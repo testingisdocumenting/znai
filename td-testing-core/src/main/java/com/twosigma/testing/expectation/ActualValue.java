@@ -1,0 +1,55 @@
+package com.twosigma.testing.expectation;
+
+import com.twosigma.testing.expectation.ExpectationHandler.Flow;
+
+import static com.twosigma.testing.expectation.ActualPath.createActualPath;
+
+/**
+ * @author mykola
+ */
+public class ActualValue implements ActualValueExpectations {
+    private Object actual;
+
+    public static ActualValueExpectations value(Object actual) {
+        return new ActualValue(actual);
+    }
+
+    private ActualValue(Object actual) {
+        this.actual = actual;
+    }
+
+    @Override
+    public void should(final ValueMatcher valueMatcher) {
+        ActualPath actualPath = extractPath(actual);
+        boolean matches = valueMatcher.matches(actualPath, actual);
+
+        if (!matches) {
+            handleMismatch(valueMatcher, actualPath);
+        }
+    }
+
+    @Override
+    public void shouldNot(final ValueMatcher valueMatcher) {
+        ActualPath actualPath = extractPath(actual);
+        boolean matches = valueMatcher.negativeMatches(actualPath, actual);
+
+         // TODO handlers
+        if (!matches)
+            throw new AssertionError(valueMatcher.negativeMismatchedMessage(actualPath, actual));
+    }
+
+    private void handleMismatch(final ValueMatcher valueMatcher, final ActualPath actualPath) {
+        final String message = valueMatcher.mismatchedMessage(actualPath, actualPath);
+        final Flow flow = ExpectationHandlers.onValueMismatch(actualPath, actual, message);
+
+        if (flow != Flow.Terminate) {
+            throw new AssertionError("\n" + message);
+        }
+    }
+
+    private ActualPath extractPath(final Object actual) {
+        return (actual instanceof ActualPathAware) ?
+            (((ActualPathAware) actual).actualPath()):
+            createActualPath("[value]");
+    }
+}
