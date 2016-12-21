@@ -1,4 +1,4 @@
-package com.twosigma.console;
+package com.twosigma.console.ansi;
 
 /**
  * @author mykola

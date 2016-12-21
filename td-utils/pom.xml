@@ -10,24 +10,12 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>td-console</artifactId>
+    <artifactId>td-utils</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.twosigma.td</groupId>
-            <artifactId>td-utils</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
