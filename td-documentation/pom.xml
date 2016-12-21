@@ -10,19 +10,40 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>td-testing-core-groovy</artifactId>
-    <version>0.1</version>
+    <artifactId>td-documentation</artifactId>
 
     <dependencies>
         <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.twosigma.td</groupId>
-            <artifactId>td-testing-core</artifactId>
+            <artifactId>td-console</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.twosigma.td</groupId>
+            <artifactId>td-utils</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -31,23 +52,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.gmavenplus</groupId>
-                <artifactId>gmavenplus-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>addSources</goal>
-                            <goal>compile</goal>
-                            <goal>addTestSources</goal>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 </project>
