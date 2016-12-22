@@ -1,0 +1,26 @@
+.toc-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.toc-item {
+  margin-left: 10px;
+}
+
+.toc-item:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+.toc-item.selected {
+  background: #eee;  
+}
+
+.toc-panel {
+  width: 300px;
+}
