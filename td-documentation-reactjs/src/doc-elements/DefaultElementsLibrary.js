@@ -20,7 +20,8 @@ library.Section = ({title, content}) => (
 library.CustomComponent = ({componentName, componentProps}) => {
     const Component = library[componentName] // TODO additional lib for provided custom components
     if (! Component) {
-        return <span>ERROR: can't find a custom component {componentName}</span>
+        console.warn("can't find a custom component: ", componentName)
+        return null
     } else {
         return <Component {...componentProps} />;
     }

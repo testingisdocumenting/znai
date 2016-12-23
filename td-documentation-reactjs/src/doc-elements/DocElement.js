@@ -8,7 +8,7 @@ const DocElement = ({content, elementsLibrary}) => {
         const ElementToUse = elementsLibrary[item.type]
         if (!ElementToUse) {
             console.warn("can't find component to display", item)
-            return <span key={idx}>ERROR: no element found to render {item.type}</span>
+            return null
         } else {
             return <ElementToUse key={idx} {...item} />
         }
