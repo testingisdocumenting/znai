@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import TocPanel from './TocPanel';
-
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
 
