@@ -6,12 +6,12 @@ import TestData from './TestData';
 class TocPanel extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             selectedItem: { sectionTitle: "", fileName: "" },
             collapsed: props.collapsed
         };
 
-        this.onClick = this.onClick.bind(this);
+        this.onTocItemClick = this.onTocItemClick.bind(this);
         this.toggle = this.toggle.bind(this);
     }
 
@@ -20,21 +20,36 @@ class TocPanel extends Component {
     }
 
     renderCollapsed() {
-        return (<div>collapsed</div>)
+        return this.renderExpanded();
+        // return (<div className="toc-panel collapsed" onClick={this.toggle}>
+        //     B
+        //     </div>)
     }
 
     renderExpanded() {
-        return (<div className="toc-panel">
-            <div onClick={this.toggle}>Collapse</div>
-            <TocMenu toc={TestData.simpleToc}
-                selected={this.state.selectedItem}
-                onClickHandler={this.onClick} />
-        </div>)
+        const panelClassName = "toc-panel " + (this.state.collapsed ? "collapsed" : "");
+        const toggleButtonClassName = "toc-panel-expand-button " + (this.state.collapsed ? "appeared" : "");
+
+        return (<div>
+            <div className={toggleButtonClassName} onClick={this.toggle}>T</div>
+            <div className={panelClassName}>
+                <div onClick={this.toggle}>collapse</div>
+                <TocMenu toc={TestData.simpleToc}
+                    selected={this.state.selectedItem}
+                    onClickHandler={this.onTocItemClick} />
+            </div>
+        </div>
+        )
     }
 
-    onClick(sectionTitle, fileName) {
+    onTocItemClick(sectionTitle, fileName) {
         console.log(sectionTitle + " " + fileName);
         this.setState({ selectedItem: { sectionTitle: sectionTitle, fileName: fileName } });
+    }
+
+    toggle() {
+        const collapsed = !this.state.collapsed;
+        this.setState({ collapsed });
     }
 };
 
