@@ -12,4 +12,12 @@
 
     <artifactId>td-documentation-reactjs</artifactId>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
