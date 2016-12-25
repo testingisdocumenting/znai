@@ -1,5 +1,6 @@
 import React from 'react'
 import DocElement from './DocElement'
+import Page from './Page'
 
 const library = {}
 
@@ -26,5 +27,7 @@ library.CustomComponent = ({componentName, componentProps}) => {
         return <Component {...componentProps} />;
     }
 }
+
+library.Page = Page;
 
 export default library
