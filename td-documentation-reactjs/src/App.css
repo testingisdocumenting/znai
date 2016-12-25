@@ -50,3 +50,54 @@
   transition: top 0.5s ease-in;
 }
 
+.navbar-brand {
+    padding: 0 40px 0 15px;
+}
+
+.navbar-brand strong {
+    color: #5e6167;
+    margin-right: 10px;
+}
+
+.navbar-brand img {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.page-title {
+    color: #5e6167;
+    font-size: 32px;
+    padding-top: 10px;
+    margin-bottom: 0;
+}
+
+pre {
+    background: #fff;
+    border: none;
+}
+
+.navbar-default {
+    background-color: #fff;
+}
+
+.section-title {
+    font-size: 28px;
+    padding-top: 40px;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+
+    color: #009aa6;
+    border-bottom: 2px solid #d0d0d0;
+}
+
+.emphasis {
+    font-style: italic;
+}
+
+.snippet {
+    margin-left: 20px;
+}
+
+.strong-emphasis {
+    font-weight: bold;
+}
