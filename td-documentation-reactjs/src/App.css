@@ -1,15 +1,29 @@
-.toc-section {
-  margin-bottom: 20px;
+.top-navigation {
+  min-height: 50px;
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+  border-width: 0 0 1px;
+  z-index: 2;
 }
 
-.section-title {
+
+.toc-section {
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.toc-section:first-child {
+    padding-top: 80px;
+}
+
+.toc-section .title {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
 .toc-item {
-  margin-left: 10px;
+  padding-left: 10px;
 }
 
 .toc-item:hover {
@@ -22,46 +36,53 @@
 }
 
 .toc-panel {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  min-width: 100px; 
-  display: inline-block;
-  padding: 20px;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+  white-space: nowrap;
   border-right: 1px solid #eee;
-  transition: left 0.5s ease-in;  
+  transition: width 0.5s;  
 }
 
 .toc-panel.collapsed {
-  left: -100px;
-  transition: left 0.5s ease-in;
+  width: 0;
+  transition: width 0.5s;
 }
 
 .toc-panel-expand-button {
-  position: absolute;
+  position: fixed;
   top: -40px;
-  width: 20px;
-  height: 20px;
+  left: 20px;
+  font-size: 20px;  
 }
 
 .toc-panel-expand-button.appeared {
-  top: 40px;
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  font-size: 20px;
   transition: top 0.5s ease-in;
+  z-index: 1001;
 }
 
-.navbar-brand {
-    padding: 0 40px 0 15px;
+.toc-panel-collapse-button {
+  position: fixed;
+  top: 50px;
+  left: -40px;
+  font-size: 20px;  
 }
 
-.navbar-brand strong {
-    color: #5e6167;
-    margin-right: 10px;
-}
-
-.navbar-brand img {
-    display: inline-block;
-    margin-right: 10px;
+.toc-panel-collapse-button.appeared {
+  position: fixed;
+  top: 50px;
+  left: 120px;
+  font-size: 20px;  
+  transition: left 0.5s;
 }
 
 .page-title {
@@ -100,4 +121,32 @@ pre {
 
 .strong-emphasis {
     font-weight: bold;
+}
+
+.page-content {
+    transition: margin-left .5s;
+    
+    margin-top: 20px;
+    margin-left: 170px;
+    width: 850px;
+}
+
+.page-content.without-toc {
+    margin-left: 60px;
+    width: 1000px; 
+}
+
+.top-navigation .menu {
+    margin-left: 60px;
+    width: 1000px;
+}
+
+@media (max-width: 1000px) {
+    .page-content.without-toc {
+        width: 850px; 
+    }
+
+    .page-content {
+        width: 750px;
+    }
 }

@@ -10,8 +10,23 @@ const TestData = {
             nestLevel: 1,
         },
 
+        toc: [
+            {
+                sectionTitle: 'Introduction', dirName: 'introduction', items: [
+                    { title: 'Getting Started', fileName: 'getting-started' },
+                    { title: 'First Title', fileName: 'first-title' },
+                ]
+            },
+            {
+                sectionTitle: 'Advanced', dirName: 'advanced', items: [
+                    { title: 'Super Duper', fileName: 'super-duper' },
+                    { title: 'Cook Book', fileName: 'cook-book' },
+                ]
+            },
+        ],
+
         title: "Sample Page",
-        
+
         content: [{
             "title": "Section # 1", "type": "Section", "content": [{
                 "type": "Paragraph",
@@ -21,7 +36,7 @@ const TestData = {
                 }]
             }, {
                 "lang": "", "lineNumber": "", "snippet":
-                    "code with indent\nin two lines\n", "type": "snippet", "content": []
+                "code with indent\nin two lines\n", "type": "snippet", "content": []
             }, {
                 "componentName": "RestTestOutput", "componentProps": {
                     "data": {
@@ -38,7 +53,7 @@ const TestData = {
             "content": [{
                 "type": "Paragraph", "content": [{
                     "text": "another ", "type":
-                        "SimpleText", "content": []
+                    "SimpleText", "content": []
                 }, {
                     "type": "Emphasis", "content": [{
                         "text": "onestar", "type": "SimpleText", "content": []
@@ -49,7 +64,7 @@ const TestData = {
                     "type":
                     "StrongEmphasis", "content": [{
                         "text": "twostars", "type":
-                            "SimpleText", "content": []
+                        "SimpleText", "content": []
                     }]
                 }]
             }]

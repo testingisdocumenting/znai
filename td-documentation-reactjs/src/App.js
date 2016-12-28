@@ -8,11 +8,7 @@ import TestMarkDownRenderedPage from './doc-elements/VisualManualTest'
 class App extends Component {
   render() {
     return (
-      <div className="container">
-        <div className="row">
             <TestMarkDownRenderedPage/>
-        </div>
-      </div>
     );
   }
 }
