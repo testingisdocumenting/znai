@@ -36,7 +36,7 @@ const TestData = {
                 }]
             }, {
                 "lang": "", "lineNumber": "", "snippet":
-                "code with indent\nin two lines\n", "type": "snippet", "content": []
+                "class SampleClass {\n    final int test = 2;\n}\n", "type": "Snippet", "content": []
             }, {
                 "componentName": "RestTestOutput", "componentProps": {
                     "data": {

@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "bootstrap": "^3.3.7",
+    "codemirror": "^5.22.0",
     "react-scripts": "0.8.4"
   },
   "dependencies": {

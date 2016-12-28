@@ -1,6 +1,7 @@
 import React from 'react'
 import DocElement from './DocElement'
 import Page from './Page'
+import Snippet from './Snippet'
 
 const library = {}
 
@@ -11,6 +12,7 @@ library.StrongEmphasis = ({content}) => (<span className="strong-emphasis"><Boun
 library.Link = ({anchor, label}) => (<a href={this.props.anchor}>{this.props.label}</a>)
 library.Paragraph = ({content}) => <div className="paragraph"><BoundDocElement content={content} /></div>
 library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
+library.Snippet = Snippet
 
 library.Section = ({title, content}) => (
     <div className="section">

@@ -97,6 +97,7 @@
 pre {
     background: #fff;
     border: none;
+    padding-left: 0;
 }
 
 .section-title {
@@ -114,7 +115,7 @@ pre {
 }
 
 .snippet {
-    margin-left: 20px;
+    margin-left: 0;
 }
 
 .strong-emphasis {

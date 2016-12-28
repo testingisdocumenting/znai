@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
+import './App.css'
 
 import TestMarkDownRenderedPage from './doc-elements/VisualManualTest'
 
