@@ -1,19 +1,10 @@
-.top-navigation {
-  min-height: 50px;
-  background-color: #f8f8f8;
-  border-color: #e7e7e7;
-  border-width: 0 0 1px;
-  z-index: 2;
-}
-
-
 .toc-section {
   margin-bottom: 20px;
   padding-left: 10px;
 }
 
 .toc-section:first-child {
-    padding-top: 80px;
+    padding-top: 10px;
 }
 
 .toc-section .title {
@@ -54,6 +45,17 @@
   transition: width 0.5s;
 }
 
+.toc-panel .header {
+  min-height: 50px;
+  padding: 15px 10px 10px;
+  background-color: #a0a0f0;
+  color: white;
+  border-color: #e7e7e7;
+  border-width: 0 0 1px;
+  z-index: 2;
+  transition: padding-left 0.5s;  
+}
+
 .toc-panel-expand-button {
   position: fixed;
   top: -40px;
@@ -79,15 +81,15 @@
 
 .toc-panel-collapse-button.appeared {
   position: fixed;
-  top: 50px;
-  left: 120px;
+  top: 10px;
+  left: 130px;
   font-size: 20px;  
   transition: left 0.5s;
 }
 
 .page-title {
     color: #5e6167;
-    font-size: 32px;
+    font-size: 24px;
     padding-top: 10px;
     margin-bottom: 0;
 }
@@ -97,15 +99,11 @@ pre {
     border: none;
 }
 
-.navbar-default {
-    background-color: #fff;
-}
-
 .section-title {
-    font-size: 28px;
+    font-size: 18px;
     padding-top: 40px;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
 
     color: #009aa6;
     border-bottom: 2px solid #d0d0d0;
@@ -123,30 +121,38 @@ pre {
     font-weight: bold;
 }
 
+.main-panel {
+    transition: margin-left .5s;    
+    margin-left: 150px;
+    margin-right: 10px;    
+}
+
+.main-panel.without-toc {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.top-navigation {
+  min-height: 50px;
+  padding-left: 10px;  
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+  border-width: 0 0 1px;
+  z-index: 2;
+  transition: padding-left 0.5s;  
+}
+
+.top-navigation.without-toc {
+    padding-left: 50px;
+    transition: padding-left 0.5s;
+}
+
 .page-content {
-    transition: margin-left .5s;
-    
-    margin-top: 20px;
-    margin-left: 170px;
-    width: 850px;
+    padding-left: 10px;
+    transition: padding-left 0.5s;
 }
 
 .page-content.without-toc {
-    margin-left: 60px;
-    width: 1000px; 
-}
-
-.top-navigation .menu {
-    margin-left: 60px;
-    width: 1000px;
-}
-
-@media (max-width: 1000px) {
-    .page-content.without-toc {
-        width: 850px; 
-    }
-
-    .page-content {
-        width: 750px;
-    }
+    padding-left: 50px;
+    transition: padding-left 0.5s;    
 }

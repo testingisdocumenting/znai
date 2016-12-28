@@ -7,22 +7,29 @@ import elementsLibrary from './DefaultElementsLibrary'
 class Page extends Component {
     constructor(props) {
         super(props)
-        this.state = {tocCollapsed: true}
+        this.state = { tocCollapsed: true }
         this.onTocToggle = this.onTocToggle.bind(this)
     }
 
     render() {
         const {title, toc, content, renderContext, docMeta} = this.props
 
-        const contentClass = "page-content " + (this.state.tocCollapsed ? "without-toc" : "")
+        const tocClassModifier =  (this.state.tocCollapsed ? "without-toc" : "")
+        const mainPanelClass = "main-panel " + tocClassModifier
+        const pageContentClass = "page-content " + tocClassModifier
+        
         return (
             <div className="page">
-                <NavBar renderContext={renderContext} docMeta={docMeta} tocCollapsed={this.state.tocCollapsed}/>
+                <div className="side-panel">
+                    <TocPanel toc={toc} collapsed={this.state.tocCollapsed} onToggle={this.onTocToggle} />
+                </div>
 
-                <TocPanel toc={toc} collapsed={this.state.tocCollapsed} onToggle={this.onTocToggle} />
-                <div className={contentClass}>
-                    <div className="page-title">{title}</div>
-                    <DocElement content={content} elementsLibrary={elementsLibrary} />
+                <div className={mainPanelClass}>
+                    <NavBar renderContext={renderContext} docMeta={docMeta} tocCollapsed={this.state.tocCollapsed} />
+                    <div className={pageContentClass}>
+                        <div className="page-title">{title}</div>
+                        <DocElement content={content} elementsLibrary={elementsLibrary} />
+                    </div>
                 </div>
             </div>)
     }

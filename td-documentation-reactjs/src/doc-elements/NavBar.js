@@ -1,9 +1,9 @@
 import React from 'react'
 
 const NavBar = ({renderContext, docMeta, tocCollapsed}) => {
-    const menuClass = "menu " + (tocCollapsed ? "without-toc": "")
-    return (<nav className="top-navigation">
-        <div className={menuClass}>
+    const navigationClass = "top-navigation " + (tocCollapsed ? "without-toc": "")
+    return (<nav className={navigationClass}>
+        <div className="menu">
             <img alt="logo" src={nestedPath(docMeta.logo, renderContext.nestLevel)} height="48px" />
             <strong>{docMeta.title}</strong> {docMeta.type}
         </div>

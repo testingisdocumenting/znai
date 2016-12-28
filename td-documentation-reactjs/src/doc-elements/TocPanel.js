@@ -6,7 +6,6 @@ class TocPanel extends Component {
         super(props);
         this.state = {
             selectedItem: { sectionTitle: "", fileName: "" },
-            collapsed: props.collapsed
         };
 
         this.onTocItemClick = this.onTocItemClick.bind(this);
@@ -14,18 +13,18 @@ class TocPanel extends Component {
     }
 
     render() {
-        const panelClass = "toc-panel " + (this.state.collapsed ? "collapsed" : "");
-        const expandButtonClass = "toc-panel-expand-button " + (this.state.collapsed ? "appeared" : "");
-        const collapseButtonClass = "toc-panel-collapse-button " + (! this.state.collapsed ? "appeared" : "")
+        const {collapsed} = this.props
+        const panelClass = "toc-panel " + (collapsed ? "collapsed" : "")
+        const expandButtonClass = "toc-panel-expand-button " + (collapsed ? "appeared" : "")
+        const collapseButtonClass = "toc-panel-collapse-button " + (!collapsed ? "appeared" : "")
 
-        return (<div>
+        return (<div className={panelClass}>
+            <div className="header">Table of Contents</div>
             <div className={expandButtonClass} onClick={this.toggle}>&#9776;</div>
-            <div className={panelClass}>
-                <div className={collapseButtonClass} onClick={this.toggle}>&#9664;</div>
-                <TocMenu toc={this.props.toc}
-                    selected={this.state.selectedItem}
-                    onClickHandler={this.onTocItemClick} />
-            </div>
+            <div className={collapseButtonClass} onClick={this.toggle}>&times;</div>
+            <TocMenu toc={this.props.toc}
+                selected={this.state.selectedItem}
+                onClickHandler={this.onTocItemClick} />
         </div>
         )
     }
@@ -36,9 +35,8 @@ class TocPanel extends Component {
     }
 
     toggle() {
-        const collapsed = !this.state.collapsed;
+        const collapsed = !this.props.collapsed;
         this.props.onToggle(collapsed);
-        this.setState({ collapsed });
     }
 };
 
