@@ -1,5 +1,7 @@
 
 .idea
+.vscode
 target
 node_modules
+td-documentation-reactjs/build
 *.iml
