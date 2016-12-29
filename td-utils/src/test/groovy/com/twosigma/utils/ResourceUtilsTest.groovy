@@ -25,4 +25,9 @@ class ResourceUtilsTest {
         contents.any { it == "second hello meta\nsecond txt" }
         contents.any { it == "hello meta\ntxt" }
     }
+
+    @Test(expected = IllegalArgumentException)
+    void "should validate multiple resource presence"() {
+        ResourceUtils.textContents("not-found.txt")
+    }
 }

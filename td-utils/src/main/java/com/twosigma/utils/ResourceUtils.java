@@ -54,6 +54,10 @@ public class ResourceUtils {
             throw new RuntimeException(e);
         }
 
+        if (contents.isEmpty()) {
+            throw new IllegalArgumentException("can't find resource: " + resourcePath);
+        }
+
         return contents;
     }
 }
