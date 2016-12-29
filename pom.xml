@@ -11,6 +11,7 @@
 
     <modules>
         <module>td-utils</module>
+        <module>td-utils-for-testing</module>
         <module>td-console</module>
         <module>td-testing-core</module>
         <module>td-testing-core-groovy</module>
