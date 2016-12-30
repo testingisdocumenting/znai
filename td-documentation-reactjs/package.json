@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "bootstrap": "^3.3.7",
-    "codemirror": "^5.22.0",
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
     "babel-eslint": "7.1.1",
@@ -50,7 +48,9 @@
   },
   "dependencies": {
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "bootstrap": "^3.3.7",
+    "codemirror": "^5.22.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
