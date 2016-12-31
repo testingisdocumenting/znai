@@ -9,7 +9,7 @@ const BoundDocElement = ({content}) => <DocElement content={content} elementsLib
 
 library.Emphasis = ({content}) => (<span className="emphasis"><BoundDocElement content={content} /></span>)
 library.StrongEmphasis = ({content}) => (<span className="strong-emphasis"><BoundDocElement content={content} /></span>)
-library.Link = ({anchor, label}) => (<a href={this.props.anchor}>{this.props.label}</a>)
+library.Link = ({anchor, label}) => (<a href={anchor}>{label}</a>)
 library.Paragraph = ({content}) => <div className="paragraph"><BoundDocElement content={content} /></div>
 library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
 library.Snippet = Snippet
