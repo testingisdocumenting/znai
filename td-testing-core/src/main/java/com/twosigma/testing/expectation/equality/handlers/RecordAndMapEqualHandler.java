@@ -10,8 +10,7 @@ import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
 /**
  * @author mykola
  */
-public class RecordAndMapEqualHandler
-    implements EqualComparatorHandler {
+public class RecordAndMapEqualHandler implements EqualComparatorHandler {
     @Override
     public boolean handle(Object actual, Object expected) {
         return actual instanceof Record && mapWithStringKeys(expected);

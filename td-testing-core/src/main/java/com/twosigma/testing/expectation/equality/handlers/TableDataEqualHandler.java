@@ -11,8 +11,7 @@ import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
 /**
  * @author mykola
  */
-public class TableDataEqualHandler
-    implements EqualComparatorHandler {
+public class TableDataEqualHandler implements EqualComparatorHandler {
     @Override
     public boolean handle(Object actual, Object expected) {
         return actual instanceof TableData && expected instanceof TableData;

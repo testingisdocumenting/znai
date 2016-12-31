@@ -9,8 +9,7 @@ import static com.twosigma.utils.TraceUtils.renderValueAndType;
 /**
  * @author mykola
  */
-public class NullEqualHandler
-    implements EqualComparatorHandler {
+public class NullEqualHandler implements EqualComparatorHandler {
     @Override
     public boolean handle(Object actual, Object expected) {
         return actual == null || expected == null;

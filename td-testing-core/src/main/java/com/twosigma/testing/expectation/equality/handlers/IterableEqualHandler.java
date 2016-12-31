@@ -10,8 +10,7 @@ import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
 /**
  * @author mykola
  */
-public class IterableEqualHandler
-    implements EqualComparatorHandler {
+public class IterableEqualHandler implements EqualComparatorHandler {
     @Override
     public boolean handle(final Object actual, final Object expected) {
         return actual instanceof Iterable && expected instanceof Iterable;

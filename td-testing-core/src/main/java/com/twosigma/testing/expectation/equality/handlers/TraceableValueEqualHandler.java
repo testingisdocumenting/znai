@@ -9,8 +9,7 @@ import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
 /**
  * @author mykola
  */
-public class TraceableValueEqualHandler
-    implements EqualComparatorHandler {
+public class TraceableValueEqualHandler implements EqualComparatorHandler {
     @Override
     public boolean handle(final Object actual, final Object expected) {
         return actual instanceof TraceableValue;
