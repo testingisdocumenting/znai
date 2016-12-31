@@ -1,14 +1,13 @@
 package com.twosigma.documentation.parser.docelement;
 
-import java.util.ArrayDeque;
-import java.util.Collections;
-import java.util.Deque;
+import java.util.*;
 
 import com.twosigma.documentation.extensions.IncludeParams;
 import com.twosigma.documentation.extensions.IncludePlugin;
 import com.twosigma.documentation.extensions.IncludePlugins;
 import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.parser.ParserHandler;
+import com.twosigma.utils.CollectionUtils;
 
 /**
  * @author mykola
@@ -29,44 +28,62 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSectionStart(String title) {
-        DocElement section = new DocElement(DocElementType.SECTION);
-        section.addProp("title", title);
-
-        appendAndPush(section);
+        start(DocElementType.SECTION, "title", title);
     }
 
     @Override
     public void onSectionEnd() {
-        elementsStack.removeLast();
+        end();
     }
 
     @Override
     public void onParagraphStart() {
-        DocElement paragraph = new DocElement(DocElementType.PARAGRAPH);
-        appendAndPush(paragraph);
+        start(DocElementType.PARAGRAPH);
     }
 
     @Override
     public void onParagraphEnd() {
-        elementsStack.removeLast();
+        end();
     }
 
+    @Override
+    public void onBulletListStart(char bulletMarker, boolean tight) {
+        start(DocElementType.BULLET_LIST, "bulletMarker", bulletMarker, "tight", tight);
+    }
+
+    @Override
+    public void onBulletListEnd() {
+        end();
+    }
+
+    @Override
+    public void onListItemStart() {
+        start(DocElementType.LIST_ITEM);
+    }
+
+    @Override
+    public void onListItemEnd() {
+        end();
+    }
+
+    @Override
     public void onEmphasisStart() {
-        DocElement emphasis = new DocElement(DocElementType.EMPHASIS);
-        appendAndPush(emphasis);
+        start(DocElementType.EMPHASIS);
     }
 
+    @Override
     public void onEmphasisEnd() {
-        elementsStack.removeLast();
+        end();
     }
 
+    @Override
     public void onStrongEmphasisStart() {
-        DocElement strongEmphasis = new DocElement(DocElementType.STRONG_EMPHASIS);
-        appendAndPush(strongEmphasis);
+        start(DocElementType.STRONG_EMPHASIS);
     }
 
+    @Override
     public void onStrongEmphasisEnd() {
-        elementsStack.removeLast();
+        end();
     }
 
     @Override
@@ -105,6 +122,18 @@ public class DocElementCreationParserHandler implements ParserHandler {
         customComponent.addProp("componentProps", reactComponent.getProps());
 
         append(customComponent);
+    }
+
+    private void start(String type, Object... propsKeyValue) {
+        DocElement element = new DocElement(type);
+        Map<String, Object> props = CollectionUtils.createMap(propsKeyValue);
+        props.forEach(element::addProp);
+
+        appendAndPush(element);
+    }
+
+    private void end() {
+        elementsStack.removeLast();
     }
 
     private void append(DocElement element) {

@@ -2,16 +2,7 @@ package com.twosigma.documentation.parser;
 
 import java.util.Collections;
 
-import org.commonmark.node.AbstractVisitor;
-import org.commonmark.node.CustomBlock;
-import org.commonmark.node.Emphasis;
-import org.commonmark.node.Heading;
-import org.commonmark.node.IndentedCodeBlock;
-import org.commonmark.node.Link;
-import org.commonmark.node.Node;
-import org.commonmark.node.Paragraph;
-import org.commonmark.node.StrongEmphasis;
-import org.commonmark.node.Text;
+import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
 
 import com.twosigma.documentation.parser.commonmark.CommonMarkExtension;
@@ -76,6 +67,20 @@ public class MarkdownParser implements MarkupParser {
         @Override
         public void visit(final Text text) {
             parserHandler.onSimpleText(text.getLiteral());
+        }
+
+        @Override
+        public void visit(BulletList bulletList) {
+            parserHandler.onBulletListStart(bulletList.getBulletMarker(), bulletList.isTight());
+            visitChildren(bulletList);
+            parserHandler.onBulletListEnd();
+        }
+
+        @Override
+        public void visit(ListItem listItem) {
+            parserHandler.onListItemStart();
+            visitChildren(listItem);
+            parserHandler.onListItemEnd();
         }
 
         @Override

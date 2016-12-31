@@ -31,6 +31,58 @@ const TestData = {
             "title": "Section # 1", "type": "Section", "content": [{
                 "type": "Paragraph",
                 "content": [{
+                    "bulletMarker": "*",
+                    "tight": true,
+                    "type": "BulletList",
+                    "content": [
+                        {
+                            "type": "ListItem",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "entry",
+                                            "type": "SimpleText",
+                                            "content": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ListItem",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "another entry",
+                                            "type": "SimpleText",
+                                            "content": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ListItem",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "hello",
+                                            "type": "SimpleText",
+                                            "content": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "text": "some text goes here", "type": "SimpleText",
                     "content": []
                 }]

@@ -14,6 +14,13 @@ library.Paragraph = ({content}) => <div className="paragraph"><BoundDocElement c
 library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
 library.Snippet = Snippet
 
+library.BulletList = ({tight, bulletMarker, content}) => {
+    const className = tight ? "tight" : ""
+    return (<ul className={className}><BoundDocElement content={content} /></ul>)
+}
+
+library.ListItem = ({content}) => <li><BoundDocElement content={content} /></li>
+
 library.Section = ({title, content}) => (
     <div className="section">
         <div className="section-title">{title}</div>

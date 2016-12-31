@@ -11,6 +11,14 @@ public interface ParserHandler {
     void onSectionEnd();
     void onParagraphStart();
     void onParagraphEnd();
+    void onBulletListStart(char bulletMarker, boolean tight);
+    void onBulletListEnd();
+    void onListItemStart();
+    void onListItemEnd();
+    void onEmphasisStart();
+    void onEmphasisEnd();
+    void onStrongEmphasisStart();
+    void onStrongEmphasisEnd();
     void onSimpleText(String value);
     void onLink(String label, String anchor);
     void onSnippet(String lang, String lineNumber, String snippet);
