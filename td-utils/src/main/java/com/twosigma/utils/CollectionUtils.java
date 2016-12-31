@@ -12,17 +12,14 @@ public class CollectionUtils {
 
     /**
      * creates map from var args key value
-     * @param k first key
-     * @param v first value
      * @param kvs key value pairs
      * @param <K> type of key
      * @param <V> type of value
      * @return map with preserved order
      */
     @SuppressWarnings("unchecked")
-    public static <K, V> Map<K, V> createMap(K k, V v, Object... kvs) {
+    public static <K, V> Map<K, V> createMap(Object... kvs) {
         Map<K, V> result = new LinkedHashMap<>();
-        result.put(k, v);
 
         if (kvs.length % 2 != 0) {
             throw new IllegalArgumentException("key value sequence must have even number of values");
