@@ -7,10 +7,9 @@ import com.twosigma.documentation.parser.Page;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
-import com.twosigma.documentation.utils.JsonUtils;
+import com.twosigma.utils.JsonUtils;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,7 +37,7 @@ public class PageToHtmlPageConverter {
         final HtmlPage htmlPage = new HtmlPage();
         htmlPage.setTitle(tocItem.getPageTitle());
 
-        RenderSupplier createElementStatement = (rc) -> "React.createElement(docComponents.Page, " + JsonUtils.serialize(
+        RenderSupplier createElementStatement = (rc) -> "React.createElement(docComponents.Page, " + JsonUtils.serializePrettyPrint(
             createPageProps(toc, tocItem, page, rc)) + ")";
         RenderSupplier reactServerRenderStatement = (rc) -> "ReactDOMServer.renderToString(" +
             createElementStatement.render(rc) + ");";
@@ -68,7 +67,7 @@ public class PageToHtmlPageConverter {
         pageProps.put("toc", toc.toListOfMaps());
         pageProps.put("renderContext", renderContext.toMap());
 
-        System.out.println(JsonUtils.serialize(pageProps));
+        System.out.println(JsonUtils.serializePrettyPrint(pageProps));
 
         return pageProps;
     }

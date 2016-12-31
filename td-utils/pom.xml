@@ -19,6 +19,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.twosigma.td</groupId>
             <artifactId>td-utils-for-testing</artifactId>
             <version>${project.version}</version>
