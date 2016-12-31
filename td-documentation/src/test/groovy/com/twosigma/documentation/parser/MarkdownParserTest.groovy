@@ -18,11 +18,11 @@ class MarkdownParserTest {
         // TODO use should == for better reporting
         assert content == [[bulletMarker: '*', tight: true, type: 'BulletList',
                             content:[[type: 'ListItem', content: [[type: 'Paragraph',
-                                                                  content:[[text: 'entry', type:'SimpleText', content:[]]]]]],
+                                                                  content:[[text: 'entry', type:'SimpleText']]]]],
                                      [type: 'ListItem', content: [[type: 'Paragraph',
-                                                                  content:[[text: 'another entry', type: 'SimpleText', content:[]]]]]],
+                                                                  content:[[text: 'another entry', type: 'SimpleText']]]]],
                                      [type: 'ListItem', content: [[type: 'Paragraph',
-                                                                   content:[[text: 'hello', type: 'SimpleText', content:[]]]]]]]]]
+                                                                   content:[[text: 'hello', type: 'SimpleText']]]]]]]]
     }
 
     private void parse(String markdown) {

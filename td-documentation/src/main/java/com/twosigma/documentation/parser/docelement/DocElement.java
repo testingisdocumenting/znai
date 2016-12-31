@@ -51,7 +51,9 @@ public class DocElement {
     public Map<String, Object> toMap() {
         final Map<String, Object> result = new LinkedHashMap<>(props);
         result.put("type", type);
-        result.put("content", content.stream().map(DocElement::toMap).collect(toList()));
+        if (! content.isEmpty()) {
+            result.put("content", content.stream().map(DocElement::toMap).collect(toList()));
+        }
 
         return result;
     }
