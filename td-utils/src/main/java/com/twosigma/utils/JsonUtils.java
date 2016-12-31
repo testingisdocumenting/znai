@@ -1,7 +1,5 @@
 package com.twosigma.utils;
 
-import java.util.Map;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,11 +13,11 @@ public class JsonUtils {
     private JsonUtils() {
     }
 
-    public static String serialize(Map<String, Object> data) {
+    public static String serialize(Object data) {
         return gson.toJson(data);
     }
 
-    public static String serializePrettyPrint(Map<String, Object> data) {
+    public static String serializePrettyPrint(Object data) {
         return gsonPretty.toJson(data);
     }
 }
