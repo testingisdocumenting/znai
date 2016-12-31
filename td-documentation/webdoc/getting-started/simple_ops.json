@@ -1,0 +1,1 @@
+[{"snippet": "a = 10\nb = a + 15", "result": "25"}, {"snippet": "c = a + b", "result": "35"}, {"snippet": "f = \"line\"\nf += c * \"*\"", "result": "line***********************************"}, {"snippet": "f = \"another\"", "result": "another"}]
