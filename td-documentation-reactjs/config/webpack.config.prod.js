@@ -56,7 +56,7 @@ module.exports = {
   // In production, we only want to load the polyfills and the app code.
   entry: [
     require.resolve('./polyfills'),
-    paths.appIndexJs
+    paths.exportJs
   ],
   output: {
     // The build folder.
@@ -170,7 +170,7 @@ module.exports = {
     "react": "React",
     "react-dom": "ReactDOM"
   },
-  
+
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
