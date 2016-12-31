@@ -1,4 +1,4 @@
-package com.twosigma.documentation.utils;
+package com.twosigma.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +9,10 @@ import java.util.stream.Collectors;
  * @author mykola
  */
 public class FileUtils {
-    public static String fileContent(final Path path) {
+    private FileUtils() {
+    }
+
+    public static String fileTextContent(final Path path) {
         if (!Files.exists(path)) {
             throw new RuntimeException(path.toAbsolutePath() + " doesn't exist");
         }

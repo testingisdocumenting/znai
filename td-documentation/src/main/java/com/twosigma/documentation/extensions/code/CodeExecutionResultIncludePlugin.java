@@ -14,7 +14,7 @@ import com.twosigma.documentation.extensions.IncludeParams;
 import com.twosigma.documentation.extensions.IncludePlugin;
 import com.twosigma.documentation.extensions.ReactComponent;
 
-import static com.twosigma.documentation.utils.FileUtils.fileContent;
+import static com.twosigma.utils.FileUtils.fileTextContent;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -78,7 +78,7 @@ public class CodeExecutionResultIncludePlugin implements IncludePlugin {
     private List<SnippetAndResult> getSnippets(final Path fullPath) {
         List<SnippetAndResult> snippetAndResults = snippetAndResultsByPath.get(fullPath);
         if (snippetAndResults == null) {
-            snippetAndResults = parse(fileContent(fullPath));
+            snippetAndResults = parse(fileTextContent(fullPath));
             snippetAndResultsByPath.put(fullPath, snippetAndResults);
         }
 

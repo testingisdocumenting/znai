@@ -23,7 +23,7 @@ import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
 
-import static com.twosigma.documentation.utils.FileUtils.fileContent;
+import static com.twosigma.utils.FileUtils.fileTextContent;
 
 /**
  * @author mykola
@@ -113,7 +113,7 @@ public class WebSite {
     }
 
     private void createToc() {
-        toc = TableOfContents.fromNestedText(fileContent(cfg.tocPath));
+        toc = TableOfContents.fromNestedText(fileTextContent(cfg.tocPath));
     }
 
     private void parseMarkups() {
@@ -126,7 +126,7 @@ public class WebSite {
 
             resetPlugins(markupPath);
 
-            final Page page = new Page(markupParser.parse(fileContent(markupPath)));
+            final Page page = new Page(markupParser.parse(fileTextContent(markupPath)));
             pageByTocItem.put(tocItem, page);
         } catch(Exception e) {
             throw new RuntimeException("error during parsing of " + tocItem.getFileNameWithoutExtension(), e);
@@ -238,7 +238,7 @@ public class WebSite {
         }
 
         public Configuration withMetaFromJsonFile(Path path) {
-            final String json = fileContent(path);
+            final String json = fileTextContent(path);
             final Gson gson = new Gson();
             final Map map = gson.fromJson(json, Map.class);
 

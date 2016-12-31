@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import com.twosigma.documentation.utils.FileUtils;
+import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.ResourceUtils;
 
 /**
@@ -64,7 +64,7 @@ public class WebResource {
 
     public String getContent() {
         return resourceContent == null ?
-                FileUtils.fileContent(originPath):
+                FileUtils.fileTextContent(originPath):
                 resourceContent;
     }
 
