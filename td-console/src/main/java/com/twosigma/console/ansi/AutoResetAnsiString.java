@@ -1,17 +1,22 @@
 package com.twosigma.console.ansi;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 /**
  * @author mykola
  */
 public class AutoResetAnsiString {
     private StringBuilder stringBuilder;
 
-    public AutoResetAnsiString(Object... styleOrValues) {
+    public AutoResetAnsiString(Stream<?> styleOrValues) {
         this.stringBuilder = new StringBuilder();
-        for (Object valueOrStyle : styleOrValues) {
-            append(valueOrStyle);
-        }
+        styleOrValues.forEach(this::append);
         reset();
+    }
+
+    public AutoResetAnsiString(Object... styleOrValues) {
+        this(Stream.of(styleOrValues));
     }
 
     @Override
