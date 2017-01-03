@@ -15,6 +15,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.twosigma.td</groupId>
+            <artifactId>td-console</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
         </dependency>
