@@ -57,6 +57,16 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onOrderedListStart(char delimiter, int startNumber) {
+        start(DocElementType.ORDERED_LIST, "delimiter", delimiter, "startNumber", startNumber);
+    }
+
+    @Override
+    public void onOrderedListEnd() {
+        end();
+    }
+
+    @Override
     public void onListItemStart() {
         start(DocElementType.LIST_ITEM);
     }

@@ -7,6 +7,7 @@ public class DocElementType {
     public static final String SECTION = "Section";
     public static final String PARAGRAPH = "Paragraph";
     public static final String BULLET_LIST = "BulletList";
+    public static final String ORDERED_LIST = "OrderedList";
     public static final String LIST_ITEM = "ListItem";
     public static final String EMPHASIS = "Emphasis";
     public static final String STRONG_EMPHASIS = "StrongEmphasis";

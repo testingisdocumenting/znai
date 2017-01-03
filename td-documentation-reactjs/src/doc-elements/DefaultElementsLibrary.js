@@ -19,6 +19,8 @@ library.BulletList = ({tight, bulletMarker, content}) => {
     return (<ul className={className}><BoundDocElement content={content} /></ul>)
 }
 
+library.OrderedList = ({delimiter, startNumber, content}) => <ol start={startNumber}><BoundDocElement content={content} /></ol>
+
 library.ListItem = ({content}) => <li><BoundDocElement content={content} /></li>
 
 library.Section = ({title, content}) => (

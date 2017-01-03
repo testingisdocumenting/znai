@@ -13,6 +13,8 @@ public interface ParserHandler {
     void onParagraphEnd();
     void onBulletListStart(char bulletMarker, boolean tight);
     void onBulletListEnd();
+    void onOrderedListStart(char delimiter, int startNumber);
+    void onOrderedListEnd();
     void onListItemStart();
     void onListItemEnd();
     void onEmphasisStart();

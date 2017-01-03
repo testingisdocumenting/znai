@@ -11,7 +11,7 @@ class MarkdownParserTest {
 
     @Test
     void "should parse bullet list"() {
-        parse("""* entry 
+        parse("""* entry
 * another entry
 * hello
 """)
@@ -23,6 +23,21 @@ class MarkdownParserTest {
                                                                   content:[[text: 'another entry', type: 'SimpleText']]]]],
                                      [type: 'ListItem', content: [[type: 'Paragraph',
                                                                    content:[[text: 'hello', type: 'SimpleText']]]]]]]]
+    }
+
+    @Test
+    void "should parse ordered list"() {
+        parse("""1. hello
+2. world
+3. of markdown
+""")
+        assert content == [[delimiter: '.', startNumber: 1, type: 'OrderedList',
+                             content:[[type: 'ListItem', content: [[type: 'Paragraph',
+                                                                    content:[[text: 'hello', type: 'SimpleText']]]]],
+                                      [type: 'ListItem', content: [[type: 'Paragraph',
+                                                                    content:[[text: 'world', type: 'SimpleText']]]]],
+                                      [type: 'ListItem', content: [[type: 'Paragraph',
+                                                                    content:[[text: 'of markdown', type: 'SimpleText']]]]]]]]
     }
 
     private void parse(String markdown) {

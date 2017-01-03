@@ -83,6 +83,55 @@ const TestData = {
                     ]
                 },
                 {
+                    "delimiter": ".",
+                    "startNumber": 1,
+                    "type": "OrderedList",
+                    "content": [
+                        {
+                            "type": "ListItem",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "hello",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ListItem",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "world",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ListItem",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "of markdown",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "text": "some text goes here", "type": "SimpleText",
                     "content": []
                 }]

@@ -77,6 +77,13 @@ public class MarkdownParser implements MarkupParser {
         }
 
         @Override
+        public void visit(OrderedList orderedList) {
+            parserHandler.onOrderedListStart(orderedList.getDelimiter(), orderedList.getStartNumber());
+            visitChildren(orderedList);
+            parserHandler.onOrderedListEnd();
+        }
+
+        @Override
         public void visit(ListItem listItem) {
             parserHandler.onListItemStart();
             visitChildren(listItem);
