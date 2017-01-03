@@ -28,6 +28,14 @@ public class EqualComparator {
         return new EqualComparator(true);
     }
 
+    /**
+     * creates new instance of comparator without any collected mismatches. Preserves isNegative switch.
+     * @return fresh copy of equal comparator
+     */
+    public EqualComparator freshCopy() {
+        return new EqualComparator(isNegative);
+    }
+
     private EqualComparator(final boolean isNegative) {
         this.isNegative = isNegative;
     }
