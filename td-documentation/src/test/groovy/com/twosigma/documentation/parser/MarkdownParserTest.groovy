@@ -41,6 +41,19 @@ class MarkdownParserTest {
     }
 
     @Test
+    void "block quote"() {
+        parse(""" > important message
+> for a reader
+""")
+
+        assert content == [[type: 'BlockQuote',
+                             content:[[type: 'Paragraph',
+                                       content:[[text: 'important message', type: 'SimpleText'],
+                                                [type: 'SoftLineBreak'],
+                                                [text: 'for a reader', type: 'SimpleText']]]]]]
+    }
+
+    @Test
     void "thematic break"() {
         parse("""hello
 ****

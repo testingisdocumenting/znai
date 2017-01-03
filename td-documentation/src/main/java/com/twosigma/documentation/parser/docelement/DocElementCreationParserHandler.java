@@ -107,6 +107,16 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onBlockQuoteStart() {
+        start(DocElementType.BLOCK_QUOTE);
+    }
+
+    @Override
+    public void onBlockQuoteEnd() {
+        end();
+    }
+
+    @Override
     public void onSimpleText(String value) {
         append(DocElementType.SIMPLE_TEXT, "text", value);
     }

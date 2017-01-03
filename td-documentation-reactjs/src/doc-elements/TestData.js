@@ -85,12 +85,22 @@ const TestData = {
                 { type: 'ThematicBreak' },
                 {
                     type: 'Paragraph', content:
-                        [{ text: 'hello', type: 'SimpleText' }, { type: 'SoftLineBreak' }, { text: 'world', type: 'SimpleText' }]
+                    [{ text: 'hello', type: 'SimpleText' }, { type: 'SoftLineBreak' }, { text: 'world', type: 'SimpleText' }]
                 },
                 { type: 'ThematicBreak' },
                 {
                     type: 'Paragraph', content:
-                        [{ text: 'hello', type: 'SimpleText' }, { type: 'HardLineBreak' }, { text: 'world', type: 'SimpleText' }]
+                    [{ text: 'hello', type: 'SimpleText' }, { type: 'HardLineBreak' }, { text: 'world', type: 'SimpleText' }]
+                },
+                { type: 'ThematicBreak' },
+                {
+                    type: 'BlockQuote',
+                    content: [{
+                        type: 'Paragraph',
+                        content: [{ text: 'important message', type: 'SimpleText' },
+                        { type: 'SoftLineBreak' },
+                        { text: 'for a reader', type: 'SimpleText' }]
+                    }]
                 },
                 { type: 'ThematicBreak' },
                 {

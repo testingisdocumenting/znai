@@ -106,6 +106,13 @@ public class MarkdownParser implements MarkupParser {
         }
 
         @Override
+        public void visit(BlockQuote blockQuote) {
+            parserHandler.onBlockQuoteStart();
+            visitChildren(blockQuote);
+            parserHandler.onBlockQuoteEnd();
+        }
+
+        @Override
         public void visit(final CustomBlock customBlock) {
             if (customBlock instanceof IncludeNode) {
                 final IncludeNode includeNode = (IncludeNode) customBlock;

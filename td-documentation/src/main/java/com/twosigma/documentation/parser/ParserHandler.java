@@ -23,6 +23,8 @@ public interface ParserHandler {
     void onEmphasisEnd();
     void onStrongEmphasisStart();
     void onStrongEmphasisEnd();
+    void onBlockQuoteStart();
+    void onBlockQuoteEnd();
     void onSimpleText(String value);
     void onLink(String label, String anchor);
     void onSnippet(String lang, String lineNumber, String snippet);

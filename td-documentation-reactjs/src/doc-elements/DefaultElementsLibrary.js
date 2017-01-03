@@ -11,10 +11,11 @@ library.Emphasis = ({content}) => (<span className="emphasis"><BoundDocElement c
 library.StrongEmphasis = ({content}) => (<span className="strong-emphasis"><BoundDocElement content={content} /></span>)
 library.Link = ({anchor, label}) => (<a href={anchor}>{label}</a>)
 library.Paragraph = ({content}) => <div className="paragraph"><BoundDocElement content={content} /></div>
+library.BlockQuote = ({content}) => <blockquote><BoundDocElement content={content} /></blockquote>
 library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
 library.SoftLineBreak = () => <span> </span>
-library.HardLineBreak = () => <br/>
-library.ThematicBreak = () => <hr/>
+library.HardLineBreak = () => <br />
+library.ThematicBreak = () => <hr />
 
 library.Snippet = Snippet
 
@@ -35,7 +36,7 @@ library.Section = ({title, content}) => (
 
 library.CustomComponent = ({componentName, componentProps}) => {
     const Component = library[componentName] // TODO additional lib for provided custom components
-    if (! Component) {
+    if (!Component) {
         console.warn("can't find a custom component: ", componentName)
         return null
     } else {
