@@ -12,6 +12,8 @@ library.StrongEmphasis = ({content}) => (<span className="strong-emphasis"><Boun
 library.Link = ({anchor, label}) => (<a href={anchor}>{label}</a>)
 library.Paragraph = ({content}) => <div className="paragraph"><BoundDocElement content={content} /></div>
 library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
+library.SoftLineBreak = () => <span> </span>
+library.HardLineBreak = () => <br/>
 library.ThematicBreak = () => <hr/>
 
 library.Snippet = Snippet

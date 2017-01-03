@@ -37,6 +37,16 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onHardLineBreak() {
+        append(DocElementType.HARD_LINE_BREAK);
+    }
+
+    @Override
+    public void onSoftLineBreak() {
+        append(DocElementType.SOFT_LINE_BREAK);
+    }
+
+    @Override
     public void onParagraphStart() {
         start(DocElementType.PARAGRAPH);
     }

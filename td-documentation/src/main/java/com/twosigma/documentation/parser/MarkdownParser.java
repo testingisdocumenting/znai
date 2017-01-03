@@ -96,6 +96,16 @@ public class MarkdownParser implements MarkupParser {
         }
 
         @Override
+        public void visit(HardLineBreak hardLineBreak) {
+            parserHandler.onHardLineBreak();
+        }
+
+        @Override
+        public void visit(SoftLineBreak softLineBreak) {
+            parserHandler.onSoftLineBreak();
+        }
+
+        @Override
         public void visit(final CustomBlock customBlock) {
             if (customBlock instanceof IncludeNode) {
                 final IncludeNode includeNode = (IncludeNode) customBlock;

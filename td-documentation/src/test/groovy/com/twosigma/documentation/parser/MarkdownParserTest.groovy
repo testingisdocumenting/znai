@@ -51,6 +51,20 @@ world""")
                            [type: 'Paragraph', content:[[text: 'world', type: 'SimpleText']]]]
     }
 
+    @Test
+    void "soft line break"() {
+        parse("hello\nworld")
+        assert content == [[type: 'Paragraph', content:
+                [[text: 'hello', type: 'SimpleText'], [type: 'SoftLineBreak'], [text: 'world', type: 'SimpleText']]]]
+    }
+
+    @Test
+    void "hard line break"() {
+        parse("hello\\\nworld")
+        assert content == [[type: 'Paragraph', content:
+                [[text: 'hello', type: 'SimpleText'], [type: 'HardLineBreak'], [text: 'world', type: 'SimpleText']]]]
+    }
+
     private void parse(String markdown) {
         def docElement = parser.parse(markdown)
         content = docElement.getContent().collect { it.toMap() }

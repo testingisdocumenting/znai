@@ -9,6 +9,8 @@ package com.twosigma.documentation.parser;
 public interface ParserHandler {
     void onSectionStart(String title);
     void onSectionEnd();
+    void onHardLineBreak();
+    void onSoftLineBreak();
     void onParagraphStart();
     void onParagraphEnd();
     void onBulletListStart(char bulletMarker, boolean tight);

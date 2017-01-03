@@ -82,7 +82,17 @@ const TestData = {
                         }
                     ]
                 },
-                {type: 'ThematicBreak'},
+                { type: 'ThematicBreak' },
+                {
+                    type: 'Paragraph', content:
+                        [{ text: 'hello', type: 'SimpleText' }, { type: 'SoftLineBreak' }, { text: 'world', type: 'SimpleText' }]
+                },
+                { type: 'ThematicBreak' },
+                {
+                    type: 'Paragraph', content:
+                        [{ text: 'hello', type: 'SimpleText' }, { type: 'HardLineBreak' }, { text: 'world', type: 'SimpleText' }]
+                },
+                { type: 'ThematicBreak' },
                 {
                     "delimiter": ".",
                     "startNumber": 1,
