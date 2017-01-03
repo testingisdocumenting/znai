@@ -98,28 +98,22 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSimpleText(String value) {
-        DocElement text = new DocElement(DocElementType.SIMPLE_TEXT);
-        text.addProp("text", value);
-        append(text);
+        append(DocElementType.SIMPLE_TEXT, "text", value);
     }
 
     @Override
     public void onLink(String label, String anchor) {
-        DocElement link = new DocElement(DocElementType.LINK); // TODO cross pages?
-        link.addProp("label", label);
-        link.addProp("anchor", anchor);
-
-        append(link);
+        append(DocElementType.LINK, "label", label, "anchor", anchor);
     }
 
     @Override
     public void onSnippet(String lang, String lineNumber, String snippet) {
-        DocElement sourceCode = new DocElement(DocElementType.SNIPPET);
-        sourceCode.addProp("lang", lang);
-        sourceCode.addProp("lineNumber", lineNumber);
-        sourceCode.addProp("snippet", snippet);
+        append(DocElementType.SNIPPET, "lang", lang, "lineNumber", lineNumber, "snippet", snippet);
+    }
 
-        append(sourceCode);
+    @Override
+    public void onThematicBreak() {
+        append(DocElementType.THEMATIC_BREAK);
     }
 
     @Override
@@ -136,8 +130,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     private void start(String type, Object... propsKeyValue) {
         DocElement element = new DocElement(type);
-        Map<String, Object> props = CollectionUtils.createMap(propsKeyValue);
-        props.forEach(element::addProp);
+        addProps(element, propsKeyValue);
 
         appendAndPush(element);
     }
@@ -146,8 +139,20 @@ public class DocElementCreationParserHandler implements ParserHandler {
         elementsStack.removeLast();
     }
 
+    private void append(String type, Object... propsKeyValue) {
+        DocElement element = new DocElement(type);
+        addProps(element, propsKeyValue);
+
+        append(element);
+    }
+
     private void append(DocElement element) {
         elementsStack.peekLast().addChild(element);
+    }
+
+    private void addProps(DocElement element, Object... propsKeyValue) {
+        Map<String, Object> props = CollectionUtils.createMap(propsKeyValue);
+        props.forEach(element::addProp);
     }
 
     private void appendAndPush(DocElement element) {

@@ -91,6 +91,11 @@ public class MarkdownParser implements MarkupParser {
         }
 
         @Override
+        public void visit(ThematicBreak thematicBreak) {
+            parserHandler.onThematicBreak();
+        }
+
+        @Override
         public void visit(final CustomBlock customBlock) {
             if (customBlock instanceof IncludeNode) {
                 final IncludeNode includeNode = (IncludeNode) customBlock;

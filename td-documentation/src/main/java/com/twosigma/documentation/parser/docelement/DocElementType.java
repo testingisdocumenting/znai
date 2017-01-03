@@ -14,5 +14,6 @@ public class DocElementType {
     public static String SIMPLE_TEXT = "SimpleText";
     public static String LINK = "Link";
     public static String SNIPPET = "Snippet";
+    public static String THEMATIC_BREAK = "ThematicBreak";
     public static String CUSTOM_COMPONENT = "CustomComponent";
 }

@@ -10,7 +10,7 @@ class MarkdownParserTest {
     private List<Map> content
 
     @Test
-    void "should parse bullet list"() {
+    void "bullet list"() {
         parse("""* entry
 * another entry
 * hello
@@ -26,7 +26,7 @@ class MarkdownParserTest {
     }
 
     @Test
-    void "should parse ordered list"() {
+    void "ordered list"() {
         parse("""1. hello
 2. world
 3. of markdown
@@ -38,6 +38,17 @@ class MarkdownParserTest {
                                                                     content:[[text: 'world', type: 'SimpleText']]]]],
                                       [type: 'ListItem', content: [[type: 'Paragraph',
                                                                     content:[[text: 'of markdown', type: 'SimpleText']]]]]]]]
+    }
+
+    @Test
+    void "thematic break"() {
+        parse("""hello
+****
+world""")
+
+        assert content == [[type: 'Paragraph', content: [[text: 'hello', type: 'SimpleText']]],
+                           [type: 'ThematicBreak'],
+                           [type: 'Paragraph', content:[[text: 'world', type: 'SimpleText']]]]
     }
 
     private void parse(String markdown) {

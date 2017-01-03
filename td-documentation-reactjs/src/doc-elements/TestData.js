@@ -82,6 +82,7 @@ const TestData = {
                         }
                     ]
                 },
+                {type: 'ThematicBreak'},
                 {
                     "delimiter": ".",
                     "startNumber": 1,
