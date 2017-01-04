@@ -87,6 +87,55 @@
   transition: left 0.5s;
 }
 
+.search-popup .overlay {
+  position: fixed; 
+  left: 0; 
+  top: 0; 
+  right: 0; 
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background: rgba(150, 150, 150, 0.5)
+}
+
+.search-popup .popup-panel {
+  position: fixed;
+  top: 50px;
+  bottom: 50px;
+  left: 50px;
+  right: 50px;
+  z-index: 1001;
+  border: 1px solid #aaa;
+  background: rgba(255, 255, 255, 1)
+}
+
+.search-popup .search-toc-panel {
+  width: 300px;
+  padding: 10px;
+  height: 100%;
+  border-right: 1px solid #ccc
+}
+
+.search-popup .search-box {
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+}
+
+.search-popup .search-box input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  padding: 10px;
+}
+
+.search-popup .close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
 .page-title {
     color: #5e6167;
     font-size: 24px;
