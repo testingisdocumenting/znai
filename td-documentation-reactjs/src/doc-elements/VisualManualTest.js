@@ -1,10 +1,10 @@
 import React from 'react'
 
-import elementsLibrary from './DefaultElementsLibrary'
 import TestData from './TestData'
+import GraphVizSvg from './graphviz/GraphVizSvg'
 
 const VisualManualTest = () => (
-          <elementsLibrary.Page {...TestData.simplePage}/>
-    )
+    <GraphVizSvg svg={TestData.svg} />
+)
 
 export default VisualManualTest
