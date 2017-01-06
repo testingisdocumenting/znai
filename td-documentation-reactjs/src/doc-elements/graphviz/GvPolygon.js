@@ -3,8 +3,28 @@ import React, { Component } from 'react'
 class GvPolygon extends Component {
     render() {
         const scaledDownPoints = scaleDown(this.props.points)
-        return <polygon {...this.props} points={scaledDownPoints} />
+        const colorsOverride = createColors(this.props.parentClassName, this.props.colors)
+        const style = createStyle(this.props.parentClassName)
+
+        return <polygon {...this.props} {...colorsOverride} points={scaledDownPoints}
+            style={style} />
     }
+}
+
+function createColors(parentClassName, colors) {
+    if (parentClassName === 'graph') {
+        return {}
+    }
+
+    return { fill: colors.fill, stroke: colors.line }
+}
+
+function createStyle(parentClassName) {
+    if (parentClassName === 'node') {
+        return { filter: "url(#dropShadowGraphviz)" }
+    }
+
+    return {}
 }
 
 // make 4 points polygon slighlty smaller so arrows dont connect with the surface
