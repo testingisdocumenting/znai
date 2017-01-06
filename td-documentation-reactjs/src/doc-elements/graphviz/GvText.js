@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styleMeta from './GvStyleMeta'
+import styleMeta from './gvStyleMeta'
 
 class GvText extends Component {
     render() {

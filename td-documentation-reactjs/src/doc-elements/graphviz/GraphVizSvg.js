@@ -5,7 +5,7 @@ import GvText from './GvText'
 import GvGroup from './GvGroup'
 import GvPath from './GvPath'
 
-import styleMeta from './GvStyleMeta'
+import styleMeta from './gvStyleMeta'
 
 class ReactElementsBuilder {
     constructor({colors, idsToDisplay, idsToHighlight}) {
