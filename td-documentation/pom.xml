@@ -20,6 +20,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.twosigma.td</groupId>
+            <artifactId>td-graphviz</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.atlassian.commonmark</groupId>
             <artifactId>commonmark</artifactId>
         </dependency>
