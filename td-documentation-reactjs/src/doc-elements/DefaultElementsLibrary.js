@@ -7,6 +7,7 @@ const library = {}
 
 const BoundDocElement = ({content}) => <DocElement content={content} elementsLibrary={library} />
 
+library.DocElement = BoundDocElement
 library.Emphasis = ({content}) => (<span className="emphasis"><BoundDocElement content={content} /></span>)
 library.StrongEmphasis = ({content}) => (<span className="strong-emphasis"><BoundDocElement content={content} /></span>)
 library.Link = ({anchor, label}) => (<a href={anchor}>{label}</a>)
