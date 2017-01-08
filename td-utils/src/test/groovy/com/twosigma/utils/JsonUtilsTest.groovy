@@ -23,4 +23,15 @@ class JsonUtilsTest {
                 '  ]\n' +
                 '}'
     }
+
+    @Test
+    void "should deserialize json as map"() {
+        def json = """{
+    "hello": "world",
+    "another": {"nested": "value"}}
+"""
+
+        def map = JsonUtils.deserializeAsMap(json)
+        assert map == [hello: "world", another: [nested: "value"]]
+    }
 }
