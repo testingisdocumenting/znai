@@ -1,4 +1,4 @@
-package com.twosigma.graphviz.meta;
+package com.twosigma.diagrams.graphviz.meta;
 
 import com.twosigma.utils.RegexpUtils;
 
@@ -20,9 +20,10 @@ public class GraphvizDiagramWithMeta {
     private final String preprocessed;
     private final String[] contentLines;
     private final Map<String, List<String>> stylesById;
+    private GraphvizShapeConfig metaConfig;
 
-    public static GraphvizDiagramWithMeta create(String diagramContent) {
-        return new GraphvizDiagramWithMeta(diagramContent);
+    public static GraphvizDiagramWithMeta create(GraphvizShapeConfig metaConfig, String diagramContent) {
+        return new GraphvizDiagramWithMeta(metaConfig, diagramContent);
     }
 
     public String getPreprocessed() {
@@ -33,7 +34,8 @@ public class GraphvizDiagramWithMeta {
         return stylesById;
     }
 
-    private GraphvizDiagramWithMeta(String originalGv) {
+    private GraphvizDiagramWithMeta(GraphvizShapeConfig metaConfig, String originalGv) {
+        this.metaConfig = metaConfig;
         this.stylesById = new LinkedHashMap<>();
         this.contentLines = originalGv.split("\n");
         this.preprocessed = preprocess();
@@ -65,11 +67,12 @@ public class GraphvizDiagramWithMeta {
     }
 
     private String additionalProps(List<String> styles) {
-        if (styles.contains("database")) {
-            return "shape=\"octagon\",width=1,height=2,fixedSize=true";
-        }
+        return styles.stream().map(metaConfig::nodeShape).
+                filter(Optional::isPresent).map(Optional::get).
+                map(GraphvizNodeShape::asAttrs).
+                findFirst().
+                orElse("");
 
-        return "";
     }
 
     private List<String> extractStyles(String label) {

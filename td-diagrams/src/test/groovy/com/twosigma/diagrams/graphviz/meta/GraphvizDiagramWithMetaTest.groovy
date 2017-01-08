@@ -1,4 +1,4 @@
-package com.twosigma.graphviz.meta
+package com.twosigma.diagrams.graphviz.meta
 
 import org.junit.Assert
 import org.junit.Test
@@ -7,9 +7,11 @@ import org.junit.Test
  * @author mykola
  */
 class GraphvizDiagramWithMetaTest {
+    static shapeConfig = new GraphvizShapeConfig([database: [shape: 'octagon', width: 1, height: 2]])
+
     @Test
     void "should extract styles based on labels"() {
-        def diagram = GraphvizDiagramWithMeta.create("""digraph Simple {
+        def diagram = GraphvizDiagramWithMeta.create(shapeConfig, """digraph Simple {
     main [label="mn [a b]"];
     server [label="server [a]"];
 
@@ -27,8 +29,8 @@ class GraphvizDiagramWithMetaTest {
 
     @Test
     void "should add shape information for database style"() {
-        def diagram = GraphvizDiagramWithMeta.create("""main [label="mn [database a]"];""")
+        def diagram = GraphvizDiagramWithMeta.create(shapeConfig, """main [label="mn [database a]"];""")
 
-        Assert.assertEquals("main [label=\"mn\",shape=\"octagon\",width=1,height=2,fixedSize=true];", diagram.getPreprocessed())
+        Assert.assertEquals("main [label=\"mn\",shape=octagon,width=1,height=2,fixedSize=true];", diagram.getPreprocessed())
     }
 }
