@@ -15,7 +15,7 @@
         <module>td-console</module>
         <module>td-testing-core</module>
         <module>td-testing-core-groovy</module>
-        <module>td-graphviz</module>
+        <module>td-diagrams</module>
         <module>td-documentation</module>
         <module>td-documentation-reactjs</module>
     </modules>

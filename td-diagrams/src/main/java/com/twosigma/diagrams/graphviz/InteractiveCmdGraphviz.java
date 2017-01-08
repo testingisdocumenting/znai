@@ -1,4 +1,4 @@
-package com.twosigma.graphviz;
+package com.twosigma.diagrams.graphviz;
 
 import java.io.*;
 import java.util.Scanner;
@@ -6,19 +6,19 @@ import java.util.Scanner;
 /**
  * @author mykola
  */
-public class InteractiveGraphviz {
+public class InteractiveCmdGraphviz implements GraphvizRuntime {
     private final Process dot;
     private final OutputStream outputStream;
     private final InputStream inputStream;
 
-    public InteractiveGraphviz() {
+    public InteractiveCmdGraphviz() {
         dot = createProcess();
 
         inputStream = dot.getInputStream();
         outputStream = dot.getOutputStream();
     }
 
-    public String svgFromDot(String dot) {
+    public String svgFromGv(String dot) {
         write(dot);
         return readTill("</svg>");
     }
@@ -58,16 +58,5 @@ public class InteractiveGraphviz {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        InteractiveGraphviz interactiveGraphviz = new InteractiveGraphviz();
-        String svg = interactiveGraphviz.svgFromDot("digraph Simple {" +
-                "node [shape=record]\n" +
-                "    main -> parse;\n" +
-                "}");
-
-        System.out.println("--- svg ----");
-        System.out.println(svg.replace('\n', ' '));
     }
 }

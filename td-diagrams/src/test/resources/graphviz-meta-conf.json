@@ -1,0 +1,8 @@
+{
+  "database": {
+    "shape": "octagon",
+    "width": 1,
+    "height": 2,
+    "svg": "<svg><g></g></svg>"
+  }
+}
