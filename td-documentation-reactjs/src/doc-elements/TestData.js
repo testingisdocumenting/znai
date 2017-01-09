@@ -22,31 +22,31 @@ const TestData = {
         slides: [
             {
                 ids: ['main', 'parse', 'main->parse'], "content": [
-                    {
-                        "type": "Paragraph",
-                        "content": [
-                            {
-                                "text": "hello",
-                                "type": "SimpleText",
-                                "content": []
-                            }
-                        ]
-                    }
-                ]
+                {
+                    "type": "Paragraph",
+                    "content": [
+                        {
+                            "text": "hello",
+                            "type": "SimpleText",
+                            "content": []
+                        }
+                    ]
+                }
+            ]
             },
             {
                 ids: ['listen'], "content": [
-                    {
-                        "type": "Paragraph",
-                        "content": [
-                            {
-                                "text": "hello world",
-                                "type": "SimpleText",
-                                "content": []
-                            }
-                        ]
-                    }
-                ]
+                {
+                    "type": "Paragraph",
+                    "content": [
+                        {
+                            "text": "hello world",
+                            "type": "SimpleText",
+                            "content": []
+                        }
+                    ]
+                }
+            ]
             }
         ]
     },
@@ -66,169 +66,354 @@ const TestData = {
         toc: [
             {
                 sectionTitle: 'Introduction', dirName: 'introduction', items: [
-                    { title: 'Getting Started', fileName: 'getting-started' },
-                    { title: 'First Title', fileName: 'first-title' },
-                ]
+                {title: 'Getting Started', fileName: 'getting-started'},
+                {title: 'First Title', fileName: 'first-title'},
+            ]
             },
             {
                 sectionTitle: 'Advanced', dirName: 'advanced', items: [
-                    { title: 'Super Duper', fileName: 'super-duper' },
-                    { title: 'Cook Book', fileName: 'cook-book' },
-                ]
+                {title: 'Super Duper', fileName: 'super-duper'},
+                {title: 'Cook Book', fileName: 'cook-book'},
+            ]
             },
         ],
 
         title: "Sample Page",
 
-        content: [{
-            "title": "Section # 1", "type": "Section", "content": [{
-                "type": "Paragraph",
-                "content": [{
-                    "bulletMarker": "*",
-                    "tight": true,
-                    "type": "BulletList",
-                    "content": [
-                        {
-                            "type": "ListItem",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "entry",
-                                            "type": "SimpleText",
-                                            "content": []
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "ListItem",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "another entry",
-                                            "type": "SimpleText",
-                                            "content": []
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "ListItem",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "hello",
-                                            "type": "SimpleText",
-                                            "content": []
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                { type: 'ThematicBreak' },
-                {
-                    type: 'Paragraph', content:
-                    [{ text: 'hello', type: 'SimpleText' }, { type: 'SoftLineBreak' }, { text: 'world', type: 'SimpleText' }]
-                },
-                { type: 'ThematicBreak' },
-                {
-                    type: 'Paragraph', content:
-                    [{ text: 'hello', type: 'SimpleText' }, { type: 'HardLineBreak' }, { text: 'world', type: 'SimpleText' }]
-                },
-                { type: 'ThematicBreak' },
-                {
-                    type: 'BlockQuote',
-                    content: [{
-                        type: 'Paragraph',
-                        content: [{ text: 'important message', type: 'SimpleText' },
-                        { type: 'SoftLineBreak' },
-                        { text: 'for a reader', type: 'SimpleText' }]
-                    }]
-                },
-                { type: 'ThematicBreak' },
-                {
-                    "delimiter": ".",
-                    "startNumber": 1,
-                    "type": "OrderedList",
-                    "content": [
-                        {
-                            "type": "ListItem",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "hello",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "ListItem",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "world",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "ListItem",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "of markdown",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "text": "some text goes here", "type": "SimpleText",
-                    "content": []
-                }]
-            }, {
-                "lang": "", "lineNumber": "", "snippet":
-                "class SampleClass {\n    final int test = 2;\n}\n", "type": "Snippet", "content": []
-            }, {
-                "componentName": "RestTestOutput", "componentProps": {
-                    "data": {
-                        "testKey":
-                        "testValue"
+        content: [
+            {
+                "title": "description",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "The vats maven-import command allows one to automatically create an unlimited number of external codebases, each of which contains containing one jar, given a maven jar.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "For example, if we wanted to import commons-lang3 from mvnrepository.com, we would vats maven-import using the SBT dependency line",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "vats maven-import --sbt \u0027\"org.apache.commons\" % \"commons-lang3\" % \"3.4\"\u0027",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "The command stores",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "lang": "",
+                        "lineNumber": "",
+                        "snippet": "the source jar in a folder \u003ccodebase_root\u003e/java/non-deployable under the original file name ending with -sources.jar\nthe POM file as \u003ccodebase_root\u003e/pom.xml\nthe library itself under  \u003ccodebase_root\u003e/java/lib\n",
+                        "type": "Snippet"
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "If you want to use an external java library, find its Maven groupid, artifactid and version on the web site of the open source organization creating the library or on mvnrepository.com or search.maven.org.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Once you have this information called GAV coordinates (for Group/Artifact/Version), you can run vats maven-import.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "vats maven-import is hard-wired to refuse any software with the Gnu Public License.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "vats maven-import only imports the GAV\u0027s which are not already present in VATS.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "The software.mi files of the generated codebases contain the proper dependency information in the STANDARD_JARS key, and proper MAVEN_GROUPID, MAVEN_ARTIFACTID, and MAVEN_VERSION keys. See Software.mi Makepath And Friends for details.",
+                                "type": "SimpleText"
+                            }
+                        ]
                     }
-                }, "type": "CustomComponent", "content": []
-            }, {
-                "type":
-                "Paragraph", "content": []
-            }]
-        }, {
+                ]
+            },
+            {
+                "title": "codebase naming",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "BlockQuote",
+                        "content": [
+                            {
+                                "type": "Paragraph",
+                                "content": [
+                                    {
+                                        "text": "The names of the new codebases created by this command will be built in the following way :",
+                                        "type": "SimpleText"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph"
+                    },
+                    {
+                        "type": "BlockQuote",
+                        "content": [
+                            {
+                                "type": "Paragraph",
+                                "content": [
+                                    {
+                                        "text": "By taking the original orgId, artifactId and version from the maven repository",
+                                        "type": "SimpleText"
+                                    },
+                                    {
+                                        "type": "SoftLineBreak"
+                                    },
+                                    {
+                                        "text": "and replacing the characters which are not allowed in VATS by z.",
+                                        "type": "SimpleText"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "We realize this naming convention is not ideal.",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "type": "SoftLineBreak"
+                            },
+                            {
+                                "text": "VATS codebase names are used to generate identifiers in bash,",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "type": "SoftLineBreak"
+                            },
+                            {
+                                "text": "so allowing dashes and periods in codebase names would have required changes in many scripts",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "type": "SoftLineBreak"
+                            },
+                            {
+                                "text": "across the Two Sigma codebase.. We consulted with several subject matter experts and concluded that replacing dashes and periods with a z was the most reasonable option.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Usage Scenario",
+                "type": "Section",
+                "content": [
+                    {
+                        "bulletMarker": "-",
+                        "tight": false,
+                        "type": "BulletList",
+                        "content": [
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "The user determines that a new open source library is needed and finds its coordinates,",
+                                                "type": "SimpleText"
+                                            },
+                                            {
+                                                "type": "SoftLineBreak"
+                                            },
+                                            {
+                                                "text": "either on the web site of the library or on ",
+                                                "type": "SimpleText"
+                                            },
+                                            {
+                                                "anchor": "http://mvnrepository.com",
+                                                "type": "Link"
+                                            },
+                                            {
+                                                "text": " or ...",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "User executes a command",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "bulletMarker": "-",
+                                        "tight": true,
+                                        "type": "BulletList",
+                                        "content": [
+                                            {
+                                                "type": "ListItem",
+                                                "content": [
+                                                    {
+                                                        "type": "Paragraph",
+                                                        "content": [
+                                                            {
+                                                                "text": "Using sbt-style import:  ",
+                                                                "type": "SimpleText"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "ListItem",
+                                                "content": [
+                                                    {
+                                                        "type": "Paragraph",
+                                                        "content": [
+                                                            {
+                                                                "text": "Using maven-style import:  ",
+                                                                "type": "SimpleText"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "VATS finds (jars to import) \u003d (all maven dependency jars) - (maven jars already in VATS).",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "VATS finds all (jars to imports) in the internal mirror.",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "VATS creates new external codebases for each dependency jar.",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "The user runs another VATS command for code review concerning these new external codebases.",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "Once the review is approved, the user pushes the new codebases along with other changes possibly.",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        , {
             "title": "Section 2", "type": "Section",
             "content": [{
                 "type": "Paragraph", "content": [{
-                    "text": "another ", "type":
-                    "SimpleText", "content": []
+                    "text": "another ", "type": "SimpleText", "content": []
                 }, {
                     "type": "Emphasis", "content": [{
                         "text": "onestar", "type": "SimpleText", "content": []
@@ -236,10 +421,8 @@ const TestData = {
                 }, {
                     "text": " and ", "type": "SimpleText", "content": []
                 }, {
-                    "type":
-                    "StrongEmphasis", "content": [{
-                        "text": "twostars", "type":
-                        "SimpleText", "content": []
+                    "type": "StrongEmphasis", "content": [{
+                        "text": "twostars", "type": "SimpleText", "content": []
                     }]
                 }]
             }]

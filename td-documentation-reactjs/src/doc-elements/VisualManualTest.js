@@ -1,13 +1,10 @@
 import React from 'react'
 
-import diagramSlide from './DiagramSlidesTestData'
-import testData from './TestData'
-
-import GraphVizFlow from './graphviz/GraphVizFlow'
+import elementsLibrary from './DefaultElementsLibrary'
+import TestData from './TestData'
 
 const VisualManualTest = () => (
-    <GraphVizFlow diagram={diagramSlide.diagram} colors={testData.graphvizColors}
-        slides={diagramSlide.slides} currentSlide={1}/>
+    <elementsLibrary.Page {...TestData.simplePage}/>
 )
 
 export default VisualManualTest
