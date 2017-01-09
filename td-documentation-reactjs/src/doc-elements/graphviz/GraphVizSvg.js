@@ -4,11 +4,13 @@ import GvPolygon from './GvPolygon'
 import GvText from './GvText'
 import GvGroup from './GvGroup'
 import GvPath from './GvPath'
+import SvgCustomShape from './SvgCustomShape'
 
 import styleMeta from './gvStyleMeta'
 
 class ReactElementsBuilder {
-    constructor({colors, idsToDisplay, idsToHighlight}) {
+    constructor({diagram, colors, idsToDisplay, idsToHighlight}) {
+        this.diagram = diagram
         this.colors = colors
         this.idsToDisplay = idsToDisplay
         this.idsToHighlight = idsToHighlight
@@ -30,27 +32,49 @@ class ReactElementsBuilder {
 
         const createElement = () => {    
             if (this.currentParentClass) {
-                props.colors = this.currentStyle
+                if (this.currentStyles) {
+                    const stylesWithColors = this.currentStyles.filter((sn) => this.colors[sn])
+
+                    // TODO merge styles (font, fill)
+
+                    console.log("###", stylesWithColors)
+                    if (stylesWithColors.length > 0) {
+                        props.colors = this.colors[stylesWithColors[0]]
+                    } else {
+                        props.colors = this.colors.b // TODO default logic and handle arrays
+                    }
+                } else {
+                    props.colors = this.colors.b // TODO default logic and handle arrays
+                }
+
+                console.log("props.colors", props.colors)
             }
 
-            return React.createElement(this.reactCompnentForDom(domNode), props,
+            let svgShape = this.customSvgShape();
+            if (svgShape) {
+                props.svg = svgShape
+                // return React.createElement(SvgCustomShape, props)
+            }
+
+            return React.createElement(this.reactComponentForDom(domNode), props,
                 this.childrenReactElementsFromDomNode(domNode))
         }
 
         if (domNode.nodeName === 'g') {
             if (this.currentCommentAsId) {
                 props.id = this.currentCommentAsId
+                this.currentStyles = this.diagram.stylesByNodeId[props.id]
+                console.log("currentStyles", this.currentStyles)
             }
 
-            if (this.currentCommentAsId && this.idsToDisplay.indexOf(this.currentCommentAsId) === -1) {
+            if (this.idsToDisplay && this.currentCommentAsId && this.idsToDisplay.indexOf(this.currentCommentAsId) === -1) {
                 return null
             }
 
             if (props.className) {
                 this.currentParentClass = props.className
-                this.currentStyle = this.extractCurrentStyleFromTextLabel(domNode)
                 const element = createElement()
-                this.currentStyle = {}  
+                this.currentStyles = {}
 
                 return element
             }
@@ -63,7 +87,22 @@ class ReactElementsBuilder {
         return createElement()
     }
 
-    reactCompnentForDom(domNode) {
+    customSvgShape() {
+        let shape
+
+        if (this.currentStyles) {
+            const shapes = this.currentStyles.filter((s) => this.diagram.shapeSvgByStyleId[s])
+
+            shape = this.diagram.shapeSvgByStyleId[shapes[0]]
+            console.log("shapes", shapes)
+
+            return shape
+        }
+
+        return null
+    }
+
+    reactComponentForDom(domNode) {
         switch (domNode.nodeName) {
             case 'polygon': return GvPolygon
             case 'text': return GvText
@@ -122,25 +161,15 @@ class ReactElementsBuilder {
 
         return []
     }
-
-    extractCurrentStyleFromTextLabel(domNode) {
-        const styleNames = this.extractCurrentStyleNamesFromTextLabel(domNode)
-        if (!styleNames.length) {
-            return this.colors.b
-        }
-
-        console.log("Style names", styleNames)
-        return this.colors[styleNames[0]] // TODO support multiple styles and convert to styles from colors
-    }
 }
 
 class GraphVizSvg extends Component {
     render() {
-        const {svg, colors, idsToDisplay, idsToHighlight} = this.props
+        const {diagram, colors, idsToDisplay, idsToHighlight} = this.props
         const parser = new DOMParser()
-        const dom = parser.parseFromString(svg, 'application/xml')
+        const dom = parser.parseFromString(diagram.svg, 'application/xml')
 
-        const el = new ReactElementsBuilder({ colors, idsToDisplay, idsToHighlight }).reactElementFromDomNode(dom.documentElement)
+        const el = new ReactElementsBuilder({ diagram, colors, idsToDisplay, idsToHighlight }).reactElementFromDomNode(dom.documentElement)
         return <div>
             <svg>
                 <filter id="dropShadowGraphviz">

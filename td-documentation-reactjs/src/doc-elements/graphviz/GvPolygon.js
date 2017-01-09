@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
+import SvgCustomShape from './SvgCustomShape'
 
 class GvPolygon extends Component {
     render() {
-        const scaledDownPoints = scaleDown(this.props.points)
+        const sizes = calculateSizes(this.props.points)
         const colorsOverride = createColors(this.props.parentClassName, this.props.colors)
         const style = createStyle(this.props.parentClassName)
 
-        return <polygon {...this.props} {...colorsOverride} points={scaledDownPoints}
-            style={style} />
+        console.log("sizes", sizes)
+
+        if (this.props.svg) {
+            return <SvgCustomShape {...this.props} {...sizes}/>
+        } else {
+            return <polygon {...this.props} {...colorsOverride} points={sizes.points}
+                            style={style}/>
+        }
     }
 }
 
@@ -29,12 +36,9 @@ function createStyle(parentClassName) {
 
 // make 4 points polygon slighlty smaller so arrows dont connect with the surface
 // points="0,-73.5 0,-109.5 54,-109.5 54,-73.5 0,-73.5
-// returns scaleX and scaleY
-function scaleDown(points) {
+// calculates center and sizes
+function calculateSizes(points) {
     let coordPairs = points.split(' ')
-    if (coordPairs.length !== 5) {
-        return points
-    }
 
     let x = []
     let y = []
@@ -51,6 +55,11 @@ function scaleDown(points) {
     const minY = Math.min(...y)
     const maxY = Math.max(...y)
 
+    const cx = (minX + maxX) / 2.0
+    const cy = (minY + maxY) / 2.0
+    const width = Math.abs(minX - maxX)
+    const height = Math.abs(minY - maxY)
+
     const gap = 4
     x[0] += gap
     x[1] += gap
@@ -64,10 +73,11 @@ function scaleDown(points) {
     y[3] -= gap
     y[4] -= gap
 
-    const newPoints = `${x[0]},${y[0]} ${x[1]},${y[1]} ${x[2]},${y[2]} ${x[3]},${y[3]} ${x[4]},${y[4]}`
+    // naive handling of rects only. Need to try to use transform scale
+    const newPoints = coordPairs.length !== 5 ? points : `${x[0]},${y[0]} ${x[1]},${y[1]} ${x[2]},${y[2]} ${x[3]},${y[3]} ${x[4]},${y[4]}`
     console.log("new points", newPoints)
 
-    return newPoints
+    return {points: newPoints, cx: cx, cy: cy, width: width, height: height}
 }
 
 export default GvPolygon

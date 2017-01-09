@@ -10,6 +10,11 @@ const TestData = {
             line: '#AA8E39',
             fill: '#FFEAAA',
             text: '#806515'
+        },
+        c: {
+            line: '#306E12',
+            fill: "#519331",
+            text: "#ABDD93"
         }
     },
 
