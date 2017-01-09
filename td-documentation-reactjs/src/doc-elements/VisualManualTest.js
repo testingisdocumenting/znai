@@ -1,13 +1,14 @@
 import React from 'react'
 
 import diagramSlide from './DiagramSlidesTestData'
+import diagram from './DiagramTestData'
 import testData from './TestData'
 
-import GraphVizFlow from './graphviz/GraphVizFlow'
+import GraphVizSvg from './graphviz/GraphVizSvg'
+// import GraphVizFlow from './graphviz/GraphVizFlow'
 
 const VisualManualTest = () => (
-    <GraphVizFlow svg={diagramSlide.svg} colors={testData.graphvizColors}
-        slides={diagramSlide.slides} currentSlide={1}/>
+    <GraphVizSvg diagram={diagram} colors={testData.graphvizColors}/>
 )
 
 export default VisualManualTest
