@@ -42,8 +42,10 @@ public class PageToHtmlPageConverter {
         RenderSupplier reactServerRenderStatement = (rc) -> "ReactDOMServer.renderToString(" +
             createElementStatement.render(rc) + ");";
 
-        htmlPage.addToBody((rc) -> "<div id=\"" + REACT_BLOCK_ID + "\">" +
-            nashornEngine.eval(reactServerRenderStatement.render(rc)).toString() + "</div>");
+        htmlPage.addToBody((rc) -> {
+            String renderStatement = reactServerRenderStatement.render(rc);
+            return "<div id=\"" + REACT_BLOCK_ID + "\">" + nashornEval(renderStatement).toString() + "</div>";
+        });
 
         // TODO investigate: there were issues with syncing complex custom components
         htmlPage.addToJavaScript((rc) -> "ReactDOM.render(" + createElementStatement.render(rc) + ", " +
@@ -55,6 +57,14 @@ public class PageToHtmlPageConverter {
         reactJsBundle.cssResources().forEach(htmlPage::addCss);
 
         return htmlPage;
+    }
+
+    private Object nashornEval(String renderStatement) {
+        try {
+            return nashornEngine.eval(renderStatement);
+        } catch (Exception e) {
+            throw new RuntimeException("failed to eval:\n" + renderStatement, e);
+        }
     }
 
     private Map<String, Object> createPageProps(final TableOfContents toc, final TocItem tocItem, final Page page, final HtmlRenderContext renderContext) {
