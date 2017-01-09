@@ -2,6 +2,7 @@ import React from 'react'
 import DocElement from './DocElement'
 import Page from './Page'
 import Snippet from './Snippet'
+import GraphVizSvg from './graphviz/GraphVizSvg'
 
 const library = {}
 
@@ -36,15 +37,17 @@ library.Section = ({title, content}) => (
     </div>)
 
 library.CustomComponent = ({componentName, componentProps}) => {
-    const Component = library[componentName] // TODO additional lib for provided custom components
+    const Component = library[componentName]
     if (!Component) {
         console.warn("can't find a custom component: ", componentName)
         return null
     } else {
-        return <Component {...componentProps} />;
+        return <Component {...componentProps} />
     }
 }
 
-library.Page = Page;
+library.GraphVizSvg = GraphVizSvg
+
+library.Page = Page
 
 export default library
