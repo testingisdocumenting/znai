@@ -1,0 +1,16 @@
+{
+  "man": {
+    "shape": "octagon",
+    "width": 0.7,
+    "height": 1.5,
+    "svgPath": "person.svg"
+  },
+
+  "world": {
+    "shape": "square",
+    "width": 0.8,
+    "height": 0.8,
+    "svgPath": "world.svg"
+  }
+}
+
