@@ -1,2 +1,3 @@
+com.twosigma.documentation.extensions.diagrams.IncludeGvDiagram
 com.twosigma.documentation.extensions.code.CodeExecutionResultIncludePlugin
 com.twosigma.documentation.extensions.rest.RestTestResultIncludePlugin
