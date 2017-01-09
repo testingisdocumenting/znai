@@ -45,14 +45,14 @@ class GraphVizFlow extends Component {
     }
 
     render() {
-        const {svg, colors, slides} = this.props
+        const {diagram, colors, slides} = this.props
         const currentSlide = (this.state.currentSlide >= slides.length) ? slides.length - 1 : this.state.currentSlide
         const currentContent = slides[currentSlide].content
 
         const tempStyle = {marginLeft: 100}
 
         return <div>
-                <GraphVizSvg svg={svg} colors={colors} idsToDisplay={this.idsToDisplay()} />
+                <GraphVizSvg diagram={diagram} colors={colors} idsToDisplay={this.idsToDisplay()} />
                 <br/>
                 <div style={tempStyle}>
                  <elementsLibrary.DocElement content={currentContent}/>
