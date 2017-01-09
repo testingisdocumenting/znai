@@ -3,6 +3,7 @@ package com.twosigma.documentation.diagrams.markdown
 import com.twosigma.diagrams.graphviz.GraphvizEngine
 import com.twosigma.diagrams.graphviz.InteractiveCmdGraphviz
 import com.twosigma.diagrams.graphviz.meta.GraphvizShapeConfig
+import com.twosigma.documentation.extensions.diagrams.markdown.MarkdownDiagramSlides
 import com.twosigma.utils.FileUtils
 import com.twosigma.utils.JsonUtils
 import com.twosigma.utils.ResourceUtils
