@@ -1,7 +1,10 @@
 package com.twosigma.diagrams.graphviz.meta;
 
+import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
+import com.twosigma.utils.ResourceUtils;
 
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,7 +40,17 @@ public class GraphvizShapeConfig {
             return Optional.empty();
         }
 
-        return Optional.ofNullable(getValue(c, "svg"));
+        String svg = getValue(c, "svg");
+        if (svg != null) {
+            return Optional.of(svg);
+        }
+
+        String svgPath = getValue(c, "svgPath");
+        if (svgPath != null) {
+            return loadSvg(svgPath);
+        }
+
+        return Optional.empty();
     }
 
     public Optional<GraphvizNodeShape> nodeShape(String style) {
@@ -56,6 +69,16 @@ public class GraphvizShapeConfig {
     @SuppressWarnings("unchecked")
     private static <E> E getValue(Map<String, ?> map, String name) {
         return (E) map.get(name);
+    }
+
+    private Optional<String> loadSvg(String svgPath) {
+        String svgFromResource = ResourceUtils.textContent(svgPath);
+        if (svgFromResource != null) {
+            return Optional.of(svgFromResource);
+        }
+
+        String svgFromFs = FileUtils.fileTextContent(Paths.get(svgPath));
+        return Optional.ofNullable(svgFromFs);
     }
 
     @SuppressWarnings("unchecked")

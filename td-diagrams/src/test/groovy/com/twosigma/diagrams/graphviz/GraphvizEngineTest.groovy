@@ -16,13 +16,14 @@ class GraphvizEngineTest {
         def engine = new GraphvizEngine(runtime, shapeConfig)
 
          def diagram = engine.diagramFromGv("""digraph Simple {
-    main [label="mn [database]"];
+    main [label="mn [world]"];
     server [label="server [a]"];
 
     server -> main;
 }""")
 
-        assert diagram.stylesByNodeId == [main: ['database'], server: ['a']]
-        assert diagram.shapeSvgByStyleId == [database: '<svg><g></g></svg>']
+        assert diagram.stylesByNodeId == [main: ['world'], server: ['a']]
+        assert ! diagram.shapeSvgByStyleId.isEmpty()
+        assert diagram.shapeSvgByStyleId.world =~ ~/transform/
     }
 }
