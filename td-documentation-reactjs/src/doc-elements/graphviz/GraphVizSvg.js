@@ -166,6 +166,12 @@ class ReactElementsBuilder {
 class GraphVizSvg extends Component {
     render() {
         const {diagram, colors, idsToDisplay, idsToHighlight} = this.props
+
+        // TODO do we need to create svg on a server side?
+        if (typeof DOMParser === 'undefined') {
+            return null
+        }
+
         const parser = new DOMParser()
         const dom = parser.parseFromString(diagram.svg, 'application/xml')
 
