@@ -1,6 +1,6 @@
-package com.twosigma.documentation.diagrams.markdown;
+package com.twosigma.documentation.extensions.diagrams.markdown;
 
-import com.twosigma.documentation.diagrams.slides.DiagramSlides;
+import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
 import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.docelement.DocElement;
 

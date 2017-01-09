@@ -1,4 +1,4 @@
-package com.twosigma.documentation.diagrams.slides;
+package com.twosigma.documentation.extensions.diagrams.slides;
 
 import com.twosigma.documentation.parser.docelement.DocElement;
 

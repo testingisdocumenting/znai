@@ -1,9 +1,9 @@
-package com.twosigma.documentation.diagrams.markdown
+package com.twosigma.documentation.extensions.diagrams.markdown
 
-import com.twosigma.documentation.diagrams.slides.DiagramSlides
+import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides
 import org.junit.Test
 
-import static com.twosigma.documentation.diagrams.markdown.MarkdownDiagramSlides.createSlides
+import static com.twosigma.documentation.extensions.diagrams.markdown.MarkdownDiagramSlides.createSlides
 
 /**
  * @author mykola
