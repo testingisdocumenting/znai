@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class SvgCustomShape extends Component {
     render() {
-        const {width, height, cx, cy, svg, colors} = this.props
+        const {cx, cy, svg, colors} = this.props
         const transform = `translate(${cx} ${cy})`
         const style = colors ? {stroke: colors.line, fill: colors.fill} : {}
 

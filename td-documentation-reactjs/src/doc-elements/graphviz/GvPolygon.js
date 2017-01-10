@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SvgCustomShape from './SvgCustomShape'
+import gvUtils from './gvUtils'
 
 class GvPolygon extends Component {
     render() {
@@ -7,12 +8,11 @@ class GvPolygon extends Component {
         const colorsOverride = createColors(this.props.parentClassName, this.props.colors)
         const style = createStyle(this.props.parentClassName)
 
-        console.log("sizes", sizes)
-
         if (this.props.svg) {
             return <SvgCustomShape {...this.props} {...sizes}/>
         } else {
-            return <polygon {...this.props} {...colorsOverride} points={sizes.points}
+            const cleanedUpProps = gvUtils.removeCustomProps(this.props)
+            return <polygon {...cleanedUpProps} {...colorsOverride} points={sizes.points}
                             style={style}/>
         }
     }
@@ -75,8 +75,6 @@ function calculateSizes(points) {
 
     // naive handling of rects only. Need to try to use transform scale
     const newPoints = coordPairs.length !== 5 ? points : `${x[0]},${y[0]} ${x[1]},${y[1]} ${x[2]},${y[2]} ${x[3]},${y[3]} ${x[4]},${y[4]}`
-    console.log("new points", newPoints)
-
     return {points: newPoints, cx: cx, cy: cy, width: width, height: height}
 }
 

@@ -4,10 +4,7 @@ import GvPolygon from './GvPolygon'
 import GvText from './GvText'
 import GvGroup from './GvGroup'
 import GvPath from './GvPath'
-import SvgCustomShape from './SvgCustomShape'
-
-import styleMeta from './gvStyleMeta'
-
+``
 class ReactElementsBuilder {
     constructor({diagram, colors, idsToDisplay, idsToHighlight}) {
         this.diagram = diagram
@@ -18,7 +15,7 @@ class ReactElementsBuilder {
         this.currentParentClass = null
     }
 
-    reactElementFromDomNode(domNode) {
+    reactElementFromDomNode(domNode, idx) {
         if (domNode.nodeName === '#comment') {
             this.currentCommentAsId = decodeComment(domNode.textContent.trim())
             return null
@@ -28,16 +25,19 @@ class ReactElementsBuilder {
             return this.freeTextNodeFromDomNode(domNode)
         }
 
-        const props = attributesToProps(domNode.attributes)
+        const attrProps = attributesToProps(domNode.attributes)
+        if (! attrProps.key) {
+            attrProps.key = idx
+        }
 
-        const createElement = () => {    
+        const props = {}
+
+        const createElement = () => {
             if (this.currentParentClass) {
                 if (this.currentStyles) {
                     const stylesWithColors = this.currentStyles.filter((sn) => this.colors[sn])
 
                     // TODO merge styles (font, fill)
-
-                    console.log("###", stylesWithColors)
                     if (stylesWithColors.length > 0) {
                         props.colors = this.colors[stylesWithColors[0]]
                     } else {
@@ -46,8 +46,6 @@ class ReactElementsBuilder {
                 } else {
                     props.colors = this.colors.b // TODO default logic and handle arrays
                 }
-
-                console.log("props.colors", props.colors)
             }
 
             let svgShape = this.customSvgShape();
@@ -56,23 +54,25 @@ class ReactElementsBuilder {
                 // return React.createElement(SvgCustomShape, props)
             }
 
-            return React.createElement(this.reactComponentForDom(domNode), props,
-                this.childrenReactElementsFromDomNode(domNode))
+            const component = this.reactComponentForDom(domNode)
+            const passExtraProps = typeof component !== 'string'
+            const propsToUse = passExtraProps ? {...attrProps, ...props} : attrProps
+
+            return React.createElement(component, propsToUse, this.childrenReactElementsFromDomNode(domNode))
         }
 
         if (domNode.nodeName === 'g') {
             if (this.currentCommentAsId) {
                 props.id = this.currentCommentAsId
                 this.currentStyles = this.diagram.stylesByNodeId[props.id]
-                console.log("currentStyles", this.currentStyles)
             }
 
             if (this.idsToDisplay && this.currentCommentAsId && this.idsToDisplay.indexOf(this.currentCommentAsId) === -1) {
                 return null
             }
 
-            if (props.className) {
-                this.currentParentClass = props.className
+            if (attrProps.className) {
+                this.currentParentClass = attrProps.className
                 const element = createElement()
                 this.currentStyles = {}
 
@@ -88,15 +88,9 @@ class ReactElementsBuilder {
     }
 
     customSvgShape() {
-        let shape
-
         if (this.currentStyles) {
             const shapes = this.currentStyles.filter((s) => this.diagram.shapeSvgByStyleId[s])
-
-            shape = this.diagram.shapeSvgByStyleId[shapes[0]]
-            console.log("shapes", shapes)
-
-            return shape
+            return this.diagram.shapeSvgByStyleId[shapes[0]]
         }
 
         return null
@@ -129,37 +123,13 @@ class ReactElementsBuilder {
         for (let i = 0, len = childNodes.length; i < len; i++) {
             const child = childNodes[i]
 
-            const reactChildElement = this.reactElementFromDomNode(child)
+            const reactChildElement = this.reactElementFromDomNode(child, i)
             if (reactChildElement != null) {
                 children.push(reactChildElement)
             }
         }
 
         return children
-    }
-
-
-    extractCurrentStyleNamesFromTextLabel(domNode) {
-        const childNodes = domNode.childNodes || []
-        for (let i = 0, len = childNodes.length; i < len; i++) {
-            const childNode = childNodes[i]
-            if (childNode.nodeName !== 'text') {
-                continue
-            }
-
-            if (!childNode.childNodes.length) {
-                continue
-            }
-
-            const text = childNode.childNodes[0].textContent
-            if (!text) {
-                continue
-            }
-
-            return styleMeta.extractStyleNames(text)
-        }
-
-        return []
     }
 }
 
@@ -193,7 +163,7 @@ class GraphVizSvg extends Component {
 
 function attributesToProps(attributes) {
     attributes = attributes || []
-    let props = {}
+    let result = {}
     for (let i = 0, len = attributes.length; i < len; i++) {
         const item = attributes.item(i)
         if (item.name.indexOf(':') !== -1) {
@@ -201,10 +171,10 @@ function attributesToProps(attributes) {
         }
 
         const name = convertAttrName(item.name)
-        props[name] = item.nodeValue
+        result[name] = item.nodeValue
     }
 
-    return props
+    return result
 }
 
 function capitalize(name) {
