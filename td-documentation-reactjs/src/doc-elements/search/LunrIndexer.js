@@ -46,11 +46,15 @@ function extractTextFromContent(content) {
 }
 
 function extractTextFromElement(docElement) {
-    switch (docElement.type) {
-        case 'Paragraph': return extractTextFromContent(docElement.content)
-        case 'SimpleText': return docElement.text
-        default: return "";
+    if (docElement.type === 'SimpleText') {
+        return docElement.text
     }
+
+    if (docElement.content) {
+        return extractTextFromContent(docElement.content)
+    }
+
+    return ""
 }
 
 const extractedText = extractTextFromContent(sampleSectionContent().content)
@@ -64,21 +68,24 @@ const indexer = new LunrIndexer((idx) => {
 const indexAsJson = JSON.stringify(indexer.lunr)
 
 let loaded = lunr.Index.load(JSON.parse(indexAsJson))
-const queryResult = loaded.search("external license")
+const queryResult = loaded.search("common")
 
-const matchData = queryResult[0].matchData.metadata
+const matchData = queryResult
 const snippetsByType = extractSnippetsByType(extractedText, matchData)
 const displayResult = JSON.stringify(queryResult) + "\n" +
         extractedText + "\n---\n" +
         JSON.stringify(matchData) + "\n +++ \n" +
         JSON.stringify(snippetsByType)
 
-function extractSnippetsByType(text, matchData) {
+function extractSnippetsByType(text, queryResults) {
     let result = []
-    Object.keys(matchData).forEach((word) => {
-        const matchByWord = matchData[word]
-        Object.keys(matchByWord).forEach((type) => {
-            result.push({type: type, snippets: extractSnippets(text, matchByWord[type].position)})
+    queryResults.forEach((queryResult) => {
+        const metaData = queryResult.matchData.metadata
+        Object.keys(metaData).forEach((word) => {
+            const matchByWord = metaData[word]
+            Object.keys(matchByWord).forEach((type) => {
+                result.push({type: type, snippets: extractSnippets(text, matchByWord[type].position)})
+            })
         })
     })
 
@@ -94,9 +101,7 @@ class SearchResultPreview extends Component {
         console.log(this.dom)
         const mark = new Mark(this.dom);
 
-        console.log("@@@", snippetsByType)
         snippetsByType.forEach((st) => {
-            console.log("@@@", st)
             mark.mark(st.snippets, {accuracy: "exactly"})
 
         })
