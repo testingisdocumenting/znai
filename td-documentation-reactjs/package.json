@@ -47,10 +47,11 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
     "bootstrap": "^3.3.7",
-    "codemirror": "^5.22.0"
+    "codemirror": "^5.22.0",
+    "lunr": "alpha",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
   },
   "scripts": {
     "start": "node scripts/start.js",
