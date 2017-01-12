@@ -1,6 +1,5 @@
 import React from 'react'
 import DocElement from './DocElement'
-import Page from './Documentation'
 import Snippet from './Snippet'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 
