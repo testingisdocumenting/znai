@@ -137,9 +137,16 @@
   transition: padding-left 0.5s;  
 }
 
-.top-navigation.without-toc {
+.without-toc .top-navigation {
     padding-left: 50px;
     transition: padding-left 0.5s;
+}
+
+.top-navigation .menu {
+    font-size: 16px;
+    height: 48px;
+    line-height: 48px;
+    vertical-align: middle;
 }
 
 .page-content {

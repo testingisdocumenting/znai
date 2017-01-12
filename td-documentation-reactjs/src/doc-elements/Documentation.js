@@ -11,7 +11,7 @@ class Documentation extends Component {
     }
 
     render() {
-        const {title, toc, content, renderContext, docMeta} = this.props
+        const {title, toc, page, docMeta} = this.props
 
         const tocClassModifier =  (this.state.tocCollapsed ? "without-toc" : "")
         const mainPanelClass = "main-panel " + tocClassModifier
@@ -23,8 +23,8 @@ class Documentation extends Component {
                 </div>
 
                 <div className={mainPanelClass}>
-                    <NavBar renderContext={renderContext} docMeta={docMeta} tocCollapsed={this.state.tocCollapsed} />
-                    <elementsLibrary.Page title={title} content={content}/>
+                    <NavBar docMeta={docMeta} />
+                    <elementsLibrary.Page title={title} content={page.content}/>
                 </div>
             </div>)
     }
