@@ -4,7 +4,7 @@ import GvPolygon from './GvPolygon'
 import GvText from './GvText'
 import GvGroup from './GvGroup'
 import GvPath from './GvPath'
-``
+
 class ReactElementsBuilder {
     constructor({diagram, colors, idsToDisplay, idsToHighlight}) {
         this.diagram = diagram
