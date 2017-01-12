@@ -57,6 +57,16 @@ public class TocItem {
         return pageTitle;
     }
 
+    public Map<String, ?> toMap() {
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("sectionTitle", getSectionTitle());
+        result.put("pageTitle", getPageTitle());
+        result.put("fileName", getFileNameWithoutExtension());
+        result.put("dirName", getDirName());
+
+        return result;
+    }
+
     @Override
     public String toString() {
         return "(dirName:" + dirName + ", fileNameWithoutExtension: " + fileNameWithoutExtension + ")";

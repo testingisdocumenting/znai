@@ -9,9 +9,6 @@ import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
 import com.twosigma.utils.JsonUtils;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 /**
  * @author mykola
  */
@@ -33,12 +30,17 @@ public class PageToHtmlPageConverter {
         reactJsBundle.javaScriptResources().forEach(nashornEngine::loadLibrary);
     }
 
-    public HtmlPage convert(TableOfContents toc, TocItem tocItem, Page page) {
+    public HtmlPageAndPageProps convert(TableOfContents toc, TocItem tocItem, Page page, HtmlRenderContext renderContext) {
         final HtmlPage htmlPage = new HtmlPage();
         htmlPage.setTitle(tocItem.getPageTitle());
 
-        RenderSupplier createElementStatement = (rc) -> "React.createElement(docComponents.Page, " + JsonUtils.serializePrettyPrint(
-            createPageProps(toc, tocItem, page, rc)) + ")";
+        PageProps pageProps = new PageProps(tocItem, page, renderContext);
+        DocumentationProps docProps = new DocumentationProps(docMeta, toc, pageProps);
+
+        // TODO reconsider the whole rc business below
+        RenderSupplier createElementStatement = (rc) -> "React.createElement(Documentation, " + JsonUtils.serializePrettyPrint(
+                    docProps.toMap()) + ")";
+
         RenderSupplier reactServerRenderStatement = (rc) -> "ReactDOMServer.renderToString(" +
             createElementStatement.render(rc) + ");";
 
@@ -56,7 +58,7 @@ public class PageToHtmlPageConverter {
         reactJsBundle.javaScriptResources().forEach(htmlPage::addJavaScript);
         reactJsBundle.cssResources().forEach(htmlPage::addCss);
 
-        return htmlPage;
+        return new HtmlPageAndPageProps(htmlPage, pageProps);
     }
 
     private Object nashornEval(String renderStatement) {
@@ -67,18 +69,4 @@ public class PageToHtmlPageConverter {
         }
     }
 
-    private Map<String, Object> createPageProps(final TableOfContents toc, final TocItem tocItem, final Page page, final HtmlRenderContext renderContext) {
-        final Map<String, Object> pageAsMap = page.getDocElement().toMap();
-        Map<String, Object> pageProps = new LinkedHashMap<>();
-        pageProps.put("content", pageAsMap.get("content"));
-        pageProps.put("docMeta", docMeta.toMap());
-        pageProps.put("title", tocItem.getPageTitle());
-        pageProps.put("type", "Page");
-        pageProps.put("toc", toc.toListOfMaps());
-        pageProps.put("renderContext", renderContext.toMap());
-
-        System.out.println(JsonUtils.serializePrettyPrint(pageProps));
-
-        return pageProps;
-    }
 }

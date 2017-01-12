@@ -1,6 +1,6 @@
-import library from './doc-elements/DefaultElementsLibrary'
+import Documentation from './doc-elements/Documentation'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
 
-global.docComponents = library
+global.Documentation = Documentation
