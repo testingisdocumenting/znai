@@ -22,8 +22,10 @@ import com.twosigma.documentation.search.LunrIndex;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
+import com.twosigma.utils.JsonUtils;
 
 import static com.twosigma.utils.FileUtils.fileTextContent;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
@@ -38,9 +40,11 @@ public class WebSite {
     private Map<TocItem, Page> pageByTocItem;
     private TableOfContents toc;
     private LunrIndex lunrIndex;
+    private List<PageProps> allPagesProps;
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
     private WebResource lunrIndexJavaScript;
+    private WebResource allPagesJavaScript;
     private final ReactJsBundle reactJsBundle;
 
     private WebSite(Configuration cfg) {
@@ -54,6 +58,7 @@ public class WebSite {
         docMeta.setType(cfg.type);
         docMeta.setLogo(WebResource.withRelativePath(cfg.logoRelativePath));
         lunrIndexJavaScript = WebResource.withRelativePath("index.js");
+        allPagesJavaScript = WebResource.withRelativePath("pages.js");
 
         reset();
     }
@@ -103,8 +108,10 @@ public class WebSite {
         pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, toc, reactJsBundle, cfg.pluginsListener);
         markupParser = new MarkdownParser();
         pageByTocItem = new LinkedHashMap<>();
+        allPagesProps = new ArrayList<>();
         extraJavaScripts = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScripts.add(lunrIndexJavaScript);
+        extraJavaScripts.add(allPagesJavaScript);
     }
 
     private void deployResources() {
@@ -155,17 +162,30 @@ public class WebSite {
 
     private void generatePages() {
         forEachPage(this::generatePage);
+        buildJsonOfAllPages();
+    }
+
+    private void buildJsonOfAllPages() {
+        List<Map<String, ?>> listOfMaps = this.allPagesProps.stream().map(PageProps::toMap).collect(toList());
+        String json = JsonUtils.serialize(listOfMaps);
+        String js = "allPagesData = " + json + ";";
+
+        deployer.deploy("pages.js", js);
     }
 
     private void generatePage(final TocItem tocItem, final Page page) {
         try {
             resetPlugins(markupPath(tocItem)); // TODO reset at render phase only?
 
-            final HtmlPage htmlPage = pageToHtmlPageConverter.convert(toc, tocItem, page);
-            extraJavaScripts.forEach(htmlPage::addJavaScript);
-
             // we are inside directory, so nest level is 1 for all the static resources
-            final String html = htmlPage.render(HtmlRenderContext.nested(1));
+            HtmlRenderContext renderContext = HtmlRenderContext.nested(1);
+
+            final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(toc, tocItem, page, renderContext);
+
+            allPagesProps.add(htmlAndProps.getProps());
+            extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScript);
+
+            final String html = htmlAndProps.getHtmlPage().render(renderContext);
             deployer.deploy(Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + ".html"), html);
         } catch (Exception e) {
             throw new RuntimeException("Error during rendering of " + tocItem.getFileNameWithoutExtension(), e);
