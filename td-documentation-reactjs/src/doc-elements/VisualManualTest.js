@@ -4,7 +4,7 @@ import testData from './TestData'
 import Documentation from './Documentation'
 
 const VisualManualTest = () => (
-    <Documentation {...testData.simplePage}/>
+    <Documentation {...testData.documentation}/>
 )
 
 
