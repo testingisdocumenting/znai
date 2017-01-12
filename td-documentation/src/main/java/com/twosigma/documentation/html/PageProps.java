@@ -1,8 +1,6 @@
 package com.twosigma.documentation.html;
 
 import com.twosigma.documentation.parser.Page;
-import com.twosigma.documentation.structure.DocMeta;
-import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
 
 import java.util.LinkedHashMap;
@@ -31,13 +29,10 @@ public class PageProps {
     }
 
     private Map<String, ?> buildMap() {
-        final Map<String, ?> pageAsMap = page.getDocElement().toMap();
         Map<String, Object> pageProps = new LinkedHashMap<>();
-//        pageProps.put("docMeta", docMeta.toMap());
-//        pageProps.put("toc", toc.toListOfMaps());
 
         pageProps.put("type", "Page");
-        pageProps.put("content", pageAsMap.get("content"));
+        pageProps.put("content", ((Map<String, ?>) page.getDocElement().toMap()).get("content"));
         pageProps.put("tocItem", tocItem.toMap());
         pageProps.put("renderContext", renderContext.toMap());
 
