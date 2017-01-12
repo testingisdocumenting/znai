@@ -1,10 +1,9 @@
 import React, { Component } from "react"
-import DocElement from "./DocElement"
 import NavBar from './NavBar'
 import TocPanel from './TocPanel'
 import elementsLibrary from './DefaultElementsLibrary'
 
-class Page extends Component {
+class Documentation extends Component {
     constructor(props) {
         super(props)
         this.state = { tocCollapsed: true }
@@ -16,8 +15,7 @@ class Page extends Component {
 
         const tocClassModifier =  (this.state.tocCollapsed ? "without-toc" : "")
         const mainPanelClass = "main-panel " + tocClassModifier
-        const pageContentClass = "page-content " + tocClassModifier
-        
+
         return (
             <div className="page">
                 <div className="side-panel">
@@ -26,10 +24,7 @@ class Page extends Component {
 
                 <div className={mainPanelClass}>
                     <NavBar renderContext={renderContext} docMeta={docMeta} tocCollapsed={this.state.tocCollapsed} />
-                    <div className={pageContentClass}>
-                        <div className="page-title">{title}</div>
-                        <DocElement content={content} elementsLibrary={elementsLibrary} />
-                    </div>
+                    <elementsLibrary.Page title={title} content={content}/>
                 </div>
             </div>)
     }
@@ -39,4 +34,4 @@ class Page extends Component {
     }
 }
 
-export default Page
+export default Documentation

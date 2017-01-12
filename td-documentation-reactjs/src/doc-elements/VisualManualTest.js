@@ -1,10 +1,11 @@
 import React from 'react'
 
-import elementsLibrary from './DefaultElementsLibrary'
-import TestData from './TestData'
+import testData from './TestData'
+import Documentation from './Documentation'
 
 const VisualManualTest = () => (
-    <elementsLibrary.Page {...TestData.simplePage}/>
+    <Documentation {...testData.simplePage}/>
 )
+
 
 export default VisualManualTest

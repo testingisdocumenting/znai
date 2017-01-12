@@ -147,7 +147,7 @@
     transition: padding-left 0.5s;
 }
 
-.page-content.without-toc {
+.without-toc .page-content {
     padding-left: 50px;
     transition: padding-left 0.5s;    
 }

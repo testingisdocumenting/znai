@@ -1,6 +1,6 @@
 import React from 'react'
 import DocElement from './DocElement'
-import Page from './Page'
+import Page from './Documentation'
 import Snippet from './Snippet'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 
@@ -48,6 +48,9 @@ library.CustomComponent = ({componentName, componentProps}) => {
 
 library.GraphVizSvg = GraphVizSvg
 
-library.Page = Page
+library.Page = ({title, content}) => (<div className="page-content">
+    <div className="page-title">{title}</div>
+    <BoundDocElement content={content}/>
+</div>)
 
 export default library
