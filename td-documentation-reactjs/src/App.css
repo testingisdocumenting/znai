@@ -65,7 +65,7 @@
 
 .toc-panel-expand-button.appeared {
   position: fixed;
-  top: 10px;
+  top: 14px;
   left: 20px;
   font-size: 20px;
   transition: top 0.5s ease-in;
@@ -128,9 +128,10 @@
 }
 
 .top-navigation {
-  min-height: 50px;
+  min-height: 60px;
   padding-left: 10px;  
-  background-color: #f8f8f8;
+  background-color: #ffffff;
+  color: #58ade3;
   border-color: #e7e7e7;
   border-width: 0 0 1px;
   z-index: 2;
@@ -143,9 +144,9 @@
 }
 
 .top-navigation .menu {
-    font-size: 16px;
-    height: 48px;
-    line-height: 48px;
+    font-size: 24px;
+    height: 60px;
+    line-height: 60px;
     vertical-align: middle;
 }
 
@@ -157,4 +158,36 @@
 .without-toc .page-content {
     padding-left: 50px;
     transition: padding-left 0.5s;    
+}
+
+@media only screen and (min-width: 1300px) {
+    .top-navigation {
+        padding-left: 50px;
+    }
+
+    .without-toc .top-navigation {
+        padding-left: 0;
+        transition: padding-left 0.5s;
+    }
+
+    .page-content {
+        padding-left: 50px;
+    }
+
+    .without-toc .page-content {
+        padding-left: 0;
+    }
+
+    .main-panel {
+        transition: margin-left .5s;
+        margin-left: auto;
+        margin-right: auto;
+        width: 1200px;
+    }
+
+    .main-panel.without-toc {
+        margin-left: auto;
+        margin-right: auto;
+        width: 1200px;
+    }
 }
