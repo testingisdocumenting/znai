@@ -5,9 +5,6 @@ import java.nio.file.Paths;
 
 import com.twosigma.documentation.WebSite;
 
-import static com.twosigma.documentation.html.reactjs.ReactWebResources.react;
-import static com.twosigma.documentation.html.reactjs.ReactWebResources.reactDom;
-
 /**
  * @author mykola
  */

@@ -1,7 +1,8 @@
 package com.twosigma.documentation.html;
 
 import com.twosigma.documentation.extensions.PluginsListener;
-import com.twosigma.documentation.html.reactjs.NashornEngine;
+import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
+import com.twosigma.documentation.nashorn.NashornEngine;
 import com.twosigma.documentation.html.reactjs.ReactJsBundle;
 import com.twosigma.documentation.parser.Page;
 import com.twosigma.documentation.structure.DocMeta;
@@ -16,18 +17,11 @@ public class PageToHtmlPageConverter {
     private static final String REACT_BLOCK_ID = "webdoc";
 
     private final DocMeta docMeta;
-    private final NashornEngine nashornEngine;
+    private final ReactJsNashornEngine reactJsNashornEngine;
 
-    private final ReactJsBundle reactJsBundle;
-
-    public PageToHtmlPageConverter(DocMeta docMeta, TableOfContents tableOfContents, ReactJsBundle reactJsBundle, PluginsListener pluginsListener) {
+    public PageToHtmlPageConverter(DocMeta docMeta, TableOfContents tableOfContents, ReactJsNashornEngine reactJsNashornEngine, PluginsListener pluginsListener) {
         this.docMeta = docMeta;
-        this.nashornEngine = new NashornEngine();
-        this.reactJsBundle = reactJsBundle;
-
-        nashornEngine.loadLibrary(reactJsBundle.react());
-        nashornEngine.loadLibrary(reactJsBundle.reactDomServer());
-        reactJsBundle.javaScriptResources().forEach(nashornEngine::loadLibrary);
+        this.reactJsNashornEngine = reactJsNashornEngine;
     }
 
     public HtmlPageAndPageProps convert(TableOfContents toc, TocItem tocItem, Page page, HtmlRenderContext renderContext) {
@@ -53,17 +47,19 @@ public class PageToHtmlPageConverter {
         htmlPage.addToJavaScript((rc) -> "ReactDOM.render(" + createElementStatement.render(rc) + ", " +
             "document.getElementById(\"" + REACT_BLOCK_ID + "\"));");
 
-        htmlPage.addJavaScript(reactJsBundle.react());
-        htmlPage.addJavaScript(reactJsBundle.reactDom());
-        reactJsBundle.javaScriptResources().forEach(htmlPage::addJavaScript);
-        reactJsBundle.cssResources().forEach(htmlPage::addCss);
+        ReactJsBundle jsBundle = reactJsNashornEngine.getReactJsBundle();
+
+        htmlPage.addJavaScript(jsBundle.react());
+        htmlPage.addJavaScript(jsBundle.reactDom());
+        jsBundle.javaScriptResources().forEach(htmlPage::addJavaScript);
+        jsBundle.cssResources().forEach(htmlPage::addCss);
 
         return new HtmlPageAndPageProps(htmlPage, pageProps);
     }
 
     private Object nashornEval(String renderStatement) {
         try {
-            return nashornEngine.eval(renderStatement);
+            return reactJsNashornEngine.getNashornEngine().eval(renderStatement);
         } catch (Exception e) {
             throw new RuntimeException("failed to eval:\n" + renderStatement, e);
         }

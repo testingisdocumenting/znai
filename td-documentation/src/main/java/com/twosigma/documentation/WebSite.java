@@ -15,10 +15,11 @@ import com.twosigma.documentation.extensions.IncludePlugins;
 import com.twosigma.documentation.extensions.PluginsListener;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsBundle;
+import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
+import com.twosigma.documentation.nashorn.NashornEngine;
 import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.Page;
-import com.twosigma.documentation.search.LunrIndex;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
@@ -39,20 +40,19 @@ public class WebSite {
 
     private Map<TocItem, Page> pageByTocItem;
     private TableOfContents toc;
-    private LunrIndex lunrIndex;
     private List<PageProps> allPagesProps;
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
     private WebResource lunrIndexJavaScript;
     private WebResource allPagesJavaScript;
-    private final ReactJsBundle reactJsBundle;
+    private final ReactJsNashornEngine reactJsNashornEngine;
 
     private WebSite(Configuration cfg) {
         this.cfg = cfg;
         this.deployer = new Deployer(cfg.deployPath);
         this.docMeta = new DocMeta();
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
-        this.reactJsBundle = new ReactJsBundle("bundle.txt");
+        this.reactJsNashornEngine = new ReactJsNashornEngine();
 
         docMeta.setTitle(cfg.title);
         docMeta.setType(cfg.type);
@@ -105,7 +105,7 @@ public class WebSite {
     }
 
     private void reset() {
-        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, toc, reactJsBundle, cfg.pluginsListener);
+        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, toc, reactJsNashornEngine, cfg.pluginsListener);
         markupParser = new MarkdownParser();
         pageByTocItem = new LinkedHashMap<>();
         allPagesProps = new ArrayList<>();
@@ -115,7 +115,7 @@ public class WebSite {
     }
 
     private void deployResources() {
-        reactJsBundle.deploy(deployer);
+        reactJsNashornEngine.getReactJsBundle().deploy(deployer);
         cfg.webResources.forEach(deployer::deploy);
     }
 

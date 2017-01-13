@@ -1,8 +1,6 @@
-package com.twosigma.documentation.html.reactjs;
+package com.twosigma.documentation.nashorn;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import javax.script.*;
 
 import com.twosigma.documentation.html.WebResource;
 
@@ -23,6 +21,11 @@ public class NashornEngine {
         } catch (ScriptException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void bind(String varName, Object value) {
+        Bindings bindings = engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put(varName, value);
     }
 
     public void loadLibraries(Iterable<WebResource> libraries) {
