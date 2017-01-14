@@ -18,12 +18,21 @@ class QueryResult {
     }
 
     getSnippetsToHighlight(id, text) {
-        return this.snippetsById[id](text)
+        const snippets = []
+        console.log(this.snippetsById)
+        this.snippetsById[id].forEach((callback) => {
+            snippets.push(...callback(text))
+        })
+
+        return snippets
     }
 
     addSnippets_(id, snippetsCallback) {
-        console.log("addSnippets_", id)
-        this.snippetsById[id] = snippetsCallback
+        if (this.snippetsById.hasOwnProperty(id)) {
+            this.snippetsById[id].push(snippetsCallback)
+        } else {
+            this.snippetsById[id] = [snippetsCallback]
+        }
     }
 
     flattenResults_() {
@@ -33,7 +42,6 @@ class QueryResult {
             Object.keys(metaData).forEach((word) => {
                 const matchByWord = metaData[word]
                 Object.keys(matchByWord).forEach((type) => {
-                    console.log("type", type)
                     this.addSnippets_(queryResult.ref, (text) => extractSnippets(text, matchByWord[type].position))
                 })
             })
@@ -82,7 +90,6 @@ class LunrIndexer {
     }
 
     addPage(page) {
-        console.log(JSON.stringify(page))
         page.content.filter((de) => de.type === 'Section')
             .forEach((s) => this.addSection(page.tocItem, s))
     }
@@ -112,9 +119,8 @@ class LunrIndexer {
     }
 }
 
-
 function extractSnippets(text, positions) {
-    return [... new Set(positions.map((p) => text.substr(p[0], p[1])))]
+    return [...new Set(positions.map((p) => text.substr(p[0], p[1])))]
 }
 
 export default LunrIndexer
