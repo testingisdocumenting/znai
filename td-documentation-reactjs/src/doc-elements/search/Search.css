@@ -1,0 +1,92 @@
+.search-popup .overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background: rgba(150, 150, 150, 0.5)
+}
+
+.search-popup .popup-panel {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 50px;
+    left: 50px;
+    right: 50px;
+    z-index: 1001;
+    border: 1px solid #aaa;
+    background: rgba(255, 255, 255, 1)
+}
+
+.search-popup .toc-and-preview {
+    flex-direction: row;
+    display: flex;
+    height: 100%;
+}
+
+.search-popup .search-toc-panel {
+    flex: 1;
+    border-right: 1px solid #ccc;
+}
+
+.search-popup .search-preview-panel {
+    flex: 3;
+    padding: 10px;
+}
+
+.search-popup .search-box {
+    border-bottom: 1px solid #ccc;
+}
+
+.search-popup .search-box input {
+    padding: 15px;
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+.search-popup .close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+.search-toc-items {
+
+}
+
+.search-toc-item {
+    display: flex;
+    align-items: baseline;
+    padding: 10px;
+}
+
+.search-toc-item.selected {
+    background: cornflowerblue;
+    color: white;
+}
+
+.search-toc-page-title {
+    color: #aaa;
+    flex-basis: 30%;
+}
+
+.selected .search-toc-page-title {
+    color: #fff;
+}
+
+
+.search-toc-page-section-title {
+    padding-left: 10px;
+    flex-basis: 40%;
+}
+
+.search-toc-section-title {
+    font-size: 10px;
+    /*flex-basis: 20%;*/
+    margin-left: auto;
+}

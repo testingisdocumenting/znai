@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.css'
+import './doc-elements/search/Search.css'
 import './App.css'
 
 import TestMarkDownRenderedPage from './doc-elements/VisualManualTest'
