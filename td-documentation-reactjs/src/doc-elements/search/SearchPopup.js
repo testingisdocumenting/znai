@@ -1,52 +1,35 @@
 import React, { Component } from 'react'
+
+import SearchBox from './SearchBox'
+import SearchToc from './SearchToc'
 import SearchPreview from './SearchPreview'
-
-class SearchBox extends Component {
-    constructor(props) {
-        super(props)
-        this.state = { value: "" }
-        this.onInputChange = this.onInputChange.bind(this)
-    }
-
-    render() {
-        return <div className="search-box">
-            <input
-                ref={(dom) => this.dom = dom}
-                placeholder="Type to search..."
-                value={this.state.value} onChange={this.onInputChange} />
-
-        </div>;
-    }
-
-    componentDidMount() {
-        this.dom.focus();
-    }
-
-    // TODO debounce? 
-    onInputChange(e) {
-        const value = e.target.value
-        this.props.onChange(value)
-        this.setState({ value })
-    }
-}
 
 class SearchPopup extends Component {
     constructor(props) {
         super(props)
 
         this.search = this.props.search
-        this.state = { searchQuery: "maven" }
+        this.state = { searchQuery: "", selectedIdx: 0 }
         this.onQueryChange = this.onQueryChange.bind(this)
+        this.keyDownHandler = this.keyDownHandler.bind(this)
+    }
+
+    queryResultIds() {
+        const queryResult = this.state.queryResult
+        return queryResult ? queryResult.getIds() : []
     }
 
     render() {
-        const {onClose} = this.props;
-        const queryResult = this.state.queryResult
-        const hasResult = queryResult && queryResult.getIds().length > 0
-        const firstId = hasResult ? queryResult.getIds()[0] : null
-        const previewDetails = hasResult ? this.search.previewDetails(firstId, queryResult) : null
+        const {onClose} = this.props
+        const ids = this.queryResultIds()
 
-        console.log("previewDetails", previewDetails)
+        this.ids = ids
+
+        const hasResult = ids.length > 0
+        const selectedIdx = this.state.selectedIdx
+        console.log("selectedIdx", selectedIdx)
+        const firstId = hasResult ? ids[selectedIdx] : null
+        const previewDetails = hasResult ? this.search.previewDetails(firstId, this.state.queryResult) : null
 
         return (<div className="search-popup">
             <div className="overlay" onClick={onClose} />
@@ -54,24 +37,67 @@ class SearchPopup extends Component {
             <div className="popup-panel">
                 <SearchBox onChange={this.onQueryChange} />
                 <div className="close" onClick={onClose}>&times;</div>
-                <div className="toc-and-preview">
-                    <div className="search-toc-panel">
-                        TOC
-                    </div>
-                    <div className="search-preview-panel">
-                        {hasResult ? <SearchPreview {...previewDetails}/> : <span>no preview to display</span>}
-                    </div>
-                </div>
+
+                {previewDetails ? this.renderPreview(ids, selectedIdx, previewDetails) : null}
             </div>
         </div>);
     }
 
+    renderPreview(ids, selectedIdx, previewDetails) {
+        return (<div className="toc-and-preview">
+            <div className="search-toc-panel">
+                <SearchToc ids={ids} selectedIdx={selectedIdx}/>
+            </div>
+            <div className="search-preview-panel">
+                <SearchPreview {...previewDetails}/>
+            </div>
+        </div>)
+    }
+
     onQueryChange(query) {
         const queryResult = this.search.search(query)
-        this.setState({queryResult})
+        const selectedIdx = 0
+        this.setState({queryResult, selectedIdx})
 
         console.log(query)
         console.log(queryResult)
+    }
+
+    componentDidMount() {
+        document.addEventListener('keydown', this.keyDownHandler)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.keyDownHandler)
+    }
+
+    keyDownHandler(e) {
+        let selectedIdx = this.state.selectedIdx
+        console.log(e)
+
+        if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') {
+            return
+        }
+
+        if (e.key === 'ArrowUp') {
+            selectedIdx -= 1
+        }
+
+        if (e.key === 'ArrowDown') {
+            selectedIdx += 1
+        }
+
+        if (selectedIdx < 0) {
+            selectedIdx = 0
+        }
+
+        const ids = this.queryResultIds()
+
+        if (selectedIdx >= ids.length) {
+            selectedIdx = this.ids.length - 1
+        }
+
+        this.setState({selectedIdx})
     }
 }
 

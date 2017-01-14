@@ -6,6 +6,7 @@ class SearchPreview extends Component {
     componentDidMount() {
         const Mark = require('mark.js/dist/mark.js') // need to hide from server side rendering
         this.mark = new Mark(this.dom)
+        this.highlight()
     }
 
     componentDidUpdate() {
@@ -17,8 +18,7 @@ class SearchPreview extends Component {
 
         const style = {transform: "scale(1.0)"}
         return (<div className="search-result-preview" style={style} ref={(dom) => this.dom = dom}>
-            <span>{this.props.snippets}</span>
-            <elementsLibrary.Section {...section}/>
+            <elementsLibrary.DocElement content={section.content}/>
         </div>)
     }
 
