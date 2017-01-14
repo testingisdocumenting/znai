@@ -5,9 +5,9 @@ import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.nashorn.NashornEngine;
 import com.twosigma.utils.JsonUtils;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -23,8 +23,8 @@ public class LunrIndexer {
         this.nashornEngine = this.reactJsNashornEngine.getNashornEngine();
     }
 
-    public String createJsonIndex(Stream<PageProps> pages) {
-        List<? extends Map<String, ?>> pagesAsMaps = pages.map(PageProps::toMap).collect(toList());
+    public String createJsonIndex(Collection<PageProps> pages) {
+        List<? extends Map<String, ?>> pagesAsMaps = pages.stream().map(PageProps::toMap).collect(toList());
         String pagesJson = JsonUtils.serialize(pagesAsMaps);
         nashornEngine.bind("pagesJson", pagesJson);
         return nashornEngine.eval("LunrIndexer.createWithPages(JSON.parse(pagesJson)).exportAsJson()").toString();

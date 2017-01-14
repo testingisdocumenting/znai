@@ -8,8 +8,6 @@ import com.twosigma.documentation.parser.Page
 import com.twosigma.documentation.structure.TocItem
 import org.junit.Test
 
-import static com.twosigma.utils.FileUtils.fileTextContent
-
 /**
  * @author mykola
  */
@@ -25,7 +23,7 @@ hello world
 """))
 
         def pageProps = new PageProps(new TocItem("dir-name", "file-name"), page, HtmlRenderContext.nested(1))
-        def indexJson = indexer.createJsonIndex([pageProps].stream())
+        def indexJson = indexer.createJsonIndex([pageProps])
 
         println indexJson
     }

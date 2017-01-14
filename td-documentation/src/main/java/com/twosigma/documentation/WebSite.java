@@ -1,29 +1,23 @@
 package com.twosigma.documentation;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.gson.Gson;
-
 import com.twosigma.documentation.extensions.IncludeContext;
 import com.twosigma.documentation.extensions.IncludePlugins;
 import com.twosigma.documentation.extensions.PluginsListener;
 import com.twosigma.documentation.html.*;
-import com.twosigma.documentation.html.reactjs.ReactJsBundle;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
-import com.twosigma.documentation.nashorn.NashornEngine;
 import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.Page;
+import com.twosigma.documentation.search.LunrIndexer;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
 import com.twosigma.utils.JsonUtils;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 import static com.twosigma.utils.FileUtils.fileTextContent;
 import static java.util.stream.Collectors.toList;
@@ -46,6 +40,7 @@ public class WebSite {
     private WebResource lunrIndexJavaScript;
     private WebResource allPagesJavaScript;
     private final ReactJsNashornEngine reactJsNashornEngine;
+    private final LunrIndexer lunrIndexer;
 
     private WebSite(Configuration cfg) {
         this.cfg = cfg;
@@ -53,6 +48,7 @@ public class WebSite {
         this.docMeta = new DocMeta();
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
         this.reactJsNashornEngine = new ReactJsNashornEngine();
+        this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
 
         docMeta.setTitle(cfg.title);
         docMeta.setType(cfg.type);
@@ -87,14 +83,14 @@ public class WebSite {
         deployResources();
         createToc();
         parseMarkups();
-//        generateSearchIndex();
         generatePages();
+        generateSearchIndex();
     }
 
     public TocItem tocItemByPath(Path path) {
         return toc.getTocItems().stream().filter(ti ->
-            path.toAbsolutePath().getParent().getFileName().toString().equals(ti.getDirName()) &&
-                path.getFileName().toString().equals(ti.getFileNameWithoutExtension() + ".md")).findFirst().orElse(null);
+                path.toAbsolutePath().getParent().getFileName().toString().equals(ti.getDirName()) &&
+                        path.getFileName().toString().equals(ti.getFileNameWithoutExtension() + ".md")).findFirst().orElse(null);
     }
 
     public void regeneratePage(TocItem tocItem) {
@@ -142,7 +138,7 @@ public class WebSite {
 
     private Path markupPath(final TocItem tocItem) {
         return cfg.tocPath.toAbsolutePath().getParent().resolve(
-            tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + ".md"); // TODO extension auto figure out
+                tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + ".md"); // TODO extension auto figure out
     }
 
     private void resetPlugins(final Path markdownPath) {
@@ -153,16 +149,16 @@ public class WebSite {
         }
     }
 
-//    private void generateSearchIndex() {
-//        lunrIndex = new LunrIndex();
-//
-//        forEachPage((tocItem, mdPage) -> mdPage.getNode().accept(new MdNodeSearchVisitor(lunrIndex, tocItem)));
-//        deployer.deploy(lunrIndexJavaScript.getRelativePath(), lunrIndex.generateJavaScript());
-//    }
-
     private void generatePages() {
         forEachPage(this::generatePage);
         buildJsonOfAllPages();
+    }
+
+    private void generateSearchIndex() {
+        String jsonIndex = lunrIndexer.createJsonIndex(allPagesProps);
+        String js = "searchIndex = " + jsonIndex;
+
+        deployer.deploy(lunrIndexJavaScript.getRelativePath(), js);
     }
 
     private void buildJsonOfAllPages() {
