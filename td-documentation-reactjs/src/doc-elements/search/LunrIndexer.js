@@ -1,4 +1,45 @@
 import lunr from 'lunr'
+import searchContent from './searchContent'
+
+
+/**
+ * wraps Lunr result set to flatten it and provide tokens insted of positions for highlighting
+ */
+class QueryResult {
+    constructor(queryResults) {
+        this.snippetsById = {}
+        this.queryResults_ = queryResults
+        this.flattenResults_()
+    }
+
+    // ids are string versions of json for performance and to be compatible with lunr
+    getIds() {
+        return Object.keys(this.snippetsById)
+    }
+
+    getSnippetsToHighlight(id, text) {
+        return this.snippetsById[id](text)
+    }
+
+    addSnippets_(id, snippetsCallback) {
+        console.log("addSnippets_", id)
+        this.snippetsById[id] = snippetsCallback
+    }
+
+    flattenResults_() {
+        this.queryResults_.forEach((queryResult) => {
+            const metaData = queryResult.matchData.metadata
+
+            Object.keys(metaData).forEach((word) => {
+                const matchByWord = metaData[word]
+                Object.keys(matchByWord).forEach((type) => {
+                    console.log("type", type)
+                    this.addSnippets_(queryResult.ref, (text) => extractSnippets(text, matchByWord[type].position))
+                })
+            })
+        })
+    }
+}
 
 class LunrIndexer {
     constructor({pages, indexJson}) {
@@ -20,7 +61,7 @@ class LunrIndexer {
         }
 
         function loadFromJson() {
-            return lunr.Index.load(JSON.parse(indexJson))
+            return lunr.Index.load(indexJson)
         }
     }
 
@@ -42,15 +83,15 @@ class LunrIndexer {
 
     addPage(page) {
         console.log(JSON.stringify(page))
-        page.content.filter((de) => de.type === 'Section').
-            forEach((s) => this.addSection(page.tocItem, s))
+        page.content.filter((de) => de.type === 'Section')
+            .forEach((s) => this.addSection(page.tocItem, s))
     }
 
     addSection(pageTocItem, section) {
         const pageSectionTitle = section.title
         const id = {...pageTocItem, pageSectionTitle}
 
-        const text = extractTextFromElement(section)
+        const text = searchContent.extractTextFromElement(section)
         this.addText(id, pageSectionTitle, text)
     }
 
@@ -71,62 +112,9 @@ class LunrIndexer {
     }
 }
 
-class QueryResult {
-    constructor(queryResults) {
-        this.snippetsById = {}
-        this.queryResults_ = queryResults
-        this.flattenResults_()
-    }
-
-    getIds() {
-        return Object.keys(this.snippetsById)
-    }
-
-    getSnippetsToHighlight(id, text) {
-        return this.snippetsById[id](text)
-    }
-
-    addSnippets_(id, snippetsCallback) {
-        this.snippetsById[id] = snippetsCallback
-    }
-
-    flattenResults_() {
-        this.queryResults_.forEach((queryResult) => {
-            const metaData = queryResult.matchData.metadata
-
-            Object.keys(metaData).forEach((word) => {
-                const matchByWord = metaData[word]
-                Object.keys(matchByWord).forEach((type) => {
-                    this.addSnippets_(queryResult.ref, (text) => extractSnippets(text, matchByWord[type].position))
-                })
-            })
-        })
-    }
-}
-
-function extractTextFromContent(content) {
-    if (! content) {
-        return ""
-    }
-
-    return content.map((el) => extractTextFromElement(el)).join(" ")
-}
-
-function extractTextFromElement(docElement) {
-    if (docElement.type === 'SimpleText') {
-        return docElement.text
-    }
-
-    if (docElement.content) {
-        return extractTextFromContent(docElement.content)
-    }
-
-    return ""
-}
 
 function extractSnippets(text, positions) {
     return [... new Set(positions.map((p) => text.substr(p[0], p[1])))]
 }
 
 export default LunrIndexer
-export {extractTextFromElement}

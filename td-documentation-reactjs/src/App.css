@@ -1,6 +1,6 @@
 .toc-section {
-  margin-bottom: 20px;
-  padding-left: 10px;
+    margin-bottom: 20px;
+    padding-left: 10px;
 }
 
 .toc-section:first-child {
@@ -8,133 +8,145 @@
 }
 
 .toc-section .title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .toc-item {
-  padding-left: 10px;
+    padding-left: 10px;
 }
 
 .toc-item:hover {
-  background: #eee;
-  cursor: pointer;
+    background: #eee;
+    cursor: pointer;
 }
 
 .toc-item.selected {
-  background: #eee;  
+    background: #eee;
 }
 
 .toc-panel {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  overflow-x: hidden;
-  white-space: nowrap;
-  border-right: 1px solid #eee;
-  transition: width 0.5s;  
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: hidden;
+    white-space: nowrap;
+    border-right: 1px solid #eee;
+    transition: width 0.5s;
 }
 
 .toc-panel.collapsed {
-  width: 0;
-  transition: width 0.5s;
+    width: 0;
+    transition: width 0.5s;
 }
 
 .toc-panel .header {
-  min-height: 50px;
-  padding: 15px 10px 10px;
-  background-color: #a0a0f0;
-  color: white;
-  border-color: #e7e7e7;
-  border-width: 0 0 1px;
-  z-index: 2;
-  transition: padding-left 0.5s;  
+    min-height: 50px;
+    padding: 15px 10px 10px;
+    background-color: #a0a0f0;
+    color: white;
+    border-color: #e7e7e7;
+    border-width: 0 0 1px;
+    z-index: 2;
+    transition: padding-left 0.5s;
 }
 
 .toc-panel-expand-button {
-  position: fixed;
-  top: -40px;
-  left: 20px;
-  font-size: 20px;  
+    position: fixed;
+    top: -40px;
+    left: 20px;
+    font-size: 20px;
 }
 
 .toc-panel-expand-button.appeared {
-  position: fixed;
-  top: 14px;
-  left: 20px;
-  font-size: 20px;
-  transition: top 0.5s ease-in;
-  z-index: 1001;
+    position: fixed;
+    top: 14px;
+    left: 20px;
+    font-size: 20px;
+    transition: top 0.5s ease-in;
+    z-index: 1001;
 }
 
 .toc-panel-collapse-button {
-  position: fixed;
-  top: 50px;
-  left: -40px;
-  font-size: 20px;  
+    position: fixed;
+    top: 50px;
+    left: -40px;
+    font-size: 20px;
 }
 
 .toc-panel-collapse-button.appeared {
-  position: fixed;
-  top: 10px;
-  left: 130px;
-  font-size: 20px;  
-  transition: left 0.5s;
+    position: fixed;
+    top: 10px;
+    left: 130px;
+    font-size: 20px;
+    transition: left 0.5s;
 }
 
 .search-popup .overlay {
-  position: fixed; 
-  left: 0; 
-  top: 0; 
-  right: 0; 
-  bottom: 0;
-  z-index: 1000;
-  width: 100%;
-  height: 100%;
-  background: rgba(150, 150, 150, 0.5)
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background: rgba(150, 150, 150, 0.5)
 }
 
 .search-popup .popup-panel {
-  position: fixed;
-  top: 50px;
-  bottom: 50px;
-  left: 50px;
-  right: 50px;
-  z-index: 1001;
-  border: 1px solid #aaa;
-  background: rgba(255, 255, 255, 1)
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 50px;
+    bottom: 50px;
+    left: 50px;
+    right: 50px;
+    z-index: 1001;
+    border: 1px solid #aaa;
+    background: rgba(255, 255, 255, 1)
+}
+
+.search-popup .toc-and-preview {
+    flex-direction: row;
+    display: flex;
+    height: 100%;
 }
 
 .search-popup .search-toc-panel {
-  width: 300px;
-  padding: 10px;
-  height: 100%;
-  border-right: 1px solid #ccc
+    border-right: 1px solid red;
+    flex: 1;
+}
+
+.search-popup .search-preview-panel {
+    border: 3px green;
+    flex: 3;
 }
 
 .search-popup .search-box {
-  height: 60px;
-  border-bottom: 1px solid #ccc;
+    flex-basis: 60px;
+    border-bottom: 1px solid #ccc;
 }
 
 .search-popup .search-box input {
-  width: 100%;
-  height: 100%;
-  outline: none;
-  border: none;
-  padding: 10px;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    padding: 10px;
 }
 
 .search-popup .close {
-  position: absolute;
-  right: 20px;
-  top: 20px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
 }
+
 
 .page-title {
     color: #5e6167;
@@ -145,7 +157,6 @@
 
 .section-title {
     font-size: 18px;
-    padding-top: 40px;
     padding-bottom: 5px;
     margin-bottom: 20px;
 
@@ -166,9 +177,9 @@
 }
 
 .main-panel {
-    transition: margin-left .5s;    
+    transition: margin-left .5s;
     margin-left: 150px;
-    margin-right: 10px;    
+    margin-right: 10px;
 }
 
 .main-panel.without-toc {
@@ -177,14 +188,14 @@
 }
 
 .top-navigation {
-  min-height: 60px;
-  padding-left: 10px;  
-  background-color: #ffffff;
-  color: #58ade3;
-  border-color: #e7e7e7;
-  border-width: 0 0 1px;
-  z-index: 2;
-  transition: padding-left 0.5s;  
+    min-height: 60px;
+    padding-left: 10px;
+    background-color: #ffffff;
+    color: #58ade3;
+    border-color: #e7e7e7;
+    border-width: 0 0 1px;
+    z-index: 2;
+    transition: padding-left 0.5s;
 }
 
 .without-toc .top-navigation {
@@ -206,7 +217,7 @@
 
 .without-toc .page-content {
     padding-left: 50px;
-    transition: padding-left 0.5s;    
+    transition: padding-left 0.5s;
 }
 
 @media only screen and (min-width: 1300px) {
