@@ -5,7 +5,7 @@ import './Snippet.css'
 
 class Snippet extends React.Component {
     render() {
-        const className = this.props.lang.length ? this.props.lang : ""
+        const className = "hljs" + (this.props.lang.length ? " " + this.props.lang : "")
         return (<div className="snippet">
             <pre className={className} ref={(dn) => this.codeNode = dn}>
                 {this.props.snippet}
@@ -14,7 +14,7 @@ class Snippet extends React.Component {
     }
 
     componentDidMount() {
-        hljs.highlightBlock(this.codeNode);
+        setTimeout(() => hljs.highlightBlock(this.codeNode), 0)
     }
 }
 
