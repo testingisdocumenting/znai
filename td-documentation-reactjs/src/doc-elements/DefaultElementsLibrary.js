@@ -11,8 +11,8 @@ library.DocElement = BoundDocElement
 library.Emphasis = ({content}) => (<span className="emphasis"><BoundDocElement content={content} /></span>)
 library.StrongEmphasis = ({content}) => (<span className="strong-emphasis"><BoundDocElement content={content} /></span>)
 library.Link = ({anchor, label}) => (<a href={anchor}>{label}</a>)
-library.Paragraph = ({content}) => <div className="paragraph"><BoundDocElement content={content} /></div>
-library.BlockQuote = ({content}) => <blockquote><BoundDocElement content={content} /></blockquote>
+library.Paragraph = ({content}) => <div className="paragraph content-block"><BoundDocElement content={content} /></div>
+library.BlockQuote = ({content}) => <blockquote className="content-block"><BoundDocElement content={content} /></blockquote>
 library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
 library.SoftLineBreak = () => <span> </span>
 library.HardLineBreak = () => <br />
@@ -21,11 +21,11 @@ library.ThematicBreak = () => <hr />
 library.Snippet = Snippet
 
 library.BulletList = ({tight, bulletMarker, content}) => {
-    const className = tight ? "tight" : ""
+    const className = "content-block" + (tight ? " tight" : "")
     return (<ul className={className}><BoundDocElement content={content} /></ul>)
 }
 
-library.OrderedList = ({delimiter, startNumber, content}) => <ol start={startNumber}><BoundDocElement content={content} /></ol>
+library.OrderedList = ({delimiter, startNumber, content}) => <ol className="content-block" start={startNumber}><BoundDocElement content={content} /></ol>
 
 library.ListItem = ({content}) => <li><BoundDocElement content={content} /></li>
 
@@ -48,7 +48,6 @@ library.CustomComponent = ({componentName, componentProps}) => {
 library.GraphVizSvg = GraphVizSvg
 
 library.Page = ({title, content}) => (<div className="page-content">
-    <div className="page-title">{title}</div>
     <BoundDocElement content={content}/>
 </div>)
 

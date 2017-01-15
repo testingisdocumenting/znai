@@ -19,7 +19,9 @@ class Documentation extends Component {
     }
 
     render() {
-        const {title, toc, page, docMeta} = this.props
+        const {toc, page, docMeta} = this.props
+
+        const pageTitle = page.tocItem.pageTitle
 
         const tocClassModifier =  (this.state.tocCollapsed ? "without-toc" : "")
         const mainPanelClass = "main-panel " + tocClassModifier
@@ -38,8 +40,8 @@ class Documentation extends Component {
                 {searchPopup}
 
                 <div className={mainPanelClass}>
-                    <NavBar docMeta={docMeta} />
-                    <elementsLibrary.Page title={title} content={page.content}/>
+                    <NavBar docMeta={docMeta} pageTitle={pageTitle}/>
+                    <elementsLibrary.Page title={pageTitle} content={page.content}/>
                 </div>
             </div>)
     }
