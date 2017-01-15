@@ -14,6 +14,9 @@ class Snippet extends React.Component {
     }
 
     componentDidMount() {
+        // delay highlight as the first time is a warm-up period and may delay react rendering
+        // it will be especially noticeable during search preview
+
         setTimeout(() => hljs.highlightBlock(this.codeNode), 0)
     }
 }
