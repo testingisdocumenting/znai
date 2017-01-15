@@ -1,3 +1,11 @@
+.search-button {
+    position: fixed;
+    font-size: 20px;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+
 .search-popup .overlay {
     position: fixed;
     left: 0;
@@ -29,12 +37,12 @@
 }
 
 .search-popup .search-toc-panel {
-    flex: 1;
+    flex: 3;
     border-right: 1px solid #ccc;
 }
 
 .search-popup .search-preview-panel {
-    flex: 3;
+    flex: 5;
     padding: 10px;
 }
 

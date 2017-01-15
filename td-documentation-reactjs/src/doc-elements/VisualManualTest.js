@@ -1,9 +1,9 @@
 import React from 'react'
 
-import SearchDemo from './search/SearchDemo'
+import DocumentationDemo from './DocumentationDemo'
 
 const VisualManualTest = () => (
-    <SearchDemo/>
+    <DocumentationDemo/>
 )
 
 

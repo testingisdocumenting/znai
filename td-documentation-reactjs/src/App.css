@@ -58,12 +58,14 @@
 
 .toc-panel-expand-button {
     position: fixed;
+    cursor: pointer;
     top: -40px;
     left: 20px;
     font-size: 20px;
 }
 
 .toc-panel-expand-button.appeared {
+    cursor: pointer;
     position: fixed;
     top: 14px;
     left: 20px;
@@ -77,9 +79,11 @@
     top: 50px;
     left: -40px;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .toc-panel-collapse-button.appeared {
+    cursor: pointer;
     position: fixed;
     top: 10px;
     left: 130px;
@@ -113,6 +117,10 @@
 
 .strong-emphasis {
     font-weight: bold;
+}
+
+blockquote {
+    font-size: 14px;
 }
 
 .main-panel {
