@@ -88,6 +88,12 @@ class SearchPopup extends Component {
         let selectedIdx = this.state.selectedIdx
         console.log(e)
 
+        if (e.key === 'Escape') {
+            if (this.props.onClose) {
+                this.props.onClose()
+            }
+        }
+
         if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') {
             return
         }
