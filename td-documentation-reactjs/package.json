@@ -51,6 +51,7 @@
     "bootstrap": "^3.3.7",
     "codemirror": "^5.22.0",
     "lunr": "alpha",
+    "promise": "^7.1.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   },

@@ -8,8 +8,7 @@ class SearchPopup extends Component {
     constructor(props) {
         super(props)
 
-        this.search = this.props.search
-        this.state = { searchQuery: "", selectedIdx: 0 }
+        this.state = { searchQuery: "", selectedIdx: 0, search: null }
         this.onQueryChange = this.onQueryChange.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
     }
@@ -17,6 +16,17 @@ class SearchPopup extends Component {
     queryResultIds() {
         const queryResult = this.state.queryResult
         return queryResult ? queryResult.getIds() : []
+    }
+
+    startResolvingSearch() {
+        // search is a promise because it requires json data for index and all pages
+        //
+        this.props.searchPromise.then((search) => {
+            console.log("search resolved")
+            this.setState({search})
+        }, (error) => {
+            console.error("can't resolve search: " + error)
+        })
     }
 
     render() {
@@ -29,13 +39,15 @@ class SearchPopup extends Component {
         const selectedIdx = this.state.selectedIdx
         console.log("selectedIdx", selectedIdx)
         const firstId = hasResult ? ids[selectedIdx] : null
-        const previewDetails = hasResult ? this.search.previewDetails(firstId, this.state.queryResult) : null
+        const previewDetails = hasResult ? this.state.search.previewDetails(firstId, this.state.queryResult) : null
 
         return (<div className="search-popup">
             <div className="overlay" onClick={onClose} />
 
-            <div className="popup-panel">
-                <SearchBox onChange={this.onQueryChange} />
+            <div className="popup-panel"> {
+                this.state.search ? <SearchBox onChange={this.onQueryChange} /> : null
+
+            }
                 <div className="close" onClick={onClose}>&times;</div>
 
                 {previewDetails ? this.renderPreview(ids, selectedIdx, previewDetails) : null}
@@ -55,7 +67,7 @@ class SearchPopup extends Component {
     }
 
     onQueryChange(query) {
-        const queryResult = this.search.search(query)
+        const queryResult = this.state.search.search(query)
         const selectedIdx = 0
         this.setState({queryResult, selectedIdx})
 
@@ -64,6 +76,7 @@ class SearchPopup extends Component {
     }
 
     componentDidMount() {
+        this.startResolvingSearch()
         document.addEventListener('keydown', this.keyDownHandler)
     }
 
