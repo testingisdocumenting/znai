@@ -37,8 +37,6 @@ public class WebSite {
     private List<PageProps> allPagesProps;
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
-    private WebResource lunrIndexJavaScript;
-    private WebResource allPagesJavaScript;
     private final ReactJsNashornEngine reactJsNashornEngine;
     private final LunrIndexer lunrIndexer;
 
@@ -53,8 +51,6 @@ public class WebSite {
         docMeta.setTitle(cfg.title);
         docMeta.setType(cfg.type);
         docMeta.setLogo(WebResource.withRelativePath(cfg.logoRelativePath));
-        lunrIndexJavaScript = WebResource.withRelativePath("index.js");
-        allPagesJavaScript = WebResource.withRelativePath("pages.js");
 
         reset();
     }
@@ -106,8 +102,6 @@ public class WebSite {
         pageByTocItem = new LinkedHashMap<>();
         allPagesProps = new ArrayList<>();
         extraJavaScripts = new ArrayList<>(registeredExtraJavaScripts);
-        extraJavaScripts.add(lunrIndexJavaScript);
-        extraJavaScripts.add(allPagesJavaScript);
     }
 
     private void deployResources() {
@@ -156,17 +150,14 @@ public class WebSite {
 
     private void generateSearchIndex() {
         String jsonIndex = lunrIndexer.createJsonIndex(allPagesProps);
-        String js = "searchIndex = " + jsonIndex;
-
-        deployer.deploy(lunrIndexJavaScript.getRelativePath(), js);
+        deployer.deploy("search-index.json", jsonIndex);
     }
 
     private void buildJsonOfAllPages() {
         List<Map<String, ?>> listOfMaps = this.allPagesProps.stream().map(PageProps::toMap).collect(toList());
         String json = JsonUtils.serialize(listOfMaps);
-        String js = "allPagesData = " + json + ";";
 
-        deployer.deploy("pages.js", js);
+        deployer.deploy("all-pages.json", json);
     }
 
     private void generatePage(final TocItem tocItem, final Page page) {
