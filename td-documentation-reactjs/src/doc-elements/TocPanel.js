@@ -6,17 +6,15 @@ import {documentationNavigation} from './DocumentationNavigation'
 class TocPanel extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedItem: { dirName: "", fileName: "" },
-        };
 
-        this.onTocItemClick = this.onTocItemClick.bind(this);
-        this.toggle = this.toggle.bind(this);
+        this.onTocItemClick = this.onTocItemClick.bind(this)
+        this.toggle = this.toggle.bind(this)
+        this.keyDownHandler = this.keyDownHandler.bind(this)
     }
 
     render() {
-        const {collapsed} = this.props
-        const panelClass = "toc-panel " + (collapsed ? "collapsed" : "")
+        const {collapsed, selected} = this.props
+        const panelClass = "toc-panel" + (collapsed ? " collapsed" : "") + (selected ? " selected" : "")
         const expandButtonClass = "toc-panel-expand-button " + (collapsed ? "appeared" : "")
         const collapseButtonClass = "toc-panel-collapse-button " + (!collapsed ? "appeared" : "")
 
@@ -27,14 +25,13 @@ class TocPanel extends Component {
             </div>
             <div className={expandButtonClass} onClick={this.toggle}>&#9776;</div>
             <TocMenu toc={this.props.toc}
-                selected={this.state.selectedItem}
+                selected={this.props.selectedItem}
                 onClickHandler={this.onTocItemClick} />
         </div>
         )
     }
 
     onTocItemClick(dirName, fileName) {
-        this.setState({ selectedItem: { dirName: dirName, fileName: fileName } })
         documentationNavigation.navigateToPage(dirName, fileName)
     }
 
@@ -42,6 +39,28 @@ class TocPanel extends Component {
         const collapsed = !this.props.collapsed
         this.props.onToggle(collapsed)
     }
+
+    componentDidMount() {
+        document.addEventListener('keydown', this.keyDownHandler)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.keyDownHandler)
+    }
+
+    keyDownHandler(e) {
+        const {selected, onNextPage, onPrevPage} = this.props
+
+        if (! selected) {
+            return
+        }
+
+        if (e.key === 'ArrowUp') {
+            onPrevPage()
+        } else if (e.key === 'ArrowDown') {
+            onNextPage()
+        }
+    }
 }
 
-export default TocPanel;
+export default TocPanel

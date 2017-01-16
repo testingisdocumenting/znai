@@ -31,6 +31,10 @@
     transition: padding-left 0.5s;
 }
 
+.toc-panel.selected .header {
+    background-color: #3060aa;
+}
+
 .toc-panel-header-title {
     align-self: baseline;
 }
@@ -70,6 +74,10 @@
 .toc-item.selected {
     background: #eee;
 }
+
+/*.toc-panel.selected .toc-item.selected {*/
+    /*background: #3060aa;*/
+/*}*/
 
 .toc-panel.collapsed {
     width: 0;

@@ -1,9 +1,13 @@
 class DocumentationNavigation {
     constructor() {
         this.listeners = []
-        window.addEventListener('popstate', (e) => {
-            this.notifyNewUrl(document.location.pathname)
-        })
+
+        // server side rendering guard
+        if (window.addEventListener) {
+            window.addEventListener('popstate', (e) => {
+                this.notifyNewUrl(document.location.pathname)
+            })
+        }
     }
 
     addUrlChangeListener(listener) {
@@ -23,6 +27,12 @@ class DocumentationNavigation {
         this.listeners.forEach((l) => {
             l(url)
         })
+    }
+
+    currentDirNameAndFileName() {
+        return window.location ?
+            this.extractDirNameAndFileName(window.location.pathname):
+            "/server/side"
     }
 
     extractDirNameAndFileName(url) {
