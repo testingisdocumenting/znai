@@ -14,16 +14,15 @@ class DocumentationNavigation {
         this.listeners.push(listener)
     }
 
-    navigateToPage(dirName, fileName) {
+    navigateToPage(id) {
         // TODO handle .. for cases when selected is not a doc page
-        const url = "../" + dirName + "/" + fileName
+        const url = "../" + id.dirName + "/" + id.fileName
 
         history.pushState({}, null, url)
         this.notifyNewUrl(url)
     }
 
     notifyNewUrl(url) {
-        console.log("notifyNewUrl", url)
         this.listeners.forEach((l) => {
             l(url)
         })

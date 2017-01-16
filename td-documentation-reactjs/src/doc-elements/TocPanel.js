@@ -32,7 +32,7 @@ class TocPanel extends Component {
     }
 
     onTocItemClick(dirName, fileName) {
-        documentationNavigation.navigateToPage(dirName, fileName)
+        documentationNavigation.navigateToPage({dirName, fileName})
     }
 
     toggle() {

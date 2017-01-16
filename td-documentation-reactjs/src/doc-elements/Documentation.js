@@ -29,6 +29,7 @@ class Documentation extends Component {
         this.onPanelSelect = this.onPanelSelect.bind(this)
         this.onNextPage = this.onNextPage.bind(this)
         this.onPrevPage = this.onPrevPage.bind(this)
+        this.onSearchSelection = this.onSearchSelection.bind(this)
 
         documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
     }
@@ -40,6 +41,7 @@ class Documentation extends Component {
         const pageTitle = page.tocItem.pageTitle
 
         const searchPopup = this.state.searchActive ? <SearchPopup searchPromise={this.searchPromise}
+                                                                   onSearchSelection={this.onSearchSelection}
                                                                    onClose={this.onSearchClose}/> : null
 
         return (
@@ -86,20 +88,23 @@ class Documentation extends Component {
     onNextPage() {
         const {page} = this.state
         if (page.nextTocItem) {
-            documentationNavigation.navigateToPage(page.nextTocItem.dirName, page.nextTocItem.fileName)
+            documentationNavigation.navigateToPage(page.nextTocItem)
         }
     }
 
     onPrevPage() {
         const {page} = this.state
         if (page.prevTocItem) {
-            documentationNavigation.navigateToPage(page.prevTocItem.dirName, page.prevTocItem.fileName)
+            documentationNavigation.navigateToPage(page.prevTocItem)
         }
     }
 
-    onUrlChange(url) {
-        console.log("@@", url)
+    onSearchSelection(id) {
+        this.onSearchClose()
+        documentationNavigation.navigateToPage(id)
+    }
 
+    onUrlChange(url) {
         getAllPagesPromise().then((pages) => {
             const currentPageLocation = documentationNavigation.extractDirNameAndFileName(url)
 
@@ -111,7 +116,6 @@ class Documentation extends Component {
                 return
             }
 
-            console.log("new page", matchingPages[0])
             this.setState({page: matchingPages[0], selectedTocItem: currentPageLocation})
         })
     }

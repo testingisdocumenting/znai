@@ -85,13 +85,18 @@ class SearchPopup extends Component {
     }
 
     keyDownHandler(e) {
+        const ids = this.queryResultIds()
         let selectedIdx = this.state.selectedIdx
-        console.log(e)
 
         if (e.key === 'Escape') {
             if (this.props.onClose) {
                 this.props.onClose()
             }
+        }
+
+        if (e.key === 'Enter' && ids.length > 0) {
+            const tocToNavigate = JSON.parse(ids[selectedIdx])
+            this.props.onSearchSelection(tocToNavigate)
         }
 
         if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') {
@@ -109,8 +114,6 @@ class SearchPopup extends Component {
         if (selectedIdx < 0) {
             selectedIdx = 0
         }
-
-        const ids = this.queryResultIds()
 
         if (selectedIdx >= ids.length) {
             selectedIdx = this.ids.length - 1
