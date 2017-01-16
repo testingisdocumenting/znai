@@ -4,6 +4,8 @@ import TocPanel from './TocPanel'
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import elementsLibrary from './DefaultElementsLibrary'
+import {documentationNavigation} from './DocumentationNavigation'
+import {getAllPagesPromise} from "./allPages"
 
 import './DocumentationLayout.css'
 
@@ -13,15 +15,18 @@ class Documentation extends Component {
 
         this.searchPromise = getSearchPromise()
 
-        this.state = { tocCollapsed: false }
+        this.state = { tocCollapsed: false, page: this.props.page }
 
         this.onTocToggle = this.onTocToggle.bind(this)
         this.onSearchClick = this.onSearchClick.bind(this)
         this.onSearchClose = this.onSearchClose.bind(this)
+
+        documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
     }
 
     render() {
-        const {toc, page, docMeta} = this.props
+        const {toc, docMeta} = this.props
+        const {page} = this.state
 
         const pageTitle = page.tocItem.pageTitle
 
@@ -46,6 +51,7 @@ class Documentation extends Component {
     }
 
     onSearchClick() {
+        history.pushState({}, null, "/test")
         this.setState({searchActive: true})
     }
 
@@ -55,6 +61,24 @@ class Documentation extends Component {
 
     onTocToggle(collapsed) {
         this.setState({ tocCollapsed: collapsed })
+    }
+
+    onUrlChange(url) {
+        console.log("@@", url)
+
+        getAllPagesPromise().then((pages) => {
+            const pageCoord = documentationNavigation.extractDirNameAndFileName(url)
+
+            const matchingPages = pages.filter((p) => p.tocItem.dirName === pageCoord.dirName &&
+                p.tocItem.fileName === pageCoord.fileName)
+
+            if (! matchingPages) {
+                console.error("can't find any page with", pageCoord)
+                return
+            }
+
+            this.setState({page: matchingPages[0]})
+        })
     }
 }
 

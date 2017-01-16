@@ -1,25 +1,27 @@
 import React from 'react';
 
-const Item = ({sectionTitle, title, fileName, isSelected, onClickHandler}) => {
+const Item = ({title, dirName, fileName, isSelected, onClickHandler}) => {
     const className = "toc-item " + (isSelected ? "selected" : "");
     return (
         <div className={className} onClick={
-            () => onClickHandler(sectionTitle, fileName)}>{title}</div>
+            () => onClickHandler(dirName, fileName)}>{title}</div>
     );
 };
 
-const Section = ({sectionTitle, items, selected, onClickHandler}) => {
+const Section = ({sectionTitle, dirName, items, selected, onClickHandler}) => {
     return (<div className="toc-section">
         <div className="title">{sectionTitle}</div>
         {items.map((item) => <Item key={item.fileName}
                                    sectionTitle={sectionTitle}
-                                   isSelected={sectionTitle === selected.sectionTitle && item.fileName === selected.fileName}
+                                   dirName={dirName}
+                                   isSelected={dirName === selected.dirName && item.fileName === selected.fileName}
                                    onClickHandler={onClickHandler} {...item} />)}
     </div>);
 };
 
 const TocMenu = ({toc, selected, onClickHandler}) => {
-    selected = selected || {sectionTitle: "", fileName: ""};
+    selected = selected || {dirName: "", fileName: ""};
+
     return (
         <div className="toc-menu">
             {toc.map((sectionEntry) =>

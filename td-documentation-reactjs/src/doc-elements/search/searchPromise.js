@@ -1,4 +1,6 @@
-import {getAllPagesPromise, getSearchIndexPromise} from "./allPagesAndSearchIndex"
+import {getSearchIndexPromise} from "./searchIndex"
+import {getAllPagesPromise} from "../allPages"
+
 import Promise from "promise"
 import Search from './Search'
 

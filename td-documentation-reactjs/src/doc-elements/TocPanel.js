@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import TocMenu from './TocMenu';
 
+import {documentationNavigation} from './DocumentationNavigation'
+
 class TocPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedItem: { sectionTitle: "", fileName: "" },
+            selectedItem: { dirName: "", fileName: "" },
         };
 
         this.onTocItemClick = this.onTocItemClick.bind(this);
@@ -31,15 +33,15 @@ class TocPanel extends Component {
         )
     }
 
-    onTocItemClick(sectionTitle, fileName) {
-        console.log(sectionTitle + " " + fileName);
-        this.setState({ selectedItem: { sectionTitle: sectionTitle, fileName: fileName } });
+    onTocItemClick(dirName, fileName) {
+        this.setState({ selectedItem: { dirName: dirName, fileName: fileName } })
+        documentationNavigation.navigateToPage(dirName, fileName)
     }
 
     toggle() {
-        const collapsed = !this.props.collapsed;
-        this.props.onToggle(collapsed);
+        const collapsed = !this.props.collapsed
+        this.props.onToggle(collapsed)
     }
-};
+}
 
 export default TocPanel;
