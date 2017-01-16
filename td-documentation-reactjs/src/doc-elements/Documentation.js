@@ -5,13 +5,15 @@ import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import elementsLibrary from './DefaultElementsLibrary'
 
+import './DocumentationLayout.css'
+
 class Documentation extends Component {
     constructor(props) {
         super(props)
 
         this.searchPromise = getSearchPromise()
 
-        this.state = { tocCollapsed: true }
+        this.state = { tocCollapsed: false }
 
         this.onTocToggle = this.onTocToggle.bind(this)
         this.onSearchClick = this.onSearchClick.bind(this)
@@ -23,14 +25,11 @@ class Documentation extends Component {
 
         const pageTitle = page.tocItem.pageTitle
 
-        const tocClassModifier =  (this.state.tocCollapsed ? "without-toc" : "")
-        const mainPanelClass = "main-panel " + tocClassModifier
-
         const searchPopup = this.state.searchActive ? <SearchPopup searchPromise={this.searchPromise}
                                                                    onClose={this.onSearchClose}/> : null
 
         return (
-            <div className="page">
+            <div className="documentation">
                 <div className="side-panel">
                     <TocPanel toc={toc} collapsed={this.state.tocCollapsed} onToggle={this.onTocToggle} />
                 </div>
@@ -39,7 +38,7 @@ class Documentation extends Component {
 
                 {searchPopup}
 
-                <div className={mainPanelClass}>
+                <div className="main-panel">
                     <NavBar docMeta={docMeta} pageTitle={pageTitle}/>
                     <elementsLibrary.Page title={pageTitle} content={page.content}/>
                 </div>

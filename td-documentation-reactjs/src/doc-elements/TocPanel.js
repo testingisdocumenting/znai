@@ -19,9 +19,11 @@ class TocPanel extends Component {
         const collapseButtonClass = "toc-panel-collapse-button " + (!collapsed ? "appeared" : "")
 
         return (<div className={panelClass}>
-            <div className="header">Table of Contents</div>
+            <div className="header">
+                <span className="toc-panel-header-title">Table of Contents</span>
+                <span className={collapseButtonClass} onClick={this.toggle}>&times;</span>
+            </div>
             <div className={expandButtonClass} onClick={this.toggle}>&#9776;</div>
-            <div className={collapseButtonClass} onClick={this.toggle}>&times;</div>
             <TocMenu toc={this.props.toc}
                 selected={this.state.selectedItem}
                 onClickHandler={this.onTocItemClick} />

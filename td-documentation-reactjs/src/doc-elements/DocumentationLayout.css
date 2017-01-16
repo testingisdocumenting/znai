@@ -1,0 +1,132 @@
+.documentation {
+    display: flex;
+}
+
+.main-panel {
+    flex: 4;
+    flex-basis: 70%;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+.toc-panel {
+    flex: 2;
+
+    overflow-x: scroll;
+    white-space: nowrap;
+    border-right: 1px solid #eee;
+    min-height: 100vh;
+}
+
+.toc-panel .header {
+    display: flex;
+    justify-content: space-between;
+    min-height: 60px;
+    background-color: #888888;
+    color: white;
+    border-color: #e7e7e7;
+    border-width: 0 0 1px;
+    padding: 15px 10px 10px 40px;
+    z-index: 2;
+    transition: padding-left 0.5s;
+}
+
+.toc-panel-header-title {
+    align-self: baseline;
+}
+
+.toc-menu {
+    padding-left: 30px;
+    padding-right: 40px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.toc-section {
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.toc-section:first-child {
+    padding-top: 10px;
+}
+
+.toc-section .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.toc-item {
+    padding-left: 10px;
+}
+
+.toc-item:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+.toc-item.selected {
+    background: #eee;
+}
+
+.toc-panel.collapsed {
+    width: 0;
+}
+
+.toc-panel-expand-button {
+    position: fixed;
+    cursor: pointer;
+    top: -40px;
+    left: 20px;
+    font-size: 20px;
+}
+
+.toc-panel-expand-button.appeared {
+    cursor: pointer;
+    position: fixed;
+    top: 14px;
+    left: 20px;
+    font-size: 20px;
+    transition: top 0.5s ease-in;
+    z-index: 1001;
+}
+
+.toc-panel-collapse-button {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.toc-panel-collapse-button.appeared {
+    cursor: pointer;
+    font-size: 20px;
+    transition: left 0.5s;
+    align-self: baseline;
+}
+
+.top-navigation {
+    min-height: 60px;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+    color: black;
+    border-color: #e7e7e7;
+    border-width: 0 0 1px;
+    z-index: 2;
+}
+
+.top-navigation .menu {
+    font-size: 28px;
+    height: 60px;
+    line-height: 60px;
+    vertical-align: middle;
+}
+
+.menu-page-title {
+    font-size: 24px;
+    margin-left: 40px;
+    color: #888888;
+}
+
