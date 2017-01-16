@@ -40,7 +40,7 @@ public class PageProps {
         }
 
         if (tocItem.getPrev() != null) {
-            pageProps.put("prevTocItem", tocItem.toMap());
+            pageProps.put("prevTocItem", tocItem.getPrev().toMap());
         }
 
         pageProps.put("renderContext", renderContext.toMap());
