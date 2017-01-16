@@ -9,6 +9,11 @@ export {getSearchPromise}
 let searchPromise = null
 
 function getSearchPromise() {
+    // server side rendering guard
+    if (! window.setTimeout) {
+        return null
+    }
+
     if (searchPromise) {
         return searchPromise
     }
