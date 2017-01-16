@@ -36,7 +36,8 @@ public class TableOfContents {
     }
 
     public List<Map<String, Object>> toListOfMaps() {
-        Map<String, List<TocItem>> bySectionTitle = tocItems.stream().collect(groupingBy(TocItem::getSectionTitle));
+        Map<String, List<TocItem>> bySectionTitle = tocItems.stream().collect(
+                groupingBy(TocItem::getSectionTitle, LinkedHashMap::new, toList()));
 
         List<Map<String, Object>> result = new ArrayList<>();
         bySectionTitle.forEach((sectionTitle, items) -> result.add(createSectionWithItems(sectionTitle, items)));
