@@ -1,12 +1,13 @@
 package com.twosigma.documentation.parser
 
+import com.twosigma.documentation.extensions.include.TestResourceResolver
 import org.junit.Test
 
 /**
  * @author mykola
  */
 class MarkdownParserTest {
-    static final MarkupParser parser = new MarkdownParser()
+    static final MarkupParser parser = new MarkdownParser(new TestResourceResolver())
     private List<Map> content
 
     @Test
