@@ -1,9 +1,11 @@
 package com.twosigma.documentation.extensions.diagrams.markdown;
 
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
+import com.twosigma.documentation.extensions.include.RelativeToFileAndRootResourceResolver;
 import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.docelement.DocElement;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class MarkdownDiagramSlides {
-    private static final MarkdownParser parser = new MarkdownParser(); // TODO DI?
+    private static final MarkdownParser parser = new MarkdownParser(new RelativeToFileAndRootResourceResolver(Paths.get("."))); // TODO DI?
 
     private DiagramSlides diagramSlides;
     private String markdownContent;

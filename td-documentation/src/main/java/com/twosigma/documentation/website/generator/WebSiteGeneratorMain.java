@@ -10,8 +10,8 @@ import com.twosigma.documentation.WebSite;
  */
 public class WebSiteGeneratorMain {
     public static void main(String[] args) {
-        final Path deployPath = Paths.get("dist/webdoc");
-        final Path mdRoot = Paths.get("webdoc");
+        final Path deployPath = Paths.get("dist/documentation");
+        final Path mdRoot = Paths.get("documentation");
 
         WebSite.withToc(mdRoot.resolve("toc")).
             withMetaFromJsonFile(mdRoot.resolve("meta.json")).

@@ -17,10 +17,11 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
-import com.twosigma.documentation.extensions.IncludeContext;
-import com.twosigma.documentation.extensions.IncludeParams;
-import com.twosigma.documentation.extensions.IncludePlugin;
+import com.twosigma.documentation.extensions.include.IncludeContext;
+import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.ReactComponent;
+import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 
 /**
  * @author mykola
@@ -39,7 +40,7 @@ public class RestTestResultIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(final IncludeParams includeParams) {
+    public ReactComponent process(IncludeResourcesResolver resourcesResolver, final IncludeParams includeParams) {
         final Map<String, Object> props = new LinkedHashMap<>();
 
         final Path pathToJson = Paths.get(includeParams.getFreeParam() + ".groovy-" + nextCallNumber + ".json");

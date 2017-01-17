@@ -21,7 +21,7 @@ public class IncludePostProcessor implements PostProcessor {
     }
 
     private static class IncludeVisitor extends AbstractVisitor {
-        private static final Pattern INCLUDE_PATTERN = Pattern.compile(":include-(\\S+)+:\\S*([^\\{]*)(\\{[^\\}]+\\})?");
+        private static final Pattern INCLUDE_PATTERN = Pattern.compile(":include-(\\S+)+:(.*)$");
 
         @Override
         public void visit(final Text text) {

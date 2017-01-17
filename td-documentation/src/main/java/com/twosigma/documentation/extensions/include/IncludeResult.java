@@ -1,4 +1,4 @@
-package com.twosigma.documentation.extensions;
+package com.twosigma.documentation.extensions.include;
 
 import java.nio.file.Path;
 import java.util.ArrayList;

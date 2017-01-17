@@ -1,4 +1,4 @@
-package com.twosigma.documentation.extensions;
+package com.twosigma.documentation.extensions.include;
 
 import java.util.Collection;
 import java.util.List;

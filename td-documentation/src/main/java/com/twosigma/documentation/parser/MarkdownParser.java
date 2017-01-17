@@ -2,6 +2,7 @@ package com.twosigma.documentation.parser;
 
 import java.util.Collections;
 
+import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
 
@@ -15,16 +16,20 @@ import com.twosigma.documentation.parser.docelement.DocElementCreationParserHand
  */
 public class MarkdownParser implements MarkupParser {
     private final Parser parser;
+    private final IncludeResourcesResolver resourcesResolver;
 
-    public MarkdownParser() {
-        final CommonMarkExtension extension = new CommonMarkExtension();
+    // TODO need to react on external resources so they can be deployed. like images
+    public MarkdownParser(IncludeResourcesResolver resourcesResolver) {
+        this.resourcesResolver = resourcesResolver;
+        CommonMarkExtension extension = new CommonMarkExtension();
         parser = Parser.builder().extensions(Collections.singletonList(extension)).build();
     }
 
+    // TODO add path
     public DocElement parse(String markdown) {
         Node node = parser.parse(markdown);
 
-        final DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler();
+        final DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(resourcesResolver);
         final DocElementVisitor visitor = new DocElementVisitor(parserHandler);
         node.accept(visitor);
 
@@ -125,6 +130,11 @@ public class MarkdownParser implements MarkupParser {
         @Override
         public void visit(final IndentedCodeBlock indentedCodeBlock) {
             parserHandler.onSnippet("", "", indentedCodeBlock.getLiteral());
+        }
+
+        @Override
+        public void visit(final FencedCodeBlock fencedCodeBlock) {
+            parserHandler.onSnippet(fencedCodeBlock.getInfo(), "", fencedCodeBlock.getLiteral());
         }
 
         @Override

@@ -1,4 +1,6 @@
-package com.twosigma.documentation.extensions;
+package com.twosigma.documentation.extensions.include;
+
+import com.twosigma.documentation.extensions.ReactComponent;
 
 /**
  *
@@ -13,6 +15,6 @@ public interface IncludePlugin {
      */
     void reset(IncludeContext context);
 
-    ReactComponent process(IncludeParams includeParams);
+    ReactComponent process(IncludeResourcesResolver resourcesResolver, IncludeParams includeParams);
     String textForSearch(); // TODO weights
 }

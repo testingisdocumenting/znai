@@ -2,10 +2,11 @@ package com.twosigma.documentation.parser.docelement;
 
 import java.util.*;
 
-import com.twosigma.documentation.extensions.IncludeParams;
-import com.twosigma.documentation.extensions.IncludePlugin;
-import com.twosigma.documentation.extensions.IncludePlugins;
+import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.extensions.include.IncludePlugins;
 import com.twosigma.documentation.extensions.ReactComponent;
+import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.utils.CollectionUtils;
 
@@ -13,10 +14,12 @@ import com.twosigma.utils.CollectionUtils;
  * @author mykola
  */
 public class DocElementCreationParserHandler implements ParserHandler {
-    private DocElement docElement;
-    private Deque<DocElement> elementsStack;
+    private final DocElement docElement;
+    private final Deque<DocElement> elementsStack;
+    private final IncludeResourcesResolver resourcesResolver;
 
-    public DocElementCreationParserHandler() {
+    public DocElementCreationParserHandler(IncludeResourcesResolver resourcesResolver) {
+        this.resourcesResolver = resourcesResolver;
         docElement = new DocElement("page");
         elementsStack = new ArrayDeque<>();
         elementsStack.add(docElement);
@@ -139,7 +142,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onInclude(final String pluginId, final String value) {
         final IncludePlugin includePlugin = IncludePlugins.byId(pluginId);
-        final ReactComponent reactComponent = includePlugin.process(new IncludeParams(value, Collections.emptyMap()));// TODO custom params
+        final ReactComponent reactComponent = includePlugin.process(resourcesResolver, new IncludeParams(value));
 
         DocElement customComponent = new DocElement(DocElementType.CUSTOM_COMPONENT);
         customComponent.addProp("componentName", reactComponent.getName());

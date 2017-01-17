@@ -8,9 +8,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.twosigma.documentation.extensions.IncludeContext;
-import com.twosigma.documentation.extensions.IncludePlugin;
-import com.twosigma.documentation.extensions.IncludeResult;
+import com.twosigma.documentation.extensions.include.IncludeContext;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.extensions.include.IncludeResult;
 import com.twosigma.documentation.extensions.PluginsListener;
 
 /**

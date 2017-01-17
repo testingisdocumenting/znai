@@ -1,9 +1,11 @@
 package com.twosigma.documentation;
 
 import com.google.gson.Gson;
-import com.twosigma.documentation.extensions.IncludeContext;
-import com.twosigma.documentation.extensions.IncludePlugins;
+import com.twosigma.documentation.extensions.include.IncludeContext;
+import com.twosigma.documentation.extensions.include.IncludePlugins;
 import com.twosigma.documentation.extensions.PluginsListener;
+import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
+import com.twosigma.documentation.extensions.include.RelativeToFileAndRootResourceResolver;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkdownParser;
@@ -37,6 +39,8 @@ public class WebSite {
     private List<PageProps> allPagesProps;
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
+
+    private final RelativeToFileAndRootResourceResolver includeResourcesResolver;
     private final ReactJsNashornEngine reactJsNashornEngine;
     private final LunrIndexer lunrIndexer;
 
@@ -47,6 +51,7 @@ public class WebSite {
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
         this.reactJsNashornEngine = new ReactJsNashornEngine();
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
+        this.includeResourcesResolver = new RelativeToFileAndRootResourceResolver(cfg.tocPath.getParent());
 
         docMeta.setTitle(cfg.title);
         docMeta.setType(cfg.type);
@@ -98,7 +103,7 @@ public class WebSite {
 
     private void reset() {
         pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, toc, reactJsNashornEngine, cfg.pluginsListener);
-        markupParser = new MarkdownParser();
+        markupParser = new MarkdownParser(includeResourcesResolver);
         pageByTocItem = new LinkedHashMap<>();
         allPagesProps = new ArrayList<>();
         extraJavaScripts = new ArrayList<>(registeredExtraJavaScripts);
@@ -121,6 +126,7 @@ public class WebSite {
         try {
             Path markupPath = markupPath(tocItem);
 
+            includeResourcesResolver.setCurrentFilePath(markupPath);
             resetPlugins(markupPath);
 
             final Page page = new Page(markupParser.parse(fileTextContent(markupPath)));
@@ -178,15 +184,6 @@ public class WebSite {
             throw new RuntimeException("Error during rendering of " + tocItem.getFileNameWithoutExtension(), e);
         }
     }
-
-//    private void generateTocPage() {
-//        final TocHtmlPage tocHtmlPage = new TocHtmlPage(docMeta, pageByTocItem);
-//        extraJavaScripts.forEach(tocHtmlPage::addJavaScript);
-//
-//        // we are outside any directory on a zero level, so all the links to css/js/img should be normal links without ".."
-//        final String html = tocHtmlPage.render(HtmlRenderContext.nested(0));
-//        deployer.deploy(Paths.get("index.html"), html);
-//    }
 
     private void forEachPage(PageConsumer consumer) {
         toc.getTocItems().forEach(tocItem -> {

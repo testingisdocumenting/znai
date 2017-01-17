@@ -19,10 +19,10 @@ package com.twosigma.documentation.parser.commonmark.include;///*
 //import org.commonmark.html.renderer.NodeRendererContext;
 //import org.commonmark.node.Node;
 //
-//import com.twosigma.documentation.extensions.IncludeParams;
-//import com.twosigma.documentation.extensions.IncludePlugin;
-//import com.twosigma.documentation.extensions.IncludePlugins;
-//import com.twosigma.documentation.extensions.IncludeResult;
+//import com.twosigma.documentation.extensions.include.IncludeParams;
+//import com.twosigma.documentation.extensions.include.IncludePlugin;
+//import com.twosigma.documentation.extensions.include.IncludePlugins;
+//import com.twosigma.documentation.extensions.include.IncludeResult;
 //import com.twosigma.documentation.extensions.PluginsListener;
 //
 //

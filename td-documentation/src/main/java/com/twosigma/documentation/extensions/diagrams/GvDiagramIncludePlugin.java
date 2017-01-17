@@ -4,14 +4,16 @@ import com.twosigma.diagrams.graphviz.GraphvizDiagram;
 import com.twosigma.diagrams.graphviz.GraphvizEngine;
 import com.twosigma.diagrams.graphviz.InteractiveCmdGraphviz;
 import com.twosigma.diagrams.graphviz.meta.GraphvizShapeConfig;
-import com.twosigma.documentation.extensions.IncludeContext;
-import com.twosigma.documentation.extensions.IncludeParams;
-import com.twosigma.documentation.extensions.IncludePlugin;
+import com.twosigma.documentation.extensions.include.IncludeContext;
+import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.ReactComponent;
+import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
 import com.twosigma.utils.ResourceUtils;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,11 +21,11 @@ import java.util.Map;
 /**
  * @author mykola
  */
-public class IncludeGvDiagram implements IncludePlugin {
+public class GvDiagramIncludePlugin implements IncludePlugin {
     private final GraphvizEngine graphvizEngine;
     private final Map<String, ?> colors;
 
-    public IncludeGvDiagram() {
+    public GvDiagramIncludePlugin() {
         GraphvizShapeConfig shapeConfig = new GraphvizShapeConfig(ResourceUtils.textContent("graphviz-shapes.json"));
         InteractiveCmdGraphviz runtime = new InteractiveCmdGraphviz();
 
@@ -44,10 +46,8 @@ public class IncludeGvDiagram implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(IncludeParams includeParams) {
-        // TODO resource resolver to be able to specify files like ./in-the-same-dir-as-md
-        String path = includeParams.getFreeParam();
-        String gvContent = FileUtils.fileTextContent(Paths.get(path));
+    public ReactComponent process(IncludeResourcesResolver resourcesResolver, IncludeParams includeParams) {
+        String gvContent = resourcesResolver.textContent(includeParams.getFreeParam());
 
         GraphvizDiagram diagram = graphvizEngine.diagramFromGv(gvContent);
         Map<String, Object> props = new LinkedHashMap<>();
