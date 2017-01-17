@@ -5,8 +5,8 @@ import './Snippet.css'
 
 class Snippet extends React.Component {
     render() {
-        const className = "hljs" + (this.props.lang.length ? " " + this.props.lang : "")
-        return (<div className="snippet">
+        const className = "hljs" + ((this.props.lang && this.props.lang.length) ? " " + this.props.lang : "")
+        return (<div className="snippet content-block">
             <pre className={className} ref={(dn) => this.codeNode = dn}>
                 {this.props.snippet}
             </pre>
