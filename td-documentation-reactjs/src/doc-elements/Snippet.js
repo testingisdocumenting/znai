@@ -19,7 +19,13 @@ class Snippet extends React.Component {
 
         // server side rendering guard
         if (window.setTimeout) {
-            setTimeout(() => hljs.highlightBlock(this.codeNode), 0)
+            this.timeOut = setTimeout(() => hljs.highlightBlock(this.codeNode), 0);
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.timeOut) {
+            clearTimeout(this.timeOut)
         }
     }
 }
