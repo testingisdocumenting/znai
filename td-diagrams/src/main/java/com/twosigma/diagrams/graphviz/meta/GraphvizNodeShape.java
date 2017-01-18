@@ -9,11 +9,13 @@ import java.util.stream.Collectors;
  */
 public class GraphvizNodeShape {
     private String shape;
+    private String labelLoc;
     private Number width;
     private Number height;
 
-    public GraphvizNodeShape(String shape, Number width, Number height) {
+    public GraphvizNodeShape(String shape, String labelLoc, Number width, Number height) {
         this.shape = shape;
+        this.labelLoc = labelLoc;
         this.width = width;
         this.height = height;
     }
@@ -34,6 +36,10 @@ public class GraphvizNodeShape {
         return shape != null && !shape.isEmpty();
     }
 
+    public boolean isLabelLocSet() {
+        return labelLoc != null && !labelLoc.isEmpty();
+    }
+
     public boolean isWidthSet() {
         return width != null;
     }
@@ -46,6 +52,10 @@ public class GraphvizNodeShape {
         List<String> attrs = new ArrayList<>();
         if (isShapeSet()) {
             attrs.add("shape=" + shape);
+        }
+
+        if (isLabelLocSet()) {
+            attrs.add("labelloc=" + labelLoc);
         }
 
         if (isWidthSet()) {
@@ -61,5 +71,10 @@ public class GraphvizNodeShape {
         }
 
         return attrs.stream().collect(Collectors.joining(","));
+    }
+
+    @Override
+    public String toString() {
+        return asAttrs();
     }
 }

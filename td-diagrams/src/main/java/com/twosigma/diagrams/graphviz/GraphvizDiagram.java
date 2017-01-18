@@ -11,11 +11,15 @@ public class GraphvizDiagram {
     private String svg;
     private Map<String, List<String>> stylesByNodeId;
     private Map<String, String> shapeSvgByStyleId;
+    private Map<String, Boolean> isInvertedTextColorByStyleId;
 
-    public GraphvizDiagram(String svg, Map<String, List<String>> stylesByNodeId, Map<String, String> shapeSvgByStyleId) {
+    public GraphvizDiagram(String svg, Map<String, List<String>> stylesByNodeId,
+                           Map<String, String> shapeSvgByStyleId,
+                           Map<String, Boolean> isInvertedTextColorByStyleId) {
         this.svg = svg;
         this.stylesByNodeId = stylesByNodeId;
         this.shapeSvgByStyleId = shapeSvgByStyleId;
+        this.isInvertedTextColorByStyleId = isInvertedTextColorByStyleId;
     }
 
     public String getSvg() {
@@ -35,6 +39,7 @@ public class GraphvizDiagram {
         result.put("svg", svg);
         result.put("stylesByNodeId", stylesByNodeId);
         result.put("shapeSvgByStyleId", shapeSvgByStyleId);
+        result.put("isInvertedTextColorByStyleId", isInvertedTextColorByStyleId);
 
         return result;
     }

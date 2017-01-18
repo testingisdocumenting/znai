@@ -25,11 +25,18 @@ public class GraphvizEngine {
 
         Set<String> styles = withMeta.getStylesById().values().stream().flatMap(Collection::stream).collect(toSet());
         Map<String, String> svgByStyle = new LinkedHashMap<>();
+        Map<String, Boolean> isInvertedTextColorByStyleId = new LinkedHashMap<>();
         styles.forEach((s) -> {
             Optional<String> shapeSvg = shapeConfig.shapeSvg(s);
             shapeSvg.ifPresent((svg) -> svgByStyle.put(s, svg));
+
+            boolean isInverted = shapeConfig.isInvertedTextColorByStyleId(s);
+            if (isInverted) {
+                isInvertedTextColorByStyleId.put(s, isInverted);
+            }
+
         });
 
-        return new GraphvizDiagram(graphSvg, withMeta.getStylesById(), svgByStyle);
+        return new GraphvizDiagram(graphSvg, withMeta.getStylesById(), svgByStyle, isInvertedTextColorByStyleId);
     }
 }

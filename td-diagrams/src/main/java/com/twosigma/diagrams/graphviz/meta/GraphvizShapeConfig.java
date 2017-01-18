@@ -53,6 +53,16 @@ public class GraphvizShapeConfig {
         return Optional.empty();
     }
 
+    public boolean isInvertedTextColorByStyleId(String style) {
+        Map<String, ?> c = getSubMap(style);
+        if (c == null) {
+            return false;
+        }
+
+        Boolean invertedText = getValue(c, "invertedText");
+        return invertedText != null;
+    }
+
     public Optional<GraphvizNodeShape> nodeShape(String style) {
         Map<String, ?> c = getSubMap(style);
         if (c == null) {
@@ -60,10 +70,11 @@ public class GraphvizShapeConfig {
         }
 
         String shape = getValue(c, "shape");
+        String labelLoc = getValue(c, "labelloc");
         Number width = getValue(c, "width");
         Number height = getValue(c, "height");
 
-        return Optional.of(new GraphvizNodeShape(shape, width, height));
+        return Optional.of(new GraphvizNodeShape(shape, labelLoc, width, height));
     }
 
     @SuppressWarnings("unchecked")
