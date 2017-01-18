@@ -1,0 +1,10 @@
+<g transform="scale(0.32)">
+    <g transform="translate(-85, -100)">
+        <g>
+            <path fill="#F2BD1A" d="M86,99H0V0h26c33.1,0,60,26.9,60,60V99z"/>
+            <path fill="#231F20" d="M86,185L86,185c-47.5,0-86-38.5-86-86v0h86V185z"/>
+            <rect x="86" y="99" fill="#40BEB0" width="78.4" height="86"/>
+            <rect x="86" y="99" fill="#37A595" width="18" height="86"/>
+        </g>
+    </g>
+</g>

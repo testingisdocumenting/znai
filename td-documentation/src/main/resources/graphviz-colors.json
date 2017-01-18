@@ -2,16 +2,19 @@
   "a": {
     "line": "#123752",
     "fill": "#708EA4",
-    "text": "#eeeeee"
+    "text": "#eeeeee",
+    "textInverse": "#123752"
   },
   "b": {
     "line": "#AA8E39",
     "fill": "#FFEAAA",
-    "text": "#806515"
+    "text": "#806515",
+    "textInverse": "#AA8E39"
   },
   "c": {
     "line": "#306E12",
     "fill": "#519331",
-    "text": "#ABDD93"
+    "text": "#ABDD93",
+    "textInverse": "#306E12"
   }
 }
