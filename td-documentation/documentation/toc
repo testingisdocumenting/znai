@@ -4,6 +4,7 @@ rationale
     first-code-base
 features
     code-snippets
+    proxy
 cook-book
     merging-time-series
 external-code-bases
