@@ -52,6 +52,7 @@
     "codemirror": "^5.22.0",
     "lunr": "alpha",
     "promise": "^7.1.1",
+    "query-string": "^4.3.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   },
