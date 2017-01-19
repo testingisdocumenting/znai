@@ -16,8 +16,8 @@
   "database": {
     "shape": "rectangle",
     "width": 1.0,
-    "height": 1.2,
-    "svgPath": "database-a.svg"
+    "height": 1.1,
+    "svgPath": "database-b.svg"
   },
 
   "logStash": {
@@ -27,6 +27,15 @@
     "labelloc": "b",
     "invertedText": true,
     "svgPath": "log-stash.svg"
+  },
+
+  "elasticSearch": {
+    "shape": "rectangle",
+    "width": 0.9,
+    "height": 1.2,
+    "labelloc": "b",
+    "invertedText": true,
+    "svgPath": "elastic-search.svg"
   }
 }
 
