@@ -45,6 +45,10 @@ pre {
     margin-right: auto;
 }
 
+.diagram-explanation-panel .content-block {
+    width: auto;
+}
+
 .without-toc .page-content {
     transition: padding-left 0.5s;
 }

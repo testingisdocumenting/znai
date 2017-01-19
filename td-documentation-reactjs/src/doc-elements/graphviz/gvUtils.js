@@ -1,4 +1,4 @@
-export {removeCustomProps, buildUniqueId}
+export {removeCustomProps, buildUniqueId, expandId}
 
 function removeCustomProps(props) {
     const res = {...props}
@@ -16,4 +16,17 @@ function removeCustomProps(props) {
 function buildUniqueId(diagramId, nodeId) {
     diagramId = diagramId || "no_name"
     return `${diagramId}_${nodeId}`
+}
+
+// if id is for an edge like a->b we want it to be expanded into three ids: a, b, a->b
+function expandId(id) {
+    const expanded = [id]
+    if (id.indexOf('-') === -1) {
+        return expanded
+    }
+
+    id.replace('>', '').replace('<', '').replace('--', '-').split('-')
+        .forEach((p) => expanded.push(p))
+
+    return expanded
 }

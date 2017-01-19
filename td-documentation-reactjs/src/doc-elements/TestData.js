@@ -9,7 +9,8 @@ const TestData = {
         b: {
             line: '#AA8E39',
             fill: '#FFEAAA',
-            text: '#806515'
+            text: '#806515',
+            inversedText: '#FFEAAA'
         },
         c: {
             line: '#306E12',

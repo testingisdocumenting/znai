@@ -8,7 +8,10 @@ import './GraphvVizFlow.css'
 class GraphVizFlow extends Component {
     constructor(props) {
         super(props)
-        this.state = {fullScreen: false}
+        this.state = {fullScreen: true}
+
+        this.onExpand = this.onExpand.bind(this)
+        this.onExitFullScreen = this.onExitFullScreen.bind(this)
     }
 
     render() {
@@ -16,9 +19,17 @@ class GraphVizFlow extends Component {
 
         return <div className="graphviz-diagram">
             {fullScreen ?
-                <GraphVizFlowFullScreen {...this.props}/> :
-                <GraphVizFlowAllInfoAtOnce {...this.props}/> }
+                <GraphVizFlowFullScreen {...this.props} onClose={this.onExitFullScreen}/> :
+                <GraphVizFlowAllInfoAtOnce {...this.props} onExpand={this.onExpand}/> }
         </div>
+    }
+
+    onExpand() {
+        this.setState({fullScreen: true})
+    }
+
+    onExitFullScreen() {
+        this.setState({fullScreen: false})
     }
 }
 

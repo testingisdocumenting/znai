@@ -2,6 +2,7 @@ import React from 'react'
 import DocElement from './DocElement'
 import Snippet from './Snippet'
 import GraphVizSvg from './graphviz/GraphVizSvg'
+import GraphVizFlow from './graphviz/GraphVizFlow'
 
 const library = {}
 
@@ -47,6 +48,7 @@ library.CustomComponent = ({componentName, componentProps}) => {
 
 library.FileTextContent = (props) => <Snippet snippet={props.text} {...props}/>
 library.GraphVizSvg = GraphVizSvg
+library.GraphVizFlow = GraphVizFlow
 
 library.Page = ({title, content}) => (<div className="page-content">
     <BoundDocElement content={content}/>

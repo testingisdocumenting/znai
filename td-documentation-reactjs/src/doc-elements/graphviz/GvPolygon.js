@@ -28,7 +28,7 @@ function createColors(parentClassName, colors) {
 
 function createStyle(diagramId, parentClassName) {
     if (parentClassName === 'node') {
-        return {filter: `url(#${buildUniqueId(diagramId, "dropShadow_filter")})` }
+        return {} //filter: `url(#${buildUniqueId(diagramId, "dropShadow_filter")})` }
     }
 
     return {}

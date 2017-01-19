@@ -106,8 +106,6 @@ class ReactElementsBuilder {
             return null
         }
 
-        console.log("isInvertedTextColor",  this.diagram.isInvertedTextColorByStyleId)
-        console.log("currentStyles",  this.currentStyles)
         return this.currentStyles.filter((s) => this.diagram.isInvertedTextColorByStyleId[s]).length > 0
     }
 
@@ -166,16 +164,16 @@ class GraphVizSvg extends Component {
         return <div>
             <svg viewBox="0 0 0 0" width="0" height="0">
                 <filter id={dropShadowFilterId}>
-                    <feOffset result="offOut" in="SourceGraphic" dx="5" dy="5" />
+                    <feOffset result="offOut" in="SourceGraphic" dx="2" dy="2" />
                     <feColorMatrix result="matrixOut" in="offOut" type="matrix" values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" />
                     <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="30" />
                     <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
                 </filter>
 
                 <filter id={highlightFilterId}>
-                    <feColorMatrix values="1 0 0 0 0
-                                           1 0 0 0 0
-                                           1 0 0 0 0
+                    <feColorMatrix values="1 0 1 0 0
+                                           1 0 1 0 0
+                                           1 0 1 0 0
                                            0 0 0 1 0"/>
                 </filter>
             </svg>
