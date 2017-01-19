@@ -2,6 +2,7 @@ package com.twosigma.documentation.parser;
 
 import java.util.Collections;
 
+import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
@@ -16,11 +17,11 @@ import com.twosigma.documentation.parser.docelement.DocElementCreationParserHand
  */
 public class MarkdownParser implements MarkupParser {
     private final Parser parser;
-    private final IncludeResourcesResolver resourcesResolver;
+    private final ComponentsRegistry componentsRegistry;
 
     // TODO need to react on external resources so they can be deployed. like images
-    public MarkdownParser(IncludeResourcesResolver resourcesResolver) {
-        this.resourcesResolver = resourcesResolver;
+    public MarkdownParser(ComponentsRegistry componentsRegistry) {
+        this.componentsRegistry = componentsRegistry;
         CommonMarkExtension extension = new CommonMarkExtension();
         parser = Parser.builder().extensions(Collections.singletonList(extension)).build();
     }
@@ -29,7 +30,7 @@ public class MarkdownParser implements MarkupParser {
     public DocElement parse(String markdown) {
         Node node = parser.parse(markdown);
 
-        final DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(resourcesResolver);
+        final DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(componentsRegistry);
         final DocElementVisitor visitor = new DocElementVisitor(parserHandler);
         node.accept(visitor);
 

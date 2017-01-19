@@ -1,0 +1,16 @@
+<g transform="scale(0.7)">
+    <g transform="translate(-50, -50)">
+        <polygon points="13 28.9 50 7.81 87 28.9 87 71.1 50 92.19 13 71.1 13 28.9"/>
+        <g>
+            <g>
+                <rect x="38.34" y="46.09" width="15.08" height="3.89" fill="#fff"/>
+                <rect x="38.34" y="53.88" width="15.08" height="3.89" fill="#fff"/>
+                <rect x="38.34" y="61.67" width="15.08" height="3.89" fill="#fff"/>
+            </g>
+            <g>
+                <polygon points="57.31 40.65 57.31 63.22 61.2 63.22 61.2 36.76 42.23 36.76 42.23 40.65 57.31 40.65" fill="#fff"/>
+                <path d="M69,29H38.34v7.79H30.55V74.9H61.2V67.11H69ZM57.31,71H34.44V40.65H57.31Zm7.79-7.79H61.2V36.76h-19V32.86H65.1Z" fill="#fff"/>
+            </g>
+        </g>
+    </g>
+</g>

@@ -10,11 +10,11 @@ import java.util.Map;
  */
 public class IncludeParams {
     private String freeParam;
-    private Map<String, ?> opts;
+    private IncludeParamsOpts opts;
 
     public IncludeParams(final String value) {
         this.freeParam = extractFreeParam(value);
-        this.opts = extractOpts(value);
+        this.opts = new IncludeParamsOpts(extractMap(value));
     }
 
     private String extractFreeParam(String value) {
@@ -24,7 +24,7 @@ public class IncludeParams {
                 value).trim();
     }
 
-    private Map<String, ?> extractOpts(String value) {
+    private Map<String, ?> extractMap(String value) {
         int optsStartIdx = value.indexOf('{');
         if (optsStartIdx == -1) {
             return Collections.emptyMap();
@@ -38,7 +38,7 @@ public class IncludeParams {
         return freeParam;
     }
 
-    public Map<String, ?> getOpts() {
+    public IncludeParamsOpts getOpts() {
         return opts;
     }
 }

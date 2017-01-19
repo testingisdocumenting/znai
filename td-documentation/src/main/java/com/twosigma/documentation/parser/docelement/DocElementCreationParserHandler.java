@@ -2,6 +2,7 @@ package com.twosigma.documentation.parser.docelement;
 
 import java.util.*;
 
+import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
@@ -16,10 +17,10 @@ import com.twosigma.utils.CollectionUtils;
 public class DocElementCreationParserHandler implements ParserHandler {
     private final DocElement docElement;
     private final Deque<DocElement> elementsStack;
-    private final IncludeResourcesResolver resourcesResolver;
+    private final ComponentsRegistry componentsRegistry;
 
-    public DocElementCreationParserHandler(IncludeResourcesResolver resourcesResolver) {
-        this.resourcesResolver = resourcesResolver;
+    public DocElementCreationParserHandler(ComponentsRegistry componentsRegistry) {
+        this.componentsRegistry = componentsRegistry;
         docElement = new DocElement("page");
         elementsStack = new ArrayDeque<>();
         elementsStack.add(docElement);
@@ -141,14 +142,18 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onInclude(final String pluginId, final String value) {
-        final IncludePlugin includePlugin = IncludePlugins.byId(pluginId);
-        final ReactComponent reactComponent = includePlugin.process(resourcesResolver, new IncludeParams(value));
+        try {
+            final IncludePlugin includePlugin = IncludePlugins.byId(pluginId);
+            final ReactComponent reactComponent = includePlugin.process(componentsRegistry, new IncludeParams(value));
 
-        DocElement customComponent = new DocElement(DocElementType.CUSTOM_COMPONENT);
-        customComponent.addProp("componentName", reactComponent.getName());
-        customComponent.addProp("componentProps", reactComponent.getProps());
+            DocElement customComponent = new DocElement(DocElementType.CUSTOM_COMPONENT);
+            customComponent.addProp("componentName", reactComponent.getName());
+            customComponent.addProp("componentProps", reactComponent.getProps());
 
-        append(customComponent);
+            append(customComponent);
+        } catch (Exception e) {
+            throw new RuntimeException("failure during processing include plugin '" + pluginId + "': " + e.getMessage(), e);
+        }
     }
 
     private void start(String type, Object... propsKeyValue) {

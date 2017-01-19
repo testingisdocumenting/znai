@@ -4,6 +4,7 @@ import com.twosigma.diagrams.graphviz.GraphvizDiagram;
 import com.twosigma.diagrams.graphviz.GraphvizEngine;
 import com.twosigma.diagrams.graphviz.InteractiveCmdGraphviz;
 import com.twosigma.diagrams.graphviz.meta.GraphvizShapeConfig;
+import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
@@ -22,19 +23,6 @@ import java.util.Map;
  * @author mykola
  */
 public class GvDiagramIncludePlugin implements IncludePlugin {
-    private final GraphvizEngine graphvizEngine;
-    private final Map<String, ?> colors;
-
-    public GvDiagramIncludePlugin() {
-        GraphvizShapeConfig shapeConfig = new GraphvizShapeConfig(ResourceUtils.textContent("graphviz-shapes.json"));
-        InteractiveCmdGraphviz runtime = new InteractiveCmdGraphviz();
-
-        colors = JsonUtils.deserializeAsMap(ResourceUtils.textContent("graphviz-colors.json"));
-        // TODO global config? this constructor is called by Service Loader
-
-        graphvizEngine = new GraphvizEngine(runtime, shapeConfig);
-    }
-
     @Override
     public String id() {
         return "gv-diagram";
@@ -46,13 +34,15 @@ public class GvDiagramIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(IncludeResourcesResolver resourcesResolver, IncludeParams includeParams) {
-        String gvContent = resourcesResolver.textContent(includeParams.getFreeParam());
+    public ReactComponent process(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+        String diagramId = includeParams.getFreeParam();
+        String diagramPath = includeParams.getOpts().getRequiredString("diagramPath");
+        String gvContent = componentsRegistry.includeResourceResolver().textContent(diagramPath);
 
-        GraphvizDiagram diagram = graphvizEngine.diagramFromGv(gvContent);
+        GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv(diagramId, gvContent);
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("diagram", diagram.toMap());
-        props.put("colors", colors);
+        props.put("colors", Graphviz.colors);
 
         return new ReactComponent("GraphVizSvg", props);
     }

@@ -1,10 +1,10 @@
 package com.twosigma.documentation.diagrams.markdown
 
-import com.twosigma.diagrams.graphviz.GraphvizEngine
-import com.twosigma.diagrams.graphviz.InteractiveCmdGraphviz
-import com.twosigma.diagrams.graphviz.meta.GraphvizShapeConfig
-import com.twosigma.documentation.extensions.diagrams.markdown.MarkdownDiagramSlides
-import com.twosigma.utils.FileUtils
+import com.twosigma.documentation.ComponentsRegistry
+import com.twosigma.documentation.WebSiteComponentsRegistry
+import com.twosigma.documentation.extensions.diagrams.Graphviz
+import com.twosigma.documentation.extensions.diagrams.MarkupDiagramSlides
+import com.twosigma.documentation.parser.MarkdownParser
 import com.twosigma.utils.JsonUtils
 import com.twosigma.utils.ResourceUtils
 
@@ -19,15 +19,17 @@ class SlidePocTodoRemove {
         def graphviz = ResourceUtils.textContent("test.gv")
         def markdown = ResourceUtils.textContent("test-flow.md")
 
-        def shapeConfig = new GraphvizShapeConfig(ResourceUtils.textContent("graphviz-meta-conf.json"))
-        def runtime = new InteractiveCmdGraphviz()
-        def engine = new GraphvizEngine(runtime, shapeConfig)
-
+        def engine = Graphviz.graphvizEngine
 
         Map<String, Object> diagramPresentation = new LinkedHashMap<>()
 
-        diagramPresentation.put("slides", MarkdownDiagramSlides.createSlides(markdown).toListOfMaps())
-        diagramPresentation.put("diagram", engine.diagramFromGv(graphviz))
+
+        def components = new WebSiteComponentsRegistry()
+        def parser = new MarkdownParser(components)
+        components.setParser(parser)
+
+        diagramPresentation.put("slides", new MarkupDiagramSlides(parser).create(markdown).toListOfMaps())
+        diagramPresentation.put("diagram", engine.diagramFromGv("demo", graphviz))
 
         String testData = "const data = " + JsonUtils.serializePrettyPrint(diagramPresentation) + "\n\nexport default data"
         Files.write(Paths.get("/Users/mykola/work/testing-documenting/td-documentation-reactjs/src/doc-elements/DiagramSlidesTestData.js"), testData.getBytes())

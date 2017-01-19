@@ -9,6 +9,7 @@ import java.util.function.Function;
 
 import com.google.gson.Gson;
 
+import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
@@ -43,7 +44,7 @@ public class CodeExecutionResultIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(IncludeResourcesResolver resourcesResolver, final IncludeParams includeParams) {
+    public ReactComponent process(ComponentsRegistry componentsRegistry, final IncludeParams includeParams) {
         return new ReactComponent("TestComponent", Collections.emptyMap());
 //        final String fileName = includeParams.getFreeParam();
 //        final Path fullPath = context.getCurrentFilePath().getParent().resolve(fileName + ".json").toAbsolutePath();

@@ -1,10 +1,10 @@
 package com.twosigma.documentation.extensions.include;
 
+import com.twosigma.utils.ServiceLoaderUtils;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
-import com.twosigma.documentation.utils.ServiceUtils;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
@@ -30,7 +30,7 @@ public class IncludePlugins {
     }
 
     private static Map<String, IncludePlugin> discover() {
-        final List<IncludePlugin> list = ServiceUtils.discover(IncludePlugin.class);
+        final List<IncludePlugin> list = ServiceLoaderUtils.load(IncludePlugin.class);
 
         final Map<String, IncludePlugin> byId = list.stream().collect(toMap(IncludePlugin::id, p -> p));
         if (byId.size() < list.size()) {

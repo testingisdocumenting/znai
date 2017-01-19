@@ -13,6 +13,20 @@
     "svgPath": "world.svg"
   },
 
+  "client": {
+    "shape": "square",
+    "width": 0.95,
+    "height": 0.95,
+    "svgPath": "client.svg"
+  },
+
+  "documents": {
+    "shape": "square",
+    "width": 0.95,
+    "height": 0.95,
+    "svgPath": "documents.svg"
+  },
+
   "database": {
     "shape": "rectangle",
     "width": 1.0,

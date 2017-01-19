@@ -1,5 +1,6 @@
 package com.twosigma.documentation.extensions.include;
 
+import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 
 /**
@@ -9,12 +10,16 @@ import com.twosigma.documentation.extensions.ReactComponent;
 public interface IncludePlugin {
     String id();
 
+    default void init(ComponentsRegistry documentationComponentsRegistry) {
+
+    }
+
     /**
      * gets called at the beginning of every page before rendering
      * @param context context of the page
      */
-    void reset(IncludeContext context);
+    default void reset(IncludeContext context) {}
 
-    ReactComponent process(IncludeResourcesResolver resourcesResolver, IncludeParams includeParams);
+    ReactComponent process(ComponentsRegistry componentsRegistry, IncludeParams includeParams);
     String textForSearch(); // TODO weights
 }

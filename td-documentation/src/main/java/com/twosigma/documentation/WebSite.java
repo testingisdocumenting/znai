@@ -40,6 +40,7 @@ public class WebSite {
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
 
+    private final WebSiteComponentsRegistry componentsRegistry;
     private final RelativeToFileAndRootResourceResolver includeResourcesResolver;
     private final ReactJsNashornEngine reactJsNashornEngine;
     private final LunrIndexer lunrIndexer;
@@ -49,6 +50,7 @@ public class WebSite {
         this.deployer = new Deployer(cfg.deployPath);
         this.docMeta = new DocMeta();
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
+        this.componentsRegistry = new WebSiteComponentsRegistry();
         this.reactJsNashornEngine = new ReactJsNashornEngine();
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.includeResourcesResolver = new RelativeToFileAndRootResourceResolver(cfg.tocPath.getParent());
@@ -56,6 +58,8 @@ public class WebSite {
         docMeta.setTitle(cfg.title);
         docMeta.setType(cfg.type);
         docMeta.setLogo(WebResource.withRelativePath(cfg.logoRelativePath));
+
+        componentsRegistry.setIncludeResourcesResolver(includeResourcesResolver);
 
         reset();
     }
@@ -103,10 +107,12 @@ public class WebSite {
 
     private void reset() {
         pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, toc, reactJsNashornEngine, cfg.pluginsListener);
-        markupParser = new MarkdownParser(includeResourcesResolver);
+        markupParser = new MarkdownParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
         allPagesProps = new ArrayList<>();
         extraJavaScripts = new ArrayList<>(registeredExtraJavaScripts);
+
+        componentsRegistry.setParser(markupParser);
     }
 
     private void deployResources() {

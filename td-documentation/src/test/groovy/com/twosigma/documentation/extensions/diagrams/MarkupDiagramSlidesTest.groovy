@@ -1,14 +1,16 @@
-package com.twosigma.documentation.extensions.diagrams.markdown
+package com.twosigma.documentation.extensions.diagrams
 
+import com.twosigma.documentation.WebSiteComponentsRegistry
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides
+import com.twosigma.documentation.parser.MarkdownParser
 import org.junit.Test
 
-import static com.twosigma.documentation.extensions.diagrams.markdown.MarkdownDiagramSlides.createSlides
+import static com.twosigma.documentation.extensions.diagrams.MarkupDiagramSlides.createSlides
 
 /**
  * @author mykola
  */
-class MarkdownDiagramSlidesTest {
+class MarkupDiagramSlidesTest {
     private DiagramSlides slides
 
     static twoSimpleSections = """
@@ -59,6 +61,7 @@ context information
     }
 
     private void parse(markdown) {
-        slides = createSlides(markdown)
+        def diagramSlides = new MarkupDiagramSlides(new MarkdownParser(new WebSiteComponentsRegistry()))
+        slides = diagramSlides.create(markdown)
     }
 }

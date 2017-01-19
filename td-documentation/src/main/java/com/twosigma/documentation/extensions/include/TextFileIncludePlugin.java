@@ -1,5 +1,6 @@
 package com.twosigma.documentation.extensions.include;
 
+import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 
 import java.util.Arrays;
@@ -21,22 +22,23 @@ public class TextFileIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(IncludeResourcesResolver resourcesResolver, IncludeParams includeParams) {
-        String text = extractText(resourcesResolver.textContent(includeParams.getFreeParam()), includeParams.getOpts());
+    public ReactComponent process(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+        String text = extractText(componentsRegistry.includeResourceResolver().
+                textContent(includeParams.getFreeParam()), includeParams.getOpts());
 
-        Map<String, Object> props = new LinkedHashMap<>(includeParams.getOpts());
+        Map<String, Object> props = new LinkedHashMap<>(includeParams.getOpts().toMap());
         props.put("text", text);
 
         return new ReactComponent("FileTextContent", props);
     }
 
-    private String extractText(String text, Map<String, ?> opts) {
+    private String extractText(String text, IncludeParamsOpts opts) {
         if (opts.isEmpty()) {
             return text;
         }
 
-        Number numberOfLines = opts.containsKey("numberOfLines") ? (Number) opts.get("numberOfLines") : Integer.MAX_VALUE;
-        if (opts.containsKey("startLine")) {
+        Number numberOfLines = opts.has("numberOfLines") ? opts.get("numberOfLines") : Integer.MAX_VALUE;
+        if (opts.has("startLine")) {
             String startLine = opts.get("startLine").toString();
             return new Text(text).startingWithLineContaining(startLine, numberOfLines).toString();
         }
