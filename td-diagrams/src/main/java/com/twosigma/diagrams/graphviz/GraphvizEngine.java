@@ -19,7 +19,7 @@ public class GraphvizEngine {
         this.shapeConfig = shapeConfig;
     }
 
-    public GraphvizDiagram diagramFromGv(String gv) {
+    public GraphvizDiagram diagramFromGv(String id, String gv) {
         GraphvizDiagramWithMeta withMeta = GraphvizDiagramWithMeta.create(shapeConfig, gv);
         String graphSvg = runtime.svgFromGv(withMeta.getPreprocessed());
 
@@ -37,6 +37,6 @@ public class GraphvizEngine {
 
         });
 
-        return new GraphvizDiagram(graphSvg, withMeta.getStylesById(), svgByStyle, isInvertedTextColorByStyleId);
+        return new GraphvizDiagram(id, graphSvg, withMeta.getStylesById(), svgByStyle, isInvertedTextColorByStyleId);
     }
 }
