@@ -1,0 +1,16 @@
+.graphviz-diagram-all-content {
+    display: flex;
+    justify-content: center;
+}
+
+.diagram-explanation-panel {
+    height: 100vh;
+    flex-basis: 400px;
+    overflow: scroll;
+    border-left: 1px solid #dddddd;
+    padding-left: 10px;
+}
+
+.diagram-slide-labels {
+    color: #aaaaaa
+}

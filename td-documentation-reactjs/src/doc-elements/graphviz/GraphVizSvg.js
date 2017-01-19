@@ -5,6 +5,8 @@ import GvText from './GvText'
 import GvGroup from './GvGroup'
 import GvPath from './GvPath'
 
+import {buildUniqueId} from './gvUtils'
+
 class ReactElementsBuilder {
     constructor({diagram, colors, idsToDisplay, idsToHighlight}) {
         this.diagram = diagram
@@ -30,8 +32,9 @@ class ReactElementsBuilder {
             attrProps.key = idx
         }
 
-        const props = {}
+        const props = {diagramId: this.diagram.id}
 
+// TODO requires refactoring
         const createElement = () => {
             if (this.currentParentClass) {
                 if (this.currentStyles) {
@@ -48,11 +51,8 @@ class ReactElementsBuilder {
                 }
             }
 
-            let svgShape = this.customSvgShape();
-            if (svgShape) {
-                props.svg = svgShape
-                // return React.createElement(SvgCustomShape, props)
-            }
+            props.svg = this.customSvgShape()
+            props.isInvertedTextColor = this.isInvertedTextColor()
 
             const component = this.reactComponentForDom(domNode)
             const passExtraProps = typeof component !== 'string'
@@ -63,11 +63,16 @@ class ReactElementsBuilder {
 
         if (domNode.nodeName === 'g') {
             if (this.currentCommentAsId) {
-                props.id = this.currentCommentAsId
-                this.currentStyles = this.diagram.stylesByNodeId[props.id]
+                props.nodeId = this.currentCommentAsId
+                props.id = buildUniqueId(this.diagram.id, props.nodeId)
+                this.currentStyles = this.diagram.stylesByNodeId[props.nodeId]
             }
 
-            if (this.idsToDisplay && this.currentCommentAsId && this.idsToDisplay.indexOf(this.currentCommentAsId) === -1) {
+            if (this.idsToHighlight && this.idsToHighlight.indexOf(props.nodeId) !== -1) {
+                props.selected = true
+            }
+
+            if (this.idsToDisplay && this.currentCommentAsId && this.idsToDisplay.indexOf(props.nodeId) === -1) {
                 return null
             }
 
@@ -88,12 +93,22 @@ class ReactElementsBuilder {
     }
 
     customSvgShape() {
-        if (this.currentStyles) {
-            const shapes = this.currentStyles.filter((s) => this.diagram.shapeSvgByStyleId[s])
-            return this.diagram.shapeSvgByStyleId[shapes[0]]
+        if (! this.currentStyles) {
+            return null
         }
 
-        return null
+        const shapes = this.currentStyles.filter((s) => this.diagram.shapeSvgByStyleId[s])
+        return this.diagram.shapeSvgByStyleId[shapes[0]]
+    }
+
+    isInvertedTextColor() {
+        if (! this.currentStyles) {
+            return null
+        }
+
+        console.log("isInvertedTextColor",  this.diagram.isInvertedTextColorByStyleId)
+        console.log("currentStyles",  this.currentStyles)
+        return this.currentStyles.filter((s) => this.diagram.isInvertedTextColorByStyleId[s]).length > 0
     }
 
     reactComponentForDom(domNode) {
@@ -145,21 +160,29 @@ class GraphVizSvg extends Component {
         const parser = new DOMParser()
         const dom = parser.parseFromString(diagram.svg, 'application/xml')
 
+        const dropShadowFilterId = buildUniqueId(diagram.id, "dropShadow_filter")
+        const highlightFilterId = buildUniqueId(diagram.id, "highlight_filter")
         const el = new ReactElementsBuilder({ diagram, colors, idsToDisplay, idsToHighlight }).reactElementFromDomNode(dom.documentElement)
         return <div>
-            <svg>
-                <filter id="dropShadowGraphviz">
+            <svg viewBox="0 0 0 0" width="0" height="0">
+                <filter id={dropShadowFilterId}>
                     <feOffset result="offOut" in="SourceGraphic" dx="5" dy="5" />
                     <feColorMatrix result="matrixOut" in="offOut" type="matrix" values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" />
                     <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="30" />
                     <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                </filter>
+
+                <filter id={highlightFilterId}>
+                    <feColorMatrix values="1 0 0 0 0
+                                           1 0 0 0 0
+                                           1 0 0 0 0
+                                           0 0 0 1 0"/>
                 </filter>
             </svg>
             {el}
         </div>
     }
 }
-
 
 function attributesToProps(attributes) {
     attributes = attributes || []
