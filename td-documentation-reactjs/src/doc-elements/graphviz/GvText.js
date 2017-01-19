@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import styleMeta from './gvStyleMeta'
-import gvUtils from './gvUtils'
+import {removeCustomProps} from './gvUtils'
 
 class GvText extends Component {
     render() {
-        const {colors} = this.props
-        const cleanedUpProps = gvUtils.removeCustomProps(this.props)
+        const {colors, isInversedTextColor} = this.props
+        const cleanedUpProps = removeCustomProps(this.props)
 
-        return <text {...cleanedUpProps} fontFamily="verdana" fontSize="8" fill={colors.text}>
-            {styleMeta.removeStyleNames(this.props.children[0])}
+        const fill = isInversedTextColor ? colors.inversedText : colors.text
+
+        return <text {...cleanedUpProps} fontFamily="verdana" fontSize="8" fill={fill}>
+            {this.props.children[0]}
         </text>
     }
 }
