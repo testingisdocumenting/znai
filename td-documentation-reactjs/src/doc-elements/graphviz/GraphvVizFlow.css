@@ -25,8 +25,7 @@
 
 .graphviz-diagram-all-content .diagram-explanation-panel {
     max-height: 100vh;
-    flex-basis: 400px;
-    overflow: scroll;
+    flex-basis: 300px;
     border-left: 1px solid #dddddd;
     padding-left: 10px;
 }
