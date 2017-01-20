@@ -8,7 +8,7 @@ import './GraphvVizFlow.css'
 class GraphVizFlow extends Component {
     constructor(props) {
         super(props)
-        this.state = {fullScreen: true}
+        this.state = {fullScreen: false}
 
         this.onExpand = this.onExpand.bind(this)
         this.onExitFullScreen = this.onExitFullScreen.bind(this)

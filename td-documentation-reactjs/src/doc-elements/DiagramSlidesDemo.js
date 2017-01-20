@@ -5,7 +5,8 @@ import testData from './TestData'
 
 class DiagramSlidesDemo extends Component {
     render() {
-        return <GraphVizFlow {...diagram} colors={testData.graphvizColors} currentSlideIdx={0}/>
+        return <div>
+            <GraphVizFlow {...diagram} colors={testData.graphvizColors} currentSlideIdx={0}/></div>
     }
 }
 

@@ -54,7 +54,6 @@ class GraphVizFlowFullScreen extends Component {
         const currentContent = slides[currentSlideIdx].content
 
         return <div className="graphviz-diagram-full-screen-container">
-            <div className="overlay"></div>
             <div className="close" onClick={onClose}>&times;</div>
             <div className="graphviz-diagram-full-screen">
                 <div className="slide-number">
