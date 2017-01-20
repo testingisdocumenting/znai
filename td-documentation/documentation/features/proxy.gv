@@ -7,6 +7,7 @@ digraph Simple {
     log_stash_elastic [label="LS kafka[b]"];
     access_log [label="[documents b]"];
     elastic [label="[database a]"];
+    cmdb [label="[database a]"];
     web_dashboard [label="[world a]"];
     client [label="[client a]"];
 
@@ -15,7 +16,5 @@ digraph Simple {
     log_stash_log -> kafka -> log_stash_elastic -> elastic;
     client -> web_dashboard;
     web_dashboard -> elastic;
-
-    {rank=same; log_stash_log kafka log_stash_elastic elastic}
-   // {rank=same; nginx client}
+    web_dashboard -> cmdb;
 }
