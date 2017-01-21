@@ -18,6 +18,7 @@
         <module>td-diagrams</module>
         <module>td-documentation</module>
         <module>td-documentation-reactjs</module>
+        <module>td-ts-dist</module>
     </modules>
 
     <properties>
