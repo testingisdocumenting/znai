@@ -8,6 +8,7 @@ import {documentationNavigation} from './DocumentationNavigation'
 import {getAllPagesPromise} from "./allPages"
 
 import './DocumentationLayout.css'
+import './search/Search.css'
 
 class Documentation extends Component {
     constructor(props) {

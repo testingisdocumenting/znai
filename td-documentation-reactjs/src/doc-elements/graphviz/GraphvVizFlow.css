@@ -30,6 +30,10 @@
     padding-left: 10px;
 }
 
+.diagram-explanation-panel .content-block {
+    width: auto;
+}
+
 .graphviz-diagram-all-content .diagram-slide-labels {
     color: #aaaaaa
 }
