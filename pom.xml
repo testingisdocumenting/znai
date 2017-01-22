@@ -25,6 +25,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <vertx.io.version>3.3.3</vertx.io.version>
     </properties>
 
     <dependencyManagement>
@@ -62,7 +63,13 @@
             <dependency>
                 <groupId>io.vertx</groupId>
                 <artifactId>vertx-core</artifactId>
-                <version>3.3.3</version>
+                <version>${vertx.io.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-web</artifactId>
+                <version>${vertx.io.version}</version>
             </dependency>
 
             <dependency>
