@@ -18,6 +18,7 @@
         <module>td-diagrams</module>
         <module>td-documentation</module>
         <module>td-documentation-reactjs</module>
+        <module>td-documentation-server</module>
         <module>td-ts-dist</module>
     </modules>
 
@@ -56,6 +57,12 @@
                 <groupId>net.sourceforge.plantuml</groupId>
                 <artifactId>plantuml</artifactId>
                 <version>6703</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-core</artifactId>
+                <version>3.3.3</version>
             </dependency>
 
             <dependency>
