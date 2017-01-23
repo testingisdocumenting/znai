@@ -13,6 +13,6 @@ function getAllPagesPromise() {
     }
 
 // TODO use render context to figure out path back
-    pagesPromise = jsonPromise("../../all-pages.json")
+    pagesPromise = jsonPromise("../all-pages.json")
     return pagesPromise
 }

@@ -14,6 +14,6 @@ function getSearchIndexPromise() {
     }
 
 // TODO use render context to figure out path back
-    indexPromise = jsonPromise("../../search-index.json")
+    indexPromise = jsonPromise("../search-index.json")
     return indexPromise
 }
