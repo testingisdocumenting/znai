@@ -16,7 +16,13 @@ public class DocumentationServerApp {
 
         Router router = Router.router(vertx);
 
-        StaticHandler staticHandler = StaticHandler.create("td-documentation/dist/");
+        StaticHandler pagesStaticHandler = StaticHandler.create("td-documentation/dist/").
+                setFilesReadOnly(false).setMaxAgeSeconds(10);
+
+        StaticHandler staticCommonResources =
+                StaticHandler.create("static").setMaxAgeSeconds(600);
+
+        router.get("/static/*").handler(staticCommonResources);
 
         router.get("/:product/:section/:page").handler(rc -> {
             MultiMap params = rc.request().params();
@@ -25,7 +31,7 @@ public class DocumentationServerApp {
             rc.next();
         });
 
-        router.get("/*").handler(staticHandler);
+        router.get("/*").handler(pagesStaticHandler);
 
         server.requestHandler(router::accept).listen(8080);
     }
