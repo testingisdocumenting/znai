@@ -44,7 +44,7 @@ public class Deployer {
     }
 
     public void deploy(WebResource webResource) {
-        deploy(Paths.get(webResource.getRelativePath()), webResource.getContent());
+        deploy(Paths.get(webResource.getPath()), webResource.getContent());
     }
 
     public void deploy(Path relativePath, byte[] content) {

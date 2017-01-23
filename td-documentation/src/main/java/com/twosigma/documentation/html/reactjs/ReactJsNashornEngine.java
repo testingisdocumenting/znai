@@ -10,13 +10,11 @@ public class ReactJsNashornEngine {
     private final NashornEngine nashornEngine;
 
     public ReactJsNashornEngine() {
-        this.reactJsBundle = new ReactJsBundle("bundle.txt");
+        this.reactJsBundle = new ReactJsBundle();
 
          this.nashornEngine = new NashornEngine();
 
-        nashornEngine.loadLibrary(reactJsBundle.react());
-        nashornEngine.loadLibrary(reactJsBundle.reactDomServer());
-        reactJsBundle.javaScriptResources().forEach(nashornEngine::loadLibrary);
+        reactJsBundle.serverJavaScripts().forEach(nashornEngine::loadLibrary);
     }
 
     public ReactJsBundle getReactJsBundle() {

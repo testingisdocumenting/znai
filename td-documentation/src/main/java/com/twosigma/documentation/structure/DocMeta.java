@@ -41,7 +41,7 @@ public class DocMeta {
         Map<String, Object> result = new HashMap<>();
         result.put("type", type);
         result.put("title", title);
-        result.put("logo", logo.getRelativePath());
+        result.put("logo", logo.getPath());
 
         return result;
     }

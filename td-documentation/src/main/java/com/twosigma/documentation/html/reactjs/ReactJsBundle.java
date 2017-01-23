@@ -4,13 +4,9 @@ import com.twosigma.documentation.html.Deployer;
 import com.twosigma.documentation.html.WebResource;
 import com.twosigma.utils.ResourceUtils;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -19,45 +15,45 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class ReactJsBundle {
-    private List<WebResource> resources;
+    private WebResource mainJs;
+    private WebResource mainCss;
     private WebResource react;
     private WebResource reactDom;
     private WebResource reactDomServer;
+    private WebResource bootstrapCss;
 
-    public ReactJsBundle(String bundleResourceName) {
-        List<String> textContents = ResourceUtils.textContents(bundleResourceName);
+    private List<WebResource> fonts;
 
-        System.out.println("----");
-        resources = textContents.stream().flatMap(c -> Arrays.stream(c.split("\n")).
-                map(WebResource::fromResource)).collect(toList());
-
-        react = WebResource.fromResource("react.min.js");
-        reactDom = WebResource.fromResource("react-dom.min.js");
+    public ReactJsBundle() {
+        mainJs = WebResource.fromResource("static/main.js");
+        mainCss = WebResource.fromResource("static/main.css");
+        bootstrapCss = WebResource.fromResource("static/css/bootstrap.min.css");
+        react = WebResource.fromResource("static/react.min.js");
+        reactDom = WebResource.fromResource("static/react-dom.min.js");
         reactDomServer = WebResource.fromResource("react-dom-server.min.js");
+
+        fonts = Stream.of("eot", "svg", "ttf", "woff", "woff2").map(ext -> "static/fonts/glyphicons-halflings-regular." + ext).
+                map(WebResource::fromResource).collect(toList());
+    }
+
+    public Stream<WebResource> clientJavaScripts() {
+        return Stream.of(react, reactDom, mainJs);
+    }
+
+    public Stream<WebResource> serverJavaScripts() {
+        return Stream.of(react, reactDomServer, mainJs);
+    }
+
+    public Stream<WebResource> clientCssResources() {
+        return Stream.of(bootstrapCss, mainCss);
     }
 
     public WebResource react() {
         return react;
     }
 
-    public WebResource reactDom() {
-        return reactDom;
-    }
-
-    public WebResource reactDomServer() {
-        return reactDomServer;
-    }
-
-    public Stream<WebResource> javaScriptResources() {
-        return resources.stream().filter(r -> r.getRelativePath().endsWith(".js"));
-    }
-
-    public Stream<WebResource> cssResources() {
-        return resources.stream().filter(r -> r.getRelativePath().endsWith(".css"));
-    }
-
     public void deploy(Deployer deployer) {
-        resources.forEach(deployer::deploy);
-        Stream.of(react, reactDom).forEach(deployer::deploy);
+        Stream.concat(Stream.concat(clientJavaScripts(), clientCssResources()),
+                fonts.stream()).forEach(deployer::deploy);
     }
 }
