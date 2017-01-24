@@ -11,12 +11,17 @@ import io.vertx.ext.web.handler.StaticHandler;
  */
 public class DocumentationServerApp {
     public static void main(String[] args) {
+        ServerConfig serverConfig = new ServerConfig(args);
+        System.out.println("server configuration:\n" + serverConfig);
+
+        System.setProperty("vertx.cwd", serverConfig.getRootOfDocs().toString());
+
         Vertx vertx = Vertx.vertx();
         HttpServer server = vertx.createHttpServer();
 
         Router router = Router.router(vertx);
 
-        StaticHandler pagesStaticHandler = StaticHandler.create("td-documentation/dist/").
+        StaticHandler pagesStaticHandler = StaticHandler.create(".").
                 setFilesReadOnly(false).setMaxAgeSeconds(10);
 
         StaticHandler staticCommonResources =
