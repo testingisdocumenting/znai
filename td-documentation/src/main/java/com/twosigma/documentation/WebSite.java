@@ -185,7 +185,8 @@ public class WebSite {
             extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScript);
 
             final String html = htmlAndProps.getHtmlPage().render(renderContext);
-            deployer.deploy(Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + ".html"), html);
+            Path pagePath = Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
+            deployer.deploy(pagePath, html);
         } catch (Exception e) {
             throw new RuntimeException("Error during rendering of " + tocItem.getFileNameWithoutExtension(), e);
         }
