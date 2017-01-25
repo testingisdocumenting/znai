@@ -1,7 +1,10 @@
 package com.twosigma.documentation.server;
 
+import com.twosigma.documentation.server.preview.PreviewWebSocketHandler;
+import io.vertx.core.Handler;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServer;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
@@ -37,6 +40,8 @@ public class DocumentationServerApp {
         });
 
         router.get("/*").handler(pagesStaticHandler);
+
+        server.websocketHandler(new PreviewWebSocketHandler());
 
         server.requestHandler(router::accept).listen(8080);
     }
