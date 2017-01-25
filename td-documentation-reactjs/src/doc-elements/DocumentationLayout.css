@@ -137,3 +137,10 @@
     color: #888888;
 }
 
+.preview-icon {
+    color: #40a0ff;
+    position: fixed;
+    font-size: 20px;
+    right: 80px;
+    top: 20px;
+}

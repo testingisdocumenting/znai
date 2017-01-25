@@ -6,6 +6,7 @@ import {getSearchPromise} from './search/searchPromise'
 import elementsLibrary from './DefaultElementsLibrary'
 import {documentationNavigation} from './DocumentationNavigation'
 import {getAllPagesPromise} from "./allPages"
+import Preview from './Preview'
 
 import './DocumentationLayout.css'
 import './search/Search.css'
@@ -45,6 +46,8 @@ class Documentation extends Component {
                                                                    onSearchSelection={this.onSearchSelection}
                                                                    onClose={this.onSearchClose}/> : null
 
+        const preview = docMeta.previewEnabled ? <Preview active={true}/> : null
+
         return (
             <div className="documentation">
                 <div className="side-panel" onClick={this.onTocSelect}>
@@ -54,6 +57,8 @@ class Documentation extends Component {
                               onNextPage={this.onNextPage}
                               onPrevPage={this.onPrevPage}/>
                 </div>
+
+                {preview}
 
                 <div className="search-button glyphicon glyphicon-search" onClick={this.onSearchClick}/>
 

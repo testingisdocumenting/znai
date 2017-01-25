@@ -4,7 +4,7 @@ import DocumentationDemo from './DocumentationDemo'
 import DiagramSlidesDemo from './DiagramSlidesDemo'
 
 const VisualManualTest = () => (
-    <DiagramSlidesDemo/>
+    <DocumentationDemo/>
 )
 
 

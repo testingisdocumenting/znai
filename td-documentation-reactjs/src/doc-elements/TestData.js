@@ -58,6 +58,7 @@ const TestData = {
         "docMeta": {
             "logo": "img/two-sigma-logo.png",
             "type": "User Guide",
+            "previewEnabled": true,
             "title": "VATS"
         },
         "toc": [
