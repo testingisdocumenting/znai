@@ -21,7 +21,7 @@ public class DocumentationServer {
         Router router = Router.router(vertx);
 
         StaticHandler pagesStaticHandler = StaticHandler.create(".").
-                setFilesReadOnly(false).setMaxAgeSeconds(10);
+                setFilesReadOnly(false).setMaxAgeSeconds(0);
 
         StaticHandler staticCommonResources =
                 StaticHandler.create("static").setMaxAgeSeconds(600);
