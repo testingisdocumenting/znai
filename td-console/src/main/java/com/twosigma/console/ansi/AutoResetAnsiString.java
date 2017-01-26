@@ -25,7 +25,7 @@ public class AutoResetAnsiString {
     }
 
     private void append(Object styleOrValue) {
-        stringBuilder.append(styleOrValue.toString());
+        stringBuilder.append(styleOrValue == null ? "null" : styleOrValue.toString());
     }
 
     private void reset() {
