@@ -58,17 +58,16 @@ const TestData = {
         "docMeta": {
             "logo": "img/two-sigma-logo.png",
             "type": "User Guide",
-            "previewEnabled": true,
             "title": "VATS"
         },
         "toc": [
             {
-                "sectionTitle": "Getting Started",
-                "dirName": "getting-started",
+                "sectionTitle": "Rationale",
+                "dirName": "rationale",
                 "items": [
                     {
-                        "title": "Introduction",
-                        "fileName": "introduction"
+                        "title": "Engineers",
+                        "fileName": "engineers"
                     },
                     {
                         "title": "Setup",
@@ -77,6 +76,20 @@ const TestData = {
                     {
                         "title": "First Code Base",
                         "fileName": "first-code-base"
+                    }
+                ]
+            },
+            {
+                "sectionTitle": "Features",
+                "dirName": "features",
+                "items": [
+                    {
+                        "title": "Code Snippets",
+                        "fileName": "code-snippets"
+                    },
+                    {
+                        "title": "Proxy",
+                        "fileName": "proxy"
                     }
                 ]
             },
@@ -108,7 +121,7 @@ const TestData = {
                     }
                 ]
             }
-            ],
+        ],
         "page": {
             "type": "Page",
             "content": [
@@ -156,6 +169,7 @@ const TestData = {
                             "lang": "",
                             "lineNumber": "",
                             "snippet": "the source jar in a folder \u003ccodebase_root\u003e/java/non-deployable under the original file name ending with -sources.jar\nthe POM file as \u003ccodebase_root\u003e/pom.xml\nthe library itself under  \u003ccodebase_root\u003e/java/lib\n",
+                            "maxLineLength": 116,
                             "type": "Snippet"
                         },
                         {
@@ -202,6 +216,13 @@ const TestData = {
                                     "type": "SimpleText"
                                 }
                             ]
+                        },
+                        {
+                            "lang": "",
+                            "lineNumber": "",
+                            "snippet": "usage: vats.py maven-import [-h] [--vats-verbose] [--vats-profile]\n                            [--vats-properties PROPERTIES_FILE]\n                            [--vats-property VATS_PROPERTY]\n                            [--vats-ignore-sanitycheck] [--vats-debug]\n                            [--vats-json-debug] [--vats-root ROOT]\n                            [--vats-targetarch VATS_TARGETARCH]\n                            [--vats-only-with CODEBASE]\n                            [--vats-config VATS_CONFIG] [--sbt SBT_DEPENDENCY]\n                            [-g MAVEN_GROUP_ID] [-a MAVEN_ARTIFACT_ID]\n                            [-v MAVEN_VERSION] [-p MAVEN_PROFILE]\n \nImport using:\n    maven-style import: -g \u003cGROUP\u003e -a \u003cARTIFACT\u003e -v \u003cVERSION\u003e\n    sbt-style import  : --sbt \u0027\"\u003cGROUP\u003e\" % \"\u003cARTIFACT\u003e\" % \"\u003cVERSION\u003e\"\u0027\n \noptional arguments:\n  -h, --help            show this help message and exit\n  --sbt SBT_DEPENDENCY  Sbt-style dependency, example below (default: None)\n  -g MAVEN_GROUP_ID, --maven-group-id MAVEN_GROUP_ID\n                        Maven group id. (default: None)\n  -a MAVEN_ARTIFACT_ID, --maven-artifact-id MAVEN_ARTIFACT_ID\n                        Maven artifact id. (default: None)\n  -v MAVEN_VERSION, --maven-version MAVEN_VERSION\n                        Maven version. (default: None)\n  -p MAVEN_PROFILE, --maven-profile MAVEN_PROFILE\n                        Maven profile to activate. This is an optional\n                        argument which can be repeated. A Maven profile is a\n                        configuration defined in a POM file which can be\n                        activated or not. (default: [])\n \nExample: vats maven-import --sbt \u0027\"org.apache.commons\" % \"commons-lang3\" % \"3.4\"\u0027\n \nRead more: http://wiki/confluence/display/tools/vats+maven-import\nTo display global options, re-run with --vats-verbose --help\n",
+                            "maxLineLength": 81,
+                            "type": "Snippet"
                         }
                     ]
                 },
@@ -447,11 +468,22 @@ const TestData = {
                 "fileName": "maven-import",
                 "dirName": "external-code-bases"
             },
+            "nextTocItem": {
+                "sectionTitle": "External Code Bases",
+                "pageTitle": "License Restrictions",
+                "fileName": "license-restrictions",
+                "dirName": "external-code-bases"
+            },
+            "prevTocItem": {
+                "sectionTitle": "External Code Bases",
+                "pageTitle": "External Code To Vats",
+                "fileName": "external-code-to-vats",
+                "dirName": "external-code-bases"
+            },
             "renderContext": {
                 "nestLevel": 1
             }
         }
-    }
-};
+    }};
 
 export default TestData;

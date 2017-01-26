@@ -132,7 +132,9 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSnippet(String lang, String lineNumber, String snippet) {
-        append(DocElementType.SNIPPET, "lang", lang, "lineNumber", lineNumber, "snippet", snippet);
+        Integer maxLineLength = Arrays.stream(snippet.split("\n")).map(String::length).max(Integer::compareTo).orElse(0);
+        append(DocElementType.SNIPPET, "lang", lang, "lineNumber", lineNumber, "snippet", snippet,
+                "maxLineLength", maxLineLength);
     }
 
     @Override

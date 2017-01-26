@@ -13,3 +13,7 @@
     padding-bottom: 20px;
     max-width: 700px;
 }
+
+.wide-screen pre {
+    max-width: 100%;
+}

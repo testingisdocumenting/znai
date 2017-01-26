@@ -44,3 +44,8 @@ pre {
     margin-left: auto;
     margin-right: auto;
 }
+
+.wide-screen {
+    display: flex;
+    align-items: center;
+}
