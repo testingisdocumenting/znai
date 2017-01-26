@@ -48,7 +48,4 @@ class DocumentationNavigation {
 
 const documentationNavigation = new DocumentationNavigation()
 
-console.log(documentationNavigation.extractDirNameAndFileName("../getting-started/introduction"))
-console.log(documentationNavigation.extractDirNameAndFileName("/getting-started/introduction"))
-
 export {documentationNavigation}
