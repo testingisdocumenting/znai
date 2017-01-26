@@ -18,6 +18,15 @@ public class IncludeParamsOpts {
         return (E) opts.get(name);
     }
 
+    public String getString(String name) {
+        Object v = opts.get(name);
+        if (v == null) {
+            return null;
+        }
+
+        return v.toString();
+    }
+
     public String getRequiredString(String name) {
         Object v = opts.get(name);
         if (v == null) {

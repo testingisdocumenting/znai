@@ -10,6 +10,7 @@ import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.utils.CollectionUtils;
+import com.twosigma.utils.StringUtils;
 
 /**
  * @author mykola
@@ -132,9 +133,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSnippet(String lang, String lineNumber, String snippet) {
-        Integer maxLineLength = Arrays.stream(snippet.split("\n")).map(String::length).max(Integer::compareTo).orElse(0);
         append(DocElementType.SNIPPET, "lang", lang, "lineNumber", lineNumber, "snippet", snippet,
-                "maxLineLength", maxLineLength);
+                "maxLineLength", StringUtils.maxLineLength(snippet));
     }
 
     @Override

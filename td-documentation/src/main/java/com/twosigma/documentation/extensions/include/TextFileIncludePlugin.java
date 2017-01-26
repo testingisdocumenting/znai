@@ -2,6 +2,9 @@ package com.twosigma.documentation.extensions.include;
 
 import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
+import com.twosigma.documentation.parser.docelement.DocElementType;
+import com.twosigma.utils.StringUtils;
+import org.apache.commons.io.FileUtils;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -23,13 +26,18 @@ public class TextFileIncludePlugin implements IncludePlugin {
 
     @Override
     public ReactComponent process(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+        String fileName = includeParams.getFreeParam();
+
         String text = extractText(componentsRegistry.includeResourceResolver().
-                textContent(includeParams.getFreeParam()), includeParams.getOpts());
+                textContent(fileName), includeParams.getOpts());
 
         Map<String, Object> props = new LinkedHashMap<>(includeParams.getOpts().toMap());
-        props.put("text", text);
+        props.put("snippet", text);
+        String providedLang = includeParams.getOpts().getString("lang");
+        props.put("lang", (providedLang == null) ? langFromFileName(fileName) : providedLang);
+        props.put("maxLineLength", StringUtils.maxLineLength(text));
 
-        return new ReactComponent("FileTextContent", props);
+        return new ReactComponent(DocElementType.SNIPPET, props);
     }
 
     private String extractText(String text, IncludeParamsOpts opts) {
@@ -49,6 +57,23 @@ public class TextFileIncludePlugin implements IncludePlugin {
     @Override
     public String textForSearch() {
         return null;
+    }
+
+    private static String langFromFileName(String fileName) {
+        String ext = extFromFileName(fileName);
+        switch (ext) {
+            case "js": return "javascript";
+            default: return ext;
+        }
+    }
+
+    private static String extFromFileName(String fileName) {
+        int dotLastIdx = fileName.lastIndexOf('.');
+        if (dotLastIdx == -1) {
+            return "";
+        }
+
+        return fileName.substring(dotLastIdx + 1);
     }
 
     private static class Text {

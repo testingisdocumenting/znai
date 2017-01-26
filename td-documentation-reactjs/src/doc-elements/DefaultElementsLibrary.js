@@ -46,7 +46,6 @@ library.CustomComponent = ({componentName, componentProps}) => {
     }
 }
 
-library.FileTextContent = (props) => <Snippet snippet={props.text} {...props}/>
 library.GraphVizSvg = GraphVizSvg
 library.GraphVizFlow = GraphVizFlow
 
