@@ -1,4 +1,4 @@
-package com.twosigma.documentation.website.preview;
+package com.twosigma.documentation.server.preview;
 
 import java.nio.file.Path;
 import java.util.Collection;
@@ -18,42 +18,42 @@ import com.twosigma.documentation.extensions.PluginsListener;
  */
 public class PreviewFilesAssociationTracker implements PluginsListener {
     /**
-     * markdown files can refer other resources through include plugins,
+     * markup files can refer other resources through include plugins,
      * if those resources are changed we need to refresh the md file that reference them
      */
-    private Map<Path, Set<Path>> mdsByUsedFile;
+    private Map<Path, Set<Path>> markupsByUsedFile;
 
     public PreviewFilesAssociationTracker() {
-        mdsByUsedFile = new HashMap<>();
+        markupsByUsedFile = new HashMap<>();
     }
 
     @Override
     public void onReset(final IncludeContext context) {
-        mdsByUsedFile.remove(context.getCurrentFilePath());
+        markupsByUsedFile.remove(context.getCurrentFilePath());
     }
 
     @Override
     public void onInclude(final IncludePlugin plugin, final IncludeResult result) {
-        final Path mdFile = result.getContext().getCurrentFilePath();
-        result.getUsedFiles().forEach(uf -> addAssociation(mdFile, uf));
+        final Path markupFile = result.getContext().getCurrentFilePath();
+        result.getUsedFiles().forEach(uf -> addAssociation(markupFile, uf));
     }
 
-    public Collection<Path> dependentMarkdowns(Path path) {
-        final Set<Path> mds = mdsByUsedFile.get(path);
-        if (mds == null) {
+    public Collection<Path> dependentMarkups(Path path) {
+        final Set<Path> markups = markupsByUsedFile.get(path);
+        if (markups == null) {
             return Collections.emptyList();
         }
 
-        return Collections.unmodifiableSet(mds);
+        return Collections.unmodifiableSet(markups);
     }
 
-    private void addAssociation(Path mdFile, Path usedFile) {
-        Set<Path> mds = mdsByUsedFile.get(usedFile);
-        if (mds == null) {
-            mds = new HashSet<>();
-            mdsByUsedFile.put(usedFile, mds);
+    private void addAssociation(Path markupFile, Path usedFile) {
+        Set<Path> markups = markupsByUsedFile.get(usedFile);
+        if (markups == null) {
+            markups = new HashSet<>();
+            markupsByUsedFile.put(usedFile, markups);
         }
 
-        mds.add(mdFile);
+        markups.add(markupFile);
     }
 }

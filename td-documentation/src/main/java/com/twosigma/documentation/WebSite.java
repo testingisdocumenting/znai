@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
 import com.twosigma.documentation.extensions.PluginsListener;
-import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import com.twosigma.documentation.extensions.include.RelativeToFileAndRootResourceResolver;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
@@ -98,11 +97,10 @@ public class WebSite {
                         path.getFileName().toString().equals(ti.getFileNameWithoutExtension() + ".md")).findFirst().orElse(null);
     }
 
-    public void regeneratePage(TocItem tocItem) {
+    public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
         parseMarkup(tocItem);
         final Page page = pageByTocItem.get(tocItem);
-        generatePage(tocItem, page);
-//        generateSearchIndex();
+        return generatePage(tocItem, page);
     }
 
     private void reset() {
@@ -172,7 +170,7 @@ public class WebSite {
         deployer.deploy("all-pages.json", json);
     }
 
-    private void generatePage(final TocItem tocItem, final Page page) {
+    private HtmlPageAndPageProps generatePage(final TocItem tocItem, final Page page) {
         try {
             resetPlugins(markupPath(tocItem)); // TODO reset at render phase only?
 
@@ -187,6 +185,8 @@ public class WebSite {
             final String html = htmlAndProps.getHtmlPage().render(renderContext);
             Path pagePath = Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
             deployer.deploy(pagePath, html);
+
+            return htmlAndProps;
         } catch (Exception e) {
             throw new RuntimeException("Error during rendering of " + tocItem.getFileNameWithoutExtension(), e);
         }

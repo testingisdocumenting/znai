@@ -1,11 +1,19 @@
 package com.twosigma.documentation.server.preview;
 
+import com.twosigma.console.ConsoleOutput;
+import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.console.ansi.Color;
+import com.twosigma.console.ansi.FontStyle;
+import com.twosigma.documentation.html.PageProps;
 import com.twosigma.utils.JsonUtils;
 import io.vertx.core.Handler;
 import io.vertx.core.http.ServerWebSocket;
 
-import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static com.twosigma.console.ansi.Color.BLUE;
+import static com.twosigma.console.ansi.Color.RED;
 
 /**
  * @author mykola
@@ -16,18 +24,37 @@ public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
     @Override
     public void handle(ServerWebSocket ws) {
         this.ws = ws;
-        System.out.println("connected: " + ws.path());
+        ConsoleOutputs.out("connected: ", BLUE, ws.path());
 
         ws.handler(data -> {
             String dataString = data.getString(0, data.length());
             System.out.println(dataString);
         });
 
-        sendJson(Collections.singletonMap("type", "reload"));
+        ws.closeHandler((h) -> {
+            ConsoleOutputs.out(RED, "connection closed");
+        });
     }
 
-    public void sendJson(Map<String, ?> json) {
-        String text = JsonUtils.serialize(json);
+    public void sendPageContent(PageProps pageProps) {
+        LinkedHashMap<String, Object> payload = new LinkedHashMap<>();
+        payload.put("type", "pageUpdate");
+        payload.put("pageProps", pageProps.toMap());
+
+        send(payload);
+    }
+
+    private void send(Map<String, ?> payload) {
+        if (ws == null) {
+            ConsoleOutputs.out(BLUE, "connection ", FontStyle.NORMAL, "with", BLUE, " web page ", FontStyle.NORMAL, "is not established. ",
+                    BLUE, "reload or open", FontStyle.NORMAL, " the page");
+            return;
+        }
+
+
+
+        String text = JsonUtils.serialize(payload);
+        ConsoleOutputs.out("sending: ", BLUE, text);
         ws.writeFinalTextFrame(text);
     }
 }

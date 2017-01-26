@@ -9,15 +9,24 @@ import java.nio.file.Paths;
 public class ServerConfig {
     private Path rootOfDocs;
 
-    ServerConfig(String... args) {
-        if (args.length < 1) {
-            throw new RuntimeException("required argument <root-of-docs> is required");
-        }
+    public ServerConfig(String... args) {
+        parseArgs(args);
+    }
 
-        rootOfDocs = Paths.get(args[0]).toAbsolutePath();
+    private void parseArgs(String[] args) {
+        if (args.length >= 1) {
+            rootOfDocs = Paths.get(args[0]).toAbsolutePath();
+        }
+    }
+
+    public void setRootOfDocs(Path rootOfDocs) {
+        this.rootOfDocs = rootOfDocs;
     }
 
     public Path getRootOfDocs() {
+        if (rootOfDocs == null) {
+            throw new RuntimeException("<rootOfDocs> is not set. specify it using args or a configuration set method");
+        }
         return rootOfDocs;
     }
 

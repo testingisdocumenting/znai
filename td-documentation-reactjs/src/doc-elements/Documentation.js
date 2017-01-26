@@ -32,6 +32,7 @@ class Documentation extends Component {
         this.onNextPage = this.onNextPage.bind(this)
         this.onPrevPage = this.onPrevPage.bind(this)
         this.onSearchSelection = this.onSearchSelection.bind(this)
+        this.onPageContentChange = this.onPageContentChange.bind(this)
 
         documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
     }
@@ -46,7 +47,7 @@ class Documentation extends Component {
                                                                    onSearchSelection={this.onSearchSelection}
                                                                    onClose={this.onSearchClose}/> : null
 
-        const preview = docMeta.previewEnabled ? <Preview active={true}/> : null
+        const preview = docMeta.previewEnabled ? <Preview active={true} onPageUpdate={this.onPageContentChange}/> : null
 
         return (
             <div className="documentation">
@@ -108,6 +109,27 @@ class Documentation extends Component {
     onSearchSelection(id) {
         this.onSearchClose()
         documentationNavigation.navigateToPage(id)
+    }
+
+    onPageContentChange(pageProps) {
+        console.log("onPageContentChange", pageProps)
+
+        // update pages inside allPages array
+        getAllPagesPromise().then((allPages) => {
+            allPages.filter((page) =>
+                page.tocItem.fileName === pageProps.tocItem.fileName && page.tocItem.dirName === pageProps.tocItem.dirName
+            ).forEach((page) => {
+                page.content = pageProps.content
+            })
+        })
+
+        const currentToc = this.state.page.tocItem
+
+        if (currentToc.dirName !== pageProps.tocItem.dirName || currentToc.fileName !== pageProps.tocItem.fileName) {
+            documentationNavigation.navigateToPage(pageProps.tocItem)
+        }
+
+        this.setState({page: pageProps})
     }
 
     onUrlChange(url) {
