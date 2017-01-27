@@ -26,17 +26,15 @@ public class DocumentationPreviewApp {
         PreviewWebSocketHandler socketHandler = new PreviewWebSocketHandler();
         server.websocketHandler(socketHandler);
 
-        final PreviewFilesAssociationTracker filesAssociationTracker = new PreviewFilesAssociationTracker();
-
         Path docRoot = Paths.get("/Users/mykola/work/testing-documenting/td-documentation/documentation/");
         Path tocPath = docRoot.resolve("toc");
 
         final WebSite webSite = WebSite.withToc(tocPath).
-            withPluginListener(filesAssociationTracker).
-            withMetaFromJsonFile(docRoot.resolve("meta.json")).deployTo(previewPath);
+            withMetaFromJsonFile(docRoot.resolve("meta.json")).
+                withEnabledPreview().
+                deployTo(previewPath.resolve("__preview"));
 
-        final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(socketHandler,
-                webSite, filesAssociationTracker);
+        final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(socketHandler, webSite);
 
         server.listen(8080);
 

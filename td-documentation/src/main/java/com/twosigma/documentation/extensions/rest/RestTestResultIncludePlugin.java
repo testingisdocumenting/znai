@@ -41,7 +41,7 @@ public class RestTestResultIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(ComponentsRegistry componentsRegistry, final IncludeParams includeParams) {
+    public ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, final IncludeParams includeParams) {
         final Map<String, Object> props = new LinkedHashMap<>();
 
         final Path pathToJson = Paths.get(includeParams.getFreeParam() + ".groovy-" + nextCallNumber + ".json");

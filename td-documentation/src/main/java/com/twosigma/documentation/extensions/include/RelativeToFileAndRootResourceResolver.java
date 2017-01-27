@@ -21,11 +21,12 @@ public class RelativeToFileAndRootResourceResolver implements IncludeResourcesRe
 
     @Override
     public String textContent(String path) {
-        Path file = findFile(path);
+        Path file = fullPath(path);
         return FileUtils.fileTextContent(file);
     }
 
-    private Path findFile(String path) {
+    @Override
+    public Path fullPath(String path) {
         Path original = Paths.get(path);
         if (original.isAbsolute() && Files.exists(original)) {
             return original;

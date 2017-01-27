@@ -1,5 +1,6 @@
 package com.twosigma.documentation.parser;
 
+import java.nio.file.Path;
 import java.util.Collections;
 
 import com.twosigma.documentation.ComponentsRegistry;
@@ -26,11 +27,10 @@ public class MarkdownParser implements MarkupParser {
         parser = Parser.builder().extensions(Collections.singletonList(extension)).build();
     }
 
-    // TODO add path
-    public DocElement parse(String markdown) {
+    public MarkupParserResult parse(Path path, String markdown) {
         Node node = parser.parse(markdown);
 
-        final DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(componentsRegistry);
+        final DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(componentsRegistry, path);
         final DocElementVisitor visitor = new DocElementVisitor(parserHandler);
         node.accept(visitor);
 
@@ -38,7 +38,7 @@ public class MarkdownParser implements MarkupParser {
             parserHandler.onSectionEnd();
         }
 
-        return parserHandler.getDocElement();
+        return new MarkupParserResult(parserHandler.getDocElement(), parserHandler.getFileMarkupDependsOn());
     }
 
     private static class DocElementVisitor extends AbstractVisitor {

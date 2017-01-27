@@ -3,6 +3,9 @@ package com.twosigma.documentation.extensions.include;
 import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 
+import java.nio.file.Path;
+import java.util.stream.Stream;
+
 /**
  *
  * @author mykola
@@ -10,16 +13,19 @@ import com.twosigma.documentation.extensions.ReactComponent;
 public interface IncludePlugin {
     String id();
 
-    default void init(ComponentsRegistry documentationComponentsRegistry) {
-
-    }
-
     /**
      * gets called at the beginning of every page before rendering
      * @param context context of the page
      */
     default void reset(IncludeContext context) {}
 
-    ReactComponent process(ComponentsRegistry componentsRegistry, IncludeParams includeParams);
-    String textForSearch(); // TODO weights
+    ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams);
+
+    default Stream<Path> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+        return Stream.empty();
+    }
+
+    default String textForSearch() {
+        return "";
+    } // TODO weights
 }

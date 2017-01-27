@@ -16,14 +16,21 @@ import com.twosigma.documentation.utils.NameUtils;
 import com.twosigma.utils.JsonUtils;
 import com.twosigma.utils.ResourceUtils;
 
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * @author mykola
  */
 public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
+    private List<Path> filesMarkupDependsOn;
+    private Path diagramPath;
+    private Path slidesPath;
+
     @Override
     public String id() {
         return "gv-diagram-slides";
@@ -35,17 +42,23 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    public ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         MarkupParser parser = componentsRegistry.parser();
         IncludeResourcesResolver includeResourcesResolver = componentsRegistry.includeResourceResolver();
 
         String diagramTitle = includeParams.getFreeParam();
         String diagramId = NameUtils.camelCaseWithSpacesToDashes(diagramTitle);
 
-        String gvContent = includeResourcesResolver.textContent(includeParams.getOpts().getRequiredString("diagramPath"));
-        String slidesContent = includeResourcesResolver.textContent(includeParams.getOpts().getRequiredString("slidesPath"));
+        diagramPath = includeResourcesResolver.fullPath(includeParams.getOpts().getRequiredString("diagramPath"));
+        slidesPath = includeResourcesResolver.fullPath(includeParams.getOpts().getRequiredString("slidesPath"));
 
-        DiagramSlides diagramSlides = new MarkupDiagramSlides(parser).create(slidesContent);
+        String gvContent = includeResourcesResolver.textContent(diagramPath);
+        String slidesContent = includeResourcesResolver.textContent(slidesPath);
+
+        MarkupDiagramSlides markupSlides = new MarkupDiagramSlides(parser);
+        DiagramSlides diagramSlides = markupSlides.create(markupPath, slidesContent);
+
+        filesMarkupDependsOn = markupSlides.getFilesMarkupDependsOn();
 
         Map<String, Object> props = new LinkedHashMap<>();
 
@@ -54,6 +67,11 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
         props.put("colors", Graphviz.colors);
 
         return new ReactComponent("GraphVizFlow", props);
+    }
+
+    @Override
+    public Stream<Path> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+        return Stream.concat(filesMarkupDependsOn.stream(), Stream.of(diagramPath, slidesPath));
     }
 
     @Override

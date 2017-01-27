@@ -8,7 +8,7 @@ export {getAllPagesPromise}
 
 let pagesPromise = null
 function getAllPagesPromise() {
-    if (pagesPromise) {
+    if (pagesPromise) {``
         return pagesPromise
     }
 

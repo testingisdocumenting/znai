@@ -4,8 +4,10 @@ import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
 import com.twosigma.documentation.extensions.include.RelativeToFileAndRootResourceResolver;
 import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
+import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElement;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +23,14 @@ public class MarkupDiagramSlides {
     private List<DocElement> sections;
     private List<String> currentIds;
     private MarkupParser parser;
+    private MarkupParserResult parserResult;
 
     public MarkupDiagramSlides(MarkupParser parser) {
         this.parser = parser;
     }
 
-    public DiagramSlides create(String markupContent) {
-        parse(markupContent);
+    public DiagramSlides create(Path path, String markupContent) {
+        parse(path, markupContent);
 
         this.currentIds = new ArrayList<>();
         this.diagramSlides = new DiagramSlides();
@@ -36,9 +39,13 @@ public class MarkupDiagramSlides {
         return diagramSlides;
     }
 
-    private void parse(String markupContent) {
-        DocElement page = parser.parse(markupContent);
-        sections = page.getContent().stream().
+    public List<Path> getFilesMarkupDependsOn() {
+        return parserResult.getFilesMarkupDependsOn();
+    }
+
+    private void parse(Path path, String markupContent) {
+        parserResult = parser.parse(path, markupContent);
+        sections = parserResult.getDocElement().getContent().stream().
                 filter(e -> e.getType().equals(SECTION)).collect(toList());
     }
 

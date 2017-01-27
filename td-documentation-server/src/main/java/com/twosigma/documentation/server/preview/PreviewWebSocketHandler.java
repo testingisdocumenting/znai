@@ -10,10 +10,13 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.ServerWebSocket;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static com.twosigma.console.ansi.Color.BLUE;
 import static com.twosigma.console.ansi.Color.RED;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
@@ -31,15 +34,21 @@ public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
             System.out.println(dataString);
         });
 
-        ws.closeHandler((h) -> {
-            ConsoleOutputs.out(RED, "connection closed");
-        });
+        ws.closeHandler((h) -> ConsoleOutputs.out(RED, "connection closed"));
     }
 
-    public void sendPageContent(PageProps pageProps) {
+    public void sendPage(PageProps pageProps) {
         LinkedHashMap<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "pageUpdate");
         payload.put("pageProps", pageProps.toMap());
+
+        send(payload);
+    }
+
+    public void sendPages(Stream<PageProps> listOfPageProps) {
+        LinkedHashMap<String, Object> payload = new LinkedHashMap<>();
+        payload.put("type", "multiplePagesUpdate");
+        payload.put("listOfPageProps", listOfPageProps.map(PageProps::toMap).collect(toList()));
 
         send(payload);
     }

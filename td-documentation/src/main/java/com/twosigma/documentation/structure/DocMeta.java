@@ -12,6 +12,7 @@ public class DocMeta {
     private String type;
     private String title;
     private WebResource logo;
+    private boolean previewEnabled;
 
     public String getType() {
         return type;
@@ -41,8 +42,17 @@ public class DocMeta {
         Map<String, Object> result = new HashMap<>();
         result.put("type", type);
         result.put("title", title);
+        result.put("previewEnabled", previewEnabled);
         result.put("logo", logo.getPath());
 
         return result;
+    }
+
+    public boolean isPreviewEnabled() {
+        return previewEnabled;
+    }
+
+    public void setPreviewEnabled(boolean previewEnabled) {
+        this.previewEnabled = previewEnabled;
     }
 }

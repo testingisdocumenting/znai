@@ -2,19 +2,17 @@ package com.twosigma.documentation.server.preview;
 
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.twosigma.console.ConsoleOutput;
 import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.WebSite;
 import com.twosigma.documentation.html.HtmlPageAndPageProps;
-import com.twosigma.documentation.server.preview.FileChangeHandler;
-import com.twosigma.documentation.server.preview.PreviewFilesAssociationTracker;
-import com.twosigma.documentation.server.preview.PreviewWebSocketHandler;
+import com.twosigma.documentation.html.PageProps;
 import com.twosigma.documentation.structure.TocItem;
 
-import static java.util.stream.Collectors.toList;
+import static com.twosigma.console.ansi.Color.*;
 
 /**
  * @author mykola
@@ -22,15 +20,12 @@ import static java.util.stream.Collectors.toList;
 public class PreviewPushFileChangeHandler implements FileChangeHandler {
     private PreviewWebSocketHandler previewSocket;
     private WebSite previewWebSite;
-    private PreviewFilesAssociationTracker filesAssociationTracker;
 
     public PreviewPushFileChangeHandler(final PreviewWebSocketHandler previewSocket,
-        final WebSite previewWebSite,
-        final PreviewFilesAssociationTracker filesAssociationTracker) {
+        final WebSite previewWebSite) {
 
         this.previewSocket = previewSocket;
         this.previewWebSite = previewWebSite;
-        this.filesAssociationTracker = filesAssociationTracker;
     }
 
     @Override
@@ -49,7 +44,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
             return;
         }
 
-        previewSocket.sendPageContent(htmlPageAndPageProps.getProps());
+        previewSocket.sendPage(htmlPageAndPageProps.getProps());
     }
 
     private HtmlPageAndPageProps regenerate(final Path markupPath) {
@@ -67,16 +62,16 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     public void onChange(final Path path) {
         ConsoleOutputs.out("file changed: ", path);
 
-        Collection<Path> dependentMarkdowns = filesAssociationTracker.dependentMarkups(path);
-        dependentMarkdowns.forEach(this::regenerate);
-
-        final List<String> htmls = dependentMarkdowns.stream().map(p -> "/" + p.getParent().getFileName().toString() + "/" + p.getFileName()).
-            map(s -> s.replaceAll("\\.md$", ".html")).
-            collect(toList());
-
-        if (! htmls.isEmpty()) {
-            ConsoleOutputs.out("dependent htmls: " + htmls.stream().collect(Collectors.joining("\n")));
-//            previewSocket.sendOpen(htmls.stream());
+        Collection<TocItem> dependentTocItems = previewWebSite.dependentTocItems(path);
+        if (dependentTocItems.isEmpty()) {
+            ConsoleOutputs.out("no markup files depends on ", BLUE, path);
+            return;
         }
+
+        dependentTocItems.forEach(System.out::println);
+        Stream<PageProps> generatedPages = dependentTocItems.stream().
+                map(tocItem -> previewWebSite.regeneratePage(tocItem).getProps());
+
+        previewSocket.sendPages(generatedPages);
     }
 }

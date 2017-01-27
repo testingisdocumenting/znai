@@ -32,7 +32,8 @@ class Documentation extends Component {
         this.onNextPage = this.onNextPage.bind(this)
         this.onPrevPage = this.onPrevPage.bind(this)
         this.onSearchSelection = this.onSearchSelection.bind(this)
-        this.onPageContentChange = this.onPageContentChange.bind(this)
+        this.onPageUpdate = this.onPageUpdate.bind(this)
+        this.onMultiplePagesUpdate = this.onMultiplePagesUpdate.bind(this)
 
         documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
     }
@@ -47,7 +48,9 @@ class Documentation extends Component {
                                                                    onSearchSelection={this.onSearchSelection}
                                                                    onClose={this.onSearchClose}/> : null
 
-        const preview = docMeta.previewEnabled ? <Preview active={true} onPageUpdate={this.onPageContentChange}/> : null
+        const preview = docMeta.previewEnabled ? <Preview active={true}
+                                                          onPageUpdate={this.onPageUpdate}
+                                                          onMultiplePagesUpdate={this.onMultiplePagesUpdate}/> : null
 
         return (
             <div className="documentation">
@@ -111,16 +114,11 @@ class Documentation extends Component {
         documentationNavigation.navigateToPage(id)
     }
 
-    onPageContentChange(pageProps) {
-        console.log("onPageContentChange", pageProps)
-
-        // update pages inside allPages array
+    // one markup page was changed and view needs to be updated
+    //
+    onPageUpdate(pageProps) {
         getAllPagesPromise().then((allPages) => {
-            allPages.filter((page) =>
-                page.tocItem.fileName === pageProps.tocItem.fileName && page.tocItem.dirName === pageProps.tocItem.dirName
-            ).forEach((page) => {
-                page.content = pageProps.content
-            })
+            this.updatePagesReference(allPages, pageProps);
         })
 
         const currentToc = this.state.page.tocItem
@@ -128,8 +126,34 @@ class Documentation extends Component {
         if (currentToc.dirName !== pageProps.tocItem.dirName || currentToc.fileName !== pageProps.tocItem.fileName) {
             documentationNavigation.navigateToPage(pageProps.tocItem)
         }
+    }
 
-        this.setState({page: pageProps})
+    // one of the files referred from a markup or multiple markups was changed
+    // we need to update multiple pages at once and either refresh current view (if one of the changed pages is it)
+    // or navigate to the first modified page
+    //
+    onMultiplePagesUpdate(listOfPageProps) {
+        getAllPagesPromise().then((allPages) => {
+            listOfPageProps.forEach((newPage) => this.updatePagesReference(allPages, newPage))
+        })
+
+        const currentToc = this.state.page.tocItem
+        const matchingPages = listOfPageProps.filter((newPage) => currentToc.dirName === newPage.tocItem.dirName &&
+            currentToc.fileName === newPage.tocItem.fileName)
+
+        if (matchingPages.length) {
+            documentationNavigation.navigateToPage(matchingPages[0].tocItem)
+        } else {
+            documentationNavigation.navigateToPage(listOfPageProps[0].tocItem)
+        }
+    }
+
+    updatePagesReference(allPages, newPage) {
+        allPages.filter((page) =>
+            page.tocItem.fileName === newPage.tocItem.fileName && page.tocItem.dirName === newPage.tocItem.dirName
+        ).forEach((page) => {
+            page.content = newPage.content
+        })
     }
 
     onUrlChange(url) {
@@ -139,7 +163,7 @@ class Documentation extends Component {
             const matchingPages = pages.filter((p) => p.tocItem.dirName === currentPageLocation.dirName &&
                 p.tocItem.fileName === currentPageLocation.fileName)
 
-            if (! matchingPages) {
+            if (! matchingPages.length) {
                 console.error("can't find any page with", currentPageLocation)
                 return
             }

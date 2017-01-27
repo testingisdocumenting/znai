@@ -1,5 +1,6 @@
 package com.twosigma.documentation.parser.docelement;
 
+import java.nio.file.Path;
 import java.util.*;
 
 import com.twosigma.documentation.ComponentsRegistry;
@@ -7,7 +8,6 @@ import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
 import com.twosigma.documentation.extensions.ReactComponent;
-import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.utils.CollectionUtils;
 import com.twosigma.utils.StringUtils;
@@ -16,19 +16,29 @@ import com.twosigma.utils.StringUtils;
  * @author mykola
  */
 public class DocElementCreationParserHandler implements ParserHandler {
+    private final ComponentsRegistry componentsRegistry;
+    private Path path;
+    private List<Path> fileMarkupDependsOn;
+
     private final DocElement docElement;
     private final Deque<DocElement> elementsStack;
-    private final ComponentsRegistry componentsRegistry;
 
-    public DocElementCreationParserHandler(ComponentsRegistry componentsRegistry) {
+    public DocElementCreationParserHandler(ComponentsRegistry componentsRegistry, Path path) {
         this.componentsRegistry = componentsRegistry;
-        docElement = new DocElement("page");
-        elementsStack = new ArrayDeque<>();
-        elementsStack.add(docElement);
+        this.path = path;
+        this.fileMarkupDependsOn = new ArrayList<>();
+
+        this.docElement = new DocElement("page");
+        this.elementsStack = new ArrayDeque<>();
+        this.elementsStack.add(docElement);
     }
 
     public DocElement getDocElement() {
         return docElement;
+    }
+
+    public List<Path> getFileMarkupDependsOn() {
+        return fileMarkupDependsOn;
     }
 
     @Override
@@ -145,8 +155,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onInclude(final String pluginId, final String value) {
         try {
-            final IncludePlugin includePlugin = IncludePlugins.byId(pluginId);
-            final ReactComponent reactComponent = includePlugin.process(componentsRegistry, new IncludeParams(value));
+            IncludePlugin includePlugin = IncludePlugins.byId(pluginId);
+            IncludeParams includeParams = new IncludeParams(value);
+            ReactComponent reactComponent = includePlugin.process(componentsRegistry, path, includeParams);
+
+            includePlugin.filesPluginDependsOn(componentsRegistry, includeParams).forEach(fileMarkupDependsOn::add);
 
             DocElement customComponent = new DocElement(DocElementType.CUSTOM_COMPONENT);
             customComponent.addProp("componentName", reactComponent.getName());

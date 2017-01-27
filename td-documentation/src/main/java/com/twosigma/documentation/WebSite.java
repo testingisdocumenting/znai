@@ -3,12 +3,12 @@ package com.twosigma.documentation;
 import com.google.gson.Gson;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
-import com.twosigma.documentation.extensions.PluginsListener;
 import com.twosigma.documentation.extensions.include.RelativeToFileAndRootResourceResolver;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
+import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.Page;
 import com.twosigma.documentation.search.LunrIndexer;
 import com.twosigma.documentation.structure.DocMeta;
@@ -34,6 +34,8 @@ public class WebSite {
     private Configuration cfg;
 
     private Map<TocItem, Page> pageByTocItem;
+    private Map<Path, Set<TocItem>> tocItemsByAuxiliaryFile;
+
     private TableOfContents toc;
     private List<PageProps> allPagesProps;
     private List<WebResource> registeredExtraJavaScripts;
@@ -53,9 +55,13 @@ public class WebSite {
         this.reactJsNashornEngine = new ReactJsNashornEngine();
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.includeResourcesResolver = new RelativeToFileAndRootResourceResolver(cfg.tocPath.getParent());
+        this.tocItemsByAuxiliaryFile = new HashMap<>();
 
         docMeta.setTitle(cfg.title);
         docMeta.setType(cfg.type);
+        if (cfg.isPreviewEnabled) {
+            docMeta.setPreviewEnabled(true);
+        }
         docMeta.setLogo(WebResource.withRelativePath(cfg.logoRelativePath));
 
         componentsRegistry.setIncludeResourcesResolver(includeResourcesResolver);
@@ -103,8 +109,13 @@ public class WebSite {
         return generatePage(tocItem, page);
     }
 
+    public Set<TocItem> dependentTocItems(Path auxiliaryFile) {
+        Set<TocItem> paths = tocItemsByAuxiliaryFile.get(auxiliaryFile);
+        return (paths == null) ? Collections.emptySet() : paths;
+    }
+
     private void reset() {
-        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, toc, reactJsNashornEngine, cfg.pluginsListener);
+        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, toc, reactJsNashornEngine);
         markupParser = new MarkdownParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
         allPagesProps = new ArrayList<>();
@@ -133,11 +144,24 @@ public class WebSite {
             includeResourcesResolver.setCurrentFilePath(markupPath);
             resetPlugins(markupPath);
 
-            final Page page = new Page(markupParser.parse(fileTextContent(markupPath)));
+            MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
+            updateFilesAssociation(tocItem, parserResult.getFilesMarkupDependsOn());
+
+            final Page page = new Page(parserResult.getDocElement());
             pageByTocItem.put(tocItem, page);
         } catch(Exception e) {
             throw new RuntimeException("error during parsing of " + tocItem.getFileNameWithoutExtension(), e);
         }
+    }
+
+    // each markup file may refer other files like code snippets or diagrams
+    // we maintain dependency between them so we know which one triggers what page refresh during preview mode
+    //
+    private void updateFilesAssociation(TocItem tocItem, List<Path> auxiliaryFiles) {
+        auxiliaryFiles.forEach((af) -> {
+            Set<TocItem> tocItems = tocItemsByAuxiliaryFile.computeIfAbsent(af, k -> new HashSet<>());
+            tocItems.add(tocItem);
+        });
     }
 
     private Path markupPath(final TocItem tocItem) {
@@ -148,9 +172,6 @@ public class WebSite {
     private void resetPlugins(final Path markdownPath) {
         final IncludeContext context = new IncludeContext(markdownPath);
         IncludePlugins.reset(context);
-        if (cfg.pluginsListener != null) {
-            cfg.pluginsListener.onReset(context);
-        }
     }
 
     private void generatePages() {
@@ -210,8 +231,8 @@ public class WebSite {
         private String title;
         private String type;
         private String logoRelativePath;
-        private PluginsListener pluginsListener;
         public List<WebResource> registeredExtraJavaScripts;
+        private boolean isPreviewEnabled;
 
         private Configuration() {
             webResources = new ArrayList<>();
@@ -243,11 +264,6 @@ public class WebSite {
             return this;
         }
 
-        public Configuration withPluginListener(PluginsListener pluginsListener) {
-            this.pluginsListener = pluginsListener;
-            return this;
-        }
-
         public Configuration withMetaFromJsonFile(Path path) {
             final String json = fileTextContent(path);
             final Gson gson = new Gson();
@@ -261,6 +277,11 @@ public class WebSite {
 
         public Configuration withLogoRelativePath(String logoRelativePath) {
             this.logoRelativePath = logoRelativePath;
+            return this;
+        }
+
+        public Configuration withEnabledPreview() {
+            this.isPreviewEnabled = true;
             return this;
         }
 

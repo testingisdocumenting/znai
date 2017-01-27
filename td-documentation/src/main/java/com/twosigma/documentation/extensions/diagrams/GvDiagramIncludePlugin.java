@@ -34,7 +34,7 @@ public class GvDiagramIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    public ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         String diagramId = includeParams.getFreeParam();
         String diagramPath = includeParams.getOpts().getRequiredString("diagramPath");
         String gvContent = componentsRegistry.includeResourceResolver().textContent(diagramPath);

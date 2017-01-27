@@ -19,7 +19,7 @@ public class PageToHtmlPageConverter {
     private final DocMeta docMeta;
     private final ReactJsNashornEngine reactJsNashornEngine;
 
-    public PageToHtmlPageConverter(DocMeta docMeta, TableOfContents tableOfContents, ReactJsNashornEngine reactJsNashornEngine, PluginsListener pluginsListener) {
+    public PageToHtmlPageConverter(DocMeta docMeta, TableOfContents tableOfContents, ReactJsNashornEngine reactJsNashornEngine) {
         this.docMeta = docMeta;
         this.reactJsNashornEngine = reactJsNashornEngine;
     }

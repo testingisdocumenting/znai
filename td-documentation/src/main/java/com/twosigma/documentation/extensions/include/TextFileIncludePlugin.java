@@ -6,10 +6,12 @@ import com.twosigma.documentation.parser.docelement.DocElementType;
 import com.twosigma.utils.StringUtils;
 import org.apache.commons.io.FileUtils;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author mykola
@@ -25,7 +27,7 @@ public class TextFileIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    public ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         String fileName = includeParams.getFreeParam();
 
         String text = extractText(componentsRegistry.includeResourceResolver().
@@ -40,6 +42,11 @@ public class TextFileIncludePlugin implements IncludePlugin {
         return new ReactComponent(DocElementType.SNIPPET, props);
     }
 
+    @Override
+    public Stream<Path> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+        return Stream.of(componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam()));
+    }
+
     private String extractText(String text, IncludeParamsOpts opts) {
         if (opts.isEmpty()) {
             return text;
@@ -52,11 +59,6 @@ public class TextFileIncludePlugin implements IncludePlugin {
         }
 
         return text;
-    }
-
-    @Override
-    public String textForSearch() {
-        return null;
     }
 
     private static String langFromFileName(String fileName) {

@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 
 class Server {
-    constructor({onOpen, onClose, onPageUpdate}) {
+    constructor({onOpen, onClose, onPageUpdate, onMultiplePagesUpdate}) {
         this.onOpen = onOpen
         this.onClose = onClose
         this.onPageUpdate = onPageUpdate
+        this.onMultiplePagesUpdate = onMultiplePagesUpdate
     }
 
     connect() {
@@ -26,6 +27,10 @@ class Server {
             const data = JSON.parse(message.data)
             if (data.type === 'pageUpdate') {
                 this.onPageUpdate(data.pageProps)
+            }
+
+            if (data.type === 'multiplePagesUpdate') {
+                this.onMultiplePagesUpdate(data.listOfPageProps)
             }
 
             // var command = JSON.parse(message.data);
@@ -67,7 +72,8 @@ class Preview extends Component {
         this.server = new Server({
             onOpen: this.onConnectionOpen.bind(this),
             onClose: this.onConnectionClose.bind(this),
-            onPageUpdate: this.props.onPageUpdate
+            onPageUpdate: this.props.onPageUpdate,
+            onMultiplePagesUpdate: this.props.onMultiplePagesUpdate
         })
 
         this.server.connect()
