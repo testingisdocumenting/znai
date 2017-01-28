@@ -17,6 +17,7 @@ class PreviewChangeIndicator extends Component {
         }
 
         targetDom.className += " __recently-modified"
+        targetDom.scrollIntoView()
         this.lastUpdatedDom = targetDom
     }
 }
