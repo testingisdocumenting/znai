@@ -60,8 +60,6 @@ public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
             return;
         }
 
-
-
         String text = JsonUtils.serialize(payload);
         ConsoleOutputs.out("sending: ", BLUE, text);
         ws.writeFinalTextFrame(text);
