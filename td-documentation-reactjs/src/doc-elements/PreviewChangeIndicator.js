@@ -13,13 +13,27 @@ class PreviewChangeIndicator extends Component {
         }
 
         if (this.lastUpdatedDom) {
-            this.lastUpdatedDom.className = targetDom.className.replace(" __recently-modified", "")
+            this.lastUpdatedDom.className = this.lastUpdatedDom.className.replace(" __recently-modified", "")
         }
 
         targetDom.className += " __recently-modified"
-        targetDom.scrollIntoView() // TODO check if requires scrolling first
+
+        if (! elementInViewport(targetDom)) {
+            targetDom.scrollIntoView()
+        }
+
         this.lastUpdatedDom = targetDom
     }
+}
+
+function elementInViewport(el) {
+    const rect = el.getBoundingClientRect()
+
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth))
 }
 
 export default PreviewChangeIndicator
