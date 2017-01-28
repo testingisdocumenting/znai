@@ -1,4 +1,6 @@
 import React, { Component } from "react"
+import Promise from "promise"
+
 import NavBar from './NavBar'
 import TocPanel from './TocPanel'
 import SearchPopup from './search/SearchPopup'
@@ -124,8 +126,10 @@ class Documentation extends Component {
         const currentToc = this.state.page.tocItem
 
         if (currentToc.dirName !== tocItem.dirName || currentToc.fileName !== tocItem.fileName) {
-            documentationNavigation.navigateToPage(tocItem)
+            return documentationNavigation.navigateToPage(tocItem)
         }
+
+        return Promise.resolve(true)
     }
 
     // one markup page was changed and view needs to be updated
@@ -135,18 +139,12 @@ class Documentation extends Component {
             this.updatePagesReference(allPages, pageProps);
         })
 
-        this.navigateToPageIfRequired(pageProps.tocItem)
-
-        this.updatePageAndDetectChangePosition(() => {
-            updatePagesReference()
-            this.setState({page: pageProps})
+        this.navigateToPageIfRequired(pageProps.tocItem).then(() => {
+            this.updatePageAndDetectChangePosition(() => {
+                updatePagesReference()
+                this.setState({page: pageProps})
+            })
         })
-
-        // if (currentToc.dirName !== pageProps.tocItem.dirName || currentToc.fileName !== pageProps.tocItem.fileName) {
-        //     documentationNavigation.navigateToPage(pageProps.tocItem)
-        // } else {
-        //     this.updatePageAndDetectChangePosition(() => this.setState({page: pageProps}))
-        // }
     }
 
     // one of the files referred from a markup or multiple markups was changed
@@ -199,7 +197,7 @@ class Documentation extends Component {
     }
 
     onUrlChange(url) {
-        getAllPagesPromise().then((pages) => {
+        return getAllPagesPromise().then((pages) => {
             const currentPageLocation = documentationNavigation.extractDirNameAndFileName(url)
 
             const matchingPages = pages.filter((p) => p.tocItem.dirName === currentPageLocation.dirName &&
@@ -211,6 +209,7 @@ class Documentation extends Component {
             }
 
             this.setState({page: matchingPages[0], selectedTocItem: currentPageLocation, lastChangeDataDom: null})
+            return true
         })
     }
 }

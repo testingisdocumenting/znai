@@ -1,3 +1,5 @@
+import Promise from "promise"
+
 class DocumentationNavigation {
     constructor() {
         this.listeners = []
@@ -19,13 +21,12 @@ class DocumentationNavigation {
         const url = "../" + id.dirName + "/" + id.fileName
 
         history.pushState({}, null, url)
-        this.notifyNewUrl(url)
+        return this.notifyNewUrl(url)
     }
 
     notifyNewUrl(url) {
-        this.listeners.forEach((l) => {
-            l(url)
-        })
+        const promises = this.listeners.map((l) => l(url))
+        return Promise.all(promises)
     }
 
     currentDirNameAndFileName() {

@@ -42,7 +42,7 @@ library.OrderedList = ({delimiter, startNumber, content, idGen}) => <ol classNam
 library.ListItem = ({content, idGen}) => <li><BoundDocElement content={content} idGen={idGen}/></li>
 
 library.Section = ({title, content, idGen}) => (
-        <div className="section">
+        <div className="section content-block" key={title}>
             <div className="section-title" data-id={idGen.next()}>{title}</div>
             <BoundDocElement content={content} idGen={idGen}/>
         </div>)
@@ -61,7 +61,7 @@ library.GraphVizSvg = GraphVizSvg
 library.GraphVizFlow = GraphVizFlow
 
 library.Page = ({title, content}) => (<div className="page-content">
-    <BoundDocElement content={content} idGen={new Id()}/>
+    <BoundDocElement key={title} content={content} idGen={new Id()}/>
 </div>)
 
 export default library
