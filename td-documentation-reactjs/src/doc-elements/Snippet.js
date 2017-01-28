@@ -5,12 +5,12 @@ import './Snippet.css'
 
 class Snippet extends React.Component {
     render() {
-        const {snippet, lang, maxLineLength} = this.props
+        const {snippet, lang, maxLineLength, idGen} = this.props
 
         const divClassName = "snippet " + (maxLineLength && maxLineLength > 100 ? "wide-screen" : "content-block")
         const preClassName = "hljs" + ((lang && lang.length) ? " " + lang : "")
 
-        return (<div className={divClassName}>
+        return (<div className={divClassName} data-id={idGen.next()}>
             <pre className={preClassName} ref={(dn) => this.codeNode = dn}>
                 {snippet}
             </pre>

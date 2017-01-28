@@ -120,20 +120,33 @@ class Documentation extends Component {
         documentationNavigation.navigateToPage(id)
     }
 
+    navigateToPageIfRequired(tocItem) {
+        const currentToc = this.state.page.tocItem
+
+        if (currentToc.dirName !== tocItem.dirName || currentToc.fileName !== tocItem.fileName) {
+            documentationNavigation.navigateToPage(tocItem)
+        }
+    }
+
     // one markup page was changed and view needs to be updated
     //
     onPageUpdate(pageProps) {
-        getAllPagesPromise().then((allPages) => {
+        const updatePagesReference = () => getAllPagesPromise().then((allPages) => {
             this.updatePagesReference(allPages, pageProps);
         })
 
-        const currentToc = this.state.page.tocItem
+        this.navigateToPageIfRequired(pageProps.tocItem)
 
-        if (currentToc.dirName !== pageProps.tocItem.dirName || currentToc.fileName !== pageProps.tocItem.fileName) {
-            documentationNavigation.navigateToPage(pageProps.tocItem)
-        } else {
-            this.updatePageAndDetectChangePosition(() => this.setState({page: pageProps}))
-        }
+        this.updatePageAndDetectChangePosition(() => {
+            updatePagesReference()
+            this.setState({page: pageProps})
+        })
+
+        // if (currentToc.dirName !== pageProps.tocItem.dirName || currentToc.fileName !== pageProps.tocItem.fileName) {
+        //     documentationNavigation.navigateToPage(pageProps.tocItem)
+        // } else {
+        //     this.updatePageAndDetectChangePosition(() => this.setState({page: pageProps}))
+        // }
     }
 
     // one of the files referred from a markup or multiple markups was changed
@@ -169,8 +182,11 @@ class Documentation extends Component {
         let closestDataId = previewDiff.findClosestDataId();
 
         if (closestDataId !== -1) {
-            const closestDom = document.querySelector(`[data-reactid='${closestDataId}']`)
+            const closestDom = document.querySelector(`[data-id='${closestDataId}']`)
             this.setState({lastChangeDataDom: closestDom})
+        } else {
+            this.setState({lastChangeDataDom: null})
+            console.error("can't find closest data id")
         }
     }
 
@@ -194,7 +210,7 @@ class Documentation extends Component {
                 return
             }
 
-            this.setState({page: matchingPages[0], selectedTocItem: currentPageLocation})
+            this.setState({page: matchingPages[0], selectedTocItem: currentPageLocation, lastChangeDataDom: null})
         })
     }
 }

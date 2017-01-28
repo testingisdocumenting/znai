@@ -11,7 +11,7 @@ class GraphVizFlowAllInfoAtOnce extends Component {
     }
 
     render() {
-        const {diagram, colors, slides, onExpand} = this.props
+        const {diagram, colors, slides, onExpand, idGen} = this.props
         const {idsToHighlight} = this.state
 
         return <div className="graphviz-diagram-all-content">
@@ -27,7 +27,7 @@ class GraphVizFlowAllInfoAtOnce extends Component {
                             <div className="diagram-slide-labels" >
                                 {slide.ids.map((id) => <div>// {id}</div>)}
                             </div>
-                            <elementsLibrary.DocElement content={slide.content}/>
+                            <elementsLibrary.DocElement content={slide.content} idGen={idGen}/>
                         </div>
                     ))
                 }

@@ -56,10 +56,9 @@ const TestData = {
 
     documentation: {
         "docMeta": {
-            "logo": "img/two-sigma-logo.png",
             "type": "User Guide",
-            "previewEnabled": true,
-            "title": "VATS"
+            "title": "MUUG",
+            "previewEnabled": true
         },
         "toc": [
             {
@@ -127,41 +126,28 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "description",
+                    "title": "Auto Highlight",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "The vats maven-import command allows one to automatically create an unlimited number of external codebases, each of which contains containing one jar, given a maven jar.",
+                                    "text": "It is very easy to add a code snippet with an automatic code highlighting.",
                                     "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
+                                },
                                 {
-                                    "text": "For example, if we wanted to import commons-lang3 from mvnrepository.com, we would vats maven-import using the SBT dependency line",
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "All you have to do is indent your code with 4 spaces inside your markdown document and",
                                     "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
+                                },
                                 {
-                                    "text": "vats maven-import --sbt \u0027\"org.apache.commons\" % \"commons-lang3\" % \"3.4\"\u0027",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
+                                    "type": "SoftLineBreak"
+                                },
                                 {
-                                    "text": "The command stores",
+                                    "text": "you code will be auto highlighted.",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -169,145 +155,92 @@ const TestData = {
                         {
                             "lang": "",
                             "lineNumber": "",
-                            "snippet": "the source jar in a folder \u003ccodebase_root\u003e/java/non-deployable under the original file name ending with -sources.jar\nthe POM file as \u003ccodebase_root\u003e/pom.xml\nthe library itself under  \u003ccodebase_root\u003e/java/lib\n",
-                            "maxLineLength": 116,
+                            "snippet": "interface PriceService {\n    Money calcPrice(String cuips, Integer quantity);\n}\n",
+                            "maxLineLength": 52,
                             "type": "Snippet"
                         },
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "If you want to use an external java library, find its Maven groupid, artifactid and version on the web site of the open source organization creating the library or on mvnrepository.com or search.maven.org.",
+                                    "text": "This method attempts to guess the language and highlight accordingly. Markdown used to create code snippet above follows",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Once you have this information called GAV coordinates (for Group/Artifact/Version), you can run vats maven-import.",
-                                    "type": "SimpleText"
-                                }
-                            ]
+                            "componentName": "Snippet",
+                            "componentProps": {
+                                "startLine": "interface PriceService",
+                                "numberOfLines": 3.0,
+                                "lang": "markdown",
+                                "title": "markdown",
+                                "snippet": "    interface PriceService {\n        Money calcPrice(String cuips, Integer quantity);\n    }",
+                                "maxLineLength": 56
+                            },
+                            "type": "CustomComponent"
                         },
                         {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "vats maven-import is hard-wired to refuse any software with the Gnu Public License.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "vats maven-import only imports the GAV\u0027s which are not already present in VATS.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "The software.mi files of the generated codebases contain the proper dependency information in the STANDARD_JARS key, and proper MAVEN_GROUPID, MAVEN_ARTIFACTID, and MAVEN_VERSION keys. See Software.mi Makepath And Friends for details.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "",
-                            "lineNumber": "",
-                            "snippet": "usage: vats.py maven-import [-h] [--vats-verbose] [--vats-profile]\n                            [--vats-properties PROPERTIES_FILE]\n                            [--vats-property VATS_PROPERTY]\n                            [--vats-ignore-sanitycheck] [--vats-debug]\n                            [--vats-json-debug] [--vats-root ROOT]\n                            [--vats-targetarch VATS_TARGETARCH]\n                            [--vats-only-with CODEBASE]\n                            [--vats-config VATS_CONFIG] [--sbt SBT_DEPENDENCY]\n                            [-g MAVEN_GROUP_ID] [-a MAVEN_ARTIFACT_ID]\n                            [-v MAVEN_VERSION] [-p MAVEN_PROFILE]\n \nImport using:\n    maven-style import: -g \u003cGROUP\u003e -a \u003cARTIFACT\u003e -v \u003cVERSION\u003e\n    sbt-style import  : --sbt \u0027\"\u003cGROUP\u003e\" % \"\u003cARTIFACT\u003e\" % \"\u003cVERSION\u003e\"\u0027\n \noptional arguments:\n  -h, --help            show this help message and exit\n  --sbt SBT_DEPENDENCY  Sbt-style dependency, example below (default: None)\n  -g MAVEN_GROUP_ID, --maven-group-id MAVEN_GROUP_ID\n                        Maven group id. (default: None)\n  -a MAVEN_ARTIFACT_ID, --maven-artifact-id MAVEN_ARTIFACT_ID\n                        Maven artifact id. (default: None)\n  -v MAVEN_VERSION, --maven-version MAVEN_VERSION\n                        Maven version. (default: None)\n  -p MAVEN_PROFILE, --maven-profile MAVEN_PROFILE\n                        Maven profile to activate. This is an optional\n                        argument which can be repeated. A Maven profile is a\n                        configuration defined in a POM file which can be\n                        activated or not. (default: [])\n \nExample: vats maven-import --sbt \u0027\"org.apache.commons\" % \"commons-lang3\" % \"3.4\"\u0027\n \nRead more: http://wiki/confluence/display/tools/vats+maven-import\nTo display global options, re-run with --vats-verbose --help\n",
-                            "maxLineLength": 81,
-                            "type": "Snippet"
+                            "type": "Paragraph"
                         }
                     ]
                 },
                 {
-                    "title": "codebase naming",
+                    "title": "Specifying Language",
                     "type": "Section",
                     "content": [
                         {
-                            "type": "BlockQuote",
+                            "type": "Paragraph",
                             "content": [
                                 {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "The names of the new codebases created by this command will be built in the following way :",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
+                                    "text": "You can also specsify a language. That maybe useful if there is the snippet is not large enough for auto detection.",
+                                    "type": "SimpleText"
                                 }
                             ]
+                        },
+                        {
+                            "lang": "javascript",
+                            "lineNumber": "",
+                            "snippet": "import React,1 {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n",
+                            "maxLineLength": 39,
+                            "type": "Snippet"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Snippet below is used to highlight the code as a javascript language",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "componentName": "Snippet",
+                            "componentProps": {
+                                "startLine": "```javascript",
+                                "numberOfLines": 9.0,
+                                "lang": "markdown",
+                                "title": "markdown",
+                                "snippet": "```javascript\nimport React,1 {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n```",
+                                "maxLineLength": 39
+                            },
+                            "type": "CustomComponent"
                         },
                         {
                             "type": "Paragraph"
                         },
                         {
-                            "type": "BlockQuote",
+                            "type": "Paragraph",
                             "content": [
                                 {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "By taking the original orgId, artifactId and version from the maven repository",
-                                            "type": "SimpleText"
-                                        },
-                                        {
-                                            "type": "SoftLineBreak"
-                                        },
-                                        {
-                                            "text": "and replacing the characters which are not allowed in VATS by z.",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
+                                    "text": "Following languages are supported",
+                                    "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "We realize this naming convention is not ideal.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "VATS codebase names are used to generate identifiers in bash,",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "so allowing dashes and periods in codebase names would have required changes in many scripts",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "across the Two Sigma codebase.. We consulted with several subject matter experts and concluded that replacing dashes and periods with a z was the most reasonable option.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Usage Scenario",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "bulletMarker": "-",
-                            "tight": false,
+                            "bulletMarker": "*",
+                            "tight": true,
                             "type": "BulletList",
                             "content": [
                                 {
@@ -317,22 +250,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "The user determines that a new open source library is needed and finds its coordinates,",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "SoftLineBreak"
-                                                },
-                                                {
-                                                    "text": "either on the web site of the library or on ",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "anchor": "http://mvnrepository.com",
-                                                    "type": "Link"
-                                                },
-                                                {
-                                                    "text": " or ...",
+                                                    "text": "Java",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -346,56 +264,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "User executes a command",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "bulletMarker": "-",
-                                            "tight": true,
-                                            "type": "BulletList",
-                                            "content": [
-                                                {
-                                                    "type": "ListItem",
-                                                    "content": [
-                                                        {
-                                                            "type": "Paragraph",
-                                                            "content": [
-                                                                {
-                                                                    "text": "Using sbt-style import:  ",
-                                                                    "type": "SimpleText"
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "ListItem",
-                                                    "content": [
-                                                        {
-                                                            "type": "Paragraph",
-                                                            "content": [
-                                                                {
-                                                                    "text": "Using maven-style import:  ",
-                                                                    "type": "SimpleText"
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "VATS finds (jars to import) \u003d (all maven dependency jars) - (maven jars already in VATS).",
+                                                    "text": "JavaScript",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -409,7 +278,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "VATS finds all (jars to imports) in the internal mirror.",
+                                                    "text": "Groovy",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -423,7 +292,118 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "VATS creates new external codebases for each dependency jar.",
+                                                    "text": "Python",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "We use highlightjs library to provide syntax highlighting",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Wide Code2",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "To make regular text more readable we maintain a narrow column of text. You code snippets however can\u0027t always follow the",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "same rules. In case of a wide code snippets we expand the horizontal boundaries and center the source code to fit.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "lang": "java",
+                            "lineNumber": "",
+                            "snippet": "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaFactory(final ExchangeCalendar calendar) {\n        ...\n    }\n}\n",
+                            "maxLineLength": 114,
+                            "type": "Snippet"
+                        }
+                    ]
+                },
+                {
+                    "title": "From File",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "To boost documentation maintainability you can refer text and code snippets from already existing files.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "lang": "",
+                            "lineNumber": "",
+                            "snippet": ":include-text-file: file-name.js\n",
+                            "maxLineLength": 32,
+                            "type": "Snippet"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Include-dash family is our custom extension to markdown to support various scenarios.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "componentName": "Snippet",
+                            "componentProps": {
+                                "snippet": "class JsClass {\n    constructor() {\n    }\n}\n\nexport default JsClass",
+                                "lang": "javascript",
+                                "maxLineLength": 22
+                            },
+                            "type": "CustomComponent"
+                        },
+                        {
+                            "type": "Paragraph"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "File will be looked up using following rules:",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "bulletMarker": "*",
+                            "tight": true,
+                            "type": "BulletList",
+                            "content": [
+                                {
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "directory with a markup file",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -437,7 +417,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "The user runs another VATS command for code review concerning these new external codebases.",
+                                                    "text": "root directory of a documentation",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -451,7 +431,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "Once the review is approved, the user pushes the new codebases along with other changes possibly.",
+                                                    "text": "class path",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -464,22 +444,22 @@ const TestData = {
                 }
             ],
             "tocItem": {
-                "sectionTitle": "External Code Bases",
-                "pageTitle": "Maven Import",
-                "fileName": "maven-import",
-                "dirName": "external-code-bases"
+                "sectionTitle": "Features",
+                "pageTitle": "Code Snippets",
+                "fileName": "code-snippets",
+                "dirName": "features"
             },
             "nextTocItem": {
-                "sectionTitle": "External Code Bases",
-                "pageTitle": "License Restrictions",
-                "fileName": "license-restrictions",
-                "dirName": "external-code-bases"
+                "sectionTitle": "Features",
+                "pageTitle": "Proxy",
+                "fileName": "proxy",
+                "dirName": "features"
             },
             "prevTocItem": {
-                "sectionTitle": "External Code Bases",
-                "pageTitle": "External Code To Vats",
-                "fileName": "external-code-to-vats",
-                "dirName": "external-code-bases"
+                "sectionTitle": "Rationale",
+                "pageTitle": "First Code Base",
+                "fileName": "first-code-base",
+                "dirName": "rationale"
             },
             "renderContext": {
                 "nestLevel": 1

@@ -13,7 +13,7 @@ class PageContentPreviewDiff {
         const indexOfDiff = this.findFirstDiffIndex();
 
         const commonPrefix = this.before.substr(0, indexOfDiff + 1)
-        const idxOfId = commonPrefix.lastIndexOf("data-reactid")
+        const idxOfId = commonPrefix.lastIndexOf("data-id")
 
         const reactIdString = commonPrefix.substr(idxOfId)
         return reactIdString.split("\n")[0].replace(/.*?=["'](\d+?)["'].*/, "$1")
