@@ -6,7 +6,10 @@ import {getSearchPromise} from './search/searchPromise'
 import elementsLibrary from './DefaultElementsLibrary'
 import {documentationNavigation} from './DocumentationNavigation'
 import {getAllPagesPromise} from "./allPages"
+
 import Preview from './Preview'
+import PreviewChangeIndicator from './PreviewChangeIndicator'
+import PageContentPreviewDiff from './PageContentPreviewDiff'
 
 import './DocumentationLayout.css'
 import './search/Search.css'
@@ -52,6 +55,8 @@ class Documentation extends Component {
                                                           onPageUpdate={this.onPageUpdate}
                                                           onMultiplePagesUpdate={this.onMultiplePagesUpdate}/> : null
 
+        const previewIndicator = <PreviewChangeIndicator targetDom={this.state.lastChangeDataDom}/>
+
         return (
             <div className="documentation">
                 <div className="side-panel" onClick={this.onTocSelect}>
@@ -63,6 +68,7 @@ class Documentation extends Component {
                 </div>
 
                 {preview}
+                {previewIndicator}
 
                 <div className="search-button glyphicon glyphicon-search" onClick={this.onSearchClick}/>
 
@@ -125,6 +131,8 @@ class Documentation extends Component {
 
         if (currentToc.dirName !== pageProps.tocItem.dirName || currentToc.fileName !== pageProps.tocItem.fileName) {
             documentationNavigation.navigateToPage(pageProps.tocItem)
+        } else {
+            this.updatePageAndDetectChangePosition(() => this.setState({page: pageProps}))
         }
     }
 
@@ -145,6 +153,24 @@ class Documentation extends Component {
             documentationNavigation.navigateToPage(matchingPages[0].tocItem)
         } else {
             documentationNavigation.navigateToPage(listOfPageProps[0].tocItem)
+        }
+    }
+
+    updatePageAndDetectChangePosition(funcToUpdatePage) {
+        const nodeBefore = document.querySelector(".page-content")
+        const htmlBefore = nodeBefore.innerHTML.slice(0)
+
+        funcToUpdatePage()
+
+        const nodeAfter = document.querySelector(".page-content")
+        const htmlAfter = nodeAfter.innerHTML.slice(0)
+
+        const previewDiff = new PageContentPreviewDiff(htmlBefore, htmlAfter)
+        let closestDataId = previewDiff.findClosestDataId();
+
+        if (closestDataId !== -1) {
+            const closestDom = document.querySelector(`[data-reactid='${closestDataId}']`)
+            this.setState({lastChangeDataDom: closestDom})
         }
     }
 
