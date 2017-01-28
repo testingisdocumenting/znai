@@ -16,7 +16,7 @@ class PageContentPreviewDiff {
         const idxOfId = commonPrefix.lastIndexOf("data-reactid")
 
         const reactIdString = commonPrefix.substr(idxOfId)
-        return reactIdString.replace(/.*?=["'](\d+?)["'].*/, "$1")
+        return reactIdString.split("\n")[0].replace(/.*?=["'](\d+?)["'].*/, "$1")
     }
 
     findFirstDiffIndex() {
