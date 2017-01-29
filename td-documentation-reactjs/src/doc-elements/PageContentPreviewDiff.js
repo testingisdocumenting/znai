@@ -1,35 +1,34 @@
 class PageContentPreviewDiff {
     constructor(before, after) {
-        this.before = before.replace(/ __recently-modified/g, '')
-        this.after = after.replace(/ __recently-modified/g, '')
+        this.before = before
+        this.after = after
     }
 
-    /**
-     * we need to find the closest identification of an element near change.
-     * React stopped using data-reactid on a pure client side but still generates them during
-     * server side rendering. using them for now
-     */
-    findClosestDataId() {
-        const indexOfDiff = this.findFirstDiffIndex();
+    findFirstDifferentNode() {
+        let btw = document.createTreeWalker(this.before);
+        let atw = document.createTreeWalker(this.after);
 
-        const commonPrefix = this.before.substr(0, indexOfDiff + 1)
-        const idxOfId = commonPrefix.lastIndexOf("data-id")
+        for (;;) {
+            const bn = btw.nextNode()
+            const an = atw.nextNode()
 
-        const reactIdString = commonPrefix.substr(idxOfId)
-        return reactIdString.split("\n")[0].replace(/.*?=["'](\d+?)["'].*/, "$1")
-    }
+            if (bn === null || an === null) {
+                return null
+            }
 
-    findFirstDiffIndex() {
-        const lenBefore = this.before.length
-        const lenAfter = this.after.length
-        const minLen = Math.min(lenBefore, lenAfter)
-        for (let i = 0; i < minLen; i++) {
-            if (this.before[i] !== this.after[i]) {
-                return i
+            if (!an.className) {
+                continue
+            }
+
+            const classes = an.className.split(' ')
+            if (classes.indexOf('content-block') !== -1) {
+                continue
+            }
+
+            if (!bn.isEqualNode(an)) {
+                return an
             }
         }
-
-        return -1
     }
 }
 

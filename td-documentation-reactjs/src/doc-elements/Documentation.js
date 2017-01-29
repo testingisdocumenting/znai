@@ -144,7 +144,7 @@ class Documentation extends Component {
                 updatePagesReference()
                 this.setState({page: pageProps})
             })
-        })
+        }).then(() => {}, (error) => console.error(error))
     }
 
     // one of the files referred from a markup or multiple markups was changed
@@ -168,23 +168,17 @@ class Documentation extends Component {
     }
 
     updatePageAndDetectChangePosition(funcToUpdatePage) {
-        const nodeBefore = document.querySelector(".page-content")
-        const htmlBefore = nodeBefore.innerHTML.slice(0)
+        const nodeBefore = document.querySelector(".page-content").cloneNode(true)
 
         funcToUpdatePage()
 
         const nodeAfter = document.querySelector(".page-content")
-        const htmlAfter = nodeAfter.innerHTML.slice(0)
 
-        const previewDiff = new PageContentPreviewDiff(htmlBefore, htmlAfter)
-        let closestDataId = previewDiff.findClosestDataId();
+        const previewDiff = new PageContentPreviewDiff(nodeBefore, nodeAfter)
+        const differentNode = previewDiff.findFirstDifferentNode()
 
-        if (closestDataId !== -1) {
-            const closestDom = document.querySelector(`[data-id='${closestDataId}']`)
-            this.setState({lastChangeDataDom: closestDom})
-        } else {
-            this.setState({lastChangeDataDom: null})
-            console.error("can't find closest data id")
+        if (differentNode) {
+            this.setState({lastChangeDataDom: differentNode})
         }
     }
 
