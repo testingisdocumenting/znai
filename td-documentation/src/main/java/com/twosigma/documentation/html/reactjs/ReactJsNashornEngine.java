@@ -11,9 +11,10 @@ public class ReactJsNashornEngine {
 
     public ReactJsNashornEngine() {
         this.reactJsBundle = new ReactJsBundle();
+        this.nashornEngine = new NashornEngine();
+    }
 
-         this.nashornEngine = new NashornEngine();
-
+    public void loadLibraries() {
         reactJsBundle.serverJavaScripts().forEach(nashornEngine::loadLibrary);
     }
 

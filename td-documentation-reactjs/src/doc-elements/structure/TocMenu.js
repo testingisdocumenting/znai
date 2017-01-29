@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Item = ({title, dirName, fileName, isSelected, onClickHandler}) => {
+const Item = ({pageTitle, dirName, fileName, isSelected, onClickHandler}) => {
     const className = "toc-item " + (isSelected ? "selected" : "");
     return (
         <div className={className} onClick={
-            () => onClickHandler(dirName, fileName)}>{title}</div>
+            () => onClickHandler(dirName, fileName)}>{pageTitle}</div>
     );
 };
 

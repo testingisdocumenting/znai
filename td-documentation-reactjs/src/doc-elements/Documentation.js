@@ -7,6 +7,7 @@ import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import elementsLibrary from './DefaultElementsLibrary'
 import {documentationNavigation} from './structure/DocumentationNavigation'
+import {tableOfContents} from './structure/TableOfContents'
 import {getAllPagesPromise} from "./allPages"
 
 import Preview from './preview/Preview'
@@ -44,7 +45,8 @@ class Documentation extends Component {
     }
 
     render() {
-        const {toc, docMeta} = this.props
+        const toc = tableOfContents.toc
+        const {docMeta} = this.props
         const {page, tocCollapsed, tocSelected} = this.state
 
         const pageTitle = page.tocItem.pageTitle
@@ -105,15 +107,17 @@ class Documentation extends Component {
 
     onNextPage() {
         const {page} = this.state
-        if (page.nextTocItem) {
-            documentationNavigation.navigateToPage(page.nextTocItem)
+        const nextTocItem = tableOfContents.nextTocItem(page.tocItem)
+        if (nextTocItem) {
+            documentationNavigation.navigateToPage(nextTocItem)
         }
     }
 
     onPrevPage() {
         const {page} = this.state
-        if (page.prevTocItem) {
-            documentationNavigation.navigateToPage(page.prevTocItem)
+        const prevTocItem = tableOfContents.prevTocItem(page.tocItem)
+        if (prevTocItem) {
+            documentationNavigation.navigateToPage(prevTocItem)
         }
     }
 

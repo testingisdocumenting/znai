@@ -54,15 +54,7 @@ public class TableOfContents {
 
         result.put("sectionTitle", sectionTitle);
         result.put("dirName", items.iterator().next().getDirName());
-        result.put("items", items.stream().map(this::tocItemToMap).collect(toList()));
-
-        return result;
-    }
-
-    private Map<String, Object> tocItemToMap(TocItem tocItem) {
-        final Map<String, Object> result = new LinkedHashMap<>();
-        result.put("title", tocItem.getPageTitle());
-        result.put("fileName", tocItem.getFileNameWithoutExtension());
+        result.put("items", items.stream().map(TocItem::toMap).collect(toList()));
 
         return result;
     }

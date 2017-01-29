@@ -34,15 +34,6 @@ public class PageProps {
         pageProps.put("type", "Page");
         pageProps.put("content", ((Map<String, ?>) page.getDocElement().toMap()).get("content"));
         pageProps.put("tocItem", tocItem.toMap());
-
-        if (tocItem.getNext() != null) {
-            pageProps.put("nextTocItem", tocItem.getNext().toMap());
-        }
-
-        if (tocItem.getPrev() != null) {
-            pageProps.put("prevTocItem", tocItem.getPrev().toMap());
-        }
-
         pageProps.put("renderContext", renderContext.toMap());
 
         return pageProps;

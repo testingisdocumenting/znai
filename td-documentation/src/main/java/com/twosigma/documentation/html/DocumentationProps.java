@@ -25,7 +25,6 @@ public class DocumentationProps {
     public Map<String, ?> toMap() {
         final Map<String, Object> map = new LinkedHashMap<>();
         map.put("docMeta", docMeta.toMap());
-        map.put("toc", toc.toListOfMaps());
         map.put("page", pageToRender.toMap());
 
         return map;

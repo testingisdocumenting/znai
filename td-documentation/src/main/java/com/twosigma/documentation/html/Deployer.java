@@ -47,6 +47,10 @@ public class Deployer {
         deploy(Paths.get(webResource.getPath()), webResource.getContent());
     }
 
+    public void deploy(WebResource webResource, String content) {
+        deploy(Paths.get(webResource.getPath()), content);
+    }
+
     public void deploy(Path relativePath, byte[] content) {
         final Path fullPath = root.resolve(relativePath);
         if (deployed.contains(fullPath))

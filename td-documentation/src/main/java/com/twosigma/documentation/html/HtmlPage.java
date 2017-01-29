@@ -41,6 +41,10 @@ public class HtmlPage {
         javaScriptResources.add(webResource);
     }
 
+    public void addJavaScriptInFront(WebResource webResource) {
+        javaScriptResources.add(0, webResource);
+    }
+
     public void addToBody(RenderSupplier supplier) {
         bodySuppliers.add(supplier);
     }
@@ -58,10 +62,10 @@ public class HtmlPage {
             cssResources.stream().map(r -> r.generateCssLink(renderContext)).collect(joining("\n")) +
             "\n</head>\n" +
             "<body>\n" +
-            bodySuppliers.stream().map(s -> s.render(renderContext)).collect(joining("\n")) +
-            javaScriptResources.stream().map(r -> r.generateJavaScriptLink(renderContext)).collect(joining("\n")) +
+            bodySuppliers.stream().map(s -> s.render(renderContext)).collect(joining("\n")) + "\n" +
+            javaScriptResources.stream().map(r -> r.generateJavaScriptLink(renderContext)).collect(joining("\n")) + "\n" +
             "<script>\n" +
-            javaScriptSuppliers.stream().map(s -> s.render(renderContext)).collect(joining("\n")) +
+            javaScriptSuppliers.stream().map(s -> s.render(renderContext)).collect(joining("\n")) + "\n" +
             "</script>\n" +
             "\n</body>" +
             "\n</html>\n";

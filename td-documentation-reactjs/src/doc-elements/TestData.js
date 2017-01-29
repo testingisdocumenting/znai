@@ -60,68 +60,6 @@ const TestData = {
             "title": "MUUG",
             "previewEnabled": true
         },
-        "toc": [
-            {
-                "sectionTitle": "Rationale",
-                "dirName": "rationale",
-                "items": [
-                    {
-                        "title": "Engineers",
-                        "fileName": "engineers"
-                    },
-                    {
-                        "title": "Setup",
-                        "fileName": "setup"
-                    },
-                    {
-                        "title": "First Code Base",
-                        "fileName": "first-code-base"
-                    }
-                ]
-            },
-            {
-                "sectionTitle": "Features",
-                "dirName": "features",
-                "items": [
-                    {
-                        "title": "Code Snippets",
-                        "fileName": "code-snippets"
-                    },
-                    {
-                        "title": "Proxy",
-                        "fileName": "proxy"
-                    }
-                ]
-            },
-            {
-                "sectionTitle": "Cook Book",
-                "dirName": "cook-book",
-                "items": [
-                    {
-                        "title": "Merging Time Series",
-                        "fileName": "merging-time-series"
-                    }
-                ]
-            },
-            {
-                "sectionTitle": "External Code Bases",
-                "dirName": "external-code-bases",
-                "items": [
-                    {
-                        "title": "External Code To Vats",
-                        "fileName": "external-code-to-vats"
-                    },
-                    {
-                        "title": "Maven Import",
-                        "fileName": "maven-import"
-                    },
-                    {
-                        "title": "License Restrictions",
-                        "fileName": "license-restrictions"
-                    }
-                ]
-            }
-        ],
         "page": {
             "type": "Page",
             "content": [

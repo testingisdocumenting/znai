@@ -45,6 +45,7 @@ public class WebSite {
     private final RelativeToFileAndRootResourceResolver includeResourcesResolver;
     private final ReactJsNashornEngine reactJsNashornEngine;
     private final LunrIndexer lunrIndexer;
+    private final WebResource tocJavaScript;
 
     private WebSite(Configuration cfg) {
         this.cfg = cfg;
@@ -52,8 +53,9 @@ public class WebSite {
         this.docMeta = new DocMeta();
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
         this.componentsRegistry = new WebSiteComponentsRegistry();
-        this.reactJsNashornEngine = new ReactJsNashornEngine();
+        this.reactJsNashornEngine = initJsEngine();
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
+        this.tocJavaScript = WebResource.withRelativePath("toc.js");
         this.includeResourcesResolver = new RelativeToFileAndRootResourceResolver(cfg.tocPath.getParent());
         this.tocItemsByAuxiliaryFile = new HashMap<>();
 
@@ -67,6 +69,13 @@ public class WebSite {
         componentsRegistry.setIncludeResourcesResolver(includeResourcesResolver);
 
         reset();
+    }
+
+    private ReactJsNashornEngine initJsEngine() {
+        ReactJsNashornEngine engine = new ReactJsNashornEngine();
+        engine.getNashornEngine().eval("toc = []");
+        engine.loadLibraries();
+        return engine;
     }
 
     public static Configuration withToc(Path path) {
@@ -120,6 +129,7 @@ public class WebSite {
         pageByTocItem = new LinkedHashMap<>();
         allPagesProps = new ArrayList<>();
         extraJavaScripts = new ArrayList<>(registeredExtraJavaScripts);
+        extraJavaScripts.add(tocJavaScript);
 
         componentsRegistry.setParser(markupParser);
     }
@@ -131,6 +141,12 @@ public class WebSite {
 
     private void createToc() {
         toc = TableOfContents.fromNestedText(fileTextContent(cfg.tocPath));
+        String tocJson = JsonUtils.serialize(toc.toListOfMaps());
+
+        deployer.deploy(tocJavaScript, "toc = " + tocJson);
+
+        reactJsNashornEngine.getNashornEngine().bind("tocJson", tocJson);
+        reactJsNashornEngine.getNashornEngine().eval("setTocJson(tocJson)");
     }
 
     private void parseMarkups() {
@@ -195,13 +211,13 @@ public class WebSite {
         try {
             resetPlugins(markupPath(tocItem)); // TODO reset at render phase only?
 
-            // we are inside directory, so nest level is 1 for all the static resources
+            // we are inside directory, so nest level is 1 for extra resources
             HtmlRenderContext renderContext = HtmlRenderContext.nested(1);
 
             final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(toc, tocItem, page, renderContext);
 
             allPagesProps.add(htmlAndProps.getProps());
-            extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScript);
+            extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
 
             final String html = htmlAndProps.getHtmlPage().render(renderContext);
             Path pagePath = Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
