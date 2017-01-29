@@ -2,16 +2,16 @@ import React, { Component } from "react"
 import Promise from "promise"
 
 import NavBar from './NavBar'
-import TocPanel from './TocPanel'
+import TocPanel from './structure/TocPanel'
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import elementsLibrary from './DefaultElementsLibrary'
-import {documentationNavigation} from './DocumentationNavigation'
+import {documentationNavigation} from './structure/DocumentationNavigation'
 import {getAllPagesPromise} from "./allPages"
 
-import Preview from './Preview'
-import PreviewChangeIndicator from './PreviewChangeIndicator'
-import PageContentPreviewDiff from './PageContentPreviewDiff'
+import Preview from './preview/Preview'
+import PreviewChangeIndicator from './preview/PreviewChangeIndicator'
+import PageContentPreviewDiff from './preview/PageContentPreviewDiff'
 
 import './DocumentationLayout.css'
 import './search/Search.css'
