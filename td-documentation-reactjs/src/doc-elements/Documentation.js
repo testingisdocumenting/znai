@@ -139,12 +139,7 @@ class Documentation extends Component {
             this.updatePagesReference(allPages, pageProps);
         })
 
-        this.navigateToPageIfRequired(pageProps.tocItem).then(() => {
-            this.updatePageAndDetectChangePosition(() => {
-                updatePagesReference()
-                this.setState({page: pageProps})
-            })
-        }).then(() => {}, (error) => console.error(error))
+        this.navigateToPageAndDisplayChange(pageProps, updatePagesReference)
     }
 
     // one of the files referred from a markup or multiple markups was changed
@@ -152,7 +147,7 @@ class Documentation extends Component {
     // or navigate to the first modified page
     //
     onMultiplePagesUpdate(listOfPageProps) {
-        getAllPagesPromise().then((allPages) => {
+        const updatePagesReference = () => getAllPagesPromise().then((allPages) => {
             listOfPageProps.forEach((newPage) => this.updatePagesReference(allPages, newPage))
         })
 
@@ -161,10 +156,22 @@ class Documentation extends Component {
             currentToc.fileName === newPage.tocItem.fileName)
 
         if (matchingPages.length) {
-            documentationNavigation.navigateToPage(matchingPages[0].tocItem)
+            this.updatePageAndDetectChangePosition(() => {
+                updatePagesReference()
+                this.setState({page: matchingPages[0]})
+            })
         } else {
-            documentationNavigation.navigateToPage(listOfPageProps[0].tocItem)
+            this.navigateToPageAndDisplayChange(listOfPageProps[0], updatePagesReference)
         }
+    }
+
+    navigateToPageAndDisplayChange(pageProps, updatePagesReference) {
+        this.navigateToPageIfRequired(pageProps.tocItem).then(() => {
+            this.updatePageAndDetectChangePosition(() => {
+                updatePagesReference()
+                this.setState({page: pageProps})
+            })
+        }).then(() => {}, (error) => console.error(error))
     }
 
     updatePageAndDetectChangePosition(funcToUpdatePage) {

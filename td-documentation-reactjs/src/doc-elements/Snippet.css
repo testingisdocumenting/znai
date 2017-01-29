@@ -17,3 +17,7 @@
 .wide-screen pre {
     max-width: 100%;
 }
+
+.snippet.__recently-modified {
+    margin-left: auto;
+}

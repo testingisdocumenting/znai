@@ -21,8 +21,10 @@ class PageContentPreviewDiff {
                 continue
             }
 
-            // section is not a content-block as it displays sometimes elements that dont fit specified width
-            if (classes.indexOf("section") !== -1 || classes.indexOf('content-block') !== -1) {
+            // section is not a content-block as it displays sometimes elements that don't fit specified width
+            if (classes.indexOf('snippet') === -1 && (
+                classes.indexOf("section") !== -1 ||
+                classes.indexOf('content-block') !== -1)) {
                 continue
             }
 
