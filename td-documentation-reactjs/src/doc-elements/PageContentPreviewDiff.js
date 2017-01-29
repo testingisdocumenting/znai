@@ -16,11 +16,11 @@ class PageContentPreviewDiff {
                 return null
             }
 
-            if (!an.className) {
+            const classes = (typeof an.className === 'string') ? an.className.split(' ').filter((cn) => cn.length) : []
+            if (! classes.length) {
                 continue
             }
 
-            const classes = an.className.split(' ')
             // section is not a content-block as it displays sometimes elements that dont fit specified width
             if (classes.indexOf("section") !== -1 || classes.indexOf('content-block') !== -1) {
                 continue
