@@ -42,8 +42,10 @@ library.OrderedList = ({delimiter, startNumber, content, idGen}) => <ol classNam
 library.ListItem = ({content, idGen}) => <li><BoundDocElement content={content} idGen={idGen}/></li>
 
 library.Section = ({title, content, idGen}) => (
-        <div className="section content-block" key={title}>
-            <div className="section-title" data-id={idGen.next()}>{title}</div>
+        <div className="section" key={title}>
+            <div className="content-block">
+                <div className="section-title" data-id={idGen.next()}>{title}</div>
+            </div>
             <BoundDocElement content={content} idGen={idGen}/>
         </div>)
 
