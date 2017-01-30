@@ -1,16 +1,14 @@
 package com.twosigma.documentation.server.preview;
 
-import com.twosigma.console.ConsoleOutput;
 import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.Color;
 import com.twosigma.console.ansi.FontStyle;
 import com.twosigma.documentation.html.PageProps;
+import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.utils.JsonUtils;
 import io.vertx.core.Handler;
 import io.vertx.core.http.ServerWebSocket;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -49,6 +47,14 @@ public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
         LinkedHashMap<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "multiplePagesUpdate");
         payload.put("listOfPageProps", listOfPageProps.map(PageProps::toMap).collect(toList()));
+
+        send(payload);
+    }
+
+    public void sendToc(TableOfContents newToc) {
+        LinkedHashMap<String, Object> payload = new LinkedHashMap<>();
+        payload.put("type", "tocUpdate");
+        payload.put("toc", newToc.toListOfMaps());
 
         send(payload);
     }

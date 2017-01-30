@@ -18,7 +18,15 @@ class TableOfContents {
     }
 
     get toc() {
-        return this._toc;
+        return [...this._toc];
+    }
+
+    get first() {
+        return this.tocItems[0]
+    }
+
+    hasTocItem(tocItem) {
+        return this.tocItems.filter((ti) => ti.dirName === tocItem.dirName && ti.fileName === tocItem.fileName).length > 0
     }
 
     nextTocItem(tocItem) {
@@ -36,7 +44,7 @@ class TableOfContents {
         for (let i = this.tocItems.length - 1; i >= 0; i--) {
             const ti = this.tocItems[i]
             if (ti.fileName === tocItem.fileName && ti.dirName === tocItem.dirName) {
-                return (i - 1) >= 0 ? this.tocItems[i -1] : null
+                return (i - 1) >= 0 ? this.tocItems[i - 1] : null
             }
         }
 

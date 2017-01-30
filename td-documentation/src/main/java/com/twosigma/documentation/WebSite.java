@@ -139,7 +139,7 @@ public class WebSite {
         cfg.webResources.forEach(deployer::deploy);
     }
 
-    private void createToc() {
+    public TableOfContents createToc() {
         toc = TableOfContents.fromNestedText(fileTextContent(cfg.tocPath));
         String tocJson = JsonUtils.serialize(toc.toListOfMaps());
 
@@ -147,6 +147,8 @@ public class WebSite {
 
         reactJsNashornEngine.getNashornEngine().bind("tocJson", tocJson);
         reactJsNashornEngine.getNashornEngine().eval("setTocJson(tocJson)");
+
+        return toc;
     }
 
     private void parseMarkups() {

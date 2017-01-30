@@ -28,6 +28,7 @@ class Documentation extends Component {
             tocCollapsed: false,
             tocSelected: false,
             page: this.props.page,
+            toc: tableOfContents.toc,
             selectedTocItem: currentPageLocation}
 
         this.onTocToggle = this.onTocToggle.bind(this)
@@ -39,15 +40,15 @@ class Documentation extends Component {
         this.onPrevPage = this.onPrevPage.bind(this)
         this.onSearchSelection = this.onSearchSelection.bind(this)
         this.onPageUpdate = this.onPageUpdate.bind(this)
+        this.onTocUpdate = this.onTocUpdate.bind(this)
         this.onMultiplePagesUpdate = this.onMultiplePagesUpdate.bind(this)
 
         documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
     }
 
     render() {
-        const toc = tableOfContents.toc
         const {docMeta} = this.props
-        const {page, tocCollapsed, tocSelected} = this.state
+        const {toc, page, tocCollapsed, tocSelected} = this.state
 
         const pageTitle = page.tocItem.pageTitle
 
@@ -57,7 +58,8 @@ class Documentation extends Component {
 
         const preview = docMeta.previewEnabled ? <Preview active={true}
                                                           onPageUpdate={this.onPageUpdate}
-                                                          onMultiplePagesUpdate={this.onMultiplePagesUpdate}/> : null
+                                                          onMultiplePagesUpdate={this.onMultiplePagesUpdate}
+                                                          onTocUpdate={this.onTocUpdate}/> : null
 
         const previewIndicator = <PreviewChangeIndicator targetDom={this.state.lastChangeDataDom}/>
 
@@ -134,12 +136,10 @@ class Documentation extends Component {
     }
 
     navButtonPage(tocItem, className, handler) {
-        const currentTocItem = this.state.page.tocItem
-
-        return (<div className={className} onClick={handler}>{currentTocItem.dirName !== tocItem.dirName ?
-            <span className="next-prev-section-title">{tocItem.sectionTitle} </span> : null}
-            <span className="next-prev-page-title">{tocItem.pageTitle} </span>
-        </div>)
+        return (tocItem ? (<div className={className} onClick={handler}>
+            <span className="next-prev-section-title">{tocItem.sectionTitle} </span>
+            <span className="next-prev-page-title">{tocItem.pageTitle}</span>
+        </div>) : null)
     }
 
     nextPageButton() {
@@ -163,6 +163,14 @@ class Documentation extends Component {
         }
 
         return Promise.resolve(true)
+    }
+
+    onTocUpdate(toc) {
+        tableOfContents.toc = toc
+        this.setState({toc})
+        if (! tableOfContents.hasTocItem(this.state.page.tocItem)) {
+            documentationNavigation.navigateToPage(tableOfContents.first)
+        }
     }
 
     // one markup page was changed and view needs to be updated

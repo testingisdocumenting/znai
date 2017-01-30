@@ -1,18 +1,16 @@
 package com.twosigma.documentation.server.preview;
 
-import java.nio.file.Path;
-import java.util.Collection;
-import java.util.stream.Stream;
-
-import com.twosigma.console.ConsoleOutput;
 import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.WebSite;
 import com.twosigma.documentation.html.HtmlPageAndPageProps;
 import com.twosigma.documentation.html.PageProps;
 import com.twosigma.documentation.structure.TocItem;
 
-import static com.twosigma.console.ansi.Color.*;
+import java.nio.file.Path;
+import java.util.Collection;
+import java.util.stream.Stream;
+
+import static com.twosigma.console.ansi.Color.BLUE;
 
 /**
  * @author mykola
@@ -29,14 +27,13 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     }
 
     @Override
-    public void onTocChange(final Path path) {
-        ConsoleOutputs.out("toc changed: ", path);
-//        previewWebSite.regenerateToc();
-//        previewSocket.sendOpen(Stream.of("/"));
+    public void onTocChange(Path tocPath) {
+        ConsoleOutputs.out("toc changed: ", tocPath);
+        previewSocket.sendToc(previewWebSite.createToc());
     }
 
     @Override
-    public void onMarkupChange(final Path path) {
+    public void onMarkupChange(Path path) {
         ConsoleOutputs.out("md changed: ", path);
         HtmlPageAndPageProps htmlPageAndPageProps = regenerate(path);
 
@@ -47,7 +44,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
         previewSocket.sendPage(htmlPageAndPageProps.getProps());
     }
 
-    private HtmlPageAndPageProps regenerate(final Path markupPath) {
+    private HtmlPageAndPageProps regenerate(Path markupPath) {
         final TocItem tocItem = previewWebSite.tocItemByPath(markupPath);
 
         if (tocItem == null) {
