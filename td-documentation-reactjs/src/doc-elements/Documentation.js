@@ -81,6 +81,10 @@ class Documentation extends Component {
                 <div className="main-panel" onClick={this.onPanelSelect}>
                     <NavBar docMeta={docMeta} pageTitle={pageTitle}/>
                     <elementsLibrary.Page title={pageTitle} content={page.content}/>
+                    <div className="next-prev-buttons content-block">
+                        {this.previousPageButton()}
+                        {this.nextPageButton()}
+                    </div>
                 </div>
             </div>)
     }
@@ -105,20 +109,45 @@ class Documentation extends Component {
         this.setState({tocSelected: false})
     }
 
-    onNextPage() {
+    get nextPageToc() {
         const {page} = this.state
-        const nextTocItem = tableOfContents.nextTocItem(page.tocItem)
-        if (nextTocItem) {
-            documentationNavigation.navigateToPage(nextTocItem)
+        return tableOfContents.nextTocItem(page.tocItem)
+    }
+
+    get prevPageToc() {
+        const {page} = this.state
+        return tableOfContents.prevTocItem(page.tocItem)
+    }
+
+    onNextPage() {
+        const next = this.nextPageToc
+        if (next) {
+            documentationNavigation.navigateToPage(next)
         }
     }
 
     onPrevPage() {
-        const {page} = this.state
-        const prevTocItem = tableOfContents.prevTocItem(page.tocItem)
-        if (prevTocItem) {
-            documentationNavigation.navigateToPage(prevTocItem)
+        const prev = this.prevPageToc
+        if (prev) {
+            documentationNavigation.navigateToPage(prev)
         }
+    }
+
+    navButtonPage(tocItem, className, handler) {
+        const currentTocItem = this.state.page.tocItem
+
+        return (<div className={className} onClick={handler}>{currentTocItem.dirName !== tocItem.dirName ?
+            <span className="next-prev-section-title">{tocItem.sectionTitle} </span> : null}
+            <span className="next-prev-page-title">{tocItem.pageTitle} </span>
+        </div>)
+    }
+
+    nextPageButton() {
+        return this.navButtonPage(this.nextPageToc, "next-button", this.onNextPage)
+    }
+
+    previousPageButton() {
+        return this.navButtonPage(this.prevPageToc, "prev-button", this.onPrevPage)
     }
 
     onSearchSelection(id) {

@@ -144,3 +144,34 @@
     right: 80px;
     top: 20px;
 }
+
+.next-prev-buttons {
+    margin-top: 120px;
+    margin-bottom: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.next-prev-buttons div {
+    padding: 10px 15px;
+    background: #eee;
+    border: 1px #ddd solid;
+}
+
+.next-prev-buttons div:hover {
+    padding: 10px 15px;
+    background: #ddd;
+    border: 1px #eee solid;
+
+    cursor: pointer;
+}
+
+.next-prev-buttons .prev-button {
+}
+
+.next-prev-buttons .next-button {
+}
+
+.next-prev-section-title {
+    font-weight: bold;
+}
