@@ -49,9 +49,9 @@ class TocPanel extends Component {
     }
 
     keyDownHandler(e) {
-        const {selected, onNextPage, onPrevPage} = this.props
+        const {selected, collapsed, onNextPage, onPrevPage} = this.props
 
-        if (! selected) {
+        if (! selected || collapsed) {
             return
         }
 
