@@ -149,7 +149,6 @@
     margin-top: 120px;
     margin-bottom: 80px;
     display: flex;
-    justify-content: space-between;
 }
 
 .next-prev-buttons div {
@@ -167,9 +166,11 @@
 }
 
 .next-prev-buttons .prev-button {
+    margin-right: auto;
 }
 
 .next-prev-buttons .next-button {
+    margin-left: auto;
 }
 
 .next-prev-section-title {
