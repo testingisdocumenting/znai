@@ -3,7 +3,10 @@ package com.twosigma.documentation.structure;
 import com.twosigma.documentation.utils.NameUtils;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
@@ -14,8 +17,7 @@ public class TocItem {
     private String sectionTitle;
     private String pageTitle;
 
-    private TocItem next;
-    private TocItem prev;
+    private List<PageSectionIdTitle> pageSectionIdTitles;
 
     public TocItem(final String dirName, final String fileNameWithoutExtension) {
         this.dirName = dirName;
@@ -23,22 +25,6 @@ public class TocItem {
 
         this.sectionTitle = NameUtils.dashToCamelCaseWithSpaces(dirName);
         this.pageTitle = NameUtils.dashToCamelCaseWithSpaces(fileNameWithoutExtension);
-    }
-
-    public TocItem getNext() {
-        return next;
-    }
-
-    void setNext(final TocItem next) {
-        this.next = next;
-    }
-
-    public TocItem getPrev() {
-        return prev;
-    }
-
-    void setPrev(final TocItem prev) {
-        this.prev = prev;
     }
 
     public String getDirName() {
@@ -57,12 +43,22 @@ public class TocItem {
         return pageTitle;
     }
 
+    public List<PageSectionIdTitle> getPageSectionIdTitles() {
+        return pageSectionIdTitles;
+    }
+
+    public void setPageSectionIdTitles(List<PageSectionIdTitle> pageSectionIdTitles) {
+        this.pageSectionIdTitles = pageSectionIdTitles;
+    }
+
     public Map<String, ?> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("sectionTitle", getSectionTitle());
         result.put("pageTitle", getPageTitle());
         result.put("fileName", getFileNameWithoutExtension());
         result.put("dirName", getDirName());
+        result.put("pageSectionIdTitles", getPageSectionIdTitles().stream().
+                map(PageSectionIdTitle::toMap).collect(toList()));
 
         return result;
     }

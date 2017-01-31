@@ -29,7 +29,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     @Override
     public void onTocChange(Path tocPath) {
         ConsoleOutputs.out("toc changed: ", tocPath);
-        previewSocket.sendToc(previewWebSite.createToc());
+        previewSocket.sendToc(previewWebSite.updateToc());
     }
 
     @Override

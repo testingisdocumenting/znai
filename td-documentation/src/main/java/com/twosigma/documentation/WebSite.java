@@ -100,8 +100,10 @@ public class WebSite {
 
     public void generate() {
         deployResources();
-        createToc();
+        createTopLevelToc();
         parseMarkups();
+        updateTocWithPageSections();
+        deployToc();
         generatePages();
         generateSearchIndex();
     }
@@ -123,6 +125,14 @@ public class WebSite {
         return (paths == null) ? Collections.emptySet() : paths;
     }
 
+
+    public TableOfContents updateToc() {
+        createTopLevelToc();
+        updateTocWithPageSections();
+        deployToc();
+        return toc;
+    }
+
     private void reset() {
         pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, toc, reactJsNashornEngine);
         markupParser = new MarkdownParser(componentsRegistry);
@@ -139,16 +149,27 @@ public class WebSite {
         cfg.webResources.forEach(deployer::deploy);
     }
 
-    public TableOfContents createToc() {
+    private void createTopLevelToc() {
         toc = TableOfContents.fromNestedText(fileTextContent(cfg.tocPath));
+    }
+
+    /**
+     * Table of Contents has a page placement information available in the external resource.
+     * Additional page structure information comes after parsing file. Hence phased approach.
+     */
+    private void updateTocWithPageSections() {
+        forEachPage(((tocItem, page) -> {
+            tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
+        }));
+    }
+
+    private void deployToc() {
         String tocJson = JsonUtils.serialize(toc.toListOfMaps());
 
         deployer.deploy(tocJavaScript, "toc = " + tocJson);
 
         reactJsNashornEngine.getNashornEngine().bind("tocJson", tocJson);
         reactJsNashornEngine.getNashornEngine().eval("setTocJson(tocJson)");
-
-        return toc;
     }
 
     private void parseMarkups() {

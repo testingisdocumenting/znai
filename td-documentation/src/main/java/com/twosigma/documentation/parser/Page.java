@@ -1,9 +1,10 @@
 package com.twosigma.documentation.parser;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import com.twosigma.documentation.parser.docelement.DocElement;
+import com.twosigma.documentation.structure.PageSectionIdTitle;
+import com.twosigma.documentation.utils.NameUtils;
 
 import static com.twosigma.documentation.parser.docelement.DocElementType.SECTION;
 import static java.util.stream.Collectors.toList;
@@ -13,25 +14,30 @@ import static java.util.stream.Collectors.toList;
  */
 public class Page {
     private final DocElement docElement;
-    private final List<String> firstLevelHeadings;
+    private final List<PageSectionIdTitle> pageSectionIdTitles;
 
     public Page(final DocElement docElement) {
         this.docElement = docElement;
-        this.firstLevelHeadings = extractFirstLevelHeadings(docElement);
+        this.pageSectionIdTitles = extractFirstLevelHeadings(docElement);
     }
 
     public DocElement getDocElement() {
         return docElement;
     }
 
-    public Stream<String> getFirstLevelHeadings() {
-        return firstLevelHeadings.stream();
+    public List<PageSectionIdTitle> getPageSectionIdTitles() {
+        return pageSectionIdTitles;
     }
 
-    private List<String> extractFirstLevelHeadings(final DocElement docElement) {
+    private List<PageSectionIdTitle> extractFirstLevelHeadings(final DocElement docElement) {
         return docElement.getContent().stream().
             filter(e -> e.getType().equals(SECTION)).
-            map(e -> e.getProp("title").toString()).
+            map(this::createSectionIdTitle).
             collect(toList());
+    }
+
+    private PageSectionIdTitle createSectionIdTitle(DocElement docElement) {
+        String title = docElement.getProp("title").toString();
+        return new PageSectionIdTitle(title, NameUtils.camelCaseWithSpacesToDashes(title));
     }
 }

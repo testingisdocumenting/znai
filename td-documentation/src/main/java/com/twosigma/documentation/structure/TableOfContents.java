@@ -20,15 +20,7 @@ public class TableOfContents {
     }
 
     public void addTocItem(final String sectionName, final String fileNameWithoutExtension) {
-        TocItem tocItem = new TocItem(sectionName, fileNameWithoutExtension);
-
-        if (! tocItems.isEmpty()) {
-            final TocItem lastTocItem = tocItems.get(tocItems.size() - 1);
-            lastTocItem.setNext(tocItem);
-            tocItem.setPrev(lastTocItem);
-        }
-
-        tocItems.add(tocItem);
+        tocItems.add(new TocItem(sectionName, fileNameWithoutExtension));
     }
 
     public List<TocItem> getTocItems() {
