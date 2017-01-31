@@ -131,7 +131,7 @@ const TestData = {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "You can also specsify a language. That maybe useful if there is the snippet is not large enough for auto detection.",
+                                    "text": "You can also specify a language. That maybe useful if there is the snippet is not large enough for auto detection.",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -139,8 +139,8 @@ const TestData = {
                         {
                             "lang": "javascript",
                             "lineNumber": "",
-                            "snippet": "import React,1 {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n",
-                            "maxLineLength": 39,
+                            "snippet": "import React, {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n",
+                            "maxLineLength": 38,
                             "type": "Snippet"
                         },
                         {
@@ -159,8 +159,8 @@ const TestData = {
                                 "numberOfLines": 9.0,
                                 "lang": "markdown",
                                 "title": "markdown",
-                                "snippet": "```javascript\nimport React,1 {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n```",
-                                "maxLineLength": 39
+                                "snippet": "```javascript\nimport React, {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n```",
+                                "maxLineLength": 38
                             },
                             "type": "CustomComponent"
                         },
@@ -251,7 +251,7 @@ const TestData = {
                     ]
                 },
                 {
-                    "title": "Wide Code2",
+                    "title": "Wide Code",
                     "type": "Section",
                     "content": [
                         {
@@ -385,19 +385,25 @@ const TestData = {
                 "sectionTitle": "Features",
                 "pageTitle": "Code Snippets",
                 "fileName": "code-snippets",
-                "dirName": "features"
-            },
-            "nextTocItem": {
-                "sectionTitle": "Features",
-                "pageTitle": "Proxy",
-                "fileName": "proxy",
-                "dirName": "features"
-            },
-            "prevTocItem": {
-                "sectionTitle": "Rationale",
-                "pageTitle": "First Code Base",
-                "fileName": "first-code-base",
-                "dirName": "rationale"
+                "dirName": "features",
+                "pageSectionIdTitles": [
+                    {
+                        "title": "Auto Highlight",
+                        "id": "auto-highlight"
+                    },
+                    {
+                        "title": "Specifying Language",
+                        "id": "specifying-language"
+                    },
+                    {
+                        "title": "Wide Code",
+                        "id": "wide-code"
+                    },
+                    {
+                        "title": "From File",
+                        "id": "from-file"
+                    }
+                ]
             },
             "renderContext": {
                 "nestLevel": 1

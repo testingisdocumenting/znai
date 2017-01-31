@@ -64,6 +64,7 @@
 
 .toc-item {
     padding-left: 10px;
+    margin-left: 3px;
 }
 
 .toc-item:hover {
@@ -71,12 +72,26 @@
 }
 
 .toc-item.selected {
-    background: #eee;
+    border-left: 3px solid #eee;
+    margin-left: 0;
 }
 
-/*.toc-panel.selected .toc-item.selected {*/
-    /*background: #3060aa;*/
-/*}*/
+.toc-menu .page-sections {
+    padding-left: 20px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.toc-menu .page-sections .page-section {
+    margin-left: 3px;
+    padding-left: 3px;
+}
+
+
+.toc-menu .page-sections .page-section.active {
+    border-left: 3px solid #1020ff;
+    margin-left: 0;
+}
 
 .toc-panel.collapsed {
     width: 0;

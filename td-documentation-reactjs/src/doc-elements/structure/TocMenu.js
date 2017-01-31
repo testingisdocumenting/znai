@@ -1,26 +1,42 @@
-import React from 'react';
+import React from 'react'
 
-const Item = ({pageTitle, dirName, fileName, isSelected, onClickHandler}) => {
-    const className = "toc-item " + (isSelected ? "selected" : "");
+const PageSections = ({pageSectionIdTitles, selected}) => {
+    return (<div className="page-sections">
+        {pageSectionIdTitles.map((idTitle, idx) => {
+            const isSelected = idTitle.id === selected.pageSectionId
+            const className = "page-section" + (isSelected ? " active" : "")
+            return (<div className={className} key={idx}>{idTitle.title}</div>)
+        })
+        }
+    </div>)
+}
+
+const Item = ({item, selected, isSelected, onClickHandler}) => {
+    const className = "toc-item " + (isSelected ? "selected" : "")
     return (
         <div className={className} onClick={
-            () => onClickHandler(dirName, fileName)}>{pageTitle}</div>
+            () => onClickHandler(item.dirName, item.fileName)}>{item.pageTitle}
+            {isSelected ? <PageSections pageSectionIdTitles={item.pageSectionIdTitles}
+                                        selected={selected}/> : null}
+        </div>
     );
 };
 
-const Section = ({sectionTitle, dirName, items, selected, onClickHandler}) => {
+const Section = ({section, selected, onClickHandler}) => {
     return (<div className="toc-section">
-        <div className="title">{sectionTitle}</div>
-        {items.map((item) => <Item key={item.fileName}
-                                   sectionTitle={sectionTitle}
-                                   dirName={dirName}
-                                   isSelected={dirName === selected.dirName && item.fileName === selected.fileName}
-                                   onClickHandler={onClickHandler} {...item} />)}
+        <div className="title">{section.sectionTitle}</div>
+        {section.items.map((item) => <Item key={item.fileName}
+                                           item={item}
+                                           selected={selected}
+                                           isSelected={section.dirName === selected.dirName && item.fileName === selected.fileName}
+                                           onClickHandler={onClickHandler} />)}
     </div>);
 };
 
 const TocMenu = ({toc, selected, onClickHandler}) => {
-    selected = selected || {dirName: "", fileName: ""};
+    selected = selected || {dirName: "", fileName: ""}
+
+    console.log(selected)
 
     return (
         <div className="toc-menu">
@@ -28,7 +44,7 @@ const TocMenu = ({toc, selected, onClickHandler}) => {
                 <Section key={sectionEntry.sectionTitle}
                     selected={selected}
                     onClickHandler={onClickHandler}
-                    {...sectionEntry} />)}
+                    section={sectionEntry} />)}
         </div>
     );
 };

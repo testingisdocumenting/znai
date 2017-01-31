@@ -21,15 +21,18 @@ class Documentation extends Component {
     constructor(props) {
         super(props)
 
+        const {page} = this.props
         this.searchPromise = getSearchPromise()
 
         const currentPageLocation = documentationNavigation.currentDirNameAndFileName()
+
+        const selectedTocItem = {...currentPageLocation, pageSectionId: page.tocItem.pageSectionIdTitles[0].id}
         this.state = {
             tocCollapsed: false,
             tocSelected: false,
-            page: this.props.page,
+            page: page,
             toc: tableOfContents.toc,
-            selectedTocItem: currentPageLocation}
+            selectedTocItem: selectedTocItem}
 
         this.onTocToggle = this.onTocToggle.bind(this)
         this.onSearchClick = this.onSearchClick.bind(this)
@@ -42,13 +45,30 @@ class Documentation extends Component {
         this.onPageUpdate = this.onPageUpdate.bind(this)
         this.onTocUpdate = this.onTocUpdate.bind(this)
         this.onMultiplePagesUpdate = this.onMultiplePagesUpdate.bind(this)
+        this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
 
         documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
     }
 
+    componentDidMount() {
+        // server side rendering guard
+        if (window.addEventListener) {
+            this.mainPanelDom.addEventListener('scroll', this.updateCurrentPageSection)
+        }
+
+        this.extractPageSectionNodes()
+    }
+
+    componentWillUnmount() {
+        // server side rendering guard
+        if (window.removeEventListener) {
+            this.mainPanelDom.removeEventListener('scroll', this.updateCurrentPageSection)
+        }
+    }
+
     render() {
         const {docMeta} = this.props
-        const {toc, page, tocCollapsed, tocSelected} = this.state
+        const {toc, page, selectedTocItem, tocCollapsed, tocSelected} = this.state
 
         const pageTitle = page.tocItem.pageTitle
 
@@ -68,7 +88,7 @@ class Documentation extends Component {
                 <div className="side-panel" onClick={this.onTocSelect}>
                     <TocPanel toc={toc} collapsed={tocCollapsed} selected={tocSelected}
                               onToggle={this.onTocToggle}
-                              selectedItem={this.state.selectedTocItem}
+                              selectedItem={selectedTocItem}
                               onNextPage={this.onNextPage}
                               onPrevPage={this.onPrevPage}/>
                 </div>
@@ -94,6 +114,7 @@ class Documentation extends Component {
     changePage(newStateWithNewPage) {
         this.setState(newStateWithNewPage)
         this.mainPanelDom.scrollTop = 0
+        this.extractPageSectionNodes()
     }
 
     onSearchClick() {
@@ -258,6 +279,31 @@ class Documentation extends Component {
             this.changePage({page: matchingPages[0], selectedTocItem: currentPageLocation, lastChangeDataDom: null})
             return true
         })
+    }
+
+    extractPageSectionNodes() {
+        this.pageSectionNodes = [...document.querySelectorAll(".section-title")]
+    }
+
+    updateCurrentPageSection() {
+        const pageSections = this.state.page.tocItem.pageSectionIdTitles
+        let sectionTitles = this.pageSectionNodes.map((n, idx) => { return {idTitle: pageSections[idx], rect: n.getBoundingClientRect()}})
+        const height = window.innerHeight
+
+        const withVisibleTitle = sectionTitles.filter(st => {
+            const rect = st.rect
+            return rect.top > -10 && rect.top < height
+        })
+
+        const closestToTopZero = () => {
+            let belowZero = sectionTitles.filter(st => st.rect.top < 0)
+            return belowZero.length ? belowZero[belowZero.length - 1] : sectionTitles[0]
+        }
+
+        const current = withVisibleTitle.length ? withVisibleTitle[0] : closestToTopZero()
+
+        const selectedTocItem = {...this.state.selectedTocItem, pageSectionId: current.idTitle.id}
+        this.setState({selectedTocItem})
     }
 }
 
