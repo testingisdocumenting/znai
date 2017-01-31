@@ -80,7 +80,7 @@ class Documentation extends Component {
 
                 {searchPopup}
 
-                <div className="main-panel" onClick={this.onPanelSelect}>
+                <div className="main-panel" onClick={this.onPanelSelect} ref={panelDom => this.mainPanelDom = panelDom}>
                     <NavBar docMeta={docMeta} pageTitle={pageTitle}/>
                     <elementsLibrary.Page title={pageTitle} content={page.content}/>
                     <div className="next-prev-buttons content-block">
@@ -89,6 +89,11 @@ class Documentation extends Component {
                     </div>
                 </div>
             </div>)
+    }
+
+    changePage(newStateWithNewPage) {
+        this.setState(newStateWithNewPage)
+        this.mainPanelDom.scrollTop = 0
     }
 
     onSearchClick() {
@@ -199,7 +204,7 @@ class Documentation extends Component {
         if (matchingPages.length) {
             this.updatePageAndDetectChangePosition(() => {
                 updatePagesReference()
-                this.setState({page: matchingPages[0]})
+                this.changePage({page: matchingPages[0]})
             })
         } else {
             this.navigateToPageAndDisplayChange(listOfPageProps[0], updatePagesReference)
@@ -210,7 +215,7 @@ class Documentation extends Component {
         this.navigateToPageIfRequired(pageProps.tocItem).then(() => {
             this.updatePageAndDetectChangePosition(() => {
                 updatePagesReference()
-                this.setState({page: pageProps})
+                this.changePage({page: pageProps})
             })
         }).then(() => {}, (error) => console.error(error))
     }
@@ -250,7 +255,7 @@ class Documentation extends Component {
                 return
             }
 
-            this.setState({page: matchingPages[0], selectedTocItem: currentPageLocation, lastChangeDataDom: null})
+            this.changePage({page: matchingPages[0], selectedTocItem: currentPageLocation, lastChangeDataDom: null})
             return true
         })
     }
