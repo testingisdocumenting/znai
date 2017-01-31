@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import Promise from "promise"
 
-import NavBar from './NavBar'
+import NavBar from './structure/NavBar'
 import TocPanel from './structure/TocPanel'
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'

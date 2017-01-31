@@ -1,6 +1,6 @@
 import React from 'react'
-import DocElement from './DocElement'
-import Snippet from './Snippet'
+import DocElement from './default-elements/DocElement'
+import Snippet from './default-elements/Snippet'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import GraphVizFlow from './graphviz/GraphVizFlow'
 
