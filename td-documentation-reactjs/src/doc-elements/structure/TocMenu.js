@@ -36,8 +36,6 @@ const Section = ({section, selected, onClickHandler}) => {
 const TocMenu = ({toc, selected, onClickHandler}) => {
     selected = selected || {dirName: "", fileName: ""}
 
-    console.log(selected)
-
     return (
         <div className="toc-menu">
             {toc.map((sectionEntry) =>

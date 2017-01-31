@@ -102,7 +102,9 @@ class Documentation extends Component {
 
                 <div className="main-panel" onClick={this.onPanelSelect} ref={panelDom => this.mainPanelDom = panelDom}>
                     <NavBar docMeta={docMeta} pageTitle={pageTitle}/>
-                    <elementsLibrary.Page title={pageTitle} content={page.content}/>
+                    <elementsLibrary.Page tocItem={page.tocItem}
+                                          content={page.content}
+                                          previewEnabled={docMeta.previewEnabled}/>
                     <div className="next-prev-buttons content-block">
                         {this.previousPageButton()}
                         {this.nextPageButton()}
