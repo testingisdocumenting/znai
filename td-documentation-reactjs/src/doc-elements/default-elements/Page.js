@@ -11,8 +11,8 @@ const Page = (elementsLibrary) => class Page extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         return this.props.previewEnabled ||
-            (this.props.tocItem.dirName !== nextProps.tocItem.dirName &&
-            this.props.tocItem.fileName !== nextProps.tocItem.fileName)
+            this.props.tocItem.dirName !== nextProps.tocItem.dirName ||
+            this.props.tocItem.fileName !== nextProps.tocItem.fileName
     }
 }
 
