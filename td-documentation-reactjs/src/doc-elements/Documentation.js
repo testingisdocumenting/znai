@@ -56,7 +56,7 @@ class Documentation extends Component {
             this.mainPanelDom.addEventListener('scroll', this.updateCurrentPageSection)
         }
 
-        this.extractPageSectionNodes()
+        this.onPageLoad()
     }
 
     componentWillUnmount() {
@@ -115,8 +115,13 @@ class Documentation extends Component {
 
     changePage(newStateWithNewPage) {
         this.setState(newStateWithNewPage)
+        this.onPageLoad()
+    }
+
+    onPageLoad() {
         this.mainPanelDom.scrollTop = 0
         this.extractPageSectionNodes()
+        this.updateCurrentPageSection()
     }
 
     onSearchClick() {
