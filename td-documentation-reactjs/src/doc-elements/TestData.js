@@ -56,15 +56,17 @@ const TestData = {
 
     documentation: {
         "docMeta": {
+            "logo": "img/two-sigma-logo.png",
             "type": "User Guide",
             "title": "MUUG",
-            "previewEnabled": true
+            "previewEnabled": false
         },
         "page": {
             "type": "Page",
             "content": [
                 {
                     "title": "Auto Highlight",
+                    "id": "auto-highlight",
                     "type": "Section",
                     "content": [
                         {
@@ -125,6 +127,7 @@ const TestData = {
                 },
                 {
                     "title": "Specifying Language",
+                    "id": "specifying-language",
                     "type": "Section",
                     "content": [
                         {
@@ -252,6 +255,7 @@ const TestData = {
                 },
                 {
                     "title": "Wide Code",
+                    "id": "wide-code",
                     "type": "Section",
                     "content": [
                         {
@@ -281,6 +285,7 @@ const TestData = {
                 },
                 {
                     "title": "From File",
+                    "id": "from-file",
                     "type": "Section",
                     "content": [
                         {

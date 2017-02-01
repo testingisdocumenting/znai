@@ -1,5 +1,7 @@
 package com.twosigma.documentation.structure;
 
+import com.twosigma.documentation.utils.NameUtils;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -10,9 +12,9 @@ public class PageSectionIdTitle {
     private String title;
     private String id;
 
-    public PageSectionIdTitle(String title, String id) {
+    public PageSectionIdTitle(String title) {
         this.title = title;
-        this.id = id;
+        this.id = NameUtils.camelCaseWithSpacesToDashes(title);
     }
 
     public String getTitle() {

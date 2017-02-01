@@ -38,6 +38,6 @@ public class Page {
 
     private PageSectionIdTitle createSectionIdTitle(DocElement docElement) {
         String title = docElement.getProp("title").toString();
-        return new PageSectionIdTitle(title, NameUtils.camelCaseWithSpacesToDashes(title));
+        return new PageSectionIdTitle(title);
     }
 }

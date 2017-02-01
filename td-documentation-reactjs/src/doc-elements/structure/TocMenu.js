@@ -5,7 +5,9 @@ const PageSections = ({pageSectionIdTitles, selected}) => {
         {pageSectionIdTitles.map((idTitle, idx) => {
             const isSelected = idTitle.id === selected.pageSectionId
             const className = "page-section" + (isSelected ? " active" : "")
-            return (<div className={className} key={idx}>{idTitle.title}</div>)
+            const href = "#" + idTitle.id
+
+            return (<div className={className} key={idx}><a href={href}>{idTitle.title}</a></div>)
         })
         }
     </div>)
@@ -14,8 +16,8 @@ const PageSections = ({pageSectionIdTitles, selected}) => {
 const Item = ({item, selected, isSelected, onClickHandler}) => {
     const className = "toc-item " + (isSelected ? "selected" : "")
     return (
-        <div className={className} onClick={
-            () => onClickHandler(item.dirName, item.fileName)}>{item.pageTitle}
+        <div className={className}>
+            <span onClick={ () => onClickHandler(item.dirName, item.fileName)}>{item.pageTitle}</span>
             {isSelected ? <PageSections pageSectionIdTitles={item.pageSectionIdTitles}
                                         selected={selected}/> : null}
         </div>

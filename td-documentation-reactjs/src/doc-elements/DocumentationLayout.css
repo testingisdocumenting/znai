@@ -78,13 +78,17 @@
 
 .toc-menu .page-sections {
     padding-left: 20px;
-    color: #aaa;
     font-size: 12px;
 }
 
 .toc-menu .page-sections .page-section {
     margin-left: 3px;
     padding-left: 3px;
+}
+
+.toc-menu .page-sections a {
+    color: #aaa;
+    text-decoration: none;
 }
 
 

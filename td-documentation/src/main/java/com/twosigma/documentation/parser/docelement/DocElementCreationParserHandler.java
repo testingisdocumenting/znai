@@ -9,6 +9,7 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
 import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.parser.ParserHandler;
+import com.twosigma.documentation.structure.PageSectionIdTitle;
 import com.twosigma.utils.CollectionUtils;
 import com.twosigma.utils.StringUtils;
 
@@ -43,7 +44,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSectionStart(String title) {
-        start(DocElementType.SECTION, "title", title);
+        start(DocElementType.SECTION, "title", title, "id", new PageSectionIdTitle(title).getId());
     }
 
     @Override

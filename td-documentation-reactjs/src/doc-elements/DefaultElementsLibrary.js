@@ -31,13 +31,15 @@ library.OrderedList = ({delimiter, startNumber, content}) => <ol className="cont
 
 library.ListItem = ({content}) => <li><BoundDocElement content={content}/></li>
 
-library.Section = ({title, content}) => (
+library.Section = ({id, title, content}) => {
+    return (
         <div className="section" key={title}>
             <div className="content-block">
-                <div className="section-title">{title}</div>
+                <div className="section-title" id={id}>{title}</div>
             </div>
             <BoundDocElement content={content}/>
         </div>)
+}
 
 library.CustomComponent = ({componentName, componentProps}) => {
     const Component = library[componentName]
