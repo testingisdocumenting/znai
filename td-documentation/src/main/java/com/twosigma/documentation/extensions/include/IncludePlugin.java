@@ -1,5 +1,6 @@
 package com.twosigma.documentation.extensions.include;
 
+import com.twosigma.documentation.AuxiliaryFile;
 import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 
@@ -21,7 +22,7 @@ public interface IncludePlugin {
 
     ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams);
 
-    default Stream<Path> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    default Stream<AuxiliaryFile> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
         return Stream.empty();
     }
 

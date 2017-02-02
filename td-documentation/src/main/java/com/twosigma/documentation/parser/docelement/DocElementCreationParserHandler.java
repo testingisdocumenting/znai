@@ -8,6 +8,7 @@ import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
 import com.twosigma.documentation.extensions.ReactComponent;
+import com.twosigma.documentation.AuxiliaryFile;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.structure.PageSectionIdTitle;
 import com.twosigma.utils.CollectionUtils;
@@ -19,7 +20,7 @@ import com.twosigma.utils.StringUtils;
 public class DocElementCreationParserHandler implements ParserHandler {
     private final ComponentsRegistry componentsRegistry;
     private Path path;
-    private List<Path> fileMarkupDependsOn;
+    private List<AuxiliaryFile> auxiliaryFiles;
 
     private List<DocElement> paragraphs;
 
@@ -30,7 +31,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
         this.componentsRegistry = componentsRegistry;
         this.path = path;
         this.paragraphs = new ArrayList<>();
-        this.fileMarkupDependsOn = new ArrayList<>();
+        this.auxiliaryFiles = new ArrayList<>();
 
         this.docElement = new DocElement("page");
         this.elementsStack = new ArrayDeque<>();
@@ -41,8 +42,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
         return docElement;
     }
 
-    public List<Path> getFileMarkupDependsOn() {
-        return fileMarkupDependsOn;
+    public List<AuxiliaryFile> getAuxiliaryFiles() {
+        return auxiliaryFiles;
     }
 
     @Override
@@ -149,6 +150,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onImage(String title, String destination, String alt) {
         append(DocElementType.IMAGE, "title", title, "destination", destination, "alt", alt, "inlined", true);
+
+        if (! destination.startsWith("http")) {
+            auxiliaryFiles.add(AuxiliaryFile.runTime(componentsRegistry.includeResourceResolver().fullPath(destination)));
+        }
     }
 
     @Override
@@ -169,7 +174,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
             IncludeParams includeParams = new IncludeParams(value);
             ReactComponent reactComponent = includePlugin.process(componentsRegistry, path, includeParams);
 
-            includePlugin.filesPluginDependsOn(componentsRegistry, includeParams).forEach(fileMarkupDependsOn::add);
+            includePlugin.filesPluginDependsOn(componentsRegistry, includeParams).forEach(auxiliaryFiles::add);
 
             DocElement customComponent = new DocElement(DocElementType.CUSTOM_COMPONENT);
             customComponent.addProp("componentName", reactComponent.getName());
@@ -187,7 +192,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     private void convertParagraphWithSingleImageToWideImage(DocElement paragraph) {
-        if (paragraph.getContent().size() > 1) {
+        if (paragraph.getContent().size() > 1 || paragraph.getContent().size() == 0) {
             return;
         }
 

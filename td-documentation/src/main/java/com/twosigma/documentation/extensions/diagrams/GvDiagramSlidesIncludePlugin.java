@@ -1,9 +1,6 @@
 package com.twosigma.documentation.extensions.diagrams;
 
-import com.twosigma.diagrams.graphviz.GraphvizDiagram;
-import com.twosigma.diagrams.graphviz.GraphvizEngine;
-import com.twosigma.diagrams.graphviz.InteractiveCmdGraphviz;
-import com.twosigma.diagrams.graphviz.meta.GraphvizShapeConfig;
+import com.twosigma.documentation.AuxiliaryFile;
 import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
@@ -13,11 +10,8 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.utils.NameUtils;
-import com.twosigma.utils.JsonUtils;
-import com.twosigma.utils.ResourceUtils;
 
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +21,7 @@ import java.util.stream.Stream;
  * @author mykola
  */
 public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
-    private List<Path> filesMarkupDependsOn;
+    private List<AuxiliaryFile> auxiliaryFiles;
     private Path diagramPath;
     private Path slidesPath;
 
@@ -58,7 +52,7 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
         MarkupDiagramSlides markupSlides = new MarkupDiagramSlides(parser);
         DiagramSlides diagramSlides = markupSlides.create(markupPath, slidesContent);
 
-        filesMarkupDependsOn = markupSlides.getFilesMarkupDependsOn();
+        auxiliaryFiles = markupSlides.getAuxiliaryFiles();
 
         Map<String, Object> props = new LinkedHashMap<>();
 
@@ -70,8 +64,10 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public Stream<Path> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
-        return Stream.concat(filesMarkupDependsOn.stream(), Stream.of(diagramPath, slidesPath));
+    public Stream<AuxiliaryFile> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+        return Stream.concat(auxiliaryFiles.stream(), Stream.of(
+                AuxiliaryFile.builtTime(diagramPath),
+                AuxiliaryFile.builtTime(slidesPath)));
     }
 
     @Override

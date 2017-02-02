@@ -1,5 +1,6 @@
 package com.twosigma.documentation.extensions.include;
 
+import com.twosigma.documentation.AuxiliaryFile;
 import com.twosigma.documentation.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.parser.docelement.DocElementType;
@@ -43,8 +44,9 @@ public class TextFileIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public Stream<Path> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
-        return Stream.of(componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam()));
+    public Stream<AuxiliaryFile> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+        return Stream.of(AuxiliaryFile.builtTime(
+                componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam())));
     }
 
     private String extractText(String text, IncludeParamsOpts opts) {

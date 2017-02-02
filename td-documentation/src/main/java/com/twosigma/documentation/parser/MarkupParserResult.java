@@ -1,5 +1,6 @@
 package com.twosigma.documentation.parser;
 
+import com.twosigma.documentation.AuxiliaryFile;
 import com.twosigma.documentation.parser.docelement.DocElement;
 
 import java.nio.file.Path;
@@ -10,18 +11,18 @@ import java.util.List;
  */
 public class MarkupParserResult {
     private DocElement docElement;
-    private List<Path> filesMarkupDependsOn;
+    private List<AuxiliaryFile> auxiliaryFiles;
 
-    public MarkupParserResult(DocElement docElement, List<Path> filesMarkupDependsOn) {
+    public MarkupParserResult(DocElement docElement, List<AuxiliaryFile> auxiliaryFiles) {
         this.docElement = docElement;
-        this.filesMarkupDependsOn = filesMarkupDependsOn;
+        this.auxiliaryFiles = auxiliaryFiles;
     }
 
     public DocElement getDocElement() {
         return docElement;
     }
 
-    public List<Path> getFilesMarkupDependsOn() {
-        return filesMarkupDependsOn;
+    public List<AuxiliaryFile> getAuxiliaryFiles() {
+        return auxiliaryFiles;
     }
 }

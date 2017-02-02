@@ -1,5 +1,6 @@
 package com.twosigma.documentation.extensions.diagrams;
 
+import com.twosigma.documentation.AuxiliaryFile;
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
 import com.twosigma.documentation.extensions.include.RelativeToFileAndRootResourceResolver;
 import com.twosigma.documentation.parser.MarkdownParser;
@@ -39,8 +40,8 @@ public class MarkupDiagramSlides {
         return diagramSlides;
     }
 
-    public List<Path> getFilesMarkupDependsOn() {
-        return parserResult.getFilesMarkupDependsOn();
+    public List<AuxiliaryFile> getAuxiliaryFiles() {
+        return parserResult.getAuxiliaryFiles();
     }
 
     private void parse(Path path, String markupContent) {

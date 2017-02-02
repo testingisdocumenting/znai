@@ -16,6 +16,8 @@ import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
 import com.twosigma.utils.JsonUtils;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -34,7 +36,7 @@ public class WebSite {
     private Configuration cfg;
 
     private Map<TocItem, Page> pageByTocItem;
-    private Map<Path, Set<TocItem>> tocItemsByAuxiliaryFile;
+    private Map<AuxiliaryFile, Set<TocItem>> tocItemsByAuxiliaryFile;
 
     private TableOfContents toc;
     private List<PageProps> allPagesProps;
@@ -106,6 +108,7 @@ public class WebSite {
         deployToc();
         generatePages();
         generateSearchIndex();
+        deployAuxiliaryFiles();
     }
 
     public TocItem tocItemByPath(Path path) {
@@ -164,7 +167,7 @@ public class WebSite {
     }
 
     private void deployToc() {
-        String tocJson = JsonUtils.serialize(toc.toListOfMaps());
+        String tocJson = JsonUtils.serializePrettyPrint(toc.toListOfMaps());
 
         deployer.deploy(tocJavaScript, "toc = " + tocJson);
 
@@ -184,7 +187,7 @@ public class WebSite {
             resetPlugins(markupPath);
 
             MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
-            updateFilesAssociation(tocItem, parserResult.getFilesMarkupDependsOn());
+            updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
 
             final Page page = new Page(parserResult.getDocElement());
             pageByTocItem.put(tocItem, page);
@@ -196,7 +199,7 @@ public class WebSite {
     // each markup file may refer other files like code snippets or diagrams
     // we maintain dependency between them so we know which one triggers what page refresh during preview mode
     //
-    private void updateFilesAssociation(TocItem tocItem, List<Path> auxiliaryFiles) {
+    private void updateFilesAssociation(TocItem tocItem, List<AuxiliaryFile> auxiliaryFiles) {
         auxiliaryFiles.forEach((af) -> {
             Set<TocItem> tocItems = tocItemsByAuxiliaryFile.computeIfAbsent(af, k -> new HashSet<>());
             tocItems.add(tocItem);
@@ -249,6 +252,21 @@ public class WebSite {
             return htmlAndProps;
         } catch (Exception e) {
             throw new RuntimeException("Error during rendering of " + tocItem.getFileNameWithoutExtension(), e);
+        }
+    }
+
+    private void deployAuxiliaryFiles() {
+        tocItemsByAuxiliaryFile.keySet().stream().filter(AuxiliaryFile::isRequiresDeployment)
+                .forEach(this::deployAuxiliaryFile);
+    }
+
+    private void deployAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
+        Path origin = auxiliaryFile.getPath().toAbsolutePath();
+        Path relative = cfg.tocPath.getParent().relativize(origin);
+        try {
+            deployer.deploy(relative, Files.readAllBytes(origin));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

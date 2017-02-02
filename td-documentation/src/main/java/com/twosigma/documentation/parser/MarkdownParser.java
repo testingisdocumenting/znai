@@ -4,13 +4,11 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 import com.twosigma.documentation.ComponentsRegistry;
-import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
 
 import com.twosigma.documentation.parser.commonmark.CommonMarkExtension;
 import com.twosigma.documentation.parser.commonmark.include.IncludeNode;
-import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.parser.docelement.DocElementCreationParserHandler;
 
 /**
@@ -40,7 +38,7 @@ public class MarkdownParser implements MarkupParser {
 
         parserHandler.onParsingEnd();
 
-        return new MarkupParserResult(parserHandler.getDocElement(), parserHandler.getFileMarkupDependsOn());
+        return new MarkupParserResult(parserHandler.getDocElement(), parserHandler.getAuxiliaryFiles());
     }
 
     private static class DocElementVisitor extends AbstractVisitor {
