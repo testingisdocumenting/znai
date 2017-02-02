@@ -46,6 +46,19 @@ pre {
     align-items: center;
 }
 
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    /*border-top: 1px solid #ccc;*/
+    /*border-bottom: 1px solid #ccc;*/
+}
+
 .__recently-modified {
     border-left: 5px solid #6060f0;
     padding-left: 5px;

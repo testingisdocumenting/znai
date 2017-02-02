@@ -89,6 +89,10 @@ const TestData = {
                                 {
                                     "text": "you code will be auto highlighted.",
                                     "type": "SimpleText"
+                                },
+                                {
+                                    "type": "Image",
+                                    "destination": "url/of/image"
                                 }
                             ]
                         },

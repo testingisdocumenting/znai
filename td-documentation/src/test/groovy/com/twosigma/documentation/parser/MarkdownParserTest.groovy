@@ -1,13 +1,16 @@
 package com.twosigma.documentation.parser
 
-import com.twosigma.documentation.extensions.include.TestResourceResolver
+import com.twosigma.documentation.TestComponentsRegistry
 import org.junit.Test
+
+import java.nio.file.Paths
 
 /**
  * @author mykola
  */
 class MarkdownParserTest {
-    static final MarkupParser parser = new MarkdownParser(new TestResourceResolver())
+    static final MarkupParser parser = new MarkdownParser(new TestComponentsRegistry())
+
     private List<Map> content
 
     @Test
@@ -79,8 +82,14 @@ world""")
                 [[text: 'hello', type: 'SimpleText'], [type: 'HardLineBreak'], [text: 'world', type: 'SimpleText']]]]
     }
 
+    @Test
+    void "image"() {
+        parse("![alt text](image/url \"custom title\")")
+        assert content == [[type: 'Paragraph', content:[[title: "custom title", destination: 'image/url', alt: 'alt text', type: 'Image']]]]
+    }
+
     private void parse(String markdown) {
-        def docElement = parser.parse(markdown)
-        content = docElement.getContent().collect { it.toMap() }
+        def parseResult = parser.parse(Paths.get("test.md"), markdown)
+        content = parseResult.docElement.getContent().collect { it.toMap() }
     }
 }

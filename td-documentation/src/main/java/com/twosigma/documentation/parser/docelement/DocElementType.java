@@ -14,6 +14,7 @@ public class DocElementType {
     public static final String BLOCK_QUOTE = "BlockQuote";
     public static final String SIMPLE_TEXT = "SimpleText";
     public static final String LINK = "Link";
+    public static final String IMAGE = "Image";
     public static final String SNIPPET = "Snippet";
     public static final String SOFT_LINE_BREAK = "SoftLineBreak";
     public static final String HARD_LINE_BREAK = "HardLineBreak";

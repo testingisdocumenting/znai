@@ -143,6 +143,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onImage(String title, String destination, String alt) {
+        append(DocElementType.IMAGE, "title", title, "destination", destination, "alt", alt);
+    }
+
+    @Override
     public void onSnippet(String lang, String lineNumber, String snippet) {
         append(DocElementType.SNIPPET, "lang", lang, "lineNumber", lineNumber, "snippet", snippet,
                 "maxLineLength", StringUtils.maxLineLength(snippet));

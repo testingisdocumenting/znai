@@ -119,13 +119,19 @@ public class MarkdownParser implements MarkupParser {
         }
 
         @Override
-        public void visit(final CustomBlock customBlock) {
+        public void visit(CustomBlock customBlock) {
             if (customBlock instanceof IncludeNode) {
                 final IncludeNode includeNode = (IncludeNode) customBlock;
                 parserHandler.onInclude(includeNode.getId(), includeNode.getValue());
             } else {
                 super.visit(customBlock);
             }
+        }
+
+        @Override
+        public void visit(Image image) {
+            Node firstChild = image.getFirstChild();
+            parserHandler.onImage(image.getTitle(), image.getDestination(), ((Text) firstChild).getLiteral());
         }
 
         @Override

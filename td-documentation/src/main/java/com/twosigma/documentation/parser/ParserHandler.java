@@ -27,6 +27,7 @@ public interface ParserHandler {
     void onBlockQuoteEnd();
     void onSimpleText(String value);
     void onLink(String label, String anchor);
+    void onImage(String title, String destination, String alt);
     void onSnippet(String lang, String lineNumber, String snippet);
     void onThematicBreak();
     void onInclude(String pluginId, String value); // TODO custom values
