@@ -59,6 +59,10 @@ pre {
     /*border-bottom: 1px solid #ccc;*/
 }
 
+.image.inlined {
+    display: inline-block;
+}
+
 .__recently-modified {
     border-left: 5px solid #6060f0;
     padding-left: 5px;

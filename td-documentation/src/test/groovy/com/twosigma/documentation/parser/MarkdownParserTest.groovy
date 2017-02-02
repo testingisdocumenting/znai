@@ -83,9 +83,20 @@ world""")
     }
 
     @Test
-    void "image"() {
+    void "inlined image"() {
+        parse("text ![alt text](image/url \"custom title\") another text")
+        assert content == [[type: 'Paragraph', content:[
+                [text: "text " , type: "SimpleText"],
+                [title: "custom title", destination: 'image/url', alt: 'alt text', type: 'Image', inlined: true],
+                [text: " another text" , type: "SimpleText"]]]]
+    }
+
+    @Test
+    void "standalone image"() {
         parse("![alt text](image/url \"custom title\")")
-        assert content == [[type: 'Paragraph', content:[[title: "custom title", destination: 'image/url', alt: 'alt text', type: 'Image']]]]
+        assert content == [[title: "custom title", destination: 'image/url',
+                                                             alt: 'alt text', inlined: false,
+                                                         type: 'Image']]
     }
 
     private void parse(String markdown) {

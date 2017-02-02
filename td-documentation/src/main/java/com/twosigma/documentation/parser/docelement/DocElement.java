@@ -32,6 +32,14 @@ public class DocElement {
         content.add(element);
     }
 
+    public void removeChild(DocElement element) {
+        content.remove(element);
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getType() {
         return type;
     }
@@ -56,5 +64,10 @@ public class DocElement {
         }
 
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return toMap().toString();
     }
 }

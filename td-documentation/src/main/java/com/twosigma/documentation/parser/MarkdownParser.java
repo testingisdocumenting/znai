@@ -38,6 +38,8 @@ public class MarkdownParser implements MarkupParser {
             parserHandler.onSectionEnd();
         }
 
+        parserHandler.onParsingEnd();
+
         return new MarkupParserResult(parserHandler.getDocElement(), parserHandler.getFileMarkupDependsOn());
     }
 

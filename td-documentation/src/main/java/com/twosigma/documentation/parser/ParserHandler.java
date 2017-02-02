@@ -30,5 +30,6 @@ public interface ParserHandler {
     void onImage(String title, String destination, String alt);
     void onSnippet(String lang, String lineNumber, String snippet);
     void onThematicBreak();
-    void onInclude(String pluginId, String value); // TODO custom values
+    void onInclude(String pluginId, String value);
+    void onParsingEnd();
 }

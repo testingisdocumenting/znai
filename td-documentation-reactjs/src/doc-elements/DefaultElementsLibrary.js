@@ -20,7 +20,10 @@ library.SoftLineBreak = () => <span> </span>
 library.HardLineBreak = () => <br />
 library.ThematicBreak = () => <hr />
 
-library.Image = ({destination}) => <div className="image"><img alt="not found" src={destination}/></div>
+library.Image = ({destination, inlined}) => {
+    const className = "image" + (inlined ? " inlined" : "")
+    return (<div className={className}><img alt="not found" src={destination}/></div>)
+}
 
 library.Snippet = Snippet
 

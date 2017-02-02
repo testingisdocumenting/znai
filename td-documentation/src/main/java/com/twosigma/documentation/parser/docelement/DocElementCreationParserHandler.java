@@ -21,12 +21,15 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private Path path;
     private List<Path> fileMarkupDependsOn;
 
+    private List<DocElement> paragraphs;
+
     private final DocElement docElement;
     private final Deque<DocElement> elementsStack;
 
     public DocElementCreationParserHandler(ComponentsRegistry componentsRegistry, Path path) {
         this.componentsRegistry = componentsRegistry;
         this.path = path;
+        this.paragraphs = new ArrayList<>();
         this.fileMarkupDependsOn = new ArrayList<>();
 
         this.docElement = new DocElement("page");
@@ -69,7 +72,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onParagraphEnd() {
-        end();
+        DocElement paragraph = end();
+        paragraphs.add(paragraph);
     }
 
     @Override
@@ -144,7 +148,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onImage(String title, String destination, String alt) {
-        append(DocElementType.IMAGE, "title", title, "destination", destination, "alt", alt);
+        append(DocElementType.IMAGE, "title", title, "destination", destination, "alt", alt, "inlined", true);
     }
 
     @Override
@@ -177,6 +181,29 @@ public class DocElementCreationParserHandler implements ParserHandler {
         }
     }
 
+    @Override
+    public void onParsingEnd() {
+        paragraphs.forEach(this::convertParagraphWithSingleImageToWideImage);
+    }
+
+    private void convertParagraphWithSingleImageToWideImage(DocElement paragraph) {
+        if (paragraph.getContent().size() > 1) {
+            return;
+        }
+
+        DocElement singleElement = paragraph.getContent().get(0);
+        if (! singleElement.getType().equals(DocElementType.IMAGE)) {
+            return;
+        }
+
+        paragraph.setType(singleElement.getType());
+
+        singleElement.getProps().forEach(paragraph::addProp);
+        paragraph.addProp("inlined", false);
+
+        paragraph.removeChild(singleElement);
+    }
+
     private void start(String type, Object... propsKeyValue) {
         DocElement element = new DocElement(type);
         addProps(element, propsKeyValue);
@@ -184,8 +211,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
         appendAndPush(element);
     }
 
-    private void end() {
-        elementsStack.removeLast();
+    private DocElement end() {
+        return elementsStack.removeLast();
     }
 
     private void append(String type, Object... propsKeyValue) {
