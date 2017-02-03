@@ -10,7 +10,7 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>td-documentation-server</artifactId>
+    <artifactId>td-documentation-client</artifactId>
 
     <dependencies>
         <dependency>
@@ -20,29 +20,13 @@
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.td</groupId>
-            <artifactId>td-documentation-reactjs</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-web</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant-compress</artifactId>
         </dependency>
     </dependencies>
 </project>

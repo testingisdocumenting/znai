@@ -19,6 +19,7 @@
         <module>td-documentation</module>
         <module>td-documentation-reactjs</module>
         <module>td-documentation-server</module>
+        <module>td-documentation-client</module>
         <module>td-ts-dist</module>
     </modules>
 
@@ -58,6 +59,18 @@
                 <groupId>net.sourceforge.plantuml</groupId>
                 <artifactId>plantuml</artifactId>
                 <version>6703</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.ant</groupId>
+                <artifactId>ant</artifactId>
+                <version>1.10.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.ant</groupId>
+                <artifactId>ant-compress</artifactId>
+                <version>1.4</version>
             </dependency>
 
             <dependency>
