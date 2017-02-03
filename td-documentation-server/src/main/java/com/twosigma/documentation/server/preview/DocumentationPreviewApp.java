@@ -7,6 +7,8 @@ import com.twosigma.documentation.server.DocumentationServer;
 import com.twosigma.documentation.server.ServerConfig;
 import io.vertx.core.http.HttpServer;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -14,31 +16,14 @@ import java.nio.file.Paths;
  * @author mykola
  */
 public class DocumentationPreviewApp {
-    public static void main(String[] args) {
-        ConsoleOutputs.add(new AnsiConsoleOutput());
-
-        final Path previewPath = Paths.get("__preview").toAbsolutePath().getParent();
+    public static void main(String[] args) throws IOException {
+        Path deployRoot = Files.createTempDirectory("documentation-preview");
+        deployRoot.toFile().deleteOnExit();
 
         ServerConfig serverConfig = new ServerConfig(args);
-        serverConfig.setRootOfDocs(previewPath);
+        serverConfig.setDeployRoot(deployRoot);
 
-        HttpServer server = DocumentationServer.create(serverConfig);
-        PreviewWebSocketHandler socketHandler = new PreviewWebSocketHandler();
-        server.websocketHandler(socketHandler);
-
-        Path docRoot = Paths.get("/Users/mykola/work/testing-documenting/td-documentation/documentation/");
-        Path tocPath = docRoot.resolve("toc");
-
-        final WebSite webSite = WebSite.withToc(tocPath).
-            withMetaFromJsonFile(docRoot.resolve("meta.json")).
-                withEnabledPreview().
-                deployTo(previewPath.resolve("__preview"));
-
-        final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(socketHandler, webSite);
-
-        server.listen(8080);
-
-        final FileWatcher fileWatcher = new FileWatcher(docRoot, fileChangeHandler);
-        fileWatcher.start();
+        DocumentationPreview preview = new DocumentationPreview(serverConfig);
+        preview.start();
     }
 }

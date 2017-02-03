@@ -7,7 +7,8 @@ import java.nio.file.Paths;
  * @author mykola
  */
 public class ServerConfig {
-    private Path rootOfDocs;
+    private Path deployRoot;
+    private Path docRoot;
 
     public ServerConfig(String... args) {
         parseArgs(args);
@@ -15,23 +16,36 @@ public class ServerConfig {
 
     private void parseArgs(String[] args) {
         if (args.length >= 1) {
-            rootOfDocs = Paths.get(args[0]).toAbsolutePath();
+            docRoot = Paths.get(args[0]).toAbsolutePath();
         }
     }
 
-    public void setRootOfDocs(Path rootOfDocs) {
-        this.rootOfDocs = rootOfDocs;
+    public Path getDocRoot() {
+        return validateIsSet("docRoot", docRoot);
     }
 
-    public Path getRootOfDocs() {
-        if (rootOfDocs == null) {
-            throw new RuntimeException("<rootOfDocs> is not set. specify it using args or a configuration set method");
+    public void setDocRoot(Path docRoot) {
+        this.docRoot = docRoot;
+    }
+
+    public void setDeployRoot(Path deployRoot) {
+        this.deployRoot = deployRoot;
+    }
+
+    public Path getDeployRoot() {
+        return validateIsSet("deployRoot", deployRoot);
+    }
+
+    private <E> E validateIsSet(String name, E v) {
+        if (v == null) {
+            throw new RuntimeException("<" + name + "> is not set. specify it using args or a configuration set method");
         }
-        return rootOfDocs;
+
+        return v;
     }
 
     @Override
     public String toString() {
-        return "rootOfDocs: " + rootOfDocs + "\n";
+        return "deployRoot: " + deployRoot + "\n";
     }
 }

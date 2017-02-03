@@ -22,7 +22,7 @@ public class DocumentationServer {
 
         System.out.println("server configuration:\n" + serverConfig);
 
-        Path rootOfDocs = serverConfig.getRootOfDocs();
+        Path rootOfDocs = serverConfig.getDeployRoot();
         System.setProperty("vertx.cwd", rootOfDocs.toString());
 
         Vertx vertx = Vertx.vertx();
