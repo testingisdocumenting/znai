@@ -143,6 +143,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onInlinedCode(String inlinedCode) {
+        append(DocElementType.INLINED_CODE, "code", inlinedCode);
+    }
+
+    @Override
     public void onLink(String label, String anchor) {
         append(DocElementType.LINK, "label", label, "anchor", anchor);
     }

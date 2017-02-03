@@ -13,6 +13,7 @@ public class DocElementType {
     public static final String STRONG_EMPHASIS = "StrongEmphasis";
     public static final String BLOCK_QUOTE = "BlockQuote";
     public static final String SIMPLE_TEXT = "SimpleText";
+    public static final String INLINED_CODE = "InlinedCode";
     public static final String LINK = "Link";
     public static final String IMAGE = "Image";
     public static final String SNIPPET = "Snippet";

@@ -14,6 +14,13 @@ class MarkdownParserTest {
     private List<Map> content
 
     @Test
+    void "inlined code"() {
+        parse("""`InterfaceName`""")
+
+        assert content == [[type: 'Paragraph', content:[[type: 'InlinedCode', code: 'InterfaceName']]]]
+    }
+
+    @Test
     void "bullet list"() {
         parse("""* entry
 * another entry

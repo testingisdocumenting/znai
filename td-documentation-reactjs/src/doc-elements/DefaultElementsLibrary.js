@@ -16,6 +16,7 @@ library.Link = ({anchor, label}) => (<a href={anchor}>{label}</a>)
 library.Paragraph = ({content}) => <div className="paragraph content-block"><BoundDocElement content={content}/></div>
 library.BlockQuote = ({content}) => <blockquote className="content-block"><BoundDocElement content={content}/></blockquote>
 library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
+library.InlinedCode = ({code}) => <code>{code}</code>
 library.SoftLineBreak = () => <span> </span>
 library.HardLineBreak = () => <br />
 library.ThematicBreak = () => <hr />

@@ -10,12 +10,13 @@ you code will be auto highlighted.
     
 This method attempts to guess the language and highlight accordingly. Markdown used to create code snippet above follows
 
-:include-text-file: code-snippets.md {startLine: 'interface PriceService', numberOfLines: 3, lang: 'markdown', title: 'markdown'}
+:include-text-file: code-snippets.md {startLine: '# Auto Highlight', numberOfLines: 9, lang: 'markdown', title: 'markdown'}
     
 
 # Specifying Language
  
-You can also specify a language. That maybe useful if there is the snippet is not large enough for auto detection.
+You can also specify a language. 
+That maybe useful if there is the snippet is not large enough for auto detection.
 
 ```javascript
 import React, {Component} from 'react'
@@ -29,7 +30,7 @@ class MyComponent extends Component {
 
 Snippet below is used to highlight the code as a javascript language
 
-:include-text-file: code-snippets.md {startLine: '```javascript', numberOfLines: 9, lang: 'markdown', title: 'markdown'}
+:include-text-file: code-snippets.md {startLine: '# Specifying Language', numberOfLines: 14, lang: 'markdown', title: 'markdown'}
 
 Following languages are supported
 * Java
@@ -67,3 +68,10 @@ File will be looked up using following rules:
 * directory with a markup file
 * root directory of a documentation
 * class path
+
+# Inlined
+
+To inline code within a text dimply put it inside a back tick. 
+E.g. To check if an Exchange is closed, you need to use `ExchangeCalendar`
+
+:include-text-file: code-snippets.md {startLine: '# Inlined', numberOfLines: 4, lang: 'markdown', title: 'markdown'}

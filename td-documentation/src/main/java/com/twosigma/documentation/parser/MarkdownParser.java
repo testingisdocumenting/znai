@@ -97,6 +97,11 @@ public class MarkdownParser implements MarkupParser {
         }
 
         @Override
+        public void visit(Code code) {
+            parserHandler.onInlinedCode(code.getLiteral());
+        }
+
+        @Override
         public void visit(ThematicBreak thematicBreak) {
             parserHandler.onThematicBreak();
         }
