@@ -1,14 +1,15 @@
 package com.twosigma.documentation.server.preview;
 
 import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.AnsiConsoleOutput;
+import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.WebSite;
 import com.twosigma.documentation.server.DocumentationServer;
 import com.twosigma.documentation.server.ServerConfig;
 import io.vertx.core.http.HttpServer;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * @author mykola
@@ -29,7 +30,7 @@ public class DocumentationPreview {
         PreviewWebSocketHandler socketHandler = new PreviewWebSocketHandler();
         server.websocketHandler(socketHandler);
 
-        Path docRoot = serverConfig.getDocRoot();
+        Path docRoot = serverConfig.getSourceRoot();
         Path tocPath = docRoot.resolve("toc");
 
         final WebSite webSite = WebSite.withToc(tocPath).
@@ -37,11 +38,26 @@ public class DocumentationPreview {
                 withEnabledPreview().
                 deployTo(previewPath.resolve("preview"));
 
+        reportPhase("starting server");
         final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(socketHandler, webSite);
+        server.listen(serverConfig.getPort());
 
-        server.listen(8080);
+        reportHost();
 
+        reportPhase("initializing file watcher");
         final FileWatcher fileWatcher = new FileWatcher(docRoot, fileChangeHandler);
         fileWatcher.start();
+    }
+
+    private void reportHost() {
+        try {
+            ConsoleOutputs.out(InetAddress.getLocalHost().getHostName(), ":", serverConfig.getPort());
+        } catch (UnknownHostException e) {
+            // ignore
+        }
+    }
+
+    private void reportPhase(String phase) {
+        ConsoleOutputs.out(Color.BLUE, phase);
     }
 }
