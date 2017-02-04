@@ -1,6 +1,8 @@
 package com.twosigma.documentation;
 
 import com.google.gson.Gson;
+import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
 import com.twosigma.documentation.extensions.include.RelativeToFileAndRootResourceResolver;
@@ -74,6 +76,7 @@ public class WebSite {
     }
 
     private ReactJsNashornEngine initJsEngine() {
+        reportPhase("initializing ReactJS server side engine");
         ReactJsNashornEngine engine = new ReactJsNashornEngine();
         engine.getNashornEngine().eval("toc = []");
         engine.loadLibraries();
@@ -101,14 +104,15 @@ public class WebSite {
     }
 
     public void generate() {
-        deployResources();
+        reportPhase("building documentation");
         createTopLevelToc();
         parseMarkups();
         updateTocWithPageSections();
-        deployToc();
         generatePages();
         generateSearchIndex();
+        deployToc();
         deployAuxiliaryFiles();
+        deployResources();
     }
 
     public TocItem tocItemByPath(Path path) {
@@ -148,11 +152,13 @@ public class WebSite {
     }
 
     private void deployResources() {
+        reportPhase("deploying resources");
         reactJsNashornEngine.getReactJsBundle().deploy(deployer);
         cfg.webResources.forEach(deployer::deploy);
     }
 
     private void createTopLevelToc() {
+        reportPhase("creating table of contents");
         toc = TableOfContents.fromNestedText(fileTextContent(cfg.tocPath));
     }
 
@@ -167,6 +173,7 @@ public class WebSite {
     }
 
     private void deployToc() {
+        reportPhase("deploying table of contents");
         String tocJson = JsonUtils.serializePrettyPrint(toc.toListOfMaps());
 
         deployer.deploy(tocJavaScript, "toc = " + tocJson);
@@ -176,6 +183,7 @@ public class WebSite {
     }
 
     private void parseMarkups() {
+        reportPhase("parsing markup files");
         toc.getTocItems().forEach(this::parseMarkup);
     }
 
@@ -217,11 +225,13 @@ public class WebSite {
     }
 
     private void generatePages() {
+        reportPhase("generating HTMLs");
         forEachPage(this::generatePage);
         buildJsonOfAllPages();
     }
 
     private void generateSearchIndex() {
+        reportPhase("generating search index");
         String jsonIndex = lunrIndexer.createJsonIndex(allPagesProps);
         deployer.deploy("search-index.json", jsonIndex);
     }
@@ -256,6 +266,7 @@ public class WebSite {
     }
 
     private void deployAuxiliaryFiles() {
+        reportPhase("deploying auxiliary files (e.g. images)");
         tocItemsByAuxiliaryFile.keySet().stream().filter(AuxiliaryFile::isRequiresDeployment)
                 .forEach(this::deployAuxiliaryFile);
     }
@@ -275,6 +286,10 @@ public class WebSite {
             final Page page = pageByTocItem.get(tocItem);
             consumer.consume(tocItem, page);
         });
+    }
+
+    private void reportPhase(String phase) {
+        ConsoleOutputs.out(Color.BLUE, phase);
     }
 
     private interface PageConsumer {

@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.console.ansi.Color;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -34,7 +36,7 @@ public class Deployer {
     }
 
     public void deploy(Path srcPath) {
-        System.out.println("deploying " + srcPath + " to " + root);
+        printDeployMessage(srcPath, root);
 
         try {
             FileUtils.copyDirectory(srcPath.toFile(), root.toFile());
@@ -56,7 +58,7 @@ public class Deployer {
         if (deployed.contains(fullPath))
             return;
 
-        System.out.println("deploying " + relativePath + " to " + fullPath);
+        printDeployMessage(relativePath, fullPath);
 
         try {
             Files.createDirectories(fullPath.getParent());
@@ -64,5 +66,9 @@ public class Deployer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void printDeployMessage(Object from, Object to) {
+        ConsoleOutputs.out("deploying ", Color.PURPLE, from, Color.BLACK, " to ", Color.PURPLE, to);
     }
 }
