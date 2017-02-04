@@ -21,6 +21,8 @@ public class DocumentationPreview {
     }
 
     public void start() {
+        serverConfig.print();
+
         final Path previewPath = serverConfig.getDeployRoot();
 
         HttpServer server = DocumentationServer.create(serverConfig);

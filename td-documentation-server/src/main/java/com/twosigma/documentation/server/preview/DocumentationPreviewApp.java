@@ -17,7 +17,9 @@ import java.nio.file.Paths;
  */
 public class DocumentationPreviewApp {
     public static void main(String[] args) throws IOException {
-        Path deployRoot = Files.createTempDirectory("documentation-preview");
+        ConsoleOutputs.add(new AnsiConsoleOutput());
+
+        Path deployRoot = PreviewTempDir.get();
         deployRoot.toFile().deleteOnExit();
 
         ServerConfig serverConfig = new ServerConfig(args);

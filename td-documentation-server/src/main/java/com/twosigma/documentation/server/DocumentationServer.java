@@ -18,10 +18,6 @@ import java.nio.file.Path;
  */
 public class DocumentationServer {
     public static HttpServer create(ServerConfig serverConfig) {
-        ConsoleOutputs.add(new AnsiConsoleOutput());
-
-        System.out.println("server configuration:\n" + serverConfig);
-
         Path rootOfDocs = serverConfig.getDeployRoot();
         System.setProperty("vertx.cwd", rootOfDocs.toString());
 

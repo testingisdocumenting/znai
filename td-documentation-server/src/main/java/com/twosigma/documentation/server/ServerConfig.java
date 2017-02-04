@@ -1,5 +1,8 @@
 package com.twosigma.documentation.server;
 
+import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.console.ansi.Color;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -42,6 +45,15 @@ public class ServerConfig {
         }
 
         return v;
+    }
+
+    public void print() {
+        print("deploy root", deployRoot);
+        print("   doc root", docRoot);
+    }
+
+    private void print(String name, Object value) {
+        ConsoleOutputs.out(Color.BLUE, name, ": ", Color.YELLOW, value);
     }
 
     @Override
