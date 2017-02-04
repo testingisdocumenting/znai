@@ -34,7 +34,6 @@ public class InteractiveCmdGraphviz implements GraphvizRuntime {
             }
 
             result.append(line).append("\n");
-            System.out.println(line);
             if (line.contains(endMarker)) {
                 break;
             }
