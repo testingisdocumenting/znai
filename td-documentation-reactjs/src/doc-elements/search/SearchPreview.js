@@ -24,9 +24,8 @@ class SearchPreview extends Component {
 
     highlight() {
         const {snippets} = this.props
-        console.log("snippets", snippets)
 
-        // this.mark.unmark()
+        this.mark.unmark()
         this.mark.mark(snippets)
     }
 }
