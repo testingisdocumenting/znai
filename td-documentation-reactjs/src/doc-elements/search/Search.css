@@ -25,6 +25,7 @@
     top: 50px;
     left: 50px;
     right: 50px;
+    max-height: calc(100vh - 100px);
     z-index: 1001;
     border: 1px solid #aaa;
     background: rgba(255, 255, 255, 1)
