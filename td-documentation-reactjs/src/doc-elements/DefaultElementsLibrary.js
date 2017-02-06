@@ -57,7 +57,7 @@ library.CustomComponent = ({componentName, componentProps}) => {
     }
 }
 
-library.GraphVizSvg = GraphVizSvg
+library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphVizSvg {...props}/></div>
 library.GraphVizFlow = GraphVizFlow
 
 library.Page = Page(library)

@@ -17,7 +17,7 @@ class GraphVizFlow extends Component {
     render() {
         const {fullScreen} = this.state
 
-        return <div className="graphviz-diagram">
+        return <div className="graphviz-diagram-flow">
             {fullScreen ?
                 <GraphVizFlowFullScreen {...this.props} onClose={this.onExitFullScreen}/> :
                 <GraphVizFlowAllInfoAtOnce {...this.props} onExpand={this.onExpand}/> }

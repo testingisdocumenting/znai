@@ -44,7 +44,7 @@ public class GvDiagramIncludePlugin implements IncludePlugin {
         props.put("diagram", diagram.toMap());
         props.put("colors", Graphviz.colors);
 
-        return new ReactComponent("GraphVizSvg", props);
+        return new ReactComponent("GraphVizDiagram", props);
     }
 
     @Override
