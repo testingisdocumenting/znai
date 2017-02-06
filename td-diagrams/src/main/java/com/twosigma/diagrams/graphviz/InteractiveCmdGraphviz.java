@@ -53,9 +53,15 @@ public class InteractiveCmdGraphviz implements GraphvizRuntime {
 
     private Process createProcess() {
         try {
-            return new ProcessBuilder().command("dot", "-Tsvg").redirectErrorStream(true).start();
+            String dotPath = getDotPath();
+            return new ProcessBuilder().command(dotPath, "-Tsvg").redirectErrorStream(true).start();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String getDotPath() {
+        String dotBin = System.getProperty("dot.bin");
+        return dotBin != null ? dotBin : "dot";
     }
 }
