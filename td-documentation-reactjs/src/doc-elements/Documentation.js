@@ -185,7 +185,7 @@ class Documentation extends Component {
 
     onSearchSelection(id) {
         this.onSearchClose()
-        documentationNavigation.navigateToPage(id)
+        documentationNavigation.navigateToPage({dirName: id.dn, fileName: id.fn, pageSectionId: id.psid})
     }
 
     navigateToPageIfRequired(tocItem) {
@@ -273,6 +273,7 @@ class Documentation extends Component {
 
     onUrlChange(url) {
         return getAllPagesPromise().then((pages) => {
+            console.log("onUrlChange", url)
             const currentPageLocation = documentationNavigation.extractDirNameAndFileName(url)
 
             const matchingPages = pages.filter((p) => p.tocItem.dirName === currentPageLocation.dirName &&
@@ -283,7 +284,14 @@ class Documentation extends Component {
                 return
             }
 
+            const tocItem = matchingPages[0].tocItem
             this.changePage({page: matchingPages[0], selectedTocItem: currentPageLocation, lastChangeDataDom: null})
+
+            const sectionIdx = tocItem.pageSectionIdTitles.map(ps => ps.id).indexOf(currentPageLocation.pageSectionId);
+            if (sectionIdx >= 0) {
+                this.pageSectionNodes[sectionIdx].scrollIntoView();
+            }
+
             return true
         })
     }

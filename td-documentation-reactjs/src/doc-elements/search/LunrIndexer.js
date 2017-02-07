@@ -96,7 +96,8 @@ class LunrIndexer {
 
     addSection(pageTocItem, section) {
         const pageSectionTitle = section.title
-        const id = {...pageTocItem, pageSectionTitle}
+        const id = {dn: pageTocItem.dirName, fn: pageTocItem.fileName, psid: section.id,
+            st: pageTocItem.sectionTitle, pt: pageTocItem.pageTitle, pst: pageSectionTitle}
 
         const text = searchContent.extractTextFromElement(section)
         this.addText(id, pageSectionTitle, text)

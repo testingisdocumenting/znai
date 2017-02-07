@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 
-const SearchTocItem = ({sectionTitle, pageTitle, pageSectionTitle, isSelected}) => {
+const SearchTocItem = ({st, pt, pst, isSelected}) => {
     const className = "search-toc-item" + (isSelected ? " selected" : "")
 
     return (<div className={className}>
-        <span className="search-toc-page-title">{pageTitle}</span>
-        <span className="search-toc-page-section-title">{pageSectionTitle}</span>
-        <span className="search-toc-section-title">{sectionTitle}</span>
+        <span className="search-toc-page-title">{pt}</span>
+        <span className="search-toc-page-section-title">{pst}</span>
+        <span className="search-toc-section-title">{st}</span>
     </div>)
 }
 

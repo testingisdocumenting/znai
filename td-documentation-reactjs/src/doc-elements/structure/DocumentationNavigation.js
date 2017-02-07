@@ -7,7 +7,7 @@ class DocumentationNavigation {
         // server side rendering guard
         if (window.addEventListener) {
             window.addEventListener('popstate', (e) => {
-                this.notifyNewUrl(document.location.pathname)
+                this.notifyNewUrl(document.location.pathname + (document.location.hash))
             })
         }
     }
@@ -18,7 +18,7 @@ class DocumentationNavigation {
 
     navigateToPage(id) {
         // TODO handle .. for cases when selected is not a doc page
-        const url = "../" + id.dirName + "/" + id.fileName
+        const url = ("../" + id.dirName + "/" + id.fileName) + (id.pageSectionId && id.pageSectionId.length ? ("#" + id.pageSectionId) : "")
 
         history.pushState({}, null, url)
         return this.notifyNewUrl(url)
@@ -36,14 +36,18 @@ class DocumentationNavigation {
     }
 
     extractDirNameAndFileName(url) {
+        const hashIdx = url.indexOf("#");
+        const pageSectionId = hashIdx >= 0 ? url.substr(hashIdx + 1) : ""
+        url = hashIdx >= 0 ? url.substr(0, hashIdx) : url
+
         const parts = url.split("/")
         if (parts.length < 2) {
             return {}
         }
 
-        // something/dir-name/file-name
+        // something/dir-name/file-name#id
         // ../dir-name/file-name
-        return {dirName: parts[parts.length - 2], fileName: parts[parts.length - 1]}
+        return {dirName: parts[parts.length - 2], fileName: parts[parts.length - 1], pageSectionId: pageSectionId}
     }
 }
 

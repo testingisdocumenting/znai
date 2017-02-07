@@ -28,9 +28,9 @@ class Search {
             const tocItem = p.tocItem
 
             const sections = p.content.filter((de) => {
-                return tocItem.dirName === indexId.dirName &&
-                    tocItem.fileName === indexId.fileName &&
-                    de.type === 'Section' && de.title === indexId.pageSectionTitle})
+                return tocItem.dirName === indexId.dn &&
+                    tocItem.fileName === indexId.fn &&
+                    de.type === 'Section' && de.id === indexId.psid})
 
             sections.forEach((s) => matching.push(s))
         })
