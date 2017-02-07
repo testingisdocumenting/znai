@@ -27,6 +27,11 @@ class SearchPreview extends Component {
 
         this.mark.unmark()
         this.mark.mark(snippets)
+
+        const marked = document.querySelector(".search-result-preview mark");
+        if (marked) {
+            marked.scrollIntoView();
+        }
     }
 }
 

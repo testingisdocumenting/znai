@@ -45,6 +45,7 @@
 .search-popup .search-preview-panel {
     flex: 5;
     padding: 10px;
+    overflow: hidden;
 }
 
 .search-popup .search-box {
