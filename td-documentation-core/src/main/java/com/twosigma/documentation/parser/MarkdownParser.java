@@ -151,7 +151,9 @@ public class MarkdownParser implements MarkupParser {
 
         @Override
         public void visit(final Link link) {
-            parserHandler.onLink(link.getTitle(), link.getDestination());
+            parserHandler.onLinkStart(link.getDestination());
+            visitChildren(link);
+            parserHandler.onLinkEnd();
         }
 
         @Override

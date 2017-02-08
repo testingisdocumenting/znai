@@ -13,6 +13,16 @@ class MarkdownParserTest {
     private List<Map> content
 
     @Test
+    void "link"() {
+        parse("""[label **bold**](http://test)""")
+
+        assert content == [[type: 'Paragraph', content:[
+                [url: 'http://test', type: 'Link',
+                    content:[[text: 'label ' , type: 'SimpleText'], [type: 'StrongEmphasis', content:[
+                            [text: 'bold', type: 'SimpleText']]]]]]]]
+    }
+
+    @Test
     void "inlined code"() {
         parse("""`InterfaceName`""")
 

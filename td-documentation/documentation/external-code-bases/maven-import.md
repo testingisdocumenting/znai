@@ -84,7 +84,7 @@ across the Two Sigma codebase.. We consulted with several subject matter experts
 # Usage Scenario
 
 - The user determines that a new open source library is needed and finds its coordinates,
- either on the web site of the library or on [mvnrepository.com](http://mvnrepository.com) or ...
+ either on the web site of the library or on [mv*nreposi*tory.com](http://mvnrepository.com) or ...
 
 - User executes a command
   - Using sbt-style import:  ``vats maven-import --sbt '"groupId" % "artfifactId" % "version"'``

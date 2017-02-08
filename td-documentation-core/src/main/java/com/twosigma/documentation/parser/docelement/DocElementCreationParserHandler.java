@@ -148,8 +148,13 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onLink(String label, String anchor) {
-        append(DocElementType.LINK, "label", label, "anchor", anchor);
+    public void onLinkStart(String url) {
+        start(DocElementType.LINK, "url", url);
+    }
+
+    @Override
+    public void onLinkEnd() {
+        end();
     }
 
     @Override

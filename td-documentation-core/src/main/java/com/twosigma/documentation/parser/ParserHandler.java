@@ -27,7 +27,8 @@ public interface ParserHandler {
     void onBlockQuoteEnd();
     void onSimpleText(String value);
     void onInlinedCode(String inlinedCode);
-    void onLink(String label, String anchor);
+    void onLinkStart(String url);
+    void onLinkEnd();
     void onImage(String title, String destination, String alt);
     void onSnippet(String lang, String lineNumber, String snippet);
     void onThematicBreak();
