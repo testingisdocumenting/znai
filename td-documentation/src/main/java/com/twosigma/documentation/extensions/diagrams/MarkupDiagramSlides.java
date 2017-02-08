@@ -1,15 +1,12 @@
 package com.twosigma.documentation.extensions.diagrams;
 
-import com.twosigma.documentation.AuxiliaryFile;
+import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
-import com.twosigma.documentation.extensions.include.RelativeToFileAndRootResourceResolver;
-import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElement;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 

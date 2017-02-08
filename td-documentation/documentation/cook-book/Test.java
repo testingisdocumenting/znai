@@ -1,0 +1,5 @@
+/**
+ * test text
+ */
+class TestJava {
+}

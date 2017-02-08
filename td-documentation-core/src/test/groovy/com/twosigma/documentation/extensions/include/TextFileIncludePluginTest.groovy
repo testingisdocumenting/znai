@@ -1,8 +1,12 @@
 package com.twosigma.documentation.extensions.include
 
 import com.twosigma.documentation.extensions.ReactComponent
+import com.twosigma.documentation.parser.TestComponentsRegistry
+import com.twosigma.documentation.parser.TestResourceResolver
 import org.junit.Assert
 import org.junit.Test
+
+import java.nio.file.Paths
 
 /**
  * @author mykola
@@ -33,7 +37,7 @@ class TextFileIncludePluginTest {
 
     private static ReactComponent process(String value) {
         def plugin = new TextFileIncludePlugin()
-        def component = plugin.process(new TestResourceResolver(), new IncludeParams("test-file.txt $value"))
+        def component = plugin.process(new TestComponentsRegistry(), Paths.get(""), new IncludeParams("test-file.txt $value"))
 
         return component
     }

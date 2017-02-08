@@ -1,6 +1,5 @@
 package com.twosigma.documentation.diagrams.markdown
 
-import com.twosigma.documentation.ComponentsRegistry
 import com.twosigma.documentation.WebSiteComponentsRegistry
 import com.twosigma.documentation.extensions.diagrams.Graphviz
 import com.twosigma.documentation.extensions.diagrams.MarkupDiagramSlides

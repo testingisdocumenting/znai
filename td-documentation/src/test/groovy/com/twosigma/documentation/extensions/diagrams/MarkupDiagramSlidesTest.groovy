@@ -5,7 +5,7 @@ import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides
 import com.twosigma.documentation.parser.MarkdownParser
 import org.junit.Test
 
-import static com.twosigma.documentation.extensions.diagrams.MarkupDiagramSlides.createSlides
+import java.nio.file.Paths
 
 /**
  * @author mykola
@@ -62,6 +62,6 @@ context information
 
     private void parse(markdown) {
         def diagramSlides = new MarkupDiagramSlides(new MarkdownParser(new WebSiteComponentsRegistry()))
-        slides = diagramSlides.create(markdown)
+        slides = diagramSlides.create(Paths.get(""), markdown)
     }
 }

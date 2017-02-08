@@ -1,6 +1,5 @@
 package com.twosigma.documentation.parser
 
-import com.twosigma.documentation.TestComponentsRegistry
 import org.junit.Test
 
 import java.nio.file.Paths

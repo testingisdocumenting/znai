@@ -1,4 +1,4 @@
-package com.twosigma.documentation.structure;
+package com.twosigma.documentation.parser;
 
 import com.twosigma.documentation.utils.NameUtils;
 

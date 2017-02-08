@@ -1,5 +1,6 @@
 package com.twosigma.documentation.structure;
 
+import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.utils.NameUtils;
 
 import java.util.LinkedHashMap;

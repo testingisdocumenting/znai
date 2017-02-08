@@ -3,8 +3,6 @@ package com.twosigma.documentation.parser;
 import java.util.List;
 
 import com.twosigma.documentation.parser.docelement.DocElement;
-import com.twosigma.documentation.structure.PageSectionIdTitle;
-import com.twosigma.documentation.utils.NameUtils;
 
 import static com.twosigma.documentation.parser.docelement.DocElementType.SECTION;
 import static java.util.stream.Collectors.toList;

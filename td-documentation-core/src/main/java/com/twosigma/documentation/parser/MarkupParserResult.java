@@ -1,9 +1,8 @@
 package com.twosigma.documentation.parser;
 
-import com.twosigma.documentation.AuxiliaryFile;
+import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.parser.docelement.DocElement;
 
-import java.nio.file.Path;
 import java.util.List;
 
 /**

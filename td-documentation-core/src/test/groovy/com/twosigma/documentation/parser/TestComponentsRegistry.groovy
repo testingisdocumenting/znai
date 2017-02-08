@@ -1,8 +1,7 @@
-package com.twosigma.documentation
+package com.twosigma.documentation.parser
 
+import com.twosigma.documentation.core.ComponentsRegistry
 import com.twosigma.documentation.extensions.include.IncludeResourcesResolver
-import com.twosigma.documentation.extensions.include.TestResourceResolver
-import com.twosigma.documentation.parser.MarkupParser
 
 /**
  * @author mykola

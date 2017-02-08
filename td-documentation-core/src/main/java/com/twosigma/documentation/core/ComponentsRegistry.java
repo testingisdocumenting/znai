@@ -1,4 +1,4 @@
-package com.twosigma.documentation;
+package com.twosigma.documentation.core;
 
 import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import com.twosigma.documentation.parser.MarkupParser;

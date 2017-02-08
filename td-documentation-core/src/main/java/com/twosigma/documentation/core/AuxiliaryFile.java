@@ -1,4 +1,4 @@
-package com.twosigma.documentation;
+package com.twosigma.documentation.core;
 
 import java.nio.file.Path;
 
@@ -13,6 +13,11 @@ public class AuxiliaryFile {
         return new AuxiliaryFile(path, false);
     }
 
+    /**
+     * file that is required at documentation hosting time and thus it will be copied to the deployment
+     * @param path file path
+     * @return auxiliary file instance
+     */
     public static AuxiliaryFile runTime(Path path) {
         return new AuxiliaryFile(path, true);
     }
@@ -55,5 +60,13 @@ public class AuxiliaryFile {
 
     public boolean isRequiresDeployment() {
         return requiresDeployment;
+    }
+
+    @Override
+    public String toString() {
+        return "AuxiliaryFile{" +
+                "path=" + path +
+                ", requiresDeployment=" + requiresDeployment +
+                '}';
     }
 }

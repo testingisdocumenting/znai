@@ -10,33 +10,9 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>td-documentation</artifactId>
+    <artifactId>td-documentation-core</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.twosigma.td</groupId>
-            <artifactId>td-documentation-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.twosigma.td</groupId>
-            <artifactId>td-documentation-java</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.twosigma.td</groupId>
-            <artifactId>td-documentation-reactjs</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.twosigma.td</groupId>
-            <artifactId>td-diagrams</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>com.atlassian.commonmark</groupId>
             <artifactId>commonmark</artifactId>

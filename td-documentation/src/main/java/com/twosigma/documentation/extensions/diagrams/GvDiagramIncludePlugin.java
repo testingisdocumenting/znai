@@ -1,21 +1,13 @@
 package com.twosigma.documentation.extensions.diagrams;
 
 import com.twosigma.diagrams.graphviz.GraphvizDiagram;
-import com.twosigma.diagrams.graphviz.GraphvizEngine;
-import com.twosigma.diagrams.graphviz.InteractiveCmdGraphviz;
-import com.twosigma.diagrams.graphviz.meta.GraphvizShapeConfig;
-import com.twosigma.documentation.ComponentsRegistry;
+import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.ReactComponent;
-import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
-import com.twosigma.utils.FileUtils;
-import com.twosigma.utils.JsonUtils;
-import com.twosigma.utils.ResourceUtils;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

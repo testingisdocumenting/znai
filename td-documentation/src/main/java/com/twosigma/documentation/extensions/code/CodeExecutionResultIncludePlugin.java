@@ -9,12 +9,11 @@ import java.util.function.Function;
 
 import com.google.gson.Gson;
 
-import com.twosigma.documentation.ComponentsRegistry;
+import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.ReactComponent;
-import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 
 import static com.twosigma.utils.FileUtils.fileTextContent;
 import static java.util.stream.Collectors.toList;

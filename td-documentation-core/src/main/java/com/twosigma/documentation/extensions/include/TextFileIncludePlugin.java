@@ -1,11 +1,10 @@
 package com.twosigma.documentation.extensions.include;
 
-import com.twosigma.documentation.AuxiliaryFile;
-import com.twosigma.documentation.ComponentsRegistry;
+import com.twosigma.documentation.core.AuxiliaryFile;
+import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 import com.twosigma.utils.StringUtils;
-import org.apache.commons.io.FileUtils;
 
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -44,7 +43,7 @@ public class TextFileIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public Stream<AuxiliaryFile> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
         return Stream.of(AuxiliaryFile.builtTime(
                 componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam())));
     }

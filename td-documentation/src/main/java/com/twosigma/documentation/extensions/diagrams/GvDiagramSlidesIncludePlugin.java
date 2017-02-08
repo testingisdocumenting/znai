@@ -1,7 +1,7 @@
 package com.twosigma.documentation.extensions.diagrams;
 
-import com.twosigma.documentation.AuxiliaryFile;
-import com.twosigma.documentation.ComponentsRegistry;
+import com.twosigma.documentation.core.AuxiliaryFile;
+import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
 import com.twosigma.documentation.extensions.include.IncludeContext;
@@ -64,7 +64,7 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public Stream<AuxiliaryFile> filesPluginDependsOn(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
         return Stream.concat(auxiliaryFiles.stream(), Stream.of(
                 AuxiliaryFile.builtTime(diagramPath),
                 AuxiliaryFile.builtTime(slidesPath)));

@@ -3,6 +3,7 @@ package com.twosigma.documentation;
 import com.google.gson.Gson;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
+import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
 import com.twosigma.documentation.extensions.include.RelativeToFileAndRootResourceResolver;
@@ -38,7 +39,8 @@ public class WebSite {
     private Configuration cfg;
 
     private Map<TocItem, Page> pageByTocItem;
-    private Map<AuxiliaryFile, Set<TocItem>> tocItemsByAuxiliaryFile;
+    private Map<Path, Set<TocItem>> tocItemsByAuxiliaryFilePath;
+    private Set<AuxiliaryFile> auxiliaryFiles;
 
     private TableOfContents toc;
     private List<PageProps> allPagesProps;
@@ -61,7 +63,8 @@ public class WebSite {
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.tocJavaScript = WebResource.withRelativePath("toc.js");
         this.includeResourcesResolver = new RelativeToFileAndRootResourceResolver(cfg.tocPath.getParent());
-        this.tocItemsByAuxiliaryFile = new HashMap<>();
+        this.tocItemsByAuxiliaryFilePath = new HashMap<>();
+        this.auxiliaryFiles = new HashSet<>();
 
         docMeta.setTitle(cfg.title);
         docMeta.setType(cfg.type);
@@ -128,7 +131,7 @@ public class WebSite {
     }
 
     public Set<TocItem> dependentTocItems(Path auxiliaryFile) {
-        Set<TocItem> paths = tocItemsByAuxiliaryFile.get(auxiliaryFile);
+        Set<TocItem> paths = tocItemsByAuxiliaryFilePath.get(auxiliaryFile);
         return (paths == null) ? Collections.emptySet() : paths;
     }
 
@@ -207,10 +210,12 @@ public class WebSite {
     // each markup file may refer other files like code snippets or diagrams
     // we maintain dependency between them so we know which one triggers what page refresh during preview mode
     //
-    private void updateFilesAssociation(TocItem tocItem, List<AuxiliaryFile> auxiliaryFiles) {
-        auxiliaryFiles.forEach((af) -> {
-            Set<TocItem> tocItems = tocItemsByAuxiliaryFile.computeIfAbsent(af, k -> new HashSet<>());
+    private void updateFilesAssociation(TocItem tocItem, List<AuxiliaryFile> newAuxiliaryFiles) {
+        newAuxiliaryFiles.forEach((af) -> {
+            Set<TocItem> tocItems = tocItemsByAuxiliaryFilePath.computeIfAbsent(af.getPath(), k -> new HashSet<>());
             tocItems.add(tocItem);
+
+            auxiliaryFiles.add(af);
         });
     }
 
@@ -267,7 +272,7 @@ public class WebSite {
 
     private void deployAuxiliaryFiles() {
         reportPhase("deploying auxiliary files (e.g. images)");
-        tocItemsByAuxiliaryFile.keySet().stream().filter(AuxiliaryFile::isRequiresDeployment)
+        auxiliaryFiles.stream().filter(AuxiliaryFile::isRequiresDeployment)
                 .forEach(this::deployAuxiliaryFile);
     }
 

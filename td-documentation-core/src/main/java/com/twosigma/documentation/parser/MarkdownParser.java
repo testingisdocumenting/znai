@@ -3,7 +3,7 @@ package com.twosigma.documentation.parser;
 import java.nio.file.Path;
 import java.util.Collections;
 
-import com.twosigma.documentation.ComponentsRegistry;
+import com.twosigma.documentation.core.ComponentsRegistry;
 import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
 

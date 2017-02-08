@@ -3,14 +3,14 @@ package com.twosigma.documentation.parser.docelement;
 import java.nio.file.Path;
 import java.util.*;
 
-import com.twosigma.documentation.ComponentsRegistry;
+import com.twosigma.documentation.core.AuxiliaryFile;
+import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
 import com.twosigma.documentation.extensions.ReactComponent;
-import com.twosigma.documentation.AuxiliaryFile;
+import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.ParserHandler;
-import com.twosigma.documentation.structure.PageSectionIdTitle;
 import com.twosigma.utils.CollectionUtils;
 import com.twosigma.utils.StringUtils;
 
@@ -179,7 +179,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
             IncludeParams includeParams = new IncludeParams(value);
             ReactComponent reactComponent = includePlugin.process(componentsRegistry, path, includeParams);
 
-            includePlugin.filesPluginDependsOn(componentsRegistry, includeParams).forEach(auxiliaryFiles::add);
+            includePlugin.auxiliaryFiles(componentsRegistry, includeParams).forEach(auxiliaryFiles::add);
 
             DocElement customComponent = new DocElement(DocElementType.CUSTOM_COMPONENT);
             customComponent.addProp("componentName", reactComponent.getName());

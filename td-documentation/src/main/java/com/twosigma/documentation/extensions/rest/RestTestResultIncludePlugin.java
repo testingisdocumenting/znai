@@ -17,12 +17,11 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
-import com.twosigma.documentation.ComponentsRegistry;
+import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.ReactComponent;
-import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 
 /**
  * @author mykola

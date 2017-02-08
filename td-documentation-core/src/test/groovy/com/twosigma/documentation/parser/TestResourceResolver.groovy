@@ -1,5 +1,6 @@
-package com.twosigma.documentation.extensions.include
+package com.twosigma.documentation.parser
 
+import com.twosigma.documentation.extensions.include.IncludeResourcesResolver
 import com.twosigma.utils.ResourceUtils
 
 import java.nio.file.Path
