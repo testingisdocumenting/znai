@@ -154,8 +154,8 @@ public class CliConfig {
     private Options createOptions() {
         Options options = new Options();
         options.addOption(null, "help", false, "print help");
-        options.addOption(null, "port", false, "server port");
-        options.addOption(null, "host", false, "server host");
+        options.addOption(null, "port", true, "server port");
+        options.addOption(null, "host", true, "server host");
         options.addOption(null, "source", true, "documentation source dir");
         options.addOption(null, "deploy", true, "documentation deploy root dir");
         options.addOption(null, "preview", false, "preview mode");
