@@ -4,7 +4,6 @@ import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.WebSite;
 import com.twosigma.documentation.server.DocumentationServer;
-import com.twosigma.documentation.server.ServerConfig;
 import io.vertx.core.http.HttpServer;
 
 import java.net.InetAddress;
@@ -15,43 +14,33 @@ import java.nio.file.Path;
  * @author mykola
  */
 public class DocumentationPreview {
-    private ServerConfig serverConfig;
+    private final Path sourceRoot;
+    private final Path deployRoot;
 
-    public DocumentationPreview(ServerConfig serverConfig) {
-        this.serverConfig = serverConfig;
+    public DocumentationPreview(Path sourceRoot, Path deployRoot) {
+        this.sourceRoot = sourceRoot;
+        this.deployRoot = deployRoot;
     }
 
-    public void start() {
-        serverConfig.print();
-
-        final Path previewPath = serverConfig.getDeployRoot();
-
-        HttpServer server = DocumentationServer.create(serverConfig);
+    public void start(WebSite webSite, int port) {
+        HttpServer server = DocumentationServer.create(deployRoot);
         PreviewWebSocketHandler socketHandler = new PreviewWebSocketHandler();
         server.websocketHandler(socketHandler);
 
-        Path docRoot = serverConfig.getSourceRoot();
-        Path tocPath = docRoot.resolve("toc");
-
-        final WebSite webSite = WebSite.withToc(tocPath).
-            withMetaFromJsonFile(docRoot.resolve("meta.json")).
-                withEnabledPreview().
-                deployTo(previewPath.resolve("preview"));
-
         reportPhase("starting server");
         final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(socketHandler, webSite);
-        server.listen(serverConfig.getPort());
+        server.listen(port);
 
-        reportHost();
+        reportHost(port);
 
         reportPhase("initializing file watcher");
-        final FileWatcher fileWatcher = new FileWatcher(docRoot, fileChangeHandler);
+        final FileWatcher fileWatcher = new FileWatcher(sourceRoot, fileChangeHandler);
         fileWatcher.start();
     }
 
-    private void reportHost() {
+    private void reportHost(int port) {
         try {
-            ConsoleOutputs.out(InetAddress.getLocalHost().getHostName(), ":", serverConfig.getPort());
+            ConsoleOutputs.out(InetAddress.getLocalHost().getHostName(), ":", port);
         } catch (UnknownHostException e) {
             // ignore
         }

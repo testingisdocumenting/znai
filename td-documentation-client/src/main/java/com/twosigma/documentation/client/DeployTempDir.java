@@ -1,4 +1,4 @@
-package com.twosigma.documentation.server.preview;
+package com.twosigma.documentation.client;
 
 import org.apache.commons.io.FileUtils;
 
@@ -10,10 +10,10 @@ import java.nio.file.Paths;
 /**
  * @author mykola
  */
-public class PreviewTempDir {
-    public static Path get() {
+public class DeployTempDir {
+    public static Path prepare(String mode) {
         String tmpDir = System.getProperty("java.io.tmpdir");
-        Path path = Paths.get(tmpDir).toAbsolutePath().resolve("mdoc-preview");
+        Path path = Paths.get(tmpDir).toAbsolutePath().resolve("mdoc" + (mode.isEmpty() ? "" : "-" + mode));
         try {
             FileUtils.deleteQuietly(path.toFile());
             Files.createDirectories(path);

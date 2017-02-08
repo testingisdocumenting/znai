@@ -20,6 +20,7 @@
         <module>td-documentation-reactjs</module>
         <module>td-documentation-server</module>
         <module>td-documentation-client</module>
+        <module>td-documentation-cli</module>
         <module>td-ts-dist</module>
     </modules>
 
