@@ -21,7 +21,6 @@ class CsvParser {
 
             CSVParser csvRecords = CSVFormat.EXCEL.withHeader().parse(new StringReader(content));
             Map<String, Integer> headerMap = csvRecords.getHeaderMap();
-            System.out.println(headerMap);
 
             headerMap.keySet().forEach(csvData::addColumn);
 
