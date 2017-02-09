@@ -8,7 +8,7 @@ export {getSearchPromise}
 
 let searchPromise = null
 
-function getSearchPromise() {
+function getSearchPromise(renderContext) {
     // server side rendering guard
     if (! window.setTimeout) {
         return null
@@ -18,7 +18,7 @@ function getSearchPromise() {
         return searchPromise
     }
 
-    searchPromise = Promise.all([getAllPagesPromise(), getSearchIndexPromise()]).then((values) => {
+    searchPromise = Promise.all([getAllPagesPromise(renderContext), getSearchIndexPromise(renderContext)]).then((values) => {
         return new Search(values[0], values[1])
     }, (error) => {
         console.error(error)

@@ -38,9 +38,10 @@ const Section = ({section, selected, onClickHandler}) => {
 const TocMenu = ({toc, selected, onClickHandler}) => {
     selected = selected || {dirName: "", fileName: ""}
 
+    // we won't render items that don't belong to a section. it includes things like top index.html or other misc filesD
     return (
         <div className="toc-menu">
-            {toc.map((sectionEntry) =>
+            {toc.filter(sectionEntry => sectionEntry.dirName.length > 0).map((sectionEntry) =>
                 <Section key={sectionEntry.sectionTitle}
                     selected={selected}
                     onClickHandler={onClickHandler}

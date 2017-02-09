@@ -2,6 +2,12 @@
     display: flex;
 }
 
+.menu a {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
 .main-panel {
     flex: 4;
     flex-basis: 70%;

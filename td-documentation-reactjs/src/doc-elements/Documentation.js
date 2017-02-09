@@ -22,7 +22,7 @@ class Documentation extends Component {
         super(props)
 
         const {page} = this.props
-        this.searchPromise = getSearchPromise()
+        this.searchPromise = getSearchPromise(page.renderContext)
 
         const currentPageLocation = documentationNavigation.currentDirNameAndFileName()
 
@@ -69,6 +69,7 @@ class Documentation extends Component {
     render() {
         const {docMeta} = this.props
         const {toc, page, selectedTocItem, tocCollapsed, tocSelected} = this.state
+        const isMiscPage = page.tocItem.dirName === ""
 
         const pageTitle = page.tocItem.pageTitle
 
@@ -82,6 +83,11 @@ class Documentation extends Component {
                                                           onTocUpdate={this.onTocUpdate}/> : null
 
         const previewIndicator = <PreviewChangeIndicator targetDom={this.state.lastChangeDataDom}/>
+
+        const nextPrevPageButtons = isMiscPage ? null : (<div className="next-prev-buttons content-block">
+            {this.previousPageButton()}
+            {this.nextPageButton()}
+        </div>)
 
         return (
             <div className="documentation">
@@ -101,14 +107,11 @@ class Documentation extends Component {
                 {searchPopup}
 
                 <div className="main-panel" onClick={this.onPanelSelect} ref={panelDom => this.mainPanelDom = panelDom}>
-                    <NavBar docMeta={docMeta} pageTitle={pageTitle}/>
+                    <NavBar docMeta={docMeta} pageTitle={pageTitle} renderContext={page.renderContext}/>
                     <elementsLibrary.Page tocItem={page.tocItem}
                                           content={page.content}
                                           previewEnabled={docMeta.previewEnabled}/>
-                    <div className="next-prev-buttons content-block">
-                        {this.previousPageButton()}
-                        {this.nextPageButton()}
-                    </div>
+                    {nextPrevPageButtons}
                 </div>
             </div>)
     }
@@ -209,7 +212,7 @@ class Documentation extends Component {
     // one markup page was changed and view needs to be updated
     //
     onPageUpdate(pageProps) {
-        const updatePagesReference = () => getAllPagesPromise().then((allPages) => {
+        const updatePagesReference = () => this.getAllPagesPromise().then((allPages) => {
             this.updatePagesReference(allPages, pageProps);
         })
 
@@ -221,7 +224,7 @@ class Documentation extends Component {
     // or navigate to the first modified page
     //
     onMultiplePagesUpdate(listOfPageProps) {
-        const updatePagesReference = () => getAllPagesPromise().then((allPages) => {
+        const updatePagesReference = () => this.getAllPagesPromise().then((allPages) => {
             listOfPageProps.forEach((newPage) => this.updatePagesReference(allPages, newPage))
         })
 
@@ -272,7 +275,7 @@ class Documentation extends Component {
     }
 
     onUrlChange(url) {
-        return getAllPagesPromise().then((pages) => {
+        return this.getAllPagesPromise().then((pages) => {
             console.log("onUrlChange", url)
             const currentPageLocation = documentationNavigation.extractDirNameAndFileName(url)
 
@@ -294,6 +297,11 @@ class Documentation extends Component {
 
             return true
         })
+    }
+
+    getAllPagesPromise() {
+        const {page} = this.props
+        return getAllPagesPromise(page.renderContext)
     }
 
     extractPageSectionNodes() {

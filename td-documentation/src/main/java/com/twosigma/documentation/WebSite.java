@@ -135,7 +135,6 @@ public class WebSite {
         return (paths == null) ? Collections.emptySet() : paths;
     }
 
-
     public TableOfContents updateToc() {
         createTopLevelToc();
         updateTocWithPageSections();
@@ -163,6 +162,7 @@ public class WebSite {
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
         toc = TableOfContents.fromNestedText(fileTextContent(cfg.tocPath));
+        toc.addTocItem("", "index");
     }
 
     /**
@@ -230,7 +230,7 @@ public class WebSite {
     }
 
     private void generatePages() {
-        reportPhase("generating HTMLs");
+        reportPhase("generating the rest of HTML pages");
         forEachPage(this::generatePage);
         buildJsonOfAllPages();
     }
@@ -252,8 +252,10 @@ public class WebSite {
         try {
             resetPlugins(markupPath(tocItem)); // TODO reset at render phase only?
 
+            boolean isIndex = isIndexToc(tocItem);
+
             // we are inside directory, so nest level is 1 for extra resources
-            HtmlRenderContext renderContext = HtmlRenderContext.nested(1);
+            HtmlRenderContext renderContext = HtmlRenderContext.nested(isIndex ? 0 : 1);
 
             final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(toc, tocItem, page, renderContext);
 
@@ -261,13 +263,20 @@ public class WebSite {
             extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
 
             final String html = htmlAndProps.getHtmlPage().render(renderContext);
-            Path pagePath = Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
+
+            Path pagePath = isIndex ? Paths.get("index.html") :
+                    Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
+
             deployer.deploy(pagePath, html);
 
             return htmlAndProps;
         } catch (Exception e) {
             throw new RuntimeException("Error during rendering of " + tocItem.getFileNameWithoutExtension(), e);
         }
+    }
+
+    private boolean isIndexToc(TocItem tocItem) {
+        return tocItem.getDirName().equals("") && tocItem.getFileNameWithoutExtension().equals("index");
     }
 
     private void deployAuxiliaryFiles() {

@@ -8,12 +8,11 @@ export {getSearchIndexPromise}
 //
 
 let indexPromise = null
-function getSearchIndexPromise() {
+function getSearchIndexPromise(renderContext) {
     if (indexPromise) {
         return indexPromise
     }
 
-// TODO use render context to figure out path back
-    indexPromise = jsonPromise("../search-index.json")
+    indexPromise = jsonPromise(renderContext, "search-index.json")
     return indexPromise
 }

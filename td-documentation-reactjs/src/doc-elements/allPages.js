@@ -7,12 +7,11 @@ export {getAllPagesPromise}
 //
 
 let pagesPromise = null
-function getAllPagesPromise() {
-    if (pagesPromise) {``
+function getAllPagesPromise(renderContext) {
+    if (pagesPromise) {
         return pagesPromise
     }
 
-// TODO use render context to figure out path back
-    pagesPromise = jsonPromise("../all-pages.json")
+    pagesPromise = jsonPromise(renderContext, "all-pages.json")
     return pagesPromise
 }

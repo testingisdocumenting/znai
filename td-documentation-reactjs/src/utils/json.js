@@ -1,8 +1,11 @@
 import Promise from "promise"
+import {nestedPath} from './renderContext'
 
 export {jsonPromise}
 
-function jsonPromise(url) {
+function jsonPromise(renderContext, url) {
+    url = nestedPath(renderContext.nestLevel, url)
+
     return new Promise((resolve, reject) => {
         fetch(url).then((response) => {
             response.json().then((json) => {

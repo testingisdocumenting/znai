@@ -4,7 +4,7 @@ import SearchPopup from "./SearchPopup"
 
 class SearchDemo extends Component {
     render() {
-        return <SearchPopup searchPromise={getSearchPromise()}/>
+        return <SearchPopup searchPromise={getSearchPromise({nestLevel: 1})}/>
     }
 }
 

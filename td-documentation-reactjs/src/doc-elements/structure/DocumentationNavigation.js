@@ -17,9 +17,16 @@ class DocumentationNavigation {
     }
 
     navigateToPage(id) {
-        // TODO handle .. for cases when selected is not a doc page
-        const url = ("../" + id.dirName + "/" + id.fileName) + (id.pageSectionId && id.pageSectionId.length ? ("#" + id.pageSectionId) : "")
+        const currentDirNameAndFileName = this.currentDirNameAndFileName()
 
+        const isRoot = currentDirNameAndFileName.dirName.length === 0
+        const url =  (isRoot ? "" : "../") + (id.dirName + "/" + id.fileName) +
+            (id.pageSectionId && id.pageSectionId.length ? ("#" + id.pageSectionId) : "")
+
+        this.navigateToUrl(url)
+    }
+
+    navigateToUrl(url) {
         history.pushState({}, null, url)
         return this.notifyNewUrl(url)
     }
@@ -36,13 +43,16 @@ class DocumentationNavigation {
     }
 
     extractDirNameAndFileName(url) {
+        console.log(url)
+
         const hashIdx = url.indexOf("#");
         const pageSectionId = hashIdx >= 0 ? url.substr(hashIdx + 1) : ""
         url = hashIdx >= 0 ? url.substr(0, hashIdx) : url
 
-        const parts = url.split("/")
+        const parts = url.split("/").filter(p => p !== ".." && p.length > 0)
+
         if (parts.length < 2) {
-            return {}
+            return {dirName: "", fileName: "index"}
         }
 
         // something/dir-name/file-name#id
