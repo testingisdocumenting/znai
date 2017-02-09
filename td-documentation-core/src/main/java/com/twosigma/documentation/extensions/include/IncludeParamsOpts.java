@@ -2,6 +2,8 @@ package com.twosigma.documentation.extensions.include;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.stream.Stream;
 
 /**
  * @author mykola
@@ -16,6 +18,14 @@ public class IncludeParamsOpts {
     @SuppressWarnings("unchecked")
     public <E> E get(String name) {
         return (E) opts.get(name);
+    }
+
+    public Stream<String> getNames() {
+        return opts.keySet().stream();
+    }
+
+    public void forEach(BiConsumer<String, Object> consumer) {
+        opts.forEach(consumer);
     }
 
     public String getString(String name) {

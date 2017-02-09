@@ -28,7 +28,7 @@ class Snippet extends React.Component {
     }
 
     componentWillUnmount() {
-        if (this.timeOut) {
+        if (this.timeOut && window.clearTimeout) {
             clearTimeout(this.timeOut)
         }
     }

@@ -4,6 +4,7 @@ import Page from './default-elements/Page'
 import Snippet from './default-elements/Snippet'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import GraphVizFlow from './graphviz/GraphVizFlow'
+import SimpleTable from './table/SimpleTable'
 
 const library = {}
 
@@ -59,6 +60,8 @@ library.CustomComponent = ({componentName, componentProps}) => {
 
 library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphVizSvg {...props}/></div>
 library.GraphVizFlow = GraphVizFlow
+
+library.SimpleTable = SimpleTable
 
 library.Page = Page(library)
 
