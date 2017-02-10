@@ -19,13 +19,19 @@ class CsvParser {
         try {
             CsvData csvData = new CsvData();
 
-            CSVParser csvRecords = CSVFormat.EXCEL.withHeader().parse(new StringReader(content));
+            CSVParser csvRecords = CSVFormat.RFC4180.withFirstRecordAsHeader().
+                    withIgnoreSurroundingSpaces().
+                    withIgnoreEmptyLines().
+                    withTrim().
+                    withDelimiter(',').
+                    parse(new StringReader(content));
             Map<String, Integer> headerMap = csvRecords.getHeaderMap();
 
             headerMap.keySet().forEach(csvData::addColumn);
 
             for (CSVRecord record : csvRecords) {
                 Row row = new Row();
+
                 record.forEach(row::add);
 
                 csvData.addRow(row);

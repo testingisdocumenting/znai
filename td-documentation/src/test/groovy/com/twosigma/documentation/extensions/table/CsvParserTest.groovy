@@ -8,8 +8,8 @@ import org.junit.Test
 class CsvParserTest {
     @Test
     void "parse simple csv"() {
-        def csvData = CsvParser.parse("""Account, Price, Description
-#12BGD3, 100, custom table
+        def csvData = CsvParser.parse("""Account, Price, "Description"
+#12BGD3, 100, "custom, table"
 #12BGD3, 150, chair
 #91AGB1, 10, lunch
 """)
@@ -29,7 +29,7 @@ class CsvParserTest {
                     [
                             "#12BGD3",
                             "100",
-                            'custom table'
+                            "custom, table"
                     ],
                     [
                             "#12BGD3",
