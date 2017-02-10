@@ -5,7 +5,6 @@ import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.WebSite;
 import com.twosigma.documentation.client.DocumentationUploadClient;
-import com.twosigma.documentation.client.DeployTempDir;
 import com.twosigma.documentation.server.DocumentationServer;
 import com.twosigma.documentation.server.preview.DocumentationPreview;
 import io.vertx.core.http.HttpServer;
@@ -17,12 +16,12 @@ import java.nio.file.Path;
  */
 public class DocumentationCliApp {
     private CliConfig config;
-    private Path deploydPath;
+    private Path deployPath;
     private WebSite webSite;
 
     public DocumentationCliApp(String[] args) {
         this.config = new CliConfig(args);
-        this.deploydPath = config.getDeployRoot().resolve(createDocName());
+        this.deployPath = config.getDeployRoot().resolve(createDocName());
     }
 
     public static void main(String[] args) {
@@ -77,7 +76,7 @@ public class DocumentationCliApp {
     private void generateDocs() {
         webSite = WebSite.withToc(config.getSourceRoot().resolve("toc")).
                 withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).
-                deployTo(deploydPath);
+                withEnabledPreview(config.isPreview()).deployTo(deployPath);
     }
 
     private void announceMode(String name) {

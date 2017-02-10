@@ -366,8 +366,8 @@ public class WebSite {
             return this;
         }
 
-        public Configuration withEnabledPreview() {
-            this.isPreviewEnabled = true;
+        public Configuration withEnabledPreview(boolean isPreviewEnabled) {
+            this.isPreviewEnabled = isPreviewEnabled;
             return this;
         }
 
