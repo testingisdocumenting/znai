@@ -3,3 +3,11 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.simple-table table td {
+    border-left: 1px #ddd solid;
+}
+
+.simple-table table td:first-child {
+    border-left: none;
+}
