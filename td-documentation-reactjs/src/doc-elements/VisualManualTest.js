@@ -5,7 +5,7 @@ import DiagramSlidesDemo from './DiagramSlidesDemo'
 import TableDemo from './table/TableDemo'
 
 const VisualManualTest = () => (
-    <TableDemo/>
+    <DocumentationDemo/>
 )
 
 

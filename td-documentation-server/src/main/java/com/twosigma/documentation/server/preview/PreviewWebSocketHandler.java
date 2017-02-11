@@ -59,6 +59,14 @@ public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
         send(payload);
     }
 
+    public void sendError(String error) {
+        LinkedHashMap<String, Object> payload = new LinkedHashMap<>();
+        payload.put("type", "error");
+        payload.put("error", error);
+
+        send(payload);
+    }
+
     private void send(Map<String, ?> payload) {
         if (ws == null) {
             ConsoleOutputs.out(BLUE, "connection ", FontStyle.NORMAL, "with", BLUE, " web page ", FontStyle.NORMAL, "is not established. ",

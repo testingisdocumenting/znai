@@ -45,6 +45,7 @@ class Documentation extends Component {
         this.onPageUpdate = this.onPageUpdate.bind(this)
         this.onTocUpdate = this.onTocUpdate.bind(this)
         this.onMultiplePagesUpdate = this.onMultiplePagesUpdate.bind(this)
+        this.onPageGenError = this.onPageGenError.bind(this)
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
 
         documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
@@ -68,7 +69,7 @@ class Documentation extends Component {
 
     render() {
         const {docMeta} = this.props
-        const {toc, page, selectedTocItem, tocCollapsed, tocSelected} = this.state
+        const {toc, page, selectedTocItem, tocCollapsed, tocSelected, pageGenError} = this.state
         const isMiscPage = page.tocItem.dirName === ""
 
         const pageTitle = page.tocItem.pageTitle
@@ -80,7 +81,8 @@ class Documentation extends Component {
         const preview = docMeta.previewEnabled ? <Preview active={true}
                                                           onPageUpdate={this.onPageUpdate}
                                                           onMultiplePagesUpdate={this.onMultiplePagesUpdate}
-                                                          onTocUpdate={this.onTocUpdate}/> : null
+                                                          onTocUpdate={this.onTocUpdate}
+                                                          onError={this.onPageGenError}/> : null
 
         const previewIndicator = <PreviewChangeIndicator targetDom={this.state.lastChangeDataDom}/>
 
@@ -88,6 +90,8 @@ class Documentation extends Component {
             {this.previousPageButton()}
             {this.nextPageButton()}
         </div>)
+
+        const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
 
         return (
             <div className="documentation">
@@ -113,11 +117,13 @@ class Documentation extends Component {
                                           previewEnabled={docMeta.previewEnabled}/>
                     {nextPrevPageButtons}
                 </div>
+
+                {pageGenErrorPanel}
             </div>)
     }
 
     changePage(newStateWithNewPage) {
-        this.setState(newStateWithNewPage)
+        this.setState({...newStateWithNewPage, pageGenError: null})
         this.onPageLoad()
     }
 
@@ -240,6 +246,11 @@ class Documentation extends Component {
         } else {
             this.navigateToPageAndDisplayChange(listOfPageProps[0], updatePagesReference)
         }
+    }
+
+    onPageGenError(error) {
+        console.error(error)
+        this.setState({pageGenError: error})
     }
 
     navigateToPageAndDisplayChange(pageProps, updatePagesReference) {

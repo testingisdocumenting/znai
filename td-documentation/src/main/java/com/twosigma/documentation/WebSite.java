@@ -203,7 +203,8 @@ public class WebSite {
             final Page page = new Page(parserResult.getDocElement());
             pageByTocItem.put(tocItem, page);
         } catch(Exception e) {
-            throw new RuntimeException("error during parsing of " + tocItem.getFileNameWithoutExtension(), e);
+            throw new RuntimeException("error during parsing of " + tocItem.getFileNameWithoutExtension() +
+                    ":" + e.getMessage(), e);
         }
     }
 
@@ -271,7 +272,8 @@ public class WebSite {
 
             return htmlAndProps;
         } catch (Exception e) {
-            throw new RuntimeException("Error during rendering of " + tocItem.getFileNameWithoutExtension(), e);
+            throw new RuntimeException("error during rendering of " + tocItem.getFileNameWithoutExtension() + ": " + e.getMessage(),
+                    e);
         }
     }
 

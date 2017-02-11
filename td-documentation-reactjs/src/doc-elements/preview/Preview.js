@@ -34,6 +34,10 @@ class Server {
             if (data.type === 'multiplePagesUpdate') {
                 this.handlers.onMultiplePagesUpdate(data.listOfPageProps)
             }
+
+            if (data.type === 'error') {
+                this.handlers.onError(data.error)
+            }
         };
 
         function socketUrl(relativeUrl) {
@@ -46,8 +50,7 @@ class Server {
             const isSecure = currentLocation.indexOf("https://") !== -1
             const protocol = isSecure ? "wss" : "ws"
 
-            return protocol + "://" + location.hostname + ":" + 8080 + "/" + relativeUrl
-            // return protocol + "://" + location.hostname + ":" + location.port + "/" + relativeUrl
+            return protocol + "://" + location.hostname + ":" + location.port + "/" + relativeUrl
         }
     }
 }

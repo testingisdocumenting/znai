@@ -59,7 +59,7 @@ const TestData = {
             "logo": "img/two-sigma-logo.png",
             "type": "User Guide",
             "title": "MUUG",
-            "previewEnabled": false
+            "previewEnabled": true
         },
         "page": {
             "type": "Page",

@@ -20,7 +20,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     private WebSite previewWebSite;
 
     public PreviewPushFileChangeHandler(final PreviewWebSocketHandler previewSocket,
-        final WebSite previewWebSite) {
+                                        final WebSite previewWebSite) {
 
         this.previewSocket = previewSocket;
         this.previewWebSite = previewWebSite;
@@ -29,19 +29,22 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     @Override
     public void onTocChange(Path tocPath) {
         ConsoleOutputs.out("toc changed: ", tocPath);
-        previewSocket.sendToc(previewWebSite.updateToc());
+        execute(() -> previewSocket.sendToc(previewWebSite.updateToc()));
     }
 
     @Override
     public void onMarkupChange(Path path) {
         ConsoleOutputs.out("md changed: ", path);
-        HtmlPageAndPageProps htmlPageAndPageProps = regenerate(path);
 
-        if (htmlPageAndPageProps == null) {
-            return;
-        }
+        execute(() -> {
+            HtmlPageAndPageProps htmlPageAndPageProps = regenerate(path);
 
-        previewSocket.sendPage(htmlPageAndPageProps.getProps());
+            if (htmlPageAndPageProps == null) {
+                return;
+            }
+
+            previewSocket.sendPage(htmlPageAndPageProps.getProps());
+        });
     }
 
     private HtmlPageAndPageProps regenerate(Path markupPath) {
@@ -59,16 +62,27 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     public void onChange(final Path path) {
         ConsoleOutputs.out("file changed: ", path);
 
-        Collection<TocItem> dependentTocItems = previewWebSite.dependentTocItems(path);
-        if (dependentTocItems.isEmpty()) {
-            ConsoleOutputs.out("no markup files depends on ", BLUE, path);
-            return;
+        execute(() -> {
+            Collection<TocItem> dependentTocItems = previewWebSite.dependentTocItems(path);
+            if (dependentTocItems.isEmpty()) {
+                ConsoleOutputs.out("no markup files depends on ", BLUE, path);
+                return;
+            }
+
+            dependentTocItems.forEach(System.out::println);
+            Stream<PageProps> generatedPages = dependentTocItems.stream().
+                    map(tocItem -> previewWebSite.regeneratePage(tocItem).getProps());
+
+            previewSocket.sendPages(generatedPages);
+        });
+    }
+
+    private void execute(Runnable code) {
+        try {
+            code.run();
+        } catch (Exception e) {
+            ConsoleOutputs.err(e.getMessage());
+            previewSocket.sendError(e.getMessage());
         }
-
-        dependentTocItems.forEach(System.out::println);
-        Stream<PageProps> generatedPages = dependentTocItems.stream().
-                map(tocItem -> previewWebSite.regeneratePage(tocItem).getProps());
-
-        previewSocket.sendPages(generatedPages);
     }
 }
