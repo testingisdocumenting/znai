@@ -8,7 +8,6 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.streams.Pump;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * @author mykola
@@ -18,15 +17,16 @@ public class FileUploadHandler implements Handler<HttpServerRequest> {
     private OnFileUploadHandler fileUploadHandler;
     private Path destination;
 
-    public FileUploadHandler(Vertx vertx, String docId, OnFileUploadHandler fileUploadHandler) {
+    public FileUploadHandler(Vertx vertx, Path deployRoot, String docId, OnFileUploadHandler fileUploadHandler) {
         this.vertx = vertx;
-        this.destination = Paths.get(docId + ".zip");
+        this.destination = deployRoot.resolve(docId + ".zip");
         this.fileUploadHandler = fileUploadHandler;
     }
 
     @Override
     public void handle(HttpServerRequest req) {
         req.pause();
+
         vertx.fileSystem().open(destination.toString(), new OpenOptions(), fh -> {
             AsyncFile file = fh.result();
             Pump pump = Pump.pump(req, file);

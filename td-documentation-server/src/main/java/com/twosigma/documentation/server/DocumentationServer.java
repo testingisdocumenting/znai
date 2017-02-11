@@ -10,6 +10,8 @@ import io.vertx.core.http.HttpServer;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
@@ -17,6 +19,7 @@ import java.nio.file.Path;
  */
 public class DocumentationServer {
     public static HttpServer create(Path deployRoot) {
+        createDirs(deployRoot);
         System.setProperty("vertx.cwd", deployRoot.toString());
 
         Vertx vertx = Vertx.vertx();
@@ -35,7 +38,7 @@ public class DocumentationServer {
         router.route("/upload/:docId").handler(ctx -> {
             MultiMap params = ctx.request().params();
             String docId = params.get("docId");
-            new FileUploadHandler(vertx, docId, (p) -> unzip(deployRoot, docId, p)).handle(ctx.request());
+            new FileUploadHandler(vertx, deployRoot, docId, (p) -> unzip(deployRoot, docId, p)).handle(ctx.request());
         });
 
         router.get("/:product/:section/:page").handler(rc -> {
@@ -51,6 +54,14 @@ public class DocumentationServer {
         server.requestHandler(router::accept);
 
         return server;
+    }
+
+    private static void createDirs(Path deployRoot) {
+        try {
+            Files.createDirectories(deployRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void unzip(Path root, String docId, Path path) {
