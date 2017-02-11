@@ -25,14 +25,18 @@ class CsvParser {
                     withTrim().
                     withDelimiter(',').
                     parse(new StringReader(content));
-            Map<String, Integer> headerMap = csvRecords.getHeaderMap();
 
+            Map<String, Integer> headerMap = csvRecords.getHeaderMap();
             headerMap.keySet().forEach(csvData::addColumn);
 
             for (CSVRecord record : csvRecords) {
                 Row row = new Row();
-
                 record.forEach(row::add);
+
+                if (record.size() != headerMap.size()) {
+                    throw new RuntimeException("record mismatches header. header: " + headerMap.keySet() +
+                            "; record: " + row.getData());
+                }
 
                 csvData.addRow(row);
             }
