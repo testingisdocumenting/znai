@@ -187,7 +187,19 @@ public class DocElementCreationParserHandler implements ParserHandler {
             IncludePluginResult includePluginResult = includePlugin.process(componentsRegistry, path, includeParams);
             includePlugin.auxiliaryFiles(componentsRegistry, includeParams).forEach(auxiliaryFiles::add);
 
-            append(includePluginResult.getDocElement());
+            List<DocElement> docElements = includePluginResult.getDocElements();
+            if (docElements.isEmpty()) {
+                return;
+            }
+
+            // if element is a section itself we need to close all the current sections and paragraphs
+            if (docElements.get(0).getType().equals(DocElementType.SECTION)) {
+                while (elementsStack.size() > 1) {
+                    end();
+                }
+            }
+
+            docElements.forEach(this::append);
         } catch (Exception e) {
             throw new RuntimeException("failure during processing include plugin '" + pluginId + "': " + e.getMessage(), e);
         }

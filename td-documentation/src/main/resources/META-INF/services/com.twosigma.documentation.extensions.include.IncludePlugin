@@ -1,4 +1,5 @@
 com.twosigma.documentation.extensions.include.TextFileIncludePlugin
+com.twosigma.documentation.extensions.markup.MarkdownsIncludePlugin
 com.twosigma.documentation.extensions.table.IncludeCsvTable
 com.twosigma.documentation.extensions.diagrams.GvDiagramIncludePlugin
 com.twosigma.documentation.extensions.diagrams.GvDiagramSlidesIncludePlugin
