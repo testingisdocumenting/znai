@@ -7,6 +7,7 @@ import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.extensions.include.IncludePluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
 import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
@@ -182,15 +183,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
         try {
             IncludePlugin includePlugin = IncludePlugins.byId(pluginId);
             IncludeParams includeParams = new IncludeParams(value);
-            ReactComponent reactComponent = includePlugin.process(componentsRegistry, path, includeParams);
 
+            IncludePluginResult includePluginResult = includePlugin.process(componentsRegistry, path, includeParams);
             includePlugin.auxiliaryFiles(componentsRegistry, includeParams).forEach(auxiliaryFiles::add);
 
-            DocElement customComponent = new DocElement(DocElementType.CUSTOM_COMPONENT);
-            customComponent.addProp("componentName", reactComponent.getName());
-            customComponent.addProp("componentProps", reactComponent.getProps());
-
-            append(customComponent);
+            append(includePluginResult.getDocElement());
         } catch (Exception e) {
             throw new RuntimeException("failure during processing include plugin '" + pluginId + "': " + e.getMessage(), e);
         }

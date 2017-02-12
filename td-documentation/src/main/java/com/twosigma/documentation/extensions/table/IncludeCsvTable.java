@@ -5,6 +5,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.extensions.include.IncludePluginResult;
 
 import java.nio.file.Path;
 import java.util.Collections;
@@ -24,7 +25,7 @@ public class IncludeCsvTable implements IncludePlugin {
 
     @Override
     @SuppressWarnings("unchecked")
-    public ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         String csv = componentsRegistry.includeResourceResolver().textContent(includeParams.getFreeParam());
         CsvData csvData = CsvParser.parse(csv);
 
@@ -36,7 +37,7 @@ public class IncludeCsvTable implements IncludePlugin {
             column.ifPresent(c -> c.putAll((Map<? extends String, ?>) meta));
         });
 
-        return new ReactComponent("SimpleTable", Collections.singletonMap("table", table));
+        return IncludePluginResult.reactComponent("SimpleTable", Collections.singletonMap("table", table));
     }
 
     @Override

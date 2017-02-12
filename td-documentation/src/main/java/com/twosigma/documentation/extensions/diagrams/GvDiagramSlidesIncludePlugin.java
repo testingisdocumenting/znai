@@ -4,10 +4,7 @@ import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
-import com.twosigma.documentation.extensions.include.IncludeContext;
-import com.twosigma.documentation.extensions.include.IncludeParams;
-import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
+import com.twosigma.documentation.extensions.include.*;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.utils.NameUtils;
 
@@ -36,7 +33,7 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         MarkupParser parser = componentsRegistry.parser();
         IncludeResourcesResolver includeResourcesResolver = componentsRegistry.includeResourceResolver();
 
@@ -60,7 +57,7 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
         props.put("diagram", Graphviz.graphvizEngine.diagramFromGv(diagramId, gvContent).toMap());
         props.put("colors", Graphviz.colors);
 
-        return new ReactComponent("GraphVizFlow", props);
+        return IncludePluginResult.reactComponent("GraphVizFlow", props);
     }
 
     @Override

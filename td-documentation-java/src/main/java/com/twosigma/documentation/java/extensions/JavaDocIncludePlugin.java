@@ -5,6 +5,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.extensions.include.IncludePluginResult;
 import com.twosigma.documentation.java.parser.JavaDocExtractor;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 
@@ -22,11 +23,11 @@ public class JavaDocIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         String textContent = componentsRegistry.includeResourceResolver().textContent(includeParams.getFreeParam());
         String javaDoc = JavaDocExtractor.extractTopLevel(textContent);
 
-        return new ReactComponent(DocElementType.SIMPLE_TEXT, Collections.singletonMap("text", javaDoc));
+        return IncludePluginResult.reactComponent(DocElementType.SIMPLE_TEXT, Collections.singletonMap("text", javaDoc));
     }
 
     @Override

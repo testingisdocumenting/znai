@@ -20,7 +20,7 @@ public interface IncludePlugin {
      */
     default void reset(IncludeContext context) {}
 
-    ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams);
+    IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams);
 
     default Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
         return Stream.empty();

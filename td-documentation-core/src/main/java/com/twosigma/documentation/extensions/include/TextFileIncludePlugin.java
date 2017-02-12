@@ -27,7 +27,7 @@ public class TextFileIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         String fileName = includeParams.getFreeParam();
 
         String text = extractText(componentsRegistry.includeResourceResolver().
@@ -39,7 +39,7 @@ public class TextFileIncludePlugin implements IncludePlugin {
         props.put("lang", (providedLang == null) ? langFromFileName(fileName) : providedLang);
         props.put("maxLineLength", StringUtils.maxLineLength(text));
 
-        return new ReactComponent(DocElementType.SNIPPET, props);
+        return IncludePluginResult.reactComponent(DocElementType.SNIPPET, props);
     }
 
     @Override

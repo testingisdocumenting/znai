@@ -1,19 +1,18 @@
 package com.twosigma.documentation.extensions.code;
 
+import com.google.gson.Gson;
+import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.include.IncludeContext;
+import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.extensions.include.IncludePluginResult;
+
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-
-import com.google.gson.Gson;
-
-import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.include.IncludeContext;
-import com.twosigma.documentation.extensions.include.IncludeParams;
-import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.ReactComponent;
 
 import static com.twosigma.utils.FileUtils.fileTextContent;
 import static java.util.stream.Collectors.toList;
@@ -43,8 +42,8 @@ public class CodeExecutionResultIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public ReactComponent process(ComponentsRegistry componentsRegistry, Path markupPath, final IncludeParams includeParams) {
-        return new ReactComponent("TestComponent", Collections.emptyMap());
+    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final IncludeParams includeParams) {
+        return IncludePluginResult.reactComponent("TestComponent", Collections.emptyMap());
 //        final String fileName = includeParams.getFreeParam();
 //        final Path fullPath = context.getCurrentFilePath().getParent().resolve(fileName + ".json").toAbsolutePath();
 //
