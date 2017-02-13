@@ -70,7 +70,6 @@ class Documentation extends Component {
     render() {
         const {docMeta} = this.props
         const {toc, page, selectedTocItem, tocCollapsed, tocSelected, pageGenError} = this.state
-        const isMiscPage = page.tocItem.dirName === ""
 
         const pageTitle = page.tocItem.pageTitle
 
@@ -85,11 +84,6 @@ class Documentation extends Component {
                                                           onError={this.onPageGenError}/> : null
 
         const previewIndicator = <PreviewChangeIndicator targetDom={this.state.lastChangeDataDom}/>
-
-        const nextPrevPageButtons = isMiscPage ? null : (<div className="next-prev-buttons content-block">
-            {this.previousPageButton()}
-            {this.nextPageButton()}
-        </div>)
 
         const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
 
@@ -115,7 +109,10 @@ class Documentation extends Component {
                     <elementsLibrary.Page tocItem={page.tocItem}
                                           content={page.content}
                                           previewEnabled={docMeta.previewEnabled}/>
-                    {nextPrevPageButtons}
+                    <div className="next-prev-buttons content-block">
+                        {this.previousPageButton()}
+                        {this.nextPageButton()}
+                    </div>
                 </div>
 
                 {pageGenErrorPanel}
