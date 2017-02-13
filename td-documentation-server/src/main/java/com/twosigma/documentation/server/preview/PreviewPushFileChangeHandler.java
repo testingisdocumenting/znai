@@ -32,10 +32,30 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
         execute(() -> previewSocket.sendToc(previewWebSite.updateToc()));
     }
 
-    @Override
-    public void onMarkupChange(Path path) {
-        ConsoleOutputs.out("md changed: ", path);
+    private HtmlPageAndPageProps regenerate(Path markupPath) {
+        final TocItem tocItem = previewWebSite.tocItemByPath(markupPath);
 
+        if (tocItem == null) {
+            return null;
+        }
+
+        return previewWebSite.regeneratePage(tocItem);
+    }
+
+    @Override
+    public void onChange(final Path path) {
+        ConsoleOutputs.out("file changed: ", path);
+
+        final TocItem tocItem = previewWebSite.tocItemByPath(path);
+        if (tocItem == null) {
+            ConsoleOutputs.out(path + " is not part of table of contents, checking dependent files");
+            onDependentChange(path);
+        } else {
+            onMarkupChange(path);
+        }
+    }
+
+    private void onMarkupChange(Path path) {
         execute(() -> {
             HtmlPageAndPageProps htmlPageAndPageProps = regenerate(path);
 
@@ -47,21 +67,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
         });
     }
 
-    private HtmlPageAndPageProps regenerate(Path markupPath) {
-        final TocItem tocItem = previewWebSite.tocItemByPath(markupPath);
-
-        if (tocItem == null) {
-            ConsoleOutputs.err(markupPath + " is not part of table of contents");
-            return null;
-        }
-
-        return previewWebSite.regeneratePage(tocItem);
-    }
-
-    @Override
-    public void onChange(final Path path) {
-        ConsoleOutputs.out("file changed: ", path);
-
+    private void onDependentChange(Path path) {
         execute(() -> {
             Collection<TocItem> dependentTocItems = previewWebSite.dependentTocItems(path);
             if (dependentTocItems.isEmpty()) {

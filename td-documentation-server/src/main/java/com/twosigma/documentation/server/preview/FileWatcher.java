@@ -2,6 +2,8 @@ package com.twosigma.documentation.server.preview;
 
 import com.sun.nio.file.SensitivityWatchEventModifier;
 import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.documentation.AuxiliaryFileListener;
+import com.twosigma.documentation.core.AuxiliaryFile;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -16,18 +18,19 @@ import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 /**
  * @author mykola
  */
-public class FileWatcher {
+public class FileWatcher implements AuxiliaryFileListener {
     private FileChangeHandler fileChangeHandler;
     private final WatchService watchService;
     private Map<WatchKey, Path> pathByKey;
 
-    public FileWatcher(Path root, FileChangeHandler fileChangeHandler) {
+    public FileWatcher(Path root, Stream<Path> auxiliaryFiles, FileChangeHandler fileChangeHandler) {
         this.fileChangeHandler = fileChangeHandler;
         watchService = createWatchService();
         pathByKey = new HashMap<>();
         final Path absoluteRoot = root.toAbsolutePath();
         register(absoluteRoot);
         registerDirs(absoluteRoot);
+        auxiliaryFiles.forEach(this::register);
     }
 
     public void start() {
@@ -95,19 +98,21 @@ public class FileWatcher {
 
         if (fileName.equals("toc")) {
             fileChangeHandler.onTocChange(path);
-        } else if (isMarkup(fileName)) {
-            fileChangeHandler.onMarkupChange(path);
         } else {
             fileChangeHandler.onChange(path);
         }
     }
 
-    private boolean isMarkup(String fileName) {
-        return fileName.endsWith(".md");
-    }
-
     private void register(Path path) {
         try {
+            if (! Files.isDirectory(path)) {
+                path = path.getParent();
+            }
+
+            if (pathByKey.values().contains(path)) {
+                return;
+            }
+
             final WatchKey key = path.register(watchService, new WatchEvent.Kind[]{StandardWatchEventKinds.ENTRY_MODIFY},
                     SensitivityWatchEventModifier.HIGH);
             pathByKey.put(key, path);
@@ -135,5 +140,10 @@ public class FileWatcher {
             throw new RuntimeException(e);
         }
         return watchService;
+    }
+
+    @Override
+    public void onAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
+        register(auxiliaryFile.getPath());
     }
 }

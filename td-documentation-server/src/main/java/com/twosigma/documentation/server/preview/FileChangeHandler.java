@@ -7,7 +7,5 @@ import java.nio.file.Path;
  */
 public interface FileChangeHandler {
     void onTocChange(Path path);
-    void onMarkupChange(Path path);
-
     void onChange(Path path);
 }

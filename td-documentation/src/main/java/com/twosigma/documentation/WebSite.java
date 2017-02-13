@@ -53,6 +53,8 @@ public class WebSite {
     private final LunrIndexer lunrIndexer;
     private final WebResource tocJavaScript;
 
+    private AuxiliaryFileListener auxiliaryFileListener;
+
     private WebSite(Configuration cfg) {
         this.cfg = cfg;
         this.deployer = new Deployer(cfg.deployPath);
@@ -96,6 +98,14 @@ public class WebSite {
     public void regenerate() {
         reset();
         generate();
+    }
+
+    public void setAuxiliaryFileListener(AuxiliaryFileListener auxiliaryFileListener) {
+        this.auxiliaryFileListener = auxiliaryFileListener;
+    }
+
+    public Set<AuxiliaryFile> getAuxiliaryFiles() {
+        return auxiliaryFiles;
     }
 
     public Path getDeployRoot() {
@@ -217,6 +227,9 @@ public class WebSite {
             tocItems.add(tocItem);
 
             auxiliaryFiles.add(af);
+            if (auxiliaryFileListener != null) {
+                auxiliaryFileListener.onAuxiliaryFile(af);
+            }
         });
     }
 

@@ -3,6 +3,7 @@ package com.twosigma.documentation.server.preview;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.WebSite;
+import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.server.DocumentationServer;
 import io.vertx.core.http.HttpServer;
 
@@ -34,7 +35,10 @@ public class DocumentationPreview {
         reportHost(port);
 
         reportPhase("initializing file watcher");
-        final FileWatcher fileWatcher = new FileWatcher(sourceRoot, fileChangeHandler);
+        final FileWatcher fileWatcher = new FileWatcher(sourceRoot,
+                webSite.getAuxiliaryFiles().stream().map(AuxiliaryFile::getPath),
+                fileChangeHandler);
+        webSite.setAuxiliaryFileListener(fileWatcher);
         fileWatcher.start();
     }
 
