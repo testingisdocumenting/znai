@@ -1,5 +1,31 @@
 toc = [
     {
+        "sectionTitle": "",
+        "dirName": "",
+        "items": [
+            {
+                "sectionTitle": "",
+                "pageTitle": "Index",
+                "fileName": "index",
+                "dirName": "",
+                "pageSectionIdTitles": [
+                    {
+                        "title": "what",
+                        "id": "what"
+                    },
+                    {
+                        "title": "why",
+                        "id": "why"
+                    },
+                    {
+                        "title": "how",
+                        "id": "how"
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "sectionTitle": "Rationale",
         "dirName": "rationale",
         "items": [
@@ -78,6 +104,18 @@ toc = [
                     {
                         "title": "Inlined",
                         "id": "inlined"
+                    }
+                ]
+            },
+            {
+                "sectionTitle": "Features",
+                "pageTitle": "Tables",
+                "fileName": "tables",
+                "dirName": "features",
+                "pageSectionIdTitles": [
+                    {
+                        "title": "CSV",
+                        "id": "csv"
                     }
                 ]
             },
@@ -168,26 +206,26 @@ toc = [
         ]
     },
     {
-        "sectionTitle": "",
-        "dirName": "",
+        "sectionTitle": "Demo Run Book",
+        "dirName": "demo-run-book",
         "items": [
             {
-                "sectionTitle": "",
-                "pageTitle": "Index",
-                "fileName": "index",
-                "dirName": "",
+                "sectionTitle": "Demo Run Book",
+                "pageTitle": "Release Notes",
+                "fileName": "release-notes",
+                "dirName": "demo-run-book",
                 "pageSectionIdTitles": [
                     {
-                        "title": "what",
-                        "id": "what"
+                        "title": "0.2",
+                        "id": "0.2"
                     },
                     {
-                        "title": "why",
-                        "id": "why"
+                        "title": "0.1.1",
+                        "id": "0.1.1"
                     },
                     {
-                        "title": "how",
-                        "id": "how"
+                        "title": "0.1",
+                        "id": "0.1"
                     }
                 ]
             }
