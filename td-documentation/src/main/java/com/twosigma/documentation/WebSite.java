@@ -162,7 +162,7 @@ public class WebSite {
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
         toc = TableOfContents.fromNestedText(fileTextContent(cfg.tocPath));
-        toc.addTocItem("", "index");
+        toc.addTocItemInFront("", "index");
     }
 
     /**
