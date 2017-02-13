@@ -1,9 +1,7 @@
 package com.twosigma.documentation.html;
 
-import com.twosigma.documentation.extensions.PluginsListener;
-import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
-import com.twosigma.documentation.nashorn.NashornEngine;
 import com.twosigma.documentation.html.reactjs.ReactJsBundle;
+import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.Page;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
