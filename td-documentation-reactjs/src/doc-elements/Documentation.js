@@ -71,7 +71,7 @@ class Documentation extends Component {
         const {docMeta} = this.props
         const {toc, page, selectedTocItem, tocCollapsed, tocSelected, pageGenError} = this.state
 
-        const pageTitle = page.tocItem.pageTitle
+        const tocItem = page.tocItem
 
         const searchPopup = this.state.searchActive ? <SearchPopup searchPromise={this.searchPromise}
                                                                    onSearchSelection={this.onSearchSelection}
@@ -105,7 +105,7 @@ class Documentation extends Component {
                 {searchPopup}
 
                 <div className="main-panel" onClick={this.onPanelSelect} ref={panelDom => this.mainPanelDom = panelDom}>
-                    <NavBar docMeta={docMeta} pageTitle={pageTitle} renderContext={page.renderContext}/>
+                    <NavBar docMeta={docMeta} tocItem={tocItem} renderContext={page.renderContext}/>
                     <elementsLibrary.Page tocItem={page.tocItem}
                                           content={page.content}
                                           previewEnabled={docMeta.previewEnabled}/>
