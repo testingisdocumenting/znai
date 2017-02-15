@@ -7,7 +7,6 @@ const Page = (elementsLibrary) => class Page extends Component {
         return (<div className="page-content">
             <div className="page-title-block">
                 <span className="page-title">{tocItem.pageTitle}</span>
-                <span className="doc-section-title">{tocItem.sectionTitle}</span>
             </div>
             <DocElement key={tocItem.pageTitle} content={content} elementsLibrary={elementsLibrary}/>
         </div>)

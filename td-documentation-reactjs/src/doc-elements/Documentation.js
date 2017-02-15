@@ -174,19 +174,26 @@ class Documentation extends Component {
         }
     }
 
-    navButtonPage(tocItem, className, handler) {
-        return (tocItem ? (<div className={className} onClick={handler}>
-                <span className="next-prev-page-title">{tocItem.pageTitle} </span>
-                <span className="next-prev-section-title">{tocItem.sectionTitle}</span>
-            </div>) : null)
-    }
-
     nextPageButton() {
-        return this.navButtonPage(this.nextPageToc, "next-button", this.onNextPage)
+        const tocItem = this.nextPageToc
+        return (tocItem ? (
+                <div className="button-and-text">
+                    <span className="next-prev-page-title">{tocItem.pageTitle} </span>
+                    <div className="next-button button" onClick={this.onNextPage}>
+                        Next
+                    </div>
+                </div>) : null)
     }
 
     previousPageButton() {
-        return this.navButtonPage(this.prevPageToc, "prev-button", this.onPrevPage)
+        const tocItem = this.prevPageToc
+        return (tocItem ? (
+                <div className="button-and-text">
+                    <div className="prev-button button" onClick={this.onPrevPage}>
+                        Prev
+                    </div>
+                    <span className="next-prev-page-title">{tocItem.pageTitle} </span>
+                </div>) : null)
     }
 
     onSearchSelection(id) {
