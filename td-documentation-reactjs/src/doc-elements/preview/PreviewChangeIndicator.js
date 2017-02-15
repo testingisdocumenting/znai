@@ -1,9 +1,20 @@
 import {Component} from 'react'
 
 class PreviewChangeIndicator extends Component {
+    constructor(props) {
+        super(props)
+        this.alreadyScrolled = false
+    }
+
     render() {
         this.highlightChanges()
         return null
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        if (nextProps.targetDom !== this.props.targetDom) {
+            this.alreadyScrolled = false
+        }
     }
 
     highlightChanges() {
@@ -18,8 +29,9 @@ class PreviewChangeIndicator extends Component {
 
         targetDom.className += " __recently-modified"
 
-        if (! elementInViewport(targetDom)) {
+        if (! this.alreadyScrolled && ! elementInViewport(targetDom)) {
             targetDom.scrollIntoView()
+            this.alreadyScrolled = true
         }
 
         this.lastUpdatedDom = targetDom
