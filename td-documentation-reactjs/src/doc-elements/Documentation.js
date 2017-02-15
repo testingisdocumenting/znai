@@ -91,6 +91,7 @@ class Documentation extends Component {
             <div className="documentation">
                 <div className="side-panel" onClick={this.onTocSelect}>
                     <TocPanel toc={toc} collapsed={tocCollapsed} selected={tocSelected}
+                              docMeta={docMeta}
                               onToggle={this.onTocToggle}
                               selectedItem={selectedTocItem}
                               onNextPage={this.onNextPage}
@@ -105,7 +106,6 @@ class Documentation extends Component {
                 {searchPopup}
 
                 <div className="main-panel" onClick={this.onPanelSelect} ref={panelDom => this.mainPanelDom = panelDom}>
-                    <NavBar docMeta={docMeta} tocItem={tocItem} renderContext={page.renderContext}/>
                     <elementsLibrary.Page tocItem={page.tocItem}
                                           content={page.content}
                                           previewEnabled={docMeta.previewEnabled}/>
@@ -176,9 +176,9 @@ class Documentation extends Component {
 
     navButtonPage(tocItem, className, handler) {
         return (tocItem ? (<div className={className} onClick={handler}>
-            <span className="next-prev-section-title">{tocItem.sectionTitle} </span>
-            <span className="next-prev-page-title">{tocItem.pageTitle}</span>
-        </div>) : null)
+                <span className="next-prev-page-title">{tocItem.pageTitle} </span>
+                <span className="next-prev-section-title">{tocItem.sectionTitle}</span>
+            </div>) : null)
     }
 
     nextPageButton() {

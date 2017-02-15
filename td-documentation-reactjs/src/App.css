@@ -1,14 +1,43 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .section {
-    margin-top: 80px;
+    margin-top: 100px;
     font-size: 16px;
+}
+
+.page-title-block {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-title {
+    font-size: 32px;
+}
+
+.doc-section-title:before {
+    font-size: 20px;
+    color: #aaa;
+    content: "// ";
+}
+
+.doc-section-title {
+    color: #aaa;
+    font-size: 20px;
 }
 
 .section-title {
     font-size: 22px;
     padding-bottom: 5px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 
-    color: #999999;
+    color: #000;
+    font-weight: bold;
     text-transform: uppercase;
 }
 

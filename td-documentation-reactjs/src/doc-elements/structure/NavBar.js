@@ -13,7 +13,7 @@ const NavBar = ({docMeta, tocItem, renderContext}) => {
 
     return (<nav className="top-navigation">
         <div className="menu">
-            <a href={url} onClick={clickHandler}> <strong>{docMeta.title}</strong> {docMeta.type} </a>
+            <a href={url} onClick={clickHandler}><span className="glyphicon glyphicon-home"/></a>
             <span className="menu-page-title">{title}</span>
         </div>
     </nav>)

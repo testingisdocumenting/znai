@@ -22,23 +22,26 @@
     white-space: nowrap;
     border-right: 1px solid #eee;
     min-height: 100vh;
+    min-width: 300px;
+
+    background-color: #333;
+    color: #fff;
 }
 
 .toc-panel .header {
     display: flex;
     justify-content: space-between;
     min-height: 60px;
-    background-color: #888888;
+    background-color: #3080b9;
     color: white;
     border-color: #e7e7e7;
     border-width: 0 0 1px;
     padding: 15px 10px 10px 40px;
     z-index: 2;
-    transition: padding-left 0.5s;
 }
 
 .toc-panel.selected .header {
-    background-color: #3060aa;
+    border-bottom: 3px solid #ddd;
 }
 
 .toc-panel-header-title {
@@ -48,6 +51,7 @@
 .toc-menu {
     padding-left: 30px;
     padding-right: 40px;
+    padding-top: 20px;
 
     display: flex;
     flex-direction: column;
@@ -69,8 +73,9 @@
 }
 
 .toc-item {
-    padding-left: 10px;
+    padding-left: 20px;
     margin-left: 3px;
+    margin-bottom: 4px;
 }
 
 .toc-item:hover {
@@ -89,7 +94,7 @@
 
 .toc-menu .page-sections .page-section {
     margin-left: 3px;
-    padding-left: 3px;
+    padding-left: 5px;
 }
 
 .toc-menu .page-sections a {
@@ -99,17 +104,19 @@
 
 
 .toc-menu .page-sections .page-section.active {
-    border-left: 3px solid #1020ff;
+    border-left: 3px solid #eee;
     margin-left: 0;
 }
 
 .toc-panel.collapsed {
     width: 0;
+    min-width: 0;
 }
 
 .toc-panel-expand-button {
     position: fixed;
     cursor: pointer;
+    color: black;
     top: -40px;
     left: 20px;
     font-size: 20px;
@@ -178,16 +185,16 @@
 
 .next-prev-buttons div {
     padding: 10px 15px;
-    background: #eee;
+    background: #28302a;
+    color: #fff;
     border: 1px #ddd solid;
+    border-radius: 5px;
+    box-shadow: 0 0 0 0 rgba(35, 35, 35, 0.15);
 }
 
 .next-prev-buttons div:hover {
-    padding: 10px 15px;
-    background: #ddd;
-    border: 1px #eee solid;
-
     cursor: pointer;
+    box-shadow: 0 0 0 4px rgba(35, 35, 35, 0.15);
 }
 
 .next-prev-buttons .prev-button {
@@ -199,6 +206,14 @@
 }
 
 .next-prev-section-title {
+    color: #ccc;
+}
+
+.next-prev-section-title:before {
+    content: " // ";
+}
+
+.next-prev-page-title {
     font-weight: bold;
 }
 
