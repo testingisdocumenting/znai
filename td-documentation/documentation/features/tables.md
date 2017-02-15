@@ -19,8 +19,6 @@ renders as this table
 By default column width is auto calculated to fit the values inside. 
 But you can control the width with the extra options 
 
-    :include-csv: table.csv {Price: {width: 200}, "Description": {width: 400}}
-    
 ```nohighlight
 :include-csv: table.csv {Price: {width: 200}, "Description": {width: 400}}
 ```
