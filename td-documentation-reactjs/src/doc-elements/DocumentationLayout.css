@@ -18,7 +18,7 @@
 .toc-panel {
     flex: 2;
 
-    overflow-x: scroll;
+    overflow-x: auto;
     white-space: nowrap;
     border-right: 1px solid #eee;
     min-height: 100vh;
@@ -211,6 +211,7 @@
 
 .next-prev-section-title:before {
     content: " // ";
+    margin-left: 20px;
 }
 
 .next-prev-page-title {
