@@ -69,13 +69,22 @@
 .toc-section .title {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    color: #eee;
+}
+
+.toc-section.selected .title {
+    color: #fff;
 }
 
 .toc-item {
-    padding-left: 20px;
-    margin-left: 3px;
+    border-left: 2px solid #333;
+    padding-left: 5px;
+    margin-left: 0;
     margin-bottom: 4px;
+    font-size: 16px;
+    color: #bbb;
+    transition: border-color 0.8s;
 }
 
 .toc-item:hover {
@@ -83,32 +92,37 @@
 }
 
 .toc-item.selected {
-    border-left: 3px solid #eee;
-    margin-left: 0;
+    border-left: 2px solid #999;
+    color: #fff;
+    transition: border-color 0.5s;
 }
 
 .toc-menu .page-sections {
-    padding-left: 20px;
+    padding-left: 10px;
     font-size: 14px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
 .toc-menu .page-sections .page-section {
-    margin-left: 3px;
+    border-left: 3px solid #333;
     margin-bottom: 2px;
     padding-left: 5px;
 }
 
 .toc-menu .page-sections a {
-    color: #aaa;
+    color: #bbb;
     text-decoration: none;
 }
 
-
-.toc-menu .page-sections .page-section.active {
-    border-left: 3px solid #eee;
+.toc-menu .page-sections .page-section.selected {
+    border-left: 3px solid #999;
     margin-left: 0;
+    transition: border-color 0.5s;
+}
+
+.toc-menu .page-sections .selected a {
+    color: #eee;
 }
 
 .toc-panel.collapsed {
@@ -173,7 +187,7 @@
 }
 
 .preview-icon {
-    color: #40a0ff;
+    color: #3080b9;
     position: fixed;
     font-size: 20px;
     right: 80px;
@@ -195,7 +209,7 @@
 .next-prev-buttons .button {
     padding: 7px 15px;
     text-transform: uppercase;
-    background: #40a0ff;
+    background: #3080b9;
     color: #fff;
     box-shadow: 0 0 0 1px rgba(22, 96, 200, 0.59);
 }
@@ -214,7 +228,6 @@
 }
 
 .next-prev-page-title {
-    /*font-weight: bold;*/
 }
 
 .page-gen-error {
