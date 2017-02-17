@@ -21,7 +21,7 @@ class TocPanel extends Component {
         return (<div className={panelClass}>
                 <div className="header">
                     <span className="toc-panel-header-title">{docMeta.title + " " + docMeta.type}</span>
-                    <span className={collapseButtonClass} onClick={this.toggle}>&times;</span>
+                    <span className={collapseButtonClass} onClick={this.toggle}>|||</span>
                 </div>
                 <div className={expandButtonClass} onClick={this.toggle}>&#9776;</div>
                 <TocMenu toc={this.props.toc}
