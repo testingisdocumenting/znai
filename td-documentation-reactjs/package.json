@@ -54,7 +54,8 @@
     "promise": "^7.1.1",
     "query-string": "^4.3.1",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "semantic-ui": "^2.2.7"
   },
   "scripts": {
     "start": "node scripts/start.js",

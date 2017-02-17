@@ -4,7 +4,7 @@ import SimpleTable from './SimpleTable'
 
 const table = {
     columns: [
-        {title: "Column 1", align: "left"},
+        {title: "Column 1", align: "right"},
         {title: "Column 2", width: 300}
     ], data: [
         [1, 2],

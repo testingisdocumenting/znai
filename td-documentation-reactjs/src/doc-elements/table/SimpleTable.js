@@ -1,6 +1,7 @@
 import React from 'react'
 
 import './Table.css'
+import 'semantic-ui/dist/components/table.min.css'
 
 const SimpleTable = ({table}) => {
     const Row = ({row}) => {
@@ -18,7 +19,7 @@ const SimpleTable = ({table}) => {
     }
 
     return (<div className="simple-table">
-        <table className="table table-striped table-condensed">
+        <table className="ui celled padded table">
             <thead>
                 <tr>
                     {table.columns.map((c, idx) => {
