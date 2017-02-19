@@ -1,0 +1,46 @@
+package com.twosigma.documentation.cpp;
+
+import org.antlr.v4.runtime.Token;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * @author mykola
+ */
+public class ExtractMethodBodyVisitor extends CPP14BaseVisitor {
+    private final List<String> lines;
+    private String code;
+    private List<Method> methods;
+
+    public ExtractMethodBodyVisitor(String code) {
+        this.code = code;
+        this.lines = Arrays.asList(code.replace("\r", "").split("\n"));
+        this.methods = new ArrayList<>();
+    }
+
+    public List<Method> getMethods() {
+        return methods;
+    }
+
+    @Override
+    public Object visitFunctiondefinition(CPP14Parser.FunctiondefinitionContext ctx) {
+        String methodName = ctx.declarator().getStart().getText();
+
+        Method method = new Method(methodName,
+                codeContent(ctx.getStart(), ctx.getStop()),
+                removeBrackets(ctx.functionbody().getStart(), ctx.functionbody().getStop()));
+        methods.add(method);
+
+        return super.visitFunctiondefinition(ctx);
+    }
+
+    private String removeBrackets(Token start, Token stop) {
+        return code.substring(start.getStartIndex() + 1, stop.getStartIndex());
+    }
+
+    private String codeContent(Token start, Token stop) {
+        return code.substring(start.getStartIndex(), stop.getStartIndex() + 1);
+    }
+}
