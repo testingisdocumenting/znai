@@ -19,7 +19,7 @@ const SimpleTable = ({table}) => {
     }
 
     return (<div className="simple-table">
-        <table className="ui celled padded table inverted blue">
+        <table className="ui celled padded table">
             <thead>
                 <tr>
                     {table.columns.map((c, idx) => {
