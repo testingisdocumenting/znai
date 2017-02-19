@@ -10,6 +10,10 @@ import 'prismjs/components/prism-cpp'
 export {parseCode}
 
 function parseCode(code, lang) {
+    if (lang === 'csv') {
+        lang = 'clike'
+    }
+
     const tokens = Prism.tokenize(code, Prism.languages[lang])
     return tokens.map(normalizeToken)
 }
