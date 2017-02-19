@@ -51,6 +51,7 @@
     "codemirror": "^5.22.0",
     "lunr": "alpha",
     "mark.js": "github:julmot/mark.js",
+    "prismjs": "^1.6.0",
     "promise": "^7.1.1",
     "query-string": "^4.3.1",
     "react": "^15.4.1",
