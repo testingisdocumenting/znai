@@ -1,6 +1,7 @@
 import React from 'react'
 
 import SimpleCodeToken from './SimpleCodeToken.js'
+import './CodeSnippet.css'
 
 const SimpleCodeSnippet = ({tokens}) => {
     return <div>

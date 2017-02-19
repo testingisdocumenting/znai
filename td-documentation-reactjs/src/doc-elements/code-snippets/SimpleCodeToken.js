@@ -1,6 +1,6 @@
 import React from 'react'
 
-import 'prismjs/themes/prism.css'
+import 'prismjs/themes/prism-coy.css'
 
 const SimpleCodeToken = ({token}) => {
     const className = (token.type === 'text') ? '' : "token " + token.type
