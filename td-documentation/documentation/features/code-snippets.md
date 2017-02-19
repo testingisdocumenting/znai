@@ -54,21 +54,6 @@ class InternationalPriceService implements PriceService {
 }
 ```
 
-# From File
-
-To boost documentation maintainability you can refer text and code snippets from already existing files.
-
-    :include-text-file: file-name.js
-    
-Include-dash family is our custom extension to markdown to support various scenarios. 
-    
-:include-text-file: file-name.js
-
-File will be looked up using following rules:
-* directory with a markup file
-* root directory of a documentation
-* class path
-
 # Inlined
 
 To inline code within a text dimply put it inside a back tick. 
