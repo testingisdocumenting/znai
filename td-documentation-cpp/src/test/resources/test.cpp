@@ -6,6 +6,10 @@ int main() {
     int b = 3;
 }
 
+void ClassName::method_name() {
+   b= 2;
+}
+
 void another() {
 }
 

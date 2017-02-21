@@ -26,7 +26,7 @@ public class ExtractMethodBodyVisitor extends CPP14BaseVisitor {
 
     @Override
     public Object visitFunctiondefinition(CPP14Parser.FunctiondefinitionContext ctx) {
-        String methodName = ctx.declarator().getStart().getText();
+        String methodName = textBeforeParenthesis(ctx.declarator().getText());
 
         Method method = new Method(methodName,
                 codeContent(ctx.getStart(), ctx.getStop()),
@@ -34,6 +34,11 @@ public class ExtractMethodBodyVisitor extends CPP14BaseVisitor {
         methods.add(method);
 
         return super.visitFunctiondefinition(ctx);
+    }
+
+    private String textBeforeParenthesis(String text) {
+        int idx = text.indexOf('(');
+        return idx == -1 ? text : text.substring(0, idx);
     }
 
     private String removeBrackets(Token start, Token stop) {
