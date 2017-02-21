@@ -28,4 +28,12 @@ class CppSourceCodeTest {
 }""", CppSourceCode.methodBody(code, "ClassName::method_name"))
     }
 
+    @Test
+    void "extract body only and strip extra indentation"() {
+        Assert.assertEquals("""int test = 2;
+
+// comment
+// in two lines
+int b = 3;""", CppSourceCode.methodBodyOnly(code, "main"))
+    }
 }

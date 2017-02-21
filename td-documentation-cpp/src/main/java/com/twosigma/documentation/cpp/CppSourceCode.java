@@ -13,12 +13,21 @@ public class CppSourceCode {
     }
 
     public static String methodBody(String code, String methodName) {
+        Optional<Method> first = findMethod(code, methodName);
+        return first.map(Method::getBodyWithDecl).orElse("");
+    }
+
+    public static String methodBodyOnly(String code, String methodName) {
+        Optional<Method> first = findMethod(code, methodName);
+        return first.map(Method::getBodyOnly).orElse("");
+    }
+
+    private static Optional<Method> findMethod(String code, String methodName) {
         CPP14Parser parser = createParser(code);
         ExtractMethodBodyVisitor visitor = new ExtractMethodBodyVisitor(code);
         parser.translationunit().accept(visitor);
 
-        Optional<Method> first = visitor.getMethods().stream().filter(m -> methodName.equals(m.getName())).findFirst();
-        return first.map(Method::getBodyWithDecl).orElse("");
+        return visitor.getMethods().stream().filter(m -> methodName.equals(m.getName())).findFirst();
     }
 
     private static CPP14Parser createParser(String code) {

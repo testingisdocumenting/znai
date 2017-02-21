@@ -2,9 +2,8 @@ package com.twosigma.documentation.cpp;
 
 import org.antlr.v4.runtime.Token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author mykola
@@ -30,10 +29,40 @@ public class ExtractMethodBodyVisitor extends CPP14BaseVisitor {
 
         Method method = new Method(methodName,
                 codeContent(ctx.getStart(), ctx.getStop()),
-                removeBrackets(ctx.functionbody().getStart(), ctx.functionbody().getStop()));
+                stripIndentation(removeBrackets(ctx.functionbody().getStart(), ctx.functionbody().getStop())));
         methods.add(method);
 
         return super.visitFunctiondefinition(ctx);
+    }
+
+    private String stripIndentation(String code) {
+        List<String> lines = Arrays.asList(code.replace("\r", "").split("\n"));
+        Integer indentation = lines.stream().
+                filter(this::notEmptyLine).
+                map(this::lineIndentation).min(Integer::compareTo).orElse(0);
+
+        return lines.stream().map(l -> removeIndentation(l, indentation)).collect(Collectors.joining("\n")).trim()  ;
+    }
+
+    private String removeIndentation(String line, Integer indentation) {
+        if (line.trim().isEmpty()) {
+            return line;
+        }
+
+        return line.substring(indentation);
+    }
+
+    private boolean notEmptyLine(String s) {
+        return ! s.trim().isEmpty();
+    }
+
+    private Integer lineIndentation(String line) {
+        int i = 0;
+        while (i < line.length() && line.charAt(i) == ' ') {
+             i++;
+        }
+
+        return i;
     }
 
     private String textBeforeParenthesis(String text) {
