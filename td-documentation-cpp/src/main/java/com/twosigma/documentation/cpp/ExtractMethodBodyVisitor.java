@@ -2,8 +2,11 @@ package com.twosigma.documentation.cpp;
 
 import org.antlr.v4.runtime.Token;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.twosigma.documentation.cpp.CodeSnippetsUtils.stripIndentation;
 
 /**
  * @author mykola
@@ -35,15 +38,6 @@ public class ExtractMethodBodyVisitor extends CPP14BaseVisitor {
         return super.visitFunctiondefinition(ctx);
     }
 
-    private String stripIndentation(String code) {
-        List<String> lines = Arrays.asList(code.replace("\r", "").split("\n"));
-        Integer indentation = lines.stream().
-                filter(this::notEmptyLine).
-                map(this::lineIndentation).min(Integer::compareTo).orElse(0);
-
-        return lines.stream().map(l -> removeIndentation(l, indentation)).collect(Collectors.joining("\n")).trim()  ;
-    }
-
     private String removeIndentation(String line, Integer indentation) {
         if (line.trim().isEmpty()) {
             return line;
@@ -56,14 +50,6 @@ public class ExtractMethodBodyVisitor extends CPP14BaseVisitor {
         return ! s.trim().isEmpty();
     }
 
-    private Integer lineIndentation(String line) {
-        int i = 0;
-        while (i < line.length() && line.charAt(i) == ' ') {
-             i++;
-        }
-
-        return i;
-    }
 
     private String textBeforeParenthesis(String text) {
         int idx = text.indexOf('(');
