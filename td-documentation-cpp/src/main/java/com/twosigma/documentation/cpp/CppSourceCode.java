@@ -2,7 +2,10 @@ package com.twosigma.documentation.cpp;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -20,6 +23,17 @@ public class CppSourceCode {
     public static String methodBodyOnly(String code, String methodName) {
         Optional<Method> first = findMethod(code, methodName);
         return first.map(Method::getBodyOnly).orElse("");
+    }
+
+    public static List<CodePart> splitOnComments(String code) {
+        CPP14Parser parser = createParser(code);
+        parser.translationunit().accept(new CPP14BaseVisitor());
+
+        SplitOnCommentsTokensProcessor processor = new SplitOnCommentsTokensProcessor(code, parser);
+        List<CodePart> parts = processor.extractParts();
+        parts.forEach(System.out::println);
+
+        return parts;
     }
 
     private static Optional<Method> findMethod(String code, String methodName) {

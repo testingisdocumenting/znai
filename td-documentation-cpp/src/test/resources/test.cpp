@@ -4,6 +4,13 @@ int main() {
     // comment
     // in two lines
     int b = 3;
+    int d = 3;
+
+    /*
+     * multi line comment
+     * of multi lines text
+    */
+    int e = 5;
 }
 
 void ClassName::method_name() {
