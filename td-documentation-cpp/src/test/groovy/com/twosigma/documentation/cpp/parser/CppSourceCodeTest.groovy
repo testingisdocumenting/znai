@@ -1,5 +1,6 @@
-package com.twosigma.documentation.cpp
+package com.twosigma.documentation.cpp.parser
 
+import com.twosigma.documentation.cpp.parser.CppSourceCode
 import com.twosigma.utils.ResourceUtils
 import org.junit.Assert
 import org.junit.Test

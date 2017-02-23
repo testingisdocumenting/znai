@@ -1,9 +1,7 @@
-package com.twosigma.documentation.cpp;
+package com.twosigma.documentation.cpp.parser;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.TokenStream;
 
 import java.util.List;
 import java.util.Optional;

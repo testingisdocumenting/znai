@@ -1,4 +1,4 @@
-package com.twosigma.documentation.cpp;
+package com.twosigma.documentation.cpp.parser;
 
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.TokenStream;

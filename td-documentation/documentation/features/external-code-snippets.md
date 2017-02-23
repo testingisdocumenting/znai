@@ -13,7 +13,11 @@ File will be looked up using following rules:
 * root directory of a documentation
 * class path
 
-# Inlined Comments
+# Inline Comments 
+
+:include-cpp-with-comments: simple.cpp {method: "main"}
+
+# Callout Comments
 
 If you already have comments inside your code it would be non effecient to repeat them inside documentation. 
 Instead comments can be automatically extracted and presented as part of the text

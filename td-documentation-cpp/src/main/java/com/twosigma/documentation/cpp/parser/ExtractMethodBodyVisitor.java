@@ -1,4 +1,4 @@
-package com.twosigma.documentation.cpp;
+package com.twosigma.documentation.cpp.parser;
 
 import org.antlr.v4.runtime.Token;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.twosigma.documentation.cpp.CodeSnippetsUtils.stripIndentation;
+import static com.twosigma.documentation.cpp.parser.CodeSnippetsUtils.stripIndentation;
 
 /**
  * @author mykola

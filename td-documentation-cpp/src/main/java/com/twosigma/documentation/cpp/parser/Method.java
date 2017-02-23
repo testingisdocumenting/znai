@@ -1,4 +1,4 @@
-package com.twosigma.documentation.cpp;
+package com.twosigma.documentation.cpp.parser;
 
 /**
  * @author mykola
