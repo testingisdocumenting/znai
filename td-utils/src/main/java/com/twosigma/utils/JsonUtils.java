@@ -3,6 +3,7 @@ package com.twosigma.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,6 +23,11 @@ public class JsonUtils {
     @SuppressWarnings("unchecked")
     public static Map<String, ?> deserializeAsMap(String data) {
         return gson.fromJson(data, Map.class);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static List<?> deserializeAsList(String data) {
+        return gson.fromJson(data, List.class);
     }
 
     public static String serializePrettyPrint(Object data) {
