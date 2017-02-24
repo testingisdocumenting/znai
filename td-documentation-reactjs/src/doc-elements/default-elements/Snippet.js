@@ -14,7 +14,7 @@ class Snippet extends React.Component {
         const divClassName = "snippet " + (maxLineLength && maxLineLength > 90 ? "wide-screen" : "content-block")
 
         return (<div className={divClassName}>
-            {lang ? <CodeSnippet tokens={parseCode(snippet, lang)}/> : <pre><code>{snippet}</code></pre>}
+            {lang ? <CodeSnippet tokens={parseCode(lang, snippet)}/> : <pre><code>{snippet}</code></pre>}
         </div>)
     }
 }

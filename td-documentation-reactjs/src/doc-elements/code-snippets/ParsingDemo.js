@@ -11,7 +11,7 @@ class ParsingDemo extends Component {
             "    var c = 3;// in two lines\n" +
             "    var d = a + 1;\n";
 
-        const tokens = parseCode(code)
+        const tokens = parseCode("cpp", code)
         return <div><CodeSnippetWithInlineComments tokens={tokens}/></div>
     }
 }

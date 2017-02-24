@@ -9,7 +9,7 @@ import 'prismjs/components/prism-cpp'
 
 export {parseCode}
 
-function parseCode(code, lang) {
+function parseCode(lang, code) {
     if (lang === 'csv') {
         lang = 'clike'
     }
