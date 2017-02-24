@@ -1,5 +1,6 @@
 package com.twosigma.documentation.core;
 
+import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
 import com.twosigma.documentation.parser.MarkupParser;
 
@@ -12,5 +13,6 @@ import com.twosigma.documentation.parser.MarkupParser;
  */
 public interface ComponentsRegistry {
     MarkupParser parser();
+    CodeTokenizer codeTokenizer();
     IncludeResourcesResolver includeResourceResolver();
 }

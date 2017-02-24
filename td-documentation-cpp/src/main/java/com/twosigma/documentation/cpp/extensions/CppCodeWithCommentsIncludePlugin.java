@@ -1,5 +1,7 @@
 package com.twosigma.documentation.cpp.extensions;
 
+import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
+import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.cpp.parser.CodePart;
@@ -12,10 +14,10 @@ import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.parser.docelement.DocElementType;
-import com.twosigma.utils.StringUtils;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -24,6 +26,7 @@ import java.util.stream.Stream;
 public class CppCodeWithCommentsIncludePlugin implements IncludePlugin {
     private MarkupParser markupParser;
     private Path cppPath;
+    private CodeTokenizer codeTokenizer;
 
     @Override
     public String id() {
@@ -33,6 +36,7 @@ public class CppCodeWithCommentsIncludePlugin implements IncludePlugin {
     @Override
     public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         this.markupParser = componentsRegistry.parser();
+        this.codeTokenizer = componentsRegistry.codeTokenizer();
         this.cppPath = componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam());
 
         String fileName = includeParams.getFreeParam();
@@ -63,9 +67,8 @@ public class CppCodeWithCommentsIncludePlugin implements IncludePlugin {
 
     private Stream<DocElement> createSnippet(String snippet) {
         DocElement docElement = new DocElement(DocElementType.SNIPPET);
-        docElement.addProp("lang", "cpp");
-        docElement.addProp("snippet", snippet);
-        docElement.addProp("maxLineLength", StringUtils.maxLineLength(snippet));
+        Map<String, Object> props = CodeSnippetsProps.create(codeTokenizer, "cpp", snippet);
+        props.forEach(docElement::addProp);
 
         return Stream.of(docElement);
     }

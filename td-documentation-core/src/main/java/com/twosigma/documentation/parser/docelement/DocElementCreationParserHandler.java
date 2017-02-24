@@ -3,6 +3,8 @@ package com.twosigma.documentation.parser.docelement;
 import java.nio.file.Path;
 import java.util.*;
 
+import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
+import com.twosigma.documentation.codesnippets.CodeToken;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeParams;
@@ -169,8 +171,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSnippet(String lang, String lineNumber, String snippet) {
-        append(DocElementType.SNIPPET, "lang", lang, "lineNumber", lineNumber, "snippet", snippet,
-                "maxLineLength", StringUtils.maxLineLength(snippet));
+        Map<String, Object> snippetProps = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), lang, snippet);
+        snippetProps.put("lineNumber", lineNumber);
+
+        append(DocElementType.SNIPPET, snippetProps);
     }
 
     @Override
@@ -242,6 +246,13 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private void append(String type, Object... propsKeyValue) {
         DocElement element = new DocElement(type);
         addProps(element, propsKeyValue);
+
+        append(element);
+    }
+
+    private void append(String type, Map<String, ?> propsKeyValue) {
+        DocElement element = new DocElement(type);
+        propsKeyValue.forEach(element::addProp);
 
         append(element);
     }

@@ -3,6 +3,8 @@ package com.twosigma.documentation;
 import com.google.gson.Gson;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
+import com.twosigma.documentation.codesnippets.CodeTokenizer;
+import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
@@ -51,6 +53,7 @@ public class WebSite {
     private final RelativeToFileAndRootResourceResolver includeResourcesResolver;
     private final ReactJsNashornEngine reactJsNashornEngine;
     private final LunrIndexer lunrIndexer;
+    private final CodeTokenizer codeTokenizer;
     private final WebResource tocJavaScript;
 
     private AuxiliaryFileListener auxiliaryFileListener;
@@ -63,6 +66,7 @@ public class WebSite {
         this.componentsRegistry = new WebSiteComponentsRegistry();
         this.reactJsNashornEngine = initJsEngine();
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
+        this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
         this.tocJavaScript = WebResource.withRelativePath("toc.js");
         this.includeResourcesResolver = new RelativeToFileAndRootResourceResolver(cfg.tocPath.getParent());
         this.tocItemsByAuxiliaryFilePath = new HashMap<>();
@@ -76,6 +80,7 @@ public class WebSite {
         docMeta.setLogo(WebResource.withRelativePath(cfg.logoRelativePath));
 
         componentsRegistry.setIncludeResourcesResolver(includeResourcesResolver);
+        componentsRegistry.setCodeTokenizer(codeTokenizer);
 
         reset();
     }

@@ -1,5 +1,6 @@
 package com.twosigma.documentation.extensions.include;
 
+import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ReactComponent;
@@ -33,11 +34,11 @@ public class TextFileIncludePlugin implements IncludePlugin {
         String text = extractText(componentsRegistry.includeResourceResolver().
                 textContent(fileName), includeParams.getOpts());
 
-        Map<String, Object> props = new LinkedHashMap<>(includeParams.getOpts().toMap());
-        props.put("snippet", text);
         String providedLang = includeParams.getOpts().getString("lang");
-        props.put("lang", (providedLang == null) ? langFromFileName(fileName) : providedLang);
-        props.put("maxLineLength", StringUtils.maxLineLength(text));
+        String langToUse = (providedLang == null) ? langFromFileName(fileName) : providedLang;
+
+        Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), langToUse, text);
+        props.putAll(includeParams.getOpts().toMap());
 
         return IncludePluginResult.reactComponent(DocElementType.SNIPPET, props);
     }
