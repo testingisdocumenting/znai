@@ -56,7 +56,6 @@ const TestData = {
 
     documentation: {
         "docMeta": {
-            "logo": "img/two-sigma-logo.png",
             "type": "User Guide",
             "title": "MUUG",
             "previewEnabled": true
@@ -93,15 +92,15 @@ const TestData = {
                             ]
                         },
                         {
-                            "type": "Image",
-                            "destination": "url/of/image",
-                            "inlined": false
-                        },
-                        {
                             "lang": "",
-                            "lineNumber": "",
-                            "snippet": "interface PriceService {\n    Money calcPrice(String cuips, Integer quantity);\n}\n",
                             "maxLineLength": 52,
+                            "tokens": [
+                                {
+                                    "type": "text",
+                                    "data": "interface PriceService {\n    Money calcPrice(String cuips, Integer quantity);\n}\n"
+                                }
+                            ],
+                            "lineNumber": "",
                             "type": "Snippet"
                         },
                         {
@@ -116,12 +115,41 @@ const TestData = {
                         {
                             "componentName": "Snippet",
                             "componentProps": {
-                                "startLine": "interface PriceService",
-                                "numberOfLines": 3.0,
                                 "lang": "markdown",
-                                "title": "markdown",
-                                "snippet": "    interface PriceService {\n        Money calcPrice(String cuips, Integer quantity);\n    }",
-                                "maxLineLength": 56
+                                "maxLineLength": 87,
+                                "tokens": [
+                                    {
+                                        "type": "title",
+                                        "data": "# Auto Highlight"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": "\n\nIt is very easy to add a code snippet with an automatic code highlighting.\nAll you have to do is indent your code with 4 spaces inside your markdown document and \nyou code will be auto highlighted.\n\n"
+                                    },
+                                    {
+                                        "type": "code",
+                                        "data": "    interface PriceService {"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": "\n"
+                                    },
+                                    {
+                                        "type": "code",
+                                        "data": "        Money calcPrice(String cuips, Integer quantity);"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": "\n"
+                                    },
+                                    {
+                                        "type": "code",
+                                        "data": "    }"
+                                    }
+                                ],
+                                "startLine": "# Auto Highlight",
+                                "numberOfLines": 9.0,
+                                "title": "markdown"
                             },
                             "type": "CustomComponent"
                         },
@@ -139,16 +167,168 @@ const TestData = {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "You can also specify a language. That maybe useful if there is the snippet is not large enough for auto detection.",
+                                    "text": "You can also specify a language.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "That maybe useful if there is the snippet is not large enough for auto detection.",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
                             "lang": "javascript",
-                            "lineNumber": "",
-                            "snippet": "import React, {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n",
                             "maxLineLength": 38,
+                            "tokens": [
+                                {
+                                    "type": "keyword",
+                                    "data": "import"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " React"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ","
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "{"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "Component"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "}"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "keyword",
+                                    "data": "from"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\u0027"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "react"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\u0027"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n\n"
+                                },
+                                {
+                                    "type": "keyword",
+                                    "data": "class"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "class-name",
+                                    "data": "MyComponent"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "keyword",
+                                    "data": "extends"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "class-name",
+                                    "data": "Component"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "{"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n    "
+                                },
+                                {
+                                    "type": "function",
+                                    "data": "render"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "{"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n        "
+                                },
+                                {
+                                    "type": "comment",
+                                    "data": "/// ..."
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n    "
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "}"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "}"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n"
+                                }
+                            ],
+                            "lineNumber": "",
                             "type": "Snippet"
                         },
                         {
@@ -163,12 +343,45 @@ const TestData = {
                         {
                             "componentName": "Snippet",
                             "componentProps": {
-                                "startLine": "```javascript",
-                                "numberOfLines": 9.0,
                                 "lang": "markdown",
-                                "title": "markdown",
-                                "snippet": "```javascript\nimport React, {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n```",
-                                "maxLineLength": 38
+                                "maxLineLength": 81,
+                                "tokens": [
+                                    {
+                                        "type": "title",
+                                        "data": "# Specifying Language"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": "\n \nYou can also specify a language. \nThat maybe useful if there is the snippet is not large enough for auto detection.\n\n```javascript\nimport React, {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n"
+                                    },
+                                    {
+                                        "type": "code",
+                                        "data": "    render() {"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": "\n"
+                                    },
+                                    {
+                                        "type": "code",
+                                        "data": "        /// ..."
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": "\n"
+                                    },
+                                    {
+                                        "type": "code",
+                                        "data": "    }"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": "\n}\n```"
+                                    }
+                                ],
+                                "startLine": "# Specifying Language",
+                                "numberOfLines": 14.0,
+                                "title": "markdown"
                             },
                             "type": "CustomComponent"
                         },
@@ -281,112 +494,194 @@ const TestData = {
                         },
                         {
                             "lang": "java",
-                            "lineNumber": "",
-                            "snippet": "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaFactory(final ExchangeCalendar calendar) {\n        ...\n    }\n}\n",
                             "maxLineLength": 114,
+                            "tokens": [
+                                {
+                                    "type": "keyword",
+                                    "data": "class"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "class-name",
+                                    "data": "InternationalPriceService"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "keyword",
+                                    "data": "implements"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "class-name",
+                                    "data": "PriceService"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "{"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n    "
+                                },
+                                {
+                                    "type": "keyword",
+                                    "data": "private"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "keyword",
+                                    "data": "static"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "keyword",
+                                    "data": "void"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " LongJavaInterfaceNameWithSuperFactory "
+                                },
+                                {
+                                    "type": "function",
+                                    "data": "createMegaFactory"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "keyword",
+                                    "data": "final"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " ExchangeCalendar calendar"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "{"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n        "
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "."
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "."
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "."
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n    "
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "}"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "}"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n"
+                                }
+                            ],
+                            "lineNumber": "",
                             "type": "Snippet"
                         }
                     ]
                 },
                 {
-                    "title": "From File",
-                    "id": "from-file",
+                    "title": "Inlined",
+                    "id": "inlined",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "To boost documentation maintainability you can refer text and code snippets from already existing files.",
+                                    "text": "To inline code within a text dimply put it inside a back tick.",
                                     "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "",
-                            "lineNumber": "",
-                            "snippet": ":include-text-file: file-name.js\n",
-                            "maxLineLength": 32,
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
+                                },
                                 {
-                                    "text": "Include-dash family is our custom extension to markdown to support various scenarios.",
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "E.g. To check if an Exchange is closed, you need to use ",
                                     "type": "SimpleText"
+                                },
+                                {
+                                    "code": "ExchangeCalendar",
+                                    "type": "InlinedCode"
                                 }
                             ]
                         },
                         {
                             "componentName": "Snippet",
                             "componentProps": {
-                                "snippet": "class JsClass {\n    constructor() {\n    }\n}\n\nexport default JsClass",
-                                "lang": "javascript",
-                                "maxLineLength": 22
+                                "lang": "markdown",
+                                "maxLineLength": 74,
+                                "tokens": [
+                                    {
+                                        "type": "title",
+                                        "data": "# Inlined"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": "\n\nTo inline code within a text dimply put it inside a back tick. \nE.g. To check if an Exchange is closed, you need to use "
+                                    },
+                                    {
+                                        "type": "code",
+                                        "data": "`ExchangeCalendar`"
+                                    }
+                                ],
+                                "startLine": "# Inlined",
+                                "numberOfLines": 4.0,
+                                "title": "markdown"
                             },
                             "type": "CustomComponent"
                         },
                         {
                             "type": "Paragraph"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "File will be looked up using following rules:",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "bulletMarker": "*",
-                            "tight": true,
-                            "type": "BulletList",
-                            "content": [
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "directory with a markup file",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "root directory of a documentation",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "class path",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
                         }
                     ]
                 }
@@ -410,8 +705,8 @@ const TestData = {
                         "id": "wide-code"
                     },
                     {
-                        "title": "From File",
-                        "id": "from-file"
+                        "title": "Inlined",
+                        "id": "inlined"
                     }
                 ]
             },
