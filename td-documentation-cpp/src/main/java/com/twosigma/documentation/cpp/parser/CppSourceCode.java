@@ -28,10 +28,7 @@ public class CppSourceCode {
         parser.translationunit().accept(new CPP14BaseVisitor());
 
         SplitOnCommentsTokensProcessor processor = new SplitOnCommentsTokensProcessor(code, parser);
-        List<CodePart> parts = processor.extractParts();
-        parts.forEach(System.out::println);
-
-        return parts;
+        return processor.extractParts();
     }
 
     private static Optional<Method> findMethod(String code, String methodName) {
