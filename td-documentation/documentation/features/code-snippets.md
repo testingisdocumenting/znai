@@ -1,16 +1,18 @@
-# Auto Highlight
+# Simple Snippet
 
-It is very easy to add a code snippet with an automatic code highlighting.
-All you have to do is indent your code with 4 spaces inside your markdown document and 
-you code will be auto highlighted.
+It is very easy to add a code snippet or an output result.
+All you have to do is indent your code with 4 spaces inside your markdown document and
+your code will be rendered like this.
 
     interface PriceService {
         Money calcPrice(String cuips, Integer quantity);
     }
     
-This method attempts to guess the language and highlight accordingly. Markdown used to create code snippet above follows
+This method doesn't highlight code by default. It is possible to provide a default language to see for highlighting using
+[meta.json](meta file).
+Markdown used to create code snippet above follows
 
-:include-text-file: code-snippets.md {startLine: '# Auto Highlight', numberOfLines: 9, lang: 'markdown', title: 'markdown'}
+:include-text-file: code-snippets.md {startLine: '# Simple Snippet', numberOfLines: 9, lang: 'markdown', title: 'markdown'}
     
 
 # Specifying Language
