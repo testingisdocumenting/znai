@@ -65,6 +65,11 @@ pre {
     margin: 0;
 }
 
+code {
+    background-color: #3080b9;
+    color: #fff;
+}
+
 .content-block {
     width: 700px;
     margin-left: auto;
