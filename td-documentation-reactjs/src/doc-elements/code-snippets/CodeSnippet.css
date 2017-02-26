@@ -5,3 +5,11 @@
 .token.punctuation {
     color: #aaa;
 }
+
+.token.title {
+    color: darkcyan;
+}
+
+.token.code {
+    color: #999;
+}
