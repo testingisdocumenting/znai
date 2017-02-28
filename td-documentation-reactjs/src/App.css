@@ -66,8 +66,13 @@ pre {
 }
 
 code {
-    background-color: #3080b9;
-    color: #fff;
+    border: 1px solid #eee;
+    background-color: #fff;
+    color: #1990b8;
+}
+
+pre code {
+    border: none;
 }
 
 .content-block {
