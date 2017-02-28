@@ -21,7 +21,7 @@ public class DocumentationCliApp {
 
     public DocumentationCliApp(String[] args) {
         this.config = new CliConfig(args);
-        this.deployPath = config.getDeployRoot().resolve(createDocName());
+        this.deployPath = config.getDeployRoot().resolve(getDocId());
     }
 
     public static void main(String[] args) {
@@ -29,7 +29,7 @@ public class DocumentationCliApp {
         cliApp.start();
     }
 
-    private String createDocName() {
+    private String getDocId() {
         if (config.isPreview()) {
             return "preview";
         }
@@ -75,6 +75,7 @@ public class DocumentationCliApp {
 
     private void generateDocs() {
         webSite = WebSite.withToc(config.getSourceRoot().resolve("toc")).
+                withId(getDocId()).
                 withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).
                 withEnabledPreview(config.isPreview()).deployTo(deployPath);
     }
@@ -82,5 +83,4 @@ public class DocumentationCliApp {
     private void announceMode(String name) {
         ConsoleOutputs.out(Color.BLUE, "mdoc ", Color.YELLOW, name + " mode");
     }
-
 }

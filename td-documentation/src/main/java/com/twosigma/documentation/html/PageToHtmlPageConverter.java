@@ -22,27 +22,27 @@ public class PageToHtmlPageConverter {
         this.reactJsNashornEngine = reactJsNashornEngine;
     }
 
-    public HtmlPageAndPageProps convert(TableOfContents toc, TocItem tocItem, Page page, HtmlRenderContext renderContext) {
+    public HtmlPageAndPageProps convert(TableOfContents toc, TocItem tocItem, Page page) {
         final HtmlPage htmlPage = new HtmlPage();
         htmlPage.setTitle(tocItem.getPageTitle());
 
-        PageProps pageProps = new PageProps(tocItem, page, renderContext);
+        PageProps pageProps = new PageProps(tocItem, page);
         DocumentationProps docProps = new DocumentationProps(docMeta, toc, pageProps);
 
         // TODO reconsider the whole rc business below
-        RenderSupplier createElementStatement = (rc) -> "React.createElement(Documentation, " + JsonUtils.serializePrettyPrint(
+        RenderSupplier createElementStatement = () -> "React.createElement(Documentation, " + JsonUtils.serializePrettyPrint(
                     docProps.toMap()) + ")";
 
-        RenderSupplier reactServerRenderStatement = (rc) -> "ReactDOMServer.renderToString(" +
-            createElementStatement.render(rc) + ");";
+        RenderSupplier reactServerRenderStatement = () -> "ReactDOMServer.renderToString(" +
+            createElementStatement.render() + ");";
 
-        htmlPage.addToBody((rc) -> {
-            String renderStatement = reactServerRenderStatement.render(rc);
+        htmlPage.addToBody(() -> {
+            String renderStatement = reactServerRenderStatement.render();
             return "<div id=\"" + REACT_BLOCK_ID + "\">" + nashornEval(renderStatement).toString() + "</div>";
         });
 
         // TODO investigate: there were issues with syncing complex custom components
-        htmlPage.addToJavaScript((rc) -> "ReactDOM.render(" + createElementStatement.render(rc) + ", " +
+        htmlPage.addToJavaScript(() -> "ReactDOM.render(" + createElementStatement.render() + ", " +
             "document.getElementById(\"" + REACT_BLOCK_ID + "\"));");
 
         ReactJsBundle jsBundle = reactJsNashornEngine.getReactJsBundle();

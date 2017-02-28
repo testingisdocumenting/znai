@@ -1,9 +1,9 @@
 import React from 'react'
-import {nestedPath} from '../../utils/renderContext'
+import {fullResourcePath} from '../../utils/resourcePath'
 import {documentationNavigation} from './DocumentationNavigation'
 
 const NavBar = ({docMeta, tocItem, renderContext}) => {
-    const url = nestedPath(renderContext.nestLevel, "")
+    const url = fullResourcePath(docMeta.id, "")
     const clickHandler = (e) => {
         e.preventDefault();
         documentationNavigation.navigateToUrl(url)

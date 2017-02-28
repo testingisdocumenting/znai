@@ -1,6 +1,5 @@
 package com.twosigma.documentation.search
 
-import com.twosigma.documentation.html.HtmlRenderContext
 import com.twosigma.documentation.html.PageProps
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine
 import com.twosigma.documentation.parser.MarkdownParser
@@ -22,7 +21,7 @@ class LunrIndexerTest {
 hello world
 """))
 
-        def pageProps = new PageProps(new TocItem("dir-name", "file-name"), page, HtmlRenderContext.nested(1))
+        def pageProps = new PageProps(new TocItem("dir-name", "file-name"), page)
         def indexJson = indexer.createJsonIndex([pageProps])
 
         println indexJson

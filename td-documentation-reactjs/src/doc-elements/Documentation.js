@@ -21,8 +21,8 @@ class Documentation extends Component {
     constructor(props) {
         super(props)
 
-        const {page} = this.props
-        this.searchPromise = getSearchPromise(page.renderContext)
+        const {page, docMeta} = this.props
+        this.searchPromise = getSearchPromise(docMeta)
 
         const currentPageLocation = documentationNavigation.currentDirNameAndFileName()
 
@@ -315,8 +315,8 @@ class Documentation extends Component {
     }
 
     getAllPagesPromise() {
-        const {page} = this.props
-        return getAllPagesPromise(page.renderContext)
+        const {docMeta} = this.props
+        return getAllPagesPromise(docMeta)
     }
 
     extractPageSectionNodes() {

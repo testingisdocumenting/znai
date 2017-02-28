@@ -56,8 +56,9 @@ const TestData = {
 
     documentation: {
         "docMeta": {
+            "id": "",
             "type": "User Guide",
-            "title": "MUUG",
+            "title": "MDoc",
             "previewEnabled": true
         },
         "page": {

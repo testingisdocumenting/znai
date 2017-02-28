@@ -9,10 +9,25 @@ import com.twosigma.documentation.html.WebResource;
  * @author mykola
  */
 public class DocMeta {
+    private String id;
     private String type;
     private String title;
     private WebResource logo;
     private boolean previewEnabled;
+
+    /**
+     * Documentation can be standalone and hosted by itself on a server. Or you may have multiple documentations
+     * that are hosted within an organization. In later case it is important to have an id.
+     *
+     * @return documentation id
+     */
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getType() {
         return type;
@@ -42,6 +57,7 @@ public class DocMeta {
         Map<String, Object> result = new HashMap<>();
         result.put("type", type);
         result.put("title", title);
+        result.put("id", id);
         result.put("previewEnabled", previewEnabled);
         result.put("logo", logo.getPath());
 

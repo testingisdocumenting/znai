@@ -1,8 +1,6 @@
 package com.twosigma.documentation.html;
 
 import java.nio.file.Path;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.ResourceUtils;
@@ -14,22 +12,19 @@ public class WebResource {
     private Path originPath;
     private String resourceContent;
     private String path;
-    private boolean isPathRelative;
 
-    private WebResource(final Path originPath, final String path, boolean isPathRelative) {
+    private WebResource(final Path originPath, final String path) {
         this.originPath = originPath;
         this.path = path;
-        this.isPathRelative = isPathRelative;
     }
 
     private WebResource(final String resourcePath) {
         this.path = resourcePath;
-        this.isPathRelative = false;
         this.resourceContent = ResourceUtils.textContent(resourcePath);
     }
 
-    public static WebResource withRelativePath(final String relativePath) {
-        return new WebResource(null, relativePath, true);
+    public static WebResource withPath(final String path) {
+        return new WebResource(null, path);
     }
 
     public static WebResource fromResource(final String resourcePath) {
@@ -44,25 +39,21 @@ public class WebResource {
         return path;
     }
 
-    public String generateCssLink(HtmlRenderContext renderContext) {
-        return "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + pathForHtml(renderContext) + "\">";
+    public String generateCssLink(String documentationId) {
+        return "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + pathForHtml(documentationId) + "\">";
     }
 
-    public String generateJavaScriptLink(HtmlRenderContext renderContext) {
-        return "<script type=\"text/javascript\" src=\"" + pathForHtml(renderContext) + "\"></script>";
+    public String generateJavaScriptLink(String documentationId) {
+        return "<script type=\"text/javascript\" src=\"" + pathForHtml(documentationId) + "\"></script>";
     }
 
-    private String pathForHtml(HtmlRenderContext renderContext) {
-        return isPathRelative ? nestedPath(renderContext) : toAbsolute(path);
-    }
-
-    private String toAbsolute(String path) {
-        return path.startsWith("/") ? path : "/" + path;
-    }
-
-    private String nestedPath(HtmlRenderContext renderContext) {
-        return IntStream.range(0, renderContext.getNestLevel()).mapToObj(l -> "..").collect(Collectors.joining("/")) +
-            (renderContext.getNestLevel() == 0 ? "" : "/") + path;
+    private String pathForHtml(String documentationId) {
+        // for resource based content we ignore documentation id when building full path
+        //
+        boolean isResourceBased = resourceContent != null;
+        return "/" +
+                ((documentationId.isEmpty() || isResourceBased) ?
+                        "" : documentationId + "/") + path;
     }
 
     public String getContent() {

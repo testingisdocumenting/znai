@@ -67,17 +67,18 @@ public class WebSite {
         this.reactJsNashornEngine = initJsEngine();
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
-        this.tocJavaScript = WebResource.withRelativePath("toc.js");
+        this.tocJavaScript = WebResource.withPath("toc.js");
         this.includeResourcesResolver = new RelativeToFileAndRootResourceResolver(cfg.tocPath.getParent());
         this.tocItemsByAuxiliaryFilePath = new HashMap<>();
         this.auxiliaryFiles = new HashSet<>();
 
+        docMeta.setId(cfg.id);
         docMeta.setTitle(cfg.title);
         docMeta.setType(cfg.type);
         if (cfg.isPreviewEnabled) {
             docMeta.setPreviewEnabled(true);
         }
-        docMeta.setLogo(WebResource.withRelativePath(cfg.logoRelativePath));
+        docMeta.setLogo(WebResource.withPath(cfg.logoRelativePath));
 
         componentsRegistry.setIncludeResourcesResolver(includeResourcesResolver);
         componentsRegistry.setCodeTokenizer(codeTokenizer);
@@ -273,15 +274,12 @@ public class WebSite {
 
             boolean isIndex = isIndexToc(tocItem);
 
-            // we are inside directory, so nest level is 1 for extra resources
-            HtmlRenderContext renderContext = HtmlRenderContext.nested(isIndex ? 0 : 1);
-
-            final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(toc, tocItem, page, renderContext);
+            final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(toc, tocItem, page);
 
             allPagesProps.add(htmlAndProps.getProps());
             extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
 
-            final String html = htmlAndProps.getHtmlPage().render(renderContext);
+            final String html = htmlAndProps.getHtmlPage().render(docMeta.getId());
 
             Path pagePath = isIndex ? Paths.get("index.html") :
                     Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
@@ -334,6 +332,7 @@ public class WebSite {
         private Path deployPath;
         private Path tocPath;
         private List<Path> webResources;
+        private String id;
         private String title;
         private String type;
         private String logoRelativePath;
@@ -357,6 +356,11 @@ public class WebSite {
 
         public Configuration withExtraJavaScripts(WebResource... webResources) {
             this.registeredExtraJavaScripts.addAll(Arrays.asList(webResources));
+            return this;
+        }
+
+        public Configuration withId(String id) {
+            this.id = id;
             return this;
         }
 

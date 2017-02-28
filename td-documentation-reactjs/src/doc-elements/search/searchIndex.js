@@ -8,11 +8,11 @@ export {getSearchIndexPromise}
 //
 
 let indexPromise = null
-function getSearchIndexPromise(renderContext) {
+function getSearchIndexPromise(docMeta) {
     if (indexPromise) {
         return indexPromise
     }
 
-    indexPromise = jsonPromise(renderContext, "search-index.json")
+    indexPromise = jsonPromise(docMeta, "search-index.json")
     return indexPromise
 }

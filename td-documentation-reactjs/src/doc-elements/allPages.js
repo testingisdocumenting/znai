@@ -7,11 +7,11 @@ export {getAllPagesPromise}
 //
 
 let pagesPromise = null
-function getAllPagesPromise(renderContext) {
+function getAllPagesPromise(docMeta) {
     if (pagesPromise) {
         return pagesPromise
     }
 
-    pagesPromise = jsonPromise(renderContext, "all-pages.json")
+    pagesPromise = jsonPromise(docMeta, "all-pages.json")
     return pagesPromise
 }

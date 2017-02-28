@@ -1,10 +1,10 @@
 import Promise from "promise"
-import {nestedPath} from './renderContext'
+import {fullResourcePath} from './resourcePath'
 
 export {jsonPromise}
 
-function jsonPromise(renderContext, url) {
-    url = nestedPath(renderContext.nestLevel, url)
+function jsonPromise(docMeta, url) {
+    url = fullResourcePath(docMeta.id, url)
 
     return new Promise((resolve, reject) => {
         fetch(url).then((response) => {

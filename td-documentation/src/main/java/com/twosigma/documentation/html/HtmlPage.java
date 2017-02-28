@@ -53,19 +53,19 @@ public class HtmlPage {
         javaScriptSuppliers.add(supplier);
     }
 
-    public String render(HtmlRenderContext renderContext) {
+    public String render(String documentationId) {
         return "<!DOCTYPE html>\n" +
             "<html>\n" +
             "<head>\n" +
             "<title>" + title + "</title>" +
-            headerSuppliers.stream().map(s -> s.render(renderContext)).collect(joining("\n")) +
-            cssResources.stream().map(r -> r.generateCssLink(renderContext)).collect(joining("\n")) +
+            headerSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) +
+            cssResources.stream().map(r -> r.generateCssLink(documentationId)).collect(joining("\n")) +
             "\n</head>\n" +
             "<body>\n" +
-            bodySuppliers.stream().map(s -> s.render(renderContext)).collect(joining("\n")) + "\n" +
-            javaScriptResources.stream().map(r -> r.generateJavaScriptLink(renderContext)).collect(joining("\n")) + "\n" +
+            bodySuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
+            javaScriptResources.stream().map(r -> r.generateJavaScriptLink(documentationId)).collect(joining("\n")) + "\n" +
             "<script>\n" +
-            javaScriptSuppliers.stream().map(s -> s.render(renderContext)).collect(joining("\n")) + "\n" +
+            javaScriptSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
             "</script>\n" +
             "\n</body>" +
             "\n</html>\n";
