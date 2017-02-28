@@ -1,7 +1,8 @@
 import Promise from "promise"
 
 class DocumentationNavigation {
-    constructor() {
+    constructor(documentationId) {
+        this.documentationId = documentationId
         this.listeners = []
 
         // server side rendering guard
@@ -17,11 +18,8 @@ class DocumentationNavigation {
     }
 
     navigateToPage(id) {
-        const currentDirNameAndFileName = this.currentDirNameAndFileName()
-
-        const isRoot = currentDirNameAndFileName.dirName.length === 0
-        const url =  (isRoot ? "" : "../") + (id.dirName + "/" + id.fileName) +
-            (id.pageSectionId && id.pageSectionId.length ? ("#" + id.pageSectionId) : "")
+        const url =  "/" + (this.documentationId  ? this.documentationId + "/" : "") + (id.dirName + "/" + id.fileName) +
+            (id.pageSectionId ? ("#" + id.pageSectionId) : "")
 
         this.navigateToUrl(url)
     }
@@ -43,8 +41,6 @@ class DocumentationNavigation {
     }
 
     extractDirNameAndFileName(url) {
-        console.log(url)
-
         const hashIdx = url.indexOf("#");
         const pageSectionId = hashIdx >= 0 ? url.substr(hashIdx + 1) : ""
         url = hashIdx >= 0 ? url.substr(0, hashIdx) : url
@@ -56,7 +52,7 @@ class DocumentationNavigation {
         }
 
         // something/dir-name/file-name#id
-        // ../dir-name/file-name
+        // /dir-name/file-name
         return {dirName: parts[parts.length - 2], fileName: parts[parts.length - 1], pageSectionId: pageSectionId}
     }
 }

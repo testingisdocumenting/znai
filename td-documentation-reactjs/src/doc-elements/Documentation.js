@@ -24,7 +24,7 @@ class Documentation extends Component {
         const {page, docMeta} = this.props
         this.searchPromise = getSearchPromise(docMeta)
 
-        this.documentationNavigation = new DocumentationNavigation()
+        this.documentationNavigation = new DocumentationNavigation(docMeta.id)
 
         const currentPageLocation = this.documentationNavigation.currentDirNameAndFileName()
 
