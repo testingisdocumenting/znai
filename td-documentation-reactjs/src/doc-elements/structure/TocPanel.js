@@ -15,15 +15,15 @@ class TocPanel extends Component {
     render() {
         const {docMeta, collapsed, selected} = this.props
         const panelClass = "toc-panel" + (collapsed ? " collapsed" : "") + (selected ? " selected" : "")
-        const expandButtonClass = "toc-panel-expand-button " + (collapsed ? "appeared" : "")
-        const collapseButtonClass = "toc-panel-collapse-button " + (!collapsed ? "appeared" : "")
+        const expandButtonClass = "toc-panel-expand-button glyphicon glyphicon-chevron-right " + (collapsed ? "appeared" : "")
+        const collapseButtonClass = "toc-panel-collapse-button glyphicon glyphicon-chevron-left " + (!collapsed ? "appeared" : "")
 
         return (<div className={panelClass}>
                 <div className="header">
                     <span className="toc-panel-header-title">{docMeta.title + " " + docMeta.type}</span>
-                    <span className={collapseButtonClass} onClick={this.toggle}>|||</span>
+                    <span className={collapseButtonClass} onClick={this.toggle}/>
                 </div>
-                <div className={expandButtonClass} onClick={this.toggle}>&#9776;</div>
+                <div className={expandButtonClass} onClick={this.toggle}/>
                 <TocMenu toc={this.props.toc}
                          selected={this.props.selectedItem}
                          currentPageSection={this.props.currentPageSection}

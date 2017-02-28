@@ -49,7 +49,7 @@ class SearchPopup extends Component {
             <div className="popup-panel">
                 {searchBox}
 
-                <div className="close" onClick={onClose}>&times;</div>
+                <div className="close glyphicon glyphicon-remove" onClick={onClose}/>
                 {previewDetails ? this.renderPreview(ids, selectedIdx, previewDetails) : null}
             </div>
         </div>);
