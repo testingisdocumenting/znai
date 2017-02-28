@@ -61,6 +61,4 @@ class DocumentationNavigation {
     }
 }
 
-const documentationNavigation = new DocumentationNavigation()
-
-export {documentationNavigation}
+export default DocumentationNavigation

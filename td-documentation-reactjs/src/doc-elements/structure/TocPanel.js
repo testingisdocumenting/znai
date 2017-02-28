@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import TocMenu from './TocMenu';
 
-import {documentationNavigation} from './DocumentationNavigation'
-
 class TocPanel extends Component {
     constructor(props) {
         super(props);
 
-        this.onTocItemClick = this.onTocItemClick.bind(this)
         this.toggle = this.toggle.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
     }
@@ -27,13 +24,9 @@ class TocPanel extends Component {
                 <TocMenu toc={this.props.toc}
                          selected={this.props.selectedItem}
                          currentPageSection={this.props.currentPageSection}
-                         onClickHandler={this.onTocItemClick} />
+                         onClickHandler={this.props.onTocItemClick} />
             </div>
         )
-    }
-
-    onTocItemClick(dirName, fileName) {
-        documentationNavigation.navigateToPage({dirName, fileName})
     }
 
     toggle() {
