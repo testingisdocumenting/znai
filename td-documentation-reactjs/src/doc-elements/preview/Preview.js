@@ -9,18 +9,14 @@ class Server {
         this.ws = new WebSocket(socketUrl("preview"))
 
         this.ws.onopen = () => {
-            console.log("onopen")
             this.handlers.onOpen()
         }
 
         this.ws.onclose = () => {
-            console.log("onclose")
             this.handlers.onClose()
         }
 
         this.ws.onmessage = (message) => {
-            console.log("message", message)
-
             const data = JSON.parse(message.data)
 
             if (data.type === 'pageUpdate') {

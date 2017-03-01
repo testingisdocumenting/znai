@@ -22,7 +22,6 @@ class SearchPopup extends Component {
         // search is a promise because it requires json data for index and all pages
         //
         this.props.searchPromise.then((search) => {
-            console.log("search resolved")
             this.setState({search})
         }, (error) => {
             console.error("can't resolve search: " + error)
@@ -37,7 +36,6 @@ class SearchPopup extends Component {
 
         const hasResult = ids.length > 0
         const selectedIdx = this.state.selectedIdx
-        console.log("selectedIdx", selectedIdx)
         const firstId = hasResult ? ids[selectedIdx] : null
         const previewDetails = hasResult ? this.state.search.previewDetails(firstId, this.state.queryResult) : null
 
@@ -70,9 +68,6 @@ class SearchPopup extends Component {
         const queryResult = this.state.search.search(query)
         const selectedIdx = 0
         this.setState({queryResult, selectedIdx})
-
-        console.log(query)
-        console.log(queryResult)
     }
 
     componentDidMount() {

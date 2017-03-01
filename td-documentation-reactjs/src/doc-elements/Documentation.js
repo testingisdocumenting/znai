@@ -296,7 +296,6 @@ class Documentation extends Component {
 
     onUrlChange(url) {
         return this.getAllPagesPromise().then((pages) => {
-            console.log("onUrlChange", url)
             const currentPageLocation = this.documentationNavigation.extractDirNameAndFileName(url)
 
             const matchingPages = pages.filter((p) => p.tocItem.dirName === currentPageLocation.dirName &&
