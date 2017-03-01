@@ -111,8 +111,8 @@ class Documentation extends Component {
                                           content={page.content}
                                           previewEnabled={docMeta.previewEnabled}/>
                     <div className="next-prev-buttons content-block">
-                        {this.previousPageButton()}
-                        {this.nextPageButton()}
+                        {this.renderPreviousPageButton()}
+                        {this.renderNextPageButton()}
                     </div>
                 </div>
 
@@ -179,24 +179,20 @@ class Documentation extends Component {
         this.documentationNavigation.navigateToPage({dirName, fileName})
     }
 
-    nextPageButton() {
+    renderNextPageButton() {
         const tocItem = this.nextPageToc
         return (tocItem ? (
-                <div className="button-and-text">
-                    <span className="next-prev-page-title">{tocItem.pageTitle} </span>
-                    <div className="next-button button" onClick={this.onNextPage}>
-                        Next
-                    </div>
+                <div className="page-navigation-button-and-text" onClick={this.onNextPage}>
+                        <span className="next-prev-page-title">{tocItem.pageTitle} </span>
+                        <span className="glyphicon glyphicon-chevron-right"/>
                 </div>) : null)
     }
 
-    previousPageButton() {
+    renderPreviousPageButton() {
         const tocItem = this.prevPageToc
         return (tocItem ? (
-                <div className="button-and-text">
-                    <div className="prev-button button" onClick={this.onPrevPage}>
-                        Prev
-                    </div>
+                <div className="page-navigation-button-and-text" onClick={this.onPrevPage}>
+                    <span className="glyphicon glyphicon-chevron-left"/>
                     <span className="next-prev-page-title">{tocItem.pageTitle} </span>
                 </div>) : null)
     }
