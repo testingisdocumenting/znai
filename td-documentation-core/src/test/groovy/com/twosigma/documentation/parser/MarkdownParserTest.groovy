@@ -115,6 +115,17 @@ world""")
                                                          type: 'Image']]
     }
 
+    @Test
+    void "include plugin"() {
+        parse("simple text\n" +
+                ":include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
+
+        assert content == [[type: 'Paragraph', content:[
+                [text: 'simple text', type: 'SimpleText'],
+                [type: 'SoftLineBreak']]],
+                           [ff: 'free-form text', opts: [param1: 'v1', param2: 'v2'], type: 'Dummy']]
+    }
+
     private void parse(String markdown) {
         def parseResult = parser.parse(Paths.get("test.md"), markdown)
         content = parseResult.docElement.getContent().collect { it.toMap() }
