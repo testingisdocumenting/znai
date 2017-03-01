@@ -8,6 +8,7 @@ import elementsLibrary from './DefaultElementsLibrary'
 import DocumentationNavigation from './structure/DocumentationNavigation'
 import {tableOfContents} from './structure/TableOfContents'
 import {getAllPagesPromise} from "./allPages"
+import {fullResourcePath} from '../utils/resourcePath'
 
 import Preview from './preview/Preview'
 import PreviewChangeIndicator from './preview/PreviewChangeIndicator'
@@ -35,14 +36,15 @@ class Documentation extends Component {
             toc: tableOfContents.toc,
             selectedTocItem: selectedTocItem}
 
+        this.onHeaderClick = this.onHeaderClick.bind(this)
         this.onTocToggle = this.onTocToggle.bind(this)
+        this.onTocSelect = this.onTocSelect.bind(this)
+        this.onTocItemClick = this.onTocItemClick.bind(this)
         this.onSearchClick = this.onSearchClick.bind(this)
         this.onSearchClose = this.onSearchClose.bind(this)
-        this.onTocSelect = this.onTocSelect.bind(this)
         this.onPanelSelect = this.onPanelSelect.bind(this)
         this.onNextPage = this.onNextPage.bind(this)
         this.onPrevPage = this.onPrevPage.bind(this)
-        this.onTocItemClick = this.onTocItemClick.bind(this)
         this.onSearchSelection = this.onSearchSelection.bind(this)
         this.onPageUpdate = this.onPageUpdate.bind(this)
         this.onTocUpdate = this.onTocUpdate.bind(this)
@@ -94,6 +96,7 @@ class Documentation extends Component {
                               docMeta={docMeta}
                               onToggle={this.onTocToggle}
                               selectedItem={selectedTocItem}
+                              onHeaderClick={this.onHeaderClick}
                               onTocItemClick={this.onTocItemClick}
                               onNextPage={this.onNextPage}
                               onPrevPage={this.onPrevPage}/>
@@ -175,10 +178,14 @@ class Documentation extends Component {
         }
     }
 
+    onHeaderClick() {
+        const url = fullResourcePath(this.props.docMeta.id, "")
+        this.documentationNavigation.navigateToUrl(url)
+    }
+
     onTocItemClick(dirName, fileName) {
         this.documentationNavigation.navigateToPage({dirName, fileName})
     }
-
 
     static doRenderNavigationButton(tocItem) {
         // we don't render next/prev buttons that will point to items without dir name (e.g. index page)

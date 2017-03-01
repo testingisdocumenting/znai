@@ -48,6 +48,10 @@
     font-size: 18px;
 }
 
+.toc-panel-header-title:hover {
+    cursor: pointer;
+}
+
 .toc-menu {
     padding-left: 30px;
     padding-right: 40px;
