@@ -8,7 +8,7 @@ import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
-import com.twosigma.documentation.extensions.include.RelativeToFileAndRootResourceResolver;
+import com.twosigma.documentation.extensions.include.MultipleLocationsResourceResolver;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkdownParser;
@@ -19,6 +19,7 @@ import com.twosigma.documentation.search.LunrIndexer;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
+import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static com.twosigma.utils.FileUtils.fileTextContent;
 import static java.util.stream.Collectors.toList;
@@ -50,7 +52,7 @@ public class WebSite {
     private List<WebResource> extraJavaScripts;
 
     private final WebSiteComponentsRegistry componentsRegistry;
-    private final RelativeToFileAndRootResourceResolver includeResourcesResolver;
+    private final MultipleLocationsResourceResolver includeResourcesResolver;
     private final ReactJsNashornEngine reactJsNashornEngine;
     private final LunrIndexer lunrIndexer;
     private final CodeTokenizer codeTokenizer;
@@ -68,7 +70,7 @@ public class WebSite {
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
         this.tocJavaScript = WebResource.withPath("toc.js");
-        this.includeResourcesResolver = new RelativeToFileAndRootResourceResolver(cfg.tocPath.getParent());
+        this.includeResourcesResolver = new MultipleLocationsResourceResolver(findLookupLocations(cfg));
         this.tocItemsByAuxiliaryFilePath = new HashMap<>();
         this.auxiliaryFiles = new HashSet<>();
 
@@ -84,6 +86,25 @@ public class WebSite {
         componentsRegistry.setCodeTokenizer(codeTokenizer);
 
         reset();
+    }
+
+    private Stream<Path> findLookupLocations(Configuration cfg) {
+        Stream<Path> root = Stream.of(cfg.docRootPath);
+
+        if (cfg.fileWithLookupPaths == null) {
+            return root;
+        }
+
+        return Stream.concat(root, readLocationsFromFile(cfg.fileWithLookupPaths));
+    }
+
+    private Stream<Path> readLocationsFromFile(String filesLookupFilePath) {
+        String fileContent = FileUtils.fileTextContent(cfg.docRootPath.resolve(filesLookupFilePath));
+        return Arrays.stream(fileContent.split("[;\n]"))
+                .map(String::trim)
+                .filter(e -> !e.isEmpty())
+                .map(e -> Paths.get(e))
+                .map(p -> p.isAbsolute() ? p : cfg.docRootPath.resolve(p));
     }
 
     private ReactJsNashornEngine initJsEngine() {
@@ -305,7 +326,7 @@ public class WebSite {
 
     private void deployAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
         Path origin = auxiliaryFile.getPath().toAbsolutePath();
-        Path relative = cfg.tocPath.getParent().relativize(origin);
+        Path relative = cfg.docRootPath.relativize(origin);
         try {
             deployer.deploy(relative, Files.readAllBytes(origin));
         } catch (IOException e) {
@@ -330,11 +351,13 @@ public class WebSite {
 
     public static class Configuration {
         private Path deployPath;
+        private Path docRootPath;
         private Path tocPath;
         private List<Path> webResources;
         private String id;
         private String title;
         private String type;
+        private String fileWithLookupPaths;
         private String logoRelativePath;
         public List<WebResource> registeredExtraJavaScripts;
         private boolean isPreviewEnabled;
@@ -346,6 +369,7 @@ public class WebSite {
 
         public Configuration setTocPath(Path path) {
             tocPath = path.toAbsolutePath();
+            docRootPath = tocPath.getParent();
             return this;
         }
 
@@ -371,6 +395,11 @@ public class WebSite {
 
         public Configuration withType(String type) {
             this.type = type;
+            return this;
+        }
+
+        public Configuration withFileWithLookupPaths(String fileWithLookupPaths) {
+            this.fileWithLookupPaths = fileWithLookupPaths;
             return this;
         }
 

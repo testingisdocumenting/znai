@@ -77,6 +77,7 @@ public class DocumentationCliApp {
         webSite = WebSite.withToc(config.getSourceRoot().resolve("toc")).
                 withId(getDocId()).
                 withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).
+                withFileWithLookupPaths("lookup-paths").
                 withEnabledPreview(config.isPreview()).deployTo(deployPath);
     }
 
