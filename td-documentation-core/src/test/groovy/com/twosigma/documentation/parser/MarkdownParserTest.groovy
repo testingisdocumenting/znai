@@ -1,5 +1,6 @@
 package com.twosigma.documentation.parser
 
+import com.twosigma.utils.JsonUtils
 import org.junit.Test
 
 import java.nio.file.Paths
@@ -117,13 +118,21 @@ world""")
 
     @Test
     void "include plugin"() {
-        parse("simple text\n" +
+        parse(":include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
+        assert content == [[type: 'Dummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
+    }
+
+    @Test
+    void "include plugin with text on top"() {
+        parse("# section\n\nsimple text\n" +
                 ":include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
 
-        assert content == [[type: 'Paragraph', content:[
-                [text: 'simple text', type: 'SimpleText'],
-                [type: 'SoftLineBreak']]],
-                           [ff: 'free-form text', opts: [param1: 'v1', param2: 'v2'], type: 'Dummy']]
+        assert content ==[[title: 'section', id: 'section', type: 'Section',
+                           content:
+                                   [[type: 'Paragraph', content:[
+                                           [text: 'simple text', type: 'SimpleText'],
+                                           [type: 'SoftLineBreak']]],
+                                    [ff: 'free-form text', opts: [param1: 'v1', param2: 'v2'], type: 'Dummy']]]]
     }
 
     private void parse(String markdown) {

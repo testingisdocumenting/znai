@@ -1,21 +1,19 @@
 package com.twosigma.documentation.parser.docelement;
 
-import java.nio.file.Path;
-import java.util.*;
-
 import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
-import com.twosigma.documentation.codesnippets.CodeToken;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.include.IncludePluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugins;
-import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.utils.CollectionUtils;
-import com.twosigma.utils.StringUtils;
+
+import java.nio.file.Path;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author mykola
@@ -211,7 +209,22 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onParsingEnd() {
+        removeEmptyParagraphs(docElement);
         paragraphs.forEach(this::convertParagraphWithSingleImageToWideImage);
+    }
+
+    /**
+     * we have empty paragraphs if the include-plugin is used outside of any sections.
+     * it leaves an empty paragraph
+     * @param element element to recursively remove paragraphs
+     */
+    private void removeEmptyParagraphs(DocElement element) {
+        List<DocElement> emptyParagraphs = element.getContent().stream()
+                .filter(e -> e.getType().equals(DocElementType.PARAGRAPH) && e.getContent().isEmpty())
+                .collect(Collectors.toList());
+
+        emptyParagraphs.forEach(element::removeChild);
+        element.getContent().forEach(this::removeEmptyParagraphs);
     }
 
     private void convertParagraphWithSingleImageToWideImage(DocElement paragraph) {

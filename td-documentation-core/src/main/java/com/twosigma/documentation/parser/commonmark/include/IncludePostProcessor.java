@@ -36,12 +36,13 @@ public class IncludePostProcessor implements PostProcessor {
         private void insertIncludeNode(final Text text, final String includeStatement) {
             Node parent = text.getParent();
 
-            Node previous = parent.getPrevious();
+            Node previous = text.getPrevious();
+            Node previousParent = previous != null ? previous.getParent() : null;
             IncludeNode includeNode = createNode(includeStatement);
 
             text.unlink();
 
-            (previous != null ? previous : parent).insertAfter(includeNode);
+            (previousParent != null ? previousParent : parent).insertAfter(includeNode);
         }
 
         private IncludeNode createNode(final String includeStatement) {
