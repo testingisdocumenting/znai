@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SvgCustomShape from './SvgCustomShape'
-import {removeCustomProps, buildUniqueId} from './gvUtils'
+import {removeCustomProps} from './gvUtils'
 
 class GvPolygon extends Component {
     render() {

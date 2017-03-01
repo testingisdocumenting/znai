@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import Promise from "promise"
 
-import NavBar from './structure/NavBar'
 import TocPanel from './structure/TocPanel'
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
@@ -73,8 +72,6 @@ class Documentation extends Component {
     render() {
         const {docMeta} = this.props
         const {toc, page, selectedTocItem, tocCollapsed, tocSelected, pageGenError} = this.state
-
-        const tocItem = page.tocItem
 
         const searchPopup = this.state.searchActive ? <SearchPopup searchPromise={this.searchPromise}
                                                                    onSearchSelection={this.onSearchSelection}
