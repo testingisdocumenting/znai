@@ -179,22 +179,26 @@ class Documentation extends Component {
         this.documentationNavigation.navigateToPage({dirName, fileName})
     }
 
+
+    static doRenderNavigationButton(tocItem) {
+        // we don't render next/prev buttons that will point to items without dir name (e.g. index page)
+        return tocItem && tocItem.dirName;
+    }
+
     renderNextPageButton() {
-        const tocItem = this.nextPageToc
-        return (tocItem ? (
+        return (Documentation.doRenderNavigationButton(this.nextPageToc) ? (
                 <div className="page-navigation-button-and-text" onClick={this.onNextPage}>
-                        <span className="next-prev-page-title">{tocItem.pageTitle} </span>
+                        <span className="next-prev-page-title">{this.nextPageToc.pageTitle} </span>
                         <span className="glyphicon glyphicon-chevron-right"/>
-                </div>) : null)
+                </div>) : <div/>)
     }
 
     renderPreviousPageButton() {
-        const tocItem = this.prevPageToc
-        return (tocItem ? (
+        return (Documentation.doRenderNavigationButton(this.prevPageToc) ? (
                 <div className="page-navigation-button-and-text" onClick={this.onPrevPage}>
                     <span className="glyphicon glyphicon-chevron-left"/>
-                    <span className="next-prev-page-title">{tocItem.pageTitle} </span>
-                </div>) : null)
+                    <span className="next-prev-page-title">{this.prevPageToc.pageTitle} </span>
+                </div>) : <div/>)
     }
 
     onSearchSelection(id) {
