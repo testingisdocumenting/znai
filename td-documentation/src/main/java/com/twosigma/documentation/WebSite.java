@@ -165,12 +165,19 @@ public class WebSite {
         parseMarkup(tocItem);
         final Page page = pageByTocItem.get(tocItem);
 
-        return generatePage(tocItem, page);
+        HtmlPageAndPageProps htmlPageAndPageProps = generatePage(tocItem, page);
+        deployToc();
+
+        return htmlPageAndPageProps;
     }
 
     public Set<TocItem> dependentTocItems(Path auxiliaryFile) {
         Set<TocItem> paths = tocItemsByAuxiliaryFilePath.get(auxiliaryFile);
         return (paths == null) ? Collections.emptySet() : paths;
+    }
+
+    public TableOfContents getToc() {
+        return toc;
     }
 
     public TableOfContents updateToc() {

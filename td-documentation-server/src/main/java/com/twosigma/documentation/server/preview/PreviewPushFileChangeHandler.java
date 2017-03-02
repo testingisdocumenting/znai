@@ -64,6 +64,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
             }
 
             previewSocket.sendPage(htmlPageAndPageProps.getProps());
+            previewSocket.sendToc(previewWebSite.getToc());
         });
     }
 
@@ -80,6 +81,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
                     map(tocItem -> previewWebSite.regeneratePage(tocItem).getProps());
 
             previewSocket.sendPages(generatedPages);
+            previewSocket.sendToc(previewWebSite.getToc());
         });
     }
 
