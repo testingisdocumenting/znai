@@ -164,6 +164,7 @@ public class WebSite {
     public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
         parseMarkup(tocItem);
         final Page page = pageByTocItem.get(tocItem);
+
         return generatePage(tocItem, page);
     }
 
@@ -239,6 +240,7 @@ public class WebSite {
 
             final Page page = new Page(parserResult.getDocElement());
             pageByTocItem.put(tocItem, page);
+            tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
         } catch(Exception e) {
             throw new RuntimeException("error during parsing of " + tocItem.getFileNameWithoutExtension() +
                     ":" + e.getMessage(), e);
