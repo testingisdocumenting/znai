@@ -56,7 +56,7 @@ const TestData = {
 
     documentation: {
         "docMeta": {
-            "id": "",
+            "id": "preview",
             "type": "User Guide",
             "title": "MDoc",
             "previewEnabled": true
@@ -65,15 +65,15 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Auto Highlight",
-                    "id": "auto-highlight",
+                    "title": "Simple Snippet",
+                    "id": "simple-snippet",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "It is very easy to add a code snippet with an automatic code highlighting.",
+                                    "text": "It is very easy to add a code snippet or an output result.",
                                     "type": "SimpleText"
                                 },
                                 {
@@ -87,7 +87,7 @@ const TestData = {
                                     "type": "SoftLineBreak"
                                 },
                                 {
-                                    "text": "you code will be auto highlighted.",
+                                    "text": "your code will be rendered like this.",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -108,7 +108,21 @@ const TestData = {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "This method attempts to guess the language and highlight accordingly. Markdown used to create code snippet above follows",
+                                    "text": "This method doesn\u0027t highlight code by default. It is possible to provide a default language to see for highlighting using",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "[meta.json](meta file).",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Markdown used to create code snippet above follows",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -117,15 +131,15 @@ const TestData = {
                             "componentName": "Snippet",
                             "componentProps": {
                                 "lang": "markdown",
-                                "maxLineLength": 87,
+                                "maxLineLength": 86,
                                 "tokens": [
                                     {
                                         "type": "title",
-                                        "data": "# Auto Highlight"
+                                        "data": "# Simple Snippet"
                                     },
                                     {
                                         "type": "text",
-                                        "data": "\n\nIt is very easy to add a code snippet with an automatic code highlighting.\nAll you have to do is indent your code with 4 spaces inside your markdown document and \nyou code will be auto highlighted.\n\n"
+                                        "data": "\n\nIt is very easy to add a code snippet or an output result.\nAll you have to do is indent your code with 4 spaces inside your markdown document and\nyour code will be rendered like this.\n\n"
                                     },
                                     {
                                         "type": "code",
@@ -148,14 +162,11 @@ const TestData = {
                                         "data": "    }"
                                     }
                                 ],
-                                "startLine": "# Auto Highlight",
+                                "startLine": "# Simple Snippet",
                                 "numberOfLines": 9.0,
                                 "title": "markdown"
                             },
                             "type": "CustomComponent"
-                        },
-                        {
-                            "type": "Paragraph"
                         }
                     ]
                 },
@@ -385,9 +396,6 @@ const TestData = {
                                 "title": "markdown"
                             },
                             "type": "CustomComponent"
-                        },
-                        {
-                            "type": "Paragraph"
                         },
                         {
                             "type": "Paragraph",
@@ -680,9 +688,6 @@ const TestData = {
                                 "title": "markdown"
                             },
                             "type": "CustomComponent"
-                        },
-                        {
-                            "type": "Paragraph"
                         }
                     ]
                 }
@@ -694,8 +699,8 @@ const TestData = {
                 "dirName": "features",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Auto Highlight",
-                        "id": "auto-highlight"
+                        "title": "Simple Snippet",
+                        "id": "simple-snippet"
                     },
                     {
                         "title": "Specifying Language",
@@ -710,9 +715,6 @@ const TestData = {
                         "id": "inlined"
                     }
                 ]
-            },
-            "renderContext": {
-                "nestLevel": 1
             }
         }
     }};

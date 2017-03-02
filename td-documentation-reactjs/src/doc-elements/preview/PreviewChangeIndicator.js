@@ -1,5 +1,7 @@
 import {Component} from 'react'
 
+const modifiedClassName = " __recently-modified"
+
 class PreviewChangeIndicator extends Component {
     constructor(props) {
         super(props)
@@ -24,10 +26,10 @@ class PreviewChangeIndicator extends Component {
         }
 
         if (this.lastUpdatedDom) {
-            this.lastUpdatedDom.className = this.lastUpdatedDom.className.replace(" __recently-modified", "")
+            this.lastUpdatedDom.className = this.lastUpdatedDom.className.replace(modifiedClassName, "")
         }
 
-        targetDom.className += " __recently-modified"
+        targetDom.className += modifiedClassName
 
         if (! this.alreadyScrolled && ! elementInViewport(targetDom)) {
             targetDom.scrollIntoView()
@@ -40,12 +42,7 @@ class PreviewChangeIndicator extends Component {
 
 function elementInViewport(el) {
     const rect = el.getBoundingClientRect()
-
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth))
+    return (rect.top >= 0 && rect.top <= window.innerHeight)
 }
 
 export default PreviewChangeIndicator

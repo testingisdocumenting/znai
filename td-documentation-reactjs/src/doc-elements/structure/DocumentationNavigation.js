@@ -21,7 +21,7 @@ class DocumentationNavigation {
         const url =  "/" + (this.documentationId  ? this.documentationId + "/" : "") + (id.dirName + "/" + id.fileName) +
             (id.pageSectionId ? ("#" + id.pageSectionId) : "")
 
-        this.navigateToUrl(url)
+        return this.navigateToUrl(url)
     }
 
     navigateToUrl(url) {

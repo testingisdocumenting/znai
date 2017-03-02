@@ -55,22 +55,6 @@ class Documentation extends Component {
         this.documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
     }
 
-    componentDidMount() {
-        // server side rendering guard
-        if (window.addEventListener) {
-            this.mainPanelDom.addEventListener('scroll', this.updateCurrentPageSection)
-        }
-
-        this.onPageLoad()
-    }
-
-    componentWillUnmount() {
-        // server side rendering guard
-        if (window.removeEventListener) {
-            this.mainPanelDom.removeEventListener('scroll', this.updateCurrentPageSection)
-        }
-    }
-
     render() {
         const {docMeta} = this.props
         const {toc, page, selectedTocItem, tocCollapsed, tocSelected, pageGenError} = this.state
@@ -123,13 +107,39 @@ class Documentation extends Component {
             </div>)
     }
 
+    componentDidMount() {
+        this.enableScrollListener()
+        this.onPageLoad()
+    }
+
+    componentWillUnmount() {
+        this.disableScrollListener()
+    }
+
+    enableScrollListener() {
+        // server side rendering guard
+        if (window.addEventListener) {
+            this.mainPanelDom.addEventListener('scroll', this.updateCurrentPageSection)
+        }
+    }
+
+    disableScrollListener() {
+        // server side rendering guard
+        if (window.removeEventListener) {
+            this.mainPanelDom.removeEventListener('scroll', this.updateCurrentPageSection)
+        }
+    }
+
     changePage(newStateWithNewPage) {
         this.setState({...newStateWithNewPage, pageGenError: null})
         this.onPageLoad()
     }
 
-    onPageLoad() {
+    scrollToTop() {
         this.mainPanelDom.scrollTop = 0
+    }
+
+    onPageLoad() {
         this.extractPageSectionNodes()
         this.updateCurrentPageSection()
     }
@@ -289,7 +299,8 @@ class Documentation extends Component {
         const differentNode = previewDiff.findFirstDifferentNode()
 
         if (differentNode) {
-            this.setState({lastChangeDataDom: differentNode})
+            this.disableScrollListener();
+            this.setState({lastChangeDataDom: differentNode}, this.enableScrollListener)
         }
     }
 
@@ -315,6 +326,7 @@ class Documentation extends Component {
 
             const tocItem = matchingPages[0].tocItem
             this.changePage({page: matchingPages[0], selectedTocItem: currentPageLocation, lastChangeDataDom: null})
+            this.scrollToTop()
 
             const sectionIdx = tocItem.pageSectionIdTitles.map(ps => ps.id).indexOf(currentPageLocation.pageSectionId);
             if (sectionIdx >= 0) {
