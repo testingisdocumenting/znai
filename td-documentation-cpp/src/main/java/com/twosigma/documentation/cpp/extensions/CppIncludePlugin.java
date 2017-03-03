@@ -41,7 +41,7 @@ public class CppIncludePlugin implements IncludePlugin {
         this.cppPath = componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam());
 
         IncludeParamsOpts opts = includeParams.getOpts();
-        String commentsType = opts.get("comments");
+        String commentsType = opts.has("comments") ? opts.get("comments") : "";
 
         String fileName = includeParams.getFreeParam();
         String text = componentsRegistry.includeResourceResolver().textContent(fileName);
