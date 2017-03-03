@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -57,7 +56,11 @@ public class TextFileIncludePlugin implements IncludePlugin {
         Text croppedAtStart = cropStart(text, opts);
         Text croppedAtEnd = cropEnd(croppedAtStart, opts);
 
-        return croppedAtEnd.toString();
+        Boolean exclude = opts.get("exclude");
+        Text withExcludedLines = exclude != null && exclude ?
+                croppedAtEnd.cropOneLineFromStartAndEnd() : croppedAtEnd;
+
+        return withExcludedLines.toString();
     }
 
     private Text cropStart(Text text, IncludeParamsOpts opts) {
@@ -123,6 +126,10 @@ public class TextFileIncludePlugin implements IncludePlugin {
 
         Text limitTo(Number numberOfLines) {
             return new Text(lines.subList(0, numberOfLines.intValue()));
+        }
+
+        Text cropOneLineFromStartAndEnd() {
+            return new Text(lines.subList(1, lines.size() - 1));
         }
 
         private int findLineIdxContaining(String subLine) {

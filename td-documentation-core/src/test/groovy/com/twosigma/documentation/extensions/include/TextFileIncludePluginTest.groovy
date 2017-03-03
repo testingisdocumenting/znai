@@ -15,16 +15,23 @@ class TextFileIncludePluginTest {
         def text = process("{startLine: 'multiple lines', numberOfLines: 2}")
 
         Assert.assertEquals("a multiple lines\n" +
-                "line number 4", text)
+                "line number", text)
     }
 
     @Test
-    void "should extract file snippet based on start and end lines"() {
+    void "should extract file snippet based on start and stop end lines"() {
         def text = process("{startLine: 'multiple lines', endLine: 'stop'}")
 
         Assert.assertEquals("a multiple lines\n" +
-                "line number 4\n" +
+                "line number\n" +
                 "--- stop", text)
+    }
+
+    @Test
+    void "should extract file snippet based on start and stop end lines excluding them"() {
+        def text = process("{startLine: 'number', endLine: 'stop', exclude: true}")
+
+        Assert.assertEquals("", text)
     }
 
     @Test
@@ -32,7 +39,7 @@ class TextFileIncludePluginTest {
         def text = process("{startLine: 'multiple lines'}")
 
         Assert.assertEquals("a multiple lines\n" +
-                "line number 4\n" +
+                "line number\n" +
                 "--- stop\n" +
                 "and five\n" +
                 "and then six", text)
@@ -45,7 +52,7 @@ class TextFileIncludePluginTest {
         Assert.assertEquals("this is a\n" +
                 "test file in\n" +
                 "a multiple lines\n" +
-                "line number 4\n" +
+                "line number\n" +
                 "--- stop", text)
     }
 
