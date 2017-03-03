@@ -48,15 +48,36 @@ public class TextFileIncludePlugin implements IncludePlugin {
                 componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam())));
     }
 
-    private String extractText(String text, IncludeParamsOpts opts) {
+    private String extractText(String fileContent, IncludeParamsOpts opts) {
         if (opts.isEmpty()) {
-            return text;
+            return fileContent;
         }
 
-        Number numberOfLines = opts.has("numberOfLines") ? opts.get("numberOfLines") : null;
-        if (opts.has("startLine")) {
-            String startLine = opts.get("startLine").toString();
-            return new Text(text).startingWithLineMatching(startLine, numberOfLines).toString();
+        Text text = new Text(fileContent);
+        Text croppedAtStart = cropStart(text, opts);
+        Text croppedAtEnd = cropEnd(croppedAtStart, opts);
+
+        return croppedAtEnd.toString();
+    }
+
+    private Text cropStart(Text text, IncludeParamsOpts opts) {
+        String startLine = opts.get("startLine");
+        if (startLine != null) {
+            return text.startingWithLineContaining(startLine);
+        }
+
+        return text;
+    }
+
+    private Text cropEnd(Text text, IncludeParamsOpts opts) {
+        Number numberOfLines = opts.get("numberOfLines");
+        if (numberOfLines != null) {
+            return text.limitTo(numberOfLines);
+        }
+
+        String endLine = opts.get("endLine");
+        if (endLine != null) {
+            return text.limitToLineContaining(endLine);
         }
 
         return text;
@@ -90,29 +111,33 @@ public class TextFileIncludePlugin implements IncludePlugin {
             this.lines = lines;
         }
 
-        int findLineIdxContaining(String regex) {
-            Pattern pattern = Pattern.compile(regex);
+        Text startingWithLineContaining(String subLine) {
+            int lineIdx = findLineIdxContaining(subLine);
+            return new Text(lines.subList(lineIdx, lines.size()));
+        }
+
+        Text limitToLineContaining(String subLine) {
+            int lineIdx = findLineIdxContaining(subLine);
+            return new Text(lines.subList(0, lineIdx + 1));
+        }
+
+        Text limitTo(Number numberOfLines) {
+            return new Text(lines.subList(0, numberOfLines.intValue()));
+        }
+
+        private int findLineIdxContaining(String subLine) {
             for (int i = 0; i < lines.size(); i++) {
-                if (pattern.matcher(lines.get(i)).find()) {
+                if (lines.get(i).contains(subLine)) {
                     return i;
                 }
             }
 
-            return -1;
+            throw new IllegalArgumentException("<there is no line containing " + subLine + " in:\n" + toString());
         }
 
         @Override
         public String toString() {
             return lines.stream().collect(Collectors.joining("\n"));
-        }
-
-        Text startingWithLineMatching(String pattern, Number numberOfLines) {
-            int lineIdx = findLineIdxContaining(pattern);
-            if (lineIdx == -1) {
-                throw new IllegalArgumentException("<there is no line matching " + pattern + " in:\n" + toString());
-            }
-
-            return new Text(lines.subList(lineIdx, numberOfLines != null  ? lineIdx + numberOfLines.intValue() : lines.size()));
         }
     }
 }

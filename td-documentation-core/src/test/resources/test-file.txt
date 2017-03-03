@@ -2,4 +2,6 @@ this is a
 test file in
 a multiple lines
 line number 4
+--- stop
 and five
+and then six

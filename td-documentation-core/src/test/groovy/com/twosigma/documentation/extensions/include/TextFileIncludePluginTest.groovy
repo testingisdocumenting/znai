@@ -11,7 +11,7 @@ import java.nio.file.Paths
  */
 class TextFileIncludePluginTest {
     @Test
-    void "should extract file snippet based on regex and number of lines"() {
+    void "should extract file snippet based on start line and number of lines"() {
         def text = process("{startLine: 'multiple lines', numberOfLines: 2}")
 
         Assert.assertEquals("a multiple lines\n" +
@@ -19,20 +19,34 @@ class TextFileIncludePluginTest {
     }
 
     @Test
-    void "should extract file snippet based on start and stop regex"() {
-        def text = process("{startLine: 'multiple lines', numberOfLines: 2}")
+    void "should extract file snippet based on start and end lines"() {
+        def text = process("{startLine: 'multiple lines', endLine: 'stop'}")
 
         Assert.assertEquals("a multiple lines\n" +
-                "line number 4", text)
+                "line number 4\n" +
+                "--- stop", text)
     }
 
     @Test
-    void "should extract file snippet based on regex only"() {
+    void "should extract file snippet based on start line only"() {
         def text = process("{startLine: 'multiple lines'}")
 
         Assert.assertEquals("a multiple lines\n" +
                 "line number 4\n" +
-                "and five", text)
+                "--- stop\n" +
+                "and five\n" +
+                "and then six", text)
+    }
+
+    @Test
+    void "should extract file snippet based on end line only"() {
+        def text = process("{endLine: 'stop'}")
+
+        Assert.assertEquals("this is a\n" +
+                "test file in\n" +
+                "a multiple lines\n" +
+                "line number 4\n" +
+                "--- stop", text)
     }
 
     private static String process(String value) {
