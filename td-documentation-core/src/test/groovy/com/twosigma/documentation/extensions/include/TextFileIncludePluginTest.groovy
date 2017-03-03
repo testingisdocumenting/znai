@@ -12,7 +12,7 @@ import java.nio.file.Paths
 class TextFileIncludePluginTest {
     @Test
     void "should extract file snippet based on start line and number of lines"() {
-        def text = process("{startLine: 'multiple lines', numberOfLines: 2}")
+        def text = process("file.txt", "{startLine: 'multiple lines', numberOfLines: 2}")
 
         Assert.assertEquals("a multiple lines\n" +
                 "line number", text)
@@ -20,7 +20,7 @@ class TextFileIncludePluginTest {
 
     @Test
     void "should extract file snippet based on start and stop end lines"() {
-        def text = process("{startLine: 'multiple lines', endLine: 'stop'}")
+        def text = process("file.txt", "{startLine: 'multiple lines', endLine: 'stop'}")
 
         Assert.assertEquals("a multiple lines\n" +
                 "line number\n" +
@@ -29,14 +29,14 @@ class TextFileIncludePluginTest {
 
     @Test
     void "should extract file snippet based on start and stop end lines excluding them"() {
-        def text = process("{startLine: 'number', endLine: 'stop', exclude: true}")
+        def text = process("file.txt", "{startLine: 'number', endLine: 'stop', exclude: true}")
 
         Assert.assertEquals("", text)
     }
 
     @Test
     void "should extract file snippet based on start line only"() {
-        def text = process("{startLine: 'multiple lines'}")
+        def text = process("file.txt", "{startLine: 'multiple lines'}")
 
         Assert.assertEquals("a multiple lines\n" +
                 "line number\n" +
@@ -47,7 +47,7 @@ class TextFileIncludePluginTest {
 
     @Test
     void "should extract file snippet based on end line only"() {
-        def text = process("{endLine: 'stop'}")
+        def text = process("file.txt", "{endLine: 'stop'}")
 
         Assert.assertEquals("this is a\n" +
                 "test file in\n" +
@@ -56,9 +56,19 @@ class TextFileIncludePluginTest {
                 "--- stop", text)
     }
 
-    private static String process(String value) {
+    @Test
+    void "should automatically strip extra indentation"() {
+        def text = process("script.groovy", "{startLine: 'class', endLine: '}', exclude: true}")
+
+        Assert.assertEquals(
+                "def a\n" +
+                "def b", text)
+    }
+
+
+    private static String process(String fileName, String value) {
         def plugin = new TextFileIncludePlugin()
-        def result = plugin.process(new TestComponentsRegistry(), Paths.get(""), new IncludeParams("test-file.txt $value"))
+        def result = plugin.process(new TestComponentsRegistry(), Paths.get(""), new IncludeParams("$fileName $value"))
 
         return result.docElements.get(0).getProps().componentProps.tokens[0].data
     }

@@ -4,6 +4,7 @@ import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.parser.docelement.DocElementType;
+import com.twosigma.utils.StringUtils;
 
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -60,7 +61,7 @@ public class TextFileIncludePlugin implements IncludePlugin {
         Text withExcludedLines = exclude != null && exclude ?
                 croppedAtEnd.cropOneLineFromStartAndEnd() : croppedAtEnd;
 
-        return withExcludedLines.toString();
+        return StringUtils.stripIndentation(withExcludedLines.toString());
     }
 
     private Text cropStart(Text text, IncludeParamsOpts opts) {

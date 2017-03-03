@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static com.twosigma.documentation.cpp.parser.CodeSnippetsUtils.stripIndentation;
+import static com.twosigma.utils.StringUtils.stripIndentation;
 
 /**
  * @author mykola

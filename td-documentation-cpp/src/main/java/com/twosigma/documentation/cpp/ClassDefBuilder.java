@@ -1,7 +1,7 @@
 package com.twosigma.documentation.cpp;
 
-import com.twosigma.documentation.cpp.parser.CodeSnippetsUtils;
 import com.twosigma.documentation.cpp.parser.EntryDef;
+import com.twosigma.utils.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,7 +57,7 @@ public class ClassDefBuilder {
     }
 
     private String stripIndentation() {
-        return CodeSnippetsUtils.stripIndentation(bodyOnly.substring(1, bodyOnly.length() - 1));
+        return StringUtils.stripIndentation(bodyOnly.substring(1, bodyOnly.length() - 1));
     }
 
     @Override

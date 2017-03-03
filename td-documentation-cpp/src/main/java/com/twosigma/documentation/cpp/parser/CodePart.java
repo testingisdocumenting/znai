@@ -1,5 +1,7 @@
 package com.twosigma.documentation.cpp.parser;
 
+import com.twosigma.utils.StringUtils;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -43,7 +45,7 @@ public class CodePart {
     public String getData() {
         return isComment ?
                 data.toString().trim() :
-                CodeSnippetsUtils.stripIndentation(data.toString());
+                StringUtils.stripIndentation(data.toString());
     }
 
     @Override
