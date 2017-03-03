@@ -5,35 +5,48 @@ import org.antlr.v4.runtime.Token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static com.twosigma.documentation.cpp.parser.CodeSnippetsUtils.stripIndentation;
 
 /**
  * @author mykola
  */
-public class ExtractMethodBodyVisitor extends CPP14BaseVisitor {
+public class ExtractBodyVisitor extends CPP14BaseVisitor {
     private final List<String> lines;
+    private CPP14Parser parser;
     private String code;
-    private List<Method> methods;
+    private List<EntryDef> entries;
 
-    public ExtractMethodBodyVisitor(String code) {
+    public ExtractBodyVisitor(CPP14Parser parser, String code) {
+        this.parser = parser;
         this.code = code;
         this.lines = Arrays.asList(code.replace("\r", "").split("\n"));
-        this.methods = new ArrayList<>();
+        this.entries = new ArrayList<>();
     }
 
-    public List<Method> getMethods() {
-        return methods;
+    public Stream<EntryDef> getEntries() {
+        return entries.stream();
+    }
+
+    @Override
+    public Object visitTranslationunit(CPP14Parser.TranslationunitContext ctx) {
+        Object translationunit = super.visitTranslationunit(ctx);
+
+        ObjectsDefinitionTokensProcessor objectsDefinitionTokensProcessor = new ObjectsDefinitionTokensProcessor(lines);
+        entries.addAll(objectsDefinitionTokensProcessor.process(parser));
+
+        return translationunit;
     }
 
     @Override
     public Object visitFunctiondefinition(CPP14Parser.FunctiondefinitionContext ctx) {
         String methodName = textBeforeParenthesis(ctx.declarator().getText());
 
-        Method method = new Method(methodName,
+        EntryDef method = new EntryDef(methodName,
                 codeContent(ctx.getStart(), ctx.getStop()),
                 stripIndentation(removeBrackets(ctx.functionbody().getStart(), ctx.functionbody().getStop())));
-        methods.add(method);
+        entries.add(method);
 
         return super.visitFunctiondefinition(ctx);
     }

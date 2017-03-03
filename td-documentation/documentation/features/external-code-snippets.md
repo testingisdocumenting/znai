@@ -15,7 +15,7 @@ File will be looked up using following rules:
 
 # Inline Comments 
 
-:include-cpp-with-comments: simple.cpp {method: "main"}
+:include-cpp: simple.cpp {entry: "main", comments: "inline", bodyOnly: true}
 
 # Callout Comments
 

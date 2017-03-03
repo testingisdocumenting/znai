@@ -1,6 +1,5 @@
 package com.twosigma.documentation.cpp.parser
 
-import com.twosigma.documentation.cpp.parser.CppSourceCode
 import com.twosigma.utils.ResourceUtils
 import org.junit.Assert
 import org.junit.Test
@@ -26,14 +25,14 @@ class CppSourceCodeTest {
      * of multi lines text
     */
     int e = 5;
-}""", CppSourceCode.methodBody(code, "main"))
+}""", CppSourceCode.entryDefinition(code, "main"))
     }
 
     @Test
     void "extract method definition"() {
         Assert.assertEquals("""void ClassName::method_name() {
    b= 2;
-}""", CppSourceCode.methodBody(code, "ClassName::method_name"))
+}""", CppSourceCode.entryDefinition(code, "ClassName::method_name"))
     }
 
     @Test
@@ -49,12 +48,49 @@ int d = 3;
  * multi line comment
  * of multi lines text
 */
-int e = 5;""", CppSourceCode.methodBodyOnly(code, "main"))
+int e = 5;""", CppSourceCode.entryBodyOnly(code, "main"))
+    }
+
+    @Test
+    void "extract class definition"() {
+        Assert.assertEquals("""class TestClass2 {
+    //
+    private:
+    int s;
+
+    void testMethod() {
+        // inlined method
+    }
+
+    //comment
+};""", CppSourceCode.entryDefinition(code, "TestClass2"))
+    }
+
+    @Test
+    void "extract class definition body only"() {
+        Assert.assertEquals("""//
+private:
+int s;
+
+void testMethod() {
+    // inlined method
+}
+
+//comment""", CppSourceCode.entryBodyOnly(code, "TestClass2"))
+    }
+
+    @Test
+    void "extract enum definition"() {
+        Assert.assertEquals("""enum TestEnum1 {
+    COLOR1,
+    // comments in between
+    COLOR2
+};""", CppSourceCode.entryDefinition(code, "TestEnum1"))
     }
 
     @Test
     void "split source code into groups using comments"() {
-        def main = CppSourceCode.methodBody(code, "main")
+        def main = CppSourceCode.entryDefinition(code, "main")
         def parts = CppSourceCode.splitOnComments(main)
         assert parts.size() == 5
         Assert.assertEquals("int main() {\n" +

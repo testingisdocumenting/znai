@@ -16,6 +16,7 @@ import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -23,14 +24,14 @@ import java.util.stream.Stream;
 /**
  * @author mykola
  */
-public class CppCodeWithCommentsIncludePlugin implements IncludePlugin {
+public class CppIncludePlugin implements IncludePlugin {
     private MarkupParser markupParser;
     private Path cppPath;
     private CodeTokenizer codeTokenizer;
 
     @Override
     public String id() {
-        return "cpp-with-comments";
+        return "cpp";
     }
 
     @Override
@@ -39,11 +40,17 @@ public class CppCodeWithCommentsIncludePlugin implements IncludePlugin {
         this.codeTokenizer = componentsRegistry.codeTokenizer();
         this.cppPath = componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam());
 
+        IncludeParamsOpts opts = includeParams.getOpts();
+        String commentsType = opts.get("comments");
+
         String fileName = includeParams.getFreeParam();
         String text = componentsRegistry.includeResourceResolver().textContent(fileName);
-        String snippet = extractSnippet(text, includeParams.getOpts());
 
-        List<CodePart> codeParts = CppSourceCode.splitOnComments(snippet);
+        String snippet = extractSnippet(text, opts);
+
+        List<CodePart> codeParts = commentsType.equals("inline") ?
+                CppSourceCode.splitOnComments(snippet):
+                Collections.singletonList(new CodePart(false, snippet));
 
         return IncludePluginResult.docElements(codeParts.stream().flatMap(this::convertToDocElement));
     }
@@ -74,11 +81,14 @@ public class CppCodeWithCommentsIncludePlugin implements IncludePlugin {
     }
 
     private String extractSnippet(String text, IncludeParamsOpts opts) {
-        String method = opts.get("method");
-        if (method == null) {
+        String entry = opts.get("entry");
+        if (entry == null) {
             return text;
         }
 
-        return CppSourceCode.methodBody(text, method);
+        Boolean bodyOnly = opts.get("bodyOnly");
+        return bodyOnly != null && bodyOnly ?
+                CppSourceCode.entryBodyOnly(text, entry):
+                CppSourceCode.entryDefinition(text, entry);
     }
 }

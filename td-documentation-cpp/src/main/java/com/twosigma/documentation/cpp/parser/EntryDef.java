@@ -3,14 +3,14 @@ package com.twosigma.documentation.cpp.parser;
 /**
  * @author mykola
  */
-public class Method {
+public class EntryDef {
     private String name;
-    private String bodyWithDecl;
+    private String full;
     private String bodyOnly;
 
-    public Method(String name, String bodyWithDecl, String bodyOnly) {
+    public EntryDef(String name, String full, String bodyOnly) {
         this.name = name;
-        this.bodyWithDecl = bodyWithDecl;
+        this.full = full;
         this.bodyOnly = bodyOnly;
     }
 
@@ -22,12 +22,12 @@ public class Method {
         this.name = name;
     }
 
-    public String getBodyWithDecl() {
-        return bodyWithDecl;
+    public String getFull() {
+        return full;
     }
 
     public void setBodyWithDecl(String bodyWithDecl) {
-        this.bodyWithDecl = bodyWithDecl;
+        this.full = bodyWithDecl;
     }
 
     public String getBodyOnly() {
@@ -40,9 +40,9 @@ public class Method {
 
     @Override
     public String toString() {
-        return "Method{" +
+        return "EntryDef{" +
                 "name='" + name + '\'' +
-                ", bodyWithDecl='" + bodyWithDecl + '\'' +
+                ", full='" + full + '\'' +
                 ", bodyOnly='" + bodyOnly + '\'' +
                 '}';
     }

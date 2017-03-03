@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author mykola
@@ -13,14 +14,14 @@ public class CppSourceCode {
     private CppSourceCode() {
     }
 
-    public static String methodBody(String code, String methodName) {
-        Optional<Method> first = findMethod(code, methodName);
-        return first.map(Method::getBodyWithDecl).orElse("");
+    public static String entryDefinition(String code, String methodName) {
+        Optional<EntryDef> first = findDefinition(code, methodName);
+        return first.map(EntryDef::getFull).orElse("");
     }
 
-    public static String methodBodyOnly(String code, String methodName) {
-        Optional<Method> first = findMethod(code, methodName);
-        return first.map(Method::getBodyOnly).orElse("");
+    public static String entryBodyOnly(String code, String methodName) {
+        Optional<EntryDef> first = findDefinition(code, methodName);
+        return first.map(EntryDef::getBodyOnly).orElse("");
     }
 
     public static List<CodePart> splitOnComments(String code) {
@@ -31,12 +32,17 @@ public class CppSourceCode {
         return processor.extractParts();
     }
 
-    private static Optional<Method> findMethod(String code, String methodName) {
+    private static Optional<EntryDef> findDefinition(String code, String methodName) {
+        ExtractBodyVisitor visitor = parse(code);
+        return visitor.getEntries().filter(m -> methodName.equals(m.getName())).findFirst();
+    }
+
+    private static ExtractBodyVisitor parse(String code) {
         CPP14Parser parser = createParser(code);
-        ExtractMethodBodyVisitor visitor = new ExtractMethodBodyVisitor(code);
+        ExtractBodyVisitor visitor = new ExtractBodyVisitor(parser, code);
         parser.translationunit().accept(visitor);
 
-        return visitor.getMethods().stream().filter(m -> methodName.equals(m.getName())).findFirst();
+        return visitor;
     }
 
     private static CPP14Parser createParser(String code) {

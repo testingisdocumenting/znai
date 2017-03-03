@@ -1,8 +1,8 @@
 int main() {
     int test = 2;
 
-    // comment **impor22tant**
-    // in two lines
+    // comment with **important**
+    // information
     int b = 3;
     int d = 3;
 
