@@ -8,7 +8,7 @@ Instead of aligning tables using one of the markdown extensions you can use your
 
 So the following csv file
 
-:include-text-file: table.csv
+:include-file: table.csv
 
 renders as this table
 

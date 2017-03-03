@@ -1,8 +1,6 @@
 package com.twosigma.documentation.extensions.include
 
-import com.twosigma.documentation.extensions.ReactComponent
 import com.twosigma.documentation.parser.TestComponentsRegistry
-import com.twosigma.documentation.parser.TestResourceResolver
 import org.junit.Assert
 import org.junit.Test
 
@@ -13,32 +11,34 @@ import java.nio.file.Paths
  */
 class TextFileIncludePluginTest {
     @Test
-    void "should have a component name"() {
-        def component = process("")
-        assert component.name == 'FileTextContent'
-    }
-
-    @Test
-    void "should extract file snippet based on contains and number of lines"() {
-        def component = process("{startLine: 'multiple lines', numberOfLines: 2}")
+    void "should extract file snippet based on regex and number of lines"() {
+        def text = process("{startLine: 'multiple lines', numberOfLines: 2}")
 
         Assert.assertEquals("a multiple lines\n" +
-                "line number 4", component.props.text)
+                "line number 4", text)
     }
 
     @Test
-    void "should extract file snippet based on contains only"() {
-        def component = process("{startLine: 'multiple lines'}")
+    void "should extract file snippet based on start and stop regex"() {
+        def text = process("{startLine: 'multiple lines', numberOfLines: 2}")
+
+        Assert.assertEquals("a multiple lines\n" +
+                "line number 4", text)
+    }
+
+    @Test
+    void "should extract file snippet based on regex only"() {
+        def text = process("{startLine: 'multiple lines'}")
 
         Assert.assertEquals("a multiple lines\n" +
                 "line number 4\n" +
-                "and five", component.props.text)
+                "and five", text)
     }
 
-    private static ReactComponent process(String value) {
+    private static String process(String value) {
         def plugin = new TextFileIncludePlugin()
-        def component = plugin.process(new TestComponentsRegistry(), Paths.get(""), new IncludeParams("test-file.txt $value"))
+        def result = plugin.process(new TestComponentsRegistry(), Paths.get(""), new IncludeParams("test-file.txt $value"))
 
-        return component
+        return result.docElements.get(0).getProps().componentProps.tokens[0].data
     }
 }

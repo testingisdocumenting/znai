@@ -15,7 +15,7 @@ class TestComponentsRegistry implements ComponentsRegistry {
 
     @Override
     CodeTokenizer codeTokenizer() {
-        return null
+        return new TestCodeTokenizer();
     }
 
     @Override

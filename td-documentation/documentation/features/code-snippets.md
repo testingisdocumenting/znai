@@ -12,7 +12,7 @@ This method doesn't highlight code by default. It is possible to provide a defau
 [meta.json](meta file).
 Markdown used to create code snippet above follows
 
-:include-text-file: code-snippets.md {startLine: '# Simple Snippet', numberOfLines: 9, lang: 'markdown', title: 'markdown'}
+:include-file: code-snippets.md {startLine: '# Simple Snippet', numberOfLines: 9, lang: 'markdown', title: 'markdown'}
     
 
 # Specifying Language
@@ -32,7 +32,7 @@ class MyComponent extends Component {
 
 Snippet below is used to highlight the code as a javascript language
 
-:include-text-file: code-snippets.md {startLine: '# Specifying Language', numberOfLines: 14, lang: 'markdown', title: 'markdown'}
+:include-file: code-snippets.md {startLine: '# Specifying Language', numberOfLines: 14, lang: 'markdown', title: 'markdown'}
 
 Following languages are supported
 * Java
@@ -61,4 +61,4 @@ class InternationalPriceService implements PriceService {
 To inline code within a text dimply put it inside a back tick. 
 E.g. To check if an Exchange is closed, you need to use `ExchangeCalendar`
 
-:include-text-file: code-snippets.md {startLine: '# Inlined', numberOfLines: 4, lang: 'markdown', title: 'markdown'}
+:include-file: code-snippets.md {startLine: '# Inlined', numberOfLines: 4, lang: 'markdown', title: 'markdown'}

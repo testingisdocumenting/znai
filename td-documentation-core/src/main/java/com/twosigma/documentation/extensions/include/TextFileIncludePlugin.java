@@ -3,14 +3,13 @@ package com.twosigma.documentation.extensions.include;
 import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.parser.docelement.DocElementType;
-import com.twosigma.utils.StringUtils;
 
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,7 +19,7 @@ import java.util.stream.Stream;
 public class TextFileIncludePlugin implements IncludePlugin {
     @Override
     public String id() {
-        return "text-file";
+        return "file";
     }
 
     @Override
@@ -54,10 +53,10 @@ public class TextFileIncludePlugin implements IncludePlugin {
             return text;
         }
 
-        Number numberOfLines = opts.has("numberOfLines") ? opts.get("numberOfLines") : Integer.MAX_VALUE;
+        Number numberOfLines = opts.has("numberOfLines") ? opts.get("numberOfLines") : null;
         if (opts.has("startLine")) {
             String startLine = opts.get("startLine").toString();
-            return new Text(text).startingWithLineContaining(startLine, numberOfLines).toString();
+            return new Text(text).startingWithLineMatching(startLine, numberOfLines).toString();
         }
 
         return text;
@@ -81,17 +80,20 @@ public class TextFileIncludePlugin implements IncludePlugin {
     }
 
     private static class Text {
-        private final String text;
-        private final String[] lines;
+        private final List<String> lines;
 
         public Text(String text) {
-            this.text = text;
-            this.lines = text.split("\n");
+            this.lines = Arrays.asList(text.split("\n"));
         }
 
-        int findLineIdxContaining(String subLine) {
-            for (int i = 0; i < lines.length; i++) {
-                if (lines[i].contains(subLine)) {
+        public Text(List<String> lines) {
+            this.lines = lines;
+        }
+
+        int findLineIdxContaining(String regex) {
+            Pattern pattern = Pattern.compile(regex);
+            for (int i = 0; i < lines.size(); i++) {
+                if (pattern.matcher(lines.get(i)).find()) {
                     return i;
                 }
             }
@@ -101,16 +103,16 @@ public class TextFileIncludePlugin implements IncludePlugin {
 
         @Override
         public String toString() {
-            return text;
+            return lines.stream().collect(Collectors.joining("\n"));
         }
 
-        Text startingWithLineContaining(String subline, Number numberOfLines) {
-            int lineIdx = findLineIdxContaining(subline);
+        Text startingWithLineMatching(String pattern, Number numberOfLines) {
+            int lineIdx = findLineIdxContaining(pattern);
             if (lineIdx == -1) {
-                throw new IllegalArgumentException("<there is no line containing '" + subline + "'> in:\n" + text);
+                throw new IllegalArgumentException("<there is no line matching " + pattern + " in:\n" + toString());
             }
 
-            return new Text(Arrays.stream(lines).skip(lineIdx).limit(numberOfLines.intValue()).collect(Collectors.joining("\n")));
+            return new Text(lines.subList(lineIdx, numberOfLines != null  ? lineIdx + numberOfLines.intValue() : lines.size()));
         }
     }
 }

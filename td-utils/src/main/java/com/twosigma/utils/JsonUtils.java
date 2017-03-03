@@ -2,6 +2,7 @@ package com.twosigma.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,11 @@ public class JsonUtils {
 
     @SuppressWarnings("unchecked")
     public static Map<String, ?> deserializeAsMap(String data) {
-        return gson.fromJson(data, Map.class);
+        try {
+            return gson.fromJson(data, Map.class);
+        } catch (JsonSyntaxException e) {
+            throw new JsonSyntaxException("error parsing " + data, e);
+        }
     }
 
     @SuppressWarnings("unchecked")
