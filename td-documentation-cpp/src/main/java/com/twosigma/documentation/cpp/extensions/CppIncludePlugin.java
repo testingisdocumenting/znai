@@ -9,7 +9,7 @@ import com.twosigma.documentation.cpp.parser.CppSourceCode;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludeParamsOpts;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.include.IncludePluginResult;
+import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElement;
@@ -28,6 +28,7 @@ public class CppIncludePlugin implements IncludePlugin {
     private MarkupParser markupParser;
     private Path cppPath;
     private CodeTokenizer codeTokenizer;
+    private String fileName;
 
     @Override
     public String id() {
@@ -35,7 +36,7 @@ public class CppIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         this.markupParser = componentsRegistry.parser();
         this.codeTokenizer = componentsRegistry.codeTokenizer();
         this.cppPath = componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam());
@@ -43,7 +44,7 @@ public class CppIncludePlugin implements IncludePlugin {
         IncludeParamsOpts opts = includeParams.getOpts();
         String commentsType = opts.has("comments") ? opts.get("comments") : "";
 
-        String fileName = includeParams.getFreeParam();
+        fileName = includeParams.getFreeParam();
         String text = componentsRegistry.includeResourceResolver().textContent(fileName);
 
         String snippet = extractSnippet(text, opts);
@@ -52,7 +53,7 @@ public class CppIncludePlugin implements IncludePlugin {
                 CppSourceCode.splitOnComments(snippet):
                 Collections.singletonList(new CodePart(false, snippet));
 
-        return IncludePluginResult.docElements(codeParts.stream().flatMap(this::convertToDocElement));
+        return PluginResult.docElements(codeParts.stream().flatMap(this::convertToDocElement));
     }
 
     private Stream<DocElement> convertToDocElement(CodePart codePart) {
@@ -62,9 +63,9 @@ public class CppIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(
-                componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam())));
+                componentsRegistry.includeResourceResolver().fullPath(fileName)));
     }
 
     private Stream<DocElement> parseComments(String data) {

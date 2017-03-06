@@ -9,12 +9,26 @@ import java.util.Map;
  * @author mykola
  */
 public class IncludeParams {
+    private String id;
     private String freeParam;
     private IncludeParamsOpts opts;
 
-    public IncludeParams(final String value) {
+    public IncludeParams(String id, String value) {
+        this.id = id;
         this.freeParam = extractFreeParam(value);
         this.opts = new IncludeParamsOpts(extractMap(value));
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getFreeParam() {
+        return freeParam;
+    }
+
+    public IncludeParamsOpts getOpts() {
+        return opts;
     }
 
     private String extractFreeParam(String value) {
@@ -32,13 +46,5 @@ public class IncludeParams {
 
         String json = value.substring(optsStartIdx);
         return JsonUtils.deserializeAsMap(json);
-    }
-
-    public String getFreeParam() {
-        return freeParam;
-    }
-
-    public IncludeParamsOpts getOpts() {
-        return opts;
     }
 }

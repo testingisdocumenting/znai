@@ -2,10 +2,9 @@ package com.twosigma.documentation.java.extensions;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.include.IncludePluginResult;
+import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.java.parser.JavaDocExtractor;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 
@@ -17,22 +16,25 @@ import java.util.stream.Stream;
  * @author mykola
  */
 public class JavaDocIncludePlugin implements IncludePlugin {
+    private String fileName;
+
     @Override
     public String id() {
         return "java-doc";
     }
 
     @Override
-    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        String textContent = componentsRegistry.includeResourceResolver().textContent(includeParams.getFreeParam());
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+        fileName = includeParams.getFreeParam();
+        String textContent = componentsRegistry.includeResourceResolver().textContent(fileName);
         String javaDoc = JavaDocExtractor.extractTopLevel(textContent);
 
-        return IncludePluginResult.reactComponent(DocElementType.SIMPLE_TEXT, Collections.singletonMap("text", javaDoc));
+        return PluginResult.reactComponent(DocElementType.SIMPLE_TEXT, Collections.singletonMap("text", javaDoc));
     }
 
     @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
-        Path path = componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam());
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
+        Path path = componentsRegistry.includeResourceResolver().fullPath(fileName);
         return Stream.of(AuxiliaryFile.builtTime(path));
     }
 }

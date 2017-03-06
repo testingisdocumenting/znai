@@ -3,6 +3,8 @@ package com.twosigma.documentation.parser.commonmark.include;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.include.IncludePluginParser;
 import org.commonmark.node.AbstractVisitor;
 import org.commonmark.node.Node;
 import org.commonmark.node.Text;
@@ -21,8 +23,6 @@ public class IncludePostProcessor implements PostProcessor {
     }
 
     private static class IncludeVisitor extends AbstractVisitor {
-        private static final Pattern INCLUDE_PATTERN = Pattern.compile(":include-(\\S+)+:(.*)$");
-
         @Override
         public void visit(final Text text) {
             String includeStatement = text.getLiteral().trim();
@@ -46,14 +46,8 @@ public class IncludePostProcessor implements PostProcessor {
         }
 
         private IncludeNode createNode(final String includeStatement) {
-            final Matcher matcher = INCLUDE_PATTERN.matcher(includeStatement);
-            if (!matcher.matches()) {
-                throw new IllegalArgumentException("To define include pattern use\n:" +
-                    "include-plugin-id: free form value {optional: keyValues}\n" +
-                    "Got: " + includeStatement);
-            }
-
-            return new IncludeNode(matcher.group(1).trim(), matcher.group(2).trim());
+            IncludeParams params = IncludePluginParser.parse(includeStatement);
+            return new IncludeNode(params);
         }
     }
 }

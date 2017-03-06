@@ -2,7 +2,7 @@ package com.twosigma.documentation.extensions.diagrams;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.ReactComponent;
+import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
 import com.twosigma.documentation.extensions.include.*;
 import com.twosigma.documentation.parser.MarkupParser;
@@ -33,7 +33,7 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         MarkupParser parser = componentsRegistry.parser();
         IncludeResourcesResolver includeResourcesResolver = componentsRegistry.includeResourceResolver();
 
@@ -57,11 +57,11 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
         props.put("diagram", Graphviz.graphvizEngine.diagramFromGv(diagramId, gvContent).toMap());
         props.put("colors", Graphviz.colors);
 
-        return IncludePluginResult.reactComponent("GraphVizFlow", props);
+        return PluginResult.reactComponent("GraphVizFlow", props);
     }
 
     @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.concat(auxiliaryFiles.stream(), Stream.of(
                 AuxiliaryFile.builtTime(diagramPath),
                 AuxiliaryFile.builtTime(slidesPath)));

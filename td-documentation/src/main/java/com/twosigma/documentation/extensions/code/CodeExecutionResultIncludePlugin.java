@@ -5,7 +5,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.include.IncludePluginResult;
+import com.twosigma.documentation.extensions.PluginResult;
 
 import java.nio.file.Path;
 import java.util.Collections;
@@ -42,8 +42,8 @@ public class CodeExecutionResultIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final IncludeParams includeParams) {
-        return IncludePluginResult.reactComponent("TestComponent", Collections.emptyMap());
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final IncludeParams includeParams) {
+        return PluginResult.reactComponent("TestComponent", Collections.emptyMap());
 //        final String fileName = includeParams.getFreeParam();
 //        final Path fullPath = context.getCurrentFilePath().getParent().resolve(fileName + ".json").toAbsolutePath();
 //

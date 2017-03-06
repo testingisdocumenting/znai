@@ -7,7 +7,7 @@ import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.extensions.include.IncludeContext;
-import com.twosigma.documentation.extensions.include.IncludePlugins;
+import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.extensions.include.MultipleLocationsResourceResolver;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
@@ -276,7 +276,7 @@ public class WebSite {
 
     private void resetPlugins(final Path markdownPath) {
         final IncludeContext context = new IncludeContext(markdownPath);
-        IncludePlugins.reset(context);
+        Plugins.reset(context);
     }
 
     private void generatePages() {

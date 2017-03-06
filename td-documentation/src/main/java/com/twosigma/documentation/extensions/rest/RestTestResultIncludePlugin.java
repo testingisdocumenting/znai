@@ -21,8 +21,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.ReactComponent;
-import com.twosigma.documentation.extensions.include.IncludePluginResult;
+import com.twosigma.documentation.extensions.PluginResult;
 
 /**
  * @author mykola
@@ -41,7 +40,7 @@ public class RestTestResultIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final IncludeParams includeParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final IncludeParams includeParams) {
         final Map<String, Object> props = new LinkedHashMap<>();
 
         final Path pathToJson = Paths.get(includeParams.getFreeParam() + ".groovy-" + nextCallNumber + ".json");
@@ -50,7 +49,7 @@ public class RestTestResultIncludePlugin implements IncludePlugin {
         final MapOrList mapOrList = createGson().fromJson(content(pathToJson), MapOrList.class);
 
         props.put("data", mapOrList.list != null ? mapOrList.list : mapOrList.map);
-        return IncludePluginResult.reactComponent("RestTestOutput", props);
+        return PluginResult.reactComponent("RestTestOutput", props);
     }
 
     private String content(final Path pathToJson) {

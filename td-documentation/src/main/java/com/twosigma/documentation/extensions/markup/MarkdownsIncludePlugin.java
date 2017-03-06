@@ -4,7 +4,7 @@ import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.include.IncludePluginResult;
+import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElement;
@@ -30,7 +30,7 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         Path dir = componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam());
         MarkupParser parser = componentsRegistry.parser();
 
@@ -40,7 +40,7 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
             return parserResult.getDocElement().getContent().stream();
         });
 
-        return IncludePluginResult.docElements(elements);
+        return PluginResult.docElements(elements);
     }
 
     private Stream<Path> markdowns(Path dir) {
@@ -52,7 +52,7 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return markdowns.stream().map(AuxiliaryFile::builtTime);
     }
 }

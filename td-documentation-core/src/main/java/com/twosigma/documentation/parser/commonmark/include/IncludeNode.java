@@ -1,5 +1,6 @@
 package com.twosigma.documentation.parser.commonmark.include;
 
+import com.twosigma.documentation.extensions.include.IncludeParams;
 import org.commonmark.node.CustomBlock;
 import org.commonmark.node.Visitor;
 
@@ -7,20 +8,18 @@ import org.commonmark.node.Visitor;
  * @author mykola
  */
 public class IncludeNode extends CustomBlock {
-    private String id;
-    private String value;
+    private IncludeParams params;
 
-    public IncludeNode(final String id, final String value) {
-        this.id = id;
-        this.value = value;
+    public IncludeNode(IncludeParams params) {
+        this.params = params;
     }
 
     public String getId() {
-        return id;
+        return params.getId();
     }
 
-    public String getValue() {
-        return value;
+    public IncludeParams getParams() {
+        return params;
     }
 
     @Override

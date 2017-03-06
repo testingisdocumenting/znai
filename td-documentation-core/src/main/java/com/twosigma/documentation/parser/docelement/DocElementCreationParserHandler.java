@@ -3,16 +3,19 @@ package com.twosigma.documentation.parser.docelement;
 import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.Plugin;
+import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.include.IncludePluginResult;
-import com.twosigma.documentation.extensions.include.IncludePlugins;
+import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.utils.CollectionUtils;
 
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -181,15 +184,24 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onInclude(final String pluginId, final String value) {
+    public void onIncludePlugin(IncludeParams includeParams) {
+        IncludePlugin includePlugin = Plugins.includePluginById(includeParams.getId());
+        processPlugin(includePlugin, (p) -> p.process(componentsRegistry, path, includeParams));
+    }
+
+    @Override
+    public void onFencePlugin(String pluginId, String value) {
+        FencePlugin fencePlugin = Plugins.fencePluginById(pluginId);
+        processPlugin(fencePlugin, (p) -> p.process(componentsRegistry, path, value));
+    }
+
+    private <E extends Plugin> void processPlugin(E plugin, Function<E, PluginResult> processFunc) {
         try {
-            IncludePlugin includePlugin = IncludePlugins.byId(pluginId);
-            IncludeParams includeParams = new IncludeParams(value);
+            PluginResult result = processFunc.apply(plugin);
 
-            IncludePluginResult includePluginResult = includePlugin.process(componentsRegistry, path, includeParams);
-            includePlugin.auxiliaryFiles(componentsRegistry, includeParams).forEach(auxiliaryFiles::add);
+            plugin.auxiliaryFiles(componentsRegistry).forEach(auxiliaryFiles::add);
 
-            List<DocElement> docElements = includePluginResult.getDocElements();
+            List<DocElement> docElements = result.getDocElements();
             if (docElements.isEmpty()) {
                 return;
             }
@@ -203,7 +215,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
             docElements.forEach(this::append);
         } catch (Exception e) {
-            throw new RuntimeException("failure during processing include plugin '" + pluginId + "': " + e.getMessage(), e);
+            throw new RuntimeException("failure during processing include plugin '" + plugin.id() + "': " + e.getMessage(), e);
         }
     }
 

@@ -2,10 +2,9 @@ package com.twosigma.documentation.extensions.table;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.ReactComponent;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.include.IncludePluginResult;
+import com.twosigma.documentation.extensions.PluginResult;
 
 import java.nio.file.Path;
 import java.util.Collections;
@@ -18,6 +17,8 @@ import java.util.stream.Stream;
  * @author mykola
  */
 public class IncludeCsvTable implements IncludePlugin {
+    private String fileName;
+
     @Override
     public String id() {
         return "csv";
@@ -25,8 +26,9 @@ public class IncludeCsvTable implements IncludePlugin {
 
     @Override
     @SuppressWarnings("unchecked")
-    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        String csv = componentsRegistry.includeResourceResolver().textContent(includeParams.getFreeParam());
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+        fileName = includeParams.getFreeParam();
+        String csv = componentsRegistry.includeResourceResolver().textContent(fileName);
         CsvData csvData = CsvParser.parse(csv);
 
         Map<String, Object> table = csvData.toMap();
@@ -37,12 +39,12 @@ public class IncludeCsvTable implements IncludePlugin {
             column.ifPresent(c -> c.putAll((Map<? extends String, ?>) meta));
         });
 
-        return IncludePluginResult.reactComponent("SimpleTable", Collections.singletonMap("table", table));
+        return PluginResult.reactComponent("SimpleTable", Collections.singletonMap("table", table));
     }
 
     @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(
-                componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam())));
+                componentsRegistry.includeResourceResolver().fullPath(fileName)));
     }
 }

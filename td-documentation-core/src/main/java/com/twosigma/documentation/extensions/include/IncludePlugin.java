@@ -1,32 +1,21 @@
 package com.twosigma.documentation.extensions.include;
 
-import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.ReactComponent;
+import com.twosigma.documentation.extensions.Plugin;
+import com.twosigma.documentation.extensions.PluginResult;
 
 import java.nio.file.Path;
-import java.util.stream.Stream;
 
 /**
  *
  * @author mykola
  */
-public interface IncludePlugin {
-    String id();
-
+public interface IncludePlugin extends Plugin {
     /**
      * gets called at the beginning of every page before rendering
      * @param context context of the page
      */
     default void reset(IncludeContext context) {}
 
-    IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams);
-
-    default Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
-        return Stream.empty();
-    }
-
-    default String textForSearch() {
-        return "";
-    } // TODO weights
+    PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams);
 }

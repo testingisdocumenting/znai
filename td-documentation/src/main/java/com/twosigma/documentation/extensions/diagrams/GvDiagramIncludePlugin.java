@@ -5,8 +5,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.ReactComponent;
-import com.twosigma.documentation.extensions.include.IncludePluginResult;
+import com.twosigma.documentation.extensions.PluginResult;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
@@ -27,7 +26,7 @@ public class GvDiagramIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         String diagramId = includeParams.getFreeParam();
         String diagramPath = includeParams.getOpts().getRequiredString("diagramPath");
         String gvContent = componentsRegistry.includeResourceResolver().textContent(diagramPath);
@@ -37,7 +36,7 @@ public class GvDiagramIncludePlugin implements IncludePlugin {
         props.put("diagram", diagram.toMap());
         props.put("colors", Graphviz.colors);
 
-        return IncludePluginResult.reactComponent("GraphVizDiagram", props);
+        return PluginResult.reactComponent("GraphVizDiagram", props);
     }
 
     @Override

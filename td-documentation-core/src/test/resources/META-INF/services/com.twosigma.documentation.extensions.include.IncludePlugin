@@ -1,1 +1,1 @@
-com.twosigma.documentation.parser.DummyIncludePlugin
+com.twosigma.documentation.extensions.include.DummyIncludePlugin

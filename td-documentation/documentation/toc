@@ -6,6 +6,7 @@ features
     code-snippets
     external-code-snippets
     tables
+    tabs
     proxy
 cook-book
     merging-time-series

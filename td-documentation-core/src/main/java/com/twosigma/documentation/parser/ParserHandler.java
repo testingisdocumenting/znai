@@ -1,5 +1,7 @@
 package com.twosigma.documentation.parser;
 
+import com.twosigma.documentation.extensions.include.IncludeParams;
+
 /**
  * There are multiple markup languages out there. There are common elements among them.
  * This interface attempts to formalize elements and let define common actions to perform regardless of the markup.
@@ -32,6 +34,7 @@ public interface ParserHandler {
     void onImage(String title, String destination, String alt);
     void onSnippet(String lang, String lineNumber, String snippet);
     void onThematicBreak();
-    void onInclude(String pluginId, String value);
+    void onIncludePlugin(IncludeParams includeParams);
+    void onFencePlugin(String pluginId, String value);
     void onParsingEnd();
 }

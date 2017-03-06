@@ -119,7 +119,7 @@ world""")
     @Test
     void "include plugin"() {
         parse(":include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
-        assert content == [[type: 'Dummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
+        assert content == [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
     }
 
     @Test
@@ -132,7 +132,17 @@ world""")
                                    [[type: 'Paragraph', content:[
                                            [text: 'simple text', type: 'SimpleText'],
                                            [type: 'SoftLineBreak']]],
-                                    [ff: 'free-form text', opts: [param1: 'v1', param2: 'v2'], type: 'Dummy']]]]
+                                    [ff: 'free-form text', opts: [param1: 'v1', param2: 'v2'], type: 'IncludeDummy']]]]
+    }
+
+    @Test
+    void "fenced plugin"() {
+        parse("~~~dummy\n" +
+                "test\n" +
+                "block\n" +
+                "~~~")
+
+        assert content == [[content: 'test\nblock\n', type: 'FenceDummy']]
     }
 
     private void parse(String markdown) {

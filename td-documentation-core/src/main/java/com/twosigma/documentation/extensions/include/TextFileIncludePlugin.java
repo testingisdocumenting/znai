@@ -3,6 +3,7 @@ package com.twosigma.documentation.extensions.include;
 import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 import com.twosigma.utils.StringUtils;
 
@@ -17,6 +18,8 @@ import java.util.stream.Stream;
  * @author mykola
  */
 public class TextFileIncludePlugin implements IncludePlugin {
+    private String fileName;
+
     @Override
     public String id() {
         return "file";
@@ -27,8 +30,8 @@ public class TextFileIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public IncludePluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        String fileName = includeParams.getFreeParam();
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+        fileName = includeParams.getFreeParam();
 
         String text = extractText(componentsRegistry.includeResourceResolver().
                 textContent(fileName), includeParams.getOpts());
@@ -39,13 +42,13 @@ public class TextFileIncludePlugin implements IncludePlugin {
         Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), langToUse, text);
         props.putAll(includeParams.getOpts().toMap());
 
-        return IncludePluginResult.reactComponent(DocElementType.SNIPPET, props);
+        return PluginResult.reactComponent(DocElementType.SNIPPET, props);
     }
 
     @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry, IncludeParams includeParams) {
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(
-                componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam())));
+                componentsRegistry.includeResourceResolver().fullPath(fileName)));
     }
 
     private String extractText(String fileContent, IncludeParamsOpts opts) {
