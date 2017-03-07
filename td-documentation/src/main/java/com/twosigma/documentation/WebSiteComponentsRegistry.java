@@ -2,7 +2,7 @@ package com.twosigma.documentation;
 
 import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.include.IncludeResourcesResolver;
+import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.documentation.parser.MarkupParser;
 
 /**
@@ -11,7 +11,7 @@ import com.twosigma.documentation.parser.MarkupParser;
 public class WebSiteComponentsRegistry implements ComponentsRegistry {
     private MarkupParser parser;
     private CodeTokenizer codeTokenizer;
-    private IncludeResourcesResolver includeResourcesResolver;
+    private PluginResourcesResolver pluginResourcesResolver;
 
     @Override
     public MarkupParser parser() {
@@ -24,8 +24,8 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
     }
 
     @Override
-    public IncludeResourcesResolver includeResourceResolver() {
-        return includeResourcesResolver;
+    public PluginResourcesResolver includeResourceResolver() {
+        return pluginResourcesResolver;
     }
 
     public void setParser(MarkupParser parser) {
@@ -36,7 +36,7 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
         this.codeTokenizer = codeTokenizer;
     }
 
-    public void setIncludeResourcesResolver(IncludeResourcesResolver includeResourcesResolver) {
-        this.includeResourcesResolver = includeResourcesResolver;
+    public void setPluginResourcesResolver(PluginResourcesResolver pluginResourcesResolver) {
+        this.pluginResourcesResolver = pluginResourcesResolver;
     }
 }

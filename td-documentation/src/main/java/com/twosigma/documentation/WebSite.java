@@ -82,7 +82,7 @@ public class WebSite {
         }
         docMeta.setLogo(WebResource.withPath(cfg.logoRelativePath));
 
-        componentsRegistry.setIncludeResourcesResolver(includeResourcesResolver);
+        componentsRegistry.setPluginResourcesResolver(includeResourcesResolver);
         componentsRegistry.setCodeTokenizer(codeTokenizer);
 
         reset();

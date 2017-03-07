@@ -15,3 +15,13 @@ Cpp:include-cpp: simple.cpp {entry: 'main', bodyOnly: true}
 ```
 
 Selecting a tab will switch all the tabs on every page.
+
+# Markdown Per Tab
+
+Using `include-markdown` plugin a markdown content per tab can be specified. For example installation instructions
+can be specified this way.
+
+```tabs
+JavaScript:include-markdown: instructions/javascript-install.md
+Cpp:include-markdown: instructions/cpp-install.md
+```

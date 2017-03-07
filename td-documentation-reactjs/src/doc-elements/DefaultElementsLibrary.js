@@ -49,6 +49,14 @@ library.Section = ({id, title, content}) => {
         </div>)
 }
 
+library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphVizSvg {...props}/></div>
+library.GraphVizFlow = GraphVizFlow
+
+library.SimpleTable = SimpleTable
+
+library.Tabs = Tabs(library)
+library.Page = Page(library)
+
 library.CustomComponent = ({componentName, componentProps}) => {
     const Component = library[componentName]
     if (!Component) {
@@ -58,13 +66,5 @@ library.CustomComponent = ({componentName, componentProps}) => {
         return <Component {...componentProps}/>
     }
 }
-
-library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphVizSvg {...props}/></div>
-library.GraphVizFlow = GraphVizFlow
-
-library.SimpleTable = SimpleTable
-library.Tabs = Tabs
-
-library.Page = Page(library)
 
 export default library

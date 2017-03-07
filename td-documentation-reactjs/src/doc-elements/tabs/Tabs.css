@@ -1,7 +1,12 @@
 .tabs-area {
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 30px;
-    border-bottom: 2px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.tabs-content {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .tabs-names-area {
@@ -33,6 +38,12 @@
 
 .tabs-area .snippet {
     border: none;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tabs-area .snippet pre {
+    border: none;
+    margin-top: 0;
+    margin-bottom: 0;
 }

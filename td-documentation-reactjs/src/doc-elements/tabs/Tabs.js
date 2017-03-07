@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import elementsLibrary from '../DefaultElementsLibrary'
 
 import './Tabs.css'
 
@@ -16,7 +15,7 @@ const TabNames = ({names, activeIdx, onClick}) => {
     </div>
 }
 
-class Tabs extends Component {
+const Tabs = (elementsLibrary) => class Tabs extends Component {
     constructor(props) {
         super(props)
 
@@ -33,7 +32,9 @@ class Tabs extends Component {
 
         return (<div className="tabs-area">
             <TabNames names={names} activeIdx={activeIdx} onClick={this.onClick}/>
-            <elementsLibrary.DocElement content={tabContent}/>
+            <div className="tabs-content">
+                <elementsLibrary.DocElement content={tabContent}/>
+            </div>
             </div>)
     }
 

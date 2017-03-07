@@ -1,11 +1,11 @@
-package com.twosigma.documentation.extensions.include;
+package com.twosigma.documentation.extensions;
 
 import java.nio.file.Path;
 
 /**
  * @author mykola
  */
-public interface IncludeResourcesResolver {
+public interface PluginResourcesResolver {
     String textContent(String path);
     default String textContent(Path path) {
         return textContent(path.toString());

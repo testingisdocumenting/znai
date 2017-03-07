@@ -65,40 +65,26 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Simple Snippet",
-                    "id": "simple-snippet",
+                    "title": "Fenced Block",
+                    "id": "fenced-block",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "It is very easy to add a code snippet or an output result.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "All you have to do is indent your code with 4 spaces inside your markdown document and",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "your code will be rendered like this.",
+                                    "text": "To define multiple tabs we use fenced code block",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
                             "lang": "",
-                            "maxLineLength": 52,
+                            "maxLineLength": 59,
                             "tokens": [
                                 {
                                     "type": "text",
-                                    "data": "interface PriceService {\n    Money calcPrice(String cuips, Integer quantity);\n}\n"
+                                    "data": "```tabs\nJavaScript:include-file: file-name.js\nCpp:include-cpp: simple.cpp {entry: \u0027main\u0027, bodyOnly: true}\n```\n"
                                 }
                             ],
                             "lineNumber": "",
@@ -108,292 +94,255 @@ const TestData = {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "This method doesn\u0027t highlight code by default. It is possible to provide a default language to see for highlighting using",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "[meta.json](meta file).",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "Markdown used to create code snippet above follows",
+                                    "text": "This will generate a multi tab widget with an include plugin content per tab",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "componentName": "Snippet",
+                            "componentName": "Tabs",
                             "componentProps": {
-                                "lang": "markdown",
-                                "maxLineLength": 86,
-                                "tokens": [
+                                "tabsContent": [
                                     {
-                                        "type": "title",
-                                        "data": "# Simple Snippet"
+                                        "name": "JavaScript",
+                                        "content": [
+                                            {
+                                                "componentName": "Snippet",
+                                                "componentProps": {
+                                                    "lang": "javascript",
+                                                    "maxLineLength": 22,
+                                                    "tokens": [
+                                                        {
+                                                            "type": "keyword",
+                                                            "data": "class"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "data": " "
+                                                        },
+                                                        {
+                                                            "type": "class-name",
+                                                            "data": "JsClass"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "data": " "
+                                                        },
+                                                        {
+                                                            "type": "punctuation",
+                                                            "data": "{"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "data": "\n    "
+                                                        },
+                                                        {
+                                                            "type": "function",
+                                                            "data": "constructor"
+                                                        },
+                                                        {
+                                                            "type": "punctuation",
+                                                            "data": "("
+                                                        },
+                                                        {
+                                                            "type": "punctuation",
+                                                            "data": ")"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "data": " "
+                                                        },
+                                                        {
+                                                            "type": "punctuation",
+                                                            "data": "{"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "data": "\n    "
+                                                        },
+                                                        {
+                                                            "type": "punctuation",
+                                                            "data": "}"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "data": "\n"
+                                                        },
+                                                        {
+                                                            "type": "punctuation",
+                                                            "data": "}"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "data": "\n\n"
+                                                        },
+                                                        {
+                                                            "type": "keyword",
+                                                            "data": "export"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "data": " "
+                                                        },
+                                                        {
+                                                            "type": "keyword",
+                                                            "data": "default"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "data": " JsClass"
+                                                        }
+                                                    ]
+                                                },
+                                                "type": "CustomComponent"
+                                            }
+                                        ]
                                     },
                                     {
-                                        "type": "text",
-                                        "data": "\n\nIt is very easy to add a code snippet or an output result.\nAll you have to do is indent your code with 4 spaces inside your markdown document and\nyour code will be rendered like this.\n\n"
-                                    },
-                                    {
-                                        "type": "code",
-                                        "data": "    interface PriceService {"
-                                    },
-                                    {
-                                        "type": "text",
-                                        "data": "\n"
-                                    },
-                                    {
-                                        "type": "code",
-                                        "data": "        Money calcPrice(String cuips, Integer quantity);"
-                                    },
-                                    {
-                                        "type": "text",
-                                        "data": "\n"
-                                    },
-                                    {
-                                        "type": "code",
-                                        "data": "    }"
+                                        "name": "Cpp",
+                                        "content": [
+                                            {
+                                                "lang": "cpp",
+                                                "maxLineLength": 29,
+                                                "tokens": [
+                                                    {
+                                                        "type": "keyword",
+                                                        "data": "int"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": " test "
+                                                    },
+                                                    {
+                                                        "type": "operator",
+                                                        "data": "\u003d"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": " "
+                                                    },
+                                                    {
+                                                        "type": "number",
+                                                        "data": "2"
+                                                    },
+                                                    {
+                                                        "type": "punctuation",
+                                                        "data": ";"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": "\n\n"
+                                                    },
+                                                    {
+                                                        "type": "comment",
+                                                        "data": "// comment with **important**"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": "\n"
+                                                    },
+                                                    {
+                                                        "type": "comment",
+                                                        "data": "// information"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": "\n"
+                                                    },
+                                                    {
+                                                        "type": "keyword",
+                                                        "data": "int"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": " b "
+                                                    },
+                                                    {
+                                                        "type": "operator",
+                                                        "data": "\u003d"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": " "
+                                                    },
+                                                    {
+                                                        "type": "number",
+                                                        "data": "3"
+                                                    },
+                                                    {
+                                                        "type": "punctuation",
+                                                        "data": ";"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": "\n"
+                                                    },
+                                                    {
+                                                        "type": "keyword",
+                                                        "data": "int"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": " d "
+                                                    },
+                                                    {
+                                                        "type": "operator",
+                                                        "data": "\u003d"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": " "
+                                                    },
+                                                    {
+                                                        "type": "number",
+                                                        "data": "3"
+                                                    },
+                                                    {
+                                                        "type": "punctuation",
+                                                        "data": ";"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": "\n\n"
+                                                    },
+                                                    {
+                                                        "type": "comment",
+                                                        "data": "/*\n * multi line comment\n * of multi *lines* text\n*/"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": "\n"
+                                                    },
+                                                    {
+                                                        "type": "keyword",
+                                                        "data": "int"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": " e "
+                                                    },
+                                                    {
+                                                        "type": "operator",
+                                                        "data": "\u003d"
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "data": " "
+                                                    },
+                                                    {
+                                                        "type": "number",
+                                                        "data": "5"
+                                                    },
+                                                    {
+                                                        "type": "punctuation",
+                                                        "data": ";"
+                                                    }
+                                                ],
+                                                "type": "Snippet"
+                                            }
+                                        ]
                                     }
-                                ],
-                                "startLine": "# Simple Snippet",
-                                "numberOfLines": 9.0,
-                                "title": "markdown"
-                            },
-                            "type": "CustomComponent"
-                        }
-                    ]
-                },
-                {
-                    "title": "Specifying Language",
-                    "id": "specifying-language",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "You can also specify a language.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "That maybe useful if there is the snippet is not large enough for auto detection.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "javascript",
-                            "maxLineLength": 38,
-                            "tokens": [
-                                {
-                                    "type": "keyword",
-                                    "data": "import"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " React"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "Component"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "keyword",
-                                    "data": "from"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\u0027"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "react"
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\u0027"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n\n"
-                                },
-                                {
-                                    "type": "keyword",
-                                    "data": "class"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "class-name",
-                                    "data": "MyComponent"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "keyword",
-                                    "data": "extends"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "class-name",
-                                    "data": "Component"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "function",
-                                    "data": "render"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "("
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ")"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n        "
-                                },
-                                {
-                                    "type": "comment",
-                                    "data": "/// ..."
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Snippet below is used to highlight the code as a javascript language",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "componentName": "Snippet",
-                            "componentProps": {
-                                "lang": "markdown",
-                                "maxLineLength": 81,
-                                "tokens": [
-                                    {
-                                        "type": "title",
-                                        "data": "# Specifying Language"
-                                    },
-                                    {
-                                        "type": "text",
-                                        "data": "\n \nYou can also specify a language. \nThat maybe useful if there is the snippet is not large enough for auto detection.\n\n```javascript\nimport React, {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n"
-                                    },
-                                    {
-                                        "type": "code",
-                                        "data": "    render() {"
-                                    },
-                                    {
-                                        "type": "text",
-                                        "data": "\n"
-                                    },
-                                    {
-                                        "type": "code",
-                                        "data": "        /// ..."
-                                    },
-                                    {
-                                        "type": "text",
-                                        "data": "\n"
-                                    },
-                                    {
-                                        "type": "code",
-                                        "data": "    }"
-                                    },
-                                    {
-                                        "type": "text",
-                                        "data": "\n}\n```"
-                                    }
-                                ],
-                                "startLine": "# Specifying Language",
-                                "numberOfLines": 14.0,
-                                "title": "markdown"
+                                ]
                             },
                             "type": "CustomComponent"
                         },
@@ -401,79 +350,7 @@ const TestData = {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Following languages are supported",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "bulletMarker": "*",
-                            "tight": true,
-                            "type": "BulletList",
-                            "content": [
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Java",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "JavaScript",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Groovy",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Python",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "We use highlightjs library to provide syntax highlighting",
+                                    "text": "Selecting a tab will switch all the tabs on every page.",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -481,211 +358,91 @@ const TestData = {
                     ]
                 },
                 {
-                    "title": "Wide Code",
-                    "id": "wide-code",
+                    "title": "Markdown Per Tab",
+                    "id": "markdown-per-tab",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "To make regular text more readable we maintain a narrow column of text. You code snippets however can\u0027t always follow the",
+                                    "text": "Using ",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "same rules. In case of a wide code snippets we expand the horizontal boundaries and center the source code to fit.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "java",
-                            "maxLineLength": 114,
-                            "tokens": [
-                                {
-                                    "type": "keyword",
-                                    "data": "class"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "class-name",
-                                    "data": "InternationalPriceService"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "keyword",
-                                    "data": "implements"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "class-name",
-                                    "data": "PriceService"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "keyword",
-                                    "data": "private"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "keyword",
-                                    "data": "static"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "keyword",
-                                    "data": "void"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " LongJavaInterfaceNameWithSuperFactory "
-                                },
-                                {
-                                    "type": "function",
-                                    "data": "createMegaFactory"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "("
-                                },
-                                {
-                                    "type": "keyword",
-                                    "data": "final"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " ExchangeCalendar calendar"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ")"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n        "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "."
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "."
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "."
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        }
-                    ]
-                },
-                {
-                    "title": "Inlined",
-                    "id": "inlined",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "To inline code within a text dimply put it inside a back tick.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "E.g. To check if an Exchange is closed, you need to use ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "ExchangeCalendar",
+                                    "code": "include-markdown",
                                     "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " plugin a markdown content per tab can be specified. For example installation instructions",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "can be specified this way.",
+                                    "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "componentName": "Snippet",
+                            "componentName": "Tabs",
                             "componentProps": {
-                                "lang": "markdown",
-                                "maxLineLength": 74,
-                                "tokens": [
+                                "tabsContent": [
                                     {
-                                        "type": "title",
-                                        "data": "# Inlined"
+                                        "name": "JavaScript",
+                                        "content": [
+                                            {
+                                                "type": "Paragraph",
+                                                "content": [
+                                                    {
+                                                        "text": "First you need to download WebStorm and then run following using your terminal",
+                                                        "type": "SimpleText"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "lang": "",
+                                                "maxLineLength": 14,
+                                                "tokens": [
+                                                    {
+                                                        "type": "text",
+                                                        "data": "$ yarn install\n$ yarn start\n"
+                                                    }
+                                                ],
+                                                "lineNumber": "",
+                                                "type": "Snippet"
+                                            }
+                                        ]
                                     },
                                     {
-                                        "type": "text",
-                                        "data": "\n\nTo inline code within a text dimply put it inside a back tick. \nE.g. To check if an Exchange is closed, you need to use "
-                                    },
-                                    {
-                                        "type": "code",
-                                        "data": "`ExchangeCalendar`"
+                                        "name": "Cpp",
+                                        "content": [
+                                            {
+                                                "type": "Paragraph",
+                                                "content": [
+                                                    {
+                                                        "text": "First you need to download CLion and then run following using your terminal",
+                                                        "type": "SimpleText"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "lang": "",
+                                                "maxLineLength": 8,
+                                                "tokens": [
+                                                    {
+                                                        "type": "text",
+                                                        "data": "$ pwd\n$ whoami\n"
+                                                    }
+                                                ],
+                                                "lineNumber": "",
+                                                "type": "Snippet"
+                                            }
+                                        ]
                                     }
-                                ],
-                                "startLine": "# Inlined",
-                                "numberOfLines": 4.0,
-                                "title": "markdown"
+                                ]
                             },
                             "type": "CustomComponent"
                         }
@@ -694,25 +451,17 @@ const TestData = {
             ],
             "tocItem": {
                 "sectionTitle": "Features",
-                "pageTitle": "Code Snippets",
-                "fileName": "code-snippets",
+                "pageTitle": "Tabs",
+                "fileName": "tabs",
                 "dirName": "features",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Simple Snippet",
-                        "id": "simple-snippet"
+                        "title": "Fenced Block",
+                        "id": "fenced-block"
                     },
                     {
-                        "title": "Specifying Language",
-                        "id": "specifying-language"
-                    },
-                    {
-                        "title": "Wide Code",
-                        "id": "wide-code"
-                    },
-                    {
-                        "title": "Inlined",
-                        "id": "inlined"
+                        "title": "Markdown Per Tab",
+                        "id": "markdown-per-tab"
                     }
                 ]
             }
