@@ -21,6 +21,13 @@ Selecting a tab will switch all the tabs on every page.
 Using `include-markdown` plugin a markdown content per tab can be specified. For example installation instructions
 can be specified this way.
 
+    ```tabs
+    JavaScript:include-markdown: instructions/javascript-install.md
+    Cpp:include-markdown: instructions/cpp-install.md
+    ```
+
+Each tab will display inlined markdown from specified files.
+
 ```tabs
 JavaScript:include-markdown: instructions/javascript-install.md
 Cpp:include-markdown: instructions/cpp-install.md

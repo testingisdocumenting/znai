@@ -1,12 +1,11 @@
 .tabs-area {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 30px;
     border-bottom: 1px solid #eeeeee;
 }
 
 .tabs-content {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin: 20px 0;
 }
 
 .tabs-names-area {
