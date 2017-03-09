@@ -2,6 +2,36 @@ import React, {Component} from 'react'
 
 import './Tabs.css'
 
+class TabsRegistration {
+    constructor() {
+        this.listeners = []
+        this.tabsSelectionHistory = []
+    }
+
+    addTabSwitchListener(listener) {
+        this.listeners.push(listener)
+    }
+
+    removeTabSwitchListener(listener) {
+        removeFromArray(this.listeners, listener)
+    }
+
+    firstMatchFromHistory(names) {
+        const matches = names.filter(n => this.tabsSelectionHistory.indexOf(n) >= 0)
+        return matches ? matches[0] : names[0]
+    }
+
+    notifyNewTab(name) {
+        removeFromArray(this.tabsSelectionHistory, name)
+        this.tabsSelectionHistory.unshift(name)
+        console.log(this.tabsSelectionHistory)
+
+        this.listeners.forEach(l => l(name))
+    }
+}
+
+const tabsRegistration = new TabsRegistration()
+
 const TabNames = ({names, activeIdx, onClick}) => {
     return <div className="tabs">
         <div className="tabs-names-area">
@@ -15,12 +45,28 @@ const TabNames = ({names, activeIdx, onClick}) => {
     </div>
 }
 
-const Tabs = (elementsLibrary) => class Tabs extends Component {
+const TabsWithLibrary = (library) => class Tabs extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {activeIdx: 0}
+        const {tabsContent} = this.props
+        const names = tabsContent.map(t => t.name)
+
+        const tabName = tabsRegistration.firstMatchFromHistory(names);
+
+        const idx = names.indexOf(tabName)
+        this.state = {activeIdx: idx >= 0 ? idx : 0}
+
         this.onClick = this.onClick.bind(this)
+        this.onTabSwitch = this.onTabSwitch.bind(this)
+    }
+
+    componentDidMount() {
+        tabsRegistration.addTabSwitchListener(this.onTabSwitch)
+    }
+
+    componentWillUnmount() {
+        tabsRegistration.removeTabSwitchListener(this.onTabSwitch)
     }
 
     render() {
@@ -33,14 +79,34 @@ const Tabs = (elementsLibrary) => class Tabs extends Component {
         return (<div className="tabs-area">
             <TabNames names={names} activeIdx={activeIdx} onClick={this.onClick}/>
             <div className="tabs-content">
-                <elementsLibrary.DocElement content={tabContent}/>
+                <library.DocElement content={tabContent}/>
             </div>
             </div>)
     }
 
     onClick(idx) {
-        this.setState({activeIdx: idx})
+        const {tabsContent} = this.props
+        tabsRegistration.notifyNewTab(tabsContent[idx].name)
+    }
+
+    onTabSwitch(tabName) {
+        console.log(tabName)
+
+        const {tabsContent} = this.props
+        const names = tabsContent.map(t => t.name)
+
+        const idx = names.indexOf(tabName)
+        if (idx !== -1) {
+            this.setState({activeIdx: idx})
+        }
     }
 }
 
-export default Tabs
+function removeFromArray(array, value) {
+    const idx = array.indexOf(value)
+    if (idx !== -1) {
+        array.splice(idx, 1)
+    }
+}
+
+export default TabsWithLibrary

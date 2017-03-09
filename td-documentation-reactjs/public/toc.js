@@ -137,6 +137,22 @@ toc = [
       },
       {
         "sectionTitle": "Features",
+        "pageTitle": "Tabs",
+        "fileName": "tabs",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "Fenced Block",
+            "id": "fenced-block"
+          },
+          {
+            "title": "Markdown Per Tab",
+            "id": "markdown-per-tab"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
         "pageTitle": "Proxy",
         "fileName": "proxy",
         "dirName": "features",

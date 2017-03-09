@@ -387,6 +387,27 @@ const TestData = {
                             ]
                         },
                         {
+                            "lang": "",
+                            "maxLineLength": 63,
+                            "tokens": [
+                                {
+                                    "type": "text",
+                                    "data": "```tabs\nJavaScript:include-markdown: instructions/javascript-install.md\nCpp:include-markdown: instructions/cpp-install.md\n```\n"
+                                }
+                            ],
+                            "lineNumber": "",
+                            "type": "Snippet"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Each tab will display inlined markdown from specified files.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
                             "componentName": "Tabs",
                             "componentProps": {
                                 "tabsContent": [
