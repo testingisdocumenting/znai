@@ -4,6 +4,9 @@ import './Knob.css'
 class Knob extends Component {
     constructor(props) {
         super(props)
+
+        this.state = {dragStarted: false}
+
         this.onDragStarted = this.onDragStarted.bind(this)
         this.onDragStopped = this.onDragStopped.bind(this)
         this.onDrag = this.onDrag.bind(this)
@@ -20,9 +23,9 @@ class Knob extends Component {
     }
 
     render() {
-        const {knobId, x, y} = this.props
+        const {id, x, y} = this.props
 
-        return <circle key={knobId} className="knob" cx={x} cy={y} r={5}
+        return <circle key={id} className="knob" cx={x} cy={y} r={5}
                        onMouseOver={this.onMouseOver}
                        onMouseDown={this.onDragStarted}/>
     }
@@ -44,8 +47,8 @@ class Knob extends Component {
         const newX = e.layerX
         const newY = e.layerY
 
-        const {knobId} = this.props
-        this.props.onPosChange({knobId: knobId, x: newX, y: newY})
+        const {id} = this.props
+        this.props.onPosChange({id: id, x: newX, y: newY})
     }
 }
 

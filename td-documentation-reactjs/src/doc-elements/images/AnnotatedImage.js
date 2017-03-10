@@ -1,10 +1,6 @@
 import React, {Component} from 'react'
-import Draggable from './annotations/Draggable'
 import annotation from './annotations/Annotation'
 import CircleAnnotation from './annotations/CircleAnnotation'
-import CircleBadge from './annotations/CircleBadge'
-
-const DraggableCircleBadge = Draggable(CircleBadge)
 
 const Circle = annotation(CircleAnnotation)
 

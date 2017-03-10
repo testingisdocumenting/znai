@@ -1,5 +1,4 @@
 import React from 'react'
-import Knob from './Knob'
 
 class CircleAnnotation {
     constructor({x, y, r, onChange}) {
@@ -11,20 +10,20 @@ class CircleAnnotation {
     }
 
     knobs() {
-        const centerKnob = <Knob knobId="center" x={this.x} y={this.y} onPosChange={this.update}/>;
-        const rightKnob = <Knob knobId="right" x={this.x + this.r} y={this.y} onPosChange={this.update}/>;
+        const centerKnob = {id: "center", x: this.x, y: this.y, onPosChange: this.update};
+        const rightKnob = {id: "right", x: this.x + this.r, y: this.y, onPosChange: this.update};
         return [centerKnob, rightKnob]
     }
 
     body() {
-        return <circle cx={this.x} cy={this.y} r={this.r} stroke="#606060" fill="#ccc" opacity={0.4}/>
+        return <circle key="main" cx={this.x} cy={this.y} r={this.r} stroke="#606060" fill="#ccc" opacity={0.4}/>
     }
 
-    update({knobId, x, y}) {
-        if (knobId === 'center') {
+    update({id, x, y}) {
+        if (id === 'center') {
             this.x = x
             this.y = y
-        } else if (knobId === 'right') {
+        } else if (id === 'right') {
             this.r = Math.abs(this.x - x)
         }
 
