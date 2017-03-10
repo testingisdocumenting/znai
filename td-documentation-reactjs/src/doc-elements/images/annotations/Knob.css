@@ -1,0 +1,11 @@
+.knob {
+    stroke: #606060;
+    fill: #4080ee;
+    opacity: 0.4;
+}
+
+.knob:hover {
+    stroke: #606060;
+    fill: #4080ee;
+    opacity: 1.0;
+}
