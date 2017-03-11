@@ -1,0 +1,27 @@
+.shape-info {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #777;
+    width: 100%;
+}
+
+.shape-info:not(.selected):hover {
+    background: #eee;
+}
+
+.shape-info.selected {
+    cursor: auto;
+}
+
+.labeled-field {
+    display: flex;
+}
+
+.labeled-field .field-name {
+    flex: 1;
+}
+
+.labeled-field .field-value {
+    flex: 2;
+    margin-left: 30px;
+}

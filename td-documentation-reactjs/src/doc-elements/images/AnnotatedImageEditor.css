@@ -4,41 +4,19 @@
 }
 
 .editor .image-area {
+    flex: 10;
     overflow: scroll;
 }
 
 .editor .shapes-info-area {
+    flex: 1;
+    flex-basis: 200px;
     border-left: 1px solid #777;
     min-height: 100vh;
     /*min-width: 700px;*/
     margin-left: 10px;
-    padding: 10px;
 }
 
 .editor .shapes-info-area {
 }
 
-.shape-info.selected {
-    background: #ddd;
-    cursor: auto;
-}
-
-.shape-info {
-    cursor: pointer;
-}
-
-.labeled-field {
-    display: flex;
-}
-
-.labeled-field .field-name {
-    flex: 1;
-    /*align-self: flex-start;*/
-    /*justify-self: flex-start;*/
-}
-
-.labeled-field .field-value {
-    margin-left: 20px;
-    /*align-self: flex-start;*/
-    /*justify-self: flex-start;*/
-}

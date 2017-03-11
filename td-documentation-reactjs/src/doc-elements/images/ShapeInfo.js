@@ -1,23 +1,38 @@
 import React, {Component} from 'react'
+import './ShapeInfo.css'
 
-const LabeledField = ({name, value}) => {
+const LabeledField = ({name, value, onChange}) => {
+    const Value = name === 'type' || name === 'id' ?
+        value :
+        <input value={value} onChange={(e) => {
+            const newValue = e.target.value
+            onChange(name, newValue | 0)}
+        }/>
+
     return (<div className="labeled-field">
         <div className="field-name">{name}</div>
-        <div className="field-value">{value}</div>
+        <div className="field-value">{Value}</div>
     </div>)
 }
 
 class ShapeInfo extends Component {
     render() {
-        const {shape, isActive, onSelect} = this.props
-        const className = "shape-info" + (isActive ? " selected" : "")
+        const {shape, isSelected, onSelect, onChange} = this.props
+        const className = "shape-info" + (isSelected ? " selected" : "")
+
+        const onShapeChange = (name, value) => {
+            onChange({...shape, [name]: value})
+        }
+
+        const typeAndLabel = <div key="type-and-label">{shape.type + " " + shape.id}</div>
+
+        const fields = Object.keys(shape).filter(key => key !== 'id' && key !== 'type').map((key) => {
+                return <LabeledField key={key} name={key} value={shape[key]}
+                                     onChange={onShapeChange}/>
+            })
 
         return <div className={className} onMouseDown={() => onSelect(shape)}>
-            { Object.keys(shape).map((key) => {
-                const value = shape[key]
-                return <LabeledField key={key} name={key} value={value}/>
-            })}
-            <LabeledField/>
+            {isSelected ? [typeAndLabel, fields] : typeAndLabel}
         </div>
     }
 }

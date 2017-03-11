@@ -23,7 +23,6 @@ class Annotations {
     }
 
     updateShape(shape) {
-        console.log("new shape", shape)
         const idx = this.shapes.findIndex(s => s.id === shape.id)
         if (idx !== -1) {
             this.shapes[idx] = shape

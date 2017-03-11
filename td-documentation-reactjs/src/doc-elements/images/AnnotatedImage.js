@@ -8,7 +8,7 @@ class AnnotatedImage extends Component {
     }
 
     render() {
-        const {data, annotations, selectedId, onImageClick} = this.props
+        const {data, annotations, selectedId} = this.props
         const {imageWidth, imageHeight} = this.state
 
         const svgWidth = imageWidth + "px"

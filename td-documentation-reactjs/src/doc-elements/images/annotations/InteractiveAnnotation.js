@@ -84,7 +84,6 @@ const interactiveAnnotation = (shapeHandler, handlers) => class InteractiveAnnot
     }
 
     onDragStarted(e) {
-        console.log("started")
         const {shape} = this.props
 
         this.lastDragX = e.nativeEvent.offsetX
@@ -119,6 +118,11 @@ const interactiveAnnotation = (shapeHandler, handlers) => class InteractiveAnnot
 
     onKnobDragStarted() {
         this.knobDragStarted = true
+        const {shape} = this.props
+
+        if (handlers.onSelection) {
+            handlers.onSelection(shape)
+        }
     }
 
     onKnobDragStopped() {

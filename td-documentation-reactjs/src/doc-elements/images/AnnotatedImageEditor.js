@@ -16,6 +16,7 @@ class AnnotatedImageEditor extends Component {
         this.annotations.add({type: 'circle', id: 'c2', x: 150, y: 150, r: 30})
 
         this.onAnnotationChange = this.onAnnotationChange.bind(this)
+        this.onEditedShape = this.onEditedShape.bind(this)
         this.onAnnotationSelect = this.onAnnotationSelect.bind(this)
         this.onMouseDown = this.onMouseDown.bind(this)
 
@@ -40,7 +41,8 @@ class AnnotatedImageEditor extends Component {
             <div className="shapes-info-area">
                 {shapes.map(shape => <ShapeInfo key={shape.id} shape={shape}
                                                 onSelect={this.onAnnotationSelect}
-                                                isActive={shape.id === selectedId}/>)}
+                                                isSelected={shape.id === selectedId}
+                                                onChange={this.onEditedShape}/>)}
             </div>
         </div>
     }
@@ -59,6 +61,11 @@ class AnnotatedImageEditor extends Component {
     }
 
     onAnnotationChange(shape) {
+        this.forceUpdate()
+    }
+
+    onEditedShape(shape) {
+        this.annotations.updateShape(shape)
         this.forceUpdate()
     }
 }
