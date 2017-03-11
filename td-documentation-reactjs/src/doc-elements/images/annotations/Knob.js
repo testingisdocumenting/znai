@@ -23,19 +23,25 @@ class Knob extends Component {
     }
 
     render() {
-        const {id, x, y} = this.props
+        const {id, x, y, onMouseOver, onMouseOut} = this.props
 
         return <circle key={id} className="knob" cx={x} cy={y} r={5}
-                       onMouseOver={this.onMouseOver}
+                       onMouseOver={onMouseOver}
+                       onMouseOut={onMouseOut}
                        onMouseDown={this.onDragStarted}/>
     }
 
-    onDragStarted() {
+    onDragStarted(e) {
+        this.lastDragX = e.nativeEvent.offsetX
+        this.lastDragY = e.nativeEvent.offsetY
+
         this.setState({dragStarted: true})
+        this.props.onDragStarted()
     }
 
     onDragStopped() {
         this.setState({dragStarted: false})
+        this.props.onDragStopped()
     }
 
     onDrag(e) {
@@ -47,8 +53,14 @@ class Knob extends Component {
         const newX = e.layerX
         const newY = e.layerY
 
+        const dx = newX - this.lastDragX
+        const dy = newY - this.lastDragY
+
+        this.lastDragX = newX
+        this.lastDragY = newY
+
         const {id} = this.props
-        this.props.onPosChange({id: id, x: newX, y: newY})
+        this.props.onPosChange({id, dx, dy})
     }
 }
 

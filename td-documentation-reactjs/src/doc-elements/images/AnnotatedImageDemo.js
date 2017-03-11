@@ -1,8 +1,8 @@
 import React from 'react'
-import AnnotatedImage from './AnnotatedImage'
+import AnnotatedImageEditor from './AnnotatedImageEditor'
 
-const data = {imageSrc: 'test-image.png'}
+const data = {imageSrc: 'ui.jpg'}
 
-const AnnotatedImageDemo = () => <AnnotatedImage data={data}/>
+const AnnotatedImageDemo = () => <AnnotatedImageEditor data={data}/>
 
 export default AnnotatedImageDemo
