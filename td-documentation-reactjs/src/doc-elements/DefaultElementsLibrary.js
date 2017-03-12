@@ -6,6 +6,7 @@ import GraphVizSvg from './graphviz/GraphVizSvg'
 import GraphVizFlow from './graphviz/GraphVizFlow'
 import SimpleTable from './table/SimpleTable'
 import Tabs from './tabs/Tabs'
+import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 
 const library = {}
 
@@ -53,6 +54,7 @@ library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphViz
 library.GraphVizFlow = GraphVizFlow
 
 library.SimpleTable = SimpleTable
+library.EmbeddedAnnotatedImage = EmbeddedAnnotatedImage
 
 library.Tabs = Tabs(library)
 library.Page = Page(library)

@@ -3,6 +3,6 @@ import AnnotatedImageEditor from './AnnotatedImageEditor'
 
 const data = {imageSrc: 'ui.jpg'}
 
-const AnnotatedImageDemo = () => <AnnotatedImageEditor data={data}/>
+const AnnotatedImageEditorDemo = () => <AnnotatedImageEditor {...data}/>
 
-export default AnnotatedImageDemo
+export default AnnotatedImageEditorDemo

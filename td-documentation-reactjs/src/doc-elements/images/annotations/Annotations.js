@@ -8,8 +8,8 @@ import circle from '../shapes/Circle'
 const shapesLib = {circle}
 
 class Annotations {
-    constructor() {
-        this.shapes = []
+    constructor(shapes) {
+        this.shapes = shapes || []
         this.listeners = []
 
         this.onChange = this.onChange.bind(this)

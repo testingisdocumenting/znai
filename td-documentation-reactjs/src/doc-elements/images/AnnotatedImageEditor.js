@@ -27,16 +27,15 @@ class AnnotatedImageEditor extends Component {
     }
 
     render() {
-        const {data} = this.props
+        const {imageSrc} = this.props
         const {selectedId} = this.state
         const shapes = this.annotations.shapes
 
         return <div className="editor" onMouseDown={this.onMouseDown}>
             <div className="image-area">
-                <AnnotatedImage data={data}
+                <AnnotatedImage imageSrc={imageSrc}
                                 annotations={this.annotations}
-                                selectedId={selectedId}
-                                onImageClick={this.onAnnotationDeselect}/>
+                                selectedId={selectedId}/>
             </div>
             <div className="shapes-info-area">
                 {shapes.map(shape => <ShapeInfo key={shape.id} shape={shape}

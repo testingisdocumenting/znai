@@ -8,24 +8,26 @@ class AnnotatedImage extends Component {
     }
 
     render() {
-        const {data, annotations, selectedId} = this.props
+        const {imageSrc, annotations, isStatic, selectedId} = this.props
         const {imageWidth, imageHeight} = this.state
 
         const svgWidth = imageWidth + "px"
         const svgHeight = imageHeight + "px"
 
-        const imageBlockStyle = {float: "left"}
-        const svgBlockStyle = {float: "left", position: "absolute", top: 0}
+        const parentStyle = {position: 'relative', width: imageWidth, height: imageHeight}
+        const childrenStyle = {float: "left", position: "absolute", top: 0}
 
-        return (<div className="annotated-image" >
-            <div style={imageBlockStyle}>
-                <img alt="annotated" src={data.imageSrc}
+        return (<div style={parentStyle} className="annotated-image" >
+            <div style={childrenStyle}>
+                <img alt="annotated" src={imageSrc}
                      ref={node => this.imageNode = node}
                      onLoad={() => this.calcSize()}/>
             </div>
-            <div style={svgBlockStyle}>
+            <div style={childrenStyle}>
                 <svg width={svgWidth} height={svgHeight}>
-                    {annotations.interactiveAnnotationsToRender(selectedId)}
+                    {isStatic ?
+                        annotations.staticAnnotationsToRender():
+                        annotations.interactiveAnnotationsToRender(selectedId)}
 
                     <filter id="highlight">
                         <feColorMatrix values="1 0 1 0 0
