@@ -9,7 +9,7 @@ import java.nio.file.Paths
 /**
  * @author mykola
  */
-class TextFileIncludePluginTest {
+class FileIncludePluginTest {
     @Test
     void "should extract file snippet based on start line and number of lines"() {
         def text = process("file.txt", "{startLine: 'multiple lines', numberOfLines: 2}")
@@ -67,7 +67,7 @@ class TextFileIncludePluginTest {
 
 
     private static String process(String fileName, String value) {
-        def plugin = new TextFileIncludePlugin()
+        def plugin = new FileIncludePlugin()
         def result = plugin.process(new TestComponentsRegistry(), Paths.get(""), new IncludeParams("$fileName $value"))
 
         return result.docElements.get(0).getProps().componentProps.tokens[0].data

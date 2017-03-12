@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * @author mykola
  */
-public class TextFileIncludePlugin implements IncludePlugin {
+public class FileIncludePlugin implements IncludePlugin {
     private String fileName;
 
     @Override
