@@ -1,6 +1,8 @@
 import React from 'react'
 
 import interactiveAnnotation from './InteractiveAnnotation'
+import staticAnnotation from './StaticAnnotation'
+
 import circle from '../shapes/Circle'
 
 const shapesLib = {circle}
@@ -31,9 +33,16 @@ class Annotations {
         }
     }
 
-    annotationsToRender(selectedId) {
+    staticAnnotationsToRender() {
         return this.shapes.map(shape => {
-            const InteractiveAnnotation = interactiveAnnotationForType(shape.type, handlerForShapeType(shape), {
+            const StaticAnnotation = staticAnnotationForShape(shape)
+            return <StaticAnnotation key={shape.id} shape={shape}/>
+        })
+    }
+
+    interactiveAnnotationsToRender(selectedId) {
+        return this.shapes.map(shape => {
+            const InteractiveAnnotation = interactiveAnnotationForShape(shape, {
                 onChange: this.onChange,
                 onSelection: this.onSelection
             })
@@ -60,14 +69,24 @@ function handlerForShapeType(shape) {
 }
 
 const interactiveAnnotationsByType = {}
-function interactiveAnnotationForType(type, shapeHandler, onChange) {
-    if (interactiveAnnotationsByType.hasOwnProperty(type)) {
-        return interactiveAnnotationsByType[type]
-    } else {
-        const InteractiveAnnotation = interactiveAnnotation(shapeHandler, onChange)
-        interactiveAnnotationsByType[type] = InteractiveAnnotation
+function interactiveAnnotationForShape(shape, handlers) {
+    return cachedAnnotationForType(interactiveAnnotationsByType, shape,  (shapeHandler) => interactiveAnnotation(shapeHandler, handlers))
+}
 
-        return InteractiveAnnotation
+const staticAnnotationsByType = {}
+function staticAnnotationForShape(shape) {
+    return cachedAnnotationForType(staticAnnotationsByType, shape,  (shapeHandler) => staticAnnotation(shapeHandler))
+}
+
+function cachedAnnotationForType(cache, shape, createFunc) {
+    const type = shape.type
+    if (cache.hasOwnProperty(type)) {
+        return cache[type]
+    } else {
+        const Annotation = createFunc(handlerForShapeType(shape))
+        cache[type] = Annotation
+
+        return Annotation
     }
 }
 

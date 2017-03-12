@@ -25,7 +25,7 @@ class AnnotatedImage extends Component {
             </div>
             <div style={svgBlockStyle}>
                 <svg width={svgWidth} height={svgHeight}>
-                    {annotations.annotationsToRender(selectedId)}
+                    {annotations.interactiveAnnotationsToRender(selectedId)}
 
                     <filter id="highlight">
                         <feColorMatrix values="1 0 1 0 0
