@@ -65,13 +65,45 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Simple",
-                    "id": "simple",
-                    "type": "Section"
+                    "title": "Complex Domain",
+                    "id": "complex-domain",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Not every UI can be as simple as one input box.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "BlockQuote",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "Documenting and Presenting your UI",
+                                            "type": "SimpleText"
+                                        },
+                                        {
+                                            "type": "SoftLineBreak"
+                                        },
+                                        {
+                                            "text": "should be a joy",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
-                    "title": "Annotated",
-                    "id": "annotated",
+                    "title": "Annotated Images",
+                    "id": "annotated-images",
                     "type": "Section",
                     "content": [
                         {
@@ -398,17 +430,17 @@ const TestData = {
             ],
             "tocItem": {
                 "sectionTitle": "Features",
-                "pageTitle": "Images",
-                "fileName": "images",
+                "pageTitle": "UI Documentation",
+                "fileName": "UI-documentation",
                 "dirName": "features",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Simple",
-                        "id": "simple"
+                        "title": "Complex Domain",
+                        "id": "complex-domain"
                     },
                     {
-                        "title": "Annotated",
-                        "id": "annotated"
+                        "title": "Annotated Images",
+                        "id": "annotated-images"
                     }
                 ]
             }

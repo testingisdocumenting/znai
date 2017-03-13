@@ -8,7 +8,7 @@ class Presentation extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {currentSlideIdx: 0, scaleRatio: 1}
+        this.state = {currentSlideIdx: 0, scaleRatio: 2}
 
         this.keyDownHandler = this.keyDownHandler.bind(this)
         this.onClose = this.onClose.bind(this)
@@ -68,7 +68,8 @@ class Presentation extends Component {
             currentSlideIdx = presentationRegistry.numberOfSlides - 1
         }
 
-        this.setState({currentSlideIdx})
+        const scaleRatio = 2 // TODO calc for everything, not just images
+        this.setState({currentSlideIdx, scaleRatio})
     }
 
     onClose() {

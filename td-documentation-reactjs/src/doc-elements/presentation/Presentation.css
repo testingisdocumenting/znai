@@ -29,3 +29,7 @@
 .presentation .snippet {
     border: none;
 }
+
+h1.presentation-title {
+    font-size: 50px;
+}
