@@ -10,7 +10,7 @@ class DocumentationAnnotatedImage extends Component {
         super(props)
 
         const {shapes} = this.props
-        presentationRegistry.register(PresentationAnnotatedImage, props, shapes.length)
+        presentationRegistry.register(PresentationAnnotatedImage, props, shapes.length + 1) // first slide is without annotations
     }
 
     render() {
@@ -19,4 +19,3 @@ class DocumentationAnnotatedImage extends Component {
 }
 
 export default DocumentationAnnotatedImage
-
