@@ -65,282 +65,37 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Fenced Block",
-                    "id": "fenced-block",
+                    "title": "Simple",
+                    "id": "simple",
+                    "type": "Section"
+                },
+                {
+                    "title": "Annotated",
+                    "id": "annotated",
                     "type": "Section",
                     "content": [
                         {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "To define multiple tabs we use fenced code block",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "",
-                            "maxLineLength": 59,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": "```tabs\nJavaScript:include-file: file-name.js\nCpp:include-cpp: simple.cpp {entry: \u0027main\u0027, bodyOnly: true}\n```\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "This will generate a multi tab widget with an include plugin content per tab",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "componentName": "Tabs",
+                            "componentName": "DocumentationAnnotatedImage",
                             "componentProps": {
-                                "tabsContent": [
+                                "imageSrc": "screenshot1.png",
+                                "shapes": [
                                     {
-                                        "name": "JavaScript",
-                                        "content": [
-                                            {
-                                                "componentName": "Snippet",
-                                                "componentProps": {
-                                                    "lang": "javascript",
-                                                    "maxLineLength": 22,
-                                                    "tokens": [
-                                                        {
-                                                            "type": "keyword",
-                                                            "data": "class"
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "data": " "
-                                                        },
-                                                        {
-                                                            "type": "class-name",
-                                                            "data": "JsClass"
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "data": " "
-                                                        },
-                                                        {
-                                                            "type": "punctuation",
-                                                            "data": "{"
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "data": "\n    "
-                                                        },
-                                                        {
-                                                            "type": "function",
-                                                            "data": "constructor"
-                                                        },
-                                                        {
-                                                            "type": "punctuation",
-                                                            "data": "("
-                                                        },
-                                                        {
-                                                            "type": "punctuation",
-                                                            "data": ")"
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "data": " "
-                                                        },
-                                                        {
-                                                            "type": "punctuation",
-                                                            "data": "{"
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "data": "\n    "
-                                                        },
-                                                        {
-                                                            "type": "punctuation",
-                                                            "data": "}"
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "data": "\n"
-                                                        },
-                                                        {
-                                                            "type": "punctuation",
-                                                            "data": "}"
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "data": "\n\n"
-                                                        },
-                                                        {
-                                                            "type": "keyword",
-                                                            "data": "export"
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "data": " "
-                                                        },
-                                                        {
-                                                            "type": "keyword",
-                                                            "data": "default"
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "data": " JsClass"
-                                                        }
-                                                    ]
-                                                },
-                                                "type": "CustomComponent"
-                                            }
-                                        ]
+                                        "type": "circle",
+                                        "id": "c1",
+                                        "x": 100.0,
+                                        "y": 100.0,
+                                        "r": 20.0,
+                                        "text": "1",
+                                        "color": "blue"
                                     },
                                     {
-                                        "name": "Cpp",
-                                        "content": [
-                                            {
-                                                "lang": "cpp",
-                                                "maxLineLength": 29,
-                                                "tokens": [
-                                                    {
-                                                        "type": "keyword",
-                                                        "data": "int"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": " test "
-                                                    },
-                                                    {
-                                                        "type": "operator",
-                                                        "data": "\u003d"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": " "
-                                                    },
-                                                    {
-                                                        "type": "number",
-                                                        "data": "2"
-                                                    },
-                                                    {
-                                                        "type": "punctuation",
-                                                        "data": ";"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": "\n\n"
-                                                    },
-                                                    {
-                                                        "type": "comment",
-                                                        "data": "// comment with **important**"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": "\n"
-                                                    },
-                                                    {
-                                                        "type": "comment",
-                                                        "data": "// information"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": "\n"
-                                                    },
-                                                    {
-                                                        "type": "keyword",
-                                                        "data": "int"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": " b "
-                                                    },
-                                                    {
-                                                        "type": "operator",
-                                                        "data": "\u003d"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": " "
-                                                    },
-                                                    {
-                                                        "type": "number",
-                                                        "data": "3"
-                                                    },
-                                                    {
-                                                        "type": "punctuation",
-                                                        "data": ";"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": "\n"
-                                                    },
-                                                    {
-                                                        "type": "keyword",
-                                                        "data": "int"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": " d "
-                                                    },
-                                                    {
-                                                        "type": "operator",
-                                                        "data": "\u003d"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": " "
-                                                    },
-                                                    {
-                                                        "type": "number",
-                                                        "data": "3"
-                                                    },
-                                                    {
-                                                        "type": "punctuation",
-                                                        "data": ";"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": "\n\n"
-                                                    },
-                                                    {
-                                                        "type": "comment",
-                                                        "data": "/*\n * multi line comment\n * of multi *lines* text\n*/"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": "\n"
-                                                    },
-                                                    {
-                                                        "type": "keyword",
-                                                        "data": "int"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": " e "
-                                                    },
-                                                    {
-                                                        "type": "operator",
-                                                        "data": "\u003d"
-                                                    },
-                                                    {
-                                                        "type": "text",
-                                                        "data": " "
-                                                    },
-                                                    {
-                                                        "type": "number",
-                                                        "data": "5"
-                                                    },
-                                                    {
-                                                        "type": "punctuation",
-                                                        "data": ";"
-                                                    }
-                                                ],
-                                                "type": "Snippet"
-                                            }
-                                        ]
+                                        "type": "circle",
+                                        "id": "c2",
+                                        "x": 250.0,
+                                        "y": 100.0,
+                                        "r": 20.0,
+                                        "text": "2",
+                                        "color": "blue"
                                     }
                                 ]
                             },
@@ -350,118 +105,289 @@ const TestData = {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Selecting a tab will switch all the tabs on every page.",
+                                    "text": "there are different types of annotations:",
                                     "type": "SimpleText"
                                 }
                             ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Markdown Per Tab",
-                    "id": "markdown-per-tab",
-                    "type": "Section",
-                    "content": [
+                        },
                         {
-                            "type": "Paragraph",
+                            "bulletMarker": "*",
+                            "tight": true,
+                            "type": "BulletList",
                             "content": [
                                 {
-                                    "text": "Using ",
-                                    "type": "SimpleText"
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "circles",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
-                                    "code": "include-markdown",
-                                    "type": "InlinedCode"
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "rectangles",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
-                                    "text": " plugin a markdown content per tab can be specified. For example installation instructions",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "can be specified this way.",
-                                    "type": "SimpleText"
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "arrows",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         },
                         {
-                            "lang": "",
-                            "maxLineLength": 63,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": "```tabs\nJavaScript:include-markdown: instructions/javascript-install.md\nCpp:include-markdown: instructions/cpp-install.md\n```\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Each tab will display inlined markdown from specified files.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "componentName": "Tabs",
+                            "componentName": "DocumentationAnnotatedImage",
                             "componentProps": {
-                                "tabsContent": [
+                                "imageSrc": "screenshot1.png",
+                                "shapes": [
                                     {
-                                        "name": "JavaScript",
-                                        "content": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "First you need to download WebStorm and then run following using your terminal",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "lang": "",
-                                                "maxLineLength": 14,
-                                                "tokens": [
-                                                    {
-                                                        "type": "text",
-                                                        "data": "$ yarn install\n$ yarn start\n"
-                                                    }
-                                                ],
-                                                "lineNumber": "",
-                                                "type": "Snippet"
-                                            }
-                                        ]
+                                        "type": "arrow",
+                                        "id": "a1",
+                                        "beginX": 200.0,
+                                        "beginY": 100.0,
+                                        "endX": 48.0,
+                                        "endY": 42.0,
+                                        "color": "red",
+                                        "text": "debug"
+                                    }
+                                ]
+                            },
+                            "type": "CustomComponent"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Annotations are stored as a simple json file",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "componentName": "Snippet",
+                            "componentProps": {
+                                "lang": "json",
+                                "maxLineLength": 55,
+                                "tokens": [
+                                    {
+                                        "type": "punctuation",
+                                        "data": "["
                                     },
                                     {
-                                        "name": "Cpp",
-                                        "content": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "First you need to download CLion and then run following using your terminal",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "lang": "",
-                                                "maxLineLength": 8,
-                                                "tokens": [
-                                                    {
-                                                        "type": "text",
-                                                        "data": "$ pwd\n$ whoami\n"
-                                                    }
-                                                ],
-                                                "lineNumber": "",
-                                                "type": "Snippet"
-                                            }
-                                        ]
+                                        "type": "punctuation",
+                                        "data": "{"
+                                    },
+                                    {
+                                        "type": "property",
+                                        "data": "\"type\""
+                                    },
+                                    {
+                                        "type": "operator",
+                                        "data": ":"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "string",
+                                        "data": "\"arrow\""
+                                    },
+                                    {
+                                        "type": "punctuation",
+                                        "data": ","
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "property",
+                                        "data": "\"id\""
+                                    },
+                                    {
+                                        "type": "operator",
+                                        "data": ":"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "data": "\"a1\""
+                                    },
+                                    {
+                                        "type": "punctuation",
+                                        "data": ","
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": "\n  "
+                                    },
+                                    {
+                                        "type": "property",
+                                        "data": "\"beginX\""
+                                    },
+                                    {
+                                        "type": "operator",
+                                        "data": ":"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "number",
+                                        "data": "200"
+                                    },
+                                    {
+                                        "type": "punctuation",
+                                        "data": ","
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "property",
+                                        "data": "\"beginY\""
+                                    },
+                                    {
+                                        "type": "operator",
+                                        "data": ":"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "number",
+                                        "data": "100"
+                                    },
+                                    {
+                                        "type": "punctuation",
+                                        "data": ","
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "property",
+                                        "data": "\"endX\""
+                                    },
+                                    {
+                                        "type": "operator",
+                                        "data": ":"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "number",
+                                        "data": "48"
+                                    },
+                                    {
+                                        "type": "punctuation",
+                                        "data": ","
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "property",
+                                        "data": "\"endY\""
+                                    },
+                                    {
+                                        "type": "operator",
+                                        "data": ":"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "number",
+                                        "data": "42"
+                                    },
+                                    {
+                                        "type": "punctuation",
+                                        "data": ","
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": "\n  "
+                                    },
+                                    {
+                                        "type": "property",
+                                        "data": "\"color\""
+                                    },
+                                    {
+                                        "type": "operator",
+                                        "data": ":"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "string",
+                                        "data": "\"red\""
+                                    },
+                                    {
+                                        "type": "punctuation",
+                                        "data": ","
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "property",
+                                        "data": "\"text\""
+                                    },
+                                    {
+                                        "type": "operator",
+                                        "data": ":"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "data": " "
+                                    },
+                                    {
+                                        "type": "string",
+                                        "data": "\"debug\""
+                                    },
+                                    {
+                                        "type": "punctuation",
+                                        "data": "}"
+                                    },
+                                    {
+                                        "type": "punctuation",
+                                        "data": "]"
                                     }
                                 ]
                             },
@@ -472,17 +398,17 @@ const TestData = {
             ],
             "tocItem": {
                 "sectionTitle": "Features",
-                "pageTitle": "Tabs",
-                "fileName": "tabs",
+                "pageTitle": "Images",
+                "fileName": "images",
                 "dirName": "features",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Fenced Block",
-                        "id": "fenced-block"
+                        "title": "Simple",
+                        "id": "simple"
                     },
                     {
-                        "title": "Markdown Per Tab",
-                        "id": "markdown-per-tab"
+                        "title": "Annotated",
+                        "id": "annotated"
                     }
                 ]
             }

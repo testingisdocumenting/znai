@@ -1,9 +1,15 @@
 import React from 'react'
+import colorByName from './colorByName'
 
-const CircleBody = ({x, y, r, ...props}) => {
-    return <circle cx={x} cy={y} r={r}
-                   stroke="#606060" fill="#ccc" opacity={0.4}
-                   {...props}/>
+const CircleBody = ({x, y, r, color, text, ...props}) => {
+    const colorScheme = colorByName(color)
+
+    return (
+        <g>
+           <circle cx={x} cy={y} r={r} stroke={colorScheme.stroke} strokeWidth="4" fill={colorScheme.fill} opacity={0.5} {...props}/>
+           <text x={x} y={y} fill={colorScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text>
+        </g>
+    );
 }
 
 const circle = {
@@ -11,8 +17,7 @@ const circle = {
 
     knobs: shape => {
         const right = {id: "right", x: shape.x + shape.r, y: shape.y};
-        const left = {id: "left", x: shape.x - shape.r, y: shape.y};
-        return [left, right]
+        return [ right ]
     },
 
     update: (shape, knobId, dx, dy) => {

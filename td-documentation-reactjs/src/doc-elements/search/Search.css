@@ -1,11 +1,3 @@
-.search-button {
-    position: fixed;
-    font-size: 20px;
-    right: 40px;
-    top: 20px;
-    cursor: pointer;
-}
-
 .search-popup .overlay {
     position: fixed;
     left: 0;

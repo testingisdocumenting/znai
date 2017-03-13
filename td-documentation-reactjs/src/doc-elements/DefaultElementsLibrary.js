@@ -2,11 +2,12 @@ import React from 'react'
 import DocElement from './default-elements/DocElement'
 import Page from './default-elements/Page'
 import Snippet from './default-elements/Snippet'
+import UnorderedList from './default-elements/UnorderedList'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import GraphVizFlow from './graphviz/GraphVizFlow'
 import SimpleTable from './table/SimpleTable'
 import Tabs from './tabs/Tabs'
-import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
+import DocumentationAnnotatedImage from './images/DocumentationAnnotatedImage'
 
 const library = {}
 
@@ -31,10 +32,7 @@ library.Image = ({destination, inlined}) => {
 
 library.Snippet = Snippet
 
-library.BulletList = ({tight, bulletMarker, content}) => {
-    const className = "content-block" + (tight ? " tight" : "")
-    return (<ul className={className}><BoundDocElement content={content}/></ul>)
-}
+library.BulletList = UnorderedList(library)
 
 library.OrderedList = ({delimiter, startNumber, content}) => <ol className="content-block" start={startNumber}><BoundDocElement content={content}/></ol>
 
@@ -54,7 +52,7 @@ library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphViz
 library.GraphVizFlow = GraphVizFlow
 
 library.SimpleTable = SimpleTable
-library.EmbeddedAnnotatedImage = EmbeddedAnnotatedImage
+library.DocumentationAnnotatedImage = DocumentationAnnotatedImage
 
 library.Tabs = Tabs(library)
 library.Page = Page(library)

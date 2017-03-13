@@ -41,8 +41,17 @@ class AnnotatedImage extends Component {
     }
 
     calcSize() {
-        this.setState({imageWidth : this.imageNode.offsetWidth,
-            imageHeight: this.imageNode.offsetHeight})
+        const {onLoad} = this.props
+
+        const imageWidth = this.imageNode.offsetWidth;
+        const imageHeight = this.imageNode.offsetHeight;
+
+        this.setState({imageWidth : imageWidth,
+            imageHeight: imageHeight})
+
+        if (onLoad) {
+            onLoad(imageWidth, imageHeight)
+        }
     }
 }
 

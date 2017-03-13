@@ -1,2 +1,5 @@
-[{"type": "circle", "id": "c1", "x": 100, "y": 100, "r": 50},
-  {"type": "circle", "id": "c2", "x": 150, "y": 150, "r": 30}]
+[{"type": "circle", "id": "c1",
+  "x": 100, "y": 100, "r": 20, "text": "1", "color": "blue"},
+
+  {"type": "circle", "id": "c2",
+    "x": 250, "y": 100, "r": 20, "text": "2", "color": "blue"}]

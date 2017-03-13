@@ -4,8 +4,10 @@ import interactiveAnnotation from './InteractiveAnnotation'
 import staticAnnotation from './StaticAnnotation'
 
 import circle from '../shapes/Circle'
+import rectangle from '../shapes/Rectangle'
+import arrow from '../shapes/Arrow'
 
-const shapesLib = {circle}
+const shapesLib = {circle, rectangle, arrow}
 
 class Annotations {
     constructor(shapes) {

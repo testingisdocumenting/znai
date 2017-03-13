@@ -1,0 +1,31 @@
+.presentation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.presentation .slide-number {
+    position: fixed;
+    bottom: 10px;
+}
+
+.presentation .slide-area {
+}
+
+.presentation-close-icon {
+    position: fixed;
+    font-size: 14px;
+    right: 40px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.presentation .content-block {
+    width: auto;
+}
+
+.presentation .snippet {
+    border: none;
+}

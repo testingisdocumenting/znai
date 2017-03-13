@@ -46,7 +46,7 @@ public class ImageIncludePlugin implements IncludePlugin {
         props.put("imageSrc", imagePathValue);
         props.put("shapes", loadShapes(annotationsPath));
 
-        return PluginResult.reactComponent("EmbeddedAnnotatedImage", props);
+        return PluginResult.reactComponent("DocumentationAnnotatedImage", props);
     }
 
     private List<?> loadShapes(Path path) {

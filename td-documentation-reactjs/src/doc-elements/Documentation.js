@@ -10,9 +10,12 @@ import {tableOfContents} from './structure/TableOfContents'
 import {getAllPagesPromise} from "./allPages"
 import {fullResourcePath} from '../utils/resourcePath'
 
+import Presentation from './presentation/Presentation'
 import Preview from './preview/Preview'
 import PreviewChangeIndicator from './preview/PreviewChangeIndicator'
 import PageContentPreviewDiff from './preview/PageContentPreviewDiff'
+
+import {presentationRegistry} from './presentation/PresentationRegistry'
 
 import './DocumentationLayout.css'
 import './search/Search.css'
@@ -37,6 +40,8 @@ class Documentation extends Component {
             selectedTocItem: selectedTocItem}
 
         this.onHeaderClick = this.onHeaderClick.bind(this)
+        this.onPresentationOpen = this.onPresentationOpen.bind(this)
+        this.onPresentationClose = this.onPresentationClose.bind(this)
         this.onTocToggle = this.onTocToggle.bind(this)
         this.onTocSelect = this.onTocSelect.bind(this)
         this.onTocItemClick = this.onTocItemClick.bind(this)
@@ -57,7 +62,7 @@ class Documentation extends Component {
 
     render() {
         const {docMeta} = this.props
-        const {toc, page, selectedTocItem, tocCollapsed, tocSelected, pageGenError} = this.state
+        const {toc, page, selectedTocItem, tocCollapsed, tocSelected, pageGenError, isPresentation} = this.state
 
         const searchPopup = this.state.searchActive ? <SearchPopup searchPromise={this.searchPromise}
                                                                    onSearchSelection={this.onSearchSelection}
@@ -73,7 +78,9 @@ class Documentation extends Component {
 
         const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
 
-        return (
+        const presentationIcon = presentationRegistry.isEmpty() ? null: <div className="presentation-button glyphicon glyphicon-resize-full" onClick={this.onPresentationOpen}/>
+
+        return isPresentation ? <Presentation onClose={this.onPresentationClose}/> : (
             <div className="documentation">
                 <div className="side-panel" onClick={this.onTocSelect}>
                     <TocPanel toc={toc} collapsed={tocCollapsed} selected={tocSelected}
@@ -88,6 +95,7 @@ class Documentation extends Component {
 
                 {preview}
                 {previewIndicator}
+                {presentationIcon}
 
                 <div className="search-button glyphicon glyphicon-search" onClick={this.onSearchClick}/>
 
@@ -191,6 +199,14 @@ class Documentation extends Component {
     onHeaderClick() {
         const url = fullResourcePath(this.props.docMeta.id, "")
         this.documentationNavigation.navigateToUrl(url)
+    }
+
+    onPresentationOpen() {
+        this.setState({isPresentation: true})
+    }
+
+    onPresentationClose() {
+        this.setState({isPresentation: false})
     }
 
     onTocItemClick(dirName, fileName) {

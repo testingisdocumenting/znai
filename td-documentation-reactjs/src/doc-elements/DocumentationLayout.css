@@ -238,3 +238,19 @@
     background-color: black;
     padding: 20px;
 }
+
+.search-button {
+    position: fixed;
+    font-size: 20px;
+    right: 40px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.presentation-button {
+    position: fixed;
+    font-size: 20px;
+    left: 10px;
+    top: 20px;
+    cursor: pointer;
+}

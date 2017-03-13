@@ -1,15 +1,17 @@
 import React from 'react'
 
-import EmbeddedAnnotatedImageDemo from './images/EmbeddedAnnotatedImageDemo'
-// import AnnotatedImageDemo from './images/AnnotatedImageDemo'
-// import TabsDemo from './tabs/TabsDemo'
-// import DocumentationDemo from './DocumentationDemo'
-// import DiagramSlidesDemo from './DiagramSlidesDemo'
-// import TableDemo from './table/TableDemo'
-// import ParsingDemo from './code-snippets/ParsingDemo'
+// import Demo from './presentation/PresentationDemo'
+import Demo from './DocumentationDemo'
+
+// import Demo from './images/EmbeddedAnnotatedImageDemo'
+// import Demo from './images/AnnotatedImageEditorDemo'
+// import Demo from './tabs/TabsDemo'
+// import Demo from './DiagramSlidesDemo'
+// import Demo from './table/TableDemo'
+// import Demo from './code-snippets/ParsingDemo'
 
 const VisualManualTest = () => (
-    <EmbeddedAnnotatedImageDemo/>
+    <Demo/>
 )
 
 
