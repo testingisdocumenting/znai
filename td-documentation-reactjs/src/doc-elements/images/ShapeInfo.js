@@ -6,7 +6,8 @@ const LabeledField = ({name, value, onChange}) => {
         value :
         <input value={value} onChange={(e) => {
             const newValue = e.target.value
-            onChange(name, newValue | 0)}
+            const isText = name === 'text' || name === 'color'
+            onChange(name, isText ? newValue : newValue | 0)}
         }/>
 
     return (<div className="labeled-field">
@@ -26,10 +27,10 @@ class ShapeInfo extends Component {
 
         const typeAndLabel = <div key="type-and-label">{shape.type + " " + shape.id}</div>
 
-        const fields = Object.keys(shape).filter(key => key !== 'id' && key !== 'type').map((key) => {
+        const fields = <div className="fields">{Object.keys(shape).filter(key => key !== 'id' && key !== 'type').map((key) => {
                 return <LabeledField key={key} name={key} value={shape[key]}
                                      onChange={onShapeChange}/>
-            })
+            })}</div>
 
         return <div className={className} onMouseDown={() => onSelect(shape)}>
             {isSelected ? [typeAndLabel, fields] : typeAndLabel}

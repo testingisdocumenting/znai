@@ -12,8 +12,9 @@ class AnnotatedImageEditor extends Component {
 
         this.annotations = new Annotations()
 
-        this.annotations.add({type: 'circle', id: 'c1', x: 100, y: 100, r: 50})
-        this.annotations.add({type: 'circle', id: 'c2', x: 150, y: 150, r: 30})
+        this.annotations.add({type: 'circle', id: 'c1', x: 100, y: 100, r: 50, text: '1', color: 'red'})
+        this.annotations.add({type: 'circle', id: 'c2', x: 150, y: 150, r: 30, text: '2', color: 'blue'})
+        this.annotations.add({type: 'arrow', id: 'a1', beginX: 250, beginY: 150, endX: 300, endY: 200, text: 'look', color: 'green'})
 
         this.onAnnotationChange = this.onAnnotationChange.bind(this)
         this.onEditedShape = this.onEditedShape.bind(this)

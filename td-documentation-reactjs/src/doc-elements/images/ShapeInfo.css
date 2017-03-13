@@ -13,6 +13,10 @@
     cursor: auto;
 }
 
+.shape-info .fields {
+    margin-top: 15px;
+}
+
 .labeled-field {
     display: flex;
 }
