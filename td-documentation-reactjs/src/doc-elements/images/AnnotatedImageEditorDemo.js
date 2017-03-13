@@ -1,7 +1,7 @@
 import React from 'react'
 import AnnotatedImageEditor from './AnnotatedImageEditor'
 
-const data = {imageSrc: 'ui.jpg'}
+const data = {imageSrc: 'idea-cropped.png'}
 
 const AnnotatedImageEditorDemo = () => <AnnotatedImageEditor {...data}/>
 

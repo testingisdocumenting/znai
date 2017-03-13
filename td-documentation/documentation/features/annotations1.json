@@ -1,5 +1,5 @@
 [{"type": "circle", "id": "c1",
-  "x": 100, "y": 100, "r": 20, "text": "1", "color": "blue"},
+  "x": 80, "y": 45, "r": 20, "text": "1", "color": "red"},
 
   {"type": "circle", "id": "c2",
-    "x": 250, "y": 100, "r": 20, "text": "2", "color": "blue"}]
+    "x": 250, "y": 65, "r": 20, "text": "2", "color": "red"}]
