@@ -55,6 +55,7 @@ public class ImageIncludePlugin implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.runTime(imagePath), AuxiliaryFile.builtTime(annotationsPath));
+        return Stream.concat(Stream.of(AuxiliaryFile.runTime(imagePath)), annotationsPath != null ?
+                Stream.of(AuxiliaryFile.builtTime(annotationsPath)) : Stream.empty());
     }
 }
