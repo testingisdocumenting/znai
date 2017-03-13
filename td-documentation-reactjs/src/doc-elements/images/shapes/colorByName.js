@@ -2,12 +2,12 @@ const colors = {
     red: {
         stroke: "#69140E",
         fill: "#A44200",
-        text: "#D58936"
+        text: "#69140E"
     },
     green: {
         stroke: "#35524A",
         fill: "#8DAB7F",
-        text: "#CFEE9E"
+        text: "#35524A"
     },
     blue: {
         stroke: "#273043",
