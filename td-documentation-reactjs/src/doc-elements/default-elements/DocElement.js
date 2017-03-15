@@ -13,7 +13,7 @@ const DocElement = ({content, elementsLibrary}) => {
             console.warn("can't find component to display", item)
             return null
         } else {
-            return <ElementToUse key={idx} {...item} />
+            return <ElementToUse key={idx} {...item} elementsLibrary={elementsLibrary} />
         }
     })}</span>)
 }

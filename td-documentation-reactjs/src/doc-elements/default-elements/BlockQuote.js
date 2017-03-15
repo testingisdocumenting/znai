@@ -1,11 +1,10 @@
-import React, {Component} from 'react'
+import React from 'react'
 
-const BlockQuoteBody = ({content, library}) => <blockquote className="content-block"><library.DocElement content={content}/></blockquote>
+const BlockQuote = ({elementsLibrary, content}) => (
+    <blockquote className="content-block"><elementsLibrary.DocElement content={content}/></blockquote>
+)
 
-const BlockQuoteBodyWithLibrary = (library) => class BlockQuote extends Component {
-    render() {
-        return <BlockQuoteBody {...this.props} library={library}/>
-    }
-}
+const presentationBlockQuoteHandler = {component: BlockQuote,
+    numberOfSlides: () => 1}
 
-export default BlockQuoteBodyWithLibrary
+export {BlockQuote, presentationBlockQuoteHandler}

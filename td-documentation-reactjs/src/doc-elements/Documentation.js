@@ -150,7 +150,7 @@ class Documentation extends Component {
     onPageLoad() {
         this.extractPageSectionNodes()
         this.updateCurrentPageSection()
-        this.presentationRegistry = new PresentationRegistry(presentationElementHandlers, this.state.page.content)
+        this.presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, this.state.page.content)
     }
 
     onSearchClick() {

@@ -1,19 +1,24 @@
 import React, {Component} from 'react'
 
-const SectionBody = ({id, title, content, library}) => {
-    return (
-        <div className="section" key={title}>
-            <div className="content-block">
-                <div className="section-title" id={id}>{title}</div>
-            </div>
-            <library.DocElement content={content}/>
-        </div>)
+const PresentationTitle = ({title}) => {
+    return <h1>{title}</h1>
 }
 
-const SectionWithLibrary = (library) => class Section  extends Component {
+const Section = (library) => class BoundSection extends Component {
     render() {
-        return <SectionBody {...this.props} library={library}/>
+        const {id, title, content} = this.props
+
+        return (<div className="section" key={title}>
+                <div className="content-block">
+                    <div className="section-title" id={id}>{title}</div>
+                </div>
+                <library.DocElement content={content}/>
+            </div>)
+
     }
 }
 
-export default SectionWithLibrary
+const presentationSectionHandler = {component: PresentationTitle,
+    numberOfSlides: () => 1}
+
+export {Section, presentationSectionHandler}

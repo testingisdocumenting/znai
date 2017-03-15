@@ -1,7 +1,8 @@
 import React from 'react'
 
 class PresentationRegistry {
-    constructor(presentationElementHandlers, pageItems) {
+    constructor(elementsLibrary, presentationElementHandlers, pageItems) {
+        this.elementsLibrary = elementsLibrary
         this.presentationElementHandlers = presentationElementHandlers
         this.numberOfSlides_ = 0
         this.slideComponents = []
@@ -22,7 +23,6 @@ class PresentationRegistry {
     }
 
     registerComponent_(item) {
-        console.log(item)
         // TODO stop differentiating custom components and regular ones
         const type = item.componentName ? item.componentName : item.type
         const props = item.componentProps ? item.componentProps : item
@@ -52,6 +52,7 @@ class PresentationRegistry {
         const {slideComponent, componentIdx} = this.findComponentAndIdx(slideIdx)
         const numberOfSlidesToSkip = this.calcNumberOfSlidesToSkip(componentIdx)
         return <slideComponent.component {...slideComponent.props}
+                                         elementsLibrary={this.elementsLibrary}
                                          slideIdx={slideIdx - numberOfSlidesToSkip}
                                          onLoad={onLoad}/>
     }
