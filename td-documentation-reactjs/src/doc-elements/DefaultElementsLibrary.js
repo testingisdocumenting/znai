@@ -67,7 +67,7 @@ library.CustomComponent = ({componentName, componentProps}) => {
         console.warn("can't find a custom component: ", componentName)
         return null
     } else {
-        return <Component {...componentProps}/>
+        return <Component {...componentProps} elementsLibrary={library}/>
     }
 }
 

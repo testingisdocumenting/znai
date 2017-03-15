@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import GraphVizSvg from './GraphVizSvg'
-import elementsLibrary from '../DefaultElementsLibrary'
 import {expandId} from './gvUtils'
 
 class GraphVizFlowAllInfoAtOnce extends Component {
@@ -11,7 +10,7 @@ class GraphVizFlowAllInfoAtOnce extends Component {
     }
 
     render() {
-        const {diagram, colors, slides, onExpand} = this.props
+        const {elementsLibrary, diagram, colors, slides, onExpand} = this.props
         const {idsToHighlight} = this.state
 
         return <div className="graphviz-diagram-all-content">
@@ -25,7 +24,7 @@ class GraphVizFlowAllInfoAtOnce extends Component {
                     slides.map((slide, idx) => (
                         <div className="diagram-slide" key={idx} onMouseOver={() => this.highlightNodes(slide.ids)}>
                             <div className="diagram-slide-labels" >
-                                {slide.ids.map((id) => <div>// {id}</div>)}
+                                {slide.ids.map((id) => <div key="id">// {id}</div>)}
                             </div>
                             <elementsLibrary.DocElement content={slide.content}/>
                         </div>
