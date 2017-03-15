@@ -9,9 +9,11 @@ import GraphVizSvg from './graphviz/GraphVizSvg'
 import GraphVizFlow from './graphviz/GraphVizFlow'
 import SimpleTable from './table/SimpleTable'
 import Tabs from './tabs/Tabs'
-import DocumentationAnnotatedImage from './images/DocumentationAnnotatedImage'
+import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
+import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
 
 const library = {}
+const presentationElementHandlers = {}
 
 const BoundDocElement = ({content}) => <DocElement content={content} elementsLibrary={library}/>
 
@@ -20,7 +22,10 @@ library.Emphasis = ({content}) => (<span className="emphasis"><BoundDocElement c
 library.StrongEmphasis = ({content}) => (<span className="strong-emphasis"><BoundDocElement content={content}/></span>)
 library.Link = ({url, content}) => (<a href={url}><BoundDocElement content={content}/></a>)
 library.Paragraph = ({content}) => <div className="paragraph content-block"><BoundDocElement content={content}/></div>
+
 library.BlockQuote = BlockQuote(library)
+presentationElementHandlers.BlockQuote = {component: library.BlockQuote, numberOfSlides: () => 1}
+
 library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
 library.InlinedCode = ({code}) => <code>{code}</code>
 library.SoftLineBreak = () => <span> </span>
@@ -46,7 +51,9 @@ library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphViz
 library.GraphVizFlow = GraphVizFlow
 
 library.SimpleTable = SimpleTable
-library.DocumentationAnnotatedImage = DocumentationAnnotatedImage
+
+library.AnnotatedImage = EmbeddedAnnotatedImage
+presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 
 library.Tabs = Tabs(library)
 library.Page = Page(library)
@@ -61,4 +68,4 @@ library.CustomComponent = ({componentName, componentProps}) => {
     }
 }
 
-export default library
+export {library as elementsLibrary, presentationElementHandlers}

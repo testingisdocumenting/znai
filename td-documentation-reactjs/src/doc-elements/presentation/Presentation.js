@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 
-import {presentationRegistry} from './PresentationRegistry'
-
 import './Presentation.css'
 
 class Presentation extends Component {
@@ -16,6 +14,7 @@ class Presentation extends Component {
     }
 
     render() {
+        const {presentationRegistry} = this.props
         const {currentSlideIdx, scaleRatio} = this.state
         const slideAreaStyle = {transform: 'scale(' + scaleRatio + ')'}
 
@@ -50,6 +49,8 @@ class Presentation extends Component {
     }
 
     keyDownHandler(e) {
+        const {presentationRegistry} = this.props
+
         let {currentSlideIdx} = this.state
 
         if (e.key === 'ArrowRight') {

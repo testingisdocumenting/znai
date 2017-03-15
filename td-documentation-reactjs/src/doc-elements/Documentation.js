@@ -4,7 +4,7 @@ import Promise from "promise"
 import TocPanel from './structure/TocPanel'
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
-import elementsLibrary from './DefaultElementsLibrary'
+import {elementsLibrary, presentationElementHandlers} from './DefaultElementsLibrary'
 import DocumentationNavigation from './structure/DocumentationNavigation'
 import {tableOfContents} from './structure/TableOfContents'
 import {getAllPagesPromise} from "./allPages"
@@ -15,7 +15,7 @@ import Preview from './preview/Preview'
 import PreviewChangeIndicator from './preview/PreviewChangeIndicator'
 import PageContentPreviewDiff from './preview/PageContentPreviewDiff'
 
-import {presentationRegistry} from './presentation/PresentationRegistry'
+import PresentationRegistry from './presentation/PresentationRegistry'
 
 import './DocumentationLayout.css'
 import './search/Search.css'
@@ -78,9 +78,9 @@ class Documentation extends Component {
 
         const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
 
-        const presentationIcon = presentationRegistry.isEmpty() ? null: <div className="presentation-button glyphicon glyphicon-resize-full" onClick={this.onPresentationOpen}/>
+        const presentationIcon = this.presentationRegistry && this.presentationRegistry.isEmpty() ? null: <div className="presentation-button glyphicon glyphicon-resize-full" onClick={this.onPresentationOpen}/>
 
-        return isPresentation ? <Presentation onClose={this.onPresentationClose}/> : (
+        return isPresentation ? <Presentation presentationRegistry={this.presentationRegistry} onClose={this.onPresentationClose}/> : (
             <div className="documentation">
                 <div className="side-panel" onClick={this.onTocSelect}>
                     <TocPanel toc={toc} collapsed={tocCollapsed} selected={tocSelected}
@@ -150,6 +150,7 @@ class Documentation extends Component {
     onPageLoad() {
         this.extractPageSectionNodes()
         this.updateCurrentPageSection()
+        this.presentationRegistry = new PresentationRegistry(presentationElementHandlers, this.state.page.content)
     }
 
     onSearchClick() {

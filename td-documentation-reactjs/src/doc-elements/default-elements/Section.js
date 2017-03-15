@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {presentationRegistry} from '../presentation/PresentationRegistry'
 
 const SectionBody = ({id, title, content, library}) => {
     return (
@@ -11,16 +10,7 @@ const SectionBody = ({id, title, content, library}) => {
         </div>)
 }
 
-const PresentationTitle = ({title}) => {
-    return <h1>{title}</h1>
-}
-
 const SectionWithLibrary = (library) => class Section  extends Component {
-    constructor(props) {
-        super(props)
-        presentationRegistry.register(PresentationTitle, {...props}, 1)
-    }
-
     render() {
         return <SectionBody {...this.props} library={library}/>
     }

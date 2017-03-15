@@ -153,6 +153,30 @@ toc = [
       },
       {
         "sectionTitle": "Features",
+        "pageTitle": "UI Documentation",
+        "fileName": "UI-documentation",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "Complex Domain",
+            "id": "complex-domain"
+          },
+          {
+            "title": "Annotated Images",
+            "id": "annotated-images"
+          },
+          {
+            "title": "Editing Annotations",
+            "id": "editing-annotations"
+          },
+          {
+            "title": "Presentation Mode",
+            "id": "presentation-mode"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
         "pageTitle": "Proxy",
         "fileName": "proxy",
         "dirName": "features",

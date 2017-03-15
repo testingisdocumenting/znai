@@ -1,17 +1,7 @@
 import React, {Component} from 'react'
 import DocElement from './DocElement'
-import {presentationRegistry} from '../presentation/PresentationRegistry'
-
-const PresentationTitle = ({tocItem}) => {
-    return <h1 className="presentation-title">{tocItem.pageTitle}</h1>
-}
 
 const Page = (elementsLibrary) => class Page extends Component {
-    constructor(props) {
-        super(props)
-        presentationRegistry.register(PresentationTitle, {...props}, 1)
-    }
-
     render() {
         const {tocItem, content} = this.props
         return (<div className="page-content">

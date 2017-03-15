@@ -1,8 +1,12 @@
 import React from 'react'
 
 class PresentationRegistry {
-    constructor() {
-        this.clear()
+    constructor(presentationElementHandlers, pageItems) {
+        this.presentationElementHandlers = presentationElementHandlers
+        this.numberOfSlides_ = 0
+        this.slideComponents = []
+
+        this.registerComponents_(pageItems)
     }
 
     get numberOfSlides() {
@@ -13,9 +17,24 @@ class PresentationRegistry {
         return this.numberOfSlides_ === 0
     }
 
-    clear() {
-        this.numberOfSlides_ = 0
-        this.slideComponents = []
+    registerComponents_(items) {
+        items.forEach(item => this.registerComponent_(item))
+    }
+
+    registerComponent_(item) {
+        console.log(item)
+        // TODO stop differentiating custom components and regular ones
+        const type = item.componentName ? item.componentName : item.type
+        const props = item.componentProps ? item.componentProps : item
+
+        const presentationElementHandler = this.presentationElementHandlers[type]
+        if (presentationElementHandler) {
+            this.register(presentationElementHandler.component, props, presentationElementHandler.numberOfSlides(props))
+        }
+
+        if (item.content) {
+            this.registerComponents_(item.content)
+        }
     }
 
     register(component, props, numberOfSlides) {
@@ -64,6 +83,4 @@ class PresentationRegistry {
     }
 }
 
-const presentationRegistry = new PresentationRegistry()
-
-export {presentationRegistry}
+export default PresentationRegistry

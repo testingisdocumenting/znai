@@ -12,4 +12,4 @@ class PresentationAnnotatedImage extends Component {
     }
 }
 
-export default PresentationAnnotatedImage
+export default {component: PresentationAnnotatedImage, numberOfSlides: ({shapes}) => shapes.length + 1}
