@@ -42,7 +42,7 @@ public class FileIncludePlugin implements IncludePlugin {
         Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), langToUse, text);
         props.putAll(includeParams.getOpts().toMap());
 
-        return PluginResult.reactComponent(DocElementType.SNIPPET, props);
+        return PluginResult.docElement(DocElementType.SNIPPET, props);
     }
 
     @Override

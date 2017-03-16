@@ -29,7 +29,7 @@ public class JavaDocIncludePlugin implements IncludePlugin {
         String textContent = componentsRegistry.includeResourceResolver().textContent(fileName);
         String javaDoc = JavaDocExtractor.extractTopLevel(textContent);
 
-        return PluginResult.reactComponent(DocElementType.SIMPLE_TEXT, Collections.singletonMap("text", javaDoc));
+        return PluginResult.docElement(DocElementType.SIMPLE_TEXT, Collections.singletonMap("text", javaDoc));
     }
 
     @Override

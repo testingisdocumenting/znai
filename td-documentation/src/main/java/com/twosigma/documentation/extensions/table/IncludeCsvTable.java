@@ -39,7 +39,7 @@ public class IncludeCsvTable implements IncludePlugin {
             column.ifPresent(c -> c.putAll((Map<? extends String, ?>) meta));
         });
 
-        return PluginResult.reactComponent("SimpleTable", Collections.singletonMap("table", table));
+        return PluginResult.docElement("SimpleTable", Collections.singletonMap("table", table));
     }
 
     @Override

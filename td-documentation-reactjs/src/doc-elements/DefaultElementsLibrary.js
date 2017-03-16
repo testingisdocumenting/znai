@@ -61,14 +61,4 @@ presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 library.Tabs = Tabs
 library.Page = Page
 
-library.CustomComponent = ({componentName, componentProps}) => {
-    const Component = library[componentName]
-    if (!Component) {
-        console.warn("can't find a custom component: ", componentName)
-        return null
-    } else {
-        return <Component {...componentProps} elementsLibrary={library}/>
-    }
-}
-
 export {library as elementsLibrary, presentationElementHandlers}

@@ -37,7 +37,7 @@ public class TabsFencePlugin implements FencePlugin {
         Map<String, Object> tabsProps = new LinkedHashMap<>();
         tabsProps.put("tabsContent", Arrays.stream(tabsDefs).map(this::tabProps).collect(toList()));
 
-        return PluginResult.reactComponent("Tabs", tabsProps);
+        return PluginResult.docElement("Tabs", tabsProps);
     }
 
     private Map<String, Object> tabProps(String tabDef) {

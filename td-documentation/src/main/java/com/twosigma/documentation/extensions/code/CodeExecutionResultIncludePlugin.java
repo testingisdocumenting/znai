@@ -43,7 +43,7 @@ public class CodeExecutionResultIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final IncludeParams includeParams) {
-        return PluginResult.reactComponent("TestComponent", Collections.emptyMap());
+        return PluginResult.docElement("TestComponent", Collections.emptyMap());
 //        final String fileName = includeParams.getFreeParam();
 //        final Path fullPath = context.getCurrentFilePath().getParent().resolve(fileName + ".json").toAbsolutePath();
 //

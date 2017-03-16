@@ -4,7 +4,6 @@ import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.extensions.diagrams.Graphviz;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.utils.FileUtils;
@@ -46,7 +45,7 @@ public class ImageIncludePlugin implements IncludePlugin {
         props.put("imageSrc", imagePathValue);
         props.put("shapes", loadShapes(annotationsPath));
 
-        return PluginResult.reactComponent("AnnotatedImage", props);
+        return PluginResult.docElement("AnnotatedImage", props);
     }
 
     private List<?> loadShapes(Path path) {

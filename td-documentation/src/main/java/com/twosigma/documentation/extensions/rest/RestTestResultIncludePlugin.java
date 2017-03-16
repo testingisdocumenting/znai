@@ -49,7 +49,7 @@ public class RestTestResultIncludePlugin implements IncludePlugin {
         final MapOrList mapOrList = createGson().fromJson(content(pathToJson), MapOrList.class);
 
         props.put("data", mapOrList.list != null ? mapOrList.list : mapOrList.map);
-        return PluginResult.reactComponent("RestTestOutput", props);
+        return PluginResult.docElement("RestTestOutput", props);
     }
 
     private String content(final Path pathToJson) {

@@ -27,12 +27,11 @@ public class PluginResult {
         return new PluginResult(elements.collect(Collectors.toList()));
     }
 
-    public static PluginResult reactComponent(final String name, final Map<String, Object> props) {
-        DocElement customComponent = new DocElement(DocElementType.CUSTOM_COMPONENT);
-        customComponent.addProp("componentName", name);
-        customComponent.addProp("componentProps", props);
+    public static PluginResult docElement(final String type, final Map<String, Object> props) {
+        DocElement docElement = new DocElement(type);
+        props.forEach(docElement::addProp);
 
-        return new PluginResult(customComponent);
+        return new PluginResult(docElement);
     }
 
     public List<DocElement> getDocElements() {

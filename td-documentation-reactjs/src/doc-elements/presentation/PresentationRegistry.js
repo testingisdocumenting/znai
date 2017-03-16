@@ -23,9 +23,8 @@ class PresentationRegistry {
     }
 
     registerComponent_(item) {
-        // TODO stop differentiating custom components and regular ones
-        const type = item.componentName ? item.componentName : item.type
-        const props = item.componentProps ? item.componentProps : item
+        const type = item.type
+        const props = item
 
         const presentationElementHandler = this.presentationElementHandlers[type]
         if (presentationElementHandler) {
