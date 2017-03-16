@@ -47,7 +47,7 @@ library.OrderedList = ({delimiter, startNumber, content}) => <ol className="cont
 
 library.ListItem = ({content}) => <li><BoundDocElement content={content}/></li>
 
-library.Section = Section(library)
+library.Section = Section
 presentationElementHandlers.Section = presentationSectionHandler
 
 library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphVizSvg {...props}/></div>
@@ -58,8 +58,8 @@ library.SimpleTable = SimpleTable
 library.AnnotatedImage = EmbeddedAnnotatedImage
 presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 
-library.Tabs = Tabs(library)
-library.Page = Page(library)
+library.Tabs = Tabs
+library.Page = Page
 
 library.CustomComponent = ({componentName, componentProps}) => {
     const Component = library[componentName]

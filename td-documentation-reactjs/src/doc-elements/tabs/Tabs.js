@@ -24,7 +24,6 @@ class TabsRegistration {
     notifyNewTab(name) {
         removeFromArray(this.tabsSelectionHistory, name)
         this.tabsSelectionHistory.unshift(name)
-        console.log(this.tabsSelectionHistory)
 
         this.listeners.forEach(l => l(name))
     }
@@ -45,7 +44,7 @@ const TabNames = ({names, activeIdx, onClick}) => {
     </div>
 }
 
-const TabsWithLibrary = (library) => class Tabs extends Component {
+class Tabs extends Component {
     constructor(props) {
         super(props)
 
@@ -70,7 +69,7 @@ const TabsWithLibrary = (library) => class Tabs extends Component {
     }
 
     render() {
-        const {tabsContent} = this.props
+        const {elementsLibrary, tabsContent} = this.props
         const {activeIdx} = this.state
 
         const names = tabsContent.map(t => t.name)
@@ -79,7 +78,7 @@ const TabsWithLibrary = (library) => class Tabs extends Component {
         return (<div className="tabs-area">
             <TabNames names={names} activeIdx={activeIdx} onClick={this.onClick}/>
             <div className="tabs-content">
-                <library.DocElement content={tabContent}/>
+                <elementsLibrary.DocElement content={tabContent}/>
             </div>
             </div>)
     }
@@ -90,8 +89,6 @@ const TabsWithLibrary = (library) => class Tabs extends Component {
     }
 
     onTabSwitch(tabName) {
-        console.log(tabName)
-
         const {tabsContent} = this.props
         const names = tabsContent.map(t => t.name)
 
@@ -109,4 +106,4 @@ function removeFromArray(array, value) {
     }
 }
 
-export default TabsWithLibrary
+export default Tabs
