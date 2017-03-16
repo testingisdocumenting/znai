@@ -64,7 +64,8 @@ class Documentation extends Component {
         const {docMeta} = this.props
         const {toc, page, selectedTocItem, tocCollapsed, tocSelected, pageGenError, isPresentation} = this.state
 
-        const searchPopup = this.state.searchActive ? <SearchPopup searchPromise={this.searchPromise}
+        const searchPopup = this.state.searchActive ? <SearchPopup elementsLibrary={elementsLibrary}
+                                                                   searchPromise={this.searchPromise}
                                                                    onSearchSelection={this.onSearchSelection}
                                                                    onClose={this.onSearchClose}/> : null
 

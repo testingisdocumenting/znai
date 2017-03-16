@@ -54,12 +54,13 @@ class SearchPopup extends Component {
     }
 
     renderPreview(ids, selectedIdx, previewDetails) {
+        const {elementsLibrary} = this.props
         return (<div className="toc-and-preview">
             <div className="search-toc-panel">
                 <SearchToc ids={ids} selectedIdx={selectedIdx}/>
             </div>
             <div className="search-preview-panel">
-                <SearchPreview {...previewDetails}/>
+                <SearchPreview elementsLibrary={elementsLibrary} {...previewDetails}/>
             </div>
         </div>)
     }

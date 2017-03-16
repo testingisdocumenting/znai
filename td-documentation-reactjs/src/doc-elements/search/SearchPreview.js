@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 
-import elementsLibrary from '../DefaultElementsLibrary'
-
 class SearchPreview extends Component {
     componentDidMount() {
         const Mark = require('mark.js/dist/mark.js') // need to hide from server side rendering
@@ -14,7 +12,7 @@ class SearchPreview extends Component {
     }
 
     render() {
-        const {section} = this.props
+        const {section, elementsLibrary} = this.props
 
         const style = {transform: "scale(1.0)"}
         return (<div className="search-result-preview" style={style} ref={(dom) => this.dom = dom}>
