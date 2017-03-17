@@ -100,6 +100,8 @@ class SearchPopup extends Component {
             return
         }
 
+        e.preventDefault()
+
         if (e.key === 'ArrowUp') {
             selectedIdx -= 1
         }

@@ -51,7 +51,8 @@
 }
 
 .search-popup .search-box {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
+    border-radius: 3px;
 }
 
 .search-popup .search-box input {
