@@ -39,7 +39,7 @@ class SearchPopup extends Component {
         const firstId = hasResult ? ids[selectedIdx] : null
         const previewDetails = hasResult ? this.state.search.previewDetails(firstId, this.state.queryResult) : null
 
-        const className = "search-popup" + (tocCollapsed ? "" : " visible-toc")
+        const className = "search-popup" + (tocCollapsed ? "" : " visible-toc") + (hasResult ? " with-results" : "")
         const searchBox = this.state.search ? <SearchBox onChange={this.onQueryChange} /> : null
 
         return (<div className={className}>
@@ -47,8 +47,6 @@ class SearchPopup extends Component {
 
             <div className="popup-panel">
                 {searchBox}
-
-                <div className="close glyphicon glyphicon-remove" onClick={onClose}/>
                 {previewDetails ? this.renderPreview(ids, selectedIdx, previewDetails) : null}
             </div>
         </div>);

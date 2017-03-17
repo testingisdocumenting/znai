@@ -12,7 +12,7 @@ class SearchBox extends Component {
         return <div className="search-box">
             <input
                 ref={(dom) => this.dom = dom}
-                placeholder="Type to search..."
+                placeholder="Type to terms to search..."
                 onKeyDown={this.onKeyDown}
                 value={this.state.value} onChange={this.onInputChange} />
         </div>;

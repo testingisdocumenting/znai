@@ -19,11 +19,9 @@
     left: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 1000px;
+    width: 1010px;
     max-height: calc(100vh - 100px);
     z-index: 1001;
-    border: 1px solid #aaa;
-    background: rgba(255, 255, 255, 1)
 }
 
 .search-popup.visible-toc .popup-panel {
@@ -37,39 +35,39 @@
     flex-direction: row;
     display: flex;
     height: 100%;
+    border: 1px solid #aaa;
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: rgba(255, 255, 255, 1)
 }
 
 .search-popup .search-toc-panel {
-    flex: 3;
+    flex: 0 0 300px;
     border-right: 1px solid #ccc;
-}
-
-.search-popup .search-preview-panel {
-    flex: 5;
-    padding: 10px;
     overflow: hidden;
 }
 
-.search-popup .search-box {
-    border-bottom: 1px solid #ddd;
-    border-radius: 3px;
+.search-popup .search-preview-panel {
+    flex: 1;
+    padding: 10px;
+    overflow: hidden;
 }
 
 .search-popup .search-box input {
     padding: 15px;
     width: 100%;
     outline: none;
-    border: none;
+    border: 1px solid #aaa;
+    border-radius: 8px;
 }
 
-.search-popup .close {
-    position: absolute;
-    right: 20px;
-    top: 15px;
+.search-popup.with-results .search-box input {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .search-toc-items {
-
 }
 
 .search-toc-item {
@@ -85,7 +83,7 @@
 
 .search-toc-page-title {
     color: #aaa;
-    flex-basis: 30%;
+    flex: 1;
 }
 
 .selected .search-toc-page-title {
@@ -95,11 +93,10 @@
 
 .search-toc-page-section-title {
     padding-left: 10px;
-    flex-basis: 40%;
+    flex: 1;
 }
 
 .search-toc-section-title {
     font-size: 10px;
-    /*flex-basis: 20%;*/
     margin-left: auto;
 }
