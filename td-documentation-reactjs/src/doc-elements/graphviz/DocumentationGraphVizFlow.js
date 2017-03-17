@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 import GraphVizSvg from './GraphVizSvg'
 import {expandId} from './gvUtils'
 
-class GraphVizFlowAllInfoAtOnce extends Component {
+import './GraphvVizFlow.css'
+
+class DocumentationGraphVizFlow extends Component {
     constructor(props) {
         super(props)
         this.state = {currentSectionIdx: -1}
@@ -18,8 +20,6 @@ class GraphVizFlowAllInfoAtOnce extends Component {
                 <GraphVizSvg diagram={diagram} colors={colors} idsToHighlight={idsToHighlight} />
             </div>
             <div className="diagram-explanation-panel" onMouseLeave={() => this.clearHighlights()}>
-                <div className="expand glyphicon glyphicon-resize-full" onClick={onExpand}></div>
-
                 {
                     slides.map((slide, idx) => (
                         <div className="diagram-slide" key={idx} onMouseOver={() => this.highlightNodes(slide.ids)}>
@@ -46,4 +46,4 @@ class GraphVizFlowAllInfoAtOnce extends Component {
     }
 }
 
-export default GraphVizFlowAllInfoAtOnce
+export default DocumentationGraphVizFlow

@@ -6,11 +6,12 @@ import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/Bloc
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
 import {BulletList, presentationUnorderedListHandler} from './default-elements/BulletList'
 import GraphVizSvg from './graphviz/GraphVizSvg'
-import GraphVizFlow from './graphviz/GraphVizFlow'
+import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import SimpleTable from './table/SimpleTable'
 import Tabs from './tabs/Tabs'
 import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
+import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
 
 const library = {}
 const presentationElementHandlers = {}
@@ -51,7 +52,9 @@ library.Section = Section
 presentationElementHandlers.Section = presentationSectionHandler
 
 library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphVizSvg {...props}/></div>
-library.GraphVizFlow = GraphVizFlow
+
+library.GraphVizFlow = DocumentationGraphVizFlow
+presentationElementHandlers.GraphVizFlow = presentationGraphVizHandler
 
 library.SimpleTable = SimpleTable
 

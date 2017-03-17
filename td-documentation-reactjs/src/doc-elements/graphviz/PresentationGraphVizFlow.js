@@ -1,0 +1,34 @@
+import React, { Component } from 'react'
+
+import GraphVizSvg from './GraphVizSvg'
+
+import {expandId} from './gvUtils'
+
+class PresentationGraphVizFlow extends Component {
+        render() {
+        const {elementsLibrary, diagram, colors, slides, slideIdx} = this.props
+        const currentContent = slides[slideIdx].content
+
+        return <div>
+            <div className="diagram-area">
+                <GraphVizSvg diagram={diagram} colors={colors} idsToDisplay={this.idsToDisplay()} />
+            </div>
+            <div className="explanation-area">
+                <elementsLibrary.DocElement content={currentContent}/>
+            </div>
+        </div>
+    }
+
+    idsToDisplay() {
+        const {slides, slideIdx} = this.props
+        const ids = []
+
+        for (let i = 0, len = slides.length; i < Math.min(len, slideIdx + 1); i++) {
+            slides[i].ids.forEach((id) => expandId(id).forEach((nid) => ids.push(nid)))
+        }
+
+        return ids
+    }
+}
+
+export default {component: PresentationGraphVizFlow, numberOfSlides: ({slides}) => slides.length}

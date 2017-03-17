@@ -20,7 +20,7 @@ class GraphVizFlow extends Component {
         return <div className="graphviz-diagram-flow">
             {fullScreen ?
                 <GraphVizFlowFullScreen {...this.props} onClose={this.onExitFullScreen}/> :
-                <GraphVizFlowAllInfoAtOnce {...this.props} onExpand={this.onExpand}/> }
+                <DocumentationGraphVizFlow {...this.props} onExpand={this.onExpand}/> }
         </div>
     }
 
