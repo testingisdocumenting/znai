@@ -29,7 +29,7 @@ class SearchPopup extends Component {
     }
 
     render() {
-        const {onClose} = this.props
+        const {onClose, tocCollapsed} = this.props
         const ids = this.queryResultIds()
 
         this.ids = ids
@@ -39,9 +39,10 @@ class SearchPopup extends Component {
         const firstId = hasResult ? ids[selectedIdx] : null
         const previewDetails = hasResult ? this.state.search.previewDetails(firstId, this.state.queryResult) : null
 
+        const className = "search-popup" + (tocCollapsed ? "" : " visible-toc")
         const searchBox = this.state.search ? <SearchBox onChange={this.onQueryChange} /> : null
 
-        return (<div className="search-popup">
+        return (<div className={className}>
             <div className="overlay" onClick={onClose} />
 
             <div className="popup-panel">

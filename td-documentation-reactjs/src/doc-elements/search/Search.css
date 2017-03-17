@@ -15,12 +15,22 @@
     display: flex;
     flex-direction: column;
     top: 50px;
-    left: 50px;
-    right: 50px;
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
     max-height: calc(100vh - 100px);
     z-index: 1001;
     border: 1px solid #aaa;
     background: rgba(255, 255, 255, 1)
+}
+
+.search-popup.visible-toc .popup-panel {
+    right: 0;
+    left: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .search-popup .toc-and-preview {
