@@ -18,6 +18,7 @@
         <module>td-diagrams</module>
         <module>td-documentation</module>
         <module>td-documentation-core</module>
+        <module>td-documentation-latex</module>
         <module>td-documentation-java</module>
         <module>td-documentation-cpp</module>
         <module>td-documentation-reactjs</module>
