@@ -21,17 +21,6 @@ body {
     font-size: 32px;
 }
 
-.doc-section-title:before {
-    font-size: 20px;
-    color: #aaa;
-    content: "// ";
-}
-
-.doc-section-title {
-    color: #aaa;
-    font-size: 20px;
-}
-
 .section-title {
     font-size: 22px;
     padding-bottom: 5px;

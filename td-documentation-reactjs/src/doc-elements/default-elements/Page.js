@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 
 class Page extends Component {
     render() {
-        const {tocItem, content, elementsLibrary} = this.props
+        const {tocItem, content, onPresentationOpen, elementsLibrary} = this.props
         return (<div className="page-content">
             <div className="page-title-block">
                 <span className="page-title">{tocItem.pageTitle}</span>
+                <span className="presentation-button glyphicon glyphicon-resize-full" onClick={onPresentationOpen}/>
             </div>
             <elementsLibrary.DocElement key={tocItem.pageTitle} content={content}/>
         </div>)

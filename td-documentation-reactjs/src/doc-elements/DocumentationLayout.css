@@ -248,9 +248,7 @@
 }
 
 .presentation-button {
-    position: fixed;
-    font-size: 20px;
-    left: 10px;
-    top: 20px;
+    font-size: 16px;
     cursor: pointer;
+    color: #bbb;
 }

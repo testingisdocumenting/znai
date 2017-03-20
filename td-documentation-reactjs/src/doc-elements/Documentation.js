@@ -80,8 +80,6 @@ class Documentation extends Component {
 
         const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
 
-        const presentationIcon = this.presentationRegistry && this.presentationRegistry.isEmpty() ? null: <div className="presentation-button glyphicon glyphicon-resize-full" onClick={this.onPresentationOpen}/>
-
         return isPresentation ? <Presentation presentationRegistry={this.presentationRegistry} onClose={this.onPresentationClose}/> : (
             <div className="documentation">
                 <div className="side-panel" onClick={this.onTocSelect}>
@@ -97,7 +95,6 @@ class Documentation extends Component {
 
                 {preview}
                 {previewIndicator}
-                {presentationIcon}
 
                 <div className="search-button glyphicon glyphicon-search" onClick={this.onSearchClick}/>
 
@@ -106,6 +103,7 @@ class Documentation extends Component {
                 <div className="main-panel" onClick={this.onPanelSelect} ref={panelDom => this.mainPanelDom = panelDom}>
                     <elementsLibrary.Page tocItem={page.tocItem}
                                           content={page.content}
+                                          onPresentationOpen={this.onPresentationOpen}
                                           previewEnabled={docMeta.previewEnabled}
                                           elementsLibrary={elementsLibrary}/>
                     <div className="next-prev-buttons content-block">
