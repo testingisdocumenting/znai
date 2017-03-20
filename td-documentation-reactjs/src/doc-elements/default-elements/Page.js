@@ -19,4 +19,11 @@ class Page extends Component {
     }
 }
 
-export default Page
+const PresentationTitle = ({tocItem}) => {
+    return <h1 className="presentation-title">{tocItem.pageTitle}</h1>
+}
+
+const presentationPageHandler = {component: PresentationTitle,
+    numberOfSlides: () => 1}
+
+export {Page, presentationPageHandler}

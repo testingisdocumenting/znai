@@ -1,6 +1,6 @@
 import React from 'react'
 import DocElement from './default-elements/DocElement'
-import Page from './default-elements/Page'
+import {Page, presentationPageHandler} from './default-elements/Page'
 import {Section, presentationSectionHandler} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
@@ -66,6 +66,8 @@ library.AnnotatedImage = EmbeddedAnnotatedImage
 presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 
 library.Tabs = Tabs
+
 library.Page = Page
+presentationElementHandlers.Page = presentationPageHandler
 
 export {library as elementsLibrary, presentationElementHandlers}

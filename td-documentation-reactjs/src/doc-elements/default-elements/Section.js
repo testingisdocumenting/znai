@@ -1,9 +1,5 @@
 import React from 'react'
 
-const PresentationTitle = ({title}) => {
-    return <h1>{title}</h1>
-}
-
 const Section = ({elementsLibrary, id, title, content}) => {
     return (<div className="section" key={title}>
         <div className="content-block">
@@ -11,6 +7,10 @@ const Section = ({elementsLibrary, id, title, content}) => {
         </div>
         <elementsLibrary.DocElement content={content}/>
     </div>)
+}
+
+const PresentationTitle = ({title}) => {
+    return <h1>{title}</h1>
 }
 
 const presentationSectionHandler = {component: PresentationTitle,
