@@ -5,16 +5,13 @@ import GraphVizSvg from './GraphVizSvg'
 import {expandId} from './gvUtils'
 
 class PresentationGraphVizFlow extends Component {
-        render() {
+    render() {
         const {elementsLibrary, diagram, colors, slides, slideIdx} = this.props
         const currentContent = slides[slideIdx].content
 
-        return <div>
+        return <div ref={node => this.node = node}>
             <div className="diagram-area">
                 <GraphVizSvg diagram={diagram} colors={colors} idsToDisplay={this.idsToDisplay()} />
-            </div>
-            <div className="explanation-area">
-                <elementsLibrary.DocElement content={currentContent}/>
             </div>
         </div>
     }
@@ -28,6 +25,10 @@ class PresentationGraphVizFlow extends Component {
         }
 
         return ids
+    }
+
+    componentDidMount() {
+        this.props.onLoad(this.node.offsetWidth, this.node.offsetHeight)
     }
 }
 

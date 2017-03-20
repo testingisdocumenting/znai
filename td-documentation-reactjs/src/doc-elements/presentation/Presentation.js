@@ -50,7 +50,7 @@ class Presentation extends Component {
 
     keyDownHandler(e) {
         const {presentationRegistry} = this.props
-
+        const {scaleRatio} = this.state
         let {currentSlideIdx} = this.state
 
         if (e.key === 'ArrowRight') {
@@ -70,7 +70,6 @@ class Presentation extends Component {
             currentSlideIdx = presentationRegistry.numberOfSlides - 1
         }
 
-        const scaleRatio = 2 // TODO calc for everything, not just images
         this.setState({currentSlideIdx, scaleRatio})
     }
 

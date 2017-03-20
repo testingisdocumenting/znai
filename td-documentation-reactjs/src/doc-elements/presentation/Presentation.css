@@ -1,7 +1,6 @@
 .presentation {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     height: 100vh;
 }
@@ -9,9 +8,12 @@
 .presentation .slide-number {
     position: fixed;
     bottom: 10px;
+    align-self: center;
 }
 
 .presentation .slide-area {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .presentation-close-icon {
