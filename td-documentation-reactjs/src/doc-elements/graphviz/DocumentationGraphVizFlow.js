@@ -12,7 +12,7 @@ class DocumentationGraphVizFlow extends Component {
     }
 
     render() {
-        const {elementsLibrary, diagram, colors, slides, onExpand} = this.props
+        const {elementsLibrary, diagram, colors, slides} = this.props
         const {idsToHighlight} = this.state
 
         return <div className="graphviz-diagram-all-content">

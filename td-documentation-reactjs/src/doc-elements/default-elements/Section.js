@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 
 const PresentationTitle = ({title}) => {
     return <h1>{title}</h1>
