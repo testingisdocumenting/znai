@@ -9,6 +9,7 @@ import GraphVizSvg from './graphviz/GraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import SimpleTable from './table/SimpleTable'
 import Tabs from './tabs/Tabs'
+import LatexMath from './math/LatexMath'
 import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
 import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
@@ -57,6 +58,9 @@ library.GraphVizFlow = DocumentationGraphVizFlow
 presentationElementHandlers.GraphVizFlow = presentationGraphVizHandler
 
 library.SimpleTable = SimpleTable
+
+library.LatexMath = LatexMath
+presentationElementHandlers.LatexMath = {component: LatexMath, numberOfSlides: ({shapes}) => 1}
 
 library.AnnotatedImage = EmbeddedAnnotatedImage
 presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler

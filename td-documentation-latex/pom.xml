@@ -14,6 +14,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.twosigma.td</groupId>
+            <artifactId>td-documentation-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.scilab.forge</groupId>
             <artifactId>jlatexmath</artifactId>
             <version>1.0.4</version>

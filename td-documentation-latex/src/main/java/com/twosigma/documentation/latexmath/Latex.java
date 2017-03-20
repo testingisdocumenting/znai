@@ -13,7 +13,10 @@ import org.w3c.dom.Document;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -25,11 +28,11 @@ public class Latex {
         init();
     }
 
-    public static String toSvg(String latex) throws IOException {
+    public static String toSvg(String latex) {
         DOMImplementation dom = GenericDOMImplementation.getDOMImplementation();
         Document document = dom.createDocument("http://www.w3.org/2000/svg", "svg", null);
 
-        SVGGraphics2D svg2d = new SVGGraphics2D(SVGGeneratorContext.createDefault(document), false);
+        SVGGraphics2D svg2d = new SVGGraphics2D(SVGGeneratorContext.createDefault(document), true);
 
         TeXFormula formula = new TeXFormula(latex);
         TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);
@@ -43,13 +46,18 @@ public class Latex {
         icon.paintIcon(label, svg2d, 0, 0);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        Writer out = new OutputStreamWriter(outputStream, "UTF-8");
-        svg2d.stream(out, false);
+        try {
+            Writer out = new OutputStreamWriter(outputStream, "UTF-8");
+            svg2d.stream(out, false);
 
-        return outputStream.toString("UTF-8");
+            return outputStream.toString("UTF-8").replaceAll("\n", "");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void init() {
+        System.setProperty("java.awt.headless", "true");
         DefaultTeXFont.registerAlphabet(new GreekRegistration());
     }
 
