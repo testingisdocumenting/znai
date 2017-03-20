@@ -59,6 +59,7 @@ class Presentation extends Component {
             currentSlideIdx -= 1
         } else if (e.key === 'Escape') {
             this.onClose()
+            return
         }
 
         if (currentSlideIdx < 0) {
