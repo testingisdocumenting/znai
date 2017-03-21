@@ -71,8 +71,9 @@ public class FileWatcher implements AuxiliaryFileListener {
 
     private void handleEvent(Path parentPath, final WatchEvent<?> watchEvent) {
         final WatchEvent.Kind<?> kind = watchEvent.kind();
-        if (kind == OVERFLOW)
+        if (kind == OVERFLOW) {
             return;
+        }
 
         @SuppressWarnings("unchecked")
         final Path relativePath = ((WatchEvent<Path>) watchEvent).context();
@@ -80,23 +81,17 @@ public class FileWatcher implements AuxiliaryFileListener {
 
         ConsoleOutputs.out("watch event: ", kind, " context: ", path);
 
-        if (kind == ENTRY_CREATE) {
-            handleCreate(path);
-        } else if (kind == ENTRY_MODIFY) {
+        if (kind == ENTRY_CREATE || kind == ENTRY_MODIFY) {
             handleModify(path);
-        }
-    }
-
-    private void handleCreate(final Path path) {
-        if (Files.isDirectory(path)) {
-            register(path);
         }
     }
 
     private void handleModify(final Path path) {
         final String fileName = path.getFileName().toString();
 
-        if (fileName.equals("toc")) {
+        if (Files.isDirectory(path)) {
+            register(path);
+        } else if (fileName.equals("toc")) {
             fileChangeHandler.onTocChange(path);
         } else {
             fileChangeHandler.onChange(path);
