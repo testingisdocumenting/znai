@@ -1,7 +1,5 @@
-rationale
-    engineers
-    setup
-    first-code-base
+introduction
+    rationale
 features
     code-snippets
     external-code-snippets
@@ -10,11 +8,3 @@ features
     UI-documentation
     math
     proxy
-cook-book
-    merging-time-series
-external-code-bases
-    external-code-to-vats
-    maven-import
-    license-restrictions
-demo-run-book
-    release-notes
