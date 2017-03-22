@@ -6,8 +6,7 @@ import {expandId} from './gvUtils'
 
 class PresentationGraphVizFlow extends Component {
     render() {
-        const {elementsLibrary, diagram, colors, slides, slideIdx} = this.props
-        const currentContent = slides[slideIdx].content
+        const {diagram, colors} = this.props
 
         return <div ref={node => this.node = node}>
             <div className="diagram-area">
