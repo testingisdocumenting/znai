@@ -26,56 +26,6 @@ toc = [
     ]
   },
   {
-    "sectionTitle": "Rationale",
-    "dirName": "rationale",
-    "items": [
-      {
-        "sectionTitle": "Rationale",
-        "pageTitle": "Engineers",
-        "fileName": "engineers",
-        "dirName": "rationale",
-        "pageSectionIdTitles": [
-          {
-            "title": "Focus On Data",
-            "id": "focus-on-data"
-          }
-        ]
-      },
-      {
-        "sectionTitle": "Rationale",
-        "pageTitle": "Setup",
-        "fileName": "setup",
-        "dirName": "rationale",
-        "pageSectionIdTitles": [
-          {
-            "title": "Kerberos",
-            "id": "kerberos"
-          }
-        ]
-      },
-      {
-        "sectionTitle": "Rationale",
-        "pageTitle": "First Code Base",
-        "fileName": "first-code-base",
-        "dirName": "rationale",
-        "pageSectionIdTitles": [
-          {
-            "title": "Simple Java",
-            "id": "simple-java"
-          },
-          {
-            "title": "Web",
-            "id": "web"
-          },
-          {
-            "title": "Python",
-            "id": "python"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "sectionTitle": "Features",
     "dirName": "features",
     "items": [
@@ -177,6 +127,18 @@ toc = [
       },
       {
         "sectionTitle": "Features",
+        "pageTitle": "Math",
+        "fileName": "math",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "LATEX",
+            "id": "latex"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
         "pageTitle": "Proxy",
         "fileName": "proxy",
         "dirName": "features",
@@ -188,100 +150,6 @@ toc = [
           {
             "title": "Log Stash",
             "id": "log-stash"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "sectionTitle": "Cook Book",
-    "dirName": "cook-book",
-    "items": [
-      {
-        "sectionTitle": "Cook Book",
-        "pageTitle": "Merging Time Series",
-        "fileName": "merging-time-series",
-        "dirName": "cook-book",
-        "pageSectionIdTitles": [
-          {
-            "title": "Time Series",
-            "id": "time-series"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "sectionTitle": "External Code Bases",
-    "dirName": "external-code-bases",
-    "items": [
-      {
-        "sectionTitle": "External Code Bases",
-        "pageTitle": "External Code To Vats",
-        "fileName": "external-code-to-vats",
-        "dirName": "external-code-bases",
-        "pageSectionIdTitles": [
-          {
-            "title": "test",
-            "id": "test"
-          }
-        ]
-      },
-      {
-        "sectionTitle": "External Code Bases",
-        "pageTitle": "Maven Import",
-        "fileName": "maven-import",
-        "dirName": "external-code-bases",
-        "pageSectionIdTitles": [
-          {
-            "title": "description",
-            "id": "description"
-          },
-          {
-            "title": "codebase naming",
-            "id": "codebase-naming"
-          },
-          {
-            "title": "Usage Scenario",
-            "id": "usage-scenario"
-          }
-        ]
-      },
-      {
-        "sectionTitle": "External Code Bases",
-        "pageTitle": "License Restrictions",
-        "fileName": "license-restrictions",
-        "dirName": "external-code-bases",
-        "pageSectionIdTitles": [
-          {
-            "title": "Acceptable for Two Sigma",
-            "id": "acceptable-for-two-sigma"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "sectionTitle": "Demo Run Book",
-    "dirName": "demo-run-book",
-    "items": [
-      {
-        "sectionTitle": "Demo Run Book",
-        "pageTitle": "Release Notes",
-        "fileName": "release-notes",
-        "dirName": "demo-run-book",
-        "pageSectionIdTitles": [
-          {
-            "title": "0.2",
-            "id": "0.2"
-          },
-          {
-            "title": "0.1.1",
-            "id": "0.1.1"
-          },
-          {
-            "title": "0.1",
-            "id": "0.1"
           }
         ]
       }

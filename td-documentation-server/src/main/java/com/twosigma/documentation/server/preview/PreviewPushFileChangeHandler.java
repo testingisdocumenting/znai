@@ -4,6 +4,7 @@ import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.documentation.WebSite;
 import com.twosigma.documentation.html.HtmlPageAndPageProps;
 import com.twosigma.documentation.html.PageProps;
+import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
 
 import java.nio.file.Path;
@@ -29,7 +30,13 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     @Override
     public void onTocChange(Path tocPath) {
         ConsoleOutputs.out("toc changed: ", tocPath);
-        execute(() -> previewSocket.sendToc(previewWebSite.updateToc()));
+        execute(() -> {
+            TableOfContents toc = previewWebSite.updateToc();
+            previewSocket.sendToc(toc);
+            previewSocket.sendPages(toc.getTocItems().stream()
+                    .map(previewWebSite::regeneratePage)
+                    .map(HtmlPageAndPageProps::getProps));
+        });
     }
 
     private HtmlPageAndPageProps regenerate(Path markupPath) {

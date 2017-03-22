@@ -165,10 +165,7 @@ public class WebSite {
         parseMarkup(tocItem);
         final Page page = pageByTocItem.get(tocItem);
 
-        HtmlPageAndPageProps htmlPageAndPageProps = generatePage(tocItem, page);
-        deployToc();
-
-        return htmlPageAndPageProps;
+        return generatePage(tocItem, page);
     }
 
     public Set<TocItem> dependentTocItems(Path auxiliaryFile) {
@@ -182,6 +179,7 @@ public class WebSite {
 
     public TableOfContents updateToc() {
         createTopLevelToc();
+        forEachTocItemWithoutPage(this::parseMarkup);
         updateTocWithPageSections();
         deployToc();
         return toc;
@@ -350,12 +348,30 @@ public class WebSite {
         });
     }
 
+    private List<TocItem> forEachTocItemWithoutPage(TocItemConsumer consumer) {
+        List<TocItem> withoutPages = new ArrayList<>();
+
+        toc.getTocItems().forEach(tocItem -> {
+            boolean isPagePresent = pageByTocItem.containsKey(tocItem);
+            if (! isPagePresent) {
+                consumer.consume(tocItem);
+                withoutPages.add(tocItem);
+            }
+        });
+
+        return withoutPages;
+    }
+
     private void reportPhase(String phase) {
         ConsoleOutputs.out(Color.BLUE, phase);
     }
 
     private interface PageConsumer {
         void consume(TocItem tocItem, Page page);
+    }
+
+    private interface TocItemConsumer {
+        void consume(TocItem tocItem);
     }
 
     public static class Configuration {

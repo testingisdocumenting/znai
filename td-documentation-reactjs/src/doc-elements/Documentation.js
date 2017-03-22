@@ -323,11 +323,15 @@ class Documentation extends Component {
     }
 
     updatePagesReference(allPages, newPage) {
-        allPages.filter((page) =>
+        const foundPages = allPages.filter((page) =>
             page.tocItem.fileName === newPage.tocItem.fileName && page.tocItem.dirName === newPage.tocItem.dirName
-        ).forEach((page) => {
-            page.content = newPage.content
-        })
+        )
+
+        if (foundPages.length) {
+            foundPages.forEach((page) => { page.content = newPage.content })
+        } else {
+            allPages.push(newPage)
+        }
     }
 
     onUrlChange(url) {
