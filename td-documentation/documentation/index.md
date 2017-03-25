@@ -1,6 +1,6 @@
 # mdoc 
 
-`mdoc` is the system to generate user facing documentation from markup files (markdown only at the moment). 
+`mdoc` is a system to generate user facing documentation from markup files (markdown only at the moment). 
 Documentation files seat next to your product codebase and are part of your product's SDLC.
 
 `mdoc` provides directives to simplify your day-to-day documentation process as well as to improve maintenance in a long run.
