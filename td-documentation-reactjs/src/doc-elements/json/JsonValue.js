@@ -7,11 +7,10 @@ import './JsonValue.css'
 
 class JsonValue extends Component {
     render() {
-        const {data, highlightedPaths} = this.props
-        const path = this.props.path || "body"
+        const {data, path, highlightedPaths, includeComma} = this.props
 
         const Component = componentTypeForData(data)
-        return <Component data={data} path={path} highlightedPaths={highlightedPaths || {}}/>
+        return <Component data={data} path={path} includeComma={includeComma} highlightedPaths={highlightedPaths}/>
     }
 }
 

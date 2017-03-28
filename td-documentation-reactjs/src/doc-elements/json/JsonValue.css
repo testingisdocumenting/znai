@@ -1,6 +1,22 @@
+.json {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
 .json .delimiter {
     color: #888;
-    display: inline;
+}
+
+.json .string {
+    color: #008000;
+    font-weight: bold;
+}
+
+.json .number {
+    color: #0000ff;
+}
+
+.json .delimiter.quote {
+    color: #bbb;
 }
 
 .json.simple.highlighted {
@@ -10,24 +26,18 @@
     border-radius: 3px;
 }
 
-.json.object>.entry>.key:after {
-    content: ': ';
+.json.simple.highlighted .delimiter {
+    color: white;
 }
 
 .json.object>.entry>.key {
-    color: #009aa6
-}
-
-.json.object .json.object {
-    margin-left: 10px;
-}
-
-.json.object>.entry>.value>.json.array {
-    /*display: table-cell;*/
+    color: #660e7a;
+    font-weight: bold;
 }
 
 .json.object .entry {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .json.array {
@@ -45,27 +55,6 @@
     display: flex;
 }
 
-.json.array > .json.object ~ .delimiter {
+.json.array > .json.object ~ .optional-enter {
     width: 100%;
-}
-
-.json.array > .json.object ~ .delimiter {
-}
-
-.json.array>.json.object:last-child:after {
-    border: none;
-    content: '';
-    display: flex;
-}
-
-.json.array>.json.object:first-child>.entry:first-child>.key:before {
-    content: '[';
-    color: #d0d0d0;
-    font-weight: normal;
-}
-
-.json.array>.json.object:last-child>.entry:last-child>.value:after {
-    content: ']';
-    color: #d0d0d0;
-    font-weight: normal;
 }
