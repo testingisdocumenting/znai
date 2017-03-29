@@ -10,16 +10,96 @@ toc = [
         "dirName": "",
         "pageSectionIdTitles": [
           {
-            "title": "what",
-            "id": "what"
+            "title": "mdoc",
+            "id": "mdoc"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sectionTitle": "Introduction",
+    "dirName": "introduction",
+    "items": [
+      {
+        "sectionTitle": "Introduction",
+        "pageTitle": "Rationale",
+        "fileName": "rationale",
+        "dirName": "introduction",
+        "pageSectionIdTitles": [
+          {
+            "title": "Stale Documentation",
+            "id": "stale-documentation"
           },
           {
-            "title": "why",
-            "id": "why"
+            "title": "Part Of Workflow",
+            "id": "part-of-workflow"
           },
           {
-            "title": "how",
-            "id": "how"
+            "title": "Maintenance",
+            "id": "maintenance"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Introduction",
+        "pageTitle": "Example",
+        "fileName": "example",
+        "dirName": "introduction",
+        "pageSectionIdTitles": [
+          {
+            "title": "Markdown",
+            "id": "markdown"
+          },
+          {
+            "title": "External References",
+            "id": "external-references"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Introduction",
+        "pageTitle": "Getting Started",
+        "fileName": "getting-started",
+        "dirName": "introduction",
+        "pageSectionIdTitles": [
+          {
+            "title": "Command Line Tool",
+            "id": "command-line-tool"
+          },
+          {
+            "title": "Installation",
+            "id": "installation"
+          },
+          {
+            "title": "Scaffolding",
+            "id": "scaffolding"
+          },
+          {
+            "title": "Preview",
+            "id": "preview"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sectionTitle": "Flow",
+    "dirName": "flow",
+    "items": [
+      {
+        "sectionTitle": "Flow",
+        "pageTitle": "Structure",
+        "fileName": "structure",
+        "dirName": "flow",
+        "pageSectionIdTitles": [
+          {
+            "title": "Table Of Contents",
+            "id": "table-of-contents"
+          },
+          {
+            "title": "Meta",
+            "id": "meta"
           }
         ]
       }
@@ -98,6 +178,22 @@ toc = [
           {
             "title": "Markdown Per Tab",
             "id": "markdown-per-tab"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
+        "pageTitle": "Json",
+        "fileName": "json",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "Paths",
+            "id": "paths"
+          },
+          {
+            "title": "Test Results",
+            "id": "test-results"
           }
         ]
       },

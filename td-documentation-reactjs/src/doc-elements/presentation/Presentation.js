@@ -2,11 +2,13 @@ import React, {Component} from 'react'
 
 import './Presentation.css'
 
+const defaultScaleRatio = 2
+
 class Presentation extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {currentSlideIdx: 0, scaleRatio: 2}
+        this.state = {currentSlideIdx: 0, scaleRatio: defaultScaleRatio}
 
         this.keyDownHandler = this.keyDownHandler.bind(this)
         this.onClose = this.onClose.bind(this)
@@ -19,6 +21,8 @@ class Presentation extends Component {
         const slideAreaStyle = {transform: 'scale(' + scaleRatio + ')'}
 
         const component = presentationRegistry.componentToRender(currentSlideIdx, this.calcRatio)
+        // const showNextButton = currentSlideIdx >= presentationRegistry.numberOfSlides - 1 TODO
+
         return (<div className="presentation">
             <div className="presentation-close-icon glyphicon glyphicon-remove" onClick={this.onClose}/>
             <div className="slide-number">
@@ -38,6 +42,14 @@ class Presentation extends Component {
         document.removeEventListener('keydown', this.keyDownHandler)
     }
 
+    componentWillReceiveProps(props) {
+        const {presentationRegistry} = this.props
+        if (this.scrollToLastWithinPage && presentationRegistry !== props.presentationRegistry) {
+            this.scrollToLastWithinPage = false
+            this.setState({currentSlideIdx: props.presentationRegistry.numberOfSlides - 1, scaleRatio: defaultScaleRatio})
+        }
+    }
+
     calcRatio(width, height) {
         console.log("calcRatio", width, height)
 
@@ -49,7 +61,7 @@ class Presentation extends Component {
     }
 
     keyDownHandler(e) {
-        const {presentationRegistry} = this.props
+        const {presentationRegistry, onNextPage, onPrevPage} = this.props
         const {scaleRatio} = this.state
         let {currentSlideIdx} = this.state
 
@@ -63,14 +75,14 @@ class Presentation extends Component {
         }
 
         if (currentSlideIdx < 0) {
-            currentSlideIdx = 0
+            this.scrollToLastWithinPage = true
+            onPrevPage()
+        } else if (currentSlideIdx >= presentationRegistry.numberOfSlides) {
+            this.setState({currentSlideIdx: 0, scaleRatio: defaultScaleRatio})
+            onNextPage()
+        } else {
+            this.setState({currentSlideIdx, scaleRatio})
         }
-
-        if (currentSlideIdx >= presentationRegistry.numberOfSlides) {
-            currentSlideIdx = presentationRegistry.numberOfSlides - 1
-        }
-
-        this.setState({currentSlideIdx, scaleRatio})
     }
 
     onClose() {

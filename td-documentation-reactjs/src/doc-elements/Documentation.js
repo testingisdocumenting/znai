@@ -62,7 +62,15 @@ class Documentation extends Component {
 
     render() {
         const {docMeta} = this.props
-        const {toc, page, selectedTocItem, tocCollapsed, tocSelected, pageGenError, isPresentation} = this.state
+        const {
+            toc,
+            page,
+            selectedTocItem,
+            tocCollapsed,
+            tocSelected,
+            pageGenError,
+            isPresentation,
+            presentationRegistry} = this.state
 
         const searchPopup = this.state.searchActive ? <SearchPopup elementsLibrary={elementsLibrary}
                                                                    tocCollapsed={tocCollapsed}
@@ -80,7 +88,10 @@ class Documentation extends Component {
 
         const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
 
-        return isPresentation ? <Presentation presentationRegistry={this.presentationRegistry} onClose={this.onPresentationClose}/> : (
+        return isPresentation ? <Presentation presentationRegistry={presentationRegistry}
+                                              onClose={this.onPresentationClose}
+                                              onNextPage={this.onNextPage}
+                                              onPrevPage={this.onPrevPage}/> : (
             <div className="documentation">
                 <div className="side-panel" onClick={this.onTocSelect}>
                     <TocPanel toc={toc} collapsed={tocCollapsed} selected={tocSelected}
@@ -151,7 +162,9 @@ class Documentation extends Component {
     onPageLoad() {
         this.extractPageSectionNodes()
         this.updateCurrentPageSection()
-        this.presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, this.state.page)
+        console.log("creating presentation registry")
+        const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, this.state.page)
+        this.setState({presentationRegistry})
     }
 
     onSearchClick() {
@@ -215,13 +228,13 @@ class Documentation extends Component {
         this.documentationNavigation.navigateToPage({dirName, fileName})
     }
 
-    static doRenderNavigationButton(tocItem) {
+    static renderNavigationButton(tocItem) {
         // we don't render next/prev buttons that will point to items without dir name (e.g. index page)
         return tocItem && tocItem.dirName;
     }
 
     renderNextPageButton() {
-        return (Documentation.doRenderNavigationButton(this.nextPageToc) ? (
+        return (Documentation.renderNavigationButton(this.nextPageToc) ? (
                 <div className="page-navigation-button-and-text" onClick={this.onNextPage}>
                         <span className="next-prev-page-title">{this.nextPageToc.pageTitle} </span>
                         <span className="glyphicon glyphicon-chevron-right"/>
@@ -229,7 +242,7 @@ class Documentation extends Component {
     }
 
     renderPreviousPageButton() {
-        return (Documentation.doRenderNavigationButton(this.prevPageToc) ? (
+        return (Documentation.renderNavigationButton(this.prevPageToc) ? (
                 <div className="page-navigation-button-and-text" onClick={this.onPrevPage}>
                     <span className="glyphicon glyphicon-chevron-left"/>
                     <span className="next-prev-page-title">{this.prevPageToc.pageTitle} </span>
@@ -356,7 +369,7 @@ class Documentation extends Component {
             }
 
             return true
-        })
+        }, (error) => console.error(error))
     }
 
     getAllPagesPromise() {
@@ -369,7 +382,13 @@ class Documentation extends Component {
     }
 
     updateCurrentPageSection() {
-        const pageSections = this.state.page.tocItem.pageSectionIdTitles
+        const {isPresentation, page} = this.state
+
+        if (isPresentation) {
+            return
+        }
+
+        const pageSections = page.tocItem.pageSectionIdTitles
         let sectionTitles = this.pageSectionNodes.map((n, idx) => { return {idTitle: pageSections[idx], rect: n.getBoundingClientRect()}})
         const height = window.innerHeight
 
