@@ -1,9 +1,8 @@
 package com.twosigma.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +10,8 @@ import java.util.Map;
  * @author mykola
  */
 public class JsonUtils {
-    private static final Gson gson = new Gson();
-    private static final Gson gsonPretty = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson gson = new GsonBuilder().registerTypeAdapter(MapOrList.class, new MapOrListDeserializer()).create();
+    private static final Gson gsonPretty = new GsonBuilder().registerTypeAdapter(MapOrList.class, new MapOrListDeserializer()).setPrettyPrinting().create();
 
     private JsonUtils() {
     }
@@ -35,7 +34,34 @@ public class JsonUtils {
         return gson.fromJson(data, List.class);
     }
 
+    public static Object deserialize(String data) {
+        final MapOrList mapOrList = gson.fromJson(data, MapOrList.class);
+
+        return mapOrList.list != null ?
+                mapOrList.list :
+                mapOrList.map;
+    }
+
     public static String serializePrettyPrint(Object data) {
         return gsonPretty.toJson(data);
+    }
+
+    private static class MapOrList {
+        private Map map;
+        private List list;
+    }
+
+    private static class MapOrListDeserializer implements JsonDeserializer<MapOrList> {
+        @Override
+        public MapOrList deserialize(final JsonElement jsonElement, final Type type, final JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            final MapOrList result = new MapOrList();
+            if (jsonElement.isJsonArray()) {
+                result.list = jsonDeserializationContext.deserialize(jsonElement, List.class);
+            } else {
+                result.map = jsonDeserializationContext.deserialize(jsonElement, Map.class);
+            }
+
+            return result;
+        }
     }
 }

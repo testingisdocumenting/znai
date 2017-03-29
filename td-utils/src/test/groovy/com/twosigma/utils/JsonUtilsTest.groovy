@@ -28,10 +28,31 @@ class JsonUtilsTest {
     void "should deserialize json as map"() {
         def json = """{
     "hello": "world",
-    "another": {"nested": "value"}}
-"""
+    "another": {"nested": "value"}} """
 
         def map = JsonUtils.deserializeAsMap(json)
         assert map == [hello: "world", another: [nested: "value"]]
+    }
+
+    @Test
+    void "should deserialize json as list"() {
+        def json = """["hello", "world"] """
+
+        def list = JsonUtils.deserializeAsList(json)
+        assert list == ["hello", "world"]
+    }
+
+    @Test
+    void "should deserialize json as object"() {
+        def listJson = """["hello", "world"] """
+
+        def list = JsonUtils.deserialize(listJson)
+        assert list instanceof List
+
+        def mapJson = """{
+    "hello": "world",
+    "another": {"nested": "value"}} """
+        def map = JsonUtils.deserialize(mapJson)
+        assert map instanceof Map
     }
 }
