@@ -11,12 +11,22 @@ import 'prismjs/components/prism-json'
 export {parseCode}
 
 function parseCode(lang, code) {
+    const prismLang = Prism.languages[adjustLang(lang)]
+
+    const tokens = Prism.tokenize(code, prismLang ? prismLang : Prism.languages.clike)
+    return tokens.map(normalizeToken)
+}
+
+function adjustLang(lang) {
     if (lang === 'csv') {
-        lang = 'clike'
+        return 'clike'
     }
 
-    const tokens = Prism.tokenize(code, Prism.languages[lang])
-    return tokens.map(normalizeToken)
+    if (lang === 'js') {
+        return 'javascript'
+    }
+
+    return lang
 }
 
 function normalizeToken(token) {
