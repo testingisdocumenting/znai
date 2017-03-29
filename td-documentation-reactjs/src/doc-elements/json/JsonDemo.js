@@ -17,15 +17,15 @@ class JsonDemo extends Component {
                 <Json data={simpleData}/>
                 <br/>
                 <p><i>array of simple values</i></p>
-                <Json data={arraySimpleData} highlightedPaths={{"body[1]": true}}/>
+                <Json data={arraySimpleData} highlightedPaths={["body[1]"]}/>
                 <br/>
                 <p><i>array of simple number values</i></p>
-                <Json data={numArraySimpleData} highlightedPaths={{"body[2]": true}}/>
+                <Json data={numArraySimpleData} highlightedPaths={["body[2]"]}/>
                 <br/>
                 <p><i>record</i></p>
                 <Json data={objectSimpleData}/>
                 <p><i>nested record</i></p>
-                <Json data={objectNestedData} highlightedPaths={{"body.key2.key22": true}}/>
+                <Json data={objectNestedData} highlightedPaths={["body.key2.key22", "body.key3.key31"]}/>
                 <br/>
                 <p><i>array of records within object</i></p>
                 <Json data={arrayOfObjectWithinObjectData}/>
