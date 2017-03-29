@@ -13,3 +13,17 @@
 .token.code {
     color: #999;
 }
+
+.token.property {
+    color: #660e7a;
+    font-weight: bold;
+}
+
+.token.number {
+    color: #0000ff;
+}
+
+.token.string {
+    color: #008000;
+    font-weight: bold;
+}
