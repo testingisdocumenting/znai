@@ -29,14 +29,16 @@
 }
 
 .json.simple.highlighted {
-    color: white;
-    background: #3080b9;
-    padding: 3px;
-    border-radius: 3px;
+    padding: 2px;
+    margin: 3px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    color: #1990b8;
 }
 
 .json.simple.highlighted .delimiter {
-    color: white;
+    color: #ccc;
 }
 
 .json.object>.entry>.key {
