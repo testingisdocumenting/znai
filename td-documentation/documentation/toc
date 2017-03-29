@@ -9,6 +9,7 @@ features
     external-code-snippets
     tables
     tabs
+    json
     UI-documentation
     math
     proxy

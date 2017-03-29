@@ -65,247 +65,96 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Collecting Data",
-                    "id": "collecting-data",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "slides": [
-                                {
-                                    "ids": [
-                                        "nginx-\u003eaccess_log"
-                                    ],
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "NGINX stores every access to access.log. It kerberizes the request.",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "ids": [
-                                        "access_log-\u003elog_stash_log"
-                                    ],
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Log Stash runs on the same machine and consumes access.log lines.",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "SoftLineBreak"
-                                                },
-                                                {
-                                                    "text": "As long as lines contain required information it gets processed.",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "ids": [
-                                        "log_stash_log-\u003ekafka"
-                                    ],
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Log stash won\u0027t write data directly to Elastic. Instead we will use Kafka as a buffer in front.",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "ids": [
-                                        "kafka-\u003elog_stash_elastic"
-                                    ],
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Another instance of Log Stash consumes records from Kafka queue and writes them to Elastic.",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "SoftLineBreak"
-                                                },
-                                                {
-                                                    "text": "Need follow-up with ELK team to see if buffer is still required.",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "ids": [
-                                        "log_stash_elastic-\u003eelastic"
-                                    ],
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Finally data gets written to Elastic by LogStash. Access.log timestamp will be the primary timestamp of a record.",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "ids": [
-                                        "client-\u003eweb_dashboard"
-                                    ],
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "We have built a web app to display news consumption analytics. And URL is be accessible by everyone.",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "ids": [
-                                        "web_dashboard-\u003eelastic"
-                                    ],
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Most of the data we take from Elastic. Data grows very fast and we need to come up with a scalable approach.",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "ids": [
-                                        "web_dashboard-\u003ecmdb"
-                                    ],
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "CMDB departments, active users and potential other information we take from CMDB. We can\u0027t replicate this queries by simply using",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "SoftLineBreak"
-                                                },
-                                                {
-                                                    "text": "out of the box Kibana interface",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ],
-                            "diagram": {
-                                "shapeSvgByStyleId": {
-                                    "database": "\u003cg transform\u003d\"scale(0.07)\"\u003e\u003cg transform\u003d\"translate(-350, -500)\"\u003e\n    \u003cpath stroke-miterlimit\u003d\"10\" d\u003d\"M384,960C171.969,960,0,902.625,0,832c0-38.625,0-80.875,0-128\n\tc0-11.125,5.562-21.688,13.562-32C56.375,727.125,205.25,768,384,768s327.625-40.875,370.438-96c8,10.312,13.562,20.875,13.562,32\n\tc0,37.062,0,76.375,0,128C768,902.625,596,960,384,960z M384,704C171.969,704,0,646.625,0,576c0-38.656,0-80.845,0-128\n\tc0-6.781,2.562-13.375,6-19.906l0,0C7.938,424,10.5,419.969,13.562,416C56.375,471.094,205.25,512,384,512\n\ts327.625-40.906,370.438-96c3.062,3.969,5.625,8,7.562,12.094l0,0c3.438,6.531,6,13.125,6,19.906c0,37.062,0,76.344,0,128\n\tC768,646.625,596,704,384,704z M384,448C171.969,448,0,390.656,0,320c0-20.22,0-41.595,0-64c0-20.345,0-41.47,0-64\n\tC0,121.344,171.969,64,384,64c212,0,384,57.344,384,128c0,19.969,0,41.155,0,64c0,19.594,0,40.25,0,64C768,390.656,596,448,384,448z\n\t M384,128c-141.375,0-256,28.594-256,64c0,35.405,114.625,64,256,64s256-28.595,256-64C640,156.594,525.375,128,384,128z\"/\u003e\n\u003c/g\u003e\u003c/g\u003e",
-                                    "world": "\u003cg transform\u003d\"scale(0.38)\"\u003e\n    \u003cg transform\u003d\"translate(-62 -62)\"\u003e\n        \u003cpath d\u003d\"M62,0c-5,0-9.8,0.6-14.4,1.7C32.5,5.3,19.5,14.4,11,26.8C4.1,36.8,0,48.9,0,62c0,34.2,27.8,62,62,62s62-27.8,62-62   S96.2,0,62,0z M87.6,103.5c-0.5,4-6.199,6-7.399,1.7c-2.101-7.9-7.7-5.601-7.5-13c0.2-5.601-11.3-1.2-14.3-5.7   c-3-4.4,5.3-8.7,0.8-14.2S45.7,74.4,34.9,70.7c-4.8-1.7-9.4-5.601-12.6-9.5C18,56,16.5,49.8,14.7,43.4c-0.2-0.6-0.3-1.3-0.5-1.9   C19.7,28.8,30,18.7,42.9,13.6c2.4,3.3,10.1,1.7,15,2.2c2.5,0.2,4.3,1,4.4,3.2c0,0.4-0.1,1-0.3,1.6c-1.5,4.1-7.1,11.3-3.6,14   c2.6,2,4.4-1.8,5.9,3.9c0.7,2.6,1,8-1.899,9.9C59.6,50.2,52.6,43,44,47c-4.7,2.3-5.4,13.1,1.1,13.7c3.8,0.3,6.8-7.2,10.4-3.6   c2.9,2.9,5.4,10.8,12.2,11.1c6,0.3,17.5-3.4,25.1,7.1c4.5,6.4-3.8,11.5-5.3,17.601C86.2,97.9,88,100.5,87.6,103.5z\"/\u003e\n    \u003c/g\u003e\n\u003c/g\u003e",
-                                    "documents": "\u003cg transform\u003d\"scale(0.7)\"\u003e\n    \u003cg transform\u003d\"translate(-50, -50)\"\u003e\n        \u003cpolygon points\u003d\"13 28.9 50 7.81 87 28.9 87 71.1 50 92.19 13 71.1 13 28.9\"/\u003e\n        \u003cg\u003e\n            \u003cg\u003e\n                \u003crect x\u003d\"38.34\" y\u003d\"46.09\" width\u003d\"15.08\" height\u003d\"3.89\" fill\u003d\"#fff\"/\u003e\n                \u003crect x\u003d\"38.34\" y\u003d\"53.88\" width\u003d\"15.08\" height\u003d\"3.89\" fill\u003d\"#fff\"/\u003e\n                \u003crect x\u003d\"38.34\" y\u003d\"61.67\" width\u003d\"15.08\" height\u003d\"3.89\" fill\u003d\"#fff\"/\u003e\n            \u003c/g\u003e\n            \u003cg\u003e\n                \u003cpolygon points\u003d\"57.31 40.65 57.31 63.22 61.2 63.22 61.2 36.76 42.23 36.76 42.23 40.65 57.31 40.65\" fill\u003d\"#fff\"/\u003e\n                \u003cpath d\u003d\"M69,29H38.34v7.79H30.55V74.9H61.2V67.11H69ZM57.31,71H34.44V40.65H57.31Zm7.79-7.79H61.2V36.76h-19V32.86H65.1Z\" fill\u003d\"#fff\"/\u003e\n            \u003c/g\u003e\n        \u003c/g\u003e\n    \u003c/g\u003e\n\u003c/g\u003e",
-                                    "client": "\u003cg transform\u003d\"scale(0.9)\"\u003e\n    \u003cg transform\u003d\"translate(-37, -30)\"\u003e\n        \u003cpath d\u003d\"M58.944,49.454H11.053c-2.379,0-4.313,1.932-4.313,4.316v3.479c0,2.387,1.934,4.319,4.313,4.319h47.892\n\t\tc2.386,0,4.315-1.933,4.315-4.319v-3.479C63.26,51.386,61.33,49.454,58.944,49.454z M57.035,57.238H39.129\n\t\tc-0.953,0-1.728-0.772-1.728-1.729c0-0.952,0.774-1.726,1.728-1.726h17.906c0.954,0,1.728,0.773,1.728,1.726\n\t\tC58.763,56.466,57.989,57.238,57.035,57.238z\"/\u003e\n        \u003cpath d\u003d\"M13.313,45.937h43.317c3.603,0,6.535-2.933,6.535-6.537V14.974c0-3.608-2.933-6.542-6.535-6.542H13.313\n\t\tc-3.604,0-6.534,2.934-6.534,6.542v24.426C6.779,43.004,9.71,45.937,13.313,45.937z M11.35,14.974c0-1.087,0.881-1.971,1.964-1.971\n\t\th43.317c1.083,0,1.964,0.884,1.964,1.971v24.426c0,1.084-0.881,1.967-1.964,1.967H13.313c-1.083,0-1.964-0.883-1.964-1.967V14.974z\n\t\t\"/\u003e\n    \u003c/g\u003e\n\u003c/g\u003e"
-                                },
-                                "isInvertedTextColorByStyleId": {},
-                                "svg": "\u003c?xml version\u003d\"1.0\" encoding\u003d\"UTF-8\" standalone\u003d\"no\"?\u003e\n\u003c!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\"\u003e\n\u003c!-- Generated by graphviz version 2.38.0 (20140413.2041)\n --\u003e\n\u003c!-- Title: Simple Pages: 1 --\u003e\n\u003csvg width\u003d\"224pt\" height\u003d\"535pt\"\n viewBox\u003d\"0.00 0.00 224.00 535.00\" xmlns\u003d\"http://www.w3.org/2000/svg\" xmlns:xlink\u003d\"http://www.w3.org/1999/xlink\"\u003e\n\u003cg id\u003d\"graph0\" class\u003d\"graph\" transform\u003d\"scale(1 1) rotate(0) translate(4 531)\"\u003e\n\u003ctitle\u003eSimple\u003c/title\u003e\n\u003cpolygon fill\u003d\"white\" stroke\u003d\"none\" points\u003d\"-4,4 -4,-531 220,-531 220,4 -4,4\"/\u003e\n\u003c!-- nginx --\u003e\n\u003cg id\u003d\"node1\" class\u003d\"node\"\u003e\u003ctitle\u003enginx\u003c/title\u003e\n\u003cpolygon fill\u003d\"none\" stroke\u003d\"black\" points\u003d\"5.44824,-490.5 5.44824,-526.5 66.5518,-526.5 66.5518,-490.5 5.44824,-490.5\"/\u003e\n\u003ctext text-anchor\u003d\"middle\" x\u003d\"36\" y\u003d\"-504.3\" font-family\u003d\"Times,serif\" font-size\u003d\"14.00\"\u003eNGINX\u003c/text\u003e\n\u003c/g\u003e\n\u003c!-- access_log --\u003e\n\u003cg id\u003d\"node4\" class\u003d\"node\"\u003e\u003ctitle\u003eaccess_log\u003c/title\u003e\n\u003cpolygon fill\u003d\"none\" stroke\u003d\"black\" points\u003d\"70,-454 2,-454 2,-386 70,-386 70,-454\"/\u003e\n\u003c/g\u003e\n\u003c!-- nginx\u0026#45;\u0026gt;access_log --\u003e\n\u003cg id\u003d\"edge1\" class\u003d\"edge\"\u003e\u003ctitle\u003enginx\u0026#45;\u0026gt;access_log\u003c/title\u003e\n\u003cpath fill\u003d\"none\" stroke\u003d\"black\" d\u003d\"M36,-490.41C36,-482.817 36,-473.501 36,-464.189\"/\u003e\n\u003cpolygon fill\u003d\"black\" stroke\u003d\"black\" points\u003d\"39.5001,-464.167 36,-454.167 32.5001,-464.167 39.5001,-464.167\"/\u003e\n\u003c/g\u003e\n\u003c!-- log_stash_log --\u003e\n\u003cg id\u003d\"node2\" class\u003d\"node\"\u003e\u003ctitle\u003elog_stash_log\u003c/title\u003e\n\u003cpolygon fill\u003d\"none\" stroke\u003d\"black\" points\u003d\"9,-313.5 9,-349.5 63,-349.5 63,-313.5 9,-313.5\"/\u003e\n\u003ctext text-anchor\u003d\"middle\" x\u003d\"35.8638\" y\u003d\"-327.3\" font-family\u003d\"Times,serif\" font-size\u003d\"14.00\"\u003eLS file\u003c/text\u003e\n\u003c/g\u003e\n\u003c!-- kafka --\u003e\n\u003cg id\u003d\"node9\" class\u003d\"node\"\u003e\u003ctitle\u003ekafka\u003c/title\u003e\n\u003cpolygon fill\u003d\"none\" stroke\u003d\"black\" points\u003d\"9,-225 9,-261 63,-261 63,-225 9,-225\"/\u003e\n\u003ctext text-anchor\u003d\"middle\" x\u003d\"35.5449\" y\u003d\"-238.8\" font-family\u003d\"Times,serif\" font-size\u003d\"14.00\"\u003ekafka\u003c/text\u003e\n\u003c/g\u003e\n\u003c!-- log_stash_log\u0026#45;\u0026gt;kafka --\u003e\n\u003cg id\u003d\"edge3\" class\u003d\"edge\"\u003e\u003ctitle\u003elog_stash_log\u0026#45;\u0026gt;kafka\u003c/title\u003e\n\u003cpath fill\u003d\"none\" stroke\u003d\"black\" d\u003d\"M36,-313.41C36,-301.445 36,-285.199 36,-271.433\"/\u003e\n\u003cpolygon fill\u003d\"black\" stroke\u003d\"black\" points\u003d\"39.5001,-271.054 36,-261.054 32.5001,-271.054 39.5001,-271.054\"/\u003e\n\u003c/g\u003e\n\u003c!-- log_stash_elastic --\u003e\n\u003cg id\u003d\"node3\" class\u003d\"node\"\u003e\u003ctitle\u003elog_stash_elastic\u003c/title\u003e\n\u003cpolygon fill\u003d\"none\" stroke\u003d\"black\" points\u003d\"2.53613,-126 2.53613,-162 69.4639,-162 69.4639,-126 2.53613,-126\"/\u003e\n\u003ctext text-anchor\u003d\"middle\" x\u003d\"36\" y\u003d\"-139.8\" font-family\u003d\"Times,serif\" font-size\u003d\"14.00\"\u003eLS kafka\u003c/text\u003e\n\u003c/g\u003e\n\u003c!-- elastic --\u003e\n\u003cg id\u003d\"node5\" class\u003d\"node\"\u003e\u003ctitle\u003eelastic\u003c/title\u003e\n\u003cpolygon fill\u003d\"none\" stroke\u003d\"black\" points\u003d\"72,-79 0,-79 0,-0 72,-0 72,-79\"/\u003e\n\u003c/g\u003e\n\u003c!-- log_stash_elastic\u0026#45;\u0026gt;elastic --\u003e\n\u003cg id\u003d\"edge5\" class\u003d\"edge\"\u003e\u003ctitle\u003elog_stash_elastic\u0026#45;\u0026gt;elastic\u003c/title\u003e\n\u003cpath fill\u003d\"none\" stroke\u003d\"black\" d\u003d\"M36,-125.612C36,-115.607 36,-102.485 36,-89.5506\"/\u003e\n\u003cpolygon fill\u003d\"black\" stroke\u003d\"black\" points\u003d\"39.5001,-89.2805 36,-79.2805 32.5001,-89.2806 39.5001,-89.2805\"/\u003e\n\u003c/g\u003e\n\u003c!-- access_log\u0026#45;\u0026gt;log_stash_log --\u003e\n\u003cg id\u003d\"edge2\" class\u003d\"edge\"\u003e\u003ctitle\u003eaccess_log\u0026#45;\u0026gt;log_stash_log\u003c/title\u003e\n\u003cpath fill\u003d\"none\" stroke\u003d\"black\" d\u003d\"M36,-385.804C36,-377.191 36,-368.015 36,-359.747\"/\u003e\n\u003cpolygon fill\u003d\"black\" stroke\u003d\"black\" points\u003d\"39.5001,-359.525 36,-349.525 32.5001,-359.525 39.5001,-359.525\"/\u003e\n\u003c/g\u003e\n\u003c!-- cmdb --\u003e\n\u003cg id\u003d\"node6\" class\u003d\"node\"\u003e\u003ctitle\u003ecmdb\u003c/title\u003e\n\u003cpolygon fill\u003d\"none\" stroke\u003d\"black\" points\u003d\"216,-79 144,-79 144,-0 216,-0 216,-79\"/\u003e\n\u003c/g\u003e\n\u003c!-- web_dashboard --\u003e\n\u003cg id\u003d\"node7\" class\u003d\"node\"\u003e\u003ctitle\u003eweb_dashboard\u003c/title\u003e\n\u003cpolygon fill\u003d\"none\" stroke\u003d\"black\" points\u003d\"204,-173 146,-173 146,-115 204,-115 204,-173\"/\u003e\n\u003c/g\u003e\n\u003c!-- web_dashboard\u0026#45;\u0026gt;elastic --\u003e\n\u003cg id\u003d\"edge7\" class\u003d\"edge\"\u003e\u003ctitle\u003eweb_dashboard\u0026#45;\u0026gt;elastic\u003c/title\u003e\n\u003cpath fill\u003d\"none\" stroke\u003d\"black\" d\u003d\"M145.861,-121.513C126.886,-107.52 101.768,-88.9978 80.3389,-73.196\"/\u003e\n\u003cpolygon fill\u003d\"black\" stroke\u003d\"black\" points\u003d\"82.149,-70.182 72.0234,-67.064 77.9945,-75.8159 82.149,-70.182\"/\u003e\n\u003c/g\u003e\n\u003c!-- web_dashboard\u0026#45;\u0026gt;cmdb --\u003e\n\u003cg id\u003d\"edge8\" class\u003d\"edge\"\u003e\u003ctitle\u003eweb_dashboard\u0026#45;\u0026gt;cmdb\u003c/title\u003e\n\u003cpath fill\u003d\"none\" stroke\u003d\"black\" d\u003d\"M176.366,-114.991C176.753,-107.067 177.185,-98.2025 177.613,-89.4287\"/\u003e\n\u003cpolygon fill\u003d\"black\" stroke\u003d\"black\" points\u003d\"181.119,-89.3913 178.111,-79.2326 174.127,-89.0502 181.119,-89.3913\"/\u003e\n\u003c/g\u003e\n\u003c!-- client --\u003e\n\u003cg id\u003d\"node8\" class\u003d\"node\"\u003e\u003ctitle\u003eclient\u003c/title\u003e\n\u003cpolygon fill\u003d\"none\" stroke\u003d\"black\" points\u003d\"209,-277 141,-277 141,-209 209,-209 209,-277\"/\u003e\n\u003c/g\u003e\n\u003c!-- client\u0026#45;\u0026gt;web_dashboard --\u003e\n\u003cg id\u003d\"edge6\" class\u003d\"edge\"\u003e\u003ctitle\u003eclient\u0026#45;\u0026gt;web_dashboard\u003c/title\u003e\n\u003cpath fill\u003d\"none\" stroke\u003d\"black\" d\u003d\"M175,-208.889C175,-200.617 175,-191.679 175,-183.184\"/\u003e\n\u003cpolygon fill\u003d\"black\" stroke\u003d\"black\" points\u003d\"178.5,-183.115 175,-173.115 171.5,-183.115 178.5,-183.115\"/\u003e\n\u003c/g\u003e\n\u003c!-- kafka\u0026#45;\u0026gt;log_stash_elastic --\u003e\n\u003cg id\u003d\"edge4\" class\u003d\"edge\"\u003e\u003ctitle\u003ekafka\u0026#45;\u0026gt;log_stash_elastic\u003c/title\u003e\n\u003cpath fill\u003d\"none\" stroke\u003d\"black\" d\u003d\"M36,-224.658C36,-210.175 36,-189.263 36,-172.499\"/\u003e\n\u003cpolygon fill\u003d\"black\" stroke\u003d\"black\" points\u003d\"39.5001,-172.191 36,-162.192 32.5001,-172.192 39.5001,-172.191\"/\u003e\n\u003c/g\u003e\n\u003c/g\u003e\n\u003c/svg\u003e\n",
-                                "stylesByNodeId": {
-                                    "nginx": [
-                                        "b"
-                                    ],
-                                    "log_stash_log": [
-                                        "b"
-                                    ],
-                                    "log_stash_elastic": [
-                                        "b"
-                                    ],
-                                    "access_log": [
-                                        "documents",
-                                        "b"
-                                    ],
-                                    "elastic": [
-                                        "database",
-                                        "a"
-                                    ],
-                                    "cmdb": [
-                                        "database",
-                                        "a"
-                                    ],
-                                    "web_dashboard": [
-                                        "world",
-                                        "a"
-                                    ],
-                                    "client": [
-                                        "client",
-                                        "a"
-                                    ]
-                                },
-                                "id": "nginx-to-elastic"
-                            },
-                            "colors": {
-                                "a": {
-                                    "line": "#123752",
-                                    "fill": "#708EA4",
-                                    "text": "#eeeeee",
-                                    "textInverse": "#123752"
-                                },
-                                "b": {
-                                    "line": "#AA8E39",
-                                    "fill": "#FFEAAA",
-                                    "text": "#806515",
-                                    "textInverse": "#AA8E39"
-                                },
-                                "c": {
-                                    "line": "#306E12",
-                                    "fill": "#519331",
-                                    "text": "#ABDD93",
-                                    "textInverse": "#306E12"
-                                }
-                            },
-                            "type": "GraphVizFlow"
-                        }
-                    ]
-                },
-                {
-                    "title": "Log Stash",
-                    "id": "log-stash",
+                    "title": "Paths",
+                    "id": "paths",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "We use logstash to process NGINX access logs.",
+                                    "text": "Use ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "include-json",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " plugin to bring attention to a certain please in a json file.",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
+                            "lang": "",
+                            "maxLineLength": 69,
+                            "tokens": [
+                                {
+                                    "type": "text",
+                                    "data": ":include-json: sample.json {paths: \"body.key2.key22,body.key3.key31\"}\n"
+                                }
+                            ],
+                            "lineNumber": "",
+                            "type": "Snippet"
+                        },
+                        {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "test test",
+                                    "text": "Comma separated paths specified inside ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "paths",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " will be highlighted.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "data": {
+                                "key1": "value1",
+                                "key2": {
+                                    "key21": "value21",
+                                    "key22": "value22",
+                                    "key23": {
+                                        "key231": "value231"
+                                    }
+                                },
+                                "key3": {
+                                    "key31": "value31",
+                                    "key32": "value32"
+                                }
+                            },
+                            "paths": [
+                                "body.key2.key22",
+                                "body.key3.key31"
+                            ],
+                            "type": "Json"
+                        }
+                    ]
+                },
+                {
+                    "title": "Test Results",
+                    "id": "test-results",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Consider leveraging testing frameworks to extract json samples from you end points.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Information about what assertions were made can be used to highlight points of interest.",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -315,17 +164,17 @@ const TestData = {
             ],
             "tocItem": {
                 "sectionTitle": "Features",
-                "pageTitle": "Proxy",
-                "fileName": "proxy",
+                "pageTitle": "Json",
+                "fileName": "json",
                 "dirName": "features",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Collecting Data",
-                        "id": "collecting-data"
+                        "title": "Paths",
+                        "id": "paths"
                     },
                     {
-                        "title": "Log Stash",
-                        "id": "log-stash"
+                        "title": "Test Results",
+                        "id": "test-results"
                     }
                 ]
             }

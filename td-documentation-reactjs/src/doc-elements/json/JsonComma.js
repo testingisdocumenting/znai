@@ -1,6 +1,6 @@
 import React from 'react'
 
-const JsonComma = ({}) => {
+const JsonComma = () => {
     return <span className="delimiter comma">,</span>
 }
 

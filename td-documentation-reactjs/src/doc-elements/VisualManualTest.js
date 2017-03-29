@@ -1,7 +1,7 @@
 import React from 'react'
 
 // import Demo from './presentation/PresentationDemo'
-// import Demo from './DocumentationDemo'
+import Demo from './DocumentationDemo'
 
 // import Demo from './images/EmbeddedAnnotatedImageDemo'
 // import Demo from './images/AnnotatedImageEditorDemo'
@@ -10,7 +10,7 @@ import React from 'react'
 // import Demo from './table/TableDemo'
 // import Demo from './code-snippets/ParsingDemo'
 
-import Demo from './json/JsonDemo'
+// import Demo from './json/JsonDemo'
 
 const VisualManualTest = () => (
     <Demo/>

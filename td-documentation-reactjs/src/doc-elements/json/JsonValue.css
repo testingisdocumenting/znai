@@ -1,5 +1,14 @@
 .json {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 14px;
+}
+
+.json.start {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 .json .delimiter {

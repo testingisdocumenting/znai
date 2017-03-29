@@ -25,45 +25,12 @@ const JsonObject = ({data, path, highlightedPaths, includeComma}) => {
     objectValues.unshift(<span key="__start" className="delimiter open-curly">&#123;</span>)
     objectValues.push(<span key="__end" className="delimiter close-curly">&#125;</span>)
     if (includeComma) {
-        objectValues.push(<JsonComma/>)
+        objectValues.push(<JsonComma key="comma"/>)
     }
 
     return <div className="json object">
         {objectValues}
     </div>
-}
-
-const t = {
-    "key1"
-        :
-        "value1",
-    "key2"
-        :
-        {
-            "key21"
-                :
-                "value21",
-            "key22"
-                :
-                "value22",
-            "key23"
-                :
-                {
-                    "key231"
-                        :
-                        "value231"
-                }
-        },
-    "key3"
-        :
-        {
-            "key31"
-                :
-                "value31",
-            "key32"
-                :
-                "value32"
-        }
 }
 
 export default JsonObject

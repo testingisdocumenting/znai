@@ -9,6 +9,8 @@ import GraphVizSvg from './graphviz/GraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import SimpleTable from './table/SimpleTable'
 import Tabs from './tabs/Tabs'
+import Json from './json/Json'
+import presentationJson from './json/PresentationJson'
 import LatexMath from './math/LatexMath'
 import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
@@ -66,6 +68,9 @@ library.AnnotatedImage = EmbeddedAnnotatedImage
 presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 
 library.Tabs = Tabs
+
+library.Json = Json
+presentationElementHandlers.Json = presentationJson
 
 library.Page = Page
 presentationElementHandlers.Page = presentationPageHandler
