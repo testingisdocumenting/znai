@@ -60,9 +60,10 @@ library.GraphVizFlow = DocumentationGraphVizFlow
 presentationElementHandlers.GraphVizFlow = presentationGraphVizHandler
 
 library.SimpleTable = SimpleTable
+presentationElementHandlers.SimpleTable = {component: SimpleTable, numberOfSlides: () => 1}
 
 library.LatexMath = LatexMath
-presentationElementHandlers.LatexMath = {component: LatexMath, numberOfSlides: ({shapes}) => 1}
+presentationElementHandlers.LatexMath = {component: LatexMath, numberOfSlides: () => 1}
 
 library.AnnotatedImage = EmbeddedAnnotatedImage
 presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
