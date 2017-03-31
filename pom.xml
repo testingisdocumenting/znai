@@ -16,6 +16,7 @@
         <module>td-testing-core</module>
         <module>td-testing-core-groovy</module>
         <module>td-testing-rest</module>
+        <module>td-testing-rest-groovy</module>
         <module>td-diagrams</module>
         <module>td-documentation</module>
         <module>td-documentation-core</module>

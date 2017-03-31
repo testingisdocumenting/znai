@@ -10,32 +10,24 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>td-testing-rest</artifactId>
-    <version>0.1</version>
+    <artifactId>td-testing-rest-groovy</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.twosigma.td</groupId>
-            <artifactId>td-testing-core</artifactId>
+            <artifactId>td-testing-core-groovy</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.twosigma.td</groupId>
-            <artifactId>td-utils</artifactId>
+            <artifactId>td-testing-rest</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <version>9.4.2.v20170220</version>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
         </dependency>
 
         <dependency>
@@ -53,6 +45,8 @@
                 <executions>
                     <execution>
                         <goals>
+                            <goal>addSources</goal>
+                            <goal>compile</goal>
                             <goal>addTestSources</goal>
                             <goal>testCompile</goal>
                         </goals>
