@@ -21,5 +21,7 @@ public class JavaDocVisitor extends VoidVisitorAdapter {
 
         Javadoc javadoc = javadocComment.parse();
         topLevelJavaDoc = javadoc.getDescription().toText();
+
+        super.visit(n, arg);
     }
 }

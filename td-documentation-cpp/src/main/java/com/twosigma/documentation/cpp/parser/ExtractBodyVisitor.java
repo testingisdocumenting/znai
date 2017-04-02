@@ -51,19 +51,6 @@ public class ExtractBodyVisitor extends CPP14BaseVisitor {
         return super.visitFunctiondefinition(ctx);
     }
 
-    private String removeIndentation(String line, Integer indentation) {
-        if (line.trim().isEmpty()) {
-            return line;
-        }
-
-        return line.substring(indentation);
-    }
-
-    private boolean notEmptyLine(String s) {
-        return ! s.trim().isEmpty();
-    }
-
-
     private String textBeforeParenthesis(String text) {
         int idx = text.indexOf('(');
         return idx == -1 ? text : text.substring(0, idx);

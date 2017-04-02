@@ -5,7 +5,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.java.parser.JavaDocExtractor;
+import com.twosigma.documentation.java.parser.JavaParserUtils;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 
 import java.nio.file.Path;
@@ -27,7 +27,7 @@ public class JavaDocIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         fileName = includeParams.getFreeParam();
         String textContent = componentsRegistry.includeResourceResolver().textContent(fileName);
-        String javaDoc = JavaDocExtractor.extractTopLevel(textContent);
+        String javaDoc = JavaParserUtils.extractTopLevelJavaDoc(textContent);
 
         return PluginResult.docElement(DocElementType.SIMPLE_TEXT, Collections.singletonMap("text", javaDoc));
     }

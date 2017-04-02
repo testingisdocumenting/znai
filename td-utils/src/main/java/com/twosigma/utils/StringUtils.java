@@ -18,8 +18,8 @@ public class StringUtils {
                 orElse(0);
     }
 
-    public static String stripIndentation(String code) {
-        List<String> lines = trimEmptyLines(Arrays.asList(code.replace("\r", "").split("\n")));
+    public static String stripIndentation(String text) {
+        List<String> lines = trimEmptyLines(Arrays.asList(text.replace("\r", "").split("\n")));
         Integer indentation = lines.stream().
                 filter(StringUtils::notEmptyLine).
                 map(StringUtils::lineIndentation).min(Integer::compareTo).orElse(0);
