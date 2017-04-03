@@ -7,35 +7,41 @@ import org.junit.Test
  * @author mykola
  */
 class JavaParserUtilsTest {
-    @Test
-    void "extracts function body"() {
-        String body = JavaParserUtils.functionBody("package com.twosigma.documentation.java.parser;\n" +
-                "\n" +
-                "\n" +
-                "public class JavaDocVisitor extends VoidVisitorAdapter {\n" +
-                "    private String topLevelJavaDoc;\n" +
-                "\n" +
-                "    public String getTopLevelJavaDoc() {\n" +
-                "        return topLevelJavaDoc;\n" +
-                "    }\n" +
-                "\n" +
-                "    @Override\n" +
-                "    public void visit(ClassOrInterfaceDeclaration n, Object arg) {\n" +
-                "        JavadocComment javadocComment = n.getJavadocComment();\n" +
-                "\n" +
-                "        Javadoc javadoc = javadocComment.parse();\n" +
-                "        topLevelJavaDoc = javadoc.getDescription().toText();\n" +
-                "\n" +
-                "        super.visit(n, arg);\n" +
-                "    }\n" +
-                "}\n", "visit");
+    String code = "class HelloWorld {\n" +
+            "    public void sampleMethod() {\n" +
+            "        statement1();\n" +
+            "        statement2();\n" +
+            "\n" +
+            "        if (logic) {\n" +
+            "            doAction();\n" +
+            "        }\n" +
+            "    }\n" +
+            "}"
 
-        Assert.assertEquals("JavadocComment javadocComment = n.getJavadocComment();\n" +
+    @Test
+    void "extracts method body"() {
+        String body = JavaParserUtils.methodBody(code, "sampleMethod");
+
+        Assert.assertEquals("public void sampleMethod() {\n" +
+                "    statement1();\n" +
+                "    statement2();\n" +
                 "\n" +
-                "Javadoc javadoc = javadocComment.parse();\n" +
-                "topLevelJavaDoc = javadoc.getDescription().toText();\n" +
+                "    if (logic) {\n" +
+                "        doAction();\n" +
+                "    }\n" +
+                "}", body);
+    }
+
+    @Test
+    void "extracts method body only"() {
+        String body = JavaParserUtils.methodBodyOnly(code, "sampleMethod");
+
+        Assert.assertEquals("statement1();\n" +
+                "statement2();\n" +
                 "\n" +
-                "super.visit(n, arg);", body);
+                "if (logic) {\n" +
+                "    doAction();\n" +
+                "}", body);
 
     }
 }

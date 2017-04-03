@@ -15,11 +15,18 @@ public class JavaParserUtils {
         return javaDocVisitor.getTopLevelJavaDoc();
     }
 
-    public static String functionBody(String fileContent, String methodName) {
-        CompilationUnit compilationUnit = JavaParser.parse(fileContent);
-        JavaFuncBodyVisitor visitor = new JavaFuncBodyVisitor(fileContent);
-        compilationUnit.accept(visitor, "test");
+    public static String methodBody(String fileContent, String methodName) {
+        return parse(fileContent).getDeclaration(methodName);
+    }
 
-        return visitor.getDeclaration(methodName);
+    public static String methodBodyOnly(String fileContent, String methodName) {
+        return parse(fileContent).getDeclarationBodyOnly(methodName);
+    }
+
+    private static JavaMethodBodyVisitor parse(String fileContent) {
+        CompilationUnit compilationUnit = JavaParser.parse(fileContent);
+        JavaMethodBodyVisitor visitor = new JavaMethodBodyVisitor(fileContent);
+        compilationUnit.accept(visitor, "test");
+        return visitor;
     }
 }
