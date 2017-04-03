@@ -7,6 +7,7 @@ flow
 features
     code-snippets
     external-code-snippets
+    java
     tables
     tabs
     json
