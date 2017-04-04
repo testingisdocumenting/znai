@@ -9,9 +9,9 @@ class Configuration {
     private ConfigSlurper configSlurper
     private ConfigObject configObject
 
-    Configuration(Path configPath, String env) {
+    Configuration(String script, String env) {
         configSlurper = new ConfigSlurper(env)
-        configObject = configSlurper.parse(configPath.toFile().toURL())
+        configObject = configSlurper.parse(script)
     }
 
     String getBaseUrl() {

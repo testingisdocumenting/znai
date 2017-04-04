@@ -26,16 +26,28 @@ class HttpTestRunner implements HttpTestListener, HttpConfiguration {
     private HttpTest currentTest
 
     HttpTestRunner() {
+        init(new Configuration(Paths.get("config.groovy").text, "dev"))
+    }
+
+    HttpTestRunner(Configuration configuration) {
+        init(configuration)
+    }
+
+    private void init(Configuration configuration) {
+        this.configuration = configuration
         groovy = prepareGroovy()
-        configuration = new Configuration(Paths.get("config.groovy"), "dev")
 
         HttpTestListeners.add(this)
         HttpConfigurations.add(this)
     }
 
     void register(Path testPath) {
-        def script = groovy.parse(testPath.text)
-        tests.add(new HttpTest(testPath.fileName.toString(), script))
+        register(testPath.fileName.toString(), testPath.text)
+    }
+
+    void register(String testName, String testScript) {
+        def script = groovy.parse(testScript)
+        tests.add(new HttpTest(testName, script))
     }
 
     void run() {
@@ -48,6 +60,7 @@ class HttpTestRunner implements HttpTestListener, HttpConfiguration {
     private static GroovyShell prepareGroovy() {
         def imports = new ImportCustomizer()
         imports.addStaticStars("com.twosigma.testing.http.Http")
+        imports.addStaticStars("com.twosigma.testing.documentation.DocumentationContext")
 
         def compilerCfg = new CompilerConfiguration()
         compilerCfg.addCompilationCustomizers(imports)

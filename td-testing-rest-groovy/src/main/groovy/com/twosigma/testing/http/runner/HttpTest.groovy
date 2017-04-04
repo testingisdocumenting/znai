@@ -1,5 +1,6 @@
 package com.twosigma.testing.http.runner
 
+import com.twosigma.testing.documentation.DocumentationContext
 import com.twosigma.testing.http.HttpValidationResult
 import com.twosigma.testing.http.datacoverage.DataNodeToMapWithChecksConverter
 import com.twosigma.testing.http.json.JsonSerialization
@@ -28,6 +29,7 @@ class HttpTest {
         println testName
         println ""
 
+        DocumentationContext.reset()
         script.run()
     }
 
@@ -41,6 +43,8 @@ class HttpTest {
             failedCalls++
         }
 
+        println DocumentationContext.markupScenario
+
         def passFailPrefix = passed ? "[.]" : "[X]"
         println "$passFailPrefix ${validationResult.requestMethod} : ${validationResult.fullUrl}"
 
@@ -52,6 +56,7 @@ class HttpTest {
         def json = JsonSerialization.toJson(bodyWithChecksAsMap)
 
         println bodyWithChecksAsMap
+
         Paths.get(testName + "-" + callNumber + ".json").toFile().text = json
     }
 }
