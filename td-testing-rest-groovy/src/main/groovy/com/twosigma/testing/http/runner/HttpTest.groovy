@@ -64,7 +64,7 @@ class HttpTest {
         def results = httpValidationResults.collect this.&validationResultToJson
         def payload = [
                 scenario: DocumentationContext.markupScenario,
-                results: results]
+                results : results]
 
         println payload
 
@@ -76,10 +76,12 @@ class HttpTest {
         def traceableValueConverter = { id, traceableValue -> pathsToHighlight.add(id.getPath()); return traceableValue.value }
         def dataNodeConverter = new DataNodeToMapOfValuesConverter(traceableValueConverter)
         def convertedBody = dataNodeConverter.convert(r.body)
+        def method = r.requestMethod.toUpperCase()
 
-        return [id: r.requestMethod.toUpperCase() + ":" + r.url,
-                url: r.url,
-                body: convertedBody,
-                paths: pathsToHighlight]
+        return [id    : method + ":" + r.url,
+                method: method,
+                url   : r.url,
+                body  : convertedBody,
+                paths : pathsToHighlight]
     }
 }
