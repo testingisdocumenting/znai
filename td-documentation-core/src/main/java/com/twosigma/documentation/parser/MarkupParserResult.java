@@ -17,6 +17,10 @@ public class MarkupParserResult {
         this.auxiliaryFiles = auxiliaryFiles;
     }
 
+    /**
+     * Top level page element. use get content to get access to the children
+     * @return top level page element
+     */
     public DocElement getDocElement() {
         return docElement;
     }

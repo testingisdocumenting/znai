@@ -2,9 +2,9 @@ package com.twosigma.testing.http.runner
 
 import com.twosigma.testing.documentation.DocumentationContext
 import com.twosigma.testing.http.HttpValidationResult
-import com.twosigma.testing.http.datacoverage.DataNodeToMapWithChecksConverter
-import com.twosigma.testing.http.json.JsonSerialization
+import com.twosigma.testing.http.datacoverage.DataNodeToMapOfValuesConverter
 import com.twosigma.testing.http.render.DataNodeRenderer
+import com.twosigma.utils.JsonUtils
 
 import java.nio.file.Paths
 
@@ -19,9 +19,12 @@ class HttpTest {
     private int failedCalls
     private int callNumber
 
-    HttpTest(final String testName, final Script script) {
+    private List<HttpValidationResult> httpValidationResults
+
+    HttpTest(String testName, Script script) {
         this.testName = testName
         this.script = script
+        this.httpValidationResults = []
     }
 
     void run() {
@@ -31,9 +34,11 @@ class HttpTest {
 
         DocumentationContext.reset()
         script.run()
+
+        createDocumentationArtifact()
     }
 
-    void afterValidation(final HttpValidationResult validationResult) {
+    void afterValidation(HttpValidationResult validationResult) {
         callNumber++
 
         def passed = validationResult.mismatches.isEmpty()
@@ -52,11 +57,29 @@ class HttpTest {
         println ""
         println DataNodeRenderer.render(validationResult.body)
 
-        def bodyWithChecksAsMap = DataNodeToMapWithChecksConverter.convert(validationResult.body)
-        def json = JsonSerialization.toJson(bodyWithChecksAsMap)
+        httpValidationResults.add(validationResult)
+    }
 
-        println bodyWithChecksAsMap
+    private void createDocumentationArtifact() {
+        def results = httpValidationResults.collect this.&validationResultToJson
+        def payload = [
+                scenario: DocumentationContext.markupScenario,
+                results: results]
 
-        Paths.get(testName + "-" + callNumber + ".json").toFile().text = json
+        println payload
+
+        Paths.get(testName + ".json").toFile().text = JsonUtils.serialize(payload)
+    }
+
+    private static Map<?, ?> validationResultToJson(HttpValidationResult r) {
+        def pathsToHighlight = []
+        def traceableValueConverter = { id, traceableValue -> pathsToHighlight.add(id.getPath()); return traceableValue.value }
+        def dataNodeConverter = new DataNodeToMapOfValuesConverter(traceableValueConverter)
+        def convertedBody = dataNodeConverter.convert(r.body)
+
+        return [id: r.requestMethod.toUpperCase() + ":" + r.url,
+                url: r.url,
+                body: convertedBody,
+                paths: pathsToHighlight]
     }
 }

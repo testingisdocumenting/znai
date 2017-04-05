@@ -64,18 +64,19 @@ public class Http {
 
         try {
             final HttpResponse response = httpCall.execute(fullUrl);
-            return validateAndRecord(requestMethod, fullUrl, validator, response);
+            return validateAndRecord(requestMethod, url, fullUrl, validator, response);
         } catch (Exception e) {
             throw new RuntimeException("error during http." + requestMethod.toLowerCase() + "(" + fullUrl + ")", e);
         }
     }
 
     @SuppressWarnings("unchecked")
-    private <E> E validateAndRecord(final String requestMethod, final String fullUrl, final HttpResponseValidatorWithReturn validator, final HttpResponse response) {
+    private <E> E validateAndRecord(final String requestMethod, final String url, final String fullUrl,
+                                    final HttpResponseValidatorWithReturn validator, final HttpResponse response) {
         final HeaderDataNode header = createHeaderDataNode(response);
         final DataNode body = createBodyDataNode(response);
 
-        HttpValidationResult result = new HttpValidationResult(requestMethod, fullUrl, header, body);
+        HttpValidationResult result = new HttpValidationResult(requestMethod, url, fullUrl, header, body);
 
         ExpectationHandler expectationHandler = (actualPath, actualValue, message) -> {
             result.addMismatch(message);

@@ -9,5 +9,12 @@ import java.nio.file.Path;
  * @author mykola
  */
 public interface MarkupParser {
+    /**
+     * parses markup
+     * @param path path of the content, will be used to resolve resources location (as one of the options)
+     * @param markup markup to parse
+     * @return markup result
+     * @see MarkupPathsResolution
+     */
     MarkupParserResult parse(Path path, String markup);
 }

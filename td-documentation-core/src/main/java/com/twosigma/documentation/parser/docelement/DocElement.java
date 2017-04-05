@@ -1,5 +1,7 @@
 package com.twosigma.documentation.parser.docelement;
 
+import com.twosigma.utils.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,6 +24,12 @@ public class DocElement {
         props = new LinkedHashMap<>();
 
         content = new ArrayList<>();
+    }
+
+    public DocElement(String type, Object... keyValues) {
+        this(type);
+        Map<String, Object> props = CollectionUtils.createMap(keyValues);
+        props.forEach(this::addProp);
     }
 
     public void addProp(String key, Object value) {

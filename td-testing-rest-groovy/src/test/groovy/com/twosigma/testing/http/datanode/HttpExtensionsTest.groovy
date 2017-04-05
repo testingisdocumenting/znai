@@ -1,14 +1,13 @@
 package com.twosigma.testing.http.datanode
 
 import com.twosigma.testing.http.HttpTestListeners
-import com.twosigma.testing.http.datacoverage.DataNodeToMapWithChecksConverter
+import com.twosigma.testing.http.datacoverage.DataNodeToMapOfValuesConverter
 import com.twosigma.testing.http.render.DataNodeRenderer
 import com.twosigma.testing.http.testserver.TestServer
 import com.twosigma.testing.http.testserver.TestServerResponseConstant
 import com.twosigma.testing.http.testserver.TestServerResponseEcho
 import org.junit.AfterClass
 import org.junit.BeforeClass
-import org.junit.Ignore
 import org.junit.Test
 
 import static com.twosigma.testing.http.Http.http
@@ -29,7 +28,7 @@ class HttpExtensionsTest {
             println result.getMismatches().join("\n")
 
             println DataNodeRenderer.render(result.getBody())
-            println DataNodeToMapWithChecksConverter.convert(result.getBody())
+            println DataNodeToMapOfValuesConverter.convert(result.getBody())
         })
     }
 

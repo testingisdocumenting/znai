@@ -9,6 +9,7 @@ import com.twosigma.testing.http.datanode.DataNode;
  * @author mykola
  */
 public class HttpValidationResult {
+    private String url;
     private String fullUrl;
 
     private HeaderDataNode header;
@@ -18,8 +19,9 @@ public class HttpValidationResult {
 
     private List<String> mismatches;
 
-    public HttpValidationResult(final String requestMethod, final String fullUrl, final HeaderDataNode header, final DataNode body) {
+    public HttpValidationResult(final String requestMethod, final String url, final String fullUrl, final HeaderDataNode header, final DataNode body) {
         this.requestMethod = requestMethod;
+        this.url = url;
         this.fullUrl = fullUrl;
         this.header = header;
         this.body = body;
@@ -32,6 +34,10 @@ public class HttpValidationResult {
 
     public List<String> getMismatches() {
         return mismatches;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public String getFullUrl() {

@@ -4,14 +4,13 @@ import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.Plugin;
+import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.ParserHandler;
-import com.twosigma.utils.CollectionUtils;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -258,10 +257,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     private void start(String type, Object... propsKeyValue) {
-        DocElement element = new DocElement(type);
-        addProps(element, propsKeyValue);
-
-        appendAndPush(element);
+        appendAndPush(new DocElement(type, propsKeyValue));
     }
 
     private DocElement end() {
@@ -269,10 +265,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     private void append(String type, Object... propsKeyValue) {
-        DocElement element = new DocElement(type);
-        addProps(element, propsKeyValue);
-
-        append(element);
+        append(new DocElement(type, propsKeyValue));
     }
 
     private void append(String type, Map<String, ?> propsKeyValue) {
@@ -284,11 +277,6 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     private void append(DocElement element) {
         elementsStack.peekLast().addChild(element);
-    }
-
-    private void addProps(DocElement element, Object... propsKeyValue) {
-        Map<String, Object> props = CollectionUtils.createMap(propsKeyValue);
-        props.forEach(element::addProp);
     }
 
     private void appendAndPush(DocElement element) {
