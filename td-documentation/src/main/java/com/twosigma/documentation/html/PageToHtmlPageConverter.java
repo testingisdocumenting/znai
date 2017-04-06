@@ -24,12 +24,11 @@ public class PageToHtmlPageConverter {
 
     public HtmlPageAndPageProps convert(TableOfContents toc, TocItem tocItem, Page page) {
         final HtmlPage htmlPage = new HtmlPage();
-        htmlPage.setTitle(tocItem.getPageTitle());
+        htmlPage.setTitle(docMeta.getTitle() + ": " + tocItem.getPageTitle());
 
         PageProps pageProps = new PageProps(tocItem, page);
         DocumentationProps docProps = new DocumentationProps(docMeta, toc, pageProps);
 
-        // TODO reconsider the whole rc business below
         RenderSupplier createElementStatement = () -> "React.createElement(Documentation, " + JsonUtils.serializePrettyPrint(
                     docProps.toMap()) + ")";
 
@@ -41,7 +40,6 @@ public class PageToHtmlPageConverter {
             return "<div id=\"" + REACT_BLOCK_ID + "\">" + nashornEval(renderStatement).toString() + "</div>";
         });
 
-        // TODO investigate: there were issues with syncing complex custom components
         htmlPage.addToJavaScript(() -> "ReactDOM.render(" + createElementStatement.render() + ", " +
             "document.getElementById(\"" + REACT_BLOCK_ID + "\"));");
 

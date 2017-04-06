@@ -160,10 +160,13 @@ class Documentation extends Component {
     }
 
     onPageLoad() {
+        const {docMeta} = this.props
+        const {page} = this.state
+
         this.extractPageSectionNodes()
         this.updateCurrentPageSection()
-        console.log("creating presentation registry")
         const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, this.state.page)
+        document.title = docMeta.title + ": " + page.tocItem.pageTitle
         this.setState({presentationRegistry})
     }
 
