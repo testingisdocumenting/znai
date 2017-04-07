@@ -60,7 +60,7 @@ public class TabsFencePlugin implements FencePlugin {
     private Object contentFromPluginId(String pluginDef) {
         IncludeParams includeParams = IncludePluginParser.parse(pluginDef);
 
-        IncludePlugin includePlugin = Plugins.includePluginById(includeParams.getId());
+        IncludePlugin includePlugin = Plugins.includePluginById(includeParams.getPluginId());
         PluginResult result = includePlugin.process(componentsRegistry, markupPath, includeParams);
 
         return result.getDocElements().stream().map(DocElement::toMap).collect(toList());

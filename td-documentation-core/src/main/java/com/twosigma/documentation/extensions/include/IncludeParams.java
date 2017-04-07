@@ -9,18 +9,18 @@ import java.util.Map;
  * @author mykola
  */
 public class IncludeParams {
-    private String id;
+    private String pluginId;
     private String freeParam;
     private IncludeParamsOpts opts;
 
-    public IncludeParams(String id, String value) {
-        this.id = id;
+    public IncludeParams(String pluginId, String value) {
+        this.pluginId = pluginId;
         this.freeParam = extractFreeParam(value);
         this.opts = new IncludeParamsOpts(extractMap(value));
     }
 
-    public String getId() {
-        return id;
+    public String getPluginId() {
+        return pluginId;
     }
 
     public String getFreeParam() {

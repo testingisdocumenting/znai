@@ -1,8 +1,7 @@
-com.twosigma.documentation.extensions.include.FileIncludePlugin
 com.twosigma.documentation.extensions.image.ImageIncludePlugin
 com.twosigma.documentation.extensions.markup.MarkdownIncludePlugin
 com.twosigma.documentation.extensions.markup.MarkdownsIncludePlugin
-com.twosigma.documentation.extensions.table.IncludeCsvTable
+com.twosigma.documentation.extensions.table.TableIncludePlugin
 com.twosigma.documentation.extensions.diagrams.GvDiagramIncludePlugin
 com.twosigma.documentation.extensions.diagrams.GvDiagramSlidesIncludePlugin
 com.twosigma.documentation.extensions.code.CodeExecutionResultIncludePlugin

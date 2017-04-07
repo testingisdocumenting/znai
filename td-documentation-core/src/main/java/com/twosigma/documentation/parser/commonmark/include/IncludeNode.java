@@ -15,7 +15,7 @@ public class IncludeNode extends CustomBlock {
     }
 
     public String getId() {
-        return params.getId();
+        return params.getPluginId();
     }
 
     public IncludeParams getParams() {

@@ -184,7 +184,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onIncludePlugin(IncludeParams includeParams) {
-        IncludePlugin includePlugin = Plugins.includePluginById(includeParams.getId());
+        IncludePlugin includePlugin = Plugins.includePluginById(includeParams.getPluginId());
         processPlugin(includePlugin, (p) -> p.process(componentsRegistry, path, includeParams));
     }
 

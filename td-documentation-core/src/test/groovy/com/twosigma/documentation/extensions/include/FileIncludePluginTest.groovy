@@ -65,11 +65,8 @@ class FileIncludePluginTest {
                 "def b", text)
     }
 
-
     private static String process(String fileName, String value) {
-        def plugin = new FileIncludePlugin()
-        def result = plugin.process(new TestComponentsRegistry(), Paths.get(""), new IncludeParams("$fileName $value"))
-
-        return result.docElements.get(0).getProps().componentProps.tokens[0].data
+        def result = PluginsTestUtils.process(":include-file: $fileName $value")
+        return result.docElements.get(0).getProps().tokens[0].data
     }
 }

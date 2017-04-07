@@ -20,4 +20,5 @@ public class DocElementType {
     public static final String SOFT_LINE_BREAK = "SoftLineBreak";
     public static final String HARD_LINE_BREAK = "HardLineBreak";
     public static final String THEMATIC_BREAK = "ThematicBreak";
+    public static final String TABLE = "Table";
 }
