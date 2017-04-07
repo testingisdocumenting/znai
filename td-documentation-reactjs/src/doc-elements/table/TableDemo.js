@@ -14,7 +14,7 @@ const table = {
 }
 
 const TableDemo = () => {
-    return <SimpleTable table={table}/>
+    return <Table table={table}/>
 }
 
 export default TableDemo

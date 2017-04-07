@@ -7,7 +7,7 @@ import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
 import {BulletList, presentationUnorderedListHandler} from './default-elements/BulletList'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
-import SimpleTable from './table/SimpleTable'
+import Table from './table/Table'
 import Tabs from './tabs/Tabs'
 import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
@@ -59,8 +59,8 @@ library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphViz
 library.GraphVizFlow = DocumentationGraphVizFlow
 presentationElementHandlers.GraphVizFlow = presentationGraphVizHandler
 
-library.SimpleTable = SimpleTable
-presentationElementHandlers.SimpleTable = {component: SimpleTable, numberOfSlides: () => 1}
+library.Table = Table
+presentationElementHandlers.Table = {component: Table, numberOfSlides: () => 1}
 
 library.LatexMath = LatexMath
 presentationElementHandlers.LatexMath = {component: LatexMath, numberOfSlides: () => 1}

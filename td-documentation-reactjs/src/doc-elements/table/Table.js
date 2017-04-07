@@ -3,7 +3,7 @@ import React from 'react'
 import './Table.css'
 import 'semantic-ui/dist/components/table.min.css'
 
-const SimpleTable = ({table}) => {
+const Table = ({table}) => {
     const Row = ({row}) => {
         return (<tr>
             {row.map((v, idx) => {
@@ -36,4 +36,4 @@ const SimpleTable = ({table}) => {
     </div> )
 }
 
-export default SimpleTable
+export default Table
