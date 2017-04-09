@@ -1,0 +1,17 @@
+[
+  {
+    "Account": "#12BGD3",
+    "Price": 100,
+    "Description": "custom table with a long attachment"
+  },
+  {
+    "Account": "#12BGD3",
+    "Price": 150,
+    "Description": "chair"
+  },
+  {
+    "Account": "#91AGB1",
+    "Price": 10,
+    "Description": "lunch"
+  }
+]

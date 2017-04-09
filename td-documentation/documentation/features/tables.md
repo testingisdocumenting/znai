@@ -4,9 +4,9 @@ There is a directive to display table data like the one below.
 
     :include-table: table.csv 
     
-Instead of aligning tables using one of the markdown extensions you can use your **CSV** editor of choice.
+Instead of aligning tables using one of the markdown extensions you can use your `CSV` editor of choice.
 
-So the following csv file
+So the following `CSV` file
 
 :include-file: table.csv
 
@@ -14,9 +14,24 @@ renders as this table
 
 :include-table: table.csv
 
+# JSON
+
+Same directive can be used to display data from a `JSON` file representing a table data.
+
+    :include-table: table.json 
+
+So the following `JSON` file
+
+:include-file: table.json
+
+renders as this table
+
+:include-table: table.json
+
+# Alignment and Width
+
 By default column width is auto calculated to fit the values inside. 
 But you can control the width with the extra options 
-
 
     :include-table: table.csv {Price: {width: 200}, "Description": {width: 400}}
 
@@ -28,5 +43,9 @@ And if you need to change a column alignment from default *left* to *right* just
 
 :include-table: table.csv {Price: {width: 200, align: "right"}}
 
-# JSON
+Or for `JSON` data
+
+    :include-table: table.json {Price: {width: 100, align: "right"}}
+
+:include-table: table.json {Price: {width: 100, align: "right"}}
 

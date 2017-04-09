@@ -14,7 +14,7 @@ class Row {
     }
 
     public void add(Object v) {
-        data.add(v.toString());
+        data.add(v);
     }
 
     public List<Object> getData() {

@@ -6,12 +6,10 @@ import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.docelement.DocElementType;
+import com.twosigma.utils.JsonUtils;
 
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -19,6 +17,7 @@ import java.util.stream.Stream;
  */
 public class TableIncludePlugin implements IncludePlugin {
     private String fileName;
+    private String textContent;
 
     @Override
     public String id() {
@@ -29,8 +28,9 @@ public class TableIncludePlugin implements IncludePlugin {
     @SuppressWarnings("unchecked")
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         fileName = includeParams.getFreeParam();
+        textContent = componentsRegistry.includeResourceResolver().textContent(fileName);
 
-        Map<String, Object> table = tableFromCsv(componentsRegistry);
+        Map<String, Object> table = (isJson() ? tableFromJson() : CsvParser.parse(textContent)).toMap();
         List<Map<String, Object>> columns = (List<Map<String, Object>>) table.get("columns");
 
         includeParams.getOpts().forEach((columnName, meta) -> {
@@ -41,11 +41,25 @@ public class TableIncludePlugin implements IncludePlugin {
         return PluginResult.docElement(DocElementType.TABLE, Collections.singletonMap("table", table));
     }
 
-    private Map<String, Object> tableFromCsv(ComponentsRegistry componentsRegistry) {
-        String csv = componentsRegistry.includeResourceResolver().textContent(fileName);
-        CsvData csvData = CsvParser.parse(csv);
+    @SuppressWarnings("unchecked")
+    private PluginTableData tableFromJson() {
+        PluginTableData tableData = new PluginTableData();
 
-        return csvData.toMap();
+        List<Map<String, ?>> rows = (List<Map<String, ?>>) JsonUtils.deserializeAsList(textContent);
+        if (rows.isEmpty()) {
+            return tableData;
+        }
+
+        Map<String, ?> firstRowData = rows.get(0);
+
+        firstRowData.keySet().forEach(tableData::addColumn);
+        rows.forEach(tableData::addRow);
+
+        return tableData;
+    }
+
+    private boolean isJson() {
+        return textContent.trim().startsWith("[");
     }
 
     @Override

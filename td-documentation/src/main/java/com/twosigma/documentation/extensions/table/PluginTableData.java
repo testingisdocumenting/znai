@@ -10,17 +10,24 @@ import static java.util.stream.Collectors.toList;
 /**
  * @author mykola
  */
-class CsvData {
+class PluginTableData {
     private List<Column> header;
     private List<Row> data;
 
-    CsvData() {
+    PluginTableData() {
         header = new ArrayList<>();
         data = new ArrayList<>();
     }
 
     void addColumn(String name) {
         header.add(new Column(name));
+    }
+
+    void addRow(Map<String, ?> rowData) {
+        Row row = new Row();
+        header.forEach(c -> row.add(rowData.get(c.getTitle())));
+
+        addRow(row);
     }
 
     void addRow(Row row) {

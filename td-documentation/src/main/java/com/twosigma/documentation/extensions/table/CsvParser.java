@@ -15,9 +15,9 @@ class CsvParser {
     private CsvParser() {
     }
 
-    public static CsvData parse(String content) {
+    public static PluginTableData parse(String content) {
         try {
-            CsvData csvData = new CsvData();
+            PluginTableData tableData = new PluginTableData();
 
             CSVParser csvRecords = CSVFormat.RFC4180.withFirstRecordAsHeader().
                     withIgnoreSurroundingSpaces().
@@ -27,7 +27,7 @@ class CsvParser {
                     parse(new StringReader(content));
 
             Map<String, Integer> headerMap = csvRecords.getHeaderMap();
-            headerMap.keySet().forEach(csvData::addColumn);
+            headerMap.keySet().forEach(tableData::addColumn);
 
             for (CSVRecord record : csvRecords) {
                 Row row = new Row();
@@ -38,10 +38,10 @@ class CsvParser {
                             "; record: " + row.getData());
                 }
 
-                csvData.addRow(row);
+                tableData.addRow(row);
             }
 
-            return csvData;
+            return tableData;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
