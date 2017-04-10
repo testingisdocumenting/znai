@@ -32,13 +32,12 @@
     padding: 2px;
     margin: 3px;
     border-radius: 5px;
-    border: 2px solid #ccc;
-    background-color: #fff;
-    color: #1990b8;
+    background-color: rgba(0, 154, 166, 0.5);
+    color: #444;
 }
 
 .json.simple.highlighted .delimiter {
-    color: #ccc;
+    color: #999;
 }
 
 .json.object>.entry>.key {
