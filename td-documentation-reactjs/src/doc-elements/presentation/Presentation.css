@@ -28,7 +28,9 @@
     width: auto;
 }
 
-.presentation .snippet {
+.presentation .snippet,
+.presentation .json,
+.presentation .latex-math {
     border: none;
 }
 
