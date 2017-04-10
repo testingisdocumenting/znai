@@ -17,11 +17,13 @@ class DocumentationNavigation {
         this.listeners.push(listener)
     }
 
-    navigateToPage(id) {
-        const url =  "/" + (this.documentationId  ? this.documentationId + "/" : "") + (id.dirName + "/" + id.fileName) +
+    buildUrl(id) {
+        return  "/" + (this.documentationId  ? this.documentationId + "/" : "") + (id.dirName + "/" + id.fileName) +
             (id.pageSectionId ? ("#" + id.pageSectionId) : "")
+    }
 
-        return this.navigateToUrl(url)
+    navigateToPage(id) {
+        return this.navigateToUrl(this.buildUrl(id))
     }
 
     navigateToUrl(url) {

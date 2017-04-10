@@ -10,7 +10,7 @@ class TocPanel extends Component {
     }
 
     render() {
-        const {docMeta, collapsed, selected, onTocItemClick, onHeaderClick} = this.props
+        const {docMeta, collapsed, selected, onTocItemClick, onHeaderClick, documentationNavigation} = this.props
         const panelClass = "toc-panel" + (collapsed ? " collapsed" : "") + (selected ? " selected" : "")
         const expandButtonClass = "toc-panel-expand-button glyphicon glyphicon-chevron-right " + (collapsed ? "appeared" : "")
         const collapseButtonClass = "toc-panel-collapse-button glyphicon glyphicon-chevron-left " + (!collapsed ? "appeared" : "")
@@ -22,6 +22,7 @@ class TocPanel extends Component {
                 </div>
                 <div className={expandButtonClass} onClick={this.toggle}/>
                 <TocMenu toc={this.props.toc}
+                         documentationNavigation={documentationNavigation}
                          selected={this.props.selectedItem}
                          onClickHandler={onTocItemClick} />
             </div>

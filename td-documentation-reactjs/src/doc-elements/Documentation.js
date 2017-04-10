@@ -98,6 +98,7 @@ class Documentation extends Component {
                               docMeta={docMeta}
                               onToggle={this.onTocToggle}
                               selectedItem={selectedTocItem}
+                              documentationNavigation={this.documentationNavigation}
                               onHeaderClick={this.onHeaderClick}
                               onTocItemClick={this.onTocItemClick}
                               onNextPage={this.onNextPage}
