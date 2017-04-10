@@ -23,8 +23,8 @@ public class TableOfContents {
         tocItems.add(new TocItem(sectionName, fileNameWithoutExtension));
     }
 
-    public void addTocItemInFront(final String sectionName, final String fileNameWithoutExtension) {
-        tocItems.add(0, new TocItem(sectionName, fileNameWithoutExtension));
+    public void addIndex() {
+        tocItems.add(0, TocItem.createIndex());
     }
 
     public List<TocItem> getTocItems() {

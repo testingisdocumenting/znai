@@ -3,10 +3,14 @@ import React, {Component} from 'react'
 class Page extends Component {
     render() {
         const {tocItem, content, onPresentationOpen, elementsLibrary} = this.props
+
+        const displayTitle = tocItem.dirName.length && tocItem.fileName !== "index"
+        const title = displayTitle ? [<span key="title" className="page-title">{tocItem.pageTitle}</span>,
+            <span key="button" className="presentation-button glyphicon glyphicon-resize-full" onClick={onPresentationOpen}/>] : []
+
         return (<div className="page-content">
             <div className="page-title-block">
-                <span className="page-title">{tocItem.pageTitle}</span>
-                <span className="presentation-button glyphicon glyphicon-resize-full" onClick={onPresentationOpen}/>
+                {title}
             </div>
             <elementsLibrary.DocElement key={tocItem.pageTitle} content={content}/>
         </div>)

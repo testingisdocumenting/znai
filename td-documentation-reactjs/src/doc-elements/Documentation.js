@@ -167,7 +167,10 @@ class Documentation extends Component {
         this.extractPageSectionNodes()
         this.updateCurrentPageSection()
         const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, this.state.page)
-        document.title = docMeta.title + ": " + page.tocItem.pageTitle
+
+        const isIndex = page.tocItem.dirName.length === 0 && page.tocItem.fileName === 'index'
+        document.title = isIndex ? docMeta.title : docMeta.title + ": " + page.tocItem.pageTitle
+
         this.setState({presentationRegistry})
     }
 

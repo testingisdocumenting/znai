@@ -24,7 +24,9 @@ public class PageToHtmlPageConverter {
 
     public HtmlPageAndPageProps convert(TableOfContents toc, TocItem tocItem, Page page) {
         final HtmlPage htmlPage = new HtmlPage();
-        htmlPage.setTitle(docMeta.getTitle() + ": " + tocItem.getPageTitle());
+        htmlPage.setTitle(tocItem.isIndex() ?
+                docMeta.getTitle():
+                docMeta.getTitle() + ": " + tocItem.getPageTitle());
 
         PageProps pageProps = new PageProps(tocItem, page);
         DocumentationProps docProps = new DocumentationProps(docMeta, toc, pageProps);
@@ -58,5 +60,4 @@ public class PageToHtmlPageConverter {
             throw new RuntimeException("failed to eval:\n" + renderStatement, e);
         }
     }
-
 }

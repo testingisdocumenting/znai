@@ -205,7 +205,7 @@ public class WebSite {
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
         toc = TableOfContents.fromNestedText(fileTextContent(cfg.tocPath));
-        toc.addTocItemInFront("", "index");
+        toc.addIndex();
     }
 
     /**
@@ -300,8 +300,6 @@ public class WebSite {
         try {
             resetPlugins(markupPath(tocItem)); // TODO reset at render phase only?
 
-            boolean isIndex = isIndexToc(tocItem);
-
             final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(toc, tocItem, page);
 
             allPagesProps.add(htmlAndProps.getProps());
@@ -309,7 +307,7 @@ public class WebSite {
 
             final String html = htmlAndProps.getHtmlPage().render(docMeta.getId());
 
-            Path pagePath = isIndex ? Paths.get("index.html") :
+            Path pagePath = tocItem.isIndex() ? Paths.get("index.html") :
                     Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
 
             deployer.deploy(pagePath, html);
@@ -319,10 +317,6 @@ public class WebSite {
             throw new RuntimeException("error during rendering of " + tocItem.getFileNameWithoutExtension() + ": " + e.getMessage(),
                     e);
         }
-    }
-
-    private boolean isIndexToc(TocItem tocItem) {
-        return tocItem.getDirName().equals("") && tocItem.getFileNameWithoutExtension().equals("index");
     }
 
     private void deployAuxiliaryFiles() {

@@ -13,12 +13,18 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class TocItem {
+    private static final String INDEX = "index";
+
     private String dirName;
     private String fileNameWithoutExtension;
     private String sectionTitle;
     private String pageTitle;
 
     private List<PageSectionIdTitle> pageSectionIdTitles;
+
+    static TocItem createIndex() {
+        return new TocItem("", INDEX);
+    }
 
     public TocItem(final String dirName, final String fileNameWithoutExtension) {
         this.dirName = dirName;
@@ -50,6 +56,10 @@ public class TocItem {
 
     public void setPageSectionIdTitles(List<PageSectionIdTitle> pageSectionIdTitles) {
         this.pageSectionIdTitles = pageSectionIdTitles;
+    }
+
+    public boolean isIndex() {
+        return dirName.isEmpty() && fileNameWithoutExtension.equals(INDEX);
     }
 
     public Map<String, ?> toMap() {
