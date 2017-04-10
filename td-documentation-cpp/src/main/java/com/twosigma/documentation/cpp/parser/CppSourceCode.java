@@ -3,6 +3,7 @@ package com.twosigma.documentation.cpp.parser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -28,8 +29,12 @@ public class CppSourceCode {
         CPP14Parser parser = createParser(code);
         parser.translationunit().accept(new CPP14BaseVisitor());
 
-        SplitOnCommentsTokensProcessor processor = new SplitOnCommentsTokensProcessor(code, parser);
+        SplitOnCommentsTokensProcessor processor = new SplitOnCommentsTokensProcessor(parser);
         return processor.extractParts();
+    }
+
+    public static List<String> topLevelComments(String code) {
+        return Collections.emptyList();
     }
 
     private static Optional<EntryDef> findDefinition(String code, String methodName) {

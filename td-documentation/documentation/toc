@@ -8,6 +8,7 @@ features
     code-snippets
     external-code-snippets
     java
+    cpp
     tables
     tabs
     json

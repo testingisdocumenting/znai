@@ -10,15 +10,11 @@ import java.util.List;
  * @author mykola
  */
 public class SplitOnCommentsTokensProcessor {
-    private final String[] lines;
-    private String code;
     private CPP14Parser parser;
     private List<CodePart> parts;
     private String currentSpaces = "";
 
-    public SplitOnCommentsTokensProcessor(String code, CPP14Parser parser) {
-        this.code = code;
-        this.lines = code.split("\n");
+    public SplitOnCommentsTokensProcessor(CPP14Parser parser) {
         this.parser = parser;
         this.parts = new ArrayList<>();
     }
@@ -54,11 +50,6 @@ public class SplitOnCommentsTokensProcessor {
         currentSpaces = "";
 
         return result;
-    }
-
-    private String indentationForLine(Token token) {
-        String text = lines[token.getLine() - 1].substring(0, token.getCharPositionInLine());
-        return text.trim().isEmpty() ? text : "";
     }
 
     private boolean isCompatibleType(CodePart last, Token token) {

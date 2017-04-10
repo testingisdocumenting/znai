@@ -9,8 +9,8 @@ import com.twosigma.documentation.extensions.PluginResourcesResolver
  */
 class TestComponentsRegistry implements ComponentsRegistry {
     @Override
-    public MarkupParser parser() {
-        return null;
+    MarkupParser parser() {
+        return new TestMarkupParser();
     }
 
     @Override
@@ -19,7 +19,7 @@ class TestComponentsRegistry implements ComponentsRegistry {
     }
 
     @Override
-    public PluginResourcesResolver includeResourceResolver() {
+    PluginResourcesResolver includeResourceResolver() {
         return new TestResourceResolver();
     }
 }

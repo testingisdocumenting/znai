@@ -37,14 +37,14 @@ public class CppIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        this.markupParser = componentsRegistry.parser();
-        this.codeTokenizer = componentsRegistry.codeTokenizer();
-        this.cppPath = componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam());
+        markupParser = componentsRegistry.parser();
+        codeTokenizer = componentsRegistry.codeTokenizer();
+        fileName = includeParams.getFreeParam();
+        cppPath = componentsRegistry.includeResourceResolver().fullPath(this.fileName);
 
         IncludeParamsOpts opts = includeParams.getOpts();
         String commentsType = opts.has("comments") ? opts.get("comments") : "";
 
-        fileName = includeParams.getFreeParam();
         String text = componentsRegistry.includeResourceResolver().textContent(fileName);
 
         String snippet = extractSnippet(text, opts);
@@ -64,8 +64,7 @@ public class CppIncludePlugin implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(
-                componentsRegistry.includeResourceResolver().fullPath(fileName)));
+        return Stream.of(AuxiliaryFile.builtTime(cppPath));
     }
 
     private Stream<DocElement> parseComments(String data) {
