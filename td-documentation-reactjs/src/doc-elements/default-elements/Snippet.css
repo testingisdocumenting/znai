@@ -15,6 +15,10 @@
     font-size: 14px;
 }
 
+pre code {
+    border: none;
+}
+
 .wide-screen pre {
     max-width: 100%;
 }

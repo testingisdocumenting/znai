@@ -6,3 +6,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+span.ui.blue.label {
+    background-color: #009AA6 !important;
+}

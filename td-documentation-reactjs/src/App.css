@@ -50,20 +50,6 @@ blockquote {
     margin-bottom: 10px;
 }
 
-pre {
-    margin: 0;
-}
-
-code {
-    border: 1px solid #eee;
-    background-color: #fff;
-    color: #1990b8;
-}
-
-pre code {
-    border: none;
-}
-
 .content-block {
     width: 700px;
     margin-left: auto;
