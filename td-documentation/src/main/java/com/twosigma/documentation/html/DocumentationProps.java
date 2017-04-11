@@ -13,12 +13,10 @@ import java.util.Map;
  */
 public class DocumentationProps {
     private final DocMeta docMeta;
-    private final TableOfContents toc;
     private final PageProps pageToRender;
 
-    public DocumentationProps(DocMeta docMeta, TableOfContents toc, PageProps pageToRender) {
+    public DocumentationProps(DocMeta docMeta, PageProps pageToRender) {
         this.docMeta = docMeta;
-        this.toc = toc;
         this.pageToRender = pageToRender;
     }
 

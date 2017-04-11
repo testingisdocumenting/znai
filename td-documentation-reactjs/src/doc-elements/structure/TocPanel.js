@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TocMenu from './TocMenu';
 
 class TocPanel extends Component {
@@ -10,21 +10,30 @@ class TocPanel extends Component {
     }
 
     render() {
-        const {docMeta, collapsed, selected, onTocItemClick, onHeaderClick, documentationNavigation} = this.props
+        const {docMeta,
+            toc,
+            collapsed,
+            selected,
+            selectedItem,
+            onTocItemClick,
+            onHeaderClick,
+            documentationNavigation} = this.props
+
         const panelClass = "toc-panel" + (collapsed ? " collapsed" : "") + (selected ? " selected" : "")
         const expandButtonClass = "toc-panel-expand-button glyphicon glyphicon-chevron-right " + (collapsed ? "appeared" : "")
         const collapseButtonClass = "toc-panel-collapse-button glyphicon glyphicon-chevron-left " + (!collapsed ? "appeared" : "")
 
         return (<div className={panelClass}>
                 <div className="header">
-                    <span className="toc-panel-header-title" onClick={onHeaderClick}>{docMeta.title + " " + docMeta.type}</span>
+                    <span className="toc-panel-header-title"
+                          onClick={onHeaderClick}>{docMeta.title + " " + docMeta.type}</span>
                     <span className={collapseButtonClass} onClick={this.toggle}/>
                 </div>
                 <div className={expandButtonClass} onClick={this.toggle}/>
-                <TocMenu toc={this.props.toc}
+                <TocMenu toc={toc}
                          documentationNavigation={documentationNavigation}
-                         selected={this.props.selectedItem}
-                         onClickHandler={onTocItemClick} />
+                         selected={selectedItem}
+                         onClickHandler={onTocItemClick}/>
             </div>
         )
     }
@@ -45,7 +54,7 @@ class TocPanel extends Component {
     keyDownHandler(e) {
         const {selected, collapsed, onNextPage, onPrevPage} = this.props
 
-        if (! selected || collapsed) {
+        if (!selected || collapsed) {
             return
         }
 

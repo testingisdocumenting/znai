@@ -22,14 +22,14 @@ public class PageToHtmlPageConverter {
         this.reactJsNashornEngine = reactJsNashornEngine;
     }
 
-    public HtmlPageAndPageProps convert(TableOfContents toc, TocItem tocItem, Page page) {
+    public HtmlPageAndPageProps convert(TocItem tocItem, Page page) {
         final HtmlPage htmlPage = new HtmlPage();
         htmlPage.setTitle(tocItem.isIndex() ?
                 docMeta.getTitle():
                 docMeta.getTitle() + ": " + tocItem.getPageTitle());
 
         PageProps pageProps = new PageProps(tocItem, page);
-        DocumentationProps docProps = new DocumentationProps(docMeta, toc, pageProps);
+        DocumentationProps docProps = new DocumentationProps(docMeta, pageProps);
 
         RenderSupplier createElementStatement = () -> "React.createElement(Documentation, " + JsonUtils.serializePrettyPrint(
                     docProps.toMap()) + ")";

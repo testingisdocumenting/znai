@@ -148,6 +148,7 @@ public class WebSite {
         createTopLevelToc();
         parseMarkups();
         updateTocWithPageSections();
+        setGlobalToc();
         generatePages();
         generateSearchIndex();
         deployToc();
@@ -221,11 +222,7 @@ public class WebSite {
     private void deployToc() {
         reportPhase("deploying table of contents");
         String tocJson = JsonUtils.serializePrettyPrint(toc.toListOfMaps());
-
         deployer.deploy(tocJavaScript, "toc = " + tocJson);
-
-        reactJsNashornEngine.getNashornEngine().bind("tocJson", tocJson);
-        reactJsNashornEngine.getNashornEngine().eval("setTocJson(tocJson)");
     }
 
     private void parseMarkups() {
@@ -277,6 +274,16 @@ public class WebSite {
         Plugins.reset(context);
     }
 
+    // we share TOC between pages as opposite to setting TOC to each page
+    // global TOC is required to be set for server side page rendering
+    private void setGlobalToc() {
+        reportPhase("setting global TOC");
+
+        String tocJson = JsonUtils.serializePrettyPrint(toc.toListOfMaps());
+        reactJsNashornEngine.getNashornEngine().bind("tocJson", tocJson);
+        reactJsNashornEngine.getNashornEngine().eval("setTocJson(tocJson)");
+    }
+
     private void generatePages() {
         reportPhase("generating the rest of HTML pages");
         forEachPage(this::generatePage);
@@ -300,7 +307,7 @@ public class WebSite {
         try {
             resetPlugins(markupPath(tocItem)); // TODO reset at render phase only?
 
-            final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(toc, tocItem, page);
+            final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(tocItem, page);
 
             allPagesProps.add(htmlAndProps.getProps());
             extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
