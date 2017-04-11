@@ -62,7 +62,7 @@
 }
 
 .toc-section {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     padding-left: 10px;
 }
 
@@ -71,23 +71,20 @@
 }
 
 .toc-section .title {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 22px;
     margin-bottom: 8px;
-    color: #eee;
+    color: #fff;
 }
 
-.toc-section.selected .title {
-    color: #fff;
+.toc-item {
+    margin-bottom: 3px;
 }
 
 .toc-item a {
     border-left: 2px solid #333;
-    padding-left: 5px;
     margin-left: 0;
-    margin-bottom: 4px;
     font-size: 16px;
-    color: #bbb;
+    color: #AAA38F;
     transition: border-color 0.8s;
     text-decoration: none;
 }
@@ -98,25 +95,30 @@
 
 .toc-item.selected {
     border-left: 2px solid #999;
+    padding-left: 2px;
     color: #fff;
     transition: border-color 0.5s;
 }
 
+.toc-item.selected > a {
+    color: #BCBCBC;
+}
+
 .toc-menu .page-sections {
-    padding-left: 10px;
+    padding-left: 5px;
     font-size: 14px;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .toc-menu .page-sections .page-section {
     border-left: 3px solid #333;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
     padding-left: 5px;
 }
 
 .toc-menu .page-sections a {
-    color: #bbb;
+    color: #ACACAC;
     text-decoration: none;
 }
 
@@ -127,7 +129,7 @@
 }
 
 .toc-menu .page-sections .selected a {
-    color: #eee;
+    color: #BCBCBC;
 }
 
 .toc-panel.collapsed {
@@ -192,7 +194,7 @@
 }
 
 .preview-icon {
-    color: #3080b9;
+    color: #009AA6;
     position: fixed;
     font-size: 20px;
     right: 80px;
