@@ -1,8 +1,6 @@
 package com.twosigma.testing.webui.driver;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.List;
 import java.util.Set;
@@ -10,12 +8,12 @@ import java.util.Set;
 /**
  * @author mykola
  */
-public class CurrentWebDriver implements WebDriver {
+public class CurrentWebDriver implements WebDriver, TakesScreenshot {
     private ThreadLocal<WebDriver> local = ThreadLocal.withInitial(WebDriverCreator::create);
 
     @Override
     public void get(String url) {
-        local.get().get(url);
+        getDriver().get(url);
     }
 
     @Override
@@ -76,5 +74,14 @@ public class CurrentWebDriver implements WebDriver {
     @Override
     public Options manage() {
         return null;
+    }
+
+    @Override
+    public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
+        return ((TakesScreenshot) getDriver()).getScreenshotAs(outputType);
+    }
+
+    private WebDriver getDriver() {
+        return local.get();
     }
 }
