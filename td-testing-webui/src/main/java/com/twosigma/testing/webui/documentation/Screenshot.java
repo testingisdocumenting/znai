@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * @author mykola
@@ -22,8 +23,8 @@ public class Screenshot {
         take();
     }
 
-    public void save(String fileName) {
-        saveImage(bufferedImage, fileName);
+    public void save(Path path) {
+        saveImage(bufferedImage, path);
     }
 
     private BufferedImage takeBufferedImage() {
@@ -35,9 +36,9 @@ public class Screenshot {
         }
     }
 
-    private void saveImage(BufferedImage bufferedImage, String fileName)  {
+    private void saveImage(BufferedImage bufferedImage, Path path)  {
         try {
-            ImageIO.write(bufferedImage, "png", new File(fileName));
+            ImageIO.write(bufferedImage, "png", path.toFile());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -45,6 +46,5 @@ public class Screenshot {
 
     private void take() {
         bufferedImage = takeBufferedImage();
-        saveImage(bufferedImage, "test.png");
     }
 }

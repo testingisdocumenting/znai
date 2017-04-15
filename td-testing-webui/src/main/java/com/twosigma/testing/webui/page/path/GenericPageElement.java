@@ -33,7 +33,7 @@ public class GenericPageElement implements PageElement {
         findElement().click();
     }
 
-    private WebElement findElement() {
+    public WebElement findElement() {
         List<WebElement> webElements = path.find(driver);
         return webElements.get(0);
     }

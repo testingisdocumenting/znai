@@ -1,0 +1,11 @@
+[
+  {
+    "r": 20,
+    "color": "red",
+    "x": 700,
+    "y": 200,
+    "id": "circle1",
+    "text": "1",
+    "type": "circle"
+  }
+]

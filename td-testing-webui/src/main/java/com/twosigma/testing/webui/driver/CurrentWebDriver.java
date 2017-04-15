@@ -28,12 +28,12 @@ public class CurrentWebDriver implements WebDriver, TakesScreenshot {
 
     @Override
     public List<WebElement> findElements(By by) {
-        return null;
+        return getDriver().findElements(by);
     }
 
     @Override
     public WebElement findElement(By by) {
-        return null;
+        return getDriver().findElement(by);
     }
 
     @Override
