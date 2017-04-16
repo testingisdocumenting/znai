@@ -81,6 +81,8 @@ const TestData = {
                         {
                             "imageSrc": "idea.png",
                             "shapes": [],
+                            "width": 937,
+                            "height": 657,
                             "type": "AnnotatedImage"
                         },
                         {
@@ -133,6 +135,8 @@ const TestData = {
                                     "color": "red"
                                 }
                             ],
+                            "width": 833,
+                            "height": 204,
                             "type": "AnnotatedImage"
                         },
                         {
@@ -240,6 +244,8 @@ const TestData = {
                                     "text": "text"
                                 }
                             ],
+                            "width": 537,
+                            "height": 133,
                             "type": "AnnotatedImage"
                         },
                         {
@@ -255,6 +261,22 @@ const TestData = {
                             "lang": "json",
                             "maxLineLength": 55,
                             "tokens": [
+                                {
+                                    "type": "punctuation",
+                                    "data": "{"
+                                },
+                                {
+                                    "type": "property",
+                                    "data": "\"shapes\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "data": ":"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
                                 {
                                     "type": "punctuation",
                                     "data": "["
@@ -822,6 +844,10 @@ const TestData = {
                                 {
                                     "type": "punctuation",
                                     "data": "]"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "}"
                                 }
                             ],
                             "type": "Snippet"
@@ -923,6 +949,8 @@ const TestData = {
                                     "color": "red"
                                 }
                             ],
+                            "width": 851,
+                            "height": 383,
                             "type": "AnnotatedImage"
                         }
                     ]

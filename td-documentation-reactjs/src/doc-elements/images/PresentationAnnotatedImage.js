@@ -8,7 +8,7 @@ class PresentationAnnotatedImage extends Component {
         const {imageSrc, shapes, slideIdx, onLoad} = this.props
         const shapesToDisplay = shapes.slice(0, slideIdx)
 
-        return (<EmbeddedAnnotatedImage imageSrc={imageSrc} shapes={shapesToDisplay} onLoad={onLoad}/>)
+        return (<EmbeddedAnnotatedImage {...this.props} shapes={shapesToDisplay}/>)
     }
 }
 

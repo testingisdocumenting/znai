@@ -8,11 +8,10 @@ class AnnotatedImage extends Component {
     }
 
     render() {
-        const {imageSrc, annotations, isStatic, selectedId} = this.props
-        const {imageWidth, imageHeight} = this.state
+        const {imageSrc, annotations, width, height, isStatic, selectedId} = this.props
 
-        const svgWidth = imageWidth + "px"
-        const svgHeight = imageHeight + "px"
+        const imageWidth = width + "px"
+        const imageHeight = height + "px"
 
         const parentStyle = {position: 'relative', width: imageWidth, height: imageHeight}
         const childrenStyle = {float: "left", position: "absolute", top: 0}
@@ -20,11 +19,12 @@ class AnnotatedImage extends Component {
         return (<div style={parentStyle} className="annotated-image" >
             <div style={childrenStyle}>
                 <img alt="annotated" src={imageSrc}
-                     ref={node => this.imageNode = node}
-                     onLoad={() => this.calcSize()}/>
+                     width={imageWidth}
+                     height={imageHeight}
+                     ref={node => this.imageNode = node}/>
             </div>
             <div style={childrenStyle}>
-                <svg width={svgWidth} height={svgHeight}>
+                <svg width={imageWidth} height={imageHeight}>
                     {isStatic ?
                         annotations.staticAnnotationsToRender():
                         annotations.interactiveAnnotationsToRender(selectedId)}
@@ -40,17 +40,11 @@ class AnnotatedImage extends Component {
         </div>)
     }
 
-    calcSize() {
-        const {onLoad} = this.props
-
-        const imageWidth = this.imageNode.offsetWidth;
-        const imageHeight = this.imageNode.offsetHeight;
-
-        this.setState({imageWidth : imageWidth,
-            imageHeight: imageHeight})
+    componentDidMount() {
+        const {onLoad, width, height} = this.props
 
         if (onLoad) {
-            onLoad(imageWidth, imageHeight)
+            onLoad(width, height)
         }
     }
 }

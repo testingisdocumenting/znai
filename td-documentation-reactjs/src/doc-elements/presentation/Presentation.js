@@ -51,8 +51,6 @@ class Presentation extends Component {
     }
 
     calcRatio(width, height) {
-        console.log("calcRatio", width, height)
-
         const widthRatio = window.innerWidth / width
         const heightRatio = window.innerHeight / height
 

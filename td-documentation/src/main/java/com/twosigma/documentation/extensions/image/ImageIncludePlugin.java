@@ -9,6 +9,7 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
 
+import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -23,6 +24,7 @@ public class ImageIncludePlugin implements IncludePlugin {
     private Path imagePath;
     private Path annotationsPath;
     private Path slidesPath;
+    private PluginResourcesResolver resourceResolver;
 
     @Override
     public String id() {
@@ -31,7 +33,7 @@ public class ImageIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        PluginResourcesResolver resourceResolver = componentsRegistry.includeResourceResolver();
+        resourceResolver = componentsRegistry.includeResourceResolver();
         String imagePathValue = includeParams.getFreeParam();
         imagePath = resourceResolver.fullPath(imagePathValue);
 
@@ -41,15 +43,24 @@ public class ImageIncludePlugin implements IncludePlugin {
         annotationsPath = annotationsPathValue != null ? resourceResolver.fullPath(annotationsPathValue) : null;
         slidesPath = slidesPathValue != null ? resourceResolver.fullPath(slidesPathValue) : null;
 
+        Map<String, ?> annotations = annotationsPath == null ? null : JsonUtils.deserializeAsMap(FileUtils.fileTextContent(annotationsPath));
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("imageSrc", imagePathValue);
-        props.put("shapes", loadShapes(annotationsPath));
+        props.put("shapes", annotations != null ? annotations.get("shapes") : Collections.emptyList());
+        setWidthHeight(props, annotations, imagePathValue);
 
         return PluginResult.docElement("AnnotatedImage", props);
     }
 
-    private List<?> loadShapes(Path path) {
-        return path == null ? Collections.emptyList() : JsonUtils.deserializeAsList(FileUtils.fileTextContent(path));
+    private void setWidthHeight(Map<String, Object> props, Map<String, ?> annotations, String imagePathValue) {
+        if (annotations == null || ! annotations.containsKey("width")) {
+            BufferedImage bufferedImage = resourceResolver.imageContent(imagePathValue);
+            props.put("width", bufferedImage.getWidth());
+            props.put("height", bufferedImage.getHeight());
+        } else {
+            props.put("width", annotations.get("width"));
+            props.put("height", annotations.get("height"));
+        }
     }
 
     @Override

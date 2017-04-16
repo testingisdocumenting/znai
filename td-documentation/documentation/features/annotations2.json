@@ -1,4 +1,4 @@
-[{"type": "arrow", "id":"a1",
+{"shapes": [{"type": "arrow", "id":"a1",
   "beginX": 200, "beginY": 100, "endX": 48, "endY": 42,
   "color": "red", "text": "debug"},
 
@@ -8,4 +8,4 @@
 
   {"type": "circle", "id": "c1",
     "x": 350, "y": 100, "r": 30,
-    "color": "blue", "text": "text"}]
+    "color": "blue", "text": "text"}]}
