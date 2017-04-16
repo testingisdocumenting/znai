@@ -73,7 +73,7 @@ public class CurrentWebDriver implements WebDriver, TakesScreenshot {
 
     @Override
     public Options manage() {
-        return null;
+        return getDriver().manage();
     }
 
     @Override

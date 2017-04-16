@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class WebTestDsl {
     private static final WebDriver driver = new CurrentWebDriver();
-    public static final DocumentationDsl doc = new DocumentationDsl((TakesScreenshot) driver);
+    public static final DocumentationDsl doc = new DocumentationDsl(driver);
 
     public static void open(String url) {
         driver.get(url);

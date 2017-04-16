@@ -4,9 +4,7 @@ import com.twosigma.testing.webui.cfg.Configuration;
 import com.twosigma.testing.webui.page.PageElement;
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -26,18 +24,20 @@ public class DocumentationDsl {
 
     private TakesScreenshot screenshotTaker;
     private List<Annotation> annotations;
+    private WebDriver driver;
 
-    public DocumentationDsl(TakesScreenshot screenshotTaker) {
-        this.screenshotTaker = screenshotTaker;
+    public DocumentationDsl(WebDriver driver) {
+        this.driver = driver;
+        this.screenshotTaker = (TakesScreenshot) driver;
     }
 
-    private DocumentationDsl(TakesScreenshot screenshotTaker, List<Annotation> annotations) {
-        this(screenshotTaker);
+    private DocumentationDsl(WebDriver driver, List<Annotation> annotations) {
+        this(driver);
         this.annotations = annotations;
     }
 
     public DocumentationDsl withAnnotations(Annotation... annotations) {
-        return new DocumentationDsl(screenshotTaker, assignDefaultText(Arrays.asList(annotations)));
+        return new DocumentationDsl(driver, assignDefaultText(Arrays.asList(annotations)));
     }
 
     public static Annotation badge(PageElement pageElement) {
@@ -55,8 +55,15 @@ public class DocumentationDsl {
     }
 
     private void createAnnotations(String screenshotName) {
-        List<? extends Map<String, ?>> list = annotations.stream().map(this::createAnnotationData).collect(toList());
-        String annotationsJson = JsonUtils.serializePrettyPrint(list);
+        List<? extends Map<String, ?>> shapes = annotations.stream().map(this::createAnnotationData).collect(toList());
+
+        Dimension dimension = driver.manage().window().getSize();
+        Map<String, Object> result = new HashMap<>();
+        result.put("shapes", shapes);
+        result.put("width", dimension.getWidth());
+        result.put("height", dimension.getHeight());
+
+        String annotationsJson = JsonUtils.serializePrettyPrint(result);
         FileUtils.writeTextContent(cfg.getDocumentationArtifactsPath().resolve(Paths.get(screenshotName + ".json")),
                 annotationsJson);
     }
