@@ -144,12 +144,32 @@ toc = [
             "id": "existing-file"
           },
           {
-            "title": "Inline Comments",
-            "id": "inline-comments"
-          },
-          {
             "title": "Callout Comments",
             "id": "callout-comments"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
+        "pageTitle": "Java",
+        "fileName": "java",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "Method Body",
+            "id": "method-body"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
+        "pageTitle": "Cpp",
+        "fileName": "cpp",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "Comments",
+            "id": "comments"
           }
         ]
       },
@@ -162,6 +182,14 @@ toc = [
           {
             "title": "CSV",
             "id": "csv"
+          },
+          {
+            "title": "JSON",
+            "id": "json"
+          },
+          {
+            "title": "Alignment and Width",
+            "id": "alignment-and-width"
           }
         ]
       },
@@ -246,6 +274,40 @@ toc = [
           {
             "title": "Log Stash",
             "id": "log-stash"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sectionTitle": "Synergy With Testing",
+    "dirName": "synergy-with-testing",
+    "items": [
+      {
+        "sectionTitle": "Synergy With Testing",
+        "pageTitle": "REST",
+        "fileName": "REST",
+        "dirName": "synergy-with-testing",
+        "pageSectionIdTitles": [
+          {
+            "title": "Output expectations",
+            "id": "output-expectations"
+          },
+          {
+            "title": "Department users list",
+            "id": "department-users-list"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Synergy With Testing",
+        "pageTitle": "UI",
+        "fileName": "UI",
+        "dirName": "synergy-with-testing",
+        "pageSectionIdTitles": [
+          {
+            "title": "Screenshots with Annotations",
+            "id": "screenshots-with-annotations"
           }
         ]
       }
