@@ -25,7 +25,7 @@ Annotations are stored as a simple json file
 
 And then easily integrated with documentation by using an `image` plugin
 
-:include-file: UI-documentation.md {startLine: '# Annotated Images', endLine: '* etc', lang: 'markdown'}
+:include-file: image-annotations.md {startLine: '# Annotated Images', endLine: '* etc', lang: 'markdown'}
 
 # Editing Annotations
 

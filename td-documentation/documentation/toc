@@ -12,9 +12,9 @@ features
     tables
     tabs
     json
-    UI-documentation
+    image-annotations
     math
     proxy
 synergy-with-testing
     REST
-    UI
+    web-UI

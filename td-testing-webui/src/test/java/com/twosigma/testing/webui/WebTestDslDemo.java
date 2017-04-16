@@ -22,7 +22,8 @@ public class WebTestDslDemo {
 
         open("http://google.com");
 
-        doc.withAnnotations(badge(signIn),
+        doc.withAnnotations(
+                badge(signIn),
                 highlighter(input).withColor("green"),
                 arrow(search, "Click This").withColor("yellow")).capture("test");
     }
