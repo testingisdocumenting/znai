@@ -101,19 +101,21 @@ world""")
 
     @Test
     void "inlined image"() {
-        parse("text ![alt text](image/url \"custom title\") another text")
+        parse("text ![alt text](images/png-test.png \"custom title\") another text")
         assert content == [[type: 'Paragraph', content:[
                 [text: "text " , type: "SimpleText"],
-                [title: "custom title", destination: 'image/url', alt: 'alt text', type: 'Image', inlined: true],
+                [title: "custom title", destination: 'images/png-test.png', alt: 'alt text', type: 'Image', inlined: true,
+                 width:762, height:581],
                 [text: " another text" , type: "SimpleText"]]]]
     }
 
     @Test
     void "standalone image"() {
-        parse("![alt text](image/url \"custom title\")")
-        assert content == [[title: "custom title", destination: 'image/url',
-                                                             alt: 'alt text', inlined: false,
-                                                         type: 'Image']]
+        parse("![alt text](images/png-test.png \"custom title\")")
+        assert content == [[title: "custom title", destination: 'images/png-test.png',
+                            alt: 'alt text', inlined: false,
+                            width:762, height:581,
+                            type: 'Image']]
     }
 
     @Test

@@ -18,15 +18,25 @@ public class ResourceUtils {
     }
 
     /**
+     * {@link InputStream} of the specified resource
+     * @param resourcePath resource path like path/to/meta.json
+     * @return input stream
+     */
+    public static InputStream resourceStream(String resourcePath) {
+        InputStream stream = ResourceUtils.class.getClassLoader().getResourceAsStream(resourcePath);
+        if (stream == null) {
+            throw new IllegalArgumentException("can't find resource: " + resourcePath);
+        }
+        return stream;
+    }
+
+    /**
      * textual content from the classpath by resource path
      * @param resourcePath resource path like path/to/meta.json
      * @return text content of the resource
      */
     public static String textContent(String resourcePath) {
-        InputStream stream = ResourceUtils.class.getClassLoader().getResourceAsStream(resourcePath);
-        if (stream == null) {
-            throw new IllegalArgumentException("can't find resource: " + resourcePath);
-        }
+        InputStream stream = resourceStream(resourcePath);
 
         try {
             return IOUtils.toString(stream, StandardCharsets.UTF_8);

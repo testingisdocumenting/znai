@@ -3,6 +3,9 @@ package com.twosigma.documentation.extensions.include;
 import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.utils.FileUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,6 +29,16 @@ public class MultipleLocationsResourceResolver implements PluginResourcesResolve
     public String textContent(String path) {
         Path file = fullPath(path);
         return FileUtils.fileTextContent(file);
+    }
+
+    @Override
+    public BufferedImage imageContent(String path) {
+        Path fullPath = fullPath(path);
+        try {
+            return ImageIO.read(fullPath.toFile());
+        } catch (IOException e) {
+            throw new RuntimeException("Can't load image " + fullPath, e);
+        }
     }
 
     @Override

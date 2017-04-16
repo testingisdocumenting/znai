@@ -3,6 +3,8 @@ package com.twosigma.documentation.parser
 import com.twosigma.documentation.extensions.PluginResourcesResolver
 import com.twosigma.utils.ResourceUtils
 
+import javax.imageio.ImageIO
+import java.awt.image.BufferedImage
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -13,6 +15,11 @@ class TestResourceResolver implements PluginResourcesResolver {
     @Override
     String textContent(String path) {
         return ResourceUtils.textContent(path)
+    }
+
+    @Override
+    BufferedImage imageContent(String path) {
+        return ImageIO.read(ResourceUtils.resourceStream(path))
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.ParserHandler;
 
+import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.function.Function;
@@ -22,10 +23,10 @@ import java.util.stream.Collectors;
  */
 public class DocElementCreationParserHandler implements ParserHandler {
     private final ComponentsRegistry componentsRegistry;
-    private Path path;
-    private List<AuxiliaryFile> auxiliaryFiles;
+    private final Path path;
+    private final List<AuxiliaryFile> auxiliaryFiles;
 
-    private List<DocElement> paragraphs;
+    private final List<DocElement> paragraphs;
 
     private final DocElement docElement;
     private final Deque<DocElement> elementsStack;
@@ -162,7 +163,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onImage(String title, String destination, String alt) {
-        append(DocElementType.IMAGE, "title", title, "destination", destination, "alt", alt, "inlined", true);
+        BufferedImage image = componentsRegistry.includeResourceResolver().imageContent(destination);
+        append(DocElementType.IMAGE, "title", title, "destination", destination, "alt", alt, "inlined", true,
+                "width", image.getWidth(),
+                "height", image.getHeight());
 
         if (! destination.startsWith("http")) {
             auxiliaryFiles.add(AuxiliaryFile.runTime(componentsRegistry.includeResourceResolver().fullPath(destination)));
@@ -283,5 +287,6 @@ public class DocElementCreationParserHandler implements ParserHandler {
         elementsStack.peekLast().addChild(element);
         elementsStack.add(element);
     }
+
 }
 
