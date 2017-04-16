@@ -1,10 +1,15 @@
 package com.twosigma.testing.data.table;
 
+import com.twosigma.utils.JsonUtils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Represents a set of rows with named columns to be used as part of test input preparation and/or test output validation
@@ -100,6 +105,14 @@ public class TableData implements Iterable<Record> {
 
     public Stream<Record> rowsStream() {
         return rows.stream();
+    }
+
+    public List<Map<String, ?>> toListOfMaps() {
+        return rows.stream().map(Record::toMap).collect(toList());
+    }
+
+    public String toJson() {
+        return JsonUtils.serializePrettyPrint(toListOfMaps());
     }
 
     @Override

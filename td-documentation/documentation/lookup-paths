@@ -2,3 +2,5 @@
 ../../td-console/src/test/groovy
 ../../td-testing-webui/src/test/java
 ../../td-testing-webui/src/test/groovy
+../../td-testing-core-groovy/target/test-classes
+../../td-testing-core-groovy/src/test/groovy

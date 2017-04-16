@@ -16,5 +16,6 @@ features
     math
     proxy
 synergy-with-testing
+    java
     REST
     web-UI

@@ -1,8 +1,10 @@
 package com.twosigma.testing.data.table;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -43,15 +45,17 @@ public class Record {
         return values.stream().map(v -> mapper.apply((T) v));
     }
 
-    public Map<String, Object> asMap() {
+    public Map<String, Object> toMap() {
         return header.columnIdxStream().boxed().
-            collect(toMap(
-                idx -> header.columnNameByIdx(idx),
-                idx -> values.get(idx)));
+                collect(Collectors.toMap(
+                        idx -> header.columnNameByIdx(idx),
+                        idx -> values.get(idx),
+                        (v1,v2) -> { throw new RuntimeException(String.format("duplicate key for values %s and %s", v1, v2)); },
+                        LinkedHashMap::new));
     }
 
     @Override
     public String toString() {
-        return asMap().toString();
+        return toMap().toString();
     }
 }
