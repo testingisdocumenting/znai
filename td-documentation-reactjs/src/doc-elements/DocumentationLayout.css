@@ -18,11 +18,12 @@
 .toc-panel {
     flex: 2;
 
-    overflow-x: auto;
+    overflow-x: hidden;
     white-space: nowrap;
     border-right: 1px solid #eee;
     min-height: 100vh;
     min-width: 300px;
+    max-width: 300px;
 
     background-color: #333;
     color: #fff;
@@ -54,7 +55,6 @@
 
 .toc-menu {
     padding-left: 30px;
-    padding-right: 40px;
     padding-top: 20px;
 
     display: flex;
