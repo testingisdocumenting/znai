@@ -1,13 +1,33 @@
 {
   "shapes": [
     {
-      "r": 20,
-      "color": "red",
-      "x": 359,
-      "y": 89,
       "id": "circle1",
+      "type": "circle",
       "text": "1",
-      "type": "circle"
+      "color": "red",
+      "x": 934,
+      "y": 31,
+      "r": 20
+    },
+    {
+      "id": "rectangle2",
+      "type": "rectangle",
+      "text": "",
+      "color": "green",
+      "x": 272,
+      "y": 324,
+      "width": 403,
+      "height": 34
+    },
+    {
+      "id": "arrow3",
+      "type": "arrow",
+      "text": "Click This",
+      "color": "yellow",
+      "beginX": 374,
+      "beginY": 501,
+      "endX": 424,
+      "endY": 419
     }
   ],
   "pixelRatio": 2

@@ -1,5 +1,6 @@
 package com.twosigma.testing.webui.driver;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -14,7 +15,14 @@ public class WebDriverCreator {
 
     public static WebDriver create() {
         System.setProperty("webdriver.chrome.driver", "/Users/mykola/work/chromedriver");
-        return register(new ChromeDriver());
+        ChromeDriver driver = createChromeDriver();
+        initState(driver);
+
+        return register(driver);
+    }
+
+    private static ChromeDriver createChromeDriver() {
+        return new ChromeDriver();
     }
 
     public static void closeAll() {
@@ -25,5 +33,9 @@ public class WebDriverCreator {
     private static WebDriver register(WebDriver driver) {
         drivers.add(driver);
         return driver;
+    }
+
+    private static void initState(WebDriver driver) {
+        driver.manage().window().setSize(new Dimension(1000, 800));
     }
 }

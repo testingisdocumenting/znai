@@ -1,16 +1,17 @@
 package com.twosigma.testing.webui.documentation;
 
 import com.twosigma.testing.webui.cfg.Configuration;
+import com.twosigma.testing.webui.documentation.annotations.ArrowImageAnnotation;
+import com.twosigma.testing.webui.documentation.annotations.BadgeImageAnnotation;
+import com.twosigma.testing.webui.documentation.annotations.HighlighterImageAnnotation;
+import com.twosigma.testing.webui.documentation.annotations.ImageAnnotation;
 import com.twosigma.testing.webui.page.PageElement;
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
 import org.openqa.selenium.*;
 
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -20,10 +21,8 @@ import static java.util.stream.Collectors.toList;
 public class DocumentationDsl {
     private Configuration cfg = Configuration.INSTANCE;
 
-    private static final String BADGE = "circle";
-
     private TakesScreenshot screenshotTaker;
-    private List<Annotation> annotations;
+    private List<ImageAnnotation> annotations;
     private WebDriver driver;
 
     public DocumentationDsl(WebDriver driver) {
@@ -31,17 +30,25 @@ public class DocumentationDsl {
         this.screenshotTaker = (TakesScreenshot) driver;
     }
 
-    private DocumentationDsl(WebDriver driver, List<Annotation> annotations) {
+    private DocumentationDsl(WebDriver driver, List<ImageAnnotation> annotations) {
         this(driver);
         this.annotations = annotations;
     }
 
-    public DocumentationDsl withAnnotations(Annotation... annotations) {
+    public DocumentationDsl withAnnotations(ImageAnnotation... annotations) {
         return new DocumentationDsl(driver, assignDefaultText(Arrays.asList(annotations)));
     }
 
-    public static Annotation badge(PageElement pageElement) {
-        return new Annotation(BADGE, "", pageElement);
+    public static ImageAnnotation badge(PageElement pageElement) {
+        return new BadgeImageAnnotation(pageElement, "");
+    }
+
+    public static ImageAnnotation highlighter(PageElement pageElement) {
+        return new HighlighterImageAnnotation(pageElement);
+    }
+
+    public static ImageAnnotation arrow(PageElement pageElement, String text) {
+        return new ArrowImageAnnotation(pageElement, text);
     }
 
     public void capture(String screenshotName) {
@@ -66,26 +73,22 @@ public class DocumentationDsl {
                 annotationsJson);
     }
 
-    private Map<String, ?> createAnnotationData(Annotation annotation) {
-        Map<String, Object> data = new HashMap<>();
+    private Map<String, ?> createAnnotationData(ImageAnnotation annotation) {
+        Map<String, Object> data = new LinkedHashMap<>();
         data.put("id", annotation.getId());
         data.put("type", annotation.getType());
-
-        WebElement webElement = annotation.getPageElement().findElement();
-        Point location = webElement.getLocation();
-        data.put("x", location.getX());
-        data.put("y", location.getY());
-        data.put("r", 20);
         data.put("text", annotation.getText());
-        data.put("color", "red");
+        data.put("color", annotation.getColor());
+
+        annotation.addAnnotationData(data, annotation.getPageElement().findElement());
 
         return data;
     }
 
-    private List<Annotation> assignDefaultText(List<Annotation> annotations) {
+    private List<ImageAnnotation> assignDefaultText(List<ImageAnnotation> annotations) {
         int badgeNumber = 0;
-        for (Annotation annotation : annotations) {
-            if (annotation.getType().equals(BADGE)) {
+        for (ImageAnnotation annotation : annotations) {
+            if (annotation instanceof BadgeImageAnnotation) {
                 badgeNumber++;
                 annotation.setText(String.valueOf(badgeNumber));
             }
