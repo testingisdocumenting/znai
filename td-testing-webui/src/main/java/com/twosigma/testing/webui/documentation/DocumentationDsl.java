@@ -57,11 +57,9 @@ public class DocumentationDsl {
     private void createAnnotations(String screenshotName) {
         List<? extends Map<String, ?>> shapes = annotations.stream().map(this::createAnnotationData).collect(toList());
 
-        Dimension dimension = driver.manage().window().getSize();
         Map<String, Object> result = new HashMap<>();
         result.put("shapes", shapes);
-        result.put("width", dimension.getWidth());
-        result.put("height", dimension.getHeight());
+        result.put("pixelRatio", getPixelRatio());
 
         String annotationsJson = JsonUtils.serializePrettyPrint(result);
         FileUtils.writeTextContent(cfg.getDocumentationArtifactsPath().resolve(Paths.get(screenshotName + ".json")),
@@ -94,5 +92,10 @@ public class DocumentationDsl {
         }
 
         return annotations;
+    }
+
+    private Number getPixelRatio() {
+        Object pixelRatio = ((JavascriptExecutor) driver).executeScript("return window.devicePixelRatio");
+        return pixelRatio instanceof Number ? (Number) pixelRatio : 1;
     }
 }

@@ -53,14 +53,11 @@ public class ImageIncludePlugin implements IncludePlugin {
     }
 
     private void setWidthHeight(Map<String, Object> props, Map<String, ?> annotations, String imagePathValue) {
-        if (annotations == null || ! annotations.containsKey("width")) {
-            BufferedImage bufferedImage = resourceResolver.imageContent(imagePathValue);
-            props.put("width", bufferedImage.getWidth());
-            props.put("height", bufferedImage.getHeight());
-        } else {
-            props.put("width", annotations.get("width"));
-            props.put("height", annotations.get("height"));
-        }
+        Number pixelRatio = (annotations == null || !annotations.containsKey("pixelRatio")) ? 1 : (Number) annotations.get("pixelRatio");
+
+        BufferedImage bufferedImage = resourceResolver.imageContent(imagePathValue);
+        props.put("width", bufferedImage.getWidth() / pixelRatio.doubleValue());
+        props.put("height", bufferedImage.getHeight() / pixelRatio.doubleValue());
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * @author mykola
  */
-public class CurrentWebDriver implements WebDriver, TakesScreenshot {
+public class CurrentWebDriver implements WebDriver, TakesScreenshot, JavascriptExecutor {
     private ThreadLocal<WebDriver> local = ThreadLocal.withInitial(WebDriverCreator::create);
 
     @Override
@@ -83,5 +83,15 @@ public class CurrentWebDriver implements WebDriver, TakesScreenshot {
 
     private WebDriver getDriver() {
         return local.get();
+    }
+
+    @Override
+    public Object executeScript(String script, Object... args) {
+        return ((JavascriptExecutor) getDriver()).executeScript(script, args);
+    }
+
+    @Override
+    public Object executeAsyncScript(String script, Object... args) {
+        return ((JavascriptExecutor) getDriver()).executeAsyncScript(script, args);
     }
 }
