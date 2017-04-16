@@ -16,16 +16,14 @@ import static com.twosigma.testing.webui.documentation.DocumentationDsl.highligh
  */
 public class WebTestDslDemo {
     public static void main(String[] args) {
-        open("http://google.com");
-
         PageElement signIn = $("#gb_70");
         PageElement input = $(".gsfi");
         PageElement search = $("[name='btnK']");
 
+        open("http://google.com");
+
         doc.withAnnotations(badge(signIn),
                 highlighter(input).withColor("green"),
                 arrow(search, "Click This").withColor("yellow")).capture("test");
-
-        WebDriverCreator.closeAll();
     }
 }

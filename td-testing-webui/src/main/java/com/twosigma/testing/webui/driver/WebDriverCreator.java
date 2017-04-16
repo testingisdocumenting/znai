@@ -13,6 +13,10 @@ import java.util.List;
 public class WebDriverCreator {
     private static List<WebDriver> drivers = new ArrayList<>();
 
+    static {
+        registerCleanup();
+    }
+
     public static WebDriver create() {
         System.setProperty("webdriver.chrome.driver", "/Users/mykola/work/chromedriver");
         ChromeDriver driver = createChromeDriver();
@@ -37,5 +41,9 @@ public class WebDriverCreator {
 
     private static void initState(WebDriver driver) {
         driver.manage().window().setSize(new Dimension(1000, 800));
+    }
+
+    private static void registerCleanup() {
+        Runtime.getRuntime().addShutdownHook(new Thread(WebDriverCreator::closeAll));
     }
 }
