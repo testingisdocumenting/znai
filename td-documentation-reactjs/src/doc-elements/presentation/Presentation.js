@@ -12,7 +12,6 @@ class Presentation extends Component {
 
         this.keyDownHandler = this.keyDownHandler.bind(this)
         this.onClose = this.onClose.bind(this)
-        this.calcRatio = this.calcRatio.bind(this)
     }
 
     render() {
@@ -20,7 +19,7 @@ class Presentation extends Component {
         const {currentSlideIdx, scaleRatio} = this.state
         const slideAreaStyle = {transform: 'scale(' + scaleRatio + ')'}
 
-        const component = presentationRegistry.componentToRender(currentSlideIdx, this.calcRatio)
+        const component = presentationRegistry.componentToRender(currentSlideIdx)
         // const showNextButton = currentSlideIdx >= presentationRegistry.numberOfSlides - 1 TODO
 
         return (<div className="presentation">
@@ -28,7 +27,7 @@ class Presentation extends Component {
             <div className="slide-number">
                 {currentSlideIdx + 1}/{presentationRegistry.numberOfSlides}
             </div>
-            <div className="slide-area" style={slideAreaStyle}>
+            <div className="slide-area" style={slideAreaStyle} ref={(n) => this.componentDom = n}>
                 {component}
             </div>
         </div>)
@@ -36,6 +35,13 @@ class Presentation extends Component {
 
     componentDidMount() {
         document.addEventListener('keydown', this.keyDownHandler)
+        this.updateScaleRatio()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.currentSlideIdx !== this.state.currentSlideIdx) {
+            this.updateScaleRatio()
+        }
     }
 
     componentWillUnmount() {
@@ -50,17 +56,20 @@ class Presentation extends Component {
         }
     }
 
-    calcRatio(width, height) {
+    updateScaleRatio() {
+        const width = this.componentDom.offsetWidth
+        const height = this.componentDom.offsetHeight
+
         const widthRatio = window.innerWidth / width
         const heightRatio = window.innerHeight / height
 
         const scaleRatio = Math.min(widthRatio, heightRatio, 2)
-        this.setState({scaleRatio, width, height})
+
+        this.setState({scaleRatio})
     }
 
     keyDownHandler(e) {
         const {presentationRegistry, onNextPage, onPrevPage} = this.props
-        const {scaleRatio} = this.state
         let {currentSlideIdx} = this.state
 
         if (e.key === 'ArrowRight') {
@@ -79,7 +88,7 @@ class Presentation extends Component {
             this.setState({currentSlideIdx: 0, scaleRatio: defaultScaleRatio})
             onNextPage()
         } else {
-            this.setState({currentSlideIdx, scaleRatio})
+            this.setState({currentSlideIdx, scaleRatio: defaultScaleRatio})
         }
     }
 

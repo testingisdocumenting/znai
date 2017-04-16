@@ -39,14 +39,6 @@ class AnnotatedImage extends Component {
             </div>
         </div>)
     }
-
-    componentDidMount() {
-        const {onLoad, width, height} = this.props
-
-        if (onLoad) {
-            onLoad(width, height)
-        }
-    }
 }
 
 export default AnnotatedImage

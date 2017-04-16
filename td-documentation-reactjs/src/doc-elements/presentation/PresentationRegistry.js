@@ -47,13 +47,12 @@ class PresentationRegistry {
         this.numberOfSlides_ += numberOfSlides
     }
 
-    componentToRender(slideIdx, onLoad) {
+    componentToRender(slideIdx) {
         const {slideComponent, componentIdx} = this.findComponentAndIdx(slideIdx)
         const numberOfSlidesToSkip = this.calcNumberOfSlidesToSkip(componentIdx)
         return <slideComponent.component {...slideComponent.props}
                                          elementsLibrary={this.elementsLibrary}
-                                         slideIdx={slideIdx - numberOfSlidesToSkip}
-                                         onLoad={onLoad}/>
+                                         slideIdx={slideIdx - numberOfSlidesToSkip}/>
     }
 
     calcNumberOfSlidesToSkip(componentIdx) {

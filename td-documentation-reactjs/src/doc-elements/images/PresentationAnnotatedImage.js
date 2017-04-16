@@ -5,7 +5,7 @@ import './PresentationAnnotatedImage.css'
 
 class PresentationAnnotatedImage extends Component {
     render() {
-        const {imageSrc, shapes, slideIdx, onLoad} = this.props
+        const {shapes, slideIdx} = this.props
         const shapesToDisplay = shapes.slice(0, slideIdx)
 
         return (<EmbeddedAnnotatedImage {...this.props} shapes={shapesToDisplay}/>)

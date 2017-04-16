@@ -65,941 +65,515 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Complex Domain",
-                    "id": "complex-domain",
+                    "title": "Auto Annotations",
+                    "id": "auto-annotations",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Not every UI can be as simple as one input box.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "imageSrc": "idea.png",
-                            "shapes": [],
-                            "width": 937,
-                            "height": 657,
-                            "type": "AnnotatedImage"
-                        },
-                        {
-                            "type": "BlockQuote",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "Documenting and Presenting your UI",
-                                            "type": "SimpleText"
-                                        },
-                                        {
-                                            "type": "SoftLineBreak"
-                                        },
-                                        {
-                                            "text": "should be a joy",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Annotated Images",
-                    "id": "annotated-images",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "imageSrc": "word-toolbar.jpg",
-                            "shapes": [
-                                {
-                                    "type": "circle",
-                                    "id": "c1",
-                                    "x": 80.0,
-                                    "y": 45.0,
-                                    "r": 20.0,
-                                    "text": "1",
-                                    "color": "red"
-                                },
-                                {
-                                    "type": "circle",
-                                    "id": "c2",
-                                    "x": 250.0,
-                                    "y": 65.0,
-                                    "r": 20.0,
-                                    "text": "2",
-                                    "color": "red"
-                                }
-                            ],
-                            "width": 833,
-                            "height": 204,
-                            "type": "AnnotatedImage"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "there are different types of annotations:",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "bulletMarker": "*",
-                            "tight": true,
-                            "type": "BulletList",
-                            "content": [
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "circles",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "rectangles",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "arrows",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "etc",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "imageSrc": "screenshot1.png",
-                            "shapes": [
-                                {
-                                    "type": "arrow",
-                                    "id": "a1",
-                                    "beginX": 200.0,
-                                    "beginY": 100.0,
-                                    "endX": 48.0,
-                                    "endY": 42.0,
-                                    "color": "red",
-                                    "text": "debug"
-                                },
-                                {
-                                    "type": "rectangle",
-                                    "id": "r1",
-                                    "x": 200.0,
-                                    "y": 50.0,
-                                    "width": 100.0,
-                                    "height": 40.0,
-                                    "color": "green",
-                                    "text": "debug"
-                                },
-                                {
-                                    "type": "circle",
-                                    "id": "c1",
-                                    "x": 350.0,
-                                    "y": 100.0,
-                                    "r": 30.0,
-                                    "color": "blue",
-                                    "text": "text"
-                                }
-                            ],
-                            "width": 537,
-                            "height": 133,
-                            "type": "AnnotatedImage"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Annotations are stored as a simple json file",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "json",
-                            "maxLineLength": 55,
-                            "tokens": [
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"shapes\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "["
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"type\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"arrow\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"id\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"a1\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n  "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"beginX\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "200"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"beginY\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "100"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"endX\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "48"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"endY\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "42"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n  "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"color\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"red\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"text\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"debug\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n\n  "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"type\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"rectangle\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"id\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"r1\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"x\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "200"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"y\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "50"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"width\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "100"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"height\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "40"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"color\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"green\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"text\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"debug\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n\n  "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"type\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"circle\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"id\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"c1\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"x\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "350"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"y\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "100"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"r\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "30"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"color\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"blue\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"text\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"text\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "]"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                }
-                            ],
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "And then easily integrated with documentation by using an ",
+                                    "text": "We saw (todo link) how you can annotate images using ",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "code": "image",
+                                    "code": "include-image",
                                     "type": "InlinedCode"
                                 },
                                 {
-                                    "text": " plugin",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "markdown",
-                            "maxLineLength": 71,
-                            "tokens": [
-                                {
-                                    "type": "title",
-                                    "data": "# Annotated Images"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n\n:include-image: word-toolbar.jpg {annotationsPath: \u0027annotations1.json\u0027}\n\nthere are different types of annotations:\n"
-                                },
-                                {
-                                    "type": "list",
-                                    "data": "*"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " circles\n"
-                                },
-                                {
-                                    "type": "list",
-                                    "data": "*"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " rectangles\n"
-                                },
-                                {
-                                    "type": "list",
-                                    "data": "*"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " arrows\n"
-                                },
-                                {
-                                    "type": "list",
-                                    "data": "*"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " etc"
-                                }
-                            ],
-                            "startLine": "# Annotated Images",
-                            "endLine": "* etc",
-                            "type": "Snippet"
-                        }
-                    ]
-                },
-                {
-                    "title": "Editing Annotations",
-                    "id": "editing-annotations",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "imageSrc": "editor-overview.png",
-                            "shapes": [
-                                {
-                                    "type": "rectangle",
-                                    "id": "r2",
-                                    "x": 140.0,
-                                    "y": 135.0,
-                                    "width": 220.0,
-                                    "height": 240.0,
-                                    "text": "",
-                                    "color": "red"
-                                },
-                                {
-                                    "type": "rectangle",
-                                    "id": "r1",
-                                    "x": 593.0,
-                                    "y": 5.0,
-                                    "width": 255.0,
-                                    "height": 180.0,
-                                    "text": "",
-                                    "color": "red"
-                                }
-                            ],
-                            "width": 851,
-                            "height": 383,
-                            "type": "AnnotatedImage"
-                        }
-                    ]
-                },
-                {
-                    "title": "Presentation Mode",
-                    "id": "presentation-mode",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Annotated images automatically participate in presentation mode. Annotations appear one by one and scale to match the",
+                                    "text": " plugin.",
                                     "type": "SimpleText"
                                 },
                                 {
                                     "type": "SoftLineBreak"
                                 },
                                 {
-                                    "text": "zoom level of a presentation.",
+                                    "text": "Now let\u0027s automate the screenshot and annotations assigning process.",
                                     "type": "SimpleText"
                                 }
                             ]
+                        },
+                        {
+                            "lang": "java",
+                            "maxLineLength": 73,
+                            "tokens": [
+                                {
+                                    "type": "text",
+                                    "data": "PageElement signIn "
+                                },
+                                {
+                                    "type": "operator",
+                                    "data": "\u003d"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " $"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "#gb_70"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ";"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\nPageElement input "
+                                },
+                                {
+                                    "type": "operator",
+                                    "data": "\u003d"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " $"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "."
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "gsfi"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ";"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\nPageElement search "
+                                },
+                                {
+                                    "type": "operator",
+                                    "data": "\u003d"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " $"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "["
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "name"
+                                },
+                                {
+                                    "type": "operator",
+                                    "data": "\u003d"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\u0027"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "btnK"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\u0027"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "]"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ";"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n\n"
+                                },
+                                {
+                                    "type": "function",
+                                    "data": "open"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "http"
+                                },
+                                {
+                                    "type": "operator",
+                                    "data": ":"
+                                },
+                                {
+                                    "type": "operator",
+                                    "data": "/"
+                                },
+                                {
+                                    "type": "operator",
+                                    "data": "/"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "google"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "."
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "com"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ";"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n\ndoc"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "."
+                                },
+                                {
+                                    "type": "function",
+                                    "data": "withAnnotations"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n        "
+                                },
+                                {
+                                    "type": "function",
+                                    "data": "badge"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "signIn"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ","
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n        "
+                                },
+                                {
+                                    "type": "function",
+                                    "data": "highlighter"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "input"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "."
+                                },
+                                {
+                                    "type": "function",
+                                    "data": "withColor"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "green"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ","
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n        "
+                                },
+                                {
+                                    "type": "function",
+                                    "data": "arrow"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "search"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ","
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "Click This"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "."
+                                },
+                                {
+                                    "type": "function",
+                                    "data": "withColor"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "yellow"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "."
+                                },
+                                {
+                                    "type": "function",
+                                    "data": "capture"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "test"
+                                },
+                                {
+                                    "type": "string",
+                                    "data": "\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "data": ";"
+                                }
+                            ],
+                            "type": "Snippet"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Example above is using a Selenium based framework to automatically take screenshot and retrieve annotations positions.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Once we have the information we can include the annotated image in our documentation.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "lang": "",
+                            "maxLineLength": 55,
+                            "tokens": [
+                                {
+                                    "type": "text",
+                                    "data": ":include-image: test.png {annotationsPath: \u0027test.json\u0027}\n"
+                                }
+                            ],
+                            "lineNumber": "",
+                            "type": "Snippet"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Result is below",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "imageSrc": "test.png",
+                            "shapes": [
+                                {
+                                    "id": "circle1",
+                                    "type": "circle",
+                                    "text": "1",
+                                    "color": "red",
+                                    "x": 934.0,
+                                    "y": 31.0,
+                                    "r": 20.0
+                                },
+                                {
+                                    "id": "rectangle2",
+                                    "type": "rectangle",
+                                    "text": "",
+                                    "color": "green",
+                                    "x": 272.0,
+                                    "y": 324.0,
+                                    "width": 403.0,
+                                    "height": 34.0
+                                },
+                                {
+                                    "id": "arrow3",
+                                    "type": "arrow",
+                                    "text": "Click This",
+                                    "color": "yellow",
+                                    "beginX": 374.0,
+                                    "beginY": 501.0,
+                                    "endX": 424.0,
+                                    "endY": 419.0
+                                }
+                            ],
+                            "width": 1000.0,
+                            "height": 686.0,
+                            "type": "AnnotatedImage"
                         }
                     ]
                 }
             ],
             "tocItem": {
-                "sectionTitle": "Features",
-                "pageTitle": "UI Documentation",
-                "fileName": "UI-documentation",
-                "dirName": "features",
+                "sectionTitle": "Synergy With Testing",
+                "pageTitle": "Web UI",
+                "fileName": "web-UI",
+                "dirName": "synergy-with-testing",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Complex Domain",
-                        "id": "complex-domain"
-                    },
-                    {
-                        "title": "Annotated Images",
-                        "id": "annotated-images"
-                    },
-                    {
-                        "title": "Editing Annotations",
-                        "id": "editing-annotations"
-                    },
-                    {
-                        "title": "Presentation Mode",
-                        "id": "presentation-mode"
+                        "title": "Auto Annotations",
+                        "id": "auto-annotations"
                     }
                 ]
             }
