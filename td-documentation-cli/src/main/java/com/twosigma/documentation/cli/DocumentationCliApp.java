@@ -20,6 +20,7 @@ public class DocumentationCliApp {
     private WebSite webSite;
 
     public DocumentationCliApp(String[] args) {
+        System.setProperty("java.awt.headless", "true");
         this.config = new CliConfig(args);
         this.deployPath = config.getDeployRoot().resolve(getDocId());
     }

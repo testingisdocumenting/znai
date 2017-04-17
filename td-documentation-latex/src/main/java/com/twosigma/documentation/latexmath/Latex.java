@@ -57,7 +57,6 @@ public class Latex {
     }
 
     private static void init() {
-        System.setProperty("java.awt.headless", "true");
         DefaultTeXFont.registerAlphabet(new GreekRegistration());
     }
 
