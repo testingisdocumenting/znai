@@ -24,6 +24,6 @@ class RestTestingTest {
 
     @Test
     void "should capture scenario description"() {
-        runner.run(ResourceUtils.textContent("simple.groovy"))
+        runner.run(ResourceUtils.textContent("simple-rest-test.groovy"))
     }
 }
