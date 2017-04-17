@@ -1,5 +1,6 @@
 import Prism from 'prismjs'
 import 'prismjs/components/prism-java'
+import 'prismjs/components/prism-groovy'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-python'
