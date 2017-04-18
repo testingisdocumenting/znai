@@ -50,3 +50,13 @@ Markup based documentation is widely used as well
 * open source projects (ReactJS, Pandas, Spark)
 * technical books (O'Reilly, Manning)
 * big companies (Google, FaceBook)
+
+# Presentations
+
+We build presentations to 
+* show new features
+* teach a class
+
+There is a cost to maintain them. 
+Instead of building separate slides and keep them up-to-date, 
+this system automatically generates slides from your documentation content.
