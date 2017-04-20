@@ -77,12 +77,17 @@ public class TestServer implements HttpConfiguration {
 
             final TestServerRequest serverRequest = new TestServerRequest();
             serverRequest.setRequestBody(IOUtils.toString(baseRequest.getReader()));
+            serverRequest.setRequestType(baseRequest.getContentType());
 
             final TestServerResponse testServerResponse = responses.get(url);
-            final String responseBody = testServerResponse.generate(serverRequest);
-            response.setStatus(200);
-            response.setContentType("application/json");
-            response.getWriter().println(responseBody != null ? responseBody : "");
+            if (testServerResponse == null) {
+                response.setStatus(404);
+            } else {
+                final String responseBody = testServerResponse.responseBody(serverRequest);
+                response.setStatus(200);
+                response.setContentType(testServerResponse.responseType(serverRequest));
+                response.getWriter().println(responseBody != null ? responseBody : "");
+            }
 
             baseRequest.setHandled(true);
         }

@@ -4,7 +4,7 @@ import com.twosigma.testing.http.HttpTestListeners
 import com.twosigma.testing.http.datacoverage.DataNodeToMapOfValuesConverter
 import com.twosigma.testing.http.render.DataNodeRenderer
 import com.twosigma.testing.http.testserver.TestServer
-import com.twosigma.testing.http.testserver.TestServerResponseConstant
+import com.twosigma.testing.http.testserver.TestServerJsonResponse
 import com.twosigma.testing.http.testserver.TestServerResponseEcho
 import org.junit.AfterClass
 import org.junit.BeforeClass
@@ -21,7 +21,7 @@ class HttpExtensionsTest {
     @BeforeClass
     static void startServer() {
         testServer.start(7823)
-        testServer.registerGet("/object", new TestServerResponseConstant("{'id': 10, 'price': 100, 'amount': 30, 'list': [1, 2, 3], 'complexList': [{'k1': 'v1', 'k2': 'v2'}, {'k1': 'v11', 'k2': 'v22'}]}"))
+        testServer.registerGet("/object", new TestServerJsonResponse("{'id': 10, 'price': 100, 'amount': 30, 'list': [1, 2, 3], 'complexList': [{'k1': 'v1', 'k2': 'v2'}, {'k1': 'v11', 'k2': 'v22'}]}"))
         testServer.registerPost("/echo", new TestServerResponseEcho())
 
         HttpTestListeners.add({ result ->

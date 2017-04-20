@@ -7,6 +7,7 @@ public class TestServerRequest {
     private String url;
     private String requestMethod;
     private String requestBody;
+    private String requestType;
 
     public String getUrl() {
         return url;
@@ -30,5 +31,13 @@ public class TestServerRequest {
 
     public void setRequestBody(final String requestBody) {
         this.requestBody = requestBody;
+    }
+
+    public String getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
     }
 }
