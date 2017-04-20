@@ -18,16 +18,19 @@ function parseCode(lang, code) {
     return tokens.map(normalizeToken)
 }
 
+const extensionsMapping = {
+    csv: 'clike',
+    c: 'cpp',
+    h: 'cpp',
+    hpp: 'cpp',
+    cpp: 'cpp',
+    js: 'javascript',
+    py: 'python'
+}
+
 function adjustLang(lang) {
-    if (lang === 'csv') {
-        return 'clike'
-    }
-
-    if (lang === 'js') {
-        return 'javascript'
-    }
-
-    return lang
+    const extensionBasedLang = extensionsMapping[lang]
+    return extensionBasedLang ? extensionBasedLang : lang
 }
 
 function normalizeToken(token) {
