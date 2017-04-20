@@ -4,6 +4,7 @@ To define multiple tabs we use fenced code block
 
     ```tabs
     JavaScript:include-file: file-name.js
+    Java:include-file: wide-code.java
     Cpp:include-cpp: simple.cpp {entry: 'main', bodyOnly: true}
     ```
     
@@ -11,6 +12,7 @@ This will generate a multi tab widget with an include plugin content per tab
 
 ```tabs
 JavaScript:include-file: file-name.js
+Java:include-file: wide-code.java
 Cpp:include-cpp: simple.cpp {entry: 'main', bodyOnly: true}
 ```
 
@@ -23,6 +25,7 @@ can be specified this way.
 
     ```tabs
     JavaScript:include-markdown: instructions/javascript-install.md
+    Java:include-markdown: instructions/java-install.md
     Cpp:include-markdown: instructions/cpp-install.md
     ```
 
@@ -30,5 +33,6 @@ Each tab will display inlined markdown from specified files.
 
 ```tabs
 JavaScript:include-markdown: instructions/javascript-install.md
+Java:include-markdown: instructions/java-install.md
 Cpp:include-markdown: instructions/cpp-install.md
 ```

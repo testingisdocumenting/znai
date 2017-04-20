@@ -48,13 +48,7 @@ We use highlightjs library to provide syntax highlighting
 To make regular text more readable we maintain a narrow column of text. You code snippets however can't always follow the 
 same rules. In case of a wide code snippets we expand the horizontal boundaries and center the source code to fit.
 
-```java
-class InternationalPriceService implements PriceService {
-    private static void LongJavaInterfaceNameWithSuperFactory createMegaFactory(final ExchangeCalendar calendar) {
-        ...
-    }
-}
-```
+:include-file: wide-code.java
 
 # Inlined
 
