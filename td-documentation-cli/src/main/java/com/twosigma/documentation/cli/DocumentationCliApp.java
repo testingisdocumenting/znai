@@ -15,13 +15,13 @@ import java.nio.file.Path;
  * @author mykola
  */
 public class DocumentationCliApp {
-    private CliConfig config;
+    private DocumentationCliConfig config;
     private Path deployPath;
     private WebSite webSite;
 
     public DocumentationCliApp(String[] args) {
         System.setProperty("java.awt.headless", "true");
-        this.config = new CliConfig(args);
+        this.config = new DocumentationCliConfig(args);
         this.deployPath = config.getDeployRoot().resolve(getDocId());
     }
 

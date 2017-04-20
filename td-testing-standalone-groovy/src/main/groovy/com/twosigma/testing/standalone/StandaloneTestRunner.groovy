@@ -1,5 +1,6 @@
 package com.twosigma.testing.standalone
 
+import com.twosigma.utils.FileUtils
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 
@@ -14,9 +15,16 @@ class StandaloneTestRunner {
 
     private Path currentTestPath
     private GroovyShell groovy
+    private StandaloneTestListener testListener
 
-    StandaloneTestRunner() {
-        groovy = prepareGroovy()
+    StandaloneTestRunner(List<String> staticImports, StandaloneTestListener testListener) {
+        this.staticImports = staticImports
+        this.testListener = testListener
+        this.groovy = prepareGroovy()
+    }
+
+    void process(Path scriptPath) {
+        process(scriptPath, FileUtils.fileTextContent(scriptPath))
     }
 
     void process(Path scriptPath, String scriptBody) {
@@ -31,8 +39,24 @@ class StandaloneTestRunner {
         return tests
     }
 
+    int getNumberOfPassed() {
+        return tests.count { it.isPassed() }
+    }
+
+    int getNumberOfFailed() {
+        return tests.count { it.isFailed() }
+    }
+
+    int getNumberOfErrored() {
+        return tests.count { it.hasError() }
+    }
+
     void runTests() {
-        tests.each { it.run() }
+        testListener.beforeFirstTest()
+        tests.each {
+            it.run()
+            testListener.afterTest(it)
+        }
     }
 
     private void scenario(String description, Closure code) {

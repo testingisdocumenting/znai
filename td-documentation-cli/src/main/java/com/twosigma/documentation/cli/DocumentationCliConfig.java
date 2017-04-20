@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 /**
  * @author mykola
  */
-public class CliConfig {
+public class DocumentationCliConfig {
     private String docId;
     private String host;
     private Path deployRoot;
@@ -22,7 +22,7 @@ public class CliConfig {
     private boolean isUpload;
     private boolean isServe;
 
-    public CliConfig(String... args) {
+    public DocumentationCliConfig(String... args) {
         parseArgs(args);
     }
 

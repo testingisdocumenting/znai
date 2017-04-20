@@ -22,14 +22,14 @@ class StandaloneTest {
     }
 
     boolean isPassed() {
-        return !isError() && !isFailure()
+        return !hasError() && !isFailed()
     }
 
-    boolean isError() {
+    boolean hasError() {
         return exception != null
     }
 
-    boolean isFailure() {
+    boolean isFailed() {
         return assertionMessage != null
     }
 
@@ -40,8 +40,6 @@ class StandaloneTest {
             assertionMessage = e.message
         } catch (Throwable e) {
             exception = e
-        } finally {
-
         }
     }
 }
