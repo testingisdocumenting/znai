@@ -17,7 +17,7 @@ class TabsRegistration {
     }
 
     firstMatchFromHistory(names) {
-        const matches = names.filter(n => this.tabsSelectionHistory.indexOf(n) >= 0)
+        const matches = this.tabsSelectionHistory.filter(n => names.indexOf(n) >= 0)
         return matches ? matches[0] : names[0]
     }
 
