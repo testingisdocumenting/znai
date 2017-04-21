@@ -32,6 +32,10 @@ class StandaloneTestRunner {
         process(scriptPath, FileUtils.fileTextContent(scriptPath))
     }
 
+    GroovyShell getGroovy() {
+        return groovy
+    }
+
     void process(Path scriptPath, String scriptBody) {
         currentTestPath = scriptPath
         def script = groovy.parse(scriptBody)
