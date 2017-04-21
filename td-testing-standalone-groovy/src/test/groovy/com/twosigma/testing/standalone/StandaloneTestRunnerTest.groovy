@@ -36,7 +36,7 @@ class StandaloneTestRunnerTest {
     }
 
     private static StandaloneTestRunner createRunner() {
-        def runner = new StandaloneTestRunner()
+        def runner = new StandaloneTestRunner([])
         runner.process(Paths.get("/test/path.groovy"),
                 ResourceUtils.textContent("StandaloneTest.groovy"))
 

@@ -16,6 +16,8 @@ class WebuitFeaturesTesting {
 
     @BeforeClass
     static void init() {
+        System.setProperty("url", "http://localhost:" + testServerPort)
+
         testServer = new TestServer()
         testServer.registerGet("/search", new TestServerHtmlResponse(ResourceUtils.textContent("search.html")))
         testServer.start(testServerPort)

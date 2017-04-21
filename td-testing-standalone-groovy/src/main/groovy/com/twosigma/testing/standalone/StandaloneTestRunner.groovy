@@ -10,17 +10,22 @@ import java.nio.file.Path
  * @author mykola
  */
 class StandaloneTestRunner {
-    private List<String> staticImports = []
-    private List<StandaloneTest> tests = []
+    private List<String> staticImports
+    private List<StandaloneTest> tests
 
     private Path currentTestPath
     private GroovyShell groovy
-    private StandaloneTestListener testListener
+    private List<StandaloneTestListener> testListeners
 
-    StandaloneTestRunner(List<String> staticImports, StandaloneTestListener testListener) {
+    StandaloneTestRunner(List<String> staticImports) {
         this.staticImports = staticImports
-        this.testListener = testListener
+        this.testListeners = []
+        this.tests = []
         this.groovy = prepareGroovy()
+    }
+
+    void addListener(StandaloneTestListener listener) {
+        testListeners.add(listener)
     }
 
     void process(Path scriptPath) {
@@ -52,10 +57,10 @@ class StandaloneTestRunner {
     }
 
     void runTests() {
-        testListener.beforeFirstTest()
-        tests.each {
-            it.run()
-            testListener.afterTest(it)
+        testListeners.each { l -> l.beforeFirstTest() }
+        tests.each { test ->
+            test.run()
+            testListeners.each { l -> l.afterTest(test) }
         }
     }
 
