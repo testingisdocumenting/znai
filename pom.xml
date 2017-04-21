@@ -19,6 +19,7 @@
         <module>td-testing-rest</module>
         <module>td-testing-rest-groovy</module>
         <module>td-testing-webui</module>
+        <module>td-testing-webui-groovy</module>
         <module>td-diagrams</module>
         <module>td-documentation</module>
         <module>td-documentation-core</module>
