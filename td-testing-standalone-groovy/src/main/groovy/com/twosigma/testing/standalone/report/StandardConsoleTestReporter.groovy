@@ -4,18 +4,15 @@ import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.Color
 import com.twosigma.testing.standalone.StandaloneTest
 import com.twosigma.testing.standalone.StandaloneTestListener
+import com.twosigma.testing.standalone.StandaloneTestListenerAdapter
 import com.twosigma.utils.TraceUtils
 
 /**
  * @author mykola
  */
-class StandardConsoleTestReporter implements StandaloneTestListener {
+class StandardConsoleTestReporter extends StandaloneTestListenerAdapter {
     @Override
-    void beforeFirstTest() {
-    }
-
-    @Override
-    void afterTest(StandaloneTest test) {
+    void afterTestRun(StandaloneTest test) {
         if (test.isFailed()) {
             ConsoleOutputs.out(Color.RED, "[x] ", Color.BLUE, "failed")
             ConsoleOutputs.out(test.assertionMessage)

@@ -1,5 +1,6 @@
 package com.twosigma.testing.webui.page
 
+import org.codehaus.groovy.control.CompilerConfiguration
 import org.junit.Before
 import org.junit.Test
 
@@ -12,7 +13,9 @@ class PageObjectLoaderTest {
 
     @Before
     void init() {
-        groovyShell = new GroovyShell()
+        def compilerCfg = new CompilerConfiguration()
+        compilerCfg.scriptBaseClass = DelegatingScript.class.name
+        groovyShell = new GroovyShell(compilerCfg)
         pageObjectLoader = new PageObjectLoader(groovyShell)
     }
 

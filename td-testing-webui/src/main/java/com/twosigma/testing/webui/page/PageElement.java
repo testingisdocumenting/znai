@@ -9,4 +9,5 @@ public interface PageElement {
     PageElement all();
     WebElement findElement();
     ElementValue elementValue();
+    void setValue(Object value);
 }

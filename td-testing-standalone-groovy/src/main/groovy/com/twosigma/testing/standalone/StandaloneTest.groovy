@@ -21,6 +21,10 @@ class StandaloneTest {
         this.code = code
     }
 
+    Path getFilePath() {
+        return filePath
+    }
+
     boolean isPassed() {
         return !hasError() && !isFailed()
     }

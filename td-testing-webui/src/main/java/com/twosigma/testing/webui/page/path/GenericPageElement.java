@@ -43,6 +43,11 @@ public class GenericPageElement implements PageElement {
         return null;
     }
 
+    @Override
+    public void setValue(Object value) {
+        findElement().sendKeys(value.toString());
+    }
+
     private String fetchValue() {
         return findElement().getText();
     }

@@ -28,19 +28,22 @@ class StandaloneTestRunner {
         testListeners.add(listener)
     }
 
-    void process(Path scriptPath) {
-        process(scriptPath, FileUtils.fileTextContent(scriptPath))
+    void processScriptWithPath(Path scriptPath, delegate) {
+        process(scriptPath, FileUtils.fileTextContent(scriptPath), delegate)
     }
 
     GroovyShell getGroovy() {
         return groovy
     }
 
-    void process(Path scriptPath, String scriptBody) {
+    void process(Path scriptPath, String scriptBody, delegate) {
         currentTestPath = scriptPath
+
         def script = groovy.parse(scriptBody)
+        script.setDelegate(delegate)
         script.setProperty("scenario", this.&scenario)
 
+        testListeners.each { l -> l.beforeScriptParse(scriptPath) }
         script.run()
     }
 
@@ -63,8 +66,9 @@ class StandaloneTestRunner {
     void runTests() {
         testListeners.each { l -> l.beforeFirstTest() }
         tests.each { test ->
+            testListeners.each { l -> l.beforeTestRun(test) }
             test.run()
-            testListeners.each { l -> l.afterTest(test) }
+            testListeners.each { l -> l.afterTestRun(test) }
         }
     }
 
@@ -82,6 +86,7 @@ class StandaloneTestRunner {
 
         def compilerCfg = new CompilerConfiguration()
         compilerCfg.addCompilationCustomizers(imports)
+        compilerCfg.scriptBaseClass = DelegatingScript.class.name
 
         return new GroovyShell(compilerCfg)
     }

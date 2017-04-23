@@ -1,7 +1,7 @@
 page {
     box = $('#search-box')
 
-    submit = action('submitting search query $value') { value ->
+    submit = { value ->
         searchBox.setValue(value)
     }
 }
