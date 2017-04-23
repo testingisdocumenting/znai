@@ -24,10 +24,22 @@ class PageObjectLoaderTest {
        def pageDef = """
 page {
     searchBox = 'search-box'
-    submit = searchBox
+    enterButton = searchBox
+    about = 'about'
 }"""
         def object = pageObjectLoader.load(pageDef)
         object.searchBox.should == 'search-box'
-        object.submit.should == 'search-box'
+        object.enterButton.should == 'search-box'
+        object.about.should == 'about'
+    }
+
+    @Test
+    void "should handle actions assignment"() {
+       def pageDef = """
+page {
+    submit = { value, two -> return value + two }
+}"""
+        def object = pageObjectLoader.load(pageDef)
+        object.submit("t1", "o2").should == 't1o2'
     }
 }
