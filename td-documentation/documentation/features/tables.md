@@ -49,3 +49,12 @@ Or for `JSON` data
 
 :include-table: table.json {Price: {width: 100, align: "right"}}
 
+# Markup in Cells
+
+You can use markup syntax within table file  
+
+:include-file: table-markup.csv
+
+:include-table: table-markup.csv 
+
+

@@ -5,6 +5,8 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.parser.MarkupParser;
+import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 import com.twosigma.utils.JsonUtils;
 
@@ -12,12 +14,16 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * @author mykola
  */
 public class TableIncludePlugin implements IncludePlugin {
     private String fileName;
     private String textContent;
+    private MarkupParser parser;
+    private Path fullPath;
 
     @Override
     public String id() {
@@ -27,7 +33,9 @@ public class TableIncludePlugin implements IncludePlugin {
     @Override
     @SuppressWarnings("unchecked")
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        fileName = includeParams.getFreeParam();
+        parser = componentsRegistry.parser();
+        String fileName = includeParams.getFreeParam();
+        fullPath = componentsRegistry.includeResourceResolver().fullPath(fileName);
         textContent = componentsRegistry.includeResourceResolver().textContent(fileName);
 
         Map<String, Object> table = (isJson() ? tableFromJson() : CsvParser.parse(textContent)).toMap();
@@ -38,7 +46,23 @@ public class TableIncludePlugin implements IncludePlugin {
             column.ifPresent(c -> c.putAll((Map<? extends String, ?>) meta));
         });
 
+        table.put("data", parseMarkupInEachRow((List<List<Object>>) table.get("data")));
+
         return PluginResult.docElement(DocElementType.TABLE, Collections.singletonMap("table", table));
+    }
+
+    private List<Object> parseMarkupInEachRow(List<List<Object>> rows) {
+        return rows.stream().map(this::parseMarkupInCell).collect(toList());
+    }
+
+    private List<Object> parseMarkupInCell(List<Object> row) {
+        return row.stream().map(this::parseMarkupInCell).collect(toList());
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<Object> parseMarkupInCell(Object cell) {
+        MarkupParserResult parserResult = parser.parse(fullPath, cell.toString());
+        return (List<Object>) parserResult.getDocElement().toMap().get("content");
     }
 
     @SuppressWarnings("unchecked")
@@ -64,7 +88,6 @@ public class TableIncludePlugin implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(
-                componentsRegistry.includeResourceResolver().fullPath(fileName)));
+        return Stream.of(AuxiliaryFile.builtTime(fullPath));
     }
 }
