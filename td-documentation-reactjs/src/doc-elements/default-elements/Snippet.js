@@ -9,7 +9,7 @@ class Snippet extends React.Component {
         const {tokens, maxLineLength, commentsType} = this.props
 
         const CodeSnippet = commentsType === 'inline' ? CodeSnippetWithInlineComments : SimpleCodeSnippet
-        const divClassName = "snippet " + (maxLineLength && maxLineLength > 90 ? "wide-screen" : "content-block")
+        const divClassName = "snippet " + (maxLineLength && maxLineLength >= 80 ? "wide-screen" : "content-block")
 
         return (<div className={divClassName}>
             <CodeSnippet tokens={tokens}/>
