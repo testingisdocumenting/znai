@@ -1,8 +1,7 @@
 package com.twosigma.testing.webui
 
-import com.twosigma.testing.http.testserver.TestServer
+import com.twosigma.testing.WebuitFeaturesTestServer
 import com.twosigma.testing.webui.cli.WebUiTestCliApp
-import com.twosigma.utils.ResourceUtils
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
@@ -12,14 +11,13 @@ import org.junit.Test
  */
 class WebuitFeaturesTesting {
     private static final int testServerPort = 8180
-    private static TestServer testServer
+    private static WebuitFeaturesTestServer testServer
 
     @BeforeClass
     static void init() {
         System.setProperty("url", "http://localhost:" + testServerPort)
 
-        testServer = new TestServer()
-        testServer.registerGet("/search", new TestServerHtmlResponse(ResourceUtils.textContent("search.html")))
+        testServer = new WebuitFeaturesTestServer()
         testServer.start(testServerPort)
     }
 

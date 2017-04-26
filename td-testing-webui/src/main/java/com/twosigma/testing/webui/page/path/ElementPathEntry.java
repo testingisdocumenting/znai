@@ -34,4 +34,9 @@ public class ElementPathEntry {
 
         return filtered;
     }
+
+    @Override
+    public String toString() {
+        return selector.description();
+    }
 }

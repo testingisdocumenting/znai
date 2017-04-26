@@ -21,4 +21,9 @@ public class CssSelector implements ElementsSelector {
     public List<WebElement> select(WebDriver driver) {
         return driver.findElements(By.cssSelector(css));
     }
+
+    @Override
+    public String description() {
+        return "by css " + css;
+    }
 }

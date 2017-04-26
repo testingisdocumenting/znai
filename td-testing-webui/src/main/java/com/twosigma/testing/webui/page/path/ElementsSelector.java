@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface ElementsSelector {
     List<WebElement> select(WebDriver driver);
+    String description();
 }

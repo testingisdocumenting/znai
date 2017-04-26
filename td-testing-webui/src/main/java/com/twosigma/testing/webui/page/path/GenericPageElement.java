@@ -1,6 +1,7 @@
 package com.twosigma.testing.webui.page.path;
 
 import com.twosigma.testing.webui.page.ElementValue;
+import com.twosigma.testing.webui.page.NullWebElement;
 import com.twosigma.testing.webui.page.PageElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,12 +36,14 @@ public class GenericPageElement implements PageElement {
 
     public WebElement findElement() {
         List<WebElement> webElements = path.find(driver);
-        return webElements.get(0);
+        return webElements.isEmpty() ?
+                new NullWebElement(path.toString()) :
+                webElements.get(0);
     }
 
     @Override
-    public ElementValue elementValue() {
-        return null;
+    public ElementValue<?> elementValue() {
+        return new ElementValue<>("todo", this::getUnderlyingValue);
     }
 
     @Override
@@ -50,5 +53,23 @@ public class GenericPageElement implements PageElement {
 
     private String fetchValue() {
         return findElement().getText();
+    }
+
+    private String getText() {
+        return findElement().getText();
+    }
+
+    private String getTagName() {
+        return findElement().getTagName();
+    }
+
+    private String getAttribute(String name) {
+        return findElement().getAttribute(name);
+    }
+
+    private Object getUnderlyingValue() {
+        String tagName = getTagName().toUpperCase();
+        return (tagName.equals("INPUT") || tagName.equals("TEXTAREA")) ?
+                getAttribute("value") : getText();
     }
 }

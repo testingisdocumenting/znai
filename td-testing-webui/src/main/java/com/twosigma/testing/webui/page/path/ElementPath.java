@@ -1,11 +1,13 @@
 package com.twosigma.testing.webui.page.path;
 
+import com.twosigma.testing.webui.page.path.selector.CssSelector;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author mykola
@@ -22,6 +24,13 @@ public class ElementPath {
         entries.add(entry);
     }
 
+    public static ElementPath css(String selector) {
+        ElementPath path = new ElementPath();
+        path.addSelector(new CssSelector(selector));
+
+        return path;
+    }
+
     public List<WebElement> find(WebDriver driver) {
         WebElement root = null;
 
@@ -36,5 +45,11 @@ public class ElementPath {
         }
 
         return webElements;
+    }
+
+    @Override
+    public String toString() {
+        return entries.stream().map(ElementPathEntry::toString)
+                .collect(Collectors.joining(", "));
     }
 }

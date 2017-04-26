@@ -22,14 +22,12 @@ public class WebTestDsl {
 
     public static void open(String url) {
         String fullUrl = createFullUrl(url);
+        System.out.println(fullUrl);
         driver.get(fullUrl);
     }
 
     public static PageElement $(String css) {
-        ElementPath path = new ElementPath();
-        path.addSelector(new CssSelector(css));
-
-        return new GenericPageElement(driver, path);
+        return new GenericPageElement(driver, ElementPath.css(css));
     }
 
     private static String createFullUrl(String url) {

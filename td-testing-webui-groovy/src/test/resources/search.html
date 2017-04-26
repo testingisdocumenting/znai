@@ -1,6 +1,14 @@
 <html>
 <body>
-<p>hello</p>
-<input id="search-box"/>
+<input id="search-box" onchange="handleChange(this)"/>
+<div id="message"></div>
+<script>
+    function handleChange(input) {
+        console.log(input);
+        console.log(input.value)
+
+        document.getElementById("message").innerHTML = "hello " + input.value;
+    }
+</script>
 </body>
 </html>
