@@ -1,5 +1,6 @@
 package com.twosigma.testing.webui.page.path;
 
+import com.twosigma.testing.reporter.TokenizedMessage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -33,6 +34,10 @@ public class ElementPathEntry {
         }
 
         return filtered;
+    }
+
+    public TokenizedMessage toTokenizedMessage() {
+        return selector.tokenizedDescription();
     }
 
     @Override

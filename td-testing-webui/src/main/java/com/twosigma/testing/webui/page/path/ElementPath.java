@@ -1,5 +1,6 @@
 package com.twosigma.testing.webui.page.path;
 
+import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.webui.page.path.selector.CssSelector;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.COMMA;
 
 /**
  * @author mykola
@@ -45,6 +48,21 @@ public class ElementPath {
         }
 
         return webElements;
+    }
+
+    public TokenizedMessage toTokenizedMessage() {
+        TokenizedMessage message = new TokenizedMessage();
+
+        int i = 0;
+        int lastIdx = entries.size() - 1;
+        for (ElementPathEntry entry : entries) {
+            message.add(entry.toTokenizedMessage());
+            if (i != lastIdx) {
+                message.add(COMMA);
+            }
+        }
+
+        return message;
     }
 
     @Override

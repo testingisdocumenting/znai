@@ -15,7 +15,8 @@ public class WebUiMessageBuilder {
         STRING_VALUE("stringValue", true, Color.GREEN),
         SELECTOR_TYPE("selectorType", true, Color.YELLOW),
         SELECTOR_VALUE("selectorValue", true, Color.GREEN),
-        PREPOSITION("preposition", true, Color.BLACK);
+        PREPOSITION("preposition", true, Color.BLACK),
+        DELIMITER("delimiter", true, Color.WHITE);
 
         private final String type;
         private final boolean delimiterAfter;
@@ -33,6 +34,7 @@ public class WebUiMessageBuilder {
     }
 
     public static final MessageToken TO = TokenTypes.PREPOSITION.token("to");
+    public static final MessageToken COMMA = TokenTypes.DELIMITER.token(",");
 
     private static final TokenizedMessageToAnsiConverter converter = createConverter();
 

@@ -23,11 +23,13 @@ public class GenericPageElement implements PageElement {
     private boolean isMultipleElements;
     private WebDriver driver;
     private ElementPath path;
+    private final TokenizedMessage pathDescription;
     private ElementValue<String> elementValue;
 
     public GenericPageElement(WebDriver driver, ElementPath path) {
         this.driver = driver;
         this.path = path;
+        this.pathDescription = path.toTokenizedMessage();
         this.elementValue = new ElementValue<>("value", this::fetchValue);
     }
 
@@ -74,8 +76,8 @@ public class GenericPageElement implements PageElement {
 
     @Override
     public void setValue(Object value) {
-        execute(TokenizedMessage.build(action("setting value"), stringValue(value), TO), // path.toTokenizedMessage()),
-                () -> TokenizedMessage.build(action("set value"), stringValue(value)),
+        execute(TokenizedMessage.build(action("setting value"), stringValue(value), TO).add(pathDescription),
+                () -> TokenizedMessage.build(action("set value"), stringValue(value), TO).add(pathDescription),
                 () -> findElement().sendKeys(value.toString()));
     }
 
