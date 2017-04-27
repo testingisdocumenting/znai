@@ -21,6 +21,6 @@ public class PageElementEqualHandler implements EqualComparatorHandler {
         ElementValue elementValue = actualPageElement.elementValue();
         Object actualValue = elementValue.get();
 
-        equalComparator.compare(actualPath, actualValue, expected);
+        equalComparator.compare(ActualPath.createActualPath(elementValue.getName()), actualValue, expected);
     }
 }
