@@ -1,6 +1,5 @@
 package com.twosigma.testing.standalone
 
-import com.twosigma.utils.FileUtils
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 
@@ -13,33 +12,33 @@ class StandaloneTestRunner {
     private List<String> staticImports
     private List<StandaloneTest> tests
 
+    private Path workingDir
     private Path currentTestPath
-    private GroovyShell groovy
+    private GroovyScriptEngine groovy
     private List<StandaloneTestListener> testListeners
 
-    StandaloneTestRunner(List<String> staticImports) {
+    StandaloneTestRunner(List<String> staticImports, Path workingDir) {
         this.staticImports = staticImports
+        this.workingDir = workingDir.toAbsolutePath()
         this.testListeners = []
         this.tests = []
-        this.groovy = prepareGroovy()
+        this.groovy = prepareGroovyEngine()
     }
 
     void addListener(StandaloneTestListener listener) {
         testListeners.add(listener)
     }
 
-    void processScriptWithPath(Path scriptPath, delegate) {
-        process(scriptPath, FileUtils.fileTextContent(scriptPath), delegate)
-    }
-
-    GroovyShell getGroovy() {
+    GroovyScriptEngine getGroovy() {
         return groovy
     }
 
-    void process(Path scriptPath, String scriptBody, delegate) {
-        currentTestPath = scriptPath
+    void process(Path scriptPath, delegate) {
+        currentTestPath = scriptPath.isAbsolute() ? scriptPath : workingDir.resolve(scriptPath)
+        println currentTestPath
 
-        def script = groovy.parse(scriptBody)
+        def script = groovy.createScript((currentTestPath).toString(), new Binding())
+
         script.setDelegate(delegate)
         script.setProperty("scenario", this.&scenario)
 
@@ -77,17 +76,17 @@ class StandaloneTestRunner {
         tests.add(test)
     }
 
-    private GroovyShell prepareGroovy() {
+    private GroovyScriptEngine prepareGroovyEngine() {
         def imports = new ImportCustomizer()
         def fullListOfStatics = staticImports + [StandaloneTestRunner.canonicalName]
-        println fullListOfStatics
-
         fullListOfStatics.forEach { imports.addStaticStars(it) }
 
         def compilerCfg = new CompilerConfiguration()
         compilerCfg.addCompilationCustomizers(imports)
         compilerCfg.scriptBaseClass = DelegatingScript.class.name
 
-        return new GroovyShell(compilerCfg)
+        def engine = new GroovyScriptEngine(workingDir.toString())
+        engine.config = compilerCfg
+        return engine
     }
 }

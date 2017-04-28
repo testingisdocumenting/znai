@@ -9,7 +9,6 @@ import com.twosigma.testing.standalone.StandaloneTest
 import com.twosigma.testing.standalone.StandaloneTestListener
 import com.twosigma.testing.standalone.StandaloneTestRunner
 import com.twosigma.testing.standalone.report.StandardConsoleTestReporter
-import com.twosigma.testing.webui.page.PageObjectLoader
 import com.twosigma.testing.webui.reporter.WebUiExpectationHandler
 import com.twosigma.testing.webui.reporter.WebUiMessageBuilder
 
@@ -22,27 +21,24 @@ import java.nio.file.Paths
 class WebUiTestCliApp implements StandaloneTestListener {
     private WebUiTestCliConfig config
     private StandaloneTestRunner runner
-    private PageObjectLoader pageObjectLoader
 
     WebUiTestCliApp(String[] args) {
         config = new WebUiTestCliConfig(args)
 
-        runner = new StandaloneTestRunner(["com.twosigma.testing.webui.WebTestDsl"])
+        runner = new StandaloneTestRunner(["com.twosigma.testing.webui.WebTestDsl"], Paths.get(""))
         runner.addListener(this)
         runner.addListener(new StandardConsoleTestReporter())
-
-        pageObjectLoader = new PageObjectLoader(runner.groovy)
     }
 
     void start() {
-        ConsoleOutputs.add(new AnsiConsoleOutput());
+        ConsoleOutputs.add(new AnsiConsoleOutput())
         StepReporters.add(new ConsoleStepReporter(WebUiMessageBuilder.converter))
         ExpectationHandlers.add(new WebUiExpectationHandler())
 
         config.print()
 
         testFiles().forEach {
-            runner.processScriptWithPath(it, pageObjectLoader)
+            runner.process(it, this)
         }
 
         runner.runTests()
@@ -62,7 +58,6 @@ class WebUiTestCliApp implements StandaloneTestListener {
 
     @Override
     void beforeScriptParse(Path currentScriptPath) {
-        pageObjectLoader.currentScriptPath = currentScriptPath
     }
 
     @Override

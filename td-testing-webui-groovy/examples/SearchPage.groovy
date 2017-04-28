@@ -1,7 +1,13 @@
-page {
-    box = $('#search-box')
+import static com.twosigma.testing.webui.WebTestDsl.*
 
-    submit = { value ->
-        box.setValue(value)
+class SearchPage {
+    def box = $('#search-box')
+
+    void open() {
+        open("/search")
+    }
+
+    void submit(value) {
+        this.box.setValue(value)
     }
 }
