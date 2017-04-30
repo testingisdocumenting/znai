@@ -6,7 +6,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.java.parser.JavaParserUtils;
+import com.twosigma.documentation.java.parser.JavaCode;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 
 import java.nio.file.Path;
@@ -30,10 +30,12 @@ public class JavaIncludePlugin implements IncludePlugin {
         String fileContent = componentsRegistry.includeResourceResolver().textContent(fileName);
         String methodName = includeParams.getOpts().get("entry");
 
+        JavaCode javaCode = new JavaCode(componentsRegistry, fileContent);
+
         Boolean bodyOnly = includeParams.getOpts().has("bodyOnly") ? includeParams.getOpts().get("bodyOnly") : false;
 
         Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "java",
-                extractContent(fileContent, methodName, bodyOnly));
+                extractContent(javaCode, methodName, bodyOnly));
 
         return PluginResult.docElement(DocElementType.SNIPPET, props);
     }
@@ -44,13 +46,13 @@ public class JavaIncludePlugin implements IncludePlugin {
         return Stream.of(AuxiliaryFile.builtTime(path));
     }
 
-    private String extractContent(String fileContent, String methodName, Boolean bodyOnly) {
+    private String extractContent(JavaCode javaCode, String methodName, Boolean bodyOnly) {
         if (methodName == null) {
-            return fileContent;
+            return javaCode.getFileContent();
         }
 
         return bodyOnly ?
-                JavaParserUtils.methodBodyOnly(fileContent, methodName) :
-                JavaParserUtils.methodBody(fileContent, methodName);
+                javaCode.methodBodyOnly(methodName) :
+                javaCode.methodBody(methodName);
     }
 }

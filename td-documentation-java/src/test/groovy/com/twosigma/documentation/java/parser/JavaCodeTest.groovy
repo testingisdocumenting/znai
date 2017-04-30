@@ -6,7 +6,7 @@ import org.junit.Test
 /**
  * @author mykola
  */
-class JavaParserUtilsTest {
+class JavaCodeTest {
     String code = """
 /**
  * this is a top level java doc
@@ -29,9 +29,11 @@ class HelloWorld {
     }
 }"""
 
+    JavaCode javaCode = new JavaCode(null, code)
+
     @Test
     void "extracts method body"() {
-        String body = JavaParserUtils.methodBody(code, "sampleMethod");
+        String body = javaCode.methodBody("sampleMethod")
 
         Assert.assertEquals("public void sampleMethod(String test) {\n" +
                 "    statement1();\n" +
@@ -45,7 +47,7 @@ class HelloWorld {
 
     @Test
     void "extracts method body only"() {
-        String body = JavaParserUtils.methodBodyOnly(code, "sampleMethod");
+        String body = javaCode.methodBodyOnly("sampleMethod");
 
         Assert.assertEquals("statement1();\n" +
                 "statement2();\n" +
@@ -58,11 +60,11 @@ class HelloWorld {
 
     @Test
     void "extracts top level java doc"() {
-        Assert.assertEquals("this is a top level java doc", JavaParserUtils.classJavaDocText(code))
+        Assert.assertEquals("this is a top level java doc", javaCode.getClassJavaDocText())
     }
 
     @Test
     void "extracts method java doc"() {
-        Assert.assertEquals("method level java doc", JavaParserUtils.methodJavaDocText(code, "sampleMethod"))
+        Assert.assertEquals("method level java doc", javaCode.methodJavaDocText("sampleMethod"))
     }
 }
