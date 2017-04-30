@@ -7,22 +7,33 @@ import org.junit.Test
  * @author mykola
  */
 class JavaParserUtilsTest {
-    String code = "class HelloWorld {\n" +
-            "    public void sampleMethod() {\n" +
-            "        statement1();\n" +
-            "        statement2();\n" +
-            "\n" +
-            "        if (logic) {\n" +
-            "            doAction();\n" +
-            "        }\n" +
-            "    }\n" +
-            "}"
+    String code = """
+/**
+ * this is a top level java doc
+ *
+ * @see other
+ * @author ignore
+ */
+class HelloWorld {
+    /**
+     * method level java doc 
+     * @param test test param 
+     */
+    public void sampleMethod(String test) {
+        statement1();
+        statement2();
+
+        if (logic) {
+            doAction();
+        }
+    }
+}"""
 
     @Test
     void "extracts method body"() {
         String body = JavaParserUtils.methodBody(code, "sampleMethod");
 
-        Assert.assertEquals("public void sampleMethod() {\n" +
+        Assert.assertEquals("public void sampleMethod(String test) {\n" +
                 "    statement1();\n" +
                 "    statement2();\n" +
                 "\n" +
@@ -43,5 +54,15 @@ class JavaParserUtilsTest {
                 "    doAction();\n" +
                 "}", body);
 
+    }
+
+    @Test
+    void "extracts top level java doc"() {
+        Assert.assertEquals("this is a top level java doc", JavaParserUtils.classJavaDocText(code))
+    }
+
+    @Test
+    void "extracts method java doc"() {
+        Assert.assertEquals("method level java doc", JavaParserUtils.methodJavaDocText(code, "sampleMethod"))
     }
 }

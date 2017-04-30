@@ -27,7 +27,7 @@ public class JavaDocIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
         fileName = includeParams.getFreeParam();
         String textContent = componentsRegistry.includeResourceResolver().textContent(fileName);
-        String javaDoc = JavaParserUtils.extractTopLevelJavaDoc(textContent);
+        String javaDoc = JavaParserUtils.classJavaDocText(textContent);
 
         return PluginResult.docElement(DocElementType.SIMPLE_TEXT, Collections.singletonMap("text", javaDoc));
     }

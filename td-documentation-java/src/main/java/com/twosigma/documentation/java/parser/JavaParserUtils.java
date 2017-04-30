@@ -7,26 +7,26 @@ import com.github.javaparser.ast.CompilationUnit;
  * @author mykola
  */
 public class JavaParserUtils {
-    public static String extractTopLevelJavaDoc(String classFileContent) {
-        CompilationUnit compilationUnit = JavaParser.parse(classFileContent);
-        JavaDocVisitor javaDocVisitor = new JavaDocVisitor();
-        compilationUnit.accept(javaDocVisitor, "test");
-
-        return javaDocVisitor.getTopLevelJavaDoc();
+    public static String classJavaDocText(String fileContent) {
+        return parse(fileContent).getTopLevelJavaDoc();
     }
 
     public static String methodBody(String fileContent, String methodName) {
-        return parse(fileContent).getDeclaration(methodName);
+        return parse(fileContent).getDetails(methodName).getFullBody();
     }
 
     public static String methodBodyOnly(String fileContent, String methodName) {
-        return parse(fileContent).getDeclarationBodyOnly(methodName);
+        return parse(fileContent).getDetails(methodName).getBodyOnly();
     }
 
-    private static JavaMethodBodyVisitor parse(String fileContent) {
+    public static String methodJavaDocText(String fileContent, String methodName) {
+        return parse(fileContent).getDetails(methodName).getJavaDocText();
+    }
+
+    private static JavaCodeVisitor parse(String fileContent) {
         CompilationUnit compilationUnit = JavaParser.parse(fileContent);
-        JavaMethodBodyVisitor visitor = new JavaMethodBodyVisitor(fileContent);
-        compilationUnit.accept(visitor, "test");
+        JavaCodeVisitor visitor = new JavaCodeVisitor(fileContent);
+        compilationUnit.accept(visitor, "JavaParserUtils");
         return visitor;
     }
 }
