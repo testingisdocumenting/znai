@@ -2,21 +2,21 @@ package com.twosigma.documentation.java.extensions;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludeParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.java.parser.JavaCode;
-import com.twosigma.documentation.parser.docelement.DocElementType;
+import com.twosigma.documentation.parser.docelement.DocElement;
 
 import java.nio.file.Path;
-import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
  * @author mykola
  */
 public class JavaDocIncludePlugin implements IncludePlugin {
-    private String fileName;
+    private Path fullPath;
 
     @Override
     public String id() {
@@ -25,16 +25,21 @@ public class JavaDocIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        fileName = includeParams.getFreeParam();
-        String textContent = componentsRegistry.includeResourceResolver().textContent(fileName);
+        String fileName = includeParams.getFreeParam();
+        fullPath = componentsRegistry.includeResourceResolver().fullPath(fileName);
+        String textContent = componentsRegistry.includeResourceResolver().textContent(fullPath);
+        String entry = includeParams.getOpts().get("entry");
 
-        String javaDoc = new JavaCode(componentsRegistry, textContent).getClassJavaDocText();
-        return PluginResult.docElement(DocElementType.SIMPLE_TEXT, Collections.singletonMap("text", javaDoc));
+        JavaCode javaCode = new JavaCode(componentsRegistry, fullPath, textContent);
+        List<DocElement> docElements = entry == null ?
+                javaCode.getClassJavaDocAsDocElements() :
+                javaCode.methodJavaDocTextAsDocElements(entry);
+
+        return PluginResult.docElements(docElements.stream());
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        Path path = componentsRegistry.includeResourceResolver().fullPath(fileName);
-        return Stream.of(AuxiliaryFile.builtTime(path));
+        return Stream.of(AuxiliaryFile.builtTime(fullPath));
     }
 }

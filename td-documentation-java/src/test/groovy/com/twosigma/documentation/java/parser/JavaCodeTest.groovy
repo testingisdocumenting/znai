@@ -3,13 +3,15 @@ package com.twosigma.documentation.java.parser
 import org.junit.Assert
 import org.junit.Test
 
+import java.nio.file.Paths
+
 /**
  * @author mykola
  */
 class JavaCodeTest {
     String code = """
 /**
- * this is a top level java doc
+ * this is a <b>top</b> level java doc
  *
  * @see other
  * @author ignore
@@ -29,7 +31,7 @@ class HelloWorld {
     }
 }"""
 
-    JavaCode javaCode = new JavaCode(null, code)
+    JavaCode javaCode = new JavaCode(null, Paths.get(""), code)
 
     @Test
     void "extracts method body"() {
@@ -60,7 +62,7 @@ class HelloWorld {
 
     @Test
     void "extracts top level java doc"() {
-        Assert.assertEquals("this is a top level java doc", javaCode.getClassJavaDocText())
+        Assert.assertEquals("this is a <b>top</b> level java doc", javaCode.getClassJavaDocText())
     }
 
     @Test

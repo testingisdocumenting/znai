@@ -40,8 +40,9 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     public void visit(ClassOrInterfaceDeclaration n, String arg) {
         JavadocComment javadocComment = n.getJavadocComment();
 
-        Javadoc javadoc = javadocComment.parse();
-        topLevelJavaDoc = javadoc.getDescription().toText();
+        topLevelJavaDoc = (javadocComment != null) ?
+                javadocComment.parse().getDescription().toText() :
+                "";
 
         super.visit(n, arg);
     }
@@ -56,12 +57,14 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         String code = lines.subList(startLine, endLine + 1).stream().collect(Collectors.joining("\n"));
 
         JavadocComment javadocComment = methodDeclaration.getJavadocComment();
-        Javadoc javadoc = javadocComment.parse();
+        String methodJavaDoc = (javadocComment != null) ?
+                javadocComment.parse().getDescription().toText() :
+                "";
 
         detailsByName.put(name, new JavaMethodDetails(
                 StringUtils.stripIndentation(code),
                 removeSignatureAndReIndent(code),
-                javadoc.getDescription().toText()));
+                methodJavaDoc));
     }
 
     private String removeSignatureAndReIndent(String code) {

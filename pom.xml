@@ -124,6 +124,12 @@
                 <artifactId>javaparser-core</artifactId>
                 <version>3.0.1</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.10.2</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

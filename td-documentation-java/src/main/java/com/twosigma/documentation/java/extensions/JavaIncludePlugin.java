@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  * @author mykola
  */
 public class JavaIncludePlugin implements IncludePlugin {
-    private String fileName;
+    private Path fullPath;
 
     @Override
     public String id() {
@@ -26,11 +26,11 @@ public class JavaIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        fileName = includeParams.getFreeParam();
-        String fileContent = componentsRegistry.includeResourceResolver().textContent(fileName);
+        fullPath = componentsRegistry.includeResourceResolver().fullPath(includeParams.getFreeParam());
+        String fileContent = componentsRegistry.includeResourceResolver().textContent(fullPath);
         String methodName = includeParams.getOpts().get("entry");
 
-        JavaCode javaCode = new JavaCode(componentsRegistry, fileContent);
+        JavaCode javaCode = new JavaCode(componentsRegistry, fullPath, fileContent);
 
         Boolean bodyOnly = includeParams.getOpts().has("bodyOnly") ? includeParams.getOpts().get("bodyOnly") : false;
 
@@ -42,8 +42,7 @@ public class JavaIncludePlugin implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        Path path = componentsRegistry.includeResourceResolver().fullPath(fileName);
-        return Stream.of(AuxiliaryFile.builtTime(path));
+        return Stream.of(AuxiliaryFile.builtTime(fullPath));
     }
 
     private String extractContent(JavaCode javaCode, String methodName, Boolean bodyOnly) {
