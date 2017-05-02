@@ -26,9 +26,7 @@ class HttpExtensionsTest {
 
         HttpTestListeners.add({ result ->
             println result.getMismatches().join("\n")
-
             println DataNodeRenderer.render(result.getBody())
-            println DataNodeToMapOfValuesConverter.convert(result.getBody())
         })
     }
 

@@ -35,7 +35,16 @@ class MapEqualHandlerTest {
                 [k6: 'v1', k2: [k21: 'v21'], k3: 'v3'],
                 [k1: 'v1', k2: [k22: 'v21'], k4: 'v3'])
 
-        println equalComparator.generateMismatchReport()
-        assertEquals("", equalComparator.generateMismatchReport())
+        // TODO need a proper alignment for nested keys
+        assertEquals("report for map\n" +
+                "extra keys:\n" +
+                "map.k3\n" +
+                "map.k6\n" +
+                "mismatches:\n" +
+                "report for map.k2\n" +
+                "extra keys:\n" +
+                "map.k2.k21\n" +
+                " [reported by MapEqualHandler]\n" +
+                " [reported by MapEqualHandler]", equalComparator.generateMismatchReport())
     }
 }

@@ -10,7 +10,7 @@ class GraphvizShapeConfigTest {
     @Test
     void "should parse shape configs from json"() {
         def shapeConfig = new GraphvizShapeConfig(ResourceUtils.textContent("graphviz-meta-conf.json"))
-        def shape = shapeConfig.nodeShape("database").orElseThrow { new AssertionError("no shpe found") }
+        def shape = shapeConfig.nodeShape("man").orElseThrow { new AssertionError("no shape found") }
         assert shape.shape == "octagon"
     }
 }

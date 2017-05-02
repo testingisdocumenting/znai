@@ -15,7 +15,7 @@ class GraphvizEngineTest {
     void "should provide svg, styles and custom shapes as result"() {
         def engine = new GraphvizEngine(runtime, shapeConfig)
 
-         def diagram = engine.diagramFromGv("""digraph Simple {
+         def diagram = engine.diagramFromGv("id", """digraph Simple {
     main [label="mn [world]"];
     server [label="server [a]"];
 
