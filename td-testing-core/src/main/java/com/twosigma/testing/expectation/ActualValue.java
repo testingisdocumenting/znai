@@ -1,6 +1,7 @@
 package com.twosigma.testing.expectation;
 
 import com.twosigma.testing.expectation.ExpectationHandler.Flow;
+import com.twosigma.testing.expectation.timer.ExpectationTimer;
 
 import static com.twosigma.testing.expectation.ActualPath.createActualPath;
 
@@ -10,7 +11,7 @@ import static com.twosigma.testing.expectation.ActualPath.createActualPath;
 public class ActualValue implements ActualValueExpectations {
     private Object actual;
 
-    public static ActualValueExpectations value(Object actual) {
+    public static ActualValueExpectations actual(Object actual) {
         return new ActualValue(actual);
     }
 
@@ -19,7 +20,7 @@ public class ActualValue implements ActualValueExpectations {
     }
 
     @Override
-    public void should(final ValueMatcher valueMatcher) {
+    public void should(ValueMatcher valueMatcher) {
         ActualPath actualPath = extractPath(actual);
         boolean matches = valueMatcher.matches(actualPath, actual);
 
@@ -29,7 +30,7 @@ public class ActualValue implements ActualValueExpectations {
     }
 
     @Override
-    public void shouldNot(final ValueMatcher valueMatcher) {
+    public void shouldNot(ValueMatcher valueMatcher) {
         ActualPath actualPath = extractPath(actual);
         boolean matches = valueMatcher.negativeMatches(actualPath, actual);
 
@@ -38,7 +39,23 @@ public class ActualValue implements ActualValueExpectations {
             throw new AssertionError(valueMatcher.negativeMismatchedMessage(actualPath, actual));
     }
 
-    private void handleMismatch(final ValueMatcher valueMatcher, final ActualPath actualPath) {
+    @Override
+    public void waitTo(ValueMatcher valueMatcher, ExpectationTimer expectationTimer) {
+        ActualPath actualPath = extractPath(actual);
+
+        while (! expectationTimer.hasTimedOut()) {
+            boolean matches = valueMatcher.matches(actualPath, actual);
+            if (matches) {
+                break;
+            }
+
+            expectationTimer.tick();
+        }
+
+        handleMismatch(valueMatcher, actualPath);
+    }
+
+    private void handleMismatch(ValueMatcher valueMatcher, ActualPath actualPath) {
         final String message = valueMatcher.mismatchedMessage(actualPath, actualPath);
         final Flow flow = ExpectationHandlers.onValueMismatch(actualPath, actual, message);
 
@@ -47,7 +64,7 @@ public class ActualValue implements ActualValueExpectations {
         }
     }
 
-    private ActualPath extractPath(final Object actual) {
+    private ActualPath extractPath(Object actual) {
         return (actual instanceof ActualPathAware) ?
             (((ActualPathAware) actual).actualPath()):
             createActualPath("[value]");

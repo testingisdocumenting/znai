@@ -5,4 +5,5 @@ com.twosigma.testing.expectation.equality.handlers.IterableEqualHandler
 com.twosigma.testing.expectation.equality.handlers.StreamAndIterableEqualHandler
 com.twosigma.testing.expectation.equality.handlers.TableDataEqualHandler
 com.twosigma.testing.expectation.equality.handlers.TraceableValueEqualHandler
+com.twosigma.testing.expectation.equality.handlers.LiveValueEqualHandler
 com.twosigma.testing.expectation.equality.handlers.IterableAndTableDataEqualHandler

@@ -1,6 +1,7 @@
 package com.twosigma.testing.expectation;
 
 import com.twosigma.testing.expectation.code.ThrowExceptionMatcher;
+import com.twosigma.testing.expectation.equality.EqualMatcher;
 
 /**
  * Convenient class for a single static * imports
@@ -14,8 +15,11 @@ public class Matchers {
         return ThrowExceptionMatcher.throwException(expectedMessage);
     }
 
-    public static ActualValueExpectations value(Object actual) {
-        return ActualValue.value(actual);
+    public static ActualValueExpectations actual(Object actual) {
+        return ActualValue.actual(actual);
     }
 
+    public static EqualMatcher equal(Object expected) {
+        return EqualMatcher.equal(expected);
+    }
 }
