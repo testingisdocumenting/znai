@@ -80,7 +80,7 @@ class Preview extends Component {
 
     render() {
         const {active} = this.state
-        return active ? (<div className='glyphicon glyphicon-eye-open preview-icon'></div>) : null
+        return active ? (<div className='glyphicon glyphicon-eye-open preview-icon'/>) : null
     }
 }
 

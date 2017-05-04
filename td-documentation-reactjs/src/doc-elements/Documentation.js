@@ -17,6 +17,8 @@ import PageContentPreviewDiff from './preview/PageContentPreviewDiff'
 
 import PresentationRegistry from './presentation/PresentationRegistry'
 
+import DocumentationLayout from './DocumentationLayout'
+
 import './DocumentationLayout.css'
 import './search/Search.css'
 
@@ -68,15 +70,23 @@ class Documentation extends Component {
             selectedTocItem,
             tocCollapsed,
             tocSelected,
+            lastChangeDataDom,
+            searchActive,
             pageGenError,
             isPresentation,
             presentationRegistry} = this.state
 
-        const searchPopup = this.state.searchActive ? <SearchPopup elementsLibrary={elementsLibrary}
+        const searchPopup = searchActive ? <SearchPopup elementsLibrary={elementsLibrary}
                                                                    tocCollapsed={tocCollapsed}
                                                                    searchPromise={this.searchPromise}
                                                                    onSearchSelection={this.onSearchSelection}
                                                                    onClose={this.onSearchClose}/> : null
+
+        const renderedPage = <elementsLibrary.Page tocItem={page.tocItem}
+                                                   content={page.content}
+                                                   onPresentationOpen={this.onPresentationOpen}
+                                                   previewEnabled={docMeta.previewEnabled}
+                                                   elementsLibrary={elementsLibrary}/>
 
         const preview = docMeta.previewEnabled ? <Preview active={true}
                                                           onPageUpdate={this.onPageUpdate}
@@ -84,48 +94,28 @@ class Documentation extends Component {
                                                           onTocUpdate={this.onTocUpdate}
                                                           onError={this.onPageGenError}/> : null
 
-        const previewIndicator = <PreviewChangeIndicator targetDom={this.state.lastChangeDataDom}/>
-
-        const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
-
         return isPresentation ? <Presentation presentationRegistry={presentationRegistry}
                                               onClose={this.onPresentationClose}
                                               onNextPage={this.onNextPage}
-                                              onPrevPage={this.onPrevPage}/> : (
-            <div className="documentation">
-                <div className="side-panel" onClick={this.onTocSelect}>
-                    <TocPanel toc={toc} collapsed={tocCollapsed} selected={tocSelected}
-                              docMeta={docMeta}
-                              onToggle={this.onTocToggle}
-                              selectedItem={selectedTocItem}
-                              documentationNavigation={this.documentationNavigation}
-                              onHeaderClick={this.onHeaderClick}
-                              onTocItemClick={this.onTocItemClick}
-                              onNextPage={this.onNextPage}
-                              onPrevPage={this.onPrevPage}/>
-                </div>
-
+                                              onPrevPage={this.onPrevPage}/> :
+            <span>
+                <DocumentationLayout docMeta={docMeta}
+                                     toc={toc}
+                                     selectedTocItem={selectedTocItem}
+                                     prevPageToc={this.prevPageToc}
+                                     nextPageToc={this.nextPageToc}
+                                     documentationNavigation={this.documentationNavigation}
+                                     searchPopup={searchPopup}
+                                     renderedPage={renderedPage}
+                                     onHeaderClick={this.onHeaderClick}
+                                     onSearchClick={this.onSearchClick}
+                                     onTocItemClick={this.onTocItemClick}
+                                     onNextPage={this.onNextPage}
+                                     onPrevPage={this.onPrevPage}
+                                     pageGenError={pageGenError}/>
                 {preview}
-                {previewIndicator}
-
-                <div className="search-button glyphicon glyphicon-search" onClick={this.onSearchClick}/>
-
-                {searchPopup}
-
-                <div className="main-panel" onClick={this.onPanelSelect} ref={panelDom => this.mainPanelDom = panelDom}>
-                    <elementsLibrary.Page tocItem={page.tocItem}
-                                          content={page.content}
-                                          onPresentationOpen={this.onPresentationOpen}
-                                          previewEnabled={docMeta.previewEnabled}
-                                          elementsLibrary={elementsLibrary}/>
-                    <div className="next-prev-buttons content-block">
-                        {this.renderPreviousPageButton()}
-                        {this.renderNextPageButton()}
-                    </div>
-                </div>
-
-                {pageGenErrorPanel}
-            </div>)
+                <PreviewChangeIndicator targetDom={lastChangeDataDom}/>
+            </span>
     }
 
     componentDidMount() {
@@ -140,6 +130,7 @@ class Documentation extends Component {
     enableScrollListener() {
         // server side rendering guard
         if (window.addEventListener) {
+            this.mainPanelDom = document.querySelector(".main-panel")
             this.mainPanelDom.addEventListener('scroll', this.updateCurrentPageSection)
         }
     }
@@ -166,7 +157,7 @@ class Documentation extends Component {
 
         this.extractPageSectionNodes()
         this.updateCurrentPageSection()
-        const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, this.state.page)
+        const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page)
 
         const isIndex = page.tocItem.dirName.length === 0 && page.tocItem.fileName === 'index'
         document.title = isIndex ? docMeta.title : docMeta.title + ": " + page.tocItem.pageTitle
@@ -175,7 +166,7 @@ class Documentation extends Component {
     }
 
     onSearchClick() {
-        this.setState({searchActive: true, tocSelected: false})
+        this.setState({searchActive: true})
     }
 
     onSearchClose() {
@@ -389,7 +380,7 @@ class Documentation extends Component {
     }
 
     updateCurrentPageSection() {
-        const {isPresentation, page} = this.state
+        const {isPresentation, page, selectedTocItem} = this.state
 
         if (isPresentation) {
             return
@@ -411,8 +402,8 @@ class Documentation extends Component {
 
         const current = withVisibleTitle.length ? withVisibleTitle[0] : closestToTopZero()
 
-        const selectedTocItem = {...this.state.selectedTocItem, pageSectionId: current.idTitle.id}
-        this.setState({selectedTocItem})
+        const enrichedSelectedTocItem = {...selectedTocItem, pageSectionId: current.idTitle.id}
+        this.setState({selectedTocItem: enrichedSelectedTocItem})
     }
 }
 
