@@ -17,27 +17,31 @@
 
 .toc-panel {
     flex: 2;
-
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    min-height: 100vh;
     overflow-x: hidden;
     white-space: nowrap;
     border-right: 1px solid #eee;
-    min-height: 100vh;
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 280px;
+    max-width: 280px;
 
-    background-color: #333;
+    background-color: #4b4f54;
     color: #fff;
 }
 
 .toc-panel .header {
     display: flex;
     justify-content: space-between;
-    min-height: 60px;
-    background-color: #009AA6;
-    color: white;
+    align-items: center;
+    line-height: 40px;
+    min-height: 80px;
+    background-color: #383b3f;
+    color: #e7e7e7;
     border-color: #e7e7e7;
     border-width: 0 0 1px;
-    padding: 15px 10px 10px 40px;
+    padding: 10px 10px 10px 10px;
     z-index: 2;
 }
 
@@ -45,8 +49,10 @@
 }
 
 .toc-panel-header-title {
+    font-size: 16px;
+    line-height: 48px;
     align-self: baseline;
-    font-size: 18px;
+    margin-left: 20px;
 }
 
 .toc-panel-header-title:hover {
@@ -54,16 +60,15 @@
 }
 
 .toc-menu {
-    padding-left: 30px;
     padding-top: 20px;
 
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
 
 .toc-section {
-    margin-bottom: 25px;
-    padding-left: 10px;
+    margin-bottom: 35px;
 }
 
 .toc-section:first-child {
@@ -71,20 +76,25 @@
 }
 
 .toc-section .title {
-    font-size: 22px;
-    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 35px;
+    margin-bottom: 2px;
     color: #fff;
+    text-transform: uppercase;
+    padding-left: 30px;
 }
 
 .toc-item {
     margin-bottom: 3px;
+    padding-left: 25px;
 }
 
 .toc-item a {
-    border-left: 2px solid #333;
+    border-left: 5px solid #4b4f54;
     margin-left: 0;
-    font-size: 16px;
-    color: #AAA38F;
+    font-size: 14px;
+    line-height: 35px;
+    color: #ACACAC;
     transition: border-color 0.8s;
     text-decoration: none;
 }
@@ -94,27 +104,24 @@
 }
 
 .toc-item.selected {
-    border-left: 2px solid #999;
-    padding-left: 2px;
-    color: #fff;
+    border-left: 4px solid #009AA6;
+    padding-left: 25px;
     transition: border-color 0.5s;
 }
 
 .toc-item.selected > a {
-    color: #BCBCBC;
+    color: #fff;
 }
 
 .toc-menu .page-sections {
-    padding-left: 5px;
     font-size: 14px;
     margin-top: 5px;
     margin-bottom: 3px;
 }
 
 .toc-menu .page-sections .page-section {
-    border-left: 3px solid #333;
     margin-bottom: 3px;
-    padding-left: 5px;
+    padding-left: 12px;
 }
 
 .toc-menu .page-sections a {
@@ -123,13 +130,12 @@
 }
 
 .toc-menu .page-sections .page-section.selected {
-    border-left: 3px solid #999;
     margin-left: 0;
     transition: border-color 0.5s;
 }
 
 .toc-menu .page-sections .selected a {
-    color: #BCBCBC;
+    color: #fff;
 }
 
 .toc-panel.collapsed {
@@ -164,33 +170,8 @@
 .toc-panel-collapse-button.appeared {
     cursor: pointer;
     font-size: 20px;
+    height: 26px;
     transition: left 0.5s;
-    align-self: baseline;
-}
-
-.top-navigation {
-    min-height: 60px;
-    width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #ffffff;
-    color: black;
-    border-color: #e7e7e7;
-    border-width: 0 0 1px;
-    z-index: 2;
-}
-
-.top-navigation .menu {
-    font-size: 28px;
-    height: 60px;
-    line-height: 60px;
-    vertical-align: middle;
-}
-
-.menu-page-title {
-    font-size: 24px;
-    margin-left: 40px;
-    color: #888888;
 }
 
 .preview-icon {

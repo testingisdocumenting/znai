@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import Promise from "promise"
 
-import TocPanel from './structure/TocPanel'
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import {elementsLibrary, presentationElementHandlers} from './DefaultElementsLibrary'
@@ -69,7 +68,6 @@ class Documentation extends Component {
             page,
             selectedTocItem,
             tocCollapsed,
-            tocSelected,
             lastChangeDataDom,
             searchActive,
             pageGenError,
