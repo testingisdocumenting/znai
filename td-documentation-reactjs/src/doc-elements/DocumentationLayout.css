@@ -158,7 +158,6 @@
     top: 14px;
     left: 20px;
     font-size: 20px;
-    transition: top 0.5s ease-in;
     z-index: 1001;
 }
 
