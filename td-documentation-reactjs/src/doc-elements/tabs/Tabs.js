@@ -48,12 +48,15 @@ class Tabs extends Component {
     constructor(props) {
         super(props)
 
-        const {tabsContent} = this.props
+        const {tabsContent, forcedTabIdx} = this.props
         const names = tabsContent.map(t => t.name)
 
         const tabName = tabsRegistration.firstMatchFromHistory(names);
 
-        const idx = names.indexOf(tabName)
+        const idx = typeof forcedTabIdx !== 'undefined' ?
+            forcedTabIdx:
+            names.indexOf(tabName)
+
         this.state = {activeIdx: idx >= 0 ? idx : 0}
 
         this.onClick = this.onClick.bind(this)
@@ -69,8 +72,10 @@ class Tabs extends Component {
     }
 
     render() {
-        const {elementsLibrary, tabsContent} = this.props
-        const {activeIdx} = this.state
+        const {elementsLibrary, tabsContent, forcedTabIdx} = this.props
+        const activeIdx = typeof forcedTabIdx !== 'undefined' ?
+            forcedTabIdx :
+            this.state.activeIdx
 
         const names = tabsContent.map(t => t.name)
         const tabContent = tabsContent[activeIdx].content
@@ -106,4 +111,13 @@ function removeFromArray(array, value) {
     }
 }
 
-export default Tabs
+const PresentationTabs = ({tabsContent, slideIdx, elementsLibrary}) => {
+    return <Tabs elementsLibrary={elementsLibrary}
+                 tabsContent={tabsContent}
+                 forcedTabIdx={slideIdx}/>
+}
+
+const presentationTabsHandler = {component: PresentationTabs,
+    numberOfSlides: ({tabsContent}) => tabsContent.length}
+
+export {Tabs, presentationTabsHandler}

@@ -8,7 +8,7 @@ import {BulletList, presentationUnorderedListHandler} from './default-elements/B
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import Table from './table/Table'
-import Tabs from './tabs/Tabs'
+import {Tabs, presentationTabsHandler} from './tabs/Tabs'
 import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
 import LatexMath from './math/LatexMath'
@@ -69,6 +69,7 @@ library.AnnotatedImage = EmbeddedAnnotatedImage
 presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 
 library.Tabs = Tabs
+presentationElementHandlers.Tabs = presentationTabsHandler
 
 library.Json = Json
 presentationElementHandlers.Json = presentationJson
