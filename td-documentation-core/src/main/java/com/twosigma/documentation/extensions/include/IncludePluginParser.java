@@ -1,6 +1,6 @@
 package com.twosigma.documentation.extensions.include;
 
-import com.twosigma.documentation.parser.commonmark.include.IncludeNode;
+import com.twosigma.documentation.extensions.PluginParams;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +14,7 @@ public class IncludePluginParser {
     private IncludePluginParser() {
     }
 
-    public static IncludeParams parse(String line) {
+    public static PluginParams parse(String line) {
         final Matcher matcher = PATTERN.matcher(line);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("To define include plugin use\n:" +
@@ -22,6 +22,6 @@ public class IncludePluginParser {
                     "Got: " + line);
         }
 
-        return new IncludeParams(matcher.group(1).trim(), matcher.group(2).trim());
+        return new PluginParams(matcher.group(1).trim(), matcher.group(2).trim());
     }
 }

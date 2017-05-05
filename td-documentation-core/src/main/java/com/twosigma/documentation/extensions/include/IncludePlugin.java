@@ -2,6 +2,7 @@ package com.twosigma.documentation.extensions.include;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.Plugin;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 
 import java.nio.file.Path;
@@ -17,5 +18,5 @@ public interface IncludePlugin extends Plugin {
      */
     default void reset(IncludeContext context) {}
 
-    PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams);
+    PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams);
 }

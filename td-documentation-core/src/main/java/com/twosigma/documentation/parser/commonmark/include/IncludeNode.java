@@ -1,6 +1,6 @@
 package com.twosigma.documentation.parser.commonmark.include;
 
-import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.PluginParams;
 import org.commonmark.node.CustomBlock;
 import org.commonmark.node.Visitor;
 
@@ -8,9 +8,9 @@ import org.commonmark.node.Visitor;
  * @author mykola
  */
 public class IncludeNode extends CustomBlock {
-    private IncludeParams params;
+    private PluginParams params;
 
-    public IncludeNode(IncludeParams params) {
+    public IncludeNode(PluginParams params) {
         this.params = params;
     }
 
@@ -18,7 +18,7 @@ public class IncludeNode extends CustomBlock {
         return params.getPluginId();
     }
 
-    public IncludeParams getParams() {
+    public PluginParams getParams() {
         return params;
     }
 

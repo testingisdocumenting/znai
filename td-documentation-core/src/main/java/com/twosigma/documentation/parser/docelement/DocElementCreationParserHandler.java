@@ -7,7 +7,7 @@ import com.twosigma.documentation.extensions.Plugin;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
-import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.ParserHandler;
@@ -187,15 +187,15 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onIncludePlugin(IncludeParams includeParams) {
-        IncludePlugin includePlugin = Plugins.includePluginById(includeParams.getPluginId());
-        processPlugin(includePlugin, (p) -> p.process(componentsRegistry, path, includeParams));
+    public void onIncludePlugin(PluginParams pluginParams) {
+        IncludePlugin includePlugin = Plugins.includePluginById(pluginParams.getPluginId());
+        processPlugin(includePlugin, (p) -> p.process(componentsRegistry, path, pluginParams));
     }
 
     @Override
-    public void onFencePlugin(String pluginId, String value) {
-        FencePlugin fencePlugin = Plugins.fencePluginById(pluginId);
-        processPlugin(fencePlugin, (p) -> p.process(componentsRegistry, path, value));
+    public void onFencePlugin(PluginParams pluginParams, String content) {
+        FencePlugin fencePlugin = Plugins.fencePluginById(pluginParams.getPluginId());
+        processPlugin(fencePlugin, (p) -> p.process(componentsRegistry, path, pluginParams, content));
     }
 
     private <E extends Plugin> void processPlugin(E plugin, Function<E, PluginResult> processFunc) {

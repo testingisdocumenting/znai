@@ -3,7 +3,7 @@ package com.twosigma.documentation.extensions.diagrams;
 import com.twosigma.diagrams.graphviz.GraphvizDiagram;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
-import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResult;
 
@@ -26,9 +26,9 @@ public class GvDiagramIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        String diagramId = includeParams.getFreeParam();
-        String diagramPath = includeParams.getOpts().getRequiredString("diagramPath");
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+        String diagramId = pluginParams.getFreeParam();
+        String diagramPath = pluginParams.getOpts().getRequiredString("diagramPath");
         String gvContent = componentsRegistry.includeResourceResolver().textContent(diagramPath);
 
         GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv(diagramId, gvContent);

@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.Plugins;
 import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
@@ -147,11 +148,21 @@ public class MarkdownParser implements MarkupParser {
 
         @Override
         public void visit(final FencedCodeBlock fencedCodeBlock) {
-            if (Plugins.hasFencePlugin(fencedCodeBlock.getInfo())) {
-                parserHandler.onFencePlugin(fencedCodeBlock.getInfo(), fencedCodeBlock.getLiteral());
+            PluginParams pluginParams = extractFencePluginParams(fencedCodeBlock.getInfo().trim());
+            if (Plugins.hasFencePlugin(pluginParams.getPluginId())) {
+                parserHandler.onFencePlugin(pluginParams, fencedCodeBlock.getLiteral());
             } else {
                 parserHandler.onSnippet(fencedCodeBlock.getInfo(), "", fencedCodeBlock.getLiteral());
             }
+        }
+
+        private static PluginParams extractFencePluginParams(String nameAndParams) {
+            int firstSpaceIdx = nameAndParams.indexOf(' ');
+            return (firstSpaceIdx == -1) ?
+                    new PluginParams(nameAndParams, ""):
+                    new PluginParams(nameAndParams.substring(0, firstSpaceIdx),
+                            nameAndParams.substring(firstSpaceIdx + 1));
+
         }
 
         @Override

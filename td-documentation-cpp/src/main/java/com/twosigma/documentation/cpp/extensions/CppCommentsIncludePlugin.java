@@ -5,8 +5,8 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.cpp.parser.CodePart;
 import com.twosigma.documentation.cpp.parser.CppSourceCode;
 import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.extensions.include.IncludeParams;
-import com.twosigma.documentation.extensions.include.IncludeParamsOpts;
+import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginParamsOpts;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParserResult;
 
@@ -27,12 +27,12 @@ public class CppCommentsIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        String fileName = includeParams.getFreeParam();
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+        String fileName = pluginParams.getFreeParam();
         cppPath = componentsRegistry.includeResourceResolver().fullPath(fileName);
         String text = componentsRegistry.includeResourceResolver().textContent(fileName);
 
-        String comments = extractComments(text, includeParams.getOpts());
+        String comments = extractComments(text, pluginParams.getOpts());
         MarkupParserResult parserResult = componentsRegistry.parser().parse(cppPath, comments);
         return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
     }
@@ -42,7 +42,7 @@ public class CppCommentsIncludePlugin implements IncludePlugin {
         return Stream.of(AuxiliaryFile.builtTime(cppPath));
     }
 
-    private String extractComments(String text, IncludeParamsOpts opts) {
+    private String extractComments(String text, PluginParamsOpts opts) {
         String entry = opts.getRequiredString("entry");
         String body = CppSourceCode.entryBodyOnly(text, entry);
 

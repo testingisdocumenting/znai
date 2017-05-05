@@ -3,19 +3,13 @@ package com.twosigma.documentation.extensions.markup;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
-import com.twosigma.documentation.parser.docelement.DocElement;
-import com.twosigma.utils.FileUtils;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -30,11 +24,11 @@ public class MarkdownIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         PluginResourcesResolver resourcesResolver = componentsRegistry.includeResourceResolver();
         MarkupParser parser = componentsRegistry.parser();
 
-        Path markdown = resourcesResolver.fullPath(includeParams.getFreeParam());
+        Path markdown = resourcesResolver.fullPath(pluginParams.getFreeParam());
         parserResult = parser.parse(markdown, resourcesResolver.textContent(markdown));
 
         return PluginResult.docElements(parserResult.getDocElement().getContent().stream());

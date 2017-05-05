@@ -1,9 +1,6 @@
 package com.twosigma.documentation.parser.commonmark.include;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePluginParser;
 import org.commonmark.node.AbstractVisitor;
 import org.commonmark.node.Node;
@@ -46,7 +43,7 @@ public class IncludePostProcessor implements PostProcessor {
         }
 
         private IncludeNode createNode(final String includeStatement) {
-            IncludeParams params = IncludePluginParser.parse(includeStatement);
+            PluginParams params = IncludePluginParser.parse(includeStatement);
             return new IncludeNode(params);
         }
     }

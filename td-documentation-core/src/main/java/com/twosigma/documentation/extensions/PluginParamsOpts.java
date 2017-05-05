@@ -1,4 +1,4 @@
-package com.twosigma.documentation.extensions.include;
+package com.twosigma.documentation.extensions;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 /**
  * @author mykola
  */
-public class IncludeParamsOpts {
+public class PluginParamsOpts {
     private Map<String, ?> opts;
 
-    IncludeParamsOpts(Map<String, ?> opts) {
+    PluginParamsOpts(Map<String, ?> opts) {
         this.opts = opts;
     }
 

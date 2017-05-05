@@ -1,24 +1,12 @@
 package com.twosigma.documentation.extensions.rest;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
-import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.MarkupParser;
@@ -45,11 +33,11 @@ public class RestTestIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final IncludeParams includeParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final PluginParams pluginParams) {
         this.markupPath = markupPath;
 
         Map testData = JsonUtils.deserializeAsMap(componentsRegistry.includeResourceResolver()
-                .textContent(includeParams.getFreeParam()));
+                .textContent(pluginParams.getFreeParam()));
         String scenarioMarkup = testData.get("scenario").toString();
 
         List<DocElement> docElements = elementsFromScenario(componentsRegistry.parser(), scenarioMarkup);

@@ -1,4 +1,4 @@
-package com.twosigma.documentation.extensions.include;
+package com.twosigma.documentation.extensions;
 
 import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.utils.FileUtils;

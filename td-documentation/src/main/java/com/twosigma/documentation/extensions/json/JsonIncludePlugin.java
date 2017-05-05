@@ -3,9 +3,8 @@ package com.twosigma.documentation.extensions.json;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.parser.docelement.DocElementType;
 import com.twosigma.utils.CollectionUtils;
 import com.twosigma.utils.JsonUtils;
 
@@ -28,12 +27,12 @@ public class JsonIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        fileName = includeParams.getFreeParam();
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+        fileName = pluginParams.getFreeParam();
         String json = componentsRegistry.includeResourceResolver().textContent(fileName);
 
         Map<String, Object> props = CollectionUtils.createMap("data", JsonUtils.deserialize(json),
-                "paths", highlightedPaths(includeParams.getOpts().get("paths")));
+                "paths", highlightedPaths(pluginParams.getOpts().get("paths")));
 
         return PluginResult.docElement("Json", props);
     }

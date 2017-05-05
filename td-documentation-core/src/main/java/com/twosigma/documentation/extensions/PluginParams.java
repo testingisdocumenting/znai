@@ -1,4 +1,4 @@
-package com.twosigma.documentation.extensions.include;
+package com.twosigma.documentation.extensions;
 
 import com.twosigma.utils.JsonUtils;
 
@@ -8,15 +8,15 @@ import java.util.Map;
 /**
  * @author mykola
  */
-public class IncludeParams {
+public class PluginParams {
     private String pluginId;
     private String freeParam;
-    private IncludeParamsOpts opts;
+    private PluginParamsOpts opts;
 
-    public IncludeParams(String pluginId, String value) {
+    public PluginParams(String pluginId, String value) {
         this.pluginId = pluginId;
         this.freeParam = extractFreeParam(value);
-        this.opts = new IncludeParamsOpts(extractMap(value));
+        this.opts = new PluginParamsOpts(extractMap(value));
     }
 
     public String getPluginId() {
@@ -27,7 +27,7 @@ public class IncludeParams {
         return freeParam;
     }
 
-    public IncludeParamsOpts getOpts() {
+    public PluginParamsOpts getOpts() {
         return opts;
     }
 

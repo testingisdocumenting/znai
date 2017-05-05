@@ -12,6 +12,7 @@ features
     tables
     tabs
     json
+    templates
     image-annotations
     math
     proxy

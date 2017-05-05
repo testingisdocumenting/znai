@@ -2,7 +2,6 @@ package com.twosigma.documentation.extensions;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.include.IncludeParams;
 
 import java.util.stream.Stream;
 

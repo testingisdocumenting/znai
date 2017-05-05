@@ -3,7 +3,7 @@ package com.twosigma.documentation.java.extensions;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.java.parser.JavaCode;
 import com.twosigma.documentation.parser.docelement.DocElement;
@@ -24,11 +24,11 @@ public class JavaDocIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        String fileName = includeParams.getFreeParam();
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+        String fileName = pluginParams.getFreeParam();
         fullPath = componentsRegistry.includeResourceResolver().fullPath(fileName);
         String textContent = componentsRegistry.includeResourceResolver().textContent(fullPath);
-        String entry = includeParams.getOpts().get("entry");
+        String entry = pluginParams.getOpts().get("entry");
 
         JavaCode javaCode = new JavaCode(componentsRegistry, fullPath, textContent);
         List<DocElement> docElements = entry == null ?

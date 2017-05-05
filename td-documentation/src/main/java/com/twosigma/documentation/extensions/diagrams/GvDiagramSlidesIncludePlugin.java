@@ -2,6 +2,7 @@ package com.twosigma.documentation.extensions.diagrams;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
@@ -34,15 +35,15 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         MarkupParser parser = componentsRegistry.parser();
         PluginResourcesResolver pluginResourcesResolver = componentsRegistry.includeResourceResolver();
 
-        String diagramTitle = includeParams.getFreeParam();
+        String diagramTitle = pluginParams.getFreeParam();
         String diagramId = NameUtils.camelCaseWithSpacesToDashes(diagramTitle);
 
-        diagramPath = pluginResourcesResolver.fullPath(includeParams.getOpts().getRequiredString("diagramPath"));
-        slidesPath = pluginResourcesResolver.fullPath(includeParams.getOpts().getRequiredString("slidesPath"));
+        diagramPath = pluginResourcesResolver.fullPath(pluginParams.getOpts().getRequiredString("diagramPath"));
+        slidesPath = pluginResourcesResolver.fullPath(pluginParams.getOpts().getRequiredString("slidesPath"));
 
         String gvContent = pluginResourcesResolver.textContent(diagramPath);
         String slidesContent = pluginResourcesResolver.textContent(slidesPath);

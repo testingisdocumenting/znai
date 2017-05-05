@@ -6,8 +6,8 @@ import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.cpp.parser.CodePart;
 import com.twosigma.documentation.cpp.parser.CppSourceCode;
-import com.twosigma.documentation.extensions.include.IncludeParams;
-import com.twosigma.documentation.extensions.include.IncludeParamsOpts;
+import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginParamsOpts;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.MarkupParser;
@@ -36,13 +36,13 @@ public class CppIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         markupParser = componentsRegistry.parser();
         codeTokenizer = componentsRegistry.codeTokenizer();
-        fileName = includeParams.getFreeParam();
+        fileName = pluginParams.getFreeParam();
         cppPath = componentsRegistry.includeResourceResolver().fullPath(this.fileName);
 
-        IncludeParamsOpts opts = includeParams.getOpts();
+        PluginParamsOpts opts = pluginParams.getOpts();
         String commentsType = opts.has("comments") ? opts.get("comments") : "";
 
         String text = componentsRegistry.includeResourceResolver().textContent(fileName);
@@ -80,7 +80,7 @@ public class CppIncludePlugin implements IncludePlugin {
         return Stream.of(docElement);
     }
 
-    private String extractSnippet(String text, IncludeParamsOpts opts) {
+    private String extractSnippet(String text, PluginParamsOpts opts) {
         String entry = opts.get("entry");
         if (entry == null) {
             return text;

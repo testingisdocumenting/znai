@@ -3,7 +3,7 @@ package com.twosigma.documentation.extensions.code;
 import com.google.gson.Gson;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.include.IncludeContext;
-import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResult;
 
@@ -42,9 +42,9 @@ public class CodeExecutionResultIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final IncludeParams includeParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final PluginParams pluginParams) {
         return PluginResult.docElement("TestComponent", Collections.emptyMap());
-//        final String fileName = includeParams.getFreeParam();
+//        final String fileName = pluginParams.getFreeParam();
 //        final Path fullPath = context.getCurrentFilePath().getParent().resolve(fileName + ".json").toAbsolutePath();
 //
 //        List<SnippetAndResult> snippetAndResults = getSnippets(fullPath);

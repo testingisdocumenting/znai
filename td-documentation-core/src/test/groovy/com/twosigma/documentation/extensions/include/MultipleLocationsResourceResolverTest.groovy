@@ -1,5 +1,6 @@
 package com.twosigma.documentation.extensions.include
 
+import com.twosigma.documentation.extensions.MultipleLocationsResourceResolver
 import org.junit.Test
 
 import java.nio.file.Paths

@@ -8,7 +8,7 @@ import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.Plugins;
-import com.twosigma.documentation.extensions.include.MultipleLocationsResourceResolver;
+import com.twosigma.documentation.extensions.MultipleLocationsResourceResolver;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkdownParser;

@@ -4,7 +4,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
-import com.twosigma.documentation.extensions.include.IncludeParams;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.include.IncludePluginParser;
 import com.twosigma.documentation.parser.docelement.DocElement;
@@ -29,7 +29,7 @@ public class TabsFencePlugin implements FencePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, String content) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         this.componentsRegistry = componentsRegistry;
         this.markupPath = markupPath;
 
@@ -58,10 +58,10 @@ public class TabsFencePlugin implements FencePlugin {
     }
 
     private Object contentFromPluginId(String pluginDef) {
-        IncludeParams includeParams = IncludePluginParser.parse(pluginDef);
+        PluginParams pluginParams = IncludePluginParser.parse(pluginDef);
 
-        IncludePlugin includePlugin = Plugins.includePluginById(includeParams.getPluginId());
-        PluginResult result = includePlugin.process(componentsRegistry, markupPath, includeParams);
+        IncludePlugin includePlugin = Plugins.includePluginById(pluginParams.getPluginId());
+        PluginResult result = includePlugin.process(componentsRegistry, markupPath, pluginParams);
 
         return result.getDocElements().stream().map(DocElement::toMap).collect(toList());
     }

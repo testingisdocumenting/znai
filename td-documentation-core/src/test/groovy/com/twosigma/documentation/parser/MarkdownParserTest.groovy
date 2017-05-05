@@ -147,6 +147,18 @@ world""")
         assert content == [[content: 'test\nblock\n', type: 'FenceDummy']]
     }
 
+    @Test
+    void "fenced plugin with params"() {
+        parse("~~~dummy free-form {'p1': 'v1', 'p2': 'v2'}\n" +
+                "test\n" +
+                "block\n" +
+                "~~~")
+
+        assert content == [[content: 'test\nblock\n', 'freeParam': 'free-form',
+                            'p1': 'v1', 'p2': 'v2',
+                            type: 'FenceDummy']]
+    }
+
     private void parse(String markdown) {
         def parseResult = parser.parse(Paths.get("test.md"), markdown)
         content = parseResult.docElement.getContent().collect { it.toMap() }

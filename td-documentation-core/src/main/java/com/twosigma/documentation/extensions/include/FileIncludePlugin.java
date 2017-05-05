@@ -3,6 +3,8 @@ package com.twosigma.documentation.extensions.include;
 import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.PluginParamsOpts;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 import com.twosigma.utils.StringUtils;
@@ -30,17 +32,17 @@ public class FileIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, IncludeParams includeParams) {
-        fileName = includeParams.getFreeParam();
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+        fileName = pluginParams.getFreeParam();
 
         String text = extractText(componentsRegistry.includeResourceResolver().
-                textContent(fileName), includeParams.getOpts());
+                textContent(fileName), pluginParams.getOpts());
 
-        String providedLang = includeParams.getOpts().getString("lang");
+        String providedLang = pluginParams.getOpts().getString("lang");
         String langToUse = (providedLang == null) ? langFromFileName(fileName) : providedLang;
 
         Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), langToUse, text);
-        props.putAll(includeParams.getOpts().toMap());
+        props.putAll(pluginParams.getOpts().toMap());
 
         return PluginResult.docElement(DocElementType.SNIPPET, props);
     }
@@ -51,7 +53,7 @@ public class FileIncludePlugin implements IncludePlugin {
                 componentsRegistry.includeResourceResolver().fullPath(fileName)));
     }
 
-    private String extractText(String fileContent, IncludeParamsOpts opts) {
+    private String extractText(String fileContent, PluginParamsOpts opts) {
         if (opts.isEmpty()) {
             return fileContent;
         }
@@ -67,7 +69,7 @@ public class FileIncludePlugin implements IncludePlugin {
         return StringUtils.stripIndentation(withExcludedLines.toString());
     }
 
-    private Text cropStart(Text text, IncludeParamsOpts opts) {
+    private Text cropStart(Text text, PluginParamsOpts opts) {
         String startLine = opts.get("startLine");
         if (startLine != null) {
             return text.startingWithLineContaining(startLine);
@@ -76,7 +78,7 @@ public class FileIncludePlugin implements IncludePlugin {
         return text;
     }
 
-    private Text cropEnd(Text text, IncludeParamsOpts opts) {
+    private Text cropEnd(Text text, PluginParamsOpts opts) {
         Number numberOfLines = opts.get("numberOfLines");
         if (numberOfLines != null) {
             return text.limitTo(numberOfLines);
