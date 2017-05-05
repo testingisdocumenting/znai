@@ -67,6 +67,19 @@
     flex-direction: column;
 }
 
+.toc-menu::-webkit-scrollbar {
+    height: 3px;
+    width: 3px;
+}
+
+.toc-menu::-webkit-scrollbar-thumb {
+   background: #ACACAC;
+}
+
+.toc-menu::-webkit-scrollbar-track {
+   background: 0;
+}
+
 .toc-section {
     margin-bottom: 35px;
 }
