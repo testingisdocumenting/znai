@@ -66,6 +66,7 @@ public class GenericPageElement implements PageElement {
         } catch (Exception e) {
             step.fail(e);
             StepReporters.onFailure(step);
+            throw e;
         }
     }
 

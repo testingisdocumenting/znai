@@ -27,6 +27,10 @@ public class TokenizedMessageToAnsiConverter {
         for (MessageToken messageToken : tokenizedMessage) {
             TokenRenderDetails renderDetails = this.tokenRenderDetails.get(messageToken.getType());
 
+            if (renderDetails == null) {
+                throw new RuntimeException("no render details found for token: " + messageToken);
+            }
+
             boolean isLast = (i == len - 1);
             boolean addSpace = renderDetails.isSpaceAfterRequired && !isLast;
             Stream<?> ansiSequence = convertToAnsiSequence(renderDetails, messageToken, addSpace);

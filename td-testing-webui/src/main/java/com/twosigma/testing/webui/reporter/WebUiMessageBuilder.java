@@ -11,6 +11,7 @@ import java.util.Arrays;
  */
 public class WebUiMessageBuilder {
     private enum TokenTypes {
+        ERROR("error", true, Color.RED),
         ACTION("action", true, Color.BLUE),
         STRING_VALUE("stringValue", true, Color.GREEN),
         SELECTOR_TYPE("selectorType", true, Color.YELLOW),

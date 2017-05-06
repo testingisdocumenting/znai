@@ -19,4 +19,12 @@ public class MessageToken {
     public Object getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "MessageToken{" +
+                "type='" + type + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

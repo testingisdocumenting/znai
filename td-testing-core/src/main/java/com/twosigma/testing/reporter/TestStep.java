@@ -42,6 +42,7 @@ public class TestStep<E> {
     public void fail(Throwable t) {
         stackTrace = TraceUtils.stackTrace(t);
         completionMessage = new TokenizedMessage();
-        completionMessage.add("error", t.getMessage()).add("", " ").add(inProgressMessage);
+        completionMessage.add("error", "failed").add(inProgressMessage).add("delimiter", ":")
+                .add("error", t.getMessage());
     }
 }
