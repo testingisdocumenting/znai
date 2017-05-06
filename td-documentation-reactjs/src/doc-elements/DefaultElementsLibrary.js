@@ -9,6 +9,7 @@ import GraphVizSvg from './graphviz/GraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import Table from './table/Table'
 import {Tabs, presentationTabsHandler} from './tabs/Tabs'
+import {Columns, presentationColumnsHandler} from './columns/Columns'
 import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
 import LatexMath from './math/LatexMath'
@@ -70,6 +71,9 @@ presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 
 library.Tabs = Tabs
 presentationElementHandlers.Tabs = presentationTabsHandler
+
+library.Columns = Columns
+presentationElementHandlers.Columns = presentationColumnsHandler
 
 library.Json = Json
 presentationElementHandlers.Json = presentationJson

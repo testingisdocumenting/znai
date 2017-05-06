@@ -12,6 +12,7 @@ features
     tables
     tabs
     json
+    columns
     templates
     image-annotations
     math

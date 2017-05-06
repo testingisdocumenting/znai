@@ -1,0 +1,8 @@
+.columns {
+    display: flex;
+}
+
+.column {
+    flex: 1;
+    width: 350px;
+}

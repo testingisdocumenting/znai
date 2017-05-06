@@ -65,1405 +65,176 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "CSV",
-                    "id": "csv",
+                    "title": "Information Layout",
+                    "id": "information-layout",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "There is a directive to display table data like the one below.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "",
-                            "maxLineLength": 26,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": ":include-table: table.csv \n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Instead of aligning tables using one of the markdown extensions you can use your ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "CSV",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " editor of choice.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "So the following ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "CSV",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " file",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "csv",
-                            "maxLineLength": 49,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": "Account"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " Price"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " Description\n#12BGD3"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "100"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " custom table with a long attachment\n#12BGD3"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "150"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " chair\n#91AGB1"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "10"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " lunch"
-                                }
-                            ],
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "renders as this table",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "table": {
-                                "columns": [
-                                    {
-                                        "title": "Account"
-                                    },
-                                    {
-                                        "title": "Price"
-                                    },
-                                    {
-                                        "title": "Description"
-                                    }
-                                ],
-                                "data": [
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "100",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "custom table with a long attachment",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "150",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "chair",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#91AGB1",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "10",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "lunch",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ]
-                                ]
-                            },
-                            "type": "Table"
-                        }
-                    ]
-                },
-                {
-                    "title": "JSON",
-                    "id": "json",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Same directive can be used to display data from a ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "JSON",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " file representing a table data.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "",
-                            "maxLineLength": 27,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": ":include-table: table.json \n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "So the following ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "JSON",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " file",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "json",
-                            "maxLineLength": 56,
-                            "tokens": [
-                                {
-                                    "type": "punctuation",
-                                    "data": "["
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n  "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"Account\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"#12BGD3\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"Price\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "100"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"Description\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"custom table with a long attachment\""
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n  "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n  "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"Account\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"#12BGD3\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"Price\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "150"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"Description\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"chair\""
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n  "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n  "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "{"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"Account\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"#91AGB1\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"Price\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "number",
-                                    "data": "10"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": ","
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n    "
-                                },
-                                {
-                                    "type": "property",
-                                    "data": "\"Description\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "data": ":"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": " "
-                                },
-                                {
-                                    "type": "string",
-                                    "data": "\"lunch\""
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n  "
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "}"
-                                },
-                                {
-                                    "type": "text",
-                                    "data": "\n"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "data": "]"
-                                }
-                            ],
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "renders as this table",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "table": {
-                                "columns": [
-                                    {
-                                        "title": "Account"
-                                    },
-                                    {
-                                        "title": "Price"
-                                    },
-                                    {
-                                        "title": "Description"
-                                    }
-                                ],
-                                "data": [
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "100.0",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "custom table with a long attachment",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "150.0",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "chair",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#91AGB1",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "10.0",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "lunch",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ]
-                                ]
-                            },
-                            "type": "Table"
-                        }
-                    ]
-                },
-                {
-                    "title": "Alignment and Width",
-                    "id": "alignment-and-width",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "By default column width is auto calculated to fit the values inside.",
+                                    "text": "The way you layout and flow your information affects how easy it is to comprehend given material.",
                                     "type": "SimpleText"
                                 },
                                 {
                                     "type": "SoftLineBreak"
                                 },
                                 {
-                                    "text": "But you can control the width with the extra options",
+                                    "text": "Examples of content that easier to consume side by side:",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "lang": "",
-                            "maxLineLength": 76,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": ":include-table: table.csv {Price: {width: 200}, \"Description\": {width: 400}}\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "table": {
-                                "columns": [
-                                    {
-                                        "title": "Account"
-                                    },
-                                    {
-                                        "title": "Price",
-                                        "width": 200.0
-                                    },
-                                    {
-                                        "title": "Description",
-                                        "width": 400.0
-                                    }
-                                ],
-                                "data": [
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "100",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "custom table with a long attachment",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "150",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "chair",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#91AGB1",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "10",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "lunch",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ]
-                                ]
-                            },
-                            "type": "Table"
-                        },
-                        {
-                            "type": "Paragraph",
+                            "bulletMarker": "*",
+                            "tight": true,
+                            "type": "BulletList",
                             "content": [
                                 {
-                                    "text": "And if you need to change a column alignment from default ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "Emphasis",
+                                    "type": "ListItem",
                                     "content": [
                                         {
-                                            "text": "left",
-                                            "type": "SimpleText"
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "Before/After transition",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "text": " to ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "Emphasis",
+                                    "type": "ListItem",
                                     "content": [
                                         {
-                                            "text": "right",
-                                            "type": "SimpleText"
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "Action and its result",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "text": " just add ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "align",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " property",
-                                    "type": "SimpleText"
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "input and output",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
-                        },
-                        {
-                            "lang": "",
-                            "maxLineLength": 63,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": ":include-table: table.csv {Price: {width: 200, align: \"right\"}}\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "table": {
-                                "columns": [
-                                    {
-                                        "title": "Account"
-                                    },
-                                    {
-                                        "title": "Price",
-                                        "width": 200.0,
-                                        "align": "right"
-                                    },
-                                    {
-                                        "title": "Description"
-                                    }
-                                ],
-                                "data": [
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "100",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "custom table with a long attachment",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "150",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "chair",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#91AGB1",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "10",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "lunch",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ]
-                                ]
-                            },
-                            "type": "Table"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Or for ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "JSON",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " data",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "",
-                            "maxLineLength": 64,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": ":include-table: table.json {Price: {width: 100, align: \"right\"}}\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "table": {
-                                "columns": [
-                                    {
-                                        "title": "Account"
-                                    },
-                                    {
-                                        "title": "Price",
-                                        "width": 100.0,
-                                        "align": "right"
-                                    },
-                                    {
-                                        "title": "Description"
-                                    }
-                                ],
-                                "data": [
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "100.0",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "custom table with a long attachment",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "150.0",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "chair",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#91AGB1",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "10.0",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "lunch",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ]
-                                ]
-                            },
-                            "type": "Table"
                         }
                     ]
                 },
                 {
-                    "title": "Markup in Cells",
-                    "id": "markup-in-cells",
+                    "title": "Definition",
+                    "id": "definition",
                     "type": "Section",
                     "content": [
                         {
-                            "table": {
-                                "columns": [
-                                    {
-                                        "title": "Account"
-                                    },
-                                    {
-                                        "title": "Price"
-                                    },
-                                    {
-                                        "title": "Description"
-                                    }
-                                ],
-                                "data": [
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "100",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "type": "StrongEmphasis",
-                                                        "content": [
-                                                            {
-                                                                "text": "custom",
-                                                                "type": "SimpleText"
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "text": " table with a long attachment",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#12BGD3",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "150",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "chair",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    ],
-                                    [
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "#91AGB1",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "10",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "code": "lunch",
-                                                        "type": "InlinedCode"
-                                                    }
-                                                ]
-                                            }
-                                        ]
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "To define columns layout use ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "fenced",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " block plugin",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "lang": "",
+                            "maxLineLength": 37,
+                            "tokens": [
+                                {
+                                    "type": "text",
+                                    "data": "```columns\nleft: \nthis content goes to the left\n\nand can span multiple lines\nright: this content goes to the right\n\nand can span multiple lines\n```\n"
+                                }
+                            ],
+                            "lineNumber": "",
+                            "type": "Snippet"
+                        },
+                        {
+                            "columns": [
+                                {
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "this content goes to the left",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "and can span multiple lines",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
                                     ]
-                                ]
-                            },
-                            "type": "Table"
+                                },
+                                {
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "this content goes to the right",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "and can span multiple lines",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "Columns"
                         }
                     ]
                 }
             ],
             "tocItem": {
                 "sectionTitle": "Features",
-                "pageTitle": "Tables",
-                "fileName": "tables",
+                "pageTitle": "Columns",
+                "fileName": "columns",
                 "dirName": "features",
                 "pageSectionIdTitles": [
                     {
-                        "title": "CSV",
-                        "id": "csv"
+                        "title": "Information Layout",
+                        "id": "information-layout"
                     },
                     {
-                        "title": "JSON",
-                        "id": "json"
-                    },
-                    {
-                        "title": "Alignment and Width",
-                        "id": "alignment-and-width"
-                    },
-                    {
-                        "title": "Markup in Cells",
-                        "id": "markup-in-cells"
+                        "title": "Definition",
+                        "id": "definition"
                     }
                 ]
             }

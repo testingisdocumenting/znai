@@ -47,7 +47,8 @@ Insert it using fenced block syntax. Content inside of fenced block is treated a
     title: Software Engineer
     team: Team A
     project: BBR
-    code:`````java
+    code:
+    `````java
     class AwesomeClass {}
     `````    
     ```
@@ -59,7 +60,8 @@ name: Sathish
 title: Software Engineer
 team: Team A
 project: BBR
-code:`````java
+code:
+`````java
 class AwesomeClass {}
 `````    
 ```

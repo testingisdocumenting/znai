@@ -1,2 +1,3 @@
 com.twosigma.documentation.extensions.tabs.TabsFencePlugin
 com.twosigma.documentation.extensions.templates.TemplateFencePlugin
+com.twosigma.documentation.extensions.columns.ColumnsFencePlugin

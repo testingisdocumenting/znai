@@ -1,4 +1,4 @@
-package com.twosigma.documentation.extensions.templates;
+package com.twosigma.documentation.extensions;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -6,16 +6,26 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
+ * Represents key values extracted from the text of key: value1 format
+ * <pre>
+ * key1:value1
+ * key2:value21
+ * value22
+ * key3: value3
+ * key4:
+ * value41
+ * value42
+ * </pre>
  * @author mykola
  */
-public class TemplateKeyValues {
+public class ColonDelimitedKeyValues {
     private static final Pattern VAR_DEF = Pattern.compile("^\\w+:");
     private final String[] lines;
     private Map<String, String> vars;
     private String currentVarName;
     private List<String> currentValueLines;
 
-    public TemplateKeyValues(String content) {
+    public ColonDelimitedKeyValues(String content) {
         lines = content.split("\n");
         vars = new HashMap<>();
         currentVarName = "";
@@ -55,7 +65,10 @@ public class TemplateKeyValues {
             int colonIdx = line.indexOf(':');
 
             currentVarName = line.substring(0, colonIdx);
-            currentValueLines.add(line.substring(colonIdx + 1));
+            String valuePart = line.substring(colonIdx + 1);
+            if (! valuePart.trim().isEmpty()) {
+                currentValueLines.add(valuePart);
+            }
         } else {
             currentValueLines.add(line);
         }

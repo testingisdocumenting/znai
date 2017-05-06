@@ -5,6 +5,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.ColonDelimitedKeyValues;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
@@ -34,12 +35,12 @@ public class TemplateFencePlugin implements FencePlugin {
 
         fullPath = resourcesResolver.fullPath(pluginParams.getFreeParam());
         parserResult = parser.parse(markupPath, processTemplate(resourcesResolver.textContent(fullPath),
-                new TemplateKeyValues(content)));
+                new ColonDelimitedKeyValues(content)));
 
         return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
     }
 
-    private String processTemplate(String template, TemplateKeyValues keyValues) {
+    private String processTemplate(String template, ColonDelimitedKeyValues keyValues) {
         return RegexpUtils.replaceAll(template, VARIABLE_PATTERN,
                 (matcher) -> keyValues.get(matcher.group(1)));
     }

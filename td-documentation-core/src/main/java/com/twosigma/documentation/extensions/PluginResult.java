@@ -27,6 +27,10 @@ public class PluginResult {
         return new PluginResult(elements.collect(Collectors.toList()));
     }
 
+    public static PluginResult docElement(DocElement element) {
+        return new PluginResult(element);
+    }
+
     public static PluginResult docElement(final String type, final Map<String, Object> props) {
         DocElement docElement = new DocElement(type);
         props.forEach(docElement::addProp);
