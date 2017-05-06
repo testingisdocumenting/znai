@@ -5,9 +5,10 @@ class SearchPage {
 
     void open() {
         open("/search")
+        box.waitTo beVisible
     }
 
     void submit(value) {
-        this.box.setValue(value)
+        box.setValue(value)
     }
 }

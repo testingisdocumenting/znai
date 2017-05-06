@@ -1,9 +1,11 @@
 package com.twosigma.testing.webui;
 
+import com.twosigma.testing.expectation.ValueMatcher;
 import com.twosigma.testing.http.HttpUrl;
 import com.twosigma.testing.webui.cfg.Configuration;
 import com.twosigma.testing.webui.documentation.DocumentationDsl;
 import com.twosigma.testing.webui.driver.CurrentWebDriver;
+import com.twosigma.testing.webui.expectation.VisibleValueMatcher;
 import com.twosigma.testing.webui.page.PageElement;
 import com.twosigma.testing.webui.page.path.ElementPath;
 import com.twosigma.testing.webui.page.path.GenericPageElement;
@@ -28,6 +30,14 @@ public class WebTestDsl {
 
     public static PageElement $(String css) {
         return new GenericPageElement(driver, ElementPath.css(css));
+    }
+
+    public static ValueMatcher beVisible() {
+        return new VisibleValueMatcher();
+    }
+
+    public static ValueMatcher getBeVisible() {
+        return beVisible();
     }
 
     private static String createFullUrl(String url) {

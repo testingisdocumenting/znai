@@ -40,16 +40,17 @@ public class ActualValue implements ActualValueExpectations {
     }
 
     @Override
-    public void waitTo(ValueMatcher valueMatcher, ExpectationTimer expectationTimer) {
+    public void waitTo(ValueMatcher valueMatcher, ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
         ActualPath actualPath = extractPath(actual);
 
-        while (! expectationTimer.hasTimedOut()) {
+        expectationTimer.start();
+        while (! expectationTimer.hasTimedOut(timeOutMillis)) {
             boolean matches = valueMatcher.matches(actualPath, actual);
             if (matches) {
-                break;
+                return;
             }
 
-            expectationTimer.tick();
+            expectationTimer.tick(tickMillis);
         }
 
         handleMismatch(valueMatcher, actualPath);

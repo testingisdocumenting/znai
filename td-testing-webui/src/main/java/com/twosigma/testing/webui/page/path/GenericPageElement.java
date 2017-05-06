@@ -82,6 +82,11 @@ public class GenericPageElement implements PageElement {
                 () -> findElement().sendKeys(value.toString()));
     }
 
+    @Override
+    public boolean isVisible() {
+        return findElement().isDisplayed();
+    }
+
     private String fetchValue() {
         return findElement().getText();
     }

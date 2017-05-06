@@ -4,7 +4,7 @@ package com.twosigma.testing.expectation.timer
  * @author mykola
  */
 class DummyExpectationTimer implements ExpectationTimer {
-    int currentTick
+    int currentTick = 100
     int maxNumberOfTicks
 
     DummyExpectationTimer(int maxNumberOfTicks) {
@@ -12,12 +12,17 @@ class DummyExpectationTimer implements ExpectationTimer {
     }
 
     @Override
-    void tick() {
+    void start() {
+        currentTick = 0
+    }
+
+    @Override
+    void tick(long millis) {
         currentTick++
     }
 
     @Override
-    boolean hasTimedOut() {
+    boolean hasTimedOut(long millis) {
         return currentTick >= maxNumberOfTicks
     }
 }
