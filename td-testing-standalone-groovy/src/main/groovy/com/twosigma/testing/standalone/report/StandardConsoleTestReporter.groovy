@@ -17,19 +17,19 @@ class StandardConsoleTestReporter extends StandaloneTestListenerAdapter {
 
     @Override
     void beforeTestRun(StandaloneTest test) {
-        ConsoleOutputs.out(Color.GREEN, test.description)
-        ConsoleOutputs.out(Color.PURPLE, test.filePath)
+        ConsoleOutputs.out(Color.GREEN, test.description.trim())
+        ConsoleOutputs.out(Color.PURPLE, test.filePath, "\n")
     }
 
     @Override
     void afterTestRun(StandaloneTest test) {
         if (test.isFailed()) {
             ConsoleOutputs.out(Color.RED, "[x] ", Color.BLUE, "failed")
-            ConsoleOutputs.out(TraceUtils.stackTrace(test.exception))
+            renderStackTrace(test.exception)
             failed++
         } else if (test.hasError()) {
             ConsoleOutputs.out(Color.RED, "[x] ", Color.BLUE, "error")
-            ConsoleOutputs.out(TraceUtils.stackTrace(test.exception))
+            renderStackTrace(test.exception)
             errored++
         } else {
             ConsoleOutputs.out(Color.GREEN, "[.] ", Color.BLUE, "passed")
@@ -44,5 +44,15 @@ class StandardConsoleTestReporter extends StandaloneTestListenerAdapter {
                 Color.GREEN, " Passed: ", passed, ", ",
                 Color.RED, " Failed: ", failed, ", ",
                 " Errored: ", errored)
+    }
+
+    private static void renderStackTrace(Throwable t) {
+        ConsoleOutputs.out(removeLibsCalls(TraceUtils.stackTrace(t)), "\n\n")
+    }
+
+    private static String removeLibsCalls(String stackTrace) {
+        return stackTrace.split("\n").findAll {
+            ! it.contains("com.twosigma.") &&
+            ! it.contains("org.codehaus.groovy")}.join("\n")
     }
 }
