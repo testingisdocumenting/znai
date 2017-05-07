@@ -1,4 +1,4 @@
-import static com.twosigma.testing.webui.WebTestDsl.*
+import static com.twosigma.testing.webui.WebTestGroovyDsl.*
 
 class SearchPage {
     def box = $('#search-box')
@@ -8,7 +8,7 @@ class SearchPage {
         box.waitTo beVisible
     }
 
-    void submit(value) {
-        box.setValue(value)
+    def submit = action("submitting search value '<query>'") {
+        box.setValue(it.query)
     }
 }

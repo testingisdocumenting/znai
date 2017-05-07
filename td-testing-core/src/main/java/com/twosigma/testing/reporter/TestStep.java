@@ -2,6 +2,7 @@ package com.twosigma.testing.reporter;
 
 import com.twosigma.utils.TraceUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -19,18 +20,49 @@ public class TestStep<E> {
     private boolean isInProgress;
     private boolean isSuccessful;
 
-    private List<TestStep> children;
+    private List<TestStep<?>> children;
+    private TestStep<?> parent;
     private String stackTrace;
 
-    public TestStep(E context,
-                    TokenizedMessage inProgressMessage,
-                    Supplier<TokenizedMessage> completionMessageSupplier,
-                    Runnable action) {
+    private static ThreadLocal<TestStep<?>> currentStep = new ThreadLocal<>();
+
+    public static <E> TestStep<E> create(E context,
+                                         TokenizedMessage inProgressMessage,
+                                         Supplier<TokenizedMessage> completionMessageSupplier,
+                                         Runnable action) {
+        TestStep<E> step = new TestStep<>(context, inProgressMessage, completionMessageSupplier, action);
+        TestStep<?> localCurrentStep = TestStep.currentStep.get();
+
+        step.parent = localCurrentStep;
+        if (localCurrentStep != null) {
+            localCurrentStep.children.add(localCurrentStep);
+        }
+        currentStep.set(step);
+
+        return step;
+    }
+
+    private TestStep(E context,
+                     TokenizedMessage inProgressMessage,
+                     Supplier<TokenizedMessage> completionMessageSupplier,
+                     Runnable action) {
         this.context = context;
+        this.children = new ArrayList<>();
         this.inProgressMessage = inProgressMessage;
         this.completionMessageSupplier = completionMessageSupplier;
         this.action = action;
         this.isInProgress = true;
+    }
+
+    public int getNumberOfParents() {
+        int result = 0;
+        TestStep step = this;
+        while (step.parent != null) {
+            result++;
+            step = step.parent;
+        }
+
+        return result;
     }
 
     public void execute() {
@@ -44,8 +76,12 @@ public class TestStep<E> {
             fail(e);
             StepReporters.onFailure(this);
             throw e;
+        } finally {
+            TestStep<?> localCurrentStep = TestStep.currentStep.get();
+            if (localCurrentStep != null) {
+                currentStep.set(localCurrentStep.parent);
+            }
         }
-
     }
 
     public TokenizedMessage getInProgressMessage() {

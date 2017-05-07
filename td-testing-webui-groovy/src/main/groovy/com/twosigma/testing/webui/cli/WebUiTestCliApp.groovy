@@ -10,7 +10,6 @@ import com.twosigma.testing.standalone.StandaloneTest
 import com.twosigma.testing.standalone.StandaloneTestListener
 import com.twosigma.testing.standalone.StandaloneTestRunner
 import com.twosigma.testing.standalone.report.StandardConsoleTestReporter
-import com.twosigma.testing.webui.reporter.WebUiExpectationHandler
 import com.twosigma.testing.webui.reporter.WebUiMessageBuilder
 
 import java.nio.file.Path
@@ -34,7 +33,6 @@ class WebUiTestCliApp implements StandaloneTestListener {
     void start() {
         ConsoleOutputs.add(new AnsiConsoleOutput())
         StepReporters.add(new ConsoleStepReporter(WebUiMessageBuilder.converter))
-        ExpectationHandlers.add(new WebUiExpectationHandler())
 
         config.print()
 

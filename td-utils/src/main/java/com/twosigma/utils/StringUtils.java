@@ -43,6 +43,10 @@ public class StringUtils {
         return i;
     }
 
+    public static String createIndentation(int numberOfSpaces) {
+        return numberOfSpaces == 0 ? "" : String.format("%" + numberOfSpaces + "s", "");
+    }
+
     private static String removeIndentation(String line, Integer indentation) {
         if (line.trim().isEmpty()) {
             return line;

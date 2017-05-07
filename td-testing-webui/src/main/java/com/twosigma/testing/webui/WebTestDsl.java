@@ -31,7 +31,7 @@ public class WebTestDsl {
                                        TokenizedMessage inProgressMessage,
                                        Supplier<TokenizedMessage> completionMessageSupplier,
                                        Runnable action) {
-        TestStep<E> step = new TestStep<>(context, inProgressMessage, completionMessageSupplier, action);
+        TestStep<E> step = TestStep.create(context, inProgressMessage, completionMessageSupplier, action);
         step.execute();
     }
 

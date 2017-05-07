@@ -1,6 +1,5 @@
 package com.twosigma.testing.webui.page.path;
 
-import com.twosigma.testing.reporter.TestStep;
 import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.webui.page.ElementValue;
 import com.twosigma.testing.webui.page.NullWebElement;
@@ -13,9 +12,7 @@ import java.util.function.Supplier;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
 import static com.twosigma.testing.webui.WebTestDsl.executeStep;
-import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.TO;
-import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.action;
-import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.stringValue;
+import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.*;
 
 /**
  * @author mykola
@@ -47,8 +44,8 @@ public class GenericPageElement implements PageElement {
     }
 
     public void click() {
-        execute(tokenizedMessage(action("clicking")),
-                () -> tokenizedMessage(action("clicked")),
+        execute(tokenizedMessage(action("clicking")).add(pathDescription),
+                () -> tokenizedMessage(action("clicked")).add(pathDescription),
                 () -> findElement().click());
     }
 
@@ -68,7 +65,24 @@ public class GenericPageElement implements PageElement {
     public void setValue(Object value) {
         execute(tokenizedMessage(action("setting value"), stringValue(value), TO).add(pathDescription),
                 () -> tokenizedMessage(action("set value"), stringValue(value), TO).add(pathDescription),
-                () -> findElement().sendKeys(value.toString()));
+                () -> {
+                    clear();
+                    sendKeys(value.toString());
+                });
+    }
+
+    @Override
+    public void sendKeys(String keys) {
+        execute(tokenizedMessage(action("sending keys"), stringValue(keys), TO).add(pathDescription),
+                () -> tokenizedMessage(action("sent value"), stringValue(keys), TO).add(pathDescription),
+                () -> findElement().sendKeys(keys));
+    }
+
+    @Override
+    public void clear() {
+        execute(tokenizedMessage(action("clearing")).add(pathDescription),
+                () -> tokenizedMessage(action("cleared")).add(pathDescription),
+                () -> findElement().clear());
     }
 
     @Override

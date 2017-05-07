@@ -6,9 +6,7 @@ import com.twosigma.testing.reporter.TestStep;
 import com.twosigma.testing.reporter.TokenizedMessage;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
-import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.TO;
-import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.action;
-import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.none;
+import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.*;
 
 /**
  * @author mykola
@@ -30,9 +28,9 @@ class PageElementExpectationSteps {
     }
 
     private static void expectationStep(PageElement pageElement, ValueMatcher valueMatcher, TokenizedMessage messageStart, Runnable expectationValidation) {
-        TestStep<PageElement> step = new TestStep<>(pageElement,
-                messageStart.add(pageElement.describe()).add(none(valueMatcher.matchingMessage())),
-                () -> tokenizedMessage(pageElement.describe()).add(none(valueMatcher.matchedMessage(null, pageElement))),
+        TestStep<PageElement> step = TestStep.create(pageElement,
+                messageStart.add(pageElement.describe()).add(matcher(valueMatcher.matchingMessage())),
+                () -> tokenizedMessage(pageElement.describe()).add(matcher(valueMatcher.matchedMessage(null, pageElement))),
                 expectationValidation);
 
         step.execute();

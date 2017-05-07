@@ -15,10 +15,11 @@ public class WebUiMessageBuilder {
         ERROR("error", true, Color.RED),
         NONE("none", true, FontStyle.NORMAL),
         ACTION("action", true, Color.BLUE),
+        MATCHER("matcher", true, Color.GREEN),
         STRING_VALUE("stringValue", true, Color.GREEN),
         URL("url", true, Color.PURPLE),
-        SELECTOR_TYPE("selectorType", true, Color.YELLOW),
-        SELECTOR_VALUE("selectorValue", true, Color.GREEN),
+        SELECTOR_TYPE("selectorType", true, Color.PURPLE),
+        SELECTOR_VALUE("selectorValue", true, FontStyle.BOLD, Color.PURPLE),
         PREPOSITION("preposition", true, Color.BLACK),
         DELIMITER("delimiter", true, Color.WHITE);
 
@@ -52,6 +53,10 @@ public class WebUiMessageBuilder {
 
     public static MessageToken action(String action) {
         return TokenTypes.ACTION.token(action);
+    }
+
+    public static MessageToken matcher(String matcher) {
+        return TokenTypes.MATCHER.token(matcher);
     }
 
     public static MessageToken none(String text) {
