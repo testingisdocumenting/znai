@@ -32,6 +32,12 @@
             <artifactId>td-documentation-client</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.twosigma.td</groupId>
+            <artifactId>td-testing-webui-groovy</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
