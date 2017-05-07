@@ -58,7 +58,7 @@ public class DocumentationDsl {
 
     private void createScreenshot(String screenshotName) {
         Screenshot screenshot = new Screenshot(screenshotTaker);
-        screenshot.save(cfg.getDocumentationArtifactsPath().resolve(screenshotName + ".png"));
+        screenshot.save(cfg.getDocArtifactsPath().resolve(screenshotName + ".png"));
     }
 
     private void createAnnotations(String screenshotName) {
@@ -69,7 +69,7 @@ public class DocumentationDsl {
         result.put("pixelRatio", getPixelRatio());
 
         String annotationsJson = JsonUtils.serializePrettyPrint(result);
-        FileUtils.writeTextContent(cfg.getDocumentationArtifactsPath().resolve(Paths.get(screenshotName + ".json")),
+        FileUtils.writeTextContent(cfg.getDocArtifactsPath().resolve(Paths.get(screenshotName + ".json")),
                 annotationsJson);
     }
 

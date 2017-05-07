@@ -21,4 +21,8 @@ class StandaloneTestListenerAdapter implements StandaloneTestListener {
     @Override
     void afterTestRun(StandaloneTest test) {
     }
+
+    @Override
+    void afterAllTests() {
+    }
 }

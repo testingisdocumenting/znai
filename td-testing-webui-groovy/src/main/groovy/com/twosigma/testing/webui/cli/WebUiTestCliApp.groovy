@@ -19,7 +19,7 @@ import java.nio.file.Paths
 /**
  * @author mykola
  */
-class WebUiTestCliApp implements StandaloneTestListener {
+class WebUiTestCliApp {
     private WebUiTestCliConfig config
     private StandaloneTestRunner runner
 
@@ -27,7 +27,6 @@ class WebUiTestCliApp implements StandaloneTestListener {
         config = new WebUiTestCliConfig(args)
 
         runner = new StandaloneTestRunner(["com.twosigma.testing.webui.WebTestDsl"], Paths.get(""))
-        runner.addListener(this)
         runner.addListener(new StandardConsoleTestReporter())
         WebTestGroovyDsl.initWithTestRunner(runner)
     }
@@ -46,29 +45,10 @@ class WebUiTestCliApp implements StandaloneTestListener {
     }
 
     private List<Path> testFiles() {
-        return [Paths.get(config.getTestFile())]
+        return config.getTestFiles().collect { Paths.get(it) }
     }
 
     static void main(String[] args) {
         new WebUiTestCliApp(args).start()
-    }
-
-    @Override
-    void beforeFirstTest() {
-    }
-
-    @Override
-    void beforeScriptParse(Path currentScriptPath) {
-    }
-
-    @Override
-    void beforeTestRun(StandaloneTest test) {
-        ConsoleOutputs.out(Color.PURPLE, test.filePath)
-        ConsoleOutputs.out(Color.GREEN, test.description)
-    }
-
-    @Override
-    void afterTestRun(StandaloneTest test) {
-
     }
 }

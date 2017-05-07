@@ -10,4 +10,5 @@ interface StandaloneTestListener {
     void beforeScriptParse(Path scriptPath)
     void beforeTestRun(StandaloneTest test)
     void afterTestRun(StandaloneTest test)
+    void afterAllTests()
 }

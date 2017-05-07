@@ -18,7 +18,6 @@ public class WebDriverCreator {
     }
 
     public static WebDriver create() {
-        System.setProperty("webdriver.chrome.driver", "/Users/mykola/work/chromedriver");
         ChromeDriver driver = createChromeDriver();
         initState(driver);
 

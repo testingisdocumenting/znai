@@ -65,6 +65,7 @@ class StandaloneTestRunner {
             test.run()
             testListeners.each { l -> l.afterTestRun(test) }
         }
+        testListeners.each { l -> l.afterAllTests() }
     }
 
     void scenario(String description, Closure code) {

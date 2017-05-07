@@ -2,32 +2,29 @@ package com.twosigma.testing.webui.cli
 
 import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.Color
+import com.twosigma.testing.webui.cfg.Configuration
 import org.apache.commons.cli.*
 
 /**
  * @author mykola
  */
 class WebUiTestCliConfig {
-    private String baseUrl
-    private String testFile
+    private Configuration cfg = Configuration.INSTANCE
+
+    private List<String> testFiles
 
     WebUiTestCliConfig(String... args) {
         parseArgs(args)
     }
 
-    String getBaseUrl() {
-        return baseUrl
-    }
-
-    String getTestFile() {
-        return testFile
+    List<String> getTestFiles() {
+        return testFiles
     }
 
     void print() {
-        def p = {k, v -> ConsoleOutputs.out(Color.BLUE, k, ": ", Color.YELLOW, v)}
+        def p = { k, v -> ConsoleOutputs.out(Color.BLUE, k, ": ", Color.YELLOW, v) }
 
-        p(" base url", baseUrl);
-        p("test file", testFile);
+        p(" base url", cfg.baseUrl);
     }
 
     private void parseArgs(String[] args) {
@@ -40,11 +37,15 @@ class WebUiTestCliConfig {
             System.exit(1);
         }
 
-        baseUrl = commandLine.getOptionValue("url");
-        testFile = commandLine.getOptionValue("file");
+        def url = commandLine.getOptionValue("url")
+        if (url != null) {
+            cfg.baseUrl = url
+        }
+
+        testFiles = new ArrayList<>(commandLine.argList)
     }
 
-    private CommandLine createCommandLine(String[] args, Options options) {
+    private static CommandLine createCommandLine(String[] args, Options options) {
         DefaultParser parser = new DefaultParser();
         try {
             return parser.parse(options, args);
@@ -53,7 +54,7 @@ class WebUiTestCliConfig {
         }
     }
 
-    private Options createOptions() {
+    private static Options createOptions() {
         Options options = new Options();
         options.addOption(null, "help", false, "print help");
         options.addOption(null, "file", true, "test file");
