@@ -25,6 +25,7 @@
         <module>td-documentation-core</module>
         <module>td-documentation-latex</module>
         <module>td-documentation-java</module>
+        <module>td-documentation-groovy</module>
         <module>td-documentation-cpp</module>
         <module>td-documentation-reactjs</module>
         <module>td-documentation-server</module>

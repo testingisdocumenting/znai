@@ -22,4 +22,11 @@ line #_3\r""")
         def stripped = StringUtils.stripIndentation(code)
         Assert.assertEquals("int a = 2;\nint b = 3;", stripped)
     }
+
+    @Test
+    void "extracts inside curly braces"() {
+        def code = "{\n    statement1;\n    statement2}"
+        def stripped = StringUtils.extractInsideCurlyBraces(code)
+        Assert.assertEquals("\n    statement1;\n    statement2", stripped)
+    }
 }

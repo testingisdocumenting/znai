@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.twosigma.utils.StringUtils.extractInsideCurlyBraces;
+import static com.twosigma.utils.StringUtils.stripIndentation;
+
 /**
  * @author mykola
  */
@@ -29,6 +32,10 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     }
 
     public JavaMethodDetails getDetails(String methodName) {
+        if (! detailsByName.containsKey(methodName)) {
+            throw new RuntimeException("no method found: " + methodName);
+        }
+
         return detailsByName.get(methodName);
     }
 
@@ -62,16 +69,8 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
                 "";
 
         detailsByName.put(name, new JavaMethodDetails(
-                StringUtils.stripIndentation(code),
-                removeSignatureAndReIndent(code),
+                stripIndentation(code),
+                stripIndentation(extractInsideCurlyBraces(code)),
                 methodJavaDoc));
-    }
-
-    private String removeSignatureAndReIndent(String code) {
-        int startIdx = code.indexOf('{');
-        int endIdx = code.lastIndexOf('}');
-
-        String insideBraces = code.substring(startIdx + 1, endIdx - 1);
-        return StringUtils.stripIndentation(insideBraces);
     }
 }

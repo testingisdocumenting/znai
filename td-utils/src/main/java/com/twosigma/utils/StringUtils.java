@@ -27,6 +27,13 @@ public class StringUtils {
         return lines.stream().map(l -> removeIndentation(l, indentation)).collect(Collectors.joining("\n"));
     }
 
+    public static String extractInsideCurlyBraces(String code) {
+        int startIdx = code.indexOf('{');
+        int endIdx = code.lastIndexOf('}');
+
+        return code.substring(startIdx + 1, endIdx);
+    }
+
     public static Integer lineIndentation(String line) {
         int i = 0;
         while (i < line.length() && line.charAt(i) == ' ') {

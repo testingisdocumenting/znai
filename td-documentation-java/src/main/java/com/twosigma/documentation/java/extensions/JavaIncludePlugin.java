@@ -45,7 +45,7 @@ public class JavaIncludePlugin implements IncludePlugin {
         return Stream.of(AuxiliaryFile.builtTime(fullPath));
     }
 
-    private String extractContent(JavaCode javaCode, String methodName, Boolean bodyOnly) {
+    private static String extractContent(JavaCode javaCode, String methodName, Boolean bodyOnly) {
         if (methodName == null) {
             return javaCode.getFileContent();
         }
