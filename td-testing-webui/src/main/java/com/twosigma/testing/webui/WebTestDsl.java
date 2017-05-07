@@ -2,6 +2,8 @@ package com.twosigma.testing.webui;
 
 import com.twosigma.testing.expectation.ValueMatcher;
 import com.twosigma.testing.http.HttpUrl;
+import com.twosigma.testing.reporter.TestStep;
+import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.webui.cfg.Configuration;
 import com.twosigma.testing.webui.documentation.DocumentationDsl;
 import com.twosigma.testing.webui.driver.CurrentWebDriver;
@@ -9,9 +11,12 @@ import com.twosigma.testing.webui.expectation.VisibleValueMatcher;
 import com.twosigma.testing.webui.page.PageElement;
 import com.twosigma.testing.webui.page.path.ElementPath;
 import com.twosigma.testing.webui.page.path.GenericPageElement;
-import com.twosigma.testing.webui.page.path.selector.CssSelector;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import java.util.function.Supplier;
+
+import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
+import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.*;
 
 /**
  * @author mykola
@@ -22,10 +27,19 @@ public class WebTestDsl {
     private static final WebDriver driver = new CurrentWebDriver();
     public static final DocumentationDsl doc = new DocumentationDsl(driver);
 
+    public static <E> void executeStep(E context,
+                                       TokenizedMessage inProgressMessage,
+                                       Supplier<TokenizedMessage> completionMessageSupplier,
+                                       Runnable action) {
+        TestStep<E> step = new TestStep<>(context, inProgressMessage, completionMessageSupplier, action);
+        step.execute();
+    }
+
     public static void open(String url) {
         String fullUrl = createFullUrl(url);
-        System.out.println(fullUrl);
-        driver.get(fullUrl);
+        executeStep(null, tokenizedMessage(action("opening"), urlValue(fullUrl)),
+                () -> tokenizedMessage(action("opened"), urlValue(fullUrl)),
+                () -> driver.get(fullUrl));
     }
 
     public static PageElement $(String css) {

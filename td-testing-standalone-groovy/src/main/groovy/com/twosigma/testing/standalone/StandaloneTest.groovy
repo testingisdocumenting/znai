@@ -41,6 +41,7 @@ class StandaloneTest {
         try {
             code.run()
         } catch (AssertionError e) {
+            exception = e
             assertionMessage = e.message
         } catch (Throwable e) {
             exception = e

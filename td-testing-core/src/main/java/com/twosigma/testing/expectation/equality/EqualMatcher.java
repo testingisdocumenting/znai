@@ -1,5 +1,6 @@
 package com.twosigma.testing.expectation.equality;
 
+import com.twosigma.testing.data.render.DataRenderers;
 import com.twosigma.testing.expectation.ActualPath;
 import com.twosigma.testing.expectation.ValueMatcher;
 
@@ -20,12 +21,12 @@ public class EqualMatcher implements ValueMatcher {
 
     @Override
     public String matchingMessage() {
-        return "to equal";
+        return "to equal " + DataRenderers.render(expected);
     }
 
     @Override
     public String matchedMessage(final ActualPath actualPath, final Object actual) {
-        return "equals";
+        return "equals " + DataRenderers.render(expected);
     }
 
     @Override

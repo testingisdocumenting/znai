@@ -16,9 +16,16 @@ public class TokenizedMessage implements Iterable<MessageToken> {
         tokens = new ArrayList<>();
     }
 
-    public static TokenizedMessage build(MessageToken... tokens) {
+    public static TokenizedMessage tokenizedMessage(MessageToken... tokens) {
         TokenizedMessage message = new TokenizedMessage();
         message.add(tokens);
+
+        return message;
+    }
+
+    public static TokenizedMessage tokenizedMessage(TokenizedMessage tokenizedMessage) {
+        TokenizedMessage message = new TokenizedMessage();
+        message.add(tokenizedMessage);
 
         return message;
     }

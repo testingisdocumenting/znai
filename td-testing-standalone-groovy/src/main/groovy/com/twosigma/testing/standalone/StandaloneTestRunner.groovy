@@ -35,8 +35,6 @@ class StandaloneTestRunner {
 
     void process(Path scriptPath, delegate) {
         currentTestPath = scriptPath.isAbsolute() ? scriptPath : workingDir.resolve(scriptPath)
-        println currentTestPath
-
         def script = groovy.createScript((currentTestPath).toString(), new Binding())
 
         script.setDelegate(delegate)

@@ -3,6 +3,7 @@ package com.twosigma.testing.reporter;
 import com.twosigma.utils.ServiceLoaderUtils;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * @author mykola

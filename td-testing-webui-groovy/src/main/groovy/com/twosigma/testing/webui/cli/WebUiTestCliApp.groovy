@@ -2,6 +2,7 @@ package com.twosigma.testing.webui.cli
 
 import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.AnsiConsoleOutput
+import com.twosigma.console.ansi.Color
 import com.twosigma.testing.expectation.ExpectationHandlers
 import com.twosigma.testing.reporter.ConsoleStepReporter
 import com.twosigma.testing.reporter.StepReporters
@@ -62,6 +63,8 @@ class WebUiTestCliApp implements StandaloneTestListener {
 
     @Override
     void beforeTestRun(StandaloneTest test) {
+        ConsoleOutputs.out(Color.PURPLE, test.filePath)
+        ConsoleOutputs.out(Color.GREEN, test.description)
     }
 
     @Override

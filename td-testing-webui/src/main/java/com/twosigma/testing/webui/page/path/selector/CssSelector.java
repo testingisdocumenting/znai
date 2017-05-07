@@ -2,7 +2,6 @@ package com.twosigma.testing.webui.page.path.selector;
 
 import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.webui.page.path.ElementsSelector;
-import com.twosigma.testing.webui.reporter.WebUiMessageBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +32,6 @@ public class CssSelector implements ElementsSelector {
 
     @Override
     public TokenizedMessage tokenizedDescription() {
-        return TokenizedMessage.build(selectorType("by css"), selectorValue(css));
+        return TokenizedMessage.tokenizedMessage(selectorType("by css"), selectorValue(css));
     }
 }

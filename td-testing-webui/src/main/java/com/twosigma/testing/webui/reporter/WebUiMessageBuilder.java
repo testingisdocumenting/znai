@@ -1,6 +1,7 @@
 package com.twosigma.testing.webui.reporter;
 
 import com.twosigma.console.ansi.Color;
+import com.twosigma.console.ansi.FontStyle;
 import com.twosigma.testing.reporter.MessageToken;
 import com.twosigma.testing.reporter.TokenizedMessageToAnsiConverter;
 
@@ -12,8 +13,10 @@ import java.util.Arrays;
 public class WebUiMessageBuilder {
     private enum TokenTypes {
         ERROR("error", true, Color.RED),
+        NONE("none", true, FontStyle.NORMAL),
         ACTION("action", true, Color.BLUE),
         STRING_VALUE("stringValue", true, Color.GREEN),
+        URL("url", true, Color.PURPLE),
         SELECTOR_TYPE("selectorType", true, Color.YELLOW),
         SELECTOR_VALUE("selectorValue", true, Color.GREEN),
         PREPOSITION("preposition", true, Color.BLACK),
@@ -43,8 +46,16 @@ public class WebUiMessageBuilder {
         return TokenTypes.STRING_VALUE.token(value.toString());
     }
 
+    public static MessageToken urlValue(String url) {
+        return TokenTypes.URL.token(url);
+    }
+
     public static MessageToken action(String action) {
         return TokenTypes.ACTION.token(action);
+    }
+
+    public static MessageToken none(String text) {
+        return TokenTypes.NONE.token(text);
     }
 
     public static MessageToken selectorType(String selector) {

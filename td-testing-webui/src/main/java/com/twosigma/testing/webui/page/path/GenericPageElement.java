@@ -1,6 +1,5 @@
 package com.twosigma.testing.webui.page.path;
 
-import com.twosigma.testing.reporter.StepReporters;
 import com.twosigma.testing.reporter.TestStep;
 import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.webui.page.ElementValue;
@@ -12,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
+import static com.twosigma.testing.webui.WebTestDsl.executeStep;
 import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.TO;
 import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.action;
 import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.stringValue;
@@ -40,9 +41,14 @@ public class GenericPageElement implements PageElement {
         return element;
     }
 
+    @Override
+    public TokenizedMessage describe() {
+        return pathDescription;
+    }
+
     public void click() {
-        execute(TokenizedMessage.build(action("clicking")),
-                () -> TokenizedMessage.build(action("clicked")),
+        execute(tokenizedMessage(action("clicking")),
+                () -> tokenizedMessage(action("clicked")),
                 () -> findElement().click());
     }
 
@@ -53,23 +59,6 @@ public class GenericPageElement implements PageElement {
                 webElements.get(0);
     }
 
-    private void execute(TokenizedMessage inProgressMessage,
-                         Supplier<TokenizedMessage> completionMessageSupplier,
-                         Runnable action) {
-        TestStep<PageElement> step = new TestStep<>(this, inProgressMessage);
-        try {
-            StepReporters.onStart(step);
-            action.run();
-
-            step.complete(completionMessageSupplier.get());
-            StepReporters.onSuccess(step);
-        } catch (Exception e) {
-            step.fail(e);
-            StepReporters.onFailure(step);
-            throw e;
-        }
-    }
-
     @Override
     public ElementValue<?> elementValue() {
         return new ElementValue<>("value", this::getUnderlyingValue);
@@ -77,8 +66,8 @@ public class GenericPageElement implements PageElement {
 
     @Override
     public void setValue(Object value) {
-        execute(TokenizedMessage.build(action("setting value"), stringValue(value), TO).add(pathDescription),
-                () -> TokenizedMessage.build(action("set value"), stringValue(value), TO).add(pathDescription),
+        execute(tokenizedMessage(action("setting value"), stringValue(value), TO).add(pathDescription),
+                () -> tokenizedMessage(action("set value"), stringValue(value), TO).add(pathDescription),
                 () -> findElement().sendKeys(value.toString()));
     }
 
@@ -112,5 +101,11 @@ public class GenericPageElement implements PageElement {
     @Override
     public String toString() {
         return path.toString();
+    }
+
+    private void execute(TokenizedMessage inProgressMessage,
+                         Supplier<TokenizedMessage> completionMessageSupplier,
+                         Runnable action) {
+        executeStep(this, inProgressMessage, completionMessageSupplier, action);
     }
 }

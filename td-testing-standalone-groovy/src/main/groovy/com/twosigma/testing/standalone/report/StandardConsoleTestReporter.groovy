@@ -15,7 +15,7 @@ class StandardConsoleTestReporter extends StandaloneTestListenerAdapter {
     void afterTestRun(StandaloneTest test) {
         if (test.isFailed()) {
             ConsoleOutputs.out(Color.RED, "[x] ", Color.BLUE, "failed")
-            ConsoleOutputs.out(test.assertionMessage)
+            ConsoleOutputs.out(TraceUtils.stackTrace(test.exception))
         } else if (test.hasError()) {
             ConsoleOutputs.out(Color.RED, "[x] ", Color.BLUE, "error")
             ConsoleOutputs.out(TraceUtils.stackTrace(test.exception))
