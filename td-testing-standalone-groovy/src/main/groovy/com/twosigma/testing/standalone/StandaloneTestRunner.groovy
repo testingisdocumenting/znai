@@ -29,15 +29,13 @@ class StandaloneTestRunner {
         testListeners.add(listener)
     }
 
-    GroovyScriptEngine getGroovy() {
-        return groovy
-    }
-
     void process(Path scriptPath, delegate) {
         currentTestPath = scriptPath.isAbsolute() ? scriptPath : workingDir.resolve(scriptPath)
         def script = groovy.createScript((currentTestPath).toString(), new Binding())
 
         script.setDelegate(delegate)
+        script.setProperty("scenario", this.&scenario)
+
         testListeners.each { l -> l.beforeScriptParse(scriptPath) }
         script.run()
     }

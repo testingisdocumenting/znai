@@ -30,7 +30,7 @@ class StandaloneTest {
     }
 
     boolean hasError() {
-        return exception != null
+        return exception != null && assertionMessage == null
     }
 
     boolean isFailed() {
