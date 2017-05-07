@@ -10,6 +10,7 @@ import com.twosigma.testing.standalone.StandaloneTest
 import com.twosigma.testing.standalone.StandaloneTestListener
 import com.twosigma.testing.standalone.StandaloneTestRunner
 import com.twosigma.testing.standalone.report.StandardConsoleTestReporter
+import com.twosigma.testing.webui.WebTestGroovyDsl
 import com.twosigma.testing.webui.reporter.WebUiMessageBuilder
 
 import java.nio.file.Path
@@ -28,6 +29,7 @@ class WebUiTestCliApp implements StandaloneTestListener {
         runner = new StandaloneTestRunner(["com.twosigma.testing.webui.WebTestDsl"], Paths.get(""))
         runner.addListener(this)
         runner.addListener(new StandardConsoleTestReporter())
+        WebTestGroovyDsl.initWithTestRunner(runner)
     }
 
     void start() {

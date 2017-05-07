@@ -38,8 +38,6 @@ class StandaloneTestRunner {
         def script = groovy.createScript((currentTestPath).toString(), new Binding())
 
         script.setDelegate(delegate)
-        script.setProperty("scenario", this.&scenario)
-
         testListeners.each { l -> l.beforeScriptParse(scriptPath) }
         script.run()
     }
@@ -69,7 +67,7 @@ class StandaloneTestRunner {
         }
     }
 
-    private void scenario(String description, Closure code) {
+    void scenario(String description, Closure code) {
         def test = new StandaloneTest(currentTestPath, description, code)
         tests.add(test)
     }

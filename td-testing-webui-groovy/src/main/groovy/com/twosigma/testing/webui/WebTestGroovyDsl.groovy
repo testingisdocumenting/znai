@@ -1,5 +1,6 @@
 package com.twosigma.testing.webui
 
+import com.twosigma.testing.standalone.StandaloneTestRunner
 import com.twosigma.utils.RegexpUtils
 
 import java.util.regex.Pattern
@@ -12,6 +13,16 @@ import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.none
  */
 class WebTestGroovyDsl extends WebTestDsl {
     private static final Pattern PLACEHOLDER_PATTERN = ~/<(\w+)>/
+
+    private static StandaloneTestRunner testRunner
+
+    static void initWithTestRunner(StandaloneTestRunner testRunner) {
+        this.testRunner = testRunner
+    }
+
+    static void scenario(String description, Closure code) {
+        testRunner.scenario(description, code)
+    }
 
     static Closure action(String description, Closure code) {
         return { args ->
