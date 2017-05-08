@@ -1,15 +1,13 @@
-package com.twosigma.testing.http.datanode
-
-import java.nio.file.Path
+package com.twosigma.testing.http.cli
 
 /**
  * @author mykola
  */
-class Configuration {
+class HttpTestConfig {
     private ConfigSlurper configSlurper
     private ConfigObject configObject
 
-    Configuration(String script, String env) {
+    HttpTestConfig(String script, String env) {
         configSlurper = new ConfigSlurper(env)
         configObject = configSlurper.parse(script)
     }

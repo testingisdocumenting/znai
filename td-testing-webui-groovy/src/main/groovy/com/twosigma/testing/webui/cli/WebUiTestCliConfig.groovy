@@ -2,19 +2,28 @@ package com.twosigma.testing.webui.cli
 
 import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.Color
-import com.twosigma.testing.webui.cfg.Configuration
+import com.twosigma.testing.webui.cfg.WebUiTestConfig
+import com.twosigma.utils.FileUtils
 import org.apache.commons.cli.*
+
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
 
 /**
  * @author mykola
  */
 class WebUiTestCliConfig {
-    private Configuration cfg = Configuration.INSTANCE
+    private WebUiTestConfig cfg = WebUiTestConfig.INSTANCE
 
     private List<String> testFiles
+    private String env
+    private Path configFile
+    private CommandLine commandLine
 
     WebUiTestCliConfig(String... args) {
         parseArgs(args)
+        parseConfig()
     }
 
     List<String> getTestFiles() {
@@ -24,17 +33,19 @@ class WebUiTestCliConfig {
     void print() {
         def p = { k, v -> ConsoleOutputs.out(Color.BLUE, k, ": ", Color.YELLOW, v) }
 
-        p(" base url", cfg.baseUrl);
+        p("         env", env)
+        p(" config file", configFile)
+        p("    base url", cfg.baseUrl)
     }
 
     private void parseArgs(String[] args) {
-        Options options = createOptions();
-        CommandLine commandLine = createCommandLine(args, options);
+        Options options = createOptions()
+        commandLine = createCommandLine(args, options)
 
         if (commandLine.hasOption("help") || args.length < 1) {
-            HelpFormatter helpFormatter = new HelpFormatter();
-            helpFormatter.printHelp("webuit", options);
-            System.exit(1);
+            HelpFormatter helpFormatter = new HelpFormatter()
+            helpFormatter.printHelp("webuit", options)
+            System.exit(1)
         }
 
         def url = commandLine.getOptionValue("url")
@@ -43,23 +54,43 @@ class WebUiTestCliConfig {
         }
 
         testFiles = new ArrayList<>(commandLine.argList)
+        configFile = Paths.get(cliValue("config", "test.cfg"))
+        env = Paths.get(cliValue("env", "local"))
     }
 
-    private static CommandLine createCommandLine(String[] args, Options options) {
-        DefaultParser parser = new DefaultParser();
-        try {
-            return parser.parse(options, args);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+    private void parseConfig() {
+        ConfigSlurper configSlurper = new ConfigSlurper(env)
+        if (! Files.exists(configFile)) {
+            ConsoleOutputs.out("skipping config file as it is not found: ", Color.CYAN, configFile)
+            return
+        }
+
+        def configObject = configSlurper.parse(FileUtils.fileTextContent(configFile))
+        if (configObject.get("url")) {
+            cfg.setBaseUrl(configObject.get("url").toString())
         }
     }
 
-    private static Options createOptions() {
-        Options options = new Options();
-        options.addOption(null, "help", false, "print help");
-        options.addOption(null, "file", true, "test file");
-        options.addOption(null, "url", true, "base url");
+    private static CommandLine createCommandLine(String[] args, Options options) {
+        DefaultParser parser = new DefaultParser()
+        try {
+            return parser.parse(options, args)
+        } catch (ParseException e) {
+            throw new RuntimeException(e)
+        }
+    }
 
-        return options;
+    private def cliValue(String name, defaultValue) {
+        return commandLine.hasOption(name) ? commandLine.getOptionValue("config") :
+                defaultValue
+    }
+
+    private static Options createOptions() {
+        def options = new Options()
+        options.addOption(null, "help", false, "print help")
+        options.addOption(null, "file", true, "test file")
+        options.addOption(null, "url", true, "base url")
+
+        return options
     }
 }

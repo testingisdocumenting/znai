@@ -1,13 +1,12 @@
 package com.twosigma.testing.webui.cfg;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * @author mykola
  */
-public class Configuration {
-    public static final Configuration INSTANCE = new Configuration();
+public class WebUiTestConfig {
+    public static final WebUiTestConfig INSTANCE = new WebUiTestConfig();
 
     private String baseUrl;
     private Path docArtifactsPath;

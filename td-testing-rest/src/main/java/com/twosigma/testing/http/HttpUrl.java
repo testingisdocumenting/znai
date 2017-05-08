@@ -17,6 +17,14 @@ public class HttpUrl {
     }
 
     public static String concat(final String left, final String right) {
+        if (left == null) {
+            throw new IllegalArgumentException("passed url on the left is NULL");
+        }
+
+        if (right == null) {
+            throw new IllegalArgumentException("passed url on the right is NULL");
+        }
+
         if (left.endsWith("/") && !right.startsWith("/")) {
             return left + right;
         }

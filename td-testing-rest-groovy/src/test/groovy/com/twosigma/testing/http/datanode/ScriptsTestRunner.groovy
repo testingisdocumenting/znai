@@ -1,5 +1,6 @@
 package com.twosigma.testing.http.datanode
 
+import com.twosigma.testing.http.cli.HttpTestConfig
 import com.twosigma.testing.http.runner.HttpTestRunner
 import com.twosigma.testing.http.testserver.TestServer
 import com.twosigma.testing.http.testserver.TestServerResponseEcho
@@ -20,8 +21,8 @@ class ScriptsTestRunner {
         testServer.stop()
     }
 
-    void run(String script) {
-        def testRunner = new HttpTestRunner(new Configuration(ResourceUtils.textContent("config.groovy"), "dev"))
+    static void run(String script) {
+        def testRunner = new HttpTestRunner(new HttpTestConfig(ResourceUtils.textContent("config.groovy"), "dev"))
         testRunner.register("test-name", script)
 
         testRunner.run()

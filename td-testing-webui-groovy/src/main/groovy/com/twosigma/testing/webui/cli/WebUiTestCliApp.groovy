@@ -2,12 +2,8 @@ package com.twosigma.testing.webui.cli
 
 import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.AnsiConsoleOutput
-import com.twosigma.console.ansi.Color
-import com.twosigma.testing.expectation.ExpectationHandlers
 import com.twosigma.testing.reporter.ConsoleStepReporter
 import com.twosigma.testing.reporter.StepReporters
-import com.twosigma.testing.standalone.StandaloneTest
-import com.twosigma.testing.standalone.StandaloneTestListener
 import com.twosigma.testing.standalone.StandaloneTestRunner
 import com.twosigma.testing.standalone.report.StandardConsoleTestReporter
 import com.twosigma.testing.webui.WebTestGroovyDsl
@@ -24,6 +20,8 @@ class WebUiTestCliApp {
     private StandaloneTestRunner runner
 
     WebUiTestCliApp(String[] args) {
+        ConsoleOutputs.add(new AnsiConsoleOutput())
+
         config = new WebUiTestCliConfig(args)
 
         runner = new StandaloneTestRunner(["com.twosigma.testing.webui.WebTestDsl"], Paths.get(""))
@@ -32,7 +30,6 @@ class WebUiTestCliApp {
     }
 
     void start() {
-        ConsoleOutputs.add(new AnsiConsoleOutput())
         StepReporters.add(new ConsoleStepReporter(WebUiMessageBuilder.converter))
 
         config.print()

@@ -1,13 +1,12 @@
 package com.twosigma.testing.http.runner
 
-import com.twosigma.testing.documentation.DocumentationContext
 import com.twosigma.testing.http.HttpTestListener
 import com.twosigma.testing.http.HttpTestListeners
 import com.twosigma.testing.http.HttpUrl
 import com.twosigma.testing.http.HttpValidationResult
 import com.twosigma.testing.http.config.HttpConfiguration
 import com.twosigma.testing.http.config.HttpConfigurations
-import com.twosigma.testing.http.datanode.Configuration
+import com.twosigma.testing.http.cli.HttpTestConfig
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 
@@ -19,20 +18,20 @@ import java.nio.file.Paths
  */
 class HttpTestRunner implements HttpTestListener, HttpConfiguration {
     private GroovyShell groovy
-    private Configuration configuration
+    private HttpTestConfig configuration
 
     private List<HttpTest> tests = []
     private HttpTest currentTest
 
     HttpTestRunner() {
-        init(new Configuration(Paths.get("config.groovy").text, "dev"))
+        init(new HttpTestConfig(Paths.get("config.groovy").text, "dev"))
     }
 
-    HttpTestRunner(Configuration configuration) {
+    HttpTestRunner(HttpTestConfig configuration) {
         init(configuration)
     }
 
-    private void init(Configuration configuration) {
+    private void init(HttpTestConfig configuration) {
         this.configuration = configuration
         groovy = prepareGroovy()
 

@@ -4,7 +4,7 @@ import com.twosigma.testing.expectation.ValueMatcher;
 import com.twosigma.testing.http.HttpUrl;
 import com.twosigma.testing.reporter.TestStep;
 import com.twosigma.testing.reporter.TokenizedMessage;
-import com.twosigma.testing.webui.cfg.Configuration;
+import com.twosigma.testing.webui.cfg.WebUiTestConfig;
 import com.twosigma.testing.webui.documentation.DocumentationDsl;
 import com.twosigma.testing.webui.driver.CurrentWebDriver;
 import com.twosigma.testing.webui.expectation.VisibleValueMatcher;
@@ -22,7 +22,7 @@ import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.*;
  * @author mykola
  */
 public class WebTestDsl {
-    private static Configuration cfg = Configuration.INSTANCE;
+    private static WebUiTestConfig cfg = WebUiTestConfig.INSTANCE;
 
     private static final WebDriver driver = new CurrentWebDriver();
     public static final DocumentationDsl doc = new DocumentationDsl(driver);
