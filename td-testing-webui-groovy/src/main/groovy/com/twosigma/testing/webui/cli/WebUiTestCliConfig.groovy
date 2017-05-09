@@ -20,10 +20,14 @@ class WebUiTestCliConfig {
     private String env
     private Path configFile
     private CommandLine commandLine
+    private ConfigObject configObject
 
     WebUiTestCliConfig(String... args) {
         parseArgs(args)
         parseConfig()
+
+        cfg.acceptConfigValues("config file", configObject.flatten())
+        cfg.acceptConfigValues("command line argument", commandLineArgsAsMap())
     }
 
     List<String> getTestFiles() {
@@ -31,11 +35,7 @@ class WebUiTestCliConfig {
     }
 
     void print() {
-        def p = { k, v -> ConsoleOutputs.out(Color.BLUE, k, ": ", Color.YELLOW, v) }
-
-        p("         env", env)
-        p(" config file", configFile)
-        p("    base url", cfg.baseUrl)
+        cfg.print()
     }
 
     private void parseArgs(String[] args) {
@@ -46,11 +46,6 @@ class WebUiTestCliConfig {
             HelpFormatter helpFormatter = new HelpFormatter()
             helpFormatter.printHelp("webuit", options)
             System.exit(1)
-        }
-
-        def url = commandLine.getOptionValue("url")
-        if (url != null) {
-            cfg.baseUrl = url
         }
 
         testFiles = new ArrayList<>(commandLine.argList)
@@ -65,10 +60,7 @@ class WebUiTestCliConfig {
             return
         }
 
-        def configObject = configSlurper.parse(FileUtils.fileTextContent(configFile))
-        if (configObject.get("url")) {
-            cfg.setBaseUrl(configObject.get("url").toString())
-        }
+        configObject = configSlurper.parse(FileUtils.fileTextContent(configFile))
     }
 
     private static CommandLine createCommandLine(String[] args, Options options) {
@@ -85,12 +77,15 @@ class WebUiTestCliConfig {
                 defaultValue
     }
 
-    private static Options createOptions() {
+    private Options createOptions() {
         def options = new Options()
         options.addOption(null, "help", false, "print help")
-        options.addOption(null, "file", true, "test file")
-        options.addOption(null, "url", true, "base url")
 
+        cfg.getCfgValuesStream().each {options.addOption(null, it.key, true, it.description)}
         return options
+    }
+
+    private Map commandLineArgsAsMap() {
+        commandLine.options.collectEntries { [it.longOpt, it.value] }
     }
 }

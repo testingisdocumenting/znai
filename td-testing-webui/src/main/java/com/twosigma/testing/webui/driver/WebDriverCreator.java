@@ -1,5 +1,6 @@
 package com.twosigma.testing.webui.driver;
 
+import com.twosigma.testing.webui.cfg.WebUiTestConfig;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,6 +12,8 @@ import java.util.List;
  * @author mykola
  */
 public class WebDriverCreator {
+    private static final WebUiTestConfig cfg = WebUiTestConfig.INSTANCE;
+
     private static List<WebDriver> drivers = new ArrayList<>();
 
     static {
@@ -39,7 +42,7 @@ public class WebDriverCreator {
     }
 
     private static void initState(WebDriver driver) {
-        driver.manage().window().setSize(new Dimension(1000, 800));
+        driver.manage().window().setSize(new Dimension(cfg.getWindowWidth(), cfg.getWindowHeight()));
     }
 
     private static void registerCleanup() {

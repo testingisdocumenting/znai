@@ -10,3 +10,9 @@ Define base URL portion either inside a `test.cfg` file
 :include-file: examples/test.cfg {lang: "groovy"}
 
 or pass as a command line argument `--url=http://...`
+
+# Window Size
+
+Browser window size can be set using `windowWidth` and `windowHeight`
+
+:include-file: examples/window-size.cfg {lang: "groovy"}
