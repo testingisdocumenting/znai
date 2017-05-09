@@ -12,20 +12,26 @@ import java.util.Arrays;
  */
 public class WebUiMessageBuilder {
     private enum TokenTypes {
-        ERROR("error", true, Color.RED),
-        NONE("none", true, FontStyle.NORMAL),
-        ACTION("action", true, Color.BLUE),
-        MATCHER("matcher", true, Color.GREEN),
-        STRING_VALUE("stringValue", true, Color.GREEN),
-        URL("url", true, Color.PURPLE),
-        SELECTOR_TYPE("selectorType", true, Color.PURPLE),
-        SELECTOR_VALUE("selectorValue", true, FontStyle.BOLD, Color.PURPLE),
-        PREPOSITION("preposition", true, Color.BLACK),
-        DELIMITER("delimiter", true, Color.WHITE);
+        ERROR("error", Color.RED),
+        NONE("none", FontStyle.NORMAL),
+        ACTION("action", Color.BLUE),
+        ID("id", FontStyle.BOLD),
+        CLASSIFIER("classifier", Color.CYAN),
+        MATCHER("matcher", Color.GREEN),
+        STRING_VALUE("stringValue", Color.GREEN),
+        URL("url", Color.PURPLE),
+        SELECTOR_TYPE("selectorType", Color.PURPLE),
+        SELECTOR_VALUE("selectorValue", FontStyle.BOLD, Color.PURPLE),
+        PREPOSITION("preposition", Color.BLACK),
+        DELIMITER("delimiter", Color.WHITE);
 
         private final String type;
         private final boolean delimiterAfter;
         private final Object[] styles;
+
+        TokenTypes(String type, Object... styles) {
+            this(type, true, styles);
+        }
 
         TokenTypes(String type, boolean delimiterAfter, Object... styles) {
             this.type = type;
@@ -39,12 +45,21 @@ public class WebUiMessageBuilder {
     }
 
     public static final MessageToken TO = TokenTypes.PREPOSITION.token("to");
+    public static final MessageToken OF = TokenTypes.PREPOSITION.token("of");
     public static final MessageToken COMMA = TokenTypes.DELIMITER.token(",");
 
     private static final TokenizedMessageToAnsiConverter converter = createConverter();
 
+    public static MessageToken id(String value) {
+        return TokenTypes.ID.token(value);
+    }
+
+    public static MessageToken classifier(String value) {
+        return TokenTypes.CLASSIFIER.token(value);
+    }
+
     public static MessageToken stringValue(Object value) {
-        return TokenTypes.STRING_VALUE.token(value.toString());
+        return TokenTypes.STRING_VALUE.token(escapeSpecialChars(value.toString()));
     }
 
     public static MessageToken urlValue(String url) {
@@ -75,12 +90,13 @@ public class WebUiMessageBuilder {
         return converter;
     }
 
+    private static Object escapeSpecialChars(String text) {
+        return text.replace("\n", "\\n");
+    }
+
     private static TokenizedMessageToAnsiConverter createConverter() {
         TokenizedMessageToAnsiConverter c = new TokenizedMessageToAnsiConverter();
-
-        Arrays.stream(TokenTypes.values()).forEach(t -> {
-            c.associate(t.type, t.delimiterAfter, t.styles);
-        });
+        Arrays.stream(TokenTypes.values()).forEach(t -> c.associate(t.type, t.delimiterAfter, t.styles));
 
         return c;
     }

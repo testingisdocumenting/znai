@@ -8,5 +8,5 @@ fact will be displayed in a special box
     search.open()
     search.submit(query: "search this")
 
-    search.numberOfResults.should == 2
+    search.numberOfResults.waitTo == 2
 }

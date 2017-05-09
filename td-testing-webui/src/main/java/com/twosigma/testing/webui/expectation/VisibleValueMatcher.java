@@ -2,6 +2,7 @@ package com.twosigma.testing.webui.expectation;
 
 import com.twosigma.testing.expectation.ActualPath;
 import com.twosigma.testing.expectation.ValueMatcher;
+import com.twosigma.testing.webui.page.ElementValue;
 import com.twosigma.testing.webui.page.PageElement;
 
 /**
@@ -25,8 +26,8 @@ public class VisibleValueMatcher implements ValueMatcher {
 
     @Override
     public boolean matches(ActualPath actualPath, Object actual) {
-        PageElement pageElement = (PageElement) actual;
-        return pageElement.isVisible();
+        ElementValue elementValue = (ElementValue) actual;
+        return elementValue.getParent().isVisible();
     }
 
     @Override

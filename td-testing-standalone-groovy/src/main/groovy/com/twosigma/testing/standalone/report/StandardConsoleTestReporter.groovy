@@ -47,6 +47,10 @@ class StandardConsoleTestReporter extends StandaloneTestListenerAdapter {
     }
 
     private static void renderStackTrace(Throwable t) {
+        if (! (t instanceof AssertionError)) {
+            ConsoleOutputs.out(t.getClass().canonicalName, ': ', t.message)
+        }
+
         ConsoleOutputs.out(removeLibsCalls(TraceUtils.stackTrace(t)), "\n\n")
     }
 

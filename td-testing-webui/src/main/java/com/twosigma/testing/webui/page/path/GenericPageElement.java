@@ -23,12 +23,14 @@ public class GenericPageElement implements PageElement {
     private ElementPath path;
     private final TokenizedMessage pathDescription;
     private ElementValue<String> elementValue;
+    private ElementValue<Integer> countValue;
 
     public GenericPageElement(WebDriver driver, ElementPath path) {
         this.driver = driver;
         this.path = path;
         this.pathDescription = path.toTokenizedMessage();
-        this.elementValue = new ElementValue<>("value", this::fetchValue);
+        this.elementValue = new ElementValue<>(this, "value", this::getUnderlyingValue);
+        this.countValue = new ElementValue<>(this, "count", this::getNumberOfElements);
     }
 
     public PageElement all() {
@@ -36,6 +38,11 @@ public class GenericPageElement implements PageElement {
         element.isMultipleElements = true;
 
         return element;
+    }
+
+    @Override
+    public ElementValue<Integer> getCount() {
+        return countValue;
     }
 
     @Override
@@ -57,8 +64,8 @@ public class GenericPageElement implements PageElement {
     }
 
     @Override
-    public ElementValue<?> elementValue() {
-        return new ElementValue<>("value", this::getUnderlyingValue);
+    public ElementValue<String> elementValue() {
+        return elementValue;
     }
 
     @Override
@@ -90,10 +97,6 @@ public class GenericPageElement implements PageElement {
         return findElement().isDisplayed();
     }
 
-    private String fetchValue() {
-        return findElement().getText();
-    }
-
     private String getText() {
         return findElement().getText();
     }
@@ -106,10 +109,15 @@ public class GenericPageElement implements PageElement {
         return findElement().getAttribute(name);
     }
 
-    private Object getUnderlyingValue() {
+    private String getUnderlyingValue() {
         String tagName = getTagName().toUpperCase();
         return (tagName.equals("INPUT") || tagName.equals("TEXTAREA")) ?
                 getAttribute("value") : getText();
+    }
+
+    private Integer getNumberOfElements() {
+        List<WebElement> webElements = path.find(driver);
+        return webElements.size();
     }
 
     @Override

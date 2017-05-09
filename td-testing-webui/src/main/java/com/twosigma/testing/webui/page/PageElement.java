@@ -5,18 +5,17 @@ import com.twosigma.testing.expectation.ActualValueExpectations;
 import com.twosigma.testing.expectation.ValueMatcher;
 import com.twosigma.testing.expectation.equality.EqualMatcher;
 import com.twosigma.testing.expectation.timer.ExpectationTimer;
-import com.twosigma.testing.reporter.TestStep;
 import com.twosigma.testing.reporter.TokenizedMessage;
 import org.openqa.selenium.WebElement;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
-import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.*;
 
 /**
  * @author mykola
  */
 public interface PageElement extends ActualValueExpectations {
     PageElement all();
+    ElementValue<Integer> getCount();
     WebElement findElement();
     ElementValue elementValue();
     void setValue(Object value);
@@ -27,7 +26,7 @@ public interface PageElement extends ActualValueExpectations {
 
     @Override
     default void should(ValueMatcher valueMatcher) {
-        PageElementExpectationSteps.shouldStep(this, valueMatcher);
+        ElementValueExpectationSteps.shouldStep(this, this.elementValue(), this.describe(), valueMatcher);
     }
 
     default Should getShould() {
@@ -40,23 +39,9 @@ public interface PageElement extends ActualValueExpectations {
     }
 
     @Override
-    default void waitTo(ValueMatcher valueMatcher) {
-        PageElementExpectationSteps.waitStep(this, valueMatcher);
-    }
-
-    @Override
-    default void waitTo(ValueMatcher valueMatcher, long timeOutMillis) {
-        ActualValue.actual(this).waitTo(valueMatcher, timeOutMillis);
-    }
-
-    @Override
-    default void waitTo(ValueMatcher valueMatcher, long tickMillis, long timeOutMillis) {
-        ActualValue.actual(this).waitTo(valueMatcher, tickMillis, timeOutMillis);
-    }
-
-    @Override
     default void waitTo(ValueMatcher valueMatcher, ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
-        ActualValue.actual(this).waitTo(valueMatcher, expectationTimer, tickMillis, timeOutMillis);
+        ElementValueExpectationSteps.waitStep(this, this.elementValue(), this.describe(), valueMatcher,
+                expectationTimer, tickMillis, timeOutMillis);
     }
 
     class Should {
@@ -67,7 +52,7 @@ public interface PageElement extends ActualValueExpectations {
         }
 
         public boolean equals(Object expected) {
-            PageElementExpectationSteps.shouldStep(actual, EqualMatcher.equal(expected));
+            ElementValueExpectationSteps.shouldStep(actual, actual.elementValue(), actual.describe(), EqualMatcher.equal(expected));
             return true;
         }
     }
