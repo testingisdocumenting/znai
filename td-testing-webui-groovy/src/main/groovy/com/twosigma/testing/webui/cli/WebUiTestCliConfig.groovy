@@ -44,7 +44,7 @@ class WebUiTestCliConfig {
 
         if (commandLine.hasOption("help") || args.length < 1) {
             HelpFormatter helpFormatter = new HelpFormatter()
-            helpFormatter.printHelp("webuit", options)
+            helpFormatter.printHelp("webuit [options] [testFile1] [testFile2]", options)
             System.exit(1)
         }
 

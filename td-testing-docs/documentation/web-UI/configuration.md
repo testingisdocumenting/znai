@@ -15,4 +15,11 @@ or pass as a command line argument `--url=http://...`
 
 Browser window size can be set using `windowWidth` and `windowHeight`
 
-:include-file: examples/window-size.cfg {lang: "groovy"}
+:include-file: examples/windowSize.cfg {lang: "groovy"}
+
+# Documentation Artifacts
+
+By default all generated documentation artifacts (e.g. screenshots) are created in the current directory.
+To override
+
+:include-file: examples/docArtifacts.cfg {lang: "groovy"}

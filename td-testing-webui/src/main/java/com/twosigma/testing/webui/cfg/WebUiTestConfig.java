@@ -22,13 +22,12 @@ public class WebUiTestConfig {
 
     private ConfigValue config = declare("config", "config path", "test.cfg");
     private ConfigValue url = declare("url", "base url for application under test", null);
+    private ConfigValue docPath = declare("docPath", "path for screenshots and other generated " +
+            "artifacts for documentation", "");
     private ConfigValue windowWidth = declare("windowWidth", "browser window width", 1000);
     private ConfigValue windowHeight = declare("windowHeight", "browser window height", 800);
 
-    private List<ConfigValue> cfgValues = Arrays.asList(config, url, windowWidth, windowHeight);
-
-    private String baseUrl;
-    private Path docArtifactsPath;
+    private List<ConfigValue> cfgValues = Arrays.asList(config, url, docPath, windowWidth, windowHeight);
 
     public Stream<ConfigValue> getCfgValuesStream() {
         return cfgValues.stream();
@@ -43,7 +42,7 @@ public class WebUiTestConfig {
     }
 
     public Path getDocArtifactsPath() {
-        return docArtifactsPath;
+        return docPath.get();
     }
 
     public int getWindowWidth() {
