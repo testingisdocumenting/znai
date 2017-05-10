@@ -41,7 +41,9 @@ public class ColumnsFencePlugin implements FencePlugin {
         parser = componentsRegistry.parser();
 
         ColonDelimitedKeyValues columnsDefinitions = new ColonDelimitedKeyValues(content);
-        DocElement docElement = new DocElement("Columns", "columns", buildColumns(columnsDefinitions));
+        DocElement docElement = new DocElement("Columns",
+                "columns", buildColumns(columnsDefinitions),
+                "config", pluginParams.getOpts().toMap());
 
         return PluginResult.docElement(docElement);
     }
