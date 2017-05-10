@@ -7,3 +7,4 @@ com.twosigma.documentation.extensions.diagrams.GvDiagramSlidesIncludePlugin
 com.twosigma.documentation.extensions.code.CodeExecutionResultIncludePlugin
 com.twosigma.documentation.extensions.rest.RestTestIncludePlugin
 com.twosigma.documentation.extensions.json.JsonIncludePlugin
+com.twosigma.documentation.extensions.templates.TemplateIncludePlugin

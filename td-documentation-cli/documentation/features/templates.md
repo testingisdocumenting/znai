@@ -11,11 +11,6 @@ For example
 **Current Project**: BBR
  
 **Team**: Team A
- 
-**Code Example**: 
-```java
-class BestClass {}
-```
 \
 \
 Second copy & paste
@@ -29,11 +24,6 @@ Second copy & paste
  
 **Team**: Team A 
 
-**Code Example**: 
-```java
-class AwesomeClass {}
-```
-
 # Definition
 
 Instead define a template in a separate file
@@ -45,12 +35,6 @@ Insert it using fenced block syntax. Content inside of fenced block is treated a
     ```template templates/job.md
     name: Sathish
     title: Software Engineer
-    team: Team A
-    project: BBR
-    code:
-    `````java
-    class AwesomeClass {}
-    `````    
     ```
     
 Result is rendered below
@@ -58,10 +42,21 @@ Result is rendered below
 ```template templates/job.md
 name: Sathish
 title: Software Engineer
-team: Team A
-project: BBR
-code:
-`````java
-class AwesomeClass {}
-`````    
 ```
+
+# Inlined
+
+Consider inlined template if you don't need to pass a lot of text as parameters to the template 
+
+    :include-template: templates/arg-definition.md {name: "Arg Name", description: "Description of the argument"}
+    
+    :include-template: templates/optional-arg-definition.md {name: "Other Name", description: "Yet another description of the argument"}
+    
+*templates/optional-arg-definition.md*
+:include-file: templates/optional-arg-definition.md
+    
+
+:include-template: templates/arg-definition.md {name: "Arg Name", description: "Description of the argument"}
+
+:include-template: templates/optional-arg-definition.md {name: "Other Name", description: "Yet another description of the argument"}
+

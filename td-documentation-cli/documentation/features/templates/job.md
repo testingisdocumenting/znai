@@ -2,9 +2,6 @@
 
 **Title**: $title
 
-**Current Project**: $project
+**Current Project**: BBR
  
-**Team**: $team
-
-**Code Example**: 
-$code
+**Team**: Team A

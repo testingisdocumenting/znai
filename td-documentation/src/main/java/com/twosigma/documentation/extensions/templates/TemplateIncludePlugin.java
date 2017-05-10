@@ -2,17 +2,13 @@ package com.twosigma.documentation.extensions.templates;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.PluginParams;
-import com.twosigma.documentation.extensions.PluginResourcesResolver;
-import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.extensions.ColonDelimitedKeyValues;
-import com.twosigma.documentation.extensions.fence.FencePlugin;
+import com.twosigma.documentation.extensions.*;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.utils.RegexpUtils;
 
 import java.nio.file.Path;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static com.twosigma.documentation.extensions.templates.Template.VARIABLE_PATTERN;
@@ -20,7 +16,7 @@ import static com.twosigma.documentation.extensions.templates.Template.VARIABLE_
 /**
  * @author mykola
  */
-public class TemplateFencePlugin implements FencePlugin {
+public class TemplateIncludePlugin implements IncludePlugin {
     private Path fullPath;
     private MarkupParserResult parserResult;
 
@@ -30,20 +26,20 @@ public class TemplateFencePlugin implements FencePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         PluginResourcesResolver resourcesResolver = componentsRegistry.includeResourceResolver();
         MarkupParser parser = componentsRegistry.parser();
 
         fullPath = resourcesResolver.fullPath(pluginParams.getFreeParam());
         parserResult = parser.parse(markupPath, processTemplate(resourcesResolver.textContent(fullPath),
-                new ColonDelimitedKeyValues(content)));
+                pluginParams.getOpts()));
 
         return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
     }
 
-    private String processTemplate(String template, ColonDelimitedKeyValues keyValues) {
+    private String processTemplate(String template, PluginParamsOpts opts) {
         return RegexpUtils.replaceAll(template, VARIABLE_PATTERN,
-                (matcher) -> keyValues.get(matcher.group(1)));
+                (matcher) -> opts.get(matcher.group(1)));
     }
 
     @Override
