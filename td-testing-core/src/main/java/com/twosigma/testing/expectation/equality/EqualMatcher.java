@@ -42,12 +42,12 @@ public class EqualMatcher implements ValueMatcher {
 
     @Override
     public String negativeMatchingMessage() {
-        return "to not equal";
+        return "to not equal " + DataRenderers.render(expected);
     }
 
     @Override
     public String negativeMatchedMessage(final ActualPath actualPath, final Object actual) {
-        return "doesn't equal";
+        return "doesn't equal " + DataRenderers.render(expected);
     }
 
     @Override

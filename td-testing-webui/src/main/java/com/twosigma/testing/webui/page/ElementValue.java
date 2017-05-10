@@ -2,9 +2,7 @@ package com.twosigma.testing.webui.page;
 
 import com.twosigma.testing.expectation.ActualValueExpectations;
 import com.twosigma.testing.expectation.ValueMatcher;
-import com.twosigma.testing.expectation.equality.EqualMatcher;
 import com.twosigma.testing.expectation.timer.ExpectationTimer;
-import com.twosigma.testing.expectation.timer.ExpectationTimerConfigProvider;
 import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.webui.reporter.WebUiMessageBuilder;
 
@@ -44,14 +42,6 @@ public class ElementValue<E> implements ActualValueExpectations {
         return this.description;
     }
 
-    public Should getShould() {
-        return new Should(this);
-    }
-
-    public Wait getWaitTo() {
-        return new Wait(this);
-    }
-
     @Override
     public void should(ValueMatcher valueMatcher) {
         ElementValueExpectationSteps.shouldStep(this.parent, this, this.describe(), valueMatcher);
@@ -59,9 +49,8 @@ public class ElementValue<E> implements ActualValueExpectations {
 
     @Override
     public void shouldNot(ValueMatcher valueMatcher) {
-        throw new UnsupportedOperationException();
+        ElementValueExpectationSteps.shouldNotStep(this.parent, this, this.describe(), valueMatcher);
     }
-
 
     @Override
     public void waitTo(ValueMatcher valueMatcher, ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
@@ -69,32 +58,25 @@ public class ElementValue<E> implements ActualValueExpectations {
                 expectationTimer, tickMillis, timeOutMillis);
     }
 
-    class Should {
-        private ElementValue actual;
-
-        Should(ElementValue actual) {
-            this.actual = actual;
-        }
-
-        public boolean equals(Object expected) {
-            ElementValueExpectationSteps.shouldStep(actual.parent, actual, actual.describe(), EqualMatcher.equal(expected));
-            return true;
-        }
+    @Override
+    public void waitToNot(ValueMatcher valueMatcher, ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
+        ElementValueExpectationSteps.waitNotStep(this.parent, this, this.describe(), valueMatcher,
+                expectationTimer, tickMillis, timeOutMillis);
     }
 
-    class Wait {
-        private ElementValue actual;
+    public ShouldAndWaitProperty getShould() {
+        return new ShouldAndWaitProperty<>(this, ElementValue::should);
+    }
 
-        Wait(ElementValue actual) {
-            this.actual = actual;
-        }
+    public ShouldAndWaitProperty getShouldNot() {
+        return new ShouldAndWaitProperty<>(this, ElementValue::shouldNot);
+    }
 
-        public boolean equals(Object expected) {
-            ElementValueExpectationSteps.waitStep(actual.parent, actual, actual.describe(), EqualMatcher.equal(expected),
-                    ExpectationTimerConfigProvider.createExpectationTimer(),
-                    ExpectationTimerConfigProvider.defaultTickMillis(),
-                    ExpectationTimerConfigProvider.defaultTimeoutMillis());
-            return true;
-        }
+    public ShouldAndWaitProperty getWaitTo() {
+        return new ShouldAndWaitProperty<>(this, ElementValue::waitTo);
+    }
+
+    public ShouldAndWaitProperty getWaitNotTo() {
+        return new ShouldAndWaitProperty<>(this, ElementValue::waitToNot);
     }
 }

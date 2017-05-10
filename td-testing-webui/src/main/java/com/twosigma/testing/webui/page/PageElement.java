@@ -29,13 +29,9 @@ public interface PageElement extends ActualValueExpectations {
         ElementValueExpectationSteps.shouldStep(this, this.elementValue(), this.describe(), valueMatcher);
     }
 
-    default Should getShould() {
-        return new Should(this);
-    }
-
     @Override
     default void shouldNot(ValueMatcher valueMatcher) {
-        throw new UnsupportedOperationException();
+        ElementValueExpectationSteps.shouldNotStep(this, this.elementValue(), this.describe(), valueMatcher);
     }
 
     @Override
@@ -44,16 +40,25 @@ public interface PageElement extends ActualValueExpectations {
                 expectationTimer, tickMillis, timeOutMillis);
     }
 
-    class Should {
-        private PageElement actual;
+    @Override
+    default void waitToNot(ValueMatcher valueMatcher, ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
+        ElementValueExpectationSteps.waitNotStep(this, this.elementValue(), this.describe(), valueMatcher,
+                expectationTimer, tickMillis, timeOutMillis);
+    }
 
-        Should(PageElement actual) {
-            this.actual = actual;
-        }
+    default ShouldAndWaitProperty getShould() {
+        return new ShouldAndWaitProperty<>(this, PageElement::should);
+    }
 
-        public boolean equals(Object expected) {
-            ElementValueExpectationSteps.shouldStep(actual, actual.elementValue(), actual.describe(), EqualMatcher.equal(expected));
-            return true;
-        }
+    default ShouldAndWaitProperty getShouldNot() {
+        return new ShouldAndWaitProperty<>(this, PageElement::shouldNot);
+    }
+
+    default ShouldAndWaitProperty getWaitTo() {
+        return new ShouldAndWaitProperty<>(this, PageElement::waitTo);
+    }
+
+    default ShouldAndWaitProperty getWaitNotTo() {
+        return new ShouldAndWaitProperty<>(this, PageElement::waitToNot);
     }
 }

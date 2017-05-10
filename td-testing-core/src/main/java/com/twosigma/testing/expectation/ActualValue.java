@@ -3,6 +3,8 @@ package com.twosigma.testing.expectation;
 import com.twosigma.testing.expectation.ExpectationHandler.Flow;
 import com.twosigma.testing.expectation.timer.ExpectationTimer;
 
+import java.util.function.Function;
+
 import static com.twosigma.testing.expectation.ActualPath.createActualPath;
 
 /**
@@ -41,12 +43,22 @@ public class ActualValue implements ActualValueExpectations {
 
     @Override
     public void waitTo(ValueMatcher valueMatcher, ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
+        waitImpl(valueMatcher, expectationTimer, tickMillis, timeOutMillis, (result) -> result);
+    }
+
+    @Override
+    public void waitToNot(ValueMatcher valueMatcher, ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
+        waitImpl(valueMatcher, expectationTimer, tickMillis, timeOutMillis, (result) -> ! result);
+    }
+
+    private void waitImpl(ValueMatcher valueMatcher, ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis,
+                         Function<Boolean, Boolean> terminate) {
         ActualPath actualPath = extractPath(actual);
 
         expectationTimer.start();
         while (! expectationTimer.hasTimedOut(timeOutMillis)) {
             boolean matches = valueMatcher.matches(actualPath, actual);
-            if (matches) {
+            if (terminate.apply(matches)) {
                 return;
             }
 
