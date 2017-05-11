@@ -2,13 +2,13 @@ package com.twosigma.testing.reporter;
 
 import com.twosigma.utils.ServiceLoaderUtils;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author mykola
  */
 public class StepReporters {
-    private static List<StepReporter> reporters = ServiceLoaderUtils.load(StepReporter.class);
+    private static Set<StepReporter> reporters = ServiceLoaderUtils.load(StepReporter.class);
 
     public static void add(StepReporter reporter) {
         reporters.add(reporter);

@@ -8,7 +8,7 @@ import java.nio.file.Path
  * @author mykola
  */
 class StandaloneTestListeners {
-    private static List<StandaloneTestListener> listeners = ServiceLoaderUtils.load(StandaloneTestListener)
+    private static Set<StandaloneTestListener> listeners = ServiceLoaderUtils.load(StandaloneTestListener)
 
     static void add(StandaloneTestListener listener) {
         listeners.add(listener)

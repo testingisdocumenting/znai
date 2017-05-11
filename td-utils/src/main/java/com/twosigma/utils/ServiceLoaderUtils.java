@@ -1,8 +1,6 @@
 package com.twosigma.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ServiceLoader;
+import java.util.*;
 
 /**
  * @author mykola
@@ -11,9 +9,9 @@ public class ServiceLoaderUtils {
     private ServiceLoaderUtils() {
     }
 
-    public static <E> List<E> load(Class<E> serviceClass) {
+    public static <E> Set<E> load(Class<E> serviceClass) {
         ServiceLoader<E> loader = ServiceLoader.load(serviceClass);
-        List<E> result = new ArrayList<>();
+        Set<E> result = new LinkedHashSet<>();
         loader.forEach(result::add);
 
         return result;

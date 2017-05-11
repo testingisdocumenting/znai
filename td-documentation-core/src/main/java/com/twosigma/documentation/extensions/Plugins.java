@@ -6,8 +6,8 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.utils.ServiceLoaderUtils;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
@@ -54,7 +54,7 @@ public class Plugins {
     }
 
     private static <E extends Plugin> Map<String, E> discoverPlugins(Class<E> pluginType) {
-        final List<E> list = ServiceLoaderUtils.load(pluginType);
+        final Set<E> list = ServiceLoaderUtils.load(pluginType);
 
         final Map<String, E> byId = list.stream().collect(toMap(Plugin::id, p -> p));
         if (byId.size() < list.size()) {
