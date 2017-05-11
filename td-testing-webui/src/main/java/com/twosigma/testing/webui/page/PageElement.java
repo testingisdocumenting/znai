@@ -58,7 +58,7 @@ public interface PageElement extends ActualValueExpectations {
         return new ShouldAndWaitProperty<>(this, PageElement::waitTo);
     }
 
-    default ShouldAndWaitProperty getWaitNotTo() {
+    default ShouldAndWaitProperty getWaitToNot() {
         return new ShouldAndWaitProperty<>(this, PageElement::waitToNot);
     }
 }

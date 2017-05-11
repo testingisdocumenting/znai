@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -55,5 +56,10 @@ public class TokenizedMessage implements Iterable<MessageToken> {
     @Override
     public Iterator<MessageToken> iterator() {
         return tokens.iterator();
+    }
+
+    @Override
+    public String toString() {
+        return tokens.stream().map(t -> t.getValue().toString()).collect(Collectors.joining(" "));
     }
 }

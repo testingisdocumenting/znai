@@ -76,7 +76,7 @@ public class ElementValue<E> implements ActualValueExpectations {
         return new ShouldAndWaitProperty<>(this, ElementValue::waitTo);
     }
 
-    public ShouldAndWaitProperty getWaitNotTo() {
+    public ShouldAndWaitProperty getWaitToNot() {
         return new ShouldAndWaitProperty<>(this, ElementValue::waitToNot);
     }
 }

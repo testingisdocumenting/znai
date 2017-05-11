@@ -65,6 +65,10 @@ public class TestStep<E> {
         return result;
     }
 
+    public boolean isSuccessful() {
+        return isSuccessful;
+    }
+
     public void execute() {
         try {
             StepReporters.onStart(this);

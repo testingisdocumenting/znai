@@ -1,3 +1,5 @@
+package pages
+
 import static com.twosigma.testing.webui.WebTestGroovyDsl.*
 
 class SearchPage {
@@ -10,6 +12,7 @@ class SearchPage {
     }
 
     def submit = action("submitting search value '<query>'") {
+        open()
         box.setValue(it.query)
         box.sendKeys("\n")
     }

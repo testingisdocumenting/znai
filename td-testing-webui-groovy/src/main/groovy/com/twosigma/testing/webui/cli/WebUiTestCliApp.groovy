@@ -4,6 +4,7 @@ import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.AnsiConsoleOutput
 import com.twosigma.testing.reporter.ConsoleStepReporter
 import com.twosigma.testing.reporter.StepReporters
+import com.twosigma.testing.standalone.StandaloneTestListeners
 import com.twosigma.testing.standalone.StandaloneTestRunner
 import com.twosigma.testing.standalone.report.StandardConsoleTestReporter
 import com.twosigma.testing.webui.WebTestGroovyDsl
@@ -25,7 +26,7 @@ class WebUiTestCliApp {
         config = new WebUiTestCliConfig(args)
 
         runner = new StandaloneTestRunner(["com.twosigma.testing.webui.WebTestDsl"], Paths.get(""))
-        runner.addListener(new StandardConsoleTestReporter())
+        StandaloneTestListeners.add(new StandardConsoleTestReporter())
         WebTestGroovyDsl.initWithTestRunner(runner)
     }
 

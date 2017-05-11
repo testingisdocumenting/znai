@@ -15,17 +15,17 @@ public class ConsoleStepReporter implements StepReporter {
     }
 
     @Override
-    public void onStart(TestStep step) {
+    public void onStepStart(TestStep step) {
         ConsoleOutputs.out(indentationStep(step), Color.YELLOW, "> ", toAnsiConverter.convert(step.getInProgressMessage()));
     }
 
     @Override
-    public void onSuccess(TestStep step) {
+    public void onStepSuccess(TestStep step) {
         ConsoleOutputs.out(indentationStep(step), Color.GREEN, ". ", toAnsiConverter.convert(step.getCompletionMessage()));
     }
 
     @Override
-    public void onFailure(TestStep step) {
+    public void onStepFailure(TestStep step) {
         ConsoleOutputs.out(indentationStep(step),Color.RED, "X ", toAnsiConverter.convert(step.getCompletionMessage()));
     }
 

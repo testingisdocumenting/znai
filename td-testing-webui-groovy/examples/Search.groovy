@@ -1,5 +1,5 @@
 import static com.twosigma.testing.webui.WebTestGroovyDsl.*
-import static Pages.*
+import static pages.Pages.*
 
 scenario("""# Search facts
 You can enter a fact in a search box and 

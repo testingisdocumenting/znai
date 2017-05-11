@@ -3,7 +3,6 @@ package com.twosigma.testing.reporter;
 import com.twosigma.utils.ServiceLoaderUtils;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * @author mykola
@@ -20,14 +19,14 @@ public class StepReporters {
     }
 
     public static void onStart(TestStep step) {
-        reporters.forEach(r -> r.onStart(step));
+        reporters.forEach(r -> r.onStepStart(step));
     }
 
     public static void onSuccess(TestStep step) {
-        reporters.forEach(r -> r.onSuccess(step));
+        reporters.forEach(r -> r.onStepSuccess(step));
     }
 
     public static void onFailure(TestStep step) {
-        reporters.forEach(r -> r.onFailure(step));
+        reporters.forEach(r -> r.onStepFailure(step));
     }
 }

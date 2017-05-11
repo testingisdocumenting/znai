@@ -15,18 +15,12 @@ class StandaloneTestRunner {
     private Path workingDir
     private Path currentTestPath
     private GroovyScriptEngine groovy
-    private List<StandaloneTestListener> testListeners
 
     StandaloneTestRunner(List<String> staticImports, Path workingDir) {
         this.staticImports = staticImports
         this.workingDir = workingDir.toAbsolutePath()
-        this.testListeners = []
         this.tests = []
         this.groovy = prepareGroovyEngine()
-    }
-
-    void addListener(StandaloneTestListener listener) {
-        testListeners.add(listener)
     }
 
     void process(Path scriptPath, delegate) {
@@ -36,7 +30,7 @@ class StandaloneTestRunner {
         script.setDelegate(delegate)
         script.setProperty("scenario", this.&scenario)
 
-        testListeners.each { l -> l.beforeScriptParse(scriptPath) }
+        StandaloneTestListeners.beforeScriptParse(scriptPath)
         script.run()
     }
 
@@ -57,13 +51,13 @@ class StandaloneTestRunner {
     }
 
     void runTests() {
-        testListeners.each { l -> l.beforeFirstTest() }
+        StandaloneTestListeners.beforeFirstTest()
         tests.each { test ->
-            testListeners.each { l -> l.beforeTestRun(test) }
+            StandaloneTestListeners.beforeTestRun(test)
             test.run()
-            testListeners.each { l -> l.afterTestRun(test) }
+            StandaloneTestListeners.afterTestRun(test)
         }
-        testListeners.each { l -> l.afterAllTests() }
+        StandaloneTestListeners.afterAllTests()
     }
 
     void scenario(String description, Closure code) {

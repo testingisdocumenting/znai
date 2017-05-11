@@ -26,7 +26,10 @@ class WebUiTestCliConfig {
         parseArgs(args)
         parseConfig()
 
-        cfg.acceptConfigValues("config file", configObject.flatten())
+        if (configObject) {
+            cfg.acceptConfigValues("config file", configObject.flatten())
+        }
+
         cfg.acceptConfigValues("command line argument", commandLineArgsAsMap())
     }
 

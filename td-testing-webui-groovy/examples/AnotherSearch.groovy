@@ -1,5 +1,5 @@
 import static com.twosigma.testing.webui.WebTestGroovyDsl.*
-import static Pages.*
+import static pages.Pages.*
 
 scenario("""# Alternative Search
 to do different description
