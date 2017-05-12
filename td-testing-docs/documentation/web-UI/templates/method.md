@@ -1,0 +1,1 @@
+:include-template: templates/method-layout.md {name: "$name", paramsPath: "test-artifacts/api/$name.groovy.result"}

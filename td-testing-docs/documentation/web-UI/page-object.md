@@ -14,7 +14,7 @@ And more importantly you will have only one place to change if UI changes.
 
 `PageObject` is just a simple class.
 
-:include-groovy: examples/SearchPage.groovy
+:include-groovy: examples/pages/SearchPage.groovy
 
 Usage of a special `action` method is optional. Used to add additional reporting information.
  
@@ -22,7 +22,7 @@ Usage of a special `action` method is optional. Used to add additional reporting
  
 To make it easier to refer `PageObjects` from different tests combine them in one file
 
-:include-groovy: examples/Pages.groovy
+:include-groovy: examples/pages/Pages.groovy
 
 later just static import all of them
 
