@@ -12,3 +12,7 @@ Examples below refer following page object
 :include-template: templates/method.md {name: "waitTo"}
 
 :include-template: templates/method.md {name: "waitToNot"}
+
+:include-template: templates/method.md {name: "should"}
+
+:include-template: templates/method.md {name: "shouldNot"}

@@ -18,12 +18,12 @@ public class CurrentWebDriver implements WebDriver, TakesScreenshot, JavascriptE
 
     @Override
     public String getCurrentUrl() {
-        return null;
+        return getDriver().getCurrentUrl();
     }
 
     @Override
     public String getTitle() {
-        return null;
+        return getDriver().getTitle();
     }
 
     @Override
@@ -38,37 +38,37 @@ public class CurrentWebDriver implements WebDriver, TakesScreenshot, JavascriptE
 
     @Override
     public String getPageSource() {
-        return null;
+        return getDriver().getPageSource();
     }
 
     @Override
     public void close() {
-
+        getDriver().close();
     }
 
     @Override
     public void quit() {
-
+        getDriver().quit();
     }
 
     @Override
     public Set<String> getWindowHandles() {
-        return null;
+        return getDriver().getWindowHandles();
     }
 
     @Override
     public String getWindowHandle() {
-        return null;
+        return getDriver().getWindowHandle();
     }
 
     @Override
     public TargetLocator switchTo() {
-        return null;
+        return getDriver().switchTo();
     }
 
     @Override
     public Navigation navigate() {
-        return null;
+        return getDriver().navigate();
     }
 
     @Override

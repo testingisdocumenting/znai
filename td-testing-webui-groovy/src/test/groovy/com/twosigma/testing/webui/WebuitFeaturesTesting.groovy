@@ -58,12 +58,23 @@ class WebuitFeaturesTesting implements StepReporter, StandaloneTestListener {
     }
 
     @Test
+    void "should"() {
+        runCli("api/should.groovy")
+    }
+
+    @Test
+    void "shouldNot"() {
+        runCli("api/shouldNot.groovy")
+    }
+
+    @Test
     void "extract script for documentation"() {
         def testPath = Paths.get("examples/api/waitTo.groovy")
         def script = FileUtils.fileTextContent(testPath)
 
         String scope = extractScenarioBody(script)
-        Assert.assertEquals("search.submit(query: \"search this\")\n" +
+        Assert.assertEquals("search.open()\n" +
+                "search.submit(query: \"search this\")\n" +
                 "search.numberOfResults.waitTo == 2", scope)
     }
 

@@ -3,16 +3,15 @@ package pages
 import static com.twosigma.testing.webui.WebTestGroovyDsl.*
 
 class SearchPage {
+    def welcomeMessage = $('#welcome')
     def box = $('#search-box')
     def numberOfResults = $('#results .result').count
 
     void open() {
-        open("/search")
-        box.waitTo beVisible
+        reopen("/search")
     }
 
     def submit = action("submitting search value '<query>'") {
-        open()
         box.setValue(it.query)
         box.sendKeys("\n")
     }

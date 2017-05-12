@@ -1,12 +1,10 @@
 {
-  "description": "Synchronization point with dynamic UI.\nIt executes your matcher multiple time until it matches or time runs out.",
-  "example": "search.submit(query: \"search this\")\nsearch.numberOfResults.waitTo \u003d\u003d 2",
+  "description": "Synchronization point with dynamic UI.\nExecutes matcher multiple time until it matches or time runs out.",
+  "example": "search.open()\nsearch.submit(query: \"search this\")\nsearch.numberOfResults.waitTo \u003d\u003d 2",
   "report": [
+    "\u003e re-opening http://localhost:8180/search",
+    ". opened http://localhost:8180/search",
     "\u003e submitting search value \u0027search this\u0027",
-    "\u003e   opening http://localhost:8180/search",
-    ".   opened http://localhost:8180/search",
-    "\u003e   waiting to by css #search-box to be visible",
-    ".   by css #search-box is visible",
     "\u003e   setting value search this to by css #search-box",
     "\u003e     clearing by css #search-box",
     ".     cleared by css #search-box",

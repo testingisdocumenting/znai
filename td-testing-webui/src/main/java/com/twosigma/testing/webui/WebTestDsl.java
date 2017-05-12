@@ -37,7 +37,19 @@ public class WebTestDsl {
 
     public static void open(String url) {
         String fullUrl = createFullUrl(url);
+
+        String currentUrl = driver.getCurrentUrl();
+        boolean sameUrl = fullUrl.equals(currentUrl);
+
         executeStep(null, tokenizedMessage(action("opening"), urlValue(fullUrl)),
+                () -> tokenizedMessage(action(sameUrl ? "staying at" : "opened"), urlValue(fullUrl)),
+                () -> { if (! sameUrl) driver.get(fullUrl); });
+    }
+
+    public static void reopen(String url) {
+        String fullUrl = createFullUrl(url);
+
+        executeStep(null, tokenizedMessage(action("re-opening"), urlValue(fullUrl)),
                 () -> tokenizedMessage(action("opened"), urlValue(fullUrl)),
                 () -> driver.get(fullUrl));
     }

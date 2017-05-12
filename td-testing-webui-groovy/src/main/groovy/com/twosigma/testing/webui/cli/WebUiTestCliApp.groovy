@@ -1,9 +1,12 @@
 package com.twosigma.testing.webui.cli
 
+import com.twosigma.console.ConsoleOutput
 import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.AnsiConsoleOutput
 import com.twosigma.testing.reporter.ConsoleStepReporter
+import com.twosigma.testing.reporter.StepReporter
 import com.twosigma.testing.reporter.StepReporters
+import com.twosigma.testing.standalone.StandaloneTestListener
 import com.twosigma.testing.standalone.StandaloneTestListeners
 import com.twosigma.testing.standalone.StandaloneTestRunner
 import com.twosigma.testing.standalone.report.StandardConsoleTestReporter
@@ -17,21 +20,25 @@ import java.nio.file.Paths
  * @author mykola
  */
 class WebUiTestCliApp {
+    private static StandaloneTestListener consoleTestReporter = new StandardConsoleTestReporter()
+    private static StepReporter stepReporter = new ConsoleStepReporter(WebUiMessageBuilder.converter)
+    private static ConsoleOutput consoleOutput = new AnsiConsoleOutput()
+
     private WebUiTestCliConfig config
     private StandaloneTestRunner runner
 
     WebUiTestCliApp(String[] args) {
-        ConsoleOutputs.add(new AnsiConsoleOutput())
+        ConsoleOutputs.add(consoleOutput)
 
         config = new WebUiTestCliConfig(args)
 
         runner = new StandaloneTestRunner(["com.twosigma.testing.webui.WebTestDsl"], Paths.get(""))
-        StandaloneTestListeners.add(new StandardConsoleTestReporter())
+        StandaloneTestListeners.add(consoleTestReporter)
         WebTestGroovyDsl.initWithTestRunner(runner)
     }
 
     void start() {
-        StepReporters.add(new ConsoleStepReporter(WebUiMessageBuilder.converter))
+        StepReporters.add(stepReporter)
 
         config.print()
 
