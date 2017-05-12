@@ -39,9 +39,19 @@ public class ConfigValue {
         return (isDefault() ? "default" : values.getFirst().sourceId);
     }
 
-    @SuppressWarnings("unchecked")
-    public <E> E get() {
-        return (E) (isDefault() ? defaultValue : values.getFirst().value);
+    public String getAsString() {
+        return isDefault() ? defaultValue.toString() : values.getFirst().value.toString();
+    }
+
+    public int getAsInt() {
+        if (isDefault()) {
+           return (int) defaultValue;
+        }
+
+        Object first = values.getFirst().value;
+        return first instanceof Integer ?
+                (int) first :
+                Integer.valueOf(first.toString());
     }
 
     @Override

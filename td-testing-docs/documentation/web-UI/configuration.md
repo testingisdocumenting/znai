@@ -11,6 +11,21 @@ Define base URL portion either inside a `test.cfg` file
 
 or pass as a command line argument `--url=http://...`
 
+# Timeouts
+
+Default timeout in milliseconds for `waitTo` and `waitToNot`
+
+`````columns
+left:
+```
+waitTimeout = 25000
+```
+right:
+```
+--waitTimeout=25000
+```
+`````
+
 # Window Size
 
 Browser window size can be set using `windowWidth` and `windowHeight`

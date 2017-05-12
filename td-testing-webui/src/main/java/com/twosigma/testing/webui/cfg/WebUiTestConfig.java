@@ -6,6 +6,7 @@ import com.twosigma.console.ansi.FontStyle;
 import com.twosigma.utils.StringUtils;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -22,12 +23,19 @@ public class WebUiTestConfig {
 
     private ConfigValue config = declare("config", "config path", "test.cfg");
     private ConfigValue url = declare("url", "base url for application under test", null);
+    private ConfigValue waitTimeout = declare("waitTimeout", "wait timeout in milliseconds", 5000);
     private ConfigValue docPath = declare("docPath", "path for screenshots and other generated " +
             "artifacts for documentation", "");
     private ConfigValue windowWidth = declare("windowWidth", "browser window width", 1000);
     private ConfigValue windowHeight = declare("windowHeight", "browser window height", 800);
 
-    private List<ConfigValue> cfgValues = Arrays.asList(config, url, docPath, windowWidth, windowHeight);
+    private List<ConfigValue> cfgValues = Arrays.asList(
+            config,
+            url,
+            waitTimeout,
+            docPath,
+            windowWidth,
+            windowHeight);
 
     public Stream<ConfigValue> getCfgValuesStream() {
         return cfgValues.stream();
@@ -38,19 +46,23 @@ public class WebUiTestConfig {
     }
 
     public String getBaseUrl() {
-        return url.get();
+        return url.getAsString();
+    }
+
+    public int waitTimeout() {
+        return waitTimeout.getAsInt();
     }
 
     public Path getDocArtifactsPath() {
-        return docPath.get();
+        return Paths.get(docPath.getAsString());
     }
 
     public int getWindowWidth() {
-        return windowWidth.get();
+        return windowWidth.getAsInt();
     }
 
     public int getWindowHeight() {
-        return windowHeight.get();
+        return windowHeight.getAsInt();
     }
 
     @Override
@@ -65,10 +77,10 @@ public class WebUiTestConfig {
 
         int maxValueLength = cfgValues.stream()
                 .filter(ConfigValue::nonDefault)
-                .map(v -> v.get().toString().length()).max(Integer::compareTo).orElse(0);
+                .map(v -> v.getAsString().toString().length()).max(Integer::compareTo).orElse(0);
 
         cfgValues.stream().filter(ConfigValue::nonDefault).forEach(v -> {
-            String valueAsText = v.get().toString();
+            String valueAsText = v.getAsString().toString();
             int valuePadding = maxValueLength - valueAsText.length();
 
             ConsoleOutputs.out(Color.BLUE, String.format("%" + maxKeyLength + "s", v.getKey()), ": ",
