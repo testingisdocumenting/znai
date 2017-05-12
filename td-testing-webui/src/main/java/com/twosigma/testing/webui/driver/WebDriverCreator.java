@@ -21,6 +21,8 @@ public class WebDriverCreator {
     }
 
     public static WebDriver create() {
+        WebDriverCreatorListeners.beforeDriverCreation();
+
         ChromeDriver driver = createChromeDriver();
         initState(driver);
 
@@ -38,6 +40,8 @@ public class WebDriverCreator {
 
     private static WebDriver register(WebDriver driver) {
         drivers.add(driver);
+        WebDriverCreatorListeners.afterDriverCreation(driver);
+
         return driver;
     }
 
