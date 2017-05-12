@@ -68,6 +68,11 @@ class WebuitFeaturesTesting implements StepReporter, StandaloneTestListener {
     }
 
     @Test
+    void "regexp"() {
+        runCli("api/regexp.groovy")
+    }
+
+    @Test
     void "extract script for documentation"() {
         def testPath = Paths.get("examples/api/waitTo.groovy")
         def script = FileUtils.fileTextContent(testPath)

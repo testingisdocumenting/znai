@@ -4,28 +4,31 @@ import com.twosigma.testing.expectation.ActualPath;
 import com.twosigma.testing.expectation.equality.EqualComparator;
 import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
 
-import static com.twosigma.utils.TraceUtils.renderValueAndType;
+import java.util.regex.Pattern;
 
 /**
  * @author mykola
  */
-public class AnyEqualHandler implements EqualComparatorHandler {
+public class RegexpEqualHandler implements EqualComparatorHandler {
     @Override
     public boolean handle(Object actual, Object expected) {
-        return true;
+        return actual instanceof String && expected instanceof Pattern;
     }
 
     @Override
     public void compare(EqualComparator equalComparator, ActualPath actualPath, Object actual, Object expected) {
-        boolean areEqual = actual.equals(expected);
-        if (areEqual)
+        Pattern expectedPattern = (Pattern) expected;
+
+        boolean areEqual = expectedPattern.matcher(actual.toString()).find();
+        if (areEqual) {
             return;
+        }
 
         equalComparator.reportMismatch(this, mismatchMessage(actualPath, actual, expected));
     }
 
     private String mismatchMessage(ActualPath actualPath, Object actual, Object expected) {
-        return actualPath + "   actual: " + renderValueAndType(actual) + "\n" +
-               actualPath + " expected: " + renderValueAndType(expected);
+        return actualPath + "    actual string: " + actual.toString() + "\n" +
+               actualPath + " expected pattern: " + expected.toString();
     }
 }
