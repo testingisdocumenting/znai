@@ -7,20 +7,33 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.COMMA;
+
 /**
  * @author mykola
  */
-public class ElementPathEntry {
-    private ElementsSelector selector;
+class ElementPathEntry {
+    private ElementsFinder finder;
     private List<ElementsFilter> filters;
 
-    public ElementPathEntry(ElementsSelector selector) {
-        this.selector = selector;
+    ElementPathEntry(ElementsFinder finder) {
+        this.finder = finder;
         this.filters = new ArrayList<>();
     }
 
-    public List<WebElement> find(WebDriver driver, WebElement parent) {
-        List<WebElement> elements = selector.select(driver);
+    void addFilter(ElementsFilter filter) {
+        filters.add(filter);
+    }
+
+    ElementPathEntry copy() {
+        ElementPathEntry copy = new ElementPathEntry(finder);
+        copy.filters = filters;
+
+        return copy;
+    }
+
+    List<WebElement> find(WebDriver driver, WebElement parent) {
+        List<WebElement> elements = finder.find(driver);
         if (elements.isEmpty()) {
             return elements;
         }
@@ -36,12 +49,22 @@ public class ElementPathEntry {
         return filtered;
     }
 
-    public TokenizedMessage toTokenizedMessage() {
-        return selector.tokenizedDescription();
+    /**
+     * @param isFirst is this the first entry in the path
+     * @return tokenized message
+     */
+    public TokenizedMessage description(boolean isFirst) {
+        TokenizedMessage description = finder.description(isFirst);
+        filters.forEach((f) -> {
+            description.add(COMMA);
+            description.add(f.description());
+        });
+
+        return description;
     }
 
     @Override
     public String toString() {
-        return selector.description();
+        return finder.description(false).toString();
     }
 }

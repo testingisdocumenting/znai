@@ -73,6 +73,11 @@ class WebuitFeaturesTesting implements StepReporter, StandaloneTestListener {
     }
 
     @Test
+    void "filter by text"() {
+        runCli("api/byText.groovy")
+    }
+
+    @Test
     void "extract script for documentation"() {
         def testPath = Paths.get("examples/api/waitTo.groovy")
         def script = FileUtils.fileTextContent(testPath)

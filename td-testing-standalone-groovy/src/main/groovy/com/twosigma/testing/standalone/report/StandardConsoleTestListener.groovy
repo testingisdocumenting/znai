@@ -10,7 +10,7 @@ import com.twosigma.utils.TraceUtils
 /**
  * @author mykola
  */
-class StandardConsoleTestReporter extends StandaloneTestListenerAdapter {
+class StandardConsoleTestListener extends StandaloneTestListenerAdapter {
     private int passed
     private int failed
     private int errored
@@ -47,10 +47,6 @@ class StandardConsoleTestReporter extends StandaloneTestListenerAdapter {
     }
 
     private static void renderStackTrace(Throwable t) {
-        if (! (t instanceof AssertionError)) {
-            ConsoleOutputs.out(t.getClass().canonicalName, ': ', t.message)
-        }
-
         ConsoleOutputs.out(removeLibsCalls(TraceUtils.stackTrace(t)), "\n\n")
     }
 

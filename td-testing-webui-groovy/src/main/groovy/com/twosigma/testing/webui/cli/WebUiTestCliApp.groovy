@@ -9,7 +9,7 @@ import com.twosigma.testing.reporter.StepReporters
 import com.twosigma.testing.standalone.StandaloneTestListener
 import com.twosigma.testing.standalone.StandaloneTestListeners
 import com.twosigma.testing.standalone.StandaloneTestRunner
-import com.twosigma.testing.standalone.report.StandardConsoleTestReporter
+import com.twosigma.testing.standalone.report.StandardConsoleTestListener
 import com.twosigma.testing.webui.WebTestGroovyDsl
 import com.twosigma.testing.webui.reporter.WebUiMessageBuilder
 
@@ -20,7 +20,7 @@ import java.nio.file.Paths
  * @author mykola
  */
 class WebUiTestCliApp {
-    private static StandaloneTestListener consoleTestReporter = new StandardConsoleTestReporter()
+    private static StandaloneTestListener consoleTestReporter = new StandardConsoleTestListener()
     private static StepReporter stepReporter = new ConsoleStepReporter(WebUiMessageBuilder.converter)
     private static ConsoleOutput consoleOutput = new AnsiConsoleOutput()
 

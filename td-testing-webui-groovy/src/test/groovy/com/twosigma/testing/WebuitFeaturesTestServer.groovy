@@ -13,6 +13,7 @@ class WebuitFeaturesTestServer {
     WebuitFeaturesTestServer() {
         testServer = new TestServer()
         testServer.registerGet("/search", new TestServerHtmlResponse(ResourceUtils.textContent("search.html")))
+        testServer.registerGet("/finders-and-filters", new TestServerHtmlResponse(ResourceUtils.textContent("finders-and-filters.html")))
     }
 
     void start(int port) {

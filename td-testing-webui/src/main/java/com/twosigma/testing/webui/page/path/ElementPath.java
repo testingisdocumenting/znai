@@ -1,16 +1,16 @@
 package com.twosigma.testing.webui.page.path;
 
 import com.twosigma.testing.reporter.TokenizedMessage;
-import com.twosigma.testing.webui.page.path.selector.CssSelector;
+import com.twosigma.testing.webui.page.path.finder.ByCssFinder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.COMMA;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
@@ -22,14 +22,29 @@ public class ElementPath {
         entries = new ArrayList<>();
     }
 
-    public void addSelector(ElementsSelector selector) {
-        ElementPathEntry entry = new ElementPathEntry(selector);
+    public void addFinder(ElementsFinder finder) {
+        ElementPathEntry entry = new ElementPathEntry(finder);
         entries.add(entry);
     }
 
-    public static ElementPath css(String selector) {
+    public void addFilter(ElementsFilter filter) {
+        if (entries.isEmpty()) {
+            throw new RuntimeException("add a finder first");
+        }
+
+        entries.get(entries.size() - 1).addFilter(filter);
+    }
+
+    public ElementPath copy() {
+        ElementPath copy = new ElementPath();
+        copy.entries = entries.stream().map(ElementPathEntry::copy).collect(toList());
+
+        return copy;
+    }
+
+    public static ElementPath css(String cssSelector) {
         ElementPath path = new ElementPath();
-        path.addSelector(new CssSelector(selector));
+        path.addFinder(new ByCssFinder(cssSelector));
 
         return path;
     }
@@ -50,16 +65,18 @@ public class ElementPath {
         return webElements;
     }
 
-    public TokenizedMessage toTokenizedMessage() {
+    public TokenizedMessage describe() {
         TokenizedMessage message = new TokenizedMessage();
 
         int i = 0;
         int lastIdx = entries.size() - 1;
         for (ElementPathEntry entry : entries) {
-            message.add(entry.toTokenizedMessage());
+            message.add(entry.description(i == 0));
             if (i != lastIdx) {
                 message.add(COMMA);
             }
+
+            i++;
         }
 
         return message;
@@ -67,7 +84,6 @@ public class ElementPath {
 
     @Override
     public String toString() {
-        return entries.stream().map(ElementPathEntry::toString)
-                .collect(Collectors.joining(", "));
+        return describe().toString();
     }
 }

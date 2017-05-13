@@ -20,7 +20,9 @@ public interface PageElement extends ActualValueExpectations {
     ElementValue elementValue();
     void setValue(Object value);
     void sendKeys(String keys);
+    void click();
     void clear();
+    PageElement get(String text);
     boolean isVisible();
     TokenizedMessage describe();
 

@@ -4,6 +4,7 @@ import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.webui.page.ElementValue;
 import com.twosigma.testing.webui.page.NullWebElement;
 import com.twosigma.testing.webui.page.PageElement;
+import com.twosigma.testing.webui.page.path.filter.ByTextElementsFilter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -28,7 +29,7 @@ public class GenericPageElement implements PageElement {
     public GenericPageElement(WebDriver driver, ElementPath path) {
         this.driver = driver;
         this.path = path;
-        this.pathDescription = path.toTokenizedMessage();
+        this.pathDescription = path.describe();
         this.elementValue = new ElementValue<>(this, "value", this::getUnderlyingValue);
         this.countValue = new ElementValue<>(this, "count", this::getNumberOfElements);
     }
@@ -93,6 +94,14 @@ public class GenericPageElement implements PageElement {
     }
 
     @Override
+    public PageElement get(String text) {
+        ElementPath newPath = path.copy();
+        newPath.addFilter(new ByTextElementsFilter(text));
+
+        return new GenericPageElement(driver, newPath);
+    }
+
+    @Override
     public boolean isVisible() {
         return findElement().isDisplayed();
     }
@@ -110,9 +119,10 @@ public class GenericPageElement implements PageElement {
     }
 
     private String getUnderlyingValue() {
-        String tagName = getTagName().toUpperCase();
+        WebElement webElement = findElement();
+        String tagName = webElement.getTagName().toUpperCase();
         return (tagName.equals("INPUT") || tagName.equals("TEXTAREA")) ?
-                getAttribute("value") : getText();
+                webElement.getAttribute("value") : webElement.getText();
     }
 
     private Integer getNumberOfElements() {
