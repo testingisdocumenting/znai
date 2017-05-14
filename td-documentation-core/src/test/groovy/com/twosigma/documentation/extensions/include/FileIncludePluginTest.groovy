@@ -1,10 +1,7 @@
 package com.twosigma.documentation.extensions.include
 
-import com.twosigma.documentation.parser.TestComponentsRegistry
 import org.junit.Assert
 import org.junit.Test
-
-import java.nio.file.Paths
 
 /**
  * @author mykola
@@ -67,6 +64,6 @@ class FileIncludePluginTest {
 
     private static String process(String fileName, String value) {
         def result = PluginsTestUtils.process(":include-file: $fileName $value")
-        return result.docElements.get(0).getProps().tokens[0].data
+        return result.docElements.get(0).getProps().tokens[0].content
     }
 }

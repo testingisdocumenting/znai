@@ -13,9 +13,9 @@ class JsBasedCodeSnippetsTokenizerTest {
         def tokens = tokenizer.tokenize("cpp", "int a = 2;")
 
         assert tokens == [[type:'keyword', content:'int'],
-                          [type:'text', content:' a '],
+                          ' a ',
                           [type:'operator', content: '='],
-                          [type:'text', content: ' '],
+                          ' ',
                           [type:'number', content:'2'],
                           [type:'punctuation', content: ';']]
     }

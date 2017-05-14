@@ -18,6 +18,6 @@ class ElementPathTest {
 
         path.addFinder(new ByCssFinder(".child"))
 
-        assert path.toString() == 'by css #cssid , elements with text about , element number 2 , nested find by css .child'
+        assert path.toString() == 'by css #cssid , element(s) with text about , element number 2 , nested find by css .child'
     }
 }

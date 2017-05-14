@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class CodeSnippetsProps {
     public static Map<String, Object> create(CodeTokenizer codeTokenizer, String lang, String snippet) {
-        List<Map<String, Object>> codeTokens = lang.isEmpty() ?
+        List<?> codeTokens = lang.isEmpty() ?
                 Collections.singletonList(textToken(snippet)):
                 codeTokenizer.tokenize(lang, snippet);
 

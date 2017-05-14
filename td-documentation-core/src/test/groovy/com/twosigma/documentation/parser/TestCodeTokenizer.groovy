@@ -1,6 +1,5 @@
 package com.twosigma.documentation.parser
 
-import com.twosigma.documentation.codesnippets.CodeToken
 import com.twosigma.documentation.codesnippets.CodeTokenizer
 
 /**
@@ -8,7 +7,7 @@ import com.twosigma.documentation.codesnippets.CodeTokenizer
  */
 class TestCodeTokenizer implements CodeTokenizer {
     @Override
-    List<CodeToken> tokenize(String lang, String code) {
-        return Collections.singletonList(new CodeToken("text", code))
+    List<?> tokenize(String lang, String code) {
+        return [[type: "text", content: code]]
     }
 }
