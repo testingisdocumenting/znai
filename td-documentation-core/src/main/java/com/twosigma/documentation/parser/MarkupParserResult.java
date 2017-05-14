@@ -4,6 +4,9 @@ import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.parser.docelement.DocElement;
 
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
@@ -23,6 +26,10 @@ public class MarkupParserResult {
      */
     public DocElement getDocElement() {
         return docElement;
+    }
+
+    public List<Map<String, Object>> contentToListOfMaps() {
+        return docElement.getContent().stream().map(DocElement::toMap).collect(toList());
     }
 
     public List<AuxiliaryFile> getAuxiliaryFiles() {

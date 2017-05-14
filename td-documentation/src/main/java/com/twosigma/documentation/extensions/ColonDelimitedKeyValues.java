@@ -2,8 +2,10 @@ package com.twosigma.documentation.extensions;
 
 import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Represents key values extracted from the text of key: value1 format
@@ -27,7 +29,7 @@ public class ColonDelimitedKeyValues {
 
     public ColonDelimitedKeyValues(String content) {
         lines = content.split("\n");
-        vars = new HashMap<>();
+        vars = new LinkedHashMap<>();
         currentVarName = "";
         currentValueLines = new ArrayList<>();
         extractVars();
@@ -35,6 +37,10 @@ public class ColonDelimitedKeyValues {
 
     public void forEach(BiConsumer<String, String> consumer) {
         vars.forEach(consumer);
+    }
+
+    public <R> Stream<R> map(BiFunction<String, String, R> function) {
+        return vars.entrySet().stream().map(e -> function.apply(e.getKey(), e.getValue()));
     }
 
     public String get(String name) {

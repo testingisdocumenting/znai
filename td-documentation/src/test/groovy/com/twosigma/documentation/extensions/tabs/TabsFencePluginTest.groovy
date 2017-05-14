@@ -11,14 +11,15 @@ import java.nio.file.Paths
  */
 class TabsFencePluginTest {
     @Test
-    void "include plugin per tab"() {
+    void "include markup per tab"() {
         def plugin = new TabsFencePlugin()
         def result = plugin.process(new TestComponentsRegistry(), Paths.get("test.md"), new PluginParams("tabs", ""),
-                "java:include-dummy: ff1 {p1: 'v1'}\n" +
-                "groovy:include-dummy:xz ff2 {p2: 'v2'}")
+                "java:test java markup\n" +
+                "groovy:test groovy markup")
 
-        result.docElements.collect { it.toMap() }.should == [[tabsContent: [[name: 'java', content: [[ff: 'ff1', opts: [p1: 'v1'], type: 'IncludeDummy']]],
-                                                                            [name: 'groovy', content: [[ff: 'xz ff2', opts: [p2: 'v2'], type: 'IncludeDummy']]]],
+        def asMap = result.docElements.collect { it.toMap() }
+        asMap.should == [[tabsContent: [[name: 'java', content: [[markup: 'test java markup', type: 'TestMarkup']]],
+                                        [name: 'groovy', content: [[markup: 'test groovy markup', type: 'TestMarkup']]]],
                                                               type: 'Tabs']]
     }
 }

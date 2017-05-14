@@ -1,17 +1,16 @@
 package com.twosigma.documentation.extensions.tabs;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.extensions.Plugins;
-import com.twosigma.documentation.extensions.fence.FencePlugin;
+import com.twosigma.documentation.extensions.ColonDelimitedKeyValues;
 import com.twosigma.documentation.extensions.PluginParams;
-import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.include.IncludePluginParser;
-import com.twosigma.documentation.parser.docelement.DocElement;
+import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.fence.FencePlugin;
+import com.twosigma.documentation.parser.MarkupParser;
+import com.twosigma.documentation.parser.MarkupParserResult;
 
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
@@ -20,8 +19,8 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class TabsFencePlugin implements FencePlugin {
-    private ComponentsRegistry componentsRegistry;
     private Path markupPath;
+    private MarkupParser parser;
 
     @Override
     public String id() {
@@ -30,39 +29,26 @@ public class TabsFencePlugin implements FencePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
-        this.componentsRegistry = componentsRegistry;
         this.markupPath = markupPath;
+        this.parser = componentsRegistry.parser();
 
-        String[] tabsDefs = content.split("\n");
+        ColonDelimitedKeyValues tabsDefinitions = new ColonDelimitedKeyValues(content);
         Map<String, Object> tabsProps = new LinkedHashMap<>();
-        tabsProps.put("tabsContent", Arrays.stream(tabsDefs).map(this::tabProps).collect(toList()));
+        tabsProps.put("tabsContent", tabsDefinitions.map(this::tabProps).collect(toList()));
 
         return PluginResult.docElement("Tabs", tabsProps);
     }
 
-    private Map<String, Object> tabProps(String tabDef) {
-        int colonIdx = tabDef.indexOf(':');
-
-        if (colonIdx == -1) {
-            throw new RuntimeException("expect tab content to be\ntabName:include-plugin: params");
-        }
-
-        String tabName = tabDef.substring(0, colonIdx).trim();
-        String pluginDef = tabDef.substring(colonIdx).trim();
-
+    private Map<String, Object> tabProps(String tabName, String markup) {
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("name", tabName);
-        props.put("content", contentFromPluginId(pluginDef));
+        props.put("content", markupDocElements(markup));
 
         return props;
     }
 
-    private Object contentFromPluginId(String pluginDef) {
-        PluginParams pluginParams = IncludePluginParser.parse(pluginDef);
-
-        IncludePlugin includePlugin = Plugins.includePluginById(pluginParams.getPluginId());
-        PluginResult result = includePlugin.process(componentsRegistry, markupPath, pluginParams);
-
-        return result.getDocElements().stream().map(DocElement::toMap).collect(toList());
+    private List<Map<String, Object>> markupDocElements(String markup) {
+        MarkupParserResult parserResult = parser.parse(markupPath, markup);
+        return parserResult.contentToListOfMaps();
     }
 }
