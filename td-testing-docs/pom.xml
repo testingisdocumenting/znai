@@ -37,7 +37,7 @@
                     <mainClass>com.twosigma.documentation.cli.DocumentationCliApp</mainClass>
                     <arguments>
                         <argument>--doc-id=grtest</argument>
-                        <argument>--source=${project.basedir}/documentation</argument>
+                        <argument>--source=${project.basedir}/webtau</argument>
                         <argument>--deploy=${project.build.directory}</argument>
                     </arguments>
                 </configuration>
