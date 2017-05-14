@@ -12,8 +12,8 @@ import java.util.Map;
  */
 public class CodeSnippetsProps {
     public static Map<String, Object> create(CodeTokenizer codeTokenizer, String lang, String snippet) {
-        List<CodeToken> codeTokens = lang.isEmpty() ?
-                Collections.singletonList(new CodeToken("text", snippet)):
+        List<Map<String, Object>> codeTokens = lang.isEmpty() ?
+                Collections.singletonList(textToken(snippet)):
                 codeTokenizer.tokenize(lang, snippet);
 
         Map<String, Object> result = new LinkedHashMap<>();
@@ -21,6 +21,13 @@ public class CodeSnippetsProps {
         result.put("maxLineLength", StringUtils.maxLineLength(snippet));
         result.put("tokens", codeTokens);
 
+        return result;
+    }
+
+    private static Map<String, Object> textToken(String text) {
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("type", "text");
+        result.put("content", text);
         return result;
     }
 }

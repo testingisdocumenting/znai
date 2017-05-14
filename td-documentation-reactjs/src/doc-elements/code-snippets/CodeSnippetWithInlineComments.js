@@ -31,7 +31,7 @@ const CodeSnippetWithInlineComments = ({tokens}) => {
     return <div>
         <pre><code>{tokens.map((t, idx) => <SpecialCommentToken key={idx} token={t}/>)}</code></pre>
         {comments.length ? <div className="code-bullets">{comments.map((t, idx) =>
-                <Bullet key={idx} comment={t.data} idx={idx + 1}/>)}</div> : null}
+                <Bullet key={idx} comment={t.content} idx={idx + 1}/>)}</div> : null}
     </div>
 }
 

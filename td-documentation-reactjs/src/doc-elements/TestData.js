@@ -58,562 +58,137 @@ const TestData = {
         "docMeta": {
             "id": "preview",
             "type": "User Guide",
-            "title": "MDoc",
+            "title": "GRTest",
             "previewEnabled": true
         },
         "page": {
             "type": "Page",
             "content": [
                 {
-                    "title": "Information Layout",
-                    "id": "information-layout",
+                    "title": "Filters",
+                    "id": "filters",
                     "type": "Section",
                     "content": [
                         {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "The way you layout and flow your information affects how easy it is to comprehend given material.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "Examples of content that easier to consume side by side:",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "bulletMarker": "*",
-                            "tight": true,
-                            "type": "BulletList",
-                            "content": [
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Before/After transition",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Action and its result",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "input and output",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Definition",
-                    "id": "definition",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "To define columns layout use ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "fenced",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " block plugin",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "",
-                            "maxLineLength": 37,
+                            "lang": "html",
+                            "maxLineLength": 42,
                             "tokens": [
                                 {
                                     "type": "text",
-                                    "data": "```columns\nleft: \nthis content goes to the left\n\nand can span multiple lines\nright: this content goes to the right\n\nand can span multiple lines\n```\n"
+                                    "data": "\u003cdiv id\u003d\"menu\"\u003e \n "
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],ul\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " \n  "
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],li\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " \u003ca href\u003d\"/book\"\u003ebook"
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],a\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],li\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " \n  "
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],li\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " \u003ca href\u003d\"/orders\"\u003eorders"
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],a\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],li\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " \n  "
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],li\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " \u003ca href\u003d\"/help\"\u003ehelp"
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],a\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " "
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],li\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " \n "
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],ul\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": " \n"
+                                },
+                                {
+                                    "type": "tag",
+                                    "data": "[object Object],div\u003e"
+                                },
+                                {
+                                    "type": "text",
+                                    "data": "\n"
                                 }
                             ],
                             "lineNumber": "",
                             "type": "Snippet"
-                        },
-                        {
-                            "columns": [
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "this content goes to the left",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "and can span multiple lines",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "this content goes to the right",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "and can span multiple lines",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ],
-                            "config": {},
-                            "type": "Columns"
-                        }
-                    ]
-                },
-                {
-                    "title": "Sizes",
-                    "id": "sizes",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Size can be specified for a column",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "",
-                            "maxLineLength": 37,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": "```columns {left: {width: 160}}\nleft: \nthis content goes to the left\n\nand can span multiple lines\nright: this content goes to the right\n\nand can span multiple lines\n```\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "columns": [
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "this content goes to the left",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "and can span multiple lines",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "this content goes to the right",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "and can span multiple lines",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ],
-                            "config": {
-                                "left": {
-                                    "width": 160.0
-                                }
-                            },
-                            "type": "Columns"
-                        }
-                    ]
-                },
-                {
-                    "title": "Border",
-                    "id": "border",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Size can be specified for a column",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "",
-                            "maxLineLength": 45,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": "```columns {left: {width: 160}, border: true}\nleft: **Argument Name**\nright: Argument description and\n\\\nwhat argument is for\n```\n```columns {left: {width: 160}, border: true}\nleft: **Another Name**\nright: Argument description and \n\\\nwhat argument is for\n```\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "columns": [
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "type": "StrongEmphasis",
-                                                    "content": [
-                                                        {
-                                                            "text": "Argument Name",
-                                                            "type": "SimpleText"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Argument description and",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "SoftLineBreak"
-                                                },
-                                                {
-                                                    "type": "HardLineBreak"
-                                                },
-                                                {
-                                                    "text": "what argument is for",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ],
-                            "config": {
-                                "left": {
-                                    "width": 160.0
-                                },
-                                "border": true
-                            },
-                            "type": "Columns"
-                        },
-                        {
-                            "columns": [
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "type": "StrongEmphasis",
-                                                    "content": [
-                                                        {
-                                                            "text": "Another Name",
-                                                            "type": "SimpleText"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Argument description and",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "SoftLineBreak"
-                                                },
-                                                {
-                                                    "type": "HardLineBreak"
-                                                },
-                                                {
-                                                    "text": "what argument is for",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ],
-                            "config": {
-                                "left": {
-                                    "width": 160.0
-                                },
-                                "border": true
-                            },
-                            "type": "Columns"
-                        }
-                    ]
-                },
-                {
-                    "title": "Alignment",
-                    "id": "alignment",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Specify text alignment using ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "align",
-                                    "type": "InlinedCode"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "",
-                            "maxLineLength": 61,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "data": "```columns {left: {width: 180, align: \"right\"}, border: true}\nleft: **Argument Name**\n\\\n*optional*\nright: Argument description and\n\\\nwhat argument is for\n```\n```columns {left: {width: 180}, border: true}\nleft: **Another Name**\nright: Argument description and \n\\\nwhat argument is for\n```\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "columns": [
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "type": "StrongEmphasis",
-                                                    "content": [
-                                                        {
-                                                            "text": "Argument Name",
-                                                            "type": "SimpleText"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "SoftLineBreak"
-                                                },
-                                                {
-                                                    "type": "HardLineBreak"
-                                                },
-                                                {
-                                                    "type": "Emphasis",
-                                                    "content": [
-                                                        {
-                                                            "text": "optional",
-                                                            "type": "SimpleText"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Argument description and",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "SoftLineBreak"
-                                                },
-                                                {
-                                                    "type": "HardLineBreak"
-                                                },
-                                                {
-                                                    "text": "what argument is for",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ],
-                            "config": {
-                                "left": {
-                                    "width": 180.0,
-                                    "align": "right"
-                                },
-                                "border": true
-                            },
-                            "type": "Columns"
-                        },
-                        {
-                            "columns": [
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "type": "StrongEmphasis",
-                                                    "content": [
-                                                        {
-                                                            "text": "Another Name",
-                                                            "type": "SimpleText"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Argument description and",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "SoftLineBreak"
-                                                },
-                                                {
-                                                    "type": "HardLineBreak"
-                                                },
-                                                {
-                                                    "text": "what argument is for",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ],
-                            "config": {
-                                "left": {
-                                    "width": 180.0
-                                },
-                                "border": true
-                            },
-                            "type": "Columns"
                         }
                     ]
                 }
             ],
             "tocItem": {
-                "sectionTitle": "Features",
-                "pageTitle": "Columns",
-                "fileName": "columns",
-                "dirName": "features",
+                "sectionTitle": "Web UI",
+                "pageTitle": "Finders And Filters",
+                "fileName": "finders-and-filters",
+                "dirName": "web-UI",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Information Layout",
-                        "id": "information-layout"
-                    },
-                    {
-                        "title": "Definition",
-                        "id": "definition"
-                    },
-                    {
-                        "title": "Sizes",
-                        "id": "sizes"
-                    },
-                    {
-                        "title": "Border",
-                        "id": "border"
-                    },
-                    {
-                        "title": "Alignment",
-                        "id": "alignment"
+                        "title": "Filters",
+                        "id": "filters"
                     }
                 ]
             }

@@ -12,11 +12,11 @@ class JsBasedCodeSnippetsTokenizerTest {
         def tokenizer = new JsBasedCodeSnippetsTokenizer(TestNashornEngine.instance)
         def tokens = tokenizer.tokenize("cpp", "int a = 2;")
 
-        assert tokens.collect { it.toMap() } == [[type:'keyword', data:'int'],
-                                                 [type:'text', data:' a '],
-                                                 [type:'operator', data: '='],
-                                                 [type:'text', data: ' '],
-                                                 [type:'number', data:'2'],
-                                                 [type:'punctuation', data: ';']]
+        assert tokens == [[type:'keyword', content:'int'],
+                          [type:'text', content:' a '],
+                          [type:'operator', content: '='],
+                          [type:'text', content: ' '],
+                          [type:'number', content:'2'],
+                          [type:'punctuation', content: ';']]
     }
 }
