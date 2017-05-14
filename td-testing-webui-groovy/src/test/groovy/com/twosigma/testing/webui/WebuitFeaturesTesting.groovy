@@ -12,7 +12,9 @@ import com.twosigma.testing.standalone.StandaloneTestListeners
 import com.twosigma.testing.webui.cli.WebUiTestCliApp
 import com.twosigma.utils.FileUtils
 import com.twosigma.utils.JsonUtils
+import com.twosigma.utils.ResourceUtils
 import com.twosigma.utils.StringUtils
+import org.jsoup.Jsoup
 import org.junit.AfterClass
 import org.junit.Assert
 import org.junit.Before
@@ -73,6 +75,11 @@ class WebuitFeaturesTesting implements StepReporter, StandaloneTestListener {
     }
 
     @Test
+    void "save html snippets"() {
+        saveSnippet("finders-and-filters.html", "#menu", "menu")
+    }
+
+    @Test
     void "filter by text"() {
         runCli("api/byText.groovy")
     }
@@ -86,6 +93,13 @@ class WebuitFeaturesTesting implements StepReporter, StandaloneTestListener {
         Assert.assertEquals("search.open()\n" +
                 "search.submit(query: \"search this\")\n" +
                 "search.numberOfResults.waitTo == 2", scope)
+    }
+
+    private static void saveSnippet(String resourceName, String css, String snippetOutName) {
+        def html = ResourceUtils.textContent(resourceName)
+
+        def snippetPath = Paths.get("test-artifacts/snippets").resolve(snippetOutName + ".html")
+        FileUtils.writeTextContent(snippetPath, Jsoup.parse(html).select(css).toString())
     }
 
     private static String extractScenarioBody(String script) {

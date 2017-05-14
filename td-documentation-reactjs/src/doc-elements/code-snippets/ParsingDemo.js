@@ -2,15 +2,18 @@ import React, {Component} from 'react'
 import {parseCode} from './codeParser'
 
 import CodeSnippetWithInlineComments from './CodeSnippetWithInlineComments'
+import SimpleCodeSnippet from './SimpleCodeSnippet'
+
+import './CodeSnippet.css'
 
 class ParsingDemo extends Component {
     render() {
         const htmlCode = '<div id="menu">\n' +
-            '<ul>\n' +
-            '  <li> <a href="/book">book</a> </li>\n' +
-            '  <li> <a href="/orders">orders</a> </li>\n' +
-            '  <li> <a href="/help">help</a> </li>\n' +
-            '</ul>\n' +
+            '  <ul>\n' +
+            '   <li> <a href="/book">book</a> </li>\n' +
+            '   <li> <a href="/orders">orders</a> </li>\n' +
+            '   <li> <a href="/help">help</a> </li>\n' +
+            ' </ul>\n' +
             '</div>\n'
 
         const javaCode = "class Test Test2 {\n" +
@@ -30,7 +33,7 @@ class ParsingDemo extends Component {
             ':include-file: config/server.config\n'
 
         return <div>
-            <CodeSnippetWithInlineComments tokens={parseCode("html", htmlCode)}/>
+            <SimpleCodeSnippet tokens={parseCode("html", htmlCode)}/>
             <CodeSnippetWithInlineComments tokens={parseCode("javascript", javaCode)}/>
             <CodeSnippetWithInlineComments tokens={parseCode("markdown", markdownCode2)}/>
         </div>

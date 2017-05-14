@@ -1,5 +1,6 @@
 web-UI
     configuration
+    finders-and-filters
     page-object
     page-element
     matchers
