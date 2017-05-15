@@ -10,7 +10,7 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>td-testing-docs</artifactId>
+    <artifactId>td-webtau-docs</artifactId>
 
     <dependencies>
         <dependency>
@@ -36,7 +36,7 @@
                 <configuration>
                     <mainClass>com.twosigma.documentation.cli.DocumentationCliApp</mainClass>
                     <arguments>
-                        <argument>--doc-id=grtest</argument>
+                        <argument>--doc-id=webtau</argument>
                         <argument>--source=${project.basedir}/webtau</argument>
                         <argument>--deploy=${project.build.directory}</argument>
                     </arguments>
