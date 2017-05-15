@@ -14,13 +14,9 @@ import java.util.List;
  */
 public class JavaCode {
     private final JavaCodeVisitor codeVisitor;
-    private Path filePath;
     private String fileContent;
-    private ComponentsRegistry componentsRegistry;
 
-    public JavaCode(ComponentsRegistry componentsRegistry, Path filePath, String fileContent) {
-        this.componentsRegistry = componentsRegistry;
-        this.filePath = filePath;
+    public JavaCode(String fileContent) {
         this.fileContent = fileContent;
         codeVisitor = parse(fileContent);
     }
@@ -33,24 +29,12 @@ public class JavaCode {
         return codeVisitor.getTopLevelJavaDoc();
     }
 
-    public List<DocElement> getClassJavaDocAsDocElements() {
-        return HtmlToDocElementConverter.convert(componentsRegistry, filePath, getClassJavaDocText());
+    public JavaMethod methodByName(String methodName) {
+        return codeVisitor.getDetails(methodName);
     }
 
-    public String methodBody(String methodName) {
-        return codeVisitor.getDetails(methodName).getFullBody();
-    }
-
-    public String methodBodyOnly(String methodName) {
-        return codeVisitor.getDetails(methodName).getBodyOnly();
-    }
-
-    public String methodJavaDocText(String methodName) {
-        return codeVisitor.getDetails(methodName).getJavaDocText();
-    }
-
-    public List<DocElement> methodJavaDocTextAsDocElements(String methodName) {
-        return HtmlToDocElementConverter.convert(componentsRegistry, filePath, methodJavaDocText(methodName));
+    public JavaMethod methodByNameAndParams(String methodName, List<String> paramNames) {
+        return codeVisitor.getDetails(methodName, paramNames);
     }
 
     private static JavaCodeVisitor parse(String fileContent) {

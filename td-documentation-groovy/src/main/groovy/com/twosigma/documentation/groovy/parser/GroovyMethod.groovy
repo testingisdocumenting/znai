@@ -6,7 +6,7 @@ import groovy.transform.Canonical
  * @author mykola
  */
 @Canonical
-class GroovyMethodDetails {
-    String fullBody;
-    String bodyOnly;
+class GroovyMethod {
+    String fullBody
+    String bodyOnly
 }

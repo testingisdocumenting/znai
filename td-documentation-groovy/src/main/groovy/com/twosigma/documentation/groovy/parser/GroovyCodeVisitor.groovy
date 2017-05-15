@@ -14,16 +14,16 @@ import static com.twosigma.utils.StringUtils.stripIndentation
  */
 class GroovyCodeVisitor extends VisitorAdapter {
     private final List<String> lines
-    private Map<String, GroovyMethodDetails> detailsByName
+    private Map<String, GroovyMethod> detailsByName
 
     GroovyCodeVisitor(String code) {
         lines = Arrays.asList(code.split("\n"))
         detailsByName = new HashMap<>()
     }
 
-    GroovyMethodDetails getDetails(String methodName) {
+    GroovyMethod getDetails(String methodName) {
         if (! detailsByName.containsKey(methodName)) {
-            throw new RuntimeException("no method found: " + methodName);
+            throw new RuntimeException("no method found: " + methodName)
         }
 
         return detailsByName.get(methodName)
@@ -38,6 +38,6 @@ class GroovyCodeVisitor extends VisitorAdapter {
         String fullBody = stripIndentation(code)
         String bodyOnly = stripIndentation(extractInsideCurlyBraces(code))
 
-        detailsByName.put(methodName, new GroovyMethodDetails(fullBody: fullBody, bodyOnly: bodyOnly))
+        detailsByName.put(methodName, new GroovyMethod(fullBody: fullBody, bodyOnly: bodyOnly))
     }
 }

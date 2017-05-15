@@ -7,36 +7,38 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.javadoc.Javadoc;
-import com.twosigma.utils.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.github.javaparser.javadoc.JavadocBlockTag.Type.PARAM;
 import static com.twosigma.utils.StringUtils.extractInsideCurlyBraces;
 import static com.twosigma.utils.StringUtils.stripIndentation;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * @author mykola
  */
 public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     private final List<String> lines;
-    private Map<String, JavaMethodDetails> detailsByName;
+    private List<JavaMethod> javaMethods;
     private String topLevelJavaDoc;
 
     public JavaCodeVisitor(String code) {
         lines = Arrays.asList(code.split("\n"));
-        detailsByName = new HashMap<>();
+        javaMethods = new ArrayList<>();
     }
 
-    public JavaMethodDetails getDetails(String methodName) {
-        if (! detailsByName.containsKey(methodName)) {
-            throw new RuntimeException("no method found: " + methodName);
-        }
+    public JavaMethod getDetails(String methodName) {
+        return javaMethods.stream().filter(m -> m.getName().equals(methodName)).findFirst()
+                .orElseThrow(() -> new RuntimeException("no method found: " + methodName));
+    }
 
-        return detailsByName.get(methodName);
+    public JavaMethod getDetails(String methodName, List<String> paramNames) {
+        return javaMethods.stream().filter(m -> m.getName().equals(methodName) && m.getParamNames().equals(paramNames))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("no method found: " + methodName + " with params: " + paramNames));
     }
 
     public String getTopLevelJavaDoc() {
@@ -64,13 +66,25 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         String code = lines.subList(startLine, endLine + 1).stream().collect(Collectors.joining("\n"));
 
         JavadocComment javadocComment = methodDeclaration.getJavadocComment();
-        String methodJavaDoc = (javadocComment != null) ?
-                javadocComment.parse().getDescription().toText() :
+        Javadoc javadoc = javadocComment != null ? javadocComment.parse() : null;
+
+        String javaDocText = (javadoc != null) ?
+                javadoc.getDescription().toText() :
                 "";
 
-        detailsByName.put(name, new JavaMethodDetails(
+        javaMethods.add(new JavaMethod(name,
                 stripIndentation(code),
                 stripIndentation(extractInsideCurlyBraces(code)),
-                methodJavaDoc));
+                extractParams(methodDeclaration, javadoc),
+                javaDocText));
+    }
+
+    private List<JavaMethodParam> extractParams(MethodDeclaration methodDeclaration, Javadoc javadoc) {
+        List<String> paramNames = methodDeclaration.getParameters().stream().map(p -> p.getName().getIdentifier()).collect(toList());
+        Map<String, String> javaDocTextByName = javadoc != null ?
+                (javadoc.getBlockTags().stream().filter(b -> b.getType() == PARAM)
+                        .collect(toMap(b -> b.getName().orElse(""), b -> b.getContent().toText()))) : Collections.emptyMap();
+
+        return paramNames.stream().map(n -> new JavaMethodParam(n, javaDocTextByName.get(n))).collect(toList());
     }
 }

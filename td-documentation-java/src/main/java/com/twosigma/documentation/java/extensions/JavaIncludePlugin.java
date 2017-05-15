@@ -7,6 +7,7 @@ import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.java.parser.JavaCode;
+import com.twosigma.documentation.java.parser.JavaMethod;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 
 import java.nio.file.Path;
@@ -30,7 +31,7 @@ public class JavaIncludePlugin implements IncludePlugin {
         String fileContent = componentsRegistry.includeResourceResolver().textContent(fullPath);
         String methodName = pluginParams.getOpts().get("entry");
 
-        JavaCode javaCode = new JavaCode(componentsRegistry, fullPath, fileContent);
+        JavaCode javaCode = new JavaCode(fileContent);
 
         Boolean bodyOnly = pluginParams.getOpts().has("bodyOnly") ? pluginParams.getOpts().get("bodyOnly") : false;
 
@@ -50,8 +51,10 @@ public class JavaIncludePlugin implements IncludePlugin {
             return javaCode.getFileContent();
         }
 
+        JavaMethod method = javaCode.methodByName(methodName);
+
         return bodyOnly ?
-                javaCode.methodBodyOnly(methodName) :
-                javaCode.methodBody(methodName);
+                method.getBodyOnly() :
+                method.getFullBody();
     }
 }
