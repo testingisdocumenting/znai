@@ -1,2 +1,3 @@
 com.twosigma.documentation.java.extensions.JavaIncludePlugin
 com.twosigma.documentation.java.extensions.JavaDocIncludePlugin
+com.twosigma.documentation.java.extensions.JavaDocParamsIncludePlugin

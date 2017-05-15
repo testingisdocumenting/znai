@@ -20,7 +20,6 @@ public class MarkdownParser implements MarkupParser {
     private final Parser parser;
     private final ComponentsRegistry componentsRegistry;
 
-    // TODO need to react on external resources so they can be deployed. like images
     public MarkdownParser(ComponentsRegistry componentsRegistry) {
         this.componentsRegistry = componentsRegistry;
         CommonMarkExtension extension = new CommonMarkExtension();

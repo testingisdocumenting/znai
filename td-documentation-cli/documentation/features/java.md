@@ -14,7 +14,7 @@ If `bodyOnly` is specified, signature will be omitted.
 
 :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true}
 
-# Class Java Doc
+# Class JavaDoc
 
 Documentation maintenance is one of the main goals of this documentation system. 
 In case of Java you may already use `JavaDoc` strings to explain certain concepts of your system.
@@ -30,7 +30,7 @@ Instead of copy and pasting text between sources, you can refer it inside docume
 :include-java-doc: HelloWorld.java
 
 
-# Method Java Doc
+# Method JavaDoc
 
 Method level `JavaDoc` text can be refereed as well by specifying `entry` parameter 
     
@@ -39,4 +39,10 @@ Method level `JavaDoc` text can be refereed as well by specifying `entry` parame
 *Text bellow is extracted from `sampleMethod` method `JavaDoc`*
 
 :include-java-doc: HelloWorld.java {entry: "sampleMethod"}
+
+# Method JavaDoc Params
+
+    :include-java-doc-params: HelloWorld.java {entry: "sampleMethod"}
+
+:include-java-doc-params: HelloWorld.java {entry: "sampleMethod"}
 

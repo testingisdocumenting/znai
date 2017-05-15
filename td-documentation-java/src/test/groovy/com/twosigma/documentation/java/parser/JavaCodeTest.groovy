@@ -73,9 +73,9 @@ class HelloWorld {
     void "extracts method body by params"() {
         def method = javaCode.methodByNameAndParams("sampleMethod", ["test", "name"])
 
-        def params = method.params.collect { [it.name, it.javaDocText] }
-        assert params == [["test", "test param"],
-                          ["name", "name of the param"]]
+        def params = method.params.collect { [it.name, it.javaDocText, it.type] }
+        assert params == [["test", "test param", "String"],
+                          ["name", "name of the param", "String"]]
 
         Assert.assertEquals("public void sampleMethod(String test, String name) {\n" +
                 "    statement3();\n" +

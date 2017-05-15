@@ -24,6 +24,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.twosigma.td</groupId>
             <artifactId>td-console</artifactId>
             <version>${project.version}</version>

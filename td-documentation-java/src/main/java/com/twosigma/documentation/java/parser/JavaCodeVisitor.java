@@ -80,11 +80,16 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     }
 
     private List<JavaMethodParam> extractParams(MethodDeclaration methodDeclaration, Javadoc javadoc) {
+        Map<String, String> typeByName = methodDeclaration.getParameters().stream()
+                .collect(toMap(p -> p.getName().getIdentifier(), p -> p.getType().getElementType().toString()));
+
         List<String> paramNames = methodDeclaration.getParameters().stream().map(p -> p.getName().getIdentifier()).collect(toList());
+
         Map<String, String> javaDocTextByName = javadoc != null ?
                 (javadoc.getBlockTags().stream().filter(b -> b.getType() == PARAM)
                         .collect(toMap(b -> b.getName().orElse(""), b -> b.getContent().toText()))) : Collections.emptyMap();
 
-        return paramNames.stream().map(n -> new JavaMethodParam(n, javaDocTextByName.get(n))).collect(toList());
+        return paramNames.stream().map(n -> new JavaMethodParam(n, javaDocTextByName.get(n), typeByName.get(n)))
+                .collect(toList());
     }
 }
