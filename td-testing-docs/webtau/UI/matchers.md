@@ -1,3 +1,3 @@
 # Values
 
-:include-template: templates/method.md {name: "regexp"}
+:include-template: templates/methods.md {names: ["regexp"]}

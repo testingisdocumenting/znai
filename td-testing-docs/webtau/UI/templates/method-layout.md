@@ -1,11 +1,11 @@
 `````columns {left: {align: "right", width: 120}, border: true}
-left: **$name**
+left: **${name}**
 
 right:
-$description
+${description}
 
 ```groovy
-$example
+${example}
 ```
 
 `````

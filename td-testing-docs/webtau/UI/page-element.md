@@ -9,10 +9,4 @@ Examples below refer following page object
 
 # Assertions
 
-:include-template: templates/method.md {name: "waitTo"}
-
-:include-template: templates/method.md {name: "waitToNot"}
-
-:include-template: templates/method.md {name: "should"}
-
-:include-template: templates/method.md {name: "shouldNot"}
+:include-template: templates/methods.md {names: ["waitTo", "waitToNot", "should", "shouldNot"]}
