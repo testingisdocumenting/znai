@@ -26,9 +26,12 @@ Second copy & paste
 
 # Definition
 
-Instead define a template in a separate file
+Instead define a template in a separate file.
+
+We use [FreeMarker](http://freemarker.org) template engine.
  
 :include-file: templates/job.md
+
 
 Insert it using fenced block syntax. Content inside of fenced block is treated as key/values. 
 
@@ -50,15 +53,14 @@ Consider inlined template if you don't need to pass a lot of text as parameters 
 
     :include-template: templates/arg-definition.md {name: "Arg Name", description: "Description of the argument"}
     
-    :include-template: templates/optional-arg-definition.md {name: "Other Name", description: "Yet another description of the argument"}
+    :include-template: templates/arg-definition.md {name: "Other Name", optional: true, description: "Yet another description of the argument"}
     
-*templates/optional-arg-definition.md*
-:include-file: templates/optional-arg-definition.md
+*templates/arg-definition.md*
+:include-file: templates/arg-definition.md
     
-
 :include-template: templates/arg-definition.md {name: "Arg Name", description: "Description of the argument"}
 
-:include-template: templates/optional-arg-definition.md {name: "Other Name", description: "Yet another description of the argument"}
+:include-template: templates/arg-definition.md {name: "Other Name", optional: true, description: "Yet another description of the argument"}
 
 # External Parameters
 
@@ -78,3 +80,20 @@ Include a template and use parameters from the file
     :include-template: templates/test-artifact.md {paramsPath: "artifacts/generated-values.json"}
     
 :include-template: templates/test-artifact.md {paramsPath: "artifacts/generated-values.json"}
+
+# Loops
+
+We can loop over list of parameters using [FreeMarker loop](http://freemarker.org/docs/ref_directive_list.html)
+
+Consider external file
+
+:include-file: artifacts/names.json
+
+and a template  
+
+:include-file: templates/multiple-arg-definition.md
+
+
+    :include-template: templates/multiple-arg-definition.md {paramsPath: "artifacts/names.json"}
+
+:include-template: templates/multiple-arg-definition.md {paramsPath: "artifacts/names.json"}

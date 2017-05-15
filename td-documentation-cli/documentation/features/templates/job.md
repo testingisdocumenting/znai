@@ -1,6 +1,6 @@
-**Name**: $name
+**Name**: ${name}
 
-**Title**: $title
+**Title**: ${title}
 
 **Current Project**: BBR
  

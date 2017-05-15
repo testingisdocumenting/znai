@@ -1,0 +1,5 @@
+{"names": [
+  {"name": "Name 1", "description": "Description 1"},
+  {"name": "Name 2", "description": "Description 2", "optional": "true"},
+  {"name": "Name 3", "description": "Description 3"}
+]}

@@ -2,20 +2,18 @@ package com.twosigma.documentation.extensions.templates;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.ColonDelimitedKeyValues;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.extensions.ColonDelimitedKeyValues;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
-import com.twosigma.utils.RegexpUtils;
+import com.twosigma.documentation.template.TextTemplate;
 
 import java.nio.file.Path;
-import java.util.regex.Pattern;
+import java.util.Collections;
 import java.util.stream.Stream;
-
-import static com.twosigma.documentation.extensions.templates.Template.VARIABLE_PATTERN;
 
 /**
  * @author mykola
@@ -42,8 +40,7 @@ public class TemplateFencePlugin implements FencePlugin {
     }
 
     private String processTemplate(String template, ColonDelimitedKeyValues keyValues) {
-        return RegexpUtils.replaceAll(template, VARIABLE_PATTERN,
-                (matcher) -> keyValues.get(matcher.group(1)));
+        return new TextTemplate(template).process(Collections.unmodifiableMap(keyValues.toMap()));
     }
 
     @Override

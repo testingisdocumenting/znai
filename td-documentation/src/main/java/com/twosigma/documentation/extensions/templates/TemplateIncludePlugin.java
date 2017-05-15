@@ -2,20 +2,21 @@ package com.twosigma.documentation.extensions.templates;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.*;
+import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginParamsOpts;
+import com.twosigma.documentation.extensions.PluginResourcesResolver;
+import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.template.TextTemplate;
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
-import com.twosigma.utils.RegexpUtils;
 
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
-
-import static com.twosigma.documentation.extensions.templates.Template.VARIABLE_PATTERN;
 
 /**
  * @author mykola
@@ -51,15 +52,7 @@ public class TemplateIncludePlugin implements IncludePlugin {
             params.putAll(JsonUtils.deserializeAsMap(FileUtils.fileTextContent(paramsPath)));
         }
 
-        return RegexpUtils.replaceAll(template, VARIABLE_PATTERN,
-                (matcher) -> {
-                    String paramName = matcher.group(1);
-                    if (! params.containsKey(paramName)) {
-                        throw new RuntimeException("no parameter '" + paramName + "' found: " + params);
-                    }
-
-                    return params.get(paramName).toString();
-                });
+        return new TextTemplate(template).process(params);
     }
 
     @Override
