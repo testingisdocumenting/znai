@@ -8,6 +8,8 @@ import com.twosigma.testing.expectation.timer.ExpectationTimer;
 import com.twosigma.testing.reporter.TokenizedMessage;
 import org.openqa.selenium.WebElement;
 
+import java.util.regex.Pattern;
+
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
 
 /**
@@ -23,6 +25,8 @@ public interface PageElement extends ActualValueExpectations {
     void click();
     void clear();
     PageElement get(String text);
+    PageElement get(int number);
+    PageElement get(Pattern regexp);
     boolean isVisible();
     TokenizedMessage describe();
 

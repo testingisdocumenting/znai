@@ -4,32 +4,31 @@ import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.webui.page.path.ElementsFilter;
 import org.openqa.selenium.WebElement;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
 import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.selectorType;
 import static com.twosigma.testing.webui.reporter.WebUiMessageBuilder.selectorValue;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
  */
-public class ByNumberElementsFilter implements ElementsFilter {
-    private int number;
+public class ByRegexpElementsFilter implements ElementsFilter {
+    private Pattern regexp;
 
-    public ByNumberElementsFilter(int number) {
-        this.number = number;
+    public ByRegexpElementsFilter(Pattern regexp) {
+        this.regexp = regexp;
     }
 
     @Override
     public List<WebElement> filter(List<WebElement> original) {
-        return (number > 0 && number <= original.size()) ?
-                Collections.singletonList(original.get(number - 1)):
-                Collections.emptyList();
+        return original.stream().filter(el -> regexp.matcher(el.getText()).find()).collect(toList());
     }
 
     @Override
     public TokenizedMessage description() {
-        return tokenizedMessage(selectorType("element number"), selectorValue(String.valueOf(number)));
+        return tokenizedMessage(selectorType("element(s) with regexp"), selectorValue(regexp.pattern()));
     }
 }

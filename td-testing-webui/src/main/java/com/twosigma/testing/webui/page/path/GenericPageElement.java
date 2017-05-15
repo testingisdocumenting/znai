@@ -4,12 +4,15 @@ import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.webui.page.ElementValue;
 import com.twosigma.testing.webui.page.NullWebElement;
 import com.twosigma.testing.webui.page.PageElement;
+import com.twosigma.testing.webui.page.path.filter.ByNumberElementsFilter;
+import com.twosigma.testing.webui.page.path.filter.ByRegexpElementsFilter;
 import com.twosigma.testing.webui.page.path.filter.ByTextElementsFilter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
 import static com.twosigma.testing.webui.WebTestDsl.executeStep;
@@ -95,10 +98,17 @@ public class GenericPageElement implements PageElement {
 
     @Override
     public PageElement get(String text) {
-        ElementPath newPath = path.copy();
-        newPath.addFilter(new ByTextElementsFilter(text));
+        return withFilter(new ByTextElementsFilter(text));
+    }
 
-        return new GenericPageElement(driver, newPath);
+    @Override
+    public PageElement get(int number) {
+        return withFilter(new ByNumberElementsFilter(number));
+    }
+
+    @Override
+    public PageElement get(Pattern regexp) {
+        return withFilter(new ByRegexpElementsFilter(regexp));
     }
 
     @Override
@@ -139,5 +149,12 @@ public class GenericPageElement implements PageElement {
                          Supplier<TokenizedMessage> completionMessageSupplier,
                          Runnable action) {
         executeStep(this, inProgressMessage, completionMessageSupplier, action);
+    }
+
+    private PageElement withFilter(ElementsFilter filter) {
+        ElementPath newPath = path.copy();
+        newPath.addFilter(filter);
+
+        return new GenericPageElement(driver, newPath);
     }
 }
