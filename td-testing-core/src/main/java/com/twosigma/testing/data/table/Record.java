@@ -46,12 +46,10 @@ public class Record {
     }
 
     public Map<String, Object> toMap() {
-        return header.columnIdxStream().boxed().
-                collect(Collectors.toMap(
-                        idx -> header.columnNameByIdx(idx),
-                        idx -> values.get(idx),
-                        (v1,v2) -> { throw new RuntimeException(String.format("duplicate key for values %s and %s", v1, v2)); },
-                        LinkedHashMap::new));
+        Map<String, Object> result = new LinkedHashMap<>();
+        header.columnIdxStream().forEach(i -> result.put(header.columnNameByIdx(i), values.get(i)));
+
+        return result;
     }
 
     @Override
