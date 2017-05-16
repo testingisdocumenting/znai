@@ -10,7 +10,7 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>td-testing-webui</artifactId>
+    <artifactId>td-testing-webtau</artifactId>
 
     <properties>
         <selenium.version>3.3.1</selenium.version>

@@ -10,7 +10,7 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>td-testing-webui-groovy</artifactId>
+    <artifactId>td-testing-webtau-groovy</artifactId>
 
     <dependencies>
         <dependency>
