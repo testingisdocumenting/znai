@@ -1,7 +1,7 @@
-# GRTest 
+# WebTau 
 
-Java and Groovy based testing frameworks to test:
-* Business Logic
+Java API and Groovy Framework to test:
 * Web UI
 * Web REST
-* Command Line utilities
+
+:include-file: examples/Search.groovy
