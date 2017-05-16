@@ -37,8 +37,9 @@ public class ActualValue implements ActualValueExpectations {
         boolean matches = valueMatcher.negativeMatches(actualPath, actual);
 
          // TODO handlers
-        if (!matches)
+        if (!matches) {
             throw new AssertionError(valueMatcher.negativeMismatchedMessage(actualPath, actual));
+        }
     }
 
     @Override

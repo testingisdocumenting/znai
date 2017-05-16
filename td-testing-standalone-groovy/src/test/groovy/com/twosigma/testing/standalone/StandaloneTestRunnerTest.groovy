@@ -28,8 +28,10 @@ class StandaloneTestRunnerTest {
 
         runner.tests[1].hasError().should == false
         runner.tests[1].isFailed().should == true
-        runner.tests[1].assertionMessage.should == "\n[value]   actual: 10 <java.lang.Integer>\n" +
-                "[value] expected: 11 <java.lang.Integer> [reported by AnyEqualHandler]"
+        runner.tests[1].assertionMessage.should == "\nmismatches:\n" +
+                "\n" +
+                "[value]:   actual: 10 <java.lang.Integer>\n" +
+                "         expected: 11 <java.lang.Integer>"
 
         runner.tests[2].hasError().should == false
         runner.tests[2].isFailed().should == false

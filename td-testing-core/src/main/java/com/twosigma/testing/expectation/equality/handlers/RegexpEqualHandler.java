@@ -24,11 +24,11 @@ public class RegexpEqualHandler implements EqualComparatorHandler {
             return;
         }
 
-        equalComparator.reportMismatch(this, mismatchMessage(actualPath, actual, expected));
+        equalComparator.reportMismatch(this, actualPath, mismatchMessage(actual, expected));
     }
 
-    private String mismatchMessage(ActualPath actualPath, Object actual, Object expected) {
-        return actualPath + "    actual string: " + actual.toString() + "\n" +
-               actualPath + " expected pattern: " + expected.toString();
+    private String mismatchMessage(Object actual, Object expected) {
+        return "   actual string: " + actual.toString() + "\n" +
+               "expected pattern: " + expected.toString();
     }
 }

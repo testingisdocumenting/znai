@@ -1,9 +1,5 @@
 package com.twosigma.testing.expectation.equality;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.twosigma.testing.data.render.DataRenderers;
 import com.twosigma.testing.expectation.ActualPath;
 import com.twosigma.testing.expectation.equality.handlers.AnyEqualHandler;
@@ -11,12 +7,20 @@ import com.twosigma.testing.expectation.equality.handlers.NullEqualHandler;
 import com.twosigma.utils.ServiceUtils;
 import com.twosigma.utils.TraceUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.stream.Collectors.joining;
+
 /**
  * @author mykola
  */
 public class EqualComparator {
     private static List<EqualComparatorHandler> handlers = discoverHandlers();
-    private List<String> mismatches = new ArrayList<>();
+
+    private List<Mismatch> mismatches = new ArrayList<>();
+    private List<ActualPathWithValue> missing = new ArrayList<>();
+    private List<ActualPathWithValue> extra = new ArrayList<>();
 
     private final boolean isNegative;
 
@@ -65,11 +69,35 @@ public class EqualComparator {
     }
 
     public String generateMismatchReport() {
-        return mismatches.stream().collect(Collectors.joining("\n"));
+        List<String> reports = new ArrayList<>();
+        if (! mismatches.isEmpty()) {
+            reports.add("mismatches:\n\n" +
+                    mismatches.stream().map(Mismatch::fullMessage).collect(joining("\n")));
+        }
+
+        if (! missing.isEmpty()) {
+            reports.add("missing, but expected values:\n\n" +
+                    missing.stream().map(ActualPathWithValue::getFullMessage).collect(joining("\n")));
+        }
+
+        if (! extra.isEmpty()) {
+            reports.add("unexpected values:\n\n" +
+                    extra.stream().map(ActualPathWithValue::getFullMessage).collect(joining("\n")));
+        }
+
+        return reports.stream().collect(joining("\n\n"));
     }
 
-    public void reportMismatch(EqualComparatorHandler reporter, String mismatch) {
-        mismatches.add(mismatch + " [reported by " + reporter.getClass().getSimpleName() + "]");
+    public void reportMismatch(EqualComparatorHandler reporter, ActualPath actualPath, String mismatch) {
+        mismatches.add(new Mismatch(actualPath, mismatch));
+    }
+
+    public void reportMissing(EqualComparatorHandler reporter, ActualPath actualPath, Object value) {
+        missing.add(new ActualPathWithValue(actualPath, value));
+    }
+
+    public void reportExtra(EqualComparatorHandler reporter, ActualPath actualPath, Object value) {
+        extra.add(new ActualPathWithValue(actualPath, value));
     }
 
     public int numberOfMismatches() {

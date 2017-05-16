@@ -32,13 +32,13 @@ public class IterableEqualHandler implements EqualComparatorHandler {
 
         while (actualIt.hasNext()) {
             Object actualElement = actualIt.next();
-            equalComparator.reportMismatch(this, "extra element " + actualPath.index(idx).getPath() + ": " + DataRenderers.render(actualElement));
+            equalComparator.reportMismatch(this, actualPath, "extra element " + actualPath.index(idx).getPath() + ": " + DataRenderers.render(actualElement));
             idx++;
         }
 
         while (expectedIt.hasNext()) {
             Object expectedElement = expectedIt.next();
-            equalComparator.reportMismatch(this, "missing element " + actualPath.index(idx).getPath() + ": " + DataRenderers.render(expectedElement));
+            equalComparator.reportMismatch(this, actualPath, "missing element " + actualPath.index(idx).getPath() + ": " + DataRenderers.render(expectedElement));
             idx++;
         }
     }

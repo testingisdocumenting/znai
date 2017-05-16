@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
+
 /**
  * @author mykola
  */
@@ -34,7 +36,7 @@ public class StringUtils {
         return code.substring(startIdx + 1, endIdx);
     }
 
-    public static Integer lineIndentation(String line) {
+    private static Integer lineIndentation(String line) {
         int i = 0;
         while (i < line.length() && line.charAt(i) == ' ') {
             i++;
@@ -45,6 +47,15 @@ public class StringUtils {
 
     public static String createIndentation(int numberOfSpaces) {
         return numberOfSpaces == 0 ? "" : String.format("%" + numberOfSpaces + "s", "");
+    }
+
+    public static String concatWithIndentation(String prefix, String multilineText) {
+        String indentation = StringUtils.createIndentation(prefix.length());
+
+        String[] lines = multilineText.split("\n");
+        return (prefix + lines[0]) + (lines.length > 1 ?
+                "\n" + Arrays.stream(lines).skip(1).map(l -> indentation + l).collect(joining("\n")) :
+                "");
     }
 
     private static String removeIndentation(String line, Integer indentation) {

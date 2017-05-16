@@ -29,4 +29,13 @@ line #_3\r""")
         def stripped = StringUtils.extractInsideCurlyBraces(code)
         Assert.assertEquals("\n    statement1;\n    statement2", stripped)
     }
+
+    @Test
+    void "concat prefix and multiline text preserving prefix size indentation"() {
+        def concatenated = StringUtils.concatWithIndentation("a prefix:", "line1 line1\nline2\nline #3")
+
+        Assert.assertEquals("a prefix:line1 line1\n" +
+                "         line2\n" +
+                "         line #3", concatenated)
+    }
 }

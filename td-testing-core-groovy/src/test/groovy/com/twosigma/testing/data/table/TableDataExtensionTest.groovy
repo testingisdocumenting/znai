@@ -2,7 +2,6 @@ package com.twosigma.testing.data.table
 
 import org.junit.Test
 
-
 /**
  * @author mykola
  */

@@ -1,6 +1,5 @@
 package com.twosigma.testing.data.table.comparison
 
-import org.junit.Ignore
 import org.junit.Test
 
 /**

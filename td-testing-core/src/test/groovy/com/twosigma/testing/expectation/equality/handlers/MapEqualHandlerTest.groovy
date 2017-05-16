@@ -33,18 +33,17 @@ class MapEqualHandlerTest {
     void "should report missing keys on both sides"() {
         equalComparator.compare(ActualPath.createActualPath("map"),
                 [k6: 'v1', k2: [k21: 'v21'], k3: 'v3'],
-                [k1: 'v1', k2: [k22: 'v21'], k4: 'v3'])
+                [k1: 'v1', k2: [k22: 'v21'], k3: 'v3-'])
 
-        // TODO need a proper alignment for nested keys
-        assertEquals("report for map\n" +
-                "extra keys:\n" +
-                "map.k3\n" +
-                "map.k6\n" +
-                "mismatches:\n" +
-                "report for map.k2\n" +
-                "extra keys:\n" +
-                "map.k2.k21\n" +
-                " [reported by MapEqualHandler]\n" +
-                " [reported by MapEqualHandler]", equalComparator.generateMismatchReport())
+        def report = equalComparator.generateMismatchReport()
+        assertEquals("mismatches:\n" +
+                "\n" +
+                "map.k3:   actual: v3 <java.lang.String>\n" +
+                "        expected: v3- <java.lang.String>\n" +
+                "\n" +
+                "unexpected values:\n" +
+                "\n" +
+                "map.k2.k21: v21\n" +
+                "map.k6: v1", report)
     }
 }

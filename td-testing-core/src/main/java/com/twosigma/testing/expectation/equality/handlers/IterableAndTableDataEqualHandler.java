@@ -31,7 +31,7 @@ public class IterableAndTableDataEqualHandler implements EqualComparatorHandler 
 
         final TableDataComparisonResult result = TableDataComparison.compare(actualTable, expectedTable);
         if (! result.areEqual()) {
-            equalComparator.reportMismatch(this, new TableDataComparisonReport(result).generate());
+            equalComparator.reportMismatch(this, actualPath, new TableDataComparisonReport(result).generate());
         }
     }
 

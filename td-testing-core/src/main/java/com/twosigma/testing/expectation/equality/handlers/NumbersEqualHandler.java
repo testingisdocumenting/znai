@@ -29,7 +29,7 @@ public class NumbersEqualHandler implements EqualComparatorHandler {
         Comparable convertedExpected = convertTo(largest, expected);
 
         if (convertedActual.compareTo(convertedExpected) != 0) {
-            equalComparator.reportMismatch(this, mismatchMessage(actualPath, actual, convertedActual, expected, convertedExpected));
+            equalComparator.reportMismatch(this, actualPath, mismatchMessage(actualPath, actual, convertedActual, expected, convertedExpected));
         }
     }
 

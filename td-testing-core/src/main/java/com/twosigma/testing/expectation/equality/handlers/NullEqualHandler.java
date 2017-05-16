@@ -22,11 +22,12 @@ public class NullEqualHandler implements EqualComparatorHandler {
         }
 
         if (actual == null) {
-            equalComparator.reportMismatch(this, actualPath + "   actual: null\n" +
-                actualPath + " expected: " + renderValueAndType(expected));
+            equalComparator.reportMismatch(this, actualPath,
+                    "  actual: null\n" +
+                              "expected: " + renderValueAndType(expected));
         } else {
-            equalComparator.reportMismatch(this, actualPath + "   actual: " + renderValueAndType(actual) + "\n" +
-                actualPath + " expected: null\n");
+            equalComparator.reportMismatch(this, actualPath, "  actual: " + renderValueAndType(actual) + "\n" +
+                "expected: null\n");
         }
     }
 }

@@ -17,10 +17,9 @@ public class RecordAndMapEqualHandler implements EqualComparatorHandler {
     }
 
     private boolean mapWithStringKeys(final Object expected) {
-        if (! (expected instanceof Map))
-            return false;
+        return expected instanceof Map &&
+                ((Map<?, ?>) expected).keySet().stream().allMatch(k -> k instanceof String);
 
-        return ! ((Map<?, ?>) expected).keySet().stream().anyMatch(k -> !(k instanceof String));
     }
 
     @Override
@@ -37,7 +36,7 @@ public class RecordAndMapEqualHandler implements EqualComparatorHandler {
                 final Object expectedValue = expectedMap.get(name);
                 equalComparator.compare(propertyPath, actualValue, expectedValue);
             } else {
-                equalComparator.reportMismatch(this, propertyPath + " is not found");
+                equalComparator.reportMismatch(this, actualPath, propertyPath + " is not found");
             }
         }
     }

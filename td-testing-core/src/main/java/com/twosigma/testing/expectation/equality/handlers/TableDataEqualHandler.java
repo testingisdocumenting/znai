@@ -21,7 +21,7 @@ public class TableDataEqualHandler implements EqualComparatorHandler {
     public void compare(EqualComparator equalComparator, ActualPath actualPath, Object actual, Object expected) {
         final TableDataComparisonResult result = TableDataComparison.compare((TableData) actual, (TableData) expected);
         if (! result.areEqual()) {
-            equalComparator.reportMismatch(this, new TableDataComparisonReport(result).generate());
+            equalComparator.reportMismatch(this, actualPath, new TableDataComparisonReport(result).generate());
         }
     }
 }
