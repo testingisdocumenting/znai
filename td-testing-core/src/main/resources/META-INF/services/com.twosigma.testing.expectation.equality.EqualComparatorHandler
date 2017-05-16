@@ -1,6 +1,7 @@
 com.twosigma.testing.expectation.equality.handlers.NumbersEqualHandler
 com.twosigma.testing.expectation.equality.handlers.RecordAndMapEqualHandler
-com.twosigma.testing.expectation.equality.handlers.MapEqualHandler
+com.twosigma.testing.expectation.equality.handlers.MapsEqualHandler
+com.twosigma.testing.expectation.equality.handlers.MapAndBeanEqualHandler
 com.twosigma.testing.expectation.equality.handlers.TableDataEqualHandler
 com.twosigma.testing.expectation.equality.handlers.IterableEqualHandler
 com.twosigma.testing.expectation.equality.handlers.StreamAndIterableEqualHandler

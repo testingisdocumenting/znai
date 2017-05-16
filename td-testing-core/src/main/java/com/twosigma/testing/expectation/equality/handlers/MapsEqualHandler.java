@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * @author mykola
  */
-public class MapEqualHandler implements EqualComparatorHandler {
+public class MapsEqualHandler implements EqualComparatorHandler {
     @Override
     public boolean handle(Object actual, Object expected) {
         return actual instanceof Map && expected instanceof Map;
@@ -48,9 +48,9 @@ public class MapEqualHandler implements EqualComparatorHandler {
             final ActualPath propertyPath = actualPath.property(key.toString());
 
             if (! actualMap.containsKey(key)) {
-                equalComparator.reportMissing(MapEqualHandler.this, propertyPath, expectedMap.get(key));
+                equalComparator.reportMissing(MapsEqualHandler.this, propertyPath, expectedMap.get(key));
             } else if (! expectedMap.containsKey(key)) {
-                equalComparator.reportExtra(MapEqualHandler.this, propertyPath, actualMap.get(key));
+                equalComparator.reportExtra(MapsEqualHandler.this, propertyPath, actualMap.get(key));
             } else {
                 equalComparator.compare(propertyPath, actualMap.get(key), expectedMap.get(key));
             }

@@ -34,8 +34,8 @@ public class NumbersEqualHandler implements EqualComparatorHandler {
     }
 
     private String mismatchMessage(ActualPath actualPath, Object actual, Object convertedActual, Object expected, Object convertedExpected) {
-        return actualPath + "   actual: " + renderValueAndType(convertedActual) + "(before conversion: " + renderValueAndType(actual) + ")\n" +
-            actualPath + " expected: " + renderValueAndType(convertedExpected) + "(before conversion: " + renderValueAndType(expected) + ")";
+        return "  actual: " + renderValueAndType(convertedActual) + "(before conversion: " + renderValueAndType(actual) + ")\n" +
+               "expected: " + renderValueAndType(convertedExpected) + "(before conversion: " + renderValueAndType(expected) + ")";
     }
 
     private static Class largest(Object actual, Object expected) {

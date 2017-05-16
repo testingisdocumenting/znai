@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals
 /**
  * @author mykola
  */
-class MapEqualHandlerTest {
+class MapsEqualHandlerTest {
     private EqualComparator equalComparator
 
     @Before
@@ -21,7 +21,7 @@ class MapEqualHandlerTest {
 
     @Test
     void "should only handle maps on both sides"() {
-        EqualComparatorHandler handler = new MapEqualHandler()
+        EqualComparatorHandler handler = new MapsEqualHandler()
         assert ! handler.handle(10, "test")
         assert ! handler.handle([k: 1], [])
         assert ! handler.handle([], [k: 1])
