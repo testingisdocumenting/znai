@@ -4,27 +4,30 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 /**
  * @author mykola
- * // TODO make iterable?
  */
 public class Record {
     private Header header;
     private List<Object> values;
+    private CompositeKey key;
 
     public Record(Header header, Stream<Object> values) {
         this.header = header;
         this.values = values.collect(toList());
+        this.key = header.hasKeyColumns() ? new CompositeKey(header.keyIdx().map(this::valueByIdx)): null;
     }
 
-    public Header header() {
+    public Header getHeader() {
         return header;
+    }
+
+    public CompositeKey getKey() {
+        return key;
     }
 
     public Object valueByName(String name) {

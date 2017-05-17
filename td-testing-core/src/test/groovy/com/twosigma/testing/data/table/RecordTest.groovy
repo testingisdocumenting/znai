@@ -2,8 +2,6 @@ package com.twosigma.testing.data.table
 
 import org.junit.Test
 
-import java.util.stream.Stream
-
 import static com.twosigma.testing.expectation.ActualValue.actual
 import static com.twosigma.testing.expectation.Matchers.equal
 
@@ -13,7 +11,19 @@ import static com.twosigma.testing.expectation.Matchers.equal
 class RecordTest {
     @Test
     void "should be convertible to map"() {
-        def record = new Record(new Header(Stream.of("n1", "n2")), Stream.of("v1", null))
+        def record = new Record(new Header(["n1", "n2"].stream()), ["v1", null].stream())
         actual(record.toMap()).should(equal([n1: 'v1', n2: null]))
+    }
+
+    @Test
+    void "should have key defined if header has key columns"() {
+        def record = new Record(new Header(["*id1", "*id2", "c1"].stream()), ["id1", "id2", "v1"].stream())
+        assert record.key.values == ["id1", "id2"]
+    }
+
+    @Test
+    void "should have null key if header has no key columns"() {
+        def record = new Record(new Header(["c1", "c2", "c3"].stream()), ["v1", "v2", "v3"].stream())
+        assert record.key == null
     }
 }

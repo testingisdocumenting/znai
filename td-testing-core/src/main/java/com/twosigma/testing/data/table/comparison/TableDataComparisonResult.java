@@ -18,8 +18,8 @@ public class TableDataComparisonResult {
     private Map<Integer, Map<String, String>> messageByExpectedRowIdxAndColumn;
 
     private Set<String> missingColumns;
-    private List<Record> missingRows;
-    private List<Record> extraRows;
+    private TableData missingRows;
+    private TableData extraRows;
 
     private TableData actual;
     private TableData expected;
@@ -32,8 +32,8 @@ public class TableDataComparisonResult {
         messageByExpectedRowIdxAndColumn = new HashMap<>();
 
         missingColumns = new TreeSet<>();
-        missingRows = new ArrayList<>();
-        extraRows = new ArrayList<>();
+        missingRows = TableData.withHeader(expected.getHeader());
+        extraRows = TableData.withHeader(actual.getHeader());
     }
 
     public boolean areEqual() {
@@ -56,11 +56,11 @@ public class TableDataComparisonResult {
     }
 
     public void addExtraRow(Record row) {
-        extraRows.add(row);
+        extraRows.addRow(row);
     }
 
     public void addMissingRow(Record row) {
-        missingRows.add(row);
+        missingRows.addRow(row);
     }
 
     public Set<String> getMissingColumns() {
@@ -71,20 +71,12 @@ public class TableDataComparisonResult {
         this.missingColumns = missingColumns;
     }
 
-    public List<Record> getMissingRows() {
+    public TableData getMissingRows() {
         return missingRows;
     }
 
-    public void setMissingRows(final List<Record> missingRows) {
-        this.missingRows = missingRows;
-    }
-
-    public List<Record> getExtraRows() {
+    public TableData getExtraRows() {
         return extraRows;
-    }
-
-    public void setExtraRows(final List<Record> extraRows) {
-        this.extraRows = extraRows;
     }
 
     // TODO keys support

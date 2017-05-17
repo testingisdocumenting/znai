@@ -1,6 +1,5 @@
 package com.twosigma.testing.data.table.comparison;
 
-import com.twosigma.testing.data.table.TableData;
 import com.twosigma.testing.data.table.render.TableRenderer;
 
 import static java.util.stream.Collectors.joining;
@@ -29,16 +28,14 @@ public class TableDataComparisonReport {
         if (result.getExtraRows().isEmpty())
             return "";
 
-        final TableData extra = TableData.fromRows(result.getExtraRows());
-        return "\nextra rows:\n" + TableRenderer.render(extra);
+        return "\nextra rows:\n" + TableRenderer.render(result.getExtraRows());
     }
 
     private String missingRowsReport() {
         if (result.getMissingRows().isEmpty())
             return "";
 
-        final TableData extra = TableData.fromRows(result.getMissingRows());
-        return "\nmissing rows:\n" + TableRenderer.render(extra);
+        return "\nmissing rows:\n" + TableRenderer.render(result.getMissingRows());
     }
 
     private String missingColumnsReport() {

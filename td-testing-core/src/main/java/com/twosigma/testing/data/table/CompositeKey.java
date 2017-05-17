@@ -1,11 +1,13 @@
 package com.twosigma.testing.data.table;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.twosigma.testing.expectation.ActualPath;
 import com.twosigma.testing.expectation.equality.EqualComparator;
 import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Composite key to be used in structures like {@link TableData}. Keys comparison rules are dictated by {@link EqualComparatorHandler}.
@@ -14,8 +16,12 @@ import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
 public class CompositeKey {
     private List<Object> values;
 
-    public CompositeKey(List<Object> values) {
-        this.values = new ArrayList<>(values);
+    public CompositeKey(Stream<Object> values) {
+        this.values = values.collect(Collectors.toList());
+    }
+
+    public List<?> getValues() {
+        return Collections.unmodifiableList(values);
     }
 
     @Override
@@ -35,5 +41,10 @@ public class CompositeKey {
 
     public int hashCode() {
         return values.stream().map(Object::hashCode).reduce(0, (l, r) -> l * 31 + r);
+    }
+
+    @Override
+    public String toString() {
+        return "CompositeKey: " + values;
     }
 }

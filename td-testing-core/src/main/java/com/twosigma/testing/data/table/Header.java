@@ -14,9 +14,14 @@ public class Header {
     private Map<String, Integer> indexByName;
     private List<String> namesByIndex;
 
+    private List<String> keyNames;
+    private List<Integer> keyIdx;
+
     public Header(Stream<String> names) {
         this.indexByName = new HashMap<>();
         this.namesByIndex = new ArrayList<>();
+        this.keyNames = new ArrayList<>();
+        this.keyIdx = new ArrayList<>();
 
         names.forEach(this::add);
     }
@@ -33,14 +38,36 @@ public class Header {
         return namesByIndex.stream();
     }
 
+    public boolean hasKeyColumns() {
+        return ! keyNames.isEmpty();
+    }
+
+    public Stream<String> keyNames() {
+        return keyNames.stream();
+    }
+
+    public Stream<Integer> keyIdx() {
+        return keyIdx.stream();
+    }
+
     public IntStream columnIdxStream() {
         return IntStream.range(0, namesByIndex.size());
     }
 
-    private void add(String name) {
-        Integer previousIndex = indexByName.put(name, namesByIndex.size());
+    private void add(String nameWithMeta) {
+        boolean startsWithAsterisk = nameWithMeta.startsWith("*");
+
+        String name = startsWithAsterisk ? nameWithMeta.substring(1) : nameWithMeta;
+        int newIdx = namesByIndex.size();
+
+        if (startsWithAsterisk) {
+            keyNames.add(name);
+            keyIdx.add(newIdx);
+        }
+
+        Integer previousIndex = indexByName.put(name, newIdx);
         if (previousIndex != null) {
-            throw new IllegalStateException("header name '" + name + "' was already present. current header: " + name);
+            throw new IllegalStateException("getHeader name '" + name + "' was already present. current getHeader: " + name);
         }
 
         namesByIndex.add(name);
@@ -66,7 +93,7 @@ public class Header {
         return idx;
     }
 
-    void validateIdx(final int idx) {
+    void validateIdx(int idx) {
         if (idx < 0 || idx >= namesByIndex.size()) {
             throw new IllegalArgumentException("column idx " + idx + " is out of boundaries. header size is " +
                 namesByIndex.size() + ", header is " + namesByIndex);
