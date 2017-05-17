@@ -21,6 +21,7 @@
         <module>td-testing-webtau</module>
         <module>td-testing-webtau-groovy</module>
         <module>td-webtau-docs</module>
+        <module>td-ddjt-docs</module>
         <module>td-diagrams</module>
         <module>td-documentation</module>
         <module>td-documentation-core</module>
