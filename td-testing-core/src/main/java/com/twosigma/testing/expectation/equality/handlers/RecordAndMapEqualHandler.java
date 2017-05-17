@@ -32,7 +32,7 @@ public class RecordAndMapEqualHandler implements EqualComparatorHandler {
             final ActualPath propertyPath = actualPath.property(name);
 
             if (actualRecord.getHeader().has(name)) {
-                final Object actualValue = actualRecord.valueByName(name);
+                final Object actualValue = actualRecord.get(name);
                 final Object expectedValue = expectedMap.get(name);
                 equalComparator.compare(propertyPath, actualValue, expectedValue);
             } else {

@@ -102,7 +102,7 @@ public class TableRenderer {
         for (int lineIdx = 0; lineIdx < rowHeight; lineIdx++) {
             final int finalLineIdx = lineIdx;
             renderLine(style.bodyMidLeft(), style.bodyMidMid(), style.bodyMidRight(), " ",
-                (name) -> ((CellToRender) row.valueByName(name)).getLine(finalLineIdx));
+                (name) -> ((CellToRender) row.get(name)).getLine(finalLineIdx));
         }
 
         renderLine(style.bodyBotLeft(), style.bodyBotMid(), style.bodyBotRight(), style.bodyBotFill(), (name) -> "");

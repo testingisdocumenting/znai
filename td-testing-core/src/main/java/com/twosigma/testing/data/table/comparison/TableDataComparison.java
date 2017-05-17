@@ -73,7 +73,7 @@ public class TableDataComparison {
     }
 
     private void compare(int rowIdx, Record actual, Record expected) {
-        columnsToCompare.forEach(columnName -> compare(rowIdx, columnName, actual.valueByName(columnName), expected.valueByName(columnName)));
+        columnsToCompare.forEach(columnName -> compare(rowIdx, columnName, actual.get(columnName), expected.get(columnName)));
     }
 
     private void compare(int rowIdx, String columnName, Object actual, Object expected) {

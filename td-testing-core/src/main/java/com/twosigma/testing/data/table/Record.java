@@ -30,8 +30,9 @@ public class Record {
         return key;
     }
 
-    public Object valueByName(String name) {
-        return values.get(header.columnIdxByName(name));
+    @SuppressWarnings("unchecked")
+    public <E> E get(String name) {
+        return (E) values.get(header.columnIdxByName(name));
     }
 
     public Object valueByIdx(int idx) {
