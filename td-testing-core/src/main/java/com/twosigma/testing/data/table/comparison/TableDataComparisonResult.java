@@ -1,8 +1,6 @@
 package com.twosigma.testing.data.table.comparison;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -32,8 +30,8 @@ public class TableDataComparisonResult {
         messageByExpectedRowIdxAndColumn = new HashMap<>();
 
         missingColumns = new TreeSet<>();
-        missingRows = TableData.withHeader(expected.getHeader());
-        extraRows = TableData.withHeader(actual.getHeader());
+        missingRows = TableData.header(expected.getHeader());
+        extraRows = TableData.header(actual.getHeader());
     }
 
     public boolean areEqual() {
@@ -103,11 +101,7 @@ public class TableDataComparisonResult {
     }
 
     private void addMismatch(Map<Integer, Map<String, String>> messagesByRowIdx, int rowIdx, String columnName, String message) {
-        Map<String, String> byRow = messagesByRowIdx.get(rowIdx);
-        if (byRow == null) {
-            byRow = new HashMap<>();
-            messagesByRowIdx.put(rowIdx, byRow);
-        }
+        Map<String, String> byRow = messagesByRowIdx.computeIfAbsent(rowIdx, k -> new HashMap<>());
 
         byRow.put(columnName, message);
     }

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.twosigma.testing.data.ToMapConverters;
 import com.twosigma.testing.data.table.Header;
-import com.twosigma.testing.data.table.Record;
 import com.twosigma.testing.data.table.TableData;
 import com.twosigma.testing.data.table.comparison.TableDataComparison;
 import com.twosigma.testing.data.table.comparison.TableDataComparisonReport;
@@ -36,7 +35,7 @@ public class IterableAndTableDataEqualHandler implements EqualComparatorHandler 
     }
 
     private static TableData createTableFromList(Header expectedHeader, List actualList) {
-        final TableData actualTable = TableData.withHeader(expectedHeader.names());
+        final TableData actualTable = TableData.header(expectedHeader.getNames());
         for (Object actualRecord : actualList) {
             final Map<String, ?> actualMap = ToMapConverters.convert(actualRecord);
             actualTable.addRow(mapToList(expectedHeader, actualMap));
@@ -47,7 +46,7 @@ public class IterableAndTableDataEqualHandler implements EqualComparatorHandler 
 
     private static List<Object> mapToList(Header header, Map<String, ?> map) {
         List<Object> result = new ArrayList<>();
-        header.names().forEach(n -> result.add(map.get(n)));
+        header.getNames().forEach(n -> result.add(map.get(n)));
 
         return result;
     }

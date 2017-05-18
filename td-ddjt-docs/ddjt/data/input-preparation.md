@@ -41,7 +41,8 @@ Lets create *input* data required for a test.
 
 :include-java: com/twosigma/testing/MarginCalculatorWithoutApiTest.java {entry: "marginShouldBeZeroIfNoLotsSet"}
 
-What will happen to this test when we refactor `Transaction` class? Setters can be replaced with constructor or a *Builder* pattern.
+What will happen to this test when we refactor `Transaction` class? For example *setters* can be removed in favor of
+*Builder* pattern.
 
 Our test is not about how to create `Transaction` instances. It is a about **logic of margin calculation**.
 Our test must survive refactorings. 
@@ -60,4 +61,25 @@ on this core domain object.
 
 A few problems with the way we implemented `createTransaction`:
 * need to specify all the parameters
-* no visible parameter names 
+* no visible parameter names
+
+Instead lets define test data using `TableData`
+
+```tabs
+Groovy: :include-groovy: com/twosigma/testing/MarginCalculatorWithGroovyTableDataTest.groovy {entry: "margin should be zero if no lots set"}
+Java: :include-java: com/twosigma/testing/MarginCalculatorWithTableDataTest.java {entry: "marginShouldBeZeroIfNoLotsSet"}
+```
+
+`TableData` is a core class of this library. Consider it to be a list of maps on steroids. 
+Let's define `createTransaction` in terms of TableData.
+
+
+```tabs
+Groovy: :include-groovy: com/twosigma/testing/MarginCalculatorWithGroovyTableDataTest.groovy {entry: "createTransaction"}
+Java: :include-java: com/twosigma/testing/MarginCalculatorWithTableDataTest.java {entry: "createTransaction"}
+```
+
+Now we can:
+* focus on test data
+* skip properties and introduce defaults
+* perform refactoring on `Transaction`

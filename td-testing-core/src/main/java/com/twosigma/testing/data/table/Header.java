@@ -34,7 +34,7 @@ public class Header {
         return indexByName.containsKey(name);
     }
 
-    public Stream<String> names() {
+    public Stream<String> getNames() {
         return namesByIndex.stream();
     }
 
@@ -42,15 +42,15 @@ public class Header {
         return ! keyNames.isEmpty();
     }
 
-    public Stream<String> keyNames() {
+    public Stream<String> getKeyNames() {
         return keyNames.stream();
     }
 
-    public Stream<Integer> keyIdx() {
+    public Stream<Integer> getKeyIdx() {
         return keyIdx.stream();
     }
 
-    public IntStream columnIdxStream() {
+    public IntStream getColumnIdxStream() {
         return IntStream.range(0, namesByIndex.size());
     }
 
@@ -78,6 +78,16 @@ public class Header {
         return namesByIndex.get(idx);
     }
 
+
+    public int size() {
+        return namesByIndex.size();
+    }
+
+    @Override
+    public String toString() {
+        return namesByIndex.toString();
+    }
+
     /**
      * column index by column name
      * @param columnName column name to get index for
@@ -98,14 +108,5 @@ public class Header {
             throw new IllegalArgumentException("column idx " + idx + " is out of boundaries. header size is " +
                 namesByIndex.size() + ", header is " + namesByIndex);
         }
-    }
-
-    public int size() {
-        return namesByIndex.size();
-    }
-
-    @Override
-    public String toString() {
-        return namesByIndex.toString();
     }
 }

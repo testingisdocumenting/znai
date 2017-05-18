@@ -17,7 +17,7 @@ class TableDataExtension {
 
     static TableData call(List header, Closure tableDataCode) {
         try {
-            def tableData = TableData.withHeader(header.flatten().stream())
+            def tableData = TableData.header(header.flatten().stream())
 
             rows.set(new ArrayList<>())
 
@@ -38,7 +38,7 @@ class TableDataExtension {
 
     static class RowValues {
         private List<Object> values = []
-        public RowValues(a, b) {
+        RowValues(a, b) {
             values.add(a)
             values.add(b)
         }

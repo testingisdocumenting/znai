@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  * @author mykola
  */
 public class MarginCalculatorWithBasicEncapsulationTest {
-    MarginCalculator marginCalculator = new MarginCalculator();
+    private MarginCalculator marginCalculator = new MarginCalculator();
 
     @Test
     public void marginShouldBeZeroIfNoLotsSet() {

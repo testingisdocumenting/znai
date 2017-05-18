@@ -19,7 +19,7 @@ public class Record {
     public Record(Header header, Stream<Object> values) {
         this.header = header;
         this.values = values.collect(toList());
-        this.key = header.hasKeyColumns() ? new CompositeKey(header.keyIdx().map(this::valueByIdx)): null;
+        this.key = header.hasKeyColumns() ? new CompositeKey(header.getKeyIdx().map(this::get)): null;
     }
 
     public Header getHeader() {
@@ -35,9 +35,10 @@ public class Record {
         return (E) values.get(header.columnIdxByName(name));
     }
 
-    public Object valueByIdx(int idx) {
+    @SuppressWarnings("unchecked")
+    public <E> E get(int idx) {
         header.validateIdx(idx);
-        return values.get(idx);
+        return (E) values.get(idx);
     }
 
     public Stream<Object> values() {
@@ -51,7 +52,7 @@ public class Record {
 
     public Map<String, Object> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
-        header.columnIdxStream().forEach(i -> result.put(header.columnNameByIdx(i), values.get(i)));
+        header.getColumnIdxStream().forEach(i -> result.put(header.columnNameByIdx(i), values.get(i)));
 
         return result;
     }

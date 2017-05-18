@@ -37,8 +37,8 @@ public class TableDataComparison {
     }
 
     private void compareColumns() {
-        final Set<String> actualColumns = actual.getHeader().names().collect(toSet());
-        final Set<String> expectedColumns = expected.getHeader().names().collect(toSet());
+        final Set<String> actualColumns = actual.getHeader().getNames().collect(toSet());
+        final Set<String> expectedColumns = expected.getHeader().getNames().collect(toSet());
 
         columnsToCompare = expectedColumns.stream().filter(actualColumns::contains).collect(toSet());
         expectedColumns.stream().filter(c -> ! actualColumns.contains(c)).forEach(comparisonResult::addMissingColumn);

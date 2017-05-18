@@ -2,13 +2,11 @@ package com.twosigma.testing.data.table;
 
 import com.twosigma.utils.JsonUtils;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -20,15 +18,19 @@ public class TableData implements Iterable<Record> {
     private List<Record> rows;
     private Header header;
 
-    public static TableData withHeader(List<String> columnNames) {
+    public static TableData header(String... columnNames) {
+        return new TableData(Arrays.stream(columnNames));
+    }
+
+    public static TableData header(List<String> columnNames) {
         return new TableData(columnNames.stream());
     }
 
-    public static TableData withHeader(Stream<String> columnNames) {
+    public static TableData header(Stream<String> columnNames) {
         return new TableData(columnNames);
     }
 
-    public static TableData withHeader(Header header) {
+    public static TableData header(Header header) {
         return new TableData(header);
     }
 
@@ -47,6 +49,30 @@ public class TableData implements Iterable<Record> {
 
     public boolean isEmpty() {
         return rows.isEmpty();
+    }
+
+    /**
+     * combine with header to define TableData in pure Java
+     * @param values row values combined in one vararg
+     * @return instance of table data
+     */
+    public TableData values(Object... values) {
+        int numberOfRows = values.length / header.size();
+        int numberOfExtraValues = values.length % header.size();
+
+        if (numberOfExtraValues != 0) {
+            int startIdxOfExtraValues = numberOfRows * header.size();
+            throw new RuntimeException("unfinished row idx " + numberOfRows + ", header:  " + header + "\nvalues so far: " +
+                    Arrays.stream(values).skip(startIdxOfExtraValues).map(Object::toString).
+                            collect(joining(", ")));
+        }
+
+        int total = numberOfRows * header.size();
+        for (int i = 0; i < total; i += header.size()) {
+            addRow(Arrays.stream(values).skip(i).limit(header.size()));
+        }
+
+        return this;
     }
 
     public Record row(int rowIdx) {
@@ -85,12 +111,12 @@ public class TableData implements Iterable<Record> {
     @SuppressWarnings("unchecked")
     public <T, R> Stream<R> mapColumn(String columnName, Function<T, R> mapper) {
         final int idx = header.columnIdxByName(columnName);
-        return rows.stream().map(r -> mapper.apply((T) r.valueByIdx(idx)));
+        return rows.stream().map(r -> mapper.apply((T) r.get(idx)));
     }
 
     @SuppressWarnings("unchecked")
     private <T, R> Stream<Object> mapRow(final int rowIdx, final Record originalRow, final TableDataCellFunction mapper) {
-        return header.columnIdxStream().mapToObj(idx -> mapper.apply(rowIdx, idx, header.columnNameByIdx(idx), originalRow.valueByIdx(idx)));
+        return header.getColumnIdxStream().mapToObj(idx -> mapper.apply(rowIdx, idx, header.columnNameByIdx(idx), originalRow.get(idx)));
     }
 
     public Stream<Record> rowsStream() {
