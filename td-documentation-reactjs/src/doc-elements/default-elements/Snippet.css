@@ -12,11 +12,19 @@
     margin: 20px 0;
     padding: 0 10px;
     max-width: 700px;
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 18px;
 }
 
 pre code {
     border: none;
+}
+
+code {
+    border: none;
+    background-color: #fff;
+    color:#4b4f54;
+    font-size: 14px;
 }
 
 .wide-screen pre {
