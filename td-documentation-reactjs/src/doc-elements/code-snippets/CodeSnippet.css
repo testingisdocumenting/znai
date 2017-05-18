@@ -1,5 +1,9 @@
 .token.class-name {
-    font-weight: bold;
+    color: #383b3f;
+}
+
+.token.function {
+    color: #4b4f54;
 }
 
 .token.punctuation {
@@ -23,13 +27,18 @@
     color: #0000ff;
 }
 
+.token.keyword {
+    color: #000080;
+    font-weight: bold;
+}
+
 .token.string {
     color: #008000;
     font-weight: bold;
 }
 
 code {
-    border: 1px solid #eee;
+    border: none;
     background-color: #fff;
-    color: #009AA6;
+    color:#4b4f54;
 }
