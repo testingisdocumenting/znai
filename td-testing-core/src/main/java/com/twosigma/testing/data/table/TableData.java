@@ -62,7 +62,7 @@ public class TableData implements Iterable<Record> {
 
         if (numberOfExtraValues != 0) {
             int startIdxOfExtraValues = numberOfRows * header.size();
-            throw new RuntimeException("unfinished row idx " + numberOfRows + ", header:  " + header + "\nvalues so far: " +
+            throw new IllegalArgumentException("unfinished row idx " + numberOfRows + ", header:  " + header + "\nvalues so far: " +
                     Arrays.stream(values).skip(startIdxOfExtraValues).map(Object::toString).
                             collect(joining(", ")));
         }
@@ -111,7 +111,7 @@ public class TableData implements Iterable<Record> {
     @SuppressWarnings("unchecked")
     public <T, R> Stream<R> mapColumn(String columnName, Function<T, R> mapper) {
         final int idx = header.columnIdxByName(columnName);
-        return rows.stream().map(r -> mapper.apply((T) r.get(idx)));
+        return rows.stream().map(r -> mapper.apply(r.get(idx)));
     }
 
     @SuppressWarnings("unchecked")

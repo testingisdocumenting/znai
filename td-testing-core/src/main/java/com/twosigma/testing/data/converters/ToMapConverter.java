@@ -1,4 +1,4 @@
-package com.twosigma.testing.data;
+package com.twosigma.testing.data.converters;
 
 import java.util.Map;
 

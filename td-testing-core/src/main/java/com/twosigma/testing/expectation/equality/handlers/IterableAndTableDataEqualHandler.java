@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.twosigma.testing.data.ToMapConverters;
+import com.twosigma.testing.data.converters.ToMapConverters;
 import com.twosigma.testing.data.table.Header;
 import com.twosigma.testing.data.table.TableData;
 import com.twosigma.testing.data.table.comparison.TableDataComparison;

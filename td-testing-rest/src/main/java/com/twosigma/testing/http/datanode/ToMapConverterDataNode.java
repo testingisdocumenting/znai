@@ -2,7 +2,7 @@ package com.twosigma.testing.http.datanode;
 
 import java.util.Map;
 
-import com.twosigma.testing.data.ToMapConverter;
+import com.twosigma.testing.data.converters.ToMapConverter;
 
 /**
  * @author mykola
