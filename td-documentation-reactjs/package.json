@@ -49,7 +49,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "codemirror": "^5.22.0",
-    "lunr": "alpha",
+    "lunr": "2.0.3",
     "mark.js": "github:julmot/mark.js",
     "prismjs": "^1.6.0",
     "promise": "^7.1.1",
