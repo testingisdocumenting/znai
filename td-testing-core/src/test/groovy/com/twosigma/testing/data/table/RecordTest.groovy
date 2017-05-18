@@ -3,7 +3,7 @@ package com.twosigma.testing.data.table
 import org.junit.Test
 
 import static com.twosigma.testing.expectation.ActualValue.actual
-import static com.twosigma.testing.expectation.Matchers.equal
+import static com.twosigma.testing.Ddjt.equal
 
 /**
  * @author mykola

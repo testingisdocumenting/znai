@@ -16,6 +16,9 @@ public class ActualCode implements ActualCodeExpectations {
 
     @Override
     public void should(final CodeMatcher codeMatcher) {
-        actual.execute();
+        boolean matches = codeMatcher.matches(actual);
+        if (! matches) {
+            throw new AssertionError("\n" + codeMatcher.mismatchedMessage(actual));
+        }
     }
 }

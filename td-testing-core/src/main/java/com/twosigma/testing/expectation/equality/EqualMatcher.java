@@ -11,12 +11,8 @@ public class EqualMatcher implements ValueMatcher {
     private EqualComparator equalComparator;
     private Object expected;
 
-    private EqualMatcher(Object expected) {
+    public EqualMatcher(Object expected) {
         this.expected = expected;
-    }
-
-    public static EqualMatcher equal(Object expected) {
-        return new EqualMatcher(expected);
     }
 
     @Override

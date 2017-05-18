@@ -1,5 +1,6 @@
 package com.twosigma.testing.webtau.page;
 
+import com.twosigma.testing.Ddjt;
 import com.twosigma.testing.expectation.equality.EqualMatcher;
 
 import java.util.function.BiConsumer;
@@ -17,7 +18,7 @@ class ShouldAndWaitProperty<E> {
     }
 
     public boolean equals(Object expected) {
-        shouldHandler.accept(actual, EqualMatcher.equal(expected));
+        shouldHandler.accept(actual, Ddjt.equal(expected));
         return true;
     }
 }

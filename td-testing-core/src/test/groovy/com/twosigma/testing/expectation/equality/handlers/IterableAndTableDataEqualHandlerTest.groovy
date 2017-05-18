@@ -6,7 +6,7 @@ import org.junit.Test
 import static com.twosigma.testing.data.table.TableData.header
 import static com.twosigma.testing.expectation.ActualPath.createActualPath
 import static com.twosigma.testing.expectation.ActualValue.actual
-import static com.twosigma.testing.expectation.Matchers.equal
+import static com.twosigma.testing.Ddjt.equal
 
 /**
  * @author mykola

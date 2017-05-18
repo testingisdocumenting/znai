@@ -4,8 +4,7 @@ import com.twosigma.testing.data.DummyLiveValue
 import com.twosigma.testing.expectation.timer.DummyExpectationTimer
 import org.junit.Test
 
-import static com.twosigma.testing.expectation.Matchers.equal
-
+import static com.twosigma.testing.Ddjt.equal
 
 /**
  * @author mykola
