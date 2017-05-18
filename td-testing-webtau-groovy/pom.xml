@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.twosigma.td</groupId>
-            <artifactId>td-testing-webui</artifactId>
+            <artifactId>td-testing-webtau</artifactId>
             <version>${project.version}</version>
         </dependency>
 
