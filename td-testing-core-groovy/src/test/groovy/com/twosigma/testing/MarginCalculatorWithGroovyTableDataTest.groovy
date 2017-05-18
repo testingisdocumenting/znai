@@ -16,11 +16,11 @@ class MarginCalculatorWithGroovyTableDataTest {
                                  "SYM.B" |     0 |     8
                                  "SYM.C" |     0 |    19 }
 
-        def margin = marginCalculator.calculate(createTransaction(transactionsData))
+        def margin = marginCalculator.calculate(createTransactions(transactionsData))
         margin.should == 0
     }
 
-    private static List<Transaction> createTransaction(TableData tableData) {
+    private static List<Transaction> createTransactions(TableData tableData) {
         tableData.collect {
             new Transaction(symbol: it.symbol, lot: it.lot, price: it.price)
         }

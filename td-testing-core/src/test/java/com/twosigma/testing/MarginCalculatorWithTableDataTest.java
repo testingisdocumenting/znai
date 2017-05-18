@@ -21,11 +21,11 @@ public class MarginCalculatorWithTableDataTest {
                                              "SYM.B",  0.0,    8.0,
                                              "SYM.C",  0.0,    19.0);
 
-        double margin = marginCalculator.calculate(createTransaction(transactionsData));
+        double margin = marginCalculator.calculate(createTransactions(transactionsData));
         assertEquals(0, margin, 0.0000001);
     }
 
-    private static List<Transaction> createTransaction(TableData tableData) {
+    private static List<Transaction> createTransactions(TableData tableData) {
         return tableData.rowsStream().map(r -> {
             Transaction t = new Transaction();
             t.setSymbol(r.get("symbol"));

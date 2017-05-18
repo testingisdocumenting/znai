@@ -31,10 +31,6 @@ This version is much easier to test:
 * Less mocks/stubs
 * Less wiring
 
-This is how list could be created in Java
-
-:include-java: com/twosigma/testing/MarginCalculator.java {entry: "calculate"}
-
 # Input Encapsulation
 
 Lets create *input* data required for a test.
@@ -75,8 +71,8 @@ Let's define `createTransaction` in terms of TableData.
 
 
 ```tabs
-Groovy: :include-groovy: com/twosigma/testing/MarginCalculatorWithGroovyTableDataTest.groovy {entry: "createTransaction"}
-Java: :include-java: com/twosigma/testing/MarginCalculatorWithTableDataTest.java {entry: "createTransaction"}
+Groovy: :include-groovy: com/twosigma/testing/MarginCalculatorWithGroovyTableDataTest.groovy {entry: "createTransactions"}
+Java: :include-java: com/twosigma/testing/MarginCalculatorWithTableDataTest.java {entry: "createTransactions"}
 ```
 
 Now we can:
