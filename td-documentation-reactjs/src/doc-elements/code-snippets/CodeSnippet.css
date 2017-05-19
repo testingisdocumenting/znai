@@ -3,7 +3,7 @@
 }
 
 .token.function {
-    color: #4b4f54;
+    color: #805020;
 }
 
 .token.punctuation {
@@ -11,7 +11,8 @@
 }
 
 .token.title {
-    color: #009AA6;
+    color: #383b3f;
+    font-weight: bold;
 }
 
 .token.code {
