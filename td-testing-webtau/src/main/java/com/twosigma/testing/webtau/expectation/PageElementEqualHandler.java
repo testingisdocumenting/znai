@@ -6,6 +6,8 @@ import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
 import com.twosigma.testing.webtau.page.ElementValue;
 import com.twosigma.testing.webtau.page.PageElement;
 
+import static com.twosigma.testing.Ddjt.createActualPath;
+
 /**
  * @author mykola
  */
@@ -21,6 +23,6 @@ public class PageElementEqualHandler implements EqualComparatorHandler {
         ElementValue elementValue = actualPageElement.elementValue();
         Object actualValue = elementValue.get();
 
-        equalComparator.compare(ActualPath.createActualPath(elementValue.getName()), actualValue, expected);
+        equalComparator.compare(createActualPath(elementValue.getName()), actualValue, expected);
     }
 }

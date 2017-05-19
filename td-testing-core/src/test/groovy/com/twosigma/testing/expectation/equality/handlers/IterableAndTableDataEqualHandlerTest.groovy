@@ -3,10 +3,7 @@ package com.twosigma.testing.expectation.equality.handlers
 import com.twosigma.testing.expectation.equality.EqualComparator
 import org.junit.Test
 
-import static com.twosigma.testing.data.table.TableData.header
-import static com.twosigma.testing.expectation.ActualPath.createActualPath
-import static com.twosigma.testing.expectation.ActualValue.actual
-import static com.twosigma.testing.Ddjt.equal
+import static com.twosigma.testing.Ddjt.*
 
 /**
  * @author mykola

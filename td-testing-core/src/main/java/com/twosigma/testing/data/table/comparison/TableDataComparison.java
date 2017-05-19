@@ -7,6 +7,7 @@ import com.twosigma.testing.data.table.TableData;
 import com.twosigma.testing.expectation.ActualPath;
 import com.twosigma.testing.expectation.equality.EqualComparator;
 
+import static com.twosigma.testing.Ddjt.createActualPath;
 import static java.util.stream.Collectors.toSet;
 
 /**
@@ -78,7 +79,7 @@ public class TableDataComparison {
 
     private void compare(int rowIdx, String columnName, Object actual, Object expected) {
         final EqualComparator ec = EqualComparator.comparator();
-        ec.compare(ActualPath.createActualPath(columnName), actual, expected);
+        ec.compare(createActualPath(columnName), actual, expected);
 
         if (ec.areEqual())
             return;

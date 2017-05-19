@@ -2,7 +2,7 @@ package com.twosigma.testing.data.table
 
 import org.junit.Test
 
-import static com.twosigma.testing.data.table.TableData.header
+import static com.twosigma.testing.Ddjt.header
 
 /**
  * @author mykola

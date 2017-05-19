@@ -1,9 +1,11 @@
 package com.twosigma.testing.expectation.equality.handlers
 
-import com.twosigma.testing.expectation.ActualPath
+import com.twosigma.testing.Ddjt
 import com.twosigma.testing.expectation.equality.EqualComparator
 import org.junit.Before
 import org.junit.Test
+
+import static com.twosigma.testing.Ddjt.createActualPath
 import static org.junit.Assert.assertEquals
 
 
@@ -29,7 +31,7 @@ class MapAndBeanEqualHandlerTest {
 
     @Test
     void "should only check explicitly specified properties"() {
-        def result = equalComparator.compare(ActualPath.createActualPath("bean"),
+        def result = equalComparator.compare(createActualPath("bean"),
                 new SmallBean(), [price: 120, name: "n2"])
 
         def report = equalComparator.generateMismatchReport()

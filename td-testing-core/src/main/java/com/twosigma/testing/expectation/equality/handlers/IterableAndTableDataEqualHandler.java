@@ -35,7 +35,7 @@ public class IterableAndTableDataEqualHandler implements EqualComparatorHandler 
     }
 
     private static TableData createTableFromList(Header expectedHeader, List actualList) {
-        final TableData actualTable = TableData.header(expectedHeader.getNames());
+        final TableData actualTable = new TableData(expectedHeader.getNames());
         for (Object actualRecord : actualList) {
             final Map<String, ?> actualMap = ToMapConverters.convert(actualRecord);
             actualTable.addRow(mapToList(expectedHeader, actualMap));

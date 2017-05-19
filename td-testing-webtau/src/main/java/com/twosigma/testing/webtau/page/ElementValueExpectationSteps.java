@@ -1,11 +1,11 @@
 package com.twosigma.testing.webtau.page;
 
-import com.twosigma.testing.expectation.ActualValue;
 import com.twosigma.testing.expectation.ValueMatcher;
 import com.twosigma.testing.expectation.timer.ExpectationTimer;
 import com.twosigma.testing.reporter.TestStep;
 import com.twosigma.testing.reporter.TokenizedMessage;
 
+import static com.twosigma.testing.Ddjt.actual;
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
 import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.*;
 
@@ -19,27 +19,27 @@ class ElementValueExpectationSteps {
     public static void shouldStep(PageElement owner, ElementValue<?> value, TokenizedMessage valueDescription, ValueMatcher valueMatcher) {
         expectationStep(owner, value, valueDescription, valueMatcher, false,
                 tokenizedMessage(action("expecting")),
-                () -> ActualValue.actual(value).should(valueMatcher));
+                () -> actual(value).should(valueMatcher));
     }
 
     public static void shouldNotStep(PageElement owner, ElementValue<?> value, TokenizedMessage valueDescription, ValueMatcher valueMatcher) {
         expectationStep(owner, value, valueDescription, valueMatcher, true,
                 tokenizedMessage(action("expecting")),
-                () -> ActualValue.actual(value).shouldNot(valueMatcher));
+                () -> actual(value).shouldNot(valueMatcher));
     }
 
     public static void waitStep(PageElement owner, ElementValue<?> value, TokenizedMessage valueDescription, ValueMatcher valueMatcher,
                                 ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
         expectationStep(owner, value, valueDescription, valueMatcher, false,
                 tokenizedMessage(action("waiting"), TO),
-                () -> ActualValue.actual(value).waitTo(valueMatcher, expectationTimer, tickMillis, timeOutMillis));
+                () -> actual(value).waitTo(valueMatcher, expectationTimer, tickMillis, timeOutMillis));
     }
 
     public static void waitNotStep(PageElement owner, ElementValue<?> value, TokenizedMessage valueDescription, ValueMatcher valueMatcher,
                                 ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
         expectationStep(owner, value, valueDescription, valueMatcher, true,
                 tokenizedMessage(action("waiting"), TO),
-                () -> ActualValue.actual(value).waitToNot(valueMatcher, expectationTimer, tickMillis, timeOutMillis));
+                () -> actual(value).waitToNot(valueMatcher, expectationTimer, tickMillis, timeOutMillis));
     }
 
     private static void expectationStep(PageElement owner, ElementValue<?> value, TokenizedMessage elementDescription,

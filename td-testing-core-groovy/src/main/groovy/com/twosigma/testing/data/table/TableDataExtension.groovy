@@ -17,7 +17,7 @@ class TableDataExtension {
 
     static TableData call(List header, Closure tableDataCode) {
         try {
-            def tableData = TableData.header(header.flatten().stream())
+            def tableData = new TableData(header.flatten().stream())
 
             rows.set(new ArrayList<>())
 

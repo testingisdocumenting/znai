@@ -1,7 +1,6 @@
 package com.twosigma.testing.http.datanode
 
 import com.twosigma.testing.http.HttpTestListeners
-import com.twosigma.testing.http.datacoverage.DataNodeToMapOfValuesConverter
 import com.twosigma.testing.http.render.DataNodeRenderer
 import com.twosigma.testing.http.testserver.TestServer
 import com.twosigma.testing.http.testserver.TestServerJsonResponse

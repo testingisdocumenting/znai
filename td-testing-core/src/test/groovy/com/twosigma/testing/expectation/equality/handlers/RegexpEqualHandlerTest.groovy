@@ -2,8 +2,7 @@ package com.twosigma.testing.expectation.equality.handlers
 
 import org.junit.Test
 
-import static com.twosigma.testing.expectation.ActualValue.actual
-import static com.twosigma.testing.Ddjt.equal
+import static com.twosigma.testing.Ddjt.*
 
 /**
  * @author mykola

@@ -5,7 +5,7 @@ import com.twosigma.testing.expectation.timer.ExpectationTimer;
 
 import java.util.function.Function;
 
-import static com.twosigma.testing.expectation.ActualPath.createActualPath;
+import static com.twosigma.testing.Ddjt.createActualPath;
 
 /**
  * @author mykola
@@ -13,11 +13,7 @@ import static com.twosigma.testing.expectation.ActualPath.createActualPath;
 public class ActualValue implements ActualValueExpectations {
     private Object actual;
 
-    public static ActualValueExpectations actual(Object actual) {
-        return new ActualValue(actual);
-    }
-
-    private ActualValue(Object actual) {
+    public ActualValue(Object actual) {
         this.actual = actual;
     }
 

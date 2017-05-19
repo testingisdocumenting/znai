@@ -18,27 +18,15 @@ public class TableData implements Iterable<Record> {
     private List<Record> rows;
     private Header header;
 
-    public static TableData header(String... columnNames) {
-        return new TableData(Arrays.stream(columnNames));
+    public TableData(List<String> columnNames) {
+        this(new Header(columnNames.stream()));
     }
 
-    public static TableData header(List<String> columnNames) {
-        return new TableData(columnNames.stream());
-    }
-
-    public static TableData header(Stream<String> columnNames) {
-        return new TableData(columnNames);
-    }
-
-    public static TableData header(Header header) {
-        return new TableData(header);
-    }
-
-    private TableData(Stream<String> columnNames) {
+    public TableData(Stream<String> columnNames) {
         this(new Header(columnNames));
     }
 
-    private TableData(Header header) {
+    public TableData(Header header) {
         this.header = header;
         this.rows = new ArrayList<>();
     }

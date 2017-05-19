@@ -1,8 +1,8 @@
 package com.twosigma.testing.data.render
 
-import com.twosigma.testing.data.table.TableData
 import org.junit.Test
 
+import static com.twosigma.testing.Ddjt.header
 import static org.junit.Assert.assertEquals
 
 /**
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals
 class TableDataRenderTest {
     @Test
     void "should determine width for each column"() {
-        def t = TableData.header(["Column A", "CB", "Column C"])
+        def t = header("Column A", "CB", "Column C")
         t.addRow(["long line of text\nspread across multiple\nlines", "A", "test"])
         t.addRow(["little bit", "CC", "some more\nin two lines"])
 

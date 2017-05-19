@@ -6,11 +6,7 @@ package com.twosigma.testing.expectation;
 public class ActualPath {
     private String path;
 
-    public static ActualPath createActualPath(String path) {
-        return new ActualPath(path);
-    }
-
-    private ActualPath(String path) {
+    public ActualPath(String path) {
         if (path == null) {
             throw new IllegalArgumentException("path cannot be null");
         }

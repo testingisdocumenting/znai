@@ -1,9 +1,11 @@
 package com.twosigma.testing;
 
+import com.twosigma.testing.data.table.TableData;
 import com.twosigma.testing.expectation.*;
 import com.twosigma.testing.expectation.code.ThrowExceptionMatcher;
 import com.twosigma.testing.expectation.equality.EqualMatcher;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
@@ -14,6 +16,22 @@ import java.util.regex.Pattern;
  */
 public class Ddjt {
     private Ddjt() {
+    }
+
+    public static TableData header(String... columnNames) {
+        return new TableData(Arrays.stream(columnNames));
+    }
+
+    public static ActualValueExpectations actual(Object actual) {
+        return new ActualValue(actual);
+    }
+
+    public static ActualCodeExpectations code(CodeBlock codeBlock) {
+        return ActualCode.code(codeBlock);
+    }
+
+    public static EqualMatcher equal(Object expected) {
+        return new EqualMatcher(expected);
     }
 
     public static ThrowExceptionMatcher throwException(String expectedMessage) {
@@ -37,18 +55,6 @@ public class Ddjt {
     }
 
     public static ActualPath createActualPath(String path) {
-        return ActualPath.createActualPath(path);
-    }
-
-    public static ActualValueExpectations actual(Object actual) {
-        return ActualValue.actual(actual);
-    }
-
-    public static ActualCodeExpectations code(CodeBlock codeBlock) {
-        return ActualCode.code(codeBlock);
-    }
-
-    public static EqualMatcher equal(Object expected) {
-        return new EqualMatcher(expected);
+        return new ActualPath(path);
     }
 }

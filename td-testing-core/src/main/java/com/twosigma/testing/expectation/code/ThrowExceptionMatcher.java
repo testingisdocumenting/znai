@@ -6,7 +6,7 @@ import com.twosigma.testing.expectation.equality.EqualComparator;
 
 import java.util.regex.Pattern;
 
-import static com.twosigma.testing.expectation.ActualPath.createActualPath;
+import static com.twosigma.testing.Ddjt.createActualPath;
 
 /**
  * @author mykola

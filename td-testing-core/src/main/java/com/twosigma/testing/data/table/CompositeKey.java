@@ -1,6 +1,5 @@
 package com.twosigma.testing.data.table;
 
-import com.twosigma.testing.expectation.ActualPath;
 import com.twosigma.testing.expectation.equality.EqualComparator;
 import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
 
@@ -8,6 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static com.twosigma.testing.Ddjt.createActualPath;
 
 /**
  * Composite key to be used in structures like {@link TableData}. Keys comparison rules are dictated by {@link EqualComparatorHandler}.
@@ -34,7 +35,7 @@ public class CompositeKey {
 
         final List<Object> otherValues = ((CompositeKey) other).values;
         final EqualComparator ec = EqualComparator.comparator();
-        ec.compare(ActualPath.createActualPath(""), values, otherValues);
+        ec.compare(createActualPath(""), values, otherValues);
 
         return ec.areEqual();
     }

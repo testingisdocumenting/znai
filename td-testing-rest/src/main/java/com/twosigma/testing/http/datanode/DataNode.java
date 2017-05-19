@@ -1,12 +1,13 @@
 package com.twosigma.testing.http.datanode;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.twosigma.testing.data.traceable.TraceableValue;
 import com.twosigma.testing.expectation.ActualPath;
 import com.twosigma.testing.expectation.ActualPathAware;
+
+import java.util.List;
+import java.util.Map;
+
+import static com.twosigma.testing.Ddjt.createActualPath;
 
 /**
  * @author mykola
@@ -27,6 +28,6 @@ public interface DataNode extends ActualPathAware {
 
     @Override
     default ActualPath actualPath() {
-        return ActualPath.createActualPath(id().getPath());
+        return createActualPath(id().getPath());
     }
 }

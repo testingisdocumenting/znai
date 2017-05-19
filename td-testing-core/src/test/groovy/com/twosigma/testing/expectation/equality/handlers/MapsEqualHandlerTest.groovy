@@ -1,11 +1,11 @@
 package com.twosigma.testing.expectation.equality.handlers
 
-import com.twosigma.testing.expectation.ActualPath
 import com.twosigma.testing.expectation.equality.EqualComparator
 import com.twosigma.testing.expectation.equality.EqualComparatorHandler
 import org.junit.Before
 import org.junit.Test
 
+import static com.twosigma.testing.Ddjt.createActualPath
 import static org.junit.Assert.assertEquals
 
 /**
@@ -31,7 +31,7 @@ class MapsEqualHandlerTest {
 
     @Test
     void "should report missing keys on both sides"() {
-        equalComparator.compare(ActualPath.createActualPath("map"),
+        equalComparator.compare(createActualPath("map"),
                 [k6: 'v1', k2: [k21: 'v21'], k3: 'v3'],
                 [k1: 'v1', k2: [k22: 'v21'], k3: 'v3-'])
 

@@ -4,7 +4,7 @@ import com.twosigma.testing.data.DummyLiveValue
 import com.twosigma.testing.expectation.timer.DummyExpectationTimer
 import org.junit.Test
 
-import static com.twosigma.testing.Ddjt.equal
+import static com.twosigma.testing.Ddjt.*
 
 /**
  * @author mykola
@@ -16,24 +16,24 @@ class ActualValueTest {
     @Test
     void "waitTo retries matcher till success"() {
         def expectationTimer = new DummyExpectationTimer(10)
-        ActualValue.actual(liveValue).waitTo(equal(1000), expectationTimer, 1000, 10)
+        actual(liveValue).waitTo(equal(1000), expectationTimer, 1000, 10)
     }
 
     @Test(expected = AssertionError)
     void "waitTo fails when timer times out"() {
         def expectationTimer = new DummyExpectationTimer(2)
-        ActualValue.actual(liveValue).waitTo(equal(2000), expectationTimer, 1000, 10)
+        actual(liveValue).waitTo(equal(2000), expectationTimer, 1000, 10)
     }
 
     @Test
     void "waitToNot retries matcher till success"() {
         def expectationTimer = new DummyExpectationTimer(10)
-        ActualValue.actual(liveValue).waitToNot(equal(1), expectationTimer, 1000, 10)
+        actual(liveValue).waitToNot(equal(1), expectationTimer, 1000, 10)
     }
 
     @Test(expected = AssertionError)
     void "waitToNot fails when timer times out"() {
         def expectationTimer = new DummyExpectationTimer(2)
-        ActualValue.actual(ones).waitToNot(equal(1), expectationTimer, 1000, 10)
+        actual(ones).waitToNot(equal(1), expectationTimer, 1000, 10)
     }
 }

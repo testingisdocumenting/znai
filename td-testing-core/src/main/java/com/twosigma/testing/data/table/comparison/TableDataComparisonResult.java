@@ -30,8 +30,8 @@ public class TableDataComparisonResult {
         messageByExpectedRowIdxAndColumn = new HashMap<>();
 
         missingColumns = new TreeSet<>();
-        missingRows = TableData.header(expected.getHeader());
-        extraRows = TableData.header(actual.getHeader());
+        missingRows = new TableData(expected.getHeader());
+        extraRows = new TableData(actual.getHeader());
     }
 
     public boolean areEqual() {
