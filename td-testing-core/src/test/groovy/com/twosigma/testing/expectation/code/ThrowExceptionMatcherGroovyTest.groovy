@@ -98,7 +98,7 @@ class ThrowExceptionMatcherGroovyTest {
 
         code {
             businessLogic(-10)
-        } should throwException(IllegalArgumentException, ~/negative .* not allowed/)
+        } should throwException(IllegalArgumentException, ~/negative.*not allowed/)
 
         code {
             businessLogic(-10)

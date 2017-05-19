@@ -1,6 +1,6 @@
 package com.twosigma.testing.expectation
 
-import com.twosigma.testing.expectation.equality.EqualMatcher
+import com.twosigma.testing.Ddjt
 
 /**
  * @author mykola
@@ -17,7 +17,7 @@ class Should {
         // TODO later replace with AST
         // this method will only have exception
         // also this won't work if actual is null as it won't even reach this place
-        ActualValue.actual(actual).should(EqualMatcher.equal(expected))
+        ActualValue.actual(actual).should(Ddjt.equal(expected))
         return true
 
         // throw new IllegalStateException("should not reach this place")
