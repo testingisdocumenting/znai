@@ -34,6 +34,7 @@
         <module>td-documentation-client</module>
         <module>td-documentation-cli</module>
         <module>td-ts-dist</module>
+        <module>td-ts-ddjt</module>
     </modules>
 
     <properties>
