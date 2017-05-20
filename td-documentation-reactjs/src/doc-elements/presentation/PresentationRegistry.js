@@ -1,13 +1,13 @@
 import React from 'react'
 
 class PresentationRegistry {
-    constructor(elementsLibrary, presentationElementHandlers, page) {
+    constructor(elementsLibrary, presentationElementHandlers, content) {
         this.elementsLibrary = elementsLibrary
         this.presentationElementHandlers = presentationElementHandlers
         this.numberOfSlides_ = 0
         this.slideComponents = []
 
-        this.registerComponent_(page)
+        this.registerComponents_(content)
     }
 
     get numberOfSlides() {

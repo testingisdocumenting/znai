@@ -1,0 +1,33 @@
+blockquote {
+    font-size: 16px;
+}
+
+.presentation blockquote {
+    max-width: 400px;
+    margin: 0;
+    font-size: 20px;
+    background-color: #fafafa;
+}
+
+.presentation .slide-area blockquote {
+    display: none;
+}
+
+.presentation .slide-area.appeared blockquote {
+    display: block;
+    animation: blockquote-presentation-appear;
+    animation-fill-mode:forwards;
+    animation-duration: 1.5s;
+}
+
+@keyframes blockquote-presentation-appear {
+    from {
+        border-left: 4px #EEE solid;
+        padding: 10px 20px 10px 120px;
+        max-width: 500px;
+    }
+    to {
+        border-left: 4px #009AA6 solid;
+        padding: 10px 20px 10px 20px;
+    }
+}

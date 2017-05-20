@@ -16,9 +16,10 @@ class Presentation extends Component {
 
     render() {
         const {presentationRegistry} = this.props
-        const {currentSlideIdx, scaleRatio} = this.state
+        const {currentSlideIdx, isAppeared, scaleRatio} = this.state
         const slideAreaStyle = {transform: 'scale(' + scaleRatio + ')'}
 
+        const slideClassName = "slide-area" + (isAppeared ? " appeared": "")
         const component = presentationRegistry.componentToRender(currentSlideIdx)
         // const showNextButton = currentSlideIdx >= presentationRegistry.numberOfSlides - 1 TODO
 
@@ -27,7 +28,7 @@ class Presentation extends Component {
             <div className="slide-number">
                 {currentSlideIdx + 1}/{presentationRegistry.numberOfSlides}
             </div>
-            <div className="slide-area" style={slideAreaStyle} ref={(n) => this.componentDom = n}>
+            <div className={slideClassName} style={slideAreaStyle} ref={(n) => this.componentDom = n}>
                 {component}
             </div>
         </div>)
@@ -35,12 +36,12 @@ class Presentation extends Component {
 
     componentDidMount() {
         document.addEventListener('keydown', this.keyDownHandler)
-        this.updateScaleRatio()
+        this.updateSlide()
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.currentSlideIdx !== this.state.currentSlideIdx) {
-            this.updateScaleRatio()
+            this.updateSlide()
         }
     }
 
@@ -56,6 +57,11 @@ class Presentation extends Component {
         }
     }
 
+    updateSlide() {
+        this.updateScaleRatio()
+        this.updateAnimation()
+    }
+
     updateScaleRatio() {
         const width = this.componentDom.offsetWidth
         const height = this.componentDom.offsetHeight
@@ -68,27 +74,34 @@ class Presentation extends Component {
         this.setState({scaleRatio})
     }
 
+    updateAnimation() {
+        setTimeout(() => {
+            this.setState({isAppeared: true})
+        }, 0)
+    }
+
     keyDownHandler(e) {
         const {presentationRegistry, onNextPage, onPrevPage} = this.props
-        let {currentSlideIdx} = this.state
+        const {currentSlideIdx} = this.state
+        let newSlideIdx = currentSlideIdx
 
         if (e.key === 'ArrowRight') {
-            currentSlideIdx += 1
+            newSlideIdx += 1
         } else if (e.key === 'ArrowLeft') {
-            currentSlideIdx -= 1
+            newSlideIdx -= 1
         } else if (e.key === 'Escape') {
             this.onClose()
             return
         }
 
-        if (currentSlideIdx < 0) {
+        if (newSlideIdx < 0) {
             this.scrollToLastWithinPage = true
             onPrevPage()
-        } else if (currentSlideIdx >= presentationRegistry.numberOfSlides) {
-            this.setState({currentSlideIdx: 0, scaleRatio: defaultScaleRatio})
+        } else if (newSlideIdx >= presentationRegistry.numberOfSlides) {
+            this.setState({currentSlideIdx: 0, scaleRatio: defaultScaleRatio, isAppeared: false})
             onNextPage()
-        } else {
-            this.setState({currentSlideIdx, scaleRatio: defaultScaleRatio})
+        } else if (newSlideIdx !== currentSlideIdx) {
+            this.setState({currentSlideIdx: newSlideIdx, scaleRatio: defaultScaleRatio, isAppeared: false})
         }
     }
 

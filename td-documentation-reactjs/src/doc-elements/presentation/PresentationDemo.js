@@ -5,9 +5,28 @@ import {elementsLibrary, presentationElementHandlers} from '../DefaultElementsLi
 import Presentation from './Presentation'
 import PresentationRegistry from './PresentationRegistry'
 
-import testData from '../TestData'
+const content = [
+    {
+        "type": "Paragraph",
+        "content": [
+            {
+                "content": [{"text": "test etest", type: "SimpleText"}],
+                "type": "BlockQuote"
+            },
+        ]
+    },
+    {
+        "type": "Paragraph",
+        "content": [
+            {
+                "content": [{"text": "long long block quote. long long block quote. long long block quote. long long block quote. long long block quote. long long block quote", type: "SimpleText"}],
+                "type": "BlockQuote"
+            },
+        ]
+    }
+]
 
-const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, testData.documentation.page.content)
+const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, content)
 const PresentationDemo = (props) => <Presentation presentationRegistry={registry}/>
 
 export default PresentationDemo
