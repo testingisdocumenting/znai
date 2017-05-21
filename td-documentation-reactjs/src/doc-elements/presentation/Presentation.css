@@ -28,6 +28,10 @@
     width: auto;
 }
 
+.presentation .paragraph {
+    margin: 0;
+}
+
 .presentation .snippet,
 .presentation .json,
 .presentation .latex-math {

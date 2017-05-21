@@ -5,7 +5,7 @@ import {elementsLibrary, presentationElementHandlers} from '../DefaultElementsLi
 import Presentation from './Presentation'
 import PresentationRegistry from './PresentationRegistry'
 
-const content = [
+const quoteContent = [
     {
         "type": "Paragraph",
         "content": [
@@ -26,7 +26,45 @@ const content = [
     }
 ]
 
-const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, content)
+const bulletContent = [
+    {
+        "bulletMarker": "*",
+        "tight": true,
+        "type": "BulletList",
+        "content": [
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "users\u0027 time lost",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "reputation damage",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
+
+const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, bulletContent)
 const PresentationDemo = (props) => <Presentation presentationRegistry={registry}/>
 
 export default PresentationDemo
