@@ -13,9 +13,14 @@ public class TableDataRenderer
 
     @Override
     public String render(final Object data) {
-        if (! (data instanceof TableData))
-            return null;
+        return (data instanceof TableData)
+                ? "\n" + TableRenderer.render((TableData) data, renderStyle)
+                : null;
 
-        return "\n" + TableRenderer.render((TableData) data, renderStyle);
+//        if (! (data instanceof TableData)) {
+//            return null;
+//        }
+//
+//        return "\n" + TableRenderer.render((TableData) data, renderStyle);
     }
 }
