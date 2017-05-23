@@ -1,1 +1,2 @@
 com.twosigma.documentation.extensions.include.FileIncludePlugin
+com.twosigma.documentation.extensions.meta.MetaIncludePlugin

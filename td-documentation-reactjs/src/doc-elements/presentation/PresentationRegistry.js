@@ -29,7 +29,7 @@ class PresentationRegistry {
         const props = item
 
         if (type === 'Meta') {
-            this.renderingMeta = this.renderingMeta.register(item.target, item)
+            this.renderingMeta = this.renderingMeta.register(item)
             return;
         }
 

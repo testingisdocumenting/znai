@@ -15,6 +15,7 @@ features
     json
     columns
     templates
+    bullet-points
     image-annotations
     math
     proxy

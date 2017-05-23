@@ -123,9 +123,8 @@ const TestData = {
                             ]
                         },
                         {
-                            "target": "BulletList",
                             "type": "Meta",
-                            "listType": "LeftRightTimeLine"
+                            "bulletListType": "LeftRightTimeLine"
                         },
                         {
                             "bulletMarker": "*",
@@ -288,9 +287,8 @@ const TestData = {
                             "type": "Snippet"
                         },
                         {
-                            "target": "BulletList",
                             "type": "Meta",
-                            "listType": null
+                            "bulletListType": null
                         },
                         {
                             "type": "Paragraph",

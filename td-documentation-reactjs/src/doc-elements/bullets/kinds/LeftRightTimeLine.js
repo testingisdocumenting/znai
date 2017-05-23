@@ -69,11 +69,12 @@ const Timeline = ({textLines, textLinesToReveal}) => {
 
     return <div className="left-right-timeline content-block">
         <svg width="100%" height="100%" viewBox={viewPort}>
-            <rect id="timeline" x="-0.7" y="0" height={height} width="1.4" fill="#ddd" stroke="#ccc" strokeWidth="0.3"/>
+            <rect id="timeline" x="-0.7" y="0" height={0} width="1.4" fill="#ddd" stroke="#ccc" strokeWidth="0.3"/>
             <animate xlinkHref="#timeline"
                      attributeName="height"
                      from="0"
                      to={height}
+                     fill="freeze"
                      dur="1s"/>
             {bullets}
             {messages}

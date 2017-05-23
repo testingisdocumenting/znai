@@ -13,7 +13,7 @@ const types = {LeftRightTimeLine}
 const presentationTypes = {RevealBoxes, LeftRightTimeLine}
 
 const BulletList = (props) => {
-    const type = listType(props, 'listType')
+    const type = listType(props, 'bulletListType')
 
     if (type === null) {
         return <DefaultBulletList {...props}/>
@@ -51,12 +51,12 @@ function valueByIdWithWarning(dict, type) {
 }
 
 function presentationListType(props) {
-    return listType(props, 'listType') ||
-        listType(props, 'presentationListType')
+    return listType(props, 'bulletListType') ||
+        listType(props, 'presentationBulletListType')
 }
 
 function listType(props, key) {
-    return (typeof props.renderingMeta === 'undefined') ? null : props.renderingMeta.typeParam('BulletList', key)
+    return (typeof props.renderingMeta === 'undefined') ? null : props.renderingMeta.paramValue(key)
 }
 
 const presentationBulletListHandler = {component: PresentationBulletList,

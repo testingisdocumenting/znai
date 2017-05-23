@@ -10,7 +10,7 @@ import * as React from 'react'
 const DocElement = ({content, elementsLibrary, renderingMeta}) => {
     return (<span>{!content ? null : content.map((item, idx) => {
         if (item.type === 'Meta' && renderingMeta) {
-            renderingMeta = renderingMeta.register(item.target, item)
+            renderingMeta = renderingMeta.register(item)
             return null
         }
 

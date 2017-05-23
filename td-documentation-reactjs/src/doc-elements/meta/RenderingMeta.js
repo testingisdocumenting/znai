@@ -1,22 +1,22 @@
 import React from 'react'
 
 class RenderingMeta {
-    paramsByType_ = {}
+    params_ = {}
 
-    register(type, params) {
+    register(params) {
         const newMeta = new RenderingMeta()
-        newMeta.paramsByType_[type] = params
+        newMeta.params_ = {...this.params_, ...params}
 
         return newMeta
     }
 
     byType(type) {
-        return this.paramsByType_[type]
+        return this.params_[type]
     }
 
-    typeParam(type, param) {
-        const params = this.paramsByType_[type];
-        return (typeof params === 'undefined') ? null : params[param]
+    paramValue(key) {
+        const result = this.params_[key]
+        return (typeof result === 'undefined') ? null : result
     }
 }
 
