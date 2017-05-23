@@ -25,3 +25,10 @@
     border: 1px solid #666;
     background-color: #eee;
 }
+
+.presentation li {
+    max-width: 400px;
+    margin: 0;
+    font-size: 20px;
+}
+

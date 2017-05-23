@@ -1,31 +1,67 @@
 import React from 'react'
 import './BulletList.css'
 
-const BulletList = ({elementsLibrary, content, tight}) => {
+import LeftRightTimeLine from './kinds/LeftRightTimeLine'
+
+import RevealBoxes from './kinds/RevealBoxes'
+
+const DefaultBulletList = ({tight, ...props}) => {
     const className = "content-block" + (tight ? " tight" : "")
-    return (<ul className={className}><elementsLibrary.DocElement content={content}/></ul>)
+    return (<ul className={className}><props.elementsLibrary.DocElement {...props}/></ul>)
 }
 
+const types = {LeftRightTimeLine}
 
-const Box = ({elementsLibrary, content}) => {
-    return <div className="bullet-box"><elementsLibrary.DocElement content={content}/></div>
+const BulletList = (props) => {
+    const type = listType(props, 'listType')
+
+    if (type === null) {
+        return <DefaultBulletList {...props}/>
+    }
+
+    const Bullets = valueByIdWithWarning(types, type)
+    return <Bullets {...props}/>
 }
 
-const EmptyBox = () => {
-    return <div className="bullet-box-empty"/>
+const NoBullets = () => <div className="content-block">No bullets type found</div>
+
+const presentationTypes = {RevealBoxes, LeftRightTimeLine}
+
+const PresentationBulletList = (props) => {
+    const type = presentationListType(props)
+
+    if (type === null) {
+        return <DefaultBulletList {...props}/>
+    }
+
+    const PresentationBullets = valueByIdWithWarning(presentationTypes, type)
+    return <PresentationBullets {...props}/>
 }
 
-const BulletListPresentation = ({elementsLibrary, content, slideIdx}) => {
-    const components = Array(content.length).fill().map((nothing, idx) => idx >= slideIdx ? EmptyBox : Box);
-
-    return <div className="bullet-boxes">{content.map((item, idx) => {
-        const Component = components[idx]
-        return <Component key={idx}
-                          elementsLibrary={elementsLibrary}
-                          content={item.content}/>})}</div>
+const presentationNumberOfSlides = ({content, ...props}) => {
+    const type = presentationListType(props)
+    return (type === null) ? 1 : (content.length + 1)
 }
 
-const presentationUnorderedListHandler = {component: BulletListPresentation,
-    numberOfSlides: ({content}) => 1 + content.length}
+function valueByIdWithWarning(dict, type) {
+    if (! dict.hasOwnProperty(type)) {
+        console.warn("can't find bullets list type: " + type)
+        return NoBullets
+    }
+
+    return dict[type]
+}
+
+function presentationListType(props) {
+    return listType(props, 'listType') ||
+        listType(props, 'presentationListType')
+}
+
+function listType(props, key) {
+    return (typeof props.renderingMeta === 'undefined') ? null : props.renderingMeta.typeParam('BulletList', key)
+}
+
+const presentationUnorderedListHandler = {component: PresentationBulletList,
+    numberOfSlides: presentationNumberOfSlides}
 
 export {BulletList, presentationUnorderedListHandler}
