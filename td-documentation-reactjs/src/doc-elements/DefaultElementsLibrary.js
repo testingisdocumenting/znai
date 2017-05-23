@@ -4,7 +4,7 @@ import {Page, presentationPageHandler} from './default-elements/Page'
 import {Section, presentationSectionHandler} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
-import {BulletList, presentationUnorderedListHandler} from './bullets/BulletList'
+import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import Table from './table/Table'
@@ -44,7 +44,7 @@ library.Snippet = Snippet
 presentationElementHandlers.Snippet = presentationSnippetHandler
 
 library.BulletList = BulletList
-presentationElementHandlers.BulletList = presentationUnorderedListHandler
+presentationElementHandlers.BulletList = presentationBulletListHandler
 
 library.OrderedList = ({delimiter, startNumber, ...props}) => <ol className="content-block" start={startNumber}>
     <props.elementsLibrary.DocElement {...props}/>

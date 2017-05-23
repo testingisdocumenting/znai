@@ -1,8 +1,10 @@
 import React from 'react'
+import RenderingMeta from '../meta/RenderingMeta'
 
 class PresentationRegistry {
     constructor(elementsLibrary, presentationElementHandlers, content) {
         this.elementsLibrary = elementsLibrary
+        this.renderingMeta = new RenderingMeta()
         this.presentationElementHandlers = presentationElementHandlers
         this.numberOfSlides_ = 0
         this.slideComponents = []
@@ -26,9 +28,16 @@ class PresentationRegistry {
         const type = item.type
         const props = item
 
+        if (type === 'Meta') {
+            this.renderingMeta = this.renderingMeta.register(item.target, item)
+            return;
+        }
+
         const presentationElementHandler = this.presentationElementHandlers[type]
         if (presentationElementHandler) {
-            this.register(presentationElementHandler.component, props, presentationElementHandler.numberOfSlides(props))
+            const propsWithRenderingMeta = {renderingMeta: this.renderingMeta, ...props}
+            this.register(presentationElementHandler.component, propsWithRenderingMeta,
+                presentationElementHandler.numberOfSlides(propsWithRenderingMeta))
         }
 
         if (item.content) {

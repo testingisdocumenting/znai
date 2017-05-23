@@ -14,10 +14,6 @@ const DocElement = ({content, elementsLibrary, renderingMeta}) => {
             return null
         }
 
-        if (! elementsLibrary) {
-            console.warn(content)
-        }
-
         const ElementToUse = elementsLibrary[item.type]
         if (!ElementToUse) {
             console.warn("can't find component to display", item)

@@ -2,7 +2,6 @@ import React from 'react'
 import './BulletList.css'
 
 import LeftRightTimeLine from './kinds/LeftRightTimeLine'
-
 import RevealBoxes from './kinds/RevealBoxes'
 
 const DefaultBulletList = ({tight, ...props}) => {
@@ -11,6 +10,7 @@ const DefaultBulletList = ({tight, ...props}) => {
 }
 
 const types = {LeftRightTimeLine}
+const presentationTypes = {RevealBoxes, LeftRightTimeLine}
 
 const BulletList = (props) => {
     const type = listType(props, 'listType')
@@ -24,8 +24,6 @@ const BulletList = (props) => {
 }
 
 const NoBullets = () => <div className="content-block">No bullets type found</div>
-
-const presentationTypes = {RevealBoxes, LeftRightTimeLine}
 
 const PresentationBulletList = (props) => {
     const type = presentationListType(props)
@@ -61,7 +59,7 @@ function listType(props, key) {
     return (typeof props.renderingMeta === 'undefined') ? null : props.renderingMeta.typeParam('BulletList', key)
 }
 
-const presentationUnorderedListHandler = {component: PresentationBulletList,
+const presentationBulletListHandler = {component: PresentationBulletList,
     numberOfSlides: presentationNumberOfSlides}
 
-export {BulletList, presentationUnorderedListHandler}
+export {BulletList, presentationBulletListHandler}
