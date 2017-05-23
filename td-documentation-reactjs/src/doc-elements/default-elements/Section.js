@@ -1,11 +1,12 @@
 import React from 'react'
+import RenderingMeta from '../meta/RenderingMeta'
 
-const Section = ({elementsLibrary, id, title, content}) => {
+const Section = ({id, title, ...props}) => {
     return (<div className="section" key={title}>
         <div className="content-block">
             <div className="section-title" id={id}>{title}</div>
         </div>
-        <elementsLibrary.DocElement content={content}/>
+        <props.elementsLibrary.DocElement {...props} renderingMeta={new RenderingMeta()}/>
     </div>)
 }
 

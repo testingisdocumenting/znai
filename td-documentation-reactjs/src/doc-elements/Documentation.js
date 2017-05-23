@@ -84,7 +84,8 @@ class Documentation extends Component {
                                                    content={page.content}
                                                    onPresentationOpen={this.onPresentationOpen}
                                                    previewEnabled={docMeta.previewEnabled}
-                                                   elementsLibrary={elementsLibrary}/>
+                                                   elementsLibrary={elementsLibrary}
+                                                   renderingMeta={this.renderingMeta}/>
 
         const preview = docMeta.previewEnabled ? <Preview active={true}
                                                           onPageUpdate={this.onPageUpdate}

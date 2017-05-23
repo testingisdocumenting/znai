@@ -83,7 +83,7 @@ class Tabs extends Component {
         return (<div className="tabs-area">
             <TabNames names={names} activeIdx={activeIdx} onClick={this.onClick}/>
             <div className="tabs-content">
-                <elementsLibrary.DocElement content={tabContent}/>
+                <elementsLibrary.DocElement {...this.props} content={tabContent}/>
             </div>
             </div>)
     }

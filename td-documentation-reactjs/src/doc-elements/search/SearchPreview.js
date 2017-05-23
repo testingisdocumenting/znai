@@ -16,7 +16,7 @@ class SearchPreview extends Component {
 
         const style = {transform: "scale(1.0)"}
         return (<div className="search-result-preview" style={style} ref={(dom) => this.dom = dom}>
-            <elementsLibrary.DocElement content={section.content}/>
+            <elementsLibrary.DocElement {...this.props} content={section.content}/>
         </div>)
     }
 

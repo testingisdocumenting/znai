@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 class Page extends Component {
     render() {
-        const {tocItem, content, onPresentationOpen, elementsLibrary} = this.props
+        const {tocItem, onPresentationOpen, elementsLibrary} = this.props
 
         const displayTitle = tocItem.dirName.length && tocItem.fileName !== "index"
         const title = displayTitle ? [<span key="title" className="page-title">{tocItem.pageTitle}</span>,
@@ -12,7 +12,8 @@ class Page extends Component {
             <div className="page-title-block">
                 {title}
             </div>
-            <elementsLibrary.DocElement key={tocItem.pageTitle} content={content}/>
+            <elementsLibrary.DocElement key={tocItem.pageTitle}
+                                        {...this.props}/>
         </div>)
     }
 

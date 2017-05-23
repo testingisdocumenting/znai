@@ -2,13 +2,13 @@ import React from 'react'
 
 import './BlockQuote.css'
 
-const BlockQuote = ({elementsLibrary, content}) => (
-    <blockquote className="content-block"><elementsLibrary.DocElement content={content}/></blockquote>
+const BlockQuote = (props) => (
+    <blockquote className="content-block"><props.elementsLibrary.DocElement {...props}/></blockquote>
 )
 
-const PresentationBlockQuote = ({elementsLibrary, content}) =>
+const PresentationBlockQuote = (props) =>
     <blockquote>
-        <elementsLibrary.DocElement content={content}/>
+        <props.elementsLibrary.DocElement {...props}/>
     </blockquote>
 
 const presentationBlockQuoteHandler = {component: PresentationBlockQuote,

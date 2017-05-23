@@ -20,13 +20,11 @@ import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
 const library = {}
 const presentationElementHandlers = {}
 
-const BoundDocElement = ({content}) => <DocElement content={content} elementsLibrary={library}/>
-
-library.DocElement = BoundDocElement
-library.Emphasis = ({content}) => (<span className="emphasis"><BoundDocElement content={content}/></span>)
-library.StrongEmphasis = ({content}) => (<span className="strong-emphasis"><BoundDocElement content={content}/></span>)
-library.Link = ({url, content}) => (<a href={url}><BoundDocElement content={content}/></a>)
-library.Paragraph = ({content}) => <div className="paragraph content-block"><BoundDocElement content={content}/></div>
+library.DocElement = DocElement
+library.Emphasis = (props) => (<span className="emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
+library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
+library.Link = ({url, ...props}) => (<a href={url}><props.elementsLibrary.DocElement {...props}/></a>)
+library.Paragraph = (props) => <div className="paragraph content-block"><props.elementsLibrary.DocElement {...props}/></div>
 
 library.BlockQuote = BlockQuote
 presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler
@@ -48,9 +46,11 @@ presentationElementHandlers.Snippet = presentationSnippetHandler
 library.BulletList = BulletList
 presentationElementHandlers.BulletList = presentationUnorderedListHandler
 
-library.OrderedList = ({delimiter, startNumber, content}) => <ol className="content-block" start={startNumber}><BoundDocElement content={content}/></ol>
+library.OrderedList = ({delimiter, startNumber, ...props}) => <ol className="content-block" start={startNumber}>
+    <props.elementsLibrary.DocElement {...props}/>
+</ol>
 
-library.ListItem = ({content}) => <li><BoundDocElement content={content}/></li>
+library.ListItem = (props) => <li><props.elementsLibrary.DocElement {...props}/></li>
 
 library.Section = Section
 presentationElementHandlers.Section = presentationSectionHandler

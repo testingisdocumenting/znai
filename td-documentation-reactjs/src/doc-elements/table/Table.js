@@ -3,7 +3,7 @@ import React from 'react'
 import './Table.css'
 import 'semantic-ui/dist/components/table.min.css'
 
-const Table = ({table, elementsLibrary}) => {
+const Table = ({table, ...props}) => {
     const Row = ({row}) => {
         return (<tr>
             {row.map((v, idx) => {
@@ -12,7 +12,7 @@ const Table = ({table, elementsLibrary}) => {
                 const width = c.width ? c.width : "auto"
 
                 const style = {textAlign: align, width: width}
-                const value = Array.isArray(v) ? <elementsLibrary.DocElement content={v}/> : v
+                const value = Array.isArray(v) ? <props.elementsLibrary.DocElement {...props} content={v}/> : v
 
                 return (<td key={idx} style={style}>{value}</td>)
             })}

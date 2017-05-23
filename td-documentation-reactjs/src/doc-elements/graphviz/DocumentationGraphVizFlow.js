@@ -26,7 +26,7 @@ class DocumentationGraphVizFlow extends Component {
                             <div className="diagram-slide-labels" >
                                 {slide.ids.map((id) => <div key="id">// {id}</div>)}
                             </div>
-                            <elementsLibrary.DocElement content={slide.content}/>
+                            <elementsLibrary.DocElement {...this.props} content={slide.content}/>
                         </div>
                     ))
                 }

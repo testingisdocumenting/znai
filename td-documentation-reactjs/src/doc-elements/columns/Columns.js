@@ -2,7 +2,7 @@ import React from 'react'
 
 import './Columns.css'
 
-const Columns = ({elementsLibrary, columns, config}) => {
+const Columns = ({columns, config, ...props}) => {
     const leftStyle = buildStyle(config.left)
     const rightStyle = buildStyle(config.right)
 
@@ -10,10 +10,10 @@ const Columns = ({elementsLibrary, columns, config}) => {
 
     return <div className="columns content-block">
         <div className={leftClassName} style={leftStyle}>
-            <elementsLibrary.DocElement content={columns[0].content}/>
+            <props.elementsLibrary.DocElement {...props} content={columns[0].content}/>
         </div>
         <div className="column" style={rightStyle}>
-            <elementsLibrary.DocElement content={columns[1].content}/>
+            <props.elementsLibrary.DocElement {...props} content={columns[1].content}/>
         </div>
     </div>
 }
