@@ -16,11 +16,5 @@ public class TableDataRenderer
         return (data instanceof TableData)
                 ? "\n" + TableRenderer.render((TableData) data, renderStyle)
                 : null;
-
-//        if (! (data instanceof TableData)) {
-//            return null;
-//        }
-//
-//        return "\n" + TableRenderer.render((TableData) data, renderStyle);
     }
 }
