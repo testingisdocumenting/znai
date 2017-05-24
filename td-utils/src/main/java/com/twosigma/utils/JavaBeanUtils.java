@@ -36,11 +36,9 @@ public class JavaBeanUtils {
         BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
         PropertyDescriptor[] properties = beanInfo.getPropertyDescriptors();
         for (PropertyDescriptor property : properties) {
-            if (property.getName().equals("class")) {
-                continue;
+            if (!property.getName().equals("class")) {
+                result.put(property.getName(), property.getReadMethod().invoke(bean));
             }
-
-            result.put(property.getName(), property.getReadMethod().invoke(bean));
         }
 
         return result;
