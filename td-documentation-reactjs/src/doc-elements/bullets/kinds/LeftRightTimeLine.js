@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+
+import {extractTextLines} from '../bulletUtils'
 import './LeftRightTimeLine.css'
 
 const stepSize = 15
@@ -82,33 +84,9 @@ const Timeline = ({textLines, textLinesToReveal}) => {
     </div>
 }
 
-const collectTextRecursively = (content, result) => {
-    if (! content) {
-        return
-    }
-
-    content.forEach(item => {
-        if (item.type === "SimpleText") {
-            result.push(item.text)
-        } else {
-            collectTextRecursively(item.content, result)
-        }
-    })
-
-    return result
-}
-
-const extractText = (listItem) => {
-    const result = []
-    collectTextRecursively(listItem.content, result)
-
-    return result.join(" ")
-}
-
-const LeftRightTimeLine = ({content, slideIdx}) => {
-    const isPresentation = typeof slideIdx !== 'undefined'
-    const textLines = content.map(item => extractText(item))
-    const textLinesToReveal = isPresentation ? textLines.slice(0, slideIdx) : textLines
+const LeftRightTimeLine = ({content, isPresentation, slideIdx}) => {
+    const textLines = extractTextLines(content)
+    const textLinesToReveal = isPresentation ? textLines.slice(0, slideIdx + 1) : textLines
     return <Timeline textLines={textLines} textLinesToReveal={textLinesToReveal}/>
 }
 

@@ -27,10 +27,26 @@ to the right.
 :include-meta: {bulletListType: "LeftRightTimeLine"}
 
 * Testing
-* Designs
+* Design
 * Code Review
 * Documentation
 
+    
+# Venn
+
+Use `Venn` to display overlapping relationships. 
+
+    :include-meta: {bulletListType: "Venn"}
+    
+    * Velocity
+    * Volume
+    * Variety
+    
+:include-meta: {bulletListType: "Venn"}
+
+* Velocity
+* Volume
+* Variety
 
 # Presentation only type
 

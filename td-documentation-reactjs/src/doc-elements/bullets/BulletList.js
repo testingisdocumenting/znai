@@ -2,6 +2,7 @@ import React from 'react'
 import './BulletList.css'
 
 import LeftRightTimeLine from './kinds/LeftRightTimeLine'
+import Venn from './kinds/Venn'
 import RevealBoxes from './kinds/RevealBoxes'
 
 const DefaultBulletList = ({tight, ...props}) => {
@@ -9,8 +10,8 @@ const DefaultBulletList = ({tight, ...props}) => {
     return (<ul className={className}><props.elementsLibrary.DocElement {...props}/></ul>)
 }
 
-const types = {LeftRightTimeLine}
-const presentationTypes = {RevealBoxes, LeftRightTimeLine}
+const types = {LeftRightTimeLine, Venn}
+const presentationTypes = {RevealBoxes, LeftRightTimeLine, Venn}
 
 const BulletList = (props) => {
     const type = listType(props, 'bulletListType')
@@ -33,12 +34,14 @@ const PresentationBulletList = (props) => {
     }
 
     const PresentationBullets = valueByIdWithWarning(presentationTypes, type)
-    return <PresentationBullets {...props}/>
+    const isPresentation = typeof props.slideIdx !== 'undefined'
+
+    return <PresentationBullets isPresentation={isPresentation} {...props}/>
 }
 
 const presentationNumberOfSlides = ({content, ...props}) => {
     const type = presentationListType(props)
-    return (type === null) ? 1 : (content.length + 1)
+    return (type === null) ? 1 : content.length
 }
 
 function valueByIdWithWarning(dict, type) {

@@ -124,7 +124,7 @@ const TestData = {
                         },
                         {
                             "type": "Meta",
-                            "bulletListType": "LeftRightTimeLine"
+                            "bulletListType": "Venn"
                         },
                         {
                             "bulletMarker": "*",
@@ -138,7 +138,21 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "fetch required data by itself",
+                                                    "text": "Something",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "Additional",
                                                     "type": "SimpleText"
                                                 }
                                             ]
