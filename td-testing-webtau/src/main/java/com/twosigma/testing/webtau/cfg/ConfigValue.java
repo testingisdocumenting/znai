@@ -1,5 +1,7 @@
 package com.twosigma.testing.webtau.cfg;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,6 +43,10 @@ public class ConfigValue {
 
     public String getAsString() {
         return isDefault() ? defaultValue.toString() : values.getFirst().value.toString();
+    }
+
+    public Path getAsPath() {
+        return isDefault() ? (Path) defaultValue : Paths.get(values.getFirst().value.toString());
     }
 
     public int getAsInt() {

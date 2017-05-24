@@ -47,12 +47,13 @@ class WebUiTestCliConfig {
 
         if (commandLine.hasOption("help") || args.length < 1) {
             HelpFormatter helpFormatter = new HelpFormatter()
-            helpFormatter.printHelp("webuit [options] [testFile1] [testFile2]", options)
+            helpFormatter.printHelp("webtau [options] [testFile1] [testFile2]", options)
             System.exit(1)
         }
 
         testFiles = new ArrayList<>(commandLine.argList)
-        configFile = Paths.get(cliValue("config", "test.cfg"))
+        Path workingDir = Paths.get(cliValue(cfg.getWorkingDirConfigName(), ""))
+        configFile = workingDir.resolve(cliValue("config", "test.cfg"))
         env = Paths.get(cliValue("env", "local"))
     }
 
@@ -76,7 +77,7 @@ class WebUiTestCliConfig {
     }
 
     private def cliValue(String name, defaultValue) {
-        return commandLine.hasOption(name) ? commandLine.getOptionValue("config") :
+        return commandLine.hasOption(name) ? commandLine.getOptionValue(name) :
                 defaultValue
     }
 

@@ -28,10 +28,12 @@ public class WebUiTestConfig {
             "artifacts for documentation", "");
     private ConfigValue windowWidth = declare("windowWidth", "browser window width", 1000);
     private ConfigValue windowHeight = declare("windowHeight", "browser window height", 800);
+    private ConfigValue workingDir = declare("workingDir", "logical working dir", Paths.get(""));
 
     private List<ConfigValue> cfgValues = Arrays.asList(
             config,
             url,
+            workingDir,
             waitTimeout,
             docPath,
             windowWidth,
@@ -65,6 +67,14 @@ public class WebUiTestConfig {
         return windowHeight.getAsInt();
     }
 
+    public Path getWorkingDir() {
+        return workingDir.getAsPath();
+    }
+
+    public String getWorkingDirConfigName() {
+        return workingDir.getKey();
+    }
+
     @Override
     public String toString() {
         return cfgValues.stream().map(ConfigValue::toString).collect(Collectors.joining("\n"));
@@ -77,10 +87,10 @@ public class WebUiTestConfig {
 
         int maxValueLength = cfgValues.stream()
                 .filter(ConfigValue::nonDefault)
-                .map(v -> v.getAsString().toString().length()).max(Integer::compareTo).orElse(0);
+                .map(v -> v.getAsString().length()).max(Integer::compareTo).orElse(0);
 
         cfgValues.stream().filter(ConfigValue::nonDefault).forEach(v -> {
-            String valueAsText = v.getAsString().toString();
+            String valueAsText = v.getAsString();
             int valuePadding = maxValueLength - valueAsText.length();
 
             ConsoleOutputs.out(Color.BLUE, String.format("%" + maxKeyLength + "s", v.getKey()), ": ",
