@@ -1,5 +1,8 @@
 package com.twosigma.testing.standalone
 
+import com.twosigma.console.ConsoleOutputs
+import com.twosigma.console.ansi.Color
+import com.twosigma.console.ansi.FontStyle
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 
@@ -24,8 +27,10 @@ class StandaloneTestRunner {
     }
 
     void process(Path scriptPath, delegate) {
+        ConsoleOutputs.out(Color.BLUE, "debug ", Color.PURPLE, scriptPath, " ",  FontStyle.NORMAL, scriptPath.isAbsolute() ? "is absolute" : "is not absolute")
         currentTestPath = scriptPath.isAbsolute() ? scriptPath : workingDir.resolve(scriptPath)
-        def script = groovy.createScript((currentTestPath).toString(), new Binding())
+
+        def script = groovy.createScript((workingDir.relativize(currentTestPath)).toString(), new Binding())
 
         script.setDelegate(delegate)
         script.setProperty("scenario", this.&scenario)
