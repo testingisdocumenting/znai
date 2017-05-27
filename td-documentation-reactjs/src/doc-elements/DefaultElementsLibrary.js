@@ -5,6 +5,7 @@ import {Section, presentationSectionHandler} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
 import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
+import ListItem from './bullets/ListItem'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import Table from './table/Table'
@@ -46,11 +47,13 @@ presentationElementHandlers.Snippet = presentationSnippetHandler
 library.BulletList = BulletList
 presentationElementHandlers.BulletList = presentationBulletListHandler
 
+library.Icon = ({id}) => <span className={"glyphicon glyphicon-" + id}/>
+
 library.OrderedList = ({delimiter, startNumber, ...props}) => <ol className="content-block" start={startNumber}>
     <props.elementsLibrary.DocElement {...props}/>
 </ol>
 
-library.ListItem = (props) => <li><props.elementsLibrary.DocElement {...props}/></li>
+library.ListItem = ListItem
 
 library.Section = Section
 presentationElementHandlers.Section = presentationSectionHandler

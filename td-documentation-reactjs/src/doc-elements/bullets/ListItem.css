@@ -1,0 +1,9 @@
+li.icon-based {
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+}
+
+li.icon-based .list-item-content {
+    margin-left: 10px;
+}
