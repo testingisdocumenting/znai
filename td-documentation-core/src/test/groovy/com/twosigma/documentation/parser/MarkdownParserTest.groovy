@@ -1,6 +1,5 @@
 package com.twosigma.documentation.parser
 
-import com.twosigma.utils.JsonUtils
 import org.junit.Test
 
 import java.nio.file.Paths
@@ -17,7 +16,7 @@ class MarkdownParserTest {
     void "link"() {
         parse("""[label **bold**](http://test)""")
 
-        assert content == [[type: 'Paragraph', content:[
+        content.should == [[type: 'Paragraph', content:[
                 [url: 'http://test', type: 'Link',
                     content:[[text: 'label ' , type: 'SimpleText'], [type: 'StrongEmphasis', content:[
                             [text: 'bold', type: 'SimpleText']]]]]]]]
@@ -27,7 +26,7 @@ class MarkdownParserTest {
     void "inlined code"() {
         parse("""`InterfaceName`""")
 
-        assert content == [[type: 'Paragraph', content:[[type: 'InlinedCode', code: 'InterfaceName']]]]
+        content.should == [[type: 'Paragraph', content:[[type: 'InlinedCode', code: 'InterfaceName']]]]
     }
 
     @Test
@@ -36,8 +35,7 @@ class MarkdownParserTest {
 * another entry
 * hello
 """)
-        // TODO use should == for better reporting
-        assert content == [[bulletMarker: '*', tight: true, type: 'BulletList',
+        content.should == [[bulletMarker: '*', tight: true, type: 'BulletList',
                             content:[[type: 'ListItem', content: [[type: 'Paragraph',
                                                                   content:[[text: 'entry', type:'SimpleText']]]]],
                                      [type: 'ListItem', content: [[type: 'Paragraph',
@@ -52,7 +50,7 @@ class MarkdownParserTest {
 2. world
 3. of markdown
 """)
-        assert content == [[delimiter: '.', startNumber: 1, type: 'OrderedList',
+        content.should == [[delimiter: '.', startNumber: 1, type: 'OrderedList',
                              content:[[type: 'ListItem', content: [[type: 'Paragraph',
                                                                     content:[[text: 'hello', type: 'SimpleText']]]]],
                                       [type: 'ListItem', content: [[type: 'Paragraph',
@@ -67,7 +65,7 @@ class MarkdownParserTest {
 > for a reader
 """)
 
-        assert content == [[type: 'BlockQuote',
+        content.should == [[type: 'BlockQuote',
                              content:[[type: 'Paragraph',
                                        content:[[text: 'important message', type: 'SimpleText'],
                                                 [type: 'SoftLineBreak'],
@@ -80,7 +78,7 @@ class MarkdownParserTest {
 ****
 world""")
 
-        assert content == [[type: 'Paragraph', content: [[text: 'hello', type: 'SimpleText']]],
+        content.should == [[type: 'Paragraph', content: [[text: 'hello', type: 'SimpleText']]],
                            [type: 'ThematicBreak'],
                            [type: 'Paragraph', content:[[text: 'world', type: 'SimpleText']]]]
     }
@@ -88,21 +86,21 @@ world""")
     @Test
     void "soft line break"() {
         parse("hello\nworld")
-        assert content == [[type: 'Paragraph', content:
+        content.should == [[type: 'Paragraph', content:
                 [[text: 'hello', type: 'SimpleText'], [type: 'SoftLineBreak'], [text: 'world', type: 'SimpleText']]]]
     }
 
     @Test
     void "hard line break"() {
         parse("hello\\\nworld")
-        assert content == [[type: 'Paragraph', content:
+        content.should == [[type: 'Paragraph', content:
                 [[text: 'hello', type: 'SimpleText'], [type: 'HardLineBreak'], [text: 'world', type: 'SimpleText']]]]
     }
 
     @Test
     void "inlined image"() {
         parse("text ![alt text](images/png-test.png \"custom title\") another text")
-        assert content == [[type: 'Paragraph', content:[
+        content.should == [[type: 'Paragraph', content:[
                 [text: "text " , type: "SimpleText"],
                 [title: "custom title", destination: 'images/png-test.png', alt: 'alt text', type: 'Image', inlined: true,
                  width:762, height:581],
@@ -112,7 +110,7 @@ world""")
     @Test
     void "standalone image"() {
         parse("![alt text](images/png-test.png \"custom title\")")
-        assert content == [[title: "custom title", destination: 'images/png-test.png',
+        content.should == [[title: "custom title", destination: 'images/png-test.png',
                             alt: 'alt text', inlined: false,
                             width:762, height:581,
                             type: 'Image']]
@@ -121,7 +119,7 @@ world""")
     @Test
     void "include plugin"() {
         parse(":include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
-        assert content == [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
+        content.should == [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
     }
 
     @Test
@@ -129,7 +127,7 @@ world""")
         parse("# section\n\nsimple text\n" +
                 ":include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
 
-        assert content ==[[title: 'section', id: 'section', type: 'Section',
+        content.should ==[[title: 'section', id: 'section', type: 'Section',
                            content:
                                    [[type: 'Paragraph', content:[
                                            [text: 'simple text', type: 'SimpleText'],
@@ -144,7 +142,7 @@ world""")
                 "block\n" +
                 "~~~")
 
-        assert content == [[content: 'test\nblock\n', type: 'FenceDummy']]
+        content.should == [[content: 'test\nblock\n', type: 'FenceDummy']]
     }
 
     @Test
@@ -154,7 +152,7 @@ world""")
                 "block\n" +
                 "~~~")
 
-        assert content == [[content: 'test\nblock\n', 'freeParam': 'free-form',
+        content.should == [[content: 'test\nblock\n', 'freeParam': 'free-form',
                             'p1': 'v1', 'p2': 'v2',
                             type: 'FenceDummy']]
     }
@@ -163,7 +161,7 @@ world""")
     void "inlined code plugin"() {
         parse("`dummy:free-param {p1: 'v1'}`")
 
-        assert content == [[type: 'Paragraph', content: [[type: 'InlinedCodeDummy', ff: 'free-param', opts: [p1: 'v1']]]]]
+        content.should == [[type: 'Paragraph', content: [[type: 'InlinedCodeDummy', ff: 'free-param', opts: [p1: 'v1']]]]]
     }
 
     private void parse(String markdown) {
