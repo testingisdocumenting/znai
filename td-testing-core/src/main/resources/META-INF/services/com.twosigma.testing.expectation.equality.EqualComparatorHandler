@@ -1,4 +1,5 @@
 com.twosigma.testing.expectation.equality.handlers.NumbersEqualHandler
+com.twosigma.testing.expectation.equality.handlers.StringEqualHandler
 com.twosigma.testing.expectation.equality.handlers.RecordAndMapEqualHandler
 com.twosigma.testing.expectation.equality.handlers.MapsEqualHandler
 com.twosigma.testing.expectation.equality.handlers.MapAndBeanEqualHandler
