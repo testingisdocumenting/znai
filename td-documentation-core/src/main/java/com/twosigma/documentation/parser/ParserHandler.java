@@ -36,5 +36,6 @@ public interface ParserHandler {
     void onThematicBreak();
     void onIncludePlugin(PluginParams pluginParams);
     void onFencePlugin(PluginParams pluginParams, String content);
+    void onInlinedCodePlugin(PluginParams pluginParams);
     void onParsingEnd();
 }

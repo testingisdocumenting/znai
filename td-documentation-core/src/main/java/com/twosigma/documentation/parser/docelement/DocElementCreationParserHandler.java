@@ -9,6 +9,7 @@ import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.extensions.inlinedcode.InlinedCodePlugin;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.ParserHandler;
 
@@ -198,6 +199,12 @@ public class DocElementCreationParserHandler implements ParserHandler {
         processPlugin(fencePlugin, (p) -> p.process(componentsRegistry, path, pluginParams, content));
     }
 
+    @Override
+    public void onInlinedCodePlugin(PluginParams pluginParams) {
+        InlinedCodePlugin inlinedCodePlugin = Plugins.inlinedCodePluginById(pluginParams.getPluginId());
+        processPlugin(inlinedCodePlugin, (p) -> p.process(componentsRegistry, path, pluginParams));
+    }
+
     private <E extends Plugin> void processPlugin(E plugin, Function<E, PluginResult> processFunc) {
         try {
             PluginResult result = processFunc.apply(plugin);
@@ -287,6 +294,5 @@ public class DocElementCreationParserHandler implements ParserHandler {
         elementsStack.peekLast().addChild(element);
         elementsStack.add(element);
     }
-
 }
 

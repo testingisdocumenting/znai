@@ -3,6 +3,7 @@ package com.twosigma.documentation.extensions;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.extensions.inlinedcode.InlinedCodePlugin;
 import com.twosigma.utils.ServiceLoaderUtils;
 
 import java.util.Collection;
@@ -18,6 +19,7 @@ import static java.util.stream.Collectors.toMap;
 public class Plugins {
     private static Map<String, IncludePlugin> includePluginsById = discoverIncludePlugins();
     private static Map<String, FencePlugin> fencePluginsById = discoverFencePlugins();
+    private static Map<String, InlinedCodePlugin> inlineCodePluginsById = discoverInlinedCodePlugins();
 
     public static IncludePlugin includePluginById(String id) {
         return pluginById(includePluginsById, id);
@@ -29,6 +31,14 @@ public class Plugins {
 
     public static FencePlugin fencePluginById(String id) {
         return pluginById(fencePluginsById, id);
+    }
+
+    public static boolean hasInlinedCodePlugin(String id) {
+        return inlineCodePluginsById.containsKey(id);
+    }
+
+    public static InlinedCodePlugin inlinedCodePluginById(String id) {
+        return pluginById(inlineCodePluginsById, id);
     }
 
     private static <E extends Plugin> E pluginById(Map<String, E> plugins, String id) {
@@ -51,6 +61,10 @@ public class Plugins {
 
     private static Map<String, FencePlugin> discoverFencePlugins() {
         return discoverPlugins(FencePlugin.class);
+    }
+
+    private static Map<String, InlinedCodePlugin> discoverInlinedCodePlugins() {
+        return discoverPlugins(InlinedCodePlugin.class);
     }
 
     private static <E extends Plugin> Map<String, E> discoverPlugins(Class<E> pluginType) {

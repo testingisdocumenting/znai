@@ -2,6 +2,8 @@ package com.twosigma.documentation.parser;
 
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
@@ -19,6 +21,8 @@ import com.twosigma.documentation.parser.docelement.DocElementCreationParserHand
 public class MarkdownParser implements MarkupParser {
     private final Parser parser;
     private final ComponentsRegistry componentsRegistry;
+
+    private static final Pattern INLINED_CODE_ID_PATTERN = Pattern.compile("^([a-zA-Z-_]+):(.*)");
 
     public MarkdownParser(ComponentsRegistry componentsRegistry) {
         this.componentsRegistry = componentsRegistry;
@@ -99,7 +103,13 @@ public class MarkdownParser implements MarkupParser {
 
         @Override
         public void visit(Code code) {
-            parserHandler.onInlinedCode(code.getLiteral());
+            String literal = code.getLiteral();
+            Matcher matcher = INLINED_CODE_ID_PATTERN.matcher(literal);
+            if (matcher.matches() && Plugins.hasInlinedCodePlugin(matcher.group(1))) {
+                parserHandler.onInlinedCodePlugin(new PluginParams(matcher.group(1), matcher.group(2)));
+            } else {
+                parserHandler.onInlinedCode(literal);
+            }
         }
 
         @Override
