@@ -12,6 +12,7 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.inlinedcode.InlinedCodePlugin;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.ParserHandler;
+import com.twosigma.documentation.parser.table.MarkupTableData;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
@@ -110,6 +111,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onListItemEnd() {
         end();
+    }
+
+    @Override
+    public void onTable(MarkupTableData tableData) {
+        append(new DocElement(DocElementType.TABLE, "table", tableData.toMap()));
     }
 
     @Override

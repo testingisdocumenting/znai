@@ -41,6 +41,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <vertx.io.version>3.3.3</vertx.io.version>
+        <commonmark.version>0.9.0</commonmark.version>
     </properties>
 
     <dependencyManagement>
@@ -126,7 +127,13 @@
             <dependency>
                 <groupId>com.atlassian.commonmark</groupId>
                 <artifactId>commonmark</artifactId>
-                <version>0.8.0</version>
+                <version>${commonmark.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.commonmark</groupId>
+                <artifactId>commonmark-ext-gfm-tables</artifactId>
+                <version>${commonmark.version}</version>
             </dependency>
 
             <dependency>

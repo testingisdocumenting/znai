@@ -8,6 +8,7 @@ import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElementType;
+import com.twosigma.documentation.parser.table.MarkupTableData;
 import com.twosigma.utils.JsonUtils;
 
 import java.nio.file.Path;
@@ -66,8 +67,8 @@ public class TableIncludePlugin implements IncludePlugin {
     }
 
     @SuppressWarnings("unchecked")
-    private PluginTableData tableFromJson() {
-        PluginTableData tableData = new PluginTableData();
+    private MarkupTableData tableFromJson() {
+        MarkupTableData tableData = new MarkupTableData();
 
         List<Map<String, ?>> rows = (List<Map<String, ?>>) JsonUtils.deserializeAsList(textContent);
         if (rows.isEmpty()) {

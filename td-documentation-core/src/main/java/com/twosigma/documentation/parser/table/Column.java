@@ -1,4 +1,4 @@
-package com.twosigma.documentation.extensions.table;
+package com.twosigma.documentation.parser.table;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,6 +12,11 @@ public class Column {
 
     public Column(String title) {
         this.title = title.trim();
+    }
+
+    public Column(String title, String align) {
+        this(title);
+        this.align = align;
     }
 
     public String getTitle() {

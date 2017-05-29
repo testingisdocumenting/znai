@@ -57,4 +57,17 @@ You can use markup syntax within table file
 
 :include-table: table-markup.csv 
 
+# Github Flavored Table
+
+    | Github        | Flavored      | Table |
+    | ------------- |:-------------:| -----:|
+    | col 3 is      | right-aligned | $1600 |
+    | col 2 is      | centered      |   $12 |
+
+
+| Github        | Flavored      | Table  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+
 

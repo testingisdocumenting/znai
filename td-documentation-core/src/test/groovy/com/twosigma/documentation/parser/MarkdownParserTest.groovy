@@ -98,6 +98,25 @@ world""")
     }
 
     @Test
+    void "github flavored table"() {
+        parse("""| Github        | Flavored       | Table  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | \$1600 |
+| col 2 is      | centered      |   \$12 |""")
+
+        content.should == [[table:[columns:[[title: 'Github', align: 'left'],
+                                            [title: 'Flavored', align: 'center'],
+                                            [title: 'Table', align: 'right']],
+                                   data:[[[[text:'col 3 is', type: 'SimpleText']],
+                                          [[text: 'right-aligned', type: 'SimpleText']],
+                                          [[text:'$1600', type: 'SimpleText']]],
+                                         [[[text: 'col 2 is', type: 'SimpleText']],
+                                          [[text: 'centered', type: 'SimpleText']],
+                                          [[text: '$12', type: 'SimpleText']]]]],
+                            type: 'Table']]
+    }
+
+    @Test
     void "inlined image"() {
         parse("text ![alt text](images/png-test.png \"custom title\") another text")
         content.should == [[type: 'Paragraph', content:[

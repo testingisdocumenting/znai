@@ -1,5 +1,7 @@
 package com.twosigma.documentation.extensions.table;
 
+import com.twosigma.documentation.parser.table.MarkupTableData;
+import com.twosigma.documentation.parser.table.Row;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -15,9 +17,9 @@ class CsvParser {
     private CsvParser() {
     }
 
-    public static PluginTableData parse(String content) {
+    public static MarkupTableData parse(String content) {
         try {
-            PluginTableData tableData = new PluginTableData();
+            MarkupTableData tableData = new MarkupTableData();
 
             CSVParser csvRecords = CSVFormat.RFC4180.withFirstRecordAsHeader().
                     withIgnoreSurroundingSpaces().

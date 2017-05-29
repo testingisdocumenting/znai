@@ -1,6 +1,7 @@
 package com.twosigma.documentation.parser;
 
 import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.parser.table.MarkupTableData;
 
 /**
  * There are multiple markup languages out there. There are common elements among them.
@@ -21,6 +22,7 @@ public interface ParserHandler {
     void onOrderedListEnd();
     void onListItemStart();
     void onListItemEnd();
+    void onTable(MarkupTableData tableData);
     void onEmphasisStart();
     void onEmphasisEnd();
     void onStrongEmphasisStart();

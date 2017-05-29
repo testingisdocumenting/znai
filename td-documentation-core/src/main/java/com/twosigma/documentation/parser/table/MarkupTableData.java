@@ -1,4 +1,4 @@
-package com.twosigma.documentation.extensions.table;
+package com.twosigma.documentation.parser.table;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -10,27 +10,31 @@ import static java.util.stream.Collectors.toList;
 /**
  * @author mykola
  */
-class PluginTableData {
+public class MarkupTableData {
     private List<Column> header;
     private List<Row> data;
 
-    PluginTableData() {
+    public MarkupTableData() {
         header = new ArrayList<>();
         data = new ArrayList<>();
     }
 
-    void addColumn(String name) {
+    public void addColumn(String name) {
         header.add(new Column(name));
     }
 
-    void addRow(Map<String, ?> rowData) {
+    public void addColumn(String name, String align) {
+        header.add(new Column(name, align));
+    }
+
+    public void addRow(Map<String, ?> rowData) {
         Row row = new Row();
         header.forEach(c -> row.add(rowData.get(c.getTitle())));
 
         addRow(row);
     }
 
-    void addRow(Row row) {
+    public void addRow(Row row) {
         data.add(row);
     }
 

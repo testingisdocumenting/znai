@@ -1,4 +1,4 @@
-package com.twosigma.documentation.extensions.table;
+package com.twosigma.documentation.parser.table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * @author mykola
  */
-class Row {
+public class Row {
     private List<Object> data;
 
-    Row() {
+    public Row() {
         data = new ArrayList<>();
     }
 
