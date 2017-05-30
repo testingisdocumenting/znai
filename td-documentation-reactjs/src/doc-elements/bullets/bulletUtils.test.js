@@ -1,4 +1,4 @@
-import {startsWithIcon, extractIconId} from './bulletUtils'
+import {startsWithIcon, extractIconId, removeIcon} from './bulletUtils'
 
 const itemContent = [
     {
@@ -40,5 +40,14 @@ describe("bulletUtils", () => {
 
     it("extracts Icon id", () => {
         expect(extractIconId(itemContent)).toEqual("time")
+    })
+
+    it("removes icon from content", () => {
+        const originalSize = itemContent[0].content.length
+
+        const withoutIcon = removeIcon(itemContent)
+
+        expect(withoutIcon[0].content[0].type).toEqual("Emphasis")
+        expect(itemContent[0].content.length).toEqual(originalSize)
     })
 })

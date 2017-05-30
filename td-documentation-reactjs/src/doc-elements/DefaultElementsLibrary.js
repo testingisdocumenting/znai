@@ -11,6 +11,7 @@ import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import Table from './table/Table'
 import {Tabs, presentationTabsHandler} from './tabs/Tabs'
 import {Columns, presentationColumnsHandler} from './columns/Columns'
+import Icon from './icons/Icon'
 import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
 import LatexMath from './math/LatexMath'
@@ -47,7 +48,7 @@ presentationElementHandlers.Snippet = presentationSnippetHandler
 library.BulletList = BulletList
 presentationElementHandlers.BulletList = presentationBulletListHandler
 
-library.Icon = ({id}) => <span className={"glyphicon glyphicon-" + id}/>
+library.Icon = Icon
 
 library.OrderedList = ({delimiter, startNumber, ...props}) => <ol className="content-block" start={startNumber}>
     <props.elementsLibrary.DocElement {...props}/>

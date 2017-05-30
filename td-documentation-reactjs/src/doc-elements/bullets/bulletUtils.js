@@ -7,6 +7,15 @@ function extractIconId(content) {
     return content[0].content[0].id
 }
 
+function removeIcon(content) {
+    const copy = [...content]
+
+    copy[0] = {...copy[0]}
+    copy[0].content = copy[0].content.slice(1)
+
+    return copy
+}
+
 function extractTextLines(content) {
     return content.map(item => extractText(item))
 }
@@ -34,4 +43,4 @@ function extractText(listItem) {
     return result.join(" ")
 }
 
-export {extractTextLines, startsWithIcon, extractIconId}
+export {extractTextLines, startsWithIcon, extractIconId, removeIcon}

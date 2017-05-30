@@ -1,14 +1,10 @@
 import React from 'react'
 import './BulletList.css'
 
+import DefaultBulletList from './kinds/DefaultBulletList'
 import LeftRightTimeLine from './kinds/LeftRightTimeLine'
 import Venn from './kinds/Venn'
 import RevealBoxes from './kinds/RevealBoxes'
-
-const DefaultBulletList = ({tight, ...props}) => {
-    const className = "content-block" + (tight ? " tight" : "")
-    return (<ul className={className}><props.elementsLibrary.DocElement {...props}/></ul>)
-}
 
 const types = {LeftRightTimeLine, Venn}
 const presentationTypes = {RevealBoxes, LeftRightTimeLine, Venn}

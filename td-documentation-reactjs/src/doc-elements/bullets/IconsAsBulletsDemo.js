@@ -1,7 +1,6 @@
 import React from 'react'
 
 import {elementsLibrary} from '../DefaultElementsLibrary'
-import {BulletList} from './BulletList'
 
 const content = [{
     "bulletMarker": "*",
@@ -83,7 +82,7 @@ const content = [{
 }];
 
 const IconsAsBulletsDemo = () => {
-    return <BulletList content={content} elementsLibrary={elementsLibrary}/>
+    return <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary}/>
 }
 
 export default IconsAsBulletsDemo

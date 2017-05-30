@@ -1,9 +1,10 @@
 li.icon-based {
     list-style: none;
     display: flex;
-    align-items: baseline;
 }
 
-li.icon-based .list-item-content {
-    margin-left: 10px;
+li.icon-based .glyphicon {
+    margin-right: 10px;
+    font-size: 18px;
+    line-height: 20px;
 }

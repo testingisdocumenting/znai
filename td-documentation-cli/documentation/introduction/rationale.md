@@ -4,8 +4,8 @@ Keeping documentation up-to-date is a hard task.
 The further documentation is from the code the more likely it won't be updated when a feature is added or changed.
 
 Depending on your product and clients, stale documentation effects are:
-* users' time lost
-* reputation damage
+* `icon:time` users' time lost
+* `icon:thumbs-down` reputation damage
 
 # Part Of Workflow
 

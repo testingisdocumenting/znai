@@ -1,5 +1,8 @@
 import React from 'react'
-import {startsWithIcon} from './bulletUtils'
+
+import Icon from '../icons/Icon'
+import {startsWithIcon, removeIcon, extractIconId} from './bulletUtils'
+
 import './ListItem.css'
 
 const ListItem = (props) => {
@@ -7,10 +10,12 @@ const ListItem = (props) => {
     const hasIcon = startsWithIcon(content)
 
     const className = "list-item" + (hasIcon ? " icon-based" : "")
-    const children = <props.elementsLibrary.DocElement {...props}/>
+    const childrenContent = hasIcon ? removeIcon(content) : content
+    const children = <props.elementsLibrary.DocElement {...props} content={childrenContent}/>
 
     return <li className={className}>
-        {hasIcon ? <span className="list-item-content">{children}</span>: children}
+        {hasIcon ? <Icon id={extractIconId(content)}/> : null}
+        {children}
     </li>
 }
 
