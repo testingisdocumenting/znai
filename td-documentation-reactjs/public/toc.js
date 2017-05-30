@@ -38,6 +38,14 @@ toc = [
           {
             "title": "Maintenance",
             "id": "maintenance"
+          },
+          {
+            "title": "Familiar Approach",
+            "id": "familiar-approach"
+          },
+          {
+            "title": "Presentations",
+            "id": "presentations"
           }
         ]
       },
@@ -158,6 +166,30 @@ toc = [
           {
             "title": "Method Body",
             "id": "method-body"
+          },
+          {
+            "title": "Class JavaDoc",
+            "id": "class-javadoc"
+          },
+          {
+            "title": "Method JavaDoc",
+            "id": "method-javadoc"
+          },
+          {
+            "title": "Method JavaDoc Params",
+            "id": "method-javadoc-params"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
+        "pageTitle": "Groovy",
+        "fileName": "groovy",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "Method Body",
+            "id": "method-body"
           }
         ]
       },
@@ -190,6 +222,14 @@ toc = [
           {
             "title": "Alignment and Width",
             "id": "alignment-and-width"
+          },
+          {
+            "title": "Markup in Cells",
+            "id": "markup-in-cells"
+          },
+          {
+            "title": "Github Flavored Table",
+            "id": "github-flavored-table"
           }
         ]
       },
@@ -206,6 +246,10 @@ toc = [
           {
             "title": "Markdown Per Tab",
             "id": "markdown-per-tab"
+          },
+          {
+            "title": "Separate Markdown files",
+            "id": "separate-markdown-files"
           }
         ]
       },
@@ -227,8 +271,104 @@ toc = [
       },
       {
         "sectionTitle": "Features",
-        "pageTitle": "UI Documentation",
-        "fileName": "UI-documentation",
+        "pageTitle": "Columns",
+        "fileName": "columns",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "Information Layout",
+            "id": "information-layout"
+          },
+          {
+            "title": "Definition",
+            "id": "definition"
+          },
+          {
+            "title": "Sizes",
+            "id": "sizes"
+          },
+          {
+            "title": "Border",
+            "id": "border"
+          },
+          {
+            "title": "Alignment",
+            "id": "alignment"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
+        "pageTitle": "Templates",
+        "fileName": "templates",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "Don\u0027t repeat yourself",
+            "id": "don\u0027t-repeat-yourself"
+          },
+          {
+            "title": "Definition",
+            "id": "definition"
+          },
+          {
+            "title": "Inlined",
+            "id": "inlined"
+          },
+          {
+            "title": "External Parameters",
+            "id": "external-parameters"
+          },
+          {
+            "title": "Loops",
+            "id": "loops"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
+        "pageTitle": "Bullet Points",
+        "fileName": "bullet-points",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "Types",
+            "id": "types"
+          },
+          {
+            "title": "Left Right Timeline",
+            "id": "left-right-timeline"
+          },
+          {
+            "title": "Venn",
+            "id": "venn"
+          },
+          {
+            "title": "Presentation only type",
+            "id": "presentation-only-type"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
+        "pageTitle": "Icons",
+        "fileName": "icons",
+        "dirName": "features",
+        "pageSectionIdTitles": [
+          {
+            "title": "Glyphicons",
+            "id": "glyphicons"
+          },
+          {
+            "title": "Bullet Points",
+            "id": "bullet-points"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Features",
+        "pageTitle": "Image Annotations",
+        "fileName": "image-annotations",
         "dirName": "features",
         "pageSectionIdTitles": [
           {
@@ -285,13 +425,25 @@ toc = [
     "items": [
       {
         "sectionTitle": "Synergy With Testing",
+        "pageTitle": "Java",
+        "fileName": "java",
+        "dirName": "synergy-with-testing",
+        "pageSectionIdTitles": [
+          {
+            "title": "Table Data",
+            "id": "table-data"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Synergy With Testing",
         "pageTitle": "REST",
         "fileName": "REST",
         "dirName": "synergy-with-testing",
         "pageSectionIdTitles": [
           {
-            "title": "Output expectations",
-            "id": "output-expectations"
+            "title": "Assertions",
+            "id": "assertions"
           },
           {
             "title": "Department users list",
@@ -301,13 +453,13 @@ toc = [
       },
       {
         "sectionTitle": "Synergy With Testing",
-        "pageTitle": "UI",
-        "fileName": "UI",
+        "pageTitle": "Web UI",
+        "fileName": "web-UI",
         "dirName": "synergy-with-testing",
         "pageSectionIdTitles": [
           {
-            "title": "Screenshots with Annotations",
-            "id": "screenshots-with-annotations"
+            "title": "Auto Annotations",
+            "id": "auto-annotations"
           }
         ]
       }

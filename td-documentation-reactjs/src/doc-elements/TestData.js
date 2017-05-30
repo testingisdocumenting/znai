@@ -57,367 +57,49 @@ const TestData = {
     documentation:  {
         "docMeta": {
             "id": "preview",
-            "type": "Guide",
-            "title": "ddjt",
+            "type": "User Guide",
+            "title": "MDoc",
             "previewEnabled": true
         },
         "page": {
             "type": "Page",
             "content": [
                 {
-                    "title": "Data Injection",
-                    "id": "data-injection",
+                    "title": "Simple Snippet",
+                    "id": "simple-snippet",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Let\u0027s consider an example.",
+                                    "text": "It is very easy to add a code snippet or an output result.",
                                     "type": "SimpleText"
                                 },
                                 {
                                     "type": "SoftLineBreak"
                                 },
                                 {
-                                    "code": "MarginCalculator",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " class with ",
+                                    "text": "All you have to do is indent your code with 4 spaces inside your markdown document and",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "code": "calculateMargin",
-                                    "type": "InlinedCode"
+                                    "type": "SoftLineBreak"
                                 },
                                 {
-                                    "text": " method that requires a list of ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "Transaction",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " objects.",
+                                    "text": "your code will be rendered like this.",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "One possible design of ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "MarginCalculator",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": ":",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Meta",
-                            "bulletListType": "Venn"
-                        },
-                        {
-                            "bulletMarker": "*",
-                            "tight": true,
-                            "type": "BulletList",
-                            "content": [
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Something",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Additional",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "type": "Emphasis",
-                                                    "content": [
-                                                        {
-                                                            "text": "Inject",
-                                                            "type": "SimpleText"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "text": " ",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "code": "DAO",
-                                                    "type": "InlinedCode"
-                                                },
-                                                {
-                                                    "text": " to decouple",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "java",
-                            "maxLineLength": 62,
+                            "lang": "",
+                            "maxLineLength": 52,
                             "tokens": [
                                 {
-                                    "type": "keyword",
-                                    "content": "public"
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "class"
-                                },
-                                " ",
-                                {
-                                    "type": "class-name",
-                                    "content": [
-                                        "MarginCalculator"
-                                    ]
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n    ",
-                                {
-                                    "type": "keyword",
-                                    "content": "public"
-                                },
-                                " ",
-                                {
-                                    "type": "function",
-                                    "content": "MarginCalculator"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "TransactionsDao transactionsDao",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n    ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                "\n    \n    ",
-                                {
-                                    "type": "keyword",
-                                    "content": "public"
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "double"
-                                },
-                                " ",
-                                {
-                                    "type": "function",
-                                    "content": "calculate"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "List",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003c"
-                                },
-                                "String",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003e"
-                                },
-                                " ids",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n    ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                "\n",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                "\n"
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Meta",
-                            "bulletListType": null
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Lets make design even simpler for testing:",
-                                    "type": "SimpleText"
+                                    "type": "text",
+                                    "content": "interface PriceService {\n    Money calcPrice(String cuips, Integer quantity);\n}\n"
                                 }
-                            ]
-                        },
-                        {
-                            "bulletMarker": "*",
-                            "tight": true,
-                            "type": "BulletList",
-                            "content": [
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "type": "Emphasis",
-                                                    "content": [
-                                                        {
-                                                            "text": "Inject",
-                                                            "type": "SimpleText"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "text": " required data",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "java",
-                            "maxLineLength": 62,
-                            "tokens": [
-                                {
-                                    "type": "keyword",
-                                    "content": "public"
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "class"
-                                },
-                                " ",
-                                {
-                                    "type": "class-name",
-                                    "content": [
-                                        "MarginCalculator"
-                                    ]
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n    ",
-                                {
-                                    "type": "keyword",
-                                    "content": "public"
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "double"
-                                },
-                                " ",
-                                {
-                                    "type": "function",
-                                    "content": "calculate"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "List",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003c"
-                                },
-                                "Transactions",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003e"
-                                },
-                                " transactions",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n    ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                "\n",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                "\n"
                             ],
                             "lineNumber": "",
                             "type": "Snippet"
@@ -426,170 +108,154 @@ const TestData = {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "This version is much easier to test:",
+                                    "text": "This method doesn\u0027t highlight code by default. It is possible to provide a default language to see for highlighting using",
                                     "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "bulletMarker": "*",
-                            "tight": true,
-                            "type": "BulletList",
-                            "content": [
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Less mocks/stubs",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
                                 },
                                 {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Less wiring",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
+                                    "type": "SoftLineBreak"
+                                },
                                 {
-                                    "text": "This is how list could be created in Java",
+                                    "text": "[meta.json](meta file).",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Markdown used to create code snippet above follows",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "lang": "java",
-                            "maxLineLength": 57,
+                            "lang": "markdown",
+                            "maxLineLength": 86,
                             "tokens": [
                                 {
-                                    "type": "keyword",
-                                    "content": "public"
+                                    "type": "title",
+                                    "content": [
+                                        {
+                                            "type": "punctuation",
+                                            "content": "#"
+                                        },
+                                        " Simple Snippet"
+                                    ]
                                 },
-                                " ",
+                                "\n\nIt is very easy to add a code snippet or an output result.\nAll you have to do is indent your code with 4 spaces inside your markdown document and\nyour code will be rendered like this.\n\n",
                                 {
-                                    "type": "keyword",
-                                    "content": "double"
-                                },
-                                " ",
-                                {
-                                    "type": "function",
-                                    "content": "calculate"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "List",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003c"
-                                },
-                                "Transaction",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003e"
-                                },
-                                " transactions",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n    ",
-                                {
-                                    "type": "keyword",
-                                    "content": "return"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "0"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
+                                    "type": "code",
+                                    "content": "    interface PriceService {"
                                 },
                                 "\n",
                                 {
-                                    "type": "punctuation",
-                                    "content": "}"
+                                    "type": "code",
+                                    "content": "        Money calcPrice(String cuips, Integer quantity);"
+                                },
+                                "\n",
+                                {
+                                    "type": "code",
+                                    "content": "    }"
                                 }
                             ],
+                            "startLine": "# Simple Snippet",
+                            "numberOfLines": 9.0,
+                            "title": "markdown",
                             "type": "Snippet"
                         }
                     ]
                 },
                 {
-                    "title": "Input Encapsulation",
-                    "id": "input-encapsulation",
+                    "title": "Specifying Language",
+                    "id": "specifying-language",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Lets create ",
+                                    "text": "You can also specify a language.",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "type": "Emphasis",
-                                    "content": [
-                                        {
-                                            "text": "input",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
+                                    "type": "SoftLineBreak"
                                 },
                                 {
-                                    "text": " data required for a test.",
+                                    "text": "That maybe useful if there is the snippet is not large enough for auto detection.",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "lang": "java",
-                            "maxLineLength": 70,
+                            "lang": "javascript",
+                            "maxLineLength": 38,
                             "tokens": [
                                 {
-                                    "type": "annotation",
-                                    "content": "@Test"
-                                },
-                                "\n",
-                                {
                                     "type": "keyword",
-                                    "content": "public"
+                                    "content": "import"
+                                },
+                                " React",
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                "Component",
+                                {
+                                    "type": "punctuation",
+                                    "content": "}"
                                 },
                                 " ",
                                 {
                                     "type": "keyword",
-                                    "content": "void"
+                                    "content": "from"
                                 },
                                 " ",
+                                {
+                                    "type": "string",
+                                    "content": "\u0027"
+                                },
+                                "react",
+                                {
+                                    "type": "string",
+                                    "content": "\u0027"
+                                },
+                                "\n\n",
+                                {
+                                    "type": "keyword",
+                                    "content": "class"
+                                },
+                                " ",
+                                {
+                                    "type": "class-name",
+                                    "content": [
+                                        "MyComponent"
+                                    ]
+                                },
+                                " ",
+                                {
+                                    "type": "keyword",
+                                    "content": "extends"
+                                },
+                                " ",
+                                {
+                                    "type": "class-name",
+                                    "content": [
+                                        "Component"
+                                    ]
+                                },
+                                " ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                "\n    ",
                                 {
                                     "type": "function",
-                                    "content": "marginShouldBeZeroIfNoLotsSet"
+                                    "content": "render"
                                 },
                                 {
                                     "type": "punctuation",
@@ -604,359 +270,140 @@ const TestData = {
                                     "type": "punctuation",
                                     "content": "{"
                                 },
-                                "\n    Transaction t1 ",
+                                "\n        ",
                                 {
-                                    "type": "operator",
-                                    "content": "\u003d"
+                                    "type": "comment",
+                                    "content": "/// ..."
                                 },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "new"
-                                },
-                                " ",
-                                {
-                                    "type": "class-name",
-                                    "content": [
-                                        "Transaction"
-                                    ]
-                                },
+                                "\n    ",
                                 {
                                     "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n    t1",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "setSymbol"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "string",
-                                    "content": "\""
-                                },
-                                "SYM",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                "B",
-                                {
-                                    "type": "string",
-                                    "content": "\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n    t1",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "setLot"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "number",
-                                    "content": "0"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n    t1",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "setPrice"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "number",
-                                    "content": "8"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n\n    Transaction t2 ",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003d"
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "new"
-                                },
-                                " ",
-                                {
-                                    "type": "class-name",
-                                    "content": [
-                                        "Transaction"
-                                    ]
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n    t1",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "setSymbol"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "string",
-                                    "content": "\""
-                                },
-                                "SYM",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                "C",
-                                {
-                                    "type": "string",
-                                    "content": "\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n    t1",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "setLot"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "number",
-                                    "content": "0"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n    t1",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "setPrice"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "number",
-                                    "content": "19"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n\n    ",
-                                {
-                                    "type": "function",
-                                    "content": "assertEquals"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "number",
-                                    "content": "0"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " marginCalculator",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "calculate"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "Arrays",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "asList"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "t1",
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " t2",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n            ",
-                                {
-                                    "type": "number",
-                                    "content": "0.0000001"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
+                                    "content": "}"
                                 },
                                 "\n",
                                 {
                                     "type": "punctuation",
                                     "content": "}"
-                                }
+                                },
+                                "\n"
                             ],
+                            "lineNumber": "",
                             "type": "Snippet"
                         },
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "What will happen to this test when we refactor ",
+                                    "text": "Snippet below is used to highlight the code as a javascript language",
                                     "type": "SimpleText"
-                                },
+                                }
+                            ]
+                        },
+                        {
+                            "lang": "markdown",
+                            "maxLineLength": 81,
+                            "tokens": [
                                 {
-                                    "code": "Transaction",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " class? For example ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "Emphasis",
+                                    "type": "title",
                                     "content": [
                                         {
-                                            "text": "setters",
-                                            "type": "SimpleText"
+                                            "type": "punctuation",
+                                            "content": "#"
+                                        },
+                                        " Specifying Language"
+                                    ]
+                                },
+                                "\n \nYou can also specify a language. \nThat maybe useful if there is the snippet is not large enough for auto detection.\n\n```javascript\nimport React, {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n",
+                                {
+                                    "type": "code",
+                                    "content": "    render() {"
+                                },
+                                "\n",
+                                {
+                                    "type": "code",
+                                    "content": "        /// ..."
+                                },
+                                "\n",
+                                {
+                                    "type": "code",
+                                    "content": "    }"
+                                },
+                                "\n}\n```"
+                            ],
+                            "startLine": "# Specifying Language",
+                            "numberOfLines": 14.0,
+                            "title": "markdown",
+                            "type": "Snippet"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Following languages are supported",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "bulletMarker": "*",
+                            "tight": true,
+                            "type": "BulletList",
+                            "content": [
+                                {
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "Java",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "text": " can be removed in favor of",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "type": "Emphasis",
+                                    "type": "ListItem",
                                     "content": [
                                         {
-                                            "text": "Builder",
-                                            "type": "SimpleText"
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "JavaScript",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "text": " pattern.",
-                                    "type": "SimpleText"
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "Groovy",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "Python",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         },
@@ -964,80 +411,67 @@ const TestData = {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Our test is not about how to create ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "Transaction",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " instances. It is a about ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "StrongEmphasis",
-                                    "content": [
-                                        {
-                                            "text": "logic of margin calculation",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "text": ".",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "Our test must survive refactorings.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "In order to survive refactoring a ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "Emphasis",
-                                    "content": [
-                                        {
-                                            "text": "Test",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "text": " must limit its exposure to implementation details.",
+                                    "text": "We use highlightjs library to provide syntax highlighting",
                                     "type": "SimpleText"
                                 }
                             ]
-                        },
+                        }
+                    ]
+                },
+                {
+                    "title": "Wide Code",
+                    "id": "wide-code",
+                    "type": "Section",
+                    "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Lets encapsulate ",
+                                    "text": "To make regular text more readable we maintain a narrow column of text. You code snippets however can\u0027t always follow the",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "code": "Transaction",
-                                    "type": "InlinedCode"
+                                    "type": "SoftLineBreak"
                                 },
                                 {
-                                    "text": " creation",
+                                    "text": "same rules. In case of a wide code snippets we expand the horizontal boundaries and center the source code to fit.",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
                             "lang": "java",
-                            "maxLineLength": 87,
+                            "maxLineLength": 114,
                             "tokens": [
+                                {
+                                    "type": "keyword",
+                                    "content": "class"
+                                },
+                                " ",
+                                {
+                                    "type": "class-name",
+                                    "content": [
+                                        "InternationalPriceService"
+                                    ]
+                                },
+                                " ",
+                                {
+                                    "type": "keyword",
+                                    "content": "implements"
+                                },
+                                " ",
+                                {
+                                    "type": "class-name",
+                                    "content": [
+                                        "PriceService"
+                                    ]
+                                },
+                                " ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                "\n    ",
                                 {
                                     "type": "keyword",
                                     "content": "private"
@@ -1047,209 +481,25 @@ const TestData = {
                                     "type": "keyword",
                                     "content": "static"
                                 },
-                                " Transaction ",
-                                {
-                                    "type": "function",
-                                    "content": "createTransaction"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "String symbol",
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "double"
-                                },
-                                " lot",
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "double"
-                                },
-                                " price",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n    Transaction t ",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003d"
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "new"
-                                },
-                                " ",
-                                {
-                                    "type": "class-name",
-                                    "content": [
-                                        "Transaction"
-                                    ]
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n    t",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "setSymbol"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "symbol",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n    t",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "setLot"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "lot",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n    t",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "setPrice"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "price",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n\n    ",
-                                {
-                                    "type": "keyword",
-                                    "content": "return"
-                                },
-                                " t",
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                }
-                            ],
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "If ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "Transaction",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " implementation details change we update one place and not every test that depends",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "on this core domain object.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "java",
-                            "maxLineLength": 70,
-                            "tokens": [
-                                {
-                                    "type": "annotation",
-                                    "content": "@Test"
-                                },
-                                "\n",
-                                {
-                                    "type": "keyword",
-                                    "content": "public"
-                                },
                                 " ",
                                 {
                                     "type": "keyword",
                                     "content": "void"
                                 },
-                                " ",
+                                " LongJavaInterfaceNameWithSuperFactory ",
                                 {
                                     "type": "function",
-                                    "content": "marginShouldBeZeroIfNoLotsSet"
+                                    "content": "createMegaFactory"
                                 },
                                 {
                                     "type": "punctuation",
                                     "content": "("
                                 },
+                                {
+                                    "type": "keyword",
+                                    "content": "final"
+                                },
+                                " ExchangeCalendar calendar",
                                 {
                                     "type": "punctuation",
                                     "content": ")"
@@ -1259,187 +509,23 @@ const TestData = {
                                     "type": "punctuation",
                                     "content": "{"
                                 },
-                                "\n    Transaction t1 ",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003d"
-                                },
-                                " ",
-                                {
-                                    "type": "function",
-                                    "content": "createTransaction"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "string",
-                                    "content": "\""
-                                },
-                                "SYM",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                "B",
-                                {
-                                    "type": "string",
-                                    "content": "\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "0"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "8"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n    Transaction t2 ",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003d"
-                                },
-                                " ",
-                                {
-                                    "type": "function",
-                                    "content": "createTransaction"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "string",
-                                    "content": "\""
-                                },
-                                "SYM",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                "C",
-                                {
-                                    "type": "string",
-                                    "content": "\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "0"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "19"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n\n    ",
-                                {
-                                    "type": "function",
-                                    "content": "assertEquals"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "number",
-                                    "content": "0"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " marginCalculator",
+                                "\n        ",
                                 {
                                     "type": "punctuation",
                                     "content": "."
                                 },
                                 {
-                                    "type": "function",
-                                    "content": "calculate"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "Arrays",
-                                {
                                     "type": "punctuation",
                                     "content": "."
                                 },
                                 {
-                                    "type": "function",
-                                    "content": "asList"
+                                    "type": "punctuation",
+                                    "content": "."
                                 },
+                                "\n    ",
                                 {
                                     "type": "punctuation",
-                                    "content": "("
-                                },
-                                "t1",
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " t2",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n            ",
-                                {
-                                    "type": "number",
-                                    "content": "0.0000001"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
+                                    "content": "}"
                                 },
                                 "\n",
                                 {
@@ -1452,1072 +538,79 @@ const TestData = {
                     ]
                 },
                 {
-                    "title": "Table Data",
-                    "id": "table-data",
+                    "title": "Inlined",
+                    "id": "inlined",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "A few problems with the way we implemented ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "createTransaction",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": ":",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "bulletMarker": "*",
-                            "tight": true,
-                            "type": "BulletList",
-                            "content": [
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "need to specify all the parameters",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "no visible parameter names",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Instead lets define test data using ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "TableData",
-                                    "type": "InlinedCode"
-                                }
-                            ]
-                        },
-                        {
-                            "tabsContent": [
-                                {
-                                    "name": "Groovy",
-                                    "content": [
-                                        {
-                                            "lang": "groovy",
-                                            "maxLineLength": 81,
-                                            "tokens": [
-                                                {
-                                                    "type": "annotation",
-                                                    "content": "@Test"
-                                                },
-                                                "\n",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "void"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\"margin should be zero if no lots set\""
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "{"
-                                                },
-                                                "\n    ",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "def"
-                                                },
-                                                " transactionsData ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003d"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "["
-                                                },
-                                                {
-                                                    "type": "string",
-                                                    "content": "\"symbol\""
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "|"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\"lot\""
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "|"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\"price\""
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "]"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "{"
-                                                },
-                                                "\n                             ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "___________________________"
-                                                },
-                                                "\n                             ",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\"SYM.B\""
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "|"
-                                                },
-                                                "     ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "0"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "|"
-                                                },
-                                                "     ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "8"
-                                                },
-                                                "\n                             ",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\"SYM.C\""
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "|"
-                                                },
-                                                "     ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "0"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "|"
-                                                },
-                                                "    ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "19"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "}"
-                                                },
-                                                "\n\n    ",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "def"
-                                                },
-                                                " margin ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003d"
-                                                },
-                                                " marginCalculator",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "calculate"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "createTransaction"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                "transactionsData",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ";"
-                                                },
-                                                "\n    margin",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "."
-                                                },
-                                                "should ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003d\u003d"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "0"
-                                                },
-                                                "\n",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "}"
-                                                }
-                                            ],
-                                            "type": "Snippet"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "name": "Java",
-                                    "content": [
-                                        {
-                                            "lang": "java",
-                                            "maxLineLength": 84,
-                                            "tokens": [
-                                                {
-                                                    "type": "annotation",
-                                                    "content": "@Test"
-                                                },
-                                                "\n",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "public"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "void"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "function",
-                                                    "content": "marginShouldBeZeroIfNoLotsSet"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "{"
-                                                },
-                                                "\n    TableData transactionsData ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003d"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "function",
-                                                    "content": "header"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                "symbol",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                "lot",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                "price",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "values"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                "\n                                         ",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                "SYM",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                "B",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                "  ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "0"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                "     ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "8"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                "\n                                         ",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                "SYM",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                "C",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                "  ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "0"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                "     ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "19"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ";"
-                                                },
-                                                "\n\n    ",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "double"
-                                                },
-                                                " margin ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003d"
-                                                },
-                                                " marginCalculator",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "calculate"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "createTransaction"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                "transactionsData",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ";"
-                                                },
-                                                "\n    ",
-                                                {
-                                                    "type": "function",
-                                                    "content": "assertEquals"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "number",
-                                                    "content": "0"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                " margin",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "number",
-                                                    "content": "0.0000001"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ";"
-                                                },
-                                                "\n",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "}"
-                                                }
-                                            ],
-                                            "type": "Snippet"
-                                        }
-                                    ]
-                                }
-                            ],
-                            "type": "Tabs"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "code": "TableData",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " is a core class of this library. Consider it to be a list of maps on steroids.",
+                                    "text": "To inline code within a text dimply put it inside a back tick.",
                                     "type": "SimpleText"
                                 },
                                 {
                                     "type": "SoftLineBreak"
                                 },
                                 {
-                                    "text": "Let\u0027s define ",
+                                    "text": "E.g. To check if an Exchange is closed, you need to use ",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "code": "createTransaction",
+                                    "code": "ExchangeCalendar",
                                     "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " in terms of TableData.",
-                                    "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "tabsContent": [
+                            "lang": "markdown",
+                            "maxLineLength": 74,
+                            "tokens": [
                                 {
-                                    "name": "Groovy",
+                                    "type": "title",
                                     "content": [
                                         {
-                                            "lang": "groovy",
-                                            "maxLineLength": 73,
-                                            "tokens": [
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "private"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "static"
-                                                },
-                                                " List",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003c"
-                                                },
-                                                "Transaction",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003e"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "function",
-                                                    "content": "createTransaction"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                "TableData tableData",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "{"
-                                                },
-                                                "\n    tableData",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "."
-                                                },
-                                                "collect ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "{"
-                                                },
-                                                "\n        ",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "new"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "class-name",
-                                                    "content": [
-                                                        "Transaction"
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                "symbol",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ":"
-                                                },
-                                                " it",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "."
-                                                },
-                                                "symbol",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                " lot",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ":"
-                                                },
-                                                " it",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "."
-                                                },
-                                                "lot",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ","
-                                                },
-                                                " price",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ":"
-                                                },
-                                                " it",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "."
-                                                },
-                                                "price",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                "\n    ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "}"
-                                                },
-                                                "\n",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "}"
-                                                }
-                                            ],
-                                            "type": "Snippet"
-                                        }
+                                            "type": "punctuation",
+                                            "content": "#"
+                                        },
+                                        " Inlined"
                                     ]
                                 },
+                                "\n\nTo inline code within a text dimply put it inside a back tick. \nE.g. To check if an Exchange is closed, you need to use ",
                                 {
-                                    "name": "Java",
-                                    "content": [
-                                        {
-                                            "lang": "java",
-                                            "maxLineLength": 73,
-                                            "tokens": [
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "private"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "static"
-                                                },
-                                                " List",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003c"
-                                                },
-                                                "Transaction",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003e"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "function",
-                                                    "content": "createTransaction"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                "TableData tableData",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "{"
-                                                },
-                                                "\n    ",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "return"
-                                                },
-                                                " tableData",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "rowsStream"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "map"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                "r ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "-"
-                                                },
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003e"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "{"
-                                                },
-                                                "\n        Transaction t ",
-                                                {
-                                                    "type": "operator",
-                                                    "content": "\u003d"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "new"
-                                                },
-                                                " ",
-                                                {
-                                                    "type": "class-name",
-                                                    "content": [
-                                                        "Transaction"
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ";"
-                                                },
-                                                "\n        t",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "setSymbol"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                "r",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "get"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                "symbol",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ";"
-                                                },
-                                                "\n        t",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "setLot"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                "r",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "get"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                "lot",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ";"
-                                                },
-                                                "\n        t",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "setPrice"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                "r",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "get"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                "price",
-                                                {
-                                                    "type": "string",
-                                                    "content": "\""
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ";"
-                                                },
-                                                "\n\n        ",
-                                                {
-                                                    "type": "keyword",
-                                                    "content": "return"
-                                                },
-                                                " t",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ";"
-                                                },
-                                                "\n    ",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "}"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "."
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "collect"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "function",
-                                                    "content": "toList"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "("
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ")"
-                                                },
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": ";"
-                                                },
-                                                "\n",
-                                                {
-                                                    "type": "punctuation",
-                                                    "content": "}"
-                                                }
-                                            ],
-                                            "type": "Snippet"
-                                        }
-                                    ]
+                                    "type": "code",
+                                    "content": "`ExchangeCalendar`"
                                 }
                             ],
-                            "type": "Tabs"
+                            "startLine": "# Inlined",
+                            "numberOfLines": 4.0,
+                            "title": "markdown",
+                            "type": "Snippet"
                         }
                     ]
                 }
             ],
             "tocItem": {
-                "sectionTitle": "Data",
-                "pageTitle": "Input Preparation",
-                "fileName": "input-preparation",
-                "dirName": "data",
+                "sectionTitle": "Features",
+                "pageTitle": "Code Snippets",
+                "fileName": "code-snippets",
+                "dirName": "features",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Data Injection",
-                        "id": "data-injection"
+                        "title": "Simple Snippet",
+                        "id": "simple-snippet"
                     },
                     {
-                        "title": "Input Encapsulation",
-                        "id": "input-encapsulation"
+                        "title": "Specifying Language",
+                        "id": "specifying-language"
                     },
                     {
-                        "title": "Table Data",
-                        "id": "table-data"
+                        "title": "Wide Code",
+                        "id": "wide-code"
+                    },
+                    {
+                        "title": "Inlined",
+                        "id": "inlined"
                     }
                 ]
             }

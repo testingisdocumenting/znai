@@ -2,8 +2,8 @@ import React from 'react'
 
 // import Demo from './presentation/SvgPresentationDemo'
 // import Demo from './presentation/PresentationDemo'
-// import Demo from './DocumentationDemo'
-import Demo from './bullets/IconsAsBulletsDemo'
+import Demo from './DocumentationDemo'
+// import Demo from './bullets/IconsAsBulletsDemo'
 
 // import Demo from './images/EmbeddedAnnotatedImageDemo'
 // import Demo from './images/AnnotatedImageEditorDemo'

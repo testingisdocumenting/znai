@@ -30,7 +30,7 @@ class Documentation extends Component {
 
         this.documentationNavigation = new DocumentationNavigation(docMeta.id)
 
-        const currentPageLocation = this.documentationNavigation.currentDirNameAndFileName()
+        const currentPageLocation = this.documentationNavigation.currentPageLocation()
 
         const selectedTocItem = {...currentPageLocation, pageSectionId: page.tocItem.pageSectionIdTitles[0].id}
         this.state = {
@@ -155,6 +155,7 @@ class Documentation extends Component {
         const {page} = this.state
 
         this.extractPageSectionNodes()
+        this.scrollToPageSection(page.tocItem, this.documentationNavigation.currentPageLocation().pageSectionId)
         this.updateCurrentPageSection()
         const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page.content)
 
@@ -223,27 +224,6 @@ class Documentation extends Component {
 
     onTocItemClick(dirName, fileName) {
         this.documentationNavigation.navigateToPage({dirName, fileName})
-    }
-
-    static renderNavigationButton(tocItem) {
-        // we don't render next/prev buttons that will point to items without dir name (e.g. index page)
-        return tocItem && tocItem.dirName;
-    }
-
-    renderNextPageButton() {
-        return (Documentation.renderNavigationButton(this.nextPageToc) ? (
-                <div className="page-navigation-button-and-text" onClick={this.onNextPage}>
-                        <span className="next-prev-page-title">{this.nextPageToc.pageTitle} </span>
-                        <span className="glyphicon glyphicon-chevron-right"/>
-                </div>) : <div/>)
-    }
-
-    renderPreviousPageButton() {
-        return (Documentation.renderNavigationButton(this.prevPageToc) ? (
-                <div className="page-navigation-button-and-text" onClick={this.onPrevPage}>
-                    <span className="glyphicon glyphicon-chevron-left"/>
-                    <span className="next-prev-page-title">{this.prevPageToc.pageTitle} </span>
-                </div>) : <div/>)
     }
 
     onSearchSelection(id) {
@@ -346,7 +326,7 @@ class Documentation extends Component {
 
     onUrlChange(url) {
         return this.getAllPagesPromise().then((pages) => {
-            const currentPageLocation = this.documentationNavigation.extractDirNameAndFileName(url)
+            const currentPageLocation = this.documentationNavigation.extractPageLocation(url)
 
             const matchingPages = pages.filter((p) => p.tocItem.dirName === currentPageLocation.dirName &&
                 p.tocItem.fileName === currentPageLocation.fileName)
@@ -360,11 +340,7 @@ class Documentation extends Component {
             this.changePage({page: matchingPages[0], selectedTocItem: currentPageLocation, lastChangeDataDom: null})
             this.scrollToTop()
 
-            const sectionIdx = tocItem.pageSectionIdTitles.map(ps => ps.id).indexOf(currentPageLocation.pageSectionId);
-            if (sectionIdx >= 0) {
-                this.pageSectionNodes[sectionIdx].scrollIntoView();
-            }
-
+            this.scrollToPageSection(tocItem, currentPageLocation.pageSectionId)
             return true
         }, (error) => console.error(error))
     }
@@ -376,6 +352,13 @@ class Documentation extends Component {
 
     extractPageSectionNodes() {
         this.pageSectionNodes = [...document.querySelectorAll(".section-title")]
+    }
+
+    scrollToPageSection(tocItem, pageSectionId) {
+        const sectionIdx = tocItem.pageSectionIdTitles.map(ps => ps.id).indexOf(pageSectionId);
+        if (sectionIdx >= 0) {
+            this.pageSectionNodes[sectionIdx].scrollIntoView();
+        }
     }
 
     updateCurrentPageSection() {
