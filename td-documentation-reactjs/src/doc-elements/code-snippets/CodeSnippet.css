@@ -2,6 +2,10 @@
     color: #383b3f;
 }
 
+.token.operator {
+    background: none;
+}
+
 .token.function {
     color: #a15b38;
 }

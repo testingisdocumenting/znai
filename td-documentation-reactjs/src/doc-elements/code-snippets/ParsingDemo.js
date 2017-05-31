@@ -17,10 +17,13 @@ class ParsingDemo extends Component {
             '</div>\n'
 
         const javaCode = "class Test Test2 {\n" +
-            "    var a  = 2; // comment line\n" +
-            "    var b = a + 1;// another comment\n" +
-            "    var c = 3;// in two lines\n" +
-            "    var d = a + 1;\n"
+            "/*another \n" +
+            " comment line \n" +
+            "end of comment */\n" +
+            "    var a = 2; // comment line\n" +
+            "    var b = a + 1;\n" +
+            "    var c = 3; //             in two lines\n" +
+            "    var d = a + 1; //          another comment\n"
 
         const markdownCode = '# Header\n\n'+
             'Normal paragraph text. Some *italic* and **bold**.\n' +
@@ -34,7 +37,7 @@ class ParsingDemo extends Component {
 
         return <div>
             <SimpleCodeSnippet tokens={parseCode("html", htmlCode)}/>
-            <CodeSnippetWithInlineComments tokens={parseCode("javascript", javaCode)}/>
+            <CodeSnippetWithInlineComments tokens={parseCode("javascript", javaCode)} slideIdx={1}/>
             <CodeSnippetWithInlineComments tokens={parseCode("markdown", markdownCode2)}/>
         </div>
     }

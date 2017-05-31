@@ -10,3 +10,9 @@
 span.ui.blue.label {
     background-color: #000080 !important;
 }
+
+.code-line.highlight {
+    background: rgba(100, 180, 250, 0.3);
+    padding: 4px 0;
+    border-radius: 4px;
+}
