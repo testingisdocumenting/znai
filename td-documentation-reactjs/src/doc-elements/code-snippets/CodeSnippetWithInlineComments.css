@@ -2,6 +2,14 @@
     margin-left: 10px;
 }
 
+.presentation-code-comment {
+    height: 18px;
+}
+
+.presentation-code-comment.divider {
+    border-top: 1px #009AA6 solid;
+}
+
 .code-bullets {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -9,6 +17,10 @@
 
 span.ui.blue.label {
     background-color: #000080 !important;
+}
+
+.code-with-inlined-comments.with-highlighted-line pre {
+    overflow-y: hidden;
 }
 
 .code-line.highlight {

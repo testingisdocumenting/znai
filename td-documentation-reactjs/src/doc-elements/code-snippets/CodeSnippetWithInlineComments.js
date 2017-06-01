@@ -41,6 +41,18 @@ const LineOfTokens = ({line, isHighlighted, isPresentation}) => {
 const BulletExplanations = ({comments}) => <div className="code-bullets">
     {comments.map((t, idx) => <Bullet key={idx} comment={t.content} idx={idx + 1}/>)}</div>
 
+const Explanations = ({isPresentation, slideIdx, comments}) => {
+    if (! isPresentation) {
+        return <BulletExplanations comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
+    }
+
+    const hiddenComment = slideIdx === 0
+    const comment = hiddenComment ? " " : comments[slideIdx - 1].content
+    const className = "presentation-code-comment" + (hiddenComment ? "" : " divider")
+
+    return <div className={className}>{trimComment(comment)}</div>
+}
+
 const CodeSnippetWithInlineComments = ({tokens, slideIdx}) => {
     commentIdx = 0
     const comments = tokens.filter(t => isInlinedComment(t))
@@ -56,9 +68,12 @@ const CodeSnippetWithInlineComments = ({tokens, slideIdx}) => {
     const isPresentation = typeof slideIdx !== 'undefined'
 
     // slideIdx === 0 means no highlights, 1 - first comment, etc
-    const lineIdxToHighlight = slideIdx === 0 ? -1 : idxOfLinesWithComments[slideIdx - 1]
+    const noHighlights = slideIdx === 0
+    const lineIdxToHighlight = noHighlights ? -1 : idxOfLinesWithComments[slideIdx - 1]
 
-    return <div>
+    const className = "code-with-inlined-comments" + (noHighlights ? "" : " with-highlighted-line")
+
+    return <div className={className}>
         <pre>
             <code>
                 {lines.map((line, idx) => <LineOfTokens key={idx} line={line}
@@ -67,8 +82,7 @@ const CodeSnippetWithInlineComments = ({tokens, slideIdx}) => {
             </code>
         </pre>
 
-        {comments.length && ! isPresentation ?
-            <BulletExplanations comments={comments}/> : null}
+        <Explanations isPresentation={isPresentation} slideIdx={slideIdx} comments={comments}/>
     </div>
 }
 
