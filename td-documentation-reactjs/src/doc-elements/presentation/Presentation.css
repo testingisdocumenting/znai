@@ -1,31 +1,39 @@
 .presentation {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
 }
 
-.presentation .slide-number {
-    position: fixed;
-    bottom: 10px;
-    align-self: center;
+.presentation .header {
+    flex: 0 0 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.presentation .footer {
+    flex: 0 0 30px;
+    display: flex;
+    justify-content: center;
 }
 
 .presentation .slide-area {
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    height: 0;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
 }
 
 .presentation-close-icon {
-    position: fixed;
     font-size: 14px;
-    right: 40px;
-    top: 20px;
+    margin: 10px;
     cursor: pointer;
 }
 
 .presentation .content-block {
     width: auto;
+    margin: 0;
 }
 
 .presentation .paragraph {

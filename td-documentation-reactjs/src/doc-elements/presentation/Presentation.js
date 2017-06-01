@@ -24,12 +24,27 @@ class Presentation extends Component {
         // const showNextButton = currentSlideIdx >= presentationRegistry.numberOfSlides - 1 TODO
 
         return (<div className="presentation">
-            <div className="presentation-close-icon glyphicon glyphicon-remove" onClick={this.onClose}/>
-            <div className="slide-number">
-                {currentSlideIdx + 1}/{presentationRegistry.numberOfSlides}
+            <div className="header">
+                <div className="info">
+                    <div className="company-title"></div>
+                    <div className="slide-title"></div>
+                </div>
+
+                <div className="controls">
+                    <div className="presentation-close-icon glyphicon glyphicon-remove" onClick={this.onClose}/>
+                </div>
             </div>
-            <div className={slideClassName} style={slideAreaStyle} ref={(n) => this.componentDom = n}>
-                {component}
+
+            <div className={slideClassName} ref={(n) => this.slideAreaDom = n}>
+                <div ref={(n) => this.componentDom = n} style={slideAreaStyle}>
+                    {component}
+                </div>
+            </div>
+
+            <div className="footer">
+                <div className="slide-number">
+                    {currentSlideIdx + 1}/{presentationRegistry.numberOfSlides}
+                </div>
             </div>
         </div>)
     }
@@ -66,10 +81,10 @@ class Presentation extends Component {
         const width = this.componentDom.offsetWidth
         const height = this.componentDom.offsetHeight
 
-        const widthRatio = window.innerWidth / width
-        const heightRatio = window.innerHeight / height
+        const widthRatio = this.slideAreaDom.offsetWidth / width
+        const heightRatio = this.slideAreaDom.offsetHeight / height
 
-        const scaleRatio = Math.min(widthRatio, heightRatio, 2)
+        const scaleRatio = Math.min(widthRatio, heightRatio, 2.5)
 
         this.setState({scaleRatio})
     }
