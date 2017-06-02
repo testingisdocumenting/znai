@@ -7,9 +7,13 @@ class PresentationRegistry {
         this.renderingMeta = new RenderingMeta()
         this.presentationElementHandlers = presentationElementHandlers
         this.numberOfSlides_ = 0
-        this.slideComponents = []
+        this.slides = []
 
-        this.registerComponents_(content)
+        if (Array.isArray(content)) {
+            this.registerSlides_(content)
+        } else {
+            this.registerSlide_(content)
+        }
     }
 
     get numberOfSlides() {
@@ -20,11 +24,15 @@ class PresentationRegistry {
         return this.numberOfSlides_ === 0
     }
 
-    registerComponents_(items) {
-        items.forEach(item => this.registerComponent_(item))
+    handlerForDocElementType(type) {
+        return this.presentationElementHandlers[type]
     }
 
-    registerComponent_(item) {
+    registerSlides_(items) {
+        items.forEach(item => this.registerSlide_(item))
+    }
+
+    registerSlide_(item) {
         const type = item.type
         const props = item
 
@@ -36,58 +44,64 @@ class PresentationRegistry {
         const presentationElementHandler = this.presentationElementHandlers[type]
         if (presentationElementHandler) {
             const propsWithRenderingMeta = {renderingMeta: this.renderingMeta, ...props}
-            this.register(presentationElementHandler.component, propsWithRenderingMeta,
-                presentationElementHandler.numberOfSlides(propsWithRenderingMeta))
+            this.register(presentationElementHandler.component, propsWithRenderingMeta, presentationElementHandler)
         }
 
         if (item.content) {
-            this.registerComponents_(item.content)
+            this.registerSlides_(item.content)
         }
     }
 
-    register(component, props, numberOfSlides) {
-        const slideComponent = {
+    register(component, props, handler) {
+        let numberOfSlides = handler.numberOfSlides(props);
+
+        const slide = {
             component: component,
             props: props,
             numberOfSlides: numberOfSlides
         }
 
-        this.slideComponents.push(slideComponent)
+        for (let slideIdx = 0; slideIdx < numberOfSlides; slideIdx++) {
+            this.slides.push({...slide, slideIdx: slideIdx,
+                info: handler.slideInfoProvider ? handler.slideInfoProvider({...props, slideIdx: slideIdx}) : {} })
+        }
+
         this.numberOfSlides_ += numberOfSlides
     }
 
-    componentToRender(slideIdx) {
-        const {slideComponent, componentIdx} = this.findComponentAndIdx(slideIdx)
-        const numberOfSlidesToSkip = this.calcNumberOfSlidesToSkip(componentIdx)
-        return <slideComponent.component {...slideComponent.props}
-                                         elementsLibrary={this.elementsLibrary}
-                                         slideIdx={slideIdx - numberOfSlidesToSkip}/>
-    }
+    extractSlideInfo(pageLocalSlideIdx) {
+        let pageTitle = ""
+        let sectionTitle = ""
+        for (let i = pageLocalSlideIdx; i >= 0; i--) {
+            const slide = this.slides[i];
 
-    calcNumberOfSlidesToSkip(componentIdx) {
-        let numberOfSlides = 0
-        for (let i = 0; i < componentIdx; i++) {
-            numberOfSlides += this.slideComponents[i].numberOfSlides
-        }
-
-        return numberOfSlides
-    }
-
-    findComponentAndIdx(slideNumber) {
-        let startSlideIdx = 0
-        for (let componentIdx = 0, len = this.slideComponents.length; componentIdx < len; componentIdx++) {
-            const slideComponent = this.slideComponents[componentIdx]
-            const endSlideIdx = startSlideIdx + slideComponent.numberOfSlides
-
-            if (slideNumber >= startSlideIdx && slideNumber < endSlideIdx) {
-                return {slideComponent, componentIdx}
+            if (slide.info.pageTitle && !pageTitle) {
+                pageTitle = slide.info.pageTitle
             }
 
-            startSlideIdx = endSlideIdx
+            if (slide.info.sectionTitle && !sectionTitle) {
+                sectionTitle = slide.info.sectionTitle
+            }
         }
 
-        return {slideComponent: this.slideComponents[this.slideComponents.length - 1],
-            componentIdx: this.slideComponents.length - 1}
+        return {pageTitle, sectionTitle}
+    }
+
+    /**
+     * renders component with a slide content
+     * @param pageLocalSlideIdx slide idx local for a page. At the start of each page it equals 0
+     * @returns {XML}
+     */
+    renderedComponent(pageLocalSlideIdx) {
+        const slide = this.slides[pageLocalSlideIdx]
+
+        return <slide.component {...slide.props}
+                                elementsLibrary={this.elementsLibrary}
+                                slideIdx={slide.slideIdx}/>
+    }
+
+    slideByIdx(pageLocalSlideIdx) {
+        return this.slides[pageLocalSlideIdx]
     }
 }
 

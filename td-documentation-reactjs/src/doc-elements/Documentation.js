@@ -93,7 +93,8 @@ class Documentation extends Component {
                                                           onTocUpdate={this.onTocUpdate}
                                                           onError={this.onPageGenError}/> : null
 
-        return isPresentation ? <Presentation presentationRegistry={presentationRegistry}
+        return isPresentation ? <Presentation docMeta={docMeta}
+                                              presentationRegistry={presentationRegistry}
                                               onClose={this.onPresentationClose}
                                               onNextPage={this.onNextPage}
                                               onPrevPage={this.onPrevPage}/> :
@@ -157,7 +158,7 @@ class Documentation extends Component {
         this.extractPageSectionNodes()
         this.scrollToPageSection(page.tocItem, this.documentationNavigation.currentPageLocation().pageSectionId)
         this.updateCurrentPageSection()
-        const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page.content)
+        const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page)
 
         const isIndex = page.tocItem.dirName.length === 0 && page.tocItem.fileName === 'index'
         document.title = isIndex ? docMeta.title : docMeta.title + ": " + page.tocItem.pageTitle

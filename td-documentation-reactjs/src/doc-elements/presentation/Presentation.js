@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 import './Presentation.css'
 
-const defaultScaleRatio = 2
+const defaultScaleRatio = 2.5
 
 class Presentation extends Component {
     constructor(props) {
@@ -12,22 +12,32 @@ class Presentation extends Component {
 
         this.keyDownHandler = this.keyDownHandler.bind(this)
         this.onClose = this.onClose.bind(this)
+        this.contentRefCallback = this.contentRefCallback.bind(this)
     }
 
     render() {
-        const {presentationRegistry} = this.props
+        const {docMeta, presentationRegistry} = this.props
         const {currentSlideIdx, isAppeared, scaleRatio} = this.state
         const slideAreaStyle = {transform: 'scale(' + scaleRatio + ')'}
 
         const slideClassName = "slide-area" + (isAppeared ? " appeared": "")
-        const component = presentationRegistry.componentToRender(currentSlideIdx)
-        // const showNextButton = currentSlideIdx >= presentationRegistry.numberOfSlides - 1 TODO
+        const slideContent = presentationRegistry.renderedComponent(currentSlideIdx)
+
+        const {pageTitle, sectionTitle} = presentationRegistry.extractSlideInfo(currentSlideIdx - 1)
+
+        const slide = presentationRegistry.slideByIdx(currentSlideIdx)
+        const isSectionTitleOnSlide = !! slide.info.sectionTitle
 
         return (<div className="presentation">
             <div className="header">
                 <div className="info">
-                    <div className="company-title"></div>
-                    <div className="slide-title"></div>
+                    <div className="company-title">
+                        <img src="/static/twosigma-logo-and-label.png" width="230px" height="42px"/>
+                    </div>
+
+                    <div className="product-title">{docMeta.title}</div>
+                    <div className="page-title">{pageTitle}</div>
+                    <div className="section-title">{isSectionTitleOnSlide ? null : sectionTitle}</div>
                 </div>
 
                 <div className="controls">
@@ -37,7 +47,7 @@ class Presentation extends Component {
 
             <div className={slideClassName} ref={(n) => this.slideAreaDom = n}>
                 <div ref={(n) => this.componentDom = n} style={slideAreaStyle}>
-                    {component}
+                    {slideContent}
                 </div>
             </div>
 
@@ -47,6 +57,11 @@ class Presentation extends Component {
                 </div>
             </div>
         </div>)
+    }
+
+    contentRefCallback(component) {
+        console.log("component", component)
+        this.slideComponent = component
     }
 
     componentDidMount() {
@@ -84,7 +99,7 @@ class Presentation extends Component {
         const widthRatio = this.slideAreaDom.offsetWidth / width
         const heightRatio = this.slideAreaDom.offsetHeight / height
 
-        const scaleRatio = Math.min(widthRatio, heightRatio, 2.5)
+        const scaleRatio = Math.min(widthRatio, heightRatio, defaultScaleRatio)
 
         this.setState({scaleRatio})
     }

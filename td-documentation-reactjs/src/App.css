@@ -17,11 +17,11 @@ body {
     align-items: center;
 }
 
-.page-title {
+.page-content .page-title {
     font-size: 32px;
 }
 
-.section-title {
+.page-content .section-title {
     font-size: 22px;
     padding-bottom: 5px;
     margin-bottom: 20px;
@@ -37,9 +37,6 @@ body {
 
 .strong-emphasis {
     font-weight: bold;
-}
-
-.page-content {
 }
 
 .paragraph {

@@ -5,6 +5,7 @@ import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.WebSite;
 import com.twosigma.documentation.client.DocumentationUploadClient;
+import com.twosigma.documentation.html.WebResource;
 import com.twosigma.documentation.server.DocumentationServer;
 import com.twosigma.documentation.server.preview.DocumentationPreview;
 import io.vertx.core.http.HttpServer;
@@ -79,6 +80,7 @@ public class DocumentationCliApp {
                 withId(getDocId()).
                 withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).
                 withFileWithLookupPaths("lookup-paths").
+                withWebResources(WebResource.fromResource("static/twosigma-logo-and-label.png")).
                 withEnabledPreview(config.isPreview()).deployTo(deployPath);
     }
 

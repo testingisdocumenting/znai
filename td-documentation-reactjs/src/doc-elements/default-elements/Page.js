@@ -29,6 +29,7 @@ const PresentationTitle = ({tocItem}) => {
 }
 
 const presentationPageHandler = {component: PresentationTitle,
-    numberOfSlides: () => 1}
+    numberOfSlides: () => 1,
+    slideInfoProvider: ({tocItem}) => {return {pageTitle: tocItem.pageTitle}}}
 
-export {Page, presentationPageHandler}
+export {Page, PresentationTitle, presentationPageHandler}

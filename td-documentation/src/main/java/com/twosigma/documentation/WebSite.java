@@ -379,7 +379,7 @@ public class WebSite {
         private Path deployPath;
         private Path docRootPath;
         private Path tocPath;
-        private List<Path> webResources;
+        private List<WebResource> webResources;
         private String id;
         private String title;
         private String type;
@@ -399,8 +399,8 @@ public class WebSite {
             return this;
         }
 
-        public Configuration withWebResources(Path... paths) {
-            Arrays.stream(paths).forEach(p -> webResources.add(p));
+        public Configuration withWebResources(WebResource... resources) {
+            webResources.addAll(Arrays.asList(resources));
             return this;
         }
 

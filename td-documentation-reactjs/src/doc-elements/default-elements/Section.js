@@ -15,6 +15,7 @@ const PresentationTitle = ({title}) => {
 }
 
 const presentationSectionHandler = {component: PresentationTitle,
-    numberOfSlides: () => 1}
+    numberOfSlides: () => 1,
+    slideInfoProvider: ({title}) => {return {sectionTitle: title}}}
 
 export {Section, presentationSectionHandler}

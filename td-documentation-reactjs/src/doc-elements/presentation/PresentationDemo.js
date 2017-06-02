@@ -137,7 +137,27 @@ const codeWithInlinedComments = [{
     "type": "Snippet"
 }]
 
-const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, codeWithInlinedComments)
-const PresentationDemo = (props) => <Presentation presentationRegistry={registry}/>
+const section1 = {
+    title: "Section One",
+    type: "Section",
+    content: codeWithInlinedComments
+}
+
+const section2 = {
+    title: "Section Two",
+    type: "Section",
+    content: codeWithInlinedComments
+}
+
+const page = {
+    tocItem: {pageTitle: "Page Title"},
+    type: "Page",
+    content: [section1, section2]
+}
+
+const docMeta = {id: "mdoc", title: "MDoc"}
+
+const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page)
+const PresentationDemo = (props) => <Presentation docMeta={docMeta} presentationRegistry={registry}/>
 
 export default PresentationDemo
