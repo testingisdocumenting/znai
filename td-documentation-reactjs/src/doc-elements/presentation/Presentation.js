@@ -12,7 +12,6 @@ class Presentation extends Component {
 
         this.keyDownHandler = this.keyDownHandler.bind(this)
         this.onClose = this.onClose.bind(this)
-        this.contentRefCallback = this.contentRefCallback.bind(this)
     }
 
     render() {
