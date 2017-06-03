@@ -27,7 +27,6 @@ class StandaloneTestRunner {
     }
 
     void process(Path scriptPath, delegate) {
-        ConsoleOutputs.out(Color.BLUE, "debug ", Color.PURPLE, scriptPath, " ",  FontStyle.NORMAL, scriptPath.isAbsolute() ? "is absolute" : "is not absolute")
         currentTestPath = scriptPath.isAbsolute() ? scriptPath : workingDir.resolve(scriptPath)
 
         def script = groovy.createScript((workingDir.relativize(currentTestPath)).toString(), new Binding())

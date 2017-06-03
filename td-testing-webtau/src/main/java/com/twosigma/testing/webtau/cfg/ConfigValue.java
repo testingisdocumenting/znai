@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
  */
 public class ConfigValue {
     private String key;
+    private String prefixedUpperCaseKey;
     private Object defaultValue;
     private String description;
 
@@ -23,14 +24,20 @@ public class ConfigValue {
         values.addFirst(new Value(source, value));
     }
 
-    public void accept(String source, Map values) {
-        if (values.containsKey(key)) {
-            set(source, values.get(key));
+    public void accept(String source, Map configValues) {
+        if (configValues.containsKey(key)) {
+            set(source, configValues.get(key));
+        } else if (configValues.containsKey(prefixedUpperCaseKey)) {
+            set(source, configValues.get(prefixedUpperCaseKey));
         }
     }
 
     public String getKey() {
         return key;
+    }
+
+    public String getPrefixedUpperCaseKey() {
+        return prefixedUpperCaseKey;
     }
 
     public String getDescription() {
@@ -60,6 +67,15 @@ public class ConfigValue {
                 Integer.valueOf(first.toString());
     }
 
+    public boolean getAsBoolean() {
+        if (isDefault()) {
+            return (boolean) defaultValue;
+        }
+
+        Object first = values.getFirst().value;
+        return first.toString().toLowerCase().equals("true");
+    }
+
     @Override
     public String toString() {
         return key + ": " + values.stream().map(Value::toString).collect(Collectors.joining(", "));
@@ -67,6 +83,7 @@ public class ConfigValue {
 
     private ConfigValue(String key, String description, String sourceId, Object value, Object defaultValue) {
         this.key = key;
+        this.prefixedUpperCaseKey = "WEBTAU_" + key.toUpperCase();
         this.description = description;
         this.values = new ArrayDeque<>();
         this.defaultValue = defaultValue;

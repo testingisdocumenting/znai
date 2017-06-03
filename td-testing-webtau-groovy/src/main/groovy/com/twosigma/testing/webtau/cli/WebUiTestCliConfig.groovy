@@ -30,6 +30,8 @@ class WebUiTestCliConfig {
             cfg.acceptConfigValues("config file", configObject.flatten())
         }
 
+        cfg.acceptConfigValues("environment variable", envVarsAsMap())
+        cfg.acceptConfigValues("system property", systemPropsAsMap())
         cfg.acceptConfigValues("command line argument", commandLineArgsAsMap())
     }
 
@@ -91,5 +93,13 @@ class WebUiTestCliConfig {
 
     private Map commandLineArgsAsMap() {
         commandLine.options.collectEntries { [it.longOpt, it.value] }
+    }
+
+    private static Map systemPropsAsMap() {
+        System.properties.stringPropertyNames().collectEntries { [it, System.getProperty(it)] }
+    }
+
+    private static Map envVarsAsMap() {
+        return System.getenv()
     }
 }

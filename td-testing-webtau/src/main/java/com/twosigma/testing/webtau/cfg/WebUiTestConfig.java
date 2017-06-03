@@ -29,6 +29,9 @@ public class WebUiTestConfig {
     private ConfigValue windowWidth = declare("windowWidth", "browser window width", 1000);
     private ConfigValue windowHeight = declare("windowHeight", "browser window height", 800);
     private ConfigValue workingDir = declare("workingDir", "logical working dir", Paths.get(""));
+    private ConfigValue headless = declare("headless", "run headless mode", false);
+    private ConfigValue chromeDriverPath = declare("chromeDriverPath", "path to chrome driver binary", null);
+    private ConfigValue chromeBinPath = declare("chromeBinPath", "path to chrome binary", null);
 
     private List<ConfigValue> cfgValues = Arrays.asList(
             config,
@@ -37,7 +40,10 @@ public class WebUiTestConfig {
             waitTimeout,
             docPath,
             windowWidth,
-            windowHeight);
+            windowHeight,
+            headless,
+            chromeDriverPath,
+            chromeBinPath);
 
     public Stream<ConfigValue> getCfgValuesStream() {
         return cfgValues.stream();
@@ -75,6 +81,18 @@ public class WebUiTestConfig {
         return workingDir.getKey();
     }
 
+    public boolean isHeadless() {
+        return headless.getAsBoolean();
+    }
+
+    public Path getChromeBinPath() {
+        return chromeBinPath.getAsPath();
+    }
+
+    public Path getChromeDriverPath() {
+        return chromeDriverPath.getAsPath();
+    }
+
     @Override
     public String toString() {
         return cfgValues.stream().map(ConfigValue::toString).collect(Collectors.joining("\n"));
@@ -90,10 +108,10 @@ public class WebUiTestConfig {
                 .map(v -> v.getAsString().length()).max(Integer::compareTo).orElse(0);
 
         cfgValues.stream().filter(ConfigValue::nonDefault).forEach(v -> {
-            String valueAsText = v.getAsString();
-            int valuePadding = maxValueLength - valueAsText.length();
+                    String valueAsText = v.getAsString();
+                    int valuePadding = maxValueLength - valueAsText.length();
 
-            ConsoleOutputs.out(Color.BLUE, String.format("%" + maxKeyLength + "s", v.getKey()), ": ",
+                    ConsoleOutputs.out(Color.BLUE, String.format("%" + maxKeyLength + "s", v.getKey()), ": ",
                             Color.YELLOW, valueAsText,
                             StringUtils.createIndentation(valuePadding),
                             FontStyle.NORMAL, " // from ", v.getSource());
