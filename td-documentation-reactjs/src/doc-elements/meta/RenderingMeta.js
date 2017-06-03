@@ -1,5 +1,3 @@
-import React from 'react'
-
 class RenderingMeta {
     params_ = {}
 

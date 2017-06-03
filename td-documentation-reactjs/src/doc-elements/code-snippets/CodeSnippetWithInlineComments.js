@@ -46,11 +46,7 @@ const Explanations = ({isPresentation, slideIdx, comments}) => {
         return <BulletExplanations comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
     }
 
-    const hiddenComment = slideIdx === 0
-    const comment = hiddenComment ? " " : comments[slideIdx - 1].content
-    const className = "presentation-code-comment" + (hiddenComment ? "" : " divider")
-
-    return <div className={className}>{trimComment(comment)}</div>
+    return null
 }
 
 const CodeSnippetWithInlineComments = ({tokens, slideIdx}) => {

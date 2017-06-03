@@ -9,7 +9,7 @@ import './Snippet.css'
 
 class Snippet extends React.Component {
     render() {
-        const {tokens, maxLineLength, commentsType} = this.props
+        const {maxLineLength, commentsType} = this.props
 
         const CodeSnippet = commentsType === 'inline' ? CodeSnippetWithInlineComments : SimpleCodeSnippet
         const divClassName = "snippet " + (maxLineLength && maxLineLength >= 89 ? "wide-screen" : "content-block")
@@ -28,6 +28,13 @@ const presentationSnippetHandler = {component: Snippet,
 
         const comments = tokens.filter(t => isInlinedComment(t))
         return comments.length + 1
+    },
+
+    slideInfoProvider: ({tokens, slideIdx}) => {
+        const comments = tokens.filter(t => isInlinedComment(t))
+
+        return {slideVisibleNote: !comments.length ? null :
+            slideIdx === 0 ? "" : comments[slideIdx - 1].content}
     }}
 
 export {Snippet, presentationSnippetHandler}

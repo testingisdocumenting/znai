@@ -6,28 +6,65 @@
 }
 
 .presentation .header {
+    display: flex;
     flex: 0 0 80px;
+}
+
+.presentation .header .product-info {
     display: flex;
+    align-items: center;
+    background-color: #383b3f;
+    flex: 0 0 280px;
+    color: #e7e7e7;
+}
+
+.presentation .header .product-info .product-title {
+    display: flex;
+    align-items: center;
+    background-color: #383b3f;
+    flex: 0 0 280px;
+    margin-left: 10px;
+    font-size: 22px;
+    padding: 10px;
+    color: #e7e7e7;
+}
+
+.presentation .header .product-info img {
+    margin-left: 10px;
+}
+
+.presentation .header .slide-info {
+    display: flex;
+    align-items: center;
+    background-color: #4b4f54;
+    color: #fff;
+    font-size: 26px;
+    flex: 1;
+    padding-left: 30px;
+}
+
+.presentation .header .slide-info .divider {
+    margin: 0 20px;
+    color: #999;
+}
+
+.presentation .header .slide-info .page-title {
+}
+
+.presentation .header .controls {
+    display: flex;
+    flex: 0 0 80px;
+    align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #bbb;
+    color: #e7e7e7;
+    background-color: #4b4f54;
 }
 
-.presentation .header .info {
-    display: flex;
-}
-
-.presentation .header .info .company-title {
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-}
-
-.presentation .header .info .product-title {
-    display: flex;
-    align-items: center;
-    font-size: 30px;
-    margin-left: 20px;
-    color: #888;
+.presentation .header .controls .close {
+    color: #fff;
+    font-size: 14px;
+    margin: 20px;
+    cursor: pointer;
 }
 
 .presentation .header .info .page-title {
@@ -48,9 +85,17 @@
 }
 
 .presentation .footer {
-    flex: 0 0 30px;
+    flex: 0 0 50px;
     display: flex;
+    font-size: 28px;
+    align-items: center;
     justify-content: center;
+    color: #e7e7e7;
+    background-color: #383b3f;
+}
+
+.presentation .footer.size-only {
+    background: none;
 }
 
 .presentation .slide-area {
@@ -59,12 +104,6 @@
     flex: 1;
     justify-content: center;
     align-items: center;
-}
-
-.presentation-close-icon {
-    font-size: 14px;
-    margin: 10px;
-    cursor: pointer;
 }
 
 .presentation .content-block {

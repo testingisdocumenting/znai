@@ -70,8 +70,12 @@ class PresentationRegistry {
     }
 
     extractSlideInfo(pageLocalSlideIdx) {
+        const slideInfo = pageLocalSlideIdx >= 0 ? this.slides[pageLocalSlideIdx].info : {}
+
+        const slideVisibleNote = slideInfo.slideVisibleNote
         let pageTitle = ""
         let sectionTitle = ""
+
         for (let i = pageLocalSlideIdx; i >= 0; i--) {
             const slide = this.slides[i];
 
@@ -84,7 +88,7 @@ class PresentationRegistry {
             }
         }
 
-        return {pageTitle, sectionTitle}
+        return {pageTitle, sectionTitle, slideVisibleNote}
     }
 
     /**

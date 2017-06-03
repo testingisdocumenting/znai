@@ -5,6 +5,8 @@ import {elementsLibrary, presentationElementHandlers} from '../DefaultElementsLi
 import Presentation from './Presentation'
 import PresentationRegistry from './PresentationRegistry'
 
+import '../DocumentationLayout.css'
+
 const quoteContent = [
     {
         "type": "Paragraph",
@@ -155,7 +157,7 @@ const page = {
     content: [section1, section2]
 }
 
-const docMeta = {id: "mdoc", title: "MDoc"}
+const docMeta = {id: "mdoc", title: "MDoc", type: "User Guide"}
 
 const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page)
 const PresentationDemo = (props) => <Presentation docMeta={docMeta} presentationRegistry={registry}/>
