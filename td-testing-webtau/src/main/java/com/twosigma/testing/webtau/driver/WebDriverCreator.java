@@ -1,13 +1,13 @@
 package com.twosigma.testing.webtau.driver;
 
 import com.twosigma.testing.webtau.cfg.WebUiTestConfig;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ import java.util.List;
 public class WebDriverCreator {
     private static final WebUiTestConfig cfg = WebUiTestConfig.INSTANCE;
 
-    private static List<WebDriver> drivers = new ArrayList<>();
+    private static List<WebDriver> drivers = Collections.synchronizedList(new ArrayList<>());
 
     static {
         registerCleanup();
@@ -51,7 +51,7 @@ public class WebDriverCreator {
     }
 
     public static void closeAll() {
-        drivers.forEach(WebDriver::close);
+        drivers.forEach(WebDriver::quit);
         drivers.clear();
     }
 

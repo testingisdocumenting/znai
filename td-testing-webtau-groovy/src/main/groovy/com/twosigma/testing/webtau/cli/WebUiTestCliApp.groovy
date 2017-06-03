@@ -12,6 +12,7 @@ import com.twosigma.testing.standalone.StandaloneTestRunner
 import com.twosigma.testing.standalone.report.StandardConsoleTestListener
 import com.twosigma.testing.webtau.WebTauGroovyDsl
 import com.twosigma.testing.webtau.cfg.WebUiTestConfig
+import com.twosigma.testing.webtau.driver.WebDriverCreator
 import com.twosigma.testing.webtau.reporter.WebUiMessageBuilder
 
 import java.nio.file.Path
@@ -49,6 +50,7 @@ class WebUiTestCliApp {
         }
 
         runner.runTests()
+        WebDriverCreator.closeAll()
     }
 
     private List<Path> testFiles() {
