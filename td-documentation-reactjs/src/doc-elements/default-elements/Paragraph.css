@@ -1,0 +1,61 @@
+.paragraph {
+    margin-bottom: 10px;
+}
+
+.paragraph.attention {
+    display: flex;
+    align-items: baseline;
+    padding: 8px 0 8px 16px;
+}
+
+.paragraph.attention .icon-part {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.paragraph.attention .icon-part .icon {
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.paragraph.attention .icon-part .label-message {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.paragraph.attention .message-part {
+    flex: 1;
+}
+
+.paragraph.attention.note {
+    border-left: 3px solid #009AA6;
+}
+
+.paragraph.attention.note .icon-part {
+    color: #009AA6;
+}
+
+.paragraph.attention.warning {
+    border-left: 3px solid #f0ad4e;
+}
+
+.paragraph.attention.warning .icon-part {
+    color: #f0ad4e;
+}
+
+.paragraph.attention.question {
+    border-left: 3px solid #59a65a;
+}
+
+.paragraph.attention.question .icon-part {
+    color: #59a65a;
+}
+
+.paragraph.attention.avoid {
+    border-left: 3px solid #d9534f;
+}
+
+.paragraph.attention.avoid .icon-part {
+    color: #d9534f;
+}

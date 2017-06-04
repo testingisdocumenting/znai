@@ -6,6 +6,7 @@ import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/Bloc
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
 import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
 import ListItem from './bullets/ListItem'
+import Paragraph from './default-elements/Paragraph'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import Table from './table/Table'
@@ -26,7 +27,7 @@ library.DocElement = DocElement
 library.Emphasis = (props) => (<span className="emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
 library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
 library.Link = ({url, ...props}) => (<a href={url}><props.elementsLibrary.DocElement {...props}/></a>)
-library.Paragraph = (props) => <div className="paragraph content-block"><props.elementsLibrary.DocElement {...props}/></div>
+library.Paragraph = Paragraph
 
 library.BlockQuote = BlockQuote
 presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler
