@@ -61,11 +61,8 @@ public class EqualComparator {
     }
 
     public boolean areEqual() {
-        if (isNegative()) {
-            return !mismatches.isEmpty();
-        } else {
-            return mismatches.isEmpty();
-        }
+        boolean isMismatch = mismatches.isEmpty() && missing.isEmpty() && extra.isEmpty();
+        return isNegative() != isMismatch;
     }
 
     public String generateMismatchReport() {
