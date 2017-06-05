@@ -3,6 +3,7 @@ package com.twosigma.documentation.java.parser;
 import com.github.javaparser.Position;
 import com.github.javaparser.Range;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -23,22 +24,44 @@ import static java.util.stream.Collectors.toMap;
 public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     private final List<String> lines;
     private List<JavaMethod> javaMethods;
+    private Map<String, JavaField> javaFields;
     private String topLevelJavaDoc;
 
     public JavaCodeVisitor(String code) {
         lines = Arrays.asList(code.split("\n"));
         javaMethods = new ArrayList<>();
+        javaFields = new LinkedHashMap<>();
     }
 
-    public JavaMethod getDetails(String methodName) {
+    public JavaMethod findMethodDetails(String methodName) {
         return javaMethods.stream().filter(m -> m.getName().equals(methodName)).findFirst()
                 .orElseThrow(() -> new RuntimeException("no method found: " + methodName));
     }
 
-    public JavaMethod getDetails(String methodName, List<String> paramNames) {
+    public JavaMethod findMethodDetails(String methodName, List<String> paramNames) {
         return javaMethods.stream().filter(m -> m.getName().equals(methodName) && m.getParamNames().equals(paramNames))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("no method found: " + methodName + " with params: " + paramNames));
+    }
+
+    public JavaField findFieldDetails(String fieldName) {
+        if (! javaFields.containsKey(fieldName)) {
+            throw new RuntimeException("no field found: " + fieldName);
+        }
+
+        return javaFields.get(fieldName);
+    }
+
+    public String findJavaDocByName(String entryName) {
+        if (javaFields.containsKey(entryName)) {
+            return javaFields.get(entryName).getJavaDocText();
+        }
+
+        if (!hasMethodDetails(entryName)) {
+            throw new RuntimeException("can't find method or field with name: " + entryName);
+        }
+
+        return findMethodDetails(entryName).getJavaDocText();
     }
 
     public String getTopLevelJavaDoc() {
@@ -65,18 +88,30 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         String name = methodDeclaration.getName().getIdentifier();
         String code = lines.subList(startLine, endLine + 1).stream().collect(Collectors.joining("\n"));
 
-        JavadocComment javadocComment = methodDeclaration.getJavadocComment();
-        Javadoc javadoc = javadocComment != null ? javadocComment.parse() : null;
+        JavadocComment javaDocComment = methodDeclaration.getJavadocComment();
+        Javadoc javaDoc = javaDocComment != null ? javaDocComment.parse() : null;
 
-        String javaDocText = (javadoc != null) ?
-                javadoc.getDescription().toText() :
+        String javaDocText = (javaDoc != null) ?
+                javaDoc.getDescription().toText() :
                 "";
 
         javaMethods.add(new JavaMethod(name,
                 stripIndentation(code),
                 stripIndentation(extractInsideCurlyBraces(code)),
-                extractParams(methodDeclaration, javadoc),
+                extractParams(methodDeclaration, javaDoc),
                 javaDocText));
+    }
+
+    @Override
+    public void visit(FieldDeclaration fieldDeclaration, String arg) {
+        String javaDocText = fieldDeclaration.hasJavaDocComment() ? fieldDeclaration.getJavadocComment().parse().toText() : "";
+
+        fieldDeclaration.getVariables().stream().map(vd -> vd.getName().getIdentifier())
+                .forEach(name -> javaFields.put(name, new JavaField(name, javaDocText)));
+    }
+
+    private boolean hasMethodDetails(String name) {
+        return javaMethods.stream().anyMatch(m -> m.getName().equals(name));
     }
 
     private List<JavaMethodParam> extractParams(MethodDeclaration methodDeclaration, Javadoc javadoc) {

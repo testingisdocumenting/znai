@@ -2,11 +2,7 @@ package com.twosigma.documentation.java.parser;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.java.parser.html.HtmlToDocElementConverter;
-import com.twosigma.documentation.parser.docelement.DocElement;
 
-import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -29,12 +25,20 @@ public class JavaCode {
         return codeVisitor.getTopLevelJavaDoc();
     }
 
+    public String findJavaDocByName(String entryName) {
+        return codeVisitor.findJavaDocByName(entryName);
+    }
+
     public JavaMethod methodByName(String methodName) {
-        return codeVisitor.getDetails(methodName);
+        return codeVisitor.findMethodDetails(methodName);
     }
 
     public JavaMethod methodByNameAndParams(String methodName, List<String> paramNames) {
-        return codeVisitor.getDetails(methodName, paramNames);
+        return codeVisitor.findMethodDetails(methodName, paramNames);
+    }
+
+    public JavaField fieldByName(String fieldName) {
+        return codeVisitor.findFieldDetails(fieldName);
     }
 
     private static JavaCodeVisitor parse(String fileContent) {

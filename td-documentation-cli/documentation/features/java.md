@@ -32,13 +32,19 @@ Instead of copy and pasting text between sources, you can refer it inside docume
 
 # Method JavaDoc
 
-Method level `JavaDoc` text can be refereed as well by specifying `entry` parameter 
+Method level `JavaDoc` text can be referred as well by specifying `entry` parameter 
     
     :include-java-doc: HelloWorld.java {entry: "sampleMethod"}
     
 *Text bellow is extracted from `sampleMethod` method `JavaDoc`*
 
 :include-java-doc: HelloWorld.java {entry: "sampleMethod"}
+
+# Field JavaDoc 
+    
+    :include-java-doc: HelloWorld.java {entry: "numberOfStudents"}
+    
+:include-java-doc: HelloWorld.java {entry: "numberOfStudents"}
 
 # Method JavaDoc Params
 

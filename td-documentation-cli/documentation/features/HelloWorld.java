@@ -5,6 +5,12 @@
  */
 class HelloWorld {
     /**
+     * Each year we hire students from different universities to increase
+     * <code>diversity</code>
+     */
+    private int numberOfStudents;
+
+    /**
      * Conceptual description of a <i>Domain</i> problem.
      * <p>
      * It will work only if you put high level description here and

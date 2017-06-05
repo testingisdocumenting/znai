@@ -5,6 +5,9 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
+import static com.twosigma.testing.Ddjt.code
+import static com.twosigma.testing.Ddjt.throwException
+
 /**
  * @author mykola
  */
@@ -17,6 +20,14 @@ class JavaCodeTest {
  * @author ignore
  */
 class HelloWorld {
+    /**
+     * Each year we hire students from different universities to increase
+     * diversity
+     */
+    private int numberOfStudents;
+    
+    private boolean fieldWithNoComment;
+
     /**
      * method level java doc 
      * @param test test param 
@@ -81,6 +92,28 @@ class HelloWorld {
                 "    statement3();\n" +
                 "    statement4();\n" +
                 "}", method.fullBody)
+    }
+
+    @Test
+    void "extracts field level java doc"() {
+        Assert.assertEquals("Each year we hire students from different universities to increase\ndiversity\n",
+                javaCode.fieldByName("numberOfStudents").getJavaDocText())
+
+        Assert.assertEquals("",
+                javaCode.fieldByName("fieldWithNoComment").getJavaDocText())
+    }
+
+    @Test
+    void "extracts java doc by entry name"() {
+        Assert.assertEquals("Each year we hire students from different universities to increase\ndiversity\n",
+                javaCode.findJavaDocByName("numberOfStudents"))
+
+        Assert.assertEquals("method level java doc",
+                javaCode.findJavaDocByName("sampleMethod"))
+
+        code {
+            javaCode.findJavaDocByName("nonExisting")
+        } should throwException("can't find method or field with name: nonExisting")
     }
 
     @Test
