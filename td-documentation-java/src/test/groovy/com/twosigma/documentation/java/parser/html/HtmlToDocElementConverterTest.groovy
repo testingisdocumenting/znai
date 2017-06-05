@@ -11,7 +11,7 @@ class HtmlToDocElementConverterTest {
     @Test
     void "should replace standard tags with doc elements"() {
         def docElements = HtmlToDocElementConverter.convert(null, Paths.get(""), """
-hello world 
+hello <code>world</code> 
 <p>
 another paragraph with 
 <b>bold</b>
@@ -21,7 +21,7 @@ another paragraph with
 second paragraph
 """)
         def elements = docElements.collect { it.toMap() }
-        assert elements == [[type: 'Paragraph', content:[[text:' hello world ', type: 'SimpleText']]],
+        elements.should == [[type: 'Paragraph', content:[[text:' hello ', type: 'SimpleText'], [code:'world', type: 'InlinedCode']]],
                             [type: 'Paragraph', content:[[text:' another paragraph with ', type: 'SimpleText'],
                                                          [type: 'StrongEmphasis', content:[[text: 'bold', type: 'SimpleText']]],
                                                          [type: 'Emphasis', content:[[text: 'italic', type: 'SimpleText']]]]],

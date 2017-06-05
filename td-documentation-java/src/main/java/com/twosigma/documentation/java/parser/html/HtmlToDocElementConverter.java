@@ -39,6 +39,7 @@ public class HtmlToDocElementConverter {
 
     private static class ConverterNodeVisitor implements NodeVisitor {
         private ParserHandler parserHandler;
+        private boolean isInsideInlinedCode;
 
         /**
          * we assume an implicit paragraph start. Paragraph needs to be closed if another one starts.
@@ -59,12 +60,18 @@ public class HtmlToDocElementConverter {
                 String text = textNode.text();
 
                 if (! text.trim().isEmpty()) {
-                    parserHandler.onSimpleText(text);
+                    if (isInsideInlinedCode) {
+                        parserHandler.onInlinedCode(text);
+                    } else {
+                        parserHandler.onSimpleText(text);
+                    }
                 }
             } else if (isBold(node)) {
                 parserHandler.onStrongEmphasisStart();
             } else if (isItalic(node)) {
                 parserHandler.onEmphasisStart();
+            } else if (isInlinedCode(node)) {
+                isInsideInlinedCode = true;
             } else if (isParagraph(node)) {
                 if (isInsideParagraph) {
                     parserHandler.onParagraphEnd();
@@ -80,6 +87,8 @@ public class HtmlToDocElementConverter {
             if (isParagraph(node)) {
                 parserHandler.onParagraphEnd();
                 isInsideParagraph = false;
+            } else if (isInlinedCode(node)) {
+                isInsideInlinedCode = false;
             } else if (isBold(node)) {
                 parserHandler.onStrongEmphasisEnd();
             } else if (isItalic(node)) {
@@ -97,6 +106,10 @@ public class HtmlToDocElementConverter {
 
         private static boolean isItalic(Node node) {
             return node.nodeName().equals("i");
+        }
+
+        private static boolean isInlinedCode(Node node) {
+            return node.nodeName().equals("code");
         }
     }
 }
