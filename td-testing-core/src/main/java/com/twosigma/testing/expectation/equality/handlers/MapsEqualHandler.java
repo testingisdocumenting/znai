@@ -38,6 +38,7 @@ public class MapsEqualHandler implements EqualComparatorHandler {
             this.expectedMap = expectedMap;
 
             allKeys = new HashSet<>(actualMap.keySet());
+            allKeys.addAll(expectedMap.keySet());
         }
 
         void compare() {

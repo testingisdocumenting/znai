@@ -32,8 +32,8 @@ class MapsEqualHandlerTest {
     @Test
     void "should report missing keys on both sides"() {
         equalComparator.compare(createActualPath("map"),
-                [k6: 'v1', k2: [k21: 'v21'], k3: 'v3'],
-                [k1: 'v1', k2: [k22: 'v21'], k3: 'v3-'])
+                [k6: 'v1', k2: [k21: 'v21', k23: "v23"], k3: 'v3'],
+                [k1: 'v1', k2: [k22: 'v21', k24: "v24"], k3: 'v3-'])
 
         def report = equalComparator.generateMismatchReport()
         assertEquals("mismatches:\n" +
@@ -41,9 +41,16 @@ class MapsEqualHandlerTest {
                 "map.k3:   actual: v3 <java.lang.String>\n" +
                 "        expected: v3- <java.lang.String>\n" +
                 "\n" +
+                "missing, but expected values:\n" +
+                "\n" +
+                "map.k1: v1\n" +
+                "map.k2.k22: v21\n" +
+                "map.k2.k24: v24\n" +
+                "\n" +
                 "unexpected values:\n" +
                 "\n" +
                 "map.k2.k21: v21\n" +
+                "map.k2.k23: v23\n" +
                 "map.k6: v1", report)
     }
 }
