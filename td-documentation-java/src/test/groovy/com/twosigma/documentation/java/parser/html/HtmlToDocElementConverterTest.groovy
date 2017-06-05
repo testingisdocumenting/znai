@@ -16,7 +16,7 @@ hello <code>world</code>
 another paragraph with 
 <b>bold</b>
 <i>italic</i>
-
+<a href="url">text inside</a>
 <P>
 second paragraph
 """)
@@ -24,7 +24,8 @@ second paragraph
         elements.should == [[type: 'Paragraph', content:[[text:' hello ', type: 'SimpleText'], [code:'world', type: 'InlinedCode']]],
                             [type: 'Paragraph', content:[[text:' another paragraph with ', type: 'SimpleText'],
                                                          [type: 'StrongEmphasis', content:[[text: 'bold', type: 'SimpleText']]],
-                                                         [type: 'Emphasis', content:[[text: 'italic', type: 'SimpleText']]]]],
+                                                         [type: 'Emphasis', content:[[text: 'italic', type: 'SimpleText']]],
+                                                         [type: 'Link', url: 'url', content: [[text: 'text inside', type: 'SimpleText']]]]],
                             [type: 'Paragraph', content:[[text:' second paragraph ', type: 'SimpleText']]]]
     }
 }

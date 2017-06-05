@@ -70,6 +70,8 @@ public class HtmlToDocElementConverter {
                 parserHandler.onStrongEmphasisStart();
             } else if (isItalic(node)) {
                 parserHandler.onEmphasisStart();
+            } else if (isLink(node)) {
+                parserHandler.onLinkStart(node.attr("href"));
             } else if (isInlinedCode(node)) {
                 isInsideInlinedCode = true;
             } else if (isParagraph(node)) {
@@ -93,6 +95,8 @@ public class HtmlToDocElementConverter {
                 parserHandler.onStrongEmphasisEnd();
             } else if (isItalic(node)) {
                 parserHandler.onEmphasisEnd();
+            } else if (isLink(node)) {
+                parserHandler.onLinkEnd();
             }
         }
 
@@ -110,6 +114,10 @@ public class HtmlToDocElementConverter {
 
         private static boolean isInlinedCode(Node node) {
             return node.nodeName().equals("code");
+        }
+
+        private static boolean isLink(Node node) {
+            return node.nodeName().equals("a");
         }
     }
 }
