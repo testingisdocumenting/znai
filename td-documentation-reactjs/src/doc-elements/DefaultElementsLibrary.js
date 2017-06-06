@@ -15,6 +15,7 @@ import {Columns, presentationColumnsHandler} from './columns/Columns'
 import Icon from './icons/Icon'
 import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
+import {Svg, presentationSvgHandler} from './svg/Svg'
 import LatexMath from './math/LatexMath'
 import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
@@ -82,6 +83,9 @@ presentationElementHandlers.Columns = presentationColumnsHandler
 
 library.Json = Json
 presentationElementHandlers.Json = presentationJson
+
+library.Svg = Svg
+presentationElementHandlers.Svg = presentationSvgHandler
 
 library.Page = Page
 presentationElementHandlers.Page = presentationPageHandler

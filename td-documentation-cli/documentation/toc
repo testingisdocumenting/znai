@@ -11,8 +11,9 @@ features
     java
     groovy
     cpp
-    tables
     tabs
+    tables
+    SVG
     json
     columns
     templates

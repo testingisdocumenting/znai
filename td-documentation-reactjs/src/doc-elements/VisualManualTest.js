@@ -1,7 +1,8 @@
 import React from 'react'
 
 // import Demo from './presentation/SvgPresentationDemo'
-import Demo from './default-elements/ParagraphDemo'
+// import Demo from './default-elements/ParagraphDemo'
+import Demo from './svg/SvgDemo'
 // import Demo from './presentation/PresentationDemo'
 // import Demo from './DocumentationDemo'
 // import Demo from './bullets/IconsAsBulletsDemo'
