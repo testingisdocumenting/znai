@@ -13,7 +13,6 @@ This method doesn't highlight code by default. It is possible to provide a defau
 Markdown used to create code snippet above follows
 
 :include-file: code-snippets.md {startLine: '# Simple Snippet', numberOfLines: 9, lang: 'markdown', title: 'markdown'}
-    
 
 # Specifying Language
  
@@ -30,18 +29,26 @@ class MyComponent extends Component {
 }
 ```
 
+```bash
+ls -l
+export PATH=/home/path
+echo $PATH
+```
+
 Snippet below is used to highlight the code as a javascript language
 
-:include-file: code-snippets.md {startLine: '# Specifying Language', numberOfLines: 14, lang: 'markdown', title: 'markdown'}
+:include-file: code-snippets.md {startLine: '# Specifying Language', numberOfLines: 20, lang: 'markdown', title: 'markdown'}
 
 Following languages are supported
 * Java
 * JavaScript
 * Groovy
+* C++
 * Python
+* Bash
 
-
-We use highlightjs library to provide syntax highlighting 
+`MDoc` uses [prismjs](http://prismjs.com) library to provide syntax highlighting. 
+It is not being executed inside the browser: syntax highlighting is done during HTML generation  
 
 # Wide Code
 
