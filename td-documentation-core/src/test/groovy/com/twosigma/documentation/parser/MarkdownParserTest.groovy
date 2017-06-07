@@ -117,6 +117,22 @@ world""")
     }
 
     @Test
+    void "top level sections"() {
+        parse("# Section\ntext text")
+        content.should == [[type: 'Section', id: "section", title: "Section", content:[
+                [type: "Paragraph", content: [[type: "SimpleText", text: "text text"]]]]]]
+    }
+
+    @Test
+    void "second level section"() {
+        parse("## Secondary Section \ntext text")
+        println content
+        content.should == [[type: 'SubHeading', level: 2, content:[
+                [type: "SimpleText", text: "Secondary Section"]]],
+                           [type: "Paragraph", content: [[type: "SimpleText", text: "text text"]]]]
+    }
+
+    @Test
     void "inlined image"() {
         parse("text ![alt text](images/png-test.png \"custom title\") another text")
         content.should == [[type: 'Paragraph', content:[

@@ -63,6 +63,16 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onSubHeadingStart(int level) {
+        start(DocElementType.SUB_HEADING, "level", level);
+    }
+
+    @Override
+    public void onSubHeadingEnd(int level) {
+        end();
+    }
+
+    @Override
     public void onHardLineBreak() {
         append(DocElementType.HARD_LINE_BREAK);
     }

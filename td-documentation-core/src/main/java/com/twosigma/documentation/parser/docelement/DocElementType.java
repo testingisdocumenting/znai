@@ -5,6 +5,7 @@ package com.twosigma.documentation.parser.docelement;
  */
 public class DocElementType {
     public static final String SECTION = "Section";
+    public static final String SUB_HEADING = "SubHeading";
     public static final String PARAGRAPH = "Paragraph";
     public static final String BULLET_LIST = "BulletList";
     public static final String ORDERED_LIST = "OrderedList";

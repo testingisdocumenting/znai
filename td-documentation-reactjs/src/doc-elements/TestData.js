@@ -70,6 +70,16 @@ const TestData = {
                     "type": "Section",
                     "content": [
                         {
+                            "type": "SubHeading",
+                            "level": 2,
+                            "content": [
+                                {
+                                    "text": "It is very easy to add a code snippet or an output result.",
+                                    "type": "SimpleText"
+                                },
+                            ]
+                        },
+                        {
                             "type": "Paragraph",
                             "content": [
                                 {

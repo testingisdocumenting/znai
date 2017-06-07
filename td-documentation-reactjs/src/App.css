@@ -31,6 +31,16 @@ body {
     text-transform: uppercase;
 }
 
+.page-content h2 {
+    font-size: 21px;
+    color: #000;
+}
+
+.page-content h3 {
+    font-size: 18px;
+    color: #000;
+}
+
 .emphasis {
     font-style: italic;
 }

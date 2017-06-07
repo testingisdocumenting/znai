@@ -30,6 +30,11 @@ library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.el
 library.Link = ({url, ...props}) => (<a href={url}><props.elementsLibrary.DocElement {...props}/></a>)
 library.Paragraph = Paragraph
 
+library.SubHeading = ({level, ...props}) => {
+    const Element = `h${level}`
+    return <Element className="content-block"><props.elementsLibrary.DocElement {...props}/></Element>
+}
+
 library.BlockQuote = BlockQuote
 presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler
 

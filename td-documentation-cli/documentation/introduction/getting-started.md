@@ -5,6 +5,12 @@ Mdoc comes with a command line tool that:
 * runs auto-preview local server
 * runs documentation server
 
+
+# Markdown
+
+Fastest way to learn markdown is to go to [CommonMark](http://commonmark.org/help/) website 
+and go through a 60 seconds cheatsheet or 10 minutes tutorial.
+
 # Installation
 
 [Optin](https://optin) to add the command line to your hosts.

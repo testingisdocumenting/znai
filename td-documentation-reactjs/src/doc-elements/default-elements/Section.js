@@ -4,7 +4,7 @@ import RenderingMeta from '../meta/RenderingMeta'
 const Section = ({id, title, ...props}) => {
     return (<div className="section" key={title}>
         <div className="content-block">
-            <div className="section-title" id={id}>{title}</div>
+            <h1 className="section-title" id={id}>{title}</h1>
         </div>
         <props.elementsLibrary.DocElement {...props} renderingMeta={new RenderingMeta()}/>
     </div>)

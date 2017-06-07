@@ -2,6 +2,10 @@ ul.icon-based {
     padding: 0 0 0 20px;
 }
 
+ul.content-block {
+    margin-bottom: 15px;
+}
+
 .bullet-boxes {
     display: flex;
 }

@@ -174,7 +174,9 @@ public class DocElementVisitor extends AbstractVisitor {
             parserHandler.onSectionStart(literal);
             sectionStarted = true;
         } else {
-            super.visit(heading);
+            parserHandler.onSubHeadingStart(heading.getLevel());
+            visitChildren(heading);
+            parserHandler.onSubHeadingEnd(heading.getLevel());
         }
     }
 }
