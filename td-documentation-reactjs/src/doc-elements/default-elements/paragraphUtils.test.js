@@ -7,9 +7,17 @@ const paragraphContent = [
     }
 ]
 
+const paragraphWithSpacesAtStartContent = [
+    {
+        "text": "  Note: It is very easy to add a code snippet or an output result.",
+        "type": "SimpleText"
+    }
+]
+
 describe("paragraphUtils", () => {
     it("detects if paragraph starts with a specified text", () => {
         expect(paragraphStartsWith(paragraphContent, "Note:")).toBeTruthy()
+        expect(paragraphStartsWith(paragraphWithSpacesAtStartContent, "Note:")).toBeTruthy()
         expect(paragraphStartsWith([], "Note:")).toBeFalsy()
         expect(paragraphStartsWith(paragraphContent, "Warning:")).toBeFalsy()
     })
@@ -20,6 +28,7 @@ describe("paragraphUtils", () => {
             "type": "SimpleText" }]
 
         expect(removeSuffixFromParagraph(paragraphContent, "Note:")).toEqual(expected)
+        expect(removeSuffixFromParagraph(paragraphWithSpacesAtStartContent, "Note:")).toEqual(expected)
 
         expect(removeSuffixFromParagraph([{
                 "text": "Note:It is very easy to add a code snippet or an output result.",

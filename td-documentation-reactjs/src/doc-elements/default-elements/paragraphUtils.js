@@ -7,7 +7,7 @@ function paragraphStartsWith(content, text) {
         return false
     }
 
-    return content[0].text.startsWith(text)
+    return trimLeft(content[0].text).startsWith(text)
 }
 
 function removeSuffixFromParagraph(content, suffix) {
@@ -18,7 +18,7 @@ function removeSuffixFromParagraph(content, suffix) {
     let copy = content.slice(0)
     copy[0] = {...content[0]}
 
-    const currentText = copy[0].text
+    const currentText = trimLeft(copy[0].text)
     copy[0].text = currentText.substr(suffix.length + (currentText[suffix.length] === ' ' ? 1 : 0))
 
     if (! copy[0].text.length) {
@@ -26,6 +26,19 @@ function removeSuffixFromParagraph(content, suffix) {
     }
 
     return copy
+}
+
+function trimLeft(text) {
+    let nonSpaceIdx = 0;
+    for (let i = 0, len = text.length; i < len; i++) {
+        if (text[i] === ' ') {
+            nonSpaceIdx++
+        } else {
+            break;
+        }
+    }
+
+    return text.substr(nonSpaceIdx)
 }
 
 export {paragraphStartsWith, removeSuffixFromParagraph}
