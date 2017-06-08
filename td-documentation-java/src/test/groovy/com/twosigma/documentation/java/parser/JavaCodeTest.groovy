@@ -29,7 +29,7 @@ class HelloWorld {
     private boolean fieldWithNoComment;
 
     /**
-     * method level java doc 
+     * method level java doc {@link package.Class}
      * @param test test param 
      */
     public void sampleMethod(String test) {
@@ -77,7 +77,7 @@ class HelloWorld {
         def params = method.params.collect { [it.name, it.javaDocText] }
         assert params == [["test", "test param"]]
 
-        Assert.assertEquals("method level java doc", method.getJavaDocText())
+        Assert.assertEquals("method level java doc  <code>package.Class</code> ", method.getJavaDocText())
     }
 
     @Test
@@ -108,7 +108,7 @@ class HelloWorld {
         Assert.assertEquals("Each year we hire students from different universities to increase\ndiversity\n",
                 javaCode.findJavaDocByName("numberOfStudents"))
 
-        Assert.assertEquals("method level java doc",
+        Assert.assertEquals("method level java doc  <code>package.Class</code> ",
                 javaCode.findJavaDocByName("sampleMethod"))
 
         code {

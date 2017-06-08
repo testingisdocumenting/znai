@@ -8,13 +8,19 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.javadoc.Javadoc;
+import com.github.javaparser.javadoc.description.JavadocDescription;
+import com.github.javaparser.javadoc.description.JavadocDescriptionElement;
+import com.github.javaparser.javadoc.description.JavadocInlineTag;
+import com.github.javaparser.javadoc.description.JavadocSnippet;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.PARAM;
 import static com.twosigma.utils.StringUtils.extractInsideCurlyBraces;
 import static com.twosigma.utils.StringUtils.stripIndentation;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
@@ -26,6 +32,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     private List<JavaMethod> javaMethods;
     private Map<String, JavaField> javaFields;
     private String topLevelJavaDoc;
+    private boolean isAfterInlinedTag;
 
     public JavaCodeVisitor(String code) {
         lines = Arrays.asList(code.split("\n"));
@@ -73,7 +80,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         JavadocComment javadocComment = n.getJavadocComment();
 
         topLevelJavaDoc = (javadocComment != null) ?
-                javadocComment.parse().getDescription().toText() :
+                extractJavaDocDescription(javadocComment.parse().getDescription()):
                 "";
 
         super.visit(n, arg);
@@ -92,7 +99,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         Javadoc javaDoc = javaDocComment != null ? javaDocComment.parse() : null;
 
         String javaDocText = (javaDoc != null) ?
-                javaDoc.getDescription().toText() :
+                extractJavaDocDescription(javaDoc.getDescription()) :
                 "";
 
         javaMethods.add(new JavaMethod(name,
@@ -100,6 +107,44 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
                 stripIndentation(extractInsideCurlyBraces(code)),
                 extractParams(methodDeclaration, javaDoc),
                 javaDocText));
+    }
+
+    @SuppressWarnings("unchecked")
+    private String extractJavaDocDescription(JavadocDescription description) {
+        // TODO check if github java parser lib solved the problem with inlined tags UnsupportedOperation exception
+        List<JavadocDescriptionElement> elements = getPrivateFieldValue(description,"elements");
+        return elements.stream().map(this::elementToText).collect(joining(" "));
+    }
+
+    private String elementToText(JavadocDescriptionElement el) {
+        if (el instanceof JavadocSnippet) {
+            String result = isAfterInlinedTag ? el.toText().substring(1) : el.toText();
+            isAfterInlinedTag = false;
+
+            return result;
+        }
+
+        if (el instanceof JavadocInlineTag) {
+            return "<code>" + extractTextFromInlinedTag(el).trim() + "</code>";
+        }
+
+        return el.toText();
+    }
+
+    private String extractTextFromInlinedTag(JavadocDescriptionElement el) {
+        isAfterInlinedTag = true;
+        return getPrivateFieldValue(el, "content");
+    }
+
+    @SuppressWarnings("unchecked")
+    private <E> E getPrivateFieldValue(Object o, String fieldName) {
+        try {
+            Field elementsFields = o.getClass().getDeclaredField(fieldName);
+            elementsFields.setAccessible(true);
+            return (E) elementsFields.get(o);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
