@@ -139,7 +139,7 @@ $ yarn install
 $ yarn start
 ```
 
- Avoid: committing node_modules
+ Do not: commit node_modules to the repository
     
 Java: 
 First you need to download Intellij IDEA and then run following using your terminal

@@ -22,9 +22,19 @@ step using warning sign. Do not use too many warning signs.
 
 # Avoid
 
-    Avoid: highlight incompatibilities of your product with Avoid sign.
+    Avoid: using multiple versions of `ReactJS` inside one project.
 
-Avoid: highlight incompatibilities of your product with Avoid sign.
+Avoid: using multiple versions of `ReactJS` inside one project.
+
+# Do not
+
+    Don't: commit node_modules to your repository
+
+    Do not: commit node_modules to your repository
+
+Don't: commit node_modules to your repository
+
+Do not: commit node_modules to your repository
 
 # Question
 

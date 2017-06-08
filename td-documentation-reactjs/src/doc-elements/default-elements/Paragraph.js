@@ -9,6 +9,8 @@ const noteSuffix = "Note:"
 const warningSuffix = "Warning:"
 const questionSuffix = "Question:"
 const avoidSuffix = "Avoid:"
+const dontSuffix = "Don't:"
+const doNotSuffix = "Do not:"
 
 const DefaultParagraph = (props) => {
     return <div className="paragraph content-block"><props.elementsLibrary.DocElement {...props}/></div>
@@ -31,6 +33,8 @@ const NoteParagraph = (props) => <ParagraphWithAttention attentionType="note" su
 const WarningParagraph = (props) => <ParagraphWithAttention attentionType="warning" suffix={warningSuffix} icon="warning-sign" {...props}/>
 const QuestionParagraph = (props) => <ParagraphWithAttention attentionType="question" suffix={questionSuffix} icon="question-sign" {...props}/>
 const AvoidParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={avoidSuffix} icon="ban-circle" {...props}/>
+const DontParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={dontSuffix} icon="ban-circle" {...props}/>
+const DoNotParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={doNotSuffix} icon="ban-circle" {...props}/>
 
 const Paragraph = (props) => {
     if (paragraphStartsWith(props.content, noteSuffix)) {
@@ -47,6 +51,14 @@ const Paragraph = (props) => {
 
     if (paragraphStartsWith(props.content, avoidSuffix)) {
         return <AvoidParagraph {...props}/>
+    }
+
+    if (paragraphStartsWith(props.content, dontSuffix)) {
+        return <DontParagraph {...props}/>
+    }
+
+    if (paragraphStartsWith(props.content, doNotSuffix)) {
+        return <DoNotParagraph {...props}/>
     }
 
     return <DefaultParagraph {...props}/>
