@@ -23,45 +23,57 @@ Selecting a tab will switch all the tabs on every page.
 Any valid markdown can be used in place of a content of each tab.
 Typical use case for *installation instructions*: extract differences per language or environment 
 
-    ```tabs
+    ````tabs
     JavaScript: 
     First you need to download WebStorm and then run following using your terminal
     
-        $ yarn install
-        $ yarn start
+    ```bash
+    $ yarn install
+    $ yarn start
+    ```
         
     Java: 
     First you need to download Intellij IDEA and then run following using your terminal
         
-        $ mvn install
-        $ mvn exec:exec
+    ```bash
+    $ mvn install
+    $ mvn exec:exec
+    ```
         
     Cpp: 
     First you need to download CLion and then run following using your terminal
     
-        $ pwd
-        $ whoamis
+    ```bash
+    $ pwd
+    $ whoamis
     ```
-
-```tabs
+    ````
+    
+````tabs
 JavaScript: 
 First you need to download WebStorm and then run following using your terminal
 
-    $ yarn install
-    $ yarn start
+```bash
+$ yarn install
+$ yarn start
+```
     
 Java: 
 First you need to download Intellij IDEA and then run following using your terminal
     
-    $ mvn install
-    $ mvn exec:exec
+```bash
+$ mvn install
+$ mvn exec:exec
+```
     
 Cpp: 
 First you need to download CLion and then run following using your terminal
 
-    $ pwd
-    $ whoamis
+```bash
+$ pwd
+$ whoamis
 ```
+````
 
 # Separate Markdown files
 
