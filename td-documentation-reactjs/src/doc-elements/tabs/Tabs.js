@@ -34,7 +34,7 @@ const tabsRegistration = new TabsRegistration()
 const TabNames = ({names, activeIdx, onClick}) => {
     return <div className="tabs">
         <div className="tabs-names-area">
-            <div className="tabs-names">
+            <div className="tabs-names content-block">
                 {names.map((name, idx) => {
                     const className = "tab-name" + (idx === activeIdx ? " active" : "")
                     return <span key={idx} className={className} onClick={() => onClick(idx)}>{name}</span>
