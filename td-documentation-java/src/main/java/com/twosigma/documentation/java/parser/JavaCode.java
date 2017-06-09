@@ -3,8 +3,6 @@ package com.twosigma.documentation.java.parser;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 
-import java.util.List;
-
 /**
  * @author mykola
  */
@@ -25,16 +23,12 @@ public class JavaCode {
         return codeVisitor.getTopLevelJavaDoc();
     }
 
-    public String findJavaDocByName(String entryName) {
-        return codeVisitor.findJavaDocByName(entryName);
+    public String findJavaDoc(String methodNameWithOptionalTypes) {
+        return codeVisitor.findJavaDoc(methodNameWithOptionalTypes);
     }
 
-    public JavaMethod methodByName(String methodName) {
-        return codeVisitor.findMethodDetails(methodName);
-    }
-
-    public JavaMethod methodByNameAndParams(String methodName, List<String> paramNames) {
-        return codeVisitor.findMethodDetails(methodName, paramNames);
+    public JavaMethod findMethod(String methodNameWithOptionalTypes) {
+        return codeVisitor.findMethodDetails(methodNameWithOptionalTypes);
     }
 
     public JavaField fieldByName(String fieldName) {

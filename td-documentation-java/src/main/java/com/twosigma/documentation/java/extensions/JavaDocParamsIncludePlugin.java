@@ -24,7 +24,7 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
 
     @Override
     public List<DocElement> process(JavaCode javaCode) {
-        JavaMethod javaMethod = javaCode.methodByName(entry);
+        JavaMethod javaMethod = javaCode.findMethod(entry);
         List<Map<Object, Object>> params = javaMethod.getParams().stream().map(p -> CollectionUtils.createMap("name", p.getName(),
                 "description", p.getJavaDocText(),
                 "type", p.getType())).collect(toList());

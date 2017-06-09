@@ -28,7 +28,11 @@ class HelloWorld {
         }
     }
 
+    public void sampleMethod(String p1, int p2, boolean isActive) {
+        // overloaded method
+    }
+
     public void importantAction() {
-        doAction();
+        // TODO important
     }
 }

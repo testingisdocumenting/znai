@@ -40,9 +40,12 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         javaFields = new LinkedHashMap<>();
     }
 
-    public JavaMethod findMethodDetails(String methodName) {
-        return javaMethods.stream().filter(m -> m.getName().equals(methodName)).findFirst()
-                .orElseThrow(() -> new RuntimeException("no method found: " + methodName));
+    public JavaMethod findMethodDetails(String methodNameWithOptionalTypes) {
+        String nameWithoutSpaces = methodNameWithOptionalTypes.replaceAll("\\s+", "");
+        return javaMethods.stream().filter(
+                m -> m.getName().equals(methodNameWithOptionalTypes) || m.getNameWithTypes().equals(nameWithoutSpaces))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("no method found: " + methodNameWithOptionalTypes));
     }
 
     public JavaMethod findMethodDetails(String methodName, List<String> paramNames) {
@@ -59,13 +62,13 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         return javaFields.get(fieldName);
     }
 
-    public String findJavaDocByName(String entryName) {
+    public String findJavaDoc(String entryName) {
         if (javaFields.containsKey(entryName)) {
             return javaFields.get(entryName).getJavaDocText();
         }
 
         if (!hasMethodDetails(entryName)) {
-            throw new RuntimeException("can't find method or field with name: " + entryName);
+            throw new RuntimeException("can't find method or field: " + entryName);
         }
 
         return findMethodDetails(entryName).getJavaDocText();
@@ -165,8 +168,11 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
                 .forEach(name -> javaFields.put(name, new JavaField(name, javaDocText)));
     }
 
-    private boolean hasMethodDetails(String name) {
-        return javaMethods.stream().anyMatch(m -> m.getName().equals(name));
+    private boolean hasMethodDetails(String methodNameWithOptionalTypes) {
+        String nameWithoutSpaces = methodNameWithOptionalTypes.replaceAll("\\s+", "");
+
+        return javaMethods.stream().anyMatch(m -> m.getName().equals(methodNameWithOptionalTypes) ||
+                m.getNameWithTypes().equals(nameWithoutSpaces));
     }
 
     private List<JavaMethodParam> extractParams(MethodDeclaration methodDeclaration, Javadoc javadoc) {

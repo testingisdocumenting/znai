@@ -6,4 +6,8 @@ class Simple {
     void methodB(String p) {
 
     }
+
+    void methodB(String p, Boolean b) {
+
+    }
 }

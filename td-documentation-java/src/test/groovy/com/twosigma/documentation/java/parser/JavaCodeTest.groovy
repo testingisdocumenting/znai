@@ -3,8 +3,6 @@ package com.twosigma.documentation.java.parser
 import org.junit.Assert
 import org.junit.Test
 
-import java.nio.file.Paths
-
 import static com.twosigma.testing.Ddjt.code
 import static com.twosigma.testing.Ddjt.throwException
 
@@ -42,7 +40,7 @@ class HelloWorld {
     }
 
     /**
-     * method level java doc 
+     * overloaded method java doc 
      * @param test test param
      * @param name name of the param 
      */
@@ -78,7 +76,7 @@ interface HelloWorld {
 
     @Test
     void "extracts method by name"() {
-        def method = javaCode.methodByName("sampleMethod")
+        def method = javaCode.findMethod("sampleMethod")
 
         Assert.assertEquals("public void sampleMethod(String test) {\n" +
                 "    statement1();\n" +
@@ -105,8 +103,8 @@ interface HelloWorld {
     }
 
     @Test
-    void "extracts method body by params"() {
-        def method = javaCode.methodByNameAndParams("sampleMethod", ["test", "name"])
+    void "extracts method body by params types"() {
+        def method = javaCode.findMethod("sampleMethod(  String , String )")
 
         def params = method.params.collect { [it.name, it.javaDocText, it.type] }
         assert params == [["test", "test param", "String"],
@@ -120,7 +118,7 @@ interface HelloWorld {
 
     @Test
     void "extracts method from interface"() {
-        def method = javaCodeInterface.methodByName("sampleMethod")
+        def method = javaCodeInterface.findMethod("sampleMethod")
 
         Assert.assertEquals("public void sampleMethod(String test)", method.fullBody)
         Assert.assertEquals("", method.bodyOnly)
@@ -142,22 +140,25 @@ interface HelloWorld {
     }
 
     @Test
-    void "extracts java doc by entry name"() {
+    void "extracts java doc by name with optional signature"() {
         Assert.assertEquals("Each year we hire students from different universities to increase\ndiversity\n",
-                javaCode.findJavaDocByName("numberOfStudents"))
+                javaCode.findJavaDoc("numberOfStudents"))
 
         Assert.assertEquals("method level java doc  <code>package.Class</code> ",
-                javaCode.findJavaDocByName("sampleMethod"))
+                javaCode.findJavaDoc("sampleMethod"))
+
+        Assert.assertEquals("overloaded method java doc",
+                javaCode.findJavaDoc("sampleMethod(String,String)"))
 
         code {
-            javaCode.findJavaDocByName("nonExisting")
-        } should throwException("can't find method or field with name: nonExisting")
+            javaCode.findJavaDoc("nonExisting")
+        } should throwException("can't find method or field: nonExisting")
     }
 
     @Test
     void "extracts java doc by entry name from interface"() {
         Assert.assertEquals("method level java doc  <code>package.Class</code> ",
-                javaCode.findJavaDocByName("sampleMethod"))
+                javaCode.findJavaDoc("sampleMethod"))
     }
 
     @Test

@@ -44,13 +44,13 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
             return javaCode.getFileContent();
         }
 
-        Stream<String> methodNames = entry != null ? Stream.of(entry) : entries.stream();
-        return methodNames.map(n -> extractSingleContent(javaCode, n, isBodyOnly, isSignatureOnly))
+        Stream<String> methodNamesWithOptionalTypes = entry != null ? Stream.of(entry) : entries.stream();
+        return methodNamesWithOptionalTypes.map(n -> extractSingleContent(javaCode, n, isBodyOnly, isSignatureOnly))
                 .collect(Collectors.joining(isSignatureOnly ? "\n" : "\n\n"));
     }
 
-    private String extractSingleContent(JavaCode javaCode, String methodName, Boolean isBodyOnly, Boolean isSignatureOnly) {
-        JavaMethod method = javaCode.methodByName(methodName);
+    private String extractSingleContent(JavaCode javaCode, String entry, Boolean isBodyOnly, Boolean isSignatureOnly) {
+        JavaMethod method = javaCode.findMethod(entry);
 
         return isBodyOnly ?
                 method.getBodyOnly() :

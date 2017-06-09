@@ -24,6 +24,20 @@ If `signatureOnly` is specified, body will be omitted.
 
 :include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true}
 
+# Overloads
+
+Specify types inside brackets to select an overloaded versions of your methods. 
+
+Types should appear as they are in the file. I.e. if you use short version of a type, you need to use the short version 
+inside plugin.
+
+    :include-java: HelloWorld.java {entry: "sampleMethod(String, int, boolean)"}
+
+Note: spaces after commas are optional
+
+:include-java: HelloWorld.java {entry: "sampleMethod(String, int, boolean)"}
+
+
 # Multiple Entries
 
 To display multiple methods at once use `entries` parameter to pass a list of method names
