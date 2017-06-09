@@ -30,7 +30,7 @@ class HelloWorld {
 
     /**
      * method level java doc {@link package.Class}
-     * @param test test param 
+     * @param test test param {@link package.Param}
      */
     public void sampleMethod(String test) {
         statement1();
@@ -99,7 +99,7 @@ interface HelloWorld {
         Assert.assertEquals("public void sampleMethod(String test)", method.signatureOnly)
 
         def params = method.params.collect { [it.name, it.javaDocText] }
-        assert params == [["test", "test param"]]
+        assert params == [["test", "test param  <code>package.Param</code> "]]
 
         Assert.assertEquals("method level java doc  <code>package.Class</code> ", method.getJavaDocText())
     }

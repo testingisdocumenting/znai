@@ -177,7 +177,9 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
         Map<String, String> javaDocTextByName = javadoc != null ?
                 (javadoc.getBlockTags().stream().filter(b -> b.getType() == PARAM)
-                        .collect(toMap(b -> b.getName().orElse(""), b -> b.getContent().toText()))) : Collections.emptyMap();
+                        .collect(toMap(
+                                b -> b.getName().orElse(""),
+                                b -> extractJavaDocDescription(b.getContent())))) : Collections.emptyMap();
 
         return paramNames.stream().map(n -> new JavaMethodParam(n, javaDocTextByName.get(n), typeByName.get(n)))
                 .collect(toList());
