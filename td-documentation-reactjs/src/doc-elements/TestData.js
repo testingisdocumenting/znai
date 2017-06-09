@@ -451,7 +451,7 @@ const TestData = {
                         },
                         {
                             "lang": "java",
-                            "maxLineLength": 114,
+                            "maxLineLength": 130,
                             "tokens": [
                                 {
                                     "type": "keyword",
@@ -509,7 +509,7 @@ const TestData = {
                                     "type": "keyword",
                                     "content": "final"
                                 },
-                                " ExchangeCalendar calendar",
+                                " ExchangeCalendarLongerThanLife calendar",
                                 {
                                     "type": "punctuation",
                                     "content": ")"

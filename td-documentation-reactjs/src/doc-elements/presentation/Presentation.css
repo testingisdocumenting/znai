@@ -5,6 +5,10 @@
     max-height: 100vh;
 }
 
+/*.presentation .paragraph.content-block {*/
+    /*padding-right: 0;*/
+/*}*/
+
 .presentation .header {
     display: flex;
     flex: 0 0 80px;

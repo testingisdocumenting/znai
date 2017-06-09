@@ -9,7 +9,7 @@ class Page extends Component {
             <span key="button" className="presentation-button glyphicon glyphicon-resize-full" onClick={onPresentationOpen}/>] : []
 
         return (<div className="page-content">
-            <div className="page-title-block">
+            <div className="page-title-block content-block">
                 {title}
             </div>
             <elementsLibrary.DocElement key={tocItem.pageTitle}
