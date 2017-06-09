@@ -63,7 +63,6 @@ class FileIncludePluginTest {
     }
 
     private static String process(String fileName, String value) {
-        def result = PluginsTestUtils.process(":include-file: $fileName $value")
-        return result.docElements.get(0).getProps().tokens[0].content
+        return PluginsTestUtils.processAndGetSimplifiedCodeBlock(":include-file: $fileName $value")
     }
 }

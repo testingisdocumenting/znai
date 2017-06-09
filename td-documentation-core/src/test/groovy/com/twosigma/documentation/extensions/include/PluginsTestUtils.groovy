@@ -13,6 +13,11 @@ import java.nio.file.Paths
 class PluginsTestUtils {
     static private TestComponentsRegistry testComponentsRegistry
 
+    static String processAndGetSimplifiedCodeBlock(String pluginDef) {
+        def result = process(pluginDef)
+        return result.docElements.get(0).getProps().tokens[0].content
+    }
+
     static PluginResult process(String pluginDef) {
         PluginParams includeParams = IncludePluginParser.parse(pluginDef)
         def includePlugin = Plugins.includePluginById(includeParams.pluginId)

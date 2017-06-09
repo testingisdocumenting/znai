@@ -103,10 +103,20 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
                 "";
 
         javaMethods.add(new JavaMethod(name,
-                stripIndentation(code),
-                stripIndentation(extractInsideCurlyBraces(code)),
+                stripIndentation(removeSemicolonAtEnd(code)),
+                stripIndentation(removeSemicolonAtEnd(extractInsideCurlyBraces(code))),
+                removeSemicolonAtEnd(extractSignature(code)),
                 extractParams(methodDeclaration, javaDoc),
                 javaDocText));
+    }
+
+    private String removeSemicolonAtEnd(String code) {
+        return code.endsWith(";") ? code.substring(0, code.length() - 1) : code;
+    }
+
+    private String extractSignature(String code) {
+        int i = code.indexOf('{');
+        return i == -1 ? code.trim() : code.substring(0, i).trim();
     }
 
     @SuppressWarnings("unchecked")

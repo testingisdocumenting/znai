@@ -28,6 +28,8 @@ line #_3\r""")
         def code = "{\n    statement1;\n    statement2}"
         def stripped = StringUtils.extractInsideCurlyBraces(code)
         Assert.assertEquals("\n    statement1;\n    statement2", stripped)
+
+        Assert.assertEquals("", StringUtils.extractInsideCurlyBraces(""))
     }
 
     @Test

@@ -31,6 +31,10 @@ public class StringUtils {
 
     public static String extractInsideCurlyBraces(String code) {
         int startIdx = code.indexOf('{');
+        if (startIdx == -1) {
+            return "";
+        }
+
         int endIdx = code.lastIndexOf('}');
 
         return code.substring(startIdx + 1, endIdx);

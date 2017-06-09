@@ -27,4 +27,8 @@ class HelloWorld {
             doAction();
         }
     }
+
+    public void importantAction() {
+        doAction();
+    }
 }

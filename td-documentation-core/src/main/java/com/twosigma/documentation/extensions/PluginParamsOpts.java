@@ -20,6 +20,10 @@ public class PluginParamsOpts {
         return (E) opts.get(name);
     }
 
+    public <E> E get(String name, E defaultValue) {
+        return has(name) ? get(name) : defaultValue;
+    }
+
     public Stream<String> getNames() {
         return opts.keySet().stream();
     }

@@ -52,7 +52,29 @@ class HelloWorld {
     }
 }"""
 
+    String interfaceCode = """
+/**
+ * this is a <b>top</b> level java doc
+ *
+ * @see other
+ * @author ignore
+ */
+interface HelloWorld {
+    /**
+     * method level java doc {@link package.Class}
+     * @param test test param 
+     */
+    public void sampleMethod(String test);
+
+     /**
+     * method level java doc overloaded
+     * @param test test param 
+     */
+     public void sampleMethod(String test, String name);
+}"""
+
     JavaCode javaCode = new JavaCode(code)
+    JavaCode javaCodeInterface = new JavaCode(interfaceCode)
 
     @Test
     void "extracts method by name"() {
@@ -73,6 +95,8 @@ class HelloWorld {
                 "if (logic) {\n" +
                 "    doAction();\n" +
                 "}", method.bodyOnly)
+
+        Assert.assertEquals("public void sampleMethod(String test)", method.signatureOnly)
 
         def params = method.params.collect { [it.name, it.javaDocText] }
         assert params == [["test", "test param"]]
@@ -95,6 +119,20 @@ class HelloWorld {
     }
 
     @Test
+    void "extracts method from interface"() {
+        def method = javaCodeInterface.methodByName("sampleMethod")
+
+        Assert.assertEquals("public void sampleMethod(String test)", method.fullBody)
+        Assert.assertEquals("", method.bodyOnly)
+        Assert.assertEquals("public void sampleMethod(String test)", method.signatureOnly)
+
+        def params = method.params.collect { [it.name, it.javaDocText] }
+        assert params == [["test", "test param"]]
+
+        Assert.assertEquals("method level java doc  <code>package.Class</code> ", method.getJavaDocText())
+    }
+
+    @Test
     void "extracts field level java doc"() {
         Assert.assertEquals("Each year we hire students from different universities to increase\ndiversity\n",
                 javaCode.fieldByName("numberOfStudents").getJavaDocText())
@@ -114,6 +152,12 @@ class HelloWorld {
         code {
             javaCode.findJavaDocByName("nonExisting")
         } should throwException("can't find method or field with name: nonExisting")
+    }
+
+    @Test
+    void "extracts java doc by entry name from interface"() {
+        Assert.assertEquals("method level java doc  <code>package.Class</code> ",
+                javaCode.findJavaDocByName("sampleMethod"))
     }
 
     @Test

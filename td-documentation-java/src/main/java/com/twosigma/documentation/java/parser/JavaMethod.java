@@ -12,13 +12,15 @@ public class JavaMethod {
     private String name;
     private String fullBody;
     private String bodyOnly;
+    private String signatureOnly;
     private String javaDocText;
     private List<JavaMethodParam> params;
 
-    public JavaMethod(String name, String fullBody, String bodyOnly, List<JavaMethodParam> params, String javaDocText) {
+    public JavaMethod(String name, String fullBody, String bodyOnly, String signatureOnly, List<JavaMethodParam> params, String javaDocText) {
         this.name = name;
         this.fullBody = fullBody;
         this.bodyOnly = bodyOnly;
+        this.signatureOnly = signatureOnly;
         this.javaDocText = javaDocText;
         this.params = params;
     }
@@ -37,6 +39,10 @@ public class JavaMethod {
 
     public String getJavaDocText() {
         return javaDocText;
+    }
+
+    public String getSignatureOnly() {
+        return signatureOnly;
     }
 
     public List<JavaMethodParam> getParams() {

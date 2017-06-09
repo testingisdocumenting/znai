@@ -6,13 +6,41 @@ Consider a file
 
 :include-java: HelloWorld.java
 
-Specifying a method name to extract only its body. 
+Specifying a method name to extract its full definition or only its body. 
 
     :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true}
 
 If `bodyOnly` is specified, signature will be omitted. 
 
 :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true}
+
+# Signature Only
+
+Specifying a method name to extract only its body. 
+
+    :include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true}
+
+If `signatureOnly` is specified, body will be omitted. 
+
+:include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true}
+
+# Multiple Entries
+
+To display multiple methods at once use `entries` parameter to pass a list of method names
+    
+    :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"]}
+
+will render 
+
+:include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"]}
+
+List important methods signatures at one place by passing `signatureOnly: true`
+
+    :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"], signatureOnly: true}
+
+will render 
+
+:include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"], signatureOnly: true}
 
 # Class JavaDoc
 

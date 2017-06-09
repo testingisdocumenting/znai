@@ -9,6 +9,8 @@ import com.twosigma.documentation.parser.docelement.DocElementType;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author mykola
@@ -21,10 +23,15 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
 
     @Override
     public List<DocElement> process(JavaCode javaCode) {
-        Boolean bodyOnly = pluginParams.getOpts().has("bodyOnly") ? pluginParams.getOpts().get("bodyOnly") : false;
+        Boolean bodyOnly = pluginParams.getOpts().get("bodyOnly", false);
+        Boolean signatureOnly = pluginParams.getOpts().get("signatureOnly", false);
+
+        if (bodyOnly && signatureOnly) {
+            throw new IllegalArgumentException("specify only bodyOnly or signatureOnly");
+        }
 
         Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "java",
-                extractContent(javaCode, entry, bodyOnly));
+                extractContent(javaCode, bodyOnly, signatureOnly));
 
         DocElement docElement = new DocElement(DocElementType.SNIPPET);
         props.forEach(docElement::addProp);
@@ -32,15 +39,23 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
         return Collections.singletonList(docElement);
     }
 
-    private static String extractContent(JavaCode javaCode, String methodName, Boolean bodyOnly) {
-        if (methodName == null) {
+    private String extractContent(JavaCode javaCode, Boolean isBodyOnly, Boolean isSignatureOnly) {
+        if (entry == null && entries == null) {
             return javaCode.getFileContent();
         }
 
+        Stream<String> methodNames = entry != null ? Stream.of(entry) : entries.stream();
+        return methodNames.map(n -> extractSingleContent(javaCode, n, isBodyOnly, isSignatureOnly))
+                .collect(Collectors.joining(isSignatureOnly ? "\n" : "\n\n"));
+    }
+
+    private String extractSingleContent(JavaCode javaCode, String methodName, Boolean isBodyOnly, Boolean isSignatureOnly) {
         JavaMethod method = javaCode.methodByName(methodName);
 
-        return bodyOnly ?
+        return isBodyOnly ?
                 method.getBodyOnly() :
-                method.getFullBody();
+                isSignatureOnly ? method.getSignatureOnly() :
+                        method.getFullBody();
+
     }
 }
