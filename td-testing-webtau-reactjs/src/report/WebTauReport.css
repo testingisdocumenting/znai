@@ -1,0 +1,12 @@
+.report {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-height: 100vh;
+}
+
+.report .body {
+    flex: 1;
+    display: flex;
+    background-color: #fff;
+}

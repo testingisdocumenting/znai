@@ -1,5 +1,9 @@
 package com.twosigma.testing.reporter;
 
+import com.twosigma.utils.CollectionUtils;
+
+import java.util.Map;
+
 /**
  * @author mykola
  */
@@ -18,6 +22,10 @@ public class MessageToken {
 
     public Object getValue() {
         return value;
+    }
+
+    public Map<String, ?> toMap() {
+        return CollectionUtils.createMap("type", type, "value", value);
     }
 
     @Override

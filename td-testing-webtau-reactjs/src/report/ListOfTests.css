@@ -1,0 +1,48 @@
+.report .test-cards {
+    border-right: 1px #627d82 solid;
+    flex: 0 0 350px;
+    overflow-y: auto;
+}
+
+.report .test-cards .test-card {
+    padding: 20px;
+    border-bottom: 1px #eee solid;
+    cursor: pointer;
+}
+
+.report .test-cards .test-card.selected {
+    background-color: rgba(20, 200, 80, 0.1);
+}
+
+.report .test-cards .test-card .meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.report .test-cards .test-card .meta .status.failed {
+    color: #b02f08;
+}
+
+.report .test-cards .test-card .meta .status.errored {
+    color: #b02f08;
+}
+
+.report .test-cards .test-card .meta .status.passed {
+    color: #248903;
+}
+
+.report .test-cards .test-card .meta .status.skipped {
+    color: #555;
+}
+
+.report .test-cards .test-card .file-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.report .test-cards .test-card .scenario {
+    font-size: 14px;
+    max-height: 70px;
+    overflow-y: hidden;
+}

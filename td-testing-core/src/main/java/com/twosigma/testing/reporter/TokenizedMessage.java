@@ -1,11 +1,10 @@
 package com.twosigma.testing.reporter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
@@ -51,6 +50,10 @@ public class TokenizedMessage implements Iterable<MessageToken> {
 
     public Stream<MessageToken> tokensStream() {
         return tokens.stream();
+    }
+
+    public List<Map<String, ?>> toListOfMaps() {
+        return tokens.stream().map(MessageToken::toMap).collect(toList());
     }
 
     @Override

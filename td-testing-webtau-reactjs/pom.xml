@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.twosigma.td</groupId>
+        <artifactId>td-parent</artifactId>
+        <version>0.1</version>
+    </parent>
+
+    <artifactId>td-testing-webtau-reactjs</artifactId>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>package-react-bundle</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <target name="copy-react-bundle">
+                        <fileset id="bundle" dir="build/static">
+                            <include name="js/*.*" />
+                            <include name="css/*.*" />
+                        </fileset>
+
+                        <pathconvert pathsep="${line.separator}" property="files" refid="bundle">
+                            <mapper>
+                                <flattenmapper />
+                            </mapper>
+                        </pathconvert>
+
+                        <copy verbose="true" flatten="true" todir="${project.build.outputDirectory}/static">
+                            <fileset refid="bundle"/>
+                        </copy>
+
+                        <copy file="${project.basedir}/node_modules/react/dist/react.min.js" toDir="${project.build.outputDirectory}/static"/>
+                        <copy file="${project.basedir}/node_modules/react-dom/dist/react-dom.min.js" toDir="${project.build.outputDirectory}/static"/>
+                        <copy file="${project.basedir}/node_modules/react-dom/dist/react-dom-server.min.js" toDir="${project.build.outputDirectory}"/>
+                        <copy toDir="${project.build.outputDirectory}/static">
+                            <fileset dir="${project.basedir}/node_modules/bootstrap/dist"/>
+                        </copy>
+                    </target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

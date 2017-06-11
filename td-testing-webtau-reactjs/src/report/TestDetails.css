@@ -1,0 +1,51 @@
+.report .body .test-details {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    flex-direction: column;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.report .body .test-details .file-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.report .body .test-details .scenario {
+    font-size: 14px;
+}
+
+.report .body .test-details .resource {
+}
+
+.report .body .test-details .resource .image {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.report .body .test-details .additional-resources-selection .tab-names {
+    flex: 1;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    display: flex;
+    width: 100%;
+    border-bottom: 2px solid #eeeeee;
+}
+
+.report .body .test-details .additional-resources-selection .tab-names .tab-name {
+    font-size: 14px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eeeeee;
+    cursor: pointer;
+    margin-bottom: -2px;
+}
+
+.report .body .test-details .additional-resources-selection .tab-names .tab-name.selected {
+    font-weight: bold;
+    border-bottom: 2px solid #888888;
+}

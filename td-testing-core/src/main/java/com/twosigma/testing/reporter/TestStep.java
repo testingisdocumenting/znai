@@ -1,10 +1,15 @@
 package com.twosigma.testing.reporter;
 
+import com.twosigma.utils.CollectionUtils;
 import com.twosigma.utils.TraceUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
@@ -35,7 +40,7 @@ public class TestStep<E> {
 
         step.parent = localCurrentStep;
         if (localCurrentStep != null) {
-            localCurrentStep.children.add(localCurrentStep);
+            localCurrentStep.children.add(step);
         }
         currentStep.set(step);
 
@@ -94,6 +99,17 @@ public class TestStep<E> {
 
     public TokenizedMessage getCompletionMessage() {
         return completionMessage;
+    }
+
+    public Map<String, ?> toMap() {
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("message", completionMessage.toListOfMaps());
+
+        if (! children.isEmpty()) {
+            result.put("children", children.stream().map(TestStep::toMap).collect(toList()));
+        }
+
+        return result;
     }
 
     private void complete(TokenizedMessage message) {
