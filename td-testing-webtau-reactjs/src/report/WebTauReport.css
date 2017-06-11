@@ -3,6 +3,9 @@
     flex-direction: column;
     min-height: 100vh;
     max-height: 100vh;
+
+    font-size: 14px;
+    font-family: Helvetica, Verdana, serif;
 }
 
 .report .body {

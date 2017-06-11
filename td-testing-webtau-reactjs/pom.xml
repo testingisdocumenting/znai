@@ -38,6 +38,10 @@
                             <include name="css/*.*" />
                         </fileset>
 
+                        <fileset id="assets" dir="build/">
+                            <include name="asset-manifest.json" />
+                        </fileset>
+
                         <pathconvert pathsep="${line.separator}" property="files" refid="bundle">
                             <mapper>
                                 <flattenmapper />
@@ -48,11 +52,8 @@
                             <fileset refid="bundle"/>
                         </copy>
 
-                        <copy file="${project.basedir}/node_modules/react/dist/react.min.js" toDir="${project.build.outputDirectory}/static"/>
-                        <copy file="${project.basedir}/node_modules/react-dom/dist/react-dom.min.js" toDir="${project.build.outputDirectory}/static"/>
-                        <copy file="${project.basedir}/node_modules/react-dom/dist/react-dom-server.min.js" toDir="${project.build.outputDirectory}"/>
-                        <copy toDir="${project.build.outputDirectory}/static">
-                            <fileset dir="${project.basedir}/node_modules/bootstrap/dist"/>
+                        <copy verbose="true" flatten="true" todir="${project.build.outputDirectory}/">
+                            <fileset refid="assets"/>
                         </copy>
                     </target>
                 </configuration>

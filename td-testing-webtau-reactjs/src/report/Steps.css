@@ -2,6 +2,9 @@
     margin-left: 15px;
 }
 
+.steps .step .message {
+}
+
 .steps .step .token {
     font-size: 14px;
 }
@@ -11,7 +14,7 @@
 }
 
 .steps .step .token.error {
-    color: #d75450;
+    color: #b02f08;
 }
 
 .steps .step .token.delimiter {

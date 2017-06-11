@@ -1,5 +1,5 @@
 import React from 'react'
-import Steps from './Steps'
+import WebTauReport from './WebTauReport'
 
 const steps = [
     {
@@ -104,12 +104,22 @@ const steps = [
     }
 ]
 
-const StepsDemo = () => {
-    return (
-        <div className="report">
-            <Steps steps={steps}/>
-        </div>
-    )
+const report = {
+    summary: {
+        total: 5,
+        passed: 1,
+        failed: 1,
+        errored: 1,
+        skipped: 2
+    },
+
+    tests: [
+        {fileName: "testFile.groovy", id: "testFile.groovy-1", screenshot: "testFile.groovy-1.png", status: "Failed", steps: steps, scenario: "User opens an empty order"},
+        {fileName: "testFile.groovy", id: "testFile.groovy-2", status: "Passed", steps: [], scenario: "Searching for latest orders, Searching for latest orders, Searching for latest orders, 1244, Searching for latest orders, Searching for latest orders, Searching for latest orders, 1244"},
+        {fileName: "testFile.groovy", id: "testFile.groovy-3", status: "Skipped", steps: [], scenario: "Syncing operations"},
+        {fileName: "anotherFile.groovy", id: "anotherFile.groovy-1", status: "Errored", steps: [], scenario: "Validation of account types"},
+        {fileName: "anotherFile.groovy", id: "anotherFile.groovy-2", status: "Skipped", steps: [], scenario: "Validation of account types"}
+    ]
 }
 
-export default StepsDemo
+export default () => <WebTauReport report={report}/>

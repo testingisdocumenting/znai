@@ -21,8 +21,6 @@
 }
 
 .report .body .test-details .resource .image {
-    overflow-x: auto;
-    width: 100%;
 }
 
 .report .body .test-details .additional-resources-selection .tab-names {
