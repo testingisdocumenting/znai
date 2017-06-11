@@ -104,6 +104,6 @@ public class NullWebElement implements WebElement {
     }
 
     private void error(String action) {
-        throw new RuntimeException("can't " + action + " as element is not found: " + id + ". Try to wait for it to appear first.");
+        throw new ElementNotFoundException("can't " + action + " as element is not found: " + id + ". Try to wait for it to appear first.");
     }
 }

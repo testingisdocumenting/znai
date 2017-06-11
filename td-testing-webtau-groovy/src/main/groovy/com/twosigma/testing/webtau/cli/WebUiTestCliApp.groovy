@@ -15,8 +15,10 @@ import com.twosigma.testing.standalone.report.StandardConsoleTestListener
 import com.twosigma.testing.webtau.WebTauGroovyDsl
 import com.twosigma.testing.webtau.cfg.WebUiTestConfig
 import com.twosigma.testing.webtau.driver.WebDriverCreator
+import com.twosigma.testing.webtau.reporter.HtmlReportGenerator
 import com.twosigma.testing.webtau.reporter.WebReportStepReporter
 import com.twosigma.testing.webtau.reporter.WebUiMessageBuilder
+import com.twosigma.utils.FileUtils
 import com.twosigma.utils.JsonUtils
 
 import java.nio.file.Path
@@ -27,13 +29,15 @@ import java.nio.file.Paths
  */
 class WebUiTestCliApp implements StandaloneTestListener {
     private static WebUiTestConfig cfg = WebUiTestConfig.INSTANCE
-    private static StandaloneTestListener consoleTestReporter = new StandardConsoleTestListener()
+    private static StandardConsoleTestListener consoleTestReporter = new StandardConsoleTestListener()
     private static StepReporter stepReporter = new ConsoleStepReporter(WebUiMessageBuilder.converter)
     private static WebReportStepReporter webReportStepReporter = new WebReportStepReporter()
     private static ConsoleOutput consoleOutput = new AnsiConsoleOutput()
 
     private WebUiTestCliConfig config
     private StandaloneTestRunner runner
+
+    private List<StandaloneTest> tests = []
 
     WebUiTestCliApp(String[] args) {
         ConsoleOutputs.add(consoleOutput)
@@ -86,10 +90,27 @@ class WebUiTestCliApp implements StandaloneTestListener {
         def steps = webReportStepReporter.getStepsAndReset()
         def listOfMaps = steps.collect { it.toMap() }
 
-        println JsonUtils.serializePrettyPrint(listOfMaps)
+        test.addResultPayload({ [steps: listOfMaps ]})
+        tests.add(test)
     }
 
     @Override
     void afterAllTests() {
+        generateReport()
+    }
+
+    void generateReport() {
+        def summary = [
+                total: consoleTestReporter.total,
+                passed: consoleTestReporter.passed,
+                failed: consoleTestReporter.failed,
+                skipped: 0,
+                errored: consoleTestReporter.errored]
+
+        def report = [summary: summary, tests: tests*.toMap()]
+        def json = JsonUtils.serializePrettyPrint(report)
+
+        def reportPath = cfg.workingDir.resolve("webtau.report.html")
+        FileUtils.writeTextContent(reportPath, new HtmlReportGenerator().generate(json))
     }
 }

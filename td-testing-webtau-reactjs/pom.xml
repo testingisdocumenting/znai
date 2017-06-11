@@ -42,17 +42,11 @@
                             <include name="asset-manifest.json" />
                         </fileset>
 
-                        <pathconvert pathsep="${line.separator}" property="files" refid="bundle">
-                            <mapper>
-                                <flattenmapper />
-                            </mapper>
-                        </pathconvert>
-
-                        <copy verbose="true" flatten="true" todir="${project.build.outputDirectory}/static">
+                        <copy verbose="true" todir="${project.build.outputDirectory}/static">
                             <fileset refid="bundle"/>
                         </copy>
 
-                        <copy verbose="true" flatten="true" todir="${project.build.outputDirectory}/">
+                        <copy verbose="true" todir="${project.build.outputDirectory}/">
                             <fileset refid="assets"/>
                         </copy>
                     </target>

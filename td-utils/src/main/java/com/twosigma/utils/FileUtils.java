@@ -17,7 +17,11 @@ public class FileUtils {
 
     public static void writeTextContent(Path path, String text) {
         try {
-            Files.createDirectories(path.getParent());
+            Path parent = path.toAbsolutePath().getParent();
+            if (parent != null) {
+                Files.createDirectories(parent);
+            }
+
             Files.write(path, text.getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);

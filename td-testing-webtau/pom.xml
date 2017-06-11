@@ -30,6 +30,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.twosigma.td</groupId>
+            <artifactId>td-testing-webtau-reactjs</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>

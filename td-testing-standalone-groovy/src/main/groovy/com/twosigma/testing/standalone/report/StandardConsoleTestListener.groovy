@@ -28,13 +28,29 @@ class StandardConsoleTestListener extends StandaloneTestListenerAdapter {
             renderStackTrace(test.exception)
             failed++
         } else if (test.hasError()) {
-            ConsoleOutputs.out(Color.RED, "[x] ", Color.BLUE, "error")
+            ConsoleOutputs.out(Color.RED, "[~] ", Color.BLUE, "error")
             renderStackTrace(test.exception)
             errored++
         } else {
             ConsoleOutputs.out(Color.GREEN, "[.] ", Color.BLUE, "passed")
             passed++
         }
+    }
+
+    int getTotal() {
+        return passed + failed + errored
+    }
+
+    int getPassed() {
+        return passed
+    }
+
+    int getFailed() {
+        return failed
+    }
+
+    int getErrored() {
+        return errored
     }
 
     @Override
