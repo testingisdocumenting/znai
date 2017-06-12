@@ -3,6 +3,7 @@ package com.twosigma.testing.webtau.cli
 import com.twosigma.console.ConsoleOutput
 import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.AnsiConsoleOutput
+import com.twosigma.console.ansi.Color
 import com.twosigma.testing.reporter.ConsoleStepReporter
 import com.twosigma.testing.reporter.StepReporter
 import com.twosigma.testing.reporter.StepReporters
@@ -118,5 +119,7 @@ class WebTauCliApp implements StandaloneTestListener {
 
         def reportPath = cfg.workingDir.resolve("webtau.report.html")
         FileUtils.writeTextContent(reportPath, new HtmlReportGenerator().generate(json))
+
+        ConsoleOutputs.out(Color.BLUE, "report is generated: ", Color.PURPLE, " ", reportPath.toAbsolutePath())
     }
 }
