@@ -82,10 +82,8 @@ class StandaloneTest implements StepReporter {
 
         payloads.each { testAsMap << it.toMap() }
 
-        if (assertionMessage) {
-            testAsMap.assertion = assertionMessage
-            testAsMap.contextDescription =  steps.find { it.isFailed() }.firstAvailableContext.toString()
-        }
+        testAsMap.assertion = assertionMessage
+        testAsMap.contextDescription = steps.find { it.isFailed() }?.firstAvailableContext?.toString()
 
         return testAsMap
     }

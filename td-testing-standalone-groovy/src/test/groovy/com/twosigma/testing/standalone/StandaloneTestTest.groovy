@@ -17,6 +17,8 @@ class StandaloneTestTest {
         test.addResultPayload({ return [steps: ["step1", "step2"] ]})
 
         test.toMap().should equal([id: 'test.groovy-1', scenario: 'my test description', fileName: 'test.groovy',
+                                   assertion: null, contextDescription: null,
+                                   status: 'Passed',
                                    screenshot: 'base64', steps: ['step1', 'step2']])
     }
 }
