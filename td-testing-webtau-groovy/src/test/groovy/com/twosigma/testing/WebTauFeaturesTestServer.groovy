@@ -7,10 +7,10 @@ import com.twosigma.utils.ResourceUtils
 /**
  * @author mykola
  */
-class WebuitFeaturesTestServer {
+class WebTauFeaturesTestServer {
     private TestServer testServer
 
-    WebuitFeaturesTestServer() {
+    WebTauFeaturesTestServer() {
         testServer = new TestServer()
         testServer.registerGet("/search", new TestServerHtmlResponse(ResourceUtils.textContent("search.html")))
         testServer.registerGet("/finders-and-filters", new TestServerHtmlResponse(ResourceUtils.textContent("finders-and-filters.html")))
@@ -25,7 +25,7 @@ class WebuitFeaturesTestServer {
     }
 
     static void main(String[] args) {
-        def testServer = new WebuitFeaturesTestServer()
+        def testServer = new WebTauFeaturesTestServer()
         testServer.start(8180)
     }
 }

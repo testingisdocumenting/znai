@@ -1,12 +1,8 @@
 package com.twosigma.testing.reporter;
 
-import com.twosigma.utils.CollectionUtils;
 import com.twosigma.utils.TraceUtils;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 import static java.util.stream.Collectors.toList;
@@ -28,6 +24,8 @@ public class TestStep<E> {
     private List<TestStep<?>> children;
     private TestStep<?> parent;
     private String stackTrace;
+
+    private List<TestStepPayload> payloads;
 
     private static ThreadLocal<TestStep<?>> currentStep = new ThreadLocal<>();
 
@@ -57,6 +55,36 @@ public class TestStep<E> {
         this.completionMessageSupplier = completionMessageSupplier;
         this.action = action;
         this.isInProgress = true;
+        this.payloads = new ArrayList<>();
+    }
+
+    public List<TestStepPayload> getCombinedPayloads() {
+        List<TestStepPayload> result = new ArrayList<>();
+        result.addAll(payloads);
+        children.forEach(s -> result.addAll(s.getCombinedPayloads()));
+
+        return result;
+    }
+
+    public void addPayload(TestStepPayload payload) {
+        payloads.add(payload);
+    }
+
+    public boolean hasPayload(Class<?> type) {
+        return payloads.stream().anyMatch(p -> type.isAssignableFrom(type)) ||
+                children.stream().anyMatch(s -> s.hasPayload(type));
+    }
+
+    @SuppressWarnings("unchecked")
+    public E getFirstAvailableContext() {
+        if (context != null) {
+            return context;
+        }
+
+        return (E) children.stream()
+                .map(TestStep::getFirstAvailableContext)
+                .filter(Objects::nonNull)
+                .findFirst().orElse(null);
     }
 
     public int getNumberOfParents() {
@@ -72,6 +100,10 @@ public class TestStep<E> {
 
     public boolean isSuccessful() {
         return isSuccessful;
+    }
+
+    public boolean isFailed() {
+        return ! isSuccessful;
     }
 
     public void execute() {

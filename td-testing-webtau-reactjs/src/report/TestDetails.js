@@ -19,7 +19,7 @@ const AdditionalResourcesSelection = ({tabs, selectedTabName, onTabSelection}) =
 const Screenshot = ({test}) => {
     return (
         <div className="image">
-            <img src={"report-assets/" + test.screenshot} width="100%"/>
+            <img src={"data:image/png;base64," + test.screenshot} width="100%"/>
         </div>
     )
 }
@@ -58,6 +58,20 @@ class TestDetails extends Component {
                 <div className="scenario">
                     {test.scenario}
                 </div>
+
+                {test.contextDescription ?
+                    <div className="context-description">
+                        <pre>
+                            {test.contextDescription}
+                        </pre>
+                    </div> : null}
+
+                {test.assertion ?
+                    <div className="assertion">
+                        <pre>
+                            {test.assertion}
+                        </pre>
+                    </div> : null}
 
                 <AdditionalResourcesSelection tabs={tabNames}
                                               selectedTabName={selectedResourceTabName}

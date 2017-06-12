@@ -3,8 +3,8 @@ package com.twosigma.testing.reporter;
 /**
  * @author mykola
  */
-public interface StepReporter {
-    void onStepStart(TestStep step);
-    void onStepSuccess(TestStep step);
-    void onStepFailure(TestStep step);
+public interface StepReporter<C> {
+    void onStepStart(TestStep<C> step);
+    void onStepSuccess(TestStep<C> step);
+    void onStepFailure(TestStep<C> step);
 }

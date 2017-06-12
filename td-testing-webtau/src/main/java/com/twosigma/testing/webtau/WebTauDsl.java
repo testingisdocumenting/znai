@@ -11,6 +11,8 @@ import com.twosigma.testing.webtau.expectation.VisibleValueMatcher;
 import com.twosigma.testing.webtau.page.PageElement;
 import com.twosigma.testing.webtau.page.path.ElementPath;
 import com.twosigma.testing.webtau.page.path.GenericPageElement;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import java.util.function.Supplier;
@@ -52,6 +54,11 @@ public class WebTauDsl {
         executeStep(null, tokenizedMessage(action("re-opening"), urlValue(fullUrl)),
                 () -> tokenizedMessage(action("opened"), urlValue(fullUrl)),
                 () -> driver.get(fullUrl));
+    }
+
+    public static String takeScreenshotAsBase64() {
+        TakesScreenshot takesScreenshot = (TakesScreenshot) WebTauDsl.driver;
+        return takesScreenshot.getScreenshotAs(OutputType.BASE64);
     }
 
     public static PageElement $(String css) {

@@ -2,7 +2,7 @@ package com.twosigma.testing.webtau
 
 import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.Color
-import com.twosigma.testing.WebuitFeaturesTestServer
+import com.twosigma.testing.WebTauFeaturesTestServer
 import com.twosigma.testing.reporter.StepReporter
 import com.twosigma.testing.reporter.StepReporters
 import com.twosigma.testing.reporter.TestStep
@@ -29,7 +29,7 @@ import java.nio.file.Paths
  */
 class WebtauFeaturesTesting implements StepReporter, StandaloneTestListener {
     private static final int testServerPort = 8180
-    private static WebuitFeaturesTestServer testServer
+    private static WebTauFeaturesTestServer testServer
 
     private List<String> report = new ArrayList<>()
     private String testDescription
@@ -38,7 +38,7 @@ class WebtauFeaturesTesting implements StepReporter, StandaloneTestListener {
     static void init() {
         System.setProperty("url", "http://localhost:" + testServerPort)
 
-        testServer = new WebuitFeaturesTestServer()
+        testServer = new WebTauFeaturesTestServer()
         testServer.start(testServerPort)
     }
 

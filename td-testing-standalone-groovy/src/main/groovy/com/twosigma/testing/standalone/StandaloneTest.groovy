@@ -1,5 +1,9 @@
 package com.twosigma.testing.standalone
 
+import com.twosigma.testing.reporter.StepReporter
+import com.twosigma.testing.reporter.StepReporters
+import com.twosigma.testing.reporter.TestStep
+
 import java.nio.file.Path
 
 import static com.twosigma.testing.standalone.StandaloneTestStatus.Errored
@@ -11,7 +15,7 @@ import static com.twosigma.testing.standalone.StandaloneTestStatus.Passed
  * One way is to define a simple script. TODO refer example here
  * @author mykola
  */
-class StandaloneTest {
+class StandaloneTest implements StepReporter {
     private static StandaloneTestIdGenerator idGenerator = new StandaloneTestIdGenerator()
 
     private String id
@@ -23,13 +27,19 @@ class StandaloneTest {
     private String assertionMessage
 
     private List<StandaloneTestResultPayload> payloads
+    private List<TestStep> steps
 
     StandaloneTest(Path filePath, String description, Closure code) {
         this.id = idGenerator.generate(filePath)
         this.filePath = filePath
         this.description = description
         this.code = code
+        this.steps = []
         this.payloads = []
+    }
+
+    List<TestStep> getSteps() {
+        return steps
     }
 
     Path getFilePath() {
@@ -65,24 +75,47 @@ class StandaloneTest {
     }
 
     Map<String, ?> toMap() {
-        def testAsMap = [id: id,
+        def testAsMap = [id      : id,
                          scenario: description,
                          fileName: filePath.fileName.toString(),
-                         status: getStatus().toString()]
+                         status  : getStatus().toString()]
 
         payloads.each { testAsMap << it.toMap() }
+
+        if (assertionMessage) {
+            testAsMap.assertion = assertionMessage
+            testAsMap.contextDescription =  steps.find { it.isFailed() }.firstAvailableContext.toString()
+        }
 
         return testAsMap
     }
 
     void run() {
         try {
+            StepReporters.add(this)
             code.run()
         } catch (AssertionError e) {
             exception = e
             assertionMessage = e.message
         } catch (Throwable e) {
             exception = e
+        } finally {
+            StepReporters.remove(this)
         }
+    }
+
+    @Override
+    void onStepStart(TestStep step) {
+        if (step.getNumberOfParents() == 0) {
+            steps.add(step)
+        }
+    }
+
+    @Override
+    void onStepSuccess(TestStep step) {
+    }
+
+    @Override
+    void onStepFailure(TestStep step) {
     }
 }

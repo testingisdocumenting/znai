@@ -1,4 +1,4 @@
-.report .body .test-details {
+.test-details {
     display: flex;
     flex: 1;
     padding: 20px;
@@ -7,23 +7,34 @@
     overflow-y: auto;
 }
 
-.report .body .test-details .file-name {
+.test-details .file-name {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-.report .body .test-details .scenario {
+.test-details .scenario {
     font-size: 14px;
 }
 
-.report .body .test-details .resource {
+.test-details .assertion,
+.test-details .context-description {
+    font-size: 14px;
+    font-family: Monospaced, monospace;
+    color: #b02f08;
 }
 
-.report .body .test-details .resource .image {
+.test-details .context-description {
+    border-bottom: 1px #eee solid;
 }
 
-.report .body .test-details .additional-resources-selection .tab-names {
+.test-details .resource {
+}
+
+.test-details .resource .image {
+}
+
+.test-details .additional-resources-selection .tab-names {
     flex: 1;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -33,7 +44,7 @@
     border-bottom: 2px solid #eeeeee;
 }
 
-.report .body .test-details .additional-resources-selection .tab-names .tab-name {
+.test-details .additional-resources-selection .tab-names .tab-name {
     font-size: 14px;
     padding-left: 15px;
     padding-right: 15px;
@@ -43,7 +54,7 @@
     margin-bottom: -2px;
 }
 
-.report .body .test-details .additional-resources-selection .tab-names .tab-name.selected {
+.test-details .additional-resources-selection .tab-names .tab-name.selected {
     font-weight: bold;
     border-bottom: 2px solid #888888;
 }

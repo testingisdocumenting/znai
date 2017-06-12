@@ -16,7 +16,8 @@ import com.twosigma.testing.webtau.WebTauGroovyDsl
 import com.twosigma.testing.webtau.cfg.WebUiTestConfig
 import com.twosigma.testing.webtau.driver.WebDriverCreator
 import com.twosigma.testing.webtau.reporter.HtmlReportGenerator
-import com.twosigma.testing.webtau.reporter.WebReportStepReporter
+import com.twosigma.testing.webtau.reporter.ScreenshotStepPayload
+import com.twosigma.testing.webtau.reporter.ScreenshotStepReporter
 import com.twosigma.testing.webtau.reporter.WebUiMessageBuilder
 import com.twosigma.utils.FileUtils
 import com.twosigma.utils.JsonUtils
@@ -31,7 +32,7 @@ class WebUiTestCliApp implements StandaloneTestListener {
     private static WebUiTestConfig cfg = WebUiTestConfig.INSTANCE
     private static StandardConsoleTestListener consoleTestReporter = new StandardConsoleTestListener()
     private static StepReporter stepReporter = new ConsoleStepReporter(WebUiMessageBuilder.converter)
-    private static WebReportStepReporter webReportStepReporter = new WebReportStepReporter()
+    private static ScreenshotStepReporter screenshotStepReporter = new ScreenshotStepReporter()
     private static ConsoleOutput consoleOutput = new AnsiConsoleOutput()
 
     private WebUiTestCliConfig config
@@ -53,7 +54,7 @@ class WebUiTestCliApp implements StandaloneTestListener {
 
     void start() {
         StepReporters.add(stepReporter)
-        StepReporters.add(webReportStepReporter)
+        StepReporters.add(screenshotStepReporter)
 
         config.print()
 
@@ -87,10 +88,16 @@ class WebUiTestCliApp implements StandaloneTestListener {
 
     @Override
     void afterTestRun(StandaloneTest test) {
-        def steps = webReportStepReporter.getStepsAndReset()
+        def steps = test.steps
         def listOfMaps = steps.collect { it.toMap() }
 
         test.addResultPayload({ [steps: listOfMaps ]})
+
+        def screenshotsPayloads = steps.combinedPayloads.flatten().findAll { it instanceof ScreenshotStepPayload }
+        if (! screenshotsPayloads.isEmpty()) {
+            test.addResultPayload({ [screenshot: screenshotsPayloads[0].base64png] })
+        }
+
         tests.add(test)
     }
 
