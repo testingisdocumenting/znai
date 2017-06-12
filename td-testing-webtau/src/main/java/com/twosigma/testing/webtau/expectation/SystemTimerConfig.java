@@ -2,13 +2,13 @@ package com.twosigma.testing.webtau.expectation;
 
 import com.twosigma.testing.expectation.timer.ExpectationTimer;
 import com.twosigma.testing.expectation.timer.ExpectationTimerConfig;
-import com.twosigma.testing.webtau.cfg.WebUiTestConfig;
+import com.twosigma.testing.webtau.cfg.WebTauConfig;
 
 /**
  * @author mykola
  */
 public class SystemTimerConfig implements ExpectationTimerConfig {
-    private static WebUiTestConfig cfg = WebUiTestConfig.INSTANCE;
+    private static WebTauConfig cfg = WebTauConfig.INSTANCE;
 
     @Override
     public ExpectationTimer createExpectationTimer() {

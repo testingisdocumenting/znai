@@ -9,7 +9,7 @@ import com.twosigma.testing.reporter.TestStep
 import com.twosigma.testing.standalone.StandaloneTest
 import com.twosigma.testing.standalone.StandaloneTestListener
 import com.twosigma.testing.standalone.StandaloneTestListeners
-import com.twosigma.testing.webtau.cli.WebUiTestCliApp
+import com.twosigma.testing.webtau.cli.WebTauCliApp
 import com.twosigma.utils.FileUtils
 import com.twosigma.utils.JsonUtils
 import com.twosigma.utils.ResourceUtils
@@ -127,7 +127,7 @@ class WebtauFeaturesTesting implements StepReporter, StandaloneTestListener {
         report.clear()
 
         try {
-            def cliApp = new WebUiTestCliApp("--url=http://localhost:" + testServerPort, testPath.toString())
+            def cliApp = new WebTauCliApp("--url=http://localhost:" + testServerPort, testPath.toString())
             cliApp.start()
         } finally {
             def testArtifact = [description: testDescription, example: example, report: report]

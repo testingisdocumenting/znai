@@ -45,15 +45,21 @@ public class ConfigValue {
     }
 
     public String getSource() {
-        return (isDefault() ? "default" : values.getFirst().sourceId);
+        return (isDefault() ? "default" : values.getFirst().getSourceId());
+    }
+
+    public List<String> getSources() {
+        return (isDefault() ?
+                Collections.singletonList("default") :
+                values.stream().map(Value::getSourceId).collect(Collectors.toList()));
     }
 
     public String getAsString() {
-        return isDefault() ? defaultValue.toString() : values.getFirst().value.toString();
+        return isDefault() ? defaultValue.toString() : values.getFirst().getValue().toString();
     }
 
     public Path getAsPath() {
-        return isDefault() ? (Path) defaultValue : Paths.get(values.getFirst().value.toString());
+        return isDefault() ? (Path) defaultValue : Paths.get(values.getFirst().getValue().toString());
     }
 
     public int getAsInt() {
@@ -61,7 +67,7 @@ public class ConfigValue {
            return (int) defaultValue;
         }
 
-        Object first = values.getFirst().value;
+        Object first = values.getFirst().getValue();
         return first instanceof Integer ?
                 (int) first :
                 Integer.valueOf(first.toString());
@@ -72,7 +78,7 @@ public class ConfigValue {
             return (boolean) defaultValue;
         }
 
-        Object first = values.getFirst().value;
+        Object first = values.getFirst().getValue();
         return first.toString().toLowerCase().equals("true");
     }
 
@@ -104,6 +110,14 @@ public class ConfigValue {
         public Value(String sourceId, Object value) {
             this.sourceId = sourceId;
             this.value = value;
+        }
+
+        public String getSourceId() {
+            return sourceId;
+        }
+
+        public Object getValue() {
+            return value;
         }
 
         @Override

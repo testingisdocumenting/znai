@@ -2,7 +2,7 @@ package com.twosigma.testing.webtau.cli
 
 import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.Color
-import com.twosigma.testing.webtau.cfg.WebUiTestConfig
+import com.twosigma.testing.webtau.cfg.WebTauConfig
 import com.twosigma.utils.FileUtils
 import org.apache.commons.cli.*
 
@@ -14,7 +14,7 @@ import java.nio.file.Paths
  * @author mykola
  */
 class WebUiTestCliConfig {
-    private WebUiTestConfig cfg = WebUiTestConfig.INSTANCE
+    private WebTauConfig cfg = WebTauConfig.INSTANCE
 
     private List<String> testFiles
     private String env
@@ -30,8 +30,6 @@ class WebUiTestCliConfig {
             cfg.acceptConfigValues("config file", configObject.flatten())
         }
 
-        cfg.acceptConfigValues("environment variable", envVarsAsMap())
-        cfg.acceptConfigValues("system property", systemPropsAsMap())
         cfg.acceptConfigValues("command line argument", commandLineArgsAsMap())
     }
 
@@ -93,13 +91,5 @@ class WebUiTestCliConfig {
 
     private Map commandLineArgsAsMap() {
         commandLine.options.collectEntries { [it.longOpt, it.value] }
-    }
-
-    private static Map systemPropsAsMap() {
-        System.properties.stringPropertyNames().collectEntries { [it, System.getProperty(it)] }
-    }
-
-    private static Map envVarsAsMap() {
-        return System.getenv()
     }
 }

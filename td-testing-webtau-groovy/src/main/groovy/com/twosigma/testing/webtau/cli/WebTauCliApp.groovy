@@ -6,14 +6,13 @@ import com.twosigma.console.ansi.AnsiConsoleOutput
 import com.twosigma.testing.reporter.ConsoleStepReporter
 import com.twosigma.testing.reporter.StepReporter
 import com.twosigma.testing.reporter.StepReporters
-import com.twosigma.testing.reporter.TestStep
 import com.twosigma.testing.standalone.StandaloneTest
 import com.twosigma.testing.standalone.StandaloneTestListener
 import com.twosigma.testing.standalone.StandaloneTestListeners
 import com.twosigma.testing.standalone.StandaloneTestRunner
 import com.twosigma.testing.standalone.report.StandardConsoleTestListener
 import com.twosigma.testing.webtau.WebTauGroovyDsl
-import com.twosigma.testing.webtau.cfg.WebUiTestConfig
+import com.twosigma.testing.webtau.cfg.WebTauConfig
 import com.twosigma.testing.webtau.driver.WebDriverCreator
 import com.twosigma.testing.webtau.reporter.HtmlReportGenerator
 import com.twosigma.testing.webtau.reporter.ScreenshotStepPayload
@@ -28,8 +27,8 @@ import java.nio.file.Paths
 /**
  * @author mykola
  */
-class WebUiTestCliApp implements StandaloneTestListener {
-    private static WebUiTestConfig cfg = WebUiTestConfig.INSTANCE
+class WebTauCliApp implements StandaloneTestListener {
+    private static WebTauConfig cfg = WebTauConfig.INSTANCE
     private static StandardConsoleTestListener consoleTestReporter = new StandardConsoleTestListener()
     private static StepReporter stepReporter = new ConsoleStepReporter(WebUiMessageBuilder.converter)
     private static ScreenshotStepReporter screenshotStepReporter = new ScreenshotStepReporter()
@@ -40,7 +39,7 @@ class WebUiTestCliApp implements StandaloneTestListener {
 
     private List<StandaloneTest> tests = []
 
-    WebUiTestCliApp(String[] args) {
+    WebTauCliApp(String[] args) {
         ConsoleOutputs.add(consoleOutput)
 
         config = new WebUiTestCliConfig(args)
@@ -71,7 +70,7 @@ class WebUiTestCliApp implements StandaloneTestListener {
     }
 
     static void main(String[] args) {
-        new WebUiTestCliApp(args).start()
+        new WebTauCliApp(args).start()
     }
 
     @Override

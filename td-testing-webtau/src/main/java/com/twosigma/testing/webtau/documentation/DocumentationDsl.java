@@ -1,6 +1,6 @@
 package com.twosigma.testing.webtau.documentation;
 
-import com.twosigma.testing.webtau.cfg.WebUiTestConfig;
+import com.twosigma.testing.webtau.cfg.WebTauConfig;
 import com.twosigma.testing.webtau.documentation.annotations.ArrowImageAnnotation;
 import com.twosigma.testing.webtau.documentation.annotations.BadgeImageAnnotation;
 import com.twosigma.testing.webtau.documentation.annotations.HighlighterImageAnnotation;
@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class DocumentationDsl {
-    private WebUiTestConfig cfg = WebUiTestConfig.INSTANCE;
+    private WebTauConfig cfg = WebTauConfig.INSTANCE;
 
     private TakesScreenshot screenshotTaker;
     private List<ImageAnnotation> annotations;

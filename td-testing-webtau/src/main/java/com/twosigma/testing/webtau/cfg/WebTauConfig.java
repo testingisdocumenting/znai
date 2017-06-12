@@ -18,8 +18,8 @@ import static com.twosigma.testing.webtau.cfg.ConfigValue.declare;
 /**
  * @author mykola
  */
-public class WebUiTestConfig {
-    public static final WebUiTestConfig INSTANCE = new WebUiTestConfig();
+public class WebTauConfig {
+    public static final WebTauConfig INSTANCE = new WebTauConfig();
 
     private ConfigValue config = declare("config", "config path", "test.cfg");
     private ConfigValue url = declare("url", "base url for application under test", null);
@@ -45,6 +45,11 @@ public class WebUiTestConfig {
             chromeDriverPath,
             chromeBinPath);
 
+    protected WebTauConfig() {
+        acceptConfigValues("environment variable", envVarsAsMap());
+        acceptConfigValues("system property", systemPropsAsMap());
+    }
+
     public Stream<ConfigValue> getCfgValuesStream() {
         return cfgValues.stream();
     }
@@ -53,8 +58,16 @@ public class WebUiTestConfig {
         cfgValues.forEach(v -> v.accept(source, values));
     }
 
+    public void setBaseUrl(String url) {
+        this.url.set("manual", url);
+    }
+
     public String getBaseUrl() {
         return url.getAsString();
+    }
+
+    public ConfigValue getBaseUrlConfigValue() {
+        return url;
     }
 
     public int waitTimeout() {
@@ -117,5 +130,15 @@ public class WebUiTestConfig {
                             FontStyle.NORMAL, " // from ", v.getSource());
                 }
         );
+    }
+
+
+    private static Map systemPropsAsMap() {
+        return System.getProperties().stringPropertyNames().stream()
+                .collect(Collectors.toMap(n -> n, System::getProperty));
+    }
+
+    private static Map envVarsAsMap() {
+        return System.getenv();
     }
 }

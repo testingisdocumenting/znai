@@ -1,6 +1,6 @@
 package com.twosigma.testing.webtau.driver;
 
-import com.twosigma.testing.webtau.cfg.WebUiTestConfig;
+import com.twosigma.testing.webtau.cfg.WebTauConfig;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author mykola
  */
 public class WebDriverCreator {
-    private static final WebUiTestConfig cfg = WebUiTestConfig.INSTANCE;
+    private static final WebTauConfig cfg = WebTauConfig.INSTANCE;
 
     private static List<WebDriver> drivers = Collections.synchronizedList(new ArrayList<>());
 

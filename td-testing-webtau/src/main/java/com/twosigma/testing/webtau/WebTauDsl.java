@@ -4,7 +4,7 @@ import com.twosigma.testing.expectation.ValueMatcher;
 import com.twosigma.testing.http.HttpUrl;
 import com.twosigma.testing.reporter.TestStep;
 import com.twosigma.testing.reporter.TokenizedMessage;
-import com.twosigma.testing.webtau.cfg.WebUiTestConfig;
+import com.twosigma.testing.webtau.cfg.WebTauConfig;
 import com.twosigma.testing.webtau.documentation.DocumentationDsl;
 import com.twosigma.testing.webtau.driver.CurrentWebDriver;
 import com.twosigma.testing.webtau.expectation.VisibleValueMatcher;
@@ -24,7 +24,7 @@ import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.*;
  * @author mykola
  */
 public class WebTauDsl {
-    private static WebUiTestConfig cfg = WebUiTestConfig.INSTANCE;
+    private static WebTauConfig cfg = WebTauConfig.INSTANCE;
 
     private static final WebDriver driver = new CurrentWebDriver();
     public static final DocumentationDsl doc = new DocumentationDsl(driver);
