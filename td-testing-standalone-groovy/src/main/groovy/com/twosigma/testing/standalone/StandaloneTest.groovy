@@ -3,6 +3,8 @@ package com.twosigma.testing.standalone
 import com.twosigma.testing.reporter.StepReporter
 import com.twosigma.testing.reporter.StepReporters
 import com.twosigma.testing.reporter.TestStep
+import com.twosigma.testing.standalone.report.GroovyStackTraceUtils
+import com.twosigma.utils.TraceUtils
 
 import java.nio.file.Path
 
@@ -58,6 +60,14 @@ class StandaloneTest implements StepReporter {
         return assertionMessage != null
     }
 
+    String getDescription() {
+        return description
+    }
+
+    Throwable getException() {
+        return exception
+    }
+
     StandaloneTestStatus getStatus() {
         if (hasError()) {
             return Errored
@@ -75,15 +85,17 @@ class StandaloneTest implements StepReporter {
     }
 
     Map<String, ?> toMap() {
-        def testAsMap = [id      : id,
-                         scenario: description,
-                         fileName: filePath.fileName.toString(),
-                         status  : getStatus().toString()]
+        def testAsMap = [id                : id,
+                         scenario          : description,
+                         fileName          : filePath.fileName.toString(),
+                         status            : getStatus().toString(),
+                         assertion         : assertionMessage,
+                         contextDescription: steps.find { it.isFailed() }?.firstAvailableContext?.toString(),
+                         exceptionMessage  : exception ? renderExceptionNameAndMessage(exception) : null,
+                         shortStackTrace   : exception ? GroovyStackTraceUtils.renderStackTraceWithoutLibCalls(exception) : null,
+                         fullStackTrace    : exception ? TraceUtils.stackTrace(exception) : null]
 
         payloads.each { testAsMap << it.toMap() }
-
-        testAsMap.assertion = assertionMessage
-        testAsMap.contextDescription = steps.find { it.isFailed() }?.firstAvailableContext?.toString()
 
         return testAsMap
     }
@@ -115,5 +127,10 @@ class StandaloneTest implements StepReporter {
 
     @Override
     void onStepFailure(TestStep step) {
+    }
+
+    private static String renderExceptionNameAndMessage(Throwable t) {
+        def message = t.getMessage()
+        return t.getClass().canonicalName + (message != null ? ": " + message : "")
     }
 }

@@ -3,9 +3,7 @@ package com.twosigma.testing.standalone.report
 import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.Color
 import com.twosigma.testing.standalone.StandaloneTest
-import com.twosigma.testing.standalone.StandaloneTestListener
 import com.twosigma.testing.standalone.StandaloneTestListenerAdapter
-import com.twosigma.utils.TraceUtils
 
 /**
  * @author mykola
@@ -25,11 +23,11 @@ class StandardConsoleTestListener extends StandaloneTestListenerAdapter {
     void afterTestRun(StandaloneTest test) {
         if (test.isFailed()) {
             ConsoleOutputs.out(Color.RED, "[x] ", Color.BLUE, "failed")
-            renderStackTrace(test.exception)
+            displayStackTrace(test.exception)
             failed++
         } else if (test.hasError()) {
             ConsoleOutputs.out(Color.RED, "[~] ", Color.BLUE, "error")
-            renderStackTrace(test.exception)
+            displayStackTrace(test.exception)
             errored++
         } else {
             ConsoleOutputs.out(Color.GREEN, "[.] ", Color.BLUE, "passed")
@@ -62,13 +60,7 @@ class StandardConsoleTestListener extends StandaloneTestListenerAdapter {
                 " Errored: ", errored)
     }
 
-    private static void renderStackTrace(Throwable t) {
-        ConsoleOutputs.out(removeLibsCalls(TraceUtils.stackTrace(t)), "\n\n")
-    }
-
-    private static String removeLibsCalls(String stackTrace) {
-        return stackTrace.split("\n").findAll {
-            ! it.contains("com.twosigma.") &&
-            ! it.contains("org.codehaus.groovy")}.join("\n")
+    private static void displayStackTrace(Throwable t) {
+        ConsoleOutputs.out(GroovyStackTraceUtils.renderStackTraceWithoutLibCalls(t), "\n\n")
     }
 }

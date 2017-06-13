@@ -3,7 +3,7 @@ import { storiesOf } from '@kadira/storybook'
 
 import StepsDemo from './StepsDemo'
 import WebTauReportDemo from './WebTauReportDemo'
-import TestDetailsDemo from "./TestDetailsDemo";
+import {TestDetailsWithScreenshot, TestDetailsWithStackTrace} from "./TestDetailsDemo";
 
 import './WebTauReport.css'
 
@@ -11,7 +11,8 @@ storiesOf('Report', module)
     .add('default view', () => <WebTauReportDemo/>)
 
 storiesOf('TestDetails', module)
-    .add('with screenshot', () => <TestDetailsDemo/>)
+    .add('with screenshot', () => <TestDetailsWithScreenshot/>)
+    .add('with stack trace', () => <TestDetailsWithStackTrace/>)
 
 storiesOf('Steps', module)
     .add('with errors', () => <StepsDemo/>)

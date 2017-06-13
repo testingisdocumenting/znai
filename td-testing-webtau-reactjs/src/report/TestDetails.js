@@ -26,7 +26,32 @@ const Screenshot = ({test}) => {
 
 const TestSteps = ({test}) => <Steps steps={test.steps}/>
 
+const StackTrace = ({message}) => {
+    return (
+        <pre className="stack-trace">
+            {message}
+        </pre>
+    )
+}
+
+const ShortStackTrace = ({test}) => <StackTrace message={test.shortStackTrace}/>
+const FullStackTrace = ({test}) => <StackTrace message={test.fullStackTrace}/>
+
 const NoResource = ({test, selectedResourceTabName}) => <div>No resource: {selectedResourceTabName}</div>
+
+const OptionalPreBlock = ({className, message}) => {
+    if (! message) {
+        return null
+    }
+
+    return (
+        <div className={className}>
+            <pre>
+                {message}
+            </pre>
+        </div>
+    )
+}
 
 class TestDetails extends Component {
     constructor(props) {
@@ -59,19 +84,9 @@ class TestDetails extends Component {
                     {test.scenario}
                 </div>
 
-                {test.contextDescription ?
-                    <div className="context-description">
-                        <pre>
-                            {test.contextDescription}
-                        </pre>
-                    </div> : null}
-
-                {test.assertion ?
-                    <div className="assertion">
-                        <pre>
-                            {test.assertion}
-                        </pre>
-                    </div> : null}
+                <OptionalPreBlock className="context-description" message={test.contextDescription}/>
+                <OptionalPreBlock className="assertion" message={test.assertion}/>
+                <OptionalPreBlock className="assertion" message={test.exceptionMessage}/>
 
                 <AdditionalResourcesSelection tabs={tabNames}
                                               selectedTabName={selectedResourceTabName}
@@ -89,6 +104,10 @@ class TestDetails extends Component {
                     return Screenshot
                 case "Steps":
                     return TestSteps
+                case "StackTrace":
+                    return ShortStackTrace
+                case "Full StackTrace":
+                    return FullStackTrace
                 default:
                     return NoResource
             }
@@ -106,6 +125,14 @@ function additionalResourcesTabNames(test) {
 
     if (test.hasOwnProperty("steps")) {
         tabs.push("Steps")
+    }
+
+    if (test.hasOwnProperty("shortStackTrace")) {
+        tabs.push("StackTrace")
+    }
+
+    if (test.hasOwnProperty("fullStackTrace")) {
+        tabs.push("Full StackTrace")
     }
 
     return tabs

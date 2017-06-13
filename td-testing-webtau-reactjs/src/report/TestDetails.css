@@ -24,6 +24,11 @@
     color: #b02f08;
 }
 
+.test-details pre.stack-trace {
+    padding: 0;
+    margin: 0;
+}
+
 .test-details .context-description {
     border-bottom: 1px #eee solid;
 }
