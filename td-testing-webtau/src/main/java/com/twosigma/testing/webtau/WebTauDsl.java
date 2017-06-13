@@ -37,6 +37,10 @@ public class WebTauDsl {
         step.execute();
     }
 
+    public static WebTauConfig getCfg() {
+        return cfg;
+    }
+
     public static void open(String url) {
         String fullUrl = createFullUrl(url);
 
