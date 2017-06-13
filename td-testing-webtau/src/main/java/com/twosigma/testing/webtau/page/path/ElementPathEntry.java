@@ -27,7 +27,7 @@ class ElementPathEntry {
 
     ElementPathEntry copy() {
         ElementPathEntry copy = new ElementPathEntry(finder);
-        copy.filters = filters;
+        copy.filters = new ArrayList<>(filters);
 
         return copy;
     }
