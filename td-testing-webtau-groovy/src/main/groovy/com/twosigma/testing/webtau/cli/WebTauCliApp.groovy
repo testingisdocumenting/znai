@@ -117,9 +117,9 @@ class WebTauCliApp implements StandaloneTestListener {
         def report = [summary: summary, tests: tests*.toMap()]
         def json = JsonUtils.serializePrettyPrint(report)
 
-        def reportPath = cfg.workingDir.resolve("webtau.report.html")
+        def reportPath = cfg.getReportPath().toAbsolutePath()
         FileUtils.writeTextContent(reportPath, new HtmlReportGenerator().generate(json))
 
-        ConsoleOutputs.out(Color.BLUE, "report is generated: ", Color.PURPLE, " ", reportPath.toAbsolutePath())
+        ConsoleOutputs.out(Color.BLUE, "report is generated: ", Color.PURPLE, " ", reportPath)
     }
 }

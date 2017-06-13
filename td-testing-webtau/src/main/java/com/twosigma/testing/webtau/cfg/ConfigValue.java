@@ -3,6 +3,7 @@ package com.twosigma.testing.webtau.cfg;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -11,13 +12,13 @@ import java.util.stream.Collectors;
 public class ConfigValue {
     private String key;
     private String prefixedUpperCaseKey;
-    private Object defaultValue;
+    private Supplier<Object> defaultValueSupplier;
     private String description;
 
     private Deque<Value> values;
 
-    public static ConfigValue declare(String key, String description, Object defaultValue) {
-        return new ConfigValue(key,  description,null, null, defaultValue);
+    public static ConfigValue declare(String key, String description, Supplier<Object> defaultValueSupplier) {
+        return new ConfigValue(key,  description,null, null, defaultValueSupplier);
     }
 
     public void set(String source, Object value) {
@@ -55,16 +56,16 @@ public class ConfigValue {
     }
 
     public String getAsString() {
-        return isDefault() ? defaultValue.toString() : values.getFirst().getValue().toString();
+        return isDefault() ? defaultValueSupplier.get().toString() : values.getFirst().getValue().toString();
     }
 
     public Path getAsPath() {
-        return isDefault() ? (Path) defaultValue : Paths.get(values.getFirst().getValue().toString());
+        return isDefault() ? (Path) defaultValueSupplier.get() : Paths.get(values.getFirst().getValue().toString());
     }
 
     public int getAsInt() {
         if (isDefault()) {
-           return (int) defaultValue;
+           return (int) defaultValueSupplier.get();
         }
 
         Object first = values.getFirst().getValue();
@@ -75,7 +76,7 @@ public class ConfigValue {
 
     public boolean getAsBoolean() {
         if (isDefault()) {
-            return (boolean) defaultValue;
+            return (boolean) defaultValueSupplier.get();
         }
 
         Object first = values.getFirst().getValue();
@@ -87,12 +88,12 @@ public class ConfigValue {
         return key + ": " + values.stream().map(Value::toString).collect(Collectors.joining(", "));
     }
 
-    private ConfigValue(String key, String description, String sourceId, Object value, Object defaultValue) {
+    private ConfigValue(String key, String description, String sourceId, Object value, Supplier<Object> defaultValueSupplier) {
         this.key = key;
         this.prefixedUpperCaseKey = "WEBTAU_" + key.toUpperCase();
         this.description = description;
         this.values = new ArrayDeque<>();
-        this.defaultValue = defaultValue;
+        this.defaultValueSupplier = defaultValueSupplier;
     }
 
     public boolean isDefault() {

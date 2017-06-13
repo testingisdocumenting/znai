@@ -21,15 +21,16 @@ import static com.twosigma.testing.webtau.cfg.ConfigValue.declare;
 public class WebTauConfig {
     public static final WebTauConfig INSTANCE = new WebTauConfig();
 
-    private ConfigValue config = declare("config", "config path", "test.cfg");
-    private ConfigValue url = declare("url", "base url for application under test", null);
-    private ConfigValue waitTimeout = declare("waitTimeout", "wait timeout in milliseconds", 5000);
+    private ConfigValue config = declare("config", "config path", () -> "test.cfg");
+    private ConfigValue url = declare("url", "base url for application under test", () -> null);
+    private ConfigValue waitTimeout = declare("waitTimeout", "wait timeout in milliseconds", () -> 5000);
     private ConfigValue docPath = declare("docPath", "path for screenshots and other generated " +
-            "artifacts for documentation", "");
-    private ConfigValue windowWidth = declare("windowWidth", "browser window width", 1000);
-    private ConfigValue windowHeight = declare("windowHeight", "browser window height", 800);
-    private ConfigValue workingDir = declare("workingDir", "logical working dir", Paths.get(""));
-    private ConfigValue headless = declare("headless", "run headless mode", false);
+            "artifacts for documentation", () -> "");
+    private ConfigValue reportPath = declare("reportPath", "report file path", () -> getWorkingDir().resolve("webtau.report.html"));
+    private ConfigValue windowWidth = declare("windowWidth", "browser window width", () -> 1000);
+    private ConfigValue windowHeight = declare("windowHeight", "browser window height", () -> 800);
+    private ConfigValue workingDir = declare("workingDir", "logical working dir", () -> Paths.get(""));
+    private ConfigValue headless = declare("headless", "run headless mode", () -> false);
     private ConfigValue chromeDriverPath = declare("chromeDriverPath", "path to chrome driver binary", null);
     private ConfigValue chromeBinPath = declare("chromeBinPath", "path to chrome binary", null);
 
@@ -39,6 +40,7 @@ public class WebTauConfig {
             workingDir,
             waitTimeout,
             docPath,
+            reportPath,
             windowWidth,
             windowHeight,
             headless,
@@ -88,6 +90,10 @@ public class WebTauConfig {
 
     public Path getWorkingDir() {
         return workingDir.getAsPath();
+    }
+
+    public Path getReportPath() {
+        return reportPath.getAsPath();
     }
 
     public String getWorkingDirConfigName() {
