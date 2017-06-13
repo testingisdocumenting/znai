@@ -8,7 +8,7 @@ import org.junit.Test
 class ConfigValueTest {
     @Test
     void "takes the most recently set value"() {
-        def configValue = ConfigValue.declare("vk", "description", "dv")
+        def configValue = ConfigValue.declare("vk", "description", { -> "dv" })
         configValue.set("config-file", "file value")
         configValue.set("command-line", "command line")
 
@@ -17,7 +17,7 @@ class ConfigValueTest {
 
     @Test
     void "converts string value true to boolean true"() {
-        def configValue = ConfigValue.declare("headless", "headless", false)
+        def configValue = ConfigValue.declare("headless", "headless", { -> false })
         configValue.getAsBoolean().should == false
 
         configValue.set("command-line", "True")
