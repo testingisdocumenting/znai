@@ -45,7 +45,8 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         return javaMethods.stream().filter(
                 m -> m.getName().equals(methodNameWithOptionalTypes) || m.getNameWithTypes().equals(nameWithoutSpaces))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("no method found: " + methodNameWithOptionalTypes));
+                .orElseThrow(() -> new RuntimeException("no method found: " + methodNameWithOptionalTypes + "." +
+                        "\nAvailable methods:\n" + renderAllMethods()));
     }
 
     public JavaMethod findMethodDetails(String methodName, List<String> paramNames) {
@@ -68,7 +69,9 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         }
 
         if (!hasMethodDetails(entryName)) {
-            throw new RuntimeException("can't find method or field: " + entryName);
+            throw new RuntimeException("can't find method or field: " + entryName + "." +
+                    "\nAvailable methods:\n" + renderAllMethods() +
+            "\nAvailable fields:\n" + renderAllFields());
         }
 
         return findMethodDetails(entryName).getJavaDocText();
@@ -111,6 +114,14 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
                 removeSemicolonAtEnd(extractSignature(code)),
                 extractParams(methodDeclaration, javaDoc),
                 javaDocText));
+    }
+
+    private String renderAllMethods() {
+        return "    " + javaMethods.stream().map(JavaMethod::getNameWithTypes).collect(joining("\n    "));
+    }
+
+    private String renderAllFields() {
+        return "    " + javaFields.keySet().stream().collect(joining("\n    "));
     }
 
     private String removeSemicolonAtEnd(String code) {

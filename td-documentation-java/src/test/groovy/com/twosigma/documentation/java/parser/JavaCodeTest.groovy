@@ -44,7 +44,7 @@ class HelloWorld {
      * @param test test param
      * @param name name of the param 
      */
-    public void sampleMethod(String test, String name) {
+    public void sampleMethod(String test, List<String> name) {
         statement3();
         statement4();
     }
@@ -104,13 +104,13 @@ interface HelloWorld {
 
     @Test
     void "extracts method body by params types"() {
-        def method = javaCode.findMethod("sampleMethod(  String , String )")
+        def method = javaCode.findMethod("sampleMethod(  String , List<String> )")
 
         def params = method.params.collect { [it.name, it.javaDocText, it.type] }
         assert params == [["test", "test param", "String"],
-                          ["name", "name of the param", "String"]]
+                          ["name", "name of the param", "List<String>"]]
 
-        Assert.assertEquals("public void sampleMethod(String test, String name) {\n" +
+        Assert.assertEquals("public void sampleMethod(String test, List<String> name) {\n" +
                 "    statement3();\n" +
                 "    statement4();\n" +
                 "}", method.fullBody)
@@ -148,11 +148,30 @@ interface HelloWorld {
                 javaCode.findJavaDoc("sampleMethod"))
 
         Assert.assertEquals("overloaded method java doc",
-                javaCode.findJavaDoc("sampleMethod(String,String)"))
+                javaCode.findJavaDoc("sampleMethod(String,List<String>)"))
+    }
 
+    @Test
+    void "list all fields and methods when extract java doc by non existing method or field"() {
         code {
             javaCode.findJavaDoc("nonExisting")
-        } should throwException("can't find method or field: nonExisting")
+        } should throwException("can't find method or field: nonExisting.\n" +
+                "Available methods:\n" +
+                "    sampleMethod(String)\n" +
+                "    sampleMethod(String,List<String>)\n" +
+                "Available fields:\n" +
+                "    numberOfStudents\n" +
+                "    fieldWithNoComment")
+    }
+
+    @Test
+    void "list all available methods with signatures when no match is found"() {
+        code {
+            javaCode.findMethod("nonExisting")
+        } should throwException("no method found: nonExisting.\n" +
+                "Available methods:\n" +
+                "    sampleMethod(String)\n" +
+                "    sampleMethod(String,List<String>)")
     }
 
     @Test
