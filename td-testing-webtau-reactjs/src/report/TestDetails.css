@@ -18,6 +18,7 @@
 }
 
 .test-details .assertion,
+.test-details .exception-message,
 .test-details .context-description {
     font-size: 14px;
     font-family: Monospaced, monospace;
@@ -27,6 +28,8 @@
 .test-details pre.stack-trace {
     padding: 0;
     margin: 0;
+    font-size: 14px;
+    font-family: Monospaced, monospace;
 }
 
 .test-details .context-description {

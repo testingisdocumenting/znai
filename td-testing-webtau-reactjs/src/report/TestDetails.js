@@ -86,7 +86,10 @@ class TestDetails extends Component {
 
                 <OptionalPreBlock className="context-description" message={test.contextDescription}/>
                 <OptionalPreBlock className="assertion" message={test.assertion}/>
-                <OptionalPreBlock className="assertion" message={test.exceptionMessage}/>
+                {
+                    ! test.assertion ? <OptionalPreBlock className="exception-message" message={test.exceptionMessage}/> :
+                        null
+                }
 
                 <AdditionalResourcesSelection tabs={tabNames}
                                               selectedTabName={selectedResourceTabName}

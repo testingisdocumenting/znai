@@ -14,6 +14,7 @@ const test = {fileName: "testFile.groovy",
 
 const TestDetailsWithScreenshot = () => <TestDetails test={{...test,
     assertion: "expected 4\nactual 3\n",
+    exceptionMessage: "AssertionError: expected 4\nactual 3\n",
     contextDescription: "by css #id"}}/>
 
 const TestDetailsWithStackTrace = () => <TestDetails test={{...test,
