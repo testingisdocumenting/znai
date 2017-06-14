@@ -31,7 +31,7 @@ class GroovyIncludePlugin implements IncludePlugin {
 
         GroovyCode groovyCode = new GroovyCode(componentsRegistry, fullPath, fileContent)
 
-        Boolean bodyOnly = pluginParams.getOpts().has("bodyOnly") ? pluginParams.getOpts().get("bodyOnly") : false;
+        Boolean bodyOnly = pluginParams.getOpts().has("bodyOnly") ? pluginParams.getOpts().get("bodyOnly") : false
 
         Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "groovy",
                 extractContent(groovyCode, methodName, bodyOnly))
@@ -44,13 +44,15 @@ class GroovyIncludePlugin implements IncludePlugin {
         return Stream.of(AuxiliaryFile.builtTime(fullPath))
     }
 
-    private static String extractContent(GroovyCode groovyCode, String methodName, Boolean bodyOnly) {
-        if (methodName == null) {
-            return groovyCode.getFileContent();
+    private static String extractContent(GroovyCode groovyCode, String entry, Boolean bodyOnly) {
+        if (entry == null) {
+            return groovyCode.getFileContent()
         }
 
+        def method = groovyCode.findMethod(entry)
+
         return bodyOnly ?
-                groovyCode.methodBodyOnly(methodName) :
-                groovyCode.methodBody(methodName);
+                method.bodyOnly :
+                method.fullBody
     }
 }

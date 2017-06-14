@@ -1,7 +1,13 @@
-class HelloWorldTest {
-    @Test
-    void "should calculate risk based on epsilon"() {
-        generateStatement(price: 10, quantity: 10, epsilon: 2)
-        calcRisk().should == 108
+class HelloWorld {
+    void methodName(List<String> a, Map<String, Integer> b) {
+        actionA()
+    }
+
+    void methodName(List<String> a, Boolean b) {
+        actionB()
+    }
+
+    void methodName(def a, def b) {
+        actionC()
     }
 }

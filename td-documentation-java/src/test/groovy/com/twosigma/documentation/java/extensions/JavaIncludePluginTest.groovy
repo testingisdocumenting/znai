@@ -24,7 +24,7 @@ class JavaIncludePluginTest {
 
         code {
             process("Simple.java", "{entry: 'methodB(String2)', signatureOnly: true}")
-        } should throwException("no method found: methodB(String2)")
+        } should throwException(~/no method found: methodB/)
     }
 
     private static String process(String fileName, String params) {

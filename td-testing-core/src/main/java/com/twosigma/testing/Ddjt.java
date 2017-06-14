@@ -27,7 +27,7 @@ public class Ddjt {
     }
 
     public static ActualCodeExpectations code(CodeBlock codeBlock) {
-        return ActualCode.code(codeBlock);
+        return new ActualCode(codeBlock);
     }
 
     public static EqualMatcher equal(Object expected) {

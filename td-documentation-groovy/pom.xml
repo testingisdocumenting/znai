@@ -20,6 +20,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.twosigma.td</groupId>
+            <artifactId>td-testing-core-groovy</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
         </dependency>

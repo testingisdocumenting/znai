@@ -6,12 +6,8 @@ package com.twosigma.testing.expectation;
 public class ActualCode implements ActualCodeExpectations {
     private CodeBlock actual;
 
-    private ActualCode(final CodeBlock actual) {
+    public ActualCode(final CodeBlock actual) {
         this.actual = actual;
-    }
-
-    public static ActualCodeExpectations code(CodeBlock actual) {
-        return new ActualCode(actual);
     }
 
     @Override

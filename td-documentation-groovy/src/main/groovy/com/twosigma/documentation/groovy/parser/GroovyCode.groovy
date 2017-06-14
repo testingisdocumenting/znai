@@ -2,19 +2,11 @@ package com.twosigma.documentation.groovy.parser
 
 import com.twosigma.documentation.core.ComponentsRegistry
 import groovyjarjarantlr.collections.AST
-import org.codehaus.groovy.antlr.GroovySourceAST
 import org.codehaus.groovy.antlr.SourceBuffer
-import org.codehaus.groovy.antlr.UnicodeEscapingReader
 import org.codehaus.groovy.antlr.parser.GroovyLexer
 import org.codehaus.groovy.antlr.parser.GroovyRecognizer
-import org.codehaus.groovy.antlr.parser.GroovyTokenTypes
 import org.codehaus.groovy.antlr.treewalker.SourceCodeTraversal
-import org.codehaus.groovy.antlr.treewalker.SourcePrinter
-import org.codehaus.groovy.antlr.treewalker.Visitor
-import org.codehaus.groovy.antlr.treewalker.VisitorAdapter
-import org.codehaus.groovy.tools.groovydoc.SimpleGroovyClassDocAssembler
 
-import java.nio.charset.StandardCharsets
 import java.nio.file.Path
 
 /**
@@ -35,12 +27,8 @@ class GroovyCode {
         this.codeVisitor = parse(fileContent)
     }
 
-    String methodBody(String methodName) {
-        return codeVisitor.getDetails(methodName).getFullBody();
-    }
-
-    String methodBodyOnly(String methodName) {
-        return codeVisitor.getDetails(methodName).getBodyOnly();
+    GroovyMethod findMethod(String methodNameWithOptionalTypes) {
+        return codeVisitor.findDetails(methodNameWithOptionalTypes)
     }
 
     private static GroovyCodeVisitor parse(String code) {
