@@ -40,6 +40,11 @@ public class StringUtils {
         return code.substring(startIdx + 1, endIdx);
     }
 
+    public static String removeContentInsideBracketsInclusive(String code) {
+        int openIdx = code.indexOf('<');
+        return openIdx == -1 ? code : code.substring(0, openIdx);
+    }
+
     private static Integer lineIndentation(String line) {
         int i = 0;
         while (i < line.length() && line.charAt(i) == ' ') {

@@ -33,6 +33,12 @@ line #_3\r""")
     }
 
     @Test
+    void "removes content inside brackets and brackets"() {
+        Assert.assertEquals("hello ",
+                StringUtils.removeContentInsideBracketsInclusive("hello <world>"))
+    }
+
+    @Test
     void "concat prefix and multiline text preserving prefix size indentation"() {
         def concatenated = StringUtils.concatWithIndentation("a prefix:", "line1 line1\nline2\nline #3")
 

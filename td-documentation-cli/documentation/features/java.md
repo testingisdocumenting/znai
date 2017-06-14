@@ -31,11 +31,11 @@ Specify types inside brackets to select an overloaded versions of your methods.
 Types should appear as they are in the file. I.e. if you use short version of a type, you need to use the short version 
 inside plugin.
 
-    :include-java: HelloWorld.java {entry: "sampleMethod(String, int, boolean)"}
+    :include-java: HelloWorld.java {entry: "sampleMethod(Map, int, boolean)"}
 
-Note: spaces after commas are optional
+Note: Generic types are erased and spaces after commas are optional
 
-:include-java: HelloWorld.java {entry: "sampleMethod(String, int, boolean)"}
+:include-java: HelloWorld.java {entry: "sampleMethod(Map, int, boolean)"}
 
 
 # Multiple Entries

@@ -104,11 +104,11 @@ interface HelloWorld {
 
     @Test
     void "extracts method body by params types"() {
-        def method = javaCode.findMethod("sampleMethod(  String , List<String> )")
+        def method = javaCode.findMethod("sampleMethod(  String , List )")
 
         def params = method.params.collect { [it.name, it.javaDocText, it.type] }
         assert params == [["test", "test param", "String"],
-                          ["name", "name of the param", "List<String>"]]
+                          ["name", "name of the param", "List"]]
 
         Assert.assertEquals("public void sampleMethod(String test, List<String> name) {\n" +
                 "    statement3();\n" +
@@ -148,7 +148,7 @@ interface HelloWorld {
                 javaCode.findJavaDoc("sampleMethod"))
 
         Assert.assertEquals("overloaded method java doc",
-                javaCode.findJavaDoc("sampleMethod(String,List<String>)"))
+                javaCode.findJavaDoc("sampleMethod(String,List)"))
     }
 
     @Test
@@ -158,7 +158,7 @@ interface HelloWorld {
         } should throwException("can't find method or field: nonExisting.\n" +
                 "Available methods:\n" +
                 "    sampleMethod(String)\n" +
-                "    sampleMethod(String,List<String>)\n" +
+                "    sampleMethod(String,List)\n" +
                 "Available fields:\n" +
                 "    numberOfStudents\n" +
                 "    fieldWithNoComment")
@@ -171,7 +171,7 @@ interface HelloWorld {
         } should throwException("no method found: nonExisting.\n" +
                 "Available methods:\n" +
                 "    sampleMethod(String)\n" +
-                "    sampleMethod(String,List<String>)")
+                "    sampleMethod(String,List)")
     }
 
     @Test

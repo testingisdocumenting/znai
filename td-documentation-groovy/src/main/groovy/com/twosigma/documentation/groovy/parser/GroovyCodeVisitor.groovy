@@ -6,6 +6,7 @@ import org.codehaus.groovy.antlr.treewalker.VisitorAdapter
 import java.util.stream.Collectors
 
 import static com.twosigma.utils.StringUtils.extractInsideCurlyBraces
+import static com.twosigma.utils.StringUtils.removeContentInsideBracketsInclusive
 import static com.twosigma.utils.StringUtils.stripIndentation
 import static org.codehaus.groovy.antlr.parser.GroovyTokenTypes.*
 
@@ -81,7 +82,6 @@ class GroovyCodeVisitor extends VisitorAdapter {
     }
 
     static String eraseGeneric(String type) {
-        def openIdx = type.indexOf('<')
-        return openIdx == -1 ? type : type.substring(0, openIdx)
+        return removeContentInsideBracketsInclusive(type)
     }
 }

@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.PARAM;
 import static com.twosigma.utils.StringUtils.extractInsideCurlyBraces;
+import static com.twosigma.utils.StringUtils.removeContentInsideBracketsInclusive;
 import static com.twosigma.utils.StringUtils.stripIndentation;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -188,7 +189,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     private List<JavaMethodParam> extractParams(MethodDeclaration methodDeclaration, Javadoc javadoc) {
         Map<String, String> typeByName = methodDeclaration.getParameters().stream()
-                .collect(toMap(p -> p.getName().getIdentifier(), p -> p.getType().getElementType().toString()));
+                .collect(toMap(p -> p.getName().getIdentifier(), p -> eraseGenericType(p.getType().getElementType().toString())));
 
         List<String> paramNames = methodDeclaration.getParameters().stream().map(p -> p.getName().getIdentifier()).collect(toList());
 
@@ -200,5 +201,9 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
         return paramNames.stream().map(n -> new JavaMethodParam(n, javaDocTextByName.get(n), typeByName.get(n)))
                 .collect(toList());
+    }
+
+    private static String eraseGenericType(String type) {
+        return removeContentInsideBracketsInclusive(type);
     }
 }
