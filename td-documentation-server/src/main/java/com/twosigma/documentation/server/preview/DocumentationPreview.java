@@ -44,7 +44,7 @@ public class DocumentationPreview {
 
     private void reportHost(int port) {
         try {
-            ConsoleOutputs.out(InetAddress.getLocalHost().getHostName(), ":", port);
+            ConsoleOutputs.out("http://", InetAddress.getLocalHost().getHostName(), ":", port, "/preview");
         } catch (UnknownHostException e) {
             // ignore
         }
