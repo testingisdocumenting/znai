@@ -58,26 +58,31 @@ public class HtmlToDocElementConverter {
 
         @Override
         public void head(Node node, int i) {
-            if (node.nodeName().equals("#text")) {
-                TextNode textNode = (TextNode) node;
-                handleText(textNode.text());
+            if (isParagraph(node)) {
+                closeParagraph();
+                parserHandler.onParagraphStart();
+                isInsideParagraph = true;
+            } else if (isInlinedCode(node)) {
+                isInsideInlinedCode = true;
+            } else if (isBlockCode(node)) {
+                isInsideBlockCode = true;
             } else if (isBold(node)) {
                 parserHandler.onStrongEmphasisStart();
             } else if (isItalic(node)) {
                 parserHandler.onEmphasisStart();
             } else if (isLink(node)) {
                 parserHandler.onLinkStart(node.attr("href"));
-            } else if (isInlinedCode(node)) {
-                isInsideInlinedCode = true;
-            } else if (isParagraph(node)) {
-                if (isInsideParagraph) {
-                    parserHandler.onParagraphEnd();
-                }
-
-                parserHandler.onParagraphStart();
-                isInsideParagraph = true;
-            } else if (isBlockCode(node)) {
-                isInsideBlockCode = true;
+            } else if (isUnorderedList(node)) {
+                closeParagraph();
+                parserHandler.onBulletListStart('*', false);
+            } else if (isOrderedList(node)) {
+                closeParagraph();
+                parserHandler.onOrderedListStart('.', 1);
+            } else if (isListItem(node)) {
+                parserHandler.onListItemStart();
+            } else if (node.nodeName().equals("#text")) {
+                TextNode textNode = (TextNode) node;
+                handleText(textNode.text());
             }
         }
 
@@ -96,6 +101,12 @@ public class HtmlToDocElementConverter {
                 parserHandler.onEmphasisEnd();
             } else if (isLink(node)) {
                 parserHandler.onLinkEnd();
+            } else if (isUnorderedList(node)) {
+                parserHandler.onBulletListEnd();
+            } else if (isOrderedList(node)) {
+                parserHandler.onOrderedListEnd();
+            } else if (isListItem(node)) {
+                parserHandler.onListItemEnd();
             }
         }
 
@@ -107,13 +118,16 @@ public class HtmlToDocElementConverter {
             if (isInsideInlinedCode) {
                 parserHandler.onInlinedCode(text);
             } else if (isInsideBlockCode) {
-                if (isInsideParagraph) {
-                    parserHandler.onParagraphEnd();
-                }
-
+                closeParagraph();
                 parserHandler.onSnippet("", "", text);
             } else {
                 parserHandler.onSimpleText(text);
+            }
+        }
+
+        private void closeParagraph() {
+            if (isInsideParagraph) {
+                parserHandler.onParagraphEnd();
             }
         }
 
@@ -123,6 +137,18 @@ public class HtmlToDocElementConverter {
 
         private static boolean isBlockCode(Node node) {
             return node.nodeName().equals("pre");
+        }
+
+        private static boolean isUnorderedList(Node node) {
+            return node.nodeName().equals("ul");
+        }
+
+        private static boolean isOrderedList(Node node) {
+            return node.nodeName().equals("ol");
+        }
+
+        private static boolean isListItem(Node node) {
+            return node.nodeName().equals("li");
         }
 
         private static boolean isBold(Node node) {

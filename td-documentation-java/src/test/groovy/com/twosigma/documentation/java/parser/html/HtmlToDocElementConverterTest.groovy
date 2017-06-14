@@ -47,6 +47,26 @@ second paragraph
                              tokens:[[type: 'text', content: 'line of code']]]] // test tokenizer treats whole block as a single text element
     }
 
+    @Test
+    void "should replace ul and li with BulletList and ListItem elements"() {
+        process('<ul><li>item 1</li><li>item 2</li></ul>')
+
+        elements.should == [[type: 'BulletList', bulletMarker: '*', tight: false,
+                             content: [
+                                     [type: 'ListItem', content: [[text: 'item 1', type: 'SimpleText']]],
+                                     [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]]]
+    }
+
+    @Test
+    void "should replace ol and li with BulletList and ListItem elements"() {
+        process('<ol><li>item 1</li><li>item 2</li></ol>')
+
+        elements.should == [[type: 'OrderedList', startNumber: 1, delimiter: '.',
+                             content: [
+                                     [type: 'ListItem', content: [[text: 'item 1', type: 'SimpleText']]],
+                                     [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]]]
+    }
+
     private void process(String html) {
         def docElements = HtmlToDocElementConverter.convert(testComponentsRegistry, Paths.get(""), html)
         elements = docElements.collect { it.toMap() }
