@@ -2,6 +2,7 @@ package com.twosigma.documentation.java.extensions;
 
 import com.twosigma.documentation.java.parser.JavaCode;
 import com.twosigma.documentation.java.parser.JavaMethod;
+import com.twosigma.documentation.java.parser.JavaMethodReturn;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.template.TextTemplate;
@@ -32,8 +33,19 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
         TextTemplate textTemplate = new TextTemplate(ResourceUtils.textContent("templates/javaDocParams.md"));
 
         MarkupParserResult parserResult = componentsRegistry.parser().parse(markupPath,
-                textTemplate.process(CollectionUtils.createMap("params", params)));
+                textTemplate.process(
+                        CollectionUtils.createMap("params", params,
+                                "return", createReturn(javaMethod))));
 
         return parserResult.getDocElement().getContent();
+    }
+
+    private Map<String, ?> createReturn(JavaMethod javaMethod) {
+        JavaMethodReturn methodReturn = javaMethod.getJavaMethodReturn();
+        if (methodReturn == null) {
+            return null;
+        }
+
+        return CollectionUtils.createMap("type", methodReturn.getType(), "description", methodReturn.getJavaDocText());
     }
 }

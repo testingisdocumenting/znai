@@ -16,8 +16,12 @@ public class JavaMethod {
     private String signatureOnly;
     private String javaDocText;
     private List<JavaMethodParam> params;
+    private JavaMethodReturn javaMethodReturn;
 
-    public JavaMethod(String name, String fullBody, String bodyOnly, String signatureOnly, List<JavaMethodParam> params, String javaDocText) {
+    public JavaMethod(String name, String fullBody, String bodyOnly, String signatureOnly,
+                      List<JavaMethodParam> params,
+                      JavaMethodReturn javaMethodReturn,
+                      String javaDocText) {
         this.name = name;
         this.nameWithTypes = name + "(" + params.stream().map(JavaMethodParam::getType).collect(joining(",")) + ")";
         this.fullBody = fullBody;
@@ -25,6 +29,7 @@ public class JavaMethod {
         this.signatureOnly = signatureOnly;
         this.javaDocText = javaDocText;
         this.params = params;
+        this.javaMethodReturn = javaMethodReturn != null && javaMethodReturn.getType().equals("void") ? null : javaMethodReturn;
     }
 
     public String getName() {
@@ -53,6 +58,10 @@ public class JavaMethod {
 
     public List<JavaMethodParam> getParams() {
         return params;
+    }
+
+    public JavaMethodReturn getJavaMethodReturn() {
+        return javaMethodReturn;
     }
 
     public List<String> getParamNames() {

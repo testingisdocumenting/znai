@@ -43,10 +43,15 @@ class HelloWorld {
      * overloaded method java doc 
      * @param test test param
      * @param name name of the param 
+     * @return list of samples
      */
-    public void sampleMethod(String test, List<String> name) {
+    public List<String> sampleMethod(String test, List<String> name) {
         statement3();
         statement4();
+    }
+    
+    public String noReturnTag() {
+        return "";
     }
 }"""
 
@@ -110,10 +115,30 @@ interface HelloWorld {
         assert params == [["test", "test param", "String"],
                           ["name", "name of the param", "List"]]
 
-        Assert.assertEquals("public void sampleMethod(String test, List<String> name) {\n" +
+        Assert.assertEquals("public List<String> sampleMethod(String test, List<String> name) {\n" +
                 "    statement3();\n" +
                 "    statement4();\n" +
                 "}", method.fullBody)
+    }
+
+    @Test
+    void "extracts return information"() {
+        def method = javaCode.findMethod("sampleMethod(String,List)")
+
+        method.javaMethodReturn.type.should == 'List<String>'
+        method.javaMethodReturn.javaDocText.should == 'list of samples'
+    }
+
+    @Test
+    void "return information is null when type is void"() {
+        def method = javaCode.findMethod("sampleMethod(String)")
+        assert method.javaMethodReturn == null
+    }
+
+    @Test
+    void "return information is null when return tag is missing"() {
+        def method = javaCode.findMethod("noReturnTag")
+        assert method.javaMethodReturn == null
     }
 
     @Test
@@ -159,6 +184,7 @@ interface HelloWorld {
                 "Available methods:\n" +
                 "    sampleMethod(String)\n" +
                 "    sampleMethod(String,List)\n" +
+                "    noReturnTag()\n" +
                 "Available fields:\n" +
                 "    numberOfStudents\n" +
                 "    fieldWithNoComment")
@@ -171,7 +197,8 @@ interface HelloWorld {
         } should throwException("no method found: nonExisting.\n" +
                 "Available methods:\n" +
                 "    sampleMethod(String)\n" +
-                "    sampleMethod(String,List)")
+                "    sampleMethod(String,List)\n" +
+                "    noReturnTag()")
     }
 
     @Test

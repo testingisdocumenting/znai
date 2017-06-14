@@ -8,6 +8,7 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.javadoc.Javadoc;
+import com.github.javaparser.javadoc.JavadocBlockTag;
 import com.github.javaparser.javadoc.description.JavadocDescription;
 import com.github.javaparser.javadoc.description.JavadocDescriptionElement;
 import com.github.javaparser.javadoc.description.JavadocInlineTag;
@@ -16,8 +17,10 @@ import com.github.javaparser.javadoc.description.JavadocSnippet;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.PARAM;
+import static com.github.javaparser.javadoc.JavadocBlockTag.Type.RETURN;
 import static com.twosigma.utils.StringUtils.extractInsideCurlyBraces;
 import static com.twosigma.utils.StringUtils.removeContentInsideBracketsInclusive;
 import static com.twosigma.utils.StringUtils.stripIndentation;
@@ -114,6 +117,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
                 stripIndentation(removeSemicolonAtEnd(extractInsideCurlyBraces(code))),
                 removeSemicolonAtEnd(extractSignature(code)),
                 extractParams(methodDeclaration, javaDoc),
+                extractReturn(methodDeclaration, javaDoc),
                 javaDocText));
     }
 
@@ -201,6 +205,20 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
         return paramNames.stream().map(n -> new JavaMethodParam(n, javaDocTextByName.get(n), typeByName.get(n)))
                 .collect(toList());
+    }
+
+    private JavaMethodReturn extractReturn(MethodDeclaration methodDeclaration, Javadoc javadoc) {
+        if (javadoc == null) {
+            return null;
+        }
+
+        Optional<JavadocBlockTag> returnBlock = javadoc.getBlockTags().stream().filter(b -> b.getType() == RETURN).findFirst();
+        if (! returnBlock.isPresent()) {
+            return null;
+        }
+
+        return new JavaMethodReturn(methodDeclaration.getType().toString(),
+                returnBlock.map(b -> extractJavaDocDescription(b.getContent())).orElse(""));
     }
 
     private static String eraseGenericType(String type) {

@@ -18,14 +18,13 @@ class HelloWorld {
      *
      * @param p1 important parameter of something
      * @param p2 sample offset according to the rules of the universe
+     * @return name of the best sample
      */
-    public void sampleMethod(String p1, int p2) {
+    public String sampleMethod(String p1, int p2) {
         statement1();
         statement2();
 
-        if (logic) {
-            doAction();
-        }
+        return bestSample();
     }
 
     public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {
