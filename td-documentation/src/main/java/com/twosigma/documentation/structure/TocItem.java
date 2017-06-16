@@ -3,9 +3,7 @@ package com.twosigma.documentation.structure;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.utils.NameUtils;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -32,6 +30,8 @@ public class TocItem {
 
         this.sectionTitle = NameUtils.dashToCamelCaseWithSpaces(dirName);
         this.pageTitle = NameUtils.dashToCamelCaseWithSpaces(fileNameWithoutExtension);
+
+        this.pageSectionIdTitles = new ArrayList<>();
     }
 
     public String getDirName() {
@@ -54,6 +54,10 @@ public class TocItem {
         return pageSectionIdTitles;
     }
 
+    public boolean hasPageSection(String id) {
+        return pageSectionIdTitles.stream().anyMatch(ps -> ps.getId().equals(id));
+    }
+
     public void setPageSectionIdTitles(List<PageSectionIdTitle> pageSectionIdTitles) {
         this.pageSectionIdTitles = pageSectionIdTitles;
     }
@@ -68,8 +72,8 @@ public class TocItem {
         result.put("pageTitle", getPageTitle());
         result.put("fileName", getFileNameWithoutExtension());
         result.put("dirName", getDirName());
-        result.put("pageSectionIdTitles", getPageSectionIdTitles().stream().
-                map(PageSectionIdTitle::toMap).collect(toList()));
+        result.put("pageSectionIdTitles",
+                getPageSectionIdTitles().stream().map(PageSectionIdTitle::toMap).collect(toList()));
 
         return result;
     }
@@ -93,6 +97,7 @@ public class TocItem {
         if (!dirName.equals(tocItem.dirName)) {
             return false;
         }
+
         return fileNameWithoutExtension.equals(tocItem.fileNameWithoutExtension);
 
     }

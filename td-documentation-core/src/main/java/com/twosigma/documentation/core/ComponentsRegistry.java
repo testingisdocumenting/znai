@@ -3,6 +3,7 @@ package com.twosigma.documentation.core;
 import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.documentation.parser.MarkupParser;
+import com.twosigma.documentation.validation.DocStructure;
 
 /**
  * simple components registry to avoid introducing DI frameworks.
@@ -15,4 +16,5 @@ public interface ComponentsRegistry {
     MarkupParser parser();
     CodeTokenizer codeTokenizer();
     PluginResourcesResolver includeResourceResolver();
+    DocStructure docStructure();
 }

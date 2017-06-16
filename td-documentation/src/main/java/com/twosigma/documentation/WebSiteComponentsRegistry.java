@@ -4,6 +4,7 @@ import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.documentation.parser.MarkupParser;
+import com.twosigma.documentation.validation.DocStructure;
 
 /**
  * @author mykola
@@ -12,6 +13,7 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
     private MarkupParser parser;
     private CodeTokenizer codeTokenizer;
     private PluginResourcesResolver pluginResourcesResolver;
+    private DocStructure docStructure;
 
     @Override
     public MarkupParser parser() {
@@ -28,6 +30,11 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
         return pluginResourcesResolver;
     }
 
+    @Override
+    public DocStructure docStructure() {
+        return docStructure;
+    }
+
     public void setParser(MarkupParser parser) {
         this.parser = parser;
     }
@@ -38,5 +45,9 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
 
     public void setPluginResourcesResolver(PluginResourcesResolver pluginResourcesResolver) {
         this.pluginResourcesResolver = pluginResourcesResolver;
+    }
+
+    public void setDocStructure(DocStructure docStructure) {
+        this.docStructure = docStructure;
     }
 }

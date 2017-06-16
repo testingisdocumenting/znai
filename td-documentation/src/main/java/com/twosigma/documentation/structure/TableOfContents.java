@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 public class TableOfContents {
     private List<TocItem> tocItems;
 
-    private TableOfContents() {
+    public TableOfContents() {
         tocItems = new ArrayList<>();
     }
 
@@ -29,6 +29,23 @@ public class TableOfContents {
 
     public List<TocItem> getTocItems() {
         return Collections.unmodifiableList(tocItems);
+    }
+
+    public boolean contains(String dirName, String fileName, String pageSectionId) {
+        TocItem tocItem = findTocItem(dirName, fileName);
+
+        if (tocItem == null) {
+            return false;
+        }
+
+        return pageSectionId.isEmpty() || tocItem.hasPageSection(pageSectionId);
+    }
+
+    public TocItem findTocItem(String dirName, String fileName) {
+        return getTocItems().stream().filter(ti ->
+                    ti.getDirName().equals(dirName) && ti.getFileNameWithoutExtension().equals(fileName))
+                    .findFirst()
+                    .orElse(null);
     }
 
     public List<Map<String, Object>> toListOfMaps() {

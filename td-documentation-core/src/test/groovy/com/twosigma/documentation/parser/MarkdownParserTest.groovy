@@ -4,17 +4,21 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
+import static com.twosigma.testing.Ddjt.code
+import static com.twosigma.testing.Ddjt.throwException
+
 /**
  * @author mykola
  */
 class MarkdownParserTest {
-    static final MarkupParser parser = new MarkdownParser(new TestComponentsRegistry())
+    static final TestComponentsRegistry componentsRegistry = new TestComponentsRegistry()
+    static final MarkupParser parser = new MarkdownParser(componentsRegistry)
 
     private List<Map> content
 
     @Test
     void "link"() {
-        parse("""[label **bold**](http://test)""")
+        parse("[label **bold**](http://test)")
 
         content.should == [[type: 'Paragraph', content:[
                 [url: 'http://test', type: 'Link',
@@ -23,8 +27,44 @@ class MarkdownParserTest {
     }
 
     @Test
+    void "link to a unsupported location"() {
+        code {
+            parse("[label](../test)")
+        } should throwException(~/Do not use .. based urls: ..\/test/)
+
+        code {
+            parse("[label](dir/page/extra)")
+        } should throwException(~/Unexpected url pattern: dir\/page\/extra/)
+    }
+
+    @Test
+    void "link to a non existing within documentation location"() {
+        code {
+            parse("[label](dir-name/non-existing-file-name)")
+        } should throwException(~/no valid link found: dir-name\/non-existing-file-name$/)
+
+        code {
+            parse("[label](dir-name/non-existing-file-name#page-section)")
+        } should throwException(~/no valid link found: dir-name\/non-existing-file-name#page-section$/)
+    }
+
+    @Test
+    void "link to an existing within documentation location"() {
+        componentsRegistry.validator.addValidLink("valid-dir-name/page-name")
+        componentsRegistry.validator.addValidLink("valid-dir-name/page-name#page-section")
+
+        parse("[label](valid-dir-name/page-name)")
+        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name', type: 'Link',
+                                                         content:[[text: 'label' , type: 'SimpleText']]]]]]
+
+        parse("[label](valid-dir-name/page-name#page-section)")
+        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name#page-section', type: 'Link',
+                                                         content:[[text: 'label' , type: 'SimpleText']]]]]]
+    }
+
+    @Test
     void "inlined code"() {
-        parse("""`InterfaceName`""")
+        parse("`InterfaceName`")
 
         content.should == [[type: 'Paragraph', content:[[type: 'InlinedCode', code: 'InterfaceName']]]]
     }
@@ -126,7 +166,6 @@ world""")
     @Test
     void "second level section"() {
         parse("## Secondary Section \ntext text")
-        println content
         content.should == [[type: 'SubHeading', level: 2, content:[
                 [type: "SimpleText", text: "Secondary Section"]]],
                            [type: "Paragraph", content: [[type: "SimpleText", text: "text text"]]]]

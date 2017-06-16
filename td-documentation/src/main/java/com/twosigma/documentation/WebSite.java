@@ -19,6 +19,7 @@ import com.twosigma.documentation.search.LunrIndexer;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
+import com.twosigma.documentation.validation.DocStructure;
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
 
@@ -27,6 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static com.twosigma.utils.FileUtils.fileTextContent;
@@ -35,7 +37,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * @author mykola
  */
-public class WebSite {
+public class WebSite implements DocStructure {
     private PageToHtmlPageConverter pageToHtmlPageConverter;
     private MarkupParser markupParser;
     private final Deployer deployer;
@@ -51,6 +53,8 @@ public class WebSite {
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
 
+    private List<LinkToValidate> linksToValidate;
+
     private final WebSiteComponentsRegistry componentsRegistry;
     private final MultipleLocationsResourceResolver includeResourcesResolver;
     private final ReactJsNashornEngine reactJsNashornEngine;
@@ -62,6 +66,7 @@ public class WebSite {
 
     private WebSite(Configuration cfg) {
         this.cfg = cfg;
+        this.linksToValidate = new ArrayList<>();
         this.deployer = new Deployer(cfg.deployPath);
         this.docMeta = new DocMeta();
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
@@ -84,6 +89,7 @@ public class WebSite {
 
         componentsRegistry.setPluginResourcesResolver(includeResourcesResolver);
         componentsRegistry.setCodeTokenizer(codeTokenizer);
+        componentsRegistry.setDocStructure(this);
 
         reset();
     }
@@ -148,6 +154,7 @@ public class WebSite {
         createTopLevelToc();
         parseMarkups();
         updateTocWithPageSections();
+        validateCollectedLinks();
         setGlobalToc();
         generatePages();
         generateSearchIndex();
@@ -214,9 +221,7 @@ public class WebSite {
      * Additional page structure information comes after parsing file. Hence phased approach.
      */
     private void updateTocWithPageSections() {
-        forEachPage(((tocItem, page) -> {
-            tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
-        }));
+        forEachPage(((tocItem, page) -> tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles())));
     }
 
     private void deployToc() {
@@ -367,6 +372,37 @@ public class WebSite {
         ConsoleOutputs.out(Color.BLUE, phase);
     }
 
+    @Override
+    public void validateLink(String dirName, String fileName, String pageSectionId) {
+        linksToValidate.add(new LinkToValidate(dirName, fileName, pageSectionId));
+    }
+
+    public void validateCollectedLinks() {
+        reportPhase("validating links");
+        linksToValidate.forEach(this::validateLink);
+    }
+
+    private void validateLink(LinkToValidate link) {
+        String url = link.dirName + "/" + link.fileName + (link.pageSectionId.isEmpty() ?  "" : "#" + link.pageSectionId);
+
+        Supplier<IllegalArgumentException> validationException = () -> new IllegalArgumentException("can't find a page associated with: " + url);
+
+        TocItem tocItem = toc.findTocItem(link.dirName, link.fileName);
+        if (tocItem == null) {
+            throw validationException.get();
+        }
+
+        if (!link.pageSectionId.isEmpty() && !tocItem.hasPageSection(link.pageSectionId)) {
+            throw validationException.get();
+        }
+    }
+
+    @Override
+    public String createLink(String dirName, String fileName, String pageSectionId) {
+        String base = "/" + docMeta.getId() + "/" + dirName + "/" + fileName;
+        return base + (pageSectionId.isEmpty() ? "" : "#" + pageSectionId);
+    }
+
     private interface PageConsumer {
         void consume(TocItem tocItem, Page page);
     }
@@ -456,6 +492,18 @@ public class WebSite {
             webSite.generate();
 
             return webSite;
+        }
+    }
+
+    private class LinkToValidate {
+        private String dirName;
+        private String fileName;
+        private String pageSectionId;
+
+        public LinkToValidate(String dirName, String fileName, String pageSectionId) {
+            this.dirName = dirName;
+            this.fileName = fileName;
+            this.pageSectionId = pageSectionId;
         }
     }
 }

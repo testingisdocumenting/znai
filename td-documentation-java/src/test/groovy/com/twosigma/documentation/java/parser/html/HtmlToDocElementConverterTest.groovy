@@ -33,9 +33,9 @@ second paragraph
 
     @Test
     void "should replace ahref with Link element"() {
-        process('<a href="url">text inside</a>')
+        process('<a href="http://url">text inside</a>')
 
-        elements.should == [[type: 'Paragraph', content:[[type: 'Link', url: 'url', content:
+        elements.should == [[type: 'Paragraph', content:[[type: 'Link', url: 'http://url', content:
                 [[text: 'text inside', type: 'SimpleText']]]]]]
     }
 

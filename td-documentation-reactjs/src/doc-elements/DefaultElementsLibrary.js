@@ -5,6 +5,7 @@ import {Section, presentationSectionHandler} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
 import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
+import Link from './default-elements/Link'
 import ListItem from './bullets/ListItem'
 import Paragraph from './default-elements/Paragraph'
 import GraphVizSvg from './graphviz/GraphVizSvg'
@@ -27,7 +28,7 @@ const presentationElementHandlers = {}
 library.DocElement = DocElement
 library.Emphasis = (props) => (<span className="emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
 library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
-library.Link = ({url, ...props}) => (<a href={url}><props.elementsLibrary.DocElement {...props}/></a>)
+library.Link = Link
 library.Paragraph = Paragraph
 
 library.SubHeading = ({level, ...props}) => {
