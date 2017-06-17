@@ -4,6 +4,7 @@ import com.twosigma.testing.data.table.TableData;
 import com.twosigma.testing.expectation.*;
 import com.twosigma.testing.expectation.code.ThrowExceptionMatcher;
 import com.twosigma.testing.expectation.equality.EqualMatcher;
+import com.twosigma.testing.expectation.ranges.GreaterThanMatcher;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -32,6 +33,10 @@ public class Ddjt {
 
     public static EqualMatcher equal(Object expected) {
         return new EqualMatcher(expected);
+    }
+
+    public static GreaterThanMatcher beGreaterThan(Comparable base) {
+        return new GreaterThanMatcher(base);
     }
 
     public static ThrowExceptionMatcher throwException(String expectedMessage) {
