@@ -46,7 +46,7 @@ public class WebSite implements DocStructure {
 
     private Map<TocItem, Page> pageByTocItem;
     private Map<Path, Set<TocItem>> tocItemsByAuxiliaryFilePath;
-    private Set<AuxiliaryFile> auxiliaryFiles;
+    private Map<Path, AuxiliaryFile> auxiliaryFiles;
 
     private TableOfContents toc;
     private List<PageProps> allPagesProps;
@@ -77,7 +77,7 @@ public class WebSite implements DocStructure {
         this.tocJavaScript = WebResource.withPath("toc.js");
         this.includeResourcesResolver = new MultipleLocationsResourceResolver(findLookupLocations(cfg));
         this.tocItemsByAuxiliaryFilePath = new HashMap<>();
-        this.auxiliaryFiles = new HashSet<>();
+        this.auxiliaryFiles = new HashMap<>();
 
         docMeta.setId(cfg.id);
         docMeta.setTitle(cfg.title);
@@ -137,8 +137,8 @@ public class WebSite implements DocStructure {
         this.auxiliaryFileListener = auxiliaryFileListener;
     }
 
-    public Set<AuxiliaryFile> getAuxiliaryFiles() {
-        return auxiliaryFiles;
+    public Collection<AuxiliaryFile> getAuxiliaryFiles() {
+        return auxiliaryFiles.values();
     }
 
     public Path getDeployRoot() {
@@ -262,7 +262,7 @@ public class WebSite implements DocStructure {
             Set<TocItem> tocItems = tocItemsByAuxiliaryFilePath.computeIfAbsent(af.getPath(), k -> new HashSet<>());
             tocItems.add(tocItem);
 
-            auxiliaryFiles.add(af);
+            auxiliaryFiles.put(af.getPath(), af);
             if (auxiliaryFileListener != null) {
                 auxiliaryFileListener.onAuxiliaryFile(af);
             }
@@ -333,7 +333,7 @@ public class WebSite implements DocStructure {
 
     private void deployAuxiliaryFiles() {
         reportPhase("deploying auxiliary files (e.g. images)");
-        auxiliaryFiles.stream().filter(AuxiliaryFile::isRequiresDeployment)
+        auxiliaryFiles.values().stream().filter(AuxiliaryFile::isDeploymentRequired)
                 .forEach(this::deployAuxiliaryFile);
     }
 
@@ -401,6 +401,19 @@ public class WebSite implements DocStructure {
     public String createLink(String dirName, String fileName, String pageSectionId) {
         String base = "/" + docMeta.getId() + "/" + dirName + "/" + fileName;
         return base + (pageSectionId.isEmpty() ? "" : "#" + pageSectionId);
+    }
+
+    public void redeployAuxiliaryFileIfRequired(Path path) {
+        AuxiliaryFile auxiliaryFile = auxiliaryFiles.get(path);
+        if (auxiliaryFile == null) {
+            return;
+        }
+
+        if (! auxiliaryFile.isDeploymentRequired()) {
+            return;
+        }
+
+        deployAuxiliaryFile(auxiliaryFile);
     }
 
     private interface PageConsumer {

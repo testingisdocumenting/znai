@@ -58,7 +58,7 @@ public class AuxiliaryFile {
         return path;
     }
 
-    public boolean isRequiresDeployment() {
+    public boolean isDeploymentRequired() {
         return requiresDeployment;
     }
 

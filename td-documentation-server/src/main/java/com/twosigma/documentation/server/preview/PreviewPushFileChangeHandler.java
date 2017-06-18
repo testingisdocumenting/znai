@@ -83,6 +83,8 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
                 return;
             }
 
+            previewWebSite.redeployAuxiliaryFileIfRequired(path);
+
             dependentTocItems.forEach(System.out::println);
             Stream<PageProps> generatedPages = dependentTocItems.stream().
                     map(tocItem -> previewWebSite.regeneratePage(tocItem).getProps());
