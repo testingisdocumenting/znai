@@ -21,11 +21,14 @@ In your terminal execute `mdoc --help` to make sure tool is available.
 Execute `mdoc --new` to create a minimum set of files for your documentation.
 
     mdoc
-       |--chapter1
-                 |--page1.md
-       |--chapter2
-                 |--page2.md
+       |--chapter-one
+                 |--page-one.md
+                 |--page-two.md
+       |--chapter-two
+                 |--page-three.md
+                 |--page-four.md
        |--toc
+       |--lookup-paths
        |--meta.json
        
 # Preview 
@@ -34,5 +37,5 @@ Navigate to the newly created directory. Execute `mdoc --preview`.
 Open prompted url inside your browser.
   
 Blue *eye* icon in the top right corner indicates that preview is on.
-Open any text editor, modify and save `page1.md` file.
-Changes will be displayed in the browser. 
+Open any text editor, modify and save `page-one.md` file.
+Changes will be reflected in the browser. 

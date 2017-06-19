@@ -11,6 +11,7 @@ import com.twosigma.documentation.server.preview.DocumentationPreview;
 import io.vertx.core.http.HttpServer;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author mykola
@@ -42,6 +43,11 @@ public class DocumentationCliApp {
     private void start() {
         ConsoleOutputs.add(new AnsiConsoleOutput());
         config.print();
+
+        if (config.isNew()) {
+            createNew();
+            return;
+        }
 
         announceMode(config.getModeAsString());
 
@@ -82,6 +88,12 @@ public class DocumentationCliApp {
                 withFileWithLookupPaths("lookup-paths").
                 withWebResources(WebResource.fromResource("static/twosigma-logo-and-label.png")).
                 withEnabledPreview(config.isPreview()).deployTo(deployPath);
+    }
+
+    private void createNew() {
+        ConsoleOutputs.out(Color.BLUE, "scaffolding new documentation");
+        DocScaffolding scaffolding = new DocScaffolding(Paths.get("mdoc"));
+        scaffolding.create();
     }
 
     private void announceMode(String name) {

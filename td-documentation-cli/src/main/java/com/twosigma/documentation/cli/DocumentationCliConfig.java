@@ -21,6 +21,7 @@ public class DocumentationCliConfig {
     private boolean isPreview;
     private boolean isUpload;
     private boolean isServe;
+    private boolean isNew;
 
     public DocumentationCliConfig(String... args) {
         parseArgs(args);
@@ -40,6 +41,7 @@ public class DocumentationCliConfig {
         isPreview = commandLine.hasOption("preview");
         isUpload = commandLine.hasOption("upload");
         isServe = commandLine.hasOption("serve");
+        isNew = commandLine.hasOption("new");
 
         docId = commandLine.hasOption("doc-id") ? commandLine.getOptionValue("doc-id") : "no-id-specified";
         host = commandLine.hasOption("host") ? commandLine.getOptionValue("host") : "localhost";
@@ -68,6 +70,10 @@ public class DocumentationCliConfig {
         }
 
         return "";
+    }
+
+    public boolean isNew() {
+        return isNew;
     }
 
     public boolean isPreview() {
@@ -161,6 +167,7 @@ public class DocumentationCliConfig {
         options.addOption(null, "preview", false, "preview mode");
         options.addOption(null, "upload", false, "upload mode");
         options.addOption(null, "serve", false, "server mode");
+        options.addOption(null, "new", false, "create new documentation with minimal necessary files");
         options.addOption(null, "doc-id", true, "documentation id");
 
         return options;
