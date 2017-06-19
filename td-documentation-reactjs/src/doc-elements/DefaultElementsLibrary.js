@@ -18,6 +18,7 @@ import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
 import {Svg, presentationSvgHandler} from './svg/Svg'
 import LatexMath from './math/LatexMath'
+import Image from './images/Image'
 import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
 import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
@@ -44,11 +45,6 @@ library.InlinedCode = ({code}) => <code>{code}</code>
 library.SoftLineBreak = () => <span> </span>
 library.HardLineBreak = () => <br />
 library.ThematicBreak = () => <hr />
-
-library.Image = ({destination, inlined}) => {
-    const className = "image" + (inlined ? " inlined" : "")
-    return (<div className={className}><img alt="not found" src={destination}/></div>)
-}
 
 library.Snippet = Snippet
 presentationElementHandlers.Snippet = presentationSnippetHandler
@@ -77,6 +73,9 @@ presentationElementHandlers.Table = {component: Table, numberOfSlides: () => 1}
 
 library.LatexMath = LatexMath
 presentationElementHandlers.LatexMath = {component: LatexMath, numberOfSlides: () => 1}
+
+library.Image = Image
+presentationElementHandlers.Image = {component: Image, numberOfSlides: () => 1}
 
 library.AnnotatedImage = EmbeddedAnnotatedImage
 presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler

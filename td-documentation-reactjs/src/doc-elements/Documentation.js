@@ -16,6 +16,7 @@ import PageContentPreviewDiff from './preview/PageContentPreviewDiff'
 
 import PresentationRegistry from './presentation/PresentationRegistry'
 
+import {setDocMeta} from './docMeta'
 import DocumentationLayout from './DocumentationLayout'
 
 import './DocumentationLayout.css'
@@ -26,6 +27,7 @@ class Documentation extends Component {
         super(props)
 
         const {page, docMeta} = this.props
+        setDocMeta(docMeta)
         this.searchPromise = getSearchPromise(docMeta)
 
         this.documentationNavigation = new DocumentationNavigation(docMeta.id)

@@ -65,291 +65,85 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Simple Snippet",
-                    "id": "simple-snippet",
+                    "title": "Complex Domain",
+                    "id": "complex-domain",
                     "type": "Section",
                     "content": [
                         {
-                            "type": "SubHeading",
-                            "level": 2,
-                            "content": [
-                                {
-                                    "text": "It is very easy to add a code snippet or an output result.",
-                                    "type": "SimpleText"
-                                },
-                            ]
-                        },
-                        {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "It is very easy to add a code snippet or an output result.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "All you have to do is indent your code with 4 spaces inside your markdown document and",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "your code will be rendered like this.",
+                                    "text": "Not every UI can be as simple as one input box.",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "lang": "",
-                            "maxLineLength": 52,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "content": "interface PriceService {\n    Money calcPrice(String cuips, Integer quantity);\n}\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
+                            "imageSrc": "idea.png",
+                            "shapes": [],
+                            "width": 937.0,
+                            "height": 657.0,
+                            "type": "AnnotatedImage"
                         },
                         {
-                            "type": "Paragraph",
+                            "type": "BlockQuote",
                             "content": [
                                 {
-                                    "text": "This method doesn\u0027t highlight code by default. It is possible to provide a default language to see for highlighting using",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "[meta.json](meta file).",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "Markdown used to create code snippet above follows",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "markdown",
-                            "maxLineLength": 86,
-                            "tokens": [
-                                {
-                                    "type": "title",
+                                    "type": "Paragraph",
                                     "content": [
                                         {
-                                            "type": "punctuation",
-                                            "content": "#"
+                                            "text": "Documenting and Presenting your UI",
+                                            "type": "SimpleText"
                                         },
-                                        " Simple Snippet"
+                                        {
+                                            "type": "SoftLineBreak"
+                                        },
+                                        {
+                                            "text": "should be a joy",
+                                            "type": "SimpleText"
+                                        }
                                     ]
-                                },
-                                "\n\nIt is very easy to add a code snippet or an output result.\nAll you have to do is indent your code with 4 spaces inside your markdown document and\nyour code will be rendered like this.\n\n",
-                                {
-                                    "type": "code",
-                                    "content": "    interface PriceService {"
-                                },
-                                "\n",
-                                {
-                                    "type": "code",
-                                    "content": "        Money calcPrice(String cuips, Integer quantity);"
-                                },
-                                "\n",
-                                {
-                                    "type": "code",
-                                    "content": "    }"
                                 }
-                            ],
-                            "startLine": "# Simple Snippet",
-                            "numberOfLines": 9.0,
-                            "title": "markdown",
-                            "type": "Snippet"
+                            ]
                         }
                     ]
                 },
                 {
-                    "title": "Specifying Language",
-                    "id": "specifying-language",
+                    "title": "Annotated Images",
+                    "id": "annotated-images",
                     "type": "Section",
                     "content": [
                         {
-                            "type": "Paragraph",
-                            "content": [
+                            "imageSrc": "word-toolbar.jpg",
+                            "shapes": [
                                 {
-                                    "text": "You can also specify a language.",
-                                    "type": "SimpleText"
+                                    "type": "circle",
+                                    "id": "c1",
+                                    "x": 80.0,
+                                    "y": 45.0,
+                                    "r": 20.0,
+                                    "text": "1",
+                                    "color": "red"
                                 },
                                 {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "That maybe useful if there is the snippet is not large enough for auto detection.",
-                                    "type": "SimpleText"
+                                    "type": "circle",
+                                    "id": "c2",
+                                    "x": 250.0,
+                                    "y": 65.0,
+                                    "r": 20.0,
+                                    "text": "2",
+                                    "color": "red"
                                 }
-                            ]
-                        },
-                        {
-                            "lang": "javascript",
-                            "maxLineLength": 38,
-                            "tokens": [
-                                {
-                                    "type": "keyword",
-                                    "content": "import"
-                                },
-                                " React",
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "Component",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "from"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\u0027"
-                                },
-                                "react",
-                                {
-                                    "type": "string",
-                                    "content": "\u0027"
-                                },
-                                "\n\n",
-                                {
-                                    "type": "keyword",
-                                    "content": "class"
-                                },
-                                " ",
-                                {
-                                    "type": "class-name",
-                                    "content": [
-                                        "MyComponent"
-                                    ]
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "extends"
-                                },
-                                " ",
-                                {
-                                    "type": "class-name",
-                                    "content": [
-                                        "Component"
-                                    ]
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n    ",
-                                {
-                                    "type": "function",
-                                    "content": "render"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n        ",
-                                {
-                                    "type": "comment",
-                                    "content": "/// ..."
-                                },
-                                "\n    ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                "\n",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                "\n"
                             ],
-                            "lineNumber": "",
-                            "type": "Snippet"
+                            "width": 833.0,
+                            "height": 204.0,
+                            "type": "AnnotatedImage"
                         },
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Snippet below is used to highlight the code as a javascript language",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "markdown",
-                            "maxLineLength": 81,
-                            "tokens": [
-                                {
-                                    "type": "title",
-                                    "content": [
-                                        {
-                                            "type": "punctuation",
-                                            "content": "#"
-                                        },
-                                        " Specifying Language"
-                                    ]
-                                },
-                                "\n \nYou can also specify a language. \nThat maybe useful if there is the snippet is not large enough for auto detection.\n\n```javascript\nimport React, {Component} from \u0027react\u0027\n\nclass MyComponent extends Component {\n",
-                                {
-                                    "type": "code",
-                                    "content": "    render() {"
-                                },
-                                "\n",
-                                {
-                                    "type": "code",
-                                    "content": "        /// ..."
-                                },
-                                "\n",
-                                {
-                                    "type": "code",
-                                    "content": "    }"
-                                },
-                                "\n}\n```"
-                            ],
-                            "startLine": "# Specifying Language",
-                            "numberOfLines": 14.0,
-                            "title": "markdown",
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Following languages are supported",
+                                    "text": "there are different types of annotations:",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -366,7 +160,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "Java",
+                                                    "text": "circles",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -380,7 +174,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "JavaScript",
+                                                    "text": "rectangles",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -394,7 +188,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "Groovy",
+                                                    "text": "arrows",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -408,7 +202,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "Python",
+                                                    "text": "etc",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -418,163 +212,534 @@ const TestData = {
                             ]
                         },
                         {
-                            "type": "Paragraph",
-                            "content": [
+                            "imageSrc": "screenshot1.png",
+                            "shapes": [
                                 {
-                                    "text": "We use highlightjs library to provide syntax highlighting",
-                                    "type": "SimpleText"
+                                    "type": "arrow",
+                                    "id": "a1",
+                                    "beginX": 200.0,
+                                    "beginY": 100.0,
+                                    "endX": 48.0,
+                                    "endY": 42.0,
+                                    "color": "red",
+                                    "text": "debug"
+                                },
+                                {
+                                    "type": "rectangle",
+                                    "id": "r1",
+                                    "x": 200.0,
+                                    "y": 50.0,
+                                    "width": 100.0,
+                                    "height": 40.0,
+                                    "color": "green",
+                                    "text": "debug"
+                                },
+                                {
+                                    "type": "circle",
+                                    "id": "c1",
+                                    "x": 350.0,
+                                    "y": 100.0,
+                                    "r": 30.0,
+                                    "color": "blue",
+                                    "text": "text"
                                 }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Wide Code",
-                    "id": "wide-code",
-                    "type": "Section",
-                    "content": [
+                            ],
+                            "width": 537.0,
+                            "height": 133.0,
+                            "type": "AnnotatedImage"
+                        },
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "To make regular text more readable we maintain a narrow column of text. You code snippets however can\u0027t always follow the",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "same rules. In case of a wide code snippets we expand the horizontal boundaries and center the source code to fit.",
+                                    "text": "Annotations are stored as a simple json file",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "lang": "java",
-                            "maxLineLength": 130,
+                            "lang": "json",
+                            "maxLineLength": 55,
                             "tokens": [
                                 {
-                                    "type": "keyword",
-                                    "content": "class"
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                {
+                                    "type": "property",
+                                    "content": "\"shapes\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
                                 },
                                 " ",
                                 {
-                                    "type": "class-name",
-                                    "content": [
-                                        "InternationalPriceService"
-                                    ]
+                                    "type": "punctuation",
+                                    "content": "["
                                 },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "implements"
-                                },
-                                " ",
-                                {
-                                    "type": "class-name",
-                                    "content": [
-                                        "PriceService"
-                                    ]
-                                },
-                                " ",
                                 {
                                     "type": "punctuation",
                                     "content": "{"
                                 },
-                                "\n    ",
                                 {
-                                    "type": "keyword",
-                                    "content": "private"
+                                    "type": "property",
+                                    "content": "\"type\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
                                 },
                                 " ",
                                 {
-                                    "type": "keyword",
-                                    "content": "static"
+                                    "type": "string",
+                                    "content": "\"arrow\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
                                 },
                                 " ",
                                 {
-                                    "type": "keyword",
-                                    "content": "void"
-                                },
-                                " LongJavaInterfaceNameWithSuperFactory ",
-                                {
-                                    "type": "function",
-                                    "content": "createMegaFactory"
+                                    "type": "property",
+                                    "content": "\"id\""
                                 },
                                 {
-                                    "type": "punctuation",
-                                    "content": "("
+                                    "type": "operator",
+                                    "content": ":"
                                 },
                                 {
-                                    "type": "keyword",
-                                    "content": "final"
+                                    "type": "string",
+                                    "content": "\"a1\""
                                 },
-                                " ExchangeCalendarLongerThanLife calendar",
                                 {
                                     "type": "punctuation",
-                                    "content": ")"
+                                    "content": ","
+                                },
+                                "\n  ",
+                                {
+                                    "type": "property",
+                                    "content": "\"beginX\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
                                 },
                                 " ",
                                 {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n        ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
+                                    "type": "number",
+                                    "content": "200"
                                 },
                                 {
                                     "type": "punctuation",
-                                    "content": "."
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"beginY\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "number",
+                                    "content": "100"
                                 },
                                 {
                                     "type": "punctuation",
-                                    "content": "."
+                                    "content": ","
                                 },
-                                "\n    ",
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"endX\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "number",
+                                    "content": "48"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"endY\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "number",
+                                    "content": "42"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                "\n  ",
+                                {
+                                    "type": "property",
+                                    "content": "\"color\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "string",
+                                    "content": "\"red\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"text\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "string",
+                                    "content": "\"debug\""
+                                },
                                 {
                                     "type": "punctuation",
                                     "content": "}"
                                 },
-                                "\n",
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                "\n\n  ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                {
+                                    "type": "property",
+                                    "content": "\"type\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "string",
+                                    "content": "\"rectangle\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"id\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                {
+                                    "type": "string",
+                                    "content": "\"r1\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                "\n    ",
+                                {
+                                    "type": "property",
+                                    "content": "\"x\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "number",
+                                    "content": "200"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"y\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "number",
+                                    "content": "50"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"width\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "number",
+                                    "content": "100"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"height\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "number",
+                                    "content": "40"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                "\n    ",
+                                {
+                                    "type": "property",
+                                    "content": "\"color\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "string",
+                                    "content": "\"green\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"text\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "string",
+                                    "content": "\"debug\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "}"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                "\n\n  ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                {
+                                    "type": "property",
+                                    "content": "\"type\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "string",
+                                    "content": "\"circle\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"id\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "string",
+                                    "content": "\"c1\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                "\n    ",
+                                {
+                                    "type": "property",
+                                    "content": "\"x\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "number",
+                                    "content": "350"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"y\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "number",
+                                    "content": "100"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"r\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "number",
+                                    "content": "30"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                "\n    ",
+                                {
+                                    "type": "property",
+                                    "content": "\"color\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "string",
+                                    "content": "\"blue\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "property",
+                                    "content": "\"text\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": ":"
+                                },
+                                " ",
+                                {
+                                    "type": "string",
+                                    "content": "\"text\""
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "}"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "]"
+                                },
                                 {
                                     "type": "punctuation",
                                     "content": "}"
                                 }
                             ],
                             "type": "Snippet"
-                        }
-                    ]
-                },
-                {
-                    "title": "Inlined",
-                    "id": "inlined",
-                    "type": "Section",
-                    "content": [
+                        },
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "To inline code within a text dimply put it inside a back tick.",
+                                    "text": "And then easily integrated with documentation by using an ",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "E.g. To check if an Exchange is closed, you need to use ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "ExchangeCalendar",
+                                    "code": "image",
                                     "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " plugin",
+                                    "type": "SimpleText"
                                 }
                             ]
                         },
                         {
                             "lang": "markdown",
-                            "maxLineLength": 74,
+                            "maxLineLength": 71,
                             "tokens": [
                                 {
                                     "type": "title",
@@ -583,44 +748,117 @@ const TestData = {
                                             "type": "punctuation",
                                             "content": "#"
                                         },
-                                        " Inlined"
+                                        " Annotated Images"
                                     ]
                                 },
-                                "\n\nTo inline code within a text dimply put it inside a back tick. \nE.g. To check if an Exchange is closed, you need to use ",
+                                "\n\n:include-image: word-toolbar.jpg {annotationsPath: \u0027annotations1.json\u0027}\n\nthere are different types of annotations:\n",
                                 {
-                                    "type": "code",
-                                    "content": "`ExchangeCalendar`"
+                                    "type": "list",
+                                    "content": "*"
+                                },
+                                " circles\n",
+                                {
+                                    "type": "list",
+                                    "content": "*"
+                                },
+                                " rectangles\n",
+                                {
+                                    "type": "list",
+                                    "content": "*"
+                                },
+                                " arrows\n",
+                                {
+                                    "type": "list",
+                                    "content": "*"
+                                },
+                                " etc"
+                            ],
+                            "startLine": "# Annotated Images",
+                            "endLine": "* etc",
+                            "type": "Snippet"
+                        }
+                    ]
+                },
+                {
+                    "title": "Editing Annotations",
+                    "id": "editing-annotations",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "imageSrc": "editor-overview.png",
+                            "shapes": [
+                                {
+                                    "type": "rectangle",
+                                    "id": "r2",
+                                    "x": 140.0,
+                                    "y": 135.0,
+                                    "width": 220.0,
+                                    "height": 240.0,
+                                    "text": "",
+                                    "color": "red"
+                                },
+                                {
+                                    "type": "rectangle",
+                                    "id": "r1",
+                                    "x": 593.0,
+                                    "y": 5.0,
+                                    "width": 255.0,
+                                    "height": 180.0,
+                                    "text": "",
+                                    "color": "red"
                                 }
                             ],
-                            "startLine": "# Inlined",
-                            "numberOfLines": 4.0,
-                            "title": "markdown",
-                            "type": "Snippet"
+                            "width": 851.0,
+                            "height": 383.0,
+                            "type": "AnnotatedImage"
+                        }
+                    ]
+                },
+                {
+                    "title": "Presentation Mode",
+                    "id": "presentation-mode",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Annotated images automatically participate in presentation mode. Annotations appear one by one and scale to match the",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "zoom level of a presentation.",
+                                    "type": "SimpleText"
+                                }
+                            ]
                         }
                     ]
                 }
             ],
             "tocItem": {
                 "sectionTitle": "Features",
-                "pageTitle": "Code Snippets",
-                "fileName": "code-snippets",
+                "pageTitle": "Image Annotations",
+                "fileName": "image-annotations",
                 "dirName": "features",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Simple Snippet",
-                        "id": "simple-snippet"
+                        "title": "Complex Domain",
+                        "id": "complex-domain"
                     },
                     {
-                        "title": "Specifying Language",
-                        "id": "specifying-language"
+                        "title": "Annotated Images",
+                        "id": "annotated-images"
                     },
                     {
-                        "title": "Wide Code",
-                        "id": "wide-code"
+                        "title": "Editing Annotations",
+                        "id": "editing-annotations"
                     },
                     {
-                        "title": "Inlined",
-                        "id": "inlined"
+                        "title": "Presentation Mode",
+                        "id": "presentation-mode"
                     }
                 ]
             }
