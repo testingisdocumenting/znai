@@ -14,6 +14,6 @@ class TestMarkupParser implements MarkupParser {
         def element = new DocElement("TestMarkup", "markup", markup)
         page.addChild(element)
 
-        return new MarkupParserResult(page, [])
+        return new MarkupParserResult(page, [], properties)
     }
 }

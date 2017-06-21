@@ -5,6 +5,7 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.parser.commonmark.include.IncludeNode;
 import com.twosigma.documentation.parser.table.GfmTableToTableConverter;
+import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
 import org.commonmark.ext.gfm.tables.TableBlock;
 import org.commonmark.node.*;
 
@@ -115,6 +116,10 @@ public class DocElementVisitor extends AbstractVisitor {
 
     @Override
     public void visit(CustomBlock customBlock) {
+        if (customBlock instanceof YamlFrontMatterBlock) {
+            return;
+        }
+
         if (customBlock instanceof IncludeNode) {
             final IncludeNode includeNode = (IncludeNode) customBlock;
             parserHandler.onIncludePlugin(includeNode.getParams());

@@ -15,6 +15,7 @@ class MarkdownParserTest {
     static final MarkupParser parser = new MarkdownParser(componentsRegistry)
 
     private List<Map> content
+    private MarkupParserResult parseResult
 
     @Test
     void "link"() {
@@ -238,8 +239,17 @@ world""")
         content.should == [[type: 'Paragraph', content: [[type: 'InlinedCodeDummy', ff: 'free-param', opts: [p1: 'v1']]]]]
     }
 
+    @Test
+    void "custom page data"() {
+        parse("""---
+title: custom title
+---""")
+
+        parseResult.properties.title.should == ["custom title"]
+    }
+
     private void parse(String markdown) {
-        def parseResult = parser.parse(Paths.get("test.md"), markdown)
+        parseResult = parser.parse(Paths.get("test.md"), markdown)
         content = parseResult.docElement.getContent().collect { it.toMap() }
     }
 }

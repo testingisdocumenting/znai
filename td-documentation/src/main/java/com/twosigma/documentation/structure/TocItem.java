@@ -62,6 +62,10 @@ public class TocItem {
         this.pageSectionIdTitles = pageSectionIdTitles;
     }
 
+    public void setPageTitle(String pageTitle) {
+        this.pageTitle = pageTitle;
+    }
+
     public boolean isIndex() {
         return dirName.isEmpty() && fileNameWithoutExtension.equals(INDEX);
     }

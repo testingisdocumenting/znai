@@ -247,7 +247,13 @@ public class WebSite implements DocStructure {
 
             final Page page = new Page(parserResult.getDocElement());
             pageByTocItem.put(tocItem, page);
+
             tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
+
+            List<String> title = parserResult.getProperties().get("title");
+            if (title != null) {
+                tocItem.setPageTitle(title.get(0));
+            }
         } catch(Exception e) {
             throw new RuntimeException("error during parsing of " + tocItem.getFileNameWithoutExtension() +
                     ":" + e.getMessage(), e);
