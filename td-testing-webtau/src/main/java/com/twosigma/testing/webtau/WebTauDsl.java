@@ -1,6 +1,7 @@
 package com.twosigma.testing.webtau;
 
 import com.twosigma.testing.expectation.ValueMatcher;
+import com.twosigma.testing.expectation.ranges.GreaterThanMatcher;
 import com.twosigma.testing.http.HttpUrl;
 import com.twosigma.testing.reporter.TestStep;
 import com.twosigma.testing.reporter.TokenizedMessage;
@@ -71,6 +72,10 @@ public class WebTauDsl {
 
     public static ValueMatcher beVisible() {
         return new VisibleValueMatcher();
+    }
+
+    public static ValueMatcher beGreaterThan(Comparable base) {
+        return new GreaterThanMatcher(base);
     }
 
     public static ValueMatcher getBeVisible() {

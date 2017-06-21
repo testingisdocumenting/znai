@@ -1,5 +1,6 @@
 package com.twosigma.testing.expectation.ranges;
 
+import com.twosigma.testing.data.converters.ToNumberConverters;
 import com.twosigma.testing.data.render.DataRenderers;
 import com.twosigma.testing.expectation.ActualPath;
 import com.twosigma.testing.expectation.ValueMatcher;
@@ -32,7 +33,7 @@ public class GreaterThanMatcher implements ValueMatcher {
 
     @Override
     public boolean matches(ActualPath actualPath, Object actual) {
-        compareToRes = compareTo((Comparable) actual);
+        compareToRes = compareTo((Comparable) ToNumberConverters.convert(actual));
         return compareToRes < 0;
     }
 
@@ -53,7 +54,7 @@ public class GreaterThanMatcher implements ValueMatcher {
 
     @Override
     public boolean negativeMatches(ActualPath actualPath, Object actual) {
-        compareToRes = compareTo((Comparable) actual);
+        compareToRes = compareTo((Comparable) ToNumberConverters.convert(actual));
         return compareToRes >= 0;
     }
 

@@ -5,5 +5,6 @@ import java.util.Map;
 /**
  * @author mykola
  */
-public interface ToMapConverter extends ToTypeConverter<Map<String, ?>> {
+public interface ToTypeConverter<E> {
+    E convert(Object v);
 }
