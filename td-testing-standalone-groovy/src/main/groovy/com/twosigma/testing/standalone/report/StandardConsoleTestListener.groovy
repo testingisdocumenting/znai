@@ -12,6 +12,7 @@ class StandardConsoleTestListener extends StandaloneTestListenerAdapter {
     private int passed
     private int failed
     private int errored
+    private int skipped
 
     @Override
     void beforeTestRun(StandaloneTest test) {
@@ -29,6 +30,9 @@ class StandardConsoleTestListener extends StandaloneTestListenerAdapter {
             ConsoleOutputs.out(Color.RED, "[~] ", Color.BLUE, "error")
             displayStackTrace(test.exception)
             errored++
+        } else if (test.isSkipped()) {
+            ConsoleOutputs.out(Color.YELLOW, "[o] ", Color.BLUE, "skipped")
+            skipped++
         } else {
             ConsoleOutputs.out(Color.GREEN, "[.] ", Color.BLUE, "passed")
             passed++
@@ -36,7 +40,7 @@ class StandardConsoleTestListener extends StandaloneTestListenerAdapter {
     }
 
     int getTotal() {
-        return passed + failed + errored
+        return passed + failed + errored + skipped
     }
 
     int getPassed() {
@@ -51,11 +55,16 @@ class StandardConsoleTestListener extends StandaloneTestListenerAdapter {
         return errored
     }
 
+    int getSkipped() {
+        return skipped
+    }
+
     @Override
     void afterAllTests() {
         ConsoleOutputs.out()
-        ConsoleOutputs.out("Total: ", (passed + failed + errored), ", ",
+        ConsoleOutputs.out("Total: ", getTotal(), ", ",
                 Color.GREEN, " Passed: ", passed, ", ",
+                Color.YELLOW, " Skipped: ", skipped, ", ",
                 Color.RED, " Failed: ", failed, ", ",
                 " Errored: ", errored)
     }

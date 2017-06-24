@@ -111,7 +111,7 @@ class WebTauCliApp implements StandaloneTestListener {
                 total: consoleTestReporter.total,
                 passed: consoleTestReporter.passed,
                 failed: consoleTestReporter.failed,
-                skipped: 0,
+                skipped: consoleTestReporter.skipped,
                 errored: consoleTestReporter.errored]
 
         def report = [summary: summary, tests: tests*.toMap()]

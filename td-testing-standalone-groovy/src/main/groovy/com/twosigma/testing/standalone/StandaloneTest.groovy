@@ -11,6 +11,7 @@ import java.nio.file.Path
 import static com.twosigma.testing.standalone.StandaloneTestStatus.Errored
 import static com.twosigma.testing.standalone.StandaloneTestStatus.Failed
 import static com.twosigma.testing.standalone.StandaloneTestStatus.Passed
+import static com.twosigma.testing.standalone.StandaloneTestStatus.Skipped
 
 /**
  * Most of the testing API can be used outside standard JUnit/TestNG setup.
@@ -31,10 +32,13 @@ class StandaloneTest implements StepReporter {
     private List<StandaloneTestResultPayload> payloads
     private List<TestStep> steps
 
+    private boolean isRan
+
     StandaloneTest(Path filePath, String description, Closure code) {
         this.id = idGenerator.generate(filePath)
         this.filePath = filePath
         this.description = description
+        this.isRan = false
         this.code = code
         this.steps = []
         this.payloads = []
@@ -46,6 +50,10 @@ class StandaloneTest implements StepReporter {
 
     Path getFilePath() {
         return filePath
+    }
+
+    boolean isSkipped() {
+        return ! isRan
     }
 
     boolean isPassed() {
@@ -75,6 +83,10 @@ class StandaloneTest implements StepReporter {
 
         if (isFailed()) {
             return Failed
+        }
+
+        if (isSkipped()) {
+            return Skipped
         }
 
         return Passed
@@ -110,6 +122,7 @@ class StandaloneTest implements StepReporter {
         } catch (Throwable e) {
             exception = e
         } finally {
+            isRan = true
             StepReporters.remove(this)
         }
     }

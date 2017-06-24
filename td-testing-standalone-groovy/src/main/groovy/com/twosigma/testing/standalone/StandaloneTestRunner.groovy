@@ -1,8 +1,5 @@
 package com.twosigma.testing.standalone
 
-import com.twosigma.console.ConsoleOutputs
-import com.twosigma.console.ansi.Color
-import com.twosigma.console.ansi.FontStyle
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 
@@ -14,6 +11,7 @@ import java.nio.file.Path
 class StandaloneTestRunner {
     private List<String> staticImports
     private List<StandaloneTest> tests
+    private List<StandaloneTest> exclusiveTests
 
     private Path workingDir
     private Path currentTestPath
@@ -23,6 +21,7 @@ class StandaloneTestRunner {
         this.staticImports = staticImports
         this.workingDir = workingDir.toAbsolutePath()
         this.tests = []
+        this.exclusiveTests = []
         this.groovy = prepareGroovyEngine()
     }
 
@@ -54,19 +53,34 @@ class StandaloneTestRunner {
         return tests.count { it.hasError() }
     }
 
+    void scenario(String description, Closure code) {
+        def test = new StandaloneTest(currentTestPath, description, code)
+        tests.add(test)
+    }
+
+    void sscenario(String description, Closure code) {
+        def test = new StandaloneTest(currentTestPath, description, code)
+        exclusiveTests.add(test)
+    }
+
     void runTests() {
         StandaloneTestListeners.beforeFirstTest()
-        tests.each { test ->
+
+        def testsToRun = exclusiveTests.isEmpty() ? tests : exclusiveTests
+        def testsToSkip = exclusiveTests.isEmpty() ? [] : tests
+
+        testsToSkip.each { test ->
+            StandaloneTestListeners.beforeTestRun(test)
+            StandaloneTestListeners.afterTestRun(test)
+        }
+
+        testsToRun.each { test ->
             StandaloneTestListeners.beforeTestRun(test)
             test.run()
             StandaloneTestListeners.afterTestRun(test)
         }
-        StandaloneTestListeners.afterAllTests()
-    }
 
-    void scenario(String description, Closure code) {
-        def test = new StandaloneTest(currentTestPath, description, code)
-        tests.add(test)
+        StandaloneTestListeners.afterAllTests()
     }
 
     private GroovyScriptEngine prepareGroovyEngine() {

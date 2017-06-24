@@ -24,6 +24,10 @@ class WebTauGroovyDsl extends WebTauDsl {
         testRunner.scenario(description, code)
     }
 
+    static void sscenario(String description, Closure code) {
+        testRunner.sscenario(description, code)
+    }
+
     static Closure action(String description, Closure code) {
         return { args ->
             String withReplacedValues = replacePlaceholders(description, args)
