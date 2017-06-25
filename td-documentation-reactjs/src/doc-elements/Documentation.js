@@ -59,6 +59,7 @@ class Documentation extends Component {
         this.onMultiplePagesUpdate = this.onMultiplePagesUpdate.bind(this)
         this.onPageGenError = this.onPageGenError.bind(this)
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
+        this.keyDownHandler = this.keyDownHandler.bind(this)
 
         this.documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
     }
@@ -123,10 +124,20 @@ class Documentation extends Component {
     componentDidMount() {
         this.enableScrollListener()
         this.onPageLoad()
+        document.addEventListener('keydown', this.keyDownHandler)
     }
 
     componentWillUnmount() {
         this.disableScrollListener()
+        document.removeEventListener('keydown', this.keyDownHandler)
+    }
+
+    keyDownHandler(e) {
+        const {searchActive} = this.state
+        if (e.code === 'Slash' && ! searchActive) {
+            e.preventDefault()
+            this.setState({searchActive: true})
+        }
     }
 
     enableScrollListener() {
@@ -177,7 +188,7 @@ class Documentation extends Component {
     }
 
     onTocToggle(collapsed) {
-        this.setState({ tocCollapsed: collapsed })
+        this.setState({tocCollapsed: collapsed})
     }
 
     onTocSelect() {
