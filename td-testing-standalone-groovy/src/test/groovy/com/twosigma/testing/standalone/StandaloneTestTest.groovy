@@ -24,7 +24,7 @@ class StandaloneTestTest {
                                    shortStackTrace: null,
                                    fullStackTrace: null,
                                    exceptionMessage: null,
-                                   status: 'Passed',
+                                   status: 'Skipped',
                                    screenshot: 'base64', steps: ['step1', 'step2']])
     }
 }
