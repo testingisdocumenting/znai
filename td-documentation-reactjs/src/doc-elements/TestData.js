@@ -65,287 +65,196 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Command Line Tool",
-                    "id": "command-line-tool",
-                    "type": "Section",
+                    "type": "Paragraph",
                     "content": [
                         {
-                            "type": "Paragraph",
+                            "code": "mdoc",
+                            "type": "InlinedCode"
+                        },
+                        {
+                            "text": " is a system to generate user facing documentation from markup files (markdown only at the moment).",
+                            "type": "SimpleText"
+                        },
+                        {
+                            "type": "SoftLineBreak"
+                        },
+                        {
+                            "text": "Documentation files seat next to your product codebase and are part of your product\u0027s SDLC.",
+                            "type": "SimpleText"
+                        }
+                    ]
+                },
+                {
+                    "type": "Paragraph",
+                    "content": [
+                        {
+                            "code": "mdoc",
+                            "type": "InlinedCode"
+                        },
+                        {
+                            "text": " provides directives to simplify your day-to-day documentation process as well as to improve maintenance in a long run.",
+                            "type": "SimpleText"
+                        }
+                    ]
+                },
+                {
+                    "type": "Paragraph",
+                    "content": [
+                        {
+                            "text": "Continue reading to learn more about",
+                            "type": "SimpleText"
+                        }
+                    ]
+                },
+                {
+                    "bulletMarker": "*",
+                    "tight": true,
+                    "type": "BulletList",
+                    "content": [
+                        {
+                            "type": "ListItem",
                             "content": [
                                 {
-                                    "text": "Mdoc comes with a command line tool that:",
-                                    "type": "SimpleText"
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "rationale",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
                                 }
                             ]
                         },
                         {
-                            "bulletMarker": "*",
-                            "tight": true,
-                            "type": "BulletList",
+                            "type": "ListItem",
                             "content": [
                                 {
-                                    "type": "ListItem",
+                                    "type": "Paragraph",
                                     "content": [
                                         {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "generates documentation website",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "runs auto-preview local server",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "runs documentation server",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Markdown",
-                    "id": "markdown",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Fastest way to learn markdown is to go to ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "url": "http://commonmark.org/help/",
-                                    "type": "Link",
-                                    "content": [
-                                        {
-                                            "text": "CommonMark",
+                                            "text": "structuring your documentation",
                                             "type": "SimpleText"
                                         }
                                     ]
-                                },
-                                {
-                                    "text": " website",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "and go through a 60 seconds cheatsheet or 10 minutes tutorial.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Installation",
-                    "id": "installation",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "url": "https://optin",
-                                    "type": "Link",
-                                    "content": [
-                                        {
-                                            "text": "Optin",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "text": " to add the command line to your hosts.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "In your terminal execute ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "mdoc --help",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " to make sure tool is available.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Scaffolding",
-                    "id": "scaffolding",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Execute ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "mdoc --new",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " to create a minimum set of files for your documentation.",
-                                    "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "lang": "",
-                            "maxLineLength": 29,
-                            "tokens": [
-                                {
-                                    "type": "text",
-                                    "content": "mdoc\n   |--chapter-one\n             |--page-one.md\n             |--page-two.md\n   |--chapter-two\n             |--page-three.md\n             |--page-four.md\n   |--toc\n   |--lookup-paths\n   |--meta.json\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        }
-                    ]
-                },
-                {
-                    "title": "Preview",
-                    "id": "preview",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
+                            "type": "ListItem",
                             "content": [
                                 {
-                                    "text": "Navigate to the newly created directory. Execute ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "mdoc --preview",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": ".",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "Open prompted url inside your browser.",
-                                    "type": "SimpleText"
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "leveraging existing code snippets and test results",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
                                 }
                             ]
                         },
                         {
-                            "type": "Paragraph",
+                            "type": "ListItem",
                             "content": [
                                 {
-                                    "text": "Blue ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "Emphasis",
+                                    "type": "Paragraph",
                                     "content": [
                                         {
-                                            "text": "eye",
+                                            "text": "diagrams support",
                                             "type": "SimpleText"
                                         }
                                     ]
-                                },
-                                {
-                                    "text": " icon in the top right corner indicates that preview is on.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "Open any text editor, modify and save ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "page-one.md",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " file.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "Changes will be reflected in the browser.",
-                                    "type": "SimpleText"
                                 }
                             ]
+                        },
+                        {
+                            "type": "ListItem",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "UI documentation techniques",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ListItem",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "presentation mode",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ListItem",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "extremely fast navigation",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "ListItem",
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "local search with auto preview",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Paragraph",
+                    "content": [
+                        {
+                            "text": "If you are reading this documentation for the first time, I suggest to read in the intended order",
+                            "type": "SimpleText"
+                        },
+                        {
+                            "type": "SoftLineBreak"
+                        },
+                        {
+                            "text": "(there is a next button at the bottom of each page).",
+                            "type": "SimpleText"
+                        },
+                        {
+                            "type": "HardLineBreak"
+                        },
+                        {
+                            "text": "Feel free to use Table Of Contents on the left, or search (top right) otherwise.",
+                            "type": "SimpleText"
                         }
                     ]
                 }
             ],
             "tocItem": {
-                "sectionTitle": "Introduction",
-                "pageTitle": "Getting Started",
-                "fileName": "getting-started",
-                "dirName": "introduction",
-                "pageSectionIdTitles": [
-                    {
-                        "title": "Command Line Tool",
-                        "id": "command-line-tool"
-                    },
-                    {
-                        "title": "Markdown",
-                        "id": "markdown"
-                    },
-                    {
-                        "title": "Installation",
-                        "id": "installation"
-                    },
-                    {
-                        "title": "Scaffolding",
-                        "id": "scaffolding"
-                    },
-                    {
-                        "title": "Preview",
-                        "id": "preview"
-                    }
-                ]
+                "sectionTitle": "",
+                "pageTitle": "Index",
+                "fileName": "index",
+                "dirName": "",
+                "pageSectionIdTitles": []
             }
         }
     }};

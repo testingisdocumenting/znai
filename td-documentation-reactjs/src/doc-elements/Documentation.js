@@ -32,7 +32,9 @@ class Documentation extends Component {
 
         const currentPageLocation = documentationNavigation.currentPageLocation()
 
-        const selectedTocItem = {...currentPageLocation, pageSectionId: page.tocItem.pageSectionIdTitles[0].id}
+        const selectedTocItem = {...currentPageLocation, pageSectionId: page.tocItem.pageSectionIdTitles[0] ?
+            page.tocItem.pageSectionIdTitles[0].id : null}
+
         this.state = {
             tocCollapsed: false,
             tocSelected: false,
@@ -395,7 +397,7 @@ class Documentation extends Component {
 
         const current = withVisibleTitle.length ? withVisibleTitle[0] : closestToTopZero()
 
-        const enrichedSelectedTocItem = {...selectedTocItem, pageSectionId: current.idTitle.id}
+        const enrichedSelectedTocItem = {...selectedTocItem, pageSectionId: current ? current.idTitle.id : null}
         this.setState({selectedTocItem: enrichedSelectedTocItem})
     }
 }
