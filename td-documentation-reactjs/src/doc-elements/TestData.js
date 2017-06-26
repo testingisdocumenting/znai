@@ -65,85 +65,15 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Complex Domain",
-                    "id": "complex-domain",
+                    "title": "Command Line Tool",
+                    "id": "command-line-tool",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Not every UI can be as simple as one input box.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "imageSrc": "idea.png",
-                            "shapes": [],
-                            "width": 937.0,
-                            "height": 657.0,
-                            "type": "AnnotatedImage"
-                        },
-                        {
-                            "type": "BlockQuote",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "Documenting and Presenting your UI",
-                                            "type": "SimpleText"
-                                        },
-                                        {
-                                            "type": "SoftLineBreak"
-                                        },
-                                        {
-                                            "text": "should be a joy",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Annotated Images",
-                    "id": "annotated-images",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "imageSrc": "word-toolbar.jpg",
-                            "shapes": [
-                                {
-                                    "type": "circle",
-                                    "id": "c1",
-                                    "x": 80.0,
-                                    "y": 45.0,
-                                    "r": 20.0,
-                                    "text": "1",
-                                    "color": "red"
-                                },
-                                {
-                                    "type": "circle",
-                                    "id": "c2",
-                                    "x": 250.0,
-                                    "y": 65.0,
-                                    "r": 20.0,
-                                    "text": "2",
-                                    "color": "red"
-                                }
-                            ],
-                            "width": 833.0,
-                            "height": 204.0,
-                            "type": "AnnotatedImage"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "there are different types of annotations:",
+                                    "text": "Mdoc comes with a command line tool that:",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -160,7 +90,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "circles",
+                                                    "text": "generates documentation website",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -174,7 +104,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "rectangles",
+                                                    "text": "runs auto-preview local server",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -188,21 +118,7 @@ const TestData = {
                                             "type": "Paragraph",
                                             "content": [
                                                 {
-                                                    "text": "arrows",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "ListItem",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "etc",
+                                                    "text": "runs documentation server",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -210,627 +126,192 @@ const TestData = {
                                     ]
                                 }
                             ]
-                        },
-                        {
-                            "imageSrc": "screenshot1.png",
-                            "shapes": [
-                                {
-                                    "type": "arrow",
-                                    "id": "a1",
-                                    "beginX": 200.0,
-                                    "beginY": 100.0,
-                                    "endX": 48.0,
-                                    "endY": 42.0,
-                                    "color": "red",
-                                    "text": "debug"
-                                },
-                                {
-                                    "type": "rectangle",
-                                    "id": "r1",
-                                    "x": 200.0,
-                                    "y": 50.0,
-                                    "width": 100.0,
-                                    "height": 40.0,
-                                    "color": "green",
-                                    "text": "debug"
-                                },
-                                {
-                                    "type": "circle",
-                                    "id": "c1",
-                                    "x": 350.0,
-                                    "y": 100.0,
-                                    "r": 30.0,
-                                    "color": "blue",
-                                    "text": "text"
-                                }
-                            ],
-                            "width": 537.0,
-                            "height": 133.0,
-                            "type": "AnnotatedImage"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Annotations are stored as a simple json file",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "json",
-                            "maxLineLength": 55,
-                            "tokens": [
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                {
-                                    "type": "property",
-                                    "content": "\"shapes\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "["
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                {
-                                    "type": "property",
-                                    "content": "\"type\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\"arrow\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"id\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                {
-                                    "type": "string",
-                                    "content": "\"a1\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n  ",
-                                {
-                                    "type": "property",
-                                    "content": "\"beginX\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "200"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"beginY\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "100"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"endX\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "48"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"endY\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "42"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n  ",
-                                {
-                                    "type": "property",
-                                    "content": "\"color\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\"red\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"text\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\"debug\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n\n  ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                {
-                                    "type": "property",
-                                    "content": "\"type\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\"rectangle\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"id\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                {
-                                    "type": "string",
-                                    "content": "\"r1\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n    ",
-                                {
-                                    "type": "property",
-                                    "content": "\"x\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "200"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"y\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "50"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"width\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "100"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"height\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "40"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n    ",
-                                {
-                                    "type": "property",
-                                    "content": "\"color\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\"green\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"text\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\"debug\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n\n  ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                {
-                                    "type": "property",
-                                    "content": "\"type\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\"circle\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"id\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\"c1\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n    ",
-                                {
-                                    "type": "property",
-                                    "content": "\"x\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "350"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"y\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "100"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"r\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "number",
-                                    "content": "30"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n    ",
-                                {
-                                    "type": "property",
-                                    "content": "\"color\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\"blue\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "property",
-                                    "content": "\"text\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": ":"
-                                },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\"text\""
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "]"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                }
-                            ],
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "And then easily integrated with documentation by using an ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "image",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " plugin",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "markdown",
-                            "maxLineLength": 71,
-                            "tokens": [
-                                {
-                                    "type": "title",
-                                    "content": [
-                                        {
-                                            "type": "punctuation",
-                                            "content": "#"
-                                        },
-                                        " Annotated Images"
-                                    ]
-                                },
-                                "\n\n:include-image: word-toolbar.jpg {annotationsPath: \u0027annotations1.json\u0027}\n\nthere are different types of annotations:\n",
-                                {
-                                    "type": "list",
-                                    "content": "*"
-                                },
-                                " circles\n",
-                                {
-                                    "type": "list",
-                                    "content": "*"
-                                },
-                                " rectangles\n",
-                                {
-                                    "type": "list",
-                                    "content": "*"
-                                },
-                                " arrows\n",
-                                {
-                                    "type": "list",
-                                    "content": "*"
-                                },
-                                " etc"
-                            ],
-                            "startLine": "# Annotated Images",
-                            "endLine": "* etc",
-                            "type": "Snippet"
                         }
                     ]
                 },
                 {
-                    "title": "Editing Annotations",
-                    "id": "editing-annotations",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "imageSrc": "editor-overview.png",
-                            "shapes": [
-                                {
-                                    "type": "rectangle",
-                                    "id": "r2",
-                                    "x": 140.0,
-                                    "y": 135.0,
-                                    "width": 220.0,
-                                    "height": 240.0,
-                                    "text": "",
-                                    "color": "red"
-                                },
-                                {
-                                    "type": "rectangle",
-                                    "id": "r1",
-                                    "x": 593.0,
-                                    "y": 5.0,
-                                    "width": 255.0,
-                                    "height": 180.0,
-                                    "text": "",
-                                    "color": "red"
-                                }
-                            ],
-                            "width": 851.0,
-                            "height": 383.0,
-                            "type": "AnnotatedImage"
-                        }
-                    ]
-                },
-                {
-                    "title": "Presentation Mode",
-                    "id": "presentation-mode",
+                    "title": "Markdown",
+                    "id": "markdown",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Annotated images automatically participate in presentation mode. Annotations appear one by one and scale to match the",
+                                    "text": "Fastest way to learn markdown is to go to ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "url": "http://commonmark.org/help/",
+                                    "type": "Link",
+                                    "content": [
+                                        {
+                                            "text": "CommonMark",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "text": " website",
                                     "type": "SimpleText"
                                 },
                                 {
                                     "type": "SoftLineBreak"
                                 },
                                 {
-                                    "text": "zoom level of a presentation.",
+                                    "text": "and go through a 60 seconds cheatsheet or 10 minutes tutorial.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Installation",
+                    "id": "installation",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "url": "https://optin",
+                                    "type": "Link",
+                                    "content": [
+                                        {
+                                            "text": "Optin",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "text": " to add the command line to your hosts.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "In your terminal execute ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "mdoc --help",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " to make sure tool is available.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Scaffolding",
+                    "id": "scaffolding",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Execute ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "mdoc --new",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " to create a minimum set of files for your documentation.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "lang": "",
+                            "maxLineLength": 29,
+                            "tokens": [
+                                {
+                                    "type": "text",
+                                    "content": "mdoc\n   |--chapter-one\n             |--page-one.md\n             |--page-two.md\n   |--chapter-two\n             |--page-three.md\n             |--page-four.md\n   |--toc\n   |--lookup-paths\n   |--meta.json\n"
+                                }
+                            ],
+                            "lineNumber": "",
+                            "type": "Snippet"
+                        }
+                    ]
+                },
+                {
+                    "title": "Preview",
+                    "id": "preview",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Navigate to the newly created directory. Execute ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "mdoc --preview",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": ".",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Open prompted url inside your browser.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Blue ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "Emphasis",
+                                    "content": [
+                                        {
+                                            "text": "eye",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "text": " icon in the top right corner indicates that preview is on.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Open any text editor, modify and save ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "page-one.md",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " file.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Changes will be reflected in the browser.",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -839,26 +320,30 @@ const TestData = {
                 }
             ],
             "tocItem": {
-                "sectionTitle": "Features",
-                "pageTitle": "Image Annotations",
-                "fileName": "image-annotations",
-                "dirName": "features",
+                "sectionTitle": "Introduction",
+                "pageTitle": "Getting Started",
+                "fileName": "getting-started",
+                "dirName": "introduction",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Complex Domain",
-                        "id": "complex-domain"
+                        "title": "Command Line Tool",
+                        "id": "command-line-tool"
                     },
                     {
-                        "title": "Annotated Images",
-                        "id": "annotated-images"
+                        "title": "Markdown",
+                        "id": "markdown"
                     },
                     {
-                        "title": "Editing Annotations",
-                        "id": "editing-annotations"
+                        "title": "Installation",
+                        "id": "installation"
                     },
                     {
-                        "title": "Presentation Mode",
-                        "id": "presentation-mode"
+                        "title": "Scaffolding",
+                        "id": "scaffolding"
+                    },
+                    {
+                        "title": "Preview",
+                        "id": "preview"
                     }
                 ]
             }

@@ -22,7 +22,6 @@ class DocumentationLayout extends Component {
             renderedPage,
             docMeta,
             selectedTocItem,
-            documentationNavigation,
             toc,
             onHeaderClick,
             onTocItemClick,
@@ -42,7 +41,6 @@ class DocumentationLayout extends Component {
                               docMeta={docMeta}
                               onToggle={this.onTocToggle}
                               selectedItem={selectedTocItem}
-                              documentationNavigation={documentationNavigation}
                               onHeaderClick={onHeaderClick}
                               onTocItemClick={onTocItemClick}
                               onNextPage={onNextPage}

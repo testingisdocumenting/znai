@@ -1,6 +1,4 @@
-import DocumentationNavigation from './DocumentationNavigation'
-
-const documentationNavigation = new DocumentationNavigation("mydoc")
+import {documentationNavigation} from './DocumentationNavigation'
 
 describe("DocumentationNavigation", () => {
     it("extracts page location from url", () => {

@@ -1,8 +1,8 @@
 import Promise from "promise"
 
 class DocumentationNavigation {
-    constructor(documentationId) {
-        this.documentationId = documentationId
+    constructor() {
+        this.documentationId = "NA"
         this.listeners = []
 
         // server side rendering guard
@@ -60,4 +60,6 @@ class DocumentationNavigation {
     }
 }
 
-export default DocumentationNavigation
+const documentationNavigation = new DocumentationNavigation()
+
+export {documentationNavigation}

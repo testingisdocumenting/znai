@@ -1,4 +1,5 @@
 import React from 'react'
+import {documentationNavigation} from '../structure/DocumentationNavigation'
 
 const PageSections = ({pageSectionIdTitles, selected}) => {
     return (<div className="page-sections">
@@ -13,7 +14,7 @@ const PageSections = ({pageSectionIdTitles, selected}) => {
     </div>)
 }
 
-const Item = ({item, selected, documentationNavigation, isSelected, onClickHandler}) => {
+const Item = ({item, selected, isSelected, onClickHandler}) => {
     const className = "toc-item " + (isSelected ? "selected" : "")
     const href = documentationNavigation.buildUrl(item)
     return (
@@ -25,21 +26,20 @@ const Item = ({item, selected, documentationNavigation, isSelected, onClickHandl
     );
 };
 
-const Section = ({section, documentationNavigation, selected, onClickHandler}) => {
+const Section = ({section, selected, onClickHandler}) => {
     const className = "toc-section " + (section.dirName === selected.dirName ? "selected" : "")
 
     return (<div className={className}>
         <div className="title">{section.sectionTitle}</div>
         {section.items.map((item) => <Item key={item.fileName}
                                            item={item}
-                                           documentationNavigation={documentationNavigation}
                                            selected={selected}
                                            isSelected={section.dirName === selected.dirName && item.fileName === selected.fileName}
                                            onClickHandler={onClickHandler} />)}
     </div>);
 };
 
-const TocMenu = ({toc, documentationNavigation, selected, onClickHandler}) => {
+const TocMenu = ({toc, selected, onClickHandler}) => {
     selected = selected || {dirName: "", fileName: ""}
 
     // we won't render items that don't belong to a section. it includes things like top index.html or other misc filesD
@@ -48,7 +48,6 @@ const TocMenu = ({toc, documentationNavigation, selected, onClickHandler}) => {
             {toc.filter(sectionEntry => sectionEntry.dirName.length > 0).map((sectionEntry) =>
                 <Section key={sectionEntry.sectionTitle}
                          selected={selected}
-                         documentationNavigation={documentationNavigation}
                          onClickHandler={onClickHandler}
                          section={sectionEntry} />)}
         </div>

@@ -4,7 +4,7 @@ import Promise from "promise"
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import {elementsLibrary, presentationElementHandlers} from './DefaultElementsLibrary'
-import DocumentationNavigation from './structure/DocumentationNavigation'
+import {documentationNavigation} from './structure/DocumentationNavigation'
 import {tableOfContents} from './structure/TableOfContents'
 import {getAllPagesPromise} from "./allPages"
 import {fullResourcePath} from '../utils/resourcePath'
@@ -30,9 +30,7 @@ class Documentation extends Component {
         setDocMeta(docMeta)
         this.searchPromise = getSearchPromise(docMeta)
 
-        this.documentationNavigation = new DocumentationNavigation(docMeta.id)
-
-        const currentPageLocation = this.documentationNavigation.currentPageLocation()
+        const currentPageLocation = documentationNavigation.currentPageLocation()
 
         const selectedTocItem = {...currentPageLocation, pageSectionId: page.tocItem.pageSectionIdTitles[0].id}
         this.state = {
@@ -61,7 +59,7 @@ class Documentation extends Component {
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
 
-        this.documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
+        documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
     }
 
     render() {
@@ -107,7 +105,6 @@ class Documentation extends Component {
                                      selectedTocItem={selectedTocItem}
                                      prevPageToc={this.prevPageToc}
                                      nextPageToc={this.nextPageToc}
-                                     documentationNavigation={this.documentationNavigation}
                                      searchPopup={searchPopup}
                                      renderedPage={renderedPage}
                                      onHeaderClick={this.onHeaderClick}
@@ -169,7 +166,7 @@ class Documentation extends Component {
         const {page} = this.state
 
         this.extractPageSectionNodes()
-        this.scrollToPageSection(page.tocItem, this.documentationNavigation.currentPageLocation().pageSectionId)
+        this.scrollToPageSection(page.tocItem, documentationNavigation.currentPageLocation().pageSectionId)
         this.updateCurrentPageSection()
         const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page)
 
@@ -212,20 +209,20 @@ class Documentation extends Component {
     onNextPage() {
         const next = this.nextPageToc
         if (next) {
-            this.documentationNavigation.navigateToPage(next)
+            documentationNavigation.navigateToPage(next)
         }
     }
 
     onPrevPage() {
         const prev = this.prevPageToc
         if (prev) {
-            this.documentationNavigation.navigateToPage(prev)
+            documentationNavigation.navigateToPage(prev)
         }
     }
 
     onHeaderClick() {
         const url = fullResourcePath(this.props.docMeta.id, "")
-        this.documentationNavigation.navigateToUrl(url)
+        documentationNavigation.navigateToUrl(url)
     }
 
     onPresentationOpen() {
@@ -237,19 +234,19 @@ class Documentation extends Component {
     }
 
     onTocItemClick(dirName, fileName) {
-        this.documentationNavigation.navigateToPage({dirName, fileName})
+        documentationNavigation.navigateToPage({dirName, fileName})
     }
 
     onSearchSelection(id) {
         this.onSearchClose()
-        this.documentationNavigation.navigateToPage({dirName: id.dn, fileName: id.fn, pageSectionId: id.psid})
+        documentationNavigation.navigateToPage({dirName: id.dn, fileName: id.fn, pageSectionId: id.psid})
     }
 
     navigateToPageIfRequired(tocItem) {
         const currentToc = this.state.page.tocItem
 
         if (currentToc.dirName !== tocItem.dirName || currentToc.fileName !== tocItem.fileName) {
-            return this.documentationNavigation.navigateToPage(tocItem)
+            return documentationNavigation.navigateToPage(tocItem)
         }
 
         return Promise.resolve(true)
@@ -259,7 +256,7 @@ class Documentation extends Component {
         tableOfContents.toc = toc
         this.setState({toc})
         if (! tableOfContents.hasTocItem(this.state.page.tocItem)) {
-            this.documentationNavigation.navigateToPage(tableOfContents.first)
+            documentationNavigation.navigateToPage(tableOfContents.first)
         }
     }
 
@@ -340,7 +337,7 @@ class Documentation extends Component {
 
     onUrlChange(url) {
         return this.getAllPagesPromise().then((pages) => {
-            const currentPageLocation = this.documentationNavigation.extractPageLocation(url)
+            const currentPageLocation = documentationNavigation.extractPageLocation(url)
 
             const matchingPages = pages.filter((p) => p.tocItem.dirName === currentPageLocation.dirName &&
                 p.tocItem.fileName === currentPageLocation.fileName)
