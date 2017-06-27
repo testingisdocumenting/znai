@@ -28,6 +28,14 @@ class MarkdownParserTest {
     }
 
     @Test
+    void "link to a supported location"() {
+        parse("[label](file:/test)")
+        parse("[label](http:/test)")
+        parse("[label](https:/test)")
+        parse("[label](mailto:/test)")
+    }
+
+    @Test
     void "link to a unsupported location"() {
         code {
             parse("[label](../test)")

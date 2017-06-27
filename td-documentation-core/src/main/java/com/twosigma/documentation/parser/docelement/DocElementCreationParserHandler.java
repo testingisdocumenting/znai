@@ -317,7 +317,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     private String validateAndCovertUrl(String url) {
-        if (url.startsWith("http")) {
+        if (url.startsWith("http") || url.startsWith("file") || url.startsWith("mailto")) {
             return url;
         }
 
