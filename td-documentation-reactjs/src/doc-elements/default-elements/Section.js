@@ -2,12 +2,18 @@ import React from 'react'
 import RenderingMeta from '../meta/RenderingMeta'
 
 const Section = ({id, title, ...props}) => {
-    return (<div className="section" key={title}>
+    const sectionTitle = title ? (
         <div className="content-block">
             <h1 className="section-title" id={id}>{title}</h1>
         </div>
-        <props.elementsLibrary.DocElement {...props} renderingMeta={new RenderingMeta()}/>
-    </div>)
+    ) : null
+
+    return (
+        <div className="section" key={title}>
+            {sectionTitle}
+            <props.elementsLibrary.DocElement {...props} renderingMeta={new RenderingMeta()}/>
+        </div>
+    )
 }
 
 const PresentationTitle = ({title}) => {

@@ -19,6 +19,8 @@ import PresentationRegistry from './presentation/PresentationRegistry'
 import {setDocMeta} from './docMeta'
 import DocumentationLayout from './DocumentationLayout'
 
+import pageContentProcessor from './pageContentProcessor.js'
+
 import './DocumentationLayout.css'
 import './search/Search.css'
 
@@ -38,7 +40,7 @@ class Documentation extends Component {
         this.state = {
             tocCollapsed: false,
             tocSelected: false,
-            page: page,
+            page: Documentation.processPage(page),
             toc: tableOfContents.toc,
             selectedTocItem: selectedTocItem}
 
@@ -155,8 +157,15 @@ class Documentation extends Component {
     }
 
     changePage(newStateWithNewPage) {
-        this.setState({...newStateWithNewPage, pageGenError: null})
+        this.setState({...newStateWithNewPage,
+            page: Documentation.processPage(newStateWithNewPage.page),
+            pageGenError: null})
+
         this.onPageLoad()
+    }
+
+    static processPage(page) {
+        return {...page, content: pageContentProcessor.process(page.content)}
     }
 
     scrollToTop() {
@@ -397,7 +406,7 @@ class Documentation extends Component {
 
         const current = withVisibleTitle.length ? withVisibleTitle[0] : closestToTopZero()
 
-        const enrichedSelectedTocItem = {...selectedTocItem, pageSectionId: current ? current.idTitle.id : null}
+        const enrichedSelectedTocItem = {...selectedTocItem, pageSectionId: (current && current.idTitle) ? current.idTitle.id : null}
         this.setState({selectedTocItem: enrichedSelectedTocItem})
     }
 }

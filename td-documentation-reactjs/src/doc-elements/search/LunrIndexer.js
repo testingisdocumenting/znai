@@ -1,5 +1,6 @@
 import lunr from 'lunr'
 import searchContent from './searchContent'
+import pageContentProcessor from '../pageContentProcessor.js'
 
 
 /**
@@ -90,7 +91,7 @@ class LunrIndexer {
     }
 
     addPage(page) {
-        page.content.filter((de) => de.type === 'Section')
+        pageContentProcessor.process(page.content).filter((de) => de.type === 'Section')
             .forEach((s) => this.addSection(page.tocItem, s))
     }
 
