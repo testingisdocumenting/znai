@@ -27,10 +27,9 @@ class Svg extends Component {
     childrenReactElementsFromDomNode(domNode) {
         let children = []
 
-        const {idsToReveal, slideIdx} = this.props
+        const {idsToReveal, isPresentation, slideIdx} = this.props
 
-        const isPresentationMode = typeof slideIdx !== 'undefined'
-        const idsForSlide = isPresentationMode && idsToReveal ? idsToReveal.slice(0, slideIdx + 1): idsToReveal
+        const idsForSlide = isPresentation && idsToReveal ? idsToReveal.slice(0, slideIdx + 1): idsToReveal
 
         if (!domNode) {
             return children

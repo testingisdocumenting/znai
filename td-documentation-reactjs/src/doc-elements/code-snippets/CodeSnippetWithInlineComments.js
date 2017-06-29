@@ -49,7 +49,7 @@ const Explanations = ({isPresentation, slideIdx, comments}) => {
     return null
 }
 
-const CodeSnippetWithInlineComments = ({tokens, slideIdx}) => {
+const CodeSnippetWithInlineComments = ({tokens, isPresentation, slideIdx}) => {
     commentIdx = 0
     const comments = tokens.filter(t => isInlinedComment(t))
     const lines = splitTokensIntoLines(tokens)
@@ -60,8 +60,6 @@ const CodeSnippetWithInlineComments = ({tokens, slideIdx}) => {
             idxOfLinesWithComments.push(idx)
         }
     })
-
-    const isPresentation = typeof slideIdx !== 'undefined'
 
     // slideIdx === 0 means no highlights, 1 - first comment, etc
     const noHighlights = slideIdx === 0

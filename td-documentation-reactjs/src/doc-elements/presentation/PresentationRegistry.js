@@ -101,7 +101,8 @@ class PresentationRegistry {
 
         return <slide.component {...slide.props}
                                 elementsLibrary={this.elementsLibrary}
-                                slideIdx={slide.slideIdx}/>
+                                slideIdx={slide.slideIdx}
+                                isPresentation={true}/>
     }
 
     slideByIdx(pageLocalSlideIdx) {

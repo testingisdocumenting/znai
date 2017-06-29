@@ -2,20 +2,32 @@ import React from 'react'
 
 import './Columns.css'
 
-const Columns = ({columns, config, ...props}) => {
+const Columns = ({columns, config, isPresentation, slideIdx, ...props}) => {
     const leftStyle = buildStyle(config.left)
     const rightStyle = buildStyle(config.right)
 
     const leftClassName = "column" + (config.border ? " border" : "")
 
-    return <div className="columns content-block">
+    const showRight = ! isPresentation || slideIdx >= 1
+
+    const left = (
         <div className={leftClassName} style={leftStyle}>
             <props.elementsLibrary.DocElement {...props} content={columns[0].content}/>
         </div>
+    )
+
+    const right = showRight ? (
         <div className="column" style={rightStyle}>
             <props.elementsLibrary.DocElement {...props} content={columns[1].content}/>
         </div>
-    </div>
+    ) : null
+
+    return (
+        <div className="columns content-block">
+            {left}
+            {right}
+        </div>
+    )
 }
 
 function buildStyle(columnConfig) {
