@@ -6,6 +6,7 @@ import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/Bloc
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
 import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
 import Link from './default-elements/Link'
+import SubHeading from './default-elements/SubHeading'
 import ListItem from './bullets/ListItem'
 import Paragraph from './default-elements/Paragraph'
 import GraphVizSvg from './graphviz/GraphVizSvg'
@@ -32,10 +33,8 @@ library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.el
 library.Link = Link
 library.Paragraph = Paragraph
 
-library.SubHeading = ({level, ...props}) => {
-    const Element = `h${level}`
-    return <Element className="content-block"><props.elementsLibrary.DocElement {...props}/></Element>
-}
+library.SubHeading = SubHeading
+presentationElementHandlers.SubHeading = {component: SubHeading, numberOfSlides: () => 1}
 
 library.BlockQuote = BlockQuote
 presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler
