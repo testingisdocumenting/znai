@@ -1,6 +1,7 @@
 package com.twosigma.testing
 
 import com.twosigma.testing.http.testserver.TestServer
+import com.twosigma.testing.http.testserver.TestServerJsonResponse
 import com.twosigma.testing.webtau.TestServerHtmlResponse
 import com.twosigma.utils.ResourceUtils
 
@@ -14,6 +15,7 @@ class WebTauFeaturesTestServer {
         testServer = new TestServer()
         testServer.registerGet("/search", new TestServerHtmlResponse(ResourceUtils.textContent("search.html")))
         testServer.registerGet("/finders-and-filters", new TestServerHtmlResponse(ResourceUtils.textContent("finders-and-filters.html")))
+        testServer.registerGet("/weather", new TestServerJsonResponse("{'temperature': 20}"))
     }
 
     void start(int port) {

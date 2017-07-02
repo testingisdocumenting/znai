@@ -35,7 +35,7 @@ public class Http {
     }
 
     public <E> E get(final String url, HttpResponseValidatorWithReturn validator) {
-        return executeAndValidateHttpCall("GET", url, fullUrl -> get(fullUrl), validator);
+        return executeAndValidateHttpCall("GET", url, this::get, validator);
     }
 
     public void get(final String url, HttpResponseValidator validator) {

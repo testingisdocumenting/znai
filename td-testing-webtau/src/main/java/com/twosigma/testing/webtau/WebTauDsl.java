@@ -2,6 +2,7 @@ package com.twosigma.testing.webtau;
 
 import com.twosigma.testing.expectation.ValueMatcher;
 import com.twosigma.testing.expectation.ranges.GreaterThanMatcher;
+import com.twosigma.testing.http.Http;
 import com.twosigma.testing.http.HttpUrl;
 import com.twosigma.testing.reporter.TestStep;
 import com.twosigma.testing.reporter.TokenizedMessage;
@@ -28,6 +29,7 @@ public class WebTauDsl {
     private static WebTauConfig cfg = WebTauConfig.INSTANCE;
 
     private static final WebDriver driver = new CurrentWebDriver();
+    public static final Http http = Http.http;
     public static final DocumentationDsl doc = new DocumentationDsl(driver);
 
     public static <E> void executeStep(E context,
