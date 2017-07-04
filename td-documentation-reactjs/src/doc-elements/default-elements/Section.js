@@ -1,5 +1,4 @@
 import React from 'react'
-import RenderingMeta from '../meta/RenderingMeta'
 
 const Section = ({id, title, ...props}) => {
     const sectionTitle = title ? (
@@ -11,7 +10,7 @@ const Section = ({id, title, ...props}) => {
     return (
         <div className="section" key={title}>
             {sectionTitle}
-            <props.elementsLibrary.DocElement {...props} renderingMeta={new RenderingMeta()}/>
+            <props.elementsLibrary.DocElement {...props}/>
         </div>
     )
 }

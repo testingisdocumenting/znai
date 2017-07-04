@@ -5,23 +5,16 @@ import * as React from 'react'
  *
  * @param content content to render
  * @param elementsLibrary library of elements to use to render
- * @param renderingMeta additional information about how to render elements
  */
-const DocElement = ({content, elementsLibrary, renderingMeta}) => {
+const DocElement = ({content, elementsLibrary}) => {
     return (<span>{!content ? null : content.map((item, idx) => {
-        if (item.type === 'Meta' && renderingMeta) {
-            renderingMeta = renderingMeta.register(item)
-            return null
-        }
-
         const ElementToUse = elementsLibrary[item.type]
         if (!ElementToUse) {
             console.warn("can't find component to display", item)
             return null
         } else {
             return <ElementToUse key={idx} {...item}
-                                 elementsLibrary={elementsLibrary}
-                                 renderingMeta={renderingMeta}/>
+                                 elementsLibrary={elementsLibrary}/>
         }
     })}</span>)
 }

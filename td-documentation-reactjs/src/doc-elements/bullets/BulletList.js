@@ -12,7 +12,7 @@ const presentationTypes = {RevealBoxes, LeftRightTimeLine, Venn}
 const BulletList = (props) => {
     const type = listType(props, 'bulletListType')
 
-    if (type === null) {
+    if (type === null || type.length === 0 ) {
         return <DefaultBulletList {...props}/>
     }
 
@@ -55,7 +55,7 @@ function presentationListType(props) {
 }
 
 function listType(props, key) {
-    return (typeof props.renderingMeta === 'undefined') ? null : props.renderingMeta.paramValue(key)
+    return (typeof props.meta === 'undefined') ? null : props.meta[key]
 }
 
 const presentationBulletListHandler = {component: PresentationBulletList,
