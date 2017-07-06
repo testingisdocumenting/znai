@@ -1,6 +1,6 @@
 # Markdown
 
-Markdown uses ASCII to represent styles and page structure.
+Markdown1 uses ASCII to represent styles and page structure.
 
 ```markdown-and-result
 # Header

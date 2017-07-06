@@ -16,6 +16,7 @@ features
     tabs
     tables
     SVG
+    charts
     json
     columns
     templates

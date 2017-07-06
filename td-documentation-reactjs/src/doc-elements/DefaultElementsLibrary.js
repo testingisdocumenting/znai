@@ -19,6 +19,7 @@ import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
 import {Svg, presentationSvgHandler} from './svg/Svg'
 import LatexMath from './math/LatexMath'
+import VerticalBarChart from './charts/VerticalBarChart'
 import Image from './images/Image'
 import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
@@ -98,5 +99,7 @@ presentationElementHandlers.Page = presentationPageHandler
 
 library.MarkdownAndResult = MarkdownAndResult
 presentationElementHandlers.MarkdownAndResult = presentationMarkdownAndResultHandler
+
+library.Chart = VerticalBarChart
 
 export {library as elementsLibrary, presentationElementHandlers}

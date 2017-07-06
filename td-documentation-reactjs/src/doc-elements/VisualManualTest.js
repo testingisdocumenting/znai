@@ -5,6 +5,7 @@ import React from 'react'
 // import Demo from './svg/SvgDemo'
 // import Demo from './presentation/PresentationDemo'
 import Demo from './DocumentationDemo'
+// import Demo from './charts/VerticalBarChartDemo'
 // import Demo from './bullets/IconsAsBulletsDemo'
 
 // import Demo from './images/EmbeddedAnnotatedImageDemo'

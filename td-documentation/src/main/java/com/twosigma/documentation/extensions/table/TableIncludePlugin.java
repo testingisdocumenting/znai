@@ -21,7 +21,6 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class TableIncludePlugin implements IncludePlugin {
-    private String fileName;
     private String textContent;
     private MarkupParser parser;
     private Path fullPath;

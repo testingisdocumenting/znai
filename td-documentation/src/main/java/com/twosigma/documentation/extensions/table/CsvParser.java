@@ -8,12 +8,18 @@ import org.apache.commons.csv.CSVRecord;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * @author mykola
  */
-class CsvParser {
+public class CsvParser {
+//    private final static Pattern NUMBER =
     private CsvParser() {
     }
 
@@ -33,7 +39,7 @@ class CsvParser {
 
             for (CSVRecord record : csvRecords) {
                 Row row = new Row();
-                record.forEach(row::add);
+                record.forEach(v -> row.add(convert(v)));
 
                 if (record.size() != headerMap.size()) {
                     throw new RuntimeException("record mismatches header. header: " + headerMap.keySet() +
@@ -47,5 +53,11 @@ class CsvParser {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static Object convert(Object v) {
+        String s = v.toString();
+        Scanner scanner = new Scanner(s);
+        return scanner.hasNextBigDecimal() ? new BigDecimal(s) : s;
     }
 }

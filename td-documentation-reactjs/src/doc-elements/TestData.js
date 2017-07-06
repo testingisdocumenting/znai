@@ -65,6 +65,94 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
+                    "title": "Command Line Tool",
+                    "id": "command-line-tool",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "data": {
+                                "columns": [
+                                    {
+                                        "title": "A"
+                                    },
+                                    {
+                                        "title": "10"
+                                    }
+                                ],
+                                "data": [
+                                    [
+                                        "B",
+                                        "20"
+                                    ],
+                                    [
+                                        "C",
+                                        "30"
+                                    ]
+                                ]
+                            },
+                            "type": "Chart"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Mdoc comes with a command line tool that:",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "bulletMarker": "*",
+                            "tight": true,
+                            "type": "BulletList",
+                            "content": [
+                                {
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "generates documentation website",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "runs auto-preview local server",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "runs documentation server",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "title": "Markdown",
                     "id": "markdown",
                     "type": "Section",
@@ -73,239 +161,180 @@ const TestData = {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Markdown uses ASCII to represent styles and page structure.",
+                                    "text": "Fastest way to learn markdown is to go to ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "url": "http://commonmark.org/help/",
+                                    "type": "Link",
+                                    "content": [
+                                        {
+                                            "text": "CommonMark",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "text": " website",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "and go through a 60 seconds cheatsheet or 10 minutes tutorial.",
                                     "type": "SimpleText"
                                 }
                             ]
-                        },
-                        {
-                            "markdown": {
-                                "lang": "markdown",
-                                "maxLineLength": 50,
-                                "type": "Snippet",
-                                "tokens": [
-                                    {
-                                        "type": "title",
-                                        "content": [
-                                            {
-                                                "type": "punctuation",
-                                                "content": "#"
-                                            },
-                                            " Header"
-                                        ]
-                                    },
-                                    "\n\nNormal paragraph text. Some ",
-                                    {
-                                        "type": "italic",
-                                        "content": [
-                                            {
-                                                "type": "punctuation",
-                                                "content": "*"
-                                            },
-                                            "i"
-                                        ]
-                                    },
-                                    "talic",
-                                    {
-                                        "type": "italic",
-                                        "content": [
-                                            {
-                                                "type": "punctuation",
-                                                "content": "*"
-                                            },
-                                            " "
-                                        ]
-                                    },
-                                    "and ",
-                                    {
-                                        "type": "bold",
-                                        "content": [
-                                            {
-                                                "type": "punctuation",
-                                                "content": "**"
-                                            },
-                                            "b"
-                                        ]
-                                    },
-                                    "old",
-                                    {
-                                        "type": "bold",
-                                        "content": [
-                                            {
-                                                "type": "punctuation",
-                                                "content": "**"
-                                            },
-                                            "."
-                                        ]
-                                    },
-                                    "\nFollowed by bullet points:\n",
-                                    {
-                                        "type": "list",
-                                        "content": "*"
-                                    },
-                                    " apple\n",
-                                    {
-                                        "type": "list",
-                                        "content": "*"
-                                    },
-                                    " banana\n",
-                                    {
-                                        "type": "list",
-                                        "content": "*"
-                                    },
-                                    " water\n"
-                                ]
-                            },
-                            "result": [
-                                {
-                                    "title": "Header",
-                                    "id": "header",
-                                    "type": "Section",
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "Normal paragraph text. Some ",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "Emphasis",
-                                                    "content": [
-                                                        {
-                                                            "text": "italic",
-                                                            "type": "SimpleText"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "text": " and ",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "StrongEmphasis",
-                                                    "content": [
-                                                        {
-                                                            "text": "bold",
-                                                            "type": "SimpleText"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "text": ".",
-                                                    "type": "SimpleText"
-                                                },
-                                                {
-                                                    "type": "SoftLineBreak"
-                                                },
-                                                {
-                                                    "text": "Followed by bullet points:",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "bulletMarker": "*",
-                                            "tight": true,
-                                            "type": "BulletList",
-                                            "content": [
-                                                {
-                                                    "type": "ListItem",
-                                                    "content": [
-                                                        {
-                                                            "type": "Paragraph",
-                                                            "content": [
-                                                                {
-                                                                    "text": "apple",
-                                                                    "type": "SimpleText"
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "ListItem",
-                                                    "content": [
-                                                        {
-                                                            "type": "Paragraph",
-                                                            "content": [
-                                                                {
-                                                                    "text": "banana",
-                                                                    "type": "SimpleText"
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "type": "ListItem",
-                                                    "content": [
-                                                        {
-                                                            "type": "Paragraph",
-                                                            "content": [
-                                                                {
-                                                                    "text": "water",
-                                                                    "type": "SimpleText"
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ],
-                            "type": "MarkdownAndResult"
                         }
                     ]
                 },
                 {
-                    "title": "External References",
-                    "id": "external-references",
+                    "title": "Installation",
+                    "id": "installation",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Example of how to keep your documentation up-to-date by referencing existing resource.",
+                                    "url": "https://optin",
+                                    "type": "Link",
+                                    "content": [
+                                        {
+                                            "text": "Optin",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "text": " to add the command line to your hosts.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "In your terminal execute ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "mdoc --help",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " to make sure tool is available.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Scaffolding",
+                    "id": "scaffolding",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Execute ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "mdoc --new",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " to create a minimum set of files for your documentation.",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "lang": "markdown",
-                            "maxLineLength": 35,
+                            "lang": "",
+                            "maxLineLength": 29,
                             "tokens": [
                                 {
-                                    "type": "title",
-                                    "content": [
-                                        {
-                                            "type": "punctuation",
-                                            "content": "#"
-                                        },
-                                        " Server Configuration"
-                                    ]
-                                },
-                                "\n\n:include-file: config/server.config\n"
+                                    "type": "text",
+                                    "content": "mdoc\n   |--chapter-one\n             |--page-one.md\n             |--page-two.md\n   |--chapter-two\n             |--page-three.md\n             |--page-four.md\n   |--toc\n   |--lookup-paths\n   |--meta.json\n"
+                                }
                             ],
                             "lineNumber": "",
                             "type": "Snippet"
+                        }
+                    ]
+                },
+                {
+                    "title": "Preview",
+                    "id": "preview",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Navigate to the newly created directory. Execute ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "mdoc --preview",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": ".",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Open prompted url inside your browser.",
+                                    "type": "SimpleText"
+                                }
+                            ]
                         },
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Note that this is ",
+                                    "text": "Blue ",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "code": "mdoc",
+                                    "type": "Emphasis",
+                                    "content": [
+                                        {
+                                            "text": "eye",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "text": " icon in the top right corner indicates that preview is on.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Open any text editor, modify and save ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "page-one.md",
                                     "type": "InlinedCode"
                                 },
                                 {
-                                    "text": " extension and is not part of a standard markdown syntax.",
+                                    "text": " file.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Changes will be reflected in the browser.",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -315,17 +344,29 @@ const TestData = {
             ],
             "tocItem": {
                 "sectionTitle": "Introduction",
-                "pageTitle": "Example",
-                "fileName": "example",
+                "pageTitle": "Getting Started",
+                "fileName": "getting-started",
                 "dirName": "introduction",
                 "pageSectionIdTitles": [
+                    {
+                        "title": "Command Line Tool",
+                        "id": "command-line-tool"
+                    },
                     {
                         "title": "Markdown",
                         "id": "markdown"
                     },
                     {
-                        "title": "External References",
-                        "id": "external-references"
+                        "title": "Installation",
+                        "id": "installation"
+                    },
+                    {
+                        "title": "Scaffolding",
+                        "id": "scaffolding"
+                    },
+                    {
+                        "title": "Preview",
+                        "id": "preview"
                     }
                 ]
             }

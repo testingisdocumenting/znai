@@ -2,6 +2,8 @@ package com.twosigma.documentation.extensions.table
 
 import org.junit.Test
 
+import static com.twosigma.testing.Ddjt.equal
+
 /**
  * @author mykola
  */
@@ -14,7 +16,7 @@ class CsvParserTest {
 #91AGB1, 10, lunch
 """)
 
-        assert csvData.toMap() == ["columns": [
+        csvData.toMap().should equal(["columns": [
                     [
                         "title": "Account"
                     ],
@@ -28,21 +30,21 @@ class CsvParserTest {
             "data": [
                     [
                             "#12BGD3",
-                            "100",
+                            100,
                             "custom, table"
                     ],
                     [
                             "#12BGD3",
-                            "150",
+                            150,
                             "chair"
                     ],
                     [
                             "#91AGB1",
-                            "10",
+                            10,
                             "lunch"
                     ]
             ]
-        ]
+        ])
     }
 
     @Test(expected = RuntimeException)
