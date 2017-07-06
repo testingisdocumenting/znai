@@ -6,9 +6,8 @@ const Columns = ({columns, config, isPresentation, slideIdx, ...props}) => {
     const leftStyle = buildStyle(config.left)
     const rightStyle = buildStyle(config.right)
 
-    const leftClassName = "column" + (config.border ? " border" : "")
-
     const showRight = ! isPresentation || slideIdx >= 1
+    const leftClassName = "column" + ((config.border && showRight) ? " border" : "")
 
     const left = (
         <div className={leftClassName} style={leftStyle}>

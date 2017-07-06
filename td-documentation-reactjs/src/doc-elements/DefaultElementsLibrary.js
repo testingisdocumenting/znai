@@ -24,6 +24,8 @@ import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
 import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
 
+import {MarkdownAndResult, presentationMarkdownAndResultHandler} from './markdown/MarkdownAndResult'
+
 const library = {}
 const presentationElementHandlers = {}
 
@@ -93,5 +95,8 @@ presentationElementHandlers.Svg = presentationSvgHandler
 
 library.Page = Page
 presentationElementHandlers.Page = presentationPageHandler
+
+library.MarkdownAndResult = MarkdownAndResult
+presentationElementHandlers.MarkdownAndResult = presentationMarkdownAndResultHandler
 
 export {library as elementsLibrary, presentationElementHandlers}

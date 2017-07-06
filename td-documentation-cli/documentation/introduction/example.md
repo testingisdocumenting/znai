@@ -2,7 +2,7 @@
 
 Markdown uses ASCII to represent styles and page structure.
 
-```markdown
+```markdown-and-result
 # Header
 
 Normal paragraph text. Some *italic* and **bold**.

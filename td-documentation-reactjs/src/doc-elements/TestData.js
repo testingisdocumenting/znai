@@ -65,196 +65,269 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "type": "Paragraph",
+                    "title": "Markdown",
+                    "id": "markdown",
+                    "type": "Section",
                     "content": [
                         {
-                            "code": "mdoc",
-                            "type": "InlinedCode"
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Markdown uses ASCII to represent styles and page structure.",
+                                    "type": "SimpleText"
+                                }
+                            ]
                         },
                         {
-                            "text": " is a system to generate user facing documentation from markup files (markdown only at the moment).",
-                            "type": "SimpleText"
-                        },
-                        {
-                            "type": "SoftLineBreak"
-                        },
-                        {
-                            "text": "Documentation files seat next to your product codebase and are part of your product\u0027s SDLC.",
-                            "type": "SimpleText"
+                            "markdown": {
+                                "lang": "markdown",
+                                "maxLineLength": 50,
+                                "type": "Snippet",
+                                "tokens": [
+                                    {
+                                        "type": "title",
+                                        "content": [
+                                            {
+                                                "type": "punctuation",
+                                                "content": "#"
+                                            },
+                                            " Header"
+                                        ]
+                                    },
+                                    "\n\nNormal paragraph text. Some ",
+                                    {
+                                        "type": "italic",
+                                        "content": [
+                                            {
+                                                "type": "punctuation",
+                                                "content": "*"
+                                            },
+                                            "i"
+                                        ]
+                                    },
+                                    "talic",
+                                    {
+                                        "type": "italic",
+                                        "content": [
+                                            {
+                                                "type": "punctuation",
+                                                "content": "*"
+                                            },
+                                            " "
+                                        ]
+                                    },
+                                    "and ",
+                                    {
+                                        "type": "bold",
+                                        "content": [
+                                            {
+                                                "type": "punctuation",
+                                                "content": "**"
+                                            },
+                                            "b"
+                                        ]
+                                    },
+                                    "old",
+                                    {
+                                        "type": "bold",
+                                        "content": [
+                                            {
+                                                "type": "punctuation",
+                                                "content": "**"
+                                            },
+                                            "."
+                                        ]
+                                    },
+                                    "\nFollowed by bullet points:\n",
+                                    {
+                                        "type": "list",
+                                        "content": "*"
+                                    },
+                                    " apple\n",
+                                    {
+                                        "type": "list",
+                                        "content": "*"
+                                    },
+                                    " banana\n",
+                                    {
+                                        "type": "list",
+                                        "content": "*"
+                                    },
+                                    " water\n"
+                                ]
+                            },
+                            "result": [
+                                {
+                                    "title": "Header",
+                                    "id": "header",
+                                    "type": "Section",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "Normal paragraph text. Some ",
+                                                    "type": "SimpleText"
+                                                },
+                                                {
+                                                    "type": "Emphasis",
+                                                    "content": [
+                                                        {
+                                                            "text": "italic",
+                                                            "type": "SimpleText"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "text": " and ",
+                                                    "type": "SimpleText"
+                                                },
+                                                {
+                                                    "type": "StrongEmphasis",
+                                                    "content": [
+                                                        {
+                                                            "text": "bold",
+                                                            "type": "SimpleText"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "text": ".",
+                                                    "type": "SimpleText"
+                                                },
+                                                {
+                                                    "type": "SoftLineBreak"
+                                                },
+                                                {
+                                                    "text": "Followed by bullet points:",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "bulletMarker": "*",
+                                            "tight": true,
+                                            "type": "BulletList",
+                                            "content": [
+                                                {
+                                                    "type": "ListItem",
+                                                    "content": [
+                                                        {
+                                                            "type": "Paragraph",
+                                                            "content": [
+                                                                {
+                                                                    "text": "apple",
+                                                                    "type": "SimpleText"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "ListItem",
+                                                    "content": [
+                                                        {
+                                                            "type": "Paragraph",
+                                                            "content": [
+                                                                {
+                                                                    "text": "banana",
+                                                                    "type": "SimpleText"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "ListItem",
+                                                    "content": [
+                                                        {
+                                                            "type": "Paragraph",
+                                                            "content": [
+                                                                {
+                                                                    "text": "water",
+                                                                    "type": "SimpleText"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "MarkdownAndResult"
                         }
                     ]
                 },
                 {
-                    "type": "Paragraph",
+                    "title": "External References",
+                    "id": "external-references",
+                    "type": "Section",
                     "content": [
                         {
-                            "code": "mdoc",
-                            "type": "InlinedCode"
-                        },
-                        {
-                            "text": " provides directives to simplify your day-to-day documentation process as well as to improve maintenance in a long run.",
-                            "type": "SimpleText"
-                        }
-                    ]
-                },
-                {
-                    "type": "Paragraph",
-                    "content": [
-                        {
-                            "text": "Continue reading to learn more about",
-                            "type": "SimpleText"
-                        }
-                    ]
-                },
-                {
-                    "bulletMarker": "*",
-                    "tight": true,
-                    "type": "BulletList",
-                    "content": [
-                        {
-                            "type": "ListItem",
+                            "type": "Paragraph",
                             "content": [
                                 {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "rationale",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
+                                    "text": "Example of how to keep your documentation up-to-date by referencing existing resource.",
+                                    "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "type": "ListItem",
-                            "content": [
+                            "lang": "markdown",
+                            "maxLineLength": 35,
+                            "tokens": [
                                 {
-                                    "type": "Paragraph",
+                                    "type": "title",
                                     "content": [
                                         {
-                                            "text": "structuring your documentation",
-                                            "type": "SimpleText"
-                                        }
+                                            "type": "punctuation",
+                                            "content": "#"
+                                        },
+                                        " Server Configuration"
                                     ]
-                                }
-                            ]
+                                },
+                                "\n\n:include-file: config/server.config\n"
+                            ],
+                            "lineNumber": "",
+                            "type": "Snippet"
                         },
                         {
-                            "type": "ListItem",
+                            "type": "Paragraph",
                             "content": [
                                 {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "leveraging existing code snippets and test results",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "ListItem",
-                            "content": [
+                                    "text": "Note that this is ",
+                                    "type": "SimpleText"
+                                },
                                 {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "diagrams support",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "ListItem",
-                            "content": [
+                                    "code": "mdoc",
+                                    "type": "InlinedCode"
+                                },
                                 {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "UI documentation techniques",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
+                                    "text": " extension and is not part of a standard markdown syntax.",
+                                    "type": "SimpleText"
                                 }
                             ]
-                        },
-                        {
-                            "type": "ListItem",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "presentation mode",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "ListItem",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "extremely fast navigation",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "ListItem",
-                            "content": [
-                                {
-                                    "type": "Paragraph",
-                                    "content": [
-                                        {
-                                            "text": "local search with auto preview",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "Paragraph",
-                    "content": [
-                        {
-                            "text": "If you are reading this documentation for the first time, I suggest to read in the intended order",
-                            "type": "SimpleText"
-                        },
-                        {
-                            "type": "SoftLineBreak"
-                        },
-                        {
-                            "text": "(there is a next button at the bottom of each page).",
-                            "type": "SimpleText"
-                        },
-                        {
-                            "type": "HardLineBreak"
-                        },
-                        {
-                            "text": "Feel free to use Table Of Contents on the left, or search (top right) otherwise.",
-                            "type": "SimpleText"
                         }
                     ]
                 }
             ],
             "tocItem": {
-                "sectionTitle": "",
-                "pageTitle": "Index",
-                "fileName": "index",
-                "dirName": "",
-                "pageSectionIdTitles": []
+                "sectionTitle": "Introduction",
+                "pageTitle": "Example",
+                "fileName": "example",
+                "dirName": "introduction",
+                "pageSectionIdTitles": [
+                    {
+                        "title": "Markdown",
+                        "id": "markdown"
+                    },
+                    {
+                        "title": "External References",
+                        "id": "external-references"
+                    }
+                ]
             }
         }
     }};

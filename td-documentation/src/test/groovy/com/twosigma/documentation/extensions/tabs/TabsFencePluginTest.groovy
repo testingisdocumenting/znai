@@ -13,7 +13,7 @@ class TabsFencePluginTest {
     @Test
     void "include markup per tab"() {
         def plugin = new TabsFencePlugin()
-        def result = plugin.process(new TestComponentsRegistry(), Paths.get("test.md"), new PluginParams("tabs", ""),
+        def result = plugin.process(new TestComponentsRegistry(), Paths.get("test.md"), new PluginParams(plugin.id(), ""),
                 "java:test java markup\n" +
                 "groovy:test groovy markup")
 
