@@ -19,8 +19,8 @@ class MarkdownAndResultFencePluginTest {
                 "hello *world*")
 
         def asMap = result.docElements.collect { it.toMap() }
-        asMap.should == [[markdown: [lang: 'markdown', maxLineLength: 13, tokens:
+        asMap.should == [[markdown: [lang: 'markdown', maxLineLength: 13, type: 'Snippet', tokens:
                 [[type: 'text', content: 'hello *world*']]], result:[[markup: 'hello *world*', type: 'TestMarkup']],
-                          type: 'MarkdownAndResult.js']]
+                          type: 'MarkdownAndResult']]
     }
 }

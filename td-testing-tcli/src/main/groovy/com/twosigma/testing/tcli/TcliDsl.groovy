@@ -1,6 +1,7 @@
 package com.twosigma.testing.tcli
 
 import com.twosigma.testing.standalone.StandaloneTestRunner
+import com.twosigma.testing.tcli.output.OutputLines
 import com.twosigma.testing.tcli.process.CliProcess
 
 /**
@@ -32,6 +33,10 @@ class TcliDsl {
     }
 
     String getOut() {
-        return cliProcess.out.toString()
+        return cliProcess.out
+    }
+
+    OutputLines getLine() {
+        return new OutputLines("<line of std output>", cliProcess.out.toString())
     }
 }

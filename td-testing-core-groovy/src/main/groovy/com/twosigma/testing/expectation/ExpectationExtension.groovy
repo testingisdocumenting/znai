@@ -14,4 +14,8 @@ class ExpectationExtension {
     static Should getShould(actual) {
         return new Should(actual)
     }
+
+    static ShouldNot getShouldNot(actual) {
+        return new ShouldNot(actual)
+    }
 }

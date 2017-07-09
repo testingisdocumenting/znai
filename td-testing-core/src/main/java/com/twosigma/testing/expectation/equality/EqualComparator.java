@@ -44,12 +44,16 @@ public class EqualComparator {
         this.isNegative = isNegative;
     }
 
-    public void compare(ActualPath actualPath, Object actual, Object expected) {
+    public ComparatorResult compare(ActualPath actualPath, Object actual, Object expected) {
         EqualComparatorHandler handler = handlers.stream().
             filter(h -> h.handle(actual, expected)).findFirst().
             orElseThrow(() -> noHandlerFound(actual, expected));
 
+        int before = getNumberOfIssues();
         handler.compare(this, actualPath, actual, expected);
+        int after = getNumberOfIssues();
+
+        return new ComparatorResult(after != before);
     }
 
     /**
@@ -97,8 +101,20 @@ public class EqualComparator {
         extra.add(new ActualPathWithValue(actualPath, value));
     }
 
-    public int numberOfMismatches() {
+    public int getNumberOfMismatches() {
         return mismatches.size();
+    }
+
+    public int getNumberOfMissing() {
+        return missing.size();
+    }
+
+    public int getNumberOfExtra() {
+        return extra.size();
+    }
+
+    public int getNumberOfIssues() {
+        return getNumberOfMismatches() + getNumberOfExtra() + getNumberOfMissing();
     }
 
     private static List<EqualComparatorHandler> discoverHandlers() {

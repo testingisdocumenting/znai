@@ -48,7 +48,7 @@ public class EqualMatcher implements ValueMatcher {
 
     @Override
     public String negativeMismatchedMessage(final ActualPath actualPath, final Object actual) {
-        return "equals";
+        return actualPath + " equals " + DataRenderers.render(expected) + "\nactual:\n" + actual;
     }
 
     @Override
