@@ -29,6 +29,14 @@ public class JavaCode {
         return codeVisitor.findJavaDoc(methodNameWithOptionalTypes);
     }
 
+    public boolean hasType(String typeName) {
+        return codeVisitor.hasType(typeName);
+    }
+
+    public JavaType findType(String typeName) {
+        return codeVisitor.findTypeDetails(typeName);
+    }
+
     public JavaMethod findMethod(String methodNameWithOptionalTypes) {
         return codeVisitor.findMethodDetails(methodNameWithOptionalTypes);
     }

@@ -1,10 +1,6 @@
 package com.twosigma.documentation.java.parser;
 
-import com.github.javaparser.Position;
-import com.github.javaparser.Range;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.FieldDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.javadoc.Javadoc;
@@ -16,23 +12,20 @@ import com.github.javaparser.javadoc.description.JavadocSnippet;
 
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.PARAM;
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.RETURN;
-import static com.twosigma.utils.StringUtils.extractInsideCurlyBraces;
-import static com.twosigma.utils.StringUtils.removeContentInsideBracketsInclusive;
-import static com.twosigma.utils.StringUtils.stripIndentation;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
+import static com.twosigma.documentation.java.parser.JavaCodeUtils.extractSignature;
+import static com.twosigma.documentation.java.parser.JavaCodeUtils.removeSemicolonAtEnd;
+import static com.twosigma.utils.StringUtils.*;
+import static java.util.stream.Collectors.*;
 
 /**
  * @author mykola
  */
 public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     private final List<String> lines;
+    private Map<String, JavaType> javaTypes;
     private List<JavaMethod> javaMethods;
     private Map<String, JavaField> javaFields;
     private String topLevelJavaDoc;
@@ -40,8 +33,21 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     public JavaCodeVisitor(String code) {
         lines = Arrays.asList(code.split("\n"));
+        javaTypes = new LinkedHashMap<>();
         javaMethods = new ArrayList<>();
         javaFields = new LinkedHashMap<>();
+    }
+
+    public boolean hasType(String typeName) {
+        return javaTypes.containsKey(typeName);
+    }
+
+    public JavaType findTypeDetails(String typeName) {
+        if (! javaTypes.containsKey(typeName)) {
+            throw new RuntimeException("no type found: " + typeName);
+        }
+
+        return javaTypes.get(typeName);
     }
 
     public JavaMethod findMethodDetails(String methodNameWithOptionalTypes) {
@@ -86,24 +92,33 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     }
 
     @Override
-    public void visit(ClassOrInterfaceDeclaration n, String arg) {
-        JavadocComment javadocComment = n.getJavadocComment();
+    public void visit(FieldDeclaration fieldDeclaration, String arg) {
+        String javaDocText = fieldDeclaration.hasJavaDocComment() ? fieldDeclaration.getJavadocComment().parse().toText() : "";
 
-        topLevelJavaDoc = (javadocComment != null) ?
-                extractJavaDocDescription(javadocComment.parse().getDescription()):
-                "";
+        fieldDeclaration.getVariables().stream().map(vd -> vd.getName().getIdentifier())
+                .forEach(name -> javaFields.put(name, new JavaField(name, javaDocText)));
+    }
 
-        super.visit(n, arg);
+    @Override
+    public void visit(ClassOrInterfaceDeclaration classOrInterfaceDeclaration, String arg) {
+        extractTopLevelJavaDoc(classOrInterfaceDeclaration);
+        registerType(classOrInterfaceDeclaration);
+
+        super.visit(classOrInterfaceDeclaration, arg);
+    }
+
+    @Override
+    public void visit(EnumDeclaration enumDeclaration, String arg) {
+        extractTopLevelJavaDoc(enumDeclaration);
+        registerType(enumDeclaration);
+
+        super.visit(enumDeclaration, arg);
     }
 
     @Override
     public void visit(MethodDeclaration methodDeclaration, String arg) {
-        Range range = methodDeclaration.getRange().orElseGet(() -> new Range(new Position(0, 0), new Position(0, 0)));
-        int startLine = range.begin.line - 1;
-        int endLine = range.end.line - 1;
-
         String name = methodDeclaration.getName().getIdentifier();
-        String code = lines.subList(startLine, endLine + 1).stream().collect(Collectors.joining("\n"));
+        String code = JavaCodeUtils.extractCode(lines, methodDeclaration);
 
         JavadocComment javaDocComment = methodDeclaration.getJavadocComment();
         Javadoc javaDoc = javaDocComment != null ? javaDocComment.parse() : null;
@@ -127,15 +142,6 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     private String renderAllFields() {
         return "    " + javaFields.keySet().stream().collect(joining("\n    "));
-    }
-
-    private String removeSemicolonAtEnd(String code) {
-        return code.endsWith(";") ? code.substring(0, code.length() - 1) : code;
-    }
-
-    private String extractSignature(String code) {
-        int i = code.indexOf('{');
-        return i == -1 ? code.trim() : code.substring(0, i).trim();
     }
 
     @SuppressWarnings("unchecked")
@@ -176,12 +182,23 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         }
     }
 
-    @Override
-    public void visit(FieldDeclaration fieldDeclaration, String arg) {
-        String javaDocText = fieldDeclaration.hasJavaDocComment() ? fieldDeclaration.getJavadocComment().parse().toText() : "";
+    private void extractTopLevelJavaDoc(TypeDeclaration declaration) {
+        if (topLevelJavaDoc == null) {
+            JavadocComment javadocComment = declaration.getJavadocComment();
+            topLevelJavaDoc = (javadocComment != null) ?
+                    extractJavaDocDescription(javadocComment.parse().getDescription()):
+                    "";
+        }
+    }
 
-        fieldDeclaration.getVariables().stream().map(vd -> vd.getName().getIdentifier())
-                .forEach(name -> javaFields.put(name, new JavaField(name, javaDocText)));
+    private void registerType(TypeDeclaration declaration) {
+        String name = declaration.getName().getIdentifier();
+        String code = JavaCodeUtils.extractCode(lines, declaration);
+
+        JavaType javaType = new JavaType(name,
+                stripIndentation(code),
+                stripIndentation(extractInsideCurlyBraces(code)));
+        javaTypes.put(name, javaType);
     }
 
     private boolean hasMethodDetails(String methodNameWithOptionalTypes) {

@@ -10,7 +10,7 @@ import static com.twosigma.testing.Ddjt.throwException
  * @author mykola
  */
 class JavaCodeTest {
-    String code = """
+    private final String classCode = """
 /**
  * this is a <b>top</b> level java doc
  *
@@ -55,7 +55,7 @@ class HelloWorld {
     }
 }"""
 
-    String interfaceCode = """
+    private final String interfaceCode = """
 /**
  * this is a <b>top</b> level java doc
  *
@@ -76,8 +76,22 @@ interface HelloWorld {
      public void sampleMethod(String test, String name);
 }"""
 
-    JavaCode javaCode = new JavaCode(code)
-    JavaCode javaCodeInterface = new JavaCode(interfaceCode)
+    private final String enumCode = """
+/**
+ * this is a <b>top</b> level java doc of enum
+ *
+ * @see other
+ * @author ignore
+ */
+enum MyEnum {
+    ENTRY_ONE,
+    SECOND_ENTRY
+}
+"""
+
+    private final JavaCode javaCode = new JavaCode(classCode)
+    private final JavaCode javaCodeInterface = new JavaCode(interfaceCode)
+    private final JavaCode javaCodeEnum = new JavaCode(enumCode)
 
     @Test
     void "extracts method by name"() {
@@ -205,6 +219,46 @@ interface HelloWorld {
     void "extracts java doc by entry name from interface"() {
         Assert.assertEquals("method level java doc  <code>package.Class</code> ",
                 javaCode.findJavaDoc("sampleMethod"))
+    }
+
+    @Test
+    void "extracts enum definition by name"() {
+        def type = javaCodeEnum.findType('MyEnum')
+        Assert.assertEquals("enum MyEnum {\n" +
+                "    ENTRY_ONE,\n" +
+                "    SECOND_ENTRY\n" +
+                "}", type.fullBody)
+        Assert.assertEquals("ENTRY_ONE,\n" +
+                "SECOND_ENTRY", type.bodyOnly)
+    }
+
+    @Test
+    void "extracts interface definition by name"() {
+        def type = javaCodeInterface.findType('HelloWorld')
+        Assert.assertEquals("interface HelloWorld {\n" +
+                "    /**\n" +
+                "     * method level java doc {@link package.Class}\n" +
+                "     * @param test test param \n" +
+                "     */\n" +
+                "    public void sampleMethod(String test);\n" +
+                "\n" +
+                "     /**\n" +
+                "     * method level java doc overloaded\n" +
+                "     * @param test test param \n" +
+                "     */\n" +
+                "     public void sampleMethod(String test, String name);\n" +
+                "}", type.fullBody)
+        Assert.assertEquals("/**\n" +
+                " * method level java doc {@link package.Class}\n" +
+                " * @param test test param \n" +
+                " */\n" +
+                "public void sampleMethod(String test);\n" +
+                "\n" +
+                " /**\n" +
+                " * method level java doc overloaded\n" +
+                " * @param test test param \n" +
+                " */\n" +
+                " public void sampleMethod(String test, String name);", type.bodyOnly)
     }
 
     @Test

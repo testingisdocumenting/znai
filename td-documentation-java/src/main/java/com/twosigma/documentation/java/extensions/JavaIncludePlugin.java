@@ -3,6 +3,7 @@ package com.twosigma.documentation.java.extensions;
 import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.java.parser.JavaCode;
 import com.twosigma.documentation.java.parser.JavaMethod;
+import com.twosigma.documentation.java.parser.JavaType;
 import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 
@@ -50,6 +51,17 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     }
 
     private String extractSingleContent(JavaCode javaCode, String entry, Boolean isBodyOnly, Boolean isSignatureOnly) {
+        return javaCode.hasType(entry) ?
+                extractTypeContent(javaCode, entry, isBodyOnly) :
+                extractMethodContent(javaCode, entry, isBodyOnly, isSignatureOnly);
+    }
+
+    private String extractTypeContent(JavaCode javaCode, String entry, Boolean isBodyOnly) {
+        JavaType type = javaCode.findType(entry);
+        return isBodyOnly ? type.getBodyOnly() : type.getFullBody();
+    }
+
+    private String extractMethodContent(JavaCode javaCode, String entry, Boolean isBodyOnly, Boolean isSignatureOnly) {
         JavaMethod method = javaCode.findMethod(entry);
 
         return isBodyOnly ?

@@ -37,6 +37,19 @@ Note: Generic types are erased and spaces after commas are optional
 
 :include-java: HelloWorld.java {entry: "sampleMethod(Map, int, boolean)"}
 
+# Type Body
+
+To extract `class`, `interface` or `enum` body use
+
+    :include-java: MyEnum.java {entry: "MyEnum"}
+    
+:include-java: MyEnum.java {entry: "MyEnum"}
+
+Use `bodyOnly` to only display body of your type
+
+    :include-java: MyEnum.java {entry: "MyEnum", bodyOnly: true}
+    
+:include-java: MyEnum.java {entry: "MyEnum", bodyOnly: true}
 
 # Multiple Entries
 
