@@ -19,7 +19,7 @@ import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
 import {Svg, presentationSvgHandler} from './svg/Svg'
 import LatexMath from './math/LatexMath'
-import Chart from './charts/Chart'
+import {Chart, presentationChartHandler} from './charts/Chart'
 import Image from './images/Image'
 import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
@@ -101,5 +101,6 @@ library.MarkdownAndResult = MarkdownAndResult
 presentationElementHandlers.MarkdownAndResult = presentationMarkdownAndResultHandler
 
 library.Chart = Chart
+presentationElementHandlers.Chart = presentationChartHandler
 
 export {library as elementsLibrary, presentationElementHandlers}

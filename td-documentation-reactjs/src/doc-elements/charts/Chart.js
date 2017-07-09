@@ -19,4 +19,7 @@ function chartByType(type) {
     return Bar
 }
 
-export default Chart
+const presentationChartHandler = {component: Chart,
+    numberOfSlides: ({data}) => data.length }
+
+export {Chart, presentationChartHandler}

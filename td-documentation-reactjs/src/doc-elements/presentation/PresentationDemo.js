@@ -212,6 +212,30 @@ const codeWithInlinedComments = [{
     "type": "Snippet"
 }]
 
+const chart = {
+    "type": "Chart",
+    "innerRadius": 100.0,
+    "chartType": "Pie",
+    "data": [
+        [
+            "A",
+            10
+        ],
+        [
+            "B",
+            20
+        ],
+        [
+            "C",
+            15
+        ],
+        [
+            "D",
+            8
+        ]
+    ]
+}
+
 const section1 = {
     title: "Section One",
     type: "Section",
@@ -232,7 +256,7 @@ const page = {
 
 const docMeta = {id: "mdoc", title: "MDoc", type: "User Guide"}
 
-const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page)
+const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [chart])
 const PresentationDemo = (props) => <Presentation docMeta={docMeta} presentationRegistry={registry}/>
 
 export default PresentationDemo
