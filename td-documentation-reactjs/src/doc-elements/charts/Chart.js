@@ -8,7 +8,11 @@ const Chart = (props) => {
     const {chartType} = props
     const ChartComponent = chartByType(chartType)
 
-    return <ChartComponent {...props}/>
+    return (
+        <div className="content-block">
+            <ChartComponent {...props}/>
+        </div>
+    )
 }
 
 function chartByType(type) {
