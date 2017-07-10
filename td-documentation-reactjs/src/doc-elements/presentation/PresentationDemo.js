@@ -215,7 +215,7 @@ const codeWithInlinedComments = [{
 const chart = {
     "type": "Chart",
     "innerRadius": 100.0,
-    "chartType": "Pie",
+    "chartType": "Bar",
     "data": [
         [
             "A",

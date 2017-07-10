@@ -1,8 +1,22 @@
-# Bar
+# Pie
 
-Given file
+Given a `CSV` file
 
 :include-file: data.csv
+
+To build a pie chart use
+
+    :include-chart: data.csv {type: "Pie"}
+
+:include-chart: data.csv {type: "Pie"}
+
+To change inner radius use
+
+    :include-chart: data.csv {type: "Pie", innerRadius: 100} 
+
+:include-chart: data.csv {type: "Pie", innerRadius: 100}
+
+# Bar
 
 To build a vertical chart use
 
@@ -10,16 +24,13 @@ To build a vertical chart use
 
 :include-chart: data.csv
 
+To build a horizontal chart use
+
     :include-chart: data.csv {horizontal: true}
 
 :include-chart: data.csv {horizontal: true}
 
-# Pie
+# Presentation Mode
 
-    :include-chart: data.csv {type: "Pie"}
+In presentation mode chart values appear one at a time.
 
-:include-chart: data.csv {type: "Pie"}
-
-    :include-chart: data.csv {type: "Pie", innerRadius: 100} 
-
-:include-chart: data.csv {type: "Pie", innerRadius: 100}

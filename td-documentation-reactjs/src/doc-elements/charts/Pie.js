@@ -1,24 +1,13 @@
 import React from 'react'
-import {VictoryPie, VictoryTheme, Slice, VictoryLabel} from 'victory'
+import {VictoryPie, VictoryTheme, Slice} from 'victory'
 
 import defaultStyle from './defaultStyle'
-
-const hiddenStyle = {fill: "rgba(0, 0, 0, 0)"}
+import {CustomLabel, isHidden, hiddenStyle} from './chartPresentation'
 
 const CustomSlice = (props) => {
     return isHidden(props) ?
         <Slice {...props} style={hiddenStyle}/>:
         <Slice {...props}/>
-}
-
-const CustomLabel = (props) => {
-    return isHidden(props) ?
-        <VictoryLabel {...props} style={hiddenStyle}/>:
-        <VictoryLabel {...props}/>
-}
-
-function isHidden(props) {
-    return props.isPresentation && props.index > props.slideIdx
 }
 
 const Pie = ({data, width, height, slideIdx, isPresentation, ...props}) => {
