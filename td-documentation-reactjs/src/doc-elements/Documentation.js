@@ -74,12 +74,12 @@ class Documentation extends Component {
             selectedTocItem,
             tocCollapsed,
             lastChangeDataDom,
-            searchActive,
+            isSearchActive,
             pageGenError,
-            isPresentation,
+            isPresentationMode,
             presentationRegistry} = this.state
 
-        const searchPopup = searchActive ? <SearchPopup elementsLibrary={elementsLibrary}
+        const searchPopup = isSearchActive ? <SearchPopup elementsLibrary={elementsLibrary}
                                                                    tocCollapsed={tocCollapsed}
                                                                    searchPromise={this.searchPromise}
                                                                    onSearchSelection={this.onSearchSelection}
@@ -97,7 +97,7 @@ class Documentation extends Component {
                                                           onTocUpdate={this.onTocUpdate}
                                                           onError={this.onPageGenError}/> : null
 
-        return isPresentation ? <Presentation docMeta={docMeta}
+        return isPresentationMode ? <Presentation docMeta={docMeta}
                                               presentationRegistry={presentationRegistry}
                                               onClose={this.onPresentationClose}
                                               onNextPage={this.onNextPage}
@@ -133,10 +133,14 @@ class Documentation extends Component {
     }
 
     keyDownHandler(e) {
-        const {searchActive} = this.state
-        if (e.code === 'Slash' && ! searchActive) {
+        console.log(e)
+
+        const {isSearchActive, isPresentationMode} = this.state
+        if (e.code === 'Slash' && ! isSearchActive) {
             e.preventDefault()
-            this.setState({searchActive: true})
+            this.setState({isSearchActive: true})
+        } else if (e.code === 'KeyP' && ! isPresentationMode) {
+            this.setState({isPresentationMode: true})
         }
     }
 
@@ -187,11 +191,11 @@ class Documentation extends Component {
     }
 
     onSearchClick() {
-        this.setState({searchActive: true})
+        this.setState({isSearchActive: true})
     }
 
     onSearchClose() {
-        this.setState({searchActive: false})
+        this.setState({isSearchActive: false})
     }
 
     onTocToggle(collapsed) {
@@ -236,11 +240,11 @@ class Documentation extends Component {
     }
 
     onPresentationOpen() {
-        this.setState({isPresentation: true})
+        this.setState({isPresentationMode: true})
     }
 
     onPresentationClose() {
-        this.setState({isPresentation: false})
+        this.setState({isPresentationMode: false})
     }
 
     onTocItemClick(dirName, fileName) {
@@ -383,9 +387,9 @@ class Documentation extends Component {
     }
 
     updateCurrentPageSection() {
-        const {isPresentation, page, selectedTocItem} = this.state
+        const {isPresentationMode, page, selectedTocItem} = this.state
 
-        if (isPresentation) {
+        if (isPresentationMode) {
             return
         }
 
