@@ -1,12 +1,12 @@
-import React, { Component } from "react"
-import Promise from "promise"
+import React, { Component } from 'react'
+import Promise from 'promise'
 
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import {elementsLibrary, presentationElementHandlers} from './DefaultElementsLibrary'
 import {documentationNavigation} from './structure/DocumentationNavigation'
 import {tableOfContents} from './structure/TableOfContents'
-import {getAllPagesPromise} from "./allPages"
+import {getAllPagesPromise} from './allPages'
 import {fullResourcePath} from '../utils/resourcePath'
 
 import Presentation from './presentation/Presentation'
@@ -124,22 +124,20 @@ class Documentation extends Component {
     componentDidMount() {
         this.enableScrollListener()
         this.onPageLoad()
-        document.addEventListener('keydown', this.keyDownHandler)
+        document.addEventListener("keydown", this.keyDownHandler)
     }
 
     componentWillUnmount() {
         this.disableScrollListener()
-        document.removeEventListener('keydown', this.keyDownHandler)
+        document.removeEventListener("keydown", this.keyDownHandler)
     }
 
     keyDownHandler(e) {
-        console.log(e)
-
         const {isSearchActive, isPresentationMode} = this.state
-        if (e.code === 'Slash' && ! isSearchActive) {
+        if (e.code === "Slash" && ! isSearchActive) {
             e.preventDefault()
             this.setState({isSearchActive: true})
-        } else if (e.code === 'KeyP' && ! isPresentationMode) {
+        } else if (e.code === "KeyP" && ! isPresentationMode) {
             this.setState({isPresentationMode: true})
         }
     }
@@ -148,14 +146,14 @@ class Documentation extends Component {
         // server side rendering guard
         if (window.addEventListener) {
             this.mainPanelDom = document.querySelector(".main-panel")
-            this.mainPanelDom.addEventListener('scroll', this.updateCurrentPageSection)
+            this.mainPanelDom.addEventListener("scroll", this.updateCurrentPageSection)
         }
     }
 
     disableScrollListener() {
         // server side rendering guard
         if (window.removeEventListener) {
-            this.mainPanelDom.removeEventListener('scroll', this.updateCurrentPageSection)
+            this.mainPanelDom.removeEventListener("scroll", this.updateCurrentPageSection)
         }
     }
 
@@ -184,7 +182,7 @@ class Documentation extends Component {
         this.updateCurrentPageSection()
         const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page)
 
-        const isIndex = page.tocItem.dirName.length === 0 && page.tocItem.fileName === 'index'
+        const isIndex = page.tocItem.dirName.length === 0 && page.tocItem.fileName === "index"
         document.title = isIndex ? docMeta.title : docMeta.title + ": " + page.tocItem.pageTitle
 
         this.setState({presentationRegistry})

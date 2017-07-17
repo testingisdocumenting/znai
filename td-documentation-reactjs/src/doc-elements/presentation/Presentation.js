@@ -17,7 +17,7 @@ class Presentation extends Component {
     render() {
         const {docMeta, presentationRegistry} = this.props
         const {currentSlideIdx, isAppeared, scaleRatio} = this.state
-        const slideAreaStyle = {transform: 'scale(' + scaleRatio + ')'}
+        const slideAreaStyle = {transform: "scale(" + scaleRatio + ")"}
 
         const slideClassName = "slide-area" + (isAppeared ? " appeared": "")
         const slideContent = presentationRegistry.renderedComponent(currentSlideIdx)
@@ -28,7 +28,7 @@ class Presentation extends Component {
         const isSectionTitleOnSlide = !! slide.info.sectionTitle
 
         const slideVisibleNote = slide.info.slideVisibleNote
-        const showSlideNote = typeof slideVisibleNote !== 'undefined' && slideVisibleNote !== null
+        const showSlideNote = typeof slideVisibleNote !== "undefined" && slideVisibleNote !== null
         const slideNoteClass = "footer" + ((showSlideNote && slideVisibleNote.length === 0) ? " size-only" : "")
 
         return (<div className="presentation">
@@ -66,7 +66,7 @@ class Presentation extends Component {
     }
 
     componentDidMount() {
-        document.addEventListener('keydown', this.keyDownHandler)
+        document.addEventListener("keydown", this.keyDownHandler)
         this.updateSlide()
     }
 
@@ -77,7 +77,7 @@ class Presentation extends Component {
     }
 
     componentWillUnmount() {
-        document.removeEventListener('keydown', this.keyDownHandler)
+        document.removeEventListener("keydown", this.keyDownHandler)
     }
 
     componentWillReceiveProps(props) {
@@ -116,11 +116,11 @@ class Presentation extends Component {
         const {currentSlideIdx} = this.state
         let newSlideIdx = currentSlideIdx
 
-        if (e.key === 'ArrowRight') {
+        if (e.code === "ArrowRight" || e.code === "PageDown" || e.code === "Space") {
             newSlideIdx += 1
-        } else if (e.key === 'ArrowLeft') {
+        } else if (e.code === "ArrowLeft" || e.code === "PageUp") {
             newSlideIdx -= 1
-        } else if (e.key === 'Escape') {
+        } else if (e.code === "Escape") {
             this.onClose()
             return
         }
