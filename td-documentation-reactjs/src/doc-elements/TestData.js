@@ -84,6 +84,8 @@ const TestData = {
                             "width": 937.0,
                             "height": 657.0,
                             "fit": true,
+                            "caption": "Test Caption Message",
+                            // "captionBottom": true,
                             "type": "AnnotatedImage"
                         },
                         {
