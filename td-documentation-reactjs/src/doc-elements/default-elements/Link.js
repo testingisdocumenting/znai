@@ -3,12 +3,19 @@ import {documentationNavigation} from '../structure/DocumentationNavigation'
 import {getDocId} from '../docMeta'
 
 const Link = ({url, ...props}) => {
-    const onClick = isLocalUrl(url) ? (e) => onLocalUrlClick(e, url) : null
-    return <a href={url} onClick={onClick}><props.elementsLibrary.DocElement {...props}/></a>
+    const isLocal = isLocalUrl(url);
+    const onClick = isLocal ? (e) => onLocalUrlClick(e, url) : null
+    const targetProp = isLocal ? {} : {target: "_blank"}
+
+    return (
+        <a href={url} onClick={onClick} {...targetProp}>
+            <props.elementsLibrary.DocElement {...props}/>
+        </a>
+    )
 }
 
 function isLocalUrl(url) {
-    if (! window.document) {
+    if (!window.document) {
         return false
     }
 
