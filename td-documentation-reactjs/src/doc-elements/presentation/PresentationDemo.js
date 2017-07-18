@@ -139,6 +139,58 @@ const bulletContent = [
     }
 ]
 
+const stepsBulletContent = [
+    {
+        "bulletMarker": "*",
+        "tight": true,
+        "type": "BulletList",
+        "meta": { "bulletListType": "Steps", "differentColors": true },
+        "content": [
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Something Additional Third Line",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Additional",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Third Step with text",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }]
+
 const codeWithInlinedComments = [{
     "lang": "javascript",
     "maxLineLength": 52,
@@ -256,7 +308,7 @@ const page = {
 
 const docMeta = {id: "mdoc", title: "MDoc", type: "User Guide"}
 
-const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [chart])
+const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, stepsBulletContent)
 const PresentationDemo = (props) => <Presentation docMeta={docMeta} presentationRegistry={registry}/>
 
 export default PresentationDemo

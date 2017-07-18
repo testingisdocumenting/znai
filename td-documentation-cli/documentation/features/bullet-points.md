@@ -36,17 +36,32 @@ to the right.
 
 Use `Venn` to display overlapping relationships. 
 
-    :include-meta: {bulletListType: "Venn"}
-    
-    * Velocity
-    * Volume
-    * Variety
-    
 :include-meta: {bulletListType: "Venn"}
 
 * Velocity
 * Volume
 * Variety
+
+# Steps
+
+Use `Steps` to outline a procedure
+    
+:include-meta: {bulletListType: "Steps"}
+
+* Install IDEA
+* Learn Java
+* Learn Machine Learning
+
+Use `differentColors: true` to use distinct colors for each step
+
+    :include-meta: {bulletListType: "Steps", differentColors: true}
+
+:include-meta: {bulletListType: "Steps", differentColors: true}
+
+* Install IDEA
+* Learn Java
+* Learn Machine Learning
+
 
 # Presentation only type
 

@@ -5,9 +5,10 @@ import DefaultBulletList from './kinds/DefaultBulletList'
 import LeftRightTimeLine from './kinds/LeftRightTimeLine'
 import Venn from './kinds/Venn'
 import RevealBoxes from './kinds/RevealBoxes'
+import Steps from './kinds/Steps'
 
-const types = {LeftRightTimeLine, Venn}
-const presentationTypes = {RevealBoxes, LeftRightTimeLine, Venn}
+const types = {LeftRightTimeLine, Venn, Steps}
+const presentationTypes = {RevealBoxes, LeftRightTimeLine, Venn, Steps}
 
 const BulletList = (props) => {
     const type = listType(props, 'bulletListType')

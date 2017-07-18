@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
+import SvgWithCalculatedSize from './SvgWithCalculatedSize'
 
 import {extractTextLines} from '../bulletUtils'
-import './LeftRightTimeLine.css'
 
 const stepSize = 15
 
@@ -10,15 +10,17 @@ const Bullet = ({idx}) => {
     const begin = (0.5 + idx * 0.2) + "s"
     const y = 5 + idx * stepSize
 
-    return (<g className="left-right-timeline"><circle id={id} cx="0" cy={y} r="0" fill="#ffb800" stroke="#d89b00" strokeWidth="0.5"/>
+    return (<g className="left-right-timeline">
+        <circle id={id} cx="0" cy={y} r="0" fill="#ffb800" stroke="#d89b00" strokeWidth="0.5"/>
         <animate xlinkHref={"#" + id}
                  attributeName="r" from="0" to="2"
-                 begin={begin} dur="1s" fill="freeze"/></g>)
+                 begin={begin} dur="1s" fill="freeze"/>
+    </g>)
 }
 
 class TextMessage extends Component {
     render() {
-       const {idx, text, isRight} = this.props
+        const {idx, text, isRight} = this.props
 
         const textId = "text" + idx
         const lineId = "line" + idx
@@ -62,15 +64,18 @@ class TextMessage extends Component {
     }
 }
 
-const Timeline = ({textLines, textLinesToReveal}) => {
+const LeftRightTimeLine = ({content, isPresentation, slideIdx}) => {
+    const textLines = extractTextLines(content)
+    const textLinesToReveal = isPresentation ? textLines.slice(0, slideIdx + 1) : textLines
+
     const bullets = textLines.map((text, idx) => <Bullet key={idx} idx={idx}/>)
-    const messages = textLinesToReveal.map((text, idx) => <TextMessage key={idx} idx={idx} text={text} isRight={idx % 2 === 1}/>)
+    const messages = textLinesToReveal.map((text, idx) => <TextMessage key={idx} idx={idx} text={text}
+                                                                       isRight={idx % 2 === 1}/>)
 
     const height = (textLines.length - 1) * stepSize + 10
-    const viewPort = `-89 0 178 ${height}`
 
-    return <div className="left-right-timeline content-block">
-        <svg width="100%" height="100%" viewBox={viewPort}>
+    return (
+        <SvgWithCalculatedSize isPresentation={isPresentation} viewBox={`-89 0 178 ${height}`}>
             <rect id="timeline" x="-0.7" y="0" height={0} width="1.4" fill="#ddd" stroke="#ccc" strokeWidth="0.3"/>
             <animate xlinkHref="#timeline"
                      attributeName="height"
@@ -80,14 +85,8 @@ const Timeline = ({textLines, textLinesToReveal}) => {
                      dur="1s"/>
             {bullets}
             {messages}
-        </svg>
-    </div>
-}
-
-const LeftRightTimeLine = ({content, isPresentation, slideIdx}) => {
-    const textLines = extractTextLines(content)
-    const textLinesToReveal = isPresentation ? textLines.slice(0, slideIdx + 1) : textLines
-    return <Timeline textLines={textLines} textLinesToReveal={textLinesToReveal}/>
+        </SvgWithCalculatedSize>
+    )
 }
 
 export default LeftRightTimeLine

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {extractTextLines} from '../bulletUtils'
 
+import SvgWithCalculatedSize from './SvgWithCalculatedSize'
+
 const fillColors = ["#ffb800", "#4a9625", "#6ca5ff", "#964a25"]
 class Circle extends Component {
     render() {
@@ -13,7 +15,7 @@ class Circle extends Component {
 
         const startingRad = totalNumber === 3 ? (-Math.PI / 2.0) : -Math.PI
         const stepRad = (2.0 * Math.PI / totalNumber)
-        const rad = startingRad  + stepRad * idx
+        const rad = startingRad + stepRad * idx
 
         const x = r2 * Math.cos(rad)
         const y = r2 * Math.sin(rad)
@@ -24,7 +26,8 @@ class Circle extends Component {
         const fillColor = fillColors[idx]
 
         return <g>
-            <circle id={id} cx={x} cy={y} r={r1} fill={fillColor} strokeWidth={initialStrokeWidth} stroke="#000" opacity={0.5}/>
+            <circle id={id} cx={x} cy={y} r={r1} fill={fillColor} strokeWidth={initialStrokeWidth} stroke="#000"
+                    opacity={0.5}/>
             <text x={x} y={y} fontSize={4} textAnchor="middle" alignmentBaseline="central">{text}</text>
 
             <animate ref={node => this.circleAnimation = node}
@@ -45,23 +48,18 @@ class Circle extends Component {
     }
 }
 
-const VennCircles = ({totalNumber, textLines, isPresentation}) => {
-    const className = isPresentation ? "" : "content-block"
-    const style = isPresentation ? {width: "100vw"} : {}
-
-    return <div className={className} style={style}>
-        <svg width="100%" height="100%" viewBox="-89 -50 178 90">
-            {textLines.map((text, idx) => <Circle isPresentation={isPresentation} key={idx} idx={idx} totalNumber={totalNumber} text={text}/> )}
-        </svg>
-    </div>
-}
-
 const Venn = ({content, isPresentation, slideIdx}) => {
     const textLines = extractTextLines(content)
     const textLinesToReveal = isPresentation ? textLines.slice(0, slideIdx + 1) : textLines
 
-    return <VennCircles totalNumber={textLines.length} textLines={textLinesToReveal}
-                        isPresentation={isPresentation}/>
+    return (
+        <SvgWithCalculatedSize isPresentation={isPresentation} viewBox="-89 -50 178 90">
+            {textLinesToReveal.map((text, idx) => <Circle isPresentation={isPresentation}
+                                                          key={idx} idx={idx}
+                                                          totalNumber={textLines.length}
+                                                          text={text}/>)}
+        </SvgWithCalculatedSize>
+    )
 }
 
 export default Venn
