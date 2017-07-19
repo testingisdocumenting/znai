@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 import './Presentation.css'
 
-const defaultScaleRatio = 2.5
+const defaultScaleRatio = 3
 
 class Presentation extends Component {
     constructor(props) {

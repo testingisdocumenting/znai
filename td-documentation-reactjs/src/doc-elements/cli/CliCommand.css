@@ -1,0 +1,33 @@
+.cli-command .prompt {
+    font-weight: bold;
+    color: #2f9c0a;
+}
+
+.cli-command .cursor {
+    font-weight: bold;
+    background-color: #2f9c0a;
+    margin-left: 5px;
+}
+
+.cli-command pre {
+    border: none;
+    background: none;
+}
+
+.cli-command .token {
+    margin-right: 10px;
+}
+
+.cli-command .token:last-child {
+    margin-right: 0;
+}
+
+.cli-command .command {
+    color: #383b3f;
+    font-weight: bold;
+}
+
+.cli-command .highlight {
+    color: #660e7a;
+    font-weight: bold;
+}

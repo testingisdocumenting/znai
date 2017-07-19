@@ -264,6 +264,11 @@ const codeWithInlinedComments = [{
     "type": "Snippet"
 }]
 
+const cliCommand = {
+    "type": "CliCommand",
+    "command": "kubernetes install container --env=prod"
+}
+
 const chart = {
     "type": "Chart",
     "innerRadius": 100.0,
@@ -308,7 +313,7 @@ const page = {
 
 const docMeta = {id: "mdoc", title: "MDoc", type: "User Guide"}
 
-const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, stepsBulletContent)
+const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [cliCommand])
 const PresentationDemo = (props) => <Presentation docMeta={docMeta} presentationRegistry={registry}/>
 
 export default PresentationDemo
