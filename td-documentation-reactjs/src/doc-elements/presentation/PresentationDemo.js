@@ -266,7 +266,8 @@ const codeWithInlinedComments = [{
 
 const cliCommand = {
     "type": "CliCommand",
-    "command": "kubernetes install container --env=prod"
+    "command": "kubernetes install container --env=prod",
+    "paramsToHighlight": ["env"]
 }
 
 const chart = {

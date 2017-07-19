@@ -15,11 +15,6 @@
 }
 
 .cli-command .token {
-    margin-right: 10px;
-}
-
-.cli-command .token:last-child {
-    margin-right: 0;
 }
 
 .cli-command .command {
@@ -30,4 +25,9 @@
 .cli-command .highlight {
     color: #660e7a;
     font-weight: bold;
+}
+
+.cli-command .invisible {
+    color: rgba(0, 0, 0, 0);
+    height: 0;
 }

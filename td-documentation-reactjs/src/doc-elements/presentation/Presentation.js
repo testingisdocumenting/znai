@@ -96,8 +96,6 @@ class Presentation extends Component {
         const width = this.componentDom.offsetWidth
         const height = this.componentDom.offsetHeight
 
-        console.log(width, height)
-
         const widthRatio = (this.slideAreaDom.offsetWidth - 60) / width
         const heightRatio = (this.slideAreaDom.offsetHeight - 30) / height
 

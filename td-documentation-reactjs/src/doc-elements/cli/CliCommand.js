@@ -1,61 +1,7 @@
-import React, {Component} from 'react'
-import classNames from 'classnames'
+import React, {Component} from "react";
 
-import './CliCommand.css'
-
-const tokenize = (fullCommand) => {
-    const [command, ...params] = fullCommand.split(" ")
-    return [{type: "command", value: command}, ...params.map(p => {
-        return {type: "param", value: p}
-    })]
-}
-
-class Token extends Component {
-    constructor(props) {
-        super(props)
-
-        const {isPresentation, value} = props
-        this.state = {lastCharIdx: isPresentation ? 0 : value.length}
-    }
-
-    render() {
-        const {type, value, highlight} = this.props
-        const {lastCharIdx} = this.state
-
-        const className = classNames("token " + type, {highlight: highlight})
-        return <span className={className}>{value.substr(0, lastCharIdx)}</span>
-    }
-
-    componentDidMount() {
-        const {isPresentation} = this.props
-
-        if (isPresentation) {
-            this.startRevealProcess()
-        }
-    }
-
-    startRevealProcess() {
-        const {value, onFullReveal} = this.props
-        const {lastCharIdx} = this.state
-
-        if (lastCharIdx === value.length) {
-            onFullReveal()
-        }
-
-        if (lastCharIdx > value.length) {
-            clearTimeout(this.timer)
-            return
-        }
-
-        this.timer = setTimeout(() => {
-            this.setState((prevState) => {
-                return {lastCharIdx: prevState.lastCharIdx + 1}
-            })
-
-            this.startRevealProcess()
-        }, 15 + Math.random() * 15)
-    }
-}
+import CliCommandToken from "./CliCommandToken";
+import "./CliCommand.css";
 
 class CliCommand extends Component {
     constructor(props) {
@@ -71,17 +17,29 @@ class CliCommand extends Component {
         const {paramsToHighlight, isPresentation} = this.props
         const {lastTokenIdx} = this.state
 
-        const tokensToShow = this.tokens.slice(0, lastTokenIdx)
+        const visibleTokens = this.tokens.slice(0, lastTokenIdx)
+        const invisibleTokens = this.tokens.slice(lastTokenIdx, this.tokens.length)
 
+        // split tokens into two groups so the width remains constant
+        // presentation mode centers slides. if width is growing the effect of typing is affected
         return (
             <div className="cli-command">
                 <pre>
                     <span className="prompt">$ </span>
-                    <span>{tokensToShow.map((token, idx) => <Token key={idx} {...token}
-                                                                   highlight={isHighlighted(token)}
-                                                                   isPresentation={isPresentation}
-                                                                   onFullReveal={this.revealNextToken}/>)}</span>
-                    {isPresentation ? <span className="cursor">&nbsp;</span> : null}
+                    <span>
+                        {visibleTokens.map((token, idx) => {
+                            return (
+                                <CliCommandToken key={idx} {...token}
+                                                 isHighlighted={isHighlighted(token)}
+                                                 isCursorVisible={isPresentation && idx === visibleTokens.length - 1}
+                                                 isPresentation={isPresentation}
+                                                 onFullReveal={this.revealNextToken}/>)
+                        })}
+                    </span>
+                    <span>{invisibleTokens.map((token, idx) => <CliCommandToken key={idx} {...token}
+                                                                                highlight={isHighlighted(token)}
+                                                                                isPresentation={isPresentation}
+                                                                                isHidden={true}/>)}</span>
                 </pre>
             </div>
         )
@@ -106,6 +64,13 @@ class CliCommand extends Component {
             })
         }, 80 + Math.random() * 50)
     }
+}
+
+function tokenize(fullCommand) {
+    const [command, ...params] = fullCommand.split(" ")
+    return [{type: "command", value: command}, ...params.map((p, idx) => {
+        return {type: "param", value: " " + p}
+    })]
 }
 
 const presentationCliCommandHandler = {
