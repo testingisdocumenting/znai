@@ -37,6 +37,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private final DocElement docElement;
     private final Deque<DocElement> elementsStack;
 
+    private String currentSectionTitle;
+
     public DocElementCreationParserHandler(ComponentsRegistry componentsRegistry, Path path) {
         this.componentsRegistry = componentsRegistry;
         this.path = path;
@@ -46,6 +48,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
         this.docElement = new DocElement("page");
         this.elementsStack = new ArrayDeque<>();
         this.elementsStack.add(docElement);
+
+        this.currentSectionTitle = "";
     }
 
     public DocElement getDocElement() {
@@ -58,11 +62,13 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSectionStart(String title) {
+        currentSectionTitle = title;
         start(DocElementType.SECTION, "title", title, "id", new PageSectionIdTitle(title).getId());
     }
 
     @Override
     public void onSectionEnd() {
+        currentSectionTitle = "";
         end();
     }
 
@@ -339,7 +345,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
         DocStructure docStructure = componentsRegistry.docStructure();
 
-        docStructure.validateLink(dirName, fileName, pageSection);
+        docStructure.validateLink(path, currentSectionTitle, dirName, fileName, pageSection);
         return docStructure.createLink(dirName, fileName, pageSection);
     }
 }

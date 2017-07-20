@@ -32,6 +32,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static com.twosigma.utils.FileUtils.fileTextContent;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -379,28 +380,38 @@ public class WebSite implements DocStructure {
     }
 
     @Override
-    public void validateLink(String dirName, String fileName, String pageSectionId) {
-        linksToValidate.add(new LinkToValidate(dirName, fileName, pageSectionId));
+    public void validateLink(Path path, String sectionWithLinkTitle, String dirName, String fileName, String pageSectionId) {
+        linksToValidate.add(new LinkToValidate(path, sectionWithLinkTitle, dirName, fileName, pageSectionId));
     }
 
-    public void validateCollectedLinks() {
+    private void validateCollectedLinks() {
         reportPhase("validating links");
-        linksToValidate.forEach(this::validateLink);
+        String validationErrorMessage = linksToValidate.stream().map(this::validateLink)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(joining("\n\n"));
+
+        if (!validationErrorMessage.isEmpty()) {
+            throw new IllegalArgumentException(validationErrorMessage  + "\n ");
+        }
     }
 
-    private void validateLink(LinkToValidate link) {
+    private Optional<String> validateLink(LinkToValidate link) {
         String url = link.dirName + "/" + link.fileName + (link.pageSectionId.isEmpty() ?  "" : "#" + link.pageSectionId);
 
-        Supplier<IllegalArgumentException> validationException = () -> new IllegalArgumentException("can't find a page associated with: " + url);
+        Supplier<String> validationMessage = () -> "can't find a page associated with: " + url +
+                "\ncheck file: " + link.path + ", section title: " + link.sectionWithLinkTitle;
 
         TocItem tocItem = toc.findTocItem(link.dirName, link.fileName);
         if (tocItem == null) {
-            throw validationException.get();
+            return Optional.of(validationMessage.get());
         }
 
         if (!link.pageSectionId.isEmpty() && !tocItem.hasPageSection(link.pageSectionId)) {
-            throw validationException.get();
+            return Optional.of(validationMessage.get());
         }
+
+        return Optional.empty();
     }
 
     @Override
@@ -515,11 +526,15 @@ public class WebSite implements DocStructure {
     }
 
     private class LinkToValidate {
+        private Path path;
+        private String sectionWithLinkTitle;
         private String dirName;
         private String fileName;
         private String pageSectionId;
 
-        public LinkToValidate(String dirName, String fileName, String pageSectionId) {
+        LinkToValidate(Path path, String sectionWithLinkTitle, String dirName, String fileName, String pageSectionId) {
+            this.path = path;
+            this.sectionWithLinkTitle = sectionWithLinkTitle;
             this.dirName = dirName;
             this.fileName = fileName;
             this.pageSectionId = pageSectionId;
