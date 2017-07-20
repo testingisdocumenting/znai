@@ -21,8 +21,9 @@ class HelloWorld {
      * @return name of the best sample
      */
     public String sampleMethod(String p1, int p2) {
-        statement1();
-        statement2();
+        validate();
+        process(p2); // important comment
+        notifyAll(p1); // very important
 
         return bestSample();
     }

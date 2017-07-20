@@ -14,6 +14,15 @@ If `bodyOnly` is specified, signature will be omitted.
 
 :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true}
 
+# Callout Comments
+
+Similar to how you [specify comments type](features/external-code-snippets#callout-comments) for a regular file,
+you can specify `commentsType` option for `include-java`.
+
+    :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, commentsType: "inline"}
+
+:include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, commentsType: "inline"}
+
 # Signature Only
 
 Specifying a method name to extract only its body. 
