@@ -18,6 +18,7 @@ features
     SVG
     charts
     json
+    CLI
     columns
     templates
     bullet-points

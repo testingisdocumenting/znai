@@ -23,7 +23,7 @@ class CliCommand extends Component {
         // split tokens into two groups so the width remains constant
         // presentation mode centers slides. if width is growing the effect of typing is affected
         return (
-            <div className="cli-command">
+            <div className="cli-command content-block">
                 <pre>
                     <span className="prompt">$ </span>
                     <span>
