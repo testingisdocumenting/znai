@@ -57,7 +57,7 @@
     "query-string": "^4.3.1",
     "react": "^15.6.0",
     "react-dom": "^15.6.0",
-    "semantic-ui": "^2.2.7",
+    "semantic-ui-css": "^2.2.7",
     "victory": "^0.21.1",
     "victory-chart": "^21.1.4"
   },

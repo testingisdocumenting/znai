@@ -1,6 +1,6 @@
 import React from 'react'
 
-import 'semantic-ui/dist/components/label.css'
+import 'semantic-ui-css/components/label.css'
 
 import SimpleCodeToken from './SimpleCodeToken.js'
 import {splitTokensIntoLines, isInlinedComment, trimComment, containsInlinedComment} from './codeUtils'

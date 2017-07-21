@@ -1,6 +1,10 @@
 
 .idea
 .vscode
+/**/.settings
+/**/.mvn
+.classpath
+.project
 target
 node_modules
 td-documentation-reactjs/build

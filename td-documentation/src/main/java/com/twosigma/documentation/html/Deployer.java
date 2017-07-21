@@ -1,6 +1,7 @@
 package com.twosigma.documentation.html;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
+
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -28,11 +30,11 @@ public class Deployer {
     }
 
     public void deploy(String relativePath, String content) {
-        deploy(Paths.get(relativePath), content.getBytes());
+        deploy(Paths.get(relativePath), content);
     }
 
     public void deploy(Path relativePath, String content) {
-        deploy(relativePath, content.getBytes());
+        deploy(relativePath, content.getBytes(StandardCharsets.UTF_8));
     }
 
     public void deploy(Path srcPath) {

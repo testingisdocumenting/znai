@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './Table.css'
-import 'semantic-ui/dist/components/table.min.css'
+import 'semantic-ui-css/components/table.min.css'
 
 const Table = ({table, ...props}) => {
     const Row = ({row}) => {
