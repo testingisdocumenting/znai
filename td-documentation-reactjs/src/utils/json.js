@@ -7,7 +7,7 @@ function jsonPromise(docMeta, url) {
     url = fullResourcePath(docMeta.id, url)
 
     return new Promise((resolve, reject) => {
-        fetch(url).then((response) => {
+        fetch(url, {credentials: 'same-origin'}).then((response) => {
             response.json().then((json) => {
                 resolve(json)
             }, (error) => {
