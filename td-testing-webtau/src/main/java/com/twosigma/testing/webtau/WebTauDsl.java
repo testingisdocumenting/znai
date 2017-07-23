@@ -10,6 +10,7 @@ import com.twosigma.testing.webtau.cfg.WebTauConfig;
 import com.twosigma.testing.webtau.documentation.DocumentationDsl;
 import com.twosigma.testing.webtau.driver.CurrentWebDriver;
 import com.twosigma.testing.webtau.expectation.VisibleValueMatcher;
+import com.twosigma.testing.webtau.page.Cookies;
 import com.twosigma.testing.webtau.page.PageElement;
 import com.twosigma.testing.webtau.page.path.ElementPath;
 import com.twosigma.testing.webtau.page.path.GenericPageElement;
@@ -28,9 +29,10 @@ import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.*;
 public class WebTauDsl {
     private static WebTauConfig cfg = WebTauConfig.INSTANCE;
 
-    private static final WebDriver driver = new CurrentWebDriver();
+    public static final WebDriver driver = new CurrentWebDriver();
     public static final Http http = Http.http;
     public static final DocumentationDsl doc = new DocumentationDsl(driver);
+    public static final Cookies cookies = new Cookies(driver);
 
     public static <E> void executeStep(E context,
                                        TokenizedMessage inProgressMessage,
