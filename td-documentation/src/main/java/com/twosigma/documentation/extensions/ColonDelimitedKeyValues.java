@@ -21,7 +21,7 @@ import java.util.stream.Stream;
  * @author mykola
  */
 public class ColonDelimitedKeyValues {
-    private static final Pattern VAR_DEF = Pattern.compile("^\\w+:");
+    private static final Pattern KEY_DEF = Pattern.compile("^[^:]+:");
     private final String[] lines;
     private Map<String, String> vars;
     private String currentVarName;
@@ -66,7 +66,7 @@ public class ColonDelimitedKeyValues {
     }
 
     private void processLine(String line) {
-        if (VAR_DEF.matcher(line).find()) {
+        if (KEY_DEF.matcher(line).find()) {
             flushVar();
             int colonIdx = line.indexOf(':');
 
