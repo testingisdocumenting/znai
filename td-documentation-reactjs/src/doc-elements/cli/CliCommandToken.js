@@ -5,8 +5,16 @@ class CliCommandToken extends Component {
     constructor(props) {
         super(props)
 
+        this.state = this.initialState(props)
+    }
+
+    initialState(props) {
         const {isPresentation, value} = props
-        this.state = {lastCharIdx: isPresentation ? 0 : value.length}
+        return {lastCharIdx: isPresentation ? 0 : value.length}
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState(this.initialState(nextProps))
     }
 
     render() {

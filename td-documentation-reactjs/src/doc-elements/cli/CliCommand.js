@@ -7,10 +7,13 @@ class CliCommand extends Component {
     constructor(props) {
         super(props)
 
-        const {isPresentation} = props
-
         this.updateTokens(props.command)
-        this.state = {lastTokenIdx: isPresentation ? 1 : this.tokens.length}
+        this.state = this.initialState(props)
+    }
+
+    initialState(props) {
+        const {isPresentation} = props
+        return {lastTokenIdx: isPresentation ? 1 : this.tokens.length}
     }
 
     render() {
@@ -51,6 +54,7 @@ class CliCommand extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.updateTokens(nextProps.command)
+        this.setState(this.initialState(nextProps))
     }
 
     updateTokens(command) {
