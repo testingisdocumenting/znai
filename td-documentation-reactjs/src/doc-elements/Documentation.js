@@ -137,7 +137,7 @@ class Documentation extends Component {
         if (e.code === "Slash" && ! isSearchActive) {
             e.preventDefault()
             this.setState({isSearchActive: true})
-        } else if (e.code === "KeyP" && ! isPresentationMode) {
+        } else if (e.code === "KeyP" && ! isPresentationMode && ! isSearchActive) {
             this.setState({isPresentationMode: true})
         }
     }
