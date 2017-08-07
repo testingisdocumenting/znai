@@ -20,27 +20,51 @@ function extractTextLines(content) {
     return content.map(item => extractText(item))
 }
 
-function collectTextRecursively(content, result) {
+function extractTextLinesEmphasisOnly(content) {
+    return content.map(item => extractText(item, true))
+}
+
+function extractTextLinesEmphasisOrFull(content) {
+    const full = extractTextLines(content)
+    const emphasisOnly = extractTextLinesEmphasisOnly(content)
+    const result = []
+
+    for (let i = 0, len = full.length; i < len; i++) {
+        result.push(emphasisOnly[i] ? emphasisOnly[i] : full[i])
+    }
+
+    return result
+}
+
+function extractText(listItem, emphasisedOnly) {
+    const result = []
+    collectTextRecursively(result, listItem.content, emphasisedOnly, false)
+
+    return result.join(" ")
+}
+
+function collectTextRecursively(result, content, emphasisedOnly, withinEmphasis) {
     if (! content) {
         return
     }
 
     content.forEach(item => {
         if (item.type === "SimpleText") {
-            result.push(item.text)
+            if (emphasisedOnly && withinEmphasis) {
+                result.push(item.text)
+            } else if (! emphasisedOnly) {
+                result.push(item.text)
+            }
         } else {
-            collectTextRecursively(item.content, result)
+            collectTextRecursively(result, item.content, emphasisedOnly, withinEmphasis || isEmphasis(item))
         }
     })
 
     return result
 }
 
-function extractText(listItem) {
-    const result = []
-    collectTextRecursively(listItem.content, result)
-
-    return result.join(" ")
+function isEmphasis(docElement) {
+    return docElement.type === 'Emphasis' || docElement.type === 'StrongEmphasis'
 }
 
-export {extractTextLines, startsWithIcon, extractIconId, removeIcon}
+export {extractTextLines, extractTextLinesEmphasisOnly, extractTextLinesEmphasisOrFull, startsWithIcon, extractIconId, removeIcon}

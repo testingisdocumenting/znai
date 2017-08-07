@@ -1,4 +1,10 @@
-import {startsWithIcon, extractIconId, removeIcon} from './bulletUtils'
+import {
+    startsWithIcon,
+    extractIconId,
+    removeIcon,
+    extractTextLinesEmphasisOnly,
+    extractTextLinesEmphasisOrFull
+} from './bulletUtils'
 
 const itemContent = [
     {
@@ -33,6 +39,46 @@ const itemContent = [
     }
 ]
 
+const bulletListContent = [
+    {
+        "type": "ListItem",
+        "content": [
+            {
+                "type": "Paragraph",
+                "content": [
+                    {
+                        "text": "Additional",
+                        "type": "SimpleText"
+                    },
+                    {
+                        "type": "Emphasis",
+                        "content": [
+                            {
+                                "text": "Inject",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "ListItem",
+        "content": [
+            {
+                "type": "Paragraph",
+                "content": [
+                    {
+                        "text": "Third Step with text",
+                        "type": "SimpleText"
+                    }
+                ]
+            }
+        ]
+    }
+]
+
 describe("bulletUtils", () => {
     it("detects if bullet item starts with Icon", () => {
         expect(startsWithIcon(itemContent)).toBeTruthy()
@@ -49,5 +95,15 @@ describe("bulletUtils", () => {
 
         expect(withoutIcon[0].content[0].type).toEqual("Emphasis")
         expect(itemContent[0].content.length).toEqual(originalSize)
+    })
+
+    it("extracts only emphasised text", () => {
+        const extractedTexts = extractTextLinesEmphasisOnly(itemContent)
+        expect(extractedTexts).toEqual(["Inject"])
+    })
+
+    it("extracts full text when emphasised is not present", () => {
+        const extractedTexts = extractTextLinesEmphasisOrFull(bulletListContent)
+        expect(extractedTexts).toEqual(["Inject", "Third Step with text"])
     })
 })
