@@ -9,7 +9,7 @@ const EmptyBox = () => {
 }
 
 const RevealBoxes = ({elementsLibrary, content, slideIdx, ...props}) => {
-    const components = Array(content.length).fill().map((nothing, idx) => idx >= slideIdx ? EmptyBox : Box);
+    const components = Array(content.length).fill().map((nothing, idx) => idx > slideIdx ? EmptyBox : Box);
 
     return <div className="bullet-boxes">{content.map((item, idx) => {
         const Component = components[idx]

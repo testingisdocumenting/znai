@@ -106,6 +106,7 @@ const bulletContent = [
         "bulletMarker": "*",
         "tight": true,
         "type": "BulletList",
+        "meta": { "presentationBulletListType": "RevealBoxes", "differentColors": true },
         "content": [
             {
                 "type": "ListItem",
@@ -129,6 +130,34 @@ const bulletContent = [
                         "content": [
                             {
                                 "text": "reputation damage",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "cost of support",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "hidden burden",
                                 "type": "SimpleText"
                             }
                         ]
@@ -314,7 +343,7 @@ const page = {
 
 const docMeta = {id: "mdoc", title: "MDoc", type: "User Guide"}
 
-const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [cliCommand])
+const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, bulletContent)
 const PresentationDemo = (props) => <Presentation docMeta={docMeta} presentationRegistry={registry}/>
 
 export default PresentationDemo
