@@ -64,9 +64,10 @@ class TextMessage extends Component {
     }
 }
 
-const LeftRightTimeLine = ({content, isPresentation, slideIdx}) => {
+const LeftRightTimeLine = ({content, meta, isPresentation, slideIdx}) => {
     const textLines = isPresentation ? extractTextLinesEmphasisOrFull(content) : extractTextLines(content)
-    const textLinesToReveal = isPresentation ? textLines.slice(0, slideIdx + 1) : textLines
+    const lastLineIdx = meta.allAtOnce ? textLines.length - 1: slideIdx
+    const textLinesToReveal = isPresentation ? textLines.slice(0, lastLineIdx + 1) : textLines
 
     const bullets = textLines.map((text, idx) => <Bullet key={idx} idx={idx}/>)
     const messages = textLinesToReveal.map((text, idx) => <TextMessage key={idx} idx={idx} text={text}

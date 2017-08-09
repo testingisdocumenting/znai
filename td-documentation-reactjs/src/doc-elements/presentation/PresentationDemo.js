@@ -109,7 +109,7 @@ const bulletContent = [
         "bulletMarker": "*",
         "tight": true,
         "type": "BulletList",
-        "meta": {"presentationBulletListType": "RevealBoxes", "allAtOnce": false},
+        "meta": {"presentationBulletListType": "LeftRightTimeLine", "allAtOnce": true},
         "content": [
             {
                 "type": "ListItem",
