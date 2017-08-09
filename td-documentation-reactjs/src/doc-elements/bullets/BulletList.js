@@ -36,9 +36,11 @@ const PresentationBulletList = (props) => {
     return <PresentationBullets isPresentation={isPresentation} {...props}/>
 }
 
-const presentationNumberOfSlides = ({content, ...props}) => {
+const presentationNumberOfSlides = (props) => {
+    const {content, meta} = props
+
     const type = presentationListType(props)
-    return (type === null) ? 1 : content.length
+    return (type === null || meta.allAtOnce) ? 1 : content.length
 }
 
 function valueByIdWithWarning(dict, type) {
