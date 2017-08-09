@@ -234,6 +234,9 @@ const stepsBulletContent = [
 const codeWithInlinedComments = [{
     "lang": "javascript",
     "maxLineLength": 52,
+    "meta": {
+        allAtOnce: true
+    },
     "tokens": [
         {
             "type": "keyword",
@@ -354,7 +357,7 @@ const page = {
 
 const docMeta = {id: "mdoc", title: "MDoc", type: "User Guide"}
 
-const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, bulletContent)
+const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, codeWithInlinedComments)
 const PresentationDemo = (props) => <Presentation docMeta={docMeta} presentationRegistry={registry}/>
 
 export default PresentationDemo

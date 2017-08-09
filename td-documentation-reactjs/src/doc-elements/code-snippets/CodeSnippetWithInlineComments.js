@@ -42,14 +42,14 @@ const BulletExplanations = ({comments}) => <div className="code-bullets">
     {comments.map((t, idx) => <Bullet key={idx} comment={t.content} idx={idx + 1}/>)}</div>
 
 const Explanations = ({isPresentation, slideIdx, comments}) => {
-    if (! isPresentation) {
+    if (!isPresentation) {
         return <BulletExplanations comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
     }
 
     return null
 }
 
-const CodeSnippetWithInlineComments = ({tokens, isPresentation, slideIdx}) => {
+const CodeSnippetWithInlineComments = ({tokens, isPresentation, meta, slideIdx}) => {
     commentIdx = 0
     const comments = tokens.filter(t => isInlinedComment(t))
     const lines = splitTokensIntoLines(tokens)
@@ -62,22 +62,32 @@ const CodeSnippetWithInlineComments = ({tokens, isPresentation, slideIdx}) => {
     })
 
     // slideIdx === 0 means no highlights, 1 - first comment, etc
-    const noHighlights = slideIdx === 0
-    const lineIdxToHighlight = noHighlights ? -1 : idxOfLinesWithComments[slideIdx - 1]
+    const highlightIsVisible = slideIdx > 0
 
-    const className = "code-with-inlined-comments" + (noHighlights ? "" : " with-highlighted-line")
+    const className = "code-with-inlined-comments" + (highlightIsVisible ? " with-highlighted-line" : "")
 
-    return <div className={className}>
-        <pre>
-            <code>
-                {lines.map((line, idx) => <LineOfTokens key={idx} line={line}
-                                                        isHighlighted={lineIdxToHighlight === idx}
-                                                        isPresentation={isPresentation}/>)}
-            </code>
-        </pre>
+    return (
+        <div className={className}>
+            <pre>
+                <code>
+                    {lines.map((line, idx) => <LineOfTokens key={idx} line={line}
+                                                            isHighlighted={isHighlighted(idx)}
+                                                            isPresentation={isPresentation}/>)}
+                </code>
+            </pre>
 
-        <Explanations isPresentation={isPresentation} slideIdx={slideIdx} comments={comments}/>
-    </div>
+            <Explanations isPresentation={isPresentation} slideIdx={slideIdx} comments={comments}/>
+        </div>
+    )
+
+    function isHighlighted(idx) {
+        if (meta.allAtOnce && highlightIsVisible) {
+            return idxOfLinesWithComments.indexOf(idx) !== -1
+        }
+
+        const lineIdxToHighlight = highlightIsVisible ? idxOfLinesWithComments[slideIdx - 1] : -1
+        return lineIdxToHighlight === idx
+    }
 }
 
 export default CodeSnippetWithInlineComments

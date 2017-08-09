@@ -21,17 +21,26 @@ class Snippet extends React.Component {
 }
 
 const presentationSnippetHandler = {component: Snippet,
-    numberOfSlides: ({commentsType, tokens}) => {
+    numberOfSlides: ({meta, commentsType, tokens}) => {
         if (commentsType !== 'inline') {
             return 1
         }
 
         const comments = tokens.filter(t => isInlinedComment(t))
+
+        if (meta.allAtOnce && comments.length > 0) {
+            return 2 // no highlights and all highlighted at once
+        }
+
         return comments.length + 1
     },
 
-    slideInfoProvider: ({tokens, slideIdx}) => {
+    slideInfoProvider: ({meta, tokens, slideIdx}) => {
         const comments = tokens.filter(t => isInlinedComment(t))
+
+        if (meta.allAtOnce) {
+            return {}
+        }
 
         return {slideVisibleNote: !comments.length ? null :
             slideIdx === 0 ? "" : comments[slideIdx - 1].content}
