@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 
 import {extractTextLines, extractTextLinesEmphasisOrFull} from '../bulletUtils'
 import {splitTextIntoLines} from '../../../utils/strings'
+import {isAllAtOnce} from '../../meta/meta'
 
 import colors from './colors'
 
@@ -69,7 +70,7 @@ class Step extends Component {
 
 const Steps = ({content, meta, isPresentation, slideIdx}) => {
     const textLines = isPresentation ? extractTextLinesEmphasisOrFull(content) : extractTextLines(content)
-    const lastLineIdx = meta.allAtOnce ? textLines.length - 1: slideIdx
+    const lastLineIdx = isAllAtOnce(meta) ? textLines.length - 1: slideIdx
     const textLinesToReveal = isPresentation ? textLines.slice(0, lastLineIdx + 1) : textLines
 
     const dx = (totalWidth - (textLinesToReveal.length * stepAllocatedWidth)) / 2

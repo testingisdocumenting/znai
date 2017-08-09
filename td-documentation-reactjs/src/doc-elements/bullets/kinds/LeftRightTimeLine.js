@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import SvgWithCalculatedSize from './SvgWithCalculatedSize'
 
 import {extractTextLinesEmphasisOrFull, extractTextLines} from '../bulletUtils'
+import {isAllAtOnce} from '../../meta/meta'
 
 const stepSize = 15
 
@@ -66,7 +67,7 @@ class TextMessage extends Component {
 
 const LeftRightTimeLine = ({content, meta, isPresentation, slideIdx}) => {
     const textLines = isPresentation ? extractTextLinesEmphasisOrFull(content) : extractTextLines(content)
-    const lastLineIdx = meta.allAtOnce ? textLines.length - 1: slideIdx
+    const lastLineIdx = isAllAtOnce(meta) ? textLines.length - 1: slideIdx
     const textLinesToReveal = isPresentation ? textLines.slice(0, lastLineIdx + 1) : textLines
 
     const bullets = textLines.map((text, idx) => <Bullet key={idx} idx={idx}/>)

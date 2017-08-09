@@ -3,6 +3,7 @@ import React from 'react'
 import 'semantic-ui-css/components/label.css'
 
 import SimpleCodeToken from './SimpleCodeToken.js'
+import {isAllAtOnce} from '../meta/meta'
 import {splitTokensIntoLines, isInlinedComment, trimComment, containsInlinedComment} from './codeUtils'
 
 import './CodeSnippetWithInlineComments.css'
@@ -81,7 +82,7 @@ const CodeSnippetWithInlineComments = ({tokens, isPresentation, meta, slideIdx})
     )
 
     function isHighlighted(idx) {
-        if (meta.allAtOnce && highlightIsVisible) {
+        if (isAllAtOnce(meta) && highlightIsVisible) {
             return idxOfLinesWithComments.indexOf(idx) !== -1
         }
 

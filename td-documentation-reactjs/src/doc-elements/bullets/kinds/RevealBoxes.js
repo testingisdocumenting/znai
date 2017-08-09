@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {extractTextLinesEmphasisOrFull} from '../bulletUtils'
+import {isAllAtOnce} from '../../meta/meta'
 
 import './RevealBoxes.css'
 
@@ -14,7 +15,7 @@ const EmptyBox = () => {
 
 const RevealBoxes = ({elementsLibrary, meta, content, slideIdx, ...props}) => {
     const components = Array(content.length).fill()
-        .map((nothing, idx) => (idx <= slideIdx || meta.allAtOnce) ? Box : EmptyBox)
+        .map((nothing, idx) => (idx <= slideIdx || isAllAtOnce(meta)) ? Box : EmptyBox)
 
     const textLines = extractTextLinesEmphasisOrFull(content)
 

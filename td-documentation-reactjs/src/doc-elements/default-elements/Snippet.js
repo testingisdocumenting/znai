@@ -4,6 +4,7 @@ import CodeSnippetWithInlineComments from '../code-snippets/CodeSnippetWithInlin
 import SimpleCodeSnippet from '../code-snippets/SimpleCodeSnippet'
 
 import {isInlinedComment} from '../code-snippets/codeUtils'
+import {isAllAtOnce} from '../meta/meta'
 
 import './Snippet.css'
 
@@ -28,7 +29,7 @@ const presentationSnippetHandler = {component: Snippet,
 
         const comments = tokens.filter(t => isInlinedComment(t))
 
-        if (meta.allAtOnce && comments.length > 0) {
+        if (isAllAtOnce(meta) && comments.length > 0) {
             return 2 // no highlights and all highlighted at once
         }
 
@@ -38,7 +39,7 @@ const presentationSnippetHandler = {component: Snippet,
     slideInfoProvider: ({meta, tokens, slideIdx}) => {
         const comments = tokens.filter(t => isInlinedComment(t))
 
-        if (meta.allAtOnce) {
+        if (isAllAtOnce(meta)) {
             return {}
         }
 

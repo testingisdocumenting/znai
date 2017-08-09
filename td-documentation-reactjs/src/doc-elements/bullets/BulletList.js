@@ -7,6 +7,8 @@ import Venn from './kinds/Venn'
 import RevealBoxes from './kinds/RevealBoxes'
 import Steps from './kinds/Steps'
 
+import {isAllAtOnce} from '../meta/meta'
+
 const types = {LeftRightTimeLine, Venn, Steps}
 const presentationTypes = {RevealBoxes, LeftRightTimeLine, Venn, Steps}
 
@@ -40,7 +42,7 @@ const presentationNumberOfSlides = (props) => {
     const {content, meta} = props
 
     const type = presentationListType(props)
-    return (type === null || meta.allAtOnce) ? 1 : content.length
+    return (type === null || isAllAtOnce(meta)) ? 1 : content.length
 }
 
 function valueByIdWithWarning(dict, type) {
