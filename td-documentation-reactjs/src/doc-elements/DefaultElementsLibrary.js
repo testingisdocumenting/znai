@@ -61,6 +61,9 @@ library.OrderedList = ({delimiter, startNumber, ...props}) => <ol className="con
     <props.elementsLibrary.DocElement {...props}/>
 </ol>
 
+presentationElementHandlers.OrderedList = {component: library.OrderedList,
+    numberOfSlides: () => 1}
+
 library.ListItem = ListItem
 
 library.Section = Section
