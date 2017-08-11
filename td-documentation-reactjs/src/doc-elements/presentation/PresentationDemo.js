@@ -315,8 +315,9 @@ const cliCommand = {
 
 const chart = {
     "type": "Chart",
+    "meta": {allAtOnce: true},
     "innerRadius": 100.0,
-    "chartType": "Bar",
+    "chartType": "Pie",
     "data": [
         [
             "A",
@@ -357,7 +358,7 @@ const page = {
 
 const docMeta = {id: "mdoc", title: "MDoc", type: "User Guide"}
 
-const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, codeWithInlinedComments)
+const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [chart])
 const PresentationDemo = (props) => <Presentation docMeta={docMeta} presentationRegistry={registry}/>
 
 export default PresentationDemo

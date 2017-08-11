@@ -10,7 +10,7 @@ const CustomSlice = (props) => {
         <Slice {...props}/>
 }
 
-const Pie = ({data, width, height, slideIdx, isPresentation, ...props}) => {
+const Pie = ({data, width, height, slideIdx, isPresentation, meta, ...props}) => {
     const calculatedWidth = width || defaultStyle.pie.width
     const calculatedHeight = height || defaultStyle.pie.height
 
@@ -18,8 +18,8 @@ const Pie = ({data, width, height, slideIdx, isPresentation, ...props}) => {
         <div style={{width: calculatedWidth, height: calculatedHeight}}>
             <VictoryPie data={data}
                         x={0} y={1}
-                        dataComponent={<CustomSlice isPresentation={isPresentation} slideIdx={slideIdx}/>}
-                        labelComponent={<CustomLabel isPresentation={isPresentation} slideIdx={slideIdx}/>}
+                        dataComponent={<CustomSlice isPresentation={isPresentation} meta={meta} slideIdx={slideIdx}/>}
+                        labelComponent={<CustomLabel isPresentation={isPresentation} meta={meta} slideIdx={slideIdx}/>}
                         width={calculatedWidth} height={calculatedHeight}
                         {...props}
                         theme={VictoryTheme.material}/>

@@ -11,7 +11,7 @@ const CustomBar = (props) => {
         <Bar {...props}/>
 }
 
-const BarChart = ({data, width, height, slideIdx, isPresentation, ...props}) => {
+const BarChart = ({data, width, height, slideIdx, isPresentation, meta, ...props}) => {
     return (
         <div style={{width: width || defaultStyle.bar.width, height: height || defaultStyle.bar.height}}>
             <VictoryChart theme={VictoryTheme.material}
@@ -19,8 +19,8 @@ const BarChart = ({data, width, height, slideIdx, isPresentation, ...props}) => 
                 <VictoryAxis crossAxis/>
                 <VictoryAxis crossAxis dependentAxis/>
                 <VictoryBar data={data} x={0} y={1}
-                            dataComponent={<CustomBar isPresentation={isPresentation} slideIdx={slideIdx}/>}
-                            labelComponent={<CustomLabel isPresentation={isPresentation} slideIdx={slideIdx}/>}
+                            dataComponent={<CustomBar isPresentation={isPresentation} meta={meta} slideIdx={slideIdx}/>}
+                            labelComponent={<CustomLabel isPresentation={isPresentation} meta={meta} slideIdx={slideIdx}/>}
                             {...props}/>
             </VictoryChart>
         </div>
