@@ -17,7 +17,7 @@ const content = [
                         "type": "Paragraph",
                         "content": [
                             {
-                                "text": "Something Additional Third Line",
+                                "text": "Risk management",
                                 "type": "SimpleText"
                             }
                         ]

@@ -58,7 +58,7 @@ class Step extends Component {
 
         return parts.map((part, idx) => (
             <text key={idx}
-                  x={halfWidth}
+                  x={halfWidth + (noseLength / 3.0)}
                   y={y + idx * fontHeight} fontSize={fontSize} textAnchor="middle"
                   style={textStyle}
                   alignmentBaseline="central">
