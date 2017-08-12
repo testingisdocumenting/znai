@@ -3,6 +3,7 @@ import React from 'react'
 import 'semantic-ui-css/components/label.css'
 
 import SimpleCodeToken from './SimpleCodeToken.js'
+import LineOfTokens from './LineOfTokens'
 import {isAllAtOnce} from '../meta/meta'
 import {splitTokensIntoLines, isInlinedComment, trimComment, containsInlinedComment} from './codeUtils'
 
@@ -29,14 +30,6 @@ const SpecialCommentToken = ({token, isPresentation}) => {
 
 const Bullet = ({comment, idx}) => {
     return <div><CircleBadge idx={idx}/> <span className="code-bullet-comment">{trimComment(comment)}</span></div>
-}
-
-const LineOfTokens = ({line, isHighlighted, isPresentation}) => {
-    const className = "code-line" + (isHighlighted ? " highlight" : "")
-
-    return <span className={className}>
-        {line.map((t, idx) => <SpecialCommentToken key={idx} token={t} isPresentation={isPresentation}/>)}
-    </span>
 }
 
 const BulletExplanations = ({comments}) => <div className="code-bullets">
@@ -73,7 +66,8 @@ const CodeSnippetWithInlineComments = ({tokens, isPresentation, meta, slideIdx})
                 <code>
                     {lines.map((line, idx) => <LineOfTokens key={idx} line={line}
                                                             isHighlighted={isHighlighted(idx)}
-                                                            isPresentation={isPresentation}/>)}
+                                                            isPresentation={isPresentation}
+                                                            TokenComponent={SpecialCommentToken}/>)}
                 </code>
             </pre>
 
