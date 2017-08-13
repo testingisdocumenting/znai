@@ -13,10 +13,6 @@ class CliCommandToken extends Component {
         return {lastCharIdx: isPresentation ? 0 : value.length}
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState(this.initialState(nextProps))
-    }
-
     render() {
         const {type, value, isCursorVisible, isHighlighted, isHidden} = this.props
         const {lastCharIdx} = this.state
