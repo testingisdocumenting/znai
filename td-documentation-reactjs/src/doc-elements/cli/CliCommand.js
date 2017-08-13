@@ -20,28 +20,25 @@ class CliCommand extends Component {
         const {paramsToHighlight, isPresentation, command} = this.props
         const {lastTokenIdx} = this.state
 
-        const visibleTokens = this.tokens.slice(0, lastTokenIdx)
-        const invisibleTokens = this.tokens.slice(lastTokenIdx, this.tokens.length)
-
-        // split tokens into two groups so the width remains constant
         // presentation mode centers slides. if width is growing the effect of typing is affected
         return (
             <div key={command} className="cli-command content-block">
                 <pre>
                     <span className="prompt">$ </span>
                     <span>
-                        {visibleTokens.map((token, idx) => <CliCommandToken key={idx} {...token}
-                                                                            isHighlighted={isHighlighted(token)}
-                                                                            isCursorVisible={isPresentation && idx === visibleTokens.length - 1}
-                                                                            isPresentation={isPresentation}
-                                                                            isHidden={false}
-                                                                            onFullReveal={this.revealNextToken}/>)
+                        {this.tokens.map((token, idx) => {
+                            const isHidden = lastTokenIdx <= idx
+                            const isLast = idx === this.tokens.length - 1
+                            return <CliCommandToken key={idx + isHidden} {...token}
+                                                    isHighlighted={isHighlighted(token)}
+                                                    isCursorVisible={isPresentation &&
+                                                        ((lastTokenIdx > this.tokens.length && isLast) || idx === lastTokenIdx - 1)}
+                                                    isPresentation={isPresentation}
+                                                    isHidden={isHidden}
+                                                    onFullReveal={this.revealNextToken}/>
+                        })
                         }
                     </span>
-                    <span>{invisibleTokens.map((token, idx) => <CliCommandToken key={idx} {...token}
-                                                                                highlight={isHighlighted(token)}
-                                                                                isPresentation={isPresentation}
-                                                                                isHidden={true}/>)}</span>
                 </pre>
             </div>
         )
@@ -49,11 +46,6 @@ class CliCommand extends Component {
         function isHighlighted(token) {
             return paramsToHighlight && paramsToHighlight.filter(p => token.value.indexOf(p) !== -1).length
         }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.updateTokens(nextProps.command)
-        this.setState(this.initialState(nextProps))
     }
 
     updateTokens(command) {

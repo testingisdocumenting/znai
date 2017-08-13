@@ -4,13 +4,21 @@ function splitTextIntoLines(text, thresholdCharCount) {
     }
 
     const words = text.split(" ")
+    const result = splitParts(words,
+        (word) => word.length + 1, // one for space
+        thresholdCharCount)
+
+    return result.map(words => words.join(" "))
+}
+
+function splitParts(parts, lengthFunc, thresholdCharCount) {
     const result = []
     let runningLength = 0
     let runningWords = []
 
-    words.forEach(word => {
-        runningLength += word.length + 1 // one for space
-        runningWords.push(word)
+    parts.forEach(part => {
+        runningLength += lengthFunc(part)
+        runningWords.push(part)
 
         if (runningLength >= thresholdCharCount) {
             flush()
@@ -23,7 +31,7 @@ function splitTextIntoLines(text, thresholdCharCount) {
 
     function flush() {
         if (runningWords.length) {
-            result.push(runningWords.join(" "))
+            result.push(runningWords)
         }
 
         runningWords = []
@@ -31,4 +39,4 @@ function splitTextIntoLines(text, thresholdCharCount) {
     }
 }
 
-export {splitTextIntoLines}
+export {splitTextIntoLines, splitParts}

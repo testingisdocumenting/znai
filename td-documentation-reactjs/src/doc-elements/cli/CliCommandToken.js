@@ -26,7 +26,7 @@ class CliCommandToken extends Component {
         return (
             <span>
                 <span className={visibleClassName}>{value.substr(0, lastCharIdx)}</span>
-                {isCursorVisible ? <span className="cursor">&nbsp;</span> : null}
+                {isCursorVisible ? <div className="cursor"/> : null}
                 {hasHiddenPart ? <span className={invisibleClassName}>{value.substr(lastCharIdx, value.length)}</span> : null}
             </span>
         )
