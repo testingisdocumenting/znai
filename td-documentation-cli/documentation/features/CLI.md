@@ -14,6 +14,12 @@ Use plural version `paramsToHighlight` to highlight multiple parameters
 
 :include-cli-command: another-command --score=2 --name=Name --value=8 {paramsToHighlight: ["name", "value"]}
 
+# Long lines
+
+Long command lines will be automatically wrapped into multiple lines
+
+:include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {paramsToHighlight: ["name", "value"]}
+
 
 # Presentation mode
 

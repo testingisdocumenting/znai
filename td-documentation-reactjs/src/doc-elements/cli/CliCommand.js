@@ -1,7 +1,8 @@
-import React, {Component} from "react";
+import React, {Component} from "react"
 
-import CliCommandToken from "./CliCommandToken";
-import "./CliCommand.css";
+import CliCommandToken from "./CliCommandToken"
+import {splitParts} from "../../utils/strings"
+import "./CliCommand.css"
 
 class CliCommand extends Component {
     constructor(props) {
@@ -16,32 +17,59 @@ class CliCommand extends Component {
         return {lastTokenIdx: isPresentation ? 1 : this.tokens.length}
     }
 
-    render() {
-        const {paramsToHighlight, isPresentation, command} = this.props
-        const {lastTokenIdx} = this.state
+    componentWillReceiveProps(nextProps) {
+        this.updateTokens(nextProps.command)
+    }
 
-        // presentation mode centers slides. if width is growing the effect of typing is affected
+    render() {
+        const {command} = this.props
+
         return (
             <div key={command} className="cli-command content-block">
                 <pre>
                     <span className="prompt">$ </span>
-                    <span>
-                        {this.tokens.map((token, idx) => {
-                            const isHidden = lastTokenIdx <= idx
-                            const isLast = idx === this.tokens.length - 1
-                            return <CliCommandToken key={idx + isHidden} {...token}
-                                                    isHighlighted={isHighlighted(token)}
-                                                    isCursorVisible={isPresentation &&
-                                                        ((lastTokenIdx > this.tokens.length && isLast) || idx === lastTokenIdx - 1)}
-                                                    isPresentation={isPresentation}
-                                                    isHidden={isHidden}
-                                                    onFullReveal={this.revealNextToken}/>
-                        })
-                        }
+                    <span key={command}>
+                        {this.renderTokens()}
                     </span>
                 </pre>
             </div>
         )
+    }
+
+    renderTokens() {
+        const {paramsToHighlight, isPresentation} = this.props
+        const {lastTokenIdx} = this.state
+        const lines = splitParts(this.tokens, t => t.value.length, isPresentation ? 40 : 80)
+        let tokenIdx = 0
+
+        // presentation mode centers slides. if width is growing the effect of typing is affected
+        return lines.map((line, lineIdx) => {
+            const isLineVisible = lastTokenIdx > (tokenIdx + line.length)
+            const isLastLine = lineIdx === lines.length - 1
+
+            const renderedLine = line.map(token => {
+                const isHidden = lastTokenIdx <= tokenIdx
+                const isLast = tokenIdx === this.tokens.length - 1
+                const isLastVisible = tokenIdx === lastTokenIdx - 1
+                const key = tokenIdx + isHidden
+
+                tokenIdx++
+
+                return <CliCommandToken key={key} {...token}
+                                        isHighlighted={isHighlighted(token)}
+                                        isCursorVisible={isPresentation &&
+                                        ((lastTokenIdx > this.tokens.length && isLast) || isLastVisible)}
+                                        isPresentation={isPresentation}
+                                        isHidden={isHidden}
+                                        onFullReveal={this.revealNextToken}/>
+            })
+
+            return (
+                <div key={lineIdx} className="tokens-line">{
+                    [...renderedLine, !isLastLine && isLineVisible ? <span className="line-separator">\</span> : null]
+                }</div>
+            )
+        })
 
         function isHighlighted(token) {
             return paramsToHighlight && paramsToHighlight.filter(p => token.value.indexOf(p) !== -1).length
@@ -63,8 +91,8 @@ class CliCommand extends Component {
 
 function tokenize(fullCommand) {
     const [command, ...params] = fullCommand.split(" ")
-    return [{type: "command", value: command}, ...params.map((p, idx) => {
-        return {type: "param", value: " " + p}
+    return [{type: "command", value: command + " "}, ...params.map(p => {
+        return {type: "param", value: p + " "}
     })]
 }
 

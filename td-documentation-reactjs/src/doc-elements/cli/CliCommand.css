@@ -6,10 +6,20 @@
 .cli-command .cursor {
     font-weight: bold;
     background-color: #2f9c0a;
-    margin-left: 5px;
+    margin-left: -5px;
     width: 8px;
     height: 10px;
     display: inline-block;
+}
+
+.cli-command .tokens-line {
+    display: block;
+    margin-left: 30px;
+}
+
+.cli-command .tokens-line:first-child {
+    display: inline-block;
+    margin-left: 0;
 }
 
 .cli-command pre {
