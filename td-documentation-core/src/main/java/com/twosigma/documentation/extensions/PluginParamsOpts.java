@@ -1,7 +1,6 @@
 package com.twosigma.documentation.extensions;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
@@ -22,6 +21,21 @@ public class PluginParamsOpts {
 
     public <E> E get(String name, E defaultValue) {
         return has(name) ? get(name) : defaultValue;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <E> List<E> getList(String name) {
+        if (!has(name)) {
+            return Collections.emptyList();
+        }
+
+        Object v = get(name);
+        if (!(v instanceof List)) {
+            E casted = (E) v;
+            return Collections.singletonList(casted);
+        }
+
+        return (List<E>) v;
     }
 
     public Stream<String> getNames() {

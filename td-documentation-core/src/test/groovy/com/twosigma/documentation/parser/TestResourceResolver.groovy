@@ -18,6 +18,11 @@ class TestResourceResolver implements PluginResourcesResolver {
     }
 
     @Override
+    String textContent(Path path) {
+        return ResourceUtils.textContent(path.fileName.toString())
+    }
+
+    @Override
     BufferedImage imageContent(String path) {
         return ImageIO.read(ResourceUtils.resourceStream(path))
     }

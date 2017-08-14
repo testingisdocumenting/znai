@@ -3,10 +3,11 @@ import React from 'react'
 import './CliOutput.css'
 
 const CliOutput = ({lines, chunkSize, fadedSize, highlight, isPresentation, slideIdx}) => {
-    const fadedLinesCount = fadedSize || 2
+    fadedSize = typeof fadedSize === 'undefined' ? 2 : fadedSize
+    chunkSize = chunkSize || lines.length
 
     return (
-        <div className="cli-output">
+        <div className="cli-output content-block">
             <pre>
                 <code>
                     {isPresentation ? renderPresentationLines() : renderLines(0, lines, "")}
@@ -19,11 +20,11 @@ const CliOutput = ({lines, chunkSize, fadedSize, highlight, isPresentation, slid
         const startIdx = chunkSize * slideIdx
         const endIdx = startIdx + chunkSize
 
-        const linesBefore = startIdx > fadedLinesCount ? lines.slice(startIdx - fadedLinesCount, startIdx) : []
-        const linesAfter = endIdx < lines.length ? lines.slice(endIdx, endIdx + fadedLinesCount) : []
+        const linesBefore = startIdx > fadedSize ? lines.slice(startIdx - fadedSize, startIdx) : []
+        const linesAfter = endIdx < lines.length ? lines.slice(endIdx, endIdx + fadedSize) : []
         const linesToShow = lines.slice(startIdx, endIdx)
 
-        return [...renderLines(startIdx - fadedLinesCount, linesBefore, "faded"),
+        return [...renderLines(startIdx - fadedSize, linesBefore, "faded"),
             ...renderLines(startIdx, linesToShow),
             ...renderLines(endIdx, linesAfter, "faded")]
     }
