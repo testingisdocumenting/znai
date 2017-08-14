@@ -22,6 +22,7 @@ import LatexMath from './math/LatexMath'
 import {Chart, presentationChartHandler} from './charts/Chart'
 import Image from './images/Image'
 import {CliCommand, presentationCliCommandHandler} from './cli/CliCommand'
+import {CliOutput, presentationCliOutput} from './cli/CliOutput'
 import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
 import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
@@ -110,5 +111,7 @@ presentationElementHandlers.Chart = presentationChartHandler
 library.CliCommand = CliCommand
 presentationElementHandlers.CliCommand = presentationCliCommandHandler
 
+library.CliOutput = CliOutput
+presentationElementHandlers.CliOutput = presentationCliOutput
 
 export {library as elementsLibrary, presentationElementHandlers}

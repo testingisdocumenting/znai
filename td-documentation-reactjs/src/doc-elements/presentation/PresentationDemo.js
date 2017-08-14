@@ -231,6 +231,34 @@ const stepsBulletContent = [
         ]
     }]
 
+const bashCode = 'output of a command\n' +
+    'test test\n' +
+    'line one\n' +
+    'line two\n' +
+    'line three\n' +
+    'line four\n' +
+    'line five\n' +
+    'line six\n' +
+    'line seven\n' +
+    'line eight\n' +
+    'line nine\n' +
+    'line ten\n' +
+    'line eleven\n' +
+    'line 12\n' +
+    'line 13\n' +
+    'line 14\n'
+
+const cliOutputElements = [{
+    "lang": "javascript",
+    "meta": {
+        allAtOnce: true
+    },
+    "type": "CliOutput",
+    "chunkSize": 6,
+    "highlight": [3, 6, 8],
+    "lines": bashCode.split("\n")
+}]
+
 const codeWithInlinedComments = [{
     "lang": "javascript",
     "maxLineLength": 52,
@@ -358,7 +386,7 @@ const page = {
 
 const docMeta = {id: "mdoc", title: "MDoc", type: "User Guide"}
 
-const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [chart])
+const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, cliOutputElements)
 const PresentationDemo = (props) => <Presentation docMeta={docMeta} presentationRegistry={registry}/>
 
 export default PresentationDemo
