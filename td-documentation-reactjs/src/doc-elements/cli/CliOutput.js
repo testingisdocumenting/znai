@@ -32,10 +32,20 @@ const CliOutput = ({lines, chunkSize, fadedSize, highlight, isPresentation, slid
     function renderLines(startIdx, lines, additionalClassName) {
         return lines.map((line, idx) => {
             const fullIdx = startIdx + idx
-            const isHighlighted = highlight && highlight.indexOf(fullIdx) !== -1
-            const className = "output-line" + (isHighlighted ? " highlight" : "") + " " + additionalClassName
+            const className = "output-line" + (isHighlighted() ? " highlight" : "") + " " + additionalClassName
 
             return <span key={fullIdx} className={className}>{line + "\n"}</span>
+
+            function isHighlighted() {
+                if (! highlight) {
+                    return false
+                }
+
+                const byIndex = highlight.indexOf(fullIdx) !== -1
+                const byText = highlight.filter(h => typeof h === 'string').some(h => line.indexOf(h) !== -1)
+
+                return byIndex || byText
+            }
         })
     }
 }

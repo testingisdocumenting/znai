@@ -255,7 +255,7 @@ const cliOutputElements = [{
     },
     "type": "CliOutput",
     "chunkSize": 6,
-    "highlight": [3, 6, 8],
+    "highlight": ['three', 'five', 8],
     "lines": bashCode.split("\n")
 }]
 
