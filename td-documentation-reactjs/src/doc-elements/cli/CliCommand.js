@@ -19,6 +19,10 @@ class CliCommand extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.updateTokens(nextProps.command)
+
+        if (nextProps.command !== this.props.command) {
+            this.setState(this.initialState(nextProps))
+        }
     }
 
     render() {
