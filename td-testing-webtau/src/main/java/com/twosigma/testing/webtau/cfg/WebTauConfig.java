@@ -20,6 +20,7 @@ public class WebTauConfig {
     public static final WebTauConfig INSTANCE = new WebTauConfig();
 
     private final ConfigValue config = declare("config", "config path", () -> "test.cfg");
+    private final ConfigValue env = declare("env", "environment id", () -> "local");
     private final ConfigValue url = declare("url", "base url for application under test", () -> null);
     private final ConfigValue waitTimeout = declare("waitTimeout", "wait timeout in milliseconds", () -> 5000);
     private final ConfigValue docPath = declare("docPath", "path for screenshots and other generated " +
@@ -34,6 +35,7 @@ public class WebTauConfig {
 
     private final List<ConfigValue> enumeratedCfgValues = Arrays.asList(
             config,
+            env,
             url,
             workingDir,
             waitTimeout,
@@ -74,6 +76,14 @@ public class WebTauConfig {
 
     public String getBaseUrl() {
         return url.getAsString();
+    }
+
+    public String getEnv() {
+        return env.getAsString();
+    }
+
+    public ConfigValue getEnvConfigValue() {
+        return env;
     }
 
     public ConfigValue getBaseUrlConfigValue() {

@@ -14,6 +14,9 @@ import java.nio.file.Paths
  * @author mykola
  */
 class WebUiTestCliConfig {
+    private static final String CLI_SOURCE = "command line argument"
+    private static final String CFG_SOURCE = "config file"
+
     private WebTauConfig cfg = WebTauConfig.INSTANCE
 
     private List<String> testFiles
@@ -27,10 +30,10 @@ class WebUiTestCliConfig {
         parseConfig()
 
         if (configObject) {
-            cfg.acceptConfigValues("config file", configObject.flatten())
+            cfg.acceptConfigValues(CFG_SOURCE, configObject.flatten())
         }
 
-        cfg.acceptConfigValues("command line argument", commandLineArgsAsMap())
+        cfg.acceptConfigValues(CLI_SOURCE, commandLineArgsAsMap())
     }
 
     List<String> getTestFiles() {
@@ -54,11 +57,13 @@ class WebUiTestCliConfig {
         testFiles = new ArrayList<>(commandLine.argList)
         Path workingDir = Paths.get(cliValue(cfg.getWorkingDirConfigName(), ""))
         configFile = workingDir.resolve(cliValue("config", "test.cfg"))
-        env = Paths.get(cliValue("env", "local"))
+
+        def envCliValue = cliValue(cfg.envConfigValue.key, "local")
+        cfg.acceptConfigValues(CLI_SOURCE, [(cfg.envConfigValue.key): envCliValue])
     }
 
     private void parseConfig() {
-        ConfigSlurper configSlurper = new ConfigSlurper(env)
+        ConfigSlurper configSlurper = new ConfigSlurper(cfg.env)
         if (! Files.exists(configFile)) {
             ConsoleOutputs.out("skipping config file as it is not found: ", Color.CYAN, configFile)
             return

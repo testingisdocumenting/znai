@@ -21,6 +21,14 @@ public class ConfigValue {
         return new ConfigValue(key,  description,null, null, defaultValueSupplier);
     }
 
+    private ConfigValue(String key, String description, String sourceId, Object value, Supplier<Object> defaultValueSupplier) {
+        this.key = key;
+        this.prefixedUpperCaseKey = "WEBTAU_" + key.toUpperCase();
+        this.description = description;
+        this.values = new ArrayDeque<>();
+        this.defaultValueSupplier = defaultValueSupplier;
+    }
+
     public void set(String source, Object value) {
         values.addFirst(new Value(source, value));
     }
@@ -60,7 +68,7 @@ public class ConfigValue {
     }
 
     public String getAsString() {
-        return isDefault() ? defaultValueSupplier.get().toString() : values.getFirst().getValue().toString();
+        return isDefault() ? convertToString(defaultValueSupplier.get()) : convertToString(values.getFirst().getValue());
     }
 
     public Path getAsPath() {
@@ -92,20 +100,16 @@ public class ConfigValue {
         return key + ": " + values.stream().map(Value::toString).collect(Collectors.joining(", "));
     }
 
-    private ConfigValue(String key, String description, String sourceId, Object value, Supplier<Object> defaultValueSupplier) {
-        this.key = key;
-        this.prefixedUpperCaseKey = "WEBTAU_" + key.toUpperCase();
-        this.description = description;
-        this.values = new ArrayDeque<>();
-        this.defaultValueSupplier = defaultValueSupplier;
-    }
-
     public boolean isDefault() {
         return values.isEmpty();
     }
 
     public boolean nonDefault() {
         return ! isDefault();
+    }
+
+    private String convertToString(Object value) {
+        return value == null ? "" : value.toString();
     }
 
     private static class Value {
