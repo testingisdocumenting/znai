@@ -33,6 +33,10 @@ public class ConfigValue {
         }
     }
 
+    public boolean match(String configKey) {
+        return configKey.equals(key) || configKey.equals(prefixedUpperCaseKey);
+    }
+
     public String getKey() {
         return key;
     }

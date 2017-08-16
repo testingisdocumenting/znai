@@ -38,7 +38,7 @@ public class WebDriverCreator {
             options.setBinary(cfg.getChromeBinPath().toFile());
         }
 
-        if (cfg.getChromeBinPath() != null) {
+        if (cfg.getChromeDriverPath() != null) {
             System.setProperty("webdriver.chrome.driver", cfg.getChromeDriverPath().toString());
         }
 

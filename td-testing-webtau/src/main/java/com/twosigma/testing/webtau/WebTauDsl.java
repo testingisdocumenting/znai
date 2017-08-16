@@ -27,7 +27,7 @@ import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.*;
  * @author mykola
  */
 public class WebTauDsl {
-    private static WebTauConfig cfg = WebTauConfig.INSTANCE;
+    public static final WebTauConfig cfg = WebTauConfig.INSTANCE;
 
     public static final WebDriver driver = new CurrentWebDriver();
     public static final Http http = Http.http;

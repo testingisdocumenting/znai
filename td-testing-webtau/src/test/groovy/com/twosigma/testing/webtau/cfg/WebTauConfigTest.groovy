@@ -23,4 +23,12 @@ class WebTauConfigTest {
         cfg.getBaseUrl().should == "new-url"
         cfg.baseUrlConfigValue.getSources().should == ["manual", "system property"]
     }
+
+    @Test
+    void "automatically registers user defined config values"() {
+        System.setProperty('userDefined', 'user-1')
+        WebTauConfig cfg = new WebTauConfig()
+
+        cfg.get('userDefined').should == 'user-1'
+    }
 }

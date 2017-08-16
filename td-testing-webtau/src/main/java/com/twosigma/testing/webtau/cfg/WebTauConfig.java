@@ -7,9 +7,7 @@ import com.twosigma.utils.StringUtils;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,20 +19,20 @@ import static com.twosigma.testing.webtau.cfg.ConfigValue.declare;
 public class WebTauConfig {
     public static final WebTauConfig INSTANCE = new WebTauConfig();
 
-    private ConfigValue config = declare("config", "config path", () -> "test.cfg");
-    private ConfigValue url = declare("url", "base url for application under test", () -> null);
-    private ConfigValue waitTimeout = declare("waitTimeout", "wait timeout in milliseconds", () -> 5000);
-    private ConfigValue docPath = declare("docPath", "path for screenshots and other generated " +
+    private final ConfigValue config = declare("config", "config path", () -> "test.cfg");
+    private final ConfigValue url = declare("url", "base url for application under test", () -> null);
+    private final ConfigValue waitTimeout = declare("waitTimeout", "wait timeout in milliseconds", () -> 5000);
+    private final ConfigValue docPath = declare("docPath", "path for screenshots and other generated " +
             "artifacts for documentation", () -> "");
-    private ConfigValue reportPath = declare("reportPath", "report file path", () -> getWorkingDir().resolve("webtau.report.html"));
-    private ConfigValue windowWidth = declare("windowWidth", "browser window width", () -> 1000);
-    private ConfigValue windowHeight = declare("windowHeight", "browser window height", () -> 800);
-    private ConfigValue workingDir = declare("workingDir", "logical working dir", () -> Paths.get(""));
-    private ConfigValue headless = declare("headless", "run headless mode", () -> false);
-    private ConfigValue chromeDriverPath = declare("chromeDriverPath", "path to chrome driver binary", null);
-    private ConfigValue chromeBinPath = declare("chromeBinPath", "path to chrome binary", null);
+    private final ConfigValue reportPath = declare("reportPath", "report file path", () -> getWorkingDir().resolve("webtau.report.html"));
+    private final ConfigValue windowWidth = declare("windowWidth", "browser window width", () -> 1000);
+    private final ConfigValue windowHeight = declare("windowHeight", "browser window height", () -> 800);
+    private final ConfigValue workingDir = declare("workingDir", "logical working dir", () -> Paths.get(""));
+    private final ConfigValue headless = declare("headless", "run headless mode", () -> false);
+    private final ConfigValue chromeDriverPath = declare("chromeDriverPath", "path to chrome driver binary", () -> null);
+    private final ConfigValue chromeBinPath = declare("chromeBinPath", "path to chrome binary", () -> null);
 
-    private List<ConfigValue> cfgValues = Arrays.asList(
+    private final List<ConfigValue> enumeratedCfgValues = Arrays.asList(
             config,
             url,
             workingDir,
@@ -47,17 +45,27 @@ public class WebTauConfig {
             chromeDriverPath,
             chromeBinPath);
 
+    private final List<ConfigValue> freeFormCfgValues = new ArrayList<>();
+
     protected WebTauConfig() {
         acceptConfigValues("environment variable", envVarsAsMap());
         acceptConfigValues("system property", systemPropsAsMap());
     }
 
     public Stream<ConfigValue> getCfgValuesStream() {
-        return cfgValues.stream();
+        return enumeratedCfgValues.stream();
     }
 
-    public void acceptConfigValues(String source, Map values) {
-        cfgValues.forEach(v -> v.accept(source, values));
+    public String get(String key) {
+        Optional<ConfigValue> configValue = freeFormCfgValues.stream().filter(v -> v.match(key)).findFirst();
+        return configValue.map(ConfigValue::getAsString).orElse("");
+    }
+
+    public void acceptConfigValues(String source, Map<String, ?> values) {
+        enumeratedCfgValues.forEach(v -> v.accept(source, values));
+
+        registerFreeFormCfgValues(values);
+        freeFormCfgValues.forEach(v -> v.accept(source, values));
     }
 
     public void setBaseUrl(String url) {
@@ -114,19 +122,19 @@ public class WebTauConfig {
 
     @Override
     public String toString() {
-        return cfgValues.stream().map(ConfigValue::toString).collect(Collectors.joining("\n"));
+        return enumeratedCfgValues.stream().map(ConfigValue::toString).collect(Collectors.joining("\n"));
     }
 
     public void print() {
-        int maxKeyLength = cfgValues.stream()
+        int maxKeyLength = enumeratedCfgValues.stream()
                 .filter(ConfigValue::nonDefault)
                 .map(v -> v.getKey().length()).max(Integer::compareTo).orElse(0);
 
-        int maxValueLength = cfgValues.stream()
+        int maxValueLength = enumeratedCfgValues.stream()
                 .filter(ConfigValue::nonDefault)
                 .map(v -> v.getAsString().length()).max(Integer::compareTo).orElse(0);
 
-        cfgValues.stream().filter(ConfigValue::nonDefault).forEach(v -> {
+        enumeratedCfgValues.stream().filter(ConfigValue::nonDefault).forEach(v -> {
                     String valueAsText = v.getAsString();
                     int valuePadding = maxValueLength - valueAsText.length();
 
@@ -138,13 +146,27 @@ public class WebTauConfig {
         );
     }
 
+    private void registerFreeFormCfgValues(Map<String, ?> values) {
+        Stream<String> keys = values.keySet().stream()
+                .filter(k -> noConfigValuePresent(enumeratedCfgValues, k));
 
-    private static Map systemPropsAsMap() {
+        keys.filter(k -> noConfigValuePresent(freeFormCfgValues, k))
+                .forEach(k -> {
+                    ConfigValue configValue = declare(k, "free form cfg value", () -> null);
+                    freeFormCfgValues.add(configValue);
+                });
+    }
+
+    private boolean noConfigValuePresent(List<ConfigValue> configValues, String key) {
+        return configValues.stream().noneMatch(cv -> cv.match(key));
+    }
+
+    private static Map<String, ?> systemPropsAsMap() {
         return System.getProperties().stringPropertyNames().stream()
                 .collect(Collectors.toMap(n -> n, System::getProperty));
     }
 
-    private static Map envVarsAsMap() {
+    private static Map<String, ?> envVarsAsMap() {
         return System.getenv();
     }
 }
