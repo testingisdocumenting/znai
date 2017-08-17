@@ -6,11 +6,12 @@ import LeftRightTimeLine from './kinds/LeftRightTimeLine'
 import Venn from './kinds/Venn'
 import RevealBoxes from './kinds/RevealBoxes'
 import Steps from './kinds/Steps'
+import HorizontalStripes from './kinds/HorizontalStripes'
 
 import {isAllAtOnce} from '../meta/meta'
 
 const types = {LeftRightTimeLine, Venn, Steps}
-const presentationTypes = {RevealBoxes, LeftRightTimeLine, Venn, Steps}
+const presentationTypes = {...types, RevealBoxes, HorizontalStripes}
 
 const BulletList = (props) => {
     const type = listType(props, 'bulletListType')
@@ -67,7 +68,20 @@ function listType(props, key) {
     return props.meta[key]
 }
 
+function slideInfoProvider(props) {
+    const type = presentationListType(props)
+    if (! type) {
+        return {}
+    }
+
+    const Bullets = valueByIdWithWarning(presentationTypes, type)
+    console.log(props, Bullets)
+
+    return {isFullScreen: Bullets.isPresentationFullScreen}
+}
+
 const presentationBulletListHandler = {component: PresentationBulletList,
-    numberOfSlides: presentationNumberOfSlides}
+    numberOfSlides: presentationNumberOfSlides,
+    slideInfoProvider: slideInfoProvider}
 
 export {BulletList, presentationBulletListHandler}

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import classNames from 'classnames'
 
 import './Presentation.css'
 
@@ -14,12 +15,9 @@ class Presentation extends Component {
     render() {
         const {docMeta, presentationRegistry} = this.props
         const {currentSlideIdx, isAppeared, scaleRatio} = this.state
-        const slideAreaStyle = {transform: "scale(" + scaleRatio + ")"}
-
-        const slideClassName = "slide-area" + (isAppeared ? " appeared": "")
         const slideContent = presentationRegistry.renderedComponent(currentSlideIdx)
 
-        const {pageTitle, sectionTitle} = presentationRegistry.extractSlideInfo(currentSlideIdx - 1)
+        const {pageTitle, sectionTitle} = presentationRegistry.extractCombinedSlideInfo(currentSlideIdx - 1)
 
         const slide = presentationRegistry.slideByIdx(currentSlideIdx)
         const isSectionTitleOnSlide = !! slide.info.sectionTitle
@@ -27,6 +25,9 @@ class Presentation extends Component {
         const slideVisibleNote = slide.info.slideVisibleNote
         const showSlideNote = typeof slideVisibleNote !== "undefined" && slideVisibleNote !== null
         const slideNoteClass = "footer" + ((showSlideNote && slideVisibleNote.length === 0) ? " size-only" : "")
+
+        const slideClassName = classNames("slide-area", {"appeared": isAppeared, "full-screen": slide.info.isFullScreen})
+        const slideAreaStyle = slide.info.isFullScreen ? {display: "flex", flex: 1} : {transform: "scale(" + scaleRatio + ")"}
 
         return (
             <div className="presentation" onClick={this.onMouseClick}>
@@ -93,11 +94,18 @@ class Presentation extends Component {
     }
 
     updateScaleRatio() {
+        const {presentationRegistry} = this.props
+        const {currentSlideIdx} = this.state
+
+        const slide = presentationRegistry.slideByIdx(currentSlideIdx)
+        const hPad = slide.info.isFullScreen ? 0 : 60
+        const vPad = slide.info.isFullScreen ? 0 : 30
+
         const width = this.componentDom.offsetWidth
         const height = this.componentDom.offsetHeight
 
-        const widthRatio = (this.slideAreaDom.offsetWidth - 60) / width
-        const heightRatio = (this.slideAreaDom.offsetHeight - 30) / height
+        const widthRatio = (this.slideAreaDom.offsetWidth - hPad) / width
+        const heightRatio = (this.slideAreaDom.offsetHeight - vPad) / height
 
         const scaleRatio = Math.min(widthRatio, heightRatio, defaultScaleRatio)
 

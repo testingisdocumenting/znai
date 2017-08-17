@@ -110,6 +110,12 @@
     align-items: center;
 }
 
+.presentation .slide-area.full-screen {
+    flex: 1;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
 .presentation .content-block {
     width: auto;
     margin: 0;

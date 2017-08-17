@@ -70,3 +70,14 @@ If you want to change bullets type only for presentation use
     :include-meta: {presentationBulletListType: "BulletsListType"}
 
 
+# HorizontalStripes
+
+Following bullet points will be rendered as horizontal striped, but only in presentation mode 
+
+    :include-meta: {presentationBulletListType: "HorizontalStripes"}
+
+:include-meta: {presentationBulletListType: "HorizontalStripes"}
+
+* Lessons Learned
+* Future Plans
+* Backup Strategy

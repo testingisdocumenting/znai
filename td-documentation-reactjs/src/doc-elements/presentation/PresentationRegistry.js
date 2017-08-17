@@ -61,7 +61,7 @@ class PresentationRegistry {
         this.numberOfSlides_ += numberOfSlides
     }
 
-    extractSlideInfo(pageLocalSlideIdx) {
+    extractCombinedSlideInfo(pageLocalSlideIdx) {
         const slideInfo = pageLocalSlideIdx >= 0 ? this.slides[pageLocalSlideIdx].info : {}
 
         const slideVisibleNote = slideInfo.slideVisibleNote
