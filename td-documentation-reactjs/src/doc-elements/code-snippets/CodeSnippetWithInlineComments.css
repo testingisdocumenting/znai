@@ -13,12 +13,14 @@
 .code-bullets {
     margin-top: 20px;
     margin-bottom: 20px;
+    padding: 1px;
 }
 
 .code-bullets.hidden-explanation {
     color: #eee;
     background-color: #eee;
     border: #ddd 1px solid;
+    padding: 0;
     cursor: pointer;
 }
 
