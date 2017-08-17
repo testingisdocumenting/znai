@@ -29,3 +29,13 @@ By specifying `commentsType`
 It will be rendered as 
 
 :include-file: file-name-with-comments.js {commentsType: "inline"}
+
+# Spoilers
+
+Set `spoiler` property to initially hide explanations. It may be useful when teaching or class.
+
+    :include-file: file-name-with-comments.js {commentsType: "inline", spoiler: true}
+
+Click on the spoiler to reveal the explanations.
+
+:include-file: file-name-with-comments.js {commentsType: "inline", spoiler: true}

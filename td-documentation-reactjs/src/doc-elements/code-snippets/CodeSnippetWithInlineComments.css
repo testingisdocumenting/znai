@@ -23,6 +23,14 @@ span.ui.blue.label {
     overflow-y: hidden;
 }
 
+.code-with-inlined-comments .spoiler {
+    border: 1px #ddd solid;
+    padding: 20px;
+    margin: 20px;
+    cursor: pointer;
+    color: #888;
+}
+
 .code-line.highlight {
     background: rgba(100, 180, 250, 0.3);
     padding: 4px 0;

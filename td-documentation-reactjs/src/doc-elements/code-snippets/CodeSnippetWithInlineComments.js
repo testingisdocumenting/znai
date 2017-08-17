@@ -2,18 +2,17 @@ import React from 'react'
 
 import 'semantic-ui-css/components/label.css'
 
-import SimpleCodeToken from './SimpleCodeToken.js'
+import SimpleCodeToken from './SimpleCodeToken'
 import LineOfTokens from './LineOfTokens'
+import BulletExplanations from './BulletExplanations'
+import CircleBadge from './CircleBadge'
+
 import {isAllAtOnce} from '../meta/meta'
-import {splitTokensIntoLines, isInlinedComment, trimComment, containsInlinedComment} from './codeUtils'
+import {splitTokensIntoLines, isInlinedComment, containsInlinedComment} from './codeUtils'
 
 import './CodeSnippetWithInlineComments.css'
 
 let commentIdx = 0
-
-const CircleBadge = ({idx}) => {
-    return <span className="ui blue circular label">{idx}</span>
-}
 
 const SpecialCommentToken = ({token, isPresentation}) => {
     if (isInlinedComment(token)) {
@@ -28,22 +27,16 @@ const SpecialCommentToken = ({token, isPresentation}) => {
     return (<SimpleCodeToken token={token}/>)
 }
 
-const Bullet = ({comment, idx}) => {
-    return <div><CircleBadge idx={idx}/> <span className="code-bullet-comment">{trimComment(comment)}</span></div>
-}
-
-const BulletExplanations = ({comments}) => <div className="code-bullets">
-    {comments.map((t, idx) => <Bullet key={idx} comment={t.content} idx={idx + 1}/>)}</div>
-
-const Explanations = ({isPresentation, slideIdx, comments}) => {
-    if (!isPresentation) {
-        return <BulletExplanations comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
+const Explanations = ({spoiler, isPresentation, slideIdx, comments}) => {
+    if (isPresentation) {
+        return null
     }
 
-    return null
+    return <BulletExplanations spoiler={spoiler}
+                               comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
 }
 
-const CodeSnippetWithInlineComments = ({tokens, isPresentation, meta, slideIdx}) => {
+const CodeSnippetWithInlineComments = ({tokens, spoiler, isPresentation, meta, slideIdx}) => {
     commentIdx = 0
     const comments = tokens.filter(t => isInlinedComment(t))
     const lines = splitTokensIntoLines(tokens)
@@ -71,7 +64,10 @@ const CodeSnippetWithInlineComments = ({tokens, isPresentation, meta, slideIdx})
                 </code>
             </pre>
 
-            <Explanations isPresentation={isPresentation} slideIdx={slideIdx} comments={comments}/>
+            <Explanations isPresentation={isPresentation}
+                          slideIdx={slideIdx}
+                          spoiler={spoiler}
+                          comments={comments}/>
         </div>
     )
 

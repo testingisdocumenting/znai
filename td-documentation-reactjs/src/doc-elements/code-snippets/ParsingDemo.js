@@ -37,7 +37,7 @@ class ParsingDemo extends Component {
 
         return <div>
             <SimpleCodeSnippet tokens={parseCode("html", htmlCode)}/>
-            <CodeSnippetWithInlineComments tokens={parseCode("javascript", javaCode)} slideIdx={1}/>
+            <CodeSnippetWithInlineComments tokens={parseCode("javascript", javaCode)} slideIdx={1} spoiler={true}/>
             <SimpleCodeSnippet tokens={parseCode("markdown", markdownCode2)} highlight={[1]}/>
         </div>
     }
