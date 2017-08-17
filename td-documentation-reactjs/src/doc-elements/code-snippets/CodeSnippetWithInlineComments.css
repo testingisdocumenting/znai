@@ -15,20 +15,32 @@
     margin-bottom: 20px;
 }
 
+.code-bullets.hidden-explanation {
+    color: #eee;
+    background-color: #eee;
+    border: #ddd 1px solid;
+    cursor: pointer;
+}
+
+.code-bullets .spoiler-message {
+    position: relative;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #888;
+}
+
+.hidden-explanation .ui.blue.circular.label.circle-badge {
+    color: #eee !important;
+    background-color: #eee !important;
+}
+
 span.ui.blue.label {
     background-color: #000080 !important;
 }
 
 .code-with-inlined-comments.with-highlighted-line pre {
     overflow-y: hidden;
-}
-
-.code-with-inlined-comments .spoiler {
-    border: 1px #ddd solid;
-    padding: 20px;
-    margin: 20px;
-    cursor: pointer;
-    color: #888;
 }
 
 .code-line.highlight {
