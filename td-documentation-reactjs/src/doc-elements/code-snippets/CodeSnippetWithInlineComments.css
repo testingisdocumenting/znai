@@ -28,7 +28,8 @@
     position: relative;
     float: left;
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 2px;
+    font-size: 14px;
     color: #888;
 }
 
