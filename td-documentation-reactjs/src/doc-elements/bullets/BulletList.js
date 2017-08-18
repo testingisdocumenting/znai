@@ -7,11 +7,12 @@ import Venn from './kinds/Venn'
 import RevealBoxes from './kinds/RevealBoxes'
 import Steps from './kinds/Steps'
 import HorizontalStripes from './kinds/HorizontalStripes'
+import Grid from './kinds/Grid'
 
 import {isAllAtOnce} from '../meta/meta'
 
 const types = {LeftRightTimeLine, Venn, Steps}
-const presentationTypes = {...types, RevealBoxes, HorizontalStripes}
+const presentationTypes = {...types, RevealBoxes, HorizontalStripes, Grid}
 
 const BulletList = (props) => {
     const type = listType(props, 'bulletListType')

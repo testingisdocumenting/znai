@@ -1,0 +1,27 @@
+.grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: center;
+}
+
+.grid .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5vh;
+    height: 50%;
+    text-align: center;
+    border-bottom: 1px solid #7daeff;
+    border-right: 1px solid #7daeff;
+    background-color: #1e7bbf;
+    color: #fff;
+}
+
+.grid .cell.empty {
+    border-bottom: 1px solid #666;
+    border-right: 1px solid #666;
+    background-color: #eee;
+    color: #eee;
+}

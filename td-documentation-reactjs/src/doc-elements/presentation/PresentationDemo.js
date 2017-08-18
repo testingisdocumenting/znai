@@ -109,7 +109,7 @@ const bulletContent = [
         "bulletMarker": "*",
         "tight": true,
         "type": "BulletList",
-        "meta": {"presentationBulletListType": "HorizontalStripes", "allAtOnce": true},
+        "meta": {"presentationBulletListType": "Grid", "allAtOnce": false},
         "content": [
             {
                 "type": "ListItem",
@@ -169,6 +169,62 @@ const bulletContent = [
                         "content": [
                             {
                                 "text": "hidden burden",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "more to come",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "and later more to come again",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "more to come",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "ListItem",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "and later more to come again",
                                 "type": "SimpleText"
                             }
                         ]
