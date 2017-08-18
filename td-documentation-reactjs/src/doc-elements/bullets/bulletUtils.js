@@ -40,7 +40,7 @@ function extractText(listItem, emphasisedOnly) {
     const result = []
     collectTextRecursively(result, listItem.content, emphasisedOnly, false)
 
-    return result.join(" ")
+    return capitalizeFirstLetter(result.join(" "))
 }
 
 function collectTextRecursively(result, content, emphasisedOnly, withinEmphasis) {
@@ -65,6 +65,10 @@ function collectTextRecursively(result, content, emphasisedOnly, withinEmphasis)
 
 function isEmphasis(docElement) {
     return docElement.type === 'Emphasis' || docElement.type === 'StrongEmphasis'
+}
+
+function capitalizeFirstLetter(text) {
+    return text.length > 1 ? text.charAt(0).toUpperCase() + text.slice(1) : text;
 }
 
 export {extractTextLines, extractTextLinesEmphasisOnly, extractTextLinesEmphasisOrFull, startsWithIcon, extractIconId, removeIcon}

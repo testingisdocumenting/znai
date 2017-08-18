@@ -39,6 +39,28 @@ const itemContent = [
     }
 ]
 
+const lowerCasedItemContent = [
+    {
+        "type": "Paragraph",
+        "content": [
+            {
+                "type": "Icon",
+                "id": "time"
+            },
+            {
+                "type": "Emphasis",
+                "content": [
+                    {
+                        "text": "inject",
+                        "type": "SimpleText"
+                    }
+                ]
+            }
+        ]
+    }
+]
+
+
 const bulletListContent = [
     {
         "type": "ListItem",
@@ -105,5 +127,10 @@ describe("bulletUtils", () => {
     it("extracts full text when emphasised is not present", () => {
         const extractedTexts = extractTextLinesEmphasisOrFull(bulletListContent)
         expect(extractedTexts).toEqual(["Inject", "Third Step with text"])
+    })
+
+    it("extracted text is capitalized", () => {
+        const extractedTexts = extractTextLinesEmphasisOnly(lowerCasedItemContent)
+        expect(extractedTexts).toEqual(["Inject"])
     })
 })
