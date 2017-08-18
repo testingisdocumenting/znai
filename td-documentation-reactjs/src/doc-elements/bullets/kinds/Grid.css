@@ -13,15 +13,15 @@
     font-size: 5vh;
     height: 50%;
     text-align: center;
-    border-bottom: 1px solid #7daeff;
-    border-right: 1px solid #7daeff;
+    border-bottom: 2px solid #7daeff;
+    border-right: 2px solid #7daeff;
     background-color: #1e7bbf;
     color: #fff;
 }
 
 .grid .cell.empty {
-    border-bottom: 1px solid #666;
-    border-right: 1px solid #666;
+    border-bottom: 2px solid #666;
+    border-right: 2px solid #666;
     background-color: #eee;
     color: #eee;
 }
