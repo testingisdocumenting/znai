@@ -71,6 +71,10 @@ function listType(props, key) {
         return null
     }
 
+    if (meta[key] === "") {
+        return null
+    }
+
     return meta[key]
 }
 
