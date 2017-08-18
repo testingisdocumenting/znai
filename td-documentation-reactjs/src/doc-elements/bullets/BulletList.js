@@ -66,7 +66,12 @@ function listType(props, key) {
         return null
     }
 
-    return props.meta[key]
+    const meta = props.meta
+    if (! meta.hasOwnProperty(key)) {
+        return null
+    }
+
+    return meta[key]
 }
 
 function slideInfoProvider(props) {
