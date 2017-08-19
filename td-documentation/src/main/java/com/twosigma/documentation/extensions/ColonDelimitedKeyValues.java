@@ -21,7 +21,6 @@ import java.util.stream.Stream;
  * @author mykola
  */
 public class ColonDelimitedKeyValues {
-    private static final Pattern KEY_DEF = Pattern.compile("^[^:]+:");
     private final String[] lines;
     private Map<String, String> vars;
     private String currentVarName;
@@ -66,18 +65,65 @@ public class ColonDelimitedKeyValues {
     }
 
     private void processLine(String line) {
-        if (KEY_DEF.matcher(line).find()) {
-            flushVar();
-            int colonIdx = line.indexOf(':');
+        KeyValuePart keyValuePart = extractKeyAndValuePart(line);
 
-            currentVarName = line.substring(0, colonIdx);
-            String valuePart = line.substring(colonIdx + 1);
-            if (! valuePart.trim().isEmpty()) {
-                currentValueLines.add(valuePart);
+        if (! keyValuePart.key.isEmpty()) {
+            flushVar();
+
+            currentVarName = keyValuePart.key;
+            if (! keyValuePart.valuePart.trim().isEmpty()) {
+                currentValueLines.add(keyValuePart.valuePart);
             }
         } else {
             currentValueLines.add(line);
         }
+    }
+
+    private static KeyValuePart extractKeyAndValuePart(String line) {
+        if (line.startsWith(" ")) {
+            return new KeyValuePart("", line);
+        }
+
+        line = line.trim();
+
+        char pc = ' ';
+
+        int quoteStartIdx = -1;
+        int quoteEndIdx = -1;
+        int numberOfQuotes = 0;
+        int numberOfSpaces = 0;
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+
+            boolean isQuote = c == '"' && pc != '\\';
+            if (isQuote) {
+                if (quoteStartIdx == -1) {
+                    quoteStartIdx = i;
+                } else if (quoteEndIdx == -1) {
+                    quoteEndIdx = i;
+                }
+
+                numberOfQuotes++;
+            }
+
+            if (Character.isSpaceChar(c)) {
+                numberOfSpaces++;
+            }
+
+            if (c == ':') {
+                if (numberOfQuotes == 2) {
+                    return new KeyValuePart(line.substring(quoteStartIdx + 1, quoteEndIdx), line.substring(quoteEndIdx + 2));
+                }
+
+                if (numberOfQuotes == 0 && numberOfSpaces == 0) {
+                    return new KeyValuePart(line.substring(0, i), line.substring(i + 1));
+                }
+            }
+
+            pc = c;
+        }
+
+        return new KeyValuePart("", line);
     }
 
     private void flushVar() {
@@ -89,5 +135,15 @@ public class ColonDelimitedKeyValues {
 
         currentValueLines.clear();
         currentVarName = "";
+    }
+
+    private static class KeyValuePart {
+        private String key;
+        private String valuePart;
+
+        KeyValuePart(String key, String valuePart) {
+            this.key = key;
+            this.valuePart = valuePart;
+        }
     }
 }
