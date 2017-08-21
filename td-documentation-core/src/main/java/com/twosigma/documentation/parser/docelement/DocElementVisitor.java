@@ -3,7 +3,7 @@ package com.twosigma.documentation.parser.docelement;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.Plugins;
-import com.twosigma.documentation.parser.commonmark.include.IncludeNode;
+import com.twosigma.documentation.parser.commonmark.include.IncludeBlock;
 import com.twosigma.documentation.parser.table.GfmTableToTableConverter;
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
 import org.commonmark.ext.gfm.tables.TableBlock;
@@ -120,9 +120,9 @@ public class DocElementVisitor extends AbstractVisitor {
             return;
         }
 
-        if (customBlock instanceof IncludeNode) {
-            final IncludeNode includeNode = (IncludeNode) customBlock;
-            parserHandler.onIncludePlugin(includeNode.getParams());
+        if (customBlock instanceof IncludeBlock) {
+            final IncludeBlock includeBlock = (IncludeBlock) customBlock;
+            parserHandler.onIncludePlugin(includeBlock.getParams());
         } else if (customBlock instanceof TableBlock) {
             GfmTableToTableConverter gfmTableToTableConverter = new GfmTableToTableConverter(componentsRegistry, path, (TableBlock) customBlock);
             parserHandler.onTable(gfmTableToTableConverter.convert());

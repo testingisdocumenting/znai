@@ -7,10 +7,13 @@ import org.commonmark.node.Visitor;
 /**
  * @author mykola
  */
-public class IncludeNode extends CustomBlock {
+public class IncludeBlock extends CustomBlock {
     private PluginParams params;
 
-    public IncludeNode(PluginParams params) {
+    IncludeBlock() {
+    }
+
+    public void setParams(PluginParams params) {
         this.params = params;
     }
 

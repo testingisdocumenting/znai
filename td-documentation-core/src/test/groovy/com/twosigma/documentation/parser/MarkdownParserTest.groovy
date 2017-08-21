@@ -206,16 +206,34 @@ world""")
     }
 
     @Test
-    void "include plugin with text on top"() {
-        parse("# section\n\nsimple text\n" +
-                ":include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
+    void "include plugin without additional opts"() {
+        parse(":include-dummy: free-form text\n\nhello world")
+        content.should == [[type: 'IncludeDummy', ff: 'free-form text', opts: [:]],
+                           [type: 'Paragraph', content: [[text: 'hello world', type: 'SimpleText']]]]
+    }
 
-        content.should ==[[title: 'section', id: 'section', type: 'Section',
-                           content:
-                                   [[type: 'Paragraph', content:[
-                                           [text: 'simple text', type: 'SimpleText'],
-                                           [type: 'SoftLineBreak']]],
-                                    [ff: 'free-form text', opts: [param1: 'v1', param2: 'v2'], type: 'IncludeDummy']]]]
+    @Test
+    void "include plugin with additional opts on the same line"() {
+        parse(":include-dummy: free-form text {param1: 'v1', param2: 'v2'}\n")
+        content.should == [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
+    }
+
+    @Test
+    void "include plugin with additional opts on multiple lines"() {
+        parse(":include-dummy: free-form text {param1: 'v1',\n param2: 'v2'}\n")
+        content.should == [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
+    }
+
+    @Test
+    void "include multiple plugins without empty line in between"() {
+        parse(":include-dummy: free-form text1 {param1: 'v1', param2: 'v2'}\n" +
+                ":include-dummy: free-form text2 {param3: 'v3', param4: 'v4'}\n\n" +
+                "hello world")
+
+        content.should == [
+                [type: 'IncludeDummy', ff: 'free-form text1', opts: [param1: 'v1', param2: 'v2']],
+                [type: 'IncludeDummy', ff: 'free-form text2', opts: [param3: 'v3', param4: 'v4']],
+                [type: 'Paragraph', content: [[text: 'hello world', type: 'SimpleText']]]]
     }
 
     @Test

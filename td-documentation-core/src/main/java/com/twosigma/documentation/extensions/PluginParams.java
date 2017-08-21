@@ -13,8 +13,16 @@ public class PluginParams {
     private String freeParam;
     private PluginParamsOpts opts;
 
+    public PluginParams(String pluginId) {
+        this.pluginId = pluginId;
+    }
+
     public PluginParams(String pluginId, String value) {
         this.pluginId = pluginId;
+        this.setValue(value);
+    }
+
+    public void setValue(String value) {
         this.freeParam = extractFreeParam(value);
         this.opts = new PluginParamsOpts(extractMap(value));
     }

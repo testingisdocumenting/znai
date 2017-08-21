@@ -1,9 +1,8 @@
 package com.twosigma.documentation.parser.commonmark;
 
+import com.twosigma.documentation.parser.commonmark.include.IncludeBlockParser;
 import org.commonmark.parser.Parser.Builder;
 import org.commonmark.parser.Parser.ParserExtension;
-
-import com.twosigma.documentation.parser.commonmark.include.IncludePostProcessor;
 
 /**
  * @author mykola
@@ -11,6 +10,6 @@ import com.twosigma.documentation.parser.commonmark.include.IncludePostProcessor
 public class CommonMarkExtension implements ParserExtension {
     @Override
     public void extend(final Builder parserBuilder) {
-        parserBuilder.postProcessor(new IncludePostProcessor());
+        parserBuilder.customBlockParserFactory(new IncludeBlockParser.Factory());
     }
 }
