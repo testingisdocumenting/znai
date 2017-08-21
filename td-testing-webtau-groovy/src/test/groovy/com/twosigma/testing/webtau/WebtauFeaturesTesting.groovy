@@ -49,27 +49,27 @@ class WebtauFeaturesTesting implements StepReporter, StandaloneTestListener {
 
     @Test
     void "waitTo"() {
-        runCli("api/waitTo.groovy")
+        runCli("ui/waitTo.groovy")
     }
 
     @Test
     void "waitToNot"() {
-        runCli("api/waitToNot.groovy")
+        runCli("ui/waitToNot.groovy")
     }
 
     @Test
     void "should"() {
-        runCli("api/should.groovy")
+        runCli("ui/should.groovy")
     }
 
     @Test
     void "shouldNot"() {
-        runCli("api/shouldNot.groovy")
+        runCli("ui/shouldNot.groovy")
     }
 
     @Test
     void "regexp"() {
-        runCli("api/regexp.groovy")
+        runCli("ui/regexp.groovy")
     }
 
     @Test
@@ -79,22 +79,22 @@ class WebtauFeaturesTesting implements StepReporter, StandaloneTestListener {
 
     @Test
     void "filter by text"() {
-        runCli("api/byText.groovy")
+        runCli("ui/byText.groovy")
     }
 
     @Test
     void "filter by regexp"() {
-        runCli("api/byRegexp.groovy")
+        runCli("ui/byRegexp.groovy")
     }
 
     @Test
     void "filter by number"() {
-        runCli("api/byNumber.groovy")
+        runCli("ui/byNumber.groovy")
     }
 
     @Test
     void "extract script for documentation"() {
-        def testPath = Paths.get("examples/api/waitTo.groovy")
+        def testPath = Paths.get("examples/ui/waitTo.groovy")
         def script = FileUtils.fileTextContent(testPath)
 
         String scope = extractScenarioBody(script)

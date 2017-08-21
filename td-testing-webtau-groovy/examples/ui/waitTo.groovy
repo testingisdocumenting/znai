@@ -1,4 +1,4 @@
-package api
+package ui
 
 import static com.twosigma.testing.webtau.WebTauGroovyDsl.scenario
 import static pages.Pages.*
