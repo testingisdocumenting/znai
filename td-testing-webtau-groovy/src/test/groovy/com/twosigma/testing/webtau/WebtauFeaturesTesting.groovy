@@ -93,6 +93,11 @@ class WebtauFeaturesTesting implements StepReporter, StandaloneTestListener {
     }
 
     @Test
+    void "http get"() {
+        runCli("rest/restGet.groovy")
+    }
+
+    @Test
     void "extract script for documentation"() {
         def testPath = Paths.get("examples/ui/waitTo.groovy")
         def script = FileUtils.fileTextContent(testPath)
@@ -141,26 +146,26 @@ class WebtauFeaturesTesting implements StepReporter, StandaloneTestListener {
 
     private static void saveTestArtifact(String testFileName, artifact) {
         def json = JsonUtils.serializePrettyPrint(artifact)
-        def expected = Paths.get("test-artifacts").resolve(testFileName + ".result")
+        def expectedPath = Paths.get("test-artifacts").resolve(testFileName + ".result")
         def actualPath = Paths.get("test-artifacts").resolve(testFileName + ".result.actual")
 
-        if (! Files.exists(expected)) {
-            FileUtils.writeTextContent(expected, json)
+        if (! Files.exists(expectedPath)) {
+            FileUtils.writeTextContent(expectedPath, json)
 
-            throw new AssertionError("make sure " + expected + " is correct. and it to repo as a baseline. " +
+            throw new AssertionError("make sure " + expectedPath + " is correct. and it to repo as a baseline. " +
                     "test will not fail next time unless output of the test is changed")
         }
 
-        def expectedReport = JsonUtils.deserialize(FileUtils.fileTextContent(expected)).report
+        def expectedReport = JsonUtils.deserialize(FileUtils.fileTextContent(expectedPath)).report
 
 
         if (! expectedReport.equals(artifact.report)) {
             ConsoleOutputs.out("reports are different, you can use IDE to compare files: ", Color.PURPLE, actualPath,
-                    Color.BLUE, " and ", Color.PURPLE, expected)
+                    Color.BLUE, " and ", Color.PURPLE, expectedPath)
             FileUtils.writeTextContent(actualPath, json)
             Assert.assertEquals(expectedReport.join("\n"), artifact.report.join("\n"))
         } else {
-            FileUtils.writeTextContent(expected, json)
+            FileUtils.writeTextContent(expectedPath, json)
             Files.deleteIfExists(actualPath)
         }
     }

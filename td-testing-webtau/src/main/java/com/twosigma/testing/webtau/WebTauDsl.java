@@ -21,7 +21,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.function.Supplier;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
-import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.*;
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.*;
 
 /**
  * @author mykola

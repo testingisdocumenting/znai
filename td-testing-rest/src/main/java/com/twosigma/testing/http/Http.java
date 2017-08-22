@@ -9,6 +9,7 @@ import com.twosigma.testing.http.config.HttpConfigurations;
 import com.twosigma.testing.http.datanode.DataNode;
 import com.twosigma.testing.http.datanode.DataNodeBuilder;
 import com.twosigma.testing.http.datanode.DataNodeId;
+import com.twosigma.testing.reporter.TestStep;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -22,6 +23,10 @@ import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.action;
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.urlValue;
+import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
 
 /**
  * @author mykola
@@ -59,15 +64,29 @@ public class Http {
         return executeAndValidateHttpCall(requestMethod, url, httpCall, new HttpResponseValidatorIgnoringReturn(validator));
     }
 
+    @SuppressWarnings("unchecked")
     private <E> E executeAndValidateHttpCall(final String requestMethod, final String url, final HttpCall httpCall, HttpResponseValidatorWithReturn validator) {
         final String fullUrl = HttpConfigurations.fullUrl(url);
 
-        try {
-            final HttpResponse response = httpCall.execute(fullUrl);
-            return validateAndRecord(requestMethod, url, fullUrl, validator, response);
-        } catch (Exception e) {
-            throw new RuntimeException("error during http." + requestMethod.toLowerCase() + "(" + fullUrl + ")", e);
-        }
+
+        final Object[] result = new Object[1];
+
+        Runnable httpCallRunnable = () -> {
+            try {
+                final HttpResponse response = httpCall.execute(fullUrl);
+                result[0] = validateAndRecord(requestMethod, url, fullUrl, validator, response);
+            } catch (Exception e) {
+                throw new RuntimeException("error during http." + requestMethod.toLowerCase() + "(" + fullUrl + ")", e);
+            }
+        };
+
+        TestStep<E> step = TestStep.create(null, tokenizedMessage(action("executing HTTP " + requestMethod), urlValue(fullUrl)),
+                () -> tokenizedMessage(action("executed HTTP " + requestMethod), urlValue(fullUrl)),
+                httpCallRunnable);
+
+        step.execute();
+
+        return (E) result[0];
     }
 
     @SuppressWarnings("unchecked")

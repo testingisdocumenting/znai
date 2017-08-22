@@ -4,10 +4,10 @@ import com.twosigma.testing.expectation.ActualValueExpectations;
 import com.twosigma.testing.expectation.ValueMatcher;
 import com.twosigma.testing.expectation.timer.ExpectationTimer;
 import com.twosigma.testing.reporter.TokenizedMessage;
-import com.twosigma.testing.webtau.reporter.WebUiMessageBuilder;
+import com.twosigma.testing.reporter.IntegrationTestsMessageBuilder;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
-import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.OF;
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.OF;
 
 /**
  * @author mykola
@@ -23,7 +23,7 @@ public class ElementValue<E> implements ActualValueExpectations {
         this.parent = parent;
         this.name = name;
         this.valueFetcher = valueFetcher;
-        this.description = tokenizedMessage(WebUiMessageBuilder.classifier(name)).add(OF).add(parent.describe());
+        this.description = tokenizedMessage(IntegrationTestsMessageBuilder.classifier(name)).add(OF).add(parent.describe());
     }
 
     public PageElement getParent() {

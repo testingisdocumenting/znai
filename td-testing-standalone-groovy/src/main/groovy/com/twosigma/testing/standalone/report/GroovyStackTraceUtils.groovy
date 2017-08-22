@@ -10,6 +10,8 @@ class GroovyStackTraceUtils {
             "sun.reflect",
             "com.twosigma",
             "org.codehaus.groovy",
+            "org.junit",
+            "com.intellij",
             "java.lang",
             "groovy.lang"
     ]

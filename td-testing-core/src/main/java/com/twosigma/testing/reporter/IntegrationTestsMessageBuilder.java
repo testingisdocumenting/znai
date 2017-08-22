@@ -1,4 +1,4 @@
-package com.twosigma.testing.webtau.reporter;
+package com.twosigma.testing.reporter;
 
 import com.twosigma.console.ansi.Color;
 import com.twosigma.console.ansi.FontStyle;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 /**
  * @author mykola
  */
-public class WebUiMessageBuilder {
+public class IntegrationTestsMessageBuilder {
     private enum TokenTypes {
         ERROR("error", Color.RED),
         NONE("none", FontStyle.NORMAL),

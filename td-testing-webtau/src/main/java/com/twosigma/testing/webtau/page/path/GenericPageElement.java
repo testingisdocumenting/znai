@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
 import static com.twosigma.testing.webtau.WebTauDsl.executeStep;
-import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.*;
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.*;
 
 /**
  * @author mykola

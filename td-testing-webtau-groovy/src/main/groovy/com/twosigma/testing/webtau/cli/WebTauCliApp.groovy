@@ -18,7 +18,7 @@ import com.twosigma.testing.webtau.driver.WebDriverCreator
 import com.twosigma.testing.webtau.reporter.HtmlReportGenerator
 import com.twosigma.testing.webtau.reporter.ScreenshotStepPayload
 import com.twosigma.testing.webtau.reporter.ScreenshotStepReporter
-import com.twosigma.testing.webtau.reporter.WebUiMessageBuilder
+import com.twosigma.testing.reporter.IntegrationTestsMessageBuilder
 import com.twosigma.utils.FileUtils
 import com.twosigma.utils.JsonUtils
 
@@ -31,11 +31,11 @@ import java.nio.file.Paths
 class WebTauCliApp implements StandaloneTestListener {
     private static WebTauConfig cfg = WebTauConfig.INSTANCE
     private static StandardConsoleTestListener consoleTestReporter = new StandardConsoleTestListener()
-    private static StepReporter stepReporter = new ConsoleStepReporter(WebUiMessageBuilder.converter)
+    private static StepReporter stepReporter = new ConsoleStepReporter(IntegrationTestsMessageBuilder.converter)
     private static ScreenshotStepReporter screenshotStepReporter = new ScreenshotStepReporter()
     private static ConsoleOutput consoleOutput = new AnsiConsoleOutput()
 
-    private WebUiTestCliConfig config
+    private WebTauTestCliConfig config
     private StandaloneTestRunner runner
 
     private List<StandaloneTest> tests = []
@@ -43,7 +43,7 @@ class WebTauCliApp implements StandaloneTestListener {
     WebTauCliApp(String[] args) {
         ConsoleOutputs.add(consoleOutput)
 
-        config = new WebUiTestCliConfig(args)
+        config = new WebTauTestCliConfig(args)
 
         runner = new StandaloneTestRunner(["com.twosigma.testing.webtau.WebTauDsl"], cfg.getWorkingDir())
 

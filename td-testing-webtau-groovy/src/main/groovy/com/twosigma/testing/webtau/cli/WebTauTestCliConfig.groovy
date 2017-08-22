@@ -13,7 +13,7 @@ import java.nio.file.Paths
 /**
  * @author mykola
  */
-class WebUiTestCliConfig {
+class WebTauTestCliConfig {
     private static final String CLI_SOURCE = "command line argument"
     private static final String CFG_SOURCE = "config file"
 
@@ -25,7 +25,7 @@ class WebUiTestCliConfig {
     private CommandLine commandLine
     private ConfigObject configObject
 
-    WebUiTestCliConfig(String... args) {
+    WebTauTestCliConfig(String... args) {
         parseArgs(args)
         parseConfig()
 

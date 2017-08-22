@@ -6,7 +6,7 @@ import com.twosigma.utils.RegexpUtils
 import java.util.regex.Pattern
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage
-import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.none
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.none
 
 /**
  * @author mykola

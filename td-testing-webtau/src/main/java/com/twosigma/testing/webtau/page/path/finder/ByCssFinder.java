@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
-import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.*;
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.*;
 
 /**
  * @author mykola

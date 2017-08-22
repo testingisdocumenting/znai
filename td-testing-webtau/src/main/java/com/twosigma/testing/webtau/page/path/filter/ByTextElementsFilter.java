@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
-import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.selectorType;
-import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.selectorValue;
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.selectorType;
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.selectorValue;
 import static java.util.stream.Collectors.toList;
 
 /**

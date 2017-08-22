@@ -65,6 +65,10 @@ public class TestServer implements HttpConfiguration {
 
     @Override
     public String fullUrl(final String url) {
+        if (HttpUrl.isFull(url)) {
+            return url;
+        }
+
         return HttpUrl.concat("http://localhost:" + port, url);
     }
 

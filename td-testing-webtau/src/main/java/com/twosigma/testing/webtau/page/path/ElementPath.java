@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.COMMA;
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.COMMA;
 import static java.util.stream.Collectors.toList;
 
 /**

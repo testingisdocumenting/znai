@@ -7,7 +7,7 @@ import com.twosigma.testing.reporter.TokenizedMessage;
 
 import static com.twosigma.testing.Ddjt.actual;
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
-import static com.twosigma.testing.webtau.reporter.WebUiMessageBuilder.*;
+import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.*;
 
 /**
  * @author mykola
