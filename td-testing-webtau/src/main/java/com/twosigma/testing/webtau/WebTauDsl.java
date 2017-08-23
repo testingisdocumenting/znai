@@ -4,6 +4,7 @@ import com.twosigma.testing.expectation.ValueMatcher;
 import com.twosigma.testing.expectation.ranges.GreaterThanMatcher;
 import com.twosigma.testing.http.Http;
 import com.twosigma.testing.http.HttpUrl;
+import com.twosigma.testing.reporter.StepReportOptions;
 import com.twosigma.testing.reporter.TestStep;
 import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.webtau.cfg.WebTauConfig;
@@ -29,7 +30,7 @@ import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.*;
 public class WebTauDsl {
     public static final WebTauConfig cfg = WebTauConfig.INSTANCE;
 
-    public static final WebDriver driver = new CurrentWebDriver();
+    public static final CurrentWebDriver driver = new CurrentWebDriver();
     public static final Http http = Http.http;
     public static final DocumentationDsl doc = new DocumentationDsl(driver);
     public static final Cookies cookies = new Cookies(driver);
@@ -39,7 +40,7 @@ public class WebTauDsl {
                                        Supplier<TokenizedMessage> completionMessageSupplier,
                                        Runnable action) {
         TestStep<E> step = TestStep.create(context, inProgressMessage, completionMessageSupplier, action);
-        step.execute();
+        step.execute(StepReportOptions.REPORT_ALL);
     }
 
     public static WebTauConfig getCfg() {
@@ -65,9 +66,12 @@ public class WebTauDsl {
                 () -> driver.get(fullUrl));
     }
 
+    public static boolean wasBrowserUsed() {
+        return driver.wasUsed();
+    }
+
     public static String takeScreenshotAsBase64() {
-        TakesScreenshot takesScreenshot = (TakesScreenshot) WebTauDsl.driver;
-        return takesScreenshot.getScreenshotAs(OutputType.BASE64);
+        return WebTauDsl.driver.getScreenshotAs(OutputType.BASE64);
     }
 
     public static PageElement $(String css) {

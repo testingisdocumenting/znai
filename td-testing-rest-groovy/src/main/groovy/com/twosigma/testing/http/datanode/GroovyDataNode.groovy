@@ -1,12 +1,14 @@
 package com.twosigma.testing.http.datanode
 
 import com.twosigma.testing.data.traceable.TraceableValue
+import com.twosigma.testing.expectation.ActualPath
 import com.twosigma.testing.expectation.Should
+import com.twosigma.testing.expectation.ShouldAndWaitProperty
 
 /**
  * @author mykola
  */
-class GroovyDataNode implements DataNode {
+class GroovyDataNode implements DataNodeExpectations, DataNode {
     private DataNode node
 
     GroovyDataNode(final DataNode node) {
@@ -14,11 +16,18 @@ class GroovyDataNode implements DataNode {
     }
 
     def getProperty(String name) {
-        if (name == "should") {
-            return new Should(node)
+        switch (name) {
+            case "should":
+                return new ShouldAndWaitProperty<>(node, this.&should)
+            case "shouldNot":
+                return new ShouldAndWaitProperty<>(node, this.&shouldNot)
+            case "waitTo":
+                return new ShouldAndWaitProperty<>(node, this.&waitTo)
+            case "waitToNot":
+                return new ShouldAndWaitProperty<>(node, this.&waitToNot)
+            default:
+                return get(name)
         }
-
-        return get(name)
     }
 
     def getAt(Integer idx) {
@@ -78,5 +87,10 @@ class GroovyDataNode implements DataNode {
     @Override
     String toString() {
         return node.toString()
+    }
+
+    @Override
+    ActualPath actualPath() {
+        return node.actualPath()
     }
 }

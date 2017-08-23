@@ -1,60 +1,40 @@
-package com.twosigma.testing.webtau.page;
+package com.twosigma.testing.http.datanode;
 
+import com.twosigma.testing.expectation.ActualPathAware;
 import com.twosigma.testing.expectation.ActualValueExpectations;
 import com.twosigma.testing.expectation.ShouldAndWaitProperty;
 import com.twosigma.testing.expectation.ValueMatcher;
 import com.twosigma.testing.expectation.timer.ExpectationTimer;
+import com.twosigma.testing.reporter.IntegrationTestsMessageBuilder;
 import com.twosigma.testing.reporter.StepReportOptions;
-import com.twosigma.testing.reporter.TokenizedMessage;
 import com.twosigma.testing.reporter.ValueMatcherExpectationSteps;
-import org.openqa.selenium.WebElement;
-
-import java.util.regex.Pattern;
 
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
 
 /**
  * @author mykola
  */
-public interface PageElement extends ActualValueExpectations {
-    PageElement all();
-    ElementValue<Integer> getCount();
-    WebElement findElement();
-    ElementValue elementValue();
-    void setValue(Object value);
-    void sendKeys(String keys);
-    void click();
-    void clear();
-    PageElement get(String text);
-    PageElement get(int number);
-    PageElement get(Pattern regexp);
-    boolean isVisible();
-    TokenizedMessage describe();
-
+interface DataNodeExpectations extends ActualValueExpectations, ActualPathAware {
     @Override
     default void should(ValueMatcher valueMatcher) {
-        ValueMatcherExpectationSteps.shouldStep(this, this.elementValue(),  StepReportOptions.REPORT_ALL,
-                this.describe(), valueMatcher);
+        ValueMatcherExpectationSteps.shouldStep(null, this, StepReportOptions.SKIP_START,
+                tokenizedMessage(IntegrationTestsMessageBuilder.id(actualPath().getPath())), valueMatcher);
     }
 
     @Override
     default void shouldNot(ValueMatcher valueMatcher) {
-        ValueMatcherExpectationSteps.shouldNotStep(this, this.elementValue(),  StepReportOptions.REPORT_ALL,
-                this.describe(), valueMatcher);
+        ValueMatcherExpectationSteps.shouldNotStep(null, this, StepReportOptions.SKIP_START,
+                tokenizedMessage(IntegrationTestsMessageBuilder.id(actualPath().getPath())), valueMatcher);
     }
 
     @Override
     default void waitTo(ValueMatcher valueMatcher, ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
-        ValueMatcherExpectationSteps.waitStep(this, this.elementValue(), StepReportOptions.REPORT_ALL,
-                this.describe(), valueMatcher,
-                expectationTimer, tickMillis, timeOutMillis);
+        throw new UnsupportedOperationException();
     }
 
     @Override
     default void waitToNot(ValueMatcher valueMatcher, ExpectationTimer expectationTimer, long tickMillis, long timeOutMillis) {
-        ValueMatcherExpectationSteps.waitNotStep(this, this.elementValue(), StepReportOptions.REPORT_ALL,
-                this.describe(), valueMatcher,
-                expectationTimer, tickMillis, timeOutMillis);
+        throw new UnsupportedOperationException();
     }
 
     default ShouldAndWaitProperty getShould() {

@@ -19,6 +19,10 @@ public class ScreenshotStepReporter implements StepReporter<PageElement> {
 
     @Override
     public void onStepFailure(TestStep<PageElement> step) {
+        if (! WebTauDsl.wasBrowserUsed()) {
+            return;
+        }
+
         if (step.hasPayload(ScreenshotStepPayload.class)) {
             return;
         }

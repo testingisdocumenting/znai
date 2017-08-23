@@ -152,7 +152,7 @@ class WebtauFeaturesTesting implements StepReporter, StandaloneTestListener {
         if (! Files.exists(expectedPath)) {
             FileUtils.writeTextContent(expectedPath, json)
 
-            throw new AssertionError("make sure " + expectedPath + " is correct. and it to repo as a baseline. " +
+            throw new AssertionError("make sure " + expectedPath + " is correct. and commit it as a baseline. " +
                     "test will not fail next time unless output of the test is changed")
         }
 
@@ -173,24 +173,18 @@ class WebtauFeaturesTesting implements StepReporter, StandaloneTestListener {
     @Override
     void onStepStart(TestStep step) {
         def stepAsText = "> " + StringUtils.createIndentation(step.numberOfParents * 2) + step.getInProgressMessage().toString()
-
-        println stepAsText
         report.add(stepAsText)
     }
 
     @Override
     void onStepSuccess(TestStep step) {
         def stepAsText = ". " + StringUtils.createIndentation(step.numberOfParents * 2)
-
-        println stepAsText
         report.add(stepAsText + step.getCompletionMessage().toString())
     }
 
     @Override
     void onStepFailure(TestStep step) {
         def stepAsText = "X " + StringUtils.createIndentation(step.numberOfParents * 2) + step.getCompletionMessage().toString()
-
-        println stepAsText
         report.add(stepAsText)
     }
 

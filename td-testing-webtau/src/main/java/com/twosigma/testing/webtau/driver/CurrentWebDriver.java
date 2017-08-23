@@ -4,11 +4,13 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author mykola
  */
 public class CurrentWebDriver implements WebDriver, TakesScreenshot, JavascriptExecutor {
+    private AtomicBoolean wasUsed = new AtomicBoolean(false);
     private ThreadLocal<WebDriver> local = ThreadLocal.withInitial(WebDriverCreator::create);
 
     @Override
@@ -81,10 +83,6 @@ public class CurrentWebDriver implements WebDriver, TakesScreenshot, JavascriptE
         return ((TakesScreenshot) getDriver()).getScreenshotAs(outputType);
     }
 
-    private WebDriver getDriver() {
-        return local.get();
-    }
-
     @Override
     public Object executeScript(String script, Object... args) {
         return ((JavascriptExecutor) getDriver()).executeScript(script, args);
@@ -93,5 +91,14 @@ public class CurrentWebDriver implements WebDriver, TakesScreenshot, JavascriptE
     @Override
     public Object executeAsyncScript(String script, Object... args) {
         return ((JavascriptExecutor) getDriver()).executeAsyncScript(script, args);
+    }
+
+    public boolean wasUsed() {
+        return wasUsed.get();
+    }
+
+    private WebDriver getDriver() {
+        wasUsed.set(true);
+        return local.get();
     }
 }

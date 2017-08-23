@@ -103,12 +103,15 @@ public class TestStep<E> {
     }
 
     public boolean isFailed() {
-        return ! isSuccessful;
+        return !isSuccessful;
     }
 
-    public void execute() {
+    public void execute(StepReportOptions stepReportOptions) {
         try {
-            StepReporters.onStart(this);
+            if (stepReportOptions != StepReportOptions.SKIP_START) {
+                StepReporters.onStart(this);
+            }
+
             action.run();
 
             complete(completionMessageSupplier.get());
@@ -137,7 +140,7 @@ public class TestStep<E> {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("message", completionMessage.toListOfMaps());
 
-        if (! children.isEmpty()) {
+        if (!children.isEmpty()) {
             result.put("children", children.stream().map(TestStep::toMap).collect(toList()));
         }
 

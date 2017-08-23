@@ -9,6 +9,7 @@ import com.twosigma.testing.http.config.HttpConfigurations;
 import com.twosigma.testing.http.datanode.DataNode;
 import com.twosigma.testing.http.datanode.DataNodeBuilder;
 import com.twosigma.testing.http.datanode.DataNodeId;
+import com.twosigma.testing.reporter.StepReportOptions;
 import com.twosigma.testing.reporter.TestStep;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -27,6 +28,7 @@ import java.util.Map;
 import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.action;
 import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.urlValue;
 import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author mykola
@@ -84,7 +86,7 @@ public class Http {
                 () -> tokenizedMessage(action("executed HTTP " + requestMethod), urlValue(fullUrl)),
                 httpCallRunnable);
 
-        step.execute();
+        step.execute(StepReportOptions.REPORT_ALL);
 
         return (E) result[0];
     }
@@ -145,7 +147,7 @@ public class Http {
         throws IOException {
         final HttpResponse httpResponse = new HttpResponse();
 
-        httpResponse.setContent(IOUtils.toString(response.getEntity().getContent()));
+        httpResponse.setContent(IOUtils.toString(response.getEntity().getContent(), UTF_8));
         httpResponse.setContentType(response.getEntity().getContentType().getValue());
         httpResponse.setStatusCode(response.getStatusLine().getStatusCode());
 
