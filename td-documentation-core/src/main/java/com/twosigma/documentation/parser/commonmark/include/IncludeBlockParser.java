@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * @author mykola
  */
 public class IncludeBlockParser extends AbstractBlockParser {
-    private static final Pattern INCLUDE_PLUGIN_REGEXP = Pattern.compile("^:include-(\\S+)+:\\s*(.*)$");
+    private static final Pattern INCLUDE_PLUGIN_REGEXP = Pattern.compile("^\\s?:include-(\\S+)+:\\s*(.*)$");
 
     private final StringBuilder value;
     private final String pluginId;

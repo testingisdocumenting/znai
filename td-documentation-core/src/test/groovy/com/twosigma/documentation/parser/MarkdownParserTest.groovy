@@ -206,6 +206,17 @@ world""")
     }
 
     @Test
+    void "include plugin with a single space in front"() {
+        parse(" :include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
+        content.should == [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
+
+        parse("  :include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
+        content.should == [[type: 'Paragraph',
+                            content:[[text: ":include-dummy: free-form text {param1: 'v1', param2: 'v2'}",
+                                      type: 'SimpleText']]]]
+    }
+
+    @Test
     void "include plugin without additional opts"() {
         parse(":include-dummy: free-form text\n\nhello world")
         content.should == [[type: 'IncludeDummy', ff: 'free-form text', opts: [:]],
