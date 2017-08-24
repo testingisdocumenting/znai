@@ -10,10 +10,11 @@ import com.twosigma.documentation.validation.DocStructure
  */
 class TestComponentsRegistry implements ComponentsRegistry {
     private TestDocStructure docStructure = new TestDocStructure()
+    MarkupParser parser = new TestMarkupParser()
 
     @Override
     MarkupParser parser() {
-        return new TestMarkupParser()
+        return parser
     }
 
     @Override

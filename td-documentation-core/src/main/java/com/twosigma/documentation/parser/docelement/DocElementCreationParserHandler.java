@@ -69,7 +69,14 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onSectionEnd() {
         currentSectionTitle = "";
-        end();
+
+        // on section end is called for plugin processing (if a plugin returns a new section)
+        // it is also being called every time a new section starts -- to close the previous one
+        // two events can collide and section will be closed twice
+        // see: DocElementVisitor#visit(Heading) and processPlugin method
+        if (elementsStack.size() > 1) {
+            end();
+        }
     }
 
     @Override
@@ -243,14 +250,16 @@ public class DocElementCreationParserHandler implements ParserHandler {
                 return;
             }
 
-            // if element is a section itself we need to close all the current sections and paragraphs
-            if (docElements.get(0).getType().equals(DocElementType.SECTION)) {
-                while (elementsStack.size() > 1) {
-                    end();
+            docElements.forEach(el -> {
+                // if element is a section itself we need to close all the current sections and paragraphs
+                if (el.getType().equals(DocElementType.SECTION)) {
+                    while (elementsStack.size() > 1) {
+                        end();
+                    }
                 }
-            }
 
-            docElements.forEach(this::append);
+                append(el);
+            });
         } catch (Exception e) {
             throw new RuntimeException("failure during processing include plugin '" + plugin.id() + "': " + e.getMessage(), e);
         }
