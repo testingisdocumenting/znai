@@ -56,6 +56,7 @@ Consider inlined template if you don't need to pass a lot of text as parameters 
     :include-template: templates/arg-definition.md {name: "Other Name", optional: true, description: "Yet another description of the argument"}
     
 *templates/arg-definition.md*
+
 :include-file: templates/arg-definition.md
     
 :include-template: templates/arg-definition.md {name: "Arg Name", description: "Description of the argument"}
