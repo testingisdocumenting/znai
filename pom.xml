@@ -35,6 +35,7 @@
         <module>td-documentation-server</module>
         <module>td-documentation-client</module>
         <module>td-documentation-cli</module>
+        <module>td-documentation-gen-from-readme</module>
         <module>td-ts-dist</module>
         <module>td-ts-ddjt</module>
     </modules>
