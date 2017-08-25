@@ -13,13 +13,13 @@ import java.util.regex.Pattern;
  * @author mykola
  */
 public class IncludeBlockParser extends AbstractBlockParser {
-    private static final Pattern INCLUDE_PLUGIN_REGEXP = Pattern.compile("^\\s?:include-(\\S+)+:\\s*(.*)$");
+    private static final Pattern INCLUDE_PLUGIN_REGEXP = Pattern.compile("^\\s*:include-(\\S+)+:\\s*(.*)$");
 
     private final StringBuilder value;
     private final String pluginId;
     private IncludeBlock block;
 
-    public IncludeBlockParser(String pluginId, String value) {
+    IncludeBlockParser(String pluginId, String value) {
         this.pluginId = pluginId;
         this.value = new StringBuilder();
         this.block = new IncludeBlock();
@@ -64,11 +64,6 @@ public class IncludeBlockParser extends AbstractBlockParser {
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             CharSequence line = state.getLine();
-            BlockParser parentParser = matchedBlockParser.getMatchedBlockParser();
-
-            if (!(parentParser instanceof DocumentBlockParser)) {
-                return BlockStart.none();
-            }
 
             Matcher matcher = INCLUDE_PLUGIN_REGEXP.matcher(line);
             if (matcher.matches()) {

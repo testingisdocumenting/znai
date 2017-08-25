@@ -206,14 +206,36 @@ world""")
     }
 
     @Test
-    void "include plugin with a single space in front"() {
+    void "include plugin with any number of spaces in front"() {
         parse(" :include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
-        content.should == [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
+        def expected = [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
+        content.should == expected
 
-        parse("  :include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
-        content.should == [[type: 'Paragraph',
-                            content:[[text: ":include-dummy: free-form text {param1: 'v1', param2: 'v2'}",
-                                      type: 'SimpleText']]]]
+        parse("   :include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
+        content.should == expected
+    }
+
+    @Test
+    void "include plugin right after paragraph of text"() {
+        parse("hello text\n:include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
+
+        content.should == [[type: 'Paragraph', content: [[text: 'hello text', type: 'SimpleText']]],
+                           [ff: 'free-form text', opts: [param1: 'v1', param2: 'v2'], type: 'IncludeDummy']]
+    }
+
+    @Test
+    void "include plugin inside numbered list"() {
+        parse("1. step one\n\n" +
+                "    :include-dummy: free-form text1 {param1: 'v1', param2: 'v2'}\n" +
+                "2. step two\n\n" +
+                "    :include-dummy: free-form text2 {param1: 'v3', param2: 'v4'}\n")
+
+        content.should == [[delimiter: '.', startNumber: 1, type: 'OrderedList',
+                            content: [[type: 'ListItem', content: [[type: 'Paragraph',
+                                                                    content: [[text: 'step one', type: 'SimpleText']]],
+                                                                   [ff: 'free-form text1', opts: [param1: 'v1', param2: 'v2'], type: 'IncludeDummy']]],
+                                      [type:  'ListItem', content: [[type: 'Paragraph', content: [[text: 'step two', type: 'SimpleText']]],
+                                                                    [ff: 'free-form text2', opts: [param1: 'v3', param2: 'v4'], type: 'IncludeDummy']]]]]]
     }
 
     @Test
