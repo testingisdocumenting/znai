@@ -1,10 +1,8 @@
 package com.twosigma.documentation.gen;
 
 import java.io.IOException;
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
@@ -14,33 +12,33 @@ import static java.util.stream.Collectors.toList;
 /**
  * @author mykola
  */
-public class GenFromReadme {
+public class FromReadmeGenerator {
     private static List<Path> readMeFiles;
     private final Path srcRoot;
     private final String sectionId;
-    private Path mdoc;
 
     public static void main(String[] args) throws IOException {
-        Path root = Paths.get("/Users/mykola/work/testing-documenting/readme");
+        CliConfig cliConfig = new CliConfig(args);
 
-        GenFromReadme gen = new GenFromReadme(root, "data-refernce");
-        gen.generate();
+        FromReadmeGenerator gen = new FromReadmeGenerator(cliConfig.getReadmeRoot(), cliConfig.getSectionId());
+        gen.generate(cliConfig.getMdocDest());
     }
 
-    public GenFromReadme(Path srcRoot, String sectionId) {
+    private FromReadmeGenerator(Path srcRoot, String sectionId) {
         this.srcRoot = srcRoot;
         this.sectionId = sectionId;
     }
 
-    public void generate() throws IOException {
-        mdoc = srcRoot.getParent().resolve("mdoc-readme-test");
-        Path mdocSectionPath = mdoc.resolve(sectionId);
+    private void generate(Path mdocDest) throws IOException {
+        Path mdocSectionPath = mdocDest.resolve(sectionId);
         readMeFiles = listReadMeFiles(srcRoot);
         copyMarkdowns(mdocSectionPath);
 
         String toc = generateToc();
+        Files.write(mdocDest.resolve("toc"), toc.getBytes());
+
+        System.out.println("generated toc:");
         System.out.println(toc);
-        Files.write(mdoc.resolve("toc"), toc.getBytes());
     }
 
     private void copyMarkdowns(Path dest) throws IOException {
