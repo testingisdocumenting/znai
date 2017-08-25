@@ -10,7 +10,7 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>td-documentation-gen-from-readme</artifactId>
+    <artifactId>td-documentation-generators</artifactId>
 
     <dependencies>
         <dependency>
