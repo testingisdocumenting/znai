@@ -27,6 +27,8 @@ features
     image-annotations
     math
     proxy
+charts
+    flow
 synergy-with-testing
     java
     REST

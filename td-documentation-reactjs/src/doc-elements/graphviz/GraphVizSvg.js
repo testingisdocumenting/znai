@@ -137,7 +137,7 @@ class ReactElementsBuilder {
             const child = childNodes[i]
 
             const reactChildElement = this.reactElementFromDomNode(child, i)
-            if (reactChildElement != null) {
+            if (reactChildElement !== null) {
                 children.push(reactChildElement)
             }
         }

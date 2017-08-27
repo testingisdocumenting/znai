@@ -16,5 +16,11 @@
     "fill": "#519331",
     "text": "#ABDD93",
     "textInverse": "#306E12"
+  },
+  "h": {
+    "line": "#444",
+    "fill": "#fff",
+    "text": "#888",
+    "textInverse": "#888"
   }
 }
