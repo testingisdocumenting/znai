@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SvgCustomShape from './SvgCustomShape'
-import {removeCustomProps} from './gvUtils'
+import {removeCustomProps, buildUniqueId} from './gvUtils'
 
 class GvPolygon extends Component {
     render() {
@@ -12,6 +12,7 @@ class GvPolygon extends Component {
             return <SvgCustomShape {...this.props} {...sizes}/>
         } else {
             const cleanedUpProps = removeCustomProps(this.props)
+
             return <polygon {...cleanedUpProps} {...colorsOverride} points={sizes.points}
                             style={style}/>
         }
@@ -28,7 +29,7 @@ function createColors(parentClassName, colors) {
 
 function createStyle(diagramId, parentClassName) {
     if (parentClassName === 'node') {
-        return {} //filter: `url(#${buildUniqueId(diagramId, "dropShadow_filter")})` }
+        return {filter: `url(#${buildUniqueId(diagramId, "glow_filter")})` }
     }
 
     return {}

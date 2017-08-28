@@ -41,13 +41,15 @@ class ReactElementsBuilder {
                     const stylesWithColors = this.currentStyles.filter((sn) => this.colors[sn])
 
                     // TODO merge styles (font, fill)
-                    if (stylesWithColors.length > 0) {
+                    if (this.currentSelected) {
+                        props.colors = this.colors.h
+                    } else if (stylesWithColors.length > 0) {
                         props.colors = this.colors[stylesWithColors[0]]
                     } else {
                         props.colors = this.colors.b // TODO default logic and handle arrays
                     }
                 } else {
-                    props.colors = this.colors.b // TODO default logic and handle arrays
+                    props.colors = this.currentSelected ? this.colors.h : this.colors.b // TODO default logic and handle arrays
                 }
             }
 
@@ -70,6 +72,9 @@ class ReactElementsBuilder {
 
             if (this.idsToHighlight && this.idsToHighlight.indexOf(props.nodeId) !== -1) {
                 props.selected = true
+                this.currentSelected = true
+            } else {
+                this.currentSelected = false
             }
 
             if (this.idsToDisplay && this.currentCommentAsId && this.idsToDisplay.indexOf(props.nodeId) === -1) {
@@ -158,23 +163,19 @@ class GraphVizSvg extends Component {
         const parser = new DOMParser()
         const dom = parser.parseFromString(diagram.svg, 'application/xml')
 
-        const dropShadowFilterId = buildUniqueId(diagram.id, "dropShadow_filter")
-        const highlightFilterId = buildUniqueId(diagram.id, "highlight_filter")
+        const dropShadowFilterId = buildUniqueId(diagram.id, "glow_filter")
         const el = new ReactElementsBuilder({ diagram, colors, idsToDisplay, idsToHighlight }).reactElementFromDomNode(dom.documentElement)
         return <div>
             <svg viewBox="0 0 0 0" width="0" height="0">
                 <filter id={dropShadowFilterId}>
-                    <feOffset result="offOut" in="SourceGraphic" dx="2" dy="2" />
-                    <feColorMatrix result="matrixOut" in="offOut" type="matrix" values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" />
-                    <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="30" />
-                    <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-                </filter>
-
-                <filter id={highlightFilterId}>
-                    <feColorMatrix values="1 0 1 0 0
-                                           1 0 1 0 0
-                                           1 0 1 0 0
-                                           0 0 0 1 0"/>
+                    <feMorphology operator="dilate" radius="3" in="SourceAlpha" result="thicken" />
+                    <feGaussianBlur in="thicken" stdDeviation="1" result="blurred" />
+                    <feFlood floodColor="rgb(230, 230, 230)" result="glowColor" />
+                    <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
+                    <feMerge>
+                        <feMergeNode in="softGlow_colored"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
                 </filter>
             </svg>
             {el}
