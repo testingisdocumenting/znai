@@ -22,10 +22,10 @@ class GraphvizFromJsonGenTest {
 
         gv.should == "digraph Generated {\n" +
                 "rankdir=LR;\n" +
-                "node [shape=record];\n" +
+                "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
                 "\n" +
-                "n1 [label=\"l1\"; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
-                "n2 [label=\"l2\"; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
+                "n1 [label=\"l1\"];\n" +
+                "n2 [label=\"l2\"];\n" +
                 "\n" +
                 "n1 -> n2;\n" +
                 "n1 -> n2[dir=both];\n" +
@@ -38,9 +38,9 @@ class GraphvizFromJsonGenTest {
 
         gv.should == "digraph Generated {\n" +
                 "rankdir=LR;\n" +
-                "node [shape=record];\n" +
+                "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
                 "\n" +
-                "n1 [label=\"l1[h]\"; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
+                "n1 [label=\"l1[h]\"];\n" +
                 "}"
     }
 

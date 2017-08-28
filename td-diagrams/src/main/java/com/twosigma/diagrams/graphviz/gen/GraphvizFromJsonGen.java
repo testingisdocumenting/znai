@@ -23,7 +23,7 @@ public class GraphvizFromJsonGen {
 
         return "digraph Generated {\n" +
                 "rankdir=LR;\n" +
-                "node [shape=record];\n" +
+                "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
                 (nodes.isEmpty() ? "" : "\n" + nodes + "\n") +
                 (edges.isEmpty() ? "" : "\n" + edges + "\n") +
                 "}";
@@ -38,7 +38,7 @@ public class GraphvizFromJsonGen {
         boolean isHighlighted = Boolean.TRUE.equals(n.get("highlight"));
 
         Object label = n.get("label") + (isHighlighted ? "[h]" : "");
-        return n.get("id") + " [label=\"" + label + "\"; fontsize=10; margin=0.2; fontname=Helvetica];";
+        return n.get("id") + " [label=\"" + label + "\"];";
     }
 
     private String generateEdges(List<List<String>> edges) {

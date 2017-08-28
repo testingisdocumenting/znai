@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import {removeCustomProps, buildUniqueId} from './gvUtils'
+import React, {Component} from 'react'
+import {removeCustomProps} from './gvUtils'
 
 class GvGroup extends Component {
     render() {
-        const {selected} = this.props
         const cleanedUpProps = removeCustomProps(this.props)
 
-        const style = selected ? {filter: `url(#${buildUniqueId(this.props.diagramId, "highlight_filter")})` } : {}
+        const style = {}
         return <g {...cleanedUpProps} style={style}>
             {this.props.children}
         </g>

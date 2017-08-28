@@ -39,6 +39,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("diagram", diagram.toMap());
         props.put("colors", Graphviz.colors);
+        props.put("idsToHighlight", pluginParams.getOpts().getList("highlight"));
 
         return PluginResult.docElement("GraphVizDiagram", props);
     }
