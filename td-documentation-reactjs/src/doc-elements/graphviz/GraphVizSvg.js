@@ -122,6 +122,7 @@ class ReactElementsBuilder {
             case 'text': return GvText
             case 'path': return GvPath
             case 'g': return GvGroup
+            case 'title': return () => <g/>
 
             default: return domNode.tagName
         }
