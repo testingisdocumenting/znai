@@ -19,7 +19,7 @@ const Table = ({table, ...props}) => {
         </tr>)
     }
 
-    return (<div className="simple-table">
+    return (<div className="simple-table content-block">
         <table className="ui celled padded table">
             <thead>
                 <tr>
