@@ -38,6 +38,7 @@
         <module>td-documentation-generators</module>
         <module>td-ts-dist</module>
         <module>td-ts-ddjt</module>
+        <module>td-mdoc-dist</module>
     </modules>
 
     <properties>
