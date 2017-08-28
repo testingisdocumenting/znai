@@ -8,7 +8,7 @@ class GvText extends Component {
 
         const fill = isInversedTextColor ? colors.inversedText : colors.text
 
-        return <text {...cleanedUpProps} fontFamily="verdana" fontSize="8" fill={fill}>
+        return <text {...cleanedUpProps} fill={fill}>
             {this.props.children[0]}
         </text>
     }
