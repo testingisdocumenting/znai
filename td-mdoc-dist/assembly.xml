@@ -1,5 +1,5 @@
 <assembly>
-    <id>mdoc-dist</id>
+    <id>mdoc</id>
     <formats>
         <format>zip</format>
     </formats>
