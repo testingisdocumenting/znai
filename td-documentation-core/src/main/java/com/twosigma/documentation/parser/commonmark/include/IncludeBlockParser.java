@@ -2,6 +2,7 @@ package com.twosigma.documentation.parser.commonmark.include;
 
 import com.twosigma.documentation.extensions.PluginParams;
 import org.commonmark.internal.DocumentBlockParser;
+import org.commonmark.internal.IndentedCodeBlockParser;
 import org.commonmark.node.Block;
 import org.commonmark.parser.InlineParser;
 import org.commonmark.parser.block.*;
@@ -14,6 +15,7 @@ import java.util.regex.Pattern;
  */
 public class IncludeBlockParser extends AbstractBlockParser {
     private static final Pattern INCLUDE_PLUGIN_REGEXP = Pattern.compile("^\\s*:include-(\\S+)+:\\s*(.*)$");
+    private static final Pattern SPACES_REGEXP = Pattern.compile("^\\s{4,}.*$");
 
     private final StringBuilder value;
     private final String pluginId;
@@ -64,6 +66,16 @@ public class IncludeBlockParser extends AbstractBlockParser {
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             CharSequence line = state.getLine();
+
+            BlockParser parentParser = matchedBlockParser.getMatchedBlockParser();
+
+            if (parentParser instanceof DocumentBlockParser && SPACES_REGEXP.matcher(line).matches()) {
+                return BlockStart.none();
+            }
+
+            if (parentParser instanceof IndentedCodeBlockParser) {
+                return BlockStart.none();
+            }
 
             Matcher matcher = INCLUDE_PLUGIN_REGEXP.matcher(line);
             if (matcher.matches()) {

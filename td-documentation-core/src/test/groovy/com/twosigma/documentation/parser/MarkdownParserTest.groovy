@@ -224,6 +224,14 @@ world""")
     }
 
     @Test
+    void "include plugin inside nested code block"() {
+        parse("    :include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
+        content.should == [[lang: "", maxLineLength:59,
+                            tokens:[[type: "text", content: ":include-dummy: free-form text {param1: 'v1', param2: 'v2'}\n"]],
+                            lineNumber: "", type: "Snippet"]]
+    }
+
+    @Test
     void "include plugin inside numbered list"() {
         parse("1. step one\n\n" +
                 "    :include-dummy: free-form text1 {param1: 'v1', param2: 'v2'}\n" +
