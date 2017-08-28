@@ -70,7 +70,7 @@ library.ListItem = ListItem
 library.Section = Section
 presentationElementHandlers.Section = presentationSectionHandler
 
-library.GraphVizDiagram = (props) => <div className="graphviz-diagram"><GraphVizSvg {...props}/></div>
+library.GraphVizDiagram = GraphVizSvg
 
 library.GraphVizFlow = DocumentationGraphVizFlow
 presentationElementHandlers.GraphVizFlow = presentationGraphVizHandler

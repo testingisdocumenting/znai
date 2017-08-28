@@ -62,18 +62,13 @@ body {
     align-items: center;
 }
 
-.graphviz-diagram,
 .image {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding-top: 20px;
-    padding-bottom: 20px;
     margin-top: 30px;
     margin-bottom: 30px;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
 }
 
 .image.inlined {
@@ -84,5 +79,9 @@ body {
     border-left: 5px solid #6060f0;
     padding-left: 5px;
     margin-left: 5px;
+}
+
+.__recently-modified.content-block {
+    margin-left: auto
 }
 

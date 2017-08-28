@@ -40,6 +40,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
         props.put("diagram", diagram.toMap());
         props.put("colors", Graphviz.colors);
         props.put("idsToHighlight", pluginParams.getOpts().getList("highlight"));
+        props.put("wide", pluginParams.getOpts().get("wide", false));
 
         return PluginResult.docElement("GraphVizDiagram", props);
     }

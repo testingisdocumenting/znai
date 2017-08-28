@@ -1,0 +1,11 @@
+.graphviz-diagram {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.graphviz-diagram.wide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}

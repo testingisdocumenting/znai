@@ -7,6 +7,8 @@ import GvPath from './GvPath'
 
 import {buildUniqueId} from './gvUtils'
 
+import './GraphVizSvg.css'
+
 class ReactElementsBuilder {
     constructor({diagram, colors, idsToDisplay, idsToHighlight}) {
         this.diagram = diagram
@@ -153,19 +155,21 @@ class ReactElementsBuilder {
 
 class GraphVizSvg extends Component {
     render() {
-        const {diagram, colors, idsToDisplay, idsToHighlight} = this.props
+        const {diagram, colors, idsToDisplay, idsToHighlight, wide} = this.props
 
         // TODO do we need to create svg on a server side?
         if (typeof DOMParser === 'undefined') {
             return null
         }
 
+        const className = "graphviz-diagram " + (wide ? "wide" : "content-block")
+
         const parser = new DOMParser()
         const dom = parser.parseFromString(diagram.svg, 'application/xml')
 
         const dropShadowFilterId = buildUniqueId(diagram.id, "glow_filter")
         const el = new ReactElementsBuilder({ diagram, colors, idsToDisplay, idsToHighlight }).reactElementFromDomNode(dom.documentElement)
-        return <div>
+        return <div className={className}>
             <svg viewBox="0 0 0 0" width="0" height="0">
                 <filter id={dropShadowFilterId}>
                     <feMorphology operator="dilate" radius="3" in="SourceAlpha" result="thicken" />
