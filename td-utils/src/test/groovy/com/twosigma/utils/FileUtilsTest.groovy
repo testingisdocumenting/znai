@@ -2,6 +2,8 @@ package com.twosigma.utils
 
 import org.junit.Test
 
+import java.nio.file.Files
+
 /**
  * @author mykola
  */
@@ -11,7 +13,7 @@ class FileUtilsTest {
         def testFile = new File("dummy.txt")
         testFile.deleteOnExit()
 
-        testFile.text = "content of a file"
-        assert FileUtils.fileTextContent(testFile.toPath()) == "content of a file"
+        Files.write(testFile.toPath(), ["content of a file \u275e"])
+        assert FileUtils.fileTextContent(testFile.toPath()) == "content of a file ❞"
     }
 }

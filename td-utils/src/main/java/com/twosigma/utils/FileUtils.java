@@ -29,7 +29,15 @@ public class FileUtils {
     }
 
     public static String fileTextContent(Path path) {
-        return new String(fileBinaryContent(path));
+        if (!Files.exists(path)) {
+            throw new RuntimeException(path.toAbsolutePath() + " doesn't exist");
+        }
+
+        try {
+            return Files.lines(path).collect(Collectors.joining("\n"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static byte[] fileBinaryContent(Path path) {
