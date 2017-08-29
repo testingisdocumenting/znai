@@ -17,12 +17,14 @@ function splitParts(parts, lengthFunc, thresholdCharCount) {
     let runningWords = []
 
     parts.forEach(part => {
-        runningLength += lengthFunc(part)
-        runningWords.push(part)
+        let len = lengthFunc(part);
 
-        if (runningLength >= thresholdCharCount) {
+        if ((runningLength + len) >= thresholdCharCount) {
             flush()
         }
+
+        runningLength += len
+        runningWords.push(part)
     })
 
     flush()
