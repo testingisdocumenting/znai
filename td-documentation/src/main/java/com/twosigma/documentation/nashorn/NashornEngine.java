@@ -34,7 +34,7 @@ public class NashornEngine {
 
     public void loadLibrary(WebResource library) {
         try {
-            engine.eval(library.getContent());
+            engine.eval(library.getTextContent());
         } catch (ScriptException e) {
             throw new RuntimeException(e);
         }
@@ -49,5 +49,4 @@ public class NashornEngine {
                 "console.warn = print;\n" +
                 "console.log = print;");
     }
-
 }

@@ -46,6 +46,21 @@ public class ResourceUtils {
     }
 
     /**
+     * binary content from the classpath by resource path
+     * @param resourcePath resource path like path/to/meta.json
+     * @return binary content of the resource
+     */
+    public static byte[] binaryContent(String resourcePath) {
+        InputStream stream = resourceStream(resourcePath);
+
+        try {
+            return IOUtils.toByteArray(stream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * list of text contents from the classpath by resource path. If you have multiple jars/zips and each of them have
      * file-name.txt, this method will give you content of each of the file
      *

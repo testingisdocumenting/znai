@@ -12,6 +12,13 @@ class ResourceUtilsTest {
         assert content == "single resource\nfile"
     }
 
+    @Test
+    void "should read binary from a single resource file"() {
+        def content = ResourceUtils.binaryContent("castle.jpg")
+        assert content.length == 145460
+        assert content[0..2] == [-1, -40, -1]
+    }
+
     @Test(expected = IllegalArgumentException)
     void "should validate single resource presence"() {
         ResourceUtils.textContent("not-found.txt")

@@ -29,12 +29,16 @@ public class FileUtils {
     }
 
     public static String fileTextContent(Path path) {
+        return new String(fileBinaryContent(path));
+    }
+
+    public static byte[] fileBinaryContent(Path path) {
         if (!Files.exists(path)) {
             throw new RuntimeException(path.toAbsolutePath() + " doesn't exist");
         }
 
         try {
-            return Files.lines(path).collect(Collectors.joining("\n"));
+            return Files.readAllBytes(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

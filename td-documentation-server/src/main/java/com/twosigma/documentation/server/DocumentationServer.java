@@ -33,7 +33,7 @@ public class DocumentationServer {
         StaticHandler staticCommonResources =
                 StaticHandler.create("static").setMaxAgeSeconds(600);
 
-        router.get("/static/*").handler(staticCommonResources);
+        router.get("/*/static/*").handler(staticCommonResources);
 
         router.route("/upload/:docId").handler(ctx -> {
             MultiMap params = ctx.request().params();
@@ -41,18 +41,9 @@ public class DocumentationServer {
             new FileUploadHandler(vertx, deployRoot, docId, (p) -> unzip(deployRoot, docId, p)).handle(ctx.request());
         });
 
-        router.get("/:product/:section/:page").handler(rc -> {
-            MultiMap params = rc.request().params();
-            System.out.println(params);
-
-            rc.next();
-        });
-
         router.get("/*").handler(pagesStaticHandler);
 
-
         server.requestHandler(router::accept);
-
         return server;
     }
 

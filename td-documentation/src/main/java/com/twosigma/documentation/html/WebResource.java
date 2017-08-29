@@ -10,7 +10,7 @@ import com.twosigma.utils.ResourceUtils;
  */
 public class WebResource {
     private Path originPath;
-    private String resourceContent;
+    private byte[] resourceContent;
     private String path;
 
     private WebResource(final Path originPath, final String path) {
@@ -20,7 +20,7 @@ public class WebResource {
 
     private WebResource(final String resourcePath) {
         this.path = resourcePath;
-        this.resourceContent = ResourceUtils.textContent(resourcePath);
+        this.resourceContent = ResourceUtils.binaryContent(resourcePath);
     }
 
     public static WebResource withPath(final String path) {
@@ -48,18 +48,17 @@ public class WebResource {
     }
 
     private String pathForHtml(String documentationId) {
-        // for resource based content we ignore documentation id when building full path
-        //
-        boolean isResourceBased = resourceContent != null;
-        return "/" +
-                ((documentationId.isEmpty() || isResourceBased) ?
-                        "" : documentationId + "/") + path;
+        return "/" + ((documentationId.isEmpty()) ? "" : documentationId + "/") + path;
     }
 
-    public String getContent() {
+    public byte[] getBinaryContent() {
         return resourceContent == null ?
-                FileUtils.fileTextContent(originPath):
+                FileUtils.fileBinaryContent(originPath):
                 resourceContent;
+    }
+
+    public String getTextContent() {
+        return new String(getBinaryContent());
     }
 
     @Override
