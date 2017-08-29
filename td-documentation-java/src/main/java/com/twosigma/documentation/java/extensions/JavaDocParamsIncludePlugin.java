@@ -30,7 +30,8 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
                 "description", p.getJavaDocText(),
                 "type", p.getType())).collect(toList());
 
-        TextTemplate textTemplate = new TextTemplate(ResourceUtils.textContent("templates/javaDocParams.md"));
+        TextTemplate textTemplate = new TextTemplate("java-doc-params",
+                ResourceUtils.textContent("templates/javaDocParams.md"));
 
         MarkupParserResult parserResult = componentsRegistry.parser().parse(markupPath,
                 textTemplate.process(

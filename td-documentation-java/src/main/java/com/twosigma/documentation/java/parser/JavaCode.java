@@ -25,6 +25,10 @@ public class JavaCode {
         return codeVisitor.getTopLevelJavaDoc();
     }
 
+    public List<EnumEntry> getEnumEntries() {
+        return codeVisitor.getEnumEntries();
+    }
+
     public String findJavaDoc(String methodNameWithOptionalTypes) {
         return codeVisitor.findJavaDoc(methodNameWithOptionalTypes);
     }

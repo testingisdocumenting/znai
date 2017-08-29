@@ -40,7 +40,8 @@ public class TemplateFencePlugin implements FencePlugin {
     }
 
     private String processTemplate(String template, ColonDelimitedKeyValues keyValues) {
-        return new TextTemplate(template).process(Collections.unmodifiableMap(keyValues.toMap()));
+        return new TextTemplate(fullPath.getFileName().toString(), template)
+                .process(Collections.unmodifiableMap(keyValues.toMap()));
     }
 
     @Override

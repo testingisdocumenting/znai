@@ -27,6 +27,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     private final List<String> lines;
     private Map<String, JavaType> javaTypes;
     private List<JavaMethod> javaMethods;
+    private List<EnumEntry> enumEntries;
     private Map<String, JavaField> javaFields;
     private String topLevelJavaDoc;
     private boolean isAfterInlinedTag;
@@ -36,6 +37,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         javaTypes = new LinkedHashMap<>();
         javaMethods = new ArrayList<>();
         javaFields = new LinkedHashMap<>();
+        enumEntries = new ArrayList<>();
     }
 
     public boolean hasType(String typeName) {
@@ -63,6 +65,10 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         return javaMethods.stream().filter(m -> m.getName().equals(methodName) && m.getParamNames().equals(paramNames))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("no method found: " + methodName + " with params: " + paramNames));
+    }
+
+    public List<EnumEntry> getEnumEntries() {
+        return enumEntries;
     }
 
     public JavaField findFieldDetails(String fieldName) {
@@ -112,6 +118,10 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         extractTopLevelJavaDoc(enumDeclaration);
         registerType(enumDeclaration);
 
+        List<EnumEntry> entries = enumDeclaration.getEntries().stream().map(e -> new EnumEntry(e.getName().getIdentifier(),
+                extractJavaDocDescription(e.getJavadocComment()))).collect(toList());
+
+        enumEntries.addAll(entries);
         super.visit(enumDeclaration, arg);
     }
 
@@ -142,6 +152,17 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     private String renderAllFields() {
         return "    " + javaFields.keySet().stream().collect(joining("\n    "));
+    }
+
+    private String extractJavaDocDescription(JavadocComment javadocComment) {
+        if (javadocComment == null) {
+            return "";
+        }
+
+        Javadoc javadoc = javadocComment.parse();
+        JavadocDescription description = javadoc.getDescription();
+
+        return description == null ? "" : extractJavaDocDescription(description);
     }
 
     @SuppressWarnings("unchecked")

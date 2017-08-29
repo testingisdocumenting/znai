@@ -93,7 +93,6 @@ Instead of copy and pasting text between sources, you can refer it inside docume
 
 :include-java-doc: HelloWorld.java
 
-
 # Method JavaDoc
 
 Method level `JavaDoc` text can be referred as well by specifying `entry` parameter 
@@ -115,4 +114,14 @@ Method level `JavaDoc` text can be referred as well by specifying `entry` parame
     :include-java-doc-params: HelloWorld.java {entry: "sampleMethod"}
 
 :include-java-doc-params: HelloWorld.java {entry: "sampleMethod"}
+
+# Enum Entries
+
+Use `include-java-enum-entries` to enumerate entries of a enum from a file
+
+:include-file: MyEnum.java
+
+    :include-java-enum-entries: MyEnum.java
+    
+:include-java-enum-entries: MyEnum.java
 

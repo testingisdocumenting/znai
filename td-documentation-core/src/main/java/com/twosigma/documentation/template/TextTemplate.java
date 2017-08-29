@@ -17,10 +17,10 @@ import static freemarker.template.Configuration.VERSION_2_3_23;
 public class TextTemplate {
     private final Template template;
 
-    public TextTemplate(String templateText) {
+    public TextTemplate(String templateName, String templateText) {
         Configuration cfg = new Configuration(VERSION_2_3_23);
         try {
-            template = new Template("templateName", new StringReader(templateText), cfg);
+            template = new Template(templateName, new StringReader(templateText), cfg);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

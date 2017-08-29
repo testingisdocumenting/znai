@@ -3,11 +3,11 @@ package com.twosigma.documentation.java.parser;
 /**
  * @author mykola
  */
-public class JavaField {
+public class EnumEntry {
     private String name;
     private String javaDocText;
 
-    public JavaField(String name, String javaDocText) {
+    public EnumEntry(String name, String javaDocText) {
         this.name = name;
         this.javaDocText = javaDocText;
     }
@@ -22,7 +22,7 @@ public class JavaField {
 
     @Override
     public String toString() {
-        return "JavaField{" +
+        return "EnumEntry{" +
                 "name='" + name + '\'' +
                 ", javaDocText='" + javaDocText + '\'' +
                 '}';

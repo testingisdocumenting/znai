@@ -52,7 +52,7 @@ public class TemplateIncludePlugin implements IncludePlugin {
             params.putAll(JsonUtils.deserializeAsMap(FileUtils.fileTextContent(paramsPath)));
         }
 
-        return new TextTemplate(template).process(params);
+        return new TextTemplate(fullPath.getFileName().toString(), template).process(params);
     }
 
     @Override

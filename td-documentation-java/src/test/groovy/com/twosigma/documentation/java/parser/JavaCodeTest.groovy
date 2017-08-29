@@ -84,8 +84,16 @@ interface HelloWorld {
  * @author ignore
  */
 enum MyEnum {
+    /**
+     * documentation of entry one
+     */
     ENTRY_ONE,
-    SECOND_ENTRY
+
+    /**
+     * documentation of entry two
+     */
+    SECOND_ENTRY,
+    THIRD_ENTRY
 }
 """
 
@@ -225,11 +233,36 @@ enum MyEnum {
     void "extracts enum definition by name"() {
         def type = javaCodeEnum.findType('MyEnum')
         Assert.assertEquals("enum MyEnum {\n" +
+                "    /**\n" +
+                "     * documentation of entry one\n" +
+                "     */\n" +
                 "    ENTRY_ONE,\n" +
-                "    SECOND_ENTRY\n" +
+                "\n" +
+                "    /**\n" +
+                "     * documentation of entry two\n" +
+                "     */\n" +
+                "    SECOND_ENTRY,\n" +
+                "    THIRD_ENTRY\n" +
                 "}", type.fullBody)
-        Assert.assertEquals("ENTRY_ONE,\n" +
-                "SECOND_ENTRY", type.bodyOnly)
+        Assert.assertEquals("/**\n" +
+                " * documentation of entry one\n" +
+                " */\n" +
+                "ENTRY_ONE,\n" +
+                "\n" +
+                "/**\n" +
+                " * documentation of entry two\n" +
+                " */\n" +
+                "SECOND_ENTRY,\n" +
+                "THIRD_ENTRY", type.bodyOnly)
+    }
+
+    @Test
+    void "extracts enumerations themselves from enum"() {
+        def entries = javaCodeEnum.getEnumEntries()
+
+        entries.should == [[name: 'ENTRY_ONE', javaDocText: 'documentation of entry one'],
+                           [name: 'SECOND_ENTRY', javaDocText: 'documentation of entry two'],
+                           [name: 'THIRD_ENTRY', javaDocText: '']]
     }
 
     @Test
