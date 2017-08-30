@@ -10,11 +10,12 @@ import {buildUniqueId} from './gvUtils'
 import './GraphVizSvg.css'
 
 class ReactElementsBuilder {
-    constructor({diagram, colors, idsToDisplay, idsToHighlight}) {
+    constructor({diagram, colors, idsToDisplay, idsToHighlight, urls}) {
         this.diagram = diagram
         this.colors = colors
         this.idsToDisplay = idsToDisplay
         this.idsToHighlight = idsToHighlight
+        this.urls = urls
         this.currentCommentAsId = null
         this.currentParentClass = null
     }
@@ -57,6 +58,7 @@ class ReactElementsBuilder {
 
             props.svg = this.customSvgShape()
             props.isInvertedTextColor = this.isInvertedTextColor()
+            props.url = this.urls[this.currentCommentAsId]
 
             const component = this.reactComponentForDom(domNode)
             const passExtraProps = typeof component !== 'string'
@@ -156,7 +158,7 @@ class ReactElementsBuilder {
 
 class GraphVizSvg extends Component {
     render() {
-        const {diagram, colors, idsToDisplay, idsToHighlight, wide} = this.props
+        const {diagram, colors, idsToDisplay, idsToHighlight, urls, wide} = this.props
 
         // TODO do we need to create svg on a server side?
         if (typeof DOMParser === 'undefined') {
@@ -169,7 +171,7 @@ class GraphVizSvg extends Component {
         const dom = parser.parseFromString(diagram.svg, 'application/xml')
 
         const dropShadowFilterId = buildUniqueId(diagram.id, "glow_filter")
-        const el = new ReactElementsBuilder({ diagram, colors, idsToDisplay, idsToHighlight }).reactElementFromDomNode(dom.documentElement)
+        const el = new ReactElementsBuilder({ diagram, colors, idsToDisplay, idsToHighlight, urls }).reactElementFromDomNode(dom.documentElement)
         return <div className={className}>
             <svg viewBox="0 0 0 0" width="0" height="0">
                 <filter id={dropShadowFilterId}>

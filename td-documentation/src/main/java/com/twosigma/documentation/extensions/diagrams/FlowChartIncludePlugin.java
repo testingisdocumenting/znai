@@ -7,11 +7,16 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.structure.DocStructure;
+import com.twosigma.documentation.structure.DocUrl;
+import com.twosigma.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -21,6 +26,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
     private static final AtomicInteger diagramCount = new AtomicInteger();
 
     private Path filePath;
+    private DocStructure docStructure;
 
     @Override
     public String id() {
@@ -30,9 +36,11 @@ public class FlowChartIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         filePath = componentsRegistry.includeResourceResolver().fullPath(pluginParams.getFreeParam());
+        docStructure = componentsRegistry.docStructure();
 
-        String gvContent = new GraphvizFromJsonGen(
-                componentsRegistry.includeResourceResolver().textContent(filePath)).generate();
+        String graphJson = componentsRegistry.includeResourceResolver().textContent(filePath);
+        Map<String, ?> graph = JsonUtils.deserializeAsMap(graphJson);
+        String gvContent = new GraphvizFromJsonGen(graph).generate();
 
         GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv("dag" + diagramCount.incrementAndGet(),
                 gvContent);
@@ -41,8 +49,26 @@ public class FlowChartIncludePlugin implements IncludePlugin {
         props.put("colors", Graphviz.colors);
         props.put("idsToHighlight", pluginParams.getOpts().getList("highlight"));
         props.put("wide", pluginParams.getOpts().get("wide", false));
+        props.put("urls", extractLinks(graph));
 
         return PluginResult.docElement("GraphVizDiagram", props);
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<String, String> extractLinks(Map<String, ?> graph) {
+        List<Map<String, ?>> nodes = (List<Map<String, ?>>) graph.get("nodes");
+
+        return nodes.stream().filter(this::hasUrl)
+                .collect(Collectors.toMap(n -> n.get("id").toString(),
+                        this::buildUrl));
+    }
+
+    private boolean hasUrl(Map<String, ?> node) {
+        return node.containsKey("url");
+    }
+
+    private String buildUrl(Map<String, ?> node) {
+        return docStructure.createLink(new DocUrl(node.get("url").toString()));
     }
 
     @Override

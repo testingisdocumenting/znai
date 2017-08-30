@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 public class GraphvizFromJsonGen {
     private final Map<String, ?> graph;
 
-    public GraphvizFromJsonGen(String json) {
-        graph = JsonUtils.deserializeAsMap(json);
+    public GraphvizFromJsonGen(Map<String, ?> graph) {
+        this.graph = graph;
     }
 
     public String generate() {

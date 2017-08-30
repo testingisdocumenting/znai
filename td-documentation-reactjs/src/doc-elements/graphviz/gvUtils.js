@@ -3,6 +3,7 @@ export {removeCustomProps, buildUniqueId, expandId}
 function removeCustomProps(props) {
     const res = {...props}
     delete res.svg
+    delete res.url
     delete res.isInvertedTextColor
     delete res.colors
     delete res.parentClassName

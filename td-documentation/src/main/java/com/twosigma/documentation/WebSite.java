@@ -16,10 +16,7 @@ import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.Page;
 import com.twosigma.documentation.search.LunrIndexer;
-import com.twosigma.documentation.structure.DocMeta;
-import com.twosigma.documentation.structure.TableOfContents;
-import com.twosigma.documentation.structure.TocItem;
-import com.twosigma.documentation.validation.DocStructure;
+import com.twosigma.documentation.structure.*;
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
 
@@ -380,8 +377,12 @@ public class WebSite implements DocStructure {
     }
 
     @Override
-    public void validateLink(Path path, String sectionWithLinkTitle, String dirName, String fileName, String pageSectionId) {
-        linksToValidate.add(new LinkToValidate(path, sectionWithLinkTitle, dirName, fileName, pageSectionId));
+    public void validateLink(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
+        if (docUrl.isGlobalUrl()) {
+            return;
+        }
+
+        linksToValidate.add(new LinkToValidate(path, sectionWithLinkTitle, docUrl));
     }
 
     private void validateCollectedLinks() {
@@ -397,17 +398,18 @@ public class WebSite implements DocStructure {
     }
 
     private Optional<String> validateLink(LinkToValidate link) {
-        String url = link.dirName + "/" + link.fileName + (link.pageSectionId.isEmpty() ?  "" : "#" + link.pageSectionId);
+        String url = link.docUrl.getDirName() + "/" + link.docUrl.getFileName() +
+                (link.docUrl.getPageSectionId().isEmpty() ?  "" : "#" + link.docUrl.getPageSectionId());
 
         Supplier<String> validationMessage = () -> "can't find a page associated with: " + url +
                 "\ncheck file: " + link.path + ", section title: " + link.sectionWithLinkTitle;
 
-        TocItem tocItem = toc.findTocItem(link.dirName, link.fileName);
+        TocItem tocItem = toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileName());
         if (tocItem == null) {
             return Optional.of(validationMessage.get());
         }
 
-        if (!link.pageSectionId.isEmpty() && !tocItem.hasPageSection(link.pageSectionId)) {
+        if (!link.docUrl.getPageSectionId().isEmpty() && !tocItem.hasPageSection(link.docUrl.getPageSectionId())) {
             return Optional.of(validationMessage.get());
         }
 
@@ -415,9 +417,13 @@ public class WebSite implements DocStructure {
     }
 
     @Override
-    public String createLink(String dirName, String fileName, String pageSectionId) {
-        String base = "/" + docMeta.getId() + "/" + dirName + "/" + fileName;
-        return base + (pageSectionId.isEmpty() ? "" : "#" + pageSectionId);
+    public String createLink(DocUrl docUrl) {
+        if (docUrl.isGlobalUrl()) {
+            return docUrl.getUrl();
+        }
+
+        String base = "/" + docMeta.getId() + "/" + docUrl.getDirName() + "/" + docUrl.getFileName();
+        return base + (docUrl.getPageSectionId().isEmpty() ? "" : "#" + docUrl.getPageSectionId());
     }
 
     public void redeployAuxiliaryFileIfRequired(Path path) {
@@ -526,18 +532,14 @@ public class WebSite implements DocStructure {
     }
 
     private class LinkToValidate {
-        private Path path;
-        private String sectionWithLinkTitle;
-        private String dirName;
-        private String fileName;
-        private String pageSectionId;
+        private final Path path;
+        private final String sectionWithLinkTitle;
+        private final DocUrl docUrl;
 
-        LinkToValidate(Path path, String sectionWithLinkTitle, String dirName, String fileName, String pageSectionId) {
+        LinkToValidate(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
             this.path = path;
             this.sectionWithLinkTitle = sectionWithLinkTitle;
-            this.dirName = dirName;
-            this.fileName = fileName;
-            this.pageSectionId = pageSectionId;
+            this.docUrl = docUrl;
         }
     }
 }

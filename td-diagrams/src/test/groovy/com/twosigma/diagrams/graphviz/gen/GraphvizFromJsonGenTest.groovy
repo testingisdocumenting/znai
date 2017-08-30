@@ -45,7 +45,7 @@ class GraphvizFromJsonGenTest {
     }
 
     private void generate(data) {
-        def gen = new GraphvizFromJsonGen(JsonUtils.serializePrettyPrint(data))
+        def gen = new GraphvizFromJsonGen(data)
         gv = gen.generate()
     }
 }

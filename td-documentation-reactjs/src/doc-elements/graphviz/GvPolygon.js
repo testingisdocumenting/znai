@@ -1,9 +1,22 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import SvgCustomShape from './SvgCustomShape'
 import {removeCustomProps, buildUniqueId} from './gvUtils'
 
+import LinkWrap from './LinkWrap'
+
 class GvPolygon extends Component {
     render() {
+        const {url} = this.props
+        const renderNode = this.renderNode()
+
+        return (
+            <LinkWrap url={url}>
+                {renderNode}
+            </LinkWrap>
+        )
+    }
+
+    renderNode() {
         const sizes = calculateSizes(this.props.points)
         const colorsOverride = createColors(this.props.parentClassName, this.props.colors)
         const style = createStyle(this.props.diagramId, this.props.parentClassName)
@@ -24,12 +37,12 @@ function createColors(parentClassName, colors) {
         return {}
     }
 
-    return { fill: colors.fill, stroke: colors.line }
+    return {fill: colors.fill, stroke: colors.line}
 }
 
 function createStyle(diagramId, parentClassName) {
     if (parentClassName === 'node') {
-        return {filter: `url(#${buildUniqueId(diagramId, "glow_filter")})` }
+        return {filter: `url(#${buildUniqueId(diagramId, "glow_filter")})`}
     }
 
     return {}

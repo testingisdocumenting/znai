@@ -3,7 +3,7 @@ package com.twosigma.documentation.parser
 import com.twosigma.documentation.codesnippets.CodeTokenizer
 import com.twosigma.documentation.core.ComponentsRegistry
 import com.twosigma.documentation.extensions.PluginResourcesResolver
-import com.twosigma.documentation.validation.DocStructure
+import com.twosigma.documentation.structure.DocStructure
 
 /**
  * @author mykola

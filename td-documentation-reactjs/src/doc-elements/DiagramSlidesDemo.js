@@ -36,7 +36,8 @@ const testData = {
             "textInverse": "#888"
         }
     },
-    "idsToHighlight": ["n3"]
+    "idsToHighlight": ["n3"],
+    "urls": {"n1": "http://google.com", "n3": "/preview/local"}
 }
 
 class DiagramSlidesDemo extends Component {

@@ -1,6 +1,8 @@
 # Nodes and Edges
 
-Flow chart is defines as `JSON` inside a file.  
+:include-flow-chart: simple-dag.json
+
+Specify a `JSON` file to define a flow chart.  
 
 :include-file: simple-dag.json    
 
@@ -8,7 +10,6 @@ Flow chart is defines as `JSON` inside a file.
 
     :include-flow-chart: simple-dag.json
     
-:include-flow-chart: simple-dag.json
 
 # Highlight
 
@@ -25,5 +26,16 @@ Or use `highlight` property of a `flow-chart` include plugin
 :include-flow-chart: simple-dag.json {highlight: "n3"}
 
 Note: to highlight more than one element use `{highlight: ["n3", "n4"]}`
-    
+
+# Links
+  
+To attach links to nodes use `url` property
+            
+:include-flow-chart: links-dag.json     
+        
+Combine links and highlights to create a sub navigation for your product.
+         
+:include-file: links-dag.json     
+            
+
 

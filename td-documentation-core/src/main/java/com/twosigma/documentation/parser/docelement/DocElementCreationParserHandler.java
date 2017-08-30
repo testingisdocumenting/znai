@@ -13,7 +13,8 @@ import com.twosigma.documentation.extensions.inlinedcode.InlinedCodePlugin;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.table.MarkupTableData;
-import com.twosigma.documentation.validation.DocStructure;
+import com.twosigma.documentation.structure.DocStructure;
+import com.twosigma.documentation.structure.DocUrl;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
@@ -25,9 +26,6 @@ import java.util.stream.Collectors;
  * @author mykola
  */
 public class DocElementCreationParserHandler implements ParserHandler {
-    private static final String LINK_TO_SECTION_INSTRUCTION = "To refer to a section of this document use" +
-            " dir-name/file-name[#page-section-id]";
-
     private final ComponentsRegistry componentsRegistry;
     private final Path path;
     private final List<AuxiliaryFile> auxiliaryFiles;
@@ -332,30 +330,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     private String validateAndCovertUrl(String url) {
-        if (url.startsWith("http") || url.startsWith("file") || url.startsWith("mailto")) {
-            return url;
-        }
-
-        if (url.startsWith("..")) {
-            throw new IllegalArgumentException("Do not use .. based urls: " + url + ". " + LINK_TO_SECTION_INSTRUCTION);
-        }
-
-        String[] parts = url.split("/");
-        if (parts.length != 2) {
-            throw new IllegalArgumentException("Unexpected url pattern: " + url + ". " + LINK_TO_SECTION_INSTRUCTION);
-        }
-
-        String dirName = parts[0];
-
-        int idxOfPageSectionSep = parts[1].indexOf('#');
-
-        String fileName = idxOfPageSectionSep == -1 ? parts[1] : parts[1].substring(0, idxOfPageSectionSep);
-        String pageSection = idxOfPageSectionSep == -1 ? "" : parts[1].substring(idxOfPageSectionSep + 1);
-
         DocStructure docStructure = componentsRegistry.docStructure();
+        DocUrl docUrl = new DocUrl(url);
 
-        docStructure.validateLink(path, currentSectionTitle, dirName, fileName, pageSection);
-        return docStructure.createLink(dirName, fileName, pageSection);
+        docStructure.validateLink(path, currentSectionTitle, docUrl);
+        return docStructure.createLink(docUrl);
     }
 }
 
