@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import {parseCode} from './codeParser'
 
-import CodeSnippetWithInlineComments from './CodeSnippetWithInlineComments'
-import SimpleCodeSnippet from './SimpleCodeSnippet'
+import {Snippet} from '../default-elements/Snippet'
 
 import './CodeSnippet.css'
 
@@ -36,9 +35,11 @@ class ParsingDemo extends Component {
             ':include-file: config/server.config\n'
 
         return <div>
-            <SimpleCodeSnippet tokens={parseCode("html", htmlCode)}/>
-            <CodeSnippetWithInlineComments tokens={parseCode("javascript", javaCode)} slideIdx={1} spoiler={true}/>
-            <SimpleCodeSnippet tokens={parseCode("markdown", markdownCode2)} highlight={[1]}/>
+            <Snippet title="snippet title" tokens={parseCode("html", htmlCode)}/>
+            <Snippet maxLineLength={200} tokens={parseCode("html", htmlCode)}/>
+            <Snippet maxLineLength={200} tokens={parseCode("html", htmlCode)}/>
+            <Snippet tokens={parseCode("javascript", javaCode)} slideIdx={1} spoiler={true} commentsType="inline"/>
+            <Snippet tokens={parseCode("markdown", markdownCode2)} highlight={[1]}/>
         </div>
     }
 }

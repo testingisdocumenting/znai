@@ -4,7 +4,7 @@
 
 Specify a `JSON` file to define a flow chart.  
 
-:include-file: simple-dag.json    
+:include-file: simple-dag.json {title: "simple-dag.json"}
 
 `nodes` and `edges` is the minimum information you need to provide.
 
