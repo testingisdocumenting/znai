@@ -36,8 +36,10 @@ class ParsingDemo extends Component {
 
         return <div>
             <Snippet title="snippet title" tokens={parseCode("html", htmlCode)}/>
+            <Snippet maxLineLength={200} title="snippet title" tokens={parseCode("html", htmlCode)}/>
             <Snippet maxLineLength={200} tokens={parseCode("html", htmlCode)}/>
-            <Snippet maxLineLength={200} tokens={parseCode("html", htmlCode)}/>
+            <p className="content-block">text in between</p>
+            <Snippet maxLineLength={20} tokens={parseCode("html", htmlCode)}/>
             <Snippet tokens={parseCode("javascript", javaCode)} slideIdx={1} spoiler={true} commentsType="inline"/>
             <Snippet tokens={parseCode("markdown", markdownCode2)} highlight={[1]}/>
         </div>

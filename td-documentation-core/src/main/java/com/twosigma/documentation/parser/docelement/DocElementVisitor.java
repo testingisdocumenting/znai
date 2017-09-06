@@ -139,7 +139,7 @@ public class DocElementVisitor extends AbstractVisitor {
 
     @Override
     public void visit(final IndentedCodeBlock indentedCodeBlock) {
-        parserHandler.onSnippet("", "", indentedCodeBlock.getLiteral());
+        parserHandler.onSnippet(new PluginParams(""),"", "", indentedCodeBlock.getLiteral());
     }
 
     @Override
@@ -148,7 +148,7 @@ public class DocElementVisitor extends AbstractVisitor {
         if (Plugins.hasFencePlugin(pluginParams.getPluginId())) {
             parserHandler.onFencePlugin(pluginParams, fencedCodeBlock.getLiteral());
         } else {
-            parserHandler.onSnippet(fencedCodeBlock.getInfo(), "", fencedCodeBlock.getLiteral());
+            parserHandler.onSnippet(pluginParams, pluginParams.getPluginId(), "", fencedCodeBlock.getLiteral());
         }
     }
 

@@ -1,6 +1,7 @@
 package com.twosigma.documentation.java.parser.html;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.parser.docelement.DocElementCreationParserHandler;
@@ -119,7 +120,7 @@ public class HtmlToDocElementConverter {
                 parserHandler.onInlinedCode(text);
             } else if (isInsideBlockCode) {
                 closeParagraph();
-                parserHandler.onSnippet("", "", text);
+                parserHandler.onSnippet(new PluginParams(""),"", "", text);
             } else {
                 parserHandler.onSimpleText(text);
             }

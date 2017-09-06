@@ -15,6 +15,7 @@ public class PluginParams {
 
     public PluginParams(String pluginId) {
         this.pluginId = pluginId;
+        this.opts = new PluginParamsOpts(Collections.emptyMap());
     }
 
     public PluginParams(String pluginId, String value) {

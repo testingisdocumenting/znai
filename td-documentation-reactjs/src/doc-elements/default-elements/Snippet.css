@@ -5,8 +5,28 @@
 }
 
 .snippet-container.wide-screen {
-    border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.snippet-container.wide-screen .title-layer {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    width: 100%;
+}
+
+.snippet-container.wide-screen .title-container.content-block {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.snippet-container.wide-screen .padding {
+    flex: 1;
+    border-bottom: 1px solid #eee;
+    height: 36px;
 }
 
 .snippet-container pre {
@@ -30,7 +50,6 @@
 
 .snippet-container .snippet.with-title {
     border-top: none;
-
 }
 
 .snippet-container .title-container {

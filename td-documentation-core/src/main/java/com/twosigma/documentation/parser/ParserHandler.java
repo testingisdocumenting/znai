@@ -36,7 +36,7 @@ public interface ParserHandler {
     void onLinkStart(String url);
     void onLinkEnd();
     void onImage(String title, String destination, String alt);
-    void onSnippet(String lang, String lineNumber, String snippet);
+    void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet);
     void onThematicBreak();
     void onIncludePlugin(PluginParams pluginParams);
     void onFencePlugin(PluginParams pluginParams, String content);

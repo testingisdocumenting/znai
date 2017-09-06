@@ -13,6 +13,15 @@ File will be looked up using following rules:
 * root directory of a documentation
 * all lookup paths listed in a special file
 
+# Title
+
+    :include-file: file-name.js {title: "ES6 class"} 
+
+Use `title` property to specify a title.
+
+:include-file: file-name.js {title: "ES6 class"} 
+
+
 # Callout Comments
 
 If you already have comments inside your code it would be non effecient to repeat them inside documentation. 
