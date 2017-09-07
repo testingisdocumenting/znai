@@ -185,7 +185,7 @@ world""")
         parse("text ![alt text](images/png-test.png \"custom title\") another text")
         content.should == [[type: 'Paragraph', content:[
                 [text: "text " , type: "SimpleText"],
-                [title: "custom title", destination: 'images/png-test.png', alt: 'alt text', type: 'Image', inlined: true,
+                [title: "custom title", destination: '/test-doc/png-test.png', alt: 'alt text', type: 'Image', inlined: true,
                  width:762, height:581],
                 [text: " another text" , type: "SimpleText"]]]]
     }
@@ -193,7 +193,7 @@ world""")
     @Test
     void "standalone image"() {
         parse("![alt text](images/png-test.png \"custom title\")")
-        content.should == [[title: "custom title", destination: 'images/png-test.png',
+        content.should == [[title: "custom title", destination: '/test-doc/png-test.png',
                             alt: 'alt text', inlined: false,
                             width:762, height:581,
                             type: 'Image']]

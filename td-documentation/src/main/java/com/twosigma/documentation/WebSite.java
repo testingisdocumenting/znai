@@ -73,7 +73,7 @@ public class WebSite implements DocStructure {
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
         this.tocJavaScript = WebResource.withPath("toc.js");
-        this.includeResourcesResolver = new MultipleLocationsResourceResolver(findLookupLocations(cfg));
+        this.includeResourcesResolver = new MultipleLocationsResourceResolver(cfg.docRootPath, findLookupLocations(cfg));
         this.tocItemsByAuxiliaryFilePath = new HashMap<>();
         this.auxiliaryFiles = new HashMap<>();
 
@@ -343,7 +343,7 @@ public class WebSite implements DocStructure {
 
     private void deployAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
         Path origin = auxiliaryFile.getPath().toAbsolutePath();
-        Path relative = cfg.docRootPath.relativize(origin);
+        Path relative = includeResourcesResolver.docRootRelativePath(origin);
         try {
             deployer.deploy(relative, Files.readAllBytes(origin));
         } catch (IOException e) {
@@ -377,7 +377,7 @@ public class WebSite implements DocStructure {
     }
 
     @Override
-    public void validateLink(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
+    public void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
         if (docUrl.isGlobalUrl()) {
             return;
         }
@@ -417,13 +417,23 @@ public class WebSite implements DocStructure {
     }
 
     @Override
-    public String createLink(DocUrl docUrl) {
+    public String createUrl(DocUrl docUrl) {
         if (docUrl.isGlobalUrl()) {
             return docUrl.getUrl();
         }
 
         String base = "/" + docMeta.getId() + "/" + docUrl.getDirName() + "/" + docUrl.getFileName();
         return base + (docUrl.getPageSectionId().isEmpty() ? "" : "#" + docUrl.getPageSectionId());
+    }
+
+    @Override
+    public String prefixUrlWithProductId(String url) {
+        url = url.toLowerCase();
+        if (url.startsWith("http")) {
+            return url;
+        }
+
+        return "/" + docMeta.getId() + "/" + url;
     }
 
     public void redeployAuxiliaryFileIfRequired(Path path) {

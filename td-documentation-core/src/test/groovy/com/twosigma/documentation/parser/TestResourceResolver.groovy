@@ -31,4 +31,9 @@ class TestResourceResolver implements PluginResourcesResolver {
     Path fullPath(String path) {
         return Paths.get(path).toAbsolutePath()
     }
+
+    @Override
+    Path docRootRelativePath(Path path) {
+        return path.fileName
+    }
 }

@@ -14,4 +14,5 @@ public interface PluginResourcesResolver {
     }
 
     Path fullPath(String path);
+    Path docRootRelativePath(Path path);
 }

@@ -44,7 +44,9 @@ public class ImageIncludePlugin implements IncludePlugin {
 
         Map<String, ?> annotations = annotationsPath == null ? null : JsonUtils.deserializeAsMap(FileUtils.fileTextContent(annotationsPath));
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
-        props.put("imageSrc", imagePathValue);
+        props.put("imageSrc", componentsRegistry.docStructure().prefixUrlWithProductId(
+                resourceResolver.docRootRelativePath(imagePath).toString()));
+
         props.put("shapes", annotations != null ? annotations.get("shapes") : Collections.emptyList());
         setWidthHeight(props, annotations, imagePathValue);
 

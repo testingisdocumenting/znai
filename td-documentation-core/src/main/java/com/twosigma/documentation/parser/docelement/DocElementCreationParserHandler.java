@@ -3,11 +3,8 @@ package com.twosigma.documentation.parser.docelement;
 import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.Plugin;
-import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.extensions.Plugins;
+import com.twosigma.documentation.extensions.*;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
-import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.inlinedcode.InlinedCodePlugin;
 import com.twosigma.documentation.parser.PageSectionIdTitle;
@@ -196,13 +193,21 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onImage(String title, String destination, String alt) {
-        BufferedImage image = componentsRegistry.includeResourceResolver().imageContent(destination);
-        append(DocElementType.IMAGE, "title", title, "destination", destination, "alt", alt, "inlined", true,
+        PluginResourcesResolver resourcesResolver = componentsRegistry.includeResourceResolver();
+
+        BufferedImage image = resourcesResolver.imageContent(destination);
+        Path imageFullPath = resourcesResolver.fullPath(destination);
+
+        append(DocElementType.IMAGE, "title", title,
+                "destination", componentsRegistry.docStructure().prefixUrlWithProductId(
+                        resourcesResolver.docRootRelativePath(imageFullPath).toString()),
+                "alt", alt,
+                "inlined", true,
                 "width", image.getWidth(),
                 "height", image.getHeight());
 
         if (! destination.startsWith("http")) {
-            auxiliaryFiles.add(AuxiliaryFile.runTime(componentsRegistry.includeResourceResolver().fullPath(destination)));
+            auxiliaryFiles.add(AuxiliaryFile.runTime(imageFullPath));
         }
     }
 
@@ -337,8 +342,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
         DocStructure docStructure = componentsRegistry.docStructure();
         DocUrl docUrl = new DocUrl(url);
 
-        docStructure.validateLink(path, currentSectionTitle, docUrl);
-        return docStructure.createLink(docUrl);
+        docStructure.validateUrl(path, currentSectionTitle, docUrl);
+        return docStructure.createUrl(docUrl);
     }
 }
 

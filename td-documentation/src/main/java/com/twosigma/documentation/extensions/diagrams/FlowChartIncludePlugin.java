@@ -68,7 +68,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
     }
 
     private String buildUrl(Map<String, ?> node) {
-        return docStructure.createLink(new DocUrl(node.get("url").toString()));
+        return docStructure.createUrl(new DocUrl(node.get("url").toString()));
     }
 
     @Override

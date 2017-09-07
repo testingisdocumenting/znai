@@ -23,8 +23,6 @@ class AnnotatedImage extends Component {
         const imageContainerStyle = {position: "absolute", top: 0}
         const annotationsContainerStyle = {position: "absolute", top: 0}
 
-        const srcToUse = imageSrc + (isPreviewEnabled() ? "?time=" + new Date().getTime() : "")
-
         const captionElement = caption ? (
             <div style={captionContainerStyle(captionBottom)} className="annotated-image-caption">
                 {caption}
@@ -34,7 +32,7 @@ class AnnotatedImage extends Component {
         return (
             <div style={parentStyle} className="annotated-image" >
                 <div style={imageContainerStyle}>
-                    <img alt="annotated" src={srcToUse}
+                    <img alt="annotated" src={imageSrc}
                          width={imageWidth}
                          height={imageHeight}
                          ref={node => this.imageNode = node}/>

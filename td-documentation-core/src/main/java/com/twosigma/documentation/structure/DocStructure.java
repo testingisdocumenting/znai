@@ -6,6 +6,7 @@ import java.nio.file.Path;
  * @author mykola
  */
 public interface DocStructure {
-    void validateLink(Path path, String sectionWithLinkTitle, DocUrl docUrl);
-    String createLink(DocUrl docUrl);
+    void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl);
+    String createUrl(DocUrl docUrl);
+    String prefixUrlWithProductId(String url);
 }

@@ -7,13 +7,13 @@ import java.util.List;
  * @author mykola
  */
 public class HttpUrl {
-    private static List<String> fullUrlPrefixes = Arrays.asList("http:", "https:", "file:");
+    private static List<String> fullUrlPrefixes = Arrays.asList("http:", "https:", "file:", "mailto:");
 
     private HttpUrl() {
     }
 
     public static boolean isFull(final String url) {
-        return fullUrlPrefixes.stream().anyMatch(url::startsWith);
+        return fullUrlPrefixes.stream().anyMatch(p -> url.toLowerCase().startsWith(p));
     }
 
     public static String concat(final String left, final String right) {

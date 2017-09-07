@@ -12,7 +12,7 @@ class TestDocStructure implements DocStructure {
     private Set<String> validLinks = [] as Set
 
     @Override
-    void validateLink(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
+    void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
         if (docUrl.isGlobalUrl()) {
             return
         }
@@ -26,13 +26,18 @@ class TestDocStructure implements DocStructure {
     }
 
     @Override
-    String createLink(DocUrl docUrl) {
+    String createUrl(DocUrl docUrl) {
         if (docUrl.isGlobalUrl()) {
             return docUrl.url
         }
 
         def base = "/test-doc/${docUrl.dirName}/${docUrl.fileName}"
         return base + (docUrl.pageSectionId ? "#${docUrl.pageSectionId}" : "")
+    }
+
+    @Override
+    String prefixUrlWithProductId(String url) {
+        return "/test-doc/${url}"
     }
 
     void addValidLink(String link) {

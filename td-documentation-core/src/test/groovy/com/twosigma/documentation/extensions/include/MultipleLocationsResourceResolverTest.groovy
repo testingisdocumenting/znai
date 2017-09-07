@@ -11,8 +11,8 @@ import java.nio.file.Paths
 class MultipleLocationsResourceResolverTest {
     @Test
     void "resolves against specified list of dirs"() {
-        def resolver = new MultipleLocationsResourceResolver([Paths.get("src/main/java/com/twosigma/documentation"),
-                                                              Paths.get("src/test/groovy/com/twosigma/documentation")].stream())
+        def resolver = new MultipleLocationsResourceResolver(Paths.get("/root"), [Paths.get("src/main/java/com/twosigma/documentation"),
+                                                                               Paths.get("src/test/groovy/com/twosigma/documentation")].stream())
 
         assert resolver.fullPath("core/AuxiliaryFile.java").toString() == 'src/main/java/com/twosigma/documentation/core/AuxiliaryFile.java'
         assert resolver.fullPath("parser/MarkdownParserTest.groovy").toString() == 'src/test/groovy/com/twosigma/documentation/parser/MarkdownParserTest.groovy'

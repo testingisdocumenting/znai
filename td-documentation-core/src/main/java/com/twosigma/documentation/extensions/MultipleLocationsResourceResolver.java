@@ -1,6 +1,5 @@
 package com.twosigma.documentation.extensions;
 
-import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.utils.FileUtils;
 
 import javax.imageio.ImageIO;
@@ -18,10 +17,12 @@ import java.util.stream.Stream;
  * @author mykola
  */
 public class MultipleLocationsResourceResolver implements PluginResourcesResolver {
+    private Path docRootPath;
     private final List<Path> lookupPaths;
     private Path currentFilePath;
 
-    public MultipleLocationsResourceResolver(Stream<Path> paths) {
+    public MultipleLocationsResourceResolver(Path docRootPath, Stream<Path> paths) {
+        this.docRootPath = docRootPath;
         this.lookupPaths = paths.collect(Collectors.toList());
     }
 
@@ -56,6 +57,11 @@ public class MultipleLocationsResourceResolver implements PluginResourcesResolve
         return createAllLocationsStream.get().filter(Files::exists).findFirst()
                 .orElseThrow(() -> new RuntimeException("can't find any of the following files:\n" +
                         createAllLocationsStream.get().map(Path::toString).collect(Collectors.joining("\n"))));
+    }
+
+    @Override
+    public Path docRootRelativePath(Path path) {
+        return docRootPath.relativize(path);
     }
 
     public void setCurrentFilePath(Path currentFilePath) {
