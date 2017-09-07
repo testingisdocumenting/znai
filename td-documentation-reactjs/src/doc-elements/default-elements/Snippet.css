@@ -48,6 +48,14 @@
     border-bottom: none;
 }
 
+.snippet-container.wide-screen {
+    border-top: 1px solid #eee;
+}
+
+.snippet-container.wide-screen.with-title {
+    border-top: none;
+}
+
 .snippet-container .snippet.with-title {
     border-top: none;
 }

@@ -48,13 +48,14 @@ class Snippet extends React.Component {
 
         const wideModePadding = <div className="padding">&nbsp;</div>
 
+        const className = "snippet-container wide-screen" + (title ? " with-title" : "")
         return (
-            <div className="snippet-container wide-screen">
-                <div className="title-layer">
+            <div className={className}>
+                {title && <div className="title-layer">
                     {wideModePadding}
                     <Title title={title}/>
                     {wideModePadding}
-                </div>
+                </div>}
 
                 <div className={this.snippetClassName}>
                     <this.CodeSnippet {...this.props}/>
