@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import {parseCode} from './codeParser'
 
+import {elementsLibrary} from '../DefaultElementsLibrary'
+
 import {Snippet} from '../default-elements/Snippet'
+import {Tabs} from '../tabs/Tabs'
 
 import './CodeSnippet.css'
 
@@ -34,10 +37,18 @@ class ParsingDemo extends Component {
         const markdownCode2 = '# Server Configuration\n\n' +
             ':include-file: config/server.config\n'
 
+        const tabs = {tabsContent: [{
+            name: "wide", content: [{
+                type: "Snippet",
+                maxLineLength: 200,
+                tokens: parseCode("html", htmlCode)
+            }]}]}
+
         return <div>
             <Snippet title="snippet title" tokens={parseCode("html", htmlCode)}/>
             <Snippet maxLineLength={200} title="snippet title" tokens={parseCode("html", htmlCode)}/>
             <Snippet maxLineLength={200} tokens={parseCode("html", htmlCode)}/>
+            <Tabs {...tabs} elementsLibrary={elementsLibrary}/>
             <p className="content-block">text in between</p>
             <Snippet maxLineLength={20} tokens={parseCode("html", htmlCode)}/>
             <Snippet tokens={parseCode("javascript", javaCode)} slideIdx={1} spoiler={true} commentsType="inline"/>

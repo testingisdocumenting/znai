@@ -32,16 +32,18 @@ class TabsRegistration {
 const tabsRegistration = new TabsRegistration()
 
 const TabNames = ({names, activeIdx, onClick}) => {
-    return <div className="tabs">
-        <div className="tabs-names-area">
-            <div className="tabs-names content-block">
-                {names.map((name, idx) => {
-                    const className = "tab-name" + (idx === activeIdx ? " active" : "")
-                    return <span key={idx} className={className} onClick={() => onClick(idx)}>{name}</span>
-                })}
+    return (
+        <div className="tabs">
+            <div className="tabs-names-area">
+                <div className="tabs-names content-block">
+                    {names.map((name, idx) => {
+                        const className = "tab-name" + (idx === activeIdx ? " active" : "")
+                        return <span key={idx} className={className} onClick={() => onClick(idx)}>{name}</span>
+                    })}
+                </div>
             </div>
         </div>
-    </div>
+    )
 }
 
 class Tabs extends Component {
@@ -73,6 +75,7 @@ class Tabs extends Component {
 
     render() {
         const {elementsLibrary, tabsContent, forcedTabIdx} = this.props
+
         const activeIdx = typeof forcedTabIdx !== 'undefined' ?
             forcedTabIdx :
             this.state.activeIdx
@@ -80,12 +83,14 @@ class Tabs extends Component {
         const names = tabsContent.map(t => t.name)
         const tabContent = tabsContent[activeIdx].content
 
-        return (<div className="tabs-area">
-            <TabNames names={names} activeIdx={activeIdx} onClick={this.onClick}/>
-            <div className="tabs-content">
-                <elementsLibrary.DocElement {...this.props} content={tabContent}/>
+        return (
+            <div className="tabs-area">
+                <TabNames names={names} activeIdx={activeIdx} onClick={this.onClick}/>
+                <div className="tabs-content">
+                    <elementsLibrary.DocElement {...this.props} content={tabContent}/>
+                </div>
             </div>
-            </div>)
+        )
     }
 
     onClick(idx) {

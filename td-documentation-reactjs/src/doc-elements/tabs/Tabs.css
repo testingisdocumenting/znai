@@ -38,6 +38,12 @@
     margin-bottom: 0;
 }
 
+.tabs-area .snippet-container {
+    border: none;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .tabs-area .snippet pre {
     border: none;
     margin-top: 0;
