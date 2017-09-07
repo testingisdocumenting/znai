@@ -57,6 +57,7 @@ public class HtmlPage {
         return "<!DOCTYPE html>\n" +
             "<html>\n" +
             "<head>\n" +
+            "<meta charset=\"utf-8\" /> \n" +
             "<title>" + title + "</title>" +
             headerSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) +
             cssResources.stream().map(r -> r.generateCssLink(documentationId)).collect(joining("\n")) +
