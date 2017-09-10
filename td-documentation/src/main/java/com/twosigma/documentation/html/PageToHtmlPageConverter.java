@@ -2,10 +2,7 @@ package com.twosigma.documentation.html;
 
 import com.twosigma.documentation.html.reactjs.ReactJsBundle;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
-import com.twosigma.documentation.parser.Page;
-import com.twosigma.documentation.structure.DocMeta;
-import com.twosigma.documentation.structure.TableOfContents;
-import com.twosigma.documentation.structure.TocItem;
+import com.twosigma.documentation.structure.*;
 import com.twosigma.utils.JsonUtils;
 
 /**
@@ -22,20 +19,21 @@ public class PageToHtmlPageConverter {
         this.reactJsNashornEngine = reactJsNashornEngine;
     }
 
-    public HtmlPageAndPageProps convert(TocItem tocItem, Page page) {
+    public HtmlPageAndPageProps convert(TocItem tocItem, Page page, Footer footer) {
         final HtmlPage htmlPage = new HtmlPage();
         htmlPage.setTitle(tocItem.isIndex() ?
                 docMeta.getTitle():
                 docMeta.getTitle() + ": " + tocItem.getPageTitle());
 
         PageProps pageProps = new PageProps(tocItem, page);
-        DocumentationProps docProps = new DocumentationProps(docMeta, pageProps);
+        FooterProps footerProps = new FooterProps(footer);
+        DocumentationProps docProps = new DocumentationProps(docMeta, pageProps, footerProps);
 
         RenderSupplier createElementStatement = () -> "React.createElement(Documentation, " + JsonUtils.serializePrettyPrint(
                     docProps.toMap()) + ")";
 
         RenderSupplier reactServerRenderStatement = () -> "ReactDOMServer.renderToString(" +
-            createElementStatement.render() + ");";
+                createElementStatement.render() + ");";
 
         htmlPage.addToBody(() -> {
             String renderStatement = reactServerRenderStatement.render();

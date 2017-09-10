@@ -86,6 +86,7 @@ public class DocumentationCliApp {
                 withId(getDocId()).
                 withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).
                 withFileWithLookupPaths("lookup-paths").
+                withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withWebResources(WebResource.fromResource("static/twosigma-logo-and-label.png")).
                 withEnabledPreview(config.isPreview()).deployTo(deployPath);
     }

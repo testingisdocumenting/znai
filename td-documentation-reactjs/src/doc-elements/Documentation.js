@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Promise from 'promise'
 
 import SearchPopup from './search/SearchPopup'
@@ -34,15 +34,18 @@ class Documentation extends Component {
 
         const currentPageLocation = documentationNavigation.currentPageLocation()
 
-        const selectedTocItem = {...currentPageLocation, pageSectionId: page.tocItem.pageSectionIdTitles[0] ?
-            page.tocItem.pageSectionIdTitles[0].id : null}
+        const selectedTocItem = {
+            ...currentPageLocation, pageSectionId: page.tocItem.pageSectionIdTitles[0] ?
+                page.tocItem.pageSectionIdTitles[0].id : null
+        }
 
         this.state = {
             tocCollapsed: false,
             tocSelected: false,
             page: Documentation.processPage(page),
             toc: tableOfContents.toc,
-            selectedTocItem: selectedTocItem}
+            selectedTocItem: selectedTocItem
+        }
 
         this.onHeaderClick = this.onHeaderClick.bind(this)
         this.onPresentationOpen = this.onPresentationOpen.bind(this)
@@ -67,7 +70,7 @@ class Documentation extends Component {
     }
 
     render() {
-        const {docMeta} = this.props
+        const {docMeta, footer} = this.props
         const {
             toc,
             page,
@@ -77,19 +80,23 @@ class Documentation extends Component {
             isSearchActive,
             pageGenError,
             isPresentationMode,
-            presentationRegistry} = this.state
+            presentationRegistry
+        } = this.state
 
         const searchPopup = isSearchActive ? <SearchPopup elementsLibrary={elementsLibrary}
-                                                                   tocCollapsed={tocCollapsed}
-                                                                   searchPromise={this.searchPromise}
-                                                                   onSearchSelection={this.onSearchSelection}
-                                                                   onClose={this.onSearchClose}/> : null
+                                                          tocCollapsed={tocCollapsed}
+                                                          searchPromise={this.searchPromise}
+                                                          onSearchSelection={this.onSearchSelection}
+                                                          onClose={this.onSearchClose}/> : null
 
         const renderedPage = <elementsLibrary.Page tocItem={page.tocItem}
                                                    content={page.content}
                                                    onPresentationOpen={this.onPresentationOpen}
                                                    previewEnabled={docMeta.previewEnabled}
                                                    elementsLibrary={elementsLibrary}/>
+
+        const renderedFooter = footer && Object.keys(footer).length &&
+            <elementsLibrary.Footer {...footer} elementsLibrary={elementsLibrary}/>
 
         const preview = docMeta.previewEnabled ? <Preview active={true}
                                                           onPageUpdate={this.onPageUpdate}
@@ -98,10 +105,10 @@ class Documentation extends Component {
                                                           onError={this.onPageGenError}/> : null
 
         return isPresentationMode ? <Presentation docMeta={docMeta}
-                                              presentationRegistry={presentationRegistry}
-                                              onClose={this.onPresentationClose}
-                                              onNextPage={this.onNextPage}
-                                              onPrevPage={this.onPrevPage}/> :
+                                                  presentationRegistry={presentationRegistry}
+                                                  onClose={this.onPresentationClose}
+                                                  onNextPage={this.onNextPage}
+                                                  onPrevPage={this.onPrevPage}/> :
             <span>
                 <DocumentationLayout docMeta={docMeta}
                                      toc={toc}
@@ -110,6 +117,7 @@ class Documentation extends Component {
                                      nextPageToc={this.nextPageToc}
                                      searchPopup={searchPopup}
                                      renderedPage={renderedPage}
+                                     renderedFooter={renderedFooter}
                                      onHeaderClick={this.onHeaderClick}
                                      onSearchClick={this.onSearchClick}
                                      onTocItemClick={this.onTocItemClick}
@@ -134,10 +142,10 @@ class Documentation extends Component {
 
     keyDownHandler(e) {
         const {isSearchActive, isPresentationMode} = this.state
-        if (e.code === "Slash" && ! isSearchActive) {
+        if (e.code === "Slash" && !isSearchActive) {
             e.preventDefault()
             this.setState({isSearchActive: true})
-        } else if (e.code === "KeyP" && ! isPresentationMode && ! isSearchActive) {
+        } else if (e.code === "KeyP" && !isPresentationMode && !isSearchActive) {
             this.setState({isPresentationMode: true})
         }
     }
@@ -158,9 +166,11 @@ class Documentation extends Component {
     }
 
     changePage(newStateWithNewPage) {
-        this.setState({...newStateWithNewPage,
+        this.setState({
+            ...newStateWithNewPage,
             page: Documentation.processPage(newStateWithNewPage.page),
-            pageGenError: null})
+            pageGenError: null
+        })
 
         this.onPageLoad()
     }
@@ -267,7 +277,7 @@ class Documentation extends Component {
     onTocUpdate(toc) {
         tableOfContents.toc = toc
         this.setState({toc})
-        if (! tableOfContents.hasTocItem(this.state.page.tocItem)) {
+        if (!tableOfContents.hasTocItem(this.state.page.tocItem)) {
             documentationNavigation.navigateToPage(tableOfContents.first)
         }
     }
@@ -316,7 +326,8 @@ class Documentation extends Component {
                 updatePagesReference()
                 this.changePage({page: pageProps})
             })
-        }).then(() => {}, (error) => console.error(error))
+        }).then(() => {
+        }, (error) => console.error(error))
     }
 
     updatePageAndDetectChangePosition(funcToUpdatePage) {
@@ -341,7 +352,9 @@ class Documentation extends Component {
         )
 
         if (foundPages.length) {
-            foundPages.forEach((page) => { page.content = newPage.content })
+            foundPages.forEach((page) => {
+                page.content = newPage.content
+            })
         } else {
             allPages.push(newPage)
         }
@@ -354,7 +367,7 @@ class Documentation extends Component {
             const matchingPages = pages.filter((p) => p.tocItem.dirName === currentPageLocation.dirName &&
                 p.tocItem.fileName === currentPageLocation.fileName)
 
-            if (! matchingPages.length) {
+            if (!matchingPages.length) {
                 console.error("can't find any page with", currentPageLocation)
                 return
             }
@@ -392,7 +405,9 @@ class Documentation extends Component {
         }
 
         const pageSections = page.tocItem.pageSectionIdTitles
-        let sectionTitles = this.pageSectionNodes.map((n, idx) => { return {idTitle: pageSections[idx], rect: n.getBoundingClientRect()}})
+        let sectionTitles = this.pageSectionNodes.map((n, idx) => {
+            return {idTitle: pageSections[idx], rect: n.getBoundingClientRect()}
+        })
         const height = window.innerHeight
 
         const withVisibleTitle = sectionTitles.filter(st => {
@@ -407,7 +422,10 @@ class Documentation extends Component {
 
         const current = withVisibleTitle.length ? withVisibleTitle[0] : closestToTopZero()
 
-        const enrichedSelectedTocItem = {...selectedTocItem, pageSectionId: (current && current.idTitle) ? current.idTitle.id : null}
+        const enrichedSelectedTocItem = {
+            ...selectedTocItem,
+            pageSectionId: (current && current.idTitle) ? current.idTitle.id : null
+        }
         this.setState({selectedTocItem: enrichedSelectedTocItem})
     }
 }

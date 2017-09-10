@@ -20,6 +20,7 @@ class DocumentationLayout extends Component {
             previewTracker,
             searchPopup,
             renderedPage,
+            renderedFooter,
             docMeta,
             selectedTocItem,
             toc,
@@ -60,6 +61,7 @@ class DocumentationLayout extends Component {
                         {this.renderPreviousPageButton()}
                         {this.renderNextPageButton()}
                     </div>
+                    {renderedFooter}
                 </div>
 
                 {pageGenErrorPanel}

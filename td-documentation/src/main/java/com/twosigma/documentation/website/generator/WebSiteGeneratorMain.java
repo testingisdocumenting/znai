@@ -18,8 +18,9 @@ public class WebSiteGeneratorMain {
         final Path mdRoot = Paths.get("documentation");
 
         WebSite.withToc(mdRoot.resolve("toc")).
-            withMetaFromJsonFile(mdRoot.resolve("meta.json")).
-            withLogoRelativePath("img/two-sigma-logo.png").
-            deployTo(deployPath);
+                withFooterPath(mdRoot.resolve("footer.md")).
+                withMetaFromJsonFile(mdRoot.resolve("meta.json")).
+                withLogoRelativePath("img/two-sigma-logo.png").
+                deployTo(deployPath);
     }
 }

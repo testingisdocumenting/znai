@@ -24,6 +24,7 @@ import Image from './images/Image'
 import {CliCommand, presentationCliCommandHandler} from './cli/CliCommand'
 import {CliOutput, presentationCliOutput} from './cli/CliOutput'
 import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
+import Footer from './structure/Footer'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
 import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
 
@@ -113,5 +114,7 @@ presentationElementHandlers.CliCommand = presentationCliCommandHandler
 
 library.CliOutput = CliOutput
 presentationElementHandlers.CliOutput = presentationCliOutput
+
+library.Footer = Footer
 
 export {library as elementsLibrary, presentationElementHandlers}

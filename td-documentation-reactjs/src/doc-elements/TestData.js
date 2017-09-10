@@ -841,6 +841,7 @@ const TestData = {
                     ]
                 }
             ],
+
             "tocItem": {
                 "sectionTitle": "Features",
                 "pageTitle": "Image Annotations",
@@ -865,6 +866,20 @@ const TestData = {
                     }
                 ]
             }
+        },
+        "footer": {
+            "type": "Footer",
+            "content": [
+                {
+                    "type": "Paragraph",
+                    "content": [
+                        {
+                            "text": "Not every UI can be as simple as one input box.",
+                            "type": "SimpleText"
+                        }
+                    ]
+                }
+            ]
         }
     }};
 

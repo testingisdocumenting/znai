@@ -14,7 +14,7 @@ import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
-import com.twosigma.documentation.parser.Page;
+import com.twosigma.documentation.structure.Page;
 import com.twosigma.documentation.search.LunrIndexer;
 import com.twosigma.documentation.structure.*;
 import com.twosigma.utils.FileUtils;
@@ -47,6 +47,7 @@ public class WebSite implements DocStructure {
     private Map<Path, AuxiliaryFile> auxiliaryFiles;
 
     private TableOfContents toc;
+    private Footer footer;
     private List<PageProps> allPagesProps;
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
@@ -121,7 +122,7 @@ public class WebSite implements DocStructure {
 
     public static Configuration withToc(Path path) {
         final Configuration configuration = new Configuration();
-        configuration.setTocPath(path);
+        configuration.withTocPath(path);
 
         return configuration;
     }
@@ -151,6 +152,7 @@ public class WebSite implements DocStructure {
         reportPhase("building documentation");
         createTopLevelToc();
         parseMarkups();
+        parseFooter();
         updateTocWithPageSections();
         validateCollectedLinks();
         setGlobalToc();
@@ -231,6 +233,22 @@ public class WebSite implements DocStructure {
     private void parseMarkups() {
         reportPhase("parsing markup files");
         toc.getTocItems().forEach(this::parseMarkup);
+    }
+
+    private void parseFooter() {
+        final Path markupPath = cfg.footerPath;
+
+        if (! Files.exists(markupPath)) {
+            return;
+        }
+
+        reportPhase("parsing footer");
+
+        includeResourcesResolver.setCurrentFilePath(markupPath);
+        resetPlugins(markupPath);
+
+        MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
+        footer = new Footer(parserResult.getDocElement());
     }
 
     private void parseMarkup(final TocItem tocItem) {
@@ -316,7 +334,7 @@ public class WebSite implements DocStructure {
         try {
             resetPlugins(markupPath(tocItem)); // TODO reset at render phase only?
 
-            final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(tocItem, page);
+            final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(tocItem, page, footer);
 
             allPagesProps.add(htmlAndProps.getProps());
             extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
@@ -461,6 +479,7 @@ public class WebSite implements DocStructure {
         private Path deployPath;
         private Path docRootPath;
         private Path tocPath;
+        private Path footerPath;
         private List<WebResource> webResources;
         private String id;
         private String title;
@@ -475,9 +494,14 @@ public class WebSite implements DocStructure {
             registeredExtraJavaScripts = new ArrayList<>();
         }
 
-        public Configuration setTocPath(Path path) {
+        public Configuration withTocPath(Path path) {
             tocPath = path.toAbsolutePath();
             docRootPath = tocPath.getParent();
+            return this;
+        }
+
+        public Configuration withFooterPath(Path path) {
+            footerPath = path.toAbsolutePath();
             return this;
         }
 

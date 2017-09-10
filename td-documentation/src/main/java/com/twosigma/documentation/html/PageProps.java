@@ -1,6 +1,6 @@
 package com.twosigma.documentation.html;
 
-import com.twosigma.documentation.parser.Page;
+import com.twosigma.documentation.structure.Page;
 import com.twosigma.documentation.structure.TocItem;
 
 import java.util.LinkedHashMap;

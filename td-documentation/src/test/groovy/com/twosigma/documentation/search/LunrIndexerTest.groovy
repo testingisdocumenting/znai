@@ -3,7 +3,7 @@ package com.twosigma.documentation.search
 import com.twosigma.documentation.html.PageProps
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine
 import com.twosigma.documentation.parser.MarkdownParser
-import com.twosigma.documentation.parser.Page
+import com.twosigma.documentation.structure.Page
 import com.twosigma.documentation.parser.TestComponentsRegistry
 import com.twosigma.documentation.structure.TocItem
 import org.junit.Ignore

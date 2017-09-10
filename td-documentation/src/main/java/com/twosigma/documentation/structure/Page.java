@@ -1,7 +1,8 @@
-package com.twosigma.documentation.parser;
+package com.twosigma.documentation.structure;
 
 import java.util.List;
 
+import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.docelement.DocElement;
 
 import static com.twosigma.documentation.parser.docelement.DocElementType.SECTION;
