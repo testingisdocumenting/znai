@@ -6,6 +6,7 @@ flow
     structure
     names
     page-references
+    footer
 features
     attention-signs
     code-snippets
