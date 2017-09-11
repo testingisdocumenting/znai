@@ -55,13 +55,17 @@ class DocumentationLayout extends Component {
                 {searchPopup}
 
                 <div className="main-panel" onClick={this.onPanelSelect}>
-                    {renderedPage}
-
-                    <div className="next-prev-buttons content-block">
-                        {this.renderPreviousPageButton()}
-                        {this.renderNextPageButton()}
+                    <div className="page-content-wrapper">
+                        {renderedPage}
                     </div>
-                    {renderedFooter}
+
+                    <div className="page-bottom">
+                        <div className="next-prev-buttons content-block">
+                            {this.renderPreviousPageButton()}
+                            {this.renderNextPageButton()}
+                        </div>
+                        {renderedFooter}
+                    </div>
                 </div>
 
                 {pageGenErrorPanel}
