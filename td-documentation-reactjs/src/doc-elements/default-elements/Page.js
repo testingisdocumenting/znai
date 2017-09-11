@@ -6,7 +6,9 @@ class Page extends Component {
 
         const displayTitle = tocItem.dirName.length && tocItem.fileName !== "index"
         const title = displayTitle ? [<span key="title" className="page-title">{tocItem.pageTitle}</span>,
-            <span key="button" className="presentation-button glyphicon glyphicon-resize-full" onClick={onPresentationOpen}/>] : []
+            onPresentationOpen ?
+                <span key="button" className="presentation-button glyphicon glyphicon-resize-full"
+                      onClick={onPresentationOpen}/> : null] : []
 
         return (<div className="page-content">
             <div className="page-title-block content-block">

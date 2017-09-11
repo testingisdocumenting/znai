@@ -123,8 +123,6 @@ class Presentation extends Component {
             this.incrementSlide();
         } else if (e.code === "ArrowLeft" || e.code === "PageUp") {
             this.decrementSlide();
-        } else if (e.code === "Escape") {
-            this.onClose()
         }
     }
 
@@ -140,7 +138,7 @@ class Presentation extends Component {
     }
 
     decrementSlide() {
-        const {presentationRegistry, onPrevPage} = this.props
+        const {onPrevPage} = this.props
         const {currentSlideIdx} = this.state
         const newSlideIdx = currentSlideIdx - 1
 

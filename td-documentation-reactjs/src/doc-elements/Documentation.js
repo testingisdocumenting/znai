@@ -16,6 +16,8 @@ import PageContentPreviewDiff from './preview/PageContentPreviewDiff'
 
 import PresentationRegistry from './presentation/PresentationRegistry'
 
+import AllPagesAtOnce from './AllPagesAtOnce'
+
 import {setDocMeta} from './docMeta'
 import DocumentationLayout from './DocumentationLayout'
 
@@ -23,6 +25,7 @@ import pageContentProcessor from './pageContentProcessor.js'
 
 import './DocumentationLayout.css'
 import './search/Search.css'
+import {DocumentationModes} from './DocumentationModes'
 
 class Documentation extends Component {
     constructor(props) {
@@ -44,7 +47,8 @@ class Documentation extends Component {
             tocSelected: false,
             page: Documentation.processPage(page),
             toc: tableOfContents.toc,
-            selectedTocItem: selectedTocItem
+            selectedTocItem: selectedTocItem,
+            mode: DocumentationModes.DEFAULT
         }
 
         this.onHeaderClick = this.onHeaderClick.bind(this)
@@ -70,6 +74,21 @@ class Documentation extends Component {
     }
 
     render() {
+        const {mode} = this.state
+
+        switch (mode) {
+            case DocumentationModes.DEFAULT:
+                return this.renderDefaultDocMode()
+            case DocumentationModes.PRESENTATION:
+                return this.renderPresentationMode()
+            case DocumentationModes.PRINT:
+                return this.renderPrintMode()
+            default:
+                return <div>No handler for documentation mode: {mode}</div>
+        }
+    }
+
+    renderDefaultDocMode() {
         const {docMeta, footer} = this.props
         const {
             toc,
@@ -79,8 +98,6 @@ class Documentation extends Component {
             lastChangeDataDom,
             isSearchActive,
             pageGenError,
-            isPresentationMode,
-            presentationRegistry
         } = this.state
 
         const searchPopup = isSearchActive ? <SearchPopup elementsLibrary={elementsLibrary}
@@ -104,11 +121,7 @@ class Documentation extends Component {
                                                           onTocUpdate={this.onTocUpdate}
                                                           onError={this.onPageGenError}/> : null
 
-        return isPresentationMode ? <Presentation docMeta={docMeta}
-                                                  presentationRegistry={presentationRegistry}
-                                                  onClose={this.onPresentationClose}
-                                                  onNextPage={this.onNextPage}
-                                                  onPrevPage={this.onPrevPage}/> :
+        return (
             <span>
                 <DocumentationLayout docMeta={docMeta}
                                      toc={toc}
@@ -127,26 +140,48 @@ class Documentation extends Component {
                 {preview}
                 <PreviewChangeIndicator targetDom={lastChangeDataDom}/>
             </span>
+        )
+    }
+
+    renderPresentationMode() {
+        const {docMeta} = this.props
+        const {presentationRegistry} = this.state
+
+        return <Presentation docMeta={docMeta}
+                             presentationRegistry={presentationRegistry}
+                             onClose={this.onPresentationClose}
+                             onNextPage={this.onNextPage}
+                             onPrevPage={this.onPrevPage}/>
+    }
+
+    renderPrintMode() {
+        const {docMeta} = this.props
+
+        return <AllPagesAtOnce docMeta={docMeta}/>
     }
 
     componentDidMount() {
         this.enableScrollListener()
         this.onPageLoad()
-        document.addEventListener("keydown", this.keyDownHandler)
+        document.addEventListener('keydown', this.keyDownHandler)
     }
 
     componentWillUnmount() {
         this.disableScrollListener()
-        document.removeEventListener("keydown", this.keyDownHandler)
+        document.removeEventListener('keydown', this.keyDownHandler)
     }
 
     keyDownHandler(e) {
-        const {isSearchActive, isPresentationMode} = this.state
-        if (e.code === "Slash" && !isSearchActive) {
+        const {isSearchActive, mode} = this.state
+        if (e.code === "Slash" && !isSearchActive && mode === DocumentationModes.DEFAULT) {
             e.preventDefault()
             this.setState({isSearchActive: true})
-        } else if (e.code === "KeyP" && !isPresentationMode && !isSearchActive) {
-            this.setState({isPresentationMode: true})
+        } else if (mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && !e.ctrlKey && !e.altKey) {
+            this.setState({mode: DocumentationModes.PRESENTATION})
+        } else if (mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && e.altKey) {
+            this.setState({mode: DocumentationModes.PRINT})
+        } else if (e.code === "Escape") {
+            this.setState({mode: DocumentationModes.DEFAULT})
         }
     }
 
@@ -248,11 +283,11 @@ class Documentation extends Component {
     }
 
     onPresentationOpen() {
-        this.setState({isPresentationMode: true})
+        this.setState({mode: DocumentationModes.PRESENTATION})
     }
 
     onPresentationClose() {
-        this.setState({isPresentationMode: false})
+        this.setState({mode: DocumentationModes.DEFAULT})
     }
 
     onTocItemClick(dirName, fileName) {
@@ -398,9 +433,9 @@ class Documentation extends Component {
     }
 
     updateCurrentPageSection() {
-        const {isPresentationMode, page, selectedTocItem} = this.state
+        const {mode, page, selectedTocItem} = this.state
 
-        if (isPresentationMode) {
+        if (mode !== DocumentationModes.DEFAULT) {
             return
         }
 

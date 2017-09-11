@@ -27,7 +27,6 @@ features
     images
     image-annotations
     math
-    proxy
 charts
     flow
 synergy-with-testing
