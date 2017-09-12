@@ -33,3 +33,20 @@ Note: Generic types are erased and spaces after commas are optional
 Note: `def` type remains `def` and not `Object`
 
 :include-groovy: HelloWorld.groovy {entry: "methodName(def, def)"}
+
+# Class Body
+
+:include-file: HelloWorld.groovy
+
+To extract `class` body use
+
+    :include-groovy: HelloWorld.groovy {entry: "HelloWorld"}
+
+:include-groovy: HelloWorld.groovy {entry: "HelloWorld"}
+
+Use `bodyOnly` to only display only the body of your class
+
+    :include-groovy: HelloWorld.groovy {entry: "HelloWorld", bodyOnly: true}
+
+:include-groovy: HelloWorld.groovy {entry: "HelloWorld", bodyOnly: true}
+

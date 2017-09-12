@@ -28,7 +28,15 @@ class GroovyCode {
     }
 
     GroovyMethod findMethod(String methodNameWithOptionalTypes) {
-        return codeVisitor.findDetails(methodNameWithOptionalTypes)
+        return codeVisitor.findMethodDetails(methodNameWithOptionalTypes)
+    }
+
+    boolean hasTypeDetails(String typeName) {
+        return codeVisitor.hasTypeDetails(typeName)
+    }
+
+    GroovyType findType(String typeName) {
+        return codeVisitor.findTypeDetails(typeName)
     }
 
     private static GroovyCodeVisitor parse(String code) {

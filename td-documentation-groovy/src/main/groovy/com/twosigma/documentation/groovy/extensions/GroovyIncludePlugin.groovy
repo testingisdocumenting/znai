@@ -27,14 +27,14 @@ class GroovyIncludePlugin implements IncludePlugin {
     PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         fullPath = componentsRegistry.includeResourceResolver().fullPath(pluginParams.getFreeParam())
         String fileContent = componentsRegistry.includeResourceResolver().textContent(fullPath)
-        String methodName = pluginParams.getOpts().get("entry")
+        String entry = pluginParams.getOpts().get("entry")
 
         GroovyCode groovyCode = new GroovyCode(componentsRegistry, fullPath, fileContent)
 
         Boolean bodyOnly = pluginParams.getOpts().has("bodyOnly") ? pluginParams.getOpts().get("bodyOnly") : false
 
         Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "groovy",
-                extractContent(groovyCode, methodName, bodyOnly))
+                extractContent(groovyCode, entry, bodyOnly))
 
         return PluginResult.docElement(DocElementType.SNIPPET, props)
     }
@@ -49,6 +49,20 @@ class GroovyIncludePlugin implements IncludePlugin {
             return groovyCode.getFileContent()
         }
 
+        return groovyCode.hasTypeDetails(entry) ?
+                extractTypeContent(groovyCode, entry, bodyOnly):
+                extractMethodContent(groovyCode, entry, bodyOnly)
+    }
+
+    private static String extractTypeContent(GroovyCode groovyCode, String entry, boolean bodyOnly) {
+        def type = groovyCode.findType(entry)
+
+        return bodyOnly ?
+                type.bodyOnly :
+                type.fullBody
+    }
+
+    private static String extractMethodContent(GroovyCode groovyCode, String entry, boolean bodyOnly) {
         def method = groovyCode.findMethod(entry)
 
         return bodyOnly ?

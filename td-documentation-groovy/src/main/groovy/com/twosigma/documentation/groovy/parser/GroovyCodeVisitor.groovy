@@ -16,23 +16,39 @@ import static org.codehaus.groovy.antlr.parser.GroovyTokenTypes.*
 class GroovyCodeVisitor extends VisitorAdapter {
     private final List<String> lines
     private List<GroovyMethod> methods
+    private List<GroovyType> types
 
     GroovyCodeVisitor(String code) {
         lines = Arrays.asList(code.split("\n"))
         methods = []
+        types = []
     }
 
-    GroovyMethod findDetails(String methodNameWithOptionalTypes) {
+    GroovyMethod findMethodDetails(String methodNameWithOptionalTypes) {
         def method = methods.find { it.matchesNameAndType(methodNameWithOptionalTypes) }
         if (! method) {
             throw new RuntimeException("no method found: " + methodNameWithOptionalTypes + ".\n" +
-                    "Available methods:\n" + renderAvailableMethods())
+                    "Available methods:\n" + renderAvailableEntries(methods, { it.nameWithTypes }))
         }
 
         return method
     }
 
-    String renderAvailableMethods() {
+    boolean hasTypeDetails(String typeName) {
+        return types.any { it.name == typeName}
+    }
+
+    GroovyType findTypeDetails(String typeName) {
+        def type = types.find { it.name == typeName }
+        if (! type) {
+            throw new RuntimeException("no type found: " + typeName + ".\n" +
+                "Available types:\n" + renderAvailableEntries(types, { it.name }))
+        }
+
+        return type
+    }
+
+    private String renderAvailableMethods() {
         return "    " + methods.collect { it.nameWithTypes }.join("\n    ")
     }
 
@@ -52,6 +68,22 @@ class GroovyCodeVisitor extends VisitorAdapter {
         methods.add(new GroovyMethod(name: methodName,
                 nameWithTypes: methodName + "(" + types.join(",") + ")",
                 fullBody: fullBody, bodyOnly: bodyOnly))
+    }
+
+    @Override
+    void visitClassDef(GroovySourceAST t, int visit) {
+        def className = t.childOfType(IDENT).getText()
+        def extractedCode = extractCode(t.getLine(), t.getLineLast())
+
+        types.add(new GroovyType(className, extractedCode.full, extractedCode.bodyOnly))
+
+        super.visitClassDef(t, visit)
+    }
+
+    private ExtractedCode extractCode(int startLine, int endLine) {
+        String code = lines.subList(startLine - 1, endLine).stream().collect(Collectors.joining("\n"))
+        return new ExtractedCode(full: stripIndentation(code),
+                bodyOnly: stripIndentation(extractInsideCurlyBraces(code)))
     }
 
     private List<String> extractParameterTypes(GroovySourceAST t) {
@@ -81,7 +113,16 @@ class GroovyCodeVisitor extends VisitorAdapter {
         return type.trim()
     }
 
-    static String eraseGeneric(String type) {
+    private static String eraseGeneric(String type) {
         return removeContentInsideBracketsInclusive(type)
+    }
+
+    private static String renderAvailableEntries(list, getter) {
+        return "    " + list.collect(getter).join("\n    ")
+    }
+
+    private static class ExtractedCode {
+        String full
+        String bodyOnly
     }
 }
