@@ -25,8 +25,8 @@ class GroovyIncludePlugin implements IncludePlugin {
 
     @Override
     PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        fullPath = componentsRegistry.includeResourceResolver().fullPath(pluginParams.getFreeParam())
-        String fileContent = componentsRegistry.includeResourceResolver().textContent(fullPath)
+        fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam())
+        String fileContent = componentsRegistry.resourceResolver().textContent(fullPath)
         String entry = pluginParams.getOpts().get("entry")
 
         GroovyCode groovyCode = new GroovyCode(componentsRegistry, fullPath, fileContent)

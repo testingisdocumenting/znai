@@ -4,7 +4,7 @@ import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginParamsOpts;
-import com.twosigma.documentation.extensions.PluginResourcesResolver;
+import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 public class TemplateIncludePlugin implements IncludePlugin {
     private Path fullPath;
     private MarkupParserResult parserResult;
-    private PluginResourcesResolver resourcesResolver;
+    private ResourcesResolver resourcesResolver;
     private Path paramsPath;
 
     @Override
@@ -34,7 +34,7 @@ public class TemplateIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        resourcesResolver = componentsRegistry.includeResourceResolver();
+        resourcesResolver = componentsRegistry.resourceResolver();
         MarkupParser parser = componentsRegistry.parser();
 
         fullPath = resourcesResolver.fullPath(pluginParams.getFreeParam());

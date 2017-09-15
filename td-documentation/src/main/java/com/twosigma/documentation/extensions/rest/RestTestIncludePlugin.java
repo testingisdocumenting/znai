@@ -36,7 +36,7 @@ public class RestTestIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final PluginParams pluginParams) {
         this.markupPath = markupPath;
 
-        Map testData = JsonUtils.deserializeAsMap(componentsRegistry.includeResourceResolver()
+        Map testData = JsonUtils.deserializeAsMap(componentsRegistry.resourceResolver()
                 .textContent(pluginParams.getFreeParam()));
         String scenarioMarkup = testData.get("scenario").toString();
 

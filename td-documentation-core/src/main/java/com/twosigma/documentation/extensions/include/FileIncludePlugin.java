@@ -35,7 +35,7 @@ public class FileIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         fileName = pluginParams.getFreeParam();
 
-        String text = extractText(componentsRegistry.includeResourceResolver().
+        String text = extractText(componentsRegistry.resourceResolver().
                 textContent(fileName), pluginParams.getOpts());
 
         String providedLang = pluginParams.getOpts().getString("lang");
@@ -50,7 +50,7 @@ public class FileIncludePlugin implements IncludePlugin {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(
-                componentsRegistry.includeResourceResolver().fullPath(fileName)));
+                componentsRegistry.resourceResolver().fullPath(fileName)));
     }
 
     private String extractText(String fileContent, PluginParamsOpts opts) {

@@ -4,20 +4,17 @@ import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ColonDelimitedKeyValues;
 import com.twosigma.documentation.extensions.PluginParams;
-import com.twosigma.documentation.extensions.PluginResourcesResolver;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElement;
-import com.twosigma.utils.RegexpUtils;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;

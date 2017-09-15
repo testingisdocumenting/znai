@@ -25,7 +25,7 @@ public class CliOutputIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        filePath = componentsRegistry.includeResourceResolver().fullPath(pluginParams.getFreeParam());
+        filePath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
 
         LinkedHashMap<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         props.put("lines", readLines(componentsRegistry, filePath));
@@ -40,6 +40,6 @@ public class CliOutputIncludePlugin implements IncludePlugin {
     }
 
     private static List<String> readLines(ComponentsRegistry componentsRegistry, Path filePath) {
-        return Arrays.asList(componentsRegistry.includeResourceResolver().textContent(filePath).split("\n"));
+        return Arrays.asList(componentsRegistry.resourceResolver().textContent(filePath).split("\n"));
     }
 }

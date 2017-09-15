@@ -2,7 +2,7 @@ package com.twosigma.documentation.parser
 
 import com.twosigma.documentation.codesnippets.CodeTokenizer
 import com.twosigma.documentation.core.ComponentsRegistry
-import com.twosigma.documentation.extensions.PluginResourcesResolver
+import com.twosigma.documentation.core.ResourcesResolver
 import com.twosigma.documentation.structure.DocStructure
 
 /**
@@ -23,7 +23,7 @@ class TestComponentsRegistry implements ComponentsRegistry {
     }
 
     @Override
-    PluginResourcesResolver includeResourceResolver() {
+    ResourcesResolver resourceResolver() {
         return new TestResourceResolver()
     }
 

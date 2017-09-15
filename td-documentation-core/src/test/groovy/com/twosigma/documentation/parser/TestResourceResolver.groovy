@@ -1,6 +1,6 @@
 package com.twosigma.documentation.parser
 
-import com.twosigma.documentation.extensions.PluginResourcesResolver
+import com.twosigma.documentation.core.ResourcesResolver
 import com.twosigma.utils.ResourceUtils
 
 import javax.imageio.ImageIO
@@ -11,7 +11,16 @@ import java.nio.file.Paths
 /**
  * @author mykola
  */
-class TestResourceResolver implements PluginResourcesResolver {
+class TestResourceResolver implements ResourcesResolver {
+    private Path root
+
+    TestResourceResolver(Path root) {
+        this.root = root
+    }
+
+    TestResourceResolver() {
+    }
+
     @Override
     String textContent(String path) {
         return ResourceUtils.textContent(path)
@@ -29,7 +38,7 @@ class TestResourceResolver implements PluginResourcesResolver {
 
     @Override
     Path fullPath(String path) {
-        return Paths.get(path).toAbsolutePath()
+        return root ? root.resolve(path) : Paths.get(path).toAbsolutePath()
     }
 
     @Override

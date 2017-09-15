@@ -31,7 +31,7 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        Path dir = componentsRegistry.includeResourceResolver().fullPath(pluginParams.getFreeParam());
+        Path dir = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         MarkupParser parser = componentsRegistry.parser();
 
         markdowns = markdowns(dir).collect(Collectors.toList());

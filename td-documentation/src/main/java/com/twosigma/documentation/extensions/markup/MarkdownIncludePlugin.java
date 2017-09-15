@@ -5,7 +5,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.extensions.PluginResourcesResolver;
+import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 
@@ -25,7 +25,7 @@ public class MarkdownIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        PluginResourcesResolver resourcesResolver = componentsRegistry.includeResourceResolver();
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         MarkupParser parser = componentsRegistry.parser();
 
         Path markdown = resourcesResolver.fullPath(pluginParams.getFreeParam());

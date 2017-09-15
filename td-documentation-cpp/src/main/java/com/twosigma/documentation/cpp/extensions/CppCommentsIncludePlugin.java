@@ -29,8 +29,8 @@ public class CppCommentsIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         String fileName = pluginParams.getFreeParam();
-        cppPath = componentsRegistry.includeResourceResolver().fullPath(fileName);
-        String text = componentsRegistry.includeResourceResolver().textContent(fileName);
+        cppPath = componentsRegistry.resourceResolver().fullPath(fileName);
+        String text = componentsRegistry.resourceResolver().textContent(fileName);
 
         String comments = extractComments(text, pluginParams.getOpts());
         MarkupParserResult parserResult = componentsRegistry.parser().parse(cppPath, comments);

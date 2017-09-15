@@ -3,7 +3,7 @@ package com.twosigma.documentation.cli;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
-import com.twosigma.documentation.WebSite;
+import com.twosigma.documentation.website.WebSite;
 import com.twosigma.documentation.client.DocumentationUploadClient;
 import com.twosigma.documentation.html.WebResource;
 import com.twosigma.documentation.server.DocumentationServer;
@@ -87,6 +87,7 @@ public class DocumentationCliApp {
                 withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).
                 withFileWithLookupPaths("lookup-paths").
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
+                withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
                 withWebResources(WebResource.fromResource("static/twosigma-logo-and-label.png")).
                 withEnabledPreview(config.isPreview()).deployTo(deployPath);
     }

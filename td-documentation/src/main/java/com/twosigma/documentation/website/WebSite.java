@@ -1,4 +1,4 @@
-package com.twosigma.documentation;
+package com.twosigma.documentation.website;
 
 import com.google.gson.Gson;
 import com.twosigma.console.ConsoleOutputs;
@@ -55,11 +55,12 @@ public class WebSite implements DocStructure {
     private List<LinkToValidate> linksToValidate;
 
     private final WebSiteComponentsRegistry componentsRegistry;
-    private final MultipleLocationsResourceResolver includeResourcesResolver;
+    private final MultipleLocationsResourceResolver resourceResolver;
     private final ReactJsNashornEngine reactJsNashornEngine;
     private final LunrIndexer lunrIndexer;
     private final CodeTokenizer codeTokenizer;
     private final WebResource tocJavaScript;
+    private final WebSiteExtensions webSiteExtensions;
 
     private AuxiliaryFileListener auxiliaryFileListener;
 
@@ -74,7 +75,8 @@ public class WebSite implements DocStructure {
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
         this.tocJavaScript = WebResource.withPath("toc.js");
-        this.includeResourcesResolver = new MultipleLocationsResourceResolver(cfg.docRootPath, findLookupLocations(cfg));
+        this.resourceResolver = new MultipleLocationsResourceResolver(cfg.docRootPath, findLookupLocations(cfg));
+        this.webSiteExtensions = initWebSiteExtensions(cfg);
         this.tocItemsByAuxiliaryFilePath = new HashMap<>();
         this.auxiliaryFiles = new HashMap<>();
 
@@ -86,38 +88,11 @@ public class WebSite implements DocStructure {
         }
         docMeta.setLogo(WebResource.withPath(cfg.logoRelativePath));
 
-        componentsRegistry.setPluginResourcesResolver(includeResourcesResolver);
+        componentsRegistry.setResourcesResolver(resourceResolver);
         componentsRegistry.setCodeTokenizer(codeTokenizer);
         componentsRegistry.setDocStructure(this);
 
         reset();
-    }
-
-    private Stream<Path> findLookupLocations(Configuration cfg) {
-        Stream<Path> root = Stream.of(cfg.docRootPath);
-
-        if (cfg.fileWithLookupPaths == null) {
-            return root;
-        }
-
-        return Stream.concat(root, readLocationsFromFile(cfg.fileWithLookupPaths));
-    }
-
-    private Stream<Path> readLocationsFromFile(String filesLookupFilePath) {
-        String fileContent = FileUtils.fileTextContent(cfg.docRootPath.resolve(filesLookupFilePath));
-        return Arrays.stream(fileContent.split("[;\n]"))
-                .map(String::trim)
-                .filter(e -> !e.isEmpty())
-                .map(e -> Paths.get(e))
-                .map(p -> p.isAbsolute() ? p : cfg.docRootPath.resolve(p));
-    }
-
-    private ReactJsNashornEngine initJsEngine() {
-        reportPhase("initializing ReactJS server side engine");
-        ReactJsNashornEngine engine = new ReactJsNashornEngine();
-        engine.getNashornEngine().eval("toc = []");
-        engine.loadLibraries();
-        return engine;
     }
 
     public static Configuration withToc(Path path) {
@@ -193,8 +168,67 @@ public class WebSite implements DocStructure {
         return toc;
     }
 
+    @Override
+    public void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
+        if (docUrl.isGlobalUrl()) {
+            return;
+        }
+
+        linksToValidate.add(new LinkToValidate(path, sectionWithLinkTitle, docUrl));
+    }
+
+    @Override
+    public String createUrl(DocUrl docUrl) {
+        if (docUrl.isGlobalUrl()) {
+            return docUrl.getUrl();
+        }
+
+        String base = "/" + docMeta.getId() + "/" + docUrl.getDirName() + "/" + docUrl.getFileName();
+        return base + (docUrl.getPageSectionId().isEmpty() ? "" : "#" + docUrl.getPageSectionId());
+    }
+
+    @Override
+    public String prefixUrlWithProductId(String url) {
+        url = url.toLowerCase();
+        if (url.startsWith("http")) {
+            return url;
+        }
+
+        return "/" + docMeta.getId() + "/" + url;
+    }
+
+    public void redeployAuxiliaryFileIfRequired(Path path) {
+        AuxiliaryFile auxiliaryFile = auxiliaryFiles.get(path);
+        if (auxiliaryFile == null) {
+            return;
+        }
+
+        if (! auxiliaryFile.isDeploymentRequired()) {
+            return;
+        }
+
+        deployAuxiliaryFile(auxiliaryFile);
+    }
+
+    private WebSiteExtensions initWebSiteExtensions(Configuration cfg) {
+        if (cfg.extensionsDefPath == null || ! Files.exists(cfg.extensionsDefPath)) {
+            return new WebSiteExtensions(resourceResolver, Collections.emptyMap());
+        }
+
+        String json = FileUtils.fileTextContent(cfg.extensionsDefPath);
+        return new WebSiteExtensions(resourceResolver, JsonUtils.deserializeAsMap(json));
+    }
+
+    private ReactJsNashornEngine initJsEngine() {
+        reportPhase("initializing ReactJS server side engine");
+        ReactJsNashornEngine engine = new ReactJsNashornEngine();
+        engine.getNashornEngine().eval("toc = []");
+        engine.loadLibraries();
+        return engine;
+    }
+
     private void reset() {
-        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, toc, reactJsNashornEngine);
+        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, webSiteExtensions, reactJsNashornEngine);
         markupParser = new MarkdownParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
         allPagesProps = new ArrayList<>();
@@ -207,6 +241,7 @@ public class WebSite implements DocStructure {
     private void deployResources() {
         reportPhase("deploying resources");
         reactJsNashornEngine.getReactJsBundle().deploy(deployer);
+        webSiteExtensions.getCssResources().forEach(deployer::deploy);
         cfg.webResources.forEach(deployer::deploy);
     }
 
@@ -244,7 +279,7 @@ public class WebSite implements DocStructure {
 
         reportPhase("parsing footer");
 
-        includeResourcesResolver.setCurrentFilePath(markupPath);
+        resourceResolver.setCurrentFilePath(markupPath);
         resetPlugins(markupPath);
 
         MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
@@ -255,7 +290,7 @@ public class WebSite implements DocStructure {
         try {
             Path markupPath = markupPath(tocItem);
 
-            includeResourcesResolver.setCurrentFilePath(markupPath);
+            resourceResolver.setCurrentFilePath(markupPath);
             resetPlugins(markupPath);
 
             MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
@@ -348,7 +383,8 @@ public class WebSite implements DocStructure {
 
             return htmlAndProps;
         } catch (Exception e) {
-            throw new RuntimeException("error during rendering of " + tocItem.getFileNameWithoutExtension() + ": " + e.getMessage(),
+            throw new RuntimeException("error during rendering of " +
+                    tocItem.getFileNameWithoutExtension() + ": " + e.getMessage(),
                     e);
         }
     }
@@ -361,7 +397,7 @@ public class WebSite implements DocStructure {
 
     private void deployAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
         Path origin = auxiliaryFile.getPath().toAbsolutePath();
-        Path relative = includeResourcesResolver.docRootRelativePath(origin);
+        Path relative = resourceResolver.docRootRelativePath(origin);
         try {
             deployer.deploy(relative, Files.readAllBytes(origin));
         } catch (IOException e) {
@@ -392,15 +428,6 @@ public class WebSite implements DocStructure {
 
     private void reportPhase(String phase) {
         ConsoleOutputs.out(Color.BLUE, phase);
-    }
-
-    @Override
-    public void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
-        if (docUrl.isGlobalUrl()) {
-            return;
-        }
-
-        linksToValidate.add(new LinkToValidate(path, sectionWithLinkTitle, docUrl));
     }
 
     private void validateCollectedLinks() {
@@ -434,37 +461,23 @@ public class WebSite implements DocStructure {
         return Optional.empty();
     }
 
-    @Override
-    public String createUrl(DocUrl docUrl) {
-        if (docUrl.isGlobalUrl()) {
-            return docUrl.getUrl();
+    private Stream<Path> findLookupLocations(Configuration cfg) {
+        Stream<Path> root = Stream.of(cfg.docRootPath);
+
+        if (cfg.fileWithLookupPaths == null) {
+            return root;
         }
 
-        String base = "/" + docMeta.getId() + "/" + docUrl.getDirName() + "/" + docUrl.getFileName();
-        return base + (docUrl.getPageSectionId().isEmpty() ? "" : "#" + docUrl.getPageSectionId());
+        return Stream.concat(root, readLocationsFromFile(cfg.fileWithLookupPaths));
     }
 
-    @Override
-    public String prefixUrlWithProductId(String url) {
-        url = url.toLowerCase();
-        if (url.startsWith("http")) {
-            return url;
-        }
-
-        return "/" + docMeta.getId() + "/" + url;
-    }
-
-    public void redeployAuxiliaryFileIfRequired(Path path) {
-        AuxiliaryFile auxiliaryFile = auxiliaryFiles.get(path);
-        if (auxiliaryFile == null) {
-            return;
-        }
-
-        if (! auxiliaryFile.isDeploymentRequired()) {
-            return;
-        }
-
-        deployAuxiliaryFile(auxiliaryFile);
+    private Stream<Path> readLocationsFromFile(String filesLookupFilePath) {
+        String fileContent = FileUtils.fileTextContent(cfg.docRootPath.resolve(filesLookupFilePath));
+        return Arrays.stream(fileContent.split("[;\n]"))
+                .map(String::trim)
+                .filter(e -> !e.isEmpty())
+                .map(e -> Paths.get(e))
+                .map(p -> p.isAbsolute() ? p : cfg.docRootPath.resolve(p));
     }
 
     private interface PageConsumer {
@@ -480,6 +493,7 @@ public class WebSite implements DocStructure {
         private Path docRootPath;
         private Path tocPath;
         private Path footerPath;
+        private Path extensionsDefPath;
         private List<WebResource> webResources;
         private String id;
         private String title;
@@ -502,6 +516,11 @@ public class WebSite implements DocStructure {
 
         public Configuration withFooterPath(Path path) {
             footerPath = path.toAbsolutePath();
+            return this;
+        }
+
+        public Configuration withExtensionsDefPath(Path path) {
+            extensionsDefPath = path.toAbsolutePath();
             return this;
         }
 

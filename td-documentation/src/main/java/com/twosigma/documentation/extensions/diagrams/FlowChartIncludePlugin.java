@@ -35,10 +35,10 @@ public class FlowChartIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        filePath = componentsRegistry.includeResourceResolver().fullPath(pluginParams.getFreeParam());
+        filePath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         docStructure = componentsRegistry.docStructure();
 
-        String graphJson = componentsRegistry.includeResourceResolver().textContent(filePath);
+        String graphJson = componentsRegistry.resourceResolver().textContent(filePath);
         Map<String, ?> graph = JsonUtils.deserializeAsMap(graphJson);
         String gvContent = new GraphvizFromJsonGen(graph).generate();
 

@@ -35,8 +35,8 @@ public class TableIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         parser = componentsRegistry.parser();
         String fileName = pluginParams.getFreeParam();
-        fullPath = componentsRegistry.includeResourceResolver().fullPath(fileName);
-        textContent = componentsRegistry.includeResourceResolver().textContent(fileName);
+        fullPath = componentsRegistry.resourceResolver().fullPath(fileName);
+        textContent = componentsRegistry.resourceResolver().textContent(fileName);
 
         Map<String, Object> table = (isJson() ? tableFromJson() : CsvParser.parse(textContent)).toMap();
         List<Map<String, Object>> columns = (List<Map<String, Object>>) table.get("columns");

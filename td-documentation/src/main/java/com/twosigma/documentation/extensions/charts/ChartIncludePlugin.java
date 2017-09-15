@@ -8,7 +8,6 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.table.CsvParser;
 
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -26,8 +25,8 @@ public class ChartIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        fullPath = componentsRegistry.includeResourceResolver().fullPath(pluginParams.getFreeParam());
-        String textContent = componentsRegistry.includeResourceResolver().textContent(fullPath);
+        fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
+        String textContent = componentsRegistry.resourceResolver().textContent(fullPath);
 
         Map<String, Object> table = CsvParser.parse(textContent).toMap();
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());

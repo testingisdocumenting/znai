@@ -3,7 +3,7 @@ package com.twosigma.documentation.extensions.svg;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
-import com.twosigma.documentation.extensions.PluginResourcesResolver;
+import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 
@@ -25,7 +25,7 @@ public class SvgIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        PluginResourcesResolver resourcesResolver = componentsRegistry.includeResourceResolver();
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         svgPath = resourcesResolver.fullPath(pluginParams.getFreeParam());
 
         Map<String, Object> props = new LinkedHashMap<>();

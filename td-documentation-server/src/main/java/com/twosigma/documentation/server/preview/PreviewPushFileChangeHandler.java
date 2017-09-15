@@ -1,7 +1,7 @@
 package com.twosigma.documentation.server.preview;
 
 import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.documentation.WebSite;
+import com.twosigma.documentation.website.WebSite;
 import com.twosigma.documentation.html.HtmlPageAndPageProps;
 import com.twosigma.documentation.html.PageProps;
 import com.twosigma.documentation.structure.TableOfContents;

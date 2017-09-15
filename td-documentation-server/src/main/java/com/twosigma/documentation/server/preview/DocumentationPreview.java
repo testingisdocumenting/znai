@@ -2,7 +2,7 @@ package com.twosigma.documentation.server.preview;
 
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
-import com.twosigma.documentation.WebSite;
+import com.twosigma.documentation.website.WebSite;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.server.DocumentationServer;
 import io.vertx.core.http.HttpServer;

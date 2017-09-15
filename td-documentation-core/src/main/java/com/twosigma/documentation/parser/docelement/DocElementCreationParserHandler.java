@@ -3,6 +3,7 @@ package com.twosigma.documentation.parser.docelement;
 import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.extensions.*;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
@@ -193,7 +194,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onImage(String title, String destination, String alt) {
-        PluginResourcesResolver resourcesResolver = componentsRegistry.includeResourceResolver();
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
 
         BufferedImage image = resourcesResolver.imageContent(destination);
         Path imageFullPath = resourcesResolver.fullPath(destination);

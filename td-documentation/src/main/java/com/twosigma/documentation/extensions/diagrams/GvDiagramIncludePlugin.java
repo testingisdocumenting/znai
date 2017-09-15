@@ -29,7 +29,7 @@ public class GvDiagramIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         String diagramId = pluginParams.getFreeParam();
         String diagramPath = pluginParams.getOpts().getRequiredString("diagramPath");
-        String gvContent = componentsRegistry.includeResourceResolver().textContent(diagramPath);
+        String gvContent = componentsRegistry.resourceResolver().textContent(diagramPath);
 
         GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv(diagramId, gvContent);
         Map<String, Object> props = new LinkedHashMap<>();

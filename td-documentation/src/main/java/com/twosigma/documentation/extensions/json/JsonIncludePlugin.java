@@ -29,7 +29,7 @@ public class JsonIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         fileName = pluginParams.getFreeParam();
-        String json = componentsRegistry.includeResourceResolver().textContent(fileName);
+        String json = componentsRegistry.resourceResolver().textContent(fileName);
 
         Map<String, Object> props = CollectionUtils.createMap("data", JsonUtils.deserialize(json),
                 "paths", highlightedPaths(pluginParams.getOpts().get("paths")));
@@ -40,7 +40,7 @@ public class JsonIncludePlugin implements IncludePlugin {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(
-                componentsRegistry.includeResourceResolver().fullPath(fileName)));
+                componentsRegistry.resourceResolver().fullPath(fileName)));
     }
 
     private List<String> highlightedPaths(String paths) {

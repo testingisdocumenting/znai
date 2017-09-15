@@ -28,7 +28,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
         this.componentsRegistry = componentsRegistry;
         this.markupPath = markupPath;
         this.pluginParams = pluginParams;
-        fullPath = componentsRegistry.includeResourceResolver().fullPath(pluginParams.getFreeParam());
+        fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         entry = pluginParams.getOpts().get("entry");
         entries = pluginParams.getOpts().get("entries");
 
@@ -36,7 +36,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
             throw new IllegalArgumentException("specify either entry or entries");
         }
 
-        JavaCode javaCode = new JavaCode(componentsRegistry.includeResourceResolver().textContent(pluginParams.getFreeParam()));
+        JavaCode javaCode = new JavaCode(componentsRegistry.resourceResolver().textContent(pluginParams.getFreeParam()));
         List<DocElement> docElements = process(javaCode);
 
         return PluginResult.docElements(docElements.stream());

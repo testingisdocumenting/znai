@@ -1,4 +1,4 @@
-package com.twosigma.documentation;
+package com.twosigma.documentation.website;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 

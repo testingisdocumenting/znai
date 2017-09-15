@@ -26,6 +26,10 @@ public class WebResource {
     public static WebResource withPath(final String path) {
         return new WebResource(null, path);
     }
+    
+    public static WebResource withPath(final Path originPath, final String webPath) {
+        return new WebResource(originPath, webPath);
+    }
 
     public static WebResource fromResource(final String resourcePath) {
         return new WebResource(resourcePath);

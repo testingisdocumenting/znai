@@ -3,7 +3,7 @@ package com.twosigma.documentation.extensions.diagrams;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
-import com.twosigma.documentation.extensions.PluginResourcesResolver;
+import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
 import com.twosigma.documentation.extensions.include.*;
@@ -37,16 +37,16 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         MarkupParser parser = componentsRegistry.parser();
-        PluginResourcesResolver pluginResourcesResolver = componentsRegistry.includeResourceResolver();
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
 
         String diagramTitle = pluginParams.getFreeParam();
         String diagramId = NameUtils.camelCaseWithSpacesToDashes(diagramTitle);
 
-        diagramPath = pluginResourcesResolver.fullPath(pluginParams.getOpts().getRequiredString("diagramPath"));
-        slidesPath = pluginResourcesResolver.fullPath(pluginParams.getOpts().getRequiredString("slidesPath"));
+        diagramPath = resourcesResolver.fullPath(pluginParams.getOpts().getRequiredString("diagramPath"));
+        slidesPath = resourcesResolver.fullPath(pluginParams.getOpts().getRequiredString("slidesPath"));
 
-        String gvContent = pluginResourcesResolver.textContent(diagramPath);
-        String slidesContent = pluginResourcesResolver.textContent(slidesPath);
+        String gvContent = resourcesResolver.textContent(diagramPath);
+        String slidesContent = resourcesResolver.textContent(slidesPath);
 
         MarkupDiagramSlides markupSlides = new MarkupDiagramSlides(parser);
         DiagramSlides diagramSlides = markupSlides.create(markupPath, slidesContent);

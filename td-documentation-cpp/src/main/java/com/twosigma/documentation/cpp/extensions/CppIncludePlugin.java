@@ -40,12 +40,12 @@ public class CppIncludePlugin implements IncludePlugin {
         markupParser = componentsRegistry.parser();
         codeTokenizer = componentsRegistry.codeTokenizer();
         fileName = pluginParams.getFreeParam();
-        cppPath = componentsRegistry.includeResourceResolver().fullPath(this.fileName);
+        cppPath = componentsRegistry.resourceResolver().fullPath(this.fileName);
 
         PluginParamsOpts opts = pluginParams.getOpts();
         String commentsType = opts.has("comments") ? opts.get("comments") : "";
 
-        String text = componentsRegistry.includeResourceResolver().textContent(fileName);
+        String text = componentsRegistry.resourceResolver().textContent(fileName);
 
         String snippet = extractSnippet(text, opts);
 

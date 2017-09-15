@@ -3,6 +3,7 @@ package com.twosigma.documentation.html;
 import com.twosigma.documentation.html.reactjs.ReactJsBundle;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.structure.*;
+import com.twosigma.documentation.website.WebSiteExtensions;
 import com.twosigma.utils.JsonUtils;
 
 /**
@@ -12,10 +13,14 @@ public class PageToHtmlPageConverter {
     private static final String REACT_BLOCK_ID = "webdoc";
 
     private final DocMeta docMeta;
+    private WebSiteExtensions webSiteExtensions;
     private final ReactJsNashornEngine reactJsNashornEngine;
 
-    public PageToHtmlPageConverter(DocMeta docMeta, TableOfContents tableOfContents, ReactJsNashornEngine reactJsNashornEngine) {
+    public PageToHtmlPageConverter(DocMeta docMeta,
+                                   WebSiteExtensions webSiteExtensions,
+                                   ReactJsNashornEngine reactJsNashornEngine) {
         this.docMeta = docMeta;
+        this.webSiteExtensions = webSiteExtensions;
         this.reactJsNashornEngine = reactJsNashornEngine;
     }
 
@@ -47,6 +52,8 @@ public class PageToHtmlPageConverter {
 
         jsBundle.clientJavaScripts().forEach(htmlPage::addJavaScript);
         jsBundle.clientCssResources().forEach(htmlPage::addCss);
+
+        webSiteExtensions.getCssResources().forEach(htmlPage::addCss);
 
         return new HtmlPageAndPageProps(htmlPage, pageProps);
     }

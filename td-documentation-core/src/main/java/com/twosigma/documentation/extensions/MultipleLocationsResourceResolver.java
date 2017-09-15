@@ -1,5 +1,6 @@
 package com.twosigma.documentation.extensions;
 
+import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.utils.FileUtils;
 
 import javax.imageio.ImageIO;
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * @author mykola
  */
-public class MultipleLocationsResourceResolver implements PluginResourcesResolver {
+public class MultipleLocationsResourceResolver implements ResourcesResolver {
     private Path docRootPath;
     private final List<Path> lookupPaths;
     private Path currentFilePath;

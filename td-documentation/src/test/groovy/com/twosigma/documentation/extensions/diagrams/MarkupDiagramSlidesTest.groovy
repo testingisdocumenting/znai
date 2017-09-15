@@ -1,6 +1,6 @@
 package com.twosigma.documentation.extensions.diagrams
 
-import com.twosigma.documentation.WebSiteComponentsRegistry
+import com.twosigma.documentation.website.WebSiteComponentsRegistry
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides
 import com.twosigma.documentation.parser.MarkdownParser
 import org.junit.Test

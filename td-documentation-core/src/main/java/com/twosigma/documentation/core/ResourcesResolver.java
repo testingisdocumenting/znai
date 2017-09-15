@@ -1,4 +1,4 @@
-package com.twosigma.documentation.extensions;
+package com.twosigma.documentation.core;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
@@ -6,7 +6,7 @@ import java.nio.file.Path;
 /**
  * @author mykola
  */
-public interface PluginResourcesResolver {
+public interface ResourcesResolver {
     String textContent(String path);
     BufferedImage imageContent(String path);
     default String textContent(Path path) {

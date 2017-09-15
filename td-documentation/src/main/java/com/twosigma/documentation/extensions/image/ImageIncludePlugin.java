@@ -2,7 +2,7 @@ package com.twosigma.documentation.extensions.image;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.PluginResourcesResolver;
+import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
@@ -23,7 +23,7 @@ public class ImageIncludePlugin implements IncludePlugin {
     private Path imagePath;
     private Path annotationsPath;
     private Path slidesPath;
-    private PluginResourcesResolver resourceResolver;
+    private ResourcesResolver resourceResolver;
 
     @Override
     public String id() {
@@ -32,7 +32,7 @@ public class ImageIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        resourceResolver = componentsRegistry.includeResourceResolver();
+        resourceResolver = componentsRegistry.resourceResolver();
         String imagePathValue = pluginParams.getFreeParam();
         imagePath = resourceResolver.fullPath(imagePathValue);
 
