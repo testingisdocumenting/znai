@@ -1,5 +1,8 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
+
 import TocPanel from './structure/TocPanel'
+import SelectedTextActionSelection from './selected-text-extensions/SelectedTextActionSelection'
+import {selectedTextExtensions} from './selected-text-extensions/SelectedTextExtensions'
 
 class DocumentationLayout extends Component {
     constructor(props) {
@@ -28,15 +31,19 @@ class DocumentationLayout extends Component {
             onTocItemClick,
             onNextPage,
             onPrevPage,
+            textSelection,
             pageGenError} = this.props
 
         const {
             tocCollapsed,
             tocSelected} = this.state
 
+        const displaySelectedTextActions = textSelection && textSelection.startNode && selectedTextExtensions.hasExtensions()
+        console.log('??', displaySelectedTextActions)
         const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
 
-        return <div className="documentation">
+        return (
+            <div className="documentation">
                 <div className="side-panel" onClick={this.onTocSelect}>
                     <TocPanel toc={toc} collapsed={tocCollapsed} selected={tocSelected}
                               docMeta={docMeta}
@@ -69,7 +76,9 @@ class DocumentationLayout extends Component {
                 </div>
 
                 {pageGenErrorPanel}
+                {displaySelectedTextActions && <SelectedTextActionSelection textSelection={textSelection}/>}
             </div>
+        )
     }
 
     onTocToggle(collapsed) {

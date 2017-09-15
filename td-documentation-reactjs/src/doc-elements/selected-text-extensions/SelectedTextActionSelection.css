@@ -1,0 +1,10 @@
+.selected-text-plugin-selection {
+    font-size: 14px;
+    position: absolute;
+    border: 1px solid #888;
+    border-radius: 3px;
+    color: #333;
+    background: #fff;
+    padding: 12px;
+    z-index: 10;
+}

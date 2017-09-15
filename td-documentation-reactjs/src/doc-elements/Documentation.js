@@ -5,6 +5,7 @@ import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import {elementsLibrary, presentationElementHandlers} from './DefaultElementsLibrary'
 import {documentationNavigation} from './structure/DocumentationNavigation'
+import {textSelection} from './selected-text-extensions/TextSelection'
 import {tableOfContents} from './structure/TableOfContents'
 import {getAllPagesPromise} from './allPages'
 import {fullResourcePath} from '../utils/resourcePath'
@@ -69,8 +70,10 @@ class Documentation extends Component {
         this.onPageGenError = this.onPageGenError.bind(this)
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
+        this.mouseUpHandler = this.mouseUpHandler.bind(this)
 
         documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
+        textSelection.addListener(this.onTextSelection.bind(this))
     }
 
     render() {
@@ -97,6 +100,7 @@ class Documentation extends Component {
             tocCollapsed,
             lastChangeDataDom,
             isSearchActive,
+            textSelection,
             pageGenError,
         } = this.state
 
@@ -136,6 +140,7 @@ class Documentation extends Component {
                                      onTocItemClick={this.onTocItemClick}
                                      onNextPage={this.onNextPage}
                                      onPrevPage={this.onPrevPage}
+                                     textSelection={textSelection}
                                      pageGenError={pageGenError}/>
                 {preview}
                 <PreviewChangeIndicator targetDom={lastChangeDataDom}/>
@@ -163,7 +168,9 @@ class Documentation extends Component {
     componentDidMount() {
         this.enableScrollListener()
         this.onPageLoad()
+
         document.addEventListener('keydown', this.keyDownHandler)
+        document.addEventListener('mouseup', this.mouseUpHandler)
     }
 
     componentWillUnmount() {
@@ -182,6 +189,18 @@ class Documentation extends Component {
             this.setState({mode: DocumentationModes.PRINT})
         } else if (e.code === "Escape") {
             this.setState({mode: DocumentationModes.DEFAULT})
+        }
+    }
+
+    mouseUpHandler() {
+        const {isSearchActive, mode} = this.state
+        if (mode !== DocumentationModes.DEFAULT || isSearchActive) {
+            return
+        }
+
+        const selection = window.getSelection()
+        if (selection.isCollapsed) {
+            textSelection.notifyClear()
         }
     }
 
@@ -393,6 +412,10 @@ class Documentation extends Component {
         } else {
             allPages.push(newPage)
         }
+    }
+
+    onTextSelection(textSelection) {
+        this.setState({textSelection})
     }
 
     onUrlChange(url) {

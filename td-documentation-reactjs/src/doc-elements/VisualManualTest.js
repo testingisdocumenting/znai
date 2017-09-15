@@ -24,10 +24,11 @@ import Demo from './DocumentationDemo'
 import {setDocMeta} from './docMeta'
 
 const docMeta = {
-    "id": "preview",
-    "type": "User Guide",
-    "title": "MDoc",
-    "previewEnabled": true
+    'id': 'preview',
+    'type': 'User Guide',
+    'title': 'MDoc',
+    'previewEnabled': true,
+    'hipchatRoom': 'Test Room'
 }
 
 setDocMeta(docMeta)
