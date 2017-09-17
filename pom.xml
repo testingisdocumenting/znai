@@ -32,6 +32,7 @@
         <module>td-documentation-groovy</module>
         <module>td-documentation-cpp</module>
         <module>td-documentation-ecmascript</module>
+        <module>td-documentation-sphinx</module>
         <module>td-documentation-reactjs</module>
         <module>td-documentation-server</module>
         <module>td-documentation-client</module>
