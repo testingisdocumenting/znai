@@ -247,7 +247,7 @@ public class WebSite implements DocStructure {
 
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
-        toc = TableOfContents.fromNestedText(fileTextContent(cfg.tocPath));
+        toc = new PlainTextTocGenerator().generate(fileTextContent(cfg.tocPath));
         toc.addIndex();
     }
 

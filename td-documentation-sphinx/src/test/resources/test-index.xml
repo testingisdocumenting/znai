@@ -1,0 +1,52 @@
+<document source="/Users/mykola/work/sphinx-doc-test/index.rst">
+    <section ids="welcome-to-test-doc-s-documentation" names="welcome\ to\ test-doc's\ documentation!">
+        <title>Welcome to test-doc’s documentation!</title>
+        <compound classes="toctree-wrapper">
+            <compact_paragraph toctree="True">
+                <caption>Contents:</caption>
+                <bullet_list>
+                    <list_item classes="toctree-l1">
+                        <compact_paragraph classes="toctree-l1">
+                            <reference anchorname="" internal="True" refuri="intro">Test Section</reference>
+                        </compact_paragraph>
+                    </list_item>
+                    <list_item classes="toctree-l1">
+                        <compact_paragraph classes="toctree-l1">
+                            <reference anchorname="" internal="True" refuri="another-page">Section Name Two</reference>
+                        </compact_paragraph>
+                    </list_item>
+                </bullet_list>
+            </compact_paragraph>
+        </compound>
+    </section>
+    <section ids="indices-and-tables" names="indices\ and\ tables">
+        <title>Indices and tables</title>
+        <paragraph>Hello World for real</paragraph>
+        <bullet_list bullet="*">
+            <list_item>
+                <paragraph>
+                    <reference internal="True" refuri="genindex">
+                        <inline classes="std std-ref">Index</inline>
+                    </reference>
+                </paragraph>
+            </list_item>
+            <list_item>
+                <paragraph>
+                    <reference internal="True" refuri="py-modindex">
+                        <inline classes="std std-ref">Module Index</inline>
+                    </reference>
+                </paragraph>
+            </list_item>
+            <list_item>
+                <paragraph>
+                    <reference internal="True" refuri="search">
+                        <inline classes="std std-ref">Search Page</inline>
+                    </reference>
+                </paragraph>
+            </list_item>
+        </bullet_list>
+        <section ids="sub" names="sub">
+            <title>Sub</title>
+        </section>
+    </section>
+</document>
