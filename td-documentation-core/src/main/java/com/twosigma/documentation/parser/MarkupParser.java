@@ -19,5 +19,4 @@ public interface MarkupParser {
      * @see MarkupPathsResolution
      */
     MarkupParserResult parse(Path path, String markup);
-
 }
