@@ -13,3 +13,4 @@ com.twosigma.documentation.extensions.templates.TemplateIncludePlugin
 com.twosigma.documentation.extensions.charts.ChartIncludePlugin
 com.twosigma.documentation.extensions.cli.CliCommandIncludePlugin
 com.twosigma.documentation.extensions.cli.CliOutputIncludePlugin
+com.twosigma.documentation.extensions.diagrams.PlantUmlIncludePlugin

@@ -29,7 +29,7 @@ features
     math
 charts
     flow
-    sequence
+    PlantUml
 synergy-with-testing
     java
     REST
