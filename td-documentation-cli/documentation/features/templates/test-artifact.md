@@ -1,4 +1,4 @@
-`````columns {left: {align: "right", width: 150}, border: true}
+`````columns {left: {align: "right", portion: 3}, border: true}
 left: ${name}
 right: ${description}
 
