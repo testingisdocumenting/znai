@@ -29,6 +29,7 @@ features
     math
 charts
     flow
+    sequence
 synergy-with-testing
     java
     REST

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {svgAttributesToProps} from './svgUtils'
 
+import './Svg.css'
+
 class Svg extends Component {
     render() {
         const {svg} = this.props
@@ -17,7 +19,7 @@ class Svg extends Component {
 
         const children = this.childrenReactElementsFromDomNode(dom.documentElement)
 
-        return <div className="content-block">
+        return <div className="svg content-block">
             <svg {...svgProps}>
                 {children}
             </svg>

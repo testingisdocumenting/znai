@@ -39,7 +39,6 @@ class DocumentationLayout extends Component {
             tocSelected} = this.state
 
         const displaySelectedTextActions = textSelection && textSelection.startNode && selectedTextExtensions.hasExtensions()
-        console.log('??', displaySelectedTextActions)
         const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
 
         return (
