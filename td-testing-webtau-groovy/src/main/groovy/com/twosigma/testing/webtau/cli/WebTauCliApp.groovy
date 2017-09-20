@@ -4,7 +4,9 @@ import com.twosigma.console.ConsoleOutput
 import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.AnsiConsoleOutput
 import com.twosigma.console.ansi.Color
+import com.twosigma.documentation.DocumentationArtifactsLocation
 import com.twosigma.testing.reporter.ConsoleStepReporter
+import com.twosigma.testing.reporter.IntegrationTestsMessageBuilder
 import com.twosigma.testing.reporter.StepReporter
 import com.twosigma.testing.reporter.StepReporters
 import com.twosigma.testing.standalone.StandaloneTest
@@ -18,7 +20,6 @@ import com.twosigma.testing.webtau.driver.WebDriverCreator
 import com.twosigma.testing.webtau.reporter.HtmlReportGenerator
 import com.twosigma.testing.webtau.reporter.ScreenshotStepPayload
 import com.twosigma.testing.webtau.reporter.ScreenshotStepReporter
-import com.twosigma.testing.reporter.IntegrationTestsMessageBuilder
 import com.twosigma.utils.FileUtils
 import com.twosigma.utils.JsonUtils
 
@@ -44,6 +45,7 @@ class WebTauCliApp implements StandaloneTestListener {
         ConsoleOutputs.add(consoleOutput)
 
         config = new WebTauTestCliConfig(args)
+        DocumentationArtifactsLocation.setRoot(cfg.getDocArtifactsPath())
 
         runner = new StandaloneTestRunner(["com.twosigma.testing.webtau.WebTauDsl"], cfg.getWorkingDir())
 

@@ -34,49 +34,64 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * @author mykola
  */
 public class Http {
-    private final static Gson gson = createGson();
+    private static final Gson gson = createGson();
 
     public static final Http http = new Http();
+    public final HttpDocumentation doc = new HttpDocumentation();
+
+    private ThreadLocal<HttpValidationResult> lastValidationResult = new ThreadLocal<>();
 
     private Http() {
     }
 
-    public <E> E get(final String url, HttpResponseValidatorWithReturn validator) {
-        return executeAndValidateHttpCall("GET", url, this::get, validator);
+    public <E> E get(String url, HttpResponseValidatorWithReturn validator) {
+        return executeAndValidateHttpCall("GET", url, this::get, null, validator);
     }
 
-    public void get(final String url, HttpResponseValidator validator) {
+    public void get(String url, HttpResponseValidator validator) {
         get(url, new HttpResponseValidatorIgnoringReturn(validator));
     }
 
-//    public void get(final String url, HttpQueryParams queryParams, HttpResponseValidator validator) {
+    public HttpValidationResult getLastValidationResult() {
+        return lastValidationResult.get();
+    }
+
+    //    public void get(String url, HttpQueryParams queryParams, HttpResponseValidator validator) {
 //
 //    }
 //
 
-    public <E> E post(final String url, HttpRequestBody requestBody, HttpResponseValidatorWithReturn validator) {
-        return executeAndValidateHttpCall("POST", url, fullUrl -> post(fullUrl, requestBody), validator);
+    public void captureLastCallInfo(String name) {
     }
 
-    public void post(final String url, HttpRequestBody requestBody, HttpResponseValidator validator) {
+    public <E> E post(String url, HttpRequestBody requestBody, HttpResponseValidatorWithReturn validator) {
+        return executeAndValidateHttpCall("POST", url,
+                fullUrl -> post(fullUrl, requestBody),
+                requestBody,
+                validator);
+    }
+
+    public void post(String url, HttpRequestBody requestBody, HttpResponseValidator validator) {
         executeAndValidateHttpCall("POST", url, fullUrl -> post(fullUrl, requestBody), validator);
     }
 
-    private <E> E executeAndValidateHttpCall(final String requestMethod, final String url, final HttpCall httpCall, HttpResponseValidator validator) {
-        return executeAndValidateHttpCall(requestMethod, url, httpCall, new HttpResponseValidatorIgnoringReturn(validator));
+    private <E> E executeAndValidateHttpCall(String requestMethod, String url, HttpCall httpCall, HttpResponseValidator validator) {
+        return executeAndValidateHttpCall(requestMethod, url, httpCall, null,
+                new HttpResponseValidatorIgnoringReturn(validator));
     }
 
     @SuppressWarnings("unchecked")
-    private <E> E executeAndValidateHttpCall(final String requestMethod, final String url, final HttpCall httpCall, HttpResponseValidatorWithReturn validator) {
-        final String fullUrl = HttpConfigurations.fullUrl(url);
+    private <E> E executeAndValidateHttpCall(String requestMethod, String url, HttpCall httpCall,
+                                             HttpRequestBody requestBody,
+                                             HttpResponseValidatorWithReturn validator) {
+        String fullUrl = HttpConfigurations.fullUrl(url);
 
-
-        final Object[] result = new Object[1];
+        Object[] result = new Object[1];
 
         Runnable httpCallRunnable = () -> {
             try {
-                final HttpResponse response = httpCall.execute(fullUrl);
-                result[0] = validateAndRecord(requestMethod, url, fullUrl, validator, response);
+                HttpResponse response = httpCall.execute(fullUrl);
+                result[0] = validateAndRecord(requestMethod, url, fullUrl, validator, requestBody, response);
             } catch (Exception e) {
                 throw new RuntimeException("error during http." + requestMethod.toLowerCase() + "(" + fullUrl + ")", e);
             }
@@ -92,12 +107,14 @@ public class Http {
     }
 
     @SuppressWarnings("unchecked")
-    private <E> E validateAndRecord(final String requestMethod, final String url, final String fullUrl,
-                                    final HttpResponseValidatorWithReturn validator, final HttpResponse response) {
-        final HeaderDataNode header = createHeaderDataNode(response);
-        final DataNode body = createBodyDataNode(response);
+    private <E> E validateAndRecord(String requestMethod, String url, String fullUrl,
+                                    HttpResponseValidatorWithReturn validator,
+                                    HttpRequestBody requestBody, HttpResponse response) {
+        HeaderDataNode header = createHeaderDataNode(response);
+        DataNode body = createBodyDataNode(response);
 
-        HttpValidationResult result = new HttpValidationResult(requestMethod, url, fullUrl, header, body);
+        HttpValidationResult result = new HttpValidationResult(requestMethod, url, fullUrl, requestBody, header, body);
+        lastValidationResult.set(result);
 
         ExpectationHandler expectationHandler = (actualPath, actualValue, message) -> {
             result.addMismatch(message);
@@ -105,18 +122,20 @@ public class Http {
         };
 
         ExpectationHandlers.add(expectationHandler);
-        final Object returnedValue = validator.validate(header, body);
-        ExpectationHandlers.remove(expectationHandler);
 
-        HttpTestListeners.afterValidation(result);
+        try {
+            Object returnedValue = validator.validate(header, body);
+            HttpTestListeners.afterValidation(result);
 
-        return (E) extractOriginalValue(returnedValue);
+            return (E) extractOriginalValue(returnedValue);
+        } finally {
+            ExpectationHandlers.remove(expectationHandler);
+        }
     }
 
-
-    public HttpResponse get(final String fullUrl) {
-        try (final CloseableHttpClient client = HttpClients.createDefault()) {
-            final HttpGet request = new HttpGet(fullUrl);
+    public HttpResponse get(String fullUrl) {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(fullUrl);
 
             return extractHttpResponse(client.execute(request));
         } catch (IOException e) {
@@ -124,15 +143,15 @@ public class Http {
         }
     }
 
-    public HttpResponse post(final String fullUrl, HttpRequestBody requestBody) {
-        try (final CloseableHttpClient client = HttpClients.createDefault()) {
-            final HttpPost post = new HttpPost(fullUrl);
+    public HttpResponse post(String fullUrl, HttpRequestBody requestBody) {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpPost post = new HttpPost(fullUrl);
 
             if (requestBody.isBinary()) {
                 throw new UnsupportedOperationException("binary is not supported yet");
             }
 
-            final StringEntity entity = new StringEntity(requestBody.asString());
+            StringEntity entity = new StringEntity(requestBody.asString());
             entity.setContentType(requestBody.type());
 
             post.setEntity(entity);
@@ -143,9 +162,9 @@ public class Http {
         }
     }
 
-    private HttpResponse extractHttpResponse(final CloseableHttpResponse response)
+    private HttpResponse extractHttpResponse(CloseableHttpResponse response)
         throws IOException {
-        final HttpResponse httpResponse = new HttpResponse();
+        HttpResponse httpResponse = new HttpResponse();
 
         httpResponse.setContent(IOUtils.toString(response.getEntity().getContent(), UTF_8));
         httpResponse.setContentType(response.getEntity().getContentType().getValue());
@@ -154,7 +173,7 @@ public class Http {
         return httpResponse;
     }
 
-    private static HeaderDataNode createHeaderDataNode(final HttpResponse response) {
+    private static HeaderDataNode createHeaderDataNode(HttpResponse response) {
         Map<String, Object> headerData = new LinkedHashMap<>();
         headerData.put("statusCode", response.getStatusCode());
         headerData.put("contentType", response.getContentType());
@@ -163,11 +182,11 @@ public class Http {
     }
 
     @SuppressWarnings("unchecked")
-    private static DataNode createBodyDataNode(final HttpResponse response) {
+    private static DataNode createBodyDataNode(HttpResponse response) {
         try {
-            final DataNodeId id = new DataNodeId("body");
+            DataNodeId id = new DataNodeId("body");
 
-            final MapOrList mapOrList = gson.fromJson(response.getContent(), MapOrList.class);
+            MapOrList mapOrList = gson.fromJson(response.getContent(), MapOrList.class);
 
             return mapOrList.list != null ?
                 DataNodeBuilder.fromList(id, mapOrList.list):
@@ -184,7 +203,7 @@ public class Http {
      * @param v value returned from a validation callback
      * @return extracted regular value
      */
-    private Object extractOriginalValue(final Object v) {
+    private Object extractOriginalValue(Object v) {
         // TODO handle maps and list inside
         if (v instanceof DataNode) {
             return ((DataNode) v).get().getValue();
@@ -212,8 +231,8 @@ public class Http {
 
     private static class MapOrListDeserializer implements JsonDeserializer<MapOrList> {
         @Override
-        public MapOrList deserialize(final JsonElement jsonElement, final Type type, final JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-            final MapOrList result = new MapOrList();
+        public MapOrList deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            MapOrList result = new MapOrList();
             if (jsonElement.isJsonArray()) {
                 result.list = jsonDeserializationContext.deserialize(jsonElement, List.class);
             } else {

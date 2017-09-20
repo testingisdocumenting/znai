@@ -6,4 +6,6 @@ scenario("simple get") {
     http.get("/weather") {
         temperature.should == 20
     }
+
+    http.doc.capture('weather-sample')
 }

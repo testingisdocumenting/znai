@@ -12,6 +12,7 @@ public class HttpValidationResult {
     private String url;
     private String fullUrl;
 
+    private HttpRequestBody requestBody;
     private HeaderDataNode header;
     private DataNode body;
 
@@ -19,10 +20,13 @@ public class HttpValidationResult {
 
     private List<String> mismatches;
 
-    public HttpValidationResult(final String requestMethod, final String url, final String fullUrl, final HeaderDataNode header, final DataNode body) {
+    public HttpValidationResult(String requestMethod, String url, String fullUrl, 
+                                HttpRequestBody requestBody, 
+                                HeaderDataNode header, DataNode body) {
         this.requestMethod = requestMethod;
         this.url = url;
         this.fullUrl = fullUrl;
+        this.requestBody = requestBody;
         this.header = header;
         this.body = body;
         this.mismatches = new ArrayList<>();
