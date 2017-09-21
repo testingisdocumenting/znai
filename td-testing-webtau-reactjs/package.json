@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "td": "file:../td-reactjs-common/td"
   },
   "devDependencies": {
     "@storybook/react": "^3.1.9",

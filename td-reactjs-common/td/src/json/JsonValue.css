@@ -1,0 +1,70 @@
+.json {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 14px;
+}
+
+.json.start {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.json .delimiter {
+    color: #888;
+}
+
+.json .string {
+    color: #008000;
+    font-weight: bold;
+}
+
+.json .number {
+    color: #0000ff;
+}
+
+.json .delimiter.quote {
+    color: #bbb;
+}
+
+.json.simple.highlighted {
+    padding: 2px;
+    margin: 3px;
+    border-radius: 5px;
+    background-color: rgba(37, 173, 183, 0.5);
+    color: #444;
+}
+
+.json.simple.highlighted .delimiter {
+    color: #999;
+}
+
+.json.object>.entry>.key {
+    color: #660e7a;
+    font-weight: bold;
+}
+
+.json.object .entry {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.json.array {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.json.array>.json.object {
+    margin-left: 0;
+    display: flex;
+}
+
+.json.object .json.array {
+    display: flex;
+}
+
+.json.array > .json.object ~ .optional-enter {
+    width: 100%;
+}

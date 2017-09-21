@@ -25,6 +25,7 @@
         <module>td-webtau-docs</module>
         <module>td-ddjt-docs</module>
         <module>td-diagrams</module>
+        <module>td-reactjs-common</module>
         <module>td-documentation</module>
         <module>td-documentation-core</module>
         <module>td-documentation-latex</module>

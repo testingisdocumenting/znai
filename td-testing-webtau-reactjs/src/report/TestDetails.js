@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Steps from './Steps'
 
+import HttpDetails from './details/HttpDetails'
 import './TestDetails.css'
 
 const AdditionalResourcesSelection = ({tabs, selectedTabName, onTabSelection}) => {
