@@ -71,6 +71,7 @@ class Documentation extends Component {
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
         this.mouseUpHandler = this.mouseUpHandler.bind(this)
+        this.mouseClickHandler = this.mouseClickHandler.bind(this)
 
         documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
         textSelection.addListener(this.onTextSelection.bind(this))
@@ -171,11 +172,14 @@ class Documentation extends Component {
 
         document.addEventListener('keydown', this.keyDownHandler)
         document.addEventListener('mouseup', this.mouseUpHandler)
+        document.addEventListener('click', this.mouseClickHandler)
     }
 
     componentWillUnmount() {
         this.disableScrollListener()
         document.removeEventListener('keydown', this.keyDownHandler)
+        document.removeEventListener('mouseup', this.mouseUpHandler)
+        document.removeEventListener('click', this.mouseClickHandler)
     }
 
     keyDownHandler(e) {
@@ -199,9 +203,24 @@ class Documentation extends Component {
         }
 
         const selection = window.getSelection()
-        if (selection.isCollapsed) {
-            textSelection.notifyClear()
+        const a = selection.getRangeAt(0)
+        console.log("a", a)
+        const rangeAt = selection.getRangeAt(0)
+        const text = selection.toString()
+
+        if (! text || selection.isCollapsed) {
+            textSelection.clear()
+        } else {
+            const {page} = this.state
+
+            const tocItem = page.tocItem
+            const startNode = selection.isCollapsed ? null : rangeAt.startContainer.parentNode
+
+            textSelection.endSelection({tocItem, startNode, text})
         }
+    }
+
+    mouseClickHandler() {
     }
 
     enableScrollListener() {

@@ -1,3 +1,5 @@
+import {getDocId} from '../docMeta'
+
 class TextSelection {
     constructor() {
         this.listeners = []
@@ -7,11 +9,31 @@ class TextSelection {
         this.listeners.push(listener)
     }
 
-    notify({sectionTitle, pageTitle, pageSectionTitle, startNode, text}) {
-        this.listeners.forEach(l => l({sectionTitle, pageTitle, pageSectionTitle, startNode, text}))
+    startSelection({pageSectionTitle, pageSectionId}) {
+        this.selectionSectionInfo = {pageSectionTitle, pageSectionId}
     }
 
-    notifyClear() {
+    endSelection({tocItem, startNode, text}) {
+        const url = "/" + getDocId() + "/" + tocItem.dirName + "/" + tocItem.fileName +
+            (this.selectedPageSectionId ? "#" + this.selectedPageSectionId : "")
+
+        this.listeners.forEach(l => l({...this.selectionSectionInfo,
+            sectionTitle: tocItem.sectionTitle,
+            pageTitle: tocItem.pageTitle,
+            startNode, text,
+            url}))
+
+        this.selectionSectionInfo = {}
+    }
+
+    get selectedPageSectionId() {
+        return this.selectionSectionInfo.pageSectionId
+    }
+
+    clear() {
+        console.log("clear")
+
+        this.selectionSectionInfo = {}
         this.listeners.forEach(l => l({
             sectionTitle: null,
             pageTitle: null,

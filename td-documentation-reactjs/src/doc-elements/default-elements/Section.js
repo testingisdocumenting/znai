@@ -20,25 +20,17 @@ class Section extends Component {
     }
 
     componentDidMount() {
-        this.node.addEventListener('mouseup', this.mouseUpHandler)
+        this.node.addEventListener('mousedown', this.mouseDownHandler)
     }
 
     componentWillUnmount() {
-        this.node.removeEventListener('mouseup', this.mouseUpHandler)
+        this.node.removeEventListener('mousedown', this.mouseDownHandler)
     }
 
-    mouseUpHandler = () => {
-        const {title} = this.props
+    mouseDownHandler = () => {
+        const {id, title} = this.props
 
-        const selection = window.getSelection()
-        const rangeAt = selection.getRangeAt(0)
-
-        const selectionStartNode = selection.isCollapsed ? null : rangeAt.startContainer.parentNode
-        textSelection.notify({sectionTitle: "TODO",
-            pageTitle: "TODO",
-            pageSectionTitle: title,
-            startNode: selectionStartNode,
-            text: "todo text"})
+        textSelection.startSelection({pageSectionId: id, pageSectionTitle: title})
     }
 }
 

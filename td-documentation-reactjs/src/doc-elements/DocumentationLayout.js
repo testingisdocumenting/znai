@@ -41,6 +41,7 @@ class DocumentationLayout extends Component {
         const displaySelectedTextActions = textSelection && textSelection.startNode && selectedTextExtensions.hasExtensions()
         const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
 
+        console.log("textSelection", textSelection)
         return (
             <div className="documentation">
                 <div className="side-panel" onClick={this.onTocSelect}>
@@ -75,7 +76,8 @@ class DocumentationLayout extends Component {
                 </div>
 
                 {pageGenErrorPanel}
-                {displaySelectedTextActions && <SelectedTextActionSelection textSelection={textSelection}/>}
+                {displaySelectedTextActions && <SelectedTextActionSelection textSelection={textSelection}
+                                                                            extensions={selectedTextExtensions.extensions()}/>}
             </div>
         )
     }
