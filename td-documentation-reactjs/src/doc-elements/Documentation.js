@@ -187,7 +187,7 @@ class Documentation extends Component {
         if (e.code === "Slash" && !isSearchActive && mode === DocumentationModes.DEFAULT) {
             e.preventDefault()
             this.setState({isSearchActive: true})
-        } else if (mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && !e.ctrlKey && !e.altKey) {
+        } else if (!isSearchActive && mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && !e.ctrlKey && !e.altKey) {
             this.setState({mode: DocumentationModes.PRESENTATION})
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && e.altKey) {
             this.setState({mode: DocumentationModes.PRINT})
