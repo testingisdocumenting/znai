@@ -117,8 +117,8 @@ class Documentation extends Component {
                                                    previewEnabled={docMeta.previewEnabled}
                                                    elementsLibrary={elementsLibrary}/>
 
-        const renderedFooter = footer && Object.keys(footer).length &&
-            <elementsLibrary.Footer {...footer} elementsLibrary={elementsLibrary}/>
+        const renderedFooter = (footer && Object.keys(footer).length) ?
+            <elementsLibrary.Footer {...footer} elementsLibrary={elementsLibrary}/> : null
 
         const preview = docMeta.previewEnabled ? <Preview active={true}
                                                           onPageUpdate={this.onPageUpdate}
