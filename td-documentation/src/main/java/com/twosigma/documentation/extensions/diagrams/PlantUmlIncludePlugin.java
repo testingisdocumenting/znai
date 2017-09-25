@@ -28,7 +28,6 @@ public class PlantUmlIncludePlugin implements IncludePlugin {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
 
         fullPath = resourcesResolver.fullPath(pluginParams.getFreeParam());
-        System.out.println("@@@@" + fullPath);
         return PluginResult.docElement("Svg", Collections.singletonMap("svg",
                 PlantUml.generateSvg(resourcesResolver.textContent(fullPath))));
     }
