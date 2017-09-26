@@ -1,0 +1,32 @@
+.http-call {
+}
+
+.http-call .method-and-url {
+    padding: 10px;
+    background-color: #eee;
+}
+
+.http-call .method-and-url .method {
+    color: #555;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.http-call .method-and-url .url {
+    color: #4862d7;
+}
+
+.http-call .payload {
+    margin-left: 10px;
+}
+
+.http-call .payload .caption {
+    color: #888;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.http-call .payload .data {
+    margin-left: 15px;
+    margin-bottom: 20px;
+}

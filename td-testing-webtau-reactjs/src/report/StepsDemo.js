@@ -1,5 +1,5 @@
 import React from 'react'
-import Steps from './Steps'
+import Steps from './details/Steps'
 
 import steps from './testSteps'
 

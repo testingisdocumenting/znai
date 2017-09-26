@@ -5,7 +5,7 @@
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "td": "file:../td-reactjs-common/td"
+    "react-json-tree": "^0.10.9"
   },
   "devDependencies": {
     "@storybook/react": "^3.1.9",

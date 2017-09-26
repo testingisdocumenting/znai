@@ -1,44 +1,15 @@
 import React, {Component} from 'react'
-import Steps from './Steps'
+import Steps from './details/Steps'
 
-import HttpDetails from './details/HttpDetails'
+import TestSteps from './details/TestSteps'
+import AdditionalResourcesSelection from './details/AdditionalResourcesSelection'
+import Screenshot from './details/Screenshot'
+import FullStackTrace from './details/FullStackTrace'
+import ShortStackTrace from './details/ShortStackTrace'
+import HttpCalls from './details/http/HttpCalls'
+import NoDetailsDefined from './details/NoDetailsDefined'
+
 import './TestDetails.css'
-
-const AdditionalResourcesSelection = ({tabs, selectedTabName, onTabSelection}) => {
-    return (
-        <div className="additional-resources-selection">
-            <div className="tab-names">
-                {tabs.map(t => {
-                    const className = "tab-name" + (selectedTabName === t ? " selected" : "")
-                    return <div key={t} className={className} onClick={() => onTabSelection(t)}>{t}</div>
-                })}
-            </div>
-        </div>
-    )
-}
-
-const Screenshot = ({test}) => {
-    return (
-        <div className="image">
-            <img src={"data:image/png;base64," + test.screenshot} width="100%"/>
-        </div>
-    )
-}
-
-const TestSteps = ({test}) => <Steps steps={test.steps}/>
-
-const StackTrace = ({message}) => {
-    return (
-        <pre className="stack-trace">
-            {message}
-        </pre>
-    )
-}
-
-const ShortStackTrace = ({test}) => <StackTrace message={test.shortStackTrace}/>
-const FullStackTrace = ({test}) => <StackTrace message={test.fullStackTrace}/>
-
-const NoResource = ({test, selectedResourceTabName}) => <div>No resource: {selectedResourceTabName}</div>
 
 const OptionalPreBlock = ({className, message}) => {
     if (! message) {
@@ -58,22 +29,23 @@ class TestDetails extends Component {
     constructor(props) {
         super(props)
 
-        const tabNames = additionalResourcesTabNames(props.test)
-        this.state = {selectedResourceTabName: tabNames[0]}
+        const resources = additionalResources(props.test)
+        this.state = {selectedResourceTabName: resources[0].tabName}
     }
 
     componentWillReceiveProps(props) {
-        const tabNames = additionalResourcesTabNames(props.test)
-        this.setState({selectedResourceTabName: tabNames[0]})
+        const resources = additionalResources(props.test)
+        this.setState({selectedResourceTabName: resources[0].tabName})
     }
 
     render() {
         const {test} = this.props
         const {selectedResourceTabName} = this.state
 
-        const tabNames = additionalResourcesTabNames(test)
-
+        const resources = additionalResources(test)
         const Resource = resourceComponentByTab()
+
+        const tabNames = resources.map(r => r.tabName)
 
         return (
             <div className="test-details">
@@ -103,43 +75,37 @@ class TestDetails extends Component {
         )
 
         function resourceComponentByTab() {
-            switch (selectedResourceTabName) {
-                case "Screenshot":
-                    return Screenshot
-                case "Steps":
-                    return TestSteps
-                case "StackTrace":
-                    return ShortStackTrace
-                case "Full StackTrace":
-                    return FullStackTrace
-                default:
-                    return NoResource
-            }
+            const entry = resources.filter(r => r.tabName === selectedResourceTabName)
+            return entry ? entry[0].component : NoDetailsDefined
         }
     }
 
     onResourceTabSelection = (tabName) => this.setState({selectedResourceTabName: tabName})
 }
 
-function additionalResourcesTabNames(test) {
-    const tabs = []
-    if (test.hasOwnProperty("screenshot")) {
-        tabs.push("Screenshot")
+function additionalResources(test) {
+    const resources = []
+    if (test.hasOwnProperty('screenshot')) {
+        resources.push({tabName: 'Screenshot', component: Screenshot})
     }
 
-    if (test.hasOwnProperty("steps")) {
-        tabs.push("Steps")
+    if (test.hasOwnProperty('steps')) {
+        resources.push({tabName: 'Steps', component: TestSteps})
     }
 
-    if (test.hasOwnProperty("shortStackTrace")) {
-        tabs.push("StackTrace")
+    if (test.hasOwnProperty('shortStackTrace')) {
+        resources.push({tabName: 'StackTrace', component: ShortStackTrace})
     }
 
-    if (test.hasOwnProperty("fullStackTrace")) {
-        tabs.push("Full StackTrace")
+    if (test.hasOwnProperty('fullStackTrace')) {
+        resources.push({tabName: 'Full StackTrace', component: FullStackTrace})
     }
 
-    return tabs
+    if (test.hasOwnProperty('httpCalls')) {
+        resources.push({tabName: 'HTTP calls', component: HttpCalls})
+    }
+
+    return resources
 }
 
 export default TestDetails
