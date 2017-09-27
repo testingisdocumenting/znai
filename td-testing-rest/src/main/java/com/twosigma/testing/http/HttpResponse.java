@@ -8,8 +8,7 @@ public class HttpResponse {
     private String contentType;
 
     private int statusCode;
-
-
+    
     public String getContent() {
         return content;
     }

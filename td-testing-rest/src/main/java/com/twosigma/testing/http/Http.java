@@ -102,6 +102,7 @@ public class Http {
                 httpCallRunnable);
 
         step.execute(StepReportOptions.REPORT_ALL);
+        step.addPayload(lastValidationResult.get());
 
         return (E) result[0];
     }
@@ -113,7 +114,8 @@ public class Http {
         HeaderDataNode header = createHeaderDataNode(response);
         DataNode body = createBodyDataNode(response);
 
-        HttpValidationResult result = new HttpValidationResult(requestMethod, url, fullUrl, requestBody, header, body);
+        HttpValidationResult result = new HttpValidationResult(requestMethod, url, fullUrl,
+                requestBody, response, header, body);
         lastValidationResult.set(result);
 
         ExpectationHandler expectationHandler = (actualPath, actualValue, message) -> {
@@ -194,7 +196,6 @@ public class Http {
         } catch (JsonSyntaxException e) {
             throw new RuntimeException("error parsing body: " + response.getContent(), e);
         }
-
     }
 
     /**

@@ -5,6 +5,7 @@ import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.AnsiConsoleOutput
 import com.twosigma.console.ansi.Color
 import com.twosigma.documentation.DocumentationArtifactsLocation
+import com.twosigma.testing.http.HttpValidationResult
 import com.twosigma.testing.reporter.ConsoleStepReporter
 import com.twosigma.testing.reporter.IntegrationTestsMessageBuilder
 import com.twosigma.testing.reporter.StepReporter
@@ -95,9 +96,16 @@ class WebTauCliApp implements StandaloneTestListener {
 
         test.addResultPayload({ [steps: listOfMaps ]})
 
-        def screenshotsPayloads = steps.combinedPayloads.flatten().findAll { it instanceof ScreenshotStepPayload }
+        def payloads = steps.combinedPayloads.flatten()
+
+        def screenshotsPayloads = payloads.findAll { it instanceof ScreenshotStepPayload }
         if (! screenshotsPayloads.isEmpty()) {
             test.addResultPayload({ [screenshot: screenshotsPayloads[0].base64png] })
+        }
+
+        def httpPayloads = payloads.findAll { it instanceof HttpValidationResult }
+        if (! httpPayloads.isEmpty()) {
+            test.addResultPayload({ [httpCalls: httpPayloads*.toMap()] })
         }
 
         tests.add(test)

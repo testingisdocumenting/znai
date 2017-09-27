@@ -16,7 +16,7 @@ class WebTauFeaturesTestServer {
         testServer.registerGet("/search", new TestServerHtmlResponse(ResourceUtils.textContent("search.html")))
         testServer.registerGet("/finders-and-filters", new TestServerHtmlResponse(ResourceUtils.textContent("finders-and-filters.html")))
         testServer.registerGet("/with-cookies", new TestServerHtmlResponse(ResourceUtils.textContent("cookies.html")))
-        testServer.registerGet("/weather", new TestServerJsonResponse("{'temperature': 20}"))
+        testServer.registerGet("/weather", new TestServerJsonResponse("{\"temperature\": 20}"))
     }
 
     void start(int port) {
