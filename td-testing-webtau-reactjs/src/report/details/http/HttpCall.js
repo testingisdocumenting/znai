@@ -20,7 +20,8 @@ const HttpCall = ({httpCall}) => {
             <div className="response">
                 <Payload caption="Response"
                          type={httpCall.responseType}
-                         data={httpCall.responseBody}/>
+                         data={httpCall.responseBody}
+                         checks={httpCall.responseBodyChecks}/>
             </div>
         </div>
     )

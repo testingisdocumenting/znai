@@ -32,17 +32,25 @@ const TestDetailsWithHttpCall = () => <TestDetails test={{
     ...test,
     exceptionMessage: 'access weather end point',
     httpCalls: [{
-        method: 'POST',
-        url: 'http://weather/station/new-york',
-        requestType: 'application/json',
-        requestBody: '[1, 2, 3, 4]',
-        responseType: 'application/json',
-        responseBody: '{"key1": "value1", "key2": "value2"}'
+        'method': 'GET',
+        'url': 'http://localhost:8180/weather',
+        'responseType': 'application/json',
+        'responseBody': '{"temperature": 20}\n',
+        'responseBodyChecks': {
+            'failedPaths': [],
+            'passedPaths': [
+                'temperature'
+            ]
+        }
     }, {
         method: 'GET',
         url: 'http://weather/station/new-york',
         responseType: 'application/json',
-        responseBody: '{"key1": "value1", "key2": "value2"}'
+        responseBody: '{"key1": "value1", "key2": "value2", "key3": {"key31": "value31"}}',
+        responseBodyChecks: {
+            failedPaths: ['key3.key31'],
+            passedPaths: ['key2']
+        }
     }]
 }}/>
 

@@ -8,5 +8,13 @@ public enum CheckLevel {
     FuzzyPassed,
     ExplicitPassed,
     FuzzyFailed,
-    ExplicitFailed,
+    ExplicitFailed;
+
+    public boolean isFailed() {
+        return this != None && this != FuzzyPassed && this != ExplicitPassed;
+    }
+
+    public boolean isPassed() {
+        return this != None && !isFailed();
+    }
 }

@@ -8,7 +8,7 @@ class HttpCalls extends Component {
 
         return (
             <div className="http">
-                {test.httpCalls.map((httpCall, idx) => <HttpCall httpCall={httpCall}/>)}
+                {test.httpCalls.map((httpCall, idx) => <HttpCall key={idx} httpCall={httpCall}/>)}
             </div>
         )
     }

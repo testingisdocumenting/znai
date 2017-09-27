@@ -61,9 +61,6 @@ public class Http {
 //    }
 //
 
-    public void captureLastCallInfo(String name) {
-    }
-
     public <E> E post(String url, HttpRequestBody requestBody, HttpResponseValidatorWithReturn validator) {
         return executeAndValidateHttpCall("POST", url,
                 fullUrl -> post(fullUrl, requestBody),

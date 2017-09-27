@@ -1,12 +1,16 @@
 package com.twosigma.testing.http;
 
+import com.twosigma.testing.data.traceable.CheckLevel;
+import com.twosigma.testing.http.datacoverage.DataNodeToMapOfValuesConverter;
+import com.twosigma.testing.http.datacoverage.TraceableValueConverter;
+import com.twosigma.testing.http.datanode.DataNode;
+import com.twosigma.testing.reporter.TestStepPayload;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.twosigma.testing.http.datanode.DataNode;
-import com.twosigma.testing.reporter.TestStepPayload;
+import java.util.function.Function;
 
 /**
  * @author mykola
@@ -80,6 +84,33 @@ public class HttpValidationResult implements TestStepPayload {
         result.put("responseType", response.getContentType());
         result.put("responseBody", response.getContent());
 
+        Map<String, Object> responseBodyChecks = new LinkedHashMap<>();
+        result.put("responseBodyChecks", responseBodyChecks);
+        responseBodyChecks.put("failedPaths", extractPaths(responseBody, CheckLevel::isFailed));
+        responseBodyChecks.put("passedPaths", extractPaths(responseBody, CheckLevel::isPassed));
+
         return result;
+    }
+
+    private List<String> extractPaths(DataNode dataNode, Function<CheckLevel, Boolean> includePath) {
+        List<String> paths = new ArrayList<>();
+
+        TraceableValueConverter traceableValueConverter = (id, traceableValue) -> {
+            if (includePath.apply(traceableValue.getCheckLevel())) {
+                paths.add(removeStartOfThePath(id.getPath()));
+            }
+
+            return traceableValue.getValue();
+        };
+
+        DataNodeToMapOfValuesConverter dataNodeConverter = new DataNodeToMapOfValuesConverter(traceableValueConverter);
+        dataNodeConverter.convert(dataNode);
+
+        return paths;
+    }
+
+    private static String removeStartOfThePath(String path) {
+        int dotIdx = path.indexOf('.');
+        return path.substring(dotIdx + 1);
     }
 }
