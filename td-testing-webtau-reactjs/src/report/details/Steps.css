@@ -9,8 +9,17 @@
     font-size: 14px;
 }
 
+.steps .step .token.id {
+    color: #333;
+    font-weight: bold;
+}
+
 .steps .step .token.action {
     color: #4862d7;
+}
+
+.steps .step .token.matcher {
+    color: #62a84b;
 }
 
 .steps .step .token.error {
