@@ -8,7 +8,7 @@ const Json = ({data, paths}) => {
     }
 
     return <div className="json start content-block">
-        <JsonValue path={"body"} data={data} highlightedPaths={highlightedPathsDict}/>
+        <JsonValue path={'root'} data={data} highlightedPaths={highlightedPathsDict}/>
     </div>
 }
 

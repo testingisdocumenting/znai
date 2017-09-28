@@ -30,7 +30,7 @@ const jsonValueRenderer = (checks) => {
     checks.passedPaths = checks.passedPaths || []
 
     return (pretty, raw, ...path) => {
-        const fullPath = path.reverse().slice(1).join('.')
+        const fullPath = path.reverse().join('.')
         const isFailed = checks.failedPaths.indexOf(fullPath) !== -1
         const isPassed = checks.passedPaths.indexOf(fullPath) !== -1
 

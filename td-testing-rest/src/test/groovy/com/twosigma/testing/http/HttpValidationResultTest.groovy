@@ -27,6 +27,6 @@ class HttpValidationResultTest {
 
         validationResult.toMap().should equal([method: 'POST', url: 'http://site/test/url', responseType: 'application/json',
                                                responseBody: responseAsJson,
-                                               responseBodyChecks: [failedPaths: ['childA'], passedPaths:['childB']]])
+                                               responseBodyChecks: [failedPaths: ['root.childA'], passedPaths:['root.childB']]])
     }
 }

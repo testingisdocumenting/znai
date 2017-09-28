@@ -39,7 +39,7 @@ const TestDetailsWithHttpCall = () => <TestDetails test={{
         'responseBodyChecks': {
             'failedPaths': [],
             'passedPaths': [
-                'temperature'
+                'root.temperature'
             ]
         }
     }, {
@@ -48,8 +48,8 @@ const TestDetailsWithHttpCall = () => <TestDetails test={{
         responseType: 'application/json',
         responseBody: '{"key1": "value1", "key2": "value2", "key3": {"key31": "value31"}}',
         responseBodyChecks: {
-            failedPaths: ['key3.key31'],
-            passedPaths: ['key2']
+            failedPaths: ['root.key3.key31'],
+            passedPaths: ['root.key1']
         }
     }]
 }}/>

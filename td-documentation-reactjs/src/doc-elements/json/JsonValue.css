@@ -4,9 +4,9 @@
 }
 
 .json.start {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    padding: 20px 0;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 10px 0;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
 }
@@ -32,7 +32,7 @@
     padding: 2px;
     margin: 3px;
     border-radius: 5px;
-    background-color: rgba(37, 173, 183, 0.5);
+    background-color: rgba(128, 206, 230, 0.3);
     color: #444;
 }
 

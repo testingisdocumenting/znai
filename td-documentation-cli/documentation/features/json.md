@@ -2,11 +2,11 @@
 
 Use `include-json` plugin to bring attention to a certain please in a json file. 
 
-    :include-json: sample.json {paths: "body.key2.key22,body.key3.key31"}
+    :include-json: sample.json {paths: "root.key2.key22,body.key3.key31"}
 
 Comma separated paths specified inside `paths` will be highlighted.
 
-:include-json: sample.json {paths: "body.key2.key22,body.key3.key31"}
+:include-json: sample.json {paths: "root.key2.key22,body.key3.key31"}
 
 # Test Results
 

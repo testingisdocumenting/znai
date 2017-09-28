@@ -27,8 +27,8 @@ import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import Footer from './structure/Footer'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
 import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
-
 import {MarkdownAndResult, presentationMarkdownAndResultHandler} from './markdown/MarkdownAndResult'
+import WebTauRest from './test-results/WebTauRest'
 
 const library = {}
 const presentationElementHandlers = {}
@@ -116,5 +116,7 @@ library.CliOutput = CliOutput
 presentationElementHandlers.CliOutput = presentationCliOutput
 
 library.Footer = Footer
+
+library.WebTauRest = WebTauRest
 
 export {library as elementsLibrary, presentationElementHandlers}

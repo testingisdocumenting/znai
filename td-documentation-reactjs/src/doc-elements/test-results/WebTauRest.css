@@ -1,0 +1,30 @@
+.webtau-rest {
+}
+
+.webtau-rest .method-and-url {
+    padding-top: 10px;
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
+
+.webtau-rest .method-and-url .method {
+    color: #555;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.webtau-rest .method-and-url .url {
+    color: #4862d7;
+}
+
+.webtau-rest .rest-payload .caption {
+    color: #888;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.webtau-rest .rest-payload .json {
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding-top: 2px;
+    border:none;
+}

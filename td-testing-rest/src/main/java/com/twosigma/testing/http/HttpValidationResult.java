@@ -97,7 +97,7 @@ public class HttpValidationResult implements TestStepPayload {
 
         TraceableValueConverter traceableValueConverter = (id, traceableValue) -> {
             if (includePath.apply(traceableValue.getCheckLevel())) {
-                paths.add(removeStartOfThePath(id.getPath()));
+                paths.add(replaceStartOfThePath(id.getPath()));
             }
 
             return traceableValue.getValue();
@@ -109,8 +109,15 @@ public class HttpValidationResult implements TestStepPayload {
         return paths;
     }
 
-    private static String removeStartOfThePath(String path) {
-        int dotIdx = path.indexOf('.');
-        return path.substring(dotIdx + 1);
+    private static String replaceStartOfThePath(String path) {
+        if (path.startsWith("body")) {
+            return path.replace("body", "root");
+        }
+
+        if (path.startsWith("header")) {
+            return path.replace("header", "root");
+        }
+
+        throw new RuntimeException("path should start with either header or body");
     }
 }
