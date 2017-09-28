@@ -44,7 +44,7 @@ public class StructuredDataNode implements DataNode {
 
     @Override
     public DataNode get(final String name) {
-        return children.containsKey(name) ? children.get(name) : new NullDataNode(id.child(name));
+        return (children != null && children.containsKey(name)) ? children.get(name) : new NullDataNode(id.child(name));
     }
 
     @Override

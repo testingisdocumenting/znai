@@ -9,9 +9,11 @@ import com.twosigma.testing.http.config.HttpConfigurations;
 import com.twosigma.testing.http.datanode.DataNode;
 import com.twosigma.testing.http.datanode.DataNodeBuilder;
 import com.twosigma.testing.http.datanode.DataNodeId;
+import com.twosigma.testing.http.datanode.StructuredDataNode;
 import com.twosigma.testing.reporter.StepReportOptions;
 import com.twosigma.testing.reporter.TestStep;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.Header;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -20,6 +22,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -165,8 +168,12 @@ public class Http {
         throws IOException {
         HttpResponse httpResponse = new HttpResponse();
 
-        httpResponse.setContent(IOUtils.toString(response.getEntity().getContent(), UTF_8));
-        httpResponse.setContentType(response.getEntity().getContentType().getValue());
+        InputStream content = response.getEntity().getContent();
+        httpResponse.setContent(content != null ? IOUtils.toString(content, UTF_8) : "");
+
+        Header contentType = response.getEntity().getContentType();
+        httpResponse.setContentType(contentType != null ? contentType.getValue() : "");
+
         httpResponse.setStatusCode(response.getStatusLine().getStatusCode());
 
         return httpResponse;
@@ -184,6 +191,13 @@ public class Http {
     private static DataNode createBodyDataNode(HttpResponse response) {
         try {
             DataNodeId id = new DataNodeId("body");
+            if (response.getContent().isEmpty()) {
+                return new StructuredDataNode(id, new TraceableValue(""));
+            }
+
+            if (! response.getContentType().contains("/json")) {
+                return new StructuredDataNode(id, new TraceableValue(response.getContent()));
+            }
 
             MapOrList mapOrList = gson.fromJson(response.getContent(), MapOrList.class);
 
