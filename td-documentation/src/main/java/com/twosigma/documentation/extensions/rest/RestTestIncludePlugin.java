@@ -1,26 +1,21 @@
 package com.twosigma.documentation.extensions.rest;
 
-import java.nio.file.Path;
-import java.util.List;
-import java.util.Map;
-
+import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.extensions.PluginParams;
-import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.parser.MarkupParser;
-import com.twosigma.documentation.parser.MarkupParserResult;
-import com.twosigma.documentation.parser.docelement.DocElement;
-import com.twosigma.documentation.parser.docelement.DocElementType;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.utils.JsonUtils;
+
+import java.nio.file.Path;
+import java.util.Collections;
+import java.util.stream.Stream;
 
 /**
  * @author mykola
  */
 public class RestTestIncludePlugin implements IncludePlugin {
-    private int resultIdx;
-    private Path markupPath;
+    private Path fullPath;
 
     @Override
     public String id() {
@@ -28,54 +23,15 @@ public class RestTestIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public void reset(final IncludeContext context) {
-        resultIdx = 0;
-    }
-
-    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, final PluginParams pluginParams) {
-        this.markupPath = markupPath;
+        fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
 
-        Map testData = JsonUtils.deserializeAsMap(componentsRegistry.resourceResolver()
-                .textContent(pluginParams.getFreeParam()));
-        String scenarioMarkup = testData.get("scenario").toString();
-
-        List<DocElement> docElements = elementsFromScenario(componentsRegistry.parser(), scenarioMarkup);
-
-        Map result = getResult(testData);
-        docElements.add(urlAndMethod(result));
-        docElements.add(new DocElement("Json", "data", result.get("body"),
-                "paths", result.get("paths")));
-
-        resultIdx++;
-        return PluginResult.docElements(docElements.stream());
+        return PluginResult.docElement("WebTauRest", Collections.singletonMap("testArtifact",
+                JsonUtils.deserializeAsMap(componentsRegistry.resourceResolver().textContent(fullPath))));
     }
 
     @Override
-    public String textForSearch() {
-        return "";
-    }
-
-    private Map getResult(Map testData) {
-        List results = (List) testData.get("results");
-        return (Map) results.get(resultIdx);
-    }
-
-    private DocElement urlAndMethod(Map result) {
-        DocElement paragraph = new DocElement(DocElementType.PARAGRAPH);
-
-        Object method = result.get("method");
-        String preposition = method.equals("GET") ? "from" : "to";
-
-        paragraph.addChild(new DocElement(DocElementType.INLINED_CODE, "code", method));
-        paragraph.addChild(new DocElement(DocElementType.SIMPLE_TEXT, "text", " " + preposition + " "));
-        paragraph.addChild(new DocElement(DocElementType.INLINED_CODE, "code", result.get("url")));
-
-        return paragraph;
-    }
-
-    private List<DocElement> elementsFromScenario(MarkupParser parser, String scenario) {
-        MarkupParserResult parserResult = parser.parse(markupPath, scenario);
-        return parserResult.getDocElement().getContent();
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
+        return Stream.of(AuxiliaryFile.builtTime(fullPath));
     }
 }

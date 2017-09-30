@@ -3,5 +3,6 @@
 ../../td-testing-rest-groovy/src/test/resources
 ../../td-testing-webtau/src/test/java
 ../../td-testing-webtau/src/test/groovy
+../../td-testing-webtau-groovy
 ../../td-testing-core-groovy/target/test-classes
 ../../td-testing-core-groovy/src/test/groovy
