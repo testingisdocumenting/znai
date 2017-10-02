@@ -72,7 +72,7 @@ public class TestServer implements HttpConfiguration {
         return HttpUrl.concat("http://localhost:" + port, url);
     }
 
-    private class RequestHandler extends AbstractHandler{
+    private class RequestHandler extends AbstractHandler {
         @Override
         public void handle(final String url, final Request baseRequest, final HttpServletRequest request,
             final HttpServletResponse response) throws IOException, ServletException {
@@ -83,7 +83,7 @@ public class TestServer implements HttpConfiguration {
             serverRequest.setRequestBody(IOUtils.toString(baseRequest.getReader()));
             serverRequest.setRequestType(baseRequest.getContentType());
 
-            final TestServerResponse testServerResponse = responses.get(url);
+            final TestServerResponse testServerResponse = responses.get(baseRequest.getOriginalURI());
             if (testServerResponse == null) {
                 response.setStatus(404);
             } else {

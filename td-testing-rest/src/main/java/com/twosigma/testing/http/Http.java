@@ -55,14 +55,13 @@ public class Http {
         get(url, new HttpResponseValidatorIgnoringReturn(validator));
     }
 
-    public HttpValidationResult getLastValidationResult() {
-        return lastValidationResult.get();
+    public <E> E get(String url, HttpQueryParams queryParams, HttpResponseValidatorWithReturn validator) {
+        return get(url + "?" + queryParams.toString(), validator);
     }
 
-    //    public void get(String url, HttpQueryParams queryParams, HttpResponseValidator validator) {
-//
-//    }
-//
+    public void get(String url, HttpQueryParams queryParams, HttpResponseValidator validator) {
+        get(url, queryParams, new HttpResponseValidatorIgnoringReturn(validator));
+    }
 
     public <E> E post(String url, HttpRequestBody requestBody, HttpResponseValidatorWithReturn validator) {
         return executeAndValidateHttpCall("POST", url,
@@ -73,6 +72,10 @@ public class Http {
 
     public void post(String url, HttpRequestBody requestBody, HttpResponseValidator validator) {
         executeAndValidateHttpCall("POST", url, fullUrl -> post(fullUrl, requestBody), validator);
+    }
+
+    public HttpValidationResult getLastValidationResult() {
+        return lastValidationResult.get();
     }
 
     private <E> E executeAndValidateHttpCall(String requestMethod, String url, HttpCall httpCall, HttpResponseValidator validator) {

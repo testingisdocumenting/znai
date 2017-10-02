@@ -22,10 +22,13 @@ class HttpExtensionsTest {
         testServer.start(7823)
         testServer.registerGet("/object", new TestServerJsonResponse("{'id': 10, 'price': 100, 'amount': 30, 'list': [1, 2, 3], 'complexList': [{'k1': 'v1', 'k2': 'v2'}, {'k1': 'v11', 'k2': 'v22'}]}"))
         testServer.registerPost("/echo", new TestServerResponseEcho())
+        testServer.registerGet("/params?a=1&b=text", new TestServerJsonResponse("{'a': 1, 'b': 'text'}"))
 
         HttpTestListeners.add({ result ->
             println result.getMismatches().join("\n")
             println DataNodeRenderer.render(result.getBody())
+
+            assert result.mismatches.isEmpty()
         })
     }
 
@@ -38,11 +41,6 @@ class HttpExtensionsTest {
     void "use groovy closure as validation"() {
         http.get("/object") {
             price.should == 100
-            price.should == 100.0
-            price.should == 130
-            price.should == 100.001
-
-            list[1].should == 4
         }
     }
 
@@ -52,7 +50,7 @@ class HttpExtensionsTest {
             complexList.should == ["k1"   | "k2"] {
                                   __________________
                                     "v1"  | "v2"
-                                    "v11" | "va22" }
+                                    "v11" | "v22" }
         }
     }
 
@@ -75,5 +73,22 @@ class HttpExtensionsTest {
 
         assert id == "generated-id"
         assert id.getClass() == String
+    }
+
+    @Test
+    void "build query params from the map"() {
+        http.get("params", [a: 1, b: 'text']) {
+            a.should == 1
+            b.should == 'text'
+        }
+    }
+
+    @Test
+    void "build query params from the map and return a single value from closure"() {
+        def a = http.get("params", [a: 1, b: 'text']) {
+            return a
+        }
+
+        assert a == 1
     }
 }
