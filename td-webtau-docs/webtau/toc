@@ -6,3 +6,6 @@ UI
     page-object
     page-element
     matchers
+configuration
+    cli
+    environments
