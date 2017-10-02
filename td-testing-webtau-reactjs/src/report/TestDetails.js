@@ -93,16 +93,16 @@ function additionalResources(test) {
         resources.push({tabName: 'Steps', component: TestSteps})
     }
 
+    if (test.hasOwnProperty('httpCalls')) {
+        resources.push({tabName: 'HTTP calls', component: HttpCalls})
+    }
+
     if (test.hasOwnProperty('shortStackTrace')) {
         resources.push({tabName: 'StackTrace', component: ShortStackTrace})
     }
 
     if (test.hasOwnProperty('fullStackTrace')) {
         resources.push({tabName: 'Full StackTrace', component: FullStackTrace})
-    }
-
-    if (test.hasOwnProperty('httpCalls')) {
-        resources.push({tabName: 'HTTP calls', component: HttpCalls})
     }
 
     return resources
