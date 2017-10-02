@@ -1,7 +1,5 @@
 package com.twosigma.testing.http.datanode
 
-import com.twosigma.testing.http.HttpTestListeners
-import com.twosigma.testing.http.render.DataNodeRenderer
 import com.twosigma.testing.http.testserver.TestServer
 import com.twosigma.testing.http.testserver.TestServerJsonResponse
 import com.twosigma.testing.http.testserver.TestServerResponseEcho
@@ -23,13 +21,6 @@ class HttpExtensionsTest {
         testServer.registerGet("/object", new TestServerJsonResponse("{'id': 10, 'price': 100, 'amount': 30, 'list': [1, 2, 3], 'complexList': [{'k1': 'v1', 'k2': 'v2'}, {'k1': 'v11', 'k2': 'v22'}]}"))
         testServer.registerPost("/echo", new TestServerResponseEcho())
         testServer.registerGet("/params?a=1&b=text", new TestServerJsonResponse("{'a': 1, 'b': 'text'}"))
-
-        HttpTestListeners.add({ result ->
-            println result.getMismatches().join("\n")
-            println DataNodeRenderer.render(result.getBody())
-
-            assert result.mismatches.isEmpty()
-        })
     }
 
     @AfterClass

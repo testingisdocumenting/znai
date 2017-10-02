@@ -27,6 +27,7 @@ import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.action;
 import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.urlValue;
@@ -104,8 +105,11 @@ public class Http {
                 () -> tokenizedMessage(action("executed HTTP " + requestMethod), urlValue(fullUrl)),
                 httpCallRunnable);
 
-        step.execute(StepReportOptions.REPORT_ALL);
-        step.addPayload(lastValidationResult.get());
+        try {
+            step.execute(StepReportOptions.REPORT_ALL);
+        } finally {
+            step.addPayload(lastValidationResult.get());
+        }
 
         return (E) result[0];
     }
@@ -121,21 +125,8 @@ public class Http {
                 requestBody, response, header, body);
         lastValidationResult.set(result);
 
-        ExpectationHandler expectationHandler = (actualPath, actualValue, message) -> {
-            result.addMismatch(message);
-            return Flow.Terminate;
-        };
-
-        ExpectationHandlers.add(expectationHandler);
-
-        try {
-            Object returnedValue = validator.validate(header, body);
-            HttpTestListeners.afterValidation(result);
-
-            return (E) extractOriginalValue(returnedValue);
-        } finally {
-            ExpectationHandlers.remove(expectationHandler);
-        }
+        Object returnedValue = validator.validate(header, body);
+        return (E) extractOriginalValue(returnedValue);
     }
 
     public HttpResponse get(String fullUrl) {
