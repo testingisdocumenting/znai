@@ -131,9 +131,11 @@ public class Http {
 
     public HttpResponse get(String fullUrl) {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpGet request = new HttpGet(fullUrl);
+            HttpGet get = new HttpGet(fullUrl);
+            get.setHeader("Accept", "application/json");
+            get.setHeader("Content-type", "application/json");
 
-            return extractHttpResponse(client.execute(request));
+            return extractHttpResponse(client.execute(get));
         } catch (IOException e) {
             throw new RuntimeException("couldn't get: " + fullUrl, e);
         }
@@ -142,6 +144,9 @@ public class Http {
     public HttpResponse post(String fullUrl, HttpRequestBody requestBody) {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPost post = new HttpPost(fullUrl);
+
+            post.setHeader("Accept", requestBody.type());
+            post.setHeader("Content-type", requestBody.type());
 
             if (requestBody.isBinary()) {
                 throw new UnsupportedOperationException("binary is not supported yet");
