@@ -16,7 +16,7 @@ class HttpExtensions {
         return http.get(url, new HttpQueryParams(queryParams), closureToHttpResponseValidator(validation))
     }
 
-    static def post(Http http, String url, Map requestBody, Closure validation) {
+    static def post(Http http, String url, Map<String, ?> requestBody, Closure validation) {
         return http.post(url, new JsonRequestBody(requestBody), closureToHttpResponseValidator(validation))
     }
 
@@ -27,7 +27,9 @@ class HttpExtensions {
                 def cloned = validation.clone() as Closure
                 cloned.delegate = new ValidatorDelegate(header, body)
                 cloned.resolveStrategy = Closure.DELEGATE_FIRST
-                return cloned()
+                return cloned.maximumNumberOfParameters == 2 ?
+                        cloned.call(header, body):
+                        cloned.call()
             }
         }
     }

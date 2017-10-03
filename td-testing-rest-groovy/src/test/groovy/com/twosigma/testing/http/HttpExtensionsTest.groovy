@@ -1,4 +1,4 @@
-package com.twosigma.testing.http.datanode
+package com.twosigma.testing.http
 
 import com.twosigma.testing.http.testserver.TestServer
 import com.twosigma.testing.http.testserver.TestServerJsonResponse
@@ -78,6 +78,15 @@ class HttpExtensionsTest {
     void "build query params from the map and return a single value from closure"() {
         def a = http.get("params", [a: 1, b: 'text']) {
             return a
+        }
+
+        assert a == 1
+    }
+
+    @Test
+    void "explicitly access header and body "() {
+        def a = http.get("params", [a: 1, b: 'text']) { header, body ->
+            return body.a
         }
 
         assert a == 1
