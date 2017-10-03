@@ -10,7 +10,7 @@ Here is an example of a `CRUD` operations test.
 
 After your test executions a report will be produced
 
-:include-image: rest-report-http-calls.png {fit: true}
+:include-image: img/rest-report-http-calls.png {fit: true}
 
 # Spring Boot
 
