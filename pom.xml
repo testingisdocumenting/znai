@@ -21,6 +21,7 @@
         <module>td-testing-webtau</module>
         <module>td-testing-webtau-groovy</module>
         <module>td-testing-webtau-reactjs</module>
+        <module>td-testing-webtau-testapp</module>
         <module>td-testing-tcli</module>
         <module>td-webtau-docs</module>
         <module>td-ddjt-docs</module>
