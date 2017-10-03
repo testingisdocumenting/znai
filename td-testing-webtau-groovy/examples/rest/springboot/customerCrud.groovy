@@ -1,0 +1,26 @@
+package rest.springboot
+
+import static com.twosigma.testing.webtau.WebTauDsl.http
+import static com.twosigma.testing.webtau.WebTauGroovyDsl.scenario
+
+scenario("CRUD operations for customer") {
+    def customerPayload = [firstName: "FN", lastName: "LN"]
+
+    int id = http.post("/customers", customerPayload) {
+        return id
+    }
+
+    http.get("/customers/${id}") {
+        firstName.should == customerPayload.firstName
+        lastName.should == customerPayload.lastName
+    }
+
+    def changedLastName = "NLN"
+    http.put("/customers/${id}", [*:customerPayload, lastName: changedLastName]) {
+        lastName.should == changedLastName
+    }
+
+    http.get("/customers/${id}") {
+        lastName.should == changedLastName
+    }
+}

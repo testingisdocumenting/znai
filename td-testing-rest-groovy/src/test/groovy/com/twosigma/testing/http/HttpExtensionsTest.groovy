@@ -20,6 +20,7 @@ class HttpExtensionsTest {
         testServer.start(7823)
         testServer.registerGet("/object", new TestServerJsonResponse("{'id': 10, 'price': 100, 'amount': 30, 'list': [1, 2, 3], 'complexList': [{'k1': 'v1', 'k2': 'v2'}, {'k1': 'v11', 'k2': 'v22'}]}"))
         testServer.registerPost("/echo", new TestServerResponseEcho())
+        testServer.registerPut("/echo", new TestServerResponseEcho())
         testServer.registerGet("/params?a=1&b=text", new TestServerJsonResponse("{'a': 1, 'b': 'text'}"))
     }
 
@@ -64,6 +65,15 @@ class HttpExtensionsTest {
 
         assert id == "generated-id"
         assert id.getClass() == String
+    }
+
+    @Test
+    void "can return simple value from put"() {
+        def id = http.put("/echo", [hello: "world", id: "generated-id"]) {
+            return id
+        }
+
+        assert id == "generated-id"
     }
 
     @Test

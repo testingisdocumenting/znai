@@ -24,11 +24,13 @@ public class TestServer implements HttpConfiguration {
     private int port;
     private Map<String, TestServerResponse> getResponses;
     private Map<String, TestServerResponse> postResponses;
+    private Map<String, TestServerResponse> putResponses;
     private Server server;
 
     public TestServer() {
         getResponses = new HashMap<>();
         postResponses = new HashMap<>();
+        putResponses = new HashMap<>();
     }
 
     public void start(int port) {
@@ -63,6 +65,10 @@ public class TestServer implements HttpConfiguration {
         postResponses.put(relativeUrl, response);
     }
 
+    public void registerPut(String relativeUrl, TestServerResponse response) {
+        putResponses.put(relativeUrl, response);
+    }
+
     @Override
     public String fullUrl(final String url) {
         if (HttpUrl.isFull(url)) {
@@ -75,7 +81,7 @@ public class TestServer implements HttpConfiguration {
     private class RequestHandler extends AbstractHandler {
         @Override
         public void handle(final String url, final Request baseRequest, final HttpServletRequest request,
-            final HttpServletResponse response) throws IOException, ServletException {
+                           final HttpServletResponse response) throws IOException, ServletException {
 
             Map<String, TestServerResponse> responses = findResponses(request);
 
@@ -97,15 +103,17 @@ public class TestServer implements HttpConfiguration {
         }
 
         private Map<String, TestServerResponse> findResponses(final HttpServletRequest request) {
-            if (request.getMethod().equals("GET")) {
-                return getResponses;
-            }
+            switch (request.getMethod()) {
+                case "GET":
+                    return getResponses;
+                case "POST":
+                    return postResponses;
+                case "PUT":
+                    return putResponses;
+                default:
+                    return Collections.emptyMap();
 
-            if (request.getMethod().equals("POST")) {
-                return postResponses;
             }
-
-            return  Collections.emptyMap();
         }
     }
 }

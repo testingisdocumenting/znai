@@ -14,9 +14,7 @@ import com.twosigma.testing.reporter.StepReportOptions;
 import com.twosigma.testing.reporter.TestStep;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -72,7 +70,18 @@ public class Http {
     }
 
     public void post(String url, HttpRequestBody requestBody, HttpResponseValidator validator) {
-        executeAndValidateHttpCall("POST", url, fullUrl -> post(fullUrl, requestBody), validator);
+        post(url, requestBody, new HttpResponseValidatorIgnoringReturn(validator));
+    }
+
+    public <E> E put(String url, HttpRequestBody requestBody, HttpResponseValidatorWithReturn validator) {
+        return executeAndValidateHttpCall("PUT", url,
+                fullUrl -> put(fullUrl, requestBody),
+                requestBody,
+                validator);
+    }
+
+    public void put(String url, HttpRequestBody requestBody, HttpResponseValidator validator) {
+        put(url, requestBody, new HttpResponseValidatorIgnoringReturn(validator));
     }
 
     public HttpValidationResult getLastValidationResult() {
@@ -142,11 +151,18 @@ public class Http {
     }
 
     public HttpResponse post(String fullUrl, HttpRequestBody requestBody) {
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpPost post = new HttpPost(fullUrl);
+        return requestWithBody(new HttpPost(fullUrl), requestBody);
+    }
 
-            post.setHeader("Accept", requestBody.type());
-            post.setHeader("Content-type", requestBody.type());
+    public HttpResponse put(String fullUrl, HttpRequestBody requestBody) {
+        return requestWithBody(new HttpPut(fullUrl), requestBody);
+    }
+
+    private HttpResponse requestWithBody(HttpEntityEnclosingRequestBase request,
+                                         HttpRequestBody requestBody) {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            request.setHeader("Accept", requestBody.type());
+            request.setHeader("Content-type", requestBody.type());
 
             if (requestBody.isBinary()) {
                 throw new UnsupportedOperationException("binary is not supported yet");
@@ -155,11 +171,11 @@ public class Http {
             StringEntity entity = new StringEntity(requestBody.asString());
             entity.setContentType(requestBody.type());
 
-            post.setEntity(entity);
+            request.setEntity(entity);
 
-            return extractHttpResponse(client.execute(post));
+            return extractHttpResponse(client.execute(request));
         } catch (IOException e) {
-            throw new RuntimeException("couldn't post: " + fullUrl, e);
+            throw new RuntimeException("couldn't " + request.getMethod() + ": " + request.getURI(), e);
         }
     }
 
