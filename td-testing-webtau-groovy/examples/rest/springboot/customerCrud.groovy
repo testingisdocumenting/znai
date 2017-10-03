@@ -23,4 +23,12 @@ scenario("CRUD operations for customer") {
     http.get("/customers/${id}") {
         lastName.should == changedLastName
     }
+
+    http.delete("/customers/${id}") {
+        statusCode.should == 204
+    }
+
+    http.get("/customers/${id}") {
+        statusCode.should == 404
+    }
 }

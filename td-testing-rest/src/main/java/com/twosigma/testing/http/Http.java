@@ -14,6 +14,7 @@ import com.twosigma.testing.reporter.StepReportOptions;
 import com.twosigma.testing.reporter.TestStep;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -84,6 +85,14 @@ public class Http {
         put(url, requestBody, new HttpResponseValidatorIgnoringReturn(validator));
     }
 
+    public <E> E delete(String url, HttpResponseValidatorWithReturn validator) {
+        return executeAndValidateHttpCall("DELETE", url, this::delete, null, validator);
+    }
+
+    public void delete(String url, HttpResponseValidator validator) {
+        delete(url, new HttpResponseValidatorIgnoringReturn(validator));
+    }
+
     public HttpValidationResult getLastValidationResult() {
         return lastValidationResult.get();
     }
@@ -139,15 +148,11 @@ public class Http {
     }
 
     public HttpResponse get(String fullUrl) {
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpGet get = new HttpGet(fullUrl);
-            get.setHeader("Accept", "application/json");
-            get.setHeader("Content-type", "application/json");
+        return requestWithoutBody(new HttpGet(fullUrl));
+    }
 
-            return extractHttpResponse(client.execute(get));
-        } catch (IOException e) {
-            throw new RuntimeException("couldn't get: " + fullUrl, e);
-        }
+    public HttpResponse delete(String fullUrl) {
+        return requestWithoutBody(new HttpDelete(fullUrl));
     }
 
     public HttpResponse post(String fullUrl, HttpRequestBody requestBody) {
@@ -156,6 +161,16 @@ public class Http {
 
     public HttpResponse put(String fullUrl, HttpRequestBody requestBody) {
         return requestWithBody(new HttpPut(fullUrl), requestBody);
+    }
+
+    private HttpResponse requestWithoutBody(HttpRequestBase request) {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            request.setHeader("Accept", "application/json");
+
+            return extractHttpResponse(client.execute(request));
+        } catch (IOException e) {
+            throw new RuntimeException("couldn't " + request.getMethod() + ": " + request.getURI(), e);
+        }
     }
 
     private HttpResponse requestWithBody(HttpEntityEnclosingRequestBase request,
@@ -183,11 +198,12 @@ public class Http {
         throws IOException {
         HttpResponse httpResponse = new HttpResponse();
 
-        InputStream content = response.getEntity().getContent();
-        httpResponse.setContent(content != null ? IOUtils.toString(content, UTF_8) : "");
+        HttpEntity httpEntity = response.getEntity();
+        httpResponse.setContent(httpEntity != null && httpEntity.getContent() != null ?
+                IOUtils.toString(httpEntity.getContent(), UTF_8) : "");
 
-        Header contentType = response.getEntity().getContentType();
-        httpResponse.setContentType(contentType != null ? contentType.getValue() : "");
+        httpResponse.setContentType(httpEntity != null && httpEntity.getContentType() != null ?
+                httpEntity.getContentType().getValue() : "");
 
         httpResponse.setStatusCode(response.getStatusLine().getStatusCode());
 

@@ -3,6 +3,7 @@ package com.twosigma.testing.http
 import com.twosigma.testing.http.testserver.TestServer
 import com.twosigma.testing.http.testserver.TestServerJsonResponse
 import com.twosigma.testing.http.testserver.TestServerResponseEcho
+import com.twosigma.testing.http.testserver.TestServerTextResponse
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
@@ -21,6 +22,7 @@ class HttpExtensionsTest {
         testServer.registerGet("/object", new TestServerJsonResponse("{'id': 10, 'price': 100, 'amount': 30, 'list': [1, 2, 3], 'complexList': [{'k1': 'v1', 'k2': 'v2'}, {'k1': 'v11', 'k2': 'v22'}]}"))
         testServer.registerPost("/echo", new TestServerResponseEcho())
         testServer.registerPut("/echo", new TestServerResponseEcho())
+        testServer.registerDelete("/resource", new TestServerTextResponse(''))
         testServer.registerGet("/params?a=1&b=text", new TestServerJsonResponse("{'a': 1, 'b': 'text'}"))
     }
 
@@ -74,6 +76,15 @@ class HttpExtensionsTest {
         }
 
         assert id == "generated-id"
+    }
+
+    @Test
+    void "can send delete and return status code"() {
+        int statusCode = http.delete("/resource") {
+            return statusCode
+        }
+
+        assert statusCode == 200
     }
 
     @Test

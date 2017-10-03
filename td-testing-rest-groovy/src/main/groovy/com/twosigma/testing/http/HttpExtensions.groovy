@@ -24,6 +24,10 @@ class HttpExtensions {
         return http.put(url, new JsonRequestBody(requestBody), closureToHttpResponseValidator(validation))
     }
 
+    static def delete(Http http, String url, Closure validation) {
+        return http.delete(url, closureToHttpResponseValidator(validation))
+    }
+
     private static HttpResponseValidatorWithReturn closureToHttpResponseValidator(validation) {
         return new HttpResponseValidatorWithReturn() {
             @Override
@@ -48,12 +52,15 @@ class HttpExtensions {
         }
 
         def getProperty(String name) {
-            if (name == "header") {
-                return new GroovyDataNode(header)
-            } else if (name == "body") {
-                return new GroovyDataNode(body)
-            } else {
-                return new GroovyDataNode(body).get(name)
+            switch (name) {
+                case "header":
+                    return new GroovyDataNode(header)
+                case "body":
+                    return new GroovyDataNode(body)
+                case "statusCode":
+                    return new GroovyDataNode(header).get("statusCode")
+                default:
+                    return new GroovyDataNode(body).get(name)
             }
         }
     }

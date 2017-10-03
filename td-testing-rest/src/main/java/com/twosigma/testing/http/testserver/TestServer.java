@@ -25,12 +25,14 @@ public class TestServer implements HttpConfiguration {
     private Map<String, TestServerResponse> getResponses;
     private Map<String, TestServerResponse> postResponses;
     private Map<String, TestServerResponse> putResponses;
+    private Map<String, TestServerResponse> deleteResponses;
     private Server server;
 
     public TestServer() {
         getResponses = new HashMap<>();
         postResponses = new HashMap<>();
         putResponses = new HashMap<>();
+        deleteResponses = new HashMap<>();
     }
 
     public void start(int port) {
@@ -67,6 +69,10 @@ public class TestServer implements HttpConfiguration {
 
     public void registerPut(String relativeUrl, TestServerResponse response) {
         putResponses.put(relativeUrl, response);
+    }
+
+    public void registerDelete(String relativeUrl, TestServerResponse response) {
+        deleteResponses.put(relativeUrl, response);
     }
 
     @Override
@@ -110,6 +116,8 @@ public class TestServer implements HttpConfiguration {
                     return postResponses;
                 case "PUT":
                     return putResponses;
+                case "DELETE":
+                    return deleteResponses;
                 default:
                     return Collections.emptyMap();
 
