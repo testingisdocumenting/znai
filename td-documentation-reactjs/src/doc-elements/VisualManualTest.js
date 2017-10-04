@@ -4,7 +4,7 @@ import React from 'react'
 // import Demo from './default-elements/ParagraphDemo'
 // import Demo from './svg/SvgDemo'
 // import Demo from './presentation/PresentationDemo'
-// import Demo from './DocumentationDemo'
+import Demo from './DocumentationDemo'
 // import Demo from './charts/ChartDemo'
 // import Demo from './bullets/IconsAsBulletsDemo'
 // import Demo from './bullets/BulletListDemo'
@@ -21,7 +21,7 @@ import React from 'react'
 
 // import Demo from './json/JsonDemo'
 
-import Demo from './test-results/WebTauRestDemo'
+// import Demo from './test-results/WebTauRestDemo'
 
 
 import {setDocMeta} from './docMeta'

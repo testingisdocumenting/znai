@@ -14,9 +14,13 @@ import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.parser.sphinx.SphinxDocTreeParser;
 import com.twosigma.documentation.structure.Page;
 import com.twosigma.documentation.search.LunrIndexer;
 import com.twosigma.documentation.structure.*;
+import com.twosigma.documentation.website.markups.MarkdownParsingConfiguration;
+import com.twosigma.documentation.website.markups.MarkupParsingConfiguration;
+import com.twosigma.documentation.website.markups.SphinxParsingConfiguration;
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
 
@@ -28,6 +32,8 @@ import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import static com.twosigma.documentation.parser.MarkupTypes.MARKDOWN;
+import static com.twosigma.documentation.parser.MarkupTypes.SPHINX;
 import static com.twosigma.utils.FileUtils.fileTextContent;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -62,6 +68,8 @@ public class WebSite implements DocStructure {
     private final WebResource tocJavaScript;
     private final WebSiteExtensions webSiteExtensions;
 
+    private final MarkupParsingConfiguration markupParsingConfiguration;
+
     private AuxiliaryFileListener auxiliaryFileListener;
 
     private WebSite(Configuration cfg) {
@@ -78,6 +86,7 @@ public class WebSite implements DocStructure {
         this.resourceResolver = new MultipleLocationsResourceResolver(cfg.docRootPath, findLookupLocations(cfg));
         this.webSiteExtensions = initWebSiteExtensions(cfg);
         this.tocItemsByAuxiliaryFilePath = new HashMap<>();
+        this.markupParsingConfiguration = createMarkupParsingConfiguration();
         this.auxiliaryFiles = new HashMap<>();
 
         docMeta.setId(cfg.id);
@@ -141,7 +150,9 @@ public class WebSite implements DocStructure {
     public TocItem tocItemByPath(Path path) {
         return toc.getTocItems().stream().filter(ti ->
                 path.toAbsolutePath().getParent().getFileName().toString().equals(ti.getDirName()) &&
-                        path.getFileName().toString().equals(ti.getFileNameWithoutExtension() + ".md")).findFirst().orElse(null);
+                        path.getFileName().toString().equals(
+                                ti.getFileNameWithoutExtension() + "." + markupParsingConfiguration.filesExtension()))
+                .findFirst().orElse(null);
     }
 
     public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
@@ -210,6 +221,15 @@ public class WebSite implements DocStructure {
         deployAuxiliaryFile(auxiliaryFile);
     }
 
+    private MarkupParsingConfiguration createMarkupParsingConfiguration() {
+        switch (cfg.markupType) {
+            case SPHINX:
+                return new SphinxParsingConfiguration();
+            default:
+                return new MarkdownParsingConfiguration();
+        }
+    }
+
     private WebSiteExtensions initWebSiteExtensions(Configuration cfg) {
         if (cfg.extensionsDefPath == null || ! Files.exists(cfg.extensionsDefPath)) {
             return new WebSiteExtensions(resourceResolver, Collections.emptyMap());
@@ -229,7 +249,7 @@ public class WebSite implements DocStructure {
 
     private void reset() {
         pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, webSiteExtensions, reactJsNashornEngine);
-        markupParser = new MarkdownParser(componentsRegistry);
+        markupParser = markupParsingConfiguration.createMarkupParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
         allPagesProps = new ArrayList<>();
         extraJavaScripts = new ArrayList<>(registeredExtraJavaScripts);
@@ -247,8 +267,7 @@ public class WebSite implements DocStructure {
 
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
-        toc = new PlainTextTocGenerator().generate(fileTextContent(cfg.tocPath));
-        toc.addIndex();
+        toc = markupParsingConfiguration.createToc(cfg.tocPath);
     }
 
     /**
@@ -327,12 +346,11 @@ public class WebSite implements DocStructure {
     }
 
     private Path markupPath(final TocItem tocItem) {
-        return cfg.tocPath.toAbsolutePath().getParent().resolve(
-                tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + ".md"); // TODO extension auto figure out
+        return markupParsingConfiguration.fullPath(cfg.docRootPath, tocItem);
     }
 
-    private void resetPlugins(final Path markdownPath) {
-        final IncludeContext context = new IncludeContext(markdownPath);
+    private void resetPlugins(final Path markupPath) {
+        final IncludeContext context = new IncludeContext(markupPath);
         Plugins.reset(context);
     }
 
@@ -472,7 +490,12 @@ public class WebSite implements DocStructure {
     }
 
     private Stream<Path> readLocationsFromFile(String filesLookupFilePath) {
-        String fileContent = FileUtils.fileTextContent(cfg.docRootPath.resolve(filesLookupFilePath));
+        Path lookupFilePath = cfg.docRootPath.resolve(filesLookupFilePath);
+        if (! Files.exists(lookupFilePath)) {
+            return Stream.empty();
+        }
+
+        String fileContent = FileUtils.fileTextContent(lookupFilePath);
         return Arrays.stream(fileContent.split("[;\n]"))
                 .map(String::trim)
                 .filter(e -> !e.isEmpty())
@@ -500,12 +523,18 @@ public class WebSite implements DocStructure {
         private String type;
         private String fileWithLookupPaths;
         private String logoRelativePath;
-        public List<WebResource> registeredExtraJavaScripts;
+        private List<WebResource> registeredExtraJavaScripts;
         private boolean isPreviewEnabled;
+        private String markupType = MARKDOWN;
 
         private Configuration() {
             webResources = new ArrayList<>();
             registeredExtraJavaScripts = new ArrayList<>();
+        }
+
+        public Configuration withMarkupType(String markupType) {
+            this.markupType = markupType;
+            return this;
         }
 
         public Configuration withTocPath(Path path) {

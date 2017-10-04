@@ -3,6 +3,7 @@ package com.twosigma.documentation.cli;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.client.DeployTempDir;
+import com.twosigma.documentation.parser.MarkupTypes;
 import org.apache.commons.cli.*;
 
 import java.nio.file.Path;
@@ -14,6 +15,7 @@ import java.util.stream.Stream;
  */
 public class DocumentationCliConfig {
     private String docId;
+    private String markupType;
     private String host;
     private Path deployRoot;
     private Path sourceRoot;
@@ -45,6 +47,8 @@ public class DocumentationCliConfig {
 
         docId = commandLine.hasOption("doc-id") ? commandLine.getOptionValue("doc-id") : "no-id-specified";
         host = commandLine.hasOption("host") ? commandLine.getOptionValue("host") : "localhost";
+
+        markupType = commandLine.hasOption("markup-type") ? commandLine.getOptionValue("markup-type") : MarkupTypes.MARKDOWN;
 
         sourceRoot = Paths.get(commandLine.hasOption("source") ? commandLine.getOptionValue("source") : "")
                 .toAbsolutePath();
@@ -102,6 +106,10 @@ public class DocumentationCliConfig {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getMarkupType() {
+        return markupType;
     }
 
     public Path getSourceRoot() {
@@ -162,6 +170,7 @@ public class DocumentationCliConfig {
         options.addOption(null, "help", false, "print help");
         options.addOption(null, "port", true, "server port");
         options.addOption(null, "host", true, "server host");
+        options.addOption(null, "markup-type", true, "markup type");
         options.addOption(null, "source", true, "documentation source dir");
         options.addOption(null, "deploy", true, "documentation deploy root dir");
         options.addOption(null, "preview", false, "preview mode");

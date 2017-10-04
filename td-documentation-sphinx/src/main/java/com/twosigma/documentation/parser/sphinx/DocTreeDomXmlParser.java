@@ -34,6 +34,9 @@ class DocTreeDomXmlParser {
 
     private void parseNode(Node node) {
         switch (node.getNodeName()) {
+            case "document":
+                parseNodeList(node.getChildNodes());
+                break;
             case "section":
                 parserHandler.onSectionStart(extractTitle(node));
                 parseNodeList(node.getChildNodes());

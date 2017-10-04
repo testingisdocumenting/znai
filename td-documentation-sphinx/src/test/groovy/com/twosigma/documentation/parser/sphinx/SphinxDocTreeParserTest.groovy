@@ -17,10 +17,12 @@ class SphinxDocTreeParserTest {
     @Test
     void "section"() {
         parse("""
+<document source="path">
     <section ids="indices-and-tables" names="indices\\ and\\ tables">
         <title>Indices and tables</title>
         <paragraph>Hello World for real</paragraph>
     </section>
+</document>
 """)
 
         content.should == [[title: 'Indices and tables', id: 'indices-and-tables', type: 'Section',

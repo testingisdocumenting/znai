@@ -3,6 +3,7 @@ package com.twosigma.documentation.cli;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
+import com.twosigma.documentation.parser.MarkupTypes;
 import com.twosigma.documentation.website.WebSite;
 import com.twosigma.documentation.client.DocumentationUploadClient;
 import com.twosigma.documentation.html.WebResource;
@@ -82,14 +83,24 @@ public class DocumentationCliApp {
     }
 
     private void generateDocs() {
-        webSite = WebSite.withToc(config.getSourceRoot().resolve("toc")).
+        webSite = WebSite.withToc(getTocPath()).
                 withId(getDocId()).
+                withMarkupType(config.getMarkupType()).
                 withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).
                 withFileWithLookupPaths("lookup-paths").
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
                 withWebResources(WebResource.fromResource("static/twosigma-logo-and-label.png")).
                 withEnabledPreview(config.isPreview()).deployTo(deployPath);
+    }
+
+    private Path getTocPath() {
+        switch (config.getMarkupType()) {
+            case MarkupTypes.SPHINX:
+                return config.getSourceRoot().resolve("index.xml");
+            default:
+                return config.getSourceRoot().resolve("toc");
+        }
     }
 
     private void createNew() {
