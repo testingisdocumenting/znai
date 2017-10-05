@@ -2,9 +2,6 @@ package com.twosigma.testing.http;
 
 import com.google.gson.*;
 import com.twosigma.testing.data.traceable.TraceableValue;
-import com.twosigma.testing.expectation.ExpectationHandler;
-import com.twosigma.testing.expectation.ExpectationHandler.Flow;
-import com.twosigma.testing.expectation.ExpectationHandlers;
 import com.twosigma.testing.http.config.HttpConfigurations;
 import com.twosigma.testing.http.datanode.DataNode;
 import com.twosigma.testing.http.datanode.DataNodeBuilder;
@@ -12,21 +9,18 @@ import com.twosigma.testing.http.datanode.DataNodeId;
 import com.twosigma.testing.http.datanode.StructuredDataNode;
 import com.twosigma.testing.reporter.StepReportOptions;
 import com.twosigma.testing.reporter.TestStep;
+import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.*;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.action;
 import static com.twosigma.testing.reporter.IntegrationTestsMessageBuilder.urlValue;
@@ -148,64 +142,63 @@ public class Http {
     }
 
     public HttpResponse get(String fullUrl) {
-        return requestWithoutBody(new HttpGet(fullUrl));
+        return requestWithoutBody("GET", fullUrl);
     }
 
     public HttpResponse delete(String fullUrl) {
-        return requestWithoutBody(new HttpDelete(fullUrl));
+        return requestWithoutBody("DELETE", fullUrl);
     }
 
     public HttpResponse post(String fullUrl, HttpRequestBody requestBody) {
-        return requestWithBody(new HttpPost(fullUrl), requestBody);
+        return requestWithBody("POST", fullUrl, requestBody);
     }
 
     public HttpResponse put(String fullUrl, HttpRequestBody requestBody) {
-        return requestWithBody(new HttpPut(fullUrl), requestBody);
+        return requestWithBody("PUT", fullUrl, requestBody);
     }
 
-    private HttpResponse requestWithoutBody(HttpRequestBase request) {
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-            request.setHeader("Accept", "application/json");
+    private HttpResponse requestWithoutBody(String method, String fullUrl) {
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(fullUrl).openConnection();
+            connection.setRequestMethod(method);
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.connect();
 
-            return extractHttpResponse(client.execute(request));
+            return extractHttpResponse(connection);
         } catch (IOException e) {
-            throw new RuntimeException("couldn't " + request.getMethod() + ": " + request.getURI(), e);
+            throw new RuntimeException("couldn't " + method + ": " + fullUrl, e);
         }
     }
 
-    private HttpResponse requestWithBody(HttpEntityEnclosingRequestBase request,
+    private HttpResponse requestWithBody(String method, String fullUrl,
                                          HttpRequestBody requestBody) {
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-            request.setHeader("Accept", requestBody.type());
-            request.setHeader("Content-type", requestBody.type());
+        if (requestBody.isBinary()) {
+            throw new UnsupportedOperationException("binary is not supported yet");
+        }
 
-            if (requestBody.isBinary()) {
-                throw new UnsupportedOperationException("binary is not supported yet");
-            }
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(fullUrl).openConnection();
+            connection.setRequestMethod(method);
+            connection.setRequestProperty("Content-Type", requestBody.type());
+            connection.setRequestProperty("Accept", requestBody.type());
+            connection.setDoOutput(true);
 
-            StringEntity entity = new StringEntity(requestBody.asString());
-            entity.setContentType(requestBody.type());
+            IOUtils.write(requestBody.asString(), connection.getOutputStream(), UTF_8);
 
-            request.setEntity(entity);
-
-            return extractHttpResponse(client.execute(request));
+            return extractHttpResponse(connection);
         } catch (IOException e) {
-            throw new RuntimeException("couldn't " + request.getMethod() + ": " + request.getURI(), e);
+            throw new RuntimeException("couldn't " + method + ": " + fullUrl, e);
         }
     }
 
-    private HttpResponse extractHttpResponse(CloseableHttpResponse response)
-        throws IOException {
+    private HttpResponse extractHttpResponse(HttpURLConnection connection) throws IOException {
         HttpResponse httpResponse = new HttpResponse();
 
-        HttpEntity httpEntity = response.getEntity();
-        httpResponse.setContent(httpEntity != null && httpEntity.getContent() != null ?
-                IOUtils.toString(httpEntity.getContent(), UTF_8) : "");
-
-        httpResponse.setContentType(httpEntity != null && httpEntity.getContentType() != null ?
-                httpEntity.getContentType().getValue() : "");
-
-        httpResponse.setStatusCode(response.getStatusLine().getStatusCode());
+        InputStream inputStream = connection.getResponseCode() < 400 ? connection.getInputStream() : connection.getErrorStream();
+        httpResponse.setStatusCode(connection.getResponseCode());
+        httpResponse.setContent(inputStream != null ? IOUtils.toString(inputStream, StandardCharsets.UTF_8) : "");
+        httpResponse.setContentType(connection.getContentType() != null ? connection.getContentType() : "");
 
         return httpResponse;
     }
