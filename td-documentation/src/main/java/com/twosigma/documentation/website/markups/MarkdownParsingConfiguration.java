@@ -35,6 +35,6 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
 
     @Override
     public Path fullPath(Path root, TocItem tocItem) {
-        return root.resolve(tocItem.getFileNameWithoutExtension() + "." + filesExtension());
+        return root.resolve(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + "." + filesExtension());
     }
 }
