@@ -29,6 +29,17 @@ class SphinxDocTreeParserTest {
                             content:[[type: 'Paragraph', content: [[text: 'Hello World for real', type: 'SimpleText']]]]]]
     }
 
+    @Test
+    void "snippet"() {
+        parse("""<literal_block highlight_args="{}" language="java" 
+linenos="False" xml:space="preserve">System.out.println("hello world");</literal_block>""")
+
+        content.should == [[lang: 'java', maxLineLength: 34,
+                            tokens: [[type: 'text',
+                                      content: 'System.out.println("hello world");']],
+                            lineNumber: '', type: 'Snippet']]
+    }
+
     private void parse(String xml) {
         def parseResult = parser.parse(Paths.get("test.xml"), xml)
         content = parseResult.docElement.getContent().collect { it.toMap() }

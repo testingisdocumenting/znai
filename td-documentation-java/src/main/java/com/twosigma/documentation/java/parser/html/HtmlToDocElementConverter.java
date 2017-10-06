@@ -120,7 +120,7 @@ public class HtmlToDocElementConverter {
                 parserHandler.onInlinedCode(text);
             } else if (isInsideBlockCode) {
                 closeParagraph();
-                parserHandler.onSnippet(new PluginParams(""),"", "", text);
+                parserHandler.onSnippet(PluginParams.EMPTY,"", "", text);
             } else {
                 parserHandler.onSimpleText(text);
             }

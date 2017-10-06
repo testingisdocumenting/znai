@@ -139,7 +139,7 @@ public class DocElementVisitor extends AbstractVisitor {
 
     @Override
     public void visit(final IndentedCodeBlock indentedCodeBlock) {
-        parserHandler.onSnippet(new PluginParams(""),"", "", indentedCodeBlock.getLiteral());
+        parserHandler.onSnippet(PluginParams.EMPTY,"", "", indentedCodeBlock.getLiteral());
     }
 
     @Override

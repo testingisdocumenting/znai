@@ -13,6 +13,8 @@ public class PluginParams {
     private String freeParam;
     private PluginParamsOpts opts;
 
+    public static final PluginParams EMPTY = new PluginParams("");
+
     public PluginParams(String pluginId) {
         this.pluginId = pluginId;
         this.opts = new PluginParamsOpts(Collections.emptyMap());

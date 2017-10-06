@@ -1,5 +1,6 @@
 package com.twosigma.documentation.parser.sphinx;
 
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.parser.ParserHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -47,6 +48,10 @@ class DocTreeDomXmlParser {
                 parseNodeList(node.getChildNodes());
                 parserHandler.onParagraphEnd();
                 break;
+            case "literal_block":
+                parserHandler.onSnippet(PluginParams.EMPTY, getAttributeText(node, "language"),
+                        "", node.getTextContent());
+                break;
             case "title":
                 break;
             case "#text":
@@ -55,6 +60,10 @@ class DocTreeDomXmlParser {
                 }
                 break;
         }
+    }
+
+    private String getAttributeText(Node node, String name) {
+        return node.getAttributes().getNamedItem(name).getTextContent();
     }
 
     private String extractTitle(Node node) {
