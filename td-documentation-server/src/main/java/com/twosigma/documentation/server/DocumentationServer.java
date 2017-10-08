@@ -9,6 +9,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
+import io.vertx.ext.web.impl.RoutingContextDecorator;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,7 +34,14 @@ public class DocumentationServer {
         StaticHandler staticCommonResources =
                 StaticHandler.create("static").setMaxAgeSeconds(600);
 
-        router.get("/*/static/*").handler(staticCommonResources);
+        // delegate each documentation static resources to a central copy
+        // to make existing docs served centrally upgrade all at once
+        router.get("/:docId/static/*").handler(ctx -> {
+            MultiMap params = ctx.request().params();
+
+            staticCommonResources.handle(new RoutingContextDecorator(
+                    router.route("/" + params.get("docId") + "/static"), ctx));
+        });
 
         router.route("/upload/:docId").handler(ctx -> {
             MultiMap params = ctx.request().params();
