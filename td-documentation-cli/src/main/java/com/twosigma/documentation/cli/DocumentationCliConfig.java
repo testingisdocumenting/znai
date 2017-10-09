@@ -39,7 +39,7 @@ public class DocumentationCliConfig {
             System.exit(1);
         }
 
-        port = commandLine.hasOption("port") ? Integer.valueOf( commandLine.getOptionValue("port")) : 8080;
+        port = commandLine.hasOption("port") ? Integer.valueOf( commandLine.getOptionValue("port")) : 3333;
         isPreview = commandLine.hasOption("preview");
         isUpload = commandLine.hasOption("upload");
         isServe = commandLine.hasOption("serve");
