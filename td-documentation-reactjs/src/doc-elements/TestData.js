@@ -59,7 +59,11 @@ const TestData = {
             "id": "preview",
             "type": "User Guide",
             "title": "MDoc",
-            "previewEnabled": true
+            "previewEnabled": true,
+            viewOn: {
+                link: 'https://github.com/twosigma/TestingIsDocumenting/blob/master/td-documentation-cli/documentation',
+                title: 'View On GitHub'
+            }
         },
         "page": {
             "type": "Page",

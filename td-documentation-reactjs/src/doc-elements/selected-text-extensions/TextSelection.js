@@ -31,8 +31,6 @@ class TextSelection {
     }
 
     clear() {
-        console.log("clear")
-
         this.selectionSectionInfo = {}
         this.listeners.forEach(l => l({
             sectionTitle: null,

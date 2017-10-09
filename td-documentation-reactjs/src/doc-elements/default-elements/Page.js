@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import {getViewOn} from '../docMeta'
+
 import './Page.css'
 
 class Page extends Component {
@@ -12,15 +14,20 @@ class Page extends Component {
                 <span key="button" className="presentation-button glyphicon glyphicon-resize-full"
                       onClick={onPresentationOpen}/> : null] : []
 
-        return (<div className="page-content">
-            <div className="page-title-block content-block">
-                {title}
-            </div>
-            { this.renderModifiedTime() }
+        return (
+            <div className="page-content">
+                <div className="page-title-block content-block">
+                    {title}
+                </div>
+                <div className="page-meta-block content-block">
+                    { this.renderModifiedTime() }
+                    { this.renderViewOn() }
+                </div>
 
-            <elementsLibrary.DocElement key={tocItem.pageTitle}
-                                        {...this.props}/>
-        </div>)
+                <elementsLibrary.DocElement key={tocItem.pageTitle}
+                                            {...this.props}/>
+            </div>
+        )
     }
 
     renderModifiedTime() {
@@ -32,10 +39,28 @@ class Page extends Component {
 
         const modifiedTimeAsStr = new Date(lastModifiedTime).toDateString()
         return (
-            <div className="last-update-time content-block">
+            <div className="last-update-time">
                 {modifiedTimeAsStr}
             </div>
         )
+    }
+
+    renderViewOn() {
+        const viewOn = getViewOn()
+        if (!viewOn || !viewOn.link || !viewOn.title) {
+            return null
+        }
+
+        return (
+            <div className="view-on">
+                <a href={this.buildViewOnLink(viewOn.link)} target="_bank">{viewOn.title}</a>
+            </div>
+        )
+    }
+
+    buildViewOnLink(link) {
+        const {tocItem} = this.props
+        return `${link}/${tocItem.dirName}/${tocItem.fileName}.md`
     }
 
     shouldComponentUpdate(nextProps, nextState) {

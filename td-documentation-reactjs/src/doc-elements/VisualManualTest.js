@@ -27,11 +27,15 @@ import Demo from './DocumentationDemo'
 import {setDocMeta} from './docMeta'
 
 const docMeta = {
-    'id': 'preview',
-    'type': 'User Guide',
-    'title': 'MDoc',
-    'previewEnabled': true,
-    'hipchatRoom': 'Test Room'
+    id: 'preview',
+    type: 'User Guide',
+    title: 'MDoc',
+    previewEnabled: true,
+    hipchatRoom: 'Test Room',
+    viewOn: {
+        link: 'https://github.com/twosigma/TestingIsDocumenting/td-documentation-cli/documentation',
+        title: 'View On GitHub'
+    }
 }
 
 setDocMeta(docMeta)

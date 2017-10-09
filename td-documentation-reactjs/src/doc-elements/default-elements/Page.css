@@ -5,12 +5,22 @@
     align-items: center;
 }
 
+.page-content .page-meta-block {
+    display: flex;
+    color: #888;
+    font-size: 12px;
+}
+
+.page-content .view-on a {
+    margin-left: 20px;
+    color: #888
+}
+
 .page-content .page-title {
-    font-size: 32px;
+    font-size: 36px;
 }
 
 .page-content .last-update-time {
-    font-size: 12px;
     color: #888;
 }
 

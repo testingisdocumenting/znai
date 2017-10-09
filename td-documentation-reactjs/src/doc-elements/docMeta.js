@@ -4,7 +4,7 @@ import {selectedTextExtensions} from './selected-text-extensions/SelectedTextExt
 let docMeta = {}
 
 function setDocMeta(newDocMeta) {
-    docMeta = newDocMeta
+    docMeta = {...newDocMeta}
     documentationNavigation.documentationId = docMeta.id // TODO revisit dependency
 
     registerExtensions()
@@ -24,4 +24,8 @@ function getDocId() {
     return docMeta.id
 }
 
-export {setDocMeta, isPreviewEnabled, getDocId}
+function getViewOn() {
+    return docMeta.viewOn
+}
+
+export {setDocMeta, isPreviewEnabled, getDocId, getViewOn}

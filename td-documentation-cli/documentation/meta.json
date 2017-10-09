@@ -1,4 +1,8 @@
 {
   "title": "MDoc",
-  "type": "User Guide"
+  "type": "User Guide",
+  "viewOn": {
+    "link": "https://github.com/twosigma/TestingIsDocumenting/blob/master/td-documentation-cli/documentation",
+    "title": "View On GitHub"
+  }
 }
