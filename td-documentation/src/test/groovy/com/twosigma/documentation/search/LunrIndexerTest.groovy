@@ -10,6 +10,7 @@ import org.junit.Ignore
 import org.junit.Test
 
 import java.nio.file.Paths
+import java.nio.file.attribute.FileTime
 
 /**
  * @author mykola
@@ -25,7 +26,7 @@ class LunrIndexerTest {
         def markupParser = new MarkdownParser(new TestComponentsRegistry())
         def page = new Page(markupParser.parse(Paths.get(""), """# section 1
 hello world
-""").docElement)
+""").docElement, FileTime.fromMillis(System.currentTimeMillis()))
 
         def item = new TocItem("dir-name", "file-name")
         item.setPageSectionIdTitles(Collections.emptyList())

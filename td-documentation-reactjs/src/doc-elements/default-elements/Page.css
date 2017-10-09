@@ -1,0 +1,41 @@
+.page-content .page-title-block {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-content .page-title {
+    font-size: 32px;
+}
+
+.page-content .last-update-time {
+    font-size: 12px;
+    color: #888;
+}
+
+.page-content .section-title {
+    font-size: 22px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.page-content h2 {
+    font-size: 21px;
+    color: #000;
+
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.page-content h3 {
+    font-size: 18px;
+    color: #000;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+

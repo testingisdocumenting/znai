@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.FileTime;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -315,7 +316,8 @@ public class WebSite implements DocStructure {
             MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
             updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
 
-            final Page page = new Page(parserResult.getDocElement());
+            FileTime lastModifiedTime = Files.getLastModifiedTime(markupPath);
+            final Page page = new Page(parserResult.getDocElement(), lastModifiedTime);
             pageByTocItem.put(tocItem, page);
 
             tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());

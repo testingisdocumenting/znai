@@ -99,5 +99,5 @@
       "react-app"
     ]
   },
-  "proxy": "ws://localhost:8080"
+  "proxy": "ws://localhost:3333"
 }

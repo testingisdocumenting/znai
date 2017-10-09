@@ -33,6 +33,7 @@ class Documentation extends Component {
         super(props)
 
         const {page, docMeta} = this.props
+
         setDocMeta(docMeta)
         this.searchPromise = getSearchPromise(docMeta)
 
@@ -111,8 +112,7 @@ class Documentation extends Component {
                                                           onSearchSelection={this.onSearchSelection}
                                                           onClose={this.onSearchClose}/> : null
 
-        const renderedPage = <elementsLibrary.Page tocItem={page.tocItem}
-                                                   content={page.content}
+        const renderedPage = <elementsLibrary.Page {...page}
                                                    onPresentationOpen={this.onPresentationOpen}
                                                    previewEnabled={docMeta.previewEnabled}
                                                    elementsLibrary={elementsLibrary}/>
@@ -203,8 +203,6 @@ class Documentation extends Component {
         }
 
         const selection = window.getSelection()
-        const a = selection.getRangeAt(0)
-        console.log("a", a)
         const rangeAt = selection.getRangeAt(0)
         const text = selection.toString()
 

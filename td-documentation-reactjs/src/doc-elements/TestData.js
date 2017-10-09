@@ -65,15 +65,157 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Complex Domain",
-                    "id": "complex-domain",
+                    "title": "Follow the Order",
+                    "id": "follow-the-order",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Not every UI can be as simple as one input box.",
+                                    "text": "Most of the documentation should have a natural order to follow.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Links to navigate to a next page are at the end of each page.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Crate links to remind an ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "Emphasis",
+                                    "content": [
+                                        {
+                                            "text": "essential",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "text": " concept introduce previously. There is a chance that a person skipped over it or forgot.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Avoid: links that navigate users forward. It breaks the flow of a documentation.",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Links",
+                    "id": "links",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "To create an ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "external",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " link use",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "lang": "markdown",
+                            "maxLineLength": 39,
+                            "tokens": [
+                                {
+                                    "type": "url",
+                                    "content": [
+                                        "[Link Title](http://external/reference)"
+                                    ]
+                                },
+                                "\n"
+                            ],
+                            "lineNumber": "",
+                            "type": "Snippet"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "To refer ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "internal",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " page within your documentation use",
+                                    "type": "SimpleText"
+                                }
+                            ]
+                        },
+                        {
+                            "lang": "markdown",
+                            "maxLineLength": 60,
+                            "tokens": [
+                                {
+                                    "type": "url",
+                                    "content": [
+                                        "[internal link](dir-name/file-name#optional-page-section-id)"
+                                    ]
+                                },
+                                "\n"
+                            ],
+                            "lineNumber": "",
+                            "type": "Snippet"
+                        },
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Note: you can get ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "page-section-id",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " by selecting that section using ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "TOC",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " and checking the browser ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "url",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": ".",
                                     "type": "SimpleText"
                                 }
                             ]
@@ -81,28 +223,20 @@ const TestData = {
                     ]
                 }
             ],
-
+            "lastModifiedTime": 1497576734000,
             "tocItem": {
-                "sectionTitle": "Features",
-                "pageTitle": "Image Annotations",
-                "fileName": "image-annotations",
-                "dirName": "features",
+                "sectionTitle": "Flow",
+                "pageTitle": "Page References",
+                "fileName": "page-references",
+                "dirName": "flow",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Complex Domain",
-                        "id": "complex-domain"
+                        "title": "Follow the Order",
+                        "id": "follow-the-order"
                     },
                     {
-                        "title": "Annotated Images",
-                        "id": "annotated-images"
-                    },
-                    {
-                        "title": "Editing Annotations",
-                        "id": "editing-annotations"
-                    },
-                    {
-                        "title": "Presentation Mode",
-                        "id": "presentation-mode"
+                        "title": "Links",
+                        "id": "links"
                     }
                 ]
             }
@@ -111,11 +245,86 @@ const TestData = {
             "type": "Footer",
             "content": [
                 {
+                    "columns": [
+                        {
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "code": "mdoc",
+                                            "type": "InlinedCode"
+                                        },
+                                        {
+                                            "text": " is in private beta. if you see any issues, please create jira ticket ",
+                                            "type": "SimpleText"
+                                        },
+                                        {
+                                            "url": "https://jira/mdoc",
+                                            "type": "Link",
+                                            "content": [
+                                                {
+                                                    "text": "jira/mdoc",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "content": [
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "Currently ",
+                                            "type": "SimpleText"
+                                        },
+                                        {
+                                            "code": "mdoc",
+                                            "type": "InlinedCode"
+                                        },
+                                        {
+                                            "text": " is focusing its effort to provide a streamlined way to document products with UI, REST and command",
+                                            "type": "SimpleText"
+                                        },
+                                        {
+                                            "type": "SoftLineBreak"
+                                        },
+                                        {
+                                            "text": "line interfaces.",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "If you want to sign for the beta, email to PPE-Support@twosimga.com",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "config": {},
+                    "type": "Columns"
+                },
+                {
                     "type": "Paragraph",
                     "content": [
                         {
-                            "text": "Not every UI can be as simple as one input box.",
-                            "type": "SimpleText"
+                            "type": "Emphasis",
+                            "content": [
+                                {
+                                    "text": "Copyright @ 2017 Two Sigma",
+                                    "type": "SimpleText"
+                                }
+                            ]
                         }
                     ]
                 }

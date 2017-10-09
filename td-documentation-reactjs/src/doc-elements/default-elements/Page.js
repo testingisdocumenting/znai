@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import './Page.css'
+
 class Page extends Component {
     render() {
         const {tocItem, onPresentationOpen, elementsLibrary} = this.props
@@ -14,9 +16,26 @@ class Page extends Component {
             <div className="page-title-block content-block">
                 {title}
             </div>
+            { this.renderModifiedTime() }
+
             <elementsLibrary.DocElement key={tocItem.pageTitle}
                                         {...this.props}/>
         </div>)
+    }
+
+    renderModifiedTime() {
+        const {lastModifiedTime} = this.props
+
+        if (!lastModifiedTime) {
+            return null
+        }
+
+        const modifiedTimeAsStr = new Date(lastModifiedTime).toDateString()
+        return (
+            <div className="last-update-time content-block">
+                {modifiedTimeAsStr}
+            </div>
+        )
     }
 
     shouldComponentUpdate(nextProps, nextState) {

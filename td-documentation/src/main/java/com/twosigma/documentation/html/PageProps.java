@@ -30,6 +30,7 @@ public class PageProps {
 
         pageProps.put("type", "Page");
         pageProps.put("content", ((Map<String, ?>) page.getDocElement().toMap()).get("content"));
+        pageProps.put("lastModifiedTime", page.getLastModifiedTime().toMillis());
         pageProps.put("tocItem", tocItem.toMap());
 
         return pageProps;
