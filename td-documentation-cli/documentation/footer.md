@@ -6,7 +6,7 @@ right:
 Currently `mdoc` is focusing its effort to provide a streamlined way to document products with UI, REST and command
 line interfaces.
 
-If you want to sign for the beta, email to PPE-Support@twosimga.com
+If you want to sign for the beta, email to PPE-Support@twosigma.com
 ```
 
 _Copyright @ 2017 Two Sigma_
