@@ -9,7 +9,6 @@ import com.twosigma.testing.http.datanode.DataNodeId;
 import com.twosigma.testing.http.datanode.StructuredDataNode;
 import com.twosigma.testing.reporter.StepReportOptions;
 import com.twosigma.testing.reporter.TestStep;
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -31,6 +30,9 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * @author mykola
  */
 public class Http {
+    private static final HttpResponseValidator EMPTY = (header, body) -> {
+    };
+
     private static final Gson gson = createGson();
 
     public static final Http http = new Http();
@@ -42,7 +44,7 @@ public class Http {
     }
 
     public <E> E get(String url, HttpResponseValidatorWithReturn validator) {
-        return executeAndValidateHttpCall("GET", url, this::get, null, validator);
+        return executeAndValidateHttpCall("GET", url, this::getToFullUrl, null, validator);
     }
 
     public void get(String url, HttpResponseValidator validator) {
@@ -59,7 +61,7 @@ public class Http {
 
     public <E> E post(String url, HttpRequestBody requestBody, HttpResponseValidatorWithReturn validator) {
         return executeAndValidateHttpCall("POST", url,
-                fullUrl -> post(fullUrl, requestBody),
+                fullUrl -> postToFullUrl(fullUrl, requestBody),
                 requestBody,
                 validator);
     }
@@ -68,9 +70,13 @@ public class Http {
         post(url, requestBody, new HttpResponseValidatorIgnoringReturn(validator));
     }
 
+    public void post(String url, HttpRequestBody requestBody) {
+        post(url, requestBody, EMPTY);
+    }
+
     public <E> E put(String url, HttpRequestBody requestBody, HttpResponseValidatorWithReturn validator) {
         return executeAndValidateHttpCall("PUT", url,
-                fullUrl -> put(fullUrl, requestBody),
+                fullUrl -> putToFullUrl(fullUrl, requestBody),
                 requestBody,
                 validator);
     }
@@ -80,20 +86,35 @@ public class Http {
     }
 
     public <E> E delete(String url, HttpResponseValidatorWithReturn validator) {
-        return executeAndValidateHttpCall("DELETE", url, this::delete, null, validator);
+        return executeAndValidateHttpCall("DELETE", url, this::deleteToFullUrl, null, validator);
     }
 
     public void delete(String url, HttpResponseValidator validator) {
         delete(url, new HttpResponseValidatorIgnoringReturn(validator));
     }
 
+    public void delete(String url) {
+        delete(url, EMPTY);
+    }
+
     public HttpValidationResult getLastValidationResult() {
         return lastValidationResult.get();
     }
 
-    private <E> E executeAndValidateHttpCall(String requestMethod, String url, HttpCall httpCall, HttpResponseValidator validator) {
-        return executeAndValidateHttpCall(requestMethod, url, httpCall, null,
-                new HttpResponseValidatorIgnoringReturn(validator));
+    public HttpResponse getToFullUrl(String fullUrl) {
+        return requestWithoutBody("GET", fullUrl);
+    }
+
+    public HttpResponse deleteToFullUrl(String fullUrl) {
+        return requestWithoutBody("DELETE", fullUrl);
+    }
+
+    public HttpResponse postToFullUrl(String fullUrl, HttpRequestBody requestBody) {
+        return requestWithBody("POST", fullUrl, requestBody);
+    }
+
+    public HttpResponse putToFullUrl(String fullUrl, HttpRequestBody requestBody) {
+        return requestWithBody("PUT", fullUrl, requestBody);
     }
 
     @SuppressWarnings("unchecked")
@@ -139,22 +160,6 @@ public class Http {
 
         Object returnedValue = validator.validate(header, body);
         return (E) extractOriginalValue(returnedValue);
-    }
-
-    public HttpResponse get(String fullUrl) {
-        return requestWithoutBody("GET", fullUrl);
-    }
-
-    public HttpResponse delete(String fullUrl) {
-        return requestWithoutBody("DELETE", fullUrl);
-    }
-
-    public HttpResponse post(String fullUrl, HttpRequestBody requestBody) {
-        return requestWithBody("POST", fullUrl, requestBody);
-    }
-
-    public HttpResponse put(String fullUrl, HttpRequestBody requestBody) {
-        return requestWithBody("PUT", fullUrl, requestBody);
     }
 
     private HttpResponse requestWithoutBody(String method, String fullUrl) {
@@ -219,15 +224,15 @@ public class Http {
                 return new StructuredDataNode(id, new TraceableValue(""));
             }
 
-            if (! response.getContentType().contains("/json")) {
+            if (!response.getContentType().contains("/json")) {
                 return new StructuredDataNode(id, new TraceableValue(response.getContent()));
             }
 
             MapOrList mapOrList = gson.fromJson(response.getContent(), MapOrList.class);
 
             return mapOrList.list != null ?
-                DataNodeBuilder.fromList(id, mapOrList.list):
-                DataNodeBuilder.fromMap(id, mapOrList.map);
+                    DataNodeBuilder.fromList(id, mapOrList.list) :
+                    DataNodeBuilder.fromMap(id, mapOrList.map);
         } catch (JsonSyntaxException e) {
             throw new RuntimeException("error parsing body: " + response.getContent(), e);
         }
@@ -236,6 +241,7 @@ public class Http {
     /**
      * Response consist of DataNode and Traceable values but we need to return back a simple value that can be used for
      * regular calculations and to drive test flow
+     *
      * @param v value returned from a validation callback
      * @return extracted regular value
      */

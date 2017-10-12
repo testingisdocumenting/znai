@@ -20,6 +20,10 @@ class HttpExtensions {
         return http.post(url, new JsonRequestBody(requestBody), closureToHttpResponseValidator(validation))
     }
 
+    static void post(Http http, String url, Map<String, ?> requestBody) {
+        http.post(url, new JsonRequestBody(requestBody))
+    }
+
     static def put(Http http, String url, Map<String, ?> requestBody, Closure validation) {
         return http.put(url, new JsonRequestBody(requestBody), closureToHttpResponseValidator(validation))
     }
