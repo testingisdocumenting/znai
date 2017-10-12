@@ -23,12 +23,12 @@ public class WebTauConfig {
     private final ConfigValue env = declare("env", "environment id", () -> "local");
     private final ConfigValue url = declare("url", "base url for application under test", () -> null);
     private final ConfigValue waitTimeout = declare("waitTimeout", "wait timeout in milliseconds", () -> 5000);
+    private final ConfigValue workingDir = declare("workingDir", "logical working dir", () -> Paths.get(""));
     private final ConfigValue docPath = declare("docPath", "path for screenshots and other generated " +
-            "artifacts for documentation", () -> "");
+            "artifacts for documentation", workingDir::getAsPath);
     private final ConfigValue reportPath = declare("reportPath", "report file path", () -> getWorkingDir().resolve("webtau.report.html"));
     private final ConfigValue windowWidth = declare("windowWidth", "browser window width", () -> 1000);
     private final ConfigValue windowHeight = declare("windowHeight", "browser window height", () -> 800);
-    private final ConfigValue workingDir = declare("workingDir", "logical working dir", () -> Paths.get(""));
     private final ConfigValue headless = declare("headless", "run headless mode", () -> false);
     private final ConfigValue chromeDriverPath = declare("chromeDriverPath", "path to chrome driver binary", () -> null);
     private final ConfigValue chromeBinPath = declare("chromeBinPath", "path to chrome binary", () -> null);
@@ -95,7 +95,7 @@ public class WebTauConfig {
     }
 
     public Path getDocArtifactsPath() {
-        return Paths.get(docPath.getAsString());
+        return docPath.getAsPath();
     }
 
     public int getWindowWidth() {

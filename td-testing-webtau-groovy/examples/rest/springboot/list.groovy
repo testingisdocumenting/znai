@@ -17,4 +17,6 @@ scenario("list Customers and assert with a Table Data") {
                                              'FN2' |      'LN2'
                                              'FN3' |      'LN3' }
     }
+
+    http.doc.capture('complex-return-type')
 }

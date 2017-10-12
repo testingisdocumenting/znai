@@ -1,0 +1,17 @@
+{
+  "method": "GET",
+  "url": "http://localhost:8080/customers/search/findAllByOrderByLastName",
+  "responseType": "application/json;charset\u003dUTF-8",
+  "responseBody": "{\n  \"_embedded\" : {\n    \"customers\" : [ {\n      \"id\" : 1,\n      \"firstName\" : \"FN1\",\n      \"lastName\" : \"LN1\",\n      \"_links\" : {\n        \"self\" : {\n          \"href\" : \"http://localhost:8080/customers/1\"\n        },\n        \"customer\" : {\n          \"href\" : \"http://localhost:8080/customers/1\"\n        }\n      }\n    }, {\n      \"id\" : 2,\n      \"firstName\" : \"FN2\",\n      \"lastName\" : \"LN2\",\n      \"_links\" : {\n        \"self\" : {\n          \"href\" : \"http://localhost:8080/customers/2\"\n        },\n        \"customer\" : {\n          \"href\" : \"http://localhost:8080/customers/2\"\n        }\n      }\n    }, {\n      \"id\" : 3,\n      \"firstName\" : \"FN3\",\n      \"lastName\" : \"LN3\",\n      \"_links\" : {\n        \"self\" : {\n          \"href\" : \"http://localhost:8080/customers/3\"\n        },\n        \"customer\" : {\n          \"href\" : \"http://localhost:8080/customers/3\"\n        }\n      }\n    } ]\n  },\n  \"_links\" : {\n    \"self\" : {\n      \"href\" : \"http://localhost:8080/customers/search/findAllByOrderByLastName\"\n    }\n  }\n}",
+  "responseBodyChecks": {
+    "failedPaths": [],
+    "passedPaths": [
+      "root._embedded.customers[0].firstName",
+      "root._embedded.customers[0].lastName",
+      "root._embedded.customers[1].firstName",
+      "root._embedded.customers[1].lastName",
+      "root._embedded.customers[2].firstName",
+      "root._embedded.customers[2].lastName"
+    ]
+  }
+}
