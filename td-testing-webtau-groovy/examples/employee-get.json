@@ -1,0 +1,13 @@
+{
+  "method": "GET",
+  "url": "http://localhost:8180/employee/id-generated-2",
+  "responseType": "application/json",
+  "responseBody": "{\"firstName\":\"FN\",\"lastName\":\"LN\"}\n",
+  "responseBodyChecks": {
+    "failedPaths": [],
+    "passedPaths": [
+      "root.firstName",
+      "root.lastName"
+    ]
+  }
+}
