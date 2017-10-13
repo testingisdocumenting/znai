@@ -7,6 +7,7 @@ import com.twosigma.testing.http.datanode.DataNode;
 import com.twosigma.testing.http.datanode.DataNodeBuilder;
 import com.twosigma.testing.http.datanode.DataNodeId;
 import com.twosigma.testing.http.datanode.StructuredDataNode;
+import com.twosigma.testing.http.render.DataNodeAnsiPrinter;
 import com.twosigma.testing.reporter.StepReportOptions;
 import com.twosigma.testing.reporter.TestStep;
 import org.apache.commons.io.IOUtils;
@@ -156,10 +157,16 @@ public class Http {
 
         HttpValidationResult result = new HttpValidationResult(requestMethod, url, fullUrl,
                 requestBody, response, header, body);
-        lastValidationResult.set(result);
-
         Object returnedValue = validator.validate(header, body);
+
+        lastValidationResult.set(result);
+        render(result);
+
         return (E) extractOriginalValue(returnedValue);
+    }
+
+    private void render(HttpValidationResult result) {
+        new DataNodeAnsiPrinter().print(result.getBody());
     }
 
     private HttpResponse requestWithoutBody(String method, String fullUrl) {
