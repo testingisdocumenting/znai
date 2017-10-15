@@ -1,7 +1,7 @@
 .tabs-area {
     margin-top: 20px;
     margin-bottom: 30px;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #dddddd;
 }
 
 .tabs-content {
@@ -9,7 +9,7 @@
 }
 
 .tabs-names-area {
-    border-bottom: 2px solid #eeeeee;
+    border-bottom: 2px solid #dddddd;
 }
 
 .tabs-names {
