@@ -15,6 +15,7 @@
         <module>td-console</module>
         <module>td-testing-core</module>
         <module>td-testing-core-groovy</module>
+        <module>td-testing-core-groovy-ast</module>
         <module>td-testing-standalone-groovy</module>
         <module>td-testing-rest</module>
         <module>td-testing-rest-groovy</module>
