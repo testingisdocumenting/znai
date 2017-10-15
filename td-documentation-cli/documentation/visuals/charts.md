@@ -45,5 +45,7 @@ To force all values to appear at once use
 
     :include-meta: {allAtOnce: true}
 
+# Victory Charts
 
+MDoc uses [VictoryChart](https://github.com/FormidableLabs/victory-chart) library to render charts.
 

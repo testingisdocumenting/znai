@@ -16,19 +16,19 @@ features
     cpp
     tabs
     tables
-    SVG
-    charts
     json
     CLI
     columns
     templates
-    bullet-points
     icons
+    math
+visuals
+    smart-bullet-points
+    charts
     images
     image-annotations
-    math
-charts
-    flow
+    SVG
+    flow-diagrams
     PlantUml
 synergy-with-testing
     java
