@@ -19,17 +19,17 @@ If your user needs both `Java` and `Python` executed one by one you need to show
 To define multiple tabs we use fenced code block
 
     ```tabs
-    JavaScript: :include-file: file-name.js
-    Java: :include-file: wide-code.java
-    Cpp: :include-cpp: simple.cpp {entry: 'main', bodyOnly: true}
+    JavaScript: :include-file: snippets/file-name.js
+    Java: :include-file: snippets/wide-code.java
+    Cpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true}
     ```
     
 This will generate a multi tab widget with an include plugin content per tab
 
 ```tabs
-JavaScript: :include-file: file-name.js
-Java: :include-file: wide-code.java
-Cpp: :include-cpp: simple.cpp {entry: 'main', bodyOnly: true}
+JavaScript: :include-file: snippets/file-name.js
+Java: :include-file: snippets/wide-code.java
+Cpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true}
 ```
 
 Selecting a tab will switch all the tabs on every page.

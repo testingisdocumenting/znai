@@ -7,21 +7,22 @@ flow
     names
     page-references
     footer
-features
-    attention-signs
+snippets
     code-snippets
     external-code-snippets
     java
     groovy
     cpp
-    tabs
-    tables
     json
     CLI
+    math
+features
+    attention-signs
+    tabs
+    tables
     columns
     templates
     icons
-    math
 visuals
     smart-bullet-points
     charts
