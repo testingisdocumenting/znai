@@ -14,7 +14,7 @@ Alice <-- Bob: another authentication Response
 ```
 `````
 
-Consider using [Columns Layout](features/columns) to put your story and a diagram side by side
+Consider using [Columns Layout](layout/columns) to put your story and a diagram side by side
 
 # External file
 

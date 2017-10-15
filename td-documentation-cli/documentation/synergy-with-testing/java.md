@@ -6,7 +6,7 @@ Example below test what account types are allowed to perform *Trading Activities
 :include-file: com/twosigma/testing/documentation/TestToDocExample.groovy {lang: "java"}
 
 As part of validation of account types test also captures data that was used for testing. 
-We can refer this data later in our documentation by using [include-table](features/tables) plugin
+We can refer this data later in our documentation by using [include-table](layout/tables) plugin
 
     :include-table: account-rules.json
      
