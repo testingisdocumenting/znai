@@ -1,10 +1,11 @@
 import React from 'react'
 import Pie from './Pie'
 import Bar from './Bar'
+import Line from './Line'
 
 import {isAllAtOnce} from '../meta/meta'
 
-const types = {Pie, Bar}
+const types = {Pie, Bar, Line}
 
 const Chart = (props) => {
     const {chartType} = props
@@ -26,6 +27,6 @@ function chartByType(type) {
 }
 
 const presentationChartHandler = {component: Chart,
-    numberOfSlides: ({data, meta}) => isAllAtOnce(meta) ? 1 : data.length }
+    numberOfSlides: ({data, chartType, meta}) => chartType === 'Line' || isAllAtOnce(meta) ? 1 : data.length }
 
 export {Chart, presentationChartHandler}
