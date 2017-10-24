@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 import {textSelection} from '../selected-text-extensions/TextSelection'
+import Icon from '../icons/Icon'
+
+import './Section.css'
 
 class Section extends Component {
     render() {
@@ -7,7 +10,9 @@ class Section extends Component {
 
         const sectionTitle = title ? (
             <div className="content-block">
-                <h1 className="section-title" id={id}>{title}</h1>
+                <h1 className="section-title" id={id}>{title}
+                    <a href={"#" + id}><Icon id="link"/></a>
+                </h1>
             </div>
         ) : null
 
@@ -38,8 +43,12 @@ const PresentationTitle = ({title}) => {
     return <h1>{title}</h1>
 }
 
-const presentationSectionHandler = {component: PresentationTitle,
+const presentationSectionHandler = {
+    component: PresentationTitle,
     numberOfSlides: () => 1,
-    slideInfoProvider: ({title}) => {return {sectionTitle: title}}}
+    slideInfoProvider: ({title}) => {
+        return {sectionTitle: title}
+    }
+}
 
 export {Section, presentationSectionHandler}
