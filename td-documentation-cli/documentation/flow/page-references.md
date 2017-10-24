@@ -21,4 +21,12 @@ To refer `internal` page within your documentation use
 [internal link](dir-name/file-name#optional-page-section-id)
 ```
 
-Note: you can get `page-section-id` by selecting that section using `TOC` and checking the browser `url`. 
+Note: you can get `page-section-id` by hovering over a section title and pressing link icon. Your browser URL will have updated link.
+
+To refer back `index` page use   
+
+```markdown
+[index link](/)
+```
+
+Clicking [Index page](/) have the same effect as clicking documentation title on the **Navigation Panel**

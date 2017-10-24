@@ -14,11 +14,17 @@ public class DocUrl {
     private String url;
 
     private boolean isGlobalUrl;
+    private boolean isIndexUrl;
 
     public DocUrl(String url) {
         this.url = url;
         if (url.startsWith("http") || url.startsWith("file") || url.startsWith("mailto")) {
             isGlobalUrl = true;
+            return;
+        }
+
+        if (url.equals("/")) {
+            isIndexUrl = true;
             return;
         }
 
@@ -37,6 +43,10 @@ public class DocUrl {
 
         fileName = idxOfPageSectionSep == -1 ? parts[1] : parts[1].substring(0, idxOfPageSectionSep);
         pageSectionId = idxOfPageSectionSep == -1 ? "" : parts[1].substring(idxOfPageSectionSep + 1);
+    }
+
+    public boolean isIndexUrl() {
+        return isIndexUrl;
     }
 
     public boolean isGlobalUrl() {

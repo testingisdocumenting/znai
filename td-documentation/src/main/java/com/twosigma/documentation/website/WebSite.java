@@ -180,7 +180,7 @@ public class WebSite implements DocStructure {
 
     @Override
     public void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
-        if (docUrl.isGlobalUrl()) {
+        if (docUrl.isGlobalUrl() || docUrl.isIndexUrl()) {
             return;
         }
 
@@ -191,6 +191,10 @@ public class WebSite implements DocStructure {
     public String createUrl(DocUrl docUrl) {
         if (docUrl.isGlobalUrl()) {
             return docUrl.getUrl();
+        }
+
+        if (docUrl.isIndexUrl()) {
+            return "/" + docMeta.getId();
         }
 
         String base = "/" + docMeta.getId() + "/" + docUrl.getDirName() + "/" + docUrl.getFileName();
