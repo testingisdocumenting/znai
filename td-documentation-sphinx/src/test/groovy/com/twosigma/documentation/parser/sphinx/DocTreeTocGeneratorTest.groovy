@@ -11,9 +11,10 @@ class DocTreeTocGeneratorTest {
     void "generates table of contents from index xml file"() {
         def toc = new DocTreeTocGenerator().generate(ResourceUtils.textContent("test-index.xml"))
 
-        toc.contains("NONAME", "intro", "").should == true
-        toc.contains("NONAME", "another-page", "").should == true
+        toc.contains("chapter-one", "page-three", "").should == true
+        toc.contains("chapter-two", "page-four", "").should == true
+        toc.contains("chapter-two", "page-five", "").should == true
 
-        toc.contains("NONAME", "garbage", "").should == false
+        toc.contains("wrong-chapter", "garbage", "").should == false
     }
 }

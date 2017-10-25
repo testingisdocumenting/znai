@@ -3,6 +3,7 @@ package com.twosigma.documentation.structure;
 import java.util.*;
 
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -15,8 +16,12 @@ public class TableOfContents {
         tocItems = new ArrayList<>();
     }
 
-    public void addTocItem(final String sectionName, final String fileNameWithoutExtension) {
-        tocItems.add(new TocItem(sectionName, fileNameWithoutExtension));
+    public void addTocItem(String dirName, String fileNameWithoutExtension) {
+        tocItems.add(new TocItem(dirName, fileNameWithoutExtension));
+    }
+
+    public void addTocItem(String dirName, String fileNameWithoutExtension, String sectionTitle) {
+        tocItems.add(new TocItem(dirName, fileNameWithoutExtension, sectionTitle));
     }
 
     public void addIndex() {
@@ -67,4 +72,10 @@ public class TableOfContents {
 
         return result;
     }
+
+    @Override
+    public String toString() {
+        return tocItems.stream().map(TocItem::toString).collect(joining("\n"));
+    }
+
 }

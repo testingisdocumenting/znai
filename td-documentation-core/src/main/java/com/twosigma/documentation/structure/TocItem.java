@@ -24,7 +24,7 @@ public class TocItem {
         return new TocItem("", INDEX);
     }
 
-    public TocItem(final String dirName, final String fileNameWithoutExtension) {
+    public TocItem(String dirName, String fileNameWithoutExtension) {
         this.dirName = dirName;
         this.fileNameWithoutExtension = fileNameWithoutExtension;
 
@@ -32,6 +32,11 @@ public class TocItem {
         this.pageTitle = NameUtils.dashToCamelCaseWithSpaces(fileNameWithoutExtension);
 
         this.pageSectionIdTitles = new ArrayList<>();
+    }
+
+    public TocItem(String dirName, String fileNameWithoutExtension, String sectionTitle) {
+        this(dirName, fileNameWithoutExtension);
+        this.sectionTitle = sectionTitle;
     }
 
     public String getDirName() {
@@ -88,7 +93,7 @@ public class TocItem {
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -96,7 +101,7 @@ public class TocItem {
             return false;
         }
 
-        final TocItem tocItem = (TocItem) o;
+        TocItem tocItem = (TocItem) o;
 
         if (!dirName.equals(tocItem.dirName)) {
             return false;
