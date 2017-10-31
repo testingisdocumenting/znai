@@ -1,4 +1,7 @@
 import Promise from "promise"
+import {getDocId} from '../docMeta';
+
+const index = {dirName: '', fileName: 'index'};
 
 class DocumentationNavigation {
     constructor() {
@@ -50,8 +53,13 @@ class DocumentationNavigation {
 
         const parts = url.split("/").filter(p => p !== ".." && p.length > 0)
 
+        // url starts with /<doc-id> ?
+        if (url.substr(1) === getDocId()) {
+            return index
+        }
+
         if (parts.length < 2) {
-            return {dirName: "", fileName: "index"}
+            return index
         }
 
         // something/dir-name/file-name#id
