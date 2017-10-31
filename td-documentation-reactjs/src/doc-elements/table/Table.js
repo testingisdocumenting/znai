@@ -29,7 +29,7 @@ const Table = ({table, ...props}) => {
     const tableClassName = (isCustomClassName ? tableStyles.join(' '):
         'ui celled padded table') + ' content-block';
 
-    return (<div className="simple-table">
+    return (<div className="simple-table content-block">
         <table className={tableClassName}>
             <thead>
                 <tr>
