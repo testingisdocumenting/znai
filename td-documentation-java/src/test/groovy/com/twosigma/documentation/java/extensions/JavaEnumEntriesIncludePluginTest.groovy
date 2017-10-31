@@ -16,7 +16,7 @@ class JavaEnumEntriesIncludePluginTest {
                                                                                      [type: 'StrongEmphasis', content: [[text: 'entry one', type: 'SimpleText']]]]]]],
                                                      [[[code: 'ENTRY_TWO', type: 'InlinedCode']],
                                                       [[type: 'Paragraph', content: [[text: 'description of entry two', type: 'SimpleText']]]]]],
-                                           columns: [[title: 'name', align: 'right', width: '30%'],
+                                           columns: [[title: 'name', align: 'right', width: '20%'],
                                                      [title: 'description']],
                                            styles : ['middle-vertical-lines-only', 'no-header', 'no-vertical-padding']],
                                    type : 'Table']]
