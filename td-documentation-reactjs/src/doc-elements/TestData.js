@@ -56,191 +56,212 @@ const TestData = {
 
     documentation:  {
         "docMeta": {
+            "viewOn": {
+                "link": "https://github.com/twosigma/TestingIsDocumenting/blob/master/td-documentation-cli/documentation",
+                "title": "View On GitHub"
+            },
             "id": "preview",
-            "type": "User Guide",
             "title": "MDoc",
-            "previewEnabled": true,
-            viewOn: {
-                link: 'https://github.com/twosigma/TestingIsDocumenting/blob/master/td-documentation-cli/documentation',
-                title: 'View On GitHub'
-            }
+            "type": "User Guide",
+            "previewEnabled": true
         },
         "page": {
             "type": "Page",
             "content": [
                 {
-                    "title": "Follow the Order",
-                    "id": "follow-the-order",
+                    "title": "Enum Entries",
+                    "id": "enum-entries",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Most of the documentation should have a natural order to follow.",
+                                    "text": "Use ",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "type": "SoftLineBreak"
+                                    "code": "include-java-enum-entries",
+                                    "type": "InlinedCode"
                                 },
                                 {
-                                    "text": "Links to navigate to a next page are at the end of each page.",
+                                    "text": " to enumerate entries of a enum from a file",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "type": "Paragraph",
-                            "content": [
+                            "lang": "java",
+                            "maxLineLength": 31,
+                            "tokens": [
                                 {
-                                    "text": "Crate links to remind an ",
-                                    "type": "SimpleText"
+                                    "type": "keyword",
+                                    "content": "package"
                                 },
+                                " my",
                                 {
-                                    "type": "Emphasis",
+                                    "type": "punctuation",
+                                    "content": "."
+                                },
+                                "company",
+                                {
+                                    "type": "punctuation",
+                                    "content": ";"
+                                },
+                                "\n\n",
+                                {
+                                    "type": "keyword",
+                                    "content": "import"
+                                },
+                                " java",
+                                {
+                                    "type": "punctuation",
+                                    "content": "."
+                                },
+                                "util",
+                                {
+                                    "type": "punctuation",
+                                    "content": "."
+                                },
+                                "List",
+                                {
+                                    "type": "punctuation",
+                                    "content": ";"
+                                },
+                                "\n\n",
+                                {
+                                    "type": "keyword",
+                                    "content": "enum"
+                                },
+                                " MyEnum ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                "\n    ",
+                                {
+                                    "type": "comment",
+                                    "content": "/**\n     * description of entry one\n     */"
+                                },
+                                "\n    ENTRY_ONE_WITH_A_LONG_NAME",
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                "\n\n    ",
+                                {
+                                    "type": "comment",
+                                    "content": "/**\n     * description of entry two\n     */"
+                                },
+                                "\n    ENTRY_TWO\n",
+                                {
+                                    "type": "punctuation",
+                                    "content": "}"
+                                }
+                            ],
+                            "type": "Snippet"
+                        },
+                        {
+                            "lang": "",
+                            "maxLineLength": 39,
+                            "tokens": [
+                                {
+                                    "type": "text",
+                                    "content": ":include-java-enum-entries: MyEnum.java\n"
+                                }
+                            ],
+                            "lineNumber": "",
+                            "type": "Snippet"
+                        },
+                        {
+                            "columns": [
+                                {
                                     "content": [
                                         {
-                                            "text": "essential",
-                                            "type": "SimpleText"
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "code": "ENTRY_ONE_WITH_A_LONG_NAME",
+                                                    "type": "InlinedCode"
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "text": " concept introduce previously. There is a chance that a person skipped over it or forgot.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Avoid: links that navigate users forward. It breaks the flow of a documentation.",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Links",
-                    "id": "links",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "To create an ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "external",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " link use",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "markdown",
-                            "maxLineLength": 39,
-                            "tokens": [
-                                {
-                                    "type": "url",
                                     "content": [
-                                        "[Link Title](http://external/reference)"
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "description of entry one",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "config": {
+                                "left": {
+                                    "portion": 3.0,
+                                    "align": "right"
+                                },
+                                "border": true
+                            },
+                            "type": "Columns"
+                        },
+                        {
+                            "columns": [
+                                {
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "code": "ENTRY_TWO",
+                                                    "type": "InlinedCode"
+                                                }
+                                            ]
+                                        }
                                     ]
                                 },
-                                "\n"
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
                                 {
-                                    "text": "To refer ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "internal",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " page within your documentation use",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "lang": "markdown",
-                            "maxLineLength": 60,
-                            "tokens": [
-                                {
-                                    "type": "url",
                                     "content": [
-                                        "[internal link](dir-name/file-name#optional-page-section-id)"
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "description of entry two",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
                                     ]
-                                },
-                                "\n"
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Note: you can get ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "page-section-id",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " by selecting that section using ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "TOC",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " and checking the browser ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "url",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": ".",
-                                    "type": "SimpleText"
                                 }
-                            ]
+                            ],
+                            "config": {
+                                "left": {
+                                    "portion": 3.0,
+                                    "align": "right"
+                                },
+                                "border": true
+                            },
+                            "type": "Columns"
                         }
                     ]
                 }
             ],
-            "lastModifiedTime": 1497576734000,
+            "lastModifiedTime": 1509406671000,
             "tocItem": {
-                "sectionTitle": "Flow",
-                "pageTitle": "Page References",
-                "fileName": "page-references",
-                "dirName": "flow",
+                "sectionTitle": "Snippets",
+                "pageTitle": "Java",
+                "fileName": "java",
+                "dirName": "snippets",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Follow the Order",
-                        "id": "follow-the-order"
-                    },
-                    {
-                        "title": "Links",
-                        "id": "links"
+                        "title": "Enum Entries",
+                        "id": "enum-entries"
                     }
                 ]
             }
@@ -307,7 +328,7 @@ const TestData = {
                                     "type": "Paragraph",
                                     "content": [
                                         {
-                                            "text": "If you want to sign for the beta, email to PPE-Support@twosimga.com",
+                                            "text": "If you want to sign for the beta, email to PPE-Support@twosigma.com",
                                             "type": "SimpleText"
                                         }
                                     ]

@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
  * @author mykola
  */
 public class CsvParser {
-//    private final static Pattern NUMBER =
     private CsvParser() {
     }
 

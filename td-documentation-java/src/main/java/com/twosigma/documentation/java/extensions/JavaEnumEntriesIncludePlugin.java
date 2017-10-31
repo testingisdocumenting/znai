@@ -1,15 +1,13 @@
 package com.twosigma.documentation.java.extensions;
 
+import com.twosigma.documentation.java.parser.EnumEntry;
 import com.twosigma.documentation.java.parser.JavaCode;
-import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.java.parser.html.HtmlToDocElementConverter;
 import com.twosigma.documentation.parser.docelement.DocElement;
-import com.twosigma.documentation.template.TextTemplate;
+import com.twosigma.documentation.parser.docelement.DocElementType;
 import com.twosigma.utils.CollectionUtils;
-import com.twosigma.utils.ResourceUtils;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -24,15 +22,34 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
 
     @Override
     public List<DocElement> process(JavaCode javaCode) {
-        List<Map<Object, Object>> entries = javaCode.getEnumEntries().stream().map(e -> CollectionUtils.createMap("name", e.getName(),
-                "description", e.getJavaDocText())).collect(toList());
+        List<List<?>> data = javaCode.getEnumEntries().stream()
+                .map(e -> Arrays.asList(nameToDocElements(e), descriptionToDocElements(e)))
+                .collect(toList());
 
-        TextTemplate textTemplate = new TextTemplate("java-enum-entries",
-                ResourceUtils.textContent("templates/javaEnumEntries.md"));
+        List<Map<String, String>> columns = new ArrayList<>();
+        columns.add(CollectionUtils.createMap("title", "name",
+                "align", "right",
+                "width", "20%"));
 
-        MarkupParserResult parserResult = componentsRegistry.parser().parse(markupPath,
-                textTemplate.process(Collections.singletonMap("entries", entries)));
+        columns.add(CollectionUtils.createMap("title", "description"));
 
-        return parserResult.getDocElement().getContent();
+        Map<Object, Object> tableProps = new LinkedHashMap<>();
+        tableProps.put("data", data);
+        tableProps.put("columns", columns);
+        tableProps.put("styles", Arrays.asList("middle-vertical-lines-only", "no-header", "no-vertical-padding"));
+
+        DocElement table = new DocElement(DocElementType.TABLE, "table", tableProps);
+        return Collections.singletonList(table);
+    }
+
+    private List<Map<String, Object>> nameToDocElements(EnumEntry e) {
+        return Collections.singletonList(
+                new DocElement(DocElementType.INLINED_CODE, "code", e.getName()).toMap());
+    }
+
+    private List<Map<String, Object>> descriptionToDocElements(EnumEntry e) {
+        return HtmlToDocElementConverter.convert(componentsRegistry, markupPath, e.getJavaDocText())
+                .stream()
+                .map(DocElement::toMap).collect(toList());
     }
 }

@@ -4,6 +4,8 @@ import './Table.css'
 import 'semantic-ui-css/components/table.min.css'
 
 const Table = ({table, ...props}) => {
+    const tableStyles = table.styles || []
+
     const Row = ({row}) => {
         return (<tr>
             {row.map((v, idx) => {
@@ -19,15 +21,23 @@ const Table = ({table, ...props}) => {
         </tr>)
     }
 
-    return (<div className="simple-table content-block">
-        <table className="ui celled padded table">
+    const showHeader = tableStyles.indexOf('no-header') === -1
+
+    // header related style will not trigger custom css
+    const isCustomClassName = (tableStyles.length > 0 && showHeader) || (!showHeader && tableStyles.length > 1)
+
+    const tableClassName = (isCustomClassName ? tableStyles.join(' '):
+        'ui celled padded table') + ' content-block';
+
+    return (<div className="simple-table">
+        <table className={tableClassName}>
             <thead>
                 <tr>
-                    {table.columns.map((c, idx) => {
+                    {showHeader ? table.columns.map((c, idx) => {
                         const align = c.align ? c.align : "left"
                         const style = {textAlign: align}
                         return (<th key={idx} style={style}>{c.title}</th>)
-                    })}
+                    }) : null}
                 </tr>
             </thead>
             <tbody>

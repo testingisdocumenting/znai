@@ -9,3 +9,33 @@
 .simple-table td .content-block {
     width: auto;
 }
+
+.simple-table .middle-vertical-lines-only thead th {
+    padding: 5px 20px;
+
+    border-right: solid 1px #009AA6;
+    vertical-align: top;
+}
+
+.simple-table .middle-vertical-lines-only thead th:last-child {
+    border-right: none;
+}
+
+.simple-table .middle-vertical-lines-only tbody td {
+    padding: 5px 20px;
+
+    border-right: solid 1px #009AA6;
+    vertical-align: top;
+}
+
+.simple-table .no-vertical-padding tbody td {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    border-right: solid 1px #009AA6;
+    vertical-align: top;
+}
+
+.simple-table .middle-vertical-lines-only tbody td:last-child {
+    border-right: none;
+}
