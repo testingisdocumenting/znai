@@ -10,6 +10,7 @@ import 'prismjs/components/prism-markup'
 import 'prismjs/components/prism-cpp'
 import 'prismjs/components/prism-json'
 import 'prismjs/components/prism-bash'
+import 'prismjs/components/prism-yaml'
 
 export {parseCode}
 

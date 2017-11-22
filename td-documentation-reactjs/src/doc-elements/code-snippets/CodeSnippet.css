@@ -23,7 +23,8 @@
     color: #999;
 }
 
-.token.property {
+.token.property,
+.token.key {
     color: #660e7a;
     font-weight: bold;
 }
