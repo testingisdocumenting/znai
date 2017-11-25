@@ -90,7 +90,7 @@ public class DocumentationCliApp {
                 withFileWithLookupPaths("lookup-paths").
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
-                withWebResources(WebResource.fromResource("static/twosigma-logo-and-label.png")).
+                withWebResources(WebResource.fromResource("static/favicon.png")).
                 withEnabledPreview(config.isPreview()).deployTo(deployPath);
     }
 

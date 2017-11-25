@@ -62,6 +62,7 @@ public class HtmlPage {
             headerSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) +
             cssResources.stream().map(r -> r.generateCssLink(documentationId)).collect(joining("\n")) +
             "\n</head>\n" +
+            "<link rel=\"shortcut icon\" href=\"/" + documentationId + "/static/favicon.png\" type=\"image/ico\"/>\n" +
             "<body>\n" +
             bodySuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
             javaScriptResources.stream().map(r -> r.generateJavaScriptLink(documentationId)).collect(joining("\n")) + "\n" +
