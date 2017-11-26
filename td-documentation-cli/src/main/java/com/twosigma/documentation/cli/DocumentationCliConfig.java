@@ -73,7 +73,7 @@ public class DocumentationCliConfig {
             return "serve";
         }
 
-        return "";
+        return "generate";
     }
 
     public boolean isNew() {

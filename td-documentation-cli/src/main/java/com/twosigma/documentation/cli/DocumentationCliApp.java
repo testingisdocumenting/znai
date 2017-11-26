@@ -3,6 +3,7 @@ package com.twosigma.documentation.cli;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
+import com.twosigma.documentation.html.HtmlPage;
 import com.twosigma.documentation.parser.MarkupTypes;
 import com.twosigma.documentation.website.WebSite;
 import com.twosigma.documentation.client.DocumentationUploadClient;
@@ -11,6 +12,7 @@ import com.twosigma.documentation.server.DocumentationServer;
 import com.twosigma.documentation.server.preview.DocumentationPreview;
 import io.vertx.core.http.HttpServer;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -83,18 +85,23 @@ public class DocumentationCliApp {
     }
 
     private void generateDocs() {
-        webSite = WebSite.withToc(getTocPath()).
+        Path userDefinedFavicon = config.getSourceRoot().resolve("favicon.png");
+        WebResource favIconResource = Files.exists(userDefinedFavicon) ?
+                WebResource.withPath(userDefinedFavicon, HtmlPage.FAVICON_PATH) :
+                WebResource.fromResource(HtmlPage.FAVICON_PATH);
+
+        webSite = WebSite.withToc(resolveTocPath()).
                 withId(getDocId()).
                 withMarkupType(config.getMarkupType()).
                 withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).
                 withFileWithLookupPaths("lookup-paths").
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
-                withWebResources(WebResource.fromResource("static/favicon.png")).
+                withWebResources(favIconResource).
                 withEnabledPreview(config.isPreview()).deployTo(deployPath);
     }
 
-    private Path getTocPath() {
+    private Path resolveTocPath() {
         switch (config.getMarkupType()) {
             case MarkupTypes.SPHINX:
                 return config.getSourceRoot().resolve("index.xml");
