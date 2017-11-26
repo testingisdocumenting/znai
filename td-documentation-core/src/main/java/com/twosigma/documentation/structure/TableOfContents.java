@@ -28,6 +28,15 @@ public class TableOfContents {
         tocItems.add(0, TocItem.createIndex());
     }
 
+    public TocItem getIndex() {
+        if (tocItems.isEmpty()) {
+            return null;
+        }
+
+        TocItem first = tocItems.get(0);
+        return first.isIndex() ? first : null;
+    }
+
     public List<TocItem> getTocItems() {
         return Collections.unmodifiableList(tocItems);
     }
@@ -35,11 +44,8 @@ public class TableOfContents {
     public boolean contains(String dirName, String fileName, String pageSectionId) {
         TocItem tocItem = findTocItem(dirName, fileName);
 
-        if (tocItem == null) {
-            return false;
-        }
-
-        return pageSectionId.isEmpty() || tocItem.hasPageSection(pageSectionId);
+        return tocItem != null &&
+                (pageSectionId.isEmpty() || tocItem.hasPageSection(pageSectionId));
     }
 
     public TocItem findTocItem(String dirName, String fileName) {

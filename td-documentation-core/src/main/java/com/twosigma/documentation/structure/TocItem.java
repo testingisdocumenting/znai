@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class TocItem {
-    private static final String INDEX = "index";
+    public static final String INDEX = "index";
 
     private String dirName;
     private String fileNameWithoutExtension;

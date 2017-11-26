@@ -147,6 +147,10 @@ public class WebSite implements DocStructure {
     }
 
     public TocItem tocItemByPath(Path path) {
+        if (path.getFileName().toString().startsWith(TocItem.INDEX + ".")) {
+            return toc.getIndex();
+        }
+
         return toc.getTocItems().stream().filter(ti ->
                 path.toAbsolutePath().getParent().getFileName().toString().equals(ti.getDirName()) &&
                         path.getFileName().toString().equals(
