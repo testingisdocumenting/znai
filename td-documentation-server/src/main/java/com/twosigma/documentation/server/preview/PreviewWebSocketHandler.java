@@ -3,6 +3,7 @@ package com.twosigma.documentation.server.preview;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.FontStyle;
 import com.twosigma.documentation.html.PageProps;
+import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.utils.JsonUtils;
 import io.vertx.core.Handler;
@@ -55,6 +56,14 @@ public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
         LinkedHashMap<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "tocUpdate");
         payload.put("toc", newToc.toListOfMaps());
+
+        send(payload);
+    }
+
+    public void sendMeta(DocMeta docMeta) {
+        LinkedHashMap<String, Object> payload = new LinkedHashMap<>();
+        payload.put("type", "docMetaUpdate");
+        payload.put("docMeta", docMeta.toMap());
 
         send(payload);
     }

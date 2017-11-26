@@ -93,6 +93,8 @@ public class FileWatcher implements AuxiliaryFileListener {
             register(path);
         } else if (fileName.equals("toc")) {
             fileChangeHandler.onTocChange(path);
+        } else if (fileName.equals("meta.json")) {
+            fileChangeHandler.onDocMetaChange(path);
         } else {
             fileChangeHandler.onChange(path);
         }

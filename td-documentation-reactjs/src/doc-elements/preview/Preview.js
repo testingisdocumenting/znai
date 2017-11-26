@@ -27,6 +27,10 @@ class Server {
                 this.handlers.onTocUpdate(data.toc)
             }
 
+            if (data.type === 'docMetaUpdate') {
+                this.handlers.onDocMetaUpdate(data.docMeta)
+            }
+
             if (data.type === 'multiplePagesUpdate') {
                 this.handlers.onMultiplePagesUpdate(data.listOfPageProps)
             }

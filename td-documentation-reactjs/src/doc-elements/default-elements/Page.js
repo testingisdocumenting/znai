@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 
-import {getViewOn} from '../docMeta'
-
 import './Page.css'
 
 class Page extends Component {
@@ -46,7 +44,9 @@ class Page extends Component {
     }
 
     renderViewOn() {
-        const viewOn = getViewOn()
+        const {docMeta} = this.props
+
+        const viewOn = docMeta.viewOn
         if (!viewOn || !viewOn.link || !viewOn.title) {
             return null
         }

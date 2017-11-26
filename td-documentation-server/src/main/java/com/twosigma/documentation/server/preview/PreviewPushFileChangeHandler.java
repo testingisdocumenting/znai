@@ -1,11 +1,13 @@
 package com.twosigma.documentation.server.preview;
 
 import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.website.WebSite;
 import com.twosigma.documentation.html.HtmlPageAndPageProps;
 import com.twosigma.documentation.html.PageProps;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
+import com.twosigma.utils.FileUtils;
 
 import java.nio.file.Path;
 import java.util.Collection;
@@ -36,6 +38,18 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
             previewSocket.sendPages(toc.getTocItems().stream()
                     .map(previewWebSite::regeneratePage)
                     .map(HtmlPageAndPageProps::getProps));
+        });
+    }
+
+    @Override
+    public void onDocMetaChange(Path metaPath) {
+        ConsoleOutputs.out("meta changed: ", metaPath);
+
+        execute(() -> {
+            String metaJson = FileUtils.fileTextContent(metaPath);
+            DocMeta newDocMeta = previewWebSite.getDocMeta().cloneWithNewJson(metaJson);
+
+            previewSocket.sendMeta(newDocMeta);
         });
     }
 

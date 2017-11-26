@@ -77,7 +77,7 @@ public class WebSite implements DocStructure {
         this.cfg = cfg;
         this.linksToValidate = new ArrayList<>();
         this.deployer = new Deployer(cfg.deployPath);
-        this.docMeta = new DocMeta(cfg.docMetaMap);
+        this.docMeta = cfg.docMeta;
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
         this.componentsRegistry = new WebSiteComponentsRegistry();
         this.reactJsNashornEngine = initJsEngine();
@@ -129,6 +129,10 @@ public class WebSite implements DocStructure {
 
     public Path getTocPath() {
         return cfg.tocPath;
+    }
+
+    public DocMeta getDocMeta() {
+        return docMeta;
     }
 
     public void generate() {
@@ -534,7 +538,7 @@ public class WebSite implements DocStructure {
         private List<WebResource> registeredExtraJavaScripts;
         private boolean isPreviewEnabled;
         private String markupType = MARKDOWN;
-        private Map<String, ?> docMetaMap = Collections.emptyMap();
+        private DocMeta docMeta = new DocMeta(Collections.emptyMap());
 
         private Configuration() {
             webResources = new ArrayList<>();
@@ -595,11 +599,10 @@ public class WebSite implements DocStructure {
         @SuppressWarnings("unchecked")
         public Configuration withMetaFromJsonFile(Path path) {
             final String json = fileTextContent(path);
-            final Gson gson = new Gson();
-            docMetaMap = gson.fromJson(json, Map.class);
+            docMeta = new DocMeta(json);
 
-            withTitle(docMetaMap.get("title").toString());
-            withType(docMetaMap.get("type").toString());
+            withTitle(docMeta.getTitle());
+            withType(docMeta.getType());
 
             return this;
         }

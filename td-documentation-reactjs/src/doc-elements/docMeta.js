@@ -24,8 +24,4 @@ function getDocId() {
     return docMeta.id
 }
 
-function getViewOn() {
-    return docMeta.viewOn
-}
-
-export {setDocMeta, isPreviewEnabled, getDocId, getViewOn}
+export {setDocMeta, isPreviewEnabled, getDocId}

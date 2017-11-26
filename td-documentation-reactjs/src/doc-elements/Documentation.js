@@ -49,6 +49,7 @@ class Documentation extends Component {
             tocSelected: false,
             page: Documentation.processPage(page),
             toc: tableOfContents.toc,
+            docMeta: docMeta,
             selectedTocItem: selectedTocItem,
             mode: DocumentationModes.DEFAULT
         }
@@ -67,6 +68,7 @@ class Documentation extends Component {
         this.onSearchSelection = this.onSearchSelection.bind(this)
         this.onPageUpdate = this.onPageUpdate.bind(this)
         this.onTocUpdate = this.onTocUpdate.bind(this)
+        this.onDocMetaUpdate = this.onDocMetaUpdate.bind(this)
         this.onMultiplePagesUpdate = this.onMultiplePagesUpdate.bind(this)
         this.onPageGenError = this.onPageGenError.bind(this)
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
@@ -94,10 +96,11 @@ class Documentation extends Component {
     }
 
     renderDefaultDocMode() {
-        const {docMeta, footer} = this.props
+        const {footer} = this.props
         const {
             toc,
             page,
+            docMeta,
             selectedTocItem,
             tocCollapsed,
             lastChangeDataDom,
@@ -113,6 +116,7 @@ class Documentation extends Component {
                                                           onClose={this.onSearchClose}/> : null
 
         const renderedPage = <elementsLibrary.Page {...page}
+                                                   docMeta={docMeta}
                                                    onPresentationOpen={this.onPresentationOpen}
                                                    previewEnabled={docMeta.previewEnabled}
                                                    elementsLibrary={elementsLibrary}/>
@@ -124,6 +128,7 @@ class Documentation extends Component {
                                                           onPageUpdate={this.onPageUpdate}
                                                           onMultiplePagesUpdate={this.onMultiplePagesUpdate}
                                                           onTocUpdate={this.onTocUpdate}
+                                                          onDocMetaUpdate={this.onDocMetaUpdate}
                                                           onError={this.onPageGenError}/> : null
 
         return (
@@ -150,8 +155,7 @@ class Documentation extends Component {
     }
 
     renderPresentationMode() {
-        const {docMeta} = this.props
-        const {presentationRegistry} = this.state
+        const {presentationRegistry, docMeta} = this.state
 
         return <Presentation docMeta={docMeta}
                              presentationRegistry={presentationRegistry}
@@ -161,7 +165,7 @@ class Documentation extends Component {
     }
 
     renderPrintMode() {
-        const {docMeta} = this.props
+        const {docMeta} = this.state
 
         return <AllPagesAtOnce docMeta={docMeta}/>
     }
@@ -255,8 +259,7 @@ class Documentation extends Component {
     }
 
     onPageLoad() {
-        const {docMeta} = this.props
-        const {page} = this.state
+        const {page, docMeta} = this.state
 
         this.extractPageSectionNodes()
         this.scrollToPageSection(page.tocItem, documentationNavigation.currentPageLocation().pageSectionId)
@@ -314,7 +317,7 @@ class Documentation extends Component {
     }
 
     onHeaderClick() {
-        const url = fullResourcePath(this.props.docMeta.id, "")
+        const url = fullResourcePath(this.state.docMeta.id, "")
         documentationNavigation.navigateToUrl(url)
     }
 
@@ -351,6 +354,10 @@ class Documentation extends Component {
         if (!tableOfContents.hasTocItem(this.state.page.tocItem)) {
             documentationNavigation.navigateToPage(tableOfContents.first)
         }
+    }
+
+    onDocMetaUpdate(docMeta) {
+        this.setState({docMeta})
     }
 
     // one markup page was changed and view needs to be updated
@@ -457,7 +464,7 @@ class Documentation extends Component {
     }
 
     getAllPagesPromise() {
-        const {docMeta} = this.props
+        const {docMeta} = this.state
         return getAllPagesPromise(docMeta)
     }
 

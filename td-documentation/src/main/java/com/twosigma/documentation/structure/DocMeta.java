@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.twosigma.documentation.html.WebResource;
+import com.twosigma.utils.JsonUtils;
 
 /**
  * @author mykola
@@ -16,10 +17,22 @@ public class DocMeta {
     private boolean previewEnabled;
     private Map<String, ?> docMetaMap;
 
+    public DocMeta(String metaJson) {
+        this(JsonUtils.deserializeAsMap(metaJson));
+    }
+
     public DocMeta(Map<String, ?> docMetaMap) {
-        this.type = docMetaMap.get("type").toString();
-        this.title = docMetaMap.get("title").toString();
+        this.type = docMetaMap.containsKey("type") ? docMetaMap.get("type").toString() : "no-type";
+        this.title = docMetaMap.containsKey("title") ? docMetaMap.get("title").toString() : "no-title";
         this.docMetaMap = docMetaMap;
+    }
+
+    public DocMeta cloneWithNewJson(String docMetaJson) {
+        DocMeta clone = new DocMeta(docMetaJson);
+        clone.setId(this.id);
+        clone.setPreviewEnabled(this.previewEnabled);
+
+        return clone;
     }
 
     /**
