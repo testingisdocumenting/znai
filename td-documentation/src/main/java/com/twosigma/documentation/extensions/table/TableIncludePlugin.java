@@ -38,17 +38,23 @@ public class TableIncludePlugin implements IncludePlugin {
         fullPath = componentsRegistry.resourceResolver().fullPath(fileName);
         textContent = componentsRegistry.resourceResolver().textContent(fileName);
 
-        Map<String, Object> table = (isJson() ? tableFromJson() : CsvParser.parse(textContent)).toMap();
-        List<Map<String, Object>> columns = (List<Map<String, Object>>) table.get("columns");
+        MarkupTableData tableFromFile = isJson() ? tableFromJson() : CsvParser.parse(textContent);
+        MarkupTableData rearrangedTable = pluginParams.getOpts().has("columns") ?
+                tableFromFile.withColumnsInOrder(pluginParams.getOpts().getList("columns")) :
+                tableFromFile;
+
+        Map<String, Object> tableAsMap = rearrangedTable.toMap();
+
+        List<Map<String, Object>> columns = (List<Map<String, Object>>) tableAsMap.get("columns");
 
         pluginParams.getOpts().forEach((columnName, meta) -> {
             Optional<Map<String, Object>> column = columns.stream().filter(c -> c.get("title").equals(columnName)).findFirst();
             column.ifPresent(c -> c.putAll((Map<? extends String, ?>) meta));
         });
 
-        table.put("data", parseMarkupInEachRow((List<List<Object>>) table.get("data")));
+        tableAsMap.put("data", parseMarkupInEachRow((List<List<Object>>) tableAsMap.get("data")));
 
-        return PluginResult.docElement(DocElementType.TABLE, Collections.singletonMap("table", table));
+        return PluginResult.docElement(DocElementType.TABLE, Collections.singletonMap("table", tableAsMap));
     }
 
     private List<Object> parseMarkupInEachRow(List<List<Object>> rows) {

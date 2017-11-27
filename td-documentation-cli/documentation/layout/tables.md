@@ -28,6 +28,14 @@ renders as this table
 
 :include-table: table.json
 
+# Arrange and Filter
+
+To change order of columns or filter out certain columns, specify `columns` parameter.
+
+    :include-table: table.csv {columns: ["Description", "Price"]}
+    
+:include-table: table.csv {columns: ["Description", "Price"]}
+
 # Alignment and Width
 
 By default column width is auto calculated to fit the values inside. 

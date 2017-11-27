@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -17,6 +19,34 @@ public class MarkupTableData {
     public MarkupTableData() {
         header = new ArrayList<>();
         data = new ArrayList<>();
+    }
+
+    MarkupTableData(List<Column> header, List<Row> data) {
+        this.header = header;
+        this.data = data;
+    }
+
+    public MarkupTableData withColumnsInOrder(List<String> columnNames) {
+        List<Integer> newIdxOrder = findColumnIdxes(columnNames);
+
+        List<Column> newHeader = newIdxOrder.stream().map(header::get).collect(toList());
+        List<Row> newRows = data.stream().map(r -> r.onlyWithIdxs(newIdxOrder)).collect(toList());
+
+        return new MarkupTableData(newHeader, newRows);
+    }
+
+    private List<Integer> findColumnIdxes(List<String> columnNames) {
+        return columnNames.stream().map(this::findColumnIdx).collect(toList());
+    }
+
+    private Integer findColumnIdx(String columnName) {
+        for (int idx = 0; idx < header.size(); idx++) {
+            if (header.get(idx).getTitle().toLowerCase().equals(columnName.toLowerCase())) {
+                return idx;
+            }
+        }
+
+        throw new RuntimeException("cannot find column: " + columnName);
     }
 
     public void addColumn(String name) {
