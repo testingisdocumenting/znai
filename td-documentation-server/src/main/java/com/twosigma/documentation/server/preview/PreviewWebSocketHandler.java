@@ -9,7 +9,9 @@ import com.twosigma.utils.JsonUtils;
 import io.vertx.core.Handler;
 import io.vertx.core.http.ServerWebSocket;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -21,19 +23,25 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
-    private ServerWebSocket ws;
+    private List<ServerWebSocket> sockets = new ArrayList<>();
 
     @Override
     public void handle(ServerWebSocket ws) {
-        this.ws = ws;
+        sockets.add(ws);
+
         ConsoleOutputs.out("connected: ", BLUE, ws.path());
+        renderNumberOfSockets();
 
         ws.handler(data -> {
             String dataString = data.getString(0, data.length());
             System.out.println(dataString);
         });
 
-        ws.closeHandler((h) -> ConsoleOutputs.out(RED, "connection closed"));
+        ws.closeHandler((h) -> {
+            sockets.remove(ws);
+            ConsoleOutputs.out(RED, "connection closed");
+            renderNumberOfSockets();
+        });
     }
 
     public void sendPage(PageProps pageProps) {
@@ -77,7 +85,7 @@ public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
     }
 
     private void send(Map<String, ?> payload) {
-        if (ws == null) {
+        if (sockets.isEmpty()) {
             ConsoleOutputs.out(BLUE, "connection ", FontStyle.NORMAL, "with", BLUE, " web page ", FontStyle.NORMAL, "is not established. ",
                     BLUE, "reload or open", FontStyle.NORMAL, " the page");
             return;
@@ -85,6 +93,10 @@ public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
 
         String text = JsonUtils.serialize(payload);
         ConsoleOutputs.out("sending: ", BLUE, text);
-        ws.writeFinalTextFrame(text);
+        sockets.forEach(ws -> ws.writeFinalTextFrame(text));
+    }
+
+    private void renderNumberOfSockets() {
+        ConsoleOutputs.out("there are " + sockets.size() + " opened sockets");
     }
 }
