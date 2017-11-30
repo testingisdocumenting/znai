@@ -41,7 +41,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
         this.paragraphs = new ArrayList<>();
         this.auxiliaryFiles = new ArrayList<>();
 
-        this.docElement = new DocElement("page");
+        this.docElement = new DocElement(DocElementType.PAGE);
         this.elementsStack = new ArrayDeque<>();
         this.elementsStack.add(docElement);
 

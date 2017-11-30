@@ -26,6 +26,14 @@ public class MarkupTableData {
         this.data = data;
     }
 
+    public Stream<String> columnNamesStream() {
+        return header.stream().map(Column::getTitle);
+    }
+
+    public Stream<Object> allValuesStream() {
+        return data.stream().flatMap(row -> row.getData().stream());
+    }
+
     public MarkupTableData withColumnsInOrder(List<String> columnNames) {
         List<Integer> newIdxOrder = findColumnIdxes(columnNames);
 
