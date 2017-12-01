@@ -11,24 +11,17 @@ import java.util.List;
  * @author mykola
  */
 public class SearchCrawlerParserHandler implements ParserHandler {
-    private String docTitle;
-    private String sectionTitle;
-    private String pageTitle;
-
-    private List<SearchEntry> searchEntries;
+    private List<PageSearchEntry> searchEntries;
     private String pageSectionTitle;
     private List<String> currentTextParts;
 
-    public SearchCrawlerParserHandler(String docTitle, String sectionTitle, String pageTitle) {
-        this.docTitle = docTitle;
-        this.sectionTitle = sectionTitle;
-        this.pageTitle = pageTitle;
+    public SearchCrawlerParserHandler() {
         this.searchEntries = new ArrayList<>();
         this.pageSectionTitle = "";
         this.currentTextParts = new ArrayList<>();
     }
 
-    public List<SearchEntry> getSearchEntries() {
+    public List<PageSearchEntry> getSearchEntries() {
         return searchEntries;
     }
 
@@ -39,7 +32,8 @@ public class SearchCrawlerParserHandler implements ParserHandler {
 
     @Override
     public void onSectionEnd() {
-        searchEntries.add(createSearchEntry(SearchScore.STANDARD.text(String.join(" ", currentTextParts))));
+        searchEntries.add(new PageSearchEntry(pageSectionTitle,
+                SearchScore.STANDARD.text(String.join(" ", currentTextParts))));
         currentTextParts.clear();
     }
 
@@ -194,14 +188,4 @@ public class SearchCrawlerParserHandler implements ParserHandler {
 
     }
 
-    private SearchEntry createSearchEntry(SearchText searchText) {
-        SearchEntry entry = new SearchEntry();
-        entry.setDocTitle(docTitle);
-        entry.setSectionTitle(sectionTitle);
-        entry.setPageTitle(pageTitle);
-        entry.setPageSectionTitle(pageSectionTitle);
-        entry.setText(searchText);
-
-        return entry;
-    }
 }

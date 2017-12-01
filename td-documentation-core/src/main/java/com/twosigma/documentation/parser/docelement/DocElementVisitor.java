@@ -3,6 +3,7 @@ package com.twosigma.documentation.parser.docelement;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.Plugins;
+import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.commonmark.include.IncludeBlock;
 import com.twosigma.documentation.parser.table.GfmTableToTableConverter;
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
@@ -21,10 +22,10 @@ public class DocElementVisitor extends AbstractVisitor {
 
     private final ComponentsRegistry componentsRegistry;
     private final Path path;
-    private DocElementCreationParserHandler parserHandler;
+    private ParserHandler parserHandler;
     private boolean sectionStarted;
 
-    public DocElementVisitor(ComponentsRegistry componentsRegistry, Path path, DocElementCreationParserHandler parserHandler) {
+    public DocElementVisitor(ComponentsRegistry componentsRegistry, Path path, ParserHandler parserHandler) {
         this.componentsRegistry = componentsRegistry;
         this.path = path;
         this.parserHandler = parserHandler;

@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.parser.docelement.DocElementVisitor;
+import com.twosigma.documentation.search.SearchCrawlerParserHandler;
 import org.commonmark.ext.front.matter.YamlFrontMatterExtension;
 import org.commonmark.ext.front.matter.YamlFrontMatterVisitor;
 import org.commonmark.ext.gfm.tables.TablesExtension;
@@ -32,7 +33,11 @@ public class MarkdownParser implements MarkupParser {
     public MarkupParserResult parse(Path path, String markdown) {
         Node node = parser.parse(markdown);
 
-        DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(componentsRegistry, path);
+        SearchCrawlerParserHandler searchCrawler = new SearchCrawlerParserHandler();
+        DocElementCreationParserHandler elementCreationHandler = new DocElementCreationParserHandler(componentsRegistry, path);
+
+        ParserHandlersList parserHandler = new ParserHandlersList(elementCreationHandler, searchCrawler);
+
         DocElementVisitor visitor = new DocElementVisitor(componentsRegistry, path, parserHandler);
         node.accept(visitor);
 
@@ -40,12 +45,14 @@ public class MarkdownParser implements MarkupParser {
         node.accept(frontMatterVisitor);
 
         if (visitor.isSectionStarted()) {
-            parserHandler.onSectionEnd();
+            elementCreationHandler.onSectionEnd();
         }
 
-        parserHandler.onParsingEnd();
+        elementCreationHandler.onParsingEnd();
 
-        return new MarkupParserResult(parserHandler.getDocElement(), parserHandler.getAuxiliaryFiles(),
+        return new MarkupParserResult(elementCreationHandler.getDocElement(),
+                searchCrawler.getSearchEntries(),
+                elementCreationHandler.getAuxiliaryFiles(),
                 frontMatterVisitor.getData());
     }
 }

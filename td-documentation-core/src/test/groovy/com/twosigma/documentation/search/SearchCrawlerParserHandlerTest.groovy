@@ -12,7 +12,7 @@ class SearchCrawlerParserHandlerTest {
 
     @Before
     void init() {
-        parserHandler = new SearchCrawlerParserHandler('doc title', 'section title', 'page title')
+        parserHandler = new SearchCrawlerParserHandler()
     }
 
     @Test
@@ -29,9 +29,9 @@ class SearchCrawlerParserHandlerTest {
         parserHandler.onInlinedCode('broker')
         parserHandler.onSectionEnd()
 
-        parserHandler.getSearchEntries().should == [  'docTitle' |  'sectionTitle' |  'pageTitle' | 'pageSectionTitle' | 'text'] {
-                                                   ________________________________________________________________________________
-                                                     'doc title' | 'section title' | 'page title' | 'section one'      | [text: 'hello source code inlined term', score: SearchScore.STANDARD]
-                                                     'doc title' | 'section title' | 'page title' | 'section two'      | [text: 'world code broker', score: SearchScore.STANDARD] }
+        parserHandler.getSearchEntries().should == [ 'pageSectionTitle' | 'text'] {
+                                                     _______________________________
+                                                     'section one'      | [text: 'hello source code inlined term', score: SearchScore.STANDARD]
+                                                     'section two'      | [text: 'world code broker', score: SearchScore.STANDARD] }
     }
 }

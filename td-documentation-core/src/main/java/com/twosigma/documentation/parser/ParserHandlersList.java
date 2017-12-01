@@ -148,7 +148,7 @@ public class ParserHandlersList implements ParserHandler {
 
     @Override
     public void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet) {
-        list.forEach(h -> onSnippet(pluginParams, lang, lineNumber, snippet));
+        list.forEach(h -> h.onSnippet(pluginParams, lang, lineNumber, snippet));
     }
 
     @Override

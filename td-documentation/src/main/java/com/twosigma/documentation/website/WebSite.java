@@ -1,6 +1,5 @@
 package com.twosigma.documentation.website;
 
-import com.google.gson.Gson;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.codesnippets.CodeTokenizer;
@@ -11,10 +10,11 @@ import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.extensions.MultipleLocationsResourceResolver;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
-import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
-import com.twosigma.documentation.parser.sphinx.SphinxDocTreeParser;
+import com.twosigma.documentation.search.PageSearchEntry;
+import com.twosigma.documentation.search.SiteSearchEntries;
+import com.twosigma.documentation.search.SiteSearchEntry;
 import com.twosigma.documentation.structure.Page;
 import com.twosigma.documentation.search.LunrIndexer;
 import com.twosigma.documentation.structure.*;
@@ -52,6 +52,7 @@ public class WebSite implements DocStructure {
     private Map<TocItem, Page> pageByTocItem;
     private Map<Path, Set<TocItem>> tocItemsByAuxiliaryFilePath;
     private Map<Path, AuxiliaryFile> auxiliaryFiles;
+    private SiteSearchEntries searchEntries;
 
     private TableOfContents toc;
     private Footer footer;
@@ -89,6 +90,7 @@ public class WebSite implements DocStructure {
         this.tocItemsByAuxiliaryFilePath = new HashMap<>();
         this.markupParsingConfiguration = createMarkupParsingConfiguration();
         this.auxiliaryFiles = new HashMap<>();
+        this.searchEntries = new SiteSearchEntries();
 
         docMeta.setId(cfg.id);
         if (cfg.isPreviewEnabled) {
@@ -104,7 +106,7 @@ public class WebSite implements DocStructure {
     }
 
     public static Configuration withToc(Path path) {
-        final Configuration configuration = new Configuration();
+        Configuration configuration = new Configuration();
         configuration.withTocPath(path);
 
         return configuration;
@@ -164,7 +166,7 @@ public class WebSite implements DocStructure {
 
     public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
         parseMarkup(tocItem);
-        final Page page = pageByTocItem.get(tocItem);
+        Page page = pageByTocItem.get(tocItem);
 
         return generatePage(tocItem, page);
     }
@@ -301,7 +303,7 @@ public class WebSite implements DocStructure {
     }
 
     private void parseFooter() {
-        final Path markupPath = cfg.footerPath;
+        Path markupPath = cfg.footerPath;
 
         if (! Files.exists(markupPath)) {
             return;
@@ -316,7 +318,7 @@ public class WebSite implements DocStructure {
         footer = new Footer(parserResult.getDocElement());
     }
 
-    private void parseMarkup(final TocItem tocItem) {
+    private void parseMarkup(TocItem tocItem) {
         try {
             Path markupPath = markupPath(tocItem);
 
@@ -327,7 +329,7 @@ public class WebSite implements DocStructure {
             updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
 
             FileTime lastModifiedTime = Files.getLastModifiedTime(markupPath);
-            final Page page = new Page(parserResult.getDocElement(), lastModifiedTime);
+            Page page = new Page(parserResult.getDocElement(), lastModifiedTime);
             pageByTocItem.put(tocItem, page);
 
             tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
@@ -336,10 +338,26 @@ public class WebSite implements DocStructure {
             if (title != null) {
                 tocItem.setPageTitle(title.get(0));
             }
+
+            updateSearchEntries(tocItem, parserResult);
         } catch(Exception e) {
             throw new RuntimeException("error during parsing of " + tocItem.getFileNameWithoutExtension() +
                     ":" + e.getMessage(), e);
         }
+    }
+
+    private void updateSearchEntries(TocItem tocItem, MarkupParserResult parserResult) {
+        List<SiteSearchEntry> siteSearchEntries = parserResult.getSearchEntries().stream()
+                .map(pageSearchEntry ->
+                        new SiteSearchEntry(searchEntryTitle(tocItem, pageSearchEntry), pageSearchEntry.getText()))
+                .collect(toList());
+
+        searchEntries.addAll(siteSearchEntries);
+    }
+
+    private String searchEntryTitle(TocItem tocItem, PageSearchEntry pageSearchEntry) {
+        return docMeta.getTitle() + ": " + tocItem.getPageTitle() + ", " + pageSearchEntry.getPageSectionTitle() +
+                " [" + tocItem.getSectionTitle() + "]";
     }
 
     // each markup file may refer other files like code snippets or diagrams
@@ -357,12 +375,12 @@ public class WebSite implements DocStructure {
         });
     }
 
-    private Path markupPath(final TocItem tocItem) {
+    private Path markupPath(TocItem tocItem) {
         return markupParsingConfiguration.fullPath(cfg.docRootPath, tocItem);
     }
 
-    private void resetPlugins(final Path markupPath) {
-        final IncludeContext context = new IncludeContext(markupPath);
+    private void resetPlugins(Path markupPath) {
+        IncludeContext context = new IncludeContext(markupPath);
         Plugins.reset(context);
     }
 
@@ -384,8 +402,12 @@ public class WebSite implements DocStructure {
 
     private void generateSearchIndex() {
         reportPhase("generating search index");
+
         String jsonIndex = lunrIndexer.createJsonIndex(allPagesProps);
         deployer.deploy("search-index.json", jsonIndex);
+
+        String xmlExternalIndex = searchEntries.toXml();
+        deployer.deploy("search-entries.xml", xmlExternalIndex);
     }
 
     private void buildJsonOfAllPages() {
@@ -395,16 +417,16 @@ public class WebSite implements DocStructure {
         deployer.deploy("all-pages.json", json);
     }
 
-    private HtmlPageAndPageProps generatePage(final TocItem tocItem, final Page page) {
+    private HtmlPageAndPageProps generatePage(TocItem tocItem, Page page) {
         try {
             resetPlugins(markupPath(tocItem)); // TODO reset at render phase only?
 
-            final HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(tocItem, page, footer);
+            HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(tocItem, page, footer);
 
             allPagesProps.add(htmlAndProps.getProps());
             extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
 
-            final String html = htmlAndProps.getHtmlPage().render(docMeta.getId());
+            String html = htmlAndProps.getHtmlPage().render(docMeta.getId());
 
             Path pagePath = tocItem.isIndex() ? Paths.get("index.html") :
                     Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
@@ -437,7 +459,7 @@ public class WebSite implements DocStructure {
 
     private void forEachPage(PageConsumer consumer) {
         toc.getTocItems().forEach(tocItem -> {
-            final Page page = pageByTocItem.get(tocItem);
+            Page page = pageByTocItem.get(tocItem);
             consumer.consume(tocItem, page);
         });
     }
@@ -598,7 +620,7 @@ public class WebSite implements DocStructure {
 
         @SuppressWarnings("unchecked")
         public Configuration withMetaFromJsonFile(Path path) {
-            final String json = fileTextContent(path);
+            String json = fileTextContent(path);
             docMeta = new DocMeta(json);
 
             withTitle(docMeta.getTitle());
@@ -619,7 +641,7 @@ public class WebSite implements DocStructure {
 
         public WebSite deployTo(Path path) {
             deployPath = path.toAbsolutePath();
-            final WebSite webSite = new WebSite(this);
+            WebSite webSite = new WebSite(this);
             webSite.generate();
 
             return webSite;
