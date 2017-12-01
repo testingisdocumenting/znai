@@ -85,11 +85,6 @@ public class CodeExecutionResultIncludePlugin implements IncludePlugin {
         return snippetAndResults;
     }
 
-    @Override
-    public String textForSearch() {
-        return "";
-    }
-
     private List<SnippetAndResult> parse(String json) {
         final Gson gson = new Gson();
         final List<?> list = gson.fromJson(json, List.class);

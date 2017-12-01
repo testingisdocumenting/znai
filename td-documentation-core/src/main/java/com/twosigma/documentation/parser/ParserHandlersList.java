@@ -1,6 +1,8 @@
 package com.twosigma.documentation.parser;
 
 import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 
 import java.util.Arrays;
@@ -157,8 +159,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onIncludePlugin(PluginParams pluginParams) {
-        list.forEach(h -> h.onIncludePlugin(pluginParams));
+    public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
+        list.forEach(h -> h.onIncludePlugin(includePlugin, pluginResult));
     }
 
     @Override

@@ -23,7 +23,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     }
 
     @Override
-    public List<DocElement> process(JavaCode javaCode) {
+    public JavaIncludeResult process(JavaCode javaCode) {
         Boolean bodyOnly = pluginParams.getOpts().get("bodyOnly", false);
         Boolean signatureOnly = pluginParams.getOpts().get("signatureOnly", false);
 
@@ -31,14 +31,14 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
             throw new IllegalArgumentException("specify only bodyOnly or signatureOnly");
         }
 
-        Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "java",
-                extractContent(javaCode, bodyOnly, signatureOnly));
+        String snippet = extractContent(javaCode, bodyOnly, signatureOnly);
+        Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "java", snippet);
         props.putAll(pluginParams.getOpts().toMap());
 
         DocElement docElement = new DocElement(DocElementType.SNIPPET);
         props.forEach(docElement::addProp);
 
-        return Collections.singletonList(docElement);
+        return new JavaIncludeResult(Collections.singletonList(docElement), snippet);
     }
 
     private String extractContent(JavaCode javaCode, Boolean isBodyOnly, Boolean isSignatureOnly) {

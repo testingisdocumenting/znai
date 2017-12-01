@@ -16,11 +16,11 @@ public class JavaDocIncludePlugin extends JavaIncludePluginBase {
     }
 
     @Override
-    public List<DocElement> process(JavaCode javaCode) {
+    public JavaIncludeResult process(JavaCode javaCode) {
         String entry = pluginParams.getOpts().get("entry");
 
-        return HtmlToDocElementConverter.convert(componentsRegistry, markupPath, entry == null ?
+        return new JavaIncludeResult(HtmlToDocElementConverter.convert(componentsRegistry, markupPath, entry == null ?
                 javaCode.getClassJavaDocText() :
-                javaCode.findJavaDoc(entry));
+                javaCode.findJavaDoc(entry)), entry);
     }
 }

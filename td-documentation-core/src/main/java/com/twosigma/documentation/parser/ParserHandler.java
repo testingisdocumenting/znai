@@ -1,6 +1,8 @@
 package com.twosigma.documentation.parser;
 
 import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 
 /**
@@ -38,7 +40,12 @@ public interface ParserHandler {
     void onImage(String title, String destination, String alt);
     void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet);
     void onThematicBreak();
-    void onIncludePlugin(PluginParams pluginParams);
+
+    /**
+     * @param includePlugin already process plugin
+     * @param pluginResult result of plugin process
+     */
+    void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult);
     void onFencePlugin(PluginParams pluginParams, String content);
     void onInlinedCodePlugin(PluginParams pluginParams);
     void onParsingEnd();

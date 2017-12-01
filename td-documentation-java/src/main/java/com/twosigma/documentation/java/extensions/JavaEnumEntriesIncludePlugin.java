@@ -2,6 +2,7 @@ package com.twosigma.documentation.java.extensions;
 
 import com.twosigma.documentation.java.parser.EnumEntry;
 import com.twosigma.documentation.java.parser.JavaCode;
+import com.twosigma.documentation.java.parser.JavaMethodParam;
 import com.twosigma.documentation.java.parser.html.HtmlToDocElementConverter;
 import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.parser.docelement.DocElementType;
@@ -9,6 +10,7 @@ import com.twosigma.utils.CollectionUtils;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -21,7 +23,7 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     }
 
     @Override
-    public List<DocElement> process(JavaCode javaCode) {
+    public JavaIncludeResult process(JavaCode javaCode) {
         List<List<?>> data = javaCode.getEnumEntries().stream()
                 .map(e -> Arrays.asList(nameToDocElements(e), descriptionToDocElements(e)))
                 .collect(toList());
@@ -39,7 +41,12 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
         tableProps.put("styles", Arrays.asList("middle-vertical-lines-only", "no-header", "no-vertical-padding"));
 
         DocElement table = new DocElement(DocElementType.TABLE, "table", tableProps);
-        return Collections.singletonList(table);
+        return new JavaIncludeResult(Collections.singletonList(table), extractText(javaCode.getEnumEntries())) ;
+    }
+
+    private String extractText(List<EnumEntry> enums) {
+        return enums.stream().map(e -> e.getName() + " " + e.getJavaDocText())
+                .collect(joining(" "));
     }
 
     private List<Map<String, Object>> nameToDocElements(EnumEntry e) {

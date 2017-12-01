@@ -7,6 +7,8 @@ import com.twosigma.documentation.extensions.PluginParamsOpts;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.docelement.DocElementType;
+import com.twosigma.documentation.search.SearchScore;
+import com.twosigma.documentation.search.SearchText;
 import com.twosigma.utils.StringUtils;
 
 import java.nio.file.Path;
@@ -21,6 +23,7 @@ import java.util.stream.Stream;
  */
 public class FileIncludePlugin implements IncludePlugin {
     private String fileName;
+    private String text;
 
     @Override
     public String id() {
@@ -35,7 +38,7 @@ public class FileIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         fileName = pluginParams.getFreeParam();
 
-        String text = extractText(componentsRegistry.resourceResolver().
+        text = extractText(componentsRegistry.resourceResolver().
                 textContent(fileName), pluginParams.getOpts());
 
         String providedLang = pluginParams.getOpts().getString("lang");
@@ -51,6 +54,11 @@ public class FileIncludePlugin implements IncludePlugin {
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(
                 componentsRegistry.resourceResolver().fullPath(fileName)));
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.STANDARD.text(text);
     }
 
     private String extractText(String fileContent, PluginParamsOpts opts) {

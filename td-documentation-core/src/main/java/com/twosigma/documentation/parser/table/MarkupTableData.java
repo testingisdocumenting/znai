@@ -34,6 +34,14 @@ public class MarkupTableData {
         return data.stream().flatMap(row -> row.getData().stream());
     }
 
+    public String allText() {
+        List<String> textParts = new ArrayList<>();
+        columnNamesStream().forEach(textParts::add);
+        allValuesStream().forEach(v -> textParts.add(v.toString()));
+
+        return String.join(" ", textParts);
+    }
+
     public MarkupTableData withColumnsInOrder(List<String> columnNames) {
         List<Integer> newIdxOrder = findColumnIdxes(columnNames);
 

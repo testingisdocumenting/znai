@@ -1,6 +1,8 @@
 package com.twosigma.documentation.search;
 
 import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 
@@ -98,8 +100,7 @@ public class SearchCrawlerParserHandler implements ParserHandler {
 
     @Override
     public void onTable(MarkupTableData tableData) {
-        tableData.columnNamesStream().forEach(currentTextParts::add);
-        tableData.allValuesStream().forEach(v -> currentTextParts.add(v.toString()));
+        currentTextParts.add(tableData.allText());
     }
 
     @Override
@@ -169,8 +170,11 @@ public class SearchCrawlerParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onIncludePlugin(PluginParams pluginParams) {
-
+    public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
+        SearchText searchText = includePlugin.textForSearch();
+        if (searchText != null) {
+            currentTextParts.add(searchText.getText());
+        }
     }
 
     @Override

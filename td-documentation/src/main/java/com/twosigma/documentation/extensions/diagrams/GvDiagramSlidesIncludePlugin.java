@@ -68,9 +68,4 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
                 AuxiliaryFile.builtTime(diagramPath),
                 AuxiliaryFile.builtTime(slidesPath)));
     }
-
-    @Override
-    public String textForSearch() {
-        return null;
-    }
 }

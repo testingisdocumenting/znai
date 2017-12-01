@@ -2,7 +2,9 @@ package com.twosigma.documentation.parser.docelement;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.Plugins;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.commonmark.include.IncludeBlock;
 import com.twosigma.documentation.parser.table.GfmTableToTableConverter;
@@ -123,13 +125,21 @@ public class DocElementVisitor extends AbstractVisitor {
 
         if (customBlock instanceof IncludeBlock) {
             final IncludeBlock includeBlock = (IncludeBlock) customBlock;
-            parserHandler.onIncludePlugin(includeBlock.getParams());
+            handleIncludePlugin(includeBlock.getParams());
+//            parserHandler.onIncludePlugin(includeBlock.getParams());
         } else if (customBlock instanceof TableBlock) {
             GfmTableToTableConverter gfmTableToTableConverter = new GfmTableToTableConverter(componentsRegistry, path, (TableBlock) customBlock);
             parserHandler.onTable(gfmTableToTableConverter.convert());
         } else {
             throw new UnsupportedOperationException("unsupported custom block: " + customBlock);
         }
+    }
+
+    private void handleIncludePlugin(PluginParams params) {
+        IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());
+        PluginResult pluginResult = includePlugin.process(componentsRegistry, path, params);
+
+        parserHandler.onIncludePlugin(includePlugin, pluginResult);
     }
 
     @Override

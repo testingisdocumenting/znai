@@ -7,6 +7,8 @@ import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.java.parser.JavaCode;
 import com.twosigma.documentation.parser.docelement.DocElement;
+import com.twosigma.documentation.search.SearchScore;
+import com.twosigma.documentation.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -22,6 +24,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
     protected PluginParams pluginParams;
     protected String entry;
     protected List<String> entries;
+    private JavaIncludeResult javaIncludeResult;
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
@@ -37,15 +40,20 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
         }
 
         JavaCode javaCode = new JavaCode(componentsRegistry.resourceResolver().textContent(pluginParams.getFreeParam()));
-        List<DocElement> docElements = process(javaCode);
+        javaIncludeResult = process(javaCode);
 
-        return PluginResult.docElements(docElements.stream());
+        return PluginResult.docElements(javaIncludeResult.getDocElements().stream());
     }
 
-    abstract public List<DocElement> process(JavaCode javaCode);
+    abstract public JavaIncludeResult process(JavaCode javaCode);
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(fullPath));
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.HIGH.text(javaIncludeResult.getText());
     }
 }

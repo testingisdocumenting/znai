@@ -38,9 +38,4 @@ public class GvDiagramIncludePlugin implements IncludePlugin {
 
         return PluginResult.docElement("GraphVizDiagram", props);
     }
-
-    @Override
-    public String textForSearch() {
-        return null;
-    }
 }

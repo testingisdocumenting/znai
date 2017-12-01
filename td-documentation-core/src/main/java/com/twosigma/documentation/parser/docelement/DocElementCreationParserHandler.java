@@ -230,9 +230,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onIncludePlugin(PluginParams pluginParams) {
-        IncludePlugin includePlugin = Plugins.includePluginById(pluginParams.getPluginId());
-        processPlugin(includePlugin, (p) -> p.process(componentsRegistry, path, pluginParams));
+    public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
+        processPlugin(includePlugin, pluginResult);
     }
 
     @Override
@@ -250,27 +249,30 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private <E extends Plugin> void processPlugin(E plugin, Function<E, PluginResult> processFunc) {
         try {
             PluginResult result = processFunc.apply(plugin);
-
-            plugin.auxiliaryFiles(componentsRegistry).forEach(auxiliaryFiles::add);
-
-            List<DocElement> docElements = result.getDocElements();
-            if (docElements.isEmpty()) {
-                return;
-            }
-
-            docElements.forEach(el -> {
-                // if element is a section itself we need to close all the current sections and paragraphs
-                if (el.getType().equals(DocElementType.SECTION)) {
-                    while (elementsStack.size() > 1) {
-                        end();
-                    }
-                }
-
-                append(el);
-            });
+            processPlugin(plugin, result);
         } catch (Exception e) {
             throw new RuntimeException("failure during processing include plugin '" + plugin.id() + "': " + e.getMessage(), e);
         }
+    }
+
+    private <E extends Plugin> void processPlugin(E plugin, PluginResult result) {
+        plugin.auxiliaryFiles(componentsRegistry).forEach(auxiliaryFiles::add);
+
+        List<DocElement> docElements = result.getDocElements();
+        if (docElements.isEmpty()) {
+            return;
+        }
+
+        docElements.forEach(el -> {
+            // if element is a section itself we need to close all the current sections and paragraphs
+            if (el.getType().equals(DocElementType.SECTION)) {
+                while (elementsStack.size() > 1) {
+                    end();
+                }
+            }
+
+            append(el);
+        });
     }
 
     @Override

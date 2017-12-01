@@ -40,4 +40,9 @@ class MarkupTableDataTest {
     void "should have a stream of all values"() {
         table.allValuesStream().should == ['a1', 'b1', 'c1', 'a2', 'b2', 'c2']
     }
+
+    @Test
+    void "should have a text representation of a table content"() {
+        table.allText().should == 'a b C a1 b1 c1 a2 b2 c2'
+    }
 }

@@ -12,7 +12,7 @@ public enum SearchScore {
     LOW,
     LOWEST;
 
-    SearchText text(String text) {
+    public SearchText text(String text) {
         return new SearchText(text, this);
     }
 }
