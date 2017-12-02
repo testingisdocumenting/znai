@@ -47,15 +47,39 @@ class DocTreeDomXmlParser {
                 return parseEmphasis(node);
             case "strong":
                 return parseStrong(node);
+            case "literal":
+                return parseLiteral(node);
             case "literal_block":
                 return parseSnippet(node);
-            case "title":
-                return false;
+            case "bullet_list":
+                return parseBulletList(node);
+            case "enumerated_list":
+                return parseOrderedList(node);
+            case "list_item":
+                return parseListItem(node);
             case "#text":
                 return parseText(node);
+            case "title":
+                return false;
         }
 
         return false;
+    }
+
+    private boolean parseSection(Node node) {
+        parserHandler.onSectionStart(extractTitle(node));
+        parseChildren(node);
+        parserHandler.onSectionEnd();
+
+        return true;
+    }
+
+    private boolean parseParagraph(Node node) {
+        parserHandler.onParagraphStart();
+        parseChildren(node);
+        parserHandler.onParagraphEnd();
+
+        return true;
     }
 
     private boolean parseEmphasis(Node node) {
@@ -74,8 +98,8 @@ class DocTreeDomXmlParser {
         return true;
     }
 
-    private boolean parseText(Node node) {
-        parserHandler.onSimpleText(node.getTextContent());
+    private boolean parseLiteral(Node node) {
+        parserHandler.onInlinedCode(node.getTextContent());
         return true;
     }
 
@@ -86,19 +110,37 @@ class DocTreeDomXmlParser {
         return true;
     }
 
-    private boolean parseParagraph(Node node) {
-        parserHandler.onParagraphStart();
+    private boolean parseBulletList(Node node) {
+        parserHandler.onBulletListStart(getAttributeText(node, "bullet").charAt(0), false);
         parseChildren(node);
-        parserHandler.onParagraphEnd();
+        parserHandler.onBulletListEnd();
 
         return true;
     }
 
-    private boolean parseSection(Node node) {
-        parserHandler.onSectionStart(extractTitle(node));
+    private boolean parseOrderedList(Node node) {
+        parserHandler.onOrderedListStart(getAttributeText(node, "suffix").charAt(0), 1);
         parseChildren(node);
-        parserHandler.onSectionEnd();
+        parserHandler.onOrderedListEnd();
 
+        return true;
+    }
+
+    private boolean parseListItem(Node node) {
+        parserHandler.onListItemStart();
+        parseChildren(node);
+        parserHandler.onListItemEnd();
+
+        return true;
+    }
+
+    private boolean parseText(Node node) {
+        String textContent = node.getTextContent();
+        if (textContent.startsWith("\n ")) {
+            return false;
+        }
+
+        parserHandler.onSimpleText(textContent);
         return true;
     }
 

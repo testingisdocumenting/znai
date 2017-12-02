@@ -48,6 +48,61 @@ linenos="False" xml:space="preserve">System.out.println("hello world");</literal
                                                          [type: 'StrongEmphasis', content:[[text: 'table of contents', type: 'SimpleText']]]]]]
     }
 
+    @Test
+    void "bullet list"() {
+        parse("""
+        <bullet_list bullet="*">
+            <list_item>
+                <paragraph>this is</paragraph>
+                <bullet_list bullet="*">
+                    <list_item>
+                        <paragraph>with a nested list</paragraph>
+                    </list_item>
+                </bullet_list>
+            </list_item>
+            <list_item>
+                <paragraph>and here the parent list continues</paragraph>
+            </list_item>
+        </bullet_list> """)
+
+        content.should == [[bulletMarker: '*', tight: false, type: 'BulletList',
+                            content:[[type: 'ListItem',
+                                      content:[[type: 'Paragraph', content: [[text:'this is', type: 'SimpleText']]],
+                                               [bulletMarker:'*', tight: false, type: 'BulletList',
+                                                content:[[type: 'ListItem', content:[[type: 'Paragraph',
+                                                                                      content:[[text: 'with a nested list', type: 'SimpleText']]]]]]]]],
+                                     [type: 'ListItem',
+                                      content:[[type: 'Paragraph', content:[[text: 'and here the parent list continues', type: 'SimpleText']]]]]]]]
+
+    }
+
+    @Test
+    void "numbered list"() {
+        parse("""    
+        <enumerated_list enumtype="arabic" prefix="" suffix=".">
+            <list_item>
+                <paragraph>numbered list</paragraph>
+            </list_item>
+            <list_item>
+                <paragraph>of two items</paragraph>
+            </list_item>
+        </enumerated_list> """)
+
+        content.should == [[delimiter: '.', startNumber:1, type:'OrderedList',
+                            content:[[type: 'ListItem',
+                                      content:[[type: 'Paragraph', content:[[text: 'numbered list', type: 'SimpleText']]]]],
+                                     [type: 'ListItem',
+                                      content:[[type: 'Paragraph', content:[[text: 'of two items', type: 'SimpleText']]]]]]]]
+
+    }
+
+    @Test
+    void "literal"() {
+        parse('<literal>markup</literal>')
+
+        content.should == [[type: 'InlinedCode', code: 'markup']]
+    }
+
     private void parse(String xml) {
         def parseResult = parser.parse(Paths.get("test.xml"), xml)
         content = parseResult.docElement.getContent().collect { it.toMap() }

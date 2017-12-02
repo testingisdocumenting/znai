@@ -20,7 +20,8 @@ public class DocTreeTocGenerator implements TocGenerator {
     @Override
     public TableOfContents generate(String indexXml) {
         Document doc = XmlUtils.parseXml(indexXml);
-        Element firstBulletList = (Element) doc.getElementsByTagName("bullet_list").item(0);
+        Element tocTreeWrapper = findTocTreeWrapperElement(doc);
+        Element firstBulletList = (Element) tocTreeWrapper.getElementsByTagName("bullet_list").item(0);
 
         NodeList chapterNodes = firstBulletList.getChildNodes();
         for (int chapterIdx = 0; chapterIdx < chapterNodes.getLength(); chapterIdx++) {
@@ -35,6 +36,21 @@ public class DocTreeTocGenerator implements TocGenerator {
 
         toc.addIndex();
         return toc;
+    }
+
+    private Element findTocTreeWrapperElement(Document doc) {
+        NodeList compoundNodes = doc.getElementsByTagName("compound");
+        int length = compoundNodes.getLength();
+        for (int i = 0; i < length; i++) {
+            Node node = compoundNodes.item(i);
+            String classes = node.getAttributes().getNamedItem("classes").getTextContent();
+
+            if (classes.equals("toctree-wrapper")) {
+                return (Element) node;
+            }
+        }
+
+        throw new IllegalArgumentException("<compound classes=\"toctree-wrapper\"> element is not found");
     }
 
     private void handleChapter(Node node) {
