@@ -38,28 +38,28 @@ public class DocElementVisitor extends AbstractVisitor {
     }
 
     @Override
-    public void visit(final Paragraph paragraph) {
+    public void visit(Paragraph paragraph) {
         parserHandler.onParagraphStart();
         visitChildren(paragraph);
         parserHandler.onParagraphEnd();
     }
 
     @Override
-    public void visit(final Emphasis emphasis) {
+    public void visit(Emphasis emphasis) {
         parserHandler.onEmphasisStart();
         visitChildren(emphasis);
         parserHandler.onEmphasisEnd();
     }
 
     @Override
-    public void visit(final StrongEmphasis strongEmphasis) {
+    public void visit(StrongEmphasis strongEmphasis) {
         parserHandler.onStrongEmphasisStart();
         visitChildren(strongEmphasis);
         parserHandler.onStrongEmphasisEnd();
     }
 
     @Override
-    public void visit(final Text text) {
+    public void visit(Text text) {
         parserHandler.onSimpleText(text.getLiteral());
     }
 
@@ -149,12 +149,12 @@ public class DocElementVisitor extends AbstractVisitor {
     }
 
     @Override
-    public void visit(final IndentedCodeBlock indentedCodeBlock) {
+    public void visit(IndentedCodeBlock indentedCodeBlock) {
         parserHandler.onSnippet(PluginParams.EMPTY,"", "", indentedCodeBlock.getLiteral());
     }
 
     @Override
-    public void visit(final FencedCodeBlock fencedCodeBlock) {
+    public void visit(FencedCodeBlock fencedCodeBlock) {
         PluginParams pluginParams = extractFencePluginParams(fencedCodeBlock.getInfo().trim());
         if (Plugins.hasFencePlugin(pluginParams.getPluginId())) {
             parserHandler.onFencePlugin(pluginParams, fencedCodeBlock.getLiteral());
@@ -173,14 +173,14 @@ public class DocElementVisitor extends AbstractVisitor {
     }
 
     @Override
-    public void visit(final Link link) {
+    public void visit(Link link) {
         parserHandler.onLinkStart(link.getDestination());
         visitChildren(link);
         parserHandler.onLinkEnd();
     }
 
     @Override
-    public void visit(final Heading heading) {
+    public void visit(Heading heading) {
         if (heading.getLevel() == 1) {
             if (sectionStarted) {
                 parserHandler.onSectionEnd();
