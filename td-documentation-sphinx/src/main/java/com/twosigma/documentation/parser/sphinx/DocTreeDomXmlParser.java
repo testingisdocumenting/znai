@@ -136,7 +136,7 @@ class DocTreeDomXmlParser {
 
     private boolean parseText(Node node) {
         String textContent = node.getTextContent();
-        if (textContent.startsWith("\n ")) {
+        if (textContent.startsWith("\n")) {
             return false;
         }
 
