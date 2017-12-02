@@ -5,6 +5,8 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.search.SearchScore;
+import com.twosigma.documentation.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -17,6 +19,7 @@ import java.util.stream.Stream;
  */
 public class CliOutputIncludePlugin implements IncludePlugin {
     private Path filePath;
+    private List<String> lines;
 
     @Override
     public String id() {
@@ -28,7 +31,8 @@ public class CliOutputIncludePlugin implements IncludePlugin {
         filePath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
 
         LinkedHashMap<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
-        props.put("lines", readLines(componentsRegistry, filePath));
+        lines = readLines(componentsRegistry, filePath);
+        props.put("lines", lines);
         props.put("highlight", pluginParams.getOpts().getList("highlight"));
 
         return PluginResult.docElement("CliOutput", props);
@@ -41,5 +45,10 @@ public class CliOutputIncludePlugin implements IncludePlugin {
 
     private static List<String> readLines(ComponentsRegistry componentsRegistry, Path filePath) {
         return Arrays.asList(componentsRegistry.resourceResolver().textContent(filePath).split("\n"));
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.STANDARD.text(String.join(" ", lines));
     }
 }
