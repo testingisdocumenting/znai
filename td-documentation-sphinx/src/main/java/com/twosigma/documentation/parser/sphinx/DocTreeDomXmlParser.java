@@ -26,40 +26,84 @@ class DocTreeDomXmlParser {
         parseNodeList(nodes);
     }
 
-    private void parseNodeList(NodeList nodes) {
+    private boolean parseNodeList(NodeList nodes) {
         for (int i = 0; i < nodes.getLength(); i++) {
             Node item = nodes.item(i);
             parseNode(item);
         }
+
+        return true;
     }
 
-    private void parseNode(Node node) {
+    private boolean parseNode(Node node) {
         switch (node.getNodeName()) {
             case "document":
-                parseNodeList(node.getChildNodes());
-                break;
+                return parseChildren(node);
             case "section":
-                parserHandler.onSectionStart(extractTitle(node));
-                parseNodeList(node.getChildNodes());
-                parserHandler.onSectionEnd();
-                break;
+                return parseSection(node);
             case "paragraph":
-                parserHandler.onParagraphStart();
-                parseNodeList(node.getChildNodes());
-                parserHandler.onParagraphEnd();
-                break;
+                return parseParagraph(node);
+            case "emphasis":
+                return parseEmphasis(node);
+            case "strong":
+                return parseStrong(node);
             case "literal_block":
-                parserHandler.onSnippet(PluginParams.EMPTY, getAttributeText(node, "language"),
-                        "", node.getTextContent());
-                break;
+                return parseSnippet(node);
             case "title":
-                break;
+                return false;
             case "#text":
-                if (! node.getTextContent().trim().isEmpty()) {
-                    parserHandler.onSimpleText(node.getTextContent());
-                }
-                break;
+                return parseText(node);
         }
+
+        return false;
+    }
+
+    private boolean parseEmphasis(Node node) {
+        parserHandler.onEmphasisStart();
+        parseChildren(node);
+        parserHandler.onEmphasisEnd();
+
+        return true;
+    }
+
+    private boolean parseStrong(Node node) {
+        parserHandler.onStrongEmphasisStart();
+        parseChildren(node);
+        parserHandler.onStrongEmphasisEnd();
+
+        return true;
+    }
+
+    private boolean parseText(Node node) {
+        parserHandler.onSimpleText(node.getTextContent());
+        return true;
+    }
+
+    private boolean parseSnippet(Node node) {
+        parserHandler.onSnippet(PluginParams.EMPTY, getAttributeText(node, "language"),
+                "", node.getTextContent());
+
+        return true;
+    }
+
+    private boolean parseParagraph(Node node) {
+        parserHandler.onParagraphStart();
+        parseChildren(node);
+        parserHandler.onParagraphEnd();
+
+        return true;
+    }
+
+    private boolean parseSection(Node node) {
+        parserHandler.onSectionStart(extractTitle(node));
+        parseChildren(node);
+        parserHandler.onSectionEnd();
+
+        return true;
+    }
+
+    private boolean parseChildren(Node node) {
+        return parseNodeList(node.getChildNodes());
     }
 
     private String getAttributeText(Node node, String name) {
