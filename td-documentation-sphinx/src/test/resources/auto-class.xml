@@ -1,0 +1,79 @@
+<desc desctype="class" domain="py" noindex="False" objtype="class">
+    <desc_signature class="" first="False" fullname="HelloWorld" ids="world.HelloWorld" module="world"
+                    names="world.HelloWorld">
+        <desc_annotation xml:space="preserve">class </desc_annotation><desc_addname xml:space="preserve">world.</desc_addname><desc_name xml:space="preserve">HelloWorld</desc_name>
+    </desc_signature>
+    <desc_content>
+        <paragraph>Simple hello world class</paragraph>
+        <index entries="['single',\ u'sayBye()\ (world.HelloWorld\ method)',\ u'world.HelloWorld.sayBye',\ '',\ None]"></index>
+        <desc desctype="method" domain="py" noindex="False" objtype="method">
+            <desc_signature class="HelloWorld" first="False" fullname="HelloWorld.sayBye"
+                            ids="world.HelloWorld.sayBye" module="world" names="world.HelloWorld.sayBye">
+                <desc_name xml:space="preserve">sayBye</desc_name>
+                <desc_parameterlist xml:space="preserve">
+                    <desc_parameter xml:space="preserve">name</desc_parameter>
+                    <desc_parameter xml:space="preserve">title</desc_parameter>
+                </desc_parameterlist>
+            </desc_signature>
+            <desc_content>
+                <paragraph>says bye</paragraph>
+                <field_list>
+                    <field>
+                        <field_name>Parameters</field_name>
+                        <field_body>
+                            <bullet_list>
+                                <list_item>
+                                    <paragraph>
+                                        <literal_strong refspecific="True">name</literal_strong>
+                                        – name of a person to greet
+                                    </paragraph>
+                                </list_item>
+                                <list_item>
+                                    <paragraph>
+                                        <literal_strong refspecific="True">title</literal_strong>
+                                        – title of a person to greet
+                                    </paragraph>
+                                </list_item>
+                            </bullet_list>
+                        </field_body>
+                    </field>
+                </field_list>
+            </desc_content>
+        </desc>
+        <index entries="['single',\ u'sayHi()\ (world.HelloWorld\ method)',\ u'world.HelloWorld.sayHi',\ '',\ None]"></index>
+        <desc desctype="method" domain="py" noindex="False" objtype="method">
+            <desc_signature class="HelloWorld" first="False" fullname="HelloWorld.sayHi"
+                            ids="world.HelloWorld.sayHi" module="world" names="world.HelloWorld.sayHi">
+                <desc_name xml:space="preserve">sayHi</desc_name>
+                <desc_parameterlist xml:space="preserve">
+                    <desc_parameter xml:space="preserve">name</desc_parameter>
+                    <desc_parameter xml:space="preserve">title</desc_parameter>
+                </desc_parameterlist>
+            </desc_signature>
+            <desc_content>
+                <paragraph>says hi</paragraph>
+                <field_list>
+                    <field>
+                        <field_name>Parameters</field_name>
+                        <field_body>
+                            <bullet_list>
+                                <list_item>
+                                    <paragraph>
+                                        <literal_strong refspecific="True">name</literal_strong>
+                                        – name of a person to greet
+                                    </paragraph>
+                                </list_item>
+                                <list_item>
+                                    <paragraph>
+                                        <literal_strong refspecific="True">title</literal_strong>
+                                        – title of a person to greet
+                                    </paragraph>
+                                </list_item>
+                            </bullet_list>
+                        </field_body>
+                    </field>
+                </field_list>
+            </desc_content>
+        </desc>
+    </desc_content>
+</desc>

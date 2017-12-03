@@ -7,6 +7,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import static com.twosigma.documentation.parser.sphinx.XmlUtils.getAttributeText;
 import static com.twosigma.documentation.parser.sphinx.XmlUtils.parseXml;
 
 /**
@@ -146,10 +147,6 @@ class DocTreeDomXmlParser {
 
     private boolean parseChildren(Node node) {
         return parseNodeList(node.getChildNodes());
-    }
-
-    private String getAttributeText(Node node, String name) {
-        return node.getAttributes().getNamedItem(name).getTextContent();
     }
 
     private String extractTitle(Node node) {
