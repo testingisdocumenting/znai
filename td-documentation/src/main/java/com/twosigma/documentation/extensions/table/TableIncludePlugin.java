@@ -9,6 +9,8 @@ import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 import com.twosigma.documentation.parser.table.MarkupTableData;
+import com.twosigma.documentation.search.SearchScore;
+import com.twosigma.documentation.search.SearchText;
 import com.twosigma.utils.JsonUtils;
 
 import java.nio.file.Path;
@@ -24,6 +26,7 @@ public class TableIncludePlugin implements IncludePlugin {
     private String textContent;
     private MarkupParser parser;
     private Path fullPath;
+    private MarkupTableData rearrangedTable;
 
     @Override
     public String id() {
@@ -39,7 +42,7 @@ public class TableIncludePlugin implements IncludePlugin {
         textContent = componentsRegistry.resourceResolver().textContent(fileName);
 
         MarkupTableData tableFromFile = isJson() ? tableFromJson() : CsvParser.parse(textContent);
-        MarkupTableData rearrangedTable = pluginParams.getOpts().has("columns") ?
+        rearrangedTable = pluginParams.getOpts().has("columns") ?
                 tableFromFile.withColumnsInOrder(pluginParams.getOpts().getList("columns")) :
                 tableFromFile;
 
@@ -95,5 +98,10 @@ public class TableIncludePlugin implements IncludePlugin {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(fullPath));
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.STANDARD.text(rearrangedTable.allText());
     }
 }
