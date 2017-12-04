@@ -35,9 +35,7 @@ public class SearchCrawlerParserHandler implements ParserHandler {
 
     @Override
     public void onSectionEnd() {
-        searchEntries.add(new PageSearchEntry(pageSectionTitle,
-                SearchScore.STANDARD.text(String.join(" ", currentTextParts))));
-        currentTextParts.clear();
+        flushTextParts();
     }
 
     @Override
@@ -193,7 +191,16 @@ public class SearchCrawlerParserHandler implements ParserHandler {
 
     @Override
     public void onParsingEnd() {
-
+        flushTextParts();
     }
 
+    private void flushTextParts() {
+        if (currentTextParts.isEmpty()) {
+            return;
+        }
+
+        searchEntries.add(new PageSearchEntry(pageSectionTitle,
+                SearchScore.STANDARD.text(String.join(" ", currentTextParts))));
+        currentTextParts.clear();
+    }
 }

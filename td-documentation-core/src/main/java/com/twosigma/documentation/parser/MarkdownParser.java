@@ -45,10 +45,10 @@ public class MarkdownParser implements MarkupParser {
         node.accept(frontMatterVisitor);
 
         if (visitor.isSectionStarted()) {
-            elementCreationHandler.onSectionEnd();
+            parserHandler.onSectionEnd();
         }
 
-        elementCreationHandler.onParsingEnd();
+        parserHandler.onParsingEnd();
 
         return new MarkupParserResult(elementCreationHandler.getDocElement(),
                 searchCrawler.getSearchEntries(),
