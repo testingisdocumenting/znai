@@ -2,6 +2,7 @@ package com.twosigma.documentation.parser;
 
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 
@@ -46,7 +47,7 @@ public interface ParserHandler {
      * @param pluginResult result of plugin process
      */
     void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult);
-    void onFencePlugin(PluginParams pluginParams, String content);
+    void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult);
     void onInlinedCodePlugin(PluginParams pluginParams);
     void onParsingEnd();
 }

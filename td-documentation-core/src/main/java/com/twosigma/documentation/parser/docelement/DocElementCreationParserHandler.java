@@ -235,9 +235,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onFencePlugin(PluginParams pluginParams, String content) {
-        FencePlugin fencePlugin = Plugins.fencePluginById(pluginParams.getPluginId());
-        processPlugin(fencePlugin, (p) -> p.process(componentsRegistry, path, pluginParams, content));
+    public void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult) {
+        processPlugin(fencePlugin, pluginResult);
     }
 
     @Override

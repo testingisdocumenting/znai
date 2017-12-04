@@ -2,6 +2,7 @@ package com.twosigma.documentation.search;
 
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.table.MarkupTableData;
@@ -178,8 +179,11 @@ public class SearchCrawlerParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onFencePlugin(PluginParams pluginParams, String content) {
-
+    public void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult) {
+        SearchText searchText = fencePlugin.textForSearch();
+        if (searchText != null) {
+            currentTextParts.add(searchText.getText());
+        }
     }
 
     @Override

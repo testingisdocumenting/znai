@@ -4,6 +4,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.Plugins;
+import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.commonmark.include.IncludeBlock;
@@ -126,7 +127,6 @@ public class DocElementVisitor extends AbstractVisitor {
         if (customBlock instanceof IncludeBlock) {
             final IncludeBlock includeBlock = (IncludeBlock) customBlock;
             handleIncludePlugin(includeBlock.getParams());
-//            parserHandler.onIncludePlugin(includeBlock.getParams());
         } else if (customBlock instanceof TableBlock) {
             GfmTableToTableConverter gfmTableToTableConverter = new GfmTableToTableConverter(componentsRegistry, path, (TableBlock) customBlock);
             parserHandler.onTable(gfmTableToTableConverter.convert());
@@ -157,7 +157,10 @@ public class DocElementVisitor extends AbstractVisitor {
     public void visit(FencedCodeBlock fencedCodeBlock) {
         PluginParams pluginParams = extractFencePluginParams(fencedCodeBlock.getInfo().trim());
         if (Plugins.hasFencePlugin(pluginParams.getPluginId())) {
-            parserHandler.onFencePlugin(pluginParams, fencedCodeBlock.getLiteral());
+            FencePlugin fencePlugin = Plugins.fencePluginById(pluginParams.getPluginId());
+            PluginResult pluginResult = fencePlugin.process(componentsRegistry, path, pluginParams, fencedCodeBlock.getLiteral());
+
+            parserHandler.onFencePlugin(fencePlugin, pluginResult);
         } else {
             parserHandler.onSnippet(pluginParams, pluginParams.getPluginId(), "", fencedCodeBlock.getLiteral());
         }

@@ -2,6 +2,7 @@ package com.twosigma.documentation.parser;
 
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 
@@ -164,8 +165,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onFencePlugin(PluginParams pluginParams, String content) {
-        list.forEach(h -> h.onFencePlugin(pluginParams, content));
+    public void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult) {
+        list.forEach(h -> h.onFencePlugin(fencePlugin, pluginResult));
     }
 
     @Override
