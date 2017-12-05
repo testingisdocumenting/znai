@@ -31,7 +31,7 @@ public class PluginResult {
         return new PluginResult(element);
     }
 
-    public static PluginResult docElement(final String type, final Map<String, ?> props) {
+    public static PluginResult docElement(String type, Map<String, ?> props) {
         DocElement docElement = new DocElement(type);
         props.forEach(docElement::addProp);
 

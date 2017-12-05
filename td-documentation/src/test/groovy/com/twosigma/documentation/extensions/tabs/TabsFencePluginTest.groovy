@@ -44,7 +44,7 @@ class TabsFencePluginTest {
 
     private static Map processAndGetPluginWithResult(String markup) {
         def plugin = new TabsFencePlugin()
-        def result = plugin.process(new TestComponentsRegistry(), Paths.get("test.md"), new PluginParams(plugin.id(), ""),
+        def result = plugin.process(TestComponentsRegistry.INSTANCE, Paths.get("test.md"), new PluginParams(plugin.id(), ""),
                 markup)
 
         return [plugin: plugin, result: result]

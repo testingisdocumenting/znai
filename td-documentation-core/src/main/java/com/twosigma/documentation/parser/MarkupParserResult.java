@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -29,6 +30,7 @@ public class MarkupParserResult {
 
     /**
      * Top level page element. use get content to get access to the children
+     *
      * @return top level page element
      */
     public DocElement getDocElement() {
@@ -49,5 +51,9 @@ public class MarkupParserResult {
 
     public List<AuxiliaryFile> getAuxiliaryFiles() {
         return auxiliaryFiles;
+    }
+
+    public String getAllText() {
+        return searchEntries.stream().map(se -> se.getText().getText()).collect(joining(" "));
     }
 }

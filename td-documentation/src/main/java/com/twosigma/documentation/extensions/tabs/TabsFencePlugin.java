@@ -63,8 +63,7 @@ public class TabsFencePlugin implements FencePlugin {
 
     private void generateSearchText(ParsedTab parsedTab) {
         texts.add(parsedTab.name);
-        texts.add(parsedTab.parserResult.getSearchEntries().stream()
-                .map(se -> se.getText().getText()).collect(joining(" ")));
+        texts.add(parsedTab.parserResult.getAllText());
     }
 
     private ParsedTab parseTab(String tabName, String markup) {

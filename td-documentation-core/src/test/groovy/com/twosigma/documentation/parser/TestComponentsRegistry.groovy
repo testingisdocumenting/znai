@@ -9,6 +9,8 @@ import com.twosigma.documentation.structure.DocStructure
  * @author mykola
  */
 class TestComponentsRegistry implements ComponentsRegistry {
+    public static final TestComponentsRegistry INSTANCE = new TestComponentsRegistry()
+    
     private TestDocStructure docStructure = new TestDocStructure()
     MarkupParser parser = new TestMarkupParser()
 

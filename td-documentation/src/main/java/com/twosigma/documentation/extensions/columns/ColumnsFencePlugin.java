@@ -9,6 +9,8 @@ import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElement;
+import com.twosigma.documentation.search.SearchScore;
+import com.twosigma.documentation.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,13 +19,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
  */
 public class ColumnsFencePlugin implements FencePlugin {
-    private List<MarkupParserResult> columnsParserResult = new ArrayList<>();
+    private List<MarkupParserResult> columnsParserResult;
     private Path markupPath;
     private MarkupParser parser;
 
@@ -35,6 +38,8 @@ public class ColumnsFencePlugin implements FencePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         this.markupPath = markupPath;
+        this.columnsParserResult = new ArrayList<>();
+
         parser = componentsRegistry.parser();
 
         ColonDelimitedKeyValues columnsDefinitions = new ColonDelimitedKeyValues(content);
@@ -63,5 +68,13 @@ public class ColumnsFencePlugin implements FencePlugin {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return columnsParserResult.stream().flatMap(pr -> pr.getAuxiliaryFiles().stream());
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        String textFromAllColumns = columnsParserResult.stream().map(MarkupParserResult::getAllText)
+                .collect(joining(" "));
+
+        return SearchScore.STANDARD.text(textFromAllColumns);
     }
 }
