@@ -46,6 +46,8 @@
     flex: 0 0 300px;
     border-right: 1px solid #ccc;
     overflow: hidden;
+    cursor: pointer;
+    overflow-y: auto;
 }
 
 .search-popup .search-preview-panel {
@@ -54,19 +56,21 @@
     overflow-y: auto;
 }
 
-.search-popup .search-preview-panel::-webkit-scrollbar {
+.search-popup .search-preview-panel::-webkit-scrollbar,
+.search-popup .search-toc-panel::-webkit-scrollbar {
     height: 3px;
     width: 3px;
 }
 
-.search-popup .search-preview-panel::-webkit-scrollbar-thumb {
+.search-popup .search-preview-panel::-webkit-scrollbar-thumb,
+.search-popup .search-toc-panel::-webkit-scrollbar-thumb {
     background: #ACACAC;
 }
 
-.search-popup .search-preview-panel::-webkit-scrollbar-track {
+.search-popup .search-preview-panel::-webkit-scrollbar-track,
+.search-popup .search-toc-panel::-webkit-scrollbar-track {
     background: 0;
 }
-
 
 .search-popup .search-box input {
     padding: 15px;

@@ -42,26 +42,33 @@ class SearchPopup extends Component {
         const className = "search-popup" + (tocCollapsed ? "" : " visible-toc") + (hasResult ? " with-results" : "")
         const searchBox = this.state.search ? <SearchBox onChange={this.onQueryChange} /> : null
 
-        return (<div className={className}>
-            <div className="overlay" onClick={onClose} />
+        return (
+            <div className={className}>
+                <div className="overlay" onClick={onClose} />
 
-            <div className="popup-panel">
-                {searchBox}
-                {previewDetails ? this.renderPreview(ids, selectedIdx, previewDetails) : null}
+                <div className="popup-panel">
+                    {searchBox}
+                    {previewDetails ? this.renderPreview(ids, selectedIdx, previewDetails) : null}
+                </div>
             </div>
-        </div>);
+        );
     }
 
     renderPreview(ids, selectedIdx, previewDetails) {
         const {elementsLibrary} = this.props
-        return (<div className="toc-and-preview">
-            <div className="search-toc-panel">
-                <SearchToc ids={ids} selectedIdx={selectedIdx}/>
+        return (
+            <div className="toc-and-preview">
+                <div className="search-toc-panel">
+                    <SearchToc ids={ids}
+                               selectedIdx={selectedIdx}
+                               onSelect={this.changeSelectedIdx}
+                               onJump={this.jumpToIdx}/>
+                </div>
+                <div className="search-preview-panel">
+                    <SearchPreview elementsLibrary={elementsLibrary} {...previewDetails}/>
+                </div>
             </div>
-            <div className="search-preview-panel">
-                <SearchPreview elementsLibrary={elementsLibrary} {...previewDetails}/>
-            </div>
-        </div>)
+        )
     }
 
     onQueryChange(query) {
@@ -79,6 +86,17 @@ class SearchPopup extends Component {
         document.removeEventListener('keydown', this.keyDownHandler)
     }
 
+    changeSelectedIdx = (idx) => {
+        this.setState({selectedIdx: idx})
+    }
+
+    jumpToIdx = (idx) => {
+        const ids = this.queryResultIds()
+        const tocToNavigate = JSON.parse(ids[idx])
+
+        this.props.onSearchSelection(tocToNavigate)
+    }
+
     keyDownHandler(e) {
         const ids = this.queryResultIds()
         let selectedIdx = this.state.selectedIdx
@@ -90,8 +108,7 @@ class SearchPopup extends Component {
         }
 
         if (e.key === 'Enter' && ids.length > 0) {
-            const tocToNavigate = JSON.parse(ids[selectedIdx])
-            this.props.onSearchSelection(tocToNavigate)
+            this.jumpToIdx(selectedIdx)
         }
 
         if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') {
