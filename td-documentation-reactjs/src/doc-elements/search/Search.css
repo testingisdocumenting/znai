@@ -19,7 +19,7 @@
     left: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 1010px;
+    width: 1220px;
     max-height: calc(100vh - 100px);
     z-index: 1001;
 }
@@ -51,8 +51,22 @@
 .search-popup .search-preview-panel {
     flex: 1;
     padding: 10px;
-    overflow: hidden;
+    overflow-y: auto;
 }
+
+.search-popup .search-preview-panel::-webkit-scrollbar {
+    height: 3px;
+    width: 3px;
+}
+
+.search-popup .search-preview-panel::-webkit-scrollbar-thumb {
+    background: #ACACAC;
+}
+
+.search-popup .search-preview-panel::-webkit-scrollbar-track {
+    background: 0;
+}
+
 
 .search-popup .search-box input {
     padding: 15px;
