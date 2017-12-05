@@ -1,10 +1,6 @@
 package com.twosigma.documentation.parser.table;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -37,7 +33,9 @@ public class MarkupTableData {
     public String allText() {
         List<String> textParts = new ArrayList<>();
         columnNamesStream().forEach(textParts::add);
-        allValuesStream().forEach(v -> textParts.add(v.toString()));
+        allValuesStream()
+                .filter(Objects::nonNull)
+                .forEach(v -> textParts.add(v.toString()));
 
         return String.join(" ", textParts);
     }

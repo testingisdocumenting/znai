@@ -5,7 +5,6 @@ import org.junit.Test
 
 import static com.twosigma.testing.Ddjt.actual
 import static com.twosigma.testing.Ddjt.equal
-import static java.util.stream.Collectors.toList
 
 /**
  * @author mykola
@@ -44,5 +43,16 @@ class MarkupTableDataTest {
     @Test
     void "should have a text representation of a table content"() {
         table.allText().should == 'a b C a1 b1 c1 a2 b2 c2'
+    }
+
+    @Test
+    void "should handle null content for text representation"() {
+        def tableWithNull = new MarkupTableData()
+        tableWithNull.addColumn('a')
+        tableWithNull.addColumn('b')
+
+        tableWithNull.addRow(new Row(['a1', null]))
+
+        tableWithNull.allText().should == 'a b a1'
     }
 }

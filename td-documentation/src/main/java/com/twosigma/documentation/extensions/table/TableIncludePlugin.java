@@ -70,6 +70,10 @@ public class TableIncludePlugin implements IncludePlugin {
 
     @SuppressWarnings("unchecked")
     private List<Object> parseMarkupInCell(Object cell) {
+        if (cell == null) {
+            return Collections.emptyList();
+        }
+
         MarkupParserResult parserResult = parser.parse(fullPath, cell.toString());
         return (List<Object>) parserResult.getDocElement().toMap().get("content");
     }
