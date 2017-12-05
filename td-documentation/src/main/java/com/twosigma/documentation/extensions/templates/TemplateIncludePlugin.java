@@ -9,6 +9,8 @@ import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.search.SearchScore;
+import com.twosigma.documentation.search.SearchText;
 import com.twosigma.documentation.template.TextTemplate;
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
@@ -63,5 +65,10 @@ public class TemplateIncludePlugin implements IncludePlugin {
         return (paramsPath != null) ?
             Stream.concat(Stream.of(AuxiliaryFile.builtTime(paramsPath)), files):
             files;
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.STANDARD.text(parserResult.getAllText());
     }
 }

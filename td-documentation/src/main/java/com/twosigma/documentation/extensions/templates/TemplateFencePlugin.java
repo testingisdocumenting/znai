@@ -9,6 +9,8 @@ import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.search.SearchScore;
+import com.twosigma.documentation.search.SearchText;
 import com.twosigma.documentation.template.TextTemplate;
 
 import java.nio.file.Path;
@@ -48,5 +50,10 @@ public class TemplateFencePlugin implements FencePlugin {
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.concat(parserResult.getAuxiliaryFiles().stream(),
                 Stream.of(AuxiliaryFile.builtTime(fullPath)));
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.STANDARD.text(parserResult.getAllText());
     }
 }
