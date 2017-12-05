@@ -1,5 +1,3 @@
-# mdoc 
-
 `mdoc` is a system to generate user facing documentation from markup files (markdown only at the moment). 
 Documentation files are located next to your product codebase and are part of your product's SDLC.
 

@@ -363,6 +363,11 @@ public class WebSite implements DocStructure {
     }
 
     private String searchEntryTitle(TocItem tocItem, PageSearchEntry pageSearchEntry) {
+        if (tocItem.isIndex()) {
+            return docMeta.getTitle() + " " + (pageSearchEntry.getPageSectionTitle().isEmpty() ?
+                    docMeta.getType() : pageSearchEntry.getPageSectionTitle());
+        }
+
         return docMeta.getTitle() + ": " + tocItem.getPageTitle() + ", " + pageSearchEntry.getPageSectionTitle() +
                 " [" + tocItem.getSectionTitle() + "]";
     }
