@@ -5,18 +5,17 @@ import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
-import com.twosigma.documentation.extensions.include.IncludeContext;
-import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.extensions.MultipleLocationsResourceResolver;
+import com.twosigma.documentation.extensions.Plugins;
+import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.search.LunrIndexer;
 import com.twosigma.documentation.search.PageSearchEntry;
 import com.twosigma.documentation.search.SiteSearchEntries;
 import com.twosigma.documentation.search.SiteSearchEntry;
-import com.twosigma.documentation.structure.Page;
-import com.twosigma.documentation.search.LunrIndexer;
 import com.twosigma.documentation.structure.*;
 import com.twosigma.documentation.website.markups.MarkdownParsingConfiguration;
 import com.twosigma.documentation.website.markups.MarkupParsingConfiguration;
@@ -358,7 +357,9 @@ public class WebSite implements DocStructure {
     }
 
     private String searchEntryUrl(TocItem tocItem, PageSearchEntry pageSearchEntry) {
-        DocUrl docUrl = new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), pageSearchEntry.getPageSectionId());
+        DocUrl docUrl = tocItem.isIndex() ?
+                DocUrl.indexUrl():
+                new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), pageSearchEntry.getPageSectionId());
         return createUrl(docUrl);
     }
 

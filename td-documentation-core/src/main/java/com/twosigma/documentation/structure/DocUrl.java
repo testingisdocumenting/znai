@@ -16,6 +16,14 @@ public class DocUrl {
     private boolean isGlobalUrl;
     private boolean isIndexUrl;
 
+    public static DocUrl indexUrl() {
+        return new DocUrl(true);
+    }
+
+    private DocUrl(boolean isIndexUrl) {
+        this.isIndexUrl = isIndexUrl;
+    }
+
     public DocUrl(String dirName, String fileName, String pageSectionId) {
         this.dirName = dirName;
         this.fileName = fileName;
