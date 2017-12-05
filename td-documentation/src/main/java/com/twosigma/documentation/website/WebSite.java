@@ -349,10 +349,17 @@ public class WebSite implements DocStructure {
     private void updateSearchEntries(TocItem tocItem, MarkupParserResult parserResult) {
         List<SiteSearchEntry> siteSearchEntries = parserResult.getSearchEntries().stream()
                 .map(pageSearchEntry ->
-                        new SiteSearchEntry(searchEntryTitle(tocItem, pageSearchEntry), pageSearchEntry.getText()))
+                        new SiteSearchEntry(
+                                searchEntryUrl(tocItem, pageSearchEntry),
+                                searchEntryTitle(tocItem, pageSearchEntry), pageSearchEntry.getText()))
                 .collect(toList());
 
         searchEntries.addAll(siteSearchEntries);
+    }
+
+    private String searchEntryUrl(TocItem tocItem, PageSearchEntry pageSearchEntry) {
+        DocUrl docUrl = new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), pageSearchEntry.getPageSectionId());
+        return createUrl(docUrl);
     }
 
     private String searchEntryTitle(TocItem tocItem, PageSearchEntry pageSearchEntry) {

@@ -15,11 +15,13 @@ import java.util.List;
  */
 public class SearchCrawlerParserHandler implements ParserHandler {
     private List<PageSearchEntry> searchEntries;
+    private String pageSectionId;
     private String pageSectionTitle;
     private List<String> currentTextParts;
 
     public SearchCrawlerParserHandler() {
         this.searchEntries = new ArrayList<>();
+        this.pageSectionId = "";
         this.pageSectionTitle = "";
         this.currentTextParts = new ArrayList<>();
     }
@@ -30,6 +32,7 @@ public class SearchCrawlerParserHandler implements ParserHandler {
 
     @Override
     public void onSectionStart(String title) {
+        pageSectionId =
         pageSectionTitle = title;
     }
 

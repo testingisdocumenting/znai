@@ -16,6 +16,12 @@ public class DocUrl {
     private boolean isGlobalUrl;
     private boolean isIndexUrl;
 
+    public DocUrl(String dirName, String fileName, String pageSectionId) {
+        this.dirName = dirName;
+        this.fileName = fileName;
+        this.pageSectionId = pageSectionId;
+    }
+
     public DocUrl(String url) {
         this.url = url;
         if (url.startsWith("http") || url.startsWith("file") || url.startsWith("mailto")) {
