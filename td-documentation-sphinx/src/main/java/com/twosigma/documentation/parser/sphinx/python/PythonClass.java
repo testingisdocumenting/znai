@@ -1,7 +1,11 @@
 package com.twosigma.documentation.parser.sphinx.python;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
@@ -40,5 +44,14 @@ public class PythonClass {
                 ", description='" + description + '\'' +
                 ", methods=" + methods +
                 '}';
+    }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("name", name);
+        result.put("description", description);
+        result.put("methods", methods.stream().map(PythonMethod::toMap).collect(toList()));
+
+        return result;
     }
 }
