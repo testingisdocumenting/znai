@@ -27,7 +27,7 @@ public class SphinxDocTreeParser implements MarkupParser {
 
         ParserHandlersList parserHandler = new ParserHandlersList(elementCreationHandler, searchCrawler);
 
-        DocTreeDomXmlParser xmlParser = new DocTreeDomXmlParser(parserHandler);
+        DocTreeDomXmlParser xmlParser = new DocTreeDomXmlParser(componentsRegistry, path, parserHandler);
         xmlParser.parse(docXml);
 
         return new MarkupParserResult(elementCreationHandler.getDocElement(),

@@ -1,11 +1,18 @@
 package com.twosigma.documentation.parser.sphinx;
 
+import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.ParserHandler;
+import com.twosigma.documentation.parser.sphinx.python.PythonClass;
+import com.twosigma.documentation.parser.sphinx.python.PythonClassIncludePlugin;
+import com.twosigma.documentation.parser.sphinx.python.PythonClassXmlParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.nio.file.Path;
 
 import static com.twosigma.documentation.parser.sphinx.XmlUtils.getAttributeText;
 import static com.twosigma.documentation.parser.sphinx.XmlUtils.parseXml;
@@ -14,9 +21,15 @@ import static com.twosigma.documentation.parser.sphinx.XmlUtils.parseXml;
  * @author mykola
  */
 class DocTreeDomXmlParser {
+    private ComponentsRegistry componentsRegistry;
+    private Path filePath;
     private ParserHandler parserHandler;
 
-    public DocTreeDomXmlParser(ParserHandler parserHandler) {
+    public DocTreeDomXmlParser(ComponentsRegistry componentsRegistry,
+                               Path filePath,
+                               ParserHandler parserHandler) {
+        this.componentsRegistry = componentsRegistry;
+        this.filePath = filePath;
         this.parserHandler = parserHandler;
     }
 
@@ -58,6 +71,8 @@ class DocTreeDomXmlParser {
                 return parseOrderedList(node);
             case "list_item":
                 return parseListItem(node);
+            case "desc":
+                return parseDesc(node);
             case "#text":
                 return parseText(node);
             case "title":
@@ -131,6 +146,30 @@ class DocTreeDomXmlParser {
         parserHandler.onListItemStart();
         parseChildren(node);
         parserHandler.onListItemEnd();
+
+        return true;
+    }
+
+    private boolean parseDesc(Node node) {
+        String descType = XmlUtils.getAttributeText(node, "desctype");
+
+        switch (descType) {
+            case "class":
+                return parseClass(node);
+            default:
+                return false;
+        }
+    }
+
+    private boolean parseClass(Node node) {
+        PythonClassXmlParser xmlParser = new PythonClassXmlParser();
+        PythonClass pythonClass = xmlParser.parseClass(node);
+
+        PythonClassIncludePlugin includePlugin = new PythonClassIncludePlugin();
+        PluginResult pluginResult = includePlugin.process(componentsRegistry, filePath,
+                new PluginParams(includePlugin.id(), pythonClass.toMap()));
+
+        parserHandler.onIncludePlugin(includePlugin, pluginResult);
 
         return true;
     }

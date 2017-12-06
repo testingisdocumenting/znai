@@ -25,6 +25,11 @@ public class PluginParams {
         this.setValue(value);
     }
 
+    public PluginParams(String pluginId, Map<String, ?> opts) {
+        this.pluginId = pluginId;
+        this.opts = new PluginParamsOpts(opts);
+    }
+
     public void setValue(String value) {
         this.freeParam = extractFreeParam(value);
         this.opts = new PluginParamsOpts(extractMap(value));

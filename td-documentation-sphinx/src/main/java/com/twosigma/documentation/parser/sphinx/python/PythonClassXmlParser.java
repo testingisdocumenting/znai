@@ -17,19 +17,18 @@ public class PythonClassXmlParser {
 
     public PythonClass parse(String xml) {
         Document document = parseXml(xml);
-        parseClass(document);
-
-        return pythonClass;
+        return parseClass(document);
     }
 
-    private void parseClass(Node node) {
+    public PythonClass parseClass(Node node) {
         Node descSignature = nodeByName(node, "desc_signature");
         Node descContent = nodeByName(node, "desc_content");
         Node description = nodeByName(descContent, "paragraph");
 
         pythonClass = new PythonClass(getAttributeText(descSignature, "fullname"), description.getTextContent());
-
         XmlUtils.nodesStreamByName(descContent, "desc").forEach(this::parseMethod);
+
+        return pythonClass;
     }
 
     private void parseMethod(Node desc) {

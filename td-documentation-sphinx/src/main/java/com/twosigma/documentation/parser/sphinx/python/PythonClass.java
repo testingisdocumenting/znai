@@ -46,7 +46,7 @@ public class PythonClass {
                 '}';
     }
 
-    public Map<String, Object> toMap() {
+    public Map<String, ?> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("name", name);
         result.put("description", description);
