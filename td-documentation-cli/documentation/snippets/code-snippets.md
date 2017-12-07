@@ -75,6 +75,46 @@ same rules. In case of a wide code snippets we expand the horizontal boundaries 
 
 :include-file: wide-code.java {title: "Wide Code"}
 
+# Read More
+
+If you have a large code snippet and you want to initially display only a small fraction use `readMore` option with an **optional**
+`readMoreVisibleLines` option to specify a number of initial lines displayed (default is 8).
+
+    ```java {readMore: true, readMoreVisibleLines: 3}
+    public class DocScaffolding {
+        private final Path workingDir;
+        private Map<String, List<String>> fileNameByDirName;
+        ...
+    ```
+
+```java {readMore: true, readMoreVisibleLines: 3}
+public class DocScaffolding {
+    private final Path workingDir;
+    private Map<String, List<String>> fileNameByDirName;
+
+    public DocScaffolding(Path workingDir) {
+        this.workingDir = workingDir;
+        this.fileNameByDirName = new LinkedHashMap<>();
+    }
+
+    public void create() {
+        createPages();
+        createToc();
+        createMeta();
+        createIndex();
+        createLookupPaths();
+    }
+
+    private void createLookupPaths() {
+        createFileFromResource("lookup-paths");
+    }
+
+    private void createMeta() {
+        createFileFromResource("meta.json");
+    }
+}
+```
+
 # Inlined
 
 To inline code within a text dimply put it inside a back tick. 

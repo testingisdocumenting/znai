@@ -8,19 +8,6 @@ import {isAllAtOnce} from '../meta/meta'
 
 import './Snippet.css'
 
-const Title = ({title}) => {
-    if (!title) {
-        return null
-    }
-
-    return (
-        <div className="title-container content-block">
-            <div className="title">{title}</div>
-            <div className="large-filling"/>
-        </div>
-    )
-}
-
 class Snippet extends React.Component {
     render() {
         const {maxLineLength} = this.props
@@ -74,6 +61,20 @@ class Snippet extends React.Component {
         return "snippet" + (title ? " with-title" : "")
     }
 }
+
+function Title({title}) {
+    if (!title) {
+        return null
+    }
+
+    return (
+        <div className="title-container content-block">
+            <div className="title">{title}</div>
+            <div className="large-filling"/>
+        </div>
+    )
+}
+
 
 const presentationSnippetHandler = {
     component: Snippet,

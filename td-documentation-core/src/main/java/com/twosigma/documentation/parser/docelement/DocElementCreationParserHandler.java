@@ -216,10 +216,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     public void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet) {
         Map<String, Object> snippetProps = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), lang, snippet);
         snippetProps.put("lineNumber", lineNumber);
-        String title = pluginParams.getOpts().get("title", "");
-        if (! title.isEmpty()) {
-            snippetProps.put("title", title);
-        }
+        snippetProps.putAll(pluginParams.getOpts().toMap());
 
         append(DocElementType.SNIPPET, snippetProps);
     }

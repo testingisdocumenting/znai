@@ -6,9 +6,9 @@ import {elementsLibrary} from '../DefaultElementsLibrary'
 import {Snippet} from '../default-elements/Snippet'
 import {Tabs} from '../tabs/Tabs'
 
-import './CodeSnippet.css'
+import './tokens.css'
 
-class ParsingDemo extends Component {
+class SnipppetDemo extends Component {
     render() {
         const htmlCode = '<div id="menu">\n' +
             '  <ul>\n' +
@@ -45,6 +45,7 @@ class ParsingDemo extends Component {
             }]}]}
 
         return <div>
+            <Snippet tokens={parseCode("csv", longCode())} maxLineLength={200} readMore={true} readMoreVisibleLines={4}/>
             <Snippet title="snippet title" tokens={parseCode("html", htmlCode)}/>
             <Snippet maxLineLength={200} title="snippet title" tokens={parseCode("html", htmlCode)}/>
             <Snippet maxLineLength={200} tokens={parseCode("html", htmlCode)}/>
@@ -57,4 +58,13 @@ class ParsingDemo extends Component {
     }
 }
 
-export default ParsingDemo
+function longCode() {
+    let lines = []
+    for (let i = 1; i <= 30; i++) {
+        lines.push('line of text number ' + i)
+    }
+
+    return lines.join('\n')
+}
+
+export default SnipppetDemo

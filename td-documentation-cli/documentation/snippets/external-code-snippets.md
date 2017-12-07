@@ -21,6 +21,15 @@ Use `title` property to specify a title.
 
 :include-file: file-name.js {title: "ES6 class"} 
 
+# Read More
+
+If you have a file with large code snippet and you want to initially display only a small fraction use `readMore` 
+option with an **optional** `readMoreVisibleLines` option to specify a number of initial lines displayed (default is 8).
+
+    :include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3}
+    
+:include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3} 
+
 
 # Callout Comments
 
