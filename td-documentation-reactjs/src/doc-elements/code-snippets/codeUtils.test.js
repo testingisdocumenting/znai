@@ -1,4 +1,5 @@
 import {splitTokensIntoLines, isInlinedComment, trimComment, containsInlinedComment} from './codeUtils'
+import {parseCode} from './codeParser';
 
 const tokens = [{"type": "keyword", "content": "class"}, " ", {"type": "class-name", "content": ["Test"]}, " Test2 ", {"type": "punctuation", "content": "{"}, "\n",
     {"type": "comment", "content": "/*another \n comment line \nend of comment */"}, "\n    ",
@@ -6,6 +7,11 @@ const tokens = [{"type": "keyword", "content": "class"}, " ", {"type": "class-na
     {"type": "keyword", "content": "var"}, " b ", { "type": "operator", "content": "=" }, " a ", {"type": "operator", "content": "+"}, " ", {"type": "number", "content": "1"}, { "type": "punctuation", "content": ";" }, "       ", {"type": "comment", "content": "//          another comment"}, "\n    ",
     { "type": "keyword", "content": "var" }, " c ", {"type": "operator", "content": "="}, " ", {"type": "number", "content": "3"}, { "type": "punctuation", "content": ";" }, "         ", {"type": "comment", "content": "//             in two lines"}, "\n    ",
     { "type": "keyword", "content": "var" }, " d ", {"type": "operator", "content": "="}, " a ", {"type": "operator", "content": "+"}, " ", { "type": "number", "content": "1" }, {"type": "punctuation", "content": ";"}, "\n"]
+
+const codeWithEmptyLines = `public class DocScaffolding {
+    private final Path workingDir;
+
+    private Map<String, List<String>> fileNameByDirName;`
 
 describe("codeUtils", () => {
     it("split list of tokens into lists of tokens per line", () => {
@@ -18,6 +24,14 @@ describe("codeUtils", () => {
         }, " Test2 ", {"type": "punctuation", "content": "{"}, "\n"])
 
         expect(lines[2]).toEqual(["    ", {"type": "keyword", "content": "var"}, " a  ", {"type": "operator", "content": "="}, " ", {"type": "number", "content": "2"}, {"type": "punctuation", "content": ";"}, " ", {"type": "comment", "content": "// comment line"}, "\n"])
+    })
+
+    it("creates separate empty lines", () => {
+        const tokens = parseCode('java', codeWithEmptyLines)
+
+        const lines = splitTokensIntoLines(tokens)
+        expect(lines.length).toEqual(4)
+        expect(lines[2]).toEqual(['\n'])
     })
 
     it("detects if a token is inlined comment", () => {
@@ -38,3 +52,4 @@ describe("codeUtils", () => {
         expect(trimComment("//  comment")).toEqual("comment")
     })
 })
+

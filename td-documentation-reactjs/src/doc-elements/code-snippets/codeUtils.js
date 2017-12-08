@@ -1,3 +1,8 @@
+/**
+ * splitting Prism tokens into separate lines
+ * @param tokens
+ * @return {Array}
+ */
 function splitTokensIntoLines(tokens) {
     const lines = []
     let line = []
@@ -16,17 +21,24 @@ function splitTokensIntoLines(tokens) {
 
     function handle(token) {
         if (typeof token === 'string' && token.startsWith('\n')) {
-            line.push("\n")
-
-            lines.push(line)
-            line = []
-
-            // handle "\n    " cases
-            if (token.length > 1) {
-                line.push(token.substr(1))
-            }
+            handleNewLineStringToken(token)
         } else {
             line.push(token)
+        }
+    }
+
+    function handleNewLineStringToken(token) {
+        // handle multiple new line chars in a row to create empty lines
+        for (let idx = 0; idx < token.length; idx++) {
+            if (token.charAt(idx) === '\n') {
+                line.push("\n")
+
+                lines.push(line)
+                line = []
+            } else {
+                line.push(token.substr(idx))
+                return;
+            }
         }
     }
 }
