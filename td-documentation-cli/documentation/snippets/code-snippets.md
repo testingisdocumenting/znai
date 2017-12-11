@@ -115,6 +115,57 @@ public class DocScaffolding {
 }
 ```
 
+# Highlights
+
+Use `highlight` option to bring readers attention to important lines.
+
+
+    ```java {highlight: "workingDir"}
+    public class DocScaffolding {
+        private final Path workingDir;
+        private Map<String, List<String>> fileNameByDirName;
+    
+        public DocScaffolding(Path workingDir) {
+        ...
+        }
+    ```
+    
+```java {highlight: "workingDir"}
+public class DocScaffolding {
+    private final Path workingDir;
+    private Map<String, List<String>> fileNameByDirName;
+
+    public DocScaffolding(Path workingDir) {
+    ...
+    }
+```
+
+It is recommended to pass substring, but you can pass line idx (starts from 0). 
+Additionally you can combine two approaches and pass a list of things to highlight. 
+    
+    ```java {highlight: [2,  "..."]}
+    public class DocScaffolding {
+        private final Path workingDir;
+        private Map<String, List<String>> fileNameByDirName;
+    
+        public DocScaffolding(Path workingDir) {
+        ...
+        }
+    ```    
+
+```java {highlight: [2,  "..."]}
+public class DocScaffolding {
+    private final Path workingDir;
+    private Map<String, List<String>> fileNameByDirName;
+
+    public DocScaffolding(Path workingDir) {
+    ...
+    }
+```    
+
+Note: You will get a build time error if the specified substring is not found in any of the snippet lines
+
+    
 # Inlined
 
 To inline code within a text dimply put it inside a back tick. 

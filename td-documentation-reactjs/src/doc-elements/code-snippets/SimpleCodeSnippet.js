@@ -1,24 +1,40 @@
 import React, {Component} from 'react'
 
-import {splitTokensIntoLines} from './codeUtils'
+import {extractTextFromTokens, splitTokensIntoLines} from './codeUtils'
 import LineOfTokens from './LineOfTokens.js'
 import SimpleCodeToken from './SimpleCodeToken.js'
 
 import './tokens.css'
 import './SimpleCodeSnippet.css'
+import {convertToList} from '../propsUtils'
 
 class SimpleCodeSnippet extends Component {
     constructor(props) {
         super(props)
 
-        const {tokens} = this.props
-
-        this.lines = splitTokensIntoLines(tokens)
+        this.processProps(props)
         this.state = {displayFully: !this.limitLines}
     }
 
     componentWillReceiveProps(nextProps) {
-        this.lines = splitTokensIntoLines(nextProps.tokens)
+        this.processProps(nextProps)
+    }
+
+    processProps({tokens, highlight}) {
+        this.linesOfTokens = splitTokensIntoLines(tokens)
+
+        // highlight is either a single line index/substring or a collection of line indexes and substrings
+        this.highlight = convertToList(highlight)
+
+        if (this.highlight.length === 0) {
+            return
+        }
+
+        this.isLineHighlighted = this.linesOfTokens.map((tokens, idx) => this.isHighlighted(idx, tokens))
+
+        if (this.isLineHighlighted.filter(highlighted => highlighted).length === 0) {
+            throw new Error('none of the lines matches specified highlights: ' + this.highlight)
+        }
     }
 
     render() {
@@ -26,17 +42,17 @@ class SimpleCodeSnippet extends Component {
         const {isPresentation} = this.props
 
         const linesToRender = this.limitLines && !displayFully ?
-            this.lines.slice(0, this.readMoreVisibleLines) :
-            this.lines
+            this.linesOfTokens.slice(0, this.readMoreVisibleLines) :
+            this.linesOfTokens
 
         return (
             <div>
                 <pre>
                     <code>
-                    {linesToRender.map((line, idx) => <LineOfTokens key={idx} line={line}
-                                                                    isHighlighted={this.isHighlighted(idx)}
-                                                                    isPresentation={isPresentation}
-                                                                    TokenComponent={SimpleCodeToken}/>)}
+                        {linesToRender.map((tokens, idx) => <LineOfTokens key={idx} tokens={tokens}
+                                                                          isHighlighted={this.isHighlighted(idx, tokens)}
+                                                                          isPresentation={isPresentation}
+                                                                          TokenComponent={SimpleCodeToken}/>)}
                     </code>
                     {this.renderReadMore()}
                 </pre>
@@ -64,16 +80,34 @@ class SimpleCodeSnippet extends Component {
     }
 
     get limitLines() {
-        return this.lines.length >= this.readMoreVisibleLines && this.props.readMore
+        return this.linesOfTokens.length >= this.readMoreVisibleLines && this.props.readMore
     }
 
     get readMoreVisibleLines() {
         return this.props.readMoreVisibleLines || 8
     }
 
-    isHighlighted(idx) {
-        const {highlight} = this.props
-        return highlight && highlight.indexOf(idx) !== -1
+    isHighlighted(idx, tokens) {
+        const highlight = this.highlight
+
+        if (! highlight) {
+            return false
+        }
+
+        if (highlight.indexOf(idx) !== -1) {
+            return true
+        }
+
+        const text = extractTextFromTokens(tokens)
+        const matches = highlight.filter(idxOrText => {
+            if (typeof idxOrText === 'number') {
+                return false
+            }
+
+            return text.indexOf(idxOrText) !== -1
+        })
+
+        return matches.length > 0
     }
 }
 

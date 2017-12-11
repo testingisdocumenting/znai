@@ -44,17 +44,20 @@ class SnipppetDemo extends Component {
                 tokens: parseCode("html", htmlCode)
             }]}]}
 
-        return <div>
-            <Snippet tokens={parseCode("csv", longCode())} maxLineLength={200} readMore={true} readMoreVisibleLines={4}/>
-            <Snippet title="snippet title" tokens={parseCode("html", htmlCode)}/>
-            <Snippet maxLineLength={200} title="snippet title" tokens={parseCode("html", htmlCode)}/>
-            <Snippet maxLineLength={200} tokens={parseCode("html", htmlCode)}/>
-            <Tabs {...tabs} elementsLibrary={elementsLibrary}/>
-            <p className="content-block">text in between</p>
-            <Snippet maxLineLength={20} tokens={parseCode("html", htmlCode)}/>
-            <Snippet tokens={parseCode("javascript", javaCode)} slideIdx={1} spoiler={true} commentsType="inline"/>
-            <Snippet tokens={parseCode("markdown", markdownCode2)} highlight={[1]}/>
-        </div>
+        return (
+            <div>
+                <Snippet tokens={parseCode("csv", longCode())} maxLineLength={200} readMore={true} readMoreVisibleLines={4}/>
+                <Snippet title="snippet title" tokens={parseCode("html", htmlCode)}/>
+                <Snippet maxLineLength={200} title="snippet title" tokens={parseCode("html", htmlCode)}/>
+                <Snippet maxLineLength={200} tokens={parseCode("html", htmlCode)}/>
+                <Tabs {...tabs} elementsLibrary={elementsLibrary}/>
+                <p className="content-block">text in between</p>
+                <Snippet maxLineLength={20} tokens={parseCode("html", htmlCode)}/>
+                <Snippet tokens={parseCode("javascript", javaCode)} slideIdx={1} spoiler={true} commentsType="inline"/>
+                <Snippet tokens={parseCode("markdown", markdownCode2)} highlight={[1]}/>
+                <Snippet tokens={parseCode("markdown", markdownCode2)} highlight={"include-file"}/>
+            </div>
+        )
     }
 }
 

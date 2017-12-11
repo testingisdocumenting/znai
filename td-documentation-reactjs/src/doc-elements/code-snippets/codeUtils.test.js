@@ -1,4 +1,7 @@
-import {splitTokensIntoLines, isInlinedComment, trimComment, containsInlinedComment} from './codeUtils'
+import {
+    splitTokensIntoLines, isInlinedComment, trimComment, containsInlinedComment,
+    extractTextFromTokens
+} from './codeUtils'
 import {parseCode} from './codeParser';
 
 const tokens = [{"type": "keyword", "content": "class"}, " ", {"type": "class-name", "content": ["Test"]}, " Test2 ", {"type": "punctuation", "content": "{"}, "\n",
@@ -28,13 +31,19 @@ describe("codeUtils", () => {
 
     it("creates separate empty lines", () => {
         const tokens = parseCode('java', codeWithEmptyLines)
-
         const lines = splitTokensIntoLines(tokens)
         expect(lines.length).toEqual(4)
         expect(lines[2]).toEqual(['\n'])
     })
 
-    it("detects if a token is inlined comment", () => {
+    it("converts line of tokens to a simple text", () => {
+        const code = 'public class PreviewServer {'
+        const tokens = parseCode('java', code)
+        const text = extractTextFromTokens(tokens)
+        expect(text).toEqual(code)
+    })
+
+    it("detects if a token is an inlined comment", () => {
         const nonInlined = {"type": "comment", "content": "/*another \n comment line \nend of comment */"}
         const inlined = {"type": "comment", "content": "// comment line"}
 
@@ -42,7 +51,7 @@ describe("codeUtils", () => {
         expect(isInlinedComment(inlined)).toBeTruthy()
     })
 
-    it("detects if a list of tokens contains inlined comment", () => {
+    it("detects if a list of tokens contains an inlined comment", () => {
         const tokens = ["    ", {"type": "keyword", "content": "var"}, " a  ", {"type": "operator", "content": "="}, " ", {"type": "number", "content": "2"}, {"type": "punctuation", "content": ";"}, " ", {"type": "comment", "content": "// comment line"}, "\n"]
 
         expect(containsInlinedComment(tokens)).toBeTruthy()

@@ -7,10 +7,12 @@ const SimpleCodeToken = ({token}) => {
         return <span>{token}</span>
     }
 
-    const className = (token.type === 'text') ? '' : "token " + token.type
-    return (<span className={className}>{
-        renderData(token)
-    }</span>)
+    const className = (token.type === 'text') ? '' : 'token ' + token.type
+    return (
+        <span className={className}>
+            {renderData(token)}
+        </span>
+    )
 }
 
 function renderData(token) {

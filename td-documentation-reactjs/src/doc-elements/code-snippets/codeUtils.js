@@ -56,4 +56,26 @@ function containsInlinedComment(tokens) {
     return tokens.filter(t => isInlinedComment(t)).length
 }
 
-export {splitTokensIntoLines, isInlinedComment, trimComment, containsInlinedComment}
+function extractTextFromTokens(tokens) {
+    return tokens.map(t => tokenToText(t)).join('')
+}
+
+function tokenToText(token) {
+    if (typeof token === 'string') {
+        return token
+    }
+
+    if (Array.isArray(token.content)) {
+        return token.content.map(t => tokenToText(t)).join('')
+    }
+
+    return token.content.toString()
+}
+
+export {
+    splitTokensIntoLines,
+    isInlinedComment,
+    trimComment,
+    containsInlinedComment,
+    extractTextFromTokens
+}

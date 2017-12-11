@@ -30,6 +30,13 @@ option with an **optional** `readMoreVisibleLines` option to specify a number of
     
 :include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3} 
 
+# Highlights
+
+Use `highlight` option to bring readers attention to important lines.
+
+    :include-file: file-name.js {highlight: ["export", 1]}
+
+:include-file: file-name.js {highlight: ["export", 1]}
 
 # Callout Comments
 
