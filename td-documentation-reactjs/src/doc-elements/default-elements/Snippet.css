@@ -85,6 +85,10 @@
     flex-basis: 8px;
 }
 
+pre {
+    overflow-y: hidden;
+}
+
 pre code {
     border: none;
 }
