@@ -43,7 +43,7 @@ class SimpleCodeSnippet extends Component {
         const {isPresentation, slideIdx} = this.props
 
         // slideIdx === 0 means no highlights, 1 - first highlight, etc
-        const highlightIsVisible = slideIdx > 0
+        const highlightIsVisible = !isPresentation || slideIdx > 0
 
         const linesToRender = this.limitLines && !displayFully ?
             this.linesOfTokens.slice(0, this.readMoreVisibleLines) :
@@ -92,8 +92,10 @@ class SimpleCodeSnippet extends Component {
     }
 
     isHighlighted(idx, tokens) {
-        const {meta, slideIdx} = this.props
-        const highlight = isAllAtOnce(meta) ? this.highlight : this.highlight.slice(0, slideIdx)
+        const {meta, isPresentation, slideIdx} = this.props
+        const highlight = (!isPresentation || isAllAtOnce(meta)) ?
+            this.highlight:
+            this.highlight.slice(0, slideIdx)
 
         if (! highlight) {
             return false

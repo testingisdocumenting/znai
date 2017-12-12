@@ -57,7 +57,7 @@ class SnipppetDemo extends Component {
                 <p className="content-block">text in between</p>
                 <Snippet tokens={parseCode("html", htmlCode)}/>
                 <Snippet tokens={parseCode("javascript", javaCode)} slideIdx={1} spoiler={true} commentsType="inline"/>
-                <Snippet tokens={parseCode("markdown", markdownCode2)} highlight={[1]}/>
+                <Snippet tokens={parseCode("markdown", markdownCode2)} highlight={[0]}/>
                 <Snippet tokens={parseCode("markdown", markdownCode2)} highlight={"include-file"}/>
             </div>
         )
