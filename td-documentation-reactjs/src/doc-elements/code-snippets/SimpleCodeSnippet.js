@@ -3,10 +3,11 @@ import React, {Component} from 'react'
 import {extractTextFromTokens, splitTokensIntoLines} from './codeUtils'
 import LineOfTokens from './LineOfTokens.js'
 import SimpleCodeToken from './SimpleCodeToken.js'
+import {convertToList} from '../propsUtils'
+import {isAllAtOnce} from '../meta/meta';
 
 import './tokens.css'
 import './SimpleCodeSnippet.css'
-import {convertToList} from '../propsUtils'
 
 class SimpleCodeSnippet extends Component {
     constructor(props) {
@@ -20,13 +21,13 @@ class SimpleCodeSnippet extends Component {
         this.processProps(nextProps)
     }
 
-    processProps({tokens, highlight}) {
+    processProps({isPresentation, tokens, highlight}) {
         this.linesOfTokens = splitTokensIntoLines(tokens)
 
         // highlight is either a single line index/substring or a collection of line indexes and substrings
         this.highlight = convertToList(highlight)
 
-        if (this.highlight.length === 0) {
+        if (isPresentation || this.highlight.length === 0) {
             return
         }
 
@@ -39,7 +40,10 @@ class SimpleCodeSnippet extends Component {
 
     render() {
         const {displayFully} = this.state
-        const {isPresentation} = this.props
+        const {isPresentation, slideIdx} = this.props
+
+        // slideIdx === 0 means no highlights, 1 - first highlight, etc
+        const highlightIsVisible = slideIdx > 0
 
         const linesToRender = this.limitLines && !displayFully ?
             this.linesOfTokens.slice(0, this.readMoreVisibleLines) :
@@ -50,7 +54,7 @@ class SimpleCodeSnippet extends Component {
                 <pre>
                     <code>
                         {linesToRender.map((tokens, idx) => <LineOfTokens key={idx} tokens={tokens}
-                                                                          isHighlighted={this.isHighlighted(idx, tokens)}
+                                                                          isHighlighted={highlightIsVisible && this.isHighlighted(idx, tokens)}
                                                                           isPresentation={isPresentation}
                                                                           TokenComponent={SimpleCodeToken}/>)}
                     </code>
@@ -88,7 +92,8 @@ class SimpleCodeSnippet extends Component {
     }
 
     isHighlighted(idx, tokens) {
-        const highlight = this.highlight
+        const {meta, slideIdx} = this.props
+        const highlight = isAllAtOnce(meta) ? this.highlight : this.highlight.slice(0, slideIdx)
 
         if (! highlight) {
             return false

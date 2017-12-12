@@ -45,6 +45,8 @@ Additionally you can combine two approaches and pass a list of things to highlig
 
 :include-file: file-name.js {highlight: ["export", 1]}
 
+Note: Order of lines to highlight is reflected during presentation mode 
+
 # Callout Comments
 
 If you already have comments inside your code it would be non effecient to repeat them inside documentation. 

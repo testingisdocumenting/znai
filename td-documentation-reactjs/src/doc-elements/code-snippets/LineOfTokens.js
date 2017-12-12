@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './LineOfTokens.css'
+
 const LineOfTokens = ({tokens, isHighlighted, isPresentation, TokenComponent}) => {
     const className = "code-line" + (isHighlighted ? " highlight" : "")
 

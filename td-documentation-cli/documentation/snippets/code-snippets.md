@@ -140,6 +140,8 @@ public class DocScaffolding {
     }
 ```
 
+Note: You will get a build time error if the specified substring is not found in any of the snippet lines
+
 It is recommended to pass a substring, but you can pass a line idx (starts from 0). 
 Additionally you can combine two approaches and pass a list of things to highlight. 
     
@@ -163,7 +165,7 @@ public class DocScaffolding {
     }
 ```    
 
-Note: You will get a build time error if the specified substring is not found in any of the snippet lines
+Note: Order of lines to highlight is reflected during presentation mode 
 
     
 # Inlined
