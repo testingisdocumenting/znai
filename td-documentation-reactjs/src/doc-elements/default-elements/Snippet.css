@@ -41,6 +41,7 @@
 .snippet-container .snippet {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+    overflow-x: auto;
 }
 
 .snippet-container.wide-screen .snippet {

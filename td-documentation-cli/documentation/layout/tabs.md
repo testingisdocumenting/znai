@@ -20,7 +20,7 @@ To define multiple tabs we use fenced code block
 
     ```tabs
     JavaScript: :include-file: snippets/file-name.js
-    Java: :include-file: snippets/wide-code.java
+    Java: :include-file: snippets/WideCode.java
     Cpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true}
     ```
     
@@ -28,7 +28,7 @@ This will generate a multi tab widget with an include plugin content per tab
 
 ```tabs
 JavaScript: :include-file: snippets/file-name.js
-Java: :include-file: snippets/wide-code.java
+Java: :include-file: snippets/WideCode.java {wide: true}
 Cpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true}
 ```
 

@@ -37,6 +37,8 @@ class SnipppetDemo extends Component {
         const markdownCode2 = '# Server Configuration\n\n' +
             ':include-file: config/server.config\n'
 
+        const wideCode = 'private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {'
+
         const tabs = {tabsContent: [{
             name: "wide", content: [{
                 type: "Snippet",
@@ -48,11 +50,12 @@ class SnipppetDemo extends Component {
             <div>
                 <Snippet tokens={parseCode("csv", longCode())} maxLineLength={200} readMore={true} readMoreVisibleLines={4}/>
                 <Snippet title="snippet title" tokens={parseCode("html", htmlCode)}/>
-                <Snippet maxLineLength={200} title="snippet title" tokens={parseCode("html", htmlCode)}/>
-                <Snippet maxLineLength={200} tokens={parseCode("html", htmlCode)}/>
+                <Snippet wide={true} title="snippet title" tokens={parseCode("html", htmlCode)}/>
+                <Snippet wide={true} tokens={parseCode("html", htmlCode)}/>
+                <Snippet wide={false} tokens={parseCode("java", wideCode)}/>
                 <Tabs {...tabs} elementsLibrary={elementsLibrary}/>
                 <p className="content-block">text in between</p>
-                <Snippet maxLineLength={20} tokens={parseCode("html", htmlCode)}/>
+                <Snippet tokens={parseCode("html", htmlCode)}/>
                 <Snippet tokens={parseCode("javascript", javaCode)} slideIdx={1} spoiler={true} commentsType="inline"/>
                 <Snippet tokens={parseCode("markdown", markdownCode2)} highlight={[1]}/>
                 <Snippet tokens={parseCode("markdown", markdownCode2)} highlight={"include-file"}/>

@@ -11,10 +11,9 @@ import './Snippet.css'
 
 class Snippet extends React.Component {
     render() {
-        const {maxLineLength} = this.props
-        const isWide = maxLineLength && maxLineLength >= 115;
+        const {wide} = this.props
 
-        return isWide ? this.renderWideMode() : this.renderNormalMode()
+        return wide ? this.renderWideMode() : this.renderNormalMode()
     }
 
     renderNormalMode() {

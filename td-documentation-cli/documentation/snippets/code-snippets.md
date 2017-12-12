@@ -70,10 +70,35 @@ Use `title` property to specify a title.
 
 # Wide Code
 
-To make regular text more readable we maintain a narrow column of text. You code snippets however can't always follow the 
-same rules. In case of a wide code snippets we expand the horizontal boundaries and center the source code to fit.
+Use `wide` option to stretch wide code to occupy as much real estate as possible.  
 
-:include-file: wide-code.java {title: "Wide Code"}
+    ```java {wide: true}
+    class InternationalPriceService implements PriceService {
+        private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {
+            ...
+        }
+    }
+    ```
+    
+```java {wide: true}
+class InternationalPriceService implements PriceService {
+    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {
+        ...
+    }
+}
+``` 
+
+Without `wide` option code will be aligned with the rest of the text and users can use scrollbars.   
+
+```java
+class InternationalPriceService implements PriceService {
+    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {
+        ...
+    }
+}
+```
+
+Note: Good placement of a *Wide Code* is at the end of a page or a section to show the full version of a code sample.
 
 # Read More
 

@@ -1,3 +1,8 @@
+.code-line {
+    word-break: keep-all;
+    white-space: pre;
+}
+
 .code-line.highlight {
     background: rgba(100, 180, 250, 0.3);
     padding: 4px 0;
