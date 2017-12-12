@@ -117,7 +117,7 @@ public class DocScaffolding {
 
 # Highlights
 
-Use `highlight` option to bring readers attention to important lines.
+Use `highlight` option to bring readers attention to the important lines.
 
 
     ```java {highlight: "workingDir"}
@@ -140,7 +140,7 @@ public class DocScaffolding {
     }
 ```
 
-It is recommended to pass substring, but you can pass line idx (starts from 0). 
+It is recommended to pass a substring, but you can pass a line idx (starts from 0). 
 Additionally you can combine two approaches and pass a list of things to highlight. 
     
     ```java {highlight: [2,  "..."]}

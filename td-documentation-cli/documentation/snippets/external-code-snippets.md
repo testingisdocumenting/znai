@@ -32,7 +32,14 @@ option with an **optional** `readMoreVisibleLines` option to specify a number of
 
 # Highlights
 
-Use `highlight` option to bring readers attention to important lines.
+Use `highlight` option to bring readers attention to the important lines.
+
+    :include-file: file-name.js {highlight: "export"}
+
+:include-file: file-name.js {highlight: "export"}
+
+It is recommended to pass a substring, but you can pass a line idx (starts from 0). 
+Additionally you can combine two approaches and pass a list of things to highlight. 
 
     :include-file: file-name.js {highlight: ["export", 1]}
 
