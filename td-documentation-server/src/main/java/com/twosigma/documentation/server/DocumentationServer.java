@@ -20,6 +20,8 @@ import java.nio.file.Path;
  */
 public class DocumentationServer {
     public static HttpServer create(Path deployRoot) {
+        System.setProperty("file.encoding","UTF-8");
+
         createDirs(deployRoot);
         System.setProperty("vertx.cwd", deployRoot.toString());
 
