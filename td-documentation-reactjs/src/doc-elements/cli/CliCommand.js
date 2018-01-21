@@ -70,7 +70,8 @@ class CliCommand extends Component {
 
             return (
                 <div key={lineIdx} className="tokens-line">{
-                    [...renderedLine, !isLastLine && isLineVisible ? <span className="line-separator">\</span> : null]
+                    [...renderedLine,
+                        !isLastLine && isLineVisible ? <span key="separator" className="line-separator">\</span> : null]
                 }</div>
             )
         })
