@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PureComponent} from 'react'
 import {documentationNavigation} from '../structure/DocumentationNavigation'
 
 const PageSections = ({pageSectionIdTitles, selected}) => {
@@ -14,35 +14,62 @@ const PageSections = ({pageSectionIdTitles, selected}) => {
     </div>)
 }
 
-const Item = ({item, selected, isSelected, onClickHandler}) => {
-    const className = "toc-item " + (isSelected ? "selected" : "")
-    const href = documentationNavigation.buildUrl(item)
-    return (
-        <div className={className}>
-            <a href={href} onClick={ (e) => { e.preventDefault(); onClickHandler(item.dirName, item.fileName)}}>{item.pageTitle}</a>
-            {isSelected ? <PageSections pageSectionIdTitles={item.pageSectionIdTitles}
-                                        selected={selected}/> : null}
-        </div>
-    );
-};
+class Item extends PureComponent {
+    render() {
+        const {item, selected, isSelected, onClickHandler} = this.props
+
+        const className = "toc-item " + (isSelected ? "selected" : "")
+        const href = documentationNavigation.buildUrl(item)
+
+        return (
+            <div className={className} ref={this.saveSelectedNodeRef}>
+                <a href={href} onClick={ (e) => { e.preventDefault(); onClickHandler(item.dirName, item.fileName)}}>{item.pageTitle}</a>
+                {isSelected ? <PageSections pageSectionIdTitles={item.pageSectionIdTitles}
+                                            selected={selected}/> : null}
+            </div>
+        )
+    }
+
+    saveSelectedNodeRef = (node) => {
+        this.node = node
+    }
+
+    componentDidMount() {
+        this.scrollIntoView()
+    }
+
+    componentDidUpdate() {
+        this.scrollIntoView()
+    }
+
+    scrollIntoView() {
+        const {isSelected} = this.props
+
+        if (isSelected) {
+            this.node.scrollIntoView({block: 'nearest'})
+        }
+    }
+}
 
 const Section = ({section, selected, onClickHandler}) => {
     const className = "toc-section " + (section.dirName === selected.dirName ? "selected" : "")
 
-    return (<div className={className}>
-        <div className="title">{section.sectionTitle}</div>
-        {section.items.map((item) => <Item key={item.fileName}
-                                           item={item}
-                                           selected={selected}
-                                           isSelected={section.dirName === selected.dirName && item.fileName === selected.fileName}
-                                           onClickHandler={onClickHandler} />)}
-    </div>);
-};
+    return (
+        <div className={className}>
+            <div className="title">{section.sectionTitle}</div>
+            {section.items.map((item) => <Item key={item.fileName}
+                                               item={item}
+                                               selected={selected}
+                                               isSelected={section.dirName === selected.dirName && item.fileName === selected.fileName}
+                                               onClickHandler={onClickHandler} />)}
+        </div>
+    )
+}
 
 const TocMenu = ({toc, selected, onClickHandler}) => {
     selected = selected || {dirName: "", fileName: ""}
 
-    // we won't render items that don't belong to a section. it includes things like top index.html or other misc filesD
+    // we won't render items that don't belong to a section. it includes things like top index.html or other misc files
     return (
         <div className="toc-menu">
             {toc.filter(sectionEntry => sectionEntry.dirName.length > 0).map((sectionEntry) =>
@@ -51,7 +78,7 @@ const TocMenu = ({toc, selected, onClickHandler}) => {
                          onClickHandler={onClickHandler}
                          section={sectionEntry} />)}
         </div>
-    );
-};
+    )
+}
 
 export default TocMenu
