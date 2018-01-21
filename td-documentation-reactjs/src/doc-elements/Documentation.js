@@ -207,6 +207,10 @@ class Documentation extends Component {
         }
 
         const selection = window.getSelection()
+        if (! selection.rangeCount) {
+            return
+        }
+
         const rangeAt = selection.getRangeAt(0)
         const text = selection.toString()
 
