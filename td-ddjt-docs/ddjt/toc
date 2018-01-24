@@ -5,3 +5,6 @@ data
     input-preparation
 matchers
     code
+components-testing
+    dangerous-mocks
+    building-fakes
