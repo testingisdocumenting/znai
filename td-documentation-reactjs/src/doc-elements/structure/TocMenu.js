@@ -67,6 +67,7 @@ const Section = ({section, selected, onClickHandler}) => {
 }
 
 const TocMenu = ({toc, selected, onClickHandler}) => {
+    console.log('toc menu loaded')
     selected = selected || {dirName: "", fileName: ""}
 
     // we won't render items that don't belong to a section. it includes things like top index.html or other misc files
