@@ -2,7 +2,6 @@ package com.twosigma.documentation.java.extensions;
 
 import com.twosigma.documentation.java.parser.EnumEntry;
 import com.twosigma.documentation.java.parser.JavaCode;
-import com.twosigma.documentation.java.parser.JavaMethodParam;
 import com.twosigma.documentation.java.parser.html.HtmlToDocElementConverter;
 import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.parser.docelement.DocElementType;
@@ -25,6 +24,7 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
         List<List<?>> data = javaCode.getEnumEntries().stream()
+                .filter(this::includeEnum)
                 .map(e -> Arrays.asList(nameToDocElements(e), descriptionToDocElements(e)))
                 .collect(toList());
 
@@ -42,6 +42,11 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
 
         DocElement table = new DocElement(DocElementType.TABLE, "table", tableProps);
         return new JavaIncludeResult(Collections.singletonList(table), extractText(javaCode.getEnumEntries())) ;
+    }
+
+    private boolean includeEnum(EnumEntry enumEntry) {
+        boolean excludeDeprecated = pluginParams.getOpts().get("excludeDeprecated", false);
+        return !(excludeDeprecated && enumEntry.isDeprecated());
     }
 
     private String extractText(List<EnumEntry> enums) {

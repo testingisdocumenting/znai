@@ -125,3 +125,9 @@ Use `include-java-enum-entries` to enumerate entries of a enum from a file
     
 :include-java-enum-entries: MyEnum.java
 
+You can exclude deprecated entries from the list by specifying `excludeDeprecated` parameter.
+ 
+    :include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
+
+:include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
+

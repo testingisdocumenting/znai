@@ -2,6 +2,7 @@ package com.twosigma.documentation.java.parser;
 
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.comments.JavadocComment;
+import com.github.javaparser.ast.expr.MarkerAnnotationExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.javadoc.Javadoc;
 import com.github.javaparser.javadoc.JavadocBlockTag;
@@ -119,7 +120,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         registerType(enumDeclaration);
 
         List<EnumEntry> entries = enumDeclaration.getEntries().stream().map(e -> new EnumEntry(e.getName().getIdentifier(),
-                extractJavaDocDescription(e.getJavadocComment()))).collect(toList());
+                extractJavaDocDescription(e.getJavadocComment()), extractIsDeprecated(e))).collect(toList());
 
         enumEntries.addAll(entries);
         super.visit(enumDeclaration, arg);
@@ -144,6 +145,11 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
                 extractParams(methodDeclaration, javaDoc),
                 extractReturn(methodDeclaration, javaDoc),
                 javaDocText));
+    }
+
+    private boolean extractIsDeprecated(EnumConstantDeclaration e) {
+        List<MarkerAnnotationExpr> annotationNodes = e.getNodesByType(MarkerAnnotationExpr.class);
+        return annotationNodes.stream().anyMatch(an -> an.getName().getIdentifier().equals("Deprecated"));
     }
 
     private String renderAllMethods() {

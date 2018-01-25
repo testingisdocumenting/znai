@@ -93,6 +93,8 @@ enum MyEnum {
      * documentation of entry two
      */
     SECOND_ENTRY,
+    
+    @Deprecated
     THIRD_ENTRY
 }
 """
@@ -242,6 +244,8 @@ enum MyEnum {
                 "     * documentation of entry two\n" +
                 "     */\n" +
                 "    SECOND_ENTRY,\n" +
+                "    \n" +
+                "    @Deprecated\n" +
                 "    THIRD_ENTRY\n" +
                 "}", type.fullBody)
         Assert.assertEquals("/**\n" +
@@ -253,6 +257,8 @@ enum MyEnum {
                 " * documentation of entry two\n" +
                 " */\n" +
                 "SECOND_ENTRY,\n" +
+                "    \n" +
+                "@Deprecated\n" +
                 "THIRD_ENTRY", type.bodyOnly)
     }
 
@@ -260,9 +266,9 @@ enum MyEnum {
     void "extracts enumerations themselves from enum"() {
         def entries = javaCodeEnum.getEnumEntries()
 
-        entries.should == [[name: 'ENTRY_ONE', javaDocText: 'documentation of entry one'],
-                           [name: 'SECOND_ENTRY', javaDocText: 'documentation of entry two'],
-                           [name: 'THIRD_ENTRY', javaDocText: '']]
+        entries.should == [[name: 'ENTRY_ONE', javaDocText: 'documentation of entry one', deprecated: false],
+                           [name: 'SECOND_ENTRY', javaDocText: 'documentation of entry two', deprecated: false],
+                           [name: 'THIRD_ENTRY', javaDocText: '', deprecated: true]]
     }
 
     @Test

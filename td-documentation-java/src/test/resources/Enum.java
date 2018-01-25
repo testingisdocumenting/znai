@@ -7,5 +7,6 @@ enum Enum {
     /**
      * description of entry two
      */
+    @Deprecated
     ENTRY_TWO
 }

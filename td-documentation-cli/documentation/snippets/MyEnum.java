@@ -15,5 +15,11 @@ enum MyEnum {
      *     <li>item two</li>
      * </ul>
      */
-    ENTRY_TWO
+    ENTRY_TWO,
+
+    /**
+     * Don't use, instead use ENTRY_TWO
+     */
+    @Deprecated
+    ENTRY_THREE
 }
