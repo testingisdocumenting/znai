@@ -53,16 +53,14 @@ public class HtmlToDocElementConverter {
 
         public ConverterNodeVisitor(ParserHandler parserHandler) {
             this.parserHandler = parserHandler;
-            this.isInsideParagraph = true;
-            parserHandler.onParagraphStart();
+            startParagraphIfRequired();
         }
 
         @Override
         public void head(Node node, int i) {
             if (isParagraph(node)) {
-                closeParagraph();
-                parserHandler.onParagraphStart();
-                isInsideParagraph = true;
+                closeParagraphIfRequired();
+                startParagraphIfRequired();
             } else if (isInlinedCode(node)) {
                 isInsideInlinedCode = true;
             } else if (isBlockCode(node)) {
@@ -74,10 +72,10 @@ public class HtmlToDocElementConverter {
             } else if (isLink(node)) {
                 parserHandler.onLinkStart(node.attr("href"));
             } else if (isUnorderedList(node)) {
-                closeParagraph();
+                closeParagraphIfRequired();
                 parserHandler.onBulletListStart('*', false);
             } else if (isOrderedList(node)) {
-                closeParagraph();
+                closeParagraphIfRequired();
                 parserHandler.onOrderedListStart('.', 1);
             } else if (isListItem(node)) {
                 parserHandler.onListItemStart();
@@ -90,8 +88,7 @@ public class HtmlToDocElementConverter {
         @Override
         public void tail(Node node, int i) {
             if (isParagraph(node)) {
-                parserHandler.onParagraphEnd();
-                isInsideParagraph = false;
+                closeParagraphIfRequired();
             } else if (isInlinedCode(node)) {
                 isInsideInlinedCode = false;
             } else if (isBlockCode(node)) {
@@ -104,8 +101,10 @@ public class HtmlToDocElementConverter {
                 parserHandler.onLinkEnd();
             } else if (isUnorderedList(node)) {
                 parserHandler.onBulletListEnd();
+                startParagraphIfRequired();
             } else if (isOrderedList(node)) {
                 parserHandler.onOrderedListEnd();
+                startParagraphIfRequired();
             } else if (isListItem(node)) {
                 parserHandler.onListItemEnd();
             }
@@ -119,16 +118,26 @@ public class HtmlToDocElementConverter {
             if (isInsideInlinedCode) {
                 parserHandler.onInlinedCode(text);
             } else if (isInsideBlockCode) {
-                closeParagraph();
+                closeParagraphIfRequired();
                 parserHandler.onSnippet(PluginParams.EMPTY,"", "", text);
             } else {
                 parserHandler.onSimpleText(text);
             }
         }
 
-        private void closeParagraph() {
+        private void startParagraphIfRequired() {
+            if (isInsideParagraph) {
+                return;
+            }
+
+            isInsideParagraph = true;
+            parserHandler.onParagraphStart();
+        }
+
+        private void closeParagraphIfRequired() {
             if (isInsideParagraph) {
                 parserHandler.onParagraphEnd();
+                isInsideParagraph = false;
             }
         }
 

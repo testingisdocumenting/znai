@@ -67,8 +67,39 @@ second paragraph
                                      [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]]]
     }
 
+    @Test
+    void "should handle unclosed tags"() {
+        process("""Hello
+<ul>
+<li>item 1</li>
+<li>item 2</li
+</ul>
+some text
+<p>
+World paragraph
+""")
+
+        elements.should == [[type: 'Paragraph',
+                             content: [[text: 'Hello ', type: 'SimpleText']]],
+                            [bulletMarker: '*', tight: false, type: 'BulletList',
+                                content:[[type: 'ListItem', content: [[text: 'item 1', type: 'SimpleText']]],
+                                         [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]],
+                            [type: 'Paragraph', content:[[text: ' some text ', type: 'SimpleText']]],
+                            [type: 'Paragraph', content:[[text: ' World paragraph ', type: 'SimpleText']]]]
+    }
+
     private void process(String html) {
         def docElements = HtmlToDocElementConverter.convert(testComponentsRegistry, Paths.get(""), html)
         elements = docElements.collect { it.toMap() }
     }
+
+    /**
+     [
+        [type:Paragraph,
+            content:[[text:Hello , type:SimpleText]]],
+        [bulletMarker:*, tight:false, type:BulletList,
+            content:[[type:ListItem, content:[[type:Paragraph, content:[[text:item 1, type:SimpleText]]],
+                [type:ListItem, content:[[text:item 2, type:SimpleText]]]]],
+                [text: some text , type:SimpleText]]], [type:Paragraph, content:[[text: World paragraph , type:SimpleText]]]]
+     */
 }
