@@ -28,8 +28,6 @@ const tabsContent = [
     }
 ]
 
-const TabsDemo = () => {
-    return (<Tabs tabsContent={tabsContent} elementsLibrary={elementsLibrary}/>)
+export function tabsDemo(registry) {
+    registry.add('with code', <Tabs tabsContent={tabsContent} elementsLibrary={elementsLibrary}/>, '')
 }
-
-export default TabsDemo
