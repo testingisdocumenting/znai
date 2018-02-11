@@ -1,0 +1,47 @@
+.lang-function {
+    margin-bottom: 20px;
+}
+
+.lang-function:last-child {
+    margin-bottom: 0;
+}
+
+.lang-function > .function-name {
+}
+
+.lang-function > .function-name > .function-params-as-str {
+    color: #555;
+}
+
+.lang-function > .description-and-params {
+    margin-left: 30px;
+}
+
+.lang-function > .description-and-params > .function-description{
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+.lang-function .function-params {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 10px;
+}
+
+.lang-function .function-params > .name-and-type {
+    justify-self: end;
+    padding-right: 10px;
+    padding-bottom: 6px;
+    border-right: 1px solid #009AA6;
+}
+
+.lang-function .function-params > .name-and-type > .name {
+}
+
+.lang-function .function-params > .name-and-type > .type {
+    color: #555;
+    font-size: 12px;
+    line-height: 1;
+    text-align: right;
+}
+

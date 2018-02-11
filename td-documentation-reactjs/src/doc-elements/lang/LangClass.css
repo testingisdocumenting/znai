@@ -13,16 +13,3 @@
 .lang-class .description-and-methods {
     margin-left: 30px;
 }
-
-.lang-class .method-name {
-    font-weight: bold;
-}
-
-.lang-class .description-and-params {
-    margin-left: 30px;
-}
-
-.lang-class .lang-method-param {
-    display: flex;
-    flex-wrap: wrap;
-}

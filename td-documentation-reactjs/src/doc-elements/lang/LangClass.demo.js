@@ -34,12 +34,6 @@ const demoDef = {
     ]
 }
 
-const LangClassDemo = () => {
-    return (
-        <div>
-            <LangClass {...demoDef} elementsLibrary={elementsLibrary}/>
-        </div>
-    )
+export function langClassDemo(registry) {
+    registry.add('class with methods', <LangClass {...demoDef} elementsLibrary={elementsLibrary}/>)
 }
-
-export default LangClassDemo
