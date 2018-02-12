@@ -37,6 +37,7 @@ class AllPagesAtOnce extends Component {
             const allPagesRendered = allPages.map((p, idx) => <elementsLibrary.Page key={idx}
                                                                                     content={p.content}
                                                                                     tocItem={p.tocItem}
+                                                                                    docMeta={docMeta}
                                                                                     elementsLibrary={elementsLibrary}/>)
             setTimeout(() => this.setState({allPages, allPagesRendered}), 0);
         })
