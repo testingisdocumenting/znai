@@ -28,9 +28,9 @@ public class ReactJsBundle {
         mainJs = WebResource.fromResource("static/main.js");
         mainCss = WebResource.fromResource("static/main.css");
         bootstrapCss = WebResource.fromResource("static/css/bootstrap.min.css");
-        react = WebResource.fromResource("static/react.min.js");
-        reactDom = WebResource.fromResource("static/react-dom.min.js");
-        reactDomServer = WebResource.fromResource("react-dom-server.min.js");
+        react = WebResource.fromResource("static/react.production.min.js");
+        reactDom = WebResource.fromResource("static/react-dom.production.min.js");
+        reactDomServer = WebResource.fromResource("react-dom-server.browser.production.min.js");
 
         fonts = Stream.of("eot", "svg", "ttf", "woff", "woff2").map(ext -> "static/fonts/glyphicons-halflings-regular." + ext).
                 map(WebResource::fromResource).collect(toList());

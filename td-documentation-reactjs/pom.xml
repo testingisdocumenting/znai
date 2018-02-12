@@ -48,9 +48,9 @@
                             <fileset refid="bundle"/>
                         </copy>
 
-                        <copy file="${project.basedir}/node_modules/react/dist/react.min.js" toDir="${project.build.outputDirectory}/static"/>
-                        <copy file="${project.basedir}/node_modules/react-dom/dist/react-dom.min.js" toDir="${project.build.outputDirectory}/static"/>
-                        <copy file="${project.basedir}/node_modules/react-dom/dist/react-dom-server.min.js" toDir="${project.build.outputDirectory}"/>
+                        <copy file="${project.basedir}/node_modules/react/umd/react.production.min.js" toDir="${project.build.outputDirectory}/static"/>
+                        <copy file="${project.basedir}/node_modules/react-dom/umd/react-dom.production.min.js" toDir="${project.build.outputDirectory}/static"/>
+                        <copy file="${project.basedir}/node_modules/react-dom/umd/react-dom-server.browser.production.min.js" toDir="${project.build.outputDirectory}"/>
                         <copy toDir="${project.build.outputDirectory}/static">
                             <fileset dir="${project.basedir}/node_modules/bootstrap/dist"/>
                         </copy>
