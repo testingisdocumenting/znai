@@ -72,7 +72,7 @@ second paragraph
         process("""Hello
 <ul>
 <li>item 1</li>
-<li>item 2</li
+<li>item 2</li>
 </ul>
 some text
 <p>
@@ -92,14 +92,4 @@ World paragraph
         def docElements = HtmlToDocElementConverter.convert(testComponentsRegistry, Paths.get(""), html)
         elements = docElements.collect { it.toMap() }
     }
-
-    /**
-     [
-        [type:Paragraph,
-            content:[[text:Hello , type:SimpleText]]],
-        [bulletMarker:*, tight:false, type:BulletList,
-            content:[[type:ListItem, content:[[type:Paragraph, content:[[text:item 1, type:SimpleText]]],
-                [type:ListItem, content:[[text:item 2, type:SimpleText]]]]],
-                [text: some text , type:SimpleText]]], [type:Paragraph, content:[[text: World paragraph , type:SimpleText]]]]
-     */
 }

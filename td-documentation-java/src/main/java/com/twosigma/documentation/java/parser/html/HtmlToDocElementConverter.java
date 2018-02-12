@@ -51,7 +51,7 @@ public class HtmlToDocElementConverter {
          */
         private boolean isInsideParagraph;
 
-        public ConverterNodeVisitor(ParserHandler parserHandler) {
+        ConverterNodeVisitor(ParserHandler parserHandler) {
             this.parserHandler = parserHandler;
             startParagraphIfRequired();
         }
@@ -60,7 +60,7 @@ public class HtmlToDocElementConverter {
         public void head(Node node, int i) {
             if (isParagraph(node)) {
                 closeParagraphIfRequired();
-                startParagraphIfRequired();
+                startParagraph();
             } else if (isInlinedCode(node)) {
                 isInsideInlinedCode = true;
             } else if (isBlockCode(node)) {
@@ -101,10 +101,14 @@ public class HtmlToDocElementConverter {
                 parserHandler.onLinkEnd();
             } else if (isUnorderedList(node)) {
                 parserHandler.onBulletListEnd();
-                startParagraphIfRequired();
+
+                closeParagraphIfRequired();
+                startParagraph();
             } else if (isOrderedList(node)) {
                 parserHandler.onOrderedListEnd();
-                startParagraphIfRequired();
+
+                closeParagraphIfRequired();
+                startParagraph();
             } else if (isListItem(node)) {
                 parserHandler.onListItemEnd();
             }
@@ -130,6 +134,10 @@ public class HtmlToDocElementConverter {
                 return;
             }
 
+            this.startParagraph();
+        }
+
+        private void startParagraph() {
             isInsideParagraph = true;
             parserHandler.onParagraphStart();
         }
