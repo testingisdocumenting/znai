@@ -4,9 +4,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.ParserHandler;
-import com.twosigma.documentation.parser.sphinx.python.PythonClass;
-import com.twosigma.documentation.parser.sphinx.python.PythonClassIncludePlugin;
-import com.twosigma.documentation.parser.sphinx.python.PythonClassXmlParser;
+import com.twosigma.documentation.parser.sphinx.python.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -156,9 +154,23 @@ class DocTreeDomXmlParser {
         switch (descType) {
             case "class":
                 return parseClass(node);
+            case "function":
+                return parseFunction(node);
             default:
                 return false;
         }
+    }
+
+    private boolean parseFunction(Node node) {
+        PythonFunction pythonFunction = new PythonFunctionXmlParser().parse(node);
+        PythonFunctionIncludePlugin includePlugin = new PythonFunctionIncludePlugin();
+
+        PluginResult pluginResult = includePlugin.process(componentsRegistry, filePath,
+                new PluginParams(includePlugin.id(), pythonFunction.toMap()));
+
+        parserHandler.onIncludePlugin(includePlugin, pluginResult);
+
+        return false;
     }
 
     private boolean parseClass(Node node) {

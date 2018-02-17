@@ -1,0 +1,79 @@
+<desc desctype="function" domain="py" noindex="False" objtype="function">
+    <desc_signature class="" first="False" fullname="send_message" ids="send_message" module="True"
+                    names="send_message">
+        <desc_name xml:space="preserve">send_message</desc_name><desc_parameterlist xml:space="preserve"><desc_parameter xml:space="preserve">sender</desc_parameter><desc_parameter xml:space="preserve">recipient</desc_parameter><desc_parameter xml:space="preserve">message_body</desc_parameter><desc_optional xml:space="preserve"><desc_parameter xml:space="preserve">priority=1</desc_parameter></desc_optional></desc_parameterlist>
+    </desc_signature>
+    <desc_content>
+        <paragraph>Send a message to a recipient</paragraph>
+        <field_list>
+            <field>
+                <field_name>Parameters</field_name>
+                <field_body>
+                    <bullet_list>
+                        <list_item>
+                            <paragraph>
+                                <literal_strong refspecific="True">sender</literal_strong>
+                                (<literal_emphasis>str</literal_emphasis>) – <emphasis>The</emphasis> person <strong>
+                                sending
+                            </strong> the message
+                            </paragraph>
+                        </list_item>
+                        <list_item>
+                            <paragraph>
+                                <literal_strong refspecific="True">recipient</literal_strong>
+                                (<literal_emphasis>str</literal_emphasis>) – The recipient of the message
+                            </paragraph>
+                        </list_item>
+                        <list_item>
+                            <paragraph>
+                                <literal_strong refspecific="True">message_body</literal_strong>
+                                (<literal_emphasis>str</literal_emphasis>) – The body of the message
+                            </paragraph>
+                        </list_item>
+                        <list_item>
+                            <paragraph>
+                                <literal_strong refspecific="True">priority</literal_strong>
+                                (
+                                <literal_emphasis>integer</literal_emphasis>
+                                <literal_emphasis>or</literal_emphasis>
+                                <literal_emphasis>None</literal_emphasis>) – The priority of the message, can be a
+                                number 1-5
+                            </paragraph>
+                        </list_item>
+                    </bullet_list>
+                </field_body>
+            </field>
+            <field>
+                <field_name>Returns</field_name>
+                <field_body>
+                    <paragraph>the message id</paragraph>
+                </field_body>
+            </field>
+            <field>
+                <field_name>Return type</field_name>
+                <field_body>
+                    <paragraph>int</paragraph>
+                </field_body>
+            </field>
+            <field>
+                <field_name>Raises</field_name>
+                <field_body>
+                    <bullet_list>
+                        <list_item>
+                            <paragraph>
+                                <literal_strong>ValueError</literal_strong>
+                                – if the message_body exceeds 160 characters
+                            </paragraph>
+                        </list_item>
+                        <list_item>
+                            <paragraph>
+                                <literal_strong>TypeError</literal_strong>
+                                – if the message_body is not a basestring
+                            </paragraph>
+                        </list_item>
+                    </bullet_list>
+                </field_body>
+            </field>
+        </field_list>
+    </desc_content>
+</desc>

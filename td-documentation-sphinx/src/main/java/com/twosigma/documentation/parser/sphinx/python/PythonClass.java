@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 public class PythonClass {
     private String name;
     private String description;
-    private List<PythonMethod> methods;
+    private List<PythonFunction> methods;
 
     public PythonClass(String name, String description) {
         this.name = name;
@@ -21,7 +21,7 @@ public class PythonClass {
         methods = new ArrayList<>();
     }
 
-    public void addMethod(PythonMethod method) {
+    public void addMethod(PythonFunction method) {
         methods.add(method);
     }
 
@@ -33,7 +33,7 @@ public class PythonClass {
         return description;
     }
 
-    public List<PythonMethod> getMethods() {
+    public List<PythonFunction> getMethods() {
         return methods;
     }
 
@@ -50,7 +50,7 @@ public class PythonClass {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("name", name);
         result.put("description", description);
-        result.put("methods", methods.stream().map(PythonMethod::toMap).collect(toList()));
+        result.put("methods", methods.stream().map(PythonFunction::toMap).collect(toList()));
 
         return result;
     }

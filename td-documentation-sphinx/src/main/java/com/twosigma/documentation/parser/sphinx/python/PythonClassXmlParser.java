@@ -13,7 +13,6 @@ import static com.twosigma.documentation.parser.sphinx.XmlUtils.parseXml;
  */
 public class PythonClassXmlParser {
     private PythonClass pythonClass;
-    private PythonMethod method;
 
     public PythonClass parse(String xml) {
         Document document = parseXml(xml);
@@ -32,23 +31,7 @@ public class PythonClassXmlParser {
     }
 
     private void parseMethod(Node desc) {
-        Node descSignature = XmlUtils.nodeByName(desc, "desc_signature");
-        Node descName = XmlUtils.nodeByName(descSignature, "desc_name");
-        Node descContent = XmlUtils.nodeByName(desc, "desc_content");
-        Node paragraph = XmlUtils.nodeByName(descContent, "paragraph");
-
-        method = new PythonMethod(descName.getTextContent(), paragraph.getTextContent());
+        PythonFunction method = new PythonFunctionXmlParser().parse(desc);
         pythonClass.addMethod(method);
-
-        XmlUtils.nodesStreamByName(descContent, "list_item").forEach(this::parseParam);
-    }
-
-    private void parseParam(Node listItem) {
-        String paramName = XmlUtils.nodeByName(listItem, "literal_strong").getTextContent();
-        Node paragraph = XmlUtils.nodeByName(listItem, "paragraph");
-        String paramDesc = paragraph.getLastChild().getTextContent().trim().replace("– ", "");
-
-        PythonMethodParam param = new PythonMethodParam(paramName, paramDesc);
-        method.addParam(param);
     }
 }

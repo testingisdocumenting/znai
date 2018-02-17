@@ -10,19 +10,25 @@ import static java.util.stream.Collectors.toList;
 /**
  * @author mykola
  */
-public class PythonMethod {
+public class PythonFunction {
     private String name;
     private String description;
-    private List<PythonMethodParam> params;
+    private List<PythonFunctionParam> params;
+    private List<PythonFunctionParamSignature> paramSignatures;
 
-    public PythonMethod(String name, String description) {
+    public PythonFunction(String name, String description) {
         this.name = name;
         this.description = description;
         this.params = new ArrayList<>();
+        this.paramSignatures = new ArrayList<>();
     }
 
-    public void addParam(PythonMethodParam param) {
+    public void addParam(PythonFunctionParam param) {
         params.add(param);
+    }
+
+    public void addParamSignature(PythonFunctionParamSignature paramSignature) {
+        paramSignatures.add(paramSignature);
     }
 
     public String getName() {
@@ -33,16 +39,21 @@ public class PythonMethod {
         return description;
     }
 
-    public List<PythonMethodParam> getParams() {
+    public List<PythonFunctionParam> getParams() {
         return params;
+    }
+
+    public List<PythonFunctionParamSignature> getParamSignatures() {
+        return paramSignatures;
     }
 
     @Override
     public String toString() {
-        return "PythonMethod{" +
+        return "PythonFunction{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", params=" + params +
+                ", paramSignatures=" + paramSignatures +
                 '}';
     }
 
@@ -50,7 +61,9 @@ public class PythonMethod {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("name", name);
         result.put("description", description);
-        result.put("params", params.stream().map(PythonMethodParam::toMap).collect(toList()));
+        result.put("params", params.stream().map(PythonFunctionParam::toMap).collect(toList()));
+        result.put("paramSignatures", paramSignatures.stream()
+                .map(PythonFunctionParamSignature::toMap).collect(toList()));
 
         return result;
     }

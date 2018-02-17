@@ -39,6 +39,11 @@ public class XmlUtils {
         }
     }
 
+    public static boolean hasNodeByName(Node parent, String name) {
+        NodeList matched = nodesListByName(parent, name);
+        return matched.getLength() > 0;
+    }
+
     public static Node nodeByName(Node parent, String name) {
         NodeList matched = nodesListByName(parent, name);
 

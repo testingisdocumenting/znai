@@ -12,12 +12,12 @@ class PythonClassTest {
     @Test
     void "should convert to map"() {
         def pythonClass = new PythonClass('ClassName', 'class description')
-        def method1 = new PythonMethod('methodOne', 'method one description')
-        method1.addParam(new PythonMethodParam('param1', 'param1 description'))
-        method1.addParam(new PythonMethodParam('param2', 'param2 description'))
+        def method1 = new PythonFunction('methodOne', 'method one description')
+        method1.addParam(new PythonFunctionParam('param1', 'param1 description'))
+        method1.addParam(new PythonFunctionParam('param2', 'param2 description'))
 
-        def method2 = new PythonMethod('methodTwo', 'method two description')
-        method2.addParam(new PythonMethodParam('param2', 'param2 description'))
+        def method2 = new PythonFunction('methodTwo', 'method two description')
+        method2.addParam(new PythonFunctionParam('param2', 'param2 description'))
 
         pythonClass.addMethod(method1)
         pythonClass.addMethod(method2)

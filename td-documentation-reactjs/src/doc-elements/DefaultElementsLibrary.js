@@ -30,6 +30,7 @@ import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
 import {MarkdownAndResult, presentationMarkdownAndResultHandler} from './markdown/MarkdownAndResult'
 import WebTauRest from './test-results/WebTauRest'
 import LangClass from './lang/LangClass';
+import LangFunction from './lang/LangFunction';
 
 const library = {}
 const presentationElementHandlers = {}
@@ -56,6 +57,7 @@ library.Snippet = Snippet
 presentationElementHandlers.Snippet = presentationSnippetHandler
 
 library.LangClass = LangClass
+library.LangFunction = LangFunction
 
 library.BulletList = BulletList
 presentationElementHandlers.BulletList = presentationBulletListHandler
