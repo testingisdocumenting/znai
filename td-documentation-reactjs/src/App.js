@@ -6,7 +6,8 @@ import {jsonDemo} from './doc-elements/json/Json.demo'
 import {langClassDemo} from './doc-elements/lang/LangClass.demo'
 import {langFunctionDemo} from './doc-elements/lang/LangFunction.demo'
 import {documentationDemo} from './doc-elements/Documentation.demo'
-import {openApiOperationDemo} from './doc-elements/open-api/OpenApiOperation.demo'
+import {openApiOperationDemo} from './doc-elements/open-api/operation/OpenApiOperation.demo'
+import {openApiSchemaDemo} from './doc-elements/open-api/schema/OpenApiSchema.demo'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
@@ -16,6 +17,7 @@ snippets.registerAsGrid('Json', 0, jsonDemo)
 snippets.registerAsGrid('Lang Class', 0, langClassDemo)
 snippets.registerAsGrid('Lang Function', 0, langFunctionDemo)
 snippets.registerAsGrid('Open API', 0, openApiOperationDemo)
+snippets.registerAsGrid('Open API Schema', 250, openApiSchemaDemo)
 
 const layout = new Registry('layout')
 layout.registerAsGrid('Tabs', 300, tabsDemo)

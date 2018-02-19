@@ -1,6 +1,6 @@
 import React from 'react'
 import OpenApiOperation from './OpenApiOperation'
-import {elementsLibrary} from '../DefaultElementsLibrary'
+import {elementsLibrary} from '../../DefaultElementsLibrary'
 
 const exampleDescription = [
     {
@@ -47,6 +47,6 @@ const getExample = {
 export function openApiOperationDemo(registry) {
     registry
         .add('get without query parameters', <OpenApiOperation elementsLibrary={elementsLibrary}
-                                                               {...getExample}/>)
+                                                               operation={getExample}/>)
 }
 
