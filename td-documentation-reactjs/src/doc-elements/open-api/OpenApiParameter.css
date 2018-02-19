@@ -1,0 +1,48 @@
+.open-api-parameter {
+    --vertical-spacing: 5px;
+    --label-spacing: 5px;
+}
+
+.open-api-parameter > .name-and-type {
+    display: flex;
+}
+
+.open-api-parameter > .name-and-type > .name {
+    color: var(--mdoc-property-color);
+}
+
+.open-api-parameter > .name-and-type > .required {
+    margin-left: 5px;
+    color: var(--mdoc-meta);
+}
+
+.open-api-parameter > .name-and-type > .type {
+    margin-left: 10px;
+}
+
+.open-api-parameter > .description {
+    margin-left: 15px;
+    margin-top: var(--vertical-spacing)
+}
+
+.open-api-parameter > .description > .values-description {
+    margin-top: var(--vertical-spacing)
+}
+
+.open-api-parameter > .description > .values-description > .available-values {
+    display: flex;
+}
+
+.open-api-parameter > .description > .values-description > .available-values > .available-values-label {
+    font-style: italic;
+    margin-right: var(--label-spacing)
+}
+
+.open-api-parameter > .description > .values-description > .default-value {
+    display: flex;
+}
+
+.open-api-parameter > .description > .values-description > .default-value > .default-value-label {
+    font-style: italic;
+    margin-right: var(--label-spacing)
+}

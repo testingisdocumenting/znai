@@ -25,7 +25,7 @@
 
 .token.property,
 .token.key {
-    color: #660e7a;
+    color: var(--mdoc-property-color);
     font-weight: bold;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .token.keyword {
-    color: #000080;
+    color: var(--mdoc-keyword-color);
     font-weight: bold;
 }
 

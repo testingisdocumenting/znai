@@ -1,0 +1,35 @@
+.open-api-operation {
+
+}
+
+.open-api-operation > .url-and-summary {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-column-gap: 20px;
+}
+
+.open-api-operation > .url-and-summary > .method {
+    text-transform: uppercase;
+    color: var(--mdoc-keyword-color);
+}
+
+.open-api-operation > .url-and-summary > .path {
+    color: var(--mdoc-rest-link-color);
+}
+
+.open-api-operation > .url-and-summary > .summary {
+}
+
+.open-api-operation > .description {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.open-api-operation > .parameters-label {
+    color: var(--mdoc-keyword-color);
+    margin-bottom: 10px;
+}
+
+.open-api-operation > .parameters {
+    margin-left: 20px;
+}

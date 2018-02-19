@@ -1,3 +1,11 @@
+:root {
+    --mdoc-keyword-color: #000080;
+    --mdoc-rest-link-color: #7287b3;
+    --mdoc-property-color: #660e7a;
+    --mdoc-important-attention: #c52912;
+    --mdoc-meta: #888;
+}
+
 body {
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
