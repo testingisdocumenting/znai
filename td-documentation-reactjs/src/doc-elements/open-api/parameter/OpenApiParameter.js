@@ -1,5 +1,5 @@
 import React from 'react'
-import './OpenApiParameter.css'
+import './OpenApiParameters.css'
 
 function OpenApiParameter({elementsLibrary, parameter}) {
     return (

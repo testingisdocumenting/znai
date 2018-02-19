@@ -9,6 +9,7 @@
 
 .open-api-parameter > .name-and-type > .name {
     color: var(--mdoc-property-color);
+    font-weight: bold;
 }
 
 .open-api-parameter > .name-and-type > .required {

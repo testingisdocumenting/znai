@@ -1,7 +1,9 @@
 import React from 'react'
-import './OpenApiOperation.css'
-import OpenApiParameter from '../parameter/OpenApiParameter'
 import {elementsLibrary} from '../../DefaultElementsLibrary'
+import OpenApiResponses from '../response/OpenApiResponses'
+import OpenApiParameters from '../parameter/OpenApiParameters'
+
+import './OpenApiOperation.css'
 
 function OpenApiOperation({elementsLibrary, operation}) {
     const queryParameters = operation.parameters.filter(p => p.in === 'query')
@@ -16,26 +18,10 @@ function OpenApiOperation({elementsLibrary, operation}) {
             <div className="description">
                 <elementsLibrary.DocElement content={operation.description} elementsLibrary={elementsLibrary}/>
             </div>
-            <Parameters label="Query parameters" parameters={queryParameters}/>
+
+            <OpenApiParameters label="Query parameters" parameters={queryParameters}/>
+            <OpenApiResponses responses={operation.responses}/>
         </div>
-    )
-}
-
-function Parameters({label, parameters}) {
-    if (parameters.length === 0) {
-        return null
-    }
-
-    return (
-        <React.Fragment>
-            <div className="parameters-label">{label}</div>
-            <div className="parameters">
-                {parameters.map(p => <OpenApiParameter key={p.name}
-                                                       parameter={p}
-                                                       elementsLibrary={elementsLibrary}
-                />)}
-            </div>
-        </React.Fragment>
     )
 }
 

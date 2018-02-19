@@ -10,10 +10,12 @@
 
 .open-api-operation > .url-and-summary > .method {
     text-transform: uppercase;
+    font-weight: bold;
     color: var(--mdoc-keyword-color);
 }
 
 .open-api-operation > .url-and-summary > .path {
+    font-weight: bold;
     color: var(--mdoc-rest-link-color);
 }
 
@@ -25,11 +27,14 @@
     margin-bottom: 10px;
 }
 
-.open-api-operation > .parameters-label {
+.open-api-operation .sub-header {
     color: var(--mdoc-keyword-color);
+    font-weight: bold;
+    margin-top: 15px;
     margin-bottom: 10px;
 }
 
-.open-api-operation > .parameters {
+.open-api-operation > .parameters,
+.open-api-operation > .open-api-responses {
     margin-left: 20px;
 }

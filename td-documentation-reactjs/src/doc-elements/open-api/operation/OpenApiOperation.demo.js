@@ -1,6 +1,7 @@
 import React from 'react'
 import OpenApiOperation from './OpenApiOperation'
 import {elementsLibrary} from '../../DefaultElementsLibrary'
+import {customerSchema} from '../schema/OpenApiSchema.data.demo'
 
 const exampleDescription = [
     {
@@ -40,7 +41,24 @@ const getExample = {
                 default: 'available'
             }
         }
-    ]
+    ],
+    responses: {
+        "200": {
+            description: "OK",
+            schema: customerSchema
+
+        },
+        "401": {
+            description: "Unauthorized"
+        },
+        "403": {
+            description: "Forbidden"
+        },
+        "404": {
+            description: "Not Found"
+        }
+    }
+
 
 }
 

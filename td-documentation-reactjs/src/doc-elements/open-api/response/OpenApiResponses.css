@@ -1,0 +1,16 @@
+.open-api-responses {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 5px 20px;
+}
+
+.open-api-responses > .open-api-response {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 5px;
+    margin-bottom: 5px;
+}
+
+.open-api-responses > .open-api-response > .description-and-schema {
+}
