@@ -42,22 +42,25 @@ const getExample = {
             }
         }
     ],
-    responses: {
-        "200": {
+    responses: [
+        {
+            code: "200",
             description: "OK",
             schema: customerSchema
-
         },
-        "401": {
+        {
+            code: "401",
             description: "Unauthorized"
         },
-        "403": {
+        {
+            code: "403",
             description: "Forbidden"
         },
-        "404": {
+        {
+            code: "404",
             description: "Not Found"
         }
-    }
+    ]
 
 
 }

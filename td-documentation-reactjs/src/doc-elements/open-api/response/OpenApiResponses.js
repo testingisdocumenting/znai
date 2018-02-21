@@ -12,9 +12,8 @@ function OpenApiResponses({responses = {}}) {
         <React.Fragment>
             <div className="sub-header">Responses</div>
             <div className="open-api-responses">
-                {Object.keys(responses).map(code => <OpenApiResponse key={code}
-                                                                     code={code}
-                                                                     response={responses[code]}/>)}
+                {responses.map(r => <OpenApiResponse key={r.code}
+                                                     response={r}/>)}
             </div>
         </React.Fragment>
     )
