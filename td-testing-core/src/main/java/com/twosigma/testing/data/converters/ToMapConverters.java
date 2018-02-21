@@ -27,6 +27,7 @@ public class ToMapConverters {
 
     private static List<ToMapConverter> discover() {
         List<ToMapConverter> discovered = ServiceUtils.discover(ToMapConverter.class);
+        discovered.add(new MapToMapConverter());
         discovered.add(new BeanToMapConverter());
 
         return discovered;
