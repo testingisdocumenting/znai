@@ -22,16 +22,18 @@ const jsonTheme = {
     base0F: '#a16946'
 }
 
-const expandNode = () => true
-
 function SchemaAsJsonTree({json}) {
     return (
         <div className="open-api-schema-as-json">
             <JSONTree data={json}
                       theme={jsonTheme}
-                      shouldExpandNode={expandNode}/>
+                      shouldExpandNode={shouldExpandNode}/>
         </div>
     )
+}
+
+function shouldExpandNode(pathParts) {
+    return pathParts.length < 2
 }
 
 export default SchemaAsJsonTree
