@@ -57,8 +57,8 @@ library.ThematicBreak = () => <hr />
 library.Snippet = Snippet
 presentationElementHandlers.Snippet = presentationSnippetHandler
 
-library.LangClass = LangClass
-library.LangFunction = LangFunction
+library.LangClass = wrappedInContentBlock(LangClass)
+library.LangFunction = wrappedInContentBlock(LangFunction)
 
 library.BulletList = BulletList
 presentationElementHandlers.BulletList = presentationBulletListHandler
@@ -125,6 +125,16 @@ library.Footer = Footer
 
 library.WebTauRest = WebTauRest
 
-library.OpenApiOperation = OpenApiOperation
+library.OpenApiOperation = wrappedInContentBlock(OpenApiOperation)
+
+/**
+ * to make a DocElement aligned with a page content it needs to have a content-block assigned.
+ * We can't content-block to each component as we may need to used them to build other components.
+ *
+ * @param Component component to wrap
+ */
+function wrappedInContentBlock(Component) {
+    return (props) => <div className="content-block"><Component {...props}/></div>
+}
 
 export {library as elementsLibrary, presentationElementHandlers}

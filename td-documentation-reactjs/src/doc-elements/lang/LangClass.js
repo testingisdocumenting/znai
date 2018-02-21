@@ -5,7 +5,7 @@ import LangFunction from './LangFunction'
 
 function LangClass({name, description, methods, ...props}) {
     return (
-        <div className="lang-class content-block">
+        <div className="lang-class">
             <div className="class-name token class-name">{name}</div>
             <div className="description-and-methods">
                 <div className="class-description">{description}</div>
