@@ -56,6 +56,7 @@ public class OpenApiSpec {
         operation.setPath(path);
         operation.setMethod(method);
         operation.setResponses(buildResponses((Map<String, ?>) definition.get("responses")));
+        operation.setParameters(new ArrayList<>());
 
         operations.add(operation);
     }

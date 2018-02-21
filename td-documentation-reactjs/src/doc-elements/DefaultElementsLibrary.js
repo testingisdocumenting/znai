@@ -31,6 +31,7 @@ import {MarkdownAndResult, presentationMarkdownAndResultHandler} from './markdow
 import WebTauRest from './test-results/WebTauRest'
 import LangClass from './lang/LangClass';
 import LangFunction from './lang/LangFunction';
+import OpenApiOperation from './open-api/operation/OpenApiOperation';
 
 const library = {}
 const presentationElementHandlers = {}
@@ -123,5 +124,7 @@ presentationElementHandlers.CliOutput = presentationCliOutput
 library.Footer = Footer
 
 library.WebTauRest = WebTauRest
+
+library.OpenApiOperation = OpenApiOperation
 
 export {library as elementsLibrary, presentationElementHandlers}

@@ -61,8 +61,6 @@ const getExample = {
             description: "Not Found"
         }
     ]
-
-
 }
 
 export function openApiOperationDemo(registry) {
