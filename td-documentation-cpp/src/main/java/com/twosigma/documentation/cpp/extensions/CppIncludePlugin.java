@@ -37,7 +37,7 @@ public class CppIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        markupParser = componentsRegistry.parser();
+        markupParser = componentsRegistry.defaultParser();
         codeTokenizer = componentsRegistry.codeTokenizer();
         fileName = pluginParams.getFreeParam();
         cppPath = componentsRegistry.resourceResolver().fullPath(this.fileName);

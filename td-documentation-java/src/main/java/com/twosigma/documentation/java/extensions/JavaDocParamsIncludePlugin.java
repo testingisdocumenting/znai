@@ -5,7 +5,6 @@ import com.twosigma.documentation.java.parser.JavaMethod;
 import com.twosigma.documentation.java.parser.JavaMethodParam;
 import com.twosigma.documentation.java.parser.JavaMethodReturn;
 import com.twosigma.documentation.parser.MarkupParserResult;
-import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.template.TextTemplate;
 import com.twosigma.utils.CollectionUtils;
 import com.twosigma.utils.ResourceUtils;
@@ -35,7 +34,7 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
         TextTemplate textTemplate = new TextTemplate("java-doc-params",
                 ResourceUtils.textContent("templates/javaDocParams.md"));
 
-        MarkupParserResult parserResult = componentsRegistry.parser().parse(markupPath,
+        MarkupParserResult parserResult = componentsRegistry.defaultParser().parse(markupPath,
                 textTemplate.process(
                         CollectionUtils.createMap("params", params,
                                 "return", createReturn(javaMethod))));

@@ -36,7 +36,7 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        MarkupParser parser = componentsRegistry.parser();
+        MarkupParser parser = componentsRegistry.defaultParser();
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
 
         String diagramTitle = pluginParams.getFreeParam();

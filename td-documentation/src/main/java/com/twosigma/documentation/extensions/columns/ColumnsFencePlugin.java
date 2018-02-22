@@ -40,7 +40,7 @@ public class ColumnsFencePlugin implements FencePlugin {
         this.markupPath = markupPath;
         this.columnsParserResult = new ArrayList<>();
 
-        parser = componentsRegistry.parser();
+        parser = componentsRegistry.defaultParser();
 
         ColonDelimitedKeyValues columnsDefinitions = new ColonDelimitedKeyValues(content);
         DocElement docElement = new DocElement("Columns",

@@ -166,6 +166,7 @@
         "produces": [
           "*/*"
         ],
+        "description": "find one *customer*",
         "parameters": [
           {
             "name": "id",

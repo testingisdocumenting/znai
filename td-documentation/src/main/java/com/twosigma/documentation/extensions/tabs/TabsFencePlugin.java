@@ -39,7 +39,7 @@ public class TabsFencePlugin implements FencePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         this.markupPath = markupPath;
-        this.parser = componentsRegistry.parser();
+        this.parser = componentsRegistry.defaultParser();
         this.texts = new ArrayList<>();
 
         ColonDelimitedKeyValues tabsDefinitions = new ColonDelimitedKeyValues(content);

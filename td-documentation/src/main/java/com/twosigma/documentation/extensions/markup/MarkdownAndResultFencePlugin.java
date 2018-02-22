@@ -7,7 +7,6 @@ import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
-import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 
 import java.nio.file.Path;
@@ -25,7 +24,7 @@ public class MarkdownAndResultFencePlugin implements FencePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
-        MarkupParser parser = componentsRegistry.parser();
+        MarkupParser parser = componentsRegistry.defaultParser();
         MarkupParserResult parserResult = parser.parse(markupPath, content);
 
         Map<String, Object> markdown = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "markdown", content);

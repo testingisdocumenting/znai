@@ -8,7 +8,6 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.utils.FileUtils;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.stream.Stream;
 
@@ -24,7 +23,8 @@ public class OpenApiOperationIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         specPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
 
-        OpenApiSpec openApiSpec = OpenApiSpec.fromJson(FileUtils.fileTextContent(specPath));
+        OpenApiSpec openApiSpec = OpenApiSpec.fromJson(componentsRegistry.markdownParser(),
+                FileUtils.fileTextContent(specPath));
         OpenApiOperation operation = openApiSpec.findOperationById(pluginParams.getOpts().get("operationId"));
 
         return PluginResult.docElement("OpenApiOperation",

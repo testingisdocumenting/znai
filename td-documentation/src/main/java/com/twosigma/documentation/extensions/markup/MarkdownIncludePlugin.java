@@ -26,7 +26,7 @@ public class MarkdownIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
-        MarkupParser parser = componentsRegistry.parser();
+        MarkupParser parser = componentsRegistry.defaultParser();
 
         Path markdown = resourcesResolver.fullPath(pluginParams.getFreeParam());
         parserResult = parser.parse(markdown, resourcesResolver.textContent(markdown));

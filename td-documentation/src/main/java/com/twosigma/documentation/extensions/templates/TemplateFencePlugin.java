@@ -32,7 +32,7 @@ public class TemplateFencePlugin implements FencePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
-        MarkupParser parser = componentsRegistry.parser();
+        MarkupParser parser = componentsRegistry.defaultParser();
 
         fullPath = resourcesResolver.fullPath(pluginParams.getFreeParam());
         parserResult = parser.parse(markupPath, processTemplate(resourcesResolver.textContent(fullPath),

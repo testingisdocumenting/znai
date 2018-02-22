@@ -1,20 +1,35 @@
 package com.twosigma.documentation.openapi;
 
+import com.twosigma.documentation.parser.MarkdownParser;
+import com.twosigma.documentation.parser.MarkupParser;
+import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.utils.JsonUtils;
 
+import java.nio.file.Paths;
 import java.util.*;
 
 public class OpenApiSpec {
     private static final String REF_KEY = "$ref";
 
+    private MarkdownParser markdownParser;
     private Map<String, ?> spec;
     private List<OpenApiOperation> operations;
 
-    public static OpenApiSpec fromJson(String jsonSpec) {
-        return new OpenApiSpec(JsonUtils.deserializeAsMap(jsonSpec));
+    /**
+     * create open api spec representation from json.
+     * Markdown defaultParser is required explicitly as open api defines description in common mark.
+     *
+     * @param markdownParser instance of markdown defaultParser
+     * @param jsonSpec open api specification
+     * @return open api spec
+     */
+    public static OpenApiSpec fromJson(MarkdownParser markdownParser, String jsonSpec) {
+        return new OpenApiSpec(markdownParser, JsonUtils.deserializeAsMap(jsonSpec));
     }
 
-    public OpenApiSpec(Map<String, ?> spec) {
+    public OpenApiSpec(MarkdownParser markdownParser, Map<String, ?> spec) {
+        this.markdownParser = markdownParser;
         this.spec = spec;
         this.operations = new ArrayList<>();
 
@@ -53,12 +68,25 @@ public class OpenApiSpec {
     private void parseMethod(String path, String method, Map<String, ?> definition) {
         OpenApiOperation operation = new OpenApiOperation();
         operation.setId(Objects.toString(definition.get("operationId")));
+        operation.setTags((List<String>) definition.get("tags"));
         operation.setPath(path);
         operation.setMethod(method);
+        operation.setDescription(buildDescription(definition));
         operation.setResponses(buildResponses((Map<String, ?>) definition.get("responses")));
         operation.setParameters(new ArrayList<>());
 
         operations.add(operation);
+    }
+
+    private List<DocElement> buildDescription(Map<String, ?> definition) {
+        Object description = definition.get("description");
+
+        if (description == null) {
+            return Collections.emptyList();
+        }
+
+        MarkupParserResult parserResult = markdownParser.parse(Paths.get(""), description.toString());
+        return parserResult.getDocElement().getContent();
     }
 
     @SuppressWarnings("unchecked")

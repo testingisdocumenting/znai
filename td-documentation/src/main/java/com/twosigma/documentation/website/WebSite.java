@@ -10,6 +10,7 @@ import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
+import com.twosigma.documentation.parser.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.search.LunrIndexer;
@@ -267,7 +268,8 @@ public class WebSite implements DocStructure {
         extraJavaScripts = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScripts.add(tocJavaScript);
 
-        componentsRegistry.setParser(markupParser);
+        componentsRegistry.setDefaultParser(markupParser);
+        componentsRegistry.setMarkdownParser(new MarkdownParser(componentsRegistry));
     }
 
     private void deployResources() {

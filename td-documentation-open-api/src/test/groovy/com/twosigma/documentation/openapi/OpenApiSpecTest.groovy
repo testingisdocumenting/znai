@@ -1,5 +1,6 @@
 package com.twosigma.documentation.openapi
 
+import com.twosigma.documentation.parser.TestComponentsRegistry
 import com.twosigma.utils.ResourceUtils
 import org.junit.Test
 
@@ -7,7 +8,9 @@ import static com.twosigma.testing.Ddjt.actual
 import static com.twosigma.testing.Ddjt.equal
 
 class OpenApiSpecTest {
-    private static OpenApiSpec spec = OpenApiSpec.fromJson(ResourceUtils.textContent("open-api-spec.json"))
+    private static OpenApiSpec spec = OpenApiSpec.fromJson(
+            TestComponentsRegistry.INSTANCE.markdownParser(),
+            ResourceUtils.textContent("open-api-spec.json"))
 
     @Test
     void "should extract all operations from a spec file"() {
@@ -24,7 +27,13 @@ class OpenApiSpecTest {
     @Test
     void "operation should consist of method, path and tag"() {
         def operation = spec.findOperationById('findOneCustomerUsingGET')
-        operation.should == [method: 'get', path: '/customers/{id}']
+        operation.should == [method: 'get', path: '/customers/{id}', tags: ['customer']]
+    }
+
+    @Test
+    void "should parse description as markdown and expose as doc elements"() {
+        def operation = spec.findOperationById('findOneCustomerUsingGET')
+        operation.description*.toMap().should == [[markdown: 'find one *customer*', type: 'TestMarkdown']]
     }
 
     @Test

@@ -37,7 +37,7 @@ public class TemplateIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         resourcesResolver = componentsRegistry.resourceResolver();
-        MarkupParser parser = componentsRegistry.parser();
+        MarkupParser parser = componentsRegistry.defaultParser();
 
         fullPath = resourcesResolver.fullPath(pluginParams.getFreeParam());
         parserResult = parser.parse(markupPath, processTemplate(resourcesResolver.textContent(fullPath),

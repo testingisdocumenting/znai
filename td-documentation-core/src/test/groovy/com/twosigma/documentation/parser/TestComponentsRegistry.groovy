@@ -12,11 +12,17 @@ class TestComponentsRegistry implements ComponentsRegistry {
     public static final TestComponentsRegistry INSTANCE = new TestComponentsRegistry()
     
     private TestDocStructure docStructure = new TestDocStructure()
-    MarkupParser parser = new TestMarkupParser()
+    MarkupParser defaultParser = new TestMarkupParser()
+    MarkupParser markdownParser = new TestMarkdownParser()
 
     @Override
-    MarkupParser parser() {
-        return parser
+    MarkupParser defaultParser() {
+        return defaultParser
+    }
+
+    @Override
+    MarkdownParser markdownParser() {
+        return markdownParser
     }
 
     @Override

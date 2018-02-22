@@ -35,6 +35,7 @@
         ],
         "summary": "findAllCustomer",
         "operationId": "findAllCustomerUsingGET",
+        "description": "returns all *customers*",
         "produces": [
           "application/json",
           "application/hal+json",
@@ -166,6 +167,7 @@
         "produces": [
           "*/*"
         ],
+        "description": "find one *customer*",
         "parameters": [
           {
             "name": "id",

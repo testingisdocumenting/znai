@@ -36,7 +36,7 @@ public class TableIncludePlugin implements IncludePlugin {
     @Override
     @SuppressWarnings("unchecked")
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        parser = componentsRegistry.parser();
+        parser = componentsRegistry.defaultParser();
         String fileName = pluginParams.getFreeParam();
         fullPath = componentsRegistry.resourceResolver().fullPath(fileName);
         textContent = componentsRegistry.resourceResolver().textContent(fileName);

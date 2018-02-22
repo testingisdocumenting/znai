@@ -32,7 +32,7 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         Path dir = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
-        MarkupParser parser = componentsRegistry.parser();
+        MarkupParser parser = componentsRegistry.defaultParser();
 
         markdowns = markdowns(dir).collect(Collectors.toList());
         Stream<DocElement> elements = markdowns.stream().flatMap(p -> {
