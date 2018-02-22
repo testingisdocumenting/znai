@@ -2,15 +2,26 @@ package com.twosigma.documentation.openapi
 
 import com.twosigma.documentation.parser.TestComponentsRegistry
 import com.twosigma.utils.ResourceUtils
+import org.junit.BeforeClass
 import org.junit.Test
 
 import static com.twosigma.testing.Ddjt.actual
 import static com.twosigma.testing.Ddjt.equal
 
 class OpenApiSpecTest {
-    private static OpenApiSpec spec = OpenApiSpec.fromJson(
-            TestComponentsRegistry.INSTANCE.markdownParser(),
-            ResourceUtils.textContent("open-api-spec.json"))
+    private static OpenApiSpec spec
+    private static OpenApiOperation findOneCustomer
+    private static OpenApiOperation findAllCustomers
+
+    @BeforeClass
+    static void init() {
+        spec = OpenApiSpec.fromJson(
+                TestComponentsRegistry.INSTANCE.markdownParser(),
+                ResourceUtils.textContent("open-api-spec.json"))
+
+        findOneCustomer = spec.findOperationById('findOneCustomerUsingGET')
+        findAllCustomers = spec.findOperationById('findAllCustomerUsingGET')
+    }
 
     @Test
     void "should extract all operations from a spec file"() {
@@ -26,14 +37,23 @@ class OpenApiSpecTest {
 
     @Test
     void "operation should consist of method, path and tag"() {
-        def operation = spec.findOperationById('findOneCustomerUsingGET')
-        operation.should == [method: 'get', path: '/customers/{id}', tags: ['customer']]
+        findOneCustomer.should == [method: 'get', path: '/customers/{id}', tags: ['customer']]
     }
 
     @Test
     void "should parse description as markdown and expose as doc elements"() {
-        def operation = spec.findOperationById('findOneCustomerUsingGET')
-        operation.description*.toMap().should == [[markdown: 'find one *customer*', type: 'TestMarkdown']]
+        findOneCustomer.description*.toMap().should == [[markdown: 'find one *customer*', type: 'TestMarkdown']]
+    }
+
+    @Test
+    void "should parse parameters description as markdown and expose as doc elements"() {
+        def expectedParameters = [    "in" | "name" | "required" | "type"   | "description"] {
+                                  ____________________________________________________________
+                                   "query" | "page" | false      | "string" |  [[markdown: 'page', type: 'TestMarkdown']]
+                                   "query" | "size" | false      | "string" |  [[markdown: 'size', type: 'TestMarkdown']]
+                                   "query" | "sort" | false      | "string" |  [[markdown: 'sort', type: 'TestMarkdown']] }
+
+        actual(findAllCustomers.toMap().parameters).should(equal(expectedParameters))
     }
 
     @Test

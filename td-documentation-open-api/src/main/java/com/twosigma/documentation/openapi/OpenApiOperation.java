@@ -16,7 +16,7 @@ public class OpenApiOperation {
     private List<String> tags;
     private List<DocElement> description;
 
-    private List<Map<String, ?>> parameters;
+    private List<OpenApiParameter> parameters;
     private List<Map<String, ?>> responses;
 
     public String getId() {
@@ -47,11 +47,11 @@ public class OpenApiOperation {
         this.path = path;
     }
 
-    public List<Map<String, ?>> getParameters() {
+    public List<OpenApiParameter> getParameters() {
         return parameters;
     }
 
-    public void setParameters(List<Map<String, ?>> parameters) {
+    public void setParameters(List<OpenApiParameter> parameters) {
         this.parameters = parameters;
     }
 
@@ -85,7 +85,7 @@ public class OpenApiOperation {
         result.put("method", method);
         result.put("path", path);
         result.put("tags", tags);
-        result.put("parameters", parameters);
+        result.put("parameters", parameters.stream().map(OpenApiParameter::toMap).collect(toList()));
         result.put("responses", responses);
         result.put("description", description.stream().map(DocElement::toMap).collect(toList()));
 

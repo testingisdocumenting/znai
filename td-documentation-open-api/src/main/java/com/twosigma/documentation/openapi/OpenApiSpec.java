@@ -1,13 +1,14 @@
 package com.twosigma.documentation.openapi;
 
 import com.twosigma.documentation.parser.MarkdownParser;
-import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.utils.JsonUtils;
 
 import java.nio.file.Paths;
 import java.util.*;
+
+import static java.util.stream.Collectors.toList;
 
 public class OpenApiSpec {
     private static final String REF_KEY = "$ref";
@@ -71,22 +72,28 @@ public class OpenApiSpec {
         operation.setTags((List<String>) definition.get("tags"));
         operation.setPath(path);
         operation.setMethod(method);
-        operation.setDescription(buildDescription(definition));
+        operation.setDescription(parseMarkdown(definition.get("description")));
         operation.setResponses(buildResponses((Map<String, ?>) definition.get("responses")));
-        operation.setParameters(new ArrayList<>());
+        operation.setParameters(buildParameters((List<Map<String, ?>>) definition.get("parameters")));
 
         operations.add(operation);
     }
 
-    private List<DocElement> buildDescription(Map<String, ?> definition) {
-        Object description = definition.get("description");
-
-        if (description == null) {
+    private List<OpenApiParameter> buildParameters(List<Map<String, ?>> parameters) {
+        if (parameters == null) {
             return Collections.emptyList();
         }
 
-        MarkupParserResult parserResult = markdownParser.parse(Paths.get(""), description.toString());
-        return parserResult.getDocElement().getContent();
+        return parameters.stream().map(this::buildParameter).collect(toList());
+    }
+
+    private OpenApiParameter buildParameter(Map<String, ?> parameter) {
+        return new OpenApiParameter(
+                Objects.toString(parameter.get("name")),
+                Objects.toString(parameter.get("in")),
+                Objects.toString(parameter.get("type")),
+                (Boolean) parameter.get("required"),
+                parseMarkdown(parameter.get("description")));
     }
 
     @SuppressWarnings("unchecked")
@@ -151,5 +158,14 @@ public class OpenApiSpec {
         }
 
         return substituteSchema((Map<String, ?>) data.get(pathParts[pathParts.length - 1]));
+    }
+
+    private List<DocElement> parseMarkdown(Object markdown) {
+        if (markdown == null) {
+            return Collections.emptyList();
+        }
+
+        MarkupParserResult parserResult = markdownParser.parse(Paths.get(""), markdown.toString());
+        return parserResult.getDocElement().getContent();
     }
 }
