@@ -12,5 +12,6 @@
     margin-bottom: 5px;
 }
 
-.open-api-responses > .open-api-response > .description-and-schema {
+.open-api-responses > .response-code {
+    font-family: var(--mdoc-code-font-family);
 }

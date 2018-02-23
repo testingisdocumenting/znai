@@ -8,11 +8,13 @@
 }
 
 .open-api-parameters > .name {
-    color: rgb(81, 132, 151);
+    font-family: var(--mdoc-code-font-family);
     font-weight: bold;
+    color: rgb(81, 132, 151);
 }
 
 .open-api-parameters > .type {
+    font-family: var(--mdoc-code-font-family);
     font-style: italic;
 }
 

@@ -1,2 +1,4 @@
 .open-api-schema {
+    font-size: var(--mdoc-code-text-size);
+    font-family: var(--mdoc-code-font-family);
 }

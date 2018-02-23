@@ -5,6 +5,12 @@
     --mdoc-property-color: #660e7a;
     --mdoc-important-attention: #c52912;
     --mdoc-meta: #888;
+
+    --mdoc-regular-text-size: 16px;
+
+    --mdoc-inlined-code-text-size: 14px;
+    --mdoc-code-text-size: 13px;
+    --mdoc-code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 body {

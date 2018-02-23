@@ -4,7 +4,7 @@
 
 .webtau-rest .method-and-url {
     padding-top: 10px;
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    font-family: var(--mdoc-code-font-family);
 }
 
 .webtau-rest .method-and-url .method {

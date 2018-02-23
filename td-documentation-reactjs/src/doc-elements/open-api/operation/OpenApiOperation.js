@@ -7,9 +7,13 @@ import './OpenApiOperation.css'
 import OpenApiBodyParameter from '../parameter/OpenApiBodyParameter'
 
 function OpenApiOperation({elementsLibrary, operation}) {
-    const pathParameters = operation.parameters.filter(p => p.in === 'path')
-    const queryParameters = operation.parameters.filter(p => p.in === 'query')
-    const bodyParameter = operation.parameters.find(p => p.in === 'body')
+    const parameters = operation.parameters || []
+
+    const pathParameters = parameters.filter(p => p.in === 'path')
+    const queryParameters = parameters.filter(p => p.in === 'query')
+
+    const bodyParams = parameters.filter(p => p.in === 'body')
+    const bodyParameter = bodyParams.length ? bodyParams[0] : null
 
     return (
         <div className="open-api-operation">

@@ -18,122 +18,134 @@ const exampleDescription = [
     }
 ]
 
-const getExample = {
+const allParameters = [
+    {
+        name: 'status',
+        "in": 'query',
+        description: [
+            {
+                "text": "Status values that need to be considered for filter",
+                "type": "SimpleText"
+            }
+        ],
+        required: true,
+        type: 'array',
+        items: {
+            type: 'string',
+            enum: ['available', 'pending', 'sold'],
+            default: 'available'
+        }
+    },
+    {
+        "name": "id",
+        "in": "path",
+        "description": [
+            {
+                "text": "ID of pet to delete",
+                "type": "SimpleText"
+            }
+        ],
+        "required": true,
+        "type": "integer",
+        "format": "int64"
+    },
+    {
+        "name": "tags",
+        "in": "query",
+        "description": [
+            {
+                "text": "tags to filter by",
+                "type": "SimpleText"
+            }
+        ],
+        "required": false,
+        "type": "array",
+        "collectionFormat": "csv",
+        "items": {
+            "type": "string"
+        }
+    },
+    {
+        "name": "limit",
+        "in": "query",
+        "description": [
+            {
+                "text": "maximum number of results to return",
+                "type": "SimpleText"
+            }
+        ],
+        "required": false,
+        "type": "integer",
+        "format": "int32"
+    },
+    {
+        "name": "limit",
+        "in": "body",
+        "description": [
+            {
+                "text": "Pet to add to the store",
+                "type": "SimpleText"
+            }
+        ],
+        "required": false,
+        "schema": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                }
+            }
+        },
+    }
+]
+
+const responses = [
+    {
+        code: "200",
+        description: "OK",
+        schema: customerSchema
+    },
+    {
+        code: "401",
+        description: "Unauthorized"
+    },
+    {
+        code: "403",
+        description: "Forbidden"
+    },
+    {
+        code: "404",
+        description: "Not Found"
+    }
+]
+
+const getExampleCoreFields = {
     method: 'get',
     path: '/findPetsByStatus',
     summary: 'Finds Pets by status',
-    description: exampleDescription,
-    parameters: [
-        {
-            name: 'status',
-            "in": 'query',
-            description: [
-                {
-                    "text": "Status values that need to be considered for filter",
-                    "type": "SimpleText"
-                }
-            ],
-            required: true,
-            type: 'array',
-            items: {
-                type: 'string',
-                enum: ['available', 'pending', 'sold'],
-                default: 'available'
-            }
-        },
-        {
-            "name": "id",
-            "in": "path",
-            "description": [
-                {
-                    "text": "ID of pet to delete",
-                    "type": "SimpleText"
-                }
-            ],
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-        },
-        {
-            "name": "tags",
-            "in": "query",
-            "description": [
-                {
-                    "text": "tags to filter by",
-                    "type": "SimpleText"
-                }
-            ],
-            "required": false,
-            "type": "array",
-            "collectionFormat": "csv",
-            "items": {
-                "type": "string"
-            }
-        },
-        {
-            "name": "limit",
-            "in": "query",
-            "description": [
-                {
-                    "text": "maximum number of results to return",
-                    "type": "SimpleText"
-                }
-            ],
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-        },
-        {
-            "name": "limit",
-            "in": "body",
-            "description": [
-                {
-                    "text": "Pet to add to the store",
-                    "type": "SimpleText"
-                }
-            ],
-            "required": false,
-            "schema": {
-                "type": "object",
-                "required": [
-                    "name"
-                ],
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "tag": {
-                        "type": "string"
-                    }
-                }
-            },
-        }
+    description: exampleDescription
+}
 
-    ],
-    responses: [
-        {
-            code: "200",
-            description: "OK",
-            schema: customerSchema
-        },
-        {
-            code: "401",
-            description: "Unauthorized"
-        },
-        {
-            code: "403",
-            description: "Forbidden"
-        },
-        {
-            code: "404",
-            description: "Not Found"
-        }
-    ]
+const getExample = {
+    ...getExampleCoreFields,
+    parameters: allParameters,
+    responses: responses
+}
+
+const getExampleWithoutParams = {
+    ...getExampleCoreFields,
+    responses: responses
 }
 
 export function openApiOperationDemo(registry) {
     registry
-        .add('get without query parameters', <OpenApiOperation elementsLibrary={elementsLibrary}
-                                                               operation={getExample}/>)
+        .add('GET request with all type of parameters', <OpenApiOperation elementsLibrary={elementsLibrary} operation={getExample}/>)
+        .add('GET request without parameters', <OpenApiOperation elementsLibrary={elementsLibrary} operation={getExampleWithoutParams}/>)
 }
 

@@ -9,7 +9,9 @@ function OpenApiBodyParameter({elementsLibrary, parameter}) {
     return (
         <React.Fragment>
             <div className="sub-header">Body parameter</div>
-            <elementsLibrary.DocElement content={parameter.description} elementsLibrary={elementsLibrary}/>
+            <div className="description">
+                <elementsLibrary.DocElement content={parameter.description} elementsLibrary={elementsLibrary}/>
+            </div>
             {parameter.schema && <OpenApiSchema schema={parameter.schema}/>}
         </React.Fragment>
     )

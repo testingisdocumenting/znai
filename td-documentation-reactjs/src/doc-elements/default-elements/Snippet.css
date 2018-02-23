@@ -34,7 +34,7 @@
     background: none;
     margin: 10px 0;
     padding: 0;
-    font-size: 13px;
+    font-size: var(--mdoc-code-text-size);
     line-height: 18px;
 }
 
@@ -71,8 +71,8 @@
     padding: 8px 16px;
     border: 1px solid #ddd;
     border-bottom: none;
-    font-size: 13px;
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: var(--mdoc-code-text-size);
+    font-family: var(--mdoc-code-font-family);
 }
 
 .snippet-container .title-container .large-filling {
@@ -98,7 +98,7 @@ code {
     background: none;
     color: #a15b38;
     padding: 0;
-    font-size: 14px;
+    font-size: var(--mdoc-inlined-code-text-size);
 }
 
 .wide-screen pre {
