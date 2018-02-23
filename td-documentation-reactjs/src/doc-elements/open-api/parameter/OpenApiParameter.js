@@ -1,14 +1,13 @@
 import React from 'react'
-import './OpenApiParameters.css'
 
 function OpenApiParameter({elementsLibrary, parameter}) {
     return (
-        <div className="open-api-parameter">
-            <div className="name-and-type">
-                <div className="name">{parameter.name}</div>
-                <IsRequired parameter={parameter}/>
-                <div className="type">{typeAsStr(parameter)}</div>
+        <React.Fragment>
+            <div className="name">
+                {parameter.name}
+                {parameter.required && <span className="required">*</span>}
             </div>
+            <div className="type">{typeAsStr(parameter)}</div>
             <div className="description">
                 <elementsLibrary.DocElement content={parameter.description} elementsLibrary={elementsLibrary}/>
                 <div className="values-description">
@@ -16,17 +15,7 @@ function OpenApiParameter({elementsLibrary, parameter}) {
                     <DefaultValue parameter={parameter}/>
                 </div>
             </div>
-        </div>
-    )
-}
-
-function IsRequired({parameter}) {
-    if (! parameter.required) {
-        return null
-    }
-
-    return (
-        <div className="required">required</div>
+        </React.Fragment>
     )
 }
 

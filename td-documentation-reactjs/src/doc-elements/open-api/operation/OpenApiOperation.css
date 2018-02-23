@@ -3,35 +3,36 @@
 }
 
 .open-api-operation > .url-and-summary {
+    font-size: 14px;
     display: grid;
-    grid-template-columns: auto auto 1fr;
-    grid-column-gap: 20px;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 10px;
 }
 
 .open-api-operation > .url-and-summary > .method {
     text-transform: uppercase;
     font-weight: bold;
-    color: var(--mdoc-keyword-color);
+    color: var(--mdoc-black);
 }
 
 .open-api-operation > .url-and-summary > .path {
     font-weight: bold;
-    color: var(--mdoc-rest-link-color);
+    color: var(--mdoc-black);
 }
 
 .open-api-operation > .url-and-summary > .summary {
 }
 
 .open-api-operation > .description {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 .open-api-operation .sub-header {
-    color: var(--mdoc-keyword-color);
+    font-size: 14px;
+    color: var(--mdoc-black);
     font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 .open-api-operation > .parameters,

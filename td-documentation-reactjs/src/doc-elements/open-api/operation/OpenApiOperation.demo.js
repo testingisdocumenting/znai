@@ -40,7 +40,75 @@ const getExample = {
                 enum: ['available', 'pending', 'sold'],
                 default: 'available'
             }
+        },
+        {
+            "name": "id",
+            "in": "path",
+            "description": [
+                {
+                    "text": "ID of pet to delete",
+                    "type": "SimpleText"
+                }
+            ],
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        {
+            "name": "tags",
+            "in": "query",
+            "description": [
+                {
+                    "text": "tags to filter by",
+                    "type": "SimpleText"
+                }
+            ],
+            "required": false,
+            "type": "array",
+            "collectionFormat": "csv",
+            "items": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "limit",
+            "in": "query",
+            "description": [
+                {
+                    "text": "maximum number of results to return",
+                    "type": "SimpleText"
+                }
+            ],
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        {
+            "name": "limit",
+            "in": "body",
+            "description": [
+                {
+                    "text": "Pet to add to the store",
+                    "type": "SimpleText"
+                }
+            ],
+            "required": false,
+            "schema": {
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "tag": {
+                        "type": "string"
+                    }
+                }
+            },
         }
+
     ],
     responses: [
         {

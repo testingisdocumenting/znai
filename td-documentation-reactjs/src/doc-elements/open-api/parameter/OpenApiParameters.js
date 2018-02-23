@@ -13,7 +13,7 @@ function OpenApiParameters({label, parameters}) {
     return (
         <React.Fragment>
             <div className="sub-header">{label}</div>
-            <div className="parameters">
+            <div className="open-api-parameters">
                 {parameters.map(p => <OpenApiParameter key={p.name}
                                                        parameter={p}
                                                        elementsLibrary={elementsLibrary}
