@@ -6,6 +6,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.search.SearchScore;
 import com.twosigma.documentation.search.SearchText;
 
@@ -24,9 +25,11 @@ public class CliCommandIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        Set<String> combinedParams = new LinkedHashSet<>();
-        combinedParams.addAll(pluginParams.getOpts().getList("paramToHighlight"));
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
+        Set<String> combinedParams = new LinkedHashSet<>(pluginParams.getOpts().getList("paramToHighlight"));
         ConsoleOutputs.out(Color.RED, "cli-command paramToHighlight will be deprecated"); // TODO deprecation warning API
 
         combinedParams.addAll(pluginParams.getOpts().getList("paramsToHighlight"));

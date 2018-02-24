@@ -165,7 +165,7 @@ class DocTreeDomXmlParser {
         PythonFunction pythonFunction = new PythonFunctionXmlParser().parse(node);
         PythonFunctionIncludePlugin includePlugin = new PythonFunctionIncludePlugin();
 
-        PluginResult pluginResult = includePlugin.process(componentsRegistry, filePath,
+        PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, filePath,
                 new PluginParams(includePlugin.id(), pythonFunction.toMap()));
 
         parserHandler.onIncludePlugin(includePlugin, pluginResult);
@@ -178,7 +178,7 @@ class DocTreeDomXmlParser {
         PythonClass pythonClass = xmlParser.parseClass(node);
 
         PythonClassIncludePlugin includePlugin = new PythonClassIncludePlugin();
-        PluginResult pluginResult = includePlugin.process(componentsRegistry, filePath,
+        PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, filePath,
                 new PluginParams(includePlugin.id(), pythonClass.toMap()));
 
         parserHandler.onIncludePlugin(includePlugin, pluginResult);

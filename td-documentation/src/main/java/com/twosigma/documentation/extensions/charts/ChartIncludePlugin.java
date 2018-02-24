@@ -6,6 +6,7 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.table.CsvParser;
+import com.twosigma.documentation.parser.ParserHandler;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
@@ -24,7 +25,10 @@ public class ChartIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
         fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         String textContent = componentsRegistry.resourceResolver().textContent(fullPath);
 

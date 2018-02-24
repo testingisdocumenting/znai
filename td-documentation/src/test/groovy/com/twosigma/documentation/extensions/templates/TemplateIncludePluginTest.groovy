@@ -26,7 +26,7 @@ class TemplateIncludePluginTest {
         componentsRegistry = new TestComponentsRegistry()
         parser = new MarkdownParser(componentsRegistry)
 
-        componentsRegistry.parser = parser
+        componentsRegistry.defaultParser = parser
     }
 
     @Test

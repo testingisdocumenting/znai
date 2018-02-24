@@ -172,6 +172,16 @@ public class SearchCrawlerParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onGlobalAnchor(String id) {
+
+    }
+
+    @Override
+    public void onGlobalAnchorRef(String id, String label) {
+
+    }
+
+    @Override
     public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
         SearchText searchText = includePlugin.textForSearch();
         if (searchText != null) {

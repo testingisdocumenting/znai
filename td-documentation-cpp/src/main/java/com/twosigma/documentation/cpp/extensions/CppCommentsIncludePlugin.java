@@ -9,6 +9,7 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginParamsOpts;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.parser.ParserHandler;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -27,7 +28,10 @@ public class CppCommentsIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
         String fileName = pluginParams.getFreeParam();
         cppPath = componentsRegistry.resourceResolver().fullPath(fileName);
         String text = componentsRegistry.resourceResolver().textContent(fileName);

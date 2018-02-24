@@ -18,6 +18,6 @@ class TestMarkupParser implements MarkupParser {
 
         def searchEntry = new PageSearchEntry('dummy page section title', SearchScore.STANDARD.text(markup))
 
-        return new MarkupParserResult(page, [searchEntry], [], properties)
+        return new MarkupParserResult(page, [], [searchEntry], [], properties)
     }
 }

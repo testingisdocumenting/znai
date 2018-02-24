@@ -23,6 +23,6 @@ class PluginsTestUtils {
         def includePlugin = Plugins.includePluginById(includeParams.pluginId)
 
         testComponentsRegistry = new TestComponentsRegistry()
-        return includePlugin.process(testComponentsRegistry, Paths.get(""), includeParams)
+        return includePlugin.process(testComponentsRegistry, null, Paths.get(""), includeParams)
     }
 }

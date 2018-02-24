@@ -1,4 +1,4 @@
-package com.twosigma.documentation.parser.docelement;
+package com.twosigma.documentation.parser;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 /**
  * @author mykola
  */
-public class DocElementVisitor extends AbstractVisitor {
+public class MarkdownVisitor extends AbstractVisitor {
     private static final Pattern INLINED_CODE_ID_PATTERN = Pattern.compile("^([a-zA-Z-_]+):(.*)");
 
     private final ComponentsRegistry componentsRegistry;
@@ -28,7 +28,7 @@ public class DocElementVisitor extends AbstractVisitor {
     private ParserHandler parserHandler;
     private boolean sectionStarted;
 
-    public DocElementVisitor(ComponentsRegistry componentsRegistry, Path path, ParserHandler parserHandler) {
+    public MarkdownVisitor(ComponentsRegistry componentsRegistry, Path path, ParserHandler parserHandler) {
         this.componentsRegistry = componentsRegistry;
         this.path = path;
         this.parserHandler = parserHandler;
@@ -137,7 +137,7 @@ public class DocElementVisitor extends AbstractVisitor {
 
     private void handleIncludePlugin(PluginParams params) {
         IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());
-        PluginResult pluginResult = includePlugin.process(componentsRegistry, path, params);
+        PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, path, params);
 
         parserHandler.onIncludePlugin(includePlugin, pluginResult);
     }

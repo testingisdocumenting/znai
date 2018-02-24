@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.util.Arrays;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.parser.docelement.DocElementVisitor;
 import com.twosigma.documentation.search.SearchCrawlerParserHandler;
 import org.commonmark.ext.front.matter.YamlFrontMatterExtension;
 import org.commonmark.ext.front.matter.YamlFrontMatterVisitor;
@@ -38,7 +37,7 @@ public class MarkdownParser implements MarkupParser {
 
         ParserHandlersList parserHandler = new ParserHandlersList(elementCreationHandler, searchCrawler);
 
-        DocElementVisitor visitor = new DocElementVisitor(componentsRegistry, path, parserHandler);
+        MarkdownVisitor visitor = new MarkdownVisitor(componentsRegistry, path, parserHandler);
         node.accept(visitor);
 
         YamlFrontMatterVisitor frontMatterVisitor = new YamlFrontMatterVisitor();
@@ -51,6 +50,7 @@ public class MarkdownParser implements MarkupParser {
         parserHandler.onParsingEnd();
 
         return new MarkupParserResult(elementCreationHandler.getDocElement(),
+                elementCreationHandler.getGlobalAnchorIds(),
                 searchCrawler.getSearchEntries(),
                 elementCreationHandler.getAuxiliaryFiles(),
                 frontMatterVisitor.getData());

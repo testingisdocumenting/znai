@@ -42,6 +42,9 @@ public interface ParserHandler {
     void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet);
     void onThematicBreak();
 
+    void onGlobalAnchor(String id);
+    void onGlobalAnchorRef(String id, String label);
+
     /**
      * @param includePlugin already process plugin
      * @param pluginResult result of plugin process

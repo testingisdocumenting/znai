@@ -8,6 +8,7 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.parser.ParserHandler;
 
 import java.nio.file.Path;
 import java.util.stream.Stream;
@@ -24,7 +25,10 @@ public class MarkdownIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         MarkupParser parser = componentsRegistry.defaultParser();
 

@@ -6,6 +6,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParamsOpts;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 import com.twosigma.documentation.search.SearchScore;
 import com.twosigma.documentation.search.SearchText;
@@ -35,7 +36,10 @@ public class FileIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
         fileName = pluginParams.getFreeParam();
 
         text = extractText(componentsRegistry.resourceResolver().

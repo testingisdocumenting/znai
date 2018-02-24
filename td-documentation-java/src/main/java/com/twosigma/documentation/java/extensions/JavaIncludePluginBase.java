@@ -6,7 +6,7 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.java.parser.JavaCode;
-import com.twosigma.documentation.parser.docelement.DocElement;
+import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.search.SearchScore;
 import com.twosigma.documentation.search.SearchText;
 
@@ -27,7 +27,10 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
     private JavaIncludeResult javaIncludeResult;
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
         this.componentsRegistry = componentsRegistry;
         this.markupPath = markupPath;
         this.pluginParams = pluginParams;

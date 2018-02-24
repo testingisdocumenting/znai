@@ -8,6 +8,7 @@ import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
 import com.twosigma.documentation.extensions.include.*;
 import com.twosigma.documentation.parser.MarkupParser;
+import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.utils.NameUtils;
 
 import java.nio.file.Path;
@@ -35,7 +36,10 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
         MarkupParser parser = componentsRegistry.defaultParser();
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
 

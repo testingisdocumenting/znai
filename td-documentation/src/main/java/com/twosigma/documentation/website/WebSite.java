@@ -61,6 +61,7 @@ public class WebSite implements DocStructure {
     private List<WebResource> extraJavaScripts;
 
     private List<LinkToValidate> linksToValidate;
+    private Map<String, Path> globalAnchorPathById;
 
     private final WebSiteComponentsRegistry componentsRegistry;
     private final MultipleLocationsResourceResolver resourceResolver;
@@ -77,6 +78,7 @@ public class WebSite implements DocStructure {
     private WebSite(Configuration cfg) {
         this.cfg = cfg;
         this.linksToValidate = new ArrayList<>();
+        this.globalAnchorPathById = new HashMap<>();
         this.deployer = new Deployer(cfg.deployPath);
         this.docMeta = cfg.docMeta;
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
@@ -208,7 +210,7 @@ public class WebSite implements DocStructure {
         }
 
         String base = "/" + docMeta.getId() + "/" + docUrl.getDirName() + "/" + docUrl.getFileName();
-        return base + (docUrl.getPageSectionId().isEmpty() ? "" : "#" + docUrl.getPageSectionId());
+        return base + (docUrl.getAnchorId().isEmpty() ? "" : "#" + docUrl.getAnchorId());
     }
 
     @Override
@@ -219,6 +221,29 @@ public class WebSite implements DocStructure {
         }
 
         return "/" + docMeta.getId() + "/" + url;
+    }
+
+    @Override
+    public void registerGlobalAnchor(Path sourcePath, String anchorId) {
+        Path existingPath = globalAnchorPathById.get(anchorId);
+
+        if (existingPath != null) {
+            throw new RuntimeException("global anchor <" + anchorId + "> specified in " + sourcePath +
+                    " is already registered in " + existingPath);
+        }
+
+        globalAnchorPathById.put(anchorId, sourcePath);
+    }
+
+    @Override
+    public String globalAnchorUrl(Path clientPath, String anchorId) {
+        Path anchorPath = globalAnchorPathById.get(anchorId);
+        if (anchorPath == null) {
+            throw new RuntimeException("cannot find global anchor <" + anchorId + "> referenced in " + clientPath);
+        }
+
+        TocItem tocItem = tocItemByPath(anchorPath);
+        return createUrl(new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), anchorId));
     }
 
     public void redeployAuxiliaryFileIfRequired(Path path) {
@@ -511,7 +536,7 @@ public class WebSite implements DocStructure {
 
     private Optional<String> validateLink(LinkToValidate link) {
         String url = link.docUrl.getDirName() + "/" + link.docUrl.getFileName() +
-                (link.docUrl.getPageSectionId().isEmpty() ?  "" : "#" + link.docUrl.getPageSectionId());
+                (link.docUrl.getAnchorId().isEmpty() ?  "" : "#" + link.docUrl.getAnchorId());
 
         Supplier<String> validationMessage = () -> "can't find a page associated with: " + url +
                 "\ncheck file: " + link.path + ", section title: " + link.sectionWithLinkTitle;
@@ -521,7 +546,7 @@ public class WebSite implements DocStructure {
             return Optional.of(validationMessage.get());
         }
 
-        if (!link.docUrl.getPageSectionId().isEmpty() && !tocItem.hasPageSection(link.docUrl.getPageSectionId())) {
+        if (!link.docUrl.getAnchorId().isEmpty() && !tocItem.hasPageSection(link.docUrl.getAnchorId())) {
             return Optional.of(validationMessage.get());
         }
 

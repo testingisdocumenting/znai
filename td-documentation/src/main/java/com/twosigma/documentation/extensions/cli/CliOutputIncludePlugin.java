@@ -5,6 +5,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.search.SearchScore;
 import com.twosigma.documentation.search.SearchText;
 
@@ -27,7 +28,10 @@ public class CliOutputIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
         filePath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
 
         LinkedHashMap<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());

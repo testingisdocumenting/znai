@@ -9,7 +9,7 @@ public class DocUrl {
 
     private String dirName = "";
     private String fileName = "";
-    private String pageSectionId = "";
+    private String anchorId = "";
 
     private String url;
 
@@ -24,10 +24,10 @@ public class DocUrl {
         this.isIndexUrl = isIndexUrl;
     }
 
-    public DocUrl(String dirName, String fileName, String pageSectionId) {
+    public DocUrl(String dirName, String fileName, String anchorId) {
         this.dirName = dirName;
         this.fileName = fileName;
-        this.pageSectionId = pageSectionId;
+        this.anchorId = anchorId;
     }
 
     public DocUrl(String url) {
@@ -53,10 +53,10 @@ public class DocUrl {
 
         dirName = parts[0];
 
-        int idxOfPageSectionSep = parts[1].indexOf('#');
+        int idxOfAnchorSep = parts[1].indexOf('#');
 
-        fileName = idxOfPageSectionSep == -1 ? parts[1] : parts[1].substring(0, idxOfPageSectionSep);
-        pageSectionId = idxOfPageSectionSep == -1 ? "" : parts[1].substring(idxOfPageSectionSep + 1);
+        fileName = idxOfAnchorSep == -1 ? parts[1] : parts[1].substring(0, idxOfAnchorSep);
+        anchorId = idxOfAnchorSep == -1 ? "" : parts[1].substring(idxOfAnchorSep + 1);
     }
 
     public boolean isIndexUrl() {
@@ -75,8 +75,8 @@ public class DocUrl {
         return fileName;
     }
 
-    public String getPageSectionId() {
-        return pageSectionId;
+    public String getAnchorId() {
+        return anchorId;
     }
 
     public String getUrl() {

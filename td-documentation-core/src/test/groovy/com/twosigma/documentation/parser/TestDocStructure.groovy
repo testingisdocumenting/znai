@@ -18,7 +18,7 @@ class TestDocStructure implements DocStructure {
         }
 
         def urlBase = "${docUrl.dirName}/${docUrl.fileName}"
-        def url = urlBase + (docUrl.pageSectionId.isEmpty() ? "" : "#${docUrl.pageSectionId}")
+        def url = urlBase + (docUrl.anchorId.isEmpty() ? "" : "#${docUrl.anchorId}")
 
         if (! validLinks.contains(url.toString())) {
             throw new IllegalArgumentException("no valid link found in section '${sectionWithLinkTitle}': " + url)
@@ -32,12 +32,22 @@ class TestDocStructure implements DocStructure {
         }
 
         def base = "/test-doc/${docUrl.dirName}/${docUrl.fileName}"
-        return base + (docUrl.pageSectionId ? "#${docUrl.pageSectionId}" : "")
+        return base + (docUrl.anchorId ? "#${docUrl.anchorId}" : "")
     }
 
     @Override
     String prefixUrlWithProductId(String url) {
         return "/test-doc/${url}"
+    }
+
+    @Override
+    void registerGlobalAnchor(Path sourcePath, String anchorId) {
+
+    }
+
+    @Override
+    String globalAnchorUrl(Path clientPath, String anchorId) {
+        return null
     }
 
     void addValidLink(String link) {

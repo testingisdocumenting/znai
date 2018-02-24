@@ -2,7 +2,7 @@ package com.twosigma.documentation.parser.table;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.parser.docelement.DocElementCreationParserHandler;
-import com.twosigma.documentation.parser.docelement.DocElementVisitor;
+import com.twosigma.documentation.parser.MarkdownVisitor;
 import org.commonmark.ext.gfm.tables.*;
 import org.commonmark.node.AbstractVisitor;
 import org.commonmark.node.CustomNode;
@@ -91,9 +91,9 @@ public class GfmTableToTableConverter extends AbstractVisitor {
     @SuppressWarnings("unchecked")
     private List<Map<String, Object>> contentFromCell(TableCell bodyCell) {
         DocElementCreationParserHandler handler = new DocElementCreationParserHandler(componentsRegistry, markdownPath);
-        DocElementVisitor docElementVisitor = new DocElementVisitor(componentsRegistry, markdownPath, handler);
+        MarkdownVisitor markdownVisitor = new MarkdownVisitor(componentsRegistry, markdownPath, handler);
 
-        bodyCell.accept(docElementVisitor);
+        bodyCell.accept(markdownVisitor);
 
         return (List<Map<String, Object>>) handler.getDocElement().toMap().get("content");
     }

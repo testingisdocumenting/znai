@@ -7,6 +7,7 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 import com.twosigma.documentation.search.SearchScore;
@@ -35,7 +36,10 @@ public class TableIncludePlugin implements IncludePlugin {
 
     @Override
     @SuppressWarnings("unchecked")
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
         parser = componentsRegistry.defaultParser();
         String fileName = pluginParams.getFreeParam();
         fullPath = componentsRegistry.resourceResolver().fullPath(fileName);

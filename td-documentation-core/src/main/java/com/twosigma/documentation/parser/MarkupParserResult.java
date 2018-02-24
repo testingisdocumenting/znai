@@ -16,13 +16,18 @@ import static java.util.stream.Collectors.toList;
  */
 public class MarkupParserResult {
     private DocElement docElement;
+    private List<String> globalAnchorIds;
     private List<AuxiliaryFile> auxiliaryFiles;
     private Map<String, List<String>> properties;
     private List<PageSearchEntry> searchEntries;
 
-    public MarkupParserResult(DocElement docElement, List<PageSearchEntry> searchEntries,
-                              List<AuxiliaryFile> auxiliaryFiles, Map<String, List<String>> properties) {
+    public MarkupParserResult(DocElement docElement,
+                              List<String> globalAnchorIds,
+                              List<PageSearchEntry> searchEntries,
+                              List<AuxiliaryFile> auxiliaryFiles,
+                              Map<String, List<String>> properties) {
         this.docElement = docElement;
+        this.globalAnchorIds = globalAnchorIds;
         this.searchEntries = searchEntries;
         this.auxiliaryFiles = auxiliaryFiles;
         this.properties = new LinkedHashMap<>(properties);
@@ -35,6 +40,10 @@ public class MarkupParserResult {
      */
     public DocElement getDocElement() {
         return docElement;
+    }
+
+    public List<String> getGlobalAnchorIds() {
+        return globalAnchorIds;
     }
 
     public Map<String, List<String>> getProperties() {

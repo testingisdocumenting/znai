@@ -5,6 +5,7 @@ import {Section, presentationSectionHandler} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
 import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
+import Anchor from './default-elements/Anchor'
 import Link from './default-elements/Link'
 import SubHeading from './default-elements/SubHeading'
 import ListItem from './bullets/ListItem'
@@ -40,6 +41,7 @@ library.DocElement = DocElement
 library.Emphasis = (props) => (<span className="emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
 library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
 library.Link = Link
+library.Anchor = Anchor
 library.Paragraph = Paragraph
 
 library.SubHeading = SubHeading

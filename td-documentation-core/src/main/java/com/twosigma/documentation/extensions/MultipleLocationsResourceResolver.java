@@ -18,9 +18,9 @@ import java.util.stream.Stream;
  * @author mykola
  */
 public class MultipleLocationsResourceResolver implements ResourcesResolver {
-    private Path docRootPath;
+    private final Path docRootPath;
     private final List<Path> lookupPaths;
-    private Path currentFilePath;
+    private ThreadLocal<Path> currentFilePath = new ThreadLocal<>();
 
     public MultipleLocationsResourceResolver(Path docRootPath, Stream<Path> paths) {
         this.docRootPath = docRootPath;
@@ -48,7 +48,9 @@ public class MultipleLocationsResourceResolver implements ResourcesResolver {
         Path original = Paths.get(path);
 
         Supplier<Stream<Path>> createAllLocationsStream = () -> {
-            Stream<Path> relativeToCurrent = currentFilePath == null ? Stream.empty() : Stream.of(currentFilePath.getParent().resolve(path));
+            Stream<Path> relativeToCurrent = currentFilePath.get() == null ? Stream.empty() :
+                    Stream.of(currentFilePath.get().getParent().resolve(path));
+
             Stream<Path> absoluteLocation = original.isAbsolute() ? Stream.of(original) : Stream.empty();
             Stream<Path> lookedUpInLocations = lookupPaths.stream().map(p -> p.resolve(path).normalize());
 
@@ -66,6 +68,6 @@ public class MultipleLocationsResourceResolver implements ResourcesResolver {
     }
 
     public void setCurrentFilePath(Path currentFilePath) {
-        this.currentFilePath = currentFilePath;
+        this.currentFilePath.set(currentFilePath);
     }
 }

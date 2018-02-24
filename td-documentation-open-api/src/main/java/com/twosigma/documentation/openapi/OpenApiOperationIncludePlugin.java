@@ -5,6 +5,7 @@ import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
+import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.utils.FileUtils;
 
 import java.nio.file.Path;
@@ -20,12 +21,19 @@ public class OpenApiOperationIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
         specPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
 
         OpenApiSpec openApiSpec = OpenApiSpec.fromJson(componentsRegistry.markdownParser(),
                 FileUtils.fileTextContent(specPath));
-        OpenApiOperation operation = openApiSpec.findOperationById(pluginParams.getOpts().get("operationId"));
+
+        String operationId = pluginParams.getOpts().get("operationId");
+        OpenApiOperation operation = openApiSpec.findOperationById(operationId);
+
+        parserHandler.onGlobalAnchor(operationId);
 
         return PluginResult.docElement("OpenApiOperation",
                 Collections.singletonMap("operation", operation.toMap()));

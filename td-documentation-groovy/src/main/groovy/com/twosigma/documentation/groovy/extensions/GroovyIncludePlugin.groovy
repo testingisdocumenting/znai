@@ -7,6 +7,7 @@ import com.twosigma.documentation.extensions.PluginParams
 import com.twosigma.documentation.extensions.PluginResult
 import com.twosigma.documentation.extensions.include.IncludePlugin
 import com.twosigma.documentation.groovy.parser.GroovyCode
+import com.twosigma.documentation.parser.ParserHandler
 import com.twosigma.documentation.parser.docelement.DocElementType
 
 import java.nio.file.Path
@@ -24,7 +25,10 @@ class GroovyIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    PluginResult process(ComponentsRegistry componentsRegistry, 
+                         ParserHandler parserHandler, 
+                         Path markupPath, 
+                         PluginParams pluginParams) {
         fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam())
         String fileContent = componentsRegistry.resourceResolver().textContent(fullPath)
         String entry = pluginParams.getOpts().get("entry")

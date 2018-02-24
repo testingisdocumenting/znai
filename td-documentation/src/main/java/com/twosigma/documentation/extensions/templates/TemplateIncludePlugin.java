@@ -9,6 +9,7 @@ import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.search.SearchScore;
 import com.twosigma.documentation.search.SearchText;
 import com.twosigma.documentation.template.TextTemplate;
@@ -35,7 +36,10 @@ public class TemplateIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
         resourcesResolver = componentsRegistry.resourceResolver();
         MarkupParser parser = componentsRegistry.defaultParser();
 

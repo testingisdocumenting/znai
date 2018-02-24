@@ -24,5 +24,4 @@ class CppCommentsIncludePluginTest {
         def result = PluginsTestUtils.process(":include-cpp-comments: $fileName {entry: \"$entry\"}")
         return result.docElements[0].getProp("markup")
     }
-
 }

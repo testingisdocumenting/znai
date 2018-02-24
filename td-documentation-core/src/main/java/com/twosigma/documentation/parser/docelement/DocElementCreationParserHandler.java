@@ -28,6 +28,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private final Path path;
     private final List<AuxiliaryFile> auxiliaryFiles;
 
+    private final List<String> globalAnchorIds;
+
     private final List<DocElement> paragraphs;
 
     private final DocElement docElement;
@@ -40,6 +42,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
         this.path = path;
         this.paragraphs = new ArrayList<>();
         this.auxiliaryFiles = new ArrayList<>();
+
+        this.globalAnchorIds = new ArrayList<>();
 
         this.docElement = new DocElement(DocElementType.PAGE);
         this.elementsStack = new ArrayDeque<>();
@@ -56,6 +60,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
         return auxiliaryFiles;
     }
 
+    public List<String> getGlobalAnchorIds() {
+        return globalAnchorIds;
+    }
+
     @Override
     public void onSectionStart(String title) {
         currentSectionTitle = title;
@@ -69,7 +77,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
         // on section end is called for plugin processing (if a plugin returns a new section)
         // it is also being called every time a new section starts -- to close the previous one
         // two events can collide and section will be closed twice
-        // see: DocElementVisitor#visit(Heading) and processPlugin method
+        // see: MarkdownVisitor#visit(Heading) and processPlugin method
         if (elementsStack.size() > 1) {
             end();
         }
@@ -227,6 +235,20 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onGlobalAnchor(String id) {
+        componentsRegistry.docStructure().registerGlobalAnchor(path, id);
+        append("Anchor", "id", id);
+    }
+
+    @Override
+    public void onGlobalAnchorRef(String id, String label) {
+        String anchorUrl = componentsRegistry.docStructure().globalAnchorUrl(path, id);
+        onLinkStart(anchorUrl);
+        onSimpleText(label);
+        onLinkEnd();
+    }
+
+    @Override
     public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
         processPlugin(includePlugin, pluginResult);
     }
@@ -247,7 +269,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
             PluginResult result = processFunc.apply(plugin);
             processPlugin(plugin, result);
         } catch (Exception e) {
-            throw new RuntimeException("failure during processing include plugin '" + plugin.id() + "': " + e.getMessage(), e);
+            throw new RuntimeException("failure during processing plugin '" + plugin.id() + "': " + e.getMessage(), e);
         }
     }
 
