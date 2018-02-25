@@ -23,9 +23,9 @@ class DocTreeDomXmlParser {
     private Path filePath;
     private ParserHandler parserHandler;
 
-    public DocTreeDomXmlParser(ComponentsRegistry componentsRegistry,
-                               Path filePath,
-                               ParserHandler parserHandler) {
+    DocTreeDomXmlParser(ComponentsRegistry componentsRegistry,
+                        Path filePath,
+                        ParserHandler parserHandler) {
         this.componentsRegistry = componentsRegistry;
         this.filePath = filePath;
         this.parserHandler = parserHandler;
@@ -69,6 +69,8 @@ class DocTreeDomXmlParser {
                 return parseOrderedList(node);
             case "list_item":
                 return parseListItem(node);
+            case "reference":
+                return parseReference(node);
             case "desc":
                 return parseDesc(node);
             case "#text":
@@ -78,6 +80,14 @@ class DocTreeDomXmlParser {
         }
 
         return false;
+    }
+
+    private boolean parseReference(Node node) {
+        parserHandler.onLinkStart(getAttributeText(node, "refuri"));
+        parseChildren(node);
+        parserHandler.onLinkEnd();
+
+        return true;
     }
 
     private boolean parseSection(Node node) {
@@ -163,6 +173,8 @@ class DocTreeDomXmlParser {
 
     private boolean parseFunction(Node node) {
         PythonFunction pythonFunction = new PythonFunctionXmlParser().parse(node);
+        parserHandler.onGlobalAnchor(pythonFunction.getRefId());
+
         PythonFunctionIncludePlugin includePlugin = new PythonFunctionIncludePlugin();
 
         PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, filePath,
@@ -176,6 +188,9 @@ class DocTreeDomXmlParser {
     private boolean parseClass(Node node) {
         PythonClassXmlParser xmlParser = new PythonClassXmlParser();
         PythonClass pythonClass = xmlParser.parseClass(node);
+
+        parserHandler.onGlobalAnchor(pythonClass.getRefId());
+        pythonClass.getMethods().forEach(m -> parserHandler.onGlobalAnchor(m.getRefId()));
 
         PythonClassIncludePlugin includePlugin = new PythonClassIncludePlugin();
         PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, filePath,

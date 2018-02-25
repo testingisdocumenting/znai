@@ -43,7 +43,8 @@ public interface ParserHandler {
     void onThematicBreak();
 
     void onGlobalAnchor(String id);
-    void onGlobalAnchorRef(String id, String label);
+    void onGlobalAnchorRefStart(String id);
+    void onGlobalAnchorRefEnd();
 
     /**
      * @param includePlugin already process plugin

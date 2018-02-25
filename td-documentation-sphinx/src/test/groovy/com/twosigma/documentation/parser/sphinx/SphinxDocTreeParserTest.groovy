@@ -2,6 +2,7 @@ package com.twosigma.documentation.parser.sphinx
 
 import com.twosigma.documentation.parser.MarkupParser
 import com.twosigma.documentation.parser.TestComponentsRegistry
+import org.junit.BeforeClass
 import org.junit.Test
 
 import java.nio.file.Paths
@@ -10,9 +11,18 @@ import java.nio.file.Paths
  * @author mykola
  */
 class SphinxDocTreeParserTest {
-    static final TestComponentsRegistry componentsRegistry = new TestComponentsRegistry()
-    static final MarkupParser parser = new SphinxDocTreeParser(componentsRegistry)
+    static TestComponentsRegistry componentsRegistry
+    static MarkupParser parser
+
     List<Map<String,Object>> content
+
+    @BeforeClass
+    static void init() {
+        componentsRegistry = new TestComponentsRegistry()
+        parser = new SphinxDocTreeParser(componentsRegistry)
+
+        componentsRegistry.docStructure().addValidLink('chapter-two/page-four#send_message')
+    }
 
     @Test
     void "section"() {
@@ -101,6 +111,17 @@ linenos="False" xml:space="preserve">System.out.println("hello world");</literal
         parse('<literal>markup</literal>')
 
         content.should == [[type: 'InlinedCode', code: 'markup']]
+    }
+
+    @Test
+    void "reference"() {
+        parse("""<reference internal="True" reftitle="send_message" 
+            refuri="chapter-two/page-four#send_message">
+            <literal classes="xref py py-func">send_message()</literal>
+            </reference>""")
+
+        content.should == [[type: 'Link', url:'/test-doc/chapter-two/page-four#send_message',
+                            content: [[type: 'InlinedCode', code: 'send_message()']]]]
     }
 
     private void parse(String xml) {

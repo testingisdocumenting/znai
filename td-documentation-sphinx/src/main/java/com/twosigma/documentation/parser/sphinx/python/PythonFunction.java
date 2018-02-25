@@ -11,12 +11,14 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class PythonFunction {
+    private String refId;
     private String name;
     private String description;
     private List<PythonFunctionParam> params;
     private List<PythonFunctionParamSignature> paramSignatures;
 
-    public PythonFunction(String name, String description) {
+    public PythonFunction(String refId, String name, String description) {
+        this.refId = refId;
         this.name = name;
         this.description = description;
         this.params = new ArrayList<>();
@@ -29,6 +31,10 @@ public class PythonFunction {
 
     public void addParamSignature(PythonFunctionParamSignature paramSignature) {
         paramSignatures.add(paramSignature);
+    }
+
+    public String getRefId() {
+        return refId;
     }
 
     public String getName() {
@@ -50,7 +56,8 @@ public class PythonFunction {
     @Override
     public String toString() {
         return "PythonFunction{" +
-                "name='" + name + '\'' +
+                "refId='" + refId + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", params=" + params +
                 ", paramSignatures=" + paramSignatures +
@@ -59,6 +66,7 @@ public class PythonFunction {
 
     public Map<String, Object> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
+        result.put("refId", refId);
         result.put("name", name);
         result.put("description", description);
         result.put("params", params.stream().map(PythonFunctionParam::toMap).collect(toList()));

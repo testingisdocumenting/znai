@@ -177,8 +177,11 @@ public class SearchCrawlerParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onGlobalAnchorRef(String id, String label) {
+    public void onGlobalAnchorRefStart(String id) {
+    }
 
+    @Override
+    public void onGlobalAnchorRefEnd() {
     }
 
     @Override

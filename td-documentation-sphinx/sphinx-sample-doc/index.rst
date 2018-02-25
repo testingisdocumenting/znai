@@ -13,6 +13,9 @@ Toc below will be used to generate *mdoc* **table of contents**. And this ``mark
 1. numbered list
 2. of two items
 
+
+Use :py:func:`send_message` to send a message
+
 .. automodule:: world
    :members:
 

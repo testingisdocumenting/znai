@@ -165,8 +165,13 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onGlobalAnchorRef(String id, String label) {
-        list.forEach(h -> h.onGlobalAnchorRef(id, label));
+    public void onGlobalAnchorRefStart(String id) {
+        list.forEach(h -> h.onGlobalAnchorRefStart(id));
+    }
+
+    @Override
+    public void onGlobalAnchorRefEnd() {
+        list.forEach(ParserHandler::onGlobalAnchorRefEnd);
     }
 
     @Override

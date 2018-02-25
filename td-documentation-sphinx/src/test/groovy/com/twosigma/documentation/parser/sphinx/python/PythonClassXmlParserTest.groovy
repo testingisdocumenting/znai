@@ -19,7 +19,7 @@ class PythonClassXmlParserTest {
 
     @Test
     void "parse class name and description"() {
-        pythonClass.should == [name: 'HelloWorld', description: 'Simple hello world class']
+        pythonClass.should == [refId: 'world.HelloWorld', name: 'HelloWorld', description: 'Simple hello world class']
     }
 
     @Test
@@ -29,9 +29,9 @@ class PythonClassXmlParserTest {
                        'name' | 'name of a person to greet'
                       'title' | 'title of a person to greet' }
 
-        pythonClass.methods.should == [  'name' | 'description' | 'params'] {
-                                      ______________________________________
-                                       'sayBye' |    'says bye' | params
-                                       'sayHi'  |    'says hi'  | params }
+        pythonClass.methods.should == [                 'refId'   |   'name' | 'description' | 'params'] {
+                                      ________________________________________________________________
+                                        'world.HelloWorld.sayBye' | 'sayBye' |    'says bye' | params
+                                         'world.HelloWorld.sayHi' | 'sayHi'  |    'says hi'  | params }
     }
 }

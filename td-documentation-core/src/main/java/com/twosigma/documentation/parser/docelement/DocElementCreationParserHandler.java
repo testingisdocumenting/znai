@@ -241,10 +241,13 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onGlobalAnchorRef(String id, String label) {
+    public void onGlobalAnchorRefStart(String id) {
         String anchorUrl = componentsRegistry.docStructure().globalAnchorUrl(path, id);
         onLinkStart(anchorUrl);
-        onSimpleText(label);
+    }
+
+    @Override
+    public void onGlobalAnchorRefEnd() {
         onLinkEnd();
     }
 

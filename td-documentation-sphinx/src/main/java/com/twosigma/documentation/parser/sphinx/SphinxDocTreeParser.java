@@ -31,7 +31,7 @@ public class SphinxDocTreeParser implements MarkupParser {
         xmlParser.parse(docXml);
 
         return new MarkupParserResult(elementCreationHandler.getDocElement(),
-                Collections.emptyList(), // TODO sphinx refs
+                Collections.emptyList(),
                 searchCrawler.getSearchEntries(),
                 elementCreationHandler.getAuxiliaryFiles(),
                 Collections.emptyMap());

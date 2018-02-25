@@ -24,9 +24,11 @@ public class PythonClassXmlParser {
         Node descContent = nodeByName(node, "desc_content");
         Node description = nodeByName(descContent, "paragraph");
 
-        pythonClass = new PythonClass(getAttributeText(descSignature, "fullname"), description.getTextContent());
+        pythonClass = new PythonClass(XmlUtils.getAttributeText(descSignature, "ids"),
+                getAttributeText(descSignature, "fullname"),
+                description.getTextContent());
+        
         XmlUtils.nodesStreamByName(descContent, "desc").forEach(this::parseMethod);
-
         return pythonClass;
     }
 

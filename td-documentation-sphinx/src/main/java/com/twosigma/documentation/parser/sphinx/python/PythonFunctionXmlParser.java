@@ -1,11 +1,11 @@
 package com.twosigma.documentation.parser.sphinx.python;
 
-import com.twosigma.documentation.parser.sphinx.XmlUtils;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.stream.Collectors;
 
+import static com.twosigma.documentation.parser.sphinx.XmlUtils.getAttributeText;
 import static com.twosigma.documentation.parser.sphinx.XmlUtils.nodeByName;
 import static com.twosigma.documentation.parser.sphinx.XmlUtils.nodesStreamByName;
 
@@ -20,11 +20,12 @@ public class PythonFunctionXmlParser {
         Node descContent = nodeByName(desc, "desc_content");
         Node paragraph = nodeByName(descContent, "paragraph");
 
-        function = new PythonFunction(descName.getTextContent(), paragraph.getTextContent());
+        function = new PythonFunction(getAttributeText(descSignature, "ids"),
+                descName.getTextContent(), paragraph.getTextContent());
 
         parseSignature(descSignature);
 
-        XmlUtils.nodesStreamByName(descContent, "field")
+        nodesStreamByName(descContent, "field")
                 .forEach(this::parseFields);
 
         return function;
@@ -60,7 +61,7 @@ public class PythonFunctionXmlParser {
     }
 
     private static String parseParamType(Node listItem) {
-        return XmlUtils.nodesStreamByName(listItem, PARAM_TYPE_NODE_NAME)
+        return nodesStreamByName(listItem, PARAM_TYPE_NODE_NAME)
                 .map(Node::getTextContent).collect(Collectors.joining(" "));
     }
 
