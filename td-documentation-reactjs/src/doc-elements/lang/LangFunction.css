@@ -38,6 +38,7 @@
 }
 
 .lang-function .function-params > .name-and-type > .name {
+    color: var(--mdoc-property-color);
     font-family: var(--mdoc-code-font-family);
 }
 

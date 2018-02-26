@@ -33,9 +33,7 @@ function FunctionParam({param}) {
     return (
         <React.Fragment>
             <div className="name-and-type">
-                <div className="name">
-                    <span className="token property">{param.name}</span>
-                </div>
+                <div className="name">{param.name}</div>
                 {param.type && <div className="type">{param.type}</div>}
             </div>
             <div className="description">
