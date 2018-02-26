@@ -28,7 +28,7 @@ const paramsWithType = [
     {
         'name': 'longerParam2',
         'description': 'longer param2 description',
-        'type': 'integer or None',
+        'type': 'integer or None or string',
     }
 ]
 

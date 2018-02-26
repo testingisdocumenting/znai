@@ -3,6 +3,7 @@
 }
 
 .lang-class .class-name {
+    font-family: var(--mdoc-code-font-family);
     font-weight: bold;
 }
 

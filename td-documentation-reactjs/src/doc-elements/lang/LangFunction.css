@@ -7,6 +7,7 @@
 }
 
 .lang-function > .function-name {
+    font-family: var(--mdoc-code-font-family);
 }
 
 .lang-function > .function-name > .function-params-as-str {
@@ -29,6 +30,7 @@
 }
 
 .lang-function .function-params > .name-and-type {
+    text-align: right;
     justify-self: end;
     padding-right: 10px;
     padding-bottom: 6px;
@@ -36,6 +38,7 @@
 }
 
 .lang-function .function-params > .name-and-type > .name {
+    font-family: var(--mdoc-code-font-family);
 }
 
 .lang-function .function-params > .name-and-type > .type {
