@@ -34,6 +34,13 @@ class DocumentationNavigation {
         return this.notifyNewUrl(url)
     }
 
+    scrollToAnchor(anchorId) {
+        const anchor = document.getElementById(anchorId)
+        if (anchor) {
+            anchor.scrollIntoView()
+        }
+    }
+
     notifyNewUrl(url) {
         const promises = this.listeners.map((l) => l(url))
         return Promise.all(promises)
@@ -42,13 +49,13 @@ class DocumentationNavigation {
     currentPageLocation() {
         return window.location ?
             {...this.extractPageLocation(window.location.pathname),
-                pageSectionId: window.location.hash.length ? window.location.hash.substr(1) : ""}:
+                anchorId: window.location.hash.length ? window.location.hash.substr(1) : ""}:
             "/server/side"
     }
 
     extractPageLocation(url) {
         const hashIdx = url.indexOf("#");
-        const pageSectionId = hashIdx >= 0 ? url.substr(hashIdx + 1) : ""
+        const anchorId = hashIdx >= 0 ? url.substr(hashIdx + 1) : ""
         url = hashIdx >= 0 ? url.substr(0, hashIdx) : url
 
         const parts = url.split("/").filter(p => p !== ".." && p.length > 0)
@@ -64,7 +71,7 @@ class DocumentationNavigation {
 
         // something/dir-name/file-name#id
         // /dir-name/file-name
-        return {dirName: parts[parts.length - 2], fileName: parts[parts.length - 1], pageSectionId: pageSectionId}
+        return {dirName: parts[parts.length - 2], fileName: parts[parts.length - 1], anchorId: anchorId}
     }
 }
 

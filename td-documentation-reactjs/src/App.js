@@ -1,3 +1,8 @@
+import 'bootstrap/dist/css/bootstrap.css'
+import './App.css'
+import './doc-elements/DocumentationLayout.css'
+import './doc-elements/search/Search.css'
+
 import React, {Component} from 'react'
 
 import {ComponentsViewer, Registry} from 'react-components-viewer'
@@ -8,9 +13,6 @@ import {langFunctionDemo} from './doc-elements/lang/LangFunction.demo'
 import {documentationDemo} from './doc-elements/Documentation.demo'
 import {openApiOperationDemo} from './doc-elements/open-api/operation/OpenApiOperation.demo'
 import {openApiSchemaDemo} from './doc-elements/open-api/schema/OpenApiSchema.demo'
-
-import 'bootstrap/dist/css/bootstrap.css'
-import './App.css'
 
 const snippets = new Registry('snippets')
 snippets.registerAsGrid('Json', 0, jsonDemo)
@@ -23,7 +25,7 @@ const layout = new Registry('layout')
 layout.registerAsGrid('Tabs', 300, tabsDemo)
 
 const endToEnd = new Registry('end to end')
-endToEnd.registerSingle('full documentation navigation', documentationDemo)
+endToEnd.registerAsMiniApp('full documentation navigation', '/preview', documentationDemo)
 
 class App extends Component {
     render() {

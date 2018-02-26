@@ -24,9 +24,10 @@ import DocumentationLayout from './DocumentationLayout'
 
 import pageContentProcessor from './pageContentProcessor.js'
 
+import {DocumentationModes} from './DocumentationModes'
+
 import './DocumentationLayout.css'
 import './search/Search.css'
-import {DocumentationModes} from './DocumentationModes'
 
 class Documentation extends Component {
     constructor(props) {
@@ -249,9 +250,7 @@ class Documentation extends Component {
             ...newStateWithNewPage,
             page: Documentation.processPage(newStateWithNewPage.page),
             pageGenError: null
-        })
-
-        this.onPageLoad()
+        }, () => this.onPageLoad())
     }
 
     static processPage(page) {
@@ -266,7 +265,14 @@ class Documentation extends Component {
         const {page, docMeta} = this.state
 
         this.extractPageSectionNodes()
-        this.scrollToPageSection(page.tocItem, documentationNavigation.currentPageLocation().pageSectionId)
+
+        const anchorId = documentationNavigation.currentPageLocation().anchorId
+        if (anchorId) {
+            this.scrollToPageSection(anchorId)
+        } else {
+            this.scrollToTop()
+        }
+
         this.updateCurrentPageSection()
         const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page)
 
@@ -458,11 +464,7 @@ class Documentation extends Component {
                 return
             }
 
-            const tocItem = matchingPages[0].tocItem
             this.changePage({page: matchingPages[0], selectedTocItem: currentPageLocation, lastChangeDataDom: null})
-            this.scrollToTop()
-
-            this.scrollToPageSection(tocItem, currentPageLocation.pageSectionId)
             return true
         }, (error) => console.error(error))
     }
@@ -476,11 +478,8 @@ class Documentation extends Component {
         this.pageSectionNodes = [...document.querySelectorAll(".section-title")]
     }
 
-    scrollToPageSection(tocItem, pageSectionId) {
-        const sectionIdx = tocItem.pageSectionIdTitles.map(ps => ps.id).indexOf(pageSectionId);
-        if (sectionIdx >= 0) {
-            this.pageSectionNodes[sectionIdx].scrollIntoView();
-        }
+    scrollToPageSection(pageSectionId) {
+        documentationNavigation.scrollToAnchor(pageSectionId)
     }
 
     updateCurrentPageSection() {
