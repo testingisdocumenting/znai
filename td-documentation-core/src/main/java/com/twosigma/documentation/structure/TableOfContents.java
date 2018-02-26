@@ -1,5 +1,6 @@
 package com.twosigma.documentation.structure;
 
+import java.nio.file.Path;
 import java.util.*;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -10,10 +11,12 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class TableOfContents {
+    private String defaultFileExtension;
     private List<TocItem> tocItems;
 
-    public TableOfContents() {
-        tocItems = new ArrayList<>();
+    public TableOfContents(String defaultFileExtension) {
+        this.defaultFileExtension = defaultFileExtension;
+        this.tocItems = new ArrayList<>();
     }
 
     public void addTocItem(String dirName, String fileNameWithoutExtension) {
@@ -35,6 +38,18 @@ public class TableOfContents {
 
         TocItem first = tocItems.get(0);
         return first.isIndex() ? first : null;
+    }
+
+    public TocItem tocItemByPath(Path path) {
+        if (path.getFileName().toString().startsWith(TocItem.INDEX + ".")) {
+            return getIndex();
+        }
+
+        return getTocItems().stream().filter(ti ->
+                path.toAbsolutePath().getParent().getFileName().toString().equals(ti.getDirName()) &&
+                        path.getFileName().toString().equals(
+                                ti.getFileNameWithoutExtension() + "." + defaultFileExtension))
+                .findFirst().orElse(null);
     }
 
     public List<TocItem> getTocItems() {
@@ -83,5 +98,4 @@ public class TableOfContents {
     public String toString() {
         return tocItems.stream().map(TocItem::toString).collect(joining("\n"));
     }
-
 }

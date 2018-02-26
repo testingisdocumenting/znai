@@ -7,9 +7,15 @@ import java.util.List;
  * @author mykola
  */
 public class PlainTextTocGenerator implements TocGenerator {
+    private String filesExtension;
+
+    public PlainTextTocGenerator(String filesExtension) {
+        this.filesExtension = filesExtension;
+    }
+
     @Override
     public TableOfContents generate(String textContent) {
-        return new Parser(textContent).parse();
+        return new Parser(filesExtension, textContent).parse();
     }
 
     private static class Parser {
@@ -18,9 +24,9 @@ public class PlainTextTocGenerator implements TocGenerator {
         private String currentSection;
         private TableOfContents toc;
 
-        public Parser(final String nestedText) {
+        public Parser(String filesExtension, final String nestedText) {
             nestedLines = Arrays.asList(nestedText.replace("\r", "").split("\n"));
-            toc = new TableOfContents();
+            toc = new TableOfContents(filesExtension);
         }
 
         public TableOfContents parse() {

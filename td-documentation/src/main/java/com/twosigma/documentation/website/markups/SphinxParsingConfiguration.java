@@ -17,7 +17,7 @@ import static com.twosigma.utils.FileUtils.fileTextContent;
 public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
     @Override
     public TableOfContents createToc(Path tocPath) {
-        return new DocTreeTocGenerator().generate(fileTextContent(tocPath));
+        return new DocTreeTocGenerator(filesExtension()).generate(fileTextContent(tocPath));
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.twosigma.documentation.website;
 
-import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
@@ -30,19 +28,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static com.twosigma.documentation.parser.MarkupTypes.MARKDOWN;
 import static com.twosigma.documentation.parser.MarkupTypes.SPHINX;
+import static com.twosigma.documentation.website.ProgressReporter.reportPhase;
 import static com.twosigma.utils.FileUtils.fileTextContent;
-import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
  */
-public class WebSite implements DocStructure {
+public class WebSite {
     private PageToHtmlPageConverter pageToHtmlPageConverter;
     private MarkupParser markupParser;
     private final Deployer deployer;
@@ -55,13 +52,11 @@ public class WebSite implements DocStructure {
     private SiteSearchEntries searchEntries;
 
     private TableOfContents toc;
+    private WebSiteDocStructure docStructure;
     private Footer footer;
     private List<PageProps> allPagesProps;
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
-
-    private List<LinkToValidate> linksToValidate;
-    private Map<String, Path> globalAnchorPathById;
 
     private final WebSiteComponentsRegistry componentsRegistry;
     private final MultipleLocationsResourceResolver resourceResolver;
@@ -77,8 +72,6 @@ public class WebSite implements DocStructure {
 
     private WebSite(Configuration cfg) {
         this.cfg = cfg;
-        this.linksToValidate = new ArrayList<>();
-        this.globalAnchorPathById = new HashMap<>();
         this.deployer = new Deployer(cfg.deployPath);
         this.docMeta = cfg.docMeta;
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
@@ -102,7 +95,6 @@ public class WebSite implements DocStructure {
 
         componentsRegistry.setResourcesResolver(resourceResolver);
         componentsRegistry.setCodeTokenizer(codeTokenizer);
-        componentsRegistry.setDocStructure(this);
 
         reset();
     }
@@ -190,62 +182,6 @@ public class WebSite implements DocStructure {
         return toc;
     }
 
-    @Override
-    public void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
-        if (docUrl.isGlobalUrl() || docUrl.isIndexUrl()) {
-            return;
-        }
-
-        linksToValidate.add(new LinkToValidate(path, sectionWithLinkTitle, docUrl));
-    }
-
-    @Override
-    public String createUrl(DocUrl docUrl) {
-        if (docUrl.isGlobalUrl()) {
-            return docUrl.getUrl();
-        }
-
-        if (docUrl.isIndexUrl()) {
-            return "/" + docMeta.getId();
-        }
-
-        String base = "/" + docMeta.getId() + "/" + docUrl.getDirName() + "/" + docUrl.getFileName();
-        return base + (docUrl.getAnchorId().isEmpty() ? "" : "#" + docUrl.getAnchorId());
-    }
-
-    @Override
-    public String prefixUrlWithProductId(String url) {
-        url = url.toLowerCase();
-        if (url.startsWith("http")) {
-            return url;
-        }
-
-        return "/" + docMeta.getId() + "/" + url;
-    }
-
-    @Override
-    public void registerGlobalAnchor(Path sourcePath, String anchorId) {
-        Path existingPath = globalAnchorPathById.get(anchorId);
-
-        if (existingPath != null) {
-            throw new RuntimeException("global anchor <" + anchorId + "> specified in " + sourcePath +
-                    " is already registered in " + existingPath);
-        }
-
-        globalAnchorPathById.put(anchorId, sourcePath);
-    }
-
-    @Override
-    public String globalAnchorUrl(Path clientPath, String anchorId) {
-        Path anchorPath = globalAnchorPathById.get(anchorId);
-        if (anchorPath == null) {
-            throw new RuntimeException("cannot find global anchor <" + anchorId + "> referenced in " + clientPath);
-        }
-
-        TocItem tocItem = tocItemByPath(anchorPath);
-        return createUrl(new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), anchorId));
-    }
-
     public void redeployAuxiliaryFileIfRequired(Path path) {
         AuxiliaryFile auxiliaryFile = auxiliaryFiles.get(path);
         if (auxiliaryFile == null) {
@@ -307,6 +243,8 @@ public class WebSite implements DocStructure {
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
         toc = markupParsingConfiguration.createToc(cfg.tocPath);
+        docStructure = new WebSiteDocStructure(docMeta, toc);
+        componentsRegistry.setDocStructure(docStructure);
     }
 
     /**
@@ -387,7 +325,7 @@ public class WebSite implements DocStructure {
         DocUrl docUrl = tocItem.isIndex() ?
                 DocUrl.indexUrl():
                 new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), pageSearchEntry.getPageSectionId());
-        return createUrl(docUrl);
+        return docStructure.createUrl(docUrl);
     }
 
     private String searchEntryTitle(TocItem tocItem, PageSearchEntry pageSearchEntry) {
@@ -504,53 +442,18 @@ public class WebSite implements DocStructure {
         });
     }
 
-    private List<TocItem> forEachTocItemWithoutPage(TocItemConsumer consumer) {
-        List<TocItem> withoutPages = new ArrayList<>();
-
+    private void forEachTocItemWithoutPage(TocItemConsumer consumer) {
         toc.getTocItems().forEach(tocItem -> {
             boolean isPagePresent = pageByTocItem.containsKey(tocItem);
             if (! isPagePresent) {
                 consumer.consume(tocItem);
-                withoutPages.add(tocItem);
             }
         });
-
-        return withoutPages;
-    }
-
-    private void reportPhase(String phase) {
-        ConsoleOutputs.out(Color.BLUE, phase);
     }
 
     private void validateCollectedLinks() {
         reportPhase("validating links");
-        String validationErrorMessage = linksToValidate.stream().map(this::validateLink)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(joining("\n\n"));
-
-        if (!validationErrorMessage.isEmpty()) {
-            throw new IllegalArgumentException(validationErrorMessage  + "\n ");
-        }
-    }
-
-    private Optional<String> validateLink(LinkToValidate link) {
-        String url = link.docUrl.getDirName() + "/" + link.docUrl.getFileName() +
-                (link.docUrl.getAnchorId().isEmpty() ?  "" : "#" + link.docUrl.getAnchorId());
-
-        Supplier<String> validationMessage = () -> "can't find a page associated with: " + url +
-                "\ncheck file: " + link.path + ", section title: " + link.sectionWithLinkTitle;
-
-        TocItem tocItem = toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileName());
-        if (tocItem == null) {
-            return Optional.of(validationMessage.get());
-        }
-
-        if (!link.docUrl.getAnchorId().isEmpty() && !tocItem.hasPageSection(link.docUrl.getAnchorId())) {
-            return Optional.of(validationMessage.get());
-        }
-
-        return Optional.empty();
+        docStructure.validateCollectedLinks();
     }
 
     private Stream<Path> findLookupLocations(Configuration cfg) {
@@ -685,18 +588,6 @@ public class WebSite implements DocStructure {
             webSite.generate();
 
             return webSite;
-        }
-    }
-
-    private class LinkToValidate {
-        private final Path path;
-        private final String sectionWithLinkTitle;
-        private final DocUrl docUrl;
-
-        LinkToValidate(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
-            this.path = path;
-            this.sectionWithLinkTitle = sectionWithLinkTitle;
-            this.docUrl = docUrl;
         }
     }
 }

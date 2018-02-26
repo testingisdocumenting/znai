@@ -17,7 +17,7 @@ import static com.twosigma.utils.FileUtils.fileTextContent;
 public class MarkdownParsingConfiguration implements MarkupParsingConfiguration {
     @Override
     public TableOfContents createToc(Path tocPath) {
-        TableOfContents toc = new PlainTextTocGenerator().generate(fileTextContent(tocPath));
+        TableOfContents toc = new PlainTextTocGenerator(filesExtension()).generate(fileTextContent(tocPath));
         toc.addIndex();
 
         return toc;

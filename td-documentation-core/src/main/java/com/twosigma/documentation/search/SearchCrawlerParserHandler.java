@@ -13,15 +13,13 @@ import java.util.List;
 /**
  * @author mykola
  */
-public class SearchCrawlerParserHandler implements ParserHandler {
+public class SearchCrawlerParserHandler extends NoOpParserHandler {
     private List<PageSearchEntry> searchEntries;
-    private String pageSectionId;
     private String pageSectionTitle;
     private List<String> currentTextParts;
 
     public SearchCrawlerParserHandler() {
         this.searchEntries = new ArrayList<>();
-        this.pageSectionId = "";
         this.pageSectionTitle = "";
         this.currentTextParts = new ArrayList<>();
     }
@@ -32,7 +30,6 @@ public class SearchCrawlerParserHandler implements ParserHandler {
 
     @Override
     public void onSectionStart(String title) {
-        pageSectionId =
         pageSectionTitle = title;
     }
 
@@ -42,97 +39,8 @@ public class SearchCrawlerParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSubHeadingStart(int level) {
-    }
-
-    @Override
-    public void onSubHeadingEnd(int level) {
-
-    }
-
-    @Override
-    public void onHardLineBreak() {
-
-    }
-
-    @Override
-    public void onSoftLineBreak() {
-
-    }
-
-    @Override
-    public void onParagraphStart() {
-
-    }
-
-    @Override
-    public void onParagraphEnd() {
-
-    }
-
-    @Override
-    public void onBulletListStart(char bulletMarker, boolean tight) {
-
-    }
-
-    @Override
-    public void onBulletListEnd() {
-
-    }
-
-    @Override
-    public void onOrderedListStart(char delimiter, int startNumber) {
-
-    }
-
-    @Override
-    public void onOrderedListEnd() {
-
-    }
-
-    @Override
-    public void onListItemStart() {
-
-    }
-
-    @Override
-    public void onListItemEnd() {
-
-    }
-
-    @Override
     public void onTable(MarkupTableData tableData) {
         currentTextParts.add(tableData.allText());
-    }
-
-    @Override
-    public void onEmphasisStart() {
-
-    }
-
-    @Override
-    public void onEmphasisEnd() {
-
-    }
-
-    @Override
-    public void onStrongEmphasisStart() {
-
-    }
-
-    @Override
-    public void onStrongEmphasisEnd() {
-
-    }
-
-    @Override
-    public void onBlockQuoteStart() {
-
-    }
-
-    @Override
-    public void onBlockQuoteEnd() {
-
     }
 
     @Override
@@ -151,11 +59,6 @@ public class SearchCrawlerParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onLinkEnd() {
-
-    }
-
-    @Override
     public void onImage(String title, String destination, String alt) {
         currentTextParts.add(title);
         currentTextParts.add(alt);
@@ -164,24 +67,6 @@ public class SearchCrawlerParserHandler implements ParserHandler {
     @Override
     public void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet) {
         currentTextParts.add(snippet);
-    }
-
-    @Override
-    public void onThematicBreak() {
-
-    }
-
-    @Override
-    public void onGlobalAnchor(String id) {
-
-    }
-
-    @Override
-    public void onGlobalAnchorRefStart(String id) {
-    }
-
-    @Override
-    public void onGlobalAnchorRefEnd() {
     }
 
     @Override
@@ -198,11 +83,6 @@ public class SearchCrawlerParserHandler implements ParserHandler {
         if (searchText != null) {
             currentTextParts.add(searchText.getText());
         }
-    }
-
-    @Override
-    public void onInlinedCodePlugin(PluginParams pluginParams) {
-
     }
 
     @Override
