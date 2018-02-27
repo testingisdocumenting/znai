@@ -8,6 +8,7 @@ import com.twosigma.documentation.parser.table.MarkupTableData;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author mykola
@@ -157,6 +158,16 @@ public class ParserHandlersList implements ParserHandler {
     @Override
     public void onThematicBreak() {
         list.forEach(ParserHandler::onThematicBreak);
+    }
+
+    @Override
+    public void onCustomNodeStart(String nodeName, Map<String, ?> attrs) {
+        list.forEach(h -> h.onCustomNodeStart(nodeName, attrs));
+    }
+
+    @Override
+    public void onCustomNodeEnd(String nodeName) {
+        list.forEach(h -> h.onCustomNodeEnd(nodeName));
     }
 
     @Override

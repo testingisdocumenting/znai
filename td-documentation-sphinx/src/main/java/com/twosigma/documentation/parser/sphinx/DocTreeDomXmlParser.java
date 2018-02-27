@@ -5,12 +5,16 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.sphinx.python.*;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.nio.file.Path;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.twosigma.documentation.parser.sphinx.XmlUtils.getAttributeText;
 import static com.twosigma.documentation.parser.sphinx.XmlUtils.parseXml;
@@ -71,15 +75,35 @@ class DocTreeDomXmlParser {
                 return parseListItem(node);
             case "reference":
                 return parseReference(node);
-            case "desc":
-                return parseDesc(node);
             case "#text":
                 return parseText(node);
             case "title":
                 return false;
+            case "field_list":
+            case "field":
+            case "field_name":
+            case "field_body":
+            case "desc":
+            case "desc_signature":
+            case "desc_parameterlist":
+            case "desc_name":
+            case "desc_content":
+            case "desc_parameter":
+            case "desc_optional":
+                return parseDocUtils(node);
         }
 
         return false;
+    }
+
+    private boolean parseDocUtils(Node node) {
+        String nodeName = convertNodeName(node.getNodeName());
+
+        parserHandler.onCustomNodeStart(nodeName, camelCaseKeys(XmlUtils.getAttributes(node)));
+        parseChildren(node);
+        parserHandler.onCustomNodeEnd(nodeName);
+
+        return true;
     }
 
     private boolean parseReference(Node node) {
@@ -218,5 +242,23 @@ class DocTreeDomXmlParser {
     private String extractTitle(Node node) {
         Element element = (Element) node;
         return element.getElementsByTagName("title").item(0).getTextContent();
+    }
+
+    private static Map<String, String> camelCaseKeys(Map<String, String> attributes) {
+        Map<String, String> result = new LinkedHashMap<>();
+        attributes.forEach((k, v) -> result.put(convertAttributeName(k), v));
+
+        return result;
+    }
+
+    private static String convertNodeName(String name) {
+        return "DocUtils" + WordUtils.capitalizeFully(name, '_')
+                .replaceAll("_", "");
+    }
+
+    private static String convertAttributeName(String name) {
+        name = name.replace(":", "_");
+        return StringUtils.uncapitalize(WordUtils.capitalizeFully(name, '_')
+                .replaceAll("_", ""));
     }
 }

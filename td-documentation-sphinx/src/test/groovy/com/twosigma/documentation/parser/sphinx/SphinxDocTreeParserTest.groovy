@@ -83,7 +83,6 @@ linenos="False" xml:space="preserve">System.out.println("hello world");</literal
                                                                                       content:[[text: 'with a nested list', type: 'SimpleText']]]]]]]]],
                                      [type: 'ListItem',
                                       content:[[type: 'Paragraph', content:[[text: 'and here the parent list continues', type: 'SimpleText']]]]]]]]
-
     }
 
     @Test
@@ -122,6 +121,34 @@ linenos="False" xml:space="preserve">System.out.println("hello world");</literal
 
         content.should == [[type: 'Link', url:'/test-doc/chapter-two/page-four#send_message',
                             content: [[type: 'InlinedCode', code: 'send_message()']]]]
+    }
+
+    @Test
+    void "desc signature"() {
+        parse("""<desc_signature class="" first="False" fullname="send_message" 
+            ids="send_message" module="True" names="send_message">
+                      <desc_name xml:space="preserve">send_message</desc_name>
+                      <desc_parameterlist xml:space="preserve">
+                           <desc_parameter xml:space="preserve">sender</desc_parameter>
+                           <desc_parameter xml:space="preserve">recipient</desc_parameter>
+                           <desc_parameter xml:space="preserve">message_body</desc_parameter>
+                           <desc_optional xml:space="preserve"><desc_parameter xml:space="preserve">priority=1</desc_parameter>
+                          </desc_optional></desc_parameterlist>
+                        </desc_signature>""")
+
+        content.should == [[class: '', first: 'False',  fullname: 'send_message', ids: 'send_message' , module: 'True',
+                            names: 'send_message', type: 'DocUtilsDescSignature',
+                            content: [['xmlSpace': 'preserve', type: 'DocUtilsDescName', content: [[text: 'send_message', type: 'SimpleText']]],
+                                      ['xmlSpace': 'preserve', type: 'DocUtilsDescParameterlist', content:
+                                              [[xmlSpace: 'preserve', type: 'DocUtilsDescParameter', content:
+                                                      [[text: 'sender', type: 'SimpleText']]],
+                                               [xmlSpace: 'preserve', type: 'DocUtilsDescParameter', content:
+                                                       [[text: 'recipient', type: 'SimpleText']]],
+                                               [xmlSpace: 'preserve', type: 'DocUtilsDescParameter', content:
+                                                       [[text: 'message_body', type: 'SimpleText']]],
+                                               [xmlSpace: 'preserve',  type: 'DocUtilsDescOptional', content:
+                                                       [[xmlSpace: 'preserve', type: 'DocUtilsDescParameter', content:
+                                                               [[text: 'priority=1', type: 'SimpleText']]]]]]]]]]
     }
 
     private void parse(String xml) {

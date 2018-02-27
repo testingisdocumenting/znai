@@ -4,7 +4,10 @@ import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.core.ResourcesResolver;
-import com.twosigma.documentation.extensions.*;
+import com.twosigma.documentation.extensions.Plugin;
+import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.inlinedcode.InlinedCodePlugin;
@@ -232,6 +235,19 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onThematicBreak() {
         append(DocElementType.THEMATIC_BREAK);
+    }
+
+    @Override
+    public void onCustomNodeStart(String nodeName, Map<String, ?> attrs) {
+        DocElement docElement = new DocElement(nodeName);
+        attrs.forEach(docElement::addProp);
+
+        appendAndPush(docElement);
+    }
+
+    @Override
+    public void onCustomNodeEnd(String nodeName) {
+        end();
     }
 
     @Override

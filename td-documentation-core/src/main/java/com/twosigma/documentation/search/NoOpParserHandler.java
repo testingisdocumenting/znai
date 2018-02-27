@@ -7,6 +7,8 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 
+import java.util.Map;
+
 public class NoOpParserHandler implements ParserHandler {
     @Override
     public void onSectionStart(String title) {
@@ -119,6 +121,14 @@ public class NoOpParserHandler implements ParserHandler {
 
     @Override
     public void onThematicBreak() {
+    }
+
+    @Override
+    public void onCustomNodeStart(String nodeName, Map<String, ?> attrs) {
+    }
+
+    @Override
+    public void onCustomNodeEnd(String nodeName) {
     }
 
     @Override

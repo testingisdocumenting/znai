@@ -6,6 +6,8 @@ import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 
+import java.util.Map;
+
 /**
  * There are multiple markup languages out there. There are common elements among them.
  * This interface attempts to formalize elements and let define common actions to perform regardless of the markup.
@@ -41,6 +43,9 @@ public interface ParserHandler {
     void onImage(String title, String destination, String alt);
     void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet);
     void onThematicBreak();
+
+    void onCustomNodeStart(String nodeName, Map<String, ?> attrs);
+    void onCustomNodeEnd(String nodeName);
 
     void onGlobalAnchor(String id);
     void onGlobalAnchorRefStart(String id);

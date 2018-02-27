@@ -75,5 +75,7 @@
                 </field_body>
             </field>
         </field_list>
+        <paragraph><strong>example</strong></paragraph>
+        <paragraph>hello world</paragraph>
     </desc_content>
 </desc>

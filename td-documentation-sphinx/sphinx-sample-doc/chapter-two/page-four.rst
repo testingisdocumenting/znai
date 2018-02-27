@@ -19,3 +19,7 @@ Function definition
    :rtype: int
    :raises ValueError: if the message_body exceeds 160 characters
    :raises TypeError: if the message_body is not a basestring
+
+   **example**
+
+   hello world
