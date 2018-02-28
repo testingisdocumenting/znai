@@ -136,7 +136,9 @@ linenos="False" xml:space="preserve">System.out.println("hello world");</literal
                           </desc_optional></desc_parameterlist>
                         </desc_signature>""")
 
-        content.should == [[class: '', first: 'False',  fullname: 'send_message', ids: 'send_message' , module: 'True',
+        println content
+        content.should == [[id: 'send_message', type: 'Anchor'],
+                           [class: '', first: 'False',  fullname: 'send_message', ids: 'send_message' , module: 'True',
                             names: 'send_message', type: 'DocUtilsDescSignature',
                             content: [['xmlSpace': 'preserve', type: 'DocUtilsDescName', content: [[text: 'send_message', type: 'SimpleText']]],
                                       ['xmlSpace': 'preserve', type: 'DocUtilsDescParameterlist', content:

@@ -74,6 +74,11 @@ public class XmlUtils {
         return node.getAttributes().getNamedItem(name).getTextContent();
     }
 
+    public static String getAttributeText(Node node, String name, String defaultValue) {
+        Node namedItem = node.getAttributes().getNamedItem(name);
+        return namedItem == null ? defaultValue : namedItem.getTextContent();
+    }
+
     public static Map<String, String> getAttributes(Node node) {
         Map<String, String> result = new LinkedHashMap<>();
 

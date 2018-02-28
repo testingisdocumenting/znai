@@ -65,6 +65,10 @@ class DocTreeDomXmlParser {
                 return parseStrong(node);
             case "literal":
                 return parseLiteral(node);
+            case "literal_strong":
+                return parseLiteralStrong(node);
+            case "literal_emphasis":
+                return parseLiteralEmphasis(node);
             case "literal_block":
                 return parseSnippet(node);
             case "bullet_list":
@@ -79,14 +83,17 @@ class DocTreeDomXmlParser {
                 return parseText(node);
             case "title":
                 return false;
+            case "desc_signature":
+                return parseDescSignature(node);
             case "field_list":
             case "field":
             case "field_name":
             case "field_body":
             case "desc":
-            case "desc_signature":
             case "desc_parameterlist":
             case "desc_name":
+            case "desc_addname":
+            case "desc_annotation":
             case "desc_content":
             case "desc_parameter":
             case "desc_optional":
@@ -94,6 +101,13 @@ class DocTreeDomXmlParser {
         }
 
         return false;
+    }
+
+    private boolean parseDescSignature(Node node) {
+        String ids = getAttributeText(node, "ids");
+        parserHandler.onGlobalAnchor(ids);
+
+        return parseDocUtils(node);
     }
 
     private boolean parseDocUtils(Node node) {
@@ -151,6 +165,20 @@ class DocTreeDomXmlParser {
         return true;
     }
 
+    private boolean parseLiteralStrong(Node node) {
+        parserHandler.onStrongEmphasisStart();
+        parserHandler.onInlinedCode(node.getTextContent());
+        parserHandler.onStrongEmphasisEnd();
+        return true;
+    }
+
+    private boolean parseLiteralEmphasis(Node node) {
+        parserHandler.onEmphasisStart();
+        parserHandler.onInlinedCode(node.getTextContent());
+        parserHandler.onEmphasisEnd();
+        return true;
+    }
+
     private boolean parseSnippet(Node node) {
         parserHandler.onSnippet(PluginParams.EMPTY, getAttributeText(node, "language"),
                 "", node.getTextContent());
@@ -159,7 +187,7 @@ class DocTreeDomXmlParser {
     }
 
     private boolean parseBulletList(Node node) {
-        parserHandler.onBulletListStart(getAttributeText(node, "bullet").charAt(0), false);
+        parserHandler.onBulletListStart(getAttributeText(node, "bullet", "*").charAt(0), false);
         parseChildren(node);
         parserHandler.onBulletListEnd();
 

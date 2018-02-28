@@ -1,0 +1,103 @@
+.doc-utils-desc-signature {
+    display: flex;
+}
+
+.doc-utils-desc-content {
+    margin-left: 20px;
+}
+
+.doc-utils-desc-content .content-block {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.doc-utils-desc-content ul.content-block {
+    margin-bottom: 5px;
+}
+
+.doc-utils-desc-content .paragraph:last-child {
+    margin-bottom: 0;
+}
+
+.doc-utils-desc-signature {
+    font-family: var(--mdoc-code-font-family);
+}
+
+.doc-utils-desc-annotation {
+    margin-right: 8px;
+    color: var(--mdoc-keyword-color);
+}
+
+.doc-utils-desc-name {
+    font-weight: bold;
+}
+
+.doc-utils-desc-parameter-list {
+    display: flex;
+}
+
+.doc-utils-desc-parameter-list:before {
+    color: var(--mdoc-punctuation-color);
+    content: '(';
+}
+
+.doc-utils-desc-parameter-list:after {
+    color: var(--mdoc-punctuation-color);
+    content: ')';
+}
+
+.doc-utils-desc-parameter-list > .doc-utils-desc-parameter {
+    margin-right: 5px;
+}
+
+.doc-utils-desc-parameter-list > .doc-utils-desc-parameter:last-child {
+    margin-right: 0;
+}
+
+.doc-utils-desc-parameter-list > .doc-utils-desc-parameter:after {
+    color: var(--mdoc-punctuation-color);
+    content: ', ';
+}
+
+.doc-utils-desc-parameter-list > .doc-utils-desc-parameter:last-child:after {
+    content: '';
+}
+
+.doc-utils-desc-optional {
+    display: flex;
+}
+
+.doc-utils-desc-optional:before {
+    color: var(--mdoc-punctuation-color);
+    content: '[';
+}
+
+.doc-utils-desc-optional:after {
+    color: var(--mdoc-punctuation-color);
+    content: ']';
+}
+
+.doc-utils-field-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 0 10px;
+}
+
+.doc-utils-field-body .content-block {
+    margin-left: 0;
+    margin-right: 0;
+    width: auto;
+}
+
+.doc-utils-field-body ul {
+    padding: 0 15px;
+}
+
+.doc-utils-field-name {
+    font-weight: bold;
+    justify-self: end;
+}
+
+.doc-utils-field-name:after {
+    content: ': ';
+}

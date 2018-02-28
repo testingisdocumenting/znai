@@ -13,9 +13,11 @@ import {langFunctionDemo} from './doc-elements/lang/LangFunction.demo'
 import {documentationDemo} from './doc-elements/Documentation.demo'
 import {openApiOperationDemo} from './doc-elements/open-api/operation/OpenApiOperation.demo'
 import {openApiSchemaDemo} from './doc-elements/open-api/schema/OpenApiSchema.demo'
+import {docUtilsDemo} from './doc-elements/doc-utils/DocUtils.demo'
 
 const snippets = new Registry('snippets')
 snippets.registerAsGrid('Json', 0, jsonDemo)
+snippets.registerAsGrid('DocUtils', 0, docUtilsDemo)
 snippets.registerAsGrid('Lang Class', 0, langClassDemo)
 snippets.registerAsGrid('Lang Function', 0, langFunctionDemo)
 snippets.registerAsGrid('Open API', 0, openApiOperationDemo)

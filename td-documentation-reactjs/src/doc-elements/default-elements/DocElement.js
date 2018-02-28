@@ -7,7 +7,7 @@ import * as React from 'react'
  * @param elementsLibrary library of elements to use to render
  */
 const DocElement = ({content, elementsLibrary}) => {
-    return (<span>{!content ? null : content.map((item, idx) => {
+    return (!content ? null : content.map((item, idx) => {
         const ElementToUse = elementsLibrary[item.type]
         if (!ElementToUse) {
             console.warn("can't find component to display", item)
@@ -16,7 +16,7 @@ const DocElement = ({content, elementsLibrary}) => {
             return <ElementToUse key={idx} {...item}
                                  elementsLibrary={elementsLibrary}/>
         }
-    })}</span>)
+    }))
 }
 
 export default DocElement

@@ -33,6 +33,7 @@ import WebTauRest from './test-results/WebTauRest'
 import LangClass from './lang/LangClass';
 import LangFunction from './lang/LangFunction';
 import OpenApiOperation from './open-api/operation/OpenApiOperation';
+import {registerDocUtilsElements} from './doc-utils/DocUtils'
 
 const library = {}
 const presentationElementHandlers = {}
@@ -128,6 +129,8 @@ library.Footer = Footer
 library.WebTauRest = WebTauRest
 
 library.OpenApiOperation = wrappedInContentBlock(OpenApiOperation)
+
+registerDocUtilsElements(library)
 
 /**
  * to make a DocElement aligned with a page content it needs to have a content-block assigned.
