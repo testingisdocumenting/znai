@@ -293,7 +293,7 @@ public class WebSite {
             updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
 
             FileTime lastModifiedTime = Files.getLastModifiedTime(markupPath);
-            Page page = new Page(parserResult.getDocElement(), lastModifiedTime);
+            Page page = new Page(parserResult.getDocElement(), lastModifiedTime, parserResult.getProperties());
             pageByTocItem.put(tocItem, page);
 
             tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());

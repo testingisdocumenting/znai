@@ -2,6 +2,7 @@ package com.twosigma.documentation.structure;
 
 import java.nio.file.attribute.FileTime;
 import java.util.List;
+import java.util.Map;
 
 import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.parser.docelement.DocElement;
@@ -15,12 +16,14 @@ import static java.util.stream.Collectors.toList;
 public class Page {
     private final DocElement docElement;
     private final List<PageSectionIdTitle> pageSectionIdTitles;
-    private FileTime lastModifiedTime;
+    private final FileTime lastModifiedTime;
+    private final Map<String, List<String>> customProperties;
 
-    public Page(DocElement docElement, FileTime lastModifiedTime) {
+    public Page(DocElement docElement, FileTime lastModifiedTime, Map<String, List<String>> customProperties) {
         this.docElement = docElement;
         this.pageSectionIdTitles = extractFirstLevelHeadings(docElement);
         this.lastModifiedTime = lastModifiedTime;
+        this.customProperties = customProperties;
     }
 
     public DocElement getDocElement() {
@@ -29,6 +32,10 @@ public class Page {
 
     public FileTime getLastModifiedTime() {
         return lastModifiedTime;
+    }
+
+    public Map<String, List<String>> getCustomProperties() {
+        return customProperties;
     }
 
     public List<PageSectionIdTitle> getPageSectionIdTitles() {

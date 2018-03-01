@@ -14,6 +14,7 @@ import {documentationDemo} from './doc-elements/Documentation.demo'
 import {openApiOperationDemo} from './doc-elements/open-api/operation/OpenApiOperation.demo'
 import {openApiSchemaDemo} from './doc-elements/open-api/schema/OpenApiSchema.demo'
 import {docUtilsDemo} from './doc-elements/doc-utils/DocUtils.demo'
+import {pagesDemo} from './doc-elements/page/Page.demo'
 
 const snippets = new Registry('snippets')
 snippets.registerAsGrid('Json', 0, jsonDemo)
@@ -24,6 +25,7 @@ snippets.registerAsGrid('Open API', 0, openApiOperationDemo)
 snippets.registerAsGrid('Open API Schema', 250, openApiSchemaDemo)
 
 const layout = new Registry('layout')
+layout.registerAsTabs('Pages', pagesDemo)
 layout.registerAsGrid('Tabs', 300, tabsDemo)
 
 const endToEnd = new Registry('end to end')

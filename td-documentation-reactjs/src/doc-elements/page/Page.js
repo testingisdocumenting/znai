@@ -1,16 +1,21 @@
 import React, {Component} from 'react'
 
+import DefaultPageContent from './DefaultPageContent'
+
 import './Page.css'
+import ApiPageContent from './api/ApiPageContent'
 
 class Page extends Component {
     render() {
-        const {tocItem, onPresentationOpen, elementsLibrary} = this.props
+        const {tocItem, onPresentationOpen, elementsLibrary, content} = this.props
 
         const displayTitle = tocItem.dirName.length && tocItem.fileName !== "index"
         const title = displayTitle ? [<span key="title" className="page-title">{tocItem.pageTitle}</span>,
             onPresentationOpen ?
                 <span key="button" className="presentation-button glyphicon glyphicon-resize-full"
                       onClick={onPresentationOpen}/> : null] : []
+
+        const PageContent = this.pageContentComponent()
 
         return (
             <div className="page-content">
@@ -22,10 +27,24 @@ class Page extends Component {
                     { this.renderViewOn() }
                 </div>
 
-                <elementsLibrary.DocElement key={tocItem.pageTitle}
-                                            {...this.props}/>
+                <PageContent key={tocItem.pageTitle}
+                             elementsLibrary={elementsLibrary}
+                             content={content}/>
             </div>
         )
+    }
+
+    pageContentComponent() {
+        const {customProperties} = this.props;
+        if (! customProperties) {
+            return DefaultPageContent
+        }
+
+        if (customProperties.type && customProperties.type[0] === 'api') {
+            return ApiPageContent
+        }
+
+        return DefaultPageContent
     }
 
     renderModifiedTime() {

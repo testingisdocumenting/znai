@@ -1,6 +1,6 @@
 import React from 'react'
 import DocElement from './default-elements/DocElement'
-import {Page, presentationPageHandler} from './default-elements/Page'
+import {Page, presentationPageHandler} from './page/Page'
 import {Section, presentationSectionHandler} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'

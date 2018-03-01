@@ -15,7 +15,7 @@ public class PageProps {
     private final TocItem tocItem;
     private final Page page;
 
-    public PageProps(final TocItem tocItem, final Page page) {
+    public PageProps(TocItem tocItem, Page page) {
         this.tocItem = tocItem;
         this.page = page;
         this.asMap = buildMap();
@@ -32,6 +32,7 @@ public class PageProps {
         pageProps.put("content", ((Map<String, ?>) page.getDocElement().toMap()).get("content"));
         pageProps.put("lastModifiedTime", page.getLastModifiedTime().toMillis());
         pageProps.put("tocItem", tocItem.toMap());
+        pageProps.put("customProperties", page.getCustomProperties());
 
         return pageProps;
     }
