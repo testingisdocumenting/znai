@@ -44,7 +44,9 @@ class DocumentationLayout extends Component {
         return (
             <div className="documentation">
                 <div className="side-panel" onClick={this.onTocSelect}>
-                    <TocPanel toc={toc} collapsed={tocCollapsed} selected={tocSelected}
+                    <TocPanel toc={toc}
+                              collapsed={tocCollapsed}
+                              selected={tocSelected}
                               docMeta={docMeta}
                               onToggle={this.onTocToggle}
                               selectedItem={selectedTocItem}

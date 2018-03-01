@@ -2,15 +2,9 @@ import React, {Component} from 'react';
 import TocMenu from './TocMenu';
 
 class TocPanel extends Component {
-    constructor(props) {
-        super(props);
-
-        this.toggle = this.toggle.bind(this)
-        this.keyDownHandler = this.keyDownHandler.bind(this)
-    }
-
     render() {
-        const {docMeta,
+        const {
+            docMeta,
             toc,
             collapsed,
             selected,
@@ -40,20 +34,12 @@ class TocPanel extends Component {
         )
     }
 
-    toggle() {
+    toggle = () => {
         const collapsed = !this.props.collapsed
         this.props.onToggle(collapsed)
     }
 
-    componentDidMount() {
-        document.addEventListener('keydown', this.keyDownHandler)
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener('keydown', this.keyDownHandler)
-    }
-
-    keyDownHandler(e) {
+    keyDownHandler = (e) => {
         const {selected, collapsed, onNextPage, onPrevPage} = this.props
 
         if (!selected || collapsed) {
@@ -65,6 +51,14 @@ class TocPanel extends Component {
         } else if (e.key === 'ArrowDown') {
             onNextPage()
         }
+    }
+
+    componentDidMount() {
+        document.addEventListener('keydown', this.keyDownHandler)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.keyDownHandler)
     }
 }
 

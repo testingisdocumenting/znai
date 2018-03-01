@@ -18,11 +18,11 @@ class Item extends PureComponent {
     render() {
         const {item, selected, isSelected, onClickHandler} = this.props
 
-        const className = "toc-item " + (isSelected ? "selected" : "")
+        const className = 'toc-item' + (isSelected ? ' selected' : '')
         const href = documentationNavigation.buildUrl(item)
 
         return (
-            <div className={className} ref={this.saveSelectedNodeRef}>
+            <div className={className} ref={this.saveNodeRef}>
                 <a href={href} onClick={ (e) => { e.preventDefault(); onClickHandler(item.dirName, item.fileName)}}>{item.pageTitle}</a>
                 {isSelected ? <PageSections pageSectionIdTitles={item.pageSectionIdTitles}
                                             selected={selected}/> : null}
@@ -30,7 +30,7 @@ class Item extends PureComponent {
         )
     }
 
-    saveSelectedNodeRef = (node) => {
+    saveNodeRef = (node) => {
         this.node = node
     }
 
@@ -52,7 +52,7 @@ class Item extends PureComponent {
 }
 
 const Section = ({section, selected, onClickHandler}) => {
-    const className = "toc-section " + (section.dirName === selected.dirName ? "selected" : "")
+    const className = 'toc-section' + (section.dirName === selected.dirName ? ' selected' : '')
 
     return (
         <div className={className}>
@@ -60,7 +60,7 @@ const Section = ({section, selected, onClickHandler}) => {
             {section.items.map((item) => <Item key={item.fileName}
                                                item={item}
                                                selected={selected}
-                                               isSelected={section.dirName === selected.dirName && item.fileName === selected.fileName}
+                                               isSelected={item.dirName === selected.dirName && item.fileName === selected.fileName}
                                                onClickHandler={onClickHandler} />)}
         </div>
     )

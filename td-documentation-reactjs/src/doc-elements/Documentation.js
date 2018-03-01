@@ -38,10 +38,10 @@ class Documentation extends Component {
         setDocMeta(docMeta)
         this.searchPromise = getSearchPromise(docMeta)
 
-        const currentPageLocation = documentationNavigation.currentPageLocation()
-
         const selectedTocItem = {
-            ...currentPageLocation, pageSectionId: page.tocItem.pageSectionIdTitles[0] ?
+            dirName: page.tocItem.dirName,
+            fileName: page.tocItem.fileName,
+            pageSectionId: page.tocItem.pageSectionIdTitles[0] ?
                 page.tocItem.pageSectionIdTitles[0].id : null
         }
 
