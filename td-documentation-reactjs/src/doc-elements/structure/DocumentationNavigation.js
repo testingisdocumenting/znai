@@ -20,6 +20,15 @@ class DocumentationNavigation {
         this.listeners.push(listener)
     }
 
+    removeUrlChangeListener(listener) {
+        const idx = this.listeners.indexOf(listener)
+        if (idx === -1) {
+            return
+        }
+
+        this.listeners.splice(idx, 1)
+    }
+
     buildUrl(id) {
         return  "/" + (this.documentationId  ? this.documentationId + "/" : "") + (id.dirName + "/" + id.fileName) +
             (id.pageSectionId ? ("#" + id.pageSectionId) : "")

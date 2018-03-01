@@ -1,7 +1,12 @@
 .api-section {
 }
 
-.api-section > .title {
+.api-section > a {
+    color: var(--mdoc-black);
+    text-decoration: none;
+}
+
+.api-section > a > .title {
     font-size: 16px;
     font-family: var(--mdoc-code-font-family);
 
@@ -12,23 +17,12 @@
     cursor: pointer;
 }
 
-.api-section > .title > a {
-    color: var(--mdoc-black);
-    text-decoration: none;
-}
-
-.api-section > .title:hover {
+.api-section > a > .title:hover {
+    color: white;
     background-color: rgba(var(--mdoc-brand-primary-color-rgb-values), 0.5);
 }
 
-.api-section > .title:hover > a{
-    color: white;
-}
-
-.api-section > .title.selected {
+.api-section > a > .title.selected {
     background-color: rgba(var(--mdoc-brand-primary-color-rgb-values), 0.8);
-}
-
-.api-section > .title.selected > a {
     color: white;
 }

@@ -23,7 +23,6 @@ class ApiPageContent extends Component {
                     const isSelected = activeSectionId === section.id
                     return <ApiSection key={section.title}
                                        isSelected={isSelected}
-                                       onTitleClick={this.onSectionTitleClick}
                                        elementsLibrary={elementsLibrary}
                                        {...section}/>
                 })}
@@ -31,11 +30,20 @@ class ApiPageContent extends Component {
         )
     }
 
-    onSectionTitleClick = (sectionId) => {
-        this.setState({activeSectionId: sectionId})
+    componentDidMount() {
+        this.updateActiveSectionId()
+        documentationNavigation.addUrlChangeListener(this.onUrlChange)
     }
 
-    componentDidMount() {
+    componentWillUnmount() {
+        documentationNavigation.removeUrlChangeListener(this.onUrlChange)
+    }
+
+    onUrlChange = () => {
+        this.updateActiveSectionId()
+    }
+
+    updateActiveSectionId() {
         this.setState({activeSectionId: documentationNavigation.currentPageLocation().anchorId})
     }
 }
