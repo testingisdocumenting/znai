@@ -1,7 +1,3 @@
----
-type: api
----
-
 # Method Body
 
 When you need to extract a specific method body use `include-java` plugin.
