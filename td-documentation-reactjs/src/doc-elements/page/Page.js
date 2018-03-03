@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 
-import DefaultPageContent from './DefaultPageContent'
-
 import './Page.css'
-import ApiPageContent from './api/ApiPageContent'
+import {pageTypesRegistry} from './PageTypesRegistry'
 
 class Page extends Component {
     render() {
@@ -35,16 +33,8 @@ class Page extends Component {
     }
 
     pageContentComponent() {
-        const {customProperties} = this.props;
-        if (! customProperties) {
-            return DefaultPageContent
-        }
-
-        if (customProperties.type && customProperties.type[0] === 'api') {
-            return ApiPageContent
-        }
-
-        return DefaultPageContent
+        const {tocItem} = this.props
+        return pageTypesRegistry.pageContentComponent(tocItem)
     }
 
     renderModifiedTime() {

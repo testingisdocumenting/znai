@@ -30,9 +30,9 @@ public class PageToHtmlPageConverter {
                 docMeta.getTitle():
                 docMeta.getTitle() + ": " + tocItem.getPageTitle());
 
-        PageProps pageProps = new PageProps(tocItem, page);
+        PageReactProps pageProps = new PageReactProps(tocItem, page);
         FooterProps footerProps = new FooterProps(footer);
-        DocumentationProps docProps = new DocumentationProps(docMeta, pageProps, footerProps);
+        DocumentationReactProps docProps = new DocumentationReactProps(docMeta, pageProps, footerProps);
 
         RenderSupplier createElementStatement = () -> "React.createElement(Documentation, " + JsonUtils.serializePrettyPrint(
                     docProps.toMap()) + ")";

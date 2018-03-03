@@ -18,13 +18,13 @@ chapter2
 
         toc.toListOfMaps().should == [[sectionTitle: 'Chapter1', dirName: 'chapter1',
                                        items       : [[sectionTitle       : 'Chapter1', pageTitle: 'Page A', fileName: 'page-a', dirName: 'chapter1',
-                                                       pageSectionIdTitles: []],
+                                                       pageSectionIdTitles: [], pageMeta: [:]],
                                                       [sectionTitle       : 'Chapter1', pageTitle: 'Page B', fileName: 'page-b', dirName: 'chapter1',
-                                                       pageSectionIdTitles: []]]],
+                                                       pageSectionIdTitles: [], pageMeta: [:]]]],
                                       [sectionTitle: 'Chapter2', dirName: 'chapter2',
                                        items       :
                                                [[sectionTitle       : 'Chapter2', pageTitle: 'Page C', fileName: 'page-c', dirName: 'chapter2',
-                                                 pageSectionIdTitles: []]]]]
+                                                 pageSectionIdTitles: [], pageMeta: [:]]]]]
 
     }
 }

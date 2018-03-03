@@ -2,7 +2,7 @@ package com.twosigma.documentation.extensions.diagrams
 
 import com.twosigma.documentation.website.WebSiteComponentsRegistry
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides
-import com.twosigma.documentation.parser.MarkdownParser
+import com.twosigma.documentation.parser.commonmark.MarkdownParser
 import org.junit.Test
 
 import java.nio.file.Paths

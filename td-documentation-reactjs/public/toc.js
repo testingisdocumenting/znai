@@ -6,6 +6,7 @@ toc = [
       {
         "sectionTitle": "",
         "pageTitle": "Index",
+        "pageMeta": {},
         "fileName": "index",
         "dirName": "",
         "pageSectionIdTitles": []
@@ -19,6 +20,7 @@ toc = [
       {
         "sectionTitle": "Introduction",
         "pageTitle": "Rationale",
+        "pageMeta": {},
         "fileName": "rationale",
         "dirName": "introduction",
         "pageSectionIdTitles": [
@@ -47,6 +49,7 @@ toc = [
       {
         "sectionTitle": "Introduction",
         "pageTitle": "Example",
+        "pageMeta": {},
         "fileName": "example",
         "dirName": "introduction",
         "pageSectionIdTitles": [
@@ -63,6 +66,7 @@ toc = [
       {
         "sectionTitle": "Introduction",
         "pageTitle": "Getting Started",
+        "pageMeta": {},
         "fileName": "getting-started",
         "dirName": "introduction",
         "pageSectionIdTitles": [
@@ -97,6 +101,7 @@ toc = [
       {
         "sectionTitle": "Flow",
         "pageTitle": "Structure",
+        "pageMeta": {},
         "fileName": "structure",
         "dirName": "flow",
         "pageSectionIdTitles": [
@@ -125,6 +130,11 @@ toc = [
       {
         "sectionTitle": "Flow",
         "pageTitle": "Page Titles",
+        "pageMeta": {
+          "title": [
+            "Page Titles"
+          ]
+        },
         "fileName": "names",
         "dirName": "flow",
         "pageSectionIdTitles": [
@@ -141,6 +151,7 @@ toc = [
       {
         "sectionTitle": "Flow",
         "pageTitle": "Page References",
+        "pageMeta": {},
         "fileName": "page-references",
         "dirName": "flow",
         "pageSectionIdTitles": [
@@ -157,6 +168,7 @@ toc = [
       {
         "sectionTitle": "Flow",
         "pageTitle": "Search",
+        "pageMeta": {},
         "fileName": "search",
         "dirName": "flow",
         "pageSectionIdTitles": [
@@ -173,6 +185,7 @@ toc = [
       {
         "sectionTitle": "Flow",
         "pageTitle": "Footer",
+        "pageMeta": {},
         "fileName": "footer",
         "dirName": "flow",
         "pageSectionIdTitles": [
@@ -185,6 +198,7 @@ toc = [
       {
         "sectionTitle": "Flow",
         "pageTitle": "Presentation",
+        "pageMeta": {},
         "fileName": "presentation",
         "dirName": "flow",
         "pageSectionIdTitles": [
@@ -197,6 +211,7 @@ toc = [
       {
         "sectionTitle": "Flow",
         "pageTitle": "Testing",
+        "pageMeta": {},
         "fileName": "testing",
         "dirName": "flow",
         "pageSectionIdTitles": [
@@ -215,6 +230,7 @@ toc = [
       {
         "sectionTitle": "Snippets",
         "pageTitle": "Code Snippets",
+        "pageMeta": {},
         "fileName": "code-snippets",
         "dirName": "snippets",
         "pageSectionIdTitles": [
@@ -251,6 +267,7 @@ toc = [
       {
         "sectionTitle": "Snippets",
         "pageTitle": "External Code Snippets",
+        "pageMeta": {},
         "fileName": "external-code-snippets",
         "dirName": "snippets",
         "pageSectionIdTitles": [
@@ -287,6 +304,11 @@ toc = [
       {
         "sectionTitle": "Snippets",
         "pageTitle": "Java",
+        "pageMeta": {
+          "type": [
+            "api"
+          ]
+        },
         "fileName": "java",
         "dirName": "snippets",
         "pageSectionIdTitles": [
@@ -339,6 +361,7 @@ toc = [
       {
         "sectionTitle": "Snippets",
         "pageTitle": "Groovy",
+        "pageMeta": {},
         "fileName": "groovy",
         "dirName": "snippets",
         "pageSectionIdTitles": [
@@ -359,6 +382,7 @@ toc = [
       {
         "sectionTitle": "Snippets",
         "pageTitle": "Cpp",
+        "pageMeta": {},
         "fileName": "cpp",
         "dirName": "snippets",
         "pageSectionIdTitles": [
@@ -371,6 +395,7 @@ toc = [
       {
         "sectionTitle": "Snippets",
         "pageTitle": "Json",
+        "pageMeta": {},
         "fileName": "json",
         "dirName": "snippets",
         "pageSectionIdTitles": [
@@ -387,6 +412,7 @@ toc = [
       {
         "sectionTitle": "Snippets",
         "pageTitle": "CLI",
+        "pageMeta": {},
         "fileName": "CLI",
         "dirName": "snippets",
         "pageSectionIdTitles": [
@@ -410,7 +436,21 @@ toc = [
       },
       {
         "sectionTitle": "Snippets",
+        "pageTitle": "Open API",
+        "pageMeta": {},
+        "fileName": "open-API",
+        "dirName": "snippets",
+        "pageSectionIdTitles": [
+          {
+            "title": "Operation definition",
+            "id": "operation-definition"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Snippets",
         "pageTitle": "Math",
+        "pageMeta": {},
         "fileName": "math",
         "dirName": "snippets",
         "pageSectionIdTitles": [
@@ -429,6 +469,7 @@ toc = [
       {
         "sectionTitle": "Layout",
         "pageTitle": "Attention Signs",
+        "pageMeta": {},
         "fileName": "attention-signs",
         "dirName": "layout",
         "pageSectionIdTitles": [
@@ -461,6 +502,7 @@ toc = [
       {
         "sectionTitle": "Layout",
         "pageTitle": "Tabs",
+        "pageMeta": {},
         "fileName": "tabs",
         "dirName": "layout",
         "pageSectionIdTitles": [
@@ -489,6 +531,7 @@ toc = [
       {
         "sectionTitle": "Layout",
         "pageTitle": "Tables",
+        "pageMeta": {},
         "fileName": "tables",
         "dirName": "layout",
         "pageSectionIdTitles": [
@@ -521,6 +564,7 @@ toc = [
       {
         "sectionTitle": "Layout",
         "pageTitle": "Columns",
+        "pageMeta": {},
         "fileName": "columns",
         "dirName": "layout",
         "pageSectionIdTitles": [
@@ -549,6 +593,7 @@ toc = [
       {
         "sectionTitle": "Layout",
         "pageTitle": "Templates",
+        "pageMeta": {},
         "fileName": "templates",
         "dirName": "layout",
         "pageSectionIdTitles": [
@@ -583,6 +628,7 @@ toc = [
       {
         "sectionTitle": "Visuals",
         "pageTitle": "Smart Bullet Points",
+        "pageMeta": {},
         "fileName": "smart-bullet-points",
         "dirName": "visuals",
         "pageSectionIdTitles": [
@@ -615,6 +661,7 @@ toc = [
       {
         "sectionTitle": "Visuals",
         "pageTitle": "Icons",
+        "pageMeta": {},
         "fileName": "icons",
         "dirName": "visuals",
         "pageSectionIdTitles": [
@@ -631,6 +678,7 @@ toc = [
       {
         "sectionTitle": "Visuals",
         "pageTitle": "Charts",
+        "pageMeta": {},
         "fileName": "charts",
         "dirName": "visuals",
         "pageSectionIdTitles": [
@@ -659,6 +707,7 @@ toc = [
       {
         "sectionTitle": "Visuals",
         "pageTitle": "Images",
+        "pageMeta": {},
         "fileName": "images",
         "dirName": "visuals",
         "pageSectionIdTitles": [
@@ -683,6 +732,7 @@ toc = [
       {
         "sectionTitle": "Visuals",
         "pageTitle": "Image Annotations",
+        "pageMeta": {},
         "fileName": "image-annotations",
         "dirName": "visuals",
         "pageSectionIdTitles": [
@@ -707,6 +757,7 @@ toc = [
       {
         "sectionTitle": "Visuals",
         "pageTitle": "SVG",
+        "pageMeta": {},
         "fileName": "SVG",
         "dirName": "visuals",
         "pageSectionIdTitles": [
@@ -723,6 +774,7 @@ toc = [
       {
         "sectionTitle": "Visuals",
         "pageTitle": "Flow Diagrams",
+        "pageMeta": {},
         "fileName": "flow-diagrams",
         "dirName": "visuals",
         "pageSectionIdTitles": [
@@ -743,6 +795,7 @@ toc = [
       {
         "sectionTitle": "Visuals",
         "pageTitle": "PlantUml",
+        "pageMeta": {},
         "fileName": "PlantUml",
         "dirName": "visuals",
         "pageSectionIdTitles": [
@@ -765,6 +818,7 @@ toc = [
       {
         "sectionTitle": "Synergy With Testing",
         "pageTitle": "Java",
+        "pageMeta": {},
         "fileName": "java",
         "dirName": "synergy-with-testing",
         "pageSectionIdTitles": [
@@ -777,6 +831,7 @@ toc = [
       {
         "sectionTitle": "Synergy With Testing",
         "pageTitle": "REST",
+        "pageMeta": {},
         "fileName": "REST",
         "dirName": "synergy-with-testing",
         "pageSectionIdTitles": [
@@ -801,6 +856,7 @@ toc = [
       {
         "sectionTitle": "Synergy With Testing",
         "pageTitle": "Web UI",
+        "pageMeta": {},
         "fileName": "web-UI",
         "dirName": "synergy-with-testing",
         "pageSectionIdTitles": [
@@ -819,6 +875,7 @@ toc = [
       {
         "sectionTitle": "Configuration",
         "pageTitle": "Basic",
+        "pageMeta": {},
         "fileName": "basic",
         "dirName": "configuration",
         "pageSectionIdTitles": [

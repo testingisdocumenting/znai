@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import {documentationNavigation} from '../structure/DocumentationNavigation'
+import {pageTypesRegistry} from '../page/PageTypesRegistry'
 
 const PageSections = ({pageSectionIdTitles, selected}) => {
     return (<div className="page-sections">
@@ -21,11 +22,13 @@ class Item extends PureComponent {
         const className = 'toc-item' + (isSelected ? ' selected' : '')
         const href = documentationNavigation.buildUrl(item)
 
+        const displayPageSections = isSelected && pageTypesRegistry.expandToc(item)
+
         return (
             <div className={className} ref={this.saveNodeRef}>
                 <a href={href} onClick={ (e) => { e.preventDefault(); onClickHandler(item.dirName, item.fileName)}}>{item.pageTitle}</a>
-                {isSelected ? <PageSections pageSectionIdTitles={item.pageSectionIdTitles}
-                                            selected={selected}/> : null}
+                {displayPageSections && <PageSections pageSectionIdTitles={item.pageSectionIdTitles}
+                                                      selected={selected}/>}
             </div>
         )
     }

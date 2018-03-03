@@ -8,12 +8,12 @@ import java.util.Map;
 /**
  * @author mykola
  */
-public class DocumentationProps {
+public class DocumentationReactProps {
     private final DocMeta docMeta;
-    private final PageProps pageProps;
+    private final PageReactProps pageProps;
     private FooterProps footerProps;
 
-    public DocumentationProps(DocMeta docMeta, PageProps pageProps, FooterProps footerProps) {
+    public DocumentationReactProps(DocMeta docMeta, PageReactProps pageProps, FooterProps footerProps) {
         this.docMeta = docMeta;
         this.pageProps = pageProps;
         this.footerProps = footerProps;

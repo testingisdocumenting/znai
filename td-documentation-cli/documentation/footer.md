@@ -9,4 +9,4 @@ line interfaces.
 If you want to sign for the beta, email to PPE-Support@twosigma.com
 ```
 
-_Copyright @ 2017 Two Sigma_
+_Copyright @ 2018 Two Sigma_

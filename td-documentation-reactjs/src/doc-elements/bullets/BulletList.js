@@ -85,7 +85,6 @@ function slideInfoProvider(props) {
     }
 
     const Bullets = valueByIdWithWarning(presentationTypes, type)
-    console.log(props, Bullets)
 
     return {isFullScreen: Bullets.isPresentationFullScreen}
 }

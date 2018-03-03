@@ -6,6 +6,7 @@ import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.ParserHandlersList;
 import com.twosigma.documentation.parser.docelement.DocElementCreationParserHandler;
 import com.twosigma.documentation.search.SearchCrawlerParserHandler;
+import com.twosigma.documentation.structure.PageMeta;
 
 import java.nio.file.Path;
 import java.util.Collections;
@@ -34,6 +35,6 @@ public class SphinxDocTreeParser implements MarkupParser {
                 Collections.emptyList(),
                 searchCrawler.getSearchEntries(),
                 elementCreationHandler.getAuxiliaryFiles(),
-                Collections.emptyMap());
+                new PageMeta());
     }
 }

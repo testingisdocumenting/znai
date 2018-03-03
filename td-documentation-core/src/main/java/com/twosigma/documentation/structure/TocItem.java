@@ -17,6 +17,7 @@ public class TocItem {
     private String fileNameWithoutExtension;
     private String sectionTitle;
     private String pageTitle;
+    private PageMeta pageMeta;
 
     private List<PageSectionIdTitle> pageSectionIdTitles;
 
@@ -30,6 +31,8 @@ public class TocItem {
 
         this.sectionTitle = NameUtils.dashToCamelCaseWithSpaces(dirName);
         this.pageTitle = NameUtils.dashToCamelCaseWithSpaces(fileNameWithoutExtension);
+
+        this.pageMeta = new PageMeta(Collections.emptyMap());
 
         this.pageSectionIdTitles = new ArrayList<>();
     }
@@ -53,6 +56,10 @@ public class TocItem {
 
     public String getPageTitle() {
         return pageTitle;
+    }
+
+    public void setPageMeta(PageMeta pageMeta) {
+        this.pageMeta = pageMeta;
     }
 
     public List<PageSectionIdTitle> getPageSectionIdTitles() {
@@ -79,6 +86,7 @@ public class TocItem {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("sectionTitle", getSectionTitle());
         result.put("pageTitle", getPageTitle());
+        result.put("pageMeta", pageMeta.toMap());
         result.put("fileName", getFileNameWithoutExtension());
         result.put("dirName", getDirName());
         result.put("pageSectionIdTitles",

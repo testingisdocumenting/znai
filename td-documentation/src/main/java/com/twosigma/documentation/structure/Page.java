@@ -17,13 +17,13 @@ public class Page {
     private final DocElement docElement;
     private final List<PageSectionIdTitle> pageSectionIdTitles;
     private final FileTime lastModifiedTime;
-    private final Map<String, List<String>> customProperties;
+    private final PageMeta pageMeta;
 
-    public Page(DocElement docElement, FileTime lastModifiedTime, Map<String, List<String>> customProperties) {
+    public Page(DocElement docElement, FileTime lastModifiedTime, PageMeta pageMeta) {
         this.docElement = docElement;
         this.pageSectionIdTitles = extractFirstLevelHeadings(docElement);
         this.lastModifiedTime = lastModifiedTime;
-        this.customProperties = customProperties;
+        this.pageMeta = pageMeta;
     }
 
     public DocElement getDocElement() {
@@ -34,8 +34,8 @@ public class Page {
         return lastModifiedTime;
     }
 
-    public Map<String, List<String>> getCustomProperties() {
-        return customProperties;
+    public PageMeta getPageMeta() {
+        return pageMeta;
     }
 
     public List<PageSectionIdTitle> getPageSectionIdTitles() {

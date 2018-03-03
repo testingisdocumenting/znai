@@ -1,5 +1,6 @@
 package com.twosigma.documentation.parser
 
+import com.twosigma.documentation.parser.commonmark.MarkdownParser
 import org.junit.Test
 
 import java.nio.file.Paths
@@ -312,7 +313,7 @@ world""")
 title: custom title
 ---""")
 
-        parseResult.properties.title.should == ["custom title"]
+        parseResult.pageMeta.toMap().title.should == ["custom title"]
     }
 
     private void parse(String markdown) {

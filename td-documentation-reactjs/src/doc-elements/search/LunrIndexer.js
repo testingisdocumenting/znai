@@ -20,7 +20,6 @@ class QueryResult {
 
     getSnippetsToHighlight(id, text) {
         const snippets = []
-        console.log(this.snippetsById)
         this.snippetsById[id].forEach((callback) => {
             snippets.push(...callback(text))
         })

@@ -2,7 +2,7 @@ package com.twosigma.documentation.parser.table;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.parser.docelement.DocElementCreationParserHandler;
-import com.twosigma.documentation.parser.MarkdownVisitor;
+import com.twosigma.documentation.parser.commonmark.MarkdownVisitor;
 import org.commonmark.ext.gfm.tables.*;
 import org.commonmark.node.AbstractVisitor;
 import org.commonmark.node.CustomNode;

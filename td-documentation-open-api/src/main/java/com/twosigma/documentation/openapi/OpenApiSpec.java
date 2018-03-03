@@ -1,6 +1,6 @@
 package com.twosigma.documentation.openapi;
 
-import com.twosigma.documentation.parser.MarkdownParser;
+import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.utils.JsonUtils;

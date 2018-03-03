@@ -2,7 +2,7 @@ package com.twosigma.documentation.server.preview;
 
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.FontStyle;
-import com.twosigma.documentation.html.PageProps;
+import com.twosigma.documentation.html.PageReactProps;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.utils.JsonUtils;
@@ -44,7 +44,7 @@ public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
         });
     }
 
-    public void sendPage(PageProps pageProps) {
+    public void sendPage(PageReactProps pageProps) {
         LinkedHashMap<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "pageUpdate");
         payload.put("pageProps", pageProps.toMap());
@@ -52,10 +52,10 @@ public class PreviewWebSocketHandler implements Handler<ServerWebSocket> {
         send(payload);
     }
 
-    public void sendPages(Stream<PageProps> listOfPageProps) {
+    public void sendPages(Stream<PageReactProps> listOfPageProps) {
         LinkedHashMap<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "multiplePagesUpdate");
-        payload.put("listOfPageProps", listOfPageProps.map(PageProps::toMap).collect(toList()));
+        payload.put("listOfPageProps", listOfPageProps.map(PageReactProps::toMap).collect(toList()));
 
         send(payload);
     }

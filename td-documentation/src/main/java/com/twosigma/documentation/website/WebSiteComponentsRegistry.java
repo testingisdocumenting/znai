@@ -3,7 +3,7 @@ package com.twosigma.documentation.website;
 import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.core.ResourcesResolver;
-import com.twosigma.documentation.parser.MarkdownParser;
+import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.structure.DocStructure;
 

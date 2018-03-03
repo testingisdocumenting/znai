@@ -1,4 +1,4 @@
-package com.twosigma.documentation.parser;
+package com.twosigma.documentation.parser.commonmark;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginParams;

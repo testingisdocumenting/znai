@@ -1,6 +1,6 @@
 package com.twosigma.documentation.extensions.templates
 
-import com.twosigma.documentation.parser.MarkdownParser
+import com.twosigma.documentation.parser.commonmark.MarkdownParser
 import com.twosigma.documentation.parser.MarkupParser
 import com.twosigma.documentation.parser.MarkupParserResult
 import com.twosigma.documentation.parser.TestComponentsRegistry

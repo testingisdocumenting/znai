@@ -258,6 +258,9 @@ const TestData = {
                 "pageTitle": "Java",
                 "fileName": "java",
                 "dirName": "snippets",
+                "pageMeta": {
+                    "type": ["api"]
+                },
                 "pageSectionIdTitles": [
                     {
                         "title": "Enum Entries",

@@ -3,8 +3,8 @@ package com.twosigma.documentation.parser;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.search.PageSearchEntry;
+import com.twosigma.documentation.structure.PageMeta;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,19 +18,19 @@ public class MarkupParserResult {
     private DocElement docElement;
     private List<String> globalAnchorIds;
     private List<AuxiliaryFile> auxiliaryFiles;
-    private Map<String, List<String>> properties;
+    private PageMeta pageMeta;
     private List<PageSearchEntry> searchEntries;
 
     public MarkupParserResult(DocElement docElement,
                               List<String> globalAnchorIds,
                               List<PageSearchEntry> searchEntries,
                               List<AuxiliaryFile> auxiliaryFiles,
-                              Map<String, List<String>> properties) {
+                              PageMeta pageMeta) {
         this.docElement = docElement;
         this.globalAnchorIds = globalAnchorIds;
         this.searchEntries = searchEntries;
         this.auxiliaryFiles = auxiliaryFiles;
-        this.properties = new LinkedHashMap<>(properties);
+        this.pageMeta = pageMeta;
     }
 
     /**
@@ -46,8 +46,8 @@ public class MarkupParserResult {
         return globalAnchorIds;
     }
 
-    public Map<String, List<String>> getProperties() {
-        return properties;
+    public PageMeta getPageMeta() {
+        return pageMeta;
     }
 
     public List<PageSearchEntry> getSearchEntries() {

@@ -3,6 +3,7 @@ package com.twosigma.documentation.parser
 import com.twosigma.documentation.parser.docelement.DocElement
 import com.twosigma.documentation.search.PageSearchEntry
 import com.twosigma.documentation.search.SearchScore
+import com.twosigma.documentation.structure.PageMeta
 
 import java.nio.file.Path
 
@@ -18,6 +19,6 @@ class TestMarkupParser implements MarkupParser {
 
         def searchEntry = new PageSearchEntry('dummy page section title', SearchScore.STANDARD.text(markup))
 
-        return new MarkupParserResult(page, [], [searchEntry], [], properties)
+        return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta())
     }
 }

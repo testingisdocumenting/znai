@@ -4,15 +4,15 @@ import {Page} from './Page'
 
 export function pagesDemo(registry) {
     const defaultPage = defaultPageContent('page1')
-    const apiPage = {...defaultPageContent('page2'), ...{customProperties: {type: ['api']}}}
+    const apiPage = defaultPageContent('page2', 'api')
 
     registry
         .add('default page', <Page elementsLibrary={elementsLibrary}
                                    docMeta={docMeta()}
                                    {...defaultPage}/>)
         .add('api page', <Page elementsLibrary={elementsLibrary}
-                                   docMeta={docMeta()}
-                                   {...apiPage}/>)
+                               docMeta={docMeta()}
+                               {...apiPage}/>)
 }
 
 function docMeta() {
@@ -23,7 +23,7 @@ function docMeta() {
 }
 
 // page should render checks dirname and file name difference
-function defaultPageContent(fileName) {
+function defaultPageContent(fileName, pageType) {
     return {
         "type": "Page",
         "content": [
@@ -645,33 +645,40 @@ function defaultPageContent(fileName) {
             }
         ],
         "lastModifiedTime": 1516464705000,
-        "tocItem": {
-            "sectionTitle": "Introduction",
-            "pageTitle": "Rationale",
-            "fileName": fileName,
-            "dirName": "introduction",
-            "pageSectionIdTitles": [
-                {
-                    "title": "Stale Documentation",
-                    "id": "stale-documentation"
-                },
-                {
-                    "title": "Part Of Workflow",
-                    "id": "part-of-workflow"
-                },
-                {
-                    "title": "Maintenance",
-                    "id": "maintenance"
-                },
-                {
-                    "title": "Familiar Approach",
-                    "id": "familiar-approach"
-                },
-                {
-                    "title": "Presentations",
-                    "id": "presentations"
-                }
-            ]
-        }
+        "tocItem": tocItem(fileName, pageType)
+    }
+}
+
+function tocItem(fileName, pageType) {
+    return {
+        "sectionTitle": "Introduction",
+        "pageTitle": "Rationale",
+        "fileName": fileName,
+        "dirName": "introduction",
+        "pageMeta": pageType ? {
+            "type": [pageType]
+        } : {},
+        "pageSectionIdTitles": [
+            {
+                "title": "Stale Documentation",
+                "id": "stale-documentation"
+            },
+            {
+                "title": "Part Of Workflow",
+                "id": "part-of-workflow"
+            },
+            {
+                "title": "Maintenance",
+                "id": "maintenance"
+            },
+            {
+                "title": "Familiar Approach",
+                "id": "familiar-approach"
+            },
+            {
+                "title": "Presentations",
+                "id": "presentations"
+            }
+        ]
     }
 }

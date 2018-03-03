@@ -8,7 +8,7 @@ import com.twosigma.documentation.extensions.Plugins;
 import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
-import com.twosigma.documentation.parser.MarkdownParser;
+import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.search.LunrIndexer;
@@ -54,7 +54,7 @@ public class WebSite {
     private TableOfContents toc;
     private WebSiteDocStructure docStructure;
     private Footer footer;
-    private List<PageProps> allPagesProps;
+    private List<PageReactProps> allPagesProps;
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
 
@@ -159,7 +159,7 @@ public class WebSite {
     }
 
     public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
-        parseMarkup(tocItem);
+        parseMarkupAndUpdateTocItem(tocItem);
         Page page = pageByTocItem.get(tocItem);
 
         return generatePage(tocItem, page);
@@ -176,7 +176,7 @@ public class WebSite {
 
     public TableOfContents updateToc() {
         createTopLevelToc();
-        forEachTocItemWithoutPage(this::parseMarkup);
+        forEachTocItemWithoutPage(this::parseMarkupAndUpdateTocItem);
         updateTocWithPageSections();
         deployToc();
         return toc;
@@ -263,7 +263,7 @@ public class WebSite {
 
     private void parseMarkups() {
         reportPhase("parsing markup files");
-        toc.getTocItems().forEach(this::parseMarkup);
+        toc.getTocItems().forEach(this::parseMarkupAndUpdateTocItem);
     }
 
     private void parseFooter() {
@@ -282,7 +282,7 @@ public class WebSite {
         footer = new Footer(parserResult.getDocElement());
     }
 
-    private void parseMarkup(TocItem tocItem) {
+    private void parseMarkupAndUpdateTocItem(TocItem tocItem) {
         try {
             Path markupPath = markupPath(tocItem);
 
@@ -293,14 +293,14 @@ public class WebSite {
             updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
 
             FileTime lastModifiedTime = Files.getLastModifiedTime(markupPath);
-            Page page = new Page(parserResult.getDocElement(), lastModifiedTime, parserResult.getProperties());
+            Page page = new Page(parserResult.getDocElement(), lastModifiedTime, parserResult.getPageMeta());
             pageByTocItem.put(tocItem, page);
 
             tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
+            tocItem.setPageMeta(parserResult.getPageMeta());
 
-            List<String> title = parserResult.getProperties().get("title");
-            if (title != null) {
-                tocItem.setPageTitle(title.get(0));
+            if (parserResult.getPageMeta().hasValue("title")) {
+                tocItem.setPageTitle(parserResult.getPageMeta().getSingleValue("title"));
             }
 
             updateSearchEntries(tocItem, parserResult);
@@ -389,7 +389,7 @@ public class WebSite {
     }
 
     private void buildJsonOfAllPages() {
-        List<Map<String, ?>> listOfMaps = this.allPagesProps.stream().map(PageProps::toMap).collect(toList());
+        List<Map<String, ?>> listOfMaps = this.allPagesProps.stream().map(PageReactProps::toMap).collect(toList());
         String json = JsonUtils.serialize(listOfMaps);
 
         deployer.deploy("all-pages.json", json);
