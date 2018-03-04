@@ -121,7 +121,7 @@
 }
 
 .toc-item.selected {
-    border-left: 4px solid #009AA6;
+    border-left: 4px solid var(--mdoc-brand-primary-color);
     padding-left: 25px;
     transition: border-color 0.5s;
 }
@@ -191,7 +191,7 @@
 }
 
 .preview-icon {
-    color: #009AA6;
+    color: var(--mdoc-brand-primary-color);
     position: fixed;
     font-size: 20px;
     right: 80px;
@@ -219,13 +219,13 @@
 .page-navigation-button-and-text .glyphicon-chevron-right {
     margin-left: 10px;
     font-size: 24px;
-    color: #009AA6;
+    color: var(--mdoc-brand-primary-color);
 }
 
 .page-navigation-button-and-text .glyphicon-chevron-left {
     margin-right: 10px;
     font-size: 24px;
-    color: #009AA6;
+    color: var(--mdoc-brand-primary-color);
 }
 
 .page-gen-error {

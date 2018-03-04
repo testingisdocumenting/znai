@@ -96,7 +96,7 @@ pre code {
 code {
     border: none;
     background: none;
-    color: #a15b38;
+    color: var(--mdoc-function-color);
     padding: 0;
     font-size: var(--mdoc-inlined-code-text-size);
 }

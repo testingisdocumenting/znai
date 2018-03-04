@@ -7,7 +7,7 @@
 }
 
 .presentation-code-comment.divider {
-    border-top: 1px #009AA6 solid;
+    border-top: 1px var(--mdoc-brand-primary-color) solid;
 }
 
 .code-bullets {

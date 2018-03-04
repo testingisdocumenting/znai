@@ -7,7 +7,7 @@
 }
 
 .token.function {
-    color: #a15b38;
+    color: var(--mdoc-function-color);
 }
 
 .token.punctuation {

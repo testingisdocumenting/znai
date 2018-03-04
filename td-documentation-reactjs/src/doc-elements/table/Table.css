@@ -13,7 +13,7 @@
 .simple-table .middle-vertical-lines-only thead th {
     padding: 5px 20px;
 
-    border-right: solid 1px #009AA6;
+    border-right: solid 1px var(--mdoc-brand-primary-color);
     vertical-align: top;
 }
 
@@ -24,7 +24,7 @@
 .simple-table .middle-vertical-lines-only tbody td {
     padding: 5px 20px;
 
-    border-right: solid 1px #009AA6;
+    border-right: solid 1px var(--mdoc-brand-primary-color);
     vertical-align: top;
 }
 
@@ -32,7 +32,7 @@
     padding-top: 0;
     padding-bottom: 0;
 
-    border-right: solid 1px #009AA6;
+    border-right: solid 1px var(--mdoc-brand-primary-color);
     vertical-align: top;
 }
 

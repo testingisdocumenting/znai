@@ -1,5 +1,5 @@
 .code-snippet-read-more {
-    color: #009AA6;
+    color: var(--mdoc-brand-primary-color);
     margin-top: 5px;
     cursor: pointer;
 }

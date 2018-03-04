@@ -1,10 +1,7 @@
 :root {
     --mdoc-black: #333;
-    --mdoc-brand-primary-color-rgb-values: 0, 154, 166;
-    --mdoc-keyword-color: #000080;
+    --mdoc-brand-primary-color: #009AA6;
     --mdoc-rest-link-color: #7287b3;
-    --mdoc-property-color: #660e7a;
-    --mdoc-punctuation-color: #888;
     --mdoc-important-attention: #c52912;
     --mdoc-meta: #888;
 
@@ -13,6 +10,11 @@
     --mdoc-inlined-code-text-size: 14px;
     --mdoc-code-text-size: 13px;
     --mdoc-code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+    --mdoc-function-color: #a15b38;
+    --mdoc-keyword-color: #000080;
+    --mdoc-property-color: #660e7a;
+    --mdoc-punctuation-color: #888;
 }
 
 body {

@@ -6,23 +6,44 @@
     text-decoration: none;
 }
 
-.api-section > a > .title {
-    font-size: 16px;
+.api-section > a > .title-block {
+    display: flex;
+    align-items: center;
+
     font-family: var(--mdoc-code-font-family);
+    font-size: 18px;
 
-    padding: 5px 20px;
+    padding: 5px 0;
     margin-bottom: 8px;
-    border-left: 3px solid rgb(var(--mdoc-brand-primary-color-rgb-values));
-
     cursor: pointer;
 }
 
-.api-section > a > .title:hover {
-    color: white;
-    background-color: rgba(var(--mdoc-brand-primary-color-rgb-values), 0.5);
+.api-section > a > .title-block:hover {
+    background-color: #eee;
 }
 
-.api-section > a > .title.selected {
-    background-color: rgba(var(--mdoc-brand-primary-color-rgb-values), 0.8);
-    color: white;
+.api-section > a > .title-block.selected {
+    font-weight: bold;
+    border-bottom: 2px solid var(--mdoc-brand-primary-color);
+    margin-bottom: 15px;
+}
+
+.api-section > a > .title-block > .collapse-indicator {
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 15px;
+}
+
+.api-section > a > .title-block > .collapse-indicator.uncollapsed {
+}
+
+.api-section > a > .title-block > .collapse-indicator.collapsed {
+}
+
+.api-section > a > .title-block > .collapse-indicator.collapsed:after {
+    content: '▶';
+}
+
+.api-section > a > .title-block > .collapse-indicator.uncollapsed:after {
+    content: '▼';
 }

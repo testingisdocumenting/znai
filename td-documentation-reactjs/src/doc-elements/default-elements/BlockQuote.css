@@ -27,7 +27,7 @@ blockquote {
         max-width: 500px;
     }
     to {
-        border-left: 4px #009AA6 solid;
+        border-left: 4px var(--mdoc-brand-primary-color) solid;
         padding: 10px 20px 10px 20px;
     }
 }
