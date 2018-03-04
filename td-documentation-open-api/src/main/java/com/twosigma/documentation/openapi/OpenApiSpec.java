@@ -12,6 +12,7 @@ import static java.util.stream.Collectors.toList;
 
 public class OpenApiSpec {
     private static final String REF_KEY = "$ref";
+    private static final String ALL_OFF_KEY = "allOf";
 
     private MarkdownParser markdownParser;
     private Map<String, ?> spec;
@@ -87,13 +88,23 @@ public class OpenApiSpec {
         return parameters.stream().map(this::buildParameter).collect(toList());
     }
 
+    @SuppressWarnings("unchecked")
     private OpenApiParameter buildParameter(Map<String, ?> parameter) {
         return new OpenApiParameter(
                 Objects.toString(parameter.get("name")),
                 Objects.toString(parameter.get("in")),
                 Objects.toString(parameter.get("type")),
                 (Boolean) parameter.get("required"),
+                buildParameterSchema((Map<String, ?>) parameter.get("schema")),
                 parseMarkdown(parameter.get("description")));
+    }
+
+    private Map<String, ?> buildParameterSchema(Map<String, ?> schema) {
+        if (schema == null) {
+            return Collections.emptyMap();
+        }
+
+        return substituteSchema(schema);
     }
 
     @SuppressWarnings("unchecked")
@@ -116,14 +127,34 @@ public class OpenApiSpec {
     private Map<String, ?> substituteSchema(Map<String, ?> data) {
         Map<String, Object> substituted = new HashMap<>();
         data.forEach((k, v) -> {
-            if (k.equals(REF_KEY)) {
-                substituted.putAll((Map<? extends String, ?>) substituteValue(k, v));
-            } else {
-                substituted.put(k, substituteValue(k, v));
+            switch (k) {
+                case REF_KEY:
+                    substituted.putAll((Map<? extends String, ?>) substituteValue(k, v));
+                    break;
+                case ALL_OFF_KEY:
+                    substituted.putAll(combineAllOfProperties((List<Map<String, ?>>) v));
+                    break;
+                default:
+                    substituted.put(k, substituteValue(k, v));
+                    break;
             }
         });
 
         return substituted;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<String, ?> combineAllOfProperties(List<Map<String, ?>> parts) {
+        Map<String, Object> combined = new LinkedHashMap<>();
+        Map<String, Object> properties = new LinkedHashMap<>();
+        combined.put("properties", properties);
+
+        parts.forEach(p -> {
+            Map<String, ?> substituted = substituteSchema(p);
+            properties.putAll((Map<? extends String, ?>) substituted.get("properties"));
+        });
+
+        return combined;
     }
 
     @SuppressWarnings("unchecked")

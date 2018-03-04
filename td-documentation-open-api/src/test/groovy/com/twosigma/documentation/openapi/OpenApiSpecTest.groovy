@@ -26,6 +26,8 @@ class OpenApiSpecTest {
     @Test
     void "should extract all operations from a spec file"() {
         spec.operations.id.should == [
+                'findPets',
+                'addPet',
                 'findAllCustomerUsingGET',
                 'saveCustomerUsingPOST',
                 'findAllByOrderByLastNameCustomerUsingGET',
@@ -69,6 +71,15 @@ class OpenApiSpecTest {
     }
 
     @Test
+    void "should substitute schema ref with an actual schema for parameters"() {
+        def addPet = spec.findOperationById('addPet')
+
+        addPet.parameters.size().should == 1
+        actual(addPet.parameters[0].schema).should(equal([type: 'object', required: ['name'],
+                                                          properties: [name: [type: 'string'], tag: [type: 'string']]]))
+    }
+
+    @Test
     void "should substitute schema ref with an actual schema for responses"() {
         def operation = spec.findOperationById('findOneCustomerUsingGET')
         def okResponse = operation.responses.get(0)
@@ -77,5 +88,15 @@ class OpenApiSpecTest {
         actual(okResponse.code).should(equal('200'))
         actual(okResponse.schema.properties.firstName).should(equal([type: 'string']))
         actual(okResponse.schema.properties.lastName).should(equal([type: 'string']))
+    }
+
+    @Test
+    void "should replace allOf with the ready to use schema definition"() {
+        def addPet = spec.findOperationById('addPet')
+
+        actual(addPet.responses[0].schema).should(equal([type: 'object',
+                                                         properties: [name: [type: 'string'],
+                                                                      tag: [type: 'string'],
+                                                                      id:[format: 'int64', type: 'integer']]]))
     }
 }
