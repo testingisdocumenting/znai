@@ -159,6 +159,8 @@ public class WebSite {
     }
 
     public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
+        docStructure.removeGlobalAnchorsForPath(markupPath(tocItem));
+
         parseMarkupAndUpdateTocItem(tocItem);
         Page page = pageByTocItem.get(tocItem);
 

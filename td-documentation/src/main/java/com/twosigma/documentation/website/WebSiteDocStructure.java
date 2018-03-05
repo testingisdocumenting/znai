@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 
 import static com.twosigma.documentation.website.ProgressReporter.reportPhase;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 class WebSiteDocStructure implements DocStructure {
     private final DocMeta docMeta;
@@ -20,6 +21,12 @@ class WebSiteDocStructure implements DocStructure {
         this.toc = toc;
         this.linksToValidate = new ArrayList<>();
         this.globalAnchorPathById = new HashMap<>();
+    }
+
+    void removeGlobalAnchorsForPath(Path path) {
+        List<Map.Entry<String, Path>> entriesForPath =
+                globalAnchorPathById.entrySet().stream().filter(kv -> kv.getValue().equals(path)).collect(toList());
+        entriesForPath.forEach(kv -> globalAnchorPathById.remove(kv.getKey()));
     }
 
     public void validateCollectedLinks() {
