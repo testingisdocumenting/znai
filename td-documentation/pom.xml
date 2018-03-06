@@ -56,8 +56,8 @@
             <artifactId>td-documentation-open-api</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
 
+        <dependency>
             <groupId>com.twosigma.td</groupId>
             <artifactId>td-documentation-sphinx</artifactId>
             <version>${project.version}</version>
