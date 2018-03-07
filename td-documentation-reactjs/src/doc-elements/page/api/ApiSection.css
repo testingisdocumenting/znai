@@ -1,4 +1,10 @@
 .api-section {
+    --section-border-color: rgba(185, 185, 185, 0.7);
+    border-bottom: solid 1px var(--section-border-color);
+}
+
+.api-section:first-child {
+    border-top: solid 1px var(--section-border-color);
 }
 
 .api-section > a {
@@ -10,40 +16,44 @@
     display: flex;
     align-items: center;
 
-    font-family: var(--mdoc-code-font-family);
     font-size: 18px;
 
-    padding: 5px 0;
-    margin-bottom: 8px;
+    padding: 8px 0;
     cursor: pointer;
 }
 
 .api-section > a > .title-block:hover {
-    background-color: #eee;
 }
 
 .api-section > a > .title-block.selected {
-    font-weight: bold;
-    border-bottom: 2px solid var(--mdoc-brand-primary-color);
     margin-bottom: 15px;
 }
 
 .api-section > a > .title-block > .collapse-indicator {
-    font-size: 12px;
-    padding-left: 5px;
-    padding-right: 15px;
+    font-size: 22px;
+    margin-left: 5px;
+    margin-right: 15px;
+    color: var(--mdoc-brand-primary-color);
+
+    transition: 0.5s ease transform;
 }
 
 .api-section > a > .title-block > .collapse-indicator.uncollapsed {
+    transform: rotate(90deg);
 }
 
 .api-section > a > .title-block > .collapse-indicator.collapsed {
 }
 
 .api-section > a > .title-block > .collapse-indicator.collapsed:after {
-    content: '▶';
+    content: '›';
 }
 
 .api-section > a > .title-block > .collapse-indicator.uncollapsed:after {
-    content: '▼';
+    content: '›';
+}
+
+.api-section > .api-section-content {
+    transition: 0.5s ease max-height;
+    overflow-y: hidden;
 }
