@@ -45,7 +45,9 @@ public class Http {
     }
 
     public <E> E get(String url, HttpResponseValidatorWithReturn validator) {
-        return executeAndValidateHttpCall("GET", url, this::getToFullUrl, null, validator);
+        return executeAndValidateHttpCall("GET", url,
+                this::getToFullUrl,
+                HttpRequestHeader.EMPTY, null, validator);
     }
 
     public void get(String url, HttpResponseValidator validator) {
@@ -62,7 +64,8 @@ public class Http {
 
     public <E> E post(String url, HttpRequestBody requestBody, HttpResponseValidatorWithReturn validator) {
         return executeAndValidateHttpCall("POST", url,
-                fullUrl -> postToFullUrl(fullUrl, requestBody),
+                (fullUrl, fullHeader) -> postToFullUrl(fullUrl, fullHeader, requestBody),
+                HttpRequestHeader.EMPTY,
                 requestBody,
                 validator);
     }
@@ -77,7 +80,8 @@ public class Http {
 
     public <E> E put(String url, HttpRequestBody requestBody, HttpResponseValidatorWithReturn validator) {
         return executeAndValidateHttpCall("PUT", url,
-                fullUrl -> putToFullUrl(fullUrl, requestBody),
+                (fullUrl, fullHeader) -> putToFullUrl(fullUrl, fullHeader, requestBody),
+                HttpRequestHeader.EMPTY,
                 requestBody,
                 validator);
     }
@@ -87,7 +91,11 @@ public class Http {
     }
 
     public <E> E delete(String url, HttpResponseValidatorWithReturn validator) {
-        return executeAndValidateHttpCall("DELETE", url, this::deleteToFullUrl, null, validator);
+        return executeAndValidateHttpCall("DELETE", url,
+                this::deleteToFullUrl,
+                HttpRequestHeader.EMPTY,
+                null,
+                validator);
     }
 
     public void delete(String url, HttpResponseValidator validator) {
@@ -102,33 +110,35 @@ public class Http {
         return lastValidationResult.get();
     }
 
-    public HttpResponse getToFullUrl(String fullUrl) {
-        return requestWithoutBody("GET", fullUrl);
+    public HttpResponse getToFullUrl(String fullUrl, HttpRequestHeader requestHeader) {
+        return requestWithoutBody("GET", fullUrl, requestHeader);
     }
 
-    public HttpResponse deleteToFullUrl(String fullUrl) {
-        return requestWithoutBody("DELETE", fullUrl);
+    public HttpResponse deleteToFullUrl(String fullUrl, HttpRequestHeader requestHeader) {
+        return requestWithoutBody("DELETE", fullUrl, requestHeader);
     }
 
-    public HttpResponse postToFullUrl(String fullUrl, HttpRequestBody requestBody) {
-        return requestWithBody("POST", fullUrl, requestBody);
+    public HttpResponse postToFullUrl(String fullUrl, HttpRequestHeader requestHeader, HttpRequestBody requestBody) {
+        return requestWithBody("POST", fullUrl, requestHeader, requestBody);
     }
 
-    public HttpResponse putToFullUrl(String fullUrl, HttpRequestBody requestBody) {
-        return requestWithBody("PUT", fullUrl, requestBody);
+    public HttpResponse putToFullUrl(String fullUrl, HttpRequestHeader requestHeader, HttpRequestBody requestBody) {
+        return requestWithBody("PUT", fullUrl, requestHeader, requestBody);
     }
 
     @SuppressWarnings("unchecked")
     private <E> E executeAndValidateHttpCall(String requestMethod, String url, HttpCall httpCall,
+                                             HttpRequestHeader requestHeader,
                                              HttpRequestBody requestBody,
                                              HttpResponseValidatorWithReturn validator) {
         String fullUrl = HttpConfigurations.fullUrl(url);
+        HttpRequestHeader fullHeader = HttpConfigurations.fullHeader(requestHeader);
 
         Object[] result = new Object[1];
 
         Runnable httpCallRunnable = () -> {
             try {
-                HttpResponse response = httpCall.execute(fullUrl);
+                HttpResponse response = httpCall.execute(fullUrl, fullHeader);
                 result[0] = validateAndRecord(requestMethod, url, fullUrl, validator, requestBody, response);
             } catch (Exception e) {
                 throw new RuntimeException("error during http." + requestMethod.toLowerCase() + "(" + fullUrl + ")", e);
@@ -169,12 +179,14 @@ public class Http {
         new DataNodeAnsiPrinter().print(result.getBody());
     }
 
-    private HttpResponse requestWithoutBody(String method, String fullUrl) {
+    private HttpResponse requestWithoutBody(String method, String fullUrl, HttpRequestHeader requestHeader) {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(fullUrl).openConnection();
             connection.setRequestMethod(method);
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Accept", "application/json");
+            requestHeader.forEachProperty(connection::setRequestProperty);
+
             connection.connect();
 
             return extractHttpResponse(connection);
@@ -184,6 +196,7 @@ public class Http {
     }
 
     private HttpResponse requestWithBody(String method, String fullUrl,
+                                         HttpRequestHeader requestHeader,
                                          HttpRequestBody requestBody) {
         if (requestBody.isBinary()) {
             throw new UnsupportedOperationException("binary is not supported yet");
@@ -194,6 +207,7 @@ public class Http {
             connection.setRequestMethod(method);
             connection.setRequestProperty("Content-Type", requestBody.type());
             connection.setRequestProperty("Accept", requestBody.type());
+            requestHeader.forEachProperty(connection::setRequestProperty);
             connection.setDoOutput(true);
 
             IOUtils.write(requestBody.asString(), connection.getOutputStream(), UTF_8);
@@ -266,7 +280,7 @@ public class Http {
     }
 
     private interface HttpCall {
-        HttpResponse execute(String fullUrl);
+        HttpResponse execute(String fullUrl, HttpRequestHeader fullHeader);
     }
 
     private static Gson createGson() {

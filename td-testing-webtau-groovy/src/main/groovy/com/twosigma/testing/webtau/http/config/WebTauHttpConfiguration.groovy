@@ -1,5 +1,6 @@
 package com.twosigma.testing.webtau.http.config
 
+import com.twosigma.testing.http.HttpRequestHeader
 import com.twosigma.testing.http.HttpUrl
 import com.twosigma.testing.http.config.HttpConfiguration
 import com.twosigma.testing.webtau.cfg.WebTauConfig
@@ -17,5 +18,10 @@ class WebTauHttpConfiguration implements HttpConfiguration {
         }
 
         return HttpUrl.concat(cfg.baseUrl, url)
+    }
+
+    @Override
+    HttpRequestHeader fullHeader(HttpRequestHeader given) {
+        return given
     }
 }

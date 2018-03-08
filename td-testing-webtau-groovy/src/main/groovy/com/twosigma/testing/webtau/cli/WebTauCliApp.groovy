@@ -5,7 +5,10 @@ import com.twosigma.console.ConsoleOutputs
 import com.twosigma.console.ansi.AnsiConsoleOutput
 import com.twosigma.console.ansi.Color
 import com.twosigma.documentation.DocumentationArtifactsLocation
+import com.twosigma.testing.http.HttpRequestHeader
 import com.twosigma.testing.http.HttpValidationResult
+import com.twosigma.testing.http.config.HttpConfiguration
+import com.twosigma.testing.http.config.HttpConfigurations
 import com.twosigma.testing.reporter.ConsoleStepReporter
 import com.twosigma.testing.reporter.IntegrationTestsMessageBuilder
 import com.twosigma.testing.reporter.StepReporter
@@ -61,6 +64,8 @@ class WebTauCliApp implements StandaloneTestListener {
 
         config.print()
 
+        initHttpConfigurationFromConfig()
+
         testFiles().forEach {
             runner.process(it, this)
         }
@@ -71,6 +76,25 @@ class WebTauCliApp implements StandaloneTestListener {
 
     private List<Path> testFiles() {
         return config.getTestFiles().collect { Paths.get(it) }
+    }
+
+    void initHttpConfigurationFromConfig() {
+        def headersProvider = config.httpHeadersProvider()
+        if (! headersProvider) {
+            return
+        }
+
+        HttpConfigurations.add(new HttpConfiguration() {
+            @Override
+            String fullUrl(String url) {
+                return url
+            }
+
+            @Override
+            HttpRequestHeader fullHeader(HttpRequestHeader given) {
+                return headersProvider.call(given) as HttpRequestHeader
+            }
+        })
     }
 
     static void main(String[] args) {

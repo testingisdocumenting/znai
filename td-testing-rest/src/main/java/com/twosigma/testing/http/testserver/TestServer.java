@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.twosigma.testing.http.HttpRequestHeader;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
@@ -82,6 +83,11 @@ public class TestServer implements HttpConfiguration {
         }
 
         return HttpUrl.concat("http://localhost:" + port, url);
+    }
+
+    @Override
+    public HttpRequestHeader fullHeader(HttpRequestHeader given) {
+        return given;
     }
 
     private class RequestHandler extends AbstractHandler {

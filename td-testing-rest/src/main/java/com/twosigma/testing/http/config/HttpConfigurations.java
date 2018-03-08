@@ -2,7 +2,7 @@ package com.twosigma.testing.http.config;
 
 import java.util.List;
 
-import com.twosigma.testing.http.testserver.TestServer;
+import com.twosigma.testing.http.HttpRequestHeader;
 import com.twosigma.utils.ServiceUtils;
 
 /**
@@ -15,7 +15,7 @@ public class HttpConfigurations {
         configurations.add(configuration);
     }
 
-    public static void remove(final HttpConfiguration configuration) {
+    public static void remove(HttpConfiguration configuration) {
         configurations.remove(configuration);
     }
 
@@ -26,5 +26,14 @@ public class HttpConfigurations {
         }
 
         return finalUrl;
+    }
+
+    public static HttpRequestHeader fullHeader(HttpRequestHeader given) {
+        HttpRequestHeader finalHeaders = given;
+        for (HttpConfiguration configuration : configurations) {
+            finalHeaders = configuration.fullHeader(finalHeaders);
+        }
+
+        return finalHeaders;
     }
 }

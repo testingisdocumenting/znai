@@ -44,6 +44,10 @@ class WebTauTestCliConfig {
         cfg.print()
     }
 
+    Closure httpHeadersProvider() {
+        return configObject.get("httpHeadersProvider")
+    }
+
     private void parseArgs(String[] args) {
         Options options = createOptions()
         commandLine = createCommandLine(args, options)
@@ -63,12 +67,12 @@ class WebTauTestCliConfig {
     }
 
     private void parseConfig() {
-        ConfigSlurper configSlurper = new ConfigSlurper(cfg.env)
         if (! Files.exists(configFile)) {
             ConsoleOutputs.out("skipping config file as it is not found: ", Color.CYAN, configFile)
             return
         }
 
+        ConfigSlurper configSlurper = new ConfigSlurper(cfg.env)
         configObject = configSlurper.parse(FileUtils.fileTextContent(configFile))
     }
 
