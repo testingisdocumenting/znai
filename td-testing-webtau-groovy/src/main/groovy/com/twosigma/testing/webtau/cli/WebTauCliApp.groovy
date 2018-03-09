@@ -92,7 +92,12 @@ class WebTauCliApp implements StandaloneTestListener {
 
             @Override
             HttpRequestHeader fullHeader(HttpRequestHeader given) {
-                return headersProvider.call(given) as HttpRequestHeader
+                try {
+                    HttpConfigurations.disable()
+                    return headersProvider.call(given) as HttpRequestHeader
+                } finally {
+                    HttpConfigurations.enable()
+                }
             }
         })
     }
