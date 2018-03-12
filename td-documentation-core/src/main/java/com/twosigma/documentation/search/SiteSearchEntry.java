@@ -1,12 +1,11 @@
 package com.twosigma.documentation.search;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
  * global search entry
  * @author mykola
  */
-@XmlRootElement
 public class SiteSearchEntry {
     private String url;
     private String fullTitle;

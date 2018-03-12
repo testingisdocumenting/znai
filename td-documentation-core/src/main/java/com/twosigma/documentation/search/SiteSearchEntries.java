@@ -1,29 +1,29 @@
 package com.twosigma.documentation.search;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.io.StringWriter;
-import java.io.Writer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author mykola
  */
-@XmlRootElement(name = "mdoc")
+@JacksonXmlRootElement(localName = "mdoc")
 public class SiteSearchEntries {
-    private static final JAXBContext jaxbContext = createJaxbContext();
-
     private List<SiteSearchEntry> entries;
 
     public SiteSearchEntries() {
         entries = new ArrayList<>();
     }
 
-    @XmlElement(name = "entry")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "entry")
     public List<SiteSearchEntry> getEntries() {
         return entries;
     }
@@ -33,23 +33,12 @@ public class SiteSearchEntries {
     }
 
     public String toXml() {
+        ObjectMapper objectMapper = new XmlMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
         try {
-            Marshaller marshaller = jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            Writer writer = new StringWriter();
-            marshaller.marshal(this, writer);
-
-            return writer.toString();
-        } catch (JAXBException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static JAXBContext createJaxbContext() {
-        try {
-            return JAXBContext.newInstance(SiteSearchEntries.class);
-        } catch (JAXBException e) {
+            return objectMapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
