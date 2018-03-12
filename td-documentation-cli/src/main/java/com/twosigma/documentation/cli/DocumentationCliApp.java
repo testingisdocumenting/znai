@@ -60,8 +60,6 @@ public class DocumentationCliApp {
 
         if (config.isPreview()) {
             preview();
-        } else if (config.isUpload()) {
-            upload();
         } else if (config.isServe()) {
             serve();
         }

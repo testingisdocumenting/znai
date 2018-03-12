@@ -13,12 +13,16 @@ and go through a 60 seconds cheatsheet or 10 minutes tutorial.
 
 # Installation
 
-[Optin](https://optin) to add the command line to your hosts.
-In your terminal execute `mdoc --help` to make sure tool is available.
+[Optin](https://cmdb.twosigma.com/entities/mdoc-opt-in) to add the command line to your hosts.
+Check tool presence by running 
+
+:include-cli-command: mdoc --help
 
 # Scaffolding
 
-Execute `mdoc --new` to create a minimum set of files for your documentation.
+To create a minimum set of files for your documentation execute 
+
+:include-cli-command: mdoc --new
 
     mdoc
        |--chapter-one
@@ -33,9 +37,29 @@ Execute `mdoc --new` to create a minimum set of files for your documentation.
        
 # Preview 
 
-Navigate to the newly created directory. Execute `mdoc --preview`. 
-Open prompted url inside your browser.
+Navigate to the newly created directory. Start preview mode by running
+
+:include-cli-command: mdoc --preview 
+
+Follow printed url.  
   
 Blue *eye* icon in the top right corner indicates that preview is on.
 Open any text editor, modify and save `page-one.md` file.
 Changes will be reflected in the browser. 
+
+# Deploy
+
+1. Build static files
+
+    :include-cli-command: mdoc --doc-id <doc-id> --source <mdoc-dir> --deploy <dest-dir> {paramsToHighlight: "dest-dir"}
+    
+2. Make static files globally available
+
+    :include-cli-command: mdoc-upload --mdoc-root-path <dest-dir> {paramsToHighlight: "dest-dir"}
+
+
+Your documentation will be available shorty at `http://mdoc.app.twosigma.com/<doc-id>`
+
+Warning: check that doc-id is not taken before deploying your documentation. There is no ownership check at the moment
+and one can override existing documentation. 
+ 

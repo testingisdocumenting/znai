@@ -21,7 +21,6 @@ public class DocumentationCliConfig {
     private Path sourceRoot;
     private Integer port;
     private boolean isPreview;
-    private boolean isUpload;
     private boolean isServe;
     private boolean isNew;
 
@@ -41,7 +40,6 @@ public class DocumentationCliConfig {
 
         port = commandLine.hasOption("port") ? Integer.valueOf( commandLine.getOptionValue("port")) : 3333;
         isPreview = commandLine.hasOption("preview");
-        isUpload = commandLine.hasOption("upload");
         isServe = commandLine.hasOption("serve");
         isNew = commandLine.hasOption("new");
 
@@ -65,10 +63,6 @@ public class DocumentationCliConfig {
             return "preview";
         }
 
-        if (isUpload()) {
-            return "upload";
-        }
-
         if (isServe()) {
             return "serve";
         }
@@ -84,16 +78,12 @@ public class DocumentationCliConfig {
         return isPreview;
     }
 
-    public boolean isUpload() {
-        return isUpload;
-    }
-
     public boolean isServe() {
         return isServe;
     }
 
     private void validateMode() {
-        long activeModesCount = Stream.of(isPreview, isServe, isUpload).filter(m -> m).count();
+        long activeModesCount = Stream.of(isPreview, isServe).filter(m -> m).count();
         if (activeModesCount > 1) {
             throw new RuntimeException("only one mode can be active");
         }
@@ -174,7 +164,6 @@ public class DocumentationCliConfig {
         options.addOption(null, "source", true, "documentation source dir");
         options.addOption(null, "deploy", true, "documentation deploy root dir");
         options.addOption(null, "preview", false, "preview mode");
-        options.addOption(null, "upload", false, "upload mode");
         options.addOption(null, "serve", false, "server mode");
         options.addOption(null, "new", false, "create new documentation with minimal necessary files");
         options.addOption(null, "doc-id", true, "documentation id");
