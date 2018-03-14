@@ -25,6 +25,7 @@
         <module>td-testing-webtau-testapp</module>
         <module>td-testing-tcli</module>
         <module>td-webtau-docs</module>
+        <module>td-webtau-dist</module>
         <module>td-ddjt-docs</module>
         <module>td-diagrams</module>
         <module>td-reactjs-common</module>
