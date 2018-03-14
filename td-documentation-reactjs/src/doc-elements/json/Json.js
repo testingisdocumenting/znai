@@ -1,15 +1,25 @@
 import React from 'react'
-import JsonValue from './JsonValue'
+
+import SimpleCodeToken from '../code-snippets/SimpleCodeToken'
+import LineOfTokens from '../code-snippets/LineOfTokens'
+
+import {printJson} from './jsonPrinter'
+
+import './Json.css'
 
 const Json = ({data, paths}) => {
-    const highlightedPathsDict = {}
-    if (paths) {
-        paths.forEach(p => { highlightedPathsDict[p] = true })
-    }
+    const lines = printJson('root', data, paths)
 
-    return <div className="json start content-block">
-        <JsonValue path={'root'} data={data} highlightedPaths={highlightedPathsDict}/>
-    </div>
+    return (
+        <div className="json content-block">
+            {lines.map((tokens, idx) => <LineOfTokens key={idx}
+                                                      tokens={tokens}
+                                                      isHighlighted={false}
+                                                      isPresentation={false}
+                                                      TokenComponent={SimpleCodeToken}/>)
+            }
+        </div>
+    )
 }
 
 export default Json

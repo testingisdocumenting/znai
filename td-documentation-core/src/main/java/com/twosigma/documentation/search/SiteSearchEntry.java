@@ -1,7 +1,5 @@
 package com.twosigma.documentation.search;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-
 /**
  * global search entry
  * @author mykola

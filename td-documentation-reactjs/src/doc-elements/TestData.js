@@ -69,8 +69,8 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Enum Entries",
-                    "id": "enum-entries",
+                    "title": "Paths",
+                    "id": "paths",
                     "type": "Section",
                     "content": [
                         {
@@ -81,190 +81,106 @@ const TestData = {
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "code": "include-java-enum-entries",
+                                    "code": "include-json",
                                     "type": "InlinedCode"
                                 },
                                 {
-                                    "text": " to enumerate entries of a enum from a file",
+                                    "text": " plugin to bring attention to a certain please in a json file.",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "lang": "java",
-                            "maxLineLength": 31,
-                            "tokens": [
-                                {
-                                    "type": "keyword",
-                                    "content": "package"
-                                },
-                                " my",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                "company",
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n\n",
-                                {
-                                    "type": "keyword",
-                                    "content": "import"
-                                },
-                                " java",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                "util",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                "List",
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n\n",
-                                {
-                                    "type": "keyword",
-                                    "content": "enum"
-                                },
-                                " MyEnum ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n    ",
-                                {
-                                    "type": "comment",
-                                    "content": "/**\n     * description of entry one\n     */"
-                                },
-                                "\n    ENTRY_ONE_WITH_A_LONG_NAME",
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                "\n\n    ",
-                                {
-                                    "type": "comment",
-                                    "content": "/**\n     * description of entry two\n     */"
-                                },
-                                "\n    ENTRY_TWO\n",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                }
-                            ],
-                            "type": "Snippet"
-                        },
-                        {
                             "lang": "",
-                            "maxLineLength": 39,
+                            "maxLineLength": 69,
                             "tokens": [
                                 {
                                     "type": "text",
-                                    "content": ":include-java-enum-entries: MyEnum.java\n"
+                                    "content": ":include-json: sample.json {paths: \"root.key2.key22,body.key3.key31\"}\n"
                                 }
                             ],
                             "lineNumber": "",
                             "type": "Snippet"
                         },
                         {
-                            "columns": [
+                            "type": "Paragraph",
+                            "content": [
                                 {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "code": "ENTRY_ONE_WITH_A_LONG_NAME",
-                                                    "type": "InlinedCode"
-                                                }
-                                            ]
-                                        }
-                                    ]
+                                    "text": "Comma separated paths specified inside ",
+                                    "type": "SimpleText"
                                 },
                                 {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "description of entry one",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
+                                    "code": "paths",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " will be highlighted.",
+                                    "type": "SimpleText"
                                 }
-                            ],
-                            "config": {
-                                "left": {
-                                    "portion": 3.0,
-                                    "align": "right"
-                                },
-                                "border": true
-                            },
-                            "type": "Columns"
+                            ]
                         },
                         {
-                            "columns": [
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "code": "ENTRY_TWO",
-                                                    "type": "InlinedCode"
-                                                }
-                                            ]
-                                        }
-                                    ]
+                            "data": {
+                                "key1": "value1",
+                                "key2": {
+                                    "key21": "value21",
+                                    "key22": "value22",
+                                    "key23": {
+                                        "key231": "value231"
+                                    }
                                 },
-                                {
-                                    "content": [
-                                        {
-                                            "type": "Paragraph",
-                                            "content": [
-                                                {
-                                                    "text": "description of entry two",
-                                                    "type": "SimpleText"
-                                                }
-                                            ]
-                                        }
-                                    ]
+                                "key3": {
+                                    "key31": "value31",
+                                    "key32": "value32"
                                 }
-                            ],
-                            "config": {
-                                "left": {
-                                    "portion": 3.0,
-                                    "align": "right"
-                                },
-                                "border": true
                             },
-                            "type": "Columns"
+                            "paths": [
+                                "root.key2.key22",
+                                "body.key3.key31"
+                            ],
+                            "type": "Json"
+                        }
+                    ]
+                },
+                {
+                    "title": "Test Results",
+                    "id": "test-results",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "Consider leveraging testing frameworks to extract json samples from you end points.",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "SoftLineBreak"
+                                },
+                                {
+                                    "text": "Information about what assertions were made can be used to highlight points of interest.",
+                                    "type": "SimpleText"
+                                }
+                            ]
                         }
                     ]
                 }
             ],
-            "lastModifiedTime": 1509406671000,
+            "lastModifiedTime": 1516464705000,
             "tocItem": {
                 "sectionTitle": "Snippets",
-                "pageTitle": "Java",
-                "fileName": "java",
+                "pageTitle": "Json",
+                "pageMeta": {},
+                "fileName": "json",
                 "dirName": "snippets",
-                "pageMeta": {
-                    "type": ["api"]
-                },
                 "pageSectionIdTitles": [
                     {
-                        "title": "Enum Entries",
-                        "id": "enum-entries"
+                        "title": "Paths",
+                        "id": "paths"
+                    },
+                    {
+                        "title": "Test Results",
+                        "id": "test-results"
                     }
                 ]
             }
@@ -349,7 +265,7 @@ const TestData = {
                             "type": "Emphasis",
                             "content": [
                                 {
-                                    "text": "Copyright @ 2017 Two Sigma",
+                                    "text": "Copyright @ 2018 Two Sigma",
                                     "type": "SimpleText"
                                 }
                             ]

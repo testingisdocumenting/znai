@@ -3,8 +3,8 @@ import React from 'react'
 import 'prismjs/themes/prism-coy.css'
 
 const SimpleCodeToken = ({token}) => {
-    if (typeof token === 'string') {
-        return <span>{token}</span>
+    if (isSimpleValue(token)) {
+        return <React.Fragment>{token}</React.Fragment>
     }
 
     const className = (token.type === 'text') ? '' : 'token ' + token.type
@@ -16,7 +16,7 @@ const SimpleCodeToken = ({token}) => {
 }
 
 function renderData(token) {
-    if (typeof token === 'string') {
+    if (isSimpleValue(token)) {
         return token
     }
 
@@ -30,6 +30,10 @@ function renderData(token) {
 
     return JSON.stringify(token)
 
+}
+
+function isSimpleValue(token) {
+    return typeof token === 'string' || typeof token === 'number'
 }
 
 export default SimpleCodeToken

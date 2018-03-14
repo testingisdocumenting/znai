@@ -42,3 +42,10 @@
     color: #008000;
     font-weight: bold;
 }
+
+.token.highlighted {
+    padding: 2px;
+    border-radius: 5px;
+    background-color: rgba(255, 176, 111, 0.3);
+    color: #444;
+}
