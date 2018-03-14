@@ -32,8 +32,21 @@ public class ReactJsBundle {
         reactDom = WebResource.fromResource("static/react-dom.min.js");
         reactDomServer = WebResource.fromResource("react-dom-server.min.js");
 
-        fonts = Stream.of("eot", "svg", "ttf", "woff", "woff2").map(ext -> "static/fonts/glyphicons-halflings-regular." + ext).
-                map(WebResource::fromResource).collect(toList());
+        Stream<WebResource> glyphIcons = Stream.of("eot", "svg", "ttf", "woff", "woff2")
+                .map(ext -> "static/fonts/glyphicons-halflings-regular." + ext)
+                .map(WebResource::fromResource);
+
+        Stream<WebResource> lato = Stream.of("Lato-Black",
+                "Lato-Bold",
+                "Lato-BoldItalic",
+                "Lato-Italic",
+                "Lato-Light",
+                "Lato-LightItalic",
+                "Lato-Regular")
+                .map(fontName -> "static/fonts/" + fontName + ".woff2")
+                .map(WebResource::fromResource);
+
+        fonts = Stream.concat(glyphIcons, lato).collect(toList());
     }
 
     public Stream<WebResource> clientJavaScripts() {
