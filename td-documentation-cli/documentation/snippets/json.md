@@ -1,6 +1,6 @@
 # Paths
 
-Use `include-json` plugin to bring attention to a certain please in a json file. 
+Use `include-json` plugin to bring attention to a certain place in a json file. 
 
     :include-json: sample.json {paths: "root.key2.key22,root.key3.key31"}
 

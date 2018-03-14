@@ -63,6 +63,6 @@ content of sub sub heading
 # Meta
 
 Each documentation must have `meta.json` file in its root.
-Json contains documentation display name and type.
+Json contains documentation display name, type and optional `View On` information.
 
 :include-file: meta.json
