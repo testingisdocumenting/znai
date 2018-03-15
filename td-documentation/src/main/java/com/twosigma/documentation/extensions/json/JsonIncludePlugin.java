@@ -1,5 +1,6 @@
 package com.twosigma.documentation.extensions.json;
 
+import com.jayway.jsonpath.JsonPath;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.PluginResult;
@@ -7,7 +8,6 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.utils.CollectionUtils;
-import com.twosigma.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -35,7 +35,10 @@ public class JsonIncludePlugin implements IncludePlugin {
         fileName = pluginParams.getFreeParam();
         String json = componentsRegistry.resourceResolver().textContent(fileName);
 
-        Map<String, Object> props = CollectionUtils.createMap("data", JsonUtils.deserialize(json),
+        String jsonPath = pluginParams.getOpts().get("include", "$");
+        Object content = JsonPath.read(json, jsonPath);
+
+        Map<String, Object> props = CollectionUtils.createMap("data", content,
                 "paths", highlightedPaths(pluginParams.getOpts().get("paths")));
 
         return PluginResult.docElement("Json", props);
