@@ -1,6 +1,5 @@
 package com.twosigma.testing.standalone
 
-import com.twosigma.utils.ResourceUtils
 import org.junit.Test
 
 import java.nio.file.Paths
@@ -38,7 +37,8 @@ class StandaloneTestRunnerTest {
     }
 
     private static StandaloneTestRunner createRunner() {
-        def runner = new StandaloneTestRunner([], Paths.get("test-scripts"))
+        def workingDir = Paths.get("test-scripts")
+        def runner = new StandaloneTestRunner(GroovyStandaloneEngine.createWithDelegatingEnabled(workingDir, []), workingDir)
         runner.process(Paths.get("StandaloneTest.groovy"), this)
 
         return runner

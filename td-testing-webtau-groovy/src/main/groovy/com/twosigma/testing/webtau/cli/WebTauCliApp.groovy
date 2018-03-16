@@ -13,6 +13,7 @@ import com.twosigma.testing.reporter.ConsoleStepReporter
 import com.twosigma.testing.reporter.IntegrationTestsMessageBuilder
 import com.twosigma.testing.reporter.StepReporter
 import com.twosigma.testing.reporter.StepReporters
+import com.twosigma.testing.standalone.GroovyStandaloneEngine
 import com.twosigma.testing.standalone.StandaloneTest
 import com.twosigma.testing.standalone.StandaloneTestListener
 import com.twosigma.testing.standalone.StandaloneTestListeners
@@ -34,13 +35,15 @@ import java.nio.file.Paths
  * @author mykola
  */
 class WebTauCliApp implements StandaloneTestListener {
+    private static def staticImports = ["com.twosigma.testing.webtau.WebTauDsl"]
+
     private static WebTauConfig cfg = WebTauConfig.INSTANCE
     private static StandardConsoleTestListener consoleTestReporter = new StandardConsoleTestListener()
     private static StepReporter stepReporter = new ConsoleStepReporter(IntegrationTestsMessageBuilder.converter)
     private static ScreenshotStepReporter screenshotStepReporter = new ScreenshotStepReporter()
     private static ConsoleOutput consoleOutput = new AnsiConsoleOutput()
 
-    private WebTauTestCliConfig config
+    private WebTauTestCliConfig cliConfig
     private StandaloneTestRunner runner
 
     private List<StandaloneTest> tests = []
@@ -48,10 +51,14 @@ class WebTauCliApp implements StandaloneTestListener {
     WebTauCliApp(String[] args) {
         ConsoleOutputs.add(consoleOutput)
 
-        config = new WebTauTestCliConfig(args)
+        cliConfig = new WebTauTestCliConfig(args)
+
+        cliConfig.parseConfig(GroovyStandaloneEngine.createWithoutDelegating(cfg.workingDir, staticImports))
         DocumentationArtifactsLocation.setRoot(cfg.getDocArtifactsPath())
 
-        runner = new StandaloneTestRunner(["com.twosigma.testing.webtau.WebTauDsl"], cfg.getWorkingDir())
+        runner = new StandaloneTestRunner(
+                GroovyStandaloneEngine.createWithDelegatingEnabled(cfg.workingDir, staticImports),
+                cfg.getWorkingDir())
 
         StandaloneTestListeners.add(consoleTestReporter)
         StandaloneTestListeners.add(this)
@@ -62,7 +69,7 @@ class WebTauCliApp implements StandaloneTestListener {
         StepReporters.add(stepReporter)
         StepReporters.add(screenshotStepReporter)
 
-        config.print()
+        cliConfig.print()
 
         initHttpConfigurationFromConfig()
 
@@ -75,11 +82,11 @@ class WebTauCliApp implements StandaloneTestListener {
     }
 
     private List<Path> testFiles() {
-        return config.getTestFiles().collect { Paths.get(it) }
+        return cliConfig.getTestFiles().collect { Paths.get(it) }
     }
 
     void initHttpConfigurationFromConfig() {
-        def headersProvider = config.httpHeadersProvider()
+        def headersProvider = cliConfig.httpHeaderProvider()
         if (! headersProvider) {
             return
         }

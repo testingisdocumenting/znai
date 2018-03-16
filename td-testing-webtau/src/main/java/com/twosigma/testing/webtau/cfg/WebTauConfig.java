@@ -86,6 +86,10 @@ public class WebTauConfig {
         return env;
     }
 
+    public ConfigValue getWorkingDirConfigValue() {
+        return workingDir;
+    }
+
     public ConfigValue getBaseUrlConfigValue() {
         return url;
     }

@@ -21,19 +21,12 @@ class WebTauTestCliConfig {
 
     private List<String> testFiles
     private String env
-    private Path configFile
+    private Path configPath
     private CommandLine commandLine
     private ConfigObject configObject
 
     WebTauTestCliConfig(String... args) {
         parseArgs(args)
-        parseConfig()
-
-        if (configObject) {
-            cfg.acceptConfigValues(CFG_SOURCE, configObject.flatten())
-        }
-
-        cfg.acceptConfigValues(CLI_SOURCE, commandLineArgsAsMap())
     }
 
     List<String> getTestFiles() {
@@ -44,8 +37,26 @@ class WebTauTestCliConfig {
         cfg.print()
     }
 
-    Closure httpHeadersProvider() {
-        return configObject.get("httpHeadersProvider")
+    Closure httpHeaderProvider() {
+        return configObject.get("httpHeaderProvider")
+    }
+
+    void parseConfig(GroovyScriptEngine groovy) {
+        if (! Files.exists(configPath)) {
+            ConsoleOutputs.out("skipping config file as it is not found: ", Color.CYAN, configPath)
+            return
+        }
+
+        ConfigSlurper configSlurper = new ConfigSlurper(cfg.env)
+        def configScript = groovy.createScript(configPath.toAbsolutePath().toString(), new ConfigBinding())
+
+        configObject = configSlurper.parse(configScript)
+
+        if (configObject) {
+            cfg.acceptConfigValues(CFG_SOURCE, configObject.flatten())
+        }
+
+        cfg.acceptConfigValues(CLI_SOURCE, commandLineArgsAsMap())
     }
 
     private void parseArgs(String[] args) {
@@ -60,20 +71,11 @@ class WebTauTestCliConfig {
 
         testFiles = new ArrayList<>(commandLine.argList)
         Path workingDir = Paths.get(cliValue(cfg.getWorkingDirConfigName(), ""))
-        configFile = workingDir.resolve(cliValue("config", "test.cfg"))
+        configPath = workingDir.resolve(cliValue("config", "test.cfg"))
 
         def envCliValue = cliValue(cfg.envConfigValue.key, "local")
-        cfg.acceptConfigValues(CLI_SOURCE, [(cfg.envConfigValue.key): envCliValue])
-    }
-
-    private void parseConfig() {
-        if (! Files.exists(configFile)) {
-            ConsoleOutputs.out("skipping config file as it is not found: ", Color.CYAN, configFile)
-            return
-        }
-
-        ConfigSlurper configSlurper = new ConfigSlurper(cfg.env)
-        configObject = configSlurper.parse(FileUtils.fileTextContent(configFile))
+        cfg.acceptConfigValues(CLI_SOURCE, [(cfg.envConfigValue.key): envCliValue,
+                                            (cfg.workingDirConfigValue.key): workingDir])
     }
 
     private static CommandLine createCommandLine(String[] args, Options options) {

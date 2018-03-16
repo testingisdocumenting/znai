@@ -9,7 +9,6 @@ import java.nio.file.Path
  * @author mykola
  */
 class StandaloneTestRunner {
-    private List<String> staticImports
     private List<StandaloneTest> tests
     private List<StandaloneTest> exclusiveTests
 
@@ -17,12 +16,11 @@ class StandaloneTestRunner {
     private Path currentTestPath
     private GroovyScriptEngine groovy
 
-    StandaloneTestRunner(List<String> staticImports, Path workingDir) {
-        this.staticImports = staticImports
+    StandaloneTestRunner(GroovyScriptEngine groovy, Path workingDir) {
         this.workingDir = workingDir.toAbsolutePath()
         this.tests = []
         this.exclusiveTests = []
-        this.groovy = prepareGroovyEngine()
+        this.groovy = groovy
     }
 
     void process(Path scriptPath, delegate) {
@@ -81,19 +79,5 @@ class StandaloneTestRunner {
         }
 
         StandaloneTestListeners.afterAllTests()
-    }
-
-    private GroovyScriptEngine prepareGroovyEngine() {
-        def imports = new ImportCustomizer()
-        def fullListOfStatics = staticImports + [StandaloneTestRunner.canonicalName]
-        fullListOfStatics.forEach { imports.addStaticStars(it) }
-
-        def compilerCfg = new CompilerConfiguration()
-        compilerCfg.addCompilationCustomizers(imports)
-        compilerCfg.scriptBaseClass = DelegatingScript.class.name
-
-        def engine = new GroovyScriptEngine(workingDir.toString())
-        engine.config = compilerCfg
-        return engine
     }
 }
