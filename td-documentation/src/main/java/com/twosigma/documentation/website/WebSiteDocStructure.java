@@ -80,7 +80,7 @@ class WebSiteDocStructure implements DocStructure {
         Path existingPath = globalAnchorPathById.get(anchorId);
 
         if (existingPath != null) {
-            throw new RuntimeException("global anchor <" + anchorId + "> specified in " + sourcePath +
+            ProgressReporter.reportWarning("global anchor <" + anchorId + "> specified in " + sourcePath +
                     " is already registered in " + existingPath);
         }
 

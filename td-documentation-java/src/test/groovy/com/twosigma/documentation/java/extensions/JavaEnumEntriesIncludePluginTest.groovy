@@ -34,6 +34,6 @@ class JavaEnumEntriesIncludePluginTest {
     }
 
     private static List<DocElement> process(String fileName, String params) {
-        return PluginsTestUtils.process(":include-java-enum-entries: $fileName $params").docElements
+        return PluginsTestUtils.process(":include-java-enum-entries: $fileName $params")
     }
 }

@@ -15,8 +15,13 @@ import java.util.Map;
  * @author mykola
  */
 public interface ParserHandler {
+    /**
+     * top level section start handler. Should be responsible for handle of closing current section (if required)
+     * @param title title of a new section
+     */
     void onSectionStart(String title);
     void onSectionEnd();
+
     void onSubHeadingStart(int level);
     void onSubHeadingEnd(int level);
     void onHardLineBreak();

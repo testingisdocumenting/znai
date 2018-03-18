@@ -7,4 +7,8 @@ class ProgressReporter {
     static void reportPhase(String phase) {
         ConsoleOutputs.out(Color.BLUE, phase);
     }
+
+    static void reportWarning(String warning) {
+        ConsoleOutputs.out(Color.YELLOW, warning);
+    }
 }

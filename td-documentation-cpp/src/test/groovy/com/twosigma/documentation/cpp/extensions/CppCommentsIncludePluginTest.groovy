@@ -22,6 +22,6 @@ class CppCommentsIncludePluginTest {
 
     private static def process(String fileName, String entry) {
         def result = PluginsTestUtils.process(":include-cpp-comments: $fileName {entry: \"$entry\"}")
-        return result.docElements[0].getProp("markup")
+        return result[0].getProp("markup")
     }
 }

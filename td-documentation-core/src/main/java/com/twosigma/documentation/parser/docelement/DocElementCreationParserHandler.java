@@ -40,6 +40,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     private String currentSectionTitle;
 
+    private boolean isSectionStarted;
+
     public DocElementCreationParserHandler(ComponentsRegistry componentsRegistry, Path path) {
         this.componentsRegistry = componentsRegistry;
         this.path = path;
@@ -53,6 +55,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
         this.elementsStack.add(docElement);
 
         this.currentSectionTitle = "";
+        this.isSectionStarted = false;
     }
 
     public DocElement getDocElement() {
@@ -70,12 +73,19 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onSectionStart(String title) {
         currentSectionTitle = title;
+
+        if (isSectionStarted) {
+            onSectionEnd();
+        }
+
         start(DocElementType.SECTION, "title", title, "id", new PageSectionIdTitle(title).getId());
+        isSectionStarted = true;
     }
 
     @Override
     public void onSectionEnd() {
         currentSectionTitle = "";
+        isSectionStarted = false;
 
         // on section end is called for plugin processing (if a plugin returns a new section)
         // it is also being called every time a new section starts -- to close the previous one

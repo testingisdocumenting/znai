@@ -12,6 +12,7 @@ import static java.util.stream.Collectors.toList;
 public class OpenApiOperation {
     private String id;
     private String method;
+    private String summary;
     private String path;
     private List<String> tags;
     private List<DocElement> description;
@@ -45,6 +46,14 @@ public class OpenApiOperation {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getSummary() {
+        return summary;
     }
 
     public List<OpenApiParameter> getParameters() {
@@ -84,6 +93,7 @@ public class OpenApiOperation {
         result.put("id", id);
         result.put("method", method);
         result.put("path", path);
+        result.put("summary", summary);
         result.put("tags", tags);
         result.put("parameters", parameters.stream().map(OpenApiParameter::toMap).collect(toList()));
         result.put("responses", responses);

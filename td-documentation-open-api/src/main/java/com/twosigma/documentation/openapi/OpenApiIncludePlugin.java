@@ -12,12 +12,12 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.stream.Stream;
 
-public class OpenApiOperationIncludePlugin implements IncludePlugin {
+public class OpenApiIncludePlugin implements IncludePlugin {
     private Path specPath;
 
     @Override
     public String id() {
-        return "open-api-operation";
+        return "open-api";
     }
 
     @Override
@@ -28,12 +28,16 @@ public class OpenApiOperationIncludePlugin implements IncludePlugin {
         specPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
 
         OpenApiSpec openApiSpec = OpenApiSpec.fromJson(componentsRegistry.markdownParser(),
-                FileUtils.fileTextContent(specPath));
+                componentsRegistry.resourceResolver().textContent(specPath));
 
         String operationId = pluginParams.getOpts().get("operationId");
         OpenApiOperation operation = openApiSpec.findOperationById(operationId);
 
         parserHandler.onGlobalAnchor(operationId);
+
+        if (pluginParams.getOpts().get("autoSection", false)) {
+            parserHandler.onSectionStart(operation.getSummary());
+        }
 
         return PluginResult.docElement("OpenApiOperation",
                 Collections.singletonMap("operation", operation.toMap()));

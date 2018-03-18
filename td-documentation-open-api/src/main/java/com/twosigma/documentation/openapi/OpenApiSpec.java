@@ -73,6 +73,7 @@ public class OpenApiSpec {
         operation.setTags((List<String>) definition.get("tags"));
         operation.setPath(path);
         operation.setMethod(method);
+        operation.setSummary(Objects.toString(definition.get("summary")));
         operation.setDescription(parseMarkdown(definition.get("description")));
         operation.setResponses(buildResponses((Map<String, ?>) definition.get("responses")));
         operation.setParameters(buildParameters((List<Map<String, ?>>) definition.get("parameters")));

@@ -53,6 +53,6 @@ class TableIncludePluginTest {
 
     private static def process(String fileName, String meta = '') {
         def result = PluginsTestUtils.process(":include-table: $fileName $meta")
-        return result.docElements.get(0).toMap()
+        return result[0].toMap()
     }
 }

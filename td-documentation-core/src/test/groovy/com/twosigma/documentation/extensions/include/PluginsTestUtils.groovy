@@ -4,6 +4,8 @@ import com.twosigma.documentation.extensions.PluginParams
 import com.twosigma.documentation.extensions.PluginResult
 import com.twosigma.documentation.extensions.Plugins
 import com.twosigma.documentation.parser.TestComponentsRegistry
+import com.twosigma.documentation.parser.docelement.DocElement
+import com.twosigma.documentation.parser.docelement.DocElementCreationParserHandler
 
 import java.nio.file.Paths
 
@@ -11,18 +13,23 @@ import java.nio.file.Paths
  * @author mykola
  */
 class PluginsTestUtils {
-    static private TestComponentsRegistry testComponentsRegistry
-
     static String processAndGetSimplifiedCodeBlock(String pluginDef) {
         def result = process(pluginDef)
-        return result.docElements.get(0).getProps().tokens[0].content
+        return result[0].getProps().tokens[0].content
     }
 
-    static PluginResult process(String pluginDef) {
+    static List<DocElement> process(String pluginDef) {
+        DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(
+                TestComponentsRegistry.INSTANCE,
+                Paths.get(""))
+
         PluginParams includeParams = IncludePluginParser.parse(pluginDef)
         def includePlugin = Plugins.includePluginById(includeParams.pluginId)
 
-        testComponentsRegistry = new TestComponentsRegistry()
-        return includePlugin.process(testComponentsRegistry, null, Paths.get(""), includeParams)
+        def pluginResult = includePlugin.process(TestComponentsRegistry.INSTANCE, parserHandler, Paths.get(""), includeParams)
+
+        parserHandler.onIncludePlugin(includePlugin, pluginResult)
+
+        return parserHandler.docElement.content
     }
 }

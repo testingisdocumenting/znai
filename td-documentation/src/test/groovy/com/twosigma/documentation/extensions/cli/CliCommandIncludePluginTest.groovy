@@ -17,6 +17,6 @@ class CliCommandIncludePluginTest {
 
     private static def process(String params) {
         def result = PluginsTestUtils.process(":include-cli-command: $params")
-        return result.docElements.get(0).toMap()
+        return result[0].toMap()
     }
 }

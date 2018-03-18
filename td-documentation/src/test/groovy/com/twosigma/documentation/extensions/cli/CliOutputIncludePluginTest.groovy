@@ -17,6 +17,6 @@ class CliOutputIncludePluginTest {
 
     private static def process(String params) {
         def result = PluginsTestUtils.process(":include-cli-output: $params")
-        return result.docElements.get(0).toMap()
+        return result[0].toMap()
     }
 }
