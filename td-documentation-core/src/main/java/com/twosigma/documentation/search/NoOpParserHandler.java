@@ -128,6 +128,10 @@ public class NoOpParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onCustomNode(String nodeName, Map<String, ?> attrs) {
+    }
+
+    @Override
     public void onCustomNodeEnd(String nodeName) {
     }
 

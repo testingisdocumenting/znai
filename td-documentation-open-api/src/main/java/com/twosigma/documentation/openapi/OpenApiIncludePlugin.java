@@ -8,11 +8,17 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class OpenApiIncludePlugin implements IncludePlugin {
     private Path specPath;
+    private List<OpenApiOperation> operations = new ArrayList<>();
+    private PluginParams pluginParams;
+    private OpenApiSpec openApiSpec;
+    private ParserHandler parserHandler;
 
     @Override
     public String id() {
@@ -29,26 +35,54 @@ public class OpenApiIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
+        this.pluginParams = pluginParams;
+        this.parserHandler = parserHandler;
+
         specPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
 
-        OpenApiSpec openApiSpec = OpenApiSpec.fromJson(componentsRegistry.markdownParser(),
+        openApiSpec = OpenApiSpec.fromJson(componentsRegistry.markdownParser(),
                 componentsRegistry.resourceResolver().textContent(specPath));
 
-        String operationId = pluginParams.getOpts().get("operationId");
-        OpenApiOperation operation = openApiSpec.findOperationById(operationId);
+        findOperations();
+        processOperations();
 
-        parserHandler.onGlobalAnchor(operationId);
-
-        if (pluginParams.getOpts().get("autoSection", false)) {
-            parserHandler.onSectionStart(operation.getSummary());
-        }
-
-        return PluginResult.docElement("OpenApiOperation",
-                Collections.singletonMap("operation", operation.toMap()));
+        return PluginResult.docElements(Stream.empty());
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(specPath));
+    }
+
+    private void findOperations() {
+        String operationId = pluginParams.getOpts().get("operationId");
+        List<String> tags = pluginParams.getOpts().getList("tags");
+
+        if (operationId != null) {
+            operations.add(openApiSpec.findOperationById(operationId));
+        }
+
+        if (! tags.isEmpty()) {
+            operations.addAll(openApiSpec.findOperationsByTags(tags));
+        }
+    }
+
+    private void processOperations() {
+        boolean isAutoSection = pluginParams.getOpts().get("autoSection", false);
+
+        operations.forEach(operation -> this.processOperation(operation, isAutoSection));
+    }
+
+    private void processOperation(OpenApiOperation operation, boolean isAutoSection) {
+        if (isAutoSection) {
+            parserHandler.onSectionStart(operation.getSummary());
+        }
+
+        if (operation.getId() != null) {
+            parserHandler.onGlobalAnchor(operation.getId());
+        }
+
+        parserHandler.onCustomNode("OpenApiOperation",
+                Collections.singletonMap("operation", operation.toMap()));
     }
 }

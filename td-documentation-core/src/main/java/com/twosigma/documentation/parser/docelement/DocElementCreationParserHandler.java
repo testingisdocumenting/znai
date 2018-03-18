@@ -256,6 +256,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onCustomNode(String nodeName, Map<String, ?> attrs) {
+        append(nodeName, attrs);
+    }
+
+    @Override
     public void onCustomNodeEnd(String nodeName) {
         end();
     }

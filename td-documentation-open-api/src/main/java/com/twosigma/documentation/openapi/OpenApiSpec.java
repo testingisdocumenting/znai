@@ -43,6 +43,10 @@ public class OpenApiSpec {
                 .orElseThrow(() -> new RuntimeException("cannot find operation: " + operationId));
     }
 
+    public List<OpenApiOperation> findOperationsByTags(List<String> tags) {
+        return operations.stream().filter(o -> o.hasTags(tags)).collect(toList());
+    }
+
     public List<OpenApiOperation> getOperations() {
         return operations;
     }
@@ -95,9 +99,14 @@ public class OpenApiSpec {
                 Objects.toString(parameter.get("name")),
                 Objects.toString(parameter.get("in")),
                 Objects.toString(parameter.get("type")),
-                (Boolean) parameter.get("required"),
+                getBoolean(parameter, "required", false),
                 buildParameterSchema((Map<String, ?>) parameter.get("schema")),
                 parseMarkdown(parameter.get("description")));
+    }
+
+    private boolean getBoolean(Map<String, ?> map, String name, Boolean defaultValue) {
+        Object v = map.get(name);
+        return v == null ? defaultValue : (boolean)v;
     }
 
     private Map<String, ?> buildParameterSchema(Map<String, ?> schema) {

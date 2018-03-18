@@ -1,8 +1,8 @@
 package com.twosigma.documentation.openapi;
 
 import com.twosigma.documentation.parser.docelement.DocElement;
-import com.twosigma.documentation.parser.docelement.DocElementType;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +14,11 @@ public class OpenApiOperation {
     private String method;
     private String summary;
     private String path;
-    private List<String> tags;
-    private List<DocElement> description;
+    private List<String> tags = new ArrayList<>();
+    private List<DocElement> description = new ArrayList<>();
 
-    private List<OpenApiParameter> parameters;
-    private List<Map<String, ?>> responses;
+    private List<OpenApiParameter> parameters = new ArrayList<>();
+    private List<Map<String, ?>> responses = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -80,6 +80,10 @@ public class OpenApiOperation {
         this.tags = tags;
     }
 
+    public boolean hasTags(List<String> tagsToCheck) {
+        return tagsToCheck.stream().allMatch(t -> this.tags.contains(t));
+    }
+
     public List<DocElement> getDescription() {
         return description;
     }
@@ -102,4 +106,17 @@ public class OpenApiOperation {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "OpenApiOperation{" +
+                "id='" + id + '\'' +
+                ", method='" + method + '\'' +
+                ", summary='" + summary + '\'' +
+                ", path='" + path + '\'' +
+                ", tags=" + tags +
+                ", description=" + description +
+                ", parameters=" + parameters +
+                ", responses=" + responses +
+                '}';
+    }
 }

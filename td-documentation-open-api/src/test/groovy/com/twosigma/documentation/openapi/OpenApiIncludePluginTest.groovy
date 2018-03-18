@@ -12,11 +12,19 @@ class OpenApiIncludePluginTest {
     void "should automatically create a section for summary"() {
         def elements = process('open-api-spec.json {operationId: "addPet", autoSection: true}')
 
-        actual(elements[0]).should equal([id: 'addPet', type: 'Anchor'])
+        elements[0].title.should == 'Add Pet'
+        elements[0].id.should == 'add-pet'
+        elements[0].type.should == 'Section'
+    }
 
-        elements[1].title.should == 'Add Pet'
-        elements[1].id.should == 'add-pet'
-        elements[1].type.should == 'Section'
+    @Test
+    void "should create multiple entries by tags"() {
+        def elements = process('open-api-spec.json {tags: "multiple", autoSection: true}')
+
+        elements.should == ['type'    | 'title'] {
+                            _______________________________________________________
+                            'Section' | 'find all pets'
+                            'Section' | 'find all customers ordered by last name'  }
     }
 
     private static def process(String params) {

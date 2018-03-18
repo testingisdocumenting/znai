@@ -1,5 +1,4 @@
 const customerSchema = {
-    "type": "object",
     "properties": {
         "firstName": {
             "type": "string"

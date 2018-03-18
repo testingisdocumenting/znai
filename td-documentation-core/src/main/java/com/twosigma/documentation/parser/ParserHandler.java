@@ -50,6 +50,7 @@ public interface ParserHandler {
     void onThematicBreak();
 
     void onCustomNodeStart(String nodeName, Map<String, ?> attrs);
+    void onCustomNode(String nodeName, Map<String, ?> attrs);
     void onCustomNodeEnd(String nodeName);
 
     void onGlobalAnchor(String id);

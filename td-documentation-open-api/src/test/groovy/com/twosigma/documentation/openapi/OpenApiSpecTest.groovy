@@ -71,6 +71,15 @@ class OpenApiSpecTest {
     }
 
     @Test
+    void "should find operations by tags"() {
+        def multiple = spec.findOperationsByTags(['multiple'])
+        multiple.id.should == ['findPets', 'findAllByOrderByLastNameCustomerUsingGET']
+
+        def multiplePets = spec.findOperationsByTags(['multiple', 'pet'])
+        multiplePets.id.should == ['findPets']
+    }
+
+    @Test
     void "should substitute schema ref with an actual schema for parameters"() {
         def addPet = spec.findOperationById('addPet')
 

@@ -166,6 +166,11 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
+    public void onCustomNode(String nodeName, Map<String, ?> attrs) {
+        list.forEach(h -> h.onCustomNode(nodeName, attrs));
+    }
+
+    @Override
     public void onCustomNodeEnd(String nodeName) {
         list.forEach(h -> h.onCustomNodeEnd(nodeName));
     }

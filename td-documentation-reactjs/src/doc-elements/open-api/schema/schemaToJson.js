@@ -8,6 +8,10 @@ export function schemaToJson(schema) {
 }
 
 function simplifyToJson(schema) {
+    if (! schema.hasOwnProperty('type') && schema.hasOwnProperty('properties')) {
+        return simplifyObjectToJson(schema)
+    }
+    
     switch (schema.type) {
         case 'object':
             return simplifyObjectToJson(schema)

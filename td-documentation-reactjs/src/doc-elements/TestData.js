@@ -69,118 +69,120 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Paths",
-                    "id": "paths",
+                    "title": "Operation definition",
+                    "id": "operation-definition",
                     "type": "Section",
                     "content": [
                         {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Use ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "include-json",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " plugin to bring attention to a certain please in a json file.",
-                                    "type": "SimpleText"
-                                }
-                            ]
+                            "id": "addPet",
+                            "type": "Anchor"
                         },
                         {
-                            "lang": "",
-                            "maxLineLength": 69,
-                            "tokens": [
+                            "id": "addPet",
+                            "method": "post",
+                            "path": "/pets",
+                            "summary": "Add a new pet",
+                            "parameters": [
                                 {
-                                    "type": "text",
-                                    "content": ":include-json: sample.json {paths: \"root.key2.key22,body.key3.key31\"}\n"
+                                    "name": "pet",
+                                    "in": "body",
+                                    "type": "null",
+                                    "required": true,
+                                    "schema": {
+                                        "type": "object",
+                                        "required": [
+                                            "name"
+                                        ],
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "tag": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "description": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "Pet to add to the store",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
+                            "responses": [
                                 {
-                                    "text": "Comma separated paths specified inside ",
-                                    "type": "SimpleText"
+                                    "code": "200",
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "tag": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "format": "int64",
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    "description": "pet response"
                                 },
                                 {
-                                    "code": "paths",
-                                    "type": "InlinedCode"
-                                },
-                                {
-                                    "text": " will be highlighted.",
-                                    "type": "SimpleText"
+                                    "code": "default",
+                                    "schema": {
+                                        "type": "object",
+                                        "required": [
+                                            "code",
+                                            "message"
+                                        ],
+                                        "properties": {
+                                            "code": {
+                                                "format": "int32",
+                                                "type": "integer"
+                                            },
+                                            "message": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "description": "unexpected error"
                                 }
-                            ]
-                        },
-                        {
-                            "data": {
-                                "key1": "value1",
-                                "key2": {
-                                    "key21": "value21",
-                                    "key22": "value22",
-                                    "key23": {
-                                        "key231": "value231"
-                                    }
-                                },
-                                "key3": {
-                                    "key31": "value31",
-                                    "key32": "value32"
-                                }
-                            },
-                            "paths": [
-                                "root.key2.key22",
-                                "body.key3.key31"
                             ],
-                            "type": "Json"
-                        }
-                    ]
-                },
-                {
-                    "title": "Test Results",
-                    "id": "test-results",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "type": "Paragraph",
-                            "content": [
+                            "description": [
                                 {
-                                    "text": "Consider leveraging testing frameworks to extract json samples from you end points.",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "Information about what assertions were made can be used to highlight points of interest.",
-                                    "type": "SimpleText"
+                                    "type": "Paragraph",
+                                    "content": [
+                                        {
+                                            "text": "Creates a new pet in the store.  Duplicates are allowed",
+                                            "type": "SimpleText"
+                                        }
+                                    ]
                                 }
-                            ]
+                            ],
+                            "type": "OpenApiOperation"
                         }
                     ]
                 }
             ],
-            "lastModifiedTime": 1516464705000,
+            "lastModifiedTime": 1521398608000,
             "tocItem": {
                 "sectionTitle": "Snippets",
-                "pageTitle": "Json",
+                "pageTitle": "Open API",
                 "pageMeta": {},
-                "fileName": "json",
+                "fileName": "open-API",
                 "dirName": "snippets",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Paths",
-                        "id": "paths"
-                    },
-                    {
-                        "title": "Test Results",
-                        "id": "test-results"
+                        "title": "Operation definition",
+                        "id": "operation-definition"
                     }
                 ]
             }
