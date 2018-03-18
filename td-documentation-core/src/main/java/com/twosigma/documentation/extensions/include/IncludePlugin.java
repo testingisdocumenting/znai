@@ -13,11 +13,7 @@ import java.nio.file.Path;
  * @author mykola
  */
 public interface IncludePlugin extends Plugin {
-    /**
-     * gets called at the beginning of every page before rendering
-     * @param context context of the page
-     */
-    default void reset(IncludeContext context) {}
+    IncludePlugin create();
 
     PluginResult process(ComponentsRegistry componentsRegistry,
                          ParserHandler parserHandler,

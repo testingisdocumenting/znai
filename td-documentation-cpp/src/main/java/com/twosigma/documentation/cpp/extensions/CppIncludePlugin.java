@@ -8,8 +8,8 @@ import com.twosigma.documentation.cpp.parser.CodePart;
 import com.twosigma.documentation.cpp.parser.CppSourceCode;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginParamsOpts;
-import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.extensions.PluginResult;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.ParserHandler;
@@ -34,6 +34,11 @@ public class CppIncludePlugin implements IncludePlugin {
     @Override
     public String id() {
         return "cpp";
+    }
+
+    @Override
+    public IncludePlugin create() {
+        return new CppIncludePlugin();
     }
 
     @Override

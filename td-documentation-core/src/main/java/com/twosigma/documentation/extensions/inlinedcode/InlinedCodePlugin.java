@@ -11,5 +11,7 @@ import java.nio.file.Path;
  * @author mykola
  */
 public interface InlinedCodePlugin extends Plugin {
+    InlinedCodePlugin create();
+
     PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams);
 }

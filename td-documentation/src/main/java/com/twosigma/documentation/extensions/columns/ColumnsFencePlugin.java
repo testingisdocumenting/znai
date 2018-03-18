@@ -36,6 +36,11 @@ public class ColumnsFencePlugin implements FencePlugin {
     }
 
     @Override
+    public FencePlugin create() {
+        return new ColumnsFencePlugin();
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         this.markupPath = markupPath;
         this.columnsParserResult = new ArrayList<>();

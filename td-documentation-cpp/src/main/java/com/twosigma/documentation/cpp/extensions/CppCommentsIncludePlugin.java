@@ -4,9 +4,9 @@ import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.cpp.parser.CodePart;
 import com.twosigma.documentation.cpp.parser.CppSourceCode;
-import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginParamsOpts;
+import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.ParserHandler;
@@ -25,6 +25,11 @@ public class CppCommentsIncludePlugin implements IncludePlugin {
     @Override
     public String id() {
         return "cpp-comments";
+    }
+
+    @Override
+    public IncludePlugin create() {
+        return new CppCommentsIncludePlugin();
     }
 
     @Override

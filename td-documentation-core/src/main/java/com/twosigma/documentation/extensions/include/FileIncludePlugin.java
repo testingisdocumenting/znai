@@ -3,8 +3,8 @@ package com.twosigma.documentation.extensions.include;
 import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.PluginParamsOpts;
 import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginParamsOpts;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.docelement.DocElementType;
@@ -32,7 +32,8 @@ public class FileIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public void reset(IncludeContext context) {
+    public IncludePlugin create() {
+        return new FileIncludePlugin();
     }
 
     @Override

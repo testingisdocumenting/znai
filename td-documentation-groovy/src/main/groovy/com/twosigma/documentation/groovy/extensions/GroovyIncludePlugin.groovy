@@ -25,6 +25,11 @@ class GroovyIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    IncludePlugin create() {
+        return new GroovyIncludePlugin()
+    }
+
+    @Override
     PluginResult process(ComponentsRegistry componentsRegistry, 
                          ParserHandler parserHandler, 
                          Path markupPath, 

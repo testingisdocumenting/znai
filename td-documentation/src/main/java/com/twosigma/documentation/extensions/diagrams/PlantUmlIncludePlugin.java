@@ -4,6 +4,7 @@ import com.twosigma.diagrams.plantuml.PlantUml;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.core.ResourcesResolver;
+import com.twosigma.documentation.extensions.Plugin;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
@@ -22,6 +23,11 @@ public class PlantUmlIncludePlugin implements IncludePlugin {
     @Override
     public String id() {
         return "plantuml";
+    }
+
+    @Override
+    public IncludePlugin create() {
+        return new PlantUmlIncludePlugin();
     }
 
     @Override

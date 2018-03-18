@@ -2,6 +2,7 @@ package com.twosigma.documentation.extensions.diagrams;
 
 import com.twosigma.diagrams.plantuml.PlantUml;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.Plugin;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
@@ -16,6 +17,11 @@ public class PlantUmlFencePlugin implements FencePlugin {
     @Override
     public String id() {
         return "plantuml";
+    }
+
+    @Override
+    public FencePlugin create() {
+        return new PlantUmlFencePlugin();
     }
 
     @Override

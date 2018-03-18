@@ -1,5 +1,6 @@
 package com.twosigma.documentation.java.extensions;
 
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.java.parser.JavaCode;
 import com.twosigma.documentation.java.parser.JavaMethod;
 import com.twosigma.documentation.java.parser.JavaMethodParam;
@@ -22,6 +23,11 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
     @Override
     public String id() {
         return "java-doc-params";
+    }
+
+    @Override
+    public IncludePlugin create() {
+        return new JavaDocParamsIncludePlugin();
     }
 
     @Override

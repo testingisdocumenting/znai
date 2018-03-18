@@ -1,5 +1,6 @@
 package com.twosigma.documentation.java.extensions;
 
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.java.parser.EnumEntry;
 import com.twosigma.documentation.java.parser.JavaCode;
 import com.twosigma.documentation.java.parser.html.HtmlToDocElementConverter;
@@ -19,6 +20,11 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     @Override
     public String id() {
         return "java-enum-entries";
+    }
+
+    @Override
+    public IncludePlugin create() {
+        return new JavaEnumEntriesIncludePlugin();
     }
 
     @Override

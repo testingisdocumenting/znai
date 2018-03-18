@@ -2,6 +2,7 @@ package com.twosigma.documentation.extensions.tabs;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ColonDelimitedKeyValues;
+import com.twosigma.documentation.extensions.Plugin;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
@@ -28,12 +29,14 @@ public class TabsFencePlugin implements FencePlugin {
 
     private List<String> texts;
 
-    public TabsFencePlugin() {
-    }
-
     @Override
     public String id() {
         return "tabs";
+    }
+
+    @Override
+    public FencePlugin create() {
+        return new TabsFencePlugin();
     }
 
     @Override

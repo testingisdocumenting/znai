@@ -11,7 +11,9 @@ import com.twosigma.documentation.search.SearchScore;
 import com.twosigma.documentation.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * @author mykola
@@ -22,6 +24,11 @@ public class CliCommandIncludePlugin implements IncludePlugin {
     @Override
     public String id() {
         return "cli-command";
+    }
+
+    @Override
+    public IncludePlugin create() {
+        return new CliCommandIncludePlugin();
     }
 
     @Override

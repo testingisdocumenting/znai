@@ -18,6 +18,11 @@ public class IconInlinedCodePlugin implements InlinedCodePlugin {
     }
 
     @Override
+    public InlinedCodePlugin create() {
+        return new IconInlinedCodePlugin();
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         return PluginResult.docElement(new DocElement("Icon", "id", pluginParams.getFreeParam()));
     }

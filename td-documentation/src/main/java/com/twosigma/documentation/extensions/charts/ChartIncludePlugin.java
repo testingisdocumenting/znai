@@ -25,6 +25,11 @@ public class ChartIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public IncludePlugin create() {
+        return new ChartIncludePlugin();
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry,
                                 ParserHandler parserHandler,
                                 Path markupPath,

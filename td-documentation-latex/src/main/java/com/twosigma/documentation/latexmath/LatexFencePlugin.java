@@ -18,6 +18,11 @@ public class LatexFencePlugin implements FencePlugin {
     }
 
     @Override
+    public FencePlugin create() {
+        return new LatexFencePlugin();
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         String svg = Latex.toSvg(content);
         return PluginResult.docElement("LatexMath", Collections.singletonMap("svg", svg));

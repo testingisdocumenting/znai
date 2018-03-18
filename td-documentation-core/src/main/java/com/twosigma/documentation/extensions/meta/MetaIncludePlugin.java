@@ -18,6 +18,11 @@ public class MetaIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public IncludePlugin create() {
+        return new MetaIncludePlugin();
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry,
                                 ParserHandler parserHandler,
                                 Path markupPath,

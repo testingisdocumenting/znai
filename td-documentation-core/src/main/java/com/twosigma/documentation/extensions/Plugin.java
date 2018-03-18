@@ -12,6 +12,8 @@ import java.util.stream.Stream;
 public interface Plugin {
     String id();
 
+    Plugin create();
+
     default Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.empty();
     }

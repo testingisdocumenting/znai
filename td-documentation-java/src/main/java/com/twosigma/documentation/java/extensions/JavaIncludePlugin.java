@@ -1,6 +1,7 @@
 package com.twosigma.documentation.java.extensions;
 
 import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.java.parser.JavaCode;
 import com.twosigma.documentation.java.parser.JavaMethod;
 import com.twosigma.documentation.java.parser.JavaType;
@@ -8,7 +9,6 @@ import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.documentation.parser.docelement.DocElementType;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,6 +20,11 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     @Override
     public String id() {
         return "java";
+    }
+
+    @Override
+    public IncludePlugin create() {
+        return new JavaIncludePlugin();
     }
 
     @Override

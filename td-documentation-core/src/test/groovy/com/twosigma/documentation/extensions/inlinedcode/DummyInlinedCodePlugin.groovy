@@ -18,6 +18,11 @@ class DummyInlinedCodePlugin implements InlinedCodePlugin {
     }
 
     @Override
+    InlinedCodePlugin create() {
+        return new DummyInlinedCodePlugin()
+    }
+
+    @Override
     PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         def dummy = new DocElement("InlinedCodeDummy", "ff", pluginParams.freeParam,
                 "opts", pluginParams.opts.toMap())

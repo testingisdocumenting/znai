@@ -19,6 +19,11 @@ class DummyIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    IncludePlugin create() {
+        return new DummyIncludePlugin()
+    }
+
+    @Override
     PluginResult process(ComponentsRegistry componentsRegistry, 
                          ParserHandler parserHandler, 
                          Path markupPath,

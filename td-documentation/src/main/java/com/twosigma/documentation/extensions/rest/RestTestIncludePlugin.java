@@ -2,6 +2,7 @@ package com.twosigma.documentation.extensions.rest;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.Plugin;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
@@ -21,6 +22,11 @@ public class RestTestIncludePlugin implements IncludePlugin {
     @Override
     public String id() {
         return "rest-test";
+    }
+
+    @Override
+    public IncludePlugin create() {
+        return new RestTestIncludePlugin();
     }
 
     @Override

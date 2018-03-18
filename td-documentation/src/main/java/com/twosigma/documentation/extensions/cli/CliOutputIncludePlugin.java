@@ -28,6 +28,11 @@ public class CliOutputIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public IncludePlugin create() {
+        return new CliOutputIncludePlugin();
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry,
                                 ParserHandler parserHandler,
                                 Path markupPath,

@@ -11,5 +11,6 @@ import java.nio.file.Path;
  * @author mykola
  */
 public interface FencePlugin extends Plugin {
+    FencePlugin create();
     PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content);
 }

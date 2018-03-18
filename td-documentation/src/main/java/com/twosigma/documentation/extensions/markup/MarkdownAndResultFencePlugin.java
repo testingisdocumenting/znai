@@ -23,6 +23,11 @@ public class MarkdownAndResultFencePlugin implements FencePlugin {
     }
 
     @Override
+    public FencePlugin create() {
+        return new MarkdownAndResultFencePlugin();
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         MarkupParser parser = componentsRegistry.defaultParser();
         MarkupParserResult parserResult = parser.parse(markupPath, content);

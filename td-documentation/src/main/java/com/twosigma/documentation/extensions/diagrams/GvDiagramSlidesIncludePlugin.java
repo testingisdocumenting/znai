@@ -2,11 +2,11 @@ package com.twosigma.documentation.extensions.diagrams;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.core.ResourcesResolver;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides;
-import com.twosigma.documentation.extensions.include.*;
+import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.utils.NameUtils;
@@ -31,8 +31,8 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public void reset(IncludeContext context) {
-
+    public IncludePlugin create() {
+        return new GvDiagramSlidesIncludePlugin();
     }
 
     @Override

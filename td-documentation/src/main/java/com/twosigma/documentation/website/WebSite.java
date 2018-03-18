@@ -4,8 +4,6 @@ import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.extensions.MultipleLocationsResourceResolver;
-import com.twosigma.documentation.extensions.Plugins;
-import com.twosigma.documentation.extensions.include.IncludeContext;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.commonmark.MarkdownParser;
@@ -278,7 +276,6 @@ public class WebSite {
         reportPhase("parsing footer");
 
         resourceResolver.setCurrentFilePath(markupPath);
-        resetPlugins(markupPath);
 
         MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
         footer = new Footer(parserResult.getDocElement());
@@ -289,7 +286,6 @@ public class WebSite {
             Path markupPath = markupPath(tocItem);
 
             resourceResolver.setCurrentFilePath(markupPath);
-            resetPlugins(markupPath);
 
             MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
             updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
@@ -359,11 +355,6 @@ public class WebSite {
         return markupParsingConfiguration.fullPath(cfg.docRootPath, tocItem);
     }
 
-    private void resetPlugins(Path markupPath) {
-        IncludeContext context = new IncludeContext(markupPath);
-        Plugins.reset(context);
-    }
-
     // we share TOC between pages as opposite to setting TOC to each page
     // global TOC is required to be set for server side page rendering
     private void setGlobalToc() {
@@ -399,8 +390,6 @@ public class WebSite {
 
     private HtmlPageAndPageProps generatePage(TocItem tocItem, Page page) {
         try {
-            resetPlugins(markupPath(tocItem)); // TODO reset at render phase only?
-
             HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(tocItem, page, footer);
 
             allPagesProps.add(htmlAndProps.getProps());

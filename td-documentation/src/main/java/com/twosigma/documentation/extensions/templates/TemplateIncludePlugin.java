@@ -2,6 +2,7 @@ package com.twosigma.documentation.extensions.templates;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.extensions.Plugin;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginParamsOpts;
 import com.twosigma.documentation.core.ResourcesResolver;
@@ -33,6 +34,11 @@ public class TemplateIncludePlugin implements IncludePlugin {
     @Override
     public String id() {
         return "template";
+    }
+
+    @Override
+    public IncludePlugin create() {
+        return new TemplateIncludePlugin();
     }
 
     @Override

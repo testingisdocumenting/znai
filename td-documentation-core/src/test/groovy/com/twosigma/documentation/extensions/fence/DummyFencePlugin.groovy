@@ -18,6 +18,11 @@ class DummyFencePlugin implements FencePlugin {
     }
 
     @Override
+    FencePlugin create() {
+        return new DummyFencePlugin()
+    }
+
+    @Override
     PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         def dummy = new DocElement("FenceDummy")
         if (pluginParams.freeParam) {

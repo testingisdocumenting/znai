@@ -35,6 +35,11 @@ public class FlowChartIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public IncludePlugin create() {
+        return new FlowChartIncludePlugin();
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry,
                                 ParserHandler parserHandler,
                                 Path markupPath,
