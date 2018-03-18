@@ -107,7 +107,7 @@ const allParameters = [
 
 const responses = [
     {
-        code: "200",
+        code: "Default",
         description: "OK",
         schema: customerSchema
     },
