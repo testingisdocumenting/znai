@@ -39,6 +39,8 @@ public interface ParserHandler {
     void onEmphasisEnd();
     void onStrongEmphasisStart();
     void onStrongEmphasisEnd();
+    void onStrikeThroughStart();
+    void onStrikeThroughEnd();
     void onBlockQuoteStart();
     void onBlockQuoteEnd();
     void onSimpleText(String value);

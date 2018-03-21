@@ -1,4 +1,4 @@
-package com.twosigma.documentation.search;
+package com.twosigma.documentation.parser;
 
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
@@ -85,6 +85,14 @@ public class NoOpParserHandler implements ParserHandler {
 
     @Override
     public void onStrongEmphasisEnd() {
+    }
+
+    @Override
+    public void onStrikeThroughStart() {
+    }
+
+    @Override
+    public void onStrikeThroughEnd() {
     }
 
     @Override

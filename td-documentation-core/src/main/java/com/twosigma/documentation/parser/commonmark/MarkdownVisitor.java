@@ -10,6 +10,7 @@ import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.commonmark.include.IncludeBlock;
 import com.twosigma.documentation.parser.table.GfmTableToTableConverter;
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
+import org.commonmark.ext.gfm.strikethrough.Strikethrough;
 import org.commonmark.ext.gfm.tables.TableBlock;
 import org.commonmark.node.*;
 
@@ -132,6 +133,17 @@ public class MarkdownVisitor extends AbstractVisitor {
             parserHandler.onTable(gfmTableToTableConverter.convert());
         } else {
             throw new UnsupportedOperationException("unsupported custom block: " + customBlock);
+        }
+    }
+
+    @Override
+    public void visit(CustomNode customNode) {
+        if (customNode instanceof Strikethrough) {
+            parserHandler.onStrikeThroughStart();
+            visitChildren(customNode);
+            parserHandler.onStrikeThroughEnd();
+        } else {
+            super.visit(customNode);
         }
     }
 

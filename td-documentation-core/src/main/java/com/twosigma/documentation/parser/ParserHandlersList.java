@@ -116,6 +116,16 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
+    public void onStrikeThroughStart() {
+        list.forEach(ParserHandler::onStrikeThroughStart);
+    }
+
+    @Override
+    public void onStrikeThroughEnd() {
+        list.forEach(ParserHandler::onStrikeThroughEnd);
+    }
+
+    @Override
     public void onBlockQuoteStart() {
         list.forEach(ParserHandler::onBlockQuoteStart);
     }

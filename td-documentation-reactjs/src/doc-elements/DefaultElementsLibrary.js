@@ -41,6 +41,7 @@ const presentationElementHandlers = {}
 library.DocElement = DocElement
 library.Emphasis = (props) => (<span className="emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
 library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
+library.StrikeThrough = (props) => (<del className="strike-through"><props.elementsLibrary.DocElement {...props}/></del>)
 library.Link = Link
 library.Anchor = Anchor
 library.Paragraph = Paragraph

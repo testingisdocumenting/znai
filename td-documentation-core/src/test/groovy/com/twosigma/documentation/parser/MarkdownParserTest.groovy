@@ -29,6 +29,13 @@ class MarkdownParserTest {
     }
 
     @Test
+    void "strike through"() {
+        parse("~~test~~")
+        content.should == [[type: 'Paragraph', content: [[type: 'StrikeThrough',
+                                                          content: [[text: 'test', type: 'SimpleText']]]]]]
+    }
+
+    @Test
     void "link to a supported location"() {
         parse("[label](file:/test)")
         parse("[label](http:/test)")

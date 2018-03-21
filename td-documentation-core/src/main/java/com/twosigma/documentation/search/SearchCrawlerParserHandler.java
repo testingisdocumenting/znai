@@ -4,7 +4,7 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.parser.ParserHandler;
+import com.twosigma.documentation.parser.NoOpParserHandler;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 
 import java.util.ArrayList;

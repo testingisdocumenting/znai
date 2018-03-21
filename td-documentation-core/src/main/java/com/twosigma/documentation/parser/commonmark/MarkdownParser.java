@@ -11,6 +11,7 @@ import com.twosigma.documentation.search.SearchCrawlerParserHandler;
 import com.twosigma.documentation.structure.PageMeta;
 import org.commonmark.ext.front.matter.YamlFrontMatterExtension;
 import org.commonmark.ext.front.matter.YamlFrontMatterVisitor;
+import org.commonmark.ext.gfm.strikethrough.StrikethroughExtension;
 import org.commonmark.ext.gfm.tables.TablesExtension;
 import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
@@ -29,6 +30,7 @@ public class MarkdownParser implements MarkupParser {
         CommonMarkExtension extension = new CommonMarkExtension();
         parser = Parser.builder().extensions(Arrays.asList(extension,
                 TablesExtension.create(),
+                StrikethroughExtension.create(),
                 YamlFrontMatterExtension.create())).build();
     }
 

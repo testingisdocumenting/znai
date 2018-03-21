@@ -183,6 +183,16 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onStrikeThroughStart() {
+        start(DocElementType.STRIKE_THROUGH);
+    }
+
+    @Override
+    public void onStrikeThroughEnd() {
+        end();
+    }
+
+    @Override
     public void onBlockQuoteStart() {
         start(DocElementType.BLOCK_QUOTE);
     }
