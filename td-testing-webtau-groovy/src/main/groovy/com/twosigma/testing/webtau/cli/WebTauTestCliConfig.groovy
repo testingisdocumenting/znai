@@ -38,7 +38,7 @@ class WebTauTestCliConfig {
     }
 
     Closure httpHeaderProvider() {
-        return configObject.get("httpHeaderProvider")
+        return configObject ? configObject.get("httpHeaderProvider") : null
     }
 
     void parseConfig(GroovyScriptEngine groovy) {
