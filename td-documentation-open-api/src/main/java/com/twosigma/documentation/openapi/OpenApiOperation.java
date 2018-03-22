@@ -81,7 +81,7 @@ public class OpenApiOperation {
     }
 
     public boolean hasTags(List<String> tagsToCheck) {
-        return tagsToCheck.stream().allMatch(t -> this.tags.contains(t));
+        return tags != null && tagsToCheck.stream().allMatch(t -> this.tags.contains(t));
     }
 
     public List<DocElement> getDescription() {

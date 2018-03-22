@@ -39,7 +39,7 @@ class OpenApiSpecTest {
 
     @Test
     void "operation should consist of method, path and tag"() {
-        findOneCustomer.should == [method: 'get', path: '/customers/{id}', tags: ['customer']]
+        findOneCustomer.should == [method: 'get', path: '/customers/{id}', tags: ['customer', 'single']]
     }
 
     @Test
