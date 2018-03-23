@@ -11,6 +11,7 @@ import java.util.*;
 import static java.util.stream.Collectors.toList;
 
 public class OpenApiSpec {
+    private static final String DESCRIPTION_KEY = "description";
     private static final String REF_KEY = "$ref";
     private static final String ALL_OFF_KEY = "allOf";
 
@@ -137,6 +138,11 @@ public class OpenApiSpec {
     private Map<String, ?> substituteSchema(Map<String, ?> data) {
         Map<String, Object> substituted = new HashMap<>();
         data.forEach((k, v) -> {
+            if (k.equals(DESCRIPTION_KEY) && v instanceof String) {
+                substituted.put(DESCRIPTION_KEY, parseMarkdown(v));
+                return;
+            }
+
             switch (k) {
                 case REF_KEY:
                     substituted.putAll((Map<? extends String, ?>) substituteValue(k, v));
@@ -201,12 +207,12 @@ public class OpenApiSpec {
         return substituteSchema((Map<String, ?>) data.get(pathParts[pathParts.length - 1]));
     }
 
-    private List<DocElement> parseMarkdown(Object markdown) {
+    private List<Map<String, Object>> parseMarkdown(Object markdown) {
         if (markdown == null) {
             return Collections.emptyList();
         }
 
         MarkupParserResult parserResult = markdownParser.parse(Paths.get(""), markdown.toString());
-        return parserResult.getDocElement().getContent();
+        return parserResult.getDocElement().getContent().stream().map(DocElement::toMap).collect(toList());
     }
 }

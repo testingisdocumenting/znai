@@ -2,20 +2,40 @@ const customerSchema = {
     "properties": {
         "firstName": {
             "type": "string",
-            "description": "customer's first name"
+            "description": [
+                {
+                    "text": "customer's first name",
+                    "type": "SimpleText"
+                }
+            ]
         },
         "id": {
             "type": "integer",
             "format": "int64",
-            "description": "customer's unique id"
+            "description": [
+                {
+                    "text": "customer's unique id",
+                    "type": "SimpleText"
+                }
+            ]
         },
         "lastName": {
             "type": "string",
-            "description": "customer's last name"
+            "description": [
+                {
+                    "text": "customer's last name",
+                    "type": "SimpleText"
+                }
+            ]
         }
     },
     "title": "Customer",
-    "description": "Customer object"
+    "description": [
+        {
+            "text": "Customer object",
+            "type": "SimpleText"
+        }
+    ]
 }
 
 const checkSchema = {
@@ -23,7 +43,12 @@ const checkSchema = {
     "properties": {
         "id": {
             "type": "string",
-            "description": "id of a customer"
+            "description":[
+                {
+                    "text": "id of a customer",
+                    "type": "SimpleText"
+                }
+            ]
         },
         "confirmationIds": {
             "type": "array",

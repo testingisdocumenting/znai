@@ -1,0 +1,22 @@
+.open-api-sub-header {
+    display: flex;
+    align-items: baseline;
+
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.open-api-sub-header > .header-part {
+    color: var(--mdoc-meta-color);
+    font-family: var(--mdoc-regular-font-family);
+    font-size: var(--mdoc-smaller-text-size);
+    text-transform: uppercase;
+}
+
+.open-api-sub-header > .description-part {
+    color: var(--mdoc-light-black);
+    font-family: var(--mdoc-regular-font-family);
+    font-size: var(--mdoc-smaller-text-size);
+
+    margin-left: 20px;
+}

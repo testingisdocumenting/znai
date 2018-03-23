@@ -1,4 +1,6 @@
 import React from 'react'
+import SingleRowParam from '../common/SingleRowParam'
+
 import './SchemaAsTable.css'
 
 export class SchemaAsTable extends React.Component {
@@ -23,19 +25,21 @@ export class SchemaAsTable extends React.Component {
     }
 
     renderTopLevel() {
-        const {schema} = this.props
+        const {schema, elementsLibrary} = this.props
 
         if (isObject(schema)) {
             return <ParamsTable params={objectToArray(schema.properties)}
                                 path={this.path}
-                                structure={this.structure}/>
+                                structure={this.structure}
+                                elementsLibrary={elementsLibrary}/>
         }
 
         return (
             <Param name="root"
                    path={this.path}
                    item={schema}
-                   structure={this.structure}/>
+                   structure={this.structure}
+                   elementsLibrary={elementsLibrary}/>
         )
     }
 
@@ -62,7 +66,7 @@ export class SchemaAsTable extends React.Component {
     }
 }
 
-function ParamsTable({params, structure, path, isNested}) {
+function ParamsTable({params, structure, path, isNested, elementsLibrary}) {
     const className = 'open-api-schema-table' + (isNested ? ' nested' : '')
 
     return (
@@ -71,24 +75,27 @@ function ParamsTable({params, structure, path, isNested}) {
                                            name={p.name}
                                            item={p.item}
                                            path={path + '.' + p.name}
+                                           elementsLibrary={elementsLibrary}
                                            structure={structure}/>)}
         </div>
     )
 }
 
-function Param({name, item, path, structure}) {
+function Param({name, item, path, structure, elementsLibrary}) {
     if (isObject(item)) {
         return <ObjectParam name={name}
                             type="object"
                             description={item.description}
                             params={objectToArray(item.properties)}
                             path={path}
+                            elementsLibrary={elementsLibrary}
                             structure={structure}/>
     }
 
     if (isArrayOfSimple(item)) {
         return <SingleParam name={name}
                             type={'array of ' + item.items.type + 's'}
+                            elementsLibrary={elementsLibrary}
                             description={item.description}/>
     }
 
@@ -98,21 +105,24 @@ function Param({name, item, path, structure}) {
                             description={item.description}
                             params={objectToArray(item.items.properties)}
                             path={path}
+                            elementsLibrary={elementsLibrary}
                             structure={structure}/>
     }
 
     return <SingleParam name={name}
                         type={item.type}
+                        elementsLibrary={elementsLibrary}
                         description={item.description}/>
 }
 
-function ObjectParam({name, type, description, params, path, structure}) {
+function ObjectParam({name, type, description, params, path, structure, elementsLibrary}) {
     const isExpanded = structure.isExpanded(path)
 
     const nested = isExpanded ? (
         <ParamsTable params={params}
                      path={path}
                      isNested={true}
+                     elementsLibrary={elementsLibrary}
                      structure={structure}/>
     ) : null
 
@@ -124,15 +134,14 @@ function ObjectParam({name, type, description, params, path, structure}) {
                          path={path}
                          isExpandable={true}
                          isExpanded={isExpanded}
+                         elementsLibrary={elementsLibrary}
                          structure={structure}/>
             {nested}
         </React.Fragment>
     )
 }
 
-function SingleParam({name, type, description, path, structure, isExpandable, isExpanded}) {
-    const className = 'open-api-schema-table-param' + (isExpanded ? ' expanded' : '')
-
+function SingleParam({name, type, description, path, structure, elementsLibrary, isExpandable, isExpanded}) {
     const expandToggle = isExpandable &&
         <div className="expand-toggle"
              onClick={() => structure.onToggle(path)}>
@@ -140,16 +149,12 @@ function SingleParam({name, type, description, path, structure, isExpandable, is
         </div>
 
     return (
-        <div className={className}>
-            <div className="name-and-type">
-                <div className="name">{name}</div>
-                <div className="type">{type}</div>
-                {expandToggle}
-            </div>
-            <div className="description">
-                {description}
-            </div>
-        </div>
+        <SingleRowParam name={name}
+                        type={type}
+                        description={description}
+                        isExpanded={isExpanded}
+                        elementsLibrary={elementsLibrary}
+                        actionElements={expandToggle}/>
     )
 }
 

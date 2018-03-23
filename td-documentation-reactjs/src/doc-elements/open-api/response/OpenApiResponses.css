@@ -13,6 +13,5 @@
 }
 
 .open-api-responses > .response-code {
-    font-family: var(--mdoc-code-font-family);
     text-align: right;
 }

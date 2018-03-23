@@ -435,7 +435,8 @@
       ],
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "pet name"
         },
         "tag": {
           "type": "string"

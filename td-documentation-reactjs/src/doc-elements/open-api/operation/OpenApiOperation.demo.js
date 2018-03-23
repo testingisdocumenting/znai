@@ -108,20 +108,40 @@ const allParameters = [
 const responses = [
     {
         code: "Default",
-        description: "OK",
+        description: [
+            {
+                "text": "OK",
+                "type": "SimpleText"
+            }
+        ],
         schema: customerSchema
     },
     {
         code: "401",
-        description: "Unauthorized"
+        description:[
+            {
+                "text": "Unauthorized",
+                "type": "SimpleText"
+            }
+        ]
     },
     {
         code: "403",
-        description: "Forbidden"
+        description: [
+            {
+                "text": "Forbidden",
+                "type": "SimpleText"
+            }
+        ]
     },
     {
         code: "404",
-        description: "Not Found"
+        description: [
+            {
+                "text": "Not Found",
+                "type": "SimpleText"
+            }
+        ]
     }
 ]
 

@@ -14,11 +14,11 @@ public class OpenApiParameter {
     private String type;
     private boolean required;
     private Map<String, ?> schema;
-    private List<DocElement> description;
+    private List<Map<String, Object>> description;
 
     public OpenApiParameter(String name, String in, String type, boolean required,
                             Map<String, ?> schema,
-                            List<DocElement> description) {
+                            List<Map<String, Object>> description) {
         this.name = name;
         this.in = in;
         this.type = type;
@@ -43,7 +43,7 @@ public class OpenApiParameter {
         return required;
     }
 
-    public List<DocElement> getDescription() {
+    public List<Map<String, Object>> getDescription() {
         return description;
     }
 
@@ -70,7 +70,7 @@ public class OpenApiParameter {
         result.put("type", type);
         result.put("required", required);
         result.put("schema", schema);
-        result.put("description", description.stream().map(DocElement::toMap).collect(toList()));
+        result.put("description", description);
 
         return result;
     }

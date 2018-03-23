@@ -1,18 +1,18 @@
 import React from 'react'
-import {elementsLibrary} from '../../DefaultElementsLibrary'
 
 import OpenApiParameter from './OpenApiParameter'
+import OpenApiSubHeader from '../common/OpenApiSubHeader'
 
 import './OpenApiParameters.css'
 
-function OpenApiParameters({label, parameters}) {
+function OpenApiParameters({label, parameters, elementsLibrary}) {
     if (parameters.length === 0) {
         return null
     }
 
     return (
         <React.Fragment>
-            <div className="sub-header">{label}</div>
+            <OpenApiSubHeader title={label}/>
             <div className="open-api-parameters">
                 {parameters.map(p => <OpenApiParameter key={p.name}
                                                        parameter={p}

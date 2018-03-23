@@ -1,21 +1,22 @@
 import React from 'react'
+import SingleRowParam from '../common/SingleRowParam'
 
 function OpenApiParameter({elementsLibrary, parameter}) {
+    const name = parameter.name + (parameter.required ? '*' : '')
+
+    const valuesDescription = (
+        <div className="values-description">
+            <AvailableValues parameter={parameter}/>
+            <DefaultValue parameter={parameter}/>
+        </div>
+    )
+
     return (
-        <React.Fragment>
-            <div className="name">
-                {parameter.name}
-                {parameter.required && <span className="required">*</span>}
-            </div>
-            <div className="type">{typeAsStr(parameter)}</div>
-            <div className="description">
-                <elementsLibrary.DocElement content={parameter.description} elementsLibrary={elementsLibrary}/>
-                <div className="values-description">
-                    <AvailableValues parameter={parameter}/>
-                    <DefaultValue parameter={parameter}/>
-                </div>
-            </div>
-        </React.Fragment>
+        <SingleRowParam name={name}
+                        type={typeAsStr(parameter)}
+                        description={parameter.description}
+                        elementsLibrary={elementsLibrary}
+                        renderedAdditionalDescription={valuesDescription}/>
     )
 }
 

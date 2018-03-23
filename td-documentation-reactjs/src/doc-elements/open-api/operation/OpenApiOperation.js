@@ -25,10 +25,10 @@ function OpenApiOperation({elementsLibrary, operation}) {
                 <elementsLibrary.DocElement content={operation.description} elementsLibrary={elementsLibrary}/>
             </div>
 
-            <OpenApiParameters label="Path parameters" parameters={pathParameters}/>
-            <OpenApiParameters label="Query parameters" parameters={queryParameters}/>
+            <OpenApiParameters label="Path parameters" parameters={pathParameters} elementsLibrary={elementsLibrary}/>
+            <OpenApiParameters label="Query parameters" parameters={queryParameters} elementsLibrary={elementsLibrary}/>
             <OpenApiBodyParameter parameter={bodyParameter} elementsLibrary={elementsLibrary}/>
-            <OpenApiResponses responses={operation.responses}/>
+            <OpenApiResponses responses={operation.responses} elementsLibrary={elementsLibrary}/>
         </div>
     )
 }

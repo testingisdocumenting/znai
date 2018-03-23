@@ -15,7 +15,7 @@ public class OpenApiOperation {
     private String summary;
     private String path;
     private List<String> tags = new ArrayList<>();
-    private List<DocElement> description = new ArrayList<>();
+    private List<Map<String, Object>> description = new ArrayList<>();
 
     private List<OpenApiParameter> parameters = new ArrayList<>();
     private List<Map<String, ?>> responses = new ArrayList<>();
@@ -84,11 +84,11 @@ public class OpenApiOperation {
         return tags != null && tagsToCheck.stream().allMatch(t -> this.tags.contains(t));
     }
 
-    public List<DocElement> getDescription() {
+    public List<Map<String, Object>> getDescription() {
         return description;
     }
 
-    public void setDescription(List<DocElement> description) {
+    public void setDescription(List<Map<String, Object>> description) {
         this.description = description;
     }
 
@@ -101,7 +101,7 @@ public class OpenApiOperation {
         result.put("tags", tags);
         result.put("parameters", parameters.stream().map(OpenApiParameter::toMap).collect(toList()));
         result.put("responses", responses);
-        result.put("description", description.stream().map(DocElement::toMap).collect(toList()));
+        result.put("description", description);
 
         return result;
     }

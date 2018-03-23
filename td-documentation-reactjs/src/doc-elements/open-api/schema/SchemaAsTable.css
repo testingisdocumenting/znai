@@ -1,18 +1,12 @@
 .open-api-schema-as-table {
-    --border-separator-inner-color: #f3f3f3;
-    --border-separator-outer-color: #e5e5e5;
-
 }
 
-.open-api-schema-table-param {
-    display: flex;
-    font-size: var(--mdoc-smaller-text-size);
-    font-family: var(--mdoc-regular-font-family);
+.open-api-schema-table.nested {
+    margin-left: 30px;
+}
 
-    padding: 16px 8px;
-    margin-right: 200px;
-
-    border-bottom: 1px solid var(--border-separator-inner-color);
+.open-api-schema-table.nested .open-api-single-row-param:first-child {
+    border-top: none;
 }
 
 .open-api-schema-table-param.expanded {
@@ -20,46 +14,10 @@
     border-bottom: none;
 }
 
-.open-api-schema-table-param:first-child {
-    border-top: 1px solid var(--border-separator-outer-color);
-}
-
-.open-api-schema-table-param:last-child {
-    border-bottom: 1px solid var(--border-separator-outer-color);
-}
-
-.open-api-schema-table.nested {
-    margin-left: 30px;
-}
-
-.open-api-schema-table.nested .open-api-schema-table-param:first-child {
-    border-top: none;
-}
-
-.open-api-schema-table-param > .name-and-type {
-    flex-basis: 160px;
-    margin-right: 20px;
-    text-align: right;
-}
-
-.open-api-schema-table-param > .name-and-type > .name {
-    color: var(--mdoc-black);
-}
-
-.open-api-schema-table-param > .name-and-type > .type {
-    color: var(--mdoc-meta-color);
-    font-size: var(--mdoc-small-meta-text-size);
-}
-
-.open-api-schema-table-param > .name-and-type > .expand-toggle {
+.open-api-single-row-param .expand-toggle {
     color: var(--mdoc-brand-primary-color);
     font-size: 18px;
 
     user-select: none;
     cursor: pointer;
-}
-
-.open-api-schema-table-param > .description {
-    flex: 1;
-    color: var(--mdoc-light-black);
 }

@@ -1,6 +1,10 @@
 .open-api-operation {
-    font-size: var(--mdoc-regular-text-size);
+    font-family: var(--mdoc-regular-font-family);
+    font-size: var(--mdoc-smaller-text-size);
+}
 
+.open-api-operation .content-block {
+    width: auto;
 }
 
 .open-api-operation > .url-and-summary {
@@ -28,15 +32,6 @@
 
 .open-api-operation > .description {
     margin-top: 5px;
-}
-
-.open-api-operation .sub-header {
-    color: var(--mdoc-black);
-    font-family: var(--mdoc-code-font-family);
-
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 5px;
 }
 
 .open-api-operation > .parameters,

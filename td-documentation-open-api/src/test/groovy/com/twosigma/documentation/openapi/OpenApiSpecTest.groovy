@@ -44,7 +44,7 @@ class OpenApiSpecTest {
 
     @Test
     void "should parse description as markdown and expose as doc elements"() {
-        findOneCustomer.description*.toMap().should == [[markdown: 'find one *customer*', type: 'TestMarkdown']]
+        findOneCustomer.description.should == [[markdown: 'find one *customer*', type: 'TestMarkdown']]
     }
 
     @Test
@@ -62,11 +62,11 @@ class OpenApiSpecTest {
     void "should list all the response codes and descriptions"() {
         def responses = spec.findOperationById('findOneCustomerUsingGET').responses
         responses.should == ['code' | 'description'] {
-                            ________________________
-                              '200' | 'OK'
-                              '401' | 'Unauthorized'
-                              '403' | 'Forbidden'
-                              '404' | 'Not Found'
+                            __________________________________________________________
+                              '200' | [[markdown: 'OK', type: 'TestMarkdown']]
+                              '401' | [[markdown: 'Unauthorized', type: 'TestMarkdown']]
+                              '403' | [[markdown: 'Forbidden', type: 'TestMarkdown']]
+                              '404' | [[markdown: 'Not Found', type: 'TestMarkdown']]
         }
     }
 
@@ -85,7 +85,9 @@ class OpenApiSpecTest {
 
         addPet.parameters.size().should == 1
         actual(addPet.parameters[0].schema).should(equal([type: 'object', required: ['name'],
-                                                          properties: [name: [type: 'string'], tag: [type: 'string']]]))
+                                                          properties: [name: [type: 'string',
+                                                                              description: [[markdown: 'pet name', type: 'TestMarkdown']]],
+                                                                       tag: [type: 'string']]]))
     }
 
     @Test
@@ -104,7 +106,8 @@ class OpenApiSpecTest {
         def addPet = spec.findOperationById('addPet')
 
         actual(addPet.responses[0].schema).should(equal([type: 'object',
-                                                         properties: [name: [type: 'string'],
+                                                         properties: [name: [type: 'string',
+                                                                             description: [[markdown: 'pet name', type: 'TestMarkdown']]],
                                                                       tag: [type: 'string'],
                                                                       id:[format: 'int64', type: 'integer']]]))
     }
