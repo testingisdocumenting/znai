@@ -1,15 +1,13 @@
 import React from 'react'
 
+import {SchemaAsTable} from './SchemaAsTable'
+
 import './OpenApiSchema.css'
-import SchemaAsJsonTree from './SchemaAsJsonTree'
-import {schemaToJson} from './schemaToJson'
 
 function OpenApiSchema({schema}) {
-    const asJson = schemaToJson(schema)
-
     return (
         <div className="open-api-schema">
-            <SchemaAsJsonTree json={asJson}/>
+            <SchemaAsTable schema={schema}/>
         </div>
     )
 }

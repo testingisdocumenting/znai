@@ -1,11 +1,15 @@
 :root {
     --mdoc-black: #333;
+    --mdoc-light-black: #555;
     --mdoc-brand-primary-color: #009AA6;
     --mdoc-rest-link-color: #7287b3;
     --mdoc-important-attention: #c52912;
-    --mdoc-meta: #888;
+    --mdoc-meta-color: #aaa;
 
     --mdoc-regular-text-size: 16px;
+    --mdoc-smaller-text-size: 14px;
+    --mdoc-small-meta-text-size: 12px;
+    --mdoc-regular-font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
     --mdoc-inlined-code-text-size: 14px;
     --mdoc-code-text-size: 13px;
@@ -60,7 +64,7 @@
 }
 
 body {
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: var(--mdoc-regular-font-family);
 }
 
 .emphasis {

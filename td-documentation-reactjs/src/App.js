@@ -22,7 +22,7 @@ snippets.registerAsGrid('DocUtils', 0, docUtilsDemo)
 snippets.registerAsGrid('Lang Class', 0, langClassDemo)
 snippets.registerAsGrid('Lang Function', 0, langFunctionDemo)
 snippets.registerAsGrid('Open API', 0, openApiOperationDemo)
-snippets.registerAsGrid('Open API Schema', 250, openApiSchemaDemo)
+snippets.registerAsGrid('Open API Schema', 0, openApiSchemaDemo)
 
 const layout = new Registry('layout')
 layout.registerAsTabs('Pages', pagesDemo)

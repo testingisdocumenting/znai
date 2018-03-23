@@ -1,26 +1,41 @@
 const customerSchema = {
     "properties": {
         "firstName": {
-            "type": "string"
+            "type": "string",
+            "description": "customer's first name"
         },
         "id": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "description": "customer's unique id"
         },
         "lastName": {
-            "type": "string"
+            "type": "string",
+            "description": "customer's last name"
         }
     },
-    "title": "Customer"
+    "title": "Customer",
+    "description": "Customer object"
 }
 
 const checkSchema = {
     "type": "object",
     "properties": {
         "id": {
-            "type": "string"
+            "type": "string",
+            "description": "id of a customer"
         },
-        "customer": customerSchema
+        "confirmationIds": {
+            "type": "array",
+            "items": {
+                type: "string"
+            }
+        },
+        "customer": customerSchema,
+        "customers": {
+            "type": "array",
+            "items": customerSchema
+        }
     },
     "title": "Check"
 }
