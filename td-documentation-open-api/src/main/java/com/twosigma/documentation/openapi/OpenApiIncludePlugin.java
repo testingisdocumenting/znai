@@ -56,7 +56,17 @@ public class OpenApiIncludePlugin implements IncludePlugin {
 
     private void findOperations() {
         String operationId = pluginParams.getOpts().get("operationId");
+        String method = pluginParams.getOpts().get("method", "");
+        String path = pluginParams.getOpts().get("path", "");
         List<String> tags = pluginParams.getOpts().getList("tags");
+
+        if ((path.isEmpty() && !method.isEmpty()) || (!path.isEmpty() && method.isEmpty())) {
+            throw new IllegalArgumentException("both method and path needs to be specified to find Open API operation");
+        }
+
+        if (!path.isEmpty()) {
+            operations.add(openApiSpec.findOperationByMethodAndPath(method, path));
+        }
 
         if (operationId != null) {
             operations.add(openApiSpec.findOperationById(operationId));

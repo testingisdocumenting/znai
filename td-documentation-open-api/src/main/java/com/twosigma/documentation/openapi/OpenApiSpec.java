@@ -44,6 +44,11 @@ public class OpenApiSpec {
                 .orElseThrow(() -> new RuntimeException("cannot find operation: " + operationId));
     }
 
+    public OpenApiOperation findOperationByMethodAndPath(String method, String path) {
+        return operations.stream().filter(o -> o.matches(method, path)).findFirst()
+                .orElseThrow(() -> new RuntimeException("cannot find operation: " + method + " " + path));
+    }
+
     public List<OpenApiOperation> findOperationsByTags(List<String> tags) {
         return operations.stream().filter(o -> o.hasTags(tags)).collect(toList());
     }

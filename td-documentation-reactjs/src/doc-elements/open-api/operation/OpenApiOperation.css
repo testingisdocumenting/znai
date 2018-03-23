@@ -17,20 +17,23 @@
 }
 
 .open-api-operation > .url-and-summary > .method {
-    text-transform: uppercase;
-    font-weight: bold;
     color: var(--mdoc-black);
+    font-size: var(--mdoc-regular-text-size);
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .open-api-operation > .url-and-summary > .path {
-    font-weight: bold;
     color: var(--mdoc-black);
+    font-size: var(--mdoc-regular-text-size);
+    font-weight: bold;
 }
 
 .open-api-operation > .url-and-summary > .summary {
 }
 
 .open-api-operation > .description {
+    font-size: var(--mdoc-regular-text-size);
     margin-top: 5px;
 }
 

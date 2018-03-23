@@ -80,6 +80,12 @@ class OpenApiSpecTest {
     }
 
     @Test
+    void "should find operation by method and path"() {
+        def op = spec.findOperationByMethodAndPath('get', '/pets')
+        op.id.should == 'findPets'
+    }
+
+    @Test
     void "should substitute schema ref with an actual schema for parameters"() {
         def addPet = spec.findOperationById('addPet')
 

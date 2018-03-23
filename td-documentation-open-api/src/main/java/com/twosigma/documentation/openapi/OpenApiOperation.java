@@ -80,6 +80,10 @@ public class OpenApiOperation {
         this.tags = tags;
     }
 
+    public boolean matches(String method, String path) {
+        return this.method.equals(method) && this.path.equals(path);
+    }
+
     public boolean hasTags(List<String> tagsToCheck) {
         return tags != null && tagsToCheck.stream().allMatch(t -> this.tags.contains(t));
     }
