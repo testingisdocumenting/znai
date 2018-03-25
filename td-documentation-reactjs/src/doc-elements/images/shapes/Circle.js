@@ -6,7 +6,7 @@ const CircleBody = ({x, y, r, color, text, ...props}) => {
 
     return (
         <g>
-           <circle cx={x} cy={y} r={r} stroke={colorScheme.stroke} strokeWidth="4" fill={colorScheme.fill} opacity={0.5} {...props}/>
+           <circle cx={x} cy={y} r={r} stroke={colorScheme.stroke} strokeWidth="4" fill={colorScheme.fill} strokeOpacity={0.9} fillOpacity={0.6} {...props}/>
            <text x={x} y={y} fill={colorScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text>
         </g>
     );

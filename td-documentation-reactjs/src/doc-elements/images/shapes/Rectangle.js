@@ -5,7 +5,7 @@ const RectangleBody = ({x, y, width, height, color, text, ...props}) => {
     const colorScheme = colorByName(color)
     return (
         <g>
-            <rect x={x} y={y} width={width} fill={colorScheme.fill} stroke={colorScheme.stroke} height={height} strokeWidth="4" opacity={0.4} {...props} />
+            <rect x={x} y={y} width={width} fill={colorScheme.fill} stroke={colorScheme.stroke} height={height} strokeWidth="4" fillOpacity={0.4} {...props} />
             { text ? <text x={x + width/2} y={y + height/2} fill={colorScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text> : null }
         </g>
     );
