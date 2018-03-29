@@ -1,7 +1,6 @@
 package rest.springboot
 
-import static com.twosigma.testing.webtau.WebTauDsl.http
-import static com.twosigma.testing.webtau.WebTauGroovyDsl.scenario
+import static com.twosigma.testing.webtau.WebTauGroovyDsl.*
 
 scenario("CRUD operations for customer") {
     def customerPayload = [firstName: "FN", lastName: "LN"]
