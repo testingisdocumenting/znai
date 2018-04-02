@@ -1,8 +1,8 @@
-import { extractDefinitions } from './definitionsExtractor';
+const { extractDefinitions } = require('./definitionsExtractor');
 
 describe('definitionsExtractor', () => {
     it('parses js docs', () => {
-        const definitions = extractDefinitions('src/main/typescript/test-data/Sample.ts');
+        const definitions = extractDefinitions('src/main/javascript/test-data/Sample.ts');
 
         expect(definitions[0]).toEqual({
             'name': 'Sample',

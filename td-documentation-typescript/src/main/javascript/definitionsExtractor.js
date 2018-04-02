@@ -1,7 +1,9 @@
-import * as ts from 'typescript';
-import * as fs from 'fs';
+const ts = require('typescript');
+const fs = require('fs');
 
-export function extractDefinitions(filePath: string): object[] {
+module.exports.extractDefinitions = extractDefinitions;
+
+function extractDefinitions(filePath) {
     const compilerOptions = { module: ts.ModuleKind.None };
     const program = ts.createProgram([filePath], compilerOptions);
 
@@ -9,14 +11,14 @@ export function extractDefinitions(filePath: string): object[] {
 
     const fileContent = fs.readFileSync(filePath, 'utf-8');
 
-    const definitions: object[] = [];
+    const definitions = [];
 
     const userSpecifiedSources = program.getSourceFiles().filter(sf => sf.fileName.indexOf(filePath) !== -1);
     userSpecifiedSources.forEach(sf => ts.forEachChild(sf, visit));
 
     return definitions;
 
-    function visit(node: ts.Node) {
+    function visit(node) {
         if (ts.isClassDeclaration(node) && node.name) {
             const symbol = checker.getSymbolAtLocation(node.name);
 
@@ -26,28 +28,28 @@ export function extractDefinitions(filePath: string): object[] {
         }
     }
 
-    function serializeSymbol(symbol: ts.Symbol): object {
+    function serializeSymbol(symbol) {
         return {
             name: symbol.getName(),
             documentation: ts.displayPartsToString(symbol.getDocumentationComment(undefined)),
-            type: checker.typeToString(checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration!))
-        };
+            type: checker.typeToString(checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration))
+        }
     }
 
-    function serializeClass(symbol: ts.Symbol) {
+    function serializeClass(symbol) {
         let details = serializeSymbol(symbol);
 
         if (!symbol) {
             return details;
         }
 
-        const keys = symbol.members!.keys();
+        const keys = symbol.members.keys();
         let next = keys.next();
 
         const serializedMembers = [];
 
         while (! next.done) {
-            const member = symbol.members!.get(next.value);
+            const member = symbol.members.get(next.value);
             if (member) {
                 const serialized = serializeMember(member);
                 serializedMembers.push(serialized);
@@ -56,11 +58,11 @@ export function extractDefinitions(filePath: string): object[] {
             next = keys.next();
         }
 
-        return {...details, members: serializedMembers};
+        return Object.assign({}, details, {members: serializedMembers});
     }
 
-    function serializeMember(symbol: ts.Symbol) {
-        const kind = symbol.valueDeclaration!.kind;
+    function serializeMember(symbol) {
+        const kind = symbol.valueDeclaration.kind;
 
         switch (kind) {
             case ts.SyntaxKind.PropertyDeclaration:
@@ -72,17 +74,17 @@ export function extractDefinitions(filePath: string): object[] {
         }
     }
 
-    function serializeProperty(symbol: ts.Symbol) {
+    function serializeProperty(symbol) {
         return {
             name: symbol.name,
-            type: checker.typeToString(checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration!)),
+            type: checker.typeToString(checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration)),
             documentation: ts.displayPartsToString(symbol.getDocumentationComment(checker)),
             kind: 'property'
-        };
+        }
     }
 
-    function serializeMethod(symbol: ts.Symbol) {
-        const bodyNode = symbol.valueDeclaration!.body;
+    function serializeMethod(symbol) {
+        const bodyNode = symbol.valueDeclaration.body;
         const body = textOfNode(bodyNode);
 
         return {
@@ -94,16 +96,16 @@ export function extractDefinitions(filePath: string): object[] {
         };
     }
 
-    function serializeParameters(symbol: ts.Symbol) {
+    function serializeParameters(symbol) {
         const paramsDocs = paramsDocsByName(symbol);
 
-        return symbol.valueDeclaration!.parameters.map(p => {
+        return symbol.valueDeclaration.parameters.map(p => {
             const name = p.name.escapedText;
             return {name: name, type: textOfNode(p.type), documentation: paramsDocs[name]};
         });
     }
 
-    function paramsDocsByName(symbol: ts.Symbol) {
+    function paramsDocsByName(symbol) {
         const docs = {};
         symbol.valueDeclaration.jsDoc.forEach(jsDoc => {
             const paramTags = jsDoc.tags.filter(tag => tag.kind === ts.SyntaxKind.JSDocParameterTag);
@@ -116,7 +118,7 @@ export function extractDefinitions(filePath: string): object[] {
         return docs;
     }
 
-    function textOfNode(node: ts.Node) {
+    function textOfNode(node) {
         return fileContent.substr(node.pos, node.end - node.pos);
     }
 }
