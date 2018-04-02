@@ -1,5 +1,5 @@
 import React from 'react'
-import SingleRowParam from '../common/SingleRowParam'
+import ApiSingleRowParam from '../../api/ApiSingleRowParam'
 
 function OpenApiParameter({elementsLibrary, parameter}) {
     const name = parameter.name + (parameter.required ? '*' : '')
@@ -12,11 +12,11 @@ function OpenApiParameter({elementsLibrary, parameter}) {
     )
 
     return (
-        <SingleRowParam name={name}
-                        type={typeAsStr(parameter)}
-                        description={parameter.description}
-                        elementsLibrary={elementsLibrary}
-                        renderedAdditionalDescription={valuesDescription}/>
+        <ApiSingleRowParam name={name}
+                           type={typeAsStr(parameter)}
+                           description={parameter.description}
+                           elementsLibrary={elementsLibrary}
+                           renderedAdditionalDescription={valuesDescription}/>
     )
 }
 

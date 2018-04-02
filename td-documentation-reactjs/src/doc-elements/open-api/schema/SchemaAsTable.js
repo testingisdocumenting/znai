@@ -1,5 +1,6 @@
 import React from 'react'
-import SingleRowParam from '../common/SingleRowParam'
+
+import ApiSingleRowParam from '../../api/ApiSingleRowParam'
 
 import './SchemaAsTable.css'
 
@@ -149,12 +150,12 @@ function SingleParam({name, type, description, path, structure, elementsLibrary,
         </div>
 
     return (
-        <SingleRowParam name={name}
-                        type={type}
-                        description={description}
-                        isExpanded={isExpanded}
-                        elementsLibrary={elementsLibrary}
-                        actionElements={expandToggle}/>
+        <ApiSingleRowParam name={name}
+                           type={type}
+                           description={description}
+                           isExpanded={isExpanded}
+                           elementsLibrary={elementsLibrary}
+                           actionElements={expandToggle}/>
     )
 }
 

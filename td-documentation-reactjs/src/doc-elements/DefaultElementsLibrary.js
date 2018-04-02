@@ -30,9 +30,10 @@ import presentationAnnotatedImageHandler from './images/PresentationAnnotatedIma
 import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
 import {MarkdownAndResult, presentationMarkdownAndResultHandler} from './markdown/MarkdownAndResult'
 import WebTauRest from './test-results/WebTauRest'
-import LangClass from './lang/LangClass';
-import LangFunction from './lang/LangFunction';
-import OpenApiOperation from './open-api/operation/OpenApiOperation';
+import LangClass from './lang/LangClass'
+import LangFunction from './lang/LangFunction'
+import ApiParameters from './api/ApiParameters'
+import OpenApiOperation from './open-api/operation/OpenApiOperation'
 import {registerDocUtilsElements} from './doc-utils/DocUtils'
 
 const library = {}
@@ -124,6 +125,8 @@ presentationElementHandlers.CliCommand = presentationCliCommandHandler
 
 library.CliOutput = CliOutput
 presentationElementHandlers.CliOutput = presentationCliOutput
+
+library.ApiParameters = ApiParameters
 
 library.Footer = Footer
 

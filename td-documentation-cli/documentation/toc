@@ -15,6 +15,7 @@ snippets
     external-code-snippets
     java
     groovy
+    typescript
     cpp
     json
     CLI

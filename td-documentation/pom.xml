@@ -59,6 +59,12 @@
 
         <dependency>
             <groupId>com.twosigma.td</groupId>
+            <artifactId>td-documentation-typescript</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.twosigma.td</groupId>
             <artifactId>td-documentation-sphinx</artifactId>
             <version>${project.version}</version>
         </dependency>

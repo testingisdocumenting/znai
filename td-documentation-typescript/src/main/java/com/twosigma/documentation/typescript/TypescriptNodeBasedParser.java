@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class TypescriptNodeBasedParser {
@@ -23,11 +24,12 @@ public class TypescriptNodeBasedParser {
         outputStream = node.getOutputStream();
     }
 
-    public List<?> parsedFile(String filePath) {
-        write(filePath);
+    @SuppressWarnings("unchecked")
+    public List<Map<String, ?>> parsedFile(Path filePath) {
+        write(filePath.toAbsolutePath().toString());
         String response = readResponse();
 
-        return JsonUtils.deserializeAsList(response);
+        return (List<Map<String, ?>>) JsonUtils.deserializeAsList(response);
     }
 
     private Path tempParserCodeLocation() {

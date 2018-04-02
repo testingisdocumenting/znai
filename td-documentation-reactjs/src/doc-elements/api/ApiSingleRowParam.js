@@ -1,8 +1,8 @@
 import React from 'react'
 
-import './SingleRowParam.css'
+import './ApiSingleRowParam.css'
 
-export default function SingleRowParam({
+export default function ApiSingleRowParam({
                                            name,
                                            type,
                                            description,
@@ -11,7 +11,7 @@ export default function SingleRowParam({
                                            renderedAdditionalDescription,
                                            elementsLibrary
                                        }) {
-    const className = 'open-api-single-row-param' + (isExpanded ? ' expanded' : '')
+    const className = 'generic-api-single-row-param' + (isExpanded ? ' expanded' : '')
 
     return (
         <div className={className}>

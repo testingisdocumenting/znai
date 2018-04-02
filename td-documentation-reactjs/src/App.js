@@ -16,12 +16,14 @@ import {openApiSchemaDemo} from './doc-elements/open-api/schema/OpenApiSchema.de
 import {docUtilsDemo} from './doc-elements/doc-utils/DocUtils.demo'
 import {pagesDemo} from './doc-elements/page/Page.demo'
 import {imageAnnotationDemo} from './doc-elements/images/EmbeddedAnnotatedImage.demo'
+import {apiParametersDemo} from './doc-elements/api/ApiParameters.demo'
 
 const snippets = new Registry('snippets')
 snippets.registerAsGrid('Json', 0, jsonDemo)
 snippets.registerAsGrid('DocUtils', 0, docUtilsDemo)
 snippets.registerAsGrid('Lang Class', 0, langClassDemo)
 snippets.registerAsGrid('Lang Function', 0, langFunctionDemo)
+snippets.registerAsGrid('API Parameters', 0, apiParametersDemo)
 snippets.registerAsGrid('Open API', 0, openApiOperationDemo)
 snippets.registerAsGrid('Open API Schema', 0, openApiSchemaDemo)
 
