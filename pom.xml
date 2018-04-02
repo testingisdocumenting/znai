@@ -38,6 +38,7 @@
         <module>td-documentation-ecmascript</module>
         <module>td-documentation-sphinx</module>
         <module>td-documentation-open-api</module>
+        <module>td-documentation-typescript</module>
         <module>td-documentation-reactjs-api</module>
         <module>td-documentation-reactjs</module>
         <module>td-documentation-server</module>
