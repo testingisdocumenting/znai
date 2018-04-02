@@ -11,6 +11,7 @@ import 'prismjs/components/prism-cpp'
 import 'prismjs/components/prism-json'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-yaml'
+import 'prismjs/components/prism-typescript'
 
 export {parseCode}
 
@@ -29,7 +30,8 @@ const extensionsMapping = {
     hpp: 'cpp',
     cpp: 'cpp',
     js: 'javascript',
-    py: 'python'
+    py: 'python',
+    ts: 'typescript',
 }
 
 function adjustLang(lang) {
