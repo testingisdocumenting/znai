@@ -3,6 +3,10 @@
     --border-separator-outer-color: #e5e5e5;
 }
 
+.generic-api-single-row-param .content-block {
+    width: auto;
+}
+
 .generic-api-single-row-param {
     max-width: 600px;
 
@@ -34,7 +38,7 @@
 }
 
 .generic-api-single-row-param > .name-and-type > .name {
-    color: var(--mdoc-black);
+    color: var(--mdoc-function-color);
 }
 
 .generic-api-single-row-param > .name-and-type > .type {
