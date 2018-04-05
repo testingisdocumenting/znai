@@ -1,7 +1,8 @@
 import React from 'react'
 
-import './WebTauRest.css'
 import RestPayload from './RestPayload'
+
+import './WebTauRest.css'
 
 const WebTauRest = ({testArtifact}) => {
     return (

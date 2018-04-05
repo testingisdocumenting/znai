@@ -1,6 +1,6 @@
 .page-two-sides-layout {
     display: grid;
-    grid-template-columns: minmax(300px, 4fr) minmax(300px, 6fr);
+    grid-template-columns: minmax(350px, 7fr) minmax(400px, 8fr);
 }
 
 .page-two-side-left-part,
@@ -14,7 +14,7 @@
     background-color: var(--mdoc-inversed-background-color);
 
     --mdoc-function-color: #a15b38;
-    --mdoc-keyword-color: #000080;
+    --mdoc-keyword-color: #477fe7;
     --mdoc-property-color: #9473a6;
     --mdoc-string-color: #678558;
     --mdoc-punctuation-color: #aab8c7;
