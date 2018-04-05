@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {textSelection} from '../selected-text-extensions/TextSelection'
-import Icon from '../icons/Icon'
 
 import './Section.css'
 
@@ -10,9 +9,7 @@ class Section extends Component {
 
         const sectionTitle = title ? (
             <div className="content-block">
-                <h1 className="section-title" id={id}>{title}
-                    <a href={"#" + id}><Icon id="link"/></a>
-                </h1>
+                <props.elementsLibrary.SectionTitle id={id} title={title}/>
             </div>
         ) : null
 

@@ -1,5 +1,6 @@
 import DefaultPageContent from './DefaultPageContent'
 import ApiPageContent from './api/ApiPageContent'
+import TwoSidesPageContent from './two-sides/TwoSidesPageContent'
 
 class PageTypesRegistry {
     _contentComponentByType = {}
@@ -30,5 +31,6 @@ const pageTypesRegistry = new PageTypesRegistry()
 
 pageTypesRegistry.registerContentComponent(defaultType, {pageContentComponent: DefaultPageContent, expandToc: true})
 pageTypesRegistry.registerContentComponent('api', {pageContentComponent: ApiPageContent, expandToc: false})
+pageTypesRegistry.registerContentComponent('two-sides', {pageContentComponent: TwoSidesPageContent, expandToc: true})
 
 export {pageTypesRegistry}

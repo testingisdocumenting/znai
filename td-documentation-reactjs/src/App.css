@@ -19,6 +19,9 @@
     --mdoc-keyword-color: #000080;
     --mdoc-property-color: #660e7a;
     --mdoc-punctuation-color: #888;
+
+    --mdoc-inversed-text-color: #efefef;
+    --mdoc-inversed-background-color: #4c555a;
 }
 
 @font-face {

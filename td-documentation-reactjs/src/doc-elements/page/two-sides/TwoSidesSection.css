@@ -1,0 +1,7 @@
+.two-sides-section {
+    font-size: var(--mdoc-regular-text-size);
+}
+
+.two-sides-section .content-block {
+    width: auto;
+}

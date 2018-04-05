@@ -3,9 +3,12 @@
  :include-meta: {key: 'value'}
  */
 
-
 function isAllAtOnce(meta) {
     return meta && meta.allAtOnce
 }
 
-export {isAllAtOnce}
+function elementMetaValue(element, key) {
+    return element && element.meta ? element.meta[key] : null
+}
+
+export {isAllAtOnce, elementMetaValue}

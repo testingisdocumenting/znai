@@ -3,6 +3,12 @@ li.icon-based {
     display: flex;
 }
 
+li.icon-based .content-block {
+    list-style: none;
+    display: flex;
+    margin-left: 0;
+}
+
 li.icon-based .glyphicon {
     margin-right: 10px;
     font-size: 18px;

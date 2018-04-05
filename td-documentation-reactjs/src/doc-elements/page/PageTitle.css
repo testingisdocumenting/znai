@@ -1,0 +1,25 @@
+.page-title {
+    font-size: 36px;
+}
+
+.page-title-block {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-meta-block {
+    display: flex;
+    color: var(--mdoc-meta-color);
+    font-size: 12px;
+}
+
+.page-view-on a {
+    margin-left: 20px;
+    color: var(--mdoc-meta-color)
+}
+
+.page-last-update-time {
+    color: var(--mdoc-meta-color);
+}

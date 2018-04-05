@@ -1,9 +1,15 @@
 import React from 'react'
+import PageTitle from './PageTitle'
 
-const DefaultPageContent = ({elementsLibrary, content}) => {
+const DefaultPageContent = (props) => {
     return (
-        <elementsLibrary.DocElement elementsLibrary={elementsLibrary}
-                                    content={content}/>
+        <React.Fragment>
+            <div className="content-block">
+                <PageTitle {...props}/>
+            </div>
+            <props.elementsLibrary.DocElement elementsLibrary={props.elementsLibrary}
+                                              content={props.content}/>
+        </React.Fragment>
     )
 }
 

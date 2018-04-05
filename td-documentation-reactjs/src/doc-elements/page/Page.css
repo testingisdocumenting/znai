@@ -1,29 +1,3 @@
-.page-content .page-title-block {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.page-content .page-meta-block {
-    display: flex;
-    color: #888;
-    font-size: 12px;
-}
-
-.page-content .view-on a {
-    margin-left: 20px;
-    color: #888
-}
-
-.page-content .page-title {
-    font-size: 36px;
-}
-
-.page-content .last-update-time {
-    color: #888;
-}
-
 .page-content h2 {
     font-size: 21px;
     color: #000;

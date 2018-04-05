@@ -5,6 +5,7 @@ import {Page} from './Page'
 export function pagesDemo(registry) {
     const defaultPage = defaultPageContent('page1')
     const apiPage = defaultPageContent('page2', 'api')
+    const twoSidesPage = defaultPageContent('page3', 'two-sides')
 
     registry
         .add('default page', <Page elementsLibrary={elementsLibrary}
@@ -13,6 +14,9 @@ export function pagesDemo(registry) {
         .add('api page', <Page elementsLibrary={elementsLibrary}
                                docMeta={docMeta()}
                                {...apiPage}/>)
+        .add('two sides page', <Page elementsLibrary={elementsLibrary}
+                                     docMeta={docMeta()}
+                                     {...twoSidesPage}/>)
 }
 
 function docMeta() {
@@ -55,12 +59,18 @@ function defaultPageContent(fileName, pageType) {
                                 "text": "Depending on your product and clients, stale documentation effects are:",
                                 "type": "SimpleText"
                             }
-                        ]
+                        ],
+                        "meta": {
+                            "rightSide": true,
+                        }
                     },
                     {
                         "bulletMarker": "*",
                         "tight": true,
                         "type": "BulletList",
+                        "meta": {
+                            "rightSide": true,
+                        },
                         "content": [
                             {
                                 "type": "ListItem",
@@ -172,12 +182,18 @@ function defaultPageContent(fileName, pageType) {
                                 "text": "Now it is time to add to it",
                                 "type": "SimpleText"
                             }
-                        ]
+                        ],
+                        "meta": {
+                            "rightSide": true,
+                        }
                     },
                     {
                         "bulletMarker": "*",
                         "tight": true,
                         "type": "BulletList",
+                        "meta": {
+                            "rightSide": true,
+                        },
                         "content": [
                             {
                                 "type": "ListItem",
@@ -522,6 +538,9 @@ function defaultPageContent(fileName, pageType) {
                         "bulletMarker": "*",
                         "tight": true,
                         "type": "BulletList",
+                        "meta": {
+                            "rightSide": true,
+                        },
                         "content": [
                             {
                                 "type": "ListItem",

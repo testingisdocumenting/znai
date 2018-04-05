@@ -1,0 +1,15 @@
+.page-two-sides-layout {
+    display: grid;
+    grid-template-columns: minmax(300px, 4fr) minmax(300px, 6fr);
+}
+
+.page-two-side-left-part,
+.page-two-side-right-part {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.page-two-side-right-part {
+    color: var(--mdoc-inversed-text-color);
+    background-color: var(--mdoc-inversed-background-color);
+}

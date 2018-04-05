@@ -1,6 +1,7 @@
 import React from 'react'
 import DocElement from './default-elements/DocElement'
 import {Page, presentationPageHandler} from './page/Page'
+import SectionTitle from './default-elements/SectionTitle'
 import {Section, presentationSectionHandler} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
@@ -79,6 +80,7 @@ presentationElementHandlers.OrderedList = {component: library.OrderedList,
 
 library.ListItem = ListItem
 
+library.SectionTitle = SectionTitle
 library.Section = Section
 presentationElementHandlers.Section = presentationSectionHandler
 
