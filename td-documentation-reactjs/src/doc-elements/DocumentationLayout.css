@@ -245,8 +245,8 @@
     right: 40px;
     top: 20px;
     cursor: pointer;
-    color: #000;
-    opacity: 0.4;
+    color: #aaa;
+    opacity: 0.7;
 }
 
 .search-button:hover {
