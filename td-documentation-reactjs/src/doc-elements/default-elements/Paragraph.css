@@ -7,7 +7,7 @@
     align-items: baseline;
     margin-top: 24px;
     margin-bottom: 24px;
-    padding: 8px 200px 8px 16px;
+    padding: 8px 0 8px 16px;
 }
 
 .paragraph.attention .icon-part {
@@ -28,6 +28,7 @@
 
 .paragraph.attention .message-part {
     flex: 1;
+    max-width: var(--mdoc-single-column-partial-width);
 }
 
 .paragraph.attention.note {

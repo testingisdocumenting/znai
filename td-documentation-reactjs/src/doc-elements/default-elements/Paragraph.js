@@ -18,15 +18,17 @@ const DefaultParagraph = (props) => {
 
 const ParagraphWithAttention = ({attentionType, suffix, icon, ...props}) => {
     const contentWithRemovedSuffix = removeSuffixFromParagraph(props.content, suffix)
-    return <div className={`paragraph attention ${attentionType} content-block`}>
-        <span className="icon-part">
-            <span className="icon"><Icon id={icon}/></span>
-            <span className="label-message">{suffix}</span>
-        </span>
-        <span className="message-part">
-            <props.elementsLibrary.DocElement {...props} content={contentWithRemovedSuffix}/>
-        </span>
-    </div>
+    return (
+        <div className={`paragraph attention ${attentionType} content-block`}>
+            <span className="icon-part">
+                <span className="icon"><Icon id={icon}/></span>
+                <span className="label-message">{suffix}</span>
+            </span>
+            <span className="message-part">
+                <props.elementsLibrary.DocElement {...props} content={contentWithRemovedSuffix}/>
+            </span>
+        </div>
+    )
 }
 
 const NoteParagraph = (props) => <ParagraphWithAttention attentionType="note" suffix={noteSuffix} icon="info-sign" {...props}/>

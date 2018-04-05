@@ -6,6 +6,9 @@
     --mdoc-important-attention: #c52912;
     --mdoc-meta-color: #aaa;
 
+    --mdoc-single-column-full-width: 900px;
+    --mdoc-single-column-partial-width: 600px;
+
     --mdoc-regular-text-size: 16px;
     --mdoc-smaller-text-size: 14px;
     --mdoc-small-meta-text-size: 12px;
@@ -83,7 +86,7 @@ body {
 }
 
 .content-block {
-    width: 900px;
+    width: var(--mdoc-single-column-full-width);
     margin-left: auto;
     margin-right: auto;
 }

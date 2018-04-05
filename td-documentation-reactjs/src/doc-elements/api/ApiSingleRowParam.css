@@ -8,7 +8,7 @@
 }
 
 .generic-api-single-row-param {
-    max-width: 600px;
+    max-width: var(--mdoc-single-column-partial-width);
 
     display: flex;
     font-size: var(--mdoc-smaller-text-size);
