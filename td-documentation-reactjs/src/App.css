@@ -17,11 +17,15 @@
 
     --mdoc-function-color: #a15b38;
     --mdoc-keyword-color: #000080;
+    --mdoc-number-color: #0000ff;
+    --mdoc-string-color: #008000;
+    --mdoc-highlighted-background-color: #ffb06f;
+    --mdoc-highlighted-color: #444;
     --mdoc-property-color: #660e7a;
     --mdoc-punctuation-color: #888;
 
-    --mdoc-inversed-text-color: #efefef;
-    --mdoc-inversed-background-color: #4c555a;
+    --mdoc-inversed-text-color: #bbbbbb;
+    --mdoc-inversed-background-color: #282f34;
 }
 
 @font-face {

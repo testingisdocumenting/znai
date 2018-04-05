@@ -30,7 +30,7 @@
 }
 
 .token.number {
-    color: #0000ff;
+    color: var(--mdoc-number-color);
 }
 
 .token.keyword {
@@ -39,13 +39,13 @@
 }
 
 .token.string {
-    color: #008000;
+    color: var(--mdoc-string-color);
     font-weight: bold;
 }
 
 .token.highlighted {
     padding: 2px;
     border-radius: 5px;
-    background-color: rgba(255, 176, 111, 0.3);
-    color: #444;
+    background-color: var(--mdoc-highlighted-background-color);
+    color: var(--mdoc-highlighted-color);
 }

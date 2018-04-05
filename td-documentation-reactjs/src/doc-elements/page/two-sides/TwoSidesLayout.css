@@ -12,4 +12,13 @@
 .page-two-side-right-part {
     color: var(--mdoc-inversed-text-color);
     background-color: var(--mdoc-inversed-background-color);
+
+    --mdoc-function-color: #a15b38;
+    --mdoc-keyword-color: #000080;
+    --mdoc-property-color: #9473a6;
+    --mdoc-string-color: #678558;
+    --mdoc-punctuation-color: #aab8c7;
+    --mdoc-number-color: #6998bc;
+    --mdoc-highlighted-background-color: #714738;
+    --mdoc-highlighted-color: #a6a6a6;
 }
