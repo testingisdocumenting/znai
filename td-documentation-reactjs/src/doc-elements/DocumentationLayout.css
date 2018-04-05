@@ -198,36 +198,6 @@
     top: 20px;
 }
 
-.next-prev-buttons {
-    margin-top: 150px;
-    margin-bottom: 100px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.page-navigation-button-and-text {
-    display: flex;
-    align-items: stretch;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.page-navigation-button-and-text .next-prev-page-title {
-    padding-top: 2px;
-}
-
-.page-navigation-button-and-text .glyphicon-chevron-right {
-    margin-left: 10px;
-    font-size: 24px;
-    color: var(--mdoc-brand-primary-color);
-}
-
-.page-navigation-button-and-text .glyphicon-chevron-left {
-    margin-right: 10px;
-    font-size: 24px;
-    color: var(--mdoc-brand-primary-color);
-}
-
 .page-gen-error {
     position: absolute;
     left: 0;

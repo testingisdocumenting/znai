@@ -1,0 +1,33 @@
+.page-default-next-prev-navigation {
+    margin-top: var(--mdoc-space-above-next-prev-navigation);
+    margin-bottom: var(--mdoc-space-below-next-prev-navigation);
+    display: flex;
+    justify-content: space-between;
+}
+
+.default-next-prev-navigation-button {
+    display: flex;
+    align-items: stretch;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.default-next-prev-navigation-button > .next-prev-page-title {
+    flex: 1;
+    padding-top: 2px;
+}
+
+.default-next-prev-navigation-button > .glyphicon-chevron-right,
+.default-next-prev-navigation-button > .glyphicon-chevron-left {
+    font-size: 24px;
+    color: var(--mdoc-brand-primary-color);
+}
+
+.default-next-prev-navigation-button > .glyphicon-chevron-right {
+    margin-left: 10px;
+}
+
+.default-next-prev-navigation-button > .glyphicon-chevron-left {
+    margin-right: 10px;
+}
+

@@ -1,0 +1,14 @@
+.two-sides-prev-navigation-button,
+.two-sides-next-navigation-button {
+    margin-top: var(--mdoc-space-above-next-prev-navigation);
+    margin-bottom: var(--mdoc-space-below-next-prev-navigation);
+}
+
+.two-sides-prev-navigation-button {
+    margin-left: 50px;
+}
+
+.two-sides-next-navigation-button {
+    margin-right: 50px;
+    text-align: right;
+}

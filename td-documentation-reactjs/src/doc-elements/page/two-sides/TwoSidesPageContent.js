@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import TwoSidesSection from './TwoSidesSection'
-import {TwoSidesLayout, LeftPart, RightPart} from './TwoSidesLayout'
+import {TwoSidesLayout, TwoSidesLayoutLeftPart, TwoSidesLayoutRightPart} from './TwoSidesLayout'
 import PageTitle from '../PageTitle'
 
 import './TwoSidesPageContent.css'
@@ -18,11 +18,11 @@ class TwoSidesPageContent extends Component {
         return (
             <div className="two-sides-page-content">
                 <TwoSidesLayout>
-                    <LeftPart>
+                    <TwoSidesLayoutLeftPart>
                         <PageTitle {...props} elementsLibrary={elementsLibrary}/>
-                    </LeftPart>
+                    </TwoSidesLayoutLeftPart>
 
-                    <RightPart/>
+                    <TwoSidesLayoutRightPart/>
                 </TwoSidesLayout>
 
                 {content.map(section =>

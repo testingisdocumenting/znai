@@ -1,20 +1,30 @@
-import DefaultPageContent from './DefaultPageContent'
+import DefaultPageContent from './default/DefaultPageContent'
+import {PageDefaultNextPrevNavigation} from './default/PageDefaultNextPrevNavigation'
 import ApiPageContent from './api/ApiPageContent'
 import TwoSidesPageContent from './two-sides/TwoSidesPageContent'
+import TwoSidesNextPrevNavigation from './two-sides/TwoSidesNextPrevNavigation'
 
 class PageTypesRegistry {
     _contentComponentByType = {}
 
     expandToc(tocItem) {
-        return this._contentComponentByType[pageType(tocItem)].expandToc
+        return this._registered(tocItem).expandToc
     }
 
     pageContentComponent(tocItem) {
-        return this._contentComponentByType[pageType(tocItem)].pageContentComponent
+        return this._registered(tocItem).pageContentComponent
     }
 
-    registerContentComponent(type, {pageContentComponent, expandToc}) {
-        this._contentComponentByType[type] = {pageContentComponent, expandToc}
+    nextPrevNavigationComponent(tocItem) {
+        return this._registered(tocItem).nextPrevNavigationComponent
+    }
+
+    registerContentComponent(type, {pageContentComponent, nextPrevNavigationComponent, expandToc}) {
+        this._contentComponentByType[type] = {pageContentComponent, nextPrevNavigationComponent, expandToc}
+    }
+
+    _registered(tocItem) {
+        return this._contentComponentByType[pageType(tocItem)]
     }
 }
 
@@ -29,8 +39,22 @@ function pageType(tocItem) {
 
 const pageTypesRegistry = new PageTypesRegistry()
 
-pageTypesRegistry.registerContentComponent(defaultType, {pageContentComponent: DefaultPageContent, expandToc: true})
-pageTypesRegistry.registerContentComponent('api', {pageContentComponent: ApiPageContent, expandToc: false})
-pageTypesRegistry.registerContentComponent('two-sides', {pageContentComponent: TwoSidesPageContent, expandToc: true})
+pageTypesRegistry.registerContentComponent(defaultType, {
+    pageContentComponent: DefaultPageContent,
+    nextPrevNavigationComponent: PageDefaultNextPrevNavigation,
+    expandToc: true
+})
+
+pageTypesRegistry.registerContentComponent('api', {
+    pageContentComponent: ApiPageContent,
+    expandToc: false,
+    nextPrevNavigationComponent: PageDefaultNextPrevNavigation,
+})
+
+pageTypesRegistry.registerContentComponent('two-sides', {
+    pageContentComponent: TwoSidesPageContent,
+    nextPrevNavigationComponent: TwoSidesNextPrevNavigation,
+    expandToc: true
+})
 
 export {pageTypesRegistry}

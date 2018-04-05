@@ -10,17 +10,17 @@ export function TwoSidesLayout({children}) {
     )
 }
 
-export function LeftPart({children}) {
+export function TwoSidesLayoutLeftPart({children}) {
     return (
-        <div className="page-two-side-left-part">
+        <div className="page-two-sides-left-part">
             {children}
         </div>
     )
 }
 
-export function RightPart({children}) {
+export function TwoSidesLayoutRightPart({children}) {
     return (
-        <div className="page-two-side-right-part">
+        <div className="page-two-sides-right-part">
             {children}
         </div>
     )

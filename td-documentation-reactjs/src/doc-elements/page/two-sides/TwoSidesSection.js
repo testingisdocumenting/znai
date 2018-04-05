@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {splitContentInTwoPartsSubsections} from './twoSidesContentSplitter'
-import {TwoSidesLayout, LeftPart, RightPart} from './TwoSidesLayout'
+import {TwoSidesLayout, TwoSidesLayoutLeftPart, TwoSidesLayoutRightPart} from './TwoSidesLayout'
 
 import './TwoSidesSection.css'
 
@@ -11,11 +11,11 @@ const TwoSidesSection = ({elementsLibrary, id, title, content}) => {
     return (
         <div className="two-sides-section">
             <TwoSidesLayout>
-                <LeftPart>
+                <TwoSidesLayoutLeftPart>
                     <elementsLibrary.SectionTitle id={id} title={title}/>
-                </LeftPart>
+                </TwoSidesLayoutLeftPart>
 
-                <RightPart/>
+                <TwoSidesLayoutRightPart/>
 
                 {subsections.map((subsection, idx) => <Subsection key={idx}
                                                                   elementsLibrary={elementsLibrary}
@@ -28,12 +28,12 @@ const TwoSidesSection = ({elementsLibrary, id, title, content}) => {
 function Subsection({elementsLibrary, subsection}) {
     return (
         <React.Fragment>
-            <LeftPart>
+            <TwoSidesLayoutLeftPart>
                 <elementsLibrary.DocElement content={subsection.left} elementsLibrary={elementsLibrary}/>
-            </LeftPart>
-            <RightPart>
+            </TwoSidesLayoutLeftPart>
+            <TwoSidesLayoutRightPart>
                 <elementsLibrary.DocElement content={subsection.right} elementsLibrary={elementsLibrary}/>
-            </RightPart>
+            </TwoSidesLayoutRightPart>
         </React.Fragment>
     )
 }

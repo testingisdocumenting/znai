@@ -3,15 +3,16 @@
     grid-template-columns: minmax(350px, 7fr) minmax(400px, 8fr);
 }
 
-.page-two-side-left-part,
-.page-two-side-right-part {
+.page-two-sides-left-part,
+.page-two-sides-right-part {
     padding-left: 30px;
     padding-right: 30px;
 }
 
-.page-two-side-right-part {
+.page-two-sides-right-part {
     color: var(--mdoc-inversed-text-color);
     background-color: var(--mdoc-inversed-background-color);
+    border-left: solid 1px #5b666c;
 
     --mdoc-function-color: #a15b38;
     --mdoc-keyword-color: #477fe7;

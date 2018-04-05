@@ -5,17 +5,10 @@ import SelectedTextActionSelection from './selected-text-extensions/SelectedText
 import {selectedTextExtensions} from './selected-text-extensions/SelectedTextExtensions'
 
 class DocumentationLayout extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            tocCollapsed: false,
-            tocSelected: false,
-            searchActive: false}
-
-        this.onTocToggle = this.onTocToggle.bind(this)
-        this.onSearchClick = this.onSearchClick.bind(this)
-        this.onPanelSelect = this.onPanelSelect.bind(this)
+    state = {
+        tocCollapsed: false,
+        tocSelected: false,
+        searchActive: false
     }
 
     render() {
@@ -23,6 +16,7 @@ class DocumentationLayout extends Component {
             previewTracker,
             searchPopup,
             renderedPage,
+            renderedNextPrevNavigation,
             renderedFooter,
             docMeta,
             selectedTocItem,
@@ -63,15 +57,10 @@ class DocumentationLayout extends Component {
                 {searchPopup}
 
                 <div className="main-panel" onClick={this.onPanelSelect}>
-                    <div className="page-content-wrapper">
-                        {renderedPage}
-                    </div>
+                    {renderedPage}
 
                     <div className="page-bottom">
-                        <div className="next-prev-buttons content-block">
-                            {this.renderPreviousPageButton()}
-                            {this.renderNextPageButton()}
-                        </div>
+                        {renderedNextPrevNavigation}
                         {renderedFooter}
                     </div>
                 </div>
@@ -83,42 +72,17 @@ class DocumentationLayout extends Component {
         )
     }
 
-    onTocToggle(collapsed) {
+    onTocToggle = (collapsed) => {
         this.setState({ tocCollapsed: collapsed })
     }
 
-    onSearchClick() {
+    onSearchClick = () => {
         this.setState({tocSelected: false})
         this.props.onSearchClick();
     }
 
-    onPanelSelect() {
+    onPanelSelect = () => {
         this.setState({tocSelected: false})
-    }
-
-    renderNextPageButton() {
-        const {nextPageToc, onNextPage} = this.props
-
-        return (DocumentationLayout.needRenderNavigationButton(nextPageToc) ? (
-            <div className="page-navigation-button-and-text" onClick={onNextPage}>
-                <span className="next-prev-page-title">{nextPageToc.pageTitle} </span>
-                <span className="glyphicon glyphicon-chevron-right"/>
-            </div>) : <div/>)
-    }
-
-    renderPreviousPageButton() {
-        const {prevPageToc, onPrevPage} = this.props
-
-        return (DocumentationLayout.needRenderNavigationButton(prevPageToc) ? (
-            <div className="page-navigation-button-and-text" onClick={onPrevPage}>
-                <span className="glyphicon glyphicon-chevron-left"/>
-                <span className="next-prev-page-title">{prevPageToc.pageTitle} </span>
-            </div>) : <div/>)
-    }
-
-    static needRenderNavigationButton(tocItem) {
-        // we don't render next/prev buttons that will point to items without dir name (e.g. index page)
-        return tocItem && tocItem.dirName;
     }
 }
 

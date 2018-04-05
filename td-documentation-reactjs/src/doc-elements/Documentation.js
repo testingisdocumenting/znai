@@ -25,6 +25,7 @@ import DocumentationLayout from './DocumentationLayout'
 import pageContentProcessor from './pageContentProcessor.js'
 
 import {DocumentationModes} from './DocumentationModes'
+import {pageTypesRegistry} from './page/PageTypesRegistry'
 
 import './DocumentationLayout.css'
 import './search/Search.css'
@@ -119,8 +120,18 @@ class Documentation extends Component {
         const renderedPage = <elementsLibrary.Page {...page}
                                                    docMeta={docMeta}
                                                    onPresentationOpen={this.onPresentationOpen}
+                                                   prevPageTocItem={this.prevPageTocItem}
+                                                   nextPageTocItem={this.nextPageTocItem}
+                                                   onNextPage={this.onNextPage}
+                                                   onPrevPage={this.onPrevPage}
                                                    previewEnabled={docMeta.previewEnabled}
                                                    elementsLibrary={elementsLibrary}/>
+
+        const NextPrevNavigation = pageTypesRegistry.nextPrevNavigationComponent(page.tocItem)
+        const renderedNextPrevNavigation = <NextPrevNavigation prevPageTocItem={this.prevPageTocItem}
+                                                               nextPageTocItem={this.nextPageTocItem}
+                                                               onNextPage={this.onNextPage}
+                                                               onPrevPage={this.onPrevPage}/>
 
         const renderedFooter = (footer && Object.keys(footer).length) ?
             <elementsLibrary.Footer {...footer} elementsLibrary={elementsLibrary}/> : null
@@ -137,10 +148,11 @@ class Documentation extends Component {
                 <DocumentationLayout docMeta={docMeta}
                                      toc={toc}
                                      selectedTocItem={selectedTocItem}
-                                     prevPageToc={this.prevPageToc}
-                                     nextPageToc={this.nextPageToc}
+                                     prevPageTocItem={this.prevPageTocItem}
+                                     nextPageTocItem={this.nextPageTocItem}
                                      searchPopup={searchPopup}
                                      renderedPage={renderedPage}
+                                     renderedNextPrevNavigation={renderedNextPrevNavigation}
                                      renderedFooter={renderedFooter}
                                      onHeaderClick={this.onHeaderClick}
                                      onSearchClick={this.onSearchClick}
@@ -302,25 +314,25 @@ class Documentation extends Component {
         this.setState({tocSelected: false})
     }
 
-    get nextPageToc() {
+    get nextPageTocItem() {
         const {page} = this.state
         return tableOfContents.nextTocItem(page.tocItem)
     }
 
-    get prevPageToc() {
+    get prevPageTocItem() {
         const {page} = this.state
         return tableOfContents.prevTocItem(page.tocItem)
     }
 
     onNextPage() {
-        const next = this.nextPageToc
+        const next = this.nextPageTocItem
         if (next) {
             documentationNavigation.navigateToPage(next)
         }
     }
 
     onPrevPage() {
-        const prev = this.prevPageToc
+        const prev = this.prevPageTocItem
         if (prev) {
             documentationNavigation.navigateToPage(prev)
         }

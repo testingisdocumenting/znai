@@ -9,6 +9,9 @@
     --mdoc-single-column-full-width: 900px;
     --mdoc-single-column-partial-width: 600px;
 
+    --mdoc-space-above-next-prev-navigation: 150px;
+    --mdoc-space-below-next-prev-navigation: 100px;
+
     --mdoc-regular-text-size: 16px;
     --mdoc-smaller-text-size: 14px;
     --mdoc-small-meta-text-size: 12px;
