@@ -5,8 +5,8 @@
 
 .page-two-sides-left-part,
 .page-two-sides-right-part {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: var(--mdoc-two-sides-horizontal-spacing);
+    padding-right: var(--mdoc-two-sides-horizontal-spacing);
 }
 
 .page-two-sides-right-part {

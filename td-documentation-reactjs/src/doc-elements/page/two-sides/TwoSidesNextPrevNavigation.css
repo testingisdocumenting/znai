@@ -5,10 +5,10 @@
 }
 
 .two-sides-prev-navigation-button {
-    margin-left: 50px;
+    margin-left: calc(var(--mdoc-space-left-next-prev-navigation) - var(--mdoc-two-sides-horizontal-spacing));
 }
 
 .two-sides-next-navigation-button {
-    margin-right: 50px;
+    margin-right: calc(var(--mdoc-space-right-next-prev-navigation) - var(--mdoc-two-sides-horizontal-spacing));
     text-align: right;
 }

@@ -20,6 +20,10 @@
 
     --mdoc-space-above-next-prev-navigation: 150px;
     --mdoc-space-below-next-prev-navigation: 100px;
+    --mdoc-space-left-next-prev-navigation: 50px;
+    --mdoc-space-right-next-prev-navigation: 50px;
+
+    --mdoc-two-sides-horizontal-spacing: 30px;
 
     --mdoc-snippets-outer-border-color: #ddd;
     --mdoc-snippets-inner-border-color: #f3f3f3;

@@ -1,6 +1,6 @@
 .page-default-next-prev-navigation {
-    margin-top: var(--mdoc-space-above-next-prev-navigation);
-    margin-bottom: var(--mdoc-space-below-next-prev-navigation);
+    margin: var(--mdoc-space-above-next-prev-navigation) var(--mdoc-space-right-next-prev-navigation) var(--mdoc-space-below-next-prev-navigation) var(--mdoc-space-left-next-prev-navigation);
+
     display: flex;
     justify-content: space-between;
 }

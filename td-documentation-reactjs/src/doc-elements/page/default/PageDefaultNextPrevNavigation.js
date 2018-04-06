@@ -4,7 +4,7 @@ import './PageDefaultNextPrevNavigation.css'
 
 function PageDefaultNextPrevNavigation({prevPageTocItem, nextPageTocItem, onNextPage, onPrevPage}) {
     return (
-        <div className="page-default-next-prev-navigation content-block">
+        <div className="page-default-next-prev-navigation">
             <DefaultPrevPageButton tocItem={prevPageTocItem} onClick={onPrevPage}/>
             <DefaultNextPageButton tocItem={nextPageTocItem} onClick={onNextPage}/>
         </div>
