@@ -38,9 +38,9 @@ class Presentation extends Component {
                     </div>
 
                     <div className="slide-info">
-                        <div className="page-title">{pageTitle}</div>
+                        <div className="presentation-page-title">{pageTitle}</div>
                         {pageTitle && (! isSectionTitleOnSlide) ? <span className="divider">&gt;&gt;</span> : null}
-                        <div className="section-title">{isSectionTitleOnSlide ? null : sectionTitle}</div>
+                        <div className="presentation-section-title">{isSectionTitleOnSlide ? null : sectionTitle}</div>
                     </div>
 
                     <div className="controls">

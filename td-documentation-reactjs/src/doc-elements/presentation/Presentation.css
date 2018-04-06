@@ -52,7 +52,7 @@
     color: #999;
 }
 
-.presentation .header .slide-info .page-title {
+.presentation .header .slide-info .presentation-page-title {
 }
 
 .presentation .header .controls {
@@ -71,7 +71,7 @@
     cursor: pointer;
 }
 
-.presentation .header .info .page-title {
+.presentation .header .info .presentation-page-title {
     display: flex;
     align-items: center;
     font-size: 30px;
@@ -79,7 +79,7 @@
     color: #555;
 }
 
-.presentation .header .info .section-title {
+.presentation .header .info .presentation-section-title {
     margin-left: 100px;
     display: flex;
     align-items: center;
