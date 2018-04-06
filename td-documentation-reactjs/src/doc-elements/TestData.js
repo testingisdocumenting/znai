@@ -377,6 +377,106 @@ const TestData = {
                             "type": "OpenApiOperation"
                         },
                         {
+                            "lang": "java",
+                            "maxLineLength": 136,
+                            "tokens": [
+                                {
+                                    "type": "keyword",
+                                    "content": "class"
+                                },
+                                " ",
+                                {
+                                    "type": "class-name",
+                                    "content": [
+                                        "InternationalPriceService"
+                                    ]
+                                },
+                                " ",
+                                {
+                                    "type": "keyword",
+                                    "content": "implements"
+                                },
+                                " ",
+                                {
+                                    "type": "class-name",
+                                    "content": [
+                                        "PriceService"
+                                    ]
+                                },
+                                " ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                "\n    ",
+                                {
+                                    "type": "keyword",
+                                    "content": "private"
+                                },
+                                " ",
+                                {
+                                    "type": "keyword",
+                                    "content": "static"
+                                },
+                                " ",
+                                {
+                                    "type": "keyword",
+                                    "content": "void"
+                                },
+                                " LongJavaInterfaceNameWithSuperFactory ",
+                                {
+                                    "type": "function",
+                                    "content": "createMegaAbstractFactory"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "("
+                                },
+                                {
+                                    "type": "keyword",
+                                    "content": "final"
+                                },
+                                " ExchangeCalendarLongerThanLife calendar",
+                                {
+                                    "type": "punctuation",
+                                    "content": ")"
+                                },
+                                " ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                "\n        ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "."
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "."
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "."
+                                },
+                                "\n    ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "}"
+                                },
+                                "\n",
+                                {
+                                    "type": "punctuation",
+                                    "content": "}"
+                                }
+                            ],
+                            "wide": false,
+                            "type": "Snippet",
+                            "meta": {
+                                "rightSide": true
+                            }
+                        },
+                        {
                             "type": "Paragraph",
                             "content": [
                                 {

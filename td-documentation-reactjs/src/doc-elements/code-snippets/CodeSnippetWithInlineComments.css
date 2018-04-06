@@ -19,7 +19,7 @@
 .code-bullets.hidden-explanation {
     color: #eee;
     background-color: #eee;
-    border: #ddd 1px solid;
+    border: var(--mdoc-snippets-outer-border-color) 1px solid;
     padding: 0;
     cursor: pointer;
 }

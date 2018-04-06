@@ -14,7 +14,11 @@
     background-color: var(--mdoc-inversed-background-color);
     border-left: solid 1px #5b666c;
 
-    --mdoc-function-color: #a15b38;
+    --mdoc-snippets-outer-border-color: #555;
+
+    --mdoc-default-code-block-color: #aaa;
+    --mdoc-class-color: #bbb;
+    --mdoc-function-color: #d07d31;
     --mdoc-keyword-color: #477fe7;
     --mdoc-property-color: #9473a6;
     --mdoc-string-color: #678558;

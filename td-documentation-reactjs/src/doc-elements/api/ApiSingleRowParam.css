@@ -1,6 +1,4 @@
 .generic-api-single-row-param {
-    --border-separator-inner-color: #f3f3f3;
-    --border-separator-outer-color: #e5e5e5;
 }
 
 .generic-api-single-row-param .content-block {
@@ -15,7 +13,7 @@
     font-family: var(--mdoc-regular-font-family);
 
     padding: 16px 8px;
-    border-bottom: 1px solid var(--border-separator-inner-color);
+    border-bottom: 1px solid var(--mdoc-snippets-inner-border-color);
 }
 
 .generic-api-single-row-param.expanded {
@@ -24,11 +22,11 @@
 }
 
 .generic-api-single-row-param:first-child {
-    border-top: 1px solid var(--border-separator-outer-color);
+    border-top: 1px solid var(--mdoc-snippets-outer-border-color);
 }
 
 .generic-api-single-row-param:last-child {
-    border-bottom: 1px solid var(--border-separator-outer-color);
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
 }
 
 .generic-api-single-row-param > .name-and-type {

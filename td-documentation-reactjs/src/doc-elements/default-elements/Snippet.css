@@ -5,7 +5,7 @@
 }
 
 .snippet-container.wide-screen {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -25,7 +25,7 @@
 
 .snippet-container.wide-screen .padding {
     flex: 1;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
     height: 36px;
 }
 
@@ -39,8 +39,8 @@
 }
 
 .snippet-container .snippet {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-top: 1px solid var(--mdoc-snippets-outer-border-color);
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
     overflow-x: auto;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .snippet-container.wide-screen {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--mdoc-snippets-outer-border-color);
 }
 
 .snippet-container.wide-screen.with-title {
@@ -69,24 +69,25 @@
     color: #555;
     display: inline-block;
     padding: 8px 16px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--mdoc-snippets-outer-border-color);
     border-bottom: none;
     font-size: var(--mdoc-code-text-size);
     font-family: var(--mdoc-code-font-family);
 }
 
 .snippet-container .title-container .large-filling {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
     flex: 1;
 }
 
 .snippet-container .title-container .small-filling {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
     flex-basis: 8px;
 }
 
 pre {
     overflow-y: hidden;
+    color: var(--mdoc-default-code-block-color)
 }
 
 pre code {

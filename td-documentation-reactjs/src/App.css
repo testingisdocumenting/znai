@@ -1,4 +1,13 @@
 :root {
+    --mdoc-regular-text-size: 16px;
+    --mdoc-smaller-text-size: 14px;
+    --mdoc-small-meta-text-size: 12px;
+    --mdoc-regular-font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    --mdoc-inlined-code-text-size: 14px;
+    --mdoc-code-text-size: 13px;
+    --mdoc-code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+
     --mdoc-black: #333;
     --mdoc-light-black: #666;
     --mdoc-brand-primary-color: #009AA6;
@@ -12,15 +21,11 @@
     --mdoc-space-above-next-prev-navigation: 150px;
     --mdoc-space-below-next-prev-navigation: 100px;
 
-    --mdoc-regular-text-size: 16px;
-    --mdoc-smaller-text-size: 14px;
-    --mdoc-small-meta-text-size: 12px;
-    --mdoc-regular-font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mdoc-snippets-outer-border-color: #ddd;
+    --mdoc-snippets-inner-border-color: #f3f3f3;
 
-    --mdoc-inlined-code-text-size: 14px;
-    --mdoc-code-text-size: 13px;
-    --mdoc-code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-
+    --mdoc-default-code-block-color: var(--mdoc-black);
+    --mdoc-class-color: #383b3f;
     --mdoc-function-color: #a15b38;
     --mdoc-keyword-color: #000080;
     --mdoc-number-color: #0000ff;

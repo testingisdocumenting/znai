@@ -1,5 +1,5 @@
 .token.class-name {
-    color: #383b3f;
+    color: var(--mdoc-class-color);
 }
 
 .token.operator {
