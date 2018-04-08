@@ -1,0 +1,7 @@
+.custom-component-a {
+    border: 1px solid #ddd;
+    padding: 20px;
+    display: flex;
+    flex: 1;
+    box-shadow: #333333;
+}

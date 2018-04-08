@@ -1,0 +1,16 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="bundle.css">
+</head>
+<body>
+<div id="root">
+
+</div>
+<script src="node_modules/react/umd/react.development.js"></script>
+<script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="bundle.js"></script>
+<script>
+    ReactDOM.render(React.createElement(myComponents.CustomComponentA, {title: "hello"}), document.getElementById("root"));
+</script>
+</body>
+</html>
