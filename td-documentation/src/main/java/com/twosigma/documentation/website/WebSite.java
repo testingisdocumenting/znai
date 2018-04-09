@@ -74,12 +74,12 @@ public class WebSite {
         this.docMeta = cfg.docMeta;
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
         this.componentsRegistry = new WebSiteComponentsRegistry();
+        this.resourceResolver = new MultipleLocationsResourceResolver(cfg.docRootPath, findLookupLocations(cfg));
+        this.webSiteExtensions = initWebSiteExtensions(cfg);
         this.reactJsNashornEngine = initJsEngine();
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
         this.tocJavaScript = WebResource.withPath("toc.js");
-        this.resourceResolver = new MultipleLocationsResourceResolver(cfg.docRootPath, findLookupLocations(cfg));
-        this.webSiteExtensions = initWebSiteExtensions(cfg);
         this.tocItemsByAuxiliaryFilePath = new HashMap<>();
         this.markupParsingConfiguration = createMarkupParsingConfiguration();
         this.auxiliaryFiles = new HashMap<>();
@@ -215,9 +215,12 @@ public class WebSite {
 
     private ReactJsNashornEngine initJsEngine() {
         reportPhase("initializing ReactJS server side engine");
+
         ReactJsNashornEngine engine = new ReactJsNashornEngine();
         engine.getNashornEngine().eval("toc = []");
-        engine.loadLibraries();
+        engine.loadCoreLibraries();
+        engine.loadCustomLibraries(webSiteExtensions.getJsResources());
+
         return engine;
     }
 
@@ -237,6 +240,7 @@ public class WebSite {
         reportPhase("deploying resources");
         reactJsNashornEngine.getReactJsBundle().deploy(deployer);
         webSiteExtensions.getCssResources().forEach(deployer::deploy);
+        webSiteExtensions.getJsResources().forEach(deployer::deploy);
         cfg.webResources.forEach(deployer::deploy);
     }
 

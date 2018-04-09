@@ -10,11 +10,14 @@ import java.nio.file.Paths
  */
 class WebSiteExtensionsTest {
     @Test
-    void "should let specify extra css resources"() {
+    void "should let specify extra web resources"() {
         createExtensions([:]).cssResources.size().should == 0
 
-        def extensions = createExtensions([cssResources: ['custom.css', 'another.css']])
+        def extensions = createExtensions([
+                cssResources: ['custom.css', 'another.css'],
+                jsResources: ['custom.js', 'components.js']])
         extensions.cssResources.path.should == ['custom.css', 'another.css']
+        extensions.jsResources.path.should == ['custom.js', 'components.js']
     }
 
     private static WebSiteExtensions createExtensions(Map definition) {

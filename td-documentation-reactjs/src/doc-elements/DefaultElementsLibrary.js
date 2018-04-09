@@ -6,6 +6,7 @@ import {Section, presentationSectionHandler} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
 import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
 import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
+import CustomReactJSComponent from './custom/CustomReactJSComponent'
 import Anchor from './default-elements/Anchor'
 import Link from './default-elements/Link'
 import SubHeading from './default-elements/SubHeading'
@@ -62,6 +63,8 @@ library.ThematicBreak = () => <hr />
 
 library.Snippet = Snippet
 presentationElementHandlers.Snippet = presentationSnippetHandler
+
+library.CustomReactJSComponent = CustomReactJSComponent
 
 library.LangClass = wrappedInContentBlock(LangClass)
 library.LangFunction = wrappedInContentBlock(LangFunction)

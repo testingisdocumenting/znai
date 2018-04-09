@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.toList;
  */
 public class WebSiteExtensions {
     private List<WebResource> cssResources;
-    private Path root;
+    private List<WebResource> jsResources;
     private Map<String, ?> definition;
     private ResourcesResolver resourcesResolver;
 
@@ -28,24 +28,28 @@ public class WebSiteExtensions {
      */
     public WebSiteExtensions(ResourcesResolver resourcesResolver, Map<String, ?> definition) {
         this.resourcesResolver = resourcesResolver;
-        this.root = root;
         this.definition = definition;
 
-        initCssPaths();
+        this.cssResources = extractWebResources("cssResources");
+        this.jsResources = extractWebResources("jsResources");
     }
 
     public List<WebResource> getCssResources() {
         return cssResources;
     }
 
-    @SuppressWarnings("unchecked")
-    private void initCssPaths() {
-        cssResources = new ArrayList<>();
-        Object cssResources = definition.get("cssResources");
+    public List<WebResource> getJsResources() {
+        return jsResources;
+    }
 
-        this.cssResources = cssResources == null ?
+    @SuppressWarnings("unchecked")
+    private List<WebResource> extractWebResources(String key) {
+        List<String> resources = (List<String>) definition.get(key);
+
+        return resources == null ?
                 Collections.emptyList():
-                ((List<String>) cssResources).stream().map(p -> WebResource.withPath(resourcesResolver.fullPath(p), p))
+                resources.stream()
+                        .map(p -> WebResource.withPath(resourcesResolver.fullPath(p), p))
                         .collect(toList());
     }
 }

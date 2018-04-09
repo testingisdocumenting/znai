@@ -1,6 +1,9 @@
 package com.twosigma.documentation.html.reactjs;
 
+import com.twosigma.documentation.html.WebResource;
 import com.twosigma.documentation.nashorn.NashornEngine;
+
+import java.util.List;
 
 /**
  * @author mykola
@@ -14,8 +17,12 @@ public class ReactJsNashornEngine {
         this.nashornEngine = new NashornEngine();
     }
 
-    public void loadLibraries() {
+    public void loadCoreLibraries() {
         reactJsBundle.serverJavaScripts().forEach(nashornEngine::loadLibrary);
+    }
+
+    public void loadCustomLibraries(List<WebResource> jsResources) {
+        jsResources.forEach(nashornEngine::loadLibrary);
     }
 
     public ReactJsBundle getReactJsBundle() {

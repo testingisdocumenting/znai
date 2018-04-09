@@ -51,8 +51,9 @@ public class PageToHtmlPageConverter {
         ReactJsBundle jsBundle = reactJsNashornEngine.getReactJsBundle();
 
         jsBundle.clientJavaScripts().forEach(htmlPage::addJavaScript);
-        jsBundle.clientCssResources().forEach(htmlPage::addCss);
+        webSiteExtensions.getJsResources().forEach(htmlPage::addJavaScript);
 
+        jsBundle.clientCssResources().forEach(htmlPage::addCss);
         webSiteExtensions.getCssResources().forEach(htmlPage::addCss);
 
         return new HtmlPageAndPageProps(htmlPage, pageProps);
