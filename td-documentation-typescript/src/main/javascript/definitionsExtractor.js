@@ -87,13 +87,42 @@ function extractDefinitions(filePath) {
         const bodyNode = symbol.valueDeclaration.body;
         const body = textOfNode(bodyNode);
 
+        const jsxDeclarations = [];
+        ts.forEachChild(bodyNode, visitMethodNodes)
+
         return {
             name: symbol.name,
             kind: 'method',
             documentation: ts.displayPartsToString(symbol.getDocumentationComment( checker)),
             parameters: serializeParameters(symbol),
-            body: body
+            body,
+            jsxDeclarations
         };
+
+        function visitMethodNodes(node) {
+            if (node.kind === ts.SyntaxKind.JsxSelfClosingElement) {
+                jsxDeclarations.push(serializeJsxEntry(node))
+            }
+
+            ts.forEachChild(node, visitMethodNodes)
+        }
+
+        function serializeJsxEntry(node) {
+            const tagName = node.tagName.escapedText
+            const attributes = []
+
+            ts.forEachChild(node, visitJsxDefinition)
+
+            return {tagName, attributes}
+
+            function visitJsxDefinition(node) {
+                if (node.kind === ts.SyntaxKind.JsxAttribute) {
+                    attributes.push({name: node.name.escapedText, value: textOfNode(node.initializer)})
+                }
+
+                ts.forEachChild(node, visitJsxDefinition)
+            }
+        }
     }
 
     function serializeParameters(symbol) {

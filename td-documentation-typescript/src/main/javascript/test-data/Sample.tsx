@@ -16,5 +16,17 @@ export class Sample {
     methodA(input: string) {
         console.log('method a body');
         console.log('test22');
+
+        const elementA = <Declaration firstName={this.firstName} lastName={this.lastName}/>;
+        const elementB = (
+            <Declaration
+                firstName="placeholder"
+                lastName={this.lastName}
+            />
+        );
     }
+}
+
+function Declaration({firstName, lastName}) {
+    return null;
 }
