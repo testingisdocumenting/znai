@@ -37,6 +37,7 @@ import LangFunction from './lang/LangFunction'
 import ApiParameters from './api/ApiParameters'
 import OpenApiOperation from './open-api/operation/OpenApiOperation'
 import {registerDocUtilsElements} from './doc-utils/DocUtils'
+import JsxGroup from './jsx/JsxGroup'
 
 const library = {}
 const presentationElementHandlers = {}
@@ -112,6 +113,8 @@ presentationElementHandlers.Columns = presentationColumnsHandler
 
 library.Json = Json
 presentationElementHandlers.Json = presentationJson
+
+library.JsxGroup = JsxGroup
 
 library.Svg = Svg
 presentationElementHandlers.Svg = presentationSvgHandler

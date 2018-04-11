@@ -1,0 +1,12 @@
+.jsx-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+
+    border-top: 1px solid var(--mdoc-snippets-outer-border-color);
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

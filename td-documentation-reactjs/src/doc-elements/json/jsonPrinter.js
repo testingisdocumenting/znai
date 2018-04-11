@@ -1,42 +1,23 @@
-export function printJson(rootPath, data, pathsToHighlight) {
-    const printer = new JsonPrinter(pathsToHighlight || [])
-    printer.printValue(rootPath, data)
+import {TokensPrinter} from '../code-snippets/TokensPrinter'
 
-    return printer.linesOfTokens
+export function printJson(rootPath, data, pathsToHighlight) {
+    const jsonPrinter = new JsonPrinter(pathsToHighlight || [])
+    jsonPrinter.printValue(rootPath, data)
+
+    return jsonPrinter.printer.linesOfTokens
 }
 
 class JsonPrinter {
-    indentation = 0
-    linesOfTokens = []
+    printer = new TokensPrinter()
 
     constructor(pathsToHighlight) {
         this._pathsToHighlight = {}
         pathsToHighlight.forEach(p => this._pathsToHighlight[p] = true)
-
-        this._registerNewLine()
     }
 
     printKey(key) {
-        this.print('key', '"' + key + '"')
-        this.printDelimiter(': ')
-    }
-
-    printDelimiter(delimiter) {
-        this.print('punctuation', delimiter)
-    }
-
-    println() {
-        this.currentLineOfTokens.push('\n')
-        this._registerNewLine()
-    }
-
-    print(type, content) {
-        this.currentLineOfTokens.push({type, content})
-    }
-
-    _registerNewLine() {
-        this.currentLineOfTokens = []
-        this.linesOfTokens.push(this.currentLineOfTokens)
+        this.printer.print('key', '"' + key + '"')
+        this.printer.printDelimiter(': ')
     }
 
     printValue(path, value, skipIndent) {
@@ -46,28 +27,19 @@ class JsonPrinter {
             this.printObject(path, value, skipIndent)
         } else {
             if (! skipIndent) {
-                this.printIndentation()
+                this.printer.printIndentation()
             }
             this.printSingleValue(path, value)
         }
     }
-
-    printIndentation() {
-        let indentation = ''
-        for (let i = 0; i < this.indentation; i++) {
-            indentation += '  '
-        }
-
-        this.print('indentation', indentation)
-    }
-
+    
     printSingleValue(path, value) {
         const additionalTokenType = this.isHighlightedPath(path) ? ' highlighted' : ''
 
         const tokenType = typeof value === 'string' ? 'string' : 'number'
         const valueToPrint = typeof value === 'string' ? '"' + escapeQuote(value) + '"' : value
 
-        this.print(tokenType + additionalTokenType, valueToPrint)
+        this.printer.print(tokenType + additionalTokenType, valueToPrint)
     }
 
     printArray(path, values, skipIndent) {
@@ -79,8 +51,8 @@ class JsonPrinter {
             this.printValue(path + '[' + idx + ']', v)
 
             if (! isLast) {
-                this.printDelimiter(',')
-                this.println()
+                this.printer.printDelimiter(',')
+                this.printer.println()
             }
         })
 
@@ -94,13 +66,13 @@ class JsonPrinter {
         keys.forEach((key, idx) => {
             const isLast = idx === keys.length - 1
 
-            this.printIndentation()
+            this.printer.printIndentation()
             this.printKey(key)
             this.printValue(path + '.' + key, json[key], true)
 
             if (! isLast) {
-                this.printDelimiter(',')
-                this.println()
+                this.printer.printDelimiter(',')
+                this.printer.println()
             }
         })
 
@@ -109,27 +81,19 @@ class JsonPrinter {
 
     openScope(delimiter, skipIndent) {
         if (! skipIndent) {
-            this.printIndentation()
+            this.printer.printIndentation()
         }
 
-        this.printDelimiter(delimiter)
-        this.println()
-        this.indentRight()
+        this.printer.printDelimiter(delimiter)
+        this.printer.println()
+        this.printer.indentRight()
     }
 
     closeScope(delimiter) {
-        this.println()
-        this.indentLeft()
-        this.printIndentation()
-        this.printDelimiter(delimiter)
-    }
-
-    indentRight() {
-        this.indentation++
-    }
-
-    indentLeft() {
-        this.indentation--
+        this.printer.println()
+        this.printer.indentLeft()
+        this.printer.printIndentation()
+        this.printer.printDelimiter(delimiter)
     }
 
     isHighlightedPath(path) {

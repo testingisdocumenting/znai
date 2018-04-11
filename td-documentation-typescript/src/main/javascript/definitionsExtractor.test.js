@@ -2,11 +2,12 @@ const {extractDefinitions} = require('./definitionsExtractor');
 
 describe('definitionsExtractor', () => {
     it('parses js docs', () => {
-        const definitions = extractDefinitions('src/main/javascript/test-data/Sample.tsx');
+        const definitions = extractDefinitions('src/test/resources/Sample.tsx');
 
         expect(definitions).toEqual([{
             "name": "Sample",
             "documentation": "top level doc string",
+            "kind": "class",
             "type": "typeof Sample",
             "members": [{
                 "name": "firstName",

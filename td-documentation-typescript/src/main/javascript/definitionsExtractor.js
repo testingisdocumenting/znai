@@ -60,7 +60,7 @@ function extractDefinitions(filePath) {
             next = keys.next();
         }
 
-        return Object.assign({}, details, {members: serializedMembers});
+        return Object.assign({}, details, {members: serializedMembers, kind: 'class'});
     }
 
     function serializeMember(symbol) {
