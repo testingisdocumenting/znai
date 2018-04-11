@@ -4,7 +4,7 @@ describe('definitionsExtractor', () => {
     it('parses js docs', () => {
         const definitions = extractDefinitions('src/main/javascript/test-data/Sample.tsx');
 
-        expect(definitions[0]).toEqual({
+        expect(definitions).toEqual([{
             "name": "Sample",
             "documentation": "top level doc string",
             "type": "typeof Sample",
@@ -33,6 +33,26 @@ describe('definitionsExtractor', () => {
                     }]
                 }]
             }]
-        })
+        }, {
+            "name": "demo",
+            "kind": "function",
+            "documentation": "",
+            "parameters": [],
+            "body": " {\n    const elementB = (\n        <Declaration\n            firstName=\"placeholder\"\n            lastName={this.lastName}\n        />)\n}",
+            "jsxDeclarations": [{
+                "tagName": "Declaration",
+                "attributes": [{"name": "firstName", "value": "\"placeholder\""}, {
+                    "name": "lastName",
+                    "value": "{this.lastName}"
+                }]
+            }]
+        }, {
+            "name": "Declaration",
+            "kind": "function",
+            "documentation": "",
+            "parameters": [{"type": ""}],
+            "body": " {\n    return null;\n}",
+            "jsxDeclarations": []
+        }])
     });
 });

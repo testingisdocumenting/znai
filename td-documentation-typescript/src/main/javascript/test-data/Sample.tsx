@@ -27,6 +27,14 @@ export class Sample {
     }
 }
 
+function demo() {
+    const elementB = (
+        <Declaration
+            firstName="placeholder"
+            lastName={this.lastName}
+        />)
+}
+
 function Declaration({firstName, lastName}) {
     return null;
 }

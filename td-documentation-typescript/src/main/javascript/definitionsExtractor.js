@@ -19,12 +19,14 @@ function extractDefinitions(filePath) {
     return definitions;
 
     function visit(node) {
-        if (ts.isClassDeclaration(node) && node.name) {
+        if (ts.isClassDeclaration(node)) {
             const symbol = checker.getSymbolAtLocation(node.name);
+            definitions.push(serializeClass(symbol));
+        }
 
-            if (symbol) {
-                definitions.push(serializeClass(symbol));
-            }
+        if (ts.isFunctionDeclaration(node)) {
+            const symbol = checker.getSymbolAtLocation(node.name);
+            definitions.push(serializeMethodOrFunction(symbol, 'function'));
         }
     }
 
@@ -68,7 +70,7 @@ function extractDefinitions(filePath) {
             case ts.SyntaxKind.PropertyDeclaration:
                 return serializeProperty(symbol);
             case ts.SyntaxKind.MethodDeclaration:
-                return serializeMethod(symbol);
+                return serializeMethodOrFunction(symbol, 'method');
             default:
                 return {};
         }
@@ -83,7 +85,7 @@ function extractDefinitions(filePath) {
         }
     }
 
-    function serializeMethod(symbol) {
+    function serializeMethodOrFunction(symbol, kind) {
         const bodyNode = symbol.valueDeclaration.body;
         const body = textOfNode(bodyNode);
 
@@ -92,7 +94,7 @@ function extractDefinitions(filePath) {
 
         return {
             name: symbol.name,
-            kind: 'method',
+            kind: kind,
             documentation: ts.displayPartsToString(symbol.getDocumentationComment( checker)),
             parameters: serializeParameters(symbol),
             body,
@@ -136,7 +138,15 @@ function extractDefinitions(filePath) {
 
     function paramsDocsByName(symbol) {
         const docs = {};
+        if (!symbol.valueDeclaration.jsDoc) {
+            return docs;
+        }
+
         symbol.valueDeclaration.jsDoc.forEach(jsDoc => {
+            if (! jsDoc.tags) {
+                return
+            }
+
             const paramTags = jsDoc.tags.filter(tag => tag.kind === ts.SyntaxKind.JSDocParameterTag);
 
             paramTags.forEach(tag => {
@@ -148,6 +158,6 @@ function extractDefinitions(filePath) {
     }
 
     function textOfNode(node) {
-        return fileContent.substr(node.pos, node.end - node.pos);
+        return node ? fileContent.substr(node.pos, node.end - node.pos) : '';
     }
 }
