@@ -5,7 +5,7 @@ import {TwoSidesLayout, TwoSidesLayoutLeftPart, TwoSidesLayoutRightPart} from '.
 
 import './TwoSidesSection.css'
 
-const TwoSidesSection = ({elementsLibrary, id, title, content}) => {
+const TwoSidesSection = ({elementsLibrary, id, title, content = []}) => {
     const subsections = splitContentInTwoPartsSubsections(content)
 
     return (
