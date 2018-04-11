@@ -11,7 +11,7 @@ const Jsx = ({declaration}) => {
     const lines = printJsx(declaration)
 
     return (
-        <div className="jsx content-block">
+        <div className="jsx">
             {lines.map((tokens, idx) => <LineOfTokens key={idx}
                                                       tokens={tokens}
                                                       isHighlighted={false}

@@ -10,20 +10,23 @@
 }
 
 .page-two-sides-right-part {
-    color: var(--mdoc-inversed-text-color);
-    background-color: var(--mdoc-inversed-background-color);
-    border-left: solid 1px #5b666c;
-
-    --mdoc-snippets-outer-border-color: #555;
+    --mdoc-regular-text-color: var(--mdoc-inversed-text-color);
+    --mdoc-regular-text-light-color: #aaa;
+    --mdoc-snippets-outer-border-color: #494949;
+    --mdoc-snippets-inner-border-color: #404040;
 
     --mdoc-default-code-block-color: #aaa;
     --mdoc-class-color: #bbb;
     --mdoc-function-color: #d07d31;
-    --mdoc-keyword-color: #477fe7;
+    --mdoc-keyword-color: #4b7fe7;
     --mdoc-property-color: #9473a6;
     --mdoc-string-color: #678558;
-    --mdoc-punctuation-color: #aab8c7;
+    --mdoc-punctuation-color: #8f9aa7;
     --mdoc-number-color: #6998bc;
     --mdoc-highlighted-background-color: #714738;
     --mdoc-highlighted-color: #a6a6a6;
+
+    color: var(--mdoc-regular-text-color);
+    background-color: var(--mdoc-inversed-background-color);
+    border-left: solid 1px #5b666c;
 }

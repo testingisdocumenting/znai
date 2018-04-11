@@ -8,7 +8,7 @@
 }
 
 .api-section > a {
-    color: var(--mdoc-black);
+    color: var(--mdoc-regular-text-color);
     text-decoration: none;
 }
 

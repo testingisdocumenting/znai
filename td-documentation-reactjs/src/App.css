@@ -11,9 +11,12 @@
     --mdoc-black: #333;
     --mdoc-light-black: #666;
     --mdoc-brand-primary-color: #009AA6;
+
     --mdoc-rest-link-color: #7287b3;
     --mdoc-important-attention: #c52912;
     --mdoc-meta-color: #aaa;
+    --mdoc-regular-text-color: var(--mdoc-black);
+    --mdoc-regular-text-light-color: var(--mdoc-light-black);
 
     --mdoc-single-column-full-width: 900px;
     --mdoc-single-column-partial-width: 600px;

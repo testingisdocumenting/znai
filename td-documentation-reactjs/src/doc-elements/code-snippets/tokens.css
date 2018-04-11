@@ -14,6 +14,18 @@
     color: var(--mdoc-punctuation-color);
 }
 
+.token.tag {
+    color: var(--mdoc-keyword-color);
+}
+
+.token.attr-name {
+    color: var(--mdoc-function-color);
+}
+
+.token.attr-value {
+    color: var(--mdoc-property-color);
+}
+
 .token.title {
     color: #383b3f;
     font-weight: bold;

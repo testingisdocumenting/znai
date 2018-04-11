@@ -46,5 +46,5 @@
 
 .generic-api-single-row-param > .description {
     flex: 1;
-    color: var(--mdoc-light-black);
+    color: var(--mdoc-regular-text-light-color);
 }

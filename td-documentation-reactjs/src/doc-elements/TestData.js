@@ -69,317 +69,56 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Operation definition",
-                    "id": "operation-definition",
+                    "title": "Parsing",
+                    "id": "parsing",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "If you have a file with ",
+                                    "text": "Mdoc uses typescript ",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "url": "https://github.com/OAI/OpenAPI-Specification/blob/master/README.md",
-                                    "type": "Link",
-                                    "content": [
-                                        {
-                                            "text": "Open API",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "SoftLineBreak"
-                                },
-                                {
-                                    "text": "definition (aka swagger file) you can render a definition by a given ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "method",
+                                    "code": "nodejs",
                                     "type": "InlinedCode"
                                 },
                                 {
-                                    "text": " and ",
+                                    "text": " module to parse typescript. Use ",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "code": "path",
+                                    "code": "typescript",
                                     "type": "InlinedCode"
                                 },
                                 {
-                                    "text": " or ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "code": "operationId",
-                                    "type": "InlinedCode"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Let\u0027s consider ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "url": "https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json",
-                                    "type": "Link",
-                                    "content": [
-                                        {
-                                            "text": "Uber API definition",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "text": " example.",
+                                    "text": " plugin to include parsed information.",
                                     "type": "SimpleText"
                                 }
                             ]
-                        },
+                        }
+                    ]
+                },
+                {
+                    "title": "Properties",
+                    "id": "properties",
+                    "type": "Section",
+                    "content": [
                         {
-                            "lang": "",
-                            "maxLineLength": 78,
+                            "lang": "ts",
+                            "maxLineLength": 44,
                             "tokens": [
                                 {
-                                    "type": "text",
-                                    "content": ":include-open-api: open-api/uber.json {method: \"get\", path: \"/estimates/time\"}\n"
-                                }
-                            ],
-                            "lineNumber": "",
-                            "type": "Snippet"
-                        },
-                        {
-                            "id": "null",
-                            "type": "Anchor"
-                        },
-                        {
-                            "operation": {
-                                "id": "null",
-                                "method": "get",
-                                "path": "/estimates/time",
-                                "summary": "Time Estimates",
-                                "tags": [
-                                    "Estimates"
-                                ],
-                                "parameters": [
-                                    {
-                                        "name": "start_latitude",
-                                        "in": "query",
-                                        "type": "number",
-                                        "required": true,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Latitude component of start location.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "start_longitude",
-                                        "in": "query",
-                                        "type": "number",
-                                        "required": true,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Longitude component of start location.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "customer_uuid",
-                                        "in": "query",
-                                        "type": "string",
-                                        "required": false,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Unique customer identifier to be used for experience customization.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "product_id",
-                                        "in": "query",
-                                        "type": "string",
-                                        "required": false,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Unique identifier representing a specific product for a given latitude \u0026 longitude.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "responses": [
-                                    {
-                                        "code": "200",
-                                        "schema": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "image": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Image URL representing the product.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "product_id": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Unique identifier representing a specific product for a given latitude \u0026 longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "description": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Description of product.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "display_name": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Display name of product.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "capacity": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Capacity of product. For example, 4 people.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "An array of products",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "code": "default",
-                                        "schema": {
-                                            "properties": {
-                                                "code": {
-                                                    "format": "int32",
-                                                    "type": "integer"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "fields": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        },
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Unexpected error",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "description": [
-                                    {
-                                        "type": "Paragraph",
-                                        "content": [
-                                            {
-                                                "text": "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
-                                                "type": "SimpleText"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            "type": "OpenApiOperation"
-                        },
-                        {
-                            "lang": "java",
-                            "maxLineLength": 136,
-                            "tokens": [
+                                    "type": "comment",
+                                    "content": "/**\n * top level doc string\n */"
+                                },
+                                "\n",
+                                {
+                                    "type": "keyword",
+                                    "content": "export"
+                                },
+                                " ",
                                 {
                                     "type": "keyword",
                                     "content": "class"
@@ -388,19 +127,7 @@ const TestData = {
                                 {
                                     "type": "class-name",
                                     "content": [
-                                        "InternationalPriceService"
-                                    ]
-                                },
-                                " ",
-                                {
-                                    "type": "keyword",
-                                    "content": "implements"
-                                },
-                                " ",
-                                {
-                                    "type": "class-name",
-                                    "content": [
-                                        "PriceService"
+                                        "Customer"
                                     ]
                                 },
                                 " ",
@@ -410,33 +137,66 @@ const TestData = {
                                 },
                                 "\n    ",
                                 {
-                                    "type": "keyword",
-                                    "content": "private"
+                                    "type": "comment",
+                                    "content": "/**\n     * customer\u0027s first name\n     */"
+                                },
+                                "\n    firstName",
+                                {
+                                    "type": "punctuation",
+                                    "content": ":"
                                 },
                                 " ",
                                 {
                                     "type": "keyword",
-                                    "content": "static"
+                                    "content": "string"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ";"
+                                },
+                                "\n\n    ",
+                                {
+                                    "type": "comment",
+                                    "content": "/**\n     * customer\u0027s last name\n     */"
+                                },
+                                "\n    lastName",
+                                {
+                                    "type": "punctuation",
+                                    "content": ":"
                                 },
                                 " ",
                                 {
                                     "type": "keyword",
-                                    "content": "void"
+                                    "content": "string"
                                 },
-                                " LongJavaInterfaceNameWithSuperFactory ",
+                                {
+                                    "type": "punctuation",
+                                    "content": ";"
+                                },
+                                "\n\n    ",
+                                {
+                                    "type": "comment",
+                                    "content": "/**\n     * method A \u003cb\u003edescription\u003c/b\u003e and some\n     * @param {string} input for \u003ci\u003etest\u003c/i\u003e\n     */"
+                                },
+                                "\n    ",
                                 {
                                     "type": "function",
-                                    "content": "createMegaAbstractFactory"
+                                    "content": "methodA"
                                 },
                                 {
                                     "type": "punctuation",
                                     "content": "("
                                 },
+                                "input",
+                                {
+                                    "type": "punctuation",
+                                    "content": ":"
+                                },
+                                " ",
                                 {
                                     "type": "keyword",
-                                    "content": "final"
+                                    "content": "string"
                                 },
-                                " ExchangeCalendarLongerThanLife calendar",
                                 {
                                     "type": "punctuation",
                                     "content": ")"
@@ -446,18 +206,55 @@ const TestData = {
                                     "type": "punctuation",
                                     "content": "{"
                                 },
-                                "\n        ",
+                                "\n        console",
                                 {
                                     "type": "punctuation",
                                     "content": "."
                                 },
                                 {
+                                    "type": "function",
+                                    "content": "log"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "content": "\u0027method a body\u0027"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ";"
+                                },
+                                "\n        console",
+                                {
                                     "type": "punctuation",
                                     "content": "."
                                 },
                                 {
+                                    "type": "function",
+                                    "content": "log"
+                                },
+                                {
                                     "type": "punctuation",
-                                    "content": "."
+                                    "content": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "content": "\u0027test22\u0027"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ";"
                                 },
                                 "\n    ",
                                 {
@@ -470,62 +267,9 @@ const TestData = {
                                     "content": "}"
                                 }
                             ],
-                            "wide": false,
-                            "type": "Snippet",
-                            "meta": {
-                                "rightSide": true
-                            }
+                            "title": "typescript/Customer.ts",
+                            "type": "Snippet"
                         },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Note: descriptions are treated as markdown, using ",
-                                    "type": "SimpleText"
-                                },
-                                {
-                                    "url": "http://commonmark.org/help/",
-                                    "type": "Link",
-                                    "content": [
-                                        {
-                                            "text": "CommonMark",
-                                            "type": "SimpleText"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "text": " specification",
-                                    "type": "SimpleText"
-                                }
-                            ]
-                        },
-                        {
-                            "rightSide": true,
-                            "type": "Meta"
-                        },
-                        {
-                            "testArtifact": {
-                                "method": "GET",
-                                "url": "http://localhost:8180/employee/id-generated-2",
-                                "responseType": "application/json",
-                                "responseBody": "{\"firstName\":\"FN\",\"lastName\":\"LN\"}\n",
-                                "responseBodyChecks": {
-                                    "failedPaths": [],
-                                    "passedPaths": [
-                                        "root.firstName",
-                                        "root.lastName"
-                                    ]
-                                }
-                            },
-                            "type": "WebTauRest"
-                        }
-                    ]
-                },
-                {
-                    "title": "Auto Section",
-                    "id": "auto-section",
-                    "type": "Section",
-                    "content": [
                         {
                             "type": "Paragraph",
                             "content": [
@@ -534,870 +278,339 @@ const TestData = {
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "code": "autoSection",
+                                    "code": "propertiesOf",
                                     "type": "InlinedCode"
                                 },
                                 {
-                                    "text": " property to automatically generate page section with a title taken from an operation summary.",
+                                    "text": " parameter to list properties of a specified class.",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
                             "lang": "",
-                            "maxLineLength": 97,
+                            "maxLineLength": 70,
                             "tokens": [
                                 {
                                     "type": "text",
-                                    "content": ":include-open-api: open-api/uber.json {method: \"get\", path: \"/estimates/time\", autoSection: true}\n"
+                                    "content": ":include-typescript: typescript/Customer.ts {propertiesOf: \"Customer\"}\n"
                                 }
                             ],
                             "lineNumber": "",
                             "type": "Snippet"
                         },
                         {
-                            "type": "Paragraph",
-                            "content": [
+                            "parameters": [
                                 {
-                                    "text": "Note: Section below is automatically generated by ",
-                                    "type": "SimpleText"
+                                    "name": "firstName",
+                                    "type": "string",
+                                    "description": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "customer\u0027s first name",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
-                                    "code": "include-open-api",
-                                    "type": "InlinedCode"
+                                    "name": "lastName",
+                                    "type": "string",
+                                    "description": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "customer\u0027s last name",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
-                            ]
+                            ],
+                            "type": "ApiParameters",
+                            "meta": {"rightSide": true}
                         }
                     ]
                 },
                 {
-                    "title": "Time Estimates",
-                    "id": "time-estimates",
+                    "title": "JSX Elements",
+                    "id": "jsx-elements",
                     "type": "Section",
                     "content": [
                         {
-                            "id": "null",
-                            "type": "Anchor"
+                            "lang": "tsx",
+                            "maxLineLength": 84,
+                            "tokens": [
+                                {
+                                    "type": "keyword",
+                                    "content": "import"
+                                },
+                                " ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                " PrimaryButton ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "}"
+                                },
+                                " ",
+                                {
+                                    "type": "keyword",
+                                    "content": "from"
+                                },
+                                " ",
+                                {
+                                    "type": "string",
+                                    "content": "\u0027my-lib\u0027"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ";"
+                                },
+                                "\n\n",
+                                {
+                                    "type": "keyword",
+                                    "content": "function"
+                                },
+                                " ",
+                                {
+                                    "type": "function",
+                                    "content": "buttonsDemo"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "("
+                                },
+                                "registry",
+                                {
+                                    "type": "punctuation",
+                                    "content": ")"
+                                },
+                                " ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                "\n    registry\n        ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "."
+                                },
+                                {
+                                    "type": "function",
+                                    "content": "add"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "content": "\u0027primary\u0027"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "operator",
+                                    "content": "\u003c"
+                                },
+                                "PrimaryButton label",
+                                {
+                                    "type": "operator",
+                                    "content": "\u003d"
+                                },
+                                {
+                                    "type": "string",
+                                    "content": "\"Click Me\""
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": "/"
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": "\u003e"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ")"
+                                },
+                                "\n        ",
+                                {
+                                    "type": "punctuation",
+                                    "content": "."
+                                },
+                                {
+                                    "type": "function",
+                                    "content": "add"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "("
+                                },
+                                {
+                                    "type": "string",
+                                    "content": "\u0027primary disabled\u0027"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ","
+                                },
+                                " ",
+                                {
+                                    "type": "operator",
+                                    "content": "\u003c"
+                                },
+                                "PrimaryButton label",
+                                {
+                                    "type": "operator",
+                                    "content": "\u003d"
+                                },
+                                {
+                                    "type": "string",
+                                    "content": "\"Click Me\""
+                                },
+                                " disabled",
+                                {
+                                    "type": "operator",
+                                    "content": "\u003d"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "{"
+                                },
+                                {
+                                    "type": "keyword",
+                                    "content": "true"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": "}"
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": "/"
+                                },
+                                {
+                                    "type": "operator",
+                                    "content": "\u003e"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ")"
+                                },
+                                {
+                                    "type": "punctuation",
+                                    "content": ";"
+                                },
+                                "\n",
+                                {
+                                    "type": "punctuation",
+                                    "content": "}"
+                                }
+                            ],
+                            "title": "demo.tsx",
+                            "type": "Snippet"
                         },
                         {
-                            "operation": {
-                                "id": "null",
-                                "method": "get",
-                                "path": "/estimates/time",
-                                "summary": "Time Estimates",
-                                "tags": [
-                                    "Estimates"
-                                ],
-                                "parameters": [
-                                    {
-                                        "name": "start_latitude",
-                                        "in": "query",
-                                        "type": "number",
-                                        "required": true,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Latitude component of start location.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "start_longitude",
-                                        "in": "query",
-                                        "type": "number",
-                                        "required": true,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Longitude component of start location.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "customer_uuid",
-                                        "in": "query",
-                                        "type": "string",
-                                        "required": false,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Unique customer identifier to be used for experience customization.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "product_id",
-                                        "in": "query",
-                                        "type": "string",
-                                        "required": false,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Unique identifier representing a specific product for a given latitude \u0026 longitude.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "responses": [
-                                    {
-                                        "code": "200",
-                                        "schema": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "image": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Image URL representing the product.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "product_id": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Unique identifier representing a specific product for a given latitude \u0026 longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "description": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Description of product.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "display_name": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Display name of product.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "capacity": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Capacity of product. For example, 4 people.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "An array of products",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "code": "default",
-                                        "schema": {
-                                            "properties": {
-                                                "code": {
-                                                    "format": "int32",
-                                                    "type": "integer"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "fields": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        },
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Unexpected error",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "description": [
-                                    {
-                                        "type": "Paragraph",
-                                        "content": [
-                                            {
-                                                "text": "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
-                                                "type": "SimpleText"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            "type": "OpenApiOperation"
-                        }
-                    ]
-                },
-                {
-                    "title": "Tags",
-                    "id": "tags",
-                    "type": "Section",
-                    "content": [
-                        {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Specify ",
+                                    "text": "Use ",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "code": "tags",
+                                    "code": "jsxElementsFrom",
                                     "type": "InlinedCode"
                                 },
                                 {
-                                    "text": " to automatically generate multiple entries from a service definition file.",
+                                    "text": " to extract ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "JSX",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": " elements from a function.",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
                             "lang": "",
-                            "maxLineLength": 76,
+                            "maxLineLength": 73,
                             "tokens": [
                                 {
                                     "type": "text",
-                                    "content": ":include-open-api: open-api/uber.json {tags: \"Estimates\", autoSection: true}\n"
+                                    "content": ":include-typescript: typescript/demo.tsx {jsxElementsFrom: \"buttonsDemo\"}\n"
                                 }
                             ],
                             "lineNumber": "",
                             "type": "Snippet"
                         },
                         {
-                            "type": "Paragraph",
-                            "content": [
+                            "declarations": [
                                 {
-                                    "text": "Note: Sections below are automatically generated by ",
-                                    "type": "SimpleText"
+                                    "tagName": "PrimaryButton",
+                                    "attributes": [
+                                        {
+                                            "name": "label",
+                                            "value": "\"Click Me\""
+                                        }
+                                    ]
                                 },
                                 {
-                                    "code": "include-open-api",
-                                    "type": "InlinedCode"
+                                    "tagName": "PrimaryButton",
+                                    "attributes": [
+                                        {
+                                            "name": "label",
+                                            "value": "\"Click Me\""
+                                        },
+                                        {
+                                            "name": "disabled",
+                                            "value": "{true}"
+                                        }
+                                    ]
                                 }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Price Estimates",
-                    "id": "price-estimates",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "id": "null",
-                            "type": "Anchor"
-                        },
-                        {
-                            "operation": {
-                                "id": "null",
-                                "method": "get",
-                                "path": "/estimates/price",
-                                "summary": "Price Estimates",
-                                "tags": [
-                                    "Estimates"
-                                ],
-                                "parameters": [
-                                    {
-                                        "name": "start_latitude",
-                                        "in": "query",
-                                        "type": "number",
-                                        "required": true,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Latitude component of start location.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "start_longitude",
-                                        "in": "query",
-                                        "type": "number",
-                                        "required": true,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Longitude component of start location.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "end_latitude",
-                                        "in": "query",
-                                        "type": "number",
-                                        "required": true,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Latitude component of end location.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "end_longitude",
-                                        "in": "query",
-                                        "type": "number",
-                                        "required": true,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Longitude component of end location.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "responses": [
-                                    {
-                                        "code": "200",
-                                        "schema": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "high_estimate": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Upper bound of the estimated price.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "number"
-                                                    },
-                                                    "product_id": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Unique identifier representing a specific product for a given latitude \u0026 longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "low_estimate": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Lower bound of the estimated price.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "number"
-                                                    },
-                                                    "surge_multiplier": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "number"
-                                                    },
-                                                    "estimate": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Formatted string of estimate in local currency of the start location. Estimate could be a range, a single number (flat rate) or \"Metered\" for TAXI.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "display_name": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Display name of product.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "currency_code": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "url": "http://en.wikipedia.org/wiki/ISO_4217",
-                                                                        "type": "Link",
-                                                                        "content": [
-                                                                            {
-                                                                                "text": "ISO 4217",
-                                                                                "type": "SimpleText"
-                                                                            }
-                                                                        ]
-                                                                    },
-                                                                    {
-                                                                        "text": " currency code.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "An array of price estimates by product",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "code": "default",
-                                        "schema": {
-                                            "properties": {
-                                                "code": {
-                                                    "format": "int32",
-                                                    "type": "integer"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "fields": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        },
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Unexpected error",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "description": [
-                                    {
-                                        "type": "Paragraph",
-                                        "content": [
-                                            {
-                                                "text": "The Price Estimates endpoint returns an estimated price range for each product offered at a given location. The price estimate is provided as a formatted string with the full price range and the localized currency symbol.",
-                                                "type": "SimpleText"
-                                            },
-                                            {
-                                                "text": "The response also includes low and high estimates, and the ",
-                                                "type": "SimpleText"
-                                            },
-                                            {
-                                                "url": "http://en.wikipedia.org/wiki/ISO_4217",
-                                                "type": "Link",
-                                                "content": [
-                                                    {
-                                                        "text": "ISO 4217",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "text": " currency code for situations requiring currency conversion. When surge is active for a particular product, its surge_multiplier will be greater than 1, but the price estimate already factors in this multiplier.",
-                                                "type": "SimpleText"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            "type": "OpenApiOperation"
-                        }
-                    ]
-                },
-                {
-                    "title": "Time Estimates",
-                    "id": "time-estimates",
-                    "type": "Section",
-                    "content": [
-                        {
-                            "id": "null",
-                            "type": "Anchor"
-                        },
-                        {
-                            "operation": {
-                                "id": "null",
-                                "method": "get",
-                                "path": "/estimates/time",
-                                "summary": "Time Estimates",
-                                "tags": [
-                                    "Estimates"
-                                ],
-                                "parameters": [
-                                    {
-                                        "name": "start_latitude",
-                                        "in": "query",
-                                        "type": "number",
-                                        "required": true,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Latitude component of start location.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "start_longitude",
-                                        "in": "query",
-                                        "type": "number",
-                                        "required": true,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Longitude component of start location.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "customer_uuid",
-                                        "in": "query",
-                                        "type": "string",
-                                        "required": false,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Unique customer identifier to be used for experience customization.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "product_id",
-                                        "in": "query",
-                                        "type": "string",
-                                        "required": false,
-                                        "schema": {},
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Unique identifier representing a specific product for a given latitude \u0026 longitude.",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "responses": [
-                                    {
-                                        "code": "200",
-                                        "schema": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "image": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Image URL representing the product.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "product_id": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Unique identifier representing a specific product for a given latitude \u0026 longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "description": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Description of product.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "display_name": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Display name of product.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "capacity": {
-                                                        "description": [
-                                                            {
-                                                                "type": "Paragraph",
-                                                                "content": [
-                                                                    {
-                                                                        "text": "Capacity of product. For example, 4 people.",
-                                                                        "type": "SimpleText"
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "An array of products",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "code": "default",
-                                        "schema": {
-                                            "properties": {
-                                                "code": {
-                                                    "format": "int32",
-                                                    "type": "integer"
-                                                },
-                                                "message": {
-                                                    "type": "string"
-                                                },
-                                                "fields": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        },
-                                        "description": [
-                                            {
-                                                "type": "Paragraph",
-                                                "content": [
-                                                    {
-                                                        "text": "Unexpected error",
-                                                        "type": "SimpleText"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "description": [
-                                    {
-                                        "type": "Paragraph",
-                                        "content": [
-                                            {
-                                                "text": "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
-                                                "type": "SimpleText"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            "type": "OpenApiOperation"
+                            ],
+                            "type": "JsxGroup",
+                            "meta": {"rightSide": true}
                         }
                     ]
                 }
             ],
-            "lastModifiedTime": 1522950025000,
+            "lastModifiedTime": 1523445494000,
             "tocItem": {
                 "sectionTitle": "Snippets",
-                "pageTitle": "Open API",
+                "pageTitle": "Typescript",
                 "pageMeta": {
-                    "type": [
-                        "two-sides"
-                    ]
+                    type: ['two-sides']
                 },
-                "fileName": "open-API",
+                "fileName": "typescript",
                 "dirName": "snippets",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Operation definition",
-                        "id": "operation-definition"
+                        "title": "Parsing",
+                        "id": "parsing"
                     },
                     {
-                        "title": "Auto Section",
-                        "id": "auto-section"
+                        "title": "Properties",
+                        "id": "properties"
                     },
                     {
-                        "title": "Time Estimates",
-                        "id": "time-estimates"
-                    },
-                    {
-                        "title": "Tags",
-                        "id": "tags"
-                    },
-                    {
-                        "title": "Price Estimates",
-                        "id": "price-estimates"
-                    },
-                    {
-                        "title": "Time Estimates",
-                        "id": "time-estimates"
+                        "title": "JSX Elements",
+                        "id": "jsx-elements"
                     }
                 ]
             }
