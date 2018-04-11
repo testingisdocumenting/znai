@@ -32,6 +32,7 @@ const extensionsMapping = {
     js: 'javascript',
     py: 'python',
     ts: 'typescript',
+    tsx: 'typescript',
 }
 
 function adjustLang(lang) {
