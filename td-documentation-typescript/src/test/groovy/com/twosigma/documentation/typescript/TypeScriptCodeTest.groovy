@@ -38,7 +38,7 @@ class TypeScriptCodeTest {
         return JsonUtils.deserializeAsList('[{\n' +
                 '            "name": "Sample",\n' +
                 '            "documentation": "top level doc string",\n' +
-                '            "kind": "class",\n' +
+                '            "kind": "type",\n' +
                 '            "type": "typeof Sample",\n' +
                 '            "members": [{\n' +
                 '                "name": "firstName",\n' +

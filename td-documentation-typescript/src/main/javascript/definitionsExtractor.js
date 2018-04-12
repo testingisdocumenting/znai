@@ -19,9 +19,9 @@ function extractDefinitions(filePath) {
     return definitions;
 
     function visit(node) {
-        if (ts.isClassDeclaration(node)) {
+        if (ts.isClassDeclaration(node) || ts.isInterfaceDeclaration(node)) {
             const symbol = checker.getSymbolAtLocation(node.name);
-            definitions.push(serializeClass(symbol));
+            definitions.push(serializeClassOrInterface(symbol));
         }
 
         if (ts.isFunctionDeclaration(node)) {
@@ -38,7 +38,7 @@ function extractDefinitions(filePath) {
         }
     }
 
-    function serializeClass(symbol) {
+    function serializeClassOrInterface(symbol) {
         let details = serializeSymbol(symbol);
 
         if (!symbol) {
@@ -60,7 +60,7 @@ function extractDefinitions(filePath) {
             next = keys.next();
         }
 
-        return Object.assign({}, details, {members: serializedMembers, kind: 'class'});
+        return Object.assign({}, details, {members: serializedMembers, kind: 'type'});
     }
 
     function serializeMember(symbol) {
@@ -68,6 +68,7 @@ function extractDefinitions(filePath) {
 
         switch (kind) {
             case ts.SyntaxKind.PropertyDeclaration:
+            case ts.SyntaxKind.PropertySignature:
                 return serializeProperty(symbol);
             case ts.SyntaxKind.MethodDeclaration:
                 return serializeMethodOrFunction(symbol, 'method');

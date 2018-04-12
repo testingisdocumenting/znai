@@ -10,7 +10,7 @@ public class TypeScriptCode {
 
     public TypeScriptCode(List<Map<String, ?>> entries) {
         types = entries.stream()
-                .filter(e -> "class".equals(e.get("kind")))
+                .filter(e -> "type".equals(e.get("kind")))
                 .map(TypeScriptType::new).collect(Collectors.toList());
 
         functions = entries.stream()

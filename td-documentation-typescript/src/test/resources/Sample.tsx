@@ -27,6 +27,18 @@ export class Sample {
     }
 }
 
+export interface Props {
+    /**
+     * first name
+     */
+    firstName: string;
+
+    /**
+     * last name
+     */
+    lastName?: string;
+}
+
 function demo() {
     const elementB = (
         <Declaration
