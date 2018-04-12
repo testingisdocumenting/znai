@@ -28,6 +28,7 @@ class OpenApiSpecTest {
         spec.operations.id.should == [
                 'findPets',
                 'addPet',
+                'dummyOp',
                 'findAllCustomerUsingGET',
                 'saveCustomerUsingPOST',
                 'findAllByOrderByLastNameCustomerUsingGET',

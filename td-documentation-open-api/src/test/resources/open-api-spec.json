@@ -104,6 +104,23 @@
         }
       }
     },
+    "/dummy": {
+      "get": {
+        "summary": "dummy operation",
+        "operationId": "dummyOp",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/NonExisting"
+          }
+        }}
+      }
+    },
     "/customers": {
       "get": {
         "tags": [

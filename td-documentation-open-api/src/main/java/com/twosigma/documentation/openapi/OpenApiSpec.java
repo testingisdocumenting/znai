@@ -142,6 +142,10 @@ public class OpenApiSpec {
     @SuppressWarnings("unchecked")
     private Map<String, ?> substituteSchema(Map<String, ?> data) {
         Map<String, Object> substituted = new HashMap<>();
+        if (data == null) {
+            return substituted;
+        }
+
         data.forEach((k, v) -> {
             if (k.equals(DESCRIPTION_KEY) && v instanceof String) {
                 substituted.put(DESCRIPTION_KEY, parseMarkdown(v));
