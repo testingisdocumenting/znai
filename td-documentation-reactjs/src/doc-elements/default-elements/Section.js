@@ -7,11 +7,11 @@ class Section extends Component {
     render() {
         const {id, title, ...props} = this.props
 
-        const sectionTitle = title ? (
+        const sectionTitle = (
             <div className="content-block">
-                <props.elementsLibrary.SectionTitle id={id} title={title}/>
+                <props.elementsLibrary.SectionTitle id={id} title={title || ''}/>
             </div>
-        ) : null
+        )
 
         return (
             <div className="section" key={title} ref={n => this.node = n}>
