@@ -150,6 +150,10 @@ public class DataNodeAnsiPrinter {
     }
 
     private String convertToString(Object value) {
+        if (value == null) {
+            return "null";
+        }
+
         return value instanceof String ?
                 "\"" + value + "\"":
                 value.toString();
