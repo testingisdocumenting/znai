@@ -40,7 +40,7 @@ class HttpExtensions {
                 cloned.delegate = new ValidatorDelegate(header, body)
                 cloned.resolveStrategy = Closure.DELEGATE_FIRST
                 return cloned.maximumNumberOfParameters == 2 ?
-                        cloned.call(header, body):
+                        cloned.call(header, new GroovyDataNode(body)):
                         cloned.call()
             }
         }
