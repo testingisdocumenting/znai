@@ -18,8 +18,10 @@ import {pagesDemo} from './doc-elements/page/Page.demo'
 import {imageAnnotationDemo} from './doc-elements/images/EmbeddedAnnotatedImage.demo'
 import {apiParametersDemo} from './doc-elements/api/ApiParameters.demo'
 import {jsxDemo} from './doc-elements/jsx/Jsx.demo'
+import {snippetsDemo} from './doc-elements/code-snippets/Snippet.demo'
 
 const snippets = new Registry('snippets')
+snippets.registerAsGrid('Code Snippet', 0, snippetsDemo)
 snippets.registerAsGrid('Json', 0, jsonDemo)
 snippets.registerAsGrid('Jsx', 0, jsxDemo)
 snippets.registerAsGrid('DocUtils', 0, docUtilsDemo)
