@@ -111,3 +111,14 @@ code {
 .snippet.__recently-modified {
     margin-left: auto;
 }
+
+.tabs-area .snippet-container .snippet,
+.tabs-area .snippet-container.wide-screen {
+    border: none;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tabs-area .snippet-container + .paragraph {
+    margin-top: 20px;
+}

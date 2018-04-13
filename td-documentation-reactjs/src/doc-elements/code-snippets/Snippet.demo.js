@@ -21,7 +21,10 @@ export function snippetsDemo(registry) {
         .add('read more', <Snippet tokens={parseCode("csv", longCode())}
                                    readMore={true} r
                                    eadMoreVisibleLines={4}/>)
-        .add('tabs with wide', <Tabs {...tabsWithWide()} elementsLibrary={elementsLibrary}/>)
+        .add('tabs with wide', <Tabs {...tabsContent({label: 'wide', wide: true})}
+                                     elementsLibrary={elementsLibrary}/>)
+        .add('tabs with narrow', <Tabs {...tabsContent({label: 'narrow', wide: false})}
+                                       elementsLibrary={elementsLibrary}/>)
 }
 
 function htmlCode() {
@@ -56,10 +59,11 @@ function longCode() {
     return lines.join('\n')
 }
 
-function tabsWithWide() {
+function tabsContent({label, wide}) {
     return {tabsContent: [{
-            name: "wide", content: [{
+            name: label, content: [{
                 type: "Snippet",
+                wide: wide,
                 maxLineLength: 200,
                 tokens: parseCode("java", wideCode())
             }]}]}
