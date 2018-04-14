@@ -10,7 +10,7 @@ const DocElement = ({content, elementsLibrary}) => {
     return (!content ? null : content.map((item, idx) => {
         const ElementToUse = elementsLibrary[item.type]
         if (!ElementToUse) {
-            console.warn("can't find component to display", item)
+            console.warn("can't find component to display: " + JSON.stringify(item))
             return null
         } else {
             return <ElementToUse key={idx} {...item}
