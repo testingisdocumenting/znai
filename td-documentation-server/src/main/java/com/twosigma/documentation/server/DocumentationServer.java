@@ -1,7 +1,13 @@
 package com.twosigma.documentation.server;
 
 import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
+import com.twosigma.documentation.server.docpreparation.DocumentationPreparationHandlers;
+import com.twosigma.documentation.server.docpreparation.DocumentationPreparationTestHandler;
+import com.twosigma.documentation.server.docpreparation.DocumentationPreparationWebSocketHandler;
+import com.twosigma.documentation.server.sockets.JsonWebSocketHandler;
+import com.twosigma.documentation.server.sockets.JsonWebSocketHandlerComposition;
 import com.twosigma.documentation.server.upload.FileUploadHandler;
 import com.twosigma.documentation.server.upload.UnzipTask;
 import io.vertx.core.MultiMap;
@@ -14,18 +20,39 @@ import io.vertx.ext.web.impl.RoutingContextDecorator;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author mykola
  */
 public class DocumentationServer {
-    public static HttpServer create(Path deployRoot) {
+    private final JsonWebSocketHandlerComposition socketHandlers;
+    private final DocumentationPreparationWebSocketHandler documentationPreparationWebSocketHandler;
+    private final Vertx vertx;
+    private Path deployRoot;
+
+    public DocumentationServer(Path deployRoot) {
+        this.deployRoot = deployRoot;
+
+        System.setProperty("vertx.cwd", deployRoot.toString());
         System.setProperty("file.encoding","UTF-8");
 
         createDirs(deployRoot);
-        System.setProperty("vertx.cwd", deployRoot.toString());
+        vertx = Vertx.vertx();
 
-        Vertx vertx = Vertx.vertx();
+        socketHandlers = new JsonWebSocketHandlerComposition();
+        documentationPreparationWebSocketHandler = new DocumentationPreparationWebSocketHandler(vertx);
+        
+        socketHandlers.add(documentationPreparationWebSocketHandler);
+
+        DocumentationPreparationHandlers.add(new DocumentationPreparationTestHandler());
+    }
+
+    public void addSocketHandler(JsonWebSocketHandler socketHandler) {
+        socketHandlers.add(socketHandler);
+    }
+
+    public HttpServer create() {
         HttpServer server = vertx.createHttpServer();
 
         Router router = Router.router(vertx);
@@ -53,7 +80,9 @@ public class DocumentationServer {
 
         router.get("/*").handler(pagesStaticHandler);
 
+        server.websocketHandler(socketHandlers);
         server.requestHandler(router::accept);
+
         return server;
     }
 
@@ -72,5 +101,15 @@ public class DocumentationServer {
         UnzipTask unzipTask = new UnzipTask(root.resolve(path), root);
         unzipTask.execute();
         ConsoleOutputs.out(Color.BLUE, "unzipped docs: ", Color.PURPLE, root);
+    }
+
+    // this is entry point for local development and testing
+    // official mdoc start is through com.twosigma.documentation.cli.DocumentationCliApp
+    public static void main(String[] args) {
+        ConsoleOutputs.add(new AnsiConsoleOutput());
+
+        HttpServer server = new DocumentationServer(Paths.get("")).create();
+        server.listen(3333);
+        System.out.println("test server started");
     }
 }

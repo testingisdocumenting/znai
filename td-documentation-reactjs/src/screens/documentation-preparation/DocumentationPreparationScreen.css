@@ -1,0 +1,5 @@
+.documentation-preparation-screen {
+    display: grid;
+    justify-items: center;
+    margin-top: 100px;
+}

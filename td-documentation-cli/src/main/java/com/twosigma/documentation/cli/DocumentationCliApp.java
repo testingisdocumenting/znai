@@ -78,7 +78,7 @@ public class DocumentationCliApp {
     }
 
     private void serve() {
-        HttpServer server = DocumentationServer.create(config.getDeployRoot());
+        HttpServer server = new DocumentationServer(config.getDeployRoot()).create();
         server.listen(config.getPort());
     }
 

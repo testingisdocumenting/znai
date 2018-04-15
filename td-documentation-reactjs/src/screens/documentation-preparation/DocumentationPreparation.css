@@ -1,0 +1,56 @@
+.documentation-preparation {
+}
+
+.documentation-preparation > .main-message {
+    display: flex;
+    font-size: 40px;
+}
+
+.documentation-preparation > .main-message > .doc-id {
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.documentation-preparation > .status-and-progress {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.documentation-preparation > .status-and-progress > .progress-bar-container {
+    width: 400px;
+    height: 26px;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.documentation-preparation > .status-and-progress > .progress-bar-container > .progress-bar {
+    background-color: #1e70bf;
+    border-radius: 5px;
+    transition: width 0.5s ease-in;
+}
+
+.documentation-preparation > .status-and-progress > .status-message {
+    color: var(--mdoc-meta-color);
+    font-size: 26px;
+    line-height: 26px;
+}
+
+.documentation-preparation > .key-value-pairs {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 20px;
+    font-family: var(--mdoc-code-font-family);
+    margin-top: 40px;
+}
+
+.documentation-preparation > .key-value-pairs > .key {
+    font-weight: bold;
+    justify-self: right;
+}
+
+.documentation-preparation > .key-value-pairs > .value {
+
+}

@@ -24,12 +24,16 @@ public class DocumentationPreview {
     }
 
     public void start(WebSite webSite, int port) {
-        HttpServer server = DocumentationServer.create(deployRoot);
-        PreviewWebSocketHandler socketHandler = new PreviewWebSocketHandler();
-        server.websocketHandler(socketHandler);
+        DocumentationServer documentationServer = new DocumentationServer(deployRoot);
+        PreviewWebSocketHandler previewWebSocketHandler = new PreviewWebSocketHandler();
+        documentationServer.addSocketHandler(previewWebSocketHandler);
+
+        HttpServer server = documentationServer.create();
 
         reportPhase("starting server");
-        final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(socketHandler, webSite);
+        final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(
+                previewWebSocketHandler,
+                webSite);
         server.listen(port);
 
         reportHost(port);
