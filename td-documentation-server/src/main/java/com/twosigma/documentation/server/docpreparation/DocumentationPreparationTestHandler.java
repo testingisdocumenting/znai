@@ -5,16 +5,18 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DocumentationPreparationTestHandler implements DocumentationPreparationHandler {
+    private static final String DUMMY_DOC_ID = "preview";
+
     private AtomicBoolean isReady = new AtomicBoolean(true);
 
     @Override
     public boolean handles(String docId) {
-        return docId.equals("preview");
+        return docId.equals(DUMMY_DOC_ID);
     }
 
     @Override
     public boolean isReady(String docId) {
-        return this.isReady.get();
+        return docId.equals("preview") && this.isReady.get();
     }
 
     @Override

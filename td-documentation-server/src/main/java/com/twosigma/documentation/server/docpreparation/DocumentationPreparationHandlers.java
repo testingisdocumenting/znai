@@ -19,7 +19,7 @@ public class DocumentationPreparationHandlers {
     }
 
     public static boolean isReady(String docId) {
-        return handlers.stream().anyMatch(h -> h.isReady(docId));
+        return handlers.isEmpty() || handlers.stream().anyMatch(h -> h.isReady(docId));
     }
 
     public static void add(DocumentationPreparationHandler handler) {

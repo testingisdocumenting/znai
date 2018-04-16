@@ -7,7 +7,6 @@ import com.twosigma.documentation.html.HtmlPage;
 import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationHandlers;
-import com.twosigma.documentation.server.docpreparation.DocumentationPreparationTestHandler;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationWebSocketHandler;
 import com.twosigma.documentation.server.sockets.JsonWebSocketHandler;
 import com.twosigma.documentation.server.sockets.JsonWebSocketHandlerComposition;
@@ -53,8 +52,6 @@ public class DocumentationServer {
         documentationPreparationWebSocketHandler = new DocumentationPreparationWebSocketHandler(vertx);
         
         socketHandlers.add(documentationPreparationWebSocketHandler);
-
-        DocumentationPreparationHandlers.add(new DocumentationPreparationTestHandler());
     }
 
     public void addSocketHandler(JsonWebSocketHandler socketHandler) {
