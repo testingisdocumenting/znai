@@ -93,8 +93,12 @@ public class DocumentationServer {
             String docId = extractDocId(ctx);
             if (DocumentationPreparationHandlers.isReady(docId)) {
                 pagesStaticHandler.handle(ctx);
-            } else if (isFavIconRequest(ctx)) {
-                ctx.response().end();
+            } else if (isNonDocPageRequest(ctx)) {
+                // mdoc documentations are single page apps
+                // page refresh won't happen during navigation from one page to another
+                // but images will still be requested if they are present on a page
+                // in that case we will serve what is currently available and not force documentation update
+                pagesStaticHandler.handle(ctx);
             } else {
                 serveDocumentationPreparationPage(ctx, docId);
             }
@@ -128,9 +132,15 @@ public class DocumentationServer {
         return parts.length < 2 ? "" : parts[1];
     }
 
-    private static boolean isFavIconRequest(RoutingContext ctx) {
+    private static boolean isNonDocPageRequest(RoutingContext ctx) {
         String uri = ctx.request().uri();
-        return uri.endsWith("/favicon.png");
+        int dotIdx = uri.lastIndexOf('.');
+        if (dotIdx == -1) {
+            return false;
+        }
+
+        int slashIdx = uri.lastIndexOf('/');
+        return dotIdx > slashIdx;
     }
 
     private static void createDirs(Path deployRoot) {
