@@ -52,7 +52,7 @@ public class WebSite {
     private TableOfContents toc;
     private WebSiteDocStructure docStructure;
     private Footer footer;
-    private List<PageReactProps> allPagesProps;
+    private List<DocPageReactProps> allPagesProps;
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
 
@@ -76,7 +76,7 @@ public class WebSite {
         this.componentsRegistry = new WebSiteComponentsRegistry();
         this.resourceResolver = new MultipleLocationsResourceResolver(cfg.docRootPath, findLookupLocations(cfg));
         this.webSiteExtensions = initWebSiteExtensions(cfg);
-        this.reactJsNashornEngine = initJsEngine();
+        this.reactJsNashornEngine = cfg.reactJsNashornEngine;
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
         this.tocJavaScript = WebResource.withPath("toc.js");
@@ -93,6 +93,8 @@ public class WebSite {
 
         componentsRegistry.setResourcesResolver(resourceResolver);
         componentsRegistry.setCodeTokenizer(codeTokenizer);
+
+        loadCustomJsLibraries();
 
         reset();
     }
@@ -127,6 +129,10 @@ public class WebSite {
 
     public DocMeta getDocMeta() {
         return docMeta;
+    }
+
+    public ReactJsNashornEngine getReactJsNashornEngine() {
+        return reactJsNashornEngine;
     }
 
     public void generate() {
@@ -213,15 +219,9 @@ public class WebSite {
         return new WebSiteExtensions(resourceResolver, JsonUtils.deserializeAsMap(json));
     }
 
-    private ReactJsNashornEngine initJsEngine() {
-        reportPhase("initializing ReactJS server side engine");
-
-        ReactJsNashornEngine engine = new ReactJsNashornEngine();
-        engine.getNashornEngine().eval("toc = []");
-        engine.loadCoreLibraries();
-        engine.loadCustomLibraries(webSiteExtensions.getJsResources());
-
-        return engine;
+    private void loadCustomJsLibraries() {
+        reportPhase("loading custom js libraries");
+        reactJsNashornEngine.loadCustomLibraries(webSiteExtensions.getJsResources());
     }
 
     private void reset() {
@@ -386,7 +386,7 @@ public class WebSite {
     }
 
     private void buildJsonOfAllPages() {
-        List<Map<String, ?>> listOfMaps = this.allPagesProps.stream().map(PageReactProps::toMap).collect(toList());
+        List<Map<String, ?>> listOfMaps = this.allPagesProps.stream().map(DocPageReactProps::toMap).collect(toList());
         String json = JsonUtils.serialize(listOfMaps);
 
         deployer.deploy("all-pages.json", json);
@@ -499,6 +499,7 @@ public class WebSite {
         private boolean isPreviewEnabled;
         private String markupType = MARKDOWN;
         private DocMeta docMeta = new DocMeta(Collections.emptyMap());
+        private ReactJsNashornEngine reactJsNashornEngine;
 
         private Configuration() {
             webResources = new ArrayList<>();
@@ -518,6 +519,11 @@ public class WebSite {
 
         public Configuration withFooterPath(Path path) {
             footerPath = path.toAbsolutePath();
+            return this;
+        }
+
+        public Configuration withReactJsNashornEngine(ReactJsNashornEngine engine) {
+            reactJsNashornEngine = engine;
             return this;
         }
 

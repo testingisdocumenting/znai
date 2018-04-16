@@ -52,7 +52,7 @@ class TableOfContents {
     }
 }
 
-const tableOfContents = new TableOfContents(global.toc)
+const tableOfContents = new TableOfContents(global.toc || [])
 
 export {tableOfContents, setTocJson}
 

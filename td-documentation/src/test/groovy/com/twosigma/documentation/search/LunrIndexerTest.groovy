@@ -1,6 +1,6 @@
 package com.twosigma.documentation.search
 
-import com.twosigma.documentation.html.PageReactProps
+import com.twosigma.documentation.html.DocPageReactProps
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine
 import com.twosigma.documentation.parser.commonmark.MarkdownParser
 import com.twosigma.documentation.structure.Page
@@ -31,7 +31,7 @@ hello world
         def item = new TocItem("dir-name", "file-name")
         item.setPageSectionIdTitles(Collections.emptyList())
 
-        def pageProps = new PageReactProps(item, page)
+        def pageProps = new DocPageReactProps(item, page)
         def indexJson = indexer.createJsonIndex([pageProps])
 
         println indexJson

@@ -7,15 +7,15 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * represents props for ReactJs Page component to render an entire documentation page
+ * represents props for ReactJs Doc Page component to render an entire documentation page
  * @author mykola
  */
-public class PageReactProps {
+public class DocPageReactProps {
     private final Map<String, ?> asMap;
     private final TocItem tocItem;
     private final Page page;
 
-    public PageReactProps(TocItem tocItem, Page page) {
+    public DocPageReactProps(TocItem tocItem, Page page) {
         this.tocItem = tocItem;
         this.page = page;
         this.asMap = buildMap();

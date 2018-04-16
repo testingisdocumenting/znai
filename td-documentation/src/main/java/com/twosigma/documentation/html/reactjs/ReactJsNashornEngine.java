@@ -5,6 +5,8 @@ import com.twosigma.documentation.nashorn.NashornEngine;
 
 import java.util.List;
 
+import static com.twosigma.documentation.website.ProgressReporter.reportPhase;
+
 /**
  * @author mykola
  */
@@ -15,10 +17,8 @@ public class ReactJsNashornEngine {
     public ReactJsNashornEngine() {
         this.reactJsBundle = new ReactJsBundle();
         this.nashornEngine = new NashornEngine();
-    }
 
-    public void loadCoreLibraries() {
-        reactJsBundle.serverJavaScripts().forEach(nashornEngine::loadLibrary);
+        initJsEngine();
     }
 
     public void loadCustomLibraries(List<WebResource> jsResources) {
@@ -31,5 +31,18 @@ public class ReactJsNashornEngine {
 
     public NashornEngine getNashornEngine() {
         return nashornEngine;
+    }
+
+    private void initJsEngine() {
+        reportPhase("initializing ReactJS server side engine");
+
+        nashornEngine.eval("toc = []");
+        loadCoreLibraries();
+
+        reportPhase("ReactJS initialized");
+    }
+
+    private void loadCoreLibraries() {
+        reactJsBundle.serverJavaScripts().forEach(nashornEngine::loadLibrary);
     }
 }

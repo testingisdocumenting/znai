@@ -18,6 +18,10 @@ public class DocumentationPreparationHandlers {
         handler.prepare(docId, preparationProgress);
     }
 
+    public static boolean isReady(String docId) {
+        return handlers.stream().anyMatch(h -> h.isReady(docId));
+    }
+
     public static void add(DocumentationPreparationHandler handler) {
         handlers.add(handler);
     }

@@ -5,9 +5,9 @@ package com.twosigma.documentation.html;
  */
 public class HtmlPageAndPageProps {
     private HtmlPage htmlPage;
-    private PageReactProps props;
+    private DocPageReactProps props;
 
-    public HtmlPageAndPageProps(HtmlPage htmlPage, PageReactProps props) {
+    public HtmlPageAndPageProps(HtmlPage htmlPage, DocPageReactProps props) {
         this.htmlPage = htmlPage;
         this.props = props;
     }
@@ -16,7 +16,7 @@ public class HtmlPageAndPageProps {
         return htmlPage;
     }
 
-    public PageReactProps getProps() {
+    public DocPageReactProps getProps() {
         return props;
     }
 }

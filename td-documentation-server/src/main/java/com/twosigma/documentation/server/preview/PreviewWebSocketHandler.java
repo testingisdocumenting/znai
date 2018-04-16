@@ -1,6 +1,6 @@
 package com.twosigma.documentation.server.preview;
 
-import com.twosigma.documentation.html.PageReactProps;
+import com.twosigma.documentation.html.DocPageReactProps;
 import com.twosigma.documentation.server.sockets.JsonWebSocketHandler;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.TableOfContents;
@@ -19,7 +19,7 @@ public class PreviewWebSocketHandler extends JsonWebSocketHandler {
         super("preview", "/preview");
     }
 
-    public void sendPage(PageReactProps pageProps) {
+    public void sendPage(DocPageReactProps pageProps) {
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "pageUpdate");
         payload.put("pageProps", pageProps.toMap());
@@ -27,10 +27,10 @@ public class PreviewWebSocketHandler extends JsonWebSocketHandler {
         send(payload);
     }
 
-    public void sendPages(Stream<PageReactProps> listOfPageProps) {
+    public void sendPages(Stream<DocPageReactProps> listOfPageProps) {
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "multiplePagesUpdate");
-        payload.put("listOfPageProps", listOfPageProps.map(PageReactProps::toMap).collect(toList()));
+        payload.put("listOfPageProps", listOfPageProps.map(DocPageReactProps::toMap).collect(toList()));
 
         send(payload);
     }

@@ -4,7 +4,7 @@ import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.website.WebSite;
 import com.twosigma.documentation.html.HtmlPageAndPageProps;
-import com.twosigma.documentation.html.PageReactProps;
+import com.twosigma.documentation.html.DocPageReactProps;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
 import com.twosigma.utils.FileUtils;
@@ -100,7 +100,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
             previewWebSite.redeployAuxiliaryFileIfRequired(path);
 
             dependentTocItems.forEach(System.out::println);
-            Stream<PageReactProps> generatedPages = dependentTocItems.stream().
+            Stream<DocPageReactProps> generatedPages = dependentTocItems.stream().
                     map(tocItem -> previewWebSite.regeneratePage(tocItem).getProps());
 
             previewSocket.sendPages(generatedPages);

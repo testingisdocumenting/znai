@@ -3,7 +3,7 @@ import DocumentationPreparation from './DocumentationPreparation'
 import DocumentationPreparationScreen from './DocumentationPreparationScreen'
 
 const simplePreparationState = {
-    docId: 'my-documentation',
+    docId: 'preview',
     statusMessage: 'checking new version content',
     progressPercent: 35,
     keyValues: [

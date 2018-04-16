@@ -10,10 +10,10 @@ import java.util.Map;
  */
 public class DocumentationReactProps {
     private final DocMeta docMeta;
-    private final PageReactProps pageProps;
+    private final DocPageReactProps pageProps;
     private FooterProps footerProps;
 
-    public DocumentationReactProps(DocMeta docMeta, PageReactProps pageProps, FooterProps footerProps) {
+    public DocumentationReactProps(DocMeta docMeta, DocPageReactProps pageProps, FooterProps footerProps) {
         this.docMeta = docMeta;
         this.pageProps = pageProps;
         this.footerProps = footerProps;

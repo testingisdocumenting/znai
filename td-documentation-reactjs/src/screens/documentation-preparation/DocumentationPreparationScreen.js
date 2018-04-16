@@ -4,7 +4,6 @@ import DocumentationPreparation from './DocumentationPreparation'
 import {socketUrl} from '../../utils/socket'
 
 import './DocumentationPreparationScreen.css'
-import {getDocId} from '../../doc-elements/docMeta'
 
 class DocumentationPreparationScreen extends React.Component {
     constructor(props) {
@@ -29,7 +28,7 @@ class DocumentationPreparationScreen extends React.Component {
     }
 
     _connect() {
-        this.ws = new WebSocket(socketUrl("_doc-update/" + getDocId()))
+        this.ws = new WebSocket(socketUrl("_doc-update/" + this.props.docId))
 
         this.ws.onopen = () => {
             console.log('@@ open')
@@ -51,6 +50,9 @@ class DocumentationPreparationScreen extends React.Component {
 
     _update({message, keyValues, progress}) {
         this.setState({statusMessage: message, keyValues: keyValues || [], progressPercent: progress})
+        if (progress >= 100) {
+            setTimeout(() => window.location.reload(), 100)
+        }
     }
 }
 

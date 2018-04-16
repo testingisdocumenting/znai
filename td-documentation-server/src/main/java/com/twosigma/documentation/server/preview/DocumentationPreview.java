@@ -24,7 +24,7 @@ public class DocumentationPreview {
     }
 
     public void start(WebSite webSite, int port) {
-        DocumentationServer documentationServer = new DocumentationServer(deployRoot);
+        DocumentationServer documentationServer = new DocumentationServer(webSite.getReactJsNashornEngine(), deployRoot);
         PreviewWebSocketHandler previewWebSocketHandler = new PreviewWebSocketHandler();
         documentationServer.addSocketHandler(previewWebSocketHandler);
 

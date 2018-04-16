@@ -4,6 +4,7 @@ import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.html.HtmlPage;
+import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkupTypes;
 import com.twosigma.documentation.website.WebSite;
 import com.twosigma.documentation.client.DocumentationUploadClient;
@@ -23,6 +24,7 @@ public class DocumentationCliApp {
     private DocumentationCliConfig config;
     private Path deployPath;
     private WebSite webSite;
+    private ReactJsNashornEngine nashornEngine;
 
     public DocumentationCliApp(String[] args) {
         System.setProperty("java.awt.headless", "true");
@@ -54,6 +56,8 @@ public class DocumentationCliApp {
 
         announceMode(config.getModeAsString());
 
+        nashornEngine = new ReactJsNashornEngine();
+
         if (! config.isServe()) {
             generateDocs();
         }
@@ -78,7 +82,7 @@ public class DocumentationCliApp {
     }
 
     private void serve() {
-        HttpServer server = new DocumentationServer(config.getDeployRoot()).create();
+        HttpServer server = new DocumentationServer(nashornEngine, config.getDeployRoot()).create();
         server.listen(config.getPort());
     }
 
@@ -89,6 +93,7 @@ public class DocumentationCliApp {
                 WebResource.fromResource(HtmlPage.FAVICON_PATH);
 
         webSite = WebSite.withToc(resolveTocPath()).
+                withReactJsNashornEngine(nashornEngine).
                 withId(getDocId()).
                 withMarkupType(config.getMarkupType()).
                 withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).

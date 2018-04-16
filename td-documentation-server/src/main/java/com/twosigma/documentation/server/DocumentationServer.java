@@ -3,6 +3,9 @@ package com.twosigma.documentation.server;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
+import com.twosigma.documentation.html.HtmlPage;
+import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
+import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationHandlers;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationTestHandler;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationWebSocketHandler;
@@ -14,6 +17,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.impl.RoutingContextDecorator;
 
@@ -21,6 +25,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @author mykola
@@ -29,9 +36,11 @@ public class DocumentationServer {
     private final JsonWebSocketHandlerComposition socketHandlers;
     private final DocumentationPreparationWebSocketHandler documentationPreparationWebSocketHandler;
     private final Vertx vertx;
+    private ReactJsNashornEngine nashornEngine;
     private Path deployRoot;
 
-    public DocumentationServer(Path deployRoot) {
+    public DocumentationServer(ReactJsNashornEngine nashornEngine, Path deployRoot) {
+        this.nashornEngine = nashornEngine;
         this.deployRoot = deployRoot;
 
         System.setProperty("vertx.cwd", deployRoot.toString());
@@ -78,12 +87,50 @@ public class DocumentationServer {
             new FileUploadHandler(vertx, deployRoot, docId, (p) -> unzip(deployRoot, docId, p)).handle(ctx.request());
         });
 
-        router.get("/*").handler(pagesStaticHandler);
+        router.get("/static/*").handler(staticCommonResources);
+
+        router.get("/*").handler(ctx -> {
+            String docId = extractDocId(ctx);
+            if (DocumentationPreparationHandlers.isReady(docId)) {
+                pagesStaticHandler.handle(ctx);
+            } else if (isFavIconRequest(ctx)) {
+                ctx.response().end();
+            } else {
+                serveDocumentationPreparationPage(ctx, docId);
+            }
+        });
 
         server.websocketHandler(socketHandlers);
         server.requestHandler(router::accept);
 
         return server;
+    }
+
+    private void serveDocumentationPreparationPage(RoutingContext ctx, String docId) {
+        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(nashornEngine);
+        Map<String, Object> props = new LinkedHashMap<>();
+
+        props.put("docId", docId);
+        props.put("statusMessage", "checking documentation cache");
+        props.put("progressPercent", 0);
+        props.put("keyValues", Collections.emptyList());
+
+        HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly("test title",
+                "DocumentationPreparationScreen", props);
+
+        ctx.response().end(htmlPage.render(docId));
+    }
+
+    private static String extractDocId(RoutingContext ctx) {
+        String uri = ctx.request().uri();
+        String[] parts = uri.split("/");
+
+        return parts.length < 2 ? "" : parts[1];
+    }
+
+    private static boolean isFavIconRequest(RoutingContext ctx) {
+        String uri = ctx.request().uri();
+        return uri.endsWith("/favicon.png");
     }
 
     private static void createDirs(Path deployRoot) {
@@ -108,7 +155,7 @@ public class DocumentationServer {
     public static void main(String[] args) {
         ConsoleOutputs.add(new AnsiConsoleOutput());
 
-        HttpServer server = new DocumentationServer(Paths.get("")).create();
+        HttpServer server = new DocumentationServer(new ReactJsNashornEngine(), Paths.get("")).create();
         server.listen(3333);
         System.out.println("test server started");
     }

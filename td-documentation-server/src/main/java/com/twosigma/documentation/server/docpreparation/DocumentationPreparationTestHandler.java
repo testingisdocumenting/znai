@@ -1,14 +1,20 @@
 package com.twosigma.documentation.server.docpreparation;
 
-import io.vertx.core.Vertx;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DocumentationPreparationTestHandler implements DocumentationPreparationHandler {
+    private AtomicBoolean isReady = new AtomicBoolean(true);
+
     @Override
     public boolean handles(String docId) {
         return docId.equals("preview");
+    }
+
+    @Override
+    public boolean isReady(String docId) {
+        return this.isReady.get();
     }
 
     @Override
@@ -28,6 +34,7 @@ public class DocumentationPreparationTestHandler implements DocumentationPrepara
             preparationProgress.reportProgress("some progress", keyValues, 75);
 
             Thread.sleep(1000);
+            this.isReady.set(true);
             preparationProgress.reportProgress("another progress", keyValues, 100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
