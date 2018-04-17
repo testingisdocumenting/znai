@@ -4,6 +4,7 @@ ul.icon-based {
 
 ul.content-block {
     margin-bottom: 15px;
+    width: auto;
 }
 
 .presentation li {
