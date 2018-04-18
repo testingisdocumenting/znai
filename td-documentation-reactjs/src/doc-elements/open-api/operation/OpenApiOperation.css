@@ -1,10 +1,11 @@
 .open-api-operation {
     font-family: var(--mdoc-regular-font-family);
     font-size: var(--mdoc-smaller-text-size);
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .open-api-operation .content-block {
-    width: auto;
 }
 
 .open-api-operation > .url-and-summary {

@@ -6,6 +6,10 @@
     margin-bottom: 10px;
 }
 
+.open-api-sub-header .content-block {
+    width: auto;
+}
+
 .open-api-sub-header > .header-part {
     color: var(--mdoc-meta-color);
     font-family: var(--mdoc-regular-font-family);

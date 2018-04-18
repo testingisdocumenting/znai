@@ -38,6 +38,18 @@ const customerSchema = {
     ]
 }
 
+const idsSchema = {
+    "type": "array",
+    "items": {
+        type: "string"
+    }
+}
+
+const customersSchema = {
+    "type": "array",
+    "items": customerSchema
+}
+
 const checkSchema = {
     "type": "object",
     "properties": {
@@ -50,17 +62,9 @@ const checkSchema = {
                 }
             ]
         },
-        "confirmationIds": {
-            "type": "array",
-            "items": {
-                type: "string"
-            }
-        },
+        "confirmationIds": idsSchema,
         "customer": customerSchema,
-        "customers": {
-            "type": "array",
-            "items": customerSchema
-        }
+        "customers": customersSchema
     },
     "title": "Check"
 }
@@ -77,4 +81,4 @@ const customerIdsSchema = {
     }
 }
 
-export {customerSchema, checkSchema, customerArraySchema, customerIdsSchema}
+export {customerSchema, checkSchema, idsSchema, customersSchema, customerArraySchema, customerIdsSchema}

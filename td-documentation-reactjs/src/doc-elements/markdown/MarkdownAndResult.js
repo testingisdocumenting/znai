@@ -21,7 +21,7 @@ const MarkdownAndResult = ({markdown, result, ...props}) => {
 }
 
 const presentationMarkdownAndResultHandler = {component: MarkdownAndResult,
-    numberOfSlides: ({}) => 2}
+    numberOfSlides: () => 2}
 
 export {MarkdownAndResult, presentationMarkdownAndResultHandler}
 

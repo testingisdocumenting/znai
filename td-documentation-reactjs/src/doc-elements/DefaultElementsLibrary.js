@@ -134,13 +134,13 @@ presentationElementHandlers.CliCommand = presentationCliCommandHandler
 library.CliOutput = CliOutput
 presentationElementHandlers.CliOutput = presentationCliOutput
 
-library.ApiParameters = ApiParameters
+library.ApiParameters = wrappedInContentBlock(ApiParameters)
 
 library.Footer = Footer
 
 library.WebTauRest = WebTauRest
 
-library.OpenApiOperation = wrappedInContentBlock(OpenApiOperation)
+library.OpenApiOperation = OpenApiOperation
 
 registerDocUtilsElements(library)
 

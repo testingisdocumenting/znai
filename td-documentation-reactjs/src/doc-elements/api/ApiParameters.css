@@ -1,0 +1,20 @@
+.api-parameters {
+    max-width: var(--mdoc-single-column-partial-width);
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    font-size: var(--mdoc-smaller-text-size);
+    font-family: var(--mdoc-regular-font-family);
+
+    border-top: 1px solid var(--mdoc-snippets-outer-border-color);
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
+
+    grid-column: 1/-1;
+}
+
+.api-parameters.nested {
+    border-top: none;
+    border-bottom: none;
+    margin-left: 40px;
+}

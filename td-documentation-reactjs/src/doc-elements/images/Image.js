@@ -1,7 +1,5 @@
 import React from 'react'
 
-import {isPreviewEnabled} from '../docMeta'
-
 const Image = ({destination, inlined, isNarrow}) => {
     const className = "image" + (inlined ? " inlined" : "")
         + (isNarrow ? " content-block" : "")

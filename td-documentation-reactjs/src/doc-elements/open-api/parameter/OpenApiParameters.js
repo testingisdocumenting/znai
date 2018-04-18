@@ -1,7 +1,9 @@
 import React from 'react'
 
-import OpenApiParameter from './OpenApiParameter'
 import OpenApiSubHeader from '../common/OpenApiSubHeader'
+
+import {openApiParameterToApiParameter} from './openApiParameterToApiParameter'
+import ApiParameters from '../../api/ApiParameters'
 
 import './OpenApiParameters.css'
 
@@ -10,14 +12,13 @@ function OpenApiParameters({label, parameters, elementsLibrary}) {
         return null
     }
 
+    const apiParameters = parameters.map(p => openApiParameterToApiParameter(p))
+
     return (
         <React.Fragment>
             <OpenApiSubHeader title={label}/>
             <div className="open-api-parameters">
-                {parameters.map(p => <OpenApiParameter key={p.name}
-                                                       parameter={p}
-                                                       elementsLibrary={elementsLibrary}
-                />)}
+                <ApiParameters parameters={apiParameters} elementsLibrary={elementsLibrary}/>
             </div>
         </React.Fragment>
     )

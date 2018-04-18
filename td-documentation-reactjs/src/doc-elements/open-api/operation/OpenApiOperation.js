@@ -1,10 +1,10 @@
 import React from 'react'
-import {elementsLibrary} from '../../DefaultElementsLibrary'
 import OpenApiResponses from '../response/OpenApiResponses'
 import OpenApiParameters from '../parameter/OpenApiParameters'
 
-import './OpenApiOperation.css'
 import OpenApiBodyParameter from '../parameter/OpenApiBodyParameter'
+
+import './OpenApiOperation.css'
 
 function OpenApiOperation({elementsLibrary, operation}) {
     const parameters = operation.parameters || []
@@ -16,7 +16,7 @@ function OpenApiOperation({elementsLibrary, operation}) {
     const bodyParameter = bodyParams.length ? bodyParams[0] : null
 
     return (
-        <div className="open-api-operation">
+        <div className="open-api-operation content-block">
             <div className="url-and-summary">
                 <div className="method">{operation.method}</div>
                 <div className="path">{operation.path}</div>

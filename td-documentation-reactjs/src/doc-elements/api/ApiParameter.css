@@ -1,0 +1,75 @@
+.api-param-name-type-toggle-cell {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    text-align: right;
+    padding-left: 10px;
+    padding-right: 20px;
+}
+
+.api-param-name-type-toggle {
+}
+
+.api-param-name-type-toggle > .expand-toggle {
+    color: var(--mdoc-brand-primary-color);
+    font-size: 18px;
+
+    text-align: left;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.api-param-name-type-toggle-cell .content-block {
+    width: auto;
+}
+
+.api-param-description-cell {
+    color: var(--mdoc-regular-text-light-color);
+    font-size: var(--mdoc-smaller-text-size);
+    font-family: var(--mdoc-regular-font-family);
+    padding-right: 8px;
+}
+
+.api-param-description-cell .content-block {
+    width: auto;
+}
+
+.api-param-cell {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--mdoc-snippets-inner-border-color);
+}
+
+.api-param-cell:nth-child(-n+2) {
+    border-top: none
+}
+
+.api-param-cell:nth-last-child(-n+2) {
+    border-bottom: none
+}
+
+.generic-api-single-row-param {
+    max-width: var(--mdoc-single-column-partial-width);
+
+    display: flex;
+    font-size: var(--mdoc-smaller-text-size);
+    font-family: var(--mdoc-regular-font-family);
+
+    padding: 16px 8px;
+    border-bottom: 1px solid var(--mdoc-snippets-inner-border-color);
+}
+
+.api-param-cell.expanded {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.api-param-name-type-toggle > .name {
+    color: var(--mdoc-function-color);
+}
+
+.api-param-name-type-toggle > .type {
+    color: var(--mdoc-meta-color);
+    font-size: var(--mdoc-small-meta-text-size);
+}

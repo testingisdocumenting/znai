@@ -1,26 +1,2 @@
 .open-api-parameters {
-    --vertical-spacing: 5px;
-    --label-spacing: 5px;
-}
-
-.open-api-parameters .values-description {
-    margin-top: var(--vertical-spacing)
-}
-
-.open-api-parameters .available-values {
-    display: flex;
-}
-
-.open-api-parameters .available-values-label {
-    font-style: italic;
-    margin-right: var(--label-spacing)
-}
-
-.open-api-parameters .default-value {
-    display: flex;
-}
-
-.open-api-parameters .default-value-label {
-    font-style: italic;
-    margin-right: var(--label-spacing)
 }

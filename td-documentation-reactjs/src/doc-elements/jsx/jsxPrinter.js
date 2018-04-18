@@ -1,12 +1,5 @@
 import {TokensPrinter} from '../code-snippets/TokensPrinter'
 
-export function printJsx(elementDecl) {
-    const jsxPrinter = new JsxPrinter()
-    jsxPrinter.printJsx(elementDecl)
-
-    return jsxPrinter.printer.linesOfTokens
-}
-
 class JsxPrinter {
     printer = new TokensPrinter()
 
@@ -59,4 +52,11 @@ class JsxPrinter {
     printAttrValue(value) {
         this.printer.print('attr-value', value)
     }
+}
+
+export function printJsx(elementDecl) {
+    const jsxPrinter = new JsxPrinter()
+    jsxPrinter.printJsx(elementDecl)
+
+    return jsxPrinter.printer.linesOfTokens
 }

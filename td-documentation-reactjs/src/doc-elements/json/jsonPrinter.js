@@ -1,12 +1,5 @@
 import {TokensPrinter} from '../code-snippets/TokensPrinter'
 
-export function printJson(rootPath, data, pathsToHighlight) {
-    const jsonPrinter = new JsonPrinter(pathsToHighlight || [])
-    jsonPrinter.printValue(rootPath, data)
-
-    return jsonPrinter.printer.linesOfTokens
-}
-
 class JsonPrinter {
     printer = new TokensPrinter()
 
@@ -32,7 +25,7 @@ class JsonPrinter {
             this.printSingleValue(path, value)
         }
     }
-    
+
     printSingleValue(path, value) {
         const additionalTokenType = this.isHighlightedPath(path) ? ' highlighted' : ''
 
@@ -100,6 +93,14 @@ class JsonPrinter {
         return this._pathsToHighlight.hasOwnProperty(path)
     }
 }
+
+export function printJson(rootPath, data, pathsToHighlight) {
+    const jsonPrinter = new JsonPrinter(pathsToHighlight || [])
+    jsonPrinter.printValue(rootPath, data)
+
+    return jsonPrinter.printer.linesOfTokens
+}
+
 
 function escapeQuote(text) {
     return text.replace(/"/g, "\\\"")

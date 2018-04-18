@@ -1,13 +1,17 @@
 import React from 'react'
 
-import {SchemaAsTable} from './SchemaAsTable'
+import {schemaToApiParameters} from './schemaToApiParameters'
+
+import ApiParameters from '../../api/ApiParameters'
 
 import './OpenApiSchema.css'
 
 function OpenApiSchema({schema, elementsLibrary}) {
+    const apiParameters = schemaToApiParameters(schema)
+
     return (
         <div className="open-api-schema">
-            <SchemaAsTable schema={schema} elementsLibrary={elementsLibrary}/>
+            <ApiParameters parameters={apiParameters} elementsLibrary={elementsLibrary}/>
         </div>
     )
 }
