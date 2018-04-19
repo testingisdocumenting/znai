@@ -2,9 +2,10 @@ import React from 'react'
 
 import './TwoSidesLayout.css'
 
-export function TwoSidesLayout({children}) {
+export function TwoSidesLayout({className, children}) {
+    const fullClassName = 'page-two-sides-layout' + (className ? ' ' + className : '')
     return (
-        <div className="page-two-sides-layout">
+        <div className={fullClassName}>
             {children}
         </div>
     )

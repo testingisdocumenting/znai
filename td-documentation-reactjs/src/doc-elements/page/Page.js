@@ -9,16 +9,20 @@ class Page extends Component {
         const {tocItem} = this.props
 
         const PageContent = pageTypesRegistry.pageContentComponent(tocItem)
+        const PageBottomPadding = pageTypesRegistry.pageBottomPaddingComponent(tocItem)
 
         return (
-            <div className="page-content">
-                <PageContent key={tocItem.pageTitle}
-                             {...this.props}/>
-            </div>
+            <React.Fragment>
+                <div className="page-content">
+                    <PageContent key={tocItem.pageTitle}
+                                 {...this.props}/>
+                </div>
+                <PageBottomPadding/>
+            </React.Fragment>
         )
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps) {
         return this.props.previewEnabled ||
             this.props.tocItem.dirName !== nextProps.tocItem.dirName ||
             this.props.tocItem.fileName !== nextProps.tocItem.fileName

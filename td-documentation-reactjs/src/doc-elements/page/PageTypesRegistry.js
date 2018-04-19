@@ -1,8 +1,10 @@
 import DefaultPageContent from './default/DefaultPageContent'
+import PageDefaultBottomPadding from './default/PageDefaultBottomPadding'
 import {PageDefaultNextPrevNavigation} from './default/PageDefaultNextPrevNavigation'
 import ApiPageContent from './api/ApiPageContent'
 import TwoSidesPageContent from './two-sides/TwoSidesPageContent'
 import TwoSidesNextPrevNavigation from './two-sides/TwoSidesNextPrevNavigation'
+import TwoSidesPageBottomPadding from './two-sides/TwoSidesPageBottomPadding'
 
 class PageTypesRegistry {
     _contentComponentByType = {}
@@ -15,12 +17,16 @@ class PageTypesRegistry {
         return this._registered(tocItem).pageContentComponent
     }
 
+    pageBottomPaddingComponent(tocItem) {
+        return this._registered(tocItem).pageBottomPaddingComponent
+    }
+
     nextPrevNavigationComponent(tocItem) {
         return this._registered(tocItem).nextPrevNavigationComponent
     }
 
-    registerContentComponent(type, {pageContentComponent, nextPrevNavigationComponent, expandToc}) {
-        this._contentComponentByType[type] = {pageContentComponent, nextPrevNavigationComponent, expandToc}
+    registerContentComponent(type, settings) {
+        this._contentComponentByType[type] = settings
     }
 
     _registered(tocItem) {
@@ -42,18 +48,21 @@ const pageTypesRegistry = new PageTypesRegistry()
 pageTypesRegistry.registerContentComponent(defaultType, {
     pageContentComponent: DefaultPageContent,
     nextPrevNavigationComponent: PageDefaultNextPrevNavigation,
+    pageBottomPaddingComponent: PageDefaultBottomPadding,
     expandToc: true
 })
 
 pageTypesRegistry.registerContentComponent('api', {
     pageContentComponent: ApiPageContent,
-    expandToc: false,
     nextPrevNavigationComponent: PageDefaultNextPrevNavigation,
+    pageBottomPaddingComponent: PageDefaultBottomPadding,
+    expandToc: false
 })
 
 pageTypesRegistry.registerContentComponent('two-sides', {
     pageContentComponent: TwoSidesPageContent,
     nextPrevNavigationComponent: TwoSidesNextPrevNavigation,
+    pageBottomPaddingComponent: TwoSidesPageBottomPadding,
     expandToc: true
 })
 
