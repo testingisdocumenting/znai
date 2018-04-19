@@ -4,6 +4,9 @@ ul.icon-based {
 
 ul.content-block {
     margin-bottom: 15px;
+}
+
+li {
     width: auto;
 }
 
