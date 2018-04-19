@@ -50,17 +50,13 @@ class SimpleCodeSnippet extends Component {
             this.linesOfTokens
 
         return (
-            <div>
                 <pre>
-                    <code>
-                        {linesToRender.map((tokens, idx) => <LineOfTokens key={idx} tokens={tokens}
-                                                                          isHighlighted={highlightIsVisible && this.isHighlighted(idx, tokens)}
-                                                                          isPresentation={isPresentation}
-                                                                          TokenComponent={SimpleCodeToken}/>)}
-                    </code>
+                    {linesToRender.map((tokens, idx) => <LineOfTokens key={idx} tokens={tokens}
+                                                                      isHighlighted={highlightIsVisible && this.isHighlighted(idx, tokens)}
+                                                                      isPresentation={isPresentation}
+                                                                      TokenComponent={SimpleCodeToken}/>)}
                     {this.renderReadMore()}
                 </pre>
-            </div>
         )
     }
 

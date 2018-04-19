@@ -1,6 +1,6 @@
 .page-two-sides-layout {
     display: grid;
-    grid-template-columns: minmax(350px, 7fr) minmax(400px, 8fr);
+    grid-template-columns: minmax(350px, 1fr) minmax(350px, 1fr);
 }
 
 .page-two-sides-left-part,

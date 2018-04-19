@@ -90,10 +90,6 @@ pre {
     color: var(--mdoc-default-code-block-color)
 }
 
-pre code {
-    border: none;
-}
-
 code {
     border: none;
     background: none;
