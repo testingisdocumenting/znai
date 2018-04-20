@@ -21,6 +21,7 @@ import {jsxDemo} from './doc-elements/jsx/Jsx.demo'
 import {snippetsDemo} from './doc-elements/code-snippets/Snippet.demo'
 import {documentationPreparationDemo} from './screens/documentation-preparation/DocumentationPreparation.demo'
 import {setDocMeta} from './doc-elements/docMeta'
+import {landingDemo} from './screens/landing/Landing.demo'
 
 const docMeta = {
     id: 'preview',
@@ -56,6 +57,7 @@ layout.registerAsGrid('Tabs', 300, tabsDemo)
 
 const screens = new Registry('screens')
 screens.registerAsTabs('Documentation Preparation', documentationPreparationDemo)
+screens.registerAsTabs('Landing', landingDemo)
 
 const endToEnd = new Registry('end to end')
 endToEnd.registerAsMiniApp('full documentation navigation', '/preview', documentationDemo)
