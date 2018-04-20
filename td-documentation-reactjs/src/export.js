@@ -9,7 +9,7 @@ import './App.css'
 
 global.Documentation = Documentation
 global.DocumentationPreparationScreen = DocumentationPreparationScreen
-global.Landing = Landing()
+global.Landing = Landing
 global.LunrIndexer = LunrIndexer
 global.parseCode = parseCode
 global.setTocJson = setTocJson

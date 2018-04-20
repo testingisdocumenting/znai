@@ -8,10 +8,13 @@ import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationHandlers;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationWebSocketHandler;
+import com.twosigma.documentation.server.landing.LandingDocEntriesProviders;
+import com.twosigma.documentation.server.landing.LandingDocEntry;
+import com.twosigma.documentation.server.landing.LandingUrlContentHandler;
 import com.twosigma.documentation.server.sockets.JsonWebSocketHandler;
 import com.twosigma.documentation.server.sockets.JsonWebSocketHandlerComposition;
-import com.twosigma.documentation.server.upload.FileUploadHandler;
 import com.twosigma.documentation.server.upload.UnzipTask;
+import com.twosigma.documentation.server.urlhandlers.UrlContentHandlers;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
@@ -27,6 +30,7 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * @author mykola
@@ -78,14 +82,25 @@ public class DocumentationServer {
                     router.route("/" + params.get("docId") + "/static"), ctx));
         });
 
-        router.route("/upload/:docId").handler(ctx -> {
-            MultiMap params = ctx.request().params();
-            String docId = params.get("docId");
-            new FileUploadHandler(vertx, deployRoot, docId, (p) -> unzip(deployRoot, docId, p)).handle(ctx.request());
-        });
-
         router.get("/static/*").handler(staticCommonResources);
 
+        registerCustomHandlers(router);
+        registerPagesHandler(router, pagesStaticHandler);
+
+        server.websocketHandler(socketHandlers);
+        server.requestHandler(router::accept);
+
+        return server;
+    }
+
+    private void registerCustomHandlers(Router router) {
+        UrlContentHandlers.urlContentHandlers()
+                .forEach(urlContentHandler ->
+                        router.get(urlContentHandler.url())
+                                .handler(ctx -> ctx.response().end(urlContentHandler.buildContent(nashornEngine))));
+    }
+
+    private void registerPagesHandler(Router router, StaticHandler pagesStaticHandler) {
         router.get("/*").handler(ctx -> {
             String docId = extractDocId(ctx);
             if (DocumentationPreparationHandlers.isReady(docId)) {
@@ -100,11 +115,6 @@ public class DocumentationServer {
                 serveDocumentationPreparationPage(ctx, docId);
             }
         });
-
-        server.websocketHandler(socketHandlers);
-        server.requestHandler(router::accept);
-
-        return server;
     }
 
     private void serveDocumentationPreparationPage(RoutingContext ctx, String docId) {
@@ -162,7 +172,14 @@ public class DocumentationServer {
     public static void main(String[] args) {
         ConsoleOutputs.add(new AnsiConsoleOutput());
 
-        HttpServer server = new DocumentationServer(new ReactJsNashornEngine(), Paths.get("")).create();
+        ReactJsNashornEngine nashornEngine = new ReactJsNashornEngine();
+
+        LandingDocEntriesProviders.add(() -> Stream.of(
+                new LandingDocEntry("mdoc", "MDoc", "Documentation", "test desc")
+        ));
+        UrlContentHandlers.add(new LandingUrlContentHandler());
+
+        HttpServer server = new DocumentationServer(nashornEngine, Paths.get("")).create();
         server.listen(3333);
         System.out.println("test server started");
     }
