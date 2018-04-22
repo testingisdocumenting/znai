@@ -3,6 +3,9 @@ package com.twosigma.documentation.cli;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
+import com.twosigma.documentation.cli.extension.CliCommandConfig;
+import com.twosigma.documentation.cli.extension.CliCommandHandler;
+import com.twosigma.documentation.cli.extension.CliCommandHandlers;
 import com.twosigma.documentation.html.HtmlPage;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkupTypes;
@@ -66,6 +69,9 @@ public class DocumentationCliApp {
             preview();
         } else if (config.isServe()) {
             serve();
+        } else if (config.isCustom()) {
+            config.getSpecifiedCustomCommand().handle(
+                    new CliCommandConfig(config.getDocId(), config.getSourceRoot(), config.getDeployRoot()));
         }
     }
 
