@@ -2,17 +2,25 @@
 }
 
 .http-call .method-and-url {
+    display: flex;
     padding: 10px;
     background-color: #eee;
 }
 
-.http-call .method-and-url .method {
+.http-call .method-and-url > .collapse-toggle {
+    width: 15px;
+    font-size: 16px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.http-call .method-and-url > .method {
     color: #555;
     font-weight: bold;
     margin-right: 15px;
 }
 
-.http-call .method-and-url .url {
+.http-call .method-and-url > .url {
     color: #4862d7;
 }
 
