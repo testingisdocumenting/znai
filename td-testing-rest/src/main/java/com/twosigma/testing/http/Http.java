@@ -167,12 +167,14 @@ public class Http {
 
         HttpValidationResult result = new HttpValidationResult(requestMethod, url, fullUrl,
                 requestBody, response, header, body);
-        Object returnedValue = validator.validate(header, body);
 
-        lastValidationResult.set(result);
-        render(result);
-
-        return (E) extractOriginalValue(returnedValue);
+        try {
+            Object returnedValue = validator.validate(header, body);
+            return (E) extractOriginalValue(returnedValue);
+        } finally {
+            lastValidationResult.set(result);
+            render(result);
+        }
     }
 
     private void render(HttpValidationResult result) {
