@@ -8,6 +8,8 @@ import com.twosigma.utils.TraceUtils
 class GroovyStackTraceUtils {
     private static List<String> libPrefixes = [
             "sun.reflect",
+            "com.sun.",
+            "java.base/",
             "com.twosigma",
             "org.codehaus.groovy",
             "org.junit",
