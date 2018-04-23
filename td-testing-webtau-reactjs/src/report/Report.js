@@ -3,6 +3,7 @@ import HttpCalls from './details/http/HttpCalls'
 import ShortStackTrace from './details/ShortStackTrace'
 import Screenshot from './details/Screenshot'
 import FullStackTrace from './details/FullStackTrace'
+import Summary from './details/Summary'
 
 class Report {
     constructor(report) {
@@ -57,6 +58,8 @@ function enrichWithAdditionalDetails(tests) {
 
 function additionalDetails(test) {
     const details = []
+    details.push({tabName: 'Summary', component: Summary})
+
     if (test.hasOwnProperty('screenshot')) {
         details.push({tabName: 'Screenshot', component: Screenshot})
     }

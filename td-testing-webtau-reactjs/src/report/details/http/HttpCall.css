@@ -3,15 +3,16 @@
 
 .http-call .method-and-url {
     display: flex;
-    padding: 10px;
-    background-color: #eee;
+    align-items: center;
+    padding: 5px 10px;
+
+    user-select: none;
+    cursor: pointer;
 }
 
 .http-call .method-and-url > .collapse-toggle {
-    width: 15px;
+    width: 20px;
     font-size: 16px;
-    user-select: none;
-    cursor: pointer;
 }
 
 .http-call .method-and-url > .method {

@@ -28,18 +28,15 @@ const TestCard = ({test, onSelect, isSelected}) => {
     const className = "test-card" + (isSelected ? " selected" : "")
     return (
         <div className={className} onClick={() => onSelect(test.id)}>
-            <div className="meta">
-                <div className="file-name">{test.fileName}</div>
-                <Status status={test.status}/>
-            </div>
             <div className="scenario">{test.scenario}</div>
+            <Status status={test.status}/>
         </div>
     )
 }
 
 const ListOfTests = ({tests, onSelect, selectedId}) => {
     return (
-        <div className="test-cards">
+        <div className="list-of-tests">
             {tests.map((test) => <TestCard key={test.id} test={test} onSelect={onSelect} isSelected={test.id === selectedId}/>)}
         </div>
     )

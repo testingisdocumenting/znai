@@ -1,10 +1,9 @@
 .test-details {
+    overflow: auto;
     display: flex;
-    flex: 1;
-    padding: 20px;
     flex-direction: column;
-    overflow-x: auto;
-    overflow-y: auto;
+    max-height: 100%;
+    box-sizing: border-box;
 }
 
 .test-details .file-name {
@@ -36,33 +35,34 @@
     border-bottom: 1px #eee solid;
 }
 
-.test-details .detail {
+.test-details > .additional-details-selection {
+    flex-basis: 40px;
 }
 
-.test-details .detail .image {
+.test-details > .detail {
+    flex: 1;
+    overflow: auto;
+    padding: 20px 10px 10px 30px;
 }
 
 .test-details .additional-details-selection .tab-names {
-    flex: 1;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding-top: 15px;
     display: flex;
     width: 100%;
-    border-bottom: 2px solid #eeeeee;
+
+    background-color: var(--webtau-test-selection-background-color);
 }
 
 .test-details .additional-details-selection .tab-names .tab-name {
     font-size: 14px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #eeeeee;
+    color: #cfcfcf;
+
+    padding: 10px 15px;
+
     cursor: pointer;
-    margin-bottom: -2px;
+    user-select: none;
 }
 
 .test-details .additional-details-selection .tab-names .tab-name.selected {
-    font-weight: bold;
-    border-bottom: 2px solid #888888;
+    color: #e5e5e5;
+    background-color: var(--webtau-test-status-filter-background-color);
 }

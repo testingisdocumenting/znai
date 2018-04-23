@@ -1,47 +1,41 @@
-.report .test-cards {
-    border-right: 1px #627d82 solid;
-    flex: 0 0 350px;
-    overflow-y: auto;
+.list-of-tests {
 }
 
-.report .test-cards .test-card {
-    padding: 20px;
-    border-bottom: 1px #eee solid;
+.list-of-tests .test-card {
+    padding: 10px 20px;
+    border-bottom: 1px #6d7a81 solid;
+    user-select: none;
     cursor: pointer;
 }
 
-.report .test-cards .test-card.selected {
-    background-color: rgba(20, 200, 80, 0.1);
+.list-of-tests .test-card.selected {
+    border-left: 5px solid #ba951c;
+    background-color: #906a59;
+    padding-left: 22px;
 }
 
-.report .test-cards .test-card .meta {
+.list-of-tests .test-card  {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
 }
 
-.report .test-cards .test-card .meta .status.failed {
-    color: #b02f08;
+.list-of-tests .status.failed {
+    color: #f88c27;
 }
 
-.report .test-cards .test-card .meta .status.errored {
-    color: #b02f08;
+.list-of-tests .status.errored {
+    color: #f88c27;
 }
 
-.report .test-cards .test-card .meta .status.passed {
-    color: #248903;
+.list-of-tests .status.passed {
+    color: #65bc0c;
 }
 
-.report .test-cards .test-card .meta .status.skipped {
-    color: #555;
+.list-of-tests .status.skipped {
+    color: #ddd;
 }
 
-.report .test-cards .test-card .file-name {
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.report .test-cards .test-card .scenario {
+.list-of-tests .test-card .scenario {
     font-size: 14px;
     max-height: 70px;
     overflow-y: hidden;

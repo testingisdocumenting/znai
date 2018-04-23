@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import ListOfTests from './ListOfTests'
-import Header from './Header'
+import StatusFilter from './StatusFilter'
 import TestDetails from './TestDetails'
 
-import './WebTauReport.css'
 import WebTauReportStateCreator from './WebTauReportStateCreator'
+
+import './WebTauReport.css'
 
 class WebTauReport extends Component {
     constructor(props) {
@@ -23,18 +24,24 @@ class WebTauReport extends Component {
 
         return (
             <div className="report">
-                <Header summary={report.summary}
-                        onTitleClick={this.onHeaderTitleClick}
-                        selectedStatusFilter={statusFilter}
-                        onTestStatusSelect={this.onTestStatusSelect}/>
-                <div className="body">
+                <div className="tests-lists-area">
                     <ListOfTests tests={this.filteredTests}
                                  selectedId={testId}
                                  onSelect={this.onTestSelect}/>
+                </div>
+
+                <div className="test-details-area">
                     {selectedTest ? <TestDetails test={selectedTest}
                                                  selectedDetailTabName={detailTabName}
                                                  onDetailsTabSelection={this.onDetailsTabSelection}
                                                  detailTabs={selectedTest.details}/> : null}
+                </div>
+
+                <div className="status-filter-area">
+                    <StatusFilter summary={report.summary}
+                                  onTitleClick={this.onHeaderTitleClick}
+                                  selectedStatusFilter={statusFilter}
+                                  onTestStatusSelect={this.onTestStatusSelect}/>
                 </div>
             </div>
         )
@@ -68,7 +75,7 @@ class WebTauReport extends Component {
     }
 
     subscribeToUrlChanges() {
-        window.addEventListener('popstate', (e) => {
+        window.addEventListener('popstate', () => {
             this.updateStateFromUrl();
         });
     }

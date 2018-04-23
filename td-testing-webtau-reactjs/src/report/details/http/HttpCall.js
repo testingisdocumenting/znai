@@ -23,9 +23,8 @@ const HttpCall = ({idx, httpCall, isExpanded, onCollapseToggleClick}) => {
 
     return (
         <div className="http-call">
-            <div className="method-and-url">
-                <div className="collapse-toggle"
-                      onClick={() => onCollapseToggleClick(idx)}>
+            <div className="method-and-url" onClick={() => onCollapseToggleClick(idx)}>
+                <div className="collapse-toggle">
                     {isExpanded ? '-' : '+'}
                 </div>
                 <div className="method">{httpCall.method}</div>
