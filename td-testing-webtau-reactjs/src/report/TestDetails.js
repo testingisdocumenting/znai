@@ -1,12 +1,6 @@
-import React, {Component} from 'react'
-import Steps from './details/Steps'
+import React from 'react'
 
-import TestSteps from './details/TestSteps'
-import AdditionalResourcesSelection from './details/AdditionalResourcesSelection'
-import Screenshot from './details/Screenshot'
-import FullStackTrace from './details/FullStackTrace'
-import ShortStackTrace from './details/ShortStackTrace'
-import HttpCalls from './details/http/HttpCalls'
+import AdditionalDetailsSelection from './details/AdditionalDetailsSelection'
 import NoDetailsDefined from './details/NoDetailsDefined'
 
 import './TestDetails.css'
@@ -25,87 +19,41 @@ const OptionalPreBlock = ({className, message}) => {
     )
 }
 
-class TestDetails extends Component {
-    constructor(props) {
-        super(props)
+const TestDetails = ({test, detailTabs, selectedDetailTabName, onDetailsTabSelection}) => {
+    const DetailTab = detailTab()
+    const tabNames = detailTabs.map(r => r.tabName)
 
-        const resources = additionalResources(props.test)
-        this.state = {selectedResourceTabName: resources[0].tabName}
-    }
-
-    componentWillReceiveProps(props) {
-        const resources = additionalResources(props.test)
-        this.setState({selectedResourceTabName: resources[0].tabName})
-    }
-
-    render() {
-        const {test} = this.props
-        const {selectedResourceTabName} = this.state
-
-        const resources = additionalResources(test)
-        const Resource = resourceComponentByTab()
-
-        const tabNames = resources.map(r => r.tabName)
-
-        return (
-            <div className="test-details">
-                <div className="file-name">
-                    {test.fileName}
-                </div>
-
-                <div className="scenario">
-                    {test.scenario}
-                </div>
-
-                <OptionalPreBlock className="context-description" message={test.contextDescription}/>
-                <OptionalPreBlock className="assertion" message={test.assertion}/>
-                {
-                    ! test.assertion ? <OptionalPreBlock className="exception-message" message={test.exceptionMessage}/> :
-                        null
-                }
-
-                <AdditionalResourcesSelection tabs={tabNames}
-                                              selectedTabName={selectedResourceTabName}
-                                              onTabSelection={this.onResourceTabSelection}/>
-
-                <div className="resource">
-                    <Resource test={test} selectedResourceTabName={selectedResourceTabName}/>
-                </div>
+    return (
+        <div className="test-details">
+            <div className="file-name">
+                {test.fileName}
             </div>
-        )
 
-        function resourceComponentByTab() {
-            const entry = resources.filter(r => r.tabName === selectedResourceTabName)
-            return entry ? entry[0].component : NoDetailsDefined
-        }
+            <div className="scenario">
+                {test.scenario}
+            </div>
+
+            <OptionalPreBlock className="context-description" message={test.contextDescription}/>
+            <OptionalPreBlock className="assertion" message={test.assertion}/>
+            {
+                ! test.assertion ? <OptionalPreBlock className="exception-message" message={test.exceptionMessage}/> :
+                    null
+            }
+
+            <AdditionalDetailsSelection tabs={tabNames}
+                                        selectedTabName={selectedDetailTabName}
+                                        onTabSelection={onDetailsTabSelection}/>
+
+            <div className="detail">
+                <DetailTab test={test} detailTabName={selectedDetailTabName}/>
+            </div>
+        </div>
+    )
+
+    function detailTab() {
+        const entry = detailTabs.filter(r => r.tabName === selectedDetailTabName)
+        return entry ? entry[0].component : NoDetailsDefined
     }
-
-    onResourceTabSelection = (tabName) => this.setState({selectedResourceTabName: tabName})
-}
-
-function additionalResources(test) {
-    const resources = []
-    if (test.hasOwnProperty('screenshot')) {
-        resources.push({tabName: 'Screenshot', component: Screenshot})
-    }
-
-    if (test.hasOwnProperty('steps')) {
-        resources.push({tabName: 'Steps', component: TestSteps})
-    }
-
-    if (test.hasOwnProperty('httpCalls')) {
-        resources.push({tabName: 'HTTP calls', component: HttpCalls})
-    }
-
-    if (test.hasOwnProperty('shortStackTrace')) {
-        resources.push({tabName: 'StackTrace', component: ShortStackTrace})
-    }
-
-    if (test.hasOwnProperty('fullStackTrace')) {
-        resources.push({tabName: 'Full StackTrace', component: FullStackTrace})
-    }
-
-    return resources
 }
 
 export default TestDetails

@@ -37,7 +37,7 @@ const TestCard = ({test, onSelect, isSelected}) => {
     )
 }
 
-const ListOfTests = ({tests, onSelect, selectedStatusFilter, selectedId}) => {
+const ListOfTests = ({tests, onSelect, selectedId}) => {
     return (
         <div className="test-cards">
             {tests.map((test) => <TestCard key={test.id} test={test} onSelect={onSelect} isSelected={test.id === selectedId}/>)}

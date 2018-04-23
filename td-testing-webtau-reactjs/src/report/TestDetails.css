@@ -36,13 +36,13 @@
     border-bottom: 1px #eee solid;
 }
 
-.test-details .resource {
+.test-details .detail {
 }
 
-.test-details .resource .image {
+.test-details .detail .image {
 }
 
-.test-details .additional-resources-selection .tab-names {
+.test-details .additional-details-selection .tab-names {
     flex: 1;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -52,7 +52,7 @@
     border-bottom: 2px solid #eeeeee;
 }
 
-.test-details .additional-resources-selection .tab-names .tab-name {
+.test-details .additional-details-selection .tab-names .tab-name {
     font-size: 14px;
     padding-left: 15px;
     padding-right: 15px;
@@ -62,7 +62,7 @@
     margin-bottom: -2px;
 }
 
-.test-details .additional-resources-selection .tab-names .tab-name.selected {
+.test-details .additional-details-selection .tab-names .tab-name.selected {
     font-weight: bold;
     border-bottom: 2px solid #888888;
 }

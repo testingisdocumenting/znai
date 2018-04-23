@@ -1,8 +1,8 @@
 import React from 'react'
 
-const AdditionalResourcesSelection = ({tabs, selectedTabName, onTabSelection}) => {
+const AdditionalDetailsSelection = ({tabs, selectedTabName, onTabSelection}) => {
     return (
-        <div className="additional-resources-selection">
+        <div className="additional-details-selection">
             <div className="tab-names">
                 {tabs.map(t => {
                     const className = "tab-name" + (selectedTabName === t ? " selected" : "")
@@ -13,4 +13,4 @@ const AdditionalResourcesSelection = ({tabs, selectedTabName, onTabSelection}) =
     )
 }
 
-export default AdditionalResourcesSelection
+export default AdditionalDetailsSelection
