@@ -10,7 +10,7 @@
 
 .list-of-tests .test-card.selected {
     border-left: 5px solid #ba951c;
-    background-color: #906a59;
+    background-color: var(--webtau-selected-test-background);
     padding-left: 22px;
 }
 

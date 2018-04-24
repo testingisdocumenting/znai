@@ -1,6 +1,7 @@
 :root {
     --webtau-test-selection-background-color: #5b666c;
     --webtau-test-status-filter-background-color: #3e474b;
+    --webtau-selected-test-background: #906a59;
 }
 
 body {
