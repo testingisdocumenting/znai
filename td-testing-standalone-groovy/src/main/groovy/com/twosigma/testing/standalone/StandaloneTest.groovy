@@ -143,7 +143,6 @@ class StandaloneTest implements StepReporter {
     }
 
     private static String renderExceptionNameAndMessage(Throwable t) {
-        def message = t.getMessage()
-        return t.getClass().canonicalName + (message != null ? ": " + message : "")
+        return GroovyStackTraceUtils.fullCauseMessage(t)
     }
 }
