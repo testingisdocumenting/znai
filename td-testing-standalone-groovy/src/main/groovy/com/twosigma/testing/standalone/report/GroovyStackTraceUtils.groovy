@@ -56,10 +56,24 @@ class GroovyStackTraceUtils {
             def fileFriendlyClassName = dollarIdx == -1 ? className : className.substring(0, dollarIdx)
 
             return new StackTraceCodeEntry(fileFriendlyClassName.replace('.', '/') + '.' + ext,
-                    stackTraceEntry.lineNumber)
+                    [stackTraceEntry.lineNumber])
         }
 
-        return codeEntries
+        return mergeByFileName(codeEntries)
+    }
+
+    private static List<StackTraceCodeEntry> mergeByFileName(List<StackTraceCodeEntry> codeEntries) {
+        List<StackTraceCodeEntry> result = []
+        codeEntries.each {
+            def last = result.isEmpty() ? null : result.last()
+            if (last?.filePath == it.filePath) {
+                last.lineNumbers.addAll(it.lineNumbers)
+            } else {
+                result.add(it)
+            }
+        }
+
+        return result
     }
 
     private static String filterStackTrace(Throwable t, Closure filter) {

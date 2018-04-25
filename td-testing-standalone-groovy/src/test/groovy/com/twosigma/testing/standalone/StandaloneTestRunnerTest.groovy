@@ -43,7 +43,7 @@ class StandaloneTestRunnerTest {
         def firstSnippet = failedSnippets[0]
 
         firstSnippet.filePath.should == 'StandaloneTest.groovy'
-        firstSnippet.lineNumber.should == 4
+        firstSnippet.lineNumbers.should == [4]
         firstSnippet.snippet.contains('throw new RuntimeException("error on purpose")').should == true // TODO contain matcher
     }
 

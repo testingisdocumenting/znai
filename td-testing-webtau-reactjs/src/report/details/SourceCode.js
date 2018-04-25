@@ -12,12 +12,12 @@ import './SourceCode.css'
 
 class SourceCode extends React.Component {
     render() {
-        const {filePath, lineNumber, snippet} = this.props
+        const {filePath, lineNumbers, snippet} = this.props
 
         return (
             <div className="source-code">
                 <div className="file-path">{filePath}</div>
-                <pre data-line={lineNumber} className="language-groovy">
+                <pre data-line={lineNumbers.join(',')} className="language-groovy">
                     <code>
                         {snippet}
                     </code>

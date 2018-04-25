@@ -152,7 +152,7 @@ class StandaloneTest implements StepReporter {
             Files.exists(workingDir.resolve(it.filePath))
         }.collect { [
                 filePath: it.filePath,
-                lineNumber: it.lineNumber,
+                lineNumbers: it.lineNumbers,
                 snippet: workingDir.resolve(it.filePath).toFile().text ] }
     }
 
