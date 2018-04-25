@@ -11,7 +11,7 @@ class HtmlReportGeneratorTest {
         def generator = new HtmlReportGenerator()
         def html = generator.generate("{summary: 'summary'}")
 
-        assert html.contains(".report .test-cards")
+        assert html.contains(".list-of-tests")
         assert html.contains("testReport = {summary: 'summary'}")
         assert html.contains("Minified React error")
     }

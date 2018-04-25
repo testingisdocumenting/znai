@@ -12,7 +12,7 @@ import static com.twosigma.testing.Ddjt.equal
 class StandaloneTestTest {
     @Test
     void "registered payloads should be merged into toMap test representation"() {
-        def test = new StandaloneTest(Paths.get("test.groovy"), "my test description", {})
+        def test = new StandaloneTest(Paths.get("."), Paths.get("test.groovy"), "my test description", {})
         test.addResultPayload({ return [screenshot: "base64" ]})
         test.addResultPayload({ return [steps: ["step1", "step2"] ]})
 
@@ -24,6 +24,7 @@ class StandaloneTestTest {
                                    shortStackTrace: null,
                                    fullStackTrace: null,
                                    exceptionMessage: null,
+                                   failedCodeSnippets: null,
                                    status: 'Skipped',
                                    screenshot: 'base64', steps: ['step1', 'step2']])
     }
