@@ -84,6 +84,8 @@ public class HttpValidationResult implements TestStepPayload {
         result.put("responseType", response.getContentType());
         result.put("responseBody", response.getContent());
 
+        result.put("mismatches", getMismatches());
+
         Map<String, Object> responseBodyChecks = new LinkedHashMap<>();
         result.put("responseBodyChecks", responseBodyChecks);
         responseBodyChecks.put("failedPaths", extractPaths(responseBody, CheckLevel::isFailed));

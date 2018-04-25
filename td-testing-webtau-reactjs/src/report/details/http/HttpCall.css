@@ -1,13 +1,23 @@
 .http-call {
+    --mismatch-indicator-color: #cc7c5e;
+}
+
+.http-call > .mismatch {
+    margin-left: 10px;
 }
 
 .http-call .method-and-url {
     display: flex;
     align-items: center;
-    padding: 5px 10px;
+    padding: 5px 0;
 
     user-select: none;
     cursor: pointer;
+}
+
+
+.http-call.with-mismatches .method-and-url {
+    color: var(--mismatch-indicator-color);
 }
 
 .http-call .method-and-url > .collapse-toggle {
@@ -19,6 +29,10 @@
     color: #555;
     font-weight: bold;
     margin-right: 15px;
+}
+
+.http-call.with-mismatches .method-and-url > .method {
+    color: var(--mismatch-indicator-color);
 }
 
 .http-call .method-and-url > .url {

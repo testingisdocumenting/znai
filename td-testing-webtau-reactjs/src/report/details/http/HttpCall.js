@@ -1,11 +1,16 @@
 import React from 'react'
-import './HttpCall.css'
 
 import Payload from './Payload'
 
+import './HttpCall.css'
+
 const HttpCall = ({idx, httpCall, isExpanded, onCollapseToggleClick}) => {
+    const mismatches = httpCall.mismatches.map((m, idx) => <div key={idx} className="mismatch"><pre>{m}</pre></div>)
+
     const renderedDetails = isExpanded && (
         <React.Fragment>
+            {mismatches}
+
             <div className="request">
                 <Payload caption="Request"
                          type={httpCall.requestType}
@@ -21,8 +26,9 @@ const HttpCall = ({idx, httpCall, isExpanded, onCollapseToggleClick}) => {
         </React.Fragment>
     )
 
+    const className = 'http-call' + (httpCall.mismatches.length > 0 ? ' with-mismatches' : '')
     return (
-        <div className="http-call">
+        <div className={className}>
             <div className="method-and-url" onClick={() => onCollapseToggleClick(idx)}>
                 <div className="collapse-toggle">
                     {isExpanded ? '-' : '+'}
