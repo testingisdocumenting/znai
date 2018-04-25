@@ -6,6 +6,7 @@ import com.twosigma.testing.reporter.TestStep
 import com.twosigma.testing.standalone.report.GroovyStackTraceUtils
 import com.twosigma.utils.TraceUtils
 
+import java.nio.file.Files
 import java.nio.file.Path
 
 import static com.twosigma.testing.standalone.StandaloneTestStatus.Errored
@@ -21,20 +22,22 @@ import static com.twosigma.testing.standalone.StandaloneTestStatus.Skipped
 class StandaloneTest implements StepReporter {
     private static StandaloneTestIdGenerator idGenerator = new StandaloneTestIdGenerator()
 
-    private String id
-    private Path filePath
-    private String description
-    private Closure code
+    private final String id
+    private final Path workingDir
+    private final Path filePath
+    private final String description
+    private final Closure code
 
     private Throwable exception
     private String assertionMessage
 
-    private List<StandaloneTestResultPayload> payloads
-    private List<TestStep> steps
+    private final List<StandaloneTestResultPayload> payloads
+    private final List<TestStep> steps
 
     private boolean isRan
 
-    StandaloneTest(Path filePath, String description, Closure code) {
+    StandaloneTest(Path workingDir, Path filePath, String description, Closure code) {
+        this.workingDir = workingDir
         this.id = idGenerator.generate(filePath)
         this.filePath = filePath
         this.description = description
@@ -97,15 +100,16 @@ class StandaloneTest implements StepReporter {
     }
 
     Map<String, ?> toMap() {
-        def testAsMap = [id                : id,
-                         scenario          : description,
-                         fileName          : filePath.fileName.toString(),
-                         status            : getStatus().toString(),
-                         assertion         : assertionMessage,
+        def testAsMap = [id: id,
+                         scenario: description,
+                         fileName: filePath.fileName.toString(),
+                         status: getStatus().toString(),
+                         assertion: assertionMessage,
                          contextDescription: steps.find { it.isFailed() }?.firstAvailableContext?.toString(),
-                         exceptionMessage  : exception ? renderExceptionNameAndMessage(exception) : null,
-                         shortStackTrace   : exception ? GroovyStackTraceUtils.renderStackTraceWithoutLibCalls(exception) : null,
-                         fullStackTrace    : exception ? TraceUtils.stackTrace(exception) : null]
+                         exceptionMessage: exception ? renderExceptionNameAndMessage(exception) : null,
+                         failedCodeSnippets: exception ? extractFailedCodeSnippet(exception) : null,
+                         shortStackTrace: exception ? GroovyStackTraceUtils.renderStackTraceWithoutLibCalls(exception) : null,
+                         fullStackTrace: exception ? TraceUtils.stackTrace(exception) : null]
 
         payloads.each { testAsMap << it.toMap() }
 
@@ -140,6 +144,16 @@ class StandaloneTest implements StepReporter {
 
     @Override
     void onStepFailure(TestStep step) {
+    }
+
+    private def extractFailedCodeSnippet(Throwable throwable) {
+        def entries = GroovyStackTraceUtils.extractLocalCodeEntries(throwable)
+        return entries.findAll {
+            Files.exists(workingDir.resolve(it.filePath))
+        }.collect { [
+                filePath: it.filePath,
+                lineNumber: it.lineNumber,
+                snippet: workingDir.resolve(it.filePath).toFile().text ] }
     }
 
     private static String renderExceptionNameAndMessage(Throwable t) {

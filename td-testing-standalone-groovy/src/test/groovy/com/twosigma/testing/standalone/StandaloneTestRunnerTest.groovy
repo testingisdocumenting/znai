@@ -36,6 +36,17 @@ class StandaloneTestRunnerTest {
         runner.tests[2].isFailed().should == false
     }
 
+    @Test
+    void "should extract failed code snippets"() {
+        runner.runTests()
+        def failedSnippets = runner.tests[0].toMap().failedCodeSnippets
+        def firstSnippet = failedSnippets[0]
+
+        firstSnippet.filePath.should == 'StandaloneTest.groovy'
+        firstSnippet.lineNumber.should == 4
+        firstSnippet.snippet.contains('throw new RuntimeException("error on purpose")').should == true // TODO contain matcher
+    }
+
     private static StandaloneTestRunner createRunner() {
         def workingDir = Paths.get("test-scripts")
         def runner = new StandaloneTestRunner(GroovyStandaloneEngine.createWithDelegatingEnabled(workingDir, []), workingDir)

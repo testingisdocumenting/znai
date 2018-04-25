@@ -1,8 +1,5 @@
 package com.twosigma.testing.standalone
 
-import org.codehaus.groovy.control.CompilerConfiguration
-import org.codehaus.groovy.control.customizers.ImportCustomizer
-
 import java.nio.file.Path
 
 /**
@@ -52,12 +49,12 @@ class StandaloneTestRunner {
     }
 
     void scenario(String description, Closure code) {
-        def test = new StandaloneTest(currentTestPath, description, code)
+        def test = new StandaloneTest(workingDir, currentTestPath, description, code)
         tests.add(test)
     }
 
     void sscenario(String description, Closure code) {
-        def test = new StandaloneTest(currentTestPath, description, code)
+        def test = new StandaloneTest(workingDir, currentTestPath, description, code)
         exclusiveTests.add(test)
     }
 

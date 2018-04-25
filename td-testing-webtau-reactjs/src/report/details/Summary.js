@@ -1,4 +1,5 @@
 import React from 'react'
+import SourceCode from './SourceCode'
 
 const OptionalPreBlock = ({className, message}) => {
     if (!message) {
@@ -31,6 +32,8 @@ const Summary = ({test}) => {
                 !test.assertion ? <OptionalPreBlock className="exception-message" message={test.exceptionMessage}/> :
                     null
             }
+
+            {test.failedCodeSnippets.map((cs, idx) => <SourceCode key={idx} {...cs}/>)}
         </div>
     )
 }
