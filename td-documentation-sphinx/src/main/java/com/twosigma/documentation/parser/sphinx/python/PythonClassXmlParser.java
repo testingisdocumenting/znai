@@ -1,12 +1,12 @@
 package com.twosigma.documentation.parser.sphinx.python;
 
-import com.twosigma.documentation.parser.sphinx.XmlUtils;
+import com.twosigma.documentation.parser.sphinx.xml.XmlUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import static com.twosigma.documentation.parser.sphinx.XmlUtils.getAttributeText;
-import static com.twosigma.documentation.parser.sphinx.XmlUtils.nodeByName;
-import static com.twosigma.documentation.parser.sphinx.XmlUtils.parseXml;
+import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.getAttributeText;
+import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.nodeByName;
+import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.parseXml;
 
 /**
  * @author mykola

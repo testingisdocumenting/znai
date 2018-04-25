@@ -1,4 +1,4 @@
-package com.twosigma.documentation.parser.sphinx;
+package com.twosigma.documentation.parser.sphinx.xml;
 
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
@@ -8,9 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.ByteArrayInputStream;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Stream;

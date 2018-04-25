@@ -5,6 +5,7 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.sphinx.python.*;
+import com.twosigma.documentation.parser.sphinx.xml.XmlUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.w3c.dom.Document;
@@ -15,9 +16,11 @@ import org.w3c.dom.NodeList;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
-import static com.twosigma.documentation.parser.sphinx.XmlUtils.getAttributeText;
-import static com.twosigma.documentation.parser.sphinx.XmlUtils.parseXml;
+import static com.twosigma.documentation.parser.sphinx.xml.DocUtilsXmlFixer.fixDocUtilsIncorrectXml;
+import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.getAttributeText;
+import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.parseXml;
 
 /**
  * @author mykola
@@ -36,6 +39,7 @@ class DocTreeDomXmlParser {
     }
 
     public void parse(String xml) {
+        xml = fixDocUtilsIncorrectXml(xml);
         Document document = parseXml(xml);
         NodeList nodes = document.getChildNodes();
 

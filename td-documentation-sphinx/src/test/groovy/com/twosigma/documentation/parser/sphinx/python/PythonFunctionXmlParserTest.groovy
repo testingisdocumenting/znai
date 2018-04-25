@@ -1,6 +1,6 @@
 package com.twosigma.documentation.parser.sphinx.python
 
-import com.twosigma.documentation.parser.sphinx.XmlUtils
+import com.twosigma.documentation.parser.sphinx.xml.XmlUtils
 import com.twosigma.utils.ResourceUtils
 import org.junit.Test
 
