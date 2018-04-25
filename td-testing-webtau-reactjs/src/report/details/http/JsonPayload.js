@@ -29,8 +29,8 @@ const jsonValueRenderer = (checks) => {
     checks.failedPaths = checks.failedPaths || []
     checks.passedPaths = checks.passedPaths || []
 
-    return (pretty, raw, ...path) => {
-        const fullPath = path.reverse().join('.')
+    return (pretty, raw, ...pathParts) => {
+        const fullPath = buildPath(pathParts)
         const isFailed = checks.failedPaths.indexOf(fullPath) !== -1
         const isPassed = checks.passedPaths.indexOf(fullPath) !== -1
 
@@ -53,6 +53,14 @@ const JsonPayload = ({json, checks}) => {
                       shouldExpandNode={expandNode}/>
         </div>
     )
+}
+
+function buildPath(parts) {
+    return parts.reverse().slice(1).reduce((prev, curr) => {
+        return prev + (typeof curr === 'number' ?
+            '[' + curr + ']':
+            '.' + curr)
+    }, 'root')
 }
 
 export default JsonPayload
