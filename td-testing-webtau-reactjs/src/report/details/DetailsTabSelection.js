@@ -1,8 +1,10 @@
 import React from 'react'
 
-const AdditionalDetailsSelection = ({tabs, selectedTabName, onTabSelection}) => {
+import './DetailsTabSelection.css'
+
+const DetailsTabSelection = ({tabs, selectedTabName, onTabSelection}) => {
     return (
-        <div className="additional-details-selection">
+        <div className="details-tab-selection">
             <div className="tab-names">
                 {tabs.map(t => {
                     const className = "tab-name" + (selectedTabName === t ? " selected" : "")
@@ -13,4 +15,4 @@ const AdditionalDetailsSelection = ({tabs, selectedTabName, onTabSelection}) => 
     )
 }
 
-export default AdditionalDetailsSelection
+export default DetailsTabSelection

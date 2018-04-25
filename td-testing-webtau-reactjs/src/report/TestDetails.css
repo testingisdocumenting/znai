@@ -35,34 +35,12 @@
     border-bottom: 1px #eee solid;
 }
 
-.test-details > .additional-details-selection {
+.test-details > .tabs-details-area {
     flex-basis: 40px;
 }
 
-.test-details > .detail {
+.test-details > .detail-area {
     flex: 1;
     overflow: auto;
     padding: 20px 10px 10px 30px;
-}
-
-.test-details .additional-details-selection .tab-names {
-    display: flex;
-    width: 100%;
-    border-bottom: 1px solid #ddd;
-}
-
-.test-details .additional-details-selection .tab-names .tab-name {
-    font-size: 14px;
-    color: #888;
-
-    padding: 10px 15px;
-
-    cursor: pointer;
-    user-select: none;
-}
-
-.test-details .additional-details-selection .tab-names .tab-name.selected {
-    color: #333;
-    border-bottom: 2px solid var(--webtau-test-status-filter-background-color);
-    margin-bottom: -2px;
 }

@@ -34,7 +34,9 @@ class WebTauReport extends Component {
                     {selectedTest ? <TestDetails test={selectedTest}
                                                  selectedDetailTabName={detailTabName}
                                                  onDetailsTabSelection={this.onDetailsTabSelection}
-                                                 detailTabs={selectedTest.details}/> : null}
+                                                 detailTabs={selectedTest.details}
+                                                 urlState={this.state}
+                                                 onInternalStateUpdate={this.onDetailsStateUpdate}/> : null}
                 </div>
 
                 <div className="status-filter-area">
@@ -53,6 +55,8 @@ class WebTauReport extends Component {
 
         return report.withStatus(statusFilter)
     }
+
+    onDetailsStateUpdate = (newState) => this.pushUrl(newState)
 
     onHeaderTitleClick = () => this.pushUrl({selectedId: null})
 

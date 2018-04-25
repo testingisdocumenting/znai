@@ -2,10 +2,19 @@ import React, {Component} from 'react'
 
 import HttpCall from './HttpCall'
 
+const httpCallIdxsQueryParam = 'httpCallIdxs'
+
 class HttpCalls extends Component {
-    constructor(props) {
-        super(props)
-        this.state = { expandedByIdx: {} }
+    state = {}
+
+    static getDerivedStateFromProps(props) {
+        const callIdxs = props.urlState[httpCallIdxsQueryParam]
+
+        const ids = callIdxs && callIdxs !== 'NA' ? callIdxs.split(',') : []
+        const expandedByIdx = {}
+        ids.forEach(id => expandedByIdx[id] = true)
+
+        return {expandedByIdx}
     }
 
     render() {
@@ -27,6 +36,8 @@ class HttpCalls extends Component {
     }
 
     onCollapseToggleClick = (idx) => {
+        const {onInternalStateUpdate} = this.props;
+
         const newExpandedByIdx = {...this.state.expandedByIdx}
 
         if (this.isExpanded(idx)) {
@@ -35,7 +46,9 @@ class HttpCalls extends Component {
             newExpandedByIdx[idx] = true
         }
 
-        this.setState({expandedByIdx: newExpandedByIdx})
+        onInternalStateUpdate({
+            [httpCallIdxsQueryParam]: Object.keys(newExpandedByIdx).join(',') || 'NA'
+        })
     }
 }
 

@@ -10,19 +10,19 @@ class WebTauReportStateCreator {
     }
 
     stateFromUrl(url) {
-        const searchParams = new URLSearchParams(url)
+        const searchParams = WebTauReportStateCreator._searchParamsFromUrl(url)
 
-        const testIdFromParam = searchParams.get(queryParamNames.testId)
+        const testIdFromParam = searchParams[queryParamNames.testId]
         const testId = this.report.hasTestWithId(testIdFromParam) ? testIdFromParam : null
 
-        const detailTabFromParam = searchParams.get(queryParamNames.detailTabName)
+        const detailTabFromParam = searchParams[queryParamNames.detailTabName]
         const detailTabName = this.report.hasDetailWithTabName(testId, detailTabFromParam) ?
             detailTabFromParam:
             this.report.firstDetailTabName(testId)
 
-        const statusFilter = searchParams.get(queryParamNames.statusFilter)
+        const statusFilter = searchParams[queryParamNames.statusFilter]
 
-        return {testId, detailTabName, statusFilter}
+        return {...searchParams, testId, detailTabName, statusFilter}
     }
 
     buildUrlSearchParams(state) {
@@ -32,11 +32,22 @@ class WebTauReportStateCreator {
             const v = state[k];
 
             if (v) {
-                searchParams.set(queryParamNames[k], v.toString());
+                const key = queryParamNames[k] || k
+                searchParams.set(key, v.toString());
             }
         });
 
         return searchParams.toString();
+    }
+
+    static _searchParamsFromUrl(url) {
+        const result = {}
+        const searchParams = new URLSearchParams(url)
+        for (let p of searchParams) {
+            result[p[0]] = p[1]
+        }
+
+        return result
     }
 }
 
