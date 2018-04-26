@@ -33,7 +33,7 @@ const Summary = ({test}) => {
                     null
             }
 
-            {test.failedCodeSnippets.map((cs, idx) => <SourceCode key={idx} {...cs}/>)}
+            {test.failedCodeSnippets && test.failedCodeSnippets.map((cs, idx) => <SourceCode key={idx} {...cs}/>)}
         </div>
     )
 }
