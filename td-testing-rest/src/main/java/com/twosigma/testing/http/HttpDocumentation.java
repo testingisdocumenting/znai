@@ -12,6 +12,12 @@ import java.nio.file.Path;
 public class HttpDocumentation {
     public void capture(String artifactName) {
         Path path = DocumentationArtifactsLocation.resolve(artifactName + ".json");
-        FileUtils.writeTextContent(path, JsonUtils.serializePrettyPrint(Http.http.getLastValidationResult().toMap()));
+
+        HttpValidationResult lastValidationResult = Http.http.getLastValidationResult();
+        if (lastValidationResult == null) {
+            throw new IllegalStateException("no http calls were made yet");
+        }
+
+        FileUtils.writeTextContent(path, JsonUtils.serializePrettyPrint(lastValidationResult.toMap()));
     }
 }
