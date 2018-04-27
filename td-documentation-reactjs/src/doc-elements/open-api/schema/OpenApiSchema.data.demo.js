@@ -62,7 +62,7 @@ const checkSchema = {
                 }
             ]
         },
-        "confirmationIds": idsSchema,
+        "confirmationIdsLongerTail": idsSchema,
         "customer": customerSchema,
         "customers": customersSchema
     },

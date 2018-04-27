@@ -17,6 +17,7 @@ class ApiParameter extends React.Component {
             type,
             children,
             description,
+            nestedLevel = 0,
             elementsLibrary
         } = this.props
 
@@ -24,7 +25,10 @@ class ApiParameter extends React.Component {
             isExpanded
         } = this.state
 
-        const commonClassName = ' api-param-cell' + (isExpanded ? ' expanded' : '')
+        const commonClassName = ' api-param-cell' +
+            (isExpanded ? ' expanded' : '') +
+            (nestedLevel > 0 ? ' nested-' + nestedLevel : '')
+
         const nameTypeClassName = 'api-param-name-type-toggle-cell' + commonClassName
         const descriptionClassName = 'api-param-description-cell' + commonClassName
 
@@ -35,7 +39,7 @@ class ApiParameter extends React.Component {
             </div> )
 
         const renderedChildren = children && isExpanded && <ApiParameters parameters={children}
-                                                                          nested={true}
+                                                                          nestedLevel={nestedLevel + 1}
                                                                           elementsLibrary={elementsLibrary}/>
         return (
             <React.Fragment>

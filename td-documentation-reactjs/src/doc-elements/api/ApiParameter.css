@@ -73,3 +73,32 @@
     color: var(--mdoc-meta-color);
     font-size: var(--mdoc-small-meta-text-size);
 }
+
+
+.api-param-cell.nested-1 {
+    margin-left: 20px;
+}
+
+.api-param-cell.nested-2 {
+    margin-left: 40px;
+}
+
+.api-param-cell.nested-3 {
+    margin-left: 60px;
+}
+
+.api-param-cell.nested-4 {
+    margin-left: 70px;
+}
+
+.api-param-cell.nested-5 {
+    margin-left: 80px;
+}
+
+.api-param-cell.nested-6 {
+    margin-left: 85px;
+}
+
+.api-param-cell.nested-7 {
+    margin-left: 90px;
+}
