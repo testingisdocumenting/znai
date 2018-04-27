@@ -12,8 +12,10 @@
 .page-two-sides-right-part {
     --mdoc-regular-text-color: var(--mdoc-inversed-text-color);
     --mdoc-regular-text-light-color: #aaa;
-    --mdoc-snippets-outer-border-color: #494949;
+
+    --mdoc-snippets-outer-border-color: #5e5e5e;
     --mdoc-snippets-inner-border-color: #404040;
+    --mdoc-snippets-title-color: #818181;
 
     --mdoc-default-code-block-color: #aaa;
     --mdoc-class-color: #bbb;

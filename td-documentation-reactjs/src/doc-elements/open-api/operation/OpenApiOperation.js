@@ -19,7 +19,7 @@ function OpenApiOperation({elementsLibrary, operation}) {
         <div className="open-api-operation content-block">
             <div className="url-and-summary">
                 <div className="method">{operation.method}</div>
-                <div className="path">{operation.path}</div>
+                <div className="path"><Path path={operation.path}/></div>
             </div>
             <div className="description">
                 <elementsLibrary.DocElement content={operation.description} elementsLibrary={elementsLibrary}/>
@@ -31,6 +31,23 @@ function OpenApiOperation({elementsLibrary, operation}) {
             <OpenApiResponses responses={operation.responses} elementsLibrary={elementsLibrary}/>
         </div>
     )
+}
+
+function Path({path}) {
+    const parts = path.split("/")
+
+    return parts
+        .filter(part => part.length)
+        .map((part, idx) => {
+            const className = part.indexOf('{') === 0 ?
+                'path-part-parameter' : 'path-part'
+
+            return (
+                <React.Fragment key={idx}>
+                    <div className="path-part-delimiter">/</div>
+                    <div className={className}>{part}</div>
+                </React.Fragment>)
+        })
 }
 
 export default OpenApiOperation

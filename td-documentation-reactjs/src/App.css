@@ -30,6 +30,7 @@
 
     --mdoc-snippets-outer-border-color: #ddd;
     --mdoc-snippets-inner-border-color: #f3f3f3;
+    --mdoc-snippets-title-color: #555;
 
     --mdoc-default-code-block-color: var(--mdoc-black);
     --mdoc-class-color: #383b3f;

@@ -25,9 +25,19 @@
 }
 
 .open-api-operation > .url-and-summary > .path {
+    display: flex;
+    flex-wrap: wrap;
     color: var(--mdoc-regular-text-color);
     font-size: var(--mdoc-regular-text-size);
     font-weight: bold;
+}
+
+.open-api-operation > .url-and-summary > .path > .path-part-delimiter {
+    color: var(--mdoc-punctuation-color);
+}
+
+.open-api-operation > .url-and-summary > .path > .path-part-parameter {
+    color: var(--mdoc-function-color);
 }
 
 .open-api-operation > .url-and-summary > .summary {
