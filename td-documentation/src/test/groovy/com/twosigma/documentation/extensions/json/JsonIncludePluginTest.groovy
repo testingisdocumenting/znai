@@ -22,6 +22,7 @@ class JsonIncludePluginTest {
         actual(elements).should equal([data: [key21: 'value21',
                                               key22: 'value22'],
                                        paths:[],
+                                       include: '$.key2',
                                        type: 'Json'])
     }
 
