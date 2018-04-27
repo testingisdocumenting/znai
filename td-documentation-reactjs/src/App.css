@@ -125,13 +125,3 @@ body {
     display: inline-block;
 }
 
-.__recently-modified {
-    border-left: 5px solid #6060f0;
-    padding-left: 5px;
-    margin-left: 5px;
-}
-
-.__recently-modified.content-block {
-    margin-left: auto
-}
-

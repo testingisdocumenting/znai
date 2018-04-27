@@ -1,42 +1,48 @@
-import {Component} from 'react'
+import React, {Component} from 'react'
 
-const modifiedClassName = " __recently-modified"
+import './PreviewChangeIndicator.css'
 
 class PreviewChangeIndicator extends Component {
-    constructor(props) {
-        super(props)
-        this.alreadyScrolled = false
-    }
+    state = {}
 
-    render() {
-        this.highlightChanges()
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.targetDom !== prevState.targetDom) {
+            return {alreadyScrolled: false, targetDom: nextProps.targetDom}
+        }
+
         return null
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        if (nextProps.targetDom !== this.props.targetDom) {
-            this.alreadyScrolled = false
+    componentDidMount() {
+        const {targetDom} = this.state
+
+        if (!elementInViewport(targetDom)) {
+            targetDom.scrollIntoView()
         }
+
+        this.removeIndicatorTimer = setTimeout(() => {
+            this.props.onIndicatorRemove()
+        }, 2000)
     }
 
-    highlightChanges() {
-        const {targetDom} = this.props
-        if (! targetDom) {
-            return
-        }
+    componentWillUnmount() {
+        clearTimeout(this.removeIndicatorTimer)
+    }
 
-        if (this.lastUpdatedDom) {
-            this.lastUpdatedDom.className = this.lastUpdatedDom.className.replace(modifiedClassName, "")
-        }
+    render() {
+        const {targetDom} = this.state
 
-        targetDom.className += modifiedClassName
+        const boundingRect = targetDom.getBoundingClientRect()
+        const indicatorStyle = {
+            position: 'absolute',
+            top: boundingRect.top,
+            left: boundingRect.left,
+            height: boundingRect.height,
+            width: boundingRect.width}
 
-        if (! this.alreadyScrolled && ! elementInViewport(targetDom)) {
-            targetDom.scrollIntoView()
-            this.alreadyScrolled = true
-        }
-
-        this.lastUpdatedDom = targetDom
+        return (
+            <div className="preview-change-indicator" style={indicatorStyle}/>
+        )
     }
 }
 

@@ -162,7 +162,7 @@ class Documentation extends Component {
                                      textSelection={textSelection}
                                      pageGenError={pageGenError}/>
                 {preview}
-                <PreviewChangeIndicator targetDom={lastChangeDataDom}/>
+                {lastChangeDataDom && <PreviewChangeIndicator targetDom={lastChangeDataDom} onIndicatorRemove={this.onPreviewIndicatorRemove}/>}
             </span>
         )
     }
@@ -524,6 +524,10 @@ class Documentation extends Component {
             pageSectionId: (current && current.idTitle) ? current.idTitle.id : null
         }
         this.setState({selectedTocItem: enrichedSelectedTocItem})
+    }
+
+    onPreviewIndicatorRemove = () => {
+        this.setState({lastChangeDataDom: null})
     }
 }
 

@@ -91,10 +91,6 @@
     padding-right: 15px;
 }
 
-.snippet.__recently-modified {
-    margin-left: auto;
-}
-
 .tabs-area .snippet-container .snippet,
 .tabs-area .snippet-container.wide-screen {
     border: none;
