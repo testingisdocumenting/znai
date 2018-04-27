@@ -1,80 +1,22 @@
 import * as React from "react"
 
-import CodeSnippetWithInlineComments from '../code-snippets/CodeSnippetWithInlineComments'
-import SimpleCodeSnippet from '../code-snippets/SimpleCodeSnippet'
-
 import {isInlinedComment} from '../code-snippets/codeUtils'
 import {isAllAtOnce} from '../meta/meta'
 import {convertToList} from '../propsUtils';
 
+import SnippetContainer from '../code-snippets/SnippetContainer'
+import CodeSnippetWithInlineComments from '../code-snippets/CodeSnippetWithInlineComments'
+import SimpleCodeSnippet from '../code-snippets/SimpleCodeSnippet'
+
 import './Snippet.css'
 
-class Snippet extends React.Component {
-    render() {
-        const {wide} = this.props
+const Snippet = (props) => {
+    const snippetComponent = props.commentsType === 'inline' ?
+        CodeSnippetWithInlineComments :
+        SimpleCodeSnippet
 
-        return wide ? this.renderWideMode() : this.renderNormalMode()
-    }
-
-    renderNormalMode() {
-        const {title} = this.props
-
-        return (
-            <div className="snippet-container content-block">
-                <Title title={title}/>
-
-                <div className={this.snippetClassName}>
-                    <this.CodeSnippet {...this.props}/>
-                </div>
-            </div>
-        )
-    }
-
-    renderWideMode() {
-        const {title} = this.props
-
-        const wideModePadding = <div className="padding">&nbsp;</div>
-
-        const className = "snippet-container wide-screen" + (title ? " with-title" : "")
-        return (
-            <div className={className}>
-                {title && <div className="title-layer">
-                    {wideModePadding}
-                    <Title title={title}/>
-                    {wideModePadding}
-                </div>}
-
-                <div className={this.snippetClassName}>
-                    <this.CodeSnippet {...this.props}/>
-                </div>
-            </div>
-        )
-    }
-
-    get CodeSnippet() {
-        const {commentsType} = this.props
-        return commentsType === 'inline' ? CodeSnippetWithInlineComments : SimpleCodeSnippet
-    }
-
-    get snippetClassName() {
-        const {title} = this.props
-        return "snippet" + (title ? " with-title" : "")
-    }
+    return <SnippetContainer {...props} snippetComponent={snippetComponent}/>
 }
-
-function Title({title}) {
-    if (!title) {
-        return null
-    }
-
-    return (
-        <div className="title-container content-block">
-            <div className="title">{title}</div>
-            <div className="large-filling"/>
-        </div>
-    )
-}
-
 
 const presentationSnippetHandler = {
     component: Snippet,

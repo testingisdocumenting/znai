@@ -72,7 +72,7 @@ public class PluginParamsOpts {
         return opts.isEmpty();
     }
 
-    public Map<String, ?> toMap() {
+    public Map<String, Object> toMap() {
         return new LinkedHashMap<>(opts);
     }
 }

@@ -1,24 +1,19 @@
 import React from 'react'
 
-import SimpleCodeToken from '../code-snippets/SimpleCodeToken'
-import LineOfTokens from '../code-snippets/LineOfTokens'
-
 import {printJson} from './jsonPrinter'
+
+import SnippetContainer from '../code-snippets/SnippetContainer'
+import SimpleCodeSnippet from '../code-snippets/SimpleCodeSnippet'
 
 import './Json.css'
 
-const Json = ({data, paths}) => {
+const Json = ({data, paths, title}) => {
     const lines = printJson('root', data, paths)
 
     return (
-        <div className="json content-block">
-            {lines.map((tokens, idx) => <LineOfTokens key={idx}
-                                                      tokens={tokens}
-                                                      isHighlighted={false}
-                                                      isPresentation={false}
-                                                      TokenComponent={SimpleCodeToken}/>)
-            }
-        </div>
+        <SnippetContainer linesOfCode={lines}
+                          title={title}
+                          snippetComponent={SimpleCodeSnippet} />
     )
 }
 

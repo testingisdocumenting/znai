@@ -1,0 +1,107 @@
+.snippet-container {
+    flex-direction: column;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.snippet-container.wide-screen {
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.snippet-container.wide-screen .title-layer {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    width: 100%;
+}
+
+.snippet-container.wide-screen .title-container.content-block {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.snippet-container.wide-screen .padding {
+    flex: 1;
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
+    height: 36px;
+}
+
+.snippet-container pre {
+    border: none;
+    background: none;
+    margin: 10px 0;
+    padding: 0;
+    font-size: var(--mdoc-code-text-size);
+    line-height: 18px;
+}
+
+.snippet-container .snippet {
+    border-top: 1px solid var(--mdoc-snippets-outer-border-color);
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
+    overflow-x: auto;
+}
+
+.snippet-container.wide-screen .snippet {
+    border-top: none;
+    border-bottom: none;
+}
+
+.snippet-container.wide-screen {
+    border-top: 1px solid var(--mdoc-snippets-outer-border-color);
+}
+
+.snippet-container.wide-screen.with-title {
+    border-top: none;
+}
+
+.snippet-container .snippet.with-title {
+    border-top: none;
+}
+
+.snippet-container .title-container {
+    display: flex;
+}
+
+.snippet-container .title-container .title {
+    color: #555;
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid var(--mdoc-snippets-outer-border-color);
+    border-bottom: none;
+    font-size: var(--mdoc-code-text-size);
+    font-family: var(--mdoc-code-font-family);
+}
+
+.snippet-container .title-container .large-filling {
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
+    flex: 1;
+}
+
+.snippet-container .title-container .small-filling {
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
+    flex-basis: 8px;
+}
+
+.wide-screen pre {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.snippet.__recently-modified {
+    margin-left: auto;
+}
+
+.tabs-area .snippet-container .snippet,
+.tabs-area .snippet-container.wide-screen {
+    border: none;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tabs-area .snippet-container + .paragraph {
+    margin-top: 20px;
+}

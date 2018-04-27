@@ -21,8 +21,8 @@ class SimpleCodeSnippet extends Component {
         this.processProps(nextProps)
     }
 
-    processProps({isPresentation, tokens, highlight}) {
-        this.linesOfTokens = splitTokensIntoLines(tokens)
+    processProps({isPresentation, tokens, linesOfCode, highlight}) {
+        this.linesOfTokens = !linesOfCode ? splitTokensIntoLines(tokens) : linesOfCode
 
         // highlight is either a single line index/substring or a collection of line indexes and substrings
         this.highlight = convertToList(highlight)

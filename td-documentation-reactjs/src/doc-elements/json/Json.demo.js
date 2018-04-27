@@ -36,6 +36,7 @@ const arrayOfObject = [{name: 'ta1', amount: 200}, {name: 'ta2', amount: 150}]
 export function jsonDemo(registry) {
     registry
         .add('array of simple', <Json data={arraySimpleData} paths={['root[1]']}/>)
+        .add('with title', <Json data={arraySimpleData} paths={['root[1]']} title="Response"/>)
         .add('record', <Json data={objectSimpleData}/>)
         .add('nested record', <Json data={objectNestedData} paths={['root.key2.key22', 'root.key3.key31']}/>)
         .add('nested record with long name', <Json data={objectNestedDataLongNames}/>)

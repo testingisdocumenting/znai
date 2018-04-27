@@ -43,8 +43,9 @@ public class JsonIncludePlugin implements IncludePlugin {
         String jsonPath = pluginParams.getOpts().get("include", "$");
         Object content = JsonPath.read(json, jsonPath);
 
-        Map<String, Object> props = CollectionUtils.createMap("data", content,
-                "paths", highlightedPaths(pluginParams.getOpts().get("paths")));
+        Map<String, Object> props = pluginParams.getOpts().toMap();
+        props.put("data", content);
+        props.put("paths", highlightedPaths(pluginParams.getOpts().get("paths")));
 
         return PluginResult.docElement("Json", props);
     }

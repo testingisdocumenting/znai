@@ -17,6 +17,14 @@ to include only a portion of your document
 
 :include-json: book-store.json {include: "$..book[0,1]"}
 
+# Title
+
+Use `title` property to specify a title.
+
+    :include-json: book-store.json {include: "$..book[0,1]", title: "Books"}
+    
+:include-json: book-store.json {include: "$..book[0,1]", title: "Books"}
+
 
 # Test Results
 
