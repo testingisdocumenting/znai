@@ -42,6 +42,22 @@ public class HttpValidationResult implements TestStepPayload {
         this.mismatches = new ArrayList<>();
     }
 
+    public String getRequestType() {
+        return requestBody != null ? requestBody.type() : null;
+    }
+
+    public String getResponseType() {
+        return response.getContentType();
+    }
+
+    public String getRequestContent() {
+        return requestBody != null ? requestBody.asString() : null;
+    }
+
+    public String getResponseContent() {
+        return response.getContent();
+    }
+
     public void addMismatch(String message) {
         mismatches.add(message);
     }
