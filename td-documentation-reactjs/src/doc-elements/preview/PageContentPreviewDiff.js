@@ -1,3 +1,15 @@
+const classNamesToSkip = [
+    'section',
+    'content-block',
+    'page-title-block',
+    'page-meta-block',
+    'page-last-update-time',
+    'two-sides-page-content',
+    'page-two-sides-layout',
+    'page-two-sides-left-part',
+    'page-two-sides-right-part',
+    'two-sides-section']
+
 class PageContentPreviewDiff {
     constructor(before, after) {
         this.before = before
@@ -21,10 +33,8 @@ class PageContentPreviewDiff {
                 continue
             }
 
-            // section is not a content-block as it displays sometimes elements that don't fit specified width
-            if (classes.indexOf('snippet') === -1 && (
-                classes.indexOf("section") !== -1 ||
-                classes.indexOf('content-block') !== -1)) {
+            const isClassToIgnore = classNamesToSkip.some(cn => classes.indexOf(cn) !== -1)
+            if (isClassToIgnore) {
                 continue
             }
 
