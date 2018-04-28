@@ -3,6 +3,8 @@ import ListOfTests from './ListOfTests'
 import StatusFilter from './StatusFilter'
 import TestDetails from './TestDetails'
 
+import HttpCalls from './details/http/HttpCalls'
+
 import WebTauReportStateCreator from './WebTauReportStateCreator'
 
 import './WebTauReport.css'
@@ -56,11 +58,23 @@ class WebTauReport extends Component {
         return report.withStatus(statusFilter)
     }
 
-    onDetailsStateUpdate = (newState) => this.pushUrl(newState)
+    onDetailsStateUpdate = (newState) => this.pushPartialUrlState(newState)
 
-    onHeaderTitleClick = () => this.pushUrl({selectedId: null})
+    onHeaderTitleClick = () => this.pushPartialUrlState({selectedId: null})
 
-    onTestSelect = (id) => this.pushUrl({testId: id})
+    onTestSelect = (id) => {
+        const currentTestId = this.state.testId
+        if (id === currentTestId) {
+            return
+        }
+
+        this.pushFullUrlState({
+            testId: id,
+            detailTabName: this.state.detailTabName,
+            statusFilter: this.state.statusFilter,
+            [HttpCalls.stateName]: ''
+        })
+    }
 
     onTestStatusSelect = (status) => {
         const {report} = this.props
@@ -68,10 +82,10 @@ class WebTauReport extends Component {
         const filtered = report.withStatus(status)
         const firstTestId = filtered.length > 0 ? filtered[0].id : null
 
-        this.pushUrl({statusFilter: status, testId: firstTestId})
+        this.pushPartialUrlState({statusFilter: status, testId: firstTestId})
     }
 
-    onDetailsTabSelection = (tabName) => this.pushUrl({detailTabName: tabName})
+    onDetailsTabSelection = (tabName) => this.pushPartialUrlState({detailTabName: tabName})
 
     componentDidMount() {
         this.subscribeToUrlChanges()
@@ -89,14 +103,16 @@ class WebTauReport extends Component {
     }
 
     updateStateFromUrl() {
-        const newState = this.stateFromUrl()
-        this.setState(newState)
+        this.setState(this.stateFromUrl())
     }
 
-    pushUrl(partialNewState) {
-        const searchParams = this._stateCreator.buildUrlSearchParams({...this.state, ...partialNewState})
-        window.history.pushState({}, '', '?' + searchParams)
+    pushPartialUrlState(partialNewState) {
+        this.pushFullUrlState({...this.state, ...partialNewState})
+    }
 
+    pushFullUrlState(fullState) {
+        const searchParams = this._stateCreator.buildUrlSearchParams(fullState)
+        window.history.pushState({}, '', '?' + searchParams)
         this.updateStateFromUrl()
     }
 }

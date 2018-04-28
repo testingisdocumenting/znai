@@ -1,9 +1,3 @@
-const queryParamNames = {
-    testId: 'testId',
-    statusFilter: 'status',
-    detailTabName: 'detail'
-};
-
 class WebTauReportStateCreator {
     constructor(report) {
         this.report = report
@@ -12,15 +6,15 @@ class WebTauReportStateCreator {
     stateFromUrl(url) {
         const searchParams = WebTauReportStateCreator._searchParamsFromUrl(url)
 
-        const testIdFromParam = searchParams[queryParamNames.testId]
+        const testIdFromParam = searchParams.testId
         const testId = this.report.hasTestWithId(testIdFromParam) ? testIdFromParam : null
 
-        const detailTabFromParam = searchParams[queryParamNames.detailTabName]
+        const detailTabFromParam = searchParams.detailTabName
         const detailTabName = this.report.hasDetailWithTabName(testId, detailTabFromParam) ?
             detailTabFromParam:
             this.report.firstDetailTabName(testId)
 
-        const statusFilter = searchParams[queryParamNames.statusFilter]
+        const statusFilter = searchParams.statusFilter
 
         return {...searchParams, testId, detailTabName, statusFilter}
     }
@@ -29,12 +23,8 @@ class WebTauReportStateCreator {
         const searchParams = new URLSearchParams();
 
         Object.keys(state).forEach(k => {
-            const v = state[k];
-
-            if (v) {
-                const key = queryParamNames[k] || k
-                searchParams.set(key, v.toString());
-            }
+            const v = state[k] || '';
+            searchParams.set(k, v.toString());
         });
 
         return searchParams.toString();

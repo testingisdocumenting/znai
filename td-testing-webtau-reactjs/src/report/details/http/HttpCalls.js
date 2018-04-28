@@ -2,15 +2,14 @@ import React, {Component} from 'react'
 
 import HttpCall from './HttpCall'
 
-const httpCallIdxsQueryParam = 'httpCallIdxs'
-
 class HttpCalls extends Component {
     state = {}
 
+    static stateName = 'httpCallIdxs'
     static getDerivedStateFromProps(props) {
-        const callIdxs = props.urlState[httpCallIdxsQueryParam]
+        const callIdxs = props.urlState[HttpCalls.stateName]
 
-        const ids = callIdxs && callIdxs !== 'NA' ? callIdxs.split(',') : []
+        const ids = callIdxs ? callIdxs.split('-') : []
         const expandedByIdx = {}
         ids.forEach(id => expandedByIdx[id] = true)
 
@@ -47,7 +46,7 @@ class HttpCalls extends Component {
         }
 
         onInternalStateUpdate({
-            [httpCallIdxsQueryParam]: Object.keys(newExpandedByIdx).join(',') || 'NA'
+            [HttpCalls.stateName]: Object.keys(newExpandedByIdx).join('-') || ''
         })
     }
 }
