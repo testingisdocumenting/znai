@@ -29,6 +29,10 @@ class SourceCode extends React.Component {
     componentDidMount() {
         Prism.highlightAll()
     }
+
+    componentDidUpdate() {
+        Prism.highlightAll()
+    }
 }
 
 export default SourceCode
