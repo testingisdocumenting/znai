@@ -28,11 +28,18 @@
 .http-call .method-and-url > .method {
     color: #555;
     font-weight: bold;
+    min-width: 50px;
+    text-align: right;
     margin-right: 15px;
 }
 
 .http-call.with-mismatches .method-and-url > .method {
     color: var(--mismatch-indicator-color);
+}
+
+.http-call .method-and-url > .status-code {
+    color: #3e474b;
+    margin-right: 15px;
 }
 
 .http-call .method-and-url > .url {

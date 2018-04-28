@@ -98,6 +98,7 @@ public class HttpValidationResult implements TestStepPayload {
         }
 
         result.put("responseType", response.getContentType());
+        result.put("responseStatusCode", response.getStatusCode());
         result.put("responseBody", response.getContent());
 
         result.put("mismatches", getMismatches());

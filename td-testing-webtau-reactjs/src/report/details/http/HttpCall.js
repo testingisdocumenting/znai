@@ -34,6 +34,7 @@ const HttpCall = ({idx, httpCall, isExpanded, onCollapseToggleClick}) => {
                     {isExpanded ? '-' : '+'}
                 </div>
                 <div className="method">{httpCall.method}</div>
+                <div className="status-code">{httpCall.responseStatusCode}</div>
                 <div className="url">{httpCall.url}</div>
             </div>
 
