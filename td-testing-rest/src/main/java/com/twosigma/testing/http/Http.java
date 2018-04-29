@@ -138,8 +138,12 @@ public class Http {
 
         Runnable httpCallRunnable = () -> {
             try {
+                long startTime = System.currentTimeMillis();
                 HttpResponse response = httpCall.execute(fullUrl, fullHeader);
-                result[0] = validateAndRecord(requestMethod, url, fullUrl, validator, requestBody, response);
+                long endTime = System.currentTimeMillis();
+
+                result[0] = validateAndRecord(requestMethod, url, fullUrl, validator, requestBody, response,
+                        endTime - startTime);
             } catch (Exception e) {
                 throw new RuntimeException("error during http." + requestMethod.toLowerCase() + "(" + fullUrl + ")", e);
             }
@@ -161,12 +165,12 @@ public class Http {
     @SuppressWarnings("unchecked")
     private <E> E validateAndRecord(String requestMethod, String url, String fullUrl,
                                     HttpResponseValidatorWithReturn validator,
-                                    HttpRequestBody requestBody, HttpResponse response) {
+                                    HttpRequestBody requestBody, HttpResponse response, long elapsedTime) {
         HeaderDataNode header = createHeaderDataNode(response);
         DataNode body = createBodyDataNode(response);
 
         HttpValidationResult result = new HttpValidationResult(requestMethod, url, fullUrl,
-                requestBody, response, header, body);
+                requestBody, response, header, body, elapsedTime);
 
         try {
             Object returnedValue = validator.validate(header, body);

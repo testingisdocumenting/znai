@@ -6,7 +6,7 @@
     margin-left: 10px;
 }
 
-.http-call .method-and-url {
+.http-call-info {
     display: flex;
     align-items: center;
     padding: 5px 0;
@@ -15,17 +15,16 @@
     cursor: pointer;
 }
 
-
-.http-call.with-mismatches .method-and-url {
+.http-call.with-mismatches .http-call-info {
     color: var(--mismatch-indicator-color);
 }
 
-.http-call .method-and-url > .collapse-toggle {
+.http-call-info > .collapse-toggle {
     width: 20px;
     font-size: 16px;
 }
 
-.http-call .method-and-url > .method {
+.http-call-info > .method {
     color: #555;
     font-weight: bold;
     min-width: 50px;
@@ -33,17 +32,33 @@
     margin-right: 15px;
 }
 
-.http-call.with-mismatches .method-and-url > .method {
+.http-call.with-mismatches .http-call-info > .method {
     color: var(--mismatch-indicator-color);
 }
 
-.http-call .method-and-url > .status-code {
+.http-call-info> .status-code {
     color: #3e474b;
     margin-right: 15px;
 }
 
-.http-call .method-and-url > .url {
+.http-call-info > .url {
     color: #4862d7;
+    margin-right: 15px;
+}
+
+.http-call-info > .elapsed-time {
+    color: #3e474b;
+    padding-right: 30px;
+}
+
+.http-call-info > .elapsed-time > .elapsed-seconds,
+.http-call-info > .elapsed-time > .elapsed-millis {
+    margin-right: 2px;
+}
+
+.http-call-info > .elapsed-time > .time-unit {
+    color: #888;
+    margin-right: 10px;
 }
 
 .http-call .payload {

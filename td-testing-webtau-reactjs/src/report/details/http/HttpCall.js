@@ -29,17 +29,56 @@ const HttpCall = ({idx, httpCall, isExpanded, onCollapseToggleClick}) => {
     const className = 'http-call' + (httpCall.mismatches.length > 0 ? ' with-mismatches' : '')
     return (
         <div className={className}>
-            <div className="method-and-url" onClick={() => onCollapseToggleClick(idx)}>
+            <div className="http-call-info" onClick={() => onCollapseToggleClick(idx)}>
                 <div className="collapse-toggle">
                     {isExpanded ? '-' : '+'}
                 </div>
                 <div className="method">{httpCall.method}</div>
                 <div className="status-code">{httpCall.responseStatusCode}</div>
                 <div className="url">{httpCall.url}</div>
+                <ElapsedTime millis={httpCall.elapsedTime}/>
             </div>
 
             {renderedDetails}
         </div>
+    )
+}
+
+function ElapsedTime({millis}) {
+    const seconds = (millis / 1000) | 0
+    const remainingMs = millis % 1000
+
+    return (
+        <div className="elapsed-time">
+            <Seconds seconds={seconds}/>
+            <Millis millis={remainingMs}/>
+        </div>
+    )
+}
+
+function Seconds({seconds}) {
+    if (seconds === 0) {
+        return null
+    }
+
+    return (
+        <React.Fragment>
+            <span className="elapsed-seconds">{seconds}</span>
+            <span className="time-unit">s</span>
+        </React.Fragment>
+    )
+}
+
+function Millis({millis}) {
+    if (millis === 0) {
+        return null
+    }
+
+    return (
+        <React.Fragment>
+            <span className="elapsed-millis">{millis}</span>
+            <span className="time-unit">ms</span>
+        </React.Fragment>
     )
 }
 

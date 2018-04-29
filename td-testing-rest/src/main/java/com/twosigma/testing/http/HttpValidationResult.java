@@ -23,6 +23,7 @@ public class HttpValidationResult implements TestStepPayload {
     private HttpResponse response;
     private HeaderDataNode responseHeader;
     private DataNode responseBody;
+    private long elapsedTime;
 
     private String requestMethod;
 
@@ -31,7 +32,8 @@ public class HttpValidationResult implements TestStepPayload {
     public HttpValidationResult(String requestMethod, String url, String fullUrl, 
                                 HttpRequestBody requestBody,
                                 HttpResponse response,
-                                HeaderDataNode responseHeader, DataNode responseBody) {
+                                HeaderDataNode responseHeader, DataNode responseBody,
+                                long elapsedTime) {
         this.requestMethod = requestMethod;
         this.url = url;
         this.fullUrl = fullUrl;
@@ -39,6 +41,7 @@ public class HttpValidationResult implements TestStepPayload {
         this.response = response;
         this.responseHeader = responseHeader;
         this.responseBody = responseBody;
+        this.elapsedTime = elapsedTime;
         this.mismatches = new ArrayList<>();
     }
 
@@ -86,6 +89,10 @@ public class HttpValidationResult implements TestStepPayload {
         return responseBody;
     }
 
+    public long getElapsedTime() {
+        return elapsedTime;
+    }
+
     @Override
     public Map<String, ?> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
@@ -100,6 +107,8 @@ public class HttpValidationResult implements TestStepPayload {
         result.put("responseType", response.getContentType());
         result.put("responseStatusCode", response.getStatusCode());
         result.put("responseBody", response.getContent());
+
+        result.put("elapsedTime", elapsedTime);
 
         result.put("mismatches", getMismatches());
 
