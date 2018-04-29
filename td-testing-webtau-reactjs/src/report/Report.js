@@ -6,6 +6,16 @@ import FullStackTrace from './details/FullStackTrace'
 import Summary from './details/Summary'
 
 class Report {
+    static overallHttpCallTimeForTest(test) {
+        const times = test.httpCalls.map(c => c.elapsedTime)
+        return times.reduce((a, r) => a + r, 0)
+    }
+
+    static averageHttpCallTimeForTest(test) {
+        const overallTime = Report.overallHttpCallTimeForTest(test)
+        return overallTime / test.httpCalls.length
+    }
+
     constructor(report) {
         this.report = report
         this.summary = report.summary
@@ -54,7 +64,6 @@ function enrichWithAdditionalDetails(tests) {
             details: additionalDetails(test)
         }))
 }
-
 
 function additionalDetails(test) {
     const details = []

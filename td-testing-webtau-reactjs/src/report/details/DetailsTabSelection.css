@@ -1,6 +1,7 @@
 .details-tab-selection > .tab-names {
     display: flex;
     width: 100%;
+    background-color: #fff;
     border-bottom: 1px solid #ddd;
 }
 
