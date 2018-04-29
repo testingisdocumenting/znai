@@ -23,11 +23,13 @@ class HttpValidationResultTest {
 
         def validationResult = new HttpValidationResult('POST', '/test/url', 'http://site/test/url', null,
                 new HttpResponse(content: responseAsJson, contentType: 'application/json', statusCode: 200),
-                new HeaderDataNode(), n)
+                new HeaderDataNode(), n, 100)
 
         validationResult.toMap().should equal([method: 'POST', url: 'http://site/test/url', responseType: 'application/json',
                                                responseBody: responseAsJson,
                                                mismatches: [],
+                                               responseStatusCode: 200,
+                                               elapsedTime: 100,
                                                responseBodyChecks: [failedPaths: ['root.childA'], passedPaths:['root.childB']]])
     }
 }
