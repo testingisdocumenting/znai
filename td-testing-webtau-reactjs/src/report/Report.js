@@ -31,6 +31,27 @@ class Report {
         return this.tests.filter(t => textFilterPredicate(t, text))
     }
 
+    numberOfHttpCalls() {
+        return this.tests
+            .map(t => (t.httpCalls || []).length)
+            .reduce((prev, curr) => prev + curr, 0)
+    }
+
+    overallHttpCallTime() {
+        return this.tests
+            .map(t => Report.overallHttpCallTimeForTest(t))
+            .reduce((prev, curr) => prev + curr, 0)
+    }
+
+    averageHttpCallTime() {
+        const n = this.numberOfHttpCalls()
+        if (!n) {
+            return 0
+        }
+
+        return this.overallHttpCallTime() / n
+    }
+
     withStatusAndFilteredByText(status, text) {
         if (!status || status === 'Total') {
             return this.filterByText(text)

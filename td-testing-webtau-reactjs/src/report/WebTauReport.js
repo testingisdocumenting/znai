@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
+import {DebounceInput} from 'react-debounce-input';
+
 import ListOfTests from './ListOfTests'
 import StatusFilter from './StatusFilter'
 import TestDetails from './TestDetails'
-
 import HttpCalls from './details/http/HttpCalls'
-
 import WebTauReportStateCreator from './WebTauReportStateCreator'
-
-import {DebounceInput} from 'react-debounce-input';
+import OverallSummary from './OverallSummary'
 
 import './WebTauReport.css'
 
@@ -22,9 +21,7 @@ class WebTauReport extends Component {
 
     render() {
         const {report} = this.props
-        const {testId, detailTabName, statusFilter, filterText} = this.state
-
-        const selectedTest = testId ? report.findTestById(testId) : null
+        const {testId, statusFilter, filterText} = this.state
 
         return (
             <div className="report">
@@ -47,12 +44,7 @@ class WebTauReport extends Component {
                 </div>
 
                 <div className="test-details-area">
-                    {selectedTest ? <TestDetails test={selectedTest}
-                                                 selectedDetailTabName={detailTabName}
-                                                 onDetailsTabSelection={this.onDetailsTabSelection}
-                                                 detailTabs={selectedTest.details}
-                                                 urlState={this.state}
-                                                 onInternalStateUpdate={this.onDetailsStateUpdate}/> : null}
+                    {this.renderTestDetailsArea()}
                 </div>
 
                 <div className="status-filter-area">
@@ -62,6 +54,28 @@ class WebTauReport extends Component {
                                   onTestStatusSelect={this.onTestStatusSelect}/>
                 </div>
             </div>
+        )
+    }
+
+    renderTestDetailsArea() {
+        const {report} = this.props
+        const {testId, detailTabName} = this.state
+
+        const selectedTest = testId ? report.findTestById(testId) : null
+
+        if (selectedTest) {
+            return (
+                <TestDetails test={selectedTest}
+                             selectedDetailTabName={detailTabName}
+                             onDetailsTabSelection={this.onDetailsTabSelection}
+                             detailTabs={selectedTest.details}
+                             urlState={this.state}
+                             onInternalStateUpdate={this.onDetailsStateUpdate}/>
+            )
+        }
+
+        return (
+            <OverallSummary report={report}/>
         )
     }
 

@@ -12,10 +12,15 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
-    background-color: #f5f2f0;
+    background-color: var(--webtau-source-code-background-color);
     padding: 10px;
 }
 
 pre.language-groovy {
     margin: 0;
+    background-color: var(--webtau-source-code-background-color);
+}
+
+.token.operator {
+    background-color: var(--webtau-source-code-background-color);
 }

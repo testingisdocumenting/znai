@@ -2,6 +2,7 @@ import React from 'react'
 import SourceCode from './SourceCode'
 
 import CardLabelAndNumber from '../widgets/CardLabelAndNumber'
+import NumberOfHttpCalls from '../dashboard/NumberOfHttpCalls'
 
 import Report from '../Report'
 
@@ -22,6 +23,8 @@ const OptionalPreBlock = ({className, message}) => {
 }
 
 const Summary = ({test}) => {
+    const numberOfHttpCalls = test.httpCalls ? test.httpCalls.length : 0
+
     return (
         <div className="single-summary">
             <div className="file-name-and-scenario">
@@ -35,7 +38,7 @@ const Summary = ({test}) => {
             </div>
 
             <div className="single-summary-dashboard">
-                <NumberOfHttpCalls test={test}/>
+                <NumberOfHttpCalls number={numberOfHttpCalls}/>
                 <AverageHttpCallsTime test={test}/>
                 <OverallHttpCallsTime test={test}/>
             </div>
@@ -49,18 +52,6 @@ const Summary = ({test}) => {
 
             {test.failedCodeSnippets && test.failedCodeSnippets.map((cs, idx) => <SourceCode key={idx} {...cs}/>)}
         </div>
-    )
-}
-
-function NumberOfHttpCalls({test}) {
-    if (!test.httpCalls) {
-        return null
-    }
-
-    const number = test.httpCalls.length
-
-    return (
-        <CardLabelAndNumber label={httpCallsLabel(number)} number={number}/>
     )
 }
 
@@ -84,10 +75,6 @@ function AverageHttpCallsTime({test}) {
         <CardLabelAndNumber label="Average Time (ms)"
                             number={Report.averageHttpCallTimeForTest(test).toFixed(2)}/>
     )
-}
-
-function httpCallsLabel(number) {
-    return number === 1 ? 'HTTP call' : 'HTTP calls'
 }
 
 export default Summary
