@@ -3,7 +3,7 @@
 
 .list-of-tests .test-card {
     padding: 10px 20px;
-    border-bottom: 1px #6d7a81 solid;
+    border-bottom: 1px var(--webtau-list-item-separation-color) solid;
     user-select: none;
     cursor: pointer;
 }

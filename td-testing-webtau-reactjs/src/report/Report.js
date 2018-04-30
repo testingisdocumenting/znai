@@ -27,12 +27,17 @@ class Report {
         return found.length ? found[0] : null
     }
 
-    withStatus(status) {
+    filterByText(text) {
+        return this.tests.filter(t => textFilterPredicate(t, text))
+    }
+
+    withStatusAndFilteredByText(status, text) {
         if (!status || status === 'Total') {
-            return this.tests
+            return this.filterByText(text)
         }
 
-        return this.tests.filter(t => t.status === status)
+        return this.tests.filter(t => t.status === status &&
+            textFilterPredicate(t, text))
     }
 
     hasTestWithId(id) {
@@ -56,6 +61,10 @@ class Report {
 
         return test.details[0].tabName
     }
+}
+
+function textFilterPredicate(test, text) {
+    return test.scenario.indexOf(text) !== -1
 }
 
 function enrichWithAdditionalDetails(tests) {

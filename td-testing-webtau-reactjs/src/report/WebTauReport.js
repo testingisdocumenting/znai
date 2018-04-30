@@ -7,6 +7,8 @@ import HttpCalls from './details/http/HttpCalls'
 
 import WebTauReportStateCreator from './WebTauReportStateCreator'
 
+import {DebounceInput} from 'react-debounce-input';
+
 import './WebTauReport.css'
 
 class WebTauReport extends Component {
@@ -20,13 +22,25 @@ class WebTauReport extends Component {
 
     render() {
         const {report} = this.props
-        const {testId, detailTabName, statusFilter} = this.state
+        const {testId, detailTabName, statusFilter, filterText} = this.state
 
         const selectedTest = testId ? report.findTestById(testId) : null
 
         return (
             <div className="report">
-                <div className="tests-lists-area">
+                <div className="report-name-area" onClick={this.onReportNameClick}>
+                    <div className="tool-name">webtau</div>
+                </div>
+
+                <div className="search-area">
+                    <DebounceInput value={filterText}
+                                   onChange={this.onFilterTextChange}
+                                   placeholder="filter text"
+                                   minLength={3}
+                                   debounceTimeout={300}/>
+                </div>
+
+                <div className="items-lists-area">
                     <ListOfTests tests={this.filteredTests}
                                  selectedId={testId}
                                  onSelect={this.onTestSelect}/>
@@ -53,9 +67,9 @@ class WebTauReport extends Component {
 
     get filteredTests() {
         const {report} = this.props
-        const {statusFilter} = this.state
+        const {statusFilter, filterText} = this.state
 
-        return report.withStatus(statusFilter)
+        return report.withStatusAndFilteredByText(statusFilter, filterText)
     }
 
     onDetailsStateUpdate = (newState) => this.pushPartialUrlState(newState)
@@ -69,23 +83,30 @@ class WebTauReport extends Component {
         }
 
         this.pushFullUrlState({
-            testId: id,
-            detailTabName: this.state.detailTabName,
-            statusFilter: this.state.statusFilter,
-            [HttpCalls.stateName]: ''
+            ...createEmptyFullState(),
+            testId: id
         })
+    }
+
+    onReportNameClick = () => {
+        this.pushFullUrlState(createEmptyFullState())
     }
 
     onTestStatusSelect = (status) => {
         const {report} = this.props
+        const {filterText} = this.state
 
-        const filtered = report.withStatus(status)
+        const filtered = report.withStatusAndFilteredByText(status, filterText)
         const firstTestId = filtered.length > 0 ? filtered[0].id : null
 
         this.pushPartialUrlState({statusFilter: status, testId: firstTestId})
     }
 
     onDetailsTabSelection = (tabName) => this.pushPartialUrlState({detailTabName: tabName})
+
+    onFilterTextChange = (e) => {
+        this.pushPartialUrlState({filterText: e.target.value})
+    }
 
     componentDidMount() {
         this.subscribeToUrlChanges()
@@ -114,6 +135,16 @@ class WebTauReport extends Component {
         const searchParams = this._stateCreator.buildUrlSearchParams(fullState)
         window.history.pushState({}, '', '?' + searchParams)
         this.updateStateFromUrl()
+    }
+}
+
+function createEmptyFullState() {
+    return {
+        testId: '',
+        detailTabName: '',
+        statusFilter: '',
+        filterText: '',
+        [HttpCalls.stateName]: ''
     }
 }
 
