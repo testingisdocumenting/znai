@@ -33,7 +33,7 @@ class TestResourceResolver implements ResourcesResolver {
 
     @Override
     BufferedImage imageContent(String path) {
-        return ImageIO.read(ResourceUtils.resourceStream(path))
+        return ImageIO.read(ResourceUtils.requiredResourceStream(path))
     }
 
     @Override
@@ -44,5 +44,10 @@ class TestResourceResolver implements ResourcesResolver {
     @Override
     Path docRootRelativePath(Path path) {
         return path.fileName
+    }
+
+    @Override
+    boolean exists(String path) {
+        return ResourceUtils.resourceStream(path) != null
     }
 }

@@ -31,8 +31,13 @@ class TestDocStructure implements DocStructure {
             return docUrl.url
         }
 
-        def base = "/test-doc/${docUrl.dirName}/${docUrl.fileName}"
-        return base + (docUrl.anchorId ? "#${docUrl.anchorId}" : "")
+        def base = "${docUrl.dirName}/${docUrl.fileName}"
+        return fullUrl(base + (docUrl.anchorId ? "#${docUrl.anchorId}" : ""))
+    }
+
+    @Override
+    String fullUrl(String relativeUrl) {
+        return  "/test-doc/" + relativeUrl
     }
 
     @Override

@@ -19,7 +19,7 @@ class ResourceUtilsTest {
         assert content[0..2] == [-1, -40, -1]
     }
 
-    @Test(expected = IllegalArgumentException)
+    @Test(expected = RuntimeException)
     void "should validate single resource presence"() {
         ResourceUtils.textContent("not-found.txt")
     }
@@ -33,7 +33,7 @@ class ResourceUtilsTest {
         contents.any { it == "hello meta\ntxt" }
     }
 
-    @Test(expected = IllegalArgumentException)
+    @Test(expected = RuntimeException)
     void "should validate multiple resource presence"() {
         ResourceUtils.textContents("not-found.txt")
     }

@@ -23,7 +23,7 @@ class MarkdownParserTest {
         parse("[label **bold**](http://test)")
 
         content.should == [[type: 'Paragraph', content:[
-                [url: 'http://test', type: 'Link',
+                [url: 'http://test', type: 'Link', isFile: false,
                     content:[[text: 'label ' , type: 'SimpleText'], [type: 'StrongEmphasis', content:[
                             [text: 'bold', type: 'SimpleText']]]]]]]]
     }
@@ -71,11 +71,13 @@ class MarkdownParserTest {
         componentsRegistry.validator.addValidLink("valid-dir-name/page-name#page-section")
 
         parse("[label](valid-dir-name/page-name)")
-        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name', type: 'Link',
+        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name', isFile: false,
+                                                         type: 'Link',
                                                          content:[[text: 'label' , type: 'SimpleText']]]]]]
 
         parse("[label](valid-dir-name/page-name#page-section)")
-        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name#page-section', type: 'Link',
+        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name#page-section',
+                                                         isFile: false, type: 'Link',
                                                          content:[[text: 'label' , type: 'SimpleText']]]]]]
     }
 

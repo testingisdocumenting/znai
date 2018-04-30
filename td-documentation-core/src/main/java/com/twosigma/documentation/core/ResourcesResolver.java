@@ -15,4 +15,6 @@ public interface ResourcesResolver {
 
     Path fullPath(String path);
     Path docRootRelativePath(Path path);
+
+    boolean exists(String path);
 }

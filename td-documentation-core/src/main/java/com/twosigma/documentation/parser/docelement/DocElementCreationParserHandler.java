@@ -214,8 +214,12 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onLinkStart(String url) {
-        String convertedUrl = validateAndCovertUrl(url);
-        start(DocElementType.LINK, "url", convertedUrl);
+        boolean isFile = isLocalFile(url);
+        String convertedUrl = isFile ?
+                convertAndRegisterLocalFileToUrl(url):
+                validateAndCovertUrl(url);
+
+        start(DocElementType.LINK, "url", convertedUrl, "isFile", isFile);
     }
 
     @Override
@@ -409,6 +413,21 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
         docStructure.validateUrl(path, currentSectionTitle, docUrl);
         return docStructure.createUrl(docUrl);
+    }
+
+    private boolean isLocalFile(String url) {
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
+        return url.indexOf('.') != -1 && resourcesResolver.exists(url);
+    }
+
+    private String convertAndRegisterLocalFileToUrl(String url) {
+        DocStructure docStructure = componentsRegistry.docStructure();
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
+
+        Path fullPath = resourcesResolver.fullPath(url);
+        auxiliaryFiles.add(AuxiliaryFile.runTime(fullPath));
+
+        return docStructure.fullUrl(resourcesResolver.docRootRelativePath(fullPath).toString());
     }
 }
 

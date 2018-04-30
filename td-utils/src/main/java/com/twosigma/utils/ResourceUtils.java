@@ -18,16 +18,25 @@ public class ResourceUtils {
     }
 
     /**
-     * {@link InputStream} of the specified resource
+     * {@link InputStream} of the specified resource. Throws if resource is not found
+     * @param resourcePath resource path like path/to/meta.json
+     * @return input stream
+     */
+    public static InputStream requiredResourceStream(String resourcePath) {
+        InputStream stream = ResourceUtils.class.getClassLoader().getResourceAsStream(resourcePath);
+        if (stream == null) {
+            throw new RuntimeException("can't find resource: " + resourcePath);
+        }
+        return stream;
+    }
+
+    /**
+     * {@link InputStream} of the specified resource. Null if resource is not found
      * @param resourcePath resource path like path/to/meta.json
      * @return input stream
      */
     public static InputStream resourceStream(String resourcePath) {
-        InputStream stream = ResourceUtils.class.getClassLoader().getResourceAsStream(resourcePath);
-        if (stream == null) {
-            throw new IllegalArgumentException("can't find resource: " + resourcePath);
-        }
-        return stream;
+        return ResourceUtils.class.getClassLoader().getResourceAsStream(resourcePath);
     }
 
     /**
@@ -36,7 +45,7 @@ public class ResourceUtils {
      * @return text content of the resource
      */
     public static String textContent(String resourcePath) {
-        InputStream stream = resourceStream(resourcePath);
+        InputStream stream = requiredResourceStream(resourcePath);
 
         try {
             return IOUtils.toString(stream, StandardCharsets.UTF_8);
@@ -51,7 +60,7 @@ public class ResourceUtils {
      * @return binary content of the resource
      */
     public static byte[] binaryContent(String resourcePath) {
-        InputStream stream = resourceStream(resourcePath);
+        InputStream stream = requiredResourceStream(resourcePath);
 
         try {
             return IOUtils.toByteArray(stream);

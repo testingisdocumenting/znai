@@ -61,8 +61,13 @@ class WebSiteDocStructure implements DocStructure {
             return "/" + docMeta.getId();
         }
 
-        String base = "/" + docMeta.getId() + "/" + docUrl.getDirName() + "/" + docUrl.getFileName();
-        return base + (docUrl.getAnchorId().isEmpty() ? "" : "#" + docUrl.getAnchorId());
+        String base = docUrl.getDirName() + "/" + docUrl.getFileName();
+        return fullUrl(base + (docUrl.getAnchorId().isEmpty() ? "" : "#" + docUrl.getAnchorId()));
+    }
+
+    @Override
+    public String fullUrl(String relativeUrl) {
+        return  "/" + docMeta.getId() + "/" + relativeUrl;
     }
 
     @Override

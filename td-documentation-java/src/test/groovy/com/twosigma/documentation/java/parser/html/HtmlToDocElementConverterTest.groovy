@@ -35,7 +35,7 @@ second paragraph
     void "should replace ahref with Link element"() {
         process('<a href="http://url">text inside</a>')
 
-        elements.should == [[type: 'Paragraph', content:[[type: 'Link', url: 'http://url', content:
+        elements.should == [[type: 'Paragraph', content:[[type: 'Link', isFile: false, url: 'http://url', content:
                 [[text: 'text inside', type: 'SimpleText']]]]]]
     }
 

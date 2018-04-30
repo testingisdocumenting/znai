@@ -30,3 +30,12 @@ To refer back `index` page use
 ```
 
 Clicking [Index page](/) have the same effect as clicking documentation title on the **Navigation Panel**
+
+# Downloads
+
+Linking to a local file will deploy the file along with the generated documentation. 
+Clicking the link will open a file using browser's default method.
+
+    Download [test json file](data/test.json)
+    
+Download [test json file](data/test.json)

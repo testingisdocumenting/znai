@@ -119,7 +119,7 @@ linenos="False" xml:space="preserve">System.out.println("hello world");</literal
             <literal classes="xref py py-func">send_message()</literal>
             </reference>""")
 
-        content.should == [[type: 'Link', url:'/test-doc/chapter-two/page-four#send_message',
+        content.should == [[type: 'Link', isFile: false, url:'/test-doc/chapter-two/page-four#send_message',
                             content: [[type: 'InlinedCode', code: 'send_message()']]]]
     }
 

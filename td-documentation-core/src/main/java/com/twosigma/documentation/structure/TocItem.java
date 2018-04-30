@@ -97,7 +97,7 @@ public class TocItem {
 
     @Override
     public String toString() {
-        return "(dirName:" + dirName + ", fileNameWithoutExtension: " + fileNameWithoutExtension + ")";
+        return dirName + "/" + fileNameWithoutExtension;
     }
 
     @Override
@@ -111,12 +111,8 @@ public class TocItem {
 
         TocItem tocItem = (TocItem) o;
 
-        if (!dirName.equals(tocItem.dirName)) {
-            return false;
-        }
-
-        return fileNameWithoutExtension.equals(tocItem.fileNameWithoutExtension);
-
+        return dirName.equals(tocItem.dirName) &&
+                fileNameWithoutExtension.equals(tocItem.fileNameWithoutExtension);
     }
 
     @Override

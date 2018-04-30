@@ -45,26 +45,31 @@ public class MultipleLocationsResourceResolver implements ResourcesResolver {
 
     @Override
     public Path fullPath(String path) {
-        Path original = Paths.get(path);
-
-        Supplier<Stream<Path>> createAllLocationsStream = () -> {
-            Stream<Path> relativeToCurrent = currentFilePath.get() == null ? Stream.empty() :
-                    Stream.of(currentFilePath.get().getParent().resolve(path));
-
-            Stream<Path> absoluteLocation = original.isAbsolute() ? Stream.of(original) : Stream.empty();
-            Stream<Path> lookedUpInLocations = lookupPaths.stream().map(p -> p.resolve(path).normalize());
-
-            return Stream.concat(relativeToCurrent, Stream.concat(absoluteLocation, lookedUpInLocations));
-        };
-
-        return createAllLocationsStream.get().filter(Files::exists).findFirst()
+        return allLocationsStream(path).filter(Files::exists).findFirst()
                 .orElseThrow(() -> new RuntimeException("can't find any of the following files:\n" +
-                        createAllLocationsStream.get().map(Path::toString).collect(Collectors.joining("\n"))));
+                        allLocationsStream(path).map(Path::toString).collect(Collectors.joining("\n"))));
     }
 
     @Override
     public Path docRootRelativePath(Path path) {
         return docRootPath.relativize(path);
+    }
+
+    @Override
+    public boolean exists(String path) {
+        return allLocationsStream(path).anyMatch(Files::exists);
+    }
+
+    private Stream<Path> allLocationsStream(String path) {
+        Path original = Paths.get(path);
+
+        Stream<Path> relativeToCurrent = currentFilePath.get() == null ? Stream.empty() :
+                Stream.of(currentFilePath.get().getParent().resolve(path));
+
+        Stream<Path> absoluteLocation = original.isAbsolute() ? Stream.of(original) : Stream.empty();
+        Stream<Path> lookedUpInLocations = lookupPaths.stream().map(p -> p.resolve(path).normalize());
+
+        return Stream.concat(relativeToCurrent, Stream.concat(absoluteLocation, lookedUpInLocations));
     }
 
     public void setCurrentFilePath(Path currentFilePath) {
