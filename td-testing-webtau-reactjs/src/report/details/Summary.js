@@ -70,8 +70,7 @@ function OverallHttpCallsTime({test}) {
     }
 
     return (
-        <CardLabelAndNumber label={httpCallsLabel(test.httpCalls.length)}
-                            secondaryLabel="overall time (ms)"
+        <CardLabelAndNumber label="Overall Time (ms)"
                             number={Report.overallHttpCallTimeForTest(test)}/>
     )
 }
@@ -82,8 +81,7 @@ function AverageHttpCallsTime({test}) {
     }
 
     return (
-        <CardLabelAndNumber label={httpCallsLabel(test.httpCalls.length)}
-                            secondaryLabel="average time (ms)"
+        <CardLabelAndNumber label="Average Time (ms)"
                             number={Report.averageHttpCallTimeForTest(test).toFixed(2)}/>
     )
 }
