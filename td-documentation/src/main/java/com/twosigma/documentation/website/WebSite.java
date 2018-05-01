@@ -348,7 +348,9 @@ public class WebSite {
             Set<TocItem> tocItems = tocItemsByAuxiliaryFilePath.computeIfAbsent(af.getPath(), k -> new HashSet<>());
             tocItems.add(tocItem);
 
-            auxiliaryFiles.put(af.getPath(), af);
+            if (!auxiliaryFiles.containsKey(af.getPath()) || !auxiliaryFiles.get(af.getPath()).isDeploymentRequired()) {
+                auxiliaryFiles.put(af.getPath(), af);
+            }
             if (auxiliaryFileListener != null) {
                 auxiliaryFileListener.onAuxiliaryFile(af);
             }
