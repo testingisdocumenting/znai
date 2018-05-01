@@ -27,7 +27,7 @@ public class DataNodeAnsiPrinter {
 
     private List<Line> lines;
     private Line currentLine;
-    private int currentIndentLevel;
+    private int indentation;
 
     public DataNodeAnsiPrinter() {
     }
@@ -37,90 +37,70 @@ public class DataNodeAnsiPrinter {
         currentLine = new Line();
         lines.add(currentLine);
 
-        printNode(dataNode);
+        printNode(dataNode, false);
 
-        lines.forEach(l -> {
-            ConsoleOutputs.out(l.getStyleAndValues().toArray());
-        });
+        lines.forEach(l -> ConsoleOutputs.out(l.getStyleAndValues().toArray()));
     }
 
-    private void printNode(DataNode dataNode) {
+    private void printNode(DataNode dataNode, boolean skipIndent) {
         if (dataNode.isList()) {
-            printList(dataNode);
+            printList(dataNode, skipIndent);
         } else if (dataNode.isSingleValue()) {
+            if (! skipIndent) {
+                printIndentation();
+            }
+
             printSingle(dataNode);
         } else {
-            printObject(dataNode);
+            printObject(dataNode, skipIndent);
         }
     }
 
-    private void printObject(DataNode dataNode) {
+    private void printObject(DataNode dataNode, boolean skipIndent) {
         Map<String, DataNode> children = dataNode.asMap();
 
-        printlnScopeOpen("{");
+        openScope("{", skipIndent);
 
-        int i = 0;
+        int idx = 0;
         for (Map.Entry<String, DataNode> entry : children.entrySet()) {
             String k = entry.getKey();
             DataNode v = entry.getValue();
 
-            boolean isLast = i == children.size() - 1;
+            boolean isLast = idx == children.size() - 1;
 
-            if (v.isSingleValue()) {
-                printSingleKeyValue(k, v);
-                if (isLast) {
-                    println();
-                }
-            } else if (v.isList()) {
-                print(indentation());
-                printSingleKey(k);
-                println();
-                printNode(v);
-            } else {
-                print(indentation());
-                printSingleKey(k);
-                println();
-                printNode(v);
-            }
+            printIndentation();
+            printKey(k);
+            printNode(v, true);
 
             if (! isLast) {
-                if (! v.isSingleValue()) {
-                    print(indentation());
-                }
                 printDelimiter(",");
                 println();
             }
 
-            i++;
+            idx++;
         }
 
-        printlnScopeClose("}");
+        closeScope("}");
     }
 
-    private void printList(DataNode dataNode) {
-        printlnScopeOpen("[");
+    private void printList(DataNode dataNode, boolean skipIndent) {
+        openScope("[", skipIndent);
 
-        int i = 0;
+        int idx = 0;
         int size = dataNode.all().size();
         for (DataNode n : dataNode.all()) {
-            if (n.isSingleValue()) {
-                print(indentation());
-            }
-            printNode(n);
-            if (!n.isSingleValue()) {
-                print(indentation());
-            }
+            printNode(n, false);
 
-            boolean isLast = i == size - 1;
+            boolean isLast = idx == size - 1;
             if (! isLast) {
                 printDelimiter(",");
+                println();
             }
-            println();
 
-            i++;
+            idx++;
         }
 
-        printlnScopeClose("]");
+        closeScope("]");
     }
 
     private void printSingle(DataNode dataNode) {
@@ -172,13 +152,7 @@ public class DataNodeAnsiPrinter {
         }
     }
 
-    private void printSingleKeyValue(String k, DataNode v) {
-        print(indentation());
-        printSingleKey(k);
-        printSingle(v);
-    }
-
-    private void printSingleKey(String k) {
+    private void printKey(String k) {
         print(KEY_COLOR, "\"" + k + "\"", ": ");
     }
 
@@ -186,24 +160,33 @@ public class DataNodeAnsiPrinter {
         print(DELIMITER_COLOR, d);
     }
 
-    private void printScopeOpen(String scopeChar) {
-        print(indentation(), SCOPE_CHAR_COLOR, scopeChar);
-        currentIndentLevel++;
-    }
+    private void openScope(String scopeChar, boolean skipIndent) {
+        if (!skipIndent) {
+            printIndentation();
+        }
 
-    private void printlnScopeOpen(String scopeChar) {
-        printScopeOpen(scopeChar);
+        printDelimiter(scopeChar);
         println();
+        indentRight();
     }
 
-    private void printScopeClose(String scopeChar) {
-        currentIndentLevel--;
-        print(indentation(), Color.CYAN, scopeChar);
-    }
-
-    private void printlnScopeClose(String scopeChar) {
-        printScopeClose(scopeChar);
+    private void closeScope(String scopeChar) {
         println();
+        indentLeft();
+        printIndentation();
+        printDelimiter(scopeChar);
+    }
+
+    private void printIndentation() {
+        print(indentation());
+    }
+
+    private void indentRight() {
+        indentation++;
+    }
+
+    private void indentLeft() {
+        indentation--;
     }
 
     private void print(Object... styleAndValues) {
@@ -217,7 +200,7 @@ public class DataNodeAnsiPrinter {
     }
 
     private String indentation() {
-        return indent(currentIndentLevel);
+        return indent(indentation);
     }
 
     private static String indent(final int nestLevel) {
