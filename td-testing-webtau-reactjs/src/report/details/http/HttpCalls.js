@@ -86,7 +86,7 @@ function HttpCallDetails({httpCall}) {
     const mismatches = httpCall.mismatches.map((m, idx) => <div key={idx} className="mismatch"><pre>{m}</pre></div>)
 
     return (
-        <tr>
+        <tr className="http-call-details">
             <td/>
             <td/>
             <td/>
