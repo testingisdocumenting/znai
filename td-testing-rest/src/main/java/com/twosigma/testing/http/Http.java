@@ -2,6 +2,8 @@ package com.twosigma.testing.http;
 
 import com.google.gson.*;
 import com.twosigma.testing.data.traceable.TraceableValue;
+import com.twosigma.testing.expectation.ExpectationHandler;
+import com.twosigma.testing.expectation.ExpectationHandlers;
 import com.twosigma.testing.http.config.HttpConfigurations;
 import com.twosigma.testing.http.datanode.DataNode;
 import com.twosigma.testing.http.datanode.DataNodeBuilder;
@@ -144,6 +146,11 @@ public class Http {
 
                 result[0] = validateAndRecord(requestMethod, url, fullUrl, validator, requestBody, response,
                         endTime - startTime);
+
+                HttpValidationResult validationResult = getLastValidationResult();
+                if (validationResult.hasMismatches()) {
+                    throw new AssertionError("\n" + validationResult.renderMismatches());
+                }
             } catch (Exception e) {
                 throw new RuntimeException("error during http." + requestMethod.toLowerCase() + "(" + fullUrl + ")", e);
             }
@@ -172,11 +179,18 @@ public class Http {
         HttpValidationResult result = new HttpValidationResult(requestMethod, url, fullUrl,
                 requestBody, response, header, body, elapsedTime);
 
+        ExpectationHandler expectationHandler = (actualPath, actualValue, message) -> {
+            result.addMismatch(message);
+            return ExpectationHandler.Flow.Terminate;
+        };
+
         try {
+            ExpectationHandlers.addLocal(expectationHandler);
             Object returnedValue = validator.validate(header, body);
             return (E) extractOriginalValue(returnedValue);
         } finally {
             lastValidationResult.set(result);
+            ExpectationHandlers.removeLocal(expectationHandler);
             render(result);
         }
     }

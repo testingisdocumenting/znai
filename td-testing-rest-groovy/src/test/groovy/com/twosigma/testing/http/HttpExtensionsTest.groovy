@@ -8,6 +8,8 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
+import static com.twosigma.testing.Ddjt.code
+import static com.twosigma.testing.Ddjt.throwException
 import static com.twosigma.testing.http.Http.http
 
 /**
@@ -111,5 +113,16 @@ class HttpExtensionsTest {
         }
 
         assert a == 1
+    }
+
+    @Test
+    void "captures failed assertions"() {
+        code {
+            http.get("params", [a: 1, b: 'text']) {
+                a.should == 2
+            }
+        } should throwException(~/body\.a:/)
+
+        http.lastValidationResult.mismatches.should == [~/body\.a:/]
     }
 }

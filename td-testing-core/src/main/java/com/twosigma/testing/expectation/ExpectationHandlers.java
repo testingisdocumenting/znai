@@ -1,6 +1,8 @@
 package com.twosigma.testing.expectation;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.twosigma.testing.expectation.ExpectationHandler.Flow;
 import com.twosigma.utils.ServiceUtils;
@@ -9,25 +11,29 @@ import com.twosigma.utils.ServiceUtils;
  * @author mykola
  */
 public class ExpectationHandlers {
-    private static List<ExpectationHandler> handlers = ServiceUtils.discover(ExpectationHandler.class);
+    private static List<ExpectationHandler> globalHandlers = ServiceUtils.discover(ExpectationHandler.class);
+    private static ThreadLocal<List<ExpectationHandler>> localHandlers = ThreadLocal.withInitial(ArrayList::new);
 
     public static void add(ExpectationHandler handler) {
-        handlers.add(handler);
+        globalHandlers.add(handler);
     }
 
     public static void remove(ExpectationHandler handler) {
-        handlers.remove(handler);
+        globalHandlers.remove(handler);
+    }
+
+    public static void addLocal(ExpectationHandler handler) {
+        localHandlers.get().add(handler);
+    }
+
+    public static void removeLocal(ExpectationHandler handler) {
+        localHandlers.get().remove(handler);
     }
 
     public static Flow onValueMismatch(ActualPath actualPath, Object actualValue, String message) {
-        for (ExpectationHandler handler : handlers) {
-            final Flow flow = handler.onValueMismatch(actualPath, actualValue, message);
-            if (flow == Flow.Terminate) {
-                return Flow.Terminate;
-            }
-        }
-
-        return Flow.PassToNext;
+        return Stream.concat(localHandlers.get().stream(), globalHandlers.stream())
+                .map(h -> h.onValueMismatch(actualPath, actualValue, message))
+                .filter(flow -> flow == Flow.Terminate)
+                .findFirst().orElse(Flow.PassToNext);
     }
-
 }

@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author mykola
@@ -67,6 +68,14 @@ public class HttpValidationResult implements TestStepPayload {
 
     public List<String> getMismatches() {
         return mismatches;
+    }
+
+    public boolean hasMismatches() {
+        return !mismatches.isEmpty();
+    }
+
+    public String renderMismatches() {
+        return mismatches.stream().collect(Collectors.joining("\n"));
     }
 
     public String getUrl() {
