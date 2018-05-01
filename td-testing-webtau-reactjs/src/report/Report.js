@@ -85,6 +85,10 @@ class Report {
 }
 
 function textFilterPredicate(test, text) {
+    if (!text) {
+        return true
+    }
+
     return test.scenario.indexOf(text) !== -1
 }
 
