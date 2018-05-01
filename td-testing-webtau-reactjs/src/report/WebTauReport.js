@@ -98,6 +98,9 @@ class WebTauReport extends Component {
 
         this.pushFullUrlState({
             ...createEmptyFullState(),
+            detailTabName: this.state.detailTabName,
+            statusFilter: this.state.statusFilter,
+            filterText: this.state.filterText,
             testId: id
         })
     }

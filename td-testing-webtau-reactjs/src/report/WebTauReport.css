@@ -4,6 +4,8 @@
     --webtau-selected-test-background: #906a59;
     --webtau-list-item-separation-color: #6d7a81;
     --webtau-source-code-background-color: #f0edeb;
+    --webtau-card-border-color: rgba(91, 91, 91, 0.12);
+    --webtau-card-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 body {

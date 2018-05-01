@@ -103,12 +103,12 @@ function additionalDetails(test) {
         details.push({tabName: 'Screenshot', component: Screenshot})
     }
 
-    if (test.hasOwnProperty('steps')) {
-        details.push({tabName: 'Steps', component: TestSteps})
-    }
-
     if (test.hasOwnProperty('httpCalls')) {
         details.push({tabName: 'HTTP calls', component: HttpCalls})
+    }
+
+    if (test.hasOwnProperty('steps')) {
+        details.push({tabName: 'Steps', component: TestSteps})
     }
 
     if (test.hasOwnProperty('shortStackTrace')) {

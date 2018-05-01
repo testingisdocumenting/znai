@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
 
-import HttpCall from './HttpCall'
+import ElapsedTime from './ElapsedTime'
+import Payload from './Payload'
+
+import './HttpCalls.css'
 
 class HttpCalls extends Component {
     state = {}
 
-    static stateName = 'httpCallIdxs'
+    static stateName = 'httpCall5Idxs'
     static getDerivedStateFromProps(props) {
         const callIdxs = props.urlState[HttpCalls.stateName]
 
@@ -21,12 +24,40 @@ class HttpCalls extends Component {
 
         return (
             <div className="http">
-                {test.httpCalls.map((httpCall, idx) => <HttpCall key={idx}
-                                                                 idx={idx}
-                                                                 httpCall={httpCall}
-                                                                 isExpanded={this.isExpanded(idx)}
-                                                                 onCollapseToggleClick={this.onCollapseToggleClick}/>)}
+                <table className="http-table">
+                    <thead>
+                    <tr>
+                        <th width="35px"/>
+                        <th width="60px">Method</th>
+                        <th width="40px">Code</th>
+                        <th width="60px">Time</th>
+                        <th>Url</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {test.httpCalls.map((httpCall, idx) => this.renderRow(httpCall, idx))}
+                    </tbody>
+                </table>
             </div>
+        )
+    }
+
+    renderRow(httpCall, idx) {
+        const className = 'http-call' + (httpCall.mismatches.length > 0 ? ' with-mismatches' : '')
+        const isExpanded = this.isExpanded(idx)
+
+        return (
+            <React.Fragment key={idx}>
+                <tr className={className} onClick={() => this.onCollapseToggleClick(idx)}>
+                    <td className="collapse-toggle">{isExpanded ? '-' : '+'}</td>
+                    <td className="method">{httpCall.method}</td>
+                    <td className="status-code">{httpCall.responseStatusCode}</td>
+                    <ElapsedTime millis={httpCall.elapsedTime}/>
+                    <td className="url">{httpCall.url}</td>
+                </tr>
+
+                {isExpanded && <HttpCallDetails httpCall={httpCall}/>}
+            </React.Fragment>
         )
     }
 
@@ -49,6 +80,34 @@ class HttpCalls extends Component {
             [HttpCalls.stateName]: Object.keys(newExpandedByIdx).join('-') || ''
         })
     }
+}
+
+function HttpCallDetails({httpCall}) {
+    const mismatches = httpCall.mismatches.map((m, idx) => <div key={idx} className="mismatch"><pre>{m}</pre></div>)
+
+    return (
+        <tr>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+            <td>
+                {mismatches}
+                <div className="request">
+                    <Payload caption="Request"
+                             type={httpCall.requestType}
+                             data={httpCall.requestBody}/>
+                </div>
+
+                <div className="response">
+                    <Payload caption="Response"
+                             type={httpCall.responseType}
+                             data={httpCall.responseBody}
+                             checks={httpCall.responseBodyChecks}/>
+                </div>
+            </td>
+        </tr>
+    )
 }
 
 export default HttpCalls
