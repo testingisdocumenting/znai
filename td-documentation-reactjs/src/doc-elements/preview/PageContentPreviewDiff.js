@@ -24,17 +24,15 @@ class PageContentPreviewDiff {
             const bn = btw.nextNode()
             const an = atw.nextNode()
 
+            if (bn === null && an !== null) {
+                return an
+            }
+
             if (bn === null || an === null) {
                 return null
             }
 
-            const classes = (typeof an.className === 'string') ? an.className.split(' ').filter((cn) => cn.length) : []
-            if (! classes.length) {
-                continue
-            }
-
-            const isClassToIgnore = classNamesToSkip.some(cn => classes.indexOf(cn) !== -1)
-            if (isClassToIgnore) {
+            if (ignoreNode(an)) {
                 continue
             }
 
@@ -43,6 +41,16 @@ class PageContentPreviewDiff {
             }
         }
     }
+}
+
+function ignoreNode(node) {
+    const classes = (typeof node.className === 'string') ? node.className.split(' ').filter((cn) => cn.length) : []
+    if (! classes.length) {
+        return true
+    }
+
+    return classNamesToSkip.some(cn => classes.indexOf(cn) !== -1)
+
 }
 
 export default PageContentPreviewDiff
