@@ -16,11 +16,9 @@ import org.w3c.dom.NodeList;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import static com.twosigma.documentation.parser.sphinx.xml.DocUtilsXmlFixer.fixDocUtilsIncorrectXml;
-import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.getAttributeText;
-import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.parseXml;
+import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.*;
 
 /**
  * @author mykola
@@ -108,8 +106,10 @@ class DocTreeDomXmlParser {
     }
 
     private boolean parseDescSignature(Node node) {
-        String ids = getAttributeText(node, "ids");
-        parserHandler.onGlobalAnchor(ids);
+        if (hasAttributeText(node, "ids")) {
+            String ids = getAttributeText(node, "ids");
+            parserHandler.onGlobalAnchor(ids);
+        }
 
         return parseDocUtils(node);
     }

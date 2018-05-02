@@ -68,6 +68,10 @@ public class XmlUtils {
         return streamBuilder.build();
     }
 
+    public static boolean hasAttributeText(Node node, String name) {
+        return node.getAttributes().getNamedItem(name) != null;
+    }
+
     public static String getAttributeText(Node node, String name) {
         return node.getAttributes().getNamedItem(name).getTextContent();
     }
