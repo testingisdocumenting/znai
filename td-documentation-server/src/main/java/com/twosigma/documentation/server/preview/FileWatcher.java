@@ -2,7 +2,7 @@ package com.twosigma.documentation.server.preview;
 
 import com.sun.nio.file.SensitivityWatchEventModifier;
 import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.documentation.website.AuxiliaryFileListener;
+import com.twosigma.documentation.core.AuxiliaryFileListener;
 import com.twosigma.documentation.core.AuxiliaryFile;
 
 import java.io.IOException;

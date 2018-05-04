@@ -1,6 +1,4 @@
-package com.twosigma.documentation.website;
-
-import com.twosigma.documentation.core.AuxiliaryFile;
+package com.twosigma.documentation.core;
 
 /**
  * @author mykola
