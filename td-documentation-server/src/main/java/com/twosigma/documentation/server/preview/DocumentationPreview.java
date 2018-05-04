@@ -40,9 +40,9 @@ public class DocumentationPreview {
 
         reportPhase("initializing file watcher");
         final FileWatcher fileWatcher = new FileWatcher(sourceRoot,
-                webSite.getAuxiliaryFiles().stream().map(AuxiliaryFile::getPath),
+                webSite.getAuxiliaryFilesRegistry().getAllPaths(),
                 fileChangeHandler);
-        webSite.setAuxiliaryFileListener(fileWatcher);
+        webSite.getAuxiliaryFilesRegistry().registerListener(fileWatcher);
         fileWatcher.start();
     }
 

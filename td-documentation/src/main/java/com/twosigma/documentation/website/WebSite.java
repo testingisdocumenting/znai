@@ -2,6 +2,7 @@ package com.twosigma.documentation.website;
 
 import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
+import com.twosigma.documentation.core.AuxiliaryFilesRegistry;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.extensions.MultipleLocationsResourceResolver;
 import com.twosigma.documentation.html.*;
@@ -45,8 +46,6 @@ public class WebSite {
     private Configuration cfg;
 
     private Map<TocItem, Page> pageByTocItem;
-    private Map<Path, Set<TocItem>> tocItemsByAuxiliaryFilePath;
-    private Map<Path, AuxiliaryFile> auxiliaryFiles;
     private SiteSearchEntries searchEntries;
 
     private TableOfContents toc;
@@ -57,6 +56,7 @@ public class WebSite {
     private List<WebResource> extraJavaScripts;
 
     private final WebSiteComponentsRegistry componentsRegistry;
+    private final AuxiliaryFilesRegistry auxiliaryFilesRegistry;
     private final MultipleLocationsResourceResolver resourceResolver;
     private final ReactJsNashornEngine reactJsNashornEngine;
     private final LunrIndexer lunrIndexer;
@@ -65,8 +65,6 @@ public class WebSite {
     private final WebSiteExtensions webSiteExtensions;
 
     private final MarkupParsingConfiguration markupParsingConfiguration;
-
-    private AuxiliaryFileListener auxiliaryFileListener;
 
     private WebSite(Configuration cfg) {
         this.cfg = cfg;
@@ -80,9 +78,8 @@ public class WebSite {
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
         this.tocJavaScript = WebResource.withPath("toc.js");
-        this.tocItemsByAuxiliaryFilePath = new HashMap<>();
+        this.auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
         this.markupParsingConfiguration = createMarkupParsingConfiguration();
-        this.auxiliaryFiles = new HashMap<>();
         this.searchEntries = new SiteSearchEntries();
 
         docMeta.setId(cfg.id);
@@ -111,12 +108,8 @@ public class WebSite {
         generate();
     }
 
-    public void setAuxiliaryFileListener(AuxiliaryFileListener auxiliaryFileListener) {
-        this.auxiliaryFileListener = auxiliaryFileListener;
-    }
-
-    public Collection<AuxiliaryFile> getAuxiliaryFiles() {
-        return auxiliaryFiles.values();
+    public AuxiliaryFilesRegistry getAuxiliaryFilesRegistry() {
+        return auxiliaryFilesRegistry;
     }
 
     public Path getDeployRoot() {
@@ -172,8 +165,7 @@ public class WebSite {
     }
 
     public Set<TocItem> dependentTocItems(Path auxiliaryFile) {
-        Set<TocItem> paths = tocItemsByAuxiliaryFilePath.get(auxiliaryFile);
-        return (paths == null) ? Collections.emptySet() : paths;
+        return auxiliaryFilesRegistry.tocItemsForPath(auxiliaryFile);
     }
 
     public TableOfContents getToc() {
@@ -189,16 +181,9 @@ public class WebSite {
     }
 
     public void redeployAuxiliaryFileIfRequired(Path path) {
-        AuxiliaryFile auxiliaryFile = auxiliaryFiles.get(path);
-        if (auxiliaryFile == null) {
-            return;
+        if (auxiliaryFilesRegistry.requiresDeployment(path)) {
+            deployAuxiliaryFile(path);
         }
-
-        if (! auxiliaryFile.isDeploymentRequired()) {
-            return;
-        }
-
-        deployAuxiliaryFile(auxiliaryFile);
     }
 
     private MarkupParsingConfiguration createMarkupParsingConfiguration() {
@@ -344,17 +329,7 @@ public class WebSite {
     // we maintain dependency between them so we know which one triggers what page refresh during preview mode
     //
     private void updateFilesAssociation(TocItem tocItem, List<AuxiliaryFile> newAuxiliaryFiles) {
-        newAuxiliaryFiles.forEach((af) -> {
-            Set<TocItem> tocItems = tocItemsByAuxiliaryFilePath.computeIfAbsent(af.getPath(), k -> new HashSet<>());
-            tocItems.add(tocItem);
-
-            if (!auxiliaryFiles.containsKey(af.getPath()) || !auxiliaryFiles.get(af.getPath()).isDeploymentRequired()) {
-                auxiliaryFiles.put(af.getPath(), af);
-            }
-            if (auxiliaryFileListener != null) {
-                auxiliaryFileListener.onAuxiliaryFile(af);
-            }
-        });
+        newAuxiliaryFiles.forEach((af) -> auxiliaryFilesRegistry.updateFileAssociations(tocItem, af));
     }
 
     private Path markupPath(TocItem tocItem) {
@@ -418,15 +393,13 @@ public class WebSite {
 
     private void deployAuxiliaryFiles() {
         reportPhase("deploying auxiliary files (e.g. images)");
-        auxiliaryFiles.values().stream().filter(AuxiliaryFile::isDeploymentRequired)
-                .forEach(this::deployAuxiliaryFile);
+        auxiliaryFilesRegistry.getAuxiliaryFilePathsRequiringDeployment().forEach(this::deployAuxiliaryFile);
     }
 
-    private void deployAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
-        Path origin = auxiliaryFile.getPath().toAbsolutePath();
-        Path relative = resourceResolver.docRootRelativePath(origin);
+    private void deployAuxiliaryFile(Path auxiliaryFilePath) {
+        Path relative = resourceResolver.docRootRelativePath(auxiliaryFilePath);
         try {
-            deployer.deploy(relative, Files.readAllBytes(origin));
+            deployer.deploy(relative, Files.readAllBytes(auxiliaryFilePath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
