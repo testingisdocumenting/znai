@@ -9,3 +9,5 @@ target
 node_modules
 td-documentation-reactjs/build
 *.iml
+.vertx
+package-lock.json
