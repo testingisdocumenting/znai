@@ -13,7 +13,7 @@ public class TestServerRequest {
         return url;
     }
 
-    public void setUrl(final String url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -21,7 +21,7 @@ public class TestServerRequest {
         return requestMethod;
     }
 
-    public void setRequestMethod(final String requestMethod) {
+    public void setRequestMethod(String requestMethod) {
         this.requestMethod = requestMethod;
     }
 
@@ -29,7 +29,7 @@ public class TestServerRequest {
         return requestBody;
     }
 
-    public void setRequestBody(final String requestBody) {
+    public void setRequestBody(String requestBody) {
         this.requestBody = requestBody;
     }
 

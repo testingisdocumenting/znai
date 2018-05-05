@@ -77,7 +77,7 @@ public class TestServer implements HttpConfiguration {
     }
 
     @Override
-    public String fullUrl(final String url) {
+    public String fullUrl(String url) {
         if (HttpUrl.isFull(url)) {
             return url;
         }
@@ -92,20 +92,20 @@ public class TestServer implements HttpConfiguration {
 
     private class RequestHandler extends AbstractHandler {
         @Override
-        public void handle(final String url, final Request baseRequest, final HttpServletRequest request,
-                           final HttpServletResponse response) throws IOException, ServletException {
+        public void handle(String url, Request baseRequest, HttpServletRequest request,
+                           HttpServletResponse response) throws IOException {
 
             Map<String, TestServerResponse> responses = findResponses(request);
 
-            final TestServerRequest serverRequest = new TestServerRequest();
+            TestServerRequest serverRequest = new TestServerRequest();
             serverRequest.setRequestBody(IOUtils.toString(baseRequest.getReader()));
             serverRequest.setRequestType(baseRequest.getContentType());
 
-            final TestServerResponse testServerResponse = responses.get(baseRequest.getOriginalURI());
+            TestServerResponse testServerResponse = responses.get(baseRequest.getOriginalURI());
             if (testServerResponse == null) {
                 response.setStatus(404);
             } else {
-                final String responseBody = testServerResponse.responseBody(serverRequest);
+                String responseBody = testServerResponse.responseBody(serverRequest);
                 response.setStatus(200);
                 response.setContentType(testServerResponse.responseType(serverRequest));
                 response.getWriter().println(responseBody != null ? responseBody : "");
@@ -114,7 +114,7 @@ public class TestServer implements HttpConfiguration {
             baseRequest.setHandled(true);
         }
 
-        private Map<String, TestServerResponse> findResponses(final HttpServletRequest request) {
+        private Map<String, TestServerResponse> findResponses(HttpServletRequest request) {
             switch (request.getMethod()) {
                 case "GET":
                     return getResponses;

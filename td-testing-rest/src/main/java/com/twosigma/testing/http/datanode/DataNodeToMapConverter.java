@@ -9,7 +9,7 @@ import com.twosigma.testing.data.converters.ToMapConverter;
  */
 public class DataNodeToMapConverter implements ToMapConverter {
     @Override
-    public Map<String, ?> convert(final Object v) {
+    public Map<String, ?> convert(Object v) {
         if (v instanceof DataNode) {
             return ((DataNode) v).asMap();
         }

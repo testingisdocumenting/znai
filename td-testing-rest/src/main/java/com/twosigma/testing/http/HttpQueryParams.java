@@ -13,7 +13,7 @@ public class HttpQueryParams {
     private Map<String, ?> params;
     private String asString;
 
-    public HttpQueryParams(final Map<String, ?> params) {
+    public HttpQueryParams(Map<String, ?> params) {
         this.params = new LinkedHashMap<>(params);
         this.asString = this.params.entrySet().stream().map(e -> decode(e.getKey()) + "=" + decode(e.getValue().toString())).collect(
             Collectors.joining("&"));

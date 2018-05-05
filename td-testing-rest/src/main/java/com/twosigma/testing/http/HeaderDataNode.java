@@ -13,7 +13,7 @@ import com.twosigma.testing.http.datanode.DataNodeId;
 public class HeaderDataNode implements DataNode {
     private DataNode dataNode;
 
-    public HeaderDataNode(final DataNode dataNode) {
+    public HeaderDataNode(DataNode dataNode) {
         this.dataNode = dataNode;
     }
 
@@ -23,12 +23,12 @@ public class HeaderDataNode implements DataNode {
     }
 
     @Override
-    public DataNode get(final String name) {
+    public DataNode get(String name) {
         return dataNode.get(name);
     }
 
     @Override
-    public DataNode get(final int idx) {
+    public DataNode get(int idx) {
         return dataNode.get(idx);
     }
 

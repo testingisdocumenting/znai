@@ -12,11 +12,11 @@ public class HttpUrl {
     private HttpUrl() {
     }
 
-    public static boolean isFull(final String url) {
+    public static boolean isFull(String url) {
         return fullUrlPrefixes.stream().anyMatch(p -> url.toLowerCase().startsWith(p));
     }
 
-    public static String concat(final String left, final String right) {
+    public static String concat(String left, String right) {
         if (left == null) {
             throw new IllegalArgumentException("passed url on the left is NULL");
         }

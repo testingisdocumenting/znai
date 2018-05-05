@@ -11,7 +11,7 @@ public class TestServerTextResponse implements TestServerResponse {
     }
 
     @Override
-    public String responseBody(final TestServerRequest request) {
+    public String responseBody(TestServerRequest request) {
         return response;
     }
 

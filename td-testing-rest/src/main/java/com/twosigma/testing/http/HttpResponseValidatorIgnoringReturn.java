@@ -8,12 +8,12 @@ import com.twosigma.testing.http.datanode.DataNode;
 public class HttpResponseValidatorIgnoringReturn implements HttpResponseValidatorWithReturn {
     private HttpResponseValidator validator;
 
-    public HttpResponseValidatorIgnoringReturn(final HttpResponseValidator validator) {
+    public HttpResponseValidatorIgnoringReturn(HttpResponseValidator validator) {
         this.validator = validator;
     }
 
     @Override
-    public Object validate(final HeaderDataNode header, final DataNode body) {
+    public Object validate(HeaderDataNode header, DataNode body) {
         validator.validate(header, body);
         return null;
     }

@@ -12,7 +12,7 @@ import com.twosigma.testing.data.traceable.TraceableValue;
 public class NullDataNode implements DataNode {
     private DataNodeId id;
 
-    public NullDataNode(final DataNodeId id) {
+    public NullDataNode(DataNodeId id) {
         this.id = id;
     }
 
@@ -22,12 +22,12 @@ public class NullDataNode implements DataNode {
     }
 
     @Override
-    public DataNode get(final String name) {
+    public DataNode get(String name) {
         return new NullDataNode(id.child(name));
     }
 
     @Override
-    public DataNode get(final int idx) {
+    public DataNode get(int idx) {
         return new NullDataNode(id.peer(idx));
     }
 

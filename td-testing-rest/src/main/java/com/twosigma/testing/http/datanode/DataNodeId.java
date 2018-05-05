@@ -8,26 +8,26 @@ public class DataNodeId {
     private String name;
     private int idx;
 
-    public DataNodeId(final String name) {
+    public DataNodeId(String name) {
         this.name = name;
         this.path = name;
     }
 
-    public DataNodeId(final String path, final String name) {
+    public DataNodeId(String path, String name) {
         this.path = path;
         this.name = name;
     }
 
-    public DataNodeId(final String path, final String name, int idx) {
+    public DataNodeId(String path, String name, int idx) {
         this(path, name);
         this.idx = idx;
     }
 
-    public DataNodeId child(final String name) {
+    public DataNodeId child(String name) {
         return new DataNodeId(path + "." + name, name);
     }
 
-    public DataNodeId peer(final int idx) {
+    public DataNodeId peer(int idx) {
         return new DataNodeId(path + "[" + idx + "]", name, idx);
     }
 

@@ -18,9 +18,9 @@ import static com.twosigma.testing.reporter.TokenizedMessage.tokenizedMessage;
 public interface DataNode extends ActualValueExpectations, DataNodeExpectations {
     DataNodeId id();
 
-    DataNode get(final String name);
+    DataNode get(String name);
 
-    DataNode get(final int idx);
+    DataNode get(int idx);
 
     TraceableValue get();
 

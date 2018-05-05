@@ -21,18 +21,18 @@ public class StructuredDataNode implements DataNode {
 
     private boolean isSingleValue;
 
-    public StructuredDataNode(final DataNodeId id, TraceableValue value) {
+    public StructuredDataNode(DataNodeId id, TraceableValue value) {
         this.id = id;
         this.value = value;
         this.isSingleValue = true;
     }
 
-    public StructuredDataNode(final DataNodeId id, List<DataNode> values) {
+    public StructuredDataNode(DataNodeId id, List<DataNode> values) {
         this.id = id;
         this.values = values;
     }
 
-    public StructuredDataNode(final DataNodeId id, Map<String, DataNode> children) {
+    public StructuredDataNode(DataNodeId id, Map<String, DataNode> children) {
         this.id = id;
         this.children = children;
     }
@@ -43,12 +43,12 @@ public class StructuredDataNode implements DataNode {
     }
 
     @Override
-    public DataNode get(final String name) {
+    public DataNode get(String name) {
         return (children != null && children.containsKey(name)) ? children.get(name) : new NullDataNode(id.child(name));
     }
 
     @Override
-    public DataNode get(final int idx) {
+    public DataNode get(int idx) {
         return (values == null || idx < 0 || idx >= values.size()) ?
             new NullDataNode(id.peer(idx)):
             values.get(idx);

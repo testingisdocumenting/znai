@@ -20,11 +20,11 @@ public class DataNodeBuilder {
         return fromValue(id, list);
     }
 
-    private static Map<String, DataNode> buildMapOfNodes(DataNodeId id, final Map<String, Object> map) {
-        final Map<String, DataNode> result = new LinkedHashMap<>();
+    private static Map<String, DataNode> buildMapOfNodes(DataNodeId id, Map<String, Object> map) {
+        Map<String, DataNode> result = new LinkedHashMap<>();
         for (Entry<String, Object> entry : map.entrySet()) {
-            final String key = entry.getKey();
-            final Object value = entry.getValue();
+            String key = entry.getKey();
+            Object value = entry.getValue();
 
             result.put(key, fromValue(id.child(key), value));
         }
@@ -32,8 +32,8 @@ public class DataNodeBuilder {
         return result;
     }
 
-    private static List<DataNode> buildListOfNodes(final DataNodeId id, final List<Object> values) {
-        final List<DataNode> result = new ArrayList<>();
+    private static List<DataNode> buildListOfNodes(DataNodeId id, List<Object> values) {
+        List<DataNode> result = new ArrayList<>();
         int idx = 0;
         for (Object value : values) {
             result.add(fromValue(id.peer(idx), value));

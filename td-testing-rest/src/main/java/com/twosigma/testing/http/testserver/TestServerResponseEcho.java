@@ -5,7 +5,7 @@ package com.twosigma.testing.http.testserver;
  */
 public class TestServerResponseEcho implements TestServerResponse {
     @Override
-    public String responseBody(final TestServerRequest request) {
+    public String responseBody(TestServerRequest request) {
         return request.getRequestBody();
     }
 

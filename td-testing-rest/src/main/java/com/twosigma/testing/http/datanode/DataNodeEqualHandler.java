@@ -22,19 +22,19 @@ public class DataNodeEqualHandler
     }
 
     @Override
-    public boolean handle(final Object actual, final Object expected) {
+    public boolean handle(Object actual, Object expected) {
         return actual instanceof DataNode;
     }
 
     @Override
-    public void compare(final EqualComparator equalComparator, final ActualPath actualPath, final Object actual,
-                        final Object expected) {
+    public void compare(EqualComparator equalComparator, ActualPath actualPath, Object actual,
+                        Object expected) {
 
-        final Object convertedActual = convertBasedOnExpected((DataNode) actual, expected);
+        Object convertedActual = convertBasedOnExpected((DataNode) actual, expected);
         equalComparator.compare(actualPath, convertedActual, expected);
     }
 
-    private Object convertBasedOnExpected(DataNode actual, final Object expected) {
+    private Object convertBasedOnExpected(DataNode actual, Object expected) {
         if (expected instanceof Map) {
             return actual.asMap();
         }
