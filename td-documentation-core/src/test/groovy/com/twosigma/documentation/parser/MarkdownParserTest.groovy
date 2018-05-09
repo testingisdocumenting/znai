@@ -12,7 +12,7 @@ import static com.twosigma.testing.Ddjt.throwException
  * @author mykola
  */
 class MarkdownParserTest {
-    static final TestComponentsRegistry componentsRegistry = new TestComponentsRegistry()
+    static final TestComponentsRegistry componentsRegistry = TestComponentsRegistry.INSTANCE
     static final MarkupParser parser = new MarkdownParser(componentsRegistry)
 
     private List<Map> content
@@ -44,7 +44,7 @@ class MarkdownParserTest {
     }
 
     @Test
-    void "link to a unsupported location"() {
+    void "link to an unsupported location"() {
         code {
             parse("[label](../test)")
         } should throwException(~/Do not use .. based urls: ..\/test/)
@@ -79,6 +79,14 @@ class MarkdownParserTest {
         content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name#page-section',
                                                          isFile: false, type: 'Link',
                                                          content:[[text: 'label' , type: 'SimpleText']]]]]]
+    }
+
+    @Test
+    void "link to a local file"() {
+        parse("[download](file.txt)")
+        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/file.txt',
+                                                         isFile: true, type: 'Link',
+                                                         content:[[text: 'download' , type: 'SimpleText']]]]]]
     }
 
     @Test

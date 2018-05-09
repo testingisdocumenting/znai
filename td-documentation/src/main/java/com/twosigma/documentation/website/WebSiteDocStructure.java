@@ -71,16 +71,6 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     @Override
-    public String prefixUrlWithProductId(String url) {
-        url = url.toLowerCase();
-        if (url.startsWith("http")) {
-            return url;
-        }
-
-        return "/" + docMeta.getId() + "/" + url;
-    }
-
-    @Override
     public void registerGlobalAnchor(Path sourcePath, String anchorId) {
         Path existingPath = globalAnchorPathById.get(anchorId);
 

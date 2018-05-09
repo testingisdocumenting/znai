@@ -41,11 +41,6 @@ class TestDocStructure implements DocStructure {
     }
 
     @Override
-    String prefixUrlWithProductId(String url) {
-        return "/test-doc/${url}"
-    }
-
-    @Override
     void registerGlobalAnchor(Path sourcePath, String anchorId) {
 
     }

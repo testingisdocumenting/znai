@@ -7,6 +7,7 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
+import com.twosigma.documentation.structure.DocStructure;
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.JsonUtils;
 
@@ -21,10 +22,10 @@ import java.util.stream.Stream;
  * @author mykola
  */
 public class ImageIncludePlugin implements IncludePlugin {
-    private Path imagePath;
     private Path annotationsPath;
     private Path slidesPath;
     private ResourcesResolver resourceResolver;
+    private AuxiliaryFile auxiliaryFile;
 
     @Override
     public String id() {
@@ -42,8 +43,10 @@ public class ImageIncludePlugin implements IncludePlugin {
                                 Path markupPath,
                                 PluginParams pluginParams) {
         resourceResolver = componentsRegistry.resourceResolver();
-        String imagePathValue = pluginParams.getFreeParam();
-        imagePath = resourceResolver.fullPath(imagePathValue);
+        DocStructure docStructure = componentsRegistry.docStructure();
+        String imagePath = pluginParams.getFreeParam();
+
+        auxiliaryFile = resourceResolver.runtimeAuxiliaryFile(imagePath);
 
         String annotationsPathValue = pluginParams.getOpts().get("annotationsPath");
         String slidesPathValue = pluginParams.getOpts().get("slidesPath");
@@ -53,11 +56,10 @@ public class ImageIncludePlugin implements IncludePlugin {
 
         Map<String, ?> annotations = annotationsPath == null ? null : JsonUtils.deserializeAsMap(FileUtils.fileTextContent(annotationsPath));
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
-        props.put("imageSrc", componentsRegistry.docStructure().prefixUrlWithProductId(
-                resourceResolver.docRootRelativePath(imagePath).toString()));
+        props.put("imageSrc", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
 
         props.put("shapes", annotations != null ? annotations.get("shapes") : Collections.emptyList());
-        setWidthHeight(props, annotations, imagePathValue);
+        setWidthHeight(props, annotations, imagePath);
 
         return PluginResult.docElement("AnnotatedImage", props);
     }
@@ -72,7 +74,7 @@ public class ImageIncludePlugin implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.concat(Stream.of(AuxiliaryFile.runTime(imagePath)), annotationsPath != null ?
-                Stream.of(AuxiliaryFile.builtTime(annotationsPath)) : Stream.empty());
+        return Stream.concat(Stream.of(auxiliaryFile),
+                annotationsPath != null ? Stream.of(AuxiliaryFile.builtTime(annotationsPath)) : Stream.empty());
     }
 }

@@ -56,6 +56,11 @@ public class MultipleLocationsResourceResolver implements ResourcesResolver {
     }
 
     @Override
+    public boolean isInsideDoc(Path path) {
+        return path.toAbsolutePath().startsWith(docRootPath);
+    }
+
+    @Override
     public boolean exists(String path) {
         return allLocationsStream(path).anyMatch(Files::exists);
     }

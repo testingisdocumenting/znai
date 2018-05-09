@@ -15,10 +15,7 @@ class TestResourceResolver implements ResourcesResolver {
     private Path root
 
     TestResourceResolver(Path root) {
-        this.root = root
-    }
-
-    TestResourceResolver() {
+        this.root = root.toAbsolutePath()
     }
 
     @Override
@@ -44,6 +41,11 @@ class TestResourceResolver implements ResourcesResolver {
     @Override
     Path docRootRelativePath(Path path) {
         return path.fileName
+    }
+
+    @Override
+    boolean isInsideDoc(Path path) {
+        return path.toAbsolutePath().startsWith(root)
     }
 
     @Override

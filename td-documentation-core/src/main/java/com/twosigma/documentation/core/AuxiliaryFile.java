@@ -1,29 +1,33 @@
 package com.twosigma.documentation.core;
 
 import java.nio.file.Path;
+import java.util.Objects;
 
 /**
  * @author mykola
  */
 public class AuxiliaryFile {
-    private Path path;
+    private final Path path;
+    private Path deployRelativePath;
     private boolean requiresDeployment;
 
     public static AuxiliaryFile builtTime(Path path) {
-        return new AuxiliaryFile(path, false);
+        return new AuxiliaryFile(path, null,false);
     }
 
     /**
      * file that is required at documentation hosting time and thus it will be copied to the deployment
      * @param path file path
+     * @param deployRelativePath relative path to use for deployment
      * @return auxiliary file instance
      */
-    public static AuxiliaryFile runTime(Path path) {
-        return new AuxiliaryFile(path, true);
+    public static AuxiliaryFile runTime(Path path, Path deployRelativePath) {
+        return new AuxiliaryFile(path, deployRelativePath,true);
     }
 
-    private AuxiliaryFile(Path path, boolean requiresDeployment) {
+    private AuxiliaryFile(Path path, Path deployRelativePath, boolean requiresDeployment) {
         this.path = path;
+        this.deployRelativePath = deployRelativePath;
         this.requiresDeployment = requiresDeployment;
     }
 
@@ -38,20 +42,14 @@ public class AuxiliaryFile {
         }
 
         AuxiliaryFile that = (AuxiliaryFile) o;
-
-        if (requiresDeployment != that.requiresDeployment) {
-            return false;
-        }
-
-        return path.equals(that.path);
+        return requiresDeployment == that.requiresDeployment &&
+                Objects.equals(path, that.path) &&
+                Objects.equals(deployRelativePath, that.deployRelativePath);
     }
 
     @Override
     public int hashCode() {
-        int result = path.hashCode();
-        result = 31 * result + (requiresDeployment ? 1 : 0);
-
-        return result;
+        return Objects.hash(path, deployRelativePath, requiresDeployment);
     }
 
     public Path getPath() {
@@ -62,10 +60,15 @@ public class AuxiliaryFile {
         return requiresDeployment;
     }
 
+    public Path getDeployRelativePath() {
+        return deployRelativePath;
+    }
+
     @Override
     public String toString() {
         return "AuxiliaryFile{" +
                 "path=" + path +
+                ", deployRelativePath='" + deployRelativePath + '\'' +
                 ", requiresDeployment=" + requiresDeployment +
                 '}';
     }

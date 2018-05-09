@@ -14,12 +14,12 @@ class AuxiliaryFilesRegistryTest {
 
         def tocItem = new TocItem("", "")
         def path = Paths.get("thePath")
-        def afRequiringDeployment = AuxiliaryFile.runTime(path)
+        def afRequiringDeployment = AuxiliaryFile.runTime(path, path)
         def afNotRequiringDeployment = AuxiliaryFile.builtTime(path)
 
         def pathAssertions = {
             registry.requiresDeployment(path).should == true
-            registry.getAuxiliaryFilePathsRequiringDeployment().anyMatch { it == path }.should == true
+            registry.getAuxiliaryFilesForDeployment().anyMatch { it.path == path }.should == true
         }
 
         registry.updateFileAssociations(tocItem, afRequiringDeployment)

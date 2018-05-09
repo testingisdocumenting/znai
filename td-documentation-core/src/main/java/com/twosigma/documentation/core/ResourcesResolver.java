@@ -2,6 +2,7 @@ package com.twosigma.documentation.core;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author mykola
@@ -16,5 +17,18 @@ public interface ResourcesResolver {
     Path fullPath(String path);
     Path docRootRelativePath(Path path);
 
+    boolean isInsideDoc(Path path);
+
     boolean exists(String path);
+
+    default AuxiliaryFile runtimeAuxiliaryFile(String origin) {
+        Path fullPath = fullPath(origin);
+        Path docRelativePath = docRootRelativePath(fullPath);
+
+        Path deployRelativePath = isInsideDoc(fullPath) ?
+                docRelativePath:
+                Paths.get(origin);
+
+        return AuxiliaryFile.runTime(fullPath, deployRelativePath);
+    }
 }

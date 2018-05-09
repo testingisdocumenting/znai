@@ -32,8 +32,12 @@ public class AuxiliaryFilesRegistry {
         auxiliaryFileListeners.forEach(listener -> listener.onAuxiliaryFile(auxiliaryFile));
     }
 
-    public Stream<Path> getAuxiliaryFilePathsRequiringDeployment() {
-        return auxiliaryFiles.values().stream().filter(AuxiliaryFile::isDeploymentRequired).map(AuxiliaryFile::getPath);
+    public AuxiliaryFile auxiliaryFileByPath(Path path) {
+        return auxiliaryFiles.get(path);
+    }
+
+    public Stream<AuxiliaryFile> getAuxiliaryFilesForDeployment() {
+        return auxiliaryFiles.values().stream().filter(AuxiliaryFile::isDeploymentRequired);
     }
 
     public boolean requiresDeployment(Path path) {

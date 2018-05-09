@@ -229,21 +229,21 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onImage(String title, String destination, String alt) {
+        DocStructure docStructure = componentsRegistry.docStructure();
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
+        AuxiliaryFile auxiliaryFile = resourcesResolver.runtimeAuxiliaryFile(destination);
 
         BufferedImage image = resourcesResolver.imageContent(destination);
-        Path imageFullPath = resourcesResolver.fullPath(destination);
 
         append(DocElementType.IMAGE, "title", title,
-                "destination", componentsRegistry.docStructure().prefixUrlWithProductId(
-                        resourcesResolver.docRootRelativePath(imageFullPath).toString()),
+                "destination", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()),
                 "alt", alt,
                 "inlined", true,
                 "width", image.getWidth(),
                 "height", image.getHeight());
 
         if (! destination.startsWith("http")) {
-            auxiliaryFiles.add(AuxiliaryFile.runTime(imageFullPath));
+            auxiliaryFiles.add(auxiliaryFile);
         }
     }
 
@@ -424,10 +424,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
         DocStructure docStructure = componentsRegistry.docStructure();
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
 
-        Path fullPath = resourcesResolver.fullPath(url);
-        auxiliaryFiles.add(AuxiliaryFile.runTime(fullPath));
+        AuxiliaryFile auxiliaryFile = resourcesResolver.runtimeAuxiliaryFile(url);
+        auxiliaryFiles.add(auxiliaryFile);
 
-        return docStructure.fullUrl(resourcesResolver.docRootRelativePath(fullPath).toString());
+        return docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString());
     }
 }
 

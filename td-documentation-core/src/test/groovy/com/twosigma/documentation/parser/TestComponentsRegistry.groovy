@@ -6,6 +6,8 @@ import com.twosigma.documentation.core.ResourcesResolver
 import com.twosigma.documentation.parser.commonmark.MarkdownParser
 import com.twosigma.documentation.structure.DocStructure
 
+import java.nio.file.Paths
+
 /**
  * @author mykola
  */
@@ -15,6 +17,9 @@ class TestComponentsRegistry implements ComponentsRegistry {
     private TestDocStructure docStructure = new TestDocStructure()
     MarkupParser defaultParser = new TestMarkupParser()
     MarkupParser markdownParser = new TestMarkdownParser()
+
+    private TestComponentsRegistry() {
+    }
 
     @Override
     MarkupParser defaultParser() {
@@ -33,7 +38,7 @@ class TestComponentsRegistry implements ComponentsRegistry {
 
     @Override
     ResourcesResolver resourceResolver() {
-        return new TestResourceResolver()
+        return new TestResourceResolver(Paths.get(""))
     }
 
     TestDocStructure getValidator() {

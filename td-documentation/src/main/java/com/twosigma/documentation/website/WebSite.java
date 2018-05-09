@@ -182,7 +182,7 @@ public class WebSite {
 
     public void redeployAuxiliaryFileIfRequired(Path path) {
         if (auxiliaryFilesRegistry.requiresDeployment(path)) {
-            deployAuxiliaryFile(path);
+            deployAuxiliaryFile(auxiliaryFilesRegistry.auxiliaryFileByPath(path));
         }
     }
 
@@ -393,13 +393,12 @@ public class WebSite {
 
     private void deployAuxiliaryFiles() {
         reportPhase("deploying auxiliary files (e.g. images)");
-        auxiliaryFilesRegistry.getAuxiliaryFilePathsRequiringDeployment().forEach(this::deployAuxiliaryFile);
+        auxiliaryFilesRegistry.getAuxiliaryFilesForDeployment().forEach(this::deployAuxiliaryFile);
     }
 
-    private void deployAuxiliaryFile(Path auxiliaryFilePath) {
-        Path relative = resourceResolver.docRootRelativePath(auxiliaryFilePath);
+    private void deployAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
         try {
-            deployer.deploy(relative, Files.readAllBytes(auxiliaryFilePath));
+            deployer.deploy(auxiliaryFile.getDeployRelativePath(), Files.readAllBytes(auxiliaryFile.getPath()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
