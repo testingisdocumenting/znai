@@ -65,7 +65,7 @@ public class ColumnsFencePlugin implements FencePlugin {
         columnsParserResult.add(parserResult);
 
         Map<String, Object> column = new LinkedHashMap<>();
-        column.put("content", parserResult.getDocElement().getContent().stream().map(DocElement::toMap).collect(toList()));
+        column.put("content", parserResult.getDocElement().contentToListOfMaps());
 
         return column;
     }

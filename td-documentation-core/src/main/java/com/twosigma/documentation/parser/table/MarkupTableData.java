@@ -1,6 +1,7 @@
 package com.twosigma.documentation.parser.table;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -28,6 +29,10 @@ public class MarkupTableData {
 
     public Stream<Object> allValuesStream() {
         return data.stream().flatMap(row -> row.getData().stream());
+    }
+
+    public <E> Stream<E> mapRows(Function<Row, E> converter) {
+        return data.stream().map(converter);
     }
 
     public String allText() {

@@ -29,6 +29,11 @@ public class Row {
         return data;
     }
 
+    @SuppressWarnings("unchecked")
+    public <E> E get(int idx) {
+        return (E) data.get(idx);
+    }
+
     public Row onlyWithIdxs(List<Integer> idxs) {
         return new Row(idxs.stream().map(data::get).collect(toList()));
     }

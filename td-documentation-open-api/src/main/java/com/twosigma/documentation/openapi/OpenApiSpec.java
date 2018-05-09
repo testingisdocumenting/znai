@@ -2,7 +2,6 @@ package com.twosigma.documentation.openapi;
 
 import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
-import com.twosigma.documentation.parser.docelement.DocElement;
 import com.twosigma.utils.JsonUtils;
 
 import java.nio.file.Paths;
@@ -222,6 +221,6 @@ public class OpenApiSpec {
         }
 
         MarkupParserResult parserResult = markdownParser.parse(Paths.get(""), markdown.toString());
-        return parserResult.getDocElement().getContent().stream().map(DocElement::toMap).collect(toList());
+        return parserResult.getDocElement().contentToListOfMaps();
     }
 }

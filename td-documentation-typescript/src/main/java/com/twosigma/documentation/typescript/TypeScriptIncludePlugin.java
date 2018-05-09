@@ -7,7 +7,6 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.commonmark.MarkdownParser;
-import com.twosigma.documentation.parser.docelement.DocElement;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -96,8 +95,7 @@ public class TypeScriptIncludePlugin implements IncludePlugin {
         map.put("type", p.getType());
 
         MarkupParserResult markupParserResult = markdownParser.parse(fullPath, p.getDocumentation());
-        map.put("description", markupParserResult.getDocElement()
-                .getContent().stream().map(DocElement::toMap).collect(toList()));
+        map.put("description", markupParserResult.getDocElement().contentToListOfMaps());
 
         return map;
     }

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
@@ -55,7 +54,7 @@ public class MarkupParserResult {
     }
 
     public List<Map<String, Object>> contentToListOfMaps() {
-        return docElement.getContent().stream().map(DocElement::toMap).collect(toList());
+        return docElement.contentToListOfMaps();
     }
 
     public List<AuxiliaryFile> getAuxiliaryFiles() {
