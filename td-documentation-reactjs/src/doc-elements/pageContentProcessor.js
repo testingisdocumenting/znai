@@ -9,6 +9,10 @@ function mergeMetaIntoContent(pageContent, meta) {
     let currentMeta = meta
 
     const result = []
+    if (!pageContent) {
+        return result
+    }
+
     for (let i = 0, len = pageContent.length; i < len; i++) {
         const el = pageContent[i]
         if (el.type === 'Meta') {
