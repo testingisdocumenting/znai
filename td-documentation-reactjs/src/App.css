@@ -38,8 +38,7 @@
     --mdoc-keyword-color: #000080;
     --mdoc-number-color: #0000ff;
     --mdoc-string-color: #008000;
-    --mdoc-highlighted-background-color: #ffb06f;
-    --mdoc-highlighted-color: #444;
+    --mdoc-highlighted-background-color: rgba(100, 180, 250, 0.3);
     --mdoc-property-color: #660e7a;
     --mdoc-punctuation-color: #888;
 

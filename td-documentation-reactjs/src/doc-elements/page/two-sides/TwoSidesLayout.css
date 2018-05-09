@@ -25,8 +25,7 @@
     --mdoc-string-color: #678558;
     --mdoc-punctuation-color: #8f9aa7;
     --mdoc-number-color: #6998bc;
-    --mdoc-highlighted-background-color: #714738;
-    --mdoc-highlighted-color: #a6a6a6;
+    --mdoc-highlighted-background-color: rgba(100, 180, 250, 0.2);
 
     color: var(--mdoc-regular-text-color);
     background-color: var(--mdoc-inversed-background-color);

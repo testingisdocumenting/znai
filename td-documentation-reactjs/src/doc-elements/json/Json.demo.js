@@ -41,5 +41,7 @@ export function jsonDemo(registry) {
         .add('nested record', <Json data={objectNestedData} paths={['root.key2.key22', 'root.key3.key31']}/>)
         .add('nested record with long name', <Json data={objectNestedDataLongNames}/>)
         .add('array of records within object', <Json data={arrayOfObjectWithinObjectData}/>)
+        .add('with read more', <Json data={arrayOfObjectWithinObjectData} readMore={true}/>)
+        .add('with line highlights', <Json data={arrayOfObjectWithinObjectData} highlight={[1, 3]}/>)
         .add('array of records', <Json data={arrayOfObject}/>)
 }

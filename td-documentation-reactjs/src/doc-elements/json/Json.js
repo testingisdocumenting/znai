@@ -7,13 +7,14 @@ import SimpleCodeSnippet from '../code-snippets/SimpleCodeSnippet'
 
 import './Json.css'
 
-const Json = ({data, paths, title}) => {
+const Json = ({data, paths, title, ...props}) => {
     const lines = printJson('root', data, paths)
 
     return (
         <SnippetContainer linesOfCode={lines}
                           title={title}
-                          snippetComponent={SimpleCodeSnippet} />
+                          snippetComponent={SimpleCodeSnippet}
+                          {...props}/>
     )
 }
 

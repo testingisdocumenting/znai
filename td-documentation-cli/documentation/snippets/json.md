@@ -25,6 +25,25 @@ Use `title` property to specify a title.
     
 :include-json: book-store.json {include: "$..book[0,1]", title: "Books"}
 
+# Read More
+
+Use `readMore` to show only first lines of JSON. **Optional** `readMoreVisibleLines` can be specified to set 
+the initial number of lines to display 
+
+    :include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}
+
+:include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}
+
+# Highlights
+
+Additionally to highlighting a specific JSON value using `paths`, you can 
+(similarly to [regular code snippets](snippets/external-code-snippets#highlights)) highlight 
+a line by text match or by giving a line index.
+
+    :include-json: book-store.json {highlight: ["category", 2]}
+    
+:include-json: book-store.json {highlight: ["category", 2]}
+
 
 # Test Results
 
