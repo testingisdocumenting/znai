@@ -1,5 +1,6 @@
 function startsWithIcon(content) {
-    return content.length && content[0].type === 'Paragraph' &&
+    return content &&
+            content.length && content[0].type === 'Paragraph' &&
             content[0].content.length && content[0].content[0].type === 'Icon'
 }
 
