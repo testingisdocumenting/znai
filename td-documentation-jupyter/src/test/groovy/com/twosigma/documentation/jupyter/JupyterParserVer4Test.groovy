@@ -12,7 +12,7 @@ class JupyterParserVer4Test {
     static void init() {
         JupyterParser parser = new JupyterParserVer4()
         notebook = parser.parse(JsonUtils.deserializeAsMap(
-                ResourceUtils.textContent("jupyter-notebook.json")))
+                ResourceUtils.textContent("jupyter-notebook.ipynb")))
     }
 
     @Test
@@ -36,7 +36,6 @@ class JupyterParserVer4Test {
     @Test
     void "should detect console output"() {
         def output = notebook.cells[1].outputs[0]
-        output.type.should == 'stream'
         output.format.should == 'text'
         output.content.should == '   a   b   c\n' +
                 '0  1   2   3\n' +
@@ -46,7 +45,6 @@ class JupyterParserVer4Test {
     @Test
     void "should extract html from data output"() {
         def htmlOutput = notebook.cells[2].outputs[0]
-        htmlOutput.type.should == 'display_data'
         htmlOutput.format.should == 'html'
         htmlOutput.content.should == '<table border="1" class="dataframe">\n' +
                 '  <thead>\n' +

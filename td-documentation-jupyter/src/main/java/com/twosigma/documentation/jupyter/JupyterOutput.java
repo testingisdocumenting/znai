@@ -2,20 +2,15 @@ package com.twosigma.documentation.jupyter;
 
 public class JupyterOutput {
     public static final String HTML_FORMAT = "html";
+    public static final String SVG_FORMAT = "svg";
     public static final String TEXT_FORMAT = "text";
 
-    private final String type;
     private final String format;
     private final String content;
 
-    public JupyterOutput(String type, String format, String content) {
-        this.type = type;
+    public JupyterOutput(String format, String content) {
         this.format = format;
         this.content = content;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public String getFormat() {

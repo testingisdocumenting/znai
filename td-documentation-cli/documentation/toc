@@ -30,6 +30,7 @@ layout
     columns
     templates
     two-sides-pages
+    jupyter-notebook-two-sides
 visuals
     smart-bullet-points
     icons

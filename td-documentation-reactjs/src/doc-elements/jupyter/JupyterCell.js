@@ -2,6 +2,8 @@ import React from 'react'
 import JupyterCodeCell from './JupyterCodeCell'
 import JupyterHtmlCell from './JupyterHtmlCell'
 import JupyterTextCell from './JupyterTextCell'
+import JupyterEmptyCell from './JupyterEmptyCell'
+import JupyterSvgCell from './JupyterSvgCell'
 
 const JupyterCell = (props) => {
     const Cell = cellComponent(props)
@@ -23,7 +25,11 @@ function cellComponent(cell) {
         return JupyterHtmlCell
     }
 
-    return JupyterCodeCell
+    if (cell.svg) {
+        return JupyterSvgCell
+    }
+
+    return JupyterEmptyCell
 }
 
 export default JupyterCell

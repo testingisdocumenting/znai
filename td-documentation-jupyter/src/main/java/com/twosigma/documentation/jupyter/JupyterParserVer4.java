@@ -8,6 +8,7 @@ import java.util.Objects;
 import static com.twosigma.documentation.jupyter.JupyterCell.CODE_TYPE;
 import static com.twosigma.documentation.jupyter.JupyterCell.MARKDOWN_TYPE;
 import static com.twosigma.documentation.jupyter.JupyterOutput.HTML_FORMAT;
+import static com.twosigma.documentation.jupyter.JupyterOutput.SVG_FORMAT;
 import static com.twosigma.documentation.jupyter.JupyterOutput.TEXT_FORMAT;
 import static java.util.stream.Collectors.toList;
 
@@ -59,24 +60,25 @@ public class JupyterParserVer4 implements JupyterParser {
         String type = outputContent.get("output_type").toString();
         switch (type) {
             case "stream":
-                return new JupyterOutput(type, TEXT_FORMAT,
-                        joinLines(outputContent.get("text")));
-            case "display_data":
-                return new JupyterOutput(type, HTML_FORMAT,
-                        parseDisplayData((Map<String, ?>) outputContent.get("data")));
+                return new JupyterOutput(TEXT_FORMAT, joinLines(outputContent.get("text")));
+            default:
+                return parseOutputData((Map<String, ?>) outputContent.get("data"));
         }
-
-        return new JupyterOutput(type, TEXT_FORMAT, "<can't parse " + type + ">");
     }
 
-    private String parseDisplayData(Map<String, ?> data) {
+    private JupyterOutput parseOutputData(Map<String, ?> data) {
         Object html = data.get("text/html");
         if (html != null) {
-            return joinLines(html);
+            return new JupyterOutput(HTML_FORMAT, joinLines(html));
+        }
+
+        Object svg = data.get("image/svg+xml");
+        if (svg != null) {
+            return new JupyterOutput(SVG_FORMAT, joinLines(svg));
         }
 
         Object text = data.get("text/plain");
-        return text != null ? joinLines(text) : "";
+        return new JupyterOutput(TEXT_FORMAT, joinLines(text));
     }
 
     @SuppressWarnings("unchecked")

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './JupyterCodeCell.css'
+
 const JupyterCodeCell = ({sourceTokens, elementsLibrary}) => {
     return (
         <div className="jupyter-code">

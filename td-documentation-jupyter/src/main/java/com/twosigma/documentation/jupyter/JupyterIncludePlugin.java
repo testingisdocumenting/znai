@@ -20,7 +20,6 @@ import java.util.stream.Stream;
 
 import static com.twosigma.documentation.jupyter.JupyterCell.CODE_TYPE;
 import static com.twosigma.documentation.jupyter.JupyterCell.MARKDOWN_TYPE;
-import static com.twosigma.documentation.jupyter.JupyterOutput.HTML_FORMAT;
 import static com.twosigma.documentation.jupyter.JupyterOutput.TEXT_FORMAT;
 
 public class JupyterIncludePlugin implements IncludePlugin {
@@ -28,6 +27,7 @@ public class JupyterIncludePlugin implements IncludePlugin {
     private MarkdownParser markdownParser;
     private Path path;
     private String lang;
+    private boolean isStoryFirst;
 
     @Override
     public String id() {
@@ -43,6 +43,8 @@ public class JupyterIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         markdownParser = componentsRegistry.markdownParser();
         codeTokenizer = componentsRegistry.codeTokenizer();
+
+        isStoryFirst = pluginParams.getOpts().get("storyFirst", false);
 
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         path = resourcesResolver.fullPath(pluginParams.getFreeParam());
@@ -61,27 +63,64 @@ public class JupyterIncludePlugin implements IncludePlugin {
     }
 
     private Stream<DocElement> convertToDocElements(JupyterCell cell) {
-        return Stream.concat(
-                createInputDocElement(cell),
-                cell.getOutputs().stream().map(this::createOutputDocElement));
+        Stream<DocElement> markdownDocElements = createMarkdownDocElements(cell);
+
+        Stream<DocElement> inputElements = createInputDocElement(cell);
+
+        Stream<DocElement> outputElements = cell.getOutputs().isEmpty() ?
+                Stream.of(createEmptyOutputDocElement()) :
+                cell.getOutputs().stream().map(this::createOutputDocElement);
+
+        return isStoryFirst ?
+                Stream.concat(Stream.concat(markdownDocElements, outputElements), inputElements):
+                Stream.concat(Stream.concat(markdownDocElements, inputElements), outputElements);
+    }
+
+    private Stream<DocElement> createMarkdownDocElements(JupyterCell cell) {
+        return cell.getType().equals(MARKDOWN_TYPE) ?
+                markdownParser.parse(path, cell.getInput()).getDocElement().getContent().stream() :
+                Stream.empty();
     }
 
     private Stream<DocElement> createInputDocElement(JupyterCell cell) {
-        if (cell.getType().equals(MARKDOWN_TYPE)) {
-            return markdownParser.parse(path, cell.getInput()).getDocElement().getContent().stream();
+        if (isMarkdown(cell)) {
+            return Stream.empty();
         }
 
         Map<String, Object> props = new LinkedHashMap<>();
-        props.put("type", cell.getType());
+        props.put("cellType", cell.getType());
         props.putAll(convertInputData(cell));
+
+        if (isStoryFirst) {
+            props.putAll(createMetaRight());
+        }
 
         return Stream.of(docElementCell(props));
     }
 
+    private boolean isMarkdown(JupyterCell cell) {
+        return cell.getType().equals(MARKDOWN_TYPE);
+    }
+
     private DocElement createOutputDocElement(JupyterOutput output) {
         Map<String, Object> props = new LinkedHashMap<>();
-        props.put("type", output.getType());
+        props.put("cellType", "output");
         props.putAll(convertOutputData(output));
+
+        if (!isStoryFirst) {
+            props.putAll(createMetaRight());
+        }
+
+        return docElementCell(props);
+    }
+
+    private DocElement createEmptyOutputDocElement() {
+        Map<String, Object> props = new LinkedHashMap<>();
+        props.put("cellType", "empty-output");
+
+        if (!isStoryFirst) {
+            props.putAll(createMetaRight());
+        }
 
         return docElementCell(props);
     }
@@ -91,6 +130,13 @@ public class JupyterIncludePlugin implements IncludePlugin {
         props.forEach(element::addProp);
 
         return element;
+    }
+
+    private Map<String, ?> createMetaRight() {
+        Map<String, Object> meta = new LinkedHashMap<>();
+        meta.put("rightSide", true);
+
+        return Collections.singletonMap("meta", meta);
     }
 
     private Map<String, Object> convertInputData(JupyterCell cell) {
@@ -105,13 +151,6 @@ public class JupyterIncludePlugin implements IncludePlugin {
     }
 
     private Map<String, Object> convertOutputData(JupyterOutput output) {
-        switch (output.getFormat()) {
-            case HTML_FORMAT:
-                return Collections.singletonMap("html", output.getContent());
-            case TEXT_FORMAT:
-                return Collections.singletonMap("text", output.getContent());
-            default:
-                return Collections.singletonMap(TEXT_FORMAT, output.getContent());
-        }
+        return Collections.singletonMap(output.getFormat(), output.getContent());
     }
 }

@@ -1,7 +1,7 @@
 .snippet-container {
     flex-direction: column;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: var(--mdoc-snippets-space-above);
+    margin-bottom: var(--mdoc-snippets-space-below);
 }
 
 .snippet-container.wide-screen {
