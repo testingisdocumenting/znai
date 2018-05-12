@@ -69,242 +69,147 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "JSX Elements",
-                    "id": "jsx-elements",
+                    "title": "Code and Output",
+                    "id": "code-and-output",
                     "type": "Section",
                     "content": [
                         {
-                            "lang": "tsx",
-                            "maxLineLength": 84,
-                            "tokens": [
-                                {
-                                    "type": "keyword",
-                                    "content": "import"
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                " PrimaryButton ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "}"
-                                },
-                                " ",
+                            "type": "JupyterCell",
+                            "sourceTokens": [
                                 {
                                     "type": "keyword",
                                     "content": "from"
                                 },
-                                " ",
-                                {
-                                    "type": "string",
-                                    "content": "\u0027my-lib\u0027"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
-                                },
-                                "\n\n",
+                                " pandas ",
                                 {
                                     "type": "keyword",
-                                    "content": "function"
+                                    "content": "import"
                                 },
-                                " ",
+                                " read_csv\n",
                                 {
-                                    "type": "function",
-                                    "content": "buttonsDemo"
+                                    "type": "keyword",
+                                    "content": "from"
                                 },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "registry",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                " ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
-                                "\n    registry\n        ",
+                                " IPython",
                                 {
                                     "type": "punctuation",
                                     "content": "."
                                 },
-                                {
-                                    "type": "function",
-                                    "content": "add"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "string",
-                                    "content": "\u0027primary\u0027"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003c"
-                                },
-                                "PrimaryButton label",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003d"
-                                },
-                                {
-                                    "type": "string",
-                                    "content": "\"Click Me\""
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": "/"
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": "\u003e"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                "\n        ",
-                                {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                {
-                                    "type": "function",
-                                    "content": "add"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                {
-                                    "type": "string",
-                                    "content": "\u0027primary disabled\u0027"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ","
-                                },
-                                " ",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003c"
-                                },
-                                "PrimaryButton label",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003d"
-                                },
-                                {
-                                    "type": "string",
-                                    "content": "\"Click Me\""
-                                },
-                                " disabled",
-                                {
-                                    "type": "operator",
-                                    "content": "\u003d"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "{"
-                                },
+                                "display ",
                                 {
                                     "type": "keyword",
-                                    "content": "true"
+                                    "content": "import"
                                 },
+                                " display"
+                            ]
+                        },
+                        {
+                            "type": "JupyterCell",
+                            "sourceTokens": [
+                                "tran ",
+                                {
+                                    "type": "operator",
+                                    "content": "\u003d"
+                                },
+                                " read_csv",
                                 {
                                     "type": "punctuation",
-                                    "content": "}"
+                                    "content": "("
                                 },
                                 {
-                                    "type": "operator",
-                                    "content": "/"
-                                },
-                                {
-                                    "type": "operator",
-                                    "content": "\u003e"
+                                    "type": "string",
+                                    "content": "\u0027transport.csv\u0027"
                                 },
                                 {
                                     "type": "punctuation",
                                     "content": ")"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": ";"
                                 },
                                 "\n",
                                 {
+                                    "type": "keyword",
+                                    "content": "print"
+                                },
+                                {
                                     "type": "punctuation",
-                                    "content": "}"
+                                    "content": "("
+                                },
+                                "tran",
+                                {
+                                    "type": "punctuation",
+                                    "content": ")"
                                 }
-                            ],
-                            "title": "demo.tsx",
-                            "type": "Snippet"
+                            ]
                         },
                         {
-                            "declarations": [
+                            "type": "JupyterCell",
+                            "text": "   a   b   c\n0  1   2   3\n1  4   5   6\n"
+                        },
+                        {
+                            "type": "JupyterCell",
+                            "sourceTokens": [
+                                "display",
                                 {
-                                    "tagName": "PrimaryButton",
-                                    "attributes": [
+                                    "type": "punctuation",
+                                    "content": "("
+                                },
+                                "tran",
+                                {
+                                    "type": "punctuation",
+                                    "content": ")"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "JupyterCell",
+                            "html": "\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n  \u003c/thead\u003e\n\u003c/table\u003e\n"
+                        }
+                    ]
+                },
+                {
+                    "title": "this is great",
+                    "id": "this-is-great",
+                    "type": "Section",
+                    "content": [
+                        {
+                            "type": "Paragraph",
+                            "content": [
+                                {
+                                    "text": "like good ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "type": "StrongEmphasis",
+                                    "content": [
                                         {
-                                            "name": "label",
-                                            "value": "\"Click Me\""
+                                            "text": "old",
+                                            "type": "SimpleText"
                                         }
                                     ]
                                 },
                                 {
-                                    "tagName": "PrimaryButton",
-                                    "attributes": [
-                                        {
-                                            "name": "label",
-                                            "value": "\"Click Me\""
-                                        },
-                                        {
-                                            "name": "disabled",
-                                            "value": "{true}"
-                                        }
-                                    ]
+                                    "text": " times",
+                                    "type": "SimpleText"
                                 }
-                            ],
-                            "type": "JsxGroup",
-                            "meta": {"rightSide": true}
+                            ]
                         }
                     ]
                 }
             ],
-            "lastModifiedTime": 1523445494000,
+            "lastModifiedTime": 1526086631000,
             "tocItem": {
                 "sectionTitle": "Snippets",
-                "pageTitle": "Typescript",
-                "pageMeta": {
-                    type: ['two-sides']
-                },
-                "fileName": "typescript",
+                "pageTitle": "Jupyter Notebook",
+                "pageMeta": {},
+                "fileName": "jupyter-notebook",
                 "dirName": "snippets",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Parsing",
-                        "id": "parsing"
+                        "title": "Code and Output",
+                        "id": "code-and-output"
                     },
                     {
-                        "title": "Properties",
-                        "id": "properties"
-                    },
-                    {
-                        "title": "JSX Elements",
-                        "id": "jsx-elements"
+                        "title": "this is great",
+                        "id": "this-is-great"
                     }
                 ]
             }
@@ -329,6 +234,7 @@ const TestData = {
                                         },
                                         {
                                             "url": "https://jira/mdoc",
+                                            "isFile": false,
                                             "type": "Link",
                                             "content": [
                                                 {

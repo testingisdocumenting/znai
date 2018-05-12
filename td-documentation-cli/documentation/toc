@@ -19,8 +19,9 @@ snippets
     cpp
     json
     api-parameters
-    CLI
     open-API
+    jupyter-notebook
+    CLI
     math
 layout
     attention-signs

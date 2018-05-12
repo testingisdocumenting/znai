@@ -1,0 +1,9 @@
+.jupyter-html thead tr,
+.jupyter-html table {
+    border: none;
+}
+
+.jupyter-html td,
+.jupyter-html th {
+    padding: 6px
+}

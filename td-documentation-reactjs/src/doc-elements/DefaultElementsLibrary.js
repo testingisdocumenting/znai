@@ -36,6 +36,7 @@ import LangClass from './lang/LangClass'
 import LangFunction from './lang/LangFunction'
 import ApiParameters from './api/ApiParameters'
 import OpenApiOperation from './open-api/operation/OpenApiOperation'
+import JupyterCell from './jupyter/JupyterCell'
 import {registerDocUtilsElements} from './doc-utils/DocUtils'
 import JsxGroup from './jsx/JsxGroup'
 
@@ -135,6 +136,8 @@ library.CliOutput = CliOutput
 presentationElementHandlers.CliOutput = presentationCliOutput
 
 library.ApiParameters = wrappedInContentBlock(ApiParameters)
+
+library.JupyterCell = JupyterCell
 
 library.Footer = Footer
 

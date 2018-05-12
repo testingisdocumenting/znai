@@ -22,6 +22,7 @@ import {snippetsDemo} from './doc-elements/code-snippets/Snippet.demo'
 import {documentationPreparationDemo} from './screens/documentation-preparation/DocumentationPreparation.demo'
 import {setDocMeta} from './doc-elements/docMeta'
 import {landingDemo} from './screens/landing/Landing.demo'
+import {jupyterDemo} from './doc-elements/jupyter/Jupyter.demo'
 
 const docMeta = {
     id: 'preview',
@@ -47,6 +48,7 @@ snippets.registerAsGrid('Lang Function', 0, langFunctionDemo)
 snippets.registerAsGrid('API Parameters', 0, apiParametersDemo)
 snippets.registerAsGrid('Open API', 0, openApiOperationDemo)
 snippets.registerAsGrid('Open API Schema', 0, openApiSchemaDemo)
+snippets.registerAsGrid('Jupyter', 0, jupyterDemo)
 
 const visuals = new Registry('visuals')
 visuals.registerAsTabs('Image Annotations', imageAnnotationDemo)

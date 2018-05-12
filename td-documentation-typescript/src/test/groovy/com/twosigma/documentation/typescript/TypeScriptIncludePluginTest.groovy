@@ -17,5 +17,4 @@ class TypeScriptIncludePluginTest {
         def result = PluginsTestUtils.process(":include-typescript: $params")
         return result*.toMap()
     }
-
 }
