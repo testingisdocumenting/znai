@@ -18,19 +18,21 @@ import java.nio.file.Paths;
  * @author mykola
  */
 public class DocumentationUploadClient {
-    private String docId;
-    private Path deployRoot;
-    private String host;
-    private int port;
+    private final Vertx vertx;
+    private final String docId;
+    private final Path deployRoot;
+    private final String host;
+    private final int port;
 
     public DocumentationUploadClient(String docId, Path deployRoot, String host, int port) {
+        this.vertx = Vertx.vertx();
         this.docId = docId;
         this.deployRoot = deployRoot;
         this.host = host;
         this.port = port;
     }
 
-    public void upload(UploadFinishedHandler onUploadFinish) {
+    public void upload(OnUploadFinishedClientHandler onUploadFinish) {
         Path zipPath = zipDocs(deployRoot);
         upload(zipPath, onUploadFinish);
     }
@@ -38,7 +40,7 @@ public class DocumentationUploadClient {
     private Path zipDocs(Path dirToZip) {
         ConsoleOutputs.out(Color.BLUE, "zipping: ", Color.PURPLE, dirToZip);
 
-        Path zipDestination = Paths.get("for-upload.zip");
+        Path zipDestination = Paths.get(docId + ".zip");
         zipDestination.toFile().deleteOnExit();
         ZipTask zipTask = new ZipTask(dirToZip, zipDestination);
         zipTask.execute();
@@ -46,20 +48,16 @@ public class DocumentationUploadClient {
         return zipDestination;
     }
 
-    private void upload(Path path, UploadFinishedHandler onUploadFinish) {
+    private void upload(Path path, OnUploadFinishedClientHandler onUploadFinish) {
         ConsoleOutputs.out(Color.BLUE, "uploading documentation: ", Color.GREEN,
                 path, Color.BLACK, " to ", Color.PURPLE, docId);
 
-        Vertx vertx = Vertx.vertx();
         HttpClientRequest req = vertx.createHttpClient(new HttpClientOptions()).put(port, host,
-                "/upload/" + docId, resp -> {
-                    handleUploadFinish(resp.statusCode(), onUploadFinish);
-                });
+                "/upload/" + docId, resp -> handleUploadFinish(resp.statusCode(), onUploadFinish));
 
         FileSystem fs = vertx.fileSystem();
         fs.props(path.toString(), ah -> {
             FileProps props = ah.result();
-            System.out.println(props);
 
             long size = props.size();
 
@@ -73,7 +71,7 @@ public class DocumentationUploadClient {
         });
     }
 
-    private void handleUploadFinish(int statusCode, UploadFinishedHandler onUploadFinish) {
+    private void handleUploadFinish(int statusCode, OnUploadFinishedClientHandler onUploadFinish) {
         if (statusCode == 200) {
             ConsoleOutputs.out(Color.BLUE, "upload finished");
         } else {
@@ -81,6 +79,6 @@ public class DocumentationUploadClient {
         }
 
         onUploadFinish.onUpload(statusCode);
+        vertx.close();
     }
-
 }

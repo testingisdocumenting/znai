@@ -7,20 +7,22 @@ import io.vertx.core.file.OpenOptions;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.streams.Pump;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
  * @author mykola
  */
-public class FileUploadHandler implements Handler<HttpServerRequest> {
+public class FileUploadVertxHandler implements Handler<HttpServerRequest> {
     private Vertx vertx;
-    private OnFileUploadHandler fileUploadHandler;
-    private Path destination;
+    private final String docId;
+    private final Path destination;
 
-    public FileUploadHandler(Vertx vertx, Path deployRoot, String docId, OnFileUploadHandler fileUploadHandler) {
+    public FileUploadVertxHandler(Vertx vertx, String docId, Path deployRoot) {
         this.vertx = vertx;
+        this.docId = docId;
         this.destination = deployRoot.resolve(docId + ".zip");
-        this.fileUploadHandler = fileUploadHandler;
     }
 
     @Override
@@ -31,13 +33,22 @@ public class FileUploadHandler implements Handler<HttpServerRequest> {
             AsyncFile file = fh.result();
             Pump pump = Pump.pump(req, file);
             req.endHandler(eh -> file.close(fch -> {
-                System.out.println("uploaded");
                 req.response().end();
-                fileUploadHandler.onUploadFinished(destination);
+
+                OnUploadFinishedServerHandlers.onUploadFinished(docId, destination);
+                deleteUploadedFile();
             }));
 
             pump.start();
             req.resume();
         });
+    }
+
+    private void deleteUploadedFile()  {
+        try {
+            Files.delete(destination);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

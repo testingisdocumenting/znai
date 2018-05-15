@@ -1,4 +1,3 @@
-
 .idea
 .vscode
 /**/.settings
@@ -10,4 +9,5 @@ node_modules
 td-documentation-reactjs/build
 *.iml
 .vertx
+docs-build
 package-lock.json

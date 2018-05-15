@@ -13,6 +13,8 @@ import com.twosigma.documentation.server.landing.LandingDocEntry;
 import com.twosigma.documentation.server.landing.LandingUrlContentHandler;
 import com.twosigma.documentation.server.sockets.JsonWebSocketHandler;
 import com.twosigma.documentation.server.sockets.JsonWebSocketHandlerComposition;
+import com.twosigma.documentation.server.upload.FileUploadVertxHandler;
+import com.twosigma.documentation.server.upload.OnUploadFinishedServerHandlers;
 import com.twosigma.documentation.server.upload.UnzipTask;
 import com.twosigma.documentation.server.urlhandlers.UrlContentHandlers;
 import io.vertx.core.MultiMap;
@@ -56,6 +58,7 @@ public class DocumentationServer {
         documentationPreparationWebSocketHandler = new DocumentationPreparationWebSocketHandler(vertx);
         
         socketHandlers.add(documentationPreparationWebSocketHandler);
+        OnUploadFinishedServerHandlers.add(this::unzip);
     }
 
     public void addSocketHandler(JsonWebSocketHandler socketHandler) {
@@ -80,6 +83,12 @@ public class DocumentationServer {
 
             staticCommonResources.handle(new RoutingContextDecorator(
                     router.route("/" + params.get("docId") + "/static"), ctx));
+        });
+
+        router.route("/upload/:docId").handler(ctx -> {
+            MultiMap params = ctx.request().params();
+            String docId = params.get("docId");
+            new FileUploadVertxHandler(vertx, docId, deployRoot).handle(ctx.request());
         });
 
         router.get("/static/*").handler(staticCommonResources);
@@ -158,13 +167,13 @@ public class DocumentationServer {
         }
     }
 
-    private static void unzip(Path root, String docId, Path path) {
+    private void unzip(String docId, Path path) {
         ConsoleOutputs.out(Color.BLUE, "unzipping docs: ", Color.PURPLE, path, Color.BLACK, " to ",
-                Color.PURPLE, root);
+                Color.PURPLE, deployRoot);
 
-        UnzipTask unzipTask = new UnzipTask(root.resolve(path), root);
+        UnzipTask unzipTask = new UnzipTask(deployRoot.resolve(path), deployRoot);
         unzipTask.execute();
-        ConsoleOutputs.out(Color.BLUE, "unzipped docs: ", Color.PURPLE, root);
+        ConsoleOutputs.out(Color.BLUE, "unzipped docs: ", Color.PURPLE, deployRoot);
     }
 
     // this is entry point for local development and testing

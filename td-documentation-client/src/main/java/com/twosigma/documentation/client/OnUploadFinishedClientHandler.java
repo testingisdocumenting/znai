@@ -3,6 +3,6 @@ package com.twosigma.documentation.client;
 /**
  * @author mykola
  */
-public interface UploadFinishedHandler {
+public interface OnUploadFinishedClientHandler {
     void onUpload(int statusCode);
 }
