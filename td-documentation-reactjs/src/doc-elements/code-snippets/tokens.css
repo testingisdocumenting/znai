@@ -47,12 +47,10 @@
 
 .token.keyword {
     color: var(--mdoc-keyword-color);
-    font-weight: bold;
 }
 
 .token.string {
     color: var(--mdoc-string-color);
-    font-weight: bold;
 }
 
 .token.highlighted {

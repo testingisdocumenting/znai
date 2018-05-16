@@ -1,0 +1,16 @@
+.toc-panel-expand-button {
+    fill: var(--mdoc-toc-panel-collapse-icon-color);
+    cursor: pointer;
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    font-size: 20px;
+    z-index: 1001;
+    transform: rotate(180deg);
+}
+
+.toc-panel-collapse-button {
+    font-size: 20px;
+    fill: var(--mdoc-toc-panel-collapse-icon-color);
+    cursor: pointer;
+}
