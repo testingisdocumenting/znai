@@ -117,7 +117,7 @@
     border-left: 5px solid var(--mdoc-toc-panel-background-color);
     margin-left: 0;
     font-size: 15px;
-    line-height: 31px;
+    line-height: 28px;
     color: var(--mdoc-toc-page-title-color);
     transition: border-color 0.8s;
     text-decoration: none;
