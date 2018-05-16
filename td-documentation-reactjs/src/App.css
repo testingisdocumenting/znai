@@ -8,9 +8,11 @@
     --mdoc-code-text-size: 13px;
     --mdoc-code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 
-    --mdoc-black: #333;
+    --mdoc-black: #383838;
     --mdoc-light-black: #666;
     --mdoc-brand-primary-color: #009AA6;
+
+    --mdoc-link-color: #009AA6;
 
     --mdoc-rest-link-color: #7287b3;
     --mdoc-important-attention: #c52912;
@@ -28,6 +30,17 @@
 
     --mdoc-two-sides-horizontal-spacing: 30px;
 
+    --mdoc-toc-title-color: #152935;
+    --mdoc-toc-title-background-color: #f8faf9;
+    --mdoc-toc-panel-background-color: #f8faf9;
+    --mdoc-toc-panel-border-color: #e9e9e9;
+    --mdoc-toc-selected-text-color: #00747a;
+    --mdoc-toc-selected-border-color: var(--mdoc-brand-primary-color);
+    --mdoc-toc-chapter-title-color: #5a6872;
+    --mdoc-toc-page-title-color: #152935;
+    --mdoc-toc-page-section-color: #152935;
+    --mdoc-toc-panel-collapse-icon-color: #798186;
+
     --mdoc-snippets-outer-border-color: #ddd;
     --mdoc-snippets-inner-border-color: #f3f3f3;
     --mdoc-snippets-title-color: #555;
@@ -37,10 +50,10 @@
     --mdoc-default-code-block-color: var(--mdoc-black);
     --mdoc-class-color: #383b3f;
     --mdoc-function-color: #a15b38;
-    --mdoc-keyword-color: #000080;
+    --mdoc-keyword-color: #196180;
     --mdoc-number-color: #0000ff;
     --mdoc-string-color: #008000;
-    --mdoc-highlighted-background-color: rgba(100, 180, 250, 0.3);
+    --mdoc-highlighted-background-color: rgba(241, 255, 42, 0.3);
     --mdoc-property-color: #660e7a;
     --mdoc-punctuation-color: #888;
 
@@ -92,6 +105,7 @@
 
 body {
     font-family: var(--mdoc-regular-font-family);
+    color: var(--mdoc-black);
 }
 
 .emphasis {
@@ -126,3 +140,7 @@ body {
     display: inline-block;
 }
 
+a,
+a:hover {
+    color: var(--mdoc-link-color);
+}

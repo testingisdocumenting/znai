@@ -25,11 +25,11 @@
     min-height: 100vh;
     overflow-x: hidden;
     white-space: nowrap;
-    border-right: 1px solid #eee;
+    border-right: 1px solid var(--mdoc-toc-panel-border-color);
     min-width: 280px;
     max-width: 280px;
 
-    background-color: #4b4f54;
+    background-color: var(--mdoc-toc-panel-background-color);
     color: #fff;
 }
 
@@ -37,13 +37,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    color: var(--mdoc-toc-title-color);
+
     line-height: 40px;
     min-height: 80px;
-    background-color: #383b3f;
-    color: #e7e7e7;
-    border-color: #e7e7e7;
-    border-width: 0 0 1px;
     padding: 10px;
+
+    background-color: var(--mdoc-toc-title-background-color);
+    border-bottom: 1px solid var(--mdoc-toc-panel-border-color);
+
     z-index: 2;
 }
 
@@ -73,10 +76,15 @@
 .toc-menu::-webkit-scrollbar {
     height: 3px;
     width: 3px;
+    display: none;
+}
+
+.toc-menu:hover::-webkit-scrollbar {
+    display: block;
 }
 
 .toc-menu::-webkit-scrollbar-thumb {
-   background: #ACACAC;
+   background: var(--mdoc-toc-panel-border-color);
 }
 
 .toc-menu::-webkit-scrollbar-track {
@@ -95,7 +103,7 @@
     font-size: 14px;
     line-height: 35px;
     margin-bottom: 2px;
-    color: #fff;
+    color: var(--mdoc-toc-chapter-title-color);
     text-transform: uppercase;
     padding-left: 30px;
 }
@@ -106,11 +114,11 @@
 }
 
 .toc-item a {
-    border-left: 5px solid #4b4f54;
+    border-left: 5px solid var(--mdoc-toc-panel-background-color);
     margin-left: 0;
-    font-size: 14px;
-    line-height: 35px;
-    color: #ACACAC;
+    font-size: 15px;
+    line-height: 31px;
+    color: var(--mdoc-toc-page-title-color);
     transition: border-color 0.8s;
     text-decoration: none;
 }
@@ -120,13 +128,13 @@
 }
 
 .toc-item.selected {
-    border-left: 4px solid var(--mdoc-brand-primary-color);
+    border-left: 4px solid var(--mdoc-toc-selected-border-color);
     padding-left: 25px;
     transition: border-color 0.5s;
 }
 
 .toc-item.selected > a {
-    color: #fff;
+    color: var(--mdoc-toc-selected-text-color);
 }
 
 .toc-menu .page-sections {
@@ -141,7 +149,7 @@
 }
 
 .toc-menu .page-sections a {
-    color: #ACACAC;
+    color: var(--mdoc-toc-page-section-color);
     text-decoration: none;
 }
 
@@ -151,42 +159,12 @@
 }
 
 .toc-menu .page-sections .selected a {
-    color: #fff;
+    color: var(--mdoc-toc-selected-text-color);
 }
 
 .toc-panel.collapsed {
     width: 0;
     min-width: 0;
-}
-
-.toc-panel-expand-button {
-    position: fixed;
-    cursor: pointer;
-    color: black;
-    top: -40px;
-    left: 10px;
-    font-size: 20px;
-}
-
-.toc-panel-expand-button.appeared {
-    cursor: pointer;
-    position: fixed;
-    top: 5px;
-    left: 5px;
-    font-size: 20px;
-    z-index: 1001;
-}
-
-.toc-panel-collapse-button {
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.toc-panel-collapse-button.appeared {
-    cursor: pointer;
-    font-size: 20px;
-    height: 26px;
-    transition: left 0.5s;
 }
 
 .preview-icon {

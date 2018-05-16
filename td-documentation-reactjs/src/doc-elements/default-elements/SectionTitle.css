@@ -4,9 +4,8 @@
     margin-top: 55px;
     margin-bottom: 20px;
 
-    color: #000;
+    color: var(--mdoc-black);
     font-weight: bold;
-    text-transform: uppercase;
 }
 
 .section-title .icon {

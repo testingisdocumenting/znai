@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import TocMenu from './TocMenu';
+import PanelCollapseButton from './PanelCollapseButton'
 
 class TocPanel extends Component {
     render() {
@@ -13,8 +14,6 @@ class TocPanel extends Component {
             onHeaderClick} = this.props
 
         const panelClass = "toc-panel" + (collapsed ? " collapsed" : "") + (selected ? " selected" : "")
-        const expandButtonClass = "toc-panel-expand-button glyphicon glyphicon-chevron-right " + (collapsed ? "appeared" : "")
-        const collapseButtonClass = "toc-panel-collapse-button glyphicon glyphicon-chevron-left " + (!collapsed ? "appeared" : "")
 
         return (
             <div className={panelClass}>
@@ -24,9 +23,8 @@ class TocPanel extends Component {
                         <span className="toc-panel-header-title"
                               onClick={onHeaderClick}>{docMeta.title + " " + docMeta.type}</span>
                     </span>
-                    <span className={collapseButtonClass} onClick={this.toggle}/>
+                    <PanelCollapseButton isCollapsed={collapsed} onClick={this.toggle}/>
                 </div>
-                <div className={expandButtonClass} onClick={this.toggle}/>
                 <TocMenu toc={toc}
                          selected={selectedItem}
                          onClickHandler={onTocItemClick}/>
