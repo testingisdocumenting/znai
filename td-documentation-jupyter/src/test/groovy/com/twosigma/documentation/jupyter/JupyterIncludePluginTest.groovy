@@ -34,19 +34,19 @@ class JupyterIncludePluginTest {
         cellTypes.should == [       'type'  | 'cellType'     | 'rightSide'] {
                              _________________________________________________
                              'TestMarkdown' | ''             | false
-                             'JupyterCell'  | 'empty-output' | false
+                             'JupyterCell'  | 'empty-output' | true
 
-                             'JupyterCell'  | 'empty-output' | false
+                             'JupyterCell'  | 'empty-output' | true
                              'JupyterCell'  | 'code'         | true
 
                              'TestMarkdown' | ''             | false
-                             'JupyterCell'  | 'empty-output' | false
+                             'JupyterCell'  | 'empty-output' | true
 
                              'JupyterCell'  | 'output'       | false
                              'JupyterCell'  | 'code'         | true
 
                              'TestMarkdown' | ''             | false
-                             'JupyterCell'  | 'empty-output' | false
+                             'JupyterCell'  | 'empty-output' | true
 
                              'JupyterCell'  | 'output'       | false
                              'JupyterCell'  | 'code'         | true  }

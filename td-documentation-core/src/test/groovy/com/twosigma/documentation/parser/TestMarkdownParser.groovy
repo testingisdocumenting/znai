@@ -19,12 +19,17 @@ class TestMarkdownParser extends MarkdownParser {
 
     @Override
     MarkupParserResult parse(Path path, String markdown) {
-        def page = new DocElement("Page")
-        def element = new DocElement("TestMarkdown", "markdown", markdown)
+        def page = new DocElement('Page')
+        def element = new DocElement('TestMarkdown', 'markdown', markdown)
         page.addChild(element)
 
         def searchEntry = new PageSearchEntry('dummy page section title', SearchScore.STANDARD.text(markdown))
 
         return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta())
+    }
+
+    @Override
+    void parse(Path path, String markdown, ParserHandler handler) {
+        handler.onCustomNode('TestMarkdown', [markdown: markdown])
     }
 }

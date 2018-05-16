@@ -4,6 +4,7 @@ import JupyterHtmlCell from './JupyterHtmlCell'
 import JupyterTextCell from './JupyterTextCell'
 import JupyterEmptyCell from './JupyterEmptyCell'
 import JupyterSvgCell from './JupyterSvgCell'
+import JupyterImgCell from './JupyterImgCell'
 
 const JupyterCell = (props) => {
     const Cell = cellComponent(props)
@@ -27,6 +28,10 @@ function cellComponent(cell) {
 
     if (cell.svg) {
         return JupyterSvgCell
+    }
+
+    if (cell.img) {
+        return JupyterImgCell
     }
 
     return JupyterEmptyCell

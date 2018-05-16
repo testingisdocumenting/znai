@@ -6,6 +6,7 @@ import java.util.Arrays;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.ParserHandlersList;
 import com.twosigma.documentation.search.SearchCrawlerParserHandler;
 import com.twosigma.documentation.structure.PageMeta;
@@ -35,15 +36,13 @@ public class MarkdownParser implements MarkupParser {
     }
 
     public MarkupParserResult parse(Path path, String markdown) {
-        Node node = parser.parse(markdown);
-
         SearchCrawlerParserHandler searchCrawler = new SearchCrawlerParserHandler();
         DocElementCreationParserHandler elementCreationHandler = new DocElementCreationParserHandler(componentsRegistry, path);
 
         ParserHandlersList parserHandler = new ParserHandlersList(elementCreationHandler, searchCrawler);
 
-        MarkdownVisitor visitor = new MarkdownVisitor(componentsRegistry, path, parserHandler);
-        node.accept(visitor);
+        Node node = parser.parse(markdown);
+        MarkdownVisitor visitor = parsePartial(node, path, parserHandler);
 
         YamlFrontMatterVisitor frontMatterVisitor = new YamlFrontMatterVisitor();
         node.accept(frontMatterVisitor);
@@ -59,5 +58,17 @@ public class MarkdownParser implements MarkupParser {
                 searchCrawler.getSearchEntries(),
                 elementCreationHandler.getAuxiliaryFiles(),
                 new PageMeta(frontMatterVisitor.getData()));
+    }
+
+    public void parse(Path path, String markdown, ParserHandler handler) {
+        Node node = parser.parse(markdown);
+        parsePartial(node, path, handler);
+    }
+
+    private MarkdownVisitor parsePartial(Node node, Path path, ParserHandler handler) {
+        MarkdownVisitor visitor = new MarkdownVisitor(componentsRegistry, path, handler);
+        node.accept(visitor);
+
+        return visitor;
     }
 }

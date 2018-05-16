@@ -4,7 +4,7 @@ import './JupyterHtmlCell.css'
 
 const JupyterHtmlCell = ({html, elementsLibrary}) => {
     return (
-        <div className="jupyter-html content-block">
+        <div className="jupyter-cell jupyter-html content-block">
             <div dangerouslySetInnerHTML={{__html: html}}/>
         </div>
     )

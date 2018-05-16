@@ -7,3 +7,8 @@
 .jupyter-html th {
     padding: 6px
 }
+
+.jupyter-html table td,
+.jupyter-html table th {
+    border: 1px solid var(--mdoc-snippets-outer-border-color);
+}

@@ -14,7 +14,7 @@ import java.util.Map;
  * @author mykola
  */
 public class ParserHandlersList implements ParserHandler {
-    private List<ParserHandler> list;
+    private final List<ParserHandler> list;
 
     public ParserHandlersList(ParserHandler... parsers) {
         list = Arrays.asList(parsers);

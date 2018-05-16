@@ -7,9 +7,7 @@ import java.util.Objects;
 
 import static com.twosigma.documentation.jupyter.JupyterCell.CODE_TYPE;
 import static com.twosigma.documentation.jupyter.JupyterCell.MARKDOWN_TYPE;
-import static com.twosigma.documentation.jupyter.JupyterOutput.HTML_FORMAT;
-import static com.twosigma.documentation.jupyter.JupyterOutput.SVG_FORMAT;
-import static com.twosigma.documentation.jupyter.JupyterOutput.TEXT_FORMAT;
+import static com.twosigma.documentation.jupyter.JupyterOutput.*;
 import static java.util.stream.Collectors.toList;
 
 public class JupyterParserVer4 implements JupyterParser {
@@ -75,6 +73,11 @@ public class JupyterParserVer4 implements JupyterParser {
         Object svg = data.get("image/svg+xml");
         if (svg != null) {
             return new JupyterOutput(SVG_FORMAT, joinLines(svg));
+        }
+
+        Object img = data.get("image/png");
+        if (img != null) {
+            return new JupyterOutput(IMG_FORMAT, img.toString());
         }
 
         Object text = data.get("text/plain");
