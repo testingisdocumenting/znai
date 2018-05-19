@@ -9,7 +9,7 @@
 }
 
 .tabs-names-area {
-    border-bottom: 2px solid var(--mdoc-snippets-outer-border-color);
+    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
 }
 
 .tabs-names {
@@ -29,7 +29,7 @@
     padding: 12px 16px;
     display: inline-block;
     font-weight: bold;
-    border-bottom: 2px solid #888888;
+    border-bottom: 3px solid #888888;
 }
 
 .tabs-area .snippet-container .snippet {
