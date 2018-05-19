@@ -25,7 +25,7 @@ class SnippetContainer extends React.Component {
     renderWideMode() {
         const {title} = this.props
 
-        const wideModePadding = <div className="padding">&nbsp;</div>
+        const wideModePadding = <div className="padding"></div>
 
         const className = "snippet-container wide-screen" + (title ? " with-title" : "")
         return (
