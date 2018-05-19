@@ -30,12 +30,12 @@ class SnippetContainer extends React.Component {
         const className = "snippet-container wide-screen" + (title ? " with-title" : "")
         return (
             <div className={className}>
+                {wideModePadding}
                 {title && <div className="title-layer">
-                    {wideModePadding}
-                    <Title title={title}/>
-                    {wideModePadding}
+                    <Title title={title}/>       
                 </div>}
-
+                {wideModePadding}
+                
                 <div className={this.snippetClassName}>
                     <this.props.snippetComponent {...this.props}/>
                 </div>
@@ -57,7 +57,6 @@ function Title({title}) {
     return (
         <div className="title-container content-block">
             <div className="title">{title}</div>
-            <div className="large-filling"/>
         </div>
     )
 }
