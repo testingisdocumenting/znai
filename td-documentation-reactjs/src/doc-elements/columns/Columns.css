@@ -16,6 +16,13 @@
     width: auto;
 }
 
+.column .snippet-container {
+    display: flex;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    grid-template-areas: none;
+}
+
 .column.border {
     border-right: 1px solid var(--mdoc-brand-primary-color);
     margin-right: 20px;

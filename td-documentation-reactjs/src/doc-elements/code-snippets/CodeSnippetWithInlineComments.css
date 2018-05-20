@@ -13,7 +13,7 @@
 .code-bullets {
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 1px;
+    padding: 1px 1px 1px 16px;
 }
 
 .code-bullets.hidden-explanation {
