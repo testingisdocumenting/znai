@@ -21,7 +21,7 @@
 }
 
 .snippet-container .title-layer {
-    background: var(--mdoc-snippets-outer-border-color);
+    background: var(--mdoc-snippets-title-background-color);
 }
 
 .snippet-container.wide-screen .title-layer {
@@ -29,13 +29,13 @@
 }
 
 .snippet-container.wide-screen .title-container.content-block {
-    background: var(--mdoc-snippets-outer-border-color);
+    background: var(--mdoc-snippets-title-background-color);
     margin-left: 0;
     margin-right: 0;
 }
 
 .snippet-container.wide-screen.with-title .padding {
-    background: var(--mdoc-snippets-outer-border-color);
+    background: var(--mdoc-snippets-title-background-color);
     height: 100%;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .snippet-container .title-container {
-    background: var(--mdoc-snippets-outer-border-color);
+    background: var(--mdoc-snippets-title-background-color);
     grid-area: ttl;
 }
 
