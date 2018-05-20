@@ -32,3 +32,11 @@
     background-color: var(--mdoc-inversed-background-color);
     border-left: solid 1px #5b666c;
 }
+
+.page-two-sides-right-part .snippet-container {
+    display: inherit;
+}
+
+.page-two-sides-right-part .snippet-container .snippet { 
+    border-left: none;
+}
