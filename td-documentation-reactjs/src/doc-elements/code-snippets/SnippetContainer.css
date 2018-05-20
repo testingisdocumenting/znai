@@ -3,7 +3,7 @@
     margin-bottom: var(--mdoc-snippets-space-below);
     background: var(--mdoc-snippets-background-color);
     display: grid;
-    grid-template-columns: auto var(--mdoc-single-column-full-width) auto;
+    grid-template-columns: 0 auto 1fr;
     grid-template-rows: auto auto;
     grid-template-areas:
         ". ttl . "
