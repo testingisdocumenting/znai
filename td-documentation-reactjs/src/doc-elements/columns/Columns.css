@@ -21,6 +21,11 @@
     grid-template-columns: none;
     grid-template-rows: none;
     grid-template-areas: none;
+    flex-direction: column;
+}
+
+.column .title-container {
+    margin: 0;
 }
 
 .column.border {
