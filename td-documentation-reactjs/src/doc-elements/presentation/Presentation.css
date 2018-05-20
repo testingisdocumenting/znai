@@ -52,9 +52,6 @@
     color: #999;
 }
 
-.presentation .header .slide-info .presentation-page-title {
-}
-
 .presentation .header .controls {
     display: flex;
     flex: 0 0 80px;
@@ -119,6 +116,10 @@
 .presentation .content-block {
     width: auto;
     margin: 0;
+}
+
+.presentation .snippet-container {
+    background: none;
 }
 
 .presentation .paragraph {
