@@ -33,6 +33,7 @@
 
 .paragraph.attention.note {
     border-left: 3px solid var(--mdoc-brand-primary-color);
+    background: #009ba615;
 }
 
 .paragraph.attention.note .icon-part {
@@ -41,6 +42,7 @@
 
 .paragraph.attention.warning {
     border-left: 3px solid #f0ad4e;
+    background: #f0ac4e15;
 }
 
 .paragraph.attention.warning .icon-part {
@@ -49,6 +51,7 @@
 
 .paragraph.attention.question {
     border-left: 3px solid #59a65a;
+    background: #59a65a15
 }
 
 .paragraph.attention.question .icon-part {
@@ -57,6 +60,7 @@
 
 .paragraph.attention.avoid {
     border-left: 3px solid #d9534f;
+    background: #d9544f18
 }
 
 .paragraph.attention.avoid .icon-part {
