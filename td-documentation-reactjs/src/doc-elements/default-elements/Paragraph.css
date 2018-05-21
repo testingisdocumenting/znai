@@ -29,8 +29,6 @@
 .paragraph.attention .message-part {
     flex: 1;
     max-width: var(--mdoc-single-column-partial-width);
-    position: relative;
-    top: -1px;
 }
 
 .paragraph.attention.note {
