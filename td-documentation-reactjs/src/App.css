@@ -50,11 +50,11 @@
     --mdoc-snippets-space-below: 25px;
 
     --mdoc-default-code-block-color: var(--mdoc-black);
-    --mdoc-class-color: #383b3f;
-    --mdoc-function-color: #a15b38;
+    --mdoc-class-color: #3d3d3f;
+    --mdoc-function-color: #a66f2b;
     --mdoc-keyword-color: #196180;
-    --mdoc-number-color: #0000ff;
-    --mdoc-string-color: #008000;
+    --mdoc-number-color: #2822ad;
+    --mdoc-string-color: #078744;
     --mdoc-highlighted-background-color: rgba(241, 255, 42, 0.3);
     --mdoc-property-color: #660e7a;
     --mdoc-punctuation-color: #888;
