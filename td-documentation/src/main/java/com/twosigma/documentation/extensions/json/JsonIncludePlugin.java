@@ -3,15 +3,15 @@ package com.twosigma.documentation.extensions.json;
 import com.jayway.jsonpath.JsonPath;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginParamsOpts;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
-import com.twosigma.utils.CollectionUtils;
+import com.twosigma.utils.JsonUtils;
 
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -21,6 +21,8 @@ import java.util.stream.Stream;
  */
 public class JsonIncludePlugin implements IncludePlugin {
     private String fileName;
+    private ResourcesResolver resourcesResolver;
+    private Path pathsFilePath;
 
     @Override
     public String id() {
@@ -37,30 +39,40 @@ public class JsonIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
+        resourcesResolver = componentsRegistry.resourceResolver();
+
         fileName = pluginParams.getFreeParam();
-        String json = componentsRegistry.resourceResolver().textContent(fileName);
+        String json = resourcesResolver.textContent(fileName);
 
         String jsonPath = pluginParams.getOpts().get("include", "$");
         Object content = JsonPath.read(json, jsonPath);
 
         Map<String, Object> props = pluginParams.getOpts().toMap();
         props.put("data", content);
-        props.put("paths", highlightedPaths(pluginParams.getOpts().get("paths")));
+        props.put("paths", extractPaths(pluginParams.getOpts()));
 
         return PluginResult.docElement("Json", props);
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(
-                componentsRegistry.resourceResolver().fullPath(fileName)));
+        Stream<AuxiliaryFile> pathsFile = pathsFilePath == null ?
+                Stream.empty() :
+                Stream.of(AuxiliaryFile.builtTime(pathsFilePath));
+
+        return Stream.concat(pathsFile,
+                Stream.of(AuxiliaryFile.builtTime(componentsRegistry.resourceResolver().fullPath(fileName))));
     }
 
-    private List<String> highlightedPaths(String paths) {
-        if (paths == null) {
-            return Collections.emptyList();
+    @SuppressWarnings("unchecked")
+    private List<String> extractPaths(PluginParamsOpts opts) {
+        if (opts.has("pathsFile")) {
+            String filePath = opts.get("pathsFile");
+            pathsFilePath = resourcesResolver.fullPath(filePath);
+
+            return (List<String>) JsonUtils.deserializeAsList(resourcesResolver.textContent(filePath));
         }
 
-        return Arrays.asList(paths.split(","));
+        return opts.getList("paths");
     }
 }
