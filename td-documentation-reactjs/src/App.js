@@ -23,6 +23,7 @@ import {documentationPreparationDemo} from './screens/documentation-preparation/
 import {setDocMeta} from './doc-elements/docMeta'
 import {landingDemo} from './screens/landing/Landing.demo'
 import {jupyterDemo} from './doc-elements/jupyter/Jupyter.demo'
+import {tocPanelDemo} from './doc-elements/structure/TocPanel.demo'
 
 const docMeta = {
     id: 'preview',
@@ -56,6 +57,7 @@ visuals.registerAsTabs('Image Annotations', imageAnnotationDemo)
 const layout = new Registry('layout')
 layout.registerAsTabs('Pages', pagesDemo)
 layout.registerAsGrid('Tabs', 300, tabsDemo)
+layout.registerSingle('TOC', tocPanelDemo)
 
 const screens = new Registry('screens')
 screens.registerAsTabs('Documentation Preparation', documentationPreparationDemo)

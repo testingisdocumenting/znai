@@ -108,16 +108,23 @@
 .toc-item {
     margin-bottom: 3px;
     padding-left: 25px;
+    padding-right: 25px;
 }
 
 .toc-item a {
-    border-left: 5px solid var(--mdoc-toc-panel-background-color);
-    margin-left: 0;
+    display: block;
+
+    color: var(--mdoc-toc-page-title-color);
     font-size: 15px;
     line-height: 28px;
-    color: var(--mdoc-toc-page-title-color);
+
     transition: border-color 0.8s;
     text-decoration: none;
+
+    margin-left: 5px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .toc-item a:hover {
@@ -132,7 +139,6 @@
 
 .toc-item.selected > a {
     color: var(--mdoc-toc-selected-text-color);
-    font-weight: 600;
 }
 
 .toc-menu .page-sections {
