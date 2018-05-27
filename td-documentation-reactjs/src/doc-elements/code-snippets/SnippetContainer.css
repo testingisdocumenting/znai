@@ -74,7 +74,7 @@
     color: var(--mdoc-snippets-title-color);
     display: inline-block;
     padding: 8px 16px;
-    border-left: 1px solid var(--mdoc-light-black);
+    border-left: 1px solid var(--mdoc-snippets-title-left-border-color);
     border-bottom: none;
     font-size: var(--mdoc-code-text-size);
     font-family: var(--mdoc-code-font-family);
