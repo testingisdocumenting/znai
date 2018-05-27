@@ -5,21 +5,24 @@
     margin-bottom: 15px;
 }
 
+.open-api-operation:first-child {
+    margin-top: 0;
+}
+
 .open-api-operation .content-block {
 }
 
 .open-api-operation > .url-and-summary {
-    font-family: var(--mdoc-code-font-family);
-
     display: grid;
 
     grid-template-columns: auto 1fr;
     grid-column-gap: 10px;
+
+    font-size: var(--mdoc-regular-text-size);
 }
 
 .open-api-operation > .url-and-summary > .method {
-    color: var(--mdoc-regular-text-color);
-    font-size: var(--mdoc-regular-text-size);
+    color: var(--mdoc-light-black);
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -27,9 +30,7 @@
 .open-api-operation > .url-and-summary > .path {
     display: flex;
     flex-wrap: wrap;
-    color: var(--mdoc-regular-text-color);
-    font-size: var(--mdoc-regular-text-size);
-    font-weight: bold;
+    color: var(--mdoc-light-black);
 }
 
 .open-api-operation > .url-and-summary > .path > .path-part-delimiter {
@@ -37,15 +38,16 @@
 }
 
 .open-api-operation > .url-and-summary > .path > .path-part-parameter {
-    color: var(--mdoc-function-color);
+    color: var(--mdoc-open-api-path-param-color);
 }
 
 .open-api-operation > .url-and-summary > .summary {
 }
 
-.open-api-operation > .description {
+.open-api-description {
     font-size: var(--mdoc-regular-text-size);
     margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 .open-api-operation > .parameters,

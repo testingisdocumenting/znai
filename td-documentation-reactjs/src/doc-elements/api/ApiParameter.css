@@ -25,7 +25,7 @@
 }
 
 .api-param-description-cell {
-    color: var(--mdoc-regular-text-light-color);
+    color: var(--mdoc-api-description-color);
     font-size: var(--mdoc-smaller-text-size);
     font-family: var(--mdoc-regular-font-family);
     padding-right: 8px;
@@ -66,7 +66,7 @@
 }
 
 .api-param-name-type-toggle > .name {
-    color: var(--mdoc-function-color);
+    color: var(--mdoc-api-key-color);
 }
 
 .api-param-name-type-toggle > .type {

@@ -21,14 +21,27 @@ function OpenApiOperation({elementsLibrary, operation}) {
                 <div className="method">{operation.method}</div>
                 <div className="path"><Path path={operation.path}/></div>
             </div>
-            <div className="description">
-                <elementsLibrary.DocElement content={operation.description} elementsLibrary={elementsLibrary}/>
-            </div>
 
-            <OpenApiParameters label="Path parameters" parameters={pathParameters} elementsLibrary={elementsLibrary}/>
-            <OpenApiParameters label="Query parameters" parameters={queryParameters} elementsLibrary={elementsLibrary}/>
-            <OpenApiBodyParameter parameter={bodyParameter} elementsLibrary={elementsLibrary}/>
-            <OpenApiResponses responses={operation.responses} elementsLibrary={elementsLibrary}/>
+            <Description description={operation.description} elementsLibrary={elementsLibrary}/>
+
+            <div className="open-api-operation-parameters">
+                <OpenApiParameters label="Path parameters" parameters={pathParameters} elementsLibrary={elementsLibrary}/>
+                <OpenApiParameters label="Query parameters" parameters={queryParameters} elementsLibrary={elementsLibrary}/>
+                <OpenApiBodyParameter parameter={bodyParameter} elementsLibrary={elementsLibrary}/>
+                <OpenApiResponses responses={operation.responses} elementsLibrary={elementsLibrary}/>
+            </div>
+        </div>
+    )
+}
+
+function Description({description, elementsLibrary}) {
+    if (!description || description.length === 0) {
+        return null
+    }
+
+    return (
+        <div className="open-api-description">
+            <elementsLibrary.DocElement content={description} elementsLibrary={elementsLibrary}/>
         </div>
     )
 }

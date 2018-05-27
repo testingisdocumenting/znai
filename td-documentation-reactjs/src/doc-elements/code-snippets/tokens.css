@@ -45,6 +45,10 @@
     color: var(--mdoc-number-color);
 }
 
+.token.boolean {
+    color: var(--mdoc-boolean-color);
+}
+
 .token.keyword {
     color: var(--mdoc-keyword-color);
 }
