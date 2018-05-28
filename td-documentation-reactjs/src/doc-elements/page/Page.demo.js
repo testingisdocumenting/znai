@@ -5,18 +5,30 @@ import {Page} from './Page'
 export function pagesDemo(registry) {
     const defaultPage = defaultPageContent('page1')
     const apiPage = defaultPageContent('page2', 'api')
-    const twoSidesPage = buildTwoSidesPage()
-
     registry
-        .add('default page', <Page elementsLibrary={elementsLibrary}
-                                   docMeta={docMeta()}
-                                   {...defaultPage}/>)
-        .add('api page', <Page elementsLibrary={elementsLibrary}
-                               docMeta={docMeta()}
-                               {...apiPage}/>)
-        .add('two sides page', <Page elementsLibrary={elementsLibrary}
-                                     docMeta={docMeta()}
-                                     {...twoSidesPage}/>)
+        .add('default', <Page elementsLibrary={elementsLibrary}
+                              docMeta={docMeta()}
+                              {...defaultPage}/>)
+        .add('api', <Page elementsLibrary={elementsLibrary}
+                          docMeta={docMeta()}
+                          {...apiPage}/>)
+        .add('two sides', <Page elementsLibrary={elementsLibrary}
+                                docMeta={docMeta()}
+                                {...twoSidesPageContent()}/>)
+        .add('two sides with tabs', (
+            <PageMaxHeightWrap>
+                <Page elementsLibrary={elementsLibrary}
+                      docMeta={docMeta()}
+                      {...twoSidesWithTabsPageContent()}/>
+            </PageMaxHeightWrap>))
+}
+
+function PageMaxHeightWrap({children}) {
+    return (
+        <div style={{height: '100vh'}}>
+            {children}
+        </div>
+    )
 }
 
 function docMeta() {
@@ -749,7 +761,7 @@ function tocItem(fileName, pageType) {
     }
 }
 
-function buildTwoSidesPage() {
+function twoSidesPageContent() {
     return {
             "type": "Page",
             "content": [
@@ -1053,5 +1065,974 @@ function buildTwoSidesPage() {
                     }
                 ]
             }
+    }
+}
+
+function twoSidesWithTabsPageContent() {
+    return {
+        "type": "Page",
+        "content": [
+            {
+                "title": "Primary Use Case",
+                "id": "primary-use-case",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Imagine your product supports multiple ways of achieving a final result:",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "bulletMarker": "*",
+                        "tight": true,
+                        "type": "BulletList",
+                        "content": [
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "REST",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "Web",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "CLI",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "Java",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "Python",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ListItem",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "etc",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Provide a selection inside your documentation if your user needs only one to accomplish her goals.",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "type": "SoftLineBreak"
+                            },
+                            {
+                                "text": "Her selection will be remembered and will provide streamlined experience.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Do not: use tabs as navigation experience.",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "type": "SoftLineBreak"
+                            },
+                            {
+                                "text": "If your user needs both ",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "code": "Java",
+                                "type": "InlinedCode"
+                            },
+                            {
+                                "text": " and ",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "code": "Python",
+                                "type": "InlinedCode"
+                            },
+                            {
+                                "text": " executed one by one you need to show steps one after another in proper order.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Definition",
+                "id": "definition",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "To define multiple tabs we use fenced code block",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "lang": "",
+                        "maxLineLength": 70,
+                        "tokens": [
+                            {
+                                "type": "text",
+                                "content": "```tabs\nJavaScript: :include-file: snippets/file-name.js\nJava: :include-file: snippets/WideCode.java\nCpp: :include-cpp: snippets/simple.cpp {entry: \u0027main\u0027, bodyOnly: true}\n```\n"
+                            }
+                        ],
+                        "lineNumber": "",
+                        "type": "Snippet"
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "This will generate a multi tab widget with an include plugin content per tab",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "rightSide": true,
+                        "type": "Meta"
+                    },
+                    {
+                        "tabsContent": [
+                            {
+                                "name": "JavaScript",
+                                "content": [
+                                    {
+                                        "lang": "javascript",
+                                        "maxLineLength": 22,
+                                        "tokens": [
+                                            {
+                                                "type": "keyword",
+                                                "content": "class"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "class-name",
+                                                "content": [
+                                                    "JsClass"
+                                                ]
+                                            },
+                                            " ",
+                                            {
+                                                "type": "punctuation",
+                                                "content": "{"
+                                            },
+                                            "\n    ",
+                                            {
+                                                "type": "function",
+                                                "content": "constructor"
+                                            },
+                                            {
+                                                "type": "punctuation",
+                                                "content": "("
+                                            },
+                                            {
+                                                "type": "punctuation",
+                                                "content": ")"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "punctuation",
+                                                "content": "{"
+                                            },
+                                            "\n    ",
+                                            {
+                                                "type": "punctuation",
+                                                "content": "}"
+                                            },
+                                            "\n",
+                                            {
+                                                "type": "punctuation",
+                                                "content": "}"
+                                            },
+                                            "\n\n",
+                                            {
+                                                "type": "keyword",
+                                                "content": "export"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "keyword",
+                                                "content": "default"
+                                            },
+                                            " JsClass"
+                                        ],
+                                        "type": "Snippet"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Java",
+                                "content": [
+                                    {
+                                        "lang": "java",
+                                        "maxLineLength": 136,
+                                        "tokens": [
+                                            {
+                                                "type": "keyword",
+                                                "content": "class"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "class-name",
+                                                "content": [
+                                                    "InternationalPriceService"
+                                                ]
+                                            },
+                                            " ",
+                                            {
+                                                "type": "keyword",
+                                                "content": "implements"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "class-name",
+                                                "content": [
+                                                    "PriceService"
+                                                ]
+                                            },
+                                            " ",
+                                            {
+                                                "type": "punctuation",
+                                                "content": "{"
+                                            },
+                                            "\n    ",
+                                            {
+                                                "type": "keyword",
+                                                "content": "private"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "keyword",
+                                                "content": "static"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "keyword",
+                                                "content": "void"
+                                            },
+                                            " LongJavaInterfaceNameWithSuperFactory ",
+                                            {
+                                                "type": "function",
+                                                "content": "createMegaAbstractFactory"
+                                            },
+                                            {
+                                                "type": "punctuation",
+                                                "content": "("
+                                            },
+                                            {
+                                                "type": "keyword",
+                                                "content": "final"
+                                            },
+                                            " ExchangeCalendarLongerThanLife calendar",
+                                            {
+                                                "type": "punctuation",
+                                                "content": ")"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "punctuation",
+                                                "content": "{"
+                                            },
+                                            "\n        ",
+                                            {
+                                                "type": "punctuation",
+                                                "content": "."
+                                            },
+                                            {
+                                                "type": "punctuation",
+                                                "content": "."
+                                            },
+                                            {
+                                                "type": "punctuation",
+                                                "content": "."
+                                            },
+                                            "\n    ",
+                                            {
+                                                "type": "punctuation",
+                                                "content": "}"
+                                            },
+                                            "\n",
+                                            {
+                                                "type": "punctuation",
+                                                "content": "}"
+                                            }
+                                        ],
+                                        "wide": true,
+                                        "type": "Snippet"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Cpp",
+                                "content": [
+                                    {
+                                        "lang": "cpp",
+                                        "maxLineLength": 29,
+                                        "tokens": [
+                                            {
+                                                "type": "keyword",
+                                                "content": "int"
+                                            },
+                                            " test ",
+                                            {
+                                                "type": "operator",
+                                                "content": "\u003d"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "number",
+                                                "content": "2"
+                                            },
+                                            {
+                                                "type": "punctuation",
+                                                "content": ";"
+                                            },
+                                            "\n\n",
+                                            {
+                                                "type": "comment",
+                                                "content": "// comment with **important**"
+                                            },
+                                            "\n",
+                                            {
+                                                "type": "comment",
+                                                "content": "// information"
+                                            },
+                                            "\n",
+                                            {
+                                                "type": "keyword",
+                                                "content": "int"
+                                            },
+                                            " b ",
+                                            {
+                                                "type": "operator",
+                                                "content": "\u003d"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "number",
+                                                "content": "3"
+                                            },
+                                            {
+                                                "type": "punctuation",
+                                                "content": ";"
+                                            },
+                                            "\n",
+                                            {
+                                                "type": "keyword",
+                                                "content": "int"
+                                            },
+                                            " d ",
+                                            {
+                                                "type": "operator",
+                                                "content": "\u003d"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "number",
+                                                "content": "3"
+                                            },
+                                            {
+                                                "type": "punctuation",
+                                                "content": ";"
+                                            },
+                                            "\n\n",
+                                            {
+                                                "type": "comment",
+                                                "content": "/*\n * multi line comment\n * of multi *lines* text\n*/"
+                                            },
+                                            "\n",
+                                            {
+                                                "type": "keyword",
+                                                "content": "int"
+                                            },
+                                            " e ",
+                                            {
+                                                "type": "operator",
+                                                "content": "\u003d"
+                                            },
+                                            " ",
+                                            {
+                                                "type": "number",
+                                                "content": "5"
+                                            },
+                                            {
+                                                "type": "punctuation",
+                                                "content": ";"
+                                            }
+                                        ],
+                                        "type": "Snippet"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "Tabs",
+                        "meta": {"rightSide": true}
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Selecting a tab will switch all the tabs on every page.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Markdown Per Tab",
+                "id": "markdown-per-tab",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Any valid markdown can be used in place of a content of each tab.",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "type": "SoftLineBreak"
+                            },
+                            {
+                                "text": "Typical use case for ",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "type": "Emphasis",
+                                "content": [
+                                    {
+                                        "text": "installation instructions",
+                                        "type": "SimpleText"
+                                    }
+                                ]
+                            },
+                            {
+                                "text": ": extract differences per language or environment",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "lang": "",
+                        "maxLineLength": 83,
+                        "tokens": [
+                            {
+                                "type": "text",
+                                "content": "````tabs\nJavaScript: \nFirst you need to download WebStorm and then run following using your terminal\n\n```bash\n$ yarn install\n$ yarn start\n```\n    \nJava: \nFirst you need to download Intellij IDEA and then run following using your terminal\n    \n```bash\n$ mvn install\n$ mvn exec:exec\n```\n    \nCpp: \nFirst you need to download CLion and then run following using your terminal\n\n```bash\n$ pwd\n$ whoamis\n```\n````\n"
+                            }
+                        ],
+                        "lineNumber": "",
+                        "type": "Snippet"
+                    },
+                    {
+                        "rightSide": true,
+                        "type": "Meta"
+                    },
+                    {
+                        "tabsContent": [
+                            {
+                                "name": "JavaScript",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "First you need to download WebStorm and then run following using your terminal",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "lang": "bash",
+                                        "maxLineLength": 14,
+                                        "tokens": [
+                                            "$ yarn ",
+                                            {
+                                                "type": "function",
+                                                "content": "install"
+                                            },
+                                            "\n$ yarn start\n"
+                                        ],
+                                        "lineNumber": "",
+                                        "type": "Snippet"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Java",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "First you need to download Intellij IDEA and then run following using your terminal",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "lang": "bash",
+                                        "maxLineLength": 15,
+                                        "tokens": [
+                                            "$ mvn ",
+                                            {
+                                                "type": "function",
+                                                "content": "install"
+                                            },
+                                            "\n$ mvn exec:exec\n"
+                                        ],
+                                        "lineNumber": "",
+                                        "type": "Snippet"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Cpp",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "First you need to download CLion and then run following using your terminal",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "lang": "bash",
+                                        "maxLineLength": 9,
+                                        "tokens": [
+                                            "$ ",
+                                            {
+                                                "type": "function",
+                                                "content": "pwd"
+                                            },
+                                            "\n$ whoamis\n"
+                                        ],
+                                        "lineNumber": "",
+                                        "type": "Snippet"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "Tabs",
+                        "meta": {"rightSide": true}
+                    }
+                ]
+            },
+            {
+                "title": "Separate Markdown files",
+                "id": "separate-markdown-files",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Consider to extract content to separate markup files if content becomes elaborate.",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "type": "SoftLineBreak"
+                            },
+                            {
+                                "text": "Use ",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "code": "include-markdown",
+                                "type": "InlinedCode"
+                            },
+                            {
+                                "text": " plugin to include an external content.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "lang": "",
+                        "maxLineLength": 65,
+                        "tokens": [
+                            {
+                                "type": "text",
+                                "content": "```tabs\nJavaScript: :include-markdown: instructions/javascript-install.md\nJava: :include-markdown: instructions/java-install.md\nCpp: :include-markdown: instructions/cpp-install.md\n```\n"
+                            }
+                        ],
+                        "lineNumber": "",
+                        "type": "Snippet"
+                    },
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Each tab will display inlined markdown from specified files.",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "rightSide": true,
+                        "type": "Meta"
+                    },
+                    {
+                        "tabsContent": [
+                            {
+                                "name": "JavaScript",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "First you need to download WebStorm and then run following using your terminal",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "lang": "",
+                                        "maxLineLength": 14,
+                                        "tokens": [
+                                            {
+                                                "type": "text",
+                                                "content": "$ yarn install\n$ yarn start\n"
+                                            }
+                                        ],
+                                        "lineNumber": "",
+                                        "type": "Snippet"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Java",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "First you need to download Intellij IDEA and then run following using your terminal",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "lang": "",
+                                        "maxLineLength": 15,
+                                        "tokens": [
+                                            {
+                                                "type": "text",
+                                                "content": "$ mvn install\n$ mvn exec:exec\n"
+                                            }
+                                        ],
+                                        "lineNumber": "",
+                                        "type": "Snippet"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Cpp",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "First you need to download CLion and then run following using your terminal",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "lang": "",
+                                        "maxLineLength": 8,
+                                        "tokens": [
+                                            {
+                                                "type": "text",
+                                                "content": "$ pwd\n$ whoami\n"
+                                            }
+                                        ],
+                                        "lineNumber": "",
+                                        "type": "Snippet"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "Tabs",
+                        "meta": {"rightSide": true}
+                    }
+                ]
+            },
+            {
+                "title": "Attention Signs",
+                "id": "attention-signs",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {
+                                "text": "Use extra space(s) in front of ",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "code": "Note:",
+                                "type": "InlinedCode"
+                            },
+                            {
+                                "text": " or other attention sign keywords to put attention signs inside a tab.",
+                                "type": "SimpleText"
+                            },
+                            {
+                                "type": "SoftLineBreak"
+                            },
+                            {
+                                "text": "Remember if you put 4+ spaces your paragraph will become a code snippet",
+                                "type": "SimpleText"
+                            }
+                        ]
+                    },
+                    {
+                        "lang": "",
+                        "maxLineLength": 83,
+                        "tokens": [
+                            {
+                                "type": "text",
+                                "content": "````tabs\nJavaScript: \n\n```bash\n$ yarn install\n$ yarn start\n```\n\n Avoid: committing node_modules\n    \nJava: \nFirst you need to download Intellij IDEA and then run following using your terminal\n    \n```bash\n$ mvn install\n$ mvn exec:exec\n```\n    \n Warning: `mvn` install for the first time may take considerable amount of time\n\nCpp: \nFirst you need to download CLion and then run following using your terminal\n\n```bash\n$ pwd\n$ whoamis\n```\n\n Question: is C++ awesome or what?\n````\n"
+                            }
+                        ],
+                        "lineNumber": "",
+                        "type": "Snippet"
+                    },
+                    {
+                        "rightSide": true,
+                        "type": "Meta"
+                    },
+                    {
+                        "tabsContent": [
+                            {
+                                "name": "JavaScript",
+                                "content": [
+                                    {
+                                        "lang": "bash",
+                                        "maxLineLength": 14,
+                                        "tokens": [
+                                            "$ yarn ",
+                                            {
+                                                "type": "function",
+                                                "content": "install"
+                                            },
+                                            "\n$ yarn start\n"
+                                        ],
+                                        "lineNumber": "",
+                                        "type": "Snippet"
+                                    },
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "Do not: commit node_modules to the repository",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Java",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "First you need to download Intellij IDEA and then run following using your terminal",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "lang": "bash",
+                                        "maxLineLength": 15,
+                                        "tokens": [
+                                            "$ mvn ",
+                                            {
+                                                "type": "function",
+                                                "content": "install"
+                                            },
+                                            "\n$ mvn exec:exec\n"
+                                        ],
+                                        "lineNumber": "",
+                                        "type": "Snippet"
+                                    },
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "Warning: ",
+                                                "type": "SimpleText"
+                                            },
+                                            {
+                                                "code": "mvn",
+                                                "type": "InlinedCode"
+                                            },
+                                            {
+                                                "text": " install for the first time may take considerable amount of time",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Cpp",
+                                "content": [
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "First you need to download CLion and then run following using your terminal",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "lang": "bash",
+                                        "maxLineLength": 9,
+                                        "tokens": [
+                                            "$ ",
+                                            {
+                                                "type": "function",
+                                                "content": "pwd"
+                                            },
+                                            "\n$ whoamis\n"
+                                        ],
+                                        "lineNumber": "",
+                                        "type": "Snippet"
+                                    },
+                                    {
+                                        "type": "Paragraph",
+                                        "content": [
+                                            {
+                                                "text": "Question: is C++ awesome or what?",
+                                                "type": "SimpleText"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "Tabs",
+                        "meta": {"rightSide": true}
+                    }
+                ]
+            }
+        ],
+        "lastModifiedTime": 1527473295000,
+        "tocItem": {
+            "sectionTitle": "Layout",
+            "pageTitle": "Tabs",
+            "pageMeta": {
+                "type": [
+                    "two-sides"
+                ]
+            },
+            "fileName": "tabs",
+            "dirName": "layout",
+            "pageSectionIdTitles": [
+                {
+                    "title": "Primary Use Case",
+                    "id": "primary-use-case"
+                },
+                {
+                    "title": "Definition",
+                    "id": "definition"
+                },
+                {
+                    "title": "Markdown Per Tab",
+                    "id": "markdown-per-tab"
+                },
+                {
+                    "title": "Separate Markdown files",
+                    "id": "separate-markdown-files"
+                },
+                {
+                    "title": "Attention Signs",
+                    "id": "attention-signs"
+                }
+            ]
+        }
     }
 }

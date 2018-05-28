@@ -1,35 +1,8 @@
 import React, {Component} from 'react'
 
+import {tabsRegistration} from './TabsRegistration'
+
 import './Tabs.css'
-
-class TabsRegistration {
-    constructor() {
-        this.listeners = []
-        this.tabsSelectionHistory = []
-    }
-
-    addTabSwitchListener(listener) {
-        this.listeners.push(listener)
-    }
-
-    removeTabSwitchListener(listener) {
-        removeFromArray(this.listeners, listener)
-    }
-
-    firstMatchFromHistory(names) {
-        const matches = this.tabsSelectionHistory.filter(n => names.indexOf(n) >= 0)
-        return matches ? matches[0] : names[0]
-    }
-
-    notifyNewTab(name) {
-        removeFromArray(this.tabsSelectionHistory, name)
-        this.tabsSelectionHistory.unshift(name)
-
-        this.listeners.forEach(l => l(name))
-    }
-}
-
-const tabsRegistration = new TabsRegistration()
 
 const TabNames = ({names, activeIdx, onClick}) => {
     return (
@@ -60,9 +33,6 @@ class Tabs extends Component {
             names.indexOf(tabName)
 
         this.state = {activeIdx: idx >= 0 ? idx : 0}
-
-        this.onClick = this.onClick.bind(this)
-        this.onTabSwitch = this.onTabSwitch.bind(this)
     }
 
     componentDidMount() {
@@ -93,12 +63,12 @@ class Tabs extends Component {
         )
     }
 
-    onClick(idx) {
+    onClick = (idx) => {
         const {tabsContent} = this.props
         tabsRegistration.notifyNewTab(tabsContent[idx].name)
     }
 
-    onTabSwitch(tabName) {
+    onTabSwitch = (tabName) => {
         const {tabsContent} = this.props
         const names = tabsContent.map(t => t.name)
 
@@ -106,13 +76,6 @@ class Tabs extends Component {
         if (idx !== -1) {
             this.setState({activeIdx: idx})
         }
-    }
-}
-
-function removeFromArray(array, value) {
-    const idx = array.indexOf(value)
-    if (idx !== -1) {
-        array.splice(idx, 1)
     }
 }
 
