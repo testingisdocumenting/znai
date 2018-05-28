@@ -30,6 +30,6 @@ All the content after that will go to the right side. At the start of a new sect
 
 :include-open-api: snippets/open-api/uber.json {method: "get", path: "/estimates/time"}
 :include-meta: {"rightSide": true}
-:include-json: two-sides/price-estimate.json
+:include-json: two-sides/price-estimate.json {title: "Response"}
 
 
