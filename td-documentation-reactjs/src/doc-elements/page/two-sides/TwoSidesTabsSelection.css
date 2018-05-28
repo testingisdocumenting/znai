@@ -1,0 +1,24 @@
+.two-sides-tabs-selection {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    height: 36px;
+    width: 100%;
+
+    background-color: var(--mdoc-snippets-background-color);
+    margin-left: calc(var(--mdoc-two-sides-horizontal-spacing) * -1);
+    padding-left: var(--mdoc-two-sides-horizontal-spacing);
+
+    z-index: 100;
+}
+
+.two-sides-tab-name {
+    color: #bbb;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.two-sides-tab-name.active {
+    color: #eee;
+}
