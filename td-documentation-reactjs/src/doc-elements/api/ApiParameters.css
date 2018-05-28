@@ -13,14 +13,8 @@
 
 .api-parameters.nested {
     margin-top: 10px;
-    padding-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
     border: 1px solid var(--mdoc-snippets-outer-border-color);
-}
-
-.api-parameters.nested .api-parameters.nested {
-    border-right: none;
-}
-
-.api-parameters.nested:last-child {
-    border-bottom: none;
+    border-radius: 5px;
 }

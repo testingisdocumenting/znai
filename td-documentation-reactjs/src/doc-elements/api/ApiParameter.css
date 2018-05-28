@@ -3,13 +3,12 @@
     justify-content: flex-end;
     width: 100%;
     text-align: right;
-    padding-left: 10px;
+    padding-left: 20px;
     padding-right: 20px;
 }
 
 .api-param-name-type-toggle {
 }
-
 
 .api-param-name-type-toggle > .type-and-toggle {
     display: flex;
