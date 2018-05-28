@@ -51,9 +51,11 @@
     --mdoc-snippets-space-above: 25px;
     --mdoc-snippets-space-below: 25px;
 
-    --mdoc-api-key-color: #444645;
+    --mdoc-api-key-color: #527d8f;
     --mdoc-api-description-color: #878988;
+
     --mdoc-open-api-path-param-color: #292b2a;
+    --mdoc-open-api-sub-header-color: var(--mdoc-light-black);
 
     --mdoc-default-code-block-color: var(--mdoc-black);
     --mdoc-class-color: #3d3d3f;

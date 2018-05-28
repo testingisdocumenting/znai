@@ -17,12 +17,14 @@ const mailBoxParameters = [
 const addressParameters = [
     {name: 'street', type: 'string', description: [{"text": "street name", "type": "SimpleText"}]},
     {name: 'mailBox', type: 'object', children: mailBoxParameters,  description: [{"text": "mail box", "type": "SimpleText"}]},
+    {name: 'simple', type: 'string', description: [{"text": "simple parameter after a complex one", "type": "SimpleText"}]},
 ]
 
-
 const nestedParameters = [
-    {name: 'primaryResidence', children: addressParameters, description: [{"text": "primary residence", "type": "SimpleText"}]},
-    {name: 'secondaryPerson', children: personParameters, description: [{"text": "secondary person", "type": "SimpleText"}]},
+    {name: 'primaryResidence', type: 'object', children: addressParameters, description: [{"text": "primary residence", "type": "SimpleText"}]},
+    {name: 'secondaryPerson', type: 'object', children: personParameters, description: [{"text": "secondary person", "type": "SimpleText"}]},
+    {name: 'short', type: 'object', children: personParameters, description: [{"text": "secondary person", "type": "SimpleText"}]},
+    {name: 'ids', type: 'array of objects', children: personParameters, description: [{"text": "secondary person", "type": "SimpleText"}]},
 ]
 
 export function apiParametersDemo(registry) {

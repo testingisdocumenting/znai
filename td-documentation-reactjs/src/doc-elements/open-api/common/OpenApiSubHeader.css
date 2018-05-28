@@ -19,14 +19,14 @@
 }
 
 .open-api-sub-header > .header-part {
-    color: var(--mdoc-meta-color);
+    color: var(--mdoc-open-api-sub-header-color);
     font-family: var(--mdoc-regular-font-family);
     font-size: var(--mdoc-smaller-text-size);
     text-transform: uppercase;
 }
 
 .open-api-sub-header > .description-part {
-    color: var(--mdoc-light-black);
+    color: var(--mdoc-open-api-sub-header-color);
     font-family: var(--mdoc-regular-font-family);
     font-size: var(--mdoc-smaller-text-size);
 

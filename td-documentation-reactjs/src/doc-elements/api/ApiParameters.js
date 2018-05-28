@@ -3,7 +3,7 @@ import ApiParameter from './ApiParameter'
 
 import './ApiParameters.css'
 
-export default function ApiParameters({parameters, nestedLevel, elementsLibrary}) {
+export default function ApiParameters({parameters, nestedLevel, parentWidth = 0, elementsLibrary}) {
     const isExpanded = parameters.length === 1 && parameters[0].children
 
     const renderedParameters = parameters.map(p => <ApiParameter key={p.name}
@@ -16,8 +16,11 @@ export default function ApiParameters({parameters, nestedLevel, elementsLibrary}
                                                                  elementsLibrary={elementsLibrary}/>)
 
     const isNested = nestedLevel > 0
-    return isNested ? renderedParameters :
-        (<div className="api-parameters">
+    const className = 'api-parameters' + (isNested ? ' nested' : '')
+    const style = {marginLeft: -parentWidth}
+
+    return (
+        <div className={className} style={style}>
             {renderedParameters}
         </div>
     )
