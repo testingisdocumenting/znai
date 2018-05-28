@@ -9,12 +9,18 @@
 
     border-top: 1px solid var(--mdoc-snippets-outer-border-color);
     border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
-
-    grid-column: 1/-1;
 }
 
 .api-parameters.nested {
-    border-top: none;
+    margin-top: 10px;
+    padding-left: 10px;
+    border: 1px solid var(--mdoc-snippets-outer-border-color);
+}
+
+.api-parameters.nested .api-parameters.nested {
+    border-right: none;
+}
+
+.api-parameters.nested:last-child {
     border-bottom: none;
-    margin-left: 40px;
 }
