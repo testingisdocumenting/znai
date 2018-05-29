@@ -1,14 +1,14 @@
 # Command parameters
 
-To bring attention to important parameters in your examples use `cli-command` extension.
+To bring attention to important parameters in your examples use the `cli-command` extension.
 
     :include-cli-command: my-super-command paramA --important-flag=true {paramsToHighlight: "important"}
     
 :include-cli-command: my-super-command paramA --important-flag=true {paramsToHighlight: "important"}
 
-Note: parameter name gets matched as long as its name contains passed value
+Note: Parameter names gets matched as long as their names contains the passed value
 
-Use plural version `paramsToHighlight` to highlight multiple parameters
+Use plural version `paramsToHighlight` to highlight multiple parameters.
  
     :include-cli-command: another-command --score=2 --name=Name --value=8 {paramsToHighlight: ["name", "value"]}
 
@@ -16,13 +16,13 @@ Use plural version `paramsToHighlight` to highlight multiple parameters
 
 # Long Commands
 
-Long command lines will be automatically wrapped into multiple lines
+Long command lines will be automatically wrapped into multiple lines.
 
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {paramsToHighlight: ["name", "value"]}
 
 # Output
 
-To display console output and bring attention to certain lines use 
+To display console output and bring attention to certain lines use:
 
     :include-cli-output: file-path-of-captured.out {highlight: [0, 4]}
 
@@ -31,9 +31,9 @@ To display console output and bring attention to certain lines use
 
 # Presentation mode
 
-In presentation mode `cli-command` will simulate typing inside terminal.
+In presentation mode, `cli-command` will simulate typing inside the terminal.
 
-In case `cli-output` is long, you can split presentation output into chunks. 
+If your `cli-output` is long, you can split the presentation output into chunks:
   
     :include-cli-output: file-path-of-captured.out {highlight: [0, 4], chunkSize: 10, fadedSize: 2}
     

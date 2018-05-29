@@ -6,17 +6,17 @@ Imagine your product supports multiple ways of achieving a final result:
 * CLI
 * Java
 * Python
-* etc
+* more...
 
-Provide a selection inside your documentation if your user needs only one to accomplish her goals. 
-Her selection will be remembered and will provide streamlined experience.
+Provide a selection inside your documentation if your user needs only one to accomplish the goal. 
+Selections will persist for users and provide streamlined experience.
 
 Do not: use tabs as navigation experience. 
 If your user needs both `Java` and `Python` executed one by one you need to show steps one after another in proper order.
  
 # Definition 
 
-To define multiple tabs we use fenced code block
+To define multiple tabs we use fenced code block:
 
     ```tabs
     JavaScript: :include-file: snippets/file-name.js
@@ -24,7 +24,7 @@ To define multiple tabs we use fenced code block
     Cpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true}
     ```
     
-This will generate a multi tab widget with an include plugin content per tab
+This will generate a multi-tab widget with `include-` plugin content for each tab.
 
 ```tabs
 JavaScript: :include-file: snippets/file-name.js
@@ -36,8 +36,9 @@ Selecting a tab will switch all the tabs on every page.
 
 # Markdown Per Tab
 
-Any valid markdown can be used in place of a content of each tab.
-Typical use case for *installation instructions*: extract differences per language or environment 
+Any valid Markdown can be used in place of `include-` content. 
+
+A typical use case for *installation instructions* might be dividing content per language or environment:
 
     ````tabs
     JavaScript: 
@@ -93,8 +94,8 @@ $ whoamis
 
 # Separate Markdown files
 
-Consider to extract content to separate markup files if content becomes elaborate.
-Use `include-markdown` plugin to include an external content.
+Consider extracting content to separate markup files if content becomes long.
+Use the `include-markdown` plugin to include external content.
 
     ```tabs
     JavaScript: :include-markdown: instructions/javascript-install.md

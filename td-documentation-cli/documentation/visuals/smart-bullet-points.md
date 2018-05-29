@@ -1,9 +1,9 @@
 # Types
 
-Bullet points is an essential tool to outline main points.
+Bullet points are an essential tool in the presentation of information.
 Frequent use of bullet points however may make documentation and presentation boring.
 
-You can change the way bullet points are rendered by using `meta` plugin.
+You can change the way bullet points are rendered by using the `meta` plugin.
 
     :include-meta: {bulletListType: "BulletsListType"}
     
@@ -14,7 +14,7 @@ You can change the way bullet points are rendered by using `meta` plugin.
     
 # Left Right Timeline
 
-Use `LeftRightTimeLine` to outline your flow. Also splits related things by moving odd points to the left and even 
+Use `LeftRightTimeLine` to outline your flow. This also splits related things by moving odd points to the left and even 
 to the right.  
 
     :include-meta: {bulletListType: "LeftRightTimeLine"}
@@ -44,7 +44,7 @@ Use `Venn` to display overlapping relationships.
 
 # Steps
 
-Use `Steps` to outline a procedure
+Use `Steps` to outline a procedure.
     
 :include-meta: {bulletListType: "Steps"}
 
@@ -65,14 +65,14 @@ Use `differentColors: true` to use distinct colors for each step
 
 # Presentation only type
 
-If you want to change bullets type only for presentation use 
+If you want to change bullets type only for presentation use: 
 
     :include-meta: {presentationBulletListType: "BulletsListType"}
 
 
 # HorizontalStripes
 
-Following bullet points will be rendered as horizontal striped, but only in presentation mode 
+Following bullet points will be rendered as horizontal striped, but only in presentation mode. 
 
     :include-meta: {presentationBulletListType: "HorizontalStripes"}
 

@@ -1,7 +1,7 @@
 # Inlined CSV
 
-When you are not able to automatically extract api parameters definition you can use 
-`api-parameters` fence plugin to manually document them.  
+When you are not able to automatically extract an API parameters definition you can use
+the `api-parameters` fence plugin to manually document them.  
 
     ```api-parameters
     firstName, String, description with *markdown* support

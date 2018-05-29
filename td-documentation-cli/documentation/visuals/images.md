@@ -1,6 +1,6 @@
 # Markdown
 
-Image can be include using standard markdown syntax
+Image can be included using standard Markdown syntax.
 
     ![alt text](regular-image.png)
 
@@ -15,13 +15,13 @@ MDoc adds additional extension to provide additional information:
 
 # Caption
 
-To add caption at the top of an image use
+To add a caption at the top of an image use:
 
     :include-image: castle.jpg {caption: "Title of an image"}
     
 :include-image: castle.jpg {caption: "Title of an image"}
     
-To add caption at the bottom of an image use
+To add a caption at the bottom of an image use:
 
     :include-image: castle.jpg {caption: "Title of an image", captionBottom: true}
     
@@ -29,11 +29,11 @@ To add caption at the bottom of an image use
 
 # Fit
 
-Wide image occupies all available space.
+An unfitted image will occupy all available space:
 
 :include-image: books.jpg 
 
-To fit the image to the width of a text use `fit` parameter.
+To fit the image to the width of a text use the `fit` parameter.
 
     :include-image: books.jpg {fit: true}
 

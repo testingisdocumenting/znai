@@ -1,20 +1,20 @@
 # Markdown
 
-Markdown uses ASCII to represent styles and page structure.
+MDoc uses Markdown, a markup language that uses ASCII to represent styles and page structure.
 
 ```markdown-and-result
 # Header
 
 Normal paragraph text. Some *italic* and **bold**.
 Followed by bullet points:
-* apple
-* banana
-* water
+* Apple
+* Banana
+* Water
 ```
 
 # External References
 
-Example of how to keep your documentation up-to-date by referencing existing resource.
+Example of how to keep your documentation up to date by referencing existing resource.
 
 ```markdown
 # Server Configuration
@@ -22,4 +22,4 @@ Example of how to keep your documentation up-to-date by referencing existing res
 :include-file: config/server.config
 ```
 
-Note that this is `mdoc` extension and is not part of a standard markdown syntax.
+Note:  Ths `include-file` macro is a `mdoc` extension and not part of a standard Markdown syntax.

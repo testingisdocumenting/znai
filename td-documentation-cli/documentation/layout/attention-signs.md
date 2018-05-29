@@ -1,6 +1,6 @@
 # Speed Bump
 
-People skim through documentations. Create speed bumps by using attention signs. 
+People skim through documentation. You can grab users attention by using attention signs. 
 
 To create an attention sign, start a paragraph with one of the predefined keywords followed by a colon.
 
@@ -8,17 +8,17 @@ To create an attention sign, start a paragraph with one of the predefined keywor
 
 # Note
 
-    Note: it is very important to not overuse signs. Make sure each of those signs count.
+    Note: It is very important to not overuse signs. Make sure each sign counts.
 
-Note: it is very important to not overuse signs. Make sure each of those signs count.
+Note: It is very important to not overuse signs. Make sure each sign counts.
 
 # Warning
     
-    Warning: bring attention to a common mistake or an often missed configuration step 
-    using warning sign. Do not use too many warning signs.
+    Warning: Bring attention to a common mistake or an often missed configuration step 
+    using a warning sign. Do not use too many warning signs.
 
-Warning: bring attention to a common mistake or an often missed configuration 
-step using warning sign. Do not use too many warning signs.
+Warning: Bring attention to a common mistake or an often missed configuration 
+step using a warning sign. Do not use too many warning signs.
 
 # Avoid
 
@@ -38,10 +38,10 @@ Do not: commit node_modules to your repository
 
 # Question
 
-    Question: use the question sign to bring an extra attention to a main idea of a page.
+    Question: Use the question sign to bring an extra attention to a main idea of a page.
     \
     What is the point of the `attention signs`?
 
-Question: use the question sign to bring an extra attention to the main idea of a page.
+Question: Use the question sign to bring an extra attention to the main idea of a page.
 \
 What is the point of the `attention signs`?

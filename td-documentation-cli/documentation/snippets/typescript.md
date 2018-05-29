@@ -1,12 +1,12 @@
 # Parsing 
 
-Mdoc uses typescript `nodejs` module to parse typescript. Use `typescript` plugin to include parsed information.
+Mdoc uses typescript `nodejs` module to parse TypeScript. Use the `typescript` plugin to include parsed information.
 
 # Properties
 
 :include-file: typescript/Customer.ts {title: 'typescript/Customer.ts'}
 
-Use `propertiesOf` parameter to list properties of a specified class.
+Use the `propertiesOf` parameter to list properties of a specified class.
 
     :include-typescript: typescript/Customer.ts {propertiesOf: "Customer"}
     
@@ -16,7 +16,7 @@ Use `propertiesOf` parameter to list properties of a specified class.
 
 :include-file: typescript/demo.tsx {title: 'demo.tsx'}
 
-Use `jsxElementsFrom` to extract `JSX` elements from a function. 
+Use the `jsxElementsFrom` to extract `JSX` elements from a function. 
 
     :include-typescript: typescript/demo.tsx {jsxElementsFrom: "buttonsDemo"}
     

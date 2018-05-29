@@ -4,7 +4,7 @@ To boost documentation maintainability you can refer text and code snippets from
 
     :include-file: file-name.js
     
-Include-dash family is our custom extension to markdown to support various scenarios. 
+Include-dash family is our custom extension to Markdown to support various scenarios. 
     
 :include-file: file-name.js
 

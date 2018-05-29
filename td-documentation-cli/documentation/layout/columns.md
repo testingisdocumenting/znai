@@ -1,14 +1,14 @@
 # Information Layout
 
-The way you layout and flow your information affects how easy it is to comprehend given material.
-Examples of content that easier to consume side by side:
-* Before/After transition
+The way your information is laid out affects how easy it is to comprehend given material.
+Some content benefits from being formatted side-by-side. Some examples are:
+* Before-and-after transition
 * Action and its result
-* input and output
+* Input and output
 
 # Definition
 
-To define columns layout use `fenced` block plugin
+To define columns layout use a `fenced` block plugin with the `columns` keyword:
  
     ```columns
     left: 
@@ -33,7 +33,7 @@ and can span multiple lines
 
 # Sizes
 
-Size can be specified for a column as a `portion`. By default both portions are assigned value `10`. 
+Size can be specified for a column as a `portion`. By default both portions are assigned a value of `10`. 
 If you specify `portion` to be `3` for left column it will occupy `0.3` of the space.
 
     ```columns {left: {portion: 3}}
@@ -59,8 +59,8 @@ and can span multiple lines
 
 # Border
 
-Size can be specified for a column
-    
+You can add a border to your columns.
+
     ```columns {left: {portion: 3}, border: true}
     left: **Argument Name**
     right: Argument description and what argument is for
@@ -81,7 +81,7 @@ right: Argument description and what argument is for
 
 # Alignment
 
-Specify text alignment using `align`
+Specify text alignment using `align`.
     
     ```columns {left: {portion: 3, align: "right"}, border: true}
     left: **Argument Name**
