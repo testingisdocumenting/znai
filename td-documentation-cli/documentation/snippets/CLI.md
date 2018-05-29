@@ -6,13 +6,7 @@ To bring attention to important parameters in your examples use the `cli-command
     
 :include-cli-command: my-super-command paramA --important-flag=true {paramsToHighlight: "important"}
 
-Note: Parameter names gets matched as long as their names contains the passed value
-
-Use plural version `paramsToHighlight` to highlight multiple parameters.
- 
-    :include-cli-command: another-command --score=2 --name=Name --value=8 {paramsToHighlight: ["name", "value"]}
-
-:include-cli-command: another-command --score=2 --name=Name --value=8 {paramsToHighlight: ["name", "value"]}
+Note: Parameter names gets matched as long as their names contain the passed value.
 
 # Long Commands
 

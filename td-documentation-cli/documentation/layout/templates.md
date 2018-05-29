@@ -48,7 +48,7 @@ title: Software Engineer
 
 # Inlined
 
-Consider inlined templates if you don't need to pass very much parameter text to the template. 
+Consider inlined templates if you don't need to pass a lot of parameter text to the template. 
 
     :include-template: templates/arg-definition.md {name: "Arg Name", description: "Description of the argument"}
     

@@ -58,7 +58,7 @@ You can do the same for `JSON` data:
 
 # Markdown in Cells
 
-You can use Markdown syntax within table file.
+You can use markup syntax within table file.
 
 :include-file: table-markup.csv
 
