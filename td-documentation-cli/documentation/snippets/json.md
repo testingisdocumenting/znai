@@ -2,13 +2,21 @@
 
 Use the `include-json` plugin to bring attention to a certain place in a `JSON` file. 
 
-    :include-json: book-store.json {paths: "root.store.book[0].category,root.store.book[2].category"}
+    :include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]}
 
 Comma-separated paths specified inside `paths` will be highlighted.
 
-:include-json: book-store.json {paths: "root.store.book[0].category,root.store.book[2].category"}
+:include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]}
 
-# Include Json Path
+# Paths From File
+
+Use `pathsFile` to specify a file to read paths from
+
+:include-json: book-store-paths.json {title: "book-store-paths.json"} 
+
+    :include-json: book-store.json {pathsFile: "book-store-paths.json"}
+
+# Json Subparts
 
 Pass [Json Path](https://github.com/json-path/JsonPath) as `include` property 
 to include only a portion of your document

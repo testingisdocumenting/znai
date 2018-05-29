@@ -9,12 +9,12 @@
 
     border-top: 1px solid var(--mdoc-snippets-outer-border-color);
     border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
-
-    grid-column: 1/-1;
 }
 
 .api-parameters.nested {
-    border-top: none;
-    border-bottom: none;
-    margin-left: 40px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--mdoc-snippets-outer-border-color);
+    border-radius: 5px;
 }

@@ -3,18 +3,24 @@
     justify-content: flex-end;
     width: 100%;
     text-align: right;
-    padding-left: 10px;
+    padding-left: 20px;
     padding-right: 20px;
 }
 
 .api-param-name-type-toggle {
 }
 
-.api-param-name-type-toggle > .expand-toggle {
+.api-param-name-type-toggle > .type-and-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.api-param-name-type-toggle > .type-and-toggle > .expand-toggle {
     color: var(--mdoc-brand-primary-color);
     font-size: 18px;
 
-    text-align: left;
+    width: 10px;
+    margin-right: 5px;
 
     user-select: none;
     cursor: pointer;
@@ -25,7 +31,7 @@
 }
 
 .api-param-description-cell {
-    color: var(--mdoc-regular-text-light-color);
+    color: var(--mdoc-api-description-color);
     font-size: var(--mdoc-smaller-text-size);
     font-family: var(--mdoc-regular-font-family);
     padding-right: 8px;
@@ -66,39 +72,12 @@
 }
 
 .api-param-name-type-toggle > .name {
-    color: var(--mdoc-function-color);
+    color: var(--mdoc-api-key-color);
 }
 
-.api-param-name-type-toggle > .type {
+.api-param-name-type-toggle > .type-and-toggle >.type {
     color: var(--mdoc-meta-color);
     font-size: var(--mdoc-small-meta-text-size);
-}
-
-
-.api-param-cell.nested-1 {
-    margin-left: 20px;
-}
-
-.api-param-cell.nested-2 {
-    margin-left: 40px;
-}
-
-.api-param-cell.nested-3 {
-    margin-left: 60px;
-}
-
-.api-param-cell.nested-4 {
-    margin-left: 70px;
-}
-
-.api-param-cell.nested-5 {
-    margin-left: 80px;
-}
-
-.api-param-cell.nested-6 {
-    margin-left: 85px;
-}
-
-.api-param-cell.nested-7 {
-    margin-left: 90px;
+    flex: 1;
+    justify-self: end;
 }

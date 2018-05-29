@@ -8,7 +8,7 @@ class ApiParameter extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = { isExpanded: this.props.isExpanded }
+        this.state = { isExpanded: this.props.isExpanded, width: 0 }
     }
 
     render() {
@@ -22,7 +22,8 @@ class ApiParameter extends React.Component {
         } = this.props
 
         const {
-            isExpanded
+            isExpanded,
+            width
         } = this.state
 
         const commonClassName = ' api-param-cell' +
@@ -36,18 +37,27 @@ class ApiParameter extends React.Component {
             <div className="expand-toggle"
                  onClick={this.toggleExpand}>
                 {isExpanded ? '-' : '+'}
-            </div> )
+            </div>)
 
-        const renderedChildren = children && isExpanded && <ApiParameters parameters={children}
-                                                                          nestedLevel={nestedLevel + 1}
-                                                                          elementsLibrary={elementsLibrary}/>
+        const renderedChildren = (children && isExpanded) ? (
+            <React.Fragment>
+                <div/>
+                <ApiParameters parameters={children}
+                               nestedLevel={nestedLevel + 1}
+                               parentWidth={width}
+                               elementsLibrary={elementsLibrary}/>
+            </React.Fragment>
+        ): null
+
         return (
             <React.Fragment>
                 <div className={nameTypeClassName}>
-                    <div className="api-param-name-type-toggle">
+                    <div className="api-param-name-type-toggle" ref={node => this.nameAndTypeNode = node}>
                         <div className="name">{name}</div>
-                        <div className="type">{type}</div>
-                        {expandToggle}
+                        <div className="type-and-toggle">
+                            {expandToggle}
+                            <div className="type">{type}</div>
+                        </div>
                     </div>
                 </div>
                 <div className={descriptionClassName}>
@@ -56,6 +66,11 @@ class ApiParameter extends React.Component {
                 {renderedChildren}
             </React.Fragment>
         )
+    }
+
+    componentDidMount() {
+        const width = this.nameAndTypeNode.getBoundingClientRect().width
+        this.setState({width})
     }
 
     toggleExpand = () => {

@@ -2,23 +2,31 @@
     display: flex;
     align-items: baseline;
 
-    margin-top: 40px;
-    margin-bottom: 10px;
+    margin-top: 25px;
+    margin-bottom: 8px;
+}
+
+.open-api-sub-header:first-child {
+    margin-top: 14px;
 }
 
 .open-api-sub-header .content-block {
     width: auto;
 }
 
+.open-api-sub-header .paragraph:last-child {
+    margin-bottom: 0;
+}
+
 .open-api-sub-header > .header-part {
-    color: var(--mdoc-meta-color);
+    color: var(--mdoc-open-api-sub-header-color);
     font-family: var(--mdoc-regular-font-family);
     font-size: var(--mdoc-smaller-text-size);
     text-transform: uppercase;
 }
 
 .open-api-sub-header > .description-part {
-    color: var(--mdoc-light-black);
+    color: var(--mdoc-open-api-sub-header-color);
     font-family: var(--mdoc-regular-font-family);
     font-size: var(--mdoc-smaller-text-size);
 

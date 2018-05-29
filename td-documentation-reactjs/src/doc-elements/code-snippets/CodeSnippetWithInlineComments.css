@@ -13,15 +13,21 @@
 .code-bullets {
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 1px;
+    padding: 1px 1px 1px 16px;
 }
 
 .code-bullets.hidden-explanation {
-    color: #eee;
-    background-color: #eee;
-    border: var(--mdoc-snippets-outer-border-color) 1px solid;
+    color: #efefef;
+    background-color: #efefef;
+    border-top: var(--mdoc-snippets-outer-border-color) 1px solid;
+    border-bottom: var(--mdoc-snippets-outer-border-color) 1px solid;
     padding: 0;
     cursor: pointer;
+}
+
+.wide-screen .code-bullets.hidden-explanation {
+    border-left: var(--mdoc-snippets-outer-border-color) 1px solid;
+    border-right: var(--mdoc-snippets-outer-border-color) 1px solid;
 }
 
 .code-bullets .spoiler-message {
@@ -39,7 +45,7 @@
 }
 
 span.ui.blue.label {
-    background-color: #000080 !important;
+    background-color: var(--mdoc-snippets-bullet-color) !important;
 }
 
 .code-with-inlined-comments.with-highlighted-line pre {

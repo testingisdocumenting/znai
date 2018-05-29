@@ -88,10 +88,6 @@ public class OpenApiIncludePlugin implements IncludePlugin {
             parserHandler.onSectionStart(operation.getSummary());
         }
 
-        if (operation.getId() != null) {
-            parserHandler.onGlobalAnchor(operation.getId());
-        }
-
         parserHandler.onCustomNode("OpenApiOperation",
                 Collections.singletonMap("operation", operation.toMap()));
     }

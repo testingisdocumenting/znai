@@ -13,9 +13,12 @@
     --mdoc-regular-text-color: var(--mdoc-inversed-text-color);
     --mdoc-regular-text-light-color: #aaa;
 
-    --mdoc-snippets-outer-border-color: #5e5e5e;
+    --mdoc-snippets-background-color: #202429;
+    --mdoc-snippets-outer-border-color: #35383e;
     --mdoc-snippets-inner-border-color: #404040;
-    --mdoc-snippets-title-color: #818181;
+    --mdoc-snippets-title-color: #959595;
+    --mdoc-snippets-title-background-color: #1b1d1f;
+    --mdoc-snippets-title-left-border-color: var(--mdoc-snippets-title-background-color);
 
     --mdoc-default-code-block-color: #aaa;
     --mdoc-class-color: #bbb;
@@ -25,9 +28,18 @@
     --mdoc-string-color: #678558;
     --mdoc-punctuation-color: #8f9aa7;
     --mdoc-number-color: #6998bc;
-    --mdoc-highlighted-background-color: rgba(100, 180, 250, 0.2);
+    --mdoc-boolean-color: var(--mdoc-number-color);
+    --mdoc-highlighted-background-color: #00d0ff2e;
 
     color: var(--mdoc-regular-text-color);
     background-color: var(--mdoc-inversed-background-color);
     border-left: solid 1px #5b666c;
+}
+
+.page-two-sides-right-part .snippet-container {
+    display: inherit;
+}
+
+.page-two-sides-right-part .snippet-container .snippet { 
+    border-left: none;
 }

@@ -11,10 +11,15 @@ import './tokens.css'
 
 export function snippetsDemo(registry) {
     const parsedJavaWide = parseCode("java", wideCode())
+    const parsedWithComments = parseCode("java", codeWithComments())
 
     registry
         .add('title', <Snippet title="snippet title" tokens={parseCode("html", htmlCode())}/>)
         .add('wide with title', <Snippet wide={true} title="snippet title" tokens={parsedJavaWide}/>)
+        .add('with bullet points', <Snippet wide={false} tokens={parsedWithComments} commentsType="inline"/>)
+        .add('with spoiler bullet points', <Snippet wide={false} tokens={parsedWithComments} spoiler={true} commentsType="inline"/>)
+        .add('wide with bullet points', <Snippet wide={true} tokens={parsedJavaWide} commentsType="inline"/>)
+        .add('wide with spoiler bullet points', <Snippet wide={true} spoiler={true} tokens={parsedJavaWide} commentsType="inline"/>)
         .add('horizontal scroll', <Snippet wide={false} tokens={parsedJavaWide}/>)
         .add('highlight by line idx', <Snippet tokens={parseCode("markdown", markdownCode())} highlight={[0]}/>)
         .add('highlight by text', <Snippet tokens={parseCode("markdown", markdownCode())} highlight={"include-file"}/>)
@@ -40,8 +45,16 @@ function htmlCode() {
 function wideCode() {
     return 'class InternationalPriceService implements PriceService {\n' +
         '    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n' +
-        '        ...\n' +
-        '    }\n' +
+        '        ... // code goes here\n' +
+        '    } // code stops here\n' +
+        '}\n'
+}
+
+function codeWithComments() {
+    return 'class InternationalPriceService implements PriceService {\n' +
+        '    private static void main(String... args) {\n' +
+        '        ... // code goes here\n' +
+        '    } // code stops here\n' +
         '}\n'
 }
 
