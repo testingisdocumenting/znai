@@ -4,6 +4,7 @@ import com.twosigma.documentation.parser.PageSectionIdTitle;
 import com.twosigma.documentation.utils.NameUtils;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.toList;
 
@@ -11,6 +12,8 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class TocItem {
+    private static final Pattern fileNameAllowedPattern = Pattern.compile("[a-zA-Z0-9-_]*");
+
     public static final String INDEX = "index";
 
     private String dirName;
@@ -28,6 +31,8 @@ public class TocItem {
     public TocItem(String dirName, String fileNameWithoutExtension) {
         this.dirName = dirName;
         this.fileNameWithoutExtension = fileNameWithoutExtension;
+        validateFileName(this.dirName);
+        validateFileName(this.fileNameWithoutExtension);
 
         this.sectionTitle = NameUtils.dashToCamelCaseWithSpaces(dirName);
         this.pageTitle = NameUtils.dashToCamelCaseWithSpaces(fileNameWithoutExtension);
@@ -120,5 +125,13 @@ public class TocItem {
         int result = dirName.hashCode();
         result = 31 * result + fileNameWithoutExtension.hashCode();
         return result;
+    }
+
+    private void validateFileName(String name) {
+        if (! fileNameAllowedPattern.matcher(name).matches()) {
+            throw new IllegalArgumentException("file name should match: " + fileNameAllowedPattern + "\ngiven name: " +
+                    name + "\n" +
+                    "use\n---\ntitle: my custom title with any symbols like !#?\n---\nto override the title for your page");
+        }
     }
 }
