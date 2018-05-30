@@ -1,11 +1,17 @@
-.section-title {
+.section-title,
+.empty-section-title {
     font-size: 22px;
+    font-weight: bold;
+    color: var(--mdoc-black);
+
     padding-bottom: 5px;
     margin-top: 55px;
     margin-bottom: 20px;
+}
 
-    color: var(--mdoc-black);
-    font-weight: bold;
+.empty-section-title {
+    margin-top: 40px;
+    margin-bottom: 0;
 }
 
 .section-title .icon {
