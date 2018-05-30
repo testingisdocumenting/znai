@@ -37,5 +37,5 @@
 }
 
 .simple-table .ui.table thead th {
-    background: #f8faf9;
+    background: var(--mdoc-table-header-background-color);
 }

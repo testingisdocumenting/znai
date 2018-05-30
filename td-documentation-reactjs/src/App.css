@@ -51,6 +51,8 @@
     --mdoc-snippets-space-above: 25px;
     --mdoc-snippets-space-below: 25px;
 
+    --mdoc-table-header-background-color: #f8faf9;
+
     --mdoc-api-key-color: #527d8f;
     --mdoc-api-description-color: #878988;
 
