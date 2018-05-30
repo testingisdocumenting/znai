@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
  * @author mykola
  */
 public class NameUtils {
-    public static String camelCaseWithSpacesToDashes(final String headingText) {
-        if (headingText == null)
+    public static String idFromTitle(final String title) {
+        if (title == null)
             return null;
 
-        return headingText.toLowerCase().replace(" ", "-");
+        String onlyTextAndNumbers = title.replaceAll("[^a-zA-Z0-9 ]", "");
+        return onlyTextAndNumbers.toLowerCase().replaceAll("\\s+", "-");
     }
 
     public static String dashToCamelCaseWithSpaces(final String dashBasedName) {

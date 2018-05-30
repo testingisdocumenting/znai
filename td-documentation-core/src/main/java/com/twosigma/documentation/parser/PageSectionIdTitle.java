@@ -14,7 +14,7 @@ public class PageSectionIdTitle {
 
     public PageSectionIdTitle(String title) {
         this.title = title;
-        this.id = NameUtils.camelCaseWithSpacesToDashes(title);
+        this.id = NameUtils.idFromTitle(title);
     }
 
     public String getTitle() {

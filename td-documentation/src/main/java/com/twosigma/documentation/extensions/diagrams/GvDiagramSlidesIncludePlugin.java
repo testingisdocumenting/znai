@@ -44,7 +44,7 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
 
         String diagramTitle = pluginParams.getFreeParam();
-        String diagramId = NameUtils.camelCaseWithSpacesToDashes(diagramTitle);
+        String diagramId = NameUtils.idFromTitle(diagramTitle);
 
         diagramPath = resourcesResolver.fullPath(pluginParams.getOpts().getRequiredString("diagramPath"));
         slidesPath = resourcesResolver.fullPath(pluginParams.getOpts().getRequiredString("slidesPath"));
