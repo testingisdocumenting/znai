@@ -39,7 +39,7 @@ class Documentation extends Component {
         setDocMeta(docMeta)
         this.searchPromise = getSearchPromise(docMeta)
 
-        const selectedTocItem = {
+        const autoSelectedTocItem = {
             dirName: page.tocItem.dirName,
             fileName: page.tocItem.fileName,
             pageSectionId: page.tocItem.pageSectionIdTitles[0] ?
@@ -52,7 +52,8 @@ class Documentation extends Component {
             page: Documentation.processPage(page),
             toc: tableOfContents.toc,
             docMeta: docMeta,
-            selectedTocItem: selectedTocItem,
+            forceSelectedTocItem: null, // via explicit TOC panel click
+            autoSelectedTocItem: autoSelectedTocItem, // based on scrolling
             mode: DocumentationModes.DEFAULT
         }
 
@@ -62,6 +63,7 @@ class Documentation extends Component {
         this.onTocToggle = this.onTocToggle.bind(this)
         this.onTocSelect = this.onTocSelect.bind(this)
         this.onTocItemClick = this.onTocItemClick.bind(this)
+        this.onTocItemPageSectionClick = this.onTocItemPageSectionClick.bind(this)
         this.onSearchClick = this.onSearchClick.bind(this)
         this.onSearchClose = this.onSearchClose.bind(this)
         this.onPanelSelect = this.onPanelSelect.bind(this)
@@ -103,7 +105,8 @@ class Documentation extends Component {
             toc,
             page,
             docMeta,
-            selectedTocItem,
+            autoSelectedTocItem,
+            forceSelectedTocItem,
             tocCollapsed,
             lastChangeDataDom,
             isSearchActive,
@@ -147,7 +150,7 @@ class Documentation extends Component {
             <span>
                 <DocumentationLayout docMeta={docMeta}
                                      toc={toc}
-                                     selectedTocItem={selectedTocItem}
+                                     selectedTocItem={forceSelectedTocItem || autoSelectedTocItem}
                                      prevPageTocItem={this.prevPageTocItem}
                                      nextPageTocItem={this.nextPageTocItem}
                                      searchPopup={searchPopup}
@@ -157,6 +160,7 @@ class Documentation extends Component {
                                      onHeaderClick={this.onHeaderClick}
                                      onSearchClick={this.onSearchClick}
                                      onTocItemClick={this.onTocItemClick}
+                                     onTocItemPageSectionClick={this.onTocItemPageSectionClick}
                                      onNextPage={this.onNextPage}
                                      onPrevPage={this.onPrevPage}
                                      textSelection={textSelection}
@@ -355,6 +359,15 @@ class Documentation extends Component {
         documentationNavigation.navigateToPage({dirName, fileName})
     }
 
+    onTocItemPageSectionClick(sectionId) {
+        const {autoSelectedTocItem} = this.state
+
+        documentationNavigation.scrollToAnchor(sectionId)
+
+        const forceSelectedTocItem = {...autoSelectedTocItem, pageSectionId: sectionId}
+        this.setState({forceSelectedTocItem})
+    }
+
     onSearchSelection(id) {
         this.onSearchClose()
         documentationNavigation.navigateToPage({dirName: id.dn, fileName: id.fn, pageSectionId: id.psid})
@@ -476,7 +489,12 @@ class Documentation extends Component {
                 return
             }
 
-            this.changePage({page: matchingPages[0], selectedTocItem: currentPageLocation, lastChangeDataDom: null})
+            this.changePage({
+                page: matchingPages[0],
+                forceSelectedTocItem: currentPageLocation,
+                autoSelectedTocItem: currentPageLocation,
+                lastChangeDataDom: null
+            })
             return true
         }, (error) => console.error(error))
     }
@@ -495,35 +513,63 @@ class Documentation extends Component {
     }
 
     updateCurrentPageSection() {
-        const {mode, page, selectedTocItem} = this.state
+        const {mode, page, autoSelectedTocItem, forceSelectedTocItem} = this.state
 
         if (mode !== DocumentationModes.DEFAULT) {
             return
         }
 
-        const pageSections = page.tocItem.pageSectionIdTitles
-        let sectionTitles = this.pageSectionNodes.map((n, idx) => {
-            return {idTitle: pageSections[idx], rect: n.getBoundingClientRect()}
-        })
-        const height = window.innerHeight
+        const sectionTitlesWithNode = combineSectionTitlesWithNodes(this.pageSectionNodes)
+        const withVisibleTitle = sectionsWithVisibleTitle()
 
-        const withVisibleTitle = sectionTitles.filter(st => {
-            const rect = st.rect
-            return rect.top > -10 && rect.top < height
-        })
-
-        const closestToTopZero = () => {
-            let belowZero = sectionTitles.filter(st => st.rect.top < 0)
-            return belowZero.length ? belowZero[belowZero.length - 1] : sectionTitles[0]
+        if (forceSelectedTocItem && isVisible(forceSelectedTocItem.pageSectionId)) {
+            return;
         }
 
-        const current = withVisibleTitle.length ? withVisibleTitle[0] : closestToTopZero()
+        const visible = withVisibleTitle.length ? withVisibleTitle[0] : closestToTopZero()
 
         const enrichedSelectedTocItem = {
-            ...selectedTocItem,
-            pageSectionId: (current && current.idTitle) ? current.idTitle.id : null
+            ...autoSelectedTocItem,
+            pageSectionId: (visible && visible.idTitle) ? visible.idTitle.id : null
         }
-        this.setState({selectedTocItem: enrichedSelectedTocItem})
+        this.setState({autoSelectedTocItem: enrichedSelectedTocItem, forceSelectedTocItem: null})
+
+        function combineSectionTitlesWithNodes(pageSectionNodes) {
+            const pageSections = page.tocItem.pageSectionIdTitles
+
+            return pageSectionNodes
+                .filter(isNodeIdPresentInSections)
+                .map((n, idx) => {
+                return {idTitle: pageSections[idx], rect: n.getBoundingClientRect()}
+            })
+
+            // case where mdoc page has an example of rendered markdown
+            // it generates extra nodes matching section-title css, but that node is not part
+            // of table of contents, so needs to be excluded
+            function isNodeIdPresentInSections(node) {
+                return pageSections.filter(s => s.id === node.id).length > 0
+            }
+        }
+
+        function sectionsWithVisibleTitle() {
+            const height = window.innerHeight
+            return (sectionTitlesWithNode).filter(st => {
+                const rect = st.rect
+                return rect.top > -10 && rect.top < height
+            })
+        }
+
+        function isVisible(pageSectionId) {
+            const visibleWithForcedId =
+                withVisibleTitle.filter(s => s.idTitle.id === pageSectionId)
+
+            return visibleWithForcedId.length > 0
+        }
+
+        function closestToTopZero() {
+            const belowZero = sectionTitlesWithNode.filter(st => st.rect.top < 0)
+            return belowZero.length ? belowZero[belowZero.length - 1] : sectionTitlesWithNode[0]
+        }
     }
 
     onPreviewIndicatorRemove = () => {

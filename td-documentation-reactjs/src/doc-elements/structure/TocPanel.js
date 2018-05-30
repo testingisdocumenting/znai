@@ -11,6 +11,7 @@ class TocPanel extends Component {
             selected,
             selectedItem,
             onTocItemClick,
+            onTocItemPageSectionClick,
             onHeaderClick} = this.props
 
         const panelClass = "toc-panel" + (collapsed ? " collapsed" : "") + (selected ? " selected" : "")
@@ -27,7 +28,8 @@ class TocPanel extends Component {
                 </div>
                 <TocMenu toc={toc}
                          selected={selectedItem}
-                         onClickHandler={onTocItemClick}/>
+                         onTocItemPageSectionClick={onTocItemPageSectionClick}
+                         onTocItemClick={onTocItemClick}/>
             </div>
         )
     }

@@ -2,14 +2,20 @@ import React, {PureComponent} from 'react'
 import {documentationNavigation} from '../structure/DocumentationNavigation'
 import {pageTypesRegistry} from '../page/PageTypesRegistry'
 
-const PageSections = ({pageSectionIdTitles, selected}) => {
+const PageSections = ({pageSectionIdTitles, selected, onTocItemPageSectionClick}) => {
     return (<div className="page-sections">
         {pageSectionIdTitles.map((idTitle, idx) => {
+            const onClick = (e) => { e.preventDefault(); onTocItemPageSectionClick(idTitle.id) }
+
             const isSelected = idTitle.id === selected.pageSectionId
             const className = "page-section" + (isSelected ? " selected" : "")
             const href = "#" + idTitle.id
 
-            return (<div className={className} key={idx}><a href={href}>{idTitle.title}</a></div>)
+            return (
+                <div className={className} key={idx} onClick={onClick}>
+                    <a href={href}>{idTitle.title}</a>
+                </div>
+            )
         })
         }
     </div>)
@@ -17,18 +23,21 @@ const PageSections = ({pageSectionIdTitles, selected}) => {
 
 class Item extends PureComponent {
     render() {
-        const {item, selected, isSelected, onClickHandler} = this.props
+        const {item, selected, isSelected, onTocItemClick, onTocItemPageSectionClick} = this.props
 
         const className = 'toc-item' + (isSelected ? ' selected' : '')
         const href = documentationNavigation.buildUrl(item)
 
         const displayPageSections = isSelected && pageTypesRegistry.expandToc(item)
 
+        const onClick = (e) => { e.preventDefault(); onTocItemClick(item.dirName, item.fileName)}
+
         return (
             <div className={className} ref={this.saveNodeRef}>
-                <a href={href} onClick={ (e) => { e.preventDefault(); onClickHandler(item.dirName, item.fileName)}}>{item.pageTitle}</a>
+                <a href={href} onClick={onClick}>{item.pageTitle}</a>
                 {displayPageSections && <PageSections pageSectionIdTitles={item.pageSectionIdTitles}
-                                                      selected={selected}/>}
+                                                      selected={selected}
+                                                      onTocItemPageSectionClick={onTocItemPageSectionClick}/>}
             </div>
         )
     }
@@ -54,7 +63,7 @@ class Item extends PureComponent {
     }
 }
 
-const Section = ({section, selected, onClickHandler}) => {
+const Section = ({section, selected, onTocItemClick, onTocItemPageSectionClick}) => {
     const className = 'toc-section' + (section.dirName === selected.dirName ? ' selected' : '')
 
     return (
@@ -64,12 +73,13 @@ const Section = ({section, selected, onClickHandler}) => {
                                                item={item}
                                                selected={selected}
                                                isSelected={item.dirName === selected.dirName && item.fileName === selected.fileName}
-                                               onClickHandler={onClickHandler} />)}
+                                               onTocItemClick={onTocItemClick}
+                                               onTocItemPageSectionClick={onTocItemPageSectionClick}/>)}
         </div>
     )
 }
 
-const TocMenu = ({toc, selected, onClickHandler}) => {
+const TocMenu = ({toc, selected, onTocItemClick, onTocItemPageSectionClick}) => {
     selected = selected || {dirName: "", fileName: ""}
 
     // we won't render items that don't belong to a section. it includes things like top index.html or other misc files
@@ -78,7 +88,8 @@ const TocMenu = ({toc, selected, onClickHandler}) => {
             {toc.filter(sectionEntry => sectionEntry.dirName.length > 0).map((sectionEntry) =>
                 <Section key={sectionEntry.sectionTitle}
                          selected={selected}
-                         onClickHandler={onClickHandler}
+                         onTocItemClick={onTocItemClick}
+                         onTocItemPageSectionClick={onTocItemPageSectionClick}
                          section={sectionEntry} />)}
         </div>
     )

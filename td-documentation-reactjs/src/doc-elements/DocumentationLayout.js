@@ -23,6 +23,7 @@ class DocumentationLayout extends Component {
             toc,
             onHeaderClick,
             onTocItemClick,
+            onTocItemPageSectionClick,
             onNextPage,
             onPrevPage,
             textSelection,
@@ -46,6 +47,7 @@ class DocumentationLayout extends Component {
                               selectedItem={selectedTocItem}
                               onHeaderClick={onHeaderClick}
                               onTocItemClick={onTocItemClick}
+                              onTocItemPageSectionClick={onTocItemPageSectionClick}
                               onNextPage={onNextPage}
                               onPrevPage={onPrevPage}/>
                 </div>
