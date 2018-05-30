@@ -1,17 +1,17 @@
 # Request and Response Capture
 
-It helps to understand REST API if there are clear scenarios defined.
-Showing request used and response received makes your documentation less abstract.
+It helps in understanding a REST API if there are clear scenarios defined.
+Showing examples of requests used and responses received makes your documentation less abstract.
 
-Instead of manually copy&paste the responses back to your documentation consider running tests instead and automatically
-capture relevant artifacts.
+Instead of manually copy-and-pasting the responses back to your documentation, consider running tests and automatically
+capturing the relevant artifacts.
 
 # WebTau
 
-[WebTau](http://mdoc.app.twosigma.com/webtau/REST/getting-started) is the framework I use to write,
-run and capture REST tests artifacts.
+[WebTau](http://mdoc.app.twosigma.com/webtau/REST/getting-started) is the framework to write,
+run, and capture REST tests artifacts.
 
-The bare minimum test in WebTau looks like this
+The bare minimum test in WebTau looks like this:
 
 :include-file: examples/rest/restGet.groovy
 
@@ -21,21 +21,21 @@ To capture artifacts use `http.doc.capture`
 
 :include-file: examples/rest/restPost.groovy {commentsType: "inline"}
 
-Captured artifact is a json file that looks like this
+Captured artifact is a `JSON` file that looks like this:
 
 :include-file: REST/employee-get.json
 
 # Document REST calls
 
-Once artifact is captured, include it for documentation with `rest-test` plugin
+Once the artifact is captured, include it for documentation with the `rest-test` plugin.
 
     :include-rest-test: REST/employee-get.json
 
-Result looks like
+The result looks like:
 
 :include-rest-test: REST/employee-get.json
 
-or
+or:
 
 :include-rest-test: REST/employee-post.json
 

@@ -1,4 +1,4 @@
-[PlantUml](http://plantuml.com/sequence-diagram) is a text based way of drawing all sort of diagrams.
+[PlantUml](http://plantuml.com/sequence-diagram) is a text-based way of drawing many kinds of diagrams.
 
 # In Place
 
@@ -14,11 +14,9 @@ Alice <-- Bob: another authentication Response
 ```
 `````
 
-Consider using [Columns Layout](layout/columns) to put your story and a diagram side by side
-
 # External file
 
-If your diagram is stored in a separate file use `:include-plantuml: <path>`.
+If your diagram is stored in a separate file, use `:include-plantuml: <path>`.
 
 ```columns
 left:

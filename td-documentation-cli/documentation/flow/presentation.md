@@ -1,11 +1,23 @@
 # Equal Flow
 
-When people build presentations for a product, they focus on a proper flow: to make sure that people
-who never used the product are not lost.
-But if you go to the documentation site, quite often the flow is not newbie friendly anymore.
+When people build presentations for a product, there should be great focus on the flow of information, making sure that those
+who have never used the product are not lost. A poorly organized presentation might drive users seeking clarification to product documentation, which too often is just as unfriendly to neophytes.
 
-`MDoc` can turn any page into a presentation at will *(zoom in icon next to each page title)*.
-If you write your documentation with presentation mode in mind it should greatly improve the flow of your documentation.
+Presenttion mode in `MDoc` is meant to help with both issues, mutually reinforcing good flow in presentations and documentation.
 
-Look at the table of the content on the left under `Introduction`.
-That order was changed after I presented `MDoc` a few times to make it flow better. As a result it made it more natural to read.
+
+# Presentation Mode
+
+`MDoc` can turn any page into a presentation. Simply click `icon:resize-full` to the far fight of each page title.
+
+In presentation mode, only certain documentation elements are converted to slides:
+
+* Headings
+* Bullets
+* Images and graphics
+* Code snippets
+* Command line input
+* Math
+* Tables
+
+If you write your documentation with a presentation in mind it should improve the flow of your documentation.

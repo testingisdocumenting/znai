@@ -2,11 +2,11 @@
 
 When you need to extract a specific method body use `include-java` plugin.
 
-Consider a file
+Consider the file below:
 
 :include-java: HelloWorld.java
 
-Specifying a method name to extract its full definition or only its body. 
+You can specify a method name to extract its full definition, or display only its body. 
 
     :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true}
 
@@ -37,8 +37,8 @@ If `signatureOnly` is specified, body will be omitted.
 
 Specify types inside brackets to select an overloaded versions of your methods. 
 
-Types should appear as they are in the file. I.e. if you use short version of a type, you need to use the short version 
-inside plugin.
+Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short version 
+inside the plugin.
 
     :include-java: HelloWorld.java {entry: "sampleMethod(Map, int, boolean)"}
 
@@ -48,13 +48,13 @@ Note: Generic types are erased and spaces after commas are optional
 
 # Type Body
 
-To extract `class`, `interface` or `enum` body use
+To extract `class`, `interface` or `enum` body use:
 
     :include-java: MyEnum.java {entry: "MyEnum"}
     
 :include-java: MyEnum.java {entry: "MyEnum"}
 
-Use `bodyOnly` to only display body of your type
+Use `bodyOnly` to only display body of your type.
 
     :include-java: MyEnum.java {entry: "MyEnum", bodyOnly: true}
     
@@ -62,19 +62,19 @@ Use `bodyOnly` to only display body of your type
 
 # Multiple Entries
 
-To display multiple methods at once use `entries` parameter to pass a list of method names
+To display multiple methods at once use `entries` parameter to pass a list of method names.
     
     :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"]}
 
-will render 
+will render:
 
 :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"]}
 
-List important methods signatures at one place by passing `signatureOnly: true`
+List important methods signatures at one place by passing `signatureOnly: true`.
 
     :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"], signatureOnly: true}
 
-will render 
+will render: 
 
 :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"], signatureOnly: true}
 
@@ -85,7 +85,7 @@ In case of Java you may already use `JavaDoc` strings to explain certain concept
 
 :include-java: HelloWorld.java
 
-Instead of copy and pasting text between sources, you can refer it inside documentation.
+Instead of copy and pasting text between sources, you can refer to it inside your documentation.
 
     :include-java-doc: HelloWorld.java
     
@@ -95,7 +95,7 @@ Instead of copy and pasting text between sources, you can refer it inside docume
 
 # Method JavaDoc
 
-Method level `JavaDoc` text can be referred as well by specifying `entry` parameter 
+Method level `JavaDoc` text can be referred to as well by specifying the `entry` parameter.
     
     :include-java-doc: HelloWorld.java {entry: "sampleMethod"}
     
@@ -117,7 +117,7 @@ Method level `JavaDoc` text can be referred as well by specifying `entry` parame
 
 # Enum Entries
 
-Use `include-java-enum-entries` to enumerate entries of a enum from a file
+Use `include-java-enum-entries` to enumerate entries of a enum from a file.
 
 :include-file: MyEnum.java
 

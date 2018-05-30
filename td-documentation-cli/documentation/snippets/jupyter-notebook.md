@@ -6,7 +6,7 @@ Use `include-jupyter` to include [Jupyter](http://jupyter.org/) notebook inside 
     
 :include-jupyter: jupyter/simple-notebook.ipynb
 
-Note: remember that you can define lookup paths for files like notebooks inside `lookup-paths` file, so you don't have
+Note: Remember that you can define lookup paths for files like notebooks inside `lookup-paths` file, so you don't have
 to copy and paste notebooks to your documentation directory.
 
 # Seamless Markdown Integration
@@ -22,5 +22,5 @@ become part of Table Of Contents and part of a search unit.
      
 # Two Sides
 
-You will learn about [Two Sides Layout](layout/two-sides-pages) in Layout section. 
-If you are curios now, jump to [Jupyter Two Sides example](layout/jupyter-notebook-two-sides)
+You will learn about the [Two Sides Layout](layout/two-sides-pages) in the Layout section. 
+If you are are curious now for examples, jump to [Jupyter Two Sides example](layout/jupyter-notebook-two-sides)

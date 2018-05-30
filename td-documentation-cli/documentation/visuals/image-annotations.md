@@ -11,19 +11,19 @@ Not every UI can be as simple as one input box.
 
 :include-image: word-toolbar.jpg {annotationsPath: 'annotations1.json'}
 
-there are different types of annotations:
-* circles
-* rectangles
-* arrows
-* etc
+There are different types of annotations:
+* Circles
+* Rectangles
+* Arrows
+* etc.
 
 :include-image: screenshot1.png {annotationsPath: 'annotations2.json'}
 
-Annotations are stored as a simple json file
+Annotations are stored as a simple `JSON` file.
 
 :include-file: annotations2.json
 
-And then easily integrated with documentation by using an `image` plugin
+These can then be easily integrated with documentation by using an `image` plugin.
 
 :include-file: image-annotations.md {startLine: '# Annotated Images', endLine: '* etc', lang: 'markdown'}
 

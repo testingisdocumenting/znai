@@ -5,11 +5,12 @@ MDoc has three levels of documentation organization:
 * Pages
 * Page Sections
 
-MDoc encourages to split content into multiple pages.
+MDoc encourages authors to split their content across multiple pages. 
+
 If you feel like you need to use nested headings, consider moving your content hierarchy one level up:
-* split page into multiple ones
-* introduce chapters
-* focus on one thing at a time
+* Split overlong page into multiple ones
+* Introduce chapters
+* Focus on one thing at a time
 
 # Similarity with OOP
 
@@ -18,13 +19,13 @@ It may help to show parallel with `OOP` concepts
 * Page Sections as `methods`
 * Chapters as `packages`
 
-It is a bad practice to have one Class with dozens of unrelated methods. 
-Similarly it is a bad practice to have one page with dozens of unrelated sections.
+It is bad practice to have one class with many unrelated methods. 
+Similarly, it is bad practice to have one page with various unrelated sections.
 
 # Table Of Contents
 
 Each documentation must have `toc` file in its root. 
-File contains chapters and pages.
+This file contains chapters and pages.
 
 This is a `toc` file for this documentation.
 
@@ -32,20 +33,19 @@ This is a `toc` file for this documentation.
 
 Take a look at the left side bar and compare it with the file content.
 
-Top level entry `introduction` correspond to directory names. 
-Nested entry `rationale` correspond to file name `rationale.md`.
+The top entry, `introduction`, corresponds to the directory of the same name. 
+The nested entry, `rationale`, corresponds to the file `rationale.md`.
 
 # Sub Headings
 
 Only a first level heading is treated as a first class citizen:
 * Part of **TOC**
-* Smallest unit of **Search result**
+* Smallest unit of **search result**
 ```   
 # First Class Citizen
 ```
 
-Nested sub headings only add visual distinction.
-If you use them to create your document outline chances are you need to consider splitting your page. 
+Nested sub headings only add visual distinction within a page.
 
     ## Sub heading
     content of sub heading
@@ -62,7 +62,7 @@ content of sub sub heading
 
 # Meta
 
-Each documentation must have `meta.json` file in its root.
-Json contains documentation display name, type and optional `View On` information.
+Each documentation must have the `meta.json` file in its root.
+This `JSON` file contains documentation display name, type, and optional `View On` information.
 
 :include-file: meta.json

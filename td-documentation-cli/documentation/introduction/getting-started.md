@@ -1,14 +1,14 @@
 # Command Line Tool
 
 Mdoc comes with a command line tool that:
-* generates documentation website
-* runs auto-preview local server
-* runs documentation server
+* Generates a documentation website
+* Runs auto-preview on a local server
+* Runs documentation server
 
 
 # Markdown
 
-Fastest way to learn markdown is to go to [CommonMark](http://commonmark.org/help/) website 
+Fastest way to learn Markdown is to go to [CommonMark](http://commonmark.org/help/) website 
 and go through a 60 seconds cheatsheet or 10 minutes tutorial.
 
 # Installation
@@ -41,7 +41,7 @@ Navigate to the newly created directory. Start preview mode by running
 
 :include-cli-command: mdoc --preview 
 
-Follow printed url.  
+The command will output a URL that directs to your preview.  
   
 Blue *eye* icon in the top right corner indicates that preview is on.
 Open any text editor, modify and save `page-one.md` file.
@@ -58,8 +58,8 @@ Changes will be reflected in the browser.
     :include-cli-command: mdoc-upload --mdoc-root-path <dest-dir> {paramsToHighlight: "dest-dir"}
 
 
-Your documentation will be available shorty at `http://mdoc.app.twosigma.com/<doc-id>`
+Your documentation will be available shortly at `http://mdoc.app.twosigma.com/<doc-id>`
 
-Warning: check that doc-id is not taken before deploying your documentation. There is no ownership check at the moment
+Warning: Always check that a new doc-id is not taken before deploying documentation. There is no ownership check at the moment
 and one can override existing documentation. 
  

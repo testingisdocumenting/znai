@@ -1,22 +1,30 @@
 # Simple Snippet
 
 It is very easy to add a code snippet or an output result.
-All you have to do is indent your code with 4 spaces inside your markdown document and
+All you have to do is indent your code with 4 spaces inside your Markdown document and
 your code will be rendered like this.
 
     interface PriceService {
         Money calcPrice(String cuips, Integer quantity);
     }
-    
-This method doesn't highlight code by default. It is possible to provide a default language to use for highlighting using
-[meta.json](meta file).
 
 :include-file: code-snippets.md {startLine: '# Simple Snippet', numberOfLines: 9, lang: 'markdown'}
 
+Note: this method doesn't highlight code.
+
 # Specifying Language
  
-You can also specify a language. 
-That maybe useful if there is the snippet is not large enough for auto detection.
+You can also specify a language to enable syntax highlighting for your snippet. 
+
+    ```javascript
+    import React, {Component} from 'react'
+
+    class MyComponent extends Component {
+        render() {
+            /// ...
+        }
+    }
+    ```
 
 ```javascript
 import React, {Component} from 'react'
@@ -28,17 +36,7 @@ class MyComponent extends Component {
 }
 ```
 
-```bash
-ls -l
-export PATH=/home/path
-echo $PATH
-```
-
-Snippet below is used to highlight the code as a javascript language
-
-:include-file: code-snippets.md {startLine: '# Specifying Language', numberOfLines: 20, lang: 'markdown'}
-
-Following languages are supported
+The following languages are supported:
 * Java
 * JavaScript
 * Groovy
@@ -47,9 +45,15 @@ Following languages are supported
 * Bash
 
 `MDoc` uses [prismjs](http://prismjs.com) library to provide syntax highlighting. 
-It is not being executed inside the browser: syntax highlighting is done during HTML generation
+Note that it is not being executed inside the browser, but rather applied during HTML generation.
   
 # Title
+
+Use `title` property to specify a title.
+
+    ```javascript {title: "ReactJS Component"}
+    ...
+    ```
 
 ```javascript {title: "ReactJS Component"}
 import React, {Component} from 'react'
@@ -61,16 +65,9 @@ class MyComponent extends Component {
 }
 ```
 
-Use `title` property to specify a title.
-
-    ```javascript {title: "ReactJS Component"}
-    ...
-    ```
-
-
 # Wide Code
 
-Use `wide` option to stretch wide code to occupy as much real estate as possible.  
+Use `wide` option to stretch wide code to occupy as much horizontal real estate as possible.  
 
     ```java {wide: true}
     class InternationalPriceService implements PriceService {
