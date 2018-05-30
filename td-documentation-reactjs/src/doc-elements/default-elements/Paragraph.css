@@ -12,12 +12,10 @@
 
 .paragraph.attention .icon-part {
     margin-right: 15px;
-    display: flex;
-    align-items: center;
 }
 
 .paragraph.attention .icon-part .icon {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 18px;
 }
 
@@ -28,7 +26,8 @@
 
 .paragraph.attention .message-part {
     flex: 1;
-    max-width: var(--mdoc-single-column-partial-width);
+    padding-bottom: 3px;
+    padding-right: 10px;
 }
 
 .paragraph.attention.note {
