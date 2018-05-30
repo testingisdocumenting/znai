@@ -35,3 +35,7 @@
 .simple-table .middle-vertical-lines-only tbody td:last-child {
     border-right: none;
 }
+
+.simple-table .ui.table thead th {
+    background: #f8faf9;
+}
