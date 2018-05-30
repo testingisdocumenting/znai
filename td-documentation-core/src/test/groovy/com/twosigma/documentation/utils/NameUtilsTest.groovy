@@ -13,6 +13,7 @@ class NameUtilsTest {
         assert idFromTitle('word') == 'word'
         assert idFromTitle('Hello DearWorld') == 'hello-dearworld'
         assert idFromTitle('Hello!. %#$ DearWorld?') == 'hello-dearworld'
+        assert idFromTitle('Negative-Value Tests') == 'negative-value-tests'
     }
 
     @Test

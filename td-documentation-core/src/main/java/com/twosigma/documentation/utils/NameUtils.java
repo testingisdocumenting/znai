@@ -11,7 +11,7 @@ public class NameUtils {
         if (title == null)
             return null;
 
-        String onlyTextAndNumbers = title.replaceAll("[^a-zA-Z0-9 ]", "");
+        String onlyTextAndNumbers = title.replaceAll("[^a-zA-Z0-9-_ ]", "");
         return onlyTextAndNumbers.toLowerCase().replaceAll("\\s+", "-");
     }
 
