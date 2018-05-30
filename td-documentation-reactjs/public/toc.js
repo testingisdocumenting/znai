@@ -89,6 +89,10 @@ toc = [
           {
             "title": "Preview",
             "id": "preview"
+          },
+          {
+            "title": "Deploy",
+            "id": "deploy"
           }
         ]
       }
@@ -162,6 +166,10 @@ toc = [
           {
             "title": "Links",
             "id": "links"
+          },
+          {
+            "title": "Downloads",
+            "id": "downloads"
           }
         ]
       },
@@ -304,11 +312,7 @@ toc = [
       {
         "sectionTitle": "Snippets",
         "pageTitle": "Java",
-        "pageMeta": {
-          "type": [
-            "api"
-          ]
-        },
+        "pageMeta": {},
         "fileName": "java",
         "dirName": "snippets",
         "pageSectionIdTitles": [
@@ -381,6 +385,27 @@ toc = [
       },
       {
         "sectionTitle": "Snippets",
+        "pageTitle": "Typescript",
+        "pageMeta": {},
+        "fileName": "typescript",
+        "dirName": "snippets",
+        "pageSectionIdTitles": [
+          {
+            "title": "Parsing",
+            "id": "parsing"
+          },
+          {
+            "title": "Properties",
+            "id": "properties"
+          },
+          {
+            "title": "JSX Elements",
+            "id": "jsx-elements"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Snippets",
         "pageTitle": "Cpp",
         "pageMeta": {},
         "fileName": "cpp",
@@ -404,8 +429,99 @@ toc = [
             "id": "paths"
           },
           {
+            "title": "Paths From File",
+            "id": "paths-from-file"
+          },
+          {
+            "title": "Json Subparts",
+            "id": "json-subparts"
+          },
+          {
+            "title": "Title",
+            "id": "title"
+          },
+          {
+            "title": "Read More",
+            "id": "read-more"
+          },
+          {
+            "title": "Highlights",
+            "id": "highlights"
+          },
+          {
             "title": "Test Results",
             "id": "test-results"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Snippets",
+        "pageTitle": "Api Parameters",
+        "pageMeta": {},
+        "fileName": "api-parameters",
+        "dirName": "snippets",
+        "pageSectionIdTitles": [
+          {
+            "title": "Inlined CSV",
+            "id": "inlined-csv"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Snippets",
+        "pageTitle": "Open API",
+        "pageMeta": {},
+        "fileName": "open-API",
+        "dirName": "snippets",
+        "pageSectionIdTitles": [
+          {
+            "title": "Operation definition",
+            "id": "operation-definition"
+          },
+          {
+            "title": "Auto Section",
+            "id": "auto-section"
+          },
+          {
+            "title": "Time Estimates",
+            "id": "time-estimates"
+          },
+          {
+            "title": "Tags",
+            "id": "tags"
+          },
+          {
+            "title": "Price Estimates",
+            "id": "price-estimates"
+          },
+          {
+            "title": "Time Estimates",
+            "id": "time-estimates"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Snippets",
+        "pageTitle": "Jupyter Notebook",
+        "pageMeta": {},
+        "fileName": "jupyter-notebook",
+        "dirName": "snippets",
+        "pageSectionIdTitles": [
+          {
+            "title": "Code and Output",
+            "id": "code-and-output"
+          },
+          {
+            "title": "Seamless Markdown Integration",
+            "id": "seamless-markdown-integration"
+          },
+          {
+            "title": "Pandas",
+            "id": "pandas"
+          },
+          {
+            "title": "Two Sides",
+            "id": "two-sides"
           }
         ]
       },
@@ -431,19 +547,6 @@ toc = [
           {
             "title": "Presentation mode",
             "id": "presentation-mode"
-          }
-        ]
-      },
-      {
-        "sectionTitle": "Snippets",
-        "pageTitle": "Open API",
-        "pageMeta": {},
-        "fileName": "open-API",
-        "dirName": "snippets",
-        "pageSectionIdTitles": [
-          {
-            "title": "Operation definition",
-            "id": "operation-definition"
           }
         ]
       },
@@ -616,6 +719,81 @@ toc = [
           {
             "title": "Loops",
             "id": "loops"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Layout",
+        "pageTitle": "Two Sides Pages",
+        "pageMeta": {
+          "type": [
+            "two-sides"
+          ]
+        },
+        "fileName": "two-sides-pages",
+        "dirName": "layout",
+        "pageSectionIdTitles": [
+          {
+            "title": "Setup",
+            "id": "setup"
+          },
+          {
+            "title": "Details Side",
+            "id": "details-side"
+          },
+          {
+            "title": "Open API example",
+            "id": "open-api-example"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Layout",
+        "pageTitle": "Two Sides Tabs",
+        "pageMeta": {
+          "type": [
+            "two-sides"
+          ]
+        },
+        "fileName": "two-sides-tabs",
+        "dirName": "layout",
+        "pageSectionIdTitles": [
+          {
+            "title": "Unified Tabs",
+            "id": "unified-tabs"
+          },
+          {
+            "title": "Definition",
+            "id": "definition"
+          },
+          {
+            "title": "Markdown Per Tab",
+            "id": "markdown-per-tab"
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Layout",
+        "pageTitle": "Jupyter Notebook Two Sides",
+        "pageMeta": {
+          "type": [
+            "two-sides"
+          ]
+        },
+        "fileName": "jupyter-notebook-two-sides",
+        "dirName": "layout",
+        "pageSectionIdTitles": [
+          {
+            "title": "Code First",
+            "id": "code-first"
+          },
+          {
+            "title": "Story First",
+            "id": "story-first"
+          },
+          {
+            "title": "Pandas",
+            "id": "pandas"
           }
         ]
       }
