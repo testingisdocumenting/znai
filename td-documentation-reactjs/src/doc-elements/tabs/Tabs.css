@@ -32,12 +32,12 @@
     border-bottom: 3px solid #888888;
 }
 
-.tabs-area .snippet-container .snippet {
-    border: none;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
 .tabs-area .snippet-container + .paragraph {
     margin-top: 20px;
+}
+
+.tabs-area .snippet-container .snippet,
+.tabs-area .snippet-container.wide-screen {
+    margin-top: 0;
+    margin-bottom: 0;
 }
