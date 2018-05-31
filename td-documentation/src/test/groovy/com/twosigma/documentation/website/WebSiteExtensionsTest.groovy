@@ -15,9 +15,11 @@ class WebSiteExtensionsTest {
 
         def extensions = createExtensions([
                 cssResources: ['custom.css', 'another.css'],
-                jsResources: ['custom.js', 'components.js']])
+                jsResources: ['custom.js', 'components.js'],
+                htmlResources: ['custom.html']])
         extensions.cssResources.path.should == ['custom.css', 'another.css']
         extensions.jsResources.path.should == ['custom.js', 'components.js']
+        extensions.htmlResources.path.should == ['custom.html']
     }
 
     private static WebSiteExtensions createExtensions(Map definition) {
