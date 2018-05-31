@@ -2,7 +2,10 @@ package com.twosigma.documentation.html;
 
 import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
-import com.twosigma.documentation.structure.*;
+import com.twosigma.documentation.structure.DocMeta;
+import com.twosigma.documentation.structure.Footer;
+import com.twosigma.documentation.structure.Page;
+import com.twosigma.documentation.structure.TocItem;
 import com.twosigma.documentation.website.WebSiteExtensions;
 
 /**
@@ -35,6 +38,9 @@ public class PageToHtmlPageConverter {
 
         webSiteExtensions.getJsResources().forEach(htmlPage::addJavaScript);
         webSiteExtensions.getCssResources().forEach(htmlPage::addCss);
+        webSiteExtensions.getHtmlResources().stream()
+            .map(WebResource::getTextContent)
+            .forEach(text -> htmlPage.addToBody(() -> text));
 
         return new HtmlPageAndPageProps(htmlPage, pageProps);
     }

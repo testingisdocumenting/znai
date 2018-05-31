@@ -3,9 +3,6 @@ package com.twosigma.documentation.website;
 import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.html.WebResource;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +16,7 @@ import static java.util.stream.Collectors.toList;
 public class WebSiteExtensions {
     private List<WebResource> cssResources;
     private List<WebResource> jsResources;
+    private List<WebResource> htmlResources;
     private Map<String, ?> definition;
     private ResourcesResolver resourcesResolver;
 
@@ -32,6 +30,7 @@ public class WebSiteExtensions {
 
         this.cssResources = extractWebResources("cssResources");
         this.jsResources = extractWebResources("jsResources");
+        this.htmlResources = extractWebResources("htmlResources");
     }
 
     public List<WebResource> getCssResources() {
@@ -40,6 +39,10 @@ public class WebSiteExtensions {
 
     public List<WebResource> getJsResources() {
         return jsResources;
+    }
+
+    public List<WebResource> getHtmlResources() {
+        return htmlResources;
     }
 
     @SuppressWarnings("unchecked")

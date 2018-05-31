@@ -1,4 +1,5 @@
 {
   "cssResources": ["custom.css"],
-  "jsResources": ["custom.js"]
+  "jsResources": ["custom.js"],
+  "htmlResources": ["custom.html"]
 }
