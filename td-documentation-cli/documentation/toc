@@ -20,7 +20,6 @@ snippets
     json
     api-parameters
     open-API
-    jupyter-notebook
     CLI
     math
 layout
@@ -31,7 +30,6 @@ layout
     templates
     two-sides-pages
     two-sides-tabs
-    jupyter-notebook-two-sides
 visuals
     smart-bullet-points
     icons
