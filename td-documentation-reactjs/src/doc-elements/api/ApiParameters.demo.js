@@ -1,6 +1,7 @@
 import React from 'react'
 import ApiParameters from './ApiParameters'
 import {elementsLibrary} from '../DefaultElementsLibrary'
+import Paragraph from '../default-elements/Paragraph'
 
 const personParameters = [
     {name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
@@ -31,5 +32,24 @@ export function apiParametersDemo(registry) {
     registry
         .add('flat parameters', <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>)
         .add('nested parameters', <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>)
+        .add('with text around', (
+            <React.Fragment>
+                <ParagraphText/>
+                <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
+                <ParagraphText/>
+            </React.Fragment>
+        ))
+}
+
+function ParagraphText() {
+    return (
+        <Paragraph content={simpleText()} elementsLibrary={elementsLibrary}/>
+    )
+}
+
+function simpleText() {
+    return [
+        {type: 'SimpleText', text: 'simple paragraph with text. simple paragraph with text. simple paragraph with text.'}
+    ]
 }
 
