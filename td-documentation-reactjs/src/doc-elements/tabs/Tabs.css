@@ -35,3 +35,9 @@
 .tabs-area .snippet-container + .paragraph {
     margin-top: 20px;
 }
+
+.tabs-area .snippet-container .snippet,
+.tabs-area .snippet-container.wide-screen {
+    margin-top: 0;
+    margin-bottom: 0;
+}
