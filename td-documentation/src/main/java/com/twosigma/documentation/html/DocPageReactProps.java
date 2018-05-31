@@ -21,6 +21,10 @@ public class DocPageReactProps {
         this.asMap = buildMap();
     }
 
+    public TocItem getTocItem() {
+        return tocItem;
+    }
+
     public Map<String, ?> toMap() {
         return asMap;
     }

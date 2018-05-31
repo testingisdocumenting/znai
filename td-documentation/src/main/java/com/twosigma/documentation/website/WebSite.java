@@ -2,14 +2,14 @@ package com.twosigma.documentation.website;
 
 import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
-import com.twosigma.documentation.core.AuxiliaryFilesRegistry;
 import com.twosigma.documentation.core.AuxiliaryFile;
+import com.twosigma.documentation.core.AuxiliaryFilesRegistry;
 import com.twosigma.documentation.extensions.MultipleLocationsResourceResolver;
 import com.twosigma.documentation.html.*;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
-import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.search.LunrIndexer;
 import com.twosigma.documentation.search.PageSearchEntry;
 import com.twosigma.documentation.search.SiteSearchEntries;
@@ -51,7 +51,7 @@ public class WebSite {
     private TableOfContents toc;
     private WebSiteDocStructure docStructure;
     private Footer footer;
-    private List<DocPageReactProps> allPagesProps;
+    private Map<TocItem, DocPageReactProps> pagePropsByTocItem;
     private List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScripts;
 
@@ -161,7 +161,13 @@ public class WebSite {
         parseMarkupAndUpdateTocItem(tocItem);
         Page page = pageByTocItem.get(tocItem);
 
-        return generatePage(tocItem, page);
+        tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
+        deployToc();
+
+        HtmlPageAndPageProps pageProps = generatePage(tocItem, page);
+        buildJsonOfAllPages();
+
+        return pageProps;
     }
 
     public Set<TocItem> dependentTocItems(Path auxiliaryFile) {
@@ -213,7 +219,7 @@ public class WebSite {
         pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, webSiteExtensions, reactJsNashornEngine);
         markupParser = markupParsingConfiguration.createMarkupParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
-        allPagesProps = new ArrayList<>();
+        pagePropsByTocItem = new HashMap<>();
         extraJavaScripts = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScripts.add(tocJavaScript);
 
@@ -355,7 +361,7 @@ public class WebSite {
     private void generateSearchIndex() {
         reportPhase("generating search index");
 
-        String jsonIndex = lunrIndexer.createJsonIndex(allPagesProps);
+        String jsonIndex = lunrIndexer.createJsonIndex(pagePropsByTocItem.values());
         deployer.deploy("search-index.json", jsonIndex);
 
         String xmlExternalIndex = searchEntries.toXml();
@@ -363,7 +369,8 @@ public class WebSite {
     }
 
     private void buildJsonOfAllPages() {
-        List<Map<String, ?>> listOfMaps = this.allPagesProps.stream().map(DocPageReactProps::toMap).collect(toList());
+        List<Map<String, ?>> listOfMaps = this.pagePropsByTocItem
+                .values().stream().map(DocPageReactProps::toMap).collect(toList());
         String json = JsonUtils.serialize(listOfMaps);
 
         deployer.deploy("all-pages.json", json);
@@ -373,7 +380,7 @@ public class WebSite {
         try {
             HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(tocItem, page, footer);
 
-            allPagesProps.add(htmlAndProps.getProps());
+            pagePropsByTocItem.put(tocItem, htmlAndProps.getProps());
             extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
 
             String html = htmlAndProps.getHtmlPage().render(docMeta.getId());
