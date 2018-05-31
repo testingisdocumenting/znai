@@ -54,3 +54,8 @@
 .open-api-operation > .open-api-responses {
     margin-left: 20px;
 }
+
+.open-api-operation .api-parameters:not(.nested) {
+    margin-top: 0;
+    margin-bottom: 0;
+}

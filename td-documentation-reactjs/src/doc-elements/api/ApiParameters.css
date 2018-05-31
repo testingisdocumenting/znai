@@ -7,6 +7,9 @@
     font-size: var(--mdoc-smaller-text-size);
     font-family: var(--mdoc-regular-font-family);
 
+    margin-top: 20px;
+    margin-bottom: 20px;
+
     border-top: 1px solid var(--mdoc-snippets-outer-border-color);
     border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
 }
