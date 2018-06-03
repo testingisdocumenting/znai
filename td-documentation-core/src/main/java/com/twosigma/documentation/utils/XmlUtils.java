@@ -1,10 +1,13 @@
-package com.twosigma.documentation.parser.sphinx.xml;
+package com.twosigma.documentation.utils;
 
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
+import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.ByteArrayInputStream;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
@@ -32,6 +35,18 @@ public class XmlUtils {
             doc.getDocumentElement().normalize();
 
             return doc;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void parseXml(String xmlContent, DefaultHandler elementHandler) {
+        try {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            factory.setValidating(false);
+
+            SAXParser saxParser = factory.newSAXParser();
+            saxParser.parse(new ByteArrayInputStream(xmlContent.getBytes(StandardCharsets.UTF_8)), elementHandler);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -5,7 +5,7 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.sphinx.python.*;
-import com.twosigma.documentation.parser.sphinx.xml.XmlUtils;
+import com.twosigma.documentation.utils.XmlUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.w3c.dom.Document;
@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.twosigma.documentation.parser.sphinx.xml.DocUtilsXmlFixer.fixDocUtilsIncorrectXml;
-import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.*;
+import static com.twosigma.documentation.utils.XmlUtils.*;
 
 /**
  * @author mykola

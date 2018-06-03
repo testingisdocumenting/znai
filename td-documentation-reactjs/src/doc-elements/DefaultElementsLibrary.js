@@ -2,9 +2,9 @@ import React from 'react'
 import DocElement from './default-elements/DocElement'
 import {Page, presentationPageHandler} from './page/Page'
 import SectionTitle from './default-elements/SectionTitle'
-import {Section, presentationSectionHandler} from './default-elements/Section'
+import {presentationSectionHandler, Section} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
-import {Snippet, presentationSnippetHandler} from './default-elements/Snippet'
+import {presentationSnippetHandler, Snippet} from './default-elements/Snippet'
 import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
 import CustomReactJSComponent from './custom/CustomReactJSComponent'
 import Anchor from './default-elements/Anchor'
@@ -15,12 +15,14 @@ import Paragraph from './default-elements/Paragraph'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import Table from './table/Table'
-import {Tabs, presentationTabsHandler} from './tabs/Tabs'
+import {presentationTabsHandler, Tabs} from './tabs/Tabs'
 import {Columns, presentationColumnsHandler} from './columns/Columns'
 import Icon from './icons/Icon'
 import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
-import {Svg, presentationSvgHandler} from './svg/Svg'
+import Xml from './xml/Xml'
+import presentationXml from './xml/PresentationXml'
+import {presentationSvgHandler, Svg} from './svg/Svg'
 import LatexMath from './math/LatexMath'
 import {Chart, presentationChartHandler} from './charts/Chart'
 import Image from './images/Image'
@@ -114,6 +116,9 @@ presentationElementHandlers.Columns = presentationColumnsHandler
 
 library.Json = Json
 presentationElementHandlers.Json = presentationJson
+
+library.Xml = Xml
+presentationElementHandlers.Xml = presentationXml
 
 library.JsxGroup = JsxGroup
 
