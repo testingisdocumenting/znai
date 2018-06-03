@@ -3,6 +3,14 @@
     grid-template-columns: minmax(350px, 1fr) minmax(350px, 1fr);
 }
 
+.page-two-sides-left-part {
+    margin-left: calc(-1 * var(--mdoc-single-side-horizontal-min-spacing));
+}
+
+.page-two-sides-right-part {
+    margin-right: calc(-1 * var(--mdoc-single-side-horizontal-min-spacing));
+}
+
 .page-two-sides-left-part,
 .page-two-sides-right-part {
     padding-left: var(--mdoc-two-sides-horizontal-spacing);

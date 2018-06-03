@@ -1,5 +1,9 @@
 .footer {
-    padding: 30px 0;
-    background-color: #f5f7f5;
     color: #818a8f;
+    background-color: #f5f7f5;
+
+    padding: 30px var(--mdoc-single-side-horizontal-min-spacing);
+
+    margin-left: calc(-1 * var(--mdoc-single-side-horizontal-min-spacing));
+    margin-right: calc(-1 * var(--mdoc-single-side-horizontal-min-spacing));
 }
