@@ -11,15 +11,20 @@
 }
 
 .search-popup .popup-panel {
-    position: fixed;
     display: flex;
     flex-direction: column;
+
+    position: fixed;
     top: 50px;
     right: 0;
     left: 0;
+
     margin-left: auto;
     margin-right: auto;
-    width: 1220px;
+    width: auto;
+
+    padding-right: 20px;
+
     max-height: calc(100vh - 100px);
     z-index: 1001;
 }
@@ -108,7 +113,6 @@
     color: #fff;
 }
 
-
 .search-toc-page-section-title {
     padding-left: 10px;
     flex: 1;
@@ -117,4 +121,10 @@
 .search-toc-section-title {
     font-size: 10px;
     margin-left: auto;
+}
+
+@media screen and (min-width: 1600px) {
+    .search-popup .popup-panel {
+        width: calc(320px + var(--mdoc-single-column-full-width));
+    }
 }

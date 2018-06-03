@@ -1,4 +1,7 @@
 :root {
+    --mdoc-single-column-full-width: 900px;
+    --mdoc-single-column-partial-width: 600px;
+
     --mdoc-regular-text-size: 16px;
     --mdoc-smaller-text-size: 14px;
     --mdoc-small-meta-text-size: 12px;
@@ -20,14 +23,12 @@
     --mdoc-regular-text-color: var(--mdoc-black);
     --mdoc-regular-text-light-color: var(--mdoc-light-black);
 
-    --mdoc-single-column-full-width: 900px;
-    --mdoc-single-column-partial-width: 600px;
-
     --mdoc-space-above-next-prev-navigation: 150px;
     --mdoc-space-below-next-prev-navigation: 100px;
     --mdoc-space-left-next-prev-navigation: 50px;
     --mdoc-space-right-next-prev-navigation: 50px;
 
+    --mdoc-single-side-horizontal-min-spacing: 20px;
     --mdoc-two-sides-horizontal-spacing: 40px;
 
     --mdoc-toc-title-color: #152935;
@@ -130,7 +131,7 @@ body {
 }
 
 .content-block {
-    width: var(--mdoc-single-column-full-width);
+    max-width: var(--mdoc-single-column-full-width);
     margin-left: auto;
     margin-right: auto;
 }
@@ -138,6 +139,8 @@ body {
 .wide-screen {
     display: flex;
     align-items: center;
+    margin-left: calc(-1 * var(--mdoc-single-side-horizontal-min-spacing));
+    margin-right: calc(-1 * var(--mdoc-single-side-horizontal-min-spacing));
 }
 
 .image {

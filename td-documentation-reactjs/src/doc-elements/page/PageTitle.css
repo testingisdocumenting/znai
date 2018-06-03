@@ -9,6 +9,10 @@
     align-items: center;
 }
 
+.page-title-block .presentation-button {
+    padding-right: 40px;
+}
+
 .page-meta-block {
     display: flex;
     color: var(--mdoc-meta-color);
