@@ -101,7 +101,6 @@ export function printJson(rootPath, data, pathsToHighlight) {
     return jsonPrinter.printer.linesOfTokens
 }
 
-
 function escapeQuote(text) {
     return text.replace(/"/g, "\\\"")
 }

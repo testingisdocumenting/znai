@@ -1,8 +1,8 @@
 package com.twosigma.documentation.parser.sphinx;
 
-import com.twosigma.documentation.parser.sphinx.xml.XmlUtils;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocGenerator;
+import com.twosigma.documentation.utils.XmlUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

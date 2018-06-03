@@ -1,0 +1,154 @@
+import {TokensPrinter} from '../code-snippets/TokensPrinter'
+
+class XmlPrinter {
+    printer = new TokensPrinter()
+
+    constructor({singleLineAttrs, pathsToHighlight = []}) {
+        this.singleLineAttrs = singleLineAttrs
+
+        this._pathsToHighlight = {}
+        pathsToHighlight.forEach(p => this._pathsToHighlight[p] = true)
+    }
+
+    printXml(path, xmlAsJson) {
+        this.printer.printIndentation()
+        this.printer.printDelimiter('<')
+        this.printTag(xmlAsJson.tagName)
+
+        this.printAttrs(path, xmlAsJson.attributes)
+
+        const numberOfChildren = (xmlAsJson.children || []).length
+        const hasChildren = numberOfChildren > 0
+
+        if (hasChildren) {
+            this.printer.printDelimiter('>')
+            this.printChildren(path, xmlAsJson.children)
+        }
+
+        if (hasChildren) {
+            if (numberOfChildren > 1) {
+                this.printer.printIndentation()
+            }
+
+            this.printer.printDelimiter('</')
+            this.printTag(xmlAsJson.tagName)
+            this.printer.printDelimiter('>')
+        } else {
+            this.printer.printDelimiter('/>')
+        }
+
+        this.printer.println()
+    }
+
+    printAttrs(path, attributes) {
+        if (!attributes || !attributes.length) {
+            return
+        }
+
+        const isMultiLineAttrs = !this.singleLineAttrs && attributes.length > 1
+        if (isMultiLineAttrs) {
+            this.printMultiLineAttrs(path, attributes)
+            this.printer.printIndentation()
+        } else {
+            this.printSingleAttrs(path, attributes)
+        }
+    }
+
+    printChildren(path, children) {
+        if (!children || !children.length) {
+            return
+        }
+
+        const isSingleChild = children.length === 1
+        const isFirstChildText = children[0].tagName === ''
+
+        if (isSingleChild && isFirstChildText) {
+            this.printText(path, children[0].text)
+            return
+        }
+
+        this.printer.indentRight()
+        this.printer.println()
+
+        const tagIdx = {}
+        let numberOfChildrenWithTags = 0
+        children.forEach(c => {
+            tagIdx[c.tagName] = 0
+            if (c.tagName) {
+                numberOfChildrenWithTags++
+            }
+        })
+
+        children.forEach(c => {
+            const tagNameForPath = c.tagName ? c.tagName : '#text'
+            const childrenPath = path + '.' + tagNameForPath + (numberOfChildrenWithTags > 1 ?
+                '[' + tagIdx[c.tagName]++ + ']' :
+                '');
+
+            if (c.tagName) {
+                this.printXml(childrenPath, c)
+            } else {
+                this.printer.printIndentation()
+                this.printText(childrenPath, c.text)
+                this.printer.println()
+            }
+        })
+        this.printer.indentLeft()
+    }
+
+    printText(path, text) {
+        const tokenType = 'text' + (this.isHighlightedPath(path) ? ' highlighted' : '')
+        this.printer.print(tokenType, text)
+    }
+
+    printSingleAttrs(path, attributes) {
+        attributes.forEach(attr => {
+            this.printer.printDelimiter(' ')
+            this.printNameValue(path, attr)
+        })
+    }
+
+    printMultiLineAttrs(path, attrs) {
+        this.printer.println()
+        this.printer.indentRight()
+
+        attrs.forEach(attr => {
+            this.printer.printIndentation()
+            this.printNameValue(path, attr)
+
+            this.printer.println()
+        })
+
+        this.printer.indentLeft()
+    }
+
+    printNameValue(path, attr) {
+        this.printAttrName(attr.name)
+        this.printer.printDelimiter('=')
+        this.printAttrValue(path + '.@' + attr.name, attr.value)
+    }
+
+    printTag(tagName) {
+        this.printer.print('tag', tagName)
+    }
+
+    printAttrName(name) {
+        this.printer.print('attr-name', name)
+    }
+
+    printAttrValue(path, value) {
+        const tokenType = 'attr-value' + (this.isHighlightedPath(path) ? ' highlighted' : '')
+        this.printer.print(tokenType, value)
+    }
+
+    isHighlightedPath(path) {
+        return this._pathsToHighlight.hasOwnProperty(path)
+    }
+}
+
+export function printXml({xmlAsJson, pathsToHighlight, singleLineAttrs}) {
+    const xmlPrinter = new XmlPrinter({singleLineAttrs, pathsToHighlight})
+    xmlPrinter.printXml(xmlAsJson.tagName, xmlAsJson)
+
+    return xmlPrinter.printer.linesOfTokens
+}

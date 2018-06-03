@@ -5,9 +5,7 @@ import org.w3c.dom.NodeList;
 
 import java.util.stream.Collectors;
 
-import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.getAttributeText;
-import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.nodeByName;
-import static com.twosigma.documentation.parser.sphinx.xml.XmlUtils.nodesStreamByName;
+import static com.twosigma.documentation.utils.XmlUtils.*;
 
 public class PythonFunctionXmlParser {
     private static final String PARAM_TYPE_NODE_NAME = "literal_emphasis";

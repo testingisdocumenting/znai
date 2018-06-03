@@ -24,6 +24,8 @@ import {setDocMeta} from './doc-elements/docMeta'
 import {landingDemo} from './screens/landing/Landing.demo'
 import {jupyterDemo} from './doc-elements/jupyter/Jupyter.demo'
 import {tocPanelDemo} from './doc-elements/structure/TocPanel.demo'
+import {xmlDemo} from './doc-elements/xml/Xml.demo'
+import {xmlPresentationDemo} from './doc-elements/xml/PresentationXml.demo'
 
 const docMeta = {
     id: 'preview',
@@ -42,6 +44,8 @@ setDocMeta(docMeta)
 const snippets = new Registry('snippets')
 snippets.registerAsGrid('Code Snippet', 0, snippetsDemo)
 snippets.registerAsGrid('Json', 0, jsonDemo)
+snippets.registerAsGrid('Xml', 0, xmlDemo)
+snippets.registerAsGrid('Xml Presentation', 0, xmlPresentationDemo)
 snippets.registerAsGrid('Jsx', 0, jsxDemo)
 snippets.registerAsGrid('DocUtils', 0, docUtilsDemo)
 snippets.registerAsGrid('Lang Class', 0, langClassDemo)
