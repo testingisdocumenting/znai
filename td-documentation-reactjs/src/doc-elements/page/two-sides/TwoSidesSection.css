@@ -3,5 +3,5 @@
 }
 
 .two-sides-section .content-block {
-    width: auto;
+    max-width: none;
 }
