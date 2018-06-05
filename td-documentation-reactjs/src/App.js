@@ -26,6 +26,7 @@ import {jupyterDemo} from './doc-elements/jupyter/Jupyter.demo'
 import {tocPanelDemo} from './doc-elements/structure/TocPanel.demo'
 import {xmlDemo} from './doc-elements/xml/Xml.demo'
 import {xmlPresentationDemo} from './doc-elements/xml/PresentationXml.demo'
+import {searchPopupDemo} from './doc-elements/search/Search.demo'
 
 const docMeta = {
     id: 'preview',
@@ -66,6 +67,7 @@ layout.registerSingle('TOC', tocPanelDemo)
 const screens = new Registry('screens')
 screens.registerAsTabs('Documentation Preparation', documentationPreparationDemo)
 screens.registerAsTabs('Landing', landingDemo)
+screens.registerAsTabs('Search Popup', searchPopupDemo)
 
 const endToEnd = new Registry('end to end')
 endToEnd.registerAsMiniApp('full documentation navigation', '/preview', documentationDemo)

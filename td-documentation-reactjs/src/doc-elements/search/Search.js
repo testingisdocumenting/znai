@@ -13,13 +13,13 @@ class Search {
     }
 
     previewDetails(id, queryResult) {
-        const section = this.findSectionById_(id)
+        const section = this._findSectionById(id)
         const snippets = queryResult.getSnippetsToHighlight(id, searchContent.extractTextFromElement(section))
 
         return {section, snippets}
     }
 
-    findSectionById_(indexId) {
+    _findSectionById(indexId) {
         indexId = JSON.parse(indexId)
 
         const matching = []

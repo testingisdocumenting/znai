@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 import SearchBox from './SearchBox'
 import SearchToc from './SearchToc'
@@ -8,7 +8,7 @@ class SearchPopup extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { searchQuery: "", selectedIdx: 0, search: null }
+        this.state = { selectedIdx: 0, search: null }
         this.onQueryChange = this.onQueryChange.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
     }

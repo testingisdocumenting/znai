@@ -2,47 +2,60 @@ import lunr from 'lunr'
 import searchContent from './searchContent'
 import pageContentProcessor from '../pageContentProcessor.js'
 
-
 /**
  * wraps Lunr result set to flatten it and provide tokens insted of positions for highlighting
  */
 class QueryResult {
     constructor(queryResults) {
-        this.snippetsById = {}
-        this.queryResults_ = queryResults
-        this.flattenResults_()
+        this.snippetsCallbacksById = {}
+        this.snippetsTypeById = {}
+        this._queryResults = queryResults
+        this._flattenResults()
     }
 
     // ids are string versions of json for performance and to be compatible with lunr
     getIds() {
-        return Object.keys(this.snippetsById)
+        return Object.keys(this.snippetsCallbacksById)
     }
 
     getSnippetsToHighlight(id, text) {
         const snippets = []
-        this.snippetsById[id].forEach((callback) => {
-            snippets.push(...callback(text))
-        })
+
+        const snippetsById = this.snippetsCallbacksById[id]
+        const snippetsTypeById = this.snippetsTypeById[id]
+
+        const len = snippetsById.length
+        for (let i = 0; i < len; i++) {
+            const callback = snippetsById[i]
+            const type = snippetsTypeById[i]
+
+            if (type === 'text') {
+                snippets.push(...callback(text))
+            }
+        }
 
         return snippets
     }
 
-    addSnippets_(id, snippetsCallback) {
-        if (this.snippetsById.hasOwnProperty(id)) {
-            this.snippetsById[id].push(snippetsCallback)
+    _addSnippets(id, type, snippetsCallback) {
+        if (this.snippetsCallbacksById.hasOwnProperty(id)) {
+            this.snippetsCallbacksById[id].push(snippetsCallback)
+            this.snippetsTypeById[id].push(type)
         } else {
-            this.snippetsById[id] = [snippetsCallback]
+            this.snippetsCallbacksById[id] = [snippetsCallback]
+            this.snippetsTypeById[id] = [type]
         }
     }
 
-    flattenResults_() {
-        this.queryResults_.forEach((queryResult) => {
+    _flattenResults() {
+        this._queryResults.forEach((queryResult) => {
             const metaData = queryResult.matchData.metadata
 
             Object.keys(metaData).forEach((word) => {
-                const matchByWord = metaData[word]
+                const matchByWord = metaData[word];
+
                 Object.keys(matchByWord).forEach((type) => {
-                    this.addSnippets_(queryResult.ref, (text) => extractSnippets(text, matchByWord[type].position))
+                    this._addSnippets(queryResult.ref, type, (text) => extractSnippets(text, matchByWord[type].position))
                 })
             })
         })

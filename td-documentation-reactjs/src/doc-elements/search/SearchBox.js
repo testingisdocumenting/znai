@@ -1,21 +1,21 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 class SearchBox extends Component {
     constructor(props) {
         super(props)
-        this.state = { value: "" }
-        this.onInputChange = this.onInputChange.bind(this)
-        this.onKeyDown = this.onKeyDown.bind(this)
+        this.state = {value: ""}
     }
 
     render() {
-        return <div className="search-box">
-            <input
-                ref={(dom) => this.dom = dom}
-                placeholder="Type to terms to search..."
-                onKeyDown={this.onKeyDown}
-                value={this.state.value} onChange={this.onInputChange} />
-        </div>;
+        return (
+            <div className="search-box">
+                <input
+                    ref={(dom) => this.dom = dom}
+                    placeholder="Type to terms to search..."
+                    onKeyDown={this.onKeyDown}
+                    value={this.state.value} onChange={this.onInputChange}/>
+            </div>
+        )
     }
 
     componentDidMount() {
@@ -23,13 +23,13 @@ class SearchBox extends Component {
     }
 
     // TODO debounce?
-    onInputChange(e) {
+    onInputChange = (e) => {
         const value = e.target.value
         this.props.onChange(value)
-        this.setState({ value })
+        this.setState({value})
     }
 
-    onKeyDown(e) {
+    onKeyDown = (e) => {
         if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
             e.preventDefault()
         }
