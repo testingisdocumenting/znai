@@ -1,5 +1,10 @@
 package com.twosigma.documentation.html;
 
+import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.console.ansi.Color;
+import com.twosigma.documentation.web.WebResource;
+import org.apache.commons.io.FileUtils;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,11 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.Color;
-
-import org.apache.commons.io.FileUtils;
 
 /**
  * @author mykola

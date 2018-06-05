@@ -1,9 +1,9 @@
 package com.twosigma.documentation.html.reactjs;
 
-import com.twosigma.documentation.html.WebResource;
 import com.twosigma.documentation.nashorn.NashornEngine;
+import com.twosigma.documentation.web.WebResource;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import static com.twosigma.documentation.website.ProgressReporter.reportPhase;
 
@@ -21,7 +21,7 @@ public class ReactJsNashornEngine {
         initJsEngine();
     }
 
-    public void loadCustomLibraries(List<WebResource> jsResources) {
+    public void loadCustomLibraries(Stream<WebResource> jsResources) {
         jsResources.forEach(nashornEngine::loadLibrary);
     }
 

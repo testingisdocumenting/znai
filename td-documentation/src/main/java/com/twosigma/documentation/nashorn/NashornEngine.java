@@ -1,8 +1,8 @@
 package com.twosigma.documentation.nashorn;
 
-import javax.script.*;
+import com.twosigma.documentation.web.WebResource;
 
-import com.twosigma.documentation.html.WebResource;
+import javax.script.*;
 
 /**
  * @author mykola

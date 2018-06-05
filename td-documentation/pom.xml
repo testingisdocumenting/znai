@@ -21,6 +21,12 @@
 
         <dependency>
             <groupId>com.twosigma.td</groupId>
+            <artifactId>td-documentation-site-extensions</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.twosigma.td</groupId>
             <artifactId>td-documentation-java</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -115,6 +121,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <scope>test</scope>
@@ -131,11 +142,6 @@
             <artifactId>td-testing-core-groovy</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
         </dependency>
     </dependencies>
 

@@ -1,11 +1,8 @@
 package com.twosigma.documentation.html.reactjs;
 
 import com.twosigma.documentation.html.Deployer;
-import com.twosigma.documentation.html.WebResource;
-import com.twosigma.utils.ResourceUtils;
+import com.twosigma.documentation.web.WebResource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -15,14 +12,14 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class ReactJsBundle {
-    private WebResource mainJs;
-    private WebResource mainCss;
-    private WebResource react;
-    private WebResource reactDom;
-    private WebResource reactDomServer;
-    private WebResource bootstrapCss;
+    private final WebResource mainJs;
+    private final WebResource mainCss;
+    private final WebResource react;
+    private final WebResource reactDom;
+    private final WebResource reactDomServer;
+    private final WebResource bootstrapCss;
 
-    private List<WebResource> fonts;
+    private final List<WebResource> fonts;
 
     public ReactJsBundle() {
         mainJs = WebResource.fromResource("static/main.js");
@@ -36,17 +33,7 @@ public class ReactJsBundle {
                 .map(ext -> "static/fonts/glyphicons-halflings-regular." + ext)
                 .map(WebResource::fromResource);
 
-        Stream<WebResource> lato = Stream.of("Lato-Black",
-                "Lato-Bold",
-                "Lato-BoldItalic",
-                "Lato-Italic",
-                "Lato-Light",
-                "Lato-LightItalic",
-                "Lato-Regular")
-                .map(fontName -> "static/fonts/" + fontName + ".woff2")
-                .map(WebResource::fromResource);
-
-        fonts = Stream.concat(glyphIcons, lato).collect(toList());
+        fonts = glyphIcons.collect(toList());
     }
 
     public Stream<WebResource> clientJavaScripts() {

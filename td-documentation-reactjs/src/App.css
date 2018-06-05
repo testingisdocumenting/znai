@@ -74,48 +74,6 @@
     --mdoc-inversed-background-color: #282f34;
 }
 
-@font-face {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 400;
-    src: url('/static/fonts/Lato-Regular.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Lato';
-    font-style: italic;
-    font-weight: 400;
-    src: url('/static/fonts/Lato-Italic.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 300;
-    src: url('/static/fonts/Lato-Light.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 700;
-    src: url('/static/fonts/Lato-Bold.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Lato';
-    font-style: italic;
-    font-weight: 700;
-    src: url('/static/fonts/Lato-BoldItalic.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 900;
-    src: url('/static/fonts/Lato-Black.woff2') format('woff2');
-}
-
 body {
     font-family: var(--mdoc-regular-font-family);
     color: var(--mdoc-black);

@@ -1,11 +1,13 @@
 package com.twosigma.documentation.website;
 
 import com.twosigma.documentation.core.ResourcesResolver;
-import com.twosigma.documentation.html.WebResource;
+import com.twosigma.documentation.web.WebResource;
+import com.twosigma.documentation.web.extensions.WebSiteResourcesProvider;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -13,12 +15,15 @@ import static java.util.stream.Collectors.toList;
  * Represents web site extensions provided by a user
  * @author mykola
  */
-public class WebSiteExtensions {
-    private List<WebResource> cssResources;
-    private List<WebResource> jsResources;
-    private List<WebResource> htmlResources;
-    private Map<String, ?> definition;
-    private ResourcesResolver resourcesResolver;
+public class WebSiteExtensions implements WebSiteResourcesProvider {
+    private final List<WebResource> cssResources;
+    private final List<WebResource> jsResources;
+    private final List<WebResource> jsClientOnlyResources;
+    private final List<WebResource> htmlResources;
+    private final List<WebResource> additionalFilesToDeploy;
+
+    private final Map<String, ?> definition;
+    private final ResourcesResolver resourcesResolver;
 
     /**
      * @param resourcesResolver resource resolving component
@@ -30,19 +35,9 @@ public class WebSiteExtensions {
 
         this.cssResources = extractWebResources("cssResources");
         this.jsResources = extractWebResources("jsResources");
+        this.jsClientOnlyResources = extractWebResources("jsClientOnlyResources");
         this.htmlResources = extractWebResources("htmlResources");
-    }
-
-    public List<WebResource> getCssResources() {
-        return cssResources;
-    }
-
-    public List<WebResource> getJsResources() {
-        return jsResources;
-    }
-
-    public List<WebResource> getHtmlResources() {
-        return htmlResources;
+        this.additionalFilesToDeploy = extractWebResources("additionalFilesToDeploy");
     }
 
     @SuppressWarnings("unchecked")
@@ -54,5 +49,30 @@ public class WebSiteExtensions {
                 resources.stream()
                         .map(p -> WebResource.withPath(resourcesResolver.fullPath(p), p))
                         .collect(toList());
+    }
+
+    @Override
+    public Stream<WebResource> cssResources(ResourcesResolver resourcesResolver) {
+        return cssResources.stream();
+    }
+
+    @Override
+    public Stream<WebResource> htmlResources(ResourcesResolver resourcesResolver) {
+        return htmlResources.stream();
+    }
+
+    @Override
+    public Stream<WebResource> jsResources(ResourcesResolver resourcesResolver) {
+        return jsResources.stream();
+    }
+
+    @Override
+    public Stream<WebResource> jsClientOnlyResources(ResourcesResolver resourcesResolver) {
+        return jsClientOnlyResources.stream();
+    }
+
+    @Override
+    public Stream<WebResource> additionalFilesToDeploy(ResourcesResolver resourcesResolver) {
+        return additionalFilesToDeploy.stream();
     }
 }
