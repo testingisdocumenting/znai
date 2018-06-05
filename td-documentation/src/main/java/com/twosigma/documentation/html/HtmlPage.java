@@ -1,5 +1,7 @@
 package com.twosigma.documentation.html;
 
+import com.twosigma.documentation.web.WebResource;
+
 import java.util.ArrayList;
 import java.util.List;
 

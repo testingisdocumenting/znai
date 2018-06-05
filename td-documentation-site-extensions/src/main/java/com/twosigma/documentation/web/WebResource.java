@@ -1,24 +1,26 @@
-package com.twosigma.documentation.html;
-
-import java.nio.file.Path;
+package com.twosigma.documentation.web;
 
 import com.twosigma.utils.FileUtils;
 import com.twosigma.utils.ResourceUtils;
+
+import java.nio.file.Path;
 
 /**
  * @author mykola
  */
 public class WebResource {
-    private Path originPath;
-    private byte[] resourceContent;
-    private String path;
+    private final Path originPath;
+    private final String path;
+    private final byte[] resourceContent;
 
     private WebResource(final Path originPath, final String path) {
         this.originPath = originPath;
         this.path = path;
+        this.resourceContent = null;
     }
 
     private WebResource(final String resourcePath) {
+        this.originPath = null;
         this.path = resourcePath;
         this.resourceContent = ResourceUtils.binaryContent(resourcePath);
     }

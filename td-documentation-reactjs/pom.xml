@@ -38,10 +38,6 @@
                             <include name="css/*.*" />
                         </fileset>
 
-                        <fileset id="fonts" dir="build/static">
-                            <include name="fonts/*.*" />
-                        </fileset>
-
                         <pathconvert pathsep="${line.separator}" property="files" refid="bundle">
                             <mapper>
                                 <flattenmapper />
@@ -50,10 +46,6 @@
 
                         <copy verbose="true" flatten="true" todir="${project.build.outputDirectory}/static">
                             <fileset refid="bundle"/>
-                        </copy>
-
-                        <copy verbose="true" flatten="true" todir="${project.build.outputDirectory}/static/fonts">
-                            <fileset refid="fonts"/>
                         </copy>
 
                         <copy file="${project.basedir}/node_modules/react/umd/react.production.min.js" toFile="${project.build.outputDirectory}/static/react.min.js"/>

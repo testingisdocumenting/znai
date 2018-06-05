@@ -1,10 +1,9 @@
 package com.twosigma.documentation.structure;
 
+import com.twosigma.utils.JsonUtils;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.twosigma.documentation.html.WebResource;
-import com.twosigma.utils.JsonUtils;
 
 /**
  * @author mykola
@@ -13,7 +12,6 @@ public class DocMeta {
     private String id;
     private String type;
     private String title;
-    private WebResource logo;
     private boolean previewEnabled;
     private Map<String, ?> docMetaMap;
 
@@ -55,10 +53,6 @@ public class DocMeta {
 
     public String getTitle() {
         return title;
-    }
-
-    public void setLogo(final WebResource logo) {
-        this.logo = logo;
     }
 
     public Map<String, Object> toMap() {

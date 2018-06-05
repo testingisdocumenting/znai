@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public class LandingDocEntriesProviders {
-    private static Set<LandingDocEntriesProvider> providers =
+    private static final Set<LandingDocEntriesProvider> providers =
             ServiceLoaderUtils.load(LandingDocEntriesProvider.class);
 
     public static void add(LandingDocEntriesProvider provider) {

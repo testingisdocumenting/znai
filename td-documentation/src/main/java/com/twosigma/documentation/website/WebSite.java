@@ -5,7 +5,10 @@ import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.AuxiliaryFilesRegistry;
 import com.twosigma.documentation.extensions.MultipleLocationsResourceResolver;
-import com.twosigma.documentation.html.*;
+import com.twosigma.documentation.html.Deployer;
+import com.twosigma.documentation.html.DocPageReactProps;
+import com.twosigma.documentation.html.HtmlPageAndPageProps;
+import com.twosigma.documentation.html.PageToHtmlPageConverter;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
@@ -15,6 +18,8 @@ import com.twosigma.documentation.search.PageSearchEntry;
 import com.twosigma.documentation.search.SiteSearchEntries;
 import com.twosigma.documentation.search.SiteSearchEntry;
 import com.twosigma.documentation.structure.*;
+import com.twosigma.documentation.web.WebResource;
+import com.twosigma.documentation.web.extensions.WebSiteResourcesProviders;
 import com.twosigma.documentation.website.markups.MarkdownParsingConfiguration;
 import com.twosigma.documentation.website.markups.MarkupParsingConfiguration;
 import com.twosigma.documentation.website.markups.SphinxParsingConfiguration;
@@ -62,7 +67,6 @@ public class WebSite {
     private final LunrIndexer lunrIndexer;
     private final CodeTokenizer codeTokenizer;
     private final WebResource tocJavaScript;
-    private final WebSiteExtensions webSiteExtensions;
 
     private final MarkupParsingConfiguration markupParsingConfiguration;
 
@@ -73,7 +77,6 @@ public class WebSite {
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
         this.componentsRegistry = new WebSiteComponentsRegistry();
         this.resourceResolver = new MultipleLocationsResourceResolver(cfg.docRootPath, findLookupLocations(cfg));
-        this.webSiteExtensions = initWebSiteExtensions(cfg);
         this.reactJsNashornEngine = cfg.reactJsNashornEngine;
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
@@ -86,10 +89,11 @@ public class WebSite {
         if (cfg.isPreviewEnabled) {
             docMeta.setPreviewEnabled(true);
         }
-        docMeta.setLogo(WebResource.withPath(cfg.logoRelativePath));
 
         componentsRegistry.setResourcesResolver(resourceResolver);
         componentsRegistry.setCodeTokenizer(codeTokenizer);
+
+        WebSiteResourcesProviders.add(initFileBasedWebSiteExtension(cfg));
 
         loadCustomJsLibraries();
 
@@ -201,7 +205,7 @@ public class WebSite {
         }
     }
 
-    private WebSiteExtensions initWebSiteExtensions(Configuration cfg) {
+    private WebSiteExtensions initFileBasedWebSiteExtension(Configuration cfg) {
         if (cfg.extensionsDefPath == null || ! Files.exists(cfg.extensionsDefPath)) {
             return new WebSiteExtensions(resourceResolver, Collections.emptyMap());
         }
@@ -212,11 +216,11 @@ public class WebSite {
 
     private void loadCustomJsLibraries() {
         reportPhase("loading custom js libraries");
-        reactJsNashornEngine.loadCustomLibraries(webSiteExtensions.getJsResources());
+        reactJsNashornEngine.loadCustomLibraries(WebSiteResourcesProviders.jsResources(resourceResolver));
     }
 
     private void reset() {
-        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, webSiteExtensions, reactJsNashornEngine);
+        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, resourceResolver, reactJsNashornEngine);
         markupParser = markupParsingConfiguration.createMarkupParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
         pagePropsByTocItem = new HashMap<>();
@@ -229,9 +233,12 @@ public class WebSite {
 
     private void deployResources() {
         reportPhase("deploying resources");
+
         reactJsNashornEngine.getReactJsBundle().deploy(deployer);
-        webSiteExtensions.getCssResources().forEach(deployer::deploy);
-        webSiteExtensions.getJsResources().forEach(deployer::deploy);
+        WebSiteResourcesProviders.cssResources(resourceResolver).forEach(deployer::deploy);
+        WebSiteResourcesProviders.jsResources(resourceResolver).forEach(deployer::deploy);
+        WebSiteResourcesProviders.jsClientOnlyResources(resourceResolver).forEach(deployer::deploy);
+        WebSiteResourcesProviders.additionalFilesToDeploy(resourceResolver).forEach(deployer::deploy);
         cfg.webResources.forEach(deployer::deploy);
     }
 
