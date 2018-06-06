@@ -27,6 +27,7 @@ import {tocPanelDemo} from './doc-elements/structure/TocPanel.demo'
 import {xmlDemo} from './doc-elements/xml/Xml.demo'
 import {xmlPresentationDemo} from './doc-elements/xml/PresentationXml.demo'
 import {searchPopupDemo} from './doc-elements/search/Search.demo'
+import {typographyDemo} from './doc-elements/typography/Typography.demo'
 
 const docMeta = {
     id: 'preview',
@@ -63,6 +64,7 @@ const layout = new Registry('layout')
 layout.registerAsTabs('Pages', pagesDemo)
 layout.registerAsGrid('Tabs', 300, tabsDemo)
 layout.registerSingle('TOC', tocPanelDemo)
+layout.registerAsGrid('Typography', 0, typographyDemo)
 
 const screens = new Registry('screens')
 screens.registerAsTabs('Documentation Preparation', documentationPreparationDemo)
