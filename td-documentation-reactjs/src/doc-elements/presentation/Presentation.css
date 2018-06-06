@@ -5,10 +5,6 @@
     max-height: 100vh;
 }
 
-/*.presentation .paragraph.content-block {*/
-    /*padding-right: 0;*/
-/*}*/
-
 .presentation .header {
     display: flex;
     flex: 0 0 80px;
@@ -16,17 +12,17 @@
 
 .presentation .header .product-info {
     display: flex;
-    align-items: center;
-    background-color: #383b3f;
     flex: 0 0 280px;
+    align-items: center;
+
     color: #e7e7e7;
+    background-color: #383b3f;
+
+    padding: 0 10px;
 }
 
 .presentation .header .product-info .product-title {
-    display: flex;
-    align-items: center;
     background-color: #383b3f;
-    flex: 0 0 280px;
     margin-left: 10px;
     font-size: 22px;
     padding: 10px;

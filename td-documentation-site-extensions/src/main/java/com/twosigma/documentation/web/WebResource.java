@@ -25,6 +25,12 @@ public class WebResource {
         this.resourceContent = ResourceUtils.binaryContent(resourcePath);
     }
 
+    private WebResource(final String path, final byte[] content) {
+        this.originPath = null;
+        this.path = path;
+        this.resourceContent = content;
+    }
+
     public static WebResource withPath(final String path) {
         return new WebResource(null, path);
     }
@@ -35,6 +41,10 @@ public class WebResource {
 
     public static WebResource fromResource(final String resourcePath) {
         return new WebResource(resourcePath);
+    }
+
+    public static WebResource withTextContent(final String path, final String content) {
+        return new WebResource(path, content.getBytes());
     }
 
     public Path getOriginPath() {
