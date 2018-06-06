@@ -48,7 +48,7 @@ public class WebSite {
     private MarkupParser markupParser;
     private final Deployer deployer;
     private final DocMeta docMeta;
-    private Configuration cfg;
+    private final Configuration cfg;
 
     private Map<TocItem, Page> pageByTocItem;
     private SiteSearchEntries searchEntries;
@@ -93,6 +93,7 @@ public class WebSite {
         componentsRegistry.setResourcesResolver(resourceResolver);
         componentsRegistry.setCodeTokenizer(codeTokenizer);
 
+        WebSiteResourcesProviders.add(new WebSiteLogoExtension(cfg.docRootPath));
         WebSiteResourcesProviders.add(initFileBasedWebSiteExtension(cfg));
 
         loadCustomJsLibraries();
@@ -205,13 +206,13 @@ public class WebSite {
         }
     }
 
-    private WebSiteExtensions initFileBasedWebSiteExtension(Configuration cfg) {
+    private WebSiteUserExtensions initFileBasedWebSiteExtension(Configuration cfg) {
         if (cfg.extensionsDefPath == null || ! Files.exists(cfg.extensionsDefPath)) {
-            return new WebSiteExtensions(resourceResolver, Collections.emptyMap());
+            return new WebSiteUserExtensions(resourceResolver, Collections.emptyMap());
         }
 
         String json = FileUtils.fileTextContent(cfg.extensionsDefPath);
-        return new WebSiteExtensions(resourceResolver, JsonUtils.deserializeAsMap(json));
+        return new WebSiteUserExtensions(resourceResolver, JsonUtils.deserializeAsMap(json));
     }
 
     private void loadCustomJsLibraries() {

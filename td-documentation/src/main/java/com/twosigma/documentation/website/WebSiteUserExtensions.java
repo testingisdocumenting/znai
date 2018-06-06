@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
  * Represents web site extensions provided by a user
  * @author mykola
  */
-public class WebSiteExtensions implements WebSiteResourcesProvider {
+public class WebSiteUserExtensions implements WebSiteResourcesProvider {
     private final List<WebResource> cssResources;
     private final List<WebResource> jsResources;
     private final List<WebResource> jsClientOnlyResources;
@@ -29,7 +29,7 @@ public class WebSiteExtensions implements WebSiteResourcesProvider {
      * @param resourcesResolver resource resolving component
      * @param definition extensions information in a tree like format.
      */
-    public WebSiteExtensions(ResourcesResolver resourcesResolver, Map<String, ?> definition) {
+    public WebSiteUserExtensions(ResourcesResolver resourcesResolver, Map<String, ?> definition) {
         this.resourcesResolver = resourcesResolver;
         this.definition = definition;
 

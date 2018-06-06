@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList
 /**
  * @author mykola
  */
-class WebSiteExtensionsTest {
+class WebSiteUserExtensionsTest {
     private ResourcesResolver resourcesResolver = new TestResourceResolver(Paths.get('/dummy/root'))
 
     @Test
@@ -34,7 +34,7 @@ class WebSiteExtensionsTest {
         paths('additionalFilesToDeploy').should == ['font1.woff2', 'font2.woff2']
     }
 
-    private static WebSiteExtensions createExtensions(Map definition) {
-        return new WebSiteExtensions(new TestResourceResolver(Paths.get('/dummy/root')),  definition)
+    private static WebSiteUserExtensions createExtensions(Map definition) {
+        return new WebSiteUserExtensions(new TestResourceResolver(Paths.get('/dummy/root')),  definition)
     }
 }
