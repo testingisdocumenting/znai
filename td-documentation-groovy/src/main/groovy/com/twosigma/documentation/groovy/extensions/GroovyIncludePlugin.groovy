@@ -30,9 +30,9 @@ class GroovyIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    PluginResult process(ComponentsRegistry componentsRegistry, 
-                         ParserHandler parserHandler, 
-                         Path markupPath, 
+    PluginResult process(ComponentsRegistry componentsRegistry,
+                         ParserHandler parserHandler,
+                         Path markupPath,
                          PluginParams pluginParams) {
         fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam())
         String fileContent = componentsRegistry.resourceResolver().textContent(fullPath)
@@ -44,6 +44,7 @@ class GroovyIncludePlugin implements IncludePlugin {
 
         Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "groovy",
                 extractContent(groovyCode, entry, bodyOnly))
+        props.putAll(pluginParams.getOpts().toMap())
 
         return PluginResult.docElement(DocElementType.SNIPPET, props)
     }
