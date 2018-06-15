@@ -7,6 +7,8 @@ import {Tabs} from '../tabs/Tabs'
 
 import {elementsLibrary} from '../DefaultElementsLibrary'
 
+import {TwoSidesLayoutRightPart} from '../page/two-sides/TwoSidesLayout'
+
 import './tokens.css'
 
 export function snippetsDemo(registry) {
@@ -19,10 +21,12 @@ export function snippetsDemo(registry) {
         .add('with bullet points', <Snippet wide={false} tokens={parsedWithComments} commentsType="inline"/>)
         .add('with spoiler bullet points', <Snippet wide={false} tokens={parsedWithComments} spoiler={true} commentsType="inline"/>)
         .add('wide with bullet points', <Snippet wide={true} tokens={parsedJavaWide} commentsType="inline"/>)
+        .add('wide with bullet points right side background', <TwoSidesLayoutRightPart><Snippet wide={true} tokens={parsedJavaWide} commentsType="inline"/></TwoSidesLayoutRightPart>)
         .add('wide with spoiler bullet points', <Snippet wide={true} spoiler={true} tokens={parsedJavaWide} commentsType="inline"/>)
         .add('horizontal scroll', <Snippet wide={false} tokens={parsedJavaWide}/>)
         .add('highlight by line idx', <Snippet tokens={parseCode("markdown", markdownCode())} highlight={[0]}/>)
         .add('highlight by text', <Snippet tokens={parseCode("markdown", markdownCode())} highlight={"include-file"}/>)
+        .add('highlight by text right side background', <TwoSidesLayoutRightPart><Snippet tokens={parsedJavaWide} highlight={"createMegaAbstractFactory"}/></TwoSidesLayoutRightPart>)
         .add('read more', <Snippet tokens={parseCode("csv", longCode())}
                                    readMore={true} r
                                    eadMoreVisibleLines={4}/>)
