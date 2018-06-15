@@ -37,7 +37,7 @@
     --mdoc-punctuation-color: #8f9aa7;
     --mdoc-number-color: #6998bc;
     --mdoc-boolean-color: var(--mdoc-number-color);
-    --mdoc-highlighted-background-color: #00d0ff2e;
+    --mdoc-highlighted-background-color: rgba(180, 190, 11, 0.3);
 
     color: var(--mdoc-regular-text-color);
     background-color: var(--mdoc-inversed-background-color);
@@ -48,6 +48,6 @@
     display: inherit;
 }
 
-.page-two-sides-right-part .snippet-container .snippet { 
+.page-two-sides-right-part .snippet-container .snippet {
     border-left: none;
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import Json from './Json'
+import {TwoSidesLayoutRightPart} from '../page/two-sides/TwoSidesLayout'
 
 const arraySimpleData = ['word', 'red', 'another']
 const objectSimpleData = {'key1': 'value1 "quote" part', 'key2': 'value2'}
@@ -13,7 +14,7 @@ const objectNestedData = {
         }
     },
     "key3": {
-        "key31": "value31",
+        "key31": 100,
         "key32": "value32"
     }
 }
@@ -39,6 +40,7 @@ export function jsonDemo(registry) {
         .add('with title', <Json data={arraySimpleData} paths={['root[1]']} title="Response"/>)
         .add('record', <Json data={objectSimpleData}/>)
         .add('nested record', <Json data={objectNestedData} paths={['root.key2.key22', 'root.key3.key31']}/>)
+        .add('nested record right side background',<TwoSidesLayoutRightPart><Json data={objectNestedData} paths={['root.key2.key22', 'root.key3.key31']}/></TwoSidesLayoutRightPart>)
         .add('nested record with long name', <Json data={objectNestedDataLongNames}/>)
         .add('array of records within object', <Json data={arrayOfObjectWithinObjectData}/>)
         .add('with read more', <Json data={arrayOfObjectWithinObjectData} readMore={true}/>)
