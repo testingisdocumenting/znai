@@ -58,7 +58,7 @@
 }
 
 .token.highlighted {
-    padding: 2px 0;
+    padding: 2px 2px;
     border-radius: 4px;
     background-color: var(--mdoc-highlighted-background-color);
 }

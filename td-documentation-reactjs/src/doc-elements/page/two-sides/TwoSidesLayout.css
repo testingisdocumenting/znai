@@ -37,7 +37,7 @@
     --mdoc-punctuation-color: #8f9aa7;
     --mdoc-number-color: #6998bc;
     --mdoc-boolean-color: var(--mdoc-number-color);
-    --mdoc-highlighted-background-color: rgba(180, 190, 11, 0.3);
+    --mdoc-highlighted-background-color: rgba(126, 131, 33, 0.3);
 
     color: var(--mdoc-regular-text-color);
     background-color: var(--mdoc-inversed-background-color);
