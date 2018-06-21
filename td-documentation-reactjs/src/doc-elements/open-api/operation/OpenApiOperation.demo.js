@@ -66,6 +66,20 @@ const allParameters = [
         }
     },
     {
+        "name": "file",
+        "in": "formData",
+        "required": true,
+        "type": "file",
+        "description": []
+    },
+    {
+        "name": "saveAs",
+        "in": "formData",
+        "required": false,
+        "type": "string",
+        "description": []
+    },
+    {
         "name": "limit",
         "in": "query",
         "description": [

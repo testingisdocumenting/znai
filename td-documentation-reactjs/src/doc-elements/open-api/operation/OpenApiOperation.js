@@ -11,6 +11,7 @@ function OpenApiOperation({elementsLibrary, operation}) {
 
     const pathParameters = parameters.filter(p => p.in === 'path')
     const queryParameters = parameters.filter(p => p.in === 'query')
+    const formDataParameters = parameters.filter(p => p.in === 'formData')
 
     const bodyParams = parameters.filter(p => p.in === 'body')
     const bodyParameter = bodyParams.length ? bodyParams[0] : null
@@ -27,6 +28,7 @@ function OpenApiOperation({elementsLibrary, operation}) {
             <div className="open-api-operation-parameters">
                 <OpenApiParameters label="Path parameters" parameters={pathParameters} elementsLibrary={elementsLibrary}/>
                 <OpenApiParameters label="Query parameters" parameters={queryParameters} elementsLibrary={elementsLibrary}/>
+                <OpenApiParameters label="Form Data parameters" parameters={formDataParameters} elementsLibrary={elementsLibrary}/>
                 <OpenApiBodyParameter parameter={bodyParameter} elementsLibrary={elementsLibrary}/>
                 <OpenApiResponses responses={operation.responses} elementsLibrary={elementsLibrary}/>
             </div>
