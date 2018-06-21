@@ -1,0 +1,21 @@
+.mdoc-landing-filter-input {
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+
+    padding: 0 15px;
+}
+
+.mdoc-landing-filter-input input {
+    width: 600px;
+    height: 62px;
+
+    outline: none;
+    box-sizing: border-box;
+
+    border: 1px solid var(--mdoc-landing-border-color);
+    border-radius: 8px;
+
+    padding: 0 15px;
+}
+

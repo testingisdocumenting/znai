@@ -1,24 +1,40 @@
 import React from 'react'
 
+import FilterInput from './FilterInput'
+
 import './Landing.css'
 
-export default function Landing({documentations}) {
-    const categoriesWithDocs = groupByCategory(documentations)
+export default class Landing extends React.Component {
+    state = {filterText: ''}
 
-    return (
-        <div className="landing">
-            {
-                categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs key={categoryWithDocs.category}
-                                                                             category={categoryWithDocs.category}
-                                                                             documentations={categoryWithDocs.documentations}/>)
-            }
-        </div>
-    )
+    render() {
+        const {documentations} = this.props
+        const {filterText} = this.state
+
+        const filteredDocumentations = filterDocumentations(documentations, filterText)
+
+        const categoriesWithDocs = groupByCategory(filteredDocumentations)
+
+        return (
+            <div className="mdoc-landing">
+                <FilterInput filterText={filterText} onChange={this.onFilterChange}/>
+                {
+                    categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs key={categoryWithDocs.category}
+                                                                                 category={categoryWithDocs.category}
+                                                                                 documentations={categoryWithDocs.documentations}/>)
+                }
+            </div>
+        )
+    }
+
+    onFilterChange = (e) => {
+        this.setState({filterText: e.target.value})
+    }
 }
 
 function CategoryWithDocs({category, documentations}) {
     return (
-        <div className="landing-category-with-documentations">
+        <div className="mdoc-landing-category-with-documentations">
             <Category category={category}/>
             <Documentations documentations={documentations}/>
         </div>
@@ -27,7 +43,7 @@ function CategoryWithDocs({category, documentations}) {
 
 function Category({category}) {
     return (
-        <div className="landing-category">
+        <div className="mdoc-landing-category">
             <div className="small-line"/>
             <div className="category">{category}</div>
             <div className="large-line"/>
@@ -37,7 +53,7 @@ function Category({category}) {
 
 function Documentations({documentations}) {
     return (
-        <div className="landing-documentations">
+        <div className="mdoc-landing-documentations">
             {documentations.map(d => <Documentation key={d.id} documentation={d}/>)}
         </div>
     )
@@ -45,7 +61,7 @@ function Documentations({documentations}) {
 
 function Documentation({documentation}) {
     return (
-        <div className="landing-documentation" onClick={() => navigateToDoc(documentation.id)}>
+        <div className="mdoc-landing-documentation" onClick={() => navigateToDoc(documentation.id)}>
             <div className="name">{documentation.name}</div>
             <div className="description">{documentation.description}</div>
         </div>
@@ -54,6 +70,19 @@ function Documentation({documentation}) {
 
 function navigateToDoc(id) {
     window.location = '/' + id;
+}
+
+function filterDocumentations(documentations, filterText) {
+    filterText = filterText.toLowerCase()
+    return documentations.filter(d => {
+        return textMatch(d.name, filterText) ||
+            textMatch(d.category, filterText) ||
+            textMatch(d.description, filterText)
+    })
+}
+
+function textMatch(text, lowerCaseFilter) {
+    return text.toLowerCase().indexOf(lowerCaseFilter) !== -1
 }
 
 function groupByCategory(documentations) {

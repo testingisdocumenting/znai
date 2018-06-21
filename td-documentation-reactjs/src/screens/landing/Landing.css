@@ -1,38 +1,40 @@
-.landing {
-    max-width: 1200px;
+.mdoc-landing {
+    max-width: 1600px;
     margin-left: auto;
     margin-right: auto;
+
+    --mdoc-landing-border-color: #ddd;
 }
 
-.landing-category {
+.mdoc-landing-category {
     display: flex;
 
     padding: 0 15px;
     margin-top: 50px;
 
-    --mdoc-landing-border: 1px solid #ddd;
+    --mdoc-landing-border: 1px solid var(--mdoc-landing-border-color);
     --mdoc-landing-line-height: 19px;
 }
 
-.landing-category > .small-line {
+.mdoc-landing-category > .small-line {
     flex-basis: 30px;
     border-bottom: var(--mdoc-landing-border);
     height: var(--mdoc-landing-line-height);
 }
 
-.landing-category > .large-line {
+.mdoc-landing-category > .large-line {
     flex: 1;
     border-bottom: var(--mdoc-landing-border);
     height: var(--mdoc-landing-line-height);
 }
 
-.landing-category > .category {
+.mdoc-landing-category > .category {
     font-size: 24px;
     color: var(--mdoc-brand-primary-color);
     padding: 0 15px;
 }
 
-.landing-documentations {
+.mdoc-landing-documentations {
     display: grid;
     grid-template-columns: repeat(auto-fill, 250px);
     grid-gap: 40px 40px;
@@ -42,7 +44,7 @@
     padding: 30px 20px 30px 50px;
 }
 
-.landing-documentation {
+.mdoc-landing-documentation {
     border-radius: 4px;
 
     box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
@@ -51,10 +53,10 @@
     cursor: pointer;
 }
 
-.landing-documentation:hover {
+.mdoc-landing-documentation:hover {
 }
 
-.landing-documentation > .name {
+.mdoc-landing-documentation > .name {
     font-size: 18px;
     font-weight: bold;
 
@@ -63,6 +65,6 @@
     border-bottom: 1px solid #eee;
 }
 
-.landing-documentation > .description {
+.mdoc-landing-documentation > .description {
     padding: 10px 15px;
 }
