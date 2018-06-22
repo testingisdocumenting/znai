@@ -39,14 +39,20 @@ public class OpenApiIncludePlugin implements IncludePlugin {
         this.parserHandler = parserHandler;
 
         specPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
+        String specContent = componentsRegistry.resourceResolver().textContent(specPath);
 
-        openApiSpec = OpenApiSpec.fromJson(componentsRegistry.markdownParser(),
-                componentsRegistry.resourceResolver().textContent(specPath));
+        openApiSpec = isJson(specContent) ?
+                OpenApiSpec.fromJson(componentsRegistry.markdownParser(), specContent):
+                OpenApiSpec.fromYaml(componentsRegistry.markdownParser(), specContent);
 
         findOperations();
         processOperations();
 
         return PluginResult.docElements(Stream.empty());
+    }
+
+    private boolean isJson(String specContent) {
+        return specContent.trim().startsWith("{");
     }
 
     @Override

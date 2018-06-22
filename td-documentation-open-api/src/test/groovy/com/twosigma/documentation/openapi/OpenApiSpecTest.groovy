@@ -24,6 +24,16 @@ class OpenApiSpecTest {
     }
 
     @Test
+    void "should parse spec from yaml"() {
+        def yamlSpec = OpenApiSpec.fromYaml(
+                TestComponentsRegistry.INSTANCE.markdownParser(),
+                ResourceUtils.textContent("open-api-spec.yaml"))
+
+        def findOneCustomerYaml = yamlSpec.findOperationById('findOneCustomerUsingGET')
+        findOneCustomerYaml.toMap().should equal(findOneCustomerYaml.toMap())
+    }
+
+    @Test
     void "should extract all operations from a spec file"() {
         spec.operations.id.should == [
                 'findPets',
