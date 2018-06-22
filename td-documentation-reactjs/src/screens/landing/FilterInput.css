@@ -8,7 +8,7 @@
 
 .mdoc-landing-filter-input input {
     width: 600px;
-    height: 62px;
+    height: 55px;
 
     outline: none;
     box-sizing: border-box;
@@ -17,5 +17,9 @@
     border-radius: 8px;
 
     padding: 0 15px;
+}
+
+.mdoc-landing-filter-input input::placeholder {
+    color: #bbb;
 }
 

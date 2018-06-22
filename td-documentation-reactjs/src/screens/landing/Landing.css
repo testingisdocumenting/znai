@@ -56,7 +56,12 @@
 .mdoc-landing-documentation:hover {
 }
 
-.mdoc-landing-documentation > .name {
+.mdoc-landing-documentation > a {
+    color: var(--mdoc-light-black);
+    text-decoration: none;
+}
+
+.mdoc-landing-documentation > a > .name {
     font-size: 18px;
     font-weight: bold;
 
@@ -65,6 +70,6 @@
     border-bottom: 1px solid #eee;
 }
 
-.mdoc-landing-documentation > .description {
+.mdoc-landing-documentation > a > .description {
     padding: 10px 15px;
 }

@@ -10,7 +10,7 @@ export default class FilterInput extends React.Component {
             <div className="mdoc-landing-filter-input">
                 <input ref={this.saveRef}
                        value={filterText}
-                       placeholder="Documentations filter..."
+                       placeholder="Search Documentation"
                        onChange={onChange}/>
             </div>
         )

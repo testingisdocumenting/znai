@@ -60,10 +60,16 @@ function Documentations({documentations}) {
 }
 
 function Documentation({documentation}) {
+    const url = documentation.id ?
+        documentation.id:
+        documentation.url
+
     return (
-        <div className="mdoc-landing-documentation" onClick={() => navigateToDoc(documentation.id)}>
-            <div className="name">{documentation.name}</div>
-            <div className="description">{documentation.description}</div>
+        <div className="mdoc-landing-documentation">
+            <a href={url} target="_blank" rel="noopener noreferrer">
+                <div className="name">{documentation.name}</div>
+                <div className="description">{documentation.description}</div>
+            </a>
         </div>
     )
 }
