@@ -3,10 +3,6 @@ package com.twosigma.documentation.openapi
 import com.twosigma.documentation.extensions.include.PluginsTestUtils
 import org.junit.Test
 
-import static com.twosigma.testing.Ddjt.actual
-import static com.twosigma.testing.Ddjt.equal
-
-
 class OpenApiIncludePluginTest {
     @Test
     void "should automatically create a section for summary"() {
@@ -25,6 +21,12 @@ class OpenApiIncludePluginTest {
                             _______________________________________________________
                             'Section' | 'find all pets'
                             'Section' | 'find all customers ordered by last name'  }
+    }
+
+    @Test
+    void "should detect extension and use appropriate parser, json or yaml"() {
+        def elements = process('open-api-spec.yaml {operationId: "addPet", autoSection: true}')
+        elements[0].title.should == 'Add Pet'
     }
 
     private static def process(String params) {

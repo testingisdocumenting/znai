@@ -1,8 +1,9 @@
 package com.twosigma.documentation.openapi;
 
-import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
+import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.utils.JsonUtils;
+import com.twosigma.utils.YamlUtils;
 
 import java.nio.file.Paths;
 import java.util.*;
@@ -28,6 +29,18 @@ public class OpenApiSpec {
      */
     public static OpenApiSpec fromJson(MarkdownParser markdownParser, String jsonSpec) {
         return new OpenApiSpec(markdownParser, JsonUtils.deserializeAsMap(jsonSpec));
+    }
+
+    /**
+     * create open api spec representation from yaml.
+     * Markdown defaultParser is required explicitly as open api defines description in common mark.
+     *
+     * @param markdownParser instance of markdown defaultParser
+     * @param yamlSpec open api specification
+     * @return open api spec
+     */
+    public static OpenApiSpec fromYaml(MarkdownParser markdownParser, String yamlSpec) {
+        return new OpenApiSpec(markdownParser, YamlUtils.deserializeAsMap(yamlSpec));
     }
 
     public OpenApiSpec(MarkdownParser markdownParser, Map<String, ?> spec) {
