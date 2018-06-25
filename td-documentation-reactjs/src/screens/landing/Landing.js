@@ -2,29 +2,52 @@ import React from 'react'
 
 import FilterInput from './FilterInput'
 
+import TocPanel from '../../doc-elements/structure/TocPanel'
+
 import './Landing.css'
 
 export default class Landing extends React.Component {
-    state = {filterText: ''}
+    state = {filterText: '', tocCollapsed: false}
 
     render() {
-        const {documentations} = this.props
-        const {filterText} = this.state
+        const {documentations, title} = this.props
+        const {filterText, tocCollapsed} = this.state
+
+        const landingDocMeta = {type: 'Guides', title: title}
 
         const filteredDocumentations = filterDocumentations(documentations, filterText)
 
         const categoriesWithDocs = groupByCategory(filteredDocumentations)
+        const documentationsToc = buildToc(categoriesWithDocs)
 
         return (
             <div className="mdoc-landing">
-                <FilterInput filterText={filterText} onChange={this.onFilterChange}/>
-                {
-                    categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs key={categoryWithDocs.category}
-                                                                                 category={categoryWithDocs.category}
-                                                                                 documentations={categoryWithDocs.documentations}/>)
-                }
+                <div className="mdoc-landing-categories-toc-area">
+                    <TocPanel toc={documentationsToc}
+                              docMeta={landingDocMeta}
+                              collapsed={tocCollapsed}
+                              onToggle={this.tocCollapseToggle}/>
+                </div>
+
+                <div className="mdoc-landing-documentations-area">
+                    <FilterInput filterText={filterText} onChange={this.onFilterChange}/>
+
+                    <div className="mdoc-landing-categories">
+                        {
+                            categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs key={categoryWithDocs.category}
+                                                                                         category={categoryWithDocs.category}
+                                                                                         documentations={categoryWithDocs.documentations}/>)
+                        }
+                    </div>
+                </div>
             </div>
         )
+    }
+
+    tocCollapseToggle = () => {
+        this.setState(prev => ({
+            tocCollapsed: !prev.tocCollapsed
+        }))
     }
 
     onFilterChange = (e) => {
@@ -43,7 +66,7 @@ function CategoryWithDocs({category, documentations}) {
 
 function Category({category}) {
     return (
-        <div className="mdoc-landing-category">
+        <div className="mdoc-landing-category" id={anchorIdFromName(category)}>
             <div className="small-line"/>
             <div className="category">{category}</div>
             <div className="large-line"/>
@@ -74,8 +97,23 @@ function Documentation({documentation}) {
     )
 }
 
-function navigateToDoc(id) {
-    window.location = '/' + id;
+function buildToc(categoriesWithDocs) {
+    const items = categoriesWithDocs.map(withDocs => ({
+        sectionTitle: "Categories",
+        pageTitle: withDocs.category,
+        fileName: withDocs.category,
+        dirName: "categories",
+        pageSectionIdTitles: [],
+        href: "#" + anchorIdFromName(withDocs.category)
+    }))
+
+    return [
+        {
+            sectionTitle: "Categories",
+            dirName: "categories",
+            items: items
+        }
+    ]
 }
 
 function filterDocumentations(documentations, filterText) {
@@ -89,6 +127,10 @@ function filterDocumentations(documentations, filterText) {
 
 function textMatch(text, lowerCaseFilter) {
     return text.toLowerCase().indexOf(lowerCaseFilter) !== -1
+}
+
+function anchorIdFromName(name) {
+    return name.toLowerCase().replace(' ', '-')
 }
 
 function groupByCategory(documentations) {
