@@ -26,11 +26,11 @@ class Item extends PureComponent {
         const {item, selected, isSelected, onTocItemClick, onTocItemPageSectionClick} = this.props
 
         const className = 'toc-item' + (isSelected ? ' selected' : '')
-        const href = documentationNavigation.buildUrl(item)
+        const href = item.href || documentationNavigation.buildUrl(item)
 
         const displayPageSections = isSelected && pageTypesRegistry.expandToc(item)
 
-        const onClick = (e) => { e.preventDefault(); onTocItemClick(item.dirName, item.fileName)}
+        const onClick = onTocItemClick ? (e) => { e.preventDefault(); onTocItemClick(item.dirName, item.fileName)} : null
 
         return (
             <div className={className} ref={this.saveNodeRef}>

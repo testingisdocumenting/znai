@@ -1,8 +1,19 @@
 .mdoc-landing {
+    display: flex;
+}
+
+.mdoc-landing-documentations-area {
+    flex: 1;
+
+    max-height: 100vh;
+    overflow-y: auto;
+
     max-width: 1600px;
+
     margin-left: auto;
     margin-right: auto;
 
+    padding: 20px;
     --mdoc-landing-border-color: #ddd;
 }
 
