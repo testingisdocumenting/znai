@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 
 import {pageTypesRegistry} from './PageTypesRegistry'
 
-import './Page.css'
-
 class Page extends Component {
     render() {
         const {tocItem} = this.props
