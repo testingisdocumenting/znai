@@ -43,6 +43,7 @@
 }
 
 .snippet-container .snippet {
+    position: relative;
     border-left: 1px solid var(--mdoc-snippets-outer-border-color);
     overflow-x: auto;
     grid-area: snp;
@@ -79,6 +80,37 @@
     font-size: var(--mdoc-code-text-size);
     font-family: var(--mdoc-code-font-family);
 }
+
+.snippet-copy-to-clipboard {
+    display: none;
+
+    color: var(--mdoc-snippets-title-color);
+    background-color: var(--mdoc-snippets-background-color);
+    opacity: 0.6;
+    stroke-width: 2px;
+
+    transition: stroke-width 0.5s ease-in-out;
+
+    cursor: pointer;
+}
+
+.snippet-copy-to-clipboard.copied {
+    stroke-width: 4px;
+}
+
+.snippet-container:hover .snippet-copy-to-clipboard {
+    display: block;
+}
+
+.snippet-container .title-container:hover {
+}
+
+.snippet-copy-to-clipboard {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
 
 .snippet-container.wide-screen.with-title .title {
     border: none;

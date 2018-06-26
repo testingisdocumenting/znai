@@ -1,8 +1,15 @@
 import * as React from 'react'
 
+import ClipboardJS from 'clipboard'
+
+import {extractTextFromTokens} from './codeUtils'
+import CopyIcon from './SnippetCopyIcon'
+
 import './SnippetContainer.css'
 
 class SnippetContainer extends React.Component {
+    state = { displayCopied: false }
+
     render() {
         return this.props.wide ?
             this.renderWideMode() : this.renderNormalMode()
@@ -13,11 +20,8 @@ class SnippetContainer extends React.Component {
 
         return (
             <div className="snippet-container content-block">
-                <Title title={title}/>
-
-                <div className={this.snippetClassName}>
-                    <this.props.snippetComponent {...this.props}/>
-                </div>
+                {this.renderTitle(title)}
+                {this.renderSnippet()}
             </div>
         )
     }
@@ -25,20 +29,57 @@ class SnippetContainer extends React.Component {
     renderWideMode() {
         const {title} = this.props
 
-        const wideModePadding = <div className="padding"></div>
+        const wideModePadding = <div className="padding"/>
 
         const className = "snippet-container wide-screen" + (title ? " with-title" : "")
         return (
             <div className={className}>
                 {wideModePadding}
                 {title && <div className="title-layer">
-                    <Title title={title}/>       
+                    {this.renderTitle(title)}
                 </div>}
+
                 {wideModePadding}
-                
-                <div className={this.snippetClassName}>
-                    <this.props.snippetComponent {...this.props}/>
-                </div>
+
+                {this.renderSnippet()}
+            </div>
+        )
+    }
+
+    renderTitle(title) {
+        if (!title) {
+            return null
+        }
+
+        return (
+            <div className="title-container content-block">
+                <div className="title">{title}</div>
+            </div>
+        )
+    }
+
+    renderSnippet() {
+        const {title} = this.props
+
+        const noTitle = !title
+
+        return (
+            <div className={this.snippetClassName}>
+                <this.props.snippetComponent {...this.props}/>
+                {this.renderCopyToClipboard()}
+            </div>
+        )
+    }
+
+    renderCopyToClipboard() {
+        const {displayCopied} = this.state
+
+        const className = 'snippet-copy-to-clipboard ' + (displayCopied ? 'copied': 'copy')
+
+        return (
+            <div className={className}
+                 ref={this.saveCopyToClipboardNode}>
+                <CopyIcon/>
             </div>
         )
     }
@@ -47,18 +88,53 @@ class SnippetContainer extends React.Component {
         const {title} = this.props
         return "snippet" + (title ? " with-title" : "")
     }
-}
 
-function Title({title}) {
-    if (!title) {
-        return null
+    saveCopyToClipboardNode = (node) => {
+        this.copyToClipboardNode = node
     }
 
-    return (
-        <div className="title-container content-block">
-            <div className="title">{title}</div>
-        </div>
-    )
+    componentDidMount() {
+        this.setupClipboard()
+    }
+
+    componentWillUnmount() {
+        this.clearTimer()
+        this.destroyClipboard()
+    }
+
+    setupClipboard() {
+        if (! this.copyToClipboardNode) {
+            return
+        }
+
+        this.clipboard = new ClipboardJS(this.copyToClipboardNode, {
+            text: trigger => {
+                const {tokens} = this.props
+                this.setState({displayCopied: true})
+                this.startRemoveFeedbackTimer()
+
+                return extractTextFromTokens(tokens)
+            }
+        })
+    }
+
+    destroyClipboard() {
+        if (this.clipboard) {
+            this.clipboard.destroy()
+        }
+    }
+
+    startRemoveFeedbackTimer() {
+        this.removeFeedbackTimer = setTimeout(() => {
+            this.setState({displayCopied: false})
+        }, 500)
+    }
+
+    clearTimer() {
+        if (this.removeFeedbackTimer) {
+            clearTimeout(this.removeFeedbackTimer)
+        }
+    }
 }
 
 export default SnippetContainer
