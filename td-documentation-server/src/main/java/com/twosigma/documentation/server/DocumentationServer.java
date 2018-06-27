@@ -56,7 +56,7 @@ public class DocumentationServer {
 
         socketHandlers = new JsonWebSocketHandlerComposition();
         documentationPreparationWebSocketHandler = new DocumentationPreparationWebSocketHandler(vertx);
-        
+
         socketHandlers.add(documentationPreparationWebSocketHandler);
         OnUploadFinishedServerHandlers.add(this::unzip);
     }
@@ -184,9 +184,9 @@ public class DocumentationServer {
         ReactJsNashornEngine nashornEngine = new ReactJsNashornEngine();
 
         LandingDocEntriesProviders.add(() -> Stream.of(
-                new LandingDocEntry("mdoc", "MDoc", "Documentation", "test desc")
+                new LandingDocEntry("mdoc", "MDoc", "http://custom","Documentation", "test desc")
         ));
-        UrlContentHandlers.add(new LandingUrlContentHandler());
+        UrlContentHandlers.add(new LandingUrlContentHandler("Company", "Guides"));
 
         HttpServer server = new DocumentationServer(nashornEngine, Paths.get("")).create();
         server.listen(3333);

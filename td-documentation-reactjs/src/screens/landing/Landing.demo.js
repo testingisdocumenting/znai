@@ -13,5 +13,5 @@ const documentations = [
 
 export function landingDemo(registry) {
     registry
-        .add('landing', <Landing documentations={documentations} title="TS"/>)
+        .add('landing', <Landing documentations={documentations} title="Company" type="Guides"/>)
 }

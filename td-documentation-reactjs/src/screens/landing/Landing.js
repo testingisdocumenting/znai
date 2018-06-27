@@ -10,10 +10,10 @@ export default class Landing extends React.Component {
     state = {filterText: '', tocCollapsed: false}
 
     render() {
-        const {documentations, title} = this.props
+        const {documentations, type, title} = this.props
         const {filterText, tocCollapsed} = this.state
 
-        const landingDocMeta = {type: 'Guides', title: title}
+        const landingDocMeta = {type: type, title: title}
 
         const filteredDocumentations = filterDocumentations(documentations, filterText)
 
@@ -83,9 +83,9 @@ function Documentations({documentations}) {
 }
 
 function Documentation({documentation}) {
-    const url = documentation.id ?
-        documentation.id:
-        documentation.url
+    const url = documentation.url ?
+        documentation.url:
+        documentation.id
 
     return (
         <div className="mdoc-landing-documentation">

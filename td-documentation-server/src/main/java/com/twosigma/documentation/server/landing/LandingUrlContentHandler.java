@@ -5,12 +5,20 @@ import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.server.urlhandlers.UrlContentHandler;
 
-import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LandingUrlContentHandler implements UrlContentHandler {
+    private String landingTitle;
+    private String landingType;
+
+    public LandingUrlContentHandler(String landingTitle, String landingType) {
+        this.landingTitle = landingTitle;
+        this.landingType = landingType;
+    }
+
     @Override
     public String url() {
         return "/";
@@ -23,8 +31,14 @@ public class LandingUrlContentHandler implements UrlContentHandler {
                 .collect(Collectors.toList());
 
         HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(nashornEngine);
-        HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly("Documentations",
-                "Landing", Collections.singletonMap("documentations", documentations));
+
+        Map<String, Object> props = new LinkedHashMap<>();
+        props.put("documentations", documentations);
+        props.put("type", landingType);
+        props.put("title", landingTitle);
+
+        HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly(landingTitle + " " + landingType,
+                "Landing", props);
 
         return htmlPage.render("");
     }

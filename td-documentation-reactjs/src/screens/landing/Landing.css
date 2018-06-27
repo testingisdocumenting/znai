@@ -67,9 +67,13 @@
 .mdoc-landing-documentation:hover {
 }
 
-.mdoc-landing-documentation > a {
+.mdoc-landing-documentation a {
     color: var(--mdoc-light-black);
     text-decoration: none;
+}
+
+.mdoc-landing-documentation a:hover {
+    color: var(--mdoc-light-black);
 }
 
 .mdoc-landing-documentation > a > .name {
