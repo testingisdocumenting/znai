@@ -59,21 +59,27 @@ public class HtmlPage {
 
     public String render(String documentationId) {
         return "<!DOCTYPE html>\n" +
-            "<html>\n" +
-            "<head>\n" +
-            "<meta charset=\"utf-8\" /> \n" +
-            "<title>" + title + "</title>" +
-            headerSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) +
-            cssResources.stream().map(r -> r.generateCssLink(documentationId)).collect(joining("\n")) +
-            "\n</head>\n" +
-            "<link rel=\"shortcut icon\" href=\"/" + documentationId + "/" + FAVICON_PATH + "\" type=\"image/ico\"/>\n" +
-            "<body>\n" +
-            bodySuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
-            javaScriptResources.stream().map(r -> r.generateJavaScriptLink(documentationId)).collect(joining("\n")) + "\n" +
-            "<script>\n" +
-            javaScriptSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
-            "</script>\n" +
-            "\n</body>" +
-            "\n</html>\n";
+                "<html>\n" +
+                "<head>\n" +
+                "<meta charset=\"utf-8\" /> \n" +
+                "<title>" + title + "</title>" +
+                headerSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) +
+                cssResources.stream().map(r -> r.generateCssLink(documentationId)).collect(joining("\n")) +
+                "\n</head>\n" +
+                "<link rel=\"shortcut icon\" href=" + favIconPath(documentationId) + "type=\"image/ico\"/>\n" +
+                "<body>\n" +
+                bodySuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
+                javaScriptResources.stream().map(r -> r.generateJavaScriptLink(documentationId)).collect(joining("\n")) + "\n" +
+                "<script>\n" +
+                javaScriptSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
+                "</script>\n" +
+                "\n</body>" +
+                "\n</html>\n";
+    }
+
+    private String favIconPath(String documentationId) {
+        return documentationId.isEmpty() ?
+                "\"/" + FAVICON_PATH + "\"":
+                "\"/" + documentationId + "/" + FAVICON_PATH + "\"";
     }
 }

@@ -6,12 +6,14 @@ import java.util.Map;
 public class LandingDocEntry {
     private String id;
     private String name;
+    private String url;
     private String category;
     private String description;
 
-    public LandingDocEntry(String id, String name, String category, String description) {
+    public LandingDocEntry(String id, String name, String url, String category, String description) {
         this.id = id;
         this.name = name;
+        this.url = url;
         this.category = category;
         this.description = description;
     }
@@ -22,6 +24,10 @@ public class LandingDocEntry {
 
     public String getName() {
         return name;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public String getCategory() {
@@ -36,6 +42,7 @@ public class LandingDocEntry {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("id", id);
         result.put("name", name);
+        result.put("url", url);
         result.put("category", category);
         result.put("description", description);
 
