@@ -217,11 +217,11 @@ public class WebSite {
 
     private void loadCustomJsLibraries() {
         reportPhase("loading custom js libraries");
-        reactJsNashornEngine.loadCustomLibraries(WebSiteResourcesProviders.jsResources(resourceResolver));
+        reactJsNashornEngine.loadCustomLibraries(WebSiteResourcesProviders.jsResources());
     }
 
     private void reset() {
-        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, resourceResolver, reactJsNashornEngine);
+        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, reactJsNashornEngine);
         markupParser = markupParsingConfiguration.createMarkupParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
         pagePropsByTocItem = new HashMap<>();
@@ -236,10 +236,10 @@ public class WebSite {
         reportPhase("deploying resources");
 
         reactJsNashornEngine.getReactJsBundle().deploy(deployer);
-        WebSiteResourcesProviders.cssResources(resourceResolver).forEach(deployer::deploy);
-        WebSiteResourcesProviders.jsResources(resourceResolver).forEach(deployer::deploy);
-        WebSiteResourcesProviders.jsClientOnlyResources(resourceResolver).forEach(deployer::deploy);
-        WebSiteResourcesProviders.additionalFilesToDeploy(resourceResolver).forEach(deployer::deploy);
+        WebSiteResourcesProviders.cssResources().forEach(deployer::deploy);
+        WebSiteResourcesProviders.jsResources().forEach(deployer::deploy);
+        WebSiteResourcesProviders.jsClientOnlyResources().forEach(deployer::deploy);
+        WebSiteResourcesProviders.additionalFilesToDeploy().forEach(deployer::deploy);
         cfg.webResources.forEach(deployer::deploy);
     }
 
