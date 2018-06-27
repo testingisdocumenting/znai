@@ -127,7 +127,7 @@ class SnippetContainer extends React.Component {
     startRemoveFeedbackTimer() {
         this.removeFeedbackTimer = setTimeout(() => {
             this.setState({displayCopied: false})
-        }, 500)
+        }, 200)
     }
 
     clearTimer() {
