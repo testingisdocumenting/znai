@@ -85,11 +85,11 @@
     display: none;
 
     color: var(--mdoc-snippets-title-color);
-    background-color: var(--mdoc-snippets-background-color);
+    background-color: transparent;
     opacity: 0.6;
     stroke-width: 2px;
 
-    transition: stroke-width 0.5s ease-in-out;
+    transition: stroke-width 0.2s ease-in-out;
 
     cursor: pointer;
 }
