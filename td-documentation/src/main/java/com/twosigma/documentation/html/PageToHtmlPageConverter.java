@@ -1,6 +1,5 @@
 package com.twosigma.documentation.html;
 
-import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.structure.DocMeta;
@@ -15,14 +14,11 @@ import com.twosigma.documentation.web.extensions.WebSiteResourcesProviders;
  */
 public class PageToHtmlPageConverter {
     private final DocMeta docMeta;
-    private final ResourcesResolver resourcesResolver;
     private final ReactJsNashornEngine reactJsNashornEngine;
 
     public PageToHtmlPageConverter(DocMeta docMeta,
-                                   ResourcesResolver resourcesResolver,
                                    ReactJsNashornEngine reactJsNashornEngine) {
         this.docMeta = docMeta;
-        this.resourcesResolver = resourcesResolver;
         this.reactJsNashornEngine = reactJsNashornEngine;
     }
 
@@ -38,10 +34,10 @@ public class PageToHtmlPageConverter {
         HtmlReactJsPage reactJsPage = new HtmlReactJsPage(reactJsNashornEngine);
         HtmlPage htmlPage = reactJsPage.createWithServerSideRendering(title, "Documentation", docProps.toMap());
 
-        WebSiteResourcesProviders.jsResources(resourcesResolver).forEach(htmlPage::addJavaScript);
-        WebSiteResourcesProviders.jsClientOnlyResources(resourcesResolver).forEach(htmlPage::addJavaScript);
-        WebSiteResourcesProviders.cssResources(resourcesResolver).forEach(htmlPage::addCss);
-        WebSiteResourcesProviders.htmlResources(resourcesResolver).map(WebResource::getTextContent)
+        WebSiteResourcesProviders.jsResources().forEach(htmlPage::addJavaScript);
+        WebSiteResourcesProviders.jsClientOnlyResources().forEach(htmlPage::addJavaScript);
+        WebSiteResourcesProviders.cssResources().forEach(htmlPage::addCss);
+        WebSiteResourcesProviders.htmlResources().map(WebResource::getTextContent)
                 .forEach(text -> htmlPage.addToBody(() -> text));
 
         return new HtmlPageAndPageProps(htmlPage, pageProps);

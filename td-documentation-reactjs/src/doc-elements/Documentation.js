@@ -30,6 +30,7 @@ import {pageTypesRegistry} from './page/PageTypesRegistry'
 
 import './DocumentationLayout.css'
 import './search/Search.css'
+import {injectCustomCssLink} from './CssOverrides'
 
 class Documentation extends Component {
     constructor(props) {
@@ -198,6 +199,8 @@ class Documentation extends Component {
     }
 
     componentDidMount() {
+        injectCustomCssLink() // TODO remove after TS Landing page release
+
         this.enableScrollListener()
         this.onPageLoad()
 

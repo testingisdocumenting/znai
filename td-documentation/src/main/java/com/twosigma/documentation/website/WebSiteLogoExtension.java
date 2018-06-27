@@ -1,6 +1,5 @@
 package com.twosigma.documentation.website;
 
-import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.web.WebResource;
 import com.twosigma.documentation.web.extensions.WebSiteResourcesProvider;
 import com.twosigma.utils.FileUtils;
@@ -21,7 +20,7 @@ public class WebSiteLogoExtension implements WebSiteResourcesProvider {
     }
 
     @Override
-    public Stream<WebResource> cssResources(ResourcesResolver resourcesResolver) {
+    public Stream<WebResource> cssResources() {
         return cssLogoResource != null ? Stream.of(cssLogoResource) : Stream.empty();
     }
 

@@ -30,14 +30,16 @@ export default class Landing extends React.Component {
                 </div>
 
                 <div className="mdoc-landing-documentations-area">
-                    <FilterInput filterText={filterText} onChange={this.onFilterChange}/>
+                    <div className="centered">
+                        <FilterInput filterText={filterText} onChange={this.onFilterChange}/>
 
-                    <div className="mdoc-landing-categories">
-                        {
-                            categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs key={categoryWithDocs.category}
-                                                                                         category={categoryWithDocs.category}
-                                                                                         documentations={categoryWithDocs.documentations}/>)
-                        }
+                        <div className="mdoc-landing-categories">
+                            {
+                                categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs key={categoryWithDocs.category}
+                                                                                             category={categoryWithDocs.category}
+                                                                                             documentations={categoryWithDocs.documentations}/>)
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
