@@ -1,6 +1,7 @@
 package com.twosigma.documentation.html.reactjs;
 
-import com.twosigma.documentation.html.*;
+import com.twosigma.documentation.html.HtmlPage;
+import com.twosigma.documentation.html.RenderSupplier;
 import com.twosigma.utils.JsonUtils;
 
 import java.util.Map;
@@ -37,7 +38,8 @@ public class HtmlReactJsPage {
             return "<div id=\"" + REACT_BLOCK_ID + "\">" + preRendered + "</div>";
         });
 
-        htmlPage.addToJavaScript(() -> "ReactDOM.render(" + createElementStatement.render() + ", " +
+        htmlPage.addToJavaScript(() -> "document.getElementById('"+ REACT_BLOCK_ID + "').innerHTML = '';\n" +
+                "ReactDOM.render(" + createElementStatement.render() + ", " +
                 "document.getElementById(\"" + REACT_BLOCK_ID + "\"));");
 
         ReactJsBundle jsBundle = reactJsNashornEngine.getReactJsBundle();
