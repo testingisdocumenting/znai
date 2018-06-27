@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import Promise from 'promise'
 
+import {themeRegistry} from '../theme/ThemeRegistry'
+
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
-import {elementsLibrary, presentationElementHandlers} from './DefaultElementsLibrary'
 import {documentationNavigation} from './structure/DocumentationNavigation'
 import {textSelection} from './selected-text-extensions/TextSelection'
 import {tableOfContents} from './structure/TableOfContents'
@@ -84,6 +85,10 @@ class Documentation extends Component {
         textSelection.addListener(this.onTextSelection.bind(this))
     }
 
+    get theme() {
+        return themeRegistry.currentTheme
+    }
+
     render() {
         const {mode} = this.state
 
@@ -113,6 +118,9 @@ class Documentation extends Component {
             textSelection,
             pageGenError,
         } = this.state
+
+        const theme = this.theme
+        const elementsLibrary = theme.elementsLibrary
 
         const searchPopup = isSearchActive ? <SearchPopup elementsLibrary={elementsLibrary}
                                                           tocCollapsed={tocCollapsed}
@@ -146,10 +154,12 @@ class Documentation extends Component {
                                                           onDocMetaUpdate={this.onDocMetaUpdate}
                                                           onError={this.onPageGenError}/> : null
 
+        const themeClassName = 'with-theme' + (theme.themeClassName ? ' theme-' + theme.themeClassName : '')
         return (
-            <span>
+            <div className={themeClassName}>
                 <DocumentationLayout docMeta={docMeta}
                                      toc={toc}
+                                     theme={theme}
                                      selectedTocItem={forceSelectedTocItem || autoSelectedTocItem}
                                      prevPageTocItem={this.prevPageTocItem}
                                      nextPageTocItem={this.nextPageTocItem}
@@ -167,7 +177,7 @@ class Documentation extends Component {
                                      pageGenError={pageGenError}/>
                 {preview}
                 {lastChangeDataDom && <PreviewChangeIndicator targetDom={lastChangeDataDom} onIndicatorRemove={this.onPreviewIndicatorRemove}/>}
-            </span>
+            </div>
         )
     }
 
@@ -191,6 +201,8 @@ class Documentation extends Component {
         this.enableScrollListener()
         this.onPageLoad()
 
+        themeRegistry.addOnThemeChangeListener(this.onThemeChange)
+
         document.addEventListener('keydown', this.keyDownHandler)
         document.addEventListener('mouseup', this.mouseUpHandler)
         document.addEventListener('click', this.mouseClickHandler)
@@ -198,9 +210,16 @@ class Documentation extends Component {
 
     componentWillUnmount() {
         this.disableScrollListener()
+
+        themeRegistry.removeOnThemeChangeListener(this.onThemeChange)
+
         document.removeEventListener('keydown', this.keyDownHandler)
         document.removeEventListener('mouseup', this.mouseUpHandler)
         document.removeEventListener('click', this.mouseClickHandler)
+    }
+
+    onThemeChange = () => {
+        this.forceUpdate()
     }
 
     keyDownHandler(e) {
@@ -290,7 +309,9 @@ class Documentation extends Component {
         }
 
         this.updateCurrentPageSection()
-        const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, page)
+
+        const theme = this.theme
+        const presentationRegistry = new PresentationRegistry(theme.elementsLibrary, theme.presentationElementHandlers, page)
 
         const isIndex = page.tocItem.dirName.length === 0 && page.tocItem.fileName === "index"
         document.title = isIndex ? docMeta.title : docMeta.title + ": " + page.tocItem.pageTitle

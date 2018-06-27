@@ -1,4 +1,10 @@
 import React from 'react'
+
+import Theme from '../theme/Theme'
+import {themeRegistry} from '../theme/ThemeRegistry'
+
+import mdocDarkTheme from '../theme/mdoc-dark/mdocDarkTheme'
+
 import DocElement from './default-elements/DocElement'
 import {Page, presentationPageHandler} from './page/Page'
 import SectionTitle from './default-elements/SectionTitle'
@@ -161,5 +167,12 @@ registerDocUtilsElements(library)
 function wrappedInContentBlock(Component) {
     return (props) => <div className="content-block"><Component {...props}/></div>
 }
+
+themeRegistry.registerAsBase(new Theme({
+    name: 'default', themeClassName: '',
+    elementsLibrary: library,
+    presentationElementHandlers: presentationElementHandlers}))
+
+themeRegistry.register(mdocDarkTheme)
 
 export {library as elementsLibrary, presentationElementHandlers}
