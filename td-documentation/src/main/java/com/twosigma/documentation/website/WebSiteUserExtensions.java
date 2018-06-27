@@ -52,27 +52,27 @@ public class WebSiteUserExtensions implements WebSiteResourcesProvider {
     }
 
     @Override
-    public Stream<WebResource> cssResources(ResourcesResolver resourcesResolver) {
+    public Stream<WebResource> cssResources() {
         return cssResources.stream();
     }
 
     @Override
-    public Stream<WebResource> htmlResources(ResourcesResolver resourcesResolver) {
+    public Stream<WebResource> htmlResources() {
         return htmlResources.stream();
     }
 
     @Override
-    public Stream<WebResource> jsResources(ResourcesResolver resourcesResolver) {
+    public Stream<WebResource> jsResources() {
         return jsResources.stream();
     }
 
     @Override
-    public Stream<WebResource> jsClientOnlyResources(ResourcesResolver resourcesResolver) {
+    public Stream<WebResource> jsClientOnlyResources() {
         return jsClientOnlyResources.stream();
     }
 
     @Override
-    public Stream<WebResource> additionalFilesToDeploy(ResourcesResolver resourcesResolver) {
+    public Stream<WebResource> additionalFilesToDeploy() {
         return additionalFilesToDeploy.stream();
     }
 }

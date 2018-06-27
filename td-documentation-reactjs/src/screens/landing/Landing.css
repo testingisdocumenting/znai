@@ -8,13 +8,15 @@
     max-height: 100vh;
     overflow-y: auto;
 
+    padding: 20px;
+    --mdoc-landing-border-color: #ddd;
+}
+
+.mdoc-landing-documentations-area > .centered {
     max-width: 1600px;
 
     margin-left: auto;
     margin-right: auto;
-
-    padding: 20px;
-    --mdoc-landing-border-color: #ddd;
 }
 
 .mdoc-landing-category {

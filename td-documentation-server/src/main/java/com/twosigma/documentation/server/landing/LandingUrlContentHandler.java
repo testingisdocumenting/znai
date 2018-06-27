@@ -4,6 +4,8 @@ import com.twosigma.documentation.html.HtmlPage;
 import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.server.urlhandlers.UrlContentHandler;
+import com.twosigma.documentation.web.WebResource;
+import com.twosigma.documentation.web.extensions.WebSiteResourcesProviders;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,6 +41,12 @@ public class LandingUrlContentHandler implements UrlContentHandler {
 
         HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly(landingTitle + " " + landingType,
                 "Landing", props);
+
+        WebSiteResourcesProviders.jsResources().forEach(htmlPage::addJavaScript);
+        WebSiteResourcesProviders.jsClientOnlyResources().forEach(htmlPage::addJavaScript);
+        WebSiteResourcesProviders.cssResources().forEach(htmlPage::addCss);
+        WebSiteResourcesProviders.htmlResources().map(WebResource::getTextContent)
+                .forEach(text -> htmlPage.addToBody(() -> text));
 
         return htmlPage.render("");
     }
