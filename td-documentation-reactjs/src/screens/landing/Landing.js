@@ -87,7 +87,7 @@ function Documentations({documentations}) {
 function Documentation({documentation}) {
     const url = documentation.url ?
         documentation.url:
-        documentation.id
+        documentation.id + '/'
 
     return (
         <div className="mdoc-landing-documentation">
