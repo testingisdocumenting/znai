@@ -168,12 +168,14 @@ public class DocumentationServer {
     }
 
     private void unzip(String docId, Path path) {
-        ConsoleOutputs.out(Color.BLUE, "unzipping docs: ", Color.PURPLE, path, Color.BLACK, " to ",
-                Color.PURPLE, deployRoot);
+        Path unzipDest = deployRoot.resolve(docId);
 
-        UnzipTask unzipTask = new UnzipTask(deployRoot.resolve(path), deployRoot);
+        ConsoleOutputs.out(Color.BLUE, "unzipping docs: ", Color.PURPLE, path, Color.BLACK, " to ",
+                Color.PURPLE, unzipDest);
+
+        UnzipTask unzipTask = new UnzipTask(deployRoot.resolve(path), unzipDest);
         unzipTask.execute();
-        ConsoleOutputs.out(Color.BLUE, "unzipped docs: ", Color.PURPLE, deployRoot);
+        ConsoleOutputs.out(Color.BLUE, "unzipped docs: ", Color.PURPLE, unzipDest);
     }
 
     // this is entry point for local development and testing
