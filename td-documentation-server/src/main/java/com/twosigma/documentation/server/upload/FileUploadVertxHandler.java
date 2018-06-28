@@ -35,7 +35,7 @@ public class FileUploadVertxHandler implements Handler<HttpServerRequest> {
             req.endHandler(eh -> file.close(fch -> {
                 req.response().end();
 
-                OnUploadFinishedServerHandlers.onUploadFinished(docId, destination);
+                OnUploadFinishedServerHandlers.onUploadFinished(vertx, docId, destination);
                 deleteUploadedFile();
             }));
 
