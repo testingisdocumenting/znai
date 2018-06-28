@@ -50,7 +50,7 @@ public class DocumentationUploadClient {
 
     private void upload(Path path, OnUploadFinishedClientHandler onUploadFinish) {
         ConsoleOutputs.out(Color.BLUE, "uploading documentation: ", Color.GREEN,
-                path, Color.BLACK, " to ", Color.PURPLE, docId);
+                path, Color.BLACK, " to ", Color.PURPLE, fullUrl(docId));
 
         HttpClientRequest req = vertx.createHttpClient(new HttpClientOptions()).put(port, host,
                 "/upload/" + docId, resp -> handleUploadFinish(resp.statusCode(), onUploadFinish));
@@ -69,6 +69,12 @@ public class DocumentationUploadClient {
                 pump.start();
             });
         });
+    }
+
+    private String fullUrl(String docId) {
+        return host +
+                (port != 80 && port != 443 ? ":" + port : "") +
+                "/" + docId;
     }
 
     private void handleUploadFinish(int statusCode, OnUploadFinishedClientHandler onUploadFinish) {
