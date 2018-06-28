@@ -95,7 +95,7 @@
 }
 
 .snippet-copy-to-clipboard.copied {
-    stroke-width: 4px;
+    stroke-width: 3px;
 }
 
 .snippet-container:hover .snippet-copy-to-clipboard {
