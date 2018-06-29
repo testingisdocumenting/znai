@@ -27,15 +27,20 @@ public class DocumentationCliApp {
     private WebSite webSite;
     private ReactJsNashornEngine nashornEngine;
 
-    public DocumentationCliApp(String[] args) {
+    public DocumentationCliApp(DocumentationCliConfig cliConfig) {
         System.setProperty("java.awt.headless", "true");
-        this.config = new DocumentationCliConfig(args);
+        this.config = cliConfig;
         this.deployPath = config.getDeployRoot().resolve(getDocId());
     }
 
-    public static void main(String[] args) {
-        DocumentationCliApp cliApp = new DocumentationCliApp(args);
+    public static void start(DocumentationCliConfig cliConfig) {
+        DocumentationCliApp cliApp = new DocumentationCliApp(cliConfig);
         cliApp.start();
+    }
+
+    public static void main(String[] args) {
+        ConsoleOutputs.add(new AnsiConsoleOutput());
+        start(new DocumentationCliConfig(args));
     }
 
     private String getDocId() {
@@ -47,7 +52,6 @@ public class DocumentationCliApp {
     }
 
     private void start() {
-        ConsoleOutputs.add(new AnsiConsoleOutput());
         config.print();
 
         if (config.isNew()) {
