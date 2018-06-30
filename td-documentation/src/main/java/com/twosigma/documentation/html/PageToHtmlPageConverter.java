@@ -32,7 +32,7 @@ public class PageToHtmlPageConverter {
         DocumentationReactProps docProps = new DocumentationReactProps(docMeta, pageProps, footerProps);
 
         HtmlReactJsPage reactJsPage = new HtmlReactJsPage(reactJsNashornEngine);
-        HtmlPage htmlPage = reactJsPage.createWithServerSideRendering(title, "Documentation", docProps.toMap());
+        HtmlPage htmlPage = reactJsPage.createWithServerSideRendering(title, "Documentation", docProps.toMap(), "");
 
         WebSiteResourcesProviders.jsResources().forEach(htmlPage::addJavaScript);
         WebSiteResourcesProviders.jsClientOnlyResources().forEach(htmlPage::addJavaScript);

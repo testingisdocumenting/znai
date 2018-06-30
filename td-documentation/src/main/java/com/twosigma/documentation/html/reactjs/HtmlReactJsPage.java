@@ -15,16 +15,16 @@ public class HtmlReactJsPage {
         this.reactJsNashornEngine = reactJsNashornEngine;
     }
 
-    public HtmlPage createWithServerSideRendering(String title, String component, Map<String, ?> props) {
-        return create(title, component, props, true);
+    public HtmlPage createWithServerSideRendering(String title, String component, Map<String, ?> props, String favIconCustomPath) {
+        return create(title, component, props, true, favIconCustomPath);
     }
 
-    public HtmlPage createWithClientSideOnly(String title, String component, Map<String, ?> props) {
-        return create(title, component, props, false);
+    public HtmlPage createWithClientSideOnly(String title, String component, Map<String, ?> props, String favIconCustomPath) {
+        return create(title, component, props, false, favIconCustomPath);
     }
 
-    private HtmlPage create(String title, String component, Map<String, ?> props, boolean serverSideRendering) {
-        HtmlPage htmlPage = new HtmlPage();
+    private HtmlPage create(String title, String component, Map<String, ?> props, boolean serverSideRendering, String favIconCustomPath) {
+        HtmlPage htmlPage = new HtmlPage(favIconCustomPath);
         htmlPage.setTitle(title);
 
         RenderSupplier createElementStatement = () -> "React.createElement(" + component + ", " +

@@ -97,7 +97,7 @@ public class DocumentationCliApp {
     private void generateDocs() {
         Path userDefinedFavicon = config.getSourceRoot().resolve("favicon.png");
         WebResource favIconResource = Files.exists(userDefinedFavicon) ?
-                WebResource.withPath(userDefinedFavicon, HtmlPage.FAVICON_PATH) :
+                WebResource.withPath(userDefinedFavicon, HtmlPage.FAVICON_PATH):
                 WebResource.fromResource(HtmlPage.FAVICON_PATH);
 
         webSite = WebSite.withToc(resolveTocPath()).

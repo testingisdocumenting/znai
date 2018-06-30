@@ -13,6 +13,8 @@ import static java.util.stream.Collectors.joining;
 public class HtmlPage {
     public static final String FAVICON_PATH = "favicon.png";
 
+    private final String customFavIconPath;
+
     private String title;
 
     private List<WebResource> cssResources;
@@ -23,6 +25,12 @@ public class HtmlPage {
     private List<RenderSupplier> javaScriptSuppliers;
 
     public HtmlPage() {
+        this("");
+    }
+
+    public HtmlPage(String customFavIconPath) {
+        this.customFavIconPath = customFavIconPath;
+
         title = "";
 
         cssResources = new ArrayList<>();
@@ -78,8 +86,16 @@ public class HtmlPage {
     }
 
     private String favIconPath(String documentationId) {
+        if (!customFavIconPath.isEmpty()) {
+            return makeIconPath(customFavIconPath);
+        }
+
         return documentationId.isEmpty() ?
-                "\"/" + FAVICON_PATH + "\"":
-                "\"/" + documentationId + "/" + FAVICON_PATH + "\"";
+                makeIconPath("/" + FAVICON_PATH):
+                makeIconPath("/" + documentationId + "/" + FAVICON_PATH);
+    }
+
+    private String makeIconPath(String path) {
+        return "\"" + path + "\"";
     }
 }

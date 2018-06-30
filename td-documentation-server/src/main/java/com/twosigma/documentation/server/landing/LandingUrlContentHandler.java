@@ -40,7 +40,7 @@ public class LandingUrlContentHandler implements UrlContentHandler {
         props.put("title", landingTitle);
 
         HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly(landingTitle + " " + landingType,
-                "Landing", props);
+                "Landing", props, "/static/landing/favicon.png");
 
         WebSiteResourcesProviders.jsResources().forEach(htmlPage::addJavaScript);
         WebSiteResourcesProviders.jsClientOnlyResources().forEach(htmlPage::addJavaScript);

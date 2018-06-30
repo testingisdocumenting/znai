@@ -136,7 +136,7 @@ public class DocumentationServer {
         props.put("keyValues", Collections.emptyList());
 
         HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly("test title",
-                "DocumentationPreparationScreen", props);
+                "DocumentationPreparationScreen", props, "");
 
         ctx.response().end(htmlPage.render(docId));
     }
