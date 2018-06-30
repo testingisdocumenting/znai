@@ -135,8 +135,8 @@ public class DocumentationServer {
         props.put("progressPercent", 0);
         props.put("keyValues", Collections.emptyList());
 
-        HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly("test title",
-                "DocumentationPreparationScreen", props, "");
+        HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly("Preparing " + docId,
+                "DocumentationPreparationScreen", props, FavIcons.DEFAULT_ICON_PATH);
 
         ctx.response().end(htmlPage.render(docId));
     }

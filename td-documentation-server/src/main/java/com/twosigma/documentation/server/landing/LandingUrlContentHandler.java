@@ -3,6 +3,7 @@ package com.twosigma.documentation.server.landing;
 import com.twosigma.documentation.html.HtmlPage;
 import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
+import com.twosigma.documentation.server.FavIcons;
 import com.twosigma.documentation.server.urlhandlers.UrlContentHandler;
 import com.twosigma.documentation.web.WebResource;
 import com.twosigma.documentation.web.extensions.WebSiteResourcesProviders;
@@ -40,7 +41,7 @@ public class LandingUrlContentHandler implements UrlContentHandler {
         props.put("title", landingTitle);
 
         HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly(landingTitle + " " + landingType,
-                "Landing", props, "/static/landing/favicon.png");
+                "Landing", props, FavIcons.DEFAULT_ICON_PATH);
 
         WebSiteResourcesProviders.jsResources().forEach(htmlPage::addJavaScript);
         WebSiteResourcesProviders.jsClientOnlyResources().forEach(htmlPage::addJavaScript);
