@@ -7,6 +7,7 @@ import io.vertx.core.file.AsyncFile;
 import io.vertx.core.file.FileProps;
 import io.vertx.core.file.FileSystem;
 import io.vertx.core.file.OpenOptions;
+import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpClientRequest;
 import io.vertx.core.streams.Pump;
@@ -33,8 +34,16 @@ public class DocumentationUploadClient {
     }
 
     public void upload(OnUploadFinishedClientHandler onUploadFinish) {
+        upload(false, onUploadFinish);
+    }
+
+    public void uploadWithSsl(OnUploadFinishedClientHandler onUploadFinish) {
+        upload(true, onUploadFinish);
+    }
+
+    private void upload(boolean useSsl, OnUploadFinishedClientHandler onUploadFinish) {
         Path zipPath = zipDocs(deployRoot);
-        upload(zipPath, onUploadFinish);
+        upload(zipPath, useSsl, onUploadFinish);
     }
 
     private Path zipDocs(Path dirToZip) {
@@ -48,11 +57,12 @@ public class DocumentationUploadClient {
         return zipDestination;
     }
 
-    private void upload(Path path, OnUploadFinishedClientHandler onUploadFinish) {
+    private void upload(Path path, boolean useSsl, OnUploadFinishedClientHandler onUploadFinish) {
         ConsoleOutputs.out(Color.BLUE, "uploading documentation: ", Color.GREEN,
                 path, Color.BLACK, " to ", Color.PURPLE, fullUrl(docId));
 
-        HttpClientRequest req = vertx.createHttpClient(new HttpClientOptions()).put(port, host,
+        HttpClient client = vertx.createHttpClient(new HttpClientOptions().setSsl(useSsl));
+        HttpClientRequest req = client.put(port, host,
                 "/upload/" + docId, resp -> handleUploadFinish(resp.statusCode(), onUploadFinish));
 
         FileSystem fs = vertx.fileSystem();

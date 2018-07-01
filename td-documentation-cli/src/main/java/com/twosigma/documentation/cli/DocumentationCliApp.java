@@ -4,7 +4,6 @@ import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.cli.extension.CliCommandConfig;
-import com.twosigma.documentation.client.DocumentationUploadClient;
 import com.twosigma.documentation.html.HtmlPage;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkupTypes;
@@ -75,13 +74,6 @@ public class DocumentationCliApp {
             config.getSpecifiedCustomCommand().handle(
                     new CliCommandConfig(config.getDocId(), config.getSourceRoot(), config.getDeployRoot()));
         }
-    }
-
-    private void upload() {
-        DocumentationUploadClient client = new DocumentationUploadClient(config.getDocId(), config.getDeployRoot(),
-                config.getHost(), config.getPort());
-
-        client.upload((statusCode -> System.exit(statusCode == 200 ? 0 : 1)));
     }
 
     private void preview() {
