@@ -111,6 +111,11 @@ public class DocumentationServer {
 
     private void registerPagesHandler(Router router, StaticHandler pagesStaticHandler) {
         router.get("/*").handler(ctx -> {
+            if (needToEndWithTrailingSlash(ctx)) {
+                redirectToTrailingSlash(ctx);
+                return;
+            }
+
             String docId = extractDocId(ctx);
             if (DocumentationPreparationHandlers.isReady(docId)) {
                 pagesStaticHandler.handle(ctx);
@@ -126,6 +131,10 @@ public class DocumentationServer {
         });
     }
 
+    private void redirectToTrailingSlash(RoutingContext ctx) {
+        ctx.response().putHeader("location", ctx.request().uri() + "/").setStatusCode(301).end();
+    }
+
     private void serveDocumentationPreparationPage(RoutingContext ctx, String docId) {
         HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(nashornEngine);
         Map<String, Object> props = new LinkedHashMap<>();
@@ -139,6 +148,14 @@ public class DocumentationServer {
                 "DocumentationPreparationScreen", props, FavIcons.DEFAULT_ICON_PATH);
 
         ctx.response().end(htmlPage.render(docId));
+    }
+
+    private static boolean needToEndWithTrailingSlash(RoutingContext ctx) {
+        if (isNonDocPageRequest(ctx)) {
+            return false;
+        }
+
+        return !ctx.request().uri().endsWith("/");
     }
 
     private static String extractDocId(RoutingContext ctx) {
