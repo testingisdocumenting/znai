@@ -1,22 +1,22 @@
 package com.twosigma.documentation.server.docpreparation;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
+import io.vertx.core.impl.ConcurrentHashSet;
+
+import java.util.*;
 
 public class DocumentationPreparationTestHandler implements DocumentationPreparationHandler {
-    private static final String DUMMY_DOC_ID = "preview";
+    private static final List<String> DUMMY_DOC_IDS = Arrays.asList("preview", "hello", "world");
 
-    private AtomicBoolean isReady = new AtomicBoolean(true);
+    private final Set<String> isReadyById = new ConcurrentHashSet<>();
 
     @Override
     public boolean handles(String docId) {
-        return docId.equals(DUMMY_DOC_ID);
+        return DUMMY_DOC_IDS.contains(docId);
     }
 
     @Override
     public boolean isReady(String docId) {
-        return docId.equals("preview") && this.isReady.get();
+        return isReadyById.contains(docId);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class DocumentationPreparationTestHandler implements DocumentationPrepara
             preparationProgress.reportProgress("some progress", keyValues, 75);
 
             Thread.sleep(1000);
-            this.isReady.set(true);
+            isReadyById.add(docId);
             preparationProgress.reportProgress("another progress", keyValues, 100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

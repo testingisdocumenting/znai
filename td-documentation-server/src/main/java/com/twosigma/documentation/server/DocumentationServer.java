@@ -7,7 +7,9 @@ import com.twosigma.documentation.html.HtmlPage;
 import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
 import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationHandlers;
+import com.twosigma.documentation.server.docpreparation.DocumentationPreparationTestHandler;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationWebSocketHandler;
+import com.twosigma.documentation.server.docpreparation.NoOpDocumentationPreparationProgress;
 import com.twosigma.documentation.server.landing.LandingDocEntriesProviders;
 import com.twosigma.documentation.server.landing.LandingDocEntry;
 import com.twosigma.documentation.server.landing.LandingUrlContentHandler;
@@ -119,12 +121,15 @@ public class DocumentationServer {
             String docId = extractDocId(ctx);
             if (DocumentationPreparationHandlers.isReady(docId)) {
                 pagesStaticHandler.handle(ctx);
-            } else if (isNonDocPageRequest(ctx)) {
+            } else if (isNotDocPageRequest(ctx)) {
                 // mdoc documentations are single page apps
                 // page refresh won't happen during navigation from one page to another
                 // but images will still be requested if they are present on a page
-                // in that case we will serve what is currently available and not force documentation update
-                pagesStaticHandler.handle(ctx);
+                // in that case we will call documentation preparation before serving content
+                vertx.executeBlocking(future -> {
+                    DocumentationPreparationHandlers.prepare(docId, NoOpDocumentationPreparationProgress.INSTANCE);
+                    future.complete();
+                }, (res) -> pagesStaticHandler.handle(ctx));
             } else {
                 serveDocumentationPreparationPage(ctx, docId);
             }
@@ -151,7 +156,7 @@ public class DocumentationServer {
     }
 
     private static boolean needToEndWithTrailingSlash(RoutingContext ctx) {
-        if (isNonDocPageRequest(ctx)) {
+        if (isNotDocPageRequest(ctx)) {
             return false;
         }
 
@@ -165,7 +170,7 @@ public class DocumentationServer {
         return parts.length < 2 ? "" : parts[1];
     }
 
-    private static boolean isNonDocPageRequest(RoutingContext ctx) {
+    private static boolean isNotDocPageRequest(RoutingContext ctx) {
         String uri = ctx.request().uri();
         int dotIdx = uri.lastIndexOf('.');
         if (dotIdx == -1) {
@@ -173,7 +178,12 @@ public class DocumentationServer {
         }
 
         int slashIdx = uri.lastIndexOf('/');
-        return dotIdx > slashIdx;
+        if (slashIdx > dotIdx) {
+            return false;
+        }
+
+        String extension = uri.substring(dotIdx);
+        return !extension.equals("html");
     }
 
     private static void createDirs(Path deployRoot) {
@@ -201,6 +211,8 @@ public class DocumentationServer {
         ConsoleOutputs.add(new AnsiConsoleOutput());
 
         ReactJsNashornEngine nashornEngine = new ReactJsNashornEngine();
+
+        DocumentationPreparationHandlers.add(new DocumentationPreparationTestHandler());
 
         LandingDocEntriesProviders.add(() -> Stream.of(
                 new LandingDocEntry("mdoc", "MDoc", "http://custom","Documentation", "test desc")
