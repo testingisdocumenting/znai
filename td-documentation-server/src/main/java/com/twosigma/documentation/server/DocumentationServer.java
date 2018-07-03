@@ -129,7 +129,7 @@ public class DocumentationServer {
                 vertx.executeBlocking(future -> {
                     DocumentationPreparationHandlers.prepare(docId, NoOpDocumentationPreparationProgress.INSTANCE);
                     future.complete();
-                }, (res) -> pagesStaticHandler.handle(ctx));
+                }, false, (res) -> pagesStaticHandler.handle(ctx));
             } else {
                 serveDocumentationPreparationPage(ctx, docId);
             }

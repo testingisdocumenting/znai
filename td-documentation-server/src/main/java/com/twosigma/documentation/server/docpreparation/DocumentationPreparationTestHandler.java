@@ -24,22 +24,27 @@ public class DocumentationPreparationTestHandler implements DocumentationPrepara
         Map<String, String> keyValues = new LinkedHashMap<>();
 
         try {
-            Thread.sleep(1000);
-            preparationProgress.reportProgress("hello", keyValues, 15);
+            sleep(1000);
+            preparationProgress.reportProgress(docId + ": hello", keyValues, 15);
 
-            Thread.sleep(1000);
+            sleep(1000);
             keyValues.put("code base", "test_codebase");
-            preparationProgress.reportProgress("world", keyValues,45);
+            preparationProgress.reportProgress(docId + ": world", keyValues,45);
 
-            Thread.sleep(2000);
+            sleep(2000);
             keyValues.put("branch", "branch name");
-            preparationProgress.reportProgress("some progress", keyValues, 75);
+            preparationProgress.reportProgress(docId + ": some progress", keyValues, 75);
 
-            Thread.sleep(1000);
+            sleep(1000);
             isReadyById.add(docId);
-            preparationProgress.reportProgress("another progress", keyValues, 100);
+            preparationProgress.reportProgress(docId + ": another progress", keyValues, 100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void sleep(int millis) throws InterruptedException {
+        Thread.sleep(millis);
+        System.out.println(Thread.currentThread().getName());
     }
 }

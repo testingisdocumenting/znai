@@ -15,8 +15,11 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class PreviewWebSocketHandler extends JsonWebSocketHandler {
+    private static final String NAME = "preview";
+    private static final String URL = "/preview";
+
     PreviewWebSocketHandler() {
-        super("preview", "/preview");
+        super(NAME, URL);
     }
 
     public void sendPage(DocPageReactProps pageProps) {
@@ -57,6 +60,10 @@ public class PreviewWebSocketHandler extends JsonWebSocketHandler {
         payload.put("error", error);
 
         send(payload);
+    }
+
+    private void send(Map<String, ?> payload) {
+        send(URL, payload);
     }
 
     @Override

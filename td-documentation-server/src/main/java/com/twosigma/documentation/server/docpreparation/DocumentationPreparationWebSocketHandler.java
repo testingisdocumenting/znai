@@ -4,11 +4,9 @@ import com.twosigma.documentation.server.sockets.JsonWebSocketHandler;
 import com.twosigma.utils.CollectionUtils;
 import io.vertx.core.Vertx;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -22,7 +20,7 @@ public class DocumentationPreparationWebSocketHandler extends JsonWebSocketHandl
         this.vertx = vertx;
     }
 
-    public void sendUpdate(String message, Map<String, String> keyValues, int progressPercent) {
+    public void sendUpdate(String docId, String message, Map<String, String> keyValues, int progressPercent) {
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("message", message);
         payload.put("progress", progressPercent);
@@ -32,7 +30,7 @@ public class DocumentationPreparationWebSocketHandler extends JsonWebSocketHandl
                 .collect(Collectors.toList());
         payload.put("keyValues", keyValuesList);
 
-        send(payload);
+        send("/" + docId, payload);
     }
 
     @Override
@@ -40,10 +38,9 @@ public class DocumentationPreparationWebSocketHandler extends JsonWebSocketHandl
         int lastSepIdx = uri.lastIndexOf('/');
         String docId = uri.substring(lastSepIdx + 1);
 
-        vertx.executeBlocking((req) -> {
-            DocumentationPreparationHandlers.prepare(docId, new DocumentationPreparationSocketProgress(this));
-        }, (res) -> {
-
-        });
+        vertx.executeBlocking((future) -> DocumentationPreparationHandlers.prepare(docId,
+                new DocumentationPreparationSocketProgress(docId, this)),
+                false,
+                (res) -> { });
     }
 }

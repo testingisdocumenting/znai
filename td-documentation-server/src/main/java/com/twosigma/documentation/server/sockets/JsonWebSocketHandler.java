@@ -14,20 +14,20 @@ import static com.twosigma.console.ansi.Color.BLUE;
 import static com.twosigma.console.ansi.Color.RED;
 
 public abstract class JsonWebSocketHandler implements Handler<ServerWebSocket> {
-    private List<ServerWebSocket> sockets;
-    private String id;
+    private List<SocketWithUrl> sockets;
+    private String name;
     private String url;
 
-    public JsonWebSocketHandler(String id, String url) {
+    public JsonWebSocketHandler(String name, String url) {
         this.sockets = new ArrayList<>();
-        this.id = id;
+        this.name = name;
         this.url = url;
     }
 
     public abstract void onConnect(String uri);
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
     public String getUrl() {
@@ -40,9 +40,9 @@ public abstract class JsonWebSocketHandler implements Handler<ServerWebSocket> {
             return;
         }
 
-        sockets.add(ws);
+        sockets.add(new SocketWithUrl(ws, ws.uri()));
 
-        ConsoleOutputs.out(id + " connected: ", BLUE, ws.path());
+        ConsoleOutputs.out(name + " connected: ", BLUE, ws.path());
         renderNumberOfSockets();
 
         onConnect(ws.uri());
@@ -53,26 +53,38 @@ public abstract class JsonWebSocketHandler implements Handler<ServerWebSocket> {
         });
 
         ws.closeHandler((h) -> {
-            sockets.remove(ws);
-            ConsoleOutputs.out(RED, id + " connection closed");
+            sockets.removeIf(s -> s.socket == ws);
+            ConsoleOutputs.out(RED, name + " connection closed");
             renderNumberOfSockets();
         });
-
     }
 
-    public void send(Map<String, ?> payload) {
+    public void send(String subUrlToContain, Map<String, ?> payload) {
         if (sockets.isEmpty()) {
-            ConsoleOutputs.out(BLUE, id + " connection ", FontStyle.NORMAL, "with", BLUE, " web page ", FontStyle.NORMAL, "is not established. ",
+            ConsoleOutputs.out(BLUE, name + " connection ", FontStyle.NORMAL, "with", BLUE, " web page ", FontStyle.NORMAL, "is not established. ",
                     BLUE, "reload or open", FontStyle.NORMAL, " the page");
             return;
         }
 
         String text = JsonUtils.serialize(payload);
-        ConsoleOutputs.out(id + " sending: ", BLUE, text);
-        sockets.forEach(ws -> ws.writeFinalTextFrame(text));
+        ConsoleOutputs.out(name + " sending: ", BLUE, text);
+
+        sockets.stream()
+                .filter(s -> s.connectedUrl.contains(subUrlToContain))
+                .forEach(s -> s.socket.writeFinalTextFrame(text));
     }
 
     private void renderNumberOfSockets() {
-        ConsoleOutputs.out("there are " + sockets.size() + " opened sockets for " + id);
+        ConsoleOutputs.out("there are " + sockets.size() + " opened sockets for " + name);
+    }
+
+    private static class SocketWithUrl {
+        private final ServerWebSocket socket;
+        private final String connectedUrl;
+
+        public SocketWithUrl(ServerWebSocket socket, String connectedUrl) {
+            this.socket = socket;
+            this.connectedUrl = connectedUrl;
+        }
     }
 }
