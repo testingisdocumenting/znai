@@ -3,6 +3,8 @@ package com.twosigma.documentation.extensions.api
 import com.twosigma.documentation.parser.TestComponentsRegistry
 import org.junit.Test
 
+import static com.twosigma.testing.Ddjt.equal
+
 class ApiParametersCsvParserTest {
     @Test
     void "should convert names like name.subname.nested to api parameter with nested children"() {
@@ -18,7 +20,7 @@ nestedList, array of objects, descr5
 nestedList.score, int, descr6
 """)
 
-        apiParameters.toMap().should == [children: [
+        apiParameters.toMap().should equal([parameters: [
                 [name: 'firstName', type: 'String', description: [[markdown: 'descr1', type: 'TestMarkdown']]],
                 [name: 'nested', type: 'object', description: [[markdown: 'descr2', type: 'TestMarkdown']], children:
                         [[name: 'zipCode', type: 'String', description: [[markdown: 'descr3', type: 'TestMarkdown']]],
@@ -26,7 +28,7 @@ nestedList.score, int, descr6
                          [name: 'subNested', type: 'object', description: [[markdown: 'nested nested', type: 'TestMarkdown']], children:
                                  [[name: 'url', type: 'String', description: [[markdown: 'nested nested 1', type: 'TestMarkdown']]],
                                   [name: 'fileName', type: 'String', description: [[markdown: 'nested nested 2', type: 'TestMarkdown']]]]]]],
-                [name: 'nestedList', type: 'array of objects', description: [[markdown: 'descr5', type: 'TestMarkdown']], children:[
-                        [name: 'score', type: 'int', description: [[markdown: 'descr6', type: 'TestMarkdown']]]]]]]
+                [name: 'nestedList', type: 'array of objects', description: [[markdown: 'descr5', type: 'TestMarkdown']], children: [
+                        [name: 'score', type: 'int', description: [[markdown: 'descr6', type: 'TestMarkdown']]]]]]])
     }
 }

@@ -1,0 +1,41 @@
+[
+  {
+    "name": "sessionId",
+    "type": "Integer",
+    "description": "session Id"
+  },
+  {
+    "name": "person",
+    "type": "Person",
+    "description": "person to login with",
+    "children": [
+      {
+        "name": "firstName",
+        "type": "String",
+        "description": "*first* name of the person"
+      },
+      {
+        "name": "lastName",
+        "type": "String",
+        "description": "*last* name of the person"
+      }
+    ]
+  },
+  {
+    "name": "roles",
+    "type": "List<Role>",
+    "description": "list of authorized roles",
+    "children": [
+      {
+        "name": "id",
+        "type": "String",
+        "description": " role id "
+      },
+      {
+        "name": "description",
+        "type": "String",
+        "description": "role description"
+      }
+    ]
+  }
+]

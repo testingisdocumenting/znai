@@ -6,14 +6,16 @@ import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 import com.twosigma.documentation.parser.table.Row;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
 public class ApiParametersCsvParser {
     private final ApiParameters apiParameters;
-    private MarkupParser markupParser;
+    private final MarkupParser markupParser;
     private final String csvContent;
+    private final Path path;
 
     public static ApiParameters parse(MarkupParser markupParser, String csvContent) {
         return new ApiParametersCsvParser(markupParser, csvContent).parse();
@@ -23,6 +25,7 @@ public class ApiParametersCsvParser {
         this.markupParser = markupParser;
         this.csvContent = csvContent;
         this.apiParameters = new ApiParameters();
+        this.path = Paths.get("");
     }
 
     public ApiParameters parse() {
@@ -36,7 +39,7 @@ public class ApiParametersCsvParser {
         String name = row.get(0);
         String type = row.get(1);
 
-        MarkupParserResult markupParserResult = markupParser.parse(Paths.get(""), row.get(2));
+        MarkupParserResult markupParserResult = markupParser.parse(path, row.get(2));
         List<Map<String, Object>> description = markupParserResult.getDocElement().contentToListOfMaps();
 
         if (name.contains(".")) {

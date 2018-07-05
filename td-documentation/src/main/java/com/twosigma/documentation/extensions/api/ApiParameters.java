@@ -22,6 +22,10 @@ public class ApiParameters {
         return root.find(name);
     }
 
+    public ApiParameter getRoot() {
+        return root;
+    }
+
     public Map<String, Object> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("parameters", root.getChildren().stream().map(ApiParameter::toMap).collect(toList()));
