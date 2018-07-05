@@ -37,9 +37,11 @@ public class ApiParameter {
         return children;
     }
 
-    public void add(String name, String type, List<Map<String, Object>> description) {
+    public ApiParameter add(String name, String type, List<Map<String, Object>> description) {
         ApiParameter apiParameter = new ApiParameter(name, type, description);
         children.add(apiParameter);
+
+        return apiParameter;
     }
 
     ApiParameter find(String name) {
