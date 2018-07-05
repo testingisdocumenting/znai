@@ -5,11 +5,11 @@ import com.twosigma.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class ApiParametersJsonParser {
     private final ApiParameters apiParameters;
-    private final Deque<ApiParameter> currentStack;
     private final MarkupParser markupParser;
     private final List<Map<String, Object>> json;
     private final Path path;
@@ -23,31 +23,24 @@ public class ApiParametersJsonParser {
         this.markupParser = markupParser;
         this.json = (List<Map<String, Object>>) JsonUtils.deserializeAsList(jsonContent);
         this.apiParameters = new ApiParameters();
-        this.currentStack = new ArrayDeque<>(Collections.singleton(apiParameters.getRoot()));
         this.path = Paths.get("");
     }
 
     public ApiParameters parse() {
-        json.forEach(this::parseParam);
-
+        json.forEach(p -> parseParam(apiParameters.getRoot(), p));
         return apiParameters;
     }
 
     @SuppressWarnings("unchecked")
-    private void parseParam(Map<String, Object> param) {
-        ApiParameter current = currentStack.getLast();
+    private void parseParam(ApiParameter current, Map<String, Object> param) {
         ApiParameter apiParameter = current.add(param.get("name").toString(),
                 param.get("type").toString(),
                 markupParser.parse(path, param.get("description").toString()).contentToListOfMaps());
 
-        currentStack.add(apiParameter);
-
         Object children = param.get("children");
         if (children != null) {
             List<Map<String, Object>> list = (List<Map<String, Object>>) children;
-            list.forEach(this::parseParam);
+            list.forEach(p -> parseParam(apiParameter, p));
         }
-
-        currentStack.removeLast();
     }
 }
