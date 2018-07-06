@@ -10,13 +10,21 @@ export class TokensPrinter {
         this.print('punctuation', delimiter)
     }
 
+    printCollapsed(delimiter, onClick) {
+        this.print('collapsed', delimiter, onClick)
+    }
+
+    printCollapse(delimiter, onClick) {
+        this.print('collapse', delimiter, onClick)
+    }
+
     println() {
         this.currentLineOfTokens.push('\n')
         this._registerNewLine()
     }
 
-    print(type, content) {
-        this.currentLineOfTokens.push({type, content})
+    print(type, content, onClick) {
+        this.currentLineOfTokens.push(onClick ? {type, content, onClick} : {type, content})
     }
 
     _registerNewLine() {

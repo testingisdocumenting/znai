@@ -3,9 +3,17 @@ import {TokensPrinter} from '../code-snippets/TokensPrinter'
 class JsonPrinter {
     printer = new TokensPrinter()
 
-    constructor(pathsToHighlight) {
+    constructor({pathsToHighlight, collapsedPaths, previouslyCollapsedPath, onPathUncollapse, onPathCollapse}) {
         this._pathsToHighlight = {}
+        this._collapsedPaths = {}
+        this._previouslyCollapsedPath = {}
+
         pathsToHighlight.forEach(p => this._pathsToHighlight[p] = true)
+        collapsedPaths.forEach(p => this._collapsedPaths[p] = true)
+        previouslyCollapsedPath.forEach(p => this._previouslyCollapsedPath[p] = true)
+
+        this.onPathUncollapse = onPathUncollapse
+        this.onPathCollapse = onPathCollapse
     }
 
     printKey(key) {
@@ -36,7 +44,13 @@ class JsonPrinter {
     }
 
     printArray(path, values, skipIndent) {
-        this.openScope('[', skipIndent)
+        if (this.isCollapsedPath(path)) {
+            this.printCollapsedArray(path)
+            return
+        }
+
+        const collapsable = this.isPreviouslyCollapsedPath(path) ? { path: path } : null
+        this.openScope('[', skipIndent, collapsable)
 
         values.forEach((v, idx) => {
             const isLast = idx === values.length - 1
@@ -53,7 +67,13 @@ class JsonPrinter {
     }
 
     printObject(path, json, skipIndent) {
-        this.openScope('{', skipIndent)
+        if (this.isCollapsedPath(path)) {
+            this.printCollapsedObject(path)
+            return
+        }
+
+        const collapsable = this.isPreviouslyCollapsedPath(path) ? { path: path } : null
+        this.openScope('{', skipIndent, collapsable)
 
         const keys = Object.keys(json)
         keys.forEach((key, idx) => {
@@ -72,12 +92,36 @@ class JsonPrinter {
         this.closeScope('}')
     }
 
-    openScope(delimiter, skipIndent) {
+    printCollapsedObject(path) {
+        this.printer.printDelimiter('{')
+        this.printCollapsed(path)
+        this.printer.printDelimiter('}')
+    }
+
+    printCollapsedArray(path) {
+        this.printer.printDelimiter('[')
+        this.printCollapsed(path)
+        this.printer.printDelimiter(']')
+    }
+
+    printCollapsed(path) {
+        this.printer.printCollapsed('...', () => this.onPathUncollapse(path))
+    }
+
+    printCollapse(path) {
+        this.printer.printCollapse('-', () => this.onPathCollapse(path))
+    }
+
+    openScope(delimiter, skipIndent, collapsable) {
         if (! skipIndent) {
             this.printer.printIndentation()
         }
 
         this.printer.printDelimiter(delimiter)
+        if (collapsable) {
+            this.printCollapse(collapsable.path)
+        }
+
         this.printer.println()
         this.printer.indentRight()
     }
@@ -92,10 +136,19 @@ class JsonPrinter {
     isHighlightedPath(path) {
         return this._pathsToHighlight.hasOwnProperty(path)
     }
+
+    isCollapsedPath(path) {
+        return this._collapsedPaths.hasOwnProperty(path)
+    }
+
+    isPreviouslyCollapsedPath(path) {
+        return this._previouslyCollapsedPath.hasOwnProperty(path)
+    }
 }
 
-export function printJson(rootPath, data, pathsToHighlight) {
-    const jsonPrinter = new JsonPrinter(pathsToHighlight || [])
+export function printJson({rootPath, data, paths, previouslyCollapsedPath, collapsedPaths, onPathUncollapse, onPathCollapse}) {
+    const jsonPrinter = new JsonPrinter({pathsToHighlight: paths || [],
+        previouslyCollapsedPath, collapsedPaths, onPathUncollapse, onPathCollapse})
     jsonPrinter.printValue(rootPath, data)
 
     return jsonPrinter.printer.linesOfTokens

@@ -39,6 +39,8 @@
     --mdoc-boolean-color: var(--mdoc-number-color);
     --mdoc-highlighted-background-color: rgba(126, 131, 33, 0.3);
 
+    --mdoc-collapse-uncollapse-background-color: #383838;
+
     color: var(--mdoc-regular-text-color);
     background-color: var(--mdoc-inversed-background-color);
     border-left: solid 1px #5b666c;

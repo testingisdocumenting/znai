@@ -70,6 +70,8 @@
     --mdoc-highlighted-background-color: rgba(241, 255, 42, 0.3);
     --mdoc-property-color: #660e7a;
     --mdoc-punctuation-color: #888;
+    --mdoc-collapse-uncollapse-color: var(--mdoc-punctuation-color);
+    --mdoc-collapse-uncollapse-background-color: var(--mdoc-snippets-title-background-color);
 
     --mdoc-inversed-text-color: #bbbbbb;
     --mdoc-inversed-background-color: #282f34;

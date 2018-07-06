@@ -62,3 +62,16 @@
     border-radius: 4px;
     background-color: var(--mdoc-highlighted-background-color);
 }
+
+.token.collapsed,
+.token.collapse {
+    display: inline-block;
+
+    color: var(--mdoc-collapse-uncollapse-color);
+    background-color: var(--mdoc-collapse-uncollapse-background-color);
+
+    padding: 0 4px;
+
+    user-select: none;
+    cursor: pointer;
+}
