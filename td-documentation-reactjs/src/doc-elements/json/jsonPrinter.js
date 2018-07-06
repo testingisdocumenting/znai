@@ -148,7 +148,11 @@ class JsonPrinter {
 
 export function printJson({rootPath, data, paths, previouslyCollapsedPath, collapsedPaths, onPathUncollapse, onPathCollapse}) {
     const jsonPrinter = new JsonPrinter({pathsToHighlight: paths || [],
-        previouslyCollapsedPath, collapsedPaths, onPathUncollapse, onPathCollapse})
+        previouslyCollapsedPath: previouslyCollapsedPath || [],
+        collapsedPaths: collapsedPaths || [],
+        onPathUncollapse,
+        onPathCollapse})
+
     jsonPrinter.printValue(rootPath, data)
 
     return jsonPrinter.printer.linesOfTokens
