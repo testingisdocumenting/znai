@@ -9,7 +9,7 @@ const SimpleCodeToken = ({token}) => {
 
     const className = (token.type === 'text') ? '' : 'token ' + token.type
     return (
-        <span className={className}>
+        <span className={className} onClick={token.onClick}>
             {renderData(token)}
         </span>
     )
@@ -25,11 +25,10 @@ function renderData(token) {
     }
 
     if (typeof token === 'object') {
-        return <SimpleCodeToken token={token.content}/>
+        return <SimpleCodeToken token={token.content} onClick={token.onClick}/>
     }
 
     return JSON.stringify(token)
-
 }
 
 function isSimpleValue(token) {

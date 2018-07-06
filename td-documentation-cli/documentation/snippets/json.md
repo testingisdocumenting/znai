@@ -18,8 +18,8 @@ Use `pathsFile` to specify a file to read paths from
 
 # Json Subparts
 
-Pass [Json Path](https://github.com/json-path/JsonPath) as `include` property 
-to include only a portion of your document
+To include only a portion of your document 
+pass [Json Path](https://github.com/json-path/JsonPath) as `include` property 
 
     :include-json: book-store.json {include: "$..book[0,1]"}
 
@@ -27,7 +27,7 @@ to include only a portion of your document
 
 # Title
 
-Use the `title` property to specify a title.
+To specify a title use the `title` property 
 
     :include-json: book-store.json {include: "$..book[0,1]", title: "Books"}
     
@@ -41,6 +41,14 @@ the initial number of lines to display
     :include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}
 
 :include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}
+
+# Hidden Parts
+
+To hide sub-parts of your JSON use `collapsedPaths` property.
+
+    :include-json: book-store.json {collapsedPaths: ['root.store.book']}
+    
+:include-json: book-store.json {collapsedPaths: ['root.store.book']}
 
 # Highlights
 

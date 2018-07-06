@@ -7,15 +7,57 @@ import SimpleCodeSnippet from '../code-snippets/SimpleCodeSnippet'
 
 import './Json.css'
 
-const Json = ({data, paths, title, ...props}) => {
-    const lines = printJson('root', data, paths)
+class Json extends React.Component {
+    state = {
+        previouslyCollapsedPath: []
+    }
 
-    return (
-        <SnippetContainer linesOfCode={lines}
-                          title={title}
-                          snippetComponent={SimpleCodeSnippet}
-                          {...props}/>
-    )
+    render() {
+        const {previouslyCollapsedPath} = this.state
+        const {data, paths, title, ...props} = this.props
+
+        const lines = printJson({
+            rootPath: 'root',
+            data,
+            paths,
+            collapsedPaths: this.collapsedPaths,
+            previouslyCollapsedPath: previouslyCollapsedPath,
+            onPathUncollapse: this.onPathUncollapse,
+            onPathCollapse: this.onPathCollapse })
+
+        return (
+            <SnippetContainer linesOfCode={lines}
+                              title={title}
+                              snippetComponent={SimpleCodeSnippet}
+                              {...props}/>
+        )
+    }
+
+    get collapsedPaths() {
+        const {previouslyCollapsedPath} = this.state
+        const collapsedPaths = this.props.collapsedPaths
+        if (!collapsedPaths) {
+            return []
+        }
+
+        return collapsedPaths.filter(p => previouslyCollapsedPath.indexOf(p) === -1)
+    }
+
+    onPathUncollapse = (path) => {
+        this.setState(prev => {
+            return {
+                previouslyCollapsedPath: [...prev.previouslyCollapsedPath, path]
+            }
+        })
+    }
+
+    onPathCollapse = (path) => {
+        this.setState(prev => {
+            return {
+                previouslyCollapsedPath: prev.previouslyCollapsedPath.filter(p => p !== path),
+            }
+        })
+    }
 }
 
 export default Json
