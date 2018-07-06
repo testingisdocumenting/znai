@@ -28,6 +28,7 @@ class Json extends React.Component {
         return (
             <SnippetContainer linesOfCode={lines}
                               title={title}
+                              tokensForClipboardProvider={this.tokensForClipboardProvider}
                               snippetComponent={SimpleCodeSnippet}
                               {...props}/>
         )
@@ -57,6 +58,13 @@ class Json extends React.Component {
                 previouslyCollapsedPath: prev.previouslyCollapsedPath.filter(p => p !== path),
             }
         })
+    }
+
+    tokensForClipboardProvider = () => {
+        const {data} = this.props
+        const lines = printJson({rootPath: 'root', data})
+
+        return lines.reduce((acc, curr) => acc.concat(curr), [])
     }
 }
 
