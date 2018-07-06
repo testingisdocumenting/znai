@@ -109,11 +109,23 @@ class SnippetContainer extends React.Component {
 
         this.clipboard = new ClipboardJS(this.copyToClipboardNode, {
             text: trigger => {
-                const {tokens} = this.props
+                const {tokens, linesOfCode, tokensForClipboardProvider} = this.props
                 this.setState({displayCopied: true})
                 this.startRemoveFeedbackTimer()
 
-                return extractTextFromTokens(tokens)
+                return extractTextFromTokens(tokensToUse())
+
+                function tokensToUse() {
+                    if (tokensForClipboardProvider) {
+                        return tokensForClipboardProvider()
+                    }
+
+                    if (tokens) {
+                        return tokens
+                    }
+
+                    return linesOfCode.reduce((acc, curr) => acc.concat(curr), [])
+                }
             }
         })
     }
