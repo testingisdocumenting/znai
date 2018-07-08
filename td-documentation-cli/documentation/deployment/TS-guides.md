@@ -42,4 +42,4 @@ Choose a simple and human-readable string using URL-safe characters for your `do
 
 **3.  Register documentation**
 
-Using this `doc-id`, follow the steps for [registering your documentation in CMDB](deployment/workflows#register-documentation), being sure to add your codebase name (e.g., `ts_my_codebase_name`) to the optional field `ts_documentation_vats_codebase_name`.
+Using this `doc-id`, follow the steps for [registering your documentation in CMDB](deployment/registration), being sure to add your codebase name (e.g., `ts_my_codebase_name`) to the optional field `ts_documentation_vats_codebase_name`.
