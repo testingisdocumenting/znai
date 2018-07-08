@@ -40,6 +40,9 @@ visuals
     SVG
     flow-diagrams
     PlantUml
+deployment
+    workflows
+    TS-guides
 synergy-with-testing
     java
     REST
