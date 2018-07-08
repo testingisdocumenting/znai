@@ -1,4 +1,8 @@
-# Deploy MDoc
+MDoc currently supports two deployment workflows: [direct deployment](deployment/workflows#direct-deployment) and [auto-deployment from the monorepo](deployment/workflows#auto-deployment-from-the-monorepo).
+
+# Direct Deployment
+
+## Upload Documentation
 
 To build and publish MDoc documentation, which is hosted by [TS Guides](deployment/TS-guides), run this command in your documentation directory:
 
@@ -8,50 +12,29 @@ Warning: Before initial deploy, verify your `doc-id` is not in use by another us
 
 The command will output a URL for your documentation, where you can verify the upload was successful.
 
-# Register Documentation
+## Register Documentation in CMDB
+ Follow the steps under [Registration](deployment/registration).
 
-Warning: Documentation must be registered in CMDB if it is to persist in the database, get indexed by search, or be displayed on the TS Guides landing page. Only documentation meant to be ephemeral (e.g., for purposes of a code review) should be left unregistered.
-
-To register, create a new [ts_documentation entity in CMDB](https://cmdb.twosigma.com/entity_types/ts_documentation)
-1.  Provide a unique doc-id in the first field, "Ts documentation"
-2.  Choose a documentation type (mdoc or sphinx) for "TS documentation type"
-3.  Provide easy-to-read display title for "TS documentation title"
-4.  Provide content category for "TS documentation category" (see [TS Guide landing page](https://tsguides.app.twosigma.com) for existing categories)
-5. Provide a short description of your documentation for "TS documentation description"
-6. Check the box for "TS documentation display on landing" if you want your entry to appear on the [TS Guide landing page](https://tsguides.app.twosigma.com)
-
-# Alternative: Auto-deploy from the Monorepo
+# Auto-Deployment from the Monorepo
 
 If your documentation lives in the monorepo (i.e., VATS), you can have your documentation auto-deploy on push. To make use of this workflow, do the following:
 
+## Create Documentation Codebase
+
+Create a new codebase for your documentatiomn and, in its `software.mi`, add dependencies to `ts_testing_documenting` and any other codebases that you might reference in your docs.
+
 ## Configure Makefile
 
-Create a Makefile in the same directory that contains your `mdoc` documentation directory with the following:
+Modify your new codebase's top-level Makefile to include MDoc references and define a doc-id:
 
-```
-TOP := .
-TOOLS := $(shell /usr/libexec/gettools ${TOP})
+Warning: Before initial deploy, verify your `doc-id` is not in use by another user by  navigating to the TS Guides URL for your `doc-id` string (https://tsguides.app.twosigma.com/`doc-id`).
 
-PROJECTS := bin
+:include-file: deployment/makefile-no-lookup.make {readMore: true, readMoreVisibleLines: 5}
 
-TS_MDOC_HOME := $(shell ${TOOLS}/bin/buildpath -H ts_testing_documenting)
+If your documentation will pull in files and code snippets from other codebases in the monorepo, also define and add the codebases to your documentation's lookup-path file in the Makefile:
+:include-file: deployment/makefile-with-lookup.make {readMore: true, readMoreVisibleLines: 5}
 
-include ${TOOLS}/mk/ts.master.nr.mk
+## Add Codebase to CMDB Registry
 
-.PHONY: mdoc
+Complete the steps under [Registration](deployment/registration), being sure to add your codebase name (e.g., `ts_my_codebase_name`) to the optional field `ts_documentation_vats_codebase_name`.
 
-mdoc:
-        ${TS_MDOC_HOME}/bin/mdoc --doc-id <add-your-doc-id-here> --source mdoc --deploy dist/mdoc
-
-mdoc_clean:
-        ${_RMRF} ${TOP}/dist/mdoc
-
-all: mdoc
-clean: mdoc_clean
-```
-
-## Opt-in in CMDB
-
-The [ts_documentation entity](https://cmdb.twosigma.com/entity_types/ts_documentation) has an optional field, `ts_documentation_auto_update_on_push`. 
-
-When [registering your documentation](deployment/workflows#register-documentation), set this boolean field to `true`.

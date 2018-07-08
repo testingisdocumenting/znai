@@ -42,6 +42,7 @@ visuals
     PlantUml
 deployment
     workflows
+    registration
     TS-guides
 synergy-with-testing
     java
