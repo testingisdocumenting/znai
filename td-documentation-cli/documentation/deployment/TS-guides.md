@@ -15,19 +15,19 @@ Sphinx documentation can be deployed in two ways, similar to the [MDoc deploymen
 
 Deploy Sphinx docs to TS Guides directly using the `tsguides` CLI tool:
 
-**1. Select doc-id for documentation**
+### 1. Select doc-id for documentation
 
 Choose a simple and human-readable string using URL-safe characters for your `doc-id`, and verify it is not already in use by navigating to the TS Guides URL for your `doc-id` string (i.e., https://tsguides.app.twosigma.com/`doc-id`).
 
-**2.  Upload documentation files**
+### 2.  Upload documentation files
 
 Run the following command:
 
-:include-cli-command: tsguides --upload --doc-id <your-doc-id> --path <path/to/built/html> {paramsToHighlight: ["your-doc-id", "ath/to/built/html"]}
+:include-cli-command: tsguides --upload --doc-id <your-doc-id> --path <path/to/built/html> {paramsToHighlight: ["your-doc-id", "path/to/built/html"]}
 
 The `tsguides` command will output a URL. Navigate to this URL and verify that your documentation was successfully uploaded.
 
-**3.  Register documentation**
+### 3.  Register documentation
 
 Follow the steps for [registering your documentation](deployment/registration) in CMDB.
 
@@ -36,10 +36,10 @@ Follow the steps for [registering your documentation](deployment/registration) i
 
 If your Sphinx docs are in the monorepo (i.e., VATS) you can have them automatically update when a change is pushed. 
 
-**1. Select doc-id for documentation**
+### 1. Select doc-id for documentation
 
 Choose a simple and human-readable string using URL-safe characters for your `doc-id`, and verify it is not already in use by navigating to the TS Guides URL for your `doc-id` string (i.e., https://tsguides.app.twosigma.com/`doc-id`).
 
-**3.  Register documentation**
+### 2.  Register documentation
 
 Using this `doc-id`, follow the steps for [registering your documentation in CMDB](deployment/registration), being sure to add your codebase name (e.g., `ts_my_codebase_name`) to the optional field `ts_documentation_vats_codebase_name`.

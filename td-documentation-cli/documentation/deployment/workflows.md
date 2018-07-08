@@ -34,6 +34,10 @@ Warning: Before initial deploy, verify your `doc-id` is not in use by another us
 If your documentation will pull in files and code snippets from other codebases in the monorepo, also define and add the codebases to your documentation's lookup-path file in the Makefile:
 :include-file: deployment/makefile-with-lookup.make {readMore: true, readMoreVisibleLines: 5}
 
+Note: In addition to allowing you to pull in artifacts from other codebases, referencing these dependencies in your Makefile validates the accuracy of your docs against these codebases at build time. \
+\
+If you want these benefits without auto-deploying on push, simply remove `--deploy dist/mdoc` from `${TS_MDOC_HOME}/bin/mdoc --doc-id <add-your-doc-id-here> --source mdoc --deploy dist/mdoc` in your Makefile.
+
 ## Add Codebase to CMDB Registry
 
 Complete the steps under [Registration](deployment/registration), being sure to add your codebase name (e.g., `ts_my_codebase_name`) to the optional field `ts_documentation_vats_codebase_name`.
