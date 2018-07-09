@@ -49,17 +49,4 @@ Changes will be reflected in the browser.
 
 # Deploy
 
-1. Build static files
-
-    :include-cli-command: mdoc --doc-id <doc-id> --source <mdoc-dir> --deploy <dest-dir> {paramsToHighlight: "dest-dir"}
-    
-2. Make static files globally available
-
-    :include-cli-command: mdoc-upload --mdoc-root-path <dest-dir> {paramsToHighlight: "dest-dir"}
-
-
-Your documentation will be available shortly at `http://mdoc.app.twosigma.com/<doc-id>`
-
-Warning: Always check that a new doc-id is not taken before deploying documentation. There is no ownership check at the moment
-and one can override existing documentation. 
- 
+See [documentation under Deployment](deployment/workflows)
