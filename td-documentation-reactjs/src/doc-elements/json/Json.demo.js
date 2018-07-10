@@ -27,7 +27,8 @@ const objectEmptyData = {
         "key22": [],
         "key23": {}
     },
-    "key3": []
+    "key3": [{}, {}],
+    "key4": [[], []]
 }
 
 const objectNestedDataLongNames = {

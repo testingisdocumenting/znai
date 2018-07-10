@@ -45,7 +45,7 @@ class JsonPrinter {
 
     printArray(path, values, skipIndent) {
         if (values.length === 0) {
-            this.printEmptyArray()
+            this.printEmptyArray(skipIndent)
         } else if (this.isCollapsedPath(path)) {
             this.printCollapsedArray(path)
         } else {
@@ -53,7 +53,11 @@ class JsonPrinter {
         }
     }
 
-    printEmptyArray() {
+    printEmptyArray(skipIndent) {
+        if (! skipIndent) {
+            this.printer.printIndentation()
+        }
+
         this.printer.printDelimiter('[')
         this.printer.printDelimiter(']')
     }
@@ -84,7 +88,7 @@ class JsonPrinter {
 
     printObject(path, json, skipIndent) {
         if (Object.keys(json).length === 0) {
-            this.printEmptyObject()
+            this.printEmptyObject(skipIndent)
         } else if (this.isCollapsedPath(path)) {
             this.printCollapsedObject(path)
         } else {
@@ -92,7 +96,11 @@ class JsonPrinter {
         }
     }
 
-    printEmptyObject() {
+    printEmptyObject(skipIndent) {
+        if (! skipIndent) {
+            this.printer.printIndentation()
+        }
+
         this.printer.printDelimiter('{')
         this.printer.printDelimiter('}')
     }
