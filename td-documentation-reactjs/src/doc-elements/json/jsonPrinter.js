@@ -44,11 +44,27 @@ class JsonPrinter {
     }
 
     printArray(path, values, skipIndent) {
-        if (this.isCollapsedPath(path)) {
+        if (values.length === 0) {
+            this.printEmptyArray()
+        } else if (this.isCollapsedPath(path)) {
             this.printCollapsedArray(path)
-            return
+        } else {
+            this.printNonEmptyArray(path, values, skipIndent)
         }
+    }
 
+    printEmptyArray() {
+        this.printer.printDelimiter('[')
+        this.printer.printDelimiter(']')
+    }
+
+    printCollapsedArray(path) {
+        this.printer.printDelimiter('[')
+        this.printCollapsed(path)
+        this.printer.printDelimiter(']')
+    }
+
+    printNonEmptyArray(path, values, skipIndent) {
         const collapsable = this.isPreviouslyCollapsedPath(path) ? { path: path } : null
         this.openScope('[', skipIndent, collapsable)
 
@@ -67,11 +83,27 @@ class JsonPrinter {
     }
 
     printObject(path, json, skipIndent) {
-        if (this.isCollapsedPath(path)) {
+        if (Object.keys(json).length === 0) {
+            this.printEmptyObject()
+        } else if (this.isCollapsedPath(path)) {
             this.printCollapsedObject(path)
-            return
+        } else {
+            this.printNonEmptyObject(path, json, skipIndent)
         }
+    }
 
+    printEmptyObject() {
+        this.printer.printDelimiter('{')
+        this.printer.printDelimiter('}')
+    }
+
+    printCollapsedObject(path) {
+        this.printer.printDelimiter('{')
+        this.printCollapsed(path)
+        this.printer.printDelimiter('}')
+    }
+
+    printNonEmptyObject(path, json, skipIndent) {
         const collapsable = this.isPreviouslyCollapsedPath(path) ? { path: path } : null
         this.openScope('{', skipIndent, collapsable)
 
@@ -90,18 +122,6 @@ class JsonPrinter {
         })
 
         this.closeScope('}')
-    }
-
-    printCollapsedObject(path) {
-        this.printer.printDelimiter('{')
-        this.printCollapsed(path)
-        this.printer.printDelimiter('}')
-    }
-
-    printCollapsedArray(path) {
-        this.printer.printDelimiter('[')
-        this.printCollapsed(path)
-        this.printer.printDelimiter(']')
     }
 
     printCollapsed(path) {

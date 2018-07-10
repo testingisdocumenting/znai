@@ -20,6 +20,16 @@ const objectNestedData = {
     "key4": [1, 2, 3, 4, 5]
 }
 
+const objectEmptyData = {
+    "key1": "value1",
+    "key2": {
+        "key21": "value21",
+        "key22": [],
+        "key23": {}
+    },
+    "key3": []
+}
+
 const objectNestedDataLongNames = {
     "properties": {
         "code": {
@@ -41,6 +51,7 @@ export function jsonDemo(registry) {
         .add('with title', <Json data={arraySimpleData} paths={['root[1]']} title="Response"/>)
         .add('record', <Json data={objectSimpleData}/>)
         .add('nested record', <Json data={objectNestedData} paths={['root.key2.key22', 'root.key3.key31']}/>)
+        .add('nested with empty', <Json data={objectEmptyData}/>)
         .add('nested record with collapsed entry',
             <Json data={objectNestedData}
                   paths={['root.key2.key22', 'root.key3.key31']}
