@@ -163,6 +163,8 @@ const getExampleCoreFields = {
     method: 'get',
     path: '/findPetsByStatus',
     summary: 'Finds Pets by status',
+    consumes: ['application/json'],
+    produces: ['application/json', 'application/xml'],
     description: exampleDescription
 }
 
@@ -180,6 +182,7 @@ const getExampleWithoutParams = {
 export function openApiOperationDemo(registry) {
     registry
         .add('GET request with all type of parameters', <OpenApiOperation elementsLibrary={elementsLibrary} operation={getExample}/>)
+        .add('GET request with consumes produces info', <OpenApiOperation elementsLibrary={elementsLibrary} operation={getExample} showConsumes={true} showProduces={true}/>)
         .add('GET request without parameters', <OpenApiOperation elementsLibrary={elementsLibrary} operation={getExampleWithoutParams}/>)
 }
 

@@ -1,12 +1,13 @@
 import React from 'react'
-import OpenApiResponse from './OpenApiResponse'
 
+import OpenApiResponse from './OpenApiResponse'
 import OpenApiSubHeader from '../common/OpenApiSubHeader'
 import OpenApiSchema from '../schema/OpenApiSchema'
+import OpenApiMimeTypes from '../common/OpenApiMimeTypes'
 
 import './OpenApiResponses.css'
 
-function OpenApiResponses({responses = {}, elementsLibrary}) {
+function OpenApiResponses({responses = {}, produces, elementsLibrary}) {
     if (responses.length === 0) {
         return null
     }
@@ -16,7 +17,7 @@ function OpenApiResponses({responses = {}, elementsLibrary}) {
 
     return (
         <React.Fragment>
-            <ResponsesWithSchema responses={responsesWithSchema} elementsLibrary={elementsLibrary}/>
+            <ResponsesWithSchema responses={responsesWithSchema} produces={produces} elementsLibrary={elementsLibrary}/>
             <ResponsesWithoutSchema responses={responsesWithoutSchema} elementsLibrary={elementsLibrary}/>
         </React.Fragment>
     )
@@ -40,18 +41,20 @@ function ResponsesWithoutSchema({responses, elementsLibrary}){
     )
 }
 
-function ResponsesWithSchema({responses, elementsLibrary}){
+function ResponsesWithSchema({responses, produces, elementsLibrary}){
     return responses.map(r => <ResponseWithSchema key={r.code}
                                                   response={r}
+                                                  produces={produces}
                                                   elementsLibrary={elementsLibrary}/>)
 }
 
-function ResponseWithSchema({response, elementsLibrary}) {
+function ResponseWithSchema({response, produces = [], elementsLibrary}) {
     return (
         <React.Fragment>
             <OpenApiSubHeader title={response.code + ' Response'}
                               description={response.description}
                               elementsLibrary={elementsLibrary}/>
+            <OpenApiMimeTypes types={produces}/>
 
             <OpenApiSchema schema={response.schema} elementsLibrary={elementsLibrary}/>
         </React.Fragment>

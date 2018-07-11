@@ -11,8 +11,14 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   },
+  "consumes": [
+    "application/xml"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "host": "localhost:8080",
-  "basePath": "/",
+  "basePath": "/api",
   "tags": [
     {
       "name": "Customer Entity",
@@ -77,6 +83,13 @@
         "summary": "Add Pet",
         "description": "Creates a new pet in the store.  Duplicates are allowed",
         "operationId": "addPet",
+        "consumes": [
+          "application/binary"
+        ],
+        "produces": [
+          "application/pdf",
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "pet",
@@ -256,9 +269,6 @@
         ],
         "summary": "findOneCustomer",
         "operationId": "findOneCustomerUsingGET",
-        "produces": [
-          "*/*"
-        ],
         "description": "find one *customer*",
         "parameters": [
           {

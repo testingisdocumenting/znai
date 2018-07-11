@@ -12,6 +12,7 @@ class OpenApiSpecTest {
     private static OpenApiSpec spec
     private static OpenApiOperation findOneCustomer
     private static OpenApiOperation findAllCustomers
+    private static OpenApiOperation addPet
 
     @BeforeClass
     static void init() {
@@ -21,6 +22,7 @@ class OpenApiSpecTest {
 
         findOneCustomer = spec.findOperationById('findOneCustomerUsingGET')
         findAllCustomers = spec.findOperationById('findAllCustomerUsingGET')
+        addPet = spec.findOperationById('addPet')
     }
 
     @Test
@@ -50,7 +52,17 @@ class OpenApiSpecTest {
 
     @Test
     void "operation should consist of method, path and tag"() {
-        findOneCustomer.should == [method: 'get', path: '/customers/{id}', tags: ['customer', 'single']]
+        findOneCustomer.should == [method: 'get', path: '/api/customers/{id}', tags: ['customer', 'single']]
+    }
+
+    @Test
+    void "operation should expose produces and consumes types"() {
+        addPet.should == [consumes: ['application/binary'], produces: ['application/pdf', 'application/json']]
+    }
+
+    @Test
+    void "spec global produces and consumes should be used when none is specified"() {
+        findOneCustomer.should == [consumes: ['application/xml'], produces: ['application/json']]
     }
 
     @Test
@@ -92,7 +104,7 @@ class OpenApiSpecTest {
 
     @Test
     void "should find operation by method and path"() {
-        def op = spec.findOperationByMethodAndPath('get', '/pets')
+        def op = spec.findOperationByMethodAndPath('get', '/api/pets')
         op.id.should == 'findPets'
     }
 

@@ -1,7 +1,5 @@
 package com.twosigma.documentation.openapi;
 
-import com.twosigma.documentation.parser.docelement.DocElement;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,6 +12,8 @@ public class OpenApiOperation {
     private String method;
     private String summary;
     private String path;
+    private List<String> consumes;
+    private List<String> produces;
     private List<String> tags = new ArrayList<>();
     private List<Map<String, Object>> description = new ArrayList<>();
 
@@ -46,6 +46,22 @@ public class OpenApiOperation {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public List<String> getConsumes() {
+        return consumes;
+    }
+
+    public void setConsumes(List<String> consumes) {
+        this.consumes = consumes;
+    }
+
+    public List<String> getProduces() {
+        return produces;
+    }
+
+    public void setProduces(List<String> produces) {
+        this.produces = produces;
     }
 
     public void setSummary(String summary) {
@@ -85,7 +101,7 @@ public class OpenApiOperation {
     }
 
     public boolean hasTags(List<String> tagsToCheck) {
-        return tags != null && tagsToCheck.stream().allMatch(t -> this.tags.contains(t));
+        return tags != null && this.tags.containsAll(tagsToCheck);
     }
 
     public List<Map<String, Object>> getDescription() {
@@ -101,6 +117,8 @@ public class OpenApiOperation {
         result.put("id", id);
         result.put("method", method);
         result.put("path", path);
+        result.put("consumes", consumes);
+        result.put("produces", produces);
         result.put("summary", summary);
         result.put("tags", tags);
         result.put("parameters", parameters.stream().map(OpenApiParameter::toMap).collect(toList()));

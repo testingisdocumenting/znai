@@ -6,7 +6,7 @@ import OpenApiBodyParameter from '../parameter/OpenApiBodyParameter'
 
 import './OpenApiOperation.css'
 
-function OpenApiOperation({elementsLibrary, operation}) {
+function OpenApiOperation({elementsLibrary, showConsumes, showProduces, operation}) {
     const parameters = operation.parameters || []
 
     const pathParameters = parameters.filter(p => p.in === 'path')
@@ -15,6 +15,9 @@ function OpenApiOperation({elementsLibrary, operation}) {
 
     const bodyParams = parameters.filter(p => p.in === 'body')
     const bodyParameter = bodyParams.length ? bodyParams[0] : null
+
+    const consumes = showConsumes ? operation.consumes : []
+    const produces = showProduces ? operation.produces : []
 
     return (
         <div className="open-api-operation content-block">
@@ -29,8 +32,8 @@ function OpenApiOperation({elementsLibrary, operation}) {
                 <OpenApiParameters label="Path parameters" parameters={pathParameters} elementsLibrary={elementsLibrary}/>
                 <OpenApiParameters label="Query parameters" parameters={queryParameters} elementsLibrary={elementsLibrary}/>
                 <OpenApiParameters label="Form Data parameters" parameters={formDataParameters} elementsLibrary={elementsLibrary}/>
-                <OpenApiBodyParameter parameter={bodyParameter} elementsLibrary={elementsLibrary}/>
-                <OpenApiResponses responses={operation.responses} elementsLibrary={elementsLibrary}/>
+                <OpenApiBodyParameter parameter={bodyParameter} consumes={consumes} elementsLibrary={elementsLibrary}/>
+                <OpenApiResponses responses={operation.responses} produces={produces} elementsLibrary={elementsLibrary}/>
             </div>
         </div>
     )
