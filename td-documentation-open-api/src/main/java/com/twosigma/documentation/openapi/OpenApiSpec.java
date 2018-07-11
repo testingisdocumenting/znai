@@ -14,6 +14,7 @@ public class OpenApiSpec {
     private static final String DESCRIPTION_KEY = "description";
     private static final String REF_KEY = "$ref";
     private static final String ALL_OFF_KEY = "allOf";
+    private final String basePath;
 
     private MarkdownParser markdownParser;
     private Map<String, ?> spec;
@@ -46,6 +47,7 @@ public class OpenApiSpec {
     public OpenApiSpec(MarkdownParser markdownParser, Map<String, ?> spec) {
         this.markdownParser = markdownParser;
         this.spec = spec;
+        this.basePath = extractBasePath(spec);
         this.operations = new ArrayList<>();
 
         parse();
@@ -93,8 +95,10 @@ public class OpenApiSpec {
         OpenApiOperation operation = new OpenApiOperation();
         operation.setId(Objects.toString(definition.get("operationId")));
         operation.setTags((List<String>) definition.get("tags"));
-        operation.setPath(path);
+        operation.setPath(fullPath(path));
         operation.setMethod(method);
+        operation.setConsumes(listOrDefault(definition, "consumes"));
+        operation.setProduces(listOrDefault(definition, "produces"));
         operation.setSummary(Objects.toString(definition.get("summary")));
         operation.setDescription(parseMarkdown(definition.get("description")));
         operation.setResponses(buildResponses((Map<String, ?>) definition.get("responses")));
@@ -103,12 +107,41 @@ public class OpenApiSpec {
         operations.add(operation);
     }
 
+    private String fullPath(String path) {
+        if (basePath.endsWith("/") && !path.startsWith("/")) {
+            return basePath + path;
+        }
+
+        if (!basePath.endsWith("/") && path.startsWith("/")) {
+            return basePath + path;
+        }
+
+        if (basePath.endsWith("/") && path.startsWith("/")) {
+            return basePath + path.substring(1);
+        }
+
+        return basePath + "/" + path;
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<String> listOrDefault(Map<String, ?> definition, String name) {
+        Object def = definition.get(name);
+        return (List<String>)(def != null ?
+                def:
+                spec.get(name));
+    }
+
     private List<OpenApiParameter> buildParameters(List<Map<String, ?>> parameters) {
         if (parameters == null) {
             return Collections.emptyList();
         }
 
         return parameters.stream().map(this::buildParameter).collect(toList());
+    }
+
+    private String extractBasePath(Map<String, ?> spec) {
+        Object basePath = spec.get("basePath");
+        return basePath == null ? "/" : basePath.toString();
     }
 
     @SuppressWarnings("unchecked")

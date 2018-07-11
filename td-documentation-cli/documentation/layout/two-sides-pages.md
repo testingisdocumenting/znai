@@ -21,14 +21,14 @@ Use `include-meta` in front of some content to place it on the right side of the
 All the following content will go to the right side. At the start of a new section it will be reset.
 
 ```markdown 
-:include-open-api: snippets/open-api/uber.json {method: "get", path: "/estimates/time"}
+:include-open-api: snippets/open-api/uber.json {method: "get", path: "/v1/estimates/time"}
 :include-meta: {"rightSide": true}
 :include-json: two-sides/price-estimate.json
 ```
 
 # Open API example
 
-:include-open-api: snippets/open-api/uber.json {method: "get", path: "/estimates/time"}
+:include-open-api: snippets/open-api/uber.json {method: "get", path: "/v1/estimates/time"}
 :include-meta: {"rightSide": true}
 :include-json: two-sides/price-estimate.json {title: "Response"}
 

@@ -9,8 +9,8 @@ import com.twosigma.documentation.parser.ParserHandler;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class OpenApiIncludePlugin implements IncludePlugin {
@@ -94,7 +94,9 @@ public class OpenApiIncludePlugin implements IncludePlugin {
             parserHandler.onSectionStart(operation.getSummary());
         }
 
-        parserHandler.onCustomNode("OpenApiOperation",
-                Collections.singletonMap("operation", operation.toMap()));
+        Map<String, Object> props = pluginParams.getOpts().toMap();
+        props.put("operation", operation.toMap());
+
+        parserHandler.onCustomNode("OpenApiOperation", props);
     }
 }
