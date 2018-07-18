@@ -28,14 +28,16 @@ class ApiParameter extends React.Component {
 
         const commonClassName = ' api-param-cell' +
             (isExpanded ? ' expanded' : '') +
+            (children ? ' expandable' : '') +
             (nestedLevel > 0 ? ' nested-' + nestedLevel : '')
 
         const nameTypeClassName = 'api-param-name-type-toggle-cell' + commonClassName
         const descriptionClassName = 'api-param-description-cell' + commonClassName
 
+        const toggleOnClick = children ? this.toggleExpand : null
+
         const expandToggle = children && (
-            <div className="expand-toggle"
-                 onClick={this.toggleExpand}>
+            <div className="expand-toggle">
                 {isExpanded ? '-' : '+'}
             </div>)
 
@@ -51,7 +53,7 @@ class ApiParameter extends React.Component {
 
         return (
             <React.Fragment>
-                <div className={nameTypeClassName}>
+                <div className={nameTypeClassName} onClick={toggleOnClick}>
                     <div className="api-param-name-type-toggle" ref={node => this.nameAndTypeNode = node}>
                         <div className="name">{name}</div>
                         <div className="type-and-toggle">

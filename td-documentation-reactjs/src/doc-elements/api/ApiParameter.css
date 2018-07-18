@@ -7,6 +7,10 @@
     padding-right: 20px;
 }
 
+.api-param-name-type-toggle-cell.expandable {
+    cursor: pointer;
+}
+
 .api-param-name-type-toggle {
 }
 
@@ -17,7 +21,6 @@
 
 .api-param-name-type-toggle > .type-and-toggle > .expand-toggle {
     color: var(--mdoc-brand-primary-color);
-    font-size: 18px;
 
     width: 10px;
     margin-right: 5px;
