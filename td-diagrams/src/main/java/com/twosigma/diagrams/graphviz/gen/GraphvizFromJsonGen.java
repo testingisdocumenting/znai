@@ -1,7 +1,5 @@
 package com.twosigma.diagrams.graphviz.gen;
 
-import com.twosigma.utils.JsonUtils;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +10,11 @@ import java.util.stream.Collectors;
  */
 public class GraphvizFromJsonGen {
     private final Map<String, ?> graph;
+    private final boolean isVertical;
 
-    public GraphvizFromJsonGen(Map<String, ?> graph) {
+    public GraphvizFromJsonGen(Map<String, ?> graph, boolean isVertical) {
         this.graph = graph;
+        this.isVertical = isVertical;
     }
 
     public String generate() {
@@ -22,7 +22,7 @@ public class GraphvizFromJsonGen {
         String edges = generateEdges(getList("edges"));
 
         return "digraph Generated {\n" +
-                "rankdir=LR;\n" +
+                (!isVertical ? "rankdir=LR;\n" : "") +
                 "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
                 (nodes.isEmpty() ? "" : "\n" + nodes + "\n") +
                 (edges.isEmpty() ? "" : "\n" + edges + "\n") +

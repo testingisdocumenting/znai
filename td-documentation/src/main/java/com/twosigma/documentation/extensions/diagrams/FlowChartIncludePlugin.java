@@ -49,7 +49,8 @@ public class FlowChartIncludePlugin implements IncludePlugin {
 
         String graphJson = componentsRegistry.resourceResolver().textContent(filePath);
         Map<String, ?> graph = JsonUtils.deserializeAsMap(graphJson);
-        String gvContent = new GraphvizFromJsonGen(graph).generate();
+        String gvContent = new GraphvizFromJsonGen(graph,
+                pluginParams.getOpts().get("vertical", false)).generate();
 
         GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv("dag" + diagramCount.incrementAndGet(),
                 gvContent);
