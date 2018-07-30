@@ -1,6 +1,5 @@
 package com.twosigma.diagrams.graphviz.gen
 
-import com.twosigma.utils.JsonUtils
 import org.junit.Test
 
 /**
@@ -45,7 +44,7 @@ class GraphvizFromJsonGenTest {
     }
 
     private void generate(data) {
-        def gen = new GraphvizFromJsonGen(data)
+        def gen = new GraphvizFromJsonGen(data, false)
         gv = gen.generate()
     }
 }
