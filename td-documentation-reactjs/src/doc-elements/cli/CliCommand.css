@@ -1,6 +1,7 @@
 .cli-command .prompt {
     font-weight: bold;
     color: #2f9c0a;
+    user-select: none;
 }
 
 .cli-command .cursor {
