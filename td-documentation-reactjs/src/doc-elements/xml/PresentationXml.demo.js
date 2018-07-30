@@ -1,19 +1,14 @@
 import React from 'react'
 import Xml from './Xml'
-import {elementsLibrary, presentationElementHandlers} from '../DefaultElementsLibrary'
-import PresentationRegistry from '../presentation/PresentationRegistry'
-import Presentation from '../presentation/Presentation'
-
-const docMeta = {id: "mdoc", title: "MDoc", type: "User Guide"}
-const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [{
-    type: 'Xml',
-    xmlAsJson: nestedWithMultipleAttrs(),
-    paths: ['ul.li[0]', 'ul.li[1].@class', 'ul.li[1].b']
-}])
+import {createPresentationDemo} from '../demo-utils/PresentationDemo'
 
 export function xmlPresentationDemo(registry) {
     registry
-        .add('xml presentation', <Presentation docMeta={docMeta} presentationRegistry={presentationRegistry}/>)
+        .add('xml presentation', createPresentationDemo([{
+            type: 'Xml',
+            xmlAsJson: nestedWithMultipleAttrs(),
+            paths: ['ul.li[0]', 'ul.li[1].@class', 'ul.li[1].b']
+        }]))
 }
 
 function nestedWithMultipleAttrs() {

@@ -19,6 +19,7 @@ import SubHeading from './default-elements/SubHeading'
 import ListItem from './bullets/ListItem'
 import Paragraph from './default-elements/Paragraph'
 import GraphVizSvg from './graphviz/GraphVizSvg'
+import presentationGraphVizSvg from './graphviz/PresentationGraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import Table from './table/Table'
 import {presentationTabsHandler, Tabs} from './tabs/Tabs'
@@ -98,6 +99,7 @@ library.Section = Section
 presentationElementHandlers.Section = presentationSectionHandler
 
 library.GraphVizDiagram = GraphVizSvg
+presentationElementHandlers.GraphVizDiagram = presentationGraphVizSvg
 
 library.GraphVizFlow = DocumentationGraphVizFlow
 presentationElementHandlers.GraphVizFlow = presentationGraphVizHandler

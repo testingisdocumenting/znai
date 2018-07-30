@@ -27,6 +27,14 @@ Or use `highlight` property of a `flow-chart` include plugin.
 
 Note: To highlight more than one element use `{highlight: ["n3", "n4"]}`
 
+# Presentation
+
+In presentation mode nodes will be highlighted one at a time.
+
+To force all highlights to appear at once add this before (either in the same section, or at the start of a document).
+
+    :include-meta: {allAtOnce: true}
+
 # Vertical Layout
 
 To switch layout from horizontal to vertical use `vertical: true`.
