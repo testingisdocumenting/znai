@@ -14,6 +14,14 @@ Long command lines will be automatically wrapped into multiple lines.
 
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {paramsToHighlight: ["name", "value"]}
 
+# Handle Special Symbols
+
+If your command contains special symbols like `{` then move command definition to `command` option
+
+    :include-cli-command: {command: "another-command {file1} [file2]", paramsToHighlight: ["file1"]}
+
+:include-cli-command: {command: "another-command {file1} [file2]", paramsToHighlight: ["file1"]}
+
 # Output
 
 To display console output and bring attention to certain lines use:
