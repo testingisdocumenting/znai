@@ -27,6 +27,12 @@ Or use `highlight` property of a `flow-chart` include plugin.
 
 Note: To highlight more than one element use `{highlight: ["n3", "n4"]}`
 
+# Vertical Layout
+
+To switch layout from horizontal to vertical use `vertical: true`.
+
+:include-flow-chart: simple-dag.json {vertical: true}
+
 # Links
   
 To attach links to nodes use `url` property.
