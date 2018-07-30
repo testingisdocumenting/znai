@@ -50,6 +50,7 @@ public class ImageIncludePlugin implements IncludePlugin {
 
         String annotationsPathValue = pluginParams.getOpts().get("annotationsPath");
         String slidesPathValue = pluginParams.getOpts().get("slidesPath");
+        Double scaleRatio = pluginParams.getOpts().get("scaleRatio", 1.0);
 
         annotationsPath = annotationsPathValue != null ? resourceResolver.fullPath(annotationsPathValue) : null;
         slidesPath = slidesPathValue != null ? resourceResolver.fullPath(slidesPathValue) : null;
@@ -59,17 +60,20 @@ public class ImageIncludePlugin implements IncludePlugin {
         props.put("imageSrc", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
 
         props.put("shapes", annotations != null ? annotations.get("shapes") : Collections.emptyList());
-        setWidthHeight(props, annotations, imagePath);
+        setWidthHeight(props, scaleRatio, annotations, imagePath);
 
         return PluginResult.docElement("AnnotatedImage", props);
     }
 
-    private void setWidthHeight(Map<String, Object> props, Map<String, ?> annotations, String imagePathValue) {
+    private void setWidthHeight(Map<String, Object> props,
+                                Double scaleRatio,
+                                Map<String, ?> annotations,
+                                String imagePathValue) {
         Number pixelRatio = (annotations == null || !annotations.containsKey("pixelRatio")) ? 1 : (Number) annotations.get("pixelRatio");
 
         BufferedImage bufferedImage = resourceResolver.imageContent(imagePathValue);
-        props.put("width", bufferedImage.getWidth() / pixelRatio.doubleValue());
-        props.put("height", bufferedImage.getHeight() / pixelRatio.doubleValue());
+        props.put("width", scaleRatio * bufferedImage.getWidth() / pixelRatio.doubleValue());
+        props.put("height", scaleRatio * bufferedImage.getHeight() / pixelRatio.doubleValue());
     }
 
     @Override
