@@ -37,12 +37,16 @@ public class CliCommandIncludePlugin implements IncludePlugin {
                                 Path markupPath,
                                 PluginParams pluginParams) {
         Set<String> combinedParams = new LinkedHashSet<>(pluginParams.getOpts().getList("paramToHighlight"));
-        ConsoleOutputs.out(Color.RED, "cli-command paramToHighlight will be deprecated"); // TODO deprecation warning API
+
+        if (pluginParams.getOpts().has("paramToHighlight")) {
+            ConsoleOutputs.out(Color.RED, "cli-command paramToHighlight will be deprecated"); // TODO deprecation warning API
+        }
 
         combinedParams.addAll(pluginParams.getOpts().getList("paramsToHighlight"));
 
         LinkedHashMap<String, Object> props = new LinkedHashMap<>();
-        command = pluginParams.getFreeParam();
+        command = extractCommand(pluginParams);
+
         props.put("command", command);
         props.put("paramsToHighlight", combinedParams);
 
@@ -52,5 +56,14 @@ public class CliCommandIncludePlugin implements IncludePlugin {
     @Override
     public SearchText textForSearch() {
         return SearchScore.HIGH.text(command);
+    }
+
+    private String extractCommand(PluginParams pluginParams) {
+        String commandAsFreeParam = pluginParams.getFreeParam().trim();
+        if (! commandAsFreeParam.isEmpty()) {
+            return commandAsFreeParam;
+        }
+
+        return pluginParams.getOpts().getRequiredString("command");
     }
 }

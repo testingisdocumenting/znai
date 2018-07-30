@@ -30,6 +30,7 @@ import {searchPopupDemo} from './doc-elements/search/Search.demo'
 import {typographyDemo} from './doc-elements/typography/Typography.demo'
 import {graphVizSvgDemo} from './doc-elements/graphviz/GraphVizSvg.demo'
 import {graphVizSvgPresentationDemo} from './doc-elements/graphviz/PresentationGraphVizSvg.demo'
+import {cliCommandDemo} from './doc-elements/cli/CliCommand.demo'
 
 const docMeta = {
     id: 'preview',
@@ -58,11 +59,12 @@ snippets.registerAsGrid('API Parameters', 0, apiParametersDemo)
 snippets.registerAsGrid('Open API', 0, openApiOperationDemo)
 snippets.registerAsGrid('Open API Schema', 0, openApiSchemaDemo)
 snippets.registerAsGrid('Jupyter', 0, jupyterDemo)
-snippets.registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
-snippets.registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
+snippets.registerAsGrid('CLI Command', 0, cliCommandDemo)
 
 const visuals = new Registry('visuals')
 visuals.registerAsTabs('Image Annotations', imageAnnotationDemo)
+visuals.registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
+visuals.registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
 
 const layout = new Registry('layout')
 layout.registerAsTabs('Pages', pagesDemo)
