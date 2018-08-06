@@ -36,6 +36,7 @@
     "object-assign": "4.1.0",
     "path-exists": "2.1.0",
     "postcss-loader": "1.0.0",
+    "react-components-viewer": "^0.6.0",
     "react-dev-utils": "^0.4.2",
     "recursive-readdir": "2.1.0",
     "strip-ansi": "3.0.1",
@@ -44,8 +45,7 @@
     "webpack": "1.14.0",
     "webpack-dev-server": "1.16.2",
     "webpack-manifest-plugin": "1.1.0",
-    "whatwg-fetch": "1.0.0",
-    "react-components-viewer": "^0.5.0"
+    "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
