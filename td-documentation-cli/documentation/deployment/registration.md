@@ -5,6 +5,9 @@ Warning: Documentation must be registered in CMDB or it will be deleted from the
 To register, create a new [ts_documentation entity in CMDB](https://cmdb.twosigma.com/entity_types/ts_documentation)
 1.  Provide your unique doc-id in the first field, "Ts documentation."
 2.  **Optional**: If you are deploying from VATS, add your codebase name in the optional field "Ts documentation vats codebase name." Otherwise, skip this step.
+
+Note: If you have this codebase attribute set, you cannot use [direct deployment](deployment/workflows) (`mdoc --upload`).
+
 3.  Choose a documentation type (*mdoc* or *sphinx*) for "Ts documentation type."
 4.  Provide easy-to-read display title for "Ts documentation title."
 5.  Provide content category for "Ts documentation category" (see [TS Guide landing page](https://tsguides.app.twosigma.com) for existing categories).
