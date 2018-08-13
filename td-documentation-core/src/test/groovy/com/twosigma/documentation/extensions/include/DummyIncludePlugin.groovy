@@ -7,7 +7,6 @@ import com.twosigma.documentation.parser.ParserHandler
 import com.twosigma.documentation.parser.docelement.DocElement
 
 import java.nio.file.Path
-import java.util.stream.Stream
 
 /**
  * @author mykola
@@ -24,14 +23,14 @@ class DummyIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    PluginResult process(ComponentsRegistry componentsRegistry, 
-                         ParserHandler parserHandler, 
+    PluginResult process(ComponentsRegistry componentsRegistry,
+                         ParserHandler parserHandler,
                          Path markupPath,
                          PluginParams includeParams) {
         def dummy = new DocElement("IncludeDummy")
         dummy.addProp("ff", includeParams.getFreeParam())
         dummy.addProp("opts", includeParams.getOpts().toMap())
 
-        return PluginResult.docElements(Stream.of(dummy))
+        return PluginResult.docElements([dummy].stream())
     }
 }

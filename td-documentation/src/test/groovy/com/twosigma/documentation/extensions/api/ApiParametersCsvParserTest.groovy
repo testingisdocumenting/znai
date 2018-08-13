@@ -7,7 +7,7 @@ import static com.twosigma.testing.Ddjt.equal
 
 class ApiParametersCsvParserTest {
     @Test
-    void "should convert names like name.subname.nested to api parameter with nested children"() {
+    void "should convert dot separated names to api parameter with nested children"() {
         def apiParameters = ApiParametersCsvParser.parse(TestComponentsRegistry.INSTANCE.markdownParser, """
 firstName, String, descr1
 nested, object, descr2

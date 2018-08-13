@@ -51,7 +51,7 @@ class GroovyIncludePlugin implements IncludePlugin {
 
     @Override
     Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(fullPath))
+        return [AuxiliaryFile.builtTime(fullPath)].stream()
     }
 
     private static String extractContent(GroovyCode groovyCode, String entry, Boolean bodyOnly) {

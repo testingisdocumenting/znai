@@ -6,7 +6,6 @@ import com.twosigma.documentation.extensions.PluginResult
 import com.twosigma.documentation.parser.docelement.DocElement
 
 import java.nio.file.Path
-import java.util.stream.Stream
 
 /**
  * @author mykola
@@ -33,6 +32,6 @@ class DummyFencePlugin implements FencePlugin {
 
         pluginParams.opts.forEach { k, v -> dummy.addProp(k, v)}
 
-        return PluginResult.docElements(Stream.of(dummy))
+        return PluginResult.docElements([dummy].stream())
     }
 }
