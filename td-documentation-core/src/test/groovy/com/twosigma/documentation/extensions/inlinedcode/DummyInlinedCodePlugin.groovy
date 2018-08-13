@@ -6,7 +6,6 @@ import com.twosigma.documentation.extensions.PluginResult
 import com.twosigma.documentation.parser.docelement.DocElement
 
 import java.nio.file.Path
-import java.util.stream.Stream
 
 /**
  * @author mykola
@@ -27,6 +26,6 @@ class DummyInlinedCodePlugin implements InlinedCodePlugin {
         def dummy = new DocElement("InlinedCodeDummy", "ff", pluginParams.freeParam,
                 "opts", pluginParams.opts.toMap())
 
-        return PluginResult.docElements(Stream.of(dummy))
+        return PluginResult.docElements([dummy].stream())
     }
 }
