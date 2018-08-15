@@ -32,7 +32,6 @@
     max-width: 280px;
 
     background-color: var(--mdoc-toc-panel-background-color);
-    color: #fff;
 }
 
 .toc-panel-header {
@@ -56,6 +55,16 @@
     display: flex;
 }
 
+.toc-panel-settings {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    min-height: 48px;
+
+    border-top: 1px solid var(--mdoc-toc-panel-border-color);
+}
+
 .mdoc-documentation-logo {
     width: 48px;
     height: 48px;
@@ -73,7 +82,8 @@
     cursor: pointer;
 }
 
-.toc-menu {
+.toc-menu,
+.toc-settings {
     padding-top: 20px;
 
     overflow-y: auto;
@@ -82,20 +92,28 @@
     flex: 1;
 }
 
+.toc-settings .toc-section:first-child {
+    margin-bottom: 10px;
+}
+
+.toc-settings::-webkit-scrollbar,
 .toc-menu::-webkit-scrollbar {
     height: 3px;
     width: 3px;
     display: none;
 }
 
+.toc-settings:hover::-webkit-scrollbar,
 .toc-menu:hover::-webkit-scrollbar {
     display: block;
 }
 
+.toc-settings::-webkit-scrollbar-thumb,
 .toc-menu::-webkit-scrollbar-thumb {
    background: var(--mdoc-toc-panel-border-color);
 }
 
+.toc-settings::-webkit-scrollbar-track,
 .toc-menu::-webkit-scrollbar-track {
    background: 0;
 }

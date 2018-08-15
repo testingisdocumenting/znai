@@ -1,5 +1,5 @@
 .toc-panel-expand-button {
-    fill: var(--mdoc-toc-panel-collapse-icon-color);
+    fill: var(--mdoc-toc-panel-icon-color);
     cursor: pointer;
     position: fixed;
     top: 5px;
@@ -11,6 +11,6 @@
 
 .toc-panel-collapse-button {
     font-size: 20px;
-    fill: var(--mdoc-toc-panel-collapse-icon-color);
+    fill: var(--mdoc-toc-panel-icon-color);
     cursor: pointer;
 }

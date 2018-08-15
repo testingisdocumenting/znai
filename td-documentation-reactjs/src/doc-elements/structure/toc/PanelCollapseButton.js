@@ -2,7 +2,7 @@ import React from 'react'
 
 import './PanelCollapseButton.css'
 
-const PanelCollapseButton = ({isCollapsed, onClick}) => {
+export default function PanelCollapseButton({isCollapsed, onClick}) {
     const className = isCollapsed ?
         'toc-panel-expand-button':
         'toc-panel-collapse-button'
@@ -16,5 +16,3 @@ const PanelCollapseButton = ({isCollapsed, onClick}) => {
         </div>
     )
 }
-
-export default PanelCollapseButton
