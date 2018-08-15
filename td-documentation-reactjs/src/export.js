@@ -3,7 +3,7 @@ import DocumentationPreparationScreen from './screens/documentation-preparation/
 import Landing from './screens/landing/Landing'
 import LunrIndexer from './doc-elements/search/LunrIndexer'
 import {parseCode} from './doc-elements/code-snippets/codeParser'
-import {setTocJson} from './doc-elements/structure/TableOfContents'
+import {setTocJson} from './doc-elements/structure/toc/TableOfContents'
 
 import './App.css'
 
