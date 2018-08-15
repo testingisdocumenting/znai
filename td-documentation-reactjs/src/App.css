@@ -40,7 +40,13 @@
     --mdoc-toc-chapter-title-color: #5a6872;
     --mdoc-toc-page-title-color: #152935;
     --mdoc-toc-page-section-color: #15293575;
-    --mdoc-toc-panel-collapse-icon-color: #798186;
+    --mdoc-toc-panel-icon-color: #798186;
+    --mdoc-toc-panel-icon-color-activated: #e7c121;
+
+    --mdoc-section-title-color: var(--mdoc-black);
+
+    --mdoc-footer-color: #818a8f;
+    --mdoc-footer-background-color: #f5f7f5;
 
     --mdoc-snippets-background-color: #f8faf9;
     --mdoc-snippets-outer-border-color: #ddd;

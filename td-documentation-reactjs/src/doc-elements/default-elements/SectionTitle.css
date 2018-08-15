@@ -2,7 +2,7 @@
 .empty-section-title {
     font-size: 22px;
     font-weight: bold;
-    color: var(--mdoc-black);
+    color: var(--mdoc-section-title-color);
 
     padding-bottom: 5px;
     margin-top: 55px;

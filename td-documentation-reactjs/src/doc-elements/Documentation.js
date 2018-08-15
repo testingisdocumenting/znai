@@ -7,7 +7,7 @@ import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import {documentationNavigation} from './structure/DocumentationNavigation'
 import {textSelection} from './selected-text-extensions/TextSelection'
-import {tableOfContents} from './structure/TableOfContents'
+import {tableOfContents} from './structure/toc/TableOfContents'
 import {getAllPagesPromise} from './allPages'
 import {fullResourcePath} from '../utils/resourcePath'
 

@@ -1,6 +1,6 @@
 .footer {
-    color: #818a8f;
-    background-color: #f5f7f5;
+    color: var(--mdoc-footer-color);
+    background-color: var(--mdoc-footer-background-color);
 
     padding: 30px var(--mdoc-single-side-horizontal-min-spacing);
 

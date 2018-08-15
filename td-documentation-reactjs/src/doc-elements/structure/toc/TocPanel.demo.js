@@ -13,12 +13,102 @@ const docMeta = {
 export function tocPanelDemo(registry) {
     const selectedTocItem = {dirName: 'snippets', fileName: 'json'}
 
-    registry.add('panel', <TocPanel docMeta={docMeta}
-                                    toc={toc()}
-                                    selectedItem={selectedTocItem}/>, '')
+    registry
+        .add('long', <TocPanel docMeta={docMeta}
+                               toc={longToc()}
+                               selectedItem={selectedTocItem}/>, '')
+        .add('short', <TocPanel docMeta={docMeta}
+                                toc={shortToc()}
+                                selectedItem={selectedTocItem}/>, '')
 }
 
-function toc() {
+function shortToc() {
+    return [
+        {
+            "sectionTitle": "",
+            "dirName": "",
+            "items": [
+                {
+                    "sectionTitle": "",
+                    "pageTitle": "Index",
+                    "pageMeta": {},
+                    "fileName": "index",
+                    "dirName": "",
+                    "pageSectionIdTitles": []
+                }
+            ]
+        },
+        {
+            "sectionTitle": "Introduction",
+            "dirName": "introduction",
+            "items": [
+                {
+                    "sectionTitle": "Introduction",
+                    "pageTitle": "Rationale",
+                    "pageMeta": {},
+                    "fileName": "rationale",
+                    "dirName": "introduction",
+                },
+                {
+                    "sectionTitle": "Introduction",
+                    "pageTitle": "Example",
+                    "pageMeta": {},
+                    "fileName": "example",
+                    "dirName": "introduction",
+                },
+                {
+                    "sectionTitle": "Introduction",
+                    "pageTitle": "Getting Started",
+                    "pageMeta": {},
+                    "fileName": "getting-started",
+                    "dirName": "introduction",
+                }
+            ]
+        },
+        {
+            "sectionTitle": "Synergy With Testing",
+            "dirName": "synergy-with-testing",
+            "items": [
+                {
+                    "sectionTitle": "Synergy With Testing",
+                    "pageTitle": "Java",
+                    "pageMeta": {},
+                    "fileName": "java",
+                    "dirName": "synergy-with-testing",
+                },
+                {
+                    "sectionTitle": "Synergy With Testing",
+                    "pageTitle": "REST",
+                    "pageMeta": {},
+                    "fileName": "REST",
+                    "dirName": "synergy-with-testing",
+                },
+                {
+                    "sectionTitle": "Synergy With Testing",
+                    "pageTitle": "Web UI",
+                    "pageMeta": {},
+                    "fileName": "web-UI",
+                    "dirName": "synergy-with-testing",
+                }
+            ]
+        },
+        {
+            "sectionTitle": "Configuration",
+            "dirName": "configuration",
+            "items": [
+                {
+                    "sectionTitle": "Configuration",
+                    "pageTitle": "Basic",
+                    "pageMeta": {},
+                    "fileName": "basic",
+                    "dirName": "configuration",
+                }
+            ]
+        }
+    ]
+}
+
+function longToc() {
     return [
         {
             "sectionTitle": "",

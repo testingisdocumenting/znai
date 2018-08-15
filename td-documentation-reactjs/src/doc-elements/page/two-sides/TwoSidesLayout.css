@@ -21,6 +21,8 @@
     --mdoc-regular-text-color: var(--mdoc-inversed-text-color);
     --mdoc-regular-text-light-color: #aaa;
 
+    --mdoc-section-title-color: #ddd;
+
     --mdoc-snippets-background-color: #202429;
     --mdoc-snippets-outer-border-color: #464950;
     --mdoc-snippets-inner-border-color: #404040;
