@@ -416,8 +416,12 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     private boolean isLocalFile(String url) {
+        if (url.startsWith("http:") || url.startsWith("https:")) {
+            return false;
+        }
+
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
-        return url.indexOf('.') != -1 && resourcesResolver.exists(url);
+        return url.indexOf('.') != -1 && resourcesResolver.isLocalFile(url);
     }
 
     private String convertAndRegisterLocalFileToUrl(String url) {

@@ -5,6 +5,7 @@ import org.junit.Test
 import java.awt.image.BufferedImage
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.stream.Stream
 
 class ResourcesResolverTest {
     @Test
@@ -24,6 +25,25 @@ class ResourcesResolverTest {
     }
 
     static class OutsideDocsResolver implements ResourcesResolver {
+        @Override
+        void initialize(Stream<String> filteredLookupPaths) {
+        }
+
+        @Override
+        boolean supportsLookupPath(String lookupPath) {
+            return true
+        }
+
+        @Override
+        boolean canResolve(String path) {
+            return false
+        }
+
+        @Override
+        List<String> listOfTriedLocations(String path) {
+            return []
+        }
+
         @Override
         String textContent(String path) {
             return ""
@@ -50,12 +70,31 @@ class ResourcesResolverTest {
         }
 
         @Override
-        boolean exists(String path) {
+        boolean isLocalFile(String path) {
             return true
         }
     }
 
     static class InsideDocsResolver implements ResourcesResolver {
+        @Override
+        void initialize(Stream<String> filteredLookupPaths) {
+        }
+
+        @Override
+        boolean supportsLookupPath(String lookupPath) {
+            return true
+        }
+
+        @Override
+        boolean canResolve(String path) {
+            return true
+        }
+
+        @Override
+        List<String> listOfTriedLocations(String path) {
+            return []
+        }
+
         @Override
         String textContent(String path) {
             return ""
@@ -82,7 +121,7 @@ class ResourcesResolverTest {
         }
 
         @Override
-        boolean exists(String path) {
+        boolean isLocalFile(String path) {
             return true
         }
     }

@@ -4,7 +4,9 @@ import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.AuxiliaryFilesRegistry;
-import com.twosigma.documentation.extensions.MultipleLocationsResourceResolver;
+import com.twosigma.documentation.core.ResourcesResolverChain;
+import com.twosigma.documentation.extensions.HttpBasedResourceResolver;
+import com.twosigma.documentation.extensions.MultipleLocalLocationsResourceResolver;
 import com.twosigma.documentation.html.Deployer;
 import com.twosigma.documentation.html.DocPageReactProps;
 import com.twosigma.documentation.html.HtmlPageAndPageProps;
@@ -62,11 +64,13 @@ public class WebSite {
 
     private final WebSiteComponentsRegistry componentsRegistry;
     private final AuxiliaryFilesRegistry auxiliaryFilesRegistry;
-    private final MultipleLocationsResourceResolver resourceResolver;
     private final ReactJsNashornEngine reactJsNashornEngine;
     private final LunrIndexer lunrIndexer;
     private final CodeTokenizer codeTokenizer;
     private final WebResource tocJavaScript;
+
+    private final MultipleLocalLocationsResourceResolver localResourceResolver;
+    private final ResourcesResolverChain resourceResolver;
 
     private final MarkupParsingConfiguration markupParsingConfiguration;
 
@@ -76,7 +80,7 @@ public class WebSite {
         this.docMeta = cfg.docMeta;
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
         this.componentsRegistry = new WebSiteComponentsRegistry();
-        this.resourceResolver = new MultipleLocationsResourceResolver(cfg.docRootPath, findLookupLocations(cfg));
+        this.resourceResolver = new ResourcesResolverChain();
         this.reactJsNashornEngine = cfg.reactJsNashornEngine;
         this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
@@ -92,6 +96,11 @@ public class WebSite {
 
         componentsRegistry.setResourcesResolver(resourceResolver);
         componentsRegistry.setCodeTokenizer(codeTokenizer);
+
+        localResourceResolver = new MultipleLocalLocationsResourceResolver(cfg.docRootPath);
+        resourceResolver.addResolver(localResourceResolver);
+        resourceResolver.addResolver(new HttpBasedResourceResolver());
+        resourceResolver.initialize(findLookupLocations(cfg));
 
         WebSiteResourcesProviders.add(new WebSiteLogoExtension(cfg.docRootPath));
         WebSiteResourcesProviders.add(initFileBasedWebSiteExtension(cfg));
@@ -278,7 +287,7 @@ public class WebSite {
 
         reportPhase("parsing footer");
 
-        resourceResolver.setCurrentFilePath(markupPath);
+        localResourceResolver.setCurrentFilePath(markupPath);
 
         MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
         footer = new Footer(parserResult.getDocElement());
@@ -288,7 +297,7 @@ public class WebSite {
         try {
             Path markupPath = markupPath(tocItem);
 
-            resourceResolver.setCurrentFilePath(markupPath);
+            localResourceResolver.setCurrentFilePath(markupPath);
 
             MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
             updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
@@ -440,8 +449,8 @@ public class WebSite {
         docStructure.validateCollectedLinks();
     }
 
-    private Stream<Path> findLookupLocations(Configuration cfg) {
-        Stream<Path> root = Stream.of(cfg.docRootPath);
+    private Stream<String> findLookupLocations(Configuration cfg) {
+        Stream<String> root = Stream.of(cfg.docRootPath.toString());
 
         if (cfg.fileWithLookupPaths == null) {
             return root;
@@ -450,7 +459,7 @@ public class WebSite {
         return Stream.concat(root, readLocationsFromFile(cfg.fileWithLookupPaths));
     }
 
-    private Stream<Path> readLocationsFromFile(String filesLookupFilePath) {
+    private Stream<String> readLocationsFromFile(String filesLookupFilePath) {
         Path lookupFilePath = cfg.docRootPath.resolve(filesLookupFilePath);
         if (! Files.exists(lookupFilePath)) {
             return Stream.empty();
@@ -459,9 +468,7 @@ public class WebSite {
         String fileContent = FileUtils.fileTextContent(lookupFilePath);
         return Arrays.stream(fileContent.split("[;\n]"))
                 .map(String::trim)
-                .filter(e -> !e.isEmpty())
-                .map(e -> Paths.get(e))
-                .map(p -> p.isAbsolute() ? p : cfg.docRootPath.resolve(p));
+                .filter(e -> !e.isEmpty());
     }
 
     private interface PageConsumer {

@@ -1,15 +1,12 @@
 package com.twosigma.testing.http.datanode;
 
-import java.util.List;
-import java.util.Map;
-
-import com.twosigma.testing.expectation.equality.EqualComparator;
-import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
-import javafx.scene.control.Tab;
-
 import com.twosigma.testing.data.table.TableData;
 import com.twosigma.testing.expectation.ActualPath;
-import com.twosigma.testing.http.datanode.DataNode;
+import com.twosigma.testing.expectation.equality.EqualComparator;
+import com.twosigma.testing.expectation.equality.EqualComparatorHandler;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author mykola
