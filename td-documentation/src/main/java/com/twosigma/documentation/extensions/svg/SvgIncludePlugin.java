@@ -2,9 +2,8 @@ package com.twosigma.documentation.extensions.svg;
 
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.Plugin;
-import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.core.ResourcesResolver;
+import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;

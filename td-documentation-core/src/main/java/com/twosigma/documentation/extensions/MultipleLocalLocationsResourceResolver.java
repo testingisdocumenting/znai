@@ -1,53 +1,57 @@
 package com.twosigma.documentation.extensions;
 
 import com.twosigma.documentation.core.ResourcesResolver;
-import com.twosigma.utils.FileUtils;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * @author mykola
  */
-public class MultipleLocationsResourceResolver implements ResourcesResolver {
+public class MultipleLocalLocationsResourceResolver implements ResourcesResolver {
     private final Path docRootPath;
     private final List<Path> lookupPaths;
-    private ThreadLocal<Path> currentFilePath = new ThreadLocal<>();
+    private final ThreadLocal<Path> currentFilePath;
 
-    public MultipleLocationsResourceResolver(Path docRootPath, Stream<Path> paths) {
+    public MultipleLocalLocationsResourceResolver(Path docRootPath) {
         this.docRootPath = docRootPath;
-        this.lookupPaths = paths.collect(Collectors.toList());
+        this.lookupPaths = new ArrayList<>();
+        this.currentFilePath = new ThreadLocal<>();
     }
 
     @Override
-    public String textContent(String path) {
-        Path file = fullPath(path);
-        return FileUtils.fileTextContent(file);
+    public void initialize(Stream<String> filteredLookupPaths) {
+        lookupPaths.clear();
+        lookupPaths.addAll(filteredLookupPaths
+                .map(docRootPath::resolve)
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public BufferedImage imageContent(String path) {
-        Path fullPath = fullPath(path);
-        try {
-            return ImageIO.read(fullPath.toFile());
-        } catch (IOException e) {
-            throw new RuntimeException("Can't load image " + fullPath, e);
-        }
+    public boolean supportsLookupPath(String lookupPath) {
+        return !HttpResource.isHttpResource(lookupPath);
+    }
+
+    @Override
+    public boolean canResolve(String path) {
+        return isLocalFile(path);
+    }
+
+    @Override
+    public List<String> listOfTriedLocations(String path) {
+        return allLocationsStream(path).map(Path::toString).collect(Collectors.toList());
     }
 
     @Override
     public Path fullPath(String path) {
         return allLocationsStream(path).filter(Files::exists).findFirst()
-                .orElseThrow(() -> new RuntimeException("can't find any of the following files:\n" +
-                        allLocationsStream(path).map(Path::toString).collect(Collectors.joining("\n"))));
+                .orElseThrow(() -> new IllegalStateException(
+                        "either file disappeared or canResolve implementation needs to be checked."));
     }
 
     @Override
@@ -61,7 +65,7 @@ public class MultipleLocationsResourceResolver implements ResourcesResolver {
     }
 
     @Override
-    public boolean exists(String path) {
+    public boolean isLocalFile(String path) {
         return allLocationsStream(path).anyMatch(Files::exists);
     }
 

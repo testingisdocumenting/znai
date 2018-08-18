@@ -6,6 +6,7 @@ flow
     structure
     names
     page-references
+    lookup-paths
     search
     footer
     presentation

@@ -7,3 +7,4 @@
 ../../td-testing-core-groovy/target/test-classes
 ../../td-testing-core-groovy/src/test/groovy
 ../../td-documentation-jupyter
+https://raw.githubusercontent.com/twosigma/webtau/master
