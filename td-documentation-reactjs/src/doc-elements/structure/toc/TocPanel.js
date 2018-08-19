@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 
 import TocMenu from './TocMenu'
 import TocHeader from './TocHeader'
-import TocSettingsTogglePanel from './TocSettingsTogglePanel'
 import TocSettings from './TocSettings'
 
 class TocPanel extends Component {
@@ -27,7 +26,7 @@ class TocPanel extends Component {
 
                 {this.renderPanelContent()}
 
-                <TocSettingsTogglePanel onSettingsClick={this.onSettingsToggle} activated={displaySettings}/>
+                {/*<TocSettingsTogglePanel onSettingsClick={this.onSettingsToggle} activated={displaySettings}/>*/}
             </div>
         )
     }
