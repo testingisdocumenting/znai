@@ -20,10 +20,29 @@ function splitTokensIntoLines(tokens) {
     return lines
 
     function handle(token) {
-        if (typeof token === 'string' && token.startsWith('\n')) {
+        const isString = typeof token === 'string'
+
+        if (isString && token.indexOf('\n') > 0) {
+            handleMultiLineStringToken(token)
+        } else if (isString && token.startsWith('\n')) {
             handleNewLineStringToken(token)
         } else {
             line.push(token)
+        }
+    }
+
+    function handleMultiLineStringToken(token) {
+        const parts = token.split('\n')
+
+        for (let idx = 0; idx < parts.length; idx++) {
+            const isLastPart = (idx === parts.length - 1)
+
+            line.push(parts[idx] + (isLastPart ? '' : '\n'))
+
+            if (!isLastPart) {
+                lines.push(line)
+                line = []
+            }
         }
     }
 

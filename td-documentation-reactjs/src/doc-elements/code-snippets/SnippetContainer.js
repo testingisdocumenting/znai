@@ -61,8 +61,6 @@ class SnippetContainer extends React.Component {
     renderSnippet() {
         const {title} = this.props
 
-        const noTitle = !title
-
         return (
             <div className={this.snippetClassName}>
                 <this.props.snippetComponent {...this.props}/>

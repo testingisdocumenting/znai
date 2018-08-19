@@ -25,6 +25,7 @@ function parseCode(lang, code) {
 const extensionsMapping = {
     csv: 'clike',
     html: 'markup',
+    yml: 'yaml',
     c: 'cpp',
     h: 'cpp',
     hpp: 'cpp',

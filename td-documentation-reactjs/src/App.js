@@ -31,6 +31,7 @@ import {typographyDemo} from './doc-elements/typography/Typography.demo'
 import {graphVizSvgDemo} from './doc-elements/graphviz/GraphVizSvg.demo'
 import {graphVizSvgPresentationDemo} from './doc-elements/graphviz/PresentationGraphVizSvg.demo'
 import {cliCommandDemo} from './doc-elements/cli/CliCommand.demo'
+import {yamlSnippetDemo} from './doc-elements/code-snippets/Yaml.demo'
 
 const docMeta = {
     id: 'preview',
@@ -48,6 +49,7 @@ setDocMeta(docMeta)
 
 const snippets = new Registry('snippets')
 snippets.registerAsGrid('Code Snippet', 0, snippetsDemo)
+snippets.registerAsGrid('Yaml Code Snippet', 0, yamlSnippetDemo)
 snippets.registerAsGrid('Json', 0, jsonDemo)
 snippets.registerAsGrid('Xml', 0, xmlDemo)
 snippets.registerAsGrid('Xml Presentation', 0, xmlPresentationDemo)
