@@ -1,6 +1,9 @@
 import {
-    splitTokensIntoLines, isInlinedComment, trimComment, containsInlinedComment,
-    extractTextFromTokens
+    containsInlinedComment,
+    extractTextFromTokens,
+    isInlinedComment,
+    splitTokensIntoLines,
+    trimComment
 } from './codeUtils'
 import {parseCode} from './codeParser';
 
@@ -34,6 +37,15 @@ describe("codeUtils", () => {
         const lines = splitTokensIntoLines(tokens)
         expect(lines.length).toEqual(4)
         expect(lines[2]).toEqual(['\n'])
+    })
+
+    it("handles string token with new-line code in the middle", () => {
+        const tokens = ['hello\n  world']
+        const lines = splitTokensIntoLines(tokens)
+
+        expect(lines.length).toEqual(2)
+        expect(lines[0]).toEqual(['hello\n'])
+        expect(lines[1]).toEqual(['  world'])
     })
 
     it("converts line of tokens to a simple text", () => {
