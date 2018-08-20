@@ -416,7 +416,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     private boolean isLocalFile(String url) {
-        if (url.startsWith("http:") || url.startsWith("https:")) {
+        if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("mailto:")) {
             return false;
         }
 
