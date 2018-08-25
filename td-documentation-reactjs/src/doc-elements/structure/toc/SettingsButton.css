@@ -1,11 +1,12 @@
 .toc-settings-button {
     color: var(--mdoc-toc-panel-icon-color);
+    height: 20px;
     margin-right: 20px;
 
     user-select: none;
     cursor: pointer;
 }
 
-.toc-settings-button.activated {
-    color: var(--mdoc-toc-panel-icon-color-activated);
+.toc-settings-button.active {
+    color: var(--mdoc-toc-panel-icon-color-active);
 }

@@ -7,8 +7,6 @@ import './tokens.css'
 
 export function yamlSnippetDemo(registry) {
     const parsed = parseCode("yaml", yamlCode())
-    console.log(parsed)
-    window.a = parsed
 
     registry
         .add('highlight by line idx', <Snippet tokens={parsed} highlight={[3, 5]}/>)

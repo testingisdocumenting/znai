@@ -33,6 +33,7 @@
 
     --mdoc-toc-title-color: #152935;
     --mdoc-toc-title-background-color: #f8faf9;
+    --mdoc-toc-panel-width: 280px;
     --mdoc-toc-panel-background-color: #f8faf9;
     --mdoc-toc-panel-border-color: #e9e9e9;
     --mdoc-toc-selected-text-color: #00747a;
@@ -41,7 +42,7 @@
     --mdoc-toc-page-title-color: #152935;
     --mdoc-toc-page-section-color: #15293575;
     --mdoc-toc-panel-icon-color: #798186;
-    --mdoc-toc-panel-icon-color-activated: #e7c121;
+    --mdoc-toc-panel-icon-color-active: #e7c121;
 
     --mdoc-section-title-color: var(--mdoc-black);
 
