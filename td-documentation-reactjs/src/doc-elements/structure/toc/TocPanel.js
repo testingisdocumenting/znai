@@ -40,7 +40,7 @@ class TocPanel extends Component {
                          selected={selectedItem}
                          onTocItemPageSectionClick={onTocItemPageSectionClick}
                          onTocItemClick={onTocItemClick}/>
-                <TocSettings active={displaySettings} onSettingsToggle={this.onSettingsToggle}/>
+                {!collapsed && <TocSettings active={displaySettings} onSettingsToggle={this.onSettingsToggle}/>}
             </div>
         )
     }
