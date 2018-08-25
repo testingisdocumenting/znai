@@ -117,6 +117,10 @@
     padding-top: 10px;
 }
 
+.toc-section:last-child {
+    margin-bottom: 55px;
+}
+
 .toc-section .title {
     font-size: 14px;
     line-height: 35px;
