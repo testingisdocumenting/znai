@@ -1,8 +1,11 @@
 import Theme from './Theme'
+import {mdocSettings} from '../settings/MdocSettings'
 
 class ThemeRegistry {
     _themeChangeListeners = []
     _selectedTheme = null
+
+    _selectedThemeName = mdocSettings.loadSelectedThemeName()
 
     themes = []
     baseTheme = null
@@ -23,7 +26,7 @@ class ThemeRegistry {
         }
 
         const mergedWithBase = mergeThemes(this.baseTheme, theme)
-        if (! this._selectedTheme) {
+        if (! this._selectedTheme || this._selectedThemeName === mergedWithBase.name) {
             this._selectedTheme = mergedWithBase
         }
 
@@ -34,6 +37,7 @@ class ThemeRegistry {
         const theme = this.findByName(name)
         this._selectedTheme = theme
 
+        mdocSettings.saveSelectedThemeName(name)
         this._themeChangeListeners.forEach(l => l(name, theme))
     }
 
