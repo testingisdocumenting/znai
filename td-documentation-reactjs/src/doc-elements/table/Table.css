@@ -6,10 +6,29 @@
     width: auto;
 }
 
+.simple-table .ui.table {
+    background: var(--mdoc-table-body-background-color);
+    border: 1px solid var(--mdoc-table-border-color);
+    color: var(--mdoc-table-text-color);
+}
+
+.simple-table .ui.table thead th {
+    background: var(--mdoc-table-header-background-color);
+    color: var(--mdoc-table-text-color);
+}
+
+.simple-table .ui.celled.table tr td {
+    border-left: 1px solid var(--mdoc-table-border-color);
+    border-top: 1px solid var(--mdoc-table-border-color);
+}
+
+.simple-table .table > thead > tr > th {
+    border-bottom: none;
+}
+
 .simple-table .middle-vertical-lines-only thead th {
     padding: 5px 20px;
-
-    border-right: solid 1px var(--mdoc-brand-primary-color);
+    border-right: solid 1px var(--mdoc-table-border-color);
     vertical-align: top;
 }
 
@@ -20,7 +39,7 @@
 .simple-table .middle-vertical-lines-only tbody td {
     padding: 5px 20px;
 
-    border-right: solid 1px var(--mdoc-brand-primary-color);
+    border-right: solid 1px var(--mdoc-table-border-color);
     vertical-align: top;
 }
 
@@ -28,7 +47,7 @@
     padding-top: 0;
     padding-bottom: 0;
 
-    border-right: solid 1px var(--mdoc-brand-primary-color);
+    border-right: solid 1px var(--mdoc-table-border-color);
     vertical-align: top;
 }
 
@@ -36,6 +55,6 @@
     border-right: none;
 }
 
-.simple-table .ui.table thead th {
-    background: var(--mdoc-table-header-background-color);
+.simple-table .ui.celled.table tr th {
+    border-left: 1px solid var(--mdoc-table-border-color);
 }

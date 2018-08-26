@@ -27,7 +27,7 @@
 }
 
 .token.title {
-    color: #383b3f;
+    color: var(--mdoc-token-title-color);
     font-weight: bold;
 }
 
@@ -61,6 +61,10 @@
     padding: 2px 2px;
     border-radius: 4px;
     background-color: var(--mdoc-highlighted-background-color);
+}
+
+.code-line .token.url {
+    background: none;
 }
 
 .token.collapsed,

@@ -4,14 +4,14 @@
 
 .section h2 {
     font-size: 21px;
-    color: #000;
+    color: var(--mdoc-section-h2-color);
     margin-top: 20px;
     margin-bottom: 15px;
 }
 
 .section h3 {
     font-size: 18px;
-    color: #000;
+    color: var(--mdoc-section-h3-color);
     margin-top: 20px;
     margin-bottom: 15px;
 }

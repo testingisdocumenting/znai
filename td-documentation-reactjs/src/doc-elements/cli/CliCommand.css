@@ -32,12 +32,12 @@
 }
 
 .cli-command .command {
-    color: #383b3f;
+    color: var(--mdoc-cli-command-color);
     font-weight: bold;
 }
 
 .cli-command .highlight {
-    color: #660e7a;
+    color: var(--mdoc-token-param-highlight-color);
     font-weight: bold;
 }
 
