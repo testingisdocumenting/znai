@@ -28,8 +28,8 @@
     overflow-x: hidden;
     white-space: nowrap;
     border-right: 1px solid var(--mdoc-toc-panel-border-color);
-    min-width: 280px;
-    max-width: 280px;
+    min-width: var(--mdoc-toc-panel-width);
+    max-width: var(--mdoc-toc-panel-width);
 
     background-color: var(--mdoc-toc-panel-background-color);
 }
@@ -82,8 +82,7 @@
     cursor: pointer;
 }
 
-.toc-menu,
-.toc-settings {
+.toc-menu {
     padding-top: 20px;
 
     overflow-y: auto;
@@ -92,28 +91,20 @@
     flex: 1;
 }
 
-.toc-settings .toc-section:first-child {
-    margin-bottom: 10px;
-}
-
-.toc-settings::-webkit-scrollbar,
 .toc-menu::-webkit-scrollbar {
     height: 3px;
     width: 3px;
     display: none;
 }
 
-.toc-settings:hover::-webkit-scrollbar,
 .toc-menu:hover::-webkit-scrollbar {
     display: block;
 }
 
-.toc-settings::-webkit-scrollbar-thumb,
 .toc-menu::-webkit-scrollbar-thumb {
    background: var(--mdoc-toc-panel-border-color);
 }
 
-.toc-settings::-webkit-scrollbar-track,
 .toc-menu::-webkit-scrollbar-track {
    background: 0;
 }
@@ -124,6 +115,10 @@
 
 .toc-section:first-child {
     padding-top: 10px;
+}
+
+.toc-section:last-child {
+    margin-bottom: 55px;
 }
 
 .toc-section .title {

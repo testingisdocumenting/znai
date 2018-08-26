@@ -1,19 +1,49 @@
 import React from 'react'
 import {themeRegistry} from '../../../theme/ThemeRegistry'
+import TocSettingsTogglePanel from './TocSettingsTogglePanel'
 
-export default function TocSettings() {
-    return (
-        <div className="toc-settings">
-            <div className="toc-section">
-                <div className="title">Settings</div>
-            </div>
+import './TocSettings.css'
 
-            <div className="toc-section">
-                <div className="title">Theme</div>
-                <Themes/>
+const collapsedHeight = 48
+export default class TocSettings extends React.Component {
+    state = {
+        maxHeight: undefined
+    }
+
+    render() {
+        const {active, onSettingsToggle} = this.props
+        const className = 'toc-settings' + (active ? ' active' : '')
+
+        return (
+            <div className={className} ref={node => this.node = node} style={{maxHeight: this.maxHeightToUse}}>
+                <TocSettingsTogglePanel onSettingsClick={onSettingsToggle} active={active}/>
+
+                <div className="toc-section">
+                    <div className="title">Theme</div>
+                    <Themes/>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+
+    get maxHeightToUse() {
+        const {active} = this.props
+        const {maxHeight} = this.state
+
+        if (! maxHeight) {
+            return undefined // to have initial rendering to get the real height of the content
+        }
+
+        if (active) {
+            return maxHeight
+        }
+
+        return collapsedHeight
+    }
+
+    componentDidMount() {
+        this.setState({maxHeight: this.node.clientHeight})
+    }
 }
 
 function Themes() {

@@ -12,8 +12,20 @@ class TocPanel extends Component {
     }
 
     render() {
-        const {docMeta, onHeaderClick} = this.props
-        const {collapsed, selected, displaySettings} = this.state
+        const {
+            docMeta,
+            onHeaderClick,
+            toc,
+            selectedItem,
+            onTocItemClick,
+            onTocItemPageSectionClick
+        } = this.props
+
+        const {
+            collapsed,
+            selected,
+            displaySettings
+        } = this.state
 
         const panelClass = 'toc-panel' + (collapsed ? ' collapsed' : '') + (selected ? ' selected' : '')
 
@@ -24,31 +36,12 @@ class TocPanel extends Component {
                            onHeaderClick={onHeaderClick}
                            onCollapseToggle={this.collapseToggle}/>
 
-                {this.renderPanelContent()}
-
-                {/*<TocSettingsTogglePanel onSettingsClick={this.onSettingsToggle} activated={displaySettings}/>*/}
+                <TocMenu toc={toc}
+                         selected={selectedItem}
+                         onTocItemPageSectionClick={onTocItemPageSectionClick}
+                         onTocItemClick={onTocItemClick}/>
+                {!collapsed && <TocSettings active={displaySettings} onSettingsToggle={this.onSettingsToggle}/>}
             </div>
-        )
-    }
-
-    renderPanelContent() {
-        const {
-            toc,
-            selectedItem,
-            onTocItemClick,
-            onTocItemPageSectionClick} = this.props
-
-        const {displaySettings} = this.state
-
-        if (displaySettings) {
-            return <TocSettings/>
-        }
-
-        return (
-            <TocMenu toc={toc}
-                     selected={selectedItem}
-                     onTocItemPageSectionClick={onTocItemPageSectionClick}
-                     onTocItemClick={onTocItemClick}/>
         )
     }
 
