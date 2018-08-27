@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 import GvPolygon from './GvPolygon'
 import GvText from './GvText'
@@ -172,21 +172,23 @@ class GraphVizSvg extends Component {
 
         const dropShadowFilterId = buildUniqueId(diagram.id, "glow_filter")
         const el = new ReactElementsBuilder({ diagram, colors, idsToDisplay, idsToHighlight, urls }).reactElementFromDomNode(dom.documentElement)
-        return <div className={className}>
-            <svg viewBox="0 0 0 0" width="0" height="0">
-                <filter id={dropShadowFilterId}>
-                    <feMorphology operator="dilate" radius="3" in="SourceAlpha" result="thicken" />
-                    <feGaussianBlur in="thicken" stdDeviation="1" result="blurred" />
-                    <feFlood floodColor="rgb(230, 230, 230)" result="glowColor" />
-                    <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
-                    <feMerge>
-                        <feMergeNode in="softGlow_colored"/>
-                        <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                </filter>
-            </svg>
-            {el}
-        </div>
+        return (
+            <div className={className}>
+                <svg viewBox="0 0 0 0" width="0" height="0">
+                    <filter id={dropShadowFilterId}>
+                        <feMorphology operator="dilate" radius="3" in="SourceAlpha" result="thicken" />
+                        <feGaussianBlur in="thicken" stdDeviation="1" result="blurred" />
+                        <feFlood floodColor="var(--mdoc-diagram-node-shadow-color)" result="glowColor" />
+                        <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
+                        <feMerge>
+                            <feMergeNode in="softGlow_colored"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </svg>
+                {el}
+            </div>
+        )
     }
 }
 

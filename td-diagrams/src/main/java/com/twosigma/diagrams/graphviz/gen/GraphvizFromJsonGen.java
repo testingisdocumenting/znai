@@ -23,6 +23,7 @@ public class GraphvizFromJsonGen {
 
         return "digraph Generated {\n" +
                 (!isVertical ? "rankdir=LR;\n" : "") +
+                "bgcolor=\"#ffffff00\";\n" +
                 "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
                 (nodes.isEmpty() ? "" : "\n" + nodes + "\n") +
                 (edges.isEmpty() ? "" : "\n" + edges + "\n") +

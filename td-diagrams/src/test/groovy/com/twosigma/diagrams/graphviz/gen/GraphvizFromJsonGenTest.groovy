@@ -21,6 +21,7 @@ class GraphvizFromJsonGenTest {
 
         gv.should == "digraph Generated {\n" +
                 "rankdir=LR;\n" +
+                "bgcolor=\"#ffffff00\";\n" +
                 "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
                 "\n" +
                 "n1 [label=\"l1\"];\n" +
@@ -37,6 +38,7 @@ class GraphvizFromJsonGenTest {
 
         gv.should == "digraph Generated {\n" +
                 "rankdir=LR;\n" +
+                "bgcolor=\"#ffffff00\";\n" +
                 "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
                 "\n" +
                 "n1 [label=\"l1[h]\"];\n" +
