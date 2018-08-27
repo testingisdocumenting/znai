@@ -63,8 +63,7 @@
     --mdoc-cli-command-color: #383b3f;
     --mdoc-snippets-space-above: 25px;
     --mdoc-snippets-space-below: 25px;
-    --mdoc-snippets-hidden-explanation-color: #efefef;
-    --mdoc-snippets-hidden-explanation-badge-color: #eee;
+    --mdoc-snippets-explanation-background-color: #efefef;
 
     --mdoc-table-body-background-color: #fff;
     --mdoc-table-header-background-color: #f8faf9;
