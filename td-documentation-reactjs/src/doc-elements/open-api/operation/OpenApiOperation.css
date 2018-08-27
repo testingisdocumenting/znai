@@ -22,7 +22,7 @@
 }
 
 .open-api-operation > .url-and-summary > .method {
-    color: var(--mdoc-light-black);
+    color: var(--mdoc-open-api-method-color);
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -30,7 +30,7 @@
 .open-api-operation > .url-and-summary > .path {
     display: flex;
     flex-wrap: wrap;
-    color: var(--mdoc-light-black);
+    color: var(--mdoc-open-api-path-color);
 }
 
 .open-api-operation > .url-and-summary > .path > .path-part-delimiter {

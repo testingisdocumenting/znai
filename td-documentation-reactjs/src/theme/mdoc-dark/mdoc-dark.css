@@ -3,28 +3,35 @@
     --mdoc-regular-text-light-color: #aaa;
 
     --mdoc-section-title-color: #ddd;
+    --mdoc-section-h2-color: #ddd;
+    --mdoc-section-h3-color: #ddd;
 
     --mdoc-toc-title-color: #a0a1a0;
-    --mdoc-toc-title-background-color: #152935;
-    --mdoc-toc-panel-background-color: #152935;
+    --mdoc-toc-title-background-color: #272f33;
+    --mdoc-toc-panel-background-color: #272f33;
     --mdoc-toc-panel-border-color: #3e3e3e;
-    --mdoc-toc-selected-text-color: #00747a;
+    --mdoc-toc-selected-text-color: var(--mdoc-brand-primary-color);
     --mdoc-toc-selected-border-color: var(--mdoc-brand-primary-color);
-    --mdoc-toc-chapter-title-color: #5a6872;
-    --mdoc-toc-page-title-color: #576872;
-    --mdoc-toc-page-section-color: rgba(64, 113, 150, 0.46);
+    --mdoc-toc-chapter-title-color: #7f8284;
+    --mdoc-toc-page-title-color: #a1afb7;
+    --mdoc-toc-page-section-color: rgba(145, 171, 173, 0.52);
     --mdoc-toc-panel-icon-color: #798186;
     --mdoc-toc-panel-icon-color-active: #e7c121;
 
     --mdoc-footer-color: #b0bcc2;
-    --mdoc-footer-background-color: #2a2b2a;
+    --mdoc-footer-background-color: #1b2225;
 
-    --mdoc-snippets-background-color: #202429;
-    --mdoc-snippets-outer-border-color: #464950;
+    --mdoc-snippets-background-color: #181e21;
+    --mdoc-snippets-outer-border-color: #29343a;
     --mdoc-snippets-inner-border-color: #404040;
     --mdoc-snippets-title-color: #959595;
-    --mdoc-snippets-title-background-color: #1b1d1f;
+    --mdoc-snippets-title-background-color: #151a1d;
     --mdoc-snippets-title-left-border-color: var(--mdoc-snippets-title-background-color);
+    --mdoc-token-title-color: #dddddd;
+    --mdoc-token-param-highlight-color: #ae59c1; 
+    --mdoc-cli-command-color: #a0aeb5;
+    --mdoc-snippets-hidden-explanation-color: #121619;
+    --mdoc-snippets-hidden-explanation-badge-color: ##121619;
 
     --mdoc-default-code-block-color: #aaa;
     --mdoc-class-color: #bbb;
@@ -37,12 +44,25 @@
     --mdoc-boolean-color: var(--mdoc-number-color);
     --mdoc-highlighted-background-color: rgba(126, 131, 33, 0.3);
 
+    --mdoc-api-key-color: var(--mdoc-section-title-color);
+    --mdoc-api-description-color: var(--mdoc-inversed-text-color);
+
+    --mdoc-open-api-method-color: var(--mdoc-toc-page-title-color);
+    --mdoc-open-api-path-color: var(--mdoc-toc-page-title-color);
+    --mdoc-open-api-path-param-color: #292b2a;
+    --mdoc-open-api-sub-header-color: var(--mdoc-toc-page-title-color);
+
     --mdoc-collapse-uncollapse-background-color: #383838;
 
+    --mdoc-table-body-background-color: #1e2529;
+    --mdoc-table-header-background-color: #272f33;
+    --mdoc-table-border-color: rgb(71, 73, 80);
+
     color: var(--mdoc-regular-text-color);
-    background-color: var(--mdoc-inversed-background-color);
+    background-color: #1e2529;
 }
 
 .theme-mdoc-dark .page-two-sides-right-part {
     border-left: 1px solid #444;
+    background-color: #161c1f;
 }
