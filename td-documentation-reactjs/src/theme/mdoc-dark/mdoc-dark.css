@@ -1,4 +1,6 @@
 .theme-mdoc-dark {
+    --mdoc-background-color: #1e2529;
+
     --mdoc-regular-text-color: var(--mdoc-inversed-text-color);
     --mdoc-regular-text-light-color: #aaa;
 
@@ -57,8 +59,10 @@
     --mdoc-table-header-background-color: #272f33;
     --mdoc-table-border-color: rgb(71, 73, 80);
 
+    --mdoc-diagram-node-shadow-color: #444;
+
     color: var(--mdoc-regular-text-color);
-    background-color: #1e2529;
+    background-color: var(--mdoc-background-color);
 }
 
 .theme-mdoc-dark .page-two-sides-right-part {

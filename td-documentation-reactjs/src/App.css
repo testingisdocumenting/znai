@@ -1,4 +1,6 @@
 :root {
+    --mdoc-background-color: #fff;
+
     --mdoc-single-column-full-width: 900px;
     --mdoc-single-column-partial-width: 600px;
 
@@ -92,11 +94,14 @@
 
     --mdoc-inversed-text-color: #bbbbbb;
     --mdoc-inversed-background-color: #282f34;
+
+    --mdoc-diagram-node-shadow-color: #e6e6e6;
 }
 
 body {
     font-family: var(--mdoc-regular-font-family);
-    color: var(--mdoc-black);
+    color: var(--mdoc-regular-text-color);
+    background: var(--mdoc-background-color);
 }
 
 .emphasis {
