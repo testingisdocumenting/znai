@@ -17,8 +17,8 @@
 }
 
 .code-bullets.hidden-explanation {
-    color: var(--mdoc-snippets-hidden-explanation-color);
-    background-color: var(--mdoc-snippets-hidden-explanation-color);
+    color: var(--mdoc-snippets-explanation-background-color);
+    background-color: var(--mdoc-snippets-explanation-background-color);
     border-top: var(--mdoc-snippets-outer-border-color) 1px solid;
     border-bottom: var(--mdoc-snippets-outer-border-color) 1px solid;
     padding: 0;
@@ -40,8 +40,8 @@
 }
 
 .hidden-explanation .ui.blue.circular.label.circle-badge {
-    color: var(--mdoc-snippets-hidden-explanation-badge-color) !important; 
-    background-color: var(--mdoc-snippets-hidden-explanation-badge-color) !important;
+    color: var(--mdoc-snippets-explanation-background-color) !important;
+    background-color: var(--mdoc-snippets-explanation-background-color) !important;
 }
 
 span.ui.blue.label {
