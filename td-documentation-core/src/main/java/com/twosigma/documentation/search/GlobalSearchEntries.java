@@ -15,20 +15,20 @@ import java.util.List;
  * @author mykola
  */
 @JacksonXmlRootElement(localName = "mdoc")
-public class SiteSearchEntries {
-    private List<SiteSearchEntry> entries;
+public class GlobalSearchEntries {
+    private List<GlobalSearchEntry> entries;
 
-    public SiteSearchEntries() {
+    public GlobalSearchEntries() {
         entries = new ArrayList<>();
     }
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "entry")
-    public List<SiteSearchEntry> getEntries() {
+    public List<GlobalSearchEntry> getEntries() {
         return entries;
     }
 
-    public void addAll(List<SiteSearchEntry> entries) {
+    public void addAll(List<GlobalSearchEntry> entries) {
         this.entries.addAll(entries);
     }
 

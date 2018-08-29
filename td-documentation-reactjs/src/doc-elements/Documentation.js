@@ -394,7 +394,7 @@ class Documentation extends Component {
 
     onSearchSelection(id) {
         this.onSearchClose()
-        documentationNavigation.navigateToPage({dirName: id.dn, fileName: id.fn, pageSectionId: id.psid})
+        documentationNavigation.navigateToPage(id)
     }
 
     navigateToPageIfRequired(tocItem) {

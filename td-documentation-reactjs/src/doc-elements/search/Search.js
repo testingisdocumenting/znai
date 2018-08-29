@@ -1,26 +1,34 @@
-import LunrIndexer from './LunrIndexer'
-import searchContent from './searchContent'
+import QueryResult from './QueryResult'
 
 class Search {
-    constructor(allPages, searchIndex) {
+    constructor(allPages) {
         this.allPages = allPages
-        this.searchIndex = searchIndex
-        this.lunrIndexer = LunrIndexer.createWithJson(searchIndex)
+        this.searchIdx = window.mdocSearchIdx
+        this.searchDataById = mapById(window.mdocSearchData)
+    }
+
+    static convertIndexIdToSectionCoords(indexId) {
+        const [dirName, fileName, pageSectionId] = indexId.split('@@')
+        return {dirName, fileName, pageSectionId}
     }
 
     search(term) {
-        return this.lunrIndexer.search(term)
+        return new QueryResult(this.searchIdx.search(term))
+    }
+
+    findSearchEntryById(id) {
+        return this.searchDataById[id]
     }
 
     previewDetails(id, queryResult) {
         const section = this._findSectionById(id)
-        const snippets = queryResult.getSnippetsToHighlight(id, searchContent.extractTextFromElement(section))
+        const snippets = queryResult.getSnippetsToHighlight(id, this.findSearchEntryById(id).text)
 
         return {section, snippets}
     }
 
     _findSectionById(indexId) {
-        indexId = JSON.parse(indexId)
+        const sectionCoords = Search.convertIndexIdToSectionCoords(indexId)
 
         const matching = []
 
@@ -28,9 +36,9 @@ class Search {
             const tocItem = p.tocItem
 
             const sections = p.content.filter((de) => {
-                return tocItem.dirName === indexId.dn &&
-                    tocItem.fileName === indexId.fn &&
-                    de.type === 'Section' && de.id === indexId.psid})
+                return tocItem.dirName === sectionCoords.dirName &&
+                    tocItem.fileName === sectionCoords.fileName &&
+                    de.type === 'Section' && de.id === sectionCoords.pageSectionId})
 
             sections.forEach((s) => matching.push(s))
         })
@@ -41,6 +49,15 @@ class Search {
 
         return matching[0]
     }
+}
+
+function mapById(searchData) {
+    const result = {}
+    searchData.forEach(([id, section, pageTitle, pageSection, text]) => {
+        result[id] = {section, pageTitle, pageSection, text}
+    })
+
+    return result
 }
 
 export default Search
