@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import SearchBox from './SearchBox'
 import SearchToc from './SearchToc'
 import SearchPreview from './SearchPreview'
+import Search from './Search'
 
 class SearchPopup extends Component {
     constructor(props) {
@@ -30,6 +31,8 @@ class SearchPopup extends Component {
 
     render() {
         const {onClose, tocCollapsed} = this.props
+        const {search} = this.state
+
         const ids = this.queryResultIds()
 
         this.ids = ids
@@ -37,10 +40,10 @@ class SearchPopup extends Component {
         const hasResult = ids.length > 0
         const selectedIdx = this.state.selectedIdx
         const firstId = hasResult ? ids[selectedIdx] : null
-        const previewDetails = hasResult ? this.state.search.previewDetails(firstId, this.state.queryResult) : null
+        const previewDetails = hasResult ? search.previewDetails(firstId, this.state.queryResult) : null
 
         const className = "search-popup" + (tocCollapsed ? "" : " visible-toc") + (hasResult ? " with-results" : "")
-        const searchBox = this.state.search ? <SearchBox onChange={this.onQueryChange} /> : null
+        const searchBox = search ? <SearchBox onChange={this.onQueryChange} /> : null
 
         return (
             <div className={className}>
@@ -56,11 +59,14 @@ class SearchPopup extends Component {
 
     renderPreview(ids, selectedIdx, previewDetails) {
         const {elementsLibrary} = this.props
+        const {search} = this.state
+
         return (
             <div className="toc-and-preview">
                 <div className="search-toc-panel">
                     <SearchToc ids={ids}
                                selectedIdx={selectedIdx}
+                               search={search}
                                onSelect={this.changeSelectedIdx}
                                onJump={this.jumpToIdx}/>
                 </div>
@@ -92,7 +98,7 @@ class SearchPopup extends Component {
 
     jumpToIdx = (idx) => {
         const ids = this.queryResultIds()
-        const tocToNavigate = JSON.parse(ids[idx])
+        const tocToNavigate = Search.convertIndexIdToSectionCoords(ids[idx])
 
         this.props.onSearchSelection(tocToNavigate)
     }

@@ -1,4 +1,3 @@
-import {getSearchIndexPromise} from "./searchIndex"
 import {getAllPagesPromise} from "../allPages"
 
 import Promise from "promise"
@@ -18,8 +17,8 @@ function getSearchPromise(docMeta) {
         return searchPromise
     }
 
-    searchPromise = Promise.all([getAllPagesPromise(docMeta), getSearchIndexPromise(docMeta)]).then((values) => {
-        return new Search(values[0], values[1])
+    searchPromise = getAllPagesPromise(docMeta).then((allPages) => {
+        return new Search(allPages)
     }, (error) => {
         console.error(error)
         return new Promise.reject("both search index and pages needs to be loaded")

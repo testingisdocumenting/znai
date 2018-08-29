@@ -3,6 +3,8 @@ import {getSearchPromise} from "./searchPromise"
 import SearchPopup from "./SearchPopup"
 import {elementsLibrary} from '../DefaultElementsLibrary'
 
+import './testData'
+
 const buttonStyle = {
     border: "1px solid",
     padding: 10,

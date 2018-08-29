@@ -5,13 +5,13 @@ import org.junit.Test
 /**
  * @author mykola
  */
-class SiteSearchEntriesTest {
+class GlobalSearchEntriesTest {
     @Test
     void "should generate XML document"() {
-        def entries = new SiteSearchEntries()
+        def entries = new GlobalSearchEntries()
         entries.addAll([
-                new SiteSearchEntry('/doc-id/title1','full title 1', new SearchText('text 1', SearchScore.HIGH)),
-                new SiteSearchEntry('/doc-id/title2','full title 2', new SearchText('text 2', SearchScore.STANDARD))])
+                new GlobalSearchEntry('/doc-id/title1','full title 1', new SearchText('text 1', SearchScore.HIGH)),
+                new GlobalSearchEntry('/doc-id/title2','full title 2', new SearchText('text 2', SearchScore.STANDARD))])
 
         println entries.toXml()
         entries.toXml().should == '<mdoc>\n' +

@@ -15,10 +15,7 @@ import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.commonmark.MarkdownParser;
-import com.twosigma.documentation.search.LunrIndexer;
-import com.twosigma.documentation.search.PageSearchEntry;
-import com.twosigma.documentation.search.SiteSearchEntries;
-import com.twosigma.documentation.search.SiteSearchEntry;
+import com.twosigma.documentation.search.*;
 import com.twosigma.documentation.structure.*;
 import com.twosigma.documentation.web.WebResource;
 import com.twosigma.documentation.web.extensions.WebSiteResourcesProviders;
@@ -46,6 +43,8 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class WebSite {
+    private static final String SEARCH_INDEX_FILE_NAME = "search-index.js";
+
     private PageToHtmlPageConverter pageToHtmlPageConverter;
     private MarkupParser markupParser;
     private final Deployer deployer;
@@ -53,21 +52,23 @@ public class WebSite {
     private final Configuration cfg;
 
     private Map<TocItem, Page> pageByTocItem;
-    private SiteSearchEntries searchEntries;
+    private GlobalSearchEntries globalSearchEntries;
+    private LocalSearchEntries localSearchEntries;
 
     private TableOfContents toc;
     private WebSiteDocStructure docStructure;
     private Footer footer;
     private Map<TocItem, DocPageReactProps> pagePropsByTocItem;
     private List<WebResource> registeredExtraJavaScripts;
-    private List<WebResource> extraJavaScripts;
+    private List<WebResource> extraJavaScriptsInFront;
+    private List<WebResource> extraJavaScriptsInBack;
 
     private final WebSiteComponentsRegistry componentsRegistry;
     private final AuxiliaryFilesRegistry auxiliaryFilesRegistry;
     private final ReactJsNashornEngine reactJsNashornEngine;
-    private final LunrIndexer lunrIndexer;
     private final CodeTokenizer codeTokenizer;
     private final WebResource tocJavaScript;
+    private final WebResource searchIndexJavaScript;
 
     private final MultipleLocalLocationsResourceResolver localResourceResolver;
     private final ResourcesResolverChain resourceResolver;
@@ -82,12 +83,13 @@ public class WebSite {
         this.componentsRegistry = new WebSiteComponentsRegistry();
         this.resourceResolver = new ResourcesResolverChain();
         this.reactJsNashornEngine = cfg.reactJsNashornEngine;
-        this.lunrIndexer = new LunrIndexer(reactJsNashornEngine);
         this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
         this.tocJavaScript = WebResource.withPath("toc.js");
+        this.searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
         this.auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
         this.markupParsingConfiguration = createMarkupParsingConfiguration();
-        this.searchEntries = new SiteSearchEntries();
+        this.globalSearchEntries = new GlobalSearchEntries();
+        this.localSearchEntries = new LocalSearchEntries();
 
         docMeta.setId(cfg.id);
         if (cfg.isPreviewEnabled) {
@@ -234,8 +236,10 @@ public class WebSite {
         markupParser = markupParsingConfiguration.createMarkupParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
         pagePropsByTocItem = new HashMap<>();
-        extraJavaScripts = new ArrayList<>(registeredExtraJavaScripts);
-        extraJavaScripts.add(tocJavaScript);
+        extraJavaScriptsInFront = new ArrayList<>(registeredExtraJavaScripts);
+        extraJavaScriptsInFront.add(tocJavaScript);
+        extraJavaScriptsInBack = new ArrayList<>(registeredExtraJavaScripts);
+        extraJavaScriptsInBack.add(searchIndexJavaScript);
 
         componentsRegistry.setDefaultParser(markupParser);
         componentsRegistry.setMarkdownParser(new MarkdownParser(componentsRegistry));
@@ -321,14 +325,15 @@ public class WebSite {
     }
 
     private void updateSearchEntries(TocItem tocItem, MarkupParserResult parserResult) {
-        List<SiteSearchEntry> siteSearchEntries = parserResult.getSearchEntries().stream()
+        List<GlobalSearchEntry> siteSearchEntries = parserResult.getSearchEntries().stream()
                 .map(pageSearchEntry ->
-                        new SiteSearchEntry(
+                        new GlobalSearchEntry(
                                 searchEntryUrl(tocItem, pageSearchEntry),
                                 searchEntryTitle(tocItem, pageSearchEntry), pageSearchEntry.getText()))
                 .collect(toList());
 
-        searchEntries.addAll(siteSearchEntries);
+        globalSearchEntries.addAll(siteSearchEntries);
+        localSearchEntries.add(new PageSearchEntries(tocItem, parserResult.getSearchEntries()));
     }
 
     private String searchEntryUrl(TocItem tocItem, PageSearchEntry pageSearchEntry) {
@@ -378,10 +383,10 @@ public class WebSite {
     private void generateSearchIndex() {
         reportPhase("generating search index");
 
-        String jsonIndex = lunrIndexer.createJsonIndex(pagePropsByTocItem.values());
-        deployer.deploy("search-index.json", jsonIndex);
+        String jsIndexScript = localSearchEntries.buildIndexScript();
+        deployer.deploy("search-index.js", jsIndexScript);
 
-        String xmlExternalIndex = searchEntries.toXml();
+        String xmlExternalIndex = globalSearchEntries.toXml();
         deployer.deploy("search-entries.xml", xmlExternalIndex);
     }
 
@@ -398,7 +403,8 @@ public class WebSite {
             HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(tocItem, page, footer);
 
             pagePropsByTocItem.put(tocItem, htmlAndProps.getProps());
-            extraJavaScripts.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
+            extraJavaScriptsInFront.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
+            extraJavaScriptsInBack.forEach(htmlAndProps.getHtmlPage()::addJavaScript);
 
             String html = htmlAndProps.getHtmlPage().render(docMeta.getId());
 

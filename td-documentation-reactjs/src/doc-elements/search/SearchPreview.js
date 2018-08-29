@@ -14,9 +14,11 @@ class SearchPreview extends Component {
     render() {
         const {section, elementsLibrary} = this.props
 
-        return (<div className="search-result-preview" ref={(dom) => this.dom = dom}>
-            <elementsLibrary.DocElement {...this.props} content={section.content}/>
-        </div>)
+        return (
+            <div className="search-result-preview" ref={(dom) => this.dom = dom}>
+                <elementsLibrary.DocElement {...this.props} content={section.content}/>
+            </div>
+        )
     }
 
     highlight() {

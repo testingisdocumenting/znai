@@ -4,15 +4,15 @@ package com.twosigma.documentation.search;
  * global search entry
  * @author mykola
  */
-public class SiteSearchEntry {
+public class GlobalSearchEntry {
     private String url;
     private String fullTitle;
     private SearchText text;
 
-    public SiteSearchEntry() {
+    public GlobalSearchEntry() {
     }
 
-    public SiteSearchEntry(String url, String fullTitle, SearchText text) {
+    public GlobalSearchEntry(String url, String fullTitle, SearchText text) {
         this.url = url;
         this.fullTitle = fullTitle;
         this.text = text;
