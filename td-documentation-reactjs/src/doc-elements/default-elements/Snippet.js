@@ -8,19 +8,24 @@ import SnippetContainer from '../code-snippets/SnippetContainer'
 import CodeSnippetWithInlineComments from '../code-snippets/CodeSnippetWithInlineComments'
 import SimpleCodeSnippet from '../code-snippets/SimpleCodeSnippet'
 
+import {parseCode} from '../code-snippets/codeParser'
+
 import './Snippet.css'
 
 const Snippet = (props) => {
+    const tokens = parseCode(props.lang, props.snippet)
+
     const snippetComponent = props.commentsType === 'inline' ?
         CodeSnippetWithInlineComments :
         SimpleCodeSnippet
 
-    return <SnippetContainer {...props} snippetComponent={snippetComponent}/>
+    return <SnippetContainer {...props} tokens={tokens} snippetComponent={snippetComponent}/>
 }
 
 const presentationSnippetHandler = {
     component: Snippet,
-    numberOfSlides: ({meta, commentsType, tokens, highlight}) => {
+    numberOfSlides: ({meta, commentsType, lang, snippet, highlight}) => {
+        const tokens = parseCode(lang, snippet)
         const highlightAsList = convertToList(highlight)
 
         if (commentsType === 'inline') {
@@ -32,7 +37,9 @@ const presentationSnippetHandler = {
         }
     },
 
-    slideInfoProvider: ({meta, commentsType, tokens, slideIdx}) => {
+    slideInfoProvider: ({meta, commentsType, snippet, lang, slideIdx}) => {
+        const tokens = parseCode(lang, snippet)
+
         if (isAllAtOnce(meta)) {
             return {}
         }

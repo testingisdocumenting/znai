@@ -1,7 +1,5 @@
 package com.twosigma.documentation.website;
 
-import com.twosigma.documentation.codesnippets.CodeTokenizer;
-import com.twosigma.documentation.codesnippets.JsBasedCodeSnippetsTokenizer;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.AuxiliaryFilesRegistry;
 import com.twosigma.documentation.core.ResourcesResolverChain;
@@ -66,7 +64,6 @@ public class WebSite {
     private final WebSiteComponentsRegistry componentsRegistry;
     private final AuxiliaryFilesRegistry auxiliaryFilesRegistry;
     private final ReactJsNashornEngine reactJsNashornEngine;
-    private final CodeTokenizer codeTokenizer;
     private final WebResource tocJavaScript;
     private final WebResource searchIndexJavaScript;
 
@@ -83,7 +80,6 @@ public class WebSite {
         this.componentsRegistry = new WebSiteComponentsRegistry();
         this.resourceResolver = new ResourcesResolverChain();
         this.reactJsNashornEngine = cfg.reactJsNashornEngine;
-        this.codeTokenizer = new JsBasedCodeSnippetsTokenizer(reactJsNashornEngine.getNashornEngine());
         this.tocJavaScript = WebResource.withPath("toc.js");
         this.searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
         this.auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
@@ -97,7 +93,6 @@ public class WebSite {
         }
 
         componentsRegistry.setResourcesResolver(resourceResolver);
-        componentsRegistry.setCodeTokenizer(codeTokenizer);
 
         localResourceResolver = new MultipleLocalLocationsResourceResolver(cfg.docRootPath);
         resourceResolver.addResolver(localResourceResolver);

@@ -32,7 +32,7 @@ public class MarkdownAndResultFencePlugin implements FencePlugin {
         MarkupParser parser = componentsRegistry.defaultParser();
         MarkupParserResult parserResult = parser.parse(markupPath, content);
 
-        Map<String, Object> markdown = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "markdown", content);
+        Map<String, Object> markdown = CodeSnippetsProps.create("markdown", content);
         markdown.put("type", DocElementType.SNIPPET);
 
         Map<String, Object> props = new LinkedHashMap<>();

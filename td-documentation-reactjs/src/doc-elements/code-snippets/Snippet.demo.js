@@ -1,7 +1,5 @@
 import React from 'react'
 
-import {parseCode} from './codeParser'
-
 import {Snippet} from '../default-elements/Snippet'
 import {Tabs} from '../tabs/Tabs'
 
@@ -12,24 +10,20 @@ import {TwoSidesLayoutRightPart} from '../page/two-sides/TwoSidesLayout'
 import './tokens.css'
 
 export function snippetsDemo(registry) {
-    const parsedJavaWide = parseCode("java", wideCode())
-    const parsedWithComments = parseCode("java", codeWithComments())
-
     registry
-        .add('title', <Snippet title="snippet title" tokens={parseCode("html", htmlCode())}/>)
-        .add('wide with title', <Snippet wide={true} title="snippet title" tokens={parsedJavaWide}/>)
-        .add('with bullet points', <Snippet wide={false} tokens={parsedWithComments} commentsType="inline"/>)
-        .add('with spoiler bullet points', <Snippet wide={false} tokens={parsedWithComments} spoiler={true} commentsType="inline"/>)
-        .add('wide with bullet points', <Snippet wide={true} tokens={parsedJavaWide} commentsType="inline"/>)
-        .add('wide with bullet points right side background', <TwoSidesLayoutRightPart><Snippet wide={true} tokens={parsedJavaWide} commentsType="inline"/></TwoSidesLayoutRightPart>)
-        .add('wide with spoiler bullet points', <Snippet wide={true} spoiler={true} tokens={parsedJavaWide} commentsType="inline"/>)
-        .add('horizontal scroll', <Snippet wide={false} tokens={parsedJavaWide}/>)
-        .add('highlight by line idx', <Snippet tokens={parseCode("markdown", markdownCode())} highlight={[0]}/>)
-        .add('highlight by text', <Snippet tokens={parseCode("markdown", markdownCode())} highlight={"include-file"}/>)
-        .add('highlight by text right side background', <TwoSidesLayoutRightPart><Snippet tokens={parsedJavaWide} highlight={"createMegaAbstractFactory"}/></TwoSidesLayoutRightPart>)
-        .add('read more', <Snippet tokens={parseCode("csv", longCode())}
-                                   readMore={true} r
-                                   eadMoreVisibleLines={4}/>)
+        .add('title', <Snippet title="snippet title" lang="html" snippet={htmlCode()}/>)
+        .add('wide with title', <Snippet wide={true} title="snippet title" lang="java" snippet={wideCode()}/>)
+        .add('with bullet points', <Snippet wide={false} lang="java" snippet={codeWithComments()} commentsType="inline"/>)
+        .add('with spoiler bullet points', <Snippet wide={false} lang="java" snippet={codeWithComments()}  spoiler={true} commentsType="inline"/>)
+        .add('wide with bullet points', <Snippet wide={true} lang="java" snippet={wideCode()} commentsType="inline"/>)
+        .add('wide with bullet points right side background', <TwoSidesLayoutRightPart><Snippet wide={true} lang="java" snippet={wideCode()} commentsType="inline"/></TwoSidesLayoutRightPart>)
+        .add('wide with spoiler bullet points', <Snippet wide={true} spoiler={true} lang="java" snippet={wideCode()} commentsType="inline"/>)
+        .add('horizontal scroll', <Snippet wide={false} lang="java" snippet={wideCode()}/>)
+        .add('highlight by line idx', <Snippet lang="markdown" snippet={markdownCode()} highlight={[0]}/>)
+        .add('highlight by text', <Snippet lang="markdown" snippet={markdownCode()} highlight={"include-file"}/>)
+        .add('highlight by text right side background', <TwoSidesLayoutRightPart><Snippet lang="java" snippet={wideCode()} highlight={"createMegaAbstractFactory"}/></TwoSidesLayoutRightPart>)
+        .add('read more', <Snippet lang="csv" snippet={longCode()}
+                                   readMore={true} readMoreVisibleLines={4}/>)
         .add('tabs with wide', <Tabs {...tabsContent({label: 'wide', wide: true})}
                                      elementsLibrary={elementsLibrary}/>)
         .add('tabs with narrow', <Tabs {...tabsContent({label: 'narrow', wide: false})}
@@ -81,7 +75,7 @@ function tabsContent({label, wide}) {
             name: label, content: [{
                 type: "Snippet",
                 wide: wide,
-                maxLineLength: 200,
-                tokens: parseCode("java", wideCode())
+                lang: "java",
+                snippet: wideCode()
             }]}]}
 }

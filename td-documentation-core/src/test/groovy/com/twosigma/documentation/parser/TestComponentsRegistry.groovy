@@ -1,6 +1,5 @@
 package com.twosigma.documentation.parser
 
-import com.twosigma.documentation.codesnippets.CodeTokenizer
 import com.twosigma.documentation.core.ComponentsRegistry
 import com.twosigma.documentation.core.ResourcesResolver
 import com.twosigma.documentation.parser.commonmark.MarkdownParser
@@ -13,7 +12,7 @@ import java.nio.file.Paths
  */
 class TestComponentsRegistry implements ComponentsRegistry {
     public static final TestComponentsRegistry INSTANCE = new TestComponentsRegistry()
-    
+
     private TestDocStructure docStructure = new TestDocStructure()
     MarkupParser defaultParser = new TestMarkupParser()
     MarkupParser markdownParser = new TestMarkdownParser()
@@ -29,11 +28,6 @@ class TestComponentsRegistry implements ComponentsRegistry {
     @Override
     MarkdownParser markdownParser() {
         return markdownParser
-    }
-
-    @Override
-    CodeTokenizer codeTokenizer() {
-        return new TestCodeTokenizer()
     }
 
     @Override

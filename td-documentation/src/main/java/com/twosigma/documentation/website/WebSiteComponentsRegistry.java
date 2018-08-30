@@ -1,10 +1,9 @@
 package com.twosigma.documentation.website;
 
-import com.twosigma.documentation.codesnippets.CodeTokenizer;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.core.ResourcesResolver;
-import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
+import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.structure.DocStructure;
 
 /**
@@ -13,7 +12,6 @@ import com.twosigma.documentation.structure.DocStructure;
 public class WebSiteComponentsRegistry implements ComponentsRegistry {
     private MarkupParser defaultParser;
     private MarkdownParser markdownParser;
-    private CodeTokenizer codeTokenizer;
     private ResourcesResolver resourcesResolver;
     private DocStructure docStructure;
 
@@ -25,11 +23,6 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
     @Override
     public MarkdownParser markdownParser() {
         return markdownParser;
-    }
-
-    @Override
-    public CodeTokenizer codeTokenizer() {
-        return codeTokenizer;
     }
 
     @Override
@@ -48,10 +41,6 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
 
     public void setMarkdownParser(MarkdownParser parser) {
         this.markdownParser = parser;
-    }
-
-    public void setCodeTokenizer(CodeTokenizer codeTokenizer) {
-        this.codeTokenizer = codeTokenizer;
     }
 
     public void setResourcesResolver(ResourcesResolver resourcesResolver) {

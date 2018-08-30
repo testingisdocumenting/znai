@@ -1243,7 +1243,6 @@ function twoSidesWithTabsPageContent() {
                     },
                     {
                         "lang": "",
-                        "maxLineLength": 70,
                         "tokens": [
                             {
                                 "type": "text",
@@ -1273,7 +1272,6 @@ function twoSidesWithTabsPageContent() {
                                 "content": [
                                     {
                                         "lang": "javascript",
-                                        "maxLineLength": 22,
                                         "tokens": [
                                             {
                                                 "type": "keyword",
@@ -1340,7 +1338,6 @@ function twoSidesWithTabsPageContent() {
                                 "content": [
                                     {
                                         "lang": "java",
-                                        "maxLineLength": 136,
                                         "tokens": [
                                             {
                                                 "type": "keyword",
@@ -1442,7 +1439,6 @@ function twoSidesWithTabsPageContent() {
                                 "content": [
                                     {
                                         "lang": "cpp",
-                                        "maxLineLength": 29,
                                         "tokens": [
                                             {
                                                 "type": "keyword",
@@ -1590,7 +1586,6 @@ function twoSidesWithTabsPageContent() {
                     },
                     {
                         "lang": "",
-                        "maxLineLength": 83,
                         "tokens": [
                             {
                                 "type": "text",
@@ -1620,7 +1615,6 @@ function twoSidesWithTabsPageContent() {
                                     },
                                     {
                                         "lang": "bash",
-                                        "maxLineLength": 14,
                                         "tokens": [
                                             "$ yarn ",
                                             {
@@ -1648,7 +1642,6 @@ function twoSidesWithTabsPageContent() {
                                     },
                                     {
                                         "lang": "bash",
-                                        "maxLineLength": 15,
                                         "tokens": [
                                             "$ mvn ",
                                             {
@@ -1676,7 +1669,6 @@ function twoSidesWithTabsPageContent() {
                                     },
                                     {
                                         "lang": "bash",
-                                        "maxLineLength": 9,
                                         "tokens": [
                                             "$ ",
                                             {
@@ -1727,7 +1719,6 @@ function twoSidesWithTabsPageContent() {
                     },
                     {
                         "lang": "",
-                        "maxLineLength": 65,
                         "tokens": [
                             {
                                 "type": "text",
@@ -1766,7 +1757,6 @@ function twoSidesWithTabsPageContent() {
                                     },
                                     {
                                         "lang": "",
-                                        "maxLineLength": 14,
                                         "tokens": [
                                             {
                                                 "type": "text",
@@ -1792,7 +1782,6 @@ function twoSidesWithTabsPageContent() {
                                     },
                                     {
                                         "lang": "",
-                                        "maxLineLength": 15,
                                         "tokens": [
                                             {
                                                 "type": "text",
@@ -1818,7 +1807,6 @@ function twoSidesWithTabsPageContent() {
                                     },
                                     {
                                         "lang": "",
-                                        "maxLineLength": 8,
                                         "tokens": [
                                             {
                                                 "type": "text",
@@ -1867,7 +1855,6 @@ function twoSidesWithTabsPageContent() {
                     },
                     {
                         "lang": "",
-                        "maxLineLength": 83,
                         "tokens": [
                             {
                                 "type": "text",
@@ -1888,7 +1875,6 @@ function twoSidesWithTabsPageContent() {
                                 "content": [
                                     {
                                         "lang": "bash",
-                                        "maxLineLength": 14,
                                         "tokens": [
                                             "$ yarn ",
                                             {
@@ -1925,7 +1911,6 @@ function twoSidesWithTabsPageContent() {
                                     },
                                     {
                                         "lang": "bash",
-                                        "maxLineLength": 15,
                                         "tokens": [
                                             "$ mvn ",
                                             {
@@ -1970,7 +1955,6 @@ function twoSidesWithTabsPageContent() {
                                     },
                                     {
                                         "lang": "bash",
-                                        "maxLineLength": 9,
                                         "tokens": [
                                             "$ ",
                                             {

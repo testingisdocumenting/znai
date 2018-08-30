@@ -42,7 +42,7 @@ class GroovyIncludePlugin implements IncludePlugin {
 
         Boolean bodyOnly = pluginParams.getOpts().has("bodyOnly") ? pluginParams.getOpts().get("bodyOnly") : false
 
-        Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "groovy",
+        Map<String, Object> props = CodeSnippetsProps.create("groovy",
                 extractContent(groovyCode, entry, bodyOnly))
         props.putAll(pluginParams.getOpts().toMap())
 

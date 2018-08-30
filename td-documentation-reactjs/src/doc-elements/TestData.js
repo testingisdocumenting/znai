@@ -69,188 +69,171 @@ const TestData = {
             "type": "Page",
             "content": [
                 {
-                    "title": "Story First",
-                    "id": "story-first",
+                    "title": "Files Reference Lookup",
+                    "id": "files-reference-lookup",
                     "type": "Section",
                     "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Displaying values using panda ",
+                                    "text": "When you refer a file using plugins like ",
                                     "type": "SimpleText"
                                 },
                                 {
-                                    "code": "display",
+                                    "code": ":include-file: my-file.cpp",
                                     "type": "InlinedCode"
-                                }
-                            ]
-                        },
-                        {
-                            "cellType": "empty-output",
-                            "meta": {
-                                "rightSide": true
-                            },
-                            "type": "JupyterCell"
-                        },
-                        {
-                            "cellType": "empty-output",
-                            "meta": {
-                                "rightSide": true
-                            },
-                            "type": "JupyterCell"
-                        },
-                        {
-                            "cellType": "code",
-                            "sourceTokens": [
-                                {
-                                    "type": "keyword",
-                                    "content": "from"
                                 },
-                                " pandas ",
                                 {
-                                    "type": "keyword",
-                                    "content": "import"
+                                    "text": " mdoc tries to find the file in",
+                                    "type": "SimpleText"
                                 },
-                                " read_csv\n",
                                 {
-                                    "type": "keyword",
-                                    "content": "from"
+                                    "type": "SoftLineBreak"
                                 },
-                                " IPython",
                                 {
-                                    "type": "punctuation",
-                                    "content": "."
-                                },
-                                "display ",
-                                {
-                                    "type": "keyword",
-                                    "content": "import"
-                                },
-                                " display"
-                            ],
-                            "type": "JupyterCell"
-                        },
-                        {
-                            "type": "Paragraph",
-                            "content": [
-                                {
-                                    "text": "Values can be displayed using standard console output",
+                                    "text": "following locations:",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "cellType": "empty-output",
-                            "meta": {
-                                "rightSide": true
-                            },
-                            "type": "JupyterCell"
-                        },
-                        {
-                            "cellType": "output",
-                            "text": "   a   b   c\n0  1   2   3\n1  4   5   6\n",
-                            "meta": {
-                                "rightSide": true
-                            },
-                            "type": "JupyterCell"
-                        },
-                        {
-                            "cellType": "code",
-                            "sourceTokens": [
-                                "tran ",
+                            "bulletMarker": "*",
+                            "tight": true,
+                            "type": "BulletList",
+                            "content": [
                                 {
-                                    "type": "operator",
-                                    "content": "\u003d"
-                                },
-                                " read_csv",
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "directory with the markup file that refers ",
+                                                    "type": "SimpleText"
+                                                },
+                                                {
+                                                    "code": "my-file.cpp",
+                                                    "type": "InlinedCode"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
-                                    "type": "string",
-                                    "content": "\u0027transport.csv\u0027"
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "documentation root directory",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
-                                    "type": "punctuation",
-                                    "content": ")"
-                                },
-                                "\n",
-                                {
-                                    "type": "keyword",
-                                    "content": "print"
-                                },
-                                {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "tran",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
+                                    "type": "ListItem",
+                                    "content": [
+                                        {
+                                            "type": "Paragraph",
+                                            "content": [
+                                                {
+                                                    "text": "locations enumerated inside ",
+                                                    "type": "SimpleText"
+                                                },
+                                                {
+                                                    "code": "\u003cdoc-root\u003e/lookup-paths",
+                                                    "type": "InlinedCode"
+                                                },
+                                                {
+                                                    "text": " file",
+                                                    "type": "SimpleText"
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
-                            ],
-                            "type": "JupyterCell"
+                            ]
                         },
+                        {
+                            "lang": "txt",
+                            "snippet": "../examples\n../module/src/main/java\n",
+                            "lineNumber": "",
+                            "title": "lookup-paths",
+                            "type": "Snippet"
+                        }
+                    ]
+                },
+                {
+                    "title": "HTTP lookup location",
+                    "id": "http-lookup-location",
+                    "type": "Section",
+                    "content": [
                         {
                             "type": "Paragraph",
                             "content": [
                                 {
-                                    "text": "Or using library to render html",
+                                    "text": "If files you want to include are not part of your project, you can add http base url to ",
+                                    "type": "SimpleText"
+                                },
+                                {
+                                    "code": "lookup-paths",
+                                    "type": "InlinedCode"
+                                },
+                                {
+                                    "text": ".",
                                     "type": "SimpleText"
                                 }
                             ]
                         },
                         {
-                            "cellType": "empty-output",
-                            "meta": {
-                                "rightSide": true
-                            },
-                            "type": "JupyterCell"
+                            "lang": "txt",
+                            "snippet": "../examples\n../module/src/main/java\nhttps://raw.githubusercontent.com/twosigma/webtau/master\n",
+                            "lineNumber": "",
+                            "title": "lookup-paths",
+                            "type": "Snippet"
                         },
                         {
-                            "cellType": "output",
-                            "html": "\u003cdiv\u003e\n\u003cstyle scoped\u003e\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n\u003c/style\u003e\n\u003ctable border\u003d\"1\" class\u003d\"dataframe\"\u003e\n  \u003cthead\u003e\n    \u003ctr style\u003d\"text-align: right;\"\u003e\n      \u003cth\u003e\u003c/th\u003e\n      \u003cth\u003ea\u003c/th\u003e\n      \u003cth\u003eb\u003c/th\u003e\n      \u003cth\u003ec\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth\u003e0\u003c/th\u003e\n      \u003ctd\u003e1\u003c/td\u003e\n      \u003ctd\u003e2\u003c/td\u003e\n      \u003ctd\u003e3\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth\u003e1\u003c/th\u003e\n      \u003ctd\u003e4\u003c/td\u003e\n      \u003ctd\u003e5\u003c/td\u003e\n      \u003ctd\u003e6\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\u003c/div\u003e",
-                            "meta": {
-                                "rightSide": true
-                            },
-                            "type": "JupyterCell"
-                        },
-                        {
-                            "cellType": "code",
-                            "sourceTokens": [
-                                "display",
+                            "type": "Paragraph",
+                            "content": [
                                 {
-                                    "type": "punctuation",
-                                    "content": "("
-                                },
-                                "tran",
-                                {
-                                    "type": "punctuation",
-                                    "content": ")"
+                                    "text": "If file is not found using local locations it will be fetched from the provided urls",
+                                    "type": "SimpleText"
                                 }
-                            ],
-                            "type": "JupyterCell"
+                            ]
+                        },
+                        {
+                            "lang": "",
+                            "snippet": ":include-file: .travis.yml\n",
+                            "lineNumber": "",
+                            "type": "Snippet"
+                        },
+                        {
+                            "lang": "yaml",
+                            "snippet": "language: java\ncache:\n  directories:\n  - $HOME/.m2\n  - $HOME/.npm\n  - node_modules",
+                            "type": "Snippet"
                         }
                     ]
                 }
             ],
-            "lastModifiedTime": 1526144879000,
+            "lastModifiedTime": 1534721181000,
             "tocItem": {
-                "sectionTitle": "Layout",
-                "pageTitle": "Jupyter Notebook Two Sides",
-                "pageMeta": {
-                    "type": [
-                        "two-sides"
-                    ]
-                },
-                "fileName": "jupyter-notebook-two-sides",
-                "dirName": "layout",
+                "sectionTitle": "Flow",
+                "pageTitle": "Lookup Paths",
+                "pageMeta": {},
+                "fileName": "lookup-paths",
+                "dirName": "flow",
                 "pageSectionIdTitles": [
                     {
-                        "title": "Story First",
-                        "id": "story-first"
+                        "title": "Files Reference Lookup",
+                        "id": "files-reference-lookup"
+                    },
+                    {
+                        "title": "HTTP lookup location",
+                        "id": "http-lookup-location"
                     }
                 ]
             }

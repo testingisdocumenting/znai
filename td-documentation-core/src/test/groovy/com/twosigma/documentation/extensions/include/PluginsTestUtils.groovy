@@ -16,7 +16,7 @@ import java.util.stream.Stream
 class PluginsTestUtils {
     static String processAndGetSimplifiedCodeBlock(String pluginDef) {
         def result = process(pluginDef)
-        return result[0].getProps().tokens[0].content
+        return result[0].getProps().snippet
     }
 
     static List<DocElement> process(String pluginDef) {

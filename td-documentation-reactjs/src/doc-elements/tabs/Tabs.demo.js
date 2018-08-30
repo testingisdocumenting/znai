@@ -8,7 +8,6 @@ const tabsContent = [
         "content": [
             {
                 "lang": "cpp",
-                "maxLineLength": 13,
                 "tokens": [
                     "code snippet \n"
                 ],

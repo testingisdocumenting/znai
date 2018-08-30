@@ -244,8 +244,8 @@ world""")
     @Test
     void "include plugin inside nested code block"() {
         parse("    :include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
-        content.should == [[lang: "", maxLineLength:59,
-                            tokens:[[type: "text", content: ":include-dummy: free-form text {param1: 'v1', param2: 'v2'}\n"]],
+        content.should == [[lang: "",
+                            snippet: ":include-dummy: free-form text {param1: 'v1', param2: 'v2'}\n",
                             lineNumber: "", type: "Snippet"]]
     }
 

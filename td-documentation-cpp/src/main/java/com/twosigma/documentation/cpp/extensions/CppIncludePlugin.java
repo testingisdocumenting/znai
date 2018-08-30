@@ -47,7 +47,6 @@ public class CppIncludePlugin implements IncludePlugin {
                                 Path markupPath,
                                 PluginParams pluginParams) {
         markupParser = componentsRegistry.defaultParser();
-        codeTokenizer = componentsRegistry.codeTokenizer();
         fileName = pluginParams.getFreeParam();
         cppPath = componentsRegistry.resourceResolver().fullPath(this.fileName);
 
@@ -83,7 +82,7 @@ public class CppIncludePlugin implements IncludePlugin {
 
     private Stream<DocElement> createSnippet(String snippet) {
         DocElement docElement = new DocElement(DocElementType.SNIPPET);
-        Map<String, Object> props = CodeSnippetsProps.create(codeTokenizer, "cpp", snippet);
+        Map<String, Object> props = CodeSnippetsProps.create("cpp", snippet);
         props.forEach(docElement::addProp);
 
         return Stream.of(docElement);

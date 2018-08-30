@@ -1,6 +1,6 @@
 package com.twosigma.documentation.jupyter;
 
-import com.twosigma.documentation.codesnippets.CodeTokenizer;
+import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.core.ResourcesResolver;
@@ -22,7 +22,6 @@ import static com.twosigma.documentation.jupyter.JupyterCell.MARKDOWN_TYPE;
 import static com.twosigma.documentation.jupyter.JupyterOutput.TEXT_FORMAT;
 
 public class JupyterIncludePlugin implements IncludePlugin {
-    private CodeTokenizer codeTokenizer;
     private MarkdownParser markdownParser;
     private Path path;
     private String lang;
@@ -43,7 +42,6 @@ public class JupyterIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         markdownParser = componentsRegistry.markdownParser();
         markdownParserHandler = parserHandler;
-        codeTokenizer = componentsRegistry.codeTokenizer();
 
         isStoryFirst = pluginParams.getOpts().get("storyFirst", false);
 
@@ -145,9 +143,7 @@ public class JupyterIncludePlugin implements IncludePlugin {
     private Map<String, Object> convertInputData(JupyterCell cell) {
         switch (cell.getType()) {
             case CODE_TYPE:
-                return Collections.singletonMap("sourceTokens",
-                        codeTokenizer.tokenize(lang, cell.getInput()));
-
+                return CodeSnippetsProps.create(lang, cell.getInput());
             default:
                 return Collections.singletonMap(TEXT_FORMAT, cell.getInput());
         }

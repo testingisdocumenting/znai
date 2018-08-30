@@ -1,6 +1,5 @@
 export default {
     'lang': 'java',
-    'maxLineLength': 56,
     'tokens': [
         {
             'type': 'keyword',
