@@ -502,31 +502,6 @@ toc = [
       },
       {
         "sectionTitle": "Snippets",
-        "pageTitle": "Jupyter Notebook",
-        "pageMeta": {},
-        "fileName": "jupyter-notebook",
-        "dirName": "snippets",
-        "pageSectionIdTitles": [
-          {
-            "title": "Code and Output",
-            "id": "code-and-output"
-          },
-          {
-            "title": "Seamless Markdown Integration",
-            "id": "seamless-markdown-integration"
-          },
-          {
-            "title": "Pandas",
-            "id": "pandas"
-          },
-          {
-            "title": "Two Sides",
-            "id": "two-sides"
-          }
-        ]
-      },
-      {
-        "sectionTitle": "Snippets",
         "pageTitle": "CLI",
         "pageMeta": {},
         "fileName": "CLI",
@@ -769,31 +744,6 @@ toc = [
           {
             "title": "Markdown Per Tab",
             "id": "markdown-per-tab"
-          }
-        ]
-      },
-      {
-        "sectionTitle": "Layout",
-        "pageTitle": "Jupyter Notebook Two Sides",
-        "pageMeta": {
-          "type": [
-            "two-sides"
-          ]
-        },
-        "fileName": "jupyter-notebook-two-sides",
-        "dirName": "layout",
-        "pageSectionIdTitles": [
-          {
-            "title": "Code First",
-            "id": "code-first"
-          },
-          {
-            "title": "Story First",
-            "id": "story-first"
-          },
-          {
-            "title": "Pandas",
-            "id": "pandas"
           }
         ]
       }

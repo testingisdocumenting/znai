@@ -44,9 +44,8 @@ class SphinxDocTreeParserTest {
         parse("""<literal_block highlight_args="{}" language="java" 
 linenos="False" xml:space="preserve">System.out.println("hello world");</literal_block>""")
 
-        content.should == [[lang: 'java', maxLineLength: 34,
-                            tokens: [[type: 'text',
-                                      content: 'System.out.println("hello world");']],
+        content.should == [[lang: 'java',
+                            snippet: 'System.out.println("hello world");',
                             lineNumber: '', type: 'Snippet']]
     }
 

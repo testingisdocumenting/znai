@@ -1,8 +1,7 @@
 package com.twosigma.documentation.core;
 
-import com.twosigma.documentation.codesnippets.CodeTokenizer;
-import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.parser.MarkupParser;
+import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.structure.DocStructure;
 
 /**
@@ -25,7 +24,6 @@ public interface ComponentsRegistry {
      */
     MarkdownParser markdownParser();
 
-    CodeTokenizer codeTokenizer();
     ResourcesResolver resourceResolver();
     DocStructure docStructure();
 }

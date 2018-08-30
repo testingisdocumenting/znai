@@ -37,7 +37,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
         }
 
         String snippet = extractContent(javaCode, bodyOnly, signatureOnly);
-        Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), "java", snippet);
+        Map<String, Object> props = CodeSnippetsProps.create("java", snippet);
         props.putAll(pluginParams.getOpts().toMap());
 
         DocElement docElement = new DocElement(DocElementType.SNIPPET);

@@ -14,13 +14,13 @@ class MarkdownAndResultFencePluginTest {
 
     @Test
     void "should create markdown code snippets and result as one doc element"() {
-        def result = plugin.process(new TestComponentsRegistry(), Paths.get("test.md"),
+        def result = plugin.process(TestComponentsRegistry.INSTANCE, Paths.get("test.md"),
                 new PluginParams(plugin.id(), ""),
                 "hello *world*")
 
         def asMap = result.docElements.collect { it.toMap() }
-        asMap.should == [[markdown: [lang: 'markdown', maxLineLength: 13, type: 'Snippet', tokens:
-                [[type: 'text', content: 'hello *world*']]], result:[[markup: 'hello *world*', type: 'TestMarkup']],
+        asMap.should == [[markdown: [lang: 'markdown', type: 'Snippet', snippet: 'hello *world*'],
+                          result:[[markup: 'hello *world*', type: 'TestMarkup']],
                           type: 'MarkdownAndResult']]
     }
 }

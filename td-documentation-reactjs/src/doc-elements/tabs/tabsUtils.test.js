@@ -27,7 +27,6 @@ function pageContent() {
                 },
                 {
                     "lang": "",
-                    "maxLineLength": 70,
                     "tokens": [
                         {
                             "type": "text",
@@ -60,7 +59,6 @@ function pageContent() {
                             "content": [
                                 {
                                     "lang": "java",
-                                    "maxLineLength": 136,
                                     "tokens": [],
                                     "wide": true,
                                     "type": "Snippet"
@@ -72,7 +70,6 @@ function pageContent() {
                             "content": [
                                 {
                                     "lang": "cpp",
-                                    "maxLineLength": 29,
                                     "tokens": [],
                                     "type": "Snippet"
                                 }

@@ -49,7 +49,7 @@ public class FileIncludePlugin implements IncludePlugin {
         String providedLang = pluginParams.getOpts().getString("lang");
         String langToUse = (providedLang == null) ? langFromFileName(fileName) : providedLang;
 
-        Map<String, Object> props = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), langToUse, text);
+        Map<String, Object> props = CodeSnippetsProps.create(langToUse, text);
         props.putAll(pluginParams.getOpts().toMap());
 
         return PluginResult.docElement(DocElementType.SNIPPET, props);

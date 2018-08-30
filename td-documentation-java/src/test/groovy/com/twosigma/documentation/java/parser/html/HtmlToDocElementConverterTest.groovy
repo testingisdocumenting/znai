@@ -43,8 +43,8 @@ second paragraph
     void "should replace pre with Snippet element"() {
         process('<pre>line of code</pre>')
 
-        elements.should == [[type: 'Snippet', lang: '', lineNumber: '', maxLineLength: 12,
-                             tokens:[[type: 'text', content: 'line of code']]]] // test tokenizer treats whole block as a single text element
+        elements.should == [[type: 'Snippet', lang: '', lineNumber: '',
+                             snippet: 'line of code']]
     }
 
     @Test

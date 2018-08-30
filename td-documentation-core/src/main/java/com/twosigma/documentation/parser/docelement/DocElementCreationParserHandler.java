@@ -249,7 +249,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet) {
-        Map<String, Object> snippetProps = CodeSnippetsProps.create(componentsRegistry.codeTokenizer(), lang, snippet);
+        Map<String, Object> snippetProps = CodeSnippetsProps.create(lang, snippet);
         snippetProps.put("lineNumber", lineNumber);
         snippetProps.putAll(pluginParams.getOpts().toMap());
 

@@ -1,6 +1,5 @@
 export default [{
     'lang': 'javascript',
-    'maxLineLength': 52,
     'tokens': [
         {
             'type': 'keyword',

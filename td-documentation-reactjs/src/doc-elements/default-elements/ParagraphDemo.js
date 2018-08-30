@@ -37,7 +37,6 @@ function createMessage(suffix) {
 
 const code = {
     "lang": "javascript",
-    "maxLineLength": 52,
     "tokens": [
         {
             "type": "keyword",
