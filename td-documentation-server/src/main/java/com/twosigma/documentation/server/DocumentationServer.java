@@ -5,7 +5,7 @@ import com.twosigma.console.ansi.AnsiConsoleOutput;
 import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.html.HtmlPage;
 import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
-import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
+import com.twosigma.documentation.html.reactjs.ReactJsBundle;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationHandlers;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationTestHandler;
 import com.twosigma.documentation.server.docpreparation.DocumentationPreparationWebSocketHandler;
@@ -43,11 +43,11 @@ public class DocumentationServer {
     private final JsonWebSocketHandlerComposition socketHandlers;
     private final DocumentationPreparationWebSocketHandler documentationPreparationWebSocketHandler;
     private final Vertx vertx;
-    private ReactJsNashornEngine nashornEngine;
-    private Path deployRoot;
+    private final ReactJsBundle reactJsBundle;
+    private final Path deployRoot;
 
-    public DocumentationServer(ReactJsNashornEngine nashornEngine, Path deployRoot) {
-        this.nashornEngine = nashornEngine;
+    public DocumentationServer(ReactJsBundle reactJsBundle, Path deployRoot) {
+        this.reactJsBundle = reactJsBundle;
         this.deployRoot = deployRoot;
 
         System.setProperty("vertx.cwd", deployRoot.toString());
@@ -108,7 +108,7 @@ public class DocumentationServer {
         UrlContentHandlers.urlContentHandlers()
                 .forEach(urlContentHandler ->
                         router.get(urlContentHandler.url())
-                                .handler(ctx -> ctx.response().end(urlContentHandler.buildContent(nashornEngine))));
+                                .handler(ctx -> ctx.response().end(urlContentHandler.buildContent(reactJsBundle))));
     }
 
     private void registerPagesHandler(Router router, StaticHandler pagesStaticHandler) {
@@ -141,7 +141,7 @@ public class DocumentationServer {
     }
 
     private void serveDocumentationPreparationPage(RoutingContext ctx, String docId) {
-        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(nashornEngine);
+        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(reactJsBundle);
         Map<String, Object> props = new LinkedHashMap<>();
 
         props.put("docId", docId);
@@ -149,8 +149,8 @@ public class DocumentationServer {
         props.put("progressPercent", 0);
         props.put("keyValues", Collections.emptyList());
 
-        HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly("Preparing " + docId,
-                "DocumentationPreparationScreen", props, FavIcons.DEFAULT_ICON_PATH);
+        HtmlPage htmlPage = htmlReactJsPage.create("Preparing " + docId,
+                "DocumentationPreparationScreen", props, () -> "", FavIcons.DEFAULT_ICON_PATH);
 
         ctx.response().end(htmlPage.render(docId));
     }
@@ -210,7 +210,7 @@ public class DocumentationServer {
     public static void main(String[] args) {
         ConsoleOutputs.add(new AnsiConsoleOutput());
 
-        ReactJsNashornEngine nashornEngine = new ReactJsNashornEngine();
+        ReactJsBundle reactJsBundle = new ReactJsBundle();
 
         DocumentationPreparationHandlers.add(new DocumentationPreparationTestHandler());
 
@@ -219,7 +219,7 @@ public class DocumentationServer {
         ));
         UrlContentHandlers.add(new LandingUrlContentHandler("Company", "Guides"));
 
-        HttpServer server = new DocumentationServer(nashornEngine, Paths.get("")).create();
+        HttpServer server = new DocumentationServer(reactJsBundle, Paths.get("")).create();
         server.listen(3333);
         System.out.println("test server started");
     }

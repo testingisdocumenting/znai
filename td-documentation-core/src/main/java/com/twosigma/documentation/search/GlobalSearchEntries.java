@@ -8,23 +8,24 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author mykola
  */
 @JacksonXmlRootElement(localName = "mdoc")
 public class GlobalSearchEntries {
-    private List<GlobalSearchEntry> entries;
+    private Set<GlobalSearchEntry> entries;
 
     public GlobalSearchEntries() {
-        entries = new ArrayList<>();
+        entries = new LinkedHashSet<>();
     }
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "entry")
-    public List<GlobalSearchEntry> getEntries() {
+    public Set<GlobalSearchEntry> getEntries() {
         return entries;
     }
 

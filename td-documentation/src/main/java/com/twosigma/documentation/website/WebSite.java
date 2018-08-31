@@ -5,11 +5,8 @@ import com.twosigma.documentation.core.AuxiliaryFilesRegistry;
 import com.twosigma.documentation.core.ResourcesResolverChain;
 import com.twosigma.documentation.extensions.HttpBasedResourceResolver;
 import com.twosigma.documentation.extensions.MultipleLocalLocationsResourceResolver;
-import com.twosigma.documentation.html.Deployer;
-import com.twosigma.documentation.html.DocPageReactProps;
-import com.twosigma.documentation.html.HtmlPageAndPageProps;
-import com.twosigma.documentation.html.PageToHtmlPageConverter;
-import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
+import com.twosigma.documentation.html.*;
+import com.twosigma.documentation.html.reactjs.ReactJsBundle;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.commonmark.MarkdownParser;
@@ -63,7 +60,7 @@ public class WebSite {
 
     private final WebSiteComponentsRegistry componentsRegistry;
     private final AuxiliaryFilesRegistry auxiliaryFilesRegistry;
-    private final ReactJsNashornEngine reactJsNashornEngine;
+    private final ReactJsBundle reactJsBundle;
     private final WebResource tocJavaScript;
     private final WebResource searchIndexJavaScript;
 
@@ -79,7 +76,7 @@ public class WebSite {
         this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
         this.componentsRegistry = new WebSiteComponentsRegistry();
         this.resourceResolver = new ResourcesResolverChain();
-        this.reactJsNashornEngine = cfg.reactJsNashornEngine;
+        this.reactJsBundle = cfg.reactJsBundle;
         this.tocJavaScript = WebResource.withPath("toc.js");
         this.searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
         this.auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
@@ -101,8 +98,6 @@ public class WebSite {
 
         WebSiteResourcesProviders.add(new WebSiteLogoExtension(cfg.docRootPath));
         WebSiteResourcesProviders.add(initFileBasedWebSiteExtension(cfg));
-
-        loadCustomJsLibraries();
 
         reset();
     }
@@ -135,8 +130,8 @@ public class WebSite {
         return docMeta;
     }
 
-    public ReactJsNashornEngine getReactJsNashornEngine() {
-        return reactJsNashornEngine;
+    public ReactJsBundle getReactJsBundle() {
+        return reactJsBundle;
     }
 
     public void generate() {
@@ -146,7 +141,6 @@ public class WebSite {
         parseFooter();
         updateTocWithPageSections();
         validateCollectedLinks();
-        setGlobalToc();
         generatePages();
         generateSearchIndex();
         deployToc();
@@ -169,7 +163,7 @@ public class WebSite {
     public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
         docStructure.removeGlobalAnchorsForPath(markupPath(tocItem));
 
-        parseMarkupAndUpdateTocItem(tocItem);
+        parseMarkupAndUpdateTocItemAndSearch(tocItem);
         Page page = pageByTocItem.get(tocItem);
 
         tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
@@ -191,7 +185,7 @@ public class WebSite {
 
     public TableOfContents updateToc() {
         createTopLevelToc();
-        forEachTocItemWithoutPage(this::parseMarkupAndUpdateTocItem);
+        forEachTocItemWithoutPage(this::parseMarkupAndUpdateTocItemAndSearch);
         updateTocWithPageSections();
         deployToc();
         return toc;
@@ -221,13 +215,8 @@ public class WebSite {
         return new WebSiteUserExtensions(resourceResolver, JsonUtils.deserializeAsMap(json));
     }
 
-    private void loadCustomJsLibraries() {
-        reportPhase("loading custom js libraries");
-        reactJsNashornEngine.loadCustomLibraries(WebSiteResourcesProviders.jsResources());
-    }
-
     private void reset() {
-        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, reactJsNashornEngine);
+        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, reactJsBundle);
         markupParser = markupParsingConfiguration.createMarkupParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
         pagePropsByTocItem = new HashMap<>();
@@ -243,7 +232,7 @@ public class WebSite {
     private void deployResources() {
         reportPhase("deploying resources");
 
-        reactJsNashornEngine.getReactJsBundle().deploy(deployer);
+        reactJsBundle.deploy(deployer);
         WebSiteResourcesProviders.cssResources().forEach(deployer::deploy);
         WebSiteResourcesProviders.jsResources().forEach(deployer::deploy);
         WebSiteResourcesProviders.jsClientOnlyResources().forEach(deployer::deploy);
@@ -274,7 +263,7 @@ public class WebSite {
 
     private void parseMarkups() {
         reportPhase("parsing markup files");
-        toc.getTocItems().forEach(this::parseMarkupAndUpdateTocItem);
+        toc.getTocItems().forEach(this::parseMarkupAndUpdateTocItemAndSearch);
     }
 
     private void parseFooter() {
@@ -292,7 +281,7 @@ public class WebSite {
         footer = new Footer(parserResult.getDocElement());
     }
 
-    private void parseMarkupAndUpdateTocItem(TocItem tocItem) {
+    private void parseMarkupAndUpdateTocItemAndSearch(TocItem tocItem) {
         try {
             Path markupPath = markupPath(tocItem);
 
@@ -359,16 +348,6 @@ public class WebSite {
         return markupParsingConfiguration.fullPath(cfg.docRootPath, tocItem);
     }
 
-    // we share TOC between pages as opposite to setting TOC to each page
-    // global TOC is required to be set for server side page rendering
-    private void setGlobalToc() {
-        reportPhase("setting global TOC");
-
-        String tocJson = JsonUtils.serializePrettyPrint(toc.toListOfMaps());
-        reactJsNashornEngine.getNashornEngine().bind("tocJson", tocJson);
-        reactJsNashornEngine.getNashornEngine().eval("setTocJson(tocJson)");
-    }
-
     private void generatePages() {
         reportPhase("generating the rest of HTML pages");
         forEachPage(this::generatePage);
@@ -395,7 +374,8 @@ public class WebSite {
 
     private HtmlPageAndPageProps generatePage(TocItem tocItem, Page page) {
         try {
-            HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(tocItem, page, footer);
+            HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(
+                    tocItem, page, createServerSideRenderer(tocItem), footer);
 
             pagePropsByTocItem.put(tocItem, htmlAndProps.getProps());
             extraJavaScriptsInFront.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
@@ -414,6 +394,17 @@ public class WebSite {
                     tocItem.getFileNameWithoutExtension() + ": " + e.getMessage(),
                     e);
         }
+    }
+
+    private RenderSupplier createServerSideRenderer(TocItem tocItem) {
+        PageSearchEntries pageSearchEntries = localSearchEntries.searchEntriesByTocItem(tocItem);
+
+        if (tocItem.isIndex()) {
+            return () -> ServerSideSimplifiedRenderer.renderPageTextContent(pageSearchEntries) +
+                    ServerSideSimplifiedRenderer.renderToc(toc);
+        }
+
+        return () -> ServerSideSimplifiedRenderer.renderPageTextContent(pageSearchEntries);
     }
 
     private void deployAuxiliaryFiles() {
@@ -496,7 +487,7 @@ public class WebSite {
         private boolean isPreviewEnabled;
         private String markupType = MARKDOWN;
         private DocMeta docMeta = new DocMeta(Collections.emptyMap());
-        private ReactJsNashornEngine reactJsNashornEngine;
+        private ReactJsBundle reactJsBundle;
 
         private Configuration() {
             webResources = new ArrayList<>();
@@ -519,8 +510,8 @@ public class WebSite {
             return this;
         }
 
-        public Configuration withReactJsNashornEngine(ReactJsNashornEngine engine) {
-            reactJsNashornEngine = engine;
+        public Configuration withReactJsBundle(ReactJsBundle reactJsBundle) {
+            this.reactJsBundle = reactJsBundle;
             return this;
         }
 

@@ -1,7 +1,7 @@
 package com.twosigma.documentation.html;
 
 import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
-import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
+import com.twosigma.documentation.html.reactjs.ReactJsBundle;
 import com.twosigma.documentation.structure.DocMeta;
 import com.twosigma.documentation.structure.Footer;
 import com.twosigma.documentation.structure.Page;
@@ -14,15 +14,18 @@ import com.twosigma.documentation.web.extensions.WebSiteResourcesProviders;
  */
 public class PageToHtmlPageConverter {
     private final DocMeta docMeta;
-    private final ReactJsNashornEngine reactJsNashornEngine;
+    private final ReactJsBundle reactJsBundle;
 
     public PageToHtmlPageConverter(DocMeta docMeta,
-                                   ReactJsNashornEngine reactJsNashornEngine) {
+                                   ReactJsBundle reactJsBundle) {
         this.docMeta = docMeta;
-        this.reactJsNashornEngine = reactJsNashornEngine;
+        this.reactJsBundle = reactJsBundle;
     }
 
-    public HtmlPageAndPageProps convert(TocItem tocItem, Page page, Footer footer) {
+    public HtmlPageAndPageProps convert(TocItem tocItem,
+                                        Page page,
+                                        RenderSupplier mainBodySupplier,
+                                        Footer footer) {
         String title = tocItem.isIndex() ?
                 docMeta.getTitle() :
                 docMeta.getTitle() + ": " + tocItem.getPageTitle();
@@ -31,8 +34,8 @@ public class PageToHtmlPageConverter {
         FooterProps footerProps = new FooterProps(footer);
         DocumentationReactProps docProps = new DocumentationReactProps(docMeta, pageProps, footerProps);
 
-        HtmlReactJsPage reactJsPage = new HtmlReactJsPage(reactJsNashornEngine);
-        HtmlPage htmlPage = reactJsPage.createWithServerSideRendering(title, "Documentation", docProps.toMap(), "");
+        HtmlReactJsPage reactJsPage = new HtmlReactJsPage(reactJsBundle);
+        HtmlPage htmlPage = reactJsPage.create(title, "Documentation", docProps.toMap(), mainBodySupplier, "");
 
         WebSiteResourcesProviders.jsResources().forEach(htmlPage::addJavaScript);
         WebSiteResourcesProviders.jsClientOnlyResources().forEach(htmlPage::addJavaScript);

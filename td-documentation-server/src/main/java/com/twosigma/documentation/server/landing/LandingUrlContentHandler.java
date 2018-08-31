@@ -2,7 +2,7 @@ package com.twosigma.documentation.server.landing;
 
 import com.twosigma.documentation.html.HtmlPage;
 import com.twosigma.documentation.html.reactjs.HtmlReactJsPage;
-import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
+import com.twosigma.documentation.html.reactjs.ReactJsBundle;
 import com.twosigma.documentation.server.FavIcons;
 import com.twosigma.documentation.server.urlhandlers.UrlContentHandler;
 import com.twosigma.documentation.web.WebResource;
@@ -28,20 +28,20 @@ public class LandingUrlContentHandler implements UrlContentHandler {
     }
 
     @Override
-    public String buildContent(ReactJsNashornEngine nashornEngine) {
+    public String buildContent(ReactJsBundle reactJsBundle) {
         List<Map<String, Object>> documentations = LandingDocEntriesProviders.provide()
                 .map(LandingDocEntry::toMap)
                 .collect(Collectors.toList());
 
-        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(nashornEngine);
+        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(reactJsBundle);
 
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("documentations", documentations);
         props.put("type", landingType);
         props.put("title", landingTitle);
 
-        HtmlPage htmlPage = htmlReactJsPage.createWithClientSideOnly(landingTitle + " " + landingType,
-                "Landing", props, FavIcons.DEFAULT_ICON_PATH);
+        HtmlPage htmlPage = htmlReactJsPage.create(landingTitle + " " + landingType,
+                "Landing", props, () -> "", FavIcons.DEFAULT_ICON_PATH);
 
         WebSiteResourcesProviders.jsResources().forEach(htmlPage::addJavaScript);
         WebSiteResourcesProviders.jsClientOnlyResources().forEach(htmlPage::addJavaScript);
