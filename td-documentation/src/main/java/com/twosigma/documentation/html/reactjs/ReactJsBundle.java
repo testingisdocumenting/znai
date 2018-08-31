@@ -16,7 +16,6 @@ public class ReactJsBundle {
     private final WebResource mainCss;
     private final WebResource react;
     private final WebResource reactDom;
-    private final WebResource reactDomServer;
     private final WebResource bootstrapCss;
 
     private final List<WebResource> fonts;
@@ -27,7 +26,6 @@ public class ReactJsBundle {
         bootstrapCss = WebResource.fromResource("static/css/bootstrap.min.css");
         react = WebResource.fromResource("static/react.min.js");
         reactDom = WebResource.fromResource("static/react-dom.min.js");
-        reactDomServer = WebResource.fromResource("react-dom-server.min.js");
 
         Stream<WebResource> glyphIcons = Stream.of("eot", "svg", "ttf", "woff", "woff2")
                 .map(ext -> "static/fonts/glyphicons-halflings-regular." + ext)
@@ -38,10 +36,6 @@ public class ReactJsBundle {
 
     public Stream<WebResource> clientJavaScripts() {
         return Stream.of(react, reactDom, mainJs);
-    }
-
-    public Stream<WebResource> serverJavaScripts() {
-        return Stream.of(react, reactDomServer, mainJs);
     }
 
     public Stream<WebResource> clientCssResources() {

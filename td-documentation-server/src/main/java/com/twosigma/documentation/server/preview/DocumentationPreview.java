@@ -2,9 +2,8 @@ package com.twosigma.documentation.server.preview;
 
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
-import com.twosigma.documentation.website.WebSite;
-import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.server.DocumentationServer;
+import com.twosigma.documentation.website.WebSite;
 import io.vertx.core.http.HttpServer;
 
 import java.net.InetAddress;
@@ -24,7 +23,7 @@ public class DocumentationPreview {
     }
 
     public void start(WebSite webSite, int port) {
-        DocumentationServer documentationServer = new DocumentationServer(webSite.getReactJsNashornEngine(), deployRoot);
+        DocumentationServer documentationServer = new DocumentationServer(webSite.getReactJsBundle(), deployRoot);
         PreviewWebSocketHandler previewWebSocketHandler = new PreviewWebSocketHandler();
         documentationServer.addSocketHandler(previewWebSocketHandler);
 

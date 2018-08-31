@@ -1,5 +1,7 @@
 package com.twosigma.documentation.search;
 
+import java.util.Objects;
+
 /**
  * global search entry
  * @author mykola
@@ -40,5 +42,25 @@ public class GlobalSearchEntry {
 
     public void setText(SearchText text) {
         this.text = text;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        GlobalSearchEntry that = (GlobalSearchEntry) o;
+        return Objects.equals(url, that.url) &&
+                Objects.equals(fullTitle, that.fullTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(url, fullTitle);
     }
 }

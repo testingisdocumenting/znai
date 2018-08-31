@@ -1,8 +1,8 @@
 package com.twosigma.documentation.server.urlhandlers;
 
-import com.twosigma.documentation.html.reactjs.ReactJsNashornEngine;
+import com.twosigma.documentation.html.reactjs.ReactJsBundle;
 
 public interface UrlContentHandler {
     String url();
-    String buildContent(ReactJsNashornEngine nashornEngine);
+    String buildContent(ReactJsBundle reactJsBundle);
 }
