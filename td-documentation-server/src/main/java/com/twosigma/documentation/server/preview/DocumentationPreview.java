@@ -35,12 +35,13 @@ public class DocumentationPreview {
                 webSite);
         server.listen(port);
 
-        reportHost(port);
-
         reportPhase("initializing file watcher");
         final FileWatcher fileWatcher = new FileWatcher(sourceRoot,
                 webSite.getAuxiliaryFilesRegistry().getAllPaths(),
                 fileChangeHandler);
+
+        reportHost(port);
+
         webSite.getAuxiliaryFilesRegistry().registerListener(fileWatcher);
         fileWatcher.start();
     }
