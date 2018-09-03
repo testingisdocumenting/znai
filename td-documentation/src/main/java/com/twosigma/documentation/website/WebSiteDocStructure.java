@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.function.Supplier;
 
-import static com.twosigma.documentation.website.ProgressReporter.reportPhase;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
@@ -30,7 +29,6 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     public void validateCollectedLinks() {
-        reportPhase("validating links");
         String validationErrorMessage = linksToValidate.stream().map(this::validateLink)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
