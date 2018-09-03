@@ -11,3 +11,4 @@ td-documentation-reactjs/build
 .vertx
 docs-build
 package-lock.json
+*.DS_Store
