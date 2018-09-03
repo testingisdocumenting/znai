@@ -1,5 +1,9 @@
-.paragraph {
+.list-item .paragraph {
     margin-bottom: 10px;
+}
+
+.paragraph {
+    margin-bottom: 16px;
 }
 
 .paragraph.attention {
