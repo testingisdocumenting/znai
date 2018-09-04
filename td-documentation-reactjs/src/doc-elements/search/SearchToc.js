@@ -5,7 +5,7 @@ export default class SearchToc extends Component {
         const {ids, selectedIdx, onSelect, onJump, search} = this.props
 
         return (
-            <div className="search-toc-items">
+            <div className="mdoc-search-toc-items">
                 {ids.map((id, idx) => {
                     const searchEntry = search.findSearchEntryById(id)
                     return (
@@ -24,14 +24,14 @@ export default class SearchToc extends Component {
 }
 
 function SearchTocItem({pageTitle, pageSection, isSelected, idx, onSelect, onJump}) {
-    const className = "search-toc-item" + (isSelected ? " selected" : "")
+    const className = "mdoc-search-toc-item" + (isSelected ? " selected" : "")
 
     return (
         <div className={className}
              onClick={() => onSelect(idx)}
              onDoubleClick={() => onJump(idx)}>
-            <span className="search-toc-page-title">{pageTitle}</span>
-            <span className="search-toc-page-section-title">{pageSection}</span>
+            <span className="mdoc-search-toc-page-title">{pageTitle}</span>
+            <span className="mdoc-search-toc-section-title">{pageSection}</span>
         </div>
     )
 }

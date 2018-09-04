@@ -1,4 +1,4 @@
-.search-popup .overlay {
+.mdoc-search-overlay {
     position: fixed;
     left: 0;
     top: 0;
@@ -7,10 +7,10 @@
     z-index: 1000;
     width: 100%;
     height: 100%;
-    background: rgba(150, 150, 150, 0.5)
+    background: var(--mdoc-search-overlay-background-color);
 }
 
-.search-popup .popup-panel {
+.mdoc-search-popup-panel {
     display: flex;
     flex-direction: column;
 
@@ -29,102 +29,125 @@
     z-index: 1001;
 }
 
-.search-popup.visible-toc .popup-panel {
+.mdoc-search-popup.visible-toc .mdoc-search-popup-panel {
     right: 0;
     left: 300px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.search-popup .toc-and-preview {
+.mdoc-search-popup .toc-and-preview {
     flex-direction: row;
     display: flex;
     height: 100%;
-    border: 1px solid #aaa;
+    border: 1px solid var(--mdoc-search-border-color);
     border-top: none;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     background: rgba(255, 255, 255, 1)
 }
 
-.search-popup .search-toc-panel {
+.mdoc-search-toc-panel {
     flex: 0 0 300px;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid var(--mdoc-search-border-color);
+
+    background-color: var(--mdoc-search-toc-panel-background-color);
+
     overflow: hidden;
-    cursor: pointer;
     overflow-y: auto;
+
+    cursor: pointer;
 }
 
-.search-popup .search-preview-panel {
+.mdoc-search-preview-panel {
     flex: 1;
     padding: 10px;
     overflow-y: auto;
+
+    background-color: var(--mdoc-background-color);
 }
 
-.search-popup .search-preview-panel::-webkit-scrollbar,
-.search-popup .search-toc-panel::-webkit-scrollbar {
+.mdoc-search-preview-panel mark {
+    background-color: var(--mdoc-search-preview-result-highlight-background-color);
+    color: var(--mdoc-search-preview-result-highlight-color);
+}
+
+.mdoc-search-result-preview {
+}
+
+.mdoc-search-popup .mdoc-search-preview-panel::-webkit-scrollbar,
+.mdoc-search-popup .mdoc-search-toc-panel::-webkit-scrollbar {
     height: 3px;
     width: 3px;
 }
 
-.search-popup .search-preview-panel::-webkit-scrollbar-thumb,
-.search-popup .search-toc-panel::-webkit-scrollbar-thumb {
-    background: #ACACAC;
+.mdoc-search-popup .mdoc-search-preview-panel::-webkit-scrollbar-thumb {
+    background: var(--mdoc-search-preview-panel-scrollbar-color);
 }
 
-.search-popup .search-preview-panel::-webkit-scrollbar-track,
-.search-popup .search-toc-panel::-webkit-scrollbar-track {
+.mdoc-search-popup .mdoc-search-toc-panel::-webkit-scrollbar-thumb {
+    background: var(--mdoc-search-toc-panel-scrollbar-color);
+}
+
+.mdoc-search-popup .mdoc-search-preview-panel::-webkit-scrollbar-track,
+.mdoc-search-popup .mdoc-search-toc-panel::-webkit-scrollbar-track {
     background: 0;
 }
 
-.search-popup .search-box input {
+.mdoc-search-popup-input-box {
+}
+
+.mdoc-search-popup-input-box input {
+    background-color: var(--mdoc-search-popup-input-box-background-color);
+    color: var(--mdoc-search-popup-input-box-color);
+
     padding: 15px;
     width: 100%;
     outline: none;
-    border: 1px solid #aaa;
+    border: 1px solid var(--mdoc-search-border-color);
     border-radius: 8px;
 }
 
-.search-popup.with-results .search-box input {
+.mdoc-search-popup.with-results .mdoc-search-popup-input-box input {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.search-toc-items {
+.mdoc-search-toc-items {
 }
 
-.search-toc-item {
+.mdoc-search-toc-item {
     display: flex;
     align-items: baseline;
     padding: 10px;
 }
 
-.search-toc-item.selected {
+.mdoc-search-toc-item.selected {
     background: #25ADB7;
     color: white;
 }
 
-.search-toc-page-title {
-    color: #aaa;
+.mdoc-search-toc-page-title {
+    color: var(--mdoc-search-toc-page-title-color);
     flex: 1;
 }
 
-.selected .search-toc-page-title {
-    color: #fff;
+.selected .mdoc-search-toc-page-title {
+    color: var(--mdoc-search-toc-selected-page-title-color);
 }
 
-.search-toc-page-section-title {
+.mdoc-search-toc-section-title {
+    color: var(--mdoc-search-toc-page-section-color);
     padding-left: 10px;
     flex: 1;
 }
 
-.search-toc-section-title {
-    font-size: 10px;
-    margin-left: auto;
+.selected .mdoc-search-toc-section-title {
+    color: var(--mdoc-search-toc-selected-page-section-color);
 }
 
 @media screen and (min-width: 1600px) {
-    .search-popup .popup-panel {
+    .mdoc-search-popup-panel {
         width: calc(320px + var(--mdoc-single-column-full-width));
     }
 }
