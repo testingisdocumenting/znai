@@ -30,7 +30,7 @@ import presentationJson from './json/PresentationJson'
 import Xml from './xml/Xml'
 import presentationXml from './xml/PresentationXml'
 import {presentationSvgHandler, Svg} from './svg/Svg'
-import LatexMath from './math/LatexMath'
+import Latex from './latex/Latex'
 import {Chart, presentationChartHandler} from './charts/Chart'
 import Image from './images/Image'
 import {CliCommand, presentationCliCommandHandler} from './cli/CliCommand'
@@ -107,8 +107,8 @@ presentationElementHandlers.GraphVizFlow = presentationGraphVizHandler
 library.Table = Table
 presentationElementHandlers.Table = {component: Table, numberOfSlides: () => 1}
 
-library.LatexMath = LatexMath
-presentationElementHandlers.LatexMath = {component: LatexMath, numberOfSlides: () => 1}
+library.Latex = Latex
+presentationElementHandlers.Latex = {component: Latex, numberOfSlides: () => 1}
 
 library.Image = Image
 presentationElementHandlers.Image = {component: Image, numberOfSlides: () => 1}
