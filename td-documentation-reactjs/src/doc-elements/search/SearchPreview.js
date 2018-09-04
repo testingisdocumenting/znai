@@ -15,7 +15,7 @@ class SearchPreview extends Component {
         const {section, elementsLibrary} = this.props
 
         return (
-            <div className="search-result-preview" ref={(dom) => this.dom = dom}>
+            <div className="mdoc-search-result-preview" ref={(dom) => this.dom = dom}>
                 <elementsLibrary.DocElement {...this.props} content={section.content}/>
             </div>
         )
@@ -27,7 +27,7 @@ class SearchPreview extends Component {
         this.mark.unmark()
         this.mark.mark(snippets)
 
-        const marked = document.querySelector(".search-result-preview mark");
+        const marked = document.querySelector(".mdoc-search-result-preview mark");
         if (marked) {
             marked.scrollIntoView();
         }

@@ -102,7 +102,7 @@
 }
 
 .toc-menu::-webkit-scrollbar-thumb {
-   background: var(--mdoc-toc-panel-border-color);
+   background: var(--mdoc-toc-panel-scrollbar-color);
 }
 
 .toc-menu::-webkit-scrollbar-track {
