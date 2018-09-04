@@ -15,3 +15,5 @@ The result will be a following math expression.
 
 In presentation mode, rendered expressions will automatically scale to make use of the screen space.
 
+Note: Rendering is done by using [KaTeX](https://github.com/Khan/KaTeX) library.
+And is using [KaTeX](https://github.com/Khan/KaTeX) fonts.  
