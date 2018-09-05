@@ -38,6 +38,15 @@
                             <include name="css/*.*" />
                         </fileset>
 
+                        <fileset id="asset-manifest" dir="build/">
+                            <include name="asset-manifest.json" />
+                        </fileset>
+
+                        <fileset id="fonts" dir="build/static/media">
+                            <include name="KaTeX_Main-*.*" />
+                            <include name="KaTeX_Math-*.*" />
+                        </fileset>
+
                         <pathconvert pathsep="${line.separator}" property="files" refid="bundle">
                             <mapper>
                                 <flattenmapper />
@@ -46,6 +55,14 @@
 
                         <copy verbose="true" flatten="true" todir="${project.build.outputDirectory}/static">
                             <fileset refid="bundle"/>
+                        </copy>
+
+                        <copy verbose="true" todir="${project.build.outputDirectory}/static">
+                            <fileset refid="asset-manifest"/>
+                        </copy>
+
+                        <copy verbose="true" todir="${project.build.outputDirectory}/static/media">
+                            <fileset refid="fonts"/>
                         </copy>
 
                         <copy file="${project.basedir}/node_modules/react/umd/react.production.min.js" toFile="${project.build.outputDirectory}/static/react.min.js"/>

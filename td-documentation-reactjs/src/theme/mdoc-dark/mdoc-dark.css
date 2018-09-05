@@ -19,9 +19,25 @@
     --mdoc-toc-page-section-color: rgba(145, 171, 173, 0.52);
     --mdoc-toc-panel-icon-color: #798186;
     --mdoc-toc-panel-icon-color-active: #e7c121;
+    --mdoc-toc-panel-scrollbar-color: var(--mdoc-toc-panel-border-color);
 
     --mdoc-footer-color: #b0bcc2;
     --mdoc-footer-background-color: #1b2225;
+
+    --mdoc-search-overlay-background-color: rgba(0, 0, 0, 0.5);
+    --mdoc-search-border-color: var(--mdoc-toc-panel-border-color);
+    --mdoc-search-toc-panel-background-color: var(--mdoc-toc-panel-background-color);
+    --mdoc-search-toc-panel-scrollbar-color: var(--mdoc-search-border-color);
+    --mdoc-search-toc-selected-background-color: var(--mdoc-brand-primary-color);
+    --mdoc-search-toc-page-title-color: var(--mdoc-toc-chapter-title-color);
+    --mdoc-search-toc-page-section-color: var(--mdoc-regular-text-color);
+    --mdoc-search-toc-selected-page-title-color: #fff;
+    --mdoc-search-toc-selected-page-section-color: #fff;
+    --mdoc-search-preview-panel-scrollbar-color: var(--mdoc-search-border-color);
+    --mdoc-search-preview-result-highlight-background-color: #ddeecc;
+    --mdoc-search-preview-result-highlight-color: #444;
+    --mdoc-search-popup-input-box-background-color: #3c484e;
+    --mdoc-search-popup-input-box-color: var(--mdoc-regular-text-color);
 
     --mdoc-snippets-background-color: #181e21;
     --mdoc-snippets-outer-border-color: #29343a;
