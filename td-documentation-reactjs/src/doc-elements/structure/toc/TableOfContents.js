@@ -52,15 +52,6 @@ class TableOfContents {
     }
 }
 
-const tableOfContents = new TableOfContents(global.toc || [])
+const tableOfContents = new TableOfContents(window.toc || [])
 
-export {tableOfContents, setTocJson}
-
-/**
- * need a way to update TOC from preview mode
- * @param tocJson json string representing a TOC
- */
-function setTocJson(tocJson) {
-    tableOfContents.toc = JSON.parse(tocJson)
-}
-
+export {tableOfContents}

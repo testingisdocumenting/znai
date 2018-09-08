@@ -1,4 +1,4 @@
-import Prism from 'prismjs'
+import * as Prism from 'prismjs'
 import 'prismjs/components/prism-java'
 import 'prismjs/components/prism-groovy'
 import 'prismjs/components/prism-clike'

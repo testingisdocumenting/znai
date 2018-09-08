@@ -6,7 +6,7 @@ import TocPanel from '../../doc-elements/structure/toc/TocPanel'
 
 import './Landing.css'
 
-export default class Landing extends React.Component {
+export class Landing extends React.Component {
     state = {filterText: '', tocCollapsed: false}
 
     render() {

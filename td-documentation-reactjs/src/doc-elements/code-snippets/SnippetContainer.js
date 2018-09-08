@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import ClipboardJS from 'clipboard'
+import * as ClipboardJS from 'clipboard'
 
 import {extractTextFromTokens} from './codeUtils'
 import CopyIcon from './SnippetCopyIcon'

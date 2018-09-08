@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import classNames from 'classnames'
 
 import './Presentation.css'
 
@@ -26,7 +25,9 @@ class Presentation extends Component {
         const showSlideNote = typeof slideVisibleNote !== "undefined" && slideVisibleNote !== null
         const slideNoteClass = "footer" + ((showSlideNote && slideVisibleNote.length === 0) ? " size-only" : "")
 
-        const slideClassName = classNames("slide-area", {"appeared": isAppeared, "full-screen": slide.info.isFullScreen})
+        const slideClassName = "slide-area" + (isAppeared ?  " appeared": "") +
+            (slide.info.isFullScreen ? " full-screen" : "")
+
         const slideAreaStyle = slide.info.isFullScreen ? {display: "flex", flex: 1} : {transform: "scale(" + scaleRatio + ")"}
 
         return (

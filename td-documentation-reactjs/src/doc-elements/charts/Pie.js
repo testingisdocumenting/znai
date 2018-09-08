@@ -1,8 +1,10 @@
 import React from 'react'
-import {VictoryPie, VictoryTheme, Slice} from 'victory'
+
+import {Slice, VictoryPie} from 'victory-pie'
+import materialTheme from 'victory-core/lib/victory-theme/material'
 
 import defaultStyle from './defaultStyle'
-import {CustomLabel, isHidden, hiddenStyle} from './chartPresentation'
+import {CustomLabel, hiddenStyle, isHidden} from './chartPresentation'
 
 const CustomSlice = (props) => {
     return isHidden(props) ?
@@ -22,7 +24,7 @@ const Pie = ({data, width, height, slideIdx, isPresentation, meta, ...props}) =>
                         labelComponent={<CustomLabel isPresentation={isPresentation} meta={meta} slideIdx={slideIdx}/>}
                         width={calculatedWidth} height={calculatedHeight}
                         {...props}
-                        theme={VictoryTheme.material}/>
+                        theme={materialTheme}/>
         </div>
     )
 }

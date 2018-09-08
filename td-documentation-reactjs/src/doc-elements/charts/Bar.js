@@ -1,9 +1,13 @@
 import React from 'react'
-import {VictoryChart, VictoryBar, VictoryAxis, Bar, VictoryTheme} from 'victory'
 
+import {VictoryChart} from 'victory-chart'
+import {Bar, VictoryBar} from 'victory-bar'
+import {VictoryAxis} from 'victory-axis'
+
+import materialTheme from 'victory-core/lib/victory-theme/material'
 import defaultStyle from './defaultStyle'
 
-import {CustomLabel, isHidden, hiddenStyle} from './chartPresentation'
+import {CustomLabel, hiddenStyle, isHidden} from './chartPresentation'
 
 const CustomBar = (props) => {
     return isHidden(props) ?
@@ -14,7 +18,7 @@ const CustomBar = (props) => {
 const BarChart = ({data, width, height, slideIdx, isPresentation, meta, ...props}) => {
     return (
         <div style={{width: width || defaultStyle.bar.width, height: height || defaultStyle.bar.height}}>
-            <VictoryChart theme={VictoryTheme.material}
+            <VictoryChart theme={materialTheme}
                           domainPadding={{x: 50, y: [20, 20]}}>
                 <VictoryAxis crossAxis/>
                 <VictoryAxis crossAxis dependentAxis/>

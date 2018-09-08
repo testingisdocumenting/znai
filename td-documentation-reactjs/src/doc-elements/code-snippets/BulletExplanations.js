@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import classNames from 'classnames'
 
 import CircleBadge from './CircleBadge'
 
@@ -24,7 +23,7 @@ class BulletExplanations extends Component {
         const {comments} = this.props
         const {hidden} = this.state
 
-        const className = classNames("code-bullets", {"hidden-explanation": hidden})
+        const className = "code-bullets" + (hidden ? " hidden-explanation": "")
         const spoilerMessage = hidden ? (
             <div className="spoiler-message">Click to reveal</div>
         ) : null

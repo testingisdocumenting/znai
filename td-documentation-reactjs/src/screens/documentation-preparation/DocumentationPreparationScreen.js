@@ -5,7 +5,7 @@ import {socketUrl} from '../../utils/socket'
 
 import './DocumentationPreparationScreen.css'
 
-class DocumentationPreparationScreen extends React.Component {
+export class DocumentationPreparationScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = props;
@@ -55,5 +55,3 @@ class DocumentationPreparationScreen extends React.Component {
         }
     }
 }
-
-export default DocumentationPreparationScreen

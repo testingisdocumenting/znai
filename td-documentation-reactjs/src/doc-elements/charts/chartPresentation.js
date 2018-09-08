@@ -1,5 +1,6 @@
 import React from 'react'
-import {VictoryLabel} from 'victory'
+import VictoryLabel from 'victory-core/lib/victory-label/victory-label'
+
 import {isAllAtOnce} from '../meta/meta'
 
 const hiddenStyle = {fill: "rgba(0, 0, 0, 0)"}

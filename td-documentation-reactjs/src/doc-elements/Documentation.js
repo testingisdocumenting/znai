@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Promise from 'promise'
+import * as Promise from 'promise'
 
 import {themeRegistry} from '../theme/ThemeRegistry'
 
@@ -28,11 +28,12 @@ import pageContentProcessor from './pageContentProcessor.js'
 import {DocumentationModes} from './DocumentationModes'
 import {pageTypesRegistry} from './page/PageTypesRegistry'
 
-import './DocumentationLayout.css'
-import './search/Search.css'
 import {injectCustomCssLink} from './CssOverrides'
 
-class Documentation extends Component {
+import './DocumentationLayout.css'
+import './search/Search.css'
+
+export class Documentation extends Component {
     constructor(props) {
         super(props)
 
@@ -600,5 +601,3 @@ class Documentation extends Component {
         this.setState({lastChangeDataDom: null})
     }
 }
-
-export default Documentation
