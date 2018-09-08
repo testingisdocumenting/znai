@@ -1,11 +1,10 @@
-import Promise from "promise"
+import * as Promise from 'promise'
 import {getDocId} from '../docMeta';
 
 const index = {dirName: '', fileName: 'index'};
 
 class DocumentationNavigation {
     constructor() {
-        this.documentationId = "NA"
         this.listeners = []
 
         // server side rendering guard
@@ -30,7 +29,7 @@ class DocumentationNavigation {
     }
 
     buildUrl(id) {
-        return  "/" + (this.documentationId  ? this.documentationId + "/" : "") + (id.dirName + "/" + id.fileName) +
+        return  "/" + (getDocId()  ? getDocId() + "/" : "") + (id.dirName + "/" + id.fileName) +
             (id.pageSectionId ? ("#" + id.pageSectionId) : "")
     }
 
@@ -39,7 +38,7 @@ class DocumentationNavigation {
     }
 
     navigateToUrl(url) {
-        history.pushState({}, null, url)
+        window.history.pushState({}, null, url)
         return this.notifyNewUrl(url)
     }
 

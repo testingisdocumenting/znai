@@ -1,6 +1,6 @@
 import React from 'react'
 import DocumentationPreparation from './DocumentationPreparation'
-import DocumentationPreparationScreen from './DocumentationPreparationScreen'
+import {DocumentationPreparationScreen} from './DocumentationPreparationScreen'
 
 const simplePreparationState = {
     docId: 'preview',

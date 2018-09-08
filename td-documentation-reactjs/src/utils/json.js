@@ -1,4 +1,5 @@
-import Promise from "promise"
+import * as Promise from 'promise'
+
 import {fullResourcePath} from './resourcePath'
 
 export {jsonPromise}

@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import classNames from 'classnames'
 
 class CliCommandToken extends Component {
     constructor(props) {
@@ -20,7 +19,8 @@ class CliCommandToken extends Component {
         const hasHiddenPart = lastCharIdx < value.length
 
         const hiddenClassName = "invisible"
-        const visibleClassName = classNames("token " + type, {highlight: isHighlighted}, {[hiddenClassName]: isHidden})
+        const visibleClassName = "token " + type + (isHighlighted ? " highlight": "") +
+            (isHidden ? " " + hiddenClassName: "")
         const invisibleClassName = visibleClassName + " " + hiddenClassName
 
         return (

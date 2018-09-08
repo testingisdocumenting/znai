@@ -1,12 +1,9 @@
-import {documentationNavigation} from './structure/DocumentationNavigation'
 import {selectedTextExtensions} from './selected-text-extensions/SelectedTextExtensions'
 
 let docMeta = {}
 
 function setDocMeta(newDocMeta) {
     docMeta = {...newDocMeta}
-    documentationNavigation.documentationId = docMeta.id // TODO revisit dependency
-
     registerExtensions()
 }
 

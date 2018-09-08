@@ -8,5 +8,5 @@ export function socketUrl(relativeUrl) {
     const isSecure = currentLocation.indexOf("https://") !== -1
     const protocol = isSecure ? "wss" : "ws"
 
-    return protocol + "://" + location.hostname + ":" + location.port + "/" + relativeUrl
+    return protocol + "://" + window.location.hostname + ":" + window.location.port + "/" + relativeUrl
 }

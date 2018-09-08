@@ -33,6 +33,7 @@ import {graphVizSvgPresentationDemo} from './doc-elements/graphviz/PresentationG
 import {cliCommandDemo} from './doc-elements/cli/CliCommand.demo'
 import {yamlSnippetDemo} from './doc-elements/code-snippets/Yaml.demo'
 import {latexDemo} from './doc-elements/latex/Latex.demo'
+import {chartDemo} from './doc-elements/charts/Chart.demo'
 
 const docMeta = {
     id: 'preview',
@@ -66,6 +67,7 @@ snippets.registerAsGrid('Jupyter', 0, jupyterDemo)
 snippets.registerAsGrid('CLI Command', 0, cliCommandDemo)
 
 const visuals = new Registry('visuals')
+visuals.registerAsGrid('Charts', 0, chartDemo)
 visuals.registerAsTabs('Image Annotations', imageAnnotationDemo)
 visuals.registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
 visuals.registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
@@ -84,12 +86,10 @@ screens.registerAsTabs('Search Popup', searchPopupDemo)
 const endToEnd = new Registry('end to end')
 endToEnd.registerAsMiniApp('full documentation navigation', '/preview', documentationDemo)
 
-class App extends Component {
+export class App extends Component {
     render() {
         return (
             <ComponentsViewer registries={[snippets, visuals, layout, screens, endToEnd]}/>
         )
     }
 }
-
-export default App;

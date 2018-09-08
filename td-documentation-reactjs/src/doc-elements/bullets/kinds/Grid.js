@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import classNames from 'classnames'
 
 import {extractTextLinesEmphasisOrFull} from '../bulletUtils'
 import {isAllAtOnce} from '../../meta/meta'
@@ -13,7 +12,7 @@ class Grid extends Component {
 
         return (
             <div className="grid">{content.map((item, idx) => {
-                const className = classNames("cell", {"empty": idx > slideIdx && !isAllAtOnce(meta)})
+                const className = "cell" + (idx > slideIdx && !isAllAtOnce(meta) ? "empty" : "")
                 return <div key={idx} className={className} style={cellStyle(textLines.length)}>{textLines[idx]}</div>
             })}
             </div>

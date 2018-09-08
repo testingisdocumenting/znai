@@ -1,5 +1,5 @@
 import React from 'react'
-import Landing from './Landing'
+import {Landing} from './Landing'
 
 const documentations = [
     {id: 'hipchat', name: 'HipChat', category: 'Collaboration', description: 'short description of HipChat. short description of HipChat'},

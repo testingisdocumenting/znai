@@ -82,6 +82,5 @@ function mergeThemes(baseTheme, theme) {
 }
 
 const themeRegistry = new ThemeRegistry()
-global.themeRegistry = themeRegistry
 
 export {themeRegistry}

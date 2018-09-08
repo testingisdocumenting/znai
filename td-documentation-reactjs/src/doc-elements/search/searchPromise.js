@@ -1,6 +1,6 @@
 import {getAllPagesPromise} from "../allPages"
 
-import Promise from "promise"
+import * as Promise from 'promise'
 import Search from './Search'
 
 export {getSearchPromise}
