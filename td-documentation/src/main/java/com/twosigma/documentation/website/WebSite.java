@@ -69,6 +69,8 @@ public class WebSite {
 
     private final MarkupParsingConfiguration markupParsingConfiguration;
 
+    private final Map<AuxiliaryFile, Long> auxiliaryFilesLastUpdateTime;
+
     private WebSite(Configuration cfg) {
         this.cfg = cfg;
         this.deployer = new Deployer(cfg.deployPath);
@@ -83,6 +85,7 @@ public class WebSite {
         this.markupParsingConfiguration = createMarkupParsingConfiguration();
         this.globalSearchEntries = new GlobalSearchEntries();
         this.localSearchEntries = new LocalSearchEntries();
+        this.auxiliaryFilesLastUpdateTime = new HashMap<>();
 
         docMeta.setId(cfg.id);
         if (cfg.isPreviewEnabled) {
@@ -172,11 +175,15 @@ public class WebSite {
         HtmlPageAndPageProps pageProps = generatePage(tocItem, page);
         buildJsonOfAllPages();
 
+        auxiliaryFilesRegistry.auxiliaryFilesByTocItem(tocItem).stream()
+                .filter(AuxiliaryFile::isDeploymentRequired)
+                .forEach(this::deployAuxiliaryFileIfOutdated);
+
         return pageProps;
     }
 
     public Set<TocItem> dependentTocItems(Path auxiliaryFile) {
-        return auxiliaryFilesRegistry.tocItemsForPath(auxiliaryFile);
+        return auxiliaryFilesRegistry.tocItemsByPath(auxiliaryFile);
     }
 
     public TableOfContents getToc() {
@@ -412,9 +419,26 @@ public class WebSite {
         auxiliaryFilesRegistry.getAuxiliaryFilesForDeployment().forEach(this::deployAuxiliaryFile);
     }
 
+    private void deployAuxiliaryFileIfOutdated(AuxiliaryFile auxiliaryFile) {
+        Long savedLastModifiedTime = auxiliaryFilesLastUpdateTime.get(auxiliaryFile);
+
+        try {
+            FileTime lastModifiedTime = Files.getLastModifiedTime(auxiliaryFile.getPath());
+            if (savedLastModifiedTime != null && savedLastModifiedTime == lastModifiedTime.toMillis()) {
+                return;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        deployAuxiliaryFile(auxiliaryFile);
+    }
+
     private void deployAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
         try {
             deployer.deploy(auxiliaryFile.getDeployRelativePath(), Files.readAllBytes(auxiliaryFile.getPath()));
+            FileTime lastModifiedTime = Files.getLastModifiedTime(auxiliaryFile.getPath());
+            auxiliaryFilesLastUpdateTime.put(auxiliaryFile, lastModifiedTime.toMillis());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

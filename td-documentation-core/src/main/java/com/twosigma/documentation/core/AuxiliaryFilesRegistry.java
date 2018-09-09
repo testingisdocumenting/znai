@@ -8,25 +8,34 @@ import java.util.stream.Stream;
 
 public class AuxiliaryFilesRegistry {
     private final Map<Path, Set<TocItem>> tocItemsByAuxiliaryFilePath;
+    private final Map<TocItem, Set<AuxiliaryFile>> auxiliaryFilesByTocItem;
     private final Map<Path, AuxiliaryFile> auxiliaryFiles;
     private final Set<AuxiliaryFileListener> auxiliaryFileListeners;
 
     public AuxiliaryFilesRegistry() {
         this.tocItemsByAuxiliaryFilePath = new HashMap<>();
+        this.auxiliaryFilesByTocItem = new HashMap<>();
         this.auxiliaryFiles = new HashMap<>();
         this.auxiliaryFileListeners = new HashSet<>();
     }
 
-    public Set<TocItem> tocItemsForPath(Path auxiliaryFile) {
+    public Set<TocItem> tocItemsByPath(Path auxiliaryFile) {
         return tocItemsByAuxiliaryFilePath.getOrDefault(auxiliaryFile, Collections.emptySet());
+    }
+
+    public Set<AuxiliaryFile> auxiliaryFilesByTocItem(TocItem tocItem) {
+        return auxiliaryFilesByTocItem.get(tocItem);
     }
 
     public void updateFileAssociations(TocItem tocItem, AuxiliaryFile auxiliaryFile) {
         Set<TocItem> tocItems = tocItemsByAuxiliaryFilePath.computeIfAbsent(auxiliaryFile.getPath(), k -> new HashSet<>());
         tocItems.add(tocItem);
 
-        if (!auxiliaryFiles.containsKey(auxiliaryFile.getPath()) || !auxiliaryFiles.get(auxiliaryFile.getPath()).isDeploymentRequired()) {
-            auxiliaryFiles.put(auxiliaryFile.getPath(), auxiliaryFile);
+        Set<AuxiliaryFile> filesForTocItem = auxiliaryFilesByTocItem.computeIfAbsent(tocItem, k -> new HashSet<>());
+        filesForTocItem.add(auxiliaryFile);
+
+        if (!this.auxiliaryFiles.containsKey(auxiliaryFile.getPath()) || !this.auxiliaryFiles.get(auxiliaryFile.getPath()).isDeploymentRequired()) {
+            this.auxiliaryFiles.put(auxiliaryFile.getPath(), auxiliaryFile);
         }
 
         auxiliaryFileListeners.forEach(listener -> listener.onAuxiliaryFile(auxiliaryFile));
