@@ -239,6 +239,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
                 "destination", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()),
                 "alt", alt,
                 "inlined", true,
+                "timestamp", System.currentTimeMillis(),
                 "width", image.getWidth(),
                 "height", image.getHeight());
 
