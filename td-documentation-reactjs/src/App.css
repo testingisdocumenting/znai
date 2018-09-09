@@ -69,6 +69,14 @@
     --mdoc-search-popup-input-box-background-color: #fff;
     --mdoc-search-popup-input-box-color: var(--mdoc-regular-text-color);
 
+    --mdoc-landing-border-color: #ddd;
+    --mdoc-landing-category-color: var(--mdoc-brand-primary-color);
+    --mdoc-landing-card-title-border-color: #eee;
+    --mdoc-landing-card-shadow-color: #d4d4d5;
+    --mdoc-landing-card-text-color: var(--mdoc-regular-text-light-color);
+    --mdoc-landing-input-background-color: #fff;
+    --mdoc-landing-input-placeholder-color: #bbb;
+
     --mdoc-snippets-background-color: #f8faf9;
     --mdoc-snippets-outer-border-color: #ddd;
     --mdoc-snippets-inner-border-color: #f3f3f3;

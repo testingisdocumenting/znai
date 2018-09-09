@@ -14,4 +14,5 @@ const documentations = [
 export function landingDemo(registry) {
     registry
         .add('landing', <Landing documentations={documentations} title="Company" type="Guides"/>)
+        .add('landing dark theme', <div className="with-theme theme-mdoc-dark"><Landing documentations={documentations} title="Company" type="Guides"/></div>)
 }

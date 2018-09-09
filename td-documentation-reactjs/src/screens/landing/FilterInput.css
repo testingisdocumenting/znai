@@ -10,6 +10,7 @@
     width: 600px;
     height: 55px;
 
+    background-color: var(--mdoc-landing-input-background-color);
     outline: none;
     box-sizing: border-box;
 
@@ -20,6 +21,6 @@
 }
 
 .mdoc-landing-filter-input input::placeholder {
-    color: #bbb;
+    color: var(--mdoc-landing-input-placeholder-color);
 }
 

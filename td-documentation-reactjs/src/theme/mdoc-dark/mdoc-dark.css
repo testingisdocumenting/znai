@@ -39,6 +39,14 @@
     --mdoc-search-popup-input-box-background-color: #3c484e;
     --mdoc-search-popup-input-box-color: var(--mdoc-regular-text-color);
 
+    --mdoc-landing-border-color: var(--mdoc-search-border-color);
+    --mdoc-landing-category-color: var(--mdoc-brand-primary-color);
+    --mdoc-landing-card-title-border-color: #333;
+    --mdoc-landing-card-shadow-color: #444;
+    --mdoc-landing-card-text-color: var(--mdoc-regular-text-light-color);
+    --mdoc-landing-input-background-color: var(--mdoc-background-color);
+    --mdoc-landing-input-placeholder-color: #555;
+
     --mdoc-snippets-background-color: #181e21;
     --mdoc-snippets-outer-border-color: #29343a;
     --mdoc-snippets-inner-border-color: #404040;

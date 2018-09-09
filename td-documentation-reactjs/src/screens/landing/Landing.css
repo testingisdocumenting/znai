@@ -9,7 +9,6 @@
     overflow-y: scroll;
 
     padding: 20px;
-    --mdoc-landing-border-color: #ddd;
 }
 
 .mdoc-landing-documentations-area > .centered {
@@ -43,7 +42,7 @@
 
 .mdoc-landing-category > .category {
     font-size: 24px;
-    color: var(--mdoc-brand-primary-color);
+    color: var(--mdoc-landing-category-color);
     padding: 0 15px;
 }
 
@@ -52,7 +51,7 @@
     grid-template-columns: repeat(auto-fill, 250px);
     grid-gap: 40px 40px;
 
-    color: var(--mdoc-light-black);
+    color: var(--mdoc-landing-card-text-color);
 
     padding: 30px 20px 30px 50px;
 }
@@ -60,7 +59,7 @@
 .mdoc-landing-documentation {
     border-radius: 4px;
 
-    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+    box-shadow: 0 1px 3px 0 var(--mdoc-landing-card-shadow-color), 0 0 0 1px var(--mdoc-landing-card-shadow-color);
     transition: 0.3s;
 
     cursor: pointer;
@@ -70,12 +69,12 @@
 }
 
 .mdoc-landing-documentation a {
-    color: var(--mdoc-light-black);
+    color: var(--mdoc-landing-card-text-color);
     text-decoration: none;
 }
 
 .mdoc-landing-documentation a:hover {
-    color: var(--mdoc-light-black);
+    color: var(--mdoc-landing-card-text-color);
 }
 
 .mdoc-landing-documentation > a > .name {
@@ -84,7 +83,7 @@
 
     padding: 10px 15px;
 
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--mdoc-landing-card-title-border-color);
 }
 
 .mdoc-landing-documentation > a > .description {
