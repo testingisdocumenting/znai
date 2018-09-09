@@ -22,6 +22,7 @@ import com.twosigma.documentation.server.urlhandlers.UrlContentHandlers;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
+import io.vertx.core.http.HttpServerOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.StaticHandler;
@@ -68,7 +69,7 @@ public class DocumentationServer {
     }
 
     public HttpServer create() {
-        HttpServer server = vertx.createHttpServer();
+        HttpServer server = vertx.createHttpServer(new HttpServerOptions().setCompressionSupported(true));
 
         Router router = Router.router(vertx);
 
