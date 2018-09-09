@@ -59,6 +59,8 @@ public class ImageIncludePlugin implements IncludePlugin {
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         props.put("imageSrc", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
 
+        props.put("timestamp", System.currentTimeMillis());
+
         props.put("shapes", annotations != null ? annotations.get("shapes") : Collections.emptyList());
         setWidthHeight(props, scaleRatio, annotations, imagePath);
 

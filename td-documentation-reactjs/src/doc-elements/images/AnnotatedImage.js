@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
-import {isPreviewEnabled} from '../docMeta'
+import {imageAdditionalPreviewUrlParam} from './imagePreviewAdditionalUrlParam'
+
 import './AnnotatedImage.css'
 
 class AnnotatedImage extends Component {
@@ -9,7 +10,18 @@ class AnnotatedImage extends Component {
     }
 
     render() {
-        const {imageSrc, annotations, width, height, isStatic, selectedId, caption, captionBottom, fit} = this.props
+        const {
+            imageSrc,
+            annotations,
+            width,
+            height,
+            isStatic,
+            selectedId,
+            caption,
+            captionBottom,
+            fit,
+            timestamp
+        } = this.props
 
         const scale = fit ? 900.0/width : 1 // TODO theme with sizes. How to share with CSS, e.g. content-block?
 
@@ -32,7 +44,8 @@ class AnnotatedImage extends Component {
         return (
             <div style={parentStyle} className="annotated-image" >
                 <div style={imageContainerStyle}>
-                    <img alt="annotated" src={imageSrc}
+                    <img alt="annotated"
+                         src={imageSrc + imageAdditionalPreviewUrlParam(timestamp)}
                          width={imageWidth}
                          height={imageHeight}
                          ref={node => this.imageNode = node}/>
