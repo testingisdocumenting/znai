@@ -1,6 +1,6 @@
 import React from 'react';
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
     require('bootstrap/dist/css/bootstrap.css')
 }
 
