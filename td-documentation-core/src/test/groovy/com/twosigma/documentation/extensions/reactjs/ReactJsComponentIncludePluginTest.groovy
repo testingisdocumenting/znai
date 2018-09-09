@@ -3,8 +3,8 @@ package com.twosigma.documentation.extensions.reactjs
 import com.twosigma.documentation.extensions.include.PluginsTestUtils
 import org.junit.Test
 
-import static com.twosigma.testing.Ddjt.code
-import static com.twosigma.testing.Ddjt.throwException
+import static com.twosigma.webtau.Ddjt.code
+import static com.twosigma.webtau.Ddjt.throwException
 
 class ReactJsComponentIncludePluginTest {
     @Test

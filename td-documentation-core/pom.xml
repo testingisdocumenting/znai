@@ -73,9 +73,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.td</groupId>
-            <artifactId>td-testing-core-groovy</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.twosigma.webtau</groupId>
+            <artifactId>webtau-core-groovy</artifactId>
+            <version>0.29</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

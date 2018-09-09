@@ -5,8 +5,7 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-import static com.twosigma.testing.Ddjt.code
-import static com.twosigma.testing.Ddjt.throwException
+import static com.twosigma.webtau.Ddjt.*
 
 /**
  * @author mykola
@@ -200,20 +199,24 @@ world""")
 
     @Test
     void "inlined image"() {
+        def timestamp = System.currentTimeMillis()
+
         parse("text ![alt text](images/png-test.png \"custom title\") another text")
         content.should == [[type: 'Paragraph', content:[
                 [text: "text " , type: "SimpleText"],
                 [title: "custom title", destination: '/test-doc/png-test.png', alt: 'alt text', type: 'Image', inlined: true,
-                 width:762, height:581],
+                 width:762, height:581, timestamp: beGreaterThanOrEqual(timestamp)],
                 [text: " another text" , type: "SimpleText"]]]]
     }
 
     @Test
     void "standalone image"() {
+        def timestamp = System.currentTimeMillis()
         parse("![alt text](images/png-test.png \"custom title\")")
         content.should == [[title: "custom title", destination: '/test-doc/png-test.png',
                             alt: 'alt text', inlined: false,
                             width:762, height:581,
+                            timestamp: beGreaterThanOrEqual(timestamp),
                             type: 'Image']]
     }
 
