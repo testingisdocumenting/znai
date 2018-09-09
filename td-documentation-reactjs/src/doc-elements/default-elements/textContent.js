@@ -1,6 +1,4 @@
-export default {extractTextFromElement, extractTextFromContent}
-
-function extractTextFromContent(content) {
+export function extractTextFromContent(content) {
     if (! content) {
         return ""
     }
@@ -8,7 +6,7 @@ function extractTextFromContent(content) {
     return content.map((el) => extractTextFromElement(el)).join(" ")
 }
 
-function extractTextFromElement(docElement) {
+export function extractTextFromElement(docElement) {
     if (docElement.type === 'SimpleText') {
         return docElement.text
     }
