@@ -50,6 +50,9 @@
     --mdoc-section-title-color: var(--mdoc-black);
     --mdoc-section-h2-color: var(--mdoc-black);
     --mdoc-section-h3-color: var(--mdoc-black);
+    --mdoc-section-h4-color: var(--mdoc-black);
+    --mdoc-section-h5-color: #5a6872;
+    --mdoc-section-h6-color: #5a6872;
 
     --mdoc-footer-color: #818a8f;
     --mdoc-footer-background-color: #f5f7f5;
