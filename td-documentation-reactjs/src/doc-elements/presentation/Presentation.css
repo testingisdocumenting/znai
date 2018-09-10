@@ -81,7 +81,7 @@
     color: #555;
 }
 
-.presentation .footer {
+.presentation-footer {
     flex: 0 0 50px;
     display: flex;
     font-size: 28px;
@@ -91,7 +91,7 @@
     background-color: #383b3f;
 }
 
-.presentation .footer.size-only {
+.presentation-footer.size-only {
     background: none;
 }
 

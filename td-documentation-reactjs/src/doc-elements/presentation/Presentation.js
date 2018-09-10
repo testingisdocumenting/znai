@@ -23,7 +23,7 @@ class Presentation extends Component {
 
         const slideVisibleNote = slide.info.slideVisibleNote
         const showSlideNote = typeof slideVisibleNote !== "undefined" && slideVisibleNote !== null
-        const slideNoteClass = "footer" + ((showSlideNote && slideVisibleNote.length === 0) ? " size-only" : "")
+        const slideNoteClass = "presentation-footer" + ((showSlideNote && slideVisibleNote.length === 0) ? " size-only" : "")
 
         const slideClassName = "slide-area" + (isAppeared ?  " appeared": "") +
             (slide.info.isFullScreen ? " full-screen" : "")
