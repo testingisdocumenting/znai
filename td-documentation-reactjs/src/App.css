@@ -122,6 +122,8 @@
     --mdoc-inversed-text-color: #bbbbbb;
     --mdoc-inversed-background-color: #282f34;
 
+    --mdoc-horizontal-rule-color: #eee;
+
     --mdoc-diagram-node-shadow-color: #e6e6e6;
 }
 
@@ -168,4 +170,8 @@ body {
 a,
 a:hover {
     color: var(--mdoc-link-color);
+}
+
+hr {
+    border-top: 1px solid var(--mdoc-horizontal-rule-color);
 }

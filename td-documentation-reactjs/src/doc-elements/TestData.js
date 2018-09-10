@@ -98,6 +98,10 @@ const TestData = {
                             ]
                         },
                         {
+                            "type": "ThematicBreak",
+                            "content": []
+                        },
+                        {
                             "lang": "javascript",
                             "snippet": "class JsClass {\n    constructor() {\n    }\n}\n\nexport default JsClass",
                             "type": "Snippet"
