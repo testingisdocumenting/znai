@@ -88,6 +88,16 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
+    public void onSoftLineBreak() {
+        add(" ");
+    }
+
+    @Override
+    public void onHardLineBreak() {
+        add(" ");
+    }
+
+    @Override
     public void onParsingEnd() {
         flushTextParts();
     }

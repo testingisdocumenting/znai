@@ -37,16 +37,46 @@ class SearchCrawlerParserHandlerTest {
 
     @Test
     void "should connect mixed styles characters within a word without extra spaces"() {
+        def searchEntries = withinSection {
+            parserHandler.onSimpleText('H')
+            parserHandler.onEmphasisStart()
+            parserHandler.onSimpleText('el')
+            parserHandler.onEmphasisEnd()
+            parserHandler.onStrongEmphasisStart()
+            parserHandler.onSimpleText('lo')
+            parserHandler.onStrongEmphasisEnd()
+        }
+
+        searchEntries.searchText.text.should == ['Hello']
+    }
+
+    @Test
+    void "should separate entries based on soft line break"() {
+        def searchEntries = withinSection {
+            parserHandler.onSimpleText('entry one.')
+            parserHandler.onSoftLineBreak()
+            parserHandler.onSimpleText('entry two.')
+        }
+
+        searchEntries.searchText.text.should == ['entry one. entry two.']
+    }
+
+    @Test
+    void "should separate entries based on hard line break"() {
+        def searchEntries = withinSection {
+            parserHandler.onSimpleText('entry one.')
+            parserHandler.onHardLineBreak()
+            parserHandler.onSimpleText('entry two.')
+        }
+
+        searchEntries.searchText.text.should == ['entry one. entry two.']
+    }
+
+    private withinSection(Closure setupCode) {
         parserHandler.onSectionStart('section')
-        parserHandler.onSimpleText('H')
-        parserHandler.onEmphasisStart()
-        parserHandler.onSimpleText('el')
-        parserHandler.onEmphasisEnd()
-        parserHandler.onStrongEmphasisStart()
-        parserHandler.onSimpleText('lo')
-        parserHandler.onStrongEmphasisEnd()
+        setupCode()
         parserHandler.onSectionEnd()
 
-        parserHandler.getSearchEntries().searchText.text.should == ['Hello']
+        return parserHandler.getSearchEntries()
     }
 }
