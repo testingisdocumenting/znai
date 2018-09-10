@@ -35,7 +35,7 @@ public class PageSearchEntries {
                 tocItem.getSectionTitle(),
                 tocItem.getPageTitle(),
                 pageSearchEntry.getPageSectionTitle(),
-                pageSearchEntry.getText().getText());
+                pageSearchEntry.getSearchText().getText());
     }
 
     private String genId(PageSearchEntry pageSearchEntry) {

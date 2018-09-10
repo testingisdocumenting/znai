@@ -62,6 +62,7 @@ public class MarkupParserResult {
     }
 
     public String getAllText() {
-        return searchEntries.stream().map(se -> se.getText().getText()).collect(joining(" "));
+        return searchEntries.stream().map(se -> se.getSearchText().getText())
+                .collect(joining(" "));
     }
 }

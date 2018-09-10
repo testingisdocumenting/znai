@@ -8,11 +8,11 @@ import com.twosigma.documentation.parser.PageSectionIdTitle;
  */
 public class PageSearchEntry {
     private PageSectionIdTitle pageSectionIdTitle;
-    private SearchText text;
+    private SearchText searchText;
 
-    public PageSearchEntry(String pageSectionTitle, SearchText text) {
+    public PageSearchEntry(String pageSectionTitle, SearchText searchText) {
         this.pageSectionIdTitle = new PageSectionIdTitle(pageSectionTitle);
-        this.text = text;
+        this.searchText = searchText;
     }
 
     public String getPageSectionId() {
@@ -23,7 +23,7 @@ public class PageSearchEntry {
         return pageSectionIdTitle.getTitle();
     }
 
-    public SearchText getText() {
-        return text;
+    public SearchText getSearchText() {
+        return searchText;
     }
 }

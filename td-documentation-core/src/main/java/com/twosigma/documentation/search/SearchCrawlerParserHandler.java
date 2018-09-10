@@ -40,40 +40,42 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onTable(MarkupTableData tableData) {
-        currentTextParts.add(tableData.allText());
+        addSeparated(tableData.allText());
     }
 
     @Override
     public void onSimpleText(String value) {
-        currentTextParts.add(value);
+        add(value);
     }
 
     @Override
     public void onInlinedCode(String inlinedCode) {
-        currentTextParts.add(inlinedCode);
+        addSeparated(inlinedCode);
     }
 
     @Override
     public void onLinkStart(String url) {
-        currentTextParts.add(url);
+        addSeparated(url);
     }
 
     @Override
     public void onImage(String title, String destination, String alt) {
-        currentTextParts.add(title);
-        currentTextParts.add(alt);
+        addSeparated(title);
+        addSeparated(destination);
+        addSeparated(alt);
     }
 
     @Override
     public void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet) {
-        currentTextParts.add(snippet);
+        addSeparated(lang);
+        addSeparated(snippet);
     }
 
     @Override
     public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
         SearchText searchText = includePlugin.textForSearch();
         if (searchText != null) {
-            currentTextParts.add(searchText.getText());
+            addSeparated(searchText.getText());
         }
     }
 
@@ -81,8 +83,18 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     public void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult) {
         SearchText searchText = fencePlugin.textForSearch();
         if (searchText != null) {
-            currentTextParts.add(searchText.getText());
+            addSeparated(searchText.getText());
         }
+    }
+
+    @Override
+    public void onSoftLineBreak() {
+        add(" ");
+    }
+
+    @Override
+    public void onHardLineBreak() {
+        add(" ");
     }
 
     @Override
@@ -90,13 +102,25 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
         flushTextParts();
     }
 
+    private void add(String part) {
+        currentTextParts.add(part);
+    }
+
+    private void addSeparated(String part) {
+        currentTextParts.add(' ' + part + ' ');
+    }
+
     private void flushTextParts() {
         if (currentTextParts.isEmpty()) {
             return;
         }
 
-        searchEntries.add(new PageSearchEntry(pageSectionTitle,
-                SearchScore.STANDARD.text(String.join(" ", currentTextParts))));
+        SearchText searchText = SearchScore.STANDARD.text(
+                String.join("", currentTextParts)
+                        .replaceAll("\\s+", " ")
+                        .trim());
+
+        searchEntries.add(new PageSearchEntry(pageSectionTitle, searchText));
         currentTextParts.clear();
     }
 }

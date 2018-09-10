@@ -320,7 +320,8 @@ public class WebSite {
                 .map(pageSearchEntry ->
                         new GlobalSearchEntry(
                                 searchEntryUrl(tocItem, pageSearchEntry),
-                                searchEntryTitle(tocItem, pageSearchEntry), pageSearchEntry.getText()))
+                                searchEntryTitle(tocItem, pageSearchEntry),
+                                pageSearchEntry.getSearchText()))
                 .collect(toList());
 
         globalSearchEntries.addAll(siteSearchEntries);
