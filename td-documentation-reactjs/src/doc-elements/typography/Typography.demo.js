@@ -191,7 +191,7 @@ function headingTextDemo() {
                 "type": "SubHeading",
                 "content": [
                     {
-                        "text": "Sub-Sub-Section Heading",
+                        "text": "Sub-Sub-Sub-Section Heading",
                         "type": "SimpleText"
                     }
                 ]
@@ -210,7 +210,7 @@ function headingTextDemo() {
                 "type": "SubHeading",
                 "content": [
                     {
-                        "text": "Sub-Sub-Section Heading",
+                        "text": "Sub-Sub-Sub-Sub-Section Heading",
                         "type": "SimpleText"
                     }
                 ]
@@ -229,7 +229,7 @@ function headingTextDemo() {
                 "type": "SubHeading",
                 "content": [
                     {
-                        "text": "Sub-Sub-Section Heading",
+                        "text": "Sub-Sub-Sub-Sub-Sub-Section Heading",
                         "type": "SimpleText"
                     }
                 ]
