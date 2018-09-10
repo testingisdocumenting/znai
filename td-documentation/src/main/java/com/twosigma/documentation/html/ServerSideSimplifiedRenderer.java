@@ -46,7 +46,7 @@ public class ServerSideSimplifiedRenderer {
                 "" :
                 "<header><h1>" + entry.getPageSectionTitle() + "</h1></header>\n";
 
-        String paragraph = "<p>" + entry.getText().getText() + "</p>\n";
+        String paragraph = "<p>" + entry.getSearchText().getText() + "</p>\n";
 
         return article(optionalHeader + paragraph);
     }
