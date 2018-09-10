@@ -86,6 +86,8 @@
     --mdoc-table-header-background-color: #272f33;
     --mdoc-table-border-color: rgb(71, 73, 80);
 
+    --mdoc-horizontal-rule-color: #313131;
+
     --mdoc-diagram-node-shadow-color: #444;
 
     color: var(--mdoc-regular-text-color);
@@ -95,8 +97,4 @@
 .theme-mdoc-dark .page-two-sides-right-part {
     border-left: 1px solid #444;
     background-color: #161c1f;
-}
-
-hr {
-    border-top: 1px solid #313131;
 }
