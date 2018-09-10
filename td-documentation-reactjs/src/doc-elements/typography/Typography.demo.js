@@ -122,6 +122,10 @@ function headingTextDemo() {
                 ]
             },
             {
+                "type": "ThematicBreak",
+                "content": []
+            },
+            {
                 "level": 2,
                 "type": "SubHeading",
                 "content": [
@@ -168,6 +172,10 @@ function headingTextDemo() {
                 ]
             },
             {
+                "type": "ThematicBreak",
+                "content": []
+            },
+            {
                 "level": 3,
                 "type": "SubHeading",
                 "content": [
@@ -185,6 +193,10 @@ function headingTextDemo() {
                         "type": "SimpleText"
                     }
                 ]
+            },
+            {
+                "type": "ThematicBreak",
+                "content": []
             },
             {
                 "level": 4,
