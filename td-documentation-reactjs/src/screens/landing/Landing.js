@@ -4,6 +4,8 @@ import FilterInput from './FilterInput'
 
 import TocPanel from '../../doc-elements/structure/toc/TocPanel'
 
+import WithTheme from '../../theme/WithTheme'
+
 import './Landing.css'
 
 export class Landing extends React.Component {
@@ -21,28 +23,34 @@ export class Landing extends React.Component {
         const documentationsToc = buildToc(categoriesWithDocs)
 
         return (
-            <div className="mdoc-landing">
-                <div className="mdoc-landing-categories-toc-area">
-                    <TocPanel toc={documentationsToc}
-                              docMeta={landingDocMeta}
-                              collapsed={tocCollapsed}
-                              onToggle={this.tocCollapseToggle}/>
-                </div>
+            <WithTheme>{() =>
+                <React.Fragment>
+                    <div className="mdoc-landing">
+                        <div className="mdoc-landing-categories-toc-area">
+                            <TocPanel toc={documentationsToc}
+                                      docMeta={landingDocMeta}
+                                      collapsed={tocCollapsed}
+                                      onToggle={this.tocCollapseToggle}/>
+                        </div>
 
-                <div className="mdoc-landing-documentations-area">
-                    <div className="centered">
-                        <FilterInput filterText={filterText} onChange={this.onFilterChange}/>
+                        <div className="mdoc-landing-documentations-area">
+                            <div className="centered">
+                                <FilterInput filterText={filterText} onChange={this.onFilterChange}/>
 
-                        <div className="mdoc-landing-categories">
-                            {
-                                categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs key={categoryWithDocs.category}
-                                                                                             category={categoryWithDocs.category}
-                                                                                             documentations={categoryWithDocs.documentations}/>)
-                            }
+                                <div className="mdoc-landing-categories">
+                                    {
+                                        categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs
+                                            key={categoryWithDocs.category}
+                                            category={categoryWithDocs.category}
+                                            documentations={categoryWithDocs.documentations}/>)
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </React.Fragment>
+            }
+            </WithTheme>
         )
     }
 
@@ -86,7 +94,7 @@ function Documentations({documentations}) {
 
 function Documentation({documentation}) {
     const url = documentation.url ?
-        documentation.url:
+        documentation.url :
         documentation.id + '/'
 
     return (

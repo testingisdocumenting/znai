@@ -27,7 +27,9 @@ class TocPanel extends Component {
             displaySettings
         } = this.state
 
-        const panelClass = 'toc-panel' + (collapsed ? ' collapsed' : '') + (selected ? ' selected' : '')
+        const panelClass = 'toc-panel' +
+            (collapsed ? ' collapsed' : '') +
+            (selected ? ' selected' : '')
 
         return (
             <div className={panelClass}>
@@ -40,6 +42,7 @@ class TocPanel extends Component {
                          selected={selectedItem}
                          onTocItemPageSectionClick={onTocItemPageSectionClick}
                          onTocItemClick={onTocItemClick}/>
+
                 {!collapsed && <TocSettings active={displaySettings} onSettingsToggle={this.onSettingsToggle}/>}
             </div>
         )
@@ -57,7 +60,7 @@ class TocPanel extends Component {
         const {selected, collapsed, onNextPage, onPrevPage} = this.props
         const {displaySettings} = this.state
 
-        if (displaySettings && e.code === "Escape") {
+        if (displaySettings && e.code === 'Escape') {
             this.setState({displaySettings: false})
             return
         }

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import * as Promise from 'promise'
 
 import {themeRegistry} from '../theme/ThemeRegistry'
+import WithTheme from '../theme/WithTheme'
 
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
@@ -156,30 +157,33 @@ export class Documentation extends Component {
                                                           onDocMetaUpdate={this.onDocMetaUpdate}
                                                           onError={this.onPageGenError}/> : null
 
-        const themeClassName = 'with-theme' + (theme.themeClassName ? ' theme-' + theme.themeClassName : '')
         return (
-            <div className={themeClassName}>
-                <DocumentationLayout docMeta={docMeta}
-                                     toc={toc}
-                                     theme={theme}
-                                     selectedTocItem={forceSelectedTocItem || autoSelectedTocItem}
-                                     prevPageTocItem={this.prevPageTocItem}
-                                     nextPageTocItem={this.nextPageTocItem}
-                                     searchPopup={searchPopup}
-                                     renderedPage={renderedPage}
-                                     renderedNextPrevNavigation={renderedNextPrevNavigation}
-                                     renderedFooter={renderedFooter}
-                                     onHeaderClick={this.onHeaderClick}
-                                     onSearchClick={this.onSearchClick}
-                                     onTocItemClick={this.onTocItemClick}
-                                     onTocItemPageSectionClick={this.onTocItemPageSectionClick}
-                                     onNextPage={this.onNextPage}
-                                     onPrevPage={this.onPrevPage}
-                                     textSelection={textSelection}
-                                     pageGenError={pageGenError}/>
-                {preview}
-                {lastChangeDataDom && <PreviewChangeIndicator targetDom={lastChangeDataDom} onIndicatorRemove={this.onPreviewIndicatorRemove}/>}
-            </div>
+            <WithTheme>{() =>
+                <React.Fragment>
+                    <DocumentationLayout docMeta={docMeta}
+                                         toc={toc}
+                                         theme={theme}
+                                         selectedTocItem={forceSelectedTocItem || autoSelectedTocItem}
+                                         prevPageTocItem={this.prevPageTocItem}
+                                         nextPageTocItem={this.nextPageTocItem}
+                                         searchPopup={searchPopup}
+                                         renderedPage={renderedPage}
+                                         renderedNextPrevNavigation={renderedNextPrevNavigation}
+                                         renderedFooter={renderedFooter}
+                                         onHeaderClick={this.onHeaderClick}
+                                         onSearchClick={this.onSearchClick}
+                                         onTocItemClick={this.onTocItemClick}
+                                         onTocItemPageSectionClick={this.onTocItemPageSectionClick}
+                                         onNextPage={this.onNextPage}
+                                         onPrevPage={this.onPrevPage}
+                                         textSelection={textSelection}
+                                         pageGenError={pageGenError}/>
+                    {preview}
+                    {lastChangeDataDom && <PreviewChangeIndicator targetDom={lastChangeDataDom}
+                                                                  onIndicatorRemove={this.onPreviewIndicatorRemove}/>}
+                </React.Fragment>
+            }
+            </WithTheme>
         )
     }
 
@@ -205,8 +209,6 @@ export class Documentation extends Component {
         this.enableScrollListener()
         this.onPageLoad()
 
-        themeRegistry.addOnThemeChangeListener(this.onThemeChange)
-
         document.addEventListener('keydown', this.keyDownHandler)
         document.addEventListener('mouseup', this.mouseUpHandler)
         document.addEventListener('click', this.mouseClickHandler)
@@ -215,15 +217,9 @@ export class Documentation extends Component {
     componentWillUnmount() {
         this.disableScrollListener()
 
-        themeRegistry.removeOnThemeChangeListener(this.onThemeChange)
-
         document.removeEventListener('keydown', this.keyDownHandler)
         document.removeEventListener('mouseup', this.mouseUpHandler)
         document.removeEventListener('click', this.mouseClickHandler)
-    }
-
-    onThemeChange = () => {
-        this.forceUpdate()
     }
 
     keyDownHandler(e) {
