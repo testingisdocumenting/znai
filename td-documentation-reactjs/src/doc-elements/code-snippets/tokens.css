@@ -63,7 +63,10 @@
     background-color: var(--mdoc-highlighted-background-color);
 }
 
-.code-line .token.url {
+.code-line .token.url,
+.code-line .token.entity,
+.code-line .token.variable,
+.code-line .token.operator {
     background: none;
 }
 
