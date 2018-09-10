@@ -13,23 +13,23 @@ import {parseCode} from '../code-snippets/codeParser'
 import './Snippet.css'
 
 const Snippet = (props) => {
-    const tokens = parseCode(props.lang, props.snippet)
+    const tokensToUse = parseCodeWithCompatibility({lang: props.lang, snippet: props.snippet, tokens: props.tokens})
 
     const snippetComponent = props.commentsType === 'inline' ?
         CodeSnippetWithInlineComments :
         SimpleCodeSnippet
 
-    return <SnippetContainer {...props} tokens={tokens} snippetComponent={snippetComponent}/>
+    return <SnippetContainer {...props} tokens={tokensToUse} snippetComponent={snippetComponent}/>
 }
 
 const presentationSnippetHandler = {
     component: Snippet,
-    numberOfSlides: ({meta, commentsType, lang, snippet, highlight}) => {
-        const tokens = parseCode(lang, snippet)
+    numberOfSlides: ({meta, commentsType, lang, snippet, tokens, highlight}) => {
+        const tokensToUse = parseCodeWithCompatibility({lang, snippet, tokens})
         const highlightAsList = convertToList(highlight)
 
         if (commentsType === 'inline') {
-            return inlinedCommentsNumberOfSlides({meta, tokens})
+            return inlinedCommentsNumberOfSlides({meta, tokens: tokensToUse})
         } else if (highlightAsList.length) {
             return highlightNumberOfSlides({meta, highlightAsList})
         } else {
@@ -37,8 +37,8 @@ const presentationSnippetHandler = {
         }
     },
 
-    slideInfoProvider: ({meta, commentsType, snippet, lang, slideIdx}) => {
-        const tokens = parseCode(lang, snippet)
+    slideInfoProvider: ({meta, commentsType, lang, snippet, tokens, slideIdx}) => {
+        const tokensToUse = parseCodeWithCompatibility({lang, snippet, tokens})
 
         if (isAllAtOnce(meta)) {
             return {}
@@ -48,13 +48,23 @@ const presentationSnippetHandler = {
             return {}
         }
 
-        const comments = tokens.filter(t => isInlinedComment(t))
+        const comments = tokensToUse.filter(t => isInlinedComment(t))
 
         return {
             slideVisibleNote: !comments.length ? null :
                 slideIdx === 0 ? "" : comments[slideIdx - 1].content
         }
     }
+}
+
+// TODO for backward compatibility with already built and deployed docs
+// remove once TSI rebuilds all the docs
+function parseCodeWithCompatibility({lang, tokens, snippet}) {
+    if (tokens) {
+        return tokens
+    }
+
+    return parseCode(lang, snippet)
 }
 
 function inlinedCommentsNumberOfSlides({meta, tokens}) {
