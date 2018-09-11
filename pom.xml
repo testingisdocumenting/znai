@@ -48,6 +48,7 @@
         <module>td-documentation-cli</module>
         <module>td-documentation-generators</module>
         <module>td-documentation-maven-plugin</module>
+        <module>td-documentation-maven-plugin-shaded</module>
         <module>td-documentation-docs</module>
         <module>td-ts-dist</module>
         <module>td-ts-ddjt</module>
