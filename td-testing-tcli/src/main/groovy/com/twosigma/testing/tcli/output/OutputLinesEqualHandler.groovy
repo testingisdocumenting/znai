@@ -18,7 +18,7 @@ class OutputLinesEqualHandler implements CompareToHandler {
     void compareEqualOnly(CompareToComparator comparator, ActualPath actualPath, Object actual, Object expected) {
         OutputLines actualLines = actual
 
-        def localComparator = comparator.freshCopy()
+        def localComparator = CompareToComparator.comparator(comparator.assertionMode)
 
         def matchedIdxs = []
         def lines = actualLines.getLines()
