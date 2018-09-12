@@ -1,24 +1,24 @@
 package com.twosigma.testing.tcli.output
 
-import com.twosigma.testing.data.render.DataRenderers
-import com.twosigma.testing.expectation.ActualPath
-import com.twosigma.testing.expectation.equality.EqualComparator
-import com.twosigma.testing.expectation.equality.EqualComparatorHandler
+import com.twosigma.webtau.data.render.DataRenderers
+import com.twosigma.webtau.expectation.ActualPath
+import com.twosigma.webtau.expectation.equality.CompareToComparator
+import com.twosigma.webtau.expectation.equality.CompareToHandler
 
 /**
  * @author mykola
  */
-class OutputLinesEqualHandler implements EqualComparatorHandler {
+class OutputLinesEqualHandler implements CompareToHandler {
     @Override
-    boolean handle(Object actual, Object expected) {
+    boolean handleEquality(Object actual, Object expected) {
         return actual instanceof OutputLines
     }
 
     @Override
-    void compare(EqualComparator equalComparator, ActualPath actualPath, Object actual, Object expected) {
+    void compareEqualOnly(CompareToComparator comparator, ActualPath actualPath, Object actual, Object expected) {
         OutputLines actualLines = actual
 
-        def localComparator = equalComparator.freshCopy()
+        def localComparator = comparator.freshCopy()
 
         def matchedIdxs = []
         def lines = actualLines.getLines()
@@ -30,7 +30,7 @@ class OutputLinesEqualHandler implements EqualComparatorHandler {
         }
 
         if (matchedIdxs.isEmpty()) {
-            equalComparator.reportMismatch(this, actualPath,
+            comparator.reportMismatch(this, actualPath,
                     "doesn't match " + DataRenderers.render(expected) +
                             ":\n" + actual)
         }

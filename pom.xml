@@ -13,19 +13,7 @@
         <module>td-utils</module>
         <module>td-utils-for-testing</module>
         <module>td-console</module>
-        <module>td-testing-core</module>
-        <module>td-testing-core-groovy</module>
-        <module>td-testing-core-groovy-ast</module>
-        <module>td-testing-standalone-groovy</module>
-        <module>td-testing-rest</module>
-        <module>td-testing-rest-groovy</module>
-        <module>td-testing-webtau</module>
-        <module>td-testing-webtau-groovy</module>
-        <module>td-testing-webtau-reactjs</module>
-        <module>td-testing-webtau-testapp</module>
         <module>td-testing-tcli</module>
-        <module>td-webtau-docs</module>
-        <module>td-webtau-dist</module>
         <module>td-ddjt-docs</module>
         <module>td-diagrams</module>
         <module>td-reactjs-common</module>
