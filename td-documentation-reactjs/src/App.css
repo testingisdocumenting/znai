@@ -168,8 +168,10 @@ body {
 }
 
 a,
-a:hover {
+a:hover,
+a code {
     color: var(--mdoc-link-color);
+    text-decoration: underline;
 }
 
 hr {
