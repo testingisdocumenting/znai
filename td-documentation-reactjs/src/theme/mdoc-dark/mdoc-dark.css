@@ -94,6 +94,10 @@
     background-color: var(--mdoc-background-color);
 }
 
+.theme-mdoc-dark a {
+    text-decoration: none;
+}
+
 .theme-mdoc-dark .page-two-sides-right-part {
     border-left: 1px solid #444;
     background-color: #161c1f;
