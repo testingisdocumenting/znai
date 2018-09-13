@@ -10,7 +10,7 @@ import com.twosigma.utils.ResourceUtils;
 import java.util.stream.Collectors;
 
 public class ServerSideSimplifiedRenderer {
-    private static final String LOADING_INDICATOR = ResourceUtils.textContent("template/initial-page-loading.html");
+    static final String LOADING_INDICATOR = ResourceUtils.textContent("template/initial-page-loading.html");
 
     public static String renderToc(TableOfContents toc) {
         return LOADING_INDICATOR + section(
