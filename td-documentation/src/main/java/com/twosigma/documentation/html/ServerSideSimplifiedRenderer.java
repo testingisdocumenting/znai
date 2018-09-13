@@ -6,6 +6,7 @@ import com.twosigma.documentation.search.PageSearchEntry;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
 import com.twosigma.utils.ResourceUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.stream.Collectors;
 
@@ -49,7 +50,7 @@ public class ServerSideSimplifiedRenderer {
                 "" :
                 "<header><h1>" + entry.getPageSectionTitle() + "</h1></header>\n";
 
-        String paragraph = "<p>" + entry.getSearchText().getText() + "</p>\n";
+        String paragraph = "<p>" + StringEscapeUtils.escapeHtml4(entry.getSearchText().getText()) + "</p>\n";
 
         return article(optionalHeader + paragraph);
     }
