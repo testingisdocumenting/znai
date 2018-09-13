@@ -38,7 +38,7 @@ class ServerSideSimplifiedRendererTest {
     void "should render simple page for crawl indexing"() {
         def searchEntries = new PageSearchEntries(
                 toc.tocItems[0], [
-                new PageSearchEntry('PS0', SearchScore.STANDARD.text('hello world')),
+                new PageSearchEntry('PS0', SearchScore.STANDARD.text('hello \' " <> [] & world')),
                 new PageSearchEntry('PS1', SearchScore.STANDARD.text('of search'))])
 
         ServerSideSimplifiedRenderer.renderPageTextContent(searchEntries).should ==
@@ -46,7 +46,7 @@ class ServerSideSimplifiedRendererTest {
                 '<section style="max-width: 640px; margin-left: auto; margin-right: auto;">\n' +
                 '<article>\n' +
                 '<header><h1>PS0</h1></header>\n' +
-                '<p>hello world</p>\n' +
+                '<p>hello \' &quot; &lt;&gt; [] &amp; world</p>\n' +
                 '</article>\n' +
                 '\n' +
                 '<article>\n' +
