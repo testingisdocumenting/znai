@@ -5,19 +5,22 @@ import com.twosigma.documentation.search.PageSearchEntries;
 import com.twosigma.documentation.search.PageSearchEntry;
 import com.twosigma.documentation.structure.TableOfContents;
 import com.twosigma.documentation.structure.TocItem;
+import com.twosigma.utils.ResourceUtils;
 
 import java.util.stream.Collectors;
 
 public class ServerSideSimplifiedRenderer {
+    private static final String LOADING_INDICATOR = ResourceUtils.textContent("template/initial-page-loading.html");
+
     public static String renderToc(TableOfContents toc) {
-        return section(
+        return LOADING_INDICATOR + section(
                 toc.getTocItems().stream()
                         .map(ServerSideSimplifiedRenderer::renderTocLink)
                         .collect(Collectors.joining("\n")));
     }
 
     public static String renderPageTextContent(PageSearchEntries pageSearchEntries) {
-        return section(
+        return LOADING_INDICATOR + section(
                 pageSearchEntries.getEntries().stream()
                         .map(ServerSideSimplifiedRenderer::renderPageEntry)
                         .collect(Collectors.joining("\n")));
