@@ -1,1 +1,1 @@
-com.twosigma.testing.tcli.output.OutputLinesEqualHandler
+com.twosigma.testing.tcli.output.OutputLinesCompareToHandler

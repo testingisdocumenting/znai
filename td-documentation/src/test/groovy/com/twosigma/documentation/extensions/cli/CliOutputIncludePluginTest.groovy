@@ -3,7 +3,7 @@ package com.twosigma.documentation.extensions.cli
 import com.twosigma.documentation.extensions.include.PluginsTestUtils
 import org.junit.Test
 
-import static com.twosigma.testing.Ddjt.equal
+import static com.twosigma.webtau.Ddjt.equal
 
 /**
  * @author mykola

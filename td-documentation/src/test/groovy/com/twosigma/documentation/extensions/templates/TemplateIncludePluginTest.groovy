@@ -9,7 +9,7 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-import static com.twosigma.testing.Ddjt.equal
+import static com.twosigma.webtau.Ddjt.equal
 
 /**
  * @author mykola

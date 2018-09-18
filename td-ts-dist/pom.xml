@@ -34,9 +34,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.td</groupId>
-            <artifactId>td-testing-webtau-groovy</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.twosigma.webtau</groupId>
+            <artifactId>webtau-groovy</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

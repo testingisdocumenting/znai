@@ -38,6 +38,7 @@
         <module>td-documentation-maven-plugin</module>
         <module>td-documentation-maven-plugin-shaded</module>
         <module>td-documentation-docs</module>
+        <module>td-testing-examples</module>
         <module>td-ts-dist</module>
         <module>td-ts-ddjt</module>
         <module>td-mdoc-dist</module>
@@ -50,6 +51,7 @@
         <commonmark.version>0.9.0</commonmark.version>
         <antlr.version>4.5</antlr.version>
         <jackson.verson>2.9.5</jackson.verson>
+        <webtau.version>0.29</webtau.version>
     </properties>
 
     <dependencyManagement>
@@ -208,6 +210,36 @@
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-yaml</artifactId>
                 <version>${jackson.verson}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.twosigma.webtau</groupId>
+                <artifactId>webtau-core-groovy</artifactId>
+                <version>${webtau.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.twosigma.webtau</groupId>
+                <artifactId>webtau</artifactId>
+                <version>${webtau.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.twosigma.webtau</groupId>
+                <artifactId>webtau-core</artifactId>
+                <version>${webtau.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.twosigma.webtau</groupId>
+                <artifactId>webtau-groovy</artifactId>
+                <version>${webtau.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.twosigma.webtau</groupId>
+                <artifactId>webtau-browser</artifactId>
+                <version>${webtau.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -8,7 +8,12 @@ import com.twosigma.webtau.expectation.equality.CompareToHandler
 /**
  * @author mykola
  */
-class OutputLinesEqualHandler implements CompareToHandler {
+class OutputLinesCompareToHandler implements CompareToHandler {
+    @Override
+    boolean handleNulls() {
+        return true
+    }
+
     @Override
     boolean handleEquality(Object actual, Object expected) {
         return actual instanceof OutputLines
@@ -23,18 +28,19 @@ class OutputLinesEqualHandler implements CompareToHandler {
         def matchedIdxs = []
         def lines = actualLines.getLines()
         lines.eachWithIndex { line, idx ->
-            def result = localComparator.compare(actualPath.index(idx), line, expected)
-            if (! result.isMismatch()) {
+            def result = localComparator.compareIsEqual(actualPath.index(idx), line, expected)
+            if (result) {
                 matchedIdxs.add(idx)
             }
         }
 
-        if (matchedIdxs.isEmpty()) {
-            comparator.reportMismatch(this, actualPath,
-                    "doesn't match " + DataRenderers.render(expected) +
-                            ":\n" + actual)
-        }
+        comparator.reportEqualOrNotEqual(this, !matchedIdxs.isEmpty(), actualPath, renderActualExpected(actual, expected))
 
         matchedIdxs.each { actualLines.registerCheckedLine(it) }
+    }
+
+    private static String renderActualExpected(Object actual, Object expected) {
+        return "  actual: " + actual + "\n" +
+            "expected: " + DataRenderers.render(expected)
     }
 }

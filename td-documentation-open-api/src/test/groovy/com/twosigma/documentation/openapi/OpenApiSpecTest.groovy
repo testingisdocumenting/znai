@@ -5,8 +5,8 @@ import com.twosigma.utils.ResourceUtils
 import org.junit.BeforeClass
 import org.junit.Test
 
-import static com.twosigma.testing.Ddjt.actual
-import static com.twosigma.testing.Ddjt.equal
+import static com.twosigma.webtau.Ddjt.actual
+import static com.twosigma.webtau.Ddjt.equal
 
 class OpenApiSpecTest {
     private static OpenApiSpec spec

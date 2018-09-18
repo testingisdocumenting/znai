@@ -2,8 +2,8 @@ package com.twosigma.documentation.parser.sphinx.python
 
 import org.junit.Test
 
-import static com.twosigma.testing.Ddjt.actual
-import static com.twosigma.testing.Ddjt.equal
+import static com.twosigma.webtau.Ddjt.actual
+import static com.twosigma.webtau.Ddjt.equal
 
 /**
  * @author mykola
