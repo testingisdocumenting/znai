@@ -12,3 +12,4 @@ td-documentation-reactjs/build
 docs-build
 package-lock.json
 *.DS_Store
+dependency-reduced-pom.xml
