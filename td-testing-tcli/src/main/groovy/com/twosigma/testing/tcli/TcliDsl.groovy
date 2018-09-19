@@ -1,8 +1,8 @@
 package com.twosigma.testing.tcli
 
-import com.twosigma.testing.standalone.StandaloneTestRunner
 import com.twosigma.testing.tcli.output.OutputLines
 import com.twosigma.testing.tcli.process.CliProcess
+import com.twosigma.webtau.runner.standalone.StandaloneTestRunner
 
 /**
  * @author mykola

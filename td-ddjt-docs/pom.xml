@@ -15,31 +15,30 @@
     <dependencies>
         <dependency>
             <groupId>com.twosigma.td</groupId>
-            <artifactId>td-documentation-cli</artifactId>
-            <version>${project.version}</version>
+            <artifactId>td-testing-examples</artifactId>
+            <version>0.1</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
+                <groupId>com.twosigma.td</groupId>
+                <artifactId>td-documentation-maven-plugin</artifactId>
+                <version>${project.version}</version>
                 <executions>
                     <execution>
                         <phase>prepare-package</phase>
                         <goals>
-                            <goal>java</goal>
+                            <goal>build</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.twosigma.documentation.cli.DocumentationCliApp</mainClass>
-                    <arguments>
-                        <argument>--doc-id=ddjt</argument>
-                        <argument>--source=${project.basedir}/ddjt</argument>
-                        <argument>--deploy=${project.build.directory}</argument>
-                    </arguments>
+                    <docId>ddjt</docId>
+                    <deployRoot>${project.build.directory}</deployRoot>
+                    <sourceRoot>${project.basedir}/ddjt</sourceRoot>
+                    <port>3334</port>
                 </configuration>
             </plugin>
         </plugins>

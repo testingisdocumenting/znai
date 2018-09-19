@@ -25,13 +25,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.td</groupId>
-            <artifactId>td-testing-core-groovy</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <scope>test</scope>
@@ -40,6 +33,19 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.twosigma.webtau</groupId>
+            <artifactId>webtau-core-groovy</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.twosigma.webtau</groupId>
+            <artifactId>webtau-core-groovy</artifactId>
+            <version>0.29</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

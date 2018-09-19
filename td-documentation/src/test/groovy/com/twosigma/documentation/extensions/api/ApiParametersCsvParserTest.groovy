@@ -3,7 +3,7 @@ package com.twosigma.documentation.extensions.api
 import com.twosigma.documentation.parser.TestComponentsRegistry
 import org.junit.Test
 
-import static com.twosigma.testing.Ddjt.equal
+import static com.twosigma.webtau.Ddjt.equal
 
 class ApiParametersCsvParserTest {
     @Test

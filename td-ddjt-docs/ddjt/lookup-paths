@@ -1,3 +1,2 @@
-../../td-testing-core/src/test/java
-../../td-testing-core/src/test/groovy
-../../td-testing-core-groovy/src/test/groovy
+../../td-testing-examples/src/test/groovy
+../../td-testing-examples/src/test/java

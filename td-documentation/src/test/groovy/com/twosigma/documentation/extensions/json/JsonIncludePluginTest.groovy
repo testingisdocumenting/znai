@@ -3,8 +3,8 @@ package com.twosigma.documentation.extensions.json
 import com.twosigma.documentation.extensions.include.PluginsTestUtils
 import org.junit.Test
 
-import static com.twosigma.testing.Ddjt.actual
-import static com.twosigma.testing.Ddjt.equal
+import static com.twosigma.webtau.Ddjt.actual
+import static com.twosigma.webtau.Ddjt.equal
 import static java.util.stream.Collectors.toList
 
 class JsonIncludePluginTest {

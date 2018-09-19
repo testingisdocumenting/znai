@@ -2,7 +2,7 @@ package com.twosigma.documentation.extensions.table
 
 import org.junit.Test
 
-import static com.twosigma.testing.Ddjt.equal
+import static com.twosigma.webtau.Ddjt.equal
 
 /**
  * @author mykola
