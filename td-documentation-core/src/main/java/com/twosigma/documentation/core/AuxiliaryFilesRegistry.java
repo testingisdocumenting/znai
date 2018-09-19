@@ -24,7 +24,7 @@ public class AuxiliaryFilesRegistry {
     }
 
     public Set<AuxiliaryFile> auxiliaryFilesByTocItem(TocItem tocItem) {
-        return auxiliaryFilesByTocItem.get(tocItem);
+        return auxiliaryFilesByTocItem.getOrDefault(tocItem, Collections.emptySet());
     }
 
     public void updateFileAssociations(TocItem tocItem, AuxiliaryFile auxiliaryFile) {
