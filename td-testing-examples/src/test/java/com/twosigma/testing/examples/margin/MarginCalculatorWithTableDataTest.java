@@ -15,8 +15,8 @@ public class MarginCalculatorWithTableDataTest {
     @Test
     public void marginShouldBeZeroIfNoLotsSet() {
         TableData transactionsData = header("symbol", "lot", "price").values(
-                "SYM.B",  0.0,    8.0,
-                "SYM.C",  0.0,    19.0);
+                                             "SYM.B",  0.0,    8.0,
+                                             "SYM.C",  0.0,    19.0);
 
         double margin = marginCalculator.calculate(createTransactions(transactionsData));
         assertEquals(0, margin, 0.0000001);

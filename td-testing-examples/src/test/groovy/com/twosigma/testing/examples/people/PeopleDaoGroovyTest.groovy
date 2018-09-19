@@ -14,8 +14,8 @@ class PeopleDaoGroovyTest {
         // ...
 
         dao.thisWeekJoiners().should == ["id"    | "level" | "monthsAtCompany"] {
-            ______________________________________
-            "bob"   | 3       | 0
-            "smith" | 4       | 0  }
+                                         ______________________________________
+                                         "bob"   | 3       | 0
+                                         "smith" | 4       | 0  }
     }
 }

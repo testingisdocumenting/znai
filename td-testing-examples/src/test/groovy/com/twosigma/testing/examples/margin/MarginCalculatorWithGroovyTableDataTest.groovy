@@ -10,9 +10,9 @@ class MarginCalculatorWithGroovyTableDataTest {
     @Test
     void "margin should be zero if no lots set"() {
         def transactionsData = ["symbol" | "lot" | "price"] {
-            ___________________________
-            "SYM.B" |     0 |     8
-            "SYM.C" |     0 |    19 }
+                                 ___________________________
+                                 "SYM.B" |     0 |     8
+                                 "SYM.C" |     0 |    19 }
 
         def margin = marginCalculator.calculate(createTransactions(transactionsData))
         margin.should == 0

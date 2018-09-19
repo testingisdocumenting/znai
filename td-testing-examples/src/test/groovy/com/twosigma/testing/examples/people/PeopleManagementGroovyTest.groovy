@@ -13,10 +13,10 @@ class PeopleManagementGroovyTest {
     @Test
     void "diversified teams should have various levels and time at company"() {
         def employeeData = [ "id"    | "level" | "monthsAtCompany"] {
-            _______________________________________
-            "bob"   |       2 |  12
-            "smith" |       4 |  34
-            "john"  |       3 |  20 }
+                            _______________________________________
+                             "bob"   |       2 |  12
+                             "smith" |       4 |  34
+                             "john"  |       3 |  20 }
 
         def diversified = peopleManagement.diversityLevel(employees(employeeData))
         diversified.should == true

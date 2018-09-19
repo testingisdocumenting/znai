@@ -19,9 +19,9 @@ public class PeopleManagementTest {
     @Test
     public void diversifiedTeamsShouldHaveVariousLevelsAndTimeAtCompany() {
         TableData employeeData = header(    "id", "level", "monthsAtCompany").values(
-                "bob",       2, 12,
-                "smith",       4, 34,
-                "john",       3, 20);
+                                           "bob",       2, 12,
+                                         "smith",       4, 34,
+                                          "john",       3, 20);
 
         boolean diversified = peopleManagement.diversityLevel(employees(employeeData));
         actual(diversified).should(equal(true));
