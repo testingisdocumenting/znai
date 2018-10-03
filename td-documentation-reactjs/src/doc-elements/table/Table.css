@@ -2,8 +2,16 @@
     margin: 20px auto;
 }
 
+.simple-table table {
+    table-layout: fixed;
+}
+
 .simple-table td .content-block {
     width: auto;
+}
+
+.simple-table td .snippet-container {
+    overflow-x: auto;
 }
 
 .simple-table .ui.table {
@@ -15,6 +23,10 @@
 .simple-table .ui.table thead th {
     background: var(--mdoc-table-header-background-color);
     color: var(--mdoc-table-text-color);
+}
+
+.simple-table td {
+    word-break: break-all;
 }
 
 .simple-table .ui.celled.table tr td {
