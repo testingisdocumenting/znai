@@ -34,6 +34,7 @@ import {cliCommandDemo} from './doc-elements/cli/CliCommand.demo'
 import {yamlSnippetDemo} from './doc-elements/code-snippets/Yaml.demo'
 import {latexDemo} from './doc-elements/latex/Latex.demo'
 import {chartDemo} from './doc-elements/charts/Chart.demo'
+import {tableDemo} from './doc-elements/table/Table.demo'
 
 const docMeta = {
     id: 'preview',
@@ -75,6 +76,7 @@ visuals.registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
 const layout = new Registry('layout')
 layout.registerAsTabs('Pages', pagesDemo)
 layout.registerAsGrid('Tabs', 300, tabsDemo)
+layout.registerAsGrid('Tables', 0, tableDemo)
 layout.registerAsTabs('TOC', tocPanelDemo)
 layout.registerAsGrid('Typography', 0, typographyDemo)
 
