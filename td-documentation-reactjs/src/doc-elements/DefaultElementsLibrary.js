@@ -77,6 +77,8 @@ presentationElementHandlers.Snippet = presentationSnippetHandler
 
 library.CustomReactJSComponent = CustomReactJSComponent
 
+library.EmptyBlock = () => (<div/>)
+
 library.LangClass = wrappedInContentBlock(LangClass)
 library.LangFunction = wrappedInContentBlock(LangFunction)
 
