@@ -60,3 +60,8 @@
 .two-sides-section .page-two-sides-right-part:nth-child(4) .snippet-container:first-child {
     margin-top: 0;
 }
+
+.two-sides-section .page-two-sides-left-part:nth-child(3) .simple-table:first-child,
+.two-sides-section .page-two-sides-right-part:nth-child(4) .simple-table:first-child {
+    margin-top: 0;
+}
