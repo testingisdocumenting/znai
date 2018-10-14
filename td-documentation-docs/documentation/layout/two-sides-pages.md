@@ -32,4 +32,16 @@ All the following content will go to the right side. At the start of a new secti
 :include-meta: {"rightSide": true}
 :include-json: two-sides/price-estimate.json {title: "Response"}
 
+# Aligning Data in Columns
 
+Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side.
+:include-empty-block: {rightSide: true}
+
+:include-file: snippets/file-name.js
+:include-meta: {"rightSide": true}
+:include-file: snippets/file-name-with-comments.js
+
+:include-meta: {"rightSide": false}
+
+Two code snippets above are aligned by using an empty block on the right side. 
+:include-file: two-sides-pages.md {startLine: "Aligning Data in Columns", exclude: true, endLine: ":include-meta: {\"rightSide\": false}"}
