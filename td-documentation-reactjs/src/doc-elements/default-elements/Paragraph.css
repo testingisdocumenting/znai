@@ -6,6 +6,10 @@
     margin-bottom: 16px;
 }
 
+.paragraph:last-child {
+    margin-bottom: 0;
+}
+
 .paragraph.attention {
     display: flex;
     align-items: baseline;

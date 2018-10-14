@@ -55,3 +55,8 @@
 .page-two-sides-right-part .snippet-container .snippet {
     border-left: none;
 }
+
+.two-sides-section .page-two-sides-left-part:nth-child(3) .snippet-container:first-child,
+.two-sides-section .page-two-sides-right-part:nth-child(4) .snippet-container:first-child {
+    margin-top: 0;
+}

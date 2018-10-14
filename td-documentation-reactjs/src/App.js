@@ -18,7 +18,7 @@ import {pagesDemo} from './doc-elements/page/Page.demo'
 import {imageAnnotationDemo} from './doc-elements/images/EmbeddedAnnotatedImage.demo'
 import {apiParametersDemo} from './doc-elements/api/ApiParameters.demo'
 import {jsxDemo} from './doc-elements/jsx/Jsx.demo'
-import {snippetsDemo} from './doc-elements/code-snippets/Snippet.demo'
+import {snippetsDemo, snippetsTwoSidesDemo} from './doc-elements/code-snippets/Snippet.demo'
 import {documentationPreparationDemo} from './screens/documentation-preparation/DocumentationPreparation.demo'
 import {setDocMeta} from './doc-elements/docMeta'
 import {landingDemo} from './screens/landing/Landing.demo'
@@ -52,6 +52,7 @@ setDocMeta(docMeta)
 
 const snippets = new Registry('snippets')
 snippets.registerAsGrid('Code Snippet', 0, snippetsDemo)
+snippets.registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)
 snippets.registerAsGrid('Yaml Code Snippet', 0, yamlSnippetDemo)
 snippets.registerAsGrid('Json', 0, jsonDemo)
 snippets.registerAsGrid('Xml', 0, xmlDemo)
