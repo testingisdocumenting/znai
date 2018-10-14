@@ -1,6 +1,9 @@
 package com.twosigma.documentation.extensions;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
@@ -11,7 +14,7 @@ public class PluginParamsOpts {
     private Map<String, ?> opts;
 
     PluginParamsOpts(Map<String, ?> opts) {
-        this.opts = opts;
+        this.opts = shortcutRightSideOption(opts);
     }
 
     @SuppressWarnings("unchecked")
@@ -74,5 +77,15 @@ public class PluginParamsOpts {
 
     public Map<String, Object> toMap() {
         return new LinkedHashMap<>(opts);
+    }
+
+    private Map<String, ?> shortcutRightSideOption(Map<String, ?> opts) {
+        Map<String, Object> result = new LinkedHashMap<>(opts);
+        Object rightSide = opts.get("rightSide");
+        if (rightSide != null) {
+            result.put("meta", Collections.singletonMap("rightSide", rightSide));
+        }
+
+        return result;
     }
 }
