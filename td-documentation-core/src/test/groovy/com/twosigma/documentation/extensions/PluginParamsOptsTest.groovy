@@ -12,10 +12,4 @@ class PluginParamsOptsTest {
         opts.getList("highlight").should == [1]
         opts.getList("params").should == ['a', 'b']
     }
-
-    @Test
-    void "should auto convert rightSide value to meta-rightSide"() {
-        def opts = new PluginParamsOpts([rightSide: true])
-        opts.toMap().get('meta').should == [rightSide: true]
-    }
 }

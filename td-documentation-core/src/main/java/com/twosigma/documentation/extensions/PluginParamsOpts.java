@@ -14,7 +14,7 @@ public class PluginParamsOpts {
     private Map<String, ?> opts;
 
     PluginParamsOpts(Map<String, ?> opts) {
-        this.opts = shortcutRightSideOption(opts);
+        this.opts = opts;
     }
 
     @SuppressWarnings("unchecked")
@@ -77,15 +77,5 @@ public class PluginParamsOpts {
 
     public Map<String, Object> toMap() {
         return new LinkedHashMap<>(opts);
-    }
-
-    private Map<String, ?> shortcutRightSideOption(Map<String, ?> opts) {
-        Map<String, Object> result = new LinkedHashMap<>(opts);
-        Object rightSide = opts.get("rightSide");
-        if (rightSide != null) {
-            result.put("meta", Collections.singletonMap("rightSide", rightSide));
-        }
-
-        return result;
     }
 }

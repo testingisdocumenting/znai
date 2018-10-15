@@ -37,6 +37,17 @@ class TabsFencePluginTest {
         plugin.textForSearch().text.should == 'java test java markup groovy test groovy markup'
     }
 
+    @Test
+    void "handles rightSide shortcut converting it to meta"() {
+        def plugin = new TabsFencePlugin()
+        def result = plugin.process(TestComponentsRegistry.INSTANCE,
+                Paths.get("test.md"),
+                new PluginParams(plugin.id(), "{rightSide: true}"),
+                "")
+
+        result.docElements*.toMap().should == [[meta: [rightSide: true], tabsContent: [], type: 'Tabs']]
+    }
+
     private static List<Map> process(String markup) {
         def pluginWithResult = processAndGetPluginWithResult(markup)
         return pluginWithResult.result.docElements.collect { it.toMap() }

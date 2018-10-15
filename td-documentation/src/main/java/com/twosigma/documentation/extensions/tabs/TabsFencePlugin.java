@@ -2,7 +2,6 @@ package com.twosigma.documentation.extensions.tabs;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.extensions.ColonDelimitedKeyValues;
-import com.twosigma.documentation.extensions.Plugin;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
@@ -17,7 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -48,7 +46,7 @@ public class TabsFencePlugin implements FencePlugin {
         ColonDelimitedKeyValues tabsDefinitions = new ColonDelimitedKeyValues(content);
         List<ParsedTab> parsedTabs = tabsDefinitions.map(this::parseTab).collect(toList());
 
-        Map<String, Object> tabsProps = new LinkedHashMap<>();
+        Map<String, Object> tabsProps = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         tabsProps.put("tabsContent", parsedTabs.stream().map(this::tabProps).collect(toList()));
 
         parsedTabs.forEach(this::generateSearchText);
