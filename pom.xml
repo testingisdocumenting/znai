@@ -51,7 +51,7 @@
         <commonmark.version>0.9.0</commonmark.version>
         <antlr.version>4.5</antlr.version>
         <jackson.verson>2.9.5</jackson.verson>
-        <webtau.version>0.29</webtau.version>
+        <webtau.version>0.30</webtau.version>
     </properties>
 
     <dependencyManagement>

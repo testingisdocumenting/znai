@@ -1,14 +1,18 @@
 package com.twosigma.documentation.extensions;
 
+import com.twosigma.documentation.extensions.meta.MetaIncludePlugin;
 import com.twosigma.utils.JsonUtils;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * @author mykola
  */
 public class PluginParams {
+    private static final String RIGHT_SIDE_OPT_NAME = "rightSide";
+
     private String pluginId;
     private String freeParam;
     private PluginParamsOpts opts;
@@ -27,12 +31,12 @@ public class PluginParams {
 
     public PluginParams(String pluginId, Map<String, ?> opts) {
         this.pluginId = pluginId;
-        this.opts = new PluginParamsOpts(opts);
+        this.opts = new PluginParamsOpts(shortcutRightSideOption(opts));
     }
 
     public void setValue(String value) {
         this.freeParam = extractFreeParam(value);
-        this.opts = new PluginParamsOpts(extractMap(value));
+        this.opts = new PluginParamsOpts(shortcutRightSideOption(extractMap(value)));
     }
 
     public String getPluginId() {
@@ -62,5 +66,21 @@ public class PluginParams {
 
         String json = value.substring(optsStartIdx);
         return JsonUtils.deserializeAsMap(json);
+    }
+
+    private Map<String, ?> shortcutRightSideOption(Map<String, ?> opts) {
+        Map<String, Object> result = new LinkedHashMap<>(opts);
+
+        Object rightSide = opts.get(RIGHT_SIDE_OPT_NAME);
+        if (rightSide == null) {
+            return result;
+        }
+
+        if (!pluginId.equals(MetaIncludePlugin.ID)) {
+            result.put("meta", Collections.singletonMap(RIGHT_SIDE_OPT_NAME, rightSide));
+            result.remove(RIGHT_SIDE_OPT_NAME);
+        }
+
+        return result;
     }
 }
