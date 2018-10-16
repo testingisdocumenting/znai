@@ -7,7 +7,6 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
 
 import java.nio.file.Path;
-import java.util.Collections;
 
 public class EmptyBlockIncludePlugin implements IncludePlugin {
     @Override
@@ -22,7 +21,6 @@ public class EmptyBlockIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
-        return PluginResult.docElement("EmptyBlock", Collections.singletonMap("meta",
-                Collections.singletonMap("rightSide", pluginParams.getOpts().get("rightSide", false))));
+        return PluginResult.docElement("EmptyBlock", pluginParams.getOpts().toMap());
     }
 }
