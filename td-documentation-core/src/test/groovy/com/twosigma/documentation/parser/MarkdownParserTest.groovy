@@ -190,11 +190,23 @@ world""")
     }
 
     @Test
+    void "top level section without text"() {
+        parse("# ")
+        content.should == [[type: 'Section', id: "", title: ""]]
+    }
+
+    @Test
     void "second level section"() {
         parse("## Secondary Section \ntext text")
         content.should == [[type: 'SubHeading', level: 2, content:[
                 [type: "SimpleText", text: "Secondary Section"]]],
                            [type: "Paragraph", content: [[type: "SimpleText", text: "text text"]]]]
+    }
+
+    @Test
+    void "second level section without text"() {
+        parse("## ")
+        content.should == [[type: 'SubHeading', level: 2]]
     }
 
     @Test
