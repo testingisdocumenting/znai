@@ -201,7 +201,8 @@ public class MarkdownVisitor extends AbstractVisitor {
                 parserHandler.onSectionEnd();
             }
 
-            final String literal = ((Text) heading.getFirstChild()).getLiteral();
+            Text firstChild = (Text) heading.getFirstChild();
+            String literal = firstChild != null ? firstChild.getLiteral() : "";
             parserHandler.onSectionStart(literal);
             sectionStarted = true;
         } else {
