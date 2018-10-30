@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import SearchTocItem from './SearchTocItem'
 
 export default class SearchToc extends Component {
     render() {
@@ -21,17 +22,4 @@ export default class SearchToc extends Component {
             </div>
         )
     }
-}
-
-function SearchTocItem({pageTitle, pageSection, isSelected, idx, onSelect, onJump}) {
-    const className = "mdoc-search-toc-item" + (isSelected ? " selected" : "")
-
-    return (
-        <div className={className}
-             onClick={() => onSelect(idx)}
-             onDoubleClick={() => onJump(idx)}>
-            <span className="mdoc-search-toc-page-title">{pageTitle}</span>
-            <span className="mdoc-search-toc-section-title">{pageSection}</span>
-        </div>
-    )
 }
