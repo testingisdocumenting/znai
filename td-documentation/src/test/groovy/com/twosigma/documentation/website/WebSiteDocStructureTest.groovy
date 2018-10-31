@@ -35,7 +35,9 @@ class WebSiteDocStructureTest {
     void "should accept direct links to anchors as long as anchors are registered"() {
         def path = Paths.get('/home/user/docs/chapter/page.md')
         docStructure.registerGlobalAnchor(path, 'functionRefId')
+        docStructure.registerLocalAnchor(path, 'localId')
         docStructure.validateUrl(path, 'section title', new DocUrl('chapter/page#functionRefId'))
+        docStructure.validateUrl(path, 'section title', new DocUrl('chapter/page#localId'))
         docStructure.validateCollectedLinks()
     }
 

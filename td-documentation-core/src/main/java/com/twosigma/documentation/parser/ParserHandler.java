@@ -22,8 +22,7 @@ public interface ParserHandler {
     void onSectionStart(String title);
     void onSectionEnd();
 
-    void onSubHeadingStart(int level);
-    void onSubHeadingEnd(int level);
+    void onSubHeading(int level, String title);
     void onHardLineBreak();
     void onSoftLineBreak();
     void onParagraphStart();

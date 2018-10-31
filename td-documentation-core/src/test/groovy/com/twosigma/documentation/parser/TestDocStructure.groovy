@@ -46,6 +46,10 @@ class TestDocStructure implements DocStructure {
     }
 
     @Override
+    void registerLocalAnchor(Path path, String anchorId) {
+    }
+
+    @Override
     String globalAnchorUrl(Path clientPath, String anchorId) {
         return null
     }

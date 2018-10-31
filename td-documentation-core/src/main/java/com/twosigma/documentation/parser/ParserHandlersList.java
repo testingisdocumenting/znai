@@ -31,13 +31,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onSubHeadingStart(int level) {
-        list.forEach(h -> h.onSubHeadingStart(level));
-    }
-
-    @Override
-    public void onSubHeadingEnd(int level) {
-        list.forEach(h -> h.onSubHeadingEnd(level));
+    public void onSubHeading(int level, String title) {
+        list.forEach(h -> h.onSubHeading(level, title));
     }
 
     @Override

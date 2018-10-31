@@ -78,7 +78,13 @@ public class DocElementCreationParserHandler implements ParserHandler {
             onSectionEnd();
         }
 
-        start(DocElementType.SECTION, "title", title, "id", new PageSectionIdTitle(title).getId());
+        String id = new PageSectionIdTitle(title).getId();
+        start(DocElementType.SECTION,
+                "title", title,
+                "id", id);
+
+        componentsRegistry.docStructure().registerLocalAnchor(path, id);
+
         isSectionStarted = true;
     }
 
@@ -97,13 +103,14 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSubHeadingStart(int level) {
-        start(DocElementType.SUB_HEADING, "level", level);
-    }
+    public void onSubHeading(int level, String title) {
+        String id = new PageSectionIdTitle(title).getId();
+        append(DocElementType.SUB_HEADING,
+                "level", level,
+                "title", title,
+                "id", id);
 
-    @Override
-    public void onSubHeadingEnd(int level) {
-        end();
+        componentsRegistry.docStructure().registerLocalAnchor(path, id);
     }
 
     @Override
