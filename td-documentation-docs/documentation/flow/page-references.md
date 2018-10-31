@@ -29,6 +29,16 @@ To refer back to the top-level `index` page use:
 [index link](/)
 ```
 
+## Links to Sub Section
+
+Linking to subsections is the same as linking to a top level section. [Here is an example](flow/page-references#links-to-sub-section)
+
+```markdown
+[Here is an example](flow/page-references#links-to-sub-section)
+```
+ 
+## Index Page
+
 Clicking this [index page](/) link will have the same effect as clicking the documentation title at the top of the **Navigation Panel**
 
 # Downloads
@@ -39,3 +49,8 @@ Clicking the link will open a file using the browser's default method.
     Download [test json file](data/test.json)
     
 Download [test json file](data/test.json)
+
+# Validation
+
+Local links are automatically validated during documentation build time. 
+You will get a build time error if you refer a page or a section/sub-section that does not exist. 

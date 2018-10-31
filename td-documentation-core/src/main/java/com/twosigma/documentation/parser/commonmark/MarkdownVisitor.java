@@ -201,14 +201,24 @@ public class MarkdownVisitor extends AbstractVisitor {
                 parserHandler.onSectionEnd();
             }
 
-            Text firstChild = (Text) heading.getFirstChild();
-            String literal = firstChild != null ? firstChild.getLiteral() : "";
-            parserHandler.onSectionStart(literal);
+            parserHandler.onSectionStart(extractHeadingText(heading));
             sectionStarted = true;
         } else {
-            parserHandler.onSubHeadingStart(heading.getLevel());
-            visitChildren(heading);
-            parserHandler.onSubHeadingEnd(heading.getLevel());
+            parserHandler.onSubHeading(heading.getLevel(), extractHeadingText(heading));
         }
+    }
+
+    private String extractHeadingText(Heading heading) {
+        Node firstChild = heading.getFirstChild();
+
+        if (firstChild == null) {
+            return "";
+        }
+
+        if (!(firstChild instanceof Text)) {
+            return "<only regular text is supported as part of heading>";
+        }
+
+        return ((Text) firstChild).getLiteral();
     }
 }

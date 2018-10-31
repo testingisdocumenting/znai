@@ -14,12 +14,14 @@ class WebSiteDocStructure implements DocStructure {
     private TableOfContents toc;
     private final List<LinkToValidate> linksToValidate;
     private final Map<String, Path> globalAnchorPathById;
+    private final Map<Path, List<String>> localAnchorIdsByPath;
 
     WebSiteDocStructure(DocMeta docMeta, TableOfContents toc) {
         this.docMeta = docMeta;
         this.toc = toc;
         this.linksToValidate = new ArrayList<>();
         this.globalAnchorPathById = new HashMap<>();
+        this.localAnchorIdsByPath = new HashMap<>();
     }
 
     void removeGlobalAnchorsForPath(Path path) {
@@ -29,7 +31,8 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     public void validateCollectedLinks() {
-        String validationErrorMessage = linksToValidate.stream().map(this::validateLink)
+        String validationErrorMessage = linksToValidate.stream()
+                .map(this::validateLink)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(joining("\n\n"));
@@ -81,6 +84,12 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     @Override
+    public void registerLocalAnchor(Path path, String anchorId) {
+        List<String> anchors = localAnchorIdsByPath.computeIfAbsent(path, k -> new ArrayList<>());
+        anchors.add(anchorId);
+    }
+
+    @Override
     public String globalAnchorUrl(Path clientPath, String anchorId) {
         Path anchorPath = globalAnchorPathById.get(anchorId);
         if (anchorPath == null) {
@@ -113,11 +122,11 @@ class WebSiteDocStructure implements DocStructure {
             return Optional.empty();
         }
 
-        if (!tocItem.hasPageSection(anchorId)) {
-            return Optional.of(validationMessage.get());
+        if (isValidLocalAnchor(link.path, anchorId)) {
+            return Optional.empty();
         }
 
-        return Optional.empty();
+        return Optional.of(validationMessage.get());
     }
 
     private boolean isValidGlobalAnchor(TocItem tocItemWithAnchor, String anchorId) {
@@ -128,6 +137,11 @@ class WebSiteDocStructure implements DocStructure {
 
         TocItem anchorTocItem = toc.tocItemByPath(anchorPath);
         return tocItemWithAnchor.equals(anchorTocItem);
+    }
+
+    private boolean isValidLocalAnchor(Path path, String anchorId) {
+        List<String> localIds = localAnchorIdsByPath.get(path);
+        return localIds != null && localIds.contains(anchorId);
     }
 
     private class LinkToValidate {

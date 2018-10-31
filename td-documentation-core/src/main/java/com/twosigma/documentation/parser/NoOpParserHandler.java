@@ -4,7 +4,6 @@ import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.fence.FencePlugin;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
-import com.twosigma.documentation.parser.ParserHandler;
 import com.twosigma.documentation.parser.table.MarkupTableData;
 
 import java.util.Map;
@@ -19,11 +18,7 @@ public class NoOpParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSubHeadingStart(int level) {
-    }
-
-    @Override
-    public void onSubHeadingEnd(int level) {
+    public void onSubHeading(int level, String title) {
     }
 
     @Override

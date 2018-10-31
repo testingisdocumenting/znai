@@ -1,5 +1,5 @@
 import React from 'react'
-import { elementsLibrary } from '../DefaultElementsLibrary'
+import {elementsLibrary} from '../DefaultElementsLibrary'
 
 export function typographyDemo(registry) {
     const headingcontent = [headingDemo()]
@@ -19,52 +19,32 @@ function headingDemo() {
                 {
                     "level": 2,
                     "type": "SubHeading",
-                    "content": [
-                        {
-                            "text": "Sub-Section Heading",
-                            "type": "SimpleText"
-                        }
-                    ]
+                    "title": "Sub-Section Heading",
+                    "id": "sub-section-heading",
                 },
                 {
                     "level": 3,
                     "type": "SubHeading",
-                    "content": [
-                        {
-                            "text": "Sub-Sub-Section Heading",
-                            "type": "SimpleText"
-                        }
-                    ]
+                    "title": "Sub-Sub-Section Heading",
+                    "id": "sub-sub-section-heading",
                 },
                 {
                     "level": 4,
                     "type": "SubHeading",
-                    "content": [
-                        {
-                            "text": "Sub-Sub-Sub-Section Heading",
-                            "type": "SimpleText"
-                        }
-                    ]
+                    "title": "Sub-Sub-Sub-Section Heading",
+                    "id": "sub-sub-sub-section-heading",
                 },
                 {
                     "level": 5,
                     "type": "SubHeading",
-                    "content": [
-                        {
-                            "text": "Sub-Sub-Sub-Sub-Section Heading",
-                            "type": "SimpleText"
-                        }
-                    ]
+                    "title": "Sub-Sub-Sub-Sub-Section Heading",
+                    "id": "sub-sub-sub-sub-section-heading",
                 },
                 {
                     "level": 6,
                     "type": "SubHeading",
-                    "content": [
-                        {
-                            "text": "Sub-Sub-Sub-Sub-Sub-Section Heading",
-                            "type": "SimpleText"
-                        }
-                    ]
+                    "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
+                    "id": "sub-sub-sub-sub-sub-section-heading"
                 }
             ]
         }
@@ -72,33 +52,6 @@ function headingDemo() {
 
 function headingTextDemo() {
     return {
-        "title": "Section Heading",
-        "id": "section-heading",
-        "type": "Section",
-        "content": [
-            {
-                "level": 2,
-                "type": "SubHeading",
-                "content": [
-                    {
-                        "text": "Sub-Section Heading",
-                        "type": "SimpleText"
-                    }
-                ]
-            },
-            {
-                "level": 3,
-                "type": "SubHeading",
-                "content": [
-                    {
-                        "text": "Sub-Sub-Section Heading",
-                        "type": "SimpleText"
-                    }
-                ]
-            }
-        ]
-    },
-    {
         "title": "Section Heading",
         "id": "section-heading",
         "type": "Section",
@@ -128,12 +81,8 @@ function headingTextDemo() {
             {
                 "level": 2,
                 "type": "SubHeading",
-                "content": [
-                    {
-                        "text": "Sub-Section Heading",
-                        "type": "SimpleText"
-                    }
-                ]
+                "title": "Sub-Section Heading",
+                "id": "sub-section-heading"
             },
             {
                 "type": "Paragraph",
@@ -178,12 +127,8 @@ function headingTextDemo() {
             {
                 "level": 3,
                 "type": "SubHeading",
-                "content": [
-                    {
-                        "text": "Sub-Sub-Section Heading",
-                        "type": "SimpleText"
-                    }
-                ]
+                "title": "Sub-Sub-Section Heading",
+                "id": "sub-sub-section-heading",
             },
             {
                 "type": "Paragraph",
@@ -201,12 +146,8 @@ function headingTextDemo() {
             {
                 "level": 4,
                 "type": "SubHeading",
-                "content": [
-                    {
-                        "text": "Sub-Sub-Sub-Section Heading",
-                        "type": "SimpleText"
-                    }
-                ]
+                "title": "Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-section-heading"
             },
             {
                 "type": "Paragraph",
@@ -220,12 +161,8 @@ function headingTextDemo() {
             {
                 "level": 5,
                 "type": "SubHeading",
-                "content": [
-                    {
-                        "text": "Sub-Sub-Sub-Sub-Section Heading",
-                        "type": "SimpleText"
-                    }
-                ]
+                "title": "Sub-Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-sub-section-heading"
             },
             {
                 "type": "Paragraph",
@@ -239,12 +176,8 @@ function headingTextDemo() {
             {
                 "level": 6,
                 "type": "SubHeading",
-                "content": [
-                    {
-                        "text": "Sub-Sub-Sub-Sub-Sub-Section Heading",
-                        "type": "SimpleText"
-                    }
-                ]
+                "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-sub-sub-section-heading"
             },
             {
                 "type": "Paragraph",
