@@ -76,7 +76,7 @@ visuals.registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
 
 const layout = new Registry('layout')
 layout.registerAsTabs('Pages', pagesDemo)
-layout.registerAsGrid('Tabs', 300, tabsDemo)
+layout.registerAsGrid('Tabs', 0, tabsDemo)
 layout.registerAsGrid('Tables', 0, tableDemo)
 layout.registerAsTabs('TOC', tocPanelDemo)
 layout.registerAsGrid('Typography', 0, typographyDemo)

@@ -54,7 +54,7 @@ class Tabs extends Component {
         const tabContent = tabsContent[activeIdx].content
 
         return (
-            <div className="tabs-area">
+            <div className="tabs-area" ref={this.saveNode}>
                 <TabNames names={names} activeIdx={activeIdx} onClick={this.onClick}/>
                 <div className="tabs-content">
                     <elementsLibrary.DocElement {...this.props} content={tabContent}/>
@@ -63,19 +63,62 @@ class Tabs extends Component {
         )
     }
 
-    onClick = (idx) => {
-        const {tabsContent} = this.props
-        tabsRegistration.notifyNewTab(tabsContent[idx].name)
+    saveNode = (node) => {
+        this.node = node
+        this.parentWithScrollNode = findParentWithScroll(this.node)
     }
 
-    onTabSwitch = (tabName) => {
+    onClick = (idx) => {
+        const {tabsContent} = this.props
+        const {activeIdx} = this.state
+
+        if (activeIdx === idx) {
+            return
+        }
+
+        tabsRegistration.notifyNewTab({tabName: tabsContent[idx].name, triggeredNode: this.node})
+    }
+
+    onTabSwitch = ({tabName, triggeredNode}) => {
         const {tabsContent} = this.props
         const names = tabsContent.map(t => t.name)
 
         const idx = names.indexOf(tabName)
         if (idx !== -1) {
-            this.setState({activeIdx: idx})
+            this.setState({activeIdx: idx, triggeredNode})
         }
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        if (prevState.activeIdx !== this.state.activeIdx &&
+            this.node === this.state.triggeredNode) {
+
+            const nodeRect = this.node.getBoundingClientRect()
+            return {scrollTop: this.parentWithScrollNode.scrollTop, clientRect: nodeRect}
+        }
+
+        return null;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!snapshot) {
+            return
+        }
+
+        const diffY = this.node.getBoundingClientRect().y - snapshot.clientRect.y
+        this.parentWithScrollNode.scrollTop = this.parentWithScrollNode.scrollTop + diffY
+    }
+}
+
+function findParentWithScroll(node) {
+    if (node == null) {
+        return null;
+    }
+
+    if (node.scrollHeight > node.clientHeight) {
+        return node;
+    } else {
+        return findParentWithScroll(node.parentNode);
     }
 }
 
