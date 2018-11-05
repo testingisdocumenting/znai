@@ -25,7 +25,7 @@ class TwoSidesTabsSelection extends React.Component {
         )
     }
 
-    onTabSwitch = (tabName) => {
+    onTabSwitch = ({tabName}) => {
         const {tabNames} = this.props
 
         const idx = tabNames.indexOf(tabName)
@@ -44,7 +44,7 @@ class TwoSidesTabsSelection extends React.Component {
 }
 
 function Tab({name, isActive}) {
-    const onClick = () => tabsRegistration.notifyNewTab(name)
+    const onClick = () => tabsRegistration.notifyNewTab({tabName: name})
     const className = 'two-sides-tab-name' + (isActive ? ' active' : '')
 
     return (

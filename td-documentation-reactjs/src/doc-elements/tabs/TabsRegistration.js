@@ -17,11 +17,11 @@ class TabsRegistration {
         return matches ? matches[0] : names[0]
     }
 
-    notifyNewTab(name) {
-        removeFromArray(this.tabsSelectionHistory, name)
-        this.tabsSelectionHistory.unshift(name)
+    notifyNewTab({tabName, triggeredNode}) {
+        removeFromArray(this.tabsSelectionHistory, tabName)
+        this.tabsSelectionHistory.unshift(tabName)
 
-        this.listeners.forEach(l => l(name))
+        this.listeners.forEach(l => l({tabName, triggeredNode}))
     }
 }
 

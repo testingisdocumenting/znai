@@ -25,7 +25,7 @@ class TwoSidesTabs extends Component {
         )
     }
 
-    onTabSwitch = (tabName) => {
+    onTabSwitch = ({tabName}) => {
         const {tabsContent} = this.props
         const names = tabsContent.map(t => t.name)
 
