@@ -29,6 +29,7 @@ import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.impl.RoutingContextDecorator;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -190,9 +191,26 @@ public class DocumentationServer {
     private static void createDirs(Path deployRoot) {
         try {
             Files.createDirectories(deployRoot);
+        } catch (FileAlreadyExistsException e) {
+            checkForSymlinks(deployRoot, e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static void checkForSymlinks(Path deployRoot, FileAlreadyExistsException e) {
+        if (Files.isSymbolicLink(deployRoot)) {
+            try {
+                Path path = Files.readSymbolicLink(deployRoot);
+                if (Files.isDirectory(path)) {
+                    return;
+                }
+            } catch (IOException ex) {
+                // Wil throw runtime exception anyway
+            }
+        }
+
+        throw new RuntimeException(e);
     }
 
     private void unzip(String docId, Path path) {
