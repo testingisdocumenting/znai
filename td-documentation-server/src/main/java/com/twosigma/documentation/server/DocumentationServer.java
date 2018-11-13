@@ -19,6 +19,7 @@ import com.twosigma.documentation.server.upload.FileUploadVertxHandler;
 import com.twosigma.documentation.server.upload.OnUploadFinishedServerHandlers;
 import com.twosigma.documentation.server.upload.UnzipTask;
 import com.twosigma.documentation.server.urlhandlers.UrlContentHandlers;
+import com.twosigma.utils.FileUtils;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
@@ -28,8 +29,6 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.impl.RoutingContextDecorator;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -42,7 +41,6 @@ import java.util.stream.Stream;
  */
 public class DocumentationServer {
     private final JsonWebSocketHandlerComposition socketHandlers;
-    private final DocumentationPreparationWebSocketHandler documentationPreparationWebSocketHandler;
     private final Vertx vertx;
     private final ReactJsBundle reactJsBundle;
     private final Path deployRoot;
@@ -54,13 +52,13 @@ public class DocumentationServer {
         System.setProperty("vertx.cwd", deployRoot.toString());
         System.setProperty("file.encoding","UTF-8");
 
-        createDirs(deployRoot);
+        FileUtils.symlinkAwareCreateDirs(deployRoot);
         vertx = Vertx.vertx();
 
         socketHandlers = new JsonWebSocketHandlerComposition();
-        documentationPreparationWebSocketHandler = new DocumentationPreparationWebSocketHandler(vertx);
+        DocumentationPreparationWebSocketHandler socketHandler = new DocumentationPreparationWebSocketHandler(vertx);
 
-        socketHandlers.add(documentationPreparationWebSocketHandler);
+        socketHandlers.add(socketHandler);
         OnUploadFinishedServerHandlers.add(this::unzip);
     }
 
@@ -185,14 +183,6 @@ public class DocumentationServer {
 
         String extension = uri.substring(dotIdx);
         return !extension.equals("html");
-    }
-
-    private static void createDirs(Path deployRoot) {
-        try {
-            Files.createDirectories(deployRoot);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void unzip(String docId, Path path) {

@@ -1,6 +1,7 @@
 package com.twosigma.utils;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -58,5 +59,16 @@ public class FileUtils {
         return nonNull.stream().filter(p -> Files.exists(p)).findFirst().orElseThrow(() ->
                 new RuntimeException("can't find any of the following files:\n" +
                         nonNull.stream().map(Path::toString).collect(Collectors.joining("\n"))));
+    }
+
+    public static void symlinkAwareCreateDirs(Path path) {
+        try {
+        Path dir = Files.isSymbolicLink(path)
+                ? Files.readSymbolicLink(path)
+                : path;
+            Files.createDirectories(dir);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
