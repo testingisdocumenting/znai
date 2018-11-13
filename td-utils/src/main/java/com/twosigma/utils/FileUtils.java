@@ -63,26 +63,12 @@ public class FileUtils {
 
     public static void symlinkAwareCreateDirs(Path path) {
         try {
-            Files.createDirectories(path);
-        } catch (FileAlreadyExistsException e) {
-            checkForSymlinks(path, e);
+        Path dir = Files.isSymbolicLink(path)
+                ? Files.readSymbolicLink(path)
+                : path;
+            Files.createDirectories(dir);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static void checkForSymlinks(Path deployRoot, FileAlreadyExistsException e) {
-        if (Files.isSymbolicLink(deployRoot)) {
-            try {
-                Path path = Files.readSymbolicLink(deployRoot);
-                if (Files.isDirectory(path)) {
-                    return;
-                }
-            } catch (IOException ex) {
-                // Wil throw runtime exception anyway
-            }
-        }
-
-        throw new RuntimeException(e);
     }
 }
