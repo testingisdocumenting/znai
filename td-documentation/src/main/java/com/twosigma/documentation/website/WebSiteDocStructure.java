@@ -126,6 +126,10 @@ class WebSiteDocStructure implements DocStructure {
             return Optional.empty();
         }
 
+        if (tocItem.hasPageSection(anchorId)) {
+            return Optional.empty();
+        }
+
         return Optional.of(validationMessage.get());
     }
 
