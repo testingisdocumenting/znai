@@ -1,7 +1,7 @@
 package com.twosigma.documentation.extensions.diagrams
 
-import com.twosigma.documentation.website.WebSiteComponentsRegistry
 import com.twosigma.documentation.extensions.diagrams.slides.DiagramSlides
+import com.twosigma.documentation.parser.TestComponentsRegistry
 import com.twosigma.documentation.parser.commonmark.MarkdownParser
 import org.junit.Test
 
@@ -61,7 +61,7 @@ context information
     }
 
     private void parse(markdown) {
-        def diagramSlides = new MarkupDiagramSlides(new MarkdownParser(new WebSiteComponentsRegistry()))
+        def diagramSlides = new MarkupDiagramSlides(new MarkdownParser(TestComponentsRegistry.INSTANCE))
         slides = diagramSlides.create(Paths.get(""), markdown)
     }
 }
