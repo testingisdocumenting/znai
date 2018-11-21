@@ -1,5 +1,6 @@
 package com.twosigma.documentation.website
 
+import com.twosigma.documentation.parser.PageSectionIdTitle
 import com.twosigma.documentation.structure.DocMeta
 import com.twosigma.documentation.structure.DocUrl
 import com.twosigma.documentation.structure.TableOfContents
@@ -24,6 +25,8 @@ class WebSiteDocStructureTest {
 
         toc = new TableOfContents('md')
         toc.addTocItem('chapter', 'page')
+        toc.addTocItem('chapter', 'pageTwo')
+        toc.findTocItem('chapter', 'pageTwo').pageSectionIdTitles = [new PageSectionIdTitle ('Test Section')]
     }
 
     @Before
@@ -38,6 +41,7 @@ class WebSiteDocStructureTest {
         docStructure.registerLocalAnchor(path, 'localId')
         docStructure.validateUrl(path, 'section title', new DocUrl('chapter/page#functionRefId'))
         docStructure.validateUrl(path, 'section title', new DocUrl('chapter/page#localId'))
+        docStructure.validateUrl(path, 'section title', new DocUrl('chapter/pageTwo#test-section'))
         docStructure.validateCollectedLinks()
     }
 
