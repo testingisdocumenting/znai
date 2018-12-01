@@ -14,14 +14,14 @@ class WebSiteDocStructure implements DocStructure {
     private TableOfContents toc;
     private final List<LinkToValidate> linksToValidate;
     private final Map<String, Path> globalAnchorPathById;
-    private final Map<Path, List<String>> localAnchorIdsByPath;
+    private final Map<TocItem, List<String>> localAnchorIdsByTocItem;
 
     WebSiteDocStructure(DocMeta docMeta, TableOfContents toc) {
         this.docMeta = docMeta;
         this.toc = toc;
         this.linksToValidate = new ArrayList<>();
         this.globalAnchorPathById = new HashMap<>();
-        this.localAnchorIdsByPath = new HashMap<>();
+        this.localAnchorIdsByTocItem = new HashMap<>();
     }
 
     void removeGlobalAnchorsForPath(Path path) {
@@ -85,7 +85,12 @@ class WebSiteDocStructure implements DocStructure {
 
     @Override
     public void registerLocalAnchor(Path path, String anchorId) {
-        List<String> anchors = localAnchorIdsByPath.computeIfAbsent(path, k -> new ArrayList<>());
+        TocItem tocItem = toc.tocItemByPath(path);
+        if (tocItem == null) {
+            throw new RuntimeException("Can't find TocItem associated with path: " + path);
+        }
+
+        List<String> anchors = localAnchorIdsByTocItem.computeIfAbsent(tocItem, k -> new ArrayList<>());
         anchors.add(anchorId);
     }
 
@@ -122,7 +127,7 @@ class WebSiteDocStructure implements DocStructure {
             return Optional.empty();
         }
 
-        if (isValidLocalAnchor(link.path, anchorId)) {
+        if (isValidLocalAnchor(tocItem, anchorId)) {
             return Optional.empty();
         }
 
@@ -143,8 +148,8 @@ class WebSiteDocStructure implements DocStructure {
         return tocItemWithAnchor.equals(anchorTocItem);
     }
 
-    private boolean isValidLocalAnchor(Path path, String anchorId) {
-        List<String> localIds = localAnchorIdsByPath.get(path);
+    private boolean isValidLocalAnchor(TocItem tocItem, String anchorId) {
+        List<String> localIds = localAnchorIdsByTocItem.get(tocItem);
         return localIds != null && localIds.contains(anchorId);
     }
 

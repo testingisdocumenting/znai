@@ -38,7 +38,7 @@ public class MarkdownIncludePlugin implements IncludePlugin {
         MarkupParser parser = componentsRegistry.defaultParser();
 
         Path markdown = resourcesResolver.fullPath(pluginParams.getFreeParam());
-        parserResult = parser.parse(markdown, resourcesResolver.textContent(markdown));
+        parserResult = parser.parse(markupPath, resourcesResolver.textContent(markdown));
 
         return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
     }
