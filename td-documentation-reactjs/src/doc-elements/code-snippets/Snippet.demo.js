@@ -26,6 +26,7 @@ export function snippetsDemo(registry) {
                                                                                                 commentsType="inline"/></TwoSidesLayoutRightPart>)
         .add('wide with spoiler bullet points', <Snippet wide={true} spoiler={true} lang="java" snippet={wideCode()}
                                                          commentsType="inline"/>)
+        .add('with empty bullet points', <Snippet lang="java" snippet={codeWithoutComments()} commentsType="inline"/>)
         .add('horizontal scroll', <Snippet wide={false} lang="java" snippet={wideCode()}/>)
         .add('highlight by line idx', <Snippet lang="markdown" snippet={markdownCode()} highlight={[0]}/>)
         .add('highlight by text', <Snippet lang="markdown" snippet={markdownCode()} highlight={"include-file"}/>)
@@ -80,6 +81,14 @@ function codeWithComments() {
         '    private static void main(String... args) {\n' +
         '        ... // code goes here\n' +
         '    } // code stops here\n' +
+        '}\n'
+}
+
+function codeWithoutComments() {
+    return 'class InternationalPriceService implements PriceService {\n' +
+        '    private static void main(String... args) {\n' +
+        '        ...\n' +
+        '    }\n' +
         '}\n'
 }
 
