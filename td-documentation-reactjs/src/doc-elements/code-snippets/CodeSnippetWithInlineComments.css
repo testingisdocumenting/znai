@@ -39,13 +39,9 @@
     color: #888;
 }
 
-.hidden-explanation .ui.blue.circular.label.circle-badge {
-    color: var(--mdoc-snippets-explanation-background-color) !important;
-    background-color: var(--mdoc-snippets-explanation-background-color) !important;
-}
-
-span.ui.blue.label {
-    background-color: var(--mdoc-snippets-bullet-color) !important;
+.hidden-explanation .circle-badge {
+    color: var(--mdoc-snippets-explanation-background-color);
+    background-color: var(--mdoc-snippets-explanation-background-color);
 }
 
 .code-with-inlined-comments.with-highlighted-line pre {
