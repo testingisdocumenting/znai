@@ -83,7 +83,8 @@
     --mdoc-snippets-background-color: #f8faf9;
     --mdoc-snippets-outer-border-color: #ddd;
     --mdoc-snippets-inner-border-color: #f3f3f3;
-    --mdoc-snippets-bullet-color: var(--mdoc-brand-primary-color);
+    --mdoc-snippets-bullet-color: #eee;
+    --mdoc-snippets-bullet-background-color: var(--mdoc-brand-primary-color);
     --mdoc-snippets-title-color: #555;
     --mdoc-snippets-title-background-color: #eff1f0;
     --mdoc-snippets-title-left-border-color: var(--mdoc-light-black);

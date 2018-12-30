@@ -1,0 +1,18 @@
+.circle-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--mdoc-code-font-family);
+    font-size: 11px;
+    color: var(--mdoc-snippets-bullet-color);
+    background-color: var(--mdoc-snippets-bullet-background-color);
+
+    border-radius: 16px;
+    min-height: 20px;
+    min-width: 20px;
+
+    padding: 1px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
