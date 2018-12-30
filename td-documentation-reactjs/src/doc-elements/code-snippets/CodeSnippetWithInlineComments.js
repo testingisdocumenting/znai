@@ -8,7 +8,7 @@ import BulletExplanations from './BulletExplanations'
 import CircleBadge from './CircleBadge'
 
 import {isAllAtOnce} from '../meta/meta'
-import {splitTokensIntoLines, isInlinedComment, containsInlinedComment} from './codeUtils'
+import {containsInlinedComment, isInlinedComment, splitTokensIntoLines} from './codeUtils'
 
 import './CodeSnippetWithInlineComments.css'
 
@@ -28,7 +28,7 @@ const SpecialCommentToken = ({token, isPresentation}) => {
 }
 
 const Explanations = ({spoiler, isPresentation, slideIdx, comments}) => {
-    if (isPresentation) {
+    if (isPresentation || comments.length === 0) {
         return null
     }
 
