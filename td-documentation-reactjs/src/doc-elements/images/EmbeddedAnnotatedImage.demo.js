@@ -13,5 +13,5 @@ const data = {imageSrc: 'ui.jpg',
 }
 
 export function imageAnnotationDemo(registry) {
-    registry.add('simple annotations', <EmbeddedAnnotatedImage {...data}/>)
+    registry.add('simple annotations', () => <EmbeddedAnnotatedImage {...data}/>)
 }

@@ -5,9 +5,9 @@ import {elementsLibrary} from '../DefaultElementsLibrary'
 export function docUtilsDemo(registry) {
     registry
         .add('function with types',
-            <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[functionWithTypes()]}/>)
+            () => <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[functionWithTypes()]}/>)
         .add('class with methods',
-            <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[classWithMethods()]}/>)
+            () => <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[classWithMethods()]}/>)
 }
 
 function functionWithTypes() {

@@ -5,15 +5,15 @@ import Table from './Table'
 
 export function tableDemo(registry) {
     registry
-        .add('no style', <Table table={defaultStyle(twoColumnsData())} elementsLibrary={elementsLibrary}/>)
-        .add('no header, vertical only', <Table table={vertLinesOnly(twoColumnsData())}
-                                                elementsLibrary={elementsLibrary}/>)
-        .add('no header, vertical only, no vertical padding', <Table table={noVertPadding(twoColumnsData())}
-                                                                     elementsLibrary={elementsLibrary}/>)
-        .add('long inlined code', <Table table={defaultStyle(dataWithLongInlinedCode())}
-                                         elementsLibrary={elementsLibrary}/>)
-        .add('with code snippet', <Table table={defaultStyle(dataWithCodeSnippet())}
-                                         elementsLibrary={elementsLibrary}/>)
+        .add('no style', () => <Table table={defaultStyle(twoColumnsData())} elementsLibrary={elementsLibrary}/>)
+        .add('no header, vertical only', () => <Table table={vertLinesOnly(twoColumnsData())}
+                                                      elementsLibrary={elementsLibrary}/>)
+        .add('no header, vertical only, no vertical padding', () => <Table table={noVertPadding(twoColumnsData())}
+                                                                           elementsLibrary={elementsLibrary}/>)
+        .add('long inlined code', () => <Table table={defaultStyle(dataWithLongInlinedCode())}
+                                               elementsLibrary={elementsLibrary}/>)
+        .add('with code snippet', () => <Table table={defaultStyle(dataWithCodeSnippet())}
+                                               elementsLibrary={elementsLibrary}/>)
 }
 
 function defaultStyle(data) {

@@ -8,5 +8,5 @@ const docMeta = {id: "mdoc", title: "MDoc", type: "User Guide"}
 
 export function createPresentationDemo(content) {
     const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, content)
-    return <Presentation docMeta={docMeta} presentationRegistry={presentationRegistry}/>
+    return () => <Presentation docMeta={docMeta} presentationRegistry={presentationRegistry}/>
 }

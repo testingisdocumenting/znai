@@ -14,12 +14,12 @@ export function tocPanelDemo(registry) {
     const selectedTocItem = {dirName: 'snippets', fileName: 'json'}
 
     registry
-        .add('long', <TocPanel docMeta={docMeta}
-                               toc={longToc()}
-                               selectedItem={selectedTocItem}/>, '')
-        .add('short', <TocPanel docMeta={docMeta}
-                                toc={shortToc()}
-                                selectedItem={selectedTocItem}/>, '')
+        .add('long', () => <TocPanel docMeta={docMeta}
+                                     toc={longToc()}
+                                     selectedItem={selectedTocItem}/>, '')
+        .add('short', () => <TocPanel docMeta={docMeta}
+                                      toc={shortToc()}
+                                      selectedItem={selectedTocItem}/>, '')
 }
 
 function shortToc() {

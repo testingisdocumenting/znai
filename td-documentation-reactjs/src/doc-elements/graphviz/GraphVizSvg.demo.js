@@ -3,8 +3,8 @@ import GraphVizSvg from './GraphVizSvg'
 
 export function graphVizSvgDemo(registry) {
     registry
-        .add('default schema svg', <GraphVizSvg {...simpleDiagram('id1')}/>)
-        .add('dark theme svg', <div className="theme-mdoc-dark"><GraphVizSvg {...simpleDiagram('id2')}/></div>)
+        .add('default schema svg', () => <GraphVizSvg {...simpleDiagram('id1')}/>)
+        .add('dark theme svg', () => <div className="theme-mdoc-dark"><GraphVizSvg {...simpleDiagram('id2')}/></div>)
 }
 
 function simpleDiagram(id) {

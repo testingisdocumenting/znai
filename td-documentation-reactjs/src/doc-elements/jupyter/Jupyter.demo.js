@@ -66,7 +66,7 @@ const simpleNotebook = {
 
 export function jupyterDemo(registry) {
     registry
-        .add('code cell', <JupyterCell elementsLibrary={elementsLibrary} cell={simpleNotebook.cells[0]}/>)
-        .add('output cell', <JupyterCell elementsLibrary={elementsLibrary} cell={simpleNotebook.cells[1]}/>)
-        .add('html cell', <JupyterCell elementsLibrary={elementsLibrary} cell={simpleNotebook.cells[2]}/>)
+        .add('code cell', () => <JupyterCell elementsLibrary={elementsLibrary} cell={simpleNotebook.cells[0]}/>)
+        .add('output cell', () => <JupyterCell elementsLibrary={elementsLibrary} cell={simpleNotebook.cells[1]}/>)
+        .add('html cell', () => <JupyterCell elementsLibrary={elementsLibrary} cell={simpleNotebook.cells[2]}/>)
 }

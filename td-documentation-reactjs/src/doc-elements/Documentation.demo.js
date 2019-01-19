@@ -3,5 +3,5 @@ import {Documentation} from './Documentation'
 import testData from './TestData'
 
 export function documentationDemo(registry) {
-    registry.add('default', <Documentation {...testData.documentation}/>)
+    registry.add('default', () => <Documentation {...testData.documentation}/>)
 }
