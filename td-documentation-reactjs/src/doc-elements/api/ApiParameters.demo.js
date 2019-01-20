@@ -30,9 +30,9 @@ const nestedParameters = [
 
 export function apiParametersDemo(registry) {
     registry
-        .add('flat parameters', <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>)
-        .add('nested parameters', <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>)
-        .add('with text around', (
+        .add('flat parameters', () => <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>)
+        .add('nested parameters', () => <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>)
+        .add('with text around', () => (
             <React.Fragment>
                 <ParagraphText/>
                 <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>

@@ -9,8 +9,8 @@ export function yamlSnippetDemo(registry) {
     const parsed = parseCode("yaml", yamlCode())
 
     registry
-        .add('highlight by line idx', <Snippet tokens={parsed} highlight={[3, 5]}/>)
-        .add('highlight by text', <Snippet tokens={parsed} highlight={"family"}/>)
+        .add('highlight by line idx', () => <Snippet tokens={parsed} highlight={[3, 5]}/>)
+        .add('highlight by text', () => <Snippet tokens={parsed} highlight={"family"}/>)
 }
 
 function yamlCode() {

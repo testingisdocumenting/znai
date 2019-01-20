@@ -37,5 +37,5 @@ class SearchDemo extends React.Component {
 }
 
 export function searchPopupDemo(registry) {
-    registry.add('search popup', <SearchDemo/>)
+    registry.add('search popup', SearchDemo)
 }

@@ -3,13 +3,15 @@ import Xml from './Xml'
 
 export function xmlDemo(registry) {
     registry
-        .add('no attributes', <Xml xmlAsJson={noAttrs()}/>)
-        .add('single attribute', <Xml xmlAsJson={singleAttr()}/>)
-        .add('multiple attributes', <Xml xmlAsJson={multipleAttrs()}/>)
-        .add('multiple attributes with highlights', <Xml xmlAsJson={multipleAttrs()} paths={['Component.@lastName']}/>)
-        .add('nested', <Xml xmlAsJson={nested()}/>)
-        .add('nested with multiple highlights', <Xml xmlAsJson={nested()} paths={['ul.li[0]', 'ul.li[1].@class', 'ul.li[1].b']}/>)
-        .add('nested with multiple attributes', <Xml xmlAsJson={nestedWithMultipleAttrs()}/>)
+        .add('no attributes', () => <Xml xmlAsJson={noAttrs()}/>)
+        .add('single attribute', () => <Xml xmlAsJson={singleAttr()}/>)
+        .add('multiple attributes', () => <Xml xmlAsJson={multipleAttrs()}/>)
+        .add('multiple attributes with highlights', () => <Xml xmlAsJson={multipleAttrs()}
+                                                               paths={['Component.@lastName']}/>)
+        .add('nested', () => <Xml xmlAsJson={nested()}/>)
+        .add('nested with multiple highlights', () => <Xml xmlAsJson={nested()}
+                                                           paths={['ul.li[0]', 'ul.li[1].@class', 'ul.li[1].b']}/>)
+        .add('nested with multiple attributes', () => <Xml xmlAsJson={nestedWithMultipleAttrs()}/>)
 }
 
 function noAttrs() {

@@ -34,8 +34,8 @@ const paramsWithType = [
 
 export function langFunctionDemo(registry) {
     registry
-        .add('simple function', <LangFunction {...nameAndDesc} params={paramsWithoutType}
-                                              elementsLibrary={elementsLibrary}/>)
-        .add('param types', <LangFunction {...nameAndDesc} params={paramsWithType}
-                                          elementsLibrary={elementsLibrary}/>)
+        .add('simple function', () => <LangFunction {...nameAndDesc} params={paramsWithoutType}
+                                                    elementsLibrary={elementsLibrary}/>)
+        .add('param types', () => <LangFunction {...nameAndDesc} params={paramsWithType}
+                                                elementsLibrary={elementsLibrary}/>)
 }

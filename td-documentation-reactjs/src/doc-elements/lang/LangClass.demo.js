@@ -35,5 +35,5 @@ const demoDef = {
 }
 
 export function langClassDemo(registry) {
-    registry.add('class with methods', <LangClass {...demoDef} elementsLibrary={elementsLibrary}/>)
+    registry.add('class with methods', () => <LangClass {...demoDef} elementsLibrary={elementsLibrary}/>)
 }

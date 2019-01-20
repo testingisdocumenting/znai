@@ -7,9 +7,9 @@ import {checkSchema, customerArraySchema, customerIdsSchema, customerSchema} fro
 
 export function openApiSchemaDemo(registry) {
     registry
-        .add('array of strings', <OpenApiSchema schema={customerIdsSchema} elementsLibrary={elementsLibrary}/>)
-        .add('array of objects', <OpenApiSchema schema={customerArraySchema} elementsLibrary={elementsLibrary}/>)
-        .add('flat object', <OpenApiSchema schema={customerSchema} elementsLibrary={elementsLibrary}/>)
-        .add('nested object', <OpenApiSchema schema={checkSchema} elementsLibrary={elementsLibrary}/>)
+        .add('array of strings', () => <OpenApiSchema schema={customerIdsSchema} elementsLibrary={elementsLibrary}/>)
+        .add('array of objects', () => <OpenApiSchema schema={customerArraySchema} elementsLibrary={elementsLibrary}/>)
+        .add('flat object', () => <OpenApiSchema schema={customerSchema} elementsLibrary={elementsLibrary}/>)
+        .add('nested object', () => <OpenApiSchema schema={checkSchema} elementsLibrary={elementsLibrary}/>)
 }
 

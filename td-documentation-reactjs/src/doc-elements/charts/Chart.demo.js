@@ -11,8 +11,8 @@ const data = [
 
 export function chartDemo(registry) {
     registry
-        .add('pie', <Chart data={data} chartType="Pie"/>)
-        .add('pie with inner radius', <Chart data={data} chartType="Pie" innerRadius={100}/>)
-        .add('bar', <Chart data={data} chartType="Bar"/>)
-        .add('bar horizontal', <Chart data={data} chartType="Bar" horizontal/>)
+        .add('pie', () => <Chart data={data} chartType="Pie"/>)
+        .add('pie with inner radius', () => <Chart data={data} chartType="Pie" innerRadius={100}/>)
+        .add('bar', () => <Chart data={data} chartType="Bar"/>)
+        .add('bar horizontal', () => <Chart data={data} chartType="Bar" horizontal/>)
 }

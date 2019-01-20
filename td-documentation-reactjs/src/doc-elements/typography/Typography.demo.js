@@ -6,48 +6,49 @@ export function typographyDemo(registry) {
     const headingTextcontent = [headingTextDemo()]
 
     registry
-        .add('headings', <elementsLibrary.DocElement content={headingcontent} elementsLibrary={elementsLibrary}/>)
-        .add('headings with text', <elementsLibrary.DocElement content={headingTextcontent} elementsLibrary={elementsLibrary}/>)
+        .add('headings', () => <elementsLibrary.DocElement content={headingcontent} elementsLibrary={elementsLibrary}/>)
+        .add('headings with text', () => <elementsLibrary.DocElement content={headingTextcontent}
+                                                                     elementsLibrary={elementsLibrary}/>)
 }
 
 function headingDemo() {
     return {
-            "title": "Section Heading",
-            "id": "section-heading",
-            "type": "Section",
-            "content": [
-                {
-                    "level": 2,
-                    "type": "SubHeading",
-                    "title": "Sub-Section Heading",
-                    "id": "sub-section-heading",
-                },
-                {
-                    "level": 3,
-                    "type": "SubHeading",
-                    "title": "Sub-Sub-Section Heading",
-                    "id": "sub-sub-section-heading",
-                },
-                {
-                    "level": 4,
-                    "type": "SubHeading",
-                    "title": "Sub-Sub-Sub-Section Heading",
-                    "id": "sub-sub-sub-section-heading",
-                },
-                {
-                    "level": 5,
-                    "type": "SubHeading",
-                    "title": "Sub-Sub-Sub-Sub-Section Heading",
-                    "id": "sub-sub-sub-sub-section-heading",
-                },
-                {
-                    "level": 6,
-                    "type": "SubHeading",
-                    "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
-                    "id": "sub-sub-sub-sub-sub-section-heading"
-                }
-            ]
-        }
+        "title": "Section Heading",
+        "id": "section-heading",
+        "type": "Section",
+        "content": [
+            {
+                "level": 2,
+                "type": "SubHeading",
+                "title": "Sub-Section Heading",
+                "id": "sub-section-heading",
+            },
+            {
+                "level": 3,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Section Heading",
+                "id": "sub-sub-section-heading",
+            },
+            {
+                "level": 4,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-section-heading",
+            },
+            {
+                "level": 5,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-sub-section-heading",
+            },
+            {
+                "level": 6,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-sub-sub-section-heading"
+            }
+        ]
+    }
 }
 
 function headingTextDemo() {

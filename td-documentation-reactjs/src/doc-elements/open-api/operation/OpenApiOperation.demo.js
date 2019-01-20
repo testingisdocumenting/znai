@@ -132,7 +132,7 @@ const responses = [
     },
     {
         code: "401",
-        description:[
+        description: [
             {
                 "text": "Unauthorized",
                 "type": "SimpleText"
@@ -181,8 +181,13 @@ const getExampleWithoutParams = {
 
 export function openApiOperationDemo(registry) {
     registry
-        .add('GET request with all type of parameters', <OpenApiOperation elementsLibrary={elementsLibrary} operation={getExample}/>)
-        .add('GET request with consumes produces info', <OpenApiOperation elementsLibrary={elementsLibrary} operation={getExample} showConsumes={true} showProduces={true}/>)
-        .add('GET request without parameters', <OpenApiOperation elementsLibrary={elementsLibrary} operation={getExampleWithoutParams}/>)
+        .add('GET request with all type of parameters', () => <OpenApiOperation elementsLibrary={elementsLibrary}
+                                                                                operation={getExample}/>)
+        .add('GET request with consumes produces info', () => <OpenApiOperation elementsLibrary={elementsLibrary}
+                                                                                operation={getExample}
+                                                                                showConsumes={true}
+                                                                                showProduces={true}/>)
+        .add('GET request without parameters', () => <OpenApiOperation elementsLibrary={elementsLibrary}
+                                                                       operation={getExampleWithoutParams}/>)
 }
 

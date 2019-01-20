@@ -21,8 +21,8 @@ const multipleAttrs = {
 
 export function jsxDemo(registry) {
     registry
-        .add('no attributes', <JsxGroup declarations={[noAttrs]}/>)
-        .add('single attribute', <JsxGroup declarations={[singleAttr]}/>)
-        .add('multiple attributes', <JsxGroup declarations={[multipleAttrs]}/>)
-        .add('multiple entries', <JsxGroup declarations={[singleAttr, multipleAttrs]}/>)
+        .add('no attributes', () => <JsxGroup declarations={[noAttrs]}/>)
+        .add('single attribute', () => <JsxGroup declarations={[singleAttr]}/>)
+        .add('multiple attributes', () => <JsxGroup declarations={[multipleAttrs]}/>)
+        .add('multiple entries', () => <JsxGroup declarations={[singleAttr, multipleAttrs]}/>)
 }
