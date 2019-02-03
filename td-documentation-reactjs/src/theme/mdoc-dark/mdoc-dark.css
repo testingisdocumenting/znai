@@ -4,7 +4,7 @@
     --mdoc-regular-text-color: var(--mdoc-inversed-text-color);
     --mdoc-regular-text-light-color: #aaa;
 
-    --mdoc-section-title-color: #ddd;
+    --mdoc-section-title-color: green;
     --mdoc-section-h2-color: #ddd;
     --mdoc-section-h3-color: #ddd;
     --mdoc-section-h4-color: #ddd;
@@ -77,7 +77,7 @@
 
     --mdoc-open-api-method-color: var(--mdoc-toc-page-title-color);
     --mdoc-open-api-path-color: var(--mdoc-toc-page-title-color);
-    --mdoc-open-api-path-param-color: #292b2a;
+    --mdoc-open-api-path-param-color: var(--mdoc-toc-page-title-color);
     --mdoc-open-api-sub-header-color: var(--mdoc-toc-page-title-color);
 
     --mdoc-collapse-uncollapse-background-color: #383838;
