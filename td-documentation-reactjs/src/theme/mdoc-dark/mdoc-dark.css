@@ -77,7 +77,7 @@
 
     --mdoc-open-api-method-color: var(--mdoc-toc-page-title-color);
     --mdoc-open-api-path-color: var(--mdoc-toc-page-title-color);
-    --mdoc-open-api-path-param-color: #292b2a;
+    --mdoc-open-api-path-param-color: var(--mdoc-toc-page-title-color);
     --mdoc-open-api-sub-header-color: var(--mdoc-toc-page-title-color);
 
     --mdoc-collapse-uncollapse-background-color: #383838;
