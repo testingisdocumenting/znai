@@ -27,6 +27,30 @@ class JavaIncludePluginTest {
         } should throwException(~/no method found: methodB/)
     }
 
+    @Test
+    void "extract body only"() {
+        process("Simple.java", "{entry: 'createData', bodyOnly: true}").should ==
+                "return construction(a, b,\n" +
+                "                    c, d);"
+    }
+
+    @Test
+    void "optionally removes return in body only mode"() {
+        process("Simple.java", "{entry: 'createData', bodyOnly: true, removeReturn: true}").should ==
+                "construction(a, b,\n" +
+                "             c, d);"
+
+    }
+
+    @Test
+    void "optionally removes return and semicolon in body only mode"() {
+        process("Simple.java", "{entry: 'createData', bodyOnly: true, " +
+                "removeReturn: true, removeSemicolon: true}").should ==
+                "construction(a, b,\n" +
+                "             c, d)"
+
+    }
+
     private static String process(String fileName, String params) {
         return PluginsTestUtils.processAndGetSimplifiedCodeBlock(":include-java: $fileName $params")
     }
