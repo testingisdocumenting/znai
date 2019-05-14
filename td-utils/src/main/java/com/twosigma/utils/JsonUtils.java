@@ -1,8 +1,11 @@
 package com.twosigma.utils;
 
-import com.google.gson.*;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
-import java.lang.reflect.Type;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -10,58 +13,90 @@ import java.util.Map;
  * @author mykola
  */
 public class JsonUtils {
-    private static final Gson gson = new GsonBuilder().registerTypeAdapter(MapOrList.class, new MapOrListDeserializer()).create();
-    private static final Gson gsonPretty = new GsonBuilder().registerTypeAdapter(MapOrList.class, new MapOrListDeserializer()).setPrettyPrinting().create();
+    private static final ObjectMapper serializeMapper = createDeserializeMapper();
+    private static final ObjectMapper serializePrettyPrintMapper = createSerializePrettyPrintMapper();
+    private static final ObjectMapper deserializeMapper = createDeserializeMapper();
 
     private JsonUtils() {
     }
 
-    public static String serialize(Object data) {
-        return gson.toJson(data);
-    }
+    public static String serialize(Object json) {
+        if (json == null) {
+            return null;
+        }
 
-    @SuppressWarnings("unchecked")
-    public static Map<String, ?> deserializeAsMap(String data) {
         try {
-            return gson.fromJson(data, Map.class);
-        } catch (JsonSyntaxException e) {
-            throw new JsonSyntaxException("error parsing " + data, e);
+            return serializeMapper.writeValueAsString(json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    public static String serializePrettyPrint(Object json) {
+        if (json == null) {
+            return null;
+        }
+
+        try {
+            return serializePrettyPrintMapper.writeValueAsString(json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @SuppressWarnings("unchecked")
-    public static List<?> deserializeAsList(String data) {
-        return gson.fromJson(data, List.class);
-    }
-
-    public static Object deserialize(String data) {
-        final MapOrList mapOrList = gson.fromJson(data, MapOrList.class);
-
-        return mapOrList.list != null ?
-                mapOrList.list :
-                mapOrList.map;
-    }
-
-    public static String serializePrettyPrint(Object data) {
-        return gsonPretty.toJson(data);
-    }
-
-    private static class MapOrList {
-        private Map map;
-        private List list;
-    }
-
-    private static class MapOrListDeserializer implements JsonDeserializer<MapOrList> {
-        @Override
-        public MapOrList deserialize(final JsonElement jsonElement, final Type type, final JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-            final MapOrList result = new MapOrList();
-            if (jsonElement.isJsonArray()) {
-                result.list = jsonDeserializationContext.deserialize(jsonElement, List.class);
-            } else {
-                result.map = jsonDeserializationContext.deserialize(jsonElement, Map.class);
-            }
-
-            return result;
+    public static Map<String, ?> deserializeAsMap(String json) {
+        if (json == null) {
+            return null;
         }
+
+        try {
+            return deserializeMapper.readValue(json, Map.class);
+        } catch (IOException e) {
+            throw new JsonParseException(e.getMessage());
+        }
+    }
+
+    public static List<?> deserializeAsList(String json) {
+        if (json == null) {
+            return null;
+        }
+
+        try {
+            return deserializeMapper.readValue(json, List.class);
+        } catch (IOException e) {
+            throw new JsonParseException(e.getMessage());
+        }
+    }
+
+    public static Object deserialize(String json) {
+        if (json == null) {
+            return null;
+        }
+
+        try {
+            return deserializeMapper.readValue(json, Object.class);
+        } catch (IOException e) {
+            throw new JsonParseException(e.getMessage());
+        }
+    }
+
+    private static ObjectMapper createDeserializeMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+
+        return mapper;
+    }
+
+    private static ObjectMapper createSerializeMapper() {
+        return new ObjectMapper();
+    }
+
+    private static ObjectMapper createSerializePrettyPrintMapper() {
+        ObjectMapper mapper = createSerializeMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        return mapper;
     }
 }
