@@ -62,6 +62,17 @@ class FileIncludePluginTest {
                 "def b", text)
     }
 
+    @Test
+    void "should only include lines matching regexp"() {
+        def singleAssert = process("script.groovy", "{includeRegexp: 'import.*ClassName'}")
+        Assert.assertEquals("import a.b.c.ClassName", singleAssert)
+
+        def allAsserts = process("script.groovy", "{includeRegexp: 'import'}")
+        Assert.assertEquals(
+                "import e.d.g.AnotherName\n" +
+                "import a.b.c.ClassName", allAsserts)
+    }
+
     private static String process(String fileName, String value) {
         return PluginsTestUtils.processAndGetSimplifiedCodeBlock(":include-file: $fileName $value")
     }

@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -75,20 +76,19 @@ public class FileIncludePlugin implements IncludePlugin {
         Text croppedAtStart = cropStart(text, opts);
         Text croppedAtEnd = cropEnd(croppedAtStart, opts);
 
-        Boolean exclude = opts.get("exclude");
-        Text withExcludedLines = exclude != null && exclude ?
-                croppedAtEnd.cropOneLineFromStartAndEnd() : croppedAtEnd;
+        Text withExcludedLines = exclude(croppedAtEnd, opts);
+        Text withIncludeRegexp = includeRegexp(withExcludedLines, opts);
 
-        return StringUtils.stripIndentation(withExcludedLines.toString());
+        return StringUtils.stripIndentation(withIncludeRegexp.toString());
     }
 
     private Text cropStart(Text text, PluginParamsOpts opts) {
         String startLine = opts.get("startLine");
-        if (startLine != null) {
-            return text.startingWithLineContaining(startLine);
+        if (startLine == null) {
+            return text;
         }
 
-        return text;
+        return text.startingWithLineContaining(startLine);
     }
 
     private Text cropEnd(Text text, PluginParamsOpts opts) {
@@ -103,6 +103,24 @@ public class FileIncludePlugin implements IncludePlugin {
         }
 
         return text;
+    }
+
+    private Text exclude(Text text, PluginParamsOpts opts) {
+        Boolean exclude = opts.get("exclude", false);
+        if (!exclude) {
+            return text;
+        }
+
+        return text.cropOneLineFromStartAndEnd();
+    }
+
+    private Text includeRegexp(Text text, PluginParamsOpts opts) {
+        String includeRegexp = opts.get("includeRegexp");
+        if (includeRegexp == null) {
+            return text;
+        }
+
+        return text.includeRegexp(Pattern.compile(includeRegexp));
     }
 
     private static String langFromFileName(String fileName) {
@@ -151,6 +169,10 @@ public class FileIncludePlugin implements IncludePlugin {
             return new Text(lines.subList(1, lines.size() - 1));
         }
 
+        Text includeRegexp(Pattern regexp) {
+            return new Text(lines.stream().filter(l -> regexp.matcher(l).find()).collect(Collectors.toList()));
+        }
+
         private int findLineIdxContaining(String subLine) {
             for (int i = 0; i < lines.size(); i++) {
                 if (lines.get(i).contains(subLine)) {
@@ -163,7 +185,7 @@ public class FileIncludePlugin implements IncludePlugin {
 
         @Override
         public String toString() {
-            return lines.stream().collect(Collectors.joining("\n"));
+            return String.join("\n", lines);
         }
     }
 }
