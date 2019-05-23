@@ -71,7 +71,7 @@ class SearchPopup extends Component {
                                onJump={this.jumpToIdx}/>
                 </div>
                 <div className="mdoc-search-preview-panel">
-                    <SearchPreview elementsLibrary={elementsLibrary} {...previewDetails}/>
+                    <SearchPreview key={selectedIdx} elementsLibrary={elementsLibrary} {...previewDetails}/>
                 </div>
             </div>
         )

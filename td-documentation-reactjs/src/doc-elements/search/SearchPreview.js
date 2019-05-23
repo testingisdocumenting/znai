@@ -7,10 +7,6 @@ class SearchPreview extends Component {
         this.highlight()
     }
 
-    componentDidUpdate() {
-        this.highlight()
-    }
-
     render() {
         const {section, elementsLibrary} = this.props
 
@@ -24,7 +20,6 @@ class SearchPreview extends Component {
     highlight() {
         const {snippets} = this.props
 
-        this.mark.unmark()
         this.mark.mark(snippets)
 
         const marked = document.querySelector(".mdoc-search-result-preview mark");
