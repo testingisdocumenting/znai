@@ -31,13 +31,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom"
   },
-  "proxy": {
-    "/preview": {
-      "target": "ws://localhost:3333/preview",
-      "ws": true
-    },
-    "/": {
-      "target": "ws://localhost:3333/"
-    }
-  }
+  "proxy": "http://localhost:3333/"
 }
