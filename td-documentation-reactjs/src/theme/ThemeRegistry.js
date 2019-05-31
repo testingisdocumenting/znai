@@ -44,7 +44,8 @@ class ThemeRegistry {
     findByName(name) {
         const found = this.themes.filter(t => t.name === name)
         if (found.length !== 1) {
-            throw new Error(`expected one theme with name "${name}", found: ${found.length}`)
+            throw new Error(`expected one theme with name "${name}", found: ${found.length}, ` +
+                `available themes: ${this.themes.map(t => t.name).join(";")}`)
         }
 
         return found[0]
