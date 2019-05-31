@@ -5,12 +5,11 @@ import './doc-elements/search/Search.css'
 
 import React, {Component} from 'react'
 
-import {ComponentsViewer, Registry} from 'react-components-viewer'
+import {ComponentViewer, DropDowns, Registries} from 'react-component-viewer'
 import {tabsDemo} from './doc-elements/tabs/Tabs.demo'
 import {jsonDemo} from './doc-elements/json/Json.demo'
 import {langClassDemo} from './doc-elements/lang/LangClass.demo'
 import {langFunctionDemo} from './doc-elements/lang/LangFunction.demo'
-import {documentationDemo} from './doc-elements/Documentation.demo'
 import {openApiOperationDemo} from './doc-elements/open-api/operation/OpenApiOperation.demo'
 import {openApiSchemaDemo} from './doc-elements/open-api/schema/OpenApiSchema.demo'
 import {docUtilsDemo} from './doc-elements/doc-utils/DocUtils.demo'
@@ -35,6 +34,11 @@ import {yamlSnippetDemo} from './doc-elements/code-snippets/Yaml.demo'
 import {latexDemo} from './doc-elements/latex/Latex.demo'
 import {chartDemo} from './doc-elements/charts/Chart.demo'
 import {tableDemo} from './doc-elements/table/Table.demo'
+import {Documentation} from "./doc-elements/Documentation";
+import testData from "./doc-elements/TestData";
+
+import {themeRegistry} from "./theme/ThemeRegistry";
+import WithTheme from "./theme/WithTheme";
 
 const docMeta = {
     id: 'preview',
@@ -50,49 +54,72 @@ const docMeta = {
 
 setDocMeta(docMeta)
 
-const snippets = new Registry('snippets')
-snippets.registerAsGrid('Code Snippet', 0, snippetsDemo)
-snippets.registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)
-snippets.registerAsGrid('Yaml Code Snippet', 0, yamlSnippetDemo)
-snippets.registerAsGrid('Json', 0, jsonDemo)
-snippets.registerAsGrid('Xml', 0, xmlDemo)
-snippets.registerAsGrid('Xml Presentation', 0, xmlPresentationDemo)
-snippets.registerAsGrid('Latex', 0, latexDemo)
-snippets.registerAsGrid('Jsx', 0, jsxDemo)
-snippets.registerAsGrid('DocUtils', 0, docUtilsDemo)
-snippets.registerAsGrid('Lang Class', 0, langClassDemo)
-snippets.registerAsGrid('Lang Function', 0, langFunctionDemo)
-snippets.registerAsGrid('API Parameters', 0, apiParametersDemo)
-snippets.registerAsGrid('Open API', 0, openApiOperationDemo)
-snippets.registerAsGrid('Open API Schema', 0, openApiSchemaDemo)
-snippets.registerAsGrid('Jupyter', 0, jupyterDemo)
-snippets.registerAsGrid('CLI Command', 0, cliCommandDemo)
+const registries = new Registries({componentWrapper: ThemeWrapper})
 
-const visuals = new Registry('visuals')
-visuals.registerAsGrid('Charts', 0, chartDemo)
-visuals.registerAsTabs('Image Annotations', imageAnnotationDemo)
-visuals.registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
-visuals.registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
+registries.add('snippets')
+    .registerAsGrid('Code Snippet', 0, snippetsDemo)
+    .registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)
+    .registerAsGrid('Yaml Code Snippet', 0, yamlSnippetDemo)
+    .registerAsGrid('Json', 0, jsonDemo)
+    .registerAsGrid('Xml', 0, xmlDemo)
+    .registerAsGrid('Xml Presentation', 0, xmlPresentationDemo)
+    .registerAsGrid('Latex', 0, latexDemo)
+    .registerAsGrid('Jsx', 0, jsxDemo)
+    .registerAsGrid('DocUtils', 0, docUtilsDemo)
+    .registerAsGrid('Lang Class', 0, langClassDemo)
+    .registerAsGrid('Lang Function', 0, langFunctionDemo)
+    .registerAsGrid('API Parameters', 0, apiParametersDemo)
+    .registerAsGrid('Open API', 0, openApiOperationDemo)
+    .registerAsGrid('Open API Schema', 0, openApiSchemaDemo)
+    .registerAsGrid('Jupyter', 0, jupyterDemo)
+    .registerAsGrid('CLI Command', 0, cliCommandDemo)
 
-const layout = new Registry('layout')
-layout.registerAsTabs('Pages', pagesDemo)
-layout.registerAsGrid('Tabs', 0, tabsDemo)
-layout.registerAsGrid('Tables', 0, tableDemo)
-layout.registerAsTabs('TOC', tocPanelDemo)
-layout.registerAsGrid('Typography', 0, typographyDemo)
+registries.add('visuals')
+    .registerAsGrid('Charts', 0, chartDemo)
+    .registerAsTabs('Image Annotations', imageAnnotationDemo)
+    .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
+    .registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
 
-const screens = new Registry('screens')
-screens.registerAsTabs('Documentation Preparation', documentationPreparationDemo)
-screens.registerAsTabs('Landing', landingDemo)
-screens.registerAsTabs('Search Popup', searchPopupDemo)
+registries.add('layout')
+    .registerAsTabs('Pages', pagesDemo)
+    .registerAsGrid('Tabs', 0, tabsDemo)
+    .registerAsGrid('Tables', 0, tableDemo)
+    .registerAsTabs('TOC', tocPanelDemo)
+    .registerAsGrid('Typography', 0, typographyDemo)
 
-const endToEnd = new Registry('end to end')
-endToEnd.registerAsMiniApp('full documentation navigation', '/preview', documentationDemo)
+registries.add('screens')
+    .registerAsTabs('Documentation Preparation', documentationPreparationDemo)
+    .registerAsTabs('Landing', landingDemo)
+    .registerAsTabs('Search Popup', searchPopupDemo)
+
+registries.add('end to end')
+    .registerAsMiniApp('full documentation navigation', /\/preview/,
+        {'root': '/preview'},
+        () => <Documentation {...testData.documentation}/>)
+
+const dropDowns = new DropDowns()
+dropDowns.add('Theme')
+    .addItem('Default', 'Alt 1')
+    .addItem('Dark', 'Alt 2')
+    .onSelect(selectTheme)
 
 export class App extends Component {
     render() {
         return (
-            <ComponentsViewer registries={[snippets, visuals, layout, screens, endToEnd]}/>
+            <ComponentViewer registries={registries} dropDowns={dropDowns}/>
         )
     }
+}
+
+function selectTheme(label) {
+    const theme = label === 'Default' ? 'default' : 'mdoc-dark'
+    themeRegistry.selectTheme(theme)
+}
+
+function ThemeWrapper({OriginalComponent}) {
+    return (
+        <WithTheme>
+            {() => <OriginalComponent/>}
+        </WithTheme>
+    )
 }
