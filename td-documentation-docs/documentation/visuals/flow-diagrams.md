@@ -41,6 +41,17 @@ To switch layout from horizontal to vertical use `vertical: true`.
 
 :include-flow-chart: simple-dag.json {vertical: true}
 
+# Layout Types
+
+Use `layout` to specify a different underlying layout engine. Only `dot` (default) and `neato` is 
+supported at the moment.
+
+    :include-flow-chart: simple-dag.json {layout: "neato"}
+
+:include-flow-chart: simple-dag.json {layout: "neato"}
+
+[Neato layout guide from Graphviz](https://www.graphviz.org/pdf/neatoguide.pdf)
+
 # Links
   
 To attach links to nodes use `url` property.

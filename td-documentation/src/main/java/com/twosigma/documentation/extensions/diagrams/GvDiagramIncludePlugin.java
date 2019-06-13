@@ -11,6 +11,8 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static com.twosigma.diagrams.graphviz.GraphvizEngine.DOT_LAYOUT;
+
 /**
  * @author mykola
  */
@@ -34,7 +36,9 @@ public class GvDiagramIncludePlugin implements IncludePlugin {
         String diagramPath = pluginParams.getOpts().getRequiredString("diagramPath");
         String gvContent = componentsRegistry.resourceResolver().textContent(diagramPath);
 
-        GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv(diagramId, gvContent);
+        GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv(
+                pluginParams.getOpts().get("type", DOT_LAYOUT),
+                diagramId, gvContent);
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("diagram", diagram.toMap());
         props.put("colors", Graphviz.colors);
