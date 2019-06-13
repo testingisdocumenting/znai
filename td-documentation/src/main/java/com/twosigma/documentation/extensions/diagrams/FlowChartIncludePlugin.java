@@ -20,6 +20,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.twosigma.diagrams.graphviz.GraphvizEngine.DOT_LAYOUT;
+
 /**
  * @author mykola
  */
@@ -52,7 +54,9 @@ public class FlowChartIncludePlugin implements IncludePlugin {
         String gvContent = new GraphvizFromJsonGen(graph,
                 pluginParams.getOpts().get("vertical", false)).generate();
 
-        GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv("dag" + diagramCount.incrementAndGet(),
+        GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv(
+                pluginParams.getOpts().get("layout", DOT_LAYOUT),
+                "dag" + diagramCount.incrementAndGet(),
                 gvContent);
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("diagram", diagram.toMap());

@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static com.twosigma.diagrams.graphviz.GraphvizEngine.DOT_LAYOUT;
+
 /**
  * @author mykola
  */
@@ -60,7 +62,9 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
         Map<String, Object> props = new LinkedHashMap<>();
 
         props.put("slides", diagramSlides.toListOfMaps());
-        props.put("diagram", Graphviz.graphvizEngine.diagramFromGv(diagramId, gvContent).toMap());
+        props.put("diagram", Graphviz.graphvizEngine.diagramFromGv(
+                pluginParams.getOpts().get("type", DOT_LAYOUT),
+                diagramId, gvContent).toMap());
         props.put("colors", Graphviz.colors);
 
         return PluginResult.docElement("GraphVizFlow", props);

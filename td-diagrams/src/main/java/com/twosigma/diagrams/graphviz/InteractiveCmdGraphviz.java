@@ -7,19 +7,25 @@ import java.util.Scanner;
  * @author mykola
  */
 public class InteractiveCmdGraphviz implements GraphvizRuntime {
-    private final Process dot;
     private final OutputStream outputStream;
     private final InputStream inputStream;
+    private final String layoutType;
 
-    public InteractiveCmdGraphviz() {
-        dot = createProcess();
+    public InteractiveCmdGraphviz(String layoutType) {
+        this.layoutType = layoutType;
 
-        inputStream = dot.getInputStream();
-        outputStream = dot.getOutputStream();
+        Process process = createProcess(layoutType);
+
+        inputStream = process.getInputStream();
+        outputStream = process.getOutputStream();
     }
 
-    public String svgFromGv(String dot) {
-        write(dot);
+    public String getLayoutType() {
+        return layoutType;
+    }
+
+    public String svgFromGv(String gv) {
+        write(gv);
         return readTill("</svg>");
     }
 
@@ -42,26 +48,26 @@ public class InteractiveCmdGraphviz implements GraphvizRuntime {
         return result.toString();
     }
 
-    private void write(String dot) {
+    private void write(String gv) {
         try {
-            outputStream.write((dot + "\n").getBytes());
+            outputStream.write((gv + "\n").getBytes());
             outputStream.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private Process createProcess() {
+    private Process createProcess(String layoutType) {
         try {
-            String dotPath = getDotPath();
-            return new ProcessBuilder().command(dotPath, "-Tsvg").redirectErrorStream(true).start();
+            String binPath = getBinPath(layoutType);
+            return new ProcessBuilder().command(binPath, "-Tsvg").redirectErrorStream(true).start();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private String getDotPath() {
-        String dotBin = System.getProperty("dot.bin");
-        return dotBin != null ? dotBin : "dot";
+    private String getBinPath(String layoutType) {
+        String bin = System.getProperty(layoutType + ".bin");
+        return bin != null ? bin : layoutType;
     }
 }
