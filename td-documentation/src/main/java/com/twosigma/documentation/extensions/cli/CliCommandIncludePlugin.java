@@ -2,6 +2,7 @@ package com.twosigma.documentation.extensions.cli;
 
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
+import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
 import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.extensions.PluginParams;
@@ -16,6 +17,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * @author mykola
@@ -23,6 +25,7 @@ import java.util.Set;
 public class CliCommandIncludePlugin implements IncludePlugin {
     private String command;
     private ResourcesResolver resourcesResolver;
+    private String commandFile;
 
     @Override
     public String id() {
@@ -58,6 +61,13 @@ public class CliCommandIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
+        return commandFile != null && !commandFile.isEmpty() ?
+                Stream.of(AuxiliaryFile.builtTime(resourcesResolver.fullPath(commandFile))):
+                Stream.empty();
+    }
+
+    @Override
     public SearchText textForSearch() {
         return SearchScore.HIGH.text(command);
     }
@@ -70,7 +80,7 @@ public class CliCommandIncludePlugin implements IncludePlugin {
 
         PluginParamsOpts opts = pluginParams.getOpts();
 
-        String commandFile = opts.get("commandFile", "");
+        commandFile = opts.get("commandFile", "");
         if (!commandFile.isEmpty()) {
             return resourcesResolver.textContent(commandFile);
         }
