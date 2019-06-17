@@ -38,9 +38,21 @@ This option is useful for displaying a captured command during tests.
 
 To display console output and bring attention to certain lines use:
 
-    :include-cli-output: file-path-of-captured.out {highlight: [0, 4]}
+    :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]}
 
-:include-cli-output: file-path-of-captured.out {highlight: [0, 4]}
+:include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]}
+
+You can highlight by a partial line text match
+
+    :include-cli-output: cli/file-path-of-captured.out {highlight: "remote"}
+
+Or you can highlight by lines stored in a separate file
+
+    :include-cli-output: cli/file-path-of-captured.out {highlightFile: "cli/file-path-of-asserted-lines.txt"}
+
+:include-file: cli/file-path-of-asserted-lines.txt {title: "cli/file-path-of-asserted-lines.txt"}
+
+:include-cli-output: cli/file-path-of-captured.out {highlightFile: "cli/file-path-of-asserted-lines.txt"}
 
 
 # Presentation mode
@@ -49,12 +61,12 @@ In presentation mode, `cli-command` will simulate typing inside the terminal.
 
 If your `cli-output` is long, you can split the presentation output into chunks:
   
-    :include-cli-output: file-path-of-captured.out {highlight: [0, 4], chunkSize: 10, fadedSize: 2}
+    :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4], chunkSize: 10, fadedSize: 2}
     
 `chunkSize` specifies the maximum number of lines visible at a time.
  `fadedSize` specifies how many lines will be visible after and before as you move through output (default is 2).
     
-:include-cli-output: file-path-of-captured.out {highlight: [0, 12], chunkSize: 10, fadedSize: 2}    
+:include-cli-output: cli/file-path-of-captured.out {highlight: [0, 12], chunkSize: 10, fadedSize: 2}    
 
 
 
