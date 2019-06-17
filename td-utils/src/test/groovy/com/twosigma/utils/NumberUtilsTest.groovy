@@ -19,4 +19,14 @@ class NumberUtilsTest {
         assert number.class == Long
         assert number == 12
     }
+
+    @Test
+    void "should detect integers"() {
+        assert NumberUtils.isInteger("100")
+        assert NumberUtils.isInteger("0")
+
+        assert !NumberUtils.isInteger("")
+        assert !NumberUtils.isInteger("10.0")
+        assert !NumberUtils.isInteger("ab")
+    }
 }

@@ -41,10 +41,7 @@ const CliOutput = ({lines, chunkSize, fadedSize, highlight, isPresentation, slid
                     return false
                 }
 
-                const byIndex = highlight.indexOf(fullIdx) !== -1
-                const byText = highlight.filter(h => typeof h === 'string').some(h => line.indexOf(h) !== -1)
-
-                return byIndex || byText
+                return highlight.indexOf(fullIdx) !== -1
             }
         })
     }
