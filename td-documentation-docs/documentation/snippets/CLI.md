@@ -67,8 +67,3 @@ If your `cli-output` is long, you can split the presentation output into chunks:
  `fadedSize` specifies how many lines will be visible after and before as you move through output (default is 2).
     
 :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 12], chunkSize: 10, fadedSize: 2}    
-
-
-
-
-

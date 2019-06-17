@@ -29,6 +29,7 @@ public class CliOutputIncludePlugin implements IncludePlugin {
     private Path filePath;
     private List<String> lines;
     private ResourcesResolver resourcesResolver;
+    private Path highlightFile;
 
     @Override
     public String id() {
@@ -58,7 +59,13 @@ public class CliOutputIncludePlugin implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(filePath));
+        Stream<AuxiliaryFile> highlightFileStream = highlightFile != null ?
+                Stream.of(AuxiliaryFile.builtTime(highlightFile)) :
+                Stream.empty();
+
+        return Stream.concat(
+                Stream.of(AuxiliaryFile.builtTime(filePath)),
+                highlightFileStream);
     }
 
     private static List<String> readLines(ComponentsRegistry componentsRegistry, Path filePath) {
@@ -72,14 +79,15 @@ public class CliOutputIncludePlugin implements IncludePlugin {
 
     private List<Object> findHighlightIndexes(PluginParamsOpts opts) {
         List<Object> list = opts.has("highlightFile") ?
-                readListFromFile(opts.getString("highlightFile")):
+                readListFromFile(opts.getString("highlightFile")) :
                 opts.getList("highlight");
 
         return list.stream().flatMap(this::findIndexes).collect(Collectors.toList());
     }
 
     private List<Object> readListFromFile(String file) {
-        return Arrays.stream(resourcesResolver.textContent(file).split("\n")).collect(toList());
+        highlightFile = resourcesResolver.fullPath(file);
+        return Arrays.stream(resourcesResolver.textContent(highlightFile).split("\n")).collect(toList());
     }
 
     private Stream<Object> findIndexes(Object numberOrText) {
