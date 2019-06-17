@@ -3,7 +3,9 @@ package com.twosigma.documentation.extensions.cli;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.console.ansi.Color;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.extensions.PluginParams;
+import com.twosigma.documentation.extensions.PluginParamsOpts;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.parser.ParserHandler;
@@ -20,6 +22,7 @@ import java.util.Set;
  */
 public class CliCommandIncludePlugin implements IncludePlugin {
     private String command;
+    private ResourcesResolver resourcesResolver;
 
     @Override
     public String id() {
@@ -44,6 +47,7 @@ public class CliCommandIncludePlugin implements IncludePlugin {
 
         combinedParams.addAll(pluginParams.getOpts().getList("paramsToHighlight"));
 
+        resourcesResolver = componentsRegistry.resourceResolver();
         LinkedHashMap<String, Object> props = new LinkedHashMap<>();
         command = extractCommand(pluginParams);
 
@@ -64,6 +68,13 @@ public class CliCommandIncludePlugin implements IncludePlugin {
             return commandAsFreeParam;
         }
 
-        return pluginParams.getOpts().getRequiredString("command");
+        PluginParamsOpts opts = pluginParams.getOpts();
+
+        String commandFile = opts.get("commandFile", "");
+        if (!commandFile.isEmpty()) {
+            return resourcesResolver.textContent(commandFile);
+        }
+
+        return opts.getRequiredString("command");
     }
 }

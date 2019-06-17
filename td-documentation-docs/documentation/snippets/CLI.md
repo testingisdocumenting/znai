@@ -22,6 +22,18 @@ If your command contains special symbols like `{` then move command definition t
 
 :include-cli-command: {command: "another-command {file1} [file2]", paramsToHighlight: ["file1"]}
 
+# From File
+
+You can read a command from file.
+
+    :include-cli-command: {commandFile: "cli/command.txt", paramsToHighlight: "value"}
+
+:include-file: cli/command.txt {title: "cli/command.txt"}
+
+:include-cli-command: {commandFile: "cli/command.txt", paramsToHighlight: "value"}
+
+This option is useful for displaying a captured command during tests. 
+
 # Output
 
 To display console output and bring attention to certain lines use:
