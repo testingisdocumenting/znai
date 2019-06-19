@@ -43,7 +43,9 @@ function simpleDiagram(id) {
         },
         "idsToHighlight": [],
         "wide": false,
-        "urls": {},
+        "urls": {
+            "n1": "http://link"
+        },
         "type": "GraphVizDiagram"
     }
 }
