@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "label": "input\none"
+    },
+    {
+      "id": "n2",
+      "label": "output\ntwo"
+    }
+  ],
+  "edges": [
+    ["n1", "n2"]
+  ]
+}

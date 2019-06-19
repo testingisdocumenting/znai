@@ -6,10 +6,18 @@ Specify a `JSON` file to define a flow chart.
 
 :include-file: flow-diagrams/simple-dag.json {title: "simple-dag.json"}
 
-At minimum, `nodes` and `edges` must be provided.
+At minimum `edges` must be provided.
 
     :include-flow-chart: simple-dag.json
     
+# Multiline Labels
+
+Use `\n` to split your label into multiple lines.
+
+:include-file: flow-diagrams/multiline-dag.json
+
+:include-flow-chart: flow-diagrams/multiline-dag.json
+
 
 # Highlight
 
