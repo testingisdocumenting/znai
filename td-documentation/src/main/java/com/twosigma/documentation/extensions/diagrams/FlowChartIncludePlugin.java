@@ -1,9 +1,13 @@
 package com.twosigma.documentation.extensions.diagrams;
 
 import com.twosigma.diagrams.graphviz.GraphvizDiagram;
+import com.twosigma.diagrams.graphviz.gen.DiagramNode;
 import com.twosigma.diagrams.graphviz.gen.GraphvizFromJsonGen;
+import com.twosigma.diagrams.graphviz.gen.GraphvizGenConfig;
+import com.twosigma.diagrams.graphviz.gen.GraphvizGenResult;
 import com.twosigma.documentation.core.AuxiliaryFile;
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginResult;
 import com.twosigma.documentation.extensions.include.IncludePlugin;
@@ -13,14 +17,13 @@ import com.twosigma.documentation.structure.DocUrl;
 import com.twosigma.utils.JsonUtils;
 
 import java.nio.file.Path;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.twosigma.diagrams.graphviz.GraphvizEngine.DOT_LAYOUT;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author mykola
@@ -29,6 +32,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
     private static final AtomicInteger diagramCount = new AtomicInteger();
 
     private Path filePath;
+    private List<Path> nodeLibPath;
     private DocStructure docStructure;
 
     @Override
@@ -49,44 +53,59 @@ public class FlowChartIncludePlugin implements IncludePlugin {
         filePath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         docStructure = componentsRegistry.docStructure();
 
+
         String graphJson = componentsRegistry.resourceResolver().textContent(filePath);
+
+        GraphvizGenConfig genConfig = new GraphvizGenConfig();
+        genConfig.setVertical(pluginParams.getOpts().get("vertical", false));
+
         Map<String, ?> graph = JsonUtils.deserializeAsMap(graphJson);
-        String gvContent = new GraphvizFromJsonGen(graph,
-                pluginParams.getOpts().get("vertical", false)).generate();
+        GraphvizGenResult genResult = new GraphvizFromJsonGen(graph,
+                loadNodeLibraries(componentsRegistry.resourceResolver(), pluginParams),
+                genConfig).generate();
 
         GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv(
                 pluginParams.getOpts().get("layout", DOT_LAYOUT),
                 "dag" + diagramCount.incrementAndGet(),
-                gvContent);
+                genResult.getGraphViz());
+
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("diagram", diagram.toMap());
         props.put("colors", Graphviz.colors);
         props.put("idsToHighlight", pluginParams.getOpts().getList("highlight"));
         props.put("wide", pluginParams.getOpts().get("wide", false));
-        props.put("urls", extractLinks(graph));
+        props.put("urls", extractLinks(genResult.getUsedNodes()));
 
         return PluginResult.docElement("GraphVizDiagram", props);
     }
 
-    @SuppressWarnings("unchecked")
-    private Map<String, String> extractLinks(Map<String, ?> graph) {
-        List<Map<String, ?>> nodes = (List<Map<String, ?>>) graph.get("nodes");
-
-        return nodes.stream().filter(this::hasUrl)
-                .collect(Collectors.toMap(n -> n.get("id").toString(),
-                        this::buildUrl));
+    private Map<String, String> extractLinks(Collection<DiagramNode> nodes) {
+        return nodes.stream()
+                .filter(DiagramNode::hasUrl)
+                .collect(Collectors.toMap(DiagramNode::getId, this::buildUrl));
     }
 
-    private boolean hasUrl(Map<String, ?> node) {
-        return node.containsKey("url");
+    private List<List<?>> loadNodeLibraries(ResourcesResolver resourcesResolver,
+                                            PluginParams pluginParams) {
+        nodeLibPath = pluginParams.getOpts().getList("nodeLibPath").stream()
+                .map(filePath -> resourcesResolver.fullPath(filePath.toString()))
+                .collect(Collectors.toList());
+
+        return nodeLibPath.stream()
+                .map(resourcesResolver::textContent)
+                .map(JsonUtils::deserializeAsList)
+                .collect(toList());
+
     }
 
-    private String buildUrl(Map<String, ?> node) {
-        return docStructure.createUrl(new DocUrl(node.get("url").toString()));
+    private String buildUrl(DiagramNode node) {
+        return docStructure.createUrl(new DocUrl(node.getUrl()));
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(filePath));
+        return Stream.concat(
+                Stream.of(AuxiliaryFile.builtTime(filePath)),
+                nodeLibPath.stream().map(AuxiliaryFile::builtTime));
     }
 }
