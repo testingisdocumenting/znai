@@ -33,6 +33,24 @@ class GraphvizFromJsonGenTest {
     }
 
     @Test
+    void "generates graphviz compatible line break for multiline labels"() {
+        generate([
+                nodes: [[id: "n", label: "multi\nline"]],
+                edges: [["n", "n"]
+                ]])
+
+        gv.should == "digraph Generated {\n" +
+                "rankdir=LR;\n" +
+                "bgcolor=\"#ffffff00\";\n" +
+                "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
+                "\n" +
+                "n [label=\"multi\\nline\"];\n" +
+                "\n" +
+                "n -> n;\n" +
+                "}"
+    }
+
+    @Test
     void "applies meta information for highlighted items"() {
         generate([nodes: [[id: "n1", label: "l1", highlight: true]], edges: [["n1", "n1"]]])
 

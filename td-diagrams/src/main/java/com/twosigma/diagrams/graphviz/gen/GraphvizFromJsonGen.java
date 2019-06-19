@@ -124,7 +124,7 @@ public class GraphvizFromJsonGen {
     }
 
     private String generateNode(DiagramNode node) {
-        Object label = node.getLabel() + (node.getHighlight() ? "[h]" : "");
+        String label = preProcessLabel(node.getLabel()) + (node.getHighlight() ? "[h]" : "");
         return node.getId() + " [label=\"" + label + "\"];";
     }
 
@@ -138,9 +138,7 @@ public class GraphvizFromJsonGen {
                 (!edge.getDirection().isEmpty() ? "[dir=" + edge.getDirection() + "];" : ";");
     }
 
-    @SuppressWarnings("unchecked")
-    private <E> List<E> getList(String name) {
-        List<E> result = (List<E>) graph.get(name);
-        return result == null ? Collections.emptyList() : result;
+    private String preProcessLabel(String label) {
+        return label.replace("\n", "\\n");
     }
 }
