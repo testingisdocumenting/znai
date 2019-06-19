@@ -1,10 +1,10 @@
 # Nodes and Edges
 
-:include-flow-chart: simple-dag.json
+:include-flow-chart: flow-diagrams/simple-dag.json
 
 Specify a `JSON` file to define a flow chart.  
 
-:include-file: simple-dag.json {title: "simple-dag.json"}
+:include-file: flow-diagrams/simple-dag.json {title: "simple-dag.json"}
 
 At minimum, `nodes` and `edges` must be provided.
 
@@ -13,17 +13,17 @@ At minimum, `nodes` and `edges` must be provided.
 
 # Highlight
 
-:include-file: highlight-dag.json     
+:include-file: flow-diagrams/highlight-dag.json     
 
 Use `highlight` to highlight a node.
 
-:include-flow-chart: highlight-dag.json
+:include-flow-chart: flow-diagrams/highlight-dag.json
 
 Or use `highlight` property of a `flow-chart` include plugin.
 
     :include-flow-chart: simple-dag.json {highlight: "n3"}
     
-:include-flow-chart: simple-dag.json {highlight: "n3"}
+:include-flow-chart: flow-diagrams/simple-dag.json {highlight: "n3"}
 
 Note: To highlight more than one element use `{highlight: ["n3", "n4"]}`
 
@@ -39,7 +39,7 @@ To force all highlights to appear at once add this before (either in the same se
 
 To switch layout from horizontal to vertical use `vertical: true`.
 
-:include-flow-chart: simple-dag.json {vertical: true}
+:include-flow-chart: flow-diagrams/simple-dag.json {vertical: true}
 
 # Layout Types
 
@@ -48,7 +48,7 @@ supported at the moment.
 
     :include-flow-chart: simple-dag.json {layout: "neato"}
 
-:include-flow-chart: simple-dag.json {layout: "neato"}
+:include-flow-chart: flow-diagrams/simple-dag.json {layout: "neato"}
 
 [Neato layout guide from Graphviz](https://www.graphviz.org/pdf/neatoguide.pdf)
 
@@ -56,11 +56,28 @@ supported at the moment.
   
 To attach links to nodes use `url` property.
             
-:include-flow-chart: links-dag.json     
+:include-flow-chart: flow-diagrams/links-dag.json     
         
 Combine links and highlights to create a sub navigation for your product.
          
-:include-file: links-dag.json     
-            
+:include-file: flow-diagrams/links-dag.json     
 
+# Reusable Nodes
+
+Move nodes definitions to a separate file(s) if you use them across multiple diagrams
+
+:include-file: flow-diagrams/graph-using-lib.json {title: "only edges definitions"}
+
+
+:include-file: flow-diagrams/nodes-lib-a.json {title: "nodes/set-a.json"}
+:include-file: flow-diagrams/nodes-lib-b.json {title: "nodes/set-b.json"}
+
+    :include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: "nodes/set-a.json"}
+
+:include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: "flow-diagrams/nodes-lib-a.json"}
+
+    :include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: ["nodes/set-a.json", "nodes/set-b.json"]}
+
+:include-flow-chart: flow-diagrams/graph-using-lib.json 
+    {nodeLibPath: ["flow-diagrams/nodes-lib-a.json", "flow-diagrams/nodes-lib-b.json"]}
 
