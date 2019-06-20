@@ -2,7 +2,7 @@ import React from 'react'
 import {fullResourcePath} from '../../utils/resourcePath'
 import {documentationNavigation} from './DocumentationNavigation'
 
-const NavBar = ({docMeta, tocItem, renderContext}) => {
+const NavBar = ({docMeta, tocItem}) => {
     const url = fullResourcePath(docMeta.id, "")
     const clickHandler = (e) => {
         e.preventDefault();
