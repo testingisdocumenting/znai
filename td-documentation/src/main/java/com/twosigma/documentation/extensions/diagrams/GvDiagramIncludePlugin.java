@@ -41,7 +41,6 @@ public class GvDiagramIncludePlugin implements IncludePlugin {
                 diagramId, gvContent);
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("diagram", diagram.toMap());
-        props.put("colors", Graphviz.colors);
 
         return PluginResult.docElement("GraphVizDiagram", props);
     }

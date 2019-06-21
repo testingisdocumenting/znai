@@ -115,6 +115,7 @@ public class GraphvizFromJsonGen {
         return new DiagramNode(id.toString(),
                 node.getOrDefault("label", id).toString(),
                 node.getOrDefault("url", "").toString(),
+                node.getOrDefault("colorGroup", "").toString(),
                 Boolean.TRUE.equals(node.getOrDefault("highlight", "")));
     }
 
@@ -124,8 +125,14 @@ public class GraphvizFromJsonGen {
     }
 
     private String generateNode(DiagramNode node) {
-        String label = preProcessLabel(node.getLabel()) + (node.getHighlight() ? "[h]" : "");
-        return node.getId() + " [label=\"" + label + "\"];";
+        return node.getId() + " [label=\"" + generateNodeLabel(node) + "\"];";
+    }
+
+    private String generateNodeLabel(DiagramNode node) {
+        String labelSuffix = node.getHighlight() ? "[h]" :
+            !node.getColorGroup().isEmpty() ? "[" + node.getColorGroup() + "]" : "";
+
+        return preProcessLabel(node.getLabel()) + labelSuffix;
     }
 
     private String generateEdges(List<DiagramEdge> edges) {

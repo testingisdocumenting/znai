@@ -126,6 +126,26 @@
     --mdoc-horizontal-rule-color: #eee;
 
     --mdoc-diagram-node-shadow-color: #e6e6e6;
+    --mdoc-diagram-a-line: #AA8E39;
+    --mdoc-diagram-a-fill: #FFEAAA;
+    --mdoc-diagram-a-text: #806515;
+    --mdoc-diagram-a-text-inverse: #AA8E39;
+    --mdoc-diagram-b-line: #123752;
+    --mdoc-diagram-b-fill: #708EA4;
+    --mdoc-diagram-b-text: #eeeeee;
+    --mdoc-diagram-b-text-inverse: #123752;
+    --mdoc-diagram-c-line: #409318;
+    --mdoc-diagram-c-fill: #c8e4a8;
+    --mdoc-diagram-c-text: #1e231e;
+    --mdoc-diagram-c-text-inverse: #4d2b5c;
+    --mdoc-diagram-d-line: #4d2b5c;
+    --mdoc-diagram-d-fill: #8364b6;
+    --mdoc-diagram-d-text: #ede2f1;
+    --mdoc-diagram-d-text-inverse: #306E12;
+    --mdoc-diagram-h-line: #888;
+    --mdoc-diagram-h-fill: #fff;
+    --mdoc-diagram-h-text: #888;
+    --mdoc-diagram-h-text-inverse: #888;
 }
 
 body {
