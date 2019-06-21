@@ -53,7 +53,6 @@ public class FlowChartIncludePlugin implements IncludePlugin {
         filePath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         docStructure = componentsRegistry.docStructure();
 
-
         String graphJson = componentsRegistry.resourceResolver().textContent(filePath);
 
         GraphvizGenConfig genConfig = new GraphvizGenConfig();
@@ -71,7 +70,6 @@ public class FlowChartIncludePlugin implements IncludePlugin {
 
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("diagram", diagram.toMap());
-        props.put("colors", Graphviz.colors);
         props.put("idsToHighlight", pluginParams.getOpts().getList("highlight"));
         props.put("wide", pluginParams.getOpts().get("wide", false));
         props.put("urls", extractLinks(genResult.getUsedNodes()));

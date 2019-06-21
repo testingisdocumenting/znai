@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "label": "input one"
+    },
+    {
+      "id": "n2",
+      "label": "input two"
+    },
+    {
+      "id": "n3",
+      "label": "processor",
+      "colorGroup": "b"
+    },
+    {
+      "id": "n4",
+      "label": "output one",
+      "colorGroup": "c"
+    },
+    {
+      "id": "n5",
+      "label": "output two",
+      "colorGroup": "c"
+    },
+    {
+      "id": "n6",
+      "label": "output three",
+      "colorGroup": "d"
+    }
+  ],
+  "edges": [
+    ["n1", "n3"],
+    ["n2", "n3"],
+    ["n3", "n4"],
+    ["n3", "n5"],
+    ["n3", "n6"]
+  ]
+}

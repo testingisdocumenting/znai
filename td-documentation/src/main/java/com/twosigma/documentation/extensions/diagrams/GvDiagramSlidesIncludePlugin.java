@@ -65,7 +65,6 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
         props.put("diagram", Graphviz.graphvizEngine.diagramFromGv(
                 pluginParams.getOpts().get("type", DOT_LAYOUT),
                 diagramId, gvContent).toMap());
-        props.put("colors", Graphviz.colors);
 
         return PluginResult.docElement("GraphVizFlow", props);
     }

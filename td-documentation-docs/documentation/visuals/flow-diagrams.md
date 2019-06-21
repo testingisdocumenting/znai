@@ -35,6 +35,14 @@ Or use `highlight` property of a `flow-chart` include plugin.
 
 Note: To highlight more than one element use `{highlight: ["n3", "n4"]}`
 
+# Color groups
+
+Use `colorGroup` to assign a color group to a node. There are three color groups out of the box: `a` (default), `b`, `c`, `d`.
+
+:include-file: flow-diagrams/simple-dag-colors.json     
+
+:include-flow-chart: flow-diagrams/simple-dag-colors.json
+
 # Presentation
 
 In presentation mode nodes will be highlighted one at a time.
