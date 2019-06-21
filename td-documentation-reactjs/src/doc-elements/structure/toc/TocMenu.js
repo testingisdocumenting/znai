@@ -5,9 +5,9 @@ import {pageTypesRegistry} from '../../page/PageTypesRegistry'
 const PageSections = ({pageSectionIdTitles, selected, onTocItemPageSectionClick}) => {
     return (<div className="page-sections">
         {pageSectionIdTitles.map((idTitle, idx) => {
-            const onClick = (e) => { e.preventDefault(); onTocItemPageSectionClick(idTitle.id) }
+            const onClick = () => onTocItemPageSectionClick(idTitle.id)
 
-            const isSelected = idTitle.id === selected.pageSectionId
+            const isSelected = idTitle.id === selected.anchorId
             const className = "page-section" + (isSelected ? " selected" : "")
             const href = "#" + idTitle.id
 
@@ -16,8 +16,7 @@ const PageSections = ({pageSectionIdTitles, selected, onTocItemPageSectionClick}
                     <a href={href}>{idTitle.title}</a>
                 </div>
             )
-        })
-        }
+        })}
     </div>)
 }
 
@@ -30,7 +29,10 @@ class Item extends PureComponent {
 
         const displayPageSections = isSelected && pageTypesRegistry.expandToc(item)
 
-        const onClick = onTocItemClick ? (e) => { e.preventDefault(); onTocItemClick(item.dirName, item.fileName)} : null
+        const onClick = onTocItemClick ? (e) => {
+            e.preventDefault();
+            onTocItemClick(item.dirName, item.fileName)
+        } : null
 
         return (
             <div className={className} ref={this.saveNodeRef}>
@@ -90,7 +92,7 @@ const TocMenu = ({toc, selected, onTocItemClick, onTocItemPageSectionClick}) => 
                          selected={selected}
                          onTocItemClick={onTocItemClick}
                          onTocItemPageSectionClick={onTocItemPageSectionClick}
-                         section={sectionEntry} />)}
+                         section={sectionEntry}/>)}
         </div>
     )
 }
