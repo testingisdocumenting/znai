@@ -15,6 +15,12 @@
     <dependencies>
         <dependency>
             <groupId>com.twosigma.td</groupId>
+            <artifactId>td-documentation-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.twosigma.td</groupId>
             <artifactId>td-utils</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -40,6 +46,14 @@
             <groupId>com.twosigma.webtau</groupId>
             <artifactId>webtau-core-groovy</artifactId>
             <version>${webtau.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.twosigma.td</groupId>
+            <artifactId>td-documentation-core</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
             <scope>test</scope>
         </dependency>
     </dependencies>
