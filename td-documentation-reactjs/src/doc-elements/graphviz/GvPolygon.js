@@ -48,7 +48,7 @@ function createStyle(diagramId, parentClassName) {
     return {}
 }
 
-// make 4 points polygon slighlty smaller so arrows dont connect with the surface
+// make 4 points polygon slightly smaller so arrows dont connect with the surface
 // points="0,-73.5 0,-109.5 54,-109.5 54,-73.5 0,-73.5
 // calculates center and sizes
 function calculateSizes(points) {

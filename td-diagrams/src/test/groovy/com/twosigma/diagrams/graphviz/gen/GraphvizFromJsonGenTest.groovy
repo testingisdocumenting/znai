@@ -2,6 +2,8 @@ package com.twosigma.diagrams.graphviz.gen
 
 import org.junit.Test
 
+import static com.twosigma.webtau.Ddjt.contain
+
 /**
  * @author mykola
  */
@@ -39,29 +41,19 @@ class GraphvizFromJsonGenTest {
                 edges: [["n", "n"]
                 ]])
 
-        gv.should == "digraph Generated {\n" +
-                "rankdir=LR;\n" +
-                "bgcolor=\"#ffffff00\";\n" +
-                "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
-                "\n" +
-                "n [label=\"multi\\nline\"];\n" +
-                "\n" +
-                "n -> n;\n" +
-                "}"
+        gv.should contain("n [label=\"multi\\nline\"]")
     }
 
     @Test
     void "applies meta information for highlighted items"() {
-        generate([nodes: [[id: "n1", label: "l1", highlight: true]], edges: [["n1", "n1"]]])
+        generate([nodes: [[id: "n", label: "l", highlight: true]], edges: [["n", "n"]]])
+        gv.should contain("n [label=\"l[h]\"]")
+    }
 
-        gv.should == "digraph Generated {\n" +
-                "rankdir=LR;\n" +
-                "bgcolor=\"#ffffff00\";\n" +
-                "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
-                "\n" +
-                "n1 [label=\"l1[h]\"];\n\n" +
-                "n1 -> n1;\n" +
-                "}"
+    @Test
+    void "applies meta information when color group is specified"() {
+        generate([nodes: [[id: "n", label: "l", colorGroup: "b"]], edges: [["n", "n"]]])
+        gv.should contain("n [label=\"l[b]\"]")
     }
 
     @Test

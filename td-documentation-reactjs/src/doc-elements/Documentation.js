@@ -46,7 +46,7 @@ export class Documentation extends Component {
         const autoSelectedTocItem = {
             dirName: page.tocItem.dirName,
             fileName: page.tocItem.fileName,
-            pageSectionId: page.tocItem.pageSectionIdTitles[0] ?
+            anchorId: page.tocItem.pageSectionIdTitles[0] ?
                 page.tocItem.pageSectionIdTitles[0].id : null
         }
 
@@ -383,9 +383,7 @@ export class Documentation extends Component {
     onTocItemPageSectionClick(sectionId) {
         const {autoSelectedTocItem} = this.state
 
-        documentationNavigation.scrollToAnchor(sectionId)
-
-        const forceSelectedTocItem = {...autoSelectedTocItem, pageSectionId: sectionId}
+        const forceSelectedTocItem = {...autoSelectedTocItem, anchorId: sectionId}
         this.setState({forceSelectedTocItem})
     }
 
@@ -543,7 +541,7 @@ export class Documentation extends Component {
         const sectionTitlesWithNode = combineSectionTitlesWithNodes(this.pageSectionNodes)
         const withVisibleTitle = sectionsWithVisibleTitle()
 
-        if (forceSelectedTocItem && isVisible(forceSelectedTocItem.pageSectionId)) {
+        if (forceSelectedTocItem && isVisible(forceSelectedTocItem.anchorId)) {
             return;
         }
 
@@ -551,7 +549,7 @@ export class Documentation extends Component {
 
         const enrichedSelectedTocItem = {
             ...autoSelectedTocItem,
-            pageSectionId: (visible && visible.idTitle) ? visible.idTitle.id : null
+            anchorId: (visible && visible.idTitle) ? visible.idTitle.id : null
         }
         this.setState({autoSelectedTocItem: enrichedSelectedTocItem, forceSelectedTocItem: null})
 
@@ -580,9 +578,9 @@ export class Documentation extends Component {
             })
         }
 
-        function isVisible(pageSectionId) {
+        function isVisible(id) {
             const visibleWithForcedId =
-                withVisibleTitle.filter(s => s.idTitle.id === pageSectionId)
+                withVisibleTitle.filter(s => s.idTitle.id === id)
 
             return visibleWithForcedId.length > 0
         }
