@@ -19,11 +19,12 @@ class GvPolygon extends Component {
     renderNode() {
         const sizes = calculateSizes(this.props.points)
         const colorsOverride = createColors(this.props.parentClassName, this.props.colors)
-        const style = createStyle(this.props.diagramId, this.props.parentClassName)
 
         if (this.props.svg) {
-            return <SvgCustomShape {...this.props} {...sizes}/>
+            const style = createGlowStyle(this.props.diagramId)
+            return <SvgCustomShape {...this.props} {...sizes} style={style}/>
         } else {
+            const style = createNodeOnlyStyle(this.props.diagramId, this.props.parentClassName)
             const cleanedUpProps = removeCustomProps(this.props)
 
             return <polygon {...cleanedUpProps} {...colorsOverride} points={sizes.points}
@@ -40,12 +41,16 @@ function createColors(parentClassName, colors) {
     return {fill: colors.fill, stroke: colors.line}
 }
 
-function createStyle(diagramId, parentClassName) {
+function createNodeOnlyStyle(diagramId, parentClassName) {
     if (parentClassName === 'node') {
-        return {filter: `url(#${buildUniqueId(diagramId, "glow_filter")})`}
+        return createGlowStyle(diagramId)
     }
 
     return {}
+}
+
+function createGlowStyle(diagramId) {
+    return {filter: `url(#${buildUniqueId(diagramId, "glow_filter")})`}
 }
 
 // make 4 points polygon slightly smaller so arrows dont connect with the surface

@@ -1,12 +1,15 @@
 import React from 'react'
 import GraphVizSvg from './GraphVizSvg'
 
+import diagramWithShapes from './DiagramTestData'
+
 export function graphVizSvgDemo(registry) {
     registry
-        .add('default schema svg', () => <GraphVizSvg {...simpleDiagram('id1')}/>)
+        .add('multiple colors', () => <GraphVizSvg {...createDiagramWithColors('id1')}/>)
+        .add('shapes', () => <GraphVizSvg {...createDiagramWithShapes()}/>)
 }
 
-function simpleDiagram(id) {
+function createDiagramWithColors(id) {
     return {
         "diagram": {
             "shapeSvgByStyleId": {},
@@ -30,3 +33,12 @@ function simpleDiagram(id) {
     }
 }
 
+function createDiagramWithShapes() {
+    return {
+        "diagram": diagramWithShapes,
+        "idsToHighlight": [],
+        "wide": false,
+        "urls": {},
+        "type": "GraphVizDiagram"
+    }
+}

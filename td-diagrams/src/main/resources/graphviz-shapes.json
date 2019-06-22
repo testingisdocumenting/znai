@@ -1,6 +1,6 @@
 {
   "man": {
-    "shape": "octagon",
+    "shape": "rectangle",
     "width": 0.7,
     "height": 1.5,
     "svgPath": "person.svg"
