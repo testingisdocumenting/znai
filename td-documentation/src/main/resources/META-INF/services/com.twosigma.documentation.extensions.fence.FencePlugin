@@ -3,4 +3,3 @@ com.twosigma.documentation.extensions.templates.TemplateFencePlugin
 com.twosigma.documentation.extensions.columns.ColumnsFencePlugin
 com.twosigma.documentation.extensions.api.ApiParametersFencePlugin
 com.twosigma.documentation.extensions.markup.MarkdownAndResultFencePlugin
-com.twosigma.documentation.extensions.diagrams.PlantUmlFencePlugin
