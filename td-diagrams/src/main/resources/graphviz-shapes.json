@@ -10,7 +10,9 @@
     "shape": "square",
     "width": 0.8,
     "height": 0.8,
-    "svgPath": "world.svg"
+    "svgPath": "world.svg",
+    "labelloc": "b",
+    "invertedText": true
   },
 
   "client": {
@@ -29,9 +31,18 @@
 
   "database": {
     "shape": "rectangle",
-    "width": 1.0,
-    "height": 1.1,
-    "svgPath": "database-b.svg"
+    "width": 0.65,
+    "height": 1.0,
+    "svgPath": "db.svg"
+  },
+
+  "database-bottom-label": {
+    "shape": "rectangle",
+    "width": 0.65,
+    "height": 1.2,
+    "svgPath": "db.svg",
+    "labelloc": "b",
+    "invertedText": true
   },
 
   "logStash": {

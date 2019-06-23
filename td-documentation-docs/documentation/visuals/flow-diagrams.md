@@ -43,6 +43,15 @@ Use `colorGroup` to assign a color group to a node. There are three color groups
 
 :include-flow-chart: flow-diagrams/simple-dag-colors.json
 
+# Shapes
+
+Use `shape` to assign one of the predefined shapes.
+
+:include-file: flow-diagrams/simple-dag-shapes.json
+
+:include-flow-chart: flow-diagrams/simple-dag-shapes.json
+
+
 # Presentation
 
 In presentation mode nodes will be highlighted one at a time.

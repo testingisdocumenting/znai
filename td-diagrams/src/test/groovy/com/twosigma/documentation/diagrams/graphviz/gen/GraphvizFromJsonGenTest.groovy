@@ -57,6 +57,24 @@ class GraphvizFromJsonGenTest {
     }
 
     @Test
+    void "applies meta information when shape is specified"() {
+        generate([nodes: [[id: "n", label: "l", shape: "database"]], edges: [["n", "n"]]])
+        gv.should contain("n [label=\"l[database]\"]")
+    }
+
+    @Test
+    void "applies meta information when shape and color is specified"() {
+        generate([nodes: [[id: "n", label: "l", colorGroup: "b", shape: "database"]], edges: [["n", "n"]]])
+        gv.should contain("n [label=\"l[b database]\"]")
+    }
+
+    @Test
+    void "applies meta information when shape and highlight is specified"() {
+        generate([nodes: [[id: "n", label: "l", highlight: true, shape: "database"]], edges: [["n", "n"]]])
+        gv.should contain("n [label=\"l[h database]\"]")
+    }
+
+    @Test
     void "allows to specify nodes libraries to use and only register referenced nodes"() {
         generate([edges: [["a", "b"], ["c", "d"]]], [
                 [

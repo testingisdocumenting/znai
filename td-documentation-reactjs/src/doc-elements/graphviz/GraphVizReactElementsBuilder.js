@@ -4,6 +4,7 @@ import GvPolygon from "./GvPolygon"
 import GvText from "./GvText"
 import GvPath from "./GvPath"
 import GvGroup from "./GvGroup"
+import {globalAssets} from "../global-assets/GlobalAssets"
 
 export default class GraphVizReactElementsBuilder {
     constructor({diagram, idsToDisplay, idsToHighlight, urls}) {
@@ -100,8 +101,12 @@ export default class GraphVizReactElementsBuilder {
             return null
         }
 
-        const shapes = this.currentStyles.filter((s) => this.diagram.shapeSvgByStyleId[s])
-        return this.diagram.shapeSvgByStyleId[shapes[0]]
+        if (!globalAssets.assets.graphvizDiagram) {
+            return null;
+        }
+
+        const shapes = this.currentStyles.filter((s) => globalAssets.assets.graphvizDiagram[s])
+        return globalAssets.assets.graphvizDiagram[shapes[0]]
     }
 
     isInvertedTextColor() {
@@ -155,8 +160,9 @@ export default class GraphVizReactElementsBuilder {
         return {
             line: `var(--mdoc-diagram-${colorGroup}-line)`,
             fill: `var(--mdoc-diagram-${colorGroup}-fill)`,
-            text: `var(--mdoc-diagram-${colorGroup}-text)`,
-            textInverse: `var(--mdoc-diagram-${colorGroup}-text-inverse)`,
+            text: this.isInvertedTextColor() ?
+                `var(--mdoc-diagram-${colorGroup}-text-inverse)`:
+                `var(--mdoc-diagram-${colorGroup}-text)`
         }
     }
 

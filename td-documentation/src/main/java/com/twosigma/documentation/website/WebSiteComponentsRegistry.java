@@ -1,6 +1,7 @@
 package com.twosigma.documentation.website;
 
 import com.twosigma.documentation.core.ComponentsRegistry;
+import com.twosigma.documentation.core.GlobalAssetsRegistry;
 import com.twosigma.documentation.core.ResourcesResolver;
 import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.commonmark.MarkdownParser;
@@ -14,6 +15,12 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
     private MarkdownParser markdownParser;
     private ResourcesResolver resourcesResolver;
     private DocStructure docStructure;
+
+    private GlobalAssetsRegistry assetsRegistry;
+
+    public WebSiteComponentsRegistry() {
+        assetsRegistry = new GlobalAssetsRegistry();
+    }
 
     @Override
     public MarkupParser defaultParser() {
@@ -33,6 +40,11 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
     @Override
     public DocStructure docStructure() {
         return docStructure;
+    }
+
+    @Override
+    public GlobalAssetsRegistry globalAssetsRegistry() {
+        return assetsRegistry;
     }
 
     public void setDefaultParser(MarkupParser parser) {

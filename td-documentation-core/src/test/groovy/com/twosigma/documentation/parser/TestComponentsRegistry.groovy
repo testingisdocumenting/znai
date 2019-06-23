@@ -1,6 +1,7 @@
 package com.twosigma.documentation.parser
 
 import com.twosigma.documentation.core.ComponentsRegistry
+import com.twosigma.documentation.core.GlobalAssetsRegistry
 import com.twosigma.documentation.core.ResourcesResolver
 import com.twosigma.documentation.parser.commonmark.MarkdownParser
 import com.twosigma.documentation.structure.DocStructure
@@ -16,6 +17,8 @@ class TestComponentsRegistry implements ComponentsRegistry {
     private TestDocStructure docStructure = new TestDocStructure()
     MarkupParser defaultParser = new TestMarkupParser()
     MarkupParser markdownParser = new TestMarkdownParser()
+
+    private GlobalAssetsRegistry assetsRegistry = new GlobalAssetsRegistry()
 
     private TestComponentsRegistry() {
     }
@@ -42,5 +45,10 @@ class TestComponentsRegistry implements ComponentsRegistry {
     @Override
     DocStructure docStructure() {
         return docStructure
+    }
+
+    @Override
+    GlobalAssetsRegistry globalAssetsRegistry() {
+        return assetsRegistry
     }
 }

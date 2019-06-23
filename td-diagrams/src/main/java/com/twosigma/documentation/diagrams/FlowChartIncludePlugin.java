@@ -54,6 +54,8 @@ public class FlowChartIncludePlugin implements IncludePlugin {
         filePath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         docStructure = componentsRegistry.docStructure();
 
+        DiagramsGlobalAssetsRegistration.register(componentsRegistry.globalAssetsRegistry());
+
         String graphJson = componentsRegistry.resourceResolver().textContent(filePath);
 
         GraphvizGenConfig genConfig = new GraphvizGenConfig();
