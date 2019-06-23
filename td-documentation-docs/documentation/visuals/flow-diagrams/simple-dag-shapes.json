@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "label": "input\none"
+    },
+    {
+      "id": "n2",
+      "label": "two",
+      "shape": "database"
+    },
+    {
+      "id": "n3",
+      "label": "three input",
+      "shape": "database-bottom-label"
+    },
+    {
+      "id": "n4",
+      "label": "processor",
+      "colorGroup": "b"
+    },
+    {
+      "id": "n5",
+      "colorGroup": "c",
+      "shape": "world"
+    }
+  ],
+  "edges": [
+    ["n1", "n4"],
+    ["n2", "n4"],
+    ["n3", "n4"],
+    ["n4", "n5"]
+  ]
+}

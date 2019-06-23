@@ -67,10 +67,10 @@ public class GraphvizNodeShape {
         }
 
         if (isWidthSet() || isHeightSet()) {
-            attrs.add("fixedSize=" + true);
+            attrs.add("fixedsize=true");
         }
 
-        return attrs.stream().collect(Collectors.joining(","));
+        return String.join("; ", attrs);
     }
 
     @Override

@@ -10,14 +10,12 @@ import static java.util.stream.Collectors.toList;
  * @author mykola
  */
 public class GraphvizFromJsonGen {
-    private final Map<String, ?> graph;
     private final Map<String, DiagramNode> nodesFromGraph;
     private final Map<String, DiagramNode> nodesFromLibs;
     private final List<DiagramEdge> edgesFromGraph;
     private final GraphvizGenConfig config;
 
     public GraphvizFromJsonGen(Map<String, ?> graph, List<List<?>> nodesLibraries, GraphvizGenConfig config) {
-        this.graph = graph;
         this.nodesFromGraph = extractNodesFromGraph(graph);
         this.edgesFromGraph = extractEdgesFromGraph(graph);
 
@@ -113,9 +111,10 @@ public class GraphvizFromJsonGen {
         }
 
         return new DiagramNode(id.toString(),
-                node.getOrDefault("label", id).toString(),
+                node.getOrDefault("label", "").toString(),
                 node.getOrDefault("url", "").toString(),
                 node.getOrDefault("colorGroup", "").toString(),
+                node.getOrDefault("shape", "").toString(),
                 Boolean.TRUE.equals(node.getOrDefault("highlight", "")));
     }
 
@@ -129,8 +128,18 @@ public class GraphvizFromJsonGen {
     }
 
     private String generateNodeLabel(DiagramNode node) {
-        String labelSuffix = node.getHighlight() ? "[h]" :
-            !node.getColorGroup().isEmpty() ? "[" + node.getColorGroup() + "]" : "";
+        List<String> metaParts = new ArrayList<>();
+        if (node.getHighlight()) {
+            metaParts.add("h");
+        } else if (!node.getColorGroup().isEmpty()) {
+            metaParts.add(node.getColorGroup());
+        }
+
+        if (!node.getShape().isEmpty()) {
+            metaParts.add(node.getShape());
+        }
+
+        String labelSuffix = metaParts.isEmpty() ? "" : "[" + String.join(" ", metaParts) + "]";
 
         return preProcessLabel(node.getLabel()) + labelSuffix;
     }

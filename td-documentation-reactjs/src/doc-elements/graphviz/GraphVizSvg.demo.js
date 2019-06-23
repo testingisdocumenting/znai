@@ -2,8 +2,11 @@ import React from 'react'
 import GraphVizSvg from './GraphVizSvg'
 
 import diagramWithShapes from './DiagramTestData'
+import {stubGraphvizGlobalAssets} from "./graphvizTestGlobalAssets"
 
 export function graphVizSvgDemo(registry) {
+    stubGraphvizGlobalAssets()
+
     registry
         .add('multiple colors', () => <GraphVizSvg {...createDiagramWithColors('id1')}/>)
         .add('shapes', () => <GraphVizSvg {...createDiagramWithShapes()}/>)

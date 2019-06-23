@@ -39,6 +39,10 @@ public class InteractiveCmdGraphviz implements GraphvizRuntime {
                 throw new RuntimeException(line);
             }
 
+            if (line.startsWith("Warning:")) {
+                continue;
+            }
+
             result.append(line).append("\n");
             if (line.contains(endMarker)) {
                 break;

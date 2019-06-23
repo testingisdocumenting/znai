@@ -26,4 +26,6 @@ public interface ComponentsRegistry {
 
     ResourcesResolver resourceResolver();
     DocStructure docStructure();
+
+    GlobalAssetsRegistry globalAssetsRegistry();
 }

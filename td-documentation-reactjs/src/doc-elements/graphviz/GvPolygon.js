@@ -27,8 +27,15 @@ class GvPolygon extends Component {
             const style = createNodeOnlyStyle(this.props.diagramId, this.props.parentClassName)
             const cleanedUpProps = removeCustomProps(this.props)
 
-            return <polygon {...cleanedUpProps} {...colorsOverride} points={sizes.points}
-                            style={style}/>
+            if (this.props.parentClassName === 'node') {
+                const gap = 4;
+                return <rect {...cleanedUpProps} {...colorsOverride}
+                             x={sizes.x + gap} y={sizes.y + gap}
+                             width={sizes.width - gap * 2} height={sizes.height - gap * 2}
+                             style={style}/>
+            }
+
+            return <polygon points={this.props.points} {...cleanedUpProps} {...colorsOverride} style={style}/>
         }
     }
 }
@@ -53,8 +60,7 @@ function createGlowStyle(diagramId) {
     return {filter: `url(#${buildUniqueId(diagramId, "glow_filter")})`}
 }
 
-// make 4 points polygon slightly smaller so arrows dont connect with the surface
-// points="0,-73.5 0,-109.5 54,-109.5 54,-73.5 0,-73.5
+// make polygon slightly smaller so arrows dont connect with the surface
 // calculates center and sizes
 function calculateSizes(points) {
     let coordPairs = points.split(' ')
@@ -79,22 +85,7 @@ function calculateSizes(points) {
     const width = Math.abs(minX - maxX)
     const height = Math.abs(minY - maxY)
 
-    const gap = 4
-    x[0] += gap
-    x[1] += gap
-    x[2] -= gap
-    x[3] -= gap
-    x[4] += gap
-
-    y[0] -= gap
-    y[1] += gap
-    y[2] += gap
-    y[3] -= gap
-    y[4] -= gap
-
-    // naive handling of rects only. Need to try to use transform scale
-    const newPoints = coordPairs.length !== 5 ? points : `${x[0]},${y[0]} ${x[1]},${y[1]} ${x[2]},${y[2]} ${x[3]},${y[3]} ${x[4]},${y[4]}`
-    return {points: newPoints, cx: cx, cy: cy, width: width, height: height}
+    return {cx: cx, cy: cy, x: cx - width/2.0, y: cy - height/2.0, width: width, height: height}
 }
 
 export default GvPolygon

@@ -5,6 +5,7 @@ import com.twosigma.utils.JsonUtils;
 import com.twosigma.utils.ResourceUtils;
 
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,14 +28,21 @@ import java.util.Optional;
 public class GraphvizShapeConfig {
     private Map<String, ?> config;
 
+    private Map<String, String> svgByName;
+
     public GraphvizShapeConfig(String json) {
         this(JsonUtils.deserializeAsMap(json));
     }
     public GraphvizShapeConfig(Map<String, ?> config) {
         this.config = config;
+        this.svgByName = buildSvgByName();
     }
 
     public Optional<String> shapeSvg(String style) {
+        if (svgByName != null) {
+            return Optional.ofNullable(svgByName.get(style));
+        }
+
         Map<String, ?> c = getSubMap(style);
         if (c == null) {
             return Optional.empty();
@@ -75,6 +83,24 @@ public class GraphvizShapeConfig {
         Number height = getValue(c, "height");
 
         return Optional.of(new GraphvizNodeShape(shape, labelLoc, width, height));
+    }
+
+    public Map<String, ?> getSvgByName() {
+        return svgByName;
+    }
+
+    private Map<String, String> buildSvgByName() {
+        Map<String, String> result = new HashMap<>();
+        config.forEach((id, styleDef)  -> {
+            Optional<String> svg = shapeSvg(id);
+            if (!svg.isPresent()) {
+                throw new RuntimeException("no svg found for <" + id + ">");
+            }
+
+            result.put(id, svg.get());
+        });
+
+        return result;
     }
 
     @SuppressWarnings("unchecked")

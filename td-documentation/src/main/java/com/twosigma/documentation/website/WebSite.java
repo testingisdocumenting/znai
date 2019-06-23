@@ -62,6 +62,7 @@ public class WebSite {
     private final AuxiliaryFilesRegistry auxiliaryFilesRegistry;
     private final ReactJsBundle reactJsBundle;
     private final WebResource tocJavaScript;
+    private final WebResource globalAssetsJavaScript;
     private final WebResource searchIndexJavaScript;
 
     private final MultipleLocalLocationsResourceResolver localResourceResolver;
@@ -80,6 +81,7 @@ public class WebSite {
         this.resourceResolver = new ResourcesResolverChain();
         this.reactJsBundle = cfg.reactJsBundle;
         this.tocJavaScript = WebResource.withPath("toc.js");
+        this.globalAssetsJavaScript = WebResource.withPath("assets.js");
         this.searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
         this.auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
         this.markupParsingConfiguration = createMarkupParsingConfiguration();
@@ -147,6 +149,7 @@ public class WebSite {
         generatePages();
         generateSearchIndex();
         deployToc();
+        deployGlobalAssets();
         deployAuxiliaryFiles();
         deployResources();
     }
@@ -228,6 +231,7 @@ public class WebSite {
         pageByTocItem = new LinkedHashMap<>();
         pagePropsByTocItem = new HashMap<>();
         extraJavaScriptsInFront = new ArrayList<>(registeredExtraJavaScripts);
+        extraJavaScriptsInFront.add(globalAssetsJavaScript);
         extraJavaScriptsInFront.add(tocJavaScript);
         extraJavaScriptsInBack = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScriptsInBack.add(searchIndexJavaScript);
@@ -266,6 +270,12 @@ public class WebSite {
         reportPhase("deploying table of contents");
         String tocJson = JsonUtils.serializePrettyPrint(toc.toListOfMaps());
         deployer.deploy(tocJavaScript, "toc = " + tocJson);
+    }
+
+    private void deployGlobalAssets() {
+        reportPhase("deploying global plugin assets");
+        String globalAssetsJson = JsonUtils.serializePrettyPrint(componentsRegistry.globalAssetsRegistry().getAssets());
+        deployer.deploy(globalAssetsJavaScript, "globalAssets = " + globalAssetsJson);
     }
 
     private void parseMarkups() {
@@ -575,7 +585,6 @@ public class WebSite {
             return this;
         }
 
-        @SuppressWarnings("unchecked")
         public Configuration withMetaFromJsonFile(Path path) {
             String json = fileTextContent(path);
             docMeta = new DocMeta(json);

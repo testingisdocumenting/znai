@@ -1,5 +1,6 @@
 package com.twosigma.documentation.diagrams.graphviz;
 
+import com.twosigma.documentation.diagrams.DiagramsGlobalAssetsRegistration;
 import com.twosigma.documentation.diagrams.slides.DiagramSlides;
 import com.twosigma.documentation.diagrams.slides.MarkupDiagramSlides;
 import com.twosigma.documentation.core.AuxiliaryFile;
@@ -45,6 +46,8 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
                                 PluginParams pluginParams) {
         MarkupParser parser = componentsRegistry.defaultParser();
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
+
+        DiagramsGlobalAssetsRegistration.register(componentsRegistry.globalAssetsRegistry());
 
         String diagramTitle = pluginParams.getFreeParam();
         String diagramId = NameUtils.idFromTitle(diagramTitle);

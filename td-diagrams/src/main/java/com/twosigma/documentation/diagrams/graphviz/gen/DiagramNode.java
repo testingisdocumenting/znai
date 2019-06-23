@@ -5,13 +5,15 @@ public class DiagramNode {
     private final String label;
     private final String url;
     private final String colorGroup;
+    private final String shape;
     private final Boolean highlight;
 
-    public DiagramNode(String id, String label, String url, String colorGroup, Boolean highlight) {
+    public DiagramNode(String id, String label, String url, String colorGroup, String shape, Boolean highlight) {
         this.id = id;
         this.label = label;
         this.url = url;
         this.colorGroup = colorGroup;
+        this.shape = shape;
         this.highlight = highlight;
     }
 
@@ -29,6 +31,10 @@ public class DiagramNode {
 
     public String getColorGroup() {
         return colorGroup;
+    }
+
+    public String getShape() {
+        return shape;
     }
 
     public Boolean hasUrl() {
