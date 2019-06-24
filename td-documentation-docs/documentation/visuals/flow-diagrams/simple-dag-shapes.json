@@ -2,7 +2,8 @@
   "nodes": [
     {
       "id": "n1",
-      "label": "input\none"
+      "label": "researcher",
+      "shape": "actor"
     },
     {
       "id": "n2",

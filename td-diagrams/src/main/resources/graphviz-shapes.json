@@ -1,9 +1,11 @@
 {
-  "man": {
+  "actor": {
     "shape": "rectangle",
     "width": 0.7,
-    "height": 1.5,
-    "svgPath": "person.svg"
+    "height": 1.1,
+    "svgPath": "actor.svg",
+    "labelloc": "b",
+    "invertedText": true
   },
 
   "world": {

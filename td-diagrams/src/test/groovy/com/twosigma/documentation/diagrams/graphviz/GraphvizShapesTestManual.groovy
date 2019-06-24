@@ -12,7 +12,7 @@ class GraphvizShapesTestManual {
             rankdir=LR;
             node [shape=rectangle; fontsize=10; margin=0.2; fontname=Helvetica;];
     
-            human [label="human [man a]"];
+            human [label="human [actor a]"];
             world [label="[world c]"];
             server [label="server [a]"];
             another [label="hello\\\\nworld of[b database]"];
