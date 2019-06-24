@@ -34,11 +34,13 @@ import {yamlSnippetDemo} from './doc-elements/code-snippets/Yaml.demo'
 import {latexDemo} from './doc-elements/latex/Latex.demo'
 import {chartDemo} from './doc-elements/charts/Chart.demo'
 import {tableDemo} from './doc-elements/table/Table.demo'
-import {Documentation} from "./doc-elements/Documentation";
-import testData from "./doc-elements/TestData";
+import {diagramLegendDemo} from "./doc-elements/diagrams/DiagramLegend.demo"
 
-import {themeRegistry} from "./theme/ThemeRegistry";
-import WithTheme from "./theme/WithTheme";
+import {Documentation} from "./doc-elements/Documentation"
+import testData from "./doc-elements/TestData"
+
+import {themeRegistry} from "./theme/ThemeRegistry"
+import WithTheme from "./theme/WithTheme"
 
 const docMeta = {
     id: 'preview',
@@ -79,6 +81,7 @@ registries.add('visuals')
     .registerAsTabs('Image Annotations', imageAnnotationDemo)
     .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
     .registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
+    .registerAsRows('Diagram Legend', diagramLegendDemo)
 
 registries.add('layout')
     .registerAsTabs('Pages', pagesDemo)

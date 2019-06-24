@@ -49,6 +49,8 @@ import JupyterCell from './jupyter/JupyterCell'
 import {registerDocUtilsElements} from './doc-utils/DocUtils'
 import JsxGroup from './jsx/JsxGroup'
 
+import DiagramLegend from './diagrams/DiagramLegend'
+
 const library = {}
 const presentationElementHandlers = {}
 
@@ -159,6 +161,7 @@ library.Footer = Footer
 library.WebTauRest = WebTauRest
 
 library.OpenApiOperation = OpenApiOperation
+library.DiagramLegend = DiagramLegend
 
 registerDocUtilsElements(library)
 
