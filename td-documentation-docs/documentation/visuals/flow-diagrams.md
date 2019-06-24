@@ -51,6 +51,21 @@ Use `shape` to assign one of the predefined shapes.
 
 :include-flow-chart: flow-diagrams/simple-dag-shapes.json
 
+# Legend
+
+Use `include-diagram-legend` to add a legend to your diagram. Optionally add `clickableNodes: true` to insert a message
+that the nodes are clickable (in case you use urls).
+
+    :include-diagram-legend: {a: "inputs", b: "optimization process", c: "outcome", d: "unknown",
+        clickableNodes: true}
+
+    :include-flow-chart: flow-diagrams/simple-dag-colors.json
+
+:include-diagram-legend: {a: "inputs", b: "optimization process", c: "outcome", d: "unknown",
+    clickableNodes: true}
+
+:include-flow-chart: flow-diagrams/simple-dag-colors.json
+
 
 # Presentation
 
