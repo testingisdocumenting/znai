@@ -24,11 +24,13 @@
     "svgPath": "client.svg"
   },
 
-  "documents": {
-    "shape": "square",
-    "width": 0.95,
-    "height": 0.95,
-    "svgPath": "documents.svg"
+  "document": {
+    "shape": "rectangle",
+    "width": 0.7,
+    "height": 1.1,
+    "svgPath": "document.svg",
+    "labelloc": "b",
+    "invertedText": true
   },
 
   "database": {
