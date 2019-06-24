@@ -23,7 +23,5 @@ class GraphvizEngineTest {
 }""")
 
         assert diagram.stylesByNodeId == [main: ['world'], server: ['a']]
-        assert ! diagram.shapeSvgByStyleId.isEmpty()
-        assert diagram.shapeSvgByStyleId.world =~ ~/transform/
     }
 }
