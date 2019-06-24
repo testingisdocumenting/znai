@@ -16,6 +16,7 @@ class GraphvizShapesTestManual {
             world [label="[world c]"];
             server [label="server [a]"];
             another [label="hello\\\\nworld of[b database]"];
+            next [label="preference[document]"];
     
             server -> another;
             server -> test -> human;
