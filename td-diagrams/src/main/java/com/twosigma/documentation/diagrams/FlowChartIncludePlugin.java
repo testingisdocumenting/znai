@@ -75,15 +75,27 @@ public class FlowChartIncludePlugin implements IncludePlugin {
         props.put("diagram", diagram.toMap());
         props.put("idsToHighlight", pluginParams.getOpts().getList("highlight"));
         props.put("wide", pluginParams.getOpts().get("wide", false));
-        props.put("urls", extractLinks(genResult.getUsedNodes()));
+
+        Map<String, String> urls = extractUrls(genResult.getUsedNodes());
+        validateUrls(markupPath, urls);
+
+        props.put("urls", convertUrls(urls));
 
         return PluginResult.docElement("GraphVizDiagram", props);
     }
 
-    private Map<String, String> extractLinks(Collection<DiagramNode> nodes) {
+    private Map<String, String> extractUrls(Collection<DiagramNode> nodes) {
         return nodes.stream()
                 .filter(DiagramNode::hasUrl)
-                .collect(Collectors.toMap(DiagramNode::getId, this::buildUrl));
+                .collect(Collectors.toMap(DiagramNode::getId, DiagramNode::getUrl));
+    }
+
+    private void validateUrls(Path markupPath, Map<String, String> urls) {
+        urls.values().forEach(url -> docStructure.validateUrl(markupPath, "<flow-diagram>", new DocUrl(url)));
+    }
+
+    private Map<String, String> convertUrls(Map<String, String> urls) {
+        return urls.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, this::buildUrl));
     }
 
     private List<List<?>> loadNodeLibraries(ResourcesResolver resourcesResolver,
@@ -99,8 +111,8 @@ public class FlowChartIncludePlugin implements IncludePlugin {
 
     }
 
-    private String buildUrl(DiagramNode node) {
-        return docStructure.createUrl(new DocUrl(node.getUrl()));
+    private String buildUrl(Map.Entry<String, String> entry) {
+        return docStructure.createUrl(new DocUrl(entry.getValue()));
     }
 
     @Override
