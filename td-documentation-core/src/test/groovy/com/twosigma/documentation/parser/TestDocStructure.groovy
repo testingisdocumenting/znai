@@ -54,6 +54,10 @@ class TestDocStructure implements DocStructure {
         return null
     }
 
+    void clearValidLinks() {
+        validLinks.clear()
+    }
+
     void addValidLink(String link) {
         validLinks.add(link)
     }

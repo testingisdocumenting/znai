@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "url": "doc/page"
+    },
+    {
+      "id": "n2",
+      "url": "ref/another"
+    }
+  ],
+  "edges": [
+    ["n1", "n2"]
+  ]
+}
