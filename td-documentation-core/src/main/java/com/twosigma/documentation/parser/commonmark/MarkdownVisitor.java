@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  * @author mykola
  */
 public class MarkdownVisitor extends AbstractVisitor {
-    private static final Pattern INLINED_CODE_ID_PATTERN = Pattern.compile("^([a-zA-Z-_]+):(.*)");
+    private static final Pattern INLINED_CODE_ID_PATTERN = Pattern.compile("^:([a-zA-Z-_]+):\\s*(.*)");
 
     private final ComponentsRegistry componentsRegistry;
     private final Path path;

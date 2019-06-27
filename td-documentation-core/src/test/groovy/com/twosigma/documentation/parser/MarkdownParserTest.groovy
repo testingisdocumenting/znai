@@ -333,7 +333,7 @@ world""")
 
     @Test
     void "inlined code plugin"() {
-        parse("`dummy:free-param {p1: 'v1'}`")
+        parse("`:dummy: free-param {p1: 'v1'}`")
 
         content.should == [[type: 'Paragraph', content: [[type: 'InlinedCodeDummy', ff: 'free-param', opts: [p1: 'v1']]]]]
     }
