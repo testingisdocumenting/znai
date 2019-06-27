@@ -25,7 +25,7 @@
 
     padding-right: 20px;
 
-    max-height: calc(100vh - 100px);
+    height: calc(100vh - 100px);
     z-index: 1001;
 }
 
@@ -53,7 +53,7 @@
 
     background-color: var(--mdoc-search-toc-panel-background-color);
 
-    overflow: hidden;
+    overflow-x: hidden;
     overflow-y: auto;
 
     cursor: pointer;
@@ -61,10 +61,12 @@
 
 .mdoc-search-preview-panel {
     flex: 1;
-    padding: 10px;
-    overflow-y: auto;
 
     background-color: var(--mdoc-background-color);
+    height: 100%;
+
+    padding: 10px;
+    overflow-y: auto;
 }
 
 .mdoc-search-preview-panel mark {
