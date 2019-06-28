@@ -1,11 +1,13 @@
+.mdoc-toc-panel-search-area {
+    padding: 8px 30px 8px 30px;
+    border-bottom: 1px solid var(--mdoc-toc-panel-border-color);
+}
+
 .mdoc-toc-panel-search {
     background-color: #eee;
     color: #777;
     font-style: var(--mdoc-smaller-text-size);
 
-    margin-left: 22px;
-    margin-right: 22px;
-    margin-top: 16px;
     padding: 4px 8px;
     border-radius: 6px;
 
