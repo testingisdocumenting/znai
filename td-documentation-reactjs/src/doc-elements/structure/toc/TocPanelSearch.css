@@ -1,0 +1,22 @@
+.mdoc-toc-panel-search {
+    background-color: #eee;
+    color: #777;
+    font-style: var(--mdoc-smaller-text-size);
+
+    margin-left: 22px;
+    margin-right: 22px;
+    margin-top: 16px;
+    padding: 4px 8px;
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+.mdoc-toc-panel-search-icon-and-text {
+    display: flex;
+    align-items: center;
+}
+
+.mdoc-search-icon {
+    margin-right: 8px;
+}
