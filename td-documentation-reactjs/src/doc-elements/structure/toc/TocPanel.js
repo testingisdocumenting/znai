@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import TocMenu from './TocMenu'
 import TocHeader from './TocHeader'
 import TocSettings from './TocSettings'
+import TocPanelSearch from './TocPanelSearch'
 
 class TocPanel extends Component {
     state = {
@@ -18,7 +19,8 @@ class TocPanel extends Component {
             toc,
             selectedItem,
             onTocItemClick,
-            onTocItemPageSectionClick
+            onTocItemPageSectionClick,
+            onSearchClick,
         } = this.props
 
         const {
@@ -38,11 +40,14 @@ class TocPanel extends Component {
                            onHeaderClick={onHeaderClick}
                            onCollapseToggle={this.collapseToggle}/>
 
-                <TocMenu toc={toc}
-                         selected={selectedItem}
-                         onTocItemPageSectionClick={onTocItemPageSectionClick}
-                         onTocItemClick={onTocItemClick}/>
+                <div className="toc-panel-search-and-menu">
+                    <TocPanelSearch onClick={onSearchClick}/>
 
+                    <TocMenu toc={toc}
+                             selected={selectedItem}
+                             onTocItemPageSectionClick={onTocItemPageSectionClick}
+                             onTocItemClick={onTocItemClick}/>
+                </div>
                 {!collapsed && <TocSettings active={displaySettings} onSettingsToggle={this.onSettingsToggle}/>}
             </div>
         )
