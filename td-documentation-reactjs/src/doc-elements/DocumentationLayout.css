@@ -83,12 +83,11 @@
 }
 
 .toc-menu {
-    padding-top: 20px;
-
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     flex: 1;
+
+    overflow-y: auto;
 }
 
 .toc-menu::-webkit-scrollbar {
@@ -214,21 +213,6 @@
     color: white;
     background-color: black;
     padding: 20px;
-}
-
-.search-button {
-    position: fixed;
-    font-size: 20px;
-    right: 25px;
-    top: 8px;
-    cursor: pointer;
-    color: #aaa;
-    opacity: 0.7;
-    z-index: 1000;
-}
-
-.search-button:hover {
-    opacity: 1.0;
 }
 
 .presentation-button {

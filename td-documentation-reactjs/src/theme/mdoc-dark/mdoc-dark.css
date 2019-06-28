@@ -27,6 +27,8 @@
     --mdoc-footer-color: #b0bcc2;
     --mdoc-footer-background-color: #1b2225;
 
+    --mdoc-search-box-text-color: #777;
+    --mdoc-search-box-background-color: #191f22;
     --mdoc-search-overlay-background-color: rgba(0, 0, 0, 0.5);
     --mdoc-search-border-color: var(--mdoc-toc-panel-border-color);
     --mdoc-search-toc-panel-background-color: var(--mdoc-toc-panel-background-color);

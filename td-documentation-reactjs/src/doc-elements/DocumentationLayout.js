@@ -41,13 +41,12 @@ class DocumentationLayout extends Component {
                               onHeaderClick={onHeaderClick}
                               onTocItemClick={onTocItemClick}
                               onTocItemPageSectionClick={onTocItemPageSectionClick}
+                              onSearchClick={this.onSearchClick}
                               onNextPage={onNextPage}
                               onPrevPage={onPrevPage}/>
                 </div>
 
                 {previewTracker}
-
-                <div className="search-button glyphicon glyphicon-search" onClick={this.onSearchClick}/>
 
                 {searchPopup}
 
