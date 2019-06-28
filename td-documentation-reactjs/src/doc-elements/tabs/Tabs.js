@@ -65,7 +65,6 @@ class Tabs extends Component {
 
     saveNode = (node) => {
         this.node = node
-        this.parentWithScrollNode = findParentWithScroll(this.node)
     }
 
     onClick = (idx) => {
@@ -94,7 +93,13 @@ class Tabs extends Component {
             this.node === this.state.triggeredNode) {
 
             const nodeRect = this.node.getBoundingClientRect()
-            return {scrollTop: this.parentWithScrollNode.scrollTop, clientRect: nodeRect}
+
+            const parentWithScrollNode = findParentWithScroll(this.node)
+            if (parentWithScrollNode === null) {
+                return null
+            }
+
+            return {parentWithScrollNode: parentWithScrollNode, clientRect: nodeRect}
         }
 
         return null;
@@ -106,7 +111,7 @@ class Tabs extends Component {
         }
 
         const diffY = this.node.getBoundingClientRect().y - snapshot.clientRect.y
-        this.parentWithScrollNode.scrollTop = this.parentWithScrollNode.scrollTop + diffY
+        snapshot.parentWithScrollNode.scrollTop += diffY
     }
 }
 
@@ -115,7 +120,7 @@ function findParentWithScroll(node) {
         return null;
     }
 
-    if (node.scrollHeight > node.clientHeight) {
+    if (node.scrollTop > 0) {
         return node;
     } else {
         return findParentWithScroll(node.parentNode);
