@@ -4,8 +4,8 @@
 }
 
 .mdoc-toc-panel-search {
-    background-color: #eee;
-    color: #777;
+    background-color: var(--mdoc-search-box-background-color);
+    color: var(--mdoc-search-box-text-color);
     font-style: var(--mdoc-smaller-text-size);
 
     padding: 4px 8px;
