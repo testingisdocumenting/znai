@@ -40,14 +40,12 @@ class TocPanel extends Component {
                            onHeaderClick={onHeaderClick}
                            onCollapseToggle={this.collapseToggle}/>
 
-                <div className="toc-panel-search-and-menu">
-                    <TocPanelSearch onClick={onSearchClick}/>
+                <TocPanelSearch onClick={onSearchClick}/>
 
-                    <TocMenu toc={toc}
-                             selected={selectedItem}
-                             onTocItemPageSectionClick={onTocItemPageSectionClick}
-                             onTocItemClick={onTocItemClick}/>
-                </div>
+                <TocMenu toc={toc}
+                         selected={selectedItem}
+                         onTocItemPageSectionClick={onTocItemPageSectionClick}
+                         onTocItemClick={onTocItemClick}/>
                 {!collapsed && <TocSettings active={displaySettings} onSettingsToggle={this.onSettingsToggle}/>}
             </div>
         )

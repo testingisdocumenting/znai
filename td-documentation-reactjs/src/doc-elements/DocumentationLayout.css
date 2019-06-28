@@ -86,6 +86,8 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+
+    overflow-y: auto;
 }
 
 .toc-menu::-webkit-scrollbar {
@@ -161,10 +163,6 @@
 
 .toc-item.selected > a {
     color: var(--mdoc-toc-selected-text-color);
-}
-
-.toc-panel-search-and-menu {
-    overflow-y: auto;
 }
 
 .toc-menu .page-sections {
