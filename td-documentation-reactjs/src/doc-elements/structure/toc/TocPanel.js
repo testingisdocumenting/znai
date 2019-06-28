@@ -40,7 +40,7 @@ class TocPanel extends Component {
                            onHeaderClick={onHeaderClick}
                            onCollapseToggle={this.collapseToggle}/>
 
-                <TocPanelSearch onClick={onSearchClick}/>
+                {onSearchClick && <TocPanelSearch onClick={onSearchClick}/>}
 
                 <TocMenu toc={toc}
                          selected={selectedItem}
