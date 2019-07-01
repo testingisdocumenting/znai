@@ -5,7 +5,6 @@ import org.junit.Test
 
 import static com.twosigma.webtau.Ddjt.actual
 import static com.twosigma.webtau.Ddjt.equal
-import static java.util.stream.Collectors.toList
 
 class JsonIncludePluginTest {
     @Test
@@ -49,11 +48,11 @@ class JsonIncludePluginTest {
     @Test
     void "auxiliary files should include pathsFile"() {
         def auxiliaryFilesStream =
-                PluginsTestUtils.processAndGetAuxiliaryFiles(':include-json: test.json {pathsFile: "jsonFileWithPaths.json"}')
+                PluginsTestUtils.processAndGetAuxiliaryFiles(
+                        ':include-json: test.json {pathsFile: "jsonFileWithPaths.json"}')
 
-        auxiliaryFilesStream
-                .map { af -> af.path.fileName.toString() }
-                .collect(toList()).should == ['jsonFileWithPaths.json', 'test.json']
+        auxiliaryFilesStream.collect { af -> af.path.fileName.toString() }
+                .should == ['jsonFileWithPaths.json', 'test.json']
     }
 
     private static def process(String params) {

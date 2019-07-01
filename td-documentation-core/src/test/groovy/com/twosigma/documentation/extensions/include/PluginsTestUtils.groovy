@@ -14,22 +14,32 @@ import java.util.stream.Stream
  * @author mykola
  */
 class PluginsTestUtils {
+    static class IncludePluginAndParserHandler {
+        IncludePlugin includePlugin
+        DocElementCreationParserHandler parserHandler
+    }
+
     static String processAndGetSimplifiedCodeBlock(String pluginDef) {
         def result = process(pluginDef)
         return result[0].getProps().snippet
     }
 
     static List<DocElement> process(String pluginDef) {
-        def (includePlugin, parserHandler) = processAndGetPluginAndHandler(pluginDef)
-        return parserHandler.docElement.content
+        def includePluginAndParserHandler = processAndGetPluginAndParserHandler(pluginDef)
+        return includePluginAndParserHandler.parserHandler.docElement.content
     }
 
     static Stream<AuxiliaryFile> processAndGetAuxiliaryFiles(String pluginDef) {
-        def (includePlugin) = processAndGetPluginAndHandler(pluginDef)
-        return includePlugin.auxiliaryFiles(TestComponentsRegistry.INSTANCE)
+        def includePluginAndParserHandler = processAndGetPluginAndParserHandler(pluginDef)
+        return includePluginAndParserHandler.includePlugin.auxiliaryFiles(TestComponentsRegistry.INSTANCE)
     }
 
-    private static def processAndGetPluginAndHandler(String pluginDef) {
+    static IncludePlugin processAndGetIncludePlugin(String pluginDef) {
+        def includePluginAndParserHandler = processAndGetPluginAndParserHandler(pluginDef)
+        return includePluginAndParserHandler.includePlugin
+    }
+
+    static IncludePluginAndParserHandler processAndGetPluginAndParserHandler(String pluginDef) {
         DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(
                 TestComponentsRegistry.INSTANCE,
                 Paths.get(""))
@@ -41,6 +51,6 @@ class PluginsTestUtils {
 
         parserHandler.onIncludePlugin(includePlugin, pluginResult)
 
-        return [includePlugin, parserHandler]
+        return new IncludePluginAndParserHandler(includePlugin: includePlugin, parserHandler: parserHandler)
     }
 }
