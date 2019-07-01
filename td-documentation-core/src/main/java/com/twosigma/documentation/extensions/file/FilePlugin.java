@@ -1,73 +1,18 @@
-package com.twosigma.documentation.extensions.include;
+package com.twosigma.documentation.extensions.file;
 
-import com.twosigma.documentation.codesnippets.CodeSnippetsProps;
-import com.twosigma.documentation.core.AuxiliaryFile;
-import com.twosigma.documentation.core.ComponentsRegistry;
-import com.twosigma.documentation.extensions.PluginParams;
 import com.twosigma.documentation.extensions.PluginParamsOpts;
-import com.twosigma.documentation.extensions.PluginResult;
-import com.twosigma.documentation.parser.ParserHandler;
-import com.twosigma.documentation.parser.docelement.DocElementType;
-import com.twosigma.documentation.search.SearchScore;
-import com.twosigma.documentation.search.SearchText;
 import com.twosigma.utils.StringUtils;
 
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
-public class FileIncludePlugin implements IncludePlugin {
-    private String fileName;
-    private String text;
-
-    @Override
-    public String id() {
-        return "file";
+class FilePlugin {
+    private FilePlugin() {
     }
 
-    @Override
-    public IncludePlugin create() {
-        return new FileIncludePlugin();
-    }
-
-    @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry,
-                                ParserHandler parserHandler,
-                                Path markupPath,
-                                PluginParams pluginParams) {
-        fileName = pluginParams.getFreeParam();
-
-        text = extractText(componentsRegistry.resourceResolver().
-                textContent(fileName), pluginParams.getOpts());
-
-        String providedLang = pluginParams.getOpts().getString("lang");
-        String langToUse = (providedLang == null) ? langFromFileName(fileName) : providedLang;
-
-        Map<String, Object> props = CodeSnippetsProps.create(langToUse, text);
-        props.putAll(pluginParams.getOpts().toMap());
-
-        return PluginResult.docElement(DocElementType.SNIPPET, props);
-    }
-
-    @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(
-                componentsRegistry.resourceResolver().fullPath(fileName)));
-    }
-
-    @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(text);
-    }
-
-    private String extractText(String fileContent, PluginParamsOpts opts) {
+    public static String extractText(String fileContent, PluginParamsOpts opts) {
         if (opts.isEmpty()) {
             return fileContent;
         }
@@ -82,7 +27,7 @@ public class FileIncludePlugin implements IncludePlugin {
         return StringUtils.stripIndentation(withIncludeRegexp.toString());
     }
 
-    private Text cropStart(Text text, PluginParamsOpts opts) {
+    private static Text cropStart(Text text, PluginParamsOpts opts) {
         String startLine = opts.get("startLine");
         if (startLine == null) {
             return text;
@@ -91,7 +36,7 @@ public class FileIncludePlugin implements IncludePlugin {
         return text.startingWithLineContaining(startLine);
     }
 
-    private Text cropEnd(Text text, PluginParamsOpts opts) {
+    private static Text cropEnd(Text text, PluginParamsOpts opts) {
         Number numberOfLines = opts.get("numberOfLines");
         if (numberOfLines != null) {
             return text.limitTo(numberOfLines);
@@ -105,7 +50,7 @@ public class FileIncludePlugin implements IncludePlugin {
         return text;
     }
 
-    private Text exclude(Text text, PluginParamsOpts opts) {
+    private static Text exclude(Text text, PluginParamsOpts opts) {
         Boolean exclude = opts.get("exclude", false);
         if (!exclude) {
             return text;
@@ -114,30 +59,13 @@ public class FileIncludePlugin implements IncludePlugin {
         return text.cropOneLineFromStartAndEnd();
     }
 
-    private Text includeRegexp(Text text, PluginParamsOpts opts) {
+    private static Text includeRegexp(Text text, PluginParamsOpts opts) {
         String includeRegexp = opts.get("includeRegexp");
         if (includeRegexp == null) {
             return text;
         }
 
         return text.includeRegexp(Pattern.compile(includeRegexp));
-    }
-
-    private static String langFromFileName(String fileName) {
-        String ext = extFromFileName(fileName);
-        switch (ext) {
-            case "js": return "javascript";
-            default: return ext;
-        }
-    }
-
-    private static String extFromFileName(String fileName) {
-        int dotLastIdx = fileName.lastIndexOf('.');
-        if (dotLastIdx == -1) {
-            return "";
-        }
-
-        return fileName.substring(dotLastIdx + 1);
     }
 
     private static class Text {

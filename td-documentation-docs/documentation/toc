@@ -14,6 +14,7 @@ flow
 snippets
     code-snippets
     external-code-snippets
+    inlined-code-snippets
     java
     groovy
     typescript

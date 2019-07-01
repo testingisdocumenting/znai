@@ -1,5 +1,6 @@
-package com.twosigma.documentation.extensions.include
+package com.twosigma.documentation.extensions.file
 
+import com.twosigma.documentation.extensions.include.PluginsTestUtils
 import org.junit.Assert
 import org.junit.Test
 
