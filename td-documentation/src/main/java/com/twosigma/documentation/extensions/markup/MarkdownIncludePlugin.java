@@ -11,13 +11,19 @@ import com.twosigma.documentation.parser.MarkupParserResult;
 import com.twosigma.documentation.parser.ParserHandler;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
  * @author mykola
  */
 public class MarkdownIncludePlugin implements IncludePlugin {
+    private static final String FIRST_AVAILABLE_PARAM = "firstAvailable";
+    private static final String USAGE_MESSAGE = "use either <" + FIRST_AVAILABLE_PARAM + "> or free " +
+            "form param to specify file to include";
+
     private MarkupParserResult parserResult;
+    private Path markdownPathUsed;
 
     @Override
     public String id() {
@@ -37,14 +43,34 @@ public class MarkdownIncludePlugin implements IncludePlugin {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         MarkupParser parser = componentsRegistry.defaultParser();
 
-        Path markdown = resourcesResolver.fullPath(pluginParams.getFreeParam());
-        parserResult = parser.parse(markupPath, resourcesResolver.textContent(markdown));
+        markdownPathUsed = selectMarkdown(componentsRegistry.resourceResolver(), pluginParams);
+        parserResult = parser.parse(markupPath, resourcesResolver.textContent(markdownPathUsed));
 
         return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
     }
 
+    private Path selectMarkdown(ResourcesResolver resourcesResolver, PluginParams pluginParams) {
+        if (pluginParams.getOpts().has(FIRST_AVAILABLE_PARAM) && !pluginParams.getFreeParam().isEmpty()) {
+            throw new IllegalArgumentException(USAGE_MESSAGE + ", but not both");
+        }
+
+        List<Object> optionalPaths = pluginParams.getOpts().getList(FIRST_AVAILABLE_PARAM);
+
+        if (pluginParams.getFreeParam().isEmpty() && optionalPaths.isEmpty()) {
+            throw new IllegalArgumentException(USAGE_MESSAGE + ", but none was specified");
+        }
+
+        return optionalPaths.stream()
+                .filter(p -> resourcesResolver.canResolve(p.toString()))
+                .findFirst()
+                .map(p -> resourcesResolver.fullPath(p.toString()))
+                .orElseGet(() -> resourcesResolver.fullPath(pluginParams.getFreeParam()));
+    }
+
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return parserResult.getAuxiliaryFiles().stream();
+        return Stream.concat(
+                Stream.of(AuxiliaryFile.builtTime(markdownPathUsed)),
+                parserResult.getAuxiliaryFiles().stream());
     }
 }

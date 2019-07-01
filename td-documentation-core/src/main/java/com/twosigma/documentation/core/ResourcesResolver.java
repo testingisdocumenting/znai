@@ -24,7 +24,6 @@ public interface ResourcesResolver {
         return FileUtils.fileTextContent(file);
     }
 
-
     default BufferedImage imageContent(String path) {
         Path fullPath = fullPath(path);
         try {

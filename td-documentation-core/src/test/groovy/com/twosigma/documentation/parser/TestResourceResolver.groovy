@@ -30,7 +30,7 @@ class TestResourceResolver implements ResourcesResolver {
 
     @Override
     boolean canResolve(String path) {
-        return true
+        return ResourceUtils.resourceStream(path) != null
     }
 
     @Override
