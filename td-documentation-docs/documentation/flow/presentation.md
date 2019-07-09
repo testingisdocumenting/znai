@@ -2,7 +2,7 @@
 
 When people build presentations for a product, there should be great focus on the flow of information, making sure that those who have never used the product are not lost. A poorly organized presentation might drive users seeking clarification to product documentation, which too often is just as unfriendly to neophytes.
 
-Presentation mode in Znai is meant to help with both issues, mutually reinforcing good flow in presentations and documentation.
+Presentation mode in `Znai` is meant to help with both issues, mutually reinforcing good flow in presentations and documentation.
 
 
 # Presentation Mode

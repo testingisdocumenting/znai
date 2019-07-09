@@ -28,7 +28,7 @@ Here are some activities that most likely put your documentation out of sync:
 * Renaming public API classes
  
 Your codebase probably already contains a vast amount of data. 
-Instead using copy-and-paste to duplicate that data in your documentation, you should leverage the already-existing artifacts.
+Instead of using copy-and-paste to duplicate that data in your documentation, you should leverage the already-existing artifacts.
 * Examples of how to use API (part of code) 
 * Config files
 * Test results

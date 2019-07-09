@@ -45,7 +45,7 @@ roles.description, String, role description
 
 # External JSON file
 
-Instead of hardcoding your parameters inside markdown file, you can specify an external JSON file. 
+Instead of hardcoding your parameters inside markdown files, you can specify an external JSON file. 
 JSON could be generated based on the data you have. Some of the examples:
 * build time annotation processor
 * test time command line parameters generation
