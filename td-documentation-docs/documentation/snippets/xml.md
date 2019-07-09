@@ -14,7 +14,7 @@ Note: Children index in `paths` starts with 0 and is associated with a tag
     
 :include-xml: simple.xml {paths: ["root.a[1]", "root.b[0]", "root.c[0]"]}
 
-# Use cases
+# Use Cases
 
 `include-xml` and `paths` can be used to document:
 

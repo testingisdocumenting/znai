@@ -66,7 +66,7 @@ To display multiple methods at once use `entries` parameter to pass a list of me
     
     :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"]}
 
-will render:
+This will render:
 
 :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"]}
 
@@ -74,7 +74,7 @@ List important methods signatures at one place by passing `signatureOnly: true`.
 
     :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"], signatureOnly: true}
 
-will render: 
+This will render: 
 
 :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"], signatureOnly: true}
 

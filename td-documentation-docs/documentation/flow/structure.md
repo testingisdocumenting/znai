@@ -1,11 +1,11 @@
 # Building blocks
 
-MDoc has three levels of documentation organization:
+`Znai` has three levels of documentation organization:
 * Chapters
 * Pages
 * Page Sections
 
-MDoc encourages authors to split their content across multiple pages. 
+`Znai` encourages authors to split their content across multiple pages. 
 
 If you feel like you need to use nested headings, consider moving your content hierarchy one level up:
 * Split overlong page into multiple ones

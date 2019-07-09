@@ -8,7 +8,7 @@ capturing the relevant artifacts.
 
 # WebTau
 
-[WebTau](http://mdoc.app.twosigma.com/webtau/REST/getting-started) is the framework to write,
+[WebTau](http://tsguides.app.twosigma.com/webtau/REST/getting-started) is the framework to write,
 run, and capture REST tests artifacts.
 
 The bare minimum test in WebTau looks like this:

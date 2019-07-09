@@ -2,11 +2,11 @@
 title: Page Titles
 ---
 
-# Auto names
+# Automatic Names
 
-By degault, page names are automatically derived from file names. `file-name.md` becomes `File Name` page title.
+By default, page names are automatically derived from file names. `file-name.md` becomes `File Name` page title.
 
-# Name override
+# Name Overrides
 
 To override the default, add the following syntax to the top of your Markdown file: 
 
@@ -14,8 +14,7 @@ To override the default, add the following syntax to the top of your Markdown fi
     title: Custom Name
     ---
     
-To keep things easy on future documentation owners, use this only when necessary.
-Examples:
+To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example:
 * Need to use special characters in title
 * Want to avoid auto-capitalization
 

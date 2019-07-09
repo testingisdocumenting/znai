@@ -1,6 +1,6 @@
 # Command Line Tool
 
-Mdoc comes with a command line tool that:
+`Znai` comes with a command line tool that:
 * Generates a documentation website
 * Runs auto-preview on a local server
 * Runs documentation server
@@ -16,15 +16,15 @@ and go through a 60 seconds cheatsheet or 10 minutes tutorial.
 [Optin](https://cmdb.twosigma.com/entities/mdoc-opt-in) to add the command line to your hosts.
 Check tool presence by running 
 
-:include-cli-command: mdoc --help
+:include-cli-command: znai --help
 
 # Scaffolding
 
 To create a minimum set of files for your documentation execute 
 
-:include-cli-command: mdoc --new
+:include-cli-command: znai --new
 
-    mdoc
+    znai
        |--chapter-one
                  |--page-one.md
                  |--page-two.md
@@ -39,7 +39,7 @@ To create a minimum set of files for your documentation execute
 
 Navigate to the newly created directory. Start preview mode by running
 
-:include-cli-command: mdoc --preview 
+:include-cli-command: znai --preview 
 
 The command will output a URL that directs to your preview.  
   

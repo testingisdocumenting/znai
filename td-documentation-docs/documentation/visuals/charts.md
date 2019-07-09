@@ -47,5 +47,5 @@ To force all values to appear at once use
 
 # Victory Charts
 
-MDoc uses [VictoryChart](https://github.com/FormidableLabs/victory-chart) library to render charts.
+`Znai` uses the [VictoryChart](https://github.com/FormidableLabs/victory-chart) library to render charts.
 

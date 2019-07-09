@@ -1,6 +1,6 @@
 # Markdown
 
-MDoc uses Markdown, a markup language that uses ASCII to represent styles and page structure.
+`Znai` uses Markdown, a markup language that uses ASCII to represent styles and page structure.
 
 ```markdown-and-result
 # Header
@@ -22,4 +22,4 @@ Example of how to keep your documentation up to date by referencing existing res
 :include-file: config/server.config
 ```
 
-Note:  Ths `include-file` macro is a `mdoc` extension and not part of a standard Markdown syntax.
+Note:  Ths `include-file` macro is a `Znai` extension and not part of a standard Markdown syntax.

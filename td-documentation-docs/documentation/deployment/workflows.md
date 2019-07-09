@@ -1,12 +1,12 @@
-MDoc currently supports two deployment workflows: [direct deployment](deployment/workflows#direct-deployment) and [auto-deployment from the monorepo](deployment/workflows#auto-deployment-from-the-monorepo).
+`Znai` currently supports two deployment workflows: [direct deployment](deployment/workflows#direct-deployment) and [auto-deployment from the monorepo](deployment/workflows#auto-deployment-from-the-monorepo).
 
 # Direct Deployment
 
 ## Upload Documentation
 
-To build and publish MDoc documentation, which is hosted by [TS Guides](deployment/TS-guides), run this command in your documentation directory:
+To build and publish a `Znai` documentation, which is hosted by [TS Guides](deployment/TS-guides), run this command in your documentation directory:
 
-:include-cli-command: mdoc --upload --doc-id <your-doc-id> {paramsToHighlight: "<your-doc-id>"}
+:include-cli-command: znai --upload --doc-id <your-doc-id> {paramsToHighlight: "<your-doc-id>"}
 
 Warning: Before initial deploy, verify your `doc-id` is not in use by another user by  navigating to the TS Guides URL for your `doc-id` string (https://tsguides.app.twosigma.com/`doc-id`).
 
@@ -25,7 +25,7 @@ Create a new codebase for your documentatiomn and, in its `software.mi`, add dep
 
 ## Configure Makefile
 
-Modify your new codebase's top-level Makefile to include MDoc references and define a doc-id:
+Modify your new codebase's top-level Makefile to include `Znai` references and define a doc-id:
 
 Warning: Before initial deploy, verify your `doc-id` is not in use by another user by  navigating to the TS Guides URL for your `doc-id` string (https://tsguides.app.twosigma.com/`doc-id`).
 
@@ -36,7 +36,7 @@ If your documentation will pull in files and code snippets from other codebases 
 
 Note: In addition to allowing you to pull in artifacts from other codebases, referencing these dependencies in your Makefile validates the accuracy of your docs against these codebases at build time. \
 \
-If you want these benefits without auto-deploying on push, simply remove `--deploy dist/mdoc` from `${TS_MDOC_HOME}/bin/mdoc --doc-id <add-your-doc-id-here> --source mdoc --deploy dist/mdoc` in your Makefile.
+If you want these benefits without auto-deploying on push, simply remove `--deploy dist/znai` from `${TS_ZNAI_HOME}/bin/znai --doc-id <add-your-doc-id-here> --source znai --deploy dist/znai` in your Makefile.
 
 ## Add Codebase to CMDB Registry
 

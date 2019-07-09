@@ -1,18 +1,16 @@
-`mdoc` is a system to generate user facing documentation from markup files (markdown only at the moment). 
-Documentation files are located next to your product codebase and are part of your product's SDLC.
+`Znai` is a system that generates user facing documentation from markdown files. 
+Documentation files are located next to your product codebase and are part of your product's software development lifecycle.
 
-`mdoc` provides directives to simplify your day-to-day documentation process as well as to improve maintenance in a long run.
+`Znai` provides extensions to simplify your day-to-day documentation processes and to improve maintenance in the long run.
 
-Continue reading to learn more about
-* rationale
-* structuring your documentation
-* leveraging existing code snippets and test results
-* diagrams support
+Continue reading to learn more about:
+* Rationale
+* Structuring your documentation
+* Leveraging existing code snippets and test results
+* Diagrams support
 * UI documentation techniques 
-* presentation mode
-* extremely fast navigation
-* local search with auto preview
+* Presentation mode
+* Extremely fast navigation
+* Local search with auto-preview
 
-If you are reading this documentation for the first time, I suggest to read in the intended order 
-(there is a next button at the bottom of each page).  
-Feel free to use Table Of Contents on the left, or search (top right) otherwise. 
+If you are reading this documentation for the first time, we suggest you read from start to finish.

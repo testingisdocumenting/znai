@@ -63,14 +63,14 @@ Use `differentColors: true` to use distinct colors for each step
 * Learn Machine Learning
 
 
-# Presentation only type
+# Presentation Only
 
 If you want to change bullets type only for presentation use: 
 
     :include-meta: {presentationBulletListType: "BulletsListType"}
 
 
-# HorizontalStripes
+# Horizontal Stripes
 
 Following bullet points will be rendered as horizontal striped, but only in presentation mode. 
 

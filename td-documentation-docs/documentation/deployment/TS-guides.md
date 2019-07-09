@@ -1,6 +1,6 @@
 # Hosting Solution
 
-MDoc documentation is deployed via TS Guides, which offers a centralized hosting solution for user documentation.
+`Znai` documentation is deployed via TS Guides, which offers a centralized hosting solution for user documentation.
 
 In addition to providing hosting, TS Guides offers:
 * [Centralized landing page](https://tsguides.app.twosigma.com) where authors can optionally display their documentation by category with a short description.
@@ -10,7 +10,7 @@ In addition to providing hosting, TS Guides offers:
 
 TS Guides also supports documentation created with Sphinx.
 
-Sphinx documentation can be deployed in two ways, similar to the [MDoc deployment options](deployment/workflows), either by direct deployment or automatically from the monorepo.
+Sphinx documentation can be deployed in two ways, similar to the [Znai deployment options](deployment/workflows), either by direct deployment or automatically from the monorepo.
 ## Direct Deployment
 
 Deploy Sphinx docs to TS Guides directly using the `tsguides` CLI tool:

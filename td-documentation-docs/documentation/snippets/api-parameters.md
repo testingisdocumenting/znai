@@ -1,3 +1,7 @@
+---
+title: API Parameters
+---
+
 # Inlined CSV
 
 When you are not able to automatically extract an API parameters definition you can use
@@ -39,16 +43,16 @@ roles.id, String, role id
 roles.description, String, role description
 ```
 
-# External Json file
+# External JSON file
 
-Instead of hardcoding your parameters inside markdown file, you can specify an external json file. 
-Json could be generated based on the data you have. Some of the examples:
+Instead of hardcoding your parameters inside markdown file, you can specify an external JSON file. 
+JSON could be generated based on the data you have. Some of the examples:
 * build time annotation processor
 * test time command line parameters generation
 
 :include-json: api-parameters.json {title: "api-parameters.json"}
 
-Given the file use
+Given the above file, use
 
     :include-api-parameters: api-parameters.json
 

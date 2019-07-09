@@ -22,7 +22,7 @@ Note: `include-markdowns` displays the files of the specified directory based on
 
 When you document an open source project you may have different instructions based on where the documentation is deployed.
  
-For example, this documentation has two versions, one deployed internally at Two Sigma and one is deployed externally using github pages. 
+For example, this documentation has two versions, one deployed internally at Two Sigma and one is deployed externally using GitHub Pages. 
 Most of the documentation parts are the same, but there are differences in sections like *Getting Started*.
 
 We build documentation twice and the differences are handled by `:include-markdown:`'s `firstAvailable` parameter.

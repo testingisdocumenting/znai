@@ -1,14 +1,13 @@
 # Equal Flow
 
-When people build presentations for a product, there should be great focus on the flow of information, making sure that those
-who have never used the product are not lost. A poorly organized presentation might drive users seeking clarification to product documentation, which too often is just as unfriendly to neophytes.
+When people build presentations for a product, there should be great focus on the flow of information, making sure that those who have never used the product are not lost. A poorly organized presentation might drive users seeking clarification to product documentation, which too often is just as unfriendly to neophytes.
 
-Presenttion mode in `MDoc` is meant to help with both issues, mutually reinforcing good flow in presentations and documentation.
+Presentation mode in Znai is meant to help with both issues, mutually reinforcing good flow in presentations and documentation.
 
 
 # Presentation Mode
 
-`MDoc` can turn any page into a presentation. Simply click `icon:resize-full` to the far fight of each page title.
+`Znai` can turn any page into a presentation. Simply click `icon:resize-full` to the far fight of each page title.
 
 In presentation mode, only certain documentation elements are converted to slides:
 
