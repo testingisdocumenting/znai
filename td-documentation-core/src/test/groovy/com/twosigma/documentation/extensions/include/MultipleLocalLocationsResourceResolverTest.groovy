@@ -5,9 +5,6 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-/**
- * @author mykola
- */
 class MultipleLocalLocationsResourceResolverTest {
     @Test
     void "resolves against specified list of dirs"() {

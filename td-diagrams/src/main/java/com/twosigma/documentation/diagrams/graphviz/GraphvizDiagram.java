@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class GraphvizDiagram {
     private String id;
     private String svg;

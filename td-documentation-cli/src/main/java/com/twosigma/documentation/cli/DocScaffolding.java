@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * @author mykola
- */
 public class DocScaffolding {
     private final Path workingDir;
     private Map<String, List<String>> fileNameByDirName;

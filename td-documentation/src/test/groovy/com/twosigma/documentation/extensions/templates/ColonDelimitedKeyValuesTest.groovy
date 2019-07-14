@@ -5,9 +5,6 @@ import org.junit.Test
 
 import static com.twosigma.webtau.Ddjt.equal
 
-/**
- * @author mykola
- */
 class ColonDelimitedKeyValuesTest {
     @Test
     void "extracts key values from block of text"() {

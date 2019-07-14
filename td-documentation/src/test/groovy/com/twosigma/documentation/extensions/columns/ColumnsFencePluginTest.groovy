@@ -6,9 +6,6 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-/**
- * @author mykola
- */
 class ColumnsFencePluginTest {
     @Test
     void "should index text from all columns"() {

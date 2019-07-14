@@ -9,9 +9,6 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.stream.Stream
 
-/**
- * @author mykola
- */
 class TestResourceResolver implements ResourcesResolver {
     private Path root
 

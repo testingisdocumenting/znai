@@ -4,9 +4,6 @@ import com.twosigma.documentation.diagrams.graphviz.meta.GraphvizShapeConfig
 import com.twosigma.utils.ResourceUtils
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class GraphvizEngineTest {
     static shapeConfig = new GraphvizShapeConfig(ResourceUtils.textContent("graphviz-meta-conf.json"))
     static dot = new InteractiveCmdGraphviz("dot")

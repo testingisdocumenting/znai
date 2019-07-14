@@ -7,9 +7,6 @@ import org.antlr.v4.runtime.TokenStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author mykola
- */
 class ObjectsDefinitionTokensProcessor {
     private List<String> lines;
     private ArrayList<EntryDef> classDefs;

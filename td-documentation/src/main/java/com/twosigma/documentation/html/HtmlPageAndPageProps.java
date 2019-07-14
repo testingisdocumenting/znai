@@ -1,8 +1,5 @@
 package com.twosigma.documentation.html;
 
-/**
- * @author mykola
- */
 public class HtmlPageAndPageProps {
     private HtmlPage htmlPage;
     private DocPageReactProps props;

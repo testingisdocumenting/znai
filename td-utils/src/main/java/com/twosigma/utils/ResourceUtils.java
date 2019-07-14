@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-/**
- * @author mykola
- */
 public class ResourceUtils {
     private ResourceUtils() {
     }

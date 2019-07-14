@@ -7,9 +7,6 @@ import com.twosigma.documentation.structure.PageMeta
 
 import java.nio.file.Path
 
-/**
- * @author mykola
- */
 class TestMarkupParser implements MarkupParser {
     @Override
     MarkupParserResult parse(Path path, String markup) {

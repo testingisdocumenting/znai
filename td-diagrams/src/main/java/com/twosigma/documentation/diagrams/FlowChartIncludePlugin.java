@@ -26,9 +26,6 @@ import java.util.stream.Stream;
 import static com.twosigma.documentation.diagrams.graphviz.GraphvizEngine.DOT_LAYOUT;
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class FlowChartIncludePlugin implements IncludePlugin {
     private static final AtomicInteger diagramCount = new AtomicInteger();
 

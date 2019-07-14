@@ -8,7 +8,6 @@ import com.twosigma.documentation.structure.DocStructure;
  * simple components registry to avoid introduction of DI frameworks.
  * One place where we don't control dependencies passing is {@link com.twosigma.documentation.extensions.include.IncludePlugin}
  *
- * @author mykola
  * @see com.twosigma.documentation.extensions.include.IncludePlugin
  */
 public interface ComponentsRegistry {

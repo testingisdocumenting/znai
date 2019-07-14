@@ -5,9 +5,6 @@ import com.twosigma.webtau.expectation.ActualPath
 import com.twosigma.webtau.expectation.equality.CompareToComparator
 import com.twosigma.webtau.expectation.equality.CompareToHandler
 
-/**
- * @author mykola
- */
 class OutputLinesCompareToHandler implements CompareToHandler {
     @Override
     boolean handleNulls() {

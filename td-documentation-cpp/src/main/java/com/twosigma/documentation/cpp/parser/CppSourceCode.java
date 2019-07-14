@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class CppSourceCode {
     private CppSourceCode() {
     }

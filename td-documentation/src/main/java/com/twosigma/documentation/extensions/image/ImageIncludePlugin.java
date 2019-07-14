@@ -18,9 +18,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class ImageIncludePlugin implements IncludePlugin {
     private Path annotationsPath;
     private Path slidesPath;

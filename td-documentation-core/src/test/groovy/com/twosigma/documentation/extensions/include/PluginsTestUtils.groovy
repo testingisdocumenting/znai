@@ -10,9 +10,6 @@ import com.twosigma.documentation.parser.docelement.DocElementCreationParserHand
 import java.nio.file.Paths
 import java.util.stream.Stream
 
-/**
- * @author mykola
- */
 class PluginsTestUtils {
     static class IncludePluginAndParserHandler {
         IncludePlugin includePlugin

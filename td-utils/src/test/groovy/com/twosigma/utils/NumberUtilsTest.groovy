@@ -2,9 +2,6 @@ package com.twosigma.utils
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class NumberUtilsTest {
     @Test
     void "should convert double as string to double"() {

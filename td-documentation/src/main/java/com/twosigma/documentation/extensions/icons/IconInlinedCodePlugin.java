@@ -8,9 +8,6 @@ import com.twosigma.documentation.parser.docelement.DocElement;
 
 import java.nio.file.Path;
 
-/**
- * @author mykola
- */
 public class IconInlinedCodePlugin implements InlinedCodePlugin {
     @Override
     public String id() {

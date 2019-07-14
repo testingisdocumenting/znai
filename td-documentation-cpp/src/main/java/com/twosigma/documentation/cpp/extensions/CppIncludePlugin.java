@@ -22,9 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class CppIncludePlugin implements IncludePlugin {
     private MarkupParser markupParser;
     private Path cppPath;

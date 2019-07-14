@@ -5,9 +5,6 @@ import java.util.List;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class JavaMethod {
     private String name;
     private String nameWithTypes;

@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/**
- * @author mykola
- */
 public class UnzipTask extends Unzip {
     public UnzipTask(Path src, Path dest) {
         setProject(new Project());

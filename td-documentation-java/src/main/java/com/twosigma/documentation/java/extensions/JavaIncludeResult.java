@@ -4,9 +4,6 @@ import com.twosigma.documentation.parser.docelement.DocElement;
 
 import java.util.List;
 
-/**
- * @author mykola
- */
 class JavaIncludeResult {
     private final List<DocElement> docElements;
     private final String text;

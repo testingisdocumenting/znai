@@ -7,9 +7,6 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class Row {
     private List<Object> data;
 

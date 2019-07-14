@@ -4,9 +4,6 @@ import com.twosigma.documentation.extensions.include.PluginsTestUtils
 import com.twosigma.documentation.parser.docelement.DocElement
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class JavaEnumEntriesIncludePluginTest {
     static final def expectedTableMeta = [columns: [[title: 'name', align: 'right', width: '20%'],
                                                     [title: 'description']],

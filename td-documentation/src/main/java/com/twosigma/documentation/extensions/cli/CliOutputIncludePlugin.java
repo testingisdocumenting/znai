@@ -22,9 +22,6 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class CliOutputIncludePlugin implements IncludePlugin {
     private Path filePath;
     private List<String> lines;

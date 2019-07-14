@@ -15,9 +15,6 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
-/**
- * @author mykola
- */
 public class FileWatcher implements AuxiliaryFileListener {
     private FileChangeHandler fileChangeHandler;
     private final WatchService watchService;

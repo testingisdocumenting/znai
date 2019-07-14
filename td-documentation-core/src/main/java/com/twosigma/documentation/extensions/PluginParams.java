@@ -7,9 +7,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class PluginParams {
     private static final String RIGHT_SIDE_OPT_NAME = "rightSide";
 

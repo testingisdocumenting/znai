@@ -15,9 +15,6 @@ import io.vertx.core.streams.Pump;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * @author mykola
- */
 public class DocumentationUploadClient {
     private final Vertx vertx;
     private final String docId;

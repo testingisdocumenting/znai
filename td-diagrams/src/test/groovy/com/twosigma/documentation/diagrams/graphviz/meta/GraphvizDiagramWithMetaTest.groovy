@@ -3,9 +3,6 @@ package com.twosigma.documentation.diagrams.graphviz.meta
 import org.junit.Assert
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class GraphvizDiagramWithMetaTest {
     static shapeConfig = new GraphvizShapeConfig([person: [shape: 'octagon', width: 1, height: 2, svgPath: "person.svg"]])
 

@@ -10,9 +10,6 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
 
-/**
- * @author mykola
- */
 public class MarkupParserResult {
     private DocElement docElement;
     private List<String> globalAnchorIds;

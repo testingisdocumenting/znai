@@ -8,9 +8,6 @@ import static com.twosigma.webtau.browser.documentation.DocumentationDsl.arrow;
 import static com.twosigma.webtau.browser.documentation.DocumentationDsl.badge;
 import static com.twosigma.webtau.browser.documentation.DocumentationDsl.highlighter;
 
-/**
- * @author mykola
- */
 public class WebTauDslDemo {
     public static void main(String[] args) {
         PageElement signIn = $("#gb_70");

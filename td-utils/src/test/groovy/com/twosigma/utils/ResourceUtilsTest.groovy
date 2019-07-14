@@ -2,9 +2,6 @@ package com.twosigma.utils
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class ResourceUtilsTest {
     @Test
     void "should read text from a single resource file"() {

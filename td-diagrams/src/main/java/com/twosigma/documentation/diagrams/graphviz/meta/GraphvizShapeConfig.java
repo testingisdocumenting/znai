@@ -22,8 +22,6 @@ import java.util.Optional;
  *
  * So 'database' style may be auto rendered as a SVG showing a data storage. And in order to make all
  * the lines connect properly a shape must be of a proper height, width and if possible, shape.
- *
- * @author mykola
  */
 public class GraphvizShapeConfig {
     private Map<String, ?> config;

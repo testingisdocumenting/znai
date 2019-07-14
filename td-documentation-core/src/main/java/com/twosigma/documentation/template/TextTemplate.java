@@ -11,9 +11,6 @@ import java.util.Map;
 
 import static freemarker.template.Configuration.VERSION_2_3_23;
 
-/**
- * @author mykola
- */
 public class TextTemplate {
     private final Template template;
 

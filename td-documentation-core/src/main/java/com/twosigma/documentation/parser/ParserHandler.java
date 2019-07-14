@@ -12,7 +12,6 @@ import java.util.Map;
  * There are multiple markup languages out there. There are common elements among them.
  * This interface attempts to formalize elements and let define common actions to perform regardless of the markup.
  *
- * @author mykola
  */
 public interface ParserHandler {
     /**

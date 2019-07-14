@@ -3,9 +3,6 @@ package com.twosigma.utils
 import org.junit.Assert
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class StringUtilsTest {
     @Test
     void "should calculate max length on a line in multiline text"() {

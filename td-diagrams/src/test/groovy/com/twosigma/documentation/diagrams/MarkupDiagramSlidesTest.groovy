@@ -8,9 +8,6 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-/**
- * @author mykola
- */
 class MarkupDiagramSlidesTest {
     private DiagramSlides slides
 

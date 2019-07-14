@@ -11,9 +11,6 @@ import java.io.StringReader;
 import java.math.BigDecimal;
 import java.util.*;
 
-/**
- * @author mykola
- */
 public class CsvParser {
     private CsvParser() {
     }

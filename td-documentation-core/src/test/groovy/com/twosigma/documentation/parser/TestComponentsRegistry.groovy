@@ -8,9 +8,6 @@ import com.twosigma.documentation.structure.DocStructure
 
 import java.nio.file.Paths
 
-/**
- * @author mykola
- */
 class TestComponentsRegistry implements ComponentsRegistry {
     public static final TestComponentsRegistry INSTANCE = new TestComponentsRegistry()
 

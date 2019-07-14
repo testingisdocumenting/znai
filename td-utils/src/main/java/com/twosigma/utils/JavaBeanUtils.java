@@ -9,9 +9,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class JavaBeanUtils {
     private JavaBeanUtils() {
     }

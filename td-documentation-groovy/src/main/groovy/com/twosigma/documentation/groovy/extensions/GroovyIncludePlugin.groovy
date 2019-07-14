@@ -13,9 +13,6 @@ import com.twosigma.documentation.parser.docelement.DocElementType
 import java.nio.file.Path
 import java.util.stream.Stream
 
-/**
- * @author mykola
- */
 class GroovyIncludePlugin implements IncludePlugin {
     private Path fullPath
 

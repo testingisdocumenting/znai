@@ -10,9 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class ParserHandlersList implements ParserHandler {
     private final List<ParserHandler> list;
 

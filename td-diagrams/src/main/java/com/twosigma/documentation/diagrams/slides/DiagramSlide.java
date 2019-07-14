@@ -12,7 +12,6 @@ import static java.util.stream.Collectors.toList;
 /**
  * Each slide reveals or re-highlight already revealed diagram items. Additionally context information can be rendered
  * to explain that particular part of a flow or a dependency
- * @author mykola
  */
 public class DiagramSlide {
     private List<String> ids;

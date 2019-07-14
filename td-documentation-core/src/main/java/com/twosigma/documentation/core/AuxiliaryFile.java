@@ -3,9 +3,6 @@ package com.twosigma.documentation.core;
 import java.nio.file.Path;
 import java.util.Objects;
 
-/**
- * @author mykola
- */
 public class AuxiliaryFile {
     private final Path path;
     private Path deployRelativePath;

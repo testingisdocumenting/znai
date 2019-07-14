@@ -7,9 +7,6 @@ import com.twosigma.documentation.structure.TocItem;
 
 import java.nio.file.Path;
 
-/**
- * @author mykola
- */
 public interface MarkupParsingConfiguration {
     TableOfContents createToc(Path tocPath);
 

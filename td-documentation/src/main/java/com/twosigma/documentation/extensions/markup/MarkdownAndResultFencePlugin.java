@@ -13,9 +13,6 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class MarkdownAndResultFencePlugin implements FencePlugin {
     @Override
     public String id() {

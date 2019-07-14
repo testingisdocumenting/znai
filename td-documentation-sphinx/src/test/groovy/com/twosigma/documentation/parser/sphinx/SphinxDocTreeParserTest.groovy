@@ -7,9 +7,6 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-/**
- * @author mykola
- */
 class SphinxDocTreeParserTest {
     static TestComponentsRegistry componentsRegistry
     static MarkupParser parser

@@ -1,8 +1,5 @@
 package com.twosigma.documentation.java.parser;
 
-/**
- * @author mykola
- */
 public class JavaMethodReturn {
     private String type;
     private String javaDocText;

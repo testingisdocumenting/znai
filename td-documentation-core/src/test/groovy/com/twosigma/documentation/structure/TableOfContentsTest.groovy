@@ -3,9 +3,6 @@ package com.twosigma.documentation.structure
 import com.twosigma.documentation.parser.PageSectionIdTitle
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class TableOfContentsTest {
     @Test
     void "should know which toc item is defined and which is not"() {

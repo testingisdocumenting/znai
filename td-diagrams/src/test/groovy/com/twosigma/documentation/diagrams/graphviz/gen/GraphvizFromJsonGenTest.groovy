@@ -4,9 +4,6 @@ import org.junit.Test
 
 import static com.twosigma.webtau.Ddjt.contain
 
-/**
- * @author mykola
- */
 class GraphvizFromJsonGenTest {
     private String gv
 

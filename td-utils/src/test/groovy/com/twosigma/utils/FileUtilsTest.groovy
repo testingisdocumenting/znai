@@ -5,9 +5,6 @@ import org.junit.Test
 import java.nio.file.FileAlreadyExistsException
 import java.nio.file.Files
 
-/**
- * @author mykola
- */
 class FileUtilsTest {
     @Test
     void "should read text content from a file"() {

@@ -21,9 +21,6 @@ import java.util.stream.Stream;
 
 import static com.twosigma.documentation.diagrams.graphviz.GraphvizEngine.DOT_LAYOUT;
 
-/**
- * @author mykola
- */
 public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     private List<AuxiliaryFile> auxiliaryFiles;
     private Path diagramPath;

@@ -10,9 +10,6 @@ import org.commonmark.parser.block.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author mykola
- */
 public class IncludeBlockParser extends AbstractBlockParser {
     private static final Pattern INCLUDE_PLUGIN_REGEXP = Pattern.compile("^\\s*:include-(\\S+)+:\\s*(.*)$");
     private static final Pattern SPACES_REGEXP = Pattern.compile("^\\s{4,}.*$");

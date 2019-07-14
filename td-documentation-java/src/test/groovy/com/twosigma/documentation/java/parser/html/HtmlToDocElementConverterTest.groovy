@@ -6,9 +6,6 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-/**
- * @author mykola
- */
 class HtmlToDocElementConverterTest {
     private static ComponentsRegistry testComponentsRegistry = new TestComponentsRegistry()
     private List<Map<String,Object>> elements

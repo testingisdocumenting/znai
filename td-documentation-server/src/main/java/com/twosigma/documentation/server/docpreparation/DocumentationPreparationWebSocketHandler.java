@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * @author mykola
- */
 public class DocumentationPreparationWebSocketHandler extends JsonWebSocketHandler {
     private Vertx vertx;
 

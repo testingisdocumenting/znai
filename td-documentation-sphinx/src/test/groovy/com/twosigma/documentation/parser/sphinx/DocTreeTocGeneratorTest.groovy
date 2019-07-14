@@ -3,9 +3,6 @@ package com.twosigma.documentation.parser.sphinx
 import com.twosigma.utils.ResourceUtils
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class DocTreeTocGeneratorTest {
     @Test
     void "generates table of contents from index xml file"() {

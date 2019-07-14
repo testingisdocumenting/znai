@@ -23,9 +23,6 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class TableIncludePlugin implements IncludePlugin {
     private String textContent;
     private MarkupParser parser;

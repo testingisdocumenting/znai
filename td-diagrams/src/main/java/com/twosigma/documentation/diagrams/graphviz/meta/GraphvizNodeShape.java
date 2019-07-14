@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author mykola
- */
 public class GraphvizNodeShape {
     private String shape;
     private String labelLoc;

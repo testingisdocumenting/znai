@@ -8,9 +8,6 @@ import com.twosigma.documentation.extensions.fence.FencePlugin;
 import java.nio.file.Path;
 import java.util.Collections;
 
-/**
- * @author mykola
- */
 public class PlantUmlFencePlugin implements FencePlugin {
     @Override
     public String id() {

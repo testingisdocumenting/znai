@@ -1,8 +1,5 @@
 package com.twosigma.documentation.java.parser;
 
-/**
- * @author mykola
- */
 public class JavaType {
     private String name;
     private String fullBody;

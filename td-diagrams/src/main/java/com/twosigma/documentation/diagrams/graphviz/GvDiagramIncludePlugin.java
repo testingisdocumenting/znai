@@ -13,9 +13,6 @@ import java.util.Map;
 
 import static com.twosigma.documentation.diagrams.graphviz.GraphvizEngine.DOT_LAYOUT;
 
-/**
- * @author mykola
- */
 public class GvDiagramIncludePlugin implements IncludePlugin {
     @Override
     public String id() {

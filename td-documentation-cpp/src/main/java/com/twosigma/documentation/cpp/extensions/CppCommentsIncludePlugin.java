@@ -16,9 +16,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class CppCommentsIncludePlugin implements IncludePlugin {
     private Path cppPath;
 

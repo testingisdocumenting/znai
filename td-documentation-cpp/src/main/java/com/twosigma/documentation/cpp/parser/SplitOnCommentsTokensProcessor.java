@@ -6,9 +6,6 @@ import org.antlr.v4.runtime.TokenStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author mykola
- */
 public class SplitOnCommentsTokensProcessor {
     private CPP14Parser parser;
     private List<CodePart> parts;

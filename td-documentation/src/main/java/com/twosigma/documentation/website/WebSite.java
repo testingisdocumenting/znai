@@ -34,9 +34,6 @@ import static com.twosigma.documentation.website.ProgressReporter.reportPhase;
 import static com.twosigma.utils.FileUtils.fileTextContent;
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class WebSite {
     private static final String SEARCH_INDEX_FILE_NAME = "search-index.js";
 

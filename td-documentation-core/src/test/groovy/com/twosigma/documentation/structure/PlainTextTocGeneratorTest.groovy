@@ -3,9 +3,6 @@ package com.twosigma.documentation.structure
 import com.twosigma.documentation.parser.PageSectionIdTitle
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class PlainTextTocGeneratorTest {
     @Test
     void "should create top level TOC from nested text structure"() {

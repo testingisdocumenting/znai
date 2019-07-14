@@ -15,9 +15,6 @@ import java.util.stream.Stream;
 
 import static com.twosigma.console.ansi.Color.BLUE;
 
-/**
- * @author mykola
- */
 public class PreviewPushFileChangeHandler implements FileChangeHandler {
     private PreviewWebSocketHandler previewSocket;
     private WebSite previewWebSite;

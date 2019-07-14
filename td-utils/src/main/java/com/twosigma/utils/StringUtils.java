@@ -6,9 +6,6 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 
-/**
- * @author mykola
- */
 public class StringUtils {
     private StringUtils() {
     }

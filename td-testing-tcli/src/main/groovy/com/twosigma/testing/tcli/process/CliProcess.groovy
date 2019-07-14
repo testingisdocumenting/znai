@@ -1,8 +1,5 @@
 package com.twosigma.testing.tcli.process
 
-/**
- * @author mykola
- */
 class CliProcess {
     private String cmd
     private StringBuilder out

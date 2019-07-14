@@ -11,9 +11,6 @@ import java.nio.file.Paths
 
 import static com.twosigma.webtau.Ddjt.equal
 
-/**
- * @author mykola
- */
 class TemplateIncludePluginTest {
     private static TestComponentsRegistry componentsRegistry
     private static MarkupParser parser

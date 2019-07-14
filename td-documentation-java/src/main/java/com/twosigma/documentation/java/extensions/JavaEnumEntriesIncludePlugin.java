@@ -13,9 +13,6 @@ import java.util.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     @Override
     public String id() {

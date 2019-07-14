@@ -18,9 +18,6 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class TabsFencePlugin implements FencePlugin {
     private Path markupPath;
     private MarkupParser parser;

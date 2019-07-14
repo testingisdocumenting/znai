@@ -7,9 +7,6 @@ import com.twosigma.documentation.extensions.PluginResult;
 
 import java.nio.file.Path;
 
-/**
- * @author mykola
- */
 public interface InlinedCodePlugin extends Plugin {
     InlinedCodePlugin create();
 

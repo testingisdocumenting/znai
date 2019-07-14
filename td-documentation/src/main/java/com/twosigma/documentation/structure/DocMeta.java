@@ -5,9 +5,6 @@ import com.twosigma.utils.JsonUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class DocMeta {
     private String id;
     private String type;

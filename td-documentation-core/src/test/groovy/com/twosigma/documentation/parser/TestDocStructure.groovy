@@ -5,9 +5,6 @@ import com.twosigma.documentation.structure.DocUrl
 
 import java.nio.file.Path
 
-/**
- * @author mykola
- */
 class TestDocStructure implements DocStructure {
     private Set<String> validLinks = [] as Set
 

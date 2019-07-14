@@ -2,9 +2,6 @@ package com.twosigma.documentation.parser.table
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class RowTest {
     @Test
     void "should filter out row based on provided indexes"() {

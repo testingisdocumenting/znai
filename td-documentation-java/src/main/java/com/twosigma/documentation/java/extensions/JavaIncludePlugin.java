@@ -18,9 +18,6 @@ import java.util.stream.Stream;
 import static com.twosigma.documentation.java.parser.JavaCodeUtils.removeReturn;
 import static com.twosigma.documentation.java.parser.JavaCodeUtils.removeSemicolonAtEnd;
 
-/**
- * @author mykola
- */
 public class JavaIncludePlugin extends JavaIncludePluginBase {
     private PluginParamsOpts opts;
 

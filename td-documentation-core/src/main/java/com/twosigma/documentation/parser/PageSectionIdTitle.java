@@ -5,9 +5,6 @@ import com.twosigma.documentation.utils.NameUtils;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class PageSectionIdTitle {
     private String title;
     private String id;

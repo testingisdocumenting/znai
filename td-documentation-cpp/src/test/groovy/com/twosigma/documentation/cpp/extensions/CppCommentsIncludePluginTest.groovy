@@ -5,9 +5,6 @@ import org.junit.Test
 
 import static org.junit.Assert.assertEquals
 
-/**
- * @author mykola
- */
 class CppCommentsIncludePluginTest {
     @Test
     void "should extract comments with @mdoc at the beginning from specified entry"() {

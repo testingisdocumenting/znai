@@ -2,9 +2,6 @@ package com.twosigma.documentation.search;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * @author mykola
- */
 @XmlRootElement
 public class SearchText {
     private String text;

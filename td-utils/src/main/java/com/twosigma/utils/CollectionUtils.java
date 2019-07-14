@@ -3,9 +3,6 @@ package com.twosigma.utils;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class CollectionUtils {
     private CollectionUtils() {
     }

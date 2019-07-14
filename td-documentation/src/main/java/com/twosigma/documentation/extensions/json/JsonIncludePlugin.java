@@ -16,9 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class JsonIncludePlugin implements IncludePlugin {
     private String fileName;
     private ResourcesResolver resourcesResolver;

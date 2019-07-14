@@ -3,9 +3,6 @@ package com.twosigma.utils
 import org.junit.Assert
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class RegexpUtilsTest {
     @Test
     void "replace matches with a callback result"() {

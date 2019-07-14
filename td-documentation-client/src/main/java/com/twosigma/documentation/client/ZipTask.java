@@ -5,9 +5,6 @@ import org.apache.tools.ant.taskdefs.Zip;
 
 import java.nio.file.Path;
 
-/**
- * @author mykola
- */
 public class ZipTask extends Zip {
     public ZipTask(Path dirToZip, Path zipDestination) {
         setProject(new Project());

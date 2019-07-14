@@ -10,9 +10,6 @@ import static com.twosigma.utils.StringUtils.removeContentInsideBracketsInclusiv
 import static com.twosigma.utils.StringUtils.stripIndentation
 import static org.codehaus.groovy.antlr.parser.GroovyTokenTypes.*
 
-/**
- * @author mykola
- */
 class GroovyCodeVisitor extends VisitorAdapter {
     private final List<String> lines
     private List<GroovyMethod> methods

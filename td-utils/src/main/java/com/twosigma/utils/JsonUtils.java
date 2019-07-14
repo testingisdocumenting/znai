@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class JsonUtils {
     private static final ObjectMapper serializeMapper = createDeserializeMapper();
     private static final ObjectMapper serializePrettyPrintMapper = createSerializePrettyPrintMapper();

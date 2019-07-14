@@ -7,9 +7,6 @@ import static com.twosigma.webtau.Ddjt.code
 import static com.twosigma.webtau.Ddjt.equal
 import static com.twosigma.webtau.Ddjt.throwException
 
-/**
- * @author mykola
- */
 class CliOutputIncludePluginTest {
     @Test
     void "should split file content into lines"() {

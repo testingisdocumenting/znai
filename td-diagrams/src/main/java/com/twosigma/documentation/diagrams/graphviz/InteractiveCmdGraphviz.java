@@ -3,9 +3,6 @@ package com.twosigma.documentation.diagrams.graphviz;
 import java.io.*;
 import java.util.Scanner;
 
-/**
- * @author mykola
- */
 public class InteractiveCmdGraphviz implements GraphvizRuntime {
     private final OutputStream outputStream;
     private final InputStream inputStream;

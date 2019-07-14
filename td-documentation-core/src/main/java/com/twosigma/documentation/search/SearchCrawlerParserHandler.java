@@ -10,9 +10,6 @@ import com.twosigma.documentation.parser.table.MarkupTableData;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author mykola
- */
 public class SearchCrawlerParserHandler extends NoOpParserHandler {
     private List<PageSearchEntry> searchEntries;
     private String pageSectionTitle;

@@ -20,9 +20,6 @@ import java.util.Map;
 import static com.twosigma.documentation.parser.sphinx.xml.DocUtilsXmlFixer.fixDocUtilsIncorrectXml;
 import static com.twosigma.documentation.utils.XmlUtils.*;
 
-/**
- * @author mykola
- */
 class DocTreeDomXmlParser {
     private ComponentsRegistry componentsRegistry;
     private Path filePath;

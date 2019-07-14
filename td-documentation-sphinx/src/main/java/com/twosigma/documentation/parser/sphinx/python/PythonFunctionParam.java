@@ -5,9 +5,6 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class PythonFunctionParam {
     private String name;
     private String type;

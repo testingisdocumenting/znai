@@ -4,9 +4,6 @@ import org.junit.Test
 
 import static com.twosigma.webtau.Ddjt.equal
 
-/**
- * @author mykola
- */
 class CsvParserTest {
     def expectedParsedData = ["columns": [
             ["title": "Account"],

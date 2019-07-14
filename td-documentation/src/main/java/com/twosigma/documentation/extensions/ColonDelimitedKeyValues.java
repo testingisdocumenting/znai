@@ -18,7 +18,6 @@ import java.util.stream.Stream;
  * value41
  * value42
  * </pre>
- * @author mykola
  */
 public class ColonDelimitedKeyValues {
     private final String[] lines;

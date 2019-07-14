@@ -18,9 +18,6 @@ import java.nio.file.Path;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author mykola
- */
 public class MarkdownVisitor extends AbstractVisitor {
     private static final Pattern INLINED_CODE_ID_PATTERN = Pattern.compile("^:([a-zA-Z-_]+):\\s*(.*)");
 

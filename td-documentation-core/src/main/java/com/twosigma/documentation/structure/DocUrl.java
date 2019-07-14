@@ -1,8 +1,5 @@
 package com.twosigma.documentation.structure;
 
-/**
- * @author mykola
- */
 public class DocUrl {
     private static final String LINK_TO_SECTION_INSTRUCTION = "To refer to a section of this document use" +
             " dir-name/file-name[#page-section-id]";

@@ -9,9 +9,6 @@ import com.twosigma.documentation.structure.TocItem;
 import com.twosigma.documentation.web.WebResource;
 import com.twosigma.documentation.web.extensions.WebSiteResourcesProviders;
 
-/**
- * @author mykola
- */
 public class PageToHtmlPageConverter {
     private final DocMeta docMeta;
     private final ReactJsBundle reactJsBundle;

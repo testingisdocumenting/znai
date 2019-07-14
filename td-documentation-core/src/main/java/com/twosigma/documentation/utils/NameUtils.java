@@ -3,9 +3,6 @@ package com.twosigma.documentation.utils;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-/**
- * @author mykola
- */
 public class NameUtils {
     public static String idFromTitle(final String title) {
         if (title == null)

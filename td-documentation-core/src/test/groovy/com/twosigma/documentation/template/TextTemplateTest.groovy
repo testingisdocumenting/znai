@@ -3,9 +3,6 @@ package com.twosigma.documentation.template
 import org.junit.Assert
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class TextTemplateTest {
     @Test
     void "processes simple variable placeholders"() {
