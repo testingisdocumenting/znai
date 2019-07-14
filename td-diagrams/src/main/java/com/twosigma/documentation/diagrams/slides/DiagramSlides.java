@@ -9,9 +9,6 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class DiagramSlides {
     private final List<DiagramSlide> slides;
 

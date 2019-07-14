@@ -8,7 +8,6 @@ import java.util.Map;
 
 /**
  * represents props for ReactJs Doc Page component to render an entire documentation page
- * @author mykola
  */
 public class DocPageReactProps {
     private final Map<String, ?> asMap;

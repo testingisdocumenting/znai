@@ -7,9 +7,6 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class PythonFunction {
     private String refId;
     private String name;

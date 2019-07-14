@@ -4,9 +4,6 @@ import com.twosigma.documentation.extensions.PluginParams;
 import org.commonmark.node.CustomBlock;
 import org.commonmark.node.Visitor;
 
-/**
- * @author mykola
- */
 public class IncludeBlock extends CustomBlock {
     private PluginParams params;
 

@@ -14,9 +14,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class DocumentationCliConfig {
     private String docId;
     private String markupType;

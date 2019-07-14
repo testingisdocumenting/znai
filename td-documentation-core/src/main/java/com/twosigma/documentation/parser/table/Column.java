@@ -3,9 +3,6 @@ package com.twosigma.documentation.parser.table;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class Column {
     private String title;
     private String align;

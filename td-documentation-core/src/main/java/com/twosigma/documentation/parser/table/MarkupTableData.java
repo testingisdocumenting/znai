@@ -7,9 +7,6 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class MarkupTableData {
     private List<Column> header;
     private List<Row> data;

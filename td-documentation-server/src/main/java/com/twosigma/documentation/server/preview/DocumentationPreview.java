@@ -10,9 +10,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Path;
 
-/**
- * @author mykola
- */
 public class DocumentationPreview {
     private final Path sourceRoot;
     private final Path deployRoot;

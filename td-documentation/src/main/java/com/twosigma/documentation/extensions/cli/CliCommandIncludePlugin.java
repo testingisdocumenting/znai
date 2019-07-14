@@ -19,9 +19,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class CliCommandIncludePlugin implements IncludePlugin {
     private String command;
     private ResourcesResolver resourcesResolver;

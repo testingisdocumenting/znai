@@ -6,9 +6,6 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class GraphvizFromJsonGen {
     private final Map<String, DiagramNode> nodesFromGraph;
     private final Map<String, DiagramNode> nodesFromLibs;

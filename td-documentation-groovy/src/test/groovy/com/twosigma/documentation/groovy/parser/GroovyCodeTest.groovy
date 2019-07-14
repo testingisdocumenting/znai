@@ -8,9 +8,6 @@ import java.nio.file.Paths
 import static com.twosigma.webtau.Ddjt.code
 import static com.twosigma.webtau.Ddjt.throwException
 
-/**
- * @author mykola
- */
 class GroovyCodeTest {
     String code = """
 /**

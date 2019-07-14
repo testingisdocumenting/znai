@@ -11,9 +11,6 @@ import com.twosigma.documentation.structure.PageMeta;
 import java.nio.file.Path;
 import java.util.Collections;
 
-/**
- * @author mykola
- */
 public class SphinxDocTreeParser implements MarkupParser {
     private ComponentsRegistry componentsRegistry;
 

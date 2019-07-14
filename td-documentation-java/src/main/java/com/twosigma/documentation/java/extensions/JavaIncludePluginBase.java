@@ -14,9 +14,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 abstract public class JavaIncludePluginBase implements IncludePlugin {
     protected Path fullPath;
     protected ComponentsRegistry componentsRegistry;

@@ -1,8 +1,5 @@
 package com.twosigma.console.ansi;
 
-/**
- * @author mykola
- */
 public enum FontStyle {
     NORMAL("\u001B[0m"),
     BOLD("\u001B[1m");

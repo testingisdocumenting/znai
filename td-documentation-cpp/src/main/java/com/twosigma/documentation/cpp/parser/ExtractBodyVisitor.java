@@ -9,9 +9,6 @@ import java.util.stream.Stream;
 
 import static com.twosigma.utils.StringUtils.stripIndentation;
 
-/**
- * @author mykola
- */
 public class ExtractBodyVisitor extends CPP14BaseVisitor {
     private final List<String> lines;
     private CPP14Parser parser;

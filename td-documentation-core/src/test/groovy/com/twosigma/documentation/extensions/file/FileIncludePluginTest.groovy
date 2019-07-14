@@ -4,9 +4,6 @@ import com.twosigma.documentation.extensions.include.PluginsTestUtils
 import org.junit.Assert
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class FileIncludePluginTest {
     @Test
     void "should extract file snippet based on start line and number of lines"() {

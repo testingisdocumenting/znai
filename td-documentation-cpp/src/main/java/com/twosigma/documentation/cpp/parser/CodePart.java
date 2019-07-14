@@ -5,9 +5,6 @@ import com.twosigma.utils.StringUtils;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-/**
- * @author mykola
- */
 public class CodePart {
     private boolean isComment;
     private StringBuilder data;

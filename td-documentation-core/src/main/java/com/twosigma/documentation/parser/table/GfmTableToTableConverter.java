@@ -11,9 +11,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class GfmTableToTableConverter extends AbstractVisitor {
     private ComponentsRegistry componentsRegistry;
     private Path markdownPath;

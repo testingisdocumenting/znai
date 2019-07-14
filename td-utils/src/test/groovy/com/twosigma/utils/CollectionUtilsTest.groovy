@@ -2,9 +2,6 @@ package com.twosigma.utils
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class CollectionUtilsTest {
     @Test
     void "should create map from the vararg sequence"() {

@@ -36,9 +36,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class DocumentationServer {
     private final JsonWebSocketHandlerComposition socketHandlers;
     private final Vertx vertx;

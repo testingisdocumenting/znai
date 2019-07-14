@@ -8,9 +8,6 @@ import com.twosigma.documentation.parser.ParserHandler;
 
 import java.nio.file.Path;
 
-/**
- * @author mykola
- */
 public class MetaIncludePlugin implements IncludePlugin {
     public static final String ID = "meta";
 

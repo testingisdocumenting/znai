@@ -2,9 +2,6 @@ package com.twosigma.utils
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class JsonUtilsTest {
     @Test
     void "should serialize json using compact print"() {

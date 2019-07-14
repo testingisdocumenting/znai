@@ -13,9 +13,6 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author mykola
- */
 public class Deployer {
     private Path root;
     private Set<Path> deployed;

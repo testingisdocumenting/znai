@@ -7,9 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * @author mykola
- */
 public class DeployTempDir {
     public static Path prepare(String mode) {
         String tmpDir = System.getProperty("java.io.tmpdir");

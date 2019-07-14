@@ -2,9 +2,6 @@ package com.twosigma.console.ansi;
 
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class IgnoreAnsiString {
     private StringBuilder stringBuilder;
 

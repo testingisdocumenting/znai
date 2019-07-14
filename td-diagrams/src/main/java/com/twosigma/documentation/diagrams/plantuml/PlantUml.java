@@ -7,9 +7,6 @@ import net.sourceforge.plantuml.SourceStringReader;
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 
-/**
- * @author mykola
- */
 public class PlantUml {
     public static String generateSvg(String plantUml) {
         SourceStringReader reader = new SourceStringReader(plantUml);

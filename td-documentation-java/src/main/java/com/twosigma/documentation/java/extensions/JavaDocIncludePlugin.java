@@ -4,9 +4,6 @@ import com.twosigma.documentation.extensions.include.IncludePlugin;
 import com.twosigma.documentation.java.parser.JavaCode;
 import com.twosigma.documentation.java.parser.html.HtmlToDocElementConverter;
 
-/**
- * @author mykola
- */
 public class JavaDocIncludePlugin extends JavaIncludePluginBase {
     @Override
     public String id() {

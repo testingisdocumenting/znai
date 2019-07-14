@@ -5,9 +5,6 @@ import com.twosigma.documentation.extensions.PluginParams;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author mykola
- */
 public class IncludePluginParser {
     private static final Pattern PATTERN = Pattern.compile(":include-(\\S+)+:(.*)$");
 

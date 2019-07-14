@@ -7,9 +7,6 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-/**
- * @author mykola
- */
 class TabsFencePluginTest {
     @Test
     void "include markup per tab"() {

@@ -12,9 +12,6 @@ import java.util.Set;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
-/**
- * @author mykola
- */
 public class Plugins {
     private static Map<String, Plugin> includePluginsById = discoverIncludePlugins();
     private static Map<String, Plugin> fencePluginsById = discoverFencePlugins();

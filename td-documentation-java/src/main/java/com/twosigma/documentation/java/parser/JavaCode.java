@@ -5,9 +5,6 @@ import com.github.javaparser.ast.CompilationUnit;
 
 import java.util.List;
 
-/**
- * @author mykola
- */
 public class JavaCode {
     private final JavaCodeVisitor codeVisitor;
     private String fileContent;

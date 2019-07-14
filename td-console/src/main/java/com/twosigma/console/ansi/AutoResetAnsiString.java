@@ -3,9 +3,6 @@ package com.twosigma.console.ansi;
 import java.util.List;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class AutoResetAnsiString {
     private StringBuilder stringBuilder;
 

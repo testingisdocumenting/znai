@@ -21,9 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class TemplateIncludePlugin implements IncludePlugin {
     private Path fullPath;
     private MarkupParserResult parserResult;

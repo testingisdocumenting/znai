@@ -7,9 +7,6 @@ import com.github.javaparser.ast.body.BodyDeclaration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author mykola
- */
 public class JavaCodeUtils {
     public static String removeSemicolonAtEnd(String code) {
         return code.endsWith(";") ? code.substring(0, code.length() - 1) : code;

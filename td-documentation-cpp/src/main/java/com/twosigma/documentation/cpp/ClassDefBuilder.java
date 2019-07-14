@@ -6,9 +6,6 @@ import com.twosigma.utils.StringUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author mykola
- */
 public class ClassDefBuilder {
     private String name;
     private int startLine;

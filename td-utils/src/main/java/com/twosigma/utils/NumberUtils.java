@@ -3,9 +3,6 @@ package com.twosigma.utils;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
-/**
- * @author mykola
- */
 public class NumberUtils {
     private NumberUtils() {
     }

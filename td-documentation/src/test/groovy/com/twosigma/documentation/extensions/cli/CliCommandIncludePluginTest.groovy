@@ -5,9 +5,6 @@ import org.junit.Test
 
 import static com.twosigma.webtau.Ddjt.equal
 
-/**
- * @author mykola
- */
 class CliCommandIncludePluginTest {
     @Test
     void "passes through params to highlight to the doc element"() {

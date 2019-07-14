@@ -1,8 +1,5 @@
 package com.twosigma.utils;
 
-/**
- * @author mykola
- */
 public class BeanWithFields {
     private long longBackingProp;
     private String stringBackingField;

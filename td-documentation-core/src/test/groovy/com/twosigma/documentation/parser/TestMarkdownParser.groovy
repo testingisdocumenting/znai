@@ -9,9 +9,6 @@ import com.twosigma.documentation.structure.PageMeta
 
 import java.nio.file.Path
 
-/**
- * @author mykola
- */
 class TestMarkdownParser extends MarkdownParser {
     TestMarkdownParser(ComponentsRegistry componentsRegistry) {
         super(componentsRegistry)

@@ -2,9 +2,6 @@ package com.twosigma.documentation.search
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class GlobalSearchEntriesTest {
     @Test
     void "should generate XML document"() {

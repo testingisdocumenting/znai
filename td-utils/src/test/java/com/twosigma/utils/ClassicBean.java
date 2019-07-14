@@ -1,8 +1,5 @@
 package com.twosigma.utils;
 
-/**
- * @author mykola
- */
 public class ClassicBean {
     public long getPrice() {
         return 100;

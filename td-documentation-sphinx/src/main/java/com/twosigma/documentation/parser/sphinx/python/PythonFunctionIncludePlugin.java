@@ -9,9 +9,6 @@ import com.twosigma.documentation.parser.ParserHandler;
 
 import java.nio.file.Path;
 
-/**
- * @author mykola
- */
 public class PythonFunctionIncludePlugin implements IncludePlugin {
     @Override
     public String id() {

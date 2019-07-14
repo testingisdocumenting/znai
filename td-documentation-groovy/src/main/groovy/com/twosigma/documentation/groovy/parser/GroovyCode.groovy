@@ -9,9 +9,6 @@ import org.codehaus.groovy.antlr.treewalker.SourceCodeTraversal
 
 import java.nio.file.Path
 
-/**
- * @author mykola
- */
 class GroovyCode {
     private ComponentsRegistry componentsRegistry
     private Path filePath

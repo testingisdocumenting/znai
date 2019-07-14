@@ -6,9 +6,6 @@ import org.w3c.dom.Node;
 
 import static com.twosigma.documentation.utils.XmlUtils.*;
 
-/**
- * @author mykola
- */
 public class PythonClassXmlParser {
     private PythonClass pythonClass;
 

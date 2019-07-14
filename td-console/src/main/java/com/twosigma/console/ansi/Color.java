@@ -1,8 +1,5 @@
 package com.twosigma.console.ansi;
 
-/**
- * @author mykola
- */
 public enum Color {
     BLACK("\u001B[30m"),
     RED("\u001B[31m"),

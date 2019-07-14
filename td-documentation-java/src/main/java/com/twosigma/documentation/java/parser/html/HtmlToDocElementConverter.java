@@ -14,9 +14,6 @@ import org.jsoup.select.NodeVisitor;
 import java.nio.file.Path;
 import java.util.List;
 
-/**
- * @author mykola
- */
 public class HtmlToDocElementConverter {
     private HtmlToDocElementConverter() {
     }

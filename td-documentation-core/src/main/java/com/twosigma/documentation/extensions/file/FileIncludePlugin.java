@@ -15,9 +15,6 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class FileIncludePlugin implements IncludePlugin {
     private String fileName;
     private String text;

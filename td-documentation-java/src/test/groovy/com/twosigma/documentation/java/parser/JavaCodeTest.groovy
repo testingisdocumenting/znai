@@ -6,9 +6,6 @@ import org.junit.Test
 import static com.twosigma.webtau.Ddjt.code
 import static com.twosigma.webtau.Ddjt.throwException
 
-/**
- * @author mykola
- */
 class JavaCodeTest {
     private final String classCode = """
 /**

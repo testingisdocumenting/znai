@@ -4,7 +4,6 @@ import java.util.Objects;
 
 /**
  * global search entry
- * @author mykola
  */
 public class GlobalSearchEntry {
     private String url;

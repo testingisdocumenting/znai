@@ -11,9 +11,6 @@ import java.nio.file.Path;
 
 import static com.twosigma.utils.FileUtils.fileTextContent;
 
-/**
- * @author mykola
- */
 public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
     @Override
     public TableOfContents createToc(Path tocPath) {

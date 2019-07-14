@@ -1,8 +1,5 @@
 package com.twosigma.documentation.cpp.parser;
 
-/**
- * @author mykola
- */
 public class EntryDef {
     private String name;
     private String full;

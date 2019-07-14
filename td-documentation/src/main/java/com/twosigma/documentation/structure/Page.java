@@ -10,9 +10,6 @@ import com.twosigma.documentation.parser.docelement.DocElement;
 import static com.twosigma.documentation.parser.docelement.DocElementType.SECTION;
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class Page {
     private final DocElement docElement;
     private final List<PageSectionIdTitle> pageSectionIdTitles;

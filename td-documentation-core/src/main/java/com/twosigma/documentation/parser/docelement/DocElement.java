@@ -12,7 +12,6 @@ import static java.util.stream.Collectors.toList;
 /**
  * Represents model to be used by ReactJS for rendering.
  * @see DocElementType
- * @author mykola
  */
 public class DocElement {
     private Map<String, Object> props;

@@ -7,9 +7,6 @@ import java.nio.file.Paths
 
 import static com.twosigma.webtau.Ddjt.*
 
-/**
- * @author mykola
- */
 class MarkdownParserTest {
     static final TestComponentsRegistry componentsRegistry = TestComponentsRegistry.INSTANCE
     static final MarkupParser parser = new MarkdownParser(componentsRegistry)

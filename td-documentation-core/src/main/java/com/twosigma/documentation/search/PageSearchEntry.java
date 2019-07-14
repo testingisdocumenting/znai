@@ -4,7 +4,6 @@ import com.twosigma.documentation.parser.PageSectionIdTitle;
 
 /**
  * search entry local to a single page
- * @author mykola
  */
 public class PageSearchEntry {
     private PageSectionIdTitle pageSectionIdTitle;

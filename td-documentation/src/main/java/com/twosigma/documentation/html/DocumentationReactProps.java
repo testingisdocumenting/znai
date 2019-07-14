@@ -5,9 +5,6 @@ import com.twosigma.documentation.structure.DocMeta;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * @author mykola
- */
 public class DocumentationReactProps {
     private final DocMeta docMeta;
     private final DocPageReactProps pageProps;

@@ -6,9 +6,6 @@ import org.junit.Test
 import static com.twosigma.webtau.Ddjt.actual
 import static com.twosigma.webtau.Ddjt.equal
 
-/**
- * @author mykola
- */
 class MarkupTableDataTest {
     MarkupTableData table
 

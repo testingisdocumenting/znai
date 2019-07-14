@@ -3,9 +3,6 @@ package com.twosigma.documentation.structure;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author mykola
- */
 public class PlainTextTocGenerator implements TocGenerator {
     private String filesExtension;
 

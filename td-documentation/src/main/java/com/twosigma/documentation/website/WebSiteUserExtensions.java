@@ -13,7 +13,6 @@ import static java.util.stream.Collectors.toList;
 
 /**
  * Represents web site extensions provided by a user
- * @author mykola
  */
 public class WebSiteUserExtensions implements WebSiteResourcesProvider {
     private final List<WebResource> cssResources;

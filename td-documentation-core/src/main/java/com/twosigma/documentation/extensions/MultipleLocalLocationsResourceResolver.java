@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class MultipleLocalLocationsResourceResolver implements ResourcesResolver {
     private final Path docRootPath;
     private final List<Path> lookupPaths;

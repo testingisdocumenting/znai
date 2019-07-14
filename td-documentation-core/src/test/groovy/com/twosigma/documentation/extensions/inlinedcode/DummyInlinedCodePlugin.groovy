@@ -7,9 +7,6 @@ import com.twosigma.documentation.parser.docelement.DocElement
 
 import java.nio.file.Path
 
-/**
- * @author mykola
- */
 class DummyInlinedCodePlugin implements InlinedCodePlugin {
     @Override
     String id() {

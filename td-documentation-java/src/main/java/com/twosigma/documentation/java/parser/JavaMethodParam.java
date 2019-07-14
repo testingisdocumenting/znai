@@ -1,8 +1,5 @@
 package com.twosigma.documentation.java.parser;
 
-/**
- * @author mykola
- */
 public class JavaMethodParam {
     private String name;
     private String javaDocText;

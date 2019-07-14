@@ -12,9 +12,6 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class PlantUmlIncludePlugin implements IncludePlugin {
     private Path fullPath;
 

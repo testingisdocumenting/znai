@@ -8,10 +8,6 @@ import com.twosigma.documentation.parser.ParserHandler;
 
 import java.nio.file.Path;
 
-/**
- *
- * @author mykola
- */
 public interface IncludePlugin extends Plugin {
     IncludePlugin create();
 

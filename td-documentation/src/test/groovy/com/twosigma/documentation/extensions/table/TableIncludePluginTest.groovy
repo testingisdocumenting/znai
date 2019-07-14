@@ -3,9 +3,6 @@ package com.twosigma.documentation.extensions.table
 import com.twosigma.documentation.extensions.include.PluginsTestUtils
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class TableIncludePluginTest {
     @Test
     void "should read table from csv by detecting format"() {

@@ -2,7 +2,6 @@ package com.twosigma.documentation.search;
 
 /**
  * how likely text will be found by a search
- * @author mykola
  */
 public enum SearchScore {
     HIGHEST,

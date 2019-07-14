@@ -3,9 +3,6 @@ package com.twosigma.testing.examples.people
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class PeopleDaoGroovyTest {
     private PeopleDao dao = new PeopleDao()
 

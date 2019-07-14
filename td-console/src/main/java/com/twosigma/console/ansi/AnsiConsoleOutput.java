@@ -2,9 +2,6 @@ package com.twosigma.console.ansi;
 
 import com.twosigma.console.ConsoleOutput;
 
-/**
- * @author mykola
- */
 public class AnsiConsoleOutput implements ConsoleOutput {
     @Override
     public void out(Object... styleOrValues) {

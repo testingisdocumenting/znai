@@ -10,9 +10,6 @@ import static com.twosigma.webtau.Ddjt.equal;
 import static com.twosigma.webtau.Ddjt.header;
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class PeopleManagementTest {
     private PeopleManagement peopleManagement = new PeopleManagement();
 

@@ -7,9 +7,6 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toSet;
 
-/**
- * @author mykola
- */
 public class GraphvizEngine {
     public static final String DOT_LAYOUT = "dot";
 

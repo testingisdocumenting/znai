@@ -2,9 +2,6 @@ package com.twosigma.utils;
 
 import java.util.*;
 
-/**
- * @author mykola
- */
 public class ServiceLoaderUtils {
     private ServiceLoaderUtils() {
     }

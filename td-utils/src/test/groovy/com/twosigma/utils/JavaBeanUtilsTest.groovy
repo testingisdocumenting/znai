@@ -2,9 +2,6 @@ package com.twosigma.utils
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class JavaBeanUtilsTest {
     @Test
     void "converts classic get-set bean without fields to a map"() {

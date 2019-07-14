@@ -4,9 +4,6 @@ import com.twosigma.utils.ResourceUtils
 import org.junit.BeforeClass
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class PythonClassXmlParserTest {
     static def xml = ResourceUtils.textContent('auto-class.xml')
     static PythonClass pythonClass

@@ -8,9 +8,6 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class ReactJsBundle {
     private final WebResource mainJs;
     private final WebResource mainCss;

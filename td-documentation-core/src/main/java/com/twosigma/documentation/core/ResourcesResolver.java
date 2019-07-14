@@ -10,9 +10,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public interface ResourcesResolver {
     void initialize(Stream<String> filteredLookupPaths);
     boolean supportsLookupPath(String lookupPath);

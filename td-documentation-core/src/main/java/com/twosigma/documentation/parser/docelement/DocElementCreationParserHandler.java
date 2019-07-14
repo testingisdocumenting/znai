@@ -23,9 +23,6 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/**
- * @author mykola
- */
 public class DocElementCreationParserHandler implements ParserHandler {
     private final ComponentsRegistry componentsRegistry;
     private final Path path;

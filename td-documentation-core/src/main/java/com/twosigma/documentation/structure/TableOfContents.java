@@ -7,9 +7,6 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class TableOfContents {
     private String defaultFileExtension;
     private List<TocItem> tocItems;

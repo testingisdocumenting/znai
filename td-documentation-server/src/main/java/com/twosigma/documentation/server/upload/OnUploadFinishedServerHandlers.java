@@ -5,9 +5,6 @@ import com.twosigma.utils.ServiceLoaderUtils;
 import java.nio.file.Path;
 import java.util.Set;
 
-/**
- * @author mykola
- */
 public class OnUploadFinishedServerHandlers {
     private static final Set<OnUploadFinishedServerHandler> handlers =
             ServiceLoaderUtils.load(OnUploadFinishedServerHandler.class);

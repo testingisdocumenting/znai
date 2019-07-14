@@ -5,9 +5,6 @@ import com.twosigma.utils.ResourceUtils;
 
 import java.nio.file.Path;
 
-/**
- * @author mykola
- */
 public class WebResource {
     private final Path originPath;
     private final String path;

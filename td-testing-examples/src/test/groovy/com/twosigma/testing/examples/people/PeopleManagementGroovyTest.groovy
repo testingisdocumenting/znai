@@ -4,9 +4,6 @@ package com.twosigma.testing.examples.people
 import com.twosigma.webtau.data.table.TableData
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class PeopleManagementGroovyTest {
     private PeopleManagement peopleManagement = new PeopleManagement()
 

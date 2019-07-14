@@ -9,9 +9,6 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class FromReadmeGenerator {
     private static List<Path> readMeFiles;
     private final Path srcRoot;

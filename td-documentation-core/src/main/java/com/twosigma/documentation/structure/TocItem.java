@@ -8,9 +8,6 @@ import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class TocItem {
     private static final Pattern fileNameAllowedPattern = Pattern.compile("[a-zA-Z0-9-_]*");
 

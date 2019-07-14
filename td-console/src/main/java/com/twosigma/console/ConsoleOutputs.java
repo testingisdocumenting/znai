@@ -5,9 +5,6 @@ import com.twosigma.utils.ServiceLoaderUtils;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @author mykola
- */
 public class ConsoleOutputs {
     private static Set<ConsoleOutput> outputs = ServiceLoaderUtils.load(ConsoleOutput.class);
 

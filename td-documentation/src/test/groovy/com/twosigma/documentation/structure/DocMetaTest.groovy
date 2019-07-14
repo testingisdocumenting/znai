@@ -2,9 +2,6 @@ package com.twosigma.documentation.structure
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class DocMetaTest {
     @Test
     void "should create a new doc meta instance based on existing data and new json"() {

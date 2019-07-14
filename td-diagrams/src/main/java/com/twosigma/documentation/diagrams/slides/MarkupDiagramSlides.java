@@ -12,9 +12,6 @@ import java.util.List;
 import static com.twosigma.documentation.parser.docelement.DocElementType.SECTION;
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class MarkupDiagramSlides {
     private DiagramSlides diagramSlides;
     private List<DocElement> sections;

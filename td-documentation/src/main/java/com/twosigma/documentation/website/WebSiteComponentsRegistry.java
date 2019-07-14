@@ -7,9 +7,6 @@ import com.twosigma.documentation.parser.MarkupParser;
 import com.twosigma.documentation.parser.commonmark.MarkdownParser;
 import com.twosigma.documentation.structure.DocStructure;
 
-/**
- * @author mykola
- */
 public class WebSiteComponentsRegistry implements ComponentsRegistry {
     private MarkupParser defaultParser;
     private MarkdownParser markdownParser;

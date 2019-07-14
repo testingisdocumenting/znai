@@ -4,9 +4,6 @@ import com.twosigma.utils.ResourceUtils
 import org.junit.Assert
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class CppSourceCodeTest {
     static String code = ResourceUtils.textContent("test.cpp");
 

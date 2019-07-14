@@ -3,9 +3,6 @@ package com.twosigma.testing.tcli.output
 import com.twosigma.webtau.expectation.ActualPath
 import com.twosigma.webtau.expectation.ActualPathAware
 
-/**
- * @author mykola
- */
 class OutputLines implements ActualPathAware {
     private List<String> lines
     private Set<Integer> checkedLineIdx

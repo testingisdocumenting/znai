@@ -6,9 +6,6 @@ import com.twosigma.documentation.search.SearchText;
 
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public interface Plugin {
     String id();
 

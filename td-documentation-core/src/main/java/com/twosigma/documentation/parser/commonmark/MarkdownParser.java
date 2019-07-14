@@ -19,9 +19,6 @@ import org.commonmark.parser.Parser;
 
 import com.twosigma.documentation.parser.docelement.DocElementCreationParserHandler;
 
-/**
- * @author mykola
- */
 public class MarkdownParser implements MarkupParser {
     private final Parser parser;
     private final ComponentsRegistry componentsRegistry;

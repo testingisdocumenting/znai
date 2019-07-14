@@ -5,9 +5,6 @@ import org.apache.commons.cli.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * @author mykola
- */
 class CliConfig {
     private static final String SECTION_ID = "sectionId";
     private static final String DEST = "mdocDest";

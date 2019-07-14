@@ -8,9 +8,6 @@ import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.joining;
 
-/**
- * @author mykola
- */
 public class GraphvizDiagramWithMeta {
     private static final Pattern NODE_PATTERN =
             Pattern.compile("(\\S+)\\s*\\[.*?label\\s*=\\s*\"(.*?\\[[^]]*]\\s*)\".*?]\\s*;");

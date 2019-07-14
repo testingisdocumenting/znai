@@ -7,9 +7,6 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class PluginParamsOpts {
     private Map<String, ?> opts;
 

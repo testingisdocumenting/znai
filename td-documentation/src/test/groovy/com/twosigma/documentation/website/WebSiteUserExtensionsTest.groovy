@@ -7,9 +7,6 @@ import java.nio.file.Paths
 
 import static java.util.stream.Collectors.toList
 
-/**
- * @author mykola
- */
 class WebSiteUserExtensionsTest {
     @Test
     void "should let specify extra web resources"() {

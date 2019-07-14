@@ -8,7 +8,6 @@ package com.twosigma.documentation.parser;
  *     <li>relative to the root of the documentation</li>
  *     <li>relative to one of the files specified inside lookup paths file</li>
  * </ul>
- * @author mykola
  */
 public class MarkupPathsResolution {
 }

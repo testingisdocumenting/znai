@@ -21,9 +21,6 @@ import static com.twosigma.documentation.java.parser.JavaCodeUtils.removeSemicol
 import static com.twosigma.utils.StringUtils.*;
 import static java.util.stream.Collectors.*;
 
-/**
- * @author mykola
- */
 public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     private final List<String> lines;
     private Map<String, JavaType> javaTypes;

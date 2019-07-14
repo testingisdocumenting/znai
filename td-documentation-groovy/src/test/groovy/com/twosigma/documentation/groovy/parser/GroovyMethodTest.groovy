@@ -2,9 +2,6 @@ package com.twosigma.documentation.groovy.parser
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class GroovyMethodTest {
     @Test
     void "ignores spaces in types definition when compares name and types"() {

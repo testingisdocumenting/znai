@@ -2,9 +2,6 @@ package com.twosigma.testing.tcli.output
 
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class OutputLinesCompareToHandlerTest {
     @Test
     void "should mark lines that passed assertion"() {

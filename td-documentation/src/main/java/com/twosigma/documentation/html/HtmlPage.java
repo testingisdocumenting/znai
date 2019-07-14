@@ -7,9 +7,6 @@ import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 
-/**
- * @author mykola
- */
 public class HtmlPage {
     public static final String FAVICON_PATH = "favicon.png";
 

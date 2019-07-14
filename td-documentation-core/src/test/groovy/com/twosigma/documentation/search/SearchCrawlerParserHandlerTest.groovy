@@ -4,9 +4,6 @@ import com.twosigma.documentation.extensions.PluginParams
 import org.junit.Before
 import org.junit.Test
 
-/**
- * @author mykola
- */
 class SearchCrawlerParserHandlerTest {
     SearchCrawlerParserHandler parserHandler
 

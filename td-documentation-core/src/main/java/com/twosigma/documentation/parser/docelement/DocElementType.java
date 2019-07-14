@@ -1,8 +1,5 @@
 package com.twosigma.documentation.parser.docelement;
 
-/**
- * @author mykola
- */
 public class DocElementType {
     public static final String PAGE = "Page";
     public static final String SECTION = "Section";

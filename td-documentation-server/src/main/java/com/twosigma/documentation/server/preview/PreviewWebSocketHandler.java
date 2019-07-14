@@ -11,9 +11,6 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * @author mykola
- */
 public class PreviewWebSocketHandler extends JsonWebSocketHandler {
     private static final String NAME = "preview";
     private static final String URL = "/preview";

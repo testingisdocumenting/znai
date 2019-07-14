@@ -9,9 +9,6 @@ import static com.twosigma.console.ansi.Color.YELLOW
 import static com.twosigma.console.ansi.FontStyle.BOLD
 import static com.twosigma.console.ansi.FontStyle.NORMAL
 
-/**
- * @author mykola
- */
 class AnsiConsoleOutputTest {
     def console = new AnsiConsoleOutput()
 

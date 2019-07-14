@@ -10,9 +10,6 @@ import com.twosigma.documentation.search.SearchText;
 import java.nio.file.Path;
 import java.util.Collections;
 
-/**
- * @author mykola
- */
 public class LatexFencePlugin implements FencePlugin {
     private String content;
 

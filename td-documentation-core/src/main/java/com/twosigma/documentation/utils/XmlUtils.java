@@ -16,9 +16,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-/**
- * @author mykola
- */
 public class XmlUtils {
     private XmlUtils() {
     }
