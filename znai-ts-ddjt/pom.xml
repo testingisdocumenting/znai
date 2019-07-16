@@ -6,7 +6,7 @@
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>com.twosigma.td</groupId>
+        <groupId>com.twosigma.znai</groupId>
         <artifactId>znai-parent</artifactId>
         <version>0.1</version>
     </parent>

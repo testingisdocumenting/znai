@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.twosigma.td</groupId>
+        <groupId>com.twosigma.znai</groupId>
         <artifactId>znai-parent</artifactId>
         <version>0.1</version>
     </parent>
@@ -14,7 +14,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.twosigma.td</groupId>
+            <groupId>com.twosigma.znai</groupId>
             <artifactId>znai-testing-examples</artifactId>
             <version>0.1</version>
         </dependency>
@@ -23,7 +23,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.twosigma.td</groupId>
+                <groupId>com.twosigma.znai</groupId>
                 <artifactId>znai-maven-plugin</artifactId>
                 <version>${project.version}</version>
                 <executions>

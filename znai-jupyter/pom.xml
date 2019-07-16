@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.twosigma.td</groupId>
+        <groupId>com.twosigma.znai</groupId>
         <artifactId>znai-parent</artifactId>
         <version>0.1</version>
     </parent>
@@ -15,13 +15,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.twosigma.td</groupId>
+            <groupId>com.twosigma.znai</groupId>
             <artifactId>znai-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.td</groupId>
+            <groupId>com.twosigma.znai</groupId>
             <artifactId>znai-core</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
