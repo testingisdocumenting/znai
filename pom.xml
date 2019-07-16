@@ -5,43 +5,43 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.twosigma.td</groupId>
-    <artifactId>td-parent</artifactId>
+    <artifactId>znai-parent</artifactId>
     <version>0.1</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>td-utils</module>
-        <module>td-utils-for-testing</module>
-        <module>td-console</module>
-        <module>td-testing-tcli</module>
-        <module>td-ddjt-docs</module>
-        <module>td-diagrams</module>
-        <module>td-reactjs-common</module>
-        <module>td-documentation</module>
-        <module>td-documentation-site-extensions</module>
-        <module>td-documentation-core</module>
-        <module>td-documentation-latex</module>
-        <module>td-documentation-java</module>
-        <module>td-documentation-groovy</module>
-        <module>td-documentation-cpp</module>
-        <module>td-documentation-ecmascript</module>
-        <module>td-documentation-sphinx</module>
-        <module>td-documentation-open-api</module>
-        <module>td-documentation-typescript</module>
-        <module>td-documentation-jupyter</module>
-        <module>td-documentation-reactjs-api</module>
-        <module>td-documentation-reactjs</module>
-        <module>td-documentation-server</module>
-        <module>td-documentation-client</module>
-        <module>td-documentation-cli</module>
-        <module>td-documentation-generators</module>
-        <module>td-documentation-maven-plugin</module>
-        <module>td-documentation-maven-plugin-shaded</module>
-        <module>td-documentation-docs</module>
-        <module>td-testing-examples</module>
-        <module>td-ts-dist</module>
-        <module>td-ts-ddjt</module>
-        <module>td-mdoc-dist</module>
+        <module>znai-utils</module>
+        <module>znai-utils-for-testing</module>
+        <module>znai-console</module>
+        <module>znai-testing-tcli</module>
+        <module>znai-ddjt-docs</module>
+        <module>znai-diagrams</module>
+        <module>znai-reactjs-common</module>
+        <module>znai</module>
+        <module>znai-site-extensions</module>
+        <module>znai-core</module>
+        <module>znai-latex</module>
+        <module>znai-java</module>
+        <module>znai-groovy</module>
+        <module>znai-cpp</module>
+        <module>znai-ecmascript</module>
+        <module>znai-sphinx</module>
+        <module>znai-open-api</module>
+        <module>znai-typescript</module>
+        <module>znai-jupyter</module>
+        <module>znai-reactjs-api</module>
+        <module>znai-reactjs</module>
+        <module>znai-server</module>
+        <module>znai-client</module>
+        <module>znai-cli</module>
+        <module>znai-generators</module>
+        <module>znai-maven-plugin</module>
+        <module>znai-maven-plugin-shaded</module>
+        <module>znai-docs</module>
+        <module>znai-testing-examples</module>
+        <module>znai-ts-dist</module>
+        <module>znai-ts-ddjt</module>
+        <module>znai-dist</module>
     </modules>
 
     <properties>
