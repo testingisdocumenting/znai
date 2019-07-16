@@ -6,7 +6,7 @@
 .project
 target
 node_modules
-td-documentation-reactjs/build
+znai-reactjs/build
 *.iml
 .vertx
 docs-build
