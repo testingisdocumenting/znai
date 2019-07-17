@@ -1,5 +1,0 @@
-com.twosigma.documentation.diagrams.graphviz.GvDiagramIncludePlugin
-com.twosigma.documentation.diagrams.graphviz.GvDiagramSlidesIncludePlugin
-com.twosigma.documentation.diagrams.FlowChartIncludePlugin
-com.twosigma.documentation.diagrams.plantuml.PlantUmlIncludePlugin
-com.twosigma.documentation.diagrams.DiagramLegendIncludePlugin

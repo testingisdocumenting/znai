@@ -1,0 +1,3 @@
+com.twosigma.znai.extensions.file.FileIncludePlugin
+com.twosigma.znai.extensions.reactjs.ReactJsComponentIncludePlugin
+com.twosigma.znai.extensions.meta.MetaIncludePlugin
