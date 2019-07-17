@@ -1,0 +1,14 @@
+com.twosigma.znai.extensions.twosides.EmptyBlockIncludePlugin
+com.twosigma.znai.extensions.image.ImageIncludePlugin
+com.twosigma.znai.extensions.svg.SvgIncludePlugin
+com.twosigma.znai.extensions.markup.MarkdownIncludePlugin
+com.twosigma.znai.extensions.markup.MarkdownsIncludePlugin
+com.twosigma.znai.extensions.table.TableIncludePlugin
+com.twosigma.znai.extensions.rest.RestTestIncludePlugin
+com.twosigma.znai.extensions.json.JsonIncludePlugin
+com.twosigma.znai.extensions.xml.XmlIncludePlugin
+com.twosigma.znai.extensions.templates.TemplateIncludePlugin
+com.twosigma.znai.extensions.charts.ChartIncludePlugin
+com.twosigma.znai.extensions.cli.CliCommandIncludePlugin
+com.twosigma.znai.extensions.cli.CliOutputIncludePlugin
+com.twosigma.znai.extensions.api.ApiParametersIncludePlugin

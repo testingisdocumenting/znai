@@ -1,0 +1,5 @@
+com.twosigma.znai.extensions.tabs.TabsFencePlugin
+com.twosigma.znai.extensions.templates.TemplateFencePlugin
+com.twosigma.znai.extensions.columns.ColumnsFencePlugin
+com.twosigma.znai.extensions.api.ApiParametersFencePlugin
+com.twosigma.znai.extensions.markup.MarkdownAndResultFencePlugin

@@ -1,0 +1,4 @@
+com.twosigma.znai.java.extensions.JavaIncludePlugin
+com.twosigma.znai.java.extensions.JavaDocIncludePlugin
+com.twosigma.znai.java.extensions.JavaDocParamsIncludePlugin
+com.twosigma.znai.java.extensions.JavaEnumEntriesIncludePlugin
