@@ -1,7 +1,3 @@
-//
-// copyright large statement
-//
-
 import you.company.com.util.*
 
 /*
