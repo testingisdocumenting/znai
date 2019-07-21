@@ -16,6 +16,7 @@
 
 package com.twosigma.znai.server.preview;
 
+import com.sun.nio.file.SensitivityWatchEventModifier;
 import com.twosigma.console.ConsoleOutputs;
 import com.twosigma.znai.core.AuxiliaryFileListener;
 import com.twosigma.znai.core.AuxiliaryFile;
@@ -122,8 +123,8 @@ public class FileWatcher implements AuxiliaryFileListener {
                 return;
             }
 
-            // TODO
-            final WatchKey key = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+            final WatchKey key = path.register(watchService, new WatchEvent.Kind[]{StandardWatchEventKinds.ENTRY_MODIFY},
+                    SensitivityWatchEventModifier.HIGH);
             pathByKey.put(key, path);
 
             ConsoleOutputs.out("watching: ", path);
