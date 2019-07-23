@@ -14,7 +14,7 @@ Alice <-- Bob: another authentication Response
 ```
 `````
 
-# External file
+# External File
 
 If your diagram is stored in a separate file, use `:include-plantuml: <path>`.
 

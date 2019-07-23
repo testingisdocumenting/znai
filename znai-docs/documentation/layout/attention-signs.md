@@ -26,7 +26,7 @@ step using a warning sign. Do not use too many warning signs.
 
 Avoid: using multiple versions of `ReactJS` inside one project.
 
-# Do not
+# Do Not
 
     Don't: commit node_modules to your repository
 

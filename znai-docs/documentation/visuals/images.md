@@ -8,7 +8,7 @@ Image can be included using standard Markdown syntax.
 
 # Extension
 
-MDoc adds additional extension to provide additional information:
+`Znai` adds additional extension to provide additional information:
 * caption
 * annotations
 * fit parameters

@@ -16,7 +16,7 @@ Long command lines will be automatically wrapped into multiple lines.
 
 # Handle Special Symbols
 
-If your command contains special symbols like `{` then move command definition to `command` option
+If your command contains special symbols, such as `{`, move the command definition to a `command` option
 
     :include-cli-command: {command: "another-command {file1} [file2]", paramsToHighlight: ["file1"]}
 

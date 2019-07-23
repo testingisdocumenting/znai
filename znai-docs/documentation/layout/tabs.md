@@ -11,7 +11,7 @@ Imagine your product supports multiple ways of achieving a final result:
 Provide a selection inside your documentation if your user needs only one to accomplish the goal. 
 Selections will persist for users and provide streamlined experience.
 
-Do not: use tabs as navigation experience. 
+Don't: use tabs as navigation experience. 
 If your user needs both `Java` and `Python` executed one by one you need to show steps one after another in proper order.
  
 # Definition 
@@ -92,7 +92,7 @@ $ whoamis
 ```
 ````
 
-# Separate Markdown files
+# Separate Markdown Files
 
 Consider extracting content to separate markup files if content becomes long.
 Use the `include-markdown` plugin to include external content.

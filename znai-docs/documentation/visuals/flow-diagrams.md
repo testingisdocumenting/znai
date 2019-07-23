@@ -35,7 +35,7 @@ Or use `highlight` property of a `flow-chart` include plugin.
 
 Note: To highlight more than one element use `{highlight: ["n3", "n4"]}`
 
-# Color groups
+# Color Groups
 
 Use `colorGroup` to assign a color group to a node. There are three color groups out of the box: `a` (default), `b`, `c`, `d`.
 

@@ -1,7 +1,10 @@
 # Files Reference Lookup
 
-When you refer a file using plugins like `:include-file: my-file.cpp` mdoc tries to find the file in 
-following locations:
+When you refer a file using plugins like
+
+ `:include-file: my-file.cpp` 
+ 
+ `Znai` tries to find the file in following locations:
 
 * directory with the markup file that refers `my-file.cpp`
 * documentation root directory
@@ -12,9 +15,9 @@ following locations:
 ../module/src/main/java
 ```
 
-# HTTP lookup location
+# HTTP Lookup Location
 
-If files you want to include are not part of your project, you can add http base url to `lookup-paths`.
+If files you want to include are not part of your project, you can add an HTTP base URL to `lookup-paths`.
 
 ```txt {title: "lookup-paths"}
 ../examples

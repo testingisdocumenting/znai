@@ -1,6 +1,6 @@
 # Parsing 
 
-Mdoc uses typescript `nodejs` module to parse TypeScript. Use the `typescript` plugin to include parsed information.
+`Znai` uses typescript `nodejs` module to parse TypeScript. Use the `typescript` plugin to include parsed information.
 
 # Properties
 
