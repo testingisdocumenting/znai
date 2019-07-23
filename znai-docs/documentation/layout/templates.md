@@ -1,4 +1,4 @@
-# Don't repeat yourself
+# Don't Repeat Yourself
 
 Define templates when you need to reuse the same layout.
 
@@ -27,7 +27,7 @@ Suppose you are have to display multiple elements like the following:
 
 Instead of copy and pasting, define a template in a separate file.
 
-MDoc uses the [FreeMarker](http://freemarker.org) template engine.
+`Znai` uses the [FreeMarker](http://freemarker.org) template engine.
  
 :include-file: templates/job.md
 

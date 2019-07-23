@@ -44,7 +44,7 @@ The following languages are supported:
 * Python
 * Bash
 
-`MDoc` uses [prismjs](http://prismjs.com) library to provide syntax highlighting. 
+`Znai` uses [prismjs](http://prismjs.com) library to provide syntax highlighting. 
 Note that it is not being executed inside the browser, but rather applied during HTML generation.
   
 # Title

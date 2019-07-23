@@ -2,10 +2,10 @@
 
 Focus your documentation on scenarios users can perform.
 Before documenting them, you need to make sure that they actually work.
-You could perform a manual test every time you release your software, but it is time consuming and error prone.
+You could perform a manual test every time you release your software, but it is time consuming and error-prone.
 
 Alternatively, you could write automated tests to make sure that scenarios you are writing about are validated.
-At the test run time, capture test produced artifacts:
+At test run time, capture test produced artifacts:
 * Command line output
 * Screenshots
 * Business logic calculation

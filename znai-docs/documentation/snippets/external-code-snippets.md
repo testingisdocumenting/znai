@@ -1,11 +1,11 @@
 # Existing File
 
-To boost documentation maintainability you can refer text and code snippets from already existing files.
+To make maintaining documentation easier you can refer to text and code snippets in already existing files.
 
     :include-file: file-name.js
     
-Include-dash family is our custom extension to Markdown to support various scenarios. 
-    
+This `include-` syntax will appear throughout the documentation and represents a family of custom Markdown extensions that enable the inclusion of various artifacts. 
+
 :include-file: file-name.js
 
 File will be looked up using following rules:
@@ -23,7 +23,7 @@ Use `title` property to specify a title.
 
 # Wide Code
 
-Use `wide` option to stretch wide code to occupy as much real estate as possible.  
+Use `wide` option to stretch wide code to occupy as much horizontal screen real estate as possible.  
 
     :include-file: WideCode.java {wide: true}
     

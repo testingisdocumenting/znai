@@ -1,6 +1,6 @@
 # Local
 
-To perform a local search of your documentation press `/` key or click magnifying glass in the top right corner.
+To perform a local search of your documentation press `/` key or click the search section in the side panel on the left.
 
 In [documentation structure](flow/structure) we learned that documentation consist of  
 * Chapters
@@ -25,9 +25,9 @@ Global search is performed by [search/](https://search.app.twosigma.com).
 Global search consider each page section as an independent entry as well. 
 
 In the case of global search, the full title gets expanded to include documentation title, so the full title of the
-current section will be: *MDoc Flow Search Global*.
+current section will be: *Znai Flow Search Global*.
 
-Go now and [search](https://search.app.twosigma.com) for *mdoc search* and see what results are there.   
+Go now and [search](https://search.app.twosigma.com) for *znai search* and see what results are there.   
 
 In case of global search it is even more important to come up with the good names for 
 * Chapters
