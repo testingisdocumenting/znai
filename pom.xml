@@ -32,7 +32,6 @@
         <module>znai-testing-tcli</module>
         <module>znai-ddjt-docs</module>
         <module>znai-diagrams</module>
-        <module>znai-reactjs-common</module>
         <module>znai</module>
         <module>znai-site-extensions</module>
         <module>znai-core</module>
