@@ -32,25 +32,8 @@
     <dependencies>
         <dependency>
             <groupId>com.twosigma.znai</groupId>
-            <artifactId>znai</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.twosigma.znai</groupId>
-            <artifactId>znai-cli</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.twosigma.znai</groupId>
-            <artifactId>znai-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.twosigma.znai</groupId>
-            <artifactId>znai-generators</artifactId>
+            <artifactId>znai-shaded</artifactId>
+            <classifier>shaded</classifier>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
