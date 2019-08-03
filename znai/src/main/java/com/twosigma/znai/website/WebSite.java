@@ -85,37 +85,37 @@ public class WebSite {
 
     private final Map<AuxiliaryFile, Long> auxiliaryFilesLastUpdateTime;
 
-    private WebSite(Configuration cfg) {
-        this.cfg = cfg;
-        this.deployer = new Deployer(cfg.deployPath);
-        this.docMeta = cfg.docMeta;
-        this.registeredExtraJavaScripts = cfg.registeredExtraJavaScripts;
-        this.componentsRegistry = new WebSiteComponentsRegistry();
-        this.resourceResolver = new ResourcesResolverChain();
-        this.reactJsBundle = cfg.reactJsBundle;
-        this.tocJavaScript = WebResource.withPath("toc.js");
-        this.globalAssetsJavaScript = WebResource.withPath("assets.js");
-        this.searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
-        this.auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
-        this.markupParsingConfiguration = createMarkupParsingConfiguration();
-        this.globalSearchEntries = new GlobalSearchEntries();
-        this.localSearchEntries = new LocalSearchEntries();
-        this.auxiliaryFilesLastUpdateTime = new HashMap<>();
+    private WebSite(Configuration siteConfig) {
+        cfg = siteConfig;
+        deployer = new Deployer(siteConfig.deployPath);
+        docMeta = siteConfig.docMeta;
+        registeredExtraJavaScripts = siteConfig.registeredExtraJavaScripts;
+        componentsRegistry = new WebSiteComponentsRegistry();
+        resourceResolver = new ResourcesResolverChain();
+        reactJsBundle = siteConfig.reactJsBundle;
+        tocJavaScript = WebResource.withPath("toc.js");
+        globalAssetsJavaScript = WebResource.withPath("assets.js");
+        searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
+        auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
+        markupParsingConfiguration = createMarkupParsingConfiguration();
+        globalSearchEntries = new GlobalSearchEntries();
+        localSearchEntries = new LocalSearchEntries();
+        auxiliaryFilesLastUpdateTime = new HashMap<>();
 
-        docMeta.setId(cfg.id);
-        if (cfg.isPreviewEnabled) {
+        docMeta.setId(siteConfig.id);
+        if (siteConfig.isPreviewEnabled) {
             docMeta.setPreviewEnabled(true);
         }
 
         componentsRegistry.setResourcesResolver(resourceResolver);
 
-        localResourceResolver = new MultipleLocalLocationsResourceResolver(cfg.docRootPath);
+        localResourceResolver = new MultipleLocalLocationsResourceResolver(siteConfig.docRootPath);
         resourceResolver.addResolver(localResourceResolver);
         resourceResolver.addResolver(new HttpBasedResourceResolver());
-        resourceResolver.initialize(findLookupLocations(cfg));
+        resourceResolver.initialize(findLookupLocations(siteConfig));
 
-        WebSiteResourcesProviders.add(new WebSiteLogoExtension(cfg.docRootPath));
-        WebSiteResourcesProviders.add(initFileBasedWebSiteExtension(cfg));
+        WebSiteResourcesProviders.add(new WebSiteLogoExtension(siteConfig.docRootPath));
+        WebSiteResourcesProviders.add(initFileBasedWebSiteExtension(siteConfig));
 
         reset();
     }
@@ -129,7 +129,7 @@ public class WebSite {
 
     public void regenerate() {
         reset();
-        generate();
+        parseAndDeploy();
     }
 
     public AuxiliaryFilesRegistry getAuxiliaryFilesRegistry() {
@@ -152,13 +152,25 @@ public class WebSite {
         return reactJsBundle;
     }
 
-    public void generate() {
-        reportPhase("building documentation");
+    public Map<String, Path> getOutsideDocsRequestedResources() {
+        return localResourceResolver.getOutsideDocRequestedResources();
+    }
+
+    public void parseAndDeploy() {
+        parse();
+        deploy();
+    }
+
+    public void parse() {
         createTopLevelToc();
         parseMarkups();
         parseFooter();
         updateTocWithPageSections();
         validateCollectedLinks();
+    }
+
+    public void deploy() {
+        reportPhase("deploying documentation");
         generatePages();
         generateSearchIndex();
         deployToc();
@@ -619,11 +631,22 @@ public class WebSite {
         }
 
         public WebSite deployTo(Path path) {
-            deployPath = path.toAbsolutePath();
-            WebSite webSite = new WebSite(this);
-            webSite.generate();
+            WebSite webSite = createWebSiteInstance(path);
+            webSite.parseAndDeploy();
 
             return webSite;
+        }
+
+        public WebSite parseOnly() {
+            WebSite webSite = createWebSiteInstance(Paths.get(""));
+            webSite.parse();
+
+            return webSite;
+        }
+
+        private WebSite createWebSiteInstance(Path path) {
+            deployPath = path.toAbsolutePath();
+            return new WebSite(this);
         }
     }
 }
