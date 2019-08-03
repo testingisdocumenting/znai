@@ -17,9 +17,9 @@
 package com.twosigma.utils;
 
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -76,10 +76,19 @@ public class FileUtils {
 
     public static void symlinkAwareCreateDirs(Path path) {
         try {
-        Path dir = Files.isSymbolicLink(path)
-                ? Files.readSymbolicLink(path)
-                : path;
+            Path dir = Files.isSymbolicLink(path)
+                    ? Files.readSymbolicLink(path)
+                    : path;
             Files.createDirectories(dir);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void copyFile(Path source, Path target) {
+        try {
+            Files.createDirectories(target.getParent());
+            Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
