@@ -100,6 +100,10 @@ public class TocItem {
         return dirName.isEmpty() && fileNameWithoutExtension.equals(INDEX);
     }
 
+    public boolean match(String dirName, String fileName) {
+        return getDirName().equals(dirName) && getFileNameWithoutExtension().equals(fileName);
+    }
+
     public Map<String, ?> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("sectionTitle", getSectionTitle());

@@ -23,7 +23,6 @@ import com.twosigma.utils.FileUtils;
 import com.twosigma.znai.cli.extension.CliCommandConfig;
 import com.twosigma.znai.html.HtmlPage;
 import com.twosigma.znai.html.reactjs.ReactJsBundle;
-import com.twosigma.znai.parser.MarkupTypes;
 import com.twosigma.znai.server.DocumentationServer;
 import com.twosigma.znai.server.preview.DocumentationPreview;
 import com.twosigma.znai.web.WebResource;
@@ -145,7 +144,7 @@ public class ZnaiCliApp {
                 WebResource.withPath(userDefinedFavicon, HtmlPage.FAVICON_PATH):
                 WebResource.fromResource(HtmlPage.FAVICON_PATH);
 
-        WebSite.Configuration webSiteCfg = WebSite.withToc(resolveTocPath()).
+        WebSite.Configuration webSiteCfg = WebSite.withRoot(config.getSourceRoot()).
                 withReactJsBundle(reactJsBundle).
                 withId(getDocId()).
                 withMarkupType(config.getMarkupType()).
@@ -159,15 +158,6 @@ public class ZnaiCliApp {
         this.webSite = config.isExportMode() ?
                 webSiteCfg.parseOnly():
                 webSiteCfg.deployTo(deployPath);
-    }
-
-    private Path resolveTocPath() {
-        switch (config.getMarkupType()) {
-            case MarkupTypes.SPHINX:
-                return config.getSourceRoot().resolve("index.xml");
-            default:
-                return config.getSourceRoot().resolve("toc");
-        }
     }
 
     private void createNew() {

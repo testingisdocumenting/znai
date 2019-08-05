@@ -20,18 +20,26 @@ import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.parser.commonmark.MarkdownParser;
 import com.twosigma.znai.parser.MarkupParser;
 import com.twosigma.znai.structure.PlainTextTocGenerator;
+import com.twosigma.znai.structure.PlainTextTocPatcher;
 import com.twosigma.znai.structure.TableOfContents;
 import com.twosigma.znai.structure.TocItem;
 
+import java.io.File;
 import java.nio.file.Path;
 
-import static com.twosigma.utils.FileUtils.fileTextContent;
-
 public class MarkdownParsingConfiguration implements MarkupParsingConfiguration {
+    public static final String TOC_PATCH_NAME = "toc-patch";
+
     @Override
-    public TableOfContents createToc(Path tocPath) {
-        TableOfContents toc = new PlainTextTocGenerator(filesExtension()).generate(fileTextContent(tocPath));
+    public TableOfContents createToc(ComponentsRegistry componentsRegistry) {
+        TableOfContents toc = new PlainTextTocGenerator(filesExtension()).generate(
+                componentsRegistry.resourceResolver().textContent("toc"));
         toc.addIndex();
+
+        if (componentsRegistry.resourceResolver().canResolve(TOC_PATCH_NAME)) {
+            String patch = componentsRegistry.resourceResolver().textContent(TOC_PATCH_NAME);
+            new PlainTextTocPatcher(toc).patch(patch);
+        }
 
         return toc;
     }
@@ -47,7 +55,9 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
     }
 
     @Override
-    public Path fullPath(Path root, TocItem tocItem) {
-        return root.resolve(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + "." + filesExtension());
+    public Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem) {
+        return componentsRegistry.resourceResolver().fullPath(tocItem.getDirName()
+                 + (tocItem.getDirName().isEmpty() ? "" : File.separator) +
+                (tocItem.getFileNameWithoutExtension() + "." + filesExtension()));
     }
 }

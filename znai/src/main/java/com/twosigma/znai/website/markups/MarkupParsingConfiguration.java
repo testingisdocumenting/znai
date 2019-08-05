@@ -24,11 +24,11 @@ import com.twosigma.znai.structure.TocItem;
 import java.nio.file.Path;
 
 public interface MarkupParsingConfiguration {
-    TableOfContents createToc(Path tocPath);
+    TableOfContents createToc(ComponentsRegistry componentsRegistry);
 
     MarkupParser createMarkupParser(ComponentsRegistry componentsRegistry);
 
     String filesExtension();
 
-    Path fullPath(Path root, TocItem tocItem);
+    Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem);
 }
