@@ -36,7 +36,7 @@ import org.apache.maven.plugins.annotations.Parameter
 
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
-        ZnaiCliRunner.run(new MavenPluginConsoleOuput(getLog()), [
+        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), [
                 'doc-id': docId,
                 source  : sourceRoot,
                 deploy  : deployRoot,

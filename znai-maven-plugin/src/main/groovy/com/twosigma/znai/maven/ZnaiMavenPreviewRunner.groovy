@@ -32,7 +32,7 @@ class ZnaiMavenPreviewRunner extends AbstractMojo {
 
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
-        ZnaiCliRunner.run(new MavenPluginConsoleOuput(getLog()), [
+        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), [
                 preview: null,
                 port   : port.toString(),
                 source : sourceRoot,

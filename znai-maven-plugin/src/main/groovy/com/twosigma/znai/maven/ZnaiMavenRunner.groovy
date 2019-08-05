@@ -18,18 +18,18 @@ package com.twosigma.znai.maven
 
 import com.twosigma.console.ConsoleOutput
 import com.twosigma.console.ConsoleOutputs
-import com.twosigma.znai.cli.DocumentationCliApp
-import com.twosigma.znai.cli.DocumentationCliConfig
+import com.twosigma.znai.cli.ZnaiCliApp
+import com.twosigma.znai.cli.ZnaiCliConfig
 
-class ZnaiCliRunner {
+class ZnaiMavenRunner {
     static void run(ConsoleOutput consoleOutput, Map<String, String> argsMap) {
         ConsoleOutputs.add(consoleOutput)
 
         try {
             String[] args = constructArgs(argsMap)
-            def config = new DocumentationCliConfig(args)
+            def config = new ZnaiCliConfig(args)
 
-            DocumentationCliApp.start(config)
+            ZnaiCliApp.start(config)
         } finally {
             ConsoleOutputs.remove(consoleOutput)
         }

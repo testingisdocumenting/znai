@@ -36,26 +36,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class DocumentationCliApp {
-    private DocumentationCliConfig config;
+public class ZnaiCliApp {
+    private ZnaiCliConfig config;
     private Path deployPath;
     private WebSite webSite;
     private ReactJsBundle reactJsBundle;
 
-    public DocumentationCliApp(DocumentationCliConfig cliConfig) {
+    public ZnaiCliApp(ZnaiCliConfig cliConfig) {
         System.setProperty("java.awt.headless", "true");
         this.config = cliConfig;
         this.deployPath = config.getDeployRoot().resolve(getDocId());
     }
 
-    public static void start(DocumentationCliConfig cliConfig) {
-        DocumentationCliApp cliApp = new DocumentationCliApp(cliConfig);
+    public static void start(ZnaiCliConfig cliConfig) {
+        ZnaiCliApp cliApp = new ZnaiCliApp(cliConfig);
         cliApp.start();
     }
 
     public static void main(String[] args) {
         ConsoleOutputs.add(new AnsiConsoleOutput());
-        start(new DocumentationCliConfig(args));
+        start(new ZnaiCliConfig(args));
     }
 
     private String getDocId() {
