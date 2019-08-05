@@ -44,9 +44,7 @@ visuals
     flow-diagrams
     PlantUml
 deployment
-    workflows
-    registration
-    TS-guides
+    static-content
 synergy-with-testing
     java
     REST

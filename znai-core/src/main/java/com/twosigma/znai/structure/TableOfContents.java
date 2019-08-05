@@ -44,6 +44,21 @@ public class TableOfContents {
         tocItems.add(0, TocItem.createIndex());
     }
 
+    public void removeTocItem(String dirName, String fileNameWithoutExtension) {
+        tocItems.removeIf(item -> item.match(dirName, fileNameWithoutExtension));
+    }
+
+    public void replaceTocItem(String originalDirName, String originalFileNameWithoutExtension,
+                               String newDirName, String newFileNameWithoutExtension) {
+        int idx = findTocItemIdx(originalDirName, originalFileNameWithoutExtension);
+        if (idx == -1) {
+            throw new IllegalArgumentException("can't find toc item: " +
+                    originalDirName + "/" + originalFileNameWithoutExtension);
+        }
+
+        tocItems.set(idx, new TocItem(newDirName, newFileNameWithoutExtension));
+    }
+
     public TocItem getIndex() {
         if (tocItems.isEmpty()) {
             return null;
@@ -77,10 +92,8 @@ public class TableOfContents {
     }
 
     public TocItem findTocItem(String dirName, String fileName) {
-        return getTocItems().stream().filter(ti ->
-                    ti.getDirName().equals(dirName) && ti.getFileNameWithoutExtension().equals(fileName))
-                    .findFirst()
-                    .orElse(null);
+        int idx = findTocItemIdx(dirName, fileName);
+        return idx == -1 ? null : tocItems.get(idx);
     }
 
     public List<Map<String, Object>> toListOfMaps() {
@@ -91,6 +104,16 @@ public class TableOfContents {
         bySectionTitle.forEach((sectionTitle, items) -> result.add(createSectionWithItems(sectionTitle, items)));
 
         return result;
+    }
+
+    private int findTocItemIdx(String dirName, String fileName) {
+        for (int idx = 0; idx < tocItems.size(); idx++) {
+            if (tocItems.get(idx).match(dirName, fileName)) {
+                return idx;
+            }
+        }
+
+        return -1;
     }
 
     private Map<String, Object> createSectionWithItems(String sectionTitle, List<TocItem> items) {

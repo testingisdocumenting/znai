@@ -1,0 +1,3 @@
+replace deployment/static-content deployment/workflows
+add deployment/registration
+add deployment/TS-guides

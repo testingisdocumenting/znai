@@ -120,9 +120,9 @@ public class WebSite {
         reset();
     }
 
-    public static Configuration withToc(Path path) {
+    public static Configuration withRoot(Path path) {
         Configuration configuration = new Configuration();
-        configuration.withTocPath(path);
+        configuration.withRootPath(path);
 
         return configuration;
     }
@@ -138,10 +138,6 @@ public class WebSite {
 
     public Path getDeployRoot() {
         return cfg.deployPath;
-    }
-
-    public Path getTocPath() {
-        return cfg.tocPath;
     }
 
     public DocMeta getDocMeta() {
@@ -278,7 +274,7 @@ public class WebSite {
 
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
-        toc = markupParsingConfiguration.createToc(cfg.tocPath);
+        toc = markupParsingConfiguration.createToc(componentsRegistry);
         docStructure = new WebSiteDocStructure(docMeta, toc);
         componentsRegistry.setDocStructure(docStructure);
     }
@@ -388,7 +384,7 @@ public class WebSite {
     }
 
     private Path markupPath(TocItem tocItem) {
-        return markupParsingConfiguration.fullPath(cfg.docRootPath, tocItem);
+        return markupParsingConfiguration.fullPath(componentsRegistry, cfg.docRootPath, tocItem);
     }
 
     private void generatePages() {
@@ -534,7 +530,6 @@ public class WebSite {
     public static class Configuration {
         private Path deployPath;
         private Path docRootPath;
-        private Path tocPath;
         private Path footerPath;
         private Path extensionsDefPath;
         private List<WebResource> webResources;
@@ -559,9 +554,8 @@ public class WebSite {
             return this;
         }
 
-        public Configuration withTocPath(Path path) {
-            tocPath = path.toAbsolutePath();
-            docRootPath = tocPath.getParent();
+        public Configuration withRootPath(Path path) {
+            docRootPath = path;
             return this;
         }
 

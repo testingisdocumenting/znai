@@ -25,12 +25,11 @@ import com.twosigma.znai.structure.TocItem;
 
 import java.nio.file.Path;
 
-import static com.twosigma.utils.FileUtils.fileTextContent;
-
 public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
     @Override
-    public TableOfContents createToc(Path tocPath) {
-        return new DocTreeTocGenerator(filesExtension()).generate(fileTextContent(tocPath));
+    public TableOfContents createToc(ComponentsRegistry componentsRegistry) {
+        return new DocTreeTocGenerator(filesExtension()).generate(
+                componentsRegistry.resourceResolver().textContent("index.xml"));
     }
 
     @Override
@@ -44,7 +43,7 @@ public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
     }
 
     @Override
-    public Path fullPath(Path root, TocItem tocItem) {
+    public Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem) {
         return root.resolve(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + "." + filesExtension());
     }
 }

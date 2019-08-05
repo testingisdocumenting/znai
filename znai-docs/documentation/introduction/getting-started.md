@@ -5,7 +5,6 @@
 * Runs auto-preview on a local server
 * Runs documentation server
 
-
 # Markdown
 
 Fastest way to learn Markdown is to go to [CommonMark](http://commonmark.org/help/) website 
@@ -13,10 +12,7 @@ and go through a 60 seconds cheatsheet or 10 minutes tutorial.
 
 # Installation
 
-[Optin](https://cmdb.twosigma.com/entities/mdoc-opt-in) to add the command line to your hosts.
-Check tool presence by running 
-
-:include-cli-command: znai --help
+:include-markdown: {firstAvailable: ["getting-started-installation-override.md", "getting-started-installation.md"]}
 
 # Scaffolding
 
@@ -49,4 +45,4 @@ Changes will be reflected in the browser.
 
 # Deploy
 
-See [documentation under Deployment](deployment/workflows)
+:include-markdown: {firstAvailable: ["getting-started-deploy-override.md", "getting-started-deploy.md"]}
