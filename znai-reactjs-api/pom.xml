@@ -28,4 +28,5 @@
 
     <artifactId>znai-reactjs-default-components</artifactId>
 
+    <description>this a placeholder for moving React default components and props</description>
 </project>
