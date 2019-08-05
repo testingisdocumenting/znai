@@ -19,27 +19,26 @@ package com.twosigma.znai.maven
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugin.MojoExecutionException
 import org.apache.maven.plugin.MojoFailureException
-import org.apache.maven.plugins.annotations.LifecyclePhase
 import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.plugins.annotations.Parameter
 
-@Mojo(name = "build", defaultPhase = LifecyclePhase.PREPARE_PACKAGE)
-    class ZnaiMavenBuildRunner extends AbstractMojo {
-    @Parameter
-    private String docId
-
+@Mojo(name = "export")
+class ZnaiMavenExportRunner extends AbstractMojo {
     @Parameter
     private String sourceRoot
 
-    @Parameter
-    private String deployRoot
+    @Parameter(defaultValue = '${project.build.directory}/znai-export')
+    private String exportRoot
+
+    @Parameter(defaultValue = "3333")
+    private Integer port
 
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
         ZnaiCliRunner.run(new MavenPluginConsoleOuput(getLog()), [
-                'doc-id': docId,
-                source  : sourceRoot,
-                deploy  : deployRoot,
+                export: exportRoot,
+                port  : port.toString(),
+                source: sourceRoot,
         ])
     }
 }
