@@ -19,23 +19,27 @@ package com.twosigma.znai.maven
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugin.MojoExecutionException
 import org.apache.maven.plugin.MojoFailureException
+import org.apache.maven.plugins.annotations.LifecyclePhase
 import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.plugins.annotations.Parameter
 
-@Mojo(name = "preview")
-class MDocMavenPreviewRunner extends AbstractMojo {
+@Mojo(name = "build", defaultPhase = LifecyclePhase.PREPARE_PACKAGE)
+class ZnaiMavenBuildRunner extends AbstractMojo {
+    @Parameter
+    private String docId
+
     @Parameter
     private String sourceRoot
 
-    @Parameter(defaultValue = "3333")
-    private Integer port
+    @Parameter
+    private String deployRoot
 
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
-        MDocCliRunner.run(new MavenPluginConsoleOuput(getLog()), [
-                preview: null,
-                port   : port.toString(),
-                source : sourceRoot,
+        ZnaiCliRunner.run(new MavenPluginConsoleOuput(getLog()), [
+                'doc-id': docId,
+                source  : sourceRoot,
+                deploy  : deployRoot,
         ])
     }
 }

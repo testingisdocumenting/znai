@@ -52,7 +52,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <docId>mdoc</docId>
+                    <docId>znai</docId>
                     <deployRoot>${project.build.directory}</deployRoot>
                     <sourceRoot>${project.basedir}/documentation</sourceRoot>
                     <port>3334</port>
