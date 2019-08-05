@@ -20,10 +20,10 @@ import org.junit.Test
 
 import static org.junit.Assert.assertEquals
 
-class ZnaiCliRunnerTest {
+class ZnaiMavenRunnerTest {
     @Test
     void "should handle params with no values"() {
-        def args = ZnaiCliRunner.constructArgs([
+        def args = ZnaiMavenRunner.constructArgs([
                 noValue: null,
                 foo: 'bar',
         ])

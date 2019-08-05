@@ -30,18 +30,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class DocumentationCliConfig {
+public class ZnaiCliConfig {
     private static final String PREVIEW_KEY = "preview";
     private static final String SERVE_KEY = "serve";
     private static final String GENERATE_KEY = "new";
     private static final String EXPORT_KEY = "export";
 
     public enum Mode {
+        BUILD("build"),
         PREVIEW("preview"),
         SERVE("serve"),
         EXPORT("export"),
         SCAFFOLD("scaffold new"),
-        NA("custom");
+        CUSTOM("custom");
 
         private final String label;
 
@@ -64,7 +65,7 @@ public class DocumentationCliConfig {
     private Mode mode;
     private List<String> specifiedCustomCommands;
 
-    public DocumentationCliConfig(String... args) {
+    public ZnaiCliConfig(String... args) {
         parseArgs(args);
     }
 
@@ -93,7 +94,7 @@ public class DocumentationCliConfig {
     }
 
     public boolean isGenerateOnlyMode() {
-        return mode == Mode.NA && !isCustomCommand();
+        return mode == Mode.BUILD;
     }
 
     public boolean isExportMode() {
@@ -216,7 +217,11 @@ public class DocumentationCliConfig {
             return Mode.EXPORT;
         }
 
-        return Mode.NA;
+        if (specifiedCustomCommands != null && !specifiedCustomCommands.isEmpty()) {
+            return Mode.CUSTOM;
+        }
+
+        return Mode.BUILD;
     }
 
     private void validateMode(CommandLine commandLine) {

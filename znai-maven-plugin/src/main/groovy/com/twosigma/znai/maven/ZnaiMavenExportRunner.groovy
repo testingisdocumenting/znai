@@ -35,7 +35,7 @@ class ZnaiMavenExportRunner extends AbstractMojo {
 
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
-        ZnaiCliRunner.run(new MavenPluginConsoleOuput(getLog()), [
+        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), [
                 export: exportRoot,
                 port  : port.toString(),
                 source: sourceRoot,
