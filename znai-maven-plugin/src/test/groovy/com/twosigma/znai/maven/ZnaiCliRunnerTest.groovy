@@ -16,8 +16,19 @@
 
 package com.twosigma.znai.maven
 
-import org.apache.maven.plugins.annotations.Mojo
+import org.junit.Test
 
-@Mojo(name = "preview")
-class ShadedMDocMavenPreviewRunner extends MDocMavenPreviewRunner {
+import static org.junit.Assert.assertEquals
+
+class ZnaiCliRunnerTest {
+    @Test
+    void "should handle params with no values"() {
+        def args = ZnaiCliRunner.constructArgs([
+                noValue: null,
+                foo: 'bar',
+        ])
+
+        String[] expectedArgs = ['--noValue', '--foo=bar']
+        assertEquals(expectedArgs, args)
+    }
 }

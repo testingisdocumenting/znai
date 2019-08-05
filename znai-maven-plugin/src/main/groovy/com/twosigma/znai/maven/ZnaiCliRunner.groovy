@@ -21,7 +21,7 @@ import com.twosigma.console.ConsoleOutputs
 import com.twosigma.znai.cli.DocumentationCliApp
 import com.twosigma.znai.cli.DocumentationCliConfig
 
-class MDocCliRunner {
+class ZnaiCliRunner {
     static void run(ConsoleOutput consoleOutput, Map<String, String> argsMap) {
         ConsoleOutputs.add(consoleOutput)
 
