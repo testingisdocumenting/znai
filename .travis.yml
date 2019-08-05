@@ -1,0 +1,13 @@
+language: java
+cache:
+  directories:
+  - $HOME/.m2
+  - $HOME/.npm
+  - node_modules
+dist: xenial
+services:
+  - xvfb
+addons:
+  chrome: stable
+
+script: mvn -B package
