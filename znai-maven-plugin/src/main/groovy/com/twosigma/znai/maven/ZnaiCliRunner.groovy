@@ -25,10 +25,14 @@ class ZnaiCliRunner {
     static void run(ConsoleOutput consoleOutput, Map<String, String> argsMap) {
         ConsoleOutputs.add(consoleOutput)
 
-        String[] args = constructArgs(argsMap)
-        def config = new DocumentationCliConfig(args)
+        try {
+            String[] args = constructArgs(argsMap)
+            def config = new DocumentationCliConfig(args)
 
-        DocumentationCliApp.start(config)
+            DocumentationCliApp.start(config)
+        } finally {
+            ConsoleOutputs.remove(consoleOutput)
+        }
     }
 
     static String[] constructArgs(Map<String, String> args) {
