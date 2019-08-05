@@ -62,10 +62,11 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <groovy.version>2.5.7</groovy.version>
-        <vertx.io.version>3.3.3</vertx.io.version>
+        <vertx.io.version>3.5.4</vertx.io.version>
         <commonmark.version>0.9.0</commonmark.version>
         <antlr.version>4.5</antlr.version>
-        <jackson.verson>2.9.5</jackson.verson>
+        <jackson.verson>2.9.9</jackson.verson>
+        <jackson.databind.verson>2.9.9.2</jackson.databind.verson>
         <webtau.version>0.30</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
     </properties>
@@ -225,7 +226,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson.verson}</version>
+                <version>${jackson.databind.verson}</version>
             </dependency>
 
             <dependency>
