@@ -27,7 +27,7 @@ class SearchBox extends Component {
             <div className="mdoc-search-popup-input-box">
                 <input
                     ref={(dom) => this.dom = dom}
-                    placeholder="Type to terms to search..."
+                    placeholder="Type terms to search..."
                     onKeyDown={this.onKeyDown}
                     value={this.state.value}
                     onChange={this.onInputChange}/>
