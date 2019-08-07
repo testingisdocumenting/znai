@@ -75,8 +75,6 @@ class SnippetContainer extends React.Component {
     }
 
     renderSnippet() {
-        const {title} = this.props
-
         return (
             <div className={this.snippetClassName}>
                 <this.props.snippetComponent {...this.props}/>
@@ -122,7 +120,7 @@ class SnippetContainer extends React.Component {
         }
 
         this.clipboard = new ClipboardJS(this.copyToClipboardNode, {
-            text: trigger => {
+            text: () => {
                 const {tokens, linesOfCode, tokensForClipboardProvider} = this.props
                 this.setState({displayCopied: true})
                 this.startRemoveFeedbackTimer()

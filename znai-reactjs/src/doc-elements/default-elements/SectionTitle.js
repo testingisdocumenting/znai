@@ -26,6 +26,7 @@ const SectionTitle = ({id, title}) => {
             <a href={"#" + id}><Icon id="link"/></a>
         </h1>
     ) : (
+        // eslint-disable-next-line
         <h1 className="empty-section-title" id='implicit-section'/>
     )
 }

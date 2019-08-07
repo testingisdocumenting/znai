@@ -21,10 +21,6 @@ import {imageAdditionalPreviewUrlParam} from './imagePreviewAdditionalUrlParam'
 import './AnnotatedImage.css'
 
 class AnnotatedImage extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         const {
             imageSrc,

@@ -23,7 +23,7 @@ const ApiSection = ({elementsLibrary, id, title, isSelected, height, content}) =
 
     return (
         <React.Fragment>
-            <a name={id} href={'#' + (isSelected ? '' : id)}>
+            <a name={id} href={isSelected ? '' : ('#' + id)}>
                 <div className={titleClassName}>
                     <CollapseIndicator isSelected={isSelected}/>
                     <div className="title">{title}</div>

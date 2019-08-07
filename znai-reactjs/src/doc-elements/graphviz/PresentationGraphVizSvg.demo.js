@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import React from 'react'
 import {createPresentationDemo} from '../demo-utils/PresentationDemo'
 
 export function graphVizSvgPresentationDemo(registry) {

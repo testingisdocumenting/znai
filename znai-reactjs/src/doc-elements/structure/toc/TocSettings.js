@@ -71,7 +71,7 @@ function Theme({theme}) {
     const className = 'toc-item' + (themeRegistry.currentTheme.name === theme.name ? ' selected' : '')
     return (
         <div className={className}>
-            <a href="#" onClick={(e) => selectTheme(e, theme.name)}>{theme.name}</a>
+            <a href="" onClick={(e) => selectTheme(e, theme.name)}>{theme.name}</a>
         </div>
     )
 }

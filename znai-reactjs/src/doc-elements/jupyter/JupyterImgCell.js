@@ -16,10 +16,10 @@
 
 import React from 'react'
 
-const JupyterImgCell = ({img, elementsLibrary}) => {
+const JupyterImgCell = ({img}) => {
     return (
         <div className="jupyter-cell jupyter-img content-block">
-            <img src={"data:image/png;base64," + img}/>
+            <img src={"data:image/png;base64," + img} alt="jupyter cell"/>
         </div>
     )
 }

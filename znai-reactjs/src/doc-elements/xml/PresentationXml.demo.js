@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import Xml from './Xml'
 import {createPresentationDemo} from '../demo-utils/PresentationDemo'
 
 export function xmlPresentationDemo(registry) {
