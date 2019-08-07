@@ -9,5 +9,7 @@ services:
   - xvfb
 addons:
   chrome: stable
-
+  apt:
+    packages:
+      - graphviz
 script: mvn -B package
