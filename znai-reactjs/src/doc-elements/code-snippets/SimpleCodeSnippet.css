@@ -15,7 +15,7 @@
  */
 
 .code-snippet-read-more {
-    color: var(--mdoc-brand-primary-color);
+    color: var(--znai-brand-primary-color);
     margin-top: 5px;
     cursor: pointer;
 }

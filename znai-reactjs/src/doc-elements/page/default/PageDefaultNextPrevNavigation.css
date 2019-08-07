@@ -15,7 +15,7 @@
  */
 
 .page-default-next-prev-navigation {
-    margin: var(--mdoc-space-above-next-prev-navigation) var(--mdoc-space-right-next-prev-navigation) var(--mdoc-space-below-next-prev-navigation) var(--mdoc-space-left-next-prev-navigation);
+    margin: var(--znai-space-above-next-prev-navigation) var(--znai-space-right-next-prev-navigation) var(--znai-space-below-next-prev-navigation) var(--znai-space-left-next-prev-navigation);
 
     display: flex;
     justify-content: space-between;
@@ -36,7 +36,7 @@
 .default-next-prev-navigation-button > .glyphicon-chevron-right,
 .default-next-prev-navigation-button > .glyphicon-chevron-left {
     font-size: 24px;
-    color: var(--mdoc-brand-primary-color);
+    color: var(--znai-brand-primary-color);
 }
 
 .default-next-prev-navigation-button > .glyphicon-chevron-right {

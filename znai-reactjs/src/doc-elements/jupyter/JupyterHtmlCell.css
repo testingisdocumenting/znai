@@ -26,5 +26,5 @@
 
 .jupyter-html table td,
 .jupyter-html table th {
-    border: 1px solid var(--mdoc-snippets-outer-border-color);
+    border: 1px solid var(--znai-snippets-outer-border-color);
 }

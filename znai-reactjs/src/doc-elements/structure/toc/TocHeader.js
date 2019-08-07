@@ -21,7 +21,7 @@ export default function TocHeader({docMeta, collapsed, onCollapseToggle, onHeade
     return (
         <div className="toc-panel-header">
             <div className="toc-panel-header-logo-and-title">
-                <div className="mdoc-documentation-logo"/>
+                <div className="znai-documentation-logo"/>
                 <div className="toc-panel-header-title"
                      onClick={onHeaderClick}>
                     {docMeta.title + " " + docMeta.type}

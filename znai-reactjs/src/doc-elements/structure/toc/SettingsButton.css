@@ -15,7 +15,7 @@
  */
 
 .toc-settings-button {
-    color: var(--mdoc-toc-panel-icon-color);
+    color: var(--znai-toc-panel-icon-color);
     height: 20px;
     margin-right: 20px;
 
@@ -24,5 +24,5 @@
 }
 
 .toc-settings-button.active {
-    color: var(--mdoc-toc-panel-icon-color-active);
+    color: var(--znai-toc-panel-icon-color-active);
 }

@@ -55,12 +55,12 @@
 }
 
 .paragraph.attention.note {
-    border-left: 3px solid var(--mdoc-brand-primary-color);
+    border-left: 3px solid var(--znai-brand-primary-color);
     background: #009ba615;
 }
 
 .paragraph.attention.note .icon-part {
-    color: var(--mdoc-brand-primary-color);
+    color: var(--znai-brand-primary-color);
 }
 
 .paragraph.attention.warning {

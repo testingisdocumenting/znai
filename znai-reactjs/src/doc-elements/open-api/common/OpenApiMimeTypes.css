@@ -15,8 +15,8 @@
  */
 
 .open-api-mime-types {
-    font-size: var(--mdoc-small-meta-text-size);
-    color: var(--mdoc-api-key-color);
+    font-size: var(--znai-small-meta-text-size);
+    color: var(--znai-api-key-color);
     margin-top: -8px;
     margin-bottom: 8px;
 }

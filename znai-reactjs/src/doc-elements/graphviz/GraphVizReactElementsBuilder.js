@@ -174,11 +174,11 @@ export default class GraphVizReactElementsBuilder {
         colorGroup = colorGroup.toLowerCase()
 
         return {
-            line: `var(--mdoc-diagram-${colorGroup}-line)`,
-            fill: `var(--mdoc-diagram-${colorGroup}-fill)`,
+            line: `var(--znai-diagram-${colorGroup}-line)`,
+            fill: `var(--znai-diagram-${colorGroup}-fill)`,
             text: this.isInvertedTextColor() ?
-                `var(--mdoc-diagram-${colorGroup}-text-inverse)`:
-                `var(--mdoc-diagram-${colorGroup}-text)`
+                `var(--znai-diagram-${colorGroup}-text-inverse)`:
+                `var(--znai-diagram-${colorGroup}-text)`
         }
     }
 

@@ -23,7 +23,7 @@
 }
 
 .presentation-code-comment.divider {
-    border-top: 1px var(--mdoc-brand-primary-color) solid;
+    border-top: 1px var(--znai-brand-primary-color) solid;
 }
 
 .code-bullets {
@@ -33,17 +33,17 @@
 }
 
 .code-bullets.hidden-explanation {
-    color: var(--mdoc-snippets-explanation-background-color);
-    background-color: var(--mdoc-snippets-explanation-background-color);
-    border-top: var(--mdoc-snippets-outer-border-color) 1px solid;
-    border-bottom: var(--mdoc-snippets-outer-border-color) 1px solid;
+    color: var(--znai-snippets-explanation-background-color);
+    background-color: var(--znai-snippets-explanation-background-color);
+    border-top: var(--znai-snippets-outer-border-color) 1px solid;
+    border-bottom: var(--znai-snippets-outer-border-color) 1px solid;
     padding: 0;
     cursor: pointer;
 }
 
 .wide-screen .code-bullets.hidden-explanation {
-    border-left: var(--mdoc-snippets-outer-border-color) 1px solid;
-    border-right: var(--mdoc-snippets-outer-border-color) 1px solid;
+    border-left: var(--znai-snippets-outer-border-color) 1px solid;
+    border-right: var(--znai-snippets-outer-border-color) 1px solid;
 }
 
 .code-bullets .spoiler-message {
@@ -56,8 +56,8 @@
 }
 
 .hidden-explanation .circle-badge {
-    color: var(--mdoc-snippets-explanation-background-color);
-    background-color: var(--mdoc-snippets-explanation-background-color);
+    color: var(--znai-snippets-explanation-background-color);
+    background-color: var(--znai-snippets-explanation-background-color);
 }
 
 .code-with-inlined-comments.with-highlighted-line pre {

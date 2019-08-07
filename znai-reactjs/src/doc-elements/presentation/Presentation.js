@@ -50,7 +50,7 @@ class Presentation extends Component {
             <div className="presentation" onClick={this.onMouseClick}>
                 <div className="header">
                     <div className="product-info">
-                        <div className="mdoc-documentation-logo"/>
+                        <div className="znai-documentation-logo"/>
                         <div className="product-title">{docMeta.title}</div>
                     </div>
 

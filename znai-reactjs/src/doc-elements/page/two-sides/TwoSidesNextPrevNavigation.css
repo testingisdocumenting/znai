@@ -16,15 +16,15 @@
 
 .two-sides-prev-navigation-button,
 .two-sides-next-navigation-button {
-    margin-top: var(--mdoc-space-above-next-prev-navigation);
-    margin-bottom: var(--mdoc-space-below-next-prev-navigation);
+    margin-top: var(--znai-space-above-next-prev-navigation);
+    margin-bottom: var(--znai-space-below-next-prev-navigation);
 }
 
 .two-sides-prev-navigation-button {
-    margin-left: calc(var(--mdoc-space-left-next-prev-navigation) - var(--mdoc-two-sides-horizontal-spacing));
+    margin-left: calc(var(--znai-space-left-next-prev-navigation) - var(--znai-two-sides-horizontal-spacing));
 }
 
 .two-sides-next-navigation-button {
-    margin-right: calc(var(--mdoc-space-right-next-prev-navigation) - var(--mdoc-two-sides-horizontal-spacing));
+    margin-right: calc(var(--znai-space-right-next-prev-navigation) - var(--znai-two-sides-horizontal-spacing));
     text-align: right;
 }

@@ -46,7 +46,7 @@ class GraphVizSvg extends Component {
                     <filter id={dropShadowFilterId}>
                         <feMorphology operator="dilate" radius="3" in="SourceAlpha" result="thicken" />
                         <feGaussianBlur in="thicken" stdDeviation="1" result="blurred" />
-                        <feFlood floodColor="var(--mdoc-diagram-node-shadow-color)" result="glowColor" />
+                        <feFlood floodColor="var(--znai-diagram-node-shadow-color)" result="glowColor" />
                         <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
                         <feMerge>
                             <feMergeNode in="softGlow_colored"/>

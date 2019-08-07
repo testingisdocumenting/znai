@@ -36,12 +36,12 @@
 }
 
 .doc-utils-desc-signature {
-    font-family: var(--mdoc-code-font-family);
+    font-family: var(--znai-code-font-family);
 }
 
 .doc-utils-desc-annotation {
     margin-right: 8px;
-    color: var(--mdoc-keyword-color);
+    color: var(--znai-keyword-color);
 }
 
 .doc-utils-desc-name {
@@ -53,12 +53,12 @@
 }
 
 .doc-utils-desc-parameter-list:before {
-    color: var(--mdoc-punctuation-color);
+    color: var(--znai-punctuation-color);
     content: '(';
 }
 
 .doc-utils-desc-parameter-list:after {
-    color: var(--mdoc-punctuation-color);
+    color: var(--znai-punctuation-color);
     content: ')';
 }
 
@@ -71,7 +71,7 @@
 }
 
 .doc-utils-desc-parameter-list > .doc-utils-desc-parameter:after {
-    color: var(--mdoc-punctuation-color);
+    color: var(--znai-punctuation-color);
     content: ', ';
 }
 
@@ -84,12 +84,12 @@
 }
 
 .doc-utils-desc-optional:before {
-    color: var(--mdoc-punctuation-color);
+    color: var(--znai-punctuation-color);
     content: '[';
 }
 
 .doc-utils-desc-optional:after {
-    color: var(--mdoc-punctuation-color);
+    color: var(--znai-punctuation-color);
     content: ']';
 }
 

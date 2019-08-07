@@ -49,7 +49,7 @@
 }
 
 .documentation-preparation > .status-and-progress > .status-message {
-    color: var(--mdoc-meta-color);
+    color: var(--znai-meta-color);
     font-size: 26px;
     line-height: 26px;
 }
@@ -58,7 +58,7 @@
     display: grid;
     grid-template-columns: auto 1fr;
     grid-column-gap: 20px;
-    font-family: var(--mdoc-code-font-family);
+    font-family: var(--znai-code-font-family);
     margin-top: 40px;
 }
 

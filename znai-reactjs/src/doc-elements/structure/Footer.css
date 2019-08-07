@@ -15,11 +15,11 @@
  */
 
 .footer {
-    color: var(--mdoc-footer-color);
-    background-color: var(--mdoc-footer-background-color);
+    color: var(--znai-footer-color);
+    background-color: var(--znai-footer-background-color);
 
-    padding: 30px var(--mdoc-single-side-horizontal-min-spacing);
+    padding: 30px var(--znai-single-side-horizontal-min-spacing);
 
-    margin-left: calc(-1 * var(--mdoc-single-side-horizontal-min-spacing));
-    margin-right: calc(-1 * var(--mdoc-single-side-horizontal-min-spacing));
+    margin-left: calc(-1 * var(--znai-single-side-horizontal-min-spacing));
+    margin-right: calc(-1 * var(--znai-single-side-horizontal-min-spacing));
 }

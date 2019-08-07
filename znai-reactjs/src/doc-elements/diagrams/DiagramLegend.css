@@ -14,33 +14,33 @@
  * limitations under the License.
  */
 
-.mdoc-diagram-legend {
+.znai-diagram-legend {
     margin-top: 8px;
     margin-bottom: 8px;
 }
 
-.mdoc-diagram-legend-single-line {
+.znai-diagram-legend-single-line {
     display: flex;
 }
 
-.mdoc-diagram-legend-entry {
+.znai-diagram-legend-entry {
     display: flex;
     align-items: center;
     margin-right: 16px;
 }
 
-.mdoc-diagram-legend-box {
+.znai-diagram-legend-box {
     width: 48px;
     height: 18px;
     margin-right: 8px;
 }
 
-.mdoc-diagram-legend-text {
-    font-size: var(--mdoc-small-meta-text-size);
+.znai-diagram-legend-text {
+    font-size: var(--znai-small-meta-text-size);
 }
 
-.mdoc-diagram-legend-message {
-    font-size: var(--mdoc-small-meta-text-size);
+.znai-diagram-legend-message {
+    font-size: var(--znai-small-meta-text-size);
     font-style: italic;
     margin-top: 4px;
 }

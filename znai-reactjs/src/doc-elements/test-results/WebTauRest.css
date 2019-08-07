@@ -20,21 +20,21 @@
 
 .webtau-rest .method-and-url {
     padding-top: 10px;
-    font-family: var(--mdoc-code-font-family);
+    font-family: var(--znai-code-font-family);
 }
 
 .webtau-rest .method-and-url .method {
-    color: var(--mdoc-keyword-color);
+    color: var(--znai-keyword-color);
     font-weight: bold;
     margin-right: 15px;
 }
 
 .webtau-rest .method-and-url .url {
-    color: var(--mdoc-rest-link-color);
+    color: var(--znai-rest-link-color);
 }
 
 .webtau-rest .rest-payload .caption {
-    color: var(--mdoc-meta-color);
+    color: var(--znai-meta-color);
     text-transform: uppercase;
     margin-top: 10px;
 }

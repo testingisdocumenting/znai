@@ -58,14 +58,14 @@ class SearchPopup extends Component {
         const firstId = hasResult ? ids[selectedIdx] : null
         const previewDetails = hasResult ? search.previewDetails(firstId, this.state.queryResult) : null
 
-        const className = "mdoc-search-popup" + (tocCollapsed ? "" : " visible-toc") + (hasResult ? " with-results" : "")
+        const className = "znai-search-popup" + (tocCollapsed ? "" : " visible-toc") + (hasResult ? " with-results" : "")
         const searchBox = search ? <SearchBox onChange={this.onQueryChange} /> : null
 
         return (
             <div className={className}>
-                <div className="mdoc-search-overlay" onClick={onClose} />
+                <div className="znai-search-overlay" onClick={onClose} />
 
-                <div className="mdoc-search-popup-panel">
+                <div className="znai-search-popup-panel">
                     {searchBox}
                     {previewDetails ? this.renderPreview(ids, selectedIdx, previewDetails) : null}
                 </div>
@@ -79,14 +79,14 @@ class SearchPopup extends Component {
 
         return (
             <div className="toc-and-preview">
-                <div className="mdoc-search-toc-panel">
+                <div className="znai-search-toc-panel">
                     <SearchToc ids={ids}
                                selectedIdx={selectedIdx}
                                search={search}
                                onSelect={this.changeSelectedIdx}
                                onJump={this.jumpToIdx}/>
                 </div>
-                <div className="mdoc-search-preview-panel">
+                <div className="znai-search-preview-panel">
                     <SearchPreview key={selectedIdx} elementsLibrary={elementsLibrary} {...previewDetails}/>
                 </div>
             </div>

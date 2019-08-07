@@ -23,7 +23,7 @@
 }
 
 .lang-function > .function-name {
-    font-family: var(--mdoc-code-font-family);
+    font-family: var(--znai-code-font-family);
 }
 
 .lang-function > .function-name > .function-params-as-str {
@@ -50,12 +50,12 @@
     justify-self: end;
     padding-right: 10px;
     padding-bottom: 6px;
-    border-right: 1px solid var(--mdoc-brand-primary-color);
+    border-right: 1px solid var(--znai-brand-primary-color);
 }
 
 .lang-function .function-params > .name-and-type > .name {
-    color: var(--mdoc-property-color);
-    font-family: var(--mdoc-code-font-family);
+    color: var(--znai-property-color);
+    font-family: var(--znai-code-font-family);
 }
 
 .lang-function .function-params > .name-and-type > .type {

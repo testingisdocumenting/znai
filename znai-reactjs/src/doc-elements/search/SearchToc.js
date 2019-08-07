@@ -22,7 +22,7 @@ export default class SearchToc extends Component {
         const {ids, selectedIdx, onSelect, onJump, search} = this.props
 
         return (
-            <div className="mdoc-search-toc-items">
+            <div className="znai-search-toc-items">
                 {ids.map((id, idx) => {
                     const searchEntry = search.findSearchEntryById(id)
                     return (

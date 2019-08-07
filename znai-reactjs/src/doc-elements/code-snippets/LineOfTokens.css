@@ -20,7 +20,7 @@
 }
 
 .code-line.highlight {
-    background: var(--mdoc-highlighted-background-color);
+    background: var(--znai-highlighted-background-color);
     padding: 4px 0;
     border-radius: 4px;
 }

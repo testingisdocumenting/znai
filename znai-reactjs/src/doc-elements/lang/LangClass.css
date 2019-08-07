@@ -19,7 +19,7 @@
 }
 
 .lang-class .class-name {
-    font-family: var(--mdoc-code-font-family);
+    font-family: var(--znai-code-font-family);
     font-weight: bold;
 }
 

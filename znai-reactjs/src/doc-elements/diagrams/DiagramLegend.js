@@ -23,13 +23,13 @@ class DiagramLegend extends Component {
         const {clickableNodes} = this.props
 
         return (
-            <div className="mdoc-diagram-legend content-block">
-                <div className="mdoc-diagram-legend-single-line">
+            <div className="znai-diagram-legend content-block">
+                <div className="znai-diagram-legend-single-line">
                     {this.renderLegend()}
                 </div>
 
                 {clickableNodes && (
-                    <div className="mdoc-diagram-legend-message">diagram nodes are clickable</div>
+                    <div className="znai-diagram-legend-message">diagram nodes are clickable</div>
                 )}
             </div>
         )
@@ -42,9 +42,9 @@ class DiagramLegend extends Component {
             Object.keys(legend).map(colorGroup => {
                 return (
                     <div key={colorGroup}
-                         className="mdoc-diagram-legend-entry">
-                        <div className="mdoc-diagram-legend-box" style={styleForColorGroup(colorGroup)}/>
-                        <div className="mdoc-diagram-legend-text">{legend[colorGroup]}</div>
+                         className="znai-diagram-legend-entry">
+                        <div className="znai-diagram-legend-box" style={styleForColorGroup(colorGroup)}/>
+                        <div className="znai-diagram-legend-text">{legend[colorGroup]}</div>
                     </div>
                 )
             })
@@ -55,9 +55,9 @@ class DiagramLegend extends Component {
 
 function styleForColorGroup(colorGroup) {
     return {
-        border: `1px solid var(--mdoc-diagram-${colorGroup}-line)`,
-        color: `1px solid var(--mdoc-diagram-${colorGroup}-text)`,
-        backgroundColor: `var(--mdoc-diagram-${colorGroup}-fill)`,
+        border: `1px solid var(--znai-diagram-${colorGroup}-line)`,
+        color: `1px solid var(--znai-diagram-${colorGroup}-text)`,
+        backgroundColor: `var(--znai-diagram-${colorGroup}-fill)`,
     }
 }
 

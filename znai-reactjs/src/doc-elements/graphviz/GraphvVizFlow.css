@@ -24,8 +24,8 @@
     margin-top: 20px;
     margin-bottom: 20px;
 
-    border-top: 1px solid var(--mdoc-snippets-outer-border-color);
-    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
+    border-top: 1px solid var(--znai-snippets-outer-border-color);
+    border-bottom: 1px solid var(--znai-snippets-outer-border-color);
 }
 
 .graphviz-diagram-all-content .expand {
@@ -42,7 +42,7 @@
 .graphviz-diagram-all-content .diagram-explanation-panel {
     max-height: 100vh;
     flex-basis: 300px;
-    border-left: 1px solid var(--mdoc-snippets-outer-border-color);
+    border-left: 1px solid var(--znai-snippets-outer-border-color);
     padding-left: 10px;
 }
 

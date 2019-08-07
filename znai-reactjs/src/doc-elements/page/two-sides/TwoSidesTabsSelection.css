@@ -22,9 +22,9 @@
     height: 36px;
     width: 100%;
 
-    background-color: var(--mdoc-snippets-background-color);
-    margin-left: calc(var(--mdoc-two-sides-horizontal-spacing) * -1);
-    padding-left: var(--mdoc-two-sides-horizontal-spacing);
+    background-color: var(--znai-snippets-background-color);
+    margin-left: calc(var(--znai-two-sides-horizontal-spacing) * -1);
+    padding-left: var(--znai-two-sides-horizontal-spacing);
 
     z-index: 100;
 }

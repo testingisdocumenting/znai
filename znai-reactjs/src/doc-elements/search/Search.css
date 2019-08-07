@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-.mdoc-search-overlay {
+.znai-search-overlay {
     position: fixed;
     left: 0;
     top: 0;
@@ -23,10 +23,10 @@
     z-index: 1000;
     width: 100%;
     height: 100%;
-    background: var(--mdoc-search-overlay-background-color);
+    background: var(--znai-search-overlay-background-color);
 }
 
-.mdoc-search-popup-panel {
+.znai-search-popup-panel {
     display: flex;
     flex-direction: column;
 
@@ -45,29 +45,29 @@
     z-index: 1001;
 }
 
-.mdoc-search-popup.visible-toc .mdoc-search-popup-panel {
+.znai-search-popup.visible-toc .znai-search-popup-panel {
     right: 0;
     left: 300px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.mdoc-search-popup .toc-and-preview {
+.znai-search-popup .toc-and-preview {
     flex-direction: row;
     display: flex;
     height: 100%;
-    border: 1px solid var(--mdoc-search-border-color);
+    border: 1px solid var(--znai-search-border-color);
     border-top: none;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     background: rgba(255, 255, 255, 1)
 }
 
-.mdoc-search-toc-panel {
+.znai-search-toc-panel {
     flex: 0 0 300px;
-    border-right: 1px solid var(--mdoc-search-border-color);
+    border-right: 1px solid var(--znai-search-border-color);
 
-    background-color: var(--mdoc-search-toc-panel-background-color);
+    background-color: var(--znai-search-toc-panel-background-color);
 
     overflow-x: hidden;
     overflow-y: auto;
@@ -75,97 +75,97 @@
     cursor: pointer;
 }
 
-.mdoc-search-preview-panel {
+.znai-search-preview-panel {
     flex: 1;
 
-    background-color: var(--mdoc-background-color);
+    background-color: var(--znai-background-color);
     height: 100%;
 
     padding: 10px;
     overflow-y: auto;
 }
 
-.mdoc-search-preview-panel mark {
-    background-color: var(--mdoc-search-preview-result-highlight-background-color);
-    color: var(--mdoc-search-preview-result-highlight-color);
+.znai-search-preview-panel mark {
+    background-color: var(--znai-search-preview-result-highlight-background-color);
+    color: var(--znai-search-preview-result-highlight-color);
 }
 
-.mdoc-search-result-preview {
+.znai-search-result-preview {
 }
 
-.mdoc-search-popup .mdoc-search-preview-panel::-webkit-scrollbar,
-.mdoc-search-popup .mdoc-search-toc-panel::-webkit-scrollbar {
+.znai-search-popup .znai-search-preview-panel::-webkit-scrollbar,
+.znai-search-popup .znai-search-toc-panel::-webkit-scrollbar {
     height: 3px;
     width: 3px;
 }
 
-.mdoc-search-popup .mdoc-search-preview-panel::-webkit-scrollbar-thumb {
-    background: var(--mdoc-search-preview-panel-scrollbar-color);
+.znai-search-popup .znai-search-preview-panel::-webkit-scrollbar-thumb {
+    background: var(--znai-search-preview-panel-scrollbar-color);
 }
 
-.mdoc-search-popup .mdoc-search-toc-panel::-webkit-scrollbar-thumb {
-    background: var(--mdoc-search-toc-panel-scrollbar-color);
+.znai-search-popup .znai-search-toc-panel::-webkit-scrollbar-thumb {
+    background: var(--znai-search-toc-panel-scrollbar-color);
 }
 
-.mdoc-search-popup .mdoc-search-preview-panel::-webkit-scrollbar-track,
-.mdoc-search-popup .mdoc-search-toc-panel::-webkit-scrollbar-track {
+.znai-search-popup .znai-search-preview-panel::-webkit-scrollbar-track,
+.znai-search-popup .znai-search-toc-panel::-webkit-scrollbar-track {
     background: 0;
 }
 
-.mdoc-search-popup-input-box {
+.znai-search-popup-input-box {
 }
 
-.mdoc-search-popup-input-box input {
-    background-color: var(--mdoc-search-popup-input-box-background-color);
-    color: var(--mdoc-search-popup-input-box-color);
+.znai-search-popup-input-box input {
+    background-color: var(--znai-search-popup-input-box-background-color);
+    color: var(--znai-search-popup-input-box-color);
 
     padding: 15px;
     width: 100%;
     outline: none;
-    border: 1px solid var(--mdoc-search-border-color);
+    border: 1px solid var(--znai-search-border-color);
     border-radius: 8px;
 }
 
-.mdoc-search-popup.with-results .mdoc-search-popup-input-box input {
+.znai-search-popup.with-results .znai-search-popup-input-box input {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.mdoc-search-toc-items {
+.znai-search-toc-items {
 }
 
-.mdoc-search-toc-item {
+.znai-search-toc-item {
     display: flex;
     align-items: baseline;
     padding: 10px;
 }
 
-.mdoc-search-toc-item.selected {
+.znai-search-toc-item.selected {
     background: #25ADB7;
     color: white;
 }
 
-.mdoc-search-toc-page-title {
-    color: var(--mdoc-search-toc-page-title-color);
+.znai-search-toc-page-title {
+    color: var(--znai-search-toc-page-title-color);
     flex: 1;
 }
 
-.selected .mdoc-search-toc-page-title {
-    color: var(--mdoc-search-toc-selected-page-title-color);
+.selected .znai-search-toc-page-title {
+    color: var(--znai-search-toc-selected-page-title-color);
 }
 
-.mdoc-search-toc-section-title {
-    color: var(--mdoc-search-toc-page-section-color);
+.znai-search-toc-section-title {
+    color: var(--znai-search-toc-page-section-color);
     padding-left: 10px;
     flex: 1;
 }
 
-.selected .mdoc-search-toc-section-title {
-    color: var(--mdoc-search-toc-selected-page-section-color);
+.selected .znai-search-toc-section-title {
+    color: var(--znai-search-toc-selected-page-section-color);
 }
 
 @media screen and (min-width: 1600px) {
-    .mdoc-search-popup-panel {
-        width: calc(320px + var(--mdoc-single-column-full-width));
+    .znai-search-popup-panel {
+        width: calc(320px + var(--znai-single-column-full-width));
     }
 }

@@ -36,7 +36,7 @@
 }
 
 .api-param-name-type-toggle > .type-and-toggle > .expand-toggle {
-    color: var(--mdoc-brand-primary-color);
+    color: var(--znai-brand-primary-color);
 
     width: 10px;
     margin-right: 5px;
@@ -50,9 +50,9 @@
 }
 
 .api-param-description-cell {
-    color: var(--mdoc-api-description-color);
-    font-size: var(--mdoc-smaller-text-size);
-    font-family: var(--mdoc-regular-font-family);
+    color: var(--znai-api-description-color);
+    font-size: var(--znai-smaller-text-size);
+    font-family: var(--znai-regular-font-family);
     padding-right: 8px;
 }
 
@@ -63,7 +63,7 @@
 .api-param-cell {
     padding-top: 16px;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--mdoc-snippets-inner-border-color);
+    border-bottom: 1px solid var(--znai-snippets-inner-border-color);
 }
 
 .api-param-cell:nth-child(-n+2) {
@@ -75,14 +75,14 @@
 }
 
 .generic-api-single-row-param {
-    max-width: var(--mdoc-single-column-partial-width);
+    max-width: var(--znai-single-column-partial-width);
 
     display: flex;
-    font-size: var(--mdoc-smaller-text-size);
-    font-family: var(--mdoc-regular-font-family);
+    font-size: var(--znai-smaller-text-size);
+    font-family: var(--znai-regular-font-family);
 
     padding: 16px 8px;
-    border-bottom: 1px solid var(--mdoc-snippets-inner-border-color);
+    border-bottom: 1px solid var(--znai-snippets-inner-border-color);
 }
 
 .api-param-cell.expanded {
@@ -91,12 +91,12 @@
 }
 
 .api-param-name-type-toggle > .name {
-    color: var(--mdoc-api-key-color);
+    color: var(--znai-api-key-color);
 }
 
 .api-param-name-type-toggle > .type-and-toggle >.type {
-    color: var(--mdoc-meta-color);
-    font-size: var(--mdoc-small-meta-text-size);
+    color: var(--znai-meta-color);
+    font-size: var(--znai-small-meta-text-size);
     flex: 1;
     justify-self: end;
 }

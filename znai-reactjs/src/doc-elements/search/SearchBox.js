@@ -24,7 +24,7 @@ class SearchBox extends Component {
 
     render() {
         return (
-            <div className="mdoc-search-popup-input-box">
+            <div className="znai-search-popup-input-box">
                 <input
                     ref={(dom) => this.dom = dom}
                     placeholder="Type terms to search..."
