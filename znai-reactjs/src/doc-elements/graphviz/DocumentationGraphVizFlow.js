@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 import GraphVizSvg from './GraphVizSvg'
 import {expandId} from './gvUtils'
@@ -30,6 +30,7 @@ class DocumentationGraphVizFlow extends Component {
     render() {
         const {elementsLibrary, diagram, colors, slides} = this.props
         const {idsToHighlight} = this.state
+        const slideLabelPrefix = '//'
 
         return <div className="graphviz-diagram-all-content">
             <div className="diagram-panel">
@@ -40,7 +41,7 @@ class DocumentationGraphVizFlow extends Component {
                     slides.map((slide, idx) => (
                         <div className="diagram-slide" key={idx} onMouseOver={() => this.highlightNodes(slide.ids)}>
                             <div className="diagram-slide-labels" >
-                                {slide.ids.map((id) => <div key="id">// {id}</div>)}
+                                {slide.ids.map((id) => <div key="id">{slideLabelPrefix} {id}</div>)}
                             </div>
                             <elementsLibrary.DocElement {...this.props} content={slide.content}/>
                         </div>

@@ -23,7 +23,6 @@ import {elementsLibrary} from '../DefaultElementsLibrary'
 
 import {TwoSidesLayoutRightPart} from '../page/two-sides/TwoSidesLayout'
 
-import Paragraph from '../default-elements/Paragraph'
 import {Page} from '../page/Page'
 
 import './tokens.css'
