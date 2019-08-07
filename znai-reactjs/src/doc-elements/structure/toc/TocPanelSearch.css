@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-.mdoc-toc-panel-search-area {
+.znai-toc-panel-search-area {
     padding: 8px 30px 8px 30px;
-    border-bottom: 1px solid var(--mdoc-toc-panel-border-color);
+    border-bottom: 1px solid var(--znai-toc-panel-border-color);
 }
 
-.mdoc-toc-panel-search {
-    background-color: var(--mdoc-search-box-background-color);
-    color: var(--mdoc-search-box-text-color);
-    font-style: var(--mdoc-smaller-text-size);
+.znai-toc-panel-search {
+    background-color: var(--znai-search-box-background-color);
+    color: var(--znai-search-box-text-color);
+    font-style: var(--znai-smaller-text-size);
 
     padding: 4px 8px;
     border-radius: 6px;
@@ -30,11 +30,11 @@
     cursor: pointer;
 }
 
-.mdoc-toc-panel-search-icon-and-text {
+.znai-toc-panel-search-icon-and-text {
     display: flex;
     align-items: center;
 }
 
-.mdoc-search-icon {
+.znai-search-icon {
     margin-right: 8px;
 }

@@ -41,19 +41,19 @@ export class Landing extends React.Component {
         return (
             <WithTheme>{() =>
                 <React.Fragment>
-                    <div className="mdoc-landing">
-                        <div className="mdoc-landing-categories-toc-area">
+                    <div className="znai-landing">
+                        <div className="znai-landing-categories-toc-area">
                             <TocPanel toc={documentationsToc}
                                       docMeta={landingDocMeta}
                                       collapsed={tocCollapsed}
                                       onToggle={this.tocCollapseToggle}/>
                         </div>
 
-                        <div className="mdoc-landing-documentations-area">
+                        <div className="znai-landing-documentations-area">
                             <div className="centered">
                                 <FilterInput filterText={filterText} onChange={this.onFilterChange}/>
 
-                                <div className="mdoc-landing-categories">
+                                <div className="znai-landing-categories">
                                     {
                                         categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs
                                             key={categoryWithDocs.category}
@@ -83,7 +83,7 @@ export class Landing extends React.Component {
 
 function CategoryWithDocs({category, documentations}) {
     return (
-        <div className="mdoc-landing-category-with-documentations">
+        <div className="znai-landing-category-with-documentations">
             <Category category={category}/>
             <Documentations documentations={documentations}/>
         </div>
@@ -92,7 +92,7 @@ function CategoryWithDocs({category, documentations}) {
 
 function Category({category}) {
     return (
-        <div className="mdoc-landing-category" id={anchorIdFromName(category)}>
+        <div className="znai-landing-category" id={anchorIdFromName(category)}>
             <div className="small-line"/>
             <div className="category">{category}</div>
             <div className="large-line"/>
@@ -102,7 +102,7 @@ function Category({category}) {
 
 function Documentations({documentations}) {
     return (
-        <div className="mdoc-landing-documentations">
+        <div className="znai-landing-documentations">
             {documentations.map(d => <Documentation key={d.id} documentation={d}/>)}
         </div>
     )
@@ -114,7 +114,7 @@ function Documentation({documentation}) {
         documentation.id + '/'
 
     return (
-        <div className="mdoc-landing-documentation">
+        <div className="znai-landing-documentation">
             <a href={url} target="_blank" rel="noopener noreferrer">
                 <div className="name">{documentation.name}</div>
                 <div className="description">{documentation.description}</div>

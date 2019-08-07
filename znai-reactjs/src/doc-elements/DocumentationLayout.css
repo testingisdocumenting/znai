@@ -29,8 +29,8 @@
     flex: 1;
     flex-direction: column;
 
-    padding-left: var(--mdoc-single-side-horizontal-min-spacing);
-    padding-right: var(--mdoc-single-side-horizontal-min-spacing);
+    padding-left: var(--znai-single-side-horizontal-min-spacing);
+    padding-right: var(--znai-single-side-horizontal-min-spacing);
 
     max-height: 100vh;
     overflow-y: scroll;
@@ -43,11 +43,11 @@
     min-height: 100vh;
     overflow-x: hidden;
     white-space: nowrap;
-    border-right: 1px solid var(--mdoc-toc-panel-border-color);
-    min-width: var(--mdoc-toc-panel-width);
-    max-width: var(--mdoc-toc-panel-width);
+    border-right: 1px solid var(--znai-toc-panel-border-color);
+    min-width: var(--znai-toc-panel-width);
+    max-width: var(--znai-toc-panel-width);
 
-    background-color: var(--mdoc-toc-panel-background-color);
+    background-color: var(--znai-toc-panel-background-color);
 }
 
 .toc-panel-header {
@@ -55,14 +55,14 @@
     justify-content: space-between;
     align-items: center;
 
-    color: var(--mdoc-toc-title-color);
+    color: var(--znai-toc-title-color);
 
     line-height: 40px;
     min-height: 80px;
     padding: 10px;
 
-    background-color: var(--mdoc-toc-title-background-color);
-    border-bottom: 1px solid var(--mdoc-toc-panel-border-color);
+    background-color: var(--znai-toc-title-background-color);
+    border-bottom: 1px solid var(--znai-toc-panel-border-color);
 
     z-index: 2;
 }
@@ -78,10 +78,10 @@
 
     min-height: 48px;
 
-    border-top: 1px solid var(--mdoc-toc-panel-border-color);
+    border-top: 1px solid var(--znai-toc-panel-border-color);
 }
 
-.mdoc-documentation-logo {
+.znai-documentation-logo {
     width: 48px;
     height: 48px;
     display: none;
@@ -117,7 +117,7 @@
 }
 
 .toc-menu::-webkit-scrollbar-thumb {
-   background: var(--mdoc-toc-panel-scrollbar-color);
+   background: var(--znai-toc-panel-scrollbar-color);
 }
 
 .toc-menu::-webkit-scrollbar-track {
@@ -140,7 +140,7 @@
     font-size: 14px;
     line-height: 35px;
     margin-bottom: 2px;
-    color: var(--mdoc-toc-chapter-title-color);
+    color: var(--znai-toc-chapter-title-color);
     text-transform: uppercase;
     padding-left: 30px;
 }
@@ -154,7 +154,7 @@
 .toc-item a {
     display: block;
 
-    color: var(--mdoc-toc-page-title-color);
+    color: var(--znai-toc-page-title-color);
     font-size: 15px;
     line-height: 28px;
 
@@ -172,13 +172,13 @@
 }
 
 .toc-item.selected {
-    border-left: 4px solid var(--mdoc-toc-selected-border-color);
+    border-left: 4px solid var(--znai-toc-selected-border-color);
     padding-left: 25px;
     transition: border-color 0.5s;
 }
 
 .toc-item.selected > a {
-    color: var(--mdoc-toc-selected-text-color);
+    color: var(--znai-toc-selected-text-color);
 }
 
 .toc-menu .page-sections {
@@ -193,7 +193,7 @@
 }
 
 .toc-menu .page-sections a {
-    color: var(--mdoc-toc-page-section-color);
+    color: var(--znai-toc-page-section-color);
     text-decoration: none;
 }
 
@@ -203,7 +203,7 @@
 }
 
 .toc-menu .page-sections .selected a {
-    color: var(--mdoc-toc-selected-text-color);
+    color: var(--znai-toc-selected-text-color);
 }
 
 .toc-panel.collapsed {
@@ -212,7 +212,7 @@
 }
 
 .preview-icon {
-    color: var(--mdoc-brand-primary-color);
+    color: var(--znai-brand-primary-color);
     position: fixed;
     font-size: 20px;
     right: 55px;
@@ -239,7 +239,7 @@
 
 @media screen and (max-width: 800px) {
     :root {
-        --mdoc-space-left-next-prev-navigation: 10px;
-        --mdoc-space-right-next-prev-navigation: 10px;
+        --znai-space-left-next-prev-navigation: 10px;
+        --znai-space-right-next-prev-navigation: 10px;
     }
 }

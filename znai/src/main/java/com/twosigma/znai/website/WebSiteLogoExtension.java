@@ -16,9 +16,9 @@
 
 package com.twosigma.znai.website;
 
+import com.twosigma.utils.FileUtils;
 import com.twosigma.znai.web.WebResource;
 import com.twosigma.znai.web.extensions.WebSiteResourcesProvider;
-import com.twosigma.utils.FileUtils;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,7 +41,7 @@ public class WebSiteLogoExtension implements WebSiteResourcesProvider {
     }
 
     private String createLogoCss(Path logoPath) {
-        return ".mdoc-documentation-logo {\n" +
+        return ".znai-documentation-logo {\n" +
                 "    display: block;\n" +
                 "    background-size: contain;\n" +
                 "    background-image: url(data:image/png;base64," + imageToBase64(logoPath) + ")\n" +

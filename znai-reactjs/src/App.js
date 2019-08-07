@@ -131,7 +131,7 @@ export class App extends Component {
 }
 
 function selectTheme(label) {
-    const theme = label === 'Default' ? 'default' : 'mdoc-dark'
+    const theme = label === 'Default' ? 'default' : 'znai-dark'
     themeRegistry.selectTheme(theme)
 }
 

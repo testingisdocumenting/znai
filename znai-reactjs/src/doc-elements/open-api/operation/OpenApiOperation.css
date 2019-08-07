@@ -15,8 +15,8 @@
  */
 
 .open-api-operation {
-    font-family: var(--mdoc-regular-font-family);
-    font-size: var(--mdoc-smaller-text-size);
+    font-family: var(--znai-regular-font-family);
+    font-size: var(--znai-smaller-text-size);
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -34,11 +34,11 @@
     grid-template-columns: auto 1fr;
     grid-column-gap: 10px;
 
-    font-size: var(--mdoc-regular-text-size);
+    font-size: var(--znai-regular-text-size);
 }
 
 .open-api-operation > .url-and-summary > .method {
-    color: var(--mdoc-open-api-method-color);
+    color: var(--znai-open-api-method-color);
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -46,22 +46,22 @@
 .open-api-operation > .url-and-summary > .path {
     display: flex;
     flex-wrap: wrap;
-    color: var(--mdoc-open-api-path-color);
+    color: var(--znai-open-api-path-color);
 }
 
 .open-api-operation > .url-and-summary > .path > .path-part-delimiter {
-    color: var(--mdoc-punctuation-color);
+    color: var(--znai-punctuation-color);
 }
 
 .open-api-operation > .url-and-summary > .path > .path-part-parameter {
-    color: var(--mdoc-open-api-path-param-color);
+    color: var(--znai-open-api-path-param-color);
 }
 
 .open-api-operation > .url-and-summary > .summary {
 }
 
 .open-api-description {
-    font-size: var(--mdoc-regular-text-size);
+    font-size: var(--znai-regular-text-size);
     margin-top: 5px;
     margin-bottom: 20px;
 }

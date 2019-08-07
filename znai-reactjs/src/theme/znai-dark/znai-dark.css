@@ -1,0 +1,122 @@
+/*
+ * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.theme-znai-dark {
+    --znai-background-color: #1e2529;
+
+    --znai-regular-text-color: var(--znai-inversed-text-color);
+    --znai-regular-text-light-color: #aaa;
+
+    --znai-section-title-color: #ddd;
+    --znai-section-h2-color: #ddd;
+    --znai-section-h3-color: #ddd;
+    --znai-section-h4-color: #ddd;
+    --znai-section-h5-color: #a1afb7;
+    --znai-section-h6-color: #a1afb7;
+
+    --znai-toc-title-color: #a0a1a0;
+    --znai-toc-title-background-color: #272f33;
+    --znai-toc-panel-background-color: #272f33;
+    --znai-toc-panel-border-color: #3e3e3e;
+    --znai-toc-selected-text-color: var(--znai-brand-primary-color);
+    --znai-toc-selected-border-color: var(--znai-brand-primary-color);
+    --znai-toc-chapter-title-color: #7f8284;
+    --znai-toc-page-title-color: #a1afb7;
+    --znai-toc-page-section-color: rgba(145, 171, 173, 0.52);
+    --znai-toc-panel-icon-color: #798186;
+    --znai-toc-panel-icon-color-active: #e7c121;
+    --znai-toc-panel-scrollbar-color: var(--znai-toc-panel-border-color);
+
+    --znai-footer-color: #b0bcc2;
+    --znai-footer-background-color: #1b2225;
+
+    --znai-search-box-text-color: #777;
+    --znai-search-box-background-color: #191f22;
+    --znai-search-overlay-background-color: rgba(0, 0, 0, 0.5);
+    --znai-search-border-color: var(--znai-toc-panel-border-color);
+    --znai-search-toc-panel-background-color: var(--znai-toc-panel-background-color);
+    --znai-search-toc-panel-scrollbar-color: var(--znai-search-border-color);
+    --znai-search-toc-selected-background-color: var(--znai-brand-primary-color);
+    --znai-search-toc-page-title-color: var(--znai-toc-chapter-title-color);
+    --znai-search-toc-page-section-color: var(--znai-regular-text-color);
+    --znai-search-toc-selected-page-title-color: #fff;
+    --znai-search-toc-selected-page-section-color: #fff;
+    --znai-search-preview-panel-scrollbar-color: var(--znai-search-border-color);
+    --znai-search-preview-result-highlight-background-color: #ddeecc;
+    --znai-search-preview-result-highlight-color: #444;
+    --znai-search-popup-input-box-background-color: #3c484e;
+    --znai-search-popup-input-box-color: var(--znai-regular-text-color);
+
+    --znai-landing-border-color: var(--znai-search-border-color);
+    --znai-landing-category-color: var(--znai-brand-primary-color);
+    --znai-landing-card-title-border-color: #333;
+    --znai-landing-card-shadow-color: #444;
+    --znai-landing-card-text-color: var(--znai-regular-text-light-color);
+    --znai-landing-input-background-color: var(--znai-background-color);
+    --znai-landing-input-placeholder-color: #555;
+
+    --znai-snippets-background-color: #181e21;
+    --znai-snippets-outer-border-color: #29343a;
+    --znai-snippets-inner-border-color: #404040;
+    --znai-snippets-title-color: #959595;
+    --znai-snippets-title-background-color: #151a1d;
+    --znai-snippets-title-left-border-color: #29343a;
+    --znai-token-title-color: #dddddd;
+    --znai-token-param-highlight-color: #ae59c1;
+    --znai-cli-command-color: #a0aeb5;
+    --znai-snippets-explanation-background-color: #121619;
+
+    --znai-default-code-block-color: #aaa;
+    --znai-class-color: #bbb;
+    --znai-function-color: #d07d31;
+    --znai-keyword-color: #4b7fe7;
+    --znai-property-color: #9473a6;
+    --znai-string-color: #678558;
+    --znai-punctuation-color: #8f9aa7;
+    --znai-number-color: #6998bc;
+    --znai-boolean-color: var(--znai-number-color);
+    --znai-highlighted-background-color: rgba(126, 131, 33, 0.3);
+
+    --znai-api-key-color: var(--znai-section-title-color);
+    --znai-api-description-color: var(--znai-inversed-text-color);
+
+    --znai-open-api-method-color: var(--znai-toc-page-title-color);
+    --znai-open-api-path-color: var(--znai-toc-page-title-color);
+    --znai-open-api-path-param-color: var(--znai-toc-page-title-color);
+    --znai-open-api-sub-header-color: var(--znai-toc-page-title-color);
+
+    --znai-collapse-uncollapse-background-color: #383838;
+
+    --znai-table-body-background-color: #1e2529;
+    --znai-table-header-background-color: #272f33;
+    --znai-table-border-color: rgb(71, 73, 80);
+
+    --znai-horizontal-rule-color: #313131;
+
+    --znai-diagram-node-shadow-color: #444;
+
+    color: var(--znai-regular-text-color);
+    background-color: var(--znai-background-color);
+}
+
+.theme-znai-dark a {
+    text-decoration: none;
+}
+
+.theme-znai-dark .page-two-sides-right-part {
+    border-left: 1px solid #444;
+    background-color: #161c1f;
+}

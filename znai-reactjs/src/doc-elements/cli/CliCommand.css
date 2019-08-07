@@ -48,12 +48,12 @@
 }
 
 .cli-command .command {
-    color: var(--mdoc-cli-command-color);
+    color: var(--znai-cli-command-color);
     font-weight: bold;
 }
 
 .cli-command .highlight {
-    color: var(--mdoc-token-param-highlight-color);
+    color: var(--znai-token-param-highlight-color);
     font-weight: bold;
 }
 

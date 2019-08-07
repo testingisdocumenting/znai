@@ -17,7 +17,7 @@
 h2 {
     font-size: 22px;
     font-weight: bold;
-    color: var(--mdoc-section-h2-color);
+    color: var(--znai-section-h2-color);
     margin-top: 28px;
     margin-bottom: 15px;
 }
@@ -25,7 +25,7 @@ h2 {
 h3 {
     font-size: 18px;
     font-weight: bold;
-    color: var(--mdoc-section-h3-color);
+    color: var(--znai-section-h3-color);
     margin-top: 25px;
     margin-bottom: 15px;
 }
@@ -33,7 +33,7 @@ h3 {
 h4 {
     font-size: 16px;
     font-weight: 800;
-    color: var(--mdoc-section-h4-color);
+    color: var(--znai-section-h4-color);
     margin-top: 20px;
     margin-bottom: 15px;
 }
@@ -41,7 +41,7 @@ h4 {
 h5 {
     font-size: 14px;
     font-weight: 400;
-    color: var(--mdoc-section-h5-color);
+    color: var(--znai-section-h5-color);
     margin-top: 20px;
     margin-bottom: 15px;
 }
@@ -50,7 +50,7 @@ h6 {
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
-    color: var(--mdoc-section-h6-color);
+    color: var(--znai-section-h6-color);
     margin-top: 20px;
     margin-bottom: 15px;
 }

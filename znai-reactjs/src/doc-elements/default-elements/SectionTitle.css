@@ -18,7 +18,7 @@
 .empty-section-title {
     font-size: 26px;
     font-weight: bold;
-    color: var(--mdoc-section-title-color);
+    color: var(--znai-section-title-color);
 
     padding-bottom: 5px;
     margin-top: 55px;

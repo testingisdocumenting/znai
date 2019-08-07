@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import './mdoc-dark.css'
+import './znai-dark.css'
 
 export default {
-    name: 'mdoc-dark'
+    name: 'znai-dark'
 }

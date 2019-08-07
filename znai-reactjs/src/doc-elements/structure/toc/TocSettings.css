@@ -22,11 +22,11 @@
     flex-direction: column;
     flex: 1;
 
-    width: var(--mdoc-toc-panel-width);
+    width: var(--znai-toc-panel-width);
     overflow-y: hidden;
 
-    border-right: 1px solid var(--mdoc-toc-panel-border-color);
-    background-color: var(--mdoc-toc-panel-background-color);
+    border-right: 1px solid var(--znai-toc-panel-border-color);
+    background-color: var(--znai-toc-panel-background-color);
 
     z-index: 2;
 
@@ -51,7 +51,7 @@
 }
 
 .toc-settings::-webkit-scrollbar-thumb {
-    background: var(--mdoc-toc-panel-border-color);
+    background: var(--znai-toc-panel-border-color);
 }
 
 .toc-settings::-webkit-scrollbar-track {

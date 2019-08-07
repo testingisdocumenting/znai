@@ -15,25 +15,25 @@
  */
 
 .api-parameters {
-    max-width: var(--mdoc-single-column-partial-width);
+    max-width: var(--znai-single-column-partial-width);
 
     display: grid;
     grid-template-columns: auto 1fr;
 
-    font-size: var(--mdoc-smaller-text-size);
-    font-family: var(--mdoc-regular-font-family);
+    font-size: var(--znai-smaller-text-size);
+    font-family: var(--znai-regular-font-family);
 
     margin-top: 20px;
     margin-bottom: 20px;
 
-    border-top: 1px solid var(--mdoc-snippets-outer-border-color);
-    border-bottom: 1px solid var(--mdoc-snippets-outer-border-color);
+    border-top: 1px solid var(--znai-snippets-outer-border-color);
+    border-bottom: 1px solid var(--znai-snippets-outer-border-color);
 }
 
 .api-parameters.nested {
     margin-top: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
-    border: 1px solid var(--mdoc-snippets-outer-border-color);
+    border: 1px solid var(--znai-snippets-outer-border-color);
     border-radius: 5px;
 }

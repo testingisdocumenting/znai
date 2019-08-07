@@ -23,7 +23,7 @@ export default class FilterInput extends React.Component {
         const {filterText, onChange} = this.props
 
         return (
-            <div className="mdoc-landing-filter-input">
+            <div className="znai-landing-filter-input">
                 <input ref={this.saveRef}
                        value={filterText}
                        placeholder="Search Documentation"

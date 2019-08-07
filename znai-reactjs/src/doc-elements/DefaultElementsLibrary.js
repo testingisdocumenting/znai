@@ -19,7 +19,7 @@ import React from 'react'
 import Theme from '../theme/Theme'
 import {themeRegistry} from '../theme/ThemeRegistry'
 
-import mdocDarkTheme from '../theme/mdoc-dark/mdocDarkTheme'
+import znaiDarkTheme from '../theme/znai-dark/znaiDarkTheme'
 
 import DocElement from './default-elements/DocElement'
 import {Page, presentationPageHandler} from './page/Page'
@@ -196,6 +196,6 @@ themeRegistry.registerAsBase(new Theme({
     elementsLibrary: library,
     presentationElementHandlers: presentationElementHandlers}))
 
-themeRegistry.register(mdocDarkTheme)
+themeRegistry.register(znaiDarkTheme)
 
 export {library as elementsLibrary, presentationElementHandlers}

@@ -31,14 +31,14 @@
 }
 
 .simple-table .ui.table {
-    background: var(--mdoc-table-body-background-color);
-    border: 1px solid var(--mdoc-table-border-color);
-    color: var(--mdoc-table-text-color);
+    background: var(--znai-table-body-background-color);
+    border: 1px solid var(--znai-table-border-color);
+    color: var(--znai-table-text-color);
 }
 
 .simple-table .ui.table thead th {
-    background: var(--mdoc-table-header-background-color);
-    color: var(--mdoc-table-text-color);
+    background: var(--znai-table-header-background-color);
+    color: var(--znai-table-text-color);
 }
 
 .simple-table td {
@@ -46,8 +46,8 @@
 }
 
 .simple-table .ui.celled.table tr td {
-    border-left: 1px solid var(--mdoc-table-border-color);
-    border-top: 1px solid var(--mdoc-table-border-color);
+    border-left: 1px solid var(--znai-table-border-color);
+    border-top: 1px solid var(--znai-table-border-color);
 }
 
 .simple-table .table > thead > tr > th {
@@ -56,7 +56,7 @@
 
 .simple-table .middle-vertical-lines-only thead th {
     padding: 5px 20px;
-    border-right: solid 1px var(--mdoc-table-border-color);
+    border-right: solid 1px var(--znai-table-border-color);
     vertical-align: top;
 }
 
@@ -67,7 +67,7 @@
 .simple-table .middle-vertical-lines-only tbody td {
     padding: 5px 20px;
 
-    border-right: solid 1px var(--mdoc-table-border-color);
+    border-right: solid 1px var(--znai-table-border-color);
     vertical-align: top;
 }
 
@@ -75,7 +75,7 @@
     padding-top: 0;
     padding-bottom: 0;
 
-    border-right: solid 1px var(--mdoc-table-border-color);
+    border-right: solid 1px var(--znai-table-border-color);
     vertical-align: top;
 }
 
@@ -84,5 +84,5 @@
 }
 
 .simple-table .ui.celled.table tr th {
-    border-left: 1px solid var(--mdoc-table-border-color);
+    border-left: 1px solid var(--znai-table-border-color);
 }

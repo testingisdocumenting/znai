@@ -45,7 +45,7 @@
 }
 
 .column.border {
-    border-right: 1px solid var(--mdoc-brand-primary-color);
+    border-right: 1px solid var(--znai-brand-primary-color);
     margin-right: 20px;
     padding-right: 20px;
 }

@@ -16,13 +16,13 @@
 
 pre {
     overflow-y: hidden;
-    color: var(--mdoc-default-code-block-color)
+    color: var(--znai-default-code-block-color)
 }
 
 code {
     border: none;
     background: none;
-    color: var(--mdoc-function-color);
+    color: var(--znai-function-color);
     padding: 0;
-    font-size: var(--mdoc-inlined-code-text-size);
+    font-size: var(--znai-inlined-code-text-size);
 }

@@ -21,15 +21,15 @@ export default class SearchTocItem extends Component {
     render() {
         const {pageTitle, pageSection, isSelected, idx, onSelect, onJump} = this.props
 
-        const className = "mdoc-search-toc-item" + (isSelected ? " selected" : "")
+        const className = "znai-search-toc-item" + (isSelected ? " selected" : "")
 
         return (
             <div className={className}
                  onClick={() => onSelect(idx)}
                  onDoubleClick={() => onJump(idx)}
                  ref={this.saveRef}>
-                <span className="mdoc-search-toc-page-title">{pageTitle}</span>
-                <span className="mdoc-search-toc-section-title">{pageSection}</span>
+                <span className="znai-search-toc-page-title">{pageTitle}</span>
+                <span className="znai-search-toc-section-title">{pageSection}</span>
             </div>
         )
     }
