@@ -31,9 +31,9 @@
 
     --znai-black: #383838;
     --znai-light-black: #666;
-    --znai-brand-primary-color: #009AA6;
+    --znai-brand-primary-color: rgb(41, 139, 231);
 
-    --znai-link-color: #009AA6;
+    --znai-link-color: var(--znai-brand-primary-color);
 
     --znai-rest-link-color: #7287b3;
     --znai-important-attention: #c52912;
@@ -50,11 +50,11 @@
     --znai-two-sides-horizontal-spacing: 40px;
 
     --znai-toc-title-color: #152935;
-    --znai-toc-title-background-color: #f8faf9;
+    --znai-toc-title-background-color: #f8f8fa;
     --znai-toc-panel-width: 280px;
-    --znai-toc-panel-background-color: #f8faf9;
+    --znai-toc-panel-background-color: #f9f8fa;
     --znai-toc-panel-border-color: #e9e9e9;
-    --znai-toc-selected-text-color: #00747a;
+    --znai-toc-selected-text-color: var(--znai-brand-primary-color);
     --znai-toc-selected-border-color: var(--znai-brand-primary-color);
     --znai-toc-chapter-title-color: #5a6872;
     --znai-toc-page-title-color: #152935;
@@ -113,6 +113,15 @@
     --znai-snippets-space-below: 25px;
     --znai-snippets-explanation-background-color: #efefef;
 
+    --znai-attention-note-color: var(--znai-brand-primary-color);
+    --znai-attention-note-background-color: rgba(41, 139, 231, .1);
+    --znai-attention-warning-color: #f0ad4e;
+    --znai-attention-warning-background-color: #f0ac4e15;
+    --znai-attention-dont-color: #d9534f;
+    --znai-attention-dont-background-color: #d9544f18;
+    --znai-attention-question-color: #59a65a;
+    --znai-attention-question-background-color: #59a65a15;
+
     --znai-table-body-background-color: #fff;
     --znai-table-header-background-color: #f8faf9;
     --znai-table-border-color: rgba(34,36,38,.1);
@@ -128,7 +137,7 @@
     --znai-default-code-block-color: var(--znai-black);
     --znai-class-color: #3d3d3f;
     --znai-function-color: #a66f2b;
-    --znai-keyword-color: #196180;
+    --znai-keyword-color: #038091;
     --znai-number-color: #2822ad;
     --znai-boolean-color: var(--znai-number-color);
     --znai-string-color: #078744;

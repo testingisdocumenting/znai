@@ -55,37 +55,37 @@
 }
 
 .paragraph.attention.note {
-    border-left: 3px solid var(--znai-brand-primary-color);
-    background: #009ba615;
+    border-left: 3px solid var(--znai-attention-note-color);
+    background: var(--znai-attention-note-background-color);
 }
 
 .paragraph.attention.note .icon-part {
-    color: var(--znai-brand-primary-color);
+    color: var(--znai-attention-note-color);
 }
 
 .paragraph.attention.warning {
-    border-left: 3px solid #f0ad4e;
-    background: #f0ac4e15;
+    border-left: 3px solid var(--znai-attention-warning-color);
+    background: var(--znai-attention-warning-background-color)
 }
 
 .paragraph.attention.warning .icon-part {
-    color: #f0ad4e;
+    color: var(--znai-attention-warning-color);
 }
 
 .paragraph.attention.question {
-    border-left: 3px solid #59a65a;
-    background: #59a65a15
+    border-left: 3px solid var(--znai-attention-question-color);
+    background: var(--znai-attention-question-background-color);
 }
 
 .paragraph.attention.question .icon-part {
-    color: #59a65a;
+    color: var(--znai-attention-question-color);
 }
 
 .paragraph.attention.avoid {
-    border-left: 3px solid #d9534f;
-    background: #d9544f18
+    border-left: 3px solid var(--znai-attention-dont-color);
+    background: var(--znai-attention-dont-background-color);
 }
 
 .paragraph.attention.avoid .icon-part {
-    color: #d9534f;
+    color: var(--znai-attention-dont-color);
 }
