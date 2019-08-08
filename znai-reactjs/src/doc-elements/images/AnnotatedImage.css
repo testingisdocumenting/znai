@@ -16,7 +16,7 @@
 
 .annotated-image-caption {
     padding: 10px;
-    background-color: rgba(0, 154, 166, 0.6);
+    background-color: var(--znai-annotated-image-background-color);
     color: #fff;
     width: 100%;
 }
