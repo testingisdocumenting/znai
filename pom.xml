@@ -51,7 +51,6 @@
         <module>znai-cli</module>
         <module>znai-generators</module>
         <module>znai-maven-plugin</module>
-        <module>znai-maven-plugin-shaded</module>
         <module>znai-docs</module>
         <module>znai-testing-examples</module>
         <module>znai-shaded</module>
