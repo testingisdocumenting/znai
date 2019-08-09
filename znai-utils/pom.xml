@@ -21,7 +21,7 @@
     <parent>
         <groupId>com.twosigma.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>0.15-SNAPSHOT</version>
+        <version>0.15</version>
     </parent>
 
     <artifactId>znai-utils</artifactId>
