@@ -23,11 +23,10 @@
     <parent>
         <groupId>com.twosigma.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>0.1</version>
+        <version>0.14-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-testing-examples</artifactId>
-    <version>0.1</version>
 
     <dependencies>
         <dependency>
@@ -44,7 +43,7 @@
             <groupId>com.twosigma.webtau</groupId>
             <artifactId>webtau-core-groovy</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
