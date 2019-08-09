@@ -17,8 +17,8 @@
 package com.twosigma.znai.extensions;
 
 import com.twosigma.znai.core.ResourcesResolver;
-import com.twosigma.utils.FileUtils;
-import com.twosigma.utils.UrlUtils;
+import com.twosigma.znai.utils.FileUtils;
+import com.twosigma.znai.utils.UrlUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

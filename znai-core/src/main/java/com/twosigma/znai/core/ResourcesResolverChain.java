@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.core;
 
-import com.twosigma.utils.ServiceLoaderUtils;
+import com.twosigma.znai.utils.ServiceLoaderUtils;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;

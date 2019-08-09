@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.core;
 
-import com.twosigma.utils.FileUtils;
+import com.twosigma.znai.utils.FileUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

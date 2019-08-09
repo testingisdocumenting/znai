@@ -22,7 +22,7 @@ import com.twosigma.znai.java.parser.JavaCode;
 import com.twosigma.znai.java.parser.html.HtmlToDocElementConverter;
 import com.twosigma.znai.parser.docelement.DocElement;
 import com.twosigma.znai.parser.docelement.DocElementType;
-import com.twosigma.utils.CollectionUtils;
+import com.twosigma.znai.utils.CollectionUtils;
 
 import java.util.*;
 

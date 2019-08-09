@@ -28,7 +28,7 @@ import com.twosigma.znai.parser.docelement.DocElementType;
 import com.twosigma.znai.parser.table.MarkupTableData;
 import com.twosigma.znai.search.SearchScore;
 import com.twosigma.znai.search.SearchText;
-import com.twosigma.utils.JsonUtils;
+import com.twosigma.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.util.Collections;

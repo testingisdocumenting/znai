@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.cpp.parser
 
-import com.twosigma.utils.ResourceUtils
+import com.twosigma.znai.utils.ResourceUtils
 import org.junit.Assert
 import org.junit.Test
 

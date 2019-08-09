@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static com.twosigma.utils.StringUtils.stripIndentation;
+import static com.twosigma.znai.utils.StringUtils.stripIndentation;
 
 public class ExtractBodyVisitor extends CPP14BaseVisitor {
     private final List<String> lines;

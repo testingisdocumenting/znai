@@ -17,7 +17,7 @@
 package com.twosigma.znai.parser
 
 import com.twosigma.znai.core.ResourcesResolver
-import com.twosigma.utils.ResourceUtils
+import com.twosigma.znai.utils.ResourceUtils
 
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage

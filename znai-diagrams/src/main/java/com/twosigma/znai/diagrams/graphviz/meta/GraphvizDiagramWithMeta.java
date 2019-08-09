@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.diagrams.graphviz.meta;
 
-import com.twosigma.utils.RegexpUtils;
+import com.twosigma.znai.utils.RegexpUtils;
 
 import java.util.*;
 import java.util.regex.Matcher;

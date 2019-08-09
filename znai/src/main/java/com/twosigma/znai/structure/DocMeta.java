@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.structure;
 
-import com.twosigma.utils.JsonUtils;
+import com.twosigma.znai.utils.JsonUtils;
 
 import java.util.HashMap;
 import java.util.Map;

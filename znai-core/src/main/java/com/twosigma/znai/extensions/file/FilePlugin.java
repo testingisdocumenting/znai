@@ -17,7 +17,7 @@
 package com.twosigma.znai.extensions.file;
 
 import com.twosigma.znai.extensions.PluginParamsOpts;
-import com.twosigma.utils.StringUtils;
+import com.twosigma.znai.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;

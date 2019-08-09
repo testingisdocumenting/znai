@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.parser.sphinx.xml;
 
-import com.twosigma.utils.RegexpUtils;
+import com.twosigma.znai.utils.RegexpUtils;
 
 import java.util.regex.Pattern;
 

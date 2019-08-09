@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.website;
 
-import com.twosigma.utils.FileUtils;
+import com.twosigma.znai.utils.FileUtils;
 import com.twosigma.znai.web.WebResource;
 import com.twosigma.znai.web.extensions.WebSiteResourcesProvider;
 

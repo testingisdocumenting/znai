@@ -16,20 +16,20 @@
 
 package com.twosigma.znai.server.preview;
 
-import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.znai.console.ConsoleOutputs;
 import com.twosigma.znai.structure.DocMeta;
 import com.twosigma.znai.website.WebSite;
 import com.twosigma.znai.html.HtmlPageAndPageProps;
 import com.twosigma.znai.html.DocPageReactProps;
 import com.twosigma.znai.structure.TableOfContents;
 import com.twosigma.znai.structure.TocItem;
-import com.twosigma.utils.FileUtils;
+import com.twosigma.znai.utils.FileUtils;
 
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.stream.Stream;
 
-import static com.twosigma.console.ansi.Color.BLUE;
+import static com.twosigma.znai.console.ansi.Color.BLUE;
 
 public class PreviewPushFileChangeHandler implements FileChangeHandler {
     private PreviewWebSocketHandler previewSocket;

@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.website;
 
-import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.Color;
+import com.twosigma.znai.console.ConsoleOutputs;
+import com.twosigma.znai.console.ansi.Color;
 
 public class ProgressReporter {
     public static void reportPhase(String phase) {

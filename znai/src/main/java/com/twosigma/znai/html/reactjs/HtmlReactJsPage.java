@@ -18,7 +18,7 @@ package com.twosigma.znai.html.reactjs;
 
 import com.twosigma.znai.html.HtmlPage;
 import com.twosigma.znai.html.RenderSupplier;
-import com.twosigma.utils.JsonUtils;
+import com.twosigma.znai.utils.JsonUtils;
 
 import java.util.Map;
 

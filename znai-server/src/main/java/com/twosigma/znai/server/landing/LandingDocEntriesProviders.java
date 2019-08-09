@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.server.landing;
 
-import com.twosigma.utils.ServiceLoaderUtils;
+import com.twosigma.znai.utils.ServiceLoaderUtils;
 
 import java.util.Set;
 import java.util.stream.Stream;

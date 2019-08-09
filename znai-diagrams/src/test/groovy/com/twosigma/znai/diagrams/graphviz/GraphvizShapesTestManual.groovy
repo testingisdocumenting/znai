@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.diagrams.graphviz
 
-import com.twosigma.utils.FileUtils
-import com.twosigma.utils.JsonUtils
+import com.twosigma.znai.utils.FileUtils
+import com.twosigma.znai.utils.JsonUtils
 
 import java.nio.file.Files
 import java.nio.file.Paths

@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.jupyter
 
-import com.twosigma.utils.JsonUtils
-import com.twosigma.utils.ResourceUtils
+import com.twosigma.znai.utils.JsonUtils
+import com.twosigma.znai.utils.ResourceUtils
 import org.junit.BeforeClass
 import org.junit.Test
 

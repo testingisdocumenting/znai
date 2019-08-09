@@ -32,7 +32,7 @@ import java.util.*;
 
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.PARAM;
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.RETURN;
-import static com.twosigma.utils.StringUtils.*;
+import static com.twosigma.znai.utils.StringUtils.*;
 import static java.util.stream.Collectors.*;
 
 public class JavaCodeVisitor extends VoidVisitorAdapter<String> {

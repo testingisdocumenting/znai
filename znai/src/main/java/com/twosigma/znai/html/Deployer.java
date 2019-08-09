@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.html;
 
-import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.Color;
+import com.twosigma.znai.console.ConsoleOutputs;
+import com.twosigma.znai.console.ansi.Color;
 import com.twosigma.znai.web.WebResource;
 import org.apache.commons.io.FileUtils;
 

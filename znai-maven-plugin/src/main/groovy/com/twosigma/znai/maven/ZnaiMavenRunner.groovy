@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.maven
 
-import com.twosigma.console.ConsoleOutput
-import com.twosigma.console.ConsoleOutputs
+import com.twosigma.znai.console.ConsoleOutput
+import com.twosigma.znai.console.ConsoleOutputs
 import com.twosigma.znai.cli.ZnaiCliApp
 import com.twosigma.znai.cli.ZnaiCliConfig
 

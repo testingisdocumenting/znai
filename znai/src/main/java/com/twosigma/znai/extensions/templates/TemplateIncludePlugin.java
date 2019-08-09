@@ -29,8 +29,8 @@ import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.search.SearchScore;
 import com.twosigma.znai.search.SearchText;
 import com.twosigma.znai.template.TextTemplate;
-import com.twosigma.utils.FileUtils;
-import com.twosigma.utils.JsonUtils;
+import com.twosigma.znai.utils.FileUtils;
+import com.twosigma.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.util.HashMap;

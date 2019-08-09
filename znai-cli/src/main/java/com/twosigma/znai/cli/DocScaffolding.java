@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.cli;
 
-import com.twosigma.utils.FileUtils;
-import com.twosigma.utils.ResourceUtils;
+import com.twosigma.znai.utils.FileUtils;
+import com.twosigma.znai.utils.ResourceUtils;
 
 import java.nio.file.Path;
 import java.util.ArrayList;

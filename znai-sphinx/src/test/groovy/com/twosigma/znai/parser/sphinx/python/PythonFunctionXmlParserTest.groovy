@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.parser.sphinx.python
 
-import com.twosigma.utils.ResourceUtils
+import com.twosigma.znai.utils.ResourceUtils
 import com.twosigma.znai.utils.XmlUtils
 import org.junit.Test
 

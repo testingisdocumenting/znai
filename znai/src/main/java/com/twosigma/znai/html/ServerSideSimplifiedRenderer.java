@@ -21,7 +21,7 @@ import com.twosigma.znai.search.PageSearchEntries;
 import com.twosigma.znai.search.PageSearchEntry;
 import com.twosigma.znai.structure.TableOfContents;
 import com.twosigma.znai.structure.TocItem;
-import com.twosigma.utils.ResourceUtils;
+import com.twosigma.znai.utils.ResourceUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.stream.Collectors;

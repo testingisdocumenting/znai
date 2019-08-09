@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.server.preview;
 
-import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.Color;
+import com.twosigma.znai.console.ConsoleOutputs;
+import com.twosigma.znai.console.ansi.Color;
 import com.twosigma.znai.server.DocumentationServer;
 import com.twosigma.znai.website.WebSite;
 import io.vertx.core.http.HttpServer;

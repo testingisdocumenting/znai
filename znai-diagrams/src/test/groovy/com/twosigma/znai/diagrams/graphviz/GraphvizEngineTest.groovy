@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.diagrams.graphviz
 
-import com.twosigma.utils.ResourceUtils
+import com.twosigma.znai.utils.ResourceUtils
 import com.twosigma.znai.diagrams.graphviz.meta.GraphvizShapeConfig
 import org.junit.Test
 

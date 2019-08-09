@@ -17,7 +17,7 @@
 package com.twosigma.znai.extensions;
 
 import com.twosigma.znai.extensions.meta.MetaIncludePlugin;
-import com.twosigma.utils.JsonUtils;
+import com.twosigma.znai.utils.JsonUtils;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;

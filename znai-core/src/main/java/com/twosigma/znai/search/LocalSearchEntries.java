@@ -17,8 +17,8 @@
 package com.twosigma.znai.search;
 
 import com.twosigma.znai.structure.TocItem;
-import com.twosigma.utils.JsonUtils;
-import com.twosigma.utils.ResourceUtils;
+import com.twosigma.znai.utils.JsonUtils;
+import com.twosigma.znai.utils.ResourceUtils;
 
 import java.util.LinkedHashMap;
 import java.util.List;

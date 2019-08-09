@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.cli;
 
-import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.Color;
+import com.twosigma.znai.console.ConsoleOutputs;
+import com.twosigma.znai.console.ansi.Color;
 import com.twosigma.znai.cli.extension.CliCommandHandler;
 import com.twosigma.znai.cli.extension.CliCommandHandlers;
 import com.twosigma.znai.client.DeployTempDir;

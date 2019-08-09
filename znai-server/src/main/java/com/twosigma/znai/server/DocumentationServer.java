@@ -16,9 +16,9 @@
 
 package com.twosigma.znai.server;
 
-import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.AnsiConsoleOutput;
-import com.twosigma.console.ansi.Color;
+import com.twosigma.znai.console.ConsoleOutputs;
+import com.twosigma.znai.console.ansi.AnsiConsoleOutput;
+import com.twosigma.znai.console.ansi.Color;
 import com.twosigma.znai.html.HtmlPage;
 import com.twosigma.znai.html.reactjs.HtmlReactJsPage;
 import com.twosigma.znai.html.reactjs.ReactJsBundle;
@@ -35,7 +35,7 @@ import com.twosigma.znai.server.upload.FileUploadVertxHandler;
 import com.twosigma.znai.server.upload.OnUploadFinishedServerHandlers;
 import com.twosigma.znai.server.upload.UnzipTask;
 import com.twosigma.znai.server.urlhandlers.UrlContentHandlers;
-import com.twosigma.utils.FileUtils;
+import com.twosigma.znai.utils.FileUtils;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;

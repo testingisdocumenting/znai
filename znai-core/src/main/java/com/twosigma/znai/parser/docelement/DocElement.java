@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.parser.docelement;
 
-import com.twosigma.utils.CollectionUtils;
+import com.twosigma.znai.utils.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.server.upload;
 
-import com.twosigma.utils.ServiceLoaderUtils;
+import com.twosigma.znai.utils.ServiceLoaderUtils;
 
 import java.nio.file.Path;
 import java.util.Set;

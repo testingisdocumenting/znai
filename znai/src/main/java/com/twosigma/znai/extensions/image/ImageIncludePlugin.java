@@ -24,8 +24,8 @@ import com.twosigma.znai.extensions.PluginResult;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.structure.DocStructure;
-import com.twosigma.utils.FileUtils;
-import com.twosigma.utils.JsonUtils;
+import com.twosigma.znai.utils.FileUtils;
+import com.twosigma.znai.utils.JsonUtils;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
