@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.openapi
 
-import com.twosigma.utils.ResourceUtils
+import com.twosigma.znai.utils.ResourceUtils
 import com.twosigma.znai.parser.TestComponentsRegistry
 import org.junit.BeforeClass
 import org.junit.Test

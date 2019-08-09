@@ -31,7 +31,7 @@ import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.structure.DocStructure;
 import com.twosigma.znai.structure.DocUrl;
-import com.twosigma.utils.JsonUtils;
+import com.twosigma.znai.utils.JsonUtils;
 import com.twosigma.znai.diagrams.graphviz.GraphvizEngine;
 
 import java.nio.file.Path;

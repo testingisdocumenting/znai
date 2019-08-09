@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.typescript;
 
-import com.twosigma.utils.JsonUtils;
-import com.twosigma.utils.ResourceUtils;
+import com.twosigma.znai.utils.JsonUtils;
+import com.twosigma.znai.utils.ResourceUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

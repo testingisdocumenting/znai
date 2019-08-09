@@ -25,7 +25,7 @@ import com.twosigma.znai.extensions.PluginResult;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.parser.commonmark.MarkdownParser;
-import com.twosigma.utils.JsonUtils;
+import com.twosigma.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.util.Collections;

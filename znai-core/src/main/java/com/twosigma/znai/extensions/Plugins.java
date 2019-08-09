@@ -19,7 +19,7 @@ package com.twosigma.znai.extensions;
 import com.twosigma.znai.extensions.fence.FencePlugin;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.extensions.inlinedcode.InlinedCodePlugin;
-import com.twosigma.utils.ServiceLoaderUtils;
+import com.twosigma.znai.utils.ServiceLoaderUtils;
 
 import java.util.Collection;
 import java.util.Map;

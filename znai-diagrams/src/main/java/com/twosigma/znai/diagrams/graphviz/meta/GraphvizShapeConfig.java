@@ -16,9 +16,9 @@
 
 package com.twosigma.znai.diagrams.graphviz.meta;
 
-import com.twosigma.utils.FileUtils;
-import com.twosigma.utils.JsonUtils;
-import com.twosigma.utils.ResourceUtils;
+import com.twosigma.znai.utils.FileUtils;
+import com.twosigma.znai.utils.JsonUtils;
+import com.twosigma.znai.utils.ResourceUtils;
 
 import java.nio.file.Paths;
 import java.util.HashMap;

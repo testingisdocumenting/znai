@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.extensions.cli;
 
-import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.Color;
+import com.twosigma.znai.console.ConsoleOutputs;
+import com.twosigma.znai.console.ansi.Color;
 import com.twosigma.znai.core.AuxiliaryFile;
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.core.ResourcesResolver;

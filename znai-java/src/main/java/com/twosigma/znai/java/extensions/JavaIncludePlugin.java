@@ -24,7 +24,7 @@ import com.twosigma.znai.java.parser.JavaMethod;
 import com.twosigma.znai.java.parser.JavaType;
 import com.twosigma.znai.parser.docelement.DocElement;
 import com.twosigma.znai.parser.docelement.DocElementType;
-import com.twosigma.utils.StringUtils;
+import com.twosigma.znai.utils.StringUtils;
 
 import java.util.Collections;
 import java.util.Map;

@@ -26,7 +26,7 @@ import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.search.SearchScore;
 import com.twosigma.znai.search.SearchText;
-import com.twosigma.utils.NumberUtils;
+import com.twosigma.znai.utils.NumberUtils;
 
 import java.nio.file.Path;
 import java.util.Arrays;

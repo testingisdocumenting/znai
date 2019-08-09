@@ -23,8 +23,8 @@ import com.twosigma.znai.java.parser.JavaMethodParam;
 import com.twosigma.znai.java.parser.JavaMethodReturn;
 import com.twosigma.znai.parser.MarkupParserResult;
 import com.twosigma.znai.template.TextTemplate;
-import com.twosigma.utils.CollectionUtils;
-import com.twosigma.utils.ResourceUtils;
+import com.twosigma.znai.utils.CollectionUtils;
+import com.twosigma.znai.utils.ResourceUtils;
 
 import java.util.List;
 import java.util.Map;

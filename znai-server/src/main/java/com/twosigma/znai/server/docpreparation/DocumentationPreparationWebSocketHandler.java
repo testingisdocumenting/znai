@@ -17,7 +17,7 @@
 package com.twosigma.znai.server.docpreparation;
 
 import com.twosigma.znai.server.sockets.JsonWebSocketHandler;
-import com.twosigma.utils.CollectionUtils;
+import com.twosigma.znai.utils.CollectionUtils;
 import io.vertx.core.Vertx;
 
 import java.util.LinkedHashMap;

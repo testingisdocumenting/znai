@@ -17,7 +17,7 @@
 package com.twosigma.znai.cpp;
 
 import com.twosigma.znai.cpp.parser.EntryDef;
-import com.twosigma.utils.StringUtils;
+import com.twosigma.znai.utils.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;

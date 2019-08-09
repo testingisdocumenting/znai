@@ -17,7 +17,7 @@
 package com.twosigma.znai.server.preview;
 
 import com.sun.nio.file.SensitivityWatchEventModifier;
-import com.twosigma.console.ConsoleOutputs;
+import com.twosigma.znai.console.ConsoleOutputs;
 import com.twosigma.znai.core.AuxiliaryFileListener;
 import com.twosigma.znai.core.AuxiliaryFile;
 

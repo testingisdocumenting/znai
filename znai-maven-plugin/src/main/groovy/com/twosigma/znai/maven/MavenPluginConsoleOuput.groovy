@@ -16,8 +16,8 @@
 
 package com.twosigma.znai.maven
 
-import com.twosigma.console.ConsoleOutput
-import com.twosigma.console.ansi.Color
+import com.twosigma.znai.console.ConsoleOutput
+import com.twosigma.znai.console.ansi.Color
 import groovy.transform.Canonical
 import org.apache.maven.plugin.logging.Log
 

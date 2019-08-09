@@ -25,7 +25,7 @@ import com.twosigma.znai.parser.MarkupParser;
 import com.twosigma.znai.parser.MarkupParserResult;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.parser.docelement.DocElement;
-import com.twosigma.utils.FileUtils;
+import com.twosigma.znai.utils.FileUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

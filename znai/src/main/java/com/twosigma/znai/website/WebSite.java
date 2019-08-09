@@ -33,8 +33,8 @@ import com.twosigma.znai.web.extensions.WebSiteResourcesProviders;
 import com.twosigma.znai.website.markups.MarkdownParsingConfiguration;
 import com.twosigma.znai.website.markups.MarkupParsingConfiguration;
 import com.twosigma.znai.website.markups.SphinxParsingConfiguration;
-import com.twosigma.utils.FileUtils;
-import com.twosigma.utils.JsonUtils;
+import com.twosigma.znai.utils.FileUtils;
+import com.twosigma.znai.utils.JsonUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,7 +47,7 @@ import java.util.stream.Stream;
 import static com.twosigma.znai.parser.MarkupTypes.MARKDOWN;
 import static com.twosigma.znai.parser.MarkupTypes.SPHINX;
 import static com.twosigma.znai.website.ProgressReporter.reportPhase;
-import static com.twosigma.utils.FileUtils.fileTextContent;
+import static com.twosigma.znai.utils.FileUtils.fileTextContent;
 import static java.util.stream.Collectors.toList;
 
 public class WebSite {

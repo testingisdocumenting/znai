@@ -18,8 +18,8 @@ package com.twosigma.znai.openapi;
 
 import com.twosigma.znai.parser.MarkupParserResult;
 import com.twosigma.znai.parser.commonmark.MarkdownParser;
-import com.twosigma.utils.JsonUtils;
-import com.twosigma.utils.YamlUtils;
+import com.twosigma.znai.utils.JsonUtils;
+import com.twosigma.znai.utils.YamlUtils;
 
 import java.nio.file.Paths;
 import java.util.*;

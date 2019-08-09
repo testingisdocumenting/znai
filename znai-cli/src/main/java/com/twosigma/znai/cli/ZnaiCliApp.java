@@ -16,10 +16,10 @@
 
 package com.twosigma.znai.cli;
 
-import com.twosigma.console.ConsoleOutputs;
-import com.twosigma.console.ansi.AnsiConsoleOutput;
-import com.twosigma.console.ansi.Color;
-import com.twosigma.utils.FileUtils;
+import com.twosigma.znai.console.ConsoleOutputs;
+import com.twosigma.znai.console.ansi.AnsiConsoleOutput;
+import com.twosigma.znai.console.ansi.Color;
+import com.twosigma.znai.utils.FileUtils;
 import com.twosigma.znai.cli.extension.CliCommandConfig;
 import com.twosigma.znai.html.HtmlPage;
 import com.twosigma.znai.html.reactjs.ReactJsBundle;

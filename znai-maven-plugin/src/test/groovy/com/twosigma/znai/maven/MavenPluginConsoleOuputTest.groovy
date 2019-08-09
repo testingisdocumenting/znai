@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.maven
 
-import com.twosigma.console.ansi.Color
+import com.twosigma.znai.console.ansi.Color
 import org.junit.Test
 
 class MavenPluginConsoleOutputTest {
