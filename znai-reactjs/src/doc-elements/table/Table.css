@@ -42,7 +42,7 @@
 }
 
 .simple-table td {
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .simple-table .ui.celled.table tr td {
