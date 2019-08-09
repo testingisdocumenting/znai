@@ -25,7 +25,23 @@
     <version>0.14-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <name>Znai</name>
+    <description>Rich documentation generator (markdown and java based)</description>
     <url>https://github.com/twosigma/znai</url>
+
+    <developers>
+        <developer>
+            <id>tsiq-karold</id>
+            <name>Karol Dudzinski</name>
+            <email>karol.dudzinski@twosigmaiq.com</email>
+            <organization>Two Sigma Insurance Quantified</organization>
+            <organizationUrl>http://twosigmaiq.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>Europe/London</timezone>
+        </developer>
+    </developers>
 
     <licenses>
         <license>
@@ -408,9 +424,24 @@
 
     <profiles>
         <profile>
-            <id>releases</id>
+            <id>release</id>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -424,6 +455,7 @@
                             </execution>
                         </executions>
                     </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
