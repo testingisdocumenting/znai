@@ -104,6 +104,10 @@
                                     <pattern>freemarker.</pattern>
                                     <shadedPattern>znaishaded.freemarker.</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>javax.xml.</pattern>
+                                    <shadedPattern>znaishaded.javax.xml.</shadedPattern>
+                                </relocation>
                             </relocations>
 
                             <transformers>
