@@ -16,11 +16,11 @@
 
 package com.twosigma.znai.cli;
 
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.console.ansi.Color;
 import com.twosigma.znai.cli.extension.CliCommandHandler;
 import com.twosigma.znai.cli.extension.CliCommandHandlers;
 import com.twosigma.znai.client.DeployTempDir;
+import com.twosigma.znai.console.ConsoleOutputs;
+import com.twosigma.znai.console.ansi.Color;
 import com.twosigma.znai.parser.MarkupTypes;
 import org.apache.commons.cli.*;
 
@@ -172,7 +172,7 @@ public class ZnaiCliConfig {
 
         if (commandLine.hasOption("help") || args.length < 1) {
             HelpFormatter helpFormatter = new HelpFormatter();
-            helpFormatter.printHelp("mdoc", options);
+            helpFormatter.printHelp("znai", options);
             System.exit(1);
         }
 
