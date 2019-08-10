@@ -105,8 +105,8 @@
                                     <shadedPattern>znaishaded.freemarker.</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>javax.xml.</pattern>
-                                    <shadedPattern>znaishaded.javax.xml.</shadedPattern>
+                                    <pattern>javax.xml.bind.</pattern>
+                                    <shadedPattern>znaishaded.javax.xml.bind.</shadedPattern>
                                 </relocation>
                             </relocations>
 
