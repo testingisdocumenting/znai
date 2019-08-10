@@ -210,7 +210,7 @@ public class DocumentationServer {
     }
 
     // this is entry point for local development and testing
-    // official znai start is through com.twosigma.documentation.cli.ZnaiCliApp
+    // official znai start is through com.twosigma.znai.cli.ZnaiCliApp
     public static void main(String[] args) {
         ConsoleOutputs.add(new AnsiConsoleOutput());
 

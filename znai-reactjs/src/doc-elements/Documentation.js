@@ -45,6 +45,8 @@ import pageContentProcessor from './pageContentProcessor.js'
 import {DocumentationModes} from './DocumentationModes'
 import {pageTypesRegistry} from './page/PageTypesRegistry'
 
+import {injectGlobalOverridesCssLink} from './CssOverrides'
+
 import './DocumentationLayout.css'
 import './search/Search.css'
 
@@ -218,6 +220,8 @@ export class Documentation extends Component {
     }
 
     componentDidMount() {
+        injectGlobalOverridesCssLink()
+
         this.enableScrollListener()
         this.onPageLoad()
 
