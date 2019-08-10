@@ -1,9 +1,5 @@
-```columns
-left:
-If you see any issues, please create jira ticket [jira/mdoc](https://jira/mdoc)
+If you have documentation suggestions, features or bugs to report, please create [GitHub Issue](https://github.com/twosigma/znai/issues)
 
-right:
-Email sct@twosigma.com with feature requests and feedback.
-```
+Contributions are welcome
 
-_Copyright @ 2018 Two Sigma_
+_Copyright @ 2019 Two Sigma_
