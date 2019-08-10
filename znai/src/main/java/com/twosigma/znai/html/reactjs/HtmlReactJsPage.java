@@ -23,7 +23,7 @@ import com.twosigma.znai.utils.JsonUtils;
 import java.util.Map;
 
 public class HtmlReactJsPage {
-    private static final String REACT_BLOCK_ID = "mdoc";
+    private static final String REACT_BLOCK_ID = "znai";
 
     private final ReactJsBundle reactJsBundle;
 
