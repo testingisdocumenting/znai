@@ -41,6 +41,7 @@ import Table from './table/Table'
 import {presentationTabsHandler, Tabs} from './tabs/Tabs'
 import {Columns, presentationColumnsHandler} from './columns/Columns'
 import Icon from './icons/Icon'
+import KeyboardShortcut from './keyboard/KeyboardShortcut'
 import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
 import Xml from './xml/Xml'
@@ -104,6 +105,7 @@ library.BulletList = BulletList
 presentationElementHandlers.BulletList = presentationBulletListHandler
 
 library.Icon = Icon
+library.KeyboardShortcut = KeyboardShortcut
 
 library.OrderedList = ({delimiter, startNumber, ...props}) => <ol className="content-block" start={startNumber}>
     <props.elementsLibrary.DocElement {...props}/>
