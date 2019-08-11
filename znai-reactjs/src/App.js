@@ -51,6 +51,7 @@ import {latexDemo} from './doc-elements/latex/Latex.demo'
 import {chartDemo} from './doc-elements/charts/Chart.demo'
 import {tableDemo} from './doc-elements/table/Table.demo'
 import {diagramLegendDemo} from "./doc-elements/diagrams/DiagramLegend.demo"
+import {keyboardShortcutsDemo} from "./doc-elements/keyboard/KeyboardShortcut.demo"
 
 import {Documentation} from "./doc-elements/Documentation"
 import testData from "./doc-elements/TestData"
@@ -98,6 +99,7 @@ registries.add('visuals')
     .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
     .registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
     .registerAsRows('Diagram Legend', diagramLegendDemo)
+    .registerAsGrid('Keyboard shortcuts', 0, keyboardShortcutsDemo)
 
 registries.add('layout')
     .registerAsTabs('Pages', pagesDemo)
