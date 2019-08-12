@@ -15,10 +15,30 @@
  */
 
 import React from 'react'
+import colorByName from "../shapes/colorByName"
 
 const staticAnnotation = (shapeHandler) => ({shape}) => {
+    if (!shapeHandler) {
+        return <NotFound {...shape}/>
+    }
+
     const Body = shapeHandler.body;
     return <Body key="body" {...shape}/>
+}
+
+function NotFound({x, y, width, height, color}) {
+    const colorScheme = colorByName(color)
+
+    return (
+        <g>
+            <rect x={x} y={y} width={width} fill={colorScheme.fill} stroke={colorScheme.line} height={height}
+                  strokeWidth="4" fillOpacity={1}/>
+            <text x={x + width / 2} y={y + height / 2} fill={colorScheme.text} textAnchor="middle"
+                  alignmentBaseline="central">
+                &lt;NOT FOUND&gt;
+            </text>
+        </g>
+    )
 }
 
 export default staticAnnotation

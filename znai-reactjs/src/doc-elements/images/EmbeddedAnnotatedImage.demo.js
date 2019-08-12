@@ -25,6 +25,7 @@ const data = {imageSrc: 'ui.jpg',
         {type: 'circle', id: 'c1', x: 500, y: 100, r: 20, text: '1', color: 'a'},
         {type: 'circle', id: 'c2', x: 180, y: 100, r: 20, text: '2', color: 'b'},
         {type: 'circle', id: 'c3', x: 150, y: 150, r: 30, text: '3', color: 'c'},
+        {type: 'highlight', id: 'h1', x: 150, y: 220, width: 80, height: 40, color: 'c'},
         {type: 'rectangle', id: 'c3', x: 270, y: 170, width: 80, height: 40, text: 'here', color: 'b'},
         {type: 'arrow', id:'a1', beginX: 200, beginY: 200, endX: 300, endY: 300, color: 'd', text:'This here'}]
 }
