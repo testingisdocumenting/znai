@@ -21,6 +21,10 @@
 }
 
 .znai-keyboard-shortcut kbd {
-    background-color: #ebcfa8;
+    background-color: #f3f1ef;
     color: var(--znai-regular-text-color);
+}
+
+.znai-keyboard-shortcut > kbd + kbd {
+    margin-left: 5px;
 }
