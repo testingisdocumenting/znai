@@ -18,15 +18,15 @@ import React from 'react'
 import colorByName from './colorByName'
 
 const ArrowBody = ({beginX, beginY, endX, endY, color, text, ...props}) => {
-    const colorScheme = colorByName(color)
+    const colorScheme = colorByName(color, true)
     return (
         <g {...props}>
             <defs>
-                <marker id="arrow" markerWidth="10" markerHeight="10" opacity="0.4" refX="0" refY="2" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L0,4 L2,2 z" fill={colorScheme.stroke} />
+                <marker id="arrow" markerWidth="10" markerHeight="10" opacity="1" refX="0" refY="2" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L0,4 L2,2 z" fill={colorScheme.fill} />
                 </marker>
             </defs>
-            <line x1={beginX} y1={beginY} x2={endX} y2={endY} fill={colorScheme.fill} stroke={colorScheme.stroke} strokeWidth="8" strokeOpacity="0.4" markerEnd="url(#arrow)" />
+            <line x1={beginX} y1={beginY} x2={endX} y2={endY} fill={colorScheme.fill} stroke={colorScheme.line} strokeWidth="8" strokeOpacity="1" markerEnd="url(#arrow)" />
             <text x={beginX}
                   y={ (beginY < endY) ? beginY - 15 : beginY + 15 }
                   fill={colorScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text>
