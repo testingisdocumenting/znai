@@ -22,8 +22,9 @@ import staticAnnotation from './StaticAnnotation'
 import circle from '../shapes/Circle'
 import rectangle from '../shapes/Rectangle'
 import arrow from '../shapes/Arrow'
+import highlight from '../shapes/Highlight'
 
-const shapesLib = {circle, rectangle, arrow}
+const shapesLib = {circle, rectangle, arrow, highlight}
 
 class Annotations {
     constructor(shapes) {
