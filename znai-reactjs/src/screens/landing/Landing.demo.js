@@ -32,10 +32,10 @@ const documentations = [
         description: 'external link example'
     },
     {
-        id: 'mdoc',
-        name: 'MDoc',
+        id: 'znai',
+        name: 'Znai',
         category: 'Documentation',
-        description: 'short description of mdoc. short description of mdoc. '
+        description: 'short description of znai. short description of znai. '
     },
     {
         id: 'python',

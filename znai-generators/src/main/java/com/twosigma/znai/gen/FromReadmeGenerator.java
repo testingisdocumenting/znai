@@ -34,7 +34,7 @@ public class FromReadmeGenerator {
         CliConfig cliConfig = new CliConfig(args);
 
         FromReadmeGenerator gen = new FromReadmeGenerator(cliConfig.getReadmeRoot(), cliConfig.getSectionId());
-        gen.generate(cliConfig.getMdocDest());
+        gen.generate(cliConfig.getZnaiDest());
     }
 
     private FromReadmeGenerator(Path srcRoot, String sectionId) {
@@ -42,13 +42,13 @@ public class FromReadmeGenerator {
         this.sectionId = sectionId;
     }
 
-    private void generate(Path mdocDest) throws IOException {
-        Path mdocSectionPath = mdocDest.resolve(sectionId);
+    private void generate(Path znaiDest) throws IOException {
+        Path znaiSectionPath = znaiDest.resolve(sectionId);
         readMeFiles = listReadMeFiles(srcRoot);
-        copyMarkdowns(mdocSectionPath);
+        copyMarkdowns(znaiSectionPath);
 
         String toc = generateToc();
-        Files.write(mdocDest.resolve("toc"), toc.getBytes());
+        Files.write(znaiDest.resolve("toc"), toc.getBytes());
 
         System.out.println("generated toc:");
         System.out.println(toc);

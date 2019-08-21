@@ -134,7 +134,7 @@ public class DocumentationServer {
             if (DocumentationPreparationHandlers.isReady(docId)) {
                 pagesStaticHandler.handle(ctx);
             } else if (isNotDocPageRequest(ctx)) {
-                // mdoc documentations are single page apps
+                // znai documentations are single page apps
                 // page refresh won't happen during navigation from one page to another
                 // but images will still be requested if they are present on a page
                 // in that case we will call documentation preparation before serving content
@@ -219,7 +219,7 @@ public class DocumentationServer {
         DocumentationPreparationHandlers.add(new DocumentationPreparationTestHandler());
 
         LandingDocEntriesProviders.add(() -> Stream.of(
-                new LandingDocEntry("mdoc", "MDoc", "http://custom","Documentation", "test desc")
+                new LandingDocEntry("znai", "Znai", "http://custom","Documentation", "test desc")
         ));
         UrlContentHandlers.add(new LandingUrlContentHandler("Company", "Guides"));
 

@@ -578,7 +578,7 @@ export class Documentation extends Component {
                 return {idTitle: pageSections[idx], rect: n.getBoundingClientRect()}
             })
 
-            // case where mdoc page has an example of rendered markdown
+            // case where znai page has an example of rendered markdown
             // it generates extra nodes matching section-title css, but that node is not part
             // of table of contents, so needs to be excluded
             function isNodeIdPresentInSections(node) {

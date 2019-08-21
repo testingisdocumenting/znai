@@ -19,8 +19,8 @@ import QueryResult from './QueryResult'
 class Search {
     constructor(allPages) {
         this.allPages = allPages
-        this.searchIdx = window.mdocSearchIdx
-        this.searchDataById = mapById(window.mdocSearchData)
+        this.searchIdx = window.znaiSearchIdx
+        this.searchDataById = mapById(window.znaiSearchData)
     }
 
     static convertIndexIdToSectionCoords(indexId) {

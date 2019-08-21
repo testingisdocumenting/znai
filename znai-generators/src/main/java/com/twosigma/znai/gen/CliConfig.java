@@ -23,13 +23,13 @@ import java.nio.file.Paths;
 
 class CliConfig {
     private static final String SECTION_ID = "sectionId";
-    private static final String DEST = "mdocDest";
+    private static final String DEST = "znaiDest";
     private static final String ROOT = "readmeRoot";
     private static final String HELP = "help";
 
     private final CommandLine commandLine;
     private Path readmeRoot;
-    private Path mdocDest;
+    private Path znaiDest;
     private String sectionId;
 
     CliConfig(String[] args) {
@@ -38,12 +38,12 @@ class CliConfig {
 
         if (commandLine.hasOption(HELP) || (args.length < 3)) {
             HelpFormatter helpFormatter = new HelpFormatter();
-            helpFormatter.printHelp("mdoc-gen", options);
+            helpFormatter.printHelp("znai-gen", options);
             System.exit(1);
         }
 
         readmeRoot = retrievePath(ROOT);
-        mdocDest = retrievePath(DEST);
+        znaiDest = retrievePath(DEST);
         sectionId = commandLine.getOptionValue(SECTION_ID);
     }
 
@@ -55,8 +55,8 @@ class CliConfig {
         return readmeRoot;
     }
 
-    Path getMdocDest() {
-        return mdocDest;
+    Path getZnaiDest() {
+        return znaiDest;
     }
 
     private Path retrievePath(String optName) {
@@ -77,7 +77,7 @@ class CliConfig {
         options.addOption(null, HELP, false, "print help");
         options.addOption(null, ROOT, true, "location of the readme root dir");
         options.addOption(null, DEST, true, "output location");
-        options.addOption(null, SECTION_ID, true, "mdoc section id where to put content");
+        options.addOption(null, SECTION_ID, true, "znai section id where to put content");
 
         return options;
     }

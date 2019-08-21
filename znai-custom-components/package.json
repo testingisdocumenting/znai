@@ -1,7 +1,7 @@
 {
-  "name": "custom-demo-components-for-mdoc",
+  "name": "custom-demo-components-for-znai",
   "version": "0.1.0",
-  "description": "Demo Components for mdoc",
+  "description": "Demo Components for znai",
   "private": true,
   "engines": {
     "node": ">=8.0.0"

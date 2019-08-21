@@ -77,7 +77,7 @@ const TestData = {
                 "title": "View On GitHub"
             },
             "id": "preview",
-            "title": "MDoc",
+            "title": "Znai",
             "type": "User Guide",
             "previewEnabled": true
         },
@@ -607,7 +607,7 @@ const TestData = {
                                     "type": "Paragraph",
                                     "content": [
                                         {
-                                            "code": "mdoc",
+                                            "code": "znai",
                                             "type": "InlinedCode"
                                         },
                                         {
@@ -615,12 +615,12 @@ const TestData = {
                                             "type": "SimpleText"
                                         },
                                         {
-                                            "url": "https://jira/mdoc",
+                                            "url": "https://jira/znai",
                                             "isFile": false,
                                             "type": "Link",
                                             "content": [
                                                 {
-                                                    "text": "jira/mdoc",
+                                                    "text": "jira/znai",
                                                     "type": "SimpleText"
                                                 }
                                             ]
@@ -639,7 +639,7 @@ const TestData = {
                                             "type": "SimpleText"
                                         },
                                         {
-                                            "code": "mdoc",
+                                            "code": "znai",
                                             "type": "InlinedCode"
                                         },
                                         {

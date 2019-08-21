@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const themeNameKey = 'mdocTheme'
+const themeNameKey = 'znaiTheme'
 
-class MdocSettings {
+class ZnaiSettings {
     saveSelectedThemeName(themeName) {
         if (window.localStorage) {
             localStorage.setItem(themeNameKey, themeName)
@@ -30,6 +30,6 @@ class MdocSettings {
     }
 }
 
-const mdocSettings = new MdocSettings()
+const znaiSettings = new ZnaiSettings()
 
-export {mdocSettings}
+export {znaiSettings}

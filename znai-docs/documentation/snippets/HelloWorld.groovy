@@ -1,4 +1,4 @@
-import you.company.com.util.*
+import your.company.com.util.*
 
 /*
  groovy docs on top

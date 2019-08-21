@@ -18,7 +18,7 @@ import React from 'react'
 import TocPanel from './TocPanel'
 
 const docMeta = {
-    "title": "MDoc",
+    "title": "Znai",
     "type": "User Guide",
     "viewOn": {
         "link": "https://github.com/twosigma/TestingIsDocumenting/blob/master/znai-cli/documentation",

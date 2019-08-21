@@ -62,7 +62,7 @@ import WithTheme from "./theme/WithTheme"
 const docMeta = {
     id: 'preview',
     type: 'User Guide',
-    title: 'MDoc',
+    title: 'Znai',
     previewEnabled: true,
     hipchatRoom: 'Test Room',
     viewOn: {
