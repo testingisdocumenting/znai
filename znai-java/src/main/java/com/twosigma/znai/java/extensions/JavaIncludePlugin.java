@@ -27,7 +27,9 @@ import com.twosigma.znai.parser.docelement.DocElementType;
 import com.twosigma.znai.utils.StringUtils;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,6 +38,9 @@ import static com.twosigma.znai.java.parser.JavaCodeUtils.removeSemicolonAtEnd;
 
 public class JavaIncludePlugin extends JavaIncludePluginBase {
     private PluginParamsOpts opts;
+    private boolean isBodyOnly;
+    private boolean isSignatureOnly;
+    private boolean isMultipleEntries;
 
     @Override
     public String id() {
@@ -51,14 +56,15 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     public JavaIncludeResult process(JavaCode javaCode) {
         opts = pluginParams.getOpts();
 
-        Boolean bodyOnly = opts.get("bodyOnly", false);
-        Boolean signatureOnly = opts.get("signatureOnly", false);
+        isBodyOnly = opts.get("bodyOnly", false);
+        isSignatureOnly = opts.get("signatureOnly", false);
+        isMultipleEntries = !entries.isEmpty();
 
-        if (bodyOnly && signatureOnly) {
+        if (isBodyOnly && isSignatureOnly) {
             throw new IllegalArgumentException("specify only bodyOnly or signatureOnly");
         }
 
-        String snippet = extractContent(javaCode, bodyOnly, signatureOnly);
+        String snippet = extractContent(javaCode);
         Map<String, Object> props = CodeSnippetsProps.create("java", snippet);
         props.putAll(pluginParams.getOpts().toMap());
 
@@ -68,35 +74,60 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
         return new JavaIncludeResult(Collections.singletonList(docElement), snippet);
     }
 
-    private String extractContent(JavaCode javaCode, Boolean isBodyOnly, Boolean isSignatureOnly) {
+    private String extractContent(JavaCode javaCode) {
         if (entry == null && entries == null) {
             return javaCode.getFileContent();
         }
 
         Stream<String> methodNamesWithOptionalTypes = entry != null ? Stream.of(entry) : entries.stream();
-        return methodNamesWithOptionalTypes.map(n -> extractSingleContent(javaCode, n, isBodyOnly, isSignatureOnly))
-                .collect(Collectors.joining(isSignatureOnly ? "\n" : "\n\n"));
+        return methodNamesWithOptionalTypes
+                .map(nameWithOptionalType -> extractSingleEntryContent(javaCode, nameWithOptionalType))
+                .collect(collectorWithSeparator());
     }
 
-    private String extractSingleContent(JavaCode javaCode, String entry, Boolean isBodyOnly, Boolean isSignatureOnly) {
+    private String extractSingleEntryContent(JavaCode javaCode, String entry) {
         return javaCode.hasType(entry) ?
-                extractTypeContent(javaCode, entry, isBodyOnly) :
-                extractMethodContent(javaCode, entry, isBodyOnly, isSignatureOnly);
+                extractTypeContent(javaCode, entry) :
+                extractMethodContent(javaCode, entry);
     }
 
-    private String extractTypeContent(JavaCode javaCode, String entry, Boolean isBodyOnly) {
+    private String extractTypeContent(JavaCode javaCode, String entry) {
         JavaType type = javaCode.findType(entry);
         return isBodyOnly ? type.getBodyOnly() : type.getFullBody();
     }
 
-    private String extractMethodContent(JavaCode javaCode, String entry, Boolean isBodyOnly, Boolean isSignatureOnly) {
-        JavaMethod method = javaCode.findMethod(entry);
+    private String extractMethodContent(JavaCode javaCode, String entry) {
+        List<JavaMethod> methods = isMultipleEntries ?
+                javaCode.findAllMethods(entry) :
+                Collections.singletonList(javaCode.findMethod(entry));
 
-        return isBodyOnly ?
-                extractBodyOnly(method) :
-                isSignatureOnly ? method.getSignatureOnly() :
-                        method.getFullBody();
+        if (isBodyOnly) {
+            return extractBodiesOnly(methods);
+        }
 
+        if (isSignatureOnly) {
+            return extractSignaturesOnly(methods);
+        }
+
+        return extractFullBodies(methods);
+    }
+
+    private String extractFullBodies(List<JavaMethod> methods) {
+        return methods.stream()
+                .map(JavaMethod::getFullBody)
+                .collect(collectorWithSeparator());
+    }
+
+    private String extractBodiesOnly(List<JavaMethod> methods) {
+        return methods.stream()
+                .map(this::extractBodyOnly)
+                .collect(collectorWithSeparator());
+    }
+
+    private String extractSignaturesOnly(List<JavaMethod> methods) {
+        return methods.stream()
+                .map(JavaMethod::getSignatureOnly)
+                .collect(collectorWithSeparator());
     }
 
     private String extractBodyOnly(JavaMethod method) {
@@ -109,5 +140,9 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
         result = removeSemicolon ? removeSemicolonAtEnd(result) : result;
 
         return result;
+    }
+
+    private Collector<CharSequence, ?, String> collectorWithSeparator() {
+        return Collectors.joining(isSignatureOnly ? "\n" : "\n\n");
     }
 }

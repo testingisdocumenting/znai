@@ -58,6 +58,10 @@ public class JavaCode {
         return codeVisitor.findMethodDetails(methodNameWithOptionalTypes);
     }
 
+    public List<JavaMethod> findAllMethods(String methodNameWithOptionalTypes) {
+        return codeVisitor.findAllMethodDetails(methodNameWithOptionalTypes);
+    }
+
     public JavaField fieldByName(String fieldName) {
         return codeVisitor.findFieldDetails(fieldName);
     }

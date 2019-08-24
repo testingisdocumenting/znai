@@ -25,9 +25,9 @@ import static com.twosigma.webtau.Ddjt.throwException
 class JavaIncludePluginTest {
     @Test
     void "includes multiple entries of java method signatures"() {
-        def result = process("Simple.java", "{entries: ['methodA', 'methodB'], signatureOnly: true}")
+        def result = process("Simple.java", "{entries: ['methodA', 'createData'], signatureOnly: true}")
         result.should == "void methodA()\n" +
-                "void methodB(String p)"
+                "Data createData()"
     }
 
     @Test
@@ -48,11 +48,29 @@ class JavaIncludePluginTest {
     }
 
     @Test
+    void "extract multiple signatures of a method overloads"() {
+        def result = process("Simple.java", "{entries: 'methodB', signatureOnly: true}")
+        result.should == 'void methodB(String p)\n' +
+                'void methodB(String p, Boolean b)'
+    }
+
+    @Test
+    void "extract multiple full bodies of a method overloads"() {
+        def result = process("Simple.java", "{entries: 'methodB'}")
+        result.should == 'void methodB(String p) {\n' +
+                '    doB();\n' +
+                '}\n' +
+                '\n' +
+                'void methodB(String p, Boolean b) {\n' +
+                '    doBPlus();\n' +
+                '}'
+    }
+
+    @Test
     void "optionally removes return in body only mode"() {
         process("Simple.java", "{entry: 'createData', bodyOnly: true, removeReturn: true}").should ==
                 "construction(a, b,\n" +
                 "             c, d);"
-
     }
 
     @Test

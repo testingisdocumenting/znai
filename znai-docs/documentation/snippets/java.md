@@ -64,19 +64,27 @@ Use `bodyOnly` to only display body of your type.
 
 To display multiple methods at once use `entries` parameter to pass a list of method names.
     
-    :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"]}
+    :include-java: HelloWorld.java {entries: ["createData", "importantAction"]}
 
 This will render:
 
-:include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"]}
+:include-java: HelloWorld.java {entries: ["createData", "importantAction"]}
 
 List important methods signatures at one place by passing `signatureOnly: true`.
 
-    :include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"], signatureOnly: true}
+    :include-java: HelloWorld.java {entries: ["createData", "importantAction"], signatureOnly: true}
 
 This will render: 
 
-:include-java: HelloWorld.java {entries: ["sampleMethod", "importantAction"], signatureOnly: true}
+:include-java: HelloWorld.java {entries: ["createData", "importantAction"], signatureOnly: true}
+
+# Multiple Overloads
+
+To list of the overloads of a method, specify method name using `entries` param.
+
+    :include-java: HelloWorld.java {entries: "sampleMethod", signatureOnly: true}
+
+:include-java: HelloWorld.java {entries: "sampleMethod", signatureOnly: true}
 
 # Class JavaDoc
 

@@ -35,4 +35,8 @@ class HelloWorld {
     public void importantAction() {
         // TODO important
     }
+
+    public Data createData() {
+        // create data
+    }
 }
