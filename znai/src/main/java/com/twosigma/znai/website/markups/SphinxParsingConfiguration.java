@@ -44,12 +44,11 @@ public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
     }
 
     @Override
-    public String filesExtension() {
-        return "xml";
-    }
-
-    @Override
     public Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem) {
         return root.resolve(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + "." + filesExtension());
+    }
+
+    private String filesExtension() {
+        return "xml";
     }
 }

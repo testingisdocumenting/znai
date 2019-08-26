@@ -179,11 +179,9 @@ public class WebSite {
             return toc.getIndex();
         }
 
-        return toc.getTocItems().stream().filter(ti ->
-                path.toAbsolutePath().getParent().getFileName().toString().equals(ti.getDirName()) &&
-                        path.getFileName().toString().equals(
-                                ti.getFileNameWithoutExtension() + "." + markupParsingConfiguration.filesExtension()))
-                .findFirst().orElse(null);
+        return toc.getTocItems().stream().filter(tocItem -> path.toAbsolutePath().equals(markupPath(tocItem)))
+                .findFirst()
+                .orElse(null);
     }
 
     public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {

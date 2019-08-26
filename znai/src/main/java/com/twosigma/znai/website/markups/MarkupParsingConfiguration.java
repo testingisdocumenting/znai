@@ -30,7 +30,5 @@ public interface MarkupParsingConfiguration {
 
     MarkupParser createMarkupParser(ComponentsRegistry componentsRegistry);
 
-    String filesExtension();
-
     Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem);
 }

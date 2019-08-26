@@ -56,14 +56,13 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
     }
 
     @Override
-    public String filesExtension() {
-        return "md";
-    }
-
-    @Override
     public Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem) {
         return componentsRegistry.resourceResolver().fullPath(tocItem.getDirName()
                  + (tocItem.getDirName().isEmpty() ? "" : File.separator) +
                 (tocItem.getFileNameWithoutExtension() + "." + filesExtension()));
+    }
+
+    private String filesExtension() {
+        return "md";
     }
 }
