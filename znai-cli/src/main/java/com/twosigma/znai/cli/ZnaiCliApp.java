@@ -16,15 +16,15 @@
 
 package com.twosigma.znai.cli;
 
+import com.twosigma.znai.cli.extension.CliCommandConfig;
 import com.twosigma.znai.console.ConsoleOutputs;
 import com.twosigma.znai.console.ansi.AnsiConsoleOutput;
 import com.twosigma.znai.console.ansi.Color;
-import com.twosigma.znai.utils.FileUtils;
-import com.twosigma.znai.cli.extension.CliCommandConfig;
 import com.twosigma.znai.html.HtmlPage;
 import com.twosigma.znai.html.reactjs.ReactJsBundle;
 import com.twosigma.znai.server.DocumentationServer;
 import com.twosigma.znai.server.preview.DocumentationPreview;
+import com.twosigma.znai.utils.FileUtils;
 import com.twosigma.znai.web.WebResource;
 import com.twosigma.znai.website.ProgressReporter;
 import com.twosigma.znai.website.WebSite;
@@ -147,7 +147,7 @@ public class ZnaiCliApp {
         WebSite.Configuration webSiteCfg = WebSite.withRoot(config.getSourceRoot()).
                 withReactJsBundle(reactJsBundle).
                 withId(getDocId()).
-                withMarkupType(config.getMarkupType()).
+                withDocumentationType(config.getMarkupType()).
                 withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).
                 withFileWithLookupPaths("lookup-paths").
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).

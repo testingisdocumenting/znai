@@ -24,6 +24,8 @@ import com.twosigma.znai.structure.TocItem;
 import java.nio.file.Path;
 
 public interface MarkupParsingConfiguration {
+    String configurationName();
+
     TableOfContents createToc(ComponentsRegistry componentsRegistry);
 
     MarkupParser createMarkupParser(ComponentsRegistry componentsRegistry);
