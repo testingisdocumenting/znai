@@ -19,9 +19,7 @@ package com.twosigma.testing.examples.people;
 import com.twosigma.webtau.data.table.TableData;
 import org.junit.Test;
 
-import static com.twosigma.webtau.Ddjt.actual;
-import static com.twosigma.webtau.Ddjt.equal;
-import static com.twosigma.webtau.Ddjt.header;
+import static com.twosigma.webtau.Ddjt.*;
 
 public class PeopleDaoTest {
     private PeopleDao dao = new PeopleDao();
@@ -30,9 +28,9 @@ public class PeopleDaoTest {
     public void providesAccessToNewJoiners() {
         // ...
 
-        TableData expected = header("id", "level", "monthsAtCompany").values(
-                                    "bob",      3,   0,
-                                    "smith",    4,   0);
+        TableData expected = table("id", "level", "monthsAtCompany").values(
+                                   "bob",      3,   0,
+                                   "smith",    4,   0);
 
         actual(dao.thisWeekJoiners()).should(equal(expected));
     }

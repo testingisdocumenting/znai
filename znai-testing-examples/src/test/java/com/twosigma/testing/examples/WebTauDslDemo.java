@@ -20,9 +20,7 @@ import com.twosigma.webtau.browser.page.PageElement;
 
 import static com.twosigma.webtau.WebTauDsl.$;
 import static com.twosigma.webtau.WebTauDsl.browser;
-import static com.twosigma.webtau.browser.documentation.DocumentationDsl.arrow;
-import static com.twosigma.webtau.browser.documentation.DocumentationDsl.badge;
-import static com.twosigma.webtau.browser.documentation.DocumentationDsl.highlighter;
+import static com.twosigma.webtau.browser.documentation.BrowserDocumentation.*;
 
 public class WebTauDslDemo {
     public static void main(String[] args) {
@@ -34,7 +32,7 @@ public class WebTauDslDemo {
 
         browser.doc.withAnnotations(
                 badge(signIn),
-                highlighter(input).withColor("green"),
+                highlight(input).withColor("green"),
                 arrow(search, "Click This").withColor("yellow")).capture("test");
     }
 }

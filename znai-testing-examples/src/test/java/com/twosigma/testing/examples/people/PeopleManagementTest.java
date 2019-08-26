@@ -21,9 +21,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.twosigma.webtau.Ddjt.actual;
-import static com.twosigma.webtau.Ddjt.equal;
-import static com.twosigma.webtau.Ddjt.header;
+import static com.twosigma.webtau.Ddjt.*;
 import static java.util.stream.Collectors.toList;
 
 public class PeopleManagementTest {
@@ -31,10 +29,10 @@ public class PeopleManagementTest {
 
     @Test
     public void diversifiedTeamsShouldHaveVariousLevelsAndTimeAtCompany() {
-        TableData employeeData = header(    "id", "level", "monthsAtCompany").values(
-                                           "bob",       2, 12,
-                                         "smith",       4, 34,
-                                          "john",       3, 20);
+        TableData employeeData = table(    "id", "level", "monthsAtCompany").values(
+                                          "bob",       2, 12,
+                                        "smith",       4, 34,
+                                         "john",       3, 20);
 
         boolean diversified = peopleManagement.diversityLevel(employees(employeeData));
         actual(diversified).should(equal(true));
