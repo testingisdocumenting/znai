@@ -1,7 +1,7 @@
 package com.twosigma.testing.examples
 
-import com.twosigma.documentation.DocumentationArtifacts
 import com.twosigma.webtau.data.table.TableData
+import com.twosigma.webtau.documentation.DocumentationArtifacts
 import org.junit.Test
 
 class TestToDocExample {

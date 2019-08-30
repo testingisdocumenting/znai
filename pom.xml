@@ -120,7 +120,7 @@
         <antlr.version>4.5</antlr.version>
         <jackson.verson>2.9.9</jackson.verson>
         <jackson.databind.verson>2.9.9.2</jackson.databind.verson>
-        <webtau.version>0.30</webtau.version>
+        <webtau.version>1.13</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
     </properties>
 
