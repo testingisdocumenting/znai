@@ -54,7 +54,7 @@ class Search {
             const sections = p.content.filter((de) => {
                 return tocItem.dirName === sectionCoords.dirName &&
                     tocItem.fileName === sectionCoords.fileName &&
-                    de.type === 'Section' && de.id === sectionCoords.pageSectionId})
+                    de.type === 'Section' && (!sectionCoords.pageSectionId || de.id === sectionCoords.pageSectionId)})
 
             sections.forEach((s) => matching.push(s))
         })
