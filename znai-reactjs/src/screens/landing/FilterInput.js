@@ -26,7 +26,7 @@ export default class FilterInput extends React.Component {
             <div className="znai-landing-filter-input">
                 <input ref={this.saveRef}
                        value={filterText}
-                       placeholder="Search Documentation"
+                       placeholder="Find Documentation"
                        onChange={onChange}/>
             </div>
         )
