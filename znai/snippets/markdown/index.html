@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Markdown</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Single Markdown File</h1></header>
+<p>To reuse Markdown in several places without duplication, use the include-markdown plugin. :include-markdown: markdown-dir/md-to-include.md</p>
+</article>
+
+<article>
+<header><h1>Multiple Markdown Files</h1></header>
+<p>You can also include all the Markdown files within a directory by using include-markdowns .This plugin can be used to generate a release notes or an FAQ page :include-markdowns: markdown-dir Note: include-markdowns displays the files of the specified directory based on the filename, in alphabetical order.</p>
+</article>
+
+<article>
+<header><h1>Optional Markdown</h1></header>
+<p>When you document an open source project you may have different instructions based on where the documentation is deployed.For example, this documentation has two versions, one deployed internally at Two Sigma and one is deployed externally using GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like Getting Started.We build documentation twice and the differences are handled by :include-markdown: 's firstAvailable parameter. :include-markdown: {firstAvailable: [ &quot;markdown-dir/getting-started-step-internal.md&quot;, &quot;markdown-dir/getting-started-step-external.md&quot;]}</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Single Markdown File",
+      "id" : "single-markdown-file",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To reuse Markdown in several places without duplication, use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-markdown",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-markdown: markdown-dir/md-to-include.md\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "level" : 2,
+        "title" : "Included Markdown",
+        "id" : "included-markdown",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This markdown, and the sub-heading above, were included using the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-markdown",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin. Super easy.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Multiple Markdown Files",
+      "id" : "multiple-markdown-files",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You can also include all the Markdown files within a directory by using ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-markdowns",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This plugin can be used to generate a release notes or an FAQ page",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-markdowns: markdown-dir\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "level" : 2,
+        "title" : "Included Markdown",
+        "id" : "included-markdown",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This markdown, and the sub-heading above, were included using the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-markdown",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin. Super easy.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "level" : 2,
+        "title" : "Included Markdown 3",
+        "id" : "included-markdown-3",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This markdown, and the sub-hed above, were included using the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-markdowns",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin. Please notice the ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "s",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "level" : 2,
+        "title" : "Included Markdown 2",
+        "id" : "included-markdown-2",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This markdown, and the sub-hed above, were included using the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-markdowns",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin. Please notice the ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "s",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "bash",
+        "snippet" : "$ command specific to external\n",
+        "lineNumber" : "",
+        "title" : "getting started",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-markdowns",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " displays the files of the specified directory based on the filename, in alphabetical order.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Optional Markdown",
+      "id" : "optional-markdown",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you document an open source project you may have different instructions based on where the documentation is deployed.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "For example, this documentation has two versions, one deployed internally at Two Sigma and one is deployed externally using GitHub Pages.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Most of the documentation parts are the same, but there are differences in sections like ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "Getting Started",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "We build documentation twice and the differences are handled by ",
+          "type" : "SimpleText"
+        }, {
+          "code" : ":include-markdown:",
+          "type" : "InlinedCode"
+        }, {
+          "text" : "'s ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "firstAvailable",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-markdown: {firstAvailable: [\n    \"markdown-dir/getting-started-step-internal.md\", \n    \"markdown-dir/getting-started-step-external.md\"]}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "bash",
+        "snippet" : "$ command specific to external\n",
+        "lineNumber" : "",
+        "title" : "getting started",
+        "type" : "Snippet"
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Snippets",
+      "pageTitle" : "Markdown",
+      "pageMeta" : { },
+      "fileName" : "markdown",
+      "dirName" : "snippets",
+      "pageSectionIdTitles" : [ {
+        "title" : "Single Markdown File",
+        "id" : "single-markdown-file"
+      }, {
+        "title" : "Multiple Markdown Files",
+        "id" : "multiple-markdown-files"
+      }, {
+        "title" : "Optional Markdown",
+        "id" : "optional-markdown"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

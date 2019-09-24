@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Columns</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Information Layout</h1></header>
+<p>The way your information is laid out affects how easy it is to comprehend given material. Some content benefits from being formatted side-by-side. Some examples are:Before-and-after transitionAction and its resultInput and output</p>
+</article>
+
+<article>
+<header><h1>Definition</h1></header>
+<p>To define columns layout use a fenced block plugin with the columns keyword: ```columns left: this content goes to the left and can span multiple lines right: this content goes to the right and can span multiple lines ``` this content goes to the leftand can span multiple lines this content goes to the rightand can span multiple lines</p>
+</article>
+
+<article>
+<header><h1>Sizes</h1></header>
+<p>Size can be specified for a column as a portion . By default both portions are assigned a value of 10 . If you specify portion to be 3 for left column it will occupy 0.3 of the space. ```columns {left: {portion: 3}} left: this content goes to the left and can span multiple lines right: this content goes to the right and can span multiple lines ``` this content goes to the leftand can span multiple lines this content goes to the rightand can span multiple lines</p>
+</article>
+
+<article>
+<header><h1>Border</h1></header>
+<p>You can add a border to your columns. ```columns {left: {portion: 3}, border: true} left: **Argument Name** right: Argument description and what argument is for ``` ```columns {left: {portion: 3}, border: true} left: **Another Name** right: Argument description and what argument is for ``` Argument Name Argument description and what argument is for Another Name Argument description and what argument is for</p>
+</article>
+
+<article>
+<header><h1>Alignment</h1></header>
+<p>Specify text alignment using align . ```columns {left: {portion: 3, align: &quot;right&quot;}, border: true} left: **Argument Name** *optional* right: Argument description and what argument is for ``` Argument Nameoptional Argument description and what argument is for</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Information Layout",
+      "id" : "information-layout",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The way your information is laid out affects how easy it is to comprehend given material.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Some content benefits from being formatted side-by-side. Some examples are:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Before-and-after transition",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Action and its result",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Input and output",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "title" : "Definition",
+      "id" : "definition",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To define columns layout use a ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "fenced",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " block plugin with the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "columns",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " keyword:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```columns\nleft: \nthis content goes to the left\n\nand can span multiple lines\nright: this content goes to the right\n\nand can span multiple lines\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "this content goes to the left",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "and can span multiple lines",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "this content goes to the right",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "and can span multiple lines",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "config" : { },
+        "type" : "Columns"
+      } ]
+    }, {
+      "title" : "Sizes",
+      "id" : "sizes",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Size can be specified for a column as a ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "portion",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ". By default both portions are assigned a value of ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "10",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "If you specify ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "portion",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to be ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "3",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " for left column it will occupy ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "0.3",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " of the space.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```columns {left: {portion: 3}}\nleft: \nthis content goes to the left\n\nand can span multiple lines\nright: this content goes to the right\n\nand can span multiple lines\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "this content goes to the left",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "and can span multiple lines",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "this content goes to the right",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "and can span multiple lines",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "config" : {
+          "left" : {
+            "portion" : 3
+          }
+        },
+        "type" : "Columns"
+      } ]
+    }, {
+      "title" : "Border",
+      "id" : "border",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You can add a border to your columns.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```columns {left: {portion: 3}, border: true}\nleft: **Argument Name**\nright: Argument description and what argument is for\n```\n```columns {left: {portion: 3}, border: true}\nleft: **Another Name**\nright: Argument description and what argument is for\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "Argument Name",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Argument description and what argument is for",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "config" : {
+          "left" : {
+            "portion" : 3
+          },
+          "border" : true
+        },
+        "type" : "Columns"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "Another Name",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Argument description and what argument is for",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "config" : {
+          "left" : {
+            "portion" : 3
+          },
+          "border" : true
+        },
+        "type" : "Columns"
+      } ]
+    }, {
+      "title" : "Alignment",
+      "id" : "alignment",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Specify text alignment using ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "align",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```columns {left: {portion: 3, align: \"right\"}, border: true}\nleft: **Argument Name**\n\n*optional*\nright: Argument description and what argument is for\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "Argument Name",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "optional",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Argument description and what argument is for",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "config" : {
+          "left" : {
+            "portion" : 3,
+            "align" : "right"
+          },
+          "border" : true
+        },
+        "type" : "Columns"
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Layout",
+      "pageTitle" : "Columns",
+      "pageMeta" : { },
+      "fileName" : "columns",
+      "dirName" : "layout",
+      "pageSectionIdTitles" : [ {
+        "title" : "Information Layout",
+        "id" : "information-layout"
+      }, {
+        "title" : "Definition",
+        "id" : "definition"
+      }, {
+        "title" : "Sizes",
+        "id" : "sizes"
+      }, {
+        "title" : "Border",
+        "id" : "border"
+      }, {
+        "title" : "Alignment",
+        "id" : "alignment"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

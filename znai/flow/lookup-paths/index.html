@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Lookup Paths</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Files Reference Lookup</h1></header>
+<p>When you refer a file using plugins like :include-file: my-file.cpp Znai tries to find the file in following locations:directory with the markup file that refers my-file.cpp documentation root directorylocations enumerated inside &lt;doc-root&gt;/lookup-paths file txt ../examples ../module/src/main/java</p>
+</article>
+
+<article>
+<header><h1>HTTP Lookup Location</h1></header>
+<p>If files you want to include are not part of your project, you can add an HTTP base URL to lookup-paths . txt ../examples ../module/src/main/java https://raw.githubusercontent.com/twosigma/webtau/master If file is not found using local locations it will be fetched from the provided urls :include-file: .travis.yml language: java cache: directories: - $HOME/.m2 - $HOME/.npm - node_modules dist: xenial services: - xvfb addons: chrome: stable apt: packages: - graphviz # disables the default install step which is mvn install skipping tests install: true script: mvn -B package deploy: - provider: script script: ./update-gh-pages.sh skip_cleanup: true on: all_branches: true tags: true</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Files Reference Lookup",
+      "id" : "files-reference-lookup",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you refer a file using plugins like",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "code" : ":include-file: my-file.cpp",
+          "type" : "InlinedCode"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "code" : "Znai",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " tries to find the file in following locations:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "directory with the markup file that refers ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "my-file.cpp",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "documentation root directory",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "locations enumerated inside ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "<doc-root>/lookup-paths",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " file",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "lang" : "txt",
+        "snippet" : "../examples\n../module/src/main/java\n",
+        "lineNumber" : "",
+        "title" : "lookup-paths",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "HTTP Lookup Location",
+      "id" : "http-lookup-location",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If files you want to include are not part of your project, you can add an HTTP base URL to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "lookup-paths",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "txt",
+        "snippet" : "../examples\n../module/src/main/java\nhttps://raw.githubusercontent.com/twosigma/webtau/master\n",
+        "lineNumber" : "",
+        "title" : "lookup-paths",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If file is not found using local locations it will be fetched from the provided urls",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: .travis.yml\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "yaml",
+        "snippet" : "language: java\n\ncache:\n  directories:\n  - $HOME/.m2\n  - $HOME/.npm\n  - node_modules\n\ndist: xenial\n\nservices:\n  - xvfb\n\naddons:\n  chrome: stable\n  apt:\n    packages:\n      - graphviz\n\n# disables the default install step which is mvn install skipping tests\ninstall: true\n\nscript: mvn -B package\n\ndeploy:\n  - provider: script\n    script: ./update-gh-pages.sh\n    skip_cleanup: true\n    on:\n      all_branches: true\n      tags: true",
+        "type" : "Snippet"
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Flow",
+      "pageTitle" : "Lookup Paths",
+      "pageMeta" : { },
+      "fileName" : "lookup-paths",
+      "dirName" : "flow",
+      "pageSectionIdTitles" : [ {
+        "title" : "Files Reference Lookup",
+        "id" : "files-reference-lookup"
+      }, {
+        "title" : "HTTP Lookup Location",
+        "id" : "http-lookup-location"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+[ {
+  "Account Type" : "SPB3",
+  "Operation" : "Buy Options",
+  "Restriction" : "weekends only"
+}, {
+  "Account Type" : "TR",
+  "Operation" : "Sell Futures",
+  "Restriction" : "except holidays"
+}, {
+  "Account Type" : "BOSS",
+  "Operation" : "Buy Stocks",
+  "Restriction" : "none"
+} ]

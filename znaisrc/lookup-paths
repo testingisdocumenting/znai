@@ -1,0 +1,9 @@
+_artifacts
+../../znai-console/src/main/java
+../../znai-console/src/test/groovy
+../../znai-jupyter
+../../znai-testing-examples
+../../znai-testing-examples/src/test/groovy
+../../znai-testing-examples/src/test/java
+../../znai-testing-examples/target/test-classes
+https://raw.githubusercontent.com/twosigma/webtau/master

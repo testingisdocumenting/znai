@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Json</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Paths</h1></header>
+<p>Use the include-json plugin to bring attention to a certain place in a JSON file. :include-json: book-store.json {paths: [&quot;root.store.book[0].category&quot;, &quot;root.store.book[2].category&quot;]} Comma-separated paths specified inside paths will be highlighted.</p>
+</article>
+
+<article>
+<header><h1>Paths From File</h1></header>
+<p>Use pathsFile to specify a file to read paths from :include-json: book-store.json {pathsFile: &quot;book-store-paths.json&quot;}</p>
+</article>
+
+<article>
+<header><h1>Json Subparts</h1></header>
+<p>To include only a portion of your document pass https://github.com/json-path/JsonPath Json Path as include property :include-json: book-store.json {include: &quot;$..book[0,1]&quot;}</p>
+</article>
+
+<article>
+<header><h1>Title</h1></header>
+<p>To specify a title use the title property :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, title: &quot;Books&quot;}</p>
+</article>
+
+<article>
+<header><h1>Read More</h1></header>
+<p>Use readMore to show only first lines of JSON . Optional readMoreVisibleLines can be specified to set the initial number of lines to display :include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}</p>
+</article>
+
+<article>
+<header><h1>Hidden Parts</h1></header>
+<p>To hide sub-parts of your JSON use collapsedPaths property. :include-json: book-store.json {collapsedPaths: ['root.store.book']}</p>
+</article>
+
+<article>
+<header><h1>Highlights</h1></header>
+<p>Additionally to highlighting a specific JSON value using paths , you can (similarly to snippets/external-code-snippets#highlights regular code snippets) highlight a line by text matching or by providing a line index. :include-json: book-store.json {highlight: [&quot;category&quot;, 2]}</p>
+</article>
+
+<article>
+<header><h1>Test Results</h1></header>
+<p>Consider leveraging testing frameworks to extract JSON samples from your end points. Information about what assertions were made can be used to highlight points of interest.</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Paths",
+      "id" : "paths",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-json",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin to bring attention to a certain place in a ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JSON",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {paths: [\"root.store.book[0].category\", \"root.store.book[2].category\"]}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Comma-separated paths specified inside ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "paths",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " will be highlighted.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "paths" : [ "root.store.book[0].category", "root.store.book[2].category" ],
+        "data" : {
+          "store" : {
+            "book" : [ {
+              "category" : "reference",
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "price" : 8.95
+            }, {
+              "category" : "fiction",
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "price" : 12.99
+            }, {
+              "category" : "fiction",
+              "author" : "Herman Melville",
+              "title" : "Moby Dick",
+              "isbn" : "0-553-21311-3",
+              "price" : 8.99
+            }, {
+              "category" : "fiction",
+              "author" : "J. R. R. Tolkien",
+              "title" : "The Lord of the Rings",
+              "isbn" : "0-395-19395-8",
+              "price" : 22.99
+            } ],
+            "bicycle" : {
+              "color" : "red",
+              "price" : 19.95
+            }
+          },
+          "expensive" : 10
+        },
+        "type" : "Json"
+      } ]
+    }, {
+      "title" : "Paths From File",
+      "id" : "paths-from-file",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "pathsFile",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to specify a file to read paths from",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "title" : "book-store-paths.json",
+        "data" : [ "root.store.book[1].category", "root.store.book[2].category" ],
+        "paths" : [ ],
+        "type" : "Json"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {pathsFile: \"book-store-paths.json\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Json Subparts",
+      "id" : "json-subparts",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To include only a portion of your document",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "pass ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://github.com/json-path/JsonPath",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Json Path",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " as ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " property",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "include" : "$..book[0,1]",
+        "data" : [ {
+          "category" : "reference",
+          "author" : "Nigel Rees",
+          "title" : "Sayings of the Century",
+          "price" : 8.95
+        }, {
+          "category" : "fiction",
+          "author" : "Evelyn Waugh",
+          "title" : "Sword of Honour",
+          "price" : 12.99
+        } ],
+        "paths" : [ ],
+        "type" : "Json"
+      } ]
+    }, {
+      "title" : "Title",
+      "id" : "title",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To specify a title use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " property",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", title: \"Books\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "include" : "$..book[0,1]",
+        "title" : "Books",
+        "data" : [ {
+          "category" : "reference",
+          "author" : "Nigel Rees",
+          "title" : "Sayings of the Century",
+          "price" : 8.95
+        }, {
+          "category" : "fiction",
+          "author" : "Evelyn Waugh",
+          "title" : "Sword of Honour",
+          "price" : 12.99
+        } ],
+        "paths" : [ ],
+        "type" : "Json"
+      } ]
+    }, {
+      "title" : "Read More",
+      "id" : "read-more",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "readMore",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to show only first lines of ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JSON",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ". ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "Optional",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "readMoreVisibleLines",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " can be specified to set",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "the initial number of lines to display",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "readMore" : true,
+        "readMoreVisibleLines" : 5,
+        "data" : {
+          "store" : {
+            "book" : [ {
+              "category" : "reference",
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "price" : 8.95
+            }, {
+              "category" : "fiction",
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "price" : 12.99
+            }, {
+              "category" : "fiction",
+              "author" : "Herman Melville",
+              "title" : "Moby Dick",
+              "isbn" : "0-553-21311-3",
+              "price" : 8.99
+            }, {
+              "category" : "fiction",
+              "author" : "J. R. R. Tolkien",
+              "title" : "The Lord of the Rings",
+              "isbn" : "0-395-19395-8",
+              "price" : 22.99
+            } ],
+            "bicycle" : {
+              "color" : "red",
+              "price" : 19.95
+            }
+          },
+          "expensive" : 10
+        },
+        "paths" : [ ],
+        "type" : "Json"
+      } ]
+    }, {
+      "title" : "Hidden Parts",
+      "id" : "hidden-parts",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To hide sub-parts of your JSON use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "collapsedPaths",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " property.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {collapsedPaths: ['root.store.book']}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "collapsedPaths" : [ "root.store.book" ],
+        "data" : {
+          "store" : {
+            "book" : [ {
+              "category" : "reference",
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "price" : 8.95
+            }, {
+              "category" : "fiction",
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "price" : 12.99
+            }, {
+              "category" : "fiction",
+              "author" : "Herman Melville",
+              "title" : "Moby Dick",
+              "isbn" : "0-553-21311-3",
+              "price" : 8.99
+            }, {
+              "category" : "fiction",
+              "author" : "J. R. R. Tolkien",
+              "title" : "The Lord of the Rings",
+              "isbn" : "0-395-19395-8",
+              "price" : 22.99
+            } ],
+            "bicycle" : {
+              "color" : "red",
+              "price" : 19.95
+            }
+          },
+          "expensive" : 10
+        },
+        "paths" : [ ],
+        "type" : "Json"
+      } ]
+    }, {
+      "title" : "Highlights",
+      "id" : "highlights",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Additionally to highlighting a specific ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JSON",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " value using ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "paths",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", you can",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "(similarly to ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/external-code-snippets#highlights",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "regular code snippets",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ") highlight",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "a line by text matching or by providing a line index.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {highlight: [\"category\", 2]}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "highlight" : [ "category", 2 ],
+        "data" : {
+          "store" : {
+            "book" : [ {
+              "category" : "reference",
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "price" : 8.95
+            }, {
+              "category" : "fiction",
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "price" : 12.99
+            }, {
+              "category" : "fiction",
+              "author" : "Herman Melville",
+              "title" : "Moby Dick",
+              "isbn" : "0-553-21311-3",
+              "price" : 8.99
+            }, {
+              "category" : "fiction",
+              "author" : "J. R. R. Tolkien",
+              "title" : "The Lord of the Rings",
+              "isbn" : "0-395-19395-8",
+              "price" : 22.99
+            } ],
+            "bicycle" : {
+              "color" : "red",
+              "price" : 19.95
+            }
+          },
+          "expensive" : 10
+        },
+        "paths" : [ ],
+        "type" : "Json"
+      } ]
+    }, {
+      "title" : "Test Results",
+      "id" : "test-results",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Consider leveraging testing frameworks to extract ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JSON",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " samples from your end points.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Information about what assertions were made can be used to highlight points of interest.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Snippets",
+      "pageTitle" : "Json",
+      "pageMeta" : { },
+      "fileName" : "json",
+      "dirName" : "snippets",
+      "pageSectionIdTitles" : [ {
+        "title" : "Paths",
+        "id" : "paths"
+      }, {
+        "title" : "Paths From File",
+        "id" : "paths-from-file"
+      }, {
+        "title" : "Json Subparts",
+        "id" : "json-subparts"
+      }, {
+        "title" : "Title",
+        "id" : "title"
+      }, {
+        "title" : "Read More",
+        "id" : "read-more"
+      }, {
+        "title" : "Hidden Parts",
+        "id" : "hidden-parts"
+      }, {
+        "title" : "Highlights",
+        "id" : "highlights"
+      }, {
+        "title" : "Test Results",
+        "id" : "test-results"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

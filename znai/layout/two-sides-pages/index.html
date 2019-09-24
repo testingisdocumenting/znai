@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Two Sides Pages</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Setup</h1></header>
+<p>To enable two-sided layout as seen on this page, add the following at the beginning of a Markdown file: markdown --- type: two-sides ---</p>
+</article>
+
+<article>
+<header><h1>Details Side</h1></header>
+<p>Use the right pane to display additional details. It could be a REST response or a code snippet.Use include-meta in front of some content to place it on the right side of the page. All the following content will go to the right side. At the start of a new section it will be reset. markdown :include-open-api: snippets/open-api/uber.json {method: &quot;get&quot;, path: &quot;/v1/estimates/time&quot;} :include-meta: {rightSide: true} :include-json: two-sides/price-estimate.json</p>
+</article>
+
+<article>
+<header><h1>Aligning Data in Columns</h1></header>
+<p>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side. :include-empty-block: {rightSide: true} :include-table: layout/table.csv :include-meta: {rightSide: true} :include-file: layout/table.csv</p>
+</article>
+
+<article>
+<header><h1>Single Data Block Shortcut</h1></header>
+<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch If need to put a single data block to a right side, you can add rightSide: true as a parameter to include- plugins. # Single Data Block Shortcut :include-table: layout/table.csv :include-file: layout/table.csv {rightSide: true}</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Setup",
+      "id" : "setup",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To enable two-sided layout as seen on this page, add the following at the beginning of a Markdown file:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "---\ntype: two-sides\n---\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Details Side",
+      "id" : "details-side",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the right pane to display additional details. It could be a REST response or a code snippet.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-meta",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " in front of some content to place it on the right side of the page.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "All the following content will go to the right side. At the start of a new section it will be reset.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-open-api: snippets/open-api/uber.json {method: \"get\", path: \"/v1/estimates/time\"}\n:include-meta: {rightSide: true}\n:include-json: two-sides/price-estimate.json\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Open API example",
+      "id" : "open-api-example",
+      "type" : "Section",
+      "content" : [ {
+        "method" : "get",
+        "path" : "/v1/estimates/time",
+        "operation" : {
+          "id" : "null",
+          "method" : "get",
+          "path" : "/v1/estimates/time",
+          "consumes" : null,
+          "produces" : [ "application/json" ],
+          "summary" : "Time Estimates",
+          "tags" : [ "Estimates" ],
+          "parameters" : [ {
+            "name" : "start_latitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Latitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "start_longitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Longitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "customer_uuid",
+            "in" : "query",
+            "type" : "string",
+            "required" : false,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique customer identifier to be used for experience customization.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "product_id",
+            "in" : "query",
+            "type" : "string",
+            "required" : false,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ],
+          "responses" : [ {
+            "code" : "200",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "properties" : {
+                  "image" : {
+                    "description" : [ {
+                      "type" : "Paragraph",
+                      "content" : [ {
+                        "text" : "Image URL representing the product.",
+                        "type" : "SimpleText"
+                      } ]
+                    } ],
+                    "type" : "string"
+                  },
+                  "product_id" : {
+                    "description" : [ {
+                      "type" : "Paragraph",
+                      "content" : [ {
+                        "text" : "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.",
+                        "type" : "SimpleText"
+                      } ]
+                    } ],
+                    "type" : "string"
+                  },
+                  "description" : {
+                    "description" : [ {
+                      "type" : "Paragraph",
+                      "content" : [ {
+                        "text" : "Description of product.",
+                        "type" : "SimpleText"
+                      } ]
+                    } ],
+                    "type" : "string"
+                  },
+                  "display_name" : {
+                    "description" : [ {
+                      "type" : "Paragraph",
+                      "content" : [ {
+                        "text" : "Display name of product.",
+                        "type" : "SimpleText"
+                      } ]
+                    } ],
+                    "type" : "string"
+                  },
+                  "capacity" : {
+                    "description" : [ {
+                      "type" : "Paragraph",
+                      "content" : [ {
+                        "text" : "Capacity of product. For example, 4 people.",
+                        "type" : "SimpleText"
+                      } ]
+                    } ],
+                    "type" : "string"
+                  }
+                }
+              }
+            },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "An array of products",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "code" : "default",
+            "schema" : {
+              "properties" : {
+                "code" : {
+                  "format" : "int32",
+                  "type" : "integer"
+                },
+                "message" : {
+                  "type" : "string"
+                },
+                "fields" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unexpected error",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ],
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        },
+        "type" : "OpenApiOperation"
+      }, {
+        "rightSide" : true,
+        "type" : "Meta"
+      }, {
+        "title" : "Response",
+        "data" : {
+          "prices" : [ {
+            "localized_display_name" : "POOL",
+            "distance" : 6.17,
+            "display_name" : "POOL",
+            "product_id" : "26546650-e557-4a7b-86e7-6a3942445247",
+            "high_estimate" : 15,
+            "low_estimate" : 13,
+            "duration" : 1080,
+            "estimate" : "$13-14",
+            "currency_code" : "USD"
+          }, {
+            "localized_display_name" : "uberX",
+            "distance" : 6.17,
+            "display_name" : "uberX",
+            "product_id" : "a1111c8c-c720-46c3-8534-2fcdd730040d",
+            "high_estimate" : 17,
+            "low_estimate" : 13,
+            "duration" : 1080,
+            "estimate" : "$13-17",
+            "currency_code" : "USD"
+          }, {
+            "localized_display_name" : "uberXL",
+            "distance" : 6.17,
+            "display_name" : "uberXL",
+            "product_id" : "821415d8-3bd5-4e27-9604-194e4359a449",
+            "high_estimate" : 26,
+            "low_estimate" : 20,
+            "duration" : 1080,
+            "estimate" : "$20-26",
+            "currency_code" : "USD"
+          }, {
+            "localized_display_name" : "SELECT",
+            "distance" : 6.17,
+            "display_name" : "SELECT",
+            "product_id" : "57c0ff4e-1493-4ef9-a4df-6b961525cf92",
+            "high_estimate" : 38,
+            "low_estimate" : 30,
+            "duration" : 1080,
+            "estimate" : "$30-38",
+            "currency_code" : "USD"
+          } ]
+        },
+        "paths" : [ ],
+        "type" : "Json"
+      } ]
+    }, {
+      "title" : "Aligning Data in Columns",
+      "id" : "aligning-data-in-columns",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use an ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-empty-block",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to align code snippets or other data block on both sides when there is an extra text on either side.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "EmptyBlock"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "type" : "Table"
+      }, {
+        "rightSide" : true,
+        "type" : "Meta"
+      }, {
+        "lang" : "csv",
+        "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
+        "type" : "Snippet"
+      }, {
+        "rightSide" : false,
+        "type" : "Meta"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Table and code snippets above are aligned by using an empty block on the right side.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "md",
+        "snippet" : "Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side.\n:include-empty-block: {rightSide: true}\n\n:include-table: layout/table.csv\n:include-meta: {rightSide: true}\n:include-file: layout/table.csv",
+        "startLine" : "Aligning Data in Columns",
+        "exclude" : true,
+        "endLine" : ":include-meta: {rightSide: false}",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Single Data Block Shortcut",
+      "id" : "single-data-block-shortcut",
+      "type" : "Section",
+      "content" : [ {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "type" : "Table"
+      }, {
+        "lang" : "csv",
+        "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "Snippet"
+      }, {
+        "rightSide" : false,
+        "type" : "Meta"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If need to put a single data block to a right side, you can add ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "rightSide: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " as a parameter to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugins.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "md",
+        "snippet" : "# Single Data Block Shortcut\n\n:include-table: layout/table.csv\n:include-file: layout/table.csv  {rightSide: true}",
+        "startLine" : "Single Data Block Shortcut",
+        "endLine" : "{rightSide: true}",
+        "type" : "Snippet"
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Layout",
+      "pageTitle" : "Two Sides Pages",
+      "pageMeta" : {
+        "type" : [ "two-sides" ]
+      },
+      "fileName" : "two-sides-pages",
+      "dirName" : "layout",
+      "pageSectionIdTitles" : [ {
+        "title" : "Setup",
+        "id" : "setup"
+      }, {
+        "title" : "Details Side",
+        "id" : "details-side"
+      }, {
+        "title" : "Open API example",
+        "id" : "open-api-example"
+      }, {
+        "title" : "Aligning Data in Columns",
+        "id" : "aligning-data-in-columns"
+      }, {
+        "title" : "Single Data Block Shortcut",
+        "id" : "single-data-block-shortcut"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

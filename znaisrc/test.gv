@@ -1,0 +1,17 @@
+digraph Simple {
+    node [shape=record];
+    graph [nodesep=1];
+
+    human [label="human [man a]"];
+    world [label="[world  c]"];
+    server [label="server [a]"];
+    another [label="another [b]"];
+
+    server -> test -> human;
+    server -> another;
+    another -> world;
+    human -> next;
+    human -> world;
+
+    {rank=same; human world;}
+}

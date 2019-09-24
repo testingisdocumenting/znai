@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Java</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Method Body</h1></header>
+<p>When you need to extract a specific method body use include-java plugin.Consider the file below: /** * Top level conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample offset according to the rules of the universe * @return name of the best sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } public void importantAction() { // TODO important } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
+</article>
+
+<article>
+<header><h1>Callout Comments</h1></header>
+<p>Similar to how you snippets/external-code-snippets#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot;} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
+</article>
+
+<article>
+<header><h1>Signature Only</h1></header>
+<p>Specifying a method name to extract only its body. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true} If signatureOnly is specified, body will be omitted. public String sampleMethod(String p1, int p2)</p>
+</article>
+
+<article>
+<header><h1>Overloads</h1></header>
+<p>Specify types inside brackets to select an overloaded versions of your methods.Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short version inside the plugin. :include-java: HelloWorld.java {entry: &quot;sampleMethod(Map, int, boolean)&quot;} Note: Generic types are erased and spaces after commas are optional public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method }</p>
+</article>
+
+<article>
+<header><h1>Type Body</h1></header>
+<p>To extract class , interface or enum body use: :include-java: MyEnum.java {entry: &quot;MyEnum&quot;} enum MyEnum { /** * description of &lt;b&gt;entry one&lt;/b&gt; */ ENTRY_ONE, /** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt;/li&gt; * &lt;li&gt;item two&lt;/li&gt; * &lt;/ul&gt; */ ENTRY_TWO, /** * Don't use, instead use ENTRY_TWO */ @Deprecated ENTRY_THREE } Use bodyOnly to only display body of your type. :include-java: MyEnum.java {entry: &quot;MyEnum&quot;, bodyOnly: true} /** * description of &lt;b&gt;entry one&lt;/b&gt; */ ENTRY_ONE, /** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt;/li&gt; * &lt;li&gt;item two&lt;/li&gt; * &lt;/ul&gt; */ ENTRY_TWO, /** * Don't use, instead use ENTRY_TWO */ @Deprecated ENTRY_THREE</p>
+</article>
+
+<article>
+<header><h1>Multiple Entries</h1></header>
+<p>To display multiple methods at once use entries parameter to pass a list of method names. :include-java: HelloWorld.java {entries: [&quot;sampleMethod&quot;, &quot;importantAction&quot;]} This will render: public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void importantAction() { // TODO important } List important methods signatures at one place by passing signatureOnly: true . :include-java: HelloWorld.java {entries: [&quot;sampleMethod&quot;, &quot;importantAction&quot;], signatureOnly: true} This will render: public String sampleMethod(String p1, int p2) public void importantAction()</p>
+</article>
+
+<article>
+<header><h1>Class JavaDoc</h1></header>
+<p>Documentation maintenance is one of the main goals of this documentation system. In case of Java you may already use JavaDoc strings to explain certain concepts of your system. /** * Top level conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample offset according to the rules of the universe * @return name of the best sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } public void importantAction() { // TODO important } } Instead of copy and pasting text between sources, you can refer to it inside your documentation. :include-java-doc: HelloWorld.java Text bellow is extracted from top class level JavaDoc null</p>
+</article>
+
+<article>
+<header><h1>Method JavaDoc</h1></header>
+<p>Method level JavaDoc text can be referred to as well by specifying the entry parameter. :include-java-doc: HelloWorld.java {entry: &quot;sampleMethod&quot;} Text bellow is extracted from sampleMethod method JavaDoc sampleMethod</p>
+</article>
+
+<article>
+<header><h1>Field JavaDoc</h1></header>
+<p>:include-java-doc: HelloWorld.java {entry: &quot;numberOfStudents&quot;} numberOfStudents</p>
+</article>
+
+<article>
+<header><h1>Method JavaDoc Params</h1></header>
+<p>:include-java-doc-params: HelloWorld.java {entry: &quot;sampleMethod&quot;} p1 String important parameter of something p2 int sample offset according to the rules of the universe</p>
+</article>
+
+<article>
+<header><h1>Enum Entries</h1></header>
+<p>Use include-java-enum-entries to enumerate entries of a enum from a file. package my.company; import java.util.List; enum MyEnum { /** * description of &lt;b&gt;entry one&lt;/b&gt; */ ENTRY_ONE, /** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt;/li&gt; * &lt;li&gt;item two&lt;/li&gt; * &lt;/ul&gt; */ ENTRY_TWO, /** * Don't use, instead use ENTRY_TWO */ @Deprecated ENTRY_THREE } :include-java-enum-entries: MyEnum.java ENTRY_ONE description of &lt;b&gt;entry one&lt;/b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt;/li&gt; &lt;li&gt;item two&lt;/li&gt; &lt;/ul&gt; ENTRY_THREE Don't use, instead use ENTRY_TWO You can exclude deprecated entries from the list by specifying excludeDeprecated parameter. :include-java-enum-entries: MyEnum.java {excludeDeprecated: true} ENTRY_ONE description of &lt;b&gt;entry one&lt;/b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt;/li&gt; &lt;li&gt;item two&lt;/li&gt; &lt;/ul&gt; ENTRY_THREE Don't use, instead use ENTRY_TWO</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Method Body",
+      "id" : "method-body",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you need to extract a specific method body use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-java",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Consider the file below:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "/**\n * Top level conceptual description of a <i>Domain</i> problem.\n * <p>\n * To avoid <b>copy & paste</b> of the content consider to re-use information.\n */\nclass HelloWorld {\n    /**\n     * Each year we hire students from different universities to increase\n     * <code>diversity</code>\n     */\n    private int numberOfStudents;\n\n    /**\n     * Conceptual description of a <i>Domain</i> problem.\n     * <p>\n     * It will work only if you put high level description here and\n     * <b>not</b> implementation details.\n     *\n     * @param p1 important parameter of something\n     * @param p2 sample offset according to the rules of the universe\n     * @return name of the best sample\n     */\n    public String sampleMethod(String p1, int p2) {\n        validate();\n        process(p2); // important comment\n        notifyAll(p1); // very important\n\n        return bestSample();\n    }\n\n    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n        // overloaded method\n    }\n\n    public void importantAction() {\n        // TODO important\n    }\n}",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You can specify a method name to extract its full definition, or display only its body.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "bodyOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " is specified, signature will be omitted.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();",
+        "entry" : "sampleMethod",
+        "bodyOnly" : true,
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Callout Comments",
+      "id" : "callout-comments",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Similar to how you ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/external-code-snippets#callout-comments",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "specify comments type",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " for a regular file,",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "you can specify ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "commentsType",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option for ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-java",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true, commentsType: \"inline\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();",
+        "entry" : "sampleMethod",
+        "bodyOnly" : true,
+        "commentsType" : "inline",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Signature Only",
+      "id" : "signature-only",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Specifying a method name to extract only its body.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "signatureOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " is specified, body will be omitted.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "public String sampleMethod(String p1, int p2)",
+        "entry" : "sampleMethod",
+        "signatureOnly" : true,
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Overloads",
+      "id" : "overloads",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Specify types inside brackets to select an overloaded versions of your methods.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short version",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "inside the plugin.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod(Map, int, boolean)\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Generic types are erased and spaces after commas are optional",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n    // overloaded method\n}",
+        "entry" : "sampleMethod(Map, int, boolean)",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Type Body",
+      "id" : "type-body",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To extract ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "class",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "interface",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " or ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "enum",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " body use:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: MyEnum.java {entry: \"MyEnum\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "enum MyEnum {\n    /**\n     * description of <b>entry one</b>\n     */\n    ENTRY_ONE,\n\n    /**\n     * description of entry two\n     * <ul>\n     *     <li>item one</li>\n     *     <li>item two</li>\n     * </ul>\n     */\n    ENTRY_TWO,\n\n    /**\n     * Don't use, instead use ENTRY_TWO\n     */\n    @Deprecated\n    ENTRY_THREE\n}",
+        "entry" : "MyEnum",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "bodyOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to only display body of your type.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: MyEnum.java {entry: \"MyEnum\", bodyOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "/**\n * description of <b>entry one</b>\n */\nENTRY_ONE,\n\n/**\n * description of entry two\n * <ul>\n *     <li>item one</li>\n *     <li>item two</li>\n * </ul>\n */\nENTRY_TWO,\n\n/**\n * Don't use, instead use ENTRY_TWO\n */\n@Deprecated\nENTRY_THREE",
+        "entry" : "MyEnum",
+        "bodyOnly" : true,
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Multiple Entries",
+      "id" : "multiple-entries",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To display multiple methods at once use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entries",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to pass a list of method names.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entries: [\"sampleMethod\", \"importantAction\"]}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This will render:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "public String sampleMethod(String p1, int p2) {\n    validate();\n    process(p2); // important comment\n    notifyAll(p1); // very important\n\n    return bestSample();\n}\n\npublic void importantAction() {\n    // TODO important\n}",
+        "entries" : [ "sampleMethod", "importantAction" ],
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "List important methods signatures at one place by passing ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "signatureOnly: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entries: [\"sampleMethod\", \"importantAction\"], signatureOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This will render:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "public String sampleMethod(String p1, int p2)\npublic void importantAction()",
+        "entries" : [ "sampleMethod", "importantAction" ],
+        "signatureOnly" : true,
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Class JavaDoc",
+      "id" : "class-javadoc",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Documentation maintenance is one of the main goals of this documentation system.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "In case of Java you may already use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JavaDoc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " strings to explain certain concepts of your system.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "/**\n * Top level conceptual description of a <i>Domain</i> problem.\n * <p>\n * To avoid <b>copy & paste</b> of the content consider to re-use information.\n */\nclass HelloWorld {\n    /**\n     * Each year we hire students from different universities to increase\n     * <code>diversity</code>\n     */\n    private int numberOfStudents;\n\n    /**\n     * Conceptual description of a <i>Domain</i> problem.\n     * <p>\n     * It will work only if you put high level description here and\n     * <b>not</b> implementation details.\n     *\n     * @param p1 important parameter of something\n     * @param p2 sample offset according to the rules of the universe\n     * @return name of the best sample\n     */\n    public String sampleMethod(String p1, int p2) {\n        validate();\n        process(p2); // important comment\n        notifyAll(p1); // very important\n\n        return bestSample();\n    }\n\n    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n        // overloaded method\n    }\n\n    public void importantAction() {\n        // TODO important\n    }\n}",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Instead of copy and pasting text between sources, you can refer to it inside your documentation.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-doc: HelloWorld.java\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "Text bellow is extracted from top class level ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "JavaDoc",
+            "type" : "InlinedCode"
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Top level conceptual description of a ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "Domain",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " problem. ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : " To avoid ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "copy & paste",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " of the content consider to re-use information.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Method JavaDoc",
+      "id" : "method-javadoc",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Method level ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JavaDoc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " text can be referred to as well by specifying the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entry",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-doc: HelloWorld.java {entry: \"sampleMethod\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "Text bellow is extracted from ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "sampleMethod",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " method ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "JavaDoc",
+            "type" : "InlinedCode"
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Conceptual description of a ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "Domain",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " problem. ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : " It will work only if you put high level description here and ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "not",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " implementation details.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Field JavaDoc",
+      "id" : "field-javadoc",
+      "type" : "Section",
+      "content" : [ {
+        "lang" : "",
+        "snippet" : ":include-java-doc: HelloWorld.java {entry: \"numberOfStudents\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Each year we hire students from different universities to increase ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "diversity",
+          "type" : "InlinedCode"
+        } ]
+      } ]
+    }, {
+      "title" : "Method JavaDoc Params",
+      "id" : "method-javadoc-params",
+      "type" : "Section",
+      "content" : [ {
+        "lang" : "",
+        "snippet" : ":include-java-doc-params: HelloWorld.java {entry: \"sampleMethod\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "String ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "return",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "name of the best sample",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "config" : {
+          "left" : {
+            "portion" : 3,
+            "align" : "right"
+          },
+          "border" : true
+        },
+        "type" : "Columns"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "String",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "p1",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "important parameter of something",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "config" : {
+          "left" : {
+            "portion" : 3,
+            "align" : "right"
+          },
+          "border" : true
+        },
+        "type" : "Columns"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "int",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "p2",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "sample offset according to the rules of the universe",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "config" : {
+          "left" : {
+            "portion" : 3,
+            "align" : "right"
+          },
+          "border" : true
+        },
+        "type" : "Columns"
+      } ]
+    }, {
+      "title" : "Enum Entries",
+      "id" : "enum-entries",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-java-enum-entries",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to enumerate entries of a enum from a file.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "package my.company;\n\nimport java.util.List;\n\nenum MyEnum {\n    /**\n     * description of <b>entry one</b>\n     */\n    ENTRY_ONE,\n\n    /**\n     * description of entry two\n     * <ul>\n     *     <li>item one</li>\n     *     <li>item two</li>\n     * </ul>\n     */\n    ENTRY_TWO,\n\n    /**\n     * Don't use, instead use ENTRY_TWO\n     */\n    @Deprecated\n    ENTRY_THREE\n}",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-enum-entries: MyEnum.java\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "data" : [ [ [ {
+            "code" : "ENTRY_ONE",
+            "type" : "InlinedCode"
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "entry one",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ] ], [ [ {
+            "code" : "ENTRY_TWO",
+            "type" : "InlinedCode"
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of entry two ",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "bulletMarker" : "*",
+            "tight" : false,
+            "type" : "BulletList",
+            "content" : [ {
+              "type" : "ListItem",
+              "content" : [ {
+                "text" : "item one",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "text" : "item two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ] ], [ [ {
+            "code" : "ENTRY_THREE",
+            "type" : "InlinedCode"
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Don't use, instead use ENTRY_TWO",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ],
+          "columns" : [ {
+            "title" : "name",
+            "align" : "right",
+            "width" : "20%"
+          }, {
+            "title" : "description"
+          } ],
+          "styles" : [ "middle-vertical-lines-only", "no-header", "no-vertical-padding" ]
+        },
+        "type" : "Table"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You can exclude deprecated entries from the list by specifying ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "excludeDeprecated",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-enum-entries: MyEnum.java {excludeDeprecated: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "data" : [ [ [ {
+            "code" : "ENTRY_ONE",
+            "type" : "InlinedCode"
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "entry one",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ] ], [ [ {
+            "code" : "ENTRY_TWO",
+            "type" : "InlinedCode"
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of entry two ",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "bulletMarker" : "*",
+            "tight" : false,
+            "type" : "BulletList",
+            "content" : [ {
+              "type" : "ListItem",
+              "content" : [ {
+                "text" : "item one",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "text" : "item two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ] ] ],
+          "columns" : [ {
+            "title" : "name",
+            "align" : "right",
+            "width" : "20%"
+          }, {
+            "title" : "description"
+          } ],
+          "styles" : [ "middle-vertical-lines-only", "no-header", "no-vertical-padding" ]
+        },
+        "type" : "Table"
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Snippets",
+      "pageTitle" : "Java",
+      "pageMeta" : { },
+      "fileName" : "java",
+      "dirName" : "snippets",
+      "pageSectionIdTitles" : [ {
+        "title" : "Method Body",
+        "id" : "method-body"
+      }, {
+        "title" : "Callout Comments",
+        "id" : "callout-comments"
+      }, {
+        "title" : "Signature Only",
+        "id" : "signature-only"
+      }, {
+        "title" : "Overloads",
+        "id" : "overloads"
+      }, {
+        "title" : "Type Body",
+        "id" : "type-body"
+      }, {
+        "title" : "Multiple Entries",
+        "id" : "multiple-entries"
+      }, {
+        "title" : "Class JavaDoc",
+        "id" : "class-javadoc"
+      }, {
+        "title" : "Method JavaDoc",
+        "id" : "method-javadoc"
+      }, {
+        "title" : "Field JavaDoc",
+        "id" : "field-javadoc"
+      }, {
+        "title" : "Method JavaDoc Params",
+        "id" : "method-javadoc-params"
+      }, {
+        "title" : "Enum Entries",
+        "id" : "enum-entries"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

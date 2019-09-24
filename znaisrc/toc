@@ -1,0 +1,54 @@
+introduction
+    rationale
+    example
+    getting-started
+flow
+    structure
+    names
+    page-references
+    lookup-paths
+    search
+    footer
+    presentation
+    testing
+snippets
+    code-snippets
+    external-code-snippets
+    inlined-code-snippets
+    java
+    groovy
+    typescript
+    cpp
+    json
+    xml
+    api-parameters
+    open-API
+    CLI
+    math
+    markdown
+layout
+    attention-signs
+    tabs
+    tables
+    columns
+    templates
+    two-sides-pages
+    two-sides-tabs
+visuals
+    smart-bullet-points
+    icons
+    keyboard-shortcuts
+    charts
+    images
+    image-annotations
+    SVG
+    flow-diagrams
+    PlantUml
+deployment
+    static-content
+synergy-with-testing
+    java
+    REST
+    web-UI
+configuration
+    basic

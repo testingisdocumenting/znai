@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Page References</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Follow the Order</h1></header>
+<p>Most of the documentation should have a natural order to follow. Links to navigate to the next page are at the end of each page.Create links to remind users of an essential concept introduced previously. There is a good chance that a reader skipped over it or forgot.Avoid: links that navigate users forward. It breaks the flow of a documentation.</p>
+</article>
+
+<article>
+<header><h1>Links</h1></header>
+<p>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link.To refer back to the top-level index page use: markdown [index link](/) Linking to subsections is the same as linking to a top level section. flow/page-references#links-to-sub-section Here is an example markdown [Here is an example](flow/page-references#links-to-sub-section) Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation Panel</p>
+</article>
+
+<article>
+<header><h1>Downloads</h1></header>
+<p>Linking to a local file will deploy the file along with the generated documentation. Clicking the link will open a file using the browser's default method. Download [test json file](data/test.json) Download data/test.json test json file</p>
+</article>
+
+<article>
+<header><h1>Validation</h1></header>
+<p>Local links are automatically validated during documentation build time. You will get a build time error if you refer a page or a section/sub-section that does not exist.</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Follow the Order",
+      "id" : "follow-the-order",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Most of the documentation should have a natural order to follow.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Links to navigate to the next page are at the end of each page.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Create links to remind users of an ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "essential",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " concept introduced previously. There is a good chance that a reader skipped over it or forgot.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Avoid: links that navigate users forward. It breaks the flow of a documentation.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Links",
+      "id" : "links",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To create an ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "external",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " link use:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "[Link Title](http://external/reference)\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To refer ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "internal",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " page within your documentation use:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "[internal link](dir-name/file-name#optional-page-section-id)\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: you can get ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "page-section-id",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " by hovering over a section title and pressing link icon. Your browser URL display the updated link.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To refer back to the top-level ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "index",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " page use:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "[index link](/)\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "level" : 2,
+        "title" : "Links to Sub Section",
+        "id" : "links-to-sub-section",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Linking to subsections is the same as linking to a top level section. ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/flow/page-references#links-to-sub-section",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Here is an example",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "[Here is an example](flow/page-references#links-to-sub-section)\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "level" : 2,
+        "title" : "Index Page",
+        "id" : "index-page",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Clicking this ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "index page",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " link will have the same effect as clicking the documentation title at the top of the ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "Navigation Panel",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      } ]
+    }, {
+      "title" : "Downloads",
+      "id" : "downloads",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Linking to a local file will deploy the file along with the generated documentation.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Clicking the link will open a file using the browser's default method.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "Download [test json file](data/test.json)\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Download ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/flow/data/test.json",
+          "isFile" : true,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "test json file",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      } ]
+    }, {
+      "title" : "Validation",
+      "id" : "validation",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Local links are automatically validated during documentation build time.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "You will get a build time error if you refer a page or a section/sub-section that does not exist.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Flow",
+      "pageTitle" : "Page References",
+      "pageMeta" : { },
+      "fileName" : "page-references",
+      "dirName" : "flow",
+      "pageSectionIdTitles" : [ {
+        "title" : "Follow the Order",
+        "id" : "follow-the-order"
+      }, {
+        "title" : "Links",
+        "id" : "links"
+      }, {
+        "title" : "Downloads",
+        "id" : "downloads"
+      }, {
+        "title" : "Validation",
+        "id" : "validation"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

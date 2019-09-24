@@ -1,0 +1,20 @@
+digraph Simple {
+    node [shape=record];
+    graph [nodesep=1];
+
+    nginx [label="NGINX [b]"];
+    log_stash_log [label="LS file[b]"];
+    log_stash_elastic [label="LS kafka[b]"];
+    access_log [label="[documents b]"];
+    elastic [label="[database a]"];
+    cmdb [label="[database a]"];
+    web_dashboard [label="[world a]"];
+    client [label="[client a]"];
+
+    nginx -> access_log;
+    access_log -> log_stash_log;
+    log_stash_log -> kafka -> log_stash_elastic -> elastic;
+    client -> web_dashboard;
+    web_dashboard -> elastic;
+    web_dashboard -> cmdb;
+}

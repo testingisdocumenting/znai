@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Groovy</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Method Body</h1></header>
+<p>When you need to extract a specific method body use include-groovy plugin.Consider the following file:Specify a method name to extract it from the file. :include-groovy: HelloWorldTest.groovy {entry: &quot;should calculate risk based on epsilon&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted.</p>
+</article>
+
+<article>
+<header><h1>Overloads</h1></header>
+<p>Specify types inside brackets to select an overloaded versions of your methods.Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short version inside the plugin. :include-groovy: HelloWorld.groovy {entry: &quot;methodName(List, Map)&quot;} :include-groovy: HelloWorld.groovy {entry: &quot;methodName(def,def)&quot;} Note: Generic types are erased and spaces after commas are optionalNote: def type remains def and not Object</p>
+</article>
+
+<article>
+<header><h1>Class Body</h1></header>
+<p>import you.company.com.util.* /* groovy docs on top */ class HelloWorld { void methodName(List&lt;String&gt; a, Map&lt;String, Integer&gt; b) { actionA() } void methodName(List&lt;String&gt; a, Boolean b) { actionB() } void methodName(def a, def b) { actionC() } } To extract class body use: :include-groovy: HelloWorld.groovy {entry: &quot;HelloWorld&quot;} Use bodyOnly to only display only the body of your class. :include-groovy: HelloWorld.groovy {entry: &quot;HelloWorld&quot;, bodyOnly: true}</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Method Body",
+      "id" : "method-body",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you need to extract a specific method body use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-groovy",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Consider the following file:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "groovy",
+        "snippet" : "class HelloWorldTest {\n    @Test\n    void \"should calculate risk based on epsilon\"() {\n        generateStatement(price: 10, quantity: 10, epsilon: 2)\n        calcRisk().should == 108\n    }\n}",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Specify a method name to extract it from the file.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-groovy: HelloWorldTest.groovy {entry: \"should calculate risk based on epsilon\", bodyOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "bodyOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " is specified, signature will be omitted.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "groovy",
+        "snippet" : "generateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108",
+        "entry" : "should calculate risk based on epsilon",
+        "bodyOnly" : true,
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Overloads",
+      "id" : "overloads",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Specify types inside brackets to select an overloaded versions of your methods.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short version",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "inside the plugin.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "groovy",
+        "snippet" : "import you.company.com.util.*\n\n/*\n groovy docs on top\n */\nclass HelloWorld {\n    void methodName(List<String> a, Map<String, Integer> b) {\n        actionA()\n    }\n\n    void methodName(List<String> a, Boolean b) {\n        actionB()\n    }\n\n    void methodName(def a, def b) {\n        actionC()\n    }\n}",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-groovy: HelloWorld.groovy {entry: \"methodName(List, Map)\"}\n:include-groovy: HelloWorld.groovy {entry: \"methodName(def,def)\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Generic types are erased and spaces after commas are optional",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "groovy",
+        "snippet" : "void methodName(List<String> a, Map<String, Integer> b) {\n    actionA()\n}",
+        "entry" : "methodName(List, Map)",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "def",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " type remains ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "def",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and not ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "Object",
+          "type" : "InlinedCode"
+        } ]
+      }, {
+        "lang" : "groovy",
+        "snippet" : "void methodName(def a, def b) {\n    actionC()\n}",
+        "entry" : "methodName(def, def)",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Class Body",
+      "id" : "class-body",
+      "type" : "Section",
+      "content" : [ {
+        "lang" : "groovy",
+        "snippet" : "import you.company.com.util.*\n\n/*\n groovy docs on top\n */\nclass HelloWorld {\n    void methodName(List<String> a, Map<String, Integer> b) {\n        actionA()\n    }\n\n    void methodName(List<String> a, Boolean b) {\n        actionB()\n    }\n\n    void methodName(def a, def b) {\n        actionC()\n    }\n}",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To extract ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "class",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " body use:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-groovy: HelloWorld.groovy {entry: \"HelloWorld\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "groovy",
+        "snippet" : "class HelloWorld {\n    void methodName(List<String> a, Map<String, Integer> b) {\n        actionA()\n    }\n\n    void methodName(List<String> a, Boolean b) {\n        actionB()\n    }\n\n    void methodName(def a, def b) {\n        actionC()\n    }\n}",
+        "entry" : "HelloWorld",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "bodyOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to only display only the body of your class.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-groovy: HelloWorld.groovy {entry: \"HelloWorld\", bodyOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "groovy",
+        "snippet" : "void methodName(List<String> a, Map<String, Integer> b) {\n    actionA()\n}\n\nvoid methodName(List<String> a, Boolean b) {\n    actionB()\n}\n\nvoid methodName(def a, def b) {\n    actionC()\n}",
+        "entry" : "HelloWorld",
+        "bodyOnly" : true,
+        "type" : "Snippet"
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Snippets",
+      "pageTitle" : "Groovy",
+      "pageMeta" : { },
+      "fileName" : "groovy",
+      "dirName" : "snippets",
+      "pageSectionIdTitles" : [ {
+        "title" : "Method Body",
+        "id" : "method-body"
+      }, {
+        "title" : "Overloads",
+        "id" : "overloads"
+      }, {
+        "title" : "Class Body",
+        "id" : "class-body"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

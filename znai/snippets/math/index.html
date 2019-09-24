@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Math</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>LATEX</h1></header>
+<p>To render math you can use https://en.wikibooks.org/wiki/LaTeX/Mathematics LaTeX math expressions. Surround LaTeX expression with fenced block and specify latex as a language ```latex \forall x \in X, \quad \exists y \leq \epsilon ``` The result will be a following math expression. \forall x \in X, \quad \exists y \leq \epsilon In presentation mode, rendered expressions will automatically scale to make use of the screen space.Note: Rendering is done by using https://github.com/Khan/KaTeX KaTeX library. And is using https://github.com/Khan/KaTeX KaTeX fonts.</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "LATEX",
+      "id" : "latex",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To render math you can use ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://en.wikibooks.org/wiki/LaTeX/Mathematics",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "LaTeX",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " math expressions.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Surround LaTeX expression with fenced block and specify ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "latex",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " as a language",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```latex\n\\forall x \\in X, \\quad \\exists y \\leq \\epsilon\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The result will be a following math expression.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "latex" : "\\forall x \\in X, \\quad \\exists y \\leq \\epsilon\n",
+        "type" : "Latex"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "In presentation mode, rendered expressions will automatically scale to make use of the screen space.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Rendering is done by using ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://github.com/Khan/KaTeX",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "KaTeX",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " library.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "And is using ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://github.com/Khan/KaTeX",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "KaTeX",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " fonts.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Snippets",
+      "pageTitle" : "Math",
+      "pageMeta" : { },
+      "fileName" : "math",
+      "dirName" : "snippets",
+      "pageSectionIdTitles" : [ {
+        "title" : "LATEX",
+        "id" : "latex"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

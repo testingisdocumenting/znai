@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Tabs</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Primary Use Case</h1></header>
+<p>Imagine your product supports multiple ways of achieving a final result:RESTWebCLIJavaPythonmore...Provide a selection inside your documentation if your user needs only one to accomplish the goal. Selections will persist for users and provide streamlined experience.Don't: use tabs as navigation experience. If your user needs both Java and Python executed one by one you need to show steps one after another in proper order.</p>
+</article>
+
+<article>
+<header><h1>Definition</h1></header>
+<p>To define multiple tabs we use fenced code block: ```tabs JavaScript: :include-file: snippets/file-name.js Java: :include-file: snippets/WideCode.java Cpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true} ``` This will generate a multi-tab widget with include- plugin content for each tab. JavaScript class JsClass { constructor() { } } export default JsClass Java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Cpp Selecting a tab will switch all the tabs on every page.</p>
+</article>
+
+<article>
+<header><h1>Markdown Per Tab</h1></header>
+<p>Any valid Markdown can be used in place of include- content.A typical use case for installation instructions might be dividing content per language or environment: ````tabs JavaScript: First you need to download WebStorm and then run following using your terminal ```bash $ yarn install $ yarn start ``` Java: First you need to download Intellij IDEA and then run following using your terminal ```bash $ mvn install $ mvn exec:exec ``` Cpp: First you need to download CLion and then run following using your terminal ```bash $ pwd $ whoamis ``` ```` JavaScript First you need to download WebStorm and then run following using your terminal bash $ yarn install $ yarn start Java First you need to download Intellij IDEA and then run following using your terminal bash $ mvn install $ mvn exec:exec Cpp First you need to download CLion and then run following using your terminal bash $ pwd $ whoamis</p>
+</article>
+
+<article>
+<header><h1>Separate Markdown Files</h1></header>
+<p>Consider extracting content to separate markup files if content becomes long. Use the include-markdown plugin to include external content. ```tabs JavaScript: :include-markdown: instructions/javascript-install.md Java: :include-markdown: instructions/java-install.md Cpp: :include-markdown: instructions/cpp-install.md ``` Each tab will display inlined markdown from specified files. JavaScript Java Cpp</p>
+</article>
+
+<article>
+<header><h1>Attention Signs</h1></header>
+<p>Use extra space(s) in front of Note: or other attention sign keywords to put attention signs inside a tab. Remember if you put 4+ spaces your paragraph will become a code snippet ````tabs JavaScript: ```bash $ yarn install $ yarn start ``` Avoid: committing node_modules Java: First you need to download Intellij IDEA and then run following using your terminal ```bash $ mvn install $ mvn exec:exec ``` Warning: `mvn` install for the first time may take considerable amount of time Cpp: First you need to download CLion and then run following using your terminal ```bash $ pwd $ whoamis ``` Question: is C++ awesome or what? ```` JavaScript bash $ yarn install $ yarn start Do not: commit node_modules to the repository Java First you need to download Intellij IDEA and then run following using your terminal bash $ mvn install $ mvn exec:exec Warning: mvn install for the first time may take considerable amount of time Cpp First you need to download CLion and then run following using your terminal bash $ pwd $ whoamis Question: is C++ awesome or what?</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Primary Use Case",
+      "id" : "primary-use-case",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Imagine your product supports multiple ways of achieving a final result:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "REST",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Web",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "CLI",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Java",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Python",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "more...",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Provide a selection inside your documentation if your user needs only one to accomplish the goal.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Selections will persist for users and provide streamlined experience.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Don't: use tabs as navigation experience.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "If your user needs both ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "Java",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "Python",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " executed one by one you need to show steps one after another in proper order.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Definition",
+      "id" : "definition",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To define multiple tabs we use fenced code block:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```tabs\nJavaScript: :include-file: snippets/file-name.js\nJava: :include-file: snippets/WideCode.java\nCpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true}\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This will generate a multi-tab widget with ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin content for each tab.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "tabsContent" : [ {
+          "name" : "JavaScript",
+          "content" : [ {
+            "lang" : "javascript",
+            "snippet" : "class JsClass {\n    constructor() {\n    }\n}\n\nexport default JsClass",
+            "type" : "Snippet"
+          } ]
+        }, {
+          "name" : "Java",
+          "content" : [ {
+            "lang" : "java",
+            "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
+            "wide" : true,
+            "type" : "Snippet"
+          } ]
+        }, {
+          "name" : "Cpp",
+          "content" : [ {
+            "lang" : "cpp",
+            "snippet" : "int test = 2;\n\n// comment with **important**\n// information\nint b = 3;\nint d = 3;\n\n/*\n * multi line comment\n * of multi *lines* text\n*/\nint e = 5;",
+            "type" : "Snippet"
+          } ]
+        } ],
+        "type" : "Tabs"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Selecting a tab will switch all the tabs on every page.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Markdown Per Tab",
+      "id" : "markdown-per-tab",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Any valid Markdown can be used in place of ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " content.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "A typical use case for ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "installation instructions",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " might be dividing content per language or environment:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "````tabs\nJavaScript: \nFirst you need to download WebStorm and then run following using your terminal\n\n```bash\n$ yarn install\n$ yarn start\n```\n    \nJava: \nFirst you need to download Intellij IDEA and then run following using your terminal\n    \n```bash\n$ mvn install\n$ mvn exec:exec\n```\n    \nCpp: \nFirst you need to download CLion and then run following using your terminal\n\n```bash\n$ pwd\n$ whoamis\n```\n````\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "tabsContent" : [ {
+          "name" : "JavaScript",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "First you need to download WebStorm and then run following using your terminal",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "bash",
+            "snippet" : "$ yarn install\n$ yarn start\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          } ]
+        }, {
+          "name" : "Java",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "First you need to download Intellij IDEA and then run following using your terminal",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "bash",
+            "snippet" : "$ mvn install\n$ mvn exec:exec\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          } ]
+        }, {
+          "name" : "Cpp",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "First you need to download CLion and then run following using your terminal",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "bash",
+            "snippet" : "$ pwd\n$ whoamis\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          } ]
+        } ],
+        "type" : "Tabs"
+      } ]
+    }, {
+      "title" : "Separate Markdown Files",
+      "id" : "separate-markdown-files",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Consider extracting content to separate markup files if content becomes long.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-markdown",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin to include external content.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```tabs\nJavaScript: :include-markdown: instructions/javascript-install.md\nJava: :include-markdown: instructions/java-install.md\nCpp: :include-markdown: instructions/cpp-install.md\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Each tab will display inlined markdown from specified files.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "tabsContent" : [ {
+          "name" : "JavaScript",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "First you need to download WebStorm and then run following using your terminal",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "",
+            "snippet" : "$ yarn install\n$ yarn start\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          } ]
+        }, {
+          "name" : "Java",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "First you need to download Intellij IDEA and then run following using your terminal",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "",
+            "snippet" : "$ mvn install\n$ mvn exec:exec\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          } ]
+        }, {
+          "name" : "Cpp",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "First you need to download CLion and then run following using your terminal",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "",
+            "snippet" : "$ pwd\n$ whoami\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          } ]
+        } ],
+        "type" : "Tabs"
+      } ]
+    }, {
+      "title" : "Attention Signs",
+      "id" : "attention-signs",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use extra space(s) in front of ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "Note:",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " or other attention sign keywords to put attention signs inside a tab.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Remember if you put 4+ spaces your paragraph will become a code snippet",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "````tabs\nJavaScript: \n\n```bash\n$ yarn install\n$ yarn start\n```\n\n Avoid: committing node_modules\n    \nJava: \nFirst you need to download Intellij IDEA and then run following using your terminal\n    \n```bash\n$ mvn install\n$ mvn exec:exec\n```\n    \n Warning: `mvn` install for the first time may take considerable amount of time\n\nCpp: \nFirst you need to download CLion and then run following using your terminal\n\n```bash\n$ pwd\n$ whoamis\n```\n\n Question: is C++ awesome or what?\n````\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "tabsContent" : [ {
+          "name" : "JavaScript",
+          "content" : [ {
+            "lang" : "bash",
+            "snippet" : "$ yarn install\n$ yarn start\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Do not: commit node_modules to the repository",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "Java",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "First you need to download Intellij IDEA and then run following using your terminal",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "bash",
+            "snippet" : "$ mvn install\n$ mvn exec:exec\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Warning: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "mvn",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " install for the first time may take considerable amount of time",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "Cpp",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "First you need to download CLion and then run following using your terminal",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "bash",
+            "snippet" : "$ pwd\n$ whoamis\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Question: is C++ awesome or what?",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "Tabs"
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Layout",
+      "pageTitle" : "Tabs",
+      "pageMeta" : { },
+      "fileName" : "tabs",
+      "dirName" : "layout",
+      "pageSectionIdTitles" : [ {
+        "title" : "Primary Use Case",
+        "id" : "primary-use-case"
+      }, {
+        "title" : "Definition",
+        "id" : "definition"
+      }, {
+        "title" : "Markdown Per Tab",
+        "id" : "markdown-per-tab"
+      }, {
+        "title" : "Separate Markdown Files",
+        "id" : "separate-markdown-files"
+      }, {
+        "title" : "Attention Signs",
+        "id" : "attention-signs"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

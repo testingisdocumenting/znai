@@ -1,0 +1,35 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "label": "input one"
+    },
+    {
+      "id": "n2",
+      "label": "input two"
+    },
+    {
+      "id": "n3",
+      "label": "processor"
+    },
+    {
+      "id": "n4",
+      "label": "output one"
+    },
+    {
+      "id": "n5",
+      "label": "output two"
+    },
+    {
+      "id": "n6",
+      "label": "output three"
+    }
+  ],
+  "edges": [
+    ["n1", "n3"],
+    ["n2", "n3"],
+    ["n3", "n4"],
+    ["n3", "n5"],
+    ["n3", "n6"]
+  ]
+}

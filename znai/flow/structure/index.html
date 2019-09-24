@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Structure</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Building Blocks</h1></header>
+<p>Znai has three levels of documentation organization:ChaptersPagesPage Sections Znai encourages authors to split their content across multiple pages.If you feel like you need to use nested headings, consider moving your content hierarchy one level up:Split overlong page into multiple onesIntroduce chaptersFocus on one thing at a time</p>
+</article>
+
+<article>
+<header><h1>Similarity with OOP</h1></header>
+<p>It may help to show parallel with OOP conceptsChapters as packages Pages as classes Page Sections as methods It is bad practice to have one class with many unrelated methods. Similarly, it is bad practice to have one page with various unrelated sections.</p>
+</article>
+
+<article>
+<header><h1>Table of Contents</h1></header>
+<p>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction rationale example getting-started flow structure names page-references lookup-paths search footer presentation testing snippets code-snippets external-code-snippets inlined-code-snippets java groovy typescript cpp json xml api-parameters open-API CLI math markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs visuals smart-bullet-points icons keyboard-shortcuts charts images image-annotations SVG flow-diagrams PlantUml deployment static-content synergy-with-testing java REST web-UI configuration basic Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</p>
+</article>
+
+<article>
+<header><h1>Sub Headings</h1></header>
+<p>Only a first level heading is treated as a first class citizen:Part of TOCSmallest unit of search result # First Class Citizen Nested sub headings only add visual distinction within a page. ## Sub heading content of sub heading ### Sub Sub heading content of sub sub heading content of sub headingcontent of sub sub heading</p>
+</article>
+
+<article>
+<header><h1>Meta</h1></header>
+<p>Each documentation must have the meta.json file in its root. This JSON file contains documentation display name, type, and optional View On information. { &quot;title&quot;: &quot;Znai&quot;, &quot;type&quot;: &quot;User Guide&quot;, &quot;viewOn&quot;: { &quot;link&quot;: &quot;https://github.com/twosigma/znai/blob/master/znai-docs/documentation&quot;, &quot;title&quot;: &quot;View On GitHub&quot; } }</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Building Blocks",
+      "id" : "building-blocks",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "code" : "Znai",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " has three levels of documentation organization:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Chapters",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Pages",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Page Sections",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "code" : "Znai",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " encourages authors to split their content across multiple pages.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If you feel like you need to use nested headings, consider moving your content hierarchy one level up:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Split overlong page into multiple ones",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Introduce chapters",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Focus on one thing at a time",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "title" : "Similarity with OOP",
+      "id" : "similarity-with-oop",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "It may help to show parallel with ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "OOP",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " concepts",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Chapters as ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "packages",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Pages as ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "classes",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Page Sections as ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "methods",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "It is bad practice to have one class with many unrelated methods.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Similarly, it is bad practice to have one page with various unrelated sections.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Table of Contents",
+      "id" : "table-of-contents",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Each documentation must have ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "toc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file in its root.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "This file contains chapters and pages.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This is a ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "toc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file for this documentation.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "introduction\n    rationale\n    example\n    getting-started\nflow\n    structure\n    names\n    page-references\n    lookup-paths\n    search\n    footer\n    presentation\n    testing\nsnippets\n    code-snippets\n    external-code-snippets\n    inlined-code-snippets\n    java\n    groovy\n    typescript\n    cpp\n    json\n    xml\n    api-parameters\n    open-API\n    CLI\n    math\n    markdown\nlayout\n    attention-signs\n    tabs\n    tables\n    columns\n    templates\n    two-sides-pages\n    two-sides-tabs\nvisuals\n    smart-bullet-points\n    icons\n    keyboard-shortcuts\n    charts\n    images\n    image-annotations\n    SVG\n    flow-diagrams\n    PlantUml\ndeployment\n    static-content\nsynergy-with-testing\n    java\n    REST\n    web-UI\nconfiguration\n    basic",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Take a look at the left side bar and compare it with the file content.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The top entry, ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "introduction",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", corresponds to the directory of the same name.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "The nested entry, ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "rationale",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", corresponds to the file ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "rationale.md",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Sub Headings",
+      "id" : "sub-headings",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Only a first level heading is treated as a first class citizen:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Part of ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "TOC",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Smallest unit of ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "search result",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "# First Class Citizen\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Nested sub headings only add visual distinction within a page.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "## Sub heading\ncontent of sub heading\n\n### Sub Sub heading\ncontent of sub sub heading\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "level" : 2,
+        "title" : "Sub heading",
+        "id" : "sub-heading",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "content of sub heading",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "level" : 3,
+        "title" : "Sub Sub heading",
+        "id" : "sub-sub-heading",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "content of sub sub heading",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Meta",
+      "id" : "meta",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Each documentation must have the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "meta.json",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file in its root.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "This ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JSON",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file contains documentation display name, type, and optional ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "View On",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " information.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "json",
+        "snippet" : "{\n  \"title\": \"Znai\",\n  \"type\": \"User Guide\",\n  \"viewOn\": {\n    \"link\": \"https://github.com/twosigma/znai/blob/master/znai-docs/documentation\",\n    \"title\": \"View On GitHub\"\n  }\n}",
+        "type" : "Snippet"
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Flow",
+      "pageTitle" : "Structure",
+      "pageMeta" : { },
+      "fileName" : "structure",
+      "dirName" : "flow",
+      "pageSectionIdTitles" : [ {
+        "title" : "Building Blocks",
+        "id" : "building-blocks"
+      }, {
+        "title" : "Similarity with OOP",
+        "id" : "similarity-with-oop"
+      }, {
+        "title" : "Table of Contents",
+        "id" : "table-of-contents"
+      }, {
+        "title" : "Sub Headings",
+        "id" : "sub-headings"
+      }, {
+        "title" : "Meta",
+        "id" : "meta"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

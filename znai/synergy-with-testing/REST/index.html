@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: REST</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Request and Response Capture</h1></header>
+<p>It helps in understanding a REST API if there are clear scenarios defined. Showing examples of requests used and responses received makes your documentation less abstract.Instead of manually copy-and-pasting the responses back to your documentation, consider running tests and automatically capturing the relevant artifacts.</p>
+</article>
+
+<article>
+<header><h1>WebTau</h1></header>
+<p>http://tsguides.app.twosigma.com/webtau/REST/getting-started WebTau is the framework to write, run, and capture REST tests artifacts.The bare minimum test in WebTau looks like this: package rest import static com.twosigma.webtau.WebTauGroovyDsl.* scenario(&quot;simple get&quot;) { http.get(&quot;/weather&quot;) { temperature.should == 88 } }</p>
+</article>
+
+<article>
+<header><h1>Capture REST Artifacts</h1></header>
+<p>To capture artifacts use http.doc.capture package rest import static com.twosigma.webtau.WebTauGroovyDsl.* scenario(&quot;extracting id after POST to use inside GET request&quot;) { def id = http.post(&quot;/employee&quot;, [firstName: 'FN', lastName: 'LN']) { return id } http.doc.capture('employee-post') http.get(&quot;/employee/$id&quot;) { firstName.should == 'FN' lastName.should == 'LN' } http.doc.capture('employee-get') // capture previous HTTP call as &lt;docDir&gt;/employee-get } Captured artifact is a JSON file that looks like this: { &quot;method&quot;: &quot;GET&quot;, &quot;url&quot;: &quot;http://localhost:8180/employee/id-generated-2&quot;, &quot;responseType&quot;: &quot;application/json&quot;, &quot;responseBody&quot;: &quot;{\&quot;firstName\&quot;:\&quot;FN\&quot;,\&quot;lastName\&quot;:\&quot;LN\&quot;}\n&quot;, &quot;responseBodyChecks&quot;: { &quot;failedPaths&quot;: [], &quot;passedPaths&quot;: [ &quot;root.firstName&quot;, &quot;root.lastName&quot; ] } }</p>
+</article>
+
+<article>
+<header><h1>Document REST calls</h1></header>
+<p>Once the artifact is captured, include it for documentation with the rest-test plugin. :include-rest-test: REST/employee-get.json The result looks like:or:Note: all the asserted values will be automatically highlighted for your users to help you bring their attention to values of interest.</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Request and Response Capture",
+      "id" : "request-and-response-capture",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "It helps in understanding a REST API if there are clear scenarios defined.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Showing examples of requests used and responses received makes your documentation less abstract.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Instead of manually copy-and-pasting the responses back to your documentation, consider running tests and automatically",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "capturing the relevant artifacts.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "WebTau",
+      "id" : "webtau",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "url" : "http://tsguides.app.twosigma.com/webtau/REST/getting-started",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "WebTau",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " is the framework to write, run, and capture REST tests artifacts.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The bare minimum test in WebTau looks like this:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "groovy",
+        "snippet" : "package rest\n\nimport static com.twosigma.webtau.WebTauGroovyDsl.*\n\nscenario(\"simple get\") {\n    http.get(\"/weather\") {\n        temperature.should == 88\n    }\n}",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Capture REST Artifacts",
+      "id" : "capture-rest-artifacts",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To capture artifacts use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "http.doc.capture",
+          "type" : "InlinedCode"
+        } ]
+      }, {
+        "lang" : "groovy",
+        "snippet" : "package rest\n\nimport static com.twosigma.webtau.WebTauGroovyDsl.*\n\nscenario(\"extracting id after POST to use inside GET request\") {\n    def id = http.post(\"/employee\", [firstName: 'FN', lastName: 'LN']) {\n        return id\n    }\n    http.doc.capture('employee-post')\n\n    http.get(\"/employee/$id\") {\n        firstName.should == 'FN'\n        lastName.should == 'LN'\n    }\n    http.doc.capture('employee-get') // capture previous HTTP call as <docDir>/employee-get\n}",
+        "commentsType" : "inline",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Captured artifact is a ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JSON",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file that looks like this:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "json",
+        "snippet" : "{\n  \"method\": \"GET\",\n  \"url\": \"http://localhost:8180/employee/id-generated-2\",\n  \"responseType\": \"application/json\",\n  \"responseBody\": \"{\\\"firstName\\\":\\\"FN\\\",\\\"lastName\\\":\\\"LN\\\"}\\n\",\n  \"responseBodyChecks\": {\n    \"failedPaths\": [],\n    \"passedPaths\": [\n      \"root.firstName\",\n      \"root.lastName\"\n    ]\n  }\n}",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Document REST calls",
+      "id" : "document-rest-calls",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Once the artifact is captured, include it for documentation with the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "rest-test",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-rest-test: REST/employee-get.json\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The result looks like:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "testArtifact" : {
+          "method" : "GET",
+          "url" : "http://localhost:8180/employee/id-generated-2",
+          "responseType" : "application/json",
+          "responseBody" : "{\"firstName\":\"FN\",\"lastName\":\"LN\"}\n",
+          "responseBodyChecks" : {
+            "failedPaths" : [ ],
+            "passedPaths" : [ "root.firstName", "root.lastName" ]
+          }
+        },
+        "type" : "WebTauRest"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "or:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "testArtifact" : {
+          "method" : "POST",
+          "url" : "http://localhost:8180/employee",
+          "requestType" : "application/json",
+          "requestBody" : "{\"firstName\":\"FN\",\"lastName\":\"LN\"}",
+          "responseType" : "application/json",
+          "responseBody" : "{\"id\":\"id-generated-2\"}\n",
+          "responseBodyChecks" : {
+            "failedPaths" : [ ],
+            "passedPaths" : [ ]
+          }
+        },
+        "type" : "WebTauRest"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: all the asserted values will be automatically highlighted for your users to help you bring their attention to",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "values of interest.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Synergy With Testing",
+      "pageTitle" : "REST",
+      "pageMeta" : { },
+      "fileName" : "REST",
+      "dirName" : "synergy-with-testing",
+      "pageSectionIdTitles" : [ {
+        "title" : "Request and Response Capture",
+        "id" : "request-and-response-capture"
+      }, {
+        "title" : "WebTau",
+        "id" : "webtau"
+      }, {
+        "title" : "Capture REST Artifacts",
+        "id" : "capture-rest-artifacts"
+      }, {
+        "title" : "Document REST calls",
+        "id" : "document-rest-calls"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

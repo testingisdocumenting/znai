@@ -1,0 +1,22 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "label": "label 1"
+    },
+    {
+      "id": "n2",
+      "label": "label 2",
+      "highlight": true
+    },
+    {
+      "id": "n3",
+      "label": "label 3"
+    }
+  ],
+  "edges": [
+    ["n1", "n2"],
+    ["n2", "n3"],
+    ["n1", "n3"]
+  ]
+}

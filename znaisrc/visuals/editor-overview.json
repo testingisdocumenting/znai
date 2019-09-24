@@ -1,0 +1,7 @@
+{"shapes": [
+  {"type": "rectangle", "id": "r2",
+    "x": 140, "y": 135, "width": 220, "height": 240, "text": "", "color": "red"},
+
+  {"type": "rectangle", "id": "r1",
+  "x": 593, "y": 5, "width": 255, "height": 180, "text": "", "color": "red"}
+]}

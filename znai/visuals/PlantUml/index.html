@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: PlantUml</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>In Place</h1></header>
+<p>http://plantuml.com/sequence-diagram PlantUml is a text-based way of drawing many kinds of diagrams.</p>
+</article>
+
+<article>
+<header><h1>External File</h1></header>
+<p>If your diagram is stored in a separate file, use :include-plantuml: &lt;path&gt; . :include-plantuml: demo.plantuml @startuml package &quot;Some Group&quot; { HTTP - [First Component] [Another Component] } node &quot;Other Groups&quot; { FTP - [Second Component] [First Component] --&gt; FTP } cloud { [Example 1] } database &quot;MySql&quot; { folder &quot;This is my folder&quot; { [Folder 3] } frame &quot;Foo&quot; { [Frame 4] } } [Another Component] --&gt; [Example 1] [Example 1] --&gt; [Folder 3] [Folder 3] --&gt; [Frame 4] @enduml</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "url" : "http://plantuml.com/sequence-diagram",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "PlantUml",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "text" : " is a text-based way of drawing many kinds of diagrams.",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "title" : "In Place",
+      "id" : "in-place",
+      "type" : "Section",
+      "content" : [ {
+        "markdown" : {
+          "lang" : "markdown",
+          "snippet" : "```plantuml\n@startuml\nAlice -> Bob: Authentication Request\nBob --> Alice: Authentication Response\n\nAlice -> Bob: Another authentication Request\nAlice <-- Bob: another authentication Response\n@enduml\n```\n",
+          "type" : "Snippet"
+        },
+        "result" : [ {
+          "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" contentScriptType=\"application/ecmascript\" contentStyleType=\"text/css\" height=\"216px\" preserveAspectRatio=\"none\" style=\"width:293px;height:216px;\" version=\"1.1\" viewBox=\"0 0 293 216\" width=\"293px\" zoomAndPan=\"magnify\"><defs><filter height=\"300%\" id=\"fbrzg00n1hs25\" width=\"300%\" x=\"-1\" y=\"-1\"><feGaussianBlur result=\"blurOut\" stdDeviation=\"2.0\"/><feColorMatrix in=\"blurOut\" result=\"blurOut2\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0\"/><feOffset dx=\"4.0\" dy=\"4.0\" in=\"blurOut2\" result=\"blurOut3\"/><feBlend in=\"SourceGraphic\" in2=\"blurOut3\" mode=\"normal\"/></filter></defs><g><line style=\"stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;\" x1=\"33\" x2=\"33\" y1=\"38.4883\" y2=\"175.7305\"/><line style=\"stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;\" x1=\"264.5\" x2=\"264.5\" y1=\"38.4883\" y2=\"175.7305\"/><rect fill=\"#FEFECE\" filter=\"url(#fbrzg00n1hs25)\" height=\"30.4883\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"47\" x=\"8\" y=\"3\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"33\" x=\"15\" y=\"23.5352\">Alice</text><rect fill=\"#FEFECE\" filter=\"url(#fbrzg00n1hs25)\" height=\"30.4883\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"47\" x=\"8\" y=\"174.7305\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"33\" x=\"15\" y=\"195.2656\">Alice</text><rect fill=\"#FEFECE\" filter=\"url(#fbrzg00n1hs25)\" height=\"30.4883\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"40\" x=\"242.5\" y=\"3\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"26\" x=\"249.5\" y=\"23.5352\">Bob</text><rect fill=\"#FEFECE\" filter=\"url(#fbrzg00n1hs25)\" height=\"30.4883\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"40\" x=\"242.5\" y=\"174.7305\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"26\" x=\"249.5\" y=\"195.2656\">Bob</text><polygon fill=\"#A80036\" points=\"252.5,65.4883,262.5,69.4883,252.5,73.4883,256.5,69.4883\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><line style=\"stroke: #A80036; stroke-width: 1.0;\" x1=\"33.5\" x2=\"258.5\" y1=\"69.4883\" y2=\"69.4883\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"13\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"147\" x=\"40.5\" y=\"65.0566\">Authentication Request</text><polygon fill=\"#A80036\" points=\"44.5,94.7988,34.5,98.7988,44.5,102.7988,40.5,98.7988\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><line style=\"stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;\" x1=\"38.5\" x2=\"263.5\" y1=\"98.7988\" y2=\"98.7988\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"13\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"157\" x=\"50.5\" y=\"94.3672\">Authentication Response</text><polygon fill=\"#A80036\" points=\"252.5,124.1094,262.5,128.1094,252.5,132.1094,256.5,128.1094\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><line style=\"stroke: #A80036; stroke-width: 1.0;\" x1=\"33.5\" x2=\"258.5\" y1=\"128.1094\" y2=\"128.1094\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"13\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"199\" x=\"40.5\" y=\"123.6777\">Another authentication Request</text><polygon fill=\"#A80036\" points=\"44.5,153.4199,34.5,157.4199,44.5,161.4199,40.5,157.4199\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><line style=\"stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;\" x1=\"38.5\" x2=\"263.5\" y1=\"157.4199\" y2=\"157.4199\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"13\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"207\" x=\"50.5\" y=\"152.9883\">another authentication Response</text><!--\n@startuml\r\nAlice -> Bob: Authentication Request\r\nBob - -> Alice: Authentication Response\r\n\r\nAlice -> Bob: Another authentication Request\r\nAlice <- - Bob: another authentication Response\r\n@enduml\r\n\nPlantUML version 1.2017.16(Sun Sep 03 11:53:37 BST 2017)\n(GPL source distribution)\nJava Runtime: Java(TM) SE Runtime Environment\nJVM: Java HotSpot(TM) 64-Bit Server VM\nJava Version: 1.8.0_191-b12\nOperating System: Mac OS X\nOS Version: 10.14.6\nDefault Encoding: UTF-8\nLanguage: en\nCountry: GB\n--></g></svg>",
+          "type" : "Svg"
+        } ],
+        "type" : "MarkdownAndResult"
+      } ]
+    }, {
+      "title" : "External File",
+      "id" : "external-file",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If your diagram is stored in a separate file, use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : ":include-plantuml: <path>",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "lang" : "",
+            "snippet" : ":include-plantuml: demo.plantuml\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          }, {
+            "lang" : "plantuml",
+            "snippet" : "@startuml\n\npackage \"Some Group\" {\n  HTTP - [First Component]\n  [Another Component]\n}\n\nnode \"Other Groups\" {\n  FTP - [Second Component]\n  [First Component] --> FTP\n}\n\ncloud {\n  [Example 1]\n}\n\n\ndatabase \"MySql\" {\n  folder \"This is my folder\" {\n    [Folder 3]\n  }\n  frame \"Foo\" {\n    [Frame 4]\n  }\n}\n\n[Another Component] --> [Example 1]\n[Example 1] --> [Folder 3]\n[Folder 3] --> [Frame 4]\n\n@enduml",
+            "title" : "demo.plantuml",
+            "type" : "Snippet"
+          } ]
+        }, {
+          "content" : [ {
+            "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" contentScriptType=\"application/ecmascript\" contentStyleType=\"text/css\" height=\"464px\" preserveAspectRatio=\"none\" style=\"width:486px;height:464px;\" version=\"1.1\" viewBox=\"0 0 486 464\" width=\"486px\" zoomAndPan=\"magnify\"><defs><filter height=\"300%\" id=\"f1oh7ma03y0glc\" width=\"300%\" x=\"-1\" y=\"-1\"><feGaussianBlur result=\"blurOut\" stdDeviation=\"2.0\"/><feColorMatrix in=\"blurOut\" result=\"blurOut2\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0\"/><feOffset dx=\"4.0\" dy=\"4.0\" in=\"blurOut2\" result=\"blurOut3\"/><feBlend in=\"SourceGraphic\" in2=\"blurOut3\" mode=\"normal\"/></filter></defs><g><!--cluster Some Group--><polygon fill=\"#FFFFFF\" filter=\"url(#f1oh7ma03y0glc)\" points=\"14,16,107,16,114,38.4883,452,38.4883,452,109,14,109,14,16\" style=\"stroke: #000000; stroke-width: 2.0;\"/><line style=\"stroke: #000000; stroke-width: 2.0;\" x1=\"14\" x2=\"114\" y1=\"38.4883\" y2=\"38.4883\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" font-weight=\"bold\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"87\" x=\"18\" y=\"31.5352\">Some Group</text><!--cluster Other Groups--><polygon fill=\"#FFFFFF\" filter=\"url(#f1oh7ma03y0glc)\" points=\"42,139,52,129,303,129,303,217,293,227,42,227,42,139\" style=\"stroke: #000000; stroke-width: 2.0;\"/><line style=\"stroke: #000000; stroke-width: 2.0;\" x1=\"293\" x2=\"302\" y1=\"139\" y2=\"130\"/><line style=\"stroke: #000000; stroke-width: 2.0;\" x1=\"42\" x2=\"293\" y1=\"139\" y2=\"139\"/><line style=\"stroke: #000000; stroke-width: 2.0;\" x1=\"293\" x2=\"293\" y1=\"139\" y2=\"227\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" font-weight=\"bold\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"97\" x=\"120\" y=\"155.5352\">Other Groups</text><!--cluster ##13--><path d=\"M325,171 C325,168 327,166 330,166 C333,166 335,168 335,171 C335,168 337,166 340,166 C343,166 345,168 345,171 C345,168 347,166 350,166 C353,166 355,168 355,171 C355,168 357,166 360,166 C363,166 365,168 365,171 C365,168 367,166 370,166 C373,166 375,168 375,171 C375,168 377,166 380,166 C383,166 385,168 385,171 C385,168 387,166 390,166 C393,166 395,168 395,171 C395,168 397,166 400,166 C403,166 405,168 405,171 C405,168 407,166 410,166 C413,166 415,168 415,171 C415,168 417,166 420,166 C423,166 425,168 425,171 C428,171 430,173 430,176 C430,179 428,181 425,181 C428,181 430,183 430,186 C430,189 428,191 425,191 C428,191 430,193 430,196 C430,199 428,201 425,201 C428,201 430,203 430,206 C430,209 428,211 425,211 C425,214 422,216 420,216 C417,216 415,214 415,211 C415,214 412,216 410,216 C407,216 405,214 405,211 C405,214 402,216 400,216 C397,216 395,214 395,211 C395,214 392,216 390,216 C387,216 385,214 385,211 C385,214 382,216 380,216 C377,216 375,214 375,211 C375,214 372,216 370,216 C367,216 365,214 365,211 C365,214 362,216 360,216 C357,216 355,214 355,211 C355,214 352,216 350,216 C347,216 345,214 345,211 C345,214 342,216 340,216 C337,216 335,214 335,211 C335,214 332,216 330,216 C327,216 325,214 325,211 C322,211 320,209 320,206 C320,203 322,201 325,201 C322,201 320,199 320,196 C320,193 322,191 325,191 C322,191 320,189 320,186 C320,183 322,181 325,181 C322,181 320,179 320,176 C320,173 322,171 325,171 \" fill=\"#FFFFFF\" filter=\"url(#f1oh7ma03y0glc)\" style=\"stroke: #000000; stroke-width: 2.0;\"/><!--cluster MySql--><path d=\"M315,245 C315,235 393.5,235 393.5,235 C393.5,235 472,235 472,245 L472,442 C472,452 393.5,452 393.5,452 C393.5,452 315,452 315,442 L315,245 \" fill=\"#FFFFFF\" filter=\"url(#f1oh7ma03y0glc)\" style=\"stroke: #000000; stroke-width: 2.0;\"/><path d=\"M315,245 C315,255 393.5,255 393.5,255 C393.5,255 472,255 472,245 \" fill=\"none\" style=\"stroke: #000000; stroke-width: 2.0;\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" font-weight=\"bold\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"43\" x=\"372\" y=\"269.5352\">MySql</text><!--cluster This is my folder--><polygon fill=\"#FFFFFF\" filter=\"url(#f1oh7ma03y0glc)\" points=\"323,277,454,277,461,299.4883,464,299.4883,464,348,323,348,323,277\" style=\"stroke: #000000; stroke-width: 2.0;\"/><line style=\"stroke: #000000; stroke-width: 2.0;\" x1=\"323\" x2=\"461\" y1=\"299.4883\" y2=\"299.4883\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" font-weight=\"bold\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"125\" x=\"327\" y=\"292.5352\">This is my folder</text><!--cluster Foo--><rect fill=\"#FFFFFF\" filter=\"url(#f1oh7ma03y0glc)\" height=\"71\" style=\"stroke: #000000; stroke-width: 2.0;\" width=\"92\" x=\"330\" y=\"373\"/><path d=\"M366,374 L366,382.4883 L356,392.4883 L330,392.4883 \" fill=\"none\" style=\"stroke: #000000; stroke-width: 2.0;\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" font-weight=\"bold\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"26\" x=\"333\" y=\"387.5352\">Foo</text><!--entity HTTP--><ellipse cx=\"220\" cy=\"72\" fill=\"#FEFECE\" filter=\"url(#f1oh7ma03y0glc)\" rx=\"8\" ry=\"8\" style=\"stroke: #A80036; stroke-width: 2.0;\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"36\" x=\"202\" y=\"102.5352\">HTTP</text><!--entity First Component--><rect fill=\"#FEFECE\" filter=\"url(#f1oh7ma03y0glc)\" height=\"36.4883\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"135\" x=\"22.5\" y=\"54\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"17.5\" y=\"59\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"17.5\" y=\"80.4883\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"115\" x=\"32.5\" y=\"77.5352\">First Component</text><!--entity Another Component--><rect fill=\"#FEFECE\" filter=\"url(#f1oh7ma03y0glc)\" height=\"36.4883\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"161\" x=\"282.5\" y=\"54\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"277.5\" y=\"59\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"277.5\" y=\"80.4883\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"141\" x=\"292.5\" y=\"77.5352\">Another Component</text><!--entity FTP--><ellipse cx=\"77\" cy=\"190\" fill=\"#FEFECE\" filter=\"url(#f1oh7ma03y0glc)\" rx=\"8\" ry=\"8\" style=\"stroke: #A80036; stroke-width: 2.0;\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"25\" x=\"64.5\" y=\"220.5352\">FTP</text><!--entity Second Component--><rect fill=\"#FEFECE\" filter=\"url(#f1oh7ma03y0glc)\" height=\"36.4883\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"155\" x=\"139.5\" y=\"172\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"134.5\" y=\"177\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"134.5\" y=\"198.4883\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"135\" x=\"149.5\" y=\"195.5352\">Second Component</text><!--entity Example 1--><rect fill=\"#FEFECE\" filter=\"url(#f1oh7ma03y0glc)\" height=\"36.4883\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"92\" x=\"330\" y=\"172\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"325\" y=\"177\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"325\" y=\"198.4883\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"72\" x=\"340\" y=\"195.5352\">Example 1</text><!--entity Folder 3--><rect fill=\"#FEFECE\" filter=\"url(#f1oh7ma03y0glc)\" height=\"36.4883\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"77\" x=\"337.5\" y=\"304\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"332.5\" y=\"309\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"332.5\" y=\"330.4883\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"57\" x=\"347.5\" y=\"327.5352\">Folder 3</text><!--entity Frame 4--><rect fill=\"#FEFECE\" filter=\"url(#f1oh7ma03y0glc)\" height=\"36.4883\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"76\" x=\"338\" y=\"400\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"333\" y=\"405\"/><rect fill=\"#FEFECE\" height=\"5\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"10\" x=\"333\" y=\"426.4883\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"56\" x=\"348\" y=\"423.5352\">Frame 4</text><!--link HTTP to First Component--><path d=\"M210.7241,72 C199.3367,72 178.963,72 158.1569,72 \" fill=\"none\" id=\"HTTP-First Component\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><!--link FTP to Second Component--><path d=\"M86.1858,196.7236 C97.4122,200.2781 117.541,202.2602 138.6959,202.6699 \" fill=\"none\" id=\"FTP-Second Component\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><!--link First Component to FTP--><path d=\"M87.9972,90.1789 C85.3972,113.7796 80.914,154.4729 78.5549,175.886 \" fill=\"none\" id=\"First Component-FTP\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><polygon fill=\"#A80036\" points=\"78.0034,180.8924,82.9652,172.3847,78.5511,175.9225,75.0133,171.5084,78.0034,180.8924\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><!--link Another Component to Example 1--><path d=\"M365.0028,90.1789 C367.271,110.7674 370.9723,144.3637 373.4463,166.8204 \" fill=\"none\" id=\"Another Component-Example 1\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><polygon fill=\"#A80036\" points=\"374.0163,171.9941,377.0066,162.6102,373.4687,167.0242,369.0547,163.4863,374.0163,171.9941\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><!--link Example 1 to Folder 3--><path d=\"M376,208.0773 C376,231.5446 376,272.5498 376,298.4351 \" fill=\"none\" id=\"Example 1-Folder 3\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><polygon fill=\"#A80036\" points=\"376,303.7175,380,294.7175,376,298.7175,372,294.7175,376,303.7175\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><!--link Folder 3 to Frame 4--><path d=\"M376,340.0569 C376,355.5126 376,377.8647 376,394.6731 \" fill=\"none\" id=\"Folder 3-Frame 4\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><polygon fill=\"#A80036\" points=\"376,399.6977,380,390.6977,376,394.6977,372,390.6977,376,399.6977\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><!--\n@startuml\r\n\r\npackage \"Some Group\" {\r\n  HTTP - [First Component]\r\n  [Another Component]\r\n}\r\n\r\nnode \"Other Groups\" {\r\n  FTP - [Second Component]\r\n  [First Component] - -> FTP\r\n}\r\n\r\ncloud {\r\n  [Example 1]\r\n}\r\n\r\n\r\ndatabase \"MySql\" {\r\n  folder \"This is my folder\" {\r\n    [Folder 3]\r\n  }\r\n  frame \"Foo\" {\r\n    [Frame 4]\r\n  }\r\n}\r\n\r\n[Another Component] - -> [Example 1]\r\n[Example 1] - -> [Folder 3]\r\n[Folder 3] - -> [Frame 4]\r\n\r\n@enduml\r\n\nPlantUML version 1.2017.16(Sun Sep 03 11:53:37 BST 2017)\n(GPL source distribution)\nJava Runtime: Java(TM) SE Runtime Environment\nJVM: Java HotSpot(TM) 64-Bit Server VM\nJava Version: 1.8.0_191-b12\nOperating System: Mac OS X\nOS Version: 10.14.6\nDefault Encoding: UTF-8\nLanguage: en\nCountry: GB\n--></g></svg>",
+            "type" : "Svg"
+          } ]
+        } ],
+        "config" : { },
+        "type" : "Columns"
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Visuals",
+      "pageTitle" : "PlantUml",
+      "pageMeta" : { },
+      "fileName" : "PlantUml",
+      "dirName" : "visuals",
+      "pageSectionIdTitles" : [ {
+        "title" : "In Place",
+        "id" : "in-place"
+      }, {
+        "title" : "External File",
+        "id" : "external-file"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

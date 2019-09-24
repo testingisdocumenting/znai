@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: SVG</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Retina Displays</h1></header>
+<p>To have crisp documentation images on Retina displays use SVG images. :include-svg: with-groups.svg</p>
+</article>
+
+<article>
+<header><h1>Ids To Reveal</h1></header>
+<p>If you have groups that you want to display while hiding everything else, pass the IDs to the idsToReveal property. :include-svg: with-groups.svg {idsToReveal: [&quot;partA&quot;, &quot;partB&quot;]} In presentation mode, groups will be displayed one at a time in the order specified.This SVG image is taken and modified from https://www.shareicon.net/pyramid-piramid-draw-stock-877888 https://www.shareicon.net/pyramid-piramid-draw-stock-877888 &lt;?xml version=&quot;1.0&quot; ?&gt; &lt;svg version=&quot;1.1&quot; viewBox=&quot;0 0 512 512&quot; width=&quot;256&quot; height=&quot;256&quot; xml:space=&quot;preserve&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt; &lt;style type=&quot;text/css&quot;&gt; .st0{fill:#5CB8CD;} .st1{fill:#FB8A52;} .st2{fill:#152D39;} .st3{fill:#E8E8E8;} &lt;/style&gt; &lt;g id=&quot;partA&quot;&gt; &lt;path class=&quot;st2&quot; d=&quot;M109.4,397.7c-0.8-3.8-0.4-7.9,1.4-11.8l127.9-279.4c2.3-5.1,6.4-8.5,11-10.1V6 c-4.6,1.6-8.6,4.9-11,10.1L52.1,423.6c-1.9,4.1-2.2,8.3-1.3,12.2L109.4,397.7z&quot; /&gt; &lt;path class=&quot;st2&quot; d=&quot;M160.4,325.4c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4 S204.2,325.4,160.4,325.4z&quot; /&gt; &lt;circle class=&quot;st3&quot; cx=&quot;160.4&quot; cy=&quot;246&quot; r=&quot;68.1&quot;/&gt; &lt;path class=&quot;st2&quot; d=&quot;M168.2,253.3h-11.3l-2.7,7.8H150l10.9-30.1h3.5l10.6,30.1h-4.2L168.2,253.3z M158,249.9h9l-4.4-12.9h-0.1 L158,249.9z&quot;/&gt; &lt;/g&gt; &lt;g id=&quot;partC&quot;&gt; &lt;path class=&quot;st1&quot; d=&quot;M394.8,409.5c-3,2.1-6.8,3.4-10.9,3.4H128.1c-4.7,0-8.9-1.6-12.1-4.3l-58.3,37.9 c3.2,2.5,7.2,4,11.8,4h373.1c4,0,7.6-1.2,10.5-3.2L394.8,409.5z&quot; /&gt; &lt;path class=&quot;st1&quot; d=&quot;M262.4,506c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4 S306.1,506,262.4,506z&quot; /&gt; &lt;circle class=&quot;st3&quot; cx=&quot;262.4&quot; cy=&quot;426.6&quot; id=&quot;XMLID_7_&quot; r=&quot;68.1&quot;/&gt; &lt;path class=&quot;st1&quot; d=&quot;M274.8,432.6l0,0.1c0.1,3.1-1,5.7-3.3,7.8c-2.3,2.1-5.2,3.2-8.9,3.2c-3.8,0-6.8-1.3-9.2-4 c-2.4-2.7-3.6-6.1-3.6-10.2v-5.9c0-4.1,1.2-7.5,3.6-10.2c2.4-2.7,5.4-4,9.2-4c3.8,0,6.8,1,9,3c2.2,2,3.3,4.7,3.2,8l0,0.1h-4.3 c0-2.3-0.7-4.2-2.1-5.5c-1.4-1.4-3.3-2-5.8-2c-2.5,0-4.5,1-6,3c-1.5,2-2.2,4.5-2.2,7.5v6c0,3,0.7,5.6,2.2,7.6c1.5,2,3.5,3,6,3 c2.5,0,4.4-0.7,5.8-2c1.4-1.3,2.1-3.2,2.1-5.6H274.8z&quot;/&gt; &lt;/g&gt; &lt;g id=&quot;partB&quot;&gt; &lt;path class=&quot;st0&quot; d=&quot;M262.4,96.5c4.6,1.6,8.6,4.9,11,10.1l127.9,279.4c2,4.4,2.2,9.1,1,13.2l58.5,38.1 c1.4-4.3,1.2-9.1-0.9-13.6L273.4,16.1c-2.3-5.1-6.4-8.5-11-10.1V96.5z&quot;/&gt; &lt;path class=&quot;st0&quot; d=&quot;M364.3,325.4c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4 S408.1,325.4,364.3,325.4z&quot; /&gt; &lt;circle class=&quot;st3&quot; cx=&quot;364.3&quot; cy=&quot;246&quot; id=&quot;XMLID_9_&quot; r=&quot;68.1&quot;/&gt; &lt;path class=&quot;st0&quot; d=&quot;M352.7,263.2v-34.4h11.2c3.6,0,6.4,0.8,8.4,2.3c2,1.6,3,3.9,3,7c0,1.5-0.5,2.8-1.4,4c-0.9,1.2-2.1,2.1-3.6,2.7 c2.3,0.3,4,1.3,5.3,2.9c1.3,1.6,2,3.6,2,5.8c0,3.1-1,5.6-3.1,7.2c-2,1.7-4.8,2.5-8.3,2.5H352.7z M357.3,243.4h7.5 c1.7,0,3.1-0.5,4.2-1.4c1.1-1,1.6-2.3,1.6-4c0-1.9-0.6-3.2-1.8-4.2c-1.2-0.9-2.9-1.4-5.1-1.4h-6.6V243.4z M357.3,247.1v12.5h9 c2.1,0,3.8-0.5,4.9-1.6c1.2-1,1.8-2.5,1.8-4.5c0-1.9-0.6-3.4-1.8-4.6c-1.2-1.2-2.8-1.8-4.8-1.9h-0.3H357.3z&quot;/&gt; &lt;/g&gt; &lt;/svg&gt;</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Retina Displays",
+      "id" : "retina-displays",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To have crisp documentation images on Retina displays use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "SVG",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " images.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-svg: with-groups.svg\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "svg" : "<?xml version=\"1.0\" ?>\n<svg version=\"1.1\" viewBox=\"0 0 512 512\" width=\"256\" height=\"256\"\n\t xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\t<style type=\"text/css\">\n\t\t.st0{fill:#5CB8CD;}\n\t\t.st1{fill:#FB8A52;}\n\t\t.st2{fill:#152D39;}\n\t\t.st3{fill:#E8E8E8;}\n\t</style>\n\n\t<g id=\"partA\">\n\t\t<path class=\"st2\" d=\"M109.4,397.7c-0.8-3.8-0.4-7.9,1.4-11.8l127.9-279.4c2.3-5.1,6.4-8.5,11-10.1V6\n\t\t\tc-4.6,1.6-8.6,4.9-11,10.1L52.1,423.6c-1.9,4.1-2.2,8.3-1.3,12.2L109.4,397.7z\" />\n\t\t<path class=\"st2\" d=\"M160.4,325.4c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4\n\t\t S204.2,325.4,160.4,325.4z\" />\n\t\t<circle class=\"st3\" cx=\"160.4\" cy=\"246\"  r=\"68.1\"/>\n\t\t<path class=\"st2\" d=\"M168.2,253.3h-11.3l-2.7,7.8H150l10.9-30.1h3.5l10.6,30.1h-4.2L168.2,253.3z M158,249.9h9l-4.4-12.9h-0.1\n\t\t L158,249.9z\"/>\n\t</g>\n\n\t<g id=\"partC\">\n\t\t<path class=\"st1\" d=\"M394.8,409.5c-3,2.1-6.8,3.4-10.9,3.4H128.1c-4.7,0-8.9-1.6-12.1-4.3l-58.3,37.9\n\t\t\tc3.2,2.5,7.2,4,11.8,4h373.1c4,0,7.6-1.2,10.5-3.2L394.8,409.5z\" />\n\t\t<path class=\"st1\" d=\"M262.4,506c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4\n\t\t S306.1,506,262.4,506z\" />\n\t\t<circle class=\"st3\" cx=\"262.4\" cy=\"426.6\" id=\"XMLID_7_\" r=\"68.1\"/>\n\t\t<path class=\"st1\" d=\"M274.8,432.6l0,0.1c0.1,3.1-1,5.7-3.3,7.8c-2.3,2.1-5.2,3.2-8.9,3.2c-3.8,0-6.8-1.3-9.2-4\n\t\tc-2.4-2.7-3.6-6.1-3.6-10.2v-5.9c0-4.1,1.2-7.5,3.6-10.2c2.4-2.7,5.4-4,9.2-4c3.8,0,6.8,1,9,3c2.2,2,3.3,4.7,3.2,8l0,0.1h-4.3\n\t\tc0-2.3-0.7-4.2-2.1-5.5c-1.4-1.4-3.3-2-5.8-2c-2.5,0-4.5,1-6,3c-1.5,2-2.2,4.5-2.2,7.5v6c0,3,0.7,5.6,2.2,7.6c1.5,2,3.5,3,6,3\n\t\t  c2.5,0,4.4-0.7,5.8-2c1.4-1.3,2.1-3.2,2.1-5.6H274.8z\"/>\n\t</g>\n\n\t<g id=\"partB\">\n\t\t<path class=\"st0\" d=\"M262.4,96.5c4.6,1.6,8.6,4.9,11,10.1l127.9,279.4c2,4.4,2.2,9.1,1,13.2l58.5,38.1\n\t\t\tc1.4-4.3,1.2-9.1-0.9-13.6L273.4,16.1c-2.3-5.1-6.4-8.5-11-10.1V96.5z\"/>\n\t\t<path class=\"st0\" d=\"M364.3,325.4c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4\n\t\t S408.1,325.4,364.3,325.4z\" />\n\t\t<circle class=\"st3\" cx=\"364.3\" cy=\"246\" id=\"XMLID_9_\" r=\"68.1\"/>\n\t\t<path class=\"st0\" d=\"M352.7,263.2v-34.4h11.2c3.6,0,6.4,0.8,8.4,2.3c2,1.6,3,3.9,3,7c0,1.5-0.5,2.8-1.4,4c-0.9,1.2-2.1,2.1-3.6,2.7\n\t\t c2.3,0.3,4,1.3,5.3,2.9c1.3,1.6,2,3.6,2,5.8c0,3.1-1,5.6-3.1,7.2c-2,1.7-4.8,2.5-8.3,2.5H352.7z M357.3,243.4h7.5\n\t\t  c1.7,0,3.1-0.5,4.2-1.4c1.1-1,1.6-2.3,1.6-4c0-1.9-0.6-3.2-1.8-4.2c-1.2-0.9-2.9-1.4-5.1-1.4h-6.6V243.4z M357.3,247.1v12.5h9\n\t\t    c2.1,0,3.8-0.5,4.9-1.6c1.2-1,1.8-2.5,1.8-4.5c0-1.9-0.6-3.4-1.8-4.6c-1.2-1.2-2.8-1.8-4.8-1.9h-0.3H357.3z\"/>\n\t</g>\n</svg>",
+        "type" : "Svg"
+      } ]
+    }, {
+      "title" : "Ids To Reveal",
+      "id" : "ids-to-reveal",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If you have ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "groups",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " that you want to display while hiding everything else, pass the IDs to the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "idsToReveal",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " property.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-svg: with-groups.svg {idsToReveal: [\"partA\", \"partB\"]}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "svg" : "<?xml version=\"1.0\" ?>\n<svg version=\"1.1\" viewBox=\"0 0 512 512\" width=\"256\" height=\"256\"\n\t xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\t<style type=\"text/css\">\n\t\t.st0{fill:#5CB8CD;}\n\t\t.st1{fill:#FB8A52;}\n\t\t.st2{fill:#152D39;}\n\t\t.st3{fill:#E8E8E8;}\n\t</style>\n\n\t<g id=\"partA\">\n\t\t<path class=\"st2\" d=\"M109.4,397.7c-0.8-3.8-0.4-7.9,1.4-11.8l127.9-279.4c2.3-5.1,6.4-8.5,11-10.1V6\n\t\t\tc-4.6,1.6-8.6,4.9-11,10.1L52.1,423.6c-1.9,4.1-2.2,8.3-1.3,12.2L109.4,397.7z\" />\n\t\t<path class=\"st2\" d=\"M160.4,325.4c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4\n\t\t S204.2,325.4,160.4,325.4z\" />\n\t\t<circle class=\"st3\" cx=\"160.4\" cy=\"246\"  r=\"68.1\"/>\n\t\t<path class=\"st2\" d=\"M168.2,253.3h-11.3l-2.7,7.8H150l10.9-30.1h3.5l10.6,30.1h-4.2L168.2,253.3z M158,249.9h9l-4.4-12.9h-0.1\n\t\t L158,249.9z\"/>\n\t</g>\n\n\t<g id=\"partC\">\n\t\t<path class=\"st1\" d=\"M394.8,409.5c-3,2.1-6.8,3.4-10.9,3.4H128.1c-4.7,0-8.9-1.6-12.1-4.3l-58.3,37.9\n\t\t\tc3.2,2.5,7.2,4,11.8,4h373.1c4,0,7.6-1.2,10.5-3.2L394.8,409.5z\" />\n\t\t<path class=\"st1\" d=\"M262.4,506c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4\n\t\t S306.1,506,262.4,506z\" />\n\t\t<circle class=\"st3\" cx=\"262.4\" cy=\"426.6\" id=\"XMLID_7_\" r=\"68.1\"/>\n\t\t<path class=\"st1\" d=\"M274.8,432.6l0,0.1c0.1,3.1-1,5.7-3.3,7.8c-2.3,2.1-5.2,3.2-8.9,3.2c-3.8,0-6.8-1.3-9.2-4\n\t\tc-2.4-2.7-3.6-6.1-3.6-10.2v-5.9c0-4.1,1.2-7.5,3.6-10.2c2.4-2.7,5.4-4,9.2-4c3.8,0,6.8,1,9,3c2.2,2,3.3,4.7,3.2,8l0,0.1h-4.3\n\t\tc0-2.3-0.7-4.2-2.1-5.5c-1.4-1.4-3.3-2-5.8-2c-2.5,0-4.5,1-6,3c-1.5,2-2.2,4.5-2.2,7.5v6c0,3,0.7,5.6,2.2,7.6c1.5,2,3.5,3,6,3\n\t\t  c2.5,0,4.4-0.7,5.8-2c1.4-1.3,2.1-3.2,2.1-5.6H274.8z\"/>\n\t</g>\n\n\t<g id=\"partB\">\n\t\t<path class=\"st0\" d=\"M262.4,96.5c4.6,1.6,8.6,4.9,11,10.1l127.9,279.4c2,4.4,2.2,9.1,1,13.2l58.5,38.1\n\t\t\tc1.4-4.3,1.2-9.1-0.9-13.6L273.4,16.1c-2.3-5.1-6.4-8.5-11-10.1V96.5z\"/>\n\t\t<path class=\"st0\" d=\"M364.3,325.4c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4\n\t\t S408.1,325.4,364.3,325.4z\" />\n\t\t<circle class=\"st3\" cx=\"364.3\" cy=\"246\" id=\"XMLID_9_\" r=\"68.1\"/>\n\t\t<path class=\"st0\" d=\"M352.7,263.2v-34.4h11.2c3.6,0,6.4,0.8,8.4,2.3c2,1.6,3,3.9,3,7c0,1.5-0.5,2.8-1.4,4c-0.9,1.2-2.1,2.1-3.6,2.7\n\t\t c2.3,0.3,4,1.3,5.3,2.9c1.3,1.6,2,3.6,2,5.8c0,3.1-1,5.6-3.1,7.2c-2,1.7-4.8,2.5-8.3,2.5H352.7z M357.3,243.4h7.5\n\t\t  c1.7,0,3.1-0.5,4.2-1.4c1.1-1,1.6-2.3,1.6-4c0-1.9-0.6-3.2-1.8-4.2c-1.2-0.9-2.9-1.4-5.1-1.4h-6.6V243.4z M357.3,247.1v12.5h9\n\t\t    c2.1,0,3.8-0.5,4.9-1.6c1.2-1,1.8-2.5,1.8-4.5c0-1.9-0.6-3.4-1.8-4.6c-1.2-1.2-2.8-1.8-4.8-1.9h-0.3H357.3z\"/>\n\t</g>\n</svg>",
+        "idsToReveal" : [ "partA", "partB" ],
+        "type" : "Svg"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "In presentation mode, groups will be displayed one at a time in the order specified.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This SVG image is taken and modified from ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://www.shareicon.net/pyramid-piramid-draw-stock-877888",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "https://www.shareicon.net/pyramid-piramid-draw-stock-877888",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      }, {
+        "lang" : "html",
+        "snippet" : "<?xml version=\"1.0\" ?>\n<svg version=\"1.1\" viewBox=\"0 0 512 512\" width=\"256\" height=\"256\"\n\t xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\t<style type=\"text/css\">\n\t\t.st0{fill:#5CB8CD;}\n\t\t.st1{fill:#FB8A52;}\n\t\t.st2{fill:#152D39;}\n\t\t.st3{fill:#E8E8E8;}\n\t</style>\n\n\t<g id=\"partA\">\n\t\t<path class=\"st2\" d=\"M109.4,397.7c-0.8-3.8-0.4-7.9,1.4-11.8l127.9-279.4c2.3-5.1,6.4-8.5,11-10.1V6\n\t\t\tc-4.6,1.6-8.6,4.9-11,10.1L52.1,423.6c-1.9,4.1-2.2,8.3-1.3,12.2L109.4,397.7z\" />\n\t\t<path class=\"st2\" d=\"M160.4,325.4c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4\n\t\t S204.2,325.4,160.4,325.4z\" />\n\t\t<circle class=\"st3\" cx=\"160.4\" cy=\"246\"  r=\"68.1\"/>\n\t\t<path class=\"st2\" d=\"M168.2,253.3h-11.3l-2.7,7.8H150l10.9-30.1h3.5l10.6,30.1h-4.2L168.2,253.3z M158,249.9h9l-4.4-12.9h-0.1\n\t\t L158,249.9z\"/>\n\t</g>\n\n\t<g id=\"partC\">\n\t\t<path class=\"st1\" d=\"M394.8,409.5c-3,2.1-6.8,3.4-10.9,3.4H128.1c-4.7,0-8.9-1.6-12.1-4.3l-58.3,37.9\n\t\t\tc3.2,2.5,7.2,4,11.8,4h373.1c4,0,7.6-1.2,10.5-3.2L394.8,409.5z\" />\n\t\t<path class=\"st1\" d=\"M262.4,506c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4\n\t\t S306.1,506,262.4,506z\" />\n\t\t<circle class=\"st3\" cx=\"262.4\" cy=\"426.6\" id=\"XMLID_7_\" r=\"68.1\"/>\n\t\t<path class=\"st1\" d=\"M274.8,432.6l0,0.1c0.1,3.1-1,5.7-3.3,7.8c-2.3,2.1-5.2,3.2-8.9,3.2c-3.8,0-6.8-1.3-9.2-4\n\t\tc-2.4-2.7-3.6-6.1-3.6-10.2v-5.9c0-4.1,1.2-7.5,3.6-10.2c2.4-2.7,5.4-4,9.2-4c3.8,0,6.8,1,9,3c2.2,2,3.3,4.7,3.2,8l0,0.1h-4.3\n\t\tc0-2.3-0.7-4.2-2.1-5.5c-1.4-1.4-3.3-2-5.8-2c-2.5,0-4.5,1-6,3c-1.5,2-2.2,4.5-2.2,7.5v6c0,3,0.7,5.6,2.2,7.6c1.5,2,3.5,3,6,3\n\t\t  c2.5,0,4.4-0.7,5.8-2c1.4-1.3,2.1-3.2,2.1-5.6H274.8z\"/>\n\t</g>\n\n\t<g id=\"partB\">\n\t\t<path class=\"st0\" d=\"M262.4,96.5c4.6,1.6,8.6,4.9,11,10.1l127.9,279.4c2,4.4,2.2,9.1,1,13.2l58.5,38.1\n\t\t\tc1.4-4.3,1.2-9.1-0.9-13.6L273.4,16.1c-2.3-5.1-6.4-8.5-11-10.1V96.5z\"/>\n\t\t<path class=\"st0\" d=\"M364.3,325.4c-43.8,0-79.4-35.6-79.4-79.4s35.6-79.4,79.4-79.4s79.4,35.6,79.4,79.4\n\t\t S408.1,325.4,364.3,325.4z\" />\n\t\t<circle class=\"st3\" cx=\"364.3\" cy=\"246\" id=\"XMLID_9_\" r=\"68.1\"/>\n\t\t<path class=\"st0\" d=\"M352.7,263.2v-34.4h11.2c3.6,0,6.4,0.8,8.4,2.3c2,1.6,3,3.9,3,7c0,1.5-0.5,2.8-1.4,4c-0.9,1.2-2.1,2.1-3.6,2.7\n\t\t c2.3,0.3,4,1.3,5.3,2.9c1.3,1.6,2,3.6,2,5.8c0,3.1-1,5.6-3.1,7.2c-2,1.7-4.8,2.5-8.3,2.5H352.7z M357.3,243.4h7.5\n\t\t  c1.7,0,3.1-0.5,4.2-1.4c1.1-1,1.6-2.3,1.6-4c0-1.9-0.6-3.2-1.8-4.2c-1.2-0.9-2.9-1.4-5.1-1.4h-6.6V243.4z M357.3,247.1v12.5h9\n\t\t    c2.1,0,3.8-0.5,4.9-1.6c1.2-1,1.8-2.5,1.8-4.5c0-1.9-0.6-3.4-1.8-4.6c-1.2-1.2-2.8-1.8-4.8-1.9h-0.3H357.3z\"/>\n\t</g>\n</svg>",
+        "type" : "Snippet"
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Visuals",
+      "pageTitle" : "SVG",
+      "pageMeta" : { },
+      "fileName" : "SVG",
+      "dirName" : "visuals",
+      "pageSectionIdTitles" : [ {
+        "title" : "Retina Displays",
+        "id" : "retina-displays"
+      }, {
+        "title" : "Ids To Reveal",
+        "id" : "ids-to-reveal"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

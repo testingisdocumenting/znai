@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: API Parameters</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Inlined CSV</h1></header>
+<p>When you are not able to automatically extract an API parameters definition you can use the api-parameters fence plugin to manually document them. ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ```</p>
+</article>
+
+<article>
+<header><h1>Nested</h1></header>
+<p>Use parent.children syntax to define nested objects like this ```api-parameters sessionId, Integer, session Id person, Person, person to login with person.firstName, String, first name of the person person.lastName, String, last name of the person roles, List&lt;Role&gt;, list of authorized roles roles.id, String, role id roles.description, String, role description ``` Note: you still need to explicitly define root entry like person in the example above</p>
+</article>
+
+<article>
+<header><h1>External JSON File</h1></header>
+<p>Instead of hardcoding your parameters inside markdown files, you can specify an external JSON file. JSON could be generated based on the data you have. Some of the examples:build time annotation processortest time command line parameters generationGiven the above file, use :include-api-parameters: api-parameters.json to display it as API ParametersNote: description field in JSON file is treated as Markdown</p>
+</article>
+</section>
+</div>
+<!--
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Inlined CSV",
+      "id" : "inlined-csv",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you are not able to automatically extract an API parameters definition you can use",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "api-parameters",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " fence plugin to manually document them.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```api-parameters\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "firstName",
+          "type" : "String",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "score",
+          "type" : "Integer",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "another description line with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
+      } ]
+    }, {
+      "title" : "Nested",
+      "id" : "nested",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "parent.children",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " syntax to define nested objects like this",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```api-parameters\nsessionId, Integer, session Id\nperson, Person, person to login with\nperson.firstName, String, first name of the person\nperson.lastName, String, last name of the person\nroles, List<Role>, list of authorized roles\nroles.id, String, role id \nroles.description, String, role description\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: you still need to explicitly define ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "root",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " entry like ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "person",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " in the example above",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "sessionId",
+          "type" : "Integer",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "session Id",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "person",
+          "type" : "Person",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "person to login with",
+              "type" : "SimpleText"
+            } ]
+          } ],
+          "children" : [ {
+            "name" : "firstName",
+            "type" : "String",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "first name of the person",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "lastName",
+            "type" : "String",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "last name of the person",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "name" : "roles",
+          "type" : "List<Role>",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "list of authorized roles",
+              "type" : "SimpleText"
+            } ]
+          } ],
+          "children" : [ {
+            "name" : "id",
+            "type" : "String",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "role id",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "description",
+            "type" : "String",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "role description",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
+      } ]
+    }, {
+      "title" : "External JSON File",
+      "id" : "external-json-file",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Instead of hardcoding your parameters inside markdown files, you can specify an external JSON file.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "JSON could be generated based on the data you have. Some of the examples:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "build time annotation processor",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "test time command line parameters generation",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "title" : "api-parameters.json",
+        "data" : [ {
+          "name" : "sessionId",
+          "type" : "Integer",
+          "description" : "session Id"
+        }, {
+          "name" : "person",
+          "type" : "Person",
+          "description" : "person to login with",
+          "children" : [ {
+            "name" : "firstName",
+            "type" : "String",
+            "description" : "*first* name of the person"
+          }, {
+            "name" : "lastName",
+            "type" : "String",
+            "description" : "*last* name of the person"
+          } ]
+        }, {
+          "name" : "roles",
+          "type" : "List<Role>",
+          "description" : "list of authorized roles",
+          "children" : [ {
+            "name" : "id",
+            "type" : "String",
+            "description" : " role id "
+          }, {
+            "name" : "description",
+            "type" : "String",
+            "description" : "role description"
+          } ]
+        } ],
+        "paths" : [ ],
+        "type" : "Json"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Given the above file, use",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-api-parameters: api-parameters.json\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "to display it as API Parameters",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "sessionId",
+          "type" : "Integer",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "session Id",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "person",
+          "type" : "Person",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "person to login with",
+              "type" : "SimpleText"
+            } ]
+          } ],
+          "children" : [ {
+            "name" : "firstName",
+            "type" : "String",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "type" : "Emphasis",
+                "content" : [ {
+                  "text" : "first",
+                  "type" : "SimpleText"
+                } ]
+              }, {
+                "text" : " name of the person",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "lastName",
+            "type" : "String",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "type" : "Emphasis",
+                "content" : [ {
+                  "text" : "last",
+                  "type" : "SimpleText"
+                } ]
+              }, {
+                "text" : " name of the person",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "name" : "roles",
+          "type" : "List<Role>",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "list of authorized roles",
+              "type" : "SimpleText"
+            } ]
+          } ],
+          "children" : [ {
+            "name" : "id",
+            "type" : "String",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "role id",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "description",
+            "type" : "String",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "role description",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "description",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " field in JSON file is treated as Markdown",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1565298640000,
+    "tocItem" : {
+      "sectionTitle" : "Snippets",
+      "pageTitle" : "API Parameters",
+      "pageMeta" : {
+        "title" : [ "API Parameters" ]
+      },
+      "fileName" : "api-parameters",
+      "dirName" : "snippets",
+      "pageSectionIdTitles" : [ {
+        "title" : "Inlined CSV",
+        "id" : "inlined-csv"
+      }, {
+        "title" : "Nested",
+        "id" : "nested"
+      }, {
+        "title" : "External JSON File",
+        "id" : "external-json-file"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

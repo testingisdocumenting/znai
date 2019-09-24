@@ -1,0 +1,12 @@
+{
+  "method": "POST",
+  "url": "http://localhost:8180/employee",
+  "requestType": "application/json",
+  "requestBody": "{\"firstName\":\"FN\",\"lastName\":\"LN\"}",
+  "responseType": "application/json",
+  "responseBody": "{\"id\":\"id-generated-2\"}\n",
+  "responseBodyChecks": {
+    "failedPaths": [],
+    "passedPaths": []
+  }
+}
