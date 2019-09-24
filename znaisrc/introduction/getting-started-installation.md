@@ -1,1 +1,0 @@
-Note: need to update instructions on downloading from maven central

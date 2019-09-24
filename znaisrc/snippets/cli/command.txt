@@ -1,1 +1,0 @@
-my-captured-command --param=10 --another=value
