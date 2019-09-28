@@ -4,11 +4,11 @@ class Simple {
     }
 
     void methodB(String p) {
-
+        doB();
     }
 
     void methodB(String p, Boolean b) {
-
+        doBPlus();
     }
 
     Data createData() {

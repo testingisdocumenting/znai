@@ -29,6 +29,7 @@ import com.github.javaparser.javadoc.description.JavadocSnippet;
 
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.PARAM;
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.RETURN;
@@ -65,18 +66,22 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     }
 
     public JavaMethod findMethodDetails(String methodNameWithOptionalTypes) {
-        String nameWithoutSpaces = methodNameWithOptionalTypes.replaceAll("\\s+", "");
-        return javaMethods.stream().filter(
-                m -> m.getName().equals(methodNameWithOptionalTypes) || m.getNameWithTypes().equals(nameWithoutSpaces))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("no method found: " + methodNameWithOptionalTypes + "." +
-                        "\nAvailable methods:\n" + renderAllMethods()));
+        List<JavaMethod> details = findAllMethodDetails(methodNameWithOptionalTypes);
+        if (details.isEmpty()) {
+            throw new RuntimeException("no method found: " + methodNameWithOptionalTypes + "." +
+                    "\nAvailable methods:\n" + renderAllMethods());
+        }
+
+        return details.get(0);
     }
 
-    public JavaMethod findMethodDetails(String methodName, List<String> paramNames) {
-        return javaMethods.stream().filter(m -> m.getName().equals(methodName) && m.getParamNames().equals(paramNames))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("no method found: " + methodName + " with params: " + paramNames));
+    public List<JavaMethod> findAllMethodDetails(String methodNameWithOptionalTypes) {
+        String nameWithoutSpaces = methodNameWithOptionalTypes.replaceAll("\\s+", "");
+        return javaMethods.stream()
+                .filter(
+                        m -> m.getName().equals(methodNameWithOptionalTypes) ||
+                                m.getNameWithTypes().equals(nameWithoutSpaces))
+                .collect(Collectors.toList());
     }
 
     public List<EnumEntry> getEnumEntries() {
@@ -168,7 +173,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     }
 
     private String renderAllFields() {
-        return "    " + javaFields.keySet().stream().collect(joining("\n    "));
+        return "    " + String.join("\n    ", javaFields.keySet());
     }
 
     private String extractJavaDocDescription(JavadocComment javadocComment) {

@@ -49,9 +49,9 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
         this.pluginParams = pluginParams;
         fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         entry = pluginParams.getOpts().get("entry");
-        entries = pluginParams.getOpts().get("entries");
+        entries = pluginParams.getOpts().getList("entries");
 
-        if (entry != null && entries != null) {
+        if (entry != null && !entries.isEmpty()) {
             throw new IllegalArgumentException("specify either entry or entries");
         }
 
