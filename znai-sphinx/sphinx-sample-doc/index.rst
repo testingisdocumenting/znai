@@ -2,7 +2,7 @@ Main intro text
 ===============
 
 This is main page with some initial text here.
-Toc below will be used to generate *mdoc* **table of contents**. And this ``markup`` result will become main index page
+Toc below will be used to generate *znai* **table of contents**. And this ``markup`` result will become main index page
 
 * this is
 

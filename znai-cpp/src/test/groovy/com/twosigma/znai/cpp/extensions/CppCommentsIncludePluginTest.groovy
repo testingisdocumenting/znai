@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals
 
 class CppCommentsIncludePluginTest {
     @Test
-    void "should extract comments with @mdoc at the beginning from specified entry"() {
+    void "should extract comments with @znai at the beginning from specified entry"() {
         def actualMarkup = process("code-with-docs.cpp", "class_name::func2")
         def expectedMarkup = "func2 special comment because it was marked as documentation related\n" +
                 "\n" +

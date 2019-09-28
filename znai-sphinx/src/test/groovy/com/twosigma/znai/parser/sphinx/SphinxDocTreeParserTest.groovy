@@ -64,9 +64,9 @@ linenos="False" xml:space="preserve">System.out.println("hello world");</literal
 
     @Test
     void "emphasis and strong text"() {
-        parse('<paragraph><emphasis>mdoc</emphasis> <strong>table of contents</strong></paragraph>')
+        parse('<paragraph><emphasis>znai</emphasis> <strong>table of contents</strong></paragraph>')
 
-        content.should == [[type: 'Paragraph', content: [[type: 'Emphasis', content:[[text: 'mdoc', type: 'SimpleText']]], [text: ' ', type: 'SimpleText'],
+        content.should == [[type: 'Paragraph', content: [[type: 'Emphasis', content:[[text: 'znai', type: 'SimpleText']]], [text: ' ', type: 'SimpleText'],
                                                          [type: 'StrongEmphasis', content:[[text: 'table of contents', type: 'SimpleText']]]]]]
     }
 

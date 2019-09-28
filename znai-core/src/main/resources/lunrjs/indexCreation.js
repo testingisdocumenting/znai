@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-mdocSearchIdx = lunr(function () {
+znaiSearchIdx = lunr(function () {
     this.ref('id')
     this.field('section')
     this.field('pageTitle')
@@ -23,7 +23,7 @@ mdocSearchIdx = lunr(function () {
 
     this.metadataWhitelist = ['position']
 
-    mdocSearchData.forEach(function (e) {
+    znaiSearchData.forEach(function (e) {
         this.add({
             id: e[0],
             section: e[1],

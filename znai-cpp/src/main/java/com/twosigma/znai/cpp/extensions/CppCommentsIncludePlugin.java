@@ -33,6 +33,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CppCommentsIncludePlugin implements IncludePlugin {
+    private static final String ZNAI_PREFIX = "@znai";
+
     private Path cppPath;
 
     @Override
@@ -71,8 +73,8 @@ public class CppCommentsIncludePlugin implements IncludePlugin {
         List<CodePart> parts = CppSourceCode.splitOnComments(body);
         return parts.stream().filter(CodePart::isComment)
                 .map(cp -> cp.getData().trim())
-                .filter(c -> c.startsWith("@mdoc"))
-                .map(c -> c.replaceAll("^@mdoc", "").trim())
+                .filter(c -> c.startsWith(ZNAI_PREFIX))
+                .map(c -> c.replaceAll("^" + ZNAI_PREFIX, "").trim())
                 .collect(Collectors.joining("\n\n"));
     }
 

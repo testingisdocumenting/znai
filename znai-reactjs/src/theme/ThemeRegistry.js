@@ -15,13 +15,13 @@
  */
 
 import Theme from './Theme'
-import {mdocSettings} from '../settings/MdocSettings'
+import {znaiSettings} from '../settings/ZnaiSettings'
 
 class ThemeRegistry {
     _themeChangeListeners = []
     _selectedTheme = null
 
-    _selectedThemeName = mdocSettings.loadSelectedThemeName()
+    _selectedThemeName = znaiSettings.loadSelectedThemeName()
 
     themes = []
     baseTheme = null
@@ -53,7 +53,7 @@ class ThemeRegistry {
         const theme = this.findByName(name)
         this._selectedTheme = theme
 
-        mdocSettings.saveSelectedThemeName(name)
+        znaiSettings.saveSelectedThemeName(name)
         this._themeChangeListeners.forEach(l => l(name, theme))
     }
 

@@ -1,7 +1,7 @@
 # Comments
 
-You can re-use comments that are inside your functions and refer to them inside your    documentation.
-Mark a comment with `@mdoc` and use `:include-comments:` plugin.
+You can re-use comments that are inside your functions and refer to them inside your documentation.
+Mark a comment with `@znai` and use `:include-cpp-comments:` plugin.
 
 :include-file: comments.cpp
 
