@@ -17,8 +17,9 @@
 package com.twosigma.znai.website.markups;
 
 import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.parser.commonmark.MarkdownParser;
 import com.twosigma.znai.parser.MarkupParser;
+import com.twosigma.znai.parser.MarkupTypes;
+import com.twosigma.znai.parser.commonmark.MarkdownParser;
 import com.twosigma.znai.structure.PlainTextTocGenerator;
 import com.twosigma.znai.structure.PlainTextTocPatcher;
 import com.twosigma.znai.structure.TableOfContents;
@@ -29,6 +30,11 @@ import java.nio.file.Path;
 
 public class MarkdownParsingConfiguration implements MarkupParsingConfiguration {
     public static final String TOC_PATCH_NAME = "toc-patch";
+
+    @Override
+    public String configurationName() {
+        return MarkupTypes.MARKDOWN;
+    }
 
     @Override
     public TableOfContents createToc(ComponentsRegistry componentsRegistry) {
@@ -50,14 +56,13 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
     }
 
     @Override
-    public String filesExtension() {
-        return "md";
-    }
-
-    @Override
     public Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem) {
         return componentsRegistry.resourceResolver().fullPath(tocItem.getDirName()
                  + (tocItem.getDirName().isEmpty() ? "" : File.separator) +
                 (tocItem.getFileNameWithoutExtension() + "." + filesExtension()));
+    }
+
+    private String filesExtension() {
+        return "md";
     }
 }

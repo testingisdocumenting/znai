@@ -32,9 +32,8 @@ import com.twosigma.znai.utils.FileUtils;
 import com.twosigma.znai.utils.JsonUtils;
 import com.twosigma.znai.web.WebResource;
 import com.twosigma.znai.web.extensions.WebSiteResourcesProviders;
-import com.twosigma.znai.website.markups.MarkdownParsingConfiguration;
 import com.twosigma.znai.website.markups.MarkupParsingConfiguration;
-import com.twosigma.znai.website.markups.SphinxParsingConfiguration;
+import com.twosigma.znai.website.markups.MarkupParsingConfigurations;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -45,7 +44,6 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static com.twosigma.znai.parser.MarkupTypes.MARKDOWN;
-import static com.twosigma.znai.parser.MarkupTypes.SPHINX;
 import static com.twosigma.znai.utils.FileUtils.fileTextContent;
 import static com.twosigma.znai.website.ProgressReporter.reportPhase;
 import static java.util.stream.Collectors.toList;
@@ -97,7 +95,7 @@ public class WebSite {
         globalAssetsJavaScript = WebResource.withPath("assets.js");
         searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
         auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
-        markupParsingConfiguration = createMarkupParsingConfiguration();
+        markupParsingConfiguration = MarkupParsingConfigurations.byName(cfg.documentationType);
         globalSearchEntries = new GlobalSearchEntries();
         localSearchEntries = new LocalSearchEntries();
         auxiliaryFilesLastUpdateTime = new HashMap<>();
@@ -181,11 +179,9 @@ public class WebSite {
             return toc.getIndex();
         }
 
-        return toc.getTocItems().stream().filter(ti ->
-                path.toAbsolutePath().getParent().getFileName().toString().equals(ti.getDirName()) &&
-                        path.getFileName().toString().equals(
-                                ti.getFileNameWithoutExtension() + "." + markupParsingConfiguration.filesExtension()))
-                .findFirst().orElse(null);
+        return toc.getTocItems().stream().filter(tocItem -> path.toAbsolutePath().equals(markupPath(tocItem)))
+                .findFirst()
+                .orElse(null);
     }
 
     public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
@@ -226,15 +222,6 @@ public class WebSite {
     public void redeployAuxiliaryFileIfRequired(Path path) {
         if (auxiliaryFilesRegistry.requiresDeployment(path)) {
             deployAuxiliaryFile(auxiliaryFilesRegistry.auxiliaryFileByPath(path));
-        }
-    }
-
-    private MarkupParsingConfiguration createMarkupParsingConfiguration() {
-        switch (cfg.markupType) {
-            case SPHINX:
-                return new SphinxParsingConfiguration();
-            default:
-                return new MarkdownParsingConfiguration();
         }
     }
 
@@ -541,7 +528,7 @@ public class WebSite {
         private String logoRelativePath;
         private List<WebResource> registeredExtraJavaScripts;
         private boolean isPreviewEnabled;
-        private String markupType = MARKDOWN;
+        private String documentationType = MARKDOWN;
         private DocMeta docMeta = new DocMeta(Collections.emptyMap());
         private ReactJsBundle reactJsBundle;
 
@@ -550,8 +537,8 @@ public class WebSite {
             registeredExtraJavaScripts = new ArrayList<>();
         }
 
-        public Configuration withMarkupType(String markupType) {
-            this.markupType = markupType;
+        public Configuration withDocumentationType(String markupType) {
+            this.documentationType = markupType;
             return this;
         }
 

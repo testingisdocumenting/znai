@@ -18,6 +18,7 @@ package com.twosigma.znai.website.markups;
 
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.parser.MarkupParser;
+import com.twosigma.znai.parser.MarkupTypes;
 import com.twosigma.znai.parser.sphinx.DocTreeTocGenerator;
 import com.twosigma.znai.parser.sphinx.SphinxDocTreeParser;
 import com.twosigma.znai.structure.TableOfContents;
@@ -26,6 +27,11 @@ import com.twosigma.znai.structure.TocItem;
 import java.nio.file.Path;
 
 public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
+    @Override
+    public String configurationName() {
+        return MarkupTypes.SPHINX;
+    }
+
     @Override
     public TableOfContents createToc(ComponentsRegistry componentsRegistry) {
         return new DocTreeTocGenerator(filesExtension()).generate(
@@ -38,12 +44,11 @@ public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
     }
 
     @Override
-    public String filesExtension() {
-        return "xml";
-    }
-
-    @Override
     public Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem) {
         return root.resolve(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + "." + filesExtension());
+    }
+
+    private String filesExtension() {
+        return "xml";
     }
 }
