@@ -27,7 +27,27 @@ as shown below:
 
 ## GPG
 
-You will need to also obtain GPG files to be copied into your `~/.gnupg` and the corresponding passphrase.
+You will need to also download GPG files to be copied into your `~/.gnupg` and the corresponding passphrase from 1password.
+```
+$ brew install gnupg gnupg2
+$ cd ~/
+$ mkdir ~/.gnupg
+$ chmod 700 .gnupg
+$ cd .gnupg
+$ mv ~/Downloads/public.key .
+$ mv ~/Downloads/private.asc .
+$ gpg --import public.key
+$ gpg --import private.asc # you need to enter the passphrase from 1password
+```
+
+## Java
+You need to set PATH to execute maven and JAVA_HOME to run maven and java.
+```
+$ cat ~/.profile 
+# location of mvn. You might need to download maven from https://maven.apache.org/download.cgi if you don't have it.
+export PATH=$PATH:~/local/maven/bin 
+export JAVA_HOME=$(/usr/libexec/java_home)
+```
 
 
 # Prepare release
@@ -59,5 +79,5 @@ This will prompt you for the GPG passphrase.  It will then build and test znai a
 # Sit back, relax and enjoy the wait
 
 At this stage, **be patient**.  There is some delay completion of the `release:perform` step and the artifacts being
-available in Maven Central.  This is of the order of an hour.  You can keep refreshing https://search.maven.org/search?q=g:com.twosigma.znai%20AND%20a:znai&core=gav
+available in Maven Central.  This is of the order of hours.  You can keep refreshing https://search.maven.org/search?q=g:com.twosigma.znai%20AND%20a:znai&core=gav
 until you see your version.
