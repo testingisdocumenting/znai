@@ -25,10 +25,14 @@ import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.MarkupParser;
 import com.twosigma.znai.parser.MarkupParserResult;
 import com.twosigma.znai.parser.ParserHandler;
+import com.twosigma.znai.search.SearchScore;
+import com.twosigma.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.joining;
 
 public class MarkdownIncludePlugin implements IncludePlugin {
     private static final String FIRST_AVAILABLE_PARAM = "firstAvailable";
@@ -85,5 +89,10 @@ public class MarkdownIncludePlugin implements IncludePlugin {
         return Stream.concat(
                 Stream.of(AuxiliaryFile.builtTime(markdownPathUsed)),
                 parserResult.getAuxiliaryFiles().stream());
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.STANDARD.text(parserResult.getAllText());
     }
 }

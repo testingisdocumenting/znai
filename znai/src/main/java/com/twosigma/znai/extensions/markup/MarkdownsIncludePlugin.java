@@ -25,6 +25,8 @@ import com.twosigma.znai.parser.MarkupParser;
 import com.twosigma.znai.parser.MarkupParserResult;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.parser.docelement.DocElement;
+import com.twosigma.znai.search.SearchScore;
+import com.twosigma.znai.search.SearchText;
 import com.twosigma.znai.utils.FileUtils;
 
 import java.io.IOException;
@@ -35,8 +37,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.joining;
+
 public class MarkdownsIncludePlugin implements IncludePlugin {
     private List<Path> markdowns;
+    private List<MarkupParserResult> parserResults;
 
     @Override
     public String id() {
@@ -57,10 +62,9 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
         MarkupParser parser = componentsRegistry.defaultParser();
 
         markdowns = markdowns(dir).collect(Collectors.toList());
-        Stream<DocElement> elements = markdowns.stream().flatMap(p -> {
-            MarkupParserResult parserResult = parser.parse(markupPath, FileUtils.fileTextContent(p));
-            return parserResult.getDocElement().getContent().stream();
-        });
+        parserResults
+                = markdowns.stream().map(p -> parser.parse(markupPath, FileUtils.fileTextContent(p))).collect(Collectors.toList());
+        Stream<DocElement> elements = parserResults.stream().flatMap(r -> r.getDocElement().getContent().stream());
 
         return PluginResult.docElements(elements);
     }
@@ -76,5 +80,13 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return markdowns.stream().map(AuxiliaryFile::builtTime);
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        String textFromMarkupResults = parserResults.stream().map(MarkupParserResult::getAllText)
+                .collect(joining(" "));
+
+        return SearchScore.STANDARD.text(textFromMarkupResults);
     }
 }

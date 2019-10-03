@@ -20,7 +20,7 @@
 
     <groupId>com.twosigma.znai</groupId>
     <artifactId>znai-parent</artifactId>
-    <version>1.20</version>
+    <version>1.21-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Znai</name>
