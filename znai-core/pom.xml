@@ -58,8 +58,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
 
         <dependency>
@@ -88,7 +88,6 @@
         <dependency>
             <groupId>com.twosigma.webtau</groupId>
             <artifactId>webtau-core-groovy</artifactId>
-            <version>${webtau.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

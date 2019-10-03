@@ -53,7 +53,6 @@
         <dependency>
             <groupId>com.twosigma.webtau</groupId>
             <artifactId>webtau-core-groovy</artifactId>
-            <version>${webtau.version}</version>
             <scope>test</scope>
         </dependency>
 
