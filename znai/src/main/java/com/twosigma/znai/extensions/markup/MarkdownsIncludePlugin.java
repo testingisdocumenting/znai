@@ -62,9 +62,11 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
         MarkupParser parser = componentsRegistry.defaultParser();
 
         markdowns = markdowns(dir).collect(Collectors.toList());
-        parserResults
-                = markdowns.stream().map(p -> parser.parse(markupPath, FileUtils.fileTextContent(p))).collect(Collectors.toList());
-        Stream<DocElement> elements = parserResults.stream().flatMap(r -> r.getDocElement().getContent().stream());
+        parserResults = markdowns.stream()
+                .map(p -> parser.parse(markupPath, FileUtils.fileTextContent(p)))
+                .collect(Collectors.toList());
+        Stream<DocElement> elements = parserResults.stream()
+                .flatMap(r -> r.getDocElement().getContent().stream());
 
         return PluginResult.docElements(elements);
     }
@@ -84,7 +86,8 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
 
     @Override
     public SearchText textForSearch() {
-        String textFromMarkupResults = parserResults.stream().map(MarkupParserResult::getAllText)
+        String textFromMarkupResults = parserResults.stream()
+                .map(MarkupParserResult::getAllText)
                 .collect(joining(" "));
 
         return SearchScore.STANDARD.text(textFromMarkupResults);

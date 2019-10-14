@@ -32,8 +32,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.joining;
-
 public class MarkdownIncludePlugin implements IncludePlugin {
     private static final String FIRST_AVAILABLE_PARAM = "firstAvailable";
     private static final String USAGE_MESSAGE = "use either <" + FIRST_AVAILABLE_PARAM + "> or free " +
