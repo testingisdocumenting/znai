@@ -24,8 +24,10 @@ import org.apache.commons.csv.CSVRecord;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class CsvParser {
     private CsvParser() {
@@ -63,7 +65,7 @@ public class CsvParser {
 
             for (CSVRecord record : csvRecords) {
                 Row row = new Row();
-                record.forEach(v -> row.add(convert(v)));
+                record.forEach(row::add);
 
                 if (record.size() != headerToUse.size()) {
                     throw new RuntimeException("record mismatches header. header: " + headerToUse +
@@ -77,11 +79,5 @@ public class CsvParser {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static Object convert(Object v) {
-        String s = v.toString();
-        Scanner scanner = new Scanner(s);
-        return scanner.hasNextBigDecimal() ? new BigDecimal(s) : s;
     }
 }
