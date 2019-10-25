@@ -52,7 +52,9 @@ const Table = ({table, ...props}) => {
                 <tr>
                     {showHeader ? table.columns.map((c, idx) => {
                         const align = c.align ? c.align : 'left'
-                        const style = {textAlign: align}
+                        const width = c.width ? c.width : 'auto'
+
+                        const style = {textAlign: align, width: width}
                         return (<th key={idx} style={style}>{c.title}</th>)
                     }) : null}
                 </tr>
