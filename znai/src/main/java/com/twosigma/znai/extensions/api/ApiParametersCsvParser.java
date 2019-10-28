@@ -58,9 +58,11 @@ public class ApiParametersCsvParser {
         MarkupParserResult markupParserResult = markupParser.parse(path, row.get(2));
         List<Map<String, Object>> description = markupParserResult.getDocElement().contentToListOfMaps();
 
-        if (name.contains(".") && !name.contains("..")) {
+        boolean escapedName = name.startsWith("'") && name.endsWith("'");
+        if (name.contains(".") && !name.contains("..") && !escapedName) {
             addNested(name, type, description);
         } else {
+            name = escapedName ? name.substring(1, name.length()-1) : name;
             apiParameters.add(name, type, description);
         }
     }
