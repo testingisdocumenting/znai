@@ -34,6 +34,7 @@ nested.subNested.url, String, nested nested 1
 nested.subNested.fileName, String, nested nested 2
 nestedList, array of objects, descr5
 nestedList.score, int, descr6
+'escaped.name', String, desc7
 """)
 
         apiParameters.toMap().should equal([parameters: [
@@ -45,6 +46,8 @@ nestedList.score, int, descr6
                                  [[name: 'url', type: 'String', description: [[markdown: 'nested nested 1', type: 'TestMarkdown']]],
                                   [name: 'fileName', type: 'String', description: [[markdown: 'nested nested 2', type: 'TestMarkdown']]]]]]],
                 [name: 'nestedList', type: 'array of objects', description: [[markdown: 'descr5', type: 'TestMarkdown']], children: [
-                        [name: 'score', type: 'int', description: [[markdown: 'descr6', type: 'TestMarkdown']]]]]]])
+                        [name: 'score', type: 'int', description: [[markdown: 'descr6', type: 'TestMarkdown']]]]],
+                [name: 'escaped.name', type: 'String', description: [[markdown: 'desc7', type: 'TestMarkdown']]]
+        ]])
     }
 }
