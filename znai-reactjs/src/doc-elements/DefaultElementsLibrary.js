@@ -68,6 +68,8 @@ import JsxGroup from './jsx/JsxGroup'
 
 import DiagramLegend from './diagrams/DiagramLegend'
 
+import {pageTypesRegistry} from "./page/PageTypesRegistry"
+
 const library = {}
 const presentationElementHandlers = {}
 
@@ -199,5 +201,7 @@ themeRegistry.registerAsBase(new Theme({
     presentationElementHandlers: presentationElementHandlers}))
 
 themeRegistry.register(znaiDarkTheme)
+
+library.pageTypesRegistry = pageTypesRegistry
 
 export {library as elementsLibrary, presentationElementHandlers}
