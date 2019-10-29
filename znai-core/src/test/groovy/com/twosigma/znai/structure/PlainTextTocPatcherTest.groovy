@@ -24,7 +24,7 @@ import static com.twosigma.webtau.Ddjt.throwException
 class PlainTextTocPatcherTest {
     @Test
     void "should remove, replace and add items based on patch instructions"() {
-        def toc = new TableOfContents('.md')
+        def toc = new TableOfContents()
         toc.addTocItem('ch1', 'p1')
         toc.addTocItem('ch1', 'p2')
         toc.addTocItem('ch2', 'p3')
@@ -42,7 +42,7 @@ class PlainTextTocPatcherTest {
 
     @Test
     void "should clarify path format when format mismatches"() {
-        def toc = new TableOfContents('.md')
+        def toc = new TableOfContents()
         def patcher = new PlainTextTocPatcher(toc)
 
         code {

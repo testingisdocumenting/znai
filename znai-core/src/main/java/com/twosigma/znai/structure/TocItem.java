@@ -100,8 +100,8 @@ public class TocItem {
         return dirName.isEmpty() && fileNameWithoutExtension.equals(INDEX);
     }
 
-    public boolean match(String dirName, String fileName) {
-        return getDirName().equals(dirName) && getFileNameWithoutExtension().equals(fileName);
+    public boolean match(String dirName, String fileNameWithoutExtension) {
+        return getDirName().equals(dirName) && getFileNameWithoutExtension().equals(fileNameWithoutExtension);
     }
 
     public Map<String, ?> toMap() {

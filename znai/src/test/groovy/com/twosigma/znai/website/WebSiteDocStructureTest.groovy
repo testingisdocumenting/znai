@@ -17,9 +17,11 @@
 package com.twosigma.znai.website
 
 import com.twosigma.znai.parser.PageSectionIdTitle
+import com.twosigma.znai.parser.TestComponentsRegistry
 import com.twosigma.znai.structure.DocMeta
 import com.twosigma.znai.structure.DocUrl
 import com.twosigma.znai.structure.TableOfContents
+import com.twosigma.znai.website.markups.MarkdownParsingConfiguration
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
@@ -39,7 +41,7 @@ class WebSiteDocStructureTest {
     static void init() {
         docMeta = new DocMeta([id: 'product'])
 
-        toc = new TableOfContents('md')
+        toc = new TableOfContents()
         toc.addTocItem('chapter', 'pageOne')
         toc.addTocItem('chapter', 'pageTwo')
         toc.findTocItem('chapter', 'pageTwo').pageSectionIdTitles = [new PageSectionIdTitle ('Test Section')]
@@ -47,7 +49,7 @@ class WebSiteDocStructureTest {
 
     @Before
     void reCreateDocStructure() {
-        docStructure = new WebSiteDocStructure(docMeta, toc)
+        docStructure = new WebSiteDocStructure(TestComponentsRegistry.INSTANCE, docMeta, toc, new MarkdownParsingConfiguration())
     }
 
     @Test

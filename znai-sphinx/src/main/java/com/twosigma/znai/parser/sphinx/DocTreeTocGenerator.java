@@ -27,8 +27,8 @@ import org.w3c.dom.NodeList;
 public class DocTreeTocGenerator implements TocGenerator {
     private final TableOfContents toc;
 
-    public DocTreeTocGenerator(String filesExtension) {
-        toc = new TableOfContents(filesExtension);
+    public DocTreeTocGenerator() {
+        toc = new TableOfContents();
     }
 
     @Override

@@ -175,13 +175,7 @@ public class WebSite {
     }
 
     public TocItem tocItemByPath(Path path) {
-        if (path.getFileName().toString().startsWith(TocItem.INDEX + ".")) {
-            return toc.getIndex();
-        }
-
-        return toc.getTocItems().stream().filter(tocItem -> path.toAbsolutePath().equals(markupPath(tocItem)))
-                .findFirst()
-                .orElse(null);
+        return markupParsingConfiguration.tocItemByPath(componentsRegistry, toc, path);
     }
 
     public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
@@ -263,7 +257,7 @@ public class WebSite {
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
         toc = markupParsingConfiguration.createToc(componentsRegistry);
-        docStructure = new WebSiteDocStructure(docMeta, toc);
+        docStructure = new WebSiteDocStructure(componentsRegistry, docMeta, toc, markupParsingConfiguration);
         componentsRegistry.setDocStructure(docStructure);
     }
 
@@ -413,7 +407,10 @@ public class WebSite {
             Path pagePath = tocItem.isIndex() ? Paths.get("index.html") :
                     Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
 
-            deployer.deploy(pagePath, html);
+            Path originalPathForLogging = cfg.docRootPath.toAbsolutePath().relativize(
+                    markupParsingConfiguration.fullPath(componentsRegistry, cfg.docRootPath, tocItem).toAbsolutePath());
+
+            deployer.deploy(originalPathForLogging, pagePath, html);
 
             return htmlAndProps;
         } catch (Exception e) {

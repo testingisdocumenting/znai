@@ -20,15 +20,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PlainTextTocGenerator implements TocGenerator {
-    private String filesExtension;
-
-    public PlainTextTocGenerator(String filesExtension) {
-        this.filesExtension = filesExtension;
-    }
-
     @Override
     public TableOfContents generate(String textContent) {
-        return new Parser(filesExtension, textContent).parse();
+        return new Parser(textContent).parse();
     }
 
     private static class Parser {
@@ -37,9 +31,9 @@ public class PlainTextTocGenerator implements TocGenerator {
         private String currentSection;
         private TableOfContents toc;
 
-        public Parser(String filesExtension, final String nestedText) {
+        public Parser(final String nestedText) {
             nestedLines = Arrays.asList(nestedText.replace("\r", "").split("\n"));
-            toc = new TableOfContents(filesExtension);
+            toc = new TableOfContents();
         }
 
         public TableOfContents parse() {

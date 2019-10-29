@@ -24,6 +24,7 @@ import com.twosigma.znai.structure.PlainTextTocGenerator;
 import com.twosigma.znai.structure.PlainTextTocPatcher;
 import com.twosigma.znai.structure.TableOfContents;
 import com.twosigma.znai.structure.TocItem;
+import com.twosigma.znai.utils.FilePathUtils;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -38,7 +39,7 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
 
     @Override
     public TableOfContents createToc(ComponentsRegistry componentsRegistry) {
-        TableOfContents toc = new PlainTextTocGenerator(filesExtension()).generate(
+        TableOfContents toc = new PlainTextTocGenerator().generate(
                 componentsRegistry.resourceResolver().textContent("toc"));
         toc.addIndex();
 
@@ -60,6 +61,16 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
         return componentsRegistry.resourceResolver().fullPath(tocItem.getDirName()
                  + (tocItem.getDirName().isEmpty() ? "" : File.separator) +
                 (tocItem.getFileNameWithoutExtension() + "." + filesExtension()));
+    }
+
+    @Override
+    public TocItem tocItemByPath(ComponentsRegistry componentsRegistry, TableOfContents toc, Path path) {
+        if (path.getFileName().toString().startsWith(TocItem.INDEX + ".")) {
+            return toc.getIndex();
+        }
+
+        return toc.findTocItem(path.toAbsolutePath().getParent().getFileName().toString(),
+                FilePathUtils.fileNameWithoutExtension(path));
     }
 
     private String filesExtension() {

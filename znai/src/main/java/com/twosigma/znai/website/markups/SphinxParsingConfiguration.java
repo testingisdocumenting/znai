@@ -23,6 +23,7 @@ import com.twosigma.znai.parser.sphinx.DocTreeTocGenerator;
 import com.twosigma.znai.parser.sphinx.SphinxDocTreeParser;
 import com.twosigma.znai.structure.TableOfContents;
 import com.twosigma.znai.structure.TocItem;
+import com.twosigma.znai.utils.FilePathUtils;
 
 import java.nio.file.Path;
 
@@ -34,7 +35,7 @@ public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
 
     @Override
     public TableOfContents createToc(ComponentsRegistry componentsRegistry) {
-        return new DocTreeTocGenerator(filesExtension()).generate(
+        return new DocTreeTocGenerator().generate(
                 componentsRegistry.resourceResolver().textContent("index.xml"));
     }
 
@@ -46,6 +47,16 @@ public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
     @Override
     public Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem) {
         return root.resolve(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + "." + filesExtension());
+    }
+
+    @Override
+    public TocItem tocItemByPath(ComponentsRegistry componentsRegistry, TableOfContents toc, Path path) {
+        if (path.getFileName().toString().startsWith(TocItem.INDEX + ".")) {
+            return toc.getIndex();
+        }
+
+        return toc.findTocItem(path.toAbsolutePath().getParent().getFileName().toString(),
+                FilePathUtils.fileNameWithoutExtension(path));
     }
 
     private String filesExtension() {
