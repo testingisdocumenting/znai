@@ -537,8 +537,8 @@ public class WebSite {
             registeredExtraJavaScripts = new ArrayList<>();
         }
 
-        public Configuration withDocumentationType(String markupType) {
-            this.documentationType = markupType;
+        public Configuration withDocumentationType(String documentationType) {
+            this.documentationType = documentationType;
             return this;
         }
 
