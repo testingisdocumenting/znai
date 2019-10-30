@@ -16,28 +16,29 @@
 
 package com.twosigma.znai.structure;
 
-import java.nio.file.Path;
 import java.util.*;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 public class TableOfContents {
-    private String defaultFileExtension;
     private List<TocItem> tocItems;
 
-    public TableOfContents(String defaultFileExtension) {
-        this.defaultFileExtension = defaultFileExtension;
+    public TableOfContents() {
         this.tocItems = new ArrayList<>();
     }
 
-    public void addTocItem(String dirName, String fileNameWithoutExtension) {
-        tocItems.add(new TocItem(dirName, fileNameWithoutExtension));
+    public TocItem addTocItem(String dirName, String fileNameWithoutExtension) {
+        TocItem tocItem = new TocItem(dirName, fileNameWithoutExtension);
+        tocItems.add(tocItem);
+
+        return tocItem;
     }
 
-    public void addTocItem(String dirName, String fileNameWithoutExtension, String sectionTitle) {
-        tocItems.add(new TocItem(dirName, fileNameWithoutExtension, sectionTitle));
+    public TocItem addTocItem(String dirName, String fileNameWithoutExtension, String sectionTitle) {
+        TocItem tocItem = new TocItem(dirName, fileNameWithoutExtension, sectionTitle);
+        tocItems.add(tocItem);
+
+        return tocItem;
     }
 
     public void addIndex() {
@@ -68,18 +69,6 @@ public class TableOfContents {
         return first.isIndex() ? first : null;
     }
 
-    public TocItem tocItemByPath(Path path) {
-        if (path.getFileName().toString().startsWith(TocItem.INDEX + ".")) {
-            return getIndex();
-        }
-
-        return getTocItems().stream().filter(ti ->
-                path.toAbsolutePath().getParent().getFileName().toString().equals(ti.getDirName()) &&
-                        path.getFileName().toString().equals(
-                                ti.getFileNameWithoutExtension() + "." + defaultFileExtension))
-                .findFirst().orElse(null);
-    }
-
     public List<TocItem> getTocItems() {
         return Collections.unmodifiableList(tocItems);
     }
@@ -91,8 +80,8 @@ public class TableOfContents {
                 (pageSectionId.isEmpty() || tocItem.hasPageSection(pageSectionId));
     }
 
-    public TocItem findTocItem(String dirName, String fileName) {
-        int idx = findTocItemIdx(dirName, fileName);
+    public TocItem findTocItem(String dirName, String fileNameWithoutExtension) {
+        int idx = findTocItemIdx(dirName, fileNameWithoutExtension);
         return idx == -1 ? null : tocItems.get(idx);
     }
 
@@ -106,9 +95,9 @@ public class TableOfContents {
         return result;
     }
 
-    private int findTocItemIdx(String dirName, String fileName) {
+    private int findTocItemIdx(String dirName, String fileNameWithoutExtension) {
         for (int idx = 0; idx < tocItems.size(); idx++) {
-            if (tocItems.get(idx).match(dirName, fileName)) {
+            if (tocItems.get(idx).match(dirName, fileNameWithoutExtension)) {
                 return idx;
             }
         }

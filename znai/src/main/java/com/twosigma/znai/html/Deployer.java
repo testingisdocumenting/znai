@@ -47,7 +47,11 @@ public class Deployer {
     }
 
     public void deploy(Path relativePath, String content) {
-        deploy(relativePath, content.getBytes(StandardCharsets.UTF_8));
+        deploy(relativePath, relativePath, content);
+    }
+
+    public void deploy(Path originalPathForLogging, Path relativePath, String content) {
+        deploy(originalPathForLogging, relativePath, content.getBytes(StandardCharsets.UTF_8));
     }
 
     public void deploy(Path srcPath) {
@@ -69,11 +73,15 @@ public class Deployer {
     }
 
     public void deploy(Path relativePath, byte[] content) {
+        deploy(relativePath, relativePath, content);
+    }
+
+    public void deploy(Path originalPathForLogging, Path relativePath, byte[] content) {
         final Path fullPath = root.resolve(relativePath);
         if (deployed.contains(fullPath))
             return;
 
-        printDeployMessage(relativePath, fullPath);
+        printDeployMessage(originalPathForLogging, fullPath);
 
         try {
             Files.createDirectories(fullPath.getParent());

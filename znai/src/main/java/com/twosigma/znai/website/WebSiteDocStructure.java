@@ -16,7 +16,9 @@
 
 package com.twosigma.znai.website;
 
+import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.structure.*;
+import com.twosigma.znai.website.markups.MarkupParsingConfiguration;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -26,15 +28,22 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 class WebSiteDocStructure implements DocStructure {
+    private ComponentsRegistry componentsRegistry;
     private final DocMeta docMeta;
     private TableOfContents toc;
+    private MarkupParsingConfiguration parsingConfiguration;
     private final List<LinkToValidate> linksToValidate;
     private final Map<String, Path> globalAnchorPathById;
     private final Map<TocItem, List<String>> localAnchorIdsByTocItem;
 
-    WebSiteDocStructure(DocMeta docMeta, TableOfContents toc) {
+    WebSiteDocStructure(ComponentsRegistry componentsRegistry,
+                        DocMeta docMeta,
+                        TableOfContents toc,
+                        MarkupParsingConfiguration parsingConfiguration) {
+        this.componentsRegistry = componentsRegistry;
         this.docMeta = docMeta;
         this.toc = toc;
+        this.parsingConfiguration = parsingConfiguration;
         this.linksToValidate = new ArrayList<>();
         this.globalAnchorPathById = new HashMap<>();
         this.localAnchorIdsByTocItem = new HashMap<>();
@@ -101,7 +110,7 @@ class WebSiteDocStructure implements DocStructure {
 
     @Override
     public void registerLocalAnchor(Path path, String anchorId) {
-        TocItem tocItem = toc.tocItemByPath(path);
+        TocItem tocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, path);
         if (tocItem == null) {
             throw new RuntimeException("Can't find TocItem associated with path: " + path);
         }
@@ -117,7 +126,7 @@ class WebSiteDocStructure implements DocStructure {
             throw new RuntimeException("cannot find global anchor <" + anchorId + "> referenced in " + clientPath);
         }
 
-        TocItem tocItem = toc.tocItemByPath(anchorPath);
+        TocItem tocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, anchorPath);
         return createUrl(new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), anchorId));
     }
 
@@ -160,7 +169,7 @@ class WebSiteDocStructure implements DocStructure {
             return false;
         }
 
-        TocItem anchorTocItem = toc.tocItemByPath(anchorPath);
+        TocItem anchorTocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, anchorPath);
         return tocItemWithAnchor.equals(anchorTocItem);
     }
 
