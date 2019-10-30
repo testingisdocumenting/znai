@@ -1,5 +1,7 @@
 package com.twosigma.znai.utils;
 
+import org.apache.commons.io.FilenameUtils;
+
 import java.nio.file.Path;
 
 public class FilePathUtils {
@@ -7,12 +9,6 @@ public class FilePathUtils {
     }
 
     public static String fileNameWithoutExtension(Path path) {
-        String fileName = path.getFileName().toString();
-        int lastDotIdx = fileName.lastIndexOf('.');
-        if (lastDotIdx == -1) {
-            return fileName;
-        }
-
-        return fileName.substring(0, lastDotIdx);
+        return FilenameUtils.removeExtension(path.getFileName().toString());
     }
 }
