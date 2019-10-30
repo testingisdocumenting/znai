@@ -22,11 +22,13 @@ public class CliCommandConfig {
     private String docId;
     private Path sourceRoot;
     private Path deployRoot;
+    private String actor;
 
-    public CliCommandConfig(String docId, Path sourceRoot, Path deployRoot) {
+    public CliCommandConfig(String docId, Path sourceRoot, Path deployRoot, String actor) {
         this.docId = docId;
         this.sourceRoot = sourceRoot;
         this.deployRoot = deployRoot;
+        this.actor = actor;
     }
 
     public String getDocId() {
@@ -41,12 +43,16 @@ public class CliCommandConfig {
         return deployRoot;
     }
 
+    public String getActor() {
+        return actor;
+    }
     @Override
     public String toString() {
         return "CliCommandConfig{" +
                 "docId='" + docId + '\'' +
                 ", sourceRoot=" + sourceRoot +
                 ", deployRoot=" + deployRoot +
+                ", actor=" + actor +
                 '}';
     }
 }

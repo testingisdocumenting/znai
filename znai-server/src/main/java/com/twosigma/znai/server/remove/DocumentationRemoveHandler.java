@@ -14,22 +14,25 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.upload;
+package com.twosigma.znai.server.remove;
 
-import com.twosigma.znai.utils.ServiceLoaderUtils;
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpServerRequest;
 
-import java.nio.file.Path;
-import java.util.Set;
+public class DocumentationRemoveHandler implements Handler<HttpServerRequest> {
+    private final String docId;
+    private final String actor;
 
-public class OnUploadFinishedServerHandlers {
-    private static final Set<OnUploadFinishedServerHandler> handlers =
-            ServiceLoaderUtils.load(OnUploadFinishedServerHandler.class);
-
-    public static void onUploadFinished(String docId, Path destination, String actor) {
-        handlers.forEach(h -> h.onUploadFinished(docId, destination, actor));
+    public DocumentationRemoveHandler(String docId, String actor) {
+        this.docId = docId;
+        this.actor = actor;
     }
 
-    public static void add(OnUploadFinishedServerHandler handler) {
-        handlers.add(handler);
+    @Override
+    public void handle(HttpServerRequest req) {
+        req.pause();
+        req.response().end();
+        OnRemoveFinishedServerHandlers.onRemoveFinished(docId, actor);
+        req.resume();
     }
 }

@@ -89,7 +89,7 @@ public class ZnaiCliApp {
             export();
         } else if (config.isCustomCommand()) {
             config.getSpecifiedCustomCommand().handle(
-                    new CliCommandConfig(config.getDocId(), config.getSourceRoot(), config.getDeployRoot()));
+                    new CliCommandConfig(config.getDocId(), config.getSourceRoot(), config.getDeployRoot(), config.getActor()));
         }
     }
 

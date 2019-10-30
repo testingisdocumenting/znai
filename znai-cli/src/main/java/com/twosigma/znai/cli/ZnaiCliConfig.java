@@ -64,6 +64,7 @@ public class ZnaiCliConfig {
     private Integer port;
     private Mode mode;
     private List<String> specifiedCustomCommands;
+    private String actor;
 
     public ZnaiCliConfig(String... args) {
         parseArgs(args);
@@ -127,6 +128,10 @@ public class ZnaiCliConfig {
 
     public String getDocId() {
         return docId;
+    }
+
+    public String getActor() {
+        return actor;
     }
 
     public void setSourceRoot(Path sourceRoot) {
@@ -196,6 +201,8 @@ public class ZnaiCliConfig {
         exportRoot = commandLine.hasOption(EXPORT_KEY) ?
                 Paths.get(commandLine.getOptionValue(EXPORT_KEY)):
                 Paths.get("");
+
+        actor = commandLine.hasOption("actor") ? commandLine.getOptionValue("actor") : "";
 
         validateMode(commandLine);
     }

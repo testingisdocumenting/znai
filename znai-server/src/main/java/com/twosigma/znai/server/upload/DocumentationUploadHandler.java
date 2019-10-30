@@ -27,15 +27,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class FileUploadVertxHandler implements Handler<HttpServerRequest> {
+public class DocumentationUploadHandler implements Handler<HttpServerRequest> {
     private Vertx vertx;
     private final String docId;
     private final Path destination;
+    private final String actor;
 
-    public FileUploadVertxHandler(Vertx vertx, String docId, Path deployRoot) {
+    public DocumentationUploadHandler(Vertx vertx, String docId, Path deployRoot, String actor) {
         this.vertx = vertx;
         this.docId = docId;
         this.destination = deployRoot.resolve(docId + ".zip");
+        this.actor = actor;
     }
 
     @Override
@@ -48,7 +50,7 @@ public class FileUploadVertxHandler implements Handler<HttpServerRequest> {
             req.endHandler(eh -> file.close(fch -> {
                 req.response().end();
 
-                OnUploadFinishedServerHandlers.onUploadFinished(docId, destination);
+                OnUploadFinishedServerHandlers.onUploadFinished(docId, destination, actor);
                 deleteUploadedFile();
             }));
 

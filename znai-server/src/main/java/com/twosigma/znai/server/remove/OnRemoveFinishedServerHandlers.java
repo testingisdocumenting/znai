@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.upload;
+package com.twosigma.znai.server.remove;
 
 import com.twosigma.znai.utils.ServiceLoaderUtils;
 
-import java.nio.file.Path;
 import java.util.Set;
 
-public class OnUploadFinishedServerHandlers {
-    private static final Set<OnUploadFinishedServerHandler> handlers =
-            ServiceLoaderUtils.load(OnUploadFinishedServerHandler.class);
+public class OnRemoveFinishedServerHandlers {
+    private static final Set<OnRemoveFinishedServerHandler> handlers =
+            ServiceLoaderUtils.load(OnRemoveFinishedServerHandler.class);
 
-    public static void onUploadFinished(String docId, Path destination, String actor) {
-        handlers.forEach(h -> h.onUploadFinished(docId, destination, actor));
+    public static void onRemoveFinished(String docId, String actor) {
+        handlers.forEach(h -> h.onRemoveFinished(docId, actor));
     }
 
-    public static void add(OnUploadFinishedServerHandler handler) {
+    public static void add(OnRemoveFinishedServerHandler handler) {
         handlers.add(handler);
     }
 }
