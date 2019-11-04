@@ -22,6 +22,8 @@ import com.twosigma.znai.console.ansi.Color;
 import com.twosigma.znai.html.HtmlPage;
 import com.twosigma.znai.html.reactjs.HtmlReactJsPage;
 import com.twosigma.znai.html.reactjs.ReactJsBundle;
+import com.twosigma.znai.server.remove.DocumentationRemoveHandler;
+import com.twosigma.znai.server.remove.OnRemoveFinishedServerHandlers;
 import com.twosigma.znai.server.docpreparation.DocumentationPreparationHandlers;
 import com.twosigma.znai.server.docpreparation.DocumentationPreparationTestHandler;
 import com.twosigma.znai.server.docpreparation.DocumentationPreparationWebSocketHandler;
@@ -31,7 +33,7 @@ import com.twosigma.znai.server.landing.LandingDocEntry;
 import com.twosigma.znai.server.landing.LandingUrlContentHandler;
 import com.twosigma.znai.server.sockets.JsonWebSocketHandler;
 import com.twosigma.znai.server.sockets.JsonWebSocketHandlerComposition;
-import com.twosigma.znai.server.upload.FileUploadVertxHandler;
+import com.twosigma.znai.server.upload.DocumentationUploadHandler;
 import com.twosigma.znai.server.upload.OnUploadFinishedServerHandlers;
 import com.twosigma.znai.server.upload.UnzipTask;
 import com.twosigma.znai.server.urlhandlers.UrlContentHandlers;
@@ -45,6 +47,8 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.impl.RoutingContextDecorator;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -73,6 +77,7 @@ public class DocumentationServer {
 
         socketHandlers.add(socketHandler);
         OnUploadFinishedServerHandlers.add(this::unzip);
+        OnRemoveFinishedServerHandlers.add(this::deleteCachedDocumentation);
     }
 
     public void addSocketHandler(JsonWebSocketHandler socketHandler) {
@@ -99,10 +104,18 @@ public class DocumentationServer {
                     router.route("/" + params.get("docId") + "/static"), ctx));
         });
 
+        router.delete("/:docId").handler(ctx -> {
+            MultiMap params = ctx.request().params();
+            String docId = params.get("docId");
+            String actor = params.get("actor");
+            new DocumentationRemoveHandler(docId, actor).handle(ctx.request());
+        });
+
         router.route("/upload/:docId").handler(ctx -> {
             MultiMap params = ctx.request().params();
             String docId = params.get("docId");
-            new FileUploadVertxHandler(vertx, docId, deployRoot).handle(ctx.request());
+            String actor = params.get("actor");
+            new DocumentationUploadHandler(vertx, docId, deployRoot, actor).handle(ctx.request());
         });
 
         router.get("/static/*").handler(staticCommonResources);
@@ -198,7 +211,23 @@ public class DocumentationServer {
         return !extension.equals("html");
     }
 
-    private void unzip(String docId, Path path) {
+    private void deleteCachedDocumentation(String docId, String actor) {
+        Path docPath = deployRoot.resolve(docId);
+
+        ConsoleOutputs.out(Color.BLUE, "deleting docs: ", Color.PURPLE, docId, Color.BLACK, " at ",
+                Color.PURPLE, docPath);
+        try {
+            File docDirectory = docPath.toFile();
+            if (docDirectory.exists()) {
+                org.apache.commons.io.FileUtils.deleteDirectory(docDirectory);
+            }
+            ConsoleOutputs.out(Color.BLUE, "deleted docs: ", Color.PURPLE, docPath);
+        } catch (IOException e) {
+            ConsoleOutputs.out(Color.BLUE, "failed to delete docs: ", Color.PURPLE, docPath);
+        }
+    }
+
+    private void unzip(String docId, Path path, String actor) {
         Path unzipDest = deployRoot.resolve(docId);
 
         ConsoleOutputs.out(Color.BLUE, "unzipping docs: ", Color.PURPLE, path, Color.BLACK, " to ",

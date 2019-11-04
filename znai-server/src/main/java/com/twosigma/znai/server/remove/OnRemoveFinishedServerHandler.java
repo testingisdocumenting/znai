@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.upload;
+package com.twosigma.znai.server.remove;
 
-import java.nio.file.Path;
-
-public interface OnUploadFinishedServerHandler {
-    void onUploadFinished(String docId, Path destination, String actor);
+public interface OnRemoveFinishedServerHandler {
+    void onRemoveFinished(String docId, String actor);
 }
