@@ -38,7 +38,6 @@ import PresentationRegistry from './presentation/PresentationRegistry'
 import AllPagesAtOnce from './AllPagesAtOnce'
 
 import {setDocMeta} from './docMeta'
-import DocumentationLayout from './DocumentationLayout'
 
 import pageContentProcessor from './pageContentProcessor.js'
 
@@ -172,6 +171,8 @@ export class Documentation extends Component {
                                                           onTocUpdate={this.onTocUpdate}
                                                           onDocMetaUpdate={this.onDocMetaUpdate}
                                                           onError={this.onPageGenError}/> : null
+
+        const DocumentationLayout = elementsLibrary.DocumentationLayout
 
         return (
             <WithTheme>{() =>

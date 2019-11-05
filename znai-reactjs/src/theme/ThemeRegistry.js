@@ -35,6 +35,12 @@ class ThemeRegistry {
         return this._selectedTheme
     }
 
+    overrideElement(elementId, newElement) {
+        this.themes.forEach(theme => {
+            theme.elementsLibrary[elementId] = newElement
+        })
+    }
+
     register(theme) {
         const found = this.themes.filter(t => t.name === theme.name)
         if (found.length > 0) {
