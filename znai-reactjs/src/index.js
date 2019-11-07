@@ -27,16 +27,17 @@ require('./doc-elements/search/Search.css')
 const {Documentation} = require('./doc-elements/Documentation')
 const {DocumentationPreparationScreen} = require('./screens/documentation-preparation/DocumentationPreparationScreen')
 const {Landing} = require('./screens/landing/Landing')
-const {elementsLibrary} = require('./doc-elements/DefaultElementsLibrary')
 const {themeRegistry} = require('./theme/ThemeRegistry')
+const {pageTypesRegistry} = require('./doc-elements/page/PageTypesRegistry')
+
 const lunr = require('lunr')
 
 global.React = React
 global.Documentation = Documentation
 global.DocumentationPreparationScreen = DocumentationPreparationScreen
 global.Landing = Landing
-global.elementsLibrary = elementsLibrary
 global.themeRegistry = themeRegistry
+global.pageTypesRegistry = pageTypesRegistry
 global.lunr = lunr
 
 if (process.env.NODE_ENV !== "production") {
