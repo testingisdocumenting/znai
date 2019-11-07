@@ -18,11 +18,13 @@ package com.twosigma.znai.parser
 
 import com.twosigma.znai.structure.DocStructure
 import com.twosigma.znai.structure.DocUrl
+import com.twosigma.znai.structure.TableOfContents
 
 import java.nio.file.Path
 
 class TestDocStructure implements DocStructure {
     private Set<String> validLinks = [] as Set
+    private TableOfContents toc = new TableOfContents()
 
     @Override
     void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
@@ -65,6 +67,15 @@ class TestDocStructure implements DocStructure {
     @Override
     String globalAnchorUrl(Path clientPath, String anchorId) {
         return null
+    }
+
+    void setToc(TableOfContents testToc) {
+        this.toc = testToc
+    }
+
+    @Override
+    TableOfContents tableOfContents() {
+        return toc
     }
 
     void clearValidLinks() {

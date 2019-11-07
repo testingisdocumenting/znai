@@ -130,6 +130,11 @@ class WebSiteDocStructure implements DocStructure {
         return createUrl(new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), anchorId));
     }
 
+    @Override
+    public TableOfContents tableOfContents() {
+        return toc;
+    }
+
     private Optional<String> validateLink(LinkToValidate link) {
         String anchorId = link.docUrl.getAnchorId();
 
