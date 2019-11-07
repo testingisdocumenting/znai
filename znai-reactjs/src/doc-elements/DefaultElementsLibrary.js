@@ -53,7 +53,6 @@ import Image from './images/Image'
 import {CliCommand, presentationCliCommandHandler} from './cli/CliCommand'
 import {CliOutput, presentationCliOutput} from './cli/CliOutput'
 import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
-import Footer from './structure/Footer'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
 import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
 import {MarkdownAndResult, presentationMarkdownAndResultHandler} from './markdown/MarkdownAndResult'
@@ -68,7 +67,8 @@ import JsxGroup from './jsx/JsxGroup'
 
 import DiagramLegend from './diagrams/DiagramLegend'
 
-import {pageTypesRegistry} from "./page/PageTypesRegistry"
+import DocumentationLayout from './DocumentationLayout'
+import Footer from './structure/Footer'
 
 const library = {}
 const presentationElementHandlers = {}
@@ -176,14 +176,15 @@ library.ApiParameters = wrappedInContentBlock(ApiParameters)
 
 library.JupyterCell = JupyterCell
 
-library.Footer = Footer
-
 library.WebTauRest = WebTauRest
 
 library.OpenApiOperation = OpenApiOperation
 library.DiagramLegend = DiagramLegend
 
 registerDocUtilsElements(library)
+
+library.DocumentationLayout = DocumentationLayout
+library.Footer = Footer
 
 /**
  * to make a DocElement aligned with a page content it needs to have a content-block assigned.
@@ -201,7 +202,5 @@ themeRegistry.registerAsBase(new Theme({
     presentationElementHandlers: presentationElementHandlers}))
 
 themeRegistry.register(znaiDarkTheme)
-
-library.pageTypesRegistry = pageTypesRegistry
 
 export {library as elementsLibrary, presentationElementHandlers}
