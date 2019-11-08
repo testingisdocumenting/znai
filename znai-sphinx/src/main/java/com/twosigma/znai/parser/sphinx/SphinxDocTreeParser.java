@@ -50,4 +50,9 @@ public class SphinxDocTreeParser implements MarkupParser {
                 elementCreationHandler.getAuxiliaryFiles(),
                 new PageMeta());
     }
+
+    @Override
+    public PageMeta parsePageMetaOnly(String markup) {
+        return new PageMeta();
+    }
 }
