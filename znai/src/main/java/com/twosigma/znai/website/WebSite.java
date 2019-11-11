@@ -158,6 +158,7 @@ public class WebSite {
 
     public void parse() {
         createTopLevelToc();
+        parseMarkupsMeta();
         parseMarkups();
         parseFooter();
         updateTocWithPageSections();
@@ -281,6 +282,11 @@ public class WebSite {
         deployer.deploy(globalAssetsJavaScript, "globalAssets = " + globalAssetsJson);
     }
 
+    private void parseMarkupsMeta() {
+        reportPhase("parsing markup files meta");
+        toc.getTocItems().forEach(this::parseMarkupMetaOnlyAndUpdateTocItem);
+    }
+
     private void parseMarkups() {
         reportPhase("parsing markup files");
         toc.getTocItems().forEach(this::parseMarkupAndUpdateTocItemAndSearch);
@@ -301,6 +307,18 @@ public class WebSite {
         footer = new Footer(parserResult.getDocElement());
     }
 
+    private void parseMarkupMetaOnlyAndUpdateTocItem(TocItem tocItem) {
+        try {
+            Path markupPath = markupPath(tocItem);
+            PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPath));
+
+            updateTocItemWithPageMeta(tocItem, pageMeta);
+        } catch(Exception e) {
+            throw new RuntimeException("error during parsing of page meta <" + tocItem +
+                    ">:" + e.getMessage(), e);
+        }
+    }
+
     private void parseMarkupAndUpdateTocItemAndSearch(TocItem tocItem) {
         try {
             Path markupPath = markupPath(tocItem);
@@ -314,17 +332,21 @@ public class WebSite {
             Page page = new Page(parserResult.getDocElement(), lastModifiedTime, parserResult.getPageMeta());
             pageByTocItem.put(tocItem, page);
 
+            updateTocItemWithPageMeta(tocItem, page.getPageMeta());
             tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
-            tocItem.setPageMeta(parserResult.getPageMeta());
-
-            if (parserResult.getPageMeta().hasValue("title")) {
-                tocItem.setPageTitle(parserResult.getPageMeta().getSingleValue("title"));
-            }
 
             updateSearchEntries(tocItem, parserResult);
         } catch(Exception e) {
             throw new RuntimeException("error during parsing of <" + tocItem +
                     ">:" + e.getMessage(), e);
+        }
+    }
+
+    private void updateTocItemWithPageMeta(TocItem tocItem, PageMeta pageMeta) {
+        tocItem.setPageMeta(pageMeta);
+
+        if (pageMeta.hasValue("title")) {
+            tocItem.setPageTitle(pageMeta.getSingleValue("title"));
         }
     }
 

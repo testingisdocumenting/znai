@@ -26,4 +26,6 @@ public interface DocStructure {
     void registerGlobalAnchor(Path sourcePath, String anchorId);
     void registerLocalAnchor(Path path, String anchorId);
     String globalAnchorUrl(Path clientPath, String anchorId);
+
+    TableOfContents tableOfContents();
 }

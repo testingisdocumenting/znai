@@ -17,6 +17,7 @@
 package com.twosigma.znai.parser;
 
 import com.twosigma.znai.parser.docelement.DocElement;
+import com.twosigma.znai.structure.PageMeta;
 
 import java.nio.file.Path;
 
@@ -33,4 +34,11 @@ public interface MarkupParser {
      * @see MarkupPathsResolution
      */
     MarkupParserResult parse(Path path, String markup);
+
+    /**
+     * parses only page meta
+     * @param markup markup to parse
+     * @return page meta
+     */
+    PageMeta parsePageMetaOnly(String markup);
 }

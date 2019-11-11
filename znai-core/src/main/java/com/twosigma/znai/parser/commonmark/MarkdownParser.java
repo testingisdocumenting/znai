@@ -18,6 +18,7 @@ package com.twosigma.znai.parser.commonmark;
 
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Collections;
 
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.parser.MarkupParser;
@@ -35,29 +36,32 @@ import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
 
 public class MarkdownParser implements MarkupParser {
-    private final Parser parser;
+    private final Parser fullParser;
+    private final Parser metaOnlyParser;
     private final ComponentsRegistry componentsRegistry;
 
     public MarkdownParser(ComponentsRegistry componentsRegistry) {
         this.componentsRegistry = componentsRegistry;
         CommonMarkExtension extension = new CommonMarkExtension();
-        parser = Parser.builder().extensions(Arrays.asList(extension,
+
+        fullParser = Parser.builder().extensions(Arrays.asList(extension,
                 TablesExtension.create(),
                 StrikethroughExtension.create(),
                 YamlFrontMatterExtension.create())).build();
+
+        metaOnlyParser = Parser.builder().extensions(
+                Collections.singletonList(YamlFrontMatterExtension.create())).build();
     }
 
     public MarkupParserResult parse(Path path, String markdown) {
         SearchCrawlerParserHandler searchCrawler = new SearchCrawlerParserHandler();
-        DocElementCreationParserHandler elementCreationHandler = new DocElementCreationParserHandler(componentsRegistry, path);
+        DocElementCreationParserHandler elementCreationHandler =
+                new DocElementCreationParserHandler(componentsRegistry, path);
 
         ParserHandlersList parserHandler = new ParserHandlersList(elementCreationHandler, searchCrawler);
 
-        Node node = parser.parse(markdown);
+        Node node = fullParser.parse(markdown);
         MarkdownVisitor visitor = parsePartial(node, path, parserHandler);
-
-        YamlFrontMatterVisitor frontMatterVisitor = new YamlFrontMatterVisitor();
-        node.accept(frontMatterVisitor);
 
         if (visitor.isSectionStarted()) {
             parserHandler.onSectionEnd();
@@ -69,11 +73,17 @@ public class MarkdownParser implements MarkupParser {
                 elementCreationHandler.getGlobalAnchorIds(),
                 searchCrawler.getSearchEntries(),
                 elementCreationHandler.getAuxiliaryFiles(),
-                new PageMeta(frontMatterVisitor.getData()));
+                parsePageMeta(node));
+    }
+
+    @Override
+    public PageMeta parsePageMetaOnly(String markdown) {
+        Node node = metaOnlyParser.parse(markdown);
+        return parsePageMeta(node);
     }
 
     public void parse(Path path, String markdown, ParserHandler handler) {
-        Node node = parser.parse(markdown);
+        Node node = fullParser.parse(markdown);
         parsePartial(node, path, handler);
     }
 
@@ -82,5 +92,12 @@ public class MarkdownParser implements MarkupParser {
         node.accept(visitor);
 
         return visitor;
+    }
+
+    private PageMeta parsePageMeta(Node node) {
+        YamlFrontMatterVisitor frontMatterVisitor = new YamlFrontMatterVisitor();
+        node.accept(frontMatterVisitor);
+
+        return new PageMeta(frontMatterVisitor.getData());
     }
 }

@@ -42,6 +42,11 @@ class TestMarkdownParser extends MarkdownParser {
     }
 
     @Override
+    PageMeta parsePageMetaOnly(String markup) {
+        return new PageMeta()
+    }
+
+    @Override
     void parse(Path path, String markdown, ParserHandler handler) {
         handler.onCustomNode('TestMarkdown', [markdown: markdown])
     }

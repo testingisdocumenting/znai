@@ -34,4 +34,9 @@ class TestMarkupParser implements MarkupParser {
 
         return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta())
     }
+
+    @Override
+    PageMeta parsePageMetaOnly(String markup) {
+        return new PageMeta()
+    }
 }
