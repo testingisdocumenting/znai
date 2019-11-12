@@ -28,6 +28,7 @@ const {Documentation} = require('./doc-elements/Documentation')
 const {DocumentationPreparationScreen} = require('./screens/documentation-preparation/DocumentationPreparationScreen')
 const {Landing} = require('./screens/landing/Landing')
 const {themeRegistry} = require('./theme/ThemeRegistry')
+const {documentationNavigation} = require('./doc-elements/structure/DocumentationNavigation')
 const {pageTypesRegistry} = require('./doc-elements/page/PageTypesRegistry')
 
 const lunr = require('lunr')
@@ -38,6 +39,7 @@ global.DocumentationPreparationScreen = DocumentationPreparationScreen
 global.Landing = Landing
 global.themeRegistry = themeRegistry
 global.pageTypesRegistry = pageTypesRegistry
+global.documentationNavigation = documentationNavigation
 global.lunr = lunr
 
 if (process.env.NODE_ENV !== "production") {
