@@ -17,7 +17,6 @@
 import React, {Component} from 'react'
 import TwoSidesSection from './TwoSidesSection'
 import {TwoSidesLayout, TwoSidesLayoutLeftPart, TwoSidesLayoutRightPart} from './TwoSidesLayout'
-import PageTitle from '../PageTitle'
 
 import {contentTabNames} from '../../tabs/tabsUtils'
 
@@ -35,6 +34,7 @@ import './TwoSidesPageContent.css'
 class TwoSidesPageContent extends Component {
     render() {
         const {elementsLibrary, content, ...props} = this.props
+        const {PageTitle} = elementsLibrary
 
         const updatedElementsLibrary = {...elementsLibrary, Tabs: TwoSidesTabs}
         const tabNames = contentTabNames(content)
