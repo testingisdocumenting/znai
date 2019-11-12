@@ -23,6 +23,7 @@ import znaiDarkTheme from '../theme/znai-dark/znaiDarkTheme'
 
 import DocElement from './default-elements/DocElement'
 import {Page, presentationPageHandler} from './page/Page'
+import PageTitle from './page/PageTitle'
 import SectionTitle from './default-elements/SectionTitle'
 import {presentationSectionHandler, Section} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
@@ -159,6 +160,8 @@ presentationElementHandlers.Svg = presentationSvgHandler
 
 library.Page = Page
 presentationElementHandlers.Page = presentationPageHandler
+
+library.PageTitle = PageTitle
 
 library.MarkdownAndResult = MarkdownAndResult
 presentationElementHandlers.MarkdownAndResult = presentationMarkdownAndResultHandler
