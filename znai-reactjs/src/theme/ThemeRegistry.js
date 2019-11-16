@@ -63,6 +63,15 @@ class ThemeRegistry {
         this._themeChangeListeners.forEach(l => l(name, theme))
     }
 
+    selectThemeIfNeverSelected(name) {
+        const themeName = znaiSettings.loadSelectedThemeName()
+        if (themeName) {
+            return
+        }
+
+        this.selectTheme(name)
+    }
+
     findByName(name) {
         const found = this.themes.filter(t => t.name === name)
         if (found.length !== 1) {
