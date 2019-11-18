@@ -18,6 +18,7 @@ package com.twosigma.znai.website.markups;
 
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.parser.MarkupParser;
+import com.twosigma.znai.parser.MarkupParsingConfiguration;
 import com.twosigma.znai.parser.MarkupTypes;
 import com.twosigma.znai.parser.sphinx.DocTreeTocGenerator;
 import com.twosigma.znai.parser.sphinx.SphinxDocTreeParser;

@@ -18,7 +18,7 @@ package com.twosigma.znai.website;
 
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.structure.*;
-import com.twosigma.znai.website.markups.MarkupParsingConfiguration;
+import com.twosigma.znai.parser.MarkupParsingConfiguration;
 
 import java.nio.file.Path;
 import java.util.*;

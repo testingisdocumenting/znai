@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website.markups;
+package com.twosigma.znai.parser;
 
 import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.parser.MarkupParser;
 import com.twosigma.znai.structure.TableOfContents;
 import com.twosigma.znai.structure.TocItem;
 

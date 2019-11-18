@@ -173,6 +173,7 @@ export class Documentation extends Component {
                                                           onError={this.onPageGenError}/> : null
 
         const DocumentationLayout = elementsLibrary.DocumentationLayout
+        const selectedTocItem = {...page.tocItem, ...(forceSelectedTocItem || autoSelectedTocItem)}
 
         return (
             <WithTheme>{() =>
@@ -180,7 +181,7 @@ export class Documentation extends Component {
                     <DocumentationLayout docMeta={docMeta}
                                          toc={toc}
                                          theme={theme}
-                                         selectedTocItem={forceSelectedTocItem || autoSelectedTocItem}
+                                         selectedTocItem={selectedTocItem}
                                          prevPageTocItem={this.prevPageTocItem}
                                          nextPageTocItem={this.nextPageTocItem}
                                          searchPopup={searchPopup}

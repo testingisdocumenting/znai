@@ -35,6 +35,13 @@ public class TocItem {
     private String pageTitle;
     private PageMeta pageMeta;
 
+    /**
+     *  relative location on github or other source.
+     *  Note it is not necessarily dirName + fileNameWithoutExtension + extension,
+     *  i.e. original source can be deployed into a different location based on a {@link com.twosigma.znai.parser.MarkupParsingConfiguration}
+     */
+    private String viewOnRelativePath;
+
     private List<PageSectionIdTitle> pageSectionIdTitles;
 
     static TocItem createIndex() {
@@ -80,6 +87,14 @@ public class TocItem {
         this.pageMeta = pageMeta;
     }
 
+    public void setViewOnRelativePath(String viewOnRelativePath) {
+        this.viewOnRelativePath = viewOnRelativePath;
+    }
+
+    public String getViewOnRelativePath() {
+        return viewOnRelativePath;
+    }
+
     public List<PageSectionIdTitle> getPageSectionIdTitles() {
         return pageSectionIdTitles;
     }
@@ -109,8 +124,9 @@ public class TocItem {
         result.put("sectionTitle", getSectionTitle());
         result.put("pageTitle", getPageTitle());
         result.put("pageMeta", pageMeta.toMap());
-        result.put("fileName", getFileNameWithoutExtension());
         result.put("dirName", getDirName());
+        result.put("fileName", getFileNameWithoutExtension());
+        result.put("viewOnRelativePath", viewOnRelativePath);
         result.put("pageSectionIdTitles",
                 getPageSectionIdTitles().stream().map(PageSectionIdTitle::toMap).collect(toList()));
 
