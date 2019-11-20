@@ -16,6 +16,7 @@
 
 package com.twosigma.znai.website.markups
 
+import com.twosigma.znai.parser.MarkupParsingConfigurations
 import com.twosigma.znai.parser.MarkupTypes
 import org.junit.Test
 

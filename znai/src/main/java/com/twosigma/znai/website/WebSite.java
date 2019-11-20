@@ -32,8 +32,8 @@ import com.twosigma.znai.utils.FileUtils;
 import com.twosigma.znai.utils.JsonUtils;
 import com.twosigma.znai.web.WebResource;
 import com.twosigma.znai.web.extensions.WebSiteResourcesProviders;
-import com.twosigma.znai.website.markups.MarkupParsingConfiguration;
-import com.twosigma.znai.website.markups.MarkupParsingConfigurations;
+import com.twosigma.znai.parser.MarkupParsingConfiguration;
+import com.twosigma.znai.parser.MarkupParsingConfigurations;
 
 import java.io.IOException;
 import java.nio.file.Files;

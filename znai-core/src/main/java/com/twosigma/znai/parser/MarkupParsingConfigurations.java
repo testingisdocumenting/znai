@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website.markups;
+package com.twosigma.znai.parser;
 
 import com.twosigma.znai.utils.ServiceLoaderUtils;
 
@@ -27,6 +27,10 @@ public class MarkupParsingConfigurations {
             ServiceLoaderUtils.load(MarkupParsingConfiguration.class);
 
     private MarkupParsingConfigurations() {
+    }
+
+    public static void add(MarkupParsingConfiguration configuration) {
+        configurations.add(configuration);
     }
 
     public static MarkupParsingConfiguration byName(String name) {

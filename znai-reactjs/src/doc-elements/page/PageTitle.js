@@ -65,7 +65,9 @@ function ViewOn({docMeta, tocItem}) {
 }
 
 function buildViewOnLink(tocItem, link) {
-    return `${link}/${tocItem.dirName}/${tocItem.fileName}.md`
+    return tocItem.viewOnRelativePath ?
+        `${link}/${tocItem.viewOnRelativePath}`:
+        `${link}/${tocItem.dirName}/${tocItem.fileName}.md`
 }
 
 
