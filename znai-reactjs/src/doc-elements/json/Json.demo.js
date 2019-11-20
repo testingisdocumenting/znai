@@ -19,8 +19,9 @@ import Json from './Json'
 import {TwoSidesLayoutRightPart} from '../page/two-sides/TwoSidesLayout'
 
 const withNulls = {
-    k1: 'v1',
-    k2: null
+    k1: null,
+    k2: 'v1',
+    k3: null
 }
 
 const arraySimpleData = ['word', 'red', 'another']
@@ -69,7 +70,7 @@ const arrayOfObject = [{name: 'ta1', amount: 200}, {name: 'ta2', amount: 150}]
 
 export function jsonDemo(registry) {
     registry
-        .add('with nulls', () => <Json data={withNulls}/>)
+        .add('with nulls', () => <Json data={withNulls} paths={['root.k3']}/>)
         .add('array of simple', () => <Json data={arraySimpleData} paths={['root[1]']}/>)
         .add('with title', () => <Json data={arraySimpleData} paths={['root[1]']} title="Response"/>)
         .add('record', () => <Json data={objectSimpleData}/>)
