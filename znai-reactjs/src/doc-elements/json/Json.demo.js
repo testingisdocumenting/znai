@@ -18,6 +18,11 @@ import React from 'react'
 import Json from './Json'
 import {TwoSidesLayoutRightPart} from '../page/two-sides/TwoSidesLayout'
 
+const withNulls = {
+    k1: 'v1',
+    k2: null
+}
+
 const arraySimpleData = ['word', 'red', 'another']
 const objectSimpleData = {'key1': 'value1 "quote" part', 'key2': 'value2'}
 const objectNestedData = {
@@ -64,6 +69,7 @@ const arrayOfObject = [{name: 'ta1', amount: 200}, {name: 'ta2', amount: 150}]
 
 export function jsonDemo(registry) {
     registry
+        .add('with nulls', () => <Json data={withNulls}/>)
         .add('array of simple', () => <Json data={arraySimpleData} paths={['root[1]']}/>)
         .add('with title', () => <Json data={arraySimpleData} paths={['root[1]']} title="Response"/>)
         .add('record', () => <Json data={objectSimpleData}/>)

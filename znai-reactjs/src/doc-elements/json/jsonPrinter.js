@@ -38,7 +38,9 @@ class JsonPrinter {
     }
 
     printValue(path, value, skipIndent) {
-        if (Array.isArray(value)) {
+        if (value === null) {
+            this.printSingleValue(path, null)
+        } else if (Array.isArray(value)) {
             this.printArray(path, value, skipIndent)
         } else if (typeof value === 'object') {
             this.printObject(path, value, skipIndent)
@@ -52,11 +54,31 @@ class JsonPrinter {
 
     printSingleValue(path, value) {
         const additionalTokenType = this.isHighlightedPath(path) ? ' highlighted' : ''
+        this.printer.print(tokenType() + additionalTokenType, valueToPrint())
 
-        const tokenType = typeof value === 'string' ? 'string' : 'number'
-        const valueToPrint = typeof value === 'string' ? '"' + escapeQuote(value) + '"' : value
+        function tokenType() {
+            if (value === null) {
+                return 'keyword'
+            }
 
-        this.printer.print(tokenType + additionalTokenType, valueToPrint)
+            if (value === 'string') {
+                return 'string'
+            }
+
+            return 'number'
+        }
+
+        function valueToPrint() {
+            if (value === null) {
+                return 'null'
+            }
+
+            if (typeof value === 'string') {
+                return '"' + escapeQuote(value) + '"';
+            }
+
+            return value;
+        }
     }
 
     printArray(path, values, skipIndent) {
