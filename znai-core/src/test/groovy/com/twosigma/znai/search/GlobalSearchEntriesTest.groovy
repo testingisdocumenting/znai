@@ -27,7 +27,7 @@ class GlobalSearchEntriesTest {
                 new GlobalSearchEntry('/doc-id/title2','full title 2', new SearchText('text 2', SearchScore.STANDARD))])
 
         println entries.toXml()
-        entries.toXml().should == '<mdoc>\n' +
+        entries.toXml().should == '<znai>\n' +
                 '  <entry>\n' +
                 '    <url>/doc-id/title1</url>\n' +
                 '    <fullTitle>full title 1</fullTitle>\n' +
@@ -44,6 +44,6 @@ class GlobalSearchEntriesTest {
                 '      <score>STANDARD</score>\n' +
                 '    </text>\n' +
                 '  </entry>\n' +
-                '</mdoc>\n'
+                '</znai>\n'
     }
 }
