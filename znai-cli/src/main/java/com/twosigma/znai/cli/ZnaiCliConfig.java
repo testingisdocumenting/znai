@@ -35,6 +35,15 @@ public class ZnaiCliConfig {
     private static final String SERVE_KEY = "serve";
     private static final String GENERATE_KEY = "new";
     private static final String EXPORT_KEY = "export";
+    private static final String DEPLOY_KEY = "deploy";
+    private static final String MODIFIED_TIME_KEY = "modified-time";
+    private static final String DOC_ID_KEY = "doc-id";
+    private static final String SOURCE_KEY = "source";
+    private static final String MARKUP_TYPE_KEY = "markup-type";
+    private static final String HOST_KEY = "host";
+    private static final String PORT_KEY = "port";
+    private static final String ACTOR_KEY = "actor";
+    private static final String HELP_KEY = "help";
 
     public enum Mode {
         BUILD("build"),
@@ -55,6 +64,12 @@ public class ZnaiCliConfig {
         }
     }
 
+    public enum ModifiedTimeStrategy {
+        FILE,
+        CONSTANT,
+        NA
+    }
+
     private String docId;
     private String markupType;
     private String host;
@@ -65,6 +80,8 @@ public class ZnaiCliConfig {
     private Mode mode;
     private List<String> specifiedCustomCommands;
     private String actor;
+
+    private ModifiedTimeStrategy modifiedTimeStrategy;
 
     public ZnaiCliConfig(String... args) {
         parseArgs(args);
@@ -142,6 +159,10 @@ public class ZnaiCliConfig {
         this.deployRoot = deployRoot;
     }
 
+    public ModifiedTimeStrategy getModifiedTimeStrategy() {
+        return modifiedTimeStrategy;
+    }
+
     public Path getDeployRoot() {
         return validateIsSet("deployRoot", deployRoot);
     }
@@ -175,34 +196,36 @@ public class ZnaiCliConfig {
         Options options = createOptions();
         CommandLine commandLine = createCommandLine(args, options);
 
-        if (commandLine.hasOption("help") || args.length < 1) {
+        if (commandLine.hasOption(HELP_KEY) || args.length < 1) {
             HelpFormatter helpFormatter = new HelpFormatter();
             helpFormatter.printHelp("znai", options);
             System.exit(1);
         }
 
-        port = commandLine.hasOption("port") ? Integer.valueOf( commandLine.getOptionValue("port")) : 3333;
+        port = commandLine.hasOption(PORT_KEY) ? Integer.parseInt(commandLine.getOptionValue(PORT_KEY)) : 3333;
         mode = determineMode(commandLine);
         specifiedCustomCommands = CliCommandHandlers.registeredCommandNames()
                 .filter(commandLine::hasOption)
                 .collect(Collectors.toList());
 
-        docId = commandLine.hasOption("doc-id") ? commandLine.getOptionValue("doc-id") : "no-id-specified";
-        host = commandLine.hasOption("host") ? commandLine.getOptionValue("host") : "localhost";
+        docId = commandLine.hasOption(DOC_ID_KEY) ? commandLine.getOptionValue(DOC_ID_KEY) : "no-id-specified";
+        host = commandLine.hasOption(HOST_KEY) ? commandLine.getOptionValue(HOST_KEY) : "localhost";
 
-        markupType = commandLine.hasOption("markup-type") ? commandLine.getOptionValue("markup-type") : MarkupTypes.MARKDOWN;
+        markupType = commandLine.hasOption(MARKUP_TYPE_KEY) ? commandLine.getOptionValue(MARKUP_TYPE_KEY) : MarkupTypes.MARKDOWN;
 
-        sourceRoot = Paths.get(commandLine.hasOption("source") ? commandLine.getOptionValue("source") : "")
+        sourceRoot = Paths.get(commandLine.hasOption(SOURCE_KEY) ? commandLine.getOptionValue(SOURCE_KEY) : "")
                 .toAbsolutePath();
 
-        deployRoot = (commandLine.hasOption("deploy") ? Paths.get(commandLine.getOptionValue("deploy")) :
+        deployRoot = (commandLine.hasOption(DEPLOY_KEY) ? Paths.get(commandLine.getOptionValue(DEPLOY_KEY)) :
                 DeployTempDir.prepare(getModeAsString())).toAbsolutePath();
 
         exportRoot = commandLine.hasOption(EXPORT_KEY) ?
                 Paths.get(commandLine.getOptionValue(EXPORT_KEY)):
                 Paths.get("");
 
-        actor = commandLine.hasOption("actor") ? commandLine.getOptionValue("actor") : "";
+        actor = commandLine.hasOption(ACTOR_KEY) ? commandLine.getOptionValue(ACTOR_KEY) : "";
+
+        modifiedTimeStrategy = determineModifiedTimeStrategy(commandLine);
 
         validateMode(commandLine);
     }
@@ -229,6 +252,22 @@ public class ZnaiCliConfig {
         }
 
         return Mode.BUILD;
+    }
+
+    private ModifiedTimeStrategy determineModifiedTimeStrategy(CommandLine commandLine) {
+        if (!commandLine.hasOption(MODIFIED_TIME_KEY)) {
+            return ModifiedTimeStrategy.NA;
+        }
+
+        String modifiedTime = commandLine.getOptionValue(MODIFIED_TIME_KEY);
+        switch (modifiedTime) {
+            case "constant":
+                return ModifiedTimeStrategy.CONSTANT;
+            case "file":
+                return ModifiedTimeStrategy.FILE;
+            default:
+                throw new IllegalArgumentException("unsupported " + MODIFIED_TIME_KEY + " value: " + modifiedTime);
+        }
     }
 
     private void validateMode(CommandLine commandLine) {
@@ -260,18 +299,20 @@ public class ZnaiCliConfig {
 
     private Options createOptions() {
         Options options = new Options();
-        options.addOption(null, "help", false, "print help");
-        options.addOption(null, "port", true, "server port");
-        options.addOption(null, "host", true, "server host");
-        options.addOption(null, "markup-type", true, "markup type");
-        options.addOption(null, "source", true, "documentation source dir");
-        options.addOption(null, "doc-id", true, "documentation id");
+        options.addOption(null, HELP_KEY, false, "print help");
+        options.addOption(null, PORT_KEY, true, "server port");
+        options.addOption(null, HOST_KEY, true, "server host");
+        options.addOption(null, MARKUP_TYPE_KEY, true, "markup type");
+        options.addOption(null, SOURCE_KEY, true, "documentation source dir");
+        options.addOption(null, DOC_ID_KEY, true, "documentation id");
+        options.addOption(null, MODIFIED_TIME_KEY, true,
+                "strategy of modified time for each page: constant or file last update time: constant, file (default)");
 
-        options.addOption(null, "deploy", true, "documentation deploy root dir");
-        options.addOption(null, "preview", false, "preview mode");
-        options.addOption(null, "serve", false, "server mode");
-        options.addOption(null, "export", true, "export documentation source including required artifacts");
-        options.addOption(null, "new", false, "create new documentation with minimal necessary files");
+        options.addOption(null, DEPLOY_KEY, true, "documentation deploy root dir");
+        options.addOption(null, PREVIEW_KEY, false, "preview mode");
+        options.addOption(null, SERVE_KEY, false, "server mode");
+        options.addOption(null, EXPORT_KEY, true, "export documentation source including required artifacts");
+        options.addOption(null, GENERATE_KEY, false, "create new documentation with minimal necessary files");
         CliCommandHandlers.forEach(h -> options.addOption(null, h.commandName(), false, h.description()));
 
         return options;

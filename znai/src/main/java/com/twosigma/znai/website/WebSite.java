@@ -34,12 +34,15 @@ import com.twosigma.znai.web.WebResource;
 import com.twosigma.znai.web.extensions.WebSiteResourcesProviders;
 import com.twosigma.znai.parser.MarkupParsingConfiguration;
 import com.twosigma.znai.parser.MarkupParsingConfigurations;
+import com.twosigma.znai.website.modifiedtime.FileBasedPageModifiedTime;
+import com.twosigma.znai.website.modifiedtime.PageModifiedTimeStrategy;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -83,10 +86,15 @@ public class WebSite {
 
     private final Map<AuxiliaryFile, Long> auxiliaryFilesLastUpdateTime;
 
+    private final PageModifiedTimeStrategy pageModifiedTimeStrategy;
+
     private WebSite(Configuration siteConfig) {
         cfg = siteConfig;
         deployer = new Deployer(siteConfig.deployPath);
         docMeta = siteConfig.docMeta;
+        pageModifiedTimeStrategy = siteConfig.pageModifiedTimeStrategy != null ?
+                siteConfig.pageModifiedTimeStrategy : new FileBasedPageModifiedTime();
+
         registeredExtraJavaScripts = siteConfig.registeredExtraJavaScripts;
         componentsRegistry = new WebSiteComponentsRegistry();
         resourceResolver = new ResourcesResolverChain();
@@ -328,7 +336,7 @@ public class WebSite {
             MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
             updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
 
-            FileTime lastModifiedTime = Files.getLastModifiedTime(markupPath);
+            Instant lastModifiedTime = pageModifiedTimeStrategy.lastModifiedTime(tocItem, markupPath);
             Page page = new Page(parserResult.getDocElement(), lastModifiedTime, parserResult.getPageMeta());
             pageByTocItem.put(tocItem, page);
 
@@ -550,6 +558,7 @@ public class WebSite {
         private String documentationType = MARKDOWN;
         private DocMeta docMeta = new DocMeta(Collections.emptyMap());
         private ReactJsBundle reactJsBundle;
+        private PageModifiedTimeStrategy pageModifiedTimeStrategy;
 
         private Configuration() {
             webResources = new ArrayList<>();
@@ -588,6 +597,11 @@ public class WebSite {
 
         public Configuration withExtraJavaScripts(WebResource... webResources) {
             this.registeredExtraJavaScripts.addAll(Arrays.asList(webResources));
+            return this;
+        }
+
+        public Configuration withPageModifiedTimeStrategy(PageModifiedTimeStrategy modifiedTimeStrategy) {
+            this.pageModifiedTimeStrategy = modifiedTimeStrategy;
             return this;
         }
 

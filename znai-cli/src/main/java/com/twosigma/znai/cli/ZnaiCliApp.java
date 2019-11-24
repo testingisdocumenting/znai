@@ -28,12 +28,16 @@ import com.twosigma.znai.utils.FileUtils;
 import com.twosigma.znai.web.WebResource;
 import com.twosigma.znai.website.ProgressReporter;
 import com.twosigma.znai.website.WebSite;
+import com.twosigma.znai.website.modifiedtime.ConstantPageModifiedTime;
+import com.twosigma.znai.website.modifiedtime.FileBasedPageModifiedTime;
+import com.twosigma.znai.website.modifiedtime.PageModifiedTimeStrategy;
 import io.vertx.core.http.HttpServer;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Instant;
 
 public class ZnaiCliApp {
     private ZnaiCliConfig config;
@@ -153,11 +157,23 @@ public class ZnaiCliApp {
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
                 withWebResources(favIconResource).
+                withPageModifiedTimeStrategy(pageModifiedTimeStrategy()).
                 withEnabledPreview(config.isPreviewMode());
 
         this.webSite = config.isExportMode() ?
                 webSiteCfg.parseOnly():
                 webSiteCfg.deployTo(deployPath);
+    }
+
+    private PageModifiedTimeStrategy pageModifiedTimeStrategy() {
+        switch (config.getModifiedTimeStrategy()) {
+            case FILE:
+                return new FileBasedPageModifiedTime();
+            case CONSTANT:
+                return new ConstantPageModifiedTime(Instant.now());
+            default:
+                return null;
+        }
     }
 
     private void createNew() {

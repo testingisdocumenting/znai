@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.structure;
 
-import java.nio.file.attribute.FileTime;
+import java.time.Instant;
 import java.util.List;
 
 import com.twosigma.znai.parser.PageSectionIdTitle;
@@ -28,10 +28,10 @@ import static java.util.stream.Collectors.toList;
 public class Page {
     private final DocElement docElement;
     private final List<PageSectionIdTitle> pageSectionIdTitles;
-    private final FileTime lastModifiedTime;
+    private final Instant lastModifiedTime;
     private final PageMeta pageMeta;
 
-    public Page(DocElement docElement, FileTime lastModifiedTime, PageMeta pageMeta) {
+    public Page(DocElement docElement, Instant lastModifiedTime, PageMeta pageMeta) {
         this.docElement = docElement;
         this.pageSectionIdTitles = extractFirstLevelHeadings(docElement);
         this.lastModifiedTime = lastModifiedTime;
@@ -42,7 +42,7 @@ public class Page {
         return docElement;
     }
 
-    public FileTime getLastModifiedTime() {
+    public Instant getLastModifiedTime() {
         return lastModifiedTime;
     }
 
