@@ -28,7 +28,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-@JacksonXmlRootElement(localName = "mdoc")
+@JacksonXmlRootElement(localName = "znai")
 public class GlobalSearchEntries {
     private Set<GlobalSearchEntry> entries;
 
