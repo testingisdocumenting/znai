@@ -349,12 +349,6 @@
                 <artifactId>webtau-browser</artifactId>
                 <version>${webtau.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-compress</artifactId>
-                <version>1.18</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
