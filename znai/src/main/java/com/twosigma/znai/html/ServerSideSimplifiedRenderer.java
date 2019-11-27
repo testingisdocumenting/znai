@@ -30,7 +30,7 @@ public class ServerSideSimplifiedRenderer {
     static final String LOADING_INDICATOR = ResourceUtils.textContent("template/initial-page-loading.html");
 
     public static String renderToc(TableOfContents toc) {
-        return LOADING_INDICATOR + section(
+        return section(
                 toc.getTocItems().stream()
                         .map(ServerSideSimplifiedRenderer::renderTocLink)
                         .collect(Collectors.joining("\n")));

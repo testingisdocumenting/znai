@@ -19,6 +19,8 @@ package com.twosigma.znai.html.reactjs;
 import com.twosigma.znai.html.HtmlPage;
 import com.twosigma.znai.html.RenderSupplier;
 import com.twosigma.znai.utils.JsonUtils;
+import com.twosigma.znai.web.WebResource;
+import com.twosigma.znai.web.extensions.WebSiteResourcesProviders;
 
 import java.util.Map;
 
@@ -51,6 +53,14 @@ public class HtmlReactJsPage {
 
         reactJsBundle.clientJavaScripts().forEach(htmlPage::addJavaScript);
         reactJsBundle.clientCssResources().forEach(htmlPage::addCss);
+
+        WebSiteResourcesProviders.jsResources().forEach(htmlPage::addJavaScript);
+        WebSiteResourcesProviders.jsClientOnlyResources().forEach(htmlPage::addJavaScript);
+        WebSiteResourcesProviders.cssResources().forEach(htmlPage::addCss);
+        WebSiteResourcesProviders.htmlHeadResources().map(WebResource::getTextContent)
+                .forEach(text -> htmlPage.addToHead(() -> text));
+        WebSiteResourcesProviders.htmlBodyResources().map(WebResource::getTextContent)
+                .forEach(text -> htmlPage.addToBody(() -> text));
 
         return htmlPage;
     }
