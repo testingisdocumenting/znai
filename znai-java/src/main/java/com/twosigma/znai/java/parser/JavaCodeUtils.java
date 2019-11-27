@@ -19,9 +19,9 @@ package com.twosigma.znai.java.parser;
 import com.github.javaparser.Position;
 import com.github.javaparser.Range;
 import com.github.javaparser.ast.body.BodyDeclaration;
+import com.twosigma.znai.utils.StringUtils;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class JavaCodeUtils {
     public static String removeSemicolonAtEnd(String code) {
@@ -37,11 +37,11 @@ public class JavaCodeUtils {
         int startLine = range.begin.line - 1;
         int endLine = range.end.line - 1;
 
-        return lines.subList(startLine, endLine + 1).stream().collect(Collectors.joining("\n"));
+        return String.join("\n", lines.subList(startLine, endLine + 1));
     }
 
     static String extractSignature(String code) {
         int i = code.indexOf('{');
-        return i == -1 ? code.trim() : code.substring(0, i).trim();
+        return StringUtils.stripIndentation(i == -1 ? code : code.substring(0, i)).trim();
     }
 }
