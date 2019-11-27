@@ -58,7 +58,8 @@ class HelloWorld {
      * @param name name of the param 
      * @return list of samples
      */
-    public List<String> sampleMethod(String test, List<String> name) {
+    public List<String> sampleMethod(String test, 
+                                     List<String> name) {
         statement3();
         statement4();
     }
@@ -152,10 +153,16 @@ enum MyEnum {
         assert params == [["test", "test param", "String"],
                           ["name", "name of the param", "List"]]
 
-        Assert.assertEquals("public List<String> sampleMethod(String test, List<String> name) {\n" +
+        Assert.assertEquals(
+                "public List<String> sampleMethod(String test, \n" +
+                "                                 List<String> name) {\n" +
                 "    statement3();\n" +
                 "    statement4();\n" +
                 "}", method.fullBody)
+
+        Assert.assertEquals(
+                "public List<String> sampleMethod(String test, \n" +
+                "                                 List<String> name)", method.signatureOnly)
     }
 
     @Test
