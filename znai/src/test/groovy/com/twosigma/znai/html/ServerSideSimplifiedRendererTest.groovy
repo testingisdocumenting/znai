@@ -29,7 +29,6 @@ class ServerSideSimplifiedRendererTest {
     @Test
     void "should render TOC with page sections"() {
         ServerSideSimplifiedRenderer.renderToc(toc).should ==
-                ServerSideSimplifiedRenderer.LOADING_INDICATOR +
                 '<section style="max-width: 640px; margin-left: auto; margin-right: auto;">\n' +
                 '<article>\n' +
                 '<a href="chapter-a/page-one/">Page One</a>\n' +
