@@ -74,6 +74,8 @@
     --znai-snippets-title-color: #959595;
     --znai-snippets-title-background-color: #151a1d;
     --znai-snippets-title-left-border-color: #29343a;
+    --znai-snippets-reference-border-color: mediumpurple;
+    --znai-snippets-reference-background-color: #29264c;
     --znai-token-title-color: #dddddd;
     --znai-token-param-highlight-color: #ae59c1;
     --znai-cli-command-color: #a0aeb5;

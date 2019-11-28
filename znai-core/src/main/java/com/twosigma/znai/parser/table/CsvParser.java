@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.table;
+package com.twosigma.znai.parser.table;
 
-import com.twosigma.znai.parser.table.MarkupTableData;
-import com.twosigma.znai.parser.table.Row;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;

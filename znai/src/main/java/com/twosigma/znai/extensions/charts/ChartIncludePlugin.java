@@ -21,7 +21,7 @@ import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.extensions.PluginParams;
 import com.twosigma.znai.extensions.PluginResult;
 import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.extensions.table.CsvParser;
+import com.twosigma.znai.parser.table.CsvParser;
 import com.twosigma.znai.parser.ParserHandler;
 
 import java.nio.file.Path;

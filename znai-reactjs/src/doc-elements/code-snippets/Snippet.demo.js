@@ -31,6 +31,9 @@ export function snippetsDemo(registry) {
     registry
         .add('title', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()}/>)
         .add('wide with title', () => <Snippet wide={true} title="snippet title" lang="java" snippet={wideCode()}/>)
+        .add('with linked method calls', () => <Snippet wide={true} title="snippet title" lang="java"
+                                                        references={methodCallReferences()}
+                                                        snippet={codeWithMethodCalls()}/>)
         .add('with bullet points', () => <Snippet wide={false} lang="java" snippet={codeWithComments()}
                                                   commentsType="inline"/>)
         .add('with spoiler bullet points', () => <Snippet wide={false} lang="java" snippet={codeWithComments()}
@@ -108,6 +111,26 @@ function codeWithoutComments() {
         '        ...\n' +
         '    }\n' +
         '}\n'
+}
+
+function codeWithMethodCalls() {
+    return 'http.get("/end-point", http.header("h1", "v1"), ((header, body) -> {\n' +
+        '    body.get("price").should(equal(100));\n' +
+        '}));'
+}
+
+function methodCallReferences() {
+    return {
+        'http.header': {
+            pageUrl: '#http-header'
+        },
+        'body.get': {
+            pageUrl: '/chapter/page'
+        },
+        'should': {
+            pageUrl: 'http://example.com'
+        }
+    }
 }
 
 function markdownCode() {

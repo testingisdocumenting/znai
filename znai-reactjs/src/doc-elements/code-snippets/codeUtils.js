@@ -42,6 +42,8 @@ function splitTokensIntoLines(tokens) {
             handleMultiLineStringToken(token)
         } else if (isString && token.startsWith('\n')) {
             handleNewLineStringToken(token)
+        } else if (isString && token.startsWith(' ')) {
+            handleSpacing(token)
         } else {
             line.push(token)
         }
@@ -53,7 +55,7 @@ function splitTokensIntoLines(tokens) {
         for (let idx = 0; idx < parts.length; idx++) {
             const isLastPart = (idx === parts.length - 1)
 
-            line.push(parts[idx] + (isLastPart ? '' : '\n'))
+            handleSpacing(parts[idx] + (isLastPart ? '' : '\n'))
 
             if (!isLastPart) {
                 lines.push(line)
@@ -71,9 +73,32 @@ function splitTokensIntoLines(tokens) {
                 lines.push(line)
                 line = []
             } else {
-                line.push(token.substr(idx))
+                handleSpacing(token.substr(idx))
                 return;
             }
+        }
+    }
+
+    function handleSpacing(token) {
+        const nonSpaceIdx = findNonSpaceIdx()
+
+        if (nonSpaceIdx === token.length || nonSpaceIdx === 0) {
+            line.push(token)
+        } else {
+            line.push(token.substr(0, nonSpaceIdx))
+            if (nonSpaceIdx > 0) {
+                line.push({content: token.substr(nonSpaceIdx), type: 'text'})
+            }
+        }
+
+        function findNonSpaceIdx() {
+            for (let idx = 0; idx < token.length; idx++) {
+                if (token.charAt(idx) !== ' ') {
+                    return idx
+                }
+            }
+
+            return token.length
         }
     }
 }
@@ -107,10 +132,96 @@ function tokenToText(token) {
     return token.content.toString()
 }
 
+function isSimpleValueToken(token) {
+    return typeof token === 'string' || typeof token === 'number'
+}
+
+
+function enhanceMatchedTokensWithMeta(tokens, expressions, extraTypeProvider, linkProvider) {
+    const enhancedTokens = [...tokens]
+
+    const matches = findTokensThatMatchExpressions(tokens, expressions)
+    Object.keys(matches).forEach(updateTokensForMatch)
+
+    return enhancedTokens
+
+    function updateTokensForMatch(expression) {
+        const match = matches[expression]
+        for (let idx = match[0]; idx <= match[1]; idx++) {
+            enhancedTokens[idx] = updateWithNewMeta(tokens[idx], expression)
+        }
+    }
+
+    function updateWithNewMeta(token, expression) {
+        const extraType = extraTypeProvider(expression)
+        const existingType = isSimpleValueToken(token) ? 'text' : token.type
+
+        const enhancement = {
+            link: linkProvider(expression),
+            type: existingType + (extraType.length > 0 ? ' ' : '') + extraType
+        }
+
+        if (isSimpleValueToken(token)) {
+            return {content: token, ...enhancement}
+        }
+
+        return {...token, ...enhancement}
+    }
+}
+
+function findTokensThatMatchExpressions(tokens, expressions) {
+    const extractedTexts = tokens.map(t => tokenToText(t).trim())
+
+    const result = {}
+    expressions.forEach(expression => {
+        const indexes = findIndexes(expression)
+        if (!indexes) {
+            return
+        }
+
+        result[expression] = indexes
+    })
+
+    return result
+
+    function findIndexes(expression) {
+        let running = ''
+        let startIdx = 0
+
+        for (let idx = 0; idx < extractedTexts.length; idx++) {
+            const tokenText = extractedTexts[idx]
+
+            if (tokenText.length === 0) {
+                if (running.length === 0) {
+                    startIdx = idx + 1
+                }
+
+                continue
+            }
+
+            running += tokenText.trim()
+
+            if (expression.indexOf(running) !== 0) {
+                running = ''
+                startIdx = idx + 1
+            } else {
+                if (running.length === expression.length) {
+                    return [startIdx, idx]
+                }
+            }
+        }
+
+        return undefined
+    }
+}
+
 export {
     splitTokensIntoLines,
     isInlinedComment,
     trimComment,
     containsInlinedComment,
-    extractTextFromTokens
+    extractTextFromTokens,
+    isSimpleValueToken,
+    enhanceMatchedTokensWithMeta,
+    findTokensThatMatchExpressions
 }

@@ -16,14 +16,24 @@
 
 import React from 'react'
 
+import {isSimpleValueToken} from './codeUtils'
+import {documentationNavigation} from '../structure/DocumentationNavigation'
+import {isExternalUrl, onLocalUrlClick} from '../structure/links'
+
 import 'prismjs/themes/prism-coy.css'
 
 const SimpleCodeToken = ({token}) => {
-    if (isSimpleValue(token)) {
+    if (isSimpleValueToken(token)) {
         return <React.Fragment>{token}</React.Fragment>
     }
 
     const className = (token.type === 'text') ? '' : 'token ' + token.type
+    return token.link ?
+        renderLinkData(token, className):
+        renderSpan(token, className)
+}
+
+function renderSpan(token, className) {
     return (
         <span className={className} onClick={token.onClick}>
             {renderData(token)}
@@ -31,8 +41,25 @@ const SimpleCodeToken = ({token}) => {
     )
 }
 
+function renderLinkData(token, className) {
+    const isLocalNavigation = !isExternalUrl(token.link);
+
+    const url = isLocalNavigation ?
+        documentationNavigation.fullPageUrl(token.link):
+        token.link
+
+    const onClick = isLocalNavigation ? (e) => onLocalUrlClick(e, url) : null
+    const targetProp = isLocalNavigation ? {} : {target: "_blank"}
+
+    return (
+        <a href={url} className={className} onClick={onClick} {...targetProp}>
+            {renderData(token)}
+        </a>
+    )
+}
+
 function renderData(token) {
-    if (isSimpleValue(token)) {
+    if (isSimpleValueToken(token)) {
         return token
     }
 
@@ -45,10 +72,6 @@ function renderData(token) {
     }
 
     return JSON.stringify(token)
-}
-
-function isSimpleValue(token) {
-    return typeof token === 'string' || typeof token === 'number'
 }
 
 export default SimpleCodeToken

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.table
+package com.twosigma.znai.parser.table
 
 import org.junit.Test
 

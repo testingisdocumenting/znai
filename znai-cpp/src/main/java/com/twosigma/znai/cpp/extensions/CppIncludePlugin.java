@@ -41,7 +41,6 @@ import java.util.stream.Stream;
 public class CppIncludePlugin implements IncludePlugin {
     private MarkupParser markupParser;
     private Path cppPath;
-    private CodeTokenizer codeTokenizer;
     private String fileName;
 
     @Override

@@ -15,20 +15,41 @@
  */
 
 import {
-    containsInlinedComment,
-    extractTextFromTokens,
+    containsInlinedComment, enhanceMatchedTokensWithMeta,
+    extractTextFromTokens, findTokensThatMatchExpressions,
     isInlinedComment,
     splitTokensIntoLines,
     trimComment
 } from './codeUtils'
 import {parseCode} from './codeParser';
 
-const tokens = [{"type": "keyword", "content": "class"}, " ", {"type": "class-name", "content": ["Test"]}, " Test2 ", {"type": "punctuation", "content": "{"}, "\n",
+const tokens = [{"type": "keyword", "content": "class"}, " ", {
+    "type": "class-name",
+    "content": ["Test"]
+}, " Test2 ", {"type": "punctuation", "content": "{"}, "\n",
     {"type": "comment", "content": "/*another \n comment line \nend of comment */"}, "\n    ",
-    {"type": "keyword", "content": "var"}, " a  ", {"type": "operator", "content": "="}, " ", {"type": "number", "content": "2"}, {"type": "punctuation", "content": ";"}, " ", {"type": "comment", "content": "// comment line"}, "\n    ",
-    {"type": "keyword", "content": "var"}, " b ", { "type": "operator", "content": "=" }, " a ", {"type": "operator", "content": "+"}, " ", {"type": "number", "content": "1"}, { "type": "punctuation", "content": ";" }, "       ", {"type": "comment", "content": "//          another comment"}, "\n    ",
-    { "type": "keyword", "content": "var" }, " c ", {"type": "operator", "content": "="}, " ", {"type": "number", "content": "3"}, { "type": "punctuation", "content": ";" }, "         ", {"type": "comment", "content": "//             in two lines"}, "\n    ",
-    { "type": "keyword", "content": "var" }, " d ", {"type": "operator", "content": "="}, " a ", {"type": "operator", "content": "+"}, " ", { "type": "number", "content": "1" }, {"type": "punctuation", "content": ";"}, "\n"]
+    {"type": "keyword", "content": "var"}, " a  ", {"type": "operator", "content": "="}, " ", {
+        "type": "number",
+        "content": "2"
+    }, {"type": "punctuation", "content": ";"}, " ", {"type": "comment", "content": "// comment line"}, "\n    ",
+    {"type": "keyword", "content": "var"}, " b ", {"type": "operator", "content": "="}, " a ", {
+        "type": "operator",
+        "content": "+"
+    }, " ", {"type": "number", "content": "1"}, {"type": "punctuation", "content": ";"}, "       ", {
+        "type": "comment",
+        "content": "//          another comment"
+    }, "\n    ",
+    {"type": "keyword", "content": "var"}, " c ", {"type": "operator", "content": "="}, " ", {
+        "type": "number",
+        "content": "3"
+    }, {"type": "punctuation", "content": ";"}, "         ", {
+        "type": "comment",
+        "content": "//             in two lines"
+    }, "\n    ",
+    {"type": "keyword", "content": "var"}, " d ", {"type": "operator", "content": "="}, " a ", {
+        "type": "operator",
+        "content": "+"
+    }, " ", {"type": "number", "content": "1"}, {"type": "punctuation", "content": ";"}, "\n"]
 
 const codeWithEmptyLines = `public class DocScaffolding {
     private final Path workingDir;
@@ -36,32 +57,90 @@ const codeWithEmptyLines = `public class DocScaffolding {
     private Map<String, List<String>> fileNameByDirName;`
 
 describe("codeUtils", () => {
-    it("split list of tokens into lists of tokens per line", () => {
-        const lines = splitTokensIntoLines(tokens)
-        expect(lines.length).toEqual(6)
+    describe("split into lines", () => {
+        it("split list of tokens into lists of tokens per line", () => {
+            const lines = splitTokensIntoLines(tokens)
+            expect(lines.length).toEqual(6)
 
-        expect(lines[0]).toEqual([{"type": "keyword", "content": "class"}, " ", {
-            "type": "class-name",
-            "content": ["Test"]
-        }, " Test2 ", {"type": "punctuation", "content": "{"}, "\n"])
+            expect(lines[0]).toEqual([
+                {'content': 'class', 'type': 'keyword'},
+                ' ',
+                {'content': ['Test'], 'type': 'class-name'},
+                ' ',
+                {'content': 'Test2 ', 'type': 'text'},
+                {'content': '{', 'type': 'punctuation'}, '\n'])
 
-        expect(lines[2]).toEqual(["    ", {"type": "keyword", "content": "var"}, " a  ", {"type": "operator", "content": "="}, " ", {"type": "number", "content": "2"}, {"type": "punctuation", "content": ";"}, " ", {"type": "comment", "content": "// comment line"}, "\n"])
-    })
+            expect(lines[2]).toEqual([
+                '    ',
+                {'content': 'var', 'type': 'keyword'},
+                ' ',
+                {'content': 'a  ', 'type': 'text'},
+                {'content': '=', 'type': 'operator'},
+                ' ',
+                {'content': '2', 'type': 'number'},
+                {'content': ';', 'type': 'punctuation'},
+                ' ',
+                {'content': '// comment line', 'type': 'comment'},
+                '\n'
+            ])
+        })
 
-    it("creates separate empty lines", () => {
-        const tokens = parseCode('java', codeWithEmptyLines)
-        const lines = splitTokensIntoLines(tokens)
-        expect(lines.length).toEqual(4)
-        expect(lines[2]).toEqual(['\n'])
-    })
+        it("creates separate empty lines", () => {
+            const tokens = parseCode('java', codeWithEmptyLines)
+            const lines = splitTokensIntoLines(tokens)
+            expect(lines.length).toEqual(4)
+            expect(lines[2]).toEqual(['\n'])
+        })
 
-    it("handles string token with new-line code in the middle", () => {
-        const tokens = ['hello\n  world']
-        const lines = splitTokensIntoLines(tokens)
+        it("handles string token with new-line code in the middle", () => {
+            const tokens = ['hello\n  world']
+            const lines = splitTokensIntoLines(tokens)
 
-        expect(lines.length).toEqual(2)
-        expect(lines[0]).toEqual(['hello\n'])
-        expect(lines[1]).toEqual(['  world'])
+            expect(lines.length).toEqual(2)
+            expect(lines[0]).toEqual(['hello\n'])
+            expect(lines[1]).toEqual([
+                '  ',
+                {'content': 'world', 'type': 'text'}])
+        })
+
+        it("converts text token with spacing into separate spacing token and text token", () => {
+            const tokens = parseCode('java', ' http.get\n' +
+                '    body.get("price") {\n' +
+                '    body.get("id") {\n')
+            const lines = splitTokensIntoLines(tokens)
+
+            expect(lines).toEqual([
+                [
+                    ' ',
+                    { content: 'http', type: 'text' },
+                    { type: 'punctuation', content: '.' },
+                    'get\n'
+                ],
+                [
+                    '    ',
+                    { content: 'body', type: 'text' },
+                    { type: 'punctuation', content: '.' },
+                    { type: 'function', content: 'get' },
+                    { type: 'punctuation', content: '(' },
+                    { type: 'string', content: '"price"' },
+                    { type: 'punctuation', content: ')' },
+                    ' ',
+                    { type: 'punctuation', content: '{' },
+                    '\n'
+                ],
+                [
+                    '    ',
+                    { content: 'body', type: 'text' },
+                    { type: 'punctuation', content: '.' },
+                    { type: 'function', content: 'get' },
+                    { type: 'punctuation', content: '(' },
+                    { type: 'string', content: '"id"' },
+                    { type: 'punctuation', content: ')' },
+                   ' ',
+                    { type: 'punctuation', content: '{' },
+                    '\n'
+                ]])
+        })
     })
 
     it("converts line of tokens to a simple text", () => {
@@ -80,13 +159,66 @@ describe("codeUtils", () => {
     })
 
     it("detects if a list of tokens contains an inlined comment", () => {
-        const tokens = ["    ", {"type": "keyword", "content": "var"}, " a  ", {"type": "operator", "content": "="}, " ", {"type": "number", "content": "2"}, {"type": "punctuation", "content": ";"}, " ", {"type": "comment", "content": "// comment line"}, "\n"]
+        const tokens = ["    ", {"type": "keyword", "content": "var"}, " a  ", {
+            "type": "operator",
+            "content": "="
+        }, " ", {"type": "number", "content": "2"}, {"type": "punctuation", "content": ";"}, " ", {
+            "type": "comment",
+            "content": "// comment line"
+        }, "\n"]
 
         expect(containsInlinedComment(tokens)).toBeTruthy()
     })
 
     it("trims comment", () => {
         expect(trimComment("//  comment")).toEqual("comment")
+    })
+
+    it("finds token idx that match expression", () => {
+        const tokensCalls = parseCode('java', 'http.get("/end-point", http.header("h1", "v1"), ((header, body) -> {')
+        const resultCalls = findTokensThatMatchExpressions(tokensCalls, ['http.header', 'http.get', 'nonexiting'])
+        expect(resultCalls).toEqual({'http.header': [6, 8], 'http.get': [0, 2]})
+
+        const tokensClass = parseCode('java', 'public void myMethod(SuperType a, AnotherType b) {}')
+        const resultClass = findTokensThatMatchExpressions(tokensClass, ['SuperType', 'AnotherType', 'nonexiting'])
+        expect(resultClass).toEqual({SuperType: [6, 6], AnotherType: [10, 10]})
+    })
+
+    it("enhances tokens with on click information", () => {
+        const tokens = parseCode('java', 'http.get("/end-point", http.header("h1", "v1"), ((header, body) -> {')
+        const lines = splitTokensIntoLines(tokens)
+        const enhancedTokens = enhanceMatchedTokensWithMeta(lines[0], ['http.header', 'http.get'], () => 'link', (reference) => '@' + reference)
+
+        expect(enhancedTokens).not.toBe(tokens)
+        expect(enhancedTokens).toEqual([ { content: 'http', link: '@http.get', type: 'text link' },
+            { type: 'punctuation link', content: '.', link: '@http.get' },
+            { type: 'function link', content: 'get', link: '@http.get' },
+            { type: 'punctuation', content: '(' },
+            { type: 'string', content: '"/end-point"' },
+            { type: 'punctuation', content: ',' },
+            ' ',
+            { content: 'http', type: 'text link', link: '@http.header' },
+            { type: 'punctuation link', content: '.', link: '@http.header' },
+            { type: 'function link', content: 'header', link: '@http.header' },
+            { type: 'punctuation', content: '(' },
+            { type: 'string', content: '"h1"' },
+            { type: 'punctuation', content: ',' },
+            ' ',
+            { type: 'string', content: '"v1"' },
+            { type: 'punctuation', content: ')' },
+            { type: 'punctuation', content: ',' },
+            ' ',
+            { type: 'punctuation', content: '(' },
+            { type: 'punctuation', content: '(' },
+            'header',
+            { type: 'punctuation', content: ',' },
+            ' ',
+            { content: 'body', type: 'text' },
+            { type: 'punctuation', content: ')' },
+            ' ',
+            { type: 'operator', content: '->' },
+            ' ',
+            { type: 'punctuation', content: '{' }])
     })
 })
 

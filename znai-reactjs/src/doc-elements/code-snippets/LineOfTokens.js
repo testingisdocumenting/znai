@@ -16,16 +16,32 @@
 
 import React from 'react'
 
+import {enhanceMatchedTokensWithMeta} from './codeUtils'
+
 import './LineOfTokens.css'
 
-const LineOfTokens = ({tokens, isHighlighted, isPresentation, TokenComponent}) => {
+const LineOfTokens = ({tokens, references, isHighlighted, isPresentation, TokenComponent}) => {
+    console.log(tokens)
+
     const className = "code-line" + (isHighlighted ? " highlight" : "")
+    const enhancedTokens = enhanceTokens()
 
     return (
         <span className={className}>
-            {tokens.map((t, idx) => <TokenComponent key={idx} token={t} isPresentation={isPresentation}/>)}
+            {enhancedTokens.map((t, idx) => <TokenComponent key={idx} token={t} isPresentation={isPresentation}/>)}
         </span>
     )
+
+    function enhanceTokens() {
+        if (!references) {
+            return tokens
+        }
+
+        return enhanceMatchedTokensWithMeta(tokens, Object.keys(references), () => 'link', (referenceText) => {
+            const reference = references[referenceText]
+            return reference.pageUrl
+        })
+    }
 }
 
 export default LineOfTokens
