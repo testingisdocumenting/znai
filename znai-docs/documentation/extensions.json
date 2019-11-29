@@ -1,5 +1,6 @@
 {
   "cssResources": ["custom.css"],
   "jsResources": ["custom.js"],
-  "htmlResources": ["custom.html"]
+  "htmlResources": ["custom.html"],
+  "htmlHeadResources": ["tracking.html"]
 }

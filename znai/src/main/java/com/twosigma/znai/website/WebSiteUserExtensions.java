@@ -34,7 +34,8 @@ public class WebSiteUserExtensions implements WebSiteResourcesProvider {
     private final List<WebResource> cssResources;
     private final List<WebResource> jsResources;
     private final List<WebResource> jsClientOnlyResources;
-    private final List<WebResource> htmlResources;
+    private final List<WebResource> htmlHeadResources;
+    private final List<WebResource> htmlBodyResources;
     private final List<WebResource> additionalFilesToDeploy;
 
     private final Map<String, ?> definition;
@@ -51,7 +52,8 @@ public class WebSiteUserExtensions implements WebSiteResourcesProvider {
         this.cssResources = extractWebResources("cssResources");
         this.jsResources = extractWebResources("jsResources");
         this.jsClientOnlyResources = extractWebResources("jsClientOnlyResources");
-        this.htmlResources = extractWebResources("htmlResources");
+        this.htmlBodyResources = extractWebResources("htmlResources"); // name is without "head" part for compatibility with existing extensions out there
+        this.htmlHeadResources = extractWebResources("htmlHeadResources");
         this.additionalFilesToDeploy = extractWebResources("additionalFilesToDeploy");
     }
 
@@ -72,8 +74,13 @@ public class WebSiteUserExtensions implements WebSiteResourcesProvider {
     }
 
     @Override
-    public Stream<WebResource> htmlResources() {
-        return htmlResources.stream();
+    public Stream<WebResource> htmlHeadResources() {
+        return htmlHeadResources.stream();
+    }
+
+    @Override
+    public Stream<WebResource> htmlBodyResources() {
+        return htmlBodyResources.stream();
     }
 
     @Override

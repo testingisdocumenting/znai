@@ -22,8 +22,6 @@ import com.twosigma.znai.structure.DocMeta;
 import com.twosigma.znai.structure.Footer;
 import com.twosigma.znai.structure.Page;
 import com.twosigma.znai.structure.TocItem;
-import com.twosigma.znai.web.WebResource;
-import com.twosigma.znai.web.extensions.WebSiteResourcesProviders;
 
 public class PageToHtmlPageConverter {
     private final DocMeta docMeta;
@@ -49,12 +47,6 @@ public class PageToHtmlPageConverter {
 
         HtmlReactJsPage reactJsPage = new HtmlReactJsPage(reactJsBundle);
         HtmlPage htmlPage = reactJsPage.create(title, "Documentation", docProps.toMap(), mainBodySupplier, "");
-
-        WebSiteResourcesProviders.jsResources().forEach(htmlPage::addJavaScript);
-        WebSiteResourcesProviders.jsClientOnlyResources().forEach(htmlPage::addJavaScript);
-        WebSiteResourcesProviders.cssResources().forEach(htmlPage::addCss);
-        WebSiteResourcesProviders.htmlResources().map(WebResource::getTextContent)
-                .forEach(text -> htmlPage.addToBody(() -> text));
 
         return new HtmlPageAndPageProps(htmlPage, pageProps);
     }

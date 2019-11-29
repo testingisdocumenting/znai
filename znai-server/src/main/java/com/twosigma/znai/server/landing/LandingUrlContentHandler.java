@@ -21,8 +21,6 @@ import com.twosigma.znai.html.reactjs.HtmlReactJsPage;
 import com.twosigma.znai.html.reactjs.ReactJsBundle;
 import com.twosigma.znai.server.FavIcons;
 import com.twosigma.znai.server.urlhandlers.UrlContentHandler;
-import com.twosigma.znai.web.WebResource;
-import com.twosigma.znai.web.extensions.WebSiteResourcesProviders;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -58,13 +56,6 @@ public class LandingUrlContentHandler implements UrlContentHandler {
 
         HtmlPage htmlPage = htmlReactJsPage.create(landingTitle + " " + landingType,
                 "Landing", props, () -> "", FavIcons.DEFAULT_ICON_PATH);
-
-        WebSiteResourcesProviders.jsResources().forEach(htmlPage::addJavaScript);
-        WebSiteResourcesProviders.jsClientOnlyResources().forEach(htmlPage::addJavaScript);
-        WebSiteResourcesProviders.cssResources().forEach(htmlPage::addCss);
-        WebSiteResourcesProviders.htmlResources().map(WebResource::getTextContent)
-                .forEach(text -> htmlPage.addToBody(() -> text));
-
         return htmlPage.render("");
     }
 }

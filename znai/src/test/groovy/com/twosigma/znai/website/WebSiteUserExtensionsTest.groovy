@@ -33,6 +33,7 @@ class WebSiteUserExtensionsTest {
                 jsResources: ['custom.js', 'components.js'],
                 jsClientOnlyResources: ['custom-client.js'],
                 additionalFilesToDeploy: ['font1.woff2', 'font2.woff2'],
+                htmlHeadResources: ['tracking.html'],
                 htmlResources: ['custom.html']])
 
         def paths = { name -> extensions."$name"().collect(toList()).path }
@@ -40,7 +41,8 @@ class WebSiteUserExtensionsTest {
         paths('cssResources').should == ['custom.css', 'another.css']
         paths('jsResources').should == ['custom.js', 'components.js']
         paths('jsClientOnlyResources').should == ['custom-client.js']
-        paths('htmlResources').should == ['custom.html']
+        paths('htmlHeadResources').should == ['tracking.html']
+        paths('htmlBodyResources').should == ['custom.html']
         paths('additionalFilesToDeploy').should == ['font1.woff2', 'font2.woff2']
     }
 

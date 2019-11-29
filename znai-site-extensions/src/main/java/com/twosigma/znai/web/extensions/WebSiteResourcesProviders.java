@@ -34,8 +34,12 @@ public class WebSiteResourcesProviders {
         return providers.stream().flatMap(WebSiteResourcesProvider::cssResources);
     }
 
-    public static Stream<WebResource> htmlResources() {
-        return providers.stream().flatMap(WebSiteResourcesProvider::htmlResources);
+    public static Stream<WebResource> htmlHeadResources() {
+        return providers.stream().flatMap(WebSiteResourcesProvider::htmlHeadResources);
+    }
+
+    public static Stream<WebResource> htmlBodyResources() {
+        return providers.stream().flatMap(WebSiteResourcesProvider::htmlBodyResources);
     }
 
     public static Stream<WebResource> jsResources() {
