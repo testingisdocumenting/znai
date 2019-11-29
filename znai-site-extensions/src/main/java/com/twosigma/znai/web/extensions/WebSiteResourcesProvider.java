@@ -28,7 +28,11 @@ public interface WebSiteResourcesProvider {
         return Stream.empty();
     }
 
-    default Stream<WebResource> htmlResources() {
+    default Stream<WebResource> htmlHeadResources() {
+        return Stream.empty();
+    }
+
+    default Stream<WebResource> htmlBodyResources() {
         return Stream.empty();
     }
 

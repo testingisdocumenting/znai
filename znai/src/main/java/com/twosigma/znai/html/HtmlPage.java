@@ -33,7 +33,7 @@ public class HtmlPage {
     private List<WebResource> cssResources;
     private List<WebResource> javaScriptResources;
 
-    private List<RenderSupplier> headerSuppliers;
+    private List<RenderSupplier> headSuppliers;
     private List<RenderSupplier> bodySuppliers;
     private List<RenderSupplier> javaScriptSuppliers;
 
@@ -49,7 +49,7 @@ public class HtmlPage {
         cssResources = new ArrayList<>();
         javaScriptResources = new ArrayList<>();
 
-        headerSuppliers = new ArrayList<>();
+        headSuppliers = new ArrayList<>();
         bodySuppliers = new ArrayList<>();
         javaScriptSuppliers = new ArrayList<>();
     }
@@ -70,6 +70,10 @@ public class HtmlPage {
         javaScriptResources.add(0, webResource);
     }
 
+    public void addToHead(RenderSupplier supplier) {
+        headSuppliers.add(supplier);
+    }
+
     public void addToBody(RenderSupplier supplier) {
         bodySuppliers.add(supplier);
     }
@@ -84,7 +88,7 @@ public class HtmlPage {
                 "<head>\n" +
                 "<meta charset=\"utf-8\" /> \n" +
                 "<title>" + title + "</title>" +
-                headerSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) +
+                headSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) +
                 cssResources.stream().map(r -> r.generateCssLink(documentationId)).collect(joining("\n")) +
                 "\n</head>\n" +
                 "<link rel=\"shortcut icon\" href=" + favIconPath(documentationId) + "type=\"image/ico\"/>\n" +
