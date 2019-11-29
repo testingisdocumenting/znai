@@ -21,15 +21,15 @@ import java.util.stream.Stream;
 public class CodeReferences {
     private final ComponentsRegistry componentsRegistry;
 
-    private final Path referencesPath;
-    private final String referencesPathValue;
+    private final Path referencesFullPath;
+    private final String referencesPath;
 
     public CodeReferences(ComponentsRegistry componentsRegistry, PluginParams pluginParams) {
         this.componentsRegistry = componentsRegistry;
 
-        this.referencesPathValue = pluginParams.getOpts().get("referencesPath", null);
-        this.referencesPath = referencesPathValue != null ?
-                componentsRegistry.resourceResolver().fullPath(referencesPathValue):
+        this.referencesPath = pluginParams.getOpts().get("referencesPath", null);
+        this.referencesFullPath = referencesPath != null ?
+                componentsRegistry.resourceResolver().fullPath(referencesPath):
                 null;
     }
 
@@ -43,7 +43,7 @@ public class CodeReferences {
 
     private Map<String, Object> buildReferences() {
         MarkupTableData tableData = CsvParser.parseWithHeader(
-                componentsRegistry.resourceResolver().textContent(referencesPathValue),
+                componentsRegistry.resourceResolver().textContent(referencesPath),
                 "reference", "url");
 
         Map<String, Object> result = new LinkedHashMap<>();
@@ -56,10 +56,10 @@ public class CodeReferences {
 
     public Stream<AuxiliaryFile> auxiliaryFiles() {
         return referencesProvided() ?
-                Stream.of(AuxiliaryFile.builtTime(referencesPath)) : Stream.empty();
+                Stream.of(AuxiliaryFile.builtTime(referencesFullPath)) : Stream.empty();
     }
 
     private boolean referencesProvided() {
-        return referencesPath != null;
+        return referencesFullPath != null;
     }
 }
