@@ -199,7 +199,7 @@ function findTokensThatMatchExpressions(tokens, expressions) {
                 continue
             }
 
-            running += tokenText.trim()
+            running += tokenText
 
             if (expression.indexOf(running) !== 0) {
                 running = ''

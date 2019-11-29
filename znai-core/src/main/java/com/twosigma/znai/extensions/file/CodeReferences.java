@@ -59,7 +59,7 @@ public class CodeReferences {
                 Stream.of(AuxiliaryFile.builtTime(referencesPath)) : Stream.empty();
     }
 
-    public boolean referencesProvided() {
+    private boolean referencesProvided() {
         return referencesPath != null;
     }
 }

@@ -21,8 +21,6 @@ import {enhanceMatchedTokensWithMeta} from './codeUtils'
 import './LineOfTokens.css'
 
 const LineOfTokens = ({tokens, references, isHighlighted, isPresentation, TokenComponent}) => {
-    console.log(tokens)
-
     const className = "code-line" + (isHighlighted ? " highlight" : "")
     const enhancedTokens = enhanceTokens()
 
