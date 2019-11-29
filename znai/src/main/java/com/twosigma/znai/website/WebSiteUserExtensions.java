@@ -20,7 +20,7 @@ import com.twosigma.znai.core.ResourcesResolver;
 import com.twosigma.znai.web.WebResource;
 import com.twosigma.znai.web.extensions.WebSiteResourcesProvider;
 
-import java.util.Collections;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -49,23 +49,12 @@ public class WebSiteUserExtensions implements WebSiteResourcesProvider {
         this.resourcesResolver = resourcesResolver;
         this.definition = definition;
 
-        this.cssResources = extractWebResources("cssResources");
-        this.jsResources = extractWebResources("jsResources");
-        this.jsClientOnlyResources = extractWebResources("jsClientOnlyResources");
-        this.htmlBodyResources = extractWebResources("htmlResources"); // name is without "head" part for compatibility with existing extensions out there
-        this.htmlHeadResources = extractWebResources("htmlHeadResources");
-        this.additionalFilesToDeploy = extractWebResources("additionalFilesToDeploy");
-    }
-
-    @SuppressWarnings("unchecked")
-    private List<WebResource> extractWebResources(String key) {
-        List<String> resources = (List<String>) definition.get(key);
-
-        return resources == null ?
-                Collections.emptyList():
-                resources.stream()
-                        .map(p -> WebResource.withPath(resourcesResolver.fullPath(p), p))
-                        .collect(toList());
+        this.cssResources = extract("cssResources", "style.css");
+        this.jsResources = extract("jsResources");
+        this.jsClientOnlyResources = extract("jsClientOnlyResources");
+        this.htmlBodyResources = extract("htmlResources"); // name is without "head" part for compatibility with existing extensions out there
+        this.htmlHeadResources = extract("htmlHeadResources", "tracking.html");
+        this.additionalFilesToDeploy = extract("additionalFilesToDeploy");
     }
 
     @Override
@@ -96,5 +85,37 @@ public class WebSiteUserExtensions implements WebSiteResourcesProvider {
     @Override
     public Stream<WebResource> additionalFilesToDeploy() {
         return additionalFilesToDeploy.stream();
+    }
+
+    private List<WebResource> extract(String extensionsKey) {
+        return extract(extensionsKey, "");
+    }
+
+    private List<WebResource> extract(String extensionsKey, String fileName) {
+        Stream<WebResource> fromExtensions = extractFromExtensions(extensionsKey);
+        Stream<WebResource> fromFile = fileName.isEmpty() ?
+                Stream.empty() :
+                extractFromFile(fileName);
+
+        return Stream.concat(fromExtensions, fromFile).collect(toList());
+    }
+
+    @SuppressWarnings("unchecked")
+    private Stream<WebResource> extractFromExtensions(String key) {
+        List<String> resources = (List<String>) definition.get(key);
+
+        return resources == null ?
+                Stream.empty():
+                resources.stream()
+                        .map(p -> WebResource.withPath(resourcesResolver.fullPath(p), p));
+    }
+
+    private Stream<WebResource> extractFromFile(String name) {
+        if (!resourcesResolver.canResolve(name)) {
+            return Stream.empty();
+        }
+
+        Path stylePath = resourcesResolver.fullPath(name);
+        return Stream.of(WebResource.withPath(stylePath, name));
     }
 }
