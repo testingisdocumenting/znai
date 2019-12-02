@@ -52,7 +52,7 @@ const Explanations = ({spoiler, isPresentation, slideIdx, comments}) => {
                                comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
 }
 
-const CodeSnippetWithInlineComments = ({tokens, spoiler, isPresentation, meta, slideIdx}) => {
+const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentation, meta, slideIdx}) => {
     commentIdx = 0
     const comments = tokens.filter(t => isInlinedComment(t))
     const lines = splitTokensIntoLines(tokens)
@@ -75,6 +75,7 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, isPresentation, meta, s
                 <code>
                     {lines.map((line, idx) => <LineOfTokens key={idx} tokens={line}
                                                             isHighlighted={isHighlighted(idx)}
+                                                            references={references}
                                                             isPresentation={isPresentation}
                                                             TokenComponent={SpecialCommentToken}/>)}
                 </code>
