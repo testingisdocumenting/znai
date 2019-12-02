@@ -26,7 +26,8 @@ import static java.util.stream.Collectors.toList
 class WebSiteUserExtensionsTest {
     @Test
     void "should let specify extra web resources"() {
-        createExtensions([:]).cssResources().collect(toList()).size().should == 0
+        def styleResources = createExtensions([:]).cssResources().collect(toList()).path
+        styleResources.should == ['style.css']
 
         def extensions = createExtensions([
                 cssResources: ['custom.css', 'another.css'],
@@ -38,7 +39,7 @@ class WebSiteUserExtensionsTest {
 
         def paths = { name -> extensions."$name"().collect(toList()).path }
 
-        paths('cssResources').should == ['custom.css', 'another.css']
+        paths('cssResources').should == ['custom.css', 'another.css', 'style.css']
         paths('jsResources').should == ['custom.js', 'components.js']
         paths('jsClientOnlyResources').should == ['custom-client.js']
         paths('htmlHeadResources').should == ['tracking.html']
