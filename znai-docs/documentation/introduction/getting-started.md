@@ -35,13 +35,14 @@ To create a minimum set of files for your documentation execute
 
 Navigate to the newly created directory. Start preview mode by running
 
-:include-cli-command: znai --preview 
+:include-cli-command: znai --preview [--port port-number] 
 
 The command will output a URL that directs to your preview.  
   
 Blue *eye* icon in the top right corner indicates that preview is on.
 Open any text editor, modify and save `page-one.md` file.
 Changes will be reflected in the browser. 
+The default port number is 3333.
 
 # Deploy
 
