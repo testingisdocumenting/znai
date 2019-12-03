@@ -249,9 +249,9 @@ export class Documentation extends Component {
             this.setState({mode: DocumentationModes.PRESENTATION})
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && e.altKey) {
             this.setState({mode: DocumentationModes.PRINT})
-        } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowLeft') {
+        } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowLeft' && e.ctrlKey) {
             this.onPrevPage()
-        } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowRight') {
+        } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowRight' && e.ctrlKey) {
             this.onNextPage()
         } else if (e.code === "Escape") {
             this.setState({mode: DocumentationModes.DEFAULT})
