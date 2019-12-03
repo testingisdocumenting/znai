@@ -56,4 +56,12 @@ describe("DocumentationNavigation", () => {
         expect(location.dirName).toEqual("")
         expect(location.fileName).toEqual("index")
     })
+
+    it("builds full doc url given a relative url", () => {
+        setDocMeta({id: 'my-doc'})
+
+        expect(documentationNavigation.fullPageUrl('#anchor')).toEqual('#anchor')
+        expect(documentationNavigation.fullPageUrl('/chapter/page')).toEqual('/my-doc/chapter/page')
+        expect(documentationNavigation.fullPageUrl('chapter/page')).toEqual('/my-doc/chapter/page')
+    })
 })

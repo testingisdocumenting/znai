@@ -60,6 +60,12 @@ a line by text matching or by providing a line index.
     
 :include-json: book-store.json {highlight: ["category", 2]}
 
+# Code References
+
+You can turn parts of a json into links to internal or external pages. 
+
+
+:include-json: book-store.json {include: "$..book[0,1]", title: "Books", referencesPath: "references/json-references-demo.csv"}
 
 # Test Results
 

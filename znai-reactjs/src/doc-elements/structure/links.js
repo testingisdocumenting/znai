@@ -22,7 +22,16 @@ function isLocalUrl(url) {
         return false
     }
 
-    return url.startsWith('/' + getDocId())
+    return url.startsWith('#') ||
+        url.startsWith('/' + getDocId())
+}
+
+function isExternalUrl(url) {
+    if (!window.document) {
+        return false
+    }
+
+    return url.startsWith('http')
 }
 
 function onLocalUrlClick(e, url) {
@@ -31,4 +40,4 @@ function onLocalUrlClick(e, url) {
 }
 
 
-export {isLocalUrl, onLocalUrlClick}
+export {isLocalUrl, isExternalUrl, onLocalUrlClick}
