@@ -44,9 +44,19 @@ class DocumentationNavigation {
         this.listeners.splice(idx, 1)
     }
 
+    fullPageUrl(relativePageUrl) {
+        if (relativePageUrl.indexOf('#') === 0) {
+            return relativePageUrl
+        }
+
+        return "/" + (getDocId()  ? getDocId() : "") +
+            (relativePageUrl.indexOf('/') === 0 ? '' : '/') +
+            relativePageUrl
+    }
+
     buildUrl(id) {
-        return  "/" + (getDocId()  ? getDocId() + "/" : "") + (id.dirName + "/" + id.fileName) +
-            (id.pageSectionId ? ("#" + id.pageSectionId) : "")
+        return  this.fullPageUrl(id.dirName + "/" + id.fileName +
+            (id.pageSectionId ? ("#" + id.pageSectionId) : ""))
     }
 
     navigateToPage(id) {

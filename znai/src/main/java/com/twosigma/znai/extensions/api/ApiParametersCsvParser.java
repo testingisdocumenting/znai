@@ -16,7 +16,7 @@
 
 package com.twosigma.znai.extensions.api;
 
-import com.twosigma.znai.extensions.table.CsvParser;
+import com.twosigma.znai.parser.table.CsvParser;
 import com.twosigma.znai.parser.MarkupParser;
 import com.twosigma.znai.parser.MarkupParserResult;
 import com.twosigma.znai.parser.table.MarkupTableData;

@@ -56,7 +56,7 @@ class SimpleCodeSnippet extends Component {
 
     render() {
         const {displayFully} = this.state
-        const {isPresentation, slideIdx} = this.props
+        const {isPresentation, slideIdx, references} = this.props
 
         // slideIdx === 0 means no highlights, 1 - first highlight, etc
         const highlightIsVisible = !isPresentation || slideIdx > 0
@@ -68,6 +68,7 @@ class SimpleCodeSnippet extends Component {
         return (
             <pre>
                 {linesToRender.map((tokens, idx) => <LineOfTokens key={idx} tokens={tokens}
+                                                                  references={references}
                                                                   isHighlighted={highlightIsVisible && this.isHighlighted(idx, tokens)}
                                                                   isPresentation={isPresentation}
                                                                   TokenComponent={SimpleCodeToken}/>)}

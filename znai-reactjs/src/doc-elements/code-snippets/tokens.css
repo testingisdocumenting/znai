@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 
+.token.link {
+    cursor: pointer;
+    border-bottom: 1px solid var(--znai-snippets-reference-border-color);
+    color: var(--znai-regular-text-color);
+    background-color: var(--znai-snippets-reference-background-color);
+    text-decoration: none;
+}
+
 .token.class-name {
     color: var(--znai-class-color);
 }

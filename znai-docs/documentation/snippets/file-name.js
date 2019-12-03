@@ -1,5 +1,6 @@
 class JsClass {
     constructor() {
+        usefulAction()
     }
 }
 

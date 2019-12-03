@@ -25,6 +25,7 @@ import com.twosigma.znai.parser.MarkupParser;
 import com.twosigma.znai.parser.MarkupParserResult;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.parser.docelement.DocElementType;
+import com.twosigma.znai.parser.table.CsvParser;
 import com.twosigma.znai.parser.table.MarkupTableData;
 import com.twosigma.znai.search.SearchScore;
 import com.twosigma.znai.search.SearchText;

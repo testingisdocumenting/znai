@@ -21,6 +21,7 @@ import com.twosigma.znai.core.AuxiliaryFile
 import com.twosigma.znai.core.ComponentsRegistry
 import com.twosigma.znai.extensions.PluginParams
 import com.twosigma.znai.extensions.PluginResult
+import com.twosigma.znai.extensions.file.CodeReferences
 import com.twosigma.znai.extensions.include.IncludePlugin
 import com.twosigma.znai.groovy.parser.GroovyCode
 import com.twosigma.znai.parser.ParserHandler
@@ -31,6 +32,7 @@ import java.util.stream.Stream
 
 class GroovyIncludePlugin implements IncludePlugin {
     private Path fullPath
+    private CodeReferences codeReferences
 
     @Override
     String id() {
@@ -47,6 +49,7 @@ class GroovyIncludePlugin implements IncludePlugin {
                          ParserHandler parserHandler,
                          Path markupPath,
                          PluginParams pluginParams) {
+        codeReferences = new CodeReferences(componentsRegistry, pluginParams)
         fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam())
         String fileContent = componentsRegistry.resourceResolver().textContent(fullPath)
         String entry = pluginParams.getOpts().get("entry")
@@ -58,13 +61,16 @@ class GroovyIncludePlugin implements IncludePlugin {
         Map<String, Object> props = CodeSnippetsProps.create("groovy",
                 extractContent(groovyCode, entry, bodyOnly))
         props.putAll(pluginParams.getOpts().toMap())
+        codeReferences.updateProps(props)
 
         return PluginResult.docElement(DocElementType.SNIPPET, props)
     }
 
     @Override
     Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return [AuxiliaryFile.builtTime(fullPath)].stream()
+        return Stream.concat(
+                Stream.of(AuxiliaryFile.builtTime(fullPath)),
+                codeReferences.auxiliaryFiles())
     }
 
     private static String extractContent(GroovyCode groovyCode, String entry, Boolean bodyOnly) {
