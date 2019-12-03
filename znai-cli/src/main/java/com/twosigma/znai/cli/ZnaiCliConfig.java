@@ -44,6 +44,7 @@ public class ZnaiCliConfig {
     private static final String PORT_KEY = "port";
     private static final String ACTOR_KEY = "actor";
     private static final String HELP_KEY = "help";
+    private static final int DEFAULT_PORT = 3333;
 
     public enum Mode {
         BUILD("build"),
@@ -202,7 +203,7 @@ public class ZnaiCliConfig {
             System.exit(1);
         }
 
-        port = commandLine.hasOption(PORT_KEY) ? Integer.parseInt(commandLine.getOptionValue(PORT_KEY)) : 3333;
+        port = commandLine.hasOption(PORT_KEY) ? Integer.parseInt(commandLine.getOptionValue(PORT_KEY)) : DEFAULT_PORT;
         mode = determineMode(commandLine);
         specifiedCustomCommands = CliCommandHandlers.registeredCommandNames()
                 .filter(commandLine::hasOption)
@@ -217,7 +218,7 @@ public class ZnaiCliConfig {
                 .toAbsolutePath();
 
         deployRoot = (commandLine.hasOption(DEPLOY_KEY) ? Paths.get(commandLine.getOptionValue(DEPLOY_KEY)) :
-                DeployTempDir.prepare(getModeAsString())).toAbsolutePath();
+                DeployTempDir.prepare(getModeAsString(), port)).toAbsolutePath();
 
         exportRoot = commandLine.hasOption(EXPORT_KEY) ?
                 Paths.get(commandLine.getOptionValue(EXPORT_KEY)):
