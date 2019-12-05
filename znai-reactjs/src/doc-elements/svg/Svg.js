@@ -35,11 +35,32 @@ class Svg extends Component {
 
         const children = this.childrenReactElementsFromDomNode(dom.documentElement)
 
-        return <div className="svg content-block">
-            <svg {...svgProps}>
-                {children}
-            </svg>
-        </div>
+        return (
+            <div className="svg content-block">
+                <svg {...svgProps} ref={this.saveSvgNode}>
+                    {children}
+                </svg>
+            </div>
+        )
+    }
+
+    saveSvgNode = (node) => {
+        this.svgNode = node
+    }
+
+    componentDidMount() {
+        if (this.props.actualSize) {
+            this.actualSizeSvg()
+        }
+    }
+
+    actualSizeSvg() {
+        const {scale = 1} = this.props
+
+        const bbox = this.svgNode.getBBox();
+        this.svgNode.setAttribute("width", (bbox.width * scale) + "px");
+        this.svgNode.setAttribute("height", (bbox.height * scale) + "px");
+        this.svgNode.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
     }
 
     childrenReactElementsFromDomNode(domNode) {
@@ -47,7 +68,7 @@ class Svg extends Component {
 
         const {idsToReveal, isPresentation, slideIdx} = this.props
 
-        const idsForSlide = isPresentation && idsToReveal ? idsToReveal.slice(0, slideIdx + 1): idsToReveal
+        const idsForSlide = isPresentation && idsToReveal ? idsToReveal.slice(0, slideIdx + 1) : idsToReveal
 
         if (!domNode) {
             return children
@@ -75,7 +96,9 @@ class Svg extends Component {
     }
 }
 
-const presentationSvgHandler = {component: Svg,
-    numberOfSlides: ({idsToReveal}) => idsToReveal ? idsToReveal.length : 1}
+const presentationSvgHandler = {
+    component: Svg,
+    numberOfSlides: ({idsToReveal}) => idsToReveal ? idsToReveal.length : 1
+}
 
 export {Svg, presentationSvgHandler}
