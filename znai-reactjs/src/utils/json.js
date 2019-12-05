@@ -22,7 +22,10 @@ export {jsonPromise}
 
 function jsonPromise(docMeta, url) {
     url = fullResourcePath(docMeta.id, url)
+    return jsonPromise(url)
+}
 
+function jsonPromise(url) {
     return new Promise((resolve, reject) => {
         fetch(url, {credentials: 'same-origin'}).then((response) => {
             response.json().then((json) => {

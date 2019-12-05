@@ -14,37 +14,19 @@
  * limitations under the License.
  */
 
-.page-title {
-    font-size: 36px;
-}
+package com.twosigma.znai.server.support;
 
-.page-title-block {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+public class OnSupportFinishedServerHandler {
+    private static SupportMetaGetter supportMetaGetter;
 
-.page-title-block .presentation-button {
-    padding-right: 40px;
-}
+    public static SupportMeta onFinished(String docId, String actor) {
+        if (supportMetaGetter == null) {
+            throw new UnsupportedOperationException();
+        }
+        return supportMetaGetter.get(docId, actor);
+    }
 
-.page-meta-block {
-    display: flex;
-    color: var(--znai-meta-color);
-    font-size: 12px;
-}
-
-.page-view-on a {
-    margin-left: 20px;
-    color: var(--znai-meta-color)
-}
-
-.page-support a {
-    margin-left: 20px;
-    color: var(--znai-meta-color)
-}
-
-.page-last-update-time {
-    color: var(--znai-meta-color);
+    public static void set(SupportMetaGetter supportMetaGetter) {
+        OnSupportFinishedServerHandler.supportMetaGetter = supportMetaGetter;
+    }
 }

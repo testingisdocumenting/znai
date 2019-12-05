@@ -4,5 +4,8 @@
   "viewOn": {
     "link": "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
     "title": "View On GitHub"
+  },
+  "support": {
+    "link": "https://twosigma.slack.com/archives/CEHLLNLMV"
   }
 }
