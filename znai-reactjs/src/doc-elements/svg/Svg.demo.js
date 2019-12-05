@@ -16,6 +16,9 @@
 
 import React from 'react'
 import {Svg} from './Svg'
+import {simulateState} from 'react-component-viewer'
+
+const [getActualSize, setActualSize] = simulateState(false)
 
 export function svgDemo(registry) {
     registry
@@ -41,10 +44,26 @@ export function svgDemo(registry) {
                  scale={0.5}
                  actualSize={true}/>
         ))
+        .add('flip props for preview', () => (
+            <div>
+                <button onClick={toggleActualSize}>toggle actual size</button>
+                <Svg svg={svg(300, null)}
+                     idsToReveal={["partC"]}
+                     scale={0.5}
+                     actualSize={getActualSize()}/>
+            </div>
+        ))
 }
 
-function svg() {
-    return "<svg version=\"1.1\" viewBox=\"0 0 512 512\" width=\"256\" height=\"256\"\n" +
+function toggleActualSize() {
+    setActualSize(!getActualSize())
+}
+
+function svg(width = 256, height = 256) {
+    const heightPart = height ? 'height="' + height + '"' : ''
+    const widthPart = width ? 'width="' + width + '"' : ''
+
+    return "<svg viewBox=\"0 0 512 512\" " + heightPart + " " + widthPart + "\n" +
         "\t xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" >\n" +
         "\t<style type=\"text/css\">\n" +
         "\t\t.st0{fill:#5CB8CD;}\n" +

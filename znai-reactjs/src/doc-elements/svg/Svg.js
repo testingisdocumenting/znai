@@ -49,18 +49,50 @@ class Svg extends Component {
     }
 
     componentDidMount() {
+        this.saveOriginalSize()
+        this.changeSizeWhenPropIsChanged()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.changeSizeWhenPropIsChanged()
+    }
+
+    // saving original size to restore on prop change back (to make preview mode correctly reflect changes)
+    saveOriginalSize() {
+        this.originalViewBox = this.svgNode.getAttribute('viewBox')
+        this.originalHeight = this.svgNode.getAttribute('height')
+        this.originalWidth = this.svgNode.getAttribute('width')
+    }
+
+    changeSizeWhenPropIsChanged() {
         if (this.props.actualSize) {
-            this.actualSizeSvg()
+            this.forceActualSizeSvg()
+        } else {
+            this.restoreOriginalSize()
         }
     }
 
-    actualSizeSvg() {
+    forceActualSizeSvg() {
         const {scale = 1} = this.props
 
         const bbox = this.svgNode.getBBox();
-        this.svgNode.setAttribute("width", (bbox.width * scale) + "px");
-        this.svgNode.setAttribute("height", (bbox.height * scale) + "px");
-        this.svgNode.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+        this.svgNode.setAttribute("width", (bbox.width * scale) + "px")
+        this.svgNode.setAttribute("height", (bbox.height * scale) + "px")
+        this.svgNode.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`)
+    }
+
+    restoreOriginalSize() {
+        const restore = (attrKey, value) => {
+            if (value !== null) {
+                this.svgNode.setAttribute(attrKey, value)
+            } else {
+                this.svgNode.removeAttribute(attrKey)
+            }
+        }
+
+        restore("width", this.originalWidth)
+        restore("height", this.originalHeight)
+        restore("viewBox", this.originalViewBox)
     }
 
     childrenReactElementsFromDomNode(domNode) {
