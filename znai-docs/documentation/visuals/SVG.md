@@ -16,6 +16,10 @@ If you have `groups` that you want to display while hiding everything else, pass
 
 In presentation mode, groups will be displayed one at a time in the order specified.
 
+To force all specified parts to appear at once add this before (either in the same section, or at the start of a document).
+
+    :include-meta: {allAtOnce: true}
+
 This SVG image is taken and modified from [https://www.shareicon.net/pyramid-piramid-draw-stock-877888](https://www.shareicon.net/pyramid-piramid-draw-stock-877888)
 
 :include-file: with-groups.svg {lang: "html"}
