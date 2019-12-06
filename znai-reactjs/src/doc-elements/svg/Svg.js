@@ -17,6 +17,8 @@
 import React, {Component} from 'react'
 import {svgAttributesToProps} from './svgUtils'
 
+import {isAllAtOnce} from '../meta/meta'
+
 import './Svg.css'
 
 class Svg extends Component {
@@ -98,9 +100,10 @@ class Svg extends Component {
     childrenReactElementsFromDomNode(domNode) {
         let children = []
 
-        const {idsToReveal, isPresentation, slideIdx} = this.props
+        const {idsToReveal, isPresentation, slideIdx, meta} = this.props
 
-        const idsForSlide = isPresentation && idsToReveal ? idsToReveal.slice(0, slideIdx + 1) : idsToReveal
+        const lastPartIdx = isAllAtOnce(meta) ? idsToReveal.length : slideIdx
+        const idsForSlide = isPresentation && idsToReveal ? idsToReveal.slice(0, lastPartIdx + 1) : idsToReveal
 
         if (!domNode) {
             return children
@@ -130,7 +133,13 @@ class Svg extends Component {
 
 const presentationSvgHandler = {
     component: Svg,
-    numberOfSlides: ({idsToReveal}) => idsToReveal ? idsToReveal.length : 1
+    numberOfSlides: ({idsToReveal, meta}) => {
+        if (isAllAtOnce(meta)) {
+            return 1
+        }
+
+        return idsToReveal ? idsToReveal.length : 1
+    }
 }
 
 export {Svg, presentationSvgHandler}

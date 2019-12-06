@@ -254,7 +254,7 @@ export class Documentation extends Component {
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowRight' && e.ctrlKey) {
             this.onNextPage()
         } else if (e.code === "Escape") {
-            this.setState({mode: DocumentationModes.DEFAULT})
+            this.onPresentationClose()
         }
     }
 
@@ -287,10 +287,14 @@ export class Documentation extends Component {
     mouseClickHandler() {
     }
 
+    saveMainPanelDomRef() {
+        this.mainPanelDom = document.querySelector(".main-panel")
+    }
+
     enableScrollListener() {
         // server side rendering guard
         if (window.addEventListener) {
-            this.mainPanelDom = document.querySelector(".main-panel")
+            this.saveMainPanelDomRef()
             this.mainPanelDom.addEventListener("scroll", this.updateCurrentPageSection)
         }
     }
@@ -395,7 +399,16 @@ export class Documentation extends Component {
     }
 
     onPresentationClose() {
-        this.setState({mode: DocumentationModes.DEFAULT})
+        this.switchToDefaultMode()
+    }
+
+    switchToDefaultMode() {
+        this.setState({mode: DocumentationModes.DEFAULT}, () => {
+            this.saveMainPanelDomRef()
+            this.extractPageSectionNodes()
+            this.updateCurrentPageSection()
+            this.enableScrollListener()
+        })
     }
 
     onTocItemClick(dirName, fileName) {
