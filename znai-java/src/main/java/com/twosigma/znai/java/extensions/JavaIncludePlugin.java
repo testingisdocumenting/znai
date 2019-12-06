@@ -76,7 +76,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     }
 
     private String extractContent(JavaCode javaCode) {
-        if (entry == null && entries == null) {
+        if (entry == null && entries.isEmpty()) {
             return javaCode.getFileContent();
         }
 

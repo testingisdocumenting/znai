@@ -17,6 +17,7 @@ snippets
     external-code-snippets
     inlined-code-snippets
     java
+    java-doc
     groovy
     typescript
     cpp

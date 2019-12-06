@@ -17,8 +17,8 @@ class HelloWorld {
      * <b>not</b> implementation details.
      *
      * @param p1 important parameter of something
-     * @param p2 sample offset according to the rules of the universe
-     * @return name of the best sample
+     * @param p2 sample <i>offset</i> according to the rules of the universe
+     * @return name of the <b>best</b> sample
      */
     public String sampleMethod(String p1, int p2) {
         validate();
