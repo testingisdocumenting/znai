@@ -15,7 +15,7 @@
  */
 
 import React, {Component} from 'react'
-import {jsonPromise} from "../../utils/json"
+import {jsonPromiseWithUrl} from "../../utils/json"
 
 class Support extends Component {
     constructor(props) {
@@ -27,7 +27,7 @@ class Support extends Component {
 
     componentDidMount() {
         if (!this.state.link) {
-            jsonPromise("/support/" + this.props.docMeta.id)
+            jsonPromiseWithUrl("/support/" + this.props.docMeta.id)
                 .then(supportMeta => this.setState({link: supportMeta.link}))
         }
     }

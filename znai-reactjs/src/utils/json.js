@@ -18,14 +18,14 @@ import * as Promise from 'promise'
 
 import {fullResourcePath} from './resourcePath'
 
-export {jsonPromise}
+export {jsonPromise, jsonPromiseWithUrl}
 
 function jsonPromise(docMeta, url) {
     url = fullResourcePath(docMeta.id, url)
     return jsonPromise(url)
 }
 
-function jsonPromise(url) {
+function jsonPromiseWithUrl(url) {
     return new Promise((resolve, reject) => {
         fetch(url, {credentials: 'same-origin'}).then((response) => {
             response.json().then((json) => {

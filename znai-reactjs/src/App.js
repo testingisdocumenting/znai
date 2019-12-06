@@ -58,6 +58,7 @@ import testData from "./doc-elements/TestData"
 
 import {themeRegistry} from "./theme/ThemeRegistry"
 import WithTheme from "./theme/WithTheme"
+import {svgDemo} from './doc-elements/svg/Svg.demo'
 
 const docMeta = {
     id: 'preview',
@@ -99,6 +100,7 @@ registries.add('snippets')
 registries.add('visuals')
     .registerAsGrid('Charts', 0, chartDemo)
     .registerAsTabs('Image Annotations', imageAnnotationDemo)
+    .registerAsGrid('SVG', 0, svgDemo)
     .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
     .registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
     .registerAsRows('Diagram Legend', diagramLegendDemo)

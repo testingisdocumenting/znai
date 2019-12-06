@@ -35,11 +35,64 @@ class Svg extends Component {
 
         const children = this.childrenReactElementsFromDomNode(dom.documentElement)
 
-        return <div className="svg content-block">
-            <svg {...svgProps}>
-                {children}
-            </svg>
-        </div>
+        return (
+            <div className="svg content-block">
+                <svg {...svgProps} ref={this.saveSvgNode}>
+                    {children}
+                </svg>
+            </div>
+        )
+    }
+
+    saveSvgNode = (node) => {
+        this.svgNode = node
+    }
+
+    componentDidMount() {
+        this.saveOriginalSize()
+        this.changeSizeWhenPropIsChanged()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.changeSizeWhenPropIsChanged()
+    }
+
+    // saving original size to restore on prop change back (to make preview mode correctly reflect changes)
+    saveOriginalSize() {
+        this.originalViewBox = this.svgNode.getAttribute('viewBox')
+        this.originalHeight = this.svgNode.getAttribute('height')
+        this.originalWidth = this.svgNode.getAttribute('width')
+    }
+
+    changeSizeWhenPropIsChanged() {
+        if (this.props.actualSize) {
+            this.forceActualSizeSvg()
+        } else {
+            this.restoreOriginalSize()
+        }
+    }
+
+    forceActualSizeSvg() {
+        const {scale = 1} = this.props
+
+        const bbox = this.svgNode.getBBox();
+        this.svgNode.setAttribute("width", (bbox.width * scale) + "px")
+        this.svgNode.setAttribute("height", (bbox.height * scale) + "px")
+        this.svgNode.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`)
+    }
+
+    restoreOriginalSize() {
+        const restore = (attrKey, value) => {
+            if (value !== null) {
+                this.svgNode.setAttribute(attrKey, value)
+            } else {
+                this.svgNode.removeAttribute(attrKey)
+            }
+        }
+
+        restore("width", this.originalWidth)
+        restore("height", this.originalHeight)
+        restore("viewBox", this.originalViewBox)
     }
 
     childrenReactElementsFromDomNode(domNode) {
@@ -47,7 +100,7 @@ class Svg extends Component {
 
         const {idsToReveal, isPresentation, slideIdx} = this.props
 
-        const idsForSlide = isPresentation && idsToReveal ? idsToReveal.slice(0, slideIdx + 1): idsToReveal
+        const idsForSlide = isPresentation && idsToReveal ? idsToReveal.slice(0, slideIdx + 1) : idsToReveal
 
         if (!domNode) {
             return children
@@ -75,7 +128,9 @@ class Svg extends Component {
     }
 }
 
-const presentationSvgHandler = {component: Svg,
-    numberOfSlides: ({idsToReveal}) => idsToReveal ? idsToReveal.length : 1}
+const presentationSvgHandler = {
+    component: Svg,
+    numberOfSlides: ({idsToReveal}) => idsToReveal ? idsToReveal.length : 1
+}
 
 export {Svg, presentationSvgHandler}
