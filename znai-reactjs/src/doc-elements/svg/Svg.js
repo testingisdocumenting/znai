@@ -79,7 +79,7 @@ class Svg extends Component {
 
         const bbox = this.svgNode.getBBox();
         this.svgNode.setAttribute("width", (bbox.width * scale) + "px")
-        this.svgNode.setAttribute("height", (bbox.height * scale) + "px")
+        this.svgNode.removeAttribute("height")
         this.svgNode.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`)
     }
 
