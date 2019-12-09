@@ -15,21 +15,17 @@
  */
 
 import React, {Component} from 'react'
-import {jsonPromiseWithUrl} from "../../utils/json"
+import {getSupportLinkPromise} from '../docMeta'
 
 class Support extends Component {
     constructor(props) {
-        super(props)
-        const support = this.props.docMeta.support
-        const link = (support && support.link) ? support.link : null
-        this.state = {link: link}
+        super(props);
+
+        this.state = {link: null}
     }
 
     componentDidMount() {
-        if (!this.state.link) {
-            jsonPromiseWithUrl("/support/" + this.props.docMeta.id)
-                .then(supportMeta => this.setState({link: supportMeta.link}))
-        }
+        getSupportLinkPromise().then(link => this.setState({link: link}));
     }
 
     render() {

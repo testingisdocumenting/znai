@@ -108,8 +108,7 @@ public class DocumentationServer {
         router.get("/support/:docId").handler(ctx -> {
             MultiMap params = ctx.request().params();
             String docId = params.get("docId");
-            String actor = params.get("actor");
-            new DocumentationSupportHandler(docId, actor).handle(ctx.request());
+            DocumentationSupportHandler.handle(docId, ctx.request());
         });
 
         router.delete("/:docId").handler(ctx -> {

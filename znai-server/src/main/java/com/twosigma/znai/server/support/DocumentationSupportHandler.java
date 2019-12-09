@@ -17,26 +17,27 @@
 package com.twosigma.znai.server.support;
 
 import com.twosigma.znai.utils.JsonUtils;
-import io.vertx.core.Handler;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 
-public class DocumentationSupportHandler implements Handler<HttpServerRequest> {
-    private final String docId;
-    private final String actor;
+public class DocumentationSupportHandler {
+    private static SupportMetaProvider supportMetaProvider;
 
-    public DocumentationSupportHandler(String docId, String actor) {
-        this.docId = docId;
-        this.actor = actor;
+    public static void setProvider(SupportMetaProvider supportMetaProvider) {
+        DocumentationSupportHandler.supportMetaProvider = supportMetaProvider;
     }
 
-    @Override
-    public void handle(HttpServerRequest request) {
+    public static void handle(String docId, HttpServerRequest request) {
         request.pause();
         HttpServerResponse response = request.response();
-        SupportMeta supportMeta = OnSupportFinishedServerHandler.onFinished(docId, actor);
-        response.putHeader("content-type", "application/json")
-                .end(JsonUtils.serialize(supportMeta));
+        if (supportMetaProvider == null) {
+            response.setStatusCode(404).end();
+        } else {
+            SupportMeta supportMeta = supportMetaProvider.provide(docId);
+            response.putHeader("content-type", "application/json")
+                    .end(JsonUtils.serialize(supportMeta));
+        }
+
         request.resume();
     }
 }

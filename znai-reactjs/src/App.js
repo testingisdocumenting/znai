@@ -70,9 +70,6 @@ const docMeta = {
     viewOn: {
         link: 'https://github.com/twosigma/TestingIsDocumenting/znai-cli/documentation',
         title: 'View On GitHub'
-    },
-    support: {
-        "link": "https://twosigma.slack.com/archives/CEHLLNLMV"
     }
 }
 

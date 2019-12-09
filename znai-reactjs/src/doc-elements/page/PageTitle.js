@@ -17,7 +17,7 @@
 import React from 'react'
 
 import "./PageTitle.css"
-import Support from "./Support";
+import Support from "./Support"
 
 const PageTitle = ({tocItem, onPresentationOpen, lastModifiedTime, docMeta, elementsLibrary}) => {
     const displayTitle = tocItem.dirName.length && tocItem.fileName !== "index"
@@ -34,7 +34,7 @@ const PageTitle = ({tocItem, onPresentationOpen, lastModifiedTime, docMeta, elem
             <div className="page-meta-block">
                 <ModifiedTime lastModifiedTime={lastModifiedTime}/>
                 <ViewOn docMeta={docMeta} tocItem={tocItem}/>
-                <Support docMeta={docMeta}/>
+                <Support/>
             </div>
         </React.Fragment>
     )
