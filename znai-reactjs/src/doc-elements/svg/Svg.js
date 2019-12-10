@@ -15,119 +15,71 @@
  */
 
 import React, {Component} from 'react'
-import {svgAttributesToProps} from './svgUtils'
-
 import {isAllAtOnce} from '../meta/meta'
+import {EmbeddedSvg} from './EmbeddedSvg'
 
 import './Svg.css'
 
 class Svg extends Component {
-    render() {
-        const {svg} = this.props
-
-        // server side rendering
-        if (typeof DOMParser === 'undefined') {
-            return null
-        }
-
-        const parser = new DOMParser()
-        const dom = parser.parseFromString(svg, 'application/xml')
-
-        const svgProps = svgAttributesToProps(dom.documentElement.attributes)
-
-        const children = this.childrenReactElementsFromDomNode(dom.documentElement)
-
-        return (
-            <div className="svg content-block">
-                <svg {...svgProps} ref={this.saveSvgNode}>
-                    {children}
-                </svg>
-            </div>
-        )
+    constructor(props) {
+        super(props)
+        this.state = {loadedSvg: null}
     }
 
-    saveSvgNode = (node) => {
-        this.svgNode = node
+    render() {
+        const {svg, svgSrc} = this.props
+        const {loadedSvg, error} = this.state
+
+        if (svg) {
+            return <EmbeddedSvg {...this.props}/>
+        }
+
+        if (error) {
+            return (
+                <div className="znai-svg-load-error content-block">
+                    Cannot load SVG: <a target="_blank" href={svgSrc}>{svgSrc}</a>
+                </div>
+            )
+        }
+
+        if (loadedSvg) {
+            return <EmbeddedSvg {...this.props} svg={loadedSvg}/>
+        }
+
+        return null
     }
 
     componentDidMount() {
-        this.saveOriginalSize()
-        this.changeSizeWhenPropIsChanged()
+        this.loadSvg()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        this.changeSizeWhenPropIsChanged()
-    }
-
-    // saving original size to restore on prop change back (to make preview mode correctly reflect changes)
-    saveOriginalSize() {
-        this.originalViewBox = this.svgNode.getAttribute('viewBox')
-        this.originalHeight = this.svgNode.getAttribute('height')
-        this.originalWidth = this.svgNode.getAttribute('width')
-    }
-
-    changeSizeWhenPropIsChanged() {
-        if (this.props.actualSize) {
-            this.forceActualSizeSvg()
-        } else {
-            this.restoreOriginalSize()
+        if (prevProps.svgSrc !== this.props.svgSrc) {
+            this.loadSvg()
         }
     }
 
-    forceActualSizeSvg() {
-        const {scale = 1} = this.props
-
-        const bbox = this.svgNode.getBBox();
-        this.svgNode.setAttribute("width", (bbox.width * scale) + "px")
-        this.svgNode.removeAttribute("height")
-        this.svgNode.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`)
-    }
-
-    restoreOriginalSize() {
-        const restore = (attrKey, value) => {
-            if (value !== null) {
-                this.svgNode.setAttribute(attrKey, value)
-            } else {
-                this.svgNode.removeAttribute(attrKey)
-            }
+    loadSvg() {
+        const {svg, svgSrc} = this.props
+        if (svg) {
+            this.setState({loadedSvg: svg, error: null})
+            return
         }
 
-        restore("width", this.originalWidth)
-        restore("height", this.originalHeight)
-        restore("viewBox", this.originalViewBox)
-    }
+        fetch(svgSrc, {cache: 'force-cache'})
+            .then(response => {
+                if (!response.ok) {
+                    throw Error(response.statusText)
+                }
 
-    childrenReactElementsFromDomNode(domNode) {
-        let children = []
-
-        const {idsToReveal, isPresentation, slideIdx, meta} = this.props
-
-        const lastPartIdx = isAllAtOnce(meta) ? idsToReveal.length : slideIdx
-        const idsForSlide = isPresentation && idsToReveal ? idsToReveal.slice(0, lastPartIdx + 1) : idsToReveal
-
-        if (!domNode) {
-            return children
-        }
-
-        const childNodes = domNode.childNodes || []
-        for (let i = 0, len = childNodes.length; i < len; i++) {
-            const child = childNodes[i]
-
-            const childProps = svgAttributesToProps(child.attributes)
-            const key = childProps.id ? childProps.id : i
-
-            if (idsToReveal && childProps.id && idsForSlide.indexOf(childProps.id) === -1) {
-                continue
-            }
-
-            const reactChildElement = child.nodeName === 'g' ?
-                <g key={key} {...childProps} dangerouslySetInnerHTML={{__html: child.innerHTML}}/> :
-                <g key={key} dangerouslySetInnerHTML={{__html: child.outerHTML}}/>
-
-            children.push(reactChildElement)
-        }
-
-        return children
+                return response.text()
+            }).then(svgFromResponse => {
+                this.setState({loadedSvg: svgFromResponse, error: null})
+            })
+            .catch(error => {
+                console.error(error)
+                this.setState({error: error.message})
+            })
     }
 }
 

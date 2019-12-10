@@ -60,6 +60,7 @@ import {themeRegistry} from "./theme/ThemeRegistry"
 import WithTheme from "./theme/WithTheme"
 import {svgDemo} from './doc-elements/svg/Svg.demo'
 import {svgPresentationDemo} from './doc-elements/svg/PresentationSvg.demo'
+import {embeddedSvgDemo} from './doc-elements/svg/EmbeddedSvg.demo'
 
 const docMeta = {
     id: 'preview',
@@ -98,6 +99,7 @@ registries.add('snippets')
 registries.add('visuals')
     .registerAsGrid('Charts', 0, chartDemo)
     .registerAsTabs('Image Annotations', imageAnnotationDemo)
+    .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)
     .registerAsGrid('SVG', 0, svgDemo)
     .registerAsGrid('SVG Presentation', 0, svgPresentationDemo)
     .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)

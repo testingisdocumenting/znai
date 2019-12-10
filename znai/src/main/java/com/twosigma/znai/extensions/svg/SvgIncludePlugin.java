@@ -23,14 +23,17 @@ import com.twosigma.znai.extensions.PluginParams;
 import com.twosigma.znai.extensions.PluginResult;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.ParserHandler;
+import com.twosigma.znai.structure.DocStructure;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
 public class SvgIncludePlugin implements IncludePlugin {
-    private Path svgPath;
+    private AuxiliaryFile svgAuxiliaryFile;
 
     @Override
     public String id() {
@@ -48,10 +51,14 @@ public class SvgIncludePlugin implements IncludePlugin {
                                 Path markupPath,
                                 PluginParams pluginParams) {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
-        svgPath = resourcesResolver.fullPath(pluginParams.getFreeParam());
+        DocStructure docStructure = componentsRegistry.docStructure();
+
+        String svgSrc = pluginParams.getFreeParam();
+        svgAuxiliaryFile = resourcesResolver.runtimeAuxiliaryFile(svgSrc);
 
         Map<String, Object> props = new LinkedHashMap<>();
-        props.put("svg", resourcesResolver.textContent(svgPath));
+        props.put("svgSrc", docStructure.fullUrl(svgAuxiliaryFile.getDeployRelativePath().toString()) +
+                "?timestamp=" + timestamp());
         props.putAll(pluginParams.getOpts().toMap());
 
         return PluginResult.docElement("Svg", props);
@@ -59,6 +66,15 @@ public class SvgIncludePlugin implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(svgPath));
+        return Stream.of(svgAuxiliaryFile);
+    }
+
+    // this is to force cache update on a client side
+    private long timestamp() {
+        try {
+            return Files.getLastModifiedTime(svgAuxiliaryFile.getPath()).toMillis();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
