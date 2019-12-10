@@ -16,15 +16,14 @@
 
 package com.twosigma.znai.java.extensions;
 
+import com.twosigma.znai.extensions.PluginResult;
+import com.twosigma.znai.extensions.api.ApiParameters;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.java.parser.JavaCode;
 import com.twosigma.znai.java.parser.JavaMethod;
-import com.twosigma.znai.java.parser.JavaMethodParam;
 import com.twosigma.znai.java.parser.JavaMethodReturn;
-import com.twosigma.znai.parser.MarkupParserResult;
-import com.twosigma.znai.template.TextTemplate;
-import com.twosigma.znai.utils.CollectionUtils;
-import com.twosigma.znai.utils.ResourceUtils;
+import com.twosigma.znai.java.parser.html.HtmlToDocElementConverter;
+import com.twosigma.znai.parser.docelement.DocElement;
 
 import java.util.List;
 import java.util.Map;
@@ -46,32 +45,40 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
         JavaMethod javaMethod = javaCode.findMethod(entry);
-        List<Map<Object, Object>> params = javaMethod.getParams().stream().map(p -> CollectionUtils.createMap("name", p.getName(),
-                "description", p.getJavaDocText(),
-                "type", p.getType())).collect(toList());
 
-        TextTemplate textTemplate = new TextTemplate("java-doc-params",
-                ResourceUtils.textContent("templates/javaDocParams.md"));
+        ApiParameters apiParameters = new ApiParameters();
+        addReturn(apiParameters, javaMethod);
+        javaMethod.getParams().forEach(param -> {
+            apiParameters.add(param.getName(), param.getType(), javaDocTextToDocElements(param.getJavaDocText()));
+        });
 
-        MarkupParserResult parserResult = componentsRegistry.defaultParser().parse(markupPath,
-                textTemplate.process(
-                        CollectionUtils.createMap("params", params,
-                                "return", createReturn(javaMethod))));
+        List<DocElement> docElements =
+                PluginResult.docElement("ApiParameters", apiParameters.toMap()).getDocElements();
 
-        return new JavaIncludeResult(parserResult.getDocElement().getContent(), extractText(javaMethod.getParams()));
+        return new JavaIncludeResult(docElements, extractText(javaMethod));
     }
 
-    private String extractText(List<JavaMethodParam> params) {
-        return params.stream().map(p -> p.getName() + " " + p.getType() + " " + p.getJavaDocText())
-                .collect(joining(" "));
+    private String extractText(JavaMethod javaMethod) {
+        JavaMethodReturn methodReturn = javaMethod.getJavaMethodReturn();
+
+        return javaMethod.getParams().stream().map(p -> p.getName() + " " + p.getType() + " " + p.getJavaDocText())
+                .collect(joining(" ")) + " " +
+                methodReturn.getType() + " " + methodReturn.getJavaDocText();
     }
 
-    private Map<String, ?> createReturn(JavaMethod javaMethod) {
+    private void addReturn(ApiParameters apiParameters, JavaMethod javaMethod) {
         JavaMethodReturn methodReturn = javaMethod.getJavaMethodReturn();
         if (methodReturn == null) {
-            return null;
+            return;
         }
 
-        return CollectionUtils.createMap("type", methodReturn.getType(), "description", methodReturn.getJavaDocText());
+        apiParameters.add("return", methodReturn.getType(),
+                javaDocTextToDocElements(methodReturn.getJavaDocText()));
+    }
+
+    private List<Map<String, Object>> javaDocTextToDocElements(String text) {
+        return HtmlToDocElementConverter.convert(componentsRegistry, markupPath, text).stream()
+                .map(DocElement::toMap)
+                .collect(toList());
     }
 }

@@ -60,6 +60,7 @@ export function snippetsDemo(registry) {
                                          readMore={true} readMoreVisibleLines={4}/>)
         .add('tabs with wide', () => <Tabs {...tabsContent({label: 'wide', wide: true})}
                                            elementsLibrary={elementsLibrary}/>)
+        .add('large java code with javadocs', () => <Snippet lang="java" snippet={largeJavaCodeWithJavaDocs()}/>)
 }
 
 export function snippetsTwoSidesDemo(registry) {
@@ -232,4 +233,49 @@ function contentSnippet(isRightSide) {
             "rightSide": isRightSide
         }
     }
+}
+
+function largeJavaCodeWithJavaDocs() {
+    return "/**\n" +
+        " * Top level conceptual description of a <i>Domain</i> problem.\n" +
+        " * <p>\n" +
+        " * To avoid <b>copy & paste</b> of the content consider to re-use information.\n" +
+        " */\n" +
+        "class HelloWorld {\n" +
+        "    /**\n" +
+        "     * Each year we hire students from different universities to increase\n" +
+        "     * <code>diversity</code>\n" +
+        "     */\n" +
+        "    private int numberOfStudents;\n" +
+        "\n" +
+        "    /**\n" +
+        "     * Conceptual description of a <i>Domain</i> problem.\n" +
+        "     * <p>\n" +
+        "     * It will work only if you put high level description here and\n" +
+        "     * <b>not</b> implementation details.\n" +
+        "     *\n" +
+        "     * @param p1 important parameter of something\n" +
+        "     * @param p2 sample offset according to the rules of the universe\n" +
+        "     * @return name of the best sample\n" +
+        "     */\n" +
+        "    public String sampleMethod(String p1, int p2) {\n" +
+        "        validate();\n" +
+        "        process(p2); // important comment\n" +
+        "        notifyAll(p1); // very important\n" +
+        "\n" +
+        "        return bestSample();\n" +
+        "    }\n" +
+        "\n" +
+        "    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n" +
+        "        // overloaded method\n" +
+        "    }\n" +
+        "\n" +
+        "    public void importantAction() {\n" +
+        "        // TODO important\n" +
+        "    }\n" +
+        "\n" +
+        "    public Data createData() {\n" +
+        "        // create data\n" +
+        "    }\n" +
+        "}"
 }
