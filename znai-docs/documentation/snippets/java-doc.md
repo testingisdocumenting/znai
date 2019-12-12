@@ -35,6 +35,24 @@ Method level `JavaDoc` text can be referred to as well by specifying the `entry`
 
 :include-java-doc-params: HelloWorld.java {entry: "sampleMethod"}
 
+# Method Params With References
+
+Use [Code References](snippets/external-code-snippets#code-references) file to link API params to reference pages.
+  
+To do that, define references in a csv file. Two columns format: `type-or-variable-name, link`.
+
+:include-file: references/javadoc-references-demo.csv {title: "references/javadoc-references-demo.csv"}
+
+    :include-java-doc-params: HelloWorld.java {
+        entry: "importantAction", 
+        referencesPath: "references/javadoc-references-demo.csv"}
+
+:include-java-doc-params: HelloWorld.java {
+    entry: "importantAction", 
+    referencesPath: "references/javadoc-references-demo.csv"}
+
+Parameters are now linked with reference section of the documentation. 
+
 # Enum Entries
 
 Use `include-java-enum-entries` to enumerate entries of a enum from a file.

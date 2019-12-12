@@ -32,7 +32,11 @@ class HelloWorld {
         // overloaded method
     }
 
-    public void importantAction() {
+    /**
+     * @param trader trader that performs action
+     * @param transaction transaction to perform action on
+     */
+    public void importantAction(Trader trader, Transaction transaction) {
         // TODO important
     }
 

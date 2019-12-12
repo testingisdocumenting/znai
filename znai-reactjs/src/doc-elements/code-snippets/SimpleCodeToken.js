@@ -17,8 +17,7 @@
 import React from 'react'
 
 import {isSimpleValueToken} from './codeUtils'
-import {documentationNavigation} from '../structure/DocumentationNavigation'
-import {isExternalUrl, onLocalUrlClick} from '../structure/links'
+import {LinkWrapper} from '../references/LinkWrapper'
 
 import 'prismjs/themes/prism-coy.css'
 
@@ -29,7 +28,7 @@ const SimpleCodeToken = ({token}) => {
 
     const className = (token.type === 'text') ? '' : 'token ' + token.type
     return token.link ?
-        renderLinkData(token, className):
+        renderLinkData(token, className) :
         renderSpan(token, className)
 }
 
@@ -42,19 +41,10 @@ function renderSpan(token, className) {
 }
 
 function renderLinkData(token, className) {
-    const isLocalNavigation = !isExternalUrl(token.link);
-
-    const url = isLocalNavigation ?
-        documentationNavigation.fullPageUrl(token.link):
-        token.link
-
-    const onClick = isLocalNavigation ? (e) => onLocalUrlClick(e, url) : null
-    const targetProp = isLocalNavigation ? {} : {target: "_blank"}
-
     return (
-        <a href={url} className={className} onClick={onClick} {...targetProp}>
+        <LinkWrapper referenceUrl={token.link} className={className}>
             {renderData(token)}
-        </a>
+        </LinkWrapper>
     )
 }
 
