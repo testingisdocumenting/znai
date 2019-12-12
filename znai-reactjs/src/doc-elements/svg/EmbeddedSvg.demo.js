@@ -18,16 +18,30 @@ import React from 'react'
 
 import {Svg} from './Svg'
 import {simulateState} from 'react-component-viewer'
+import {svg} from './svg.testdata'
 
 const [getActualSize, setActualSize] = simulateState(false)
-const [isValidSrc, setIsValidSrc] = simulateState(false)
 
-export function svgDemo(registry) {
+export function embeddedSvgDemo(registry) {
     registry
-        .add('simple', () => <Svg svgSrc="svg.svg"/>)
-        .add('error loading', () => <Svg svgSrc="not-found.svg"/>)
+        .add('simple', () => <Svg svg={svg()}/>)
+        .add('partially revealed', () => <Svg svg={svg()} idsToReveal={["partC"]}/>)
+        .add('actual size', () => (
+            <Svg svg={svg()}
+                 actualSize={true}/>
+        ))
+        .add('partially revealed with actual size', () => (
+            <Svg svg={svg()}
+                 idsToReveal={["partC"]}
+                 actualSize={true}/>
+        ))
+        .add('actual size with scale', () => (
+            <Svg svg={svg()}
+                 actualSize={true}
+                 scale={0.5}/>
+        ))
         .add('partially revealed with actual size and scale', () => (
-            <Svg svgSrc="svg.svg"
+            <Svg svg={svg()}
                  idsToReveal={["partC"]}
                  scale={0.5}
                  actualSize={true}/>
@@ -35,24 +49,14 @@ export function svgDemo(registry) {
         .add('flip actual size for preview mode', () => (
             <div>
                 <button onClick={toggleActualSize}>toggle actual size</button>
-                <Svg svgSrc="svg.svg"
+                <Svg svg={svg(300, null)}
                      idsToReveal={["partC"]}
                      scale={0.5}
                      actualSize={getActualSize()}/>
-            </div>
-        ))
-        .add('flip src for preview mode', () => (
-            <div>
-                <button onClick={toggleSrc}>toggle src</button>
-                <Svg svgSrc={isValidSrc() ? "svg.svg" : "not-found.svg"}/>
             </div>
         ))
 }
 
 function toggleActualSize() {
     setActualSize(!getActualSize())
-}
-
-function toggleSrc() {
-    setIsValidSrc(!isValidSrc())
 }
