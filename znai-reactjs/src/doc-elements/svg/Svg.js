@@ -77,7 +77,6 @@ class Svg extends Component {
                 this.setState({loadedSvg: svgFromResponse, error: null})
             })
             .catch(error => {
-                console.error(error)
                 this.setState({error: error.message})
             })
     }

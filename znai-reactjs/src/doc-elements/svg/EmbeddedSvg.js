@@ -100,14 +100,14 @@ class EmbeddedSvg extends Component {
     childrenReactElementsFromDomNode(domNode) {
         let children = []
 
+        if (!domNode) {
+            return children
+        }
+
         const {idsToReveal, isPresentation, slideIdx, meta} = this.props
 
         const lastPartIdx = isAllAtOnce(meta) ? idsToReveal.length : slideIdx
         const idsForSlide = isPresentation && idsToReveal ? idsToReveal.slice(0, lastPartIdx + 1) : idsToReveal
-
-        if (!domNode) {
-            return children
-        }
 
         const childNodes = domNode.childNodes || []
         for (let i = 0, len = childNodes.length; i < len; i++) {
