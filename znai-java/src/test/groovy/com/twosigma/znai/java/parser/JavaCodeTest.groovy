@@ -140,9 +140,9 @@ enum MyEnum {
         Assert.assertEquals("public void sampleMethod(String test)", method.signatureOnly)
 
         def params = method.params.collect { [it.name, it.javaDocText] }
-        assert params == [["test", "test param  <code>package.Param</code> "]]
+        assert params == [["test", "test param <code>package.Param</code>"]]
 
-        Assert.assertEquals("method level java doc  <code>package.Class</code> ", method.getJavaDocText())
+        Assert.assertEquals("method level java doc <code>package.Class</code>", method.getJavaDocText())
     }
 
     @Test
@@ -196,7 +196,7 @@ enum MyEnum {
         def params = method.params.collect { [it.name, it.javaDocText] }
         assert params == [["test", "test param"]]
 
-        Assert.assertEquals("method level java doc  <code>package.Class</code> ", method.getJavaDocText())
+        Assert.assertEquals("method level java doc <code>package.Class</code>", method.getJavaDocText())
     }
 
     @Test
@@ -213,7 +213,7 @@ enum MyEnum {
         Assert.assertEquals("Each year we hire students from different universities to increase\ndiversity\n",
                 javaCode.findJavaDoc("numberOfStudents"))
 
-        Assert.assertEquals("method level java doc  <code>package.Class</code> ",
+        Assert.assertEquals("method level java doc <code>package.Class</code>",
                 javaCode.findJavaDoc("sampleMethod"))
 
         Assert.assertEquals("overloaded method java doc",
@@ -247,7 +247,7 @@ enum MyEnum {
 
     @Test
     void "extracts java doc by entry name from interface"() {
-        Assert.assertEquals("method level java doc  <code>package.Class</code> ",
+        Assert.assertEquals("method level java doc <code>package.Class</code>",
                 javaCode.findJavaDoc("sampleMethod"))
     }
 
