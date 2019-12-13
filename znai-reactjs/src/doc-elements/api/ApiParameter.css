@@ -23,23 +23,21 @@
     padding-right: 20px;
 }
 
-.api-param-name-type-toggle {
+.api-param-cell.expandable .api-param-type-and-toggle {
+    cursor: pointer;
 }
 
-.api-param-name-type-toggle > .type-and-toggle {
+.api-param-type-and-toggle {
     display: flex;
     align-items: center;
 }
 
-.api-param-name-type-toggle > .type-and-toggle > .expand-toggle {
+.api-param-type-and-toggle > .expand-toggle {
     color: var(--znai-brand-primary-color);
 
     width: 10px;
     padding: 0 10px;
     margin-left: -10px;
-
-    user-select: none;
-    cursor: pointer;
 }
 
 .api-param-name-type-toggle-cell .content-block {
@@ -73,17 +71,6 @@
     border-bottom: none
 }
 
-.generic-api-single-row-param {
-    max-width: var(--znai-single-column-partial-width);
-
-    display: flex;
-    font-size: var(--znai-smaller-text-size);
-    font-family: var(--znai-regular-font-family);
-
-    padding: 16px 8px;
-    border-bottom: 1px solid var(--znai-snippets-inner-border-color);
-}
-
 .api-param-cell.expanded {
     padding-bottom: 0;
     border-bottom: none;
@@ -100,16 +87,9 @@
     justify-self: end;
 }
 
-.api-param-cell a {
-    text-decoration: none;
-}
-
-.api-param-name a {
-    color: var(--znai-api-key-color);
-}
-
 .api-param-type a {
     color: var(--znai-meta-color);
+    text-decoration: none;
 }
 
 .api-param-description-cell a {

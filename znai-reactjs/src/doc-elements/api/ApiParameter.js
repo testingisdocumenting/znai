@@ -57,7 +57,7 @@ class ApiParameter extends React.Component {
         const toggleOnClick = children ? this.toggleExpand : null
 
         const expandToggle = children && (
-            <div className="expand-toggle" onClick={toggleOnClick}>
+            <div className="expand-toggle">
                 {isExpanded ? '-' : '+'}
             </div>)
 
@@ -82,23 +82,18 @@ class ApiParameter extends React.Component {
                                 {name}
                             </LinkWrapper>
                         </div>
-                        <div className="type-and-toggle">
+                        <div className="api-param-type-and-toggle" onClick={toggleOnClick}>
                             {expandToggle}
                             <div className="api-param-type">
-                                <LinkWrapper referenceUrl={referenceUrl}>
-                                    {type}
-                                </LinkWrapper>
+                                {type}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className={descriptionClassName}>
-                    <LinkWrapper referenceUrl={referenceUrl}>
-                        <div className="api-param-reference-layout">
-                            <elementsLibrary.DocElement content={description} elementsLibrary={elementsLibrary}/>
-                            {!!referenceUrl && (<div className="api-param-reference">...</div>)}
-                        </div>
-                    </LinkWrapper>
+                    <div className="api-param-reference-layout">
+                        <elementsLibrary.DocElement content={description} elementsLibrary={elementsLibrary}/>
+                    </div>
                 </div>
                 {renderedChildren}
             </React.Fragment>
