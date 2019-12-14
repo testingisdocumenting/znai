@@ -187,11 +187,13 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         return description == null ? "" : extractJavaDocDescription(description);
     }
 
-    @SuppressWarnings("unchecked")
     private String extractJavaDocDescription(JavadocDescription description) {
         // TODO check if github java parser lib solved the problem with inlined tags UnsupportedOperation exception
         List<JavadocDescriptionElement> elements = getPrivateFieldValue(description,"elements");
-        return elements.stream().map(this::elementToText).collect(joining(" "));
+        return elements.stream()
+                .map(this::elementToText)
+                .filter(text -> !text.isEmpty())
+                .collect(joining(" "));
     }
 
     private String elementToText(JavadocDescriptionElement el) {
@@ -199,7 +201,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
             String result = isAfterInlinedTag ? el.toText().substring(1) : el.toText();
             isAfterInlinedTag = false;
 
-            return result;
+            return result.trim();
         }
 
         if (el instanceof JavadocInlineTag) {
@@ -225,7 +227,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         }
     }
 
-    private void extractTopLevelJavaDoc(TypeDeclaration declaration) {
+    private void extractTopLevelJavaDoc(TypeDeclaration<?> declaration) {
         if (topLevelJavaDoc == null) {
             JavadocComment javadocComment = declaration.getJavadocComment();
             topLevelJavaDoc = (javadocComment != null) ?
@@ -234,7 +236,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         }
     }
 
-    private void registerType(TypeDeclaration declaration) {
+    private void registerType(TypeDeclaration<?> declaration) {
         String name = declaration.getName().getIdentifier();
         String code = JavaCodeUtils.extractCode(lines, declaration);
 

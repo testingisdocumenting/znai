@@ -52,8 +52,11 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
             apiParameters.add(param.getName(), param.getType(), javaDocTextToDocElements(param.getJavaDocText()));
         });
 
+        Map<String, Object> props = apiParameters.toMap();
+        codeReferences.updateProps(props);
+
         List<DocElement> docElements =
-                PluginResult.docElement("ApiParameters", apiParameters.toMap()).getDocElements();
+                PluginResult.docElement("ApiParameters", props).getDocElements();
 
         return new JavaIncludeResult(docElements, extractText(javaMethod));
     }
@@ -61,9 +64,16 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
     private String extractText(JavaMethod javaMethod) {
         JavaMethodReturn methodReturn = javaMethod.getJavaMethodReturn();
 
-        return javaMethod.getParams().stream().map(p -> p.getName() + " " + p.getType() + " " + p.getJavaDocText())
-                .collect(joining(" ")) + " " +
-                methodReturn.getType() + " " + methodReturn.getJavaDocText();
+        String returnPart = methodReturn != null ?
+                "return " + methodReturn.getType() + " " + methodReturn.getJavaDocText():
+                "";
+        String paramsPart = javaMethod.getParams().stream()
+                .map(p -> p.getName() + " " + p.getType() + " " + p.getJavaDocText())
+                .collect(joining(" "));
+
+        return paramsPart +
+                (returnPart.isEmpty() ? "" : " ") +
+                returnPart;
     }
 
     private void addReturn(ApiParameters apiParameters, JavaMethod javaMethod) {

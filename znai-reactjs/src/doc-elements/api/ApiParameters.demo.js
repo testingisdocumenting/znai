@@ -46,8 +46,17 @@ const nestedParameters = [
 
 export function apiParametersDemo(registry) {
     registry
-        .add('flat parameters', () => <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>)
-        .add('nested parameters', () => <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>)
+        .add('flat parameters', () => (
+            <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>
+        ))
+        .add('flat parameters with references', () => (
+            <ApiParameters elementsLibrary={elementsLibrary}
+                           parameters={personParameters}
+                           references={paramsReferences()}/>
+        ))
+        .add('nested parameters', () => (
+            <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
+        ))
         .add('with text around', () => (
             <React.Fragment>
                 <ParagraphText/>
@@ -68,4 +77,16 @@ function simpleText() {
         {type: 'SimpleText', text: 'simple paragraph with text. simple paragraph with text. simple paragraph with text.'}
     ]
 }
+
+function paramsReferences() {
+    return {
+        'firstName': {
+            pageUrl: '#firstname'
+        },
+        'integer': {
+            pageUrl: '#integer'
+        }
+    }
+}
+
 
