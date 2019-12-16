@@ -19,9 +19,6 @@ package com.twosigma.znai.parser.table
 import org.junit.Before
 import org.junit.Test
 
-import static com.twosigma.webtau.Ddjt.actual
-import static com.twosigma.webtau.Ddjt.equal
-
 class MarkupTableDataTest {
     MarkupTableData table
 
@@ -39,8 +36,7 @@ class MarkupTableDataTest {
     @Test
     void "should rearange and filter out columns by case insensitive names"() {
         def newTable = table.withColumnsInOrder(['c', 'A'])
-        // TODO fix shortcut 'should ==' for maps
-        actual(newTable.toMap()).should(equal([columns:[[title: 'C'], [title: 'a']], data:[['c1', 'a1'], ['c2', 'a2']]]))
+        newTable.toMap().should == [columns:[[title: 'C'], [title: 'a']], data:[['c1', 'a1'], ['c2', 'a2']]]
     }
 
     @Test

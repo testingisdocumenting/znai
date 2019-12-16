@@ -18,9 +18,6 @@ package com.twosigma.znai.extensions.xml
 
 import org.junit.Test
 
-import static com.twosigma.webtau.Ddjt.actual
-import static com.twosigma.webtau.Ddjt.equal
-
 class XmlToMapRepresentationConverterTest {
     @Test
     void "converts children and attributes to their own map entries"() {
@@ -31,12 +28,12 @@ class XmlToMapRepresentationConverterTest {
 </ul>
 """)
 
-        actual(asMap).should equal([
-                tagName: 'ul', attributes: [[name: 'id', value: '"menu"'], [name: 'class', value: '"test"']],
-                children: [[tagName: 'li', attributes: [[name: 'id', value: '"menu-1"'], [name: 'class', value: '"item"']], children:[
+        asMap.should == [
+                tagName : 'ul', attributes: [[name: 'id', value: '"menu"'], [name: 'class', value: '"test"']],
+                children: [[tagName: 'li', attributes: [[name: 'id', value: '"menu-1"'], [name: 'class', value: '"item"']], children: [
                         [tagName: '', text: 'first']]],
-                           [tagName: 'li', attributes: [[name: 'id', value: '"menu-2"'], [name: 'class', value: '"item"']], children:[
+                           [tagName: 'li', attributes: [[name: 'id', value: '"menu-2"'], [name: 'class', value: '"item"']], children: [
                                    [tagName: '', text: 'second']
-                           ]]]])
+                           ]]]]
     }
 }
