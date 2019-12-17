@@ -19,8 +19,8 @@ package com.twosigma.znai.extensions.reactjs
 import com.twosigma.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
-import static com.twosigma.webtau.Ddjt.code
-import static com.twosigma.webtau.Ddjt.throwException
+import static com.twosigma.webtau.Matchers.code
+import static com.twosigma.webtau.Matchers.throwException
 
 class ReactJsComponentIncludePluginTest {
     @Test

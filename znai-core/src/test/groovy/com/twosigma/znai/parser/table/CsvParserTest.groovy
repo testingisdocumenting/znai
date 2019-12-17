@@ -18,8 +18,6 @@ package com.twosigma.znai.parser.table
 
 import org.junit.Test
 
-import static com.twosigma.webtau.Ddjt.equal
-
 class CsvParserTest {
     def expectedParsedData = ["columns": [
             ["title": "Account"],
@@ -39,7 +37,7 @@ class CsvParserTest {
 #91AGB1, 10, lunch
 """)
 
-        csvData.toMap().should equal(expectedParsedData)
+        csvData.toMap().should == expectedParsedData
     }
 
     @Test
@@ -50,7 +48,7 @@ class CsvParserTest {
 #91AGB1, 10, lunch
 """, "Account", "Price", "Description")
 
-        csvData.toMap().should equal(expectedParsedData)
+        csvData.toMap().should == expectedParsedData
     }
 
     @Test(expected = RuntimeException)

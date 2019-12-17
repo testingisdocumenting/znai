@@ -119,7 +119,7 @@
         <commonmark.version>0.9.0</commonmark.version>
         <antlr.version>4.5</antlr.version>
         <jackson.verson>2.10.1</jackson.verson>
-        <webtau.version>1.13</webtau.version>
+        <webtau.version>1.16</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
         <ant.version>1.10.5</ant.version>
         <ant-compress.version>1.5</ant-compress.version>

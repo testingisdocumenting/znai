@@ -19,8 +19,6 @@ package com.twosigma.znai.extensions.api
 import com.twosigma.znai.parser.TestComponentsRegistry
 import org.junit.Test
 
-import static com.twosigma.webtau.Ddjt.equal
-
 class ApiParametersCsvParserTest {
     @Test
     void "should convert dot separated names to api parameter with nested children"() {
@@ -37,7 +35,7 @@ nestedList.score, int, descr6
 'escaped.name', String, desc7
 """)
 
-        apiParameters.toMap().should equal([parameters: [
+        apiParameters.toMap().should == [parameters: [
                 [name: 'firstName', type: 'String', description: [[markdown: 'descr1', type: 'TestMarkdown']]],
                 [name: 'nested', type: 'object', description: [[markdown: 'descr2', type: 'TestMarkdown']], children:
                         [[name: 'zipCode', type: 'String', description: [[markdown: 'descr3', type: 'TestMarkdown']]],
@@ -48,6 +46,6 @@ nestedList.score, int, descr6
                 [name: 'nestedList', type: 'array of objects', description: [[markdown: 'descr5', type: 'TestMarkdown']], children: [
                         [name: 'score', type: 'int', description: [[markdown: 'descr6', type: 'TestMarkdown']]]]],
                 [name: 'escaped.name', type: 'String', description: [[markdown: 'desc7', type: 'TestMarkdown']]]
-        ]])
+        ]]
     }
 }
