@@ -25,10 +25,10 @@ class TableIncludePluginTest {
         def element = process('test-table.csv')
 
         element.should == [type: 'Table', table: [columns: [[title: 'Account'], [title: 'Price'], [title: 'Description']],
-                                                 data   : [[[[type: 'TestMarkup', markup: '#12BGD3']], [[type: 'TestMarkup', markup: '100']],
-                                                            [[type: 'TestMarkup', markup: 'custom table with a long attachment']]],
-                                                           [[[type: 'TestMarkup', markup: '#12BGD3']], [[type: 'TestMarkup', markup: '150']],
-                                                            [[type: 'TestMarkup', markup: 'chair']]]]]]
+                                                  data   : [[[[type: 'TestMarkup', markup: '#12BGD3']], [[type: 'TestMarkup', markup: '100']],
+                                                             [[type: 'TestMarkup', markup: 'custom table with a long attachment']]],
+                                                            [[[type: 'TestMarkup', markup: '#12BGD3']], [[type: 'TestMarkup', markup: '150']],
+                                                             [[type: 'TestMarkup', markup: 'chair']]]]]]
     }
 
     @Test
