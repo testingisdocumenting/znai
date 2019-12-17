@@ -24,7 +24,7 @@ class TableIncludePluginTest {
     void "should read table from csv by detecting format"() {
         def element = process('test-table.csv')
 
-        element.shoul == [type: 'Table', table: [columns: [[title: 'Account'], [title: 'Price'], [title: 'Description']],
+        element.should == [type: 'Table', table: [columns: [[title: 'Account'], [title: 'Price'], [title: 'Description']],
                                                  data   : [[[[type: 'TestMarkup', markup: '#12BGD3']], [[type: 'TestMarkup', markup: '100']],
                                                             [[type: 'TestMarkup', markup: 'custom table with a long attachment']]],
                                                            [[[type: 'TestMarkup', markup: '#12BGD3']], [[type: 'TestMarkup', markup: '150']],
