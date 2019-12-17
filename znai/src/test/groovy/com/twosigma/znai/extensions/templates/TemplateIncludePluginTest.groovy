@@ -34,7 +34,7 @@ class TemplateIncludePluginTest {
 
     @BeforeClass
     static void init() {
-        componentsRegistry = TestComponentsRegistry.INSTANCE
+        componentsRegistry = new TestComponentsRegistry()
         parser = new MarkdownParser(componentsRegistry)
 
         componentsRegistry.defaultParser = parser

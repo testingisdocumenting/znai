@@ -27,13 +27,18 @@ import java.nio.file.Paths
 class TestComponentsRegistry implements ComponentsRegistry {
     public static final TestComponentsRegistry INSTANCE = new TestComponentsRegistry()
 
-    private TestDocStructure docStructure = new TestDocStructure()
-    MarkupParser defaultParser = new TestMarkupParser()
-    MarkupParser markdownParser = new TestMarkdownParser()
+    private final TestDocStructure docStructure = new TestDocStructure()
+    private final MarkupParser markdownParser = new TestMarkdownParser()
+
+    private MarkupParser defaultParser = new TestMarkupParser()
 
     private GlobalAssetsRegistry assetsRegistry = new GlobalAssetsRegistry()
 
-    private TestComponentsRegistry() {
+    TestComponentsRegistry() {
+    }
+
+    void setDefaultParser(MarkupParser defaultParser) {
+        this.defaultParser = defaultParser
     }
 
     @Override
