@@ -19,23 +19,23 @@ import {svg} from './svg.testdata'
 
 export function svgPresentationDemo(registry) {
     registry
-        .add('svg presentation embedded', createPresentationDemo([{
+        .add('embedded', createPresentationDemo([{
             type: 'Svg',
             svg: svg(),
             idsToReveal: ['partA', 'partC']
         }]))
-        .add('svg presentation from src', createPresentationDemo([{
+        .add('from src', createPresentationDemo([{
             type: 'Svg',
             svgSrc: "svg.svg",
             idsToReveal: ['partA', 'partC']
         }]))
-        .add('svg presentation all at once', createPresentationDemo([{
+        .add('all at once', createPresentationDemo([{
             type: 'Svg',
             svgSrc: "svg.svg",
             meta: {allAtOnce: true},
             idsToReveal: ['partA', 'partC']
         }]))
-        .add('svg presentation no ids to reveal', createPresentationDemo([{
+        .add('no ids to reveal', createPresentationDemo([{
             type: 'Svg',
             svg: svg()
         }]))

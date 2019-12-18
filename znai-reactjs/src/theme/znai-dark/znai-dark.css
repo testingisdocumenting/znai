@@ -40,6 +40,15 @@
     --znai-toc-panel-icon-color-active: #e7c121;
     --znai-toc-panel-scrollbar-color: var(--znai-toc-panel-border-color);
 
+    --znai-presentation-title-background-color: var(--znai-toc-title-background-color);
+    --znai-presentation-title-color: var(--znai-toc-chapter-title-color);
+    --znai-presentation-slide-info-background-color: var(--znai-toc-title-background-color);
+    --znai-presentation-slide-info-color: var(--znai-toc-title-color);
+    --znai-presentation-slide-note-background-color: var(--znai-toc-title-background-color);
+    --znai-presentation-slide-note-color: var(--znai-toc-title-color);
+    --znai-presentation-border-color: var(--znai-toc-panel-border-color);
+    --znai-presentation-title-divider: #444;
+
     --znai-footer-color: #b0bcc2;
     --znai-footer-background-color: #1b2225;
 

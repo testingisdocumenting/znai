@@ -18,9 +18,11 @@ import React from 'react'
 
 import Icon from '../icons/Icon'
 
+import {PresentationHeading} from './PresentationHeading'
+
 import './SubHeading.css'
 
-export default function SubHeading({level, title, id}) {
+export function SubHeading({level, title, id}) {
     const Element = `h${level}`
 
     return (
@@ -30,3 +32,5 @@ export default function SubHeading({level, title, id}) {
         </Element>
     )
 }
+
+export const presentationSubHeading = {component: PresentationHeading, numberOfSlides: () => 1}
