@@ -28,7 +28,7 @@ function PageDefaultNextPrevNavigation({prevPageTocItem, nextPageTocItem, onNext
 }
 
 function DefaultPrevPageButton({tocItem, onClick}) {
-    return needRenderNavigationButton(tocItem) ? (
+    return tocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
             <span className="glyphicon glyphicon-chevron-left"/>
             <span className="next-prev-page-title">{tocItem.pageTitle} </span>
@@ -36,16 +36,11 @@ function DefaultPrevPageButton({tocItem, onClick}) {
 }
 
 function DefaultNextPageButton({tocItem, onClick}) {
-    return needRenderNavigationButton(tocItem) ? (
+    return tocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
             <span className="next-prev-page-title">{tocItem.pageTitle} </span>
             <span className="glyphicon glyphicon-chevron-right"/>
         </div>) : <div/>
-}
-
-function needRenderNavigationButton(tocItem) {
-    // we don't render next/prev buttons that will point to items without dir name (e.g. index page)
-    return tocItem && tocItem.dirName;
 }
 
 export {PageDefaultNextPrevNavigation, DefaultPrevPageButton, DefaultNextPageButton}
