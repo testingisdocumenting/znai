@@ -24,7 +24,7 @@ class Presentation extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {currentSlideIdx: 0, scaleRatio: defaultScaleRatio}
+        this.state = {currentSlideIdx: this.props.slideIdx || 0, scaleRatio: defaultScaleRatio}
     }
 
     render() {
@@ -56,7 +56,10 @@ class Presentation extends Component {
 
                     <div className="slide-info">
                         <div className="presentation-page-title">{pageTitle}</div>
-                        {pageTitle && (! isSectionTitleOnSlide) ? <span className="divider">&gt;&gt;</span> : null}
+                        {pageTitle && (! isSectionTitleOnSlide) ?
+                            <span className="presentation-title-divider">&gt;&gt;</span> :
+                            null
+                        }
                         <div className="presentation-section-title">{isSectionTitleOnSlide ? null : sectionTitle}</div>
                     </div>
 
@@ -169,13 +172,15 @@ class Presentation extends Component {
     }
 
     incrementSlide() {
-        const {presentationRegistry, onNextPage} = this.props
+        const {presentationRegistry, onNextPage, hasNextPage} = this.props
         const {currentSlideIdx} = this.state
         const newSlideIdx = currentSlideIdx + 1
 
         if (newSlideIdx >= presentationRegistry.numberOfSlides) {
-            this.setState({currentSlideIdx: 0, scaleRatio: defaultScaleRatio, isAppeared: false})
-            onNextPage()
+            if (hasNextPage) {
+                this.setState({currentSlideIdx: 0, scaleRatio: defaultScaleRatio, isAppeared: false})
+                onNextPage()
+            }
         } else {
             this.setState({currentSlideIdx: newSlideIdx, scaleRatio: defaultScaleRatio, isAppeared: false})
         }
@@ -183,4 +188,3 @@ class Presentation extends Component {
 }
 
 export default Presentation
-

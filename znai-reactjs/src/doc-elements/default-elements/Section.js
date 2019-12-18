@@ -17,6 +17,8 @@
 import React, {Component} from 'react'
 import {textSelection} from '../selected-text-extensions/TextSelection'
 
+import {PresentationHeading} from './PresentationHeading'
+
 import './Section.css'
 
 class Section extends Component {
@@ -53,7 +55,8 @@ class Section extends Component {
 }
 
 const PresentationTitle = ({title}) => {
-    return <h1>{title}</h1>
+    return <PresentationHeading level={1}
+                                title={title}/>
 }
 
 const presentationSectionHandler = {

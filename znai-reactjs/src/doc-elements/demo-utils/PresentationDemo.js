@@ -20,9 +20,17 @@ import {elementsLibrary, presentationElementHandlers} from '../DefaultElementsLi
 import PresentationRegistry from '../presentation/PresentationRegistry'
 import Presentation from '../presentation/Presentation'
 
-const docMeta = {id: "znai", title: "Znai", type: "User Guide"}
+const defaultDocMeta = {id: "znai", title: "Znai", type: "User Guide"}
 
-export function createPresentationDemo(content) {
+export function createPresentationDemo(content, cfg = {docMeta: defaultDocMeta, slideIdx: 0}) {
     const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, content)
-    return () => <Presentation docMeta={docMeta} presentationRegistry={presentationRegistry}/>
+    return () => (
+        <Presentation docMeta={cfg.docMeta}
+                      presentationRegistry={presentationRegistry}
+                      slideIdx={cfg.slideIdx}
+                      onNextPage={noOp}
+                      onPrevPage={noOp}/>)
+}
+
+function noOp() {
 }
