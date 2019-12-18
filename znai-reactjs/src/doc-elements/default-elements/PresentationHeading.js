@@ -14,26 +14,16 @@
  * limitations under the License.
  */
 
-export default {
-    "type": "Chart",
-    "innerRadius": 100.0,
-    "chartType": "Bar",
-    "data": [
-        [
-            "A",
-            10
-        ],
-        [
-            "B",
-            20
-        ],
-        [
-            "C",
-            15
-        ],
-        [
-            "D",
-            8
-        ]
-    ]
+import React from 'react'
+
+import './PresentationHeading.css'
+
+export function PresentationHeading({level, title, className}) {
+    const Element = `h${level}`
+
+    return (
+        <div className="presentation-heading-wrapper">
+            <Element className={className}>{title}</Element>
+        </div>
+    )
 }

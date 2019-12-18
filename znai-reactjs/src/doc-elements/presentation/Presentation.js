@@ -24,7 +24,7 @@ class Presentation extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {currentSlideIdx: 0, scaleRatio: defaultScaleRatio}
+        this.state = {currentSlideIdx: this.props.slideIdx || 0, scaleRatio: defaultScaleRatio}
     }
 
     render() {
@@ -56,7 +56,10 @@ class Presentation extends Component {
 
                     <div className="slide-info">
                         <div className="presentation-page-title">{pageTitle}</div>
-                        {pageTitle && (! isSectionTitleOnSlide) ? <span className="divider">&gt;&gt;</span> : null}
+                        {pageTitle && (! isSectionTitleOnSlide) ?
+                            <span className="presentation-title-divider">&gt;&gt;</span> :
+                            null
+                        }
                         <div className="presentation-section-title">{isSectionTitleOnSlide ? null : sectionTitle}</div>
                     </div>
 
@@ -185,4 +188,3 @@ class Presentation extends Component {
 }
 
 export default Presentation
-

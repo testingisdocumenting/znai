@@ -1,0 +1,19 @@
+.presentation-heading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.presentation-heading-wrapper h1,
+.presentation-heading-wrapper h2,
+.presentation-heading-wrapper h3,
+.presentation-heading-wrapper h4,
+.presentation-heading-wrapper h5,
+.presentation-heading-wrapper h6 {
+    /*display table is crucial here, without it long unbreakable titles will be moved sideways*/
+    display: table;
+    max-width: 70%;
+
+    text-align: center;
+    margin: 0;
+}
