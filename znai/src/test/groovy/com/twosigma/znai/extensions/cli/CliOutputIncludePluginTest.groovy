@@ -19,27 +19,26 @@ package com.twosigma.znai.extensions.cli
 import com.twosigma.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
-import static com.twosigma.webtau.Ddjt.code
-import static com.twosigma.webtau.Ddjt.equal
-import static com.twosigma.webtau.Ddjt.throwException
+import static com.twosigma.webtau.Matchers.code
+import static com.twosigma.webtau.Matchers.throwException
 
 class CliOutputIncludePluginTest {
     @Test
     void "should split file content into lines"() {
         def elements = process('captured-output.out')
-        elements.should equal(['lines': ['line one', 'line two', 'line three'], highlight: [], type: 'CliOutput'])
+        elements.should == ['lines': ['line one', 'line two', 'line three'], highlight: [], type: 'CliOutput']
     }
 
     @Test
     void "should convert text to indexes with full match"() {
         def elements = process('captured-output.out {highlight: "line two"}')
-        elements.highlight.should equal([1])
+        elements.highlight.should == [1]
     }
 
     @Test
     void "should convert text to indexes with partial match"() {
         def elements = process('captured-output.out {highlight: "two"}')
-        elements.highlight.should equal([1])
+        elements.highlight.should == [1]
     }
 
     @Test
@@ -52,7 +51,7 @@ class CliOutputIncludePluginTest {
     @Test
     void "should read lines to highlight from file"() {
         def elements = process('captured-output.out {highlightFile: "captured-matched-lines.txt"}')
-        elements.highlight.should equal([1, 2])
+        elements.highlight.should == [1, 2]
     }
 
     @Test

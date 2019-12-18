@@ -21,9 +21,6 @@ import com.twosigma.znai.parser.TestComponentsRegistry
 import org.junit.BeforeClass
 import org.junit.Test
 
-import static com.twosigma.webtau.Ddjt.actual
-import static com.twosigma.webtau.Ddjt.equal
-
 class OpenApiSpecTest {
     private static OpenApiSpec spec
     private static OpenApiOperation findOneCustomer
@@ -48,7 +45,7 @@ class OpenApiSpecTest {
                 ResourceUtils.textContent("open-api-spec.yaml"))
 
         def findOneCustomerYaml = yamlSpec.findOperationById('findOneCustomerUsingGET')
-        findOneCustomerYaml.toMap().should equal(findOneCustomerYaml.toMap())
+        findOneCustomerYaml.toMap().should == findOneCustomerYaml.toMap()
     }
 
     @Test
@@ -94,7 +91,7 @@ class OpenApiSpecTest {
                                    "query" | "size" | false      | "string" |  [[markdown: 'size', type: 'TestMarkdown']]
                                    "query" | "sort" | false      | "string" |  [[markdown: 'sort', type: 'TestMarkdown']] }
 
-        actual(findAllCustomers.toMap().parameters).should(equal(expectedParameters))
+        findAllCustomers.toMap().parameters.should == expectedParameters
     }
 
     @Test
@@ -129,10 +126,10 @@ class OpenApiSpecTest {
         def addPet = spec.findOperationById('addPet')
 
         addPet.parameters.size().should == 1
-        actual(addPet.parameters[0].schema).should(equal([type: 'object', required: ['name'],
+        addPet.parameters[0].schema.should == [type: 'object', required: ['name'],
                                                           properties: [name: [type: 'string',
                                                                               description: [[markdown: 'pet name', type: 'TestMarkdown']]],
-                                                                       tag: [type: 'string']]]))
+                                                                       tag: [type: 'string']]]
     }
 
     @Test
@@ -140,20 +137,19 @@ class OpenApiSpecTest {
         def operation = spec.findOperationById('findOneCustomerUsingGET')
         def okResponse = operation.responses.get(0)
 
-        // TODO should == need to be AST transformation, otherwise it is not working for maps
-        actual(okResponse.code).should(equal('200'))
-        actual(okResponse.schema.properties.firstName).should(equal([type: 'string']))
-        actual(okResponse.schema.properties.lastName).should(equal([type: 'string']))
+        okResponse.code.should == '200'
+        okResponse.schema.properties.firstName.should == [type: 'string']
+        okResponse.schema.properties.lastName.should == [type: 'string']
     }
 
     @Test
     void "should replace allOf with the ready to use schema definition"() {
         def addPet = spec.findOperationById('addPet')
 
-        actual(addPet.responses[0].schema).should(equal([type: 'object',
+        addPet.responses[0].schema.should == [type: 'object',
                                                          properties: [name: [type: 'string',
                                                                              description: [[markdown: 'pet name', type: 'TestMarkdown']]],
                                                                       tag: [type: 'string'],
-                                                                      id:[format: 'int64', type: 'integer']]]))
+                                                                      id:[format: 'int64', type: 'integer']]]
     }
 }

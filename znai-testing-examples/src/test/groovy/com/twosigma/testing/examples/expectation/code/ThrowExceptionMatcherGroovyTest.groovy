@@ -20,7 +20,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
 
-import static com.twosigma.webtau.Ddjt.*
+import static com.twosigma.webtau.Matchers.*
 
 class ThrowExceptionMatcherGroovyTest {
     @Rule
@@ -46,5 +46,4 @@ class ThrowExceptionMatcherGroovyTest {
             throw new IllegalArgumentException("negative not allowed")
         }
     }
-
 }
