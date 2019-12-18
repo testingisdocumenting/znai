@@ -214,6 +214,7 @@ export class Documentation extends Component {
                               presentationRegistry={presentationRegistry}
                               onClose={this.onPresentationClose}
                               onNextPage={this.onNextPage}
+                              hasNextPage={this.hasNextPage()}
                               onPrevPage={this.onPrevPage}/>
             }
             </WithTheme>
@@ -344,7 +345,7 @@ export class Documentation extends Component {
         const theme = this.theme
         const presentationRegistry = new PresentationRegistry(theme.elementsLibrary, theme.presentationElementHandlers, page)
 
-        const isIndex = page.tocItem.dirName.length === 0 && page.tocItem.fileName === "index"
+        const isIndex = tableOfContents.isIndex(page.tocItem)
         document.title = isIndex ? docMeta.title : docMeta.title + ": " + page.tocItem.pageTitle
 
         this.setState({presentationRegistry})
@@ -378,6 +379,10 @@ export class Documentation extends Component {
     get prevPageTocItem() {
         const {page} = this.state
         return tableOfContents.prevTocItem(page.tocItem)
+    }
+
+    hasNextPage() {
+        return this.nextPageTocItem !== null
     }
 
     onNextPage() {
