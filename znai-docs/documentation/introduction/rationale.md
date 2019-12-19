@@ -4,8 +4,8 @@ Keeping documentation up to date is a hard task.
 It's often the case that the more separated your documentation is from the code it's decribing, the more likely it won't be updated when a feature is added or changed.
 
 Depending on your product and clients, stale documentation can cause:
-* `icon:time` Lost time for users
-* `icon:thumbs-down` Reputational damage
+* `:icon:time` Lost time for users
+* `:icon:thumbs-down` Reputational damage
 
 # Part Of Workflow
 
