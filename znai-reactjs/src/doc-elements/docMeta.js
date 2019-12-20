@@ -47,9 +47,13 @@ function getSupportLinkPromise() {
         return supportLinkPromise
     }
     const support = docMeta.support
-    supportLinkPromise = support && support.link ?
-        new Promise((resolve, reject) => resolve(support.link))
-        : jsonPromise("/support/" + docMeta.id).then(supportMeta => supportMeta.link)
+    if (support && support.link) {
+        supportLinkPromise = new Promise((resolve, reject) => resolve(support.link));
+    } else if (support && support.urlToFetchSupportLink) {
+        supportLinkPromise = jsonPromise(support.urlToFetchSupportLink).then(supportMeta => supportMeta.link)
+    } else {
+        supportLinkPromise = new Promise((resolve, reject) => resolve(null));
+    }
     return supportLinkPromise
 }
 

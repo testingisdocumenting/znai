@@ -21,7 +21,7 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-import static com.twosigma.webtau.Ddjt.*
+import static com.twosigma.webtau.Matchers.*
 
 class MarkdownParserTest {
     static final TestComponentsRegistry componentsRegistry = TestComponentsRegistry.INSTANCE

@@ -19,8 +19,6 @@ package com.twosigma.znai.extensions.api
 import com.twosigma.znai.parser.TestComponentsRegistry
 import org.junit.Test
 
-import static com.twosigma.webtau.Ddjt.equal
-
 class ApiParametersJsonParserTest {
     @Test
     void "reads api params json and parses description to create doc elemements"() {
@@ -59,11 +57,11 @@ class ApiParametersJsonParserTest {
 ]
 """)
 
-        apiParameters.toMap().should equal([parameters:[
+        apiParameters.toMap().should == [parameters:[
                 [name: 'param1', type: 'String', description: [[markdown: 'description 1', type: 'TestMarkdown']]],
                 [name: 'param2', type: 'Integer', description: [[markdown: 'description 2', type: 'TestMarkdown']], children:[
                         [name: 'param21', type: 'String', description:[[markdown: 'description 21', type: 'TestMarkdown']], children:[
                                 [name: 'param31', type: 'Boolean', description: [[markdown: 'description 31', type: 'TestMarkdown']]]]],
-                        [name: 'param22', type: 'Integer', description: [[markdown: 'description 22', type: 'TestMarkdown']]]]]]])
+                        [name: 'param22', type: 'Integer', description: [[markdown: 'description 22', type: 'TestMarkdown']]]]]]]
     }
 }

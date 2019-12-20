@@ -32,7 +32,7 @@ import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
 import CustomReactJSComponent from './custom/CustomReactJSComponent'
 import Anchor from './default-elements/Anchor'
 import Link from './default-elements/Link'
-import SubHeading from './default-elements/SubHeading'
+import {SubHeading, presentationSubHeading} from './default-elements/SubHeading'
 import ListItem from './bullets/ListItem'
 import Paragraph from './default-elements/Paragraph'
 import GraphVizSvg from './graphviz/GraphVizSvg'
@@ -83,7 +83,7 @@ library.Anchor = Anchor
 library.Paragraph = Paragraph
 
 library.SubHeading = SubHeading
-presentationElementHandlers.SubHeading = {component: SubHeading, numberOfSlides: () => 1}
+presentationElementHandlers.SubHeading = presentationSubHeading
 
 library.BlockQuote = BlockQuote
 presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler

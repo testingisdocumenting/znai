@@ -45,6 +45,10 @@ class TableOfContents {
         return this.tocItems.filter((ti) => ti.dirName === tocItem.dirName && ti.fileName === tocItem.fileName).length > 0
     }
 
+    isIndex(tocItem) {
+        return tocItem.dirName.length === 0 && tocItem.fileName === "index"
+    }
+
     nextTocItem(tocItem) {
         for (let i = 0, len = this.tocItems.length; i < len; i++) {
             const ti = this.tocItems[i]
@@ -60,7 +64,8 @@ class TableOfContents {
         for (let i = this.tocItems.length - 1; i >= 0; i--) {
             const ti = this.tocItems[i]
             if (ti.fileName === tocItem.fileName && ti.dirName === tocItem.dirName) {
-                return (i - 1) >= 0 ? this.tocItems[i - 1] : null
+                const prev = (i - 1) >= 0 ? this.tocItems[i - 1] : null
+                return prev && this.isIndex(prev) ? null : prev
             }
         }
 

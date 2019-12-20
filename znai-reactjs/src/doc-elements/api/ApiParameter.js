@@ -17,6 +17,7 @@
 import React from 'react'
 
 import ApiParameters from './ApiParameters'
+import {LinkWrapper} from '../references/LinkWrapper'
 
 import './ApiParameter.css'
 
@@ -42,9 +43,12 @@ class ApiParameter extends React.Component {
             width
         } = this.state
 
+        const reference = this.findReference()
+
         const commonClassName = ' api-param-cell' +
             (isExpanded ? ' expanded' : '') +
             (children ? ' expandable' : '') +
+            (reference ? ' with-reference' : '') +
             (nestedLevel > 0 ? ' nested-' + nestedLevel : '')
 
         const nameTypeClassName = 'api-param-name-type-toggle-cell' + commonClassName
@@ -67,19 +71,29 @@ class ApiParameter extends React.Component {
             </React.Fragment>
         ): null
 
+        const referenceUrl = reference ? reference.pageUrl : null
+
         return (
             <React.Fragment>
-                <div className={nameTypeClassName} onClick={toggleOnClick}>
+                <div className={nameTypeClassName}>
                     <div className="api-param-name-type-toggle" ref={node => this.nameAndTypeNode = node}>
-                        <div className="name">{name}</div>
-                        <div className="type-and-toggle">
+                        <div className="api-param-name">
+                            <LinkWrapper referenceUrl={referenceUrl}>
+                                {name}
+                            </LinkWrapper>
+                        </div>
+                        <div className="api-param-type-and-toggle" onClick={toggleOnClick}>
                             {expandToggle}
-                            <div className="type">{type}</div>
+                            <div className="api-param-type">
+                                {type}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className={descriptionClassName}>
-                    <elementsLibrary.DocElement content={description} elementsLibrary={elementsLibrary}/>
+                    <div className="api-param-reference-layout">
+                        <elementsLibrary.DocElement content={description} elementsLibrary={elementsLibrary}/>
+                    </div>
                 </div>
                 {renderedChildren}
             </React.Fragment>
@@ -93,6 +107,23 @@ class ApiParameter extends React.Component {
 
     toggleExpand = () => {
         this.setState(prev => ({isExpanded: !prev.isExpanded}))
+    }
+
+    findReference() {
+        const {references, type, name} = this.props
+        if (!references) {
+            return null
+        }
+
+        const byType = references[type]
+        if (byType) {
+            return byType
+        }
+
+        const byName = references[name]
+        if (byName) {
+            return byName
+        }
     }
 }
 

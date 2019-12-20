@@ -22,8 +22,8 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-import static com.twosigma.webtau.Ddjt.code
-import static com.twosigma.webtau.Ddjt.throwException
+import static com.twosigma.webtau.Matchers.code
+import static com.twosigma.webtau.Matchers.throwException
 
 class FlowChartIncludePluginTest {
     @Before

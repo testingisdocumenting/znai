@@ -14,26 +14,29 @@
  * limitations under the License.
  */
 
-export default {
-    "type": "Chart",
-    "innerRadius": 100.0,
-    "chartType": "Line",
-    "data": [
-        [
-            2,
-            10
-        ],
-        [
-            4,
-            20
-        ],
-        [
-            12,
-            15
-        ],
-        [
-            20,
-            8
-        ]
-    ]
+class HelloWorld {
+    /**
+     * method level java doc {@link package.Class}
+     * @param test test param {@link package.Param}
+     */
+    public void sampleMethod(String test) {
+        statement1();
+        statement2();
+
+        if (logic) {
+            doAction();
+        }
+    }
+
+    /**
+     * overloaded method java doc
+     * @param test test param
+     * @param name name of the param
+     * @return list of samples
+     */
+    public List<String> sampleMethod(String test,
+                                     List<String> name) {
+        statement3();
+        statement4();
+    }
 }

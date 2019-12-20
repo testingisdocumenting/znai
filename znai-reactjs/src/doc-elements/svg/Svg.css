@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-.svg {
-    margin-top: 15px;
-    margin-bottom: 15px;
+.znai-svg-load-error {
+    padding: 16px;
+    background-color: rgba(41, 0, 7, 0.91);
+    color: #eee;
 }

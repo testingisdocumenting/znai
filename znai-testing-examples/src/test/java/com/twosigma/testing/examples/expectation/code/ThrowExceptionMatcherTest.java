@@ -20,8 +20,8 @@ import org.junit.Test;
 
 import java.util.regex.Pattern;
 
-import static com.twosigma.webtau.Ddjt.code;
-import static com.twosigma.webtau.Ddjt.throwException;
+import static com.twosigma.webtau.Matchers.code;
+import static com.twosigma.webtau.Matchers.throwException;
 
 public class ThrowExceptionMatcherTest {
     @Test
@@ -44,5 +44,4 @@ public class ThrowExceptionMatcherTest {
             throw new IllegalArgumentException("negative are not allowed");
         }
     }
-
 }

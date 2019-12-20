@@ -19,10 +19,33 @@ package com.twosigma.znai.java.extensions
 import com.twosigma.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
-import static com.twosigma.webtau.Ddjt.code
-import static com.twosigma.webtau.Ddjt.throwException
+import static com.twosigma.webtau.Matchers.code
+import static com.twosigma.webtau.Matchers.throwException
 
 class JavaIncludePluginTest {
+    @Test
+    void "full source"() {
+        def result = process("Simple.java", "")
+        result.should == "class Simple {\n" +
+                "    void methodA() {\n" +
+                "\n" +
+                "    }\n" +
+                "\n" +
+                "    void methodB(String p) {\n" +
+                "        doB();\n" +
+                "    }\n" +
+                "\n" +
+                "    void methodB(String p, Boolean b) {\n" +
+                "        doBPlus();\n" +
+                "    }\n" +
+                "\n" +
+                "    Data createData() {\n" +
+                "        return construction(a, b,\n" +
+                "                            c, d);\n" +
+                "    }\n" +
+                "}"
+    }
+
     @Test
     void "includes multiple entries of java method signatures"() {
         def result = process("Simple.java", "{entries: ['methodA', 'createData'], signatureOnly: true}")

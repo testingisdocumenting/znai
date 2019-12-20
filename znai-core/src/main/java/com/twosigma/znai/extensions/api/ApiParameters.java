@@ -26,7 +26,7 @@ import static java.util.stream.Collectors.toList;
 public class ApiParameters {
     private ApiParameter root;
 
-    ApiParameters() {
+    public ApiParameters() {
         root = new ApiParameter("root", "root", Collections.emptyList());
     }
 

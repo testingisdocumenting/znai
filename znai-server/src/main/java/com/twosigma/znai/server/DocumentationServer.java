@@ -33,7 +33,6 @@ import com.twosigma.znai.server.landing.LandingDocEntry;
 import com.twosigma.znai.server.landing.LandingUrlContentHandler;
 import com.twosigma.znai.server.sockets.JsonWebSocketHandler;
 import com.twosigma.znai.server.sockets.JsonWebSocketHandlerComposition;
-import com.twosigma.znai.server.support.DocumentationSupportHandler;
 import com.twosigma.znai.server.upload.DocumentationUploadHandler;
 import com.twosigma.znai.server.upload.OnUploadFinishedServerHandlers;
 import com.twosigma.znai.server.upload.UnzipTask;
@@ -103,12 +102,6 @@ public class DocumentationServer {
 
             staticCommonResources.handle(new RoutingContextDecorator(
                     router.route("/" + params.get("docId") + "/static"), ctx));
-        });
-
-        router.get("/support/:docId").handler(ctx -> {
-            MultiMap params = ctx.request().params();
-            String docId = params.get("docId");
-            DocumentationSupportHandler.handle(docId, ctx.request());
         });
 
         router.delete("/:docId").handler(ctx -> {

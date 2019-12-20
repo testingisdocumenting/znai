@@ -25,8 +25,6 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-import static com.twosigma.webtau.Ddjt.equal
-
 class TemplateIncludePluginTest {
     private static TestComponentsRegistry componentsRegistry
     private static MarkupParser parser
@@ -53,15 +51,15 @@ text
 # header two
 """)
 
-        content.should equal([[title  : 'header one', id: 'header-one', type: 'Section',
-                               content: [[type   : 'Paragraph',
-                                          content: [[text: 'text', type: 'SimpleText']]],
-                                         [type: 'Paragraph', content: [[text: 'text before section', type: 'SimpleText']]]]],
-                              [title  : 'Template Header One', id: 'template-header-one', type: 'Section',
-                               content: [[type: 'Paragraph', content: [[text: 'template body one', type: 'SimpleText']]]]],
-                              [title  : 'Template Header Two', id: 'template-header-two', type: 'Section',
-                               content: [[type: 'Paragraph', content: [[text: 'template body two', type: 'SimpleText']]]]],
-                              [title: 'header two', id: 'header-two', type: 'Section']])
+        content.should == [[title  : 'header one', id: 'header-one', type: 'Section',
+                            content: [[type   : 'Paragraph',
+                                       content: [[text: 'text', type: 'SimpleText']]],
+                                      [type: 'Paragraph', content: [[text: 'text before section', type: 'SimpleText']]]]],
+                           [title  : 'Template Header One', id: 'template-header-one', type: 'Section',
+                            content: [[type: 'Paragraph', content: [[text: 'template body one', type: 'SimpleText']]]]],
+                           [title  : 'Template Header Two', id: 'template-header-two', type: 'Section',
+                            content: [[type: 'Paragraph', content: [[text: 'template body two', type: 'SimpleText']]]]],
+                           [title: 'header two', id: 'header-two', type: 'Section']]
     }
 
     private void parse(String markdown) {

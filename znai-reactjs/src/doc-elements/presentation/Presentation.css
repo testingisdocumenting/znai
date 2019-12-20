@@ -24,6 +24,7 @@
 .presentation .header {
     display: flex;
     flex: 0 0 80px;
+    border-bottom: 1px solid var(--znai-presentation-border-color);
 }
 
 .presentation .header .product-info {
@@ -31,18 +32,17 @@
     flex: 0 0 280px;
     align-items: center;
 
-    color: #e7e7e7;
-    background-color: #383b3f;
+    color: var(--znai-presentation-title-color);
+    background-color: var(--znai-presentation-title-background-color);
+    border-right: 1px solid var(--znai-presentation-border-color);
 
     padding: 0 10px;
 }
 
 .presentation .header .product-info .product-title {
-    background-color: #383b3f;
     margin-left: 10px;
     font-size: 22px;
     padding: 10px;
-    color: #e7e7e7;
 }
 
 .presentation .header .product-info img {
@@ -52,16 +52,16 @@
 .presentation .header .slide-info {
     display: flex;
     align-items: center;
-    background-color: #4b4f54;
-    color: #fff;
+    background-color: var(--znai-presentation-slide-info-background-color);
+    color: var(--znai-presentation-slide-info-color);
     font-size: 26px;
     flex: 1;
     padding-left: 30px;
 }
 
-.presentation .header .slide-info .divider {
+.presentation-title-divider {
     margin: 0 20px;
-    color: #999;
+    color: var(--znai-presentation-title-divider);
 }
 
 .presentation .header .controls {
@@ -69,46 +69,34 @@
     flex: 0 0 80px;
     align-items: center;
     justify-content: space-between;
-    color: #e7e7e7;
-    background-color: #4b4f54;
+
+    background-color: var(--znai-presentation-slide-info-background-color);
+    color: var(--znai-presentation-slide-info-color);
 }
 
 .presentation .header .controls .close {
-    color: #fff;
+    color: var(--znai-presentation-slide-info-color);
     font-size: 14px;
     margin: 20px;
     cursor: pointer;
 }
 
-.presentation .header .info .presentation-page-title {
-    display: flex;
-    align-items: center;
-    font-size: 30px;
-    margin-left: 100px;
-    color: #555;
-}
-
-.presentation .header .info .presentation-section-title {
-    margin-left: 100px;
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    text-transform: uppercase;
-    color: #555;
-}
-
 .presentation-footer {
+    background-color: var(--znai-presentation-slide-note-background-color);
+    color: var(--znai-presentation-slide-note-color);
+
+    border-top: 1px solid var(--znai-presentation-border-color);
+
     flex: 0 0 50px;
     display: flex;
     font-size: 28px;
     align-items: center;
     justify-content: center;
-    color: #e7e7e7;
-    background-color: #383b3f;
 }
 
 .presentation-footer.size-only {
     background: none;
+    border: none;
 }
 
 .presentation .slide-area {

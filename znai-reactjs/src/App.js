@@ -52,14 +52,17 @@ import {chartDemo} from './doc-elements/charts/Chart.demo'
 import {tableDemo} from './doc-elements/table/Table.demo'
 import {diagramLegendDemo} from "./doc-elements/diagrams/DiagramLegend.demo"
 import {keyboardShortcutsDemo} from "./doc-elements/keyboard/KeyboardShortcut.demo"
-
-import {Documentation} from "./doc-elements/Documentation"
-import testData from "./doc-elements/TestData"
+import {svgDemo} from './doc-elements/svg/Svg.demo'
+import {svgPresentationDemo} from './doc-elements/svg/PresentationSvg.demo'
+import {embeddedSvgDemo} from './doc-elements/svg/EmbeddedSvg.demo'
+import {presentationDemo} from './doc-elements/presentation/Presentation.demo'
 
 import {themeRegistry} from "./theme/ThemeRegistry"
 import WithTheme from "./theme/WithTheme"
-import {svgDemo} from './doc-elements/svg/Svg.demo'
-import {svgPresentationDemo} from './doc-elements/svg/PresentationSvg.demo'
+
+import {Documentation} from "./doc-elements/Documentation"
+import testData from "./doc-elements/TestData"
+import {subHeadingPresentationDemo} from './doc-elements/default-elements/PresentationSubHeading.demo'
 
 const docMeta = {
     id: 'preview',
@@ -83,7 +86,6 @@ registries.add('snippets')
     .registerAsGrid('Yaml Code Snippet', 0, yamlSnippetDemo)
     .registerAsGrid('Json', 0, jsonDemo)
     .registerAsGrid('Xml', 0, xmlDemo)
-    .registerAsGrid('Xml Presentation', 0, xmlPresentationDemo)
     .registerAsGrid('Latex', 0, latexDemo)
     .registerAsGrid('Jsx', 0, jsxDemo)
     .registerAsGrid('DocUtils', 0, docUtilsDemo)
@@ -98,10 +100,9 @@ registries.add('snippets')
 registries.add('visuals')
     .registerAsGrid('Charts', 0, chartDemo)
     .registerAsTabs('Image Annotations', imageAnnotationDemo)
+    .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)
     .registerAsGrid('SVG', 0, svgDemo)
-    .registerAsGrid('SVG Presentation', 0, svgPresentationDemo)
     .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
-    .registerAsTabs('GraphViz SVG Presentation', graphVizSvgPresentationDemo)
     .registerAsRows('Diagram Legend', diagramLegendDemo)
     .registerAsGrid('Keyboard shortcuts', 0, keyboardShortcutsDemo)
 
@@ -111,6 +112,13 @@ registries.add('layout')
     .registerAsGrid('Tables', 0, tableDemo)
     .registerAsTabs('TOC', tocPanelDemo)
     .registerAsGrid('Typography', 0, typographyDemo)
+
+registries.add('presentation')
+    .registerAsTabs('Layout', presentationDemo)
+    .registerAsTabs('SubHeading', subHeadingPresentationDemo)
+    .registerAsTabs('Xml Presentation', xmlPresentationDemo)
+    .registerAsTabs('SVG', svgPresentationDemo)
+    .registerAsTabs('GraphViz SVG', graphVizSvgPresentationDemo)
 
 registries.add('screens')
     .registerAsTabs('Documentation Preparation', documentationPreparationDemo)

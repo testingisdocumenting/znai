@@ -17,6 +17,7 @@
 import React, {Component} from 'react'
 
 import {pageTypesRegistry} from './PageTypesRegistry'
+import {PresentationHeading} from '../default-elements/PresentationHeading'
 
 class Page extends Component {
     render() {
@@ -44,7 +45,9 @@ class Page extends Component {
 }
 
 const PresentationTitle = ({tocItem}) => {
-    return <h1 className="presentation-title">{tocItem.pageTitle}</h1>
+    return <PresentationHeading className="presentation-title"
+                                level={1}
+                                title={tocItem.pageTitle}/>
 }
 
 const presentationPageHandler = {component: PresentationTitle,

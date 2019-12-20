@@ -208,11 +208,17 @@ export class Documentation extends Component {
     renderPresentationMode() {
         const {presentationRegistry, docMeta} = this.state
 
-        return <Presentation docMeta={docMeta}
-                             presentationRegistry={presentationRegistry}
-                             onClose={this.onPresentationClose}
-                             onNextPage={this.onNextPage}
-                             onPrevPage={this.onPrevPage}/>
+        return (
+            <WithTheme>{() =>
+                <Presentation docMeta={docMeta}
+                              presentationRegistry={presentationRegistry}
+                              onClose={this.onPresentationClose}
+                              onNextPage={this.onNextPage}
+                              hasNextPage={this.hasNextPage()}
+                              onPrevPage={this.onPrevPage}/>
+            }
+            </WithTheme>
+        )
     }
 
     renderPrintMode() {
@@ -265,14 +271,14 @@ export class Documentation extends Component {
         }
 
         const selection = window.getSelection()
-        if (! selection.rangeCount) {
+        if (!selection.rangeCount) {
             return
         }
 
         const rangeAt = selection.getRangeAt(0)
         const text = selection.toString()
 
-        if (! text || selection.isCollapsed) {
+        if (!text || selection.isCollapsed) {
             textSelection.clear()
         } else {
             const {page} = this.state
@@ -339,7 +345,7 @@ export class Documentation extends Component {
         const theme = this.theme
         const presentationRegistry = new PresentationRegistry(theme.elementsLibrary, theme.presentationElementHandlers, page)
 
-        const isIndex = page.tocItem.dirName.length === 0 && page.tocItem.fileName === "index"
+        const isIndex = tableOfContents.isIndex(page.tocItem)
         document.title = isIndex ? docMeta.title : docMeta.title + ": " + page.tocItem.pageTitle
 
         this.setState({presentationRegistry})
@@ -373,6 +379,10 @@ export class Documentation extends Component {
     get prevPageTocItem() {
         const {page} = this.state
         return tableOfContents.prevTocItem(page.tocItem)
+    }
+
+    hasNextPage() {
+        return this.nextPageTocItem !== null
     }
 
     onNextPage() {
@@ -594,8 +604,8 @@ export class Documentation extends Component {
             return pageSectionNodes
                 .filter(isNodeIdPresentInSections)
                 .map((n, idx) => {
-                return {idTitle: pageSections[idx], rect: n.getBoundingClientRect()}
-            })
+                    return {idTitle: pageSections[idx], rect: n.getBoundingClientRect()}
+                })
 
             // case where znai page has an example of rendered markdown
             // it generates extra nodes matching section-title css, but that node is not part
