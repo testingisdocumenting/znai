@@ -26,6 +26,8 @@ import com.twosigma.znai.html.reactjs.ReactJsBundle;
 import com.twosigma.znai.parser.MarkupParser;
 import com.twosigma.znai.parser.MarkupParserResult;
 import com.twosigma.znai.parser.commonmark.MarkdownParser;
+import com.twosigma.znai.reference.DocReferences;
+import com.twosigma.znai.reference.GlobalDocReferences;
 import com.twosigma.znai.search.*;
 import com.twosigma.znai.structure.*;
 import com.twosigma.znai.utils.FileUtils;
@@ -65,6 +67,7 @@ public class WebSite {
     private LocalSearchEntries localSearchEntries;
 
     private TableOfContents toc;
+    private GlobalDocReferences globalDocReferences;
     private WebSiteDocStructure docStructure;
     private Footer footer;
     private Map<TocItem, DocPageReactProps> pagePropsByTocItem;
@@ -77,6 +80,7 @@ public class WebSite {
     private final ReactJsBundle reactJsBundle;
     private final WebResource tocJavaScript;
     private final WebResource globalAssetsJavaScript;
+    private final WebResource globalDocReferencesJavaScript;
     private final WebResource searchIndexJavaScript;
 
     private final MultipleLocalLocationsResourceResolver localResourceResolver;
@@ -101,6 +105,7 @@ public class WebSite {
         reactJsBundle = siteConfig.reactJsBundle;
         tocJavaScript = WebResource.withPath("toc.js");
         globalAssetsJavaScript = WebResource.withPath("assets.js");
+        globalDocReferencesJavaScript = WebResource.withPath("documentation-references.js");
         searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
         auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
         markupParsingConfiguration = MarkupParsingConfigurations.byName(cfg.documentationType);
@@ -125,6 +130,10 @@ public class WebSite {
         WebSiteResourcesProviders.add(initFileBasedWebSiteExtension(siteConfig));
 
         reset();
+    }
+
+    public Configuration getCfg() {
+        return cfg;
     }
 
     public static Configuration withRoot(Path path) {
@@ -166,6 +175,7 @@ public class WebSite {
 
     public void parse() {
         createTopLevelToc();
+        parseGlobalReferences();
         parseMarkupsMeta();
         parseMarkups();
         parseFooter();
@@ -179,6 +189,7 @@ public class WebSite {
         generateSearchIndex();
         deployToc();
         deployGlobalAssets();
+        deployGlobalDocReferences();
         deployAuxiliaryFiles();
         deployResources();
     }
@@ -222,6 +233,13 @@ public class WebSite {
         return toc;
     }
 
+    public DocReferences updateDocReferences() {
+        globalDocReferences.reload();
+        deployGlobalDocReferences();
+
+        return globalDocReferences.getDocReferences();
+    }
+
     public void redeployAuxiliaryFileIfRequired(Path path) {
         if (auxiliaryFilesRegistry.requiresDeployment(path)) {
             deployAuxiliaryFile(auxiliaryFilesRegistry.auxiliaryFileByPath(path));
@@ -244,6 +262,7 @@ public class WebSite {
         pagePropsByTocItem = new HashMap<>();
         extraJavaScriptsInFront = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScriptsInFront.add(globalAssetsJavaScript);
+        extraJavaScriptsInFront.add(globalDocReferencesJavaScript);
         extraJavaScriptsInFront.add(tocJavaScript);
         extraJavaScriptsInBack = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScriptsInBack.add(searchIndexJavaScript);
@@ -270,6 +289,11 @@ public class WebSite {
         componentsRegistry.setDocStructure(docStructure);
     }
 
+    private void parseGlobalReferences() {
+        reportPhase("parse global references");
+        globalDocReferences = new GlobalDocReferences(componentsRegistry.resourceResolver(), cfg.globalReferencesPath);
+    }
+
     /**
      * Table of Contents has a page placement information available in the external resource.
      * Additional page structure information comes after parsing file. Hence phased approach.
@@ -288,6 +312,13 @@ public class WebSite {
         reportPhase("deploying global plugin assets");
         String globalAssetsJson = JsonUtils.serializePrettyPrint(componentsRegistry.globalAssetsRegistry().getAssets());
         deployer.deploy(globalAssetsJavaScript, "globalAssets = " + globalAssetsJson);
+    }
+
+    private void deployGlobalDocReferences() {
+        reportPhase("deploying global documentation references");
+
+        String globalReferences = JsonUtils.serializePrettyPrint(globalDocReferences.getDocReferences().toMap());
+        deployer.deploy(globalDocReferencesJavaScript, "docReferences = " + globalReferences);
     }
 
     private void parseMarkupsMeta() {
@@ -547,6 +578,7 @@ public class WebSite {
         private Path docRootPath;
         private Path footerPath;
         private Path extensionsDefPath;
+        private Path globalReferencesPath;
         private List<WebResource> webResources;
         private String id;
         private String title;
@@ -587,6 +619,11 @@ public class WebSite {
 
         public Configuration withExtensionsDefPath(Path path) {
             extensionsDefPath = path.toAbsolutePath();
+            return this;
+        }
+
+        public Configuration withGlobalReferencesPath(Path path) {
+            globalReferencesPath = path.toAbsolutePath();
             return this;
         }
 
@@ -643,6 +680,14 @@ public class WebSite {
         public Configuration withEnabledPreview(boolean isPreviewEnabled) {
             this.isPreviewEnabled = isPreviewEnabled;
             return this;
+        }
+
+        public Path getGlobalReferencesPath() {
+            return globalReferencesPath;
+        }
+
+        public Path getDocRootPath() {
+            return docRootPath;
         }
 
         public WebSite deployTo(Path path) {

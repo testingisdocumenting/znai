@@ -14,13 +14,22 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.preview;
+package com.twosigma.znai.reference;
 
-import java.nio.file.Path;
+import java.util.Collections;
+import java.util.Map;
 
-public interface FileChangeHandler {
-    void onTocChange(Path path);
-    void onGlobalDocReferencesChange(Path path);
-    void onDocMetaChange(Path path);
-    void onChange(Path path);
+/**
+ * maintains a list of references (code references, text references, etc) and page-urls associated with them
+ */
+public class DocReferences {
+    private final Map<String, Object> references;
+
+    public DocReferences(Map<String, Object> references) {
+        this.references = references;
+    }
+
+    public Map<String, Object> toMap() {
+        return Collections.unmodifiableMap(references);
+    }
 }

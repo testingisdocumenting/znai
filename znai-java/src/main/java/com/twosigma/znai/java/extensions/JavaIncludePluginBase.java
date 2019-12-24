@@ -20,7 +20,7 @@ import com.twosigma.znai.core.AuxiliaryFile;
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.extensions.PluginParams;
 import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.extensions.file.CodeReferences;
+import com.twosigma.znai.extensions.file.CodeReferencesTrait;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.java.parser.JavaCode;
 import com.twosigma.znai.parser.ParserHandler;
@@ -38,7 +38,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
     protected PluginParams pluginParams;
     protected String entry;
     protected List<String> entries;
-    protected CodeReferences codeReferences;
+    protected CodeReferencesTrait codeReferencesTrait;
     private JavaIncludeResult javaIncludeResult;
 
     @Override
@@ -46,7 +46,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        this.codeReferences = new CodeReferences(componentsRegistry, pluginParams);
+        this.codeReferencesTrait = new CodeReferencesTrait(componentsRegistry, pluginParams);
         this.componentsRegistry = componentsRegistry;
         this.markupPath = markupPath;
         this.pluginParams = pluginParams;
@@ -70,7 +70,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.concat(
                 Stream.of(AuxiliaryFile.builtTime(fullPath)),
-                codeReferences.auxiliaryFiles());
+                codeReferencesTrait.auxiliaryFiles());
     }
 
     @Override

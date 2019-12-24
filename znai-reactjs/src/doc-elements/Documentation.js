@@ -46,6 +46,8 @@ import {pageTypesRegistry} from './page/PageTypesRegistry'
 
 import {injectGlobalOverridesCssLink} from './CssOverrides'
 
+import {updateGlobalDocReferences} from './references/globalDocReferences'
+
 import './DocumentationLayout.css'
 import './search/Search.css'
 
@@ -93,6 +95,7 @@ export class Documentation extends Component {
         this.onTocUpdate = this.onTocUpdate.bind(this)
         this.onDocMetaUpdate = this.onDocMetaUpdate.bind(this)
         this.onMultiplePagesUpdate = this.onMultiplePagesUpdate.bind(this)
+        this.onDocReferencesUpdate = this.onDocReferencesUpdate.bind(this)
         this.onPageGenError = this.onPageGenError.bind(this)
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
@@ -168,6 +171,7 @@ export class Documentation extends Component {
         const preview = docMeta.previewEnabled ? <Preview active={true}
                                                           onPageUpdate={this.onPageUpdate}
                                                           onMultiplePagesUpdate={this.onMultiplePagesUpdate}
+                                                          onDocReferencesUpdate={this.onDocReferencesUpdate}
                                                           onTocUpdate={this.onTocUpdate}
                                                           onDocMetaUpdate={this.onDocMetaUpdate}
                                                           onError={this.onPageGenError}/> : null
@@ -490,6 +494,13 @@ export class Documentation extends Component {
         } else {
             this.navigateToPageAndDisplayChange(listOfPageProps[0], updatePagesReference)
         }
+    }
+
+    onDocReferencesUpdate(docReferences) {
+        this.updatePageAndDetectChangePosition(() => {
+            updateGlobalDocReferences(docReferences)
+            this.changePage({page: this.state.page})
+        })
     }
 
     onPageGenError(error) {

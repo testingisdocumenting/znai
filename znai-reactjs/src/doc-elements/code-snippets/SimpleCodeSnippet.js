@@ -21,6 +21,7 @@ import LineOfTokens from './LineOfTokens.js'
 import SimpleCodeToken from './SimpleCodeToken.js'
 import {convertToList} from '../propsUtils'
 import {isAllAtOnce} from '../meta/meta';
+import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'
 
 import './tokens.css'
 import './SimpleCodeSnippet.css'
@@ -65,13 +66,17 @@ class SimpleCodeSnippet extends Component {
             this.linesOfTokens.slice(0, this.readMoreVisibleLines) :
             this.linesOfTokens
 
+        const mergedReferences = mergeWithGlobalDocReferences(references)
+
         return (
             <pre>
-                {linesToRender.map((tokens, idx) => <LineOfTokens key={idx} tokens={tokens}
-                                                                  references={references}
-                                                                  isHighlighted={highlightIsVisible && this.isHighlighted(idx, tokens)}
-                                                                  isPresentation={isPresentation}
-                                                                  TokenComponent={SimpleCodeToken}/>)}
+                {linesToRender.map((tokens, idx) => (
+                    <LineOfTokens key={idx} tokens={tokens}
+                                  references={mergedReferences}
+                                  isHighlighted={highlightIsVisible && this.isHighlighted(idx, tokens)}
+                                  isPresentation={isPresentation}
+                                  TokenComponent={SimpleCodeToken}/>
+                ))}
                 {this.renderReadMore()}
             </pre>
         )

@@ -21,7 +21,7 @@ import com.twosigma.znai.core.AuxiliaryFile
 import com.twosigma.znai.core.ComponentsRegistry
 import com.twosigma.znai.extensions.PluginParams
 import com.twosigma.znai.extensions.PluginResult
-import com.twosigma.znai.extensions.file.CodeReferences
+import com.twosigma.znai.extensions.file.CodeReferencesTrait
 import com.twosigma.znai.extensions.include.IncludePlugin
 import com.twosigma.znai.groovy.parser.GroovyCode
 import com.twosigma.znai.parser.ParserHandler
@@ -32,7 +32,7 @@ import java.util.stream.Stream
 
 class GroovyIncludePlugin implements IncludePlugin {
     private Path fullPath
-    private CodeReferences codeReferences
+    private CodeReferencesTrait codeReferences
 
     @Override
     String id() {
@@ -49,7 +49,7 @@ class GroovyIncludePlugin implements IncludePlugin {
                          ParserHandler parserHandler,
                          Path markupPath,
                          PluginParams pluginParams) {
-        codeReferences = new CodeReferences(componentsRegistry, pluginParams)
+        codeReferences = new CodeReferencesTrait(componentsRegistry, pluginParams)
         fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam())
         String fileContent = componentsRegistry.resourceResolver().textContent(fullPath)
         String entry = pluginParams.getOpts().get("entry")

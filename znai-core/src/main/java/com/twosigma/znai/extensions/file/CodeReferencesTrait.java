@@ -3,12 +3,9 @@ package com.twosigma.znai.extensions.file;
 import com.twosigma.znai.core.AuxiliaryFile;
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.parser.table.CsvParser;
-import com.twosigma.znai.parser.table.MarkupTableData;
+import com.twosigma.znai.reference.DocReferencesParser;
 
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -18,13 +15,13 @@ import java.util.stream.Stream;
  *
  * sort of like a plugin trait. Maybe a good idea to formalize traits on plugins interface level.
  */
-public class CodeReferences {
+public class CodeReferencesTrait {
     private final ComponentsRegistry componentsRegistry;
 
     private final Path referencesFullPath;
     private final String referencesPath;
 
-    public CodeReferences(ComponentsRegistry componentsRegistry, PluginParams pluginParams) {
+    public CodeReferencesTrait(ComponentsRegistry componentsRegistry, PluginParams pluginParams) {
         this.componentsRegistry = componentsRegistry;
 
         this.referencesPath = pluginParams.getOpts().get("referencesPath", null);
@@ -42,16 +39,8 @@ public class CodeReferences {
     }
 
     private Map<String, Object> buildReferences() {
-        MarkupTableData tableData = CsvParser.parseWithHeader(
-                componentsRegistry.resourceResolver().textContent(referencesPath),
-                "reference", "url");
-
-        Map<String, Object> result = new LinkedHashMap<>();
-        tableData.forEachRow(row -> {
-            result.put(row.get(0), Collections.singletonMap("pageUrl", row.get(1)));
-        });
-
-        return result;
+        return DocReferencesParser.parse(
+                componentsRegistry.resourceResolver().textContent(referencesPath)).toMap();
     }
 
     public Stream<AuxiliaryFile> auxiliaryFiles() {

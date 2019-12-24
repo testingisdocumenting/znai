@@ -17,6 +17,7 @@
 package com.twosigma.znai.server.preview;
 
 import com.twosigma.znai.console.ConsoleOutputs;
+import com.twosigma.znai.reference.DocReferences;
 import com.twosigma.znai.structure.DocMeta;
 import com.twosigma.znai.website.WebSite;
 import com.twosigma.znai.html.HtmlPageAndPageProps;
@@ -51,6 +52,16 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
             previewSocket.sendPages(toc.getTocItems().stream()
                     .map(previewWebSite::regeneratePage)
                     .map(HtmlPageAndPageProps::getProps));
+        });
+    }
+
+    @Override
+    public void onGlobalDocReferencesChange(Path docReferencePath) {
+        ConsoleOutputs.out("global doc references changed: ", docReferencePath);
+
+        execute(() -> {
+            DocReferences docReferences = previewWebSite.updateDocReferences();
+            previewSocket.sendDocReferences(docReferences);
         });
     }
 
