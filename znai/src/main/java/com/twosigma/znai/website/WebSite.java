@@ -67,7 +67,7 @@ public class WebSite {
     private LocalSearchEntries localSearchEntries;
 
     private TableOfContents toc;
-    private GlobalDocReferences globalDocReferences;
+    private final GlobalDocReferences globalDocReferences;
     private WebSiteDocStructure docStructure;
     private Footer footer;
     private Map<TocItem, DocPageReactProps> pagePropsByTocItem;
@@ -112,6 +112,8 @@ public class WebSite {
         globalSearchEntries = new GlobalSearchEntries();
         localSearchEntries = new LocalSearchEntries();
         auxiliaryFilesLastUpdateTime = new HashMap<>();
+
+        globalDocReferences = new GlobalDocReferences(cfg.globalReferencesPath);
 
         docMeta.setId(siteConfig.id);
         if (siteConfig.isPreviewEnabled) {
@@ -175,7 +177,6 @@ public class WebSite {
 
     public void parse() {
         createTopLevelToc();
-        parseGlobalReferences();
         parseMarkupsMeta();
         parseMarkups();
         parseFooter();
@@ -262,7 +263,11 @@ public class WebSite {
         pagePropsByTocItem = new HashMap<>();
         extraJavaScriptsInFront = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScriptsInFront.add(globalAssetsJavaScript);
-        extraJavaScriptsInFront.add(globalDocReferencesJavaScript);
+
+        if (globalDocReferences.isPresent()) {
+            extraJavaScriptsInFront.add(globalDocReferencesJavaScript);
+        }
+
         extraJavaScriptsInFront.add(tocJavaScript);
         extraJavaScriptsInBack = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScriptsInBack.add(searchIndexJavaScript);
@@ -289,11 +294,6 @@ public class WebSite {
         componentsRegistry.setDocStructure(docStructure);
     }
 
-    private void parseGlobalReferences() {
-        reportPhase("parse global references");
-        globalDocReferences = new GlobalDocReferences(componentsRegistry.resourceResolver(), cfg.globalReferencesPath);
-    }
-
     /**
      * Table of Contents has a page placement information available in the external resource.
      * Additional page structure information comes after parsing file. Hence phased approach.
@@ -315,6 +315,10 @@ public class WebSite {
     }
 
     private void deployGlobalDocReferences() {
+        if (!globalDocReferences.isPresent()) {
+            return;
+        }
+
         reportPhase("deploying global documentation references");
 
         String globalReferences = JsonUtils.serializePrettyPrint(globalDocReferences.getDocReferences().toMap());

@@ -99,6 +99,4 @@ public class FileIncludePlugin implements IncludePlugin {
 
         return fileName.substring(dotLastIdx + 1);
     }
-
-
 }

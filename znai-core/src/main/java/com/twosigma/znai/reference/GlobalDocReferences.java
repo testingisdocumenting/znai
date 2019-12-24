@@ -16,24 +16,29 @@
 
 package com.twosigma.znai.reference;
 
-import com.twosigma.znai.core.ResourcesResolver;
+import com.twosigma.znai.utils.FileUtils;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 
 public class GlobalDocReferences {
     private final Path globalReferencesPath;
     private DocReferences docReferences;
 
-    private final ResourcesResolver resourcesResolver;
-
-    public GlobalDocReferences(ResourcesResolver resourcesResolver, Path globalReferencesPath) {
-        this.resourcesResolver = resourcesResolver;
+    public GlobalDocReferences(Path globalReferencesPath) {
         this.globalReferencesPath = globalReferencesPath;
         this.reload();
     }
 
+    public boolean isPresent() {
+        return Files.exists(globalReferencesPath);
+    }
+
     public void reload() {
-        docReferences = DocReferencesParser.parse(resourcesResolver.textContent(globalReferencesPath));
+        docReferences = isPresent() ?
+                DocReferencesParser.parse(FileUtils.fileTextContent(globalReferencesPath)):
+                new DocReferences(Collections.emptyMap());
     }
 
     public DocReferences getDocReferences() {
