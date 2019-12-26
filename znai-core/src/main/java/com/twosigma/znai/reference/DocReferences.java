@@ -26,10 +26,10 @@ public class DocReferences {
     private final Map<String, Object> references;
 
     public DocReferences(Map<String, Object> references) {
-        this.references = references;
+        this.references = Collections.unmodifiableMap(references);
     }
 
     public Map<String, Object> toMap() {
-        return Collections.unmodifiableMap(references);
+        return references;
     }
 }

@@ -626,6 +626,8 @@ public class WebSite {
             return this;
         }
 
+        // TODO add support for JSON
+        // https://github.com/twosigma/znai/issues/339
         public Configuration withGlobalReferencesPath(Path path) {
             globalReferencesPath = path.toAbsolutePath();
             return this;
