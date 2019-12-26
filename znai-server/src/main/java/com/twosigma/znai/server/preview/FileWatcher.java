@@ -115,11 +115,15 @@ public class FileWatcher implements AuxiliaryFileListener {
 
     private void register(Path path) {
         try {
-            if (! Files.isDirectory(path)) {
+            if (!Files.isDirectory(path)) {
                 path = path.getParent();
             }
 
-            if (pathByKey.values().contains(path)) {
+            if (path.endsWith(".vertx")) {
+                return;
+            }
+
+            if (pathByKey.containsValue(path)) {
                 return;
             }
 
