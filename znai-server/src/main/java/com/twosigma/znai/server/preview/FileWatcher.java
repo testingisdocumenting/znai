@@ -20,6 +20,7 @@ import com.sun.nio.file.SensitivityWatchEventModifier;
 import com.twosigma.znai.console.ConsoleOutputs;
 import com.twosigma.znai.core.AuxiliaryFileListener;
 import com.twosigma.znai.core.AuxiliaryFile;
+import com.twosigma.znai.website.WebSite;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -32,15 +33,19 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
 public class FileWatcher implements AuxiliaryFileListener {
-    private FileChangeHandler fileChangeHandler;
+    private final WebSite.Configuration siteCfg;
+    private final FileChangeHandler fileChangeHandler;
     private final WatchService watchService;
-    private Map<WatchKey, Path> pathByKey;
+    private final Map<WatchKey, Path> pathByKey;
 
-    public FileWatcher(Path root, Stream<Path> auxiliaryFiles, FileChangeHandler fileChangeHandler) {
+    public FileWatcher(WebSite.Configuration siteCfg, Stream<Path> auxiliaryFiles, FileChangeHandler fileChangeHandler) {
+        this.siteCfg = siteCfg;
         this.fileChangeHandler = fileChangeHandler;
+
         watchService = createWatchService();
         pathByKey = new HashMap<>();
-        final Path absoluteRoot = root.toAbsolutePath();
+
+        Path absoluteRoot = siteCfg.getDocRootPath().toAbsolutePath();
         register(absoluteRoot);
         registerDirs(absoluteRoot);
         auxiliaryFiles.forEach(this::register);
@@ -108,6 +113,8 @@ public class FileWatcher implements AuxiliaryFileListener {
             fileChangeHandler.onTocChange(path);
         } else if (fileName.equals("meta.json")) {
             fileChangeHandler.onDocMetaChange(path);
+        } else if (path.equals(siteCfg.getGlobalReferencesPath())) {
+            fileChangeHandler.onGlobalDocReferencesChange(path);
         } else {
             fileChangeHandler.onChange(path);
         }

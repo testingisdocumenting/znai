@@ -27,11 +27,9 @@ import java.net.UnknownHostException;
 import java.nio.file.Path;
 
 public class DocumentationPreview {
-    private final Path sourceRoot;
     private final Path deployRoot;
 
-    public DocumentationPreview(Path sourceRoot, Path deployRoot) {
-        this.sourceRoot = sourceRoot;
+    public DocumentationPreview(Path deployRoot) {
         this.deployRoot = deployRoot;
     }
 
@@ -49,7 +47,8 @@ public class DocumentationPreview {
         server.listen(port);
 
         reportPhase("initializing file watcher");
-        final FileWatcher fileWatcher = new FileWatcher(sourceRoot,
+        final FileWatcher fileWatcher = new FileWatcher(
+                webSite.getCfg(),
                 webSite.getAuxiliaryFilesRegistry().getAllPaths(),
                 fileChangeHandler);
 

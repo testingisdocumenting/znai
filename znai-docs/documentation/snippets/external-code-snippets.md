@@ -87,15 +87,3 @@ Set `spoiler` property to initially hide explanations. It may be useful when tea
 Click on the spoiler to reveal the explanations.
 
 :include-file: file-name-with-comments.js {commentsType: "inline", spoiler: true}
-
-# Code References
-
-You can turn parts of a code into links to internal or external pages. 
-
-To do that, define references in a csv file. Two columns format: `expression, link`.
-
-:include-file: references/references-demo.csv {title: "references/references-demo.csv"}
-
-    :include-file: file-name.js {referencesPath: "references/references-demo.csv"}
-    
-:include-file: file-name.js {referencesPath: "references/references-demo.csv"}

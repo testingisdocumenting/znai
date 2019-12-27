@@ -37,7 +37,7 @@ Method level `JavaDoc` text can be referred to as well by specifying the `entry`
 
 # Method Params With References
 
-Use [Code References](snippets/external-code-snippets#code-references) file to link API params to reference pages.
+Use [Code References](snippets/code-references) file to link API params to reference pages.
   
 To do that, define references in a csv file. Two columns format: `type-or-variable-name, link`.
 

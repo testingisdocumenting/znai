@@ -17,6 +17,7 @@
 package com.twosigma.znai.server.preview;
 
 import com.twosigma.znai.html.DocPageReactProps;
+import com.twosigma.znai.reference.DocReferences;
 import com.twosigma.znai.server.sockets.JsonWebSocketHandler;
 import com.twosigma.znai.structure.DocMeta;
 import com.twosigma.znai.structure.TableOfContents;
@@ -63,6 +64,14 @@ public class PreviewWebSocketHandler extends JsonWebSocketHandler {
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "docMetaUpdate");
         payload.put("docMeta", docMeta.toMap());
+
+        send(payload);
+    }
+
+    public void sendDocReferences(DocReferences docReferences) {
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("type", "docReferencesUpdate");
+        payload.put("docReferences", docReferences.toMap());
 
         send(payload);
     }

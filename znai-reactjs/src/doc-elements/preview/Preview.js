@@ -52,6 +52,10 @@ class Server {
                 this.handlers.onMultiplePagesUpdate(data.listOfPageProps)
             }
 
+            if (data.type === 'docReferencesUpdate') {
+                this.handlers.onDocReferencesUpdate(data.docReferences)
+            }
+
             if (data.type === 'error') {
                 this.handlers.onError(data.error)
             }
