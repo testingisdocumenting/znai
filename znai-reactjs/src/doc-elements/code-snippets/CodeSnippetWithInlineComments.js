@@ -26,6 +26,8 @@ import CircleBadge from './CircleBadge'
 import {isAllAtOnce} from '../meta/meta'
 import {containsInlinedComment, isInlinedComment, splitTokensIntoLines} from './codeUtils'
 
+import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'
+
 import './CodeSnippetWithInlineComments.css'
 
 let commentIdx = 0
@@ -68,6 +70,7 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentat
     const highlightIsVisible = slideIdx > 0
 
     const className = "code-with-inlined-comments" + (highlightIsVisible ? " with-highlighted-line" : "")
+    const mergedReferences = mergeWithGlobalDocReferences(references)
 
     return (
         <div className={className}>
@@ -75,7 +78,7 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentat
                 <code>
                     {lines.map((line, idx) => <LineOfTokens key={idx} tokens={line}
                                                             isHighlighted={isHighlighted(idx)}
-                                                            references={references}
+                                                            references={mergedReferences}
                                                             isPresentation={isPresentation}
                                                             TokenComponent={SpecialCommentToken}/>)}
                 </code>

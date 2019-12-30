@@ -16,6 +16,8 @@ snippets
     code-snippets
     external-code-snippets
     inlined-code-snippets
+    api-parameters
+    code-references
     java
     java-doc
     groovy
@@ -23,7 +25,6 @@ snippets
     cpp
     json
     xml
-    api-parameters
     open-API
     CLI
     math
@@ -56,3 +57,4 @@ configuration
     basic
 example-references
     domain
+    api

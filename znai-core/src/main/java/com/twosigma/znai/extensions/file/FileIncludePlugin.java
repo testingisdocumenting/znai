@@ -35,7 +35,7 @@ public class FileIncludePlugin implements IncludePlugin {
     private String fileName;
     private String text;
 
-    private CodeReferences codeReferences;
+    private CodeReferencesTrait codeReferencesTrait;
 
     @Override
     public String id() {
@@ -52,7 +52,7 @@ public class FileIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        codeReferences = new CodeReferences(componentsRegistry, pluginParams);
+        codeReferencesTrait = new CodeReferencesTrait(componentsRegistry, pluginParams);
         fileName = pluginParams.getFreeParam();
 
         text = FilePlugin.extractText(
@@ -64,7 +64,7 @@ public class FileIncludePlugin implements IncludePlugin {
 
         Map<String, Object> props = CodeSnippetsProps.create(langToUse, text);
         props.putAll(pluginParams.getOpts().toMap());
-        codeReferences.updateProps(props);
+        codeReferencesTrait.updateProps(props);
 
         return PluginResult.docElement(DocElementType.SNIPPET, props);
     }
@@ -74,7 +74,7 @@ public class FileIncludePlugin implements IncludePlugin {
         return Stream.concat(
                 Stream.of(AuxiliaryFile.builtTime(
                         componentsRegistry.resourceResolver().fullPath(fileName))),
-                codeReferences.auxiliaryFiles());
+                codeReferencesTrait.auxiliaryFiles());
     }
 
     @Override
@@ -99,6 +99,4 @@ public class FileIncludePlugin implements IncludePlugin {
 
         return fileName.substring(dotLastIdx + 1);
     }
-
-
 }

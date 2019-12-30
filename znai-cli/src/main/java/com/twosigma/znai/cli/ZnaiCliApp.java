@@ -40,8 +40,9 @@ import java.nio.file.Paths;
 import java.time.Instant;
 
 public class ZnaiCliApp {
-    private ZnaiCliConfig config;
-    private Path deployPath;
+    private final ZnaiCliConfig config;
+    private final Path deployPath;
+
     private WebSite webSite;
     private ReactJsBundle reactJsBundle;
 
@@ -98,7 +99,7 @@ public class ZnaiCliApp {
     }
 
     private void preview() {
-        DocumentationPreview preview = new DocumentationPreview(config.getSourceRoot(), config.getDeployRoot());
+        DocumentationPreview preview = new DocumentationPreview(config.getDeployRoot());
         preview.start(webSite, config.getPort());
     }
 
@@ -156,6 +157,7 @@ public class ZnaiCliApp {
                 withFileWithLookupPaths("lookup-paths").
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
+                withGlobalReferencesPath(config.getSourceRoot().resolve("references.csv")).
                 withWebResources(favIconResource).
                 withPageModifiedTimeStrategy(pageModifiedTimeStrategy()).
                 withEnabledPreview(config.isPreviewMode());

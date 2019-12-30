@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.preview;
+package com.twosigma.znai.reference
 
-import java.nio.file.Path;
+import org.junit.Test
 
-public interface FileChangeHandler {
-    void onTocChange(Path path);
-    void onGlobalDocReferencesChange(Path path);
-    void onDocMetaChange(Path path);
-    void onChange(Path path);
+class DocReferencesParserTest {
+    @Test
+    void "parse csv"() {
+        def references = DocReferencesParser.parse("""
+MyClass, /reference/my-class
+YourClass, /reference/your-class
+""")
+
+        references.toMap().should == [
+                MyClass: [pageUrl: '/reference/my-class'],
+                YourClass: [pageUrl: '/reference/your-class']
+        ]
+    }
 }

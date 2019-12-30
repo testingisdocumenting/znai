@@ -4,10 +4,10 @@ import com.twosigma.znai.extensions.PluginParams
 import com.twosigma.znai.parser.TestComponentsRegistry
 import org.junit.Test
 
-class CodeReferencesTest {
+class CodeReferencesTraitTest {
     @Test
     void "should read csv references and add to props as a map"() {
-        def codeReferences = new CodeReferences(TestComponentsRegistry.INSTANCE,
+        def codeReferences = new CodeReferencesTrait(TestComponentsRegistry.INSTANCE,
                 new PluginParams("include-file", '{referencesPath: "references/test-references.csv"}'))
 
         def props = new LinkedHashMap()
@@ -19,7 +19,7 @@ class CodeReferencesTest {
 
     @Test
     void "should provide auxiliary files stream"() {
-        def codeReferences = new CodeReferences(TestComponentsRegistry.INSTANCE,
+        def codeReferences = new CodeReferencesTrait(TestComponentsRegistry.INSTANCE,
                 new PluginParams("include-file", '{referencesPath: "references/test-references.csv"}'))
 
         codeReferences.auxiliaryFiles().collect {it.path.fileName.toString()}.should == ['test-references.csv']
@@ -27,7 +27,7 @@ class CodeReferencesTest {
 
     @Test
     void "should not update props and should return empty auxiliary stream when no reference path was provided"() {
-        def codeReferences = new CodeReferences(TestComponentsRegistry.INSTANCE,
+        def codeReferences = new CodeReferencesTrait(TestComponentsRegistry.INSTANCE,
                 new PluginParams("include-file", ''))
 
         codeReferences.auxiliaryFiles().collect {it}.should == []
