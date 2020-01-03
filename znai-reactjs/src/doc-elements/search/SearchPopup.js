@@ -25,7 +25,7 @@ class SearchPopup extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { selectedIdx: 0, search: null }
+        this.state = { selectedIdx: 0, search: null, query: '' }
         this.onQueryChange = this.onQueryChange.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
     }
@@ -96,7 +96,7 @@ class SearchPopup extends Component {
     onQueryChange(query) {
         const queryResult = this.state.search.search(query)
         const selectedIdx = 0
-        this.setState({queryResult, selectedIdx})
+        this.setState({query, queryResult, selectedIdx})
     }
 
     componentDidMount() {
@@ -115,8 +115,9 @@ class SearchPopup extends Component {
     jumpToIdx = (idx) => {
         const ids = this.queryResultIds()
         const tocToNavigate = Search.convertIndexIdToSectionCoords(ids[idx])
+        const {query} = this.state
 
-        this.props.onSearchSelection(tocToNavigate)
+        this.props.onSearchSelection(query, tocToNavigate)
     }
 
     keyDownHandler(e) {

@@ -63,6 +63,7 @@ import WithTheme from "./theme/WithTheme"
 import {Documentation} from "./doc-elements/Documentation"
 import testData from "./doc-elements/TestData"
 import {subHeadingPresentationDemo} from './doc-elements/default-elements/PresentationSubHeading.demo'
+import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
 
 const docMeta = {
     id: 'preview',
@@ -135,6 +136,32 @@ dropDowns.add('Theme')
     .addItem('Default', 'Alt 1')
     .addItem('Dark', 'Alt 2')
     .onSelect(selectTheme)
+
+const documentationTracker = {
+    onPageOpen(pageId) {
+        console.log('onPageOpen', pageId)
+    },
+    onLinkClick(currentPageId, url) {
+        console.log('onLinkClick', currentPageId, url)
+    },
+    onNextPage(currentPageId) {
+        console.log('onNextPage', currentPageId)
+    },
+    onPrevPage(currentPageId) {
+        console.log('onPrevPage', currentPageId)
+    },
+    onTocItemSelect(currentPageId, tocItem) {
+        console.log('onTocItemSelect', currentPageId, tocItem)
+    },
+    onSearchResultSelect(currentPageId, query, selectedPageId) {
+        console.log('onSearchResultSelect', currentPageId, query, selectedPageId)
+    },
+    onPresentationOpen(currentPageId) {
+        console.log('onPresentationOpen', currentPageId)
+    }
+}
+
+documentationTracking.addListener(documentationTracker)
 
 export class App extends Component {
     render() {

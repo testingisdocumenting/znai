@@ -23,6 +23,7 @@ import WithTheme from '../theme/WithTheme'
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import {documentationNavigation} from './structure/DocumentationNavigation'
+import {documentationTracking} from './tracking/DocumentationTracking'
 import {textSelection} from './selected-text-extensions/TextSelection'
 import {tableOfContents} from './structure/toc/TableOfContents'
 import {getAllPagesPromise} from './allPages'
@@ -256,7 +257,7 @@ export class Documentation extends Component {
             e.preventDefault()
             this.setState({isSearchActive: true})
         } else if (!isSearchActive && mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && !e.ctrlKey && !e.altKey) {
-            this.setState({mode: DocumentationModes.PRESENTATION})
+            this.onPresentationOpen()
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && e.altKey) {
             this.setState({mode: DocumentationModes.PRINT})
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowLeft' && e.ctrlKey) {
@@ -337,7 +338,10 @@ export class Documentation extends Component {
 
         this.extractPageSectionNodes()
 
-        const anchorId = documentationNavigation.currentPageLocation().anchorId
+        const currentPageLocation = documentationNavigation.currentPageLocation()
+        documentationTracking.onPageOpen(currentPageLocation)
+
+        const anchorId = currentPageLocation.anchorId
         if (anchorId) {
             this.scrollToPageSection(anchorId)
         } else {
@@ -392,6 +396,7 @@ export class Documentation extends Component {
     onNextPage() {
         const next = this.nextPageTocItem
         if (next) {
+            documentationTracking.onNextPage()
             documentationNavigation.navigateToPage(next)
         }
     }
@@ -399,6 +404,7 @@ export class Documentation extends Component {
     onPrevPage() {
         const prev = this.prevPageTocItem
         if (prev) {
+            documentationTracking.onPrevPage()
             documentationNavigation.navigateToPage(prev)
         }
     }
@@ -409,6 +415,7 @@ export class Documentation extends Component {
     }
 
     onPresentationOpen() {
+        documentationTracking.onPresentationOpen()
         this.setState({mode: DocumentationModes.PRESENTATION})
     }
 
@@ -426,6 +433,7 @@ export class Documentation extends Component {
     }
 
     onTocItemClick(dirName, fileName) {
+        documentationTracking.onTocItemSelect({dirName, fileName, anchorId: ''})
         documentationNavigation.navigateToPage({dirName, fileName})
     }
 
@@ -433,11 +441,14 @@ export class Documentation extends Component {
         const {autoSelectedTocItem} = this.state
 
         const forceSelectedTocItem = {...autoSelectedTocItem, anchorId: sectionId}
+
+        documentationTracking.onTocItemSelect(forceSelectedTocItem)
         this.setState({forceSelectedTocItem})
     }
 
-    onSearchSelection(id) {
+    onSearchSelection(query, id) {
         this.onSearchClose()
+        documentationTracking.onSearchResultSelect(query, id)
         documentationNavigation.navigateToPage(id)
     }
 

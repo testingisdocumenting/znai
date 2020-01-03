@@ -16,27 +16,25 @@
 
 import React from 'react'
 
-import {isExternalUrl, onLocalUrlClick} from '../structure/links'
-import {documentationNavigation} from '../structure/DocumentationNavigation'
+import {onLocalUrlClick} from '../structure/links'
+import {documentationTracking} from '../tracking/DocumentationTracking'
 
-export function LinkWrapper({referenceUrl, className, children}) {
-    if (!referenceUrl) {
-        return children
-    }
-
-    const isLocalNavigation = !isExternalUrl(referenceUrl);
-
-    const fullUrl = isLocalNavigation ?
-        documentationNavigation.fullPageUrl(referenceUrl):
-        referenceUrl
-
-    const onClick = isLocalNavigation ? (e) => onLocalUrlClick(e, fullUrl) : null
-    const targetProp = isLocalNavigation ? {} : {target: "_blank"}
-
+export function LinkWrapper({className, url, treatAsLocal, children}) {
+    const onClick = treatAsLocal ? handleLocalUrlClick : handleExternalUrlClick
+    const targetProp = treatAsLocal ? {} : {target: "_blank"}
 
     return (
-        <a href={fullUrl} className={className} onClick={onClick} {...targetProp}>
+        <a href={url} className={className} onClick={onClick} {...targetProp}>
             {children}
         </a>
     )
+
+    function handleLocalUrlClick(e) {
+        documentationTracking.onLinkClick(url)
+        onLocalUrlClick(e, url)
+    }
+
+    function handleExternalUrlClick() {
+        documentationTracking.onLinkClick(url)
+    }
 }
