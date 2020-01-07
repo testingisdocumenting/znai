@@ -272,9 +272,6 @@ toc = [ {
     }, {
       "title" : "Spoilers",
       "id" : "spoilers"
-    }, {
-      "title" : "Code References",
-      "id" : "code-references"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -289,6 +286,39 @@ toc = [ {
     }, {
       "title" : "From File",
       "id" : "from-file"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "API Parameters",
+    "pageMeta" : {
+      "title" : [ "API Parameters" ]
+    },
+    "dirName" : "snippets",
+    "fileName" : "api-parameters",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Inlined CSV",
+      "id" : "inlined-csv"
+    }, {
+      "title" : "Nested",
+      "id" : "nested"
+    }, {
+      "title" : "External JSON File",
+      "id" : "external-json-file"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Code References",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "code-references",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Local References",
+      "id" : "local-references"
+    }, {
+      "title" : "Global References",
+      "id" : "global-references"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -456,25 +486,6 @@ toc = [ {
     }, {
       "title" : "Title",
       "id" : "title"
-    } ]
-  }, {
-    "sectionTitle" : "Snippets",
-    "pageTitle" : "API Parameters",
-    "pageMeta" : {
-      "title" : [ "API Parameters" ]
-    },
-    "dirName" : "snippets",
-    "fileName" : "api-parameters",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Inlined CSV",
-      "id" : "inlined-csv"
-    }, {
-      "title" : "Nested",
-      "id" : "nested"
-    }, {
-      "title" : "External JSON File",
-      "id" : "external-json-file"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -1020,6 +1031,23 @@ toc = [ {
     }, {
       "title" : "Transaction",
       "id" : "transaction"
+    } ]
+  }, {
+    "sectionTitle" : "Example References",
+    "pageTitle" : "Api",
+    "pageMeta" : { },
+    "dirName" : "example-references",
+    "fileName" : "api",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Flight API",
+      "id" : "flight-api"
+    }, {
+      "title" : "Book",
+      "id" : "book"
+    }, {
+      "title" : "Query",
+      "id" : "query"
     } ]
   } ]
 } ]

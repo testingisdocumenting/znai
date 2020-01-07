@@ -29,6 +29,7 @@ const {DocumentationPreparationScreen} = require('./screens/documentation-prepar
 const {Landing} = require('./screens/landing/Landing')
 const {themeRegistry} = require('./theme/ThemeRegistry')
 const {documentationNavigation} = require('./doc-elements/structure/DocumentationNavigation')
+const {documentationTracking} = require('./doc-elements/tracking/DocumentationTracking')
 const {pageTypesRegistry} = require('./doc-elements/page/PageTypesRegistry')
 const {setDocMeta} = require('./doc-elements/docMeta')
 
@@ -41,6 +42,7 @@ global.Landing = Landing
 global.themeRegistry = themeRegistry
 global.pageTypesRegistry = pageTypesRegistry
 global.documentationNavigation = documentationNavigation
+global.documentationTracking = documentationTracking
 global.lunr = lunr
 global.setDocMeta = setDocMeta
 

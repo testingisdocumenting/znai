@@ -17,7 +17,7 @@
 import React from 'react'
 
 import ApiParameters from './ApiParameters'
-import {LinkWrapper} from '../references/LinkWrapper'
+import {ReferenceLinkWrapper} from '../references/ReferenceLinkWrapper'
 
 import './ApiParameter.css'
 
@@ -78,9 +78,9 @@ class ApiParameter extends React.Component {
                 <div className={nameTypeClassName}>
                     <div className="api-param-name-type-toggle" ref={node => this.nameAndTypeNode = node}>
                         <div className="api-param-name">
-                            <LinkWrapper referenceUrl={referenceUrl}>
+                            <ReferenceLinkWrapper referenceUrl={referenceUrl}>
                                 {name}
-                            </LinkWrapper>
+                            </ReferenceLinkWrapper>
                         </div>
                         <div className="api-param-type-and-toggle" onClick={toggleOnClick}>
                             {expandToggle}

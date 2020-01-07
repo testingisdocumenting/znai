@@ -17,7 +17,7 @@
 import React from 'react'
 
 import {isSimpleValueToken} from './codeUtils'
-import {LinkWrapper} from '../references/LinkWrapper'
+import {ReferenceLinkWrapper} from '../references/ReferenceLinkWrapper'
 
 import 'prismjs/themes/prism-coy.css'
 
@@ -42,9 +42,9 @@ function renderSpan(token, className) {
 
 function renderLinkData(token, className) {
     return (
-        <LinkWrapper referenceUrl={token.link} className={className}>
+        <ReferenceLinkWrapper referenceUrl={token.link} className={className}>
             {renderData(token)}
-        </LinkWrapper>
+        </ReferenceLinkWrapper>
     )
 }
 

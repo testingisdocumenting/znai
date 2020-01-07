@@ -15,17 +15,25 @@
  */
 
 import React from 'react'
-import {isLocalUrl} from '../structure/links'
-import {LinkWrapper} from './LinkWrapper'
 
-const Link = ({url, isFile, ...props}) => {
-    const isLocalNavigation = isLocalUrl(url) && !isFile;
+import {isExternalUrl} from '../structure/links'
+import {documentationNavigation} from '../structure/DocumentationNavigation'
+import {LinkWrapper} from '../default-elements/LinkWrapper'
+
+export function ReferenceLinkWrapper({referenceUrl, className, children}) {
+    if (!referenceUrl) {
+        return children
+    }
+
+    const isLocalNavigation = !isExternalUrl(referenceUrl);
+
+    const fullUrl = isLocalNavigation ?
+        documentationNavigation.fullPageUrl(referenceUrl):
+        referenceUrl
 
     return (
-        <LinkWrapper url={url} treatAsLocal={isLocalNavigation}>
-            <props.elementsLibrary.DocElement {...props}/>
+        <LinkWrapper url={fullUrl} treatAsLocal={isLocalNavigation} className={className}>
+            {children}
         </LinkWrapper>
     )
 }
-
-export default Link
