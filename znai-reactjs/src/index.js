@@ -30,6 +30,7 @@ const {Landing} = require('./screens/landing/Landing')
 const {themeRegistry} = require('./theme/ThemeRegistry')
 const {documentationNavigation} = require('./doc-elements/structure/DocumentationNavigation')
 const {pageTypesRegistry} = require('./doc-elements/page/PageTypesRegistry')
+const {setDocMeta} = require('./doc-elements/docMeta')
 
 const lunr = require('lunr')
 
@@ -41,6 +42,7 @@ global.themeRegistry = themeRegistry
 global.pageTypesRegistry = pageTypesRegistry
 global.documentationNavigation = documentationNavigation
 global.lunr = lunr
+global.setDocMeta = setDocMeta
 
 if (process.env.NODE_ENV !== "production") {
     const ReactDOM = require('react-dom');

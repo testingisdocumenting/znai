@@ -40,6 +40,11 @@
     color: var(--znai-meta-color)
 }
 
+.page-support a {
+    margin-left: 20px;
+    color: var(--znai-meta-color)
+}
+
 .page-last-update-time {
     color: var(--znai-meta-color);
 }

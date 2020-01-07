@@ -15,6 +15,7 @@
  */
 
 import {selectedTextExtensions} from './selected-text-extensions/SelectedTextExtensions'
+import {jsonPromise} from "../utils/json"
 
 let docMeta = {}
 
@@ -25,7 +26,10 @@ function setDocMeta(newDocMeta) {
 
 function registerExtensions() {
     if (docMeta.hasOwnProperty('hipchatRoom')) {
-        selectedTextExtensions.register({name: 'Ask in HipChat', action: (args) => console.log('hipchat action:', args)})
+        selectedTextExtensions.register({
+            name: 'Ask in HipChat',
+            action: (args) => console.log('hipchat action:', args)
+        })
     }
 }
 
@@ -37,4 +41,20 @@ function getDocId() {
     return docMeta.id
 }
 
-export {setDocMeta, isPreviewEnabled, getDocId}
+let supportLinkPromise = null;
+function getSupportLinkPromise() {
+    if (supportLinkPromise) {
+        return supportLinkPromise
+    }
+    const support = docMeta.support
+    if (support && support.link) {
+        supportLinkPromise = new Promise((resolve, reject) => resolve(support.link));
+    } else if (support && support.urlToFetchSupportLink) {
+        supportLinkPromise = jsonPromise(support.urlToFetchSupportLink).then(supportMeta => supportMeta.link)
+    } else {
+        supportLinkPromise = new Promise((resolve, reject) => resolve(null));
+    }
+    return supportLinkPromise
+}
+
+export {setDocMeta, isPreviewEnabled, getDocId, getSupportLinkPromise}
