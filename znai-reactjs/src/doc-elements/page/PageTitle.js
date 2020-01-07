@@ -16,7 +16,8 @@
 
 import React from 'react'
 
-import './PageTitle.css'
+import "./PageTitle.css"
+import Support from "./Support"
 
 const PageTitle = ({tocItem, onPresentationOpen, lastModifiedTime, docMeta, elementsLibrary}) => {
     const displayTitle = tocItem.dirName.length && tocItem.fileName !== "index"
@@ -33,6 +34,7 @@ const PageTitle = ({tocItem, onPresentationOpen, lastModifiedTime, docMeta, elem
             <div className="page-meta-block">
                 <ModifiedTime lastModifiedTime={lastModifiedTime}/>
                 <ViewOn docMeta={docMeta} tocItem={tocItem}/>
+                <Support/>
             </div>
         </React.Fragment>
     )
@@ -59,16 +61,15 @@ function ViewOn({docMeta, tocItem}) {
 
     return (
         <div className="page-view-on">
-            <a href={buildViewOnLink(tocItem, viewOn.link)} target="_bank">{viewOn.title}</a>
+            <a href={buildViewOnLink(tocItem, viewOn.link)} target="_blank">{viewOn.title}</a>
         </div>
     )
 }
 
 function buildViewOnLink(tocItem, link) {
     return tocItem.viewOnRelativePath ?
-        `${link}/${tocItem.viewOnRelativePath}`:
+        `${link}/${tocItem.viewOnRelativePath}` :
         `${link}/${tocItem.dirName}/${tocItem.fileName}.md`
 }
-
 
 export default PageTitle

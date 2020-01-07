@@ -14,18 +14,29 @@
  * limitations under the License.
  */
 
-import * as Promise from 'promise'
+import React, {Component} from 'react'
+import {getSupportLinkPromise} from '../docMeta'
 
-export {jsonPromise}
+class Support extends Component {
+    constructor(props) {
+        super(props);
 
-function jsonPromise(url) {
-    return new Promise((resolve, reject) => {
-        fetch(url, {credentials: 'same-origin'}).then((response) => {
-            response.json().then((json) => {
-                resolve(json)
-            }, (error) => {
-                reject("can't parse data from: " + url + "; " + error)
-            })
-        }, (response) => reject("can't read data from: " + response))
-    })
+        this.state = {link: null}
+    }
+
+    componentDidMount() {
+        getSupportLinkPromise().then(link => this.setState({link: link}));
+    }
+
+    render() {
+        return (
+            <div className="page-support">
+                {this.state.link ?
+                    <a href={this.state.link} target="_blank">Support</a> : null
+                }
+            </div>
+        )
+    }
 }
+
+export default Support
