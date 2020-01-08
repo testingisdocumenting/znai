@@ -620,6 +620,11 @@ export class Documentation extends Component {
         }
         this.setState({autoSelectedTocItem: enrichedSelectedTocItem, forceSelectedTocItem: null})
 
+        if (sectionTitlesWithNode.length !== 0 &&
+            autoSelectedTocItem.anchorId !== visible.idTitle.id) {
+            documentationTracking.onScrollToSection(visible.idTitle)
+        }
+
         function combineSectionTitlesWithNodes(pageSectionNodes) {
             const pageSections = page.tocItem.pageSectionIdTitles
 
