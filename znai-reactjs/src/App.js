@@ -150,6 +150,9 @@ const documentationTracker = {
     onPrevPage(currentPageId) {
         console.log('onPrevPage', currentPageId)
     },
+    onScrollToSection(currentPageId, sectionIdTitle) {
+        console.log('onScrollToSection', currentPageId, sectionIdTitle)
+    },
     onTocItemSelect(currentPageId, tocItem) {
         console.log('onTocItemSelect', currentPageId, tocItem)
     },

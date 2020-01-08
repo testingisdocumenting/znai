@@ -37,6 +37,10 @@ class DocumentationTracking {
         this.notifyListeners('onPrevPage', this.currentPageId)
     }
 
+    onScrollToSection(sectionIdTitle) {
+        this.notifyListeners('onScrollToSection', this.currentPageId, sectionIdTitle)
+    }
+
     onTocItemSelect(tocItem) {
         this.notifyListeners('onTocItemSelect', this.currentPageId, tocItem)
     }
