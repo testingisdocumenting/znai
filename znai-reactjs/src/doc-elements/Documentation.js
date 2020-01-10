@@ -38,7 +38,7 @@ import PresentationRegistry from './presentation/PresentationRegistry'
 
 import AllPagesAtOnce from './AllPagesAtOnce'
 
-import {setDocMeta} from './docMeta'
+import {mergeDocMeta} from './docMeta'
 
 import pageContentProcessor from './pageContentProcessor.js'
 
@@ -58,7 +58,7 @@ export class Documentation extends Component {
 
         const {page, docMeta} = this.props
 
-        setDocMeta(docMeta)
+        mergeDocMeta(docMeta)
         this.searchPromise = getSearchPromise(docMeta)
 
         const autoSelectedTocItem = {

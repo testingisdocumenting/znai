@@ -17,8 +17,9 @@
 package com.twosigma.znai.server.urlhandlers;
 
 import com.twosigma.znai.html.reactjs.ReactJsBundle;
+import io.vertx.ext.web.RoutingContext;
 
 public interface UrlContentHandler {
     String url();
-    String buildContent(ReactJsBundle reactJsBundle);
+    String buildContent(RoutingContext ctx, ReactJsBundle reactJsBundle);
 }

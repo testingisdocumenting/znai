@@ -14,23 +14,21 @@
  * limitations under the License.
  */
 
-import {selectedTextExtensions} from './selected-text-extensions/SelectedTextExtensions'
 import {jsonPromise} from "../utils/json"
 
 let docMeta = {}
 
 function setDocMeta(newDocMeta) {
     docMeta = {...newDocMeta}
-    registerExtensions()
 }
 
-function registerExtensions() {
-    if (docMeta.hasOwnProperty('hipchatRoom')) {
-        selectedTextExtensions.register({
-            name: 'Ask in HipChat',
-            action: (args) => console.log('hipchat action:', args)
-        })
-    }
+function getDocMeta() {
+    return {...docMeta}
+}
+
+function mergeDocMeta(newDocMeta) {
+    setDocMeta({...docMeta, ...newDocMeta})
+    return getDocMeta()
 }
 
 function isPreviewEnabled() {
@@ -42,19 +40,20 @@ function getDocId() {
 }
 
 let supportLinkPromise = null;
+
 function getSupportLinkPromise() {
     if (supportLinkPromise) {
         return supportLinkPromise
     }
     const support = docMeta.support
     if (support && support.link) {
-        supportLinkPromise = new Promise((resolve, reject) => resolve(support.link));
+        supportLinkPromise = new Promise((resolve, reject) => resolve(support.link))
     } else if (support && support.urlToFetchSupportLink) {
-        supportLinkPromise = jsonPromise(support.urlToFetchSupportLink).then(supportMeta => supportMeta.link)
+        supportLinkPromise = jsonPromise(support.urlToFetchSupportLink(getDocMeta())).then(supportMeta => supportMeta.link)
     } else {
-        supportLinkPromise = new Promise((resolve, reject) => resolve(null));
+        supportLinkPromise = new Promise((resolve, reject) => resolve(null))
     }
     return supportLinkPromise
 }
 
-export {setDocMeta, isPreviewEnabled, getDocId, getSupportLinkPromise}
+export {setDocMeta, mergeDocMeta, getDocMeta, isPreviewEnabled, getDocId, getSupportLinkPromise}
