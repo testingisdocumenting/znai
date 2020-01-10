@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {addDocMeta, getDocMeta, setDocMeta} from './docMeta.js'
+import {getDocMeta, mergeDocMeta, setDocMeta} from './docMeta.js'
 
 describe('test methods in docMeta', () => {
     it('get docMeta after setting one', () => {
@@ -31,10 +31,8 @@ describe('test methods in docMeta', () => {
             type: "Guide",
             previewEnabled: true
         }
-
         setDocMeta(docMeta)
-        const actual = getDocMeta()
-        expect(actual).toEqual(expected)
+        expect(getDocMeta()).toEqual(expected)
     })
 
     it('add twice and check merged docMeta', () => {
@@ -47,8 +45,8 @@ describe('test methods in docMeta', () => {
             type: "Guide",
             previewEnabled: true
         }
-        addDocMeta({supportMeta: supportMeta})
-        addDocMeta(docMeta)
+        mergeDocMeta({supportMeta: supportMeta})
+        mergeDocMeta(docMeta)
 
         const expected = {
             id: "preview",
@@ -60,8 +58,7 @@ describe('test methods in docMeta', () => {
             }
         }
 
-        const actual = getDocMeta()
-        expect(actual).toEqual(expected)
+        expect(getDocMeta()).toEqual(expected)
     })
 
     it('set and add docMeta and check merged docMeta', () => {
@@ -75,7 +72,7 @@ describe('test methods in docMeta', () => {
             previewEnabled: true
         }
         setDocMeta(docMeta)
-        addDocMeta({supportMeta: supportMeta})
+        mergeDocMeta({supportMeta: supportMeta})
 
         const expected = {
             id: "preview",
@@ -87,8 +84,7 @@ describe('test methods in docMeta', () => {
             }
         }
 
-        const actual = getDocMeta()
-        expect(actual).toEqual(expected)
+        expect(getDocMeta()).toEqual(expected)
     })
 
     it('add and set docMeta and check docMeta', () => {
@@ -101,7 +97,7 @@ describe('test methods in docMeta', () => {
             type: "Guide",
             previewEnabled: true
         }
-        addDocMeta({supportMeta: supportMeta})
+        mergeDocMeta({supportMeta: supportMeta})
         setDocMeta(docMeta)
 
         const expected = {
@@ -111,7 +107,6 @@ describe('test methods in docMeta', () => {
             previewEnabled: true
         }
 
-        const actual = getDocMeta()
-        expect(actual).toEqual(expected)
+        expect(getDocMeta()).toEqual(expected)
     })
 })

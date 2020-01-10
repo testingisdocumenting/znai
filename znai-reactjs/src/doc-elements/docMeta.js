@@ -26,8 +26,8 @@ function getDocMeta() {
     return {...docMeta}
 }
 
-function addDocMeta(newDocMeta) {
-    docMeta = Object.assign({}, docMeta, {...newDocMeta})
+function mergeDocMeta(newDocMeta) {
+    setDocMeta({...docMeta, ...newDocMeta})
     return getDocMeta()
 }
 
@@ -56,4 +56,4 @@ function getSupportLinkPromise() {
     return supportLinkPromise
 }
 
-export {setDocMeta, addDocMeta, getDocMeta, isPreviewEnabled, getDocId, getSupportLinkPromise}
+export {setDocMeta, mergeDocMeta, getDocMeta, isPreviewEnabled, getDocId, getSupportLinkPromise}

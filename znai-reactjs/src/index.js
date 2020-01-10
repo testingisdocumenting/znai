@@ -31,7 +31,7 @@ const {themeRegistry} = require('./theme/ThemeRegistry')
 const {documentationNavigation} = require('./doc-elements/structure/DocumentationNavigation')
 const {documentationTracking} = require('./doc-elements/tracking/DocumentationTracking')
 const {pageTypesRegistry} = require('./doc-elements/page/PageTypesRegistry')
-const {addDocMeta, getDocId} = require('./doc-elements/docMeta')
+const {mergeDocMeta} = require('./doc-elements/docMeta')
 
 const lunr = require('lunr')
 
@@ -44,8 +44,7 @@ global.pageTypesRegistry = pageTypesRegistry
 global.documentationNavigation = documentationNavigation
 global.documentationTracking = documentationTracking
 global.lunr = lunr
-global.addDocMeta = addDocMeta
-global.getDocId = getDocId
+global.mergeDocMeta = mergeDocMeta
 
 if (process.env.NODE_ENV !== "production") {
     const ReactDOM = require('react-dom');

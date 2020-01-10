@@ -56,6 +56,7 @@ import {svgDemo} from './doc-elements/svg/Svg.demo'
 import {svgPresentationDemo} from './doc-elements/svg/PresentationSvg.demo'
 import {embeddedSvgDemo} from './doc-elements/svg/EmbeddedSvg.demo'
 import {presentationDemo} from './doc-elements/presentation/Presentation.demo'
+import {spoilerDemo} from './doc-elements/spoiler/Spoiler.demo'
 
 import {themeRegistry} from "./theme/ThemeRegistry"
 import WithTheme from "./theme/WithTheme"
@@ -99,6 +100,7 @@ registries.add('snippets')
     .registerAsGrid('CLI Command', 0, cliCommandDemo)
 
 registries.add('visuals')
+    .registerAsGrid('Spoilers', 0, spoilerDemo)
     .registerAsGrid('Charts', 0, chartDemo)
     .registerAsTabs('Image Annotations', imageAnnotationDemo)
     .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)
