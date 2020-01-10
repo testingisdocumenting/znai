@@ -133,7 +133,7 @@ public class DocumentationServer {
         UrlContentHandlers.urlContentHandlers()
                 .forEach(urlContentHandler ->
                         router.get(urlContentHandler.url())
-                                .handler(ctx -> ctx.response().end(urlContentHandler.buildContent(reactJsBundle))));
+                                .handler(ctx -> ctx.response().end(urlContentHandler.buildContent(ctx, reactJsBundle))));
     }
 
     private void registerPagesHandler(Router router, StaticHandler pagesStaticHandler) {

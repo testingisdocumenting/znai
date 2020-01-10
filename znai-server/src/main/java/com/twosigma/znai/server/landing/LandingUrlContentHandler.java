@@ -21,6 +21,7 @@ import com.twosigma.znai.html.reactjs.HtmlReactJsPage;
 import com.twosigma.znai.html.reactjs.ReactJsBundle;
 import com.twosigma.znai.server.FavIcons;
 import com.twosigma.znai.server.urlhandlers.UrlContentHandler;
+import io.vertx.ext.web.RoutingContext;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -42,7 +43,7 @@ public class LandingUrlContentHandler implements UrlContentHandler {
     }
 
     @Override
-    public String buildContent(ReactJsBundle reactJsBundle) {
+    public String buildContent(RoutingContext ctx, ReactJsBundle reactJsBundle) {
         List<Map<String, Object>> documentations = LandingDocEntriesProviders.provide()
                 .map(LandingDocEntry::toMap)
                 .collect(Collectors.toList());
