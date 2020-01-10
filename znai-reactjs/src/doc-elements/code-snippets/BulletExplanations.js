@@ -41,7 +41,7 @@ class BulletExplanations extends Component {
 
         const className = "code-bullets" + (hidden ? " hidden-explanation": "")
         const spoilerMessage = hidden ? (
-            <div className="spoiler-message">Click to reveal</div>
+            <div className="spoiler-message">Press to reveal</div>
         ) : null
 
         return (

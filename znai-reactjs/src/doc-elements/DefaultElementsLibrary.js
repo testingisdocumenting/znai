@@ -63,6 +63,7 @@ import LangFunction from './lang/LangFunction'
 import ApiParameters from './api/ApiParameters'
 import OpenApiOperation from './open-api/operation/OpenApiOperation'
 import JupyterCell from './jupyter/JupyterCell'
+import {Spoiler} from './spoiler/Spoiler'
 import {registerDocUtilsElements} from './doc-utils/DocUtils'
 import JsxGroup from './jsx/JsxGroup'
 
@@ -174,6 +175,8 @@ presentationElementHandlers.CliCommand = presentationCliCommandHandler
 
 library.CliOutput = CliOutput
 presentationElementHandlers.CliOutput = presentationCliOutput
+
+library.Spoiler = Spoiler
 
 library.ApiParameters = wrappedInContentBlock(ApiParameters)
 
