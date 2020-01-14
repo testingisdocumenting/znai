@@ -20,6 +20,8 @@
     border: solid 1px var(--znai-snippets-outer-border-color);
     cursor: pointer;
     user-select: none;
+
+    margin-bottom: 16px;
 }
 
 .znai-spoiler * {

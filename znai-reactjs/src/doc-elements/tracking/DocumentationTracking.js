@@ -57,6 +57,10 @@ class DocumentationTracking {
         this.notifyListeners('onPresentationOpen', this.currentPageId)
     }
 
+    onInteraction(type, id) {
+        this.notifyListeners('onInteraction', this.currentPageId, type, id)
+    }
+
     notifyListeners(methodName, ...args) {
         this.listeners.forEach(listener => safeCall(listener, methodName, args))
     }
