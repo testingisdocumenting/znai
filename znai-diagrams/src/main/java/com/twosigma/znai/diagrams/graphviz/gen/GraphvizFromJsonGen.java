@@ -28,13 +28,16 @@ public class GraphvizFromJsonGen {
     private final List<DiagramEdge> edgesFromGraph;
     private final GraphvizGenConfig config;
 
+    private final NodesConfig nodesConfig;
+
     public GraphvizFromJsonGen(Map<String, ?> graph, List<List<?>> nodesLibraries, GraphvizGenConfig config) {
+        this.config = config;
+
         this.nodesFromGraph = extractNodesFromGraph(graph);
         this.edgesFromGraph = extractEdgesFromGraph(graph);
+        this.nodesConfig = extractNodesConfig(graph);
 
         this.nodesFromLibs = organizeNodesFromLibs(nodesLibraries);
-
-        this.config = config;
     }
 
     public GraphvizGenResult generate() {
@@ -106,6 +109,21 @@ public class GraphvizFromJsonGen {
     }
 
     @SuppressWarnings("unchecked")
+    private NodesConfig extractNodesConfig(Map<String, ?> graph) {
+        Map<String, ?> config = (Map<String, ?>) graph.get("config");
+        if (config == null) {
+            return new NodesConfig();
+        }
+
+        Map<String, ?> nodes = (Map<String, ?>) config.get("nodes");
+        if (nodes == null) {
+            return new NodesConfig();
+        }
+
+        return new NodesConfig((Number) nodes.get("width"), (Number) nodes.get("height"));
+    }
+
+    @SuppressWarnings("unchecked")
     private Map<String, DiagramNode> organizeNodesFromLibs(List<List<?>> nodesLibraries) {
         Map<String, DiagramNode> result = new LinkedHashMap<>();
         nodesLibraries.forEach(nodes -> result.putAll(groupNodesById((List<Map<String, Object>>) nodes)));
@@ -128,7 +146,9 @@ public class GraphvizFromJsonGen {
                 node.getOrDefault("url", "").toString(),
                 node.getOrDefault("colorGroup", "").toString(),
                 node.getOrDefault("shape", "").toString(),
-                Boolean.TRUE.equals(node.getOrDefault("highlight", "")));
+                Boolean.TRUE.equals(node.getOrDefault("highlight", "")),
+                (Number) node.get("width"),
+                (Number) node.get("height"));
     }
 
     private String generateNodes(Collection<DiagramNode> nodes) {
@@ -137,7 +157,17 @@ public class GraphvizFromJsonGen {
     }
 
     private String generateNode(DiagramNode node) {
-        return node.getId() + " [label=\"" + generateNodeLabel(node) + "\"];";
+        return node.getId() + " [label=\"" + generateNodeLabel(node) + "\"" +
+                generateSizeAttributesIfRequired(node) + "];";
+    }
+
+    private String generateSizeAttributesIfRequired(DiagramNode node) {
+        if (!nodesConfig.isSizeDefined(node)) {
+            return "";
+        }
+
+        return " fixedsize=true" + (nodesConfig.isWidthDefined(node) ? " width=" + nodesConfig.getWidth(node) : "") +
+                (nodesConfig.isHeightDefined(node) ? " height=" + nodesConfig.getHeight(node) : "");
     }
 
     private String generateNodeLabel(DiagramNode node) {
