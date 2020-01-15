@@ -6,7 +6,7 @@ Specify a `JSON` file to define a flow chart.
 
 :include-file: flow-diagrams/simple-dag.json {title: "simple-dag.json"}
 
-At minimum `edges` must be provided.
+At the minimum `edges` must be provided.
 
     :include-flow-chart: simple-dag.json
     
@@ -26,7 +26,7 @@ Add `config` section to specify a common size for all the nodes
 
 :include-flow-chart: flow-diagrams/common-size-dag.json
 
-Note: Size unit is not based on pixels. It is size units used by [Graphviz](https://graphviz.gitlab.io/)
+Note: Size unit is not based on pixels. It is size in inches (assuming correct DPI). It is size units used by [Graphviz](https://graphviz.gitlab.io/))
 
 Use `width` and `height` property on a node itself to control individual nodes size
 
