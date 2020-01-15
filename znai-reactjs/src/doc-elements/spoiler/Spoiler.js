@@ -16,6 +16,8 @@
 
 import * as React from 'react'
 
+import {documentationTracking} from '../tracking/DocumentationTracking'
+
 import './Spoiler.css'
 
 export class Spoiler extends React.Component {
@@ -42,6 +44,9 @@ export class Spoiler extends React.Component {
     }
 
     reveal = () => {
+        const {title} = this.props
+
         this.setState({active: false})
+        documentationTracking.onInteraction('spoiler', title)
     }
 }

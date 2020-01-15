@@ -161,6 +161,9 @@ const documentationTracker = {
     onSearchResultSelect(currentPageId, query, selectedPageId) {
         console.log('onSearchResultSelect', currentPageId, query, selectedPageId)
     },
+    onInteraction(currentPageId, type, id) {
+        console.log('onInteraction', currentPageId, type, id)
+    },
     onPresentationOpen(currentPageId) {
         console.log('onPresentationOpen', currentPageId)
     }
