@@ -20,18 +20,31 @@ import {elementsLibrary} from '../DefaultElementsLibrary'
 
 export function spoilerDemo(registry) {
     registry
-        .add('regular text', () => <Spoiler title="Press to reveal"
-                                            content={paragraphContent()}
-                                            elementsLibrary={elementsLibrary}/>)
-        .add('code snippet', () => <Spoiler title="Press to show code"
-                                            content={codeContent()}
-                                            elementsLibrary={elementsLibrary}/>)
-        .add('code snippet with bullets', () => <Spoiler title="reveal"
-                                                         content={codeWithBulletsContent()}
-                                                         elementsLibrary={elementsLibrary}/>)
-        .add('tabs', () => <Spoiler title="Reveal tabs"
-                                    content={tabsContent()}
-                                    elementsLibrary={elementsLibrary}/>)
+        .add('regular text', () =>
+            surroundWithText(
+                <Spoiler title="Press to reveal"
+                         content={paragraphContent()}
+                         elementsLibrary={elementsLibrary}/>))
+
+        .add('code snippet', () => surroundWithText(<Spoiler title="Press to show code"
+                                                             content={codeContent()}
+                                                             elementsLibrary={elementsLibrary}/>))
+        .add('code snippet with bullets', () => surroundWithText(<Spoiler title="reveal"
+                                                                          content={codeWithBulletsContent()}
+                                                                          elementsLibrary={elementsLibrary}/>))
+        .add('tabs', () => surroundWithText(<Spoiler title="Reveal tabs"
+                                                     content={tabsContent()}
+                                                     elementsLibrary={elementsLibrary}/>))
+}
+
+function surroundWithText(rendered) {
+    return (
+        <React.Fragment>
+            <elementsLibrary.DocElement content={paragraphContent()} elementsLibrary={elementsLibrary}/>
+            {rendered}
+            <elementsLibrary.DocElement content={paragraphContent()} elementsLibrary={elementsLibrary}/>
+        </React.Fragment>
+    )
 }
 
 function paragraphContent() {
