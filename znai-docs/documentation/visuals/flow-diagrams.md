@@ -6,7 +6,7 @@ Specify a `JSON` file to define a flow chart.
 
 :include-file: flow-diagrams/simple-dag.json {title: "simple-dag.json"}
 
-At minimum `edges` must be provided.
+At the minimum `edges` must be provided.
 
     :include-flow-chart: simple-dag.json
     
@@ -18,6 +18,21 @@ Use `\n` to split your label into multiple lines.
 
 :include-flow-chart: flow-diagrams/multiline-dag.json
 
+# Nodes Size
+
+Add `config` section to specify a common size for all the nodes 
+
+:include-json: flow-diagrams/common-size-dag.json {title: "shared nodes size", collapsedPaths: ['root.nodes', 'root.edges']}
+
+:include-flow-chart: flow-diagrams/common-size-dag.json
+
+Note: Size unit is not based on pixels. It is size in inches (assuming correct DPI). It is size units used by [Graphviz](https://graphviz.gitlab.io/))
+
+Use `width` and `height` property on a node itself to control individual nodes size
+
+:include-json: flow-diagrams/common-size-with-override-dag.json {title: "nodes size override", collapsedPaths: ['root.config', 'root.edges']}
+
+:include-flow-chart: flow-diagrams/common-size-with-override-dag.json
 
 # Highlight
 
@@ -37,7 +52,7 @@ Note: To highlight more than one element use `{highlight: ["n3", "n4"]}`
 
 # Color Groups
 
-Use `colorGroup` to assign a color group to a node. There are three color groups out of the box: `a` (default), `b`, `c`, `d`.
+Use `colorGroup` to assign a color group to a node. There are four color groups out of the box: `a` (default), `b`, `c`, `d`.
 
 :include-file: flow-diagrams/simple-dag-colors.json     
 

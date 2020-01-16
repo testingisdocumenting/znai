@@ -24,13 +24,19 @@ public class DiagramNode {
     private final String shape;
     private final Boolean highlight;
 
-    public DiagramNode(String id, String label, String url, String colorGroup, String shape, Boolean highlight) {
+    private final Number width;
+    private final Number height;
+
+    public DiagramNode(String id, String label, String url, String colorGroup, String shape, Boolean highlight,
+                       Number width, Number height) {
         this.id = id;
         this.label = label;
         this.url = url;
         this.colorGroup = colorGroup;
         this.shape = shape;
         this.highlight = highlight;
+        this.width = width;
+        this.height = height;
     }
 
     public String getId() {
@@ -59,5 +65,13 @@ public class DiagramNode {
 
     public String getUrl() {
         return url;
+    }
+
+    public Number getWidth() {
+        return width;
+    }
+
+    public Number getHeight() {
+        return height;
     }
 }

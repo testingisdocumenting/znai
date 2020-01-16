@@ -1,0 +1,36 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "label": "one"
+    },
+    {
+      "id": "n2",
+      "label": "two"
+    },
+    {
+      "id": "n3",
+      "label": "three"
+    }
+  ],
+  "edges": [
+    [
+      "n1",
+      "n2"
+    ],
+    [
+      "n2",
+      "n3"
+    ],
+    [
+      "n1",
+      "n3"
+    ]
+  ],
+  "config": {
+    "nodes": {
+      "width": 1.5,
+      "height": 1.5
+    }
+  }
+}
