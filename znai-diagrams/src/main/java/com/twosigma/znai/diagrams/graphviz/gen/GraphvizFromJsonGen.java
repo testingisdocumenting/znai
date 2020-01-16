@@ -166,8 +166,16 @@ public class GraphvizFromJsonGen {
             return "";
         }
 
-        return " fixedsize=true" + (nodesConfig.isWidthDefined(node) ? " width=" + nodesConfig.getWidth(node) : "") +
-                (nodesConfig.isHeightDefined(node) ? " height=" + nodesConfig.getHeight(node) : "");
+        StringBuilder sizeAttrs = new StringBuilder(" fixedsize=true");
+        if (nodesConfig.isWidthDefined(node)) {
+            sizeAttrs.append(" width=").append(nodesConfig.getWidth(node));
+        }
+
+        if (nodesConfig.isHeightDefined(node)) {
+            sizeAttrs.append(" height=").append(nodesConfig.getHeight(node));
+        }
+
+        return sizeAttrs.toString();
     }
 
     private String generateNodeLabel(DiagramNode node) {
