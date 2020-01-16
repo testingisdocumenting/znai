@@ -58,6 +58,46 @@ class GraphvizFromJsonGenTest {
     }
 
     @Test
+    void "pass size information to each node from config section"() {
+        generate([
+                nodes: [
+                        [id: "n1", label: "l1"],
+                        [id: "n2", label: "l2"]],
+                edges: [
+                        ["n1", "n2"],
+                        ["n1", "n2"]],
+                config: [
+                        nodes: [
+                            width: 4,
+                            height: 2
+                        ]]
+                ])
+
+        gv.should contain("n1 [label=\"l1\" fixedsize=true width=4 height=2]")
+        gv.should contain("n2 [label=\"l2\" fixedsize=true width=4 height=2]")
+    }
+
+    @Test
+    void "overrides config size by node size"() {
+        generate([
+                nodes: [
+                        [id: "n1", label: "l1"],
+                        [id: "n2", label: "l2", width: 8, height: 1]],
+                edges: [
+                        ["n1", "n2"],
+                        ["n1", "n2"]],
+                config: [
+                        nodes: [
+                            width: 4,
+                            height: 2
+                        ]]
+                ])
+
+        gv.should contain("n1 [label=\"l1\" fixedsize=true width=4 height=2]")
+        gv.should contain("n2 [label=\"l2\" fixedsize=true width=8 height=1]")
+    }
+
+    @Test
     void "applies meta information for highlighted items"() {
         generate([nodes: [[id: "n", label: "l", highlight: true]], edges: [["n", "n"]]])
         gv.should contain("n [label=\"l[h]\"]")
