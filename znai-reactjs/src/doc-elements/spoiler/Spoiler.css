@@ -17,7 +17,7 @@
 .znai-spoiler {
     display: grid;
 
-    border: solid 1px var(--znai-snippets-outer-border-color);
+    border: solid 1px var(--znai-spoiler-border-color);
     cursor: pointer;
     user-select: none;
 
@@ -25,13 +25,13 @@
 }
 
 .znai-spoiler * {
-    color: var(--znai-background-color);
-    background-color: var(--znai-background-color);
+    color: var(--znai-spoiler-background-color);
+    background-color: var(--znai-spoiler-background-color);
 }
 
 .znai-spoiler .token {
-    color: var(--znai-background-color);
-    background-color: var(--znai-background-color);
+    color: var(--znai-spoiler-background-color);
+    background-color: var(--znai-spoiler-background-color);
 }
 
 .znai-spoiler *,
@@ -51,9 +51,10 @@
     align-self: center;
     justify-self: center;
 
-    color: var(--znai-link-color);
-    background-color: var(--znai-background-color);
-    padding: 8px;
+    color: var(--znai-spoiler-title-color);
+    background-color: var(--znai-spoiler-background-color);
+    padding: 16px;
+    text-align: center;
 
     z-index: 1;
 }

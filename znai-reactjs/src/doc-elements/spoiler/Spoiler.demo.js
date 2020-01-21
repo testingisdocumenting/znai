@@ -26,6 +26,15 @@ export function spoilerDemo(registry) {
                          content={paragraphContent()}
                          elementsLibrary={elementsLibrary}/>))
 
+        .add('regular text small box', () =>
+            <div style={{width: 250}}>
+                {surroundWithText(
+                    <Spoiler title="Long spoiler title to cause wrap. On multiple lines."
+                             content={paragraphContent()}
+                             elementsLibrary={elementsLibrary}/>)
+                }
+            </div>)
+
         .add('code snippet', () => surroundWithText(<Spoiler title="Press to show code"
                                                              content={codeContent()}
                                                              elementsLibrary={elementsLibrary}/>))

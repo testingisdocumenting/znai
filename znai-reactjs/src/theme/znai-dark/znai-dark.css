@@ -90,6 +90,10 @@
     --znai-cli-command-color: #a0aeb5;
     --znai-snippets-explanation-background-color: #121619;
 
+    --znai-spoiler-border-color: var(--znai-snippets-outer-border-color);
+    --znai-spoiler-title-color: var(--znai-link-color);
+    --znai-spoiler-background-color: var(--znai-snippets-title-background-color);
+
     --znai-default-code-block-color: #aaa;
     --znai-class-color: #bbb;
     --znai-function-color: #d07d31;
