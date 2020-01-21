@@ -124,6 +124,10 @@
     --znai-snippets-space-below: 25px;
     --znai-snippets-explanation-background-color: #efefef;
 
+    --znai-spoiler-border-color: var(--znai-snippets-outer-border-color);
+    --znai-spoiler-title-color: var(--znai-link-color);
+    --znai-spoiler-background-color: var(--znai-snippets-title-background-color);
+
     --znai-attention-note-color: var(--znai-brand-primary-color);
     --znai-attention-note-background-color: rgba(41, 139, 231, .1);
     --znai-attention-warning-color: #f0ad4e;
@@ -135,7 +139,7 @@
 
     --znai-table-body-background-color: #fff;
     --znai-table-header-background-color: #f8faf9;
-    --znai-table-border-color: rgba(34,36,38,.1);
+    --znai-table-border-color: rgba(34, 36, 38, .1);
 
     --znai-api-key-color: #527d8f;
     --znai-api-description-color: #878988;
