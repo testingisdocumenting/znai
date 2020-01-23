@@ -180,7 +180,12 @@ public class ZnaiCliApp {
 
     private void createNew() {
         ConsoleOutputs.out(Color.BLUE, "scaffolding new documentation");
-        DocScaffolding scaffolding = new DocScaffolding(Paths.get("znai"));
+
+        Path pathToScaffold = config.isSourceRootSet() ?
+                config.getSourceRoot():
+                Paths.get("znai");
+
+        DocScaffolding scaffolding = new DocScaffolding(pathToScaffold);
         scaffolding.create();
     }
 
