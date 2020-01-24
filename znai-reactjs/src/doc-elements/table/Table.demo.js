@@ -22,6 +22,7 @@ import Table from './Table'
 export function tableDemo(registry) {
     registry
         .add('no style', () => <Table table={defaultStyle(twoColumnsData())} elementsLibrary={elementsLibrary}/>)
+        .add('with title', () => <Table table={defaultStyle(twoColumnsData())} title="User Data" elementsLibrary={elementsLibrary}/>)
         .add('no header, vertical only', () => <Table table={vertLinesOnly(twoColumnsData())}
                                                       elementsLibrary={elementsLibrary}/>)
         .add('no header, vertical only, no vertical padding', () => <Table table={noVertPadding(twoColumnsData())}
