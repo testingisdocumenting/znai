@@ -19,27 +19,22 @@ package com.twosigma.znai.maven
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugin.MojoExecutionException
 import org.apache.maven.plugin.MojoFailureException
-import org.apache.maven.plugins.annotations.LifecyclePhase
 import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.plugins.annotations.Parameter
 
-@Mojo(name = "build", defaultPhase = LifecyclePhase.PREPARE_PACKAGE)
-class ZnaiMavenBuildRunner extends AbstractMojo {
-    @Parameter
-    private String docId
-
+@Mojo(name = "new")
+class ZnaiMavenNewRunner extends AbstractMojo {
     @Parameter
     private String sourceRoot
 
-    @Parameter(defaultValue = '${project.build.directory}')
-    private String deployRoot
-
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
-        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), [
-                'doc-id': docId,
-                source  : sourceRoot,
-                deploy  : deployRoot,
-        ])
+        def args = [new: null]
+
+        if (sourceRoot != null) {
+            args['source'] = sourceRoot
+        }
+
+        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), args)
     }
 }
