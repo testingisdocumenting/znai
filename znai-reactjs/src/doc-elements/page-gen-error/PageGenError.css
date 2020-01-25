@@ -14,19 +14,32 @@
  * limitations under the License.
  */
 
-export function socketUrl(relativeUrl) {
-    if (process.env.NODE_ENV !== "production") {
-        return "ws://localhost:3333/preview"
-    }
+.znai-page-gen-error {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
 
-    let currentLocation = document.location.toString()
-    const hashIdx = currentLocation.lastIndexOf("#")
-    if (hashIdx !== -1) {
-        currentLocation = currentLocation.substr(0, hashIdx)
-    }
+    font-family: var(--znai-code-font-family);
+    font-size: var(--znai-code-text-size);
 
-    const isSecure = currentLocation.indexOf("https://") !== -1
-    const protocol = isSecure ? "wss" : "ws"
+    max-height: 50vh;
+    overflow: auto;
 
-    return protocol + "://" + window.location.hostname + ":" + window.location.port + "/" + relativeUrl
+    white-space: pre;
+
+    color: #eee;
+    background-color: #222;
+
+    padding: 32px;
+}
+
+.znai-page-gen-error-message {
+
+}
+
+.znai-page-gen-error-stacktrace {
+    margin-top: 16px;
+    color: #ffd9bd;
 }

@@ -26,6 +26,8 @@ import com.twosigma.znai.structure.TableOfContents;
 import com.twosigma.znai.structure.TocItem;
 import com.twosigma.znai.utils.FileUtils;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.stream.Stream;
@@ -137,7 +139,15 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
             code.run();
         } catch (Exception e) {
             ConsoleOutputs.err(e.getMessage());
-            previewSocket.sendError(e.getMessage());
+            previewSocket.sendError(e.getMessage(), renderStackTrace(e));
         }
+    }
+
+    private static String renderStackTrace(Throwable t) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter);
+        t.printStackTrace(writer);
+
+        return stringWriter.toString();
     }
 }
