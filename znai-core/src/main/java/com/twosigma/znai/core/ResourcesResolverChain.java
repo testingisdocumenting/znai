@@ -101,7 +101,7 @@ public class ResourcesResolverChain implements ResourcesResolver {
         return resolvers.stream()
                 .filter(r -> r.canResolve(path))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Can't find \"" + path + "\"\n\nTried following ResourceResolvers: \n" +
+                .orElseThrow(() -> new RuntimeException("Can't find \"" + path + "\"\n\nTried following ResourceResolvers:\n" +
                     resolvers.stream().map(r -> renderResolverDetails(r, path)).collect(joining("\n"))));
     }
 
