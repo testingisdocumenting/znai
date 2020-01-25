@@ -38,6 +38,7 @@ public class DocScaffolding {
     public void create() {
         createPages();
         createToc();
+        createAuxiliaryContentFiles();
         createMeta();
         createIndex();
         createLookupPaths();
@@ -56,7 +57,7 @@ public class DocScaffolding {
     }
 
     private void createPages() {
-        createPage("chapter-one", "page-one");
+        createPage("chapter-one", "getting-started");
         createPage("chapter-one", "page-two");
         createPage("chapter-two", "page-three");
         createPage("chapter-two", "page-four");
@@ -69,13 +70,17 @@ public class DocScaffolding {
         FileUtils.writeTextContent(workingDir.resolve("toc"), toc);
     }
 
+    private void createAuxiliaryContentFiles() {
+        createAuxiliaryContentFile("file-name.js");
+    }
+
     private void createFileFromResource(String fileName) {
         FileUtils.writeTextContent(workingDir.resolve(fileName), ResourceUtils.textContent(fileName));
     }
 
     private String buildTocSection(String dirName) {
         List<String> fileNames = fileNameByDirName.get(dirName);
-        return dirName + "\n    " + fileNames.stream().collect(Collectors.joining("\n    "));
+        return dirName + "\n    " + String.join("\n    ", fileNames);
     }
 
     private void createPage(String dirName, String fileName) {
@@ -89,5 +94,9 @@ public class DocScaffolding {
     private void registerPage(String dirName, String fileName) {
         List<String> fileNames = fileNameByDirName.computeIfAbsent(dirName, k -> new ArrayList<>());
         fileNames.add(fileName);
+    }
+
+    private void createAuxiliaryContentFile(String resourceFilePath) {
+        FileUtils.writeTextContent(workingDir.resolve(resourceFilePath), ResourceUtils.textContent(resourceFilePath));
     }
 }
