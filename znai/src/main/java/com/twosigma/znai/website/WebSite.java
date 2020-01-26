@@ -381,7 +381,7 @@ public class WebSite {
             updateSearchEntries(tocItem, parserResult);
         } catch(Exception e) {
             throw new RuntimeException("error during parsing of <" + tocItem +
-                    ">:" + e.getMessage(), e);
+                    ">:\n\n" + e.getMessage() + "\n\n", e);
         }
     }
 

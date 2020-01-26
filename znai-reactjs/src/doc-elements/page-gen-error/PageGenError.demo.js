@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-export function socketUrl(relativeUrl) {
-    if (process.env.NODE_ENV !== "production") {
-        return "ws://localhost:3333/preview"
+import * as React from 'react'
+import {PageGenError} from './PageGenError'
+
+export function pageGenErrorDemo(registry) {
+    registry
+        .add('small error', () => <PageGenError error={{message: "File is not found", stackTrace: "stackTrace"}}/>)
+
+        .add('large error', () => <PageGenError error={{
+            message: generateLargeText('error line #'),
+            stackTrace: generateLargeText("stack trace")
+        }}/>)
+}
+
+function generateLargeText(prefix) {
+    let lines = []
+    for (let idx = 0; idx < 50; idx++) {
+        lines.push(prefix + (idx + 1))
     }
 
-    let currentLocation = document.location.toString()
-    const hashIdx = currentLocation.lastIndexOf("#")
-    if (hashIdx !== -1) {
-        currentLocation = currentLocation.substr(0, hashIdx)
-    }
-
-    const isSecure = currentLocation.indexOf("https://") !== -1
-    const protocol = isSecure ? "wss" : "ws"
-
-    return protocol + "://" + window.location.hostname + ":" + window.location.port + "/" + relativeUrl
+    return lines.join("\n")
 }
