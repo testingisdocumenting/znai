@@ -58,7 +58,8 @@ class ResourcesResolverChainTest {
 
         code {
             chain.textContent('path')
-        } should throwException("can't find ResourceResolver to handle \"path\":\n" +
+        } should throwException("Can't find \"path\"\n\n" +
+                "Tried following ResourceResolvers:\n" +
                 "com.twosigma.znai.core.ResourcesResolverChainTest.Resolver resources not found:\n" +
                 "  a:1/path\n" +
                 "  a:2/path\n" +

@@ -19,6 +19,7 @@ import React, {Component} from 'react'
 import TocPanel from './structure/toc/TocPanel'
 import SelectedTextActionSelection from './selected-text-extensions/SelectedTextActionSelection'
 import {selectedTextExtensions} from './selected-text-extensions/SelectedTextExtensions'
+import {PageGenError} from './page-gen-error/PageGenError'
 
 class DocumentationLayout extends Component {
     state = {
@@ -44,7 +45,7 @@ class DocumentationLayout extends Component {
             pageGenError} = this.props
 
         const displaySelectedTextActions = textSelection && textSelection.startNode && selectedTextExtensions.hasExtensions()
-        const pageGenErrorPanel = pageGenError ? (<div className="page-gen-error">{pageGenError}</div>) : null
+        const pageGenErrorPanel = pageGenError ? (<PageGenError error={pageGenError}/>) : null
 
         return (
             <div className="documentation">

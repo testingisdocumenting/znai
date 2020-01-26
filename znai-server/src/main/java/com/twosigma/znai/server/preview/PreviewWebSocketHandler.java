@@ -76,7 +76,11 @@ public class PreviewWebSocketHandler extends JsonWebSocketHandler {
         send(payload);
     }
 
-    public void sendError(String error) {
+    public void sendError(String errorMessage, String stackTrace) {
+        Map<String, Object> error = new LinkedHashMap<>();
+        error.put("message", errorMessage);
+        error.put("stackTrace", stackTrace);
+
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "error");
         payload.put("error", error);

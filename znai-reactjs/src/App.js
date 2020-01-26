@@ -57,6 +57,7 @@ import {svgPresentationDemo} from './doc-elements/svg/PresentationSvg.demo'
 import {embeddedSvgDemo} from './doc-elements/svg/EmbeddedSvg.demo'
 import {presentationDemo} from './doc-elements/presentation/Presentation.demo'
 import {spoilerDemo} from './doc-elements/spoiler/Spoiler.demo'
+import {pageGenErrorDemo} from './doc-elements/page-gen-error/PageGenError.demo'
 
 import {themeRegistry} from "./theme/ThemeRegistry"
 import WithTheme from "./theme/WithTheme"
@@ -122,6 +123,9 @@ registries.add('presentation')
     .registerAsTabs('Xml Presentation', xmlPresentationDemo)
     .registerAsTabs('SVG', svgPresentationDemo)
     .registerAsTabs('GraphViz SVG', graphVizSvgPresentationDemo)
+
+registries.add('preview')
+    .registerAsTabs('Page Gen Error', pageGenErrorDemo)
 
 registries.add('screens')
     .registerAsTabs('Documentation Preparation', documentationPreparationDemo)
