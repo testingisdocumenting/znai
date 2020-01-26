@@ -33,8 +33,8 @@ class PageContentPreviewDiff {
     }
 
     findFirstDifferentNode() {
-        let btw = document.createTreeWalker(this.before);
-        let atw = document.createTreeWalker(this.after);
+        let btw = document.createTreeWalker(this.before)
+        let atw = document.createTreeWalker(this.after)
 
         for (;;) {
             const bn = btw.nextNode()
