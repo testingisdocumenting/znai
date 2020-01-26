@@ -220,17 +220,6 @@
     z-index: 1000;
 }
 
-.page-gen-error {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2000;
-    color: white;
-    background-color: black;
-    padding: 20px;
-}
-
 .presentation-button {
     font-size: 16px;
     cursor: pointer;
