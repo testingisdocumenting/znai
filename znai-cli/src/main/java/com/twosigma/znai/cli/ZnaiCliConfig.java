@@ -174,7 +174,7 @@ public class ZnaiCliConfig {
     }
 
     public void print() {
-        if (!isScaffoldMode() || !isServeMode()) {
+        if (!isScaffoldMode() && !isServeMode()) {
             print("source root", sourceRoot);
         }
 
