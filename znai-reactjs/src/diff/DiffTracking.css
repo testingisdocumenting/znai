@@ -20,6 +20,11 @@
     animation-fill-mode: backwards;
 }
 
+.content-block.znai-preview-change-tracker-indicator,
+.wide-screen.znai-preview-change-tracker-indicator {
+    animation-name: znai-preview-change-container-background-color-keyframes;
+}
+
 text.znai-preview-change-tracker-indicator {
     animation-name: znai-preview-change-color-keyframes;
     animation-duration: 2s;
@@ -29,6 +34,12 @@ text.znai-preview-change-tracker-indicator {
 @keyframes znai-preview-change-background-color-keyframes {
     0% {background-color: rgba(38, 110, 164, 0)}
     50% {background-color: rgba(38, 110, 164, 0.5)}
+    100% {background-color: rgba(38, 110, 164, 0)}
+}
+
+@keyframes znai-preview-change-container-background-color-keyframes {
+    0% {background-color: rgba(38, 110, 164, 0)}
+    50% {background-color: rgba(38, 110, 164, 0.2)}
     100% {background-color: rgba(38, 110, 164, 0)}
 }
 
