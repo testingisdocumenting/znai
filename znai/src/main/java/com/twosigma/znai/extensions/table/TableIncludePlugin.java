@@ -32,10 +32,7 @@ import com.twosigma.znai.search.SearchText;
 import com.twosigma.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -83,7 +80,14 @@ public class TableIncludePlugin implements IncludePlugin {
 
         tableAsMap.put("data", parseMarkupInEachRow((List<List<Object>>) tableAsMap.get("data")));
 
-        return PluginResult.docElement(DocElementType.TABLE, Collections.singletonMap("table", tableAsMap));
+        Map<String, Object> props = new LinkedHashMap<>();
+        props.put("table", tableAsMap);
+
+        if (pluginParams.getOpts().has("title")) {
+            props.put("title", pluginParams.getOpts().get("title"));
+        }
+
+        return PluginResult.docElement(DocElementType.TABLE, props);
     }
 
     private List<Object> parseMarkupInEachRow(List<List<Object>> rows) {
