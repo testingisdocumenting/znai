@@ -82,7 +82,7 @@ public class ZnaiCliApp {
 
         reactJsBundle = new ReactJsBundle();
 
-        if (! config.isServeMode()) {
+        if (!config.isServeMode()) {
             generateDocs();
         }
 
@@ -179,8 +179,13 @@ public class ZnaiCliApp {
     }
 
     private void createNew() {
-        ConsoleOutputs.out(Color.BLUE, "scaffolding new documentation");
-        DocScaffolding scaffolding = new DocScaffolding(Paths.get("znai"));
+        Path pathToScaffold = (config.isSourceRootSet() ?
+                config.getSourceRoot() :
+                Paths.get("znai")).toAbsolutePath();
+
+        ConsoleOutputs.out(Color.BLUE, "scaffolding new documentation: ", Color.PURPLE, pathToScaffold);
+
+        DocScaffolding scaffolding = new DocScaffolding(pathToScaffold);
         scaffolding.create();
     }
 

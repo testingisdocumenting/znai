@@ -27,6 +27,14 @@ So the following `JSON` file...
 
 :include-table: table.json
 
+# Title
+
+Use `title` parameter to set table title.
+
+    :include-table: table.json {title: "Monthly Report"}
+    
+:include-table: table.json {title: "Monthly Report"}
+
 # Arrange and Filter
 
 To change the order of columns or filter out certain columns, specify the `columns` parameter.

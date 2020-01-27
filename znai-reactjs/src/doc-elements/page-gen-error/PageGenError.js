@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-export function socketUrl(relativeUrl) {
-    if (process.env.NODE_ENV !== "production") {
-        return "ws://localhost:3333/preview"
-    }
+import * as React from 'react'
 
-    let currentLocation = document.location.toString()
-    const hashIdx = currentLocation.lastIndexOf("#")
-    if (hashIdx !== -1) {
-        currentLocation = currentLocation.substr(0, hashIdx)
-    }
+import './PageGenError.css'
 
-    const isSecure = currentLocation.indexOf("https://") !== -1
-    const protocol = isSecure ? "wss" : "ws"
-
-    return protocol + "://" + window.location.hostname + ":" + window.location.port + "/" + relativeUrl
+export function PageGenError({error}) {
+    return (
+        <div className="znai-page-gen-error">
+            <div className="znai-page-gen-error-message">{error.message}</div>
+            <div className="znai-page-gen-error-stacktrace">{error.stackTrace}</div>
+        </div>
+    )
 }

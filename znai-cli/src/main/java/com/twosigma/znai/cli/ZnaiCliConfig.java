@@ -77,6 +77,7 @@ public class ZnaiCliConfig {
     private Path deployRoot;
     private Path exportRoot;
     private Path sourceRoot;
+    private boolean isSourceRootSet;
     private Integer port;
     private Mode mode;
     private List<String> specifiedCustomCommands;
@@ -132,6 +133,10 @@ public class ZnaiCliConfig {
         return validateIsSet("sourceRoot", sourceRoot);
     }
 
+    public boolean isSourceRootSet() {
+        return isSourceRootSet;
+    }
+
     public Path getExportRoot() {
         return exportRoot;
     }
@@ -169,7 +174,7 @@ public class ZnaiCliConfig {
     }
 
     public void print() {
-        if (!isScaffoldMode() || !isServeMode()) {
+        if (!isScaffoldMode() && !isServeMode()) {
             print("source root", sourceRoot);
         }
 
@@ -214,7 +219,8 @@ public class ZnaiCliConfig {
 
         markupType = commandLine.hasOption(MARKUP_TYPE_KEY) ? commandLine.getOptionValue(MARKUP_TYPE_KEY) : MarkupTypes.MARKDOWN;
 
-        sourceRoot = Paths.get(commandLine.hasOption(SOURCE_KEY) ? commandLine.getOptionValue(SOURCE_KEY) : "")
+        isSourceRootSet = commandLine.hasOption(SOURCE_KEY);
+        sourceRoot = Paths.get(isSourceRootSet ? commandLine.getOptionValue(SOURCE_KEY) : "")
                 .toAbsolutePath();
 
         deployRoot = (commandLine.hasOption(DEPLOY_KEY) ? Paths.get(commandLine.getOptionValue(DEPLOY_KEY)) :
