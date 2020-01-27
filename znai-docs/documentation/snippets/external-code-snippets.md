@@ -1,17 +1,18 @@
-# Existing File
+# Embedding Content
 
-To make maintaining documentation easier you can refer to text and code snippets in already existing files.
+To reduce documentation maintenance burden avoid copy and paste of code snippets.
+Embed content by referencing existing files using `:include-file:` plugin instead.  
 
     :include-file: file-name.js
     
-This `include-` syntax will appear throughout the documentation and represents a family of custom Markdown extensions that enable the inclusion of various artifacts. 
+This `include-` syntax will appear throughout the documentation and represents a family of custom Markdown extensions. 
 
 :include-file: file-name.js
 
 File will be looked up using following rules:
 * directory with a markup file
 * root directory of a documentation
-* all lookup paths listed in a special file
+* all lookup paths listed in a `lookup-paths` file
 
 # Title
 
