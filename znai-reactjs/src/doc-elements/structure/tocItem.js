@@ -14,27 +14,7 @@
  * limitations under the License.
  */
 
-export function findParentWithScroll(node) {
-    if (node == null) {
-        return null;
-    }
-
-    if (node.scrollTop > 0) {
-        return node;
-    } else {
-        return findParentWithScroll(node.parentNode);
-    }
-}
-
-export function getNodeClassName(node) {
-    // to handle svg nodes case as well
-    return node.className ? node.className.toString() : ''
-}
-
-export function setNodeClassName(node, name) {
-    node.setAttribute('class', name)
-}
-
-export function getNodeTagName(node) {
-    return node.tagName ? node.tagName.toLowerCase() : ''
+export function areTocItemEquals(a, b) {
+    return a.dirName === b.dirName &&
+        a.fileName === b.fileName
 }

@@ -25,6 +25,7 @@ import {
 } from './DiffTracking'
 
 const [getTextValue, setTextValue] = simulateState('hello')
+const [getSvgTextValue, setSvgTextValue] = simulateState('svg hello')
 const [getBeforeItems, setBeforeItems] = simulateState([])
 const [getAfterItems, setAfterItems] = simulateState([])
 const [getScrollCaseBeforeItems, setScrollCaseBeforeItems] = simulateState(['line1', 'line2', 'line3', 'line4', 'line5'])
@@ -47,12 +48,17 @@ export function diffTrackingDemo(registry) {
                         <div className="simple-text">{getTextValue()}</div>
                     </div>
 
+                    <svg width={200} height={100} >
+                        <text x={50} y={50}>{getSvgTextValue()}</text>
+                    </svg>
+
                     <div className="simple-text">{getTextValue()}</div>
 
                     {getBeforeItems().map((item, idx) => <div key={idx} className="simple-text">{item}</div>)}
                 </div>
 
                 <button onClick={changeText}>change text</button>
+                <button onClick={changeSvgText}>change svg text</button>
                 <button onClick={addBeforeItem}>add before item</button>
                 <button onClick={addAfterItem}>add after item</button>
 
@@ -80,6 +86,10 @@ export function diffTrackingDemo(registry) {
 
 function changeText() {
     setTextValue(getTextValue() + '@')
+}
+
+function changeSvgText() {
+    setSvgTextValue(getSvgTextValue() + '@')
 }
 
 let itemIdx = 0

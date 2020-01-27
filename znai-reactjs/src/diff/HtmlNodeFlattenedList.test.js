@@ -22,10 +22,13 @@ describe('HtmlNodeFlattenedList', () => {
         const root = createNode({
             tagName: 'div', children: [
                 {
-                    id: 'c1', tagName: 'div', className: 'content-block', children: [
+                    id: 'c1', tagName: 'div', className: 'custom-class content-block', children: [
                         {id: 't1', tagName: 'div', className: 'text', text: 'line 1'},
                         {id: 'img1', tagName: 'img', className: 'annotated', attrs: {src: 'path', timestamp: 'time'}},
-                        {id: 't2', tagName: 'div', className: 'text', text: 'line 2'}]
+                        {id: 't2', tagName: 'div', className: 'text', text: 'line 2'},
+                        {tagName: 'div', children: [
+                                {id: 'nested1', tagName: 'div', text: 'nested-text'}
+                            ]}]
                 },
                 {
                     id: 'no-container', tagName: 'div', children: [
@@ -44,52 +47,53 @@ describe('HtmlNodeFlattenedList', () => {
 
         const simplifiedActual = nodeList.list.map(e => (
             {
-                idx: e.idx,
                 value: e.value,
                 nodeId: e.node.id,
                 containerId: e.container && e.container.id
             }
         ))
 
+        const idxes = nodeList.list.map(e => e.idx)
+
+        expect(idxes).toEqual([0, 1, 2, 3, 4, 5, 6, 7])
+
         expect(simplifiedActual).toEqual([
             {
-                idx: 0,
                 value: 'line 1',
                 nodeId: 't1',
                 containerId: 'c1'
             },
             {
-                idx: 1,
                 value: 'src=path timestamp=time',
                 nodeId: 'img1',
                 containerId: 'c1'
             },
             {
-                idx: 2,
                 value: 'line 2',
                 nodeId: 't2',
                 containerId: 'c1'
             },
             {
-                idx: 3,
+                value: 'nested-text',
+                nodeId: 'nested1',
+                containerId: 'c1'
+            },
+            {
                 value: 'line 01',
                 nodeId: 'noc1',
                 containerId: null
             },
             {
-                idx: 4,
                 value: 'line 02',
                 nodeId: 'noc2',
                 containerId: null
             },
             {
-                idx: 5,
                 value: 'line 3',
                 nodeId: 't3',
                 containerId: 'c2'
             },
             {
-                idx: 6,
                 value: 'line 4',
                 nodeId: 't4',
                 containerId: 'c2'

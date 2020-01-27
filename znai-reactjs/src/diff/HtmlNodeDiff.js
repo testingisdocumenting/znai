@@ -17,6 +17,7 @@
 import * as Diff from 'diff'
 
 import {HtmlNodeFlattenedList} from './HtmlNodeFlattenedList'
+import {getNodeClassName, setNodeClassName} from '../utils/domNodes'
 
 export class HtmlNodeDiff {
     constructor(beforeNodeRoot, afterNodeRoot) {
@@ -104,15 +105,16 @@ function removeAnimationClass(animation) {
 }
 
 function addAnimationClass(node) {
-    if (node.className.indexOf(animationClassName) !== -1) {
+    const nodeClass = getNodeClassName(node)
+    if (nodeClass.indexOf(animationClassName) !== -1) {
         return
     }
 
-    const optionalSpace = node.className.length === 0 ? '' : ' '
-    node.className += optionalSpace + animationClassName
+    const optionalSpace = nodeClass.length === 0 ? '' : ' '
+    setNodeClassName(node, nodeClass + optionalSpace + animationClassName)
 }
 
 function removeClass(node, className) {
-    const parts = node.className.split(/\s+/)
-    node.className = parts.filter(p => p !== className).join(' ')
+    const parts = getNodeClassName(node).split(/\s+/)
+    setNodeClassName(node, parts.filter(p => p !== className).join(' '))
 }

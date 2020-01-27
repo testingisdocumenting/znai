@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-const containerClasses = createContainerClassesDict()
+import {getNodeClassName, getNodeTagName} from '../utils/domNodes'
+
+const containerClassNames = createContainerClassesList()
 
 export class HtmlNodeFlattenedList {
     constructor(node) {
@@ -53,7 +55,6 @@ export class HtmlNodeFlattenedList {
             this.registerTextNode(node)
         } else if (isVisualNode(node)) {
             this.registerVisualNode(node)
-            return true
         }
 
         return false
@@ -78,14 +79,12 @@ export class HtmlNodeFlattenedList {
 }
 
 function isContainerNode(node) {
-    const classes = (typeof node.className === 'string') ?
-        node.className.split(' ').filter((cn) => cn.length) : []
-
-    if (!classes.length) {
+    if (!node.className) {
         return false
     }
 
-    return classes.some(className => containerClasses[className])
+    const nodeClass = getNodeClassName(node)
+    return containerClassNames.some(className => nodeClass.indexOf(className) !== -1)
 }
 
 function isTextNode(node) {
@@ -93,13 +92,8 @@ function isTextNode(node) {
 }
 
 function isVisualNode(node) {
-    if (!node.tagName) {
-        return false
-    }
-
-    const tagName = node.tagName.toLowerCase()
-    return tagName === 'img' ||
-        tagName === 'svg'
+    const tagName = getNodeTagName(node)
+    return tagName === 'img'
 }
 
 function attributesAsText(node) {
@@ -117,17 +111,9 @@ function attributesAsText(node) {
     return parts.join(' ')
 }
 
-function createContainerClassesDict() {
-    const dict = {}
-
-    const classNames = [
+function createContainerClassesList() {
+    return [
         'content-block',
         'wide-screen'
     ]
-
-    classNames.forEach(className =>
-        dict[className] = true
-    )
-
-    return dict
 }

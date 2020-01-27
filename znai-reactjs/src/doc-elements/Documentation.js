@@ -47,6 +47,7 @@ import {pageTypesRegistry} from './page/PageTypesRegistry'
 import {injectGlobalOverridesCssLink} from './CssOverrides'
 
 import {updateGlobalDocReferences} from './references/globalDocReferences'
+import {areTocItemEquals} from './structure/tocItem'
 
 import './DocumentationLayout.css'
 import './search/Search.css'
@@ -464,8 +465,7 @@ export class Documentation extends Component {
     navigateToPageIfRequired(tocItem) {
         const currentToc = this.state.page.tocItem
 
-        // TODO extract and reuse in Page.js as well
-        if (currentToc.dirName !== tocItem.dirName || currentToc.fileName !== tocItem.fileName) {
+        if (!areTocItemEquals(currentToc, tocItem)) {
             return documentationNavigation.navigateToPage(tocItem)
         }
 

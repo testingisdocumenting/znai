@@ -14,27 +14,16 @@
  * limitations under the License.
  */
 
-export function findParentWithScroll(node) {
-    if (node == null) {
-        return null;
-    }
+import {areTocItemEquals} from './tocItem'
 
-    if (node.scrollTop > 0) {
-        return node;
-    } else {
-        return findParentWithScroll(node.parentNode);
-    }
-}
+describe('toc items', () => {
+    it('equality', () => {
+        expect(areTocItemEquals(
+            {dirName: 'd1', fileName: 'f1'},
+            {dirName: 'd1', fileName: 'f1', extra: 'e1'})).toBeTruthy()
 
-export function getNodeClassName(node) {
-    // to handle svg nodes case as well
-    return node.className ? node.className.toString() : ''
-}
-
-export function setNodeClassName(node, name) {
-    node.setAttribute('class', name)
-}
-
-export function getNodeTagName(node) {
-    return node.tagName ? node.tagName.toLowerCase() : ''
-}
+        expect(areTocItemEquals(
+            {dirName: 'd1', fileName: 'f2'},
+            {dirName: 'd1', fileName: 'f1'})).toBeFalsy()
+    })
+})

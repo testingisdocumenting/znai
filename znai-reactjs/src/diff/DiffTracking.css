@@ -15,13 +15,33 @@
  */
 
 .znai-preview-change-tracker-indicator {
-    animation-name: znai-preview-change-tracker-keyframes;
+    animation-name: znai-preview-change-background-color-keyframes;
     animation-duration: 2s;
-    animation-fill-mode: both;
+    animation-fill-mode: backwards;
 }
 
-@keyframes znai-preview-change-tracker-keyframes {
+text.znai-preview-change-tracker-indicator {
+    animation-name: znai-preview-change-color-keyframes;
+    animation-duration: 2s;
+    animation-fill-mode: backwards;
+}
+
+@keyframes znai-preview-change-background-color-keyframes {
     0% {background-color: rgba(38, 110, 164, 0)}
     50% {background-color: rgba(38, 110, 164, 0.5)}
     100% {background-color: rgba(38, 110, 164, 0)}
+}
+
+@keyframes znai-preview-change-color-keyframes {
+    0% {
+        visibility:hidden;
+        fill: rgb(164, 46, 37);
+        opacity: 0;
+    }
+
+    100% {
+        visibility: visible;
+        fill: rgb(164, 125, 62);
+        opacity: 1;
+    }
 }
