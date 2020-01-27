@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-.preview-change-indicator {
-    animation-name: preview-change-keyframes;
+.znai-preview-change-tracker-indicator {
+    animation-name: znai-preview-change-tracker-keyframes;
     animation-duration: 2s;
     animation-fill-mode: both;
 }
 
-@keyframes preview-change-keyframes {
+@keyframes znai-preview-change-tracker-keyframes {
     0% {background-color: rgba(38, 110, 164, 0)}
     50% {background-color: rgba(38, 110, 164, 0.5)}
     100% {background-color: rgba(38, 110, 164, 0)}

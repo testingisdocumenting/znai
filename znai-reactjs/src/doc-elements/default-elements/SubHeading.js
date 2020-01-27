@@ -27,7 +27,7 @@ export function SubHeading({level, title, id}) {
 
     return (
         <Element className="content-block" id={id}>
-            {title}
+            <span>{title}</span>
             <a href={"#" + id}><Icon id="link"/></a>
         </Element>
     )

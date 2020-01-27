@@ -22,41 +22,77 @@ describe('HtmlNodeFlattenedList', () => {
         const root = createNode({
             tagName: 'div', children: [
                 {
-                    tagName: 'div', children: [
-                        {tagName: 'div', className: 'text', text: 'line 1'},
-                        {tagName: 'div', className: 'text', text: 'line 2'}]
+                    id: 'c1', tagName: 'div', className: 'content-block', children: [
+                        {id: 't1', tagName: 'div', className: 'text', text: 'line 1'},
+                        {id: 'img1', tagName: 'img', className: 'annotated', attrs: {src: 'path', timestamp: 'time'}},
+                        {id: 't2', tagName: 'div', className: 'text', text: 'line 2'}]
                 },
                 {
-                    tagName: 'div', children: [
-                        {tagName: 'div', className: 'text', text: 'line 3'},
-                        {tagName: 'div', className: 'text', text: 'line 4'}]
+                    id: 'no-container', tagName: 'div', children: [
+                        {id: 'noc1', tagName: 'div', className: 'text', text: 'line 01'},
+                        {id: 'noc2', tagName: 'div', className: 'text', text: 'line 02'}]
+                },
+                {
+                    id: 'c2', tagName: 'div', className: 'wide-screen', children: [
+                        {id: 't3', tagName: 'div', className: 'text', text: 'line 3'},
+                        {id: 't4', tagName: 'div', className: 'text', text: 'line 4'}]
                 }
             ]
         })
 
         const nodeList = new HtmlNodeFlattenedList(root)
 
-        const simplifiedActual = nodeList.list.map(e => ({idx: e.idx, innerText: e.node.innerText, text: e.text}))
+        const simplifiedActual = nodeList.list.map(e => (
+            {
+                idx: e.idx,
+                value: e.value,
+                nodeId: e.node.id,
+                containerId: e.container && e.container.id
+            }
+        ))
+
         expect(simplifiedActual).toEqual([
             {
-                "idx": 0,
-                "innerText": "line 1",
-                "text": "line 1"
+                idx: 0,
+                value: 'line 1',
+                nodeId: 't1',
+                containerId: 'c1'
             },
             {
-                "idx": 1,
-                "innerText": "line 2",
-                "text": "line 2"
+                idx: 1,
+                value: 'src=path timestamp=time',
+                nodeId: 'img1',
+                containerId: 'c1'
             },
             {
-                "idx": 2,
-                "innerText": "line 3",
-                "text": "line 3"
+                idx: 2,
+                value: 'line 2',
+                nodeId: 't2',
+                containerId: 'c1'
             },
             {
-                "idx": 3,
-                "innerText": "line 4",
-                "text": "line 4"
+                idx: 3,
+                value: 'line 01',
+                nodeId: 'noc1',
+                containerId: null
+            },
+            {
+                idx: 4,
+                value: 'line 02',
+                nodeId: 'noc2',
+                containerId: null
+            },
+            {
+                idx: 5,
+                value: 'line 3',
+                nodeId: 't3',
+                containerId: 'c2'
+            },
+            {
+                idx: 6,
+                value: 'line 4',
+                nodeId: 't4',
+                containerId: 'c2'
             }
         ])
 

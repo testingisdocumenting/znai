@@ -17,6 +17,7 @@
 import React, {Component} from 'react'
 
 import {tabsRegistration} from './TabsRegistration'
+import {findParentWithScroll} from '../../utils/domNodes'
 
 import './Tabs.css'
 
@@ -128,18 +129,6 @@ class Tabs extends Component {
 
         const diffY = this.node.getBoundingClientRect().y - snapshot.clientRect.y
         snapshot.parentWithScrollNode.scrollTop += diffY
-    }
-}
-
-function findParentWithScroll(node) {
-    if (node == null) {
-        return null;
-    }
-
-    if (node.scrollTop > 0) {
-        return node;
-    } else {
-        return findParentWithScroll(node.parentNode);
     }
 }
 

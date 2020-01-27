@@ -14,29 +14,15 @@
  * limitations under the License.
  */
 
-export function createNode({tagName, className, text, id, attrs = {}, children = []}) {
-    const node = document.createElement(tagName)
-
-    if (text) {
-        const textNode = document.createTextNode(text)
-        node.appendChild(textNode)
+export function findParentWithScroll(node) {
+    if (node == null) {
+        return null;
     }
 
-    if (id) {
-        node.id = id
+    if (node.scrollTop > 0) {
+        return node;
+    } else {
+        return findParentWithScroll(node.parentNode);
     }
-
-    if (className) {
-        node.className = className
-    }
-
-    Object.keys(attrs).forEach(key => {
-        node.setAttribute(key, attrs[key])
-    })
-
-    children.forEach(child => {
-        node.appendChild(createNode(child))
-    })
-
-    return node
 }
+

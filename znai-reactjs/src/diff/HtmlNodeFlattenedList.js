@@ -14,66 +14,115 @@
  * limitations under the License.
  */
 
-const classesToSkip = createClassesToSkipDict()
+const containerClasses = createContainerClassesDict()
 
 export class HtmlNodeFlattenedList {
     constructor(node) {
         this.root = node
         this.list = []
         this.idx = 0;
+        this.currentContainerNode = null
 
-        this._walkNodes()
+        this.walkNodes(this.root)
     }
 
-    _walkNodes() {
-        let treeWalker = document.createTreeWalker(this.root)
+    walkNodes(node) {
+        if (node === null) {
+            return
+        }
 
-        for (;;) {
-            let node = treeWalker.nextNode()
-            if (!node) {
-                break
+        const shouldStop = this.processNode(node)
+        if (shouldStop) {
+            return
+        }
+
+        const childNodesCount = node.childNodes.length
+        for (let idx = 0; idx < childNodesCount; idx++) {
+            if (isContainerNode(node)) {
+                this.currentContainerNode = node
             }
 
-            if (ignoreNode(node)) {
-                continue
-            }
+            this.walkNodes(node.childNodes[idx])
 
-            this.registerNode(node)
+            this.currentContainerNode = null
         }
     }
 
-    registerNode(node) {
+    processNode(node) {
+        if (isTextNode(node)) {
+            this.registerTextNode(node)
+        } else if (isVisualNode(node)) {
+            this.registerVisualNode(node)
+            return true
+        }
+
+        return false
+    }
+
+    registerTextNode(node) {
+        this.registerNode(node.parentNode, node.textContent)
+    }
+
+    registerVisualNode(node) {
+        this.registerNode(node, attributesAsText(node))
+    }
+
+    registerNode(node, value) {
         this.list.push({
             idx: this.idx++,
             node: node,
-            text: node.innerText
+            value: value,
+            container: this.currentContainerNode
         })
     }
 }
 
-function ignoreNode(node) {
-    const classes = (typeof node.className === 'string') ? node.className.split(' ').filter((cn) => cn.length) : []
-    if (! classes.length) {
-        return true
+function isContainerNode(node) {
+    const classes = (typeof node.className === 'string') ?
+        node.className.split(' ').filter((cn) => cn.length) : []
+
+    if (!classes.length) {
+        return false
     }
 
-    return classes.some(className => classesToSkip[className])
+    return classes.some(className => containerClasses[className])
 }
 
-function createClassesToSkipDict() {
+function isTextNode(node) {
+    return node.nodeType === Node.TEXT_NODE && !!node.textContent
+}
+
+function isVisualNode(node) {
+    if (!node.tagName) {
+        return false
+    }
+
+    const tagName = node.tagName.toLowerCase()
+    return tagName === 'img' ||
+        tagName === 'svg'
+}
+
+function attributesAsText(node) {
+    const parts = []
+
+    for (let idx = 0; idx < node.attributes.length; idx++) {
+        const attr = node.attributes[idx];
+        if (attr.name === 'id' || attr.name === 'class') {
+            continue
+        }
+
+        parts.push(`${attr.name}=${attr.value}`)
+    }
+
+    return parts.join(' ')
+}
+
+function createContainerClassesDict() {
     const dict = {}
 
     const classNames = [
-        'section',
         'content-block',
-        'page-title-block',
-        'page-meta-block',
-        'page-last-update-time',
-        'two-sides-page-content',
-        'page-two-sides-layout',
-        'page-two-sides-left-part',
-        'page-two-sides-right-part',
-        'two-sides-section'
+        'wide-screen'
     ]
 
     classNames.forEach(className =>
@@ -82,4 +131,3 @@ function createClassesToSkipDict() {
 
     return dict
 }
-
