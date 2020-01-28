@@ -79,7 +79,7 @@ public class CliCommandIncludePlugin implements IncludePlugin {
             props.put("presentationThreshold", opts.get("presentationThreshold"));
         }
 
-        List<String> splitAfter = opts.getList("splitAfter");
+        Set<String> splitAfter = opts.getSet("splitAfter");
         if (!splitAfter.isEmpty()) {
             props.put("splitAfter", splitAfter);
             validateSplitAfter(command, splitAfter);
@@ -100,12 +100,12 @@ public class CliCommandIncludePlugin implements IncludePlugin {
         return SearchScore.HIGH.text(command);
     }
 
-    private void validateSplitAfter(String command, List<String> splitParts) {
-        String[] commandParts = command.split(" ");
+    private void validateSplitAfter(String command, Set<String> splitAfter) {
+        Set<String> commandParts = new HashSet<String>(Arrays.asList(command.split(" ")));
 
-        for (String splitPart : splitParts) {
-            if (Arrays.stream(commandParts).noneMatch(commandPart -> commandPart.equals(splitPart))) {
-                throw new RuntimeException("split part \"" + splitPart + "\" is not present in command: " + command);
+        for (String token : splitAfter) {
+            if (!commandParts.contains(token)) {
+                throw new RuntimeException("split part \"" + token + "\" is not present in command: " + command);
             }
         }
     }
