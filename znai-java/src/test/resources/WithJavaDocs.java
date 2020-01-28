@@ -15,6 +15,17 @@
  */
 
 class HelloWorld {
+
+    /**
+     * variable level java doc {@link package.Class}
+     */
+    private static String SAMPLE_CONST_WITH_LINK = "Sample";
+
+    /**
+     * variable level java doc
+     */
+    private static String SAMPLE_CONST = "Sample";
+
     /**
      * method level java doc {@link package.Class}
      * @param test test param {@link package.Param}

@@ -67,7 +67,7 @@ public class JavaCode {
     }
 
     private static JavaCodeVisitor parse(String fileContent) {
-        CompilationUnit compilationUnit = JavaParser.parse(fileContent);
+        CompilationUnit compilationUnit = new JavaParser().parse(fileContent).getResult().get();
         JavaCodeVisitor visitor = new JavaCodeVisitor(fileContent);
         compilationUnit.accept(visitor, "JavaCode");
         return visitor;
