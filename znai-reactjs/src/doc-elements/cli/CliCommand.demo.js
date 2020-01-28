@@ -18,11 +18,23 @@ import React from 'react'
 
 import {CliCommand} from './CliCommand'
 
+const longCommand = 'git meta push123 origin HEAD:myfeature/pushrequest some more lines even --more ' +
+    '--some-long-options --another-longer-option'
+
 export function cliCommandDemo(registry) {
-    registry.add('with colons', () => <CliCommand
-        command="git meta push123 origin HEAD:myfeature/pushrequest some more lines even --more --some-long-options"
-        paramsToHighlight={["push"]}
-        isPresentation={false}/>)
-    registry.add('with brackets', () => <CliCommand command="git <param1> <param2>" paramsToHighlight={["push"]}
-                                                    isPresentation={false}/>)
+    registry
+        .add('with colons', () => <CliCommand command={longCommand}
+                                              paramsToHighlight={["push"]}
+                                              isPresentation={false}/>)
+        .add('with brackets', () => <CliCommand command="git <param1> <param2>" paramsToHighlight={["push"]}
+                                                isPresentation={false}/>)
+        .add('with threshold', () => <CliCommand command={longCommand}
+                                                 threshold={50}
+                                                 paramsToHighlight={["push"]}
+                                                 isPresentation={false}/>)
+        .add('with split after', () => <CliCommand
+            command={longCommand}
+            paramsToHighlight={["push"]}
+            splitAfter={['origin', 'more']}
+            isPresentation={false}/>)
 }
