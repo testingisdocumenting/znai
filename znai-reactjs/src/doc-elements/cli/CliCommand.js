@@ -57,9 +57,23 @@ class CliCommand extends Component {
     }
 
     renderTokens() {
-        const {paramsToHighlight, isPresentation} = this.props
+        const {
+            paramsToHighlight,
+            isPresentation,
+            threshold = 100,
+            presentationThreshold = 40,
+            splitAfter = [],
+        } = this.props
         const {lastTokenIdx} = this.state
-        const lines = splitParts(this.tokens, t => t.value.length, isPresentation ? 40 : 80)
+
+        const lines = splitParts({
+            parts: this.tokens,
+            valueFunc: (token) => token.value,
+            lengthFunc: (token) => token.value.length,
+            thresholdCharCount: isPresentation ? presentationThreshold : threshold,
+            splitAfterList: splitAfter
+        })
+
         let tokenIdx = 0
 
         // presentation mode centers slides. if width is growing the effect of typing is affected

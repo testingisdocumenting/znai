@@ -14,6 +14,36 @@ Long command lines will be automatically wrapped into multiple lines.
 
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {paramsToHighlight: ["name", "value"]}
 
+Use `threshold` parameter to specify the max length of a line before splitting
+ 
+```
+:include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
+    paramsToHighlight: ["name", "value"], 
+    threshold: 30
+}
+```
+
+:include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
+    paramsToHighlight: ["name", "value"], 
+    threshold: 30
+}
+
+Use `splitAfter` to force line splitting after specified parameter
+
+```
+:include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
+    paramsToHighlight: ["name", "value"], 
+    splitAfter: ["--score=2", "--value=8"]
+}
+```
+
+:include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
+    paramsToHighlight: ["score", "value"], 
+    splitAfter: ["--score=2", "--value=8"]
+}
+
+Note: Unlike `paramsToHighlight`, `splitAfter` must be an exact match
+
 # Handle Special Symbols
 
 If your command contains special symbols, such as `{`, move the command definition to a `command` option

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {splitTextIntoLines} from './strings'
+import {splitParts, splitTextIntoLines} from './strings'
 
 describe("string utils", () => {
     it("should split text into one line if threshold is not reached", () => {
@@ -35,5 +35,39 @@ describe("string utils", () => {
     it("should move the last long token to a new line", () => {
         const lines = splitTextIntoLines("hello world-with-no-spaces", 12)
         expect(lines).toEqual(["hello", "world-with-no-spaces"])
+    })
+
+    it("should split into parts using threshold", () => {
+        const parts = splitParts({
+            parts: ["hello", "world", "of", "parts", "and", "configs"],
+            lengthFunc: (p) => p.length,
+            thresholdCharCount: 11
+        })
+
+        expect(parts).toEqual([['hello', 'world'], ['of', 'parts', 'and'], ['configs']])
+    })
+
+    it("should split into parts after specified split parts", () => {
+        const parts = splitParts({
+            parts: ["hello", "world", "of", "parts", "and", "configs"],
+            lengthFunc: (p) => p.length,
+            valueFunc: (p) => p,
+            thresholdCharCount: 20,
+            splitAfterList: ['world', 'and']
+        })
+
+        expect(parts).toEqual([['hello', 'world'], ['of', 'parts', 'and'], ['configs']])
+    })
+
+    it("should split respecting threshold when split parts are specified", () => {
+        const parts = splitParts({
+            parts: ["hello", "world", "of", "par", "and", "ter", "configs"],
+            lengthFunc: (p) => p.length,
+            valueFunc: (p) => p,
+            thresholdCharCount: 11,
+            splitAfterList: ['and']
+        })
+
+        expect(parts).toEqual([['hello', 'world'], ['of', 'par', 'and'], ['ter', 'configs']])
     })
 })

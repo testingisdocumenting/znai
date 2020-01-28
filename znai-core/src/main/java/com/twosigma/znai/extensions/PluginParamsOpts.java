@@ -16,10 +16,7 @@
 
 package com.twosigma.znai.extensions;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
@@ -52,6 +49,10 @@ public class PluginParamsOpts {
         }
 
         return (List<E>) v;
+    }
+
+    public <E> Set<E> getSet(String name) {
+        return new HashSet<E>(getList(name));
     }
 
     public Stream<String> getNames() {
