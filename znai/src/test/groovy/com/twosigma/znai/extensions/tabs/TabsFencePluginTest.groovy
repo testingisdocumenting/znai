@@ -19,6 +19,8 @@ package com.twosigma.znai.extensions.tabs
 import com.twosigma.znai.extensions.PluginParams
 import com.twosigma.znai.extensions.fence.FencePlugin
 import com.twosigma.znai.parser.TestComponentsRegistry
+import com.twosigma.znai.parser.TestMarkupParser
+import com.twosigma.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 
 import java.nio.file.Paths
@@ -51,6 +53,17 @@ class TabsFencePluginTest {
     }
 
     @Test
+    void "collects auxiliary files from each tab"() {
+        FencePlugin plugin = processAndGetPluginWithResult(
+                "java:\n:include-file: a.java\n" +
+                "groovy:\n:include-file:b.groovy\n", false).plugin
+
+
+        def auxFiles = plugin.auxiliaryFiles(null).toList()
+        auxFiles.path.fileName*.toString().should == ['a.java', 'b.groovy']
+    }
+
+    @Test
     void "handles rightSide shortcut converting it to meta"() {
         def plugin = new TabsFencePlugin()
         def result = plugin.process(TestComponentsRegistry.INSTANCE,
@@ -61,14 +74,29 @@ class TabsFencePluginTest {
         result.docElements*.toMap().should == [[meta: [rightSide: true], tabsContent: [], type: 'Tabs']]
     }
 
-    private static List<Map> process(String markup) {
+    private static List<Map> processWithFakeMarkupParser(String markup) {
         def pluginWithResult = processAndGetPluginWithResult(markup)
+
         return pluginWithResult.result.docElements.collect { it.toMap() }
     }
 
-    private static Map processAndGetPluginWithResult(String markup) {
+    private static List<Map> process(String markup) {
+        def pluginWithResult = processAndGetPluginWithResult(markup)
+
+        return pluginWithResult.result.docElements.collect { it.toMap() }
+    }
+
+    private static Map processAndGetPluginWithResult(String markup, boolean isFakeParser = true) {
+        def componentsRegistry = new TestComponentsRegistry()
+
+        def markupParser = isFakeParser ?
+                new TestMarkupParser() :
+                new MarkdownParser(componentsRegistry)
+
+        componentsRegistry.defaultParser = markupParser
+
         def plugin = new TabsFencePlugin()
-        def result = plugin.process(TestComponentsRegistry.INSTANCE, Paths.get("test.md"), new PluginParams(plugin.id(), ""),
+        def result = plugin.process(componentsRegistry, Paths.get("test.md"), new PluginParams(plugin.id(), ""),
                 markup)
 
         return [plugin: plugin, result: result]
