@@ -337,8 +337,7 @@ export class Documentation extends Component {
 
         const tocItem = page.tocItem
 
-        if (previousPageTocItem === null ||
-            (previousPageTocItem.dirName !== tocItem.dirName && previousPageTocItem.fileName !== tocItem.fileName)) {
+        if (previousPageTocItem === null || !areTocItemEquals(tocItem, previousPageTocItem)) {
             this.mainPanelDom.scrollTop = 0
         }
     }
