@@ -16,6 +16,7 @@
 
 package com.twosigma.znai.extensions.tabs;
 
+import com.twosigma.znai.core.AuxiliaryFile;
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.extensions.ColonDelimitedKeyValues;
 import com.twosigma.znai.extensions.PluginParams;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -39,6 +41,7 @@ public class TabsFencePlugin implements FencePlugin {
     private MarkupParser parser;
 
     private List<String> texts;
+    private List<AuxiliaryFile> auxiliaryFiles;
 
     @Override
     public String id() {
@@ -55,6 +58,7 @@ public class TabsFencePlugin implements FencePlugin {
         this.markupPath = markupPath;
         this.parser = componentsRegistry.defaultParser();
         this.texts = new ArrayList<>();
+        this.auxiliaryFiles = new ArrayList<>();
 
         ColonDelimitedKeyValues tabsDefinitions = new ColonDelimitedKeyValues(content);
         List<ParsedTab> parsedTabs = tabsDefinitions.map(this::parseTab).collect(toList());
@@ -63,6 +67,7 @@ public class TabsFencePlugin implements FencePlugin {
         tabsProps.put("tabsContent", parsedTabs.stream().map(this::tabProps).collect(toList()));
 
         parsedTabs.forEach(this::generateSearchText);
+        parsedTabs.forEach(this::collectAuxiliaryFiles);
 
         return PluginResult.docElement("Tabs", tabsProps);
     }
@@ -80,9 +85,18 @@ public class TabsFencePlugin implements FencePlugin {
         texts.add(parsedTab.parserResult.getAllText());
     }
 
+    private void collectAuxiliaryFiles(ParsedTab parsedTab) {
+        auxiliaryFiles.addAll(parsedTab.parserResult.getAuxiliaryFiles());
+    }
+
     private ParsedTab parseTab(String tabName, String markup) {
         MarkupParserResult parserResult = parser.parse(markupPath, markup);
         return new ParsedTab(tabName, parserResult);
+    }
+
+    @Override
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
+        return auxiliaryFiles.stream();
     }
 
     @Override
