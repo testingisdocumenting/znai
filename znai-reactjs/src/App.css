@@ -140,6 +140,8 @@
     --znai-table-body-background-color: #fff;
     --znai-table-header-background-color: #f8faf9;
     --znai-table-border-color: rgba(34, 36, 38, .1);
+    --znai-table-title-color: var(--znai-snippets-title-color);
+    --znai-table-title-background-color: #e0e2e1;
 
     --znai-api-key-color: #527d8f;
     --znai-api-description-color: #878988;

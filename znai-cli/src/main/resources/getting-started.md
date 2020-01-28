@@ -1,4 +1,4 @@
-# Building Blocks
+# Main Concepts
 
 `Znai` has three levels of documentation organization:
 * Chapters
@@ -12,8 +12,6 @@ If you feel like you need to use nested headings, consider moving your content h
 * Introduce chapters
 * Focus on one thing at a time
 
-# Similarity with OOP
-
 It may help to show parallel with `OOP` concepts 
 * Chapters as `packages`
 * Pages as `classes`
@@ -22,43 +20,37 @@ It may help to show parallel with `OOP` concepts
 It is a bad practice to have a class with loosely related methods. 
 Similarly, it is a bad practice to have a long page with loosely related sections.
 
+[Read more](https://twosigma.github.io/znai/flow/structure)
+
 # Table of Contents
 
 Each documentation must have `toc` file in its root. 
 This file contains chapters and pages.
 
-This is a `toc` file for this documentation.
+This is a `toc` file for this auto generated documentation.
 
 :include-file: toc
 
 Take a look at the left side bar and compare it with the file content.
 
-The top entry, `introduction`, corresponds to the directory of the same name. 
-The nested entry, `rationale`, corresponds to the file `rationale.md`.
+The top entry, `Chapter One`, corresponds to the directory `chapter-one`. 
+The nested entries like `Page Two`, corresponds to the file `page-two.md`.
 
-# Sub Headings
+# Embedding Content
 
-Only a first level heading is treated as a first class citizen:
-* Part of **TOC**
-* Smallest unit of **search result**
-```   
-# First Class Citizen
-```
+To reduce documentation maintenance burden avoid copy and paste of code snippets.
+Embed content by referencing existing files using `:include-file:` plugin instead.  
 
-Nested sub headings only add visual distinction within a page.
-
-    ## Sub heading
-    content of sub heading
+    :include-file: file-name.js {title: "Optional Title"}
     
-    ### Sub Sub heading
-    content of sub sub heading
+:include-file: file-name.js {title: "Optional Title"}
 
-## Sub heading
-content of sub heading
+File will be looked up using following rules:
+* directory with a markup file
+* root directory of a documentation
+* all lookup paths listed in a `lookup-paths` file
 
-### Sub Sub heading
-content of sub sub heading
-
+[Read more](https://twosigma.github.io/znai/snippets/external-code-snippets)
 
 # Meta
 

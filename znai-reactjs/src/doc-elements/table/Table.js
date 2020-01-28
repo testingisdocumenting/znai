@@ -42,11 +42,15 @@ const Table = ({table, ...props}) => {
     // header related style will not trigger custom css
     const isCustomClassName = (tableStyles.length > 0 && showHeader) || (!showHeader && tableStyles.length > 1)
 
-    const tableClassName = (isCustomClassName ? tableStyles.join(' ') :
-        'ui celled padded table') + ' content-block';
+    const hasTitle = !!props.title
+
+    const tableClassName = (isCustomClassName ? tableStyles.join(' ') : 'ui celled padded table') +
+        (hasTitle ? ' with-title' : '') +
+        ' content-block'
 
     return (
         <div className="simple-table content-block">
+            <TableTitle title={props.title}/>
             <table className={tableClassName}>
                 <thead>
                 <tr>
@@ -63,6 +67,18 @@ const Table = ({table, ...props}) => {
                 {table.data.map((r, idx) => <Row key={idx} row={r}/>)}
                 </tbody>
             </table>
+        </div>
+    )
+}
+
+function TableTitle({title}) {
+    if (!title) {
+        return null
+    }
+
+    return (
+        <div className="znai-table-title">
+            {title}
         </div>
     )
 }

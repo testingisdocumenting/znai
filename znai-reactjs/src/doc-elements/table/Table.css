@@ -86,3 +86,22 @@
 .simple-table .ui.celled.table tr th {
     border-left: 1px solid var(--znai-table-border-color);
 }
+
+.simple-table .ui.table {
+    margin: 0;
+}
+
+.ui.table.with-title {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.znai-table-title {
+    color: var(--znai-table-title-color);
+    background-color: var(--znai-table-title-background-color);
+
+    border: 1px solid var(--znai-table-border-color);
+    border-bottom: none;
+
+    padding: 8px 16px;
+}
