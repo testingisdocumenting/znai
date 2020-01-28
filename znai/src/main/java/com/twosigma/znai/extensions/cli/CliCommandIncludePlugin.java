@@ -30,9 +30,7 @@ import com.twosigma.znai.search.SearchScore;
 import com.twosigma.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class CliCommandIncludePlugin implements IncludePlugin {
@@ -55,13 +53,14 @@ public class CliCommandIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        Set<String> combinedParams = new LinkedHashSet<>(pluginParams.getOpts().getList("paramToHighlight"));
+        PluginParamsOpts opts = pluginParams.getOpts();
+        Set<String> combinedParams = new LinkedHashSet<>(opts.getList("paramToHighlight"));
 
-        if (pluginParams.getOpts().has("paramToHighlight")) {
+        if (opts.has("paramToHighlight")) {
             ConsoleOutputs.out(Color.RED, "cli-command paramToHighlight will be deprecated"); // TODO deprecation warning API
         }
 
-        combinedParams.addAll(pluginParams.getOpts().getList("paramsToHighlight"));
+        combinedParams.addAll(opts.getList("paramsToHighlight"));
 
         resourcesResolver = componentsRegistry.resourceResolver();
         LinkedHashMap<String, Object> props = new LinkedHashMap<>();
@@ -70,13 +69,29 @@ public class CliCommandIncludePlugin implements IncludePlugin {
         props.put("command", command);
         props.put("paramsToHighlight", combinedParams);
 
+        validateParamsToHighlight(command, combinedParams);
+
+        if (opts.has("threshold")) {
+            props.put("threshold", opts.get("threshold"));
+        }
+
+        if (opts.has("presentationThreshold")) {
+            props.put("presentationThreshold", opts.get("presentationThreshold"));
+        }
+
+        List<String> splitAfter = opts.getList("splitAfter");
+        if (!splitAfter.isEmpty()) {
+            props.put("splitAfter", splitAfter);
+            validateSplitAfter(command, splitAfter);
+        }
+
         return PluginResult.docElement("CliCommand", props);
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return commandFile != null && !commandFile.isEmpty() ?
-                Stream.of(AuxiliaryFile.builtTime(resourcesResolver.fullPath(commandFile))):
+                Stream.of(AuxiliaryFile.builtTime(resourcesResolver.fullPath(commandFile))) :
                 Stream.empty();
     }
 
@@ -85,9 +100,28 @@ public class CliCommandIncludePlugin implements IncludePlugin {
         return SearchScore.HIGH.text(command);
     }
 
+    private void validateSplitAfter(String command, List<String> splitParts) {
+        String[] commandParts = command.split(" ");
+
+        for (String splitPart : splitParts) {
+            if (Arrays.stream(commandParts).noneMatch(commandPart -> commandPart.equals(splitPart))) {
+                throw new RuntimeException("split part \"" + splitPart + "\" is not present in command: " + command);
+            }
+        }
+    }
+
+    private void validateParamsToHighlight(String command, Set<String> paramsToHighlight) {
+        for (String paramToHighlight : paramsToHighlight) {
+            if (!command.contains(paramToHighlight)) {
+                throw new RuntimeException("param to highlight \"" + paramToHighlight + "\" " +
+                        "is not present in command: " + command);
+            }
+        }
+    }
+
     private String extractCommand(PluginParams pluginParams) {
         String commandAsFreeParam = pluginParams.getFreeParam().trim();
-        if (! commandAsFreeParam.isEmpty()) {
+        if (!commandAsFreeParam.isEmpty()) {
             return commandAsFreeParam;
         }
 
