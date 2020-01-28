@@ -53,11 +53,11 @@ export class DiffTracking extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        try {
-            if (!snapshot) {
-                return
-            }
+        if (!snapshot) {
+            return
+        }
 
+        try {
             const diffNode = new HtmlNodeDiff(snapshot.beforeNode, this.rootNode)
             diffNode.scrollAddedIntoView(this.scrollNode)
             diffNode.animateAdded()

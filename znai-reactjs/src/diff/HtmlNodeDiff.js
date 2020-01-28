@@ -33,8 +33,6 @@ export class HtmlNodeDiff {
 
         this.addedNodes = this._extractAddedNodes()
         this.addedNodesContainers = this._extractAddedNodesContainers()
-
-        console.log(this.diffResultRaw)
     }
 
     animateAdded() {

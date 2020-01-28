@@ -20,12 +20,11 @@ const containerClassNames = createContainerClassesList()
 
 export class HtmlNodeFlattenedList {
     constructor(node) {
-        this.root = node
         this.list = []
         this.idx = 0;
         this.currentContainerNode = null
 
-        this.walkNodes(this.root)
+        this.walkNodes(node)
     }
 
     walkNodes(node) {
