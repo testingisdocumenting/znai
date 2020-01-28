@@ -259,7 +259,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
                 "destination", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()),
                 "alt", alt,
                 "inlined", true,
-                "timestamp", auxiliaryFile.getModifiedTime(),
+                "timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()),
                 "width", image.getWidth(),
                 "height", image.getHeight());
 

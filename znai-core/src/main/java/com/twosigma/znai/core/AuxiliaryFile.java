@@ -16,8 +16,6 @@
 
 package com.twosigma.znai.core;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 
@@ -77,14 +75,6 @@ public class AuxiliaryFile {
 
     public Path getDeployRelativePath() {
         return deployRelativePath;
-    }
-
-    public long getModifiedTime() {
-        try {
-            return Files.getLastModifiedTime(path).toMillis();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
