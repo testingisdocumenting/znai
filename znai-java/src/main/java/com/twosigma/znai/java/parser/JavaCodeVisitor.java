@@ -116,7 +116,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     @Override
     public void visit(FieldDeclaration fieldDeclaration, String arg) {
-        String javaDocText = fieldDeclaration.hasJavaDocComment() ? fieldDeclaration.getJavadocComment().parse().toText() : "";
+        String javaDocText = fieldDeclaration.hasJavaDocComment() ? fieldDeclaration.getJavadocComment().get().parse().toText() : "";
 
         fieldDeclaration.getVariables().stream().map(vd -> vd.getName().getIdentifier())
                 .forEach(name -> javaFields.put(name, new JavaField(name, javaDocText)));
@@ -147,8 +147,8 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         String name = methodDeclaration.getName().getIdentifier();
         String code = JavaCodeUtils.extractCode(lines, methodDeclaration);
 
-        JavadocComment javaDocComment = methodDeclaration.getJavadocComment();
-        Javadoc javaDoc = javaDocComment != null ? javaDocComment.parse() : null;
+        Optional<JavadocComment> javaDocComment = methodDeclaration.getJavadocComment();
+        Javadoc javaDoc = javaDocComment.isPresent() ? javaDocComment.get().parse() : null;
 
         String javaDocText = (javaDoc != null) ?
                 extractJavaDocDescription(javaDoc.getDescription()) :
@@ -176,19 +176,18 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         return "    " + String.join("\n    ", javaFields.keySet());
     }
 
-    private String extractJavaDocDescription(JavadocComment javadocComment) {
-        if (javadocComment == null) {
+    private String extractJavaDocDescription(Optional<JavadocComment> javadocComment) {
+        if (!javadocComment.isPresent()) {
             return "";
         }
 
-        Javadoc javadoc = javadocComment.parse();
+        Javadoc javadoc = javadocComment.get().parse();
         JavadocDescription description = javadoc.getDescription();
 
         return description == null ? "" : extractJavaDocDescription(description);
     }
 
     private String extractJavaDocDescription(JavadocDescription description) {
-        // TODO check if github java parser lib solved the problem with inlined tags UnsupportedOperation exception
         List<JavadocDescriptionElement> elements = getPrivateFieldValue(description,"elements");
         return elements.stream()
                 .map(this::elementToText)
@@ -198,7 +197,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     private String elementToText(JavadocDescriptionElement el) {
         if (el instanceof JavadocSnippet) {
-            String result = isAfterInlinedTag ? el.toText().substring(1) : el.toText();
+            String result = el.toText();
             isAfterInlinedTag = false;
 
             return result.trim();
@@ -229,9 +228,9 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     private void extractTopLevelJavaDoc(TypeDeclaration<?> declaration) {
         if (topLevelJavaDoc == null) {
-            JavadocComment javadocComment = declaration.getJavadocComment();
-            topLevelJavaDoc = (javadocComment != null) ?
-                    extractJavaDocDescription(javadocComment.parse().getDescription()):
+            Optional<JavadocComment> javadocComment = declaration.getJavadocComment();
+            topLevelJavaDoc = (javadocComment.isPresent()) ?
+                    extractJavaDocDescription(javadocComment.get().parse().getDescription()):
                     "";
         }
     }
