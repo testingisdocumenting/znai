@@ -24,7 +24,7 @@ Use `threshold` parameter to specify the max length of a line before splitting
 ```
 
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
-    paramsToHighlight: ["name", "va2lue"], 
+    paramsToHighlight: ["name", "value"], 
     threshold: 30
 }
 
