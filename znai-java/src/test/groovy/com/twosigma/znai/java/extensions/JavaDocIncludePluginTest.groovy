@@ -42,5 +42,4 @@ class JavaDocIncludePluginTest {
     private static IncludePlugin process(String params) {
         return PluginsTestUtils.processAndGetIncludePlugin(":include-java-doc: WithJavaDocs.java " + params)
     }
-
 }
