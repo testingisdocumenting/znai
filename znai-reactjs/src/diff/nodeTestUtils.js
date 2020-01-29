@@ -14,23 +14,29 @@
  * limitations under the License.
  */
 
-import React from 'react'
+export function createNode({tagName, className, text, id, attrs = {}, children = []}) {
+    const node = document.createElement(tagName)
 
-import Icon from '../icons/Icon'
+    if (text) {
+        const textNode = document.createTextNode(text)
+        node.appendChild(textNode)
+    }
 
-import {PresentationHeading} from './PresentationHeading'
+    if (id) {
+        node.id = id
+    }
 
-import './SubHeading.css'
+    if (className) {
+        node.className = className
+    }
 
-export function SubHeading({level, title, id}) {
-    const Element = `h${level}`
+    Object.keys(attrs).forEach(key => {
+        node.setAttribute(key, attrs[key])
+    })
 
-    return (
-        <Element className="content-block" id={id}>
-            <span>{title}</span>
-            <a href={"#" + id}><Icon id="link"/></a>
-        </Element>
-    )
+    children.forEach(child => {
+        node.appendChild(createNode(child))
+    })
+
+    return node
 }
-
-export const presentationSubHeading = {component: PresentationHeading, numberOfSlides: () => 1}

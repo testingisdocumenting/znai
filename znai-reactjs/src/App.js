@@ -58,6 +58,7 @@ import {embeddedSvgDemo} from './doc-elements/svg/EmbeddedSvg.demo'
 import {presentationDemo} from './doc-elements/presentation/Presentation.demo'
 import {spoilerDemo} from './doc-elements/spoiler/Spoiler.demo'
 import {pageGenErrorDemo} from './doc-elements/page-gen-error/PageGenError.demo'
+import {diffTrackingDemo} from './diff/DiffTracking.demo'
 
 import {themeRegistry} from "./theme/ThemeRegistry"
 import WithTheme from "./theme/WithTheme"
@@ -125,6 +126,7 @@ registries.add('presentation')
     .registerAsTabs('GraphViz SVG', graphVizSvgPresentationDemo)
 
 registries.add('preview')
+    .registerAsRows('Diff Highlight', diffTrackingDemo)
     .registerAsTabs('Page Gen Error', pageGenErrorDemo)
 
 registries.add('screens')

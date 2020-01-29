@@ -77,7 +77,7 @@ class SimpleCodeSnippet extends Component {
                                   isPresentation={isPresentation}
                                   TokenComponent={SimpleCodeToken}/>
                 ))}
-                {this.renderReadMore()}
+                <React.Fragment>{this.renderReadMore()}</React.Fragment>
             </pre>
         )
     }
@@ -90,10 +90,7 @@ class SimpleCodeSnippet extends Component {
         }
 
         return (
-            <div className="code-snippet-read-more"
-                 onClick={this.onReadMoreClick}>
-                Read more...
-            </div>
+            <div className="code-snippet-read-more" onClick={this.onReadMoreClick}>Read more...</div>
         )
     }
 
