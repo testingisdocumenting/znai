@@ -44,7 +44,7 @@ Use the `referencesPath` value to associate `{@link CustomDomain}` with the docu
 
 :include-file: references/javadoc-references-demo.csv {title: "references/javadoc-references-demo.csv"}
 
-Alternatively you can define [Global References](snippets/code-references#global-references) to turn `MyClass` into link.
+Alternatively you can define [Global References](snippets/code-references#global-references) to turn `MyClass` into a link.
 
 # Method Params
 
