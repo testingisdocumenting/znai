@@ -20,7 +20,7 @@ Add references to `references.csv` if you want all your code snippets to use the
 
 # Inlined Code
 
-[Inlined code](snippets/inlined-code-snippets) gets automatically converted into a link if its content matches one of the
+[Inlined code](snippets/inlined-code-snippets) is automatically converted into a link if its content matches one of the
 global references entries:
 
 :include-file: code-reference-inlined-code-example.md {title: "Example"}
