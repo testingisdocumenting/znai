@@ -22,7 +22,7 @@ Avoid: using generic names in your page titles and page section titles. You shou
 
 Global search is performed by [search/](https://search.app.twosigma.com).
 
-Global search consider each page section as an independent entry as well. 
+Global search treats each page section as an independent entry as well. 
 
 In the case of global search, the full title gets expanded to include documentation title, so the full title of the
 current section will be: *Znai Flow Search Global*.
@@ -34,8 +34,7 @@ In case of global search it is even more important to come up with the good name
 * Pages
 * Page Sections
 
-To make your product more discoverable consider naming your *page sections* and *page titles* to match potential user queries.
-E.g., consider a page called *Getting Started*.
+To make your product more discoverable consider naming your *page sections* and *page titles* to match potential user queries. For example, consider naming a page *Getting Started*.
 
 ```columns 
 left:

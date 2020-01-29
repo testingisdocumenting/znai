@@ -26,9 +26,9 @@ Add `config` section to specify a common size for all the nodes
 
 :include-flow-chart: flow-diagrams/common-size-dag.json
 
-Note: Size unit is not based on pixels. It is size in inches (assuming correct DPI). It is size units used by [Graphviz](https://graphviz.gitlab.io/))
+Note: Size unit is not based on pixels. It is sized in inches (assuming correct DPI). It is the size units used by [Graphviz](https://graphviz.gitlab.io/))
 
-Use `width` and `height` property on a node itself to control individual nodes size
+Use `width` and `height` property on a node itself to control individual nodes size:
 
 :include-json: flow-diagrams/common-size-with-override-dag.json {title: "nodes size override", collapsedPaths: ['root.config', 'root.edges']}
 
@@ -119,7 +119,7 @@ Combine links and highlights to create a sub navigation for your product.
 
 # Reusable Nodes
 
-Move nodes definitions to a separate file(s) if you use them across multiple diagrams
+Move node definitions to a one or more separate files if you use them across multiple diagrams.
 
 :include-file: flow-diagrams/graph-using-lib.json {title: "only edges definitions"}
 

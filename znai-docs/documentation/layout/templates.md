@@ -39,7 +39,7 @@ Insert your template using the fenced block syntax. The content inside the fence
     title: Software Engineer
     ```
     
-Result is rendered below:
+The result is rendered below:
 
 ```template templates/job.md
 name: Sathish
@@ -83,7 +83,7 @@ You can include a template in your page and make use of parameters from the file
 
 # Loops
 
-You can loop over list of parameters using [FreeMarker loop](http://freemarker.org/docs/ref_directive_list.html)
+You can loop over a list of parameters using [FreeMarker loop](http://freemarker.org/docs/ref_directive_list.html)
 
 Consider an external file...
 

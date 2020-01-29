@@ -26,7 +26,7 @@ All the following content will go to the right side. At the start of a new secti
 :include-json: two-sides/price-estimate.json
 ```
 
-# Open API example
+# Open API Example
 
 :include-open-api: snippets/open-api/uber.json {method: "get", path: "/v1/estimates/time"}
 :include-meta: {rightSide: true}

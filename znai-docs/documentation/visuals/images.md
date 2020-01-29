@@ -1,6 +1,6 @@
 # Markdown
 
-Image can be included using standard Markdown syntax.
+An image can be included using standard Markdown syntax.
 
     ![alt text](regular-image.png)
 

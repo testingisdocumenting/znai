@@ -29,7 +29,7 @@ So the following `JSON` file...
 
 # Title
 
-Use `title` parameter to set table title.
+Use `title` parameter to set a table title.
 
     :include-table: table.json {title: "Monthly Report"}
     
@@ -37,7 +37,7 @@ Use `title` parameter to set table title.
 
 # Arrange and Filter
 
-To change the order of columns or filter out certain columns, specify the `columns` parameter.
+To change the order of columns or to filter out certain columns, specify the `columns` parameter.
 
     :include-table: table.csv {columns: ["Description", "Price"]}
     
@@ -66,7 +66,7 @@ You can do the same for `JSON` data:
 
 # Markdown in Cells
 
-You can use markup syntax within table file.
+You can use Markdown table syntax within your table file.
 
 :include-file: table-markup.csv
 

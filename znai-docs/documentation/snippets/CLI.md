@@ -1,4 +1,4 @@
-# Command parameters
+# Command Parameters
 
 To bring attention to important parameters in your examples use the `cli-command` extension.
 
@@ -14,7 +14,7 @@ Long command lines will be automatically wrapped into multiple lines.
 
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {paramsToHighlight: ["name", "value"]}
 
-Use `threshold` parameter to specify the max length of a line before splitting
+Use `threshold` parameter to specify the max length of a line before splitting:
  
 ```
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
@@ -28,7 +28,7 @@ Use `threshold` parameter to specify the max length of a line before splitting
     threshold: 30
 }
 
-Use `splitAfter` to force line splitting after specified parameter
+Use `splitAfter` to force line splitting after specified parameter:
 
 ```
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
@@ -72,11 +72,11 @@ To display console output and bring attention to certain lines use:
 
 :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]}
 
-You can highlight by a partial line text match
+You can highlight by a partial line text match:
 
     :include-cli-output: cli/file-path-of-captured.out {highlight: "remote"}
 
-Or you can highlight by lines stored in a separate file
+Or you can highlight by lines stored in a separate file:
 
     :include-cli-output: cli/file-path-of-captured.out {highlightFile: "cli/file-path-of-asserted-lines.txt"}
 
@@ -85,7 +85,7 @@ Or you can highlight by lines stored in a separate file
 :include-cli-output: cli/file-path-of-captured.out {highlightFile: "cli/file-path-of-asserted-lines.txt"}
 
 
-# Presentation mode
+# Presentation Mode
 
 In presentation mode, `cli-command` will simulate typing inside the terminal.
 
