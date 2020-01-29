@@ -27,7 +27,7 @@ class TestDocStructure implements DocStructure {
     private TableOfContents toc = new TableOfContents()
 
     @Override
-    void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
+    void validateUrl(Path path, String additionalClue, DocUrl docUrl) {
         if (docUrl.isGlobalUrl()) {
             return
         }
@@ -36,7 +36,7 @@ class TestDocStructure implements DocStructure {
         def url = urlBase + (docUrl.anchorId.isEmpty() ? "" : "#${docUrl.anchorId}")
 
         if (! validLinks.contains(url.toString())) {
-            throw new IllegalArgumentException("no valid link found in section '${sectionWithLinkTitle}': " + url)
+            throw new IllegalArgumentException("no valid link found in ${path.fileName}, ${additionalClue}: " + url)
         }
     }
 

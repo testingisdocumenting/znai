@@ -16,14 +16,15 @@
 
 package com.twosigma.znai.extensions.api
 
-import com.twosigma.znai.parser.TestComponentsRegistry
 import org.junit.Test
+
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class ApiParametersJsonParserTest {
     @Test
     void "reads api params json and parses description to create doc elemements"() {
         //language=json
-        def apiParameters = ApiParametersJsonParser.parse(TestComponentsRegistry.INSTANCE.markdownParser, """
+        def apiParameters = ApiParametersJsonParser.parse(TEST_COMPONENTS_REGISTRY.markdownParser(), """
 [
     {
         "name": "param1",

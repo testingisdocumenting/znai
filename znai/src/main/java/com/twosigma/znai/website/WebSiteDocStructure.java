@@ -76,12 +76,12 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     @Override
-    public void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
+    public void validateUrl(Path path, String additionalClue, DocUrl docUrl) {
         if (docUrl.isGlobalUrl() || docUrl.isIndexUrl()) {
             return;
         }
 
-        linksToValidate.add(new LinkToValidate(path, sectionWithLinkTitle, docUrl));
+        linksToValidate.add(new LinkToValidate(path, additionalClue, docUrl));
     }
 
     @Override
@@ -149,7 +149,9 @@ class WebSiteDocStructure implements DocStructure {
                 (anchorId.isEmpty() ?  "" : "#" + anchorId);
 
         Supplier<String> validationMessage = () -> "can't find a page associated with: " + url +
-                "\ncheck file: " + link.path + ", section title: " + link.sectionWithLinkTitle;
+                "\ncheck file: " + link.path + (link.additionalClue.isEmpty() ?
+                "" :
+                ", " + link.additionalClue);
 
         TocItem tocItem = toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileName());
         if (tocItem == null) {
@@ -188,12 +190,12 @@ class WebSiteDocStructure implements DocStructure {
 
     private static class LinkToValidate {
         private final Path path;
-        private final String sectionWithLinkTitle;
+        private final String additionalClue;
         private final DocUrl docUrl;
 
-        LinkToValidate(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
+        LinkToValidate(Path path, String additionalClue, DocUrl docUrl) {
             this.path = path;
-            this.sectionWithLinkTitle = sectionWithLinkTitle;
+            this.additionalClue = additionalClue;
             this.docUrl = docUrl;
         }
     }

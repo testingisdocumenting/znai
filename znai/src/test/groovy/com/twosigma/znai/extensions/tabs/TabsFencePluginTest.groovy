@@ -25,6 +25,8 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+
 class TabsFencePluginTest {
     @Test
     void "include markup per tab"() {
@@ -66,7 +68,7 @@ class TabsFencePluginTest {
     @Test
     void "handles rightSide shortcut converting it to meta"() {
         def plugin = new TabsFencePlugin()
-        def result = plugin.process(TestComponentsRegistry.INSTANCE,
+        def result = plugin.process(TEST_COMPONENTS_REGISTRY,
                 Paths.get("test.md"),
                 new PluginParams(plugin.id(), "{rightSide: true}"),
                 "")

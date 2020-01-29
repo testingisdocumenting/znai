@@ -19,10 +19,6 @@ package com.twosigma.znai.reference;
 import com.twosigma.znai.parser.table.CsvParser;
 import com.twosigma.znai.parser.table.MarkupTableData;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class DocReferencesParser {
     private DocReferencesParser() {
     }
@@ -30,11 +26,9 @@ public class DocReferencesParser {
     public static DocReferences parse(String content) {
         MarkupTableData tableData = CsvParser.parseWithHeader(content, "reference", "url");
 
-        Map<String, Object> result = new LinkedHashMap<>();
-        tableData.forEachRow(row -> {
-            result.put(row.get(0), Collections.singletonMap("pageUrl", row.get(1)));
-        });
+        DocReferences result = new DocReferences();
+        tableData.forEachRow(row -> result.add(row.get(0), row.get(1)));
 
-        return new DocReferences(result);
+        return result;
     }
 }

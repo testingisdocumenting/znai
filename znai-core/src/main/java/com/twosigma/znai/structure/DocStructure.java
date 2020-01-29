@@ -19,7 +19,7 @@ package com.twosigma.znai.structure;
 import java.nio.file.Path;
 
 public interface DocStructure {
-    void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl);
+    void validateUrl(Path path, String additionalClue, DocUrl docUrl);
     String createUrl(DocUrl docUrl);
     String fullUrl(String relativeUrl);
 

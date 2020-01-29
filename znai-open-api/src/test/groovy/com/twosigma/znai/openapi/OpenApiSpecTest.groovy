@@ -17,9 +17,10 @@
 package com.twosigma.znai.openapi
 
 import com.twosigma.znai.utils.ResourceUtils
-import com.twosigma.znai.parser.TestComponentsRegistry
 import org.junit.BeforeClass
 import org.junit.Test
+
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class OpenApiSpecTest {
     private static OpenApiSpec spec
@@ -30,7 +31,7 @@ class OpenApiSpecTest {
     @BeforeClass
     static void init() {
         spec = OpenApiSpec.fromJson(
-                TestComponentsRegistry.INSTANCE.markdownParser(),
+                TEST_COMPONENTS_REGISTRY.markdownParser(),
                 ResourceUtils.textContent("open-api-spec.json"))
 
         findOneCustomer = spec.findOperationById('findOneCustomerUsingGET')
@@ -41,7 +42,7 @@ class OpenApiSpecTest {
     @Test
     void "should parse spec from yaml"() {
         def yamlSpec = OpenApiSpec.fromYaml(
-                TestComponentsRegistry.INSTANCE.markdownParser(),
+                TEST_COMPONENTS_REGISTRY.markdownParser(),
                 ResourceUtils.textContent("open-api-spec.yaml"))
 
         def findOneCustomerYaml = yamlSpec.findOperationById('findOneCustomerUsingGET')

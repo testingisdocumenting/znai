@@ -46,7 +46,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        this.codeReferencesTrait = new CodeReferencesTrait(componentsRegistry, pluginParams);
+        this.codeReferencesTrait = new CodeReferencesTrait(componentsRegistry, markupPath, pluginParams);
         this.componentsRegistry = componentsRegistry;
         this.markupPath = markupPath;
         this.pluginParams = pluginParams;

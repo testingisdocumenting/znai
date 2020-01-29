@@ -3,7 +3,10 @@ package com.twosigma.znai.extensions.file;
 import com.twosigma.znai.core.AuxiliaryFile;
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.extensions.PluginParams;
+import com.twosigma.znai.reference.DocReferences;
 import com.twosigma.znai.reference.DocReferencesParser;
+import com.twosigma.znai.structure.DocStructure;
+import com.twosigma.znai.structure.DocUrl;
 
 import java.nio.file.Path;
 import java.util.Map;
@@ -19,10 +22,12 @@ public class CodeReferencesTrait {
     private final ComponentsRegistry componentsRegistry;
 
     private final Path referencesFullPath;
+    private final Path markupPath;
     private final String referencesPath;
 
-    public CodeReferencesTrait(ComponentsRegistry componentsRegistry, PluginParams pluginParams) {
+    public CodeReferencesTrait(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         this.componentsRegistry = componentsRegistry;
+        this.markupPath = markupPath;
 
         this.referencesPath = pluginParams.getOpts().get("referencesPath", null);
         this.referencesFullPath = referencesPath != null ?
@@ -35,12 +40,25 @@ public class CodeReferencesTrait {
             return;
         }
 
-        props.put("references", buildReferences());
+        DocReferences references = buildReferences();
+        validateLinks(references);
+
+        props.put("references", references.toMap());
     }
 
-    private Map<String, Object> buildReferences() {
+    private void validateLinks(DocReferences references) {
+        DocStructure docStructure = componentsRegistry.docStructure();
+
+        references.pageUrlsStream().forEach(pageUrl ->
+                docStructure.validateUrl(markupPath,
+                        "reference file name: " + referencesFullPath.getFileName().toString(),
+                        new DocUrl(pageUrl))
+        );
+    }
+
+    private DocReferences buildReferences() {
         return DocReferencesParser.parse(
-                componentsRegistry.resourceResolver().textContent(referencesPath)).toMap();
+                componentsRegistry.resourceResolver().textContent(referencesPath));
     }
 
     public Stream<AuxiliaryFile> auxiliaryFiles() {

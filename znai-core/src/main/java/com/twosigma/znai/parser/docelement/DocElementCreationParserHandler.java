@@ -432,7 +432,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
         DocStructure docStructure = componentsRegistry.docStructure();
         DocUrl docUrl = new DocUrl(url);
 
-        docStructure.validateUrl(path, currentSectionTitle, docUrl);
+        docStructure.validateUrl(path, "section title: " + currentSectionTitle, docUrl);
         return docStructure.createUrl(docUrl);
     }
 
