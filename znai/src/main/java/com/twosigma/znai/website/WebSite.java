@@ -16,6 +16,8 @@
 
 package com.twosigma.znai.website;
 
+import com.twosigma.znai.console.ConsoleOutputs;
+import com.twosigma.znai.console.ansi.Color;
 import com.twosigma.znai.core.AuxiliaryFile;
 import com.twosigma.znai.core.AuxiliaryFilesRegistry;
 import com.twosigma.znai.core.ResourcesResolverChain;
@@ -200,7 +202,11 @@ public class WebSite {
     }
 
     public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
-        docStructure.removeGlobalAnchorsForPath(markupPath(tocItem));
+        Path markupPath = markupPath(tocItem);
+
+        docStructure.removeGlobalAnchorsForPath(markupPath);
+        docStructure.removeLocalAnchorsForTocItem(tocItem);
+        docStructure.removeLinksForPath(markupPath);
 
         parseMarkupAndUpdateTocItemAndSearch(tocItem);
         Page page = pageByTocItem.get(tocItem);
@@ -214,6 +220,8 @@ public class WebSite {
         auxiliaryFilesRegistry.auxiliaryFilesByTocItem(tocItem).stream()
                 .filter(AuxiliaryFile::isDeploymentRequired)
                 .forEach(this::deployAuxiliaryFileIfOutdated);
+
+        docStructure.validateCollectedLinks();
 
         return pageProps;
     }
@@ -365,6 +373,9 @@ public class WebSite {
     private void parseMarkupAndUpdateTocItemAndSearch(TocItem tocItem) {
         try {
             Path markupPath = markupPath(tocItem);
+            Path relativePathToLog = cfg.docRootPath.relativize(markupPath);
+
+            ConsoleOutputs.out("parsing ", Color.PURPLE, relativePathToLog);
 
             localResourceResolver.setCurrentFilePath(markupPath);
 
@@ -472,7 +483,7 @@ public class WebSite {
             Path pagePath = tocItem.isIndex() ? Paths.get("index.html") :
                     Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
 
-            Path originalPathForLogging = cfg.docRootPath.toAbsolutePath().relativize(
+            Path originalPathForLogging = cfg.docRootPath.relativize(
                     markupParsingConfiguration.fullPath(componentsRegistry, cfg.docRootPath, tocItem).toAbsolutePath());
 
             deployer.deploy(originalPathForLogging, pagePath, html);
@@ -607,7 +618,7 @@ public class WebSite {
         }
 
         public Configuration withRootPath(Path path) {
-            docRootPath = path;
+            docRootPath = path.toAbsolutePath();
             return this;
         }
 
