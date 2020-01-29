@@ -1,6 +1,6 @@
 # Method Body
 
-When you need to extract a specific method body use `include-groovy` plugin.
+When you need to extract a specific method body use the `include-groovy` plugin.
 
 Consider the following file:
 
@@ -18,7 +18,7 @@ If `bodyOnly` is specified, signature will be omitted.
 
 Specify types inside brackets to select an overloaded versions of your methods. 
 
-Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short version 
+Types should appear as they do in the file, i.e., if you use the short version of a type, you need to use the short version 
 inside the plugin.
 
 :include-groovy: HelloWorld.groovy
