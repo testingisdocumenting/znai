@@ -28,7 +28,6 @@ class DocumentationLayout extends Component {
 
     render() {
         const {
-            previewTracker,
             searchPopup,
             renderedPage,
             renderedNextPrevNavigation,
@@ -60,8 +59,6 @@ class DocumentationLayout extends Component {
                               onNextPage={onNextPage}
                               onPrevPage={onPrevPage}/>
                 </div>
-
-                {previewTracker}
 
                 {searchPopup}
 

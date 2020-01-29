@@ -19,11 +19,35 @@ package com.twosigma.znai.extensions.cli
 import com.twosigma.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
+import static com.twosigma.webtau.Matchers.code
+import static com.twosigma.webtau.Matchers.throwException
+
 class CliCommandIncludePluginTest {
     @Test
     void "passes through params to highlight to the doc element"() {
-        def elements = process("git meta push origin HEAD:myfeature/pushrequest {paramToHighlight: \"push\"}")
-        elements.should == [command: 'git meta push origin HEAD:myfeature/pushrequest', paramsToHighlight: ['push'], type: 'CliCommand']
+        def elements = process('git meta push origin HEAD:myfeature/pushrequest ' +
+                '{paramToHighlight: "push", splitAfter: ["origin"], threshold: 60, presentationThreshold: 40}')
+        elements.should == [
+                command: 'git meta push origin HEAD:myfeature/pushrequest',
+                paramsToHighlight: ['push'],
+                splitAfter: ['origin'],
+                threshold: 60,
+                presentationThreshold: 40,
+                type: 'CliCommand']
+    }
+    
+    @Test
+    void "validates split after tokens"() {
+        code {
+            process('git meta push origin HEAD:myfeature/pushrequest {splitAfter: ["origina"]}')
+        } should throwException('split part "origina" is not present in command: git meta push origin HEAD:myfeature/pushrequest')
+    }
+
+    @Test
+    void "validates params to highlight presence"() {
+        code {
+            process('git meta push origin HEAD:myfeature/pushrequest {paramsToHighlight: ["pusha"]}')
+        } should throwException('param to highlight "pusha" is not present in command: git meta push origin HEAD:myfeature/pushrequest')
     }
 
     private static def process(String params) {

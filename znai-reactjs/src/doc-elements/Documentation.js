@@ -31,8 +31,7 @@ import {fullResourcePath} from '../utils/resourcePath'
 
 import Presentation from './presentation/Presentation'
 import Preview from './preview/Preview'
-import PreviewChangeIndicator from './preview/PreviewChangeIndicator'
-import PageContentPreviewDiff from './preview/PageContentPreviewDiff'
+import {DiffTracking, enableDiffTrackingForOneDomChangeTransaction} from '../diff/DiffTracking'
 
 import PresentationRegistry from './presentation/PresentationRegistry'
 
@@ -48,6 +47,7 @@ import {pageTypesRegistry} from './page/PageTypesRegistry'
 import {injectGlobalOverridesCssLink} from './CssOverrides'
 
 import {updateGlobalDocReferences} from './references/globalDocReferences'
+import {areTocItemEquals} from './structure/tocItem'
 
 import './DocumentationLayout.css'
 import './search/Search.css'
@@ -71,6 +71,7 @@ export class Documentation extends Component {
         this.state = {
             tocCollapsed: false,
             tocSelected: false,
+            previousPageTocItem: null,
             page: Documentation.processPage(page),
             toc: tableOfContents.toc,
             docMeta: docMeta,
@@ -135,7 +136,6 @@ export class Documentation extends Component {
             autoSelectedTocItem,
             forceSelectedTocItem,
             tocCollapsed,
-            lastChangeDataDom,
             isSearchActive,
             textSelection,
             pageGenError,
@@ -180,9 +180,13 @@ export class Documentation extends Component {
         const DocumentationLayout = elementsLibrary.DocumentationLayout
         const selectedTocItem = {...page.tocItem, ...(forceSelectedTocItem || autoSelectedTocItem)}
 
+        const PreviewTrackerWrapper = docMeta.previewEnabled ?
+            DiffTracking:
+            React.Fragment
+
         return (
             <WithTheme>{() =>
-                <React.Fragment>
+                <PreviewTrackerWrapper >
                     <DocumentationLayout docMeta={docMeta}
                                          toc={toc}
                                          theme={theme}
@@ -202,9 +206,7 @@ export class Documentation extends Component {
                                          textSelection={textSelection}
                                          pageGenError={pageGenError}/>
                     {preview}
-                    {lastChangeDataDom && <PreviewChangeIndicator targetDom={lastChangeDataDom}
-                                                                  onIndicatorRemove={this.onPreviewIndicatorRemove}/>}
-                </React.Fragment>
+                </PreviewTrackerWrapper>
             }
             </WithTheme>
         )
@@ -320,6 +322,7 @@ export class Documentation extends Component {
     changePage(newStateWithNewPage) {
         this.setState({
             ...newStateWithNewPage,
+            previousPageTocItem: this.state.page.tocItem,
             page: Documentation.processPage(newStateWithNewPage.page),
             pageGenError: null
         }, () => this.onPageLoad())
@@ -329,8 +332,14 @@ export class Documentation extends Component {
         return {...page, content: pageContentProcessor.process(page.content)}
     }
 
-    scrollToTop() {
-        this.mainPanelDom.scrollTop = 0
+    scrollToTopIfNecessary() {
+        const {previousPageTocItem, page} = this.state
+
+        const tocItem = page.tocItem
+
+        if (previousPageTocItem === null || !areTocItemEquals(tocItem, previousPageTocItem)) {
+            this.mainPanelDom.scrollTop = 0
+        }
     }
 
     onPageLoad() {
@@ -345,7 +354,7 @@ export class Documentation extends Component {
         if (anchorId) {
             this.scrollToPageSection(anchorId)
         } else {
-            this.scrollToTop()
+            this.scrollToTopIfNecessary()
         }
 
         this.updateCurrentPageSection()
@@ -455,7 +464,7 @@ export class Documentation extends Component {
     navigateToPageIfRequired(tocItem) {
         const currentToc = this.state.page.tocItem
 
-        if (currentToc.dirName !== tocItem.dirName || currentToc.fileName !== tocItem.fileName) {
+        if (!areTocItemEquals(currentToc, tocItem)) {
             return documentationNavigation.navigateToPage(tocItem)
         }
 
@@ -530,19 +539,8 @@ export class Documentation extends Component {
     }
 
     updatePageAndDetectChangePosition(funcToUpdatePage) {
-        const nodeBefore = document.querySelector(".page-content").cloneNode(true)
-
+        enableDiffTrackingForOneDomChangeTransaction()
         funcToUpdatePage()
-
-        const nodeAfter = document.querySelector(".page-content")
-
-        const previewDiff = new PageContentPreviewDiff(nodeBefore, nodeAfter)
-        const differentNode = previewDiff.findFirstDifferentNode()
-
-        if (differentNode) {
-            this.disableScrollListener();
-            this.setState({lastChangeDataDom: differentNode}, this.enableScrollListener)
-        }
     }
 
     updatePagesReference(allPages, newPage) {
@@ -661,9 +659,5 @@ export class Documentation extends Component {
             const belowZero = sectionTitlesWithNode.filter(st => st.rect.top < 0)
             return belowZero.length ? belowZero[belowZero.length - 1] : sectionTitlesWithNode[0]
         }
-    }
-
-    onPreviewIndicatorRemove = () => {
-        this.setState({lastChangeDataDom: null})
     }
 }

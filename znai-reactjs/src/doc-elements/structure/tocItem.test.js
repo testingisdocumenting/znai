@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-.preview-change-indicator {
-    animation-name: preview-change-keyframes;
-    animation-duration: 2s;
-    animation-fill-mode: both;
-}
+import {areTocItemEquals} from './tocItem'
 
-@keyframes preview-change-keyframes {
-    0% {background-color: rgba(38, 110, 164, 0)}
-    50% {background-color: rgba(38, 110, 164, 0.5)}
-    100% {background-color: rgba(38, 110, 164, 0)}
-}
+describe('toc items', () => {
+    it('equality', () => {
+        expect(areTocItemEquals(
+            {dirName: 'd1', fileName: 'f1'},
+            {dirName: 'd1', fileName: 'f1', extra: 'e1'})).toBeTruthy()
+
+        expect(areTocItemEquals(
+            {dirName: 'd1', fileName: 'f2'},
+            {dirName: 'd1', fileName: 'f1'})).toBeFalsy()
+    })
+})

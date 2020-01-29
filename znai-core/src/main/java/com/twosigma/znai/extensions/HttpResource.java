@@ -56,8 +56,8 @@ class HttpResource {
             }
 
             return extractHttpResponse(connection);
-        } catch (IOException e) {
-            throw new RuntimeException("couldn't get " + url, e);
+        } catch (Exception e) {
+            return null;
         }
     }
 

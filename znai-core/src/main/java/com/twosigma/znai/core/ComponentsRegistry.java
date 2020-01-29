@@ -20,6 +20,7 @@ import com.twosigma.znai.parser.MarkupParser;
 import com.twosigma.znai.parser.commonmark.MarkdownParser;
 import com.twosigma.znai.structure.DocStructure;
 import com.twosigma.znai.extensions.include.IncludePlugin;
+import com.twosigma.znai.time.TimeService;
 
 /**
  * simple components registry to avoid introduction of DI frameworks.
@@ -44,4 +45,6 @@ public interface ComponentsRegistry {
     DocStructure docStructure();
 
     GlobalAssetsRegistry globalAssetsRegistry();
+
+    TimeService timeService();
 }

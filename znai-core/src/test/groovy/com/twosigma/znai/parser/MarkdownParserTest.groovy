@@ -223,24 +223,25 @@ world""")
 
     @Test
     void "inlined image"() {
-        def timestamp = System.currentTimeMillis()
+        TestComponentsRegistry.INSTANCE.timeService().fakedFileTime = 300000
 
         parse("text ![alt text](images/png-test.png \"custom title\") another text")
         content.should == [[type: 'Paragraph', content:[
                 [text: "text " , type: "SimpleText"],
                 [title: "custom title", destination: '/test-doc/png-test.png', alt: 'alt text', type: 'Image', inlined: true,
-                 width:762, height:581, timestamp: beGreaterThanOrEqual(timestamp)],
+                 width:762, height:581, timestamp: 300000],
                 [text: " another text" , type: "SimpleText"]]]]
     }
 
     @Test
     void "standalone image"() {
-        def timestamp = System.currentTimeMillis()
+        TestComponentsRegistry.INSTANCE.timeService().fakedFileTime = 200000
+
         parse("![alt text](images/png-test.png \"custom title\")")
         content.should == [[title: "custom title", destination: '/test-doc/png-test.png',
                             alt: 'alt text', inlined: false,
                             width:762, height:581,
-                            timestamp: beGreaterThanOrEqual(timestamp),
+                            timestamp: 200000,
                             type: 'Image']]
     }
 

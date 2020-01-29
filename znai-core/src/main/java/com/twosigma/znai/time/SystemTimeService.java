@@ -14,23 +14,24 @@
  * limitations under the License.
  */
 
-import React from 'react'
+package com.twosigma.znai.time;
 
-import Icon from '../icons/Icon'
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-import {PresentationHeading} from './PresentationHeading'
+public class SystemTimeService implements TimeService {
+    @Override
+    public long fileModifiedTimeMillis(Path path) {
+        try {
+            return Files.getLastModifiedTime(path).toMillis();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-import './SubHeading.css'
-
-export function SubHeading({level, title, id}) {
-    const Element = `h${level}`
-
-    return (
-        <Element className="content-block" id={id}>
-            <span>{title}</span>
-            <a href={"#" + id}><Icon id="link"/></a>
-        </Element>
-    )
+    @Override
+    public long currentTimeMillis() {
+        return System.currentTimeMillis();
+    }
 }
-
-export const presentationSubHeading = {component: PresentationHeading, numberOfSlides: () => 1}
