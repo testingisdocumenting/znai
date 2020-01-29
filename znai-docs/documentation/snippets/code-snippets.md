@@ -49,7 +49,7 @@ Note that it is not being executed inside the browser, but rather applied during
   
 # Title
 
-Use `title` property to specify a title.
+Use the `title` property to specify a title.
 
     ```javascript {title: "ReactJS Component"}
     ...
@@ -67,7 +67,7 @@ class MyComponent extends Component {
 
 # Wide Code
 
-Use `wide` option to stretch wide code to occupy as much horizontal real estate as possible.  
+Use the `wide` option to stretch wide code to occupy as much horizontal real estate as possible.  
 
     ```java {wide: true}
     class InternationalPriceService implements PriceService {
@@ -85,7 +85,7 @@ class InternationalPriceService implements PriceService {
 }
 ``` 
 
-Without `wide` option code will be aligned with the rest of the text and users can use scrollbars.   
+Without the `wide` option code will be aligned with the rest of the text and users can use scrollbars.   
 
 ```java
 class InternationalPriceService implements PriceService {
@@ -95,11 +95,11 @@ class InternationalPriceService implements PriceService {
 }
 ```
 
-Note: Good placement of a *Wide Code* is at the end of a page or a section to show the full version of a code sample.
+Note: Good placement of a *Wide Code* element is at the end of a page or a section to show the full version of a code sample.
 
 # Read More
 
-If you have a large code snippet and you want to initially display only a small fraction use `readMore` option with an **optional**
+If you have a large code snippet and you want to initially display only a small fraction use the `readMore` option with an **optional**
 `readMoreVisibleLines` option to specify a number of initial lines displayed (default is 8).
 
     ```java {readMore: true, readMoreVisibleLines: 3}
@@ -139,7 +139,7 @@ public class DocScaffolding {
 
 # Highlights
 
-Use `highlight` option to bring readers attention to the important lines.
+Use the `highlight` option to bring readers attention to important lines.
 
 
     ```java {highlight: "workingDir"}
@@ -162,7 +162,7 @@ public class DocScaffolding {
     }
 ```
 
-Note: You will get a build time error if the specified substring is not found in any of the snippet lines
+Note: You will get a build-time error if the specified substring is not found in any of the snippet lines
 
 It is recommended to pass a substring, but you can pass a line idx (starts from 0). 
 Additionally you can combine two approaches and pass a list of things to highlight. 

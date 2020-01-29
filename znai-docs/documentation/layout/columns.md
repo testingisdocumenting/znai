@@ -1,6 +1,6 @@
 # Information Layout
 
-The way your information is laid out affects how easy it is to comprehend given material.
+The way your information is laid out affects how easy it is to comprehend any given material.
 Some content benefits from being formatted side-by-side. Some examples are:
 * Before-and-after transition
 * Action and its result

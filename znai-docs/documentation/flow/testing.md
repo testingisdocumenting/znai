@@ -13,12 +13,11 @@ At test run time, capture test produced artifacts:
 * Config files
 * Script snippets
 * Runtime dependencies DAGs
-* etc
+* ...
 
 Include the captured artifacts inside your documentation to keep it up to date.
 
-As you write your documentation you will come up with new scenarios to test. And as you write tests, think about documentation
-and what test-produced artifacts can improve it.
+As you write your documentation you will come up with new scenarios to test. As you write tests, think about your documentation and what test-produced artifacts can improve it.
 
-In the rest of this documentation you will learn how to include artifacts.
+In this documentation you will learn how to include artifacts.
 There are also examples of synergy between tests and documentation in the later chapters.

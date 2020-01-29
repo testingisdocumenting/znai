@@ -10,7 +10,7 @@ Comma-separated paths specified inside `paths` will be highlighted.
 
 # Paths From File
 
-Use `pathsFile` to specify a file to read paths from
+Use `pathsFile` to specify a file to read paths from.
 
 :include-json: book-store-paths.json {title: "book-store-paths.json"} 
 
@@ -19,7 +19,7 @@ Use `pathsFile` to specify a file to read paths from
 # Json Subparts
 
 To include only a portion of your document 
-pass [Json Path](https://github.com/json-path/JsonPath) as `include` property 
+pass [Json Path](https://github.com/json-path/JsonPath) as `include` property:
 
     :include-json: book-store.json {include: "$..book[0,1]"}
 
@@ -27,7 +27,7 @@ pass [Json Path](https://github.com/json-path/JsonPath) as `include` property
 
 # Title
 
-To specify a title use the `title` property 
+To specify a title use the `title` property:
 
     :include-json: book-store.json {include: "$..book[0,1]", title: "Books"}
     
@@ -44,7 +44,7 @@ the initial number of lines to display
 
 # Hidden Parts
 
-To hide sub-parts of your JSON use `collapsedPaths` property.
+To hide sub-parts of your `JSON` use `collapsedPaths` property.
 
     :include-json: book-store.json {collapsedPaths: ['root.store.book']}
     
@@ -52,8 +52,7 @@ To hide sub-parts of your JSON use `collapsedPaths` property.
 
 # Highlights
 
-Additionally to highlighting a specific `JSON` value using `paths`, you can 
-(similarly to [regular code snippets](snippets/external-code-snippets#highlights)) highlight 
+To highlight a specific `JSON` value using `paths`, in (similar fashion to [regular code snippets](snippets/external-code-snippets#highlights)), you can highlight 
 a line by text matching or by providing a line index.
 
     :include-json: book-store.json {highlight: ["category", 2]}
@@ -62,12 +61,12 @@ a line by text matching or by providing a line index.
 
 # Code References
 
-You can turn parts of a json into links to internal or external pages. 
+You can turn parts of `JSON` into links to internal or external pages. 
 
 
 :include-json: book-store.json {include: "$..book[0,1]", title: "Books", referencesPath: "references/json-references-demo.csv"}
 
 # Test Results
 
-Consider leveraging testing frameworks to extract `JSON` samples from your end points. 
+Consider leveraging testing frameworks to extract `JSON` samples from your endpoints. 
 Information about what assertions were made can be used to highlight points of interest.

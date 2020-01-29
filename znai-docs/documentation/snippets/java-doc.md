@@ -1,11 +1,11 @@
 # Class Level
 
 Documentation maintenance is one of the main goals of this documentation system. 
-In case of Java you may already use `JavaDoc` strings to explain certain concepts of your system.
+In the case of Java you may already use `JavaDoc` strings to explain certain concepts of your system.
 
 :include-java: HelloWorld.java
 
-Instead of copy and pasting text between sources, you can refer to it inside your documentation.
+Instead of copy-and-pasting text between sources, you can refer to it inside your documentation.
 
     :include-java-doc: HelloWorld.java
     
@@ -37,9 +37,9 @@ Method level `JavaDoc` text can be referred to as well by specifying the `entry`
 
 # Method Params With References
 
-Use [Code References](snippets/code-references) file to link API params to reference pages.
+Use the [Code References](snippets/code-references) file to link API parameters to reference pages.
   
-To do that, define references in a csv file. Two columns format: `type-or-variable-name, link`.
+To do that, define references in a CSV file, using a two column format: `type-or-variable-name, link`.
 
 :include-file: references/javadoc-references-demo.csv {title: "references/javadoc-references-demo.csv"}
 
@@ -51,7 +51,7 @@ To do that, define references in a csv file. Two columns format: `type-or-variab
     entry: "importantAction", 
     referencesPath: "references/javadoc-references-demo.csv"}
 
-Parameters are now linked with reference section of the documentation. 
+Parameters are now linked with a reference section for the documentation. 
 
 # Enum Entries
 
@@ -63,7 +63,7 @@ Use `include-java-enum-entries` to enumerate entries of a enum from a file.
     
 :include-java-enum-entries: MyEnum.java
 
-You can exclude deprecated entries from the list by specifying `excludeDeprecated` parameter.
+You can exclude deprecated entries from the list by setting the `excludeDeprecated` parameter.
  
     :include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
 

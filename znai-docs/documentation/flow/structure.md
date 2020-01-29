@@ -14,7 +14,7 @@ If you feel like you need to use nested headings, consider moving your content h
 
 # Similarity with OOP
 
-It may help to show parallel with `OOP` concepts 
+It may be useful to compare documentation design to an object-oriented programming approach:
 * Chapters as `packages`
 * Pages as `classes`
 * Page Sections as `methods`
