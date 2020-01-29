@@ -1,8 +1,8 @@
 # Local References
 
-You can turn parts of a code into links to internal or external pages. 
+You can turn parts of a code snippet into links to internal or external pages. 
 
-To do that, define references in a csv file. Two columns format: `expression, link`.
+To do that, define references in a CSV file, using a two column format: `expression, link`.
 
 :include-file: references/references-demo.csv {title: "references/references-demo.csv"}
 

@@ -4,7 +4,7 @@ title: API Parameters
 
 # Inlined CSV
 
-When you are not able to automatically extract an API parameters definition you can use
+When you are not able to automatically extract an API parameter definition you can use
 the `api-parameters` fence plugin to manually document them.  
 
     ```api-parameters
@@ -19,7 +19,7 @@ score, Integer, another description line with *markdown* support
 
 # Nested
 
-Use `parent.children` syntax to define nested objects like this
+Use `parent.children` syntax to define nested objects like this.
 
     ```api-parameters
     sessionId, Integer, session Id
@@ -31,7 +31,7 @@ Use `parent.children` syntax to define nested objects like this
     roles.description, String, role description
     ```
     
-Note: you still need to explicitly define `root` entry like `person` in the example above
+Note: when using this approach it is necessary to explicitly define a `root` entry, such as `person` in this example.
 
 ```api-parameters
 sessionId, Integer, session Id
@@ -42,6 +42,8 @@ roles, List<Role>, list of authorized roles
 roles.id, String, role id 
 roles.description, String, role description
 ```
+
+Note: if a parameter name actually contains a period ("."), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. 'person.firstName'
 
 # External JSON File
 

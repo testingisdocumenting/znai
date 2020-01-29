@@ -1,6 +1,6 @@
 # Backtick
 
-To inline code within a text simply put it inside a backtick. 
+To display inline code within regular text, simply put it inside a backtick. 
 
 Example: To check if an Exchange is closed, you need to use `ExchangeCalendar`
 
@@ -8,7 +8,7 @@ Example: To check if an Exchange is closed, you need to use `ExchangeCalendar`
 
 # From File
 
-To inline code from a file use `file` backtick plugin. 
+To display inline code from a file, use the `file` backtick plugin. 
 
 Example: To access this feature navigate to `:file: urlsample.txt`. 
 

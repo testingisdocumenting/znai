@@ -1,6 +1,6 @@
 # Method Body
 
-When you need to extract a specific method body use `include-java` plugin.
+When you need to extract a specific method body, use the `include-java` plugin.
 
 Consider the file below:
 
@@ -25,7 +25,7 @@ you can specify `commentsType` option for `include-java`.
 
 # Signature Only
 
-Specifying a method name to extract only its body. 
+You can also specify a method name and extract only its signature. 
 
     :include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true}
 
@@ -80,7 +80,7 @@ This will render:
 
 # Multiple Overloads
 
-To list of the overloads of a method, specify method name using `entries` param.
+To list of the overloads of a method, specify method name using the `entries` parameter.
 
     :include-java: HelloWorld.java {entries: "sampleMethod", signatureOnly: true}
 
@@ -89,11 +89,11 @@ To list of the overloads of a method, specify method name using `entries` param.
 # Class JavaDoc
 
 Documentation maintenance is one of the main goals of this documentation system. 
-In case of Java you may already use `JavaDoc` strings to explain certain concepts of your system.
+In the case of Java you may already use `JavaDoc` strings to explain certain concepts of your system.
 
 :include-java: HelloWorld.java
 
-Instead of copy and pasting text between sources, you can refer to it inside your documentation.
+Instead of copy-and-pasting text between sources, you can refer to it inside your documentation.
 
     :include-java-doc: HelloWorld.java
     

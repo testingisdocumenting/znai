@@ -8,11 +8,11 @@ Imagine your product supports multiple ways of achieving a final result:
 * Python
 * more...
 
-Provide a selection inside your documentation if your user needs only one to accomplish the goal. 
-Selections will persist for users and provide streamlined experience.
+You can use tabs to allow your user to choose the method to accomplish the goal covered in the documentation. 
+Tab selections will persist for users and provide streamlined experience.
 
 Don't: use tabs as navigation experience. 
-If your user needs both `Java` and `Python` executed one by one you need to show steps one after another in proper order.
+If your user needs both `Java` and `Python` executed one by one you need to show steps one after the other in proper order.
  
 # Definition 
 
@@ -42,7 +42,7 @@ A typical use case for *installation instructions* might be dividing content per
 
     ````tabs
     JavaScript: 
-    First you need to download WebStorm and then run following using your terminal
+    First you need to download WebStorm and then run the following using your terminal
     
     ```bash
     $ yarn install
@@ -50,7 +50,7 @@ A typical use case for *installation instructions* might be dividing content per
     ```
         
     Java: 
-    First you need to download Intellij IDEA and then run following using your terminal
+    First you need to download Intellij IDEA and then run the following using your terminal
         
     ```bash
     $ mvn install
@@ -58,7 +58,7 @@ A typical use case for *installation instructions* might be dividing content per
     ```
         
     Cpp: 
-    First you need to download CLion and then run following using your terminal
+    First you need to download CLion and then run the following using your terminal
     
     ```bash
     $ pwd
@@ -68,7 +68,7 @@ A typical use case for *installation instructions* might be dividing content per
     
 ````tabs
 JavaScript: 
-First you need to download WebStorm and then run following using your terminal
+First you need to download WebStorm and then run the following using your terminal
 
 ```bash
 $ yarn install
@@ -76,7 +76,7 @@ $ yarn start
 ```
     
 Java: 
-First you need to download Intellij IDEA and then run following using your terminal
+First you need to download Intellij IDEA and then run the following using your terminal
     
 ```bash
 $ mvn install
@@ -84,7 +84,7 @@ $ mvn exec:exec
 ```
     
 Cpp: 
-First you need to download CLion and then run following using your terminal
+First you need to download CLion and then run the following using your terminal
 
 ```bash
 $ pwd
@@ -114,7 +114,7 @@ Cpp: :include-markdown: instructions/cpp-install.md
 # Attention Signs
 
 Use extra space(s) in front of `Note:` or other attention sign keywords to put attention signs inside a tab. 
-Remember if you put 4+ spaces your paragraph will become a code snippet
+Remember if you put 4+ spaces, your paragraph will become a code snippet.
 
     
     ````tabs
@@ -128,7 +128,7 @@ Remember if you put 4+ spaces your paragraph will become a code snippet
      Avoid: committing node_modules
         
     Java: 
-    First you need to download Intellij IDEA and then run following using your terminal
+    First you need to download Intellij IDEA and then run the following using your terminal
         
     ```bash
     $ mvn install
@@ -138,7 +138,7 @@ Remember if you put 4+ spaces your paragraph will become a code snippet
      Warning: `mvn` install for the first time may take considerable amount of time
     
     Cpp: 
-    First you need to download CLion and then run following using your terminal
+    First you need to download CLion and then run the following using your terminal
     
     ```bash
     $ pwd
@@ -159,7 +159,7 @@ $ yarn start
  Do not: commit node_modules to the repository
     
 Java: 
-First you need to download Intellij IDEA and then run following using your terminal
+First you need to download Intellij IDEA and then run the following using your terminal
     
 ```bash
 $ mvn install
@@ -169,7 +169,7 @@ $ mvn exec:exec
  Warning: `mvn` install for the first time may take considerable amount of time
 
 Cpp: 
-First you need to download CLion and then run following using your terminal
+First you need to download CLion and then run the following using your terminal
 
 ```bash
 $ pwd

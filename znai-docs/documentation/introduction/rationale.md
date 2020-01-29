@@ -1,7 +1,7 @@
 # Stale Documentation
 
 Keeping documentation up to date is a hard task. 
-It's often the case that the more separated your documentation is from the code it's decribing, the more likely it won't be updated when a feature is added or changed.
+It's often the case that the more separated your documentation is from the code it's describing, the more likely it won't be updated when a feature is added or changed.
 
 Depending on your product and clients, stale documentation can cause:
 * `:icon:time` Lost time for users
@@ -20,7 +20,7 @@ Now, it is time to add to that list:
 # Maintenance 
 
 Keeping documentation up to date takes time. 
-Even non-functional changes may require documentation update.
+Even non-functional changes may require documentation updates.
 Here are some activities that most likely put your documentation out of sync:
 * Moving UI elements around
 * Re-naming REST response fields

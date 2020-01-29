@@ -1,6 +1,6 @@
 # Files Reference Lookup
 
-When you refer a file using plugins like
+When you refer to a file using plugins like
 
  `:include-file: my-file.cpp` 
  
@@ -25,7 +25,7 @@ If files you want to include are not part of your project, you can add an HTTP b
 https://raw.githubusercontent.com/twosigma/webtau/master
 ```
 
-If file is not found using local locations it will be fetched from the provided urls
+If the file is not found using local locations, it will be fetched from the provided urls.
 
     :include-file: .travis.yml
  

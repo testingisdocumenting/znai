@@ -1,9 +1,9 @@
 # Follow the Order
 
-Most of the documentation should have a natural order to follow. 
+The best documentation should be arranged with a natural order to follow. 
 Links to navigate to the next page are at the end of each page.
 
-Create links to remind users of an *essential* concept introduced previously. There is a good chance that a reader skipped over it or forgot. 
+Create links to remind users of *essential* concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them. 
 
 Avoid: links that navigate users forward. It breaks the flow of a documentation. 
 
@@ -29,12 +29,12 @@ To refer back to the top-level `index` page use:
 [index link](/)
 ```
 
-## Links to Sub Section
+## Links to Subsection
 
-Linking to subsections is the same as linking to a top level section. [Here is an example](flow/page-references#links-to-sub-section)
+Linking to subsections is the same as linking to a top level section. [Here is an example](flow/page-references#links-to-subsection)
 
 ```markdown
-[Here is an example](flow/page-references#links-to-sub-section)
+[Here is an example](flow/page-references#links-to-subsection)
 ```
  
 ## Index Page

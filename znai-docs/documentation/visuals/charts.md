@@ -41,7 +41,7 @@ To build a line chart use:
 # Presentation Mode
 
 In presentation mode, chart values for `Bar` and `Pie` appear one at a time.
-To force all values to appear at once use
+To force all values to appear at once use:
 
     :include-meta: {allAtOnce: true}
 
