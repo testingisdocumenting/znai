@@ -21,6 +21,7 @@ import com.twosigma.znai.extensions.PluginResult;
 import com.twosigma.znai.extensions.fence.FencePlugin;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.table.MarkupTableData;
+import com.twosigma.znai.reference.DocReferences;
 
 import java.util.Map;
 
@@ -58,7 +59,7 @@ public interface ParserHandler {
     void onBlockQuoteStart();
     void onBlockQuoteEnd();
     void onSimpleText(String value);
-    void onInlinedCode(String inlinedCode);
+    void onInlinedCode(String inlinedCode, DocReferences docReferences);
     void onLinkStart(String url);
     void onLinkEnd();
     void onImage(String title, String destination, String alt);

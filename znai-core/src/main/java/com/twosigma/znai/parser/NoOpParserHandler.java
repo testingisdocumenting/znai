@@ -21,6 +21,7 @@ import com.twosigma.znai.extensions.PluginResult;
 import com.twosigma.znai.extensions.fence.FencePlugin;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.table.MarkupTableData;
+import com.twosigma.znai.reference.DocReferences;
 
 import java.util.Map;
 
@@ -119,7 +120,7 @@ public class NoOpParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onInlinedCode(String inlinedCode) {
+    public void onInlinedCode(String inlinedCode, DocReferences docReferences) {
     }
 
     @Override

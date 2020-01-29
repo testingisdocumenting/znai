@@ -23,10 +23,16 @@ import java.util.Map;
  * maintains a list of references (code references, text references, etc) and page-urls associated with them
  */
 public class DocReferences {
+    public static final DocReferences EMPTY = new DocReferences(Collections.emptyMap());
+
     private final Map<String, Object> references;
 
     public DocReferences(Map<String, Object> references) {
         this.references = Collections.unmodifiableMap(references);
+    }
+
+    public boolean isEmpty() {
+        return references.isEmpty();
     }
 
     public Map<String, Object> toMap() {

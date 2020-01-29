@@ -371,8 +371,9 @@ public class WebSite {
     }
 
     private void parseMarkupAndUpdateTocItemAndSearch(TocItem tocItem) {
+        Path markupPath = markupPath(tocItem);
+
         try {
-            Path markupPath = markupPath(tocItem);
             Path relativePathToLog = cfg.docRootPath.relativize(markupPath);
 
             ConsoleOutputs.out("parsing ", Color.PURPLE, relativePathToLog);
@@ -391,8 +392,10 @@ public class WebSite {
 
             updateSearchEntries(tocItem, parserResult);
         } catch(Exception e) {
-            throw new RuntimeException("error during parsing of <" + tocItem +
-                    ">:\n\n" + e.getMessage() + "\n\n", e);
+            throw new RuntimeException("\nmarkup parsing error:\n" +
+                    "    TOC item: " + tocItem + "\n" +
+                    "    path: " + markupPath + "\n" +
+                    "\n" + e.getMessage() + "\n", e);
         }
     }
 

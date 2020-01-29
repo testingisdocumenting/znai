@@ -34,6 +34,7 @@
     --znai-brand-primary-color: rgb(41, 139, 231);
 
     --znai-link-color: var(--znai-brand-primary-color);
+    --znai-link-decoration: underline;
 
     --znai-rest-link-color: #7287b3;
     --znai-important-attention: #c52912;
@@ -232,13 +233,6 @@ body {
 
 .image.inlined {
     display: inline-block;
-}
-
-a,
-a:hover,
-a code {
-    color: var(--znai-link-color);
-    text-decoration: underline;
 }
 
 hr {

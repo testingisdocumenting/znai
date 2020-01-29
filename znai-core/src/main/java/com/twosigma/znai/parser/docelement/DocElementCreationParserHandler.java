@@ -30,6 +30,7 @@ import com.twosigma.znai.extensions.inlinedcode.InlinedCodePlugin;
 import com.twosigma.znai.parser.PageSectionIdTitle;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.parser.table.MarkupTableData;
+import com.twosigma.znai.reference.DocReferences;
 import com.twosigma.znai.structure.DocStructure;
 import com.twosigma.znai.structure.DocUrl;
 
@@ -228,8 +229,14 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onInlinedCode(String inlinedCode) {
-        append(DocElementType.INLINED_CODE, "code", inlinedCode);
+    public void onInlinedCode(String inlinedCode, DocReferences docReferences) {
+        Map<String, Object> props = new HashMap<>();
+        props.put("code", inlinedCode);
+        if (!docReferences.isEmpty()) {
+            props.put("references", docReferences.toMap());
+        }
+
+        append(DocElementType.INLINED_CODE, props);
     }
 
     @Override

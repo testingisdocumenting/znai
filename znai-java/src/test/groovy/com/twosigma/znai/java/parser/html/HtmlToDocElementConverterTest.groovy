@@ -18,6 +18,7 @@ package com.twosigma.znai.java.parser.html
 
 import com.twosigma.znai.core.ComponentsRegistry
 import com.twosigma.znai.parser.TestComponentsRegistry
+import com.twosigma.znai.reference.DocReferences
 import org.junit.Test
 
 import java.nio.file.Paths
@@ -101,8 +102,17 @@ World paragraph
                             [type: 'Paragraph', content:[[text: ' World paragraph ', type: 'SimpleText']]]]
     }
 
-    private void process(String html) {
-        def docElements = HtmlToDocElementConverter.convert(testComponentsRegistry, Paths.get(""), html)
+    @Test
+    void "should add code references to inlined code when specified"() {
+        process('<code>MyClass</code>', [MyClass: 'link/toRef'])
+
+        elements.should == [[type: 'Paragraph',
+                             content: [[code: 'MyClass', references: [MyClass: 'link/toRef'], type: 'InlinedCode']]]]
+    }
+
+    private void process(String html, codeReferences = [:]) {
+        def docElements = HtmlToDocElementConverter.convert(testComponentsRegistry, Paths.get(""), html,
+                new DocReferences(codeReferences))
         elements = docElements.collect { it.toMap() }
     }
 }

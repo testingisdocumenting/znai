@@ -22,6 +22,7 @@ import com.twosigma.znai.extensions.fence.FencePlugin;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.NoOpParserHandler;
 import com.twosigma.znai.parser.table.MarkupTableData;
+import com.twosigma.znai.reference.DocReferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
-    public void onInlinedCode(String inlinedCode) {
+    public void onInlinedCode(String inlinedCode, DocReferences docReferences) {
         addSeparated(inlinedCode);
     }
 
