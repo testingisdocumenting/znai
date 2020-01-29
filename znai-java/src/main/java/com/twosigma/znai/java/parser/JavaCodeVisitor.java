@@ -43,7 +43,6 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     private List<EnumEntry> enumEntries;
     private Map<String, JavaField> javaFields;
     private String topLevelJavaDoc;
-    private boolean isAfterInlinedTag;
 
     public JavaCodeVisitor(String code) {
         lines = Arrays.asList(code.split("\n"));
@@ -116,7 +115,8 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     @Override
     public void visit(FieldDeclaration fieldDeclaration, String arg) {
-        String javaDocText = fieldDeclaration.hasJavaDocComment() ? fieldDeclaration.getJavadocComment().get().parse().toText() : "";
+        String javaDocText = fieldDeclaration.hasJavaDocComment() ?
+                fieldDeclaration.getJavadocComment().map(c -> c.parse().toText()).orElse("") : "";
 
         fieldDeclaration.getVariables().stream().map(vd -> vd.getName().getIdentifier())
                 .forEach(name -> javaFields.put(name, new JavaField(name, javaDocText)));
@@ -135,8 +135,11 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         extractTopLevelJavaDoc(enumDeclaration);
         registerType(enumDeclaration);
 
-        List<EnumEntry> entries = enumDeclaration.getEntries().stream().map(e -> new EnumEntry(e.getName().getIdentifier(),
-                extractJavaDocDescription(e.getJavadocComment()), extractIsDeprecated(e))).collect(toList());
+        List<EnumEntry> entries = enumDeclaration.getEntries().stream().map(e -> {
+            Optional<JavadocComment> javadocComment = e.getJavadocComment();
+            String javaDocText = javadocComment.map(this::extractJavaDocDescription).orElse("");
+            return new EnumEntry(e.getName().getIdentifier(), javaDocText, extractIsDeprecated(e));
+        }).collect(toList());
 
         enumEntries.addAll(entries);
         super.visit(enumDeclaration, arg);
@@ -148,7 +151,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         String code = JavaCodeUtils.extractCode(lines, methodDeclaration);
 
         Optional<JavadocComment> javaDocComment = methodDeclaration.getJavadocComment();
-        Javadoc javaDoc = javaDocComment.isPresent() ? javaDocComment.get().parse() : null;
+        Javadoc javaDoc = javaDocComment.map(JavadocComment::parse).orElse(null);
 
         String javaDocText = (javaDoc != null) ?
                 extractJavaDocDescription(javaDoc.getDescription()) :
@@ -164,7 +167,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     }
 
     private boolean extractIsDeprecated(EnumConstantDeclaration e) {
-        List<MarkerAnnotationExpr> annotationNodes = e.getNodesByType(MarkerAnnotationExpr.class);
+        List<MarkerAnnotationExpr> annotationNodes = e.findAll(MarkerAnnotationExpr.class);
         return annotationNodes.stream().anyMatch(an -> an.getName().getIdentifier().equals("Deprecated"));
     }
 
@@ -176,12 +179,8 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         return "    " + String.join("\n    ", javaFields.keySet());
     }
 
-    private String extractJavaDocDescription(Optional<JavadocComment> javadocComment) {
-        if (!javadocComment.isPresent()) {
-            return "";
-        }
-
-        Javadoc javadoc = javadocComment.get().parse();
+    private String extractJavaDocDescription(JavadocComment javadocComment) {
+        Javadoc javadoc = javadocComment.parse();
         JavadocDescription description = javadoc.getDescription();
 
         return description == null ? "" : extractJavaDocDescription(description);
@@ -198,7 +197,6 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     private String elementToText(JavadocDescriptionElement el) {
         if (el instanceof JavadocSnippet) {
             String result = el.toText();
-            isAfterInlinedTag = false;
 
             return result.trim();
         }
@@ -211,7 +209,6 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     }
 
     private String extractTextFromInlinedTag(JavadocDescriptionElement el) {
-        isAfterInlinedTag = true;
         return getPrivateFieldValue(el, "content");
     }
 
