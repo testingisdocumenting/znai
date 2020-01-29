@@ -36,10 +36,6 @@ public class CodeReferencesTrait {
     }
 
     public DocReferences getReferences() {
-//        if (references == null) {
-//            references = buildReferences();
-//        }
-
         return references;
     }
 
