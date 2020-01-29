@@ -28,10 +28,10 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 class WebSiteDocStructure implements DocStructure {
-    private ComponentsRegistry componentsRegistry;
+    private final ComponentsRegistry componentsRegistry;
     private final DocMeta docMeta;
-    private TableOfContents toc;
-    private MarkupParsingConfiguration parsingConfiguration;
+    private final TableOfContents toc;
+    private final MarkupParsingConfiguration parsingConfiguration;
     private final List<LinkToValidate> linksToValidate;
     private final Map<String, Path> globalAnchorPathById;
     private final Map<TocItem, List<String>> localAnchorIdsByTocItem;
@@ -55,6 +55,14 @@ class WebSiteDocStructure implements DocStructure {
         entriesForPath.forEach(kv -> globalAnchorPathById.remove(kv.getKey()));
     }
 
+    void removeLocalAnchorsForTocItem(TocItem tocItem) {
+        localAnchorIdsByTocItem.remove(tocItem);
+    }
+
+    void removeLinksForPath(Path path) {
+        linksToValidate.removeIf(linkToValidate -> linkToValidate.path.equals(path));
+    }
+
     public void validateCollectedLinks() {
         String validationErrorMessage = linksToValidate.stream()
                 .map(this::validateLink)
@@ -75,7 +83,6 @@ class WebSiteDocStructure implements DocStructure {
 
         linksToValidate.add(new LinkToValidate(path, sectionWithLinkTitle, docUrl));
     }
-
 
     @Override
     public String createUrl(DocUrl docUrl) {
@@ -161,10 +168,6 @@ class WebSiteDocStructure implements DocStructure {
             return Optional.empty();
         }
 
-        if (tocItem.hasPageSection(anchorId)) {
-            return Optional.empty();
-        }
-
         return Optional.of(validationMessage.get());
     }
 
@@ -183,7 +186,7 @@ class WebSiteDocStructure implements DocStructure {
         return localIds != null && localIds.contains(anchorId);
     }
 
-    private class LinkToValidate {
+    private static class LinkToValidate {
         private final Path path;
         private final String sectionWithLinkTitle;
         private final DocUrl docUrl;
