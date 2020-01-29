@@ -39,7 +39,7 @@ public class CppSourceCode {
 
     public static List<CodePart> splitOnComments(String code) {
         CPP14Parser parser = createParser(code);
-        parser.translationunit().accept(new CPP14BaseVisitor());
+        parser.translationunit().accept(new CPP14BaseVisitor<Void>());
 
         SplitOnCommentsTokensProcessor processor = new SplitOnCommentsTokensProcessor(parser);
         return processor.extractParts();
