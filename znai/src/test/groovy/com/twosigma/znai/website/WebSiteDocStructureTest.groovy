@@ -68,7 +68,7 @@ class WebSiteDocStructureTest {
     @Test
     void "should reject link that has no associated toc item"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.validateUrl(path, 'section title', new DocUrl('chapter/unknown-page'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('chapter/unknown-page'))
 
         code {
             docStructure.validateCollectedLinks()
@@ -79,7 +79,7 @@ class WebSiteDocStructureTest {
     @Test
     void "should reject link that has no associated global anchor"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.validateUrl(path, 'section title', new DocUrl('chapter/pageOne#wrongRefId'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('chapter/pageOne#wrongRefId'))
 
         code {
             docStructure.validateCollectedLinks()

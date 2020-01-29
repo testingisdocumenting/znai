@@ -72,11 +72,11 @@ class MarkdownParserTest {
     void "link to a non existing within documentation location"() {
         code {
             parse("# wrong link\n\n[label](dir-name/non-existing-file-name)")
-        } should throwException(~/no valid link found in section 'wrong link': dir-name\/non-existing-file-name$/)
+        } should throwException(~/no valid link found in test.md, section title: wrong link: dir-name\/non-existing-file-name$/)
 
         code {
             parse("[label](dir-name/non-existing-file-name#page-section)")
-        } should throwException(~/no valid link found in section '': dir-name\/non-existing-file-name#page-section$/)
+        } should throwException(~/no valid link found in test\.md, section title: : dir-name\/non-existing-file-name#page-section$/)
     }
 
     @Test
