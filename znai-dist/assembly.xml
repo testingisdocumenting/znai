@@ -20,7 +20,6 @@
         <format>zip</format>
     </formats>
 
-
     <dependencySets>
         <dependencySet>
             <unpack>false</unpack>
