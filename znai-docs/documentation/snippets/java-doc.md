@@ -68,3 +68,21 @@ You can exclude deprecated entries from the list by setting the `excludeDeprecat
     :include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
 
 :include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
+
+# Enum Entries With References
+
+Use [Code References](snippets/code-references) file to link enum entries to reference pages.
+
+Use `include-java-enum-entries` to enumerate entries of a enum from a file.
+
+:include-file: MyEnum.java
+
+    :include-java-enum-entries: MyEnum.java
+    
+:include-java-enum-entries: MyEnum.java
+
+You can exclude deprecated entries from the list by specifying `excludeDeprecated` parameter.
+ 
+    :include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
+
+:include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
