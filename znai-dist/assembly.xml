@@ -19,11 +19,13 @@
     <formats>
         <format>zip</format>
     </formats>
+
     <dependencySets>
         <dependencySet>
             <unpack>false</unpack>
             <scope>runtime</scope>
             <outputDirectory>lib</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
             <includes>
                 <include>com.twosigma.znai:znai-shaded:*</include>
                 <include>org.codehaus.groovy:*</include>
