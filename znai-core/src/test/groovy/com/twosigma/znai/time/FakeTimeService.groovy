@@ -14,23 +14,29 @@
  * limitations under the License.
  */
 
-import React from 'react'
+package com.twosigma.znai.time
 
-import Icon from '../icons/Icon'
+import java.nio.file.Path
 
-import {PresentationHeading} from './PresentationHeading'
+class FakeTimeService implements TimeService {
+    private long fakedCurrentTime
+    private long fakedFileTime
 
-import './SubHeading.css'
+    @Override
+    long fileModifiedTimeMillis(Path path) {
+        return fakedFileTime
+    }
 
-export function SubHeading({level, title, id}) {
-    const Element = `h${level}`
+    @Override
+    long currentTimeMillis() {
+        return fakedCurrentTime
+    }
 
-    return (
-        <Element className="content-block" id={id}>
-            <span>{title}</span>
-            <a href={"#" + id}><Icon id="link"/></a>
-        </Element>
-    )
+    void setFakedCurrentTime(long fakedCurrentTime) {
+        this.fakedCurrentTime = fakedCurrentTime
+    }
+
+    void setFakedFileTime(long fakedFileTime) {
+        this.fakedFileTime = fakedFileTime
+    }
 }
-
-export const presentationSubHeading = {component: PresentationHeading, numberOfSlides: () => 1}

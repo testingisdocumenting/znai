@@ -259,7 +259,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
                 "destination", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()),
                 "alt", alt,
                 "inlined", true,
-                "timestamp", System.currentTimeMillis(),
+                "timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()),
                 "width", image.getWidth(),
                 "height", image.getHeight());
 
@@ -383,7 +383,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     private void convertParagraphWithSingleImageToWideImage(DocElement paragraph) {
-        if (paragraph.getContent().size() > 1 || paragraph.getContent().size() == 0) {
+        if (paragraph.getContent().size() != 1) {
             return;
         }
 

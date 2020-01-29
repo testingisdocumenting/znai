@@ -14,23 +14,7 @@
  * limitations under the License.
  */
 
-import React from 'react'
-
-import Icon from '../icons/Icon'
-
-import {PresentationHeading} from './PresentationHeading'
-
-import './SubHeading.css'
-
-export function SubHeading({level, title, id}) {
-    const Element = `h${level}`
-
-    return (
-        <Element className="content-block" id={id}>
-            <span>{title}</span>
-            <a href={"#" + id}><Icon id="link"/></a>
-        </Element>
-    )
+export function areTocItemEquals(a, b) {
+    return a.dirName === b.dirName &&
+        a.fileName === b.fileName
 }
-
-export const presentationSubHeading = {component: PresentationHeading, numberOfSlides: () => 1}

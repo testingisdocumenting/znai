@@ -22,6 +22,8 @@ import com.twosigma.znai.core.ResourcesResolver;
 import com.twosigma.znai.parser.MarkupParser;
 import com.twosigma.znai.parser.commonmark.MarkdownParser;
 import com.twosigma.znai.structure.DocStructure;
+import com.twosigma.znai.time.SystemTimeService;
+import com.twosigma.znai.time.TimeService;
 
 public class WebSiteComponentsRegistry implements ComponentsRegistry {
     private MarkupParser defaultParser;
@@ -31,8 +33,11 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
 
     private GlobalAssetsRegistry assetsRegistry;
 
+    private TimeService timeService;
+
     public WebSiteComponentsRegistry() {
         assetsRegistry = new GlobalAssetsRegistry();
+        timeService = new SystemTimeService();
     }
 
     @Override
@@ -58,6 +63,11 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
     @Override
     public GlobalAssetsRegistry globalAssetsRegistry() {
         return assetsRegistry;
+    }
+
+    @Override
+    public TimeService timeService() {
+        return timeService;
     }
 
     public void setDefaultParser(MarkupParser parser) {

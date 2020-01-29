@@ -18,6 +18,7 @@ import React, {Component} from 'react'
 
 import {pageTypesRegistry} from './PageTypesRegistry'
 import {PresentationHeading} from '../default-elements/PresentationHeading'
+import {areTocItemEquals} from '../structure/tocItem'
 
 class Page extends Component {
     render() {
@@ -39,8 +40,7 @@ class Page extends Component {
 
     shouldComponentUpdate(nextProps) {
         return this.props.previewEnabled ||
-            this.props.tocItem.dirName !== nextProps.tocItem.dirName ||
-            this.props.tocItem.fileName !== nextProps.tocItem.fileName
+            !areTocItemEquals(this.props.tocItem, nextProps.tocItem)
     }
 }
 
