@@ -22,7 +22,7 @@ Avoid: using generic names in your page titles and page section titles. You shou
 
 Global search is performed by [search/](https://search.app.twosigma.com).
 
-Global search treates each page section as an independent entry as well. 
+Global search treats each page section as an independent entry as well. 
 
 In the case of global search, the full title gets expanded to include documentation title, so the full title of the
 current section will be: *Znai Flow Search Global*.

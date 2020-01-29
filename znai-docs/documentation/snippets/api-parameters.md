@@ -19,7 +19,7 @@ score, Integer, another description line with *markdown* support
 
 # Nested
 
-Use `parent.children` syntax to define nested objects like this.
+Use `parent.children` syntax to define nested objects like this:
 
     ```api-parameters
     sessionId, Integer, session Id
