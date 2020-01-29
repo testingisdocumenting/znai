@@ -1,2 +1,4 @@
 Trader, example-references/domain#trader
 Transaction, example-references/domain#transaction
+BUY, example-references/domain#buy
+SELL, example-references/domain#sell

@@ -37,7 +37,7 @@ Method level `JavaDoc` text can be referred to as well by specifying the `entry`
 
 # Method Params With References
 
-Use the [Code References](snippets/code-references) file to link API parameters to reference pages.
+Use the [Code References](snippets/code-references) file to link method parameters to reference pages.
   
 To do that, define references in a CSV file, using a two column format: `type-or-variable-name, link`.
 
@@ -57,7 +57,7 @@ Parameters are now linked with a reference section for the documentation.
 
 Use `include-java-enum-entries` to enumerate entries of a enum from a file.
 
-:include-file: MyEnum.java
+:include-file: MyEnum.java {title: "MyEnum.java"}
 
     :include-java-enum-entries: MyEnum.java
     
@@ -73,16 +73,20 @@ You can exclude deprecated entries from the list by setting the `excludeDeprecat
 
 Use [Code References](snippets/code-references) file to link enum entries to reference pages.
 
-Use `include-java-enum-entries` to enumerate entries of a enum from a file.
+To do that, define references in a CSV file, using a two column format: `enum-name, link`.
 
-:include-file: MyEnum.java
+:include-file: references/javadoc-references-demo.csv {title: "references/javadoc-references-demo.csv"}
 
-    :include-java-enum-entries: MyEnum.java
+:include-file: TransactionTypes.java {title: "TransactionTypes.java"}
+
+    :include-java-enum-entries: TransactionTypes.java {
+        referencesPath: "references/javadoc-references-demo.csv"
+    }
     
-:include-java-enum-entries: MyEnum.java
+:include-java-enum-entries: TransactionTypes.java {referencesPath: "references/javadoc-references-demo.csv"}
 
-You can exclude deprecated entries from the list by specifying `excludeDeprecated` parameter.
- 
-    :include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
+Enums are now linked with a reference section for the documentation. 
 
-:include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
+Note: you can re-use the same CSV file for Enums, Parameters, Code Snippets. Or you can use
+[Global References](snippets/code-references#global-references).
+
