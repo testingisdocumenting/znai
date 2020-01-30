@@ -54,6 +54,7 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
 
         Map<String, Object> props = apiParameters.toMap();
         codeReferencesTrait.updateProps(props);
+        props.putAll(pluginParams.getOpts().toMap());
 
         List<DocElement> docElements =
                 PluginResult.docElement("ApiParameters", props).getDocElements();

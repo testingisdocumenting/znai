@@ -21,9 +21,10 @@ import './ApiParameters.css'
 
 export default function ApiParameters({
                                           parameters,
+                                          title,
+                                          references,
                                           nestedLevel,
                                           parentWidth = 0,
-                                          references,
                                           elementsLibrary
                                       }) {
     const renderedParameters = parameters.map(p => <ApiParameter key={p.name}
@@ -42,7 +43,22 @@ export default function ApiParameters({
 
     return (
         <div className={className} style={style}>
+            <ApiParametersTitle title={title} nestedLevel={nestedLevel}/>
             {renderedParameters}
+        </div>
+    )
+}
+
+function ApiParametersTitle({title, nestedLevel}) {
+    if (!title || nestedLevel > 0) {
+        return null
+    }
+
+    return (
+        <div className="znai-api-parameters-title-cell">
+            <div className="znai-api-parameters-title">
+                {title}
+            </div>
         </div>
     )
 }

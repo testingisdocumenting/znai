@@ -35,6 +35,13 @@ Method level `JavaDoc` text can be referred to as well by specifying the `entry`
 
 :include-java-doc-params: HelloWorld.java {entry: "sampleMethod"}
 
+Use the `title` parameter to specify a title.
+
+    :include-java-doc-params: HelloWorld.java {entry: "importantAction", title: "Trading Required Parameters"}
+
+:include-java-doc-params: HelloWorld.java {entry: "importantAction", title: "Trading Required Parameters"}
+
+
 # Method Params With References
 
 Use the [Code References](snippets/code-references) file to link method parameters to reference pages.
@@ -45,10 +52,12 @@ To do that, define references in a CSV file, using a two column format: `type-or
 
     :include-java-doc-params: HelloWorld.java {
         entry: "importantAction", 
+        title: "Trading Required Parameters",
         referencesPath: "references/javadoc-references-demo.csv"}
 
 :include-java-doc-params: HelloWorld.java {
-    entry: "importantAction", 
+    entry: "importantAction",
+    title: "Trading Required Parameters", 
     referencesPath: "references/javadoc-references-demo.csv"}
 
 Parameters are now linked with a reference section for the documentation. 
@@ -69,6 +78,14 @@ You can exclude deprecated entries from the list by setting the `excludeDeprecat
 
 :include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
 
+Use the `title` parameter to specify a title.
+
+    :include-java-enum-entries: TransactionTypes.java {title: "Transaction Types"}
+
+:include-java-enum-entries: TransactionTypes.java {title: "Transaction Types"}
+
+
+
 # Enum Entries With References
 
 Use a [Code References](snippets/code-references) file to link enum entries to reference pages.
@@ -80,10 +97,11 @@ To do that, define references in a CSV file, using a two column format: `enum-na
 :include-file: TransactionTypes.java {title: "TransactionTypes.java"}
 
     :include-java-enum-entries: TransactionTypes.java {
+        title: "Transaction Types",
         referencesPath: "references/javadoc-references-demo.csv"
     }
     
-:include-java-enum-entries: TransactionTypes.java {referencesPath: "references/javadoc-references-demo.csv"}
+:include-java-enum-entries: TransactionTypes.java {referencesPath: "references/javadoc-references-demo.csv", title: "Transaction Types"}
 
 Enums are now linked with a reference section for the documentation. 
 

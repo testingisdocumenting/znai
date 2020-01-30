@@ -25,6 +25,7 @@ import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class ApiParametersIncludePlugin implements IncludePlugin {
@@ -48,7 +49,10 @@ public class ApiParametersIncludePlugin implements IncludePlugin {
         ApiParameters apiParameters = ApiParametersJsonParser.parse(componentsRegistry.markdownParser(),
                 resourcesResolver.textContent(fullPath));
 
-        return PluginResult.docElement("ApiParameters", apiParameters.toMap());
+        Map<String, Object> props = apiParameters.toMap();
+        props.putAll(pluginParams.getOpts().toMap());
+
+        return PluginResult.docElement("ApiParameters", props);
     }
 
     @Override
