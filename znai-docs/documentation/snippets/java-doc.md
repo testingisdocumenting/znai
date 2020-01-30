@@ -71,7 +71,7 @@ You can exclude deprecated entries from the list by setting the `excludeDeprecat
 
 # Enum Entries With References
 
-Use [Code References](snippets/code-references) file to link enum entries to reference pages.
+Use a [Code References](snippets/code-references) file to link enum entries to reference pages.
 
 To do that, define references in a CSV file, using a two column format: `enum-name, link`.
 
@@ -87,6 +87,5 @@ To do that, define references in a CSV file, using a two column format: `enum-na
 
 Enums are now linked with a reference section for the documentation. 
 
-Note: you can re-use the same CSV file for Enums, Parameters, Code Snippets. Or you can use
+Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use
 [Global References](snippets/code-references#global-references).
-
