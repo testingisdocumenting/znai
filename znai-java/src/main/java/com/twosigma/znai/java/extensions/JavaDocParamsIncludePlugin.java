@@ -85,11 +85,4 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
         apiParameters.add("return", methodReturn.getType(),
                 javaDocTextToDocElements(methodReturn.getJavaDocText()));
     }
-
-    private List<Map<String, Object>> javaDocTextToDocElements(String text) {
-        return HtmlToDocElementConverter.convert(componentsRegistry, markupPath, text,
-                codeReferencesTrait.getReferences()).stream()
-                .map(DocElement::toMap)
-                .collect(toList());
-    }
 }

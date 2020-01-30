@@ -16,6 +16,8 @@
 
 package com.twosigma.znai.java.extensions;
 
+import com.twosigma.znai.extensions.PluginResult;
+import com.twosigma.znai.extensions.api.ApiParameters;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.java.parser.EnumEntry;
 import com.twosigma.znai.java.parser.JavaCode;
@@ -42,25 +44,20 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
 
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
-        List<List<?>> data = javaCode.getEnumEntries().stream()
+        ApiParameters apiParameters = new ApiParameters();
+        javaCode.getEnumEntries().stream()
                 .filter(this::includeEnum)
-                .map(e -> Arrays.asList(nameToDocElements(e), descriptionToDocElements(e)))
-                .collect(toList());
+                .forEach((enumEntry) -> {
+            apiParameters.add(enumEntry.getName(), "", javaDocTextToDocElements(enumEntry.getJavaDocText()));
+        });
 
-        List<Map<String, String>> columns = new ArrayList<>();
-        columns.add(CollectionUtils.createMap("title", "name",
-                "align", "right",
-                "width", "20%"));
+        Map<String, Object> props = apiParameters.toMap();
+        codeReferencesTrait.updateProps(props);
 
-        columns.add(CollectionUtils.createMap("title", "description"));
+        List<DocElement> docElements =
+                PluginResult.docElement("ApiParameters", props).getDocElements();
 
-        Map<Object, Object> tableProps = new LinkedHashMap<>();
-        tableProps.put("data", data);
-        tableProps.put("columns", columns);
-        tableProps.put("styles", Arrays.asList("middle-vertical-lines-only", "no-header", "no-vertical-padding"));
-
-        DocElement table = new DocElement(DocElementType.TABLE, "table", tableProps);
-        return new JavaIncludeResult(Collections.singletonList(table), extractText(javaCode.getEnumEntries())) ;
+        return new JavaIncludeResult(docElements, extractText(javaCode.getEnumEntries()));
     }
 
     private boolean includeEnum(EnumEntry enumEntry) {

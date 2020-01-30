@@ -1,7 +1,5 @@
 package my.company;
 
-import java.util.List;
-
 enum MyEnum {
     /**
      * description of <b>entry one</b>
