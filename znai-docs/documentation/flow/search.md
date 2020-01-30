@@ -20,34 +20,4 @@ Avoid: using generic names in your page titles and page section titles. You shou
 
 # Global 
 
-Global search is performed by [search/](https://search.app.twosigma.com).
-
-Global search treats each page section as an independent entry as well. 
-
-In the case of global search, the full title gets expanded to include documentation title, so the full title of the
-current section will be: *Znai Flow Search Global*.
-
-Go now and [search](https://search.app.twosigma.com) for *znai search* and see what results are there.   
-
-In case of global search it is even more important to come up with the good names for 
-* Chapters
-* Pages
-* Page Sections
-
-To make your product more discoverable consider naming your *page sections* and *page titles* to match potential user queries. For example, consider naming a page *Getting Started*.
-
-```columns 
-left:
-**DO**
-
-    # Node installation 
-    
-    To install node.js use ...
-    
-right:
-**DON'T**
-
-    # Prerequsites
-    
-    To install node.js use ...    
-```
+:include-markdown: {firstAvailable: ["search-global-override.md", "search-global.md"]}
