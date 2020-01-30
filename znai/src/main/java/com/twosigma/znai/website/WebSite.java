@@ -421,7 +421,8 @@ public class WebSite {
         DocUrl docUrl = tocItem.isIndex() ?
                 DocUrl.indexUrl():
                 new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), pageSearchEntry.getPageSectionId());
-        return docStructure.createUrl(docUrl);
+
+        return docStructure.createUrl(null, docUrl);
     }
 
     private String searchEntryTitle(TocItem tocItem, PageSearchEntry pageSearchEntry) {

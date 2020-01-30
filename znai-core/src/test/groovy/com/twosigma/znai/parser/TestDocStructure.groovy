@@ -28,7 +28,7 @@ class TestDocStructure implements DocStructure {
 
     @Override
     void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
-        if (docUrl.isGlobalUrl()) {
+        if (docUrl.isExternalUrl()) {
             return
         }
 
@@ -41,8 +41,8 @@ class TestDocStructure implements DocStructure {
     }
 
     @Override
-    String createUrl(DocUrl docUrl) {
-        if (docUrl.isGlobalUrl()) {
+    String createUrl(Path path, DocUrl docUrl) {
+        if (docUrl.isExternalUrl()) {
             return docUrl.url
         }
 

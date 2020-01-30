@@ -433,7 +433,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
         DocUrl docUrl = new DocUrl(url);
 
         docStructure.validateUrl(path, currentSectionTitle, docUrl);
-        return docStructure.createUrl(docUrl);
+        return docStructure.createUrl(path, docUrl);
     }
 
     private boolean isLocalFile(String url) {
