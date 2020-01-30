@@ -22,11 +22,11 @@
  * @returns {Object} global references merged with local, null if neither is defined
  */
 export function mergeWithGlobalDocReferences(localReferences) {
-    if (window.docReferences !== null) {
-        return {...window.docReferences, ...localReferences}
-    }
+    return {...getGlobalDocReferences(), ...localReferences}
+}
 
-    return localReferences
+export function getGlobalDocReferences() {
+    return window.docReferences || {}
 }
 
 export function updateGlobalDocReferences(docReferences) {

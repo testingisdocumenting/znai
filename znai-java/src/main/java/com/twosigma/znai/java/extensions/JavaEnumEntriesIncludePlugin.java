@@ -76,7 +76,9 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     }
 
     private List<Map<String, Object>> descriptionToDocElements(EnumEntry e) {
-        return HtmlToDocElementConverter.convert(componentsRegistry, markupPath, e.getJavaDocText())
+        return HtmlToDocElementConverter.convert(
+                componentsRegistry, markupPath, e.getJavaDocText(),
+                codeReferencesTrait.getReferences())
                 .stream()
                 .map(DocElement::toMap).collect(toList());
     }

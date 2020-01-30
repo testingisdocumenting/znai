@@ -22,8 +22,10 @@ public class CodeReferencesTrait {
     private final ComponentsRegistry componentsRegistry;
 
     private final Path referencesFullPath;
-    private final Path markupPath;
     private final String referencesPath;
+
+    private final Path markupPath;
+    private final DocReferences references;
 
     public CodeReferencesTrait(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         this.componentsRegistry = componentsRegistry;
@@ -33,6 +35,12 @@ public class CodeReferencesTrait {
         this.referencesFullPath = referencesPath != null ?
                 componentsRegistry.resourceResolver().fullPath(referencesPath):
                 null;
+
+        this.references = buildReferences();
+    }
+
+    public DocReferences getReferences() {
+        return references;
     }
 
     public void updateProps(Map<String, Object> props) {
@@ -40,9 +48,7 @@ public class CodeReferencesTrait {
             return;
         }
 
-        DocReferences references = buildReferences();
         validateLinks(references);
-
         props.put("references", references.toMap());
     }
 
@@ -57,6 +63,10 @@ public class CodeReferencesTrait {
     }
 
     private DocReferences buildReferences() {
+        if (referencesPath == null) {
+            return DocReferences.EMPTY;
+        }
+
         return DocReferencesParser.parse(
                 componentsRegistry.resourceResolver().textContent(referencesPath));
     }

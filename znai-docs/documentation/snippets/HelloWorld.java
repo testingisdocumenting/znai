@@ -1,5 +1,5 @@
 /**
- * Top level conceptual description of a <i>Domain</i> problem.
+ * Top level conceptual description of a {@link CustomDomain} problem.
  * <p>
  * To avoid <b>copy & paste</b> of the content consider to re-use information.
  */

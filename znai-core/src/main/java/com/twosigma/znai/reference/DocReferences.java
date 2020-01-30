@@ -16,6 +16,7 @@
 
 package com.twosigma.znai.reference;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,7 +26,9 @@ import java.util.stream.Stream;
  * maintains a list of references (code references, text references, etc) and page-urls associated with them
  */
 public class DocReferences {
-    private final Map<String, DocReference> references;
+    public static final DocReferences EMPTY = new DocReferences(Collections.emptyMap());
+
+    private final Map<String, Object> references;
 
     public DocReferences() {
         this.references = new HashMap<>();
@@ -38,6 +41,10 @@ public class DocReferences {
     public Stream<String> pageUrlsStream() {
         return references.values().stream()
                 .map(DocReference::getPageUrl);
+    }
+
+    public boolean isEmpty() {
+        return references.isEmpty();
     }
 
     public Map<String, Object> toMap() {

@@ -84,7 +84,9 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
     }
 
     protected List<Map<String, Object>> javaDocTextToDocElements(String html) {
-        return HtmlToDocElementConverter.convert(componentsRegistry, markupPath, html).stream()
+        return HtmlToDocElementConverter.convert(
+                componentsRegistry, markupPath, html, codeReferencesTrait.getReferences())
+                .stream()
                 .map(DocElement::toMap)
                 .collect(toList());
     }

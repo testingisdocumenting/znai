@@ -29,6 +29,23 @@ Method level `JavaDoc` text can be referred to as well by specifying the `entry`
     
 :include-java-doc: HelloWorld.java {entry: "numberOfStudents"}
 
+# Handling Links
+
+Links defined with `{@link MyClass}` are automatically converted to [Inlined Code](snippets/inlined-code-snippets) and become
+`MyClass`. To turn `MyClass` into a link you need to use [Code References](snippets/code-references).
+
+Use the `referencesPath` value to associate `{@link CustomDomain}` with the documentation link:
+
+```markdown-and-result
+:include-java-doc: HelloWorld.java {
+    referencesPath: "references/javadoc-references-demo.csv"
+}
+```
+
+:include-file: references/javadoc-references-demo.csv {title: "references/javadoc-references-demo.csv"}
+
+Alternatively you can define [Global References](snippets/code-references#global-references) to turn `MyClass` into a link.
+
 # Method Params
 
     :include-java-doc-params: HelloWorld.java {entry: "sampleMethod"}

@@ -17,6 +17,7 @@
 package com.twosigma.znai.search
 
 import com.twosigma.znai.extensions.PluginParams
+import com.twosigma.znai.reference.DocReferences
 import org.junit.Before
 import org.junit.Test
 
@@ -33,13 +34,13 @@ class SearchCrawlerParserHandlerTest {
         parserHandler.onSectionStart('section one')
         parserHandler.onSimpleText('hello')
         parserHandler.onSnippet(PluginParams.EMPTY, '', '', 'source code')
-        parserHandler.onInlinedCode('inlined term')
+        parserHandler.onInlinedCode('inlined term', DocReferences.EMPTY)
         parserHandler.onSectionEnd()
 
         parserHandler.onSectionStart('section two')
         parserHandler.onSimpleText('world')
         parserHandler.onSnippet(PluginParams.EMPTY, '', '', 'code')
-        parserHandler.onInlinedCode('broker')
+        parserHandler.onInlinedCode('broker', DocReferences.EMPTY)
         parserHandler.onSectionEnd()
 
         parserHandler.getSearchEntries().should == [ 'pageSectionTitle' | 'searchText'] {

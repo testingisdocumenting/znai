@@ -21,6 +21,7 @@ import com.twosigma.znai.extensions.PluginParams;
 import com.twosigma.znai.extensions.PluginResult;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.parser.sphinx.python.*;
+import com.twosigma.znai.reference.DocReferences;
 import com.twosigma.znai.utils.XmlUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
@@ -177,20 +178,20 @@ class DocTreeDomXmlParser {
     }
 
     private boolean parseLiteral(Node node) {
-        parserHandler.onInlinedCode(node.getTextContent());
+        parserHandler.onInlinedCode(node.getTextContent(), DocReferences.EMPTY);
         return true;
     }
 
     private boolean parseLiteralStrong(Node node) {
         parserHandler.onStrongEmphasisStart();
-        parserHandler.onInlinedCode(node.getTextContent());
+        parserHandler.onInlinedCode(node.getTextContent(), DocReferences.EMPTY);
         parserHandler.onStrongEmphasisEnd();
         return true;
     }
 
     private boolean parseLiteralEmphasis(Node node) {
         parserHandler.onEmphasisStart();
-        parserHandler.onInlinedCode(node.getTextContent());
+        parserHandler.onInlinedCode(node.getTextContent(), DocReferences.EMPTY);
         parserHandler.onEmphasisEnd();
         return true;
     }

@@ -21,6 +21,7 @@ import com.twosigma.znai.extensions.PluginResult;
 import com.twosigma.znai.extensions.fence.FencePlugin;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.table.MarkupTableData;
+import com.twosigma.znai.reference.DocReferences;
 
 import java.util.Arrays;
 import java.util.List;
@@ -149,8 +150,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onInlinedCode(String inlinedCode) {
-        list.forEach(h -> h.onInlinedCode(inlinedCode));
+    public void onInlinedCode(String inlinedCode, DocReferences docReferences) {
+        list.forEach(h -> h.onInlinedCode(inlinedCode, docReferences));
     }
 
     @Override
