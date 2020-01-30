@@ -25,6 +25,7 @@ import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.parser.commonmark.include.IncludeBlock;
 import com.twosigma.znai.parser.table.GfmTableToTableConverter;
+import com.twosigma.znai.reference.DocReferences;
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
 import org.commonmark.ext.gfm.strikethrough.Strikethrough;
 import org.commonmark.ext.gfm.tables.TableBlock;
@@ -106,7 +107,7 @@ public class MarkdownVisitor extends AbstractVisitor {
         if (matcher.matches() && Plugins.hasInlinedCodePlugin(matcher.group(1))) {
             parserHandler.onInlinedCodePlugin(new PluginParams(matcher.group(1), matcher.group(2)));
         } else {
-            parserHandler.onInlinedCode(literal);
+            parserHandler.onInlinedCode(literal, DocReferences.EMPTY);
         }
     }
 

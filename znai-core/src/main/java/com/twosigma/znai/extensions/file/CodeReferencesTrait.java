@@ -3,6 +3,7 @@ package com.twosigma.znai.extensions.file;
 import com.twosigma.znai.core.AuxiliaryFile;
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.extensions.PluginParams;
+import com.twosigma.znai.reference.DocReferences;
 import com.twosigma.znai.reference.DocReferencesParser;
 
 import java.nio.file.Path;
@@ -21,6 +22,8 @@ public class CodeReferencesTrait {
     private final Path referencesFullPath;
     private final String referencesPath;
 
+    private final DocReferences references;
+
     public CodeReferencesTrait(ComponentsRegistry componentsRegistry, PluginParams pluginParams) {
         this.componentsRegistry = componentsRegistry;
 
@@ -28,6 +31,12 @@ public class CodeReferencesTrait {
         this.referencesFullPath = referencesPath != null ?
                 componentsRegistry.resourceResolver().fullPath(referencesPath):
                 null;
+
+        this.references = buildReferences();
+    }
+
+    public DocReferences getReferences() {
+        return references;
     }
 
     public void updateProps(Map<String, Object> props) {
@@ -35,12 +44,16 @@ public class CodeReferencesTrait {
             return;
         }
 
-        props.put("references", buildReferences());
+        props.put("references", getReferences().toMap());
     }
 
-    private Map<String, Object> buildReferences() {
+    private DocReferences buildReferences() {
+        if (referencesPath == null) {
+            return DocReferences.EMPTY;
+        }
+
         return DocReferencesParser.parse(
-                componentsRegistry.resourceResolver().textContent(referencesPath)).toMap();
+                componentsRegistry.resourceResolver().textContent(referencesPath));
     }
 
     public Stream<AuxiliaryFile> auxiliaryFiles() {

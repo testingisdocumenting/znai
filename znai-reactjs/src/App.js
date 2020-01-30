@@ -34,6 +34,7 @@ import {imageAnnotationDemo} from './doc-elements/images/EmbeddedAnnotatedImage.
 import {apiParametersDemo} from './doc-elements/api/ApiParameters.demo'
 import {jsxDemo} from './doc-elements/jsx/Jsx.demo'
 import {snippetsDemo, snippetsTwoSidesDemo} from './doc-elements/code-snippets/Snippet.demo'
+import {inlinedCodeDemo} from './doc-elements/code-snippets/InlinedCode.demo'
 import {documentationPreparationDemo} from './screens/documentation-preparation/DocumentationPreparation.demo'
 import {setDocMeta} from './doc-elements/docMeta'
 import {landingDemo} from './screens/landing/Landing.demo'
@@ -67,6 +68,7 @@ import {Documentation} from "./doc-elements/Documentation"
 import testData from "./doc-elements/TestData"
 import {subHeadingPresentationDemo} from './doc-elements/default-elements/PresentationSubHeading.demo'
 import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
+import {updateGlobalDocReferences} from './doc-elements/references/globalDocReferences'
 
 const docMeta = {
     id: 'preview',
@@ -81,11 +83,17 @@ const docMeta = {
 }
 
 setDocMeta(docMeta)
+updateGlobalDocReferences({
+    'package.SuperClass': {
+        pageUrl: '#super-url'
+    }
+})
 
 const registries = new Registries({componentWrapper: ThemeWrapper})
 
 registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
+    .registerAsGrid('Inlined Code', 0, inlinedCodeDemo)
     .registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)
     .registerAsGrid('Yaml Code Snippet', 0, yamlSnippetDemo)
     .registerAsGrid('Json', 0, jsonDemo)

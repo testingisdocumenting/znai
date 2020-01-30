@@ -14,14 +14,9 @@
  * limitations under the License.
  */
 
-.markdown-and-result {
-    margin-bottom: 16px;
-}
-
-.markdown-and-result .snippet {
-    margin: 0 0;
-}
-
-.markdown-and-result .section {
-    margin-top: 0;
+a,
+a:hover,
+a code {
+    color: var(--znai-link-color);
+    text-decoration: var(--znai-link-decoration);
 }

@@ -27,6 +27,8 @@
     --znai-section-h5-color: #a1afb7;
     --znai-section-h6-color: #a1afb7;
 
+    --znai-link-decoration: none;
+
     --znai-toc-title-color: #a0a1a0;
     --znai-toc-title-background-color: #272f33;
     --znai-toc-panel-background-color: #272f33;
@@ -129,10 +131,6 @@
 
     color: var(--znai-regular-text-color);
     background-color: var(--znai-background-color);
-}
-
-.theme-znai-dark a {
-    text-decoration: none;
 }
 
 .theme-znai-dark .page-two-sides-right-part {

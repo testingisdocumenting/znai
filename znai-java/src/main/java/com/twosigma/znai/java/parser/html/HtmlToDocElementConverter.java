@@ -21,6 +21,7 @@ import com.twosigma.znai.extensions.PluginParams;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.parser.docelement.DocElement;
 import com.twosigma.znai.parser.docelement.DocElementCreationParserHandler;
+import com.twosigma.znai.reference.DocReferences;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
@@ -40,13 +41,14 @@ public class HtmlToDocElementConverter {
      * @param componentsRegistry components like code parser
      * @param filePath           path to use by markup parser to handle include plugins resource location
      * @param html               html to parse
+     * @param codeReferences     code references to use during conversion
      * @return doc element that is a representation of th®e html
      */
-    public static List<DocElement> convert(ComponentsRegistry componentsRegistry, Path filePath, String html) {
+    public static List<DocElement> convert(ComponentsRegistry componentsRegistry, Path filePath, String html, DocReferences codeReferences) {
         Document document = Jsoup.parse(html);
 
         DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(componentsRegistry, filePath);
-        document.body().traverse(new ConverterNodeVisitor(parserHandler));
+        document.body().traverse(new ConverterNodeVisitor(parserHandler, codeReferences));
 
         parserHandler.onParsingEnd();
 
@@ -55,6 +57,7 @@ public class HtmlToDocElementConverter {
 
     private static class ConverterNodeVisitor implements NodeVisitor {
         private ParserHandler parserHandler;
+        private DocReferences codeReferences;
         private boolean isInsideInlinedCode;
         private boolean isInsideBlockCode;
 
@@ -64,8 +67,9 @@ public class HtmlToDocElementConverter {
          */
         private boolean isInsideParagraph;
 
-        ConverterNodeVisitor(ParserHandler parserHandler) {
+        ConverterNodeVisitor(ParserHandler parserHandler, DocReferences codeReferences) {
             this.parserHandler = parserHandler;
+            this.codeReferences = codeReferences;
             startParagraphIfRequired();
         }
 
@@ -133,7 +137,7 @@ public class HtmlToDocElementConverter {
             }
 
             if (isInsideInlinedCode) {
-                parserHandler.onInlinedCode(text);
+                parserHandler.onInlinedCode(text, codeReferences);
             } else if (isInsideBlockCode) {
                 closeParagraphIfRequired();
                 parserHandler.onSnippet(PluginParams.EMPTY,"", "", text);
