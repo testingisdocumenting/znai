@@ -23,13 +23,18 @@ import com.twosigma.znai.extensions.PluginResult;
 import com.twosigma.znai.extensions.file.CodeReferencesTrait;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.java.parser.JavaCode;
+import com.twosigma.znai.java.parser.html.HtmlToDocElementConverter;
 import com.twosigma.znai.parser.ParserHandler;
+import com.twosigma.znai.parser.docelement.DocElement;
 import com.twosigma.znai.search.SearchScore;
 import com.twosigma.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 abstract public class JavaIncludePluginBase implements IncludePlugin {
     protected Path fullPath;
@@ -76,5 +81,11 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
     @Override
     public SearchText textForSearch() {
         return SearchScore.HIGH.text(javaIncludeResult.getText());
+    }
+
+    protected List<Map<String, Object>> javaDocTextToDocElements(String html) {
+        return HtmlToDocElementConverter.convert(componentsRegistry, markupPath, html).stream()
+                .map(DocElement::toMap)
+                .collect(toList());
     }
 }

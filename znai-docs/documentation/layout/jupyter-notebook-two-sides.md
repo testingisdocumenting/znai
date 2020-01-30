@@ -13,7 +13,7 @@ Note: Content below is included using `include-jupyter`
 
 # Story First
 
-Use `storyFirst` if you use a notebook with Markdown cells to tell a story. In this mode code will be moved to the right
+Use `storyFirst` if you use a notebook with Markdown cells to tell a story. In this mode, code will be moved to the right
 side and a reader can focus on the story itself.  
 
     :include-jupyter: notebook.ipynb {storyFirst: true}

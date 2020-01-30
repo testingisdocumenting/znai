@@ -38,10 +38,10 @@ Do not: commit node_modules to your repository
 
 # Question
 
-    Question: Use the question sign to bring an extra attention to a main idea of a page.
+    Question: Use the question sign to bring an extra attention to the main idea of a page.
     \
     What is the point of the `attention signs`?
 
-Question: Use the question sign to bring an extra attention to the main idea of a page.
+Question: Use the question sign to bring extra attention to the main idea of a page.
 \
 What is the point of the `attention signs`?

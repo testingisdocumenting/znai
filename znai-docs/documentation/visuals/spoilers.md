@@ -1,6 +1,6 @@
 # Hidden Content
 
-To hide content use `spoiler` fence plugin
+To hide content use the `spoiler` fence plugin
 
     ````spoiler 
     Information you don't want users to see right away goes here.
@@ -26,12 +26,12 @@ let value = 0
 ```
 ````
 
-Note: Four backticks were used instead of a usual three. It is done so one fence block can include 
+Note: Four backticks were used instead of the usual three. This is done so one fence block can include 
 another block (code snippet) without confusion. It can be any number of backticks greater than three.
 
 # Hidden Content Title
 
-Use `title` parameter to set a custom title for your spoiler.
+Use the `title` parameter to set a custom title for your spoiler.
 
     ```spoiler {title: "Are you ready to see what's insdie?"}
     ...

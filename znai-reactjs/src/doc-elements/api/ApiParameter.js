@@ -91,9 +91,7 @@ class ApiParameter extends React.Component {
                     </div>
                 </div>
                 <div className={descriptionClassName}>
-                    <div className="api-param-reference-layout">
-                        <elementsLibrary.DocElement content={description} elementsLibrary={elementsLibrary}/>
-                    </div>
+                    <elementsLibrary.DocElement content={description} elementsLibrary={elementsLibrary}/>
                 </div>
                 {renderedChildren}
             </React.Fragment>

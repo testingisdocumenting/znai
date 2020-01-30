@@ -1,7 +1,7 @@
 # Operation definition
 
 If you have a file with an [Open API](https://github.com/OAI/OpenAPI-Specification/blob/master/README.md)
-definition (a.k.a. a Swagger file) you can render it by a given `method` and `path` or by `operationId`. 
+definition (a.k.a. a Swagger file) you can render it by a given `method` and `path`, or by `operationId`. 
 Both `yaml` and `json` formats are supported.
 
 Let's consider [Uber's API definition](https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json) as an example:
@@ -14,10 +14,10 @@ Note: descriptions are treated as Markdown, using the [CommonMark](http://common
 
 # Produces/Consumes
 
-By default `produces` and `consumes` parts are not displayed. If you document modern API chances are it will
+By default `produces` and `consumes` parts are not displayed. If you are documenting a modern API, chances are it will
 be consistent and you can specify at the start of your documentation that you are dealing with `application/json`.
 
-Use `showConsumes` and `showProduces` params to show what content type are supported.
+Use `showConsumes` and `showProduces` params to show what content types are supported.
 
     :include-open-api: open-api/uber.json {method: "get", path: "/v1/estimates/time", 
         showConsumes: true, showProduces: true}

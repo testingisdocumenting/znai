@@ -14,7 +14,7 @@ Followed by bullet points:
 
 # External References
 
-Example of how to keep your documentation up to date by referencing existing resource.
+Additionally, you can keep your documentation up to date and accurate by referencing existing resources.
 
 ```markdown
 # Server Configuration
@@ -22,4 +22,4 @@ Example of how to keep your documentation up to date by referencing existing res
 :include-file: config/server.config
 ```
 
-Note:  Ths `include-file` macro is a `Znai` extension and not part of a standard Markdown syntax.
+Note:  This `include-file` macro is a `Znai` extension and not part of a standard Markdown syntax.
