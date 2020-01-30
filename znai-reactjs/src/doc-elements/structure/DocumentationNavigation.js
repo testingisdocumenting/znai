@@ -55,7 +55,7 @@ class DocumentationNavigation {
     }
 
     buildUrl(id) {
-        return  this.fullPageUrl(id.dirName + "/" + id.fileName +
+        return this.fullPageUrl(id.dirName + "/" + id.fileName +
             (id.pageSectionId ? ("#" + id.pageSectionId) : ""))
     }
 

@@ -36,7 +36,13 @@ Linking to subsections is the same as linking to a top level section. [Here is a
 ```markdown
 [Here is an example](flow/page-references#links-to-subsection)
 ```
- 
+
+Use [Subsection Shortcut](#links) if a subsection is within the same page: 
+
+```markdown
+[Subsection Shortcut](#links)
+```
+  
 ## Index Page
 
 Clicking this [index page](/) link will have the same effect as clicking the documentation title at the top of the **Navigation Panel**
@@ -53,4 +59,4 @@ Download [test json file](data/test.json)
 # Validation
 
 Local links are automatically validated during documentation build time. 
-You will get a build time error if you refer a page or a section/sub-section that does not exist. 
+You will get a build time error if you refer to a page or a section/sub-section that does not exist. 
