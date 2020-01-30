@@ -14,14 +14,20 @@
  * limitations under the License.
  */
 
-.markdown-and-result {
-    margin-bottom: 16px;
-}
+import * as React from 'react'
 
-.markdown-and-result .snippet {
-    margin: 0 0;
-}
+import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'
+import {ReferenceLinkWrapper} from '../references/ReferenceLinkWrapper'
 
-.markdown-and-result .section {
-    margin-top: 0;
+export function InlinedCode({code, references}) {
+    const mergedReferences = mergeWithGlobalDocReferences(references)
+    const reference = mergedReferences[code]
+
+    const renderedCode = <code>{code}</code>
+
+    return reference ? (
+        <ReferenceLinkWrapper referenceUrl={reference.pageUrl}>
+            {renderedCode}
+        </ReferenceLinkWrapper>
+    ) : renderedCode
 }

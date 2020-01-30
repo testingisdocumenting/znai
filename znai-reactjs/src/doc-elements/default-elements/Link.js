@@ -18,6 +18,8 @@ import React from 'react'
 import {isLocalUrl} from '../structure/links'
 import {LinkWrapper} from './LinkWrapper'
 
+import './Link.css'
+
 const Link = ({url, isFile, ...props}) => {
     const isLocalNavigation = isLocalUrl(url) && !isFile;
 

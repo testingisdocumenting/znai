@@ -28,6 +28,7 @@ import SectionTitle from './default-elements/SectionTitle'
 import {presentationSectionHandler, Section} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './default-elements/BlockQuote'
 import {presentationSnippetHandler, Snippet} from './default-elements/Snippet'
+import {InlinedCode} from './code-snippets/InlinedCode'
 import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
 import CustomReactJSComponent from './custom/CustomReactJSComponent'
 import Anchor from './default-elements/Anchor'
@@ -90,7 +91,7 @@ library.BlockQuote = BlockQuote
 presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler
 
 library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
-library.InlinedCode = ({code}) => <code>{code}</code>
+library.InlinedCode = InlinedCode
 library.SoftLineBreak = () => <span> </span>
 library.HardLineBreak = () => <br />
 library.ThematicBreak = () => <hr />
