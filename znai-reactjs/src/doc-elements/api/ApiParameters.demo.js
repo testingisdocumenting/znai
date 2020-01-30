@@ -25,6 +25,15 @@ const personParameters = [
     {name: 'score', type: 'integer', description: [{"text": "score accumulated over last year", "type": "SimpleText"}]},
 ]
 
+const paragraph = {"type": "Paragraph", "content": [{"text": "first name", "type": "SimpleText"}]}
+const multipleParagraph = [paragraph, paragraph, paragraph]
+
+const personLongDescriptionParameters = [
+    {name: 'firstName', type: 'string', description: multipleParagraph},
+    {name: 'lastName', type: 'string', description: multipleParagraph},
+    {name: 'score', type: 'integer', description: multipleParagraph},
+]
+
 const mailBoxParameters = [
     {name: 'zipCode', type: 'string', description: [{"text": "zip code", "type": "SimpleText"}]},
     {name: 'isPersonal', type: 'boolean', description: [{"text": "does it belong to a org or a person", "type": "SimpleText"}]},
@@ -48,6 +57,9 @@ export function apiParametersDemo(registry) {
     registry
         .add('flat parameters', () => (
             <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>
+        ))
+        .add('flat parameters with long description', () => (
+            <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongDescriptionParameters}/>
         ))
         .add('flat parameters with references', () => (
             <ApiParameters elementsLibrary={elementsLibrary}
