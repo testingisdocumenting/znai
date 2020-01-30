@@ -145,6 +145,8 @@
 
     --znai-api-key-color: #527d8f;
     --znai-api-description-color: #878988;
+    --znai-api-title-color: var(--znai-snippets-title-color);
+    --znai-api-title-background-color: var(--znai-snippets-title-background-color);
 
     --znai-open-api-method-color: var(--znai-light-black);;
     --znai-open-api-path-color: var(--znai-light-black);;

@@ -19,7 +19,13 @@ import ApiParameter from './ApiParameter'
 
 import './ApiParameters.css'
 
-export default function ApiParameters({parameters, nestedLevel, parentWidth = 0, references, elementsLibrary}) {
+export default function ApiParameters({
+                                          parameters,
+                                          nestedLevel,
+                                          parentWidth = 0,
+                                          references,
+                                          elementsLibrary
+                                      }) {
     const renderedParameters = parameters.map(p => <ApiParameter key={p.name}
                                                                  name={p.name}
                                                                  type={p.type}
