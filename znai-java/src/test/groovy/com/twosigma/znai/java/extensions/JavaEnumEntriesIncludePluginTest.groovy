@@ -46,8 +46,9 @@ class JavaEnumEntriesIncludePluginTest {
 
         result.should == [
                 [
-                        type      : 'ApiParameters',
-                        parameters: [
+                        type             : 'ApiParameters',
+                        excludeDeprecated: true,
+                        parameters       : [
                                 [name: 'ENTRY_ONE_WITH_A_LONG_NAME', type: '', description: entryOneDescription]],
                 ]]
     }
