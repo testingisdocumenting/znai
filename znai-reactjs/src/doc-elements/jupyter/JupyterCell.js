@@ -49,6 +49,8 @@ function cellComponent(cell) {
             }
 
             return JupyterTextCell
+        default:
+            return JupyterEmptyCell
     }
 }
 
