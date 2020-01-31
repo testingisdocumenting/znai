@@ -45,6 +45,20 @@ roles.description, String, role description
 
 Note: if a parameter name actually contains a period ("."), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. 'person.firstName'
 
+# Title
+
+Use the `title` parameter to specify a title.
+    
+    ```api-parameters {title: "Person Definition"}
+    firstName, String, description with *markdown* support
+    score, Integer, another description line with *markdown* support
+    ```
+
+```api-parameters {title: "Person Definition"}
+firstName, String, description with *markdown* support
+score, Integer, another description line with *markdown* support
+```
+
 # External JSON File
 
 Instead of hardcoding your parameters inside markdown files, you can specify an external JSON file.
@@ -56,11 +70,11 @@ JSON could be generated based on the data you have. Some of the examples:
 
 Given the above file, use
 
-    :include-api-parameters: api-parameters.json
+    :include-api-parameters: api-parameters.json {title: "Person Definition"}
 
 to display it as API Parameters
     
-:include-api-parameters: api-parameters.json
+:include-api-parameters: api-parameters.json {title: "Person Definition"}
     
 Note: `description` field in JSON file is treated as Markdown
  
