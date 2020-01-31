@@ -17,11 +17,22 @@
 import React from 'react'
 
 const JupyterTextCell = ({text, elementsLibrary}) => {
+    const lines = convertToLines(text)
+
     return (
         <div className="jupyter-cell jupyter-text content-block">
-            <elementsLibrary.CliOutput lines={text.split('\n')}/>
+            <elementsLibrary.CliOutput lines={lines}/>
         </div>
     )
+}
+
+function convertToLines(text) {
+    const lines = text.split('\n')
+    if (lines.length > 0 && lines[lines.length - 1].length === 0) {
+        lines.pop()
+    }
+
+    return lines
 }
 
 export default JupyterTextCell

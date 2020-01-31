@@ -18,8 +18,3 @@
     --znai-snippets-space-above: 10px;
     --znai-snippets-space-below: 10px;
 }
-
-.jupyter-html {
-    margin-top: var(--znai-snippets-space-above);
-    margin-bottom: var(--znai-snippets-space-below);
-}
