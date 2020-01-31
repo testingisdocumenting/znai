@@ -17,7 +17,6 @@
 package com.twosigma.znai.website
 
 import com.twosigma.znai.parser.PageSectionIdTitle
-import com.twosigma.znai.parser.TestComponentsRegistry
 import com.twosigma.znai.structure.DocMeta
 import com.twosigma.znai.structure.DocUrl
 import com.twosigma.znai.structure.TableOfContents
@@ -30,6 +29,7 @@ import java.nio.file.Paths
 
 import static com.twosigma.webtau.Matchers.code
 import static com.twosigma.webtau.Matchers.throwException
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class WebSiteDocStructureTest {
     static DocMeta docMeta
@@ -50,7 +50,7 @@ class WebSiteDocStructureTest {
 
     @Before
     void reCreateDocStructure() {
-        docStructure = new WebSiteDocStructure(TestComponentsRegistry.INSTANCE, docMeta, toc, new MarkdownParsingConfiguration())
+        docStructure = new WebSiteDocStructure(TEST_COMPONENTS_REGISTRY, docMeta, toc, new MarkdownParsingConfiguration())
     }
 
     @Test
@@ -81,7 +81,7 @@ class WebSiteDocStructureTest {
     @Test
     void "should reject link that has no associated toc item"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.validateUrl(path, 'section title', new DocUrl('chapter/unknown-page'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('chapter/unknown-page'))
 
         code {
             docStructure.validateCollectedLinks()
@@ -92,8 +92,8 @@ class WebSiteDocStructureTest {
     @Test
     void "should reject link that has no associated anchor"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.validateUrl(path, 'section title', new DocUrl('chapter/pageOne#wrongRefId'))
-        docStructure.validateUrl(path, 'section title', new DocUrl('#anotherWrongRefId'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('chapter/pageOne#wrongRefId'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('#anotherWrongRefId'))
 
         code {
             docStructure.validateCollectedLinks()

@@ -16,13 +16,14 @@
 
 package com.twosigma.znai.extensions.api
 
-import com.twosigma.znai.parser.TestComponentsRegistry
 import org.junit.Test
+
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class ApiParametersCsvParserTest {
     @Test
     void "should convert dot separated names to api parameter with nested children"() {
-        def apiParameters = ApiParametersCsvParser.parse(TestComponentsRegistry.INSTANCE.markdownParser, """
+        def apiParameters = ApiParametersCsvParser.parse(TEST_COMPONENTS_REGISTRY.markdownParser(), """
 firstName, String, descr1
 nested, object, descr2
 nested.zipCode, String, descr3
