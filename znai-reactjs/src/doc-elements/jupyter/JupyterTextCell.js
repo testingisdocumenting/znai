@@ -15,11 +15,14 @@
  */
 
 import React from 'react'
+import {splitAndTrimEmptyLines} from '../../utils/strings'
 
 const JupyterTextCell = ({text, elementsLibrary}) => {
+    const lines = splitAndTrimEmptyLines(text)
+
     return (
         <div className="jupyter-cell jupyter-text content-block">
-            <elementsLibrary.CliOutput lines={text.split('\n')}/>
+            <elementsLibrary.CliOutput lines={lines}/>
         </div>
     )
 }

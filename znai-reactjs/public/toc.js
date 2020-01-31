@@ -252,8 +252,8 @@ toc = [ {
     "fileName" : "external-code-snippets",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Existing File",
-      "id" : "existing-file"
+      "title" : "Embedding Content",
+      "id" : "embedding-content"
     }, {
       "title" : "Title",
       "id" : "title"
@@ -319,6 +319,9 @@ toc = [ {
     }, {
       "title" : "Global References",
       "id" : "global-references"
+    }, {
+      "title" : "Inlined Code",
+      "id" : "inlined-code"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -348,21 +351,6 @@ toc = [ {
     }, {
       "title" : "Multiple Overloads",
       "id" : "multiple-overloads"
-    }, {
-      "title" : "Class JavaDoc",
-      "id" : "class-javadoc"
-    }, {
-      "title" : "Method JavaDoc",
-      "id" : "method-javadoc"
-    }, {
-      "title" : "Field JavaDoc",
-      "id" : "field-javadoc"
-    }, {
-      "title" : "Method JavaDoc Params",
-      "id" : "method-javadoc-params"
-    }, {
-      "title" : "Enum Entries",
-      "id" : "enum-entries"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -381,6 +369,9 @@ toc = [ {
       "title" : "Field Level",
       "id" : "field-level"
     }, {
+      "title" : "Handling Links",
+      "id" : "handling-links"
+    }, {
       "title" : "Method Params",
       "id" : "method-params"
     }, {
@@ -389,6 +380,9 @@ toc = [ {
     }, {
       "title" : "Enum Entries",
       "id" : "enum-entries"
+    }, {
+      "title" : "Enum Entries With References",
+      "id" : "enum-entries-with-references"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -524,7 +518,7 @@ toc = [ {
     "fileName" : "CLI",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Command parameters",
+      "title" : "Command Parameters",
       "id" : "command-parameters"
     }, {
       "title" : "Long Commands",
@@ -539,7 +533,7 @@ toc = [ {
       "title" : "Output",
       "id" : "output"
     }, {
-      "title" : "Presentation mode",
+      "title" : "Presentation Mode",
       "id" : "presentation-mode"
     } ]
   }, {
@@ -552,6 +546,26 @@ toc = [ {
     "pageSectionIdTitles" : [ {
       "title" : "LATEX",
       "id" : "latex"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Jupyter Notebook",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "jupyter-notebook",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Code and Output",
+      "id" : "code-and-output"
+    }, {
+      "title" : "Seamless Markdown Integration",
+      "id" : "seamless-markdown-integration"
+    }, {
+      "title" : "Pandas",
+      "id" : "pandas"
+    }, {
+      "title" : "Two Sides",
+      "id" : "two-sides"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -637,6 +651,9 @@ toc = [ {
       "title" : "JSON",
       "id" : "json"
     }, {
+      "title" : "Title",
+      "id" : "title"
+    }, {
       "title" : "Arrange and Filter",
       "id" : "arrange-and-filter"
     }, {
@@ -711,7 +728,7 @@ toc = [ {
       "title" : "Details Side",
       "id" : "details-side"
     }, {
-      "title" : "Open API example",
+      "title" : "Open API Example",
       "id" : "open-api-example"
     }, {
       "title" : "Aligning Data in Columns",
@@ -739,11 +756,44 @@ toc = [ {
       "title" : "Markdown Per Tab",
       "id" : "markdown-per-tab"
     } ]
+  }, {
+    "sectionTitle" : "Layout",
+    "pageTitle" : "Jupyter Notebook Two Sides",
+    "pageMeta" : {
+      "type" : [ "two-sides" ]
+    },
+    "dirName" : "layout",
+    "fileName" : "jupyter-notebook-two-sides",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Code First",
+      "id" : "code-first"
+    }, {
+      "title" : "Story First",
+      "id" : "story-first"
+    }, {
+      "title" : "Pandas",
+      "id" : "pandas"
+    } ]
   } ]
 }, {
   "sectionTitle" : "Visuals",
   "dirName" : "visuals",
   "items" : [ {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Spoilers",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "spoilers",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Hidden Content",
+      "id" : "hidden-content"
+    }, {
+      "title" : "Hidden Content Title",
+      "id" : "hidden-content-title"
+    } ]
+  }, {
     "sectionTitle" : "Visuals",
     "pageTitle" : "Smart Bullet Points",
     "pageMeta" : { },
@@ -894,6 +944,9 @@ toc = [ {
       "title" : "Multiline Labels",
       "id" : "multiline-labels"
     }, {
+      "title" : "Nodes Size",
+      "id" : "nodes-size"
+    }, {
       "title" : "Highlight",
       "id" : "highlight"
     }, {
@@ -985,7 +1038,7 @@ toc = [ {
       "title" : "Capture REST Artifacts",
       "id" : "capture-rest-artifacts"
     }, {
-      "title" : "Document REST calls",
+      "title" : "Document REST Calls",
       "id" : "document-rest-calls"
     } ]
   }, {
