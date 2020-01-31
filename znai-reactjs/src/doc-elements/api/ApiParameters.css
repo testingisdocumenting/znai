@@ -37,3 +37,15 @@
     border: 1px solid var(--znai-snippets-outer-border-color);
     border-radius: 5px;
 }
+
+.znai-api-parameters-title-cell {
+    grid-column: 1/3;
+    border-bottom: 1px solid var(--znai-snippets-outer-border-color);
+}
+
+.znai-api-parameters-title {
+    color: var(--znai-table-title-color);
+    background-color: var(--znai-table-title-background-color);
+
+    padding: 8px 20px;
+}
