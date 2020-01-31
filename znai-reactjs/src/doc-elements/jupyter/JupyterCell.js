@@ -30,27 +30,26 @@ const JupyterCell = (props) => {
 }
 
 function cellComponent(cell) {
-    if (cell.sourceTokens) {
-        return JupyterCodeCell
-    }
+    switch (cell.cellType) {
+        case 'code':
+            return JupyterCodeCell
+        case 'empty-output':
+            return JupyterEmptyCell
+        case 'output':
+            if (cell.html) {
+                return JupyterHtmlCell
+            }
 
-    if (cell.text) {
-        return JupyterTextCell
-    }
+            if (cell.svg) {
+                return JupyterSvgCell
+            }
 
-    if (cell.html) {
-        return JupyterHtmlCell
-    }
+            if (cell.img) {
+                return JupyterImgCell
+            }
 
-    if (cell.svg) {
-        return JupyterSvgCell
+            return JupyterTextCell
     }
-
-    if (cell.img) {
-        return JupyterImgCell
-    }
-
-    return JupyterEmptyCell
 }
 
 export default JupyterCell

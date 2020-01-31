@@ -21,22 +21,23 @@ import {elementsLibrary} from '../DefaultElementsLibrary'
 import {parseCode} from '../code-snippets/codeParser'
 
 const simpleNotebook = {
-    "cells": [
+    cells: [
         {
-            sourceTokens: parseCode('python',
-                'from pandas import read_csv\n' +
-                'from IPython.display import display')
+            "cellType" : "code",
+            "lang" : "python",
+            "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
+            "type" : "JupyterCell"
         },
         {
+            cellType : "output",
             text:
             "   a   b   c\n" +
             "0  1   2   3\n" +
             "1  4   5   6\n"
         },
         {
-            "cell_type": "code",
-            "execution_count": 14,
-            "html": `
+            cellType: "output",
+            html: `
                             <div>
                             <style scoped>
                                 .dataframe tbody tr th:only-of-type {
@@ -82,7 +83,7 @@ const simpleNotebook = {
 
 export function jupyterDemo(registry) {
     registry
-        .add('code cell', () => <JupyterCell elementsLibrary={elementsLibrary} cell={simpleNotebook.cells[0]}/>)
-        .add('output cell', () => <JupyterCell elementsLibrary={elementsLibrary} cell={simpleNotebook.cells[1]}/>)
-        .add('html cell', () => <JupyterCell elementsLibrary={elementsLibrary} cell={simpleNotebook.cells[2]}/>)
+        .add('code cell', () => <JupyterCell elementsLibrary={elementsLibrary} {...simpleNotebook.cells[0]}/>)
+        .add('output text cell', () => <JupyterCell elementsLibrary={elementsLibrary} {...simpleNotebook.cells[1]}/>)
+        .add('output htlml cell', () => <JupyterCell elementsLibrary={elementsLibrary} {...simpleNotebook.cells[2]}/>)
 }
