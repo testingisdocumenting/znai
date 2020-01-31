@@ -17,17 +17,18 @@
 package com.twosigma.znai.extensions.markup
 
 import com.twosigma.znai.extensions.PluginParams
-import com.twosigma.znai.parser.TestComponentsRegistry
 import org.junit.Test
 
 import java.nio.file.Paths
+
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkdownAndResultFencePluginTest {
     def plugin = new MarkdownAndResultFencePlugin()
 
     @Test
     void "should create markdown code snippets and result as one doc element"() {
-        def result = plugin.process(TestComponentsRegistry.INSTANCE, Paths.get("test.md"),
+        def result = plugin.process(TEST_COMPONENTS_REGISTRY, Paths.get("test.md"),
                 new PluginParams(plugin.id(), ""),
                 "hello *world*")
 

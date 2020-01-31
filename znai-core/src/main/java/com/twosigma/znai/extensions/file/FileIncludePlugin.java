@@ -52,7 +52,7 @@ public class FileIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        codeReferencesTrait = new CodeReferencesTrait(componentsRegistry, pluginParams);
+        codeReferencesTrait = new CodeReferencesTrait(componentsRegistry, markupPath, pluginParams);
         fileName = pluginParams.getFreeParam();
 
         text = FilePlugin.extractText(

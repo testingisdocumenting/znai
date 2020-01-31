@@ -16,29 +16,45 @@
 
 package com.twosigma.znai.reference;
 
+import com.twosigma.znai.core.ComponentsRegistry;
+import com.twosigma.znai.structure.DocStructure;
+import com.twosigma.znai.structure.DocUrl;
 import com.twosigma.znai.utils.FileUtils;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 
 public class GlobalDocReferences {
+    private ComponentsRegistry componentsRegistry;
     private final Path globalReferencesPath;
     private DocReferences docReferences;
 
-    public GlobalDocReferences(Path globalReferencesPath) {
+    public GlobalDocReferences(ComponentsRegistry componentsRegistry, Path globalReferencesPath) {
+        this.componentsRegistry = componentsRegistry;
         this.globalReferencesPath = globalReferencesPath;
-        this.reload();
     }
 
     public boolean isPresent() {
         return Files.exists(globalReferencesPath);
     }
 
-    public void reload() {
+    public void load() {
         docReferences = isPresent() ?
                 DocReferencesParser.parse(FileUtils.fileTextContent(globalReferencesPath)):
-                new DocReferences(Collections.emptyMap());
+                new DocReferences();
+
+        validateLinks();
+    }
+
+    private void validateLinks() {
+        DocStructure docStructure = componentsRegistry.docStructure();
+
+        docReferences.pageUrlsStream().forEach(pageUrl ->
+                docStructure.validateUrl(globalReferencesPath, "", new DocUrl(pageUrl)));
+    }
+
+    public Path getGlobalReferencesPath() {
+        return globalReferencesPath;
     }
 
     public DocReferences getDocReferences() {

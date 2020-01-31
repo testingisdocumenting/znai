@@ -17,19 +17,19 @@
 package com.twosigma.znai.diagrams
 
 import com.twosigma.znai.extensions.include.PluginsTestUtils
-import com.twosigma.znai.parser.TestComponentsRegistry
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 import static com.twosigma.webtau.Matchers.code
 import static com.twosigma.webtau.Matchers.throwException
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class FlowChartIncludePluginTest {
     @Before
     @After
     void init() {
-        TestComponentsRegistry.INSTANCE.getValidator().clearValidLinks()
+        TEST_COMPONENTS_REGISTRY.docStructure().clearValidLinks()
     }
 
     @Test
@@ -55,6 +55,6 @@ class FlowChartIncludePluginTest {
     }
 
     static void registerValidLink(link) {
-        TestComponentsRegistry.INSTANCE.getValidator().addValidLink(link)
+        TEST_COMPONENTS_REGISTRY.docStructure().addValidLink(link)
     }
 }

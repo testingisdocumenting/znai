@@ -49,7 +49,7 @@ class GroovyIncludePlugin implements IncludePlugin {
                          ParserHandler parserHandler,
                          Path markupPath,
                          PluginParams pluginParams) {
-        codeReferences = new CodeReferencesTrait(componentsRegistry, pluginParams)
+        codeReferences = new CodeReferencesTrait(componentsRegistry, markupPath, pluginParams)
         fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam())
         String fileContent = componentsRegistry.resourceResolver().textContent(fullPath)
         String entry = pluginParams.getOpts().get("entry")

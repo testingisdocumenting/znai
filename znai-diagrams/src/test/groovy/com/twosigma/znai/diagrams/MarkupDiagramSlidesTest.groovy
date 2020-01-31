@@ -18,11 +18,12 @@ package com.twosigma.znai.diagrams
 
 import com.twosigma.znai.diagrams.slides.DiagramSlides
 import com.twosigma.znai.diagrams.slides.MarkupDiagramSlides
-import com.twosigma.znai.parser.TestComponentsRegistry
 import com.twosigma.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 
 import java.nio.file.Paths
+
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkupDiagramSlidesTest {
     private DiagramSlides slides
@@ -75,7 +76,7 @@ context information
     }
 
     private void parse(markdown) {
-        def diagramSlides = new MarkupDiagramSlides(new MarkdownParser(TestComponentsRegistry.INSTANCE))
+        def diagramSlides = new MarkupDiagramSlides(new MarkdownParser(TEST_COMPONENTS_REGISTRY))
         slides = diagramSlides.create(Paths.get(""), markdown)
     }
 }
