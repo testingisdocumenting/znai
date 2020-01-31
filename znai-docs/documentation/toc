@@ -28,6 +28,7 @@ snippets
     open-API
     CLI
     math
+    jupyter-notebook
     markdown
 layout
     attention-signs
@@ -37,6 +38,7 @@ layout
     templates
     two-sides-pages
     two-sides-tabs
+    jupyter-notebook-two-sides
 visuals
     spoilers
     smart-bullet-points
