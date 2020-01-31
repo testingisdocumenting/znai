@@ -107,12 +107,15 @@ World paragraph
         process('<code>MyClass</code>', [MyClass: 'link/toRef'])
 
         elements.should == [[type: 'Paragraph',
-                             content: [[code: 'MyClass', references: [MyClass: 'link/toRef'], type: 'InlinedCode']]]]
+                             content: [[code: 'MyClass', references: [MyClass: [pageUrl: 'link/toRef']], type: 'InlinedCode']]]]
     }
 
     private void process(String html, codeReferences = [:]) {
+        def docReferences = new DocReferences()
+        codeReferences.each { k, v -> docReferences.add(k, v) }
+
         def docElements = HtmlToDocElementConverter.convert(testComponentsRegistry, Paths.get(""), html,
-                new DocReferences(codeReferences))
+                docReferences)
         elements = docElements.collect { it.toMap() }
     }
 }

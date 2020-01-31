@@ -20,14 +20,13 @@ import com.twosigma.znai.core.ComponentsRegistry
 import com.twosigma.znai.core.GlobalAssetsRegistry
 import com.twosigma.znai.core.ResourcesResolver
 import com.twosigma.znai.parser.commonmark.MarkdownParser
-import com.twosigma.znai.structure.DocStructure
 import com.twosigma.znai.time.FakeTimeService
 import com.twosigma.znai.time.TimeService
 
 import java.nio.file.Paths
 
 class TestComponentsRegistry implements ComponentsRegistry {
-    public static final TestComponentsRegistry INSTANCE = new TestComponentsRegistry()
+    public static final TestComponentsRegistry TEST_COMPONENTS_REGISTRY = new TestComponentsRegistry()
 
     private final TestDocStructure docStructure = new TestDocStructure()
     private final MarkupParser markdownParser = new TestMarkdownParser()
@@ -59,12 +58,8 @@ class TestComponentsRegistry implements ComponentsRegistry {
         return new TestResourceResolver(Paths.get(""))
     }
 
-    TestDocStructure getValidator() {
-        return docStructure
-    }
-
     @Override
-    DocStructure docStructure() {
+    TestDocStructure docStructure() {
         return docStructure
     }
 
@@ -74,7 +69,7 @@ class TestComponentsRegistry implements ComponentsRegistry {
     }
 
     @Override
-    TimeService timeService() {
+    FakeTimeService timeService() {
         return timeService
     }
 }

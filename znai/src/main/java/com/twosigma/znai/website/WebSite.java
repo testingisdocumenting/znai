@@ -115,7 +115,7 @@ public class WebSite {
         localSearchEntries = new LocalSearchEntries();
         auxiliaryFilesLastUpdateTime = new HashMap<>();
 
-        globalDocReferences = new GlobalDocReferences(cfg.globalReferencesPath);
+        globalDocReferences = new GlobalDocReferences(componentsRegistry, cfg.globalReferencesPath);
 
         docMeta.setId(siteConfig.id);
         if (siteConfig.isPreviewEnabled) {
@@ -179,6 +179,7 @@ public class WebSite {
 
     public void parse() {
         createTopLevelToc();
+        parseGlobalDocReference();
         parseMarkupsMeta();
         parseMarkups();
         parseFooter();
@@ -243,8 +244,12 @@ public class WebSite {
     }
 
     public DocReferences updateDocReferences() {
-        globalDocReferences.reload();
+        docStructure.removeLinksForPath(globalDocReferences.getGlobalReferencesPath());
+
+        globalDocReferences.load();
         deployGlobalDocReferences();
+
+        validateCollectedLinks();
 
         return globalDocReferences.getDocReferences();
     }
@@ -300,6 +305,11 @@ public class WebSite {
         toc = markupParsingConfiguration.createToc(componentsRegistry);
         docStructure = new WebSiteDocStructure(componentsRegistry, docMeta, toc, markupParsingConfiguration);
         componentsRegistry.setDocStructure(docStructure);
+    }
+
+    private void parseGlobalDocReference() {
+        reportPhase("parsing global doc references");
+        globalDocReferences.load();
     }
 
     /**
