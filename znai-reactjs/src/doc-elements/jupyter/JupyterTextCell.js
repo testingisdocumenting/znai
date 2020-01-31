@@ -15,6 +15,7 @@
  */
 
 import React from 'react'
+import {splitAndTrimEmptyLines} from '../../utils/strings'
 
 const JupyterTextCell = ({text, elementsLibrary}) => {
     const lines = convertToLines(text)
@@ -27,7 +28,7 @@ const JupyterTextCell = ({text, elementsLibrary}) => {
 }
 
 function convertToLines(text) {
-    const lines = text.split('\n')
+    const lines = splitAndTrimEmptyLines(text)
     if (lines.length > 0 && lines[lines.length - 1].length === 0) {
         lines.pop()
     }
