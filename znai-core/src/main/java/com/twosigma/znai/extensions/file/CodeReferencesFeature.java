@@ -3,6 +3,7 @@ package com.twosigma.znai.extensions.file;
 import com.twosigma.znai.core.AuxiliaryFile;
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.extensions.PluginParams;
+import com.twosigma.znai.extensions.features.PluginFeature;
 import com.twosigma.znai.reference.DocReferences;
 import com.twosigma.znai.reference.DocReferencesParser;
 import com.twosigma.znai.structure.DocStructure;
@@ -15,10 +16,8 @@ import java.util.stream.Stream;
 /**
  * common code for the include-file plugin, include-java plugin, etc
  * to handle parsing of code references, converting them to props, and handling auxiliary files.
- *
- * sort of like a plugin trait. Maybe a good idea to formalize traits on plugins interface level.
  */
-public class CodeReferencesTrait {
+public class CodeReferencesFeature implements PluginFeature {
     private final ComponentsRegistry componentsRegistry;
 
     private final Path referencesFullPath;
@@ -27,7 +26,7 @@ public class CodeReferencesTrait {
     private final Path markupPath;
     private final DocReferences references;
 
-    public CodeReferencesTrait(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+    public CodeReferencesFeature(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         this.componentsRegistry = componentsRegistry;
         this.markupPath = markupPath;
 

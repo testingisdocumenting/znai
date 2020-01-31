@@ -60,7 +60,15 @@ Additionally you can combine two approaches and pass a list of things to highlig
 
 :include-file: file-name.js {highlight: ["export", 1]}
 
-Note: Order of lines to highlight is reflected during presentation mode 
+Note: Order of lines to highlight is reflected during presentation mode
+
+Use the `highlightPath` option to highlight lines specified in a separate file. 
+
+    :include-file: file-name.js {highlightPath: "lines-to-highlight.txt"}
+    
+:include-file: file-name.js {highlightPath: "lines-to-highlight.txt"}
+
+:include-file: lines-to-highlight.txt {title: "lines-to-highlight.txt"}
 
 # Callout Comments
 

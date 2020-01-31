@@ -24,7 +24,6 @@ import com.twosigma.znai.java.parser.JavaCode;
 import com.twosigma.znai.java.parser.html.HtmlToDocElementConverter;
 import com.twosigma.znai.parser.docelement.DocElement;
 import com.twosigma.znai.parser.docelement.DocElementType;
-import com.twosigma.znai.utils.CollectionUtils;
 
 import java.util.*;
 
@@ -52,7 +51,7 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
         });
 
         Map<String, Object> props = apiParameters.toMap();
-        codeReferencesTrait.updateProps(props);
+        features.updateProps(props);
         props.putAll(pluginParams.getOpts().toMap());
 
         List<DocElement> docElements =
@@ -79,7 +78,7 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     private List<Map<String, Object>> descriptionToDocElements(EnumEntry e) {
         return HtmlToDocElementConverter.convert(
                 componentsRegistry, markupPath, e.getJavaDocText(),
-                codeReferencesTrait.getReferences())
+                codeReferencesFeature.getReferences())
                 .stream()
                 .map(DocElement::toMap).collect(toList());
     }
