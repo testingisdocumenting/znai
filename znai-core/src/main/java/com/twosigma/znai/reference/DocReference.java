@@ -14,23 +14,26 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.columns
+package com.twosigma.znai.reference;
 
-import com.twosigma.znai.extensions.PluginParams
-import org.junit.Test
+import java.util.HashMap;
+import java.util.Map;
 
-import java.nio.file.Paths
+public class DocReference {
+    private final String pageUrl;
 
-import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+    public DocReference(String pageUrl) {
+        this.pageUrl = pageUrl;
+    }
 
-class ColumnsFencePluginTest {
-    @Test
-    void "should index text from all columns"() {
-        def plugin = new ColumnsFencePlugin()
-        plugin.process(TEST_COMPONENTS_REGISTRY, Paths.get('test.md'), PluginParams.EMPTY,
-                """left:text on the left
-right:text on the right""")
+    public String getPageUrl() {
+        return pageUrl;
+    }
 
-        plugin.textForSearch().text.should == 'text on the left text on the right'
+    public Map<String, Object> toMap() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("pageUrl", pageUrl);
+
+        return result;
     }
 }
