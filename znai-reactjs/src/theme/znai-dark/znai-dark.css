@@ -81,7 +81,7 @@
 
     --znai-snippets-background-color: #181e21;
     --znai-snippets-outer-border-color: #29343a;
-    --znai-snippets-inner-border-color: #404040;
+    --znai-snippets-inner-border-color: #222c31;
     --znai-snippets-title-color: #959595;
     --znai-snippets-title-background-color: #151a1d;
     --znai-snippets-title-left-border-color: #29343a;
@@ -109,6 +109,8 @@
 
     --znai-api-key-color: var(--znai-section-title-color);
     --znai-api-description-color: var(--znai-inversed-text-color);
+    --znai-api-title-color: var(--znai-snippets-title-color);
+    --znai-api-title-background-color: var(--znai-snippets-title-background-color);
 
     --znai-open-api-method-color: var(--znai-toc-page-title-color);
     --znai-open-api-path-color: var(--znai-toc-page-title-color);

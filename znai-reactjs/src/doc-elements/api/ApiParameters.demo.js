@@ -58,6 +58,9 @@ export function apiParametersDemo(registry) {
         .add('flat parameters', () => (
             <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>
         ))
+        .add('flat parameters with title', () => (
+            <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition"/>
+        ))
         .add('flat parameters with long description', () => (
             <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongDescriptionParameters}/>
         ))
@@ -75,6 +78,13 @@ export function apiParametersDemo(registry) {
                 <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
                 <ParagraphText/>
             </React.Fragment>
+        ))
+        .add('with text around and title', () => (
+            <div className="content-block">
+                <ParagraphText/>
+                <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} title="Person definition"/>
+                <ParagraphText/>
+            </div>
         ))
 }
 

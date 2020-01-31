@@ -22,6 +22,7 @@ import com.twosigma.znai.extensions.PluginResult;
 import com.twosigma.znai.extensions.fence.FencePlugin;
 
 import java.nio.file.Path;
+import java.util.Map;
 
 public class ApiParametersFencePlugin implements FencePlugin {
     @Override
@@ -37,6 +38,9 @@ public class ApiParametersFencePlugin implements FencePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         ApiParameters apiParameters = ApiParametersCsvParser.parse(componentsRegistry.markdownParser(), content);
-        return PluginResult.docElement("ApiParameters", apiParameters.toMap());
+        Map<String, Object> props = apiParameters.toMap();
+        props.putAll(pluginParams.getOpts().toMap());
+
+        return PluginResult.docElement("ApiParameters", props);
     }
 }
