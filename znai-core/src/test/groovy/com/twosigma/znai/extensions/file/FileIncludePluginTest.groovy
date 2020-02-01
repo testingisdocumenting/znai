@@ -17,77 +17,121 @@
 package com.twosigma.znai.extensions.file
 
 import com.twosigma.znai.extensions.include.PluginsTestUtils
-import org.junit.Assert
 import org.junit.Test
+
+import static com.twosigma.webtau.Matchers.code
+import static com.twosigma.webtau.Matchers.throwException
 
 class FileIncludePluginTest {
     @Test
     void "should extract file snippet based on start line and number of lines"() {
-        def text = process("file.txt", "{startLine: 'multiple lines', numberOfLines: 2}")
+        def text = resultingSnippet("file.txt", "{startLine: 'multiple lines', numberOfLines: 2}")
 
-        Assert.assertEquals("a multiple lines\n" +
-                "line number", text)
+        text.should == "a multiple lines\n" +
+                "line number"
     }
 
     @Test
     void "should extract file snippet based on start and stop end lines"() {
-        def text = process("file.txt", "{startLine: 'multiple lines', endLine: 'stop'}")
+        def text = resultingSnippet("file.txt", "{startLine: 'multiple lines', endLine: 'stop'}")
 
-        Assert.assertEquals("a multiple lines\n" +
+        text.should == "a multiple lines\n" +
                 "line number\n" +
-                "--- stop", text)
+                "--- stop"
     }
 
     @Test
     void "should extract file snippet based on start and stop end lines excluding them"() {
-        def text = process("file.txt", "{startLine: 'number', endLine: 'stop', exclude: true}")
+        def text = resultingSnippet("file.txt", "{startLine: 'number', endLine: 'stop', exclude: true}")
 
-        Assert.assertEquals("", text)
+        text.should == ""
     }
 
     @Test
     void "should extract file snippet based on start line only"() {
-        def text = process("file.txt", "{startLine: 'multiple lines'}")
+        def text = resultingSnippet("file.txt", "{startLine: 'multiple lines'}")
 
-        Assert.assertEquals("a multiple lines\n" +
+        text.should == "a multiple lines\n" +
                 "line number\n" +
                 "--- stop\n" +
                 "and five\n" +
-                "and then six", text)
+                "and then six"
     }
 
     @Test
     void "should extract file snippet based on end line only"() {
-        def text = process("file.txt", "{endLine: 'stop'}")
+        def text = resultingSnippet("file.txt", "{endLine: 'stop'}")
 
-        Assert.assertEquals("this is a\n" +
+        text.should == "this is a\n" +
                 "test file in\n" +
                 "a multiple lines\n" +
                 "line number\n" +
-                "--- stop", text)
+                "--- stop"
     }
 
     @Test
     void "should automatically strip extra indentation"() {
-        def text = process("script.groovy", "{startLine: 'class', endLine: '}', exclude: true}")
+        def text = resultingSnippet("script.groovy", "{startLine: 'class', endLine: '}', exclude: true}")
 
-        Assert.assertEquals(
+        text.should ==
                 "def a\n" +
-                "def b", text)
+                "def b"
     }
 
     @Test
     void "should only include lines matching regexp"() {
-        def singleAssert = process("script.groovy", "{includeRegexp: 'import.*ClassName'}")
-        Assert.assertEquals("import a.b.c.ClassName", singleAssert)
+        def singleImport = resultingSnippet("script.groovy", "{includeRegexp: 'import.*ClassName'}")
+        singleImport.should == "import a.b.c.ClassName"
 
-        def allAsserts = process("script.groovy", "{includeRegexp: 'import'}")
-        Assert.assertEquals(
+        def allImports = resultingSnippet("script.groovy", "{includeRegexp: 'import'}")
+        allImports.should ==
                 "import e.d.g.AnotherName\n" +
-                "import a.b.c.ClassName", allAsserts)
+                "import a.b.c.ClassName"
     }
 
-    private static String process(String fileName, String value) {
+    @Test
+    void "should validate highlight lines presence when highlight is a line idx"() {
+        resultingSnippet("script.groovy", "{highlight: 3}")
+        code {
+            resultingSnippet("script.groovy", "{highlight: 7}")
+        } should throwException("highlight idx is out of range: 7\n" +
+                "check: script.groovy")
+    }
+
+    @Test
+    void "should validate highlight lines presence when highlight is a text"() {
+        resultingSnippet("script.groovy", "{highlight: 'def a'}")
+        code {
+            resultingSnippet("script.groovy", "{highlight: 'def c'}")
+        } should throwException("highlight text <def c> is not found\n" +
+                "check: script.groovy\n" +
+                "import e.d.g.AnotherName\n" +
+                "import a.b.c.ClassName\n" +
+                "\n" +
+                "class HelloWorld {\n" +
+                "    def a\n" +
+                "    def b\n" +
+                "}")
+    }
+
+    @Test
+    void "should highlight lines from a highlight text file"() {
+        def props = resultingProps("script.groovy", "{highlightPath: 'highlight.txt'}")
+        props.highlight.should == ['def a', 'def b']
+    }
+
+    @Test
+    void "should validate lines from a highlight text file"() {
+        code {
+            resultingProps("script.groovy", "{highlightPath: 'missing-highlight.txt'}")
+        } should throwException(~/highlight text <def g> is not found/)
+    }
+
+    private static String resultingSnippet(String fileName, String value) {
         return PluginsTestUtils.processAndGetSimplifiedCodeBlock(":include-file: $fileName $value")
+    }
+
+    private static Map<String, Object> resultingProps(String fileName, String value) {
+        return PluginsTestUtils.processAndGetProps(":include-file: $fileName $value")
     }
 }
