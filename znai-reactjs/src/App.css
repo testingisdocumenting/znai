@@ -42,6 +42,9 @@
     --znai-regular-text-color: var(--znai-black);
     --znai-regular-text-light-color: var(--znai-light-black);
 
+    --znai-blockquote-border-color: #dedede;
+    --zani-blockquote-background-color: #f4f6f5;
+
     --znai-space-above-next-prev-navigation: 150px;
     --znai-space-below-next-prev-navigation: 100px;
     --znai-space-left-next-prev-navigation: 50px;
