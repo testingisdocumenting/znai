@@ -33,9 +33,13 @@ class PluginsTestUtils {
         DocElementCreationParserHandler parserHandler
     }
 
-    static String processAndGetSimplifiedCodeBlock(String pluginDef) {
+    static Map<String, Object> processAndGetProps(String pluginDef) {
         def result = process(pluginDef)
-        return result[0].getProps().snippet
+        return result[0].getProps()
+    }
+
+    static String processAndGetSimplifiedCodeBlock(String pluginDef) {
+        return processAndGetProps(pluginDef).snippet
     }
 
     static List<DocElement> process(String pluginDef) {

@@ -14,26 +14,9 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import {splitAndTrimEmptyLines} from '../../utils/strings'
+package com.twosigma.znai.extensions.file;
 
-const JupyterTextCell = ({text, elementsLibrary}) => {
-    const lines = splitAndTrimEmptyLines(text)
-
-    return (
-        <div className="jupyter-cell jupyter-text content-block">
-            <elementsLibrary.CliOutput lines={lines}/>
-        </div>
-    )
+public interface SnippetContentProvider {
+    String snippetContent();
+    String snippetId();
 }
-
-function convertToLines(text) {
-    const lines = text.split('\n')
-    if (lines.length > 0 && lines[lines.length - 1].length === 0) {
-        lines.pop()
-    }
-
-    return lines
-}
-
-export default JupyterTextCell

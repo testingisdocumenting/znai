@@ -105,6 +105,13 @@ class JavaIncludePluginTest {
 
     }
 
+    @Test
+    void "validates highlight"() {
+        code {
+            process("Simple.java", "{highlight: -1}")
+        } should throwException(IllegalArgumentException)
+    }
+
     private static String process(String fileName, String params) {
         return PluginsTestUtils.processAndGetSimplifiedCodeBlock(":include-java: $fileName $params")
     }

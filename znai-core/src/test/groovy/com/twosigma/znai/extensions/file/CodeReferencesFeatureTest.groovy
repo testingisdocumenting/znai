@@ -11,7 +11,7 @@ import static com.twosigma.webtau.Matchers.code
 import static com.twosigma.webtau.Matchers.throwException
 import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
-class CodeReferencesTraitTest {
+class CodeReferencesFeatureTest {
     @Before
     @After
     void init() {
@@ -61,8 +61,8 @@ class CodeReferencesTraitTest {
         props.should == [:]
     }
 
-    private static CodeReferencesTrait createCodeReferencesTrait(String includeFileParams) {
-        return new CodeReferencesTrait(TEST_COMPONENTS_REGISTRY, Paths.get("doc.md"),
+    private static CodeReferencesFeature createCodeReferencesTrait(String includeFileParams) {
+        return new CodeReferencesFeature(TEST_COMPONENTS_REGISTRY, Paths.get("doc.md"),
                 new PluginParams("include-file", includeFileParams))
     }
 }

@@ -14,26 +14,15 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import {splitAndTrimEmptyLines} from '../../utils/strings'
+package com.twosigma.znai.extensions.features;
 
-const JupyterTextCell = ({text, elementsLibrary}) => {
-    const lines = splitAndTrimEmptyLines(text)
+import com.twosigma.znai.core.AuxiliaryFile;
 
-    return (
-        <div className="jupyter-cell jupyter-text content-block">
-            <elementsLibrary.CliOutput lines={lines}/>
-        </div>
-    )
+import java.util.Map;
+import java.util.stream.Stream;
+
+public interface PluginFeature {
+    void updateProps(Map<String, Object> props);
+
+    Stream<AuxiliaryFile> auxiliaryFiles();
 }
-
-function convertToLines(text) {
-    const lines = text.split('\n')
-    if (lines.length > 0 && lines[lines.length - 1].length === 0) {
-        lines.pop()
-    }
-
-    return lines
-}
-
-export default JupyterTextCell

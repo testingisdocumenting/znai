@@ -14,26 +14,38 @@
  * limitations under the License.
  */
 
-import {splitParts, splitTextIntoLines} from './strings'
+import {splitAndTrimEmptyLines, splitParts, splitTextIntoLinesUsingThreshold} from './strings'
 
 describe("string utils", () => {
+    it("should split text into lines and remove empty lines from both sides", () => {
+        expect(splitAndTrimEmptyLines('')).toEqual([])
+        expect(splitAndTrimEmptyLines('hello')).toEqual(['hello'])
+        expect(splitAndTrimEmptyLines('hello\nline')).toEqual(['hello', 'line'])
+        expect(splitAndTrimEmptyLines('hello\nline\n')).toEqual(['hello', 'line'])
+        expect(splitAndTrimEmptyLines('\nhello\nline')).toEqual(['hello', 'line'])
+        expect(splitAndTrimEmptyLines('   \nline')).toEqual(['line'])
+        expect(splitAndTrimEmptyLines('line\n     ')).toEqual(['line'])
+        expect(splitAndTrimEmptyLines('     line\n     ')).toEqual(['     line'])
+        expect(splitAndTrimEmptyLines('     \nline\n     ')).toEqual(['line'])
+    })
+
     it("should split text into one line if threshold is not reached", () => {
-        const lines = splitTextIntoLines("hello", 10)
+        const lines = splitTextIntoLinesUsingThreshold("hello", 10)
         expect(lines).toEqual(["hello"])
     })
 
     it("should split text into two lines using spaces as dilimiter", () => {
-        const lines = splitTextIntoLines("hello world to", 13)
+        const lines = splitTextIntoLinesUsingThreshold("hello world to", 13)
         expect(lines).toEqual(["hello world", "to"])
     })
 
     it("should split text as soon as threshold is reached", () => {
-        const lines = splitTextIntoLines("hello world to", 1)
+        const lines = splitTextIntoLinesUsingThreshold("hello world to", 1)
         expect(lines).toEqual(["hello", "world", "to"])
     })
 
     it("should move the last long token to a new line", () => {
-        const lines = splitTextIntoLines("hello world-with-no-spaces", 12)
+        const lines = splitTextIntoLinesUsingThreshold("hello world-with-no-spaces", 12)
         expect(lines).toEqual(["hello", "world-with-no-spaces"])
     })
 

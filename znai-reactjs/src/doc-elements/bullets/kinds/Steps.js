@@ -17,7 +17,7 @@
 import React, {Component} from 'react'
 
 import {extractTextLines, extractTextLinesEmphasisOrFull} from '../bulletUtils'
-import {splitTextIntoLines} from '../../../utils/strings'
+import {splitTextIntoLinesUsingThreshold} from '../../../utils/strings'
 import {isAllAtOnce} from '../../meta/meta'
 
 import colors from './colors'
@@ -68,7 +68,7 @@ class Step extends Component {
 
         const textStyle = {fill: color.text}
 
-        const parts = splitTextIntoLines(text, 10)
+        const parts = splitTextIntoLinesUsingThreshold(text, 10)
         const y = parts.length === 1 ? halfHeight :
             (halfHeight - (fontHeight * parts.length / 2.0) + halfFontHeight)
 

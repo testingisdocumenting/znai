@@ -14,26 +14,23 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import {splitAndTrimEmptyLines} from '../../utils/strings'
+package com.twosigma.znai.groovy.extensions
 
-const JupyterTextCell = ({text, elementsLibrary}) => {
-    const lines = splitAndTrimEmptyLines(text)
+import com.twosigma.znai.extensions.include.PluginsTestUtils
+import org.junit.Test
 
-    return (
-        <div className="jupyter-cell jupyter-text content-block">
-            <elementsLibrary.CliOutput lines={lines}/>
-        </div>
-    )
-}
+import static com.twosigma.webtau.Matchers.code
+import static com.twosigma.webtau.Matchers.throwException
 
-function convertToLines(text) {
-    const lines = text.split('\n')
-    if (lines.length > 0 && lines[lines.length - 1].length === 0) {
-        lines.pop()
+class GroovyIncludePluginTest {
+    @Test
+    void "validates highlight"() {
+        code {
+            process("sample.groovy", "{highlight: 4}")
+        } should throwException(IllegalArgumentException)
     }
 
-    return lines
+    private static String process(String fileName, String value) {
+        return PluginsTestUtils.processAndGetSimplifiedCodeBlock(":include-groovy: $fileName $value")
+    }
 }
-
-export default JupyterTextCell
