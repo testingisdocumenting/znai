@@ -27,13 +27,4 @@ const JupyterTextCell = ({text, elementsLibrary}) => {
     )
 }
 
-function convertToLines(text) {
-    const lines = text.split('\n')
-    if (lines.length > 0 && lines[lines.length - 1].length === 0) {
-        lines.pop()
-    }
-
-    return lines
-}
-
 export default JupyterTextCell
