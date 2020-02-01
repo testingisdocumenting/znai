@@ -118,12 +118,15 @@
     --znai-snippets-title-left-border-color: var(--znai-light-black);
     --znai-snippets-reference-border-color: var(--znai-light-black);
     --znai-snippets-reference-background-color: rgb(234, 237, 242);
-    --znai-token-title-color: #383b3f;
-    --znai-token-param-highlight-color: #660e7a;
-    --znai-cli-command-color: #383b3f;
     --znai-snippets-space-above: 25px;
     --znai-snippets-space-below: 25px;
     --znai-snippets-explanation-background-color: #efefef;
+    --znai-snippets-line-highlighted-background-color: rgba(41, 139, 231, .2);
+
+    --znai-token-title-color: #383b3f;
+    --znai-token-highlight-background-color: var(--znai-snippets-line-highlighted-background-color);
+    --znai-cli-command-color: #383b3f;
+    --znai-cli-command-param-highlight-color: #660e7a;
 
     --znai-spoiler-border-color: var(--znai-snippets-outer-border-color);
     --znai-spoiler-title-color: var(--znai-link-color);
@@ -161,7 +164,6 @@
     --znai-number-color: #2822ad;
     --znai-boolean-color: var(--znai-number-color);
     --znai-string-color: #078744;
-    --znai-highlighted-background-color: rgba(241, 255, 42, 0.3);
     --znai-property-color: #660e7a;
     --znai-punctuation-color: #888;
     --znai-collapse-uncollapse-color: var(--znai-punctuation-color);

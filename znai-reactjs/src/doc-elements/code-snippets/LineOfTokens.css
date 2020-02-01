@@ -20,7 +20,9 @@
 }
 
 .code-line.highlight {
-    background: var(--znai-highlighted-background-color);
-    padding: 4px 0;
-    border-radius: 4px;
+    background: var(--znai-snippets-line-highlighted-background-color);
+    margin-left: -16px;
+    padding: 4px 0 4px 16px;
+
+    display: block;
 }
