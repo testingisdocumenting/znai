@@ -258,8 +258,6 @@ export class Documentation extends Component {
         if (e.code === "Slash" && !isSearchActive && mode === DocumentationModes.DEFAULT) {
             e.preventDefault()
             this.setState({isSearchActive: true})
-        } else if (!isSearchActive && mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && !e.ctrlKey && !e.altKey) {
-            this.onPresentationOpen()
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && e.altKey) {
             this.setState({mode: DocumentationModes.PRINT})
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowLeft' && e.ctrlKey) {
