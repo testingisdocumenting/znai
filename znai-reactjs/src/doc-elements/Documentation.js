@@ -27,7 +27,6 @@ import {documentationTracking} from './tracking/DocumentationTracking'
 import {textSelection} from './selected-text-extensions/TextSelection'
 import {tableOfContents} from './structure/toc/TableOfContents'
 import {getAllPagesPromise} from './allPages'
-import {fullResourcePath} from '../utils/resourcePath'
 
 import Presentation from './presentation/Presentation'
 import Preview from './preview/Preview'
