@@ -474,7 +474,10 @@ export class Documentation extends Component {
 
     onTocUpdate(toc) {
         tableOfContents.toc = toc
-        this.setState({toc})
+        this.setState({
+            toc: toc,
+            pageGenError: null
+        })
     }
 
     onDocMetaUpdate(docMeta) {
