@@ -101,12 +101,6 @@ public class ResourcesResolverChain implements ResourcesResolver {
         return resolvers.stream()
                 .filter(r -> r.canResolve(path))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Can't find \"" + path + "\"\n\nTried following ResourceResolvers:\n" +
-                    resolvers.stream().map(r -> renderResolverDetails(r, path)).collect(joining("\n"))));
-    }
-
-    private String renderResolverDetails(ResourcesResolver resolver, String path) {
-        return resolver.getClass().getCanonicalName() + " resources not found:\n  " +
-                String.join("\n  ", resolver.listOfTriedLocations(path));
+                .orElseThrow(() -> new UnresolvedResourceException(resolvers.stream(), path));
     }
 }

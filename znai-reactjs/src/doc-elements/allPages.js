@@ -17,6 +17,7 @@
 import {jsonPromise} from '../utils/json'
 import pageContentProcessor from './pageContentProcessor.js'
 import {fullResourcePath} from "../utils/resourcePath";
+import {areTocItemEquals} from './structure/tocItem'
 
 // we don't load all-pages using regular javascript script tag
 // this is because we want to ui provide to be responsive while data is loading in the background
@@ -30,12 +31,39 @@ function getAllPagesPromise(docMeta) {
 
     const url = fullResourcePath(docMeta.id, "all-pages.json")
     pagesPromise = jsonPromise(url).then(allPages => {
-        return allPages.map(page => {
+        return new AllPages(allPages.map(page => {
             return {...page, content: pageContentProcessor.process(page.content)}
-        })
+        }))
     })
 
     return pagesPromise
 }
 
-export {getAllPagesPromise}
+class AllPages {
+    constructor(pages) {
+        this.pages = pages
+    }
+
+    update(newPage) {
+        const foundPage = this.find(newPage.tocItem)
+
+        if (foundPage) {
+            foundPage.content = newPage.content
+        } else {
+            this.pages.push(newPage)
+        }
+    }
+
+    find(tocItem) {
+        return this.pages.find((page) => areTocItemEquals(page.tocItem, tocItem))
+    }
+
+    remove(tocItem) {
+        const idx = this.pages.findIndex(page => areTocItemEquals(page.tocItem, tocItem))
+        if (idx !== -1) {
+            this.pages.splice(idx, 1)
+        }
+    }
+}
+
+export {getAllPagesPromise, AllPages}

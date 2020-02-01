@@ -97,6 +97,7 @@ export class Documentation extends Component {
         this.onTocUpdate = this.onTocUpdate.bind(this)
         this.onDocMetaUpdate = this.onDocMetaUpdate.bind(this)
         this.onMultiplePagesUpdate = this.onMultiplePagesUpdate.bind(this)
+        this.onPagesRemove = this.onPagesRemove.bind(this)
         this.onDocReferencesUpdate = this.onDocReferencesUpdate.bind(this)
         this.onPageGenError = this.onPageGenError.bind(this)
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
@@ -172,6 +173,7 @@ export class Documentation extends Component {
         const preview = docMeta.previewEnabled ? <Preview active={true}
                                                           onPageUpdate={this.onPageUpdate}
                                                           onMultiplePagesUpdate={this.onMultiplePagesUpdate}
+                                                          onPagesRemove={this.onPagesRemove}
                                                           onDocReferencesUpdate={this.onDocReferencesUpdate}
                                                           onTocUpdate={this.onTocUpdate}
                                                           onDocMetaUpdate={this.onDocMetaUpdate}
@@ -419,8 +421,7 @@ export class Documentation extends Component {
     }
 
     onHeaderClick() {
-        const url = fullResourcePath(this.state.docMeta.id, "")
-        documentationNavigation.navigateToUrl(url)
+        documentationNavigation.navigateToIndex()
     }
 
     onPresentationOpen() {
@@ -474,9 +475,6 @@ export class Documentation extends Component {
     onTocUpdate(toc) {
         tableOfContents.toc = toc
         this.setState({toc})
-        if (!tableOfContents.hasTocItem(this.state.page.tocItem)) {
-            documentationNavigation.navigateToPage(tableOfContents.first)
-        }
     }
 
     onDocMetaUpdate(docMeta) {
@@ -487,24 +485,23 @@ export class Documentation extends Component {
     //
     onPageUpdate(pageProps) {
         const updatePagesReference = () => this.getAllPagesPromise().then((allPages) => {
-            this.updatePagesReference(allPages, pageProps);
+            allPages.update(pageProps)
         })
 
         this.navigateToPageAndDisplayChange(pageProps, updatePagesReference)
     }
 
     // one of the files referred from a markup or multiple markups was changed
-    // we need to update multiple pages at once and either refresh current view (if one of the changed pages is it)
+    // we need to update multiple pages at once and either refresh current view (if one of the changed pages is current page)
     // or navigate to the first modified page
     //
     onMultiplePagesUpdate(listOfPageProps) {
         const updatePagesReference = () => this.getAllPagesPromise().then((allPages) => {
-            listOfPageProps.forEach((newPage) => this.updatePagesReference(allPages, newPage))
+            listOfPageProps.forEach((newPage) => allPages.update(newPage))
         })
 
         const currentToc = this.state.page.tocItem
-        const matchingPages = listOfPageProps.filter((newPage) => currentToc.dirName === newPage.tocItem.dirName &&
-            currentToc.fileName === newPage.tocItem.fileName)
+        const matchingPages = listOfPageProps.filter((newPage) => areTocItemEquals(currentToc, newPage.tocItem))
 
         if (matchingPages.length) {
             this.updatePageAndDetectChangePosition(() => {
@@ -514,6 +511,19 @@ export class Documentation extends Component {
         } else {
             this.navigateToPageAndDisplayChange(listOfPageProps[0], updatePagesReference)
         }
+    }
+
+    onPagesRemove(removedTocItems) {
+        const currentToc = this.state.page.tocItem
+        const matchingPages = removedTocItems.filter((tocItem) => areTocItemEquals(currentToc, tocItem))
+
+        if (matchingPages.length) {
+            documentationNavigation.navigateToIndex()
+        }
+
+        this.getAllPagesPromise().then((allPages) => {
+            removedTocItems.forEach((tocItem) => allPages.remove(tocItem))
+        })
     }
 
     onDocReferencesUpdate(docReferences) {
@@ -529,13 +539,14 @@ export class Documentation extends Component {
     }
 
     navigateToPageAndDisplayChange(pageProps, updatePagesReference) {
-        this.navigateToPageIfRequired(pageProps.tocItem).then(() => {
-            this.updatePageAndDetectChangePosition(() => {
-                updatePagesReference()
-                this.changePage({page: pageProps})
-            })
-        }).then(() => {
-        }, (error) => console.error(error))
+        updatePagesReference().then(() => {
+            this.navigateToPageIfRequired(pageProps.tocItem).then(() => {
+                this.updatePageAndDetectChangePosition(() => {
+                    this.changePage({page: pageProps})
+                })
+            }).then(() => {
+            }, (error) => console.error(error))
+        })
     }
 
     updatePageAndDetectChangePosition(funcToUpdatePage) {
@@ -543,42 +554,28 @@ export class Documentation extends Component {
         funcToUpdatePage()
     }
 
-    updatePagesReference(allPages, newPage) {
-        const foundPages = allPages.filter((page) =>
-            page.tocItem.fileName === newPage.tocItem.fileName && page.tocItem.dirName === newPage.tocItem.dirName
-        )
-
-        if (foundPages.length) {
-            foundPages.forEach((page) => {
-                page.content = newPage.content
-            })
-        } else {
-            allPages.push(newPage)
-        }
-    }
-
     onTextSelection(textSelection) {
         this.setState({textSelection})
     }
 
     onUrlChange(url) {
-        return this.getAllPagesPromise().then((pages) => {
+        return this.getAllPagesPromise().then((allPages) => {
             const currentPageLocation = documentationNavigation.extractPageLocation(url)
 
-            const matchingPages = pages.filter((p) => p.tocItem.dirName === currentPageLocation.dirName &&
-                p.tocItem.fileName === currentPageLocation.fileName)
+            const matchingPage = allPages.find(currentPageLocation)
 
-            if (!matchingPages.length) {
-                console.error("can't find any page with", currentPageLocation)
+            if (!matchingPage) {
+                console.error("can't find any page with", currentPageLocation, "url: " + url)
                 return
             }
 
             this.changePage({
-                page: matchingPages[0],
+                page: matchingPage,
                 forceSelectedTocItem: currentPageLocation,
                 autoSelectedTocItem: currentPageLocation,
                 lastChangeDataDom: null
             })
+
             return true
         }, (error) => console.error(error))
     }

@@ -58,10 +58,15 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
     }
 
     @Override
+    public String tocItemResourceName(TocItem tocItem) {
+        return tocItem.getDirName()
+                + (tocItem.getDirName().isEmpty() ? "" : File.separator) +
+                (tocItem.getFileNameWithoutExtension() + "." + filesExtension());
+    }
+
+    @Override
     public Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem) {
-        return componentsRegistry.resourceResolver().fullPath(tocItem.getDirName()
-                 + (tocItem.getDirName().isEmpty() ? "" : File.separator) +
-                (tocItem.getFileNameWithoutExtension() + "." + filesExtension()));
+        return componentsRegistry.resourceResolver().fullPath(tocItemResourceName(tocItem));
     }
 
     @Override
