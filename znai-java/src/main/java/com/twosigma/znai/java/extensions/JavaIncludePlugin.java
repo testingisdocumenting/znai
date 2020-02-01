@@ -18,6 +18,8 @@ package com.twosigma.znai.java.extensions;
 
 import com.twosigma.znai.codesnippets.CodeSnippetsProps;
 import com.twosigma.znai.extensions.PluginParamsOpts;
+import com.twosigma.znai.extensions.file.SnippetContentProvider;
+import com.twosigma.znai.extensions.file.SnippetHighlightFeature;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.java.parser.JavaCode;
 import com.twosigma.znai.java.parser.JavaMethod;
@@ -36,11 +38,12 @@ import java.util.stream.Stream;
 import static com.twosigma.znai.java.parser.JavaCodeUtils.removeReturn;
 import static com.twosigma.znai.java.parser.JavaCodeUtils.removeSemicolonAtEnd;
 
-public class JavaIncludePlugin extends JavaIncludePluginBase {
+public class JavaIncludePlugin extends JavaIncludePluginBase implements SnippetContentProvider {
     private PluginParamsOpts opts;
     private boolean isBodyOnly;
     private boolean isSignatureOnly;
     private boolean isMultipleEntries;
+    private String snippet;
 
     @Override
     public String id() {
@@ -54,6 +57,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
 
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
+        features.add(new SnippetHighlightFeature(componentsRegistry, pluginParams, this));
         opts = pluginParams.getOpts();
 
         isBodyOnly = opts.get("bodyOnly", false);
@@ -64,10 +68,11 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
             throw new IllegalArgumentException("specify only bodyOnly or signatureOnly");
         }
 
-        String snippet = extractContent(javaCode);
+        snippet = extractContent(javaCode);
+
         Map<String, Object> props = CodeSnippetsProps.create("java", snippet);
         props.putAll(pluginParams.getOpts().toMap());
-        codeReferencesTrait.updateProps(props);
+        features.updateProps(props);
 
         DocElement docElement = new DocElement(DocElementType.SNIPPET);
         props.forEach(docElement::addProp);
@@ -145,5 +150,15 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
 
     private Collector<CharSequence, ?, String> collectorWithSeparator() {
         return Collectors.joining(isSignatureOnly ? "\n" : "\n\n");
+    }
+
+    @Override
+    public String snippetContent() {
+        return snippet;
+    }
+
+    @Override
+    public String snippetId() {
+        return path;
     }
 }

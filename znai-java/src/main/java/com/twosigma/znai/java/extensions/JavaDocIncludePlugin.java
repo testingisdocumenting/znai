@@ -37,6 +37,6 @@ public class JavaDocIncludePlugin extends JavaIncludePluginBase {
 
         return new JavaIncludeResult(HtmlToDocElementConverter.convert(componentsRegistry, markupPath,
                 entry == null ? javaCode.getClassJavaDocText() : javaCode.findJavaDoc(entry),
-                codeReferencesTrait.getReferences()), entry);
+                codeReferencesFeature.getReferences()), entry);
     }
 }
