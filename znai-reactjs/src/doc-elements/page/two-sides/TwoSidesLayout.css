@@ -33,37 +33,6 @@
     padding-right: var(--znai-two-sides-horizontal-spacing);
 }
 
-.page-two-sides-right-part {
-    --znai-regular-text-color: var(--znai-inversed-text-color);
-    --znai-regular-text-light-color: #aaa;
-
-    --znai-section-title-color: #ddd;
-
-    --znai-snippets-background-color: #202429;
-    --znai-snippets-outer-border-color: #464950;
-    --znai-snippets-inner-border-color: #404040;
-    --znai-snippets-title-color: #959595;
-    --znai-snippets-title-background-color: #1b1d1f;
-    --znai-snippets-title-left-border-color: var(--znai-snippets-title-background-color);
-
-    --znai-default-code-block-color: #aaa;
-    --znai-class-color: #bbb;
-    --znai-function-color: #d07d31;
-    --znai-keyword-color: #4b7fe7;
-    --znai-property-color: #9473a6;
-    --znai-string-color: #678558;
-    --znai-punctuation-color: #8f9aa7;
-    --znai-number-color: #6998bc;
-    --znai-boolean-color: var(--znai-number-color);
-    --znai-highlighted-background-color: rgba(126, 131, 33, 0.3);
-
-    --znai-collapse-uncollapse-background-color: #383838;
-
-    color: var(--znai-regular-text-color);
-    background-color: var(--znai-inversed-background-color);
-    border-left: solid 1px #5b666c;
-}
-
 .page-two-sides-right-part .snippet-container {
     display: inherit;
 }

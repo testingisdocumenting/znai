@@ -43,6 +43,8 @@ import {tocPanelDemo} from './doc-elements/structure/toc/TocPanel.demo'
 import {xmlDemo} from './doc-elements/xml/Xml.demo'
 import {xmlPresentationDemo} from './doc-elements/xml/PresentationXml.demo'
 import {searchPopupDemo} from './doc-elements/search/Search.demo'
+import {blockQuoteDemo} from './doc-elements/quote/BlockQuote.demo'
+import {blockQuotePresentationDemo} from './doc-elements/quote/PresentationBlockQuote.demo'
 import {typographyDemo} from './doc-elements/typography/Typography.demo'
 import {graphVizSvgDemo} from './doc-elements/graphviz/GraphVizSvg.demo'
 import {graphVizSvgPresentationDemo} from './doc-elements/graphviz/PresentationGraphVizSvg.demo'
@@ -91,6 +93,10 @@ updateGlobalDocReferences({
 
 const registries = new Registries({componentWrapper: ThemeWrapper})
 
+registries.add('text')
+    .registerAsGrid('Typography', 0, typographyDemo)
+    .registerAsRows('Blockquote', blockQuoteDemo)
+
 registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
     .registerAsGrid('Inlined Code', 0, inlinedCodeDemo)
@@ -124,7 +130,6 @@ registries.add('layout')
     .registerAsGrid('Tabs', 0, tabsDemo)
     .registerAsGrid('Tables', 0, tableDemo)
     .registerAsTabs('TOC', tocPanelDemo)
-    .registerAsGrid('Typography', 0, typographyDemo)
 
 registries.add('presentation')
     .registerAsTabs('Layout', presentationDemo)
@@ -132,6 +137,7 @@ registries.add('presentation')
     .registerAsTabs('Xml Presentation', xmlPresentationDemo)
     .registerAsTabs('SVG', svgPresentationDemo)
     .registerAsTabs('GraphViz SVG', graphVizSvgPresentationDemo)
+    .registerAsTabs('Blockquote', blockQuotePresentationDemo)
 
 registries.add('preview')
     .registerAsRows('Diff Highlight', diffTrackingDemo)

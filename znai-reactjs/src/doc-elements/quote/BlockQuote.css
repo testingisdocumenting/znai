@@ -15,14 +15,20 @@
  */
 
 blockquote {
-    font-size: 16px;
+    font-size: var(--znai-regular-text-size);
+    color: var(--znai-regular-text-color);
+
+    border-left: 5px solid var(--znai-blockquote-border-color);
+    background-color: var(--zani-blockquote-background-color);
+
+    padding: 10px 20px;
+    margin: 0 0 20px;
 }
 
 .presentation blockquote {
     max-width: 400px;
     margin: 0;
     font-size: 20px;
-    background-color: #fafafa;
 }
 
 .presentation .slide-area blockquote {
@@ -38,12 +44,10 @@ blockquote {
 
 @keyframes blockquote-presentation-appear {
     from {
-        border-left: 4px #EEE solid;
         padding: 10px 20px 10px 120px;
         max-width: 500px;
     }
     to {
-        border-left: 4px var(--znai-brand-primary-color) solid;
         padding: 10px 20px 10px 20px;
     }
 }
