@@ -18,7 +18,6 @@ import React from 'react'
 import JupyterCell from './JupyterCell'
 
 import {elementsLibrary} from '../DefaultElementsLibrary'
-import {parseCode} from '../code-snippets/codeParser'
 
 const simpleNotebook = {
     cells: [
