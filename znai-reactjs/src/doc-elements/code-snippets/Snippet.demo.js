@@ -51,6 +51,7 @@ export function snippetsDemo(registry) {
         .add('with empty bullet points', () => <Snippet lang="java" snippet={codeWithoutComments()}
                                                         commentsType="inline"/>)
         .add('horizontal scroll', () => <Snippet wide={false} lang="java" snippet={wideCode()}/>)
+        .add('horizontal scroll with title and highlight', () => <Snippet wide={false} lang="java" snippet={wideCode()} highlight={2} title="Hello Snippet"/>)
         .add('highlight by line idx', () => <Snippet lang="markdown" snippet={markdownCode()} highlight={[0]}/>)
         .add('highlight by text', () => <Snippet lang="markdown" snippet={markdownCode()} highlight={"include-file"}/>)
         .add('highlight by text right side background', () => <TwoSidesLayoutRightPart><Snippet lang="java"
