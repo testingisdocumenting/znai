@@ -52,6 +52,7 @@ visuals
     PlantUml
 deployment
     static-content
+    static-hosting
 synergy-with-testing
     java
     REST
