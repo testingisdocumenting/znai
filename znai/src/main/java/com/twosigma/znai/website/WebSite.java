@@ -21,6 +21,7 @@ import com.twosigma.znai.console.ansi.Color;
 import com.twosigma.znai.core.AuxiliaryFile;
 import com.twosigma.znai.core.AuxiliaryFilesRegistry;
 import com.twosigma.znai.core.ResourcesResolverChain;
+import com.twosigma.znai.core.UnresolvedResourceException;
 import com.twosigma.znai.extensions.HttpBasedResourceResolver;
 import com.twosigma.znai.extensions.MultipleLocalLocationsResourceResolver;
 import com.twosigma.znai.html.*;
@@ -48,6 +49,8 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.twosigma.znai.parser.MarkupTypes.MARKDOWN;
@@ -179,7 +182,9 @@ public class WebSite {
 
     public void parse() {
         createTopLevelToc();
+        createDocStructure();
         parseGlobalDocReference();
+        validateTocItemsPresence();
         parseMarkupsMeta();
         parseMarkups();
         parseFooter();
@@ -202,27 +207,41 @@ public class WebSite {
         return markupParsingConfiguration.tocItemByPath(componentsRegistry, toc, path);
     }
 
-    public HtmlPageAndPageProps regeneratePage(TocItem tocItem) {
-        Path markupPath = markupPath(tocItem);
+    public HtmlPageAndPageProps regenerateAndValidatePageDeployTocAndAllPages(TocItem tocItem) {
+        removeLinksForTocItem(tocItem);
 
-        docStructure.removeGlobalAnchorsForPath(markupPath);
-        docStructure.removeLocalAnchorsForTocItem(tocItem);
-        docStructure.removeLinksForPath(markupPath);
-
-        parseMarkupAndUpdateTocItemAndSearch(tocItem);
-        Page page = pageByTocItem.get(tocItem);
-
-        tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
+        HtmlPageAndPageProps pageProps = regeneratePageOnly(tocItem);
         deployToc();
 
-        HtmlPageAndPageProps pageProps = generatePage(tocItem, page);
+        docStructure.validateCollectedLinks();
         buildJsonOfAllPages();
+
+        return pageProps;
+    }
+
+    public void removeLinksForTocItem(TocItem tocItem) {
+        try {
+            Path markupPath = markupPath(tocItem);
+
+            docStructure.removeGlobalAnchorsForPath(markupPath);
+            docStructure.removeLocalAnchorsForTocItem(tocItem);
+            docStructure.removeLinksForPath(markupPath);
+        } catch (UnresolvedResourceException e) {
+            // ignored
+        }
+    }
+
+    public HtmlPageAndPageProps regeneratePageOnly(TocItem tocItem) {
+        parseMarkupAndUpdateTocItemAndSearch(tocItem);
+
+        Page page = pageByTocItem.get(tocItem);
+        tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
+
+        HtmlPageAndPageProps pageProps = generatePage(tocItem, page);
 
         auxiliaryFilesRegistry.auxiliaryFilesByTocItem(tocItem).stream()
                 .filter(AuxiliaryFile::isDeploymentRequired)
                 .forEach(this::deployAuxiliaryFileIfOutdated);
-
-        docStructure.validateCollectedLinks();
 
         return pageProps;
     }
@@ -235,12 +254,31 @@ public class WebSite {
         return toc;
     }
 
-    public TableOfContents updateToc() {
+    public TocAddedAndRemovedPages updateToc() {
+        TableOfContents previousToc = toc;
         createTopLevelToc();
-        forEachTocItemWithoutPage(this::parseMarkupAndUpdateTocItemAndSearch);
+
+        docStructure.updateToc(toc);
+
+        validateTocItemsPresence();
+
+        List<TocItem> newTocItems = previousToc.detectNewTocItems(toc);
+        List<TocItem> removedTocItems = previousToc.detectRemovedTocItems(toc);
+
+        removedTocItems.forEach(this::removeLinksForTocItem);
+
+        List<HtmlPageAndPageProps> newPages = newTocItems.stream().map(tocItem -> {
+            parseMarkupAndUpdateTocItemAndSearch(tocItem);
+            return regeneratePageOnly(tocItem);
+        }).collect(toList());
+
         updateTocWithPageSections();
+
+        docStructure.validateCollectedLinks();
+
         deployToc();
-        return toc;
+
+        return new TocAddedAndRemovedPages(toc, newPages, removedTocItems);
     }
 
     public DocReferences updateDocReferences() {
@@ -303,6 +341,9 @@ public class WebSite {
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
         toc = markupParsingConfiguration.createToc(componentsRegistry);
+    }
+
+    private void createDocStructure() {
         docStructure = new WebSiteDocStructure(componentsRegistry, docMeta, toc, markupParsingConfiguration);
         componentsRegistry.setDocStructure(docStructure);
     }
@@ -343,6 +384,33 @@ public class WebSite {
         deployer.deploy(globalDocReferencesJavaScript, "docReferences = " + globalReferences);
     }
 
+    private void validateTocItemsPresence() {
+        reportPhase("validate TOC items presence");
+        List<TocItem> missingTocItems = toc.getTocItems().stream()
+                .filter(this::isTocItemMissing)
+                .collect(toList());
+
+        if (!missingTocItems.isEmpty()) {
+            String renderedMissingTocItems = "    " + missingTocItems.stream()
+                    .map(tocItem -> tocItem.toString() + ": can't find " +
+                            markupParsingConfiguration.tocItemResourceName(tocItem))
+                    .collect(Collectors.joining("\n    "));
+
+            throw new RuntimeException("\nFollowing Table of Contents entries are missing associated files:\n\n" +
+                    renderedMissingTocItems + "\n");
+        }
+    }
+
+    private boolean isTocItemMissing(TocItem tocItem) {
+        try {
+            markupPath(tocItem);
+        } catch (UnresolvedResourceException e) {
+            return true;
+        }
+
+        return false;
+    }
+
     private void parseMarkupsMeta() {
         reportPhase("parsing markup files meta");
         toc.getTocItems().forEach(this::parseMarkupMetaOnlyAndUpdateTocItem);
@@ -369,21 +437,23 @@ public class WebSite {
     }
 
     private void parseMarkupMetaOnlyAndUpdateTocItem(TocItem tocItem) {
+        Path markupPath = null;
+
         try {
-            Path markupPath = markupPath(tocItem);
+            markupPath = markupPath(tocItem);
             PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPath));
 
             updateTocItemWithPageMeta(tocItem, pageMeta);
         } catch(Exception e) {
-            throw new RuntimeException("error during parsing of page meta <" + tocItem +
-                    ">:" + e.getMessage(), e);
+            throwParsingErrorMessage(tocItem, markupPath, e);
         }
     }
 
     private void parseMarkupAndUpdateTocItemAndSearch(TocItem tocItem) {
-        Path markupPath = markupPath(tocItem);
+        Path markupPath = null;
 
         try {
+            markupPath = markupPath(tocItem);
             Path relativePathToLog = cfg.docRootPath.relativize(markupPath);
 
             ConsoleOutputs.out("parsing ", Color.PURPLE, relativePathToLog);
@@ -402,11 +472,15 @@ public class WebSite {
 
             updateSearchEntries(tocItem, parserResult);
         } catch(Exception e) {
-            throw new RuntimeException("\nmarkup parsing error:\n" +
-                    "    TOC item: " + tocItem + "\n" +
-                    "    path: " + markupPath + "\n" +
-                    "\n" + e.getMessage() + "\n", e);
+            throwParsingErrorMessage(tocItem, markupPath, e);
         }
+    }
+
+    private static void throwParsingErrorMessage(TocItem tocItem, Path markupPath, Throwable e) {
+        throw new RuntimeException("\nmarkup parsing error:\n" +
+                "    TOC item: " + tocItem + "\n" +
+                "    full path: " + markupPath + "\n" +
+                "\n" + e.getMessage() + "\n", e);
     }
 
     private void updateTocItemWithPageMeta(TocItem tocItem, PageMeta pageMeta) {
@@ -558,13 +632,10 @@ public class WebSite {
         });
     }
 
-    private void forEachTocItemWithoutPage(TocItemConsumer consumer) {
-        toc.getTocItems().forEach(tocItem -> {
-            boolean isPagePresent = pageByTocItem.containsKey(tocItem);
-            if (! isPagePresent) {
-                consumer.consume(tocItem);
-            }
-        });
+    private <E> Stream<E> mapEachTocItemWithoutPage(Function<TocItem, E> func) {
+        return toc.getTocItems().stream()
+                .filter(tocItem -> pageByTocItem.containsKey(tocItem))
+                .map(func);
     }
 
     private void validateCollectedLinks() {

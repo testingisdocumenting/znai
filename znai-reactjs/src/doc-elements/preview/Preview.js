@@ -52,6 +52,10 @@ class Server {
                 this.handlers.onMultiplePagesUpdate(data.listOfPageProps)
             }
 
+            if (data.type === 'pagesRemove') {
+                this.handlers.onPagesRemove(data.removedTocItems)
+            }
+
             if (data.type === 'docReferencesUpdate') {
                 this.handlers.onDocReferencesUpdate(data.docReferences)
             }

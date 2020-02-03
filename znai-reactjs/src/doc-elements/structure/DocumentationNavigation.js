@@ -63,6 +63,10 @@ class DocumentationNavigation {
         return this.navigateToUrl(this.buildUrl(id))
     }
 
+    navigateToIndex() {
+        return this.navigateToUrl(this.fullPageUrl(""))
+    }
+
     navigateToUrl(url) {
         window.history.pushState({}, null, url)
         return this.notifyNewUrl(url)

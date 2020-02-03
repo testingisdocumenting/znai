@@ -39,4 +39,50 @@ class TableOfContentsTest {
         toc.contains("chapter1", "page-a", pageSection1.id).should == true
         toc.contains("chapter1", "page-a", "another title").should == false
     }
+
+    @Test
+    void "should detect newly added items by comparing with another toc"() {
+        def toc = new TableOfContents()
+        def updated = new TableOfContents()
+
+        toc.detectNewTocItems(updated).should == []
+
+        toc.addTocItem("chapter1", "page-a")
+        toc.addTocItem("chapter1", "page-b")
+        toc.addTocItem("chapter2", "page-c")
+
+        updated.addTocItem("chapter1", "page-a")
+        updated.addTocItem("chapter1", "page-e")
+        updated.addTocItem("chapter2", "page-c")
+        updated.addTocItem("chapter2", "page-d")
+
+        def newItems = toc.detectNewTocItems(updated)
+        newItems.should == ['dirName'  | 'fileNameWithoutExtension'] {
+                           ________________________________________
+                            'chapter1' | 'page-e'
+                            'chapter2' | 'page-d'  }
+    }
+
+    @Test
+    void "should detect removed items by comparing with another toc"() {
+        def toc = new TableOfContents()
+        def updated = new TableOfContents()
+
+        toc.detectRemovedTocItems(updated).should == []
+
+        toc.addTocItem("chapter1", "page-a")
+        toc.addTocItem("chapter1", "page-e")
+        toc.addTocItem("chapter2", "page-c")
+        toc.addTocItem("chapter2", "page-d")
+
+        updated.addTocItem("chapter1", "page-a")
+        updated.addTocItem("chapter1", "page-b")
+        updated.addTocItem("chapter2", "page-c")
+
+        def removedItems = toc.detectRemovedTocItems(updated)
+        removedItems.should == ['dirName'  | 'fileNameWithoutExtension'] {
+                               ________________________________________
+                                'chapter1' | 'page-e'
+                                'chapter2' | 'page-d'  }
+    }
 }

@@ -29,7 +29,7 @@ import static java.util.stream.Collectors.toList;
 class WebSiteDocStructure implements DocStructure {
     private final ComponentsRegistry componentsRegistry;
     private final DocMeta docMeta;
-    private final TableOfContents toc;
+    private TableOfContents toc;
     private final MarkupParsingConfiguration parsingConfiguration;
     private final List<LinkToValidate> linksToValidate;
     private final Map<String, Path> globalAnchorPathById;
@@ -60,6 +60,10 @@ class WebSiteDocStructure implements DocStructure {
 
     void removeLinksForPath(Path path) {
         linksToValidate.removeIf(linkToValidate -> linkToValidate.path.equals(path));
+    }
+
+    void updateToc(TableOfContents toc) {
+        this.toc = toc;
     }
 
     public void validateCollectedLinks() {

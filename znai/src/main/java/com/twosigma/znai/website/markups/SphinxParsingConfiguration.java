@@ -46,8 +46,13 @@ public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
     }
 
     @Override
+    public String tocItemResourceName(TocItem tocItem) {
+        return tocItem.getFileNameWithoutExtension() + "." + filesExtension();
+    }
+
+    @Override
     public Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem) {
-        return root.resolve(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension() + "." + filesExtension());
+        return root.resolve(tocItem.getDirName()).resolve(tocItemResourceName(tocItem));
     }
 
     @Override
