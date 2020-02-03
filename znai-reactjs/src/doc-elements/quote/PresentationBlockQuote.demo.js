@@ -14,15 +14,24 @@
  * limitations under the License.
  */
 
-.code-line {
-    word-break: keep-all;
-    white-space: pre;
+import {createPresentationDemo} from '../demo-utils/PresentationDemo'
+
+export function blockQuotePresentationDemo(registry) {
+    registry
+        .add('block quote', createPresentationDemo([{
+            type: 'BlockQuote',
+            content: paragraph()
+        }]))
 }
 
-.code-line.highlight {
-    background: var(--znai-snippets-line-highlighted-background-color);
-    margin-left: -16px;
-    padding: 4px 0 4px 16px;
-
-    display: block;
+function paragraph() {
+    return [
+        {
+            type: 'Paragraph',
+            content: [{
+                type: 'SimpleText',
+                text: 'quote text quote text'
+            }]
+        }
+    ]
 }

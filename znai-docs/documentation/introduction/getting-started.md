@@ -30,12 +30,16 @@ To create a minimum set of files for your documentation execute
        |--toc
        |--lookup-paths
        |--meta.json
+
+:include-markdown: {firstAvailable: ["getting-started-scaffolding-maven-override.md", "getting-started-scaffolding-maven.md"]}
        
 # Preview 
 
 Navigate to the newly created directory. Start preview mode by running:
 
 :include-cli-command: znai --preview [--port port-number] 
+
+:include-markdown: {firstAvailable: ["getting-started-preview-maven-override.md", "getting-started-preview-maven.md"]}
 
 The command will output a URL that directs to your preview.  
   
