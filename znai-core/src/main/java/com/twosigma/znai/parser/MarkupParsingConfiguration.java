@@ -29,6 +29,8 @@ public interface MarkupParsingConfiguration {
 
     MarkupParser createMarkupParser(ComponentsRegistry componentsRegistry);
 
+    String tocItemResourceName(TocItem tocItem);
+
     Path fullPath(ComponentsRegistry componentsRegistry, Path root, TocItem tocItem);
 
     TocItem tocItemByPath(ComponentsRegistry componentsRegistry, TableOfContents toc, Path path);

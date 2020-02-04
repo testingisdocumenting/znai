@@ -19,10 +19,10 @@ package com.twosigma.znai.server.preview;
 import com.twosigma.znai.console.ConsoleOutputs;
 import com.twosigma.znai.reference.DocReferences;
 import com.twosigma.znai.structure.DocMeta;
+import com.twosigma.znai.website.TocAddedAndRemovedPages;
 import com.twosigma.znai.website.WebSite;
 import com.twosigma.znai.html.HtmlPageAndPageProps;
 import com.twosigma.znai.html.DocPageReactProps;
-import com.twosigma.znai.structure.TableOfContents;
 import com.twosigma.znai.structure.TocItem;
 import com.twosigma.znai.utils.FileUtils;
 
@@ -49,11 +49,17 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     public void onTocChange(Path tocPath) {
         ConsoleOutputs.out("toc changed: ", tocPath);
         execute(() -> {
-            TableOfContents toc = previewWebSite.updateToc();
-            previewSocket.sendToc(toc);
-            previewSocket.sendPages(toc.getTocItems().stream()
-                    .map(previewWebSite::regeneratePage)
-                    .map(HtmlPageAndPageProps::getProps));
+            TocAddedAndRemovedPages tocAddedAndRemovedPages = previewWebSite.updateToc();
+            previewSocket.sendToc(tocAddedAndRemovedPages.getTableOfContents());
+
+            if (!tocAddedAndRemovedPages.getAddedPagesProps().isEmpty()) {
+                previewSocket.sendPages(tocAddedAndRemovedPages.getAddedPagesProps().stream()
+                        .map(HtmlPageAndPageProps::getProps));
+            }
+
+            if (!tocAddedAndRemovedPages.getRemovedTocItems().isEmpty()) {
+                previewSocket.sendPagesRemove(tocAddedAndRemovedPages.getRemovedTocItems().stream());
+            }
         });
     }
 
@@ -86,7 +92,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
             return null;
         }
 
-        return previewWebSite.regeneratePage(tocItem);
+        return previewWebSite.regenerateAndValidatePageDeployTocAndAllPages(tocItem);
     }
 
     @Override
@@ -127,7 +133,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
 
             dependentTocItems.forEach(System.out::println);
             Stream<DocPageReactProps> generatedPages = dependentTocItems.stream().
-                    map(tocItem -> previewWebSite.regeneratePage(tocItem).getProps());
+                    map(tocItem -> previewWebSite.regenerateAndValidatePageDeployTocAndAllPages(tocItem).getProps());
 
             previewSocket.sendPages(generatedPages);
             previewSocket.sendToc(previewWebSite.getToc());

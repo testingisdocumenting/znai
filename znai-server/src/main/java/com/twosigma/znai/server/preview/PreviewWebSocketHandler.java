@@ -21,6 +21,7 @@ import com.twosigma.znai.reference.DocReferences;
 import com.twosigma.znai.server.sockets.JsonWebSocketHandler;
 import com.twosigma.znai.structure.DocMeta;
 import com.twosigma.znai.structure.TableOfContents;
+import com.twosigma.znai.structure.TocItem;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -48,6 +49,14 @@ public class PreviewWebSocketHandler extends JsonWebSocketHandler {
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "multiplePagesUpdate");
         payload.put("listOfPageProps", listOfPageProps.map(DocPageReactProps::toMap).collect(toList()));
+
+        send(payload);
+    }
+
+    public void sendPagesRemove(Stream<TocItem> removedTocItems) {
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("type", "pagesRemove");
+        payload.put("removedTocItems", removedTocItems.map(TocItem::toMap).collect(toList()));
 
         send(payload);
     }

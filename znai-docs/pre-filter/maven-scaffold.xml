@@ -1,0 +1,10 @@
+<plugin>
+    <groupId>com.twosigma.znai</groupId>
+    <artifactId>znai-maven-plugin</artifactId>
+    <version>${project.version}</version>
+    <configuration>
+        <docId>my-docs</docId>
+        <sourceRoot>\${project.basedir}/documentation</sourceRoot>
+        <port>3333</port>
+    </configuration>
+</plugin>
