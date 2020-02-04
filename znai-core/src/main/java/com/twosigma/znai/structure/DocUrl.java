@@ -18,7 +18,7 @@ package com.twosigma.znai.structure;
 
 public class DocUrl {
     private static final String LINK_TO_SECTION_INSTRUCTION = "To refer to a section of this document use" +
-            " dir-name/file-name[#page-section-id]";
+            " dir-name/file-name[#page-section-id]. Use #page-section-id to refer to the current page section";
 
     private String dirName = "";
     private String fileName = "";
@@ -26,7 +26,8 @@ public class DocUrl {
 
     private String url;
 
-    private boolean isGlobalUrl;
+    private boolean isExternalUrl;
+    private boolean isAnchorOnly;
     private boolean isIndexUrl;
 
     public static DocUrl indexUrl() {
@@ -45,20 +46,39 @@ public class DocUrl {
 
     public DocUrl(String url) {
         this.url = url;
-        if (url.startsWith("http") || url.startsWith("file") || url.startsWith("mailto")) {
-            isGlobalUrl = true;
-            return;
+
+        validateNoRelative();
+
+        boolean handled = handleExternal() ||
+                handleIndex() ||
+                handleAnchorOnly() ||
+                handleLocal();
+
+        if (!handled) {
+            throw new IllegalStateException("couldn't parse url: " + url);
+        }
+    }
+
+    private boolean handleExternal() {
+        return isExternalUrl = url.startsWith("http") || url.startsWith("file") || url.startsWith("mailto");
+    }
+
+    private boolean handleIndex() {
+        return isIndexUrl = url.equals("/");
+    }
+
+    private boolean handleAnchorOnly() {
+        isAnchorOnly = url.startsWith("#");
+        if (isAnchorOnly) {
+            dirName = "";
+            fileName = "";
+            anchorId = url.substring(1);
         }
 
-        if (url.equals("/")) {
-            isIndexUrl = true;
-            return;
-        }
+        return isAnchorOnly;
+    }
 
-        if (url.startsWith("..")) {
-            throw new IllegalArgumentException("Do not use .. based urls: " + url + ". " + LINK_TO_SECTION_INSTRUCTION);
-        }
-
+    private boolean handleLocal() {
         String[] parts = url.split("/");
         if (parts.length != 2) {
             throw new IllegalArgumentException("Unexpected url pattern: " + url + ". " + LINK_TO_SECTION_INSTRUCTION);
@@ -70,14 +90,26 @@ public class DocUrl {
 
         fileName = idxOfAnchorSep == -1 ? parts[1] : parts[1].substring(0, idxOfAnchorSep);
         anchorId = idxOfAnchorSep == -1 ? "" : parts[1].substring(idxOfAnchorSep + 1);
+
+        return true;
+    }
+
+    private void validateNoRelative() {
+        if (url.startsWith("..")) {
+            throw new IllegalArgumentException("Do not use .. based urls: " + url + ". " + LINK_TO_SECTION_INSTRUCTION);
+        }
     }
 
     public boolean isIndexUrl() {
         return isIndexUrl;
     }
 
-    public boolean isGlobalUrl() {
-        return isGlobalUrl;
+    public boolean isExternalUrl() {
+        return isExternalUrl;
+    }
+
+    public boolean isAnchorOnly() {
+        return isAnchorOnly;
     }
 
     public String getDirName() {
@@ -90,6 +122,10 @@ public class DocUrl {
 
     public String getAnchorId() {
         return anchorId;
+    }
+
+    public String getAnchorIdWithHash() {
+        return anchorId.isEmpty() ?  "" : "#" + anchorId;
     }
 
     public String getUrl() {

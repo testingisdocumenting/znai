@@ -6,7 +6,7 @@ Use `include-jupyter` to include [Jupyter](http://jupyter.org/) notebook inside 
     
 :include-jupyter: jupyter/simple-notebook.ipynb
 
-Note: Remember that you can define lookup paths for files like notebooks inside `lookup-paths` file, so you don't have
+Note: Remember that you can define lookup paths for files like notebooks inside [lookup-paths](flow/lookup-paths) file, so you don't have
 to copy and paste notebooks to your documentation directory.
 
 # Seamless Markdown Integration
@@ -18,6 +18,7 @@ become part of Table Of Contents and part of a search unit.
 
     :include-jupyter: notebook-with-markdown-story.ipynb
 
+Note: below text is auto generated, including the **Panda** section 
 :include-jupyter: src/test/resources/notebook-with-markdown-story.ipynb
      
 # Two Sides

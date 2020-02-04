@@ -17,7 +17,6 @@
 package com.twosigma.znai.website
 
 import com.twosigma.znai.parser.PageSectionIdTitle
-import com.twosigma.znai.parser.TestComponentsRegistry
 import com.twosigma.znai.structure.DocMeta
 import com.twosigma.znai.structure.DocUrl
 import com.twosigma.znai.structure.TableOfContents
@@ -30,6 +29,7 @@ import java.nio.file.Paths
 
 import static com.twosigma.webtau.Matchers.code
 import static com.twosigma.webtau.Matchers.throwException
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class WebSiteDocStructureTest {
     static DocMeta docMeta
@@ -39,7 +39,8 @@ class WebSiteDocStructureTest {
 
     @BeforeClass
     static void init() {
-        docMeta = new DocMeta([id: 'product'])
+        docMeta = new DocMeta([:])
+        docMeta.setId('product')
 
         toc = new TableOfContents()
         toc.addTocItem('chapter', 'pageOne')
@@ -49,7 +50,18 @@ class WebSiteDocStructureTest {
 
     @Before
     void reCreateDocStructure() {
-        docStructure = new WebSiteDocStructure(TestComponentsRegistry.INSTANCE, docMeta, toc, new MarkdownParsingConfiguration())
+        docStructure = new WebSiteDocStructure(TEST_COMPONENTS_REGISTRY, docMeta, toc, new MarkdownParsingConfiguration())
+    }
+
+    @Test
+    void "should create full url based on url type"() {
+        def path = Paths.get('/home/user/docs/chapter/pageOne.md')
+
+        docStructure.createUrl(path, new DocUrl("/")).should == "/product"
+        docStructure.createUrl(path, new DocUrl("https://abc")).should == "https://abc"
+        docStructure.createUrl(path, new DocUrl("#anchor")).should == "/product/chapter/pageOne#anchor"
+        docStructure.createUrl(path, new DocUrl("test/page")).should == "/product/test/page"
+        docStructure.createUrl(path, new DocUrl("test/page#anchor")).should == "/product/test/page#anchor"
     }
 
     @Test
@@ -62,13 +74,14 @@ class WebSiteDocStructureTest {
         docStructure.validateUrl(pageOnePath, 'section title', new DocUrl('chapter/pageOne#functionRefId'))
         docStructure.validateUrl(pageOnePath, 'section title', new DocUrl('chapter/pageOne#localId'))
         docStructure.validateUrl(pageOnePath, 'section title', new DocUrl('chapter/pageTwo#test-section'))
+        docStructure.validateUrl(pageTwoPath, 'section title', new DocUrl('#test-section'))
         docStructure.validateCollectedLinks()
     }
 
     @Test
     void "should reject link that has no associated toc item"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.validateUrl(path, 'section title', new DocUrl('chapter/unknown-page'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('chapter/unknown-page'))
 
         code {
             docStructure.validateCollectedLinks()
@@ -77,13 +90,17 @@ class WebSiteDocStructureTest {
     }
 
     @Test
-    void "should reject link that has no associated global anchor"() {
+    void "should reject link that has no associated anchor"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.validateUrl(path, 'section title', new DocUrl('chapter/pageOne#wrongRefId'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('chapter/pageOne#wrongRefId'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('#anotherWrongRefId'))
 
         code {
             docStructure.validateCollectedLinks()
-        } should throwException("can't find a page associated with: chapter/pageOne#wrongRefId\n" +
-                "check file: /home/user/docs/chapter/pageOne.md, section title: section title\n")
+        } should throwException('can\'t find a page associated with: chapter/pageOne#wrongRefId\n' +
+                'check file: /home/user/docs/chapter/pageOne.md, section title: section title\n' +
+                '\n' +
+                'can\'t find the anchor #anotherWrongRefId\n' +
+                'check file: /home/user/docs/chapter/pageOne.md, section title: section title\n')
     }
 }

@@ -14,7 +14,26 @@
  * limitations under the License.
  */
 
-function splitTextIntoLines(text, thresholdCharCount) {
+function splitAndTrimEmptyLines(text) {
+    const lines = text.split('\n')
+    let startIdx = 0
+    for (; startIdx < lines.length; startIdx++) {
+        if (lines[startIdx].trim() !== '') {
+            break;
+        }
+    }
+
+    let endIdx = lines.length - 1;
+    for (; endIdx >=0; endIdx--) {
+        if (lines[endIdx].trim() !== '') {
+            break
+        }
+    }
+
+    return lines.slice(startIdx, endIdx + 1)
+}
+
+function splitTextIntoLinesUsingThreshold(text, thresholdCharCount) {
     if (text.length < thresholdCharCount) {
         return [text]
     }
@@ -64,4 +83,4 @@ function splitParts({parts, lengthFunc, valueFunc, thresholdCharCount, splitAfte
     }
 }
 
-export {splitTextIntoLines, splitParts}
+export { splitAndTrimEmptyLines, splitTextIntoLinesUsingThreshold, splitParts }

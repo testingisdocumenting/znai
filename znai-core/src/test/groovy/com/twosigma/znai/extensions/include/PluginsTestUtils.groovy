@@ -19,12 +19,13 @@ package com.twosigma.znai.extensions.include
 import com.twosigma.znai.core.AuxiliaryFile
 import com.twosigma.znai.extensions.PluginParams
 import com.twosigma.znai.extensions.Plugins
-import com.twosigma.znai.parser.TestComponentsRegistry
 import com.twosigma.znai.parser.docelement.DocElement
 import com.twosigma.znai.parser.docelement.DocElementCreationParserHandler
 
 import java.nio.file.Paths
 import java.util.stream.Stream
+
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class PluginsTestUtils {
     static class IncludePluginAndParserHandler {
@@ -32,9 +33,13 @@ class PluginsTestUtils {
         DocElementCreationParserHandler parserHandler
     }
 
-    static String processAndGetSimplifiedCodeBlock(String pluginDef) {
+    static Map<String, Object> processAndGetProps(String pluginDef) {
         def result = process(pluginDef)
-        return result[0].getProps().snippet
+        return result[0].getProps()
+    }
+
+    static String processAndGetSimplifiedCodeBlock(String pluginDef) {
+        return processAndGetProps(pluginDef).snippet
     }
 
     static List<DocElement> process(String pluginDef) {
@@ -44,7 +49,7 @@ class PluginsTestUtils {
 
     static Stream<AuxiliaryFile> processAndGetAuxiliaryFiles(String pluginDef) {
         def includePluginAndParserHandler = processAndGetPluginAndParserHandler(pluginDef)
-        return includePluginAndParserHandler.includePlugin.auxiliaryFiles(TestComponentsRegistry.INSTANCE)
+        return includePluginAndParserHandler.includePlugin.auxiliaryFiles(TEST_COMPONENTS_REGISTRY)
     }
 
     static IncludePlugin processAndGetIncludePlugin(String pluginDef) {
@@ -54,13 +59,13 @@ class PluginsTestUtils {
 
     static IncludePluginAndParserHandler processAndGetPluginAndParserHandler(String pluginDef) {
         DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(
-                TestComponentsRegistry.INSTANCE,
+                TEST_COMPONENTS_REGISTRY,
                 Paths.get(""))
 
         PluginParams includeParams = IncludePluginParser.parse(pluginDef)
         def includePlugin = Plugins.includePluginById(includeParams.pluginId)
 
-        def pluginResult = includePlugin.process(TestComponentsRegistry.INSTANCE, parserHandler, Paths.get(""), includeParams)
+        def pluginResult = includePlugin.process(TEST_COMPONENTS_REGISTRY, parserHandler, Paths.get(""), includeParams)
 
         parserHandler.onIncludePlugin(includePlugin, pluginResult)
 

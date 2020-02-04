@@ -21,7 +21,10 @@ import com.twosigma.znai.core.AuxiliaryFile
 import com.twosigma.znai.core.ComponentsRegistry
 import com.twosigma.znai.extensions.PluginParams
 import com.twosigma.znai.extensions.PluginResult
-import com.twosigma.znai.extensions.file.CodeReferencesTrait
+import com.twosigma.znai.extensions.features.PluginFeatureList
+import com.twosigma.znai.extensions.file.CodeReferencesFeature
+import com.twosigma.znai.extensions.file.SnippetContentProvider
+import com.twosigma.znai.extensions.file.SnippetHighlightFeature
 import com.twosigma.znai.extensions.include.IncludePlugin
 import com.twosigma.znai.groovy.parser.GroovyCode
 import com.twosigma.znai.parser.ParserHandler
@@ -30,9 +33,12 @@ import com.twosigma.znai.parser.docelement.DocElementType
 import java.nio.file.Path
 import java.util.stream.Stream
 
-class GroovyIncludePlugin implements IncludePlugin {
+class GroovyIncludePlugin implements IncludePlugin, SnippetContentProvider {
+    private String path
     private Path fullPath
-    private CodeReferencesTrait codeReferences
+    private PluginFeatureList features
+
+    private String content
 
     @Override
     String id() {
@@ -49,8 +55,13 @@ class GroovyIncludePlugin implements IncludePlugin {
                          ParserHandler parserHandler,
                          Path markupPath,
                          PluginParams pluginParams) {
-        codeReferences = new CodeReferencesTrait(componentsRegistry, pluginParams)
-        fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam())
+        features = new PluginFeatureList(
+                new SnippetHighlightFeature(componentsRegistry, pluginParams, this),
+                new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)
+        )
+
+        path = pluginParams.getFreeParam()
+        fullPath = componentsRegistry.resourceResolver().fullPath(path)
         String fileContent = componentsRegistry.resourceResolver().textContent(fullPath)
         String entry = pluginParams.getOpts().get("entry")
 
@@ -58,19 +69,18 @@ class GroovyIncludePlugin implements IncludePlugin {
 
         Boolean bodyOnly = pluginParams.getOpts().has("bodyOnly") ? pluginParams.getOpts().get("bodyOnly") : false
 
+        content = extractContent(groovyCode, entry, bodyOnly)
         Map<String, Object> props = CodeSnippetsProps.create("groovy",
-                extractContent(groovyCode, entry, bodyOnly))
+                content)
         props.putAll(pluginParams.getOpts().toMap())
-        codeReferences.updateProps(props)
+        features.updateProps(props)
 
         return PluginResult.docElement(DocElementType.SNIPPET, props)
     }
 
     @Override
     Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.concat(
-                Stream.of(AuxiliaryFile.builtTime(fullPath)),
-                codeReferences.auxiliaryFiles())
+        return features.combineAuxiliaryFilesWith(Stream.of(AuxiliaryFile.builtTime(fullPath)))
     }
 
     private static String extractContent(GroovyCode groovyCode, String entry, Boolean bodyOnly) {
@@ -97,5 +107,15 @@ class GroovyIncludePlugin implements IncludePlugin {
         return bodyOnly ?
                 method.bodyOnly :
                 method.fullBody
+    }
+
+    @Override
+    String snippetContent() {
+        return content
+    }
+
+    @Override
+    String snippetId() {
+        return path
     }
 }

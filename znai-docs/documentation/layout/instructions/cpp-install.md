@@ -1,4 +1,4 @@
-First you need to download CLion and then run following using your terminal
+First you need to download CLion and then run the following using your terminal
 
     $ pwd
     $ whoami

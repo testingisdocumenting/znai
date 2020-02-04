@@ -22,16 +22,15 @@ import com.twosigma.znai.parser.MarkupParsingConfiguration;
 
 import java.nio.file.Path;
 import java.util.*;
-import java.util.function.Supplier;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 class WebSiteDocStructure implements DocStructure {
-    private ComponentsRegistry componentsRegistry;
+    private final ComponentsRegistry componentsRegistry;
     private final DocMeta docMeta;
     private TableOfContents toc;
-    private MarkupParsingConfiguration parsingConfiguration;
+    private final MarkupParsingConfiguration parsingConfiguration;
     private final List<LinkToValidate> linksToValidate;
     private final Map<String, Path> globalAnchorPathById;
     private final Map<TocItem, List<String>> localAnchorIdsByTocItem;
@@ -55,6 +54,18 @@ class WebSiteDocStructure implements DocStructure {
         entriesForPath.forEach(kv -> globalAnchorPathById.remove(kv.getKey()));
     }
 
+    void removeLocalAnchorsForTocItem(TocItem tocItem) {
+        localAnchorIdsByTocItem.remove(tocItem);
+    }
+
+    void removeLinksForPath(Path path) {
+        linksToValidate.removeIf(linkToValidate -> linkToValidate.path.equals(path));
+    }
+
+    void updateToc(TableOfContents toc) {
+        this.toc = toc;
+    }
+
     public void validateCollectedLinks() {
         String validationErrorMessage = linksToValidate.stream()
                 .map(this::validateLink)
@@ -63,23 +74,22 @@ class WebSiteDocStructure implements DocStructure {
                 .collect(joining("\n\n"));
 
         if (!validationErrorMessage.isEmpty()) {
-            throw new IllegalArgumentException(validationErrorMessage  + "\n");
+            throw new IllegalArgumentException(validationErrorMessage + "\n");
         }
     }
 
     @Override
-    public void validateUrl(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
-        if (docUrl.isGlobalUrl() || docUrl.isIndexUrl()) {
+    public void validateUrl(Path path, String additionalClue, DocUrl docUrl) {
+        if (docUrl.isExternalUrl() || docUrl.isIndexUrl()) {
             return;
         }
 
-        linksToValidate.add(new LinkToValidate(path, sectionWithLinkTitle, docUrl));
+        linksToValidate.add(new LinkToValidate(path, additionalClue, docUrl));
     }
 
-
     @Override
-    public String createUrl(DocUrl docUrl) {
-        if (docUrl.isGlobalUrl()) {
+    public String createUrl(Path path, DocUrl docUrl) {
+        if (docUrl.isExternalUrl()) {
             return docUrl.getUrl();
         }
 
@@ -87,8 +97,7 @@ class WebSiteDocStructure implements DocStructure {
             return "/" + docMeta.getId();
         }
 
-        String base = docUrl.getDirName() + "/" + docUrl.getFileName();
-        return fullUrl(base + (docUrl.getAnchorId().isEmpty() ? "" : "#" + docUrl.getAnchorId()));
+        return fullUrl(createUrlBase(path, docUrl) + docUrl.getAnchorIdWithHash());
     }
 
     @Override
@@ -127,7 +136,7 @@ class WebSiteDocStructure implements DocStructure {
         }
 
         TocItem tocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, anchorPath);
-        return createUrl(new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), anchorId));
+        return createUrl(anchorPath, new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), anchorId));
     }
 
     @Override
@@ -138,15 +147,11 @@ class WebSiteDocStructure implements DocStructure {
     private Optional<String> validateLink(LinkToValidate link) {
         String anchorId = link.docUrl.getAnchorId();
 
-        String url = link.docUrl.getDirName() + "/" + link.docUrl.getFileName() +
-                (anchorId.isEmpty() ?  "" : "#" + anchorId);
-
-        Supplier<String> validationMessage = () -> "can't find a page associated with: " + url +
-                "\ncheck file: " + link.path + ", section title: " + link.sectionWithLinkTitle;
-
-        TocItem tocItem = toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileName());
+        TocItem tocItem = link.docUrl.isAnchorOnly() ?
+                parsingConfiguration.tocItemByPath(componentsRegistry, toc, link.path):
+                toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileName());
         if (tocItem == null) {
-            return Optional.of(validationMessage.get());
+            return Optional.of(createInvalidLinkMessage(link));
         }
 
         if (anchorId.isEmpty()) {
@@ -161,11 +166,19 @@ class WebSiteDocStructure implements DocStructure {
             return Optional.empty();
         }
 
-        if (tocItem.hasPageSection(anchorId)) {
-            return Optional.empty();
+        return Optional.of(createInvalidLinkMessage(link));
+    }
+
+    private String createInvalidLinkMessage(LinkToValidate link) {
+        String checkFileMessage = "\ncheck file: " + link.path + (
+                link.additionalClue.isEmpty() ? "" : ", " + link.additionalClue);
+
+        if (link.docUrl.isAnchorOnly()) {
+            return "can't find the anchor " + link.docUrl.getAnchorIdWithHash() + checkFileMessage;
         }
 
-        return Optional.of(validationMessage.get());
+        String url = link.docUrl.getDirName() + "/" + link.docUrl.getFileName() + link.docUrl.getAnchorIdWithHash();
+        return "can't find a page associated with: " + url + checkFileMessage;
     }
 
     private boolean isValidGlobalAnchor(TocItem tocItemWithAnchor, String anchorId) {
@@ -183,14 +196,26 @@ class WebSiteDocStructure implements DocStructure {
         return localIds != null && localIds.contains(anchorId);
     }
 
-    private class LinkToValidate {
+    private String createUrlBase(Path path, DocUrl docUrl) {
+        if (docUrl.isAnchorOnly()) {
+            TocItem tocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, path);
+
+            return tocItem == null ?
+                    "<should not happen>":
+                    tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension();
+        }
+
+        return docUrl.getDirName() + "/" + docUrl.getFileName();
+    }
+
+    private static class LinkToValidate {
         private final Path path;
-        private final String sectionWithLinkTitle;
+        private final String additionalClue;
         private final DocUrl docUrl;
 
-        LinkToValidate(Path path, String sectionWithLinkTitle, DocUrl docUrl) {
+        LinkToValidate(Path path, String additionalClue, DocUrl docUrl) {
             this.path = path;
-            this.sectionWithLinkTitle = sectionWithLinkTitle;
+            this.additionalClue = additionalClue;
             this.docUrl = docUrl;
         }
     }

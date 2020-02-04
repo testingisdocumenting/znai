@@ -48,6 +48,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
     private Path filePath;
     private List<Path> nodeLibPath;
     private DocStructure docStructure;
+    private Path markupPath;
 
     @Override
     public String id() {
@@ -64,6 +65,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
+        this.markupPath = markupPath;
         filePath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         docStructure = componentsRegistry.docStructure();
 
@@ -104,7 +106,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
     }
 
     private void validateUrls(Path markupPath, Map<String, String> urls) {
-        urls.values().forEach(url -> docStructure.validateUrl(markupPath, "<flow-diagram>", new DocUrl(url)));
+        urls.values().forEach(url -> docStructure.validateUrl(markupPath, "inside :include-flow-chart:", new DocUrl(url)));
     }
 
     private Map<String, String> convertUrls(Map<String, String> urls) {
@@ -125,7 +127,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
     }
 
     private String buildUrl(Map.Entry<String, String> entry) {
-        return docStructure.createUrl(new DocUrl(entry.getValue()));
+        return docStructure.createUrl(markupPath, new DocUrl(entry.getValue()));
     }
 
     @Override

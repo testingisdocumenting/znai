@@ -45,6 +45,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.twosigma.znai</groupId>
+            <artifactId>znai-core</artifactId>
+            <type>test-jar</type>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.twosigma.webtau</groupId>
             <artifactId>webtau-core-groovy</artifactId>
             <scope>test</scope>

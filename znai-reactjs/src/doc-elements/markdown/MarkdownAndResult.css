@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+.markdown-and-result {
+    margin-bottom: 16px;
+}
+
 .markdown-and-result .snippet {
     margin: 0 0;
 }

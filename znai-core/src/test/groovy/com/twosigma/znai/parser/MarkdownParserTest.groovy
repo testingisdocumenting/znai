@@ -21,10 +21,12 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-import static com.twosigma.webtau.Matchers.*
+import static com.twosigma.webtau.Matchers.code
+import static com.twosigma.webtau.Matchers.throwException
+import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkdownParserTest {
-    static final TestComponentsRegistry componentsRegistry = TestComponentsRegistry.INSTANCE
+    static final TestComponentsRegistry componentsRegistry = TEST_COMPONENTS_REGISTRY
     static final MarkupParser parser = new MarkdownParser(componentsRegistry)
 
     private List<Map> content
@@ -70,17 +72,17 @@ class MarkdownParserTest {
     void "link to a non existing within documentation location"() {
         code {
             parse("# wrong link\n\n[label](dir-name/non-existing-file-name)")
-        } should throwException(~/no valid link found in section 'wrong link': dir-name\/non-existing-file-name$/)
+        } should throwException(~/no valid link found in test.md, section title: wrong link: dir-name\/non-existing-file-name$/)
 
         code {
             parse("[label](dir-name/non-existing-file-name#page-section)")
-        } should throwException(~/no valid link found in section '': dir-name\/non-existing-file-name#page-section$/)
+        } should throwException(~/no valid link found in test\.md, section title: : dir-name\/non-existing-file-name#page-section$/)
     }
 
     @Test
     void "link to an existing within documentation location"() {
-        componentsRegistry.validator.addValidLink("valid-dir-name/page-name")
-        componentsRegistry.validator.addValidLink("valid-dir-name/page-name#page-section")
+        componentsRegistry.docStructure().addValidLink("valid-dir-name/page-name")
+        componentsRegistry.docStructure().addValidLink("valid-dir-name/page-name#page-section")
 
         parse("[label](valid-dir-name/page-name)")
         content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name', isFile: false,
@@ -223,7 +225,7 @@ world""")
 
     @Test
     void "inlined image"() {
-        TestComponentsRegistry.INSTANCE.timeService().fakedFileTime = 300000
+        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 300000
 
         parse("text ![alt text](images/png-test.png \"custom title\") another text")
         content.should == [[type: 'Paragraph', content:[
@@ -235,7 +237,7 @@ world""")
 
     @Test
     void "standalone image"() {
-        TestComponentsRegistry.INSTANCE.timeService().fakedFileTime = 200000
+        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 200000
 
         parse("![alt text](images/png-test.png \"custom title\")")
         content.should == [[title: "custom title", destination: '/test-doc/png-test.png',

@@ -84,7 +84,7 @@
 .token.highlighted {
     padding: 2px 2px;
     border-radius: 4px;
-    background-color: var(--znai-highlighted-background-color);
+    background-color: var(--znai-token-highlight-background-color);
 }
 
 .code-line .token.url,

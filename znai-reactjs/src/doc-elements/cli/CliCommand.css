@@ -53,7 +53,7 @@
 }
 
 .cli-command .highlight {
-    color: var(--znai-token-param-highlight-color);
+    color: var(--znai-cli-command-param-highlight-color);
     font-weight: bold;
 }
 

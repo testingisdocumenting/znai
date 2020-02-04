@@ -1,7 +1,7 @@
 # Embedding Content
 
 To reduce documentation maintenance burden avoid copy and paste of code snippets.
-Embed content by referencing existing files using `:include-file:` plugin instead.  
+Embed content by referencing existing files using the `:include-file:` plugin instead.  
 
     :include-file: file-name.js
     
@@ -9,7 +9,7 @@ This `include-` syntax will appear throughout the documentation and represents a
 
 :include-file: file-name.js
 
-File will be looked up using following rules:
+The file will be looked up using following rules:
 * directory with a markup file
 * root directory of a documentation
 * all lookup paths listed in a `lookup-paths` file
@@ -18,23 +18,23 @@ File will be looked up using following rules:
 
     :include-file: file-name.js {title: "ES6 class"} 
 
-Use `title` property to specify a title.
+Use the `title` property to specify a title.
 
 :include-file: file-name.js {title: "ES6 class"} 
 
 # Wide Code
 
-Use `wide` option to stretch wide code to occupy as much horizontal screen real estate as possible.  
+Use the `wide` option to stretch wide code to occupy as much horizontal screen real estate as possible.  
 
     :include-file: WideCode.java {wide: true}
     
 :include-file: WideCode.java {wide: true}
 
-Without `wide` option code will be aligned with the rest of the text and users can use scrollbars.   
+Without the `wide` option code will be aligned with the rest of the text and users can use scrollbars.   
 
 :include-file: WideCode.java
 
-Note: Good placement of a *Wide Code* is at the end of a page or a section to show the full version of a code sample.
+Note: Good placement of a *Wide Code* element is at the end of a page or a section to show the full version of a code sample.
 
 # Read More
 
@@ -47,7 +47,7 @@ option with an **optional** `readMoreVisibleLines` option to specify a number of
 
 # Highlights
 
-Use `highlight` option to bring readers attention to the important lines.
+Use the `highlight` option to bring readers attention to the important lines.
 
     :include-file: file-name.js {highlight: "export"}
 
@@ -60,7 +60,15 @@ Additionally you can combine two approaches and pass a list of things to highlig
 
 :include-file: file-name.js {highlight: ["export", 1]}
 
-Note: Order of lines to highlight is reflected during presentation mode 
+Note: Order of lines to highlight is reflected during presentation mode
+
+Use the `highlightPath` option to highlight lines specified in a separate file. 
+
+    :include-file: file-name.js {highlightPath: "lines-to-highlight.txt"}
+    
+:include-file: file-name.js {highlightPath: "lines-to-highlight.txt"}
+
+:include-file: lines-to-highlight.txt {title: "lines-to-highlight.txt"}
 
 # Callout Comments
 
@@ -81,10 +89,10 @@ It will be rendered as
 
 # Spoilers
 
-Set `spoiler` property to initially hide explanations. It may be useful when teaching or class.
+Set the `spoiler` property to initially hide explanations. It may be useful when teaching.
 
     :include-file: file-name-with-comments.js {commentsType: "inline", spoiler: true}
 
-Click on the spoiler to reveal the explanations.
+Click on the spoiler to reveal the explanations:
 
 :include-file: file-name-with-comments.js {commentsType: "inline", spoiler: true}

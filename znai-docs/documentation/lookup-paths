@@ -5,4 +5,5 @@
 ../../znai-testing-examples/src/test/groovy
 ../../znai-testing-examples/src/test/java
 ../../znai-testing-examples/target/test-classes
+../target/classes
 https://raw.githubusercontent.com/twosigma/webtau/master

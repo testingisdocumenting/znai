@@ -22,14 +22,12 @@ import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.java.parser.JavaCode;
 import com.twosigma.znai.java.parser.JavaMethod;
 import com.twosigma.znai.java.parser.JavaMethodReturn;
-import com.twosigma.znai.java.parser.html.HtmlToDocElementConverter;
 import com.twosigma.znai.parser.docelement.DocElement;
 
 import java.util.List;
 import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 
 public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
     @Override
@@ -53,7 +51,8 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
         });
 
         Map<String, Object> props = apiParameters.toMap();
-        codeReferencesTrait.updateProps(props);
+        codeReferencesFeature.updateProps(props);
+        props.putAll(pluginParams.getOpts().toMap());
 
         List<DocElement> docElements =
                 PluginResult.docElement("ApiParameters", props).getDocElements();
@@ -84,11 +83,5 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
 
         apiParameters.add("return", methodReturn.getType(),
                 javaDocTextToDocElements(methodReturn.getJavaDocText()));
-    }
-
-    private List<Map<String, Object>> javaDocTextToDocElements(String text) {
-        return HtmlToDocElementConverter.convert(componentsRegistry, markupPath, text).stream()
-                .map(DocElement::toMap)
-                .collect(toList());
     }
 }

@@ -21,6 +21,7 @@ import com.twosigma.znai.core.AuxiliaryFile;
 import com.twosigma.znai.core.ComponentsRegistry;
 import com.twosigma.znai.extensions.PluginParams;
 import com.twosigma.znai.extensions.PluginResult;
+import com.twosigma.znai.extensions.features.PluginFeatureList;
 import com.twosigma.znai.extensions.include.IncludePlugin;
 import com.twosigma.znai.parser.ParserHandler;
 import com.twosigma.znai.parser.docelement.DocElementType;
@@ -31,11 +32,11 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class FileIncludePlugin implements IncludePlugin {
+public class FileIncludePlugin implements IncludePlugin, SnippetContentProvider {
     private String fileName;
     private String text;
 
-    private CodeReferencesTrait codeReferencesTrait;
+    private PluginFeatureList features;
 
     @Override
     public String id() {
@@ -52,7 +53,11 @@ public class FileIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        codeReferencesTrait = new CodeReferencesTrait(componentsRegistry, pluginParams);
+        features = new PluginFeatureList(
+                new SnippetHighlightFeature(componentsRegistry, pluginParams, this),
+                new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)
+        );
+
         fileName = pluginParams.getFreeParam();
 
         text = FilePlugin.extractText(
@@ -64,24 +69,21 @@ public class FileIncludePlugin implements IncludePlugin {
 
         Map<String, Object> props = CodeSnippetsProps.create(langToUse, text);
         props.putAll(pluginParams.getOpts().toMap());
-        codeReferencesTrait.updateProps(props);
+        features.updateProps(props);
 
         return PluginResult.docElement(DocElementType.SNIPPET, props);
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.concat(
-                Stream.of(AuxiliaryFile.builtTime(
-                        componentsRegistry.resourceResolver().fullPath(fileName))),
-                codeReferencesTrait.auxiliaryFiles());
+        return features.combineAuxiliaryFilesWith(
+                Stream.of(AuxiliaryFile.builtTime(componentsRegistry.resourceResolver().fullPath(fileName))));
     }
 
     @Override
     public SearchText textForSearch() {
         return SearchScore.STANDARD.text(text);
     }
-
 
     private static String langFromFileName(String fileName) {
         String ext = extFromFileName(fileName);
@@ -98,5 +100,15 @@ public class FileIncludePlugin implements IncludePlugin {
         }
 
         return fileName.substring(dotLastIdx + 1);
+    }
+
+    @Override
+    public String snippetContent() {
+        return text;
+    }
+
+    @Override
+    public String snippetId() {
+        return fileName;
     }
 }

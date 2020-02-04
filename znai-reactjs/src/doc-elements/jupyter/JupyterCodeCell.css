@@ -15,6 +15,6 @@
  */
 
 .page-two-sides-layout .jupyter-cell {
-    --znai-snippets-space-above: 5px;
-    --znai-snippets-space-below: 5px;
+    --znai-snippets-space-above: 10px;
+    --znai-snippets-space-below: 10px;
 }

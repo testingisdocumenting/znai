@@ -60,6 +60,22 @@ public class TableOfContents {
         tocItems.set(idx, new TocItem(newDirName, newFileNameWithoutExtension));
     }
 
+    public List<TocItem> detectNewTocItems(TableOfContents newToc) {
+        Set<TocItem> existingItems = new LinkedHashSet<>(this.tocItems);
+        Set<TocItem> newItems = new LinkedHashSet<>(newToc.tocItems);
+
+        newItems.removeAll(existingItems);
+        return new ArrayList<>(newItems);
+    }
+
+    public List<TocItem> detectRemovedTocItems(TableOfContents newToc) {
+        Set<TocItem> existingItems = new LinkedHashSet<>(this.tocItems);
+        Set<TocItem> newItems = new LinkedHashSet<>(newToc.tocItems);
+
+        existingItems.removeAll(newItems);
+        return new ArrayList<>(existingItems);
+    }
+
     public TocItem getIndex() {
         if (tocItems.isEmpty()) {
             return null;
