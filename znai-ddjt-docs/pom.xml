@@ -31,6 +31,7 @@
             <groupId>com.twosigma.znai</groupId>
             <artifactId>znai-testing-examples</artifactId>
             <version>${project.version}</version>
+            <type>test-jar</type>
         </dependency>
     </dependencies>
 
