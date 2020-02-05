@@ -48,7 +48,7 @@ class Search {
 
         const matching = []
 
-        this.allPages.forEach((p) => {
+        this.allPages.pages.forEach((p) => {
             const tocItem = p.tocItem
 
             const sections = p.content.filter((de) => {
