@@ -20,7 +20,7 @@
 
     <groupId>com.twosigma.znai</groupId>
     <artifactId>znai-parent</artifactId>
-    <version>1.26</version>
+    <version>1.27-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Znai</name>
@@ -64,7 +64,7 @@
         <url>https://github.com/twosigma/znai</url>
         <connection>scm:git:https://github.com/twosigma/znai.git</connection>
         <developerConnection>scm:git:https://github.com/twosigma/znai.git</developerConnection>
-        <tag>1.26</tag>
+        <tag>1.20</tag>
     </scm>
 
     <distributionManagement>
