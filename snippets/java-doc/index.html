@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Java Doc</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Class Level</h1></header>
+<p>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use JavaDoc strings to explain certain concepts of your system. /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } Instead of copy-and-pasting text between sources, you can refer to it inside your documentation. :include-java-doc: HelloWorld.java Text bellow is extracted from top class level JavaDoc null</p>
+</article>
+
+<article>
+<header><h1>Method Level</h1></header>
+<p>Method level JavaDoc text can be referred to as well by specifying the entry parameter. :include-java-doc: HelloWorld.java {entry: &quot;sampleMethod&quot;} Text bellow is extracted from sampleMethod method JavaDoc sampleMethod</p>
+</article>
+
+<article>
+<header><h1>Field Level</h1></header>
+<p>:include-java-doc: HelloWorld.java {entry: &quot;numberOfStudents&quot;} numberOfStudents</p>
+</article>
+
+<article>
+<header><h1>Handling Links</h1></header>
+<p>Links defined with {@link MyClass} are automatically converted to snippets/inlined-code-snippets Inlined Code and become MyClass . To turn MyClass into a link you need to use snippets/code-references Code References.Use the referencesPath value to associate {@link CustomDomain} with the documentation link: CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#buy SELL, example-references/domain#sell Alternatively you can define snippets/code-references#global-references Global References to turn MyClass into a link.</p>
+</article>
+
+<article>
+<header><h1>Method Params</h1></header>
+<p>:include-java-doc-params: HelloWorld.java {entry: &quot;sampleMethod&quot;} p1 String important parameter of something p2 int sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe return String name of the &lt;b&gt;best&lt;/b&gt; sample Use the title parameter to specify a title. :include-java-doc-params: HelloWorld.java {entry: &quot;importantAction&quot;, title: &quot;Trading Required Parameters&quot;} trader Trader trader that performs action transaction Transaction transaction to perform action on</p>
+</article>
+
+<article>
+<header><h1>Method Params With References</h1></header>
+<p>Use the snippets/code-references Code References file to link method parameters to reference pages.To do that, define references in a CSV file, using a two column format: type-or-variable-name, link . CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#buy SELL, example-references/domain#sell :include-java-doc-params: HelloWorld.java { entry: &quot;importantAction&quot;, title: &quot;Trading Required Parameters&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot;} trader Trader trader that performs action transaction Transaction transaction to perform action on Parameters are now linked with a reference section for the documentation.</p>
+</article>
+
+<article>
+<header><h1>Enum Entries</h1></header>
+<p>Use include-java-enum-entries to enumerate entries of a enum from a file. package my.company; enum MyEnum { /** * description of &lt;b&gt;entry one&lt;/b&gt; */ ENTRY_ONE, /** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt;/li&gt; * &lt;li&gt;item two&lt;/li&gt; * &lt;/ul&gt; */ ENTRY_TWO, /** * Don't use, instead use ENTRY_TWO */ @Deprecated ENTRY_THREE } :include-java-enum-entries: MyEnum.java ENTRY_ONE description of &lt;b&gt;entry one&lt;/b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt;/li&gt; &lt;li&gt;item two&lt;/li&gt; &lt;/ul&gt; ENTRY_THREE Don't use, instead use ENTRY_TWO You can exclude deprecated entries from the list by setting the excludeDeprecated parameter. :include-java-enum-entries: MyEnum.java {excludeDeprecated: true} ENTRY_ONE description of &lt;b&gt;entry one&lt;/b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt;/li&gt; &lt;li&gt;item two&lt;/li&gt; &lt;/ul&gt; ENTRY_THREE Don't use, instead use ENTRY_TWO Use the title parameter to specify a title. :include-java-enum-entries: TransactionTypes.java {title: &quot;Transaction Types&quot;} BUY buy intrument SELL sell instrument</p>
+</article>
+
+<article>
+<header><h1>Enum Entries With References</h1></header>
+<p>Use a snippets/code-references Code References file to link enum entries to reference pages.To do that, define references in a CSV file, using a two column format: enum-name, link . CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#buy SELL, example-references/domain#sell package my.company; enum TransactionTypes { /** * buy intrument */ BUY, /** * sell instrument */ SELL } :include-java-enum-entries: TransactionTypes.java { title: &quot;Transaction Types&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot; } BUY buy intrument SELL sell instrument Enums are now linked with a reference section for the documentation.Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use snippets/code-references#global-references Global References.</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Class Level",
+      "id" : "class-level",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Documentation maintenance is one of the main goals of this documentation system.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "In the case of Java you may already use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JavaDoc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " strings to explain certain concepts of your system.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "/**\n * Top level conceptual description of a {@link CustomDomain} problem.\n * <p>\n * To avoid <b>copy & paste</b> of the content consider to re-use information.\n */\nclass HelloWorld {\n    /**\n     * Each year we hire students from different universities to increase\n     * <code>diversity</code>\n     */\n    private int numberOfStudents;\n\n    /**\n     * Conceptual description of a <i>Domain</i> problem.\n     * <p>\n     * It will work only if you put high level description here and\n     * <b>not</b> implementation details.\n     *\n     * @param p1 important parameter of something\n     * @param p2 sample <i>offset</i> according to the rules of the universe\n     * @return name of the <b>best</b> sample\n     */\n    public String sampleMethod(String p1, int p2) {\n        validate();\n        process(p2); // important comment\n        notifyAll(p1); // very important\n\n        return bestSample();\n    }\n\n    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n        // overloaded method\n    }\n\n    /**\n     * @param trader trader that performs action\n     * @param transaction transaction to perform action on\n     */\n    public void importantAction(Trader trader, Transaction transaction) {\n        // TODO important\n    }\n\n    public Data createData() {\n        // create data\n    }\n}",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Instead of copy-and-pasting text between sources, you can refer to it inside your documentation.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-doc: HelloWorld.java\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "Text bellow is extracted from top class level ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "JavaDoc",
+            "type" : "InlinedCode"
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Top level conceptual description of a ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "CustomDomain",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " problem. ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : " To avoid ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "copy & paste",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " of the content consider to re-use information.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Method Level",
+      "id" : "method-level",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Method level ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JavaDoc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " text can be referred to as well by specifying the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entry",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-doc: HelloWorld.java {entry: \"sampleMethod\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "Text bellow is extracted from ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "sampleMethod",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " method ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "JavaDoc",
+            "type" : "InlinedCode"
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Conceptual description of a ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "Domain",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " problem. ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : " It will work only if you put high level description here and ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "not",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " implementation details.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Field Level",
+      "id" : "field-level",
+      "type" : "Section",
+      "content" : [ {
+        "lang" : "",
+        "snippet" : ":include-java-doc: HelloWorld.java {entry: \"numberOfStudents\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Each year we hire students from different universities to increase ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "diversity",
+          "type" : "InlinedCode"
+        } ]
+      } ]
+    }, {
+      "title" : "Handling Links",
+      "id" : "handling-links",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Links defined with ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "{@link MyClass}",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " are automatically converted to ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/inlined-code-snippets",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Inlined Code",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " and become",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "code" : "MyClass",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ". To turn ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "MyClass",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " into a link you need to use ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/code-references",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Code References",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "referencesPath",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " value to associate ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "{@link CustomDomain}",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " with the documentation link:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "markdown" : {
+          "lang" : "markdown",
+          "snippet" : ":include-java-doc: HelloWorld.java {\n    referencesPath: \"references/javadoc-references-demo.csv\"\n}\n",
+          "type" : "Snippet"
+        },
+        "result" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Top level conceptual description of a ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "CustomDomain",
+            "references" : {
+              "CustomDomain" : {
+                "pageUrl" : "example-references/domain"
+              },
+              "Transaction" : {
+                "pageUrl" : "example-references/domain#transaction"
+              },
+              "SELL" : {
+                "pageUrl" : "example-references/domain#sell"
+              },
+              "Trader" : {
+                "pageUrl" : "example-references/domain#trader"
+              },
+              "BUY" : {
+                "pageUrl" : "example-references/domain#buy"
+              }
+            },
+            "type" : "InlinedCode"
+          }, {
+            "text" : " problem. ",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : " To avoid ",
+            "type" : "SimpleText"
+          }, {
+            "type" : "StrongEmphasis",
+            "content" : [ {
+              "text" : "copy & paste",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "text" : " of the content consider to re-use information.",
+            "type" : "SimpleText"
+          } ]
+        } ],
+        "type" : "MarkdownAndResult"
+      }, {
+        "lang" : "csv",
+        "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#buy\nSELL, example-references/domain#sell",
+        "title" : "references/javadoc-references-demo.csv",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Alternatively you can define ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/code-references#global-references",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Global References",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " to turn ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "MyClass",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " into a link.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Method Params",
+      "id" : "method-params",
+      "type" : "Section",
+      "content" : [ {
+        "lang" : "",
+        "snippet" : ":include-java-doc-params: HelloWorld.java {entry: \"sampleMethod\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "return",
+          "type" : "String",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "name of the ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "best",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " sample",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "p1",
+          "type" : "String",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "important parameter of something",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "p2",
+          "type" : "int",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "sample ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "offset",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " according to the rules of the universe",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "entry" : "sampleMethod",
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to specify a title.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-doc-params: HelloWorld.java {entry: \"importantAction\", title: \"Trading Required Parameters\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "trader",
+          "type" : "Trader",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "trader that performs action",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "transaction",
+          "type" : "Transaction",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "transaction to perform action on",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "entry" : "importantAction",
+        "title" : "Trading Required Parameters",
+        "type" : "ApiParameters"
+      } ]
+    }, {
+      "title" : "Method Params With References",
+      "id" : "method-params-with-references",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/code-references",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Code References",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " file to link method parameters to reference pages.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To do that, define references in a CSV file, using a two column format: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "type-or-variable-name, link",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "csv",
+        "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#buy\nSELL, example-references/domain#sell",
+        "title" : "references/javadoc-references-demo.csv",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-doc-params: HelloWorld.java {\n    entry: \"importantAction\", \n    title: \"Trading Required Parameters\",\n    referencesPath: \"references/javadoc-references-demo.csv\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "trader",
+          "type" : "Trader",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "trader that performs action",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "transaction",
+          "type" : "Transaction",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "transaction to perform action on",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "references" : {
+          "CustomDomain" : {
+            "pageUrl" : "example-references/domain"
+          },
+          "Transaction" : {
+            "pageUrl" : "example-references/domain#transaction"
+          },
+          "SELL" : {
+            "pageUrl" : "example-references/domain#sell"
+          },
+          "Trader" : {
+            "pageUrl" : "example-references/domain#trader"
+          },
+          "BUY" : {
+            "pageUrl" : "example-references/domain#buy"
+          }
+        },
+        "entry" : "importantAction",
+        "title" : "Trading Required Parameters",
+        "referencesPath" : "references/javadoc-references-demo.csv",
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Parameters are now linked with a reference section for the documentation.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Enum Entries",
+      "id" : "enum-entries",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-java-enum-entries",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to enumerate entries of a enum from a file.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "package my.company;\n\nenum MyEnum {\n    /**\n     * description of <b>entry one</b>\n     */\n    ENTRY_ONE,\n\n    /**\n     * description of entry two\n     * <ul>\n     *     <li>item one</li>\n     *     <li>item two</li>\n     * </ul>\n     */\n    ENTRY_TWO,\n\n    /**\n     * Don't use, instead use ENTRY_TWO\n     */\n    @Deprecated\n    ENTRY_THREE\n}",
+        "title" : "MyEnum.java",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-enum-entries: MyEnum.java\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "ENTRY_ONE",
+          "type" : "",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "entry one",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "name" : "ENTRY_TWO",
+          "type" : "",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of entry two ",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "bulletMarker" : "*",
+            "tight" : false,
+            "type" : "BulletList",
+            "content" : [ {
+              "type" : "ListItem",
+              "content" : [ {
+                "text" : "item one",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "text" : "item two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "name" : "ENTRY_THREE",
+          "type" : "",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Don't use, instead use ENTRY_TWO",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You can exclude deprecated entries from the list by setting the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "excludeDeprecated",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-enum-entries: MyEnum.java {excludeDeprecated: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "ENTRY_ONE",
+          "type" : "",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "entry one",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "name" : "ENTRY_TWO",
+          "type" : "",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of entry two ",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "bulletMarker" : "*",
+            "tight" : false,
+            "type" : "BulletList",
+            "content" : [ {
+              "type" : "ListItem",
+              "content" : [ {
+                "text" : "item one",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "text" : "item two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "excludeDeprecated" : true,
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to specify a title.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-enum-entries: TransactionTypes.java {title: \"Transaction Types\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "BUY",
+          "type" : "",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "buy intrument",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "SELL",
+          "type" : "",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "sell instrument",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "Transaction Types",
+        "type" : "ApiParameters"
+      } ]
+    }, {
+      "title" : "Enum Entries With References",
+      "id" : "enum-entries-with-references",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use a ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/code-references",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Code References",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " file to link enum entries to reference pages.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To do that, define references in a CSV file, using a two column format: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "enum-name, link",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "csv",
+        "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#buy\nSELL, example-references/domain#sell",
+        "title" : "references/javadoc-references-demo.csv",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "package my.company;\n\nenum TransactionTypes {\n    /**\n     * buy intrument\n     */\n    BUY,\n\n    /**\n     * sell instrument\n     */\n    SELL\n}",
+        "title" : "TransactionTypes.java",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-enum-entries: TransactionTypes.java {\n    title: \"Transaction Types\",\n    referencesPath: \"references/javadoc-references-demo.csv\"\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "BUY",
+          "type" : "",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "buy intrument",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "SELL",
+          "type" : "",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "sell instrument",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "references" : {
+          "CustomDomain" : {
+            "pageUrl" : "example-references/domain"
+          },
+          "Transaction" : {
+            "pageUrl" : "example-references/domain#transaction"
+          },
+          "SELL" : {
+            "pageUrl" : "example-references/domain#sell"
+          },
+          "Trader" : {
+            "pageUrl" : "example-references/domain#trader"
+          },
+          "BUY" : {
+            "pageUrl" : "example-references/domain#buy"
+          }
+        },
+        "referencesPath" : "references/javadoc-references-demo.csv",
+        "title" : "Transaction Types",
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Enums are now linked with a reference section for the documentation.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "url" : "/znai/snippets/code-references#global-references",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Global References",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1580929748832,
+    "tocItem" : {
+      "sectionTitle" : "Snippets",
+      "pageTitle" : "Java Doc",
+      "pageMeta" : { },
+      "dirName" : "snippets",
+      "fileName" : "java-doc",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Class Level",
+        "id" : "class-level"
+      }, {
+        "title" : "Method Level",
+        "id" : "method-level"
+      }, {
+        "title" : "Field Level",
+        "id" : "field-level"
+      }, {
+        "title" : "Handling Links",
+        "id" : "handling-links"
+      }, {
+        "title" : "Method Params",
+        "id" : "method-params"
+      }, {
+        "title" : "Method Params With References",
+        "id" : "method-params-with-references"
+      }, {
+        "title" : "Enum Entries",
+        "id" : "enum-entries"
+      }, {
+        "title" : "Enum Entries With References",
+        "id" : "enum-entries-with-references"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Open API</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Open API</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,33 +13,17 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Operation definition</h1></header>
-<p>If you have a file with an https://github.com/OAI/OpenAPI-Specification/blob/master/README.md Open API definition (a.k.a. a Swagger file) you can render it by a given method and path or by operationId . Both yaml and json formats are supported.Let's consider https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json Uber's API definition as an example: :include-open-api: open-api/uber.json {method: &quot;get&quot;, path: &quot;/v1/estimates/time&quot;} Note: descriptions are treated as Markdown, using the http://commonmark.org/help/ CommonMark specification</p>
+<p>If you have a file with an https://github.com/OAI/OpenAPI-Specification/blob/master/README.md Open API definition (a.k.a. a Swagger file) you can render it by a given method and path , or by operationId . Both yaml and json formats are supported.Let's consider https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json Uber's API definition as an example: :include-open-api: open-api/uber.json {method: &quot;get&quot;, path: &quot;/v1/estimates/time&quot;} Note: descriptions are treated as Markdown, using the http://commonmark.org/help/ CommonMark specification</p>
 </article>
 
 <article>
 <header><h1>Produces/Consumes</h1></header>
-<p>By default produces and consumes parts are not displayed. If you document modern API chances are it will be consistent and you can specify at the start of your documentation that you are dealing with application/json .Use showConsumes and showProduces params to show what content type are supported. :include-open-api: open-api/uber.json {method: &quot;get&quot;, path: &quot;/v1/estimates/time&quot;, showConsumes: true, showProduces: true}</p>
+<p>By default produces and consumes parts are not displayed. If you are documenting a modern API, chances are it will be consistent and you can specify at the start of your documentation that you are dealing with application/json .Use showConsumes and showProduces params to show what content types are supported. :include-open-api: open-api/uber.json {method: &quot;get&quot;, path: &quot;/v1/estimates/time&quot;, showConsumes: true, showProduces: true}</p>
 </article>
 
 <article>
@@ -52,24 +37,9 @@
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -123,7 +93,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "path",
           "type" : "InlinedCode"
         }, {
-          "text" : " or by ",
+          "text" : ", or by ",
           "type" : "SimpleText"
         }, {
           "code" : "operationId",
@@ -371,7 +341,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "consumes",
           "type" : "InlinedCode"
         }, {
-          "text" : " parts are not displayed. If you document modern API chances are it will",
+          "text" : " parts are not displayed. If you are documenting a modern API, chances are it will",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
@@ -400,7 +370,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "showProduces",
           "type" : "InlinedCode"
         }, {
-          "text" : " params to show what content type are supported.",
+          "text" : " params to show what content types are supported.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -1184,13 +1154,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "OpenApiOperation"
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748843,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Open API",
       "pageMeta" : { },
-      "fileName" : "open-API",
       "dirName" : "snippets",
+      "fileName" : "open-API",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Operation definition",
         "id" : "operation-definition"

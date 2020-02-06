@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Getting Started</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Getting Started</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,23 +13,7 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
@@ -38,38 +23,33 @@
 
 <article>
 <header><h1>Markdown</h1></header>
-<p>Fastest way to learn Markdown is to go to http://commonmark.org/help/ CommonMark website and go through a 60 seconds cheatsheet or 10 minutes tutorial.</p>
+<p>The fastest way to learn Markdown is to go to http://commonmark.org/help/ CommonMark website and go through a 60 second cheatsheet or 10 minute tutorial.</p>
+</article>
+
+<article>
+<header><h1>Installation</h1></header>
+<p>Download and unzip https://repo.maven.apache.org/maven2/com/twosigma/znai/znai-dist/${project.version}/znai-dist-${project.version}-znai.zip znai. Add it to your PATH .Note: https://brew.sh/ brew support is currently in progress.</p>
 </article>
 
 <article>
 <header><h1>Scaffolding</h1></header>
-<p>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json</p>
+<p>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin&gt; &lt;groupId&gt;com.twosigma.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.28-SNAPSHOT&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;my-docs&lt;/docId&gt; &lt;sourceRoot&gt;${project.basedir}/documentation&lt;/sourceRoot&gt; &lt;port&gt;3333&lt;/port&gt; &lt;/configuration&gt; &lt;/plugin&gt; mvn znai:new</p>
 </article>
 
 <article>
 <header><h1>Preview</h1></header>
-<p>Navigate to the newly created directory. Start preview mode by running znai --preview The command will output a URL that directs to your preview.Blue eye icon in the top right corner indicates that preview is on. Open any text editor, modify and save page-one.md file. Changes will be reflected in the browser.</p>
+<p>Navigate to the newly created directory. Start preview mode by running: znai --preview [--port port-number] Or using Maven: mvn znai:preview The command will output a URL that directs to your preview.Blue eye icon in the top right corner indicates that preview is on. Open any text editor, modify and save page-one.md file. Changes will be reflected in the browser. The default port number is 3333.</p>
+</article>
+
+<article>
+<header><h1>Deploy</h1></header>
+<p>See deployment/static-content deployment strategy</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -144,7 +124,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Fastest way to learn Markdown is to go to ",
+          "text" : "The fastest way to learn Markdown is to go to ",
           "type" : "SimpleText"
         }, {
           "url" : "http://commonmark.org/help/",
@@ -160,7 +140,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "and go through a 60 seconds cheatsheet or 10 minutes tutorial.",
+          "text" : "and go through a 60 second cheatsheet or 10 minute tutorial.",
           "type" : "SimpleText"
         } ]
       } ]
@@ -169,9 +149,58 @@ ReactDOM.render(React.createElement(Documentation, {
       "id" : "installation",
       "type" : "Section",
       "content" : [ {
+        "level" : 2,
+        "title" : "CLI download",
+        "id" : "cli-download",
+        "type" : "SubHeading"
+      }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: need to update instructions on downloading from maven central",
+          "text" : "Download and unzip ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://repo.maven.apache.org/maven2/com/twosigma/znai/znai-dist/${project.version}/znai-dist-${project.version}-znai.zip",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "znai",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Add it to your ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "PATH",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "level" : 2,
+        "title" : "Brew",
+        "id" : "brew",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://brew.sh/",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "code" : "brew",
+            "type" : "InlinedCode"
+          } ]
+        }, {
+          "text" : " support is currently in progress.",
           "type" : "SimpleText"
         } ]
       } ]
@@ -196,17 +225,64 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     }, {
+      "title" : "Scaffolding With Maven",
+      "id" : "scaffolding-with-maven",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "znai-maven-plugin",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://maven.apache.org/",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Maven",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " plugin to scaffold docs in Maven project.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "xml",
+        "snippet" : "<plugin>\n    <groupId>com.twosigma.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.28-SNAPSHOT</version>\n    <configuration>\n        <docId>my-docs</docId>\n        <sourceRoot>${project.basedir}/documentation</sourceRoot>\n        <port>3333</port>\n    </configuration>\n</plugin>",
+        "title" : "maven plugin",
+        "type" : "Snippet"
+      }, {
+        "command" : "mvn znai:new",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      } ]
+    }, {
       "title" : "Preview",
       "id" : "preview",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Navigate to the newly created directory. Start preview mode by running",
+          "text" : "Navigate to the newly created directory. Start preview mode by running:",
           "type" : "SimpleText"
         } ]
       }, {
-        "command" : "znai --preview",
+        "command" : "znai --preview [--port port-number]",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Or using Maven:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "command" : "mvn znai:preview",
         "paramsToHighlight" : [ ],
         "type" : "CliCommand"
       }, {
@@ -245,6 +321,11 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "text" : "Changes will be reflected in the browser.",
           "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "The default port number is 3333.",
+          "type" : "SimpleText"
         } ]
       } ]
     }, {
@@ -267,13 +348,14 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748808,
     "tocItem" : {
       "sectionTitle" : "Introduction",
       "pageTitle" : "Getting Started",
       "pageMeta" : { },
-      "fileName" : "getting-started",
       "dirName" : "introduction",
+      "fileName" : "getting-started",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Command Line Tool",
         "id" : "command-line-tool"
@@ -286,6 +368,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Scaffolding",
         "id" : "scaffolding"
+      }, {
+        "title" : "Scaffolding With Maven",
+        "id" : "scaffolding-with-maven"
       }, {
         "title" : "Preview",
         "id" : "preview"

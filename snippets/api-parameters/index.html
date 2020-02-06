@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: API Parameters</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: API Parameters</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,59 +13,33 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Inlined CSV</h1></header>
-<p>When you are not able to automatically extract an API parameters definition you can use the api-parameters fence plugin to manually document them. ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ```</p>
+<p>When you are not able to automatically extract an API parameter definition you can use the api-parameters fence plugin to manually document them. ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ```</p>
 </article>
 
 <article>
 <header><h1>Nested</h1></header>
-<p>Use parent.children syntax to define nested objects like this ```api-parameters sessionId, Integer, session Id person, Person, person to login with person.firstName, String, first name of the person person.lastName, String, last name of the person roles, List&lt;Role&gt;, list of authorized roles roles.id, String, role id roles.description, String, role description ``` Note: you still need to explicitly define root entry like person in the example above</p>
+<p>Use parent.children syntax to define nested objects like this: ```api-parameters sessionId, Integer, session Id person, Person, person to login with person.firstName, String, first name of the person person.lastName, String, last name of the person roles, List&lt;Role&gt;, list of authorized roles roles.id, String, role id roles.description, String, role description ``` Note: when using this approach it is necessary to explicitly define a root entry, such as person in this example.Note: if a parameter name actually contains a period (&quot;.&quot;), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. 'person.firstName'</p>
+</article>
+
+<article>
+<header><h1>Title</h1></header>
+<p>Use the title parameter to specify a title. ```api-parameters {title: &quot;Person Definition&quot;} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ```</p>
 </article>
 
 <article>
 <header><h1>External JSON File</h1></header>
-<p>Instead of hardcoding your parameters inside markdown files, you can specify an external JSON file. JSON could be generated based on the data you have. Some of the examples:build time annotation processortest time command line parameters generationGiven the above file, use :include-api-parameters: api-parameters.json to display it as API ParametersNote: description field in JSON file is treated as Markdown</p>
+<p>Instead of hardcoding your parameters inside markdown files, you can specify an external JSON file. JSON could be generated based on the data you have. Some of the examples:build time annotation processortest time command line parameters generationGiven the above file, use :include-api-parameters: api-parameters.json {title: &quot;Person Definition&quot;} to display it as API ParametersNote: description field in JSON file is treated as Markdown</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -93,7 +68,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "When you are not able to automatically extract an API parameters definition you can use",
+          "text" : "When you are not able to automatically extract an API parameter definition you can use",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
@@ -167,7 +142,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "parent.children",
           "type" : "InlinedCode"
         }, {
-          "text" : " syntax to define nested objects like this",
+          "text" : " syntax to define nested objects like this:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -178,19 +153,19 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: you still need to explicitly define ",
+          "text" : "Note: when using this approach it is necessary to explicitly define a ",
           "type" : "SimpleText"
         }, {
           "code" : "root",
           "type" : "InlinedCode"
         }, {
-          "text" : " entry like ",
+          "text" : " entry, such as ",
           "type" : "SimpleText"
         }, {
           "code" : "person",
           "type" : "InlinedCode"
         }, {
-          "text" : " in the example above",
+          "text" : " in this example.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -267,6 +242,76 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: if a parameter name actually contains a period (\".\"), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. 'person.firstName'",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Title",
+      "id" : "title",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to specify a title.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```api-parameters {title: \"Person Definition\"}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "firstName",
+          "type" : "String",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "score",
+          "type" : "Integer",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "another description line with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "Person Definition",
         "type" : "ApiParameters"
       } ]
     }, {
@@ -350,7 +395,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-api-parameters: api-parameters.json\n",
+        "snippet" : ":include-api-parameters: api-parameters.json {title: \"Person Definition\"}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -445,6 +490,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "title" : "Person Definition",
         "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
@@ -460,21 +506,25 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748824,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "API Parameters",
       "pageMeta" : {
         "title" : [ "API Parameters" ]
       },
-      "fileName" : "api-parameters",
       "dirName" : "snippets",
+      "fileName" : "api-parameters",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Inlined CSV",
         "id" : "inlined-csv"
       }, {
         "title" : "Nested",
         "id" : "nested"
+      }, {
+        "title" : "Title",
+        "id" : "title"
       }, {
         "title" : "External JSON File",
         "id" : "external-json-file"

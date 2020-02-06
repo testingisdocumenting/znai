@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Json</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Json</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,23 +13,7 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
@@ -38,17 +23,17 @@
 
 <article>
 <header><h1>Paths From File</h1></header>
-<p>Use pathsFile to specify a file to read paths from :include-json: book-store.json {pathsFile: &quot;book-store-paths.json&quot;}</p>
+<p>Use pathsFile to specify a file to read paths from. :include-json: book-store.json {pathsFile: &quot;book-store-paths.json&quot;}</p>
 </article>
 
 <article>
 <header><h1>Json Subparts</h1></header>
-<p>To include only a portion of your document pass https://github.com/json-path/JsonPath Json Path as include property :include-json: book-store.json {include: &quot;$..book[0,1]&quot;}</p>
+<p>To include only a portion of your document pass https://github.com/json-path/JsonPath Json Path as include property: :include-json: book-store.json {include: &quot;$..book[0,1]&quot;}</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>To specify a title use the title property :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, title: &quot;Books&quot;}</p>
+<p>To specify a title use the title property: :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, title: &quot;Books&quot;}</p>
 </article>
 
 <article>
@@ -63,33 +48,23 @@
 
 <article>
 <header><h1>Highlights</h1></header>
-<p>Additionally to highlighting a specific JSON value using paths , you can (similarly to snippets/external-code-snippets#highlights regular code snippets) highlight a line by text matching or by providing a line index. :include-json: book-store.json {highlight: [&quot;category&quot;, 2]}</p>
+<p>To highlight a specific JSON value using paths , in (similar fashion to snippets/external-code-snippets#highlights regular code snippets), you can highlight a line by text matching or by providing a line index. :include-json: book-store.json {highlight: [&quot;category&quot;, 2]}</p>
+</article>
+
+<article>
+<header><h1>Code References</h1></header>
+<p>You can turn parts of JSON into links to internal or external pages.</p>
 </article>
 
 <article>
 <header><h1>Test Results</h1></header>
-<p>Consider leveraging testing frameworks to extract JSON samples from your end points. Information about what assertions were made can be used to highlight points of interest.</p>
+<p>Consider leveraging testing frameworks to extract JSON samples from your endpoints. Information about what assertions were made can be used to highlight points of interest.</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -199,7 +174,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "pathsFile",
           "type" : "InlinedCode"
         }, {
-          "text" : " to specify a file to read paths from",
+          "text" : " to specify a file to read paths from.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -242,7 +217,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "include",
           "type" : "InlinedCode"
         }, {
-          "text" : " property",
+          "text" : " property:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -279,7 +254,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "title",
           "type" : "InlinedCode"
         }, {
-          "text" : " property",
+          "text" : " property:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -396,7 +371,13 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To hide sub-parts of your JSON use ",
+          "text" : "To hide sub-parts of your ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JSON",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " use ",
           "type" : "SimpleText"
         }, {
           "code" : "collapsedPaths",
@@ -454,7 +435,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Additionally to highlighting a specific ",
+          "text" : "To highlight a specific ",
           "type" : "SimpleText"
         }, {
           "code" : "JSON",
@@ -466,12 +447,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "paths",
           "type" : "InlinedCode"
         }, {
-          "text" : ", you can",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "(similarly to ",
+          "text" : ", in (similar fashion to ",
           "type" : "SimpleText"
         }, {
           "url" : "/znai/snippets/external-code-snippets#highlights",
@@ -482,7 +458,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : ") highlight",
+          "text" : "), you can highlight",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
@@ -533,6 +509,40 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Json"
       } ]
     }, {
+      "title" : "Code References",
+      "id" : "code-references",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You can turn parts of ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JSON",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " into links to internal or external pages.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "include" : "$..book[0,1]",
+        "title" : "Books",
+        "referencesPath" : "references/json-references-demo.csv",
+        "data" : [ {
+          "category" : "reference",
+          "author" : "Nigel Rees",
+          "title" : "Sayings of the Century",
+          "price" : 8.95
+        }, {
+          "category" : "fiction",
+          "author" : "Evelyn Waugh",
+          "title" : "Sword of Honour",
+          "price" : 12.99
+        } ],
+        "paths" : [ ],
+        "type" : "Json"
+      } ]
+    }, {
       "title" : "Test Results",
       "id" : "test-results",
       "type" : "Section",
@@ -545,7 +555,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "JSON",
           "type" : "InlinedCode"
         }, {
-          "text" : " samples from your end points.",
+          "text" : " samples from your endpoints.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
@@ -555,13 +565,14 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748833,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Json",
       "pageMeta" : { },
-      "fileName" : "json",
       "dirName" : "snippets",
+      "fileName" : "json",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Paths",
         "id" : "paths"
@@ -583,6 +594,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Highlights",
         "id" : "highlights"
+      }, {
+        "title" : "Code References",
+        "id" : "code-references"
       }, {
         "title" : "Test Results",
         "id" : "test-results"

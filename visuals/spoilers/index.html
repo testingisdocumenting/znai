@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Spoilers</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Hidden Content</h1></header>
+<p>To hide content use the spoiler fence plugin ````spoiler Information you don't want users to see right away goes here. Can use all the markdown inside 1. item A 2. item B ``` let list = [1, 2, 3] let value = 0 ``` ```` Information you don't want users to see right away goes here. Can use all the markdown insideitem Aitem B let list = [1, 2, 3] let value = 0 Note: Four backticks were used instead of the usual three. This is done so one fence block can include another block (code snippet) without confusion. It can be any number of backticks greater than three.</p>
+</article>
+
+<article>
+<header><h1>Hidden Content Title</h1></header>
+<p>Use the title parameter to set a custom title for your spoiler. ```spoiler {title: &quot;Are you ready to see what's inside?&quot;} ... ``` Line OneLine TwoLine Three</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Hidden Content",
+      "id" : "hidden-content",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To hide content use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "spoiler",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " fence plugin",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "````spoiler \nInformation you don't want users to see right away goes here.\nCan use all the markdown inside\n1. item A\n2. item B\n    \n```\nlet list = [1, 2, 3]\nlet value = 0\n```\n````\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "Press to reveal",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Information you don't want users to see right away goes here.",
+            "type" : "SimpleText"
+          }, {
+            "type" : "SoftLineBreak"
+          }, {
+            "text" : "Can use all the markdown inside",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "delimiter" : ".",
+          "startNumber" : 1,
+          "type" : "OrderedList",
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "item A",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "item B",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "lang" : "",
+          "snippet" : "let list = [1, 2, 3]\nlet value = 0\n",
+          "lineNumber" : "",
+          "type" : "Snippet"
+        } ],
+        "type" : "Spoiler"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Four backticks were used instead of the usual three. This is done so one fence block can include",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "another block (code snippet) without confusion. It can be any number of backticks greater than three.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Hidden Content Title",
+      "id" : "hidden-content-title",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to set a custom title for your spoiler.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```spoiler {title: \"Are you ready to see what's inside?\"}\n...\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "Are you ready to see what's inside?",
+        "content" : [ {
+          "delimiter" : ".",
+          "startNumber" : 1,
+          "type" : "OrderedList",
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Line One",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Line Two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Line Three",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "type" : "Spoiler"
+      } ]
+    } ],
+    "lastModifiedTime" : 1580929748968,
+    "tocItem" : {
+      "sectionTitle" : "Visuals",
+      "pageTitle" : "Spoilers",
+      "pageMeta" : { },
+      "dirName" : "visuals",
+      "fileName" : "spoilers",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Hidden Content",
+        "id" : "hidden-content"
+      }, {
+        "title" : "Hidden Content Title",
+        "id" : "hidden-content-title"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

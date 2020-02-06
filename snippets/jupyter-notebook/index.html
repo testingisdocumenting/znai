@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Jupyter Notebook</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Code and Output</h1></header>
+<p>Use include-jupyter to include http://jupyter.org/ Jupyter notebook inside your documentation. :include-jupyter: jupyter/simple-notebook.ipynb Note: Remember that you can define lookup paths for files like notebooks inside flow/lookup-paths lookup-paths file, so you don't have to copy and paste notebooks to your documentation directory.</p>
+</article>
+
+<article>
+<header><h1>Pandas</h1></header>
+<p>Markdown from your notebook will be seamlessly integrated into your current page. First level # headers will become part of Table Of Contents and part of a search unit. :include-jupyter: notebook-with-markdown-story.ipynb Note: below text is auto generated, including the Panda sectionDisplaying values using panda display Values can be displayed using standard console outputOr using library to render a html snippet</p>
+</article>
+
+<article>
+<header><h1>Two Sides</h1></header>
+<p>You will learn about the layout/two-sides-pages Two Sides Layout in the Layout section. If you are are curious now for examples, jump to layout/jupyter-notebook-two-sides Jupyter Two Sides example</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Code and Output",
+      "id" : "code-and-output",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-jupyter",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to include ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "http://jupyter.org/",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Jupyter",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " notebook inside your documentation.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-jupyter: jupyter/simple-notebook.ipynb\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "empty-output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "output",
+        "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "display(tran)",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "output",
+        "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Remember that you can define lookup paths for files like notebooks inside ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/flow/lookup-paths",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "lookup-paths",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " file, so you don't have",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "to copy and paste notebooks to your documentation directory.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Seamless Markdown Integration",
+      "id" : "seamless-markdown-integration",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Markdown from your notebook will be seamlessly integrated into your current page. First level ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "# headers",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " will",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "become part of Table Of Contents and part of a search unit.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "fit" : true,
+        "imageSrc" : "/znai/snippets/jupyter/notebook.png",
+        "timestamp" : 1580929748835,
+        "shapes" : [ ],
+        "width" : 1944.0,
+        "height" : 1112.0,
+        "type" : "AnnotatedImage"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-jupyter: notebook-with-markdown-story.ipynb\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: below text is auto generated, including the ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "Panda",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " section",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "title" : "Pandas",
+      "id" : "pandas",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Displaying values using panda ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "display",
+          "type" : "InlinedCode"
+        } ]
+      }, {
+        "cellType" : "empty-output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "empty-output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Values can be displayed using standard console output",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "cellType" : "empty-output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "output",
+        "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Or using library to render a html snippet",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "cellType" : "empty-output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "display(tran)",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "output",
+        "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      } ]
+    }, {
+      "title" : "Two Sides",
+      "id" : "two-sides",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You will learn about the ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/layout/two-sides-pages",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Two Sides Layout",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " in the Layout section.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "If you are are curious now for examples, jump to ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/layout/jupyter-notebook-two-sides",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Jupyter Two Sides example",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1580929748834,
+    "tocItem" : {
+      "sectionTitle" : "Snippets",
+      "pageTitle" : "Jupyter Notebook",
+      "pageMeta" : { },
+      "dirName" : "snippets",
+      "fileName" : "jupyter-notebook",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Code and Output",
+        "id" : "code-and-output"
+      }, {
+        "title" : "Seamless Markdown Integration",
+        "id" : "seamless-markdown-integration"
+      }, {
+        "title" : "Pandas",
+        "id" : "pandas"
+      }, {
+        "title" : "Two Sides",
+        "id" : "two-sides"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

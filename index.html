@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,48 +13,14 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <p>Znai is a system that generates user facing documentation from markdown files. Documentation files are located next to your product codebase and are part of your product's software development lifecycle. Znai provides extensions to simplify your day-to-day documentation processes and to improve maintenance in the long run.Continue reading to learn more about:RationaleStructuring your documentationLeveraging existing code snippets and test resultsDiagrams supportUI documentation techniquesPresentation modeExtremely fast navigationLocal search with auto-previewIf you are reading this documentation for the first time, we suggest you read from start to finish.</p>
 </article>
 </section>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
-    <div></div>
-</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <a href="/index/">Index</a>
 </article>
@@ -79,6 +46,7 @@
 <a href="introduction/getting-started/#markdown">Getting Started Markdown</a>
 <a href="introduction/getting-started/#installation">Getting Started Installation</a>
 <a href="introduction/getting-started/#scaffolding">Getting Started Scaffolding</a>
+<a href="introduction/getting-started/#scaffolding-with-maven">Getting Started Scaffolding With Maven</a>
 <a href="introduction/getting-started/#preview">Getting Started Preview</a>
 <a href="introduction/getting-started/#deploy">Getting Started Deploy</a>
 </article>
@@ -135,6 +103,11 @@
 </article>
 
 <article>
+<a href="flow/shortcuts/">Shortcuts</a>
+<a href="flow/shortcuts/#keyboard-shortcuts">Shortcuts Keyboard shortcuts</a>
+</article>
+
+<article>
 <a href="snippets/code-snippets/">Code Snippets</a>
 <a href="snippets/code-snippets/#simple-snippet">Code Snippets Simple Snippet</a>
 <a href="snippets/code-snippets/#specifying-language">Code Snippets Specifying Language</a>
@@ -146,7 +119,7 @@
 
 <article>
 <a href="snippets/external-code-snippets/">External Code Snippets</a>
-<a href="snippets/external-code-snippets/#existing-file">External Code Snippets Existing File</a>
+<a href="snippets/external-code-snippets/#embedding-content">External Code Snippets Embedding Content</a>
 <a href="snippets/external-code-snippets/#title">External Code Snippets Title</a>
 <a href="snippets/external-code-snippets/#wide-code">External Code Snippets Wide Code</a>
 <a href="snippets/external-code-snippets/#read-more">External Code Snippets Read More</a>
@@ -162,6 +135,21 @@
 </article>
 
 <article>
+<a href="snippets/api-parameters/">API Parameters</a>
+<a href="snippets/api-parameters/#inlined-csv">API Parameters Inlined CSV</a>
+<a href="snippets/api-parameters/#nested">API Parameters Nested</a>
+<a href="snippets/api-parameters/#title">API Parameters Title</a>
+<a href="snippets/api-parameters/#external-json-file">API Parameters External JSON File</a>
+</article>
+
+<article>
+<a href="snippets/code-references/">Code References</a>
+<a href="snippets/code-references/#local-references">Code References Local References</a>
+<a href="snippets/code-references/#global-references">Code References Global References</a>
+<a href="snippets/code-references/#inlined-code">Code References Inlined Code</a>
+</article>
+
+<article>
 <a href="snippets/java/">Java</a>
 <a href="snippets/java/#method-body">Java Method Body</a>
 <a href="snippets/java/#callout-comments">Java Callout Comments</a>
@@ -169,11 +157,19 @@
 <a href="snippets/java/#overloads">Java Overloads</a>
 <a href="snippets/java/#type-body">Java Type Body</a>
 <a href="snippets/java/#multiple-entries">Java Multiple Entries</a>
-<a href="snippets/java/#class-javadoc">Java Class JavaDoc</a>
-<a href="snippets/java/#method-javadoc">Java Method JavaDoc</a>
-<a href="snippets/java/#field-javadoc">Java Field JavaDoc</a>
-<a href="snippets/java/#method-javadoc-params">Java Method JavaDoc Params</a>
-<a href="snippets/java/#enum-entries">Java Enum Entries</a>
+<a href="snippets/java/#multiple-overloads">Java Multiple Overloads</a>
+</article>
+
+<article>
+<a href="snippets/java-doc/">Java Doc</a>
+<a href="snippets/java-doc/#class-level">Java Doc Class Level</a>
+<a href="snippets/java-doc/#method-level">Java Doc Method Level</a>
+<a href="snippets/java-doc/#field-level">Java Doc Field Level</a>
+<a href="snippets/java-doc/#handling-links">Java Doc Handling Links</a>
+<a href="snippets/java-doc/#method-params">Java Doc Method Params</a>
+<a href="snippets/java-doc/#method-params-with-references">Java Doc Method Params With References</a>
+<a href="snippets/java-doc/#enum-entries">Java Doc Enum Entries</a>
+<a href="snippets/java-doc/#enum-entries-with-references">Java Doc Enum Entries With References</a>
 </article>
 
 <article>
@@ -204,6 +200,7 @@
 <a href="snippets/json/#read-more">Json Read More</a>
 <a href="snippets/json/#hidden-parts">Json Hidden Parts</a>
 <a href="snippets/json/#highlights">Json Highlights</a>
+<a href="snippets/json/#code-references">Json Code References</a>
 <a href="snippets/json/#test-results">Json Test Results</a>
 </article>
 
@@ -212,13 +209,6 @@
 <a href="snippets/xml/#highlight-parts">Xml Highlight Parts</a>
 <a href="snippets/xml/#use-cases">Xml Use Cases</a>
 <a href="snippets/xml/#title">Xml Title</a>
-</article>
-
-<article>
-<a href="snippets/api-parameters/">API Parameters</a>
-<a href="snippets/api-parameters/#inlined-csv">API Parameters Inlined CSV</a>
-<a href="snippets/api-parameters/#nested">API Parameters Nested</a>
-<a href="snippets/api-parameters/#external-json-file">API Parameters External JSON File</a>
 </article>
 
 <article>
@@ -234,17 +224,25 @@
 
 <article>
 <a href="snippets/CLI/">CLI</a>
-<a href="snippets/CLI/#command-parameters">CLI Command parameters</a>
+<a href="snippets/CLI/#command-parameters">CLI Command Parameters</a>
 <a href="snippets/CLI/#long-commands">CLI Long Commands</a>
 <a href="snippets/CLI/#handle-special-symbols">CLI Handle Special Symbols</a>
 <a href="snippets/CLI/#from-file">CLI From File</a>
 <a href="snippets/CLI/#output">CLI Output</a>
-<a href="snippets/CLI/#presentation-mode">CLI Presentation mode</a>
+<a href="snippets/CLI/#presentation-mode">CLI Presentation Mode</a>
 </article>
 
 <article>
 <a href="snippets/math/">Math</a>
 <a href="snippets/math/#latex">Math LATEX</a>
+</article>
+
+<article>
+<a href="snippets/jupyter-notebook/">Jupyter Notebook</a>
+<a href="snippets/jupyter-notebook/#code-and-output">Jupyter Notebook Code and Output</a>
+<a href="snippets/jupyter-notebook/#seamless-markdown-integration">Jupyter Notebook Seamless Markdown Integration</a>
+<a href="snippets/jupyter-notebook/#pandas">Jupyter Notebook Pandas</a>
+<a href="snippets/jupyter-notebook/#two-sides">Jupyter Notebook Two Sides</a>
 </article>
 
 <article>
@@ -277,6 +275,7 @@
 <a href="layout/tables/">Tables</a>
 <a href="layout/tables/#csv">Tables CSV</a>
 <a href="layout/tables/#json">Tables JSON</a>
+<a href="layout/tables/#title">Tables Title</a>
 <a href="layout/tables/#arrange-and-filter">Tables Arrange and Filter</a>
 <a href="layout/tables/#alignment-and-width">Tables Alignment and Width</a>
 <a href="layout/tables/#markdown-in-cells">Tables Markdown in Cells</a>
@@ -305,7 +304,7 @@
 <a href="layout/two-sides-pages/">Two Sides Pages</a>
 <a href="layout/two-sides-pages/#setup">Two Sides Pages Setup</a>
 <a href="layout/two-sides-pages/#details-side">Two Sides Pages Details Side</a>
-<a href="layout/two-sides-pages/#open-api-example">Two Sides Pages Open API example</a>
+<a href="layout/two-sides-pages/#open-api-example">Two Sides Pages Open API Example</a>
 <a href="layout/two-sides-pages/#aligning-data-in-columns">Two Sides Pages Aligning Data in Columns</a>
 <a href="layout/two-sides-pages/#single-data-block-shortcut">Two Sides Pages Single Data Block Shortcut</a>
 </article>
@@ -315,6 +314,19 @@
 <a href="layout/two-sides-tabs/#unified-tabs">Two Sides Tabs Unified Tabs</a>
 <a href="layout/two-sides-tabs/#definition">Two Sides Tabs Definition</a>
 <a href="layout/two-sides-tabs/#markdown-per-tab">Two Sides Tabs Markdown Per Tab</a>
+</article>
+
+<article>
+<a href="layout/jupyter-notebook-two-sides/">Jupyter Notebook Two Sides</a>
+<a href="layout/jupyter-notebook-two-sides/#code-first">Jupyter Notebook Two Sides Code First</a>
+<a href="layout/jupyter-notebook-two-sides/#story-first">Jupyter Notebook Two Sides Story First</a>
+<a href="layout/jupyter-notebook-two-sides/#pandas">Jupyter Notebook Two Sides Pandas</a>
+</article>
+
+<article>
+<a href="visuals/spoilers/">Spoilers</a>
+<a href="visuals/spoilers/#hidden-content">Spoilers Hidden Content</a>
+<a href="visuals/spoilers/#hidden-content-title">Spoilers Hidden Content Title</a>
 </article>
 
 <article>
@@ -368,12 +380,15 @@
 <a href="visuals/SVG/">SVG</a>
 <a href="visuals/SVG/#retina-displays">SVG Retina Displays</a>
 <a href="visuals/SVG/#ids-to-reveal">SVG Ids To Reveal</a>
+<a href="visuals/SVG/#actual-size">SVG Actual Size</a>
+<a href="visuals/SVG/#scale">SVG Scale</a>
 </article>
 
 <article>
 <a href="visuals/flow-diagrams/">Flow Diagrams</a>
 <a href="visuals/flow-diagrams/#nodes-and-edges">Flow Diagrams Nodes and Edges</a>
 <a href="visuals/flow-diagrams/#multiline-labels">Flow Diagrams Multiline Labels</a>
+<a href="visuals/flow-diagrams/#nodes-size">Flow Diagrams Nodes Size</a>
 <a href="visuals/flow-diagrams/#highlight">Flow Diagrams Highlight</a>
 <a href="visuals/flow-diagrams/#color-groups">Flow Diagrams Color Groups</a>
 <a href="visuals/flow-diagrams/#shapes">Flow Diagrams Shapes</a>
@@ -393,8 +408,12 @@
 
 <article>
 <a href="deployment/static-content/">Static Content</a>
-<a href="deployment/static-content/#static-content-intro">Static Content static content intro</a>
-<a href="deployment/static-content/#github-placeholder">Static Content github placeholder</a>
+<a href="deployment/static-content/#build">Static Content Build</a>
+</article>
+
+<article>
+<a href="deployment/static-hosting/">Static Hosting</a>
+<a href="deployment/static-hosting/#github-pages">Static Hosting GitHub Pages</a>
 </article>
 
 <article>
@@ -407,7 +426,7 @@
 <a href="synergy-with-testing/REST/#request-and-response-capture">REST Request and Response Capture</a>
 <a href="synergy-with-testing/REST/#webtau">REST WebTau</a>
 <a href="synergy-with-testing/REST/#capture-rest-artifacts">REST Capture REST Artifacts</a>
-<a href="synergy-with-testing/REST/#document-rest-calls">REST Document REST calls</a>
+<a href="synergy-with-testing/REST/#document-rest-calls">REST Document REST Calls</a>
 </article>
 
 <article>
@@ -419,26 +438,24 @@
 <a href="configuration/basic/">Basic</a>
 <a href="configuration/basic/#favicon">Basic Favicon</a>
 </article>
+
+<article>
+<a href="example-references/domain/">Domain</a>
+<a href="example-references/domain/#trader">Domain Trader</a>
+<a href="example-references/domain/#transaction">Domain Transaction</a>
+</article>
+
+<article>
+<a href="example-references/api/">Api</a>
+<a href="example-references/api/#flight-api">Api Flight API</a>
+<a href="example-references/api/#book">Api Book</a>
+<a href="example-references/api/#query">Api Query</a>
+</article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -573,13 +590,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "SimpleText"
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748805,
     "tocItem" : {
       "sectionTitle" : "",
       "pageTitle" : "Index",
       "pageMeta" : { },
-      "fileName" : "index",
       "dirName" : "",
+      "fileName" : "index",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ ]
     }
   },

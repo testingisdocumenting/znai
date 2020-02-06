@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Tables</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Tables</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,23 +13,7 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
@@ -42,8 +27,13 @@
 </article>
 
 <article>
+<header><h1>Title</h1></header>
+<p>Use title parameter to set a table title. :include-table: table.json {title: &quot;Monthly Report&quot;} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+</article>
+
+<article>
 <header><h1>Arrange and Filter</h1></header>
-<p>To change the order of columns or filter out certain columns, specify the columns parameter. :include-table: table.csv {columns: [&quot;Description&quot;, &quot;Price&quot;]} Description Price custom table with a long attachment 100 chair 150 lunch 10</p>
+<p>To change the order of columns or to filter out certain columns, specify the columns parameter. :include-table: table.csv {columns: [&quot;Description&quot;, &quot;Price&quot;]} Description Price custom table with a long attachment 100 chair 150 lunch 10</p>
 </article>
 
 <article>
@@ -53,7 +43,7 @@
 
 <article>
 <header><h1>Markdown in Cells</h1></header>
-<p>You can use markup syntax within table file. Account, Price, Description #12BGD3, 100, **custom** table with a long attachment #12BGD3, 150, chair #91AGB1, 10, `lunch` Account Price Description #12BGD3 100 **custom** table with a long attachment #12BGD3 150 chair #91AGB1 10 `lunch`</p>
+<p>You can use Markdown table syntax within your table file. Account, Price, Description #12BGD3, 100, **custom** table with a long attachment #12BGD3, 150, chair #91AGB1, 10, `lunch` Account Price Description #12BGD3 100 **custom** table with a long attachment #12BGD3 150 chair #91AGB1 10 `lunch`</p>
 </article>
 
 <article>
@@ -62,24 +52,9 @@
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -322,13 +297,102 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     }, {
+      "title" : "Title",
+      "id" : "title",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to set a table title.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-table: table.json {title: \"Monthly Report\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "title" : "Monthly Report",
+        "type" : "Table"
+      } ]
+    }, {
       "title" : "Arrange and Filter",
       "id" : "arrange-and-filter",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To change the order of columns or filter out certain columns, specify the ",
+          "text" : "To change the order of columns or to filter out certain columns, specify the ",
           "type" : "SimpleText"
         }, {
           "code" : "columns",
@@ -673,7 +737,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "You can use markup syntax within table file.",
+          "text" : "You can use Markdown table syntax within your table file.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -797,19 +861,23 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748814,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Tables",
       "pageMeta" : { },
-      "fileName" : "tables",
       "dirName" : "layout",
+      "fileName" : "tables",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "CSV",
         "id" : "csv"
       }, {
         "title" : "JSON",
         "id" : "json"
+      }, {
+        "title" : "Title",
+        "id" : "title"
       }, {
         "title" : "Arrange and Filter",
         "id" : "arrange-and-filter"

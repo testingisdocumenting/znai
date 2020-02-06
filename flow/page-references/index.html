@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Page References</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Page References</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,33 +13,17 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Follow the Order</h1></header>
-<p>Most of the documentation should have a natural order to follow. Links to navigate to the next page are at the end of each page.Create links to remind users of an essential concept introduced previously. There is a good chance that a reader skipped over it or forgot.Avoid: links that navigate users forward. It breaks the flow of a documentation.</p>
+<p>The best documentation should be arranged with a natural order to follow. Links to navigate to the next page are at the end of each page.Create links to remind users of essential concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them.Avoid: links that navigate users forward. It breaks the flow of a documentation.</p>
 </article>
 
 <article>
 <header><h1>Links</h1></header>
-<p>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link.To refer back to the top-level index page use: markdown [index link](/) Linking to subsections is the same as linking to a top level section. flow/page-references#links-to-sub-section Here is an example markdown [Here is an example](flow/page-references#links-to-sub-section) Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation Panel</p>
+<p>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link.To refer back to the top-level index page use: markdown [index link](/) Linking to subsections is the same as linking to a top level section. flow/page-references#links-to-subsection Here is an example markdown [Here is an example](flow/page-references#links-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation Panel</p>
 </article>
 
 <article>
@@ -48,28 +33,13 @@
 
 <article>
 <header><h1>Validation</h1></header>
-<p>Local links are automatically validated during documentation build time. You will get a build time error if you refer a page or a section/sub-section that does not exist.</p>
+<p>Local links are automatically validated during documentation build time. You will get a build time error if you refer to a page or a section/sub-section that does not exist.</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -98,7 +68,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Most of the documentation should have a natural order to follow.",
+          "text" : "The best documentation should be arranged with a natural order to follow.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
@@ -109,7 +79,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Create links to remind users of an ",
+          "text" : "Create links to remind users of ",
           "type" : "SimpleText"
         }, {
           "type" : "Emphasis",
@@ -118,7 +88,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : " concept introduced previously. There is a good chance that a reader skipped over it or forgot.",
+          "text" : " concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -197,8 +167,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "level" : 2,
-        "title" : "Links to Sub Section",
-        "id" : "links-to-sub-section",
+        "title" : "Links to Subsection",
+        "id" : "links-to-subsection",
         "type" : "SubHeading"
       }, {
         "type" : "Paragraph",
@@ -206,7 +176,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Linking to subsections is the same as linking to a top level section. ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/flow/page-references#links-to-sub-section",
+          "url" : "/znai/flow/page-references#links-to-subsection",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
@@ -216,7 +186,29 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "[Here is an example](flow/page-references#links-to-sub-section)\n",
+        "snippet" : "[Here is an example](flow/page-references#links-to-subsection)\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/flow/page-references#links",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Subsection Shortcut",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " if a subsection is within the same page:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "[Subsection Shortcut](#links)\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -295,18 +287,19 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "You will get a build time error if you refer a page or a section/sub-section that does not exist.",
+          "text" : "You will get a build time error if you refer to a page or a section/sub-section that does not exist.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748799,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Page References",
       "pageMeta" : { },
-      "fileName" : "page-references",
       "dirName" : "flow",
+      "fileName" : "page-references",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Follow the Order",
         "id" : "follow-the-order"

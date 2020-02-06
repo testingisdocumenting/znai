@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: CLI</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: CLI</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,33 +13,17 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Command parameters</h1></header>
+<header><h1>Command Parameters</h1></header>
 <p>To bring attention to important parameters in your examples use the cli-command extension. :include-cli-command: my-super-command paramA --important-flag=true {paramsToHighlight: &quot;important&quot;} my-super-command paramA --important-flag=true Note: Parameter names gets matched as long as their names contain the passed value.</p>
 </article>
 
 <article>
 <header><h1>Long Commands</h1></header>
-<p>Long command lines will be automatically wrapped into multiple lines. another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3</p>
+<p>Long command lines will be automatically wrapped into multiple lines. another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Use threshold parameter to specify the max length of a line before splitting: :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { paramsToHighlight: [&quot;name&quot;, &quot;value&quot;], threshold: 30 } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Use splitAfter to force line splitting after specified parameter: :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { paramsToHighlight: [&quot;name&quot;, &quot;value&quot;], splitAfter: [&quot;--score=2&quot;, &quot;--value=8&quot;] } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Note: Unlike paramsToHighlight , splitAfter must be an exact match</p>
 </article>
 
 <article>
@@ -53,33 +38,18 @@
 
 <article>
 <header><h1>Output</h1></header>
-<p>To display console output and bring attention to certain lines use: :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]} Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/twosigma/TestingIsDocumenting.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/twosigma/TestingIsDocumenting.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/twosigma/TestingIsDocumenting.git 900e0be..bb9993f master -&gt; master You can highlight by a partial line text match :include-cli-output: cli/file-path-of-captured.out {highlight: &quot;remote&quot;} Or you can highlight by lines stored in a separate file :include-cli-output: cli/file-path-of-captured.out {highlightFile: &quot;cli/file-path-of-asserted-lines.txt&quot;} remote: Writing Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/twosigma/TestingIsDocumenting.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/twosigma/TestingIsDocumenting.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/twosigma/TestingIsDocumenting.git 900e0be..bb9993f master -&gt; master</p>
+<p>To display console output and bring attention to certain lines use: :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]} Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/twosigma/TestingIsDocumenting.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/twosigma/TestingIsDocumenting.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/twosigma/TestingIsDocumenting.git 900e0be..bb9993f master -&gt; master You can highlight by a partial line text match: :include-cli-output: cli/file-path-of-captured.out {highlight: &quot;remote&quot;} Or you can highlight by lines stored in a separate file: :include-cli-output: cli/file-path-of-captured.out {highlightFile: &quot;cli/file-path-of-asserted-lines.txt&quot;} remote: Writing Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/twosigma/TestingIsDocumenting.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/twosigma/TestingIsDocumenting.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/twosigma/TestingIsDocumenting.git 900e0be..bb9993f master -&gt; master</p>
 </article>
 
 <article>
-<header><h1>Presentation mode</h1></header>
+<header><h1>Presentation Mode</h1></header>
 <p>In presentation mode, cli-command will simulate typing inside the terminal.If your cli-output is long, you can split the presentation output into chunks: :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4], chunkSize: 10, fadedSize: 2} chunkSize specifies the maximum number of lines visible at a time. fadedSize specifies how many lines will be visible after and before as you move through output (default is 2). Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/twosigma/TestingIsDocumenting.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/twosigma/TestingIsDocumenting.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/twosigma/TestingIsDocumenting.git 900e0be..bb9993f master -&gt; master</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -102,7 +72,7 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Command parameters",
+      "title" : "Command Parameters",
       "id" : "command-parameters",
       "type" : "Section",
       "content" : [ {
@@ -147,6 +117,68 @@ ReactDOM.render(React.createElement(Documentation, {
         "command" : "another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3",
         "paramsToHighlight" : [ "name", "value" ],
         "type" : "CliCommand"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "threshold",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to specify the max length of a line before splitting:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {\n    paramsToHighlight: [\"name\", \"value\"], \n    threshold: 30\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "command" : "another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3",
+        "paramsToHighlight" : [ "name", "value" ],
+        "threshold" : 30,
+        "type" : "CliCommand"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "splitAfter",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to force line splitting after specified parameter:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {\n    paramsToHighlight: [\"name\", \"value\"], \n    splitAfter: [\"--score=2\", \"--value=8\"]\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "command" : "another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3",
+        "paramsToHighlight" : [ "score", "value" ],
+        "splitAfter" : [ "--value=8", "--score=2" ],
+        "type" : "CliCommand"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Unlike ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "paramsToHighlight",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "splitAfter",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " must be an exact match",
+          "type" : "SimpleText"
+        } ]
       } ]
     }, {
       "title" : "Handle Special Symbols",
@@ -233,7 +265,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "You can highlight by a partial line text match",
+          "text" : "You can highlight by a partial line text match:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -244,7 +276,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Or you can highlight by lines stored in a separate file",
+          "text" : "Or you can highlight by lines stored in a separate file:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -264,7 +296,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliOutput"
       } ]
     }, {
-      "title" : "Presentation mode",
+      "title" : "Presentation Mode",
       "id" : "presentation-mode",
       "type" : "Section",
       "content" : [ {
@@ -321,15 +353,16 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliOutput"
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748822,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "CLI",
       "pageMeta" : { },
-      "fileName" : "CLI",
       "dirName" : "snippets",
+      "fileName" : "CLI",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Command parameters",
+        "title" : "Command Parameters",
         "id" : "command-parameters"
       }, {
         "title" : "Long Commands",
@@ -344,7 +377,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Output",
         "id" : "output"
       }, {
-        "title" : "Presentation mode",
+        "title" : "Presentation Mode",
         "id" : "presentation-mode"
       } ]
     }

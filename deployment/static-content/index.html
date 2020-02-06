@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Static Content</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Static Content</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,45 +13,18 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Build</h1></header>
+<p>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin&gt; &lt;groupId&gt;com.twosigma.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.28-SNAPSHOT&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;my-docs&lt;/docId&gt; &lt;sourceRoot&gt;${project.basedir}/documentation&lt;/sourceRoot&gt; &lt;deployRoot&gt;${project.build.directory}&lt;/deployRoot&gt; &lt;port&gt;3333&lt;/port&gt; &lt;/configuration&gt; &lt;/plugin&gt; mvn znai:build</p>
+</article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -73,27 +47,48 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "static content intro",
-      "id" : "static-content-intro",
-      "type" : "Section"
-    }, {
-      "title" : "github placeholder",
-      "id" : "github-placeholder",
-      "type" : "Section"
+      "title" : "Build",
+      "id" : "build",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To generate static content for deployment use:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "command" : "znai --doc-id my-docs --deploy /path/to/static-content",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Using Maven:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "xml",
+        "snippet" : "<plugin>\n    <groupId>com.twosigma.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.28-SNAPSHOT</version>\n    <configuration>\n        <docId>my-docs</docId>\n        <sourceRoot>${project.basedir}/documentation</sourceRoot>\n        <deployRoot>${project.build.directory}</deployRoot>\n        <port>3333</port>\n    </configuration>\n</plugin>",
+        "title" : "maven plugin",
+        "highlight" : [ "deployRoot" ],
+        "type" : "Snippet"
+      }, {
+        "command" : "mvn znai:build",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748792,
     "tocItem" : {
       "sectionTitle" : "Deployment",
       "pageTitle" : "Static Content",
       "pageMeta" : { },
-      "fileName" : "static-content",
       "dirName" : "deployment",
+      "fileName" : "static-content",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "static content intro",
-        "id" : "static-content-intro"
-      }, {
-        "title" : "github placeholder",
-        "id" : "github-placeholder"
+        "title" : "Build",
+        "id" : "build"
       } ]
     }
   },

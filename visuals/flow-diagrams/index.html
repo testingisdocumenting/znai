@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Flow Diagrams</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Flow Diagrams</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,33 +13,22 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Nodes and Edges</h1></header>
-<p>Specify a JSON file to define a flow chart. { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;input one&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;input two&quot; }, { &quot;id&quot;: &quot;n3&quot;, &quot;label&quot;: &quot;processor&quot; }, { &quot;id&quot;: &quot;n4&quot;, &quot;label&quot;: &quot;output one&quot; }, { &quot;id&quot;: &quot;n5&quot;, &quot;label&quot;: &quot;output two&quot; }, { &quot;id&quot;: &quot;n6&quot;, &quot;label&quot;: &quot;output three&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n3&quot;], [&quot;n2&quot;, &quot;n3&quot;], [&quot;n3&quot;, &quot;n4&quot;], [&quot;n3&quot;, &quot;n5&quot;], [&quot;n3&quot;, &quot;n6&quot;] ] } At minimum edges must be provided. :include-flow-chart: simple-dag.json</p>
+<p>Specify a JSON file to define a flow chart. { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;input one&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;input two&quot; }, { &quot;id&quot;: &quot;n3&quot;, &quot;label&quot;: &quot;processor&quot; }, { &quot;id&quot;: &quot;n4&quot;, &quot;label&quot;: &quot;output one&quot; }, { &quot;id&quot;: &quot;n5&quot;, &quot;label&quot;: &quot;output two&quot; }, { &quot;id&quot;: &quot;n6&quot;, &quot;label&quot;: &quot;output three&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n3&quot;], [&quot;n2&quot;, &quot;n3&quot;], [&quot;n3&quot;, &quot;n4&quot;], [&quot;n3&quot;, &quot;n5&quot;], [&quot;n3&quot;, &quot;n6&quot;] ] } At the minimum edges must be provided. :include-flow-chart: simple-dag.json</p>
 </article>
 
 <article>
 <header><h1>Multiline Labels</h1></header>
 <p>Use \n to split your label into multiple lines. { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;input\none&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;output\ntwo&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n2&quot;] ] }</p>
+</article>
+
+<article>
+<header><h1>Nodes Size</h1></header>
+<p>Add config section to specify a common size for all the nodesNote: Size unit is not based on pixels. It is sized in inches (assuming correct DPI). It is the size units used by https://graphviz.gitlab.io/ Graphviz)Use width and height property on a node itself to control individual nodes size:</p>
 </article>
 
 <article>
@@ -48,7 +38,7 @@
 
 <article>
 <header><h1>Color Groups</h1></header>
-<p>Use colorGroup to assign a color group to a node. There are three color groups out of the box: a (default), b , c , d . { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;input one&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;input two&quot; }, { &quot;id&quot;: &quot;n3&quot;, &quot;label&quot;: &quot;processor&quot;, &quot;colorGroup&quot;: &quot;b&quot; }, { &quot;id&quot;: &quot;n4&quot;, &quot;label&quot;: &quot;output one&quot;, &quot;colorGroup&quot;: &quot;c&quot; }, { &quot;id&quot;: &quot;n5&quot;, &quot;label&quot;: &quot;output two&quot;, &quot;colorGroup&quot;: &quot;c&quot; }, { &quot;id&quot;: &quot;n6&quot;, &quot;label&quot;: &quot;output three&quot;, &quot;colorGroup&quot;: &quot;d&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n3&quot;], [&quot;n2&quot;, &quot;n3&quot;], [&quot;n3&quot;, &quot;n4&quot;], [&quot;n3&quot;, &quot;n5&quot;], [&quot;n3&quot;, &quot;n6&quot;] ] }</p>
+<p>Use colorGroup to assign a color group to a node. There are four color groups out of the box: a (default), b , c , d . { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;input one&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;input two&quot; }, { &quot;id&quot;: &quot;n3&quot;, &quot;label&quot;: &quot;processor&quot;, &quot;colorGroup&quot;: &quot;b&quot; }, { &quot;id&quot;: &quot;n4&quot;, &quot;label&quot;: &quot;output one&quot;, &quot;colorGroup&quot;: &quot;c&quot; }, { &quot;id&quot;: &quot;n5&quot;, &quot;label&quot;: &quot;output two&quot;, &quot;colorGroup&quot;: &quot;c&quot; }, { &quot;id&quot;: &quot;n6&quot;, &quot;label&quot;: &quot;output three&quot;, &quot;colorGroup&quot;: &quot;d&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n3&quot;], [&quot;n2&quot;, &quot;n3&quot;], [&quot;n3&quot;, &quot;n4&quot;], [&quot;n3&quot;, &quot;n5&quot;], [&quot;n3&quot;, &quot;n6&quot;] ] }</p>
 </article>
 
 <article>
@@ -83,28 +73,13 @@
 
 <article>
 <header><h1>Reusable Nodes</h1></header>
-<p>Move nodes definitions to a separate file(s) if you use them across multiple diagrams { &quot;edges&quot;: [ [&quot;a1&quot;, &quot;a2&quot;], [&quot;b1&quot;, &quot;b2&quot;], [&quot;b1&quot;, &quot;a2&quot;] ] } [ { &quot;id&quot;: &quot;a1&quot;, &quot;label&quot;: &quot;Label A 1&quot; }, { &quot;id&quot;: &quot;a2&quot;, &quot;label&quot;: &quot;Label A 2&quot; }, { &quot;id&quot;: &quot;a3&quot;, &quot;label&quot;: &quot;Label A 3&quot; } ] [ { &quot;id&quot;: &quot;b1&quot;, &quot;label&quot;: &quot;Label B 1&quot; }, { &quot;id&quot;: &quot;b2&quot;, &quot;label&quot;: &quot;Label B 2&quot; }, { &quot;id&quot;: &quot;b3&quot;, &quot;label&quot;: &quot;Label B 3&quot; } ] :include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: &quot;nodes/set-a.json&quot;} :include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: [&quot;nodes/set-a.json&quot;, &quot;nodes/set-b.json&quot;]}</p>
+<p>Move node definitions to a one or more separate files if you use them across multiple diagrams. { &quot;edges&quot;: [ [&quot;a1&quot;, &quot;a2&quot;], [&quot;b1&quot;, &quot;b2&quot;], [&quot;b1&quot;, &quot;a2&quot;] ] } [ { &quot;id&quot;: &quot;a1&quot;, &quot;label&quot;: &quot;Label A 1&quot; }, { &quot;id&quot;: &quot;a2&quot;, &quot;label&quot;: &quot;Label A 2&quot; }, { &quot;id&quot;: &quot;a3&quot;, &quot;label&quot;: &quot;Label A 3&quot; } ] [ { &quot;id&quot;: &quot;b1&quot;, &quot;label&quot;: &quot;Label B 1&quot; }, { &quot;id&quot;: &quot;b2&quot;, &quot;label&quot;: &quot;Label B 2&quot; }, { &quot;id&quot;: &quot;b3&quot;, &quot;label&quot;: &quot;Label B 3&quot; } ] :include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: &quot;nodes/set-a.json&quot;} :include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: [&quot;nodes/set-a.json&quot;, &quot;nodes/set-b.json&quot;]}</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -161,7 +136,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "At minimum ",
+          "text" : "At the minimum ",
           "type" : "SimpleText"
         }, {
           "code" : "edges",
@@ -209,6 +184,130 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "GraphVizDiagram"
       } ]
     }, {
+      "title" : "Nodes Size",
+      "id" : "nodes-size",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Add ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "config",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " section to specify a common size for all the nodes",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "title" : "shared nodes size",
+        "collapsedPaths" : [ "root.nodes", "root.edges" ],
+        "data" : {
+          "nodes" : [ {
+            "id" : "n1",
+            "label" : "one"
+          }, {
+            "id" : "n2",
+            "label" : "two"
+          }, {
+            "id" : "n3",
+            "label" : "three"
+          } ],
+          "edges" : [ [ "n1", "n2" ], [ "n2", "n3" ], [ "n1", "n3" ] ],
+          "config" : {
+            "nodes" : {
+              "width" : 1.5,
+              "height" : 1.5
+            }
+          }
+        },
+        "paths" : [ ],
+        "type" : "Json"
+      }, {
+        "diagram" : {
+          "isInvertedTextColorByStyleId" : { },
+          "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.40.1 (20161225.0304)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"404pt\" height=\"159pt\"\n viewBox=\"0.00 0.00 404.00 159.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 155)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-155 400,-155 400,4 -4,4\"/>\n<!-- n1 -->\n<g id=\"node1\" class=\"node\">\n<title>n1</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"0,-.5 0,-108.5 108,-108.5 108,-.5 0,-.5\"/>\n<text text-anchor=\"middle\" x=\"54\" y=\"-51.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">one</text>\n</g>\n<!-- n2 -->\n<g id=\"node2\" class=\"node\">\n<title>n2</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"144,-42.5 144,-150.5 252,-150.5 252,-42.5 144,-42.5\"/>\n<text text-anchor=\"middle\" x=\"198\" y=\"-93.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">two</text>\n</g>\n<!-- n1&#45;&gt;n2 -->\n<g id=\"edge1\" class=\"edge\">\n<title>n1&#45;&gt;n2</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M108.03,-70.2587C116.4956,-72.7279 125.3154,-75.3003 133.9791,-77.8272\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"133.0872,-81.2129 143.6672,-80.6529 135.0472,-74.4929 133.0872,-81.2129\"/>\n</g>\n<!-- n3 -->\n<g id=\"node3\" class=\"node\">\n<title>n3</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"288,-.5 288,-108.5 396,-108.5 396,-.5 288,-.5\"/>\n<text text-anchor=\"middle\" x=\"342\" y=\"-51.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">three</text>\n</g>\n<!-- n1&#45;&gt;n3 -->\n<g id=\"edge3\" class=\"edge\">\n<title>n1&#45;&gt;n3</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M108.3812,-39.7024C120.0462,-37.1227 132.3642,-34.8395 144,-33.5 191.6851,-28.0105 204.3149,-28.0105 252,-33.5 260.3632,-34.4628 269.0789,-35.913 277.6512,-37.6105\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"277.1131,-41.0738 287.6188,-39.7024 278.5509,-34.223 277.1131,-41.0738\"/>\n</g>\n<!-- n2&#45;&gt;n3 -->\n<g id=\"edge2\" class=\"edge\">\n<title>n2&#45;&gt;n3</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M252.03,-80.7413C260.4956,-78.2721 269.3154,-75.6997 277.9791,-73.1728\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"279.0472,-76.5071 287.6672,-70.3471 277.0872,-69.7871 279.0472,-76.5071\"/>\n</g>\n</g>\n</svg>\n",
+          "stylesByNodeId" : { },
+          "id" : "dag3"
+        },
+        "idsToHighlight" : [ ],
+        "wide" : false,
+        "urls" : { },
+        "type" : "GraphVizDiagram"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Size unit is not based on pixels. It is sized in inches (assuming correct DPI). It is the size units used by ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://graphviz.gitlab.io/",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Graphviz",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ")",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "width",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "height",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " property on a node itself to control individual nodes size:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "title" : "nodes size override",
+        "collapsedPaths" : [ "root.config", "root.edges" ],
+        "data" : {
+          "nodes" : [ {
+            "id" : "n1",
+            "label" : "one"
+          }, {
+            "id" : "n2",
+            "label" : "two"
+          }, {
+            "id" : "n3",
+            "label" : "three",
+            "width" : 2,
+            "height" : 2
+          } ],
+          "edges" : [ [ "n1", "n2" ], [ "n2", "n3" ], [ "n1", "n3" ] ],
+          "config" : {
+            "nodes" : {
+              "width" : 1,
+              "height" : 1
+            }
+          }
+        },
+        "paths" : [ ],
+        "type" : "Json"
+      }, {
+        "diagram" : {
+          "isInvertedTextColorByStyleId" : { },
+          "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.40.1 (20161225.0304)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"368pt\" height=\"153pt\"\n viewBox=\"0.00 0.00 368.00 153.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 149)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-149 364,-149 364,4 -4,4\"/>\n<!-- n1 -->\n<g id=\"node1\" class=\"node\">\n<title>n1</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"0,-36.5 0,-108.5 72,-108.5 72,-36.5 0,-36.5\"/>\n<text text-anchor=\"middle\" x=\"36\" y=\"-69.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">one</text>\n</g>\n<!-- n2 -->\n<g id=\"node2\" class=\"node\">\n<title>n2</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"108,-69.5 108,-141.5 180,-141.5 180,-69.5 108,-69.5\"/>\n<text text-anchor=\"middle\" x=\"144\" y=\"-102.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">two</text>\n</g>\n<!-- n1&#45;&gt;n2 -->\n<g id=\"edge1\" class=\"edge\">\n<title>n1&#45;&gt;n2</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M72.2629,-83.5803C80.5442,-86.1107 89.4517,-88.8325 98.0778,-91.4682\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"97.0627,-94.8177 107.649,-94.3927 99.1083,-88.1233 97.0627,-94.8177\"/>\n</g>\n<!-- n3 -->\n<g id=\"node3\" class=\"node\">\n<title>n3</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"216,-.5 216,-144.5 360,-144.5 360,-.5 216,-.5\"/>\n<text text-anchor=\"middle\" x=\"288\" y=\"-69.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">three</text>\n</g>\n<!-- n1&#45;&gt;n3 -->\n<g id=\"edge3\" class=\"edge\">\n<title>n1&#45;&gt;n3</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M72.1127,-65.2826C83.5412,-63.3215 96.2548,-61.4721 108,-60.5 139.8284,-57.8658 174.8604,-59.2342 205.4938,-61.8344\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"205.4278,-65.3427 215.7029,-62.7594 206.0596,-58.3712 205.4278,-65.3427\"/>\n</g>\n<!-- n2&#45;&gt;n3 -->\n<g id=\"edge2\" class=\"edge\">\n<title>n2&#45;&gt;n3</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M180.3373,-97.1727C188.2915,-95.3499 197.0227,-93.349 205.9645,-91.2998\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"206.7577,-94.7088 215.7231,-89.0634 205.194,-87.8857 206.7577,-94.7088\"/>\n</g>\n</g>\n</svg>\n",
+          "stylesByNodeId" : { },
+          "id" : "dag4"
+        },
+        "idsToHighlight" : [ ],
+        "wide" : false,
+        "urls" : { },
+        "type" : "GraphVizDiagram"
+      } ]
+    }, {
       "title" : "Highlight",
       "id" : "highlight",
       "type" : "Section",
@@ -235,7 +334,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : {
             "n2" : [ "h" ]
           },
-          "id" : "dag3"
+          "id" : "dag5"
         },
         "idsToHighlight" : [ ],
         "wide" : false,
@@ -269,7 +368,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "isInvertedTextColorByStyleId" : { },
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.40.1 (20161225.0304)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"302pt\" height=\"161pt\"\n viewBox=\"0.00 0.00 302.43 161.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 157)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-157 298.4277,-157 298.4277,4 -4,4\"/>\n<!-- n1 -->\n<g id=\"node1\" class=\"node\">\n<title>n1</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"0,-86.5 0,-124.5 69.1475,-124.5 69.1475,-86.5 0,-86.5\"/>\n<text text-anchor=\"middle\" x=\"34.5737\" y=\"-102.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">input one</text>\n</g>\n<!-- n3 -->\n<g id=\"node2\" class=\"node\">\n<title>n3</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"105.1475,-57.5 105.1475,-95.5 177.0537,-95.5 177.0537,-57.5 105.1475,-57.5\"/>\n<text text-anchor=\"middle\" x=\"141.1006\" y=\"-73.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">processor</text>\n</g>\n<!-- n1&#45;&gt;n3 -->\n<g id=\"edge1\" class=\"edge\">\n<title>n1&#45;&gt;n3</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M69.1599,-96.0845C77.4583,-93.8254 86.4493,-91.3778 95.1726,-89.0031\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"96.1271,-92.3707 104.8566,-86.3668 94.2884,-85.6165 96.1271,-92.3707\"/>\n</g>\n<!-- n4 -->\n<g id=\"node4\" class=\"node\">\n<title>n4</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"216.1079,-114.5 216.1079,-152.5 291.3735,-152.5 291.3735,-114.5 216.1079,-114.5\"/>\n<text text-anchor=\"middle\" x=\"253.7407\" y=\"-130.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">output one</text>\n</g>\n<!-- n3&#45;&gt;n4 -->\n<g id=\"edge3\" class=\"edge\">\n<title>n3&#45;&gt;n4</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M177.3607,-94.8489C186.8147,-99.633 197.1362,-104.856 207.0477,-109.8716\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"205.4953,-113.0086 215.9982,-114.4009 208.6559,-106.7628 205.4953,-113.0086\"/>\n</g>\n<!-- n5 -->\n<g id=\"node5\" class=\"node\">\n<title>n5</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"216.6694,-57.5 216.6694,-95.5 290.812,-95.5 290.812,-57.5 216.6694,-57.5\"/>\n<text text-anchor=\"middle\" x=\"253.7407\" y=\"-73.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">output two</text>\n</g>\n<!-- n3&#45;&gt;n5 -->\n<g id=\"edge4\" class=\"edge\">\n<title>n3&#45;&gt;n5</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M177.3607,-76.5C186.5233,-76.5 196.5007,-76.5 206.13,-76.5\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"206.3872,-80.0001 216.3872,-76.5 206.3872,-73.0001 206.3872,-80.0001\"/>\n</g>\n<!-- n6 -->\n<g id=\"node6\" class=\"node\">\n<title>n6</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"213.0537,-.5 213.0537,-38.5 294.4277,-38.5 294.4277,-.5 213.0537,-.5\"/>\n<text text-anchor=\"middle\" x=\"253.7407\" y=\"-16.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">output three</text>\n</g>\n<!-- n3&#45;&gt;n6 -->\n<g id=\"edge5\" class=\"edge\">\n<title>n3&#45;&gt;n6</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M177.3607,-58.1511C186.8147,-53.367 197.1362,-48.144 207.0477,-43.1284\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"208.6559,-46.2372 215.9982,-38.5991 205.4953,-39.9914 208.6559,-46.2372\"/>\n</g>\n<!-- n2 -->\n<g id=\"node3\" class=\"node\">\n<title>n2</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\".5615,-29.5 .5615,-67.5 68.5859,-67.5 68.5859,-29.5 .5615,-29.5\"/>\n<text text-anchor=\"middle\" x=\"34.5737\" y=\"-45.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">input two</text>\n</g>\n<!-- n2&#45;&gt;n3 -->\n<g id=\"edge2\" class=\"edge\">\n<title>n2&#45;&gt;n3</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M68.8659,-57.5135C77.2622,-59.7204 86.3821,-62.1176 95.225,-64.4418\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"94.4765,-67.8639 105.0378,-67.0211 96.256,-61.0939 94.4765,-67.8639\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : { },
-          "id" : "dag4"
+          "id" : "dag6"
         },
         "idsToHighlight" : [ "n3" ],
         "wide" : false,
@@ -298,7 +397,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "colorGroup",
           "type" : "InlinedCode"
         }, {
-          "text" : " to assign a color group to a node. There are three color groups out of the box: ",
+          "text" : " to assign a color group to a node. There are four color groups out of the box: ",
           "type" : "SimpleText"
         }, {
           "code" : "a",
@@ -339,7 +438,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "n5" : [ "c" ],
             "n6" : [ "d" ]
           },
-          "id" : "dag5"
+          "id" : "dag7"
         },
         "idsToHighlight" : [ ],
         "wide" : false,
@@ -383,7 +482,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "anotherDb" : [ "database-bottom-label" ],
             "outcome" : [ "c", "world" ]
           },
-          "id" : "dag6"
+          "id" : "dag8"
         },
         "idsToHighlight" : [ ],
         "wide" : false,
@@ -441,7 +540,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "n5" : [ "c" ],
             "n6" : [ "d" ]
           },
-          "id" : "dag7"
+          "id" : "dag9"
         },
         "idsToHighlight" : [ ],
         "wide" : false,
@@ -491,7 +590,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "isInvertedTextColorByStyleId" : { },
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.40.1 (20161225.0304)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"275pt\" height=\"197pt\"\n viewBox=\"0.00 0.00 275.32 197.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 193)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-193 271.3198,-193 271.3198,4 -4,4\"/>\n<!-- n1 -->\n<g id=\"node1\" class=\"node\">\n<title>n1</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"53.0591,-150.5 53.0591,-188.5 122.2065,-188.5 122.2065,-150.5 53.0591,-150.5\"/>\n<text text-anchor=\"middle\" x=\"87.6328\" y=\"-166.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">input one</text>\n</g>\n<!-- n3 -->\n<g id=\"node2\" class=\"node\">\n<title>n3</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"94.6797,-75.5 94.6797,-113.5 166.5859,-113.5 166.5859,-75.5 94.6797,-75.5\"/>\n<text text-anchor=\"middle\" x=\"130.6328\" y=\"-91.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">processor</text>\n</g>\n<!-- n1&#45;&gt;n3 -->\n<g id=\"edge1\" class=\"edge\">\n<title>n1&#45;&gt;n3</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M98.7064,-150.1856C103.5214,-141.7873 109.2571,-131.7833 114.5297,-122.5868\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"117.6592,-124.1651 119.5968,-113.7489 111.5865,-120.6834 117.6592,-124.1651\"/>\n</g>\n<!-- n4 -->\n<g id=\"node4\" class=\"node\">\n<title>n4</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"0,-.5 0,-38.5 75.2656,-38.5 75.2656,-.5 0,-.5\"/>\n<text text-anchor=\"middle\" x=\"37.6328\" y=\"-16.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">output one</text>\n</g>\n<!-- n3&#45;&gt;n4 -->\n<g id=\"edge3\" class=\"edge\">\n<title>n3&#45;&gt;n4</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M106.683,-75.1856C95.4012,-66.0874 81.7828,-55.1048 69.6322,-45.3059\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"71.4828,-42.302 61.5015,-38.7489 67.0885,-47.7509 71.4828,-42.302\"/>\n</g>\n<!-- n5 -->\n<g id=\"node5\" class=\"node\">\n<title>n5</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"93.5615,-.5 93.5615,-38.5 167.7041,-38.5 167.7041,-.5 93.5615,-.5\"/>\n<text text-anchor=\"middle\" x=\"130.6328\" y=\"-16.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">output two</text>\n</g>\n<!-- n3&#45;&gt;n5 -->\n<g id=\"edge4\" class=\"edge\">\n<title>n3&#45;&gt;n5</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M130.6328,-75.1856C130.6328,-67.2247 130.6328,-57.821 130.6328,-49.03\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"134.1329,-48.7489 130.6328,-38.7489 127.1329,-48.7489 134.1329,-48.7489\"/>\n</g>\n<!-- n6 -->\n<g id=\"node6\" class=\"node\">\n<title>n6</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"185.9458,-.5 185.9458,-38.5 267.3198,-38.5 267.3198,-.5 185.9458,-.5\"/>\n<text text-anchor=\"middle\" x=\"226.6328\" y=\"-16.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">output three</text>\n</g>\n<!-- n3&#45;&gt;n6 -->\n<g id=\"edge5\" class=\"edge\">\n<title>n3&#45;&gt;n6</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M155.1061,-75.3803C166.9542,-66.1239 181.343,-54.8826 194.0999,-44.9163\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"196.4788,-47.4994 202.2043,-38.5848 192.1692,-41.9832 196.4788,-47.4994\"/>\n</g>\n<!-- n2 -->\n<g id=\"node3\" class=\"node\">\n<title>n2</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"140.6206,-150.5 140.6206,-188.5 208.645,-188.5 208.645,-150.5 140.6206,-150.5\"/>\n<text text-anchor=\"middle\" x=\"174.6328\" y=\"-166.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">input two</text>\n</g>\n<!-- n2&#45;&gt;n3 -->\n<g id=\"edge2\" class=\"edge\">\n<title>n2&#45;&gt;n3</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M163.3017,-150.1856C158.3747,-141.7873 152.5057,-131.7833 147.1104,-122.5868\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"150.0045,-120.6031 141.9255,-113.7489 143.9669,-124.1452 150.0045,-120.6031\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : { },
-          "id" : "dag8"
+          "id" : "dag10"
         },
         "idsToHighlight" : [ ],
         "wide" : false,
@@ -541,7 +640,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "isInvertedTextColorByStyleId" : { },
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.40.1 (20161225.0304)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"238pt\" height=\"200pt\"\n viewBox=\"0.00 0.00 238.06 200.08\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 196.0756)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-196.0756 234.064,-196.0756 234.064,4 -4,4\"/>\n<!-- n1 -->\n<g id=\"node1\" class=\"node\">\n<title>n1</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"19.7282,-16.8856 19.7282,-54.8856 88.8756,-54.8856 88.8756,-16.8856 19.7282,-16.8856\"/>\n<text text-anchor=\"middle\" x=\"54.3019\" y=\"-32.8856\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">input one</text>\n</g>\n<!-- n3 -->\n<g id=\"node2\" class=\"node\">\n<title>n3</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"76.7899,-73.3398 76.7899,-111.3398 148.6961,-111.3398 148.6961,-73.3398 76.7899,-73.3398\"/>\n<text text-anchor=\"middle\" x=\"112.743\" y=\"-89.3398\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">processor</text>\n</g>\n<!-- n1&#45;&gt;n3 -->\n<g id=\"edge1\" class=\"edge\">\n<title>n1&#45;&gt;n3</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M74.0874,-54.9984C77.8003,-58.585 81.7408,-62.3916 85.6312,-66.1498\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"83.3538,-68.8162 92.9779,-73.2466 88.2173,-63.7816 83.3538,-68.8162\"/>\n</g>\n<!-- n4 -->\n<g id=\"node4\" class=\"node\">\n<title>n4</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"88.0177,-153.5756 88.0177,-191.5756 163.2833,-191.5756 163.2833,-153.5756 88.0177,-153.5756\"/>\n<text text-anchor=\"middle\" x=\"125.6505\" y=\"-169.5756\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">output one</text>\n</g>\n<!-- n3&#45;&gt;n4 -->\n<g id=\"edge3\" class=\"edge\">\n<title>n3&#45;&gt;n4</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M115.8019,-111.3545C117.3339,-120.8777 119.2226,-132.6187 120.935,-143.2632\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"117.5249,-144.1021 122.5688,-153.4193 124.436,-142.9903 117.5249,-144.1021\"/>\n</g>\n<!-- n5 -->\n<g id=\"node5\" class=\"node\">\n<title>n5</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"155.9214,-85.7116 155.9214,-123.7116 230.064,-123.7116 230.064,-85.7116 155.9214,-85.7116\"/>\n<text text-anchor=\"middle\" x=\"192.9927\" y=\"-101.7116\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">output two</text>\n</g>\n<!-- n3&#45;&gt;n5 -->\n<g id=\"edge4\" class=\"edge\">\n<title>n3&#45;&gt;n5</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M149.111,-97.9465C149.2458,-97.9673 149.3807,-97.9881 149.5156,-98.0089\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"145.1825,-100.8821 155.5991,-98.9468 146.2492,-93.9638 145.1825,-100.8821\"/>\n</g>\n<!-- n6 -->\n<g id=\"node6\" class=\"node\">\n<title>n6</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"0,-111.0012 0,-149.0012 81.374,-149.0012 81.374,-111.0012 0,-111.0012\"/>\n<text text-anchor=\"middle\" x=\"40.687\" y=\"-127.0012\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">output three</text>\n</g>\n<!-- n3&#45;&gt;n6 -->\n<g id=\"edge5\" class=\"edge\">\n<title>n3&#45;&gt;n6</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M76.715,-111.1705C76.6446,-111.2073 76.5743,-111.2441 76.5039,-111.2808\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"83.5337,-103.6547 76.2928,-111.3912 86.7778,-109.8588 83.5337,-103.6547\"/>\n</g>\n<!-- n2 -->\n<g id=\"node3\" class=\"node\">\n<title>n2</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"114.5953,-.5 114.5953,-38.5 182.6197,-38.5 182.6197,-.5 114.5953,-.5\"/>\n<text text-anchor=\"middle\" x=\"148.6075\" y=\"-16.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">input two</text>\n</g>\n<!-- n2&#45;&gt;n3 -->\n<g id=\"edge2\" class=\"edge\">\n<title>n2&#45;&gt;n3</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M139.1845,-38.6378C135.3544,-46.4166 130.8501,-55.5647 126.6553,-64.0843\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"123.3804,-62.8122 122.103,-73.3298 129.6604,-65.9044 123.3804,-62.8122\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : { },
-          "id" : "dag9"
+          "id" : "dag11"
         },
         "idsToHighlight" : [ ],
         "wide" : false,
@@ -580,7 +679,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "isInvertedTextColorByStyleId" : { },
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.40.1 (20161225.0304)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"224pt\" height=\"104pt\"\n viewBox=\"0.00 0.00 224.34 104.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 100)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-100 220.3359,-100 220.3359,4 -4,4\"/>\n<!-- n1 -->\n<g id=\"node1\" class=\"node\">\n<title>n1</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"17.5098,-57.5 17.5098,-95.5 79.416,-95.5 79.416,-57.5 17.5098,-57.5\"/>\n<text text-anchor=\"middle\" x=\"48.4629\" y=\"-73.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">No Link</text>\n</g>\n<!-- n2 -->\n<g id=\"node2\" class=\"node\">\n<title>n2</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"132.9258,-28.5 132.9258,-66.5 216.3359,-66.5 216.3359,-28.5 132.9258,-28.5\"/>\n<text text-anchor=\"middle\" x=\"174.6309\" y=\"-44.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">Link To Java</text>\n</g>\n<!-- n1&#45;&gt;n2 -->\n<g id=\"edge1\" class=\"edge\">\n<title>n1&#45;&gt;n2</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M79.6505,-69.3315C92.6943,-66.3333 108.2071,-62.7676 122.8751,-59.3962\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"123.8924,-62.7537 132.8542,-57.1025 122.3243,-55.9316 123.8924,-62.7537\"/>\n</g>\n<!-- n3 -->\n<g id=\"node3\" class=\"node\">\n<title>n3</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"0,-.5 0,-38.5 96.9258,-38.5 96.9258,-.5 0,-.5\"/>\n<text text-anchor=\"middle\" x=\"48.4629\" y=\"-16.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">Link to External</text>\n</g>\n<!-- n3&#45;&gt;n2 -->\n<g id=\"edge2\" class=\"edge\">\n<title>n3&#45;&gt;n2</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M97.2427,-30.3255C105.5249,-32.1636 114.1543,-34.0787 122.5182,-35.9348\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"122.0267,-39.4108 132.5475,-38.1606 123.5433,-32.5771 122.0267,-39.4108\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : { },
-          "id" : "dag10"
+          "id" : "dag12"
         },
         "idsToHighlight" : [ ],
         "wide" : false,
@@ -607,7 +706,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Move nodes definitions to a separate file(s) if you use them across multiple diagrams",
+          "text" : "Move node definitions to a one or more separate files if you use them across multiple diagrams.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -635,7 +734,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "isInvertedTextColorByStyleId" : { },
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.40.1 (20161225.0304)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"182pt\" height=\"104pt\"\n viewBox=\"0.00 0.00 182.32 104.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 100)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-100 178.3242,-100 178.3242,4 -4,4\"/>\n<!-- a1 -->\n<g id=\"node1\" class=\"node\">\n<title>a1</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"0,-57.5 0,-95.5 69.1621,-95.5 69.1621,-57.5 0,-57.5\"/>\n<text text-anchor=\"middle\" x=\"34.5811\" y=\"-73.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">Label A 1</text>\n</g>\n<!-- a2 -->\n<g id=\"node2\" class=\"node\">\n<title>a2</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"105.1621,-57.5 105.1621,-95.5 174.3242,-95.5 174.3242,-57.5 105.1621,-57.5\"/>\n<text text-anchor=\"middle\" x=\"139.7432\" y=\"-73.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">Label A 2</text>\n</g>\n<!-- a1&#45;&gt;a2 -->\n<g id=\"edge1\" class=\"edge\">\n<title>a1&#45;&gt;a2</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M69.3065,-76.5C77.4729,-76.5 86.2913,-76.5 94.8337,-76.5\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"95.0542,-80.0001 105.0542,-76.5 95.0541,-73.0001 95.0542,-80.0001\"/>\n</g>\n<!-- b1 -->\n<g id=\"node3\" class=\"node\">\n<title>b1</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"7.5811,-.5 7.5811,-38.5 61.5811,-38.5 61.5811,-.5 7.5811,-.5\"/>\n<text text-anchor=\"middle\" x=\"34.5811\" y=\"-16.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">b1</text>\n</g>\n<!-- b1&#45;&gt;a2 -->\n<g id=\"edge3\" class=\"edge\">\n<title>b1&#45;&gt;a2</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M61.6629,-34.1789C72.0352,-39.8009 84.1543,-46.3697 95.7077,-52.6319\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"94.3484,-55.8762 104.8079,-57.5644 97.6841,-49.722 94.3484,-55.8762\"/>\n</g>\n<!-- b2 -->\n<g id=\"node4\" class=\"node\">\n<title>b2</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"112.7432,-.5 112.7432,-38.5 166.7432,-38.5 166.7432,-.5 112.7432,-.5\"/>\n<text text-anchor=\"middle\" x=\"139.7432\" y=\"-16.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">b2</text>\n</g>\n<!-- b1&#45;&gt;b2 -->\n<g id=\"edge2\" class=\"edge\">\n<title>b1&#45;&gt;b2</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M61.6629,-19.5C73.956,-19.5 88.7027,-19.5 102.0534,-19.5\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"102.3876,-23.0001 112.3876,-19.5 102.3875,-16.0001 102.3876,-23.0001\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : { },
-          "id" : "dag11"
+          "id" : "dag13"
         },
         "idsToHighlight" : [ ],
         "wide" : false,
@@ -651,7 +750,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "isInvertedTextColorByStyleId" : { },
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.40.1 (20161225.0304)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"185pt\" height=\"104pt\"\n viewBox=\"0.00 0.00 184.51 104.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 100)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-100 180.5117,-100 180.5117,4 -4,4\"/>\n<!-- a1 -->\n<g id=\"node1\" class=\"node\">\n<title>a1</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\".5469,-57.5 .5469,-95.5 69.709,-95.5 69.709,-57.5 .5469,-57.5\"/>\n<text text-anchor=\"middle\" x=\"35.1279\" y=\"-73.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">Label A 1</text>\n</g>\n<!-- a2 -->\n<g id=\"node2\" class=\"node\">\n<title>a2</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"106.8027,-57.5 106.8027,-95.5 175.9648,-95.5 175.9648,-57.5 106.8027,-57.5\"/>\n<text text-anchor=\"middle\" x=\"141.3838\" y=\"-73.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">Label A 2</text>\n</g>\n<!-- a1&#45;&gt;a2 -->\n<g id=\"edge1\" class=\"edge\">\n<title>a1&#45;&gt;a2</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M69.9201,-76.5C78.3595,-76.5 87.5025,-76.5 96.3399,-76.5\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"96.5135,-80.0001 106.5135,-76.5 96.5134,-73.0001 96.5135,-80.0001\"/>\n</g>\n<!-- b1 -->\n<g id=\"node3\" class=\"node\">\n<title>b1</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"0,-.5 0,-38.5 70.2559,-38.5 70.2559,-.5 0,-.5\"/>\n<text text-anchor=\"middle\" x=\"35.1279\" y=\"-16.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">Label B 1</text>\n</g>\n<!-- b1&#45;&gt;a2 -->\n<g id=\"edge3\" class=\"edge\">\n<title>b1&#45;&gt;a2</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M70.5096,-38.4802C79.203,-43.1437 88.6126,-48.1914 97.6479,-53.0383\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"96.0514,-56.1536 106.5181,-57.7966 99.3605,-49.9851 96.0514,-56.1536\"/>\n</g>\n<!-- b2 -->\n<g id=\"node4\" class=\"node\">\n<title>b2</title>\n<polygon fill=\"none\" stroke=\"#000000\" points=\"106.2559,-.5 106.2559,-38.5 176.5117,-38.5 176.5117,-.5 106.2559,-.5\"/>\n<text text-anchor=\"middle\" x=\"141.3838\" y=\"-16.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\" fill=\"#000000\">Label B 2</text>\n</g>\n<!-- b1&#45;&gt;b2 -->\n<g id=\"edge2\" class=\"edge\">\n<title>b1&#45;&gt;b2</title>\n<path fill=\"none\" stroke=\"#000000\" d=\"M70.5096,-19.5C78.6644,-19.5 87.4494,-19.5 95.9645,-19.5\"/>\n<polygon fill=\"#000000\" stroke=\"#000000\" points=\"96.1567,-23.0001 106.1566,-19.5 96.1566,-16.0001 96.1567,-23.0001\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : { },
-          "id" : "dag12"
+          "id" : "dag14"
         },
         "idsToHighlight" : [ ],
         "wide" : false,
@@ -659,19 +758,23 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "GraphVizDiagram"
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748926,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Flow Diagrams",
       "pageMeta" : { },
-      "fileName" : "flow-diagrams",
       "dirName" : "visuals",
+      "fileName" : "flow-diagrams",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Nodes and Edges",
         "id" : "nodes-and-edges"
       }, {
         "title" : "Multiline Labels",
         "id" : "multiline-labels"
+      }, {
+        "title" : "Nodes Size",
+        "id" : "nodes-size"
       }, {
         "title" : "Highlight",
         "id" : "highlight"

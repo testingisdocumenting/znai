@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Markdown</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Markdown</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,59 +13,28 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Single Markdown File</h1></header>
-<p>To reuse Markdown in several places without duplication, use the include-markdown plugin. :include-markdown: markdown-dir/md-to-include.md</p>
+<p>To reuse Markdown in several places without duplication, use the include-markdown plugin. :include-markdown: markdown-dir/md-to-include.md This markdown, and the sub-heading above, were included using the include-markdown plugin. Super easy.</p>
 </article>
 
 <article>
 <header><h1>Multiple Markdown Files</h1></header>
-<p>You can also include all the Markdown files within a directory by using include-markdowns .This plugin can be used to generate a release notes or an FAQ page :include-markdowns: markdown-dir Note: include-markdowns displays the files of the specified directory based on the filename, in alphabetical order.</p>
+<p>You can also include all the Markdown files within a directory by using include-markdowns .This plugin can be used to generate release notes or an FAQ page. :include-markdowns: markdown-dir This markdown, and the sub-heading above, were included using the include-markdown plugin. Super easy. This markdown, and the sub-hed above, were included using the include-markdowns plugin. Please notice the s. This markdown, and the sub-hed above, were included using the include-markdowns plugin. Please notice the s. bash $ command specific to external Note: include-markdowns displays the files of the specified directory based on the filename, in alphabetical order.</p>
 </article>
 
 <article>
 <header><h1>Optional Markdown</h1></header>
-<p>When you document an open source project you may have different instructions based on where the documentation is deployed.For example, this documentation has two versions, one deployed internally at Two Sigma and one is deployed externally using GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like Getting Started.We build documentation twice and the differences are handled by :include-markdown: 's firstAvailable parameter. :include-markdown: {firstAvailable: [ &quot;markdown-dir/getting-started-step-internal.md&quot;, &quot;markdown-dir/getting-started-step-external.md&quot;]}</p>
+<p>When you document an open source project you may have different instructions based on where the documentation is deployed.For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like Getting Started.We build documentation twice and the differences are handled by :include-markdown: 's firstAvailable parameter. :include-markdown: {firstAvailable: [ &quot;markdown-dir/getting-started-step-internal.md&quot;, &quot;markdown-dir/getting-started-step-external.md&quot;]} bash $ command specific to external</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -144,7 +114,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "This plugin can be used to generate a release notes or an FAQ page",
+          "text" : "This plugin can be used to generate release notes or an FAQ page.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -253,7 +223,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "For example, this documentation has two versions, one deployed internally at Two Sigma and one is deployed externally using GitHub Pages.",
+          "text" : "For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using GitHub Pages.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
@@ -301,13 +271,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748841,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Markdown",
       "pageMeta" : { },
-      "fileName" : "markdown",
       "dirName" : "snippets",
+      "fileName" : "markdown",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Single Markdown File",
         "id" : "single-markdown-file"

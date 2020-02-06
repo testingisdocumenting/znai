@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Search</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Search</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,23 +13,7 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
@@ -38,28 +23,13 @@
 
 <article>
 <header><h1>Global</h1></header>
-<p>Global search is performed by https://search.app.twosigma.com search/.Global search consider each page section as an independent entry as well.In the case of global search, the full title gets expanded to include documentation title, so the full title of the current section will be: Znai Flow Search Global.Go now and https://search.app.twosigma.com search for znai search and see what results are there.In case of global search it is even more important to come up with the good names forChaptersPagesPage SectionsTo make your product more discoverable consider naming your page sections and page titles to match potential user queries. E.g., consider a page called Getting Started. DO # Node installation To install node.js use ... DON'T # Prerequsites To install node.js use ...</p>
+<p>Besides local search capabilities, Znai provides a search entry XML file for your documentation. This file can be crawled to expose your documentation to external search engines.Your search entry file can be located at the following endpoint: &lt;base-url&gt;/&lt;doc-id&gt;/search-entries.xml For example, the search entry for the Znai documentation on Github is located at https://twosigma.github.io/znai/search-entries.xml twosigma.github.io/znai/search-entries.xml</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -228,193 +198,60 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Global search is performed by ",
+          "text" : "Besides local search capabilities, ",
           "type" : "SimpleText"
         }, {
-          "url" : "https://search.app.twosigma.com",
+          "code" : "Znai",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " provides a search entry ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "XML",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file for your documentation. This file can be crawled to expose your documentation to external search engines.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Your search entry file can be located at the following endpoint: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "<base-url>/<doc-id>/search-entries.xml",
+          "type" : "InlinedCode"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "For example, the search entry for the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "Znai",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " documentation on Github is located at ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://twosigma.github.io/znai/search-entries.xml",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
-            "text" : "search/",
+            "text" : "twosigma.github.io/znai/search-entries.xml",
             "type" : "SimpleText"
           } ]
-        }, {
-          "text" : ".",
-          "type" : "SimpleText"
         } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Global search consider each page section as an independent entry as well.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "In the case of global search, the full title gets expanded to include documentation title, so the full title of the",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "current section will be: ",
-          "type" : "SimpleText"
-        }, {
-          "type" : "Emphasis",
-          "content" : [ {
-            "text" : "Znai Flow Search Global",
-            "type" : "SimpleText"
-          } ]
-        }, {
-          "text" : ".",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Go now and ",
-          "type" : "SimpleText"
-        }, {
-          "url" : "https://search.app.twosigma.com",
-          "isFile" : false,
-          "type" : "Link",
-          "content" : [ {
-            "text" : "search",
-            "type" : "SimpleText"
-          } ]
-        }, {
-          "text" : " for ",
-          "type" : "SimpleText"
-        }, {
-          "type" : "Emphasis",
-          "content" : [ {
-            "text" : "znai search",
-            "type" : "SimpleText"
-          } ]
-        }, {
-          "text" : " and see what results are there.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "In case of global search it is even more important to come up with the good names for",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "bulletMarker" : "*",
-        "tight" : true,
-        "type" : "BulletList",
-        "content" : [ {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Chapters",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Pages",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Page Sections",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To make your product more discoverable consider naming your ",
-          "type" : "SimpleText"
-        }, {
-          "type" : "Emphasis",
-          "content" : [ {
-            "text" : "page sections",
-            "type" : "SimpleText"
-          } ]
-        }, {
-          "text" : " and ",
-          "type" : "SimpleText"
-        }, {
-          "type" : "Emphasis",
-          "content" : [ {
-            "text" : "page titles",
-            "type" : "SimpleText"
-          } ]
-        }, {
-          "text" : " to match potential user queries.",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "E.g., consider a page called ",
-          "type" : "SimpleText"
-        }, {
-          "type" : "Emphasis",
-          "content" : [ {
-            "text" : "Getting Started",
-            "type" : "SimpleText"
-          } ]
-        }, {
-          "text" : ".",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "columns" : [ {
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "type" : "StrongEmphasis",
-              "content" : [ {
-                "text" : "DO",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          }, {
-            "lang" : "",
-            "snippet" : "# Node installation \n\nTo install node.js use ...\n",
-            "lineNumber" : "",
-            "type" : "Snippet"
-          } ]
-        }, {
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "type" : "StrongEmphasis",
-              "content" : [ {
-                "text" : "DON'T",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          }, {
-            "lang" : "",
-            "snippet" : "# Prerequsites\n\nTo install node.js use ...    \n",
-            "lineNumber" : "",
-            "type" : "Snippet"
-          } ]
-        } ],
-        "config" : { },
-        "type" : "Columns"
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748801,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Search",
       "pageMeta" : { },
-      "fileName" : "search",
       "dirName" : "flow",
+      "fileName" : "search",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Local",
         "id" : "local"

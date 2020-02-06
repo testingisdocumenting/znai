@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Code Snippets</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Code Snippets</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,23 +13,7 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
@@ -43,43 +28,28 @@
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use title property to specify a title. ```javascript {title: &quot;ReactJS Component&quot;} ... ``` javascript import React, {Component} from 'react' class MyComponent extends Component { render() { /// ... } }</p>
+<p>Use the title property to specify a title. ```javascript {title: &quot;ReactJS Component&quot;} ... ``` javascript import React, {Component} from 'react' class MyComponent extends Component { render() { /// ... } }</p>
 </article>
 
 <article>
 <header><h1>Wide Code</h1></header>
-<p>Use wide option to stretch wide code to occupy as much horizontal real estate as possible. ```java {wide: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } ``` java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Without wide option code will be aligned with the rest of the text and users can use scrollbars. java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Note: Good placement of a Wide Code is at the end of a page or a section to show the full version of a code sample.</p>
+<p>Use the wide option to stretch wide code to occupy as much horizontal real estate as possible. ```java {wide: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } ``` java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Without the wide option code will be aligned with the rest of the text and users can use scrollbars. java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Note: Good placement of a Wide Code element is at the end of a page or a section to show the full version of a code sample.</p>
 </article>
 
 <article>
 <header><h1>Read More</h1></header>
-<p>If you have a large code snippet and you want to initially display only a small fraction use readMore option with an optional readMoreVisibleLines option to specify a number of initial lines displayed (default is 8). ```java {readMore: true, readMoreVisibleLines: 3} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; ... ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { this.workingDir = workingDir; this.fileNameByDirName = new LinkedHashMap&lt;&gt;(); } public void create() { createPages(); createToc(); createMeta(); createIndex(); createLookupPaths(); } private void createLookupPaths() { createFileFromResource(&quot;lookup-paths&quot;); } private void createMeta() { createFileFromResource(&quot;meta.json&quot;); } }</p>
+<p>If you have a large code snippet and you want to initially display only a small fraction use the readMore option with an optional readMoreVisibleLines option to specify a number of initial lines displayed (default is 8). ```java {readMore: true, readMoreVisibleLines: 3} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; ... ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { this.workingDir = workingDir; this.fileNameByDirName = new LinkedHashMap&lt;&gt;(); } public void create() { createPages(); createToc(); createMeta(); createIndex(); createLookupPaths(); } private void createLookupPaths() { createFileFromResource(&quot;lookup-paths&quot;); } private void createMeta() { createFileFromResource(&quot;meta.json&quot;); } }</p>
 </article>
 
 <article>
 <header><h1>Highlights</h1></header>
-<p>Use highlight option to bring readers attention to the important lines. ```java {highlight: &quot;workingDir&quot;} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } Note: You will get a build time error if the specified substring is not found in any of the snippet linesIt is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. ```java {highlight: [2, &quot;...&quot;]} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } Note: Order of lines to highlight is reflected during presentation mode</p>
+<p>Use the highlight option to bring readers attention to important lines. ```java {highlight: &quot;workingDir&quot;} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } Note: You will get a build-time error if the specified substring is not found in any of the snippet linesIt is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. ```java {highlight: [2, &quot;...&quot;]} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } Note: Order of lines to highlight is reflected during presentation mode</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -257,7 +227,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use ",
+          "text" : "Use the ",
           "type" : "SimpleText"
         }, {
           "code" : "title",
@@ -285,7 +255,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use ",
+          "text" : "Use the ",
           "type" : "SimpleText"
         }, {
           "code" : "wide",
@@ -308,7 +278,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Without ",
+          "text" : "Without the ",
           "type" : "SimpleText"
         }, {
           "code" : "wide",
@@ -334,7 +304,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : " is at the end of a page or a section to show the full version of a code sample.",
+          "text" : " element is at the end of a page or a section to show the full version of a code sample.",
           "type" : "SimpleText"
         } ]
       } ]
@@ -345,7 +315,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "If you have a large code snippet and you want to initially display only a small fraction use ",
+          "text" : "If you have a large code snippet and you want to initially display only a small fraction use the ",
           "type" : "SimpleText"
         }, {
           "code" : "readMore",
@@ -388,13 +358,13 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use ",
+          "text" : "Use the ",
           "type" : "SimpleText"
         }, {
           "code" : "highlight",
           "type" : "InlinedCode"
         }, {
-          "text" : " option to bring readers attention to the important lines.",
+          "text" : " option to bring readers attention to important lines.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -411,7 +381,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: You will get a build time error if the specified substring is not found in any of the snippet lines",
+          "text" : "Note: You will get a build-time error if the specified substring is not found in any of the snippet lines",
           "type" : "SimpleText"
         } ]
       }, {
@@ -444,13 +414,14 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748827,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Code Snippets",
       "pageMeta" : { },
-      "fileName" : "code-snippets",
       "dirName" : "snippets",
+      "fileName" : "code-snippets",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Simple Snippet",
         "id" : "simple-snippet"

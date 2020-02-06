@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Jupyter Notebook Two Sides</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Code First</h1></header>
+<p>snippets/jupyter-notebook The include-jupyter extension automatically assigns {meta: {rightSide: true}} to output cells. If page type is set to two-sides you will get automatic split between code and output.Note: Content below is included using include-jupyter</p>
+</article>
+
+<article>
+<header><h1>Pandas</h1></header>
+<p>Use storyFirst if you use a notebook with Markdown cells to tell a story. In this mode, code will be moved to the right side and a reader can focus on the story itself. :include-jupyter: notebook.ipynb {storyFirst: true} Displaying values using panda display Values can be displayed using standard console outputOr using library to render a html snippet</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Code First",
+      "id" : "code-first",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "url" : "/znai/snippets/jupyter-notebook",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "The include-jupyter extension",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " automatically assigns ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "{meta: {rightSide: true}}",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to output cells.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "If page ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "type",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " is set to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "two-sides",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " you will get automatic split between code and output.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Content below is included using ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-jupyter",
+          "type" : "InlinedCode"
+        } ]
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "empty-output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "output",
+        "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "display(tran)",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "output",
+        "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      } ]
+    }, {
+      "title" : "Story First",
+      "id" : "story-first",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "storyFirst",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " if you use a notebook with Markdown cells to tell a story. In this mode, code will be moved to the right",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "side and a reader can focus on the story itself.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-jupyter: notebook.ipynb {storyFirst: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Pandas",
+      "id" : "pandas",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Displaying values using panda ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "display",
+          "type" : "InlinedCode"
+        } ]
+      }, {
+        "cellType" : "empty-output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "empty-output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Values can be displayed using standard console output",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "cellType" : "empty-output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "output",
+        "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Or using library to render a html snippet",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "cellType" : "empty-output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "output",
+        "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "display(tran)",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "JupyterCell"
+      } ]
+    } ],
+    "lastModifiedTime" : 1580929748813,
+    "tocItem" : {
+      "sectionTitle" : "Layout",
+      "pageTitle" : "Jupyter Notebook Two Sides",
+      "pageMeta" : {
+        "type" : [ "two-sides" ]
+      },
+      "dirName" : "layout",
+      "fileName" : "jupyter-notebook-two-sides",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Code First",
+        "id" : "code-first"
+      }, {
+        "title" : "Story First",
+        "id" : "story-first"
+      }, {
+        "title" : "Pandas",
+        "id" : "pandas"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

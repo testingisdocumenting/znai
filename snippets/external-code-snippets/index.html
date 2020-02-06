@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: External Code Snippets</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: External Code Snippets</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,38 +13,22 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Existing File</h1></header>
-<p>To make maintaining documentation easier you can refer to text and code snippets in already existing files. :include-file: file-name.js This include- syntax will appear throughout the documentation and represents a family of custom Markdown extensions that enable the inclusion of various artifacts. class JsClass { constructor() { } } export default JsClass File will be looked up using following rules:directory with a markup fileroot directory of a documentationall lookup paths listed in a special file</p>
+<header><h1>Embedding Content</h1></header>
+<p>To reduce documentation maintenance burden avoid copy and paste of code snippets. Embed content by referencing existing files using the :include-file: plugin instead. :include-file: file-name.js This include- syntax will appear throughout the documentation and represents a family of custom Markdown extensions. class JsClass { constructor() { usefulAction() } } export default JsClass The file will be looked up using following rules:directory with a markup fileroot directory of a documentationall lookup paths listed in a lookup-paths file</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>:include-file: file-name.js {title: &quot;ES6 class&quot;} Use title property to specify a title. class JsClass { constructor() { } } export default JsClass</p>
+<p>:include-file: file-name.js {title: &quot;ES6 class&quot;} Use the title property to specify a title. class JsClass { constructor() { usefulAction() } } export default JsClass</p>
 </article>
 
 <article>
 <header><h1>Wide Code</h1></header>
-<p>Use wide option to stretch wide code to occupy as much horizontal screen real estate as possible. :include-file: WideCode.java {wide: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Without wide option code will be aligned with the rest of the text and users can use scrollbars. class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Note: Good placement of a Wide Code is at the end of a page or a section to show the full version of a code sample.</p>
+<p>Use the wide option to stretch wide code to occupy as much horizontal screen real estate as possible. :include-file: WideCode.java {wide: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Without the wide option code will be aligned with the rest of the text and users can use scrollbars. class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Note: Good placement of a Wide Code element is at the end of a page or a section to show the full version of a code sample.</p>
 </article>
 
 <article>
@@ -53,7 +38,7 @@
 
 <article>
 <header><h1>Highlights</h1></header>
-<p>Use highlight option to bring readers attention to the important lines. :include-file: file-name.js {highlight: &quot;export&quot;} class JsClass { constructor() { } } export default JsClass It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. :include-file: file-name.js {highlight: [&quot;export&quot;, 1]} class JsClass { constructor() { } } export default JsClass Note: Order of lines to highlight is reflected during presentation mode</p>
+<p>Use the highlight option to bring readers attention to the important lines. :include-file: file-name.js {highlight: &quot;export&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. :include-file: file-name.js {highlight: [&quot;export&quot;, 1]} class JsClass { constructor() { usefulAction() } } export default JsClass Note: Order of lines to highlight is reflected during presentation modeUse the highlightPath option to highlight lines specified in a separate file. :include-file: file-name.js {highlightPath: &quot;lines-to-highlight.txt&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass class usefulAction</p>
 </article>
 
 <article>
@@ -63,28 +48,13 @@
 
 <article>
 <header><h1>Spoilers</h1></header>
-<p>Set spoiler property to initially hide explanations. It may be useful when teaching or class. :include-file: file-name-with-comments.js {commentsType: &quot;inline&quot;, spoiler: true} Click on the spoiler to reveal the explanations. class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</p>
+<p>Set the spoiler property to initially hide explanations. It may be useful when teaching. :include-file: file-name-with-comments.js {commentsType: &quot;inline&quot;, spoiler: true} Click on the spoiler to reveal the explanations: class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -107,13 +77,24 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Existing File",
-      "id" : "existing-file",
+      "title" : "Embedding Content",
+      "id" : "embedding-content",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To make maintaining documentation easier you can refer to text and code snippets in already existing files.",
+          "text" : "To reduce documentation maintenance burden avoid copy and paste of code snippets.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Embed content by referencing existing files using the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : ":include-file:",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin instead.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -130,17 +111,17 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "include-",
           "type" : "InlinedCode"
         }, {
-          "text" : " syntax will appear throughout the documentation and represents a family of custom Markdown extensions that enable the inclusion of various artifacts.",
+          "text" : " syntax will appear throughout the documentation and represents a family of custom Markdown extensions.",
           "type" : "SimpleText"
         } ]
       }, {
         "lang" : "javascript",
-        "snippet" : "class JsClass {\n    constructor() {\n    }\n}\n\nexport default JsClass",
+        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "File will be looked up using following rules:",
+          "text" : "The file will be looked up using following rules:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -170,7 +151,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "all lookup paths listed in a special file",
+              "text" : "all lookup paths listed in a ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "lookup-paths",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " file",
               "type" : "SimpleText"
             } ]
           } ]
@@ -188,7 +175,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use ",
+          "text" : "Use the ",
           "type" : "SimpleText"
         }, {
           "code" : "title",
@@ -199,7 +186,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "javascript",
-        "snippet" : "class JsClass {\n    constructor() {\n    }\n}\n\nexport default JsClass",
+        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "title" : "ES6 class",
         "type" : "Snippet"
       } ]
@@ -210,7 +197,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use ",
+          "text" : "Use the ",
           "type" : "SimpleText"
         }, {
           "code" : "wide",
@@ -232,7 +219,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Without ",
+          "text" : "Without the ",
           "type" : "SimpleText"
         }, {
           "code" : "wide",
@@ -257,7 +244,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : " is at the end of a page or a section to show the full version of a code sample.",
+          "text" : " element is at the end of a page or a section to show the full version of a code sample.",
           "type" : "SimpleText"
         } ]
       } ]
@@ -316,7 +303,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use ",
+          "text" : "Use the ",
           "type" : "SimpleText"
         }, {
           "code" : "highlight",
@@ -332,8 +319,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "javascript",
-        "snippet" : "class JsClass {\n    constructor() {\n    }\n}\n\nexport default JsClass",
-        "highlight" : "export",
+        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+        "highlight" : [ "export" ],
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -353,7 +340,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "javascript",
-        "snippet" : "class JsClass {\n    constructor() {\n    }\n}\n\nexport default JsClass",
+        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "highlight" : [ "export", 1 ],
         "type" : "Snippet"
       }, {
@@ -362,6 +349,34 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Note: Order of lines to highlight is reflected during presentation mode",
           "type" : "SimpleText"
         } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "highlightPath",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option to highlight lines specified in a separate file.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: file-name.js {highlightPath: \"lines-to-highlight.txt\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "javascript",
+        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+        "highlightPath" : "lines-to-highlight.txt",
+        "highlight" : [ "class", "usefulAction" ],
+        "type" : "Snippet"
+      }, {
+        "lang" : "txt",
+        "snippet" : "class\nusefulAction",
+        "title" : "lines-to-highlight.txt",
+        "type" : "Snippet"
       } ]
     }, {
       "title" : "Callout Comments",
@@ -421,13 +436,13 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Set ",
+          "text" : "Set the ",
           "type" : "SimpleText"
         }, {
           "code" : "spoiler",
           "type" : "InlinedCode"
         }, {
-          "text" : " property to initially hide explanations. It may be useful when teaching or class.",
+          "text" : " property to initially hide explanations. It may be useful when teaching.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -438,7 +453,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Click on the spoiler to reveal the explanations.",
+          "text" : "Click on the spoiler to reveal the explanations:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -449,16 +464,17 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748829,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
       "pageMeta" : { },
-      "fileName" : "external-code-snippets",
       "dirName" : "snippets",
+      "fileName" : "external-code-snippets",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Existing File",
-        "id" : "existing-file"
+        "title" : "Embedding Content",
+        "id" : "embedding-content"
       }, {
         "title" : "Title",
         "id" : "title"

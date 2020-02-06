@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Cpp</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Cpp</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,49 +13,18 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Comments</h1></header>
-<p>You can re-use comments that are inside your functions and refer to them inside your documentation. Mark a comment with @mdoc and use :include-comments: plugin. int my_func() { // @mdoc important context information goes here // this information is useful and can be re-used inside a user guide code_goes_here(); // this comment is not marked another_code(); /* @mdoc another piece of **documentation** in multiple lines, but it will be treated as `markdown` */ } Specify a file and an entry point to extract comments from. :include-cpp-comments: comments.cpp {entry: &quot;my_func&quot;} Result will be a text rendered as if it was typed inside markup file. See the text immediately below:</p>
+<p>You can reuse comments that are inside your functions and refer to them inside your documentation. Mark a comment with @znai and use :include-cpp-comments: plugin. int my_func() { // @znai important context information goes here // this information is useful and can be re-used inside a user guide code_goes_here(); // this comment is not marked another_code(); /* @znai another piece of **documentation** in multiple lines, but it will be treated as `markdown` */ } Specify a file and an entry point to extract comments from. :include-cpp-comments: comments.cpp {entry: &quot;my_func&quot;} Result will be a text rendered as if it was typed inside markup file. See the text immediately below:</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -83,7 +53,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "You can re-use comments that are inside your functions and refer to them inside your    documentation.",
+          "text" : "You can reuse comments that are inside your functions and refer to them inside your documentation.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
@@ -91,13 +61,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Mark a comment with ",
           "type" : "SimpleText"
         }, {
-          "code" : "@mdoc",
+          "code" : "@znai",
           "type" : "InlinedCode"
         }, {
           "text" : " and use ",
           "type" : "SimpleText"
         }, {
-          "code" : ":include-comments:",
+          "code" : ":include-cpp-comments:",
           "type" : "InlinedCode"
         }, {
           "text" : " plugin.",
@@ -105,7 +75,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "cpp",
-        "snippet" : "int my_func() {\n    // @mdoc important context information goes here\n    // this information is useful and can be re-used inside a user guide\n\n    code_goes_here();\n     // this comment is not marked\n    another_code();\n\n    /* @mdoc\n    another piece of **documentation**\n    in multiple lines, but it will be treated as `markdown`\n    */\n}",
+        "snippet" : "int my_func() {\n    // @znai important context information goes here\n    // this information is useful and can be re-used inside a user guide\n\n    code_goes_here();\n     // this comment is not marked\n    another_code();\n\n    /* @znai\n    another piece of **documentation**\n    in multiple lines, but it will be treated as `markdown`\n    */\n}",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -152,13 +122,14 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748828,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Cpp",
       "pageMeta" : { },
-      "fileName" : "cpp",
       "dirName" : "snippets",
+      "fileName" : "cpp",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Comments",
         "id" : "comments"

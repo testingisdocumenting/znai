@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Templates</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Templates</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,23 +13,7 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
@@ -38,7 +23,7 @@
 
 <article>
 <header><h1>Definition</h1></header>
-<p>Instead of copy and pasting, define a template in a separate file. Znai uses the http://freemarker.org FreeMarker template engine. **Name**: ${name} **Title**: ${title} **Current Project**: BBR **Team**: Team A Insert your template using the fenced block syntax. The content inside the fenced block is treated as key/values. ```template templates/job.md name: Sathish title: Software Engineer ``` Result is rendered below: Name: SathishTitle: Software EngineerCurrent Project: BBRTeam: Team A</p>
+<p>Instead of copy and pasting, define a template in a separate file. Znai uses the http://freemarker.org FreeMarker template engine. **Name**: ${name} **Title**: ${title} **Current Project**: BBR **Team**: Team A Insert your template using the fenced block syntax. The content inside the fenced block is treated as key/values. ```template templates/job.md name: Sathish title: Software Engineer ``` The result is rendered below: Name: SathishTitle: Software EngineerCurrent Project: BBRTeam: Team A</p>
 </article>
 
 <article>
@@ -53,28 +38,13 @@
 
 <article>
 <header><h1>Loops</h1></header>
-<p>You can loop over list of parameters using http://freemarker.org/docs/ref_directive_list.html FreeMarker loopConsider an external file... {&quot;names&quot;: [ {&quot;name&quot;: &quot;Name 1&quot;, &quot;description&quot;: &quot;Description 1&quot;}, {&quot;name&quot;: &quot;Name 2&quot;, &quot;description&quot;: &quot;Description 2&quot;, &quot;optional&quot;: &quot;true&quot;}, {&quot;name&quot;: &quot;Name 3&quot;, &quot;description&quot;: &quot;Description 3&quot;} ]} ...and this template: &lt;#list names as n&gt; ```columns {left: {portion: 3, align: &quot;right&quot;}, border: true} left: **${n.name}** &lt;#if n.optional??&gt; \ *optional* &lt;/#if&gt; right: ${n.description} ``` &lt;/#list&gt; :include-template: templates/multiple-arg-definition.md {paramsPath: &quot;artifacts/names.json&quot;} Name 1 Description 1 Name 2 optional Description 2 Name 3 Description 3</p>
+<p>You can loop over a list of parameters using http://freemarker.org/docs/ref_directive_list.html FreeMarker loopConsider an external file... {&quot;names&quot;: [ {&quot;name&quot;: &quot;Name 1&quot;, &quot;description&quot;: &quot;Description 1&quot;}, {&quot;name&quot;: &quot;Name 2&quot;, &quot;description&quot;: &quot;Description 2&quot;, &quot;optional&quot;: &quot;true&quot;}, {&quot;name&quot;: &quot;Name 3&quot;, &quot;description&quot;: &quot;Description 3&quot;} ]} ...and this template: &lt;#list names as n&gt; ```columns {left: {portion: 3, align: &quot;right&quot;}, border: true} left: **${n.name}** &lt;#if n.optional??&gt; \ *optional* &lt;/#if&gt; right: ${n.description} ``` &lt;/#list&gt; :include-template: templates/multiple-arg-definition.md {paramsPath: &quot;artifacts/names.json&quot;} Name 1 Description 1 Name 2 optional Description 2 Name 3 Description 3</p>
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -265,7 +235,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Result is rendered below:",
+          "text" : "The result is rendered below:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -505,7 +475,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "You can loop over list of parameters using ",
+          "text" : "You can loop over a list of parameters using ",
           "type" : "SimpleText"
         }, {
           "url" : "http://freemarker.org/docs/ref_directive_list.html",
@@ -640,13 +610,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748815,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Templates",
       "pageMeta" : { },
-      "fileName" : "templates",
       "dirName" : "layout",
+      "fileName" : "templates",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Don't Repeat Yourself",
         "id" : "dont-repeat-yourself"

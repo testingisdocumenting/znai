@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<title>Znai: Code References</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/logo.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Local References</h1></header>
+<p>You can turn parts of a code snippet into links to internal or external pages.To do that, define references in a CSV file, using a two column format: expression, link . constructor, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor usefulAction, flow/footer :include-file: file-name.js {referencesPath: &quot;references/references-demo.csv&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass</p>
+</article>
+
+<article>
+<header><h1>Global References</h1></header>
+<p>Add references to references.csv if you want all your code snippets to use the same references. fapi.book, example-references/api#book fapi.query, example-references/api#query import * as fapi from 'flight-api' function bookFlight(flightInfo) { const confirmation = fapi.book(flightInfo) //... } function flightStatus(id) { const fullStatus = fapi.query(id) return fullStatus.shortStatus }</p>
+</article>
+
+<article>
+<header><h1>Inlined Code</h1></header>
+<p>snippets/inlined-code-snippets Inlined code is automatically converted into a link if its content matches one of the global references entries: Use `fapi.book` to book a flight. Use fapi.book to book a flight.</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/react.min.js"></script>
+<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "title" : "View On GitHub"
+    },
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "previewEnabled" : false
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "Local References",
+      "id" : "local-references",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You can turn parts of a code snippet into links to internal or external pages.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To do that, define references in a CSV file, using a two column format: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "expression, link",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "csv",
+        "snippet" : "constructor, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor\nusefulAction, flow/footer",
+        "title" : "references/references-demo.csv",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: file-name.js {referencesPath: \"references/references-demo.csv\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "javascript",
+        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+        "referencesPath" : "references/references-demo.csv",
+        "references" : {
+          "usefulAction" : {
+            "pageUrl" : "flow/footer"
+          },
+          "constructor" : {
+            "pageUrl" : "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor"
+          }
+        },
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Global References",
+      "id" : "global-references",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Add references to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "references.csv",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " if you want all your code snippets to use the same references.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "csv",
+        "snippet" : "fapi.book, example-references/api#book\nfapi.query, example-references/api#query",
+        "title" : "references.csv",
+        "type" : "Snippet"
+      }, {
+        "lang" : "javascript",
+        "snippet" : "import * as fapi from 'flight-api'\n\nfunction bookFlight(flightInfo) {\n    const confirmation = fapi.book(flightInfo)\n    //...\n}\n\nfunction flightStatus(id) {\n    const fullStatus = fapi.query(id)\n    return fullStatus.shortStatus\n}",
+        "title" : "API example",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Inlined Code",
+      "id" : "inlined-code",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "url" : "/znai/snippets/inlined-code-snippets",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Inlined code",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " is automatically converted into a link if its content matches one of the",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "global references entries:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "md",
+        "snippet" : "Use `fapi.book` to book a flight.  ",
+        "title" : "Example",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "fapi.book",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to book a flight.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1580929748827,
+    "tocItem" : {
+      "sectionTitle" : "Snippets",
+      "pageTitle" : "Code References",
+      "pageMeta" : { },
+      "dirName" : "snippets",
+      "fileName" : "code-references",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Local References",
+        "id" : "local-references"
+      }, {
+        "title" : "Global References",
+        "id" : "global-references"
+      }, {
+        "title" : "Inlined Code",
+        "id" : "inlined-code"
+      } ]
+    }
+  },
+  "footer" : {
+    "type" : "Footer",
+    "content" : [ {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
+        "type" : "SimpleText"
+      }, {
+        "url" : "https://github.com/twosigma/znai/issues",
+        "isFile" : false,
+        "type" : "Link",
+        "content" : [ {
+          "text" : "GitHub Issue",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Contributions are welcome",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "type" : "Emphasis",
+        "content" : [ {
+          "text" : "Copyright @ 2019 Two Sigma",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ]
+  }
+}), document.getElementById("znai"));
+</script>
+
+</body>
+</html>

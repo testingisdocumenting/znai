@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Structure</title><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
+<title>Znai: Structure</title><!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
@@ -12,23 +13,7 @@
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
 <body>
-<div id="znai"><!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
-<div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
@@ -38,12 +23,12 @@
 
 <article>
 <header><h1>Similarity with OOP</h1></header>
-<p>It may help to show parallel with OOP conceptsChapters as packages Pages as classes Page Sections as methods It is bad practice to have one class with many unrelated methods. Similarly, it is bad practice to have one page with various unrelated sections.</p>
+<p>It may be useful to compare documentation design to an object-oriented programming approach:Chapters as packages Pages as classes Page Sections as methods It is a bad practice to have a class with loosely related methods. Similarly, it is a bad practice to have a long page with loosely related sections.</p>
 </article>
 
 <article>
 <header><h1>Table of Contents</h1></header>
-<p>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction rationale example getting-started flow structure names page-references lookup-paths search footer presentation testing snippets code-snippets external-code-snippets inlined-code-snippets java groovy typescript cpp json xml api-parameters open-API CLI math markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs visuals smart-bullet-points icons keyboard-shortcuts charts images image-annotations SVG flow-diagrams PlantUml deployment static-content synergy-with-testing java REST web-UI configuration basic Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</p>
+<p>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction rationale example getting-started flow structure names page-references lookup-paths search footer presentation testing shortcuts snippets code-snippets external-code-snippets inlined-code-snippets api-parameters code-references java java-doc groovy typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points icons keyboard-shortcuts charts images image-annotations SVG flow-diagrams PlantUml deployment static-content static-hosting synergy-with-testing java REST web-UI configuration basic example-references domain api Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</p>
 </article>
 
 <article>
@@ -57,24 +42,9 @@
 </article>
 </section>
 </div>
-<!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/react.min.js"></script>
 <script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
@@ -196,13 +166,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "It may help to show parallel with ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "OOP",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " concepts",
+          "text" : "It may be useful to compare documentation design to an object-oriented programming approach:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -249,12 +213,12 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "It is bad practice to have one class with many unrelated methods.",
+          "text" : "It is a bad practice to have a class with loosely related methods.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "Similarly, it is bad practice to have one page with various unrelated sections.",
+          "text" : "Similarly, it is a bad practice to have a long page with loosely related sections.",
           "type" : "SimpleText"
         } ]
       } ]
@@ -293,7 +257,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "introduction\n    rationale\n    example\n    getting-started\nflow\n    structure\n    names\n    page-references\n    lookup-paths\n    search\n    footer\n    presentation\n    testing\nsnippets\n    code-snippets\n    external-code-snippets\n    inlined-code-snippets\n    java\n    groovy\n    typescript\n    cpp\n    json\n    xml\n    api-parameters\n    open-API\n    CLI\n    math\n    markdown\nlayout\n    attention-signs\n    tabs\n    tables\n    columns\n    templates\n    two-sides-pages\n    two-sides-tabs\nvisuals\n    smart-bullet-points\n    icons\n    keyboard-shortcuts\n    charts\n    images\n    image-annotations\n    SVG\n    flow-diagrams\n    PlantUml\ndeployment\n    static-content\nsynergy-with-testing\n    java\n    REST\n    web-UI\nconfiguration\n    basic",
+        "snippet" : "introduction\n    rationale\n    example\n    getting-started\nflow\n    structure\n    names\n    page-references\n    lookup-paths\n    search\n    footer\n    presentation\n    testing\n    shortcuts\nsnippets\n    code-snippets\n    external-code-snippets\n    inlined-code-snippets\n    api-parameters\n    code-references\n    java\n    java-doc\n    groovy\n    typescript\n    cpp\n    json\n    xml\n    open-API\n    CLI\n    math\n    jupyter-notebook\n    markdown\nlayout\n    attention-signs\n    tabs\n    tables\n    columns\n    templates\n    two-sides-pages\n    two-sides-tabs\n    jupyter-notebook-two-sides\nvisuals\n    spoilers\n    smart-bullet-points\n    icons\n    keyboard-shortcuts\n    charts\n    images\n    image-annotations\n    SVG\n    flow-diagrams\n    PlantUml\ndeployment\n    static-content\n    static-hosting\nsynergy-with-testing\n    java\n    REST\n    web-UI\nconfiguration\n    basic\nexample-references\n    domain\n    api",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -454,13 +418,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1565298640000,
+    "lastModifiedTime" : 1580929748803,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Structure",
       "pageMeta" : { },
-      "fileName" : "structure",
       "dirName" : "flow",
+      "fileName" : "structure",
+      "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Building Blocks",
         "id" : "building-blocks"
