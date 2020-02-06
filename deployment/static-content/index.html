@@ -18,7 +18,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Build</h1></header>
-<p>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin&gt; &lt;groupId&gt;com.twosigma.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.28-SNAPSHOT&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;my-docs&lt;/docId&gt; &lt;sourceRoot&gt;${project.basedir}/documentation&lt;/sourceRoot&gt; &lt;deployRoot&gt;${project.build.directory}&lt;/deployRoot&gt; &lt;port&gt;3333&lt;/port&gt; &lt;/configuration&gt; &lt;/plugin&gt; mvn znai:build</p>
+<p>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin&gt; &lt;groupId&gt;com.twosigma.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.30-SNAPSHOT&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;my-docs&lt;/docId&gt; &lt;sourceRoot&gt;${project.basedir}/documentation&lt;/sourceRoot&gt; &lt;deployRoot&gt;${project.build.directory}&lt;/deployRoot&gt; &lt;port&gt;3333&lt;/port&gt; &lt;/configuration&gt; &lt;/plugin&gt; mvn znai:build</p>
 </article>
 </section>
 </div>
@@ -68,7 +68,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "xml",
-        "snippet" : "<plugin>\n    <groupId>com.twosigma.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.28-SNAPSHOT</version>\n    <configuration>\n        <docId>my-docs</docId>\n        <sourceRoot>${project.basedir}/documentation</sourceRoot>\n        <deployRoot>${project.build.directory}</deployRoot>\n        <port>3333</port>\n    </configuration>\n</plugin>",
+        "snippet" : "<plugin>\n    <groupId>com.twosigma.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.30-SNAPSHOT</version>\n    <configuration>\n        <docId>my-docs</docId>\n        <sourceRoot>${project.basedir}/documentation</sourceRoot>\n        <deployRoot>${project.build.directory}</deployRoot>\n        <port>3333</port>\n    </configuration>\n</plugin>",
         "title" : "maven plugin",
         "highlight" : [ "deployRoot" ],
         "type" : "Snippet"
@@ -78,7 +78,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliCommand"
       } ]
     } ],
-    "lastModifiedTime" : 1580929748792,
+    "lastModifiedTime" : 1581009605773,
     "tocItem" : {
       "sectionTitle" : "Deployment",
       "pageTitle" : "Static Content",
