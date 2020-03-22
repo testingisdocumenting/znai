@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.structure
+package org.testingisdocumenting.znai.structure
 
 import org.junit.Test
 

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website;
+package org.testingisdocumenting.znai.website;
 
-import com.twosigma.znai.html.HtmlPageAndPageProps;
-import com.twosigma.znai.structure.TableOfContents;
-import com.twosigma.znai.structure.TocItem;
+import org.testingisdocumenting.znai.html.HtmlPageAndPageProps;
+import org.testingisdocumenting.znai.structure.TableOfContents;
+import org.testingisdocumenting.znai.structure.TocItem;
 
 import java.util.List;
 

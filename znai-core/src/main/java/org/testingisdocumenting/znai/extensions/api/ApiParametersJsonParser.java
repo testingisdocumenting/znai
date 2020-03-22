@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.api;
+package org.testingisdocumenting.znai.extensions.api;
 
-import com.twosigma.znai.parser.MarkupParser;
-import com.twosigma.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

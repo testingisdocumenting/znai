@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser;
+package org.testingisdocumenting.znai.parser;
 
 public class MarkupTypes {
     public static final String MARKDOWN = "markdown";

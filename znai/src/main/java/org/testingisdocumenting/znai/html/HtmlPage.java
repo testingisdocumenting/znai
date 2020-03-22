@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html;
+package org.testingisdocumenting.znai.html;
 
-import com.twosigma.znai.web.WebResource;
+import org.testingisdocumenting.znai.web.WebResource;
 
 import java.util.ArrayList;
 import java.util.List;

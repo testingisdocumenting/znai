@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams;
+package org.testingisdocumenting.znai.diagrams;
 
-import com.twosigma.znai.core.GlobalAssetsRegistry;
-import com.twosigma.znai.diagrams.graphviz.Graphviz;
+import org.testingisdocumenting.znai.core.GlobalAssetsRegistry;
+import org.testingisdocumenting.znai.diagrams.graphviz.Graphviz;
 
 public class DiagramsGlobalAssetsRegistration {
     private DiagramsGlobalAssetsRegistration() {

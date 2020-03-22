@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.table
+package org.testingisdocumenting.znai.extensions.table
 
-import com.twosigma.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
 class TableIncludePluginTest {

@@ -14,30 +14,30 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server;
+package org.testingisdocumenting.znai.server;
 
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.console.ansi.AnsiConsoleOutput;
-import com.twosigma.znai.console.ansi.Color;
-import com.twosigma.znai.html.HtmlPage;
-import com.twosigma.znai.html.reactjs.HtmlReactJsPage;
-import com.twosigma.znai.html.reactjs.ReactJsBundle;
-import com.twosigma.znai.server.remove.DocumentationRemoveHandler;
-import com.twosigma.znai.server.remove.OnRemoveFinishedServerHandlers;
-import com.twosigma.znai.server.docpreparation.DocumentationPreparationHandlers;
-import com.twosigma.znai.server.docpreparation.DocumentationPreparationTestHandler;
-import com.twosigma.znai.server.docpreparation.DocumentationPreparationWebSocketHandler;
-import com.twosigma.znai.server.docpreparation.NoOpDocumentationPreparationProgress;
-import com.twosigma.znai.server.landing.LandingDocEntriesProviders;
-import com.twosigma.znai.server.landing.LandingDocEntry;
-import com.twosigma.znai.server.landing.LandingUrlContentHandler;
-import com.twosigma.znai.server.sockets.JsonWebSocketHandler;
-import com.twosigma.znai.server.sockets.JsonWebSocketHandlerComposition;
-import com.twosigma.znai.server.upload.DocumentationUploadHandler;
-import com.twosigma.znai.server.upload.OnUploadFinishedServerHandlers;
-import com.twosigma.znai.server.upload.UnzipTask;
-import com.twosigma.znai.server.urlhandlers.UrlContentHandlers;
-import com.twosigma.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput;
+import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.html.HtmlPage;
+import org.testingisdocumenting.znai.html.reactjs.HtmlReactJsPage;
+import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
+import org.testingisdocumenting.znai.server.remove.DocumentationRemoveHandler;
+import org.testingisdocumenting.znai.server.remove.OnRemoveFinishedServerHandlers;
+import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationHandlers;
+import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationTestHandler;
+import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationWebSocketHandler;
+import org.testingisdocumenting.znai.server.docpreparation.NoOpDocumentationPreparationProgress;
+import org.testingisdocumenting.znai.server.landing.LandingDocEntriesProviders;
+import org.testingisdocumenting.znai.server.landing.LandingDocEntry;
+import org.testingisdocumenting.znai.server.landing.LandingUrlContentHandler;
+import org.testingisdocumenting.znai.server.sockets.JsonWebSocketHandler;
+import org.testingisdocumenting.znai.server.sockets.JsonWebSocketHandlerComposition;
+import org.testingisdocumenting.znai.server.upload.DocumentationUploadHandler;
+import org.testingisdocumenting.znai.server.upload.OnUploadFinishedServerHandlers;
+import org.testingisdocumenting.znai.server.upload.UnzipTask;
+import org.testingisdocumenting.znai.server.urlhandlers.UrlContentHandlers;
+import org.testingisdocumenting.znai.utils.FileUtils;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
@@ -239,7 +239,7 @@ public class DocumentationServer {
     }
 
     // this is entry point for local development and testing
-    // official znai start is through com.twosigma.znai.cli.ZnaiCliApp
+    // official znai start is through org.testingisdocumenting.znai.cli.ZnaiCliApp
     public static void main(String[] args) {
         ConsoleOutputs.add(new AnsiConsoleOutput());
 

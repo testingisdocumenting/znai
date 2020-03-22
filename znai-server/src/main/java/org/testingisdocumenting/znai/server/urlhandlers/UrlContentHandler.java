@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.urlhandlers;
+package org.testingisdocumenting.znai.server.urlhandlers;
 
-import com.twosigma.znai.html.reactjs.ReactJsBundle;
+import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
 import io.vertx.ext.web.RoutingContext;
 
 public interface UrlContentHandler {

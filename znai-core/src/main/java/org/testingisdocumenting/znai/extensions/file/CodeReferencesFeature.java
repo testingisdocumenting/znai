@@ -1,13 +1,13 @@
-package com.twosigma.znai.extensions.file;
+package org.testingisdocumenting.znai.extensions.file;
 
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.features.PluginFeature;
-import com.twosigma.znai.reference.DocReferences;
-import com.twosigma.znai.reference.DocReferencesParser;
-import com.twosigma.znai.structure.DocStructure;
-import com.twosigma.znai.structure.DocUrl;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.features.PluginFeature;
+import org.testingisdocumenting.znai.reference.DocReferences;
+import org.testingisdocumenting.znai.reference.DocReferencesParser;
+import org.testingisdocumenting.znai.structure.DocStructure;
+import org.testingisdocumenting.znai.structure.DocUrl;
 
 import java.nio.file.Path;
 import java.util.Map;

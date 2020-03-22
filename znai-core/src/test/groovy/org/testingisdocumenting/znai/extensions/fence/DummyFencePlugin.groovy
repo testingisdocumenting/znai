@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.fence
+package org.testingisdocumenting.znai.extensions.fence
 
-import com.twosigma.znai.core.ComponentsRegistry
-import com.twosigma.znai.extensions.PluginParams
-import com.twosigma.znai.extensions.PluginResult
-import com.twosigma.znai.parser.docelement.DocElement
+import org.testingisdocumenting.znai.core.ComponentsRegistry
+import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginResult
+import org.testingisdocumenting.znai.parser.docelement.DocElement
 
 import java.nio.file.Path
 

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.docpreparation;
+package org.testingisdocumenting.znai.server.docpreparation;
 
-import com.twosigma.znai.server.sockets.JsonWebSocketHandler;
-import com.twosigma.znai.utils.CollectionUtils;
+import org.testingisdocumenting.znai.server.sockets.JsonWebSocketHandler;
+import org.testingisdocumenting.znai.utils.CollectionUtils;
 import io.vertx.core.Vertx;
 
 import java.util.LinkedHashMap;

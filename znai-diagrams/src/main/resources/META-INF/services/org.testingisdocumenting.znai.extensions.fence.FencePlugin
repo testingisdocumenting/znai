@@ -1,5 +1,5 @@
 #
-# Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+# Copyright 2020 znai maintainers
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,4 @@
 # limitations under the License.
 #
 
-com.twosigma.znai.extensions.tabs.TabsFencePlugin
-com.twosigma.znai.extensions.templates.TemplateFencePlugin
-com.twosigma.znai.extensions.columns.ColumnsFencePlugin
-com.twosigma.znai.extensions.api.ApiParametersFencePlugin
-com.twosigma.znai.extensions.markup.MarkdownAndResultFencePlugin
+org.testingisdocumenting.znai.diagrams.plantuml.PlantUmlFencePlugin

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.web.extensions;
+package org.testingisdocumenting.znai.web.extensions;
 
-import com.twosigma.znai.web.WebResource;
-import com.twosigma.znai.utils.ServiceLoaderUtils;
+import org.testingisdocumenting.znai.web.WebResource;
+import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.util.Set;
 import java.util.stream.Stream;

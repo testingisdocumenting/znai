@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.utils;
+package org.testingisdocumenting.znai.utils;
 
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;

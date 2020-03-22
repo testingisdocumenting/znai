@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.table;
+package org.testingisdocumenting.znai.parser.table;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;

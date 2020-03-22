@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.parser;
+package org.testingisdocumenting.znai.java.parser;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;

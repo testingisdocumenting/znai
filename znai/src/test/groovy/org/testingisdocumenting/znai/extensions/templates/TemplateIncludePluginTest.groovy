@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.templates
+package org.testingisdocumenting.znai.extensions.templates
 
-import com.twosigma.znai.parser.MarkupParser
-import com.twosigma.znai.parser.MarkupParserResult
-import com.twosigma.znai.parser.TestComponentsRegistry
-import com.twosigma.znai.parser.commonmark.MarkdownParser
+import org.testingisdocumenting.znai.parser.MarkupParser
+import org.testingisdocumenting.znai.parser.MarkupParserResult
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.BeforeClass
 import org.junit.Test
 

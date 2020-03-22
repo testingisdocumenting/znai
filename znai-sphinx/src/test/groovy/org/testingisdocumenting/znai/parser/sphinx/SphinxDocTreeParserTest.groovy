@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.sphinx
+package org.testingisdocumenting.znai.parser.sphinx
 
-import com.twosigma.znai.parser.MarkupParser
-import com.twosigma.znai.parser.TestComponentsRegistry
+import org.testingisdocumenting.znai.parser.MarkupParser
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import org.junit.BeforeClass
 import org.junit.Test
 

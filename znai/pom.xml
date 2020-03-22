@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.twosigma.znai</groupId>
+        <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
         <version>1.30-SNAPSHOT</version>
     </parent>
@@ -28,37 +28,37 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-site-extensions</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-java</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-groovy</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-latex</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-core</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
@@ -66,55 +66,55 @@
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-cpp</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-open-api</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-typescript</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-jupyter</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-sphinx</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-reactjs</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-diagrams</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-console</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-utils</artifactId>
             <version>${project.version}</version>
         </dependency>

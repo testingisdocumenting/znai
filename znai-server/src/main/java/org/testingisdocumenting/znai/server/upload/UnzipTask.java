@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.upload;
+package org.testingisdocumenting.znai.server.upload;
 
 import org.apache.ant.compress.taskdefs.Unzip;
 import org.apache.tools.ant.Project;

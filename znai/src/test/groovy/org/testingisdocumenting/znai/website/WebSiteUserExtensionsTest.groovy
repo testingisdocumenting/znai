@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website
+package org.testingisdocumenting.znai.website
 
-import com.twosigma.znai.parser.TestResourceResolver
+import org.testingisdocumenting.znai.parser.TestResourceResolver
 import org.junit.Test
 
 import java.nio.file.Paths

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.groovy.parser
+package org.testingisdocumenting.znai.groovy.parser
 
-import com.twosigma.znai.core.ComponentsRegistry
+import org.testingisdocumenting.znai.core.ComponentsRegistry
 import groovyjarjarantlr.collections.AST
 import org.codehaus.groovy.antlr.SourceBuffer
 import org.codehaus.groovy.antlr.parser.GroovyLexer

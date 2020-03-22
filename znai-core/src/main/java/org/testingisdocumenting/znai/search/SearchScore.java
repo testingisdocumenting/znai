@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.search;
+package org.testingisdocumenting.znai.search;
 
 /**
  * how likely text will be found by a search

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.structure;
+package org.testingisdocumenting.znai.structure;
 
 public class DocUrl {
     private static final String LINK_TO_SECTION_INSTRUCTION = "To refer to a section of this document use" +

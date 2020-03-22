@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.landing;
+package org.testingisdocumenting.znai.server.landing;
 
-import com.twosigma.znai.html.HtmlPage;
-import com.twosigma.znai.html.reactjs.HtmlReactJsPage;
-import com.twosigma.znai.html.reactjs.ReactJsBundle;
-import com.twosigma.znai.server.FavIcons;
-import com.twosigma.znai.server.urlhandlers.UrlContentHandler;
+import org.testingisdocumenting.znai.html.HtmlPage;
+import org.testingisdocumenting.znai.html.reactjs.HtmlReactJsPage;
+import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
+import org.testingisdocumenting.znai.server.FavIcons;
+import org.testingisdocumenting.znai.server.urlhandlers.UrlContentHandler;
 import io.vertx.ext.web.RoutingContext;
 
 import java.util.LinkedHashMap;

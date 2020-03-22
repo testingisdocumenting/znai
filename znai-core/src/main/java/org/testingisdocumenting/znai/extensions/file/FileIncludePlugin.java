@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.file;
+package org.testingisdocumenting.znai.extensions.file;
 
-import com.twosigma.znai.codesnippets.CodeSnippetsProps;
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.extensions.features.PluginFeatureList;
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.parser.ParserHandler;
-import com.twosigma.znai.parser.docelement.DocElementType;
-import com.twosigma.znai.search.SearchScore;
-import com.twosigma.znai.search.SearchText;
+import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.features.PluginFeatureList;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.parser.docelement.DocElementType;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.Map;

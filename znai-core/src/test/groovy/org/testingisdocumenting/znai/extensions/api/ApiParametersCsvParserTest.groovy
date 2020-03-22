@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.api
+package org.testingisdocumenting.znai.extensions.api
 
 import org.junit.Test
 
-import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class ApiParametersCsvParserTest {
     @Test

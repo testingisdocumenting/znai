@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.parser.html
+package org.testingisdocumenting.znai.java.parser.html
 
-import com.twosigma.znai.core.ComponentsRegistry
-import com.twosigma.znai.parser.TestComponentsRegistry
-import com.twosigma.znai.reference.DocReferences
+import org.testingisdocumenting.znai.core.ComponentsRegistry
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
+import org.testingisdocumenting.znai.reference.DocReferences
 import org.junit.Test
 
 import java.nio.file.Paths

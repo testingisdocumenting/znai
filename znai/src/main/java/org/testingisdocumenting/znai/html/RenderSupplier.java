@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html;
+package org.testingisdocumenting.znai.html;
 
 public interface RenderSupplier {
     String render();

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.gen;
+package org.testingisdocumenting.znai.gen;
 
 import org.apache.commons.cli.*;
 

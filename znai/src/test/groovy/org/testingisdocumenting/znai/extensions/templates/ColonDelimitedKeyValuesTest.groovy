@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.templates
+package org.testingisdocumenting.znai.extensions.templates
 
-import com.twosigma.znai.extensions.ColonDelimitedKeyValues
+import org.testingisdocumenting.znai.extensions.ColonDelimitedKeyValues
 import org.junit.Test
 
 class ColonDelimitedKeyValuesTest {

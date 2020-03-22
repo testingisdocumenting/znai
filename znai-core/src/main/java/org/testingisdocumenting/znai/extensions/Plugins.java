@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions;
+package org.testingisdocumenting.znai.extensions;
 
-import com.twosigma.znai.extensions.fence.FencePlugin;
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.extensions.inlinedcode.InlinedCodePlugin;
-import com.twosigma.znai.utils.ServiceLoaderUtils;
+import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
+import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.util.Collection;
 import java.util.Map;

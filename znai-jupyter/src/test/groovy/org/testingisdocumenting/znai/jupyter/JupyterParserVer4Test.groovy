@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.jupyter
+package org.testingisdocumenting.znai.jupyter
 
-import com.twosigma.znai.utils.JsonUtils
-import com.twosigma.znai.utils.ResourceUtils
+import org.testingisdocumenting.znai.utils.JsonUtils
+import org.testingisdocumenting.znai.utils.ResourceUtils
 import org.junit.BeforeClass
 import org.junit.Test
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.sphinx.xml
+package org.testingisdocumenting.znai.parser.sphinx.xml
 
 import org.junit.Test
 

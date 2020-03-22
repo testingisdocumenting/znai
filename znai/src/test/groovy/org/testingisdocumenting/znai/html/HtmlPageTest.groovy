@@ -1,4 +1,4 @@
-package com.twosigma.znai.html
+package org.testingisdocumenting.znai.html
 
 import org.junit.Test
 

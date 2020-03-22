@@ -79,7 +79,7 @@ const docMeta = {
     previewEnabled: true,
     hipchatRoom: 'Test Room',
     viewOn: {
-        link: 'https://github.com/twosigma/TestingIsDocumenting/znai-cli/documentation',
+        link: 'https://github.com/testingisdocumenting/znai/znai-cli/documentation',
         title: 'View On GitHub'
     }
 }

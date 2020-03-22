@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.remove;
+package org.testingisdocumenting.znai.server.remove;
 
-import com.twosigma.znai.utils.ServiceLoaderUtils;
+import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.util.Set;
 

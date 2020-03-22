@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions;
+package org.testingisdocumenting.znai.extensions;
 
-import com.twosigma.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
 import java.util.Collections;
 import java.util.List;

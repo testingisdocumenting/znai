@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.preview;
+package org.testingisdocumenting.znai.server.preview;
 
-import com.twosigma.znai.html.DocPageReactProps;
-import com.twosigma.znai.reference.DocReferences;
-import com.twosigma.znai.server.sockets.JsonWebSocketHandler;
-import com.twosigma.znai.structure.DocMeta;
-import com.twosigma.znai.structure.TableOfContents;
-import com.twosigma.znai.structure.TocItem;
+import org.testingisdocumenting.znai.html.DocPageReactProps;
+import org.testingisdocumenting.znai.reference.DocReferences;
+import org.testingisdocumenting.znai.server.sockets.JsonWebSocketHandler;
+import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.structure.TableOfContents;
+import org.testingisdocumenting.znai.structure.TocItem;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

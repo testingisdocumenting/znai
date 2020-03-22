@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.twosigma.znai</groupId>
+        <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
         <version>1.30-SNAPSHOT</version>
     </parent>
@@ -28,13 +28,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-utils</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -62,7 +62,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-core</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
@@ -77,7 +77,7 @@
                 <artifactId>antlr4-maven-plugin</artifactId>
                 <configuration>
                     <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-                    <grammars>com/twosigma/documentation/cpp/CPP14.g4</grammars>
+                    <grammars>org/testingisdocumenting/znai/cpp/parser/CPP14.g4</grammars>
                     <visitor>true</visitor>
                     <listener>true</listener>
                 </configuration>

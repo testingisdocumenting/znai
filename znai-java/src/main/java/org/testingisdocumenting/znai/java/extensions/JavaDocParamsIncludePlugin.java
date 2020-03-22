@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.extensions;
+package org.testingisdocumenting.znai.java.extensions;
 
-import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.extensions.api.ApiParameters;
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.java.parser.JavaCode;
-import com.twosigma.znai.java.parser.JavaMethod;
-import com.twosigma.znai.java.parser.JavaMethodReturn;
-import com.twosigma.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.api.ApiParameters;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.java.parser.JavaCode;
+import org.testingisdocumenting.znai.java.parser.JavaMethod;
+import org.testingisdocumenting.znai.java.parser.JavaMethodReturn;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
 import java.util.List;
 import java.util.Map;

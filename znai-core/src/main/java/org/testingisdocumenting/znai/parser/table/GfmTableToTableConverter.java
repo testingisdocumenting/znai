@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.table;
+package org.testingisdocumenting.znai.parser.table;
 
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.parser.docelement.DocElementCreationParserHandler;
-import com.twosigma.znai.parser.commonmark.MarkdownVisitor;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownVisitor;
 import org.commonmark.ext.gfm.tables.*;
 import org.commonmark.node.AbstractVisitor;
 import org.commonmark.node.CustomNode;

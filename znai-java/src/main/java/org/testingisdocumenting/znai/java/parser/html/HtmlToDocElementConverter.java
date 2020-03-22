@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.parser.html;
+package org.testingisdocumenting.znai.java.parser.html;
 
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.parser.ParserHandler;
-import com.twosigma.znai.parser.docelement.DocElement;
-import com.twosigma.znai.parser.docelement.DocElementCreationParserHandler;
-import com.twosigma.znai.reference.DocReferences;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
+import org.testingisdocumenting.znai.reference.DocReferences;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;

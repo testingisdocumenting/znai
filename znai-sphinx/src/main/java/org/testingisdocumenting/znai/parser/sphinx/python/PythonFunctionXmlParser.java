@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.sphinx.python;
+package org.testingisdocumenting.znai.parser.sphinx.python;
 
-import com.twosigma.znai.utils.XmlUtils;
+import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 

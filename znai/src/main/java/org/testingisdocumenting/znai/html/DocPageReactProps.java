@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html;
+package org.testingisdocumenting.znai.html;
 
-import com.twosigma.znai.structure.Page;
-import com.twosigma.znai.structure.TocItem;
+import org.testingisdocumenting.znai.structure.Page;
+import org.testingisdocumenting.znai.structure.TocItem;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

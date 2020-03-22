@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.search;
+package org.testingisdocumenting.znai.search;
 
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.extensions.fence.FencePlugin;
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.parser.NoOpParserHandler;
-import com.twosigma.znai.parser.table.MarkupTableData;
-import com.twosigma.znai.reference.DocReferences;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.NoOpParserHandler;
+import org.testingisdocumenting.znai.parser.table.MarkupTableData;
+import org.testingisdocumenting.znai.reference.DocReferences;
 
 import java.util.ArrayList;
 import java.util.List;

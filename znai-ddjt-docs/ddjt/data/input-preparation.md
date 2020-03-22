@@ -35,7 +35,7 @@ This version is much easier to test:
 
 Lets create *input* data required for a test.
 
-:include-java: com/twosigma/testing/examples/margin/MarginCalculatorWithoutApiTest.java {entry: "marginShouldBeZeroIfNoLotsSet"}
+:include-java: org/testingisdocumenting/testing/examples/margin/MarginCalculatorWithoutApiTest.java {entry: "marginShouldBeZeroIfNoLotsSet"}
 
 What will happen to this test when we refactor `Transaction` class? For example *setters* can be removed in favor of
 *Builder* pattern.
@@ -46,12 +46,12 @@ In order to survive refactoring a *Test* must limit its exposure to implementati
 
 Lets encapsulate `Transaction` creation
 
-:include-java: com/twosigma/testing/examples/margin/MarginCalculatorWithBasicEncapsulationTest.java {entry: "createTransaction"}
+:include-java: org/testingisdocumenting/testing/examples/margin/MarginCalculatorWithBasicEncapsulationTest.java {entry: "createTransaction"}
  
 If `Transaction` implementation details change we update one place and not every test that depends 
 on this core domain object.
 
-:include-java: com/twosigma/testing/examples/margin/MarginCalculatorWithBasicEncapsulationTest.java {entry: "marginShouldBeZeroIfNoLotsSet"}
+:include-java: org/testingisdocumenting/testing/examples/margin/MarginCalculatorWithBasicEncapsulationTest.java {entry: "marginShouldBeZeroIfNoLotsSet"}
 
 # Table Data
 
@@ -62,8 +62,8 @@ A few problems with the way we implemented `createTransaction`:
 Instead lets define test data using `TableData`
 
 ```tabs
-Groovy: :include-groovy: com/twosigma/testing/examples/margin/MarginCalculatorWithGroovyTableDataTest.groovy {entry: "margin should be zero if no lots set"}
-Java: :include-java: com/twosigma/testing/examples/margin/MarginCalculatorWithTableDataTest.java {entry: "marginShouldBeZeroIfNoLotsSet"}
+Groovy: :include-groovy: org/testingisdocumenting/testing/examples/margin/MarginCalculatorWithGroovyTableDataTest.groovy {entry: "margin should be zero if no lots set"}
+Java: :include-java: org/testingisdocumenting/testing/examples/margin/MarginCalculatorWithTableDataTest.java {entry: "marginShouldBeZeroIfNoLotsSet"}
 ```
 
 `TableData` is a core class of this library. Consider it to be a list of maps on steroids. 
@@ -71,8 +71,8 @@ Let's define `createTransaction` in terms of TableData.
 
 
 ```tabs
-Groovy: :include-groovy: com/twosigma/testing/examples/margin/MarginCalculatorWithGroovyTableDataTest.groovy {entry: "createTransactions"}
-Java: :include-java: com/twosigma/testing/examples/margin/MarginCalculatorWithTableDataTest.java {entry: "createTransactions"}
+Groovy: :include-groovy: org/testingisdocumenting/testing/examples/margin/MarginCalculatorWithGroovyTableDataTest.groovy {entry: "createTransactions"}
+Java: :include-java: org/testingisdocumenting/testing/examples/margin/MarginCalculatorWithTableDataTest.java {entry: "createTransactions"}
 ```
 
 Now we can:

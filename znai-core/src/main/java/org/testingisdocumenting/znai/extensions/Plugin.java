@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions;
+package org.testingisdocumenting.znai.extensions;
 
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.search.SearchText;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.util.stream.Stream;
 

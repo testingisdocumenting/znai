@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html;
+package org.testingisdocumenting.znai.html;
 
-import com.twosigma.znai.html.reactjs.HtmlReactJsPage;
-import com.twosigma.znai.html.reactjs.ReactJsBundle;
-import com.twosigma.znai.structure.DocMeta;
-import com.twosigma.znai.structure.Footer;
-import com.twosigma.znai.structure.Page;
-import com.twosigma.znai.structure.TocItem;
+import org.testingisdocumenting.znai.html.reactjs.HtmlReactJsPage;
+import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
+import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.structure.Footer;
+import org.testingisdocumenting.znai.structure.Page;
+import org.testingisdocumenting.znai.structure.TocItem;
 
 public class PageToHtmlPageConverter {
     private final DocMeta docMeta;

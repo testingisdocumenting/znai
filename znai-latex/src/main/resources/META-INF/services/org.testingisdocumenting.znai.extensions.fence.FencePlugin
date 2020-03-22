@@ -1,5 +1,5 @@
 #
-# Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+# Copyright 2020 znai maintainers
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,4 @@
 # limitations under the License.
 #
 
-com.twosigma.znai.diagrams.graphviz.GvDiagramIncludePlugin
-com.twosigma.znai.diagrams.graphviz.GvDiagramSlidesIncludePlugin
-com.twosigma.znai.diagrams.FlowChartIncludePlugin
-com.twosigma.znai.diagrams.plantuml.PlantUmlIncludePlugin
-com.twosigma.znai.diagrams.DiagramLegendIncludePlugin
+org.testingisdocumenting.znai.latexmath.LatexFencePlugin

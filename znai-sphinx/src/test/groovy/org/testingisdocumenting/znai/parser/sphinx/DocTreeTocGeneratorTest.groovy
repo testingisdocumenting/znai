@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.sphinx
+package org.testingisdocumenting.znai.parser.sphinx
 
-import com.twosigma.znai.utils.ResourceUtils
+import org.testingisdocumenting.znai.utils.ResourceUtils
 import org.junit.Test
 
 class DocTreeTocGeneratorTest {

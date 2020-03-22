@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.structure;
+package org.testingisdocumenting.znai.structure;
 
-import com.twosigma.znai.parser.PageSectionIdTitle;
-import com.twosigma.znai.utils.NameUtils;
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
+import org.testingisdocumenting.znai.utils.NameUtils;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -38,7 +38,7 @@ public class TocItem {
     /**
      *  relative location on github or other source.
      *  Note it is not necessarily dirName + fileNameWithoutExtension + extension,
-     *  i.e. original source can be deployed into a different location based on a {@link com.twosigma.znai.parser.MarkupParsingConfiguration}
+     *  i.e. original source can be deployed into a different location based on a {@link org.testingisdocumenting.znai.parser.MarkupParsingConfiguration}
      */
     private String viewOnRelativePath;
 

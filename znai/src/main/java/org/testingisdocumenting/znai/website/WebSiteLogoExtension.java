@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website;
+package org.testingisdocumenting.znai.website;
 
-import com.twosigma.znai.utils.FileUtils;
-import com.twosigma.znai.web.WebResource;
-import com.twosigma.znai.web.extensions.WebSiteResourcesProvider;
+import org.testingisdocumenting.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.web.WebResource;
+import org.testingisdocumenting.znai.web.extensions.WebSiteResourcesProvider;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

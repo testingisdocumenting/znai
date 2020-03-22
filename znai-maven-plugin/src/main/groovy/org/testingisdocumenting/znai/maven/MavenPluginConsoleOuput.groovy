@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.maven
+package org.testingisdocumenting.znai.maven
 
-import com.twosigma.znai.console.ConsoleOutput
-import com.twosigma.znai.console.ansi.Color
+import org.testingisdocumenting.znai.console.ConsoleOutput
+import org.testingisdocumenting.znai.console.ansi.Color
 import groovy.transform.Canonical
 import org.apache.maven.plugin.logging.Log
 

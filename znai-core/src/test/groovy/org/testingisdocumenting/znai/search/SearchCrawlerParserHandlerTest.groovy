@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.search
+package org.testingisdocumenting.znai.search
 
-import com.twosigma.znai.extensions.PluginParams
-import com.twosigma.znai.reference.DocReferences
+import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.reference.DocReferences
 import org.junit.Before
 import org.junit.Test
 

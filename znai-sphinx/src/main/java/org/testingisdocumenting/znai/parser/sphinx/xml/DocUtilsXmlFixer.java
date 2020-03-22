@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.sphinx.xml;
+package org.testingisdocumenting.znai.parser.sphinx.xml;
 
-import com.twosigma.znai.utils.RegexpUtils;
+import org.testingisdocumenting.znai.utils.RegexpUtils;
 
 import java.util.regex.Pattern;
 

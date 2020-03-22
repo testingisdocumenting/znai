@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.twosigma.znai</groupId>
+        <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
         <version>1.30-SNAPSHOT</version>
     </parent>
@@ -29,7 +29,7 @@
     <dependencies>
         <!-- this is purely to force running of those tests -->
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-testing-examples</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
@@ -53,7 +53,7 @@
 
                 <plugins>
                     <plugin>
-                        <groupId>com.twosigma.znai</groupId>
+                        <groupId>org.testingisdocumenting.znai</groupId>
                         <artifactId>znai-maven-plugin</artifactId>
                         <version>${project.version}</version>
                         <executions>

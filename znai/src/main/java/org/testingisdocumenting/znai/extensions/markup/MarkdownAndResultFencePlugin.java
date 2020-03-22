@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.markup;
+package org.testingisdocumenting.znai.extensions.markup;
 
-import com.twosigma.znai.codesnippets.CodeSnippetsProps;
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.extensions.fence.FencePlugin;
-import com.twosigma.znai.parser.MarkupParser;
-import com.twosigma.znai.parser.MarkupParserResult;
-import com.twosigma.znai.parser.docelement.DocElementType;
+import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.parser.docelement.DocElementType;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.structure;
+package org.testingisdocumenting.znai.structure;
 
-import com.twosigma.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
 public class Footer {
     private final DocElement docElement;

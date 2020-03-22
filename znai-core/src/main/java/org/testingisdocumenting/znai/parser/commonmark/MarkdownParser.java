@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.commonmark;
+package org.testingisdocumenting.znai.parser.commonmark;
 
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
 
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.parser.MarkupParser;
-import com.twosigma.znai.parser.MarkupParserResult;
-import com.twosigma.znai.parser.ParserHandler;
-import com.twosigma.znai.parser.ParserHandlersList;
-import com.twosigma.znai.search.SearchCrawlerParserHandler;
-import com.twosigma.znai.structure.PageMeta;
-import com.twosigma.znai.parser.docelement.DocElementCreationParserHandler;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.parser.ParserHandlersList;
+import org.testingisdocumenting.znai.search.SearchCrawlerParserHandler;
+import org.testingisdocumenting.znai.structure.PageMeta;
+import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
 import org.commonmark.ext.front.matter.YamlFrontMatterExtension;
 import org.commonmark.ext.front.matter.YamlFrontMatterVisitor;
 import org.commonmark.ext.gfm.strikethrough.StrikethroughExtension;

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.core;
+package org.testingisdocumenting.znai.core;
 
-import com.twosigma.znai.utils.ServiceLoaderUtils;
+import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;

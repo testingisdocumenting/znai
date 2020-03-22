@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server;
+package org.testingisdocumenting.znai.server;
 
 public class FavIcons {
     public static final String DEFAULT_ICON_PATH = "/static/favicon/default.png";

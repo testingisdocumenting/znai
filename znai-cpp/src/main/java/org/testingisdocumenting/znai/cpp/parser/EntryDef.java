@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cpp.parser;
+package org.testingisdocumenting.znai.cpp.parser;
 
 public class EntryDef {
     private String name;

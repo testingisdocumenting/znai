@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.search;
+package org.testingisdocumenting.znai.search;
 
-import com.twosigma.znai.parser.PageSectionIdTitle;
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 
 /**
  * search entry local to a single page

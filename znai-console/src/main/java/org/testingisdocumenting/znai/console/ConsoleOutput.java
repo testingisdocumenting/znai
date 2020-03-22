@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.console;
+package org.testingisdocumenting.znai.console;
 
 public interface ConsoleOutput {
     void out(Object... styleOrValues);

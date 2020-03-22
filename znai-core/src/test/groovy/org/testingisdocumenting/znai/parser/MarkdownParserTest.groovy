@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser
+package org.testingisdocumenting.znai.parser
 
-import com.twosigma.znai.parser.commonmark.MarkdownParser
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 
 import java.nio.file.Paths
 
 import static com.twosigma.webtau.Matchers.code
 import static com.twosigma.webtau.Matchers.throwException
-import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkdownParserTest {
     static final TestComponentsRegistry componentsRegistry = TEST_COMPONENTS_REGISTRY

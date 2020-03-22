@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams;
+package org.testingisdocumenting.znai.diagrams;
 
-import com.twosigma.znai.diagrams.graphviz.Graphviz;
-import com.twosigma.znai.diagrams.graphviz.GraphvizDiagram;
-import com.twosigma.znai.diagrams.graphviz.gen.DiagramNode;
-import com.twosigma.znai.diagrams.graphviz.gen.GraphvizFromJsonGen;
-import com.twosigma.znai.diagrams.graphviz.gen.GraphvizGenConfig;
-import com.twosigma.znai.diagrams.graphviz.gen.GraphvizGenResult;
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.core.ResourcesResolver;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.parser.ParserHandler;
-import com.twosigma.znai.structure.DocStructure;
-import com.twosigma.znai.structure.DocUrl;
-import com.twosigma.znai.utils.JsonUtils;
-import com.twosigma.znai.diagrams.graphviz.GraphvizEngine;
+import org.testingisdocumenting.znai.diagrams.graphviz.Graphviz;
+import org.testingisdocumenting.znai.diagrams.graphviz.GraphvizDiagram;
+import org.testingisdocumenting.znai.diagrams.graphviz.gen.DiagramNode;
+import org.testingisdocumenting.znai.diagrams.graphviz.gen.GraphvizFromJsonGen;
+import org.testingisdocumenting.znai.diagrams.graphviz.gen.GraphvizGenConfig;
+import org.testingisdocumenting.znai.diagrams.graphviz.gen.GraphvizGenResult;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.structure.DocStructure;
+import org.testingisdocumenting.znai.structure.DocUrl;
+import org.testingisdocumenting.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.diagrams.graphviz.GraphvizEngine;
 
 import java.nio.file.Path;
 import java.util.*;

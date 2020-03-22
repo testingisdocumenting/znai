@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.jupyter;
+package org.testingisdocumenting.znai.jupyter;
 
 import java.util.List;
 

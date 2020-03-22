@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.search;
+package org.testingisdocumenting.znai.search;
 
-import com.twosigma.znai.structure.TocItem;
-import com.twosigma.znai.utils.JsonUtils;
-import com.twosigma.znai.utils.ResourceUtils;
+import org.testingisdocumenting.znai.structure.TocItem;
+import org.testingisdocumenting.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.utils.ResourceUtils;
 
 import java.util.LinkedHashMap;
 import java.util.List;

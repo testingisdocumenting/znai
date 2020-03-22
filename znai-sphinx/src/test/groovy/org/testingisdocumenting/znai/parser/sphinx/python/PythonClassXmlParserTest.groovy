@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.sphinx.python
+package org.testingisdocumenting.znai.parser.sphinx.python
 
-import com.twosigma.znai.utils.ResourceUtils
+import org.testingisdocumenting.znai.utils.ResourceUtils
 import org.junit.BeforeClass
 import org.junit.Test
 

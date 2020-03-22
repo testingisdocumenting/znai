@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.file;
+package org.testingisdocumenting.znai.extensions.file;
 
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.features.PluginFeature;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.features.PluginFeature;
 
 import java.nio.file.Path;
 import java.util.Arrays;

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.client;
+package org.testingisdocumenting.znai.client;
 
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.Color;
 import io.vertx.core.Vertx;
 import io.vertx.core.file.AsyncFile;
 import io.vertx.core.file.FileProps;

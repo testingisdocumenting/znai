@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.reactjs
+package org.testingisdocumenting.znai.extensions.reactjs
 
-import com.twosigma.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
 import static com.twosigma.webtau.Matchers.code

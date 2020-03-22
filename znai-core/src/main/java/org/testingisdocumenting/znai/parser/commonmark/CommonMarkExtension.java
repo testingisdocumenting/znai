@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.commonmark;
+package org.testingisdocumenting.znai.parser.commonmark;
 
-import com.twosigma.znai.parser.commonmark.include.IncludeBlockParser;
+import org.testingisdocumenting.znai.parser.commonmark.include.IncludeBlockParser;
 import org.commonmark.parser.Parser.Builder;
 import org.commonmark.parser.Parser.ParserExtension;
 

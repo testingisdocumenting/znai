@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser;
+package org.testingisdocumenting.znai.parser;
 
 /**
  * Plugins parameter can be a file path. You must not specify a full path. Path will be resolved using

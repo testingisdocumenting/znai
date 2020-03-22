@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.groovy.parser
+package org.testingisdocumenting.znai.groovy.parser
 
 import org.junit.Test
 

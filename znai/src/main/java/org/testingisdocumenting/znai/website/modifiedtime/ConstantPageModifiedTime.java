@@ -1,6 +1,6 @@
-package com.twosigma.znai.website.modifiedtime;
+package org.testingisdocumenting.znai.website.modifiedtime;
 
-import com.twosigma.znai.structure.TocItem;
+import org.testingisdocumenting.znai.structure.TocItem;
 
 import java.nio.file.Path;
 import java.time.Instant;

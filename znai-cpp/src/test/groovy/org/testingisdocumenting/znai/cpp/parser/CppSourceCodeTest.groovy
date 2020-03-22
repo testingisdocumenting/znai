@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cpp.parser
+package org.testingisdocumenting.znai.cpp.parser
 
-import com.twosigma.znai.utils.ResourceUtils
+import org.testingisdocumenting.znai.utils.ResourceUtils
 import org.junit.Assert
 import org.junit.Test
 

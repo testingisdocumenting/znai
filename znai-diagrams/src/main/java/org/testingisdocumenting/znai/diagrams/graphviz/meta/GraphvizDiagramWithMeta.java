@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams.graphviz.meta;
+package org.testingisdocumenting.znai.diagrams.graphviz.meta;
 
-import com.twosigma.znai.utils.RegexpUtils;
+import org.testingisdocumenting.znai.utils.RegexpUtils;
 
 import java.util.*;
 import java.util.regex.Matcher;

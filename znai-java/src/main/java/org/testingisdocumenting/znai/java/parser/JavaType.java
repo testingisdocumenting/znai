@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.parser;
+package org.testingisdocumenting.znai.java.parser;
 
 public class JavaType {
     private String name;

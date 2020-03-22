@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website;
+package org.testingisdocumenting.znai.website;
 
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.core.GlobalAssetsRegistry;
-import com.twosigma.znai.core.ResourcesResolver;
-import com.twosigma.znai.parser.MarkupParser;
-import com.twosigma.znai.parser.commonmark.MarkdownParser;
-import com.twosigma.znai.structure.DocStructure;
-import com.twosigma.znai.time.SystemTimeService;
-import com.twosigma.znai.time.TimeService;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.core.GlobalAssetsRegistry;
+import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
+import org.testingisdocumenting.znai.structure.DocStructure;
+import org.testingisdocumenting.znai.time.SystemTimeService;
+import org.testingisdocumenting.znai.time.TimeService;
 
 public class WebSiteComponentsRegistry implements ComponentsRegistry {
     private MarkupParser defaultParser;

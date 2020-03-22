@@ -18,14 +18,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.twosigma.znai</groupId>
+    <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-parent</artifactId>
     <version>1.30-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Znai</name>
     <description>Rich documentation generator (markdown and java based)</description>
-    <url>https://github.com/twosigma/znai</url>
+    <url>https://github.com/testingisdocumenting/znai</url>
 
     <developers>
         <developer>
@@ -61,9 +61,9 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/twosigma/znai</url>
-        <connection>scm:git:https://github.com/twosigma/znai.git</connection>
-        <developerConnection>scm:git:https://github.com/twosigma/znai.git</developerConnection>
+        <url>https://github.com/testingisdocumenting/znai</url>
+        <connection>scm:git:https://github.com/testingisdocumenting/znai.git</connection>
+        <developerConnection>scm:git:https://github.com/testingisdocumenting/znai.git</developerConnection>
         <tag>1.20</tag>
     </scm>
 

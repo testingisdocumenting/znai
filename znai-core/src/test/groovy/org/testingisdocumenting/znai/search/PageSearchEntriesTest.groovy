@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.search
+package org.testingisdocumenting.znai.search
 
-import com.twosigma.znai.structure.TocItem
+import org.testingisdocumenting.znai.structure.TocItem
 import org.junit.Test
 
 class PageSearchEntriesTest {

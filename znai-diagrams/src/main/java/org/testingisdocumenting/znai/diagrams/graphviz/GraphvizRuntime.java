@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams.graphviz;
+package org.testingisdocumenting.znai.diagrams.graphviz;
 
 public interface GraphvizRuntime {
     String svgFromGv(String gv);

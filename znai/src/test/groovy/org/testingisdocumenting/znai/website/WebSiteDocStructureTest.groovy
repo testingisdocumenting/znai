@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website
+package org.testingisdocumenting.znai.website
 
-import com.twosigma.znai.parser.PageSectionIdTitle
-import com.twosigma.znai.structure.DocMeta
-import com.twosigma.znai.structure.DocUrl
-import com.twosigma.znai.structure.TableOfContents
-import com.twosigma.znai.website.markups.MarkdownParsingConfiguration
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle
+import org.testingisdocumenting.znai.structure.DocMeta
+import org.testingisdocumenting.znai.structure.DocUrl
+import org.testingisdocumenting.znai.structure.TableOfContents
+import org.testingisdocumenting.znai.website.markups.MarkdownParsingConfiguration
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
@@ -29,7 +29,7 @@ import java.nio.file.Paths
 
 import static com.twosigma.webtau.Matchers.code
 import static com.twosigma.webtau.Matchers.throwException
-import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class WebSiteDocStructureTest {
     static DocMeta docMeta

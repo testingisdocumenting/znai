@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cpp;
+package org.testingisdocumenting.znai.cpp;
 
-import com.twosigma.znai.cpp.parser.EntryDef;
-import com.twosigma.znai.utils.StringUtils;
+import org.testingisdocumenting.znai.cpp.parser.EntryDef;
+import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;

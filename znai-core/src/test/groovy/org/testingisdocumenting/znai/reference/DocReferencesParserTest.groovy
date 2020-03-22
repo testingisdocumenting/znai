@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.reference
+package org.testingisdocumenting.znai.reference
 
 import org.junit.Test
 

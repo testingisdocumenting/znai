@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website.markups;
+package org.testingisdocumenting.znai.website.markups;
 
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.parser.MarkupParser;
-import com.twosigma.znai.parser.MarkupParsingConfiguration;
-import com.twosigma.znai.parser.MarkupTypes;
-import com.twosigma.znai.parser.commonmark.MarkdownParser;
-import com.twosigma.znai.structure.PlainTextTocGenerator;
-import com.twosigma.znai.structure.PlainTextTocPatcher;
-import com.twosigma.znai.structure.TableOfContents;
-import com.twosigma.znai.structure.TocItem;
-import com.twosigma.znai.utils.FilePathUtils;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.parser.MarkupParsingConfiguration;
+import org.testingisdocumenting.znai.parser.MarkupTypes;
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
+import org.testingisdocumenting.znai.structure.PlainTextTocGenerator;
+import org.testingisdocumenting.znai.structure.PlainTextTocPatcher;
+import org.testingisdocumenting.znai.structure.TableOfContents;
+import org.testingisdocumenting.znai.structure.TocItem;
+import org.testingisdocumenting.znai.utils.FilePathUtils;
 
 import java.io.File;
 import java.nio.file.Path;

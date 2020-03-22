@@ -73,7 +73,7 @@ const TestData = {
     documentation:    {
         "docMeta": {
             "viewOn": {
-                "link": "https://github.com/twosigma/TestingIsDocumenting/blob/master/znai-cli/documentation",
+                "link": "https://github.com/testingisdocumenting/TestingIsDocumenting/blob/master/znai-cli/documentation",
                 "title": "View On GitHub"
             },
             "id": "preview",

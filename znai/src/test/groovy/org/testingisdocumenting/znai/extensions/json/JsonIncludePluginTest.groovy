@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.json
+package org.testingisdocumenting.znai.extensions.json
 
-import com.twosigma.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
 class JsonIncludePluginTest {

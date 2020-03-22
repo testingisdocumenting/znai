@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions;
+package org.testingisdocumenting.znai.extensions;
 
-import com.twosigma.znai.core.ResourcesResolver;
-import com.twosigma.znai.utils.FileUtils;
-import com.twosigma.znai.utils.UrlUtils;
+import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

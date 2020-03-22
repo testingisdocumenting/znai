@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html;
+package org.testingisdocumenting.znai.html;
 
-import com.twosigma.znai.parser.PageSectionIdTitle;
-import com.twosigma.znai.search.PageSearchEntries;
-import com.twosigma.znai.search.PageSearchEntry;
-import com.twosigma.znai.structure.TableOfContents;
-import com.twosigma.znai.structure.TocItem;
-import com.twosigma.znai.utils.ResourceUtils;
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
+import org.testingisdocumenting.znai.search.PageSearchEntries;
+import org.testingisdocumenting.znai.search.PageSearchEntry;
+import org.testingisdocumenting.znai.structure.TableOfContents;
+import org.testingisdocumenting.znai.structure.TocItem;
+import org.testingisdocumenting.znai.utils.ResourceUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.stream.Collectors;

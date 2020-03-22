@@ -27,7 +27,7 @@
             <outputDirectory>lib</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <includes>
-                <include>com.twosigma.znai:znai-shaded:*</include>
+                <include>org.testingisdocumenting.znai:znai-shaded:*</include>
                 <include>org.codehaus.groovy:*</include>
             </includes>
             <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>

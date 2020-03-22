@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cli;
+package org.testingisdocumenting.znai.cli;
 
-import com.twosigma.znai.utils.FileUtils;
-import com.twosigma.znai.utils.ResourceUtils;
+import org.testingisdocumenting.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.utils.ResourceUtils;
 
 import java.nio.file.Path;
 import java.util.ArrayList;

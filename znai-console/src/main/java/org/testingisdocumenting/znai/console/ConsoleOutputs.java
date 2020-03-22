@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.console;
+package org.testingisdocumenting.znai.console;
 
-import com.twosigma.znai.utils.ServiceLoaderUtils;
+import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.util.Set;
 

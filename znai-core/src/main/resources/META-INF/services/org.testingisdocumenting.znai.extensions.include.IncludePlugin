@@ -1,5 +1,5 @@
 #
-# Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+# Copyright 2020 znai maintainers
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
 # limitations under the License.
 #
 
-com.twosigma.znai.java.extensions.JavaIncludePlugin
-com.twosigma.znai.java.extensions.JavaDocIncludePlugin
-com.twosigma.znai.java.extensions.JavaDocParamsIncludePlugin
-com.twosigma.znai.java.extensions.JavaEnumEntriesIncludePlugin
+org.testingisdocumenting.znai.extensions.file.FileIncludePlugin
+org.testingisdocumenting.znai.extensions.reactjs.ReactJsComponentIncludePlugin
+org.testingisdocumenting.znai.extensions.meta.MetaIncludePlugin

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.client;
+package org.testingisdocumenting.znai.client;
 
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Zip;

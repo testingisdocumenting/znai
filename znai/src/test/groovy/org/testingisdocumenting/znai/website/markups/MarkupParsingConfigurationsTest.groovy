@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website.markups
+package org.testingisdocumenting.znai.website.markups
 
-import com.twosigma.znai.parser.MarkupParsingConfigurations
-import com.twosigma.znai.parser.MarkupTypes
+import org.testingisdocumenting.znai.parser.MarkupParsingConfigurations
+import org.testingisdocumenting.znai.parser.MarkupTypes
 import org.junit.Test
 
 import static com.twosigma.webtau.Matchers.code
@@ -38,7 +38,7 @@ class MarkupParsingConfigurationsTest {
         code {
             MarkupParsingConfigurations.byName('unknown')
         } should throwException("can't find markup configuration for <unknown>. Available configurations: \n" +
-                "markdown(class com.twosigma.znai.website.markups.MarkdownParsingConfiguration)\n" +
-                "sphinx(class com.twosigma.znai.website.markups.SphinxParsingConfiguration)")
+                "markdown(class org.testingisdocumenting.znai.website.markups.MarkdownParsingConfiguration)\n" +
+                "sphinx(class org.testingisdocumenting.znai.website.markups.SphinxParsingConfiguration)")
     }
 }

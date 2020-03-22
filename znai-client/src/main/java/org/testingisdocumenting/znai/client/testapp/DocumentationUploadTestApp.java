@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.client.testapp;
+package org.testingisdocumenting.znai.client.testapp;
 
-import com.twosigma.znai.client.DocumentationUploadClient;
+import org.testingisdocumenting.znai.client.DocumentationUploadClient;
 
 import java.nio.file.Paths;
 

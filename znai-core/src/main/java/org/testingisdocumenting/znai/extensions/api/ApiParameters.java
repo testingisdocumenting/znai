@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.api;
+package org.testingisdocumenting.znai.extensions.api;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;

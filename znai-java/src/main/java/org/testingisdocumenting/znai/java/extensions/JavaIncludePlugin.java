@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.extensions;
+package org.testingisdocumenting.znai.java.extensions;
 
-import com.twosigma.znai.codesnippets.CodeSnippetsProps;
-import com.twosigma.znai.extensions.PluginParamsOpts;
-import com.twosigma.znai.extensions.file.SnippetContentProvider;
-import com.twosigma.znai.extensions.file.SnippetHighlightFeature;
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.java.parser.JavaCode;
-import com.twosigma.znai.java.parser.JavaMethod;
-import com.twosigma.znai.java.parser.JavaType;
-import com.twosigma.znai.parser.docelement.DocElement;
-import com.twosigma.znai.parser.docelement.DocElementType;
-import com.twosigma.znai.utils.StringUtils;
+import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
+import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
+import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
+import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.java.parser.JavaCode;
+import org.testingisdocumenting.znai.java.parser.JavaMethod;
+import org.testingisdocumenting.znai.java.parser.JavaType;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.parser.docelement.DocElementType;
+import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -35,8 +35,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.twosigma.znai.java.parser.JavaCodeUtils.removeReturn;
-import static com.twosigma.znai.java.parser.JavaCodeUtils.removeSemicolonAtEnd;
+import static org.testingisdocumenting.znai.java.parser.JavaCodeUtils.removeReturn;
+import static org.testingisdocumenting.znai.java.parser.JavaCodeUtils.removeSemicolonAtEnd;
 
 public class JavaIncludePlugin extends JavaIncludePluginBase implements SnippetContentProvider {
     private PluginParamsOpts opts;

@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cli;
+package org.testingisdocumenting.znai.cli;
 
-import com.twosigma.znai.cli.extension.CliCommandConfig;
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.console.ansi.AnsiConsoleOutput;
-import com.twosigma.znai.console.ansi.Color;
-import com.twosigma.znai.html.HtmlPage;
-import com.twosigma.znai.html.reactjs.ReactJsBundle;
-import com.twosigma.znai.server.DocumentationServer;
-import com.twosigma.znai.server.preview.DocumentationPreview;
-import com.twosigma.znai.utils.FileUtils;
-import com.twosigma.znai.web.WebResource;
-import com.twosigma.znai.website.ProgressReporter;
-import com.twosigma.znai.website.WebSite;
-import com.twosigma.znai.website.modifiedtime.ConstantPageModifiedTime;
-import com.twosigma.znai.website.modifiedtime.FileBasedPageModifiedTime;
-import com.twosigma.znai.website.modifiedtime.PageModifiedTimeStrategy;
+import org.testingisdocumenting.znai.cli.extension.CliCommandConfig;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput;
+import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.html.HtmlPage;
+import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
+import org.testingisdocumenting.znai.server.DocumentationServer;
+import org.testingisdocumenting.znai.server.preview.DocumentationPreview;
+import org.testingisdocumenting.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.web.WebResource;
+import org.testingisdocumenting.znai.website.ProgressReporter;
+import org.testingisdocumenting.znai.website.WebSite;
+import org.testingisdocumenting.znai.website.modifiedtime.ConstantPageModifiedTime;
+import org.testingisdocumenting.znai.website.modifiedtime.FileBasedPageModifiedTime;
+import org.testingisdocumenting.znai.website.modifiedtime.PageModifiedTimeStrategy;
 import io.vertx.core.http.HttpServer;
 
 import java.io.IOException;

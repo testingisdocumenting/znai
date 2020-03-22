@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.utils;
+package org.testingisdocumenting.znai.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;

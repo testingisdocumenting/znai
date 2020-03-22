@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.core;
+package org.testingisdocumenting.znai.core;
 
-import com.twosigma.znai.parser.MarkupParser;
-import com.twosigma.znai.parser.commonmark.MarkdownParser;
-import com.twosigma.znai.structure.DocStructure;
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.time.TimeService;
+import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
+import org.testingisdocumenting.znai.structure.DocStructure;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.time.TimeService;
 
 /**
  * simple components registry to avoid introduction of DI frameworks.

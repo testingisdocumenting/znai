@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.structure;
+package org.testingisdocumenting.znai.structure;
 
 import java.time.Instant;
 import java.util.List;
 
-import com.twosigma.znai.parser.PageSectionIdTitle;
-import com.twosigma.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
-import static com.twosigma.znai.parser.docelement.DocElementType.SECTION;
+import static org.testingisdocumenting.znai.parser.docelement.DocElementType.SECTION;
 import static java.util.stream.Collectors.toList;
 
 public class Page {

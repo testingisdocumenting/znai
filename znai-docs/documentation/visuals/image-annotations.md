@@ -16,7 +16,7 @@ There are different types of annotations:
 
 It is possible to generate an annotations file by using UI testing framework.
 
-For example [webtau](https://github.com/twosigma/webtau) automatically generates an annotations file in addition to 
+For example [webtau](https://github.com/testingisdocumenting/webtau) automatically generates an annotations file in addition to 
 capturing a screenshot. 
 
 # Presentation Mode

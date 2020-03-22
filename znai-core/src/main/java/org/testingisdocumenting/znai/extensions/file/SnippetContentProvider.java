@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.file;
+package org.testingisdocumenting.znai.extensions.file;
 
 public interface SnippetContentProvider {
     String snippetContent();

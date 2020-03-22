@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.groovy.extensions
+package org.testingisdocumenting.znai.groovy.extensions
 
-import com.twosigma.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
 import static com.twosigma.webtau.Matchers.code

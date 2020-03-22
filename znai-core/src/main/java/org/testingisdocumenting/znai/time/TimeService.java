@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.time;
+package org.testingisdocumenting.znai.time;
 
 import java.nio.file.Path;
 

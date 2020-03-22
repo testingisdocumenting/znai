@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.codesnippets;
+package org.testingisdocumenting.znai.codesnippets;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

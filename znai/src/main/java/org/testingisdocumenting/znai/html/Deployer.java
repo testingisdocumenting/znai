@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html;
+package org.testingisdocumenting.znai.html;
 
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.console.ansi.Color;
-import com.twosigma.znai.web.WebResource;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.web.WebResource;
 import org.apache.commons.io.FileUtils;
 
 import java.io.IOException;

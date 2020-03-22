@@ -1,5 +1,5 @@
 #
-# Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+# Copyright 2020 znai maintainers
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,5 +14,7 @@
 # limitations under the License.
 #
 
-com.twosigma.znai.website.markups.MarkdownParsingConfiguration
-com.twosigma.znai.website.markups.SphinxParsingConfiguration
+org.testingisdocumenting.znai.java.extensions.JavaIncludePlugin
+org.testingisdocumenting.znai.java.extensions.JavaDocIncludePlugin
+org.testingisdocumenting.znai.java.extensions.JavaDocParamsIncludePlugin
+org.testingisdocumenting.znai.java.extensions.JavaEnumEntriesIncludePlugin

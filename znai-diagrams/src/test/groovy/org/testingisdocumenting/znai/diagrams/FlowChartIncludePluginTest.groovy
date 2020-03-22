@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams
+package org.testingisdocumenting.znai.diagrams
 
-import com.twosigma.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 import static com.twosigma.webtau.Matchers.code
 import static com.twosigma.webtau.Matchers.throwException
-import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class FlowChartIncludePluginTest {
     @Before

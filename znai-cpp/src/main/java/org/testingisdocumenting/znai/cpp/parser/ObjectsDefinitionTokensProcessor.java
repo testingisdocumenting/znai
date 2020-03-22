@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cpp.parser;
+package org.testingisdocumenting.znai.cpp.parser;
 
-import com.twosigma.znai.cpp.ClassDefBuilder;
+import org.testingisdocumenting.znai.cpp.ClassDefBuilder;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.TokenStream;
 

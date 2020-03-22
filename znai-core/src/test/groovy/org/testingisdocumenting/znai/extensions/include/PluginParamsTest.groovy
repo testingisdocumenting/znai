@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.include
+package org.testingisdocumenting.znai.extensions.include
 
-import com.twosigma.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParams
 import org.junit.Test
 
 class PluginParamsTest {

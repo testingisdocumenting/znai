@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.structure;
+package org.testingisdocumenting.znai.structure;
 
 public interface TocGenerator {
     TableOfContents generate(String textContent);

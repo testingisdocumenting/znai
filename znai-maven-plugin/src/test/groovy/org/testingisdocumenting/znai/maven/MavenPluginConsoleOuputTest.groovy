@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.maven
+package org.testingisdocumenting.znai.maven
 
-import com.twosigma.znai.console.ansi.Color
+import org.testingisdocumenting.znai.console.ansi.Color
 import org.junit.Test
 
 class MavenPluginConsoleOutputTest {

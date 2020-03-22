@@ -14,33 +14,33 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website;
+package org.testingisdocumenting.znai.website;
 
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.console.ansi.Color;
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.core.AuxiliaryFilesRegistry;
-import com.twosigma.znai.core.ResourcesResolverChain;
-import com.twosigma.znai.core.UnresolvedResourceException;
-import com.twosigma.znai.extensions.HttpBasedResourceResolver;
-import com.twosigma.znai.extensions.MultipleLocalLocationsResourceResolver;
-import com.twosigma.znai.html.*;
-import com.twosigma.znai.html.reactjs.ReactJsBundle;
-import com.twosigma.znai.parser.MarkupParser;
-import com.twosigma.znai.parser.MarkupParserResult;
-import com.twosigma.znai.parser.commonmark.MarkdownParser;
-import com.twosigma.znai.reference.DocReferences;
-import com.twosigma.znai.reference.GlobalDocReferences;
-import com.twosigma.znai.search.*;
-import com.twosigma.znai.structure.*;
-import com.twosigma.znai.utils.FileUtils;
-import com.twosigma.znai.utils.JsonUtils;
-import com.twosigma.znai.web.WebResource;
-import com.twosigma.znai.web.extensions.WebSiteResourcesProviders;
-import com.twosigma.znai.parser.MarkupParsingConfiguration;
-import com.twosigma.znai.parser.MarkupParsingConfigurations;
-import com.twosigma.znai.website.modifiedtime.FileBasedPageModifiedTime;
-import com.twosigma.znai.website.modifiedtime.PageModifiedTimeStrategy;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.AuxiliaryFilesRegistry;
+import org.testingisdocumenting.znai.core.ResourcesResolverChain;
+import org.testingisdocumenting.znai.core.UnresolvedResourceException;
+import org.testingisdocumenting.znai.extensions.HttpBasedResourceResolver;
+import org.testingisdocumenting.znai.extensions.MultipleLocalLocationsResourceResolver;
+import org.testingisdocumenting.znai.html.*;
+import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
+import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
+import org.testingisdocumenting.znai.reference.DocReferences;
+import org.testingisdocumenting.znai.reference.GlobalDocReferences;
+import org.testingisdocumenting.znai.search.*;
+import org.testingisdocumenting.znai.structure.*;
+import org.testingisdocumenting.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.web.WebResource;
+import org.testingisdocumenting.znai.web.extensions.WebSiteResourcesProviders;
+import org.testingisdocumenting.znai.parser.MarkupParsingConfiguration;
+import org.testingisdocumenting.znai.parser.MarkupParsingConfigurations;
+import org.testingisdocumenting.znai.website.modifiedtime.FileBasedPageModifiedTime;
+import org.testingisdocumenting.znai.website.modifiedtime.PageModifiedTimeStrategy;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -53,9 +53,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.twosigma.znai.parser.MarkupTypes.MARKDOWN;
-import static com.twosigma.znai.utils.FileUtils.fileTextContent;
-import static com.twosigma.znai.website.ProgressReporter.reportPhase;
+import static org.testingisdocumenting.znai.parser.MarkupTypes.MARKDOWN;
+import static org.testingisdocumenting.znai.utils.FileUtils.fileTextContent;
+import static org.testingisdocumenting.znai.website.ProgressReporter.reportPhase;
 import static java.util.stream.Collectors.toList;
 
 public class WebSite {
@@ -723,7 +723,7 @@ public class WebSite {
         }
 
         // TODO add support for JSON
-        // https://github.com/twosigma/znai/issues/339
+        // https://github.org/testingisdocumenting/znai/issues/339
         public Configuration withGlobalReferencesPath(Path path) {
             globalReferencesPath = path.toAbsolutePath();
             return this;

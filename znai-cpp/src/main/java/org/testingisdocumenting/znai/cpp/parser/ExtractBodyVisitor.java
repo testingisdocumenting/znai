@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cpp.parser;
+package org.testingisdocumenting.znai.cpp.parser;
 
 import org.antlr.v4.runtime.Token;
 
@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static com.twosigma.znai.utils.StringUtils.stripIndentation;
+import static org.testingisdocumenting.znai.utils.StringUtils.stripIndentation;
 
 public class ExtractBodyVisitor extends CPP14BaseVisitor {
     private final List<String> lines;

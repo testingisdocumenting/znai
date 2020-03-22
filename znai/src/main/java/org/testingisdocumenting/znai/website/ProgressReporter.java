@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.website;
+package org.testingisdocumenting.znai.website;
 
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.Color;
 
 public class ProgressReporter {
     public static void reportPhase(String phase) {

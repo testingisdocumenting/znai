@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.console.ansi;
+package org.testingisdocumenting.znai.console.ansi;
 
 public enum FontStyle {
     NORMAL("\u001B[0m"),

@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.templates;
+package org.testingisdocumenting.znai.extensions.templates;
 
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.core.ResourcesResolver;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.PluginParamsOpts;
-import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.parser.MarkupParser;
-import com.twosigma.znai.parser.MarkupParserResult;
-import com.twosigma.znai.parser.ParserHandler;
-import com.twosigma.znai.search.SearchScore;
-import com.twosigma.znai.search.SearchText;
-import com.twosigma.znai.template.TextTemplate;
-import com.twosigma.znai.utils.FileUtils;
-import com.twosigma.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
+import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
+import org.testingisdocumenting.znai.template.TextTemplate;
+import org.testingisdocumenting.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.util.HashMap;

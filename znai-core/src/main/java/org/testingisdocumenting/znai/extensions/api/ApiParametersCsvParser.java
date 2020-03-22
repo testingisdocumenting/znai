@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.api;
+package org.testingisdocumenting.znai.extensions.api;
 
-import com.twosigma.znai.parser.table.CsvParser;
-import com.twosigma.znai.parser.MarkupParser;
-import com.twosigma.znai.parser.MarkupParserResult;
-import com.twosigma.znai.parser.table.MarkupTableData;
-import com.twosigma.znai.parser.table.Row;
+import org.testingisdocumenting.znai.parser.table.CsvParser;
+import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.parser.table.MarkupTableData;
+import org.testingisdocumenting.znai.parser.table.Row;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.landing;
+package org.testingisdocumenting.znai.server.landing;
 
 import java.util.stream.Stream;
 

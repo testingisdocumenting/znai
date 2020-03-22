@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.preview;
+package org.testingisdocumenting.znai.server.preview;
 
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.reference.DocReferences;
-import com.twosigma.znai.structure.DocMeta;
-import com.twosigma.znai.website.TocAddedAndRemovedPages;
-import com.twosigma.znai.website.WebSite;
-import com.twosigma.znai.html.HtmlPageAndPageProps;
-import com.twosigma.znai.html.DocPageReactProps;
-import com.twosigma.znai.structure.TocItem;
-import com.twosigma.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.reference.DocReferences;
+import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.website.TocAddedAndRemovedPages;
+import org.testingisdocumenting.znai.website.WebSite;
+import org.testingisdocumenting.znai.html.HtmlPageAndPageProps;
+import org.testingisdocumenting.znai.html.DocPageReactProps;
+import org.testingisdocumenting.znai.structure.TocItem;
+import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -32,7 +32,7 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.stream.Stream;
 
-import static com.twosigma.znai.console.ansi.Color.BLUE;
+import static org.testingisdocumenting.znai.console.ansi.Color.BLUE;
 
 public class PreviewPushFileChangeHandler implements FileChangeHandler {
     private PreviewWebSocketHandler previewSocket;

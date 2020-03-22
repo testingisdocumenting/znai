@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cpp.extensions;
+package org.testingisdocumenting.znai.cpp.extensions;
 
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.cpp.parser.CodePart;
-import com.twosigma.znai.cpp.parser.CppSourceCode;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.PluginParamsOpts;
-import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.parser.MarkupParserResult;
-import com.twosigma.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.cpp.parser.CodePart;
+import org.testingisdocumenting.znai.cpp.parser.CppSourceCode;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
+import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
 import java.util.List;

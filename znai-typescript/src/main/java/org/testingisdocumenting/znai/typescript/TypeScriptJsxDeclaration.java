@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.typescript;
+package org.testingisdocumenting.znai.typescript;
 
 import java.util.LinkedHashMap;
 import java.util.List;

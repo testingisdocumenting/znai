@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.sockets;
+package org.testingisdocumenting.znai.server.sockets;
 
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.console.ansi.FontStyle;
-import com.twosigma.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.FontStyle;
+import org.testingisdocumenting.znai.utils.JsonUtils;
 import io.vertx.core.Handler;
 import io.vertx.core.http.ServerWebSocket;
 
@@ -26,8 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.twosigma.znai.console.ansi.Color.BLUE;
-import static com.twosigma.znai.console.ansi.Color.RED;
+import static org.testingisdocumenting.znai.console.ansi.Color.BLUE;
+import static org.testingisdocumenting.znai.console.ansi.Color.RED;
 
 public abstract class JsonWebSocketHandler implements Handler<ServerWebSocket> {
     private List<SocketWithUrl> sockets;

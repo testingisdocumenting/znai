@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cli;
+package org.testingisdocumenting.znai.cli;
 
-import com.twosigma.znai.cli.extension.CliCommandHandler;
-import com.twosigma.znai.cli.extension.CliCommandHandlers;
-import com.twosigma.znai.client.DeployTempDir;
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.console.ansi.Color;
-import com.twosigma.znai.parser.MarkupTypes;
+import org.testingisdocumenting.znai.cli.extension.CliCommandHandler;
+import org.testingisdocumenting.znai.cli.extension.CliCommandHandlers;
+import org.testingisdocumenting.znai.client.DeployTempDir;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.parser.MarkupTypes;
 import org.apache.commons.cli.*;
 
 import java.nio.file.Path;

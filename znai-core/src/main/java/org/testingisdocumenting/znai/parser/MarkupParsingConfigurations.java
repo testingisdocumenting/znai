@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser;
+package org.testingisdocumenting.znai.parser;
 
-import com.twosigma.znai.utils.ServiceLoaderUtils;
+import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.util.List;
 import java.util.Set;

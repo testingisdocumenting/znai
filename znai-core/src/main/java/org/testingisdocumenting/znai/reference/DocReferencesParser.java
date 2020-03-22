@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.reference;
+package org.testingisdocumenting.znai.reference;
 
-import com.twosigma.znai.parser.table.CsvParser;
-import com.twosigma.znai.parser.table.MarkupTableData;
+import org.testingisdocumenting.znai.parser.table.CsvParser;
+import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 
 public class DocReferencesParser {
     private DocReferencesParser() {

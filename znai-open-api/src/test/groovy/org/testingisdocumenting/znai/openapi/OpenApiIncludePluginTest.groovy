@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.openapi
+package org.testingisdocumenting.znai.openapi
 
-import com.twosigma.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
 class OpenApiIncludePluginTest {

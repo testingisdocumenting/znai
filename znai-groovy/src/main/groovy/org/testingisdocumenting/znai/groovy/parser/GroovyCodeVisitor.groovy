@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.groovy.parser
+package org.testingisdocumenting.znai.groovy.parser
 
 import org.codehaus.groovy.antlr.GroovySourceAST
 import org.codehaus.groovy.antlr.treewalker.VisitorAdapter
 
 import java.util.stream.Collectors
 
-import static com.twosigma.znai.utils.StringUtils.extractInsideCurlyBraces
-import static com.twosigma.znai.utils.StringUtils.removeContentInsideBracketsInclusive
-import static com.twosigma.znai.utils.StringUtils.stripIndentation
+import static org.testingisdocumenting.znai.utils.StringUtils.extractInsideCurlyBraces
+import static org.testingisdocumenting.znai.utils.StringUtils.removeContentInsideBracketsInclusive
+import static org.testingisdocumenting.znai.utils.StringUtils.stripIndentation
 import static org.codehaus.groovy.antlr.parser.GroovyTokenTypes.*
 
 class GroovyCodeVisitor extends VisitorAdapter {

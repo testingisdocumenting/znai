@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.core;
+package org.testingisdocumenting.znai.core;
 
-import com.twosigma.znai.structure.TocItem;
+import org.testingisdocumenting.znai.structure.TocItem;
 
 import java.nio.file.Path;
 import java.util.*;

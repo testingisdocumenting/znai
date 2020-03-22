@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.preview;
+package org.testingisdocumenting.znai.server.preview;
 
 import java.nio.file.Path;
 

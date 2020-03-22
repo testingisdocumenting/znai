@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.remove;
+package org.testingisdocumenting.znai.server.remove;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpServerRequest;

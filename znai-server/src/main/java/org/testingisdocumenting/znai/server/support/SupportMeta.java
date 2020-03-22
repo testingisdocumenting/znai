@@ -1,4 +1,4 @@
-package com.twosigma.znai.server.support;
+package org.testingisdocumenting.znai.server.support;
 
 public class SupportMeta {
     private String link;

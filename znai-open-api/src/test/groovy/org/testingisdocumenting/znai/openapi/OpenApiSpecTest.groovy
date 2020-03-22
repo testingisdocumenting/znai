@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.openapi
+package org.testingisdocumenting.znai.openapi
 
-import com.twosigma.znai.utils.ResourceUtils
+import org.testingisdocumenting.znai.utils.ResourceUtils
 import org.junit.BeforeClass
 import org.junit.Test
 
-import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class OpenApiSpecTest {
     private static OpenApiSpec spec

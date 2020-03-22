@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams.graphviz
+package org.testingisdocumenting.znai.diagrams.graphviz
 
-import com.twosigma.znai.utils.FileUtils
-import com.twosigma.znai.utils.JsonUtils
+import org.testingisdocumenting.znai.utils.FileUtils
+import org.testingisdocumenting.znai.utils.JsonUtils
 
 import java.nio.file.Files
 import java.nio.file.Paths

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions;
+package org.testingisdocumenting.znai.extensions;
 
-import com.twosigma.znai.extensions.meta.MetaIncludePlugin;
-import com.twosigma.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.extensions.meta.MetaIncludePlugin;
+import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;

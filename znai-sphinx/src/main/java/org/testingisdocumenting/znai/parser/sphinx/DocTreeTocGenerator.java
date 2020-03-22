@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.sphinx;
+package org.testingisdocumenting.znai.parser.sphinx;
 
-import com.twosigma.znai.structure.TableOfContents;
-import com.twosigma.znai.structure.TocGenerator;
-import com.twosigma.znai.utils.XmlUtils;
+import org.testingisdocumenting.znai.structure.TableOfContents;
+import org.testingisdocumenting.znai.structure.TocGenerator;
+import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

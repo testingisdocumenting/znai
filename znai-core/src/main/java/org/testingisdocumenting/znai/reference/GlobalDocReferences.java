@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.reference;
+package org.testingisdocumenting.znai.reference;
 
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.structure.DocStructure;
-import com.twosigma.znai.structure.DocUrl;
-import com.twosigma.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.structure.DocStructure;
+import org.testingisdocumenting.znai.structure.DocUrl;
+import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

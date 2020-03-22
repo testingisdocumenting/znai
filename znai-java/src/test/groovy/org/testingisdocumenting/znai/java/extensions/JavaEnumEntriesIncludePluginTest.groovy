@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.extensions
+package org.testingisdocumenting.znai.java.extensions
 
-import com.twosigma.znai.extensions.include.PluginsTestUtils
-import com.twosigma.znai.parser.docelement.DocElement
+import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.parser.docelement.DocElement
 import org.junit.Test
 
 class JavaEnumEntriesIncludePluginTest {

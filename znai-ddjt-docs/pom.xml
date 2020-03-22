@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.twosigma.znai</groupId>
+        <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
         <version>1.30-SNAPSHOT</version>
     </parent>
@@ -28,7 +28,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-testing-examples</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
@@ -38,7 +38,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.twosigma.znai</groupId>
+                <groupId>org.testingisdocumenting.znai</groupId>
                 <artifactId>znai-maven-plugin</artifactId>
                 <version>${project.version}</version>
                 <executions>

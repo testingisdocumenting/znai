@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.search;
+package org.testingisdocumenting.znai.search;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

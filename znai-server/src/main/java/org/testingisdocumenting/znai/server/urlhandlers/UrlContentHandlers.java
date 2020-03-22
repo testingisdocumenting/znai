@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.urlhandlers;
+package org.testingisdocumenting.znai.server.urlhandlers;
 
-import com.twosigma.znai.utils.ServiceLoaderUtils;
+import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.util.Set;
 import java.util.stream.Stream;

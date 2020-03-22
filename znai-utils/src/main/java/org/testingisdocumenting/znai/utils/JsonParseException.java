@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.utils;
+package org.testingisdocumenting.znai.utils;
 
 public class JsonParseException extends RuntimeException {
     public JsonParseException(String message) {

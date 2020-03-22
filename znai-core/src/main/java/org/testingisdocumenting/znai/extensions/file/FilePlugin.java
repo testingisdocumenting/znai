@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.file;
+package org.testingisdocumenting.znai.extensions.file;
 
-import com.twosigma.znai.extensions.PluginParamsOpts;
-import com.twosigma.znai.utils.StringUtils;
+import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
+import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;

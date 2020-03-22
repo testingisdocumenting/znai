@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.core
+package org.testingisdocumenting.znai.core
 
 import org.junit.Before
 import org.junit.Test
@@ -60,10 +60,10 @@ class ResourcesResolverChainTest {
             chain.textContent('path')
         } should throwException("Can't find <path>\n\n" +
                 "Tried following ResourceResolvers:\n" +
-                "com.twosigma.znai.core.ResourcesResolverChainTest.Resolver resources not found:\n" +
+                "org.testingisdocumenting.znai.core.ResourcesResolverChainTest.Resolver resources not found:\n" +
                 "  a:1/path\n" +
                 "  a:2/path\n" +
-                "com.twosigma.znai.core.ResourcesResolverChainTest.Resolver resources not found:\n" +
+                "org.testingisdocumenting.znai.core.ResourcesResolverChainTest.Resolver resources not found:\n" +
                 "  b:1/path\n" +
                 "  b:2/path\n" +
                 "  b:3/path")

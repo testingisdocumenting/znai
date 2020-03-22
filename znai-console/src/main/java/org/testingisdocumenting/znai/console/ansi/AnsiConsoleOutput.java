@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.console.ansi;
+package org.testingisdocumenting.znai.console.ansi;
 
-import com.twosigma.znai.console.ConsoleOutput;
+import org.testingisdocumenting.znai.console.ConsoleOutput;
 
 public class AnsiConsoleOutput implements ConsoleOutput {
     @Override

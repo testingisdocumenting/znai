@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cpp.parser;
+package org.testingisdocumenting.znai.cpp.parser;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;

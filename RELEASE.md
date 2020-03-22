@@ -4,7 +4,7 @@
 
 There is some one time setup required in order to publish to Maven Central.  First, you will need a Sonatype account which
 you can create at https://issues.sonatype.org/secure/Signup!default.jspa.  You will also need permissions to publish to
-the `com.twosigma.znai` group ID, for that raise a similar JIRA to https://issues.sonatype.org/browse/OSSRH-41183.
+the `org.testingisdocumenting.znai` group ID, for that raise a similar JIRA to https://issues.sonatype.org/browse/OSSRH-41183.
 
 Once you have an account, you will need to add credentials for Sonatype to your `~/.m2/settings.xml`.  If you don't have
 one then copy the one below.  If you have one already then create or modify the `servers` section to include the server
@@ -79,5 +79,5 @@ This will prompt you for the GPG passphrase.  It will then build and test znai a
 # Sit back, relax and enjoy the wait
 
 At this stage, **be patient**.  There is some delay completion of the `release:perform` step and the artifacts being
-available in Maven Central.  This is of the order of hours.  You can keep refreshing https://search.maven.org/search?q=g:com.twosigma.znai%20AND%20a:znai&core=gav
+available in Maven Central.  This is of the order of hours.  You can keep refreshing https://search.maven.org/search?q=g:org.testingisdocumenting.znai%20AND%20a:znai&core=gav
 until you see your version.

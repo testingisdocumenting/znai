@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.docpreparation;
+package org.testingisdocumenting.znai.server.docpreparation;
 
 import io.vertx.core.impl.ConcurrentHashSet;
 

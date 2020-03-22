@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.latexmath;
+package org.testingisdocumenting.znai.latexmath;
 
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.extensions.fence.FencePlugin;
-import com.twosigma.znai.search.SearchScore;
-import com.twosigma.znai.search.SearchText;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.Collections;

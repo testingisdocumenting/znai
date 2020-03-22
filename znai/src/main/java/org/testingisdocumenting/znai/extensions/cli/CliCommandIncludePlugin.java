@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.cli;
+package org.testingisdocumenting.znai.extensions.cli;
 
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.console.ansi.Color;
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.core.ResourcesResolver;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.PluginParamsOpts;
-import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.parser.ParserHandler;
-import com.twosigma.znai.search.SearchScore;
-import com.twosigma.znai.search.SearchText;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
+import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.*;

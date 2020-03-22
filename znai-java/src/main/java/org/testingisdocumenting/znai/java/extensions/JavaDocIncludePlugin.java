@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.extensions;
+package org.testingisdocumenting.znai.java.extensions;
 
-import com.twosigma.znai.extensions.include.IncludePlugin;
-import com.twosigma.znai.java.parser.JavaCode;
-import com.twosigma.znai.java.parser.html.HtmlToDocElementConverter;
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.java.parser.JavaCode;
+import org.testingisdocumenting.znai.java.parser.html.HtmlToDocElementConverter;
 
 public class JavaDocIncludePlugin extends JavaIncludePluginBase {
     @Override

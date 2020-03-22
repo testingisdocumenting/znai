@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.sockets;
+package org.testingisdocumenting.znai.server.sockets;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.ServerWebSocket;

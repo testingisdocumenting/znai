@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cli.extension;
+package org.testingisdocumenting.znai.cli.extension;
 
 import java.nio.file.Path;
 

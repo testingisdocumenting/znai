@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.tabs
+package org.testingisdocumenting.znai.extensions.tabs
 
-import com.twosigma.znai.extensions.PluginParams
-import com.twosigma.znai.extensions.fence.FencePlugin
-import com.twosigma.znai.parser.TestComponentsRegistry
-import com.twosigma.znai.parser.TestMarkupParser
-import com.twosigma.znai.parser.commonmark.MarkdownParser
+import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.fence.FencePlugin
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
+import org.testingisdocumenting.znai.parser.TestMarkupParser
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 
 import java.nio.file.Paths
 
-import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class TabsFencePluginTest {
     @Test

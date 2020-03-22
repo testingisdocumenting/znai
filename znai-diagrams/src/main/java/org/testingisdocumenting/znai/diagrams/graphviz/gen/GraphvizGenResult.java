@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams.graphviz.gen;
+package org.testingisdocumenting.znai.diagrams.graphviz.gen;
 
 import java.util.Collection;
 

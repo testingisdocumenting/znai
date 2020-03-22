@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.structure;
+package org.testingisdocumenting.znai.structure;
 
-import com.twosigma.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.util.HashMap;
 import java.util.Map;

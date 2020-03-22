@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions;
+package org.testingisdocumenting.znai.extensions;
 
-import com.twosigma.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.core.ResourcesResolver;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

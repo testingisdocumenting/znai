@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.include
+package org.testingisdocumenting.znai.extensions.include
 
-import com.twosigma.znai.extensions.MultipleLocalLocationsResourceResolver
+import org.testingisdocumenting.znai.extensions.MultipleLocalLocationsResourceResolver
 import org.junit.Test
 
 import java.nio.file.Paths
@@ -25,11 +25,11 @@ class MultipleLocalLocationsResourceResolverTest {
     @Test
     void "resolves against specified list of dirs"() {
         def resolver = new MultipleLocalLocationsResourceResolver(Paths.get(""))
-        resolver.initialize(["src/main/java/com/twosigma/znai",
-                             "src/test/groovy/com/twosigma/znai"].stream())
+        resolver.initialize(["src/main/java/org/testingisdocumenting/znai",
+                             "src/test/groovy/org/testingisdocumenting/znai"].stream())
 
-        assert resolver.fullPath("core/AuxiliaryFile.java").toString() == 'src/main/java/com/twosigma/znai/core/AuxiliaryFile.java'
-        assert resolver.fullPath("parser/MarkdownParserTest.groovy").toString() == 'src/test/groovy/com/twosigma/znai/parser/MarkdownParserTest.groovy'
+        assert resolver.fullPath("core/AuxiliaryFile.java").toString() == 'src/main/java/org/testingisdocumenting/znai/core/AuxiliaryFile.java'
+        assert resolver.fullPath("parser/MarkdownParserTest.groovy").toString() == 'src/test/groovy/org/testingisdocumenting/znai/parser/MarkdownParserTest.groovy'
     }
 
     @Test

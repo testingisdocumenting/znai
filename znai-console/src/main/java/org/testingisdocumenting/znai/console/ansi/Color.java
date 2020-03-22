@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.console.ansi;
+package org.testingisdocumenting.znai.console.ansi;
 
 public enum Color {
     BLACK("\u001B[30m"),

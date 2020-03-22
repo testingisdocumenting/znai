@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html.reactjs;
+package org.testingisdocumenting.znai.html.reactjs;
 
-import com.twosigma.znai.html.HtmlPage;
-import com.twosigma.znai.html.RenderSupplier;
-import com.twosigma.znai.utils.JsonUtils;
-import com.twosigma.znai.web.WebResource;
-import com.twosigma.znai.web.extensions.WebSiteResourcesProviders;
+import org.testingisdocumenting.znai.html.HtmlPage;
+import org.testingisdocumenting.znai.html.RenderSupplier;
+import org.testingisdocumenting.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.web.WebResource;
+import org.testingisdocumenting.znai.web.extensions.WebSiteResourcesProviders;
 
 import java.util.Map;
 

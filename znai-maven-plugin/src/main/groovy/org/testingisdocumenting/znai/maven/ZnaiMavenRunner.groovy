@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.maven
+package org.testingisdocumenting.znai.maven
 
-import com.twosigma.znai.console.ConsoleOutput
-import com.twosigma.znai.console.ConsoleOutputs
-import com.twosigma.znai.cli.ZnaiCliApp
-import com.twosigma.znai.cli.ZnaiCliConfig
+import org.testingisdocumenting.znai.console.ConsoleOutput
+import org.testingisdocumenting.znai.console.ConsoleOutputs
+import org.testingisdocumenting.znai.cli.ZnaiCliApp
+import org.testingisdocumenting.znai.cli.ZnaiCliConfig
 
 class ZnaiMavenRunner {
     static void run(ConsoleOutput consoleOutput, Map<String, String> argsMap) {

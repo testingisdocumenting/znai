@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cpp.parser;
+package org.testingisdocumenting.znai.cpp.parser;
 
-import com.twosigma.znai.utils.StringUtils;
+import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

@@ -22,7 +22,7 @@ If files you want to include are not part of your project, you can add an HTTP b
 ```txt {title: "lookup-paths"}
 ../examples
 ../module/src/main/java
-https://raw.githubusercontent.com/twosigma/webtau/master
+https://raw.githubusercontent.com/testingisdocumenting/webtau/master
 ```
 
 If the file is not found using local locations, it will be fetched from the provided urls.

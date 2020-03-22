@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser
+package org.testingisdocumenting.znai.parser
 
-import com.twosigma.znai.core.ResourcesResolver
-import com.twosigma.znai.utils.ResourceUtils
+import org.testingisdocumenting.znai.core.ResourcesResolver
+import org.testingisdocumenting.znai.utils.ResourceUtils
 
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage

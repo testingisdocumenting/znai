@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.typescript;
+package org.testingisdocumenting.znai.typescript;
 
-import com.twosigma.znai.utils.JsonUtils;
-import com.twosigma.znai.utils.ResourceUtils;
+import org.testingisdocumenting.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.utils.ResourceUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.maven
+package org.testingisdocumenting.znai.maven
 
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugin.MojoExecutionException

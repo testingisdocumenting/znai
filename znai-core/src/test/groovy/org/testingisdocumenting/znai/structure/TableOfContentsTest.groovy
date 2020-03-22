@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.structure
+package org.testingisdocumenting.znai.structure
 
-import com.twosigma.znai.parser.PageSectionIdTitle
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle
 import org.junit.Test
 
 class TableOfContentsTest {

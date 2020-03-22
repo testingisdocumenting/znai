@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html
+package org.testingisdocumenting.znai.html
 
-import com.twosigma.znai.parser.PageSectionIdTitle
-import com.twosigma.znai.search.PageSearchEntries
-import com.twosigma.znai.search.PageSearchEntry
-import com.twosigma.znai.search.SearchScore
-import com.twosigma.znai.structure.TableOfContents
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle
+import org.testingisdocumenting.znai.search.PageSearchEntries
+import org.testingisdocumenting.znai.search.PageSearchEntry
+import org.testingisdocumenting.znai.search.SearchScore
+import org.testingisdocumenting.znai.structure.TableOfContents
 import org.junit.Test
 
 class ServerSideSimplifiedRendererTest {

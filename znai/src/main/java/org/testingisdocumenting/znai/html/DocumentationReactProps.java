@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html;
+package org.testingisdocumenting.znai.html;
 
-import com.twosigma.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.structure.DocMeta;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

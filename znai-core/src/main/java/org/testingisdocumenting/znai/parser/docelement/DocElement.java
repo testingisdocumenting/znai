@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.docelement;
+package org.testingisdocumenting.znai.parser.docelement;
 
-import com.twosigma.znai.utils.CollectionUtils;
+import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.cpp.extensions
+package org.testingisdocumenting.znai.cpp.extensions
 
-import com.twosigma.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
 import static org.junit.Assert.assertEquals

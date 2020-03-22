@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html;
+package org.testingisdocumenting.znai.html;
 
 public class HtmlPageAndPageProps {
     private HtmlPage htmlPage;

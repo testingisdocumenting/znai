@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.jupyter;
+package org.testingisdocumenting.znai.jupyter;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static com.twosigma.znai.jupyter.JupyterCell.CODE_TYPE;
-import static com.twosigma.znai.jupyter.JupyterCell.MARKDOWN_TYPE;
+import static org.testingisdocumenting.znai.jupyter.JupyterCell.CODE_TYPE;
+import static org.testingisdocumenting.znai.jupyter.JupyterCell.MARKDOWN_TYPE;
 import static java.util.stream.Collectors.toList;
 
 public class JupyterParserVer4 implements JupyterParser {

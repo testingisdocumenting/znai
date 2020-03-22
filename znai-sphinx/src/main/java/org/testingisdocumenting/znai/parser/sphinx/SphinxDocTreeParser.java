@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.sphinx;
+package org.testingisdocumenting.znai.parser.sphinx;
 
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.parser.MarkupParser;
-import com.twosigma.znai.parser.MarkupParserResult;
-import com.twosigma.znai.parser.ParserHandlersList;
-import com.twosigma.znai.parser.docelement.DocElementCreationParserHandler;
-import com.twosigma.znai.search.SearchCrawlerParserHandler;
-import com.twosigma.znai.structure.PageMeta;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.parser.ParserHandlersList;
+import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
+import org.testingisdocumenting.znai.search.SearchCrawlerParserHandler;
+import org.testingisdocumenting.znai.structure.PageMeta;
 
 import java.nio.file.Path;
 import java.util.Collections;

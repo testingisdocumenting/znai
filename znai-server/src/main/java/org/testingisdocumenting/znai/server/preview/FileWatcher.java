@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.preview;
+package org.testingisdocumenting.znai.server.preview;
 
 import com.sun.nio.file.SensitivityWatchEventModifier;
-import com.twosigma.znai.console.ConsoleOutputs;
-import com.twosigma.znai.core.AuxiliaryFileListener;
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.website.WebSite;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.core.AuxiliaryFileListener;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.website.WebSite;
 
 import java.io.IOException;
 import java.nio.file.*;

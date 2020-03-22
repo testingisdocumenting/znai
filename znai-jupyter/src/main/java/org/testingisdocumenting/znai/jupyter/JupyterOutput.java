@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.jupyter;
+package org.testingisdocumenting.znai.jupyter;
 
 public class JupyterOutput {
     public static final String HTML_FORMAT = "html";

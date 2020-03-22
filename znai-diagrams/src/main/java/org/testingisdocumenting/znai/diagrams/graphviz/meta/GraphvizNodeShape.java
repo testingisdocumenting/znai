@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams.graphviz.meta;
+package org.testingisdocumenting.znai.diagrams.graphviz.meta;
 
 import java.util.ArrayList;
 import java.util.List;

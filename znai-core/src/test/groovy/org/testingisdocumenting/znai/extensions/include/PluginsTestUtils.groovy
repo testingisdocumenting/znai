@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.include
+package org.testingisdocumenting.znai.extensions.include
 
-import com.twosigma.znai.core.AuxiliaryFile
-import com.twosigma.znai.extensions.PluginParams
-import com.twosigma.znai.extensions.Plugins
-import com.twosigma.znai.parser.docelement.DocElement
-import com.twosigma.znai.parser.docelement.DocElementCreationParserHandler
+import org.testingisdocumenting.znai.core.AuxiliaryFile
+import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.Plugins
+import org.testingisdocumenting.znai.parser.docelement.DocElement
+import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler
 
 import java.nio.file.Paths
 import java.util.stream.Stream
 
-import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class PluginsTestUtils {
     static class IncludePluginAndParserHandler {

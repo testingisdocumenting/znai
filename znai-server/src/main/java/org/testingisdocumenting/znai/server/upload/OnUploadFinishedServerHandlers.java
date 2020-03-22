@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.upload;
+package org.testingisdocumenting.znai.server.upload;
 
-import com.twosigma.znai.utils.ServiceLoaderUtils;
+import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.nio.file.Path;
 import java.util.Set;

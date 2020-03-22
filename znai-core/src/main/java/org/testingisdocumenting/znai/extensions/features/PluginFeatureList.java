@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.features;
+package org.testingisdocumenting.znai.extensions.features;
 
-import com.twosigma.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;

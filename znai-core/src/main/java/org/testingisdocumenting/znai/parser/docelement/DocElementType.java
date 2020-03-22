@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.docelement;
+package org.testingisdocumenting.znai.parser.docelement;
 
 public class DocElementType {
     public static final String PAGE = "Page";

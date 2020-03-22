@@ -17,7 +17,7 @@
 import {getDocId} from './docMeta';
 
 /**
- * @see com.twosigma.znai.website.WebSiteGlobalOverridePlaceholderExtension
+ * @see org.testingisdocumenting.znai.website.WebSiteGlobalOverridePlaceholderExtension
  * TODO when all the documentations will be rebuilt with new global-overrides.css in place,
  * this injection can be removed
  */

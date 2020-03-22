@@ -5,7 +5,7 @@ You essentially need to breach encapsulation. Test's exposure to implementation 
 
 Let's look at a simple example.
 
-:include-java: com/twosigma/testing/examples/components/GamesShop.java {entry: "GamesShop"}
+:include-java: org/testingisdocumenting/testing/examples/components/GamesShop.java {entry: "GamesShop"}
 
 In order to write a test for `GamesShop` component, your test needs to know what methods are being called and what is
 their signature.

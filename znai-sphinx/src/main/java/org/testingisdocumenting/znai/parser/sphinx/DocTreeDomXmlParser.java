@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser.sphinx;
+package org.testingisdocumenting.znai.parser.sphinx;
 
-import com.twosigma.znai.core.ComponentsRegistry;
-import com.twosigma.znai.extensions.PluginParams;
-import com.twosigma.znai.extensions.PluginResult;
-import com.twosigma.znai.parser.ParserHandler;
-import com.twosigma.znai.parser.sphinx.python.*;
-import com.twosigma.znai.reference.DocReferences;
-import com.twosigma.znai.utils.XmlUtils;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.parser.sphinx.python.*;
+import org.testingisdocumenting.znai.reference.DocReferences;
+import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.w3c.dom.Document;
@@ -34,7 +34,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static com.twosigma.znai.parser.sphinx.xml.DocUtilsXmlFixer.fixDocUtilsIncorrectXml;
+import static org.testingisdocumenting.znai.parser.sphinx.xml.DocUtilsXmlFixer.fixDocUtilsIncorrectXml;
 
 class DocTreeDomXmlParser {
     private ComponentsRegistry componentsRegistry;

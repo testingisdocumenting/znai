@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai
+package org.testingisdocumenting.znai
 
-import com.twosigma.znai.core.AuxiliaryFile
-import com.twosigma.znai.core.AuxiliaryFilesRegistry
-import com.twosigma.znai.structure.TocItem
+import org.testingisdocumenting.znai.core.AuxiliaryFile
+import org.testingisdocumenting.znai.core.AuxiliaryFilesRegistry
+import org.testingisdocumenting.znai.structure.TocItem
 import org.junit.Test
 
 import java.nio.file.Paths

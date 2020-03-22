@@ -1,4 +1,4 @@
-package com.twosigma.znai.utils;
+package org.testingisdocumenting.znai.utils;
 
 import org.apache.commons.io.FilenameUtils;
 

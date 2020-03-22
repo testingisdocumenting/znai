@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.server.remove;
+package org.testingisdocumenting.znai.server.remove;
 
 public interface OnRemoveFinishedServerHandler {
     void onRemoveFinished(String docId, String actor);

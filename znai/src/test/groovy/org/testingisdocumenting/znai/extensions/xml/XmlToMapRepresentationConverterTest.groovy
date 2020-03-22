@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.xml
+package org.testingisdocumenting.znai.extensions.xml
 
 import org.junit.Test
 

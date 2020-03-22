@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.extensions.markup
+package org.testingisdocumenting.znai.extensions.markup
 
-import com.twosigma.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParams
 import org.junit.Test
 
 import java.nio.file.Paths
 
-import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkdownAndResultFencePluginTest {
     def plugin = new MarkdownAndResultFencePlugin()

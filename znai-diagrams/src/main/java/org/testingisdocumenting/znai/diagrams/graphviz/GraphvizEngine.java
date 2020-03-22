@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams.graphviz;
+package org.testingisdocumenting.znai.diagrams.graphviz;
 
-import com.twosigma.znai.diagrams.graphviz.meta.GraphvizDiagramWithMeta;
-import com.twosigma.znai.diagrams.graphviz.meta.GraphvizShapeConfig;
+import org.testingisdocumenting.znai.diagrams.graphviz.meta.GraphvizDiagramWithMeta;
+import org.testingisdocumenting.znai.diagrams.graphviz.meta.GraphvizShapeConfig;
 
 import java.util.*;
 

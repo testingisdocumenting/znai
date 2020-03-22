@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams
+package org.testingisdocumenting.znai.diagrams
 
-import com.twosigma.znai.diagrams.slides.DiagramSlides
-import com.twosigma.znai.diagrams.slides.MarkupDiagramSlides
-import com.twosigma.znai.parser.commonmark.MarkdownParser
+import org.testingisdocumenting.znai.diagrams.slides.DiagramSlides
+import org.testingisdocumenting.znai.diagrams.slides.MarkupDiagramSlides
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 
 import java.nio.file.Paths
 
-import static com.twosigma.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkupDiagramSlidesTest {
     private DiagramSlides slides

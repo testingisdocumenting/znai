@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.html.reactjs;
+package org.testingisdocumenting.znai.html.reactjs;
 
-import com.twosigma.znai.html.Deployer;
-import com.twosigma.znai.web.WebResource;
+import org.testingisdocumenting.znai.html.Deployer;
+import org.testingisdocumenting.znai.web.WebResource;
 
 import java.util.List;
 import java.util.stream.Stream;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.diagrams.plantuml;
+package org.testingisdocumenting.znai.diagrams.plantuml;
 
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;

@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser;
+package org.testingisdocumenting.znai.parser;
 
-import com.twosigma.znai.core.AuxiliaryFile;
-import com.twosigma.znai.parser.docelement.DocElement;
-import com.twosigma.znai.search.PageSearchEntry;
-import com.twosigma.znai.structure.PageMeta;
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.search.PageSearchEntry;
+import org.testingisdocumenting.znai.structure.PageMeta;
 
 import java.util.List;
 import java.util.Map;

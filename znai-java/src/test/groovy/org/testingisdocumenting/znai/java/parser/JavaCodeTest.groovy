@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.parser
+package org.testingisdocumenting.znai.java.parser
 
 import org.junit.Assert
 import org.junit.Test

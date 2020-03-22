@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.typescript
+package org.testingisdocumenting.znai.typescript
 
-import com.twosigma.znai.utils.JsonUtils
+import org.testingisdocumenting.znai.utils.JsonUtils
 import org.junit.BeforeClass
 import org.junit.Test
 

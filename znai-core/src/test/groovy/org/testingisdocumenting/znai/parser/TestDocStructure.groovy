@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.parser
+package org.testingisdocumenting.znai.parser
 
-import com.twosigma.znai.structure.DocStructure
-import com.twosigma.znai.structure.DocUrl
-import com.twosigma.znai.structure.TableOfContents
+import org.testingisdocumenting.znai.structure.DocStructure
+import org.testingisdocumenting.znai.structure.DocUrl
+import org.testingisdocumenting.znai.structure.TableOfContents
 
 import java.nio.file.Path
 

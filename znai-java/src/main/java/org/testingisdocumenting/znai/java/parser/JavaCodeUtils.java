@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.parser;
+package org.testingisdocumenting.znai.java.parser;
 
 import com.github.javaparser.Position;
 import com.github.javaparser.Range;
 import com.github.javaparser.ast.body.BodyDeclaration;
-import com.twosigma.znai.utils.StringUtils;
+import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.List;
 

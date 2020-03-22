@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.template
+package org.testingisdocumenting.znai.template
 
 import org.junit.Assert
 import org.junit.Test

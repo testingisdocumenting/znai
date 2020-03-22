@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.java.parser;
+package org.testingisdocumenting.znai.java.parser;
 
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.comments.JavadocComment;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.PARAM;
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.RETURN;
-import static com.twosigma.znai.utils.StringUtils.*;
+import static org.testingisdocumenting.znai.utils.StringUtils.*;
 import static java.util.stream.Collectors.*;
 
 public class JavaCodeVisitor extends VoidVisitorAdapter<String> {

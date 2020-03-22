@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.jupyter
+package org.testingisdocumenting.znai.jupyter
 
-import com.twosigma.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
 class JupyterIncludePluginTest {

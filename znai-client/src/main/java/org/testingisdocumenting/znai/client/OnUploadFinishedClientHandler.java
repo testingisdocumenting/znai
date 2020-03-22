@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.znai.client;
+package org.testingisdocumenting.znai.client;
 
 public interface OnUploadFinishedClientHandler {
     void onUpload(int statusCode);
