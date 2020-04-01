@@ -89,7 +89,7 @@
                                     <pattern>com.</pattern>
                                     <shadedPattern>znaishaded.com.</shadedPattern>
                                     <excludes>
-                                        <exclude>com.twosigma.**</exclude>
+                                        <exclude>org.testingisdocumenting.**</exclude>
                                         <exclude>com.sun.**</exclude>
                                     </excludes>
                                 </relocation>

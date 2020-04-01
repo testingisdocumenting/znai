@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.testing.examples.margin;
+package org.testingisdocumenting.testing.examples.margin;
 
 public class Transaction {
     private double lot;

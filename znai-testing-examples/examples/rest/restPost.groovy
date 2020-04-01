@@ -1,6 +1,6 @@
 package rest
 
-import static com.twosigma.webtau.WebTauGroovyDsl.*
+import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
 scenario("extracting id after POST to use inside GET request") {
     def id = http.post("/employee", [firstName: 'FN', lastName: 'LN']) {

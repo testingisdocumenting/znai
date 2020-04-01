@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  ~ Copyright 2020 znai maintainers
   ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,8 +44,8 @@
             <id>MykolaGolubyev</id>
             <name>Nick Golubyev</name>
             <email>golubev.nikolay@gmail.com</email>
-            <organization>Two Sigma Investments</organization>
-            <organizationUrl>http://www.twosigma.com/</organizationUrl>
+            <organization>Testing Is Documenting</organization>
+            <organizationUrl>https://testingisdocumenting.org/</organizationUrl>
             <roles>
                 <role>developer</role>
             </roles>
@@ -83,7 +84,6 @@
         <module>znai-utils</module>
         <module>znai-utils-for-testing</module>
         <module>znai-console</module>
-        <module>znai-testing-tcli</module>
         <module>znai-ddjt-docs</module>
         <module>znai-diagrams</module>
         <module>znai</module>
@@ -120,7 +120,7 @@
         <commonmark.version>0.9.0</commonmark.version>
         <antlr.version>4.5</antlr.version>
         <jackson.verson>2.10.1</jackson.verson>
-        <webtau.version>1.16</webtau.version>
+        <webtau.version>1.21.1</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
         <ant.version>1.10.5</ant.version>
         <ant-compress.version>1.5</ant-compress.version>
@@ -322,31 +322,31 @@
             </dependency>
 
             <dependency>
-                <groupId>com.twosigma.webtau</groupId>
+                <groupId>org.testingisdocumenting.webtau</groupId>
                 <artifactId>webtau-core-groovy</artifactId>
                 <version>${webtau.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.twosigma.webtau</groupId>
+                <groupId>org.testingisdocumenting.webtau</groupId>
                 <artifactId>webtau</artifactId>
                 <version>${webtau.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.twosigma.webtau</groupId>
+                <groupId>org.testingisdocumenting.webtau</groupId>
                 <artifactId>webtau-core</artifactId>
                 <version>${webtau.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.twosigma.webtau</groupId>
+                <groupId>org.testingisdocumenting.webtau</groupId>
                 <artifactId>webtau-groovy</artifactId>
                 <version>${webtau.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.twosigma.webtau</groupId>
+                <groupId>org.testingisdocumenting.webtau</groupId>
                 <artifactId>webtau-browser</artifactId>
                 <version>${webtau.version}</version>
             </dependency>

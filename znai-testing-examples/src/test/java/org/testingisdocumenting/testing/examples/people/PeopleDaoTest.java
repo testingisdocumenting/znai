@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.twosigma.testing.examples.people;
+package org.testingisdocumenting.testing.examples.people;
 
-import com.twosigma.webtau.data.table.TableData;
+import org.testingisdocumenting.webtau.data.table.TableData;
 import org.junit.Test;
 
-import static com.twosigma.webtau.WebTauCore.*;
+import static org.testingisdocumenting.webtau.WebTauCore.*;
 
 public class PeopleDaoTest {
     private PeopleDao dao = new PeopleDao();

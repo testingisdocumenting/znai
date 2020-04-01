@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.twosigma.testing.examples.margin;
+package org.testingisdocumenting.testing.examples.margin;
 
-import com.twosigma.webtau.data.table.TableData;
+import org.testingisdocumenting.webtau.data.table.TableData;
 import org.junit.Test;
 
 import java.util.List;
 
-import static com.twosigma.webtau.WebTauCore.table;
+import static org.testingisdocumenting.webtau.WebTauCore.table;
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 

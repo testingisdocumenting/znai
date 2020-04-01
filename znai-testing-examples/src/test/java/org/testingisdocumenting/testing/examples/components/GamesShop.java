@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.testing.examples.components;
+package org.testingisdocumenting.testing.examples.components;
 
 public class GamesShop {
     private PaymentService paymentService;

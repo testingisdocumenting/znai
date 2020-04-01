@@ -2,4 +2,4 @@ Besides local search capabilities, `Znai` provides a search entry `XML` file for
 
 Your search entry file can be located at the following endpoint: `<base-url>/<doc-id>/search-entries.xml`
 
-For example, the search entry for the `Znai` documentation on Github is located at [twosigma.github.io/znai/search-entries.xml](https://twosigma.github.io/znai/search-entries.xml)
+For example, the search entry for the `Znai` documentation on Github is located at [https://testingisdocumenting.org/znai/search-entries.xml](https://testingisdocumenting.org/znai/search-entries.xml)

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.twosigma.testing.examples.margin
+package org.testingisdocumenting.testing.examples.margin
 
 
-import com.twosigma.webtau.data.table.TableData
+import org.testingisdocumenting.webtau.data.table.TableData
 import org.junit.Test
 
 class MarginCalculatorWithGroovyTableDataTest {

@@ -20,8 +20,8 @@ import org.testingisdocumenting.znai.parser.MarkupParsingConfigurations
 import org.testingisdocumenting.znai.parser.MarkupTypes
 import org.junit.Test
 
-import static com.twosigma.webtau.Matchers.code
-import static com.twosigma.webtau.Matchers.throwException
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class MarkupParsingConfigurationsTest {
     @Test

@@ -19,8 +19,8 @@ package org.testingisdocumenting.znai.extensions.cli
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
-import static com.twosigma.webtau.Matchers.code
-import static com.twosigma.webtau.Matchers.throwException
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class CliCommandIncludePluginTest {
     @Test

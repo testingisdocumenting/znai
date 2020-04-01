@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.testing.examples.people;
+package org.testingisdocumenting.testing.examples.people;
 
 import java.util.Arrays;
 import java.util.List;

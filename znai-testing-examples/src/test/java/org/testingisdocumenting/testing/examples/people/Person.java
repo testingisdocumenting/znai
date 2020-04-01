@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.twosigma.testing.examples.people;
+package org.testingisdocumenting.testing.examples.people;
 
 public class Person {
     private String id;
