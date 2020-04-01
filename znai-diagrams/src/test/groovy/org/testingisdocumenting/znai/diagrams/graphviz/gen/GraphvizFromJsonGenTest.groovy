@@ -18,7 +18,7 @@ package org.testingisdocumenting.znai.diagrams.graphviz.gen
 
 import org.junit.Test
 
-import static com.twosigma.webtau.Matchers.contain
+import static org.testingisdocumenting.webtau.Matchers.contain
 
 class GraphvizFromJsonGenTest {
     private String gv

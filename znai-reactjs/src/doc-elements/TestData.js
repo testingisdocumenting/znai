@@ -659,7 +659,7 @@ const TestData = {
                                     "type": "Paragraph",
                                     "content": [
                                         {
-                                            "text": "If you want to sign for the beta, email to PPE-Support@twosigma.com",
+                                            "text": "If you want to sign for beta email to X",
                                             "type": "SimpleText"
                                         }
                                     ]

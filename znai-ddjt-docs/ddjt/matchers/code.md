@@ -9,4 +9,4 @@ Java: :include-java: org/testingisdocumenting/testing/examples/expectation/code/
 
 All the required static methods are define in
 
-    import static com.twosigma.testing.Ddjt.*
+    import static org.testingisdocumenting.testing.Ddjt.*

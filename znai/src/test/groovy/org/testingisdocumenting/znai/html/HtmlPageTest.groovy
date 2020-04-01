@@ -2,7 +2,7 @@ package org.testingisdocumenting.znai.html
 
 import org.junit.Test
 
-import static com.twosigma.webtau.Matchers.contain
+import static org.testingisdocumenting.webtau.Matchers.contain
 
 class HtmlPageTest {
     @Test

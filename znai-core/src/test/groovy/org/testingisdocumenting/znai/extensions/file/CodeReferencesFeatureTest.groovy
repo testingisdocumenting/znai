@@ -7,8 +7,8 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-import static com.twosigma.webtau.Matchers.code
-import static com.twosigma.webtau.Matchers.throwException
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class CodeReferencesFeatureTest {

@@ -20,7 +20,7 @@ It may help to show parallel with `OOP` concepts
 It is a bad practice to have a class with loosely related methods. 
 Similarly, it is a bad practice to have a long page with loosely related sections.
 
-[Read more](https://twosigma.github.io/znai/flow/structure)
+[Read more](https://testingisdocumenting.org/znai/flow/structure)
 
 # Table of Contents
 
@@ -50,7 +50,7 @@ File will be looked up using following rules:
 * root directory of a documentation
 * all lookup paths listed in a `lookup-paths` file
 
-[Read more](https://twosigma.github.io/znai/snippets/external-code-snippets)
+[Read more](https://testingisdocumenting.org/znai/snippets/external-code-snippets)
 
 # Meta
 

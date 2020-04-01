@@ -22,8 +22,8 @@ import org.junit.Test
 import java.nio.file.Path
 import java.util.stream.Stream
 
-import static com.twosigma.webtau.Matchers.code
-import static com.twosigma.webtau.Matchers.throwException
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
 import static java.util.stream.Collectors.toList
 
 class ResourcesResolverChainTest {

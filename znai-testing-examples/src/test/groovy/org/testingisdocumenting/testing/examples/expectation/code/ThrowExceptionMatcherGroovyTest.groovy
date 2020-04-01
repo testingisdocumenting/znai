@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.twosigma.testing.examples.expectation.code
+package org.testingisdocumenting.testing.examples.expectation.code
 
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
 
-import static com.twosigma.webtau.Matchers.*
+import static org.testingisdocumenting.webtau.Matchers.*
 
 class ThrowExceptionMatcherGroovyTest {
     @Rule

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.twosigma.testing.examples;
+package org.testingisdocumenting.testing.examples;
 
-import com.twosigma.webtau.browser.page.PageElement;
+import org.testingisdocumenting.webtau.browser.page.PageElement;
 
-import static com.twosigma.webtau.WebTauDsl.$;
-import static com.twosigma.webtau.WebTauDsl.browser;
-import static com.twosigma.webtau.browser.documentation.BrowserDocumentation.*;
+import static org.testingisdocumenting.webtau.WebTauDsl.$;
+import static org.testingisdocumenting.webtau.WebTauDsl.browser;
+import static org.testingisdocumenting.webtau.browser.documentation.BrowserDocumentation.*;
 
 public class WebTauDslDemo {
     public static void main(String[] args) {
