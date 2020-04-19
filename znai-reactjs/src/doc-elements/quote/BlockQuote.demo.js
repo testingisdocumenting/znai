@@ -16,8 +16,6 @@
 
 import * as React from 'react'
 import {elementsLibrary} from '../DefaultElementsLibrary'
-import {BlockQuote} from './BlockQuote'
-import Paragraph from '../default-elements/Paragraph'
 import {Section} from '../default-elements/Section'
 
 export function blockQuoteDemo(registry) {
