@@ -71,6 +71,7 @@ import testData from "./doc-elements/TestData"
 import {subHeadingPresentationDemo} from './doc-elements/default-elements/PresentationSubHeading.demo'
 import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
 import {updateGlobalDocReferences} from './doc-elements/references/globalDocReferences'
+import {paragraphDemo} from './doc-elements/default-elements/Paragraph.demo'
 
 const docMeta = {
     id: 'preview',
@@ -96,6 +97,7 @@ const registries = new Registries({componentWrapper: ThemeWrapper})
 registries.add('text')
     .registerAsGrid('Typography', 0, typographyDemo)
     .registerAsRows('Blockquote', blockQuoteDemo)
+    .registerAsRows('Paragraph', paragraphDemo)
 
 registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
