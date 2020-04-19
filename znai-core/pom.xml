@@ -73,6 +73,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-console</artifactId>
             <version>${project.version}</version>
