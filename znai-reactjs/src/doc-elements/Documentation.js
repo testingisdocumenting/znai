@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -161,7 +162,8 @@ export class Documentation extends Component {
                                                    elementsLibrary={elementsLibrary}/>
 
         const NextPrevNavigation = pageTypesRegistry.nextPrevNavigationComponent(page.tocItem)
-        const renderedNextPrevNavigation = <NextPrevNavigation prevPageTocItem={this.prevPageTocItem}
+        const renderedNextPrevNavigation = <NextPrevNavigation currentTocItem={page.tocItem}
+                                                               prevPageTocItem={this.prevPageTocItem}
                                                                nextPageTocItem={this.nextPageTocItem}
                                                                onNextPage={this.onNextPage}
                                                                onPrevPage={this.onPrevPage}/>

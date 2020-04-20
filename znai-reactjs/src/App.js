@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -72,6 +73,8 @@ import {subHeadingPresentationDemo} from './doc-elements/default-elements/Presen
 import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
 import {updateGlobalDocReferences} from './doc-elements/references/globalDocReferences'
 import {paragraphDemo} from './doc-elements/default-elements/Paragraph.demo'
+import {defaultNextPrevNavigationDemo} from './doc-elements/page/default/PageDefaultNextPrevNavigation.demo'
+import {twoSidesNextPrevNavigationDemo} from './doc-elements/page/two-sides/TwoSidesNextPrevNavigation.demo'
 
 const docMeta = {
     id: 'preview',
@@ -132,6 +135,8 @@ registries.add('layout')
     .registerAsGrid('Tabs', 0, tabsDemo)
     .registerAsGrid('Tables', 0, tableDemo)
     .registerAsTabs('TOC', tocPanelDemo)
+    .registerAsRows('Next/Prev navigation', defaultNextPrevNavigationDemo)
+    .registerAsRows('Two Sides Next/Prev navigation', twoSidesNextPrevNavigationDemo)
 
 registries.add('presentation')
     .registerAsTabs('Layout', presentationDemo)
