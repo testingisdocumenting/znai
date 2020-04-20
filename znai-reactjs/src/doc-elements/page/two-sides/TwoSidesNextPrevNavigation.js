@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,18 +21,22 @@ import {DefaultNextPageButton, DefaultPrevPageButton} from '../default/PageDefau
 
 import './TwoSidesNextPrevNavigation.css'
 
-const TwoSidesNextPrevNavigation = ({prevPageTocItem, nextPageTocItem, onNextPage, onPrevPage}) => {
+const TwoSidesNextPrevNavigation = ({currentTocItem, prevPageTocItem, nextPageTocItem, onNextPage, onPrevPage}) => {
     return (
         <TwoSidesLayout>
             <TwoSidesLayoutLeftPart>
                 <div className="two-sides-prev-navigation-button">
-                    <DefaultPrevPageButton tocItem={prevPageTocItem} onClick={onPrevPage}/>
+                    <DefaultPrevPageButton currentTocItem={currentTocItem}
+                                           prevTocItem={prevPageTocItem}
+                                           onClick={onPrevPage}/>
                 </div>
             </TwoSidesLayoutLeftPart>
 
             <TwoSidesLayoutRightPart>
                 <div className="two-sides-next-navigation-button">
-                    <DefaultNextPageButton tocItem={nextPageTocItem} onClick={onNextPage}/>
+                    <DefaultNextPageButton currentTocItem={currentTocItem}
+                                           nextTocItem={nextPageTocItem}
+                                           onClick={onNextPage}/>
                 </div>
             </TwoSidesLayoutRightPart>
         </TwoSidesLayout>

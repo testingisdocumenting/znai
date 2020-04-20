@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,29 +19,37 @@ import React from 'react'
 
 import './PageDefaultNextPrevNavigation.css'
 
-function PageDefaultNextPrevNavigation({prevPageTocItem, nextPageTocItem, onNextPage, onPrevPage}) {
+function PageDefaultNextPrevNavigation({currentTocItem, prevPageTocItem, nextPageTocItem, onNextPage, onPrevPage}) {
     return (
         <div className="page-default-next-prev-navigation">
-            <DefaultPrevPageButton tocItem={prevPageTocItem} onClick={onPrevPage}/>
-            <DefaultNextPageButton tocItem={nextPageTocItem} onClick={onNextPage}/>
+            <DefaultPrevPageButton currentTocItem={currentTocItem} prevTocItem={prevPageTocItem} onClick={onPrevPage}/>
+            <DefaultNextPageButton currentTocItem={currentTocItem} nextTocItem={nextPageTocItem} onClick={onNextPage}/>
         </div>
     )
 }
 
-function DefaultPrevPageButton({tocItem, onClick}) {
-    return tocItem ? (
+function DefaultPrevPageButton({currentTocItem, prevTocItem, onClick}) {
+    return prevTocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
             <span className="glyphicon glyphicon-chevron-left"/>
-            <span className="next-prev-page-title">{tocItem.pageTitle} </span>
+            <span className="next-prev-page-title">{fullTitle(currentTocItem, prevTocItem)} </span>
         </div>) : <div/>
 }
 
-function DefaultNextPageButton({tocItem, onClick}) {
-    return tocItem ? (
+function DefaultNextPageButton({currentTocItem, nextTocItem, onClick}) {
+    return nextTocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
-            <span className="next-prev-page-title">{tocItem.pageTitle} </span>
+            <span className="next-prev-page-title">{fullTitle(currentTocItem, nextTocItem)} </span>
             <span className="glyphicon glyphicon-chevron-right"/>
         </div>) : <div/>
+}
+
+function fullTitle(current, nextOrPrev) {
+    if (current.dirName === nextOrPrev.dirName) {
+        return nextOrPrev.pageTitle;
+    }
+
+    return `${nextOrPrev.sectionTitle}: ${nextOrPrev.pageTitle}`
 }
 
 export {PageDefaultNextPrevNavigation, DefaultPrevPageButton, DefaultNextPageButton}
