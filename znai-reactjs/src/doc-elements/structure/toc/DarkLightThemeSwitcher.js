@@ -24,7 +24,6 @@ const darkThemeName = 'znai-dark'
 
 export function DarkLightThemeSwitcher() {
     const themeName = themeRegistry.currentTheme.name
-    console.log(themeName)
 
     const themeLabel = (themeName === darkThemeName ? 'dark' : 'light')
     const sliderClassName = 'znai-theme-switcher-slider ' + themeLabel
