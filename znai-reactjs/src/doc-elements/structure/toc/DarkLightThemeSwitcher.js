@@ -26,14 +26,15 @@ export function DarkLightThemeSwitcher() {
     const themeName = themeRegistry.currentTheme.name
     console.log(themeName)
 
-    const sliderClassName = 'znai-theme-switcher-slider ' + (themeName === darkThemeName ? 'dark' : 'light')
+    const themeLabel = (themeName === darkThemeName ? 'dark' : 'light')
+    const sliderClassName = 'znai-theme-switcher-slider ' + themeLabel
+    const switcherNameClassName = 'znai-theme-switcher-name ' + themeLabel
 
     return (
         <div className="znai-theme-switcher-panel" onClick={toggleTheme}>
             <div className="znai-theme-switcher">
                 <div className={sliderClassName}/>
-                <div className="znai-theme-switcher-moon"/>
-                <div className="znai-theme-switcher-sun"/>
+                <div className={switcherNameClassName}>{themeLabel}</div>
             </div>
         </div>
     )

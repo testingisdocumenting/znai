@@ -24,49 +24,17 @@
 
 .znai-theme-switcher {
     position: relative;
-    width: 48px;
+    display: flex;
+    align-items: center;
+
+    width: 54px;
     height: 20px;
     border-radius: 24px;
-    background: #9e9e9e;
-}
-
-.theme-znai-dark .znai-theme-switcher {
-    background: #0b1120;
-}
-
-.znai-theme-switcher-moon,
-.znai-theme-switcher-sun {
-    position: absolute;
-    z-index: 5;
-}
-
-.znai-theme-switcher-moon {
-    border-top: 6px solid yellow;
-    border-radius: 50%;
-
-    height: 16px;
-    width: 16px;
-
-    transform: rotate(135deg);
-}
-
-.znai-theme-switcher-sun {
-    height: 14px;
-    width: 14px;
-
-    left: 30px;
-    top: 3px;
-
-    background-color: white;
-    border-radius: 50%;
 }
 
 .znai-theme-switcher-slider {
     position: absolute;
     z-index: 10;
-
-    border: 1px solid #888;
-    background-color: #385c67;
 
     height: 20px;
     width: 20px;
@@ -75,9 +43,22 @@
     transition: left .3s ease-in-out;
 }
 
+.theme-default .znai-theme-switcher {
+    background-color: #e1e1e1;
+}
+
+.theme-znai-dark .znai-theme-switcher {
+    background-color: #0b1120;
+}
+
 .theme-default .znai-theme-switcher-slider {
-    border: 1px solid #888;
-    background-color: #ddd;
+    border: 1px solid #aaa;
+    background-color: #eee;
+}
+
+.theme-znai-dark .znai-theme-switcher-slider {
+    border: 1px solid #25424c;
+    background-color: #385c67;
 }
 
 
@@ -86,6 +67,19 @@
 }
 
 .znai-theme-switcher-slider.dark {
-    left: 30px;
+    left: 36px;
+}
+
+.znai-theme-switcher-name {
+    font-size: 12px;
+    position: absolute;
+}
+
+.znai-theme-switcher-name.light {
+    left: 24px;
+}
+
+.znai-theme-switcher-name.dark {
+    left: 8px;
 }
 
