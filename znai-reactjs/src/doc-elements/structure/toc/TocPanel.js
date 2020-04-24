@@ -18,8 +18,8 @@ import React, {Component} from 'react'
 
 import TocMenu from './TocMenu'
 import TocHeader from './TocHeader'
-import TocSettings from './TocSettings'
 import TocPanelSearch from './TocPanelSearch'
+import {DarkLightThemeSwitcher} from './DarkLightThemeSwitcher'
 
 class TocPanel extends Component {
     state = {
@@ -42,7 +42,6 @@ class TocPanel extends Component {
         const {
             collapsed,
             selected,
-            displaySettings
         } = this.state
 
         const panelClass = 'toc-panel' +
@@ -62,7 +61,8 @@ class TocPanel extends Component {
                          selected={selectedItem}
                          onTocItemPageSectionClick={onTocItemPageSectionClick}
                          onTocItemClick={onTocItemClick}/>
-                {!collapsed && <TocSettings active={displaySettings} onSettingsToggle={this.onSettingsToggle}/>}
+
+                <DarkLightThemeSwitcher/>
             </div>
         )
     }
