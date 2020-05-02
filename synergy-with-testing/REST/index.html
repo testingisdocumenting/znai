@@ -23,12 +23,12 @@
 
 <article>
 <header><h1>WebTau</h1></header>
-<p>http://tsguides.app.twosigma.com/webtau/REST/getting-started WebTau is a framework to write, run, and capture REST tests artifacts.The bare minimum test in WebTau looks like this: package rest import static com.twosigma.webtau.WebTauGroovyDsl.* scenario(&quot;simple get&quot;) { http.get(&quot;/weather&quot;) { temperature.should == 88 } }</p>
+<p>https://testingisdocumenting.org/webtau/REST/getting-started WebTau is a framework to write, run, and capture REST tests artifacts.The bare minimum test in WebTau looks like this: package rest import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* scenario(&quot;simple get&quot;) { http.get(&quot;/weather&quot;) { temperature.should == 88 } }</p>
 </article>
 
 <article>
 <header><h1>Capture REST Artifacts</h1></header>
-<p>To capture artifacts use http.doc.capture package rest import static com.twosigma.webtau.WebTauGroovyDsl.* scenario(&quot;extracting id after POST to use inside GET request&quot;) { def id = http.post(&quot;/employee&quot;, [firstName: 'FN', lastName: 'LN']) { return id } http.doc.capture('employee-post') http.get(&quot;/employee/$id&quot;) { firstName.should == 'FN' lastName.should == 'LN' } http.doc.capture('employee-get') // capture previous HTTP call as &lt;docDir&gt;/employee-get } Captured artifact is a JSON file that looks like this: { &quot;method&quot;: &quot;GET&quot;, &quot;url&quot;: &quot;http://localhost:8180/employee/id-generated-2&quot;, &quot;responseType&quot;: &quot;application/json&quot;, &quot;responseBody&quot;: &quot;{\&quot;firstName\&quot;:\&quot;FN\&quot;,\&quot;lastName\&quot;:\&quot;LN\&quot;}\n&quot;, &quot;responseBodyChecks&quot;: { &quot;failedPaths&quot;: [], &quot;passedPaths&quot;: [ &quot;root.firstName&quot;, &quot;root.lastName&quot; ] } }</p>
+<p>To capture artifacts use http.doc.capture package rest import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* scenario(&quot;extracting id after POST to use inside GET request&quot;) { def id = http.post(&quot;/employee&quot;, [firstName: 'FN', lastName: 'LN']) { return id } http.doc.capture('employee-post') http.get(&quot;/employee/$id&quot;) { firstName.should == 'FN' lastName.should == 'LN' } http.doc.capture('employee-get') // capture previous HTTP call as &lt;docDir&gt;/employee-get } Captured artifact is a JSON file that looks like this: { &quot;method&quot;: &quot;GET&quot;, &quot;url&quot;: &quot;http://localhost:8180/employee/id-generated-2&quot;, &quot;responseType&quot;: &quot;application/json&quot;, &quot;responseBody&quot;: &quot;{\&quot;firstName\&quot;:\&quot;FN\&quot;,\&quot;lastName\&quot;:\&quot;LN\&quot;}\n&quot;, &quot;responseBodyChecks&quot;: { &quot;failedPaths&quot;: [], &quot;passedPaths&quot;: [ &quot;root.firstName&quot;, &quot;root.lastName&quot; ] } }</p>
 </article>
 
 <article>
@@ -51,7 +51,7 @@ document.getElementById('znai').innerHTML = '';
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
-      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/documentation",
       "title" : "View On GitHub"
     },
     "id" : "znai",
@@ -95,7 +95,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "url" : "http://tsguides.app.twosigma.com/webtau/REST/getting-started",
+          "url" : "https://testingisdocumenting.org/webtau/REST/getting-started",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
@@ -114,7 +114,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "groovy",
-        "snippet" : "package rest\n\nimport static com.twosigma.webtau.WebTauGroovyDsl.*\n\nscenario(\"simple get\") {\n    http.get(\"/weather\") {\n        temperature.should == 88\n    }\n}",
+        "snippet" : "package rest\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\nscenario(\"simple get\") {\n    http.get(\"/weather\") {\n        temperature.should == 88\n    }\n}",
         "type" : "Snippet"
       } ]
     }, {
@@ -132,7 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "groovy",
-        "snippet" : "package rest\n\nimport static com.twosigma.webtau.WebTauGroovyDsl.*\n\nscenario(\"extracting id after POST to use inside GET request\") {\n    def id = http.post(\"/employee\", [firstName: 'FN', lastName: 'LN']) {\n        return id\n    }\n    http.doc.capture('employee-post')\n\n    http.get(\"/employee/$id\") {\n        firstName.should == 'FN'\n        lastName.should == 'LN'\n    }\n    http.doc.capture('employee-get') // capture previous HTTP call as <docDir>/employee-get\n}",
+        "snippet" : "package rest\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\nscenario(\"extracting id after POST to use inside GET request\") {\n    def id = http.post(\"/employee\", [firstName: 'FN', lastName: 'LN']) {\n        return id\n    }\n    http.doc.capture('employee-post')\n\n    http.get(\"/employee/$id\") {\n        firstName.should == 'FN'\n        lastName.should == 'LN'\n    }\n    http.doc.capture('employee-get') // capture previous HTTP call as <docDir>/employee-get\n}",
         "commentsType" : "inline",
         "type" : "Snippet"
       }, {
@@ -224,7 +224,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1581023143665,
+    "lastModifiedTime" : 1588392146123,
     "tocItem" : {
       "sectionTitle" : "Synergy With Testing",
       "pageTitle" : "REST",
@@ -255,7 +255,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "text" : "If you have documentation suggestions, features or bugs to report, please create ",
         "type" : "SimpleText"
       }, {
-        "url" : "https://github.com/twosigma/znai/issues",
+        "url" : "https://github.com/testingisdocumenting/znai/issues",
         "isFile" : false,
         "type" : "Link",
         "content" : [ {
@@ -268,15 +268,6 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "text" : "Contributions are welcome",
         "type" : "SimpleText"
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "type" : "Emphasis",
-        "content" : [ {
-          "text" : "Copyright @ 2019 Two Sigma",
-          "type" : "SimpleText"
-        } ]
       } ]
     } ]
   }

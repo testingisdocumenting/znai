@@ -18,7 +18,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Table Data</h1></header>
-<p>Your business logic tests can greatly improve maintainability of your documentation. The example below tests what account types are allowed to perform Trading Activities. package com.twosigma.testing.examples import com.twosigma.webtau.data.table.TableData import com.twosigma.webtau.documentation.DocumentationArtifacts import org.junit.Test class TestToDocExample { @Test void shouldRestrictAccountsActivity() { def rules = [&quot;Account Type&quot; | &quot;Operation&quot; | &quot;Restriction&quot;] { _________________________________________________ &quot;SPB3&quot; | &quot;Buy Options&quot; | &quot;weekends only&quot; &quot;TR&quot; | &quot;Sell Futures&quot; | &quot;except holidays&quot; &quot;BOSS&quot; | &quot;Buy Stocks&quot; | &quot;none&quot; } validateRules(rules) } private static void validateRules(TableData rules) { DocumentationArtifacts.create(TestToDocExample, &quot;account-rules.json&quot;, rules.toJson()) } } As part of validation of account types, the test also captures data that was used for testing. We can refer to this data later in our documentation by using the layout/tables include-table plugin :include-table: account-rules.json Your test data and user-facing documentation is now linked. Account Type Operation Restriction SPB3 Buy Options weekends only TR Sell Futures except holidays BOSS Buy Stocks none</p>
+<p>Your business logic tests can greatly improve maintainability of your documentation. The example below tests what account types are allowed to perform Trading Activities. package org.testingisdocumenting.testing.examples import org.testingisdocumenting.webtau.data.table.TableData import org.testingisdocumenting.webtau.documentation.DocumentationArtifacts import org.junit.Test class TestToDocExample { @Test void shouldRestrictAccountsActivity() { def rules = [&quot;Account Type&quot; | &quot;Operation&quot; | &quot;Restriction&quot;] { _________________________________________________ &quot;SPB3&quot; | &quot;Buy Options&quot; | &quot;weekends only&quot; &quot;TR&quot; | &quot;Sell Futures&quot; | &quot;except holidays&quot; &quot;BOSS&quot; | &quot;Buy Stocks&quot; | &quot;none&quot; } validateRules(rules) } private static void validateRules(TableData rules) { DocumentationArtifacts.create(TestToDocExample, &quot;account-rules.json&quot;, rules.toJson()) } } As part of validation of account types, the test also captures data that was used for testing. We can refer to this data later in our documentation by using the layout/tables include-table plugin :include-table: account-rules.json Your test data and user-facing documentation is now linked. Account Type Operation Restriction SPB3 Buy Options weekends only TR Sell Futures except holidays BOSS Buy Stocks none</p>
 </article>
 </section>
 </div>
@@ -36,7 +36,7 @@ document.getElementById('znai').innerHTML = '';
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
-      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/documentation",
       "title" : "View On GitHub"
     },
     "id" : "znai",
@@ -72,7 +72,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "java",
-        "snippet" : "package com.twosigma.testing.examples\n\nimport com.twosigma.webtau.data.table.TableData\nimport com.twosigma.webtau.documentation.DocumentationArtifacts\nimport org.junit.Test\n\nclass TestToDocExample {\n    @Test\n    void shouldRestrictAccountsActivity() {\n        def rules = [\"Account Type\" | \"Operation\"    | \"Restriction\"] {\n                    _________________________________________________\n                        \"SPB3\"      | \"Buy Options\"  | \"weekends only\"\n                        \"TR\"        | \"Sell Futures\" | \"except holidays\"\n                        \"BOSS\"      | \"Buy Stocks\"   | \"none\" }\n\n        validateRules(rules)\n    }\n\n    private static void validateRules(TableData rules) {\n        DocumentationArtifacts.create(TestToDocExample,\n            \"account-rules.json\", rules.toJson())\n    }\n}",
+        "snippet" : "package org.testingisdocumenting.testing.examples\n\nimport org.testingisdocumenting.webtau.data.table.TableData\nimport org.testingisdocumenting.webtau.documentation.DocumentationArtifacts\nimport org.junit.Test\n\nclass TestToDocExample {\n    @Test\n    void shouldRestrictAccountsActivity() {\n        def rules = [\"Account Type\" | \"Operation\"    | \"Restriction\"] {\n                    _________________________________________________\n                        \"SPB3\"      | \"Buy Options\"  | \"weekends only\"\n                        \"TR\"        | \"Sell Futures\" | \"except holidays\"\n                        \"BOSS\"      | \"Buy Stocks\"   | \"none\" }\n\n        validateRules(rules)\n    }\n\n    private static void validateRules(TableData rules) {\n        DocumentationArtifacts.create(TestToDocExample,\n            \"account-rules.json\", rules.toJson())\n    }\n}",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -175,7 +175,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1581023143667,
+    "lastModifiedTime" : 1588392146123,
     "tocItem" : {
       "sectionTitle" : "Synergy With Testing",
       "pageTitle" : "Java",
@@ -197,7 +197,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "text" : "If you have documentation suggestions, features or bugs to report, please create ",
         "type" : "SimpleText"
       }, {
-        "url" : "https://github.com/twosigma/znai/issues",
+        "url" : "https://github.com/testingisdocumenting/znai/issues",
         "isFile" : false,
         "type" : "Link",
         "content" : [ {
@@ -210,15 +210,6 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "text" : "Contributions are welcome",
         "type" : "SimpleText"
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "type" : "Emphasis",
-        "content" : [ {
-          "text" : "Copyright @ 2019 Two Sigma",
-          "type" : "SimpleText"
-        } ]
       } ]
     } ]
   }

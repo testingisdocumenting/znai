@@ -28,12 +28,12 @@
 
 <article>
 <header><h1>Installation</h1></header>
-<p>Download and unzip https://repo.maven.apache.org/maven2/com/twosigma/znai/znai-dist/${project.version}/znai-dist-${project.version}-znai.zip znai. Add it to your PATH .Note: https://brew.sh/ brew support is currently in progress.</p>
+<p>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/${project.version}/znai-dist-${project.version}-znai.zip znai. Add it to your PATH .Note: https://brew.sh/ brew support is currently in progress.</p>
 </article>
 
 <article>
 <header><h1>Scaffolding</h1></header>
-<p>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin&gt; &lt;groupId&gt;com.twosigma.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.29&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;my-docs&lt;/docId&gt; &lt;sourceRoot&gt;${project.basedir}/documentation&lt;/sourceRoot&gt; &lt;port&gt;3333&lt;/port&gt; &lt;/configuration&gt; &lt;/plugin&gt; mvn znai:new</p>
+<p>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.30&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;my-docs&lt;/docId&gt; &lt;sourceRoot&gt;${project.basedir}/documentation&lt;/sourceRoot&gt; &lt;port&gt;3333&lt;/port&gt; &lt;/configuration&gt; &lt;/plugin&gt; mvn znai:new</p>
 </article>
 
 <article>
@@ -61,7 +61,7 @@ document.getElementById('znai').innerHTML = '';
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
-      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/documentation",
       "title" : "View On GitHub"
     },
     "id" : "znai",
@@ -159,7 +159,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Download and unzip ",
           "type" : "SimpleText"
         }, {
-          "url" : "https://repo.maven.apache.org/maven2/com/twosigma/znai/znai-dist/${project.version}/znai-dist-${project.version}-znai.zip",
+          "url" : "https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/${project.version}/znai-dist-${project.version}-znai.zip",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
@@ -253,7 +253,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "xml",
-        "snippet" : "<plugin>\n    <groupId>com.twosigma.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.29</version>\n    <configuration>\n        <docId>my-docs</docId>\n        <sourceRoot>${project.basedir}/documentation</sourceRoot>\n        <port>3333</port>\n    </configuration>\n</plugin>",
+        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.30</version>\n    <configuration>\n        <docId>my-docs</docId>\n        <sourceRoot>${project.basedir}/documentation</sourceRoot>\n        <port>3333</port>\n    </configuration>\n</plugin>",
         "title" : "maven plugin",
         "type" : "Snippet"
       }, {
@@ -348,7 +348,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1581023143622,
+    "lastModifiedTime" : 1588392146119,
     "tocItem" : {
       "sectionTitle" : "Introduction",
       "pageTitle" : "Getting Started",
@@ -388,7 +388,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "text" : "If you have documentation suggestions, features or bugs to report, please create ",
         "type" : "SimpleText"
       }, {
-        "url" : "https://github.com/twosigma/znai/issues",
+        "url" : "https://github.com/testingisdocumenting/znai/issues",
         "isFile" : false,
         "type" : "Link",
         "content" : [ {
@@ -401,15 +401,6 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "text" : "Contributions are welcome",
         "type" : "SimpleText"
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "type" : "Emphasis",
-        "content" : [ {
-          "text" : "Copyright @ 2019 Two Sigma",
-          "type" : "SimpleText"
-        } ]
       } ]
     } ]
   }

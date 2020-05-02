@@ -18,7 +18,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Build</h1></header>
-<p>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin&gt; &lt;groupId&gt;com.twosigma.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.29&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;my-docs&lt;/docId&gt; &lt;sourceRoot&gt;${project.basedir}/documentation&lt;/sourceRoot&gt; &lt;deployRoot&gt;${project.build.directory}&lt;/deployRoot&gt; &lt;port&gt;3333&lt;/port&gt; &lt;/configuration&gt; &lt;/plugin&gt; mvn znai:build</p>
+<p>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.30&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;my-docs&lt;/docId&gt; &lt;sourceRoot&gt;${project.basedir}/documentation&lt;/sourceRoot&gt; &lt;deployRoot&gt;${project.build.directory}&lt;/deployRoot&gt; &lt;port&gt;3333&lt;/port&gt; &lt;/configuration&gt; &lt;/plugin&gt; mvn znai:build</p>
 </article>
 </section>
 </div>
@@ -36,7 +36,7 @@ document.getElementById('znai').innerHTML = '';
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
-      "link" : "https://github.com/twosigma/znai/blob/master/znai-docs/documentation",
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/documentation",
       "title" : "View On GitHub"
     },
     "id" : "znai",
@@ -68,7 +68,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "xml",
-        "snippet" : "<plugin>\n    <groupId>com.twosigma.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.29</version>\n    <configuration>\n        <docId>my-docs</docId>\n        <sourceRoot>${project.basedir}/documentation</sourceRoot>\n        <deployRoot>${project.build.directory}</deployRoot>\n        <port>3333</port>\n    </configuration>\n</plugin>",
+        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.30</version>\n    <configuration>\n        <docId>my-docs</docId>\n        <sourceRoot>${project.basedir}/documentation</sourceRoot>\n        <deployRoot>${project.build.directory}</deployRoot>\n        <port>3333</port>\n    </configuration>\n</plugin>",
         "title" : "maven plugin",
         "highlight" : [ "deployRoot" ],
         "type" : "Snippet"
@@ -78,7 +78,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliCommand"
       } ]
     } ],
-    "lastModifiedTime" : 1581023143605,
+    "lastModifiedTime" : 1588392146119,
     "tocItem" : {
       "sectionTitle" : "Deployment",
       "pageTitle" : "Static Content",
@@ -100,7 +100,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "text" : "If you have documentation suggestions, features or bugs to report, please create ",
         "type" : "SimpleText"
       }, {
-        "url" : "https://github.com/twosigma/znai/issues",
+        "url" : "https://github.com/testingisdocumenting/znai/issues",
         "isFile" : false,
         "type" : "Link",
         "content" : [ {
@@ -113,15 +113,6 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "text" : "Contributions are welcome",
         "type" : "SimpleText"
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "type" : "Emphasis",
-        "content" : [ {
-          "text" : "Copyright @ 2019 Two Sigma",
-          "type" : "SimpleText"
-        } ]
       } ]
     } ]
   }
