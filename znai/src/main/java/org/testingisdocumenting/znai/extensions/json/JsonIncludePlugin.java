@@ -19,7 +19,7 @@ package org.testingisdocumenting.znai.extensions.json;
 import com.jayway.jsonpath.JsonPath;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;

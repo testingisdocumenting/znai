@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.core
+package org.testingisdocumenting.znai.resources
 
 import org.junit.Before
 import org.junit.Test
@@ -58,12 +58,12 @@ class ResourcesResolverChainTest {
 
         code {
             chain.textContent('path')
-        } should throwException("Can't find <path>\n\n" +
+        } should throwException("Can't find: path\n\n" +
                 "Tried following ResourceResolvers:\n" +
-                "org.testingisdocumenting.znai.core.ResourcesResolverChainTest.Resolver resources not found:\n" +
+                "org.testingisdocumenting.znai.resources.ResourcesResolverChainTest.Resolver resources not found:\n" +
                 "  a:1/path\n" +
                 "  a:2/path\n" +
-                "org.testingisdocumenting.znai.core.ResourcesResolverChainTest.Resolver resources not found:\n" +
+                "org.testingisdocumenting.znai.resources.ResourcesResolverChainTest.Resolver resources not found:\n" +
                 "  b:1/path\n" +
                 "  b:2/path\n" +
                 "  b:3/path")

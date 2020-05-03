@@ -19,7 +19,7 @@ package org.testingisdocumenting.znai.jupyter;
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;

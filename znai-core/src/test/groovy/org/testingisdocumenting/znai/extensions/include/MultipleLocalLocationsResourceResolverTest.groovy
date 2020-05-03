@@ -16,8 +16,8 @@
 
 package org.testingisdocumenting.znai.extensions.include
 
-import org.testingisdocumenting.znai.extensions.MultipleLocalLocationsResourceResolver
 import org.junit.Test
+import org.testingisdocumenting.znai.resources.MultipleLocalLocationsResourceResolver
 
 import java.nio.file.Paths
 

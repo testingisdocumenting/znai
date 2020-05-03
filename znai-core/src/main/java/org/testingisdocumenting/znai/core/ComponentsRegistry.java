@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.core;
 
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.time.TimeService;

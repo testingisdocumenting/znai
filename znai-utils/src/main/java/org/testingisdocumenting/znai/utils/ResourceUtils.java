@@ -36,7 +36,7 @@ public class ResourceUtils {
      * @return input stream
      */
     public static InputStream requiredResourceStream(String resourcePath) {
-        InputStream stream = ResourceUtils.class.getClassLoader().getResourceAsStream(resourcePath);
+        InputStream stream = resourceStream(resourcePath);
         if (stream == null) {
             throw new RuntimeException("can't find resource: " + resourcePath);
         }

@@ -15,6 +15,17 @@ When you refer to a file using plugins like
 ../module/src/main/java
 ```
 
+# Class Path Lookup
+
+Znai is written using Java and can access resources in class path. 
+Using class path lookup you can include snippets from projects deployed to, for example, Maven Central.
+
+:include-file: maven-class-path.xml {highlight: "classifier"}
+
+    :include-java: org/junit/Assert.java {entry: "assertArrayEquals"}
+
+:include-java: org/junit/Assert.java {entry: "assertArrayEquals"}
+
 # HTTP Lookup Location
 
 If files you want to include are not part of your project, you can add an HTTP base URL to `lookup-paths`.
@@ -30,4 +41,5 @@ If the file is not found using local locations, it will be fetched from the prov
     :include-file: .travis.yml
  
 :include-file: .travis.yml {lang: "yaml"}
+
 

@@ -20,10 +20,7 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.AuxiliaryFilesRegistry;
-import org.testingisdocumenting.znai.core.ResourcesResolverChain;
-import org.testingisdocumenting.znai.core.UnresolvedResourceException;
-import org.testingisdocumenting.znai.extensions.HttpBasedResourceResolver;
-import org.testingisdocumenting.znai.extensions.MultipleLocalLocationsResourceResolver;
+import org.testingisdocumenting.znai.resources.*;
 import org.testingisdocumenting.znai.html.*;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
 import org.testingisdocumenting.znai.parser.MarkupParser;
@@ -129,6 +126,7 @@ public class WebSite {
 
         localResourceResolver = new MultipleLocalLocationsResourceResolver(siteConfig.docRootPath);
         resourceResolver.addResolver(localResourceResolver);
+        resourceResolver.addResolver(new ClassPathResourceResolver());
         resourceResolver.addResolver(new HttpBasedResourceResolver());
         resourceResolver.initialize(findLookupLocations(siteConfig));
 

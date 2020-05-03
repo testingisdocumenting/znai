@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.extensions;
-
-import org.testingisdocumenting.znai.core.ResourcesResolver;
+package org.testingisdocumenting.znai.resources;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

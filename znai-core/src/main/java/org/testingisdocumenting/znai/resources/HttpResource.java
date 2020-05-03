@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.extensions;
+package org.testingisdocumenting.znai.resources;
 
 import org.apache.commons.io.IOUtils;
 

@@ -122,6 +122,10 @@ public class FileWatcher implements AuxiliaryFileListener {
 
     private void register(Path path) {
         try {
+            if (!Files.exists(path)) {
+                return;
+            }
+
             if (!Files.isDirectory(path)) {
                 path = path.getParent();
             }

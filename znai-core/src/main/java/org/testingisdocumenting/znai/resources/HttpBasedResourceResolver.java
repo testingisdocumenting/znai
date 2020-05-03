@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.extensions;
+package org.testingisdocumenting.znai.resources;
 
-import org.testingisdocumenting.znai.core.ResourcesResolver;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 

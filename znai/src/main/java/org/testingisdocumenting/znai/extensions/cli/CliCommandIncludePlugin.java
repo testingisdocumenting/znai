@@ -20,7 +20,7 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;
@@ -101,7 +101,7 @@ public class CliCommandIncludePlugin implements IncludePlugin {
     }
 
     private void validateSplitAfter(String command, Set<String> splitAfter) {
-        Set<String> commandParts = new HashSet<String>(Arrays.asList(command.split(" ")));
+        Set<String> commandParts = new HashSet<>(Arrays.asList(command.split(" ")));
 
         for (String token : splitAfter) {
             if (!commandParts.contains(token)) {
