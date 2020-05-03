@@ -24,7 +24,7 @@ import org.apache.maven.plugins.annotations.Parameter
 
 @Mojo(name = "preview")
 class ZnaiMavenPreviewRunner extends AbstractMojo {
-    @Parameter
+    @Parameter(defaultValue = '${project.basedir}/znai')
     private String sourceRoot
 
     @Parameter(defaultValue = "3333")

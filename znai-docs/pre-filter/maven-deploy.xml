@@ -3,9 +3,7 @@
     <artifactId>znai-maven-plugin</artifactId>
     <version>${project.version}</version>
     <configuration>
-        <docId>my-docs</docId>
-        <sourceRoot>\${project.basedir}/documentation</sourceRoot>
-        <deployRoot>\${project.build.directory}</deployRoot>
-        <port>3333</port>
+        <docId>project-name</docId>
+        <deployRoot>/path/to/static-content</deployRoot>  <!-- default is \${project.build.directory} -->
     </configuration>
 </plugin>

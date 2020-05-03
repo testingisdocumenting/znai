@@ -24,7 +24,7 @@ import org.apache.maven.plugins.annotations.Parameter
 
 @Mojo(name = "export")
 class ZnaiMavenExportRunner extends AbstractMojo {
-    @Parameter
+    @Parameter(defaultValue = '${project.basedir}/znai')
     private String sourceRoot
 
     @Parameter(defaultValue = '${project.build.directory}/znai-export')

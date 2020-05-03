@@ -27,7 +27,7 @@
     <artifactId>znai-docs</artifactId>
 
     <dependencies>
-        <!-- this is purely to force running of those tests -->
+        <!-- to force running of the tests before documentation -->
         <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-testing-examples</artifactId>
@@ -74,8 +74,6 @@
                         </executions>
                         <configuration>
                             <docId>znai</docId>
-                            <deployRoot>${project.build.directory}</deployRoot>
-                            <sourceRoot>${project.basedir}/documentation</sourceRoot>
                             <port>3334</port>
                         </configuration>
                     </plugin>

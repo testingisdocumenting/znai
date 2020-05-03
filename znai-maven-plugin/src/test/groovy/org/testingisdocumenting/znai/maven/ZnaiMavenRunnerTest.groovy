@@ -18,8 +18,6 @@ package org.testingisdocumenting.znai.maven
 
 import org.junit.Test
 
-import static org.junit.Assert.assertEquals
-
 class ZnaiMavenRunnerTest {
     @Test
     void "should handle params with no values"() {
@@ -28,7 +26,6 @@ class ZnaiMavenRunnerTest {
                 foo: 'bar',
         ])
 
-        String[] expectedArgs = ['--noValue', '--foo=bar']
-        assertEquals(expectedArgs, args)
+        args.should == ['--noValue', '--foo=bar']
     }
 }

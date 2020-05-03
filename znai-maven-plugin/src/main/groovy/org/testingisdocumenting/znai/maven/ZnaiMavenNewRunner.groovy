@@ -24,16 +24,12 @@ import org.apache.maven.plugins.annotations.Parameter
 
 @Mojo(name = "new")
 class ZnaiMavenNewRunner extends AbstractMojo {
-    @Parameter
+    @Parameter(defaultValue = '${project.basedir}/znai')
     private String sourceRoot
 
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
-        def args = [new: null]
-
-        if (sourceRoot != null) {
-            args['source'] = sourceRoot
-        }
+        def args = [new: null, source: sourceRoot]
 
         ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), args)
     }
