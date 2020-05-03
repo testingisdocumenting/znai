@@ -4,5 +4,6 @@
     <version>${project.version}</version>
     <configuration>
         <docId>project-name</docId>
+        <deployRoot>/path/to/static-content</deployRoot>  <!-- default is \${project.build.directory} -->
     </configuration>
 </plugin>
