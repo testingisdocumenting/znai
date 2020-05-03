@@ -25,10 +25,14 @@ import org.apache.maven.plugins.annotations.Parameter
 
 @Mojo(name = "build", defaultPhase = LifecyclePhase.PREPARE_PACKAGE)
 class ZnaiMavenBuildRunner extends AbstractMojo {
-    @Parameter
+    /**
+     * documentation id becomes part of url of the generated website:
+     * <code>myhosting.org/&lt;doc-id&gt;</code>
+     */
+    @Parameter(required = true)
     private String docId
 
-    @Parameter
+    @Parameter(defaultValue = '${project.basedir}/znai')
     private String sourceRoot
 
     @Parameter(defaultValue = '${project.build.directory}')
