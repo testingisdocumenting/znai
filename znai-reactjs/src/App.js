@@ -64,9 +64,6 @@ import {spoilerDemo} from './doc-elements/spoiler/Spoiler.demo'
 import {pageGenErrorDemo} from './doc-elements/page-gen-error/PageGenError.demo'
 import {diffTrackingDemo} from './diff/DiffTracking.demo'
 
-import {themeRegistry} from "./theme/ThemeRegistry"
-import WithTheme from "./theme/WithTheme"
-
 import {Documentation} from "./doc-elements/Documentation"
 import testData from "./doc-elements/TestData"
 import {subHeadingPresentationDemo} from './doc-elements/default-elements/PresentationSubHeading.demo'
@@ -95,7 +92,7 @@ updateGlobalDocReferences({
     }
 })
 
-const registries = new Registries({componentWrapper: ThemeWrapper})
+const registries = new Registries()
 
 registries.add('text')
     .registerAsGrid('Typography', 0, typographyDemo)
@@ -207,14 +204,6 @@ export class App extends Component {
 }
 
 function selectTheme(label) {
-    const theme = label === 'Default' ? 'default' : 'znai-dark'
-    themeRegistry.selectTheme(theme)
-}
-
-function ThemeWrapper({OriginalComponent}) {
-    return (
-        <WithTheme>
-            {() => <OriginalComponent/>}
-        </WithTheme>
-    )
+    const name = label === 'Default' ? 'default' : 'znai-dark'
+    global.znaiTheme.setExplicitly(name)
 }
