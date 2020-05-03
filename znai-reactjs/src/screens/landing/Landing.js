@@ -20,8 +20,6 @@ import FilterInput from './FilterInput'
 
 import TocPanel from '../../doc-elements/structure/toc/TocPanel'
 
-import WithTheme from '../../theme/WithTheme'
-
 import './Landing.css'
 
 export class Landing extends React.Component {
@@ -39,34 +37,31 @@ export class Landing extends React.Component {
         const documentationsToc = buildToc(categoriesWithDocs)
 
         return (
-            <WithTheme>{() =>
-                <React.Fragment>
-                    <div className="znai-landing">
-                        <div className="znai-landing-categories-toc-area">
-                            <TocPanel toc={documentationsToc}
-                                      docMeta={landingDocMeta}
-                                      collapsed={tocCollapsed}
-                                      onToggle={this.tocCollapseToggle}/>
-                        </div>
+            <React.Fragment>
+                <div className="znai-landing">
+                    <div className="znai-landing-categories-toc-area">
+                        <TocPanel toc={documentationsToc}
+                                  docMeta={landingDocMeta}
+                                  collapsed={tocCollapsed}
+                                  onToggle={this.tocCollapseToggle}/>
+                    </div>
 
-                        <div className="znai-landing-documentations-area">
-                            <div className="centered">
-                                <FilterInput filterText={filterText} onChange={this.onFilterChange}/>
+                    <div className="znai-landing-documentations-area">
+                        <div className="centered">
+                            <FilterInput filterText={filterText} onChange={this.onFilterChange}/>
 
-                                <div className="znai-landing-categories">
-                                    {
-                                        categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs
-                                            key={categoryWithDocs.category}
-                                            category={categoryWithDocs.category}
-                                            documentations={categoryWithDocs.documentations}/>)
-                                    }
-                                </div>
+                            <div className="znai-landing-categories">
+                                {
+                                    categoriesWithDocs.map(categoryWithDocs => <CategoryWithDocs
+                                        key={categoryWithDocs.category}
+                                        category={categoryWithDocs.category}
+                                        documentations={categoryWithDocs.documentations}/>)
+                                }
                             </div>
                         </div>
                     </div>
-                </React.Fragment>
-            }
-            </WithTheme>
+                </div>
+            </React.Fragment>
         )
     }
 

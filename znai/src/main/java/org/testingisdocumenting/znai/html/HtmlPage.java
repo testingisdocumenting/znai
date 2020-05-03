@@ -16,6 +16,7 @@
 
 package org.testingisdocumenting.znai.html;
 
+import org.testingisdocumenting.znai.utils.ResourceUtils;
 import org.testingisdocumenting.znai.web.WebResource;
 
 import java.util.ArrayList;
@@ -30,12 +31,14 @@ public class HtmlPage {
 
     private String title;
 
-    private List<WebResource> cssResources;
-    private List<WebResource> javaScriptResources;
+    private final List<WebResource> cssResources;
+    private final List<WebResource> javaScriptResources;
 
-    private List<RenderSupplier> headSuppliers;
-    private List<RenderSupplier> bodySuppliers;
-    private List<RenderSupplier> javaScriptSuppliers;
+    private final List<RenderSupplier> headSuppliers;
+    private final List<RenderSupplier> bodySuppliers;
+    private final List<RenderSupplier> javaScriptSuppliers;
+
+    private final static String themeCode = ResourceUtils.textContent("znai-theme.js");
 
     public HtmlPage() {
         this("");
@@ -87,12 +90,13 @@ public class HtmlPage {
                 "<html>\n" +
                 "<head>\n" +
                 "<meta charset=\"utf-8\" /> \n" +
-                "<title>" + title + "</title>" +
+                "<title>" + title + "</title>" + "\n" +
                 headSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) +
                 cssResources.stream().map(r -> r.generateCssLink(documentationId)).collect(joining("\n")) +
                 "\n</head>\n" +
                 "<link rel=\"shortcut icon\" href=" + favIconPath(documentationId) + "type=\"image/ico\"/>\n" +
-                "<body>\n" +
+                "<body class=\"theme-znai-dark\">\n" +
+                "<script>" + themeCode + "</script>\n" +
                 bodySuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
                 javaScriptResources.stream().map(r -> r.generateJavaScriptLink(documentationId)).collect(joining("\n")) + "\n" +
                 "<script>\n" +

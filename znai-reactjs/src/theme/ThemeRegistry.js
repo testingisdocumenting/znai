@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +16,9 @@
  */
 
 import Theme from './Theme'
-import {znaiSettings} from '../settings/ZnaiSettings'
 
 class ThemeRegistry {
-    _themeChangeListeners = []
     _selectedTheme = null
-
-    _selectedThemeName = znaiSettings.loadSelectedThemeName()
 
     themes = []
     baseTheme = null
@@ -48,28 +45,11 @@ class ThemeRegistry {
         }
 
         const mergedWithBase = mergeThemes(this.baseTheme, theme)
-        if (! this._selectedTheme || this._selectedThemeName === mergedWithBase.name) {
+        if (! this._selectedTheme) {
             this._selectedTheme = mergedWithBase
         }
 
         this.themes.push(mergedWithBase)
-    }
-
-    selectTheme(name) {
-        const theme = this.findByName(name)
-        this._selectedTheme = theme
-
-        znaiSettings.saveSelectedThemeName(name)
-        this._themeChangeListeners.forEach(l => l(name, theme))
-    }
-
-    selectThemeIfNeverSelected(name) {
-        const themeName = znaiSettings.loadSelectedThemeName()
-        if (themeName) {
-            return
-        }
-
-        this.selectTheme(name)
     }
 
     findByName(name) {
@@ -80,19 +60,6 @@ class ThemeRegistry {
         }
 
         return found[0]
-    }
-
-    addOnThemeChangeListener(listener) {
-        this._themeChangeListeners.push(listener)
-    }
-
-    removeOnThemeChangeListener(listener) {
-        const idx = this._themeChangeListeners.indexOf(listener)
-        if (idx === -1) {
-            return
-        }
-
-        this._themeChangeListeners.splice(idx, 1)
     }
 }
 

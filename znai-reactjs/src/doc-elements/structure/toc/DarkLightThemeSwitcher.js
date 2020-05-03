@@ -16,35 +16,44 @@
 
 import React from 'react'
 
-import {themeRegistry} from '../../../theme/ThemeRegistry'
-
 import './DarkLightThemeSwitcher.css'
 
 const darkThemeName = 'znai-dark'
 
-export function DarkLightThemeSwitcher() {
-    const themeName = themeRegistry.currentTheme.name
+export class DarkLightThemeSwitcher extends React.Component {
+    render() {
+        const themeName = global.znaiTheme.name
 
-    const themeLabel = (themeName === darkThemeName ? 'dark' : 'light')
-    const sliderClassName = 'znai-theme-switcher-slider ' + themeLabel
-    const switcherNameClassName = 'znai-theme-switcher-name ' + themeLabel
+        const themeLabel = (themeName === darkThemeName ? 'dark' : 'light')
+        const sliderClassName = 'znai-theme-switcher-slider ' + themeLabel
+        const switcherNameClassName = 'znai-theme-switcher-name ' + themeLabel
 
-    return (
-        <div className="znai-theme-switcher-panel" onClick={toggleTheme}>
-            <div className="znai-theme-switcher">
-                <div className={sliderClassName}/>
-                <div className={switcherNameClassName}>{themeLabel}</div>
+        const forceUpdate = () => this.forceUpdate()
+
+        return (
+            <div className="znai-theme-switcher-panel" onClick={toggleTheme}>
+                <div className="znai-theme-switcher">
+                    <div className={sliderClassName}/>
+                    <div className={switcherNameClassName}>{themeLabel}</div>
+                </div>
             </div>
-        </div>
-    )
+        )
 
-    function toggleTheme() {
-        themeRegistry.selectTheme(toggleName())
+        function toggleTheme() {
+            global.znaiTheme.toggle()
+            forceUpdate()
+        }
     }
 
-    function toggleName() {
-        return themeName === 'default' ?
-            darkThemeName :
-            'default'
+    onThemeChange = () => {
+        this.forceUpdate()
+    }
+
+    componentDidMount() {
+        global.znaiTheme.addChangeHandler(this.onThemeChange)
+    }
+
+    componentWillUnmount() {
+        global.znaiTheme.removeChangeHandler(this.onThemeChange)
     }
 }

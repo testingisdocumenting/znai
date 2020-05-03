@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +26,6 @@ class TocPanel extends Component {
     state = {
         collapsed: false,
         selected: false,
-        displaySettings: false
     }
 
     render() {
@@ -71,18 +71,8 @@ class TocPanel extends Component {
         this.setState(prev => ({collapsed: !prev.collapsed}))
     }
 
-    onSettingsToggle = () => {
-        this.setState(prev => ({displaySettings: !prev.displaySettings}))
-    }
-
     keyDownHandler = (e) => {
         const {selected, collapsed, onNextPage, onPrevPage} = this.props
-        const {displaySettings} = this.state
-
-        if (displaySettings && e.code === 'Escape') {
-            this.setState({displaySettings: false})
-            return
-        }
 
         if (!selected || collapsed) {
             return
