@@ -18,7 +18,7 @@ package org.testingisdocumenting.znai.website;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.core.GlobalAssetsRegistry;
-import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
 import org.testingisdocumenting.znai.structure.DocStructure;

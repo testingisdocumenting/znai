@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.core;
+package org.testingisdocumenting.znai.resources;
 
 import java.util.stream.Stream;
 
@@ -24,7 +25,7 @@ public class UnresolvedResourceException extends RuntimeException {
     private String resourceName;
 
     public UnresolvedResourceException(Stream<ResourcesResolver> resolvers, String resourceName) {
-        super("Can't find <" + resourceName + ">\n\nTried following ResourceResolvers:\n" +
+        super("Can't find: " + resourceName + "\n\nTried following ResourceResolvers:\n" +
                 resolvers.map(r -> renderResolverDetails(r, resourceName)).collect(joining("\n")));
         this.resourceName = resourceName;
     }

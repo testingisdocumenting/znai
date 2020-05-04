@@ -76,6 +76,14 @@
                             <docId>znai</docId>
                             <port>3334</port>
                         </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>junit</groupId>
+                                <artifactId>junit</artifactId>
+                                <version>${junit.version}</version>
+                                <classifier>sources</classifier>
+                            </dependency>
+                        </dependencies>
                     </plugin>
 
                     <plugin>

@@ -1,0 +1,13 @@
+<plugin>
+    <groupId>org.testingisdocumenting.znai</groupId>
+    <artifactId>znai-maven-plugin</artifactId>
+    <version>\${project.version}</version>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>\${junit.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+    </dependencies>
+</plugin>

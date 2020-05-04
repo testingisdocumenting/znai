@@ -16,7 +16,7 @@
 
 package org.testingisdocumenting.znai.parser
 
-import org.testingisdocumenting.znai.core.ResourcesResolver
+import org.testingisdocumenting.znai.resources.ResourcesResolver
 import org.testingisdocumenting.znai.utils.ResourceUtils
 
 import javax.imageio.ImageIO

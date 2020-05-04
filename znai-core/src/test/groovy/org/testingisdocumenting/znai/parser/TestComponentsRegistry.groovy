@@ -18,8 +18,8 @@ package org.testingisdocumenting.znai.parser
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry
 import org.testingisdocumenting.znai.core.GlobalAssetsRegistry
-import org.testingisdocumenting.znai.core.ResourcesResolver
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
+import org.testingisdocumenting.znai.resources.ResourcesResolver
 import org.testingisdocumenting.znai.time.FakeTimeService
 import org.testingisdocumenting.znai.time.TimeService
 

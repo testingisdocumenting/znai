@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.core;
+package org.testingisdocumenting.znai.resources;
 
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.utils.FileUtils;
 
 import javax.imageio.ImageIO;

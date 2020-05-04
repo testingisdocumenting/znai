@@ -21,7 +21,7 @@ import org.testingisdocumenting.znai.diagrams.slides.DiagramSlides;
 import org.testingisdocumenting.znai.diagrams.slides.MarkupDiagramSlides;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;

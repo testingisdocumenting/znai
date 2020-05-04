@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.core;
+package org.testingisdocumenting.znai.resources;
 
 import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 

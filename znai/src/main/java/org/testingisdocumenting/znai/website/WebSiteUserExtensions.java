@@ -16,7 +16,7 @@
 
 package org.testingisdocumenting.znai.website;
 
-import org.testingisdocumenting.znai.core.ResourcesResolver;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.web.WebResource;
 import org.testingisdocumenting.znai.web.extensions.WebSiteResourcesProvider;
 
