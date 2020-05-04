@@ -17,7 +17,7 @@ When you refer to a file using plugins like
 
 # Class Path Lookup
 
-Znai is written using Java and can access resources in class path. 
+Znai is written using Java and can access resources from the classpath. 
 Using class path lookup you can include snippets from projects deployed to, for example, Maven Central.
 
 :include-file: maven-class-path.xml {highlight: "classifier"}
