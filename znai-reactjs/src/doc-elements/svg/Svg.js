@@ -37,7 +37,7 @@ class Svg extends Component {
         if (error) {
             return (
                 <div className="znai-svg-load-error content-block">
-                    Cannot load SVG: <a target="_blank" href={svgSrc}>{svgSrc}</a>
+                    Cannot load SVG: <a target="_blank" rel="noopener" href={svgSrc}>{svgSrc}</a>
                 </div>
             )
         }

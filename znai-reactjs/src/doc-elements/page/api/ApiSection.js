@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +24,7 @@ const ApiSection = ({elementsLibrary, id, title, isSelected, height, content}) =
 
     return (
         <React.Fragment>
+            {/*eslint-disable-next-line*/}
             <a name={id} href={isSelected ? '' : ('#' + id)}>
                 <div className={titleClassName}>
                     <CollapseIndicator isSelected={isSelected}/>
