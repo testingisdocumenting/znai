@@ -12,3 +12,4 @@ znai-reactjs/build
 docs-build
 *.DS_Store
 dependency-reduced-pom.xml
+npm-debug.log

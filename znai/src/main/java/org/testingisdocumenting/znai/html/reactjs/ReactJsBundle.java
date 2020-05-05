@@ -27,8 +27,6 @@ import static java.util.stream.Collectors.toList;
 public class ReactJsBundle {
     private final WebResource mainJs;
     private final WebResource mainCss;
-    private final WebResource react;
-    private final WebResource reactDom;
     private final WebResource bootstrapCss;
     private final WebResource katexCss;
 
@@ -39,8 +37,6 @@ public class ReactJsBundle {
         mainCss = WebResource.fromResource("static/main.css");
         bootstrapCss = WebResource.fromResource("static/css/bootstrap.min.css");
         katexCss = WebResource.fromResource("static/css/katex.min.css");
-        react = WebResource.fromResource("static/react.min.js");
-        reactDom = WebResource.fromResource("static/react-dom.min.js");
 
         Stream<WebResource> glyphIcons = Stream.of("eot", "svg", "ttf", "woff", "woff2")
                 .map(ext -> "static/fonts/glyphicons-halflings-regular." + ext)
@@ -60,7 +56,7 @@ public class ReactJsBundle {
     }
 
     public Stream<WebResource> clientJavaScripts() {
-        return Stream.of(react, reactDom, mainJs);
+        return Stream.of(mainJs);
     }
 
     public Stream<WebResource> clientCssResources() {
