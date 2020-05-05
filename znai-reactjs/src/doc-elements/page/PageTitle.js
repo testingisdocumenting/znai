@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +20,7 @@ import React from 'react'
 import "./PageTitle.css"
 import Support from "./Support"
 
-const PageTitle = ({tocItem, onPresentationOpen, lastModifiedTime, docMeta, elementsLibrary}) => {
+const PageTitle = ({tocItem, onPresentationOpen, lastModifiedTime, docMeta}) => {
     const displayTitle = tocItem.dirName.length && tocItem.fileName !== "index"
     const title = displayTitle ? [<span key="title" className="page-title">{tocItem.pageTitle}</span>,
         onPresentationOpen ?
@@ -61,7 +62,10 @@ function ViewOn({docMeta, tocItem}) {
 
     return (
         <div className="page-view-on">
-            <a href={buildViewOnLink(tocItem, viewOn.link)} target="_blank">{viewOn.title}</a>
+            <a href={buildViewOnLink(tocItem, viewOn.link)}
+               target="_blank" rel="noopener">
+                {viewOn.title}
+            </a>
         </div>
     )
 }
