@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -63,14 +64,14 @@ import {spoilerDemo} from './doc-elements/spoiler/Spoiler.demo'
 import {pageGenErrorDemo} from './doc-elements/page-gen-error/PageGenError.demo'
 import {diffTrackingDemo} from './diff/DiffTracking.demo'
 
-import {themeRegistry} from "./theme/ThemeRegistry"
-import WithTheme from "./theme/WithTheme"
-
 import {Documentation} from "./doc-elements/Documentation"
 import testData from "./doc-elements/TestData"
 import {subHeadingPresentationDemo} from './doc-elements/default-elements/PresentationSubHeading.demo'
 import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
 import {updateGlobalDocReferences} from './doc-elements/references/globalDocReferences'
+import {paragraphDemo} from './doc-elements/default-elements/Paragraph.demo'
+import {defaultNextPrevNavigationDemo} from './doc-elements/page/default/PageDefaultNextPrevNavigation.demo'
+import {twoSidesNextPrevNavigationDemo} from './doc-elements/page/two-sides/TwoSidesNextPrevNavigation.demo'
 
 const docMeta = {
     id: 'preview',
@@ -79,7 +80,7 @@ const docMeta = {
     previewEnabled: true,
     hipchatRoom: 'Test Room',
     viewOn: {
-        link: 'https://github.com/twosigma/TestingIsDocumenting/znai-cli/documentation',
+        link: 'https://github.com/testingisdocumenting/znai/znai-cli/documentation',
         title: 'View On GitHub'
     }
 }
@@ -91,11 +92,12 @@ updateGlobalDocReferences({
     }
 })
 
-const registries = new Registries({componentWrapper: ThemeWrapper})
+const registries = new Registries()
 
 registries.add('text')
     .registerAsGrid('Typography', 0, typographyDemo)
     .registerAsRows('Blockquote', blockQuoteDemo)
+    .registerAsRows('Paragraph', paragraphDemo)
 
 registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
@@ -130,6 +132,8 @@ registries.add('layout')
     .registerAsGrid('Tabs', 0, tabsDemo)
     .registerAsGrid('Tables', 0, tableDemo)
     .registerAsTabs('TOC', tocPanelDemo)
+    .registerAsRows('Next/Prev navigation', defaultNextPrevNavigationDemo)
+    .registerAsRows('Two Sides Next/Prev navigation', twoSidesNextPrevNavigationDemo)
 
 registries.add('presentation')
     .registerAsTabs('Layout', presentationDemo)
@@ -200,14 +204,6 @@ export class App extends Component {
 }
 
 function selectTheme(label) {
-    const theme = label === 'Default' ? 'default' : 'znai-dark'
-    themeRegistry.selectTheme(theme)
-}
-
-function ThemeWrapper({OriginalComponent}) {
-    return (
-        <WithTheme>
-            {() => <OriginalComponent/>}
-        </WithTheme>
-    )
+    const name = label === 'Default' ? 'default' : 'znai-dark'
+    global.znaiTheme.setExplicitly(name)
 }

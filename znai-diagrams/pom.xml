@@ -19,22 +19,22 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.twosigma.znai</groupId>
+        <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.26-SNAPSHOT</version>
+        <version>1.31-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-diagrams</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-utils</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -51,13 +51,13 @@
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.webtau</groupId>
+            <groupId>org.testingisdocumenting.webtau</groupId>
             <artifactId>webtau-core-groovy</artifactId>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.twosigma.znai</groupId>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-core</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>

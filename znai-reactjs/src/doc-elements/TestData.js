@@ -73,7 +73,7 @@ const TestData = {
     documentation:    {
         "docMeta": {
             "viewOn": {
-                "link": "https://github.com/twosigma/TestingIsDocumenting/blob/master/znai-cli/documentation",
+                "link": "https://github.com/testingisdocumenting/TestingIsDocumenting/blob/master/znai-cli/documentation",
                 "title": "View On GitHub"
             },
             "id": "preview",
@@ -659,7 +659,7 @@ const TestData = {
                                     "type": "Paragraph",
                                     "content": [
                                         {
-                                            "text": "If you want to sign for the beta, email to PPE-Support@twosigma.com",
+                                            "text": "If you want to sign for beta email to X",
                                             "type": "SimpleText"
                                         }
                                     ]

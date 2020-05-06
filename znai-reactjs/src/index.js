@@ -15,6 +15,7 @@
  */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 if (process.env.NODE_ENV !== 'production') {
     require('bootstrap/dist/css/bootstrap.css')
@@ -36,6 +37,7 @@ const {mergeDocMeta} = require('./doc-elements/docMeta')
 const lunr = require('lunr')
 
 global.React = React
+global.ReactDOM = ReactDOM
 global.Documentation = Documentation
 global.DocumentationPreparationScreen = DocumentationPreparationScreen
 global.Landing = Landing
@@ -47,7 +49,6 @@ global.lunr = lunr
 global.mergeDocMeta = mergeDocMeta
 
 if (process.env.NODE_ENV !== "production") {
-    const ReactDOM = require('react-dom');
     const App = require('./App').App
 
     ReactDOM.render(

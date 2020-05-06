@@ -22,8 +22,16 @@
     margin-bottom: 16px;
 }
 
+/*
+two sides mode case where a paragraph follows by a code block. In two sides mode paragraph and code may
+not belong to the same parent node so margins won't even each other out.
+*/
 .paragraph:last-child {
     margin-bottom: 0;
+}
+
+.list-item .paragraph:last-child {
+    margin-bottom: 10px;
 }
 
 .paragraph.attention {

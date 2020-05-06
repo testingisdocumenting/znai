@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +19,6 @@ import React, {Component} from 'react'
 import * as Promise from 'promise'
 
 import {themeRegistry} from '../theme/ThemeRegistry'
-import WithTheme from '../theme/WithTheme'
 
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
@@ -161,7 +161,8 @@ export class Documentation extends Component {
                                                    elementsLibrary={elementsLibrary}/>
 
         const NextPrevNavigation = pageTypesRegistry.nextPrevNavigationComponent(page.tocItem)
-        const renderedNextPrevNavigation = <NextPrevNavigation prevPageTocItem={this.prevPageTocItem}
+        const renderedNextPrevNavigation = <NextPrevNavigation currentTocItem={page.tocItem}
+                                                               prevPageTocItem={this.prevPageTocItem}
                                                                nextPageTocItem={this.nextPageTocItem}
                                                                onNextPage={this.onNextPage}
                                                                onPrevPage={this.onPrevPage}/>
@@ -186,30 +187,27 @@ export class Documentation extends Component {
             React.Fragment
 
         return (
-            <WithTheme>{() =>
-                <PreviewTrackerWrapper >
-                    <DocumentationLayout docMeta={docMeta}
-                                         toc={toc}
-                                         theme={theme}
-                                         selectedTocItem={selectedTocItem}
-                                         prevPageTocItem={this.prevPageTocItem}
-                                         nextPageTocItem={this.nextPageTocItem}
-                                         searchPopup={searchPopup}
-                                         renderedPage={renderedPage}
-                                         renderedNextPrevNavigation={renderedNextPrevNavigation}
-                                         renderedFooter={renderedFooter}
-                                         onHeaderClick={this.onHeaderClick}
-                                         onSearchClick={this.onSearchClick}
-                                         onTocItemClick={this.onTocItemClick}
-                                         onTocItemPageSectionClick={this.onTocItemPageSectionClick}
-                                         onNextPage={this.onNextPage}
-                                         onPrevPage={this.onPrevPage}
-                                         textSelection={textSelection}
-                                         pageGenError={pageGenError}/>
-                    {preview}
-                </PreviewTrackerWrapper>
-            }
-            </WithTheme>
+            <PreviewTrackerWrapper>
+                <DocumentationLayout docMeta={docMeta}
+                                     toc={toc}
+                                     theme={theme}
+                                     selectedTocItem={selectedTocItem}
+                                     prevPageTocItem={this.prevPageTocItem}
+                                     nextPageTocItem={this.nextPageTocItem}
+                                     searchPopup={searchPopup}
+                                     renderedPage={renderedPage}
+                                     renderedNextPrevNavigation={renderedNextPrevNavigation}
+                                     renderedFooter={renderedFooter}
+                                     onHeaderClick={this.onHeaderClick}
+                                     onSearchClick={this.onSearchClick}
+                                     onTocItemClick={this.onTocItemClick}
+                                     onTocItemPageSectionClick={this.onTocItemPageSectionClick}
+                                     onNextPage={this.onNextPage}
+                                     onPrevPage={this.onPrevPage}
+                                     textSelection={textSelection}
+                                     pageGenError={pageGenError}/>
+                {preview}
+            </PreviewTrackerWrapper>
         )
     }
 
@@ -217,15 +215,12 @@ export class Documentation extends Component {
         const {presentationRegistry, docMeta} = this.state
 
         return (
-            <WithTheme>{() =>
-                <Presentation docMeta={docMeta}
-                              presentationRegistry={presentationRegistry}
-                              onClose={this.onPresentationClose}
-                              onNextPage={this.onNextPage}
-                              hasNextPage={this.hasNextPage()}
-                              onPrevPage={this.onPrevPage}/>
-            }
-            </WithTheme>
+            <Presentation docMeta={docMeta}
+                          presentationRegistry={presentationRegistry}
+                          onClose={this.onPresentationClose}
+                          onNextPage={this.onNextPage}
+                          hasNextPage={this.hasNextPage()}
+                          onPrevPage={this.onPrevPage}/>
         )
     }
 

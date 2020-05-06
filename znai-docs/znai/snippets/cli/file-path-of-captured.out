@@ -1,0 +1,25 @@
+Delta compression using up to 8 threads.
+Compressing objects: 100% (16/16), done.
+Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.
+Total 16 (delta 14), reused 0 (delta 0)
+remote: Resolving deltas: 100% (14/14), completed with 10 local objects.
+To https://github.com/testingisdocumenting/znai.git
+   ea44003..e310685  master -> master
+Mykolas-MacBook-Pro:znai-reactjs mykola$ git push
+Counting objects: 13, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.
+Total 13 (delta 11), reused 0 (delta 0)
+remote: Resolving deltas: 100% (11/11), completed with 11 local objects.
+To https://github.com/testingisdocumenting/znai.git
+   e310685..900e0be  master -> master
+Mykolas-MacBook-Pro:znai-reactjs mykola$ git push
+Counting objects: 33, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (33/33), done.
+Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.
+Total 33 (delta 28), reused 0 (delta 0)
+remote: Resolving deltas: 100% (28/28), completed with 14 local objects.
+To https://github.com/testingisdocumenting/znai.git
+   900e0be..bb9993f  master -> master

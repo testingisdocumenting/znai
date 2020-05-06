@@ -1,10 +1,10 @@
 {
   "name": "znai-components",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "devDependencies": {
-    "react-component-viewer": "^0.20.0",
-    "react-scripts": "^1.1.5"
+    "react-component-viewer": "^0.25.0",
+    "react-scripts": "3.4.1"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
@@ -16,8 +16,8 @@
     "prismjs": "^1.6.0",
     "promise": "^7.1.1",
     "query-string": "^4.3.1",
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "scroll-into-view-if-needed": "^2.2.20",
     "semantic-ui-css": "^2.2.7",
     "victory-axis": "^30.3.1",
@@ -32,5 +32,17 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom"
   },
-  "proxy": "http://localhost:3333/"
+  "proxy": "http://localhost:3333/",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

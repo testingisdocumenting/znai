@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +33,7 @@ class Support extends Component {
         return (
             <div className="page-support">
                 {this.state.link ?
-                    <a href={this.state.link} target="_blank">Support</a> : null
+                    <a href={this.state.link} target="_blank" rel="noopener">Support</a> : null
                 }
             </div>
         )

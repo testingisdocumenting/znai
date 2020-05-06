@@ -19,9 +19,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.twosigma.znai</groupId>
+        <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.26-SNAPSHOT</version>
+        <version>1.31-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-reactjs</artifactId>
@@ -47,17 +47,23 @@
                 </executions>
                 <configuration>
                     <target name="copy-react-bundle">
-                        <copy verbose="true" todir="${project.build.outputDirectory}/static">
-                            <fileset file="build/static/js/*.js" />
-                            <fileset file="build/static/css/*.css" />
-                            <mapper type="regexp" from="(.*)\.[^\.]+\.(.*)" to="\1.\2" />
-                        </copy>
+                        <delete dir="${project.build.outputDirectory}/static"/>
 
-                        <copy verbose="true" todir="${project.build.outputDirectory}/static">
-                            <fileset file="build/static/js/*.js.map" />
-                            <fileset file="build/static/css/*.css.map" />
-                            <mapper type="regexp" from="(.*)\.[^\.]+\.(.*)\.(.*)" to="\1.\2.\3" />
-                        </copy>
+                        <concat destfile="${project.build.outputDirectory}/static/main.js" append="true">
+                            <fileset file="build/static/js/runt*.js"/>
+                        </concat>
+
+                        <concat destfile="${project.build.outputDirectory}/static/main.js" append="true">
+                            <fileset file="build/static/js/2*.js"/>
+                        </concat>
+
+                        <concat destfile="${project.build.outputDirectory}/static/main.js" append="true">
+                            <fileset file="build/static/js/main*.js"/>
+                        </concat>
+
+                        <concat destfile="${project.build.outputDirectory}/static/main.css" append="true">
+                            <fileset file="build/static/css/*.css" />
+                        </concat>
 
                         <copy verbose="true" todir="${project.build.outputDirectory}/static/fonts">
                             <fileset id="fonts" dir="node_modules/katex/dist/fonts">
@@ -74,8 +80,7 @@
                             <fileset file="${project.basedir}/node_modules/katex/dist/katex.min.css" />
                         </copy>
 
-                        <copy file="${project.basedir}/node_modules/react/umd/react.production.min.js" toFile="${project.build.outputDirectory}/static/react.min.js" />
-                        <copy file="${project.basedir}/node_modules/react-dom/umd/react-dom.production.min.js" toFile="${project.build.outputDirectory}/static/react-dom.min.js" />
+                        <copy file="${project.basedir}/public/znai-theme.js" toFile="${project.build.outputDirectory}/znai-theme.js" />
                     </target>
                 </configuration>
             </plugin>

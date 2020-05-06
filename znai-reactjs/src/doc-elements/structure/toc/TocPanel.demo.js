@@ -21,7 +21,7 @@ const docMeta = {
     "title": "Znai",
     "type": "User Guide",
     "viewOn": {
-        "link": "https://github.com/twosigma/TestingIsDocumenting/blob/master/znai-cli/documentation",
+        "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-cli/documentation",
         "title": "View On GitHub"
     }
 }
