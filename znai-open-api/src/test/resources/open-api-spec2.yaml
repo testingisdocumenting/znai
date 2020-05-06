@@ -1,0 +1,639 @@
+swagger: '2.0'
+info:
+  title: Orca Task Aggregator
+  description: Aggregator Service API
+  version: 0.0.1
+basePath: /api/
+definitions:
+  State:
+    type: string
+    enum:
+      - PAUSED
+      - PREREQ
+      - READY
+      - RUNNING
+      - WAITING
+      - FAILED
+      - SUCCEEDED
+      - CANCELED
+  Task:
+    type: object
+    properties:
+      user:
+        type: string
+      task:
+        type: string
+        description: Task id
+      name:
+        type: string
+      path:
+        $ref: '#/definitions/ItemPath'
+      state:
+        $ref: '#/definitions/State'
+      progress:
+        type: integer
+        minimum: 0
+        maximum: 100
+        example: 33
+      flags:
+        type: array
+        items:
+          type: string
+        example:
+          - PREEMPTED
+      attributes:
+        $ref: '#/definitions/Attributes'
+      createTimeMs:
+        type: integer
+        format: int64
+      updateTimeMs:
+        type: integer
+        format: int64
+      dispatchTimeMs:
+        type: integer
+        format: int64
+    required:
+      - user
+      - task
+      - name
+      - state
+      - progress
+      - createTimeMs
+  Folder:
+    type: object
+    properties:
+      user:
+        type: string
+      folder:
+        type: string
+      name:
+        type: string
+      path:
+        $ref: '#/definitions/ItemPath'
+      state:
+        $ref: '#/definitions/State'
+      numDescendantTasks:
+        type: integer
+      progressDecileCounts:
+        $ref: '#/definitions/ProgressDecileCounts'
+      stateCounts:
+        $ref: '#/definitions/StateCounts'
+      flagCounts:
+        $ref: '#/definitions/FlagCounts'
+      attributes:
+        $ref: '#/definitions/Attributes'
+      tags:
+        type: array
+        items:
+          type: string
+      subscriptions:
+        type: array
+        items:
+          $ref: '#/definitions/FolderSubscription'
+      createTimeMs:
+        type: integer
+        format: int64
+      updateTimeMs:
+        type: integer
+        format: int64
+    required:
+      - user
+      - folder
+      - name
+      - state
+      - createTimeMs
+      - numDescendantTasks
+      - progressDecileCounts
+      - stateCounts
+  Tag:
+    type: object
+    properties:
+      tag:
+        type: string
+    example:
+      tag: sims
+  TaskList:
+    type: object
+    properties:
+      tasks:
+        type: array
+        items:
+          $ref: '#/definitions/Task'
+  FolderList:
+    type: object
+    properties:
+      folders:
+        type: array
+        items:
+          $ref: '#/definitions/Folder'
+      pagingToken:
+        type: string
+  TagList:
+    type: object
+    properties:
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/Tag'
+  UserList:
+    type: object
+    properties:
+      users:
+        type: array
+        items:
+          type: string
+  ItemPath:
+    # can't call this "Path" due to conflict with javax.ws.rs.Path (TSAPKT-602)
+    type: object
+    required: [ parents, ancestors, names ]
+    description: Path from the root of the user's folder hierarchy to this item.
+    properties:
+      parents:
+        type: array
+        description: Folder ids of the parents of this object
+        example:
+          - parent1
+          - parent2
+        items:
+          type: string
+      ancestors:
+        type: object
+        description: For every item in path, a list of that item's parents
+        additionalProperties:
+          type: array
+          items:
+            type: string
+        example:
+          parent1: [ grandparent1 ]
+          parent2: [ grandparent2 ]
+          grandparent1: [ rootfolder ]
+          grandparent2: [ rootfolder ]
+      names:
+        type: object
+        description: A map of (folder id -> folder name) entries for folder ids referenced in this object
+        example:
+          parent1: Parent Folder 1
+          parent2: Parent Folder 2
+          grandparent1: Grandparent Folder 1
+          grandparent2: Grandparent Folder 2
+          somerootfolder: My Root Folder
+        additionalProperties:
+          type: string
+  Attributes:
+    type: object
+    additionalProperties:
+      type: string
+    example:
+      twosigma.region: US
+  ProgressDecileCounts:
+    type: array
+    description: >
+      Counts of incomplete descendant tasks in each progress decile, where an incomplete task is a
+      task that is not SUCCEEDED. For example, an array of [13, 9, 2, 0, 0, 0, 0, 0, 0, 10] would
+      mean that the given folder contains 13 incomplete descendant tasks with the progress of 0-9%,
+      9 incomplete descendant tasks with the progress of 10-19%, 2 tasks with the progress of
+      20-29%, and 10 with the progress of 90-99%.
+    example: [13, 9, 2, 0, 0, 0, 0, 0, 0, 10]
+    items:
+      type: integer
+    minItems: 10
+    maxItems: 10
+  StateCounts:
+    type: object
+    description: >
+      Count of descendant tasks for the given states. For example,
+      { COMPLETED: 10, FAILED: 1 }
+      indicates that the folder contains
+      10 descendant tasks in the COMPLETED state
+       1 descendant task in the FAILED state.
+    additionalProperties:
+      type: integer
+    example:
+      COMPLETED: 10
+      FAILED: 1
+  FlagCounts:
+    type: object
+    description: >
+      Count of descendant tasks with the given flag state. For example
+      { PREEMPTED: 3 }
+      indicates that the folder contains 3 descendant tasks flagged as "PREEMPTED"
+    additionalProperties:
+      type: integer
+    example:
+      PREEMPTED: 3
+  FolderCreateRequest:
+    type: object
+    required: [ name ]
+    properties:
+      name:
+        type: string
+      parents:
+        type: array
+        description: Parent folder ids (otherwise folder is placed at user root)
+        items:
+          type: string
+      tags:
+        type: array
+        items:
+          type: string
+        example: [ "sims" ]
+      attributes:
+        $ref: '#/definitions/Attributes'
+      subscriptions:
+        type: array
+        items:
+          $ref: '#/definitions/FolderSubscription'
+  FolderSubscription:
+    type: object
+    description: Describes a subscription for folder changes
+    example:
+      states: [ 'FAILED', 'CANCELED ']
+      flags: [ 'PREEMPTED' ]
+      channels:
+        - type: EMAIL
+          target: username@twosigma.com
+        - type: SLACK
+          target: '#team-orca'
+        - type: SLACK
+          target: '@username'
+    properties:
+      states:
+        description: States which will trigger the notification
+        type: array
+        items:
+          $ref: '#/definitions/State'
+      flags:
+        description: Flags which will trigger the notification
+        type: array
+        items:
+          type: string
+      channels:
+        type: array
+        description: Destination for the delivery of the subscription notification
+        items:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - EMAIL
+                - SLACK
+            target:
+              type: string
+  TaskUpdate:
+    type: object
+    properties:
+      state:
+        $ref: '#/definitions/State'
+      progress:
+        type: integer
+        minimum: 0
+        maximum: 100
+      setFlags:
+        type: array
+        items:
+          type: string
+      clearFlags:
+        type: array
+        items:
+          type: string
+      attributes:
+        $ref: '#/definitions/Attributes'
+  TaskCreateRequest:
+    allOf:
+      - $ref: '#/definitions/TaskUpdate'
+      - type: object
+        properties:
+          name:
+            type: string
+          folders:
+            description: Parent folder ids (otherwise task is only accessible via its id)
+            type: array
+            items:
+              type: string
+        required:
+          - name
+          - folder
+  DescendantQueryFilter: &DESCENDANT_QUERY_FILTER
+    type: string
+    enum:
+      - ALL
+      - DIRECT_CHILDREN_ONLY
+      - INDIRECT_DESCENDANTS_ONLY
+parameters:
+  user:
+    name: user
+    in: path
+    type: string
+    required: true
+  folder:
+    name: folder
+    in: path
+    type: string
+    required: true
+paths:
+  /v1/users:
+    get:
+      tags:
+        - Aggregator
+      summary: Get all users (who have at least one tagged folder)
+      description: The results of this operation are cached by the server, and thus may be out of
+        date unless the refreshCache parameter is set to 'true'.
+      operationId: getUsers
+      produces:
+        - application/json
+      parameters:
+        - name: refreshCache
+          description: Setting this parameter to true may have an adverse performance impact.
+          in: query
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: User list
+          schema:
+            $ref: '#/definitions/UserList'
+  /v1/users/{user}/tags:
+    get:
+      tags:
+        - Aggregator
+      summary: Get the user's tags
+      operationId: getTags
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/user'
+      responses:
+        '200':
+          description: Tag information
+          schema:
+            $ref: '#/definitions/TagList'
+        '404':
+          description: User not found
+  /v1/users/{user}/folders:
+    get:
+      tags:
+        - Aggregator
+      summary: Get a filtered folder list
+      description: Returns a list of folders matching all of the specified filters.
+      operationId: getFolders
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/user'
+        - name: tag
+          in: query
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+          collectionFormat: multi
+          required: true
+          description: Folder must be tagged with this tag
+        - name: after
+          in: query
+          type: integer
+          format: int64
+          description: Folder must have been created after this time (epoch Unix time).
+        - name: before
+          in: query
+          type: integer
+          format: int64
+          description: Folder must have been created before this time (epoch Unix time).
+        - name: name
+          in: query
+          type: string
+          description: Folder name must contain this string
+        - name: attribute
+          in: query
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+          collectionFormat: multi
+          description: >
+            Folder must have this attribute-key pair, where the attribute-key pair is
+            specified as "{attribute}={value}". The attribute must not contain the
+            character "=".
+        - name: desiredPageSize
+          in: query
+          type: integer
+          description: Desired number of items returned per page. Each page may contain more or less than this number of items.
+        - name: pagingToken
+          in: query
+          type: string
+      responses:
+        '200':
+          description: Filtered folder list
+          schema:
+            $ref: '#/definitions/FolderList'
+        '400':
+          description: Unable to return folder list.
+        '404':
+          description: User not found
+  /v1/users/{user}/folders/{folder}:
+    parameters:
+      - $ref: '#/parameters/user'
+      - $ref: '#/parameters/folder'
+    get:
+      tags:
+        - Aggregator
+      summary: Get the folder
+      operationId: getFolder
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Folder information
+          schema:
+            $ref: '#/definitions/Folder'
+        '404':
+          description: User or folder does not exist
+    post:
+      tags:
+        - Aggregator
+      summary: Create a new folder
+      operationId: createFolder
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/FolderCreateRequest'
+      responses:
+        '201':
+          description: Folder was successfully created
+        '403':
+          description: Permission denied
+        '404':
+          description: User does not exist
+        '409':
+          description: Folder already exists
+  /v1/users/{user}/folders/{folder}/tags/{tag}:
+    put:
+      tags:
+        - Aggregator
+      summary: Tag the folder with the specified tag
+      operationId: addFolderTag
+      parameters:
+        - $ref: '#/parameters/user'
+        - $ref: '#/parameters/folder'
+        - name: tag
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Tag added
+        '400':
+          description: Unable to add tag
+        '403':
+          description: Permission denied
+        '404':
+          description: User or folder does not exist
+    delete:
+      tags:
+        - Aggregator
+      summary: Delete specified tag from the folder
+      operationId: deleteFolderTag
+      parameters:
+        - $ref: '#/parameters/user'
+        - $ref: '#/parameters/folder'
+        - name: tag
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Tag deleted
+        '400':
+          description: Unable to delete tag
+        '403':
+          description: Permission denied
+        '404':
+          description: User or folder does not exist
+  /v1/users/{user}/folders/{folder}/folders:
+    get:
+      tags:
+        - Aggregator
+      summary: Get the descendant folders of a folder
+      operationId: getDescendantFolders
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/user'
+        - $ref: '#/parameters/folder'
+        - name: filter
+          in: query
+          <<: *DESCENDANT_QUERY_FILTER
+      responses:
+        '200':
+          description: Folder list
+          schema:
+            $ref: '#/definitions/FolderList'
+        '404':
+          description: User or folder does not exist
+  /v1/users/{user}/folders/{folder}/tasks:
+    get:
+      tags:
+        - Aggregator
+      summary: Get the descendant tasks of a folder
+      operationId: getDescendantTasks
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/user'
+        - $ref: '#/parameters/folder'
+        - name: filter
+          in: query
+          <<: *DESCENDANT_QUERY_FILTER
+      responses:
+        '200':
+          description: Task list
+          schema:
+            $ref: '#/definitions/TaskList'
+        '404':
+          description: User or folder does not exist
+  /v1/users/{user}/tasks/{task}:
+    parameters:
+      - $ref: '#/parameters/user'
+      - name: task
+        in: path
+        type: string
+        required: true
+    get:
+      tags:
+        - Aggregator
+      summary: Get task information
+      operationId: getTask
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Task information
+          schema:
+            $ref: '#/definitions/Task'
+        '404':
+          description: Task not found
+    post:
+      tags:
+        - Aggregator
+      summary: Create a new task
+      operationId: createTask
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/TaskCreateRequest'
+      responses:
+        '201':
+          description: Task successfully created
+        '400':
+          description: Task create request not accepted.
+        '403':
+          description: User is not permitted to create this task.
+        '409':
+          description: Specified task already exists.
+    patch:
+      tags:
+        - Aggregator
+      summary: Update a task
+      operationId: updateTask
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/TaskUpdate'
+      responses:
+        '200':
+          description: Task update processed
+        '400':
+          description: Task update not accepted.
+        '403':
+          description: Permission denied
+        '404':
+          description: User or task not found
+  /test/notification:
+    post:
+      tags:
+        - AggregatorTest
+      summary: Generate a dummy folder notification
+      operationId: sendTestNotification
+      consumes:
+        - application/json
+      parameters:
+        - name: subscription
+          in: body
+          schema:
+            $ref: '#/definitions/FolderSubscription'
+      responses:
+        200:
+          description: Dummy folder notification processed

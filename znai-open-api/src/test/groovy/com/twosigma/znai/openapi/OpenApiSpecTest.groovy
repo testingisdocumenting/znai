@@ -50,6 +50,16 @@ class OpenApiSpecTest {
     }
 
     @Test
+    void "should parse spec with a shared field from yaml"() {
+        def yamlSpec = OpenApiSpec.fromYaml(
+                TEST_COMPONENTS_REGISTRY.markdownParser(),
+                ResourceUtils.textContent("open-api-spec2.yaml"))
+
+        def findOneCustomerYaml = yamlSpec.findOperationById('getUsers')
+        findOneCustomerYaml.toMap().should == findOneCustomerYaml.toMap()
+    }
+
+    @Test
     void "should extract all operations from a spec file"() {
         spec.operations.id.should == [
                 'findPets',

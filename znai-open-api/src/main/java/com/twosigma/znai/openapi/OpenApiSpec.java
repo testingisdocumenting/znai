@@ -102,8 +102,25 @@ public class OpenApiSpec {
     }
 
     @SuppressWarnings("unchecked")
-    private void parseMethods(String path, Map<String, ?> methods) {
-        methods.forEach((method, definition) -> parseMethod(path, method, (Map<String, ?>) definition));
+    private void parseMethods(String path, Map<String, ?> methodsWithShared) {
+        Map<String, Object> shared = new LinkedHashMap<>();
+        Map<String, Object> methods = new LinkedHashMap<>();
+        methodsWithShared.forEach((methodWithShared, definition) -> {
+            if (isShared(methodWithShared)) {
+                shared.put(methodWithShared, definition);
+            } else {
+                methods.put(methodWithShared, definition);
+            }
+        });
+        methods.forEach((method, definition) -> {
+            shared.forEach(((Map<String, Object>) definition)::put);
+            parseMethod(path, method, (Map<String, ?>)definition);
+        });
+    }
+
+    // Refer to https://swagger.io/specification/v2/#path-item-object
+    private boolean isShared(String field) {
+        return "parameters".equals(field) || "$ref".equals(field);
     }
 
     @SuppressWarnings("unchecked")
