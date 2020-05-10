@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
 import './doc-elements/DocumentationLayout.css'
 import './doc-elements/search/Search.css'
@@ -72,6 +71,7 @@ import {updateGlobalDocReferences} from './doc-elements/references/globalDocRefe
 import {paragraphDemo} from './doc-elements/default-elements/Paragraph.demo'
 import {defaultNextPrevNavigationDemo} from './doc-elements/page/default/PageDefaultNextPrevNavigation.demo'
 import {twoSidesNextPrevNavigationDemo} from './doc-elements/page/two-sides/TwoSidesNextPrevNavigation.demo'
+import {bulletListsDemo} from './doc-elements/bullets/BulletList.demo'
 
 const docMeta = {
     id: 'preview',
@@ -98,6 +98,7 @@ registries.add('text')
     .registerAsGrid('Typography', 0, typographyDemo)
     .registerAsRows('Blockquote', blockQuoteDemo)
     .registerAsRows('Paragraph', paragraphDemo)
+    .registerAsRows('Bullets', bulletListsDemo)
 
 registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
@@ -205,5 +206,5 @@ export class App extends Component {
 
 function selectTheme(label) {
     const name = label === 'Default' ? 'default' : 'znai-dark'
-    global.znaiTheme.setExplicitly(name)
+    window.znaiTheme.setExplicitly(name)
 }

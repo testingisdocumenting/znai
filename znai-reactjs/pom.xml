@@ -72,10 +72,6 @@
                             </fileset>
                         </copy>
 
-                        <copy toDir="${project.build.outputDirectory}/static">
-                            <fileset dir="${project.basedir}/node_modules/bootstrap/dist" />
-                        </copy>
-
                         <copy toDir="${project.build.outputDirectory}/static/css">
                             <fileset file="${project.basedir}/node_modules/katex/dist/katex.min.css" />
                         </copy>

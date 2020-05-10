@@ -15,6 +15,7 @@
  */
 
 .footer {
+    font-size: 14px;
     color: var(--znai-footer-color);
     background-color: var(--znai-footer-background-color);
 

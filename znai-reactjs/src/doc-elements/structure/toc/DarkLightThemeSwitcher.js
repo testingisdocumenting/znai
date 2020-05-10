@@ -22,7 +22,7 @@ const darkThemeName = 'znai-dark'
 
 export class DarkLightThemeSwitcher extends React.Component {
     render() {
-        const themeName = global.znaiTheme.name
+        const themeName = window.znaiTheme.name
 
         const themeLabel = (themeName === darkThemeName ? 'dark' : 'light')
         const sliderClassName = 'znai-theme-switcher-slider ' + themeLabel
@@ -40,7 +40,7 @@ export class DarkLightThemeSwitcher extends React.Component {
         )
 
         function toggleTheme() {
-            global.znaiTheme.toggle()
+            window.znaiTheme.toggle()
             forceUpdate()
         }
     }
@@ -50,10 +50,10 @@ export class DarkLightThemeSwitcher extends React.Component {
     }
 
     componentDidMount() {
-        global.znaiTheme.addChangeHandler(this.onThemeChange)
+        window.znaiTheme.addChangeHandler(this.onThemeChange)
     }
 
     componentWillUnmount() {
-        global.znaiTheme.removeChangeHandler(this.onThemeChange)
+        window.znaiTheme.removeChangeHandler(this.onThemeChange)
     }
 }

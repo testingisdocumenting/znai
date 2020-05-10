@@ -215,15 +215,9 @@
     color: var(--znai-brand-primary-color);
     position: fixed;
     font-size: 20px;
-    right: 55px;
-    top: 8px;
+    right: 24px;
+    top: 24px;
     z-index: 1000;
-}
-
-.presentation-button {
-    font-size: 16px;
-    cursor: pointer;
-    color: #bbb;
 }
 
 @media screen and (max-width: 800px) {

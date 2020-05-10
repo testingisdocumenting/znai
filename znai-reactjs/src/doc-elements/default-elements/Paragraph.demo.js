@@ -19,23 +19,49 @@ import React from 'react'
 import {elementsLibrary} from '../DefaultElementsLibrary'
 
 export function paragraphDemo(registry) {
-    registry.add('note', () => (<elementsLibrary.DocElement content={createParagraph("Note:")}
+    registry.add('with icon', () => (<elementsLibrary.DocElement content={createParagraphWithIcon()}
+                                                                 elementsLibrary={elementsLibrary}/>))
+
+    registry.add('note', () => (<elementsLibrary.DocElement content={createAttentionParagraph("Note:")}
                                                             elementsLibrary={elementsLibrary}/>))
 
-    registry.add('warning', () => (<elementsLibrary.DocElement content={createParagraph("Warning:")}
+    registry.add('warning', () => (<elementsLibrary.DocElement content={createAttentionParagraph("Warning:")}
                                                                elementsLibrary={elementsLibrary}/>))
 
-    registry.add('avoid', () => (<elementsLibrary.DocElement content={createParagraph("Avoid:")}
+    registry.add('avoid', () => (<elementsLibrary.DocElement content={createAttentionParagraph("Avoid:")}
                                                              elementsLibrary={elementsLibrary}/>))
 
-    registry.add('question', () => (<elementsLibrary.DocElement content={createParagraph("Question:")}
+    registry.add('question', () => (<elementsLibrary.DocElement content={createAttentionParagraph("Question:")}
                                                                 elementsLibrary={elementsLibrary}/>))
-
-    registry.add('inside bullet list', () => (<elementsLibrary.DocElement content={createListWithParagraphs()}
-                                                                          elementsLibrary={elementsLibrary}/>))
 }
 
-function createParagraph(suffix) {
+function createParagraphWithIcon() {
+    return [
+        {
+            "type": "Paragraph",
+            "content": [
+                {
+                    "text": "Long text followed by icon.",
+                    "type": "SimpleText"
+                },
+                {
+                    "id": "cloud",
+                    "type": "Icon"
+                },
+                {
+                    "text": "Text after the icon followed by another icon",
+                    "type": "SimpleText"
+                },
+                {
+                    "id": "git-pull-request",
+                    "type": "Icon"
+                },
+            ]
+        }
+    ]
+}
+
+function createAttentionParagraph(suffix) {
     return [
         {
             "type": "Paragraph",
@@ -61,42 +87,4 @@ function createParagraph(suffix) {
             ]
         }
     ]
-}
-
-function createListWithParagraphs() {
-    return [ {
-        "bulletMarker" : "*",
-        "tight" : false,
-        "type" : "BulletList",
-        "content" : [ {
-            "type" : "ListItem",
-            "content" : [ {
-                "type" : "Paragraph",
-                "content" : [ {
-                    "text" : "First list item's first paragraph.",
-                    "type" : "SimpleText"
-                }, {
-                    "type" : "SoftLineBreak"
-                }, {
-                    "text" : "This is still part of the first paragraph.",
-                    "type" : "SimpleText"
-                } ]
-            }, {
-                "type" : "Paragraph",
-                "content" : [ {
-                    "text" : "First list item's second paragraph",
-                    "type" : "SimpleText"
-                } ]
-            } ]
-        }, {
-            "type" : "ListItem",
-            "content" : [ {
-                "type" : "Paragraph",
-                "content" : [ {
-                    "text" : "Second list item's first paragraph",
-                    "type" : "SimpleText"
-                } ]
-            } ]
-        } ]
-    } ]
 }

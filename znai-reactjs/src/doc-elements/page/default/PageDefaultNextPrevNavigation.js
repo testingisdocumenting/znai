@@ -17,6 +17,7 @@
 
 import React from 'react'
 
+import Icon from '../../icons/Icon'
 import './PageDefaultNextPrevNavigation.css'
 
 function PageDefaultNextPrevNavigation({currentTocItem, prevPageTocItem, nextPageTocItem, onNextPage, onPrevPage}) {
@@ -31,16 +32,16 @@ function PageDefaultNextPrevNavigation({currentTocItem, prevPageTocItem, nextPag
 function DefaultPrevPageButton({currentTocItem, prevTocItem, onClick}) {
     return prevTocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
-            <span className="glyphicon glyphicon-chevron-left"/>
-            <span className="next-prev-page-title">{fullTitle(currentTocItem, prevTocItem)} </span>
+            <Icon id="chevron-left"/>
+            <div className="next-prev-page-title">{fullTitle(currentTocItem, prevTocItem)} </div>
         </div>) : <div/>
 }
 
 function DefaultNextPageButton({currentTocItem, nextTocItem, onClick}) {
     return nextTocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
-            <span className="next-prev-page-title">{fullTitle(currentTocItem, nextTocItem)} </span>
-            <span className="glyphicon glyphicon-chevron-right"/>
+            <div className="next-prev-page-title">{fullTitle(currentTocItem, nextTocItem)} </div>
+            <Icon id="chevron-right"/>
         </div>) : <div/>
 }
 

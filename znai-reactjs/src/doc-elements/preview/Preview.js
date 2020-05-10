@@ -16,6 +16,7 @@
 
 import React, {Component} from 'react'
 import {socketUrl} from '../../utils/socket'
+import Icon from '../icons/Icon'
 
 class Server {
     constructor(handlers) {
@@ -82,10 +83,6 @@ class Preview extends Component {
         this.server.connect()
     }
 
-    componentWillUnmount() {
-        // disconnect?
-    }
-
     onConnectionOpen() {
         this.setState({active: true})
     }
@@ -96,7 +93,11 @@ class Preview extends Component {
 
     render() {
         const {active} = this.state
-        return active ? (<div className='glyphicon glyphicon-eye-open preview-icon'/>) : null
+        const iconId = active ? 'eye' : 'eye-off'
+
+        return (
+            <Icon id={iconId} className="preview-icon"/>
+        )
     }
 }
 

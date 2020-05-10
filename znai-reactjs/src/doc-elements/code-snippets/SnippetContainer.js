@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,9 +20,9 @@ import * as React from 'react'
 import * as ClipboardJS from 'clipboard'
 
 import {extractTextFromTokens} from './codeUtils'
-import CopyIcon from './SnippetCopyIcon'
 
 import './SnippetContainer.css'
+import Icon from '../icons/Icon'
 
 class SnippetContainer extends React.Component {
     state = { displayCopied: false }
@@ -89,9 +90,8 @@ class SnippetContainer extends React.Component {
         const className = 'snippet-copy-to-clipboard ' + (displayCopied ? 'copied': 'copy')
 
         return (
-            <div className={className}
-                 ref={this.saveCopyToClipboardNode}>
-                <CopyIcon/>
+            <div className={className} ref={this.saveCopyToClipboardNode}>
+                <Icon id="copy"/>
             </div>
         )
     }
