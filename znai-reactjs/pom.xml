@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.31-SNAPSHOT</version>
+        <version>1.31</version>
     </parent>
 
     <artifactId>znai-reactjs</artifactId>
@@ -47,18 +47,18 @@
                 </executions>
                 <configuration>
                     <target name="copy-react-bundle">
-                        <delete dir="${project.build.outputDirectory}/static"/>
+                        <delete dir="${project.build.outputDirectory}/static" />
 
                         <concat destfile="${project.build.outputDirectory}/static/main.js" append="true">
-                            <fileset file="build/static/js/runt*.js"/>
+                            <fileset file="build/static/js/runt*.js" />
                         </concat>
 
                         <concat destfile="${project.build.outputDirectory}/static/main.js" append="true">
-                            <fileset file="build/static/js/2*.js"/>
+                            <fileset file="build/static/js/2*.js" />
                         </concat>
 
                         <concat destfile="${project.build.outputDirectory}/static/main.js" append="true">
-                            <fileset file="build/static/js/main*.js"/>
+                            <fileset file="build/static/js/main*.js" />
                         </concat>
 
                         <concat destfile="${project.build.outputDirectory}/static/main.css" append="true">
