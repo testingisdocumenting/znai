@@ -48,3 +48,7 @@
 .page-last-update-time {
     color: var(--znai-meta-color);
 }
+
+.presentation-button {
+    cursor: pointer;
+}

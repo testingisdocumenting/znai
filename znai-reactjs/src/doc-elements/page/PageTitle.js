@@ -17,14 +17,18 @@
 
 import React from 'react'
 
-import "./PageTitle.css"
 import Support from "./Support"
+import Icon from '../icons/Icon'
+
+import "./PageTitle.css"
 
 const PageTitle = ({tocItem, onPresentationOpen, lastModifiedTime, docMeta}) => {
     const displayTitle = tocItem.dirName.length && tocItem.fileName !== "index"
     const title = displayTitle ? [<span key="title" className="page-title">{tocItem.pageTitle}</span>,
         onPresentationOpen ?
-            <span key="button" className="presentation-button glyphicon glyphicon-resize-full"
+            <Icon key="presentation-mode"
+                  id="maximize"
+                  className="presentation-button"
                   onClick={onPresentationOpen}/> : null] : []
 
     return (

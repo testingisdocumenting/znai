@@ -41,7 +41,8 @@
 
 .cli-command pre {
     border: none;
-    background: none;
+    font-size: var(--znai-code-text-size);
+    padding: 8px;
 }
 
 .cli-command .token {

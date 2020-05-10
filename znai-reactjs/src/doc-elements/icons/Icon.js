@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +16,32 @@
  */
 
 import React from 'react'
+import feather from 'feather-icons'
 
-const Icon = ({id}) => <span className={"icon glyphicon glyphicon-" + id}/>
+import './Icon.css'
+
+const idMapping = generateMapping()
+
+const Icon = ({id, className, onClick}) => {
+    const fullClassName = 'icon ' + id + (className ? ' ' + className : '')
+    const idToUse = idMapping[id] || id
+
+    const featherIcon = feather.icons[idToUse]
+    return featherIcon ? (
+        <span className={fullClassName}
+              onClick={onClick}
+              dangerouslySetInnerHTML={{__html: featherIcon.toSvg()}}/>
+    ) : (
+        <span>Icon not found: {idToUse}</span>
+    )
+}
+
+function generateMapping() {
+    return {
+        time: 'clock',
+        'info-sign': 'info',
+        cog: 'settings'
+    }
+}
 
 export default Icon

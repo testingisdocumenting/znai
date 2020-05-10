@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +17,8 @@
 
 import React, {Component} from 'react'
 
+import Icon from '../../icons/Icon'
+
 import './TocPanelSearch.css'
 
 class TocPanelSearch extends Component {
@@ -24,7 +27,7 @@ class TocPanelSearch extends Component {
             <div className="znai-toc-panel-search-area">
                 <div className="znai-toc-panel-search" onClick={this.props.onClick} title="hotkey /">
                     <div className="znai-toc-panel-search-icon-and-text">
-                        <div className="znai-search-icon glyphicon glyphicon-search"/>
+                        <Icon id="search"/>
                         <div>Search...</div>
                     </div>
                 </div>

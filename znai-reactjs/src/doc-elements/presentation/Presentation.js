@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +16,8 @@
  */
 
 import React, {Component} from 'react'
+
+import Icon from '../icons/Icon'
 
 import './Presentation.css'
 
@@ -68,9 +71,7 @@ class Presentation extends Component {
                             {currentSlideIdx + 1}/{presentationRegistry.numberOfSlides}
                         </div>
 
-                        <div className="close">
-                            <div className="glyphicon glyphicon-remove" onClick={this.onClose}/>
-                        </div>
+                        <Icon id="x" onClick={this.onClose} className="close"/>
                     </div>
                 </div>
 

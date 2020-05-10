@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+h1 {
+    line-height: 1.1;
+}
+
 .section-title,
 .empty-section-title {
     font-size: 26px;
@@ -30,14 +34,13 @@
     margin-bottom: 0;
 }
 
-.section-title .icon {
-    font-size: 18px;
+.section-title .icon svg {
+    width: 18px;
+    height: 18px;
     margin-left: 10px;
     display: none;
 }
 
-.section-title:hover .icon {
-    font-size: 18px;
-    margin-left: 10px;
+.section-title:hover .icon svg {
     display: inline-block;
 }

@@ -37,7 +37,7 @@ const ParagraphWithAttention = ({attentionType, suffix, icon, ...props}) => {
     return (
         <div className={`paragraph attention ${attentionType} content-block`}>
             <span className="icon-part">
-                <span className="icon"><Icon id={icon}/></span>
+                <Icon id={icon}/>
                 <span className="label-message">{suffix}</span>
             </span>
             <span className="message-part">
@@ -47,12 +47,12 @@ const ParagraphWithAttention = ({attentionType, suffix, icon, ...props}) => {
     )
 }
 
-const NoteParagraph = (props) => <ParagraphWithAttention attentionType="note" suffix={noteSuffix} icon="info-sign" {...props}/>
-const WarningParagraph = (props) => <ParagraphWithAttention attentionType="warning" suffix={warningSuffix} icon="warning-sign" {...props}/>
-const QuestionParagraph = (props) => <ParagraphWithAttention attentionType="question" suffix={questionSuffix} icon="question-sign" {...props}/>
-const AvoidParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={avoidSuffix} icon="ban-circle" {...props}/>
-const DontParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={dontSuffix} icon="ban-circle" {...props}/>
-const DoNotParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={doNotSuffix} icon="ban-circle" {...props}/>
+const NoteParagraph = (props) => <ParagraphWithAttention attentionType="note" suffix={noteSuffix} icon="info" {...props}/>
+const WarningParagraph = (props) => <ParagraphWithAttention attentionType="warning" suffix={warningSuffix} icon="alert-triangle" {...props}/>
+const QuestionParagraph = (props) => <ParagraphWithAttention attentionType="question" suffix={questionSuffix} icon="help-circle" {...props}/>
+const AvoidParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={avoidSuffix} icon="x-octagon" {...props}/>
+const DontParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={dontSuffix} icon="x-octagon" {...props}/>
+const DoNotParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={doNotSuffix} icon="x-octagon" {...props}/>
 
 const Paragraph = (props) => {
     if (paragraphStartsWith(props.content, noteSuffix)) {

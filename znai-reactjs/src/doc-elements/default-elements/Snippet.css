@@ -15,14 +15,18 @@
  */
 
 pre {
+    font-family: var(--znai-code-font-family);
+
     overflow-y: hidden;
-    color: var(--znai-default-code-block-color)
+    color: var(--znai-default-code-block-color);
 }
 
 code {
+    font-family: var(--znai-code-font-family);
+    font-size: var(--znai-inlined-code-text-size);
+
     border: none;
     background: none;
     color: var(--znai-function-color);
     padding: 0;
-    font-size: var(--znai-inlined-code-text-size);
 }

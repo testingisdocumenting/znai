@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,27 +24,25 @@
 
 .default-next-prev-navigation-button {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     font-size: 16px;
     cursor: pointer;
 }
 
 .default-next-prev-navigation-button > .next-prev-page-title {
     flex: 1;
-    padding-top: 2px;
 }
 
-.default-next-prev-navigation-button > .glyphicon-chevron-right,
-.default-next-prev-navigation-button > .glyphicon-chevron-left {
-    font-size: 24px;
+.default-next-prev-navigation-button > .icon,
+.default-next-prev-navigation-button > .icon {
     color: var(--znai-brand-primary-color);
 }
 
-.default-next-prev-navigation-button > .glyphicon-chevron-right {
+.default-next-prev-navigation-button > .icon.chevron-right {
     margin-left: 10px;
 }
 
-.default-next-prev-navigation-button > .glyphicon-chevron-left {
+.default-next-prev-navigation-button > .icon.chevron-left {
     margin-right: 10px;
 }
 

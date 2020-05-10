@@ -76,7 +76,6 @@
 
 .presentation .header .controls .close {
     color: var(--znai-presentation-slide-info-color);
-    font-size: 14px;
     margin: 20px;
     cursor: pointer;
 }
