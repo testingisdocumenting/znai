@@ -45,6 +45,7 @@ class WebSiteDocStructureTest {
         toc = new TableOfContents()
         toc.addTocItem('chapter', 'pageOne')
         toc.addTocItem('chapter', 'pageTwo')
+        toc.addIndex()
         toc.findTocItem('chapter', 'pageTwo').pageSectionIdTitles = [new PageSectionIdTitle ('Test Section')]
     }
 
@@ -60,6 +61,7 @@ class WebSiteDocStructureTest {
         docStructure.createUrl(path, new DocUrl("/")).should == "/product"
         docStructure.createUrl(path, new DocUrl("https://abc")).should == "https://abc"
         docStructure.createUrl(path, new DocUrl("#anchor")).should == "/product/chapter/pageOne#anchor"
+        docStructure.createUrl(path, new DocUrl("/#anchor")).should == "/product#anchor"
         docStructure.createUrl(path, new DocUrl("test/page")).should == "/product/test/page"
         docStructure.createUrl(path, new DocUrl("test/page#anchor")).should == "/product/test/page#anchor"
     }
@@ -76,6 +78,28 @@ class WebSiteDocStructureTest {
         docStructure.validateUrl(pageOnePath, 'section title', new DocUrl('chapter/pageTwo#test-section'))
         docStructure.validateUrl(pageTwoPath, 'section title', new DocUrl('#test-section'))
         docStructure.validateCollectedLinks()
+    }
+
+    @Test
+    void "should handle index page with anchor as forward slash"() {
+        def indexPath = Paths.get('/home/user/docs/index.md')
+        def referringPagePath = Paths.get('/home/user/docs/chapter/pageOne.md')
+        docStructure.registerLocalAnchor(indexPath, 'index-id')
+        docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl('/#index-id'))
+        docStructure.validateCollectedLinks()
+    }
+
+    @Test
+    void "should validate index page anchors"() {
+        def indexPath = Paths.get('/home/user/docs/index.md')
+        def referringPagePath = Paths.get('/home/user/docs/chapter/pageOne.md')
+        docStructure.registerLocalAnchor(indexPath, 'index-id')
+        docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl('/#index-wrong-id'))
+
+        code {
+            docStructure.validateCollectedLinks()
+        } should throwException("can't find a page associated with: /#index-wrong-id\n" +
+                "check file: /home/user/docs/chapter/pageOne.md, section title: referring title\n")
     }
 
     @Test
