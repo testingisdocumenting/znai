@@ -24,9 +24,10 @@ pre {
 code {
     font-family: var(--znai-code-font-family);
     font-size: var(--znai-inlined-code-text-size);
-
+    
     border: none;
-    background: none;
-    color: var(--znai-function-color);
-    padding: 0;
+    background: var(--znai-inlined-code-background-color);
+    border-radius: .3em;
+    padding: .15em .2em .05em;
+    white-space: normal;
 }
