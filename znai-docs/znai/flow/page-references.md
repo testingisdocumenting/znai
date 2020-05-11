@@ -39,7 +39,7 @@ Use [Subsection Shortcut](#links) if a subsection is within the same page:
   
 ## Index Page
 
-Clicking this [index page](ad/) link will have the same effect as clicking the documentation title at the top of the **Navigation Panel**
+Clicking this [index page](/) link will have the same effect as clicking the documentation title at the top of the **Navigation Panel**
 
 To refer back to the top-level `index` page use:   
 
