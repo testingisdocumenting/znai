@@ -22,6 +22,12 @@
     margin-bottom: 16px;
 }
 
+.paragraph .icon {
+    margin-bottom: 1px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
 /*
 two sides mode case where a paragraph follows by a code block. In two sides mode paragraph and code may
 not belong to the same parent node so margins won't even each other out.
