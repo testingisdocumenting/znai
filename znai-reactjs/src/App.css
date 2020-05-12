@@ -27,6 +27,7 @@
 
     --znai-inlined-code-text-size: 14px;
     --znai-inlined-code-background-color: #efeff1;
+    --znai-inlined-code-text-color: var(--znai-black);
     --znai-code-text-size: 13px;
     --znai-code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 
@@ -174,7 +175,7 @@
     --znai-collapse-uncollapse-background-color: var(--znai-snippets-title-background-color);
 
     --znai-inversed-text-color: #bbbbbb;
-    --znai-inversed-background-color: #282f34;
+    --znai-inversed-background-color: #030303;
 
     --znai-horizontal-rule-color: #eee;
 
