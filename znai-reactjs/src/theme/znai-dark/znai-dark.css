@@ -92,7 +92,7 @@
     --znai-snippets-reference-border-color: mediumpurple;
     --znai-snippets-reference-background-color: #29264c;
     --znai-snippets-explanation-background-color: #121619;
-    --znai-snippets-line-highlighted-background-color: #121415;
+    --znai-snippets-line-highlighted-background-color: #000;
 
     --znai-token-title-color: #dddddd;
     --znai-token-highlight-background-color: rgba(147, 112, 219, 0.22);
