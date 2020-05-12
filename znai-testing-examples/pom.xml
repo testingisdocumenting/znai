@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.34-SNAPSHOT</version>
+        <version>1.34</version>
     </parent>
 
     <artifactId>znai-testing-examples</artifactId>
