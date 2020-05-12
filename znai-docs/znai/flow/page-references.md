@@ -5,7 +5,7 @@ Links to navigate to the next page are at the end of each page.
 
 Create links to remind users of *essential* concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them. 
 
-Avoid: links that navigate users forward. It breaks the flow of a documentation. 
+Avoid: links that navigate users forward. It may break the flow of a documentation. 
 
 # Links
 
@@ -23,18 +23,12 @@ To refer `internal` page within your documentation use:
 
 Note: you can get `page-section-id` by hovering over a section title and pressing link icon. Your browser URL display the updated link.
 
-To refer back to the top-level `index` page use:   
-
-```markdown
-[index link](/)
-```
-
 ## Links to Subsection
 
 Linking to subsections is the same as linking to a top level section. [Here is an example](flow/page-references#links-to-subsection)
 
 ```markdown
-[Here is an example](flow/page-references#links-to-subsection)
+[Here is an example](flow/page-references#link-to-subsection)
 ```
 
 Use [Subsection Shortcut](#links) if a subsection is within the same page: 
@@ -46,6 +40,13 @@ Use [Subsection Shortcut](#links) if a subsection is within the same page:
 ## Index Page
 
 Clicking this [index page](/) link will have the same effect as clicking the documentation title at the top of the **Navigation Panel**
+
+To refer back to the top-level `index` page use:   
+
+```markdown
+[index page](/)
+[index page](/#link-to-subsection)
+```
 
 # Downloads
 

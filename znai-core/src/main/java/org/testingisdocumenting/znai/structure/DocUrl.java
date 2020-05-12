@@ -17,8 +17,10 @@
 package org.testingisdocumenting.znai.structure;
 
 public class DocUrl {
-    private static final String LINK_TO_SECTION_INSTRUCTION = "To refer to a section of this document use" +
-            " dir-name/file-name[#page-section-id]. Use #page-section-id to refer to the current page section";
+    private static final String LINK_TO_SECTION_INSTRUCTION = "To refer to a section of a document page use " +
+            " dir-name/file-name-without-extension#page-section-id. #page-section-id is optional.\n" +
+            "Use #page-section-id to refer to the current page section.\n" +
+            "Use /#section-id to refer the root page of a documentation.\n";
 
     private String dirName = "";
     private String fileName = "";
@@ -64,6 +66,13 @@ public class DocUrl {
     }
 
     private boolean handleIndex() {
+        if (url.startsWith("/#")) {
+            isIndexUrl = true;
+            anchorId = url.substring(2);
+
+            return true;
+        }
+
         return isIndexUrl = url.equals("/");
     }
 
