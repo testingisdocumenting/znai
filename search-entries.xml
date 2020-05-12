@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#scaffolding</url>
     <fullTitle>Znai: Getting Started, Scaffolding [Introduction]</fullTitle>
     <text>
-      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.30&lt;/version> &lt;configuration> &lt;docId>my-docs&lt;/docId> &lt;sourceRoot>${project.basedir}/documentation&lt;/sourceRoot> &lt;port>3333&lt;/port> &lt;/configuration> &lt;/plugin> mvn znai:new</text>
+      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.32&lt;/version> &lt;/plugin> mvn znai:new</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -171,7 +171,7 @@
     <url>/znai/flow/page-references#follow-the-order</url>
     <fullTitle>Znai: Page References, Follow the Order [Flow]</fullTitle>
     <text>
-      <text>The best documentation should be arranged with a natural order to follow. Links to navigate to the next page are at the end of each page.Create links to remind users of essential concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them.Avoid: links that navigate users forward. It breaks the flow of a documentation.</text>
+      <text>The best documentation should be arranged with a natural order to follow. Links to navigate to the next page are at the end of each page.Create links to remind users of essential concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them.Avoid: links that navigate users forward. It may break the flow of a documentation.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -179,7 +179,7 @@
     <url>/znai/flow/page-references#links</url>
     <fullTitle>Znai: Page References, Links [Flow]</fullTitle>
     <text>
-      <text>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link.To refer back to the top-level index page use: markdown [index link](/) Linking to subsections is the same as linking to a top level section. flow/page-references#links-to-subsection Here is an example markdown [Here is an example](flow/page-references#links-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation Panel</text>
+      <text>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link.Linking to subsections is the same as linking to a top level section. flow/page-references#links-to-subsection Here is an example markdown [Here is an example](flow/page-references#link-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation PanelTo refer back to the top-level index page use: markdown [index page](/) [index page](/#link-to-subsection)</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -204,6 +204,14 @@
     <fullTitle>Znai: Lookup Paths, Files Reference Lookup [Flow]</fullTitle>
     <text>
       <text>When you refer to a file using plugins like :include-file: my-file.cpp Znai tries to find the file in following locations:directory with the markup file that refers my-file.cpp documentation root directorylocations enumerated inside &lt;doc-root>/lookup-paths file txt ../examples ../module/src/main/java</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/lookup-paths#class-path-lookup</url>
+    <fullTitle>Znai: Lookup Paths, Class Path Lookup [Flow]</fullTitle>
+    <text>
+      <text>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets from projects deployed to, for example, Maven Central. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>${project.version}&lt;/version> &lt;dependencies> &lt;dependency> &lt;groupId>junit&lt;/groupId> &lt;artifactId>junit&lt;/artifactId> &lt;version>${junit.version}&lt;/version> &lt;classifier>sources&lt;/classifier> &lt;/dependency> &lt;/dependencies> &lt;/plugin> :include-java: org/junit/Assert.java {entry: "assertArrayEquals"} public static void assertArrayEquals(String message, Object[] expecteds, Object[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1208,10 +1216,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/visuals/icons#glyphicons</url>
-    <fullTitle>Znai: Icons, Glyphicons [Visuals]</fullTitle>
+    <url>/znai/visuals/icons#feather-icons</url>
+    <fullTitle>Znai: Icons, Feather Icons [Visuals]</fullTitle>
     <text>
-      <text>Icons can be included using the inlined code plugin. `:icon: cloud` The result will be appear inline in the current paragraph Glyphicon's list of icons is available here: http://getbootstrap.com/components/#glyphicons http://getbootstrap.com/components/#glyphicons</text>
+      <text>Znai has integration with https://feathericons.com/ Feather Icons. Icons can be included using the inlined code plugin. `:icon: cloud` The result will appear in-lined in the current text Head over to https://feathericons.com/ https://feathericons.com/ to find the icon id.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1219,7 +1227,7 @@
     <url>/znai/visuals/icons#bullet-points</url>
     <fullTitle>Znai: Icons, Bullet Points [Visuals]</fullTitle>
     <text>
-      <text>Icons can also be used as bullet points replacement: * `:icon: time` Time is important * `:icon: cog` Setup must be easy Time is important Setup must be easy</text>
+      <text>Icons can also be used as bullet points replacement: * `:icon: time` Time is important * `:icon: settings` Setup must be easy Time is important Setup must be easy</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1491,7 +1499,7 @@
     <url>/znai/deployment/static-content#build</url>
     <fullTitle>Znai: Static Content, Build [Deployment]</fullTitle>
     <text>
-      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.30&lt;/version> &lt;configuration> &lt;docId>my-docs&lt;/docId> &lt;sourceRoot>${project.basedir}/documentation&lt;/sourceRoot> &lt;deployRoot>${project.build.directory}&lt;/deployRoot> &lt;port>3333&lt;/port> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
+      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.32&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
       <score>STANDARD</score>
     </text>
   </entry>

@@ -2,23 +2,95 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Lookup Paths</title><!--test extension added comment to head-->
-<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<title>Znai: Lookup Paths</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
-<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
-<link rel="stylesheet" type="text/css" href="/znai/logo.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addEventListener("change", function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
 <div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Files Reference Lookup</h1></header>
 <p>When you refer to a file using plugins like :include-file: my-file.cpp Znai tries to find the file in following locations:directory with the markup file that refers my-file.cpp documentation root directorylocations enumerated inside &lt;doc-root&gt;/lookup-paths file txt ../examples ../module/src/main/java</p>
+</article>
+
+<article>
+<header><h1>Class Path Lookup</h1></header>
+<p>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets from projects deployed to, for example, Maven Central. &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;${project.version}&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;${junit.version}&lt;/version&gt; &lt;classifier&gt;sources&lt;/classifier&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;/plugin&gt; :include-java: org/junit/Assert.java {entry: &quot;assertArrayEquals&quot;} public static void assertArrayEquals(String message, Object[] expecteds, Object[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); }</p>
 </article>
 
 <article>
@@ -31,8 +103,6 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="text/javascript" src="/znai/static/react.min.js"></script>
-<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/search-index.js"></script>
@@ -125,6 +195,37 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     }, {
+      "title" : "Class Path Lookup",
+      "id" : "class-path-lookup",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Znai is written using Java and can access resources from the classpath.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Using class path lookup you can include snippets from projects deployed to, for example, Maven Central.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "xml",
+        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>${project.version}</version>\n    <dependencies>\n        <dependency>\n            <groupId>junit</groupId>\n            <artifactId>junit</artifactId>\n            <version>${junit.version}</version>\n            <classifier>sources</classifier>\n        </dependency>\n    </dependencies>\n</plugin>",
+        "highlight" : [ "classifier" ],
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: org/junit/Assert.java {entry: \"assertArrayEquals\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "public static void assertArrayEquals(String message, Object[] expecteds,\n        Object[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}",
+        "entry" : "assertArrayEquals",
+        "type" : "Snippet"
+      } ]
+    }, {
       "title" : "HTTP Lookup Location",
       "id" : "http-lookup-location",
       "type" : "Section",
@@ -163,7 +264,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1588392146119,
+    "lastModifiedTime" : 1589248692916,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Lookup Paths",
@@ -174,6 +275,9 @@ ReactDOM.render(React.createElement(Documentation, {
       "pageSectionIdTitles" : [ {
         "title" : "Files Reference Lookup",
         "id" : "files-reference-lookup"
+      }, {
+        "title" : "Class Path Lookup",
+        "id" : "class-path-lookup"
       }, {
         "title" : "HTTP Lookup Location",
         "id" : "http-lookup-location"

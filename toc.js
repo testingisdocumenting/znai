@@ -153,6 +153,9 @@ toc = [ {
       "title" : "Files Reference Lookup",
       "id" : "files-reference-lookup"
     }, {
+      "title" : "Class Path Lookup",
+      "id" : "class-path-lookup"
+    }, {
       "title" : "HTTP Lookup Location",
       "id" : "http-lookup-location"
     } ]
@@ -833,8 +836,8 @@ toc = [ {
     "fileName" : "icons",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Glyphicons",
-      "id" : "glyphicons"
+      "title" : "Feather Icons",
+      "id" : "feather-icons"
     }, {
       "title" : "Bullet Points",
       "id" : "bullet-points"

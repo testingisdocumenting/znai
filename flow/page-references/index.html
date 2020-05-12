@@ -2,28 +2,95 @@
 <html>
 <head>
 <meta charset="utf-8" /> 
-<title>Znai: Page References</title><!--test extension added comment to head-->
-<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<title>Znai: Page References</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
-<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
-<link rel="stylesheet" type="text/css" href="/znai/logo.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addEventListener("change", function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
 <div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Follow the Order</h1></header>
-<p>The best documentation should be arranged with a natural order to follow. Links to navigate to the next page are at the end of each page.Create links to remind users of essential concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them.Avoid: links that navigate users forward. It breaks the flow of a documentation.</p>
+<p>The best documentation should be arranged with a natural order to follow. Links to navigate to the next page are at the end of each page.Create links to remind users of essential concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them.Avoid: links that navigate users forward. It may break the flow of a documentation.</p>
 </article>
 
 <article>
 <header><h1>Links</h1></header>
-<p>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link.To refer back to the top-level index page use: markdown [index link](/) Linking to subsections is the same as linking to a top level section. flow/page-references#links-to-subsection Here is an example markdown [Here is an example](flow/page-references#links-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation Panel</p>
+<p>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link.Linking to subsections is the same as linking to a top level section. flow/page-references#links-to-subsection Here is an example markdown [Here is an example](flow/page-references#link-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation PanelTo refer back to the top-level index page use: markdown [index page](/) [index page](/#link-to-subsection)</p>
 </article>
 
 <article>
@@ -41,8 +108,6 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="text/javascript" src="/znai/static/react.min.js"></script>
-<script type="text/javascript" src="/znai/static/react-dom.min.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/search-index.js"></script>
@@ -94,7 +159,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Avoid: links that navigate users forward. It breaks the flow of a documentation.",
+          "text" : "Avoid: links that navigate users forward. It may break the flow of a documentation.",
           "type" : "SimpleText"
         } ]
       } ]
@@ -149,23 +214,6 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To refer back to the top-level ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "index",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " page use:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "markdown",
-        "snippet" : "[index link](/)\n",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
         "level" : 2,
         "title" : "Links to Subsection",
         "id" : "links-to-subsection",
@@ -186,7 +234,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "[Here is an example](flow/page-references#links-to-subsection)\n",
+        "snippet" : "[Here is an example](flow/page-references#link-to-subsection)\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -239,6 +287,23 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To refer back to the top-level ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "index",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " page use:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "[index page](/)\n[index page](/#link-to-subsection)\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
       } ]
     }, {
       "title" : "Downloads",
@@ -292,7 +357,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1588392146119,
+    "lastModifiedTime" : 1589248692916,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Page References",
