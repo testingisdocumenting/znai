@@ -24,7 +24,6 @@ pre {
 code {
     font-family: var(--znai-code-font-family);
     font-size: var(--znai-inlined-code-text-size);
-    
     border: none;
     background: var(--znai-inlined-code-background-color);
     color: var(--znai-inlined-code-text-color);
