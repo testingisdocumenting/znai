@@ -7,7 +7,7 @@ Presentation mode in `Znai` is meant to help with both issues, mutually reinforc
 
 # Presentation Mode
 
-`Znai` can turn any page into a presentation. Simply click `icon:resize-full` to the far fight of each page title.
+`Znai` can turn any page into a presentation. Simply click `icon:resize-full` to the far right of each page title.
 
 In presentation mode, only certain documentation elements are converted to slides:
 
