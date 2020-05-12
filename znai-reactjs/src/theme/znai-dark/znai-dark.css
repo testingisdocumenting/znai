@@ -30,6 +30,9 @@
 
     --znai-link-decoration: none;
 
+    --znai-inlined-code-background-color: #181e21;
+    --znai-inlined-code-text-color: #aaa;
+
     --znai-blockquote-border-color: #333;
     --zani-blockquote-background-color: #181e22;
 
