@@ -75,13 +75,13 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentat
     return (
         <div className={className}>
             <pre>
-                <code>
-                    {lines.map((line, idx) => <LineOfTokens key={idx} tokens={line}
-                                                            isHighlighted={isHighlighted(idx)}
-                                                            references={mergedReferences}
-                                                            isPresentation={isPresentation}
-                                                            TokenComponent={SpecialCommentToken}/>)}
-                </code>
+                {lines.map((line, idx) =>
+                    <LineOfTokens key={idx}
+                                  tokens={line}
+                                  isHighlighted={isHighlighted(idx)}
+                                  references={mergedReferences}
+                                  isPresentation={isPresentation}
+                                  TokenComponent={SpecialCommentToken}/>)}
             </pre>
 
             <Explanations isPresentation={isPresentation}
