@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#installation</url>
     <fullTitle>Znai: Getting Started, Installation [Introduction]</fullTitle>
     <text>
-      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/${project.version}/znai-dist-${project.version}-znai.zip znai. Add it to your PATH .Note: https://brew.sh/ brew support is currently in progress.</text>
+      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.32/znai-dist-1.32-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -259,7 +259,7 @@
     <url>/znai/flow/presentation#presentation-mode</url>
     <fullTitle>Znai: Presentation, Presentation Mode [Flow]</fullTitle>
     <text>
-      <text>Znai can turn any page into a presentation. Simply click icon:resize-full to the far fight of each page title.In presentation mode, only certain documentation elements are converted to slides:HeadingsBulletsImages and graphicsCode snippetsCommand line inputMathTablesIf you write your documentation with a presentation in mind it should improve the flow of your documentation.</text>
+      <text>Znai can turn any page into a presentation. Simply click to the far right of each page title.In presentation mode, only certain documentation elements are converted to slides:HeadingsBulletsImages and graphicsCode snippetsCommand line inputMathTablesIf you write your documentation with a presentation in mind it should improve the flow of your documentation.</text>
       <score>STANDARD</score>
     </text>
   </entry>

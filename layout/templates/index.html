@@ -72,7 +72,7 @@
         }
 
         var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
-        lightQuery.addEventListener("change", function (e) {
+        lightQuery.addListener(function (e) {
             const newThemeName = e.matches ? lightThemeName : darkThemeName;
             znaiTheme.setExplicitly(newThemeName);
         });
@@ -675,7 +675,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       } ]
     } ],
-    "lastModifiedTime" : 1589248692916,
+    "lastModifiedTime" : 1589256954820,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Templates",

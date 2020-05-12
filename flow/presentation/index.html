@@ -72,7 +72,7 @@
         }
 
         var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
-        lightQuery.addEventListener("change", function (e) {
+        lightQuery.addListener(function (e) {
             const newThemeName = e.matches ? lightThemeName : darkThemeName;
             znaiTheme.setExplicitly(newThemeName);
         });
@@ -90,7 +90,7 @@
 
 <article>
 <header><h1>Presentation Mode</h1></header>
-<p>Znai can turn any page into a presentation. Simply click icon:resize-full to the far fight of each page title.In presentation mode, only certain documentation elements are converted to slides:HeadingsBulletsImages and graphicsCode snippetsCommand line inputMathTablesIf you write your documentation with a presentation in mind it should improve the flow of your documentation.</p>
+<p>Znai can turn any page into a presentation. Simply click to the far right of each page title.In presentation mode, only certain documentation elements are converted to slides:HeadingsBulletsImages and graphicsCode snippetsCommand line inputMathTablesIf you write your documentation with a presentation in mind it should improve the flow of your documentation.</p>
 </article>
 </section>
 </div>
@@ -152,10 +152,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : " can turn any page into a presentation. Simply click ",
           "type" : "SimpleText"
         }, {
-          "code" : "icon:resize-full",
-          "type" : "InlinedCode"
+          "id" : "maximize",
+          "type" : "Icon"
         }, {
-          "text" : " to the far fight of each page title.",
+          "text" : " to the far right of each page title.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -240,7 +240,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1589248692916,
+    "lastModifiedTime" : 1589256954816,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Presentation",

@@ -72,7 +72,7 @@
         }
 
         var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
-        lightQuery.addEventListener("change", function (e) {
+        lightQuery.addListener(function (e) {
             const newThemeName = e.matches ? lightThemeName : darkThemeName;
             znaiTheme.setExplicitly(newThemeName);
         });
@@ -148,7 +148,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
-        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1589248692936",
+        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1589256954840",
         "type" : "Svg"
       } ]
     }, {
@@ -179,7 +179,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
-        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1589248692936",
+        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1589256954840",
         "idsToReveal" : [ "partA", "partB" ],
         "type" : "Svg"
       }, {
@@ -259,7 +259,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
-        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1589248692936",
+        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1589256954840",
         "idsToReveal" : [ "partC" ],
         "actualSize" : true,
         "type" : "Svg"
@@ -298,14 +298,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
-        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1589248692936",
+        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1589256954840",
         "idsToReveal" : [ "partC" ],
         "actualSize" : true,
         "scale" : 0.2,
         "type" : "Svg"
       } ]
     } ],
-    "lastModifiedTime" : 1589248692920,
+    "lastModifiedTime" : 1589256954820,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "SVG",

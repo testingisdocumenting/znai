@@ -72,7 +72,7 @@
         }
 
         var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
-        lightQuery.addEventListener("change", function (e) {
+        lightQuery.addListener(function (e) {
             const newThemeName = e.matches ? lightThemeName : darkThemeName;
             znaiTheme.setExplicitly(newThemeName);
         });
@@ -133,7 +133,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "annotationsPath" : "annotations.json",
         "imageSrc" : "/znai/visuals/word-toolbar.jpg",
-        "timestamp" : 1589248692936,
+        "timestamp" : 1589256954840,
         "shapes" : [ {
           "type" : "arrow",
           "id" : "a1",
@@ -267,7 +267,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1589248692936,
+    "lastModifiedTime" : 1589256954840,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Image Annotations",

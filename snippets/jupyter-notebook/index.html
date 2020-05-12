@@ -72,7 +72,7 @@
         }
 
         var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
-        lightQuery.addEventListener("change", function (e) {
+        lightQuery.addListener(function (e) {
             const newThemeName = e.matches ? lightThemeName : darkThemeName;
             znaiTheme.setExplicitly(newThemeName);
         });
@@ -235,7 +235,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "fit" : true,
         "imageSrc" : "/znai/snippets/jupyter/notebook.png",
-        "timestamp" : 1589248692920,
+        "timestamp" : 1589256954820,
         "shapes" : [ ],
         "width" : 1944.0,
         "height" : 1112.0,
@@ -376,7 +376,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1589248692920,
+    "lastModifiedTime" : 1589256954820,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Jupyter Notebook",

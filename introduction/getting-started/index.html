@@ -72,7 +72,7 @@
         }
 
         var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
-        lightQuery.addEventListener("change", function (e) {
+        lightQuery.addListener(function (e) {
             const newThemeName = e.matches ? lightThemeName : darkThemeName;
             znaiTheme.setExplicitly(newThemeName);
         });
@@ -95,7 +95,7 @@
 
 <article>
 <header><h1>Installation</h1></header>
-<p>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/${project.version}/znai-dist-${project.version}-znai.zip znai. Add it to your PATH .Note: https://brew.sh/ brew support is currently in progress.</p>
+<p>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.32/znai-dist-1.32-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</p>
 </article>
 
 <article>
@@ -224,7 +224,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Download and unzip ",
           "type" : "SimpleText"
         }, {
-          "url" : "https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/${project.version}/znai-dist-${project.version}-znai.zip",
+          "url" : "https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.32/znai-dist-1.32-znai.zip",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
@@ -413,7 +413,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1589248692916,
+    "lastModifiedTime" : 1589256954816,
     "tocItem" : {
       "sectionTitle" : "Introduction",
       "pageTitle" : "Getting Started",
