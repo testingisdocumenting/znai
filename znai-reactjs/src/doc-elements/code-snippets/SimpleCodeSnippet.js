@@ -34,8 +34,13 @@ class SimpleCodeSnippet extends Component {
         this.state = {displayFully: !this.limitLines}
     }
 
+    // handles changes during preview
     componentWillReceiveProps(nextProps) {
         this.processProps(nextProps)
+
+        if (this.props.readMore && this.props.readMoreVisibleLines !== nextProps.readMoreVisibleLines) {
+            this.setState({displayFully: false})
+        }
     }
 
     processProps({isPresentation, tokens, linesOfCode, highlight}) {

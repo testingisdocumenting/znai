@@ -26,6 +26,8 @@
     --znai-regular-font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
     --znai-inlined-code-text-size: 14px;
+    --znai-inlined-code-background-color: #efeff1;
+    --znai-inlined-code-text-color: var(--znai-black);
     --znai-code-text-size: 13px;
     --znai-code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 
@@ -206,6 +208,11 @@ body {
     font-family: var(--znai-regular-font-family);
     color: var(--znai-regular-text-color);
     background: var(--znai-background-color);
+    line-height: 1.42857143;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 .emphasis {
@@ -243,5 +250,6 @@ body {
 }
 
 hr {
+    border: none;
     border-top: 1px solid var(--znai-horizontal-rule-color);
 }

@@ -111,7 +111,7 @@
     cursor: pointer;
 }
 
-.snippet-copy-to-clipboard.copied {
+.snippet-copy-to-clipboard.copied svg {
     stroke-width: 3px;
 }
 

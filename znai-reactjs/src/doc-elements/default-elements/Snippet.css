@@ -15,14 +15,19 @@
  */
 
 pre {
+    font-family: var(--znai-code-font-family);
+
     overflow-y: hidden;
-    color: var(--znai-default-code-block-color)
+    color: var(--znai-default-code-block-color);
 }
 
 code {
-    border: none;
-    background: none;
-    color: var(--znai-function-color);
-    padding: 0;
+    font-family: var(--znai-code-font-family);
     font-size: var(--znai-inlined-code-text-size);
+    border: none;
+    background: var(--znai-inlined-code-background-color);
+    color: var(--znai-inlined-code-text-color);
+    border-radius: .3em;
+    padding: .15em .2em .05em;
+    white-space: normal;
 }

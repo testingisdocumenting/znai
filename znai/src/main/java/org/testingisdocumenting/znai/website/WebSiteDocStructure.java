@@ -80,7 +80,7 @@ class WebSiteDocStructure implements DocStructure {
 
     @Override
     public void validateUrl(Path path, String additionalClue, DocUrl docUrl) {
-        if (docUrl.isExternalUrl() || docUrl.isIndexUrl()) {
+        if (docUrl.isExternalUrl()) {
             return;
         }
 
@@ -94,7 +94,7 @@ class WebSiteDocStructure implements DocStructure {
         }
 
         if (docUrl.isIndexUrl()) {
-            return "/" + docMeta.getId();
+            return "/" + docMeta.getId() + (docUrl.getAnchorId().isEmpty() ? "" : docUrl.getAnchorIdWithHash());
         }
 
         return fullUrl(createUrlBase(path, docUrl) + docUrl.getAnchorIdWithHash());
@@ -147,9 +147,8 @@ class WebSiteDocStructure implements DocStructure {
     private Optional<String> validateLink(LinkToValidate link) {
         String anchorId = link.docUrl.getAnchorId();
 
-        TocItem tocItem = link.docUrl.isAnchorOnly() ?
-                parsingConfiguration.tocItemByPath(componentsRegistry, toc, link.path):
-                toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileName());
+        TocItem tocItem = findTocItemByLink(link);
+
         if (tocItem == null) {
             return Optional.of(createInvalidLinkMessage(link));
         }
@@ -167,6 +166,16 @@ class WebSiteDocStructure implements DocStructure {
         }
 
         return Optional.of(createInvalidLinkMessage(link));
+    }
+
+    private TocItem findTocItemByLink(LinkToValidate link) {
+        if (link.docUrl.isIndexUrl()) {
+            return toc.getIndex();
+        }
+
+        return link.docUrl.isAnchorOnly() ?
+                parsingConfiguration.tocItemByPath(componentsRegistry, toc, link.path):
+                toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileName());
     }
 
     private String createInvalidLinkMessage(LinkToValidate link) {

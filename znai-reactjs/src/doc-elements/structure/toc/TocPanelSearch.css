@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +21,8 @@
 }
 
 .znai-toc-panel-search {
+    font-size: 14px;
+
     background-color: var(--znai-search-box-background-color);
     color: var(--znai-search-box-text-color);
     font-style: var(--znai-smaller-text-size);
@@ -35,6 +38,6 @@
     align-items: center;
 }
 
-.znai-search-icon {
+.znai-toc-panel-search-icon-and-text .icon {
     margin-right: 8px;
 }

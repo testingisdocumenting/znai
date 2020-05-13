@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2020 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import SettingsButton from './SettingsButton'
+.icon {
+    display: inline-block;
+    line-height: 0;
+    margin: 0;
+    height: 18px;
+    width: 18px;
+    vertical-align: middle;
+}
 
-export default function TocSettingsTogglePanel({onSettingsClick, active}) {
-    return (
-        <div className="toc-panel-settings">
-            <SettingsButton onClick={onSettingsClick} active={active}/>
-        </div>
-    )
+.icon svg {
+    width: 18px;
+    height: 18px;
 }

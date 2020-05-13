@@ -22,6 +22,12 @@
     margin-bottom: 16px;
 }
 
+.paragraph .icon {
+    margin-bottom: 1px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
 /*
 two sides mode case where a paragraph follows by a code block. In two sides mode paragraph and code may
 not belong to the same parent node so margins won't even each other out.
@@ -36,19 +42,26 @@ not belong to the same parent node so margins won't even each other out.
 
 .paragraph.attention {
     display: flex;
-    align-items: baseline;
+    align-items: start;
     margin-top: 24px;
     margin-bottom: 24px;
     padding: 8px 0 8px 16px;
 }
 
 .paragraph.attention .icon-part {
+    display: flex;
+    align-items: center;
     margin-right: 15px;
 }
 
 .paragraph.attention .icon-part .icon {
-    font-size: 16px;
-    line-height: 18px;
+    height: 24px;
+    width: 24px;
+}
+
+.paragraph.attention .icon-part svg {
+    height: 24px;
+    width: 24px;
 }
 
 .paragraph.attention .icon-part .label-message {
@@ -58,6 +71,7 @@ not belong to the same parent node so margins won't even each other out.
 
 .paragraph.attention .message-part {
     flex: 1;
+    padding-top: 2px;
     padding-bottom: 3px;
     padding-right: 10px;
 }

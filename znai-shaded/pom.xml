@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.31-SNAPSHOT</version>
+        <version>1.35-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-shaded</artifactId>
@@ -80,6 +80,7 @@
                                     <pattern>org.</pattern>
                                     <shadedPattern>znaishaded.org.</shadedPattern>
                                     <excludes>
+                                        <exclude>org.testingisdocumenting.**</exclude>
                                         <exclude>org.codehaus.**</exclude>
                                         <exclude>org.xml.**</exclude>
                                         <exclude>org.w3c.**</exclude>
@@ -89,7 +90,6 @@
                                     <pattern>com.</pattern>
                                     <shadedPattern>znaishaded.com.</shadedPattern>
                                     <excludes>
-                                        <exclude>org.testingisdocumenting.**</exclude>
                                         <exclude>com.sun.**</exclude>
                                     </excludes>
                                 </relocation>

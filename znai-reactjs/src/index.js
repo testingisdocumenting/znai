@@ -17,10 +17,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-if (process.env.NODE_ENV !== 'production') {
-    require('bootstrap/dist/css/bootstrap.css')
-}
-
+require('normalize.css/normalize.css')
 require('./App.css')
 require('./doc-elements/DocumentationLayout.css')
 require('./doc-elements/search/Search.css')

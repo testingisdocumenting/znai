@@ -27,7 +27,6 @@ import static java.util.stream.Collectors.toList;
 public class ReactJsBundle {
     private final WebResource mainJs;
     private final WebResource mainCss;
-    private final WebResource bootstrapCss;
     private final WebResource katexCss;
 
     private final List<WebResource> fonts;
@@ -35,12 +34,7 @@ public class ReactJsBundle {
     public ReactJsBundle() {
         mainJs = WebResource.fromResource("static/main.js");
         mainCss = WebResource.fromResource("static/main.css");
-        bootstrapCss = WebResource.fromResource("static/css/bootstrap.min.css");
         katexCss = WebResource.fromResource("static/css/katex.min.css");
-
-        Stream<WebResource> glyphIcons = Stream.of("eot", "svg", "ttf", "woff", "woff2")
-                .map(ext -> "static/fonts/glyphicons-halflings-regular." + ext)
-                .map(WebResource::fromResource);
 
         Stream<WebResource> katexFonts = Stream.of("ttf", "woff", "woff2")
                 .flatMap(ext -> Stream.of(
@@ -52,7 +46,7 @@ public class ReactJsBundle {
                         "KaTeX_Math-Italic." + ext)
                         .map(name -> WebResource.fromResource("static/fonts/" + name)));
 
-        fonts = Stream.concat(glyphIcons, katexFonts).collect(toList());
+        fonts = katexFonts.collect(toList());
     }
 
     public Stream<WebResource> clientJavaScripts() {
@@ -60,7 +54,7 @@ public class ReactJsBundle {
     }
 
     public Stream<WebResource> clientCssResources() {
-        return Stream.of(bootstrapCss, katexCss, mainCss);
+        return Stream.of(katexCss, mainCss);
     }
 
     public void deploy(Deployer deployer) {
