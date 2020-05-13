@@ -95,12 +95,12 @@
 
 <article>
 <header><h1>Installation</h1></header>
-<p>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.32/znai-dist-1.32-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</p>
+<p>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.34/znai-dist-1.34-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</p>
 </article>
 
 <article>
 <header><h1>Scaffolding</h1></header>
-<p>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.32&lt;/version&gt; &lt;/plugin&gt; mvn znai:new</p>
+<p>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.34&lt;/version&gt; &lt;/plugin&gt; mvn znai:new</p>
 </article>
 
 <article>
@@ -126,7 +126,7 @@ document.getElementById('znai').innerHTML = '';
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
-      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/documentation",
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
       "title" : "View On GitHub"
     },
     "id" : "znai",
@@ -224,7 +224,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Download and unzip ",
           "type" : "SimpleText"
         }, {
-          "url" : "https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.32/znai-dist-1.32-znai.zip",
+          "url" : "https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.34/znai-dist-1.34-znai.zip",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
@@ -318,7 +318,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "xml",
-        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.32</version>\n</plugin>",
+        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.34</version>\n</plugin>",
         "title" : "maven plugin",
         "type" : "Snippet"
       }, {
@@ -413,7 +413,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1589256954816,
+    "lastModifiedTime" : 1589384535115,
     "tocItem" : {
       "sectionTitle" : "Introduction",
       "pageTitle" : "Getting Started",

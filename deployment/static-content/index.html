@@ -85,7 +85,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Build</h1></header>
-<p>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.32&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;project-name&lt;/docId&gt; &lt;deployRoot&gt;/path/to/static-content&lt;/deployRoot&gt; &lt;!-- default is ${project.build.directory} --&gt; &lt;/configuration&gt; &lt;/plugin&gt; mvn znai:build</p>
+<p>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.34&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;project-name&lt;/docId&gt; &lt;deployRoot&gt;/path/to/static-content&lt;/deployRoot&gt; &lt;!-- default is ${project.build.directory} --&gt; &lt;/configuration&gt; &lt;/plugin&gt; mvn znai:build</p>
 </article>
 </section>
 </div>
@@ -101,7 +101,7 @@ document.getElementById('znai').innerHTML = '';
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
-      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/documentation",
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
       "title" : "View On GitHub"
     },
     "id" : "znai",
@@ -133,7 +133,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "xml",
-        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.32</version>\n    <configuration>\n        <docId>project-name</docId>\n        <deployRoot>/path/to/static-content</deployRoot>  <!-- default is ${project.build.directory} -->\n    </configuration>\n</plugin>",
+        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.34</version>\n    <configuration>\n        <docId>project-name</docId>\n        <deployRoot>/path/to/static-content</deployRoot>  <!-- default is ${project.build.directory} -->\n    </configuration>\n</plugin>",
         "title" : "maven plugin",
         "highlight" : [ "deployRoot" ],
         "type" : "Snippet"
@@ -143,7 +143,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliCommand"
       } ]
     } ],
-    "lastModifiedTime" : 1589256954816,
+    "lastModifiedTime" : 1589384535115,
     "tocItem" : {
       "sectionTitle" : "Deployment",
       "pageTitle" : "Static Content",
