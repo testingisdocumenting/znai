@@ -108,7 +108,7 @@ public class ZnaiCliApp {
         server.listen(config.getPort());
     }
 
-    private void export() {
+    public void export() {
         ProgressReporter.reportPhase("export documentation files");
         copyDir(config.getSourceRoot(), config.getExportRoot());
 
