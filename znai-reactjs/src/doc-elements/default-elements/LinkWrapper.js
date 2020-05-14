@@ -16,7 +16,7 @@
 
 import React from 'react'
 
-import {onLocalUrlClick} from '../structure/links'
+import {onLocalUrlClick} from '../../structure/links'
 import {documentationTracking} from '../tracking/DocumentationTracking'
 
 export function LinkWrapper({className, url, treatAsLocal, children}) {

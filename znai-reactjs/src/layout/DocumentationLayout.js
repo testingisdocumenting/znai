@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2020 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
 
 import React, {Component} from 'react'
 
-import TocPanel from './structure/toc/TocPanel'
-import SelectedTextActionSelection from './selected-text-extensions/SelectedTextActionSelection'
-import {selectedTextExtensions} from './selected-text-extensions/SelectedTextExtensions'
-import {PageGenError} from './page-gen-error/PageGenError'
+import TocPanel from '../structure/toc/TocPanel'
+import SelectedTextActionSelection from '../doc-elements/selected-text-extensions/SelectedTextActionSelection'
+import {selectedTextExtensions} from '../doc-elements/selected-text-extensions/SelectedTextExtensions'
+import {PageGenError} from '../doc-elements/page-gen-error/PageGenError'
 
 class DocumentationLayout extends Component {
     state = {

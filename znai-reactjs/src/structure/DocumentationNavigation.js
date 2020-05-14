@@ -15,7 +15,7 @@
  */
 
 import * as Promise from 'promise'
-import {getDocId} from '../docMeta';
+import {getDocId} from '../doc-elements/docMeta';
 
 const index = {dirName: '', fileName: 'index'};
 

@@ -16,7 +16,7 @@
 
 import React, {PureComponent} from 'react'
 import {documentationNavigation} from '../DocumentationNavigation'
-import {pageTypesRegistry} from '../../page/PageTypesRegistry'
+import {pageTypesRegistry} from '../../doc-elements/page/PageTypesRegistry'
 
 const PageSections = ({pageSectionIdTitles, selected, onTocItemPageSectionClick}) => {
     return (<div className="page-sections">

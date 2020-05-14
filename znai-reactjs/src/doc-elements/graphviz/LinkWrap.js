@@ -16,7 +16,7 @@
 
 import React from 'react'
 
-import {isLocalUrl, onLocalUrlClick} from '../structure/links'
+import {isLocalUrl, onLocalUrlClick} from '../../structure/links'
 
 const LinkWrap = ({url, children}) => {
     if (!url) {

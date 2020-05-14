@@ -18,7 +18,7 @@ import React from 'react'
 
 import FilterInput from './FilterInput'
 
-import TocPanel from '../../doc-elements/structure/toc/TocPanel'
+import TocPanel from '../../structure/toc/TocPanel'
 
 import './Landing.css'
 
