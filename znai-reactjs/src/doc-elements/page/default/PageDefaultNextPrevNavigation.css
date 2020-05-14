@@ -46,3 +46,10 @@
     margin-right: 10px;
 }
 
+.next-prev-page-title.prev {
+    text-align: left;
+}
+
+.next-prev-page-title.next {
+    text-align: right;
+}

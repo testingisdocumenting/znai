@@ -33,14 +33,14 @@ function DefaultPrevPageButton({currentTocItem, prevTocItem, onClick}) {
     return prevTocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
             <Icon id="chevron-left"/>
-            <div className="next-prev-page-title">{fullTitle(currentTocItem, prevTocItem)} </div>
+            <div className="next-prev-page-title prev">{fullTitle(currentTocItem, prevTocItem)} </div>
         </div>) : <div/>
 }
 
 function DefaultNextPageButton({currentTocItem, nextTocItem, onClick}) {
     return nextTocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
-            <div className="next-prev-page-title">{fullTitle(currentTocItem, nextTocItem)} </div>
+            <div className="next-prev-page-title next">{fullTitle(currentTocItem, nextTocItem)} </div>
             <Icon id="chevron-right"/>
         </div>) : <div/>
 }

@@ -90,6 +90,7 @@ public class HtmlPage {
                 "<html>\n" +
                 "<head>\n" +
                 "<meta charset=\"utf-8\" /> \n" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\"> \n" +
                 "<title>" + title + "</title>" + "\n" +
                 headSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) +
                 cssResources.stream().map(r -> r.generateCssLink(documentationId)).collect(joining("\n")) +
