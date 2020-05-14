@@ -29,7 +29,7 @@ const {themeRegistry} = require('./theme/ThemeRegistry')
 const {documentationNavigation} = require('./structure/DocumentationNavigation')
 const {documentationTracking} = require('./doc-elements/tracking/DocumentationTracking')
 const {pageTypesRegistry} = require('./doc-elements/page/PageTypesRegistry')
-const {mergeDocMeta} = require('./doc-elements/docMeta')
+const {mergeDocMeta} = require('./structure/docMeta')
 
 const lunr = require('lunr')
 

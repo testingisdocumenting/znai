@@ -16,7 +16,7 @@
  */
 
 import React, {Component} from 'react'
-import {getSupportLinkPromise} from '../docMeta'
+import {getSupportLinkPromise} from '../../structure/docMeta'
 
 class Support extends Component {
     constructor(props) {

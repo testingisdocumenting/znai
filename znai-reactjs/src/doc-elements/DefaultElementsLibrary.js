@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -70,7 +71,7 @@ import JsxGroup from './jsx/JsxGroup'
 
 import DiagramLegend from './diagrams/DiagramLegend'
 
-import DocumentationLayout from '../layout/DocumentationLayout'
+import { DocumentationLayout } from '../layout/DocumentationLayout'
 import Footer from '../structure/Footer'
 
 const library = {}

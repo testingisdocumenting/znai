@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +15,16 @@
  * limitations under the License.
  */
 
-export function areTocItemEquals(a, b) {
-    return a.dirName === b.dirName &&
-        a.fileName === b.fileName
-}
+import {areTocItemEquals} from './TocItem'
+
+describe('toc items', () => {
+  it('equality', () => {
+    expect(areTocItemEquals(
+      {dirName: 'd1', fileName: 'f1'},
+      {dirName: 'd1', fileName: 'f1', anchorId: 'selected'})).toBeTruthy()
+
+    expect(areTocItemEquals(
+      {dirName: 'd1', fileName: 'f2'},
+      {dirName: 'd1', fileName: 'f1'})).toBeFalsy()
+  })
+})
