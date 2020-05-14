@@ -17,7 +17,7 @@
 import React, {Component} from 'react'
 import ApiSection from './ApiSection'
 
-import {documentationNavigation} from '../../structure/DocumentationNavigation'
+import {documentationNavigation} from '../../../structure/DocumentationNavigation'
 
 import './ApiPageContent.css'
 

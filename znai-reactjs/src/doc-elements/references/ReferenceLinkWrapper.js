@@ -16,8 +16,8 @@
 
 import React from 'react'
 
-import {isExternalUrl} from '../structure/links'
-import {documentationNavigation} from '../structure/DocumentationNavigation'
+import {isExternalUrl} from '../../structure/links'
+import {documentationNavigation} from '../../structure/DocumentationNavigation'
 import {LinkWrapper} from '../default-elements/LinkWrapper'
 
 export function ReferenceLinkWrapper({referenceUrl, className, children}) {

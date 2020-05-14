@@ -16,7 +16,7 @@
  */
 
 import './App.css'
-import './doc-elements/DocumentationLayout.css'
+import './layout/DocumentationLayout.css'
 import './doc-elements/search/Search.css'
 
 import React, {Component} from 'react'
@@ -39,7 +39,7 @@ import {documentationPreparationDemo} from './screens/documentation-preparation/
 import {setDocMeta} from './doc-elements/docMeta'
 import {landingDemo} from './screens/landing/Landing.demo'
 import {jupyterDemo} from './doc-elements/jupyter/Jupyter.demo'
-import {tocPanelDemo} from './doc-elements/structure/toc/TocPanel.demo'
+import {tocPanelDemo} from './structure/toc/TocPanel.demo'
 import {xmlDemo} from './doc-elements/xml/Xml.demo'
 import {xmlPresentationDemo} from './doc-elements/xml/PresentationXml.demo'
 import {searchPopupDemo} from './doc-elements/search/Search.demo'

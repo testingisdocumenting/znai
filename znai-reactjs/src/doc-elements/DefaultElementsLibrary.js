@@ -70,8 +70,8 @@ import JsxGroup from './jsx/JsxGroup'
 
 import DiagramLegend from './diagrams/DiagramLegend'
 
-import DocumentationLayout from './DocumentationLayout'
-import Footer from './structure/Footer'
+import DocumentationLayout from '../layout/DocumentationLayout'
+import Footer from '../structure/Footer'
 
 const library = {}
 const presentationElementHandlers = {}

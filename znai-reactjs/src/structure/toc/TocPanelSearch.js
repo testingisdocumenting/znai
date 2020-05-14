@@ -17,7 +17,7 @@
 
 import React, {Component} from 'react'
 
-import Icon from '../../icons/Icon'
+import Icon from '../../doc-elements/icons/Icon'
 
 import './TocPanelSearch.css'
 

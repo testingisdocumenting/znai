@@ -22,10 +22,10 @@ import {themeRegistry} from '../theme/ThemeRegistry'
 
 import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
-import {documentationNavigation} from './structure/DocumentationNavigation'
+import {documentationNavigation} from '../structure/DocumentationNavigation'
 import {documentationTracking} from './tracking/DocumentationTracking'
 import {textSelection} from './selected-text-extensions/TextSelection'
-import {tableOfContents} from './structure/toc/TableOfContents'
+import {tableOfContents} from '../structure/toc/TableOfContents'
 import {getAllPagesPromise} from './allPages'
 
 import Presentation from './presentation/Presentation'
@@ -46,9 +46,9 @@ import {pageTypesRegistry} from './page/PageTypesRegistry'
 import {injectGlobalOverridesCssLink} from './CssOverrides'
 
 import {updateGlobalDocReferences} from './references/globalDocReferences'
-import {areTocItemEquals} from './structure/tocItem'
+import {areTocItemEquals} from '../structure/tocItem'
 
-import './DocumentationLayout.css'
+import '../layout/DocumentationLayout.css'
 import './search/Search.css'
 
 export class Documentation extends Component {

@@ -19,14 +19,14 @@ import ReactDOM from 'react-dom';
 
 require('normalize.css/normalize.css')
 require('./App.css')
-require('./doc-elements/DocumentationLayout.css')
+require('./layout/DocumentationLayout.css')
 require('./doc-elements/search/Search.css')
 
 const {Documentation} = require('./doc-elements/Documentation')
 const {DocumentationPreparationScreen} = require('./screens/documentation-preparation/DocumentationPreparationScreen')
 const {Landing} = require('./screens/landing/Landing')
 const {themeRegistry} = require('./theme/ThemeRegistry')
-const {documentationNavigation} = require('./doc-elements/structure/DocumentationNavigation')
+const {documentationNavigation} = require('./structure/DocumentationNavigation')
 const {documentationTracking} = require('./doc-elements/tracking/DocumentationTracking')
 const {pageTypesRegistry} = require('./doc-elements/page/PageTypesRegistry')
 const {mergeDocMeta} = require('./doc-elements/docMeta')
