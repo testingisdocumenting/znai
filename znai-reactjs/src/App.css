@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,6 +31,9 @@
     --znai-inlined-code-text-color: var(--znai-black);
     --znai-code-text-size: 13px;
     --znai-code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+    --znai-kbd-background-color: var(--znai-inlined-code-background-color);
+    --znai-kbd-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);
 
     --znai-black: #383838;
     --znai-light-black: #666;

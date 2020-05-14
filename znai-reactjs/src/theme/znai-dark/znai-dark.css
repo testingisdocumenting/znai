@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +33,9 @@
 
     --znai-inlined-code-background-color: #181e21;
     --znai-inlined-code-text-color: #aaa;
+
+    --znai-kbd-background-color: var(--znai-inlined-code-background-color);
+    --znai-kbd-shadow: inset 0 -1px 0 rgba(250, 250, 250, 0.15);
 
     --znai-blockquote-border-color: #333;
     --zani-blockquote-background-color: #181e22;
