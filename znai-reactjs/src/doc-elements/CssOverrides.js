@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {getDocId} from './docMeta';
+import {getDocId} from '../structure/docMeta';
 
 /**
  * @see org.testingisdocumenting.znai.website.WebSiteGlobalOverridePlaceholderExtension

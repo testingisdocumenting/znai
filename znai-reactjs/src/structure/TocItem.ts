@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +15,23 @@
  * limitations under the License.
  */
 
-import * as Promise from 'promise'
+export interface TocItem {
+  dirName: string;
+  fileName: string;
+  sectionTitle?: string;
+  pageTitle?: string;
+  pageMeta?: object;
+  anchorId?: string;
+  items?: TocItem[];
+  pageSectionIdTitles?: TocItemPageSections[];
+}
 
-export {jsonPromise}
+export interface TocItemPageSections {
+  id: string;
+  title: string;
+}
 
-function jsonPromise(url) {
-    return new Promise((resolve, reject) => {
-        fetch(url, {credentials: 'same-origin'}).then((response) => {
-            response.json().then((json) => {
-                resolve(json)
-            }, (error) => {
-                reject("can't parse data from: " + url + "; " + error)
-            })
-        }, (response) => reject("can't read data from: " + response))
-    })
+export function areTocItemEquals(a: TocItem, b: TocItem) {
+  return a.dirName === b.dirName &&
+    a.fileName === b.fileName
 }

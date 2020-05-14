@@ -15,7 +15,7 @@
  */
 
 import {documentationNavigation} from './DocumentationNavigation'
-import {setDocMeta} from '../doc-elements/docMeta';
+import {setDocMeta} from './docMeta';
 
 describe("DocumentationNavigation", () => {
     it("extracts page location from url", () => {

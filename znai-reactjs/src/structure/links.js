@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {getDocId} from '../doc-elements/docMeta'
+import {getDocId} from './docMeta'
 import {documentationNavigation} from './DocumentationNavigation'
 
 function isLocalUrl(url) {

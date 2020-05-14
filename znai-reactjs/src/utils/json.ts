@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +15,18 @@
  * limitations under the License.
  */
 
-import {areTocItemEquals} from './tocItem'
+import Promise from 'promise'
 
-describe('toc items', () => {
-    it('equality', () => {
-        expect(areTocItemEquals(
-            {dirName: 'd1', fileName: 'f1'},
-            {dirName: 'd1', fileName: 'f1', extra: 'e1'})).toBeTruthy()
+export {jsonPromise}
 
-        expect(areTocItemEquals(
-            {dirName: 'd1', fileName: 'f2'},
-            {dirName: 'd1', fileName: 'f1'})).toBeFalsy()
-    })
-})
+function jsonPromise<T>(url: string): Promise<T> {
+  return new Promise((resolve, reject) => {
+    fetch(url, {credentials: 'same-origin'}).then((response) => {
+      response.json().then((json) => {
+        resolve(json)
+      }, (error) => {
+        reject("can't parse data from: " + url + "; " + error)
+      })
+    }, (response) => reject("can't read data from: " + response))
+  })
+}
