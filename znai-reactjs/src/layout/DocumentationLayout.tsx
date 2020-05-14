@@ -21,7 +21,10 @@ import {PageGenError} from '../doc-elements/page-gen-error/PageGenError'
 import {DocMeta} from "../structure/docMeta";
 import {TocItem} from "../structure/TocItem";
 
+import {useViewport} from "./useViewport";
+
 import './DocumentationLayout.css'
+import './MobileLayoutOverrides.css'
 
 interface Props {
   searchPopup: React.ReactNode;
@@ -64,20 +67,23 @@ export function DocumentationLayout({
                                       pageGenError
                                     }: Props) {
   const pageGenErrorPanel = pageGenError ? (<PageGenError error={pageGenError}/>) : null;
+  const {isMobile} = useViewport();
 
   return (
     <div className="documentation">
-      <div className="side-panel">
-        <TocPanel toc={toc}
-                  docMeta={docMeta}
-                  selectedItem={selectedTocItem}
-                  onHeaderClick={onHeaderClick}
-                  onTocItemClick={onTocItemClick}
-                  onTocItemPageSectionClick={onTocItemPageSectionClick}
-                  onSearchClick={onSearchClick}
-                  onNextPage={onNextPage}
-                  onPrevPage={onPrevPage}/>
-      </div>
+      {!isMobile && (
+        <div className="side-panel">
+          <TocPanel toc={toc}
+                    docMeta={docMeta}
+                    selectedItem={selectedTocItem}
+                    onHeaderClick={onHeaderClick}
+                    onTocItemClick={onTocItemClick}
+                    onTocItemPageSectionClick={onTocItemPageSectionClick}
+                    onSearchClick={onSearchClick}
+                    onNextPage={onNextPage}
+                    onPrevPage={onPrevPage}/>
+        </div>
+      )}
 
       {searchPopup}
 
