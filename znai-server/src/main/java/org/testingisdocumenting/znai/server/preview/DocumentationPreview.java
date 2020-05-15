@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +19,8 @@ package org.testingisdocumenting.znai.server.preview;
 
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
-import org.testingisdocumenting.znai.server.DocumentationServer;
+import org.testingisdocumenting.znai.server.ZnaiServer;
+import org.testingisdocumenting.znai.server.sockets.WebSocketHandlers;
 import org.testingisdocumenting.znai.website.WebSite;
 import io.vertx.core.http.HttpServer;
 
@@ -34,11 +36,12 @@ public class DocumentationPreview {
     }
 
     public void start(WebSite webSite, int port) {
-        DocumentationServer documentationServer = new DocumentationServer(webSite.getReactJsBundle(), deployRoot);
+        ZnaiServer znaiServer = new ZnaiServer(webSite.getReactJsBundle(), deployRoot);
         PreviewWebSocketHandler previewWebSocketHandler = new PreviewWebSocketHandler();
-        documentationServer.addSocketHandler(previewWebSocketHandler);
 
-        HttpServer server = documentationServer.create();
+        WebSocketHandlers.add(previewWebSocketHandler);
+
+        HttpServer server = znaiServer.create();
 
         reportPhase("starting server");
         final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(

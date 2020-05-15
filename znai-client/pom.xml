@@ -29,7 +29,7 @@
     <dependencies>
         <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
-            <artifactId>znai</artifactId>
+            <artifactId>znai-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
