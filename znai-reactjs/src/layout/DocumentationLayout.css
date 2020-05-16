@@ -36,6 +36,14 @@
     overflow-y: scroll;
 }
 
+.main-panel.mobile {
+    display: block;
+    height: auto;
+    max-height: initial;
+    min-height: initial;
+    overflow: hidden;
+}
+
 .toc-panel {
     display: flex;
     flex-direction: column;
