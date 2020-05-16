@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~ Copyright 2020 znai maintainers
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,7 +15,9 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -24,24 +26,23 @@
         <version>1.35-SNAPSHOT</version>
     </parent>
 
-    <artifactId>znai-server</artifactId>
+    <artifactId>znai-enterprise</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
-            <artifactId>znai-website-gen</artifactId>
+            <artifactId>znai-server</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.testingisdocumenting.znai</groupId>
-            <artifactId>znai-reactjs</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>commons-cli</groupId>
-            <artifactId>commons-cli</artifactId>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant-compress</artifactId>
         </dependency>
 
         <dependency>

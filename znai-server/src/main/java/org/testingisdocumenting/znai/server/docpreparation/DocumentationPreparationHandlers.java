@@ -21,7 +21,7 @@ import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 import java.util.Set;
 
 public class DocumentationPreparationHandlers {
-    private static Set<DocumentationPreparationHandler> handlers =
+    private static final Set<DocumentationPreparationHandler> handlers =
             ServiceLoaderUtils.load(DocumentationPreparationHandler.class);
 
     public static void prepare(String docId, DocumentationPreparationProgress preparationProgress) {

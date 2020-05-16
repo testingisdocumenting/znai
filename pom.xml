@@ -86,9 +86,9 @@
         <module>znai-console</module>
         <module>znai-ddjt-docs</module>
         <module>znai-diagrams</module>
-        <module>znai</module>
-        <module>znai-site-extensions</module>
+        <module>znai-website-gen</module>
         <module>znai-core</module>
+        <module>znai-enterprise</module>
         <module>znai-latex</module>
         <module>znai-java</module>
         <module>znai-groovy</module>
