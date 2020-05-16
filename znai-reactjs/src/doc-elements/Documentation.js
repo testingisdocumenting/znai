@@ -294,21 +294,25 @@ export class Documentation extends Component {
     }
 
     saveMainPanelDomRef() {
+        const mobile = document.querySelector(".main-panel.mobile")
         this.mainPanelDom = document.querySelector(".main-panel")
+        this.mobile = !!mobile // TODO rewrite this component to TypeScript and drive mobile info from here
     }
 
     enableScrollListener() {
-        // server side rendering guard
-        if (window.addEventListener) {
-            this.saveMainPanelDomRef()
+        this.saveMainPanelDomRef()
+        if (this.mobile) {
+            window.addEventListener("scroll", this.updateCurrentPageSection)
+        } else {
             this.mainPanelDom.addEventListener("scroll", this.updateCurrentPageSection)
         }
     }
 
     disableScrollListener() {
-        // server side rendering guard
-        if (window.removeEventListener) {
-            this.mainPanelDom.removeEventListener("scroll", this.updateCurrentPageSection)
+        if (this.mobile) {
+            window.removeEventListener("scroll", this.updateCurrentPageSection)
+        } else {
+            this.mainPanelDom.addEventListener("scroll", this.updateCurrentPageSection)
         }
     }
 
@@ -331,6 +335,14 @@ export class Documentation extends Component {
         const tocItem = page.tocItem
 
         if (previousPageTocItem === null || !areTocItemEquals(tocItem, previousPageTocItem)) {
+            this.scrollTop()
+        }
+    }
+
+    scrollTop = () => {
+        if (this.mobile) {
+            window.scrollTo(0, 0)
+        } else {
             this.mainPanelDom.scrollTop = 0
         }
     }

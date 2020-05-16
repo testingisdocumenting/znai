@@ -18,6 +18,8 @@ import {useEffect, useState} from "react";
 
 export function useViewport() {
   const [isMobile, setIsMobile] = useState(calcIsMobile());
+  const [width, setWidth] = useState(calcWidth());
+  const [height, setHeight] = useState(calcHeight());
 
   useEffect(() => {
     window.addEventListener('resize', onResize);
@@ -25,14 +27,26 @@ export function useViewport() {
   })
 
   return {
+    width,
+    height,
     isMobile
   }
 
   function onResize() {
-    setIsMobile(calcIsMobile);
+    setIsMobile(calcIsMobile());
+    setHeight(calcHeight());
+    setWidth(calcWidth());
   }
 }
 
 function calcIsMobile() {
-  return window.innerWidth <= 900;
+  return calcWidth() <= 900;
+}
+
+function calcWidth() {
+  return window.innerWidth
+}
+
+function calcHeight() {
+  return window.innerHeight
 }

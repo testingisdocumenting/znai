@@ -69,8 +69,11 @@ export function DocumentationLayout({
   const pageGenErrorPanel = pageGenError ? (<PageGenError error={pageGenError}/>) : null;
   const {isMobile} = useViewport();
 
+  const mainPanelClassName = 'main-panel' + (isMobile ? ' mobile' : '');
+  const DocumentationWrapper = isMobile ? React.Fragment : Documentation;
+
   return (
-    <div className="documentation">
+    <DocumentationWrapper>
       {!isMobile && (
         <div className="side-panel">
           <TocPanel toc={toc}
@@ -87,7 +90,7 @@ export function DocumentationLayout({
 
       {searchPopup}
 
-      <div className="main-panel">
+      <div className={mainPanelClassName}>
         {renderedPage}
 
         <div className="page-bottom">
@@ -97,6 +100,18 @@ export function DocumentationLayout({
       </div>
 
       {pageGenErrorPanel}
+    </DocumentationWrapper>
+  )
+}
+
+interface DocumentationProps {
+  children: React.ReactNode;
+}
+
+function Documentation({children}: DocumentationProps) {
+  return (
+    <div className="documentation">
+      {children}
     </div>
   )
 }
