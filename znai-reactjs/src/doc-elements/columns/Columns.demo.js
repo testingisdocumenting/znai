@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2020 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,38 +17,34 @@
 import React from 'react'
 
 import {elementsLibrary} from '../DefaultElementsLibrary'
-
 import {Columns} from './Columns'
 
-const testData = {
-    config: {
-        border: true,
-        left: {portion: 3}
-    },
-    columns: [{
-        content: [
-            {
-                "text": `It_is_very_`,
-                // "text": `It_is_very_easy_to_add_a_code_snippet_or_an_output_result_It_is_very_easy_to_add_a_code_snipp.`,
-                "type": "SimpleText"
-            },
-        ]
-    },
-        {
+export function columnsDemo(registry) {
+    registry.add('half half', () => <Columns elementsLibrary={elementsLibrary} {...contentAndConfig()}/>)
+}
+
+function contentAndConfig() {
+    return {
+        config: {
+            border: true,
+            left: {portion: 10}
+        },
+        columns: [{
             content: [
                 {
-                    "text": "one liner",
+                    "text": `It_is_very_`,
                     "type": "SimpleText"
-                }
+                },
             ]
-        }]
+        },
+            {
+                content: [
+                    {
+                        "text": "one liner",
+                        "type": "SimpleText"
+                    }
+                ]
+            }]
+    }
 }
 
-
-const ColumnsDemo = () => {
-    return (
-        <Columns elementsLibrary={elementsLibrary} {...testData}/>
-    )
-}
-
-export default ColumnsDemo

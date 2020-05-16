@@ -72,6 +72,7 @@ import {paragraphDemo} from './doc-elements/default-elements/Paragraph.demo'
 import {defaultNextPrevNavigationDemo} from './doc-elements/page/default/PageDefaultNextPrevNavigation.demo'
 import {twoSidesNextPrevNavigationDemo} from './doc-elements/page/two-sides/TwoSidesNextPrevNavigation.demo'
 import {bulletListsDemo} from './doc-elements/bullets/BulletList.demo'
+import {columnsDemo} from "./doc-elements/columns/Columns.demo";
 
 const docMeta = {
     id: 'preview',
@@ -132,6 +133,7 @@ registries.add('layout')
     .registerAsTabs('Pages', pagesDemo)
     .registerAsGrid('Tabs', 0, tabsDemo)
     .registerAsGrid('Tables', 0, tableDemo)
+    .registerAsGrid('Columns', 0, columnsDemo)
     .registerAsTabs('TOC', tocPanelDemo)
     .registerAsRows('Next/Prev navigation', defaultNextPrevNavigationDemo)
     .registerAsRows('Two Sides Next/Prev navigation', twoSidesNextPrevNavigationDemo)
