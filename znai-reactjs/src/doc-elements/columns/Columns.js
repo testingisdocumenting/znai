@@ -17,12 +17,12 @@
 
 import React from 'react'
 
-import {useViewport} from "../../layout/useViewport";
+import {useIsMobile} from "../../theme/ViewPortContext";
 
 import './Columns.css'
 
 const Columns = ({columns, config, isPresentation, slideIdx, ...props}) => {
-    const {isMobile} = useViewport()
+    const isMobile = useIsMobile()
 
     const leftStyle = buildStyle(config.left)
     const rightStyle = buildStyle(config.right)
