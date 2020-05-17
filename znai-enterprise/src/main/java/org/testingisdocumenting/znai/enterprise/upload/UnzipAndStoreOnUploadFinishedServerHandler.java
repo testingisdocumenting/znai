@@ -22,7 +22,9 @@ import org.testingisdocumenting.znai.server.ZnaiServerConfig;
 
 import java.nio.file.Path;
 
-public class UnzipOnUploadFinishedServerHandler implements OnUploadFinishedServerHandler {
+import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.documentationStorage;
+
+public class UnzipAndStoreOnUploadFinishedServerHandler implements OnUploadFinishedServerHandler {
     @Override
     public void onUploadFinished(ZnaiServerConfig config, String docId, Path uploadedPath, String actor) {
         Path unzipDest = config.getDeployRoot().resolve(docId);
@@ -33,5 +35,7 @@ public class UnzipOnUploadFinishedServerHandler implements OnUploadFinishedServe
         UnzipTask unzipTask = new UnzipTask(uploadedPath, unzipDest);
         unzipTask.execute();
         ConsoleOutputs.out(Color.BLUE, "unzipped docs: ", Color.PURPLE, unzipDest);
+
+        documentationStorage().store(docId, "", unzipDest);
     }
 }

@@ -38,6 +38,10 @@ public class Deployer {
         deployed = new HashSet<>();
     }
 
+    public Path getRoot() {
+        return root;
+    }
+
     public void deploy(String relativePath, byte[] content) {
         deploy(Paths.get(relativePath), content);
     }

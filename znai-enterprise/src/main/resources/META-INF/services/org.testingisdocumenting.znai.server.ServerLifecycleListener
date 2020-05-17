@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-org.testingisdocumenting.znai.enterprise.upload.UnzipAndStoreOnUploadFinishedServerHandler
+org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry
