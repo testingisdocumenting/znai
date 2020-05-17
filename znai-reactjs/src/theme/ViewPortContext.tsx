@@ -37,23 +37,23 @@ export function ViewPortProvider({isMobileForced, onLayoutChange, children}: Pro
   useEffect(() => {
     mobileMediaQuery.addListener(onMediaQueryBreakpoint);
     return () => mobileMediaQuery.removeListener(onMediaQueryBreakpoint);
-  })
+
+    function onMediaQueryBreakpoint(e: MediaQueryListEvent) {
+      const isMobile = e.matches;
+
+      if (onLayoutChange) {
+        onLayoutChange(isMobile);
+      }
+
+      setIsMobile(isMobile);
+    }
+  }, [onLayoutChange])
 
   return (
     <ViewPortContext.Provider value={{isMobile}}>
       {children}
     </ViewPortContext.Provider>
   )
-
-  function onMediaQueryBreakpoint(e: MediaQueryListEvent) {
-    const isMobile = e.matches;
-
-    if (onLayoutChange) {
-      onLayoutChange(isMobile);
-    }
-
-    setIsMobile(isMobile);
-  }
 }
 
 export function isViewPortMobile() {
