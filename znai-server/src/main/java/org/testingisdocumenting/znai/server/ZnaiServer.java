@@ -50,6 +50,8 @@ public class ZnaiServer {
         System.setProperty("vertx.cwd", deployRoot.toString());
         System.setProperty("file.encoding","UTF-8");
 
+        ServerLifecycleListeners.beforeStart(serverConfig);
+
         FileUtils.symlinkAwareCreateDirs(deployRoot);
         vertx = Vertx.vertx();
     }
