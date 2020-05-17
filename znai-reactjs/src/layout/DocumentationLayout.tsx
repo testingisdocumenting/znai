@@ -21,7 +21,7 @@ import {PageGenError} from '../doc-elements/page-gen-error/PageGenError'
 import {DocMeta} from "../structure/docMeta";
 import {TocItem} from "../structure/TocItem";
 
-import {useViewport} from "./useViewport";
+import {useIsMobile} from "../theme/ViewPortContext";
 
 import './DocumentationLayout.css'
 import './MobileLayoutOverrides.css'
@@ -67,7 +67,7 @@ export function DocumentationLayout({
                                       pageGenError
                                     }: Props) {
   const pageGenErrorPanel = pageGenError ? (<PageGenError error={pageGenError}/>) : null;
-  const {isMobile} = useViewport();
+  const isMobile = useIsMobile();
 
   const mainPanelClassName = 'main-panel' + (isMobile ? ' mobile' : '');
   const DocumentationWrapper = isMobile ? React.Fragment : Documentation;

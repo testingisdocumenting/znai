@@ -48,6 +48,8 @@ import {injectGlobalOverridesCssLink} from './CssOverrides'
 import {updateGlobalDocReferences} from './references/globalDocReferences'
 import {areTocItemEquals} from '../structure/TocItem'
 
+import {isViewPortMobile, ViewPortProvider} from "../theme/ViewPortContext";
+
 import './search/Search.css'
 
 export class Documentation extends Component {
@@ -75,7 +77,8 @@ export class Documentation extends Component {
             docMeta: docMeta,
             forceSelectedTocItem: null, // via explicit TOC panel click
             autoSelectedTocItem: autoSelectedTocItem, // based on scrolling
-            mode: DocumentationModes.DEFAULT
+            mode: DocumentationModes.DEFAULT,
+            isMobile: isViewPortMobile()
         }
 
         this.onHeaderClick = this.onHeaderClick.bind(this)
@@ -186,27 +189,29 @@ export class Documentation extends Component {
             React.Fragment
 
         return (
-            <PreviewTrackerWrapper>
-                <DocumentationLayout docMeta={docMeta}
-                                     toc={toc}
-                                     theme={theme}
-                                     selectedTocItem={selectedTocItem}
-                                     prevPageTocItem={this.prevPageTocItem}
-                                     nextPageTocItem={this.nextPageTocItem}
-                                     searchPopup={searchPopup}
-                                     renderedPage={renderedPage}
-                                     renderedNextPrevNavigation={renderedNextPrevNavigation}
-                                     renderedFooter={renderedFooter}
-                                     onHeaderClick={this.onHeaderClick}
-                                     onSearchClick={this.onSearchClick}
-                                     onTocItemClick={this.onTocItemClick}
-                                     onTocItemPageSectionClick={this.onTocItemPageSectionClick}
-                                     onNextPage={this.onNextPage}
-                                     onPrevPage={this.onPrevPage}
-                                     textSelection={textSelection}
-                                     pageGenError={pageGenError}/>
-                {preview}
-            </PreviewTrackerWrapper>
+            <ViewPortProvider onLayoutChange={this.onLayoutChange}>
+                <PreviewTrackerWrapper>
+                    <DocumentationLayout docMeta={docMeta}
+                                         toc={toc}
+                                         theme={theme}
+                                         selectedTocItem={selectedTocItem}
+                                         prevPageTocItem={this.prevPageTocItem}
+                                         nextPageTocItem={this.nextPageTocItem}
+                                         searchPopup={searchPopup}
+                                         renderedPage={renderedPage}
+                                         renderedNextPrevNavigation={renderedNextPrevNavigation}
+                                         renderedFooter={renderedFooter}
+                                         onHeaderClick={this.onHeaderClick}
+                                         onSearchClick={this.onSearchClick}
+                                         onTocItemClick={this.onTocItemClick}
+                                         onTocItemPageSectionClick={this.onTocItemPageSectionClick}
+                                         onNextPage={this.onNextPage}
+                                         onPrevPage={this.onPrevPage}
+                                         textSelection={textSelection}
+                                         pageGenError={pageGenError}/>
+                    {preview}
+                </PreviewTrackerWrapper>
+            </ViewPortProvider>
         )
     }
 
@@ -293,15 +298,25 @@ export class Documentation extends Component {
     mouseClickHandler() {
     }
 
+    onLayoutChange = (isMobile) => {
+        this.disableScrollListener()
+        this.setState({isMobile}, () => setTimeout(() => {
+            this.saveMainPanelDomRef() // TODO need a component to track sections
+            this.extractPageSectionNodes()
+            this.updateCurrentPageSection()
+            this.enableScrollListener()
+        }, 0));
+    }
+
     saveMainPanelDomRef() {
-        const mobile = document.querySelector(".main-panel.mobile")
         this.mainPanelDom = document.querySelector(".main-panel")
-        this.mobile = !!mobile // TODO rewrite this component to TypeScript and drive mobile info from here
     }
 
     enableScrollListener() {
+        const {isMobile} = this.state;
+
         this.saveMainPanelDomRef()
-        if (this.mobile) {
+        if (isMobile) {
             window.addEventListener("scroll", this.updateCurrentPageSection)
         } else {
             this.mainPanelDom.addEventListener("scroll", this.updateCurrentPageSection)
@@ -309,7 +324,9 @@ export class Documentation extends Component {
     }
 
     disableScrollListener() {
-        if (this.mobile) {
+        const {isMobile} = this.state;
+
+        if (isMobile) {
             window.removeEventListener("scroll", this.updateCurrentPageSection)
         } else {
             this.mainPanelDom.addEventListener("scroll", this.updateCurrentPageSection)
