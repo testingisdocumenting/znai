@@ -21,8 +21,8 @@ import * as ClipboardJS from 'clipboard'
 
 import {extractTextFromTokens} from './codeUtils'
 
+import { Icon } from '../icons/Icon'
 import './SnippetContainer.css'
-import Icon from '../icons/Icon'
 
 class SnippetContainer extends React.Component {
     state = { displayCopied: false }

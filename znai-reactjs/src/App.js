@@ -39,7 +39,7 @@ import {documentationPreparationDemo} from './screens/documentation-preparation/
 import {setDocMeta} from './structure/docMeta'
 import {landingDemo} from './screens/landing/Landing.demo'
 import {jupyterDemo} from './doc-elements/jupyter/Jupyter.demo'
-import {tocPanelDemo} from './structure/toc/TocPanel.demo'
+import {tocPanelDemo} from './layout/TocPanel.demo'
 import {xmlDemo} from './doc-elements/xml/Xml.demo'
 import {xmlPresentationDemo} from './doc-elements/xml/PresentationXml.demo'
 import {searchPopupDemo} from './doc-elements/search/Search.demo'
@@ -73,6 +73,8 @@ import {defaultNextPrevNavigationDemo} from './doc-elements/page/default/PageDef
 import {twoSidesNextPrevNavigationDemo} from './doc-elements/page/two-sides/TwoSidesNextPrevNavigation.demo'
 import {bulletListsDemo} from './doc-elements/bullets/BulletList.demo'
 import {columnsDemo} from "./doc-elements/columns/Columns.demo";
+import {tocMobileHeaderDemo} from "./layout/mobile/TocMobileHeader.demo";
+import {documentationLayoutDemo} from "./layout/DocumentationLayout.demo";
 
 const docMeta = {
     id: 'preview',
@@ -135,6 +137,8 @@ registries.add('layout')
     .registerAsGrid('Tables', 0, tableDemo)
     .registerAsGrid('Columns', 0, columnsDemo)
     .registerAsTabs('TOC', tocPanelDemo)
+    .registerAsTabs('Mobile Header', tocMobileHeaderDemo)
+    .registerAsTabs('Layout', documentationLayoutDemo)
     .registerAsRows('Next/Prev navigation', defaultNextPrevNavigationDemo)
     .registerAsRows('Two Sides Next/Prev navigation', twoSidesNextPrevNavigationDemo)
 

@@ -22,6 +22,8 @@ import TocHeader from './TocHeader'
 import TocPanelSearch from './TocPanelSearch'
 import {DarkLightThemeSwitcher} from './DarkLightThemeSwitcher'
 
+import './TocPanel.css'
+
 class TocPanel extends Component {
     state = {
         collapsed: false,
@@ -62,7 +64,9 @@ class TocPanel extends Component {
                          onTocItemPageSectionClick={onTocItemPageSectionClick}
                          onTocItemClick={onTocItemClick}/>
 
-                <DarkLightThemeSwitcher/>
+                <div className="znai-toc-bottom-panel">
+                    <DarkLightThemeSwitcher/>
+                </div>
             </div>
         )
     }

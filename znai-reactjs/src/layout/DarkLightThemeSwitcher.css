@@ -15,11 +15,10 @@
  */
 
 .znai-theme-switcher-panel {
-    min-height: 48px;
+    height: 48px;
     display: flex;
     justify-content: flex-end;
     padding: 12px 24px;
-    border-top: 1px solid var(--znai-toc-panel-border-color);
     user-select: none;
     cursor: pointer;
 }

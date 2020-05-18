@@ -16,7 +16,7 @@
 
 import React, {Component} from 'react'
 import {socketUrl} from '../../utils/socket'
-import Icon from '../icons/Icon'
+import { Icon } from '../icons/Icon'
 
 class Server {
     constructor(handlers) {
