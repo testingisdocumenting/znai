@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2020 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-import React from 'react'
-
-import { Icon } from '../icons/Icon'
-
-import './SectionTitle.css'
-
-const SectionTitle = ({id, title}) => {
-    return id ? (
-        <h1 className="section-title" id={id}>{title}
-            <a href={"#" + id}><Icon id="link"/></a>
-        </h1>
-    ) : (
-        // eslint-disable-next-line
-        <h1 className="empty-section-title" id='implicit-section'/>
-    )
+.znai-toc-mobile-panel {
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: var(--znai-toc-panel-background-color);
 }
 
-export default SectionTitle
+.znai-toc-mobile-panel .znai-theme-switcher-panel {
+    grid-area: 1/1/1/1;
+    margin-top: 4px;
+}
+
+.znai-toc-mobile-panel .toc-menu {
+    grid-area: 1/1/1/1;
+}

@@ -22,26 +22,31 @@ import './Icon.css'
 
 const idMapping = generateMapping()
 
-const Icon = ({id, className, onClick}) => {
-    const fullClassName = 'icon ' + id + (className ? ' ' + className : '')
-    const idToUse = idMapping[id] || id
+interface Props {
+  id: string;
+  className?: string;
 
-    const featherIcon = feather.icons[idToUse]
-    return featherIcon ? (
-        <span className={fullClassName}
-              onClick={onClick}
-              dangerouslySetInnerHTML={{__html: featherIcon.toSvg()}}/>
-    ) : (
-        <span>Icon not found: {idToUse}</span>
-    )
+  onClick?(): void;
 }
 
-function generateMapping() {
-    return {
-        time: 'clock',
-        'info-sign': 'info',
-        cog: 'settings'
-    }
+export function Icon({id, className, onClick}: Props) {
+  const fullClassName = 'icon ' + id + (className ? ' ' + className : '')
+  const idToUse = idMapping[id] || id
+
+  const featherIcon = feather.icons[idToUse]
+  return featherIcon ? (
+    <span className={fullClassName}
+          onClick={onClick}
+          dangerouslySetInnerHTML={{__html: featherIcon.toSvg()}}/>
+  ) : (
+    <span>Icon not found: {idToUse}</span>
+  )
 }
 
-export default Icon
+function generateMapping(): {[id: string]: string;} {
+  return {
+    time: 'clock',
+    'info-sign': 'info',
+    cog: 'settings'
+  }
+}

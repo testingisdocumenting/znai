@@ -357,7 +357,8 @@ export class Documentation extends Component {
     }
 
     scrollTop = () => {
-        if (this.mobile) {
+        const {isMobile} = this.state;
+        if (isMobile) {
             window.scrollTo(0, 0)
         } else {
             this.mainPanelDom.scrollTop = 0

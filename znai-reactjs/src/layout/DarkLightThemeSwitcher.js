@@ -28,10 +28,8 @@ export class DarkLightThemeSwitcher extends React.Component {
         const sliderClassName = 'znai-theme-switcher-slider ' + themeLabel
         const switcherNameClassName = 'znai-theme-switcher-name ' + themeLabel
 
-        const forceUpdate = () => this.forceUpdate()
-
         return (
-            <div className="znai-theme-switcher-panel" onClick={toggleTheme}>
+            <div className="znai-theme-switcher-panel" onClick={this.toggleTheme}>
                 <div className="znai-theme-switcher">
                     <div className={sliderClassName}/>
                     <div className={switcherNameClassName}>{themeLabel}</div>
@@ -39,10 +37,11 @@ export class DarkLightThemeSwitcher extends React.Component {
             </div>
         )
 
-        function toggleTheme() {
-            window.znaiTheme.toggle()
-            forceUpdate()
-        }
+    }
+
+    toggleTheme = () => {
+        window.znaiTheme.toggle()
+        this.forceUpdate()
     }
 
     onThemeChange = () => {
