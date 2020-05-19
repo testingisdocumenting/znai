@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,9 +17,13 @@
 
 import React from 'react'
 
+import {useIsMobile} from "../../theme/ViewPortContext";
+
 import './Columns.css'
 
 const Columns = ({columns, config, isPresentation, slideIdx, ...props}) => {
+    const isMobile = useIsMobile()
+
     const leftStyle = buildStyle(config.left)
     const rightStyle = buildStyle(config.right)
 
@@ -37,8 +42,9 @@ const Columns = ({columns, config, isPresentation, slideIdx, ...props}) => {
         </div>
     ) : null
 
+    const className = 'columns content-block' + (isMobile ? ' mobile' : '')
     return (
-        <div className="columns content-block">
+        <div className={className}>
             {left}
             {right}
         </div>

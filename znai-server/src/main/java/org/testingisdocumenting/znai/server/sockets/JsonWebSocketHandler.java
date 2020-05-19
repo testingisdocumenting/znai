@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +17,7 @@
 
 package org.testingisdocumenting.znai.server.sockets;
 
+import io.vertx.core.Vertx;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.utils.JsonUtils;
@@ -29,10 +31,11 @@ import java.util.Map;
 import static org.testingisdocumenting.znai.console.ansi.Color.BLUE;
 import static org.testingisdocumenting.znai.console.ansi.Color.RED;
 
-public abstract class JsonWebSocketHandler implements Handler<ServerWebSocket> {
-    private List<SocketWithUrl> sockets;
-    private String name;
-    private String url;
+public abstract class JsonWebSocketHandler implements WebSocketHandler {
+    private final List<SocketWithUrl> sockets;
+    private final String name;
+    private final String url;
+    protected Vertx vertx;
 
     public JsonWebSocketHandler(String name, String url) {
         this.sockets = new ArrayList<>();
@@ -51,8 +54,18 @@ public abstract class JsonWebSocketHandler implements Handler<ServerWebSocket> {
     }
 
     @Override
+    public void init(Vertx vertx) {
+        this.vertx = vertx;
+    }
+
+    @Override
+    public boolean handles(ServerWebSocket ws) {
+        return ws.uri().startsWith(url);
+    }
+
+    @Override
     public void handle(ServerWebSocket ws) {
-        if (! ws.uri().startsWith(url)) {
+        if (!handles(ws)) {
             return;
         }
 

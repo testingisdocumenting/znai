@@ -18,7 +18,7 @@ import React, {Component} from 'react'
 
 import {pageTypesRegistry} from './PageTypesRegistry'
 import {PresentationHeading} from '../default-elements/PresentationHeading'
-import {areTocItemEquals} from '../structure/tocItem'
+import {areTocItemEquals} from '../../structure/TocItem'
 
 class Page extends Component {
     render() {

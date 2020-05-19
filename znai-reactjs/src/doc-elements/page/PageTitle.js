@@ -18,7 +18,7 @@
 import React from 'react'
 
 import Support from "./Support"
-import Icon from '../icons/Icon'
+import { Icon } from '../icons/Icon'
 
 import "./PageTitle.css"
 

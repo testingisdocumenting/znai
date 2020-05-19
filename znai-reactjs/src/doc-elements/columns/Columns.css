@@ -19,6 +19,14 @@
     flex-wrap: nowrap;
 }
 
+.columns.mobile {
+    display: block;
+}
+
+.columns.mobile .column {
+    margin-bottom: 8px;
+}
+
 .column {
     flex: 1;
 }
@@ -48,4 +56,10 @@
     border-right: 1px solid var(--znai-brand-primary-color);
     margin-right: 20px;
     padding-right: 20px;
+}
+
+.columns.mobile .column.border {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
 }

@@ -46,3 +46,12 @@
     margin-right: 10px;
 }
 
+.next-prev-page-title.prev {
+    text-align: left;
+    margin-right: 32px;
+}
+
+.next-prev-page-title.next {
+    text-align: right;
+    margin-left: 32px;
+}

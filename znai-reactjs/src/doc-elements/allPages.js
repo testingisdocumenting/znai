@@ -17,7 +17,7 @@
 import {jsonPromise} from '../utils/json'
 import pageContentProcessor from './pageContentProcessor.js'
 import {fullResourcePath} from "../utils/resourcePath";
-import {areTocItemEquals} from './structure/tocItem'
+import {areTocItemEquals} from '../structure/TocItem'
 
 // we don't load all-pages using regular javascript script tag
 // this is because we want to ui provide to be responsive while data is loading in the background

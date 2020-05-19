@@ -16,7 +16,7 @@
 
 import React from 'react'
 
-import Icon from '../icons/Icon'
+import { Icon } from '../icons/Icon'
 import {startsWithIcon, removeIcon, extractIconId} from './bulletUtils'
 
 import './ListItem.css'

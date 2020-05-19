@@ -22,11 +22,11 @@ import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.html.HtmlPage;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
-import org.testingisdocumenting.znai.server.DocumentationServer;
+import org.testingisdocumenting.znai.server.ZnaiServer;
 import org.testingisdocumenting.znai.server.preview.DocumentationPreview;
 import org.testingisdocumenting.znai.utils.FileUtils;
-import org.testingisdocumenting.znai.web.WebResource;
 import org.testingisdocumenting.znai.website.ProgressReporter;
+import org.testingisdocumenting.znai.website.WebResource;
 import org.testingisdocumenting.znai.website.WebSite;
 import org.testingisdocumenting.znai.website.modifiedtime.ConstantPageModifiedTime;
 import org.testingisdocumenting.znai.website.modifiedtime.FileBasedPageModifiedTime;
@@ -104,7 +104,7 @@ public class ZnaiCliApp {
     }
 
     private void serve() {
-        HttpServer server = new DocumentationServer(reactJsBundle, config.getDeployRoot()).create();
+        HttpServer server = new ZnaiServer(reactJsBundle, config.getDeployRoot()).create();
         server.listen(config.getPort());
     }
 

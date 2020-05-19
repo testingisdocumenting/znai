@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,7 +43,7 @@ import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import Table from './table/Table'
 import {presentationTabsHandler, Tabs} from './tabs/Tabs'
 import {Columns, presentationColumnsHandler} from './columns/Columns'
-import Icon from './icons/Icon'
+import { Icon } from './icons/Icon'
 import KeyboardShortcut from './keyboard/KeyboardShortcut'
 import Json from './json/Json'
 import presentationJson from './json/PresentationJson'
@@ -70,8 +71,8 @@ import JsxGroup from './jsx/JsxGroup'
 
 import DiagramLegend from './diagrams/DiagramLegend'
 
-import DocumentationLayout from './DocumentationLayout'
-import Footer from './structure/Footer'
+import { DocumentationLayout } from '../layout/DocumentationLayout'
+import Footer from '../structure/Footer'
 
 const library = {}
 const presentationElementHandlers = {}

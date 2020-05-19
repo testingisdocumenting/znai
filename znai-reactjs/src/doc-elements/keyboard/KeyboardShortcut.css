@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,8 +22,14 @@
 }
 
 .znai-keyboard-shortcut kbd {
-    background-color: #f3f1ef;
+    font-size: var(--znai-code-text-size);
+    font-family: var(--znai-code-font-family);
+    background-color: var(--znai-kbd-background-color);
     color: var(--znai-regular-text-color);
+
+    border-radius: 3px;
+    padding: 2px 4px;
+    box-shadow: var(--znai-kbd-shadow);
 }
 
 .znai-keyboard-shortcut > kbd + kbd {

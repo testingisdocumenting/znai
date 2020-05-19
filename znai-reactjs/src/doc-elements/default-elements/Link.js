@@ -15,7 +15,7 @@
  */
 
 import React from 'react'
-import {isLocalUrl} from '../structure/links'
+import {isLocalUrl} from '../../structure/links'
 import {LinkWrapper} from './LinkWrapper'
 
 import './Link.css'

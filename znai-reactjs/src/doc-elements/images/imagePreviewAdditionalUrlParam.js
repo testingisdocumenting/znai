@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {isPreviewEnabled} from '../docMeta'
+import {isPreviewEnabled} from '../../structure/docMeta'
 
 export function imageAdditionalPreviewUrlParam(timestamp) {
     return isPreviewEnabled() && timestamp ?
