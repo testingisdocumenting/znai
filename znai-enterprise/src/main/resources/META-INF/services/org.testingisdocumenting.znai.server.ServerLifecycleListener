@@ -15,3 +15,4 @@
 #
 
 org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry
+org.testingisdocumenting.znai.enterprise.monitoring.BuildOutputMonitor

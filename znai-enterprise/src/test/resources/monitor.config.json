@@ -1,0 +1,11 @@
+{
+  "intervalMillis": 20000,
+  "paths": [
+    {
+      "rootDir": "/Users/mykolagolubyev/work/fake-build-dir",
+      "wildCardPatterns": [
+        "*/*.zip"
+      ]
+    }
+  ]
+}
