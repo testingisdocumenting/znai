@@ -20,11 +20,18 @@ import org.junit.Test
 
 class MonitorConfigTest {
     @Test
-    void "should be able to pass list of wildcards"() {
+    void "should maintain a list of roots and associated wild card patterns"() {
         def config = new MonitorConfig([
-                fileMatchPatterns: ["znai-*.zip", "doxygen.zip"]
-        ])
+                "intervalMillis": 20000,
+                "paths": [[
+                     "rootDir": "/home/fake-build-dir",
+                     "wildCardPatterns": ["*/*.zip", "inner/*/*.zip"]]]])
 
-        config.wildCardPatterns.should == ["znai.zip", "doxygen.zip"]
+        config.intervalMillis.should == 20000
+
+        println config.buildRootsAndPatterns
+        config.buildRootsAndPatterns.size().should == 1
+        config.buildRootsAndPatterns[0].buildRoot.toString().should == "/home/fake-build-dir"
+        config.buildRootsAndPatterns[0].wildCardPatterns.should == ["*/*.zip", "inner/*/*.zip"]
     }
 }
