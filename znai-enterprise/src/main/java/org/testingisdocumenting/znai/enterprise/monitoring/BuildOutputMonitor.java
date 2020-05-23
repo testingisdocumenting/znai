@@ -121,9 +121,9 @@ public class BuildOutputMonitor implements ServerLifecycleListener {
         }
     }
 
-    private static Stream<Path> listFiles(Path tempDir) {
+    private static Stream<Path> listFiles(Path dir) {
         try {
-            return Files.list(tempDir);
+            return Files.list(dir);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
