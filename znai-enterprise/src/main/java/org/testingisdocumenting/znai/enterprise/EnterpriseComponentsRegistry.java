@@ -23,6 +23,8 @@ import org.testingisdocumenting.znai.server.ZnaiServerConfig;
 
 public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
     private static ZnaiServerConfig serverConfig;
+    private static final ZnaiEnterpriseConfig enterpriseConfig = new ZnaiEnterpriseConfig();
+
     private static DocumentationStorage documentationStorage;
 
     @Override
@@ -30,12 +32,16 @@ public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
         serverConfig = config;
 
         documentationStorage = new FileBasedDocumentationStorage(
-                config.getDocStorageRoot(),
+                enterpriseConfig().getDocStorageRoot(),
                 config.getDeployRoot());
     }
 
     public static DocumentationStorage documentationStorage() {
         return documentationStorage;
+    }
+
+    public static ZnaiEnterpriseConfig enterpriseConfig() {
+        return enterpriseConfig;
     }
 
     public static ZnaiServerConfig serverConfig() {

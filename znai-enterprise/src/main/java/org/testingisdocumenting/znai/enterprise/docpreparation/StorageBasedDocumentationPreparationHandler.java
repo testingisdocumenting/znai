@@ -20,13 +20,12 @@ import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparat
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
 import org.testingisdocumenting.znai.website.DocumentationFileBasedTimestamp;
 
-import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.documentationStorage;
-import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.serverConfig;
+import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.*;
 
 public class StorageBasedDocumentationPreparationHandler implements DocumentationPreparationHandler {
     @Override
     public boolean handles(String docId) {
-        return serverConfig().getDocStorageRoot() != null;
+        return enterpriseConfig().getDocStorageRoot() != null;
     }
 
     @Override

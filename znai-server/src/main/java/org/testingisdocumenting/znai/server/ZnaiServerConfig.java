@@ -17,21 +17,17 @@
 package org.testingisdocumenting.znai.server;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class ZnaiServerConfig {
     private final String serverTitle;
     private final String serverType;
 
     private final Path deployRoot;
-    private final Path docStorageRoot;
 
     public ZnaiServerConfig(Path deployRoot) {
         this.serverTitle = propertyOrDefault("znaiTitle", "Company");
         this.serverType = propertyOrDefault("znaiType", "Guides");
         this.deployRoot = deployRoot;
-
-        this.docStorageRoot = buildDocStoragePath();
     }
 
     public String getServerTitle() {
@@ -44,15 +40,6 @@ public class ZnaiServerConfig {
 
     public Path getDeployRoot() {
         return deployRoot;
-    }
-
-    public Path getDocStorageRoot() {
-        return docStorageRoot;
-    }
-
-    private Path buildDocStoragePath() {
-        String docStoragePath = propertyOrDefault("docStoragePath", "");
-        return docStoragePath.isEmpty() ? null : Paths.get(docStoragePath);
     }
 
     private static String propertyOrDefault(String key, String defaultValue) {

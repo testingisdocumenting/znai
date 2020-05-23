@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.enterprise.upload;
+package org.testingisdocumenting.znai.fs;
 
 import org.apache.ant.compress.taskdefs.Unzip;
 import org.apache.tools.ant.Project;
