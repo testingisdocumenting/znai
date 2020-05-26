@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  ~ Copyright 2020 znai maintainers
   ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,7 +40,11 @@
 
     <profiles>
         <profile>
-            <id>docs-building</id>
+            <!--
+            travis will run first build with skipped test, docs will not be built and
+            hence dep will be missed
+            -->
+            <id>build-dist</id>
             <activation>
                 <property>
                     <name>!skipTests</name>
