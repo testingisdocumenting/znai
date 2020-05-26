@@ -12,4 +12,4 @@ addons:
   apt:
     packages:
       - graphviz
-script: mvn -B package
+script: mvn -B install
