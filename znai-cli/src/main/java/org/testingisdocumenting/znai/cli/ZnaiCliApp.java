@@ -34,6 +34,8 @@ import org.testingisdocumenting.znai.website.modifiedtime.PageModifiedTimeStrate
 import io.vertx.core.http.HttpServer;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -101,11 +103,15 @@ public class ZnaiCliApp {
     private void preview() {
         DocumentationPreview preview = new DocumentationPreview(config.getDeployRoot());
         preview.start(webSite, config.getPort());
+
+        reportHostPort(config.getPort(), "/preview");
     }
 
     private void serve() {
         HttpServer server = new ZnaiServer(reactJsBundle, config.getDeployRoot()).create();
         server.listen(config.getPort());
+
+        reportHostPort(config.getPort(), "");
     }
 
     public void export() {
@@ -191,5 +197,14 @@ public class ZnaiCliApp {
 
     private void announceMode(String name) {
         ConsoleOutputs.out(Color.BLUE, "znai ", Color.YELLOW, name + " mode");
+    }
+
+    private static void reportHostPort(int port, String relativeUrl) {
+        try {
+            ConsoleOutputs.out("http://", InetAddress.getLocalHost().getHostName(), ":",
+                    port, relativeUrl.isEmpty() ? "" : relativeUrl);
+        } catch (UnknownHostException e) {
+            ConsoleOutputs.err("Cannot extract host name");
+        }
     }
 }
