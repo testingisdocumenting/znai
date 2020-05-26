@@ -34,6 +34,14 @@
             <classifier>shaded</classifier>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.testingisdocumenting.znai</groupId>
+            <artifactId>znai-docs</artifactId>
+            <classifier>docs-export</classifier>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
     </dependencies>
 
     <build>

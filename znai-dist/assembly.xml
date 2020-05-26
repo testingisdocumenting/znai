@@ -32,6 +32,16 @@
             </includes>
             <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
         </dependencySet>
+
+        <dependencySet>
+            <unpack>true</unpack>
+            <outputDirectory>doc-export</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <includes>
+                <include>org.testingisdocumenting.znai:znai-docs:*</include>
+            </includes>
+            <outputFileNameMapping>docs-export</outputFileNameMapping>
+        </dependencySet>
     </dependencySets>
 
     <fileSets>

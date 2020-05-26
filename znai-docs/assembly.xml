@@ -15,7 +15,7 @@
   -->
 
 <assembly>
-    <id>docs-source</id>
+    <id>docs-export</id>
     <formats>
         <format>zip</format>
     </formats>
@@ -25,8 +25,11 @@
             <directory>${project.build.directory}/znai-export</directory>
             <outputDirectory/>
             <includes>
-                <include>*</include>
+                <include>**/*</include>
             </includes>
+            <excludes>
+                <exclude>.vertx/**</exclude>
+            </excludes>
         </fileSet>
     </fileSets>
 </assembly>
