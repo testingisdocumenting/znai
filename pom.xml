@@ -120,6 +120,7 @@
         <module>znai-testing-examples</module>
         <module>znai-shaded</module>
         <module>znai-dist</module>
+        <module>znai-tests</module>
     </modules>
 
     <properties>
