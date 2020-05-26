@@ -30,10 +30,7 @@ public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
     @Override
     public void beforeStart(ZnaiServerConfig config) {
         serverConfig = config;
-
-        documentationStorage = new FileBasedDocumentationStorage(
-                enterpriseConfig().getDocStorageRoot(),
-                config.getDeployRoot());
+        documentationStorage = createStorage();
     }
 
     public static DocumentationStorage documentationStorage() {
@@ -46,5 +43,11 @@ public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
 
     public static ZnaiServerConfig serverConfig() {
         return serverConfig;
+    }
+
+    private static DocumentationStorage createStorage() {
+        return new FileBasedDocumentationStorage(
+                enterpriseConfig().getDocStorageRoot(),
+                serverConfig.getDeployRoot());
     }
 }
