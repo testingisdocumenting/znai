@@ -26,7 +26,6 @@
     </parent>
 
     <artifactId>znai-docs</artifactId>
-    <packaging>jar</packaging>
 
     <dependencies>
         <!-- to force running of the tests before documentation -->
