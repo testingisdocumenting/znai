@@ -24,7 +24,7 @@ Using class path lookup you can include snippets from projects deployed to, for 
 
     :include-java: org/junit/Assert.java {entry: "assertArrayEquals"}
 
-:include-java: org/junit/Assert.java {entry: "assertArrayEquals"}
+--:include-java: org/junit/Assert.java {entry: "assertArrayEquals"}
 
 # HTTP Lookup Location
 

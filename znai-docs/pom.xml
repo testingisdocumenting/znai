@@ -25,15 +25,16 @@
     </parent>
 
     <artifactId>znai-docs</artifactId>
+    <packaging>pom</packaging>
 
     <dependencies>
         <!-- to force running of the tests before documentation -->
-        <dependency>
-            <groupId>org.testingisdocumenting.znai</groupId>
-            <artifactId>znai-testing-examples</artifactId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.testingisdocumenting.znai</groupId>-->
+<!--            <artifactId>znai-testing-examples</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--            <type>test-jar</type>-->
+<!--        </dependency>-->
     </dependencies>
 
     <profiles>
@@ -52,6 +53,19 @@
                 </resources>
 
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>resources</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
                     <plugin>
                         <groupId>org.testingisdocumenting.znai</groupId>
                         <artifactId>znai-maven-plugin</artifactId>
