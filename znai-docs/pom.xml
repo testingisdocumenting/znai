@@ -112,7 +112,7 @@
                         <executions>
                             <execution>
                                 <id>zip-docs-export</id>
-                                <phase>package</phase>
+                                <phase>prepare-package</phase>
                                 <goals>
                                     <goal>single</goal>
                                 </goals>
