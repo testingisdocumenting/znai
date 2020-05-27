@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.website;
+package org.testingisdocumenting.znai.enterprise.storage;
 
 import org.testingisdocumenting.znai.utils.FileUtils;
 
