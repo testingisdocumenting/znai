@@ -198,7 +198,6 @@ public class WebSite {
         deployGlobalDocReferences();
         deployAuxiliaryFiles();
         deployResources();
-        deployTimestamp();
     }
 
     public TocItem tocItemByPath(Path path) {
@@ -334,11 +333,6 @@ public class WebSite {
         WebSiteResourcesProviders.jsClientOnlyResources().forEach(deployer::deploy);
         WebSiteResourcesProviders.additionalFilesToDeploy().forEach(deployer::deploy);
         cfg.webResources.forEach(deployer::deploy);
-    }
-
-    private void deployTimestamp() {
-        reportPhase("deploying timestamp file");
-        DocumentationFileBasedTimestamp.store(deployer.getRoot());
     }
 
     private void createTopLevelToc() {

@@ -18,7 +18,6 @@ package org.testingisdocumenting.znai.enterprise.storage;
 
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
-import org.testingisdocumenting.znai.website.DocumentationFileBasedTimestamp;
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
 
 import java.io.IOException;
@@ -38,10 +37,18 @@ public class FileBasedDocumentationStorage implements DocumentationStorage {
     }
 
     @Override
+    public boolean contains(String docId) {
+        Path src = storageRoot.resolve(docId).resolve("");
+        return Files.exists(src);
+    }
+
+    @Override
     public void store(String docId, String version, Path generatedDocumentation) {
         Path dest = storageRoot.resolve(docId).resolve(version);
         deleteDirectory(dest);
         copyDirectory(generatedDocumentation, dest);
+
+        DocumentationFileBasedTimestamp.store(dest);
 
         ConsoleOutputs.out("stored ", Color.WHITE, docId, Color.BLUE, " as ", Color.PURPLE, dest);
     }
