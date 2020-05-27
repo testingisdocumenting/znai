@@ -16,7 +16,8 @@
 
 package org.testingisdocumenting.znai.enterprise.storage;
 
-import org.apache.commons.io.FileUtils;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.website.DocumentationFileBasedTimestamp;
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
 
@@ -24,6 +25,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+
+import static org.testingisdocumenting.znai.fs.FsUtils.*;
 
 public class FileBasedDocumentationStorage implements DocumentationStorage {
     private final Path storageRoot;
@@ -36,9 +39,11 @@ public class FileBasedDocumentationStorage implements DocumentationStorage {
 
     @Override
     public void store(String docId, String version, Path generatedDocumentation) {
-        Path dest = docsRoot.resolve(docId).resolve(version);
+        Path dest = storageRoot.resolve(docId).resolve(version);
         deleteDirectory(dest);
         copyDirectory(generatedDocumentation, dest);
+
+        ConsoleOutputs.out("stored ", Color.WHITE, docId, Color.BLUE, " as ", Color.PURPLE, dest);
     }
 
     @Override
@@ -75,29 +80,5 @@ public class FileBasedDocumentationStorage implements DocumentationStorage {
     @Override
     public long lastUpdateTime(String docId, String version) {
         return DocumentationFileBasedTimestamp.read(storageRoot.resolve(docId).resolve(version));
-    }
-
-    private void deleteDirectory(Path dest) {
-        try {
-            FileUtils.deleteDirectory(dest.toFile());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void moveDirectory(Path src, Path dest) {
-        try {
-            FileUtils.moveDirectory(src.toFile(), dest.toFile());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void copyDirectory(Path src, Path dest) {
-        try {
-            FileUtils.copyDirectory(src.toFile(), dest.toFile());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

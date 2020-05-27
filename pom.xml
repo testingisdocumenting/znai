@@ -21,7 +21,7 @@
 
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-parent</artifactId>
-    <version>1.35-SNAPSHOT</version>
+    <version>1.36-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Znai</name>
@@ -125,12 +125,13 @@
         <ant.version>1.10.5</ant.version>
         <ant-compress.version>1.5</ant-compress.version>
         <jsoup.version>1.10.2</jsoup.version>
-        <commons-io.version>2.6</commons-io.version>
         <freemarker.version>2.3.23</freemarker.version>
+        <commons-io.version>2.6</commons-io.version>
         <commons-cli.version>1.4</commons-cli.version>
         <commons-csv.version>1.4</commons-csv.version>
         <commons-compress.version>1.19</commons-compress.version>
         <commons-lang3.version>3.5</commons-lang3.version>
+        <commons-codec.version>1.4</commons-codec.version>
         <plantuml.version>1.2017.16</plantuml.version>
         <json-path.version>2.4.0</json-path.version>
         <slf4j-simple.version>1.7.25</slf4j-simple.version>
@@ -195,6 +196,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
             </dependency>
 
             <dependency>
@@ -314,12 +321,6 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-xml</artifactId>
-                <version>${jackson.verson}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-yaml</artifactId>
                 <version>${jackson.verson}</version>
             </dependency>
 

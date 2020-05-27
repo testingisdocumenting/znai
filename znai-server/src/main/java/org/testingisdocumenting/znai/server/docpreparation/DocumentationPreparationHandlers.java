@@ -21,24 +21,28 @@ import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 import java.util.Set;
 
 public class DocumentationPreparationHandlers {
+    private static final DocumentationPreparationHandler localDiskHandler = new LocalDiskOnlyPreparationHandler();
+
     private static final Set<DocumentationPreparationHandler> handlers =
             ServiceLoaderUtils.load(DocumentationPreparationHandler.class);
 
     public static void prepare(String docId, DocumentationPreparationProgress preparationProgress) {
-        DocumentationPreparationHandler handler = handlers.stream()
-                .filter(h -> h.handles(docId))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException(
-                        "can't find handler for documentation preparation of documentation: " + docId));
-
+        DocumentationPreparationHandler handler = findHandler(docId);
         handler.prepare(docId, preparationProgress);
     }
 
     public static boolean isReady(String docId) {
-        return handlers.isEmpty() || handlers.stream().anyMatch(h -> h.isReady(docId));
+        return findHandler(docId).isReady(docId);
     }
 
     public static void add(DocumentationPreparationHandler handler) {
         handlers.add(handler);
+    }
+
+    private static DocumentationPreparationHandler findHandler(String docId) {
+        return handlers.stream()
+                .filter(h -> h.handles(docId))
+                .findFirst()
+                .orElse(localDiskHandler);
     }
 }

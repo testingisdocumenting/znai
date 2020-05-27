@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.enterprise.upload;
 
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.fs.FsUtils;
 import org.testingisdocumenting.znai.server.ZnaiServerConfig;
 
 import java.nio.file.Path;
@@ -32,8 +33,7 @@ public class UnzipAndStoreOnUploadFinishedServerHandler implements OnUploadFinis
         ConsoleOutputs.out(Color.BLUE, "unzipping docs: ", Color.PURPLE, uploadedPath, Color.BLACK, " to ",
                 Color.PURPLE, unzipDest);
 
-        UnzipTask unzipTask = new UnzipTask(uploadedPath, unzipDest);
-        unzipTask.execute();
+        FsUtils.unzip(uploadedPath, unzipDest);
         ConsoleOutputs.out(Color.BLUE, "unzipped docs: ", Color.PURPLE, unzipDest);
 
         documentationStorage().store(docId, "", unzipDest);

@@ -55,18 +55,8 @@ public class DocumentationPreview {
                 webSite.getAuxiliaryFilesRegistry().getAllPaths(),
                 fileChangeHandler);
 
-        reportHost(port);
-
         webSite.getAuxiliaryFilesRegistry().registerListener(fileWatcher);
         fileWatcher.start();
-    }
-
-    private void reportHost(int port) {
-        try {
-            ConsoleOutputs.out("http://", InetAddress.getLocalHost().getHostName(), ":", port, "/preview");
-        } catch (UnknownHostException e) {
-            // ignore
-        }
     }
 
     private void reportPhase(String phase) {
