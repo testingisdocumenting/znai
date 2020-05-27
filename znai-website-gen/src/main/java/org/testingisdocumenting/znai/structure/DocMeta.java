@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,18 +24,23 @@ import java.util.Map;
 
 public class DocMeta {
     private String id;
-    private String type;
-    private String title;
+    private final String type;
+    private final String title;
+    private final String category;
+    private final String description;
     private boolean previewEnabled;
-    private Map<String, ?> docMetaMap;
+    private final Map<String, ?> docMetaMap;
 
     public DocMeta(String metaJson) {
         this(JsonUtils.deserializeAsMap(metaJson));
     }
 
     public DocMeta(Map<String, ?> docMetaMap) {
-        this.type = docMetaMap.containsKey("type") ? docMetaMap.get("type").toString() : "no-type";
-        this.title = docMetaMap.containsKey("title") ? docMetaMap.get("title").toString() : "no-title";
+        this.type = stringValue(docMetaMap, "type", "no-type");
+        this.title = stringValue(docMetaMap, "title", "no-title");
+        this.category = stringValue(docMetaMap, "category", "Un-categorized");
+        this.description = stringValue(docMetaMap, "description", "no description");
+
         this.docMetaMap = docMetaMap;
     }
 
@@ -68,6 +74,14 @@ public class DocMeta {
         return title;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public Map<String, Object> toMap() {
         Map<String, Object> result = new HashMap<>();
         result.put("id", id);
@@ -83,5 +97,9 @@ public class DocMeta {
 
     public void setPreviewEnabled(boolean previewEnabled) {
         this.previewEnabled = previewEnabled;
+    }
+
+    private static String stringValue(Map<String, ?> docMetaMap, String key, String defaultValue) {
+        return docMetaMap.containsKey(key) ? docMetaMap.get(key).toString() : defaultValue;
     }
 }

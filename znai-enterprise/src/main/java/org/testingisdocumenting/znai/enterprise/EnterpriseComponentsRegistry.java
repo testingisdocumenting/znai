@@ -16,6 +16,7 @@
 
 package org.testingisdocumenting.znai.enterprise;
 
+import org.testingisdocumenting.znai.enterprise.landing.LandingDocEntriesProviders;
 import org.testingisdocumenting.znai.enterprise.storage.DocumentationStorage;
 import org.testingisdocumenting.znai.enterprise.storage.FileBasedDocumentationStorage;
 import org.testingisdocumenting.znai.server.ServerLifecycleListener;
@@ -46,8 +47,12 @@ public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
     }
 
     private static DocumentationStorage createStorage() {
-        return new FileBasedDocumentationStorage(
+        FileBasedDocumentationStorage documentationStorage = new FileBasedDocumentationStorage(
                 enterpriseConfig().getDocStorageRoot(),
                 serverConfig.getDeployRoot());
+
+        LandingDocEntriesProviders.add(documentationStorage);
+
+        return documentationStorage;
     }
 }
