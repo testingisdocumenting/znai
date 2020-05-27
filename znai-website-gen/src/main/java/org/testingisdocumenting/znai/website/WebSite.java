@@ -194,6 +194,7 @@ public class WebSite {
         generatePages();
         generateSearchIndex();
         deployToc();
+        deployMeta();
         deployGlobalAssets();
         deployGlobalDocReferences();
         deployAuxiliaryFiles();
@@ -362,6 +363,11 @@ public class WebSite {
         reportPhase("deploying table of contents");
         String tocJson = JsonUtils.serializePrettyPrint(toc.toListOfMaps());
         deployer.deploy(tocJavaScript, "toc = " + tocJson);
+    }
+
+    private void deployMeta() {
+        reportPhase("deploying meta");
+        deployer.deploy("meta.json", JsonUtils.serializePrettyPrint(docMeta.toMap()));
     }
 
     private void deployGlobalAssets() {
