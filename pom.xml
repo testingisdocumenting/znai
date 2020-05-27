@@ -51,6 +51,17 @@
             </roles>
             <timezone>America/New_York</timezone>
         </developer>
+        <developer>
+            <id>byc1234</id>
+            <name>Hwansoo Lee</name>
+            <email>hwansoo.lee@twosigma.com</email>
+            <organization>Two Sigma</organization>
+            <organizationUrl>https://twosigma.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>America/New_York</timezone>
+        </developer>
     </developers>
 
     <licenses>
