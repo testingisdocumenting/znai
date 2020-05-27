@@ -26,6 +26,7 @@
     width: 600px;
     height: 55px;
 
+    color: var(--znai-regular-text-color);
     background-color: var(--znai-landing-input-background-color);
     outline: none;
     box-sizing: border-box;
