@@ -169,7 +169,7 @@ public class WebSite {
     }
 
     public Map<String, Path> getOutsideDocsRequestedResources() {
-        return localResourceResolver.getOutsideDocRequestedResources();
+        return resourceResolver.getOutsideDocRequestedResources();
     }
 
     public void parseAndDeploy() {

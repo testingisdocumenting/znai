@@ -103,9 +103,7 @@ public class ZnaiCliApp {
 
     private void preview() {
         DocumentationPreview preview = new DocumentationPreview(config.getDeployRoot());
-        preview.start(webSite, config.getPort());
-
-        reportHostPort(config.getPort(), "/preview");
+        preview.start(webSite, config.getPort(), () -> reportHostPort(config.getPort(), "/preview"));
     }
 
     private void serve() {

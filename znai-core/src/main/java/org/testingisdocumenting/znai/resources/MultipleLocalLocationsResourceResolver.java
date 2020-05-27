@@ -21,9 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -31,13 +29,11 @@ public class MultipleLocalLocationsResourceResolver implements ResourcesResolver
     private final Path docRootPath;
     private final List<Path> lookupPaths;
     private final ThreadLocal<Path> currentFilePath;
-    private final Map<String, Path> outsideDocRequestedResources;
 
     public MultipleLocalLocationsResourceResolver(Path docRootPath) {
         this.docRootPath = docRootPath;
         this.lookupPaths = new ArrayList<>();
         this.currentFilePath = new ThreadLocal<>();
-        this.outsideDocRequestedResources = new HashMap<>();
     }
 
     @Override
@@ -65,19 +61,9 @@ public class MultipleLocalLocationsResourceResolver implements ResourcesResolver
 
     @Override
     public Path fullPath(String path) {
-        Path result = allLocationsStream(path).filter(Files::exists).findFirst()
+        return allLocationsStream(path).filter(Files::exists).findFirst()
                 .orElseThrow(() -> new IllegalStateException(
                         "either file disappeared or canResolve implementation needs to be checked."));
-
-        if (!Paths.get(path).isAbsolute() && !isInsideDoc(result)) {
-            outsideDocRequestedResources.put(path, result);
-        }
-
-        return result;
-    }
-
-    public Map<String, Path> getOutsideDocRequestedResources() {
-        return outsideDocRequestedResources;
     }
 
     @Override
