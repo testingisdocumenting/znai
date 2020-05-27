@@ -35,7 +35,7 @@ public class DocumentationPreview {
         this.deployRoot = deployRoot;
     }
 
-    public void start(WebSite webSite, int port) {
+    public void start(WebSite webSite, int port, Runnable onStart) {
         ZnaiServer znaiServer = new ZnaiServer(webSite.getReactJsBundle(), deployRoot);
         PreviewWebSocketHandler previewWebSocketHandler = new PreviewWebSocketHandler();
 
@@ -56,6 +56,9 @@ public class DocumentationPreview {
                 fileChangeHandler);
 
         webSite.getAuxiliaryFilesRegistry().registerListener(fileWatcher);
+
+        onStart.run();
+
         fileWatcher.start();
     }
 

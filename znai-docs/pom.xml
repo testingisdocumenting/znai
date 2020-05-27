@@ -85,6 +85,17 @@
                                     <goal>export</goal>
                                 </goals>
                             </execution>
+                            <execution>
+                                <id>validate-export</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                                <configuration>
+                                    <docId>znai-from-export</docId>
+                                    <sourceRoot>${project.build.directory}/znai-export</sourceRoot>
+                                </configuration>
+                            </execution>
                         </executions>
                         <configuration>
                             <docId>znai</docId>

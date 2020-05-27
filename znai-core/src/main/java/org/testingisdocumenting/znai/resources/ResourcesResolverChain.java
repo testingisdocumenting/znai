@@ -21,14 +21,15 @@ import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.joining;
-
 public class ResourcesResolverChain implements ResourcesResolver {
-    private List<ResourcesResolver> resolvers = new ArrayList<>(ServiceLoaderUtils.load(ResourcesResolver.class));
+    private final Map<String, Path> outsideDocRequestedResources = new HashMap<>();
+    private final List<ResourcesResolver> resolvers = new ArrayList<>(ServiceLoaderUtils.load(ResourcesResolver.class));
 
     public void addResolver(ResourcesResolver resourcesResolver) {
         resolvers.add(resourcesResolver);
@@ -72,7 +73,13 @@ public class ResourcesResolverChain implements ResourcesResolver {
 
     @Override
     public Path fullPath(String path) {
-        return resolver(path).fullPath(path);
+        Path result = resolver(path).fullPath(path);
+
+        if (!isInsideDoc(result)) {
+            outsideDocRequestedResources.put(path, result);
+        }
+
+        return result;
     }
 
     @Override
@@ -88,6 +95,10 @@ public class ResourcesResolverChain implements ResourcesResolver {
     @Override
     public boolean isLocalFile(String path) {
         return resolver(path).isLocalFile(path);
+    }
+
+    public Map<String, Path> getOutsideDocRequestedResources() {
+        return outsideDocRequestedResources;
     }
 
     private void initializeWithFilteredPaths(ResourcesResolver r, Stream<String> filteredLookupPaths) {
