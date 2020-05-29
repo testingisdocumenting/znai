@@ -39,17 +39,20 @@ scenario('scaffolds new documentation') {
     cli.run(scaffoldCommand)
 
     def docRoot = scaffoldDir.resolve('znai')
-    fs.textContent(docRoot.resolve('toc')).should contain('chapter-1one\n' +
+    fs.textContent(docRoot.resolve('toc')).should contain('chapter-one\n' +
             '    getting-started')
 }
 
-sscenario('sample serve') {
+scenario('simple serve') {
     def znaiDocs = '../../../../znai-docs/target'
     def serveCommand = "${unzippedZnai.bin} --serve --deploy=${znaiDocs}"
 
-    def znaiServe = cli.backgroundCommand(serveCommand)
-    znaiServe.start()
+    def znaiServe = cli.runBackground(serveCommand)
 
-    sleep 2000
+    znaiServe.output.waitTo contain(":3333")
+
+    browser.open("http://localhost:3333")
+    $(".toc-panel-header").waitTo == 'Company Guides'
+
     znaiServe.stop()
 }
