@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -113,8 +114,8 @@ public class FileBasedDocumentationStorage implements DocumentationStorage, Land
     }
 
     synchronized private Map<String, DocMeta> enumerateDocMetas() {
-        if (storageRoot == null) {
-            return Collections.emptyMap();
+        if (storageRoot == null || !Files.exists(storageRoot)) {
+            return new HashMap<>();
         }
 
         try {
