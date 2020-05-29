@@ -53,7 +53,7 @@ public class FileBasedDocumentationStorage implements DocumentationStorage, Land
     }
 
     @Override
-    public void store(String docId, String version, Path generatedDocumentation) {
+    synchronized public void store(String docId, String version, Path generatedDocumentation) {
         Path dest = storageRoot.resolve(docId).resolve(version);
         deleteDirectory(dest);
         copyDirectory(generatedDocumentation, dest);
@@ -66,8 +66,8 @@ public class FileBasedDocumentationStorage implements DocumentationStorage, Land
     }
 
     @Override
-    public void prepare(String docId, String version,
-                        DocumentationPreparationProgress progress) {
+    synchronized public void prepare(String docId, String version,
+                                     DocumentationPreparationProgress progress) {
         progress.reportProgress("Checking documentation", Collections.emptyMap(), 10);
         Path src = storageRoot.resolve(docId).resolve(version);
 
@@ -112,7 +112,11 @@ public class FileBasedDocumentationStorage implements DocumentationStorage, Land
                         entry.getValue().getDescription()));
     }
 
-    private Map<String, DocMeta> enumerateDocMetas() {
+    synchronized private Map<String, DocMeta> enumerateDocMetas() {
+        if (storageRoot == null) {
+            return Collections.emptyMap();
+        }
+
         try {
             return Files.list(storageRoot)
                     .filter(file -> Files.isDirectory(file))

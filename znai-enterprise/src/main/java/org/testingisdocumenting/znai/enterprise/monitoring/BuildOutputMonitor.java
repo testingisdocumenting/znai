@@ -70,7 +70,7 @@ public class BuildOutputMonitor implements ServerLifecycleListener {
     private void scan() {
         List<Path> found = filesFinder.find();
         found.stream()
-                .filter(this::isChecksumDifferent)
+                .filter(this::isChecksumDifferentAndUpdate)
                 .forEach(this::process);
     }
 
@@ -85,22 +85,24 @@ public class BuildOutputMonitor implements ServerLifecycleListener {
     private void unzipAndStore(Path zip) {
         Path tempDir = FsUtils.createTempDir("znai-unzipped-doc");
 
-        FsUtils.unzip(zip, tempDir);
+        try {
+            FsUtils.unzip(zip, tempDir);
 
-        Path docsDir = listFiles(tempDir)
-                .filter(Files::isDirectory)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("no directory found inside zip"));
+            Path docsDir = listFiles(tempDir)
+                    .filter(Files::isDirectory)
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("no directory found inside zip"));
 
-        String docId = docsDir.getFileName().toString();
+            String docId = docsDir.getFileName().toString();
+            ConsoleOutputs.out("detected ", Color.WHITE, docId, Color.BLUE, " at ", Color.PURPLE, zip);
 
-        ConsoleOutputs.out("detected ", Color.WHITE, docId, Color.BLUE, " at ", Color.PURPLE, zip);
-        documentationStorage().store(docId, "", docsDir);
-
-        FsUtils.deleteDirectory(tempDir);
+            documentationStorage().store(docId, "", docsDir);
+        } finally {
+            FsUtils.deleteDirectory(tempDir);
+        }
     }
 
-    private boolean isChecksumDifferent(Path path) {
+    private boolean isChecksumDifferentAndUpdate(Path path) {
         String previousCheckSum = checkSumByPath.get(path);
         String newCheckSum = checkSum(path);
 
