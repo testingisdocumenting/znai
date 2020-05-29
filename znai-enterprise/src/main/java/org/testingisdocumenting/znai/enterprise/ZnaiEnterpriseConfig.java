@@ -16,14 +16,25 @@
 
 package org.testingisdocumenting.znai.enterprise;
 
+import org.testingisdocumenting.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.utils.JsonUtils;
+
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.Map;
 
 public class ZnaiEnterpriseConfig {
+    private static final String CONFIG_FILE_NAME = "znai-enterprise.cfg";
+
     private final Path fsMonitorConfigPath;
     private final Path docStorageRoot;
+    private final Map<String, Object> jsonConfig;
 
     public ZnaiEnterpriseConfig() {
+        jsonConfig = getJsonConfig();
+
         fsMonitorConfigPath = buildFsMonitorConfigPath();
         docStorageRoot = buildDocStorageRoot();
     }
@@ -37,15 +48,27 @@ public class ZnaiEnterpriseConfig {
     }
 
     private Path buildFsMonitorConfigPath() {
-        return Paths.get(propertyOrDefault("znaiFsMonitorConfig", "monitor.config.json"));
+        return Paths.get(configValueOrDefault("znaiFsMonitorConfig", "monitor.config.json"));
     }
 
     private Path buildDocStorageRoot() {
-        String docStoragePath = propertyOrDefault("znaiDocStoragePath", "");
+        String docStoragePath = configValueOrDefault("znaiDocStoragePath", "");
         return docStoragePath.isEmpty() ? null : Paths.get(docStoragePath);
     }
 
-    private static String propertyOrDefault(String key, String defaultValue) {
+    private String configValueOrDefault(String key, String defaultValue) {
+        return systemPropertyOrDefault(key, jsonConfig.getOrDefault(key, defaultValue).toString());
+    }
+
+    private static String systemPropertyOrDefault(String key, String defaultValue) {
         return System.getProperty(key, defaultValue);
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> getJsonConfig() {
+        Path configPath = Paths.get(CONFIG_FILE_NAME);
+
+        return Files.exists(configPath) ? (Map < String, Object >) JsonUtils.deserializeAsMap(
+                FileUtils.fileTextContent(configPath)): Collections.emptyMap();
     }
 }

@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -113,6 +114,10 @@ public class FileBasedDocumentationStorage implements DocumentationStorage, Land
     }
 
     private Map<String, DocMeta> enumerateDocMetas() {
+        if (!Files.exists(storageRoot)) {
+            return new HashMap<>();
+        }
+
         try {
             return Files.list(storageRoot)
                     .filter(file -> Files.isDirectory(file))
