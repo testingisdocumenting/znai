@@ -1,0 +1,12 @@
+{
+  "viewOn" : {
+    "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+    "title" : "View On GitHub"
+  },
+  "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+  "id" : "znai",
+  "title" : "Znai",
+  "type" : "User Guide",
+  "category" : "Documentation",
+  "previewEnabled" : false
+}
