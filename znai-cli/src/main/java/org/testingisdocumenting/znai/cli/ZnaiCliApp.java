@@ -98,11 +98,6 @@ public class ZnaiCliApp {
         } else if (config.isExportMode()) {
             export();
         } else if (config.isCustomCommand()) {
-            boolean setDefaultUploadCommandHandler =
-                    Boolean.valueOf(System.getProperty("znai.set.default.uploadCommandHandler", "true"));
-            if (setDefaultUploadCommandHandler) {
-                CliCommandHandlers.add(new CliUploadCommandHandler());
-            }
             config.getSpecifiedCustomCommand().handle(
                     new CliCommandConfig(config.getDocId(), config.getSourceRoot(), config.getDeployRoot(), config.getActor()));
         }
