@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.36-SNAPSHOT</version>
+        <version>1.38-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-docs</artifactId>
@@ -84,6 +84,17 @@
                                 <goals>
                                     <goal>export</goal>
                                 </goals>
+                            </execution>
+                            <execution>
+                                <id>validate-export</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                                <configuration>
+                                    <docId>znai-from-export</docId>
+                                    <sourceRoot>${project.build.directory}/znai-export</sourceRoot>
+                                </configuration>
                             </execution>
                         </executions>
                         <configuration>

@@ -52,8 +52,8 @@
 .snippet-container pre {
     border: none;
     background: none;
-    margin: 10px 0;
-    padding: 0 0 0 16px;
+    margin: 0;
+    padding: 10px 0 10px 16px;
     border-radius: 0;
     font-size: var(--znai-code-text-size);
     line-height: 18px;

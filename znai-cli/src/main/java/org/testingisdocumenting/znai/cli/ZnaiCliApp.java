@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -102,9 +103,7 @@ public class ZnaiCliApp {
 
     private void preview() {
         DocumentationPreview preview = new DocumentationPreview(config.getDeployRoot());
-        preview.start(webSite, config.getPort());
-
-        reportHostPort(config.getPort(), "/preview");
+        preview.start(webSite, config.getPort(), () -> reportHostPort(config.getPort(), "/preview"));
     }
 
     private void serve() {

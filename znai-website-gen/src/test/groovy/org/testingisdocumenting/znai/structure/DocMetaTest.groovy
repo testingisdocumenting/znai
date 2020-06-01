@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,18 +22,25 @@ import org.junit.Test
 class DocMetaTest {
     @Test
     void "should create a new doc meta instance based on existing data and new json"() {
-        def existing = new DocMeta([title: 'old title', type: 'old type'])
+        def existing = new DocMeta([title: 'old title', type: 'old type', category: 'tools', description: 'some desc'])
         existing.id = 'doc-id'
         existing.previewEnabled = true
+        existing.category.should == 'tools'
+        existing.description.should == 'some desc'
 
         def clone = existing.cloneWithNewJson("""
 {"title": "new title", 
-"type": "guide"}
+"type": "guide",
+"category": "super tools",
+"description": "new desc"
+}
 """)
 
         clone.id.should == 'doc-id'
         clone.previewEnabled.should == true
         clone.title.should == 'new title'
         clone.type.should == 'guide'
+        clone.category.should == 'super tools'
+        clone.description.should == 'new desc'
     }
 }

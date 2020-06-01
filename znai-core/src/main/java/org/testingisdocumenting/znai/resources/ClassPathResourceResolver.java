@@ -16,14 +16,14 @@
 
 package org.testingisdocumenting.znai.resources;
 
+import org.apache.commons.io.IOUtils;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.utils.ResourceUtils;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,7 +31,6 @@ import java.util.stream.Stream;
 
 public class ClassPathResourceResolver implements ResourcesResolver {
     private final ConcurrentHashMap<String, Path> fullPathByResourcePath = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<Path, String> resourcePathByFullPath = new ConcurrentHashMap<>();
 
     @Override
     public void initialize(Stream<String> filteredLookupPaths) {
@@ -46,9 +45,8 @@ public class ClassPathResourceResolver implements ResourcesResolver {
     public boolean canResolve(String resourcePath) {
         boolean canResolve = ResourceUtils.resourceStream(resourcePath) != null;
         if (canResolve) {
-            Path path = Paths.get(resourcePath);
+            Path path = createTempFile(resourcePath);
             fullPathByResourcePath.put(resourcePath, path);
-            resourcePathByFullPath.put(path, resourcePath);
         }
 
         return canResolve;
@@ -62,21 +60,6 @@ public class ClassPathResourceResolver implements ResourcesResolver {
     @Override
     public String textContent(String path) {
         return ResourceUtils.textContent(path);
-    }
-
-    @Override
-    public BufferedImage imageContent(String path) {
-        try {
-            return ImageIO.read(ResourceUtils.resourceStream(path));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't load image " + path, e);
-        }
-    }
-
-    @Override
-    public String textContent(Path path) {
-        String resourcePath = resourcePathByFullPath.get(path);
-        return ResourceUtils.textContent(resourcePath);
     }
 
     @Override
@@ -102,5 +85,21 @@ public class ClassPathResourceResolver implements ResourcesResolver {
     @Override
     public AuxiliaryFile runtimeAuxiliaryFile(String origin) {
         throw new UnsupportedOperationException("unsupported operation: runtimeAuxiliaryFile(origin)");
+    }
+
+    // we create temp file as opposite to resolving content directly from classpath
+    // so we can have physical file for documentation export process
+    private Path createTempFile(String resourcePath) {
+        try {
+            Path tempFile = Files.createTempFile("classpath", "");
+            tempFile.toFile().deleteOnExit();
+
+            InputStream inputStream = ResourceUtils.resourceStream(resourcePath);
+            Files.write(tempFile, IOUtils.toByteArray(inputStream));
+
+            return tempFile;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

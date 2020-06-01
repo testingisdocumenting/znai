@@ -18,14 +18,15 @@ package org.testingisdocumenting.znai.enterprise.docpreparation;
 
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationHandler;
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
-import org.testingisdocumenting.znai.website.DocumentationFileBasedTimestamp;
+import org.testingisdocumenting.znai.enterprise.storage.DocumentationFileBasedTimestamp;
 
 import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.*;
 
 public class StorageBasedDocumentationPreparationHandler implements DocumentationPreparationHandler {
     @Override
     public boolean handles(String docId) {
-        return enterpriseConfig().getDocStorageRoot() != null;
+        return enterpriseConfig().getDocStorageRoot() != null &&
+                documentationStorage().contains(docId);
     }
 
     @Override

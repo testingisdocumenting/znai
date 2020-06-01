@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparat
 import java.nio.file.Path;
 
 public interface DocumentationStorage {
+    boolean contains(String docId);
     void store(String docId, String version, Path generatedDocumentation);
     void prepare(String docId, String version, DocumentationPreparationProgress progress);
     long lastUpdateTime(String docId, String version);

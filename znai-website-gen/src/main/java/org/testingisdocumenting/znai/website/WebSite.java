@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -168,7 +169,7 @@ public class WebSite {
     }
 
     public Map<String, Path> getOutsideDocsRequestedResources() {
-        return localResourceResolver.getOutsideDocRequestedResources();
+        return resourceResolver.getOutsideDocRequestedResources();
     }
 
     public void parseAndDeploy() {
@@ -193,11 +194,11 @@ public class WebSite {
         generatePages();
         generateSearchIndex();
         deployToc();
+        deployMeta();
         deployGlobalAssets();
         deployGlobalDocReferences();
         deployAuxiliaryFiles();
         deployResources();
-        deployTimestamp();
     }
 
     public TocItem tocItemByPath(Path path) {
@@ -335,11 +336,6 @@ public class WebSite {
         cfg.webResources.forEach(deployer::deploy);
     }
 
-    private void deployTimestamp() {
-        reportPhase("deploying timestamp file");
-        DocumentationFileBasedTimestamp.store(deployer.getRoot());
-    }
-
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
         toc = markupParsingConfiguration.createToc(componentsRegistry);
@@ -367,6 +363,11 @@ public class WebSite {
         reportPhase("deploying table of contents");
         String tocJson = JsonUtils.serializePrettyPrint(toc.toListOfMaps());
         deployer.deploy(tocJavaScript, "toc = " + tocJson);
+    }
+
+    private void deployMeta() {
+        reportPhase("deploying meta");
+        deployer.deploy("meta.json", JsonUtils.serializePrettyPrint(docMeta.toMap()));
     }
 
     private void deployGlobalAssets() {

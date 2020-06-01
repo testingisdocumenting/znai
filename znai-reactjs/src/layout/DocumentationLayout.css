@@ -36,6 +36,20 @@
     overflow-y: scroll;
 }
 
+::-webkit-scrollbar {
+    width: 7px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--znai-scrollbar-thumb-color);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--znai-scrollbar-background-color);
+}
+
+
 .main-panel.mobile {
     display: block;
     height: auto;
