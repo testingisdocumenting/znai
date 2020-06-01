@@ -18,6 +18,8 @@
 package org.testingisdocumenting.znai.cli;
 
 import org.testingisdocumenting.znai.cli.extension.CliCommandConfig;
+import org.testingisdocumenting.znai.cli.extension.CliCommandHandlers;
+import org.testingisdocumenting.znai.cli.extension.upload.CliUploadCommandHandler;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput;
 import org.testingisdocumenting.znai.console.ansi.Color;
@@ -96,6 +98,11 @@ public class ZnaiCliApp {
         } else if (config.isExportMode()) {
             export();
         } else if (config.isCustomCommand()) {
+            boolean setDefaultUploadCommandHandler =
+                    Boolean.valueOf(System.getProperty("znai.set.default.uploadCommandHandler", "true"));
+            if (setDefaultUploadCommandHandler) {
+                CliCommandHandlers.add(new CliUploadCommandHandler());
+            }
             config.getSpecifiedCustomCommand().handle(
                     new CliCommandConfig(config.getDocId(), config.getSourceRoot(), config.getDeployRoot(), config.getActor()));
         }
