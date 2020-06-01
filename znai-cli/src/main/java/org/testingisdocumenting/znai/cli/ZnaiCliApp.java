@@ -18,8 +18,6 @@
 package org.testingisdocumenting.znai.cli;
 
 import org.testingisdocumenting.znai.cli.extension.CliCommandConfig;
-import org.testingisdocumenting.znai.cli.extension.CliCommandHandlers;
-import org.testingisdocumenting.znai.cli.extension.upload.CliUploadCommandHandler;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput;
 import org.testingisdocumenting.znai.console.ansi.Color;
