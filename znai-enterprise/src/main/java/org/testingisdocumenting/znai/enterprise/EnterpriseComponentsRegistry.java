@@ -19,24 +19,15 @@ package org.testingisdocumenting.znai.enterprise;
 import org.testingisdocumenting.znai.enterprise.authorization.NixGroupsBasedAuthorizationHandler;
 import org.testingisdocumenting.znai.enterprise.landing.LandingDocEntriesProviders;
 import org.testingisdocumenting.znai.enterprise.storage.DocumentationStorage;
-import org.testingisdocumenting.znai.enterprise.storage.FileBasedDocumentationStorage;
+import org.testingisdocumenting.znai.enterprise.storage.DocumentationStorageFactories;
 import org.testingisdocumenting.znai.server.ServerLifecycleListener;
 import org.testingisdocumenting.znai.server.ZnaiServerConfig;
 import org.testingisdocumenting.znai.server.auth.AuthorizationHandlers;
 
 public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
-    private static ZnaiServerConfig serverConfig;
     private static final ZnaiEnterpriseConfig enterpriseConfig = new ZnaiEnterpriseConfig();
-
+    private static ZnaiServerConfig serverConfig;
     private static DocumentationStorage documentationStorage;
-
-    @Override
-    public void beforeStart(ZnaiServerConfig config) {
-        serverConfig = config;
-        documentationStorage = createStorage();
-
-        registerAuthz(config);
-    }
 
     public static DocumentationStorage documentationStorage() {
         return documentationStorage;
@@ -51,13 +42,18 @@ public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
     }
 
     private static DocumentationStorage createStorage() {
-        FileBasedDocumentationStorage documentationStorage = new FileBasedDocumentationStorage(
-                enterpriseConfig().getDocStorageRoot(),
-                serverConfig.getDeployRoot());
-
-        LandingDocEntriesProviders.add(documentationStorage);
+        DocumentationStorage documentationStorage = DocumentationStorageFactories.create(serverConfig);
+        LandingDocEntriesProviders.add(new FileBasedLandingDocEntriesProvider(enterpriseConfig().getDocStorageRoot()));
 
         return documentationStorage;
+    }
+
+    @Override
+    public void beforeStart(ZnaiServerConfig config) {
+        serverConfig = config;
+        documentationStorage = createStorage();
+
+        registerAuthz(config);
     }
 
     private void registerAuthz(ZnaiServerConfig config) {
