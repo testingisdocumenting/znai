@@ -28,6 +28,8 @@ import io.vertx.ext.web.impl.RoutingContextDecorator;
 import org.testingisdocumenting.znai.html.HtmlPage;
 import org.testingisdocumenting.znai.html.reactjs.HtmlReactJsPage;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
+import org.testingisdocumenting.znai.server.auth.AuthorizationHandlers;
+import org.testingisdocumenting.znai.server.auth.BasicInjectedAuthentication;
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationHandlers;
 import org.testingisdocumenting.znai.server.docpreparation.NoOpDocumentationPreparationProgress;
 import org.testingisdocumenting.znai.server.sockets.WebSocketHandlers;
@@ -106,6 +108,12 @@ public class ZnaiServer {
             }
 
             String docId = extractDocId(ctx);
+
+            if (!isAuthorized(ctx, docId)) {
+                ctx.fail(403);
+                return;
+            }
+
             if (DocumentationPreparationHandlers.isReady(docId)) {
                 pagesStaticHandler.handle(ctx);
             } else if (isNotDocPageRequest(ctx)) {
@@ -121,6 +129,13 @@ public class ZnaiServer {
                 serveDocumentationPreparationPage(ctx, docId);
             }
         });
+    }
+
+    private boolean isAuthorized(RoutingContext ctx, String docId) {
+        String authorization = ctx.request().headers().get("Authorization");
+        String userId = BasicInjectedAuthentication.extractUserId(authorization);
+
+        return AuthorizationHandlers.isAuthorized(userId);
     }
 
     private void redirectToTrailingSlash(RoutingContext ctx) {

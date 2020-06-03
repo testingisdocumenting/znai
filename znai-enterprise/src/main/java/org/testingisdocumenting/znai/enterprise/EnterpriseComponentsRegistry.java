@@ -16,12 +16,14 @@
 
 package org.testingisdocumenting.znai.enterprise;
 
+import org.testingisdocumenting.znai.enterprise.authorization.NixGroupsBasedAuthorizationHandler;
 import org.testingisdocumenting.znai.enterprise.landing.FileBasedLandingDocEntriesProvider;
 import org.testingisdocumenting.znai.enterprise.landing.LandingDocEntriesProviders;
 import org.testingisdocumenting.znai.enterprise.storage.DocumentationStorage;
 import org.testingisdocumenting.znai.enterprise.storage.DocumentationStorageFactories;
 import org.testingisdocumenting.znai.server.ServerLifecycleListener;
 import org.testingisdocumenting.znai.server.ZnaiServerConfig;
+import org.testingisdocumenting.znai.server.auth.AuthorizationHandlers;
 
 public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
     private static final ZnaiEnterpriseConfig enterpriseConfig = new ZnaiEnterpriseConfig();
@@ -51,5 +53,13 @@ public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
     public void beforeStart(ZnaiServerConfig config) {
         serverConfig = config;
         documentationStorage = createStorage();
+
+        registerAuthz(config);
+    }
+
+    private void registerAuthz(ZnaiServerConfig config) {
+        if (config.isAuthorizationUsingNixGroups()) {
+            AuthorizationHandlers.add(new NixGroupsBasedAuthorizationHandler());
+        }
     }
 }
