@@ -25,4 +25,5 @@ public interface DocumentationStorage {
     void store(String docId, String version, Path generatedDocumentation);
     void prepare(String docId, String version, DocumentationPreparationProgress progress);
     long lastUpdateTime(String docId, String version);
+    void remove(String docId);
 }

@@ -18,33 +18,23 @@ package org.testingisdocumenting.znai.enterprise.storage;
 
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
-import org.testingisdocumenting.znai.enterprise.landing.LandingDocEntriesProvider;
-import org.testingisdocumenting.znai.enterprise.landing.LandingDocEntry;
+import org.testingisdocumenting.znai.enterprise.landing.LandingDocEntriesProviders;
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
-import org.testingisdocumenting.znai.structure.DocMeta;
-import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.testingisdocumenting.znai.fs.FsUtils.*;
 
-public class FileBasedDocumentationStorage implements DocumentationStorage, LandingDocEntriesProvider {
-    public static final String META_FILE_NAME = "meta.json";
+public class FileBasedDocumentationStorage implements DocumentationStorage {
     private final Path storageRoot;
     private final Path docsRoot;
-    private final Map<String, DocMeta> docMetaByDocId;
 
     public FileBasedDocumentationStorage(Path storageRoot, Path docsRootPath) {
         this.storageRoot = storageRoot;
         this.docsRoot = docsRootPath;
-        this.docMetaByDocId = enumerateDocMetas();
     }
 
     @Override
@@ -61,7 +51,7 @@ public class FileBasedDocumentationStorage implements DocumentationStorage, Land
 
         DocumentationFileBasedTimestamp.store(dest);
 
-        docMetaByDocId.put(docId, new DocMeta(FileUtils.fileTextContent(generatedDocumentation.resolve(META_FILE_NAME))));
+        LandingDocEntriesProviders.store(docId, generatedDocumentation);
 
         ConsoleOutputs.out("stored ", Color.WHITE, docId, Color.BLUE, " as ", Color.PURPLE, dest);
     }
@@ -103,31 +93,14 @@ public class FileBasedDocumentationStorage implements DocumentationStorage, Land
     }
 
     @Override
-    public Stream<LandingDocEntry> provide() {
-        return docMetaByDocId.entrySet().stream()
-                .map(entry -> new LandingDocEntry(
-                        entry.getKey(),
-                        entry.getValue().getTitle(),
-                        "",
-                        entry.getValue().getCategory(),
-                        entry.getValue().getDescription()));
-    }
-
-    synchronized private Map<String, DocMeta> enumerateDocMetas() {
-        if (storageRoot == null || !Files.exists(storageRoot)) {
-            return new HashMap<>();
-        }
-
-        try {
-            return Files.list(storageRoot)
-                    .filter(file -> Files.isDirectory(file))
-                    .filter(file -> Files.exists(file.resolve("meta.json")))
-                    .map(file -> file.resolve("meta.json"))
-                    .collect(Collectors.toMap(
-                            fileMeta -> fileMeta.getParent().getFileName().toString(),
-                            fileMeta -> new DocMeta(FileUtils.fileTextContent(fileMeta))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    public void remove(String docId) {
+        if (contains(docId)) {
+            Path src = storageRoot.resolve(docId).resolve("");
+            try {
+                Files.delete(src);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

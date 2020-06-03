@@ -16,8 +16,11 @@
 
 package org.testingisdocumenting.znai.enterprise.landing;
 
+import java.nio.file.Path;
 import java.util.stream.Stream;
 
 public interface LandingDocEntriesProvider {
     Stream<LandingDocEntry> provide();
+
+    void store(String docId, Path generatedDocumentation);
 }

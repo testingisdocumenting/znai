@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.enterprise.landing;
 
 import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
+import java.nio.file.Path;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -31,5 +32,9 @@ public class LandingDocEntriesProviders {
 
     public static Stream<LandingDocEntry> provide() {
         return providers.stream().flatMap(LandingDocEntriesProvider::provide);
+    }
+
+    public static void store(String docId, Path generatedDocumentation) {
+        providers.stream().forEach(p -> p.store(docId, generatedDocumentation));
     }
 }
