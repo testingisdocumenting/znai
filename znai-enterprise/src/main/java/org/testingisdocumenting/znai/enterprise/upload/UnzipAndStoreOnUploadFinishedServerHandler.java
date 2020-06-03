@@ -16,6 +16,7 @@
 
 package org.testingisdocumenting.znai.enterprise.upload;
 
+import org.apache.commons.lang3.StringUtils;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.fs.FsUtils;
@@ -26,6 +27,14 @@ import java.nio.file.Path;
 import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.documentationStorage;
 
 public class UnzipAndStoreOnUploadFinishedServerHandler implements OnUploadFinishedServerHandler {
+    private static final String SERVER_URL = System.getProperty("znai.server.url");
+
+    static {
+        if (StringUtils.isNotBlank(SERVER_URL)) {
+            OnUploadFinishedServerHandlers.add(new UnzipAndStoreOnUploadFinishedServerHandler());
+        }
+    }
+
     @Override
     public void onUploadFinished(ZnaiServerConfig config, String docId, Path uploadedPath, String actor) {
         Path unzipDest = config.getDeployRoot().resolve(docId);

@@ -13,17 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.testingisdocumenting.znai.enterprise.storage;
 
-import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
+import org.testingisdocumenting.znai.server.ZnaiServerConfig;
+import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
-import java.nio.file.Path;
+import java.util.Set;
 
-public interface DocumentationStorage {
-    boolean contains(String docId);
-    void store(String docId, String version, Path generatedDocumentation);
-    void prepare(String docId, String version, DocumentationPreparationProgress progress);
-    long lastUpdateTime(String docId, String version);
-    void remove(String docId);
+public class DocumentationStorageFactories {
+    private static final Set<DocumentationStorageFactory> handlers =
+            ServiceLoaderUtils.load(DocumentationStorageFactory.class);
+
+    public static DocumentationStorage create(ZnaiServerConfig config) {
+        return handlers.stream().findFirst().map(h -> h.create(config)).orElse(null);
+    }
+
+    public static void add(DocumentationStorageFactory handler) {
+        handlers.add(handler);
+    }
 }
