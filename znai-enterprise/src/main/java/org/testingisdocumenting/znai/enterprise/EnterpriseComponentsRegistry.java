@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.enterprise;
 
 import org.testingisdocumenting.znai.enterprise.authorization.NixGroupsBasedAuthorizationHandler;
+import org.testingisdocumenting.znai.enterprise.landing.FileBasedLandingDocEntriesProvider;
 import org.testingisdocumenting.znai.enterprise.landing.LandingDocEntriesProviders;
 import org.testingisdocumenting.znai.enterprise.storage.DocumentationStorage;
 import org.testingisdocumenting.znai.enterprise.storage.DocumentationStorageFactories;
