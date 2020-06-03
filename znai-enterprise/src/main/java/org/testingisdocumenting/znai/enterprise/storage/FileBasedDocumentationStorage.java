@@ -47,7 +47,7 @@ public class FileBasedDocumentationStorage implements DocumentationStorage {
     }
 
     @Override
-    synchronized public void store(String docId, String version, Path generatedDocumentation, String actor) {
+    synchronized public void store(String actor, String docId, String version, Path generatedDocumentation) {
         Path dest = storageRoot.resolve(docId).resolve(version);
         deleteDirectory(dest);
         copyDirectory(generatedDocumentation, dest);
@@ -97,7 +97,7 @@ public class FileBasedDocumentationStorage implements DocumentationStorage {
     }
 
     @Override
-    public void remove(String docId, String actor) {
+    public void remove(String actor, String docId) {
         if (contains(docId)) {
             Path src = storageRoot.resolve(docId).resolve("");
             try {
