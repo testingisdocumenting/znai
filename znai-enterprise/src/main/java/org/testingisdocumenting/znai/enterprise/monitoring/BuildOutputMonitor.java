@@ -96,7 +96,7 @@ public class BuildOutputMonitor implements ServerLifecycleListener {
             String docId = docsDir.getFileName().toString();
             ConsoleOutputs.out("detected ", Color.WHITE, docId, Color.BLUE, " at ", Color.PURPLE, zip);
 
-            documentationStorage().store(docId, "", docsDir);
+            documentationStorage().store(docId, "", docsDir, "");
         } finally {
             FsUtils.deleteDirectory(tempDir);
         }

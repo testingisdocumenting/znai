@@ -50,7 +50,7 @@ public class OnRemoveDeleteCachedServerHandler implements OnRemoveFinishedServer
             }
             ConsoleOutputs.out(Color.BLUE, "deleted docs: ", Color.PURPLE, docPath, " from file system.");
 
-            documentationStorage().remove(docId);
+            documentationStorage().remove(docId, actor);
             ConsoleOutputs.out(Color.BLUE, "deleted docs: ", Color.PURPLE, docPath, " from stroage.");
         } catch (IOException e) {
             ConsoleOutputs.out(Color.BLUE, "failed to delete docs: ", Color.PURPLE, docPath);
