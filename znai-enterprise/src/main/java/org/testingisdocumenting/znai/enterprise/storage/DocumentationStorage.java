@@ -22,8 +22,8 @@ import java.nio.file.Path;
 
 public interface DocumentationStorage {
     boolean contains(String docId);
-    void store(String docId, String version, Path generatedDocumentation, String actor);
+    void store(String actor, String docId, String version, Path generatedDocumentation);
     void prepare(String docId, String version, DocumentationPreparationProgress progress);
     long lastUpdateTime(String docId, String version);
-    void remove(String docId, String actor);
+    void remove(String actor, String docId);
 }

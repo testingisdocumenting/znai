@@ -45,6 +45,6 @@ public class UnzipAndStoreOnUploadFinishedServerHandler implements OnUploadFinis
         FsUtils.unzip(uploadedPath, unzipDest);
         ConsoleOutputs.out(Color.BLUE, "unzipped docs: ", Color.PURPLE, unzipDest);
 
-        documentationStorage().store(docId, "", unzipDest, actor);
+        documentationStorage().store(actor, docId, "", unzipDest);
     }
 }
