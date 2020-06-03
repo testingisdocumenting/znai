@@ -1,0 +1,2 @@
+GET http://localhost:3333/znai
+Authorization: Basic dGVzdHVzZXIgZHVtbXlwYXNzd29yZA==
