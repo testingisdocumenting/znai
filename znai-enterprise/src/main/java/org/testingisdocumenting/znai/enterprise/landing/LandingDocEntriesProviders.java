@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2020 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package org.testingisdocumenting.znai.enterprise.landing;
 
+import org.testingisdocumenting.znai.structure.DocMeta;
 import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
-import java.nio.file.Path;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -34,7 +34,7 @@ public class LandingDocEntriesProviders {
         return providers.stream().flatMap(LandingDocEntriesProvider::provide);
     }
 
-    public static void store(String docId, Path generatedDocumentation) {
-        providers.stream().forEach(p -> p.store(docId, generatedDocumentation));
+    public static void onNewDocMeta(String docId, DocMeta docMeta) {
+        providers.stream().forEach(p -> p.onNewDocMeta(docId, docMeta));
     }
 }

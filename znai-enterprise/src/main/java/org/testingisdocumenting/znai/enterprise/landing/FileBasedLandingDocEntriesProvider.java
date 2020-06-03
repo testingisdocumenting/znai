@@ -49,8 +49,8 @@ public class FileBasedLandingDocEntriesProvider implements LandingDocEntriesProv
     }
 
     @Override
-    public void store(String docId, Path generatedDocumentation) {
-        docMetaByDocId.put(docId, new DocMeta(FileUtils.fileTextContent(generatedDocumentation.resolve(META_FILE_NAME))));
+    public void onNewDocMeta(String docId, DocMeta docMeta) {
+        docMetaByDocId.put(docId, docMeta);
     }
 
     private Map<String, DocMeta> enumerateDocMetas() {

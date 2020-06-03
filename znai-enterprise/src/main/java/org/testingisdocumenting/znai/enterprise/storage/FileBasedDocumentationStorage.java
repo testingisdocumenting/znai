@@ -20,12 +20,15 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.enterprise.landing.LandingDocEntriesProviders;
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
+import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 
+import static org.testingisdocumenting.znai.enterprise.landing.FileBasedLandingDocEntriesProvider.META_FILE_NAME;
 import static org.testingisdocumenting.znai.fs.FsUtils.*;
 
 public class FileBasedDocumentationStorage implements DocumentationStorage {
@@ -51,7 +54,8 @@ public class FileBasedDocumentationStorage implements DocumentationStorage {
 
         DocumentationFileBasedTimestamp.store(dest);
 
-        LandingDocEntriesProviders.store(docId, generatedDocumentation);
+        LandingDocEntriesProviders.onNewDocMeta(docId,
+                new DocMeta(FileUtils.fileTextContent(generatedDocumentation.resolve(META_FILE_NAME))));
 
         ConsoleOutputs.out("stored ", Color.WHITE, docId, Color.BLUE, " as ", Color.PURPLE, dest);
     }
