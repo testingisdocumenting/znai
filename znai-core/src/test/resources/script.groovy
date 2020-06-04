@@ -3,5 +3,5 @@ import a.b.c.ClassName
 
 class HelloWorld {
     def a
-    def b
+    int b
 }
