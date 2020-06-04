@@ -42,7 +42,7 @@ class FileIncludePluginTest {
 
     @Test
     void "should extract file snippet based on start and stop end lines excluding them"() {
-        def text = resultingSnippet("file.txt", "{startLine: 'number', endLine: 'stop', exclude: true}")
+        def text = resultingSnippet("file.txt", "{startLine: 'number', endLine: 'stop', excludeStartEnd: true}")
 
         text.should == ""
     }
@@ -71,11 +71,11 @@ class FileIncludePluginTest {
 
     @Test
     void "should automatically strip extra indentation"() {
-        def text = resultingSnippet("script.groovy", "{startLine: 'class', endLine: '}', exclude: true}")
+        def text = resultingSnippet("script.groovy", "{startLine: 'class', endLine: '}', excludeStartEnd: true}")
 
         text.should ==
                 "def a\n" +
-                "def b"
+                "int b"
     }
 
     @Test
@@ -87,6 +87,28 @@ class FileIncludePluginTest {
         allImports.should ==
                 "import e.d.g.AnotherName\n" +
                 "import a.b.c.ClassName"
+    }
+
+    @Test
+    void "should only include lines matching regexps list"() {
+        def result = resultingSnippet("script.groovy", "{includeRegexp: ['int', 'def']}")
+        result.should == "def a\n" +
+                "int b"
+    }
+
+    @Test
+    void "should exclude lines matching regexp"() {
+        def withoutMarkers = resultingSnippet("sample-with-marker.py", "{excludeRegexp: '# exa..le'}")
+        withoutMarkers.should == "print(\"hello\")"
+    }
+
+    @Test
+    void "should exclude lines matching regexps list"() {
+        def withoutMarkers = resultingSnippet("sample-with-multi-marker.py",
+                '{excludeRegexp: ["# example", "# .rocedur."]}')
+        withoutMarkers.should == "print(\"hello\")\n" +
+                "\n" +
+                "print(\"hello world\")"
     }
 
     @Test
@@ -110,14 +132,14 @@ class FileIncludePluginTest {
                 "\n" +
                 "class HelloWorld {\n" +
                 "    def a\n" +
-                "    def b\n" +
+                "    int b\n" +
                 "}")
     }
 
     @Test
     void "should highlight lines from a highlight text file"() {
         def props = resultingProps("script.groovy", "{highlightPath: 'highlight.txt'}")
-        props.highlight.should == ['def a', 'def b']
+        props.highlight.should == ['def a', 'int b']
     }
 
     @Test

@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 class FilePlugin {
     private FilePlugin() {
     }
@@ -37,10 +39,11 @@ class FilePlugin {
         Text croppedAtStart = cropStart(text, opts);
         Text croppedAtEnd = cropEnd(croppedAtStart, opts);
 
-        Text withExcludedLines = exclude(croppedAtEnd, opts);
-        Text withIncludeRegexp = includeRegexp(withExcludedLines, opts);
+        Text withExcludedStartEnd = excludeStartEnd(croppedAtEnd, opts);
+        Text withIncludeRegexp = includeRegexp(withExcludedStartEnd, opts);
+        Text withExcludedRegexp = excludeRegexp(withIncludeRegexp, opts);
 
-        return StringUtils.stripIndentation(withIncludeRegexp.toString());
+        return StringUtils.stripIndentation(withExcludedRegexp.toString());
     }
 
     private static Text cropStart(Text text, PluginParamsOpts opts) {
@@ -66,8 +69,8 @@ class FilePlugin {
         return text;
     }
 
-    private static Text exclude(Text text, PluginParamsOpts opts) {
-        Boolean exclude = opts.get("exclude", false);
+    private static Text excludeStartEnd(Text text, PluginParamsOpts opts) {
+        Boolean exclude = opts.get("excludeStartEnd", false);
         if (!exclude) {
             return text;
         }
@@ -76,12 +79,25 @@ class FilePlugin {
     }
 
     private static Text includeRegexp(Text text, PluginParamsOpts opts) {
-        String includeRegexp = opts.get("includeRegexp");
-        if (includeRegexp == null) {
+        List<String> includeRegexps = opts.getList("includeRegexp");
+        if (includeRegexps.isEmpty()) {
             return text;
         }
 
-        return text.includeRegexp(Pattern.compile(includeRegexp));
+        return text.includeRegexp(createListOfPatterns(includeRegexps));
+    }
+
+    private static Text excludeRegexp(Text text, PluginParamsOpts opts) {
+        List<String> excludeRegexps = opts.getList("excludeRegexp");
+        if (excludeRegexps.isEmpty()) {
+            return text;
+        }
+
+        return text.excludeRegexp(createListOfPatterns(excludeRegexps));
+    }
+
+    private static List<Pattern> createListOfPatterns(List<String> regexps) {
+        return regexps.stream().map(Pattern::compile).collect(toList());
     }
 
     private static class Text {
@@ -113,8 +129,16 @@ class FilePlugin {
             return new Text(lines.subList(1, lines.size() - 1));
         }
 
-        Text includeRegexp(Pattern regexp) {
-            return new Text(lines.stream().filter(l -> regexp.matcher(l).find()).collect(Collectors.toList()));
+        Text includeRegexp(List<Pattern> regexps) {
+            return new Text(lines.stream()
+                    .filter(line -> regexps.stream().anyMatch(r -> r.matcher(line).find()))
+                    .collect(Collectors.toList()));
+        }
+
+        Text excludeRegexp(List<Pattern> regexps) {
+            return new Text(lines.stream()
+                    .filter(line -> regexps.stream().noneMatch(r -> r.matcher(line).find()))
+                    .collect(Collectors.toList()));
         }
 
         private int findLineIdxContaining(String subLine) {

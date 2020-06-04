@@ -70,6 +70,47 @@ Use the `highlightPath` option to highlight lines specified in a separate file.
 
 :include-file: lines-to-highlight.txt {title: "lines-to-highlight.txt"}
 
+# Limit
+
+Use `startLine`, `endLine` to limit the included content.
+
+If you have a file with embedded examples, you can use limit function to extract small samples by using marker lines.
+
+:include-file: python-examples.py {title: "file with examples"} 
+
+    :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"}
+     
+:include-file: python-examples.py {title: "extracted example", startLine: "example: book trade", endLine: "example-end"}
+
+Note: Lines match doesn't have to be exact, `contains` is used.
+ 
+By default `startLine` and `endLine` are included in the rendered result. Use `excludeStartEnd: true` to remove markers.   
+
+    :include-file: python-examples.py { 
+        startLine: "example: book trade",
+        endLine: "example-end",
+        excludeStartEnd: true }
+
+:include-file: python-examples.py {
+    title: "extracted example", 
+    startLine: "example: book trade",
+    endLine: "example-end",
+    excludeStartEnd: true }
+    
+Use `includeRegexp` to include only lines matching regexp(s).
+
+    :include-file: python-examples.py {includeRegexp: "import"}
+    :include-file: python-examples.py {includeRegexp: ["import"]}
+    
+:include-file: python-examples.py { includeRegexp: ["import"], title: "include by regexp" }
+
+Use `excludeRegexp` to exclude lines matching regexp(s).
+
+    :include-file: python-examples.py {excludeRegexp: "# example"}
+    :include-file: python-examples.py {excludeRegexp: ["# example"]}
+    
+:include-file: python-examples.py { excludeRegexp: ["# example"], title: "exclude by regexp" }
+
 # Callout Comments
 
 If you already have comments inside your code it would be non effecient to repeat them inside documentation. 
