@@ -25,6 +25,7 @@ import org.testingisdocumenting.znai.html.HtmlPage;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
 import org.testingisdocumenting.znai.server.ZnaiServer;
 import org.testingisdocumenting.znai.server.preview.DocumentationPreview;
+import org.testingisdocumenting.znai.structure.DocMeta;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.website.ProgressReporter;
 import org.testingisdocumenting.znai.website.WebResource;
@@ -158,7 +159,7 @@ public class ZnaiCliApp {
                 withReactJsBundle(reactJsBundle).
                 withId(getDocId()).
                 withDocumentationType(config.getMarkupType()).
-                withMetaFromJsonFile(config.getSourceRoot().resolve("meta.json")).
+                withMetaFromJsonFile(config.getSourceRoot().resolve(DocMeta.META_FILE_NAME)).
                 withFileWithLookupPaths("lookup-paths").
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).

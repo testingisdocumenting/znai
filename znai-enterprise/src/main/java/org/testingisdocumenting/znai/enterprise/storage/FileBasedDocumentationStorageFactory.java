@@ -6,6 +6,10 @@ import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegis
 
 public class FileBasedDocumentationStorageFactory implements DocumentationStorageFactory {
     public DocumentationStorage create(ZnaiServerConfig serverConfig) {
+        if (enterpriseConfig().getDocStorageRoot() == null) {
+            return null;
+        }
+
         return new FileBasedDocumentationStorage(
                 enterpriseConfig().getDocStorageRoot(),
                 serverConfig.getDeployRoot());

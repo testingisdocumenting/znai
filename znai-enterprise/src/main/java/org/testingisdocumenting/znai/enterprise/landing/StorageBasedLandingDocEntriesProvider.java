@@ -16,24 +16,21 @@
 
 package org.testingisdocumenting.znai.enterprise.landing;
 
+import org.testingisdocumenting.znai.enterprise.DocLifecycleListener;
 import org.testingisdocumenting.znai.structure.DocMeta;
-import org.testingisdocumenting.znai.utils.FileUtils;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class FileBasedLandingDocEntriesProvider implements LandingDocEntriesProvider {
-    public static final String META_FILE_NAME = "meta.json";
-    private final Path storageRoot;
+import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.documentationStorage;
+
+public class StorageBasedLandingDocEntriesProvider implements LandingDocEntriesProvider, DocLifecycleListener {
     private final Map<String, DocMeta> docMetaByDocId;
 
-    public FileBasedLandingDocEntriesProvider(Path storageRoot) {
-        this.storageRoot = storageRoot;
+    public StorageBasedLandingDocEntriesProvider() {
         this.docMetaByDocId = enumerateDocMetas();
     }
 
@@ -48,26 +45,23 @@ public class FileBasedLandingDocEntriesProvider implements LandingDocEntriesProv
                         entry.getValue().getDescription()));
     }
 
-    @Override
-    public void onNewDocMeta(String docId, DocMeta docMeta) {
-        docMetaByDocId.put(docId, docMeta);
-    }
-
     private Map<String, DocMeta> enumerateDocMetas() {
-        if (storageRoot == null || !Files.exists(storageRoot)) {
+        if (documentationStorage() == null) {
             return new HashMap<>();
         }
 
-        try {
-            return Files.list(storageRoot)
-                    .filter(file -> Files.isDirectory(file))
-                    .filter(file -> Files.exists(file.resolve(META_FILE_NAME)))
-                    .map(file -> file.resolve(META_FILE_NAME))
-                    .collect(Collectors.toMap(
-                            fileMeta -> fileMeta.getParent().getFileName().toString(),
-                            fileMeta -> new DocMeta(FileUtils.fileTextContent(fileMeta))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return documentationStorage().list()
+                .stream()
+                .collect(Collectors.toMap(DocMeta::getId, Function.identity()));
+    }
+
+    @Override
+    public void onDocUpdate(DocMeta docMeta) {
+        docMetaByDocId.put(docMeta.getId(), docMeta);
+    }
+
+    @Override
+    public void onDocRemove(String docId) {
+        docMetaByDocId.remove(docId);
     }
 }

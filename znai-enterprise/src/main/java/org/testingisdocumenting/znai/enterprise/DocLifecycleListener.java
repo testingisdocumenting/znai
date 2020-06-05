@@ -14,19 +14,11 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.enterprise.storage;
+package org.testingisdocumenting.znai.enterprise;
 
-import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
 import org.testingisdocumenting.znai.structure.DocMeta;
 
-import java.nio.file.Path;
-import java.util.List;
-
-public interface DocumentationStorage {
-    boolean contains(String docId);
-    void store(String actor, String docId, String version, Path generatedDocumentation);
-    void prepare(String docId, String version, DocumentationPreparationProgress progress);
-    long lastUpdateTime(String docId, String version);
-    void remove(String actor, String docId);
-    List<DocMeta> list();
+public interface DocLifecycleListener {
+    void onDocUpdate(DocMeta docMeta);
+    void onDocRemove(String docId);
 }

@@ -17,5 +17,5 @@
 package org.testingisdocumenting.znai.server.auth;
 
 public interface AuthorizationHandler {
-    boolean isAuthorized(String docId);
+    boolean isAuthorized(String userId, String docId);
 }

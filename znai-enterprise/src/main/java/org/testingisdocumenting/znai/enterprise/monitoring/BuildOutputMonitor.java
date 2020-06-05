@@ -19,9 +19,11 @@ package org.testingisdocumenting.znai.enterprise.monitoring;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.enterprise.DocLifecycleListeners;
 import org.testingisdocumenting.znai.fs.FsUtils;
 import org.testingisdocumenting.znai.server.ServerLifecycleListener;
 import org.testingisdocumenting.znai.server.ZnaiServerConfig;
+import org.testingisdocumenting.znai.structure.DocMeta;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
@@ -97,6 +99,8 @@ public class BuildOutputMonitor implements ServerLifecycleListener {
             ConsoleOutputs.out("detected ", Color.WHITE, docId, Color.BLUE, " at ", Color.PURPLE, zip);
 
             documentationStorage().store("build-output-monitor", docId, "", docsDir);
+            DocLifecycleListeners.onDocUpdate(new DocMeta(
+                    FileUtils.fileTextContent(docsDir.resolve(DocMeta.META_FILE_NAME))));
         } finally {
             FsUtils.deleteDirectory(tempDir);
         }

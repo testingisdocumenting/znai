@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.enterprise.remove;
 import org.apache.commons.lang3.StringUtils;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.enterprise.DocLifecycleListeners;
 import org.testingisdocumenting.znai.server.ZnaiServerConfig;
 
 import java.io.File;
@@ -51,6 +52,8 @@ public class OnRemoveDeleteCachedServerHandler implements OnRemoveFinishedServer
             ConsoleOutputs.out(Color.BLUE, "deleted docs: ", Color.PURPLE, docPath, " from file system.");
 
             documentationStorage().remove(actor, docId);
+            DocLifecycleListeners.onDocRemove(docId);
+
             ConsoleOutputs.out(Color.BLUE, "deleted docs: ", Color.PURPLE, docPath, " from stroage.");
         } catch (IOException e) {
             ConsoleOutputs.out(Color.BLUE, "failed to delete docs: ", Color.PURPLE, docPath);

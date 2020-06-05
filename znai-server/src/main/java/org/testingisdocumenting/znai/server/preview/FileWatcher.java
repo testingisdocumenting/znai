@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 webtau maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +21,7 @@ import com.sun.nio.file.SensitivityWatchEventModifier;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.core.AuxiliaryFileListener;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.structure.DocMeta;
 import org.testingisdocumenting.znai.website.WebSite;
 
 import java.io.IOException;
@@ -111,7 +113,7 @@ public class FileWatcher implements AuxiliaryFileListener {
             register(path);
         } else if (fileName.equals("toc")) {
             fileChangeHandler.onTocChange(path);
-        } else if (fileName.equals("meta.json")) {
+        } else if (fileName.equals(DocMeta.META_FILE_NAME)) {
             fileChangeHandler.onDocMetaChange(path);
         } else if (path.equals(siteCfg.getGlobalReferencesPath())) {
             fileChangeHandler.onGlobalDocReferencesChange(path);

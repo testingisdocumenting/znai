@@ -17,13 +17,8 @@
 
 package org.testingisdocumenting.znai.enterprise.landing;
 
-import org.testingisdocumenting.znai.structure.DocMeta;
-
 import java.util.stream.Stream;
 
 public interface LandingDocEntriesProvider {
     Stream<LandingDocEntry> provide();
-
-    default void onNewDocMeta(String docId, DocMeta docMeta) {
-    }
 }
