@@ -14,30 +14,30 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.server.auth;
+package org.testingisdocumenting.znai.enterprise;
 
+import org.testingisdocumenting.znai.structure.DocMeta;
 import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.util.Set;
 
-public class AuthorizationHandlers {
-    private static final Set<AuthorizationHandler> handlers =
-            ServiceLoaderUtils.load(AuthorizationHandler.class);
+public class DocLifecycleListeners {
+    private static final Set<DocLifecycleListener> listeners =
+            ServiceLoaderUtils.load(DocLifecycleListener.class);
 
-    public static boolean isAuthorized(String userId, String docId) {
-        if (handlers.isEmpty()) {
-            return true;
-        }
-
-        return handlers.stream()
-                .anyMatch(h -> h.isAuthorized(userId, docId));
+    public static void add(DocLifecycleListener listener) {
+        listeners.add(listener);
     }
 
-    public static void add(AuthorizationHandler handler) {
-        handlers.add(handler);
+    public static void remove(DocLifecycleListener listener) {
+        listeners.remove(listener);
     }
 
-    public static void remove(AuthorizationHandler handler) {
-        handlers.remove(handler);
+    public static void onDocUpdate(DocMeta docMeta) {
+        listeners.forEach(l -> l.onDocUpdate(docMeta));
+    }
+
+    public static void onDocRemove(String docId) {
+        listeners.forEach(l -> l.onDocRemove(docId));
     }
 }

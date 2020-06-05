@@ -14,13 +14,8 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.enterprise.authorization;
+package org.testingisdocumenting.znai.enterprise.authorization.groups;
 
-import org.testingisdocumenting.znai.server.auth.AuthorizationHandler;
-
-public class NixGroupsBasedAuthorizationHandler implements AuthorizationHandler {
-    @Override
-    public boolean isAuthorized(String docId) {
-        return false; // TODO placeholder
-    }
+public interface AuthorizationGroupResolutionService {
+    boolean groupContainsUser(String group, String userId);
 }

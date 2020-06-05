@@ -16,8 +16,10 @@
 
 package org.testingisdocumenting.znai.enterprise;
 
-import org.testingisdocumenting.znai.enterprise.authorization.NixGroupsBasedAuthorizationHandler;
-import org.testingisdocumenting.znai.enterprise.landing.FileBasedLandingDocEntriesProvider;
+import org.testingisdocumenting.znai.enterprise.authorization.EnterpriseAuthorizationHandler;
+import org.testingisdocumenting.znai.enterprise.authorization.groups.AuthorizationGroupResolutionServices;
+import org.testingisdocumenting.znai.enterprise.authorization.groups.NixAuthorizationGroupResolutionService;
+import org.testingisdocumenting.znai.enterprise.landing.StorageBasedLandingDocEntriesProvider;
 import org.testingisdocumenting.znai.enterprise.landing.LandingDocEntriesProviders;
 import org.testingisdocumenting.znai.enterprise.storage.DocumentationStorage;
 import org.testingisdocumenting.znai.enterprise.storage.DocumentationStorageFactories;
@@ -42,24 +44,34 @@ public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
         return serverConfig;
     }
 
-    private static DocumentationStorage createStorage() {
-        DocumentationStorage documentationStorage = DocumentationStorageFactories.create(serverConfig);
-        LandingDocEntriesProviders.add(new FileBasedLandingDocEntriesProvider(enterpriseConfig().getDocStorageRoot()));
-
-        return documentationStorage;
-    }
-
     @Override
     public void beforeStart(ZnaiServerConfig config) {
         serverConfig = config;
         documentationStorage = createStorage();
 
-        registerAuthz(config);
+        registerLanding();
+        registerAuthorization();
     }
 
-    private void registerAuthz(ZnaiServerConfig config) {
-        if (config.isAuthorizationUsingNixGroups()) {
-            AuthorizationHandlers.add(new NixGroupsBasedAuthorizationHandler());
+    private static DocumentationStorage createStorage() {
+        return DocumentationStorageFactories.create(serverConfig);
+    }
+
+    private void registerLanding() {
+        StorageBasedLandingDocEntriesProvider entriesProvider = new StorageBasedLandingDocEntriesProvider();
+
+        LandingDocEntriesProviders.add(entriesProvider);
+        DocLifecycleListeners.add(entriesProvider);
+    }
+
+    private void registerAuthorization() {
+        EnterpriseAuthorizationHandler authorizationHandler = new EnterpriseAuthorizationHandler();
+
+        AuthorizationHandlers.add(authorizationHandler);
+        DocLifecycleListeners.add(authorizationHandler);
+
+        if (enterpriseConfig.getAuthGroupsResolutionType().equals("nix-groups")) {
+            AuthorizationGroupResolutionServices.add(new NixAuthorizationGroupResolutionService());
         }
     }
 }

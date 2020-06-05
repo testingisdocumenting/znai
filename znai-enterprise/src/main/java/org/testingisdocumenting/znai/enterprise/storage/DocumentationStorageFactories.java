@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.enterprise.storage;
 import org.testingisdocumenting.znai.server.ZnaiServerConfig;
 import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class DocumentationStorageFactories {
@@ -25,7 +26,11 @@ public class DocumentationStorageFactories {
             ServiceLoaderUtils.load(DocumentationStorageFactory.class);
 
     public static DocumentationStorage create(ZnaiServerConfig config) {
-        return handlers.stream().findFirst().map(h -> h.create(config)).orElse(null);
+        return handlers.stream()
+                .map(h -> h.create(config))
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
     }
 
     public static void add(DocumentationStorageFactory handler) {

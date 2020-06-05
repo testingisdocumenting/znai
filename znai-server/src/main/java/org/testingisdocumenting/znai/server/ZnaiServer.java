@@ -135,7 +135,7 @@ public class ZnaiServer {
         String authorization = ctx.request().headers().get("Authorization");
         String userId = BasicInjectedAuthentication.extractUserId(authorization);
 
-        return AuthorizationHandlers.isAuthorized(userId);
+        return AuthorizationHandlers.isAuthorized(userId, docId);
     }
 
     private void redirectToTrailingSlash(RoutingContext ctx) {

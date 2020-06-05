@@ -19,15 +19,21 @@ package org.testingisdocumenting.znai.structure;
 
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DocMeta {
+    public static final String META_FILE_NAME = "meta.json";
+
     private String id;
     private final String type;
     private final String title;
     private final String category;
     private final String description;
+    private final List<String> allowedUsers;
+    private final List<String> allowedGroups;
     private boolean previewEnabled;
     private final Map<String, ?> docMetaMap;
 
@@ -36,10 +42,13 @@ public class DocMeta {
     }
 
     public DocMeta(Map<String, ?> docMetaMap) {
+        this.id = stringValue(docMetaMap, "id", "");
         this.type = stringValue(docMetaMap, "type", "no-type");
         this.title = stringValue(docMetaMap, "title", "no-title");
         this.category = stringValue(docMetaMap, "category", "Un-categorized");
         this.description = stringValue(docMetaMap, "description", "no description");
+        this.allowedUsers = stringList(docMetaMap, "allowedUsers");
+        this.allowedGroups = stringList(docMetaMap, "allowedGroups");
 
         this.docMetaMap = docMetaMap;
     }
@@ -82,6 +91,14 @@ public class DocMeta {
         return description;
     }
 
+    public List<String> getAllowedUsers() {
+        return allowedUsers;
+    }
+
+    public List<String> getAllowedGroups() {
+        return allowedGroups;
+    }
+
     public Map<String, Object> toMap() {
         Map<String, Object> result = new HashMap<>();
         result.put("id", id);
@@ -101,5 +118,11 @@ public class DocMeta {
 
     private static String stringValue(Map<String, ?> docMetaMap, String key, String defaultValue) {
         return docMetaMap.containsKey(key) ? docMetaMap.get(key).toString() : defaultValue;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static List<String> stringList(Map<String, ?> docMetaMap, String key) {
+        Object value = docMetaMap.get(key);
+        return value != null ? (List<String>) value : Collections.emptyList();
     }
 }

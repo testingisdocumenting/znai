@@ -21,14 +21,12 @@ import java.nio.file.Path;
 public class ZnaiServerConfig {
     private final String serverTitle;
     private final String serverType;
-    private final boolean authorizationUsingNixGroups;
 
     private final Path deployRoot;
 
     public ZnaiServerConfig(Path deployRoot) {
         this.serverTitle = propertyOrDefault("znaiTitle", "Company");
         this.serverType = propertyOrDefault("znaiType", "Guides");
-        this.authorizationUsingNixGroups = propertyOrDefault("znaiAuthroizationType", "").equals("nix-groups");
         this.deployRoot = deployRoot;
     }
 
@@ -42,10 +40,6 @@ public class ZnaiServerConfig {
 
     public Path getDeployRoot() {
         return deployRoot;
-    }
-
-    public boolean isAuthorizationUsingNixGroups() {
-        return authorizationUsingNixGroups;
     }
 
     private static String propertyOrDefault(String key, String defaultValue) {

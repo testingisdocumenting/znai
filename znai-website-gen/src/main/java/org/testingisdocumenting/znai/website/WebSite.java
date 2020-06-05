@@ -367,7 +367,7 @@ public class WebSite {
 
     private void deployMeta() {
         reportPhase("deploying meta");
-        deployer.deploy("meta.json", JsonUtils.serializePrettyPrint(docMeta.toMap()));
+        deployer.deploy(DocMeta.META_FILE_NAME, JsonUtils.serializePrettyPrint(docMeta.toMap()));
     }
 
     private void deployGlobalAssets() {

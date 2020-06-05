@@ -30,6 +30,8 @@ public class ZnaiEnterpriseConfig {
 
     private final Path fsMonitorConfigPath;
     private final Path docStorageRoot;
+    private final String authGroupsResolutionType;
+
     private final Map<String, Object> jsonConfig;
 
     public ZnaiEnterpriseConfig() {
@@ -37,6 +39,7 @@ public class ZnaiEnterpriseConfig {
 
         fsMonitorConfigPath = buildFsMonitorConfigPath();
         docStorageRoot = buildDocStorageRoot();
+        authGroupsResolutionType = configValueOrDefault("authGroupsResolutionType", "");
     }
 
     public Path getFsMonitorConfigPath() {
@@ -45,6 +48,10 @@ public class ZnaiEnterpriseConfig {
 
     public Path getDocStorageRoot() {
         return docStorageRoot;
+    }
+
+    public String getAuthGroupsResolutionType() {
+        return authGroupsResolutionType;
     }
 
     private Path buildFsMonitorConfigPath() {
