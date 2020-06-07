@@ -24,22 +24,67 @@ import {convertAnsiToTokenLines} from "./ansiToTokensConverter";
 
 import './CliOutput.css';
 
-const CliOutput = ({lines, ...props}) => {
+const CliOutput = ({lines, lineStopIndexes, highlight, slideIdx, ...props}) => {
+    const linesOfTokens = convertAnsiToTokenLines(lines);
+
     return (
         <SnippetContainer className="cli-output"
-                          linesOfCode={convertAnsiToTokenLines(lines)}
+                          linesOfCode={reduceLinesForPresentation()}
                           snippetComponent={SimpleCodeSnippet}
+                          highlight={reduceHighlightForPresentation()}
+                          slideIdx={reduceSnippetContainerSlideIdx()}
                           {...props}/>
     )
+
+    function reduceLinesForPresentation() {
+        if (!lineStopIndexes) {
+            return linesOfTokens;
+        }
+
+        if (slideIdx >= lineStopIndexes.length) {
+            return linesOfTokens;
+        }
+
+        return linesOfTokens.slice(0, lineStopIndexes[slideIdx] + 1);
+    }
+
+    // slides show first reveal of output
+    // then highlight one line at a time
+    // so we need to delay highlight we pass to SnippetContainer
+    //
+    function reduceHighlightForPresentation() {
+        if (!lineStopIndexes) {
+            return highlight;
+        }
+
+        if (slideIdx < lineStopIndexes.length) {
+            return []
+        }
+
+        return highlight;
+    }
+
+    function reduceSnippetContainerSlideIdx() {
+        if (!lineStopIndexes) {
+            return slideIdx;
+        }
+
+        return slideIdx - lineStopIndexes.length;
+    }
 }
 
 const presentationCliOutput = {component: CliOutput,
-    numberOfSlides: ({highlight}) => {
+    numberOfSlides: ({highlight, lineStopIndexes}) => {
+        let numberOfSlides = 1;
         if (highlight) {
-            return highlight.length + 1;
+            numberOfSlides += highlight.length;
         }
 
-        return 1
+        if (lineStopIndexes) {
+            numberOfSlides += lineStopIndexes.length;
+        }
+
+        return numberOfSlides;
     }
 }
 

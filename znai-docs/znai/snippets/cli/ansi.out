@@ -1,0 +1,14 @@
+[1mwebtau:[m000[1m>[m http.get("https://jsonplaceholder.typicode.com/todos/1")
+[33m> [34mexecuting HTTP GET [35mhttps://jsonplaceholder.typicode.com/todos/1[0m
+  [32m. [1mheader.statusCode [32mequals 200
+      matches:
+
+      header.statusCode:   actual: 200 <java.lang.Integer>
+                         expected: 200 <java.lang.Integer>[33m ([32m47ms[33m)[0m
+[36m{[0m
+  [35m"userId": 1[36m,[0m
+  [35m"id": 1[36m,[0m
+  [35m"title": [32m"delectus aut autem"[36m,[0m
+  [35m"completed": false[0m
+[36m}[0m
+[32m. [34mexecuted HTTP GET [35mhttps://jsonplaceholder.typicode.com/todos/1[33m ([32m342ms[33m)[0m
