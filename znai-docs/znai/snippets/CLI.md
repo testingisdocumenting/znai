@@ -88,7 +88,7 @@ Or you can highlight by lines stored in a separate file:
 
 CLI renders ANSI colors automatically.
 
-:include-file: cli/ansi.out {title: "file with ANSI sequence colors"}
+:include-file: cli/ansi.out {title: "cli/ansi.out - file with ANSI sequence colors"}
 
     :include-cli-output: cli/ansi.out
 
