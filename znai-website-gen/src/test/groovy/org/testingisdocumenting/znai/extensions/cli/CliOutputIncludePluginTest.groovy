@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,39 +27,18 @@ class CliOutputIncludePluginTest {
     @Test
     void "should split file content into lines"() {
         def elements = process('captured-output.out')
-        elements.should == ['lines': ['line one', 'line two', 'line three'], highlight: [], type: 'CliOutput']
-    }
-
-    @Test
-    void "should convert text to indexes with full match"() {
-        def elements = process('captured-output.out {highlight: "line two"}')
-        elements.highlight.should == [1]
-    }
-
-    @Test
-    void "should convert text to indexes with partial match"() {
-        def elements = process('captured-output.out {highlight: "two"}')
-        elements.highlight.should == [1]
+        elements.should == ['lines': ['line one', 'line two', 'line three'], type: 'CliOutput']
     }
 
     @Test
     void "should error when no text to highlight found"() {
         code {
             process('captured-output.out {highlight: "line x"}')
-        } should throwException("can't find line: line x")
-    }
-
-    @Test
-    void "should read lines to highlight from file"() {
-        def elements = process('captured-output.out {highlightFile: "captured-matched-lines.txt"}')
-        elements.highlight.should == [1, 2]
-    }
-
-    @Test
-    void "should error when lines to highlight from file are not present"() {
-        code {
-            process('captured-output.out {highlightFile: "captured-matched-lines-error.txt"}')
-        } should throwException("can't find line: wrong line two")
+        } should throwException("highlight text <line x> is not found\n" +
+                "check: captured-output.out\n" +
+                "line one\n" +
+                "line two\n" +
+                "line three")
     }
 
     private static def process(String params) {

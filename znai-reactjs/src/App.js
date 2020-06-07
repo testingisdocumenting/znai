@@ -75,6 +75,8 @@ import {bulletListsDemo} from './doc-elements/bullets/BulletList.demo'
 import {columnsDemo} from "./doc-elements/columns/Columns.demo";
 import {tocMobileHeaderDemo} from "./layout/mobile/TocMobileHeader.demo";
 import {documentationLayoutDemo} from "./layout/DocumentationLayout.demo";
+import {cliOutputDemo} from "./doc-elements/cli/CliOutput.demo";
+import {cliOutputPresentationDemo} from "./doc-elements/cli/PresentationCliOutput.demo";
 
 const docMeta = {
     id: 'preview',
@@ -120,6 +122,7 @@ registries.add('snippets')
     .registerAsGrid('Open API Schema', 0, openApiSchemaDemo)
     .registerAsGrid('Jupyter', 0, jupyterDemo)
     .registerAsGrid('CLI Command', 0, cliCommandDemo)
+    .registerAsGrid('CLI Output', 0, cliOutputDemo)
 
 registries.add('visuals')
     .registerAsGrid('Spoilers', 0, spoilerDemo)
@@ -149,6 +152,7 @@ registries.add('presentation')
     .registerAsTabs('SVG', svgPresentationDemo)
     .registerAsTabs('GraphViz SVG', graphVizSvgPresentationDemo)
     .registerAsTabs('Blockquote', blockQuotePresentationDemo)
+    .registerAsTabs('Cli Output', cliOutputPresentationDemo)
 
 registries.add('preview')
     .registerAsRows('Diff Highlight', diffTrackingDemo)
