@@ -24,10 +24,10 @@ import {TokensPrinter} from "../code-snippets/TokensPrinter";
 
 const CliOutput = ({lines, ...props}) => {
     return (
-            <SnippetContainer className="cli-output"
-                              linesOfCode={renderLines(lines)}
-                              snippetComponent={SimpleCodeSnippet}
-                              {...props}/>
+        <SnippetContainer className="cli-output"
+                          linesOfCode={renderLines(lines)}
+                          snippetComponent={SimpleCodeSnippet}
+                          {...props}/>
     )
 
     function renderLines(lines) {
