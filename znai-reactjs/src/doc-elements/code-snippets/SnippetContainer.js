@@ -33,10 +33,12 @@ class SnippetContainer extends React.Component {
     }
 
     renderNormalMode() {
-        const {title} = this.props
+        const {title, className} = this.props
+
+        const fullClassName = "snippet-container content-block" + (className ? " " + className : "")
 
         return (
-            <div className="snippet-container content-block">
+            <div className={fullClassName}>
                 {this.renderTitle(title)}
                 {this.renderSnippet()}
             </div>
@@ -44,13 +46,16 @@ class SnippetContainer extends React.Component {
     }
 
     renderWideMode() {
-        const {title} = this.props
+        const {title, className} = this.props
 
         const wideModePadding = <div className="padding"/>
 
-        const className = "snippet-container wide-screen" + (title ? " with-title" : "")
+        const fullClassName = "snippet-container wide-screen" +
+            (title ? " with-title" : "") +
+            (className ? " " + className : "")
+
         return (
-            <div className={className}>
+            <div className={fullClassName}>
                 {wideModePadding}
                 {title && <div className="title-layer">
                     {this.renderTitle(title)}
