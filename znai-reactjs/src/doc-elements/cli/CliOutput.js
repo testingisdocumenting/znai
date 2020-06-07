@@ -20,25 +20,17 @@ import React from 'react'
 import SnippetContainer from "../code-snippets/SnippetContainer";
 import SimpleCodeSnippet from "../code-snippets/SimpleCodeSnippet";
 
-import {TokensPrinter} from "../code-snippets/TokensPrinter";
+import {convertAnsiToTokenLines} from "./ansiToTokensConverter";
+
+import './CliOutput.css';
 
 const CliOutput = ({lines, ...props}) => {
     return (
         <SnippetContainer className="cli-output"
-                          linesOfCode={renderLines(lines)}
+                          linesOfCode={convertAnsiToTokenLines(lines)}
                           snippetComponent={SimpleCodeSnippet}
                           {...props}/>
     )
-
-    function renderLines(lines) {
-        const printer = new TokensPrinter()
-        lines.forEach((line) => {
-            printer.print("cli-output-line", line)
-            printer.println()
-        })
-
-        return printer.linesOfTokens
-    }
 }
 
 const presentationCliOutput = {component: CliOutput,

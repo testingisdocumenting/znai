@@ -19,12 +19,19 @@ import React from "react";
 import {CliOutput} from "./CliOutput";
 
 export function cliOutputDemo(registry) {
-    registry.add('no highlight', () => (
-        <CliOutput lines={generateNonAnsiLines()}/>
-    ))
-    registry.add('with highlight', () => (
-        <CliOutput lines={generateNonAnsiLines()} highlight={[1, 'line number 7']}/>
-    ))
+    registry
+        .add('no highlight', () => (
+            <CliOutput lines={generateNonAnsiLines()}/>
+        ))
+        .add('with highlight', () => (
+            <CliOutput lines={generateNonAnsiLines()} highlight={[1, 'line number 7']}/>
+        ))
+        .add('with ansi', () => (
+            <CliOutput lines={generateAnsiLines()}/>
+        ))
+        .add('ansi colors', () => (
+            <CliOutput lines={generateAllColors()}/>
+        ))
 }
 
 function generateNonAnsiLines() {
@@ -42,4 +49,15 @@ function generateNonAnsiLines() {
         'line number 11',
         'line number 12',
     ]
+}
+
+function generateAnsiLines() {
+    return ['\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get("https://jsonplaceholder.typicode.com/todos/1")',
+        '\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m',
+        '  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200']
+}
+
+function generateAllColors() {
+    return ['\u001b[30m A \u001b[31m B \u001b[32m C \u001b[33m D \u001b[0m',
+        '\u001b[34m E \u001b[35m F \u001b[36m G \u001b[37m H \u001b[0m']
 }
