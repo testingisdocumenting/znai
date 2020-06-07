@@ -31,10 +31,14 @@ import java.util.concurrent.TimeUnit;
 import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.documentationStorage;
 
 public class EnterpriseAuthorizationHandler implements AuthorizationHandler, DocLifecycleListener {
-    private final Cache<UserIdDocId, Boolean> authorizedByIds;
+    private Cache<UserIdDocId, Boolean> authorizedByIds;
     private final Map<String, AllowedUsersAndGroups> allowedUsersAndGroupsById = new ConcurrentHashMap<>();
 
     public EnterpriseAuthorizationHandler() {
+        if (disabled()) {
+            return;
+        }
+
         authorizedByIds = Caffeine.newBuilder().expireAfterWrite(5, TimeUnit.MINUTES).build();
         buildAllowedUsersAndGroupsCache();
     }
@@ -95,5 +99,9 @@ public class EnterpriseAuthorizationHandler implements AuthorizationHandler, Doc
 
     private boolean inGroup(String group, String userId) {
         return AuthorizationGroupResolutionServices.groupContainsUser(group, userId);
+    }
+
+    private boolean disabled() {
+        return documentationStorage() == null;
     }
 }
