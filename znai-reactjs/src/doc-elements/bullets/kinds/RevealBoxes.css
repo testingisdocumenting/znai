@@ -38,6 +38,6 @@
     margin: 20px;
     width: 140px;
     height: 140px;
-    border: 1px solid #666;
-    background-color: #eee;
+    border: 1px solid var(--znai-snippets-outer-border-color);
+    background-color: var(--znai-snippets-background-color);
 }

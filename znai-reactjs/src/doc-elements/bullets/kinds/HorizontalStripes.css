@@ -33,6 +33,6 @@
 
 .horizontal-stripes .empty-horizontal-stripe {
     flex: 1;
-    border: 2px solid #666;
-    background-color: #eee;
+    border: 2px solid var(--znai-snippets-outer-border-color);
+    background-color: var(--znai-snippets-background-color);
 }
