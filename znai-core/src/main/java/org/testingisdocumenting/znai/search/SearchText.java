@@ -49,6 +49,10 @@ public class SearchText {
     }
 
     private static String removeNonReadableSymbols(String text) {
+        if (text == null) {
+            return null;
+        }
+
         return text.replaceAll("\\e\\[[\\d;]*[^\\d;]","");
     }
 }
