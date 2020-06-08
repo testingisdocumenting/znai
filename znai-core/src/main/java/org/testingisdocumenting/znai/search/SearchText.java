@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +28,7 @@ public class SearchText {
     }
 
     public SearchText(String text, SearchScore score) {
-        this.text = text;
+        this.text = removeNonReadableSymbols(text);
         this.score = score;
     }
 
@@ -45,5 +46,9 @@ public class SearchText {
 
     public void setScore(SearchScore score) {
         this.score = score;
+    }
+
+    private static String removeNonReadableSymbols(String text) {
+        return text.replaceAll("\\e\\[[\\d;]*[^\\d;]","");
     }
 }
