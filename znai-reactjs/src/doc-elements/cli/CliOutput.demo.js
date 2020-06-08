@@ -32,6 +32,9 @@ export function cliOutputDemo(registry) {
         .add('ansi colors', () => (
             <CliOutput lines={generateAllColors()}/>
         ))
+        .add('with lineStop and highlight outside presentation', () => (
+            <CliOutput lines={generateNonAnsiLines()} highlight={[2, 5]} lineStop={[0, 2]}/>
+        ))
 }
 
 function generateNonAnsiLines() {
