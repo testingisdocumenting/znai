@@ -24,7 +24,8 @@ import {convertAnsiToTokenLines} from "./ansiToTokensConverter";
 
 import './CliOutput.css';
 
-const CliOutput = ({lines, lineStopIndexes, highlight, slideIdx, ...props}) => {
+const CliOutput = ({lines, lineStop, highlight, slideIdx, ...props}) => {
+    const isPresentation = slideIdx !== undefined;
     const linesOfTokens = convertAnsiToTokenLines(lines);
 
     return (
@@ -37,15 +38,15 @@ const CliOutput = ({lines, lineStopIndexes, highlight, slideIdx, ...props}) => {
     )
 
     function reduceLinesForPresentation() {
-        if (!lineStopIndexes) {
+        if (!lineStop || !isPresentation) {
             return linesOfTokens;
         }
 
-        if (slideIdx >= lineStopIndexes.length) {
+        if (slideIdx >= lineStop.length) {
             return linesOfTokens;
         }
 
-        return linesOfTokens.slice(0, lineStopIndexes[slideIdx] + 1);
+        return linesOfTokens.slice(0, lineStop[slideIdx] + 1);
     }
 
     // slides show first reveal of output
@@ -53,11 +54,11 @@ const CliOutput = ({lines, lineStopIndexes, highlight, slideIdx, ...props}) => {
     // so we need to delay highlight we pass to SnippetContainer
     //
     function reduceHighlightForPresentation() {
-        if (!lineStopIndexes) {
+        if (!lineStop || !isPresentation) {
             return highlight;
         }
 
-        if (slideIdx < lineStopIndexes.length) {
+        if (slideIdx < lineStop.length) {
             return []
         }
 
@@ -65,23 +66,23 @@ const CliOutput = ({lines, lineStopIndexes, highlight, slideIdx, ...props}) => {
     }
 
     function reduceSnippetContainerSlideIdx() {
-        if (!lineStopIndexes) {
+        if (!lineStop) {
             return slideIdx;
         }
 
-        return slideIdx - lineStopIndexes.length;
+        return slideIdx - lineStop.length;
     }
 }
 
 const presentationCliOutput = {component: CliOutput,
-    numberOfSlides: ({highlight, lineStopIndexes}) => {
+    numberOfSlides: ({highlight, lineStop}) => {
         let numberOfSlides = 1;
         if (highlight) {
             numberOfSlides += highlight.length;
         }
 
-        if (lineStopIndexes) {
-            numberOfSlides += lineStopIndexes.length;
+        if (lineStop) {
+            numberOfSlides += lineStop.length;
         }
 
         return numberOfSlides;

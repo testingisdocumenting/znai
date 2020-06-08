@@ -30,12 +30,12 @@ export function cliOutputPresentationDemo(registry) {
         .add('with reveal', createPresentationDemo([{
             type: 'CliOutput',
             lines: generateNonAnsiLines(),
-            lineStopIndexes: [0, 3]
+            lineStop: [0, 3]
         }]))
         .add('with reveal and highlight', createPresentationDemo([{
             type: 'CliOutput',
             lines: generateNonAnsiLines(),
-            lineStopIndexes: [0, 3],
+            lineStop: [0, 3],
             highlight: [3, 'line number 7']
         }]))
 }
