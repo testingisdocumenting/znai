@@ -78,22 +78,38 @@ You can highlight by a partial line text match:
 
 Or you can highlight by lines stored in a separate file:
 
-    :include-cli-output: cli/file-path-of-captured.out {highlightFile: "cli/file-path-of-asserted-lines.txt"}
+    :include-cli-output: cli/file-path-of-captured.out {highlightPath: "cli/file-path-of-asserted-lines.txt"}
 
 :include-file: cli/file-path-of-asserted-lines.txt {title: "cli/file-path-of-asserted-lines.txt"}
 
-:include-cli-output: cli/file-path-of-captured.out {highlightFile: "cli/file-path-of-asserted-lines.txt"}
+:include-cli-output: cli/file-path-of-captured.out {highlightPath: "cli/file-path-of-asserted-lines.txt"}
 
+# ANSI Colors
+
+CLI renders ANSI colors automatically.
+
+:include-file: cli/ansi.out {title: "cli/ansi.out - file with ANSI sequence colors"}
+
+    :include-cli-output: cli/ansi.out
+
+:include-cli-output: cli/ansi.out
+
+# Title
+
+Use `title` to specify output of the output
+
+    :include-cli-output: cli/file-path-of-captured.out {title: "Captured output"}
+
+:include-cli-output: cli/file-path-of-captured.out {title: "Captured output"}
 
 # Presentation Mode
 
 In presentation mode, `cli-command` will simulate typing inside the terminal.
 
-If your `cli-output` is long, you can split the presentation output into chunks:
+You can gradually reveal `cli-output` by providing `lineStopIndexes` parameter.
   
-    :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4], chunkSize: 10, fadedSize: 2}
+    :include-cli-output: cli/file-path-of-captured.out {lineStopIndexes: [0, 4]}
     
-`chunkSize` specifies the maximum number of lines visible at a time.
- `fadedSize` specifies how many lines will be visible after and before as you move through output (default is 2).
-    
-:include-cli-output: cli/file-path-of-captured.out {highlight: [0, 12], chunkSize: 10, fadedSize: 2}    
+Passed `highlight` will highlight each line as a separate slide.
+
+:include-cli-output: cli/file-path-of-captured.out {lineStopIndexes: [0, 4], highlight: "remote"}

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,8 +23,8 @@ import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
  * search entry local to a single page
  */
 public class PageSearchEntry {
-    private PageSectionIdTitle pageSectionIdTitle;
-    private SearchText searchText;
+    private final PageSectionIdTitle pageSectionIdTitle;
+    private final SearchText searchText;
 
     public PageSearchEntry(String pageSectionTitle, SearchText searchText) {
         this.pageSectionIdTitle = new PageSectionIdTitle(pageSectionTitle);

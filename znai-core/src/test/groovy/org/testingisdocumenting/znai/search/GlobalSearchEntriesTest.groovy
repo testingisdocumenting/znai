@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,8 +24,8 @@ class GlobalSearchEntriesTest {
     void "should generate XML document"() {
         def entries = new GlobalSearchEntries()
         entries.addAll([
-                new GlobalSearchEntry('/doc-id/title1','full title 1', new SearchText('text 1', SearchScore.HIGH)),
-                new GlobalSearchEntry('/doc-id/title2','full title 2', new SearchText('text 2', SearchScore.STANDARD))])
+                new GlobalSearchEntry('/doc-id/title1', 'full title 1', new SearchText('text 1', SearchScore.HIGH)),
+                new GlobalSearchEntry('/doc-id/title2', 'full title 2', new SearchText('text 2', SearchScore.STANDARD))])
 
         println entries.toXml()
         entries.toXml().should == '<znai>\n' +
@@ -41,6 +42,27 @@ class GlobalSearchEntriesTest {
                 '    <fullTitle>full title 2</fullTitle>\n' +
                 '    <text>\n' +
                 '      <text>text 2</text>\n' +
+                '      <score>STANDARD</score>\n' +
+                '    </text>\n' +
+                '  </entry>\n' +
+                '</znai>\n'
+    }
+
+    @Test
+    void "should handle ansi sequences"() {
+        def entries = new GlobalSearchEntries()
+        entries.addAll([
+                new GlobalSearchEntry('/doc-id/title', 'title', new SearchText(
+                        "\u001B[1mwebtau:\u001B[m000\u001B" +
+                                "[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\")" +
+                                " \u001B[33m> (\u001B[32m342ms\u001B[33m)\u001B[0m", SearchScore.STANDARD))])
+
+        entries.toXml().should == '<znai>\n' +
+                '  <entry>\n' +
+                '    <url>/doc-id/title</url>\n' +
+                '    <fullTitle>title</fullTitle>\n' +
+                '    <text>\n' +
+                '      <text>webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > (342ms)</text>\n' +
                 '      <score>STANDARD</score>\n' +
                 '    </text>\n' +
                 '  </entry>\n' +

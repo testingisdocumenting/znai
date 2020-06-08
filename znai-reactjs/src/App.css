@@ -181,6 +181,15 @@
     --znai-collapse-uncollapse-color: var(--znai-punctuation-color);
     --znai-collapse-uncollapse-background-color: var(--znai-snippets-title-background-color);
 
+    --znai-ansi-black: #222;
+    --znai-ansi-red: #d9534f;
+    --znai-ansi-green: #078744;
+    --znai-ansi-yellow: #a66f2b;
+    --znai-ansi-blue: #2822ad;
+    --znai-ansi-magenta: #660e7a;
+    --znai-ansi-cyan: #038091;
+    --znai-ansi-white: #ccc;
+
     --znai-inversed-text-color: #bbbbbb;
     --znai-inversed-background-color: #282f34;
 

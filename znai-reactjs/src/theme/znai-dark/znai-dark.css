@@ -124,6 +124,15 @@
     --znai-number-color: #6998bc;
     --znai-boolean-color: var(--znai-number-color);
 
+    --znai-ansi-black: #444;
+    --znai-ansi-red: #d9534f;
+    --znai-ansi-green: #078744;
+    --znai-ansi-yellow: #a66f2b;
+    --znai-ansi-blue: #5284e7;
+    --znai-ansi-magenta: #9473a6;
+    --znai-ansi-cyan: #6998bc;
+    --znai-ansi-white: #eee;
+
     --znai-api-key-color: var(--znai-section-title-color);
     --znai-api-description-color: var(--znai-inversed-text-color);
     --znai-api-title-color: var(--znai-snippets-title-color);

@@ -1,0 +1,83 @@
+/*
+ * Copyright 2020 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.znai-ansi-bold {
+    font-weight: bold;
+}
+
+.znai-ansi-black-fg {
+    color: var(--znai-ansi-black);
+}
+
+.znai-ansi-black-bg {
+    background-color: var(--znai-ansi-black);
+}
+
+.znai-ansi-red-fg {
+    color: var(--znai-ansi-red);
+}
+
+.znai-ansi-red-bg {
+    background-color: var(--znai-ansi-red);
+}
+
+.znai-ansi-green-fg {
+    color: var(--znai-ansi-green);
+}
+
+.znai-ansi-green-bg {
+    background-color: var(--znai-ansi-green);
+}
+
+.znai-ansi-yellow-fg {
+    color: var(--znai-ansi-yellow);
+}
+
+.znai-ansi-yellow-bg {
+    background-color: var(--znai-ansi-yellow);
+}
+
+.znai-ansi-blue-fg {
+    color: var(--znai-ansi-blue);
+}
+
+.znai-ansi-blue-bg {
+    background-color: var(--znai-ansi-blue);
+}
+
+.znai-ansi-magenta-fg {
+    color: var(--znai-ansi-magenta);
+}
+
+.znai-ansi-magenta-bg {
+    background-color: var(--znai-ansi-magenta);
+}
+
+.znai-ansi-cyan-fg {
+    color: var(--znai-ansi-cyan);
+}
+
+.znai-ansi-cyan-bg {
+    background-color: var(--znai-ansi-cyan);
+}
+
+.znai-ansi-white-fg {
+    color: var(--znai-ansi-white);
+}
+
+.znai-ansi-white-bg {
+    background-color: var(--znai-ansi-white);
+}
