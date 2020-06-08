@@ -77,6 +77,7 @@ import {tocMobileHeaderDemo} from "./layout/mobile/TocMobileHeader.demo";
 import {documentationLayoutDemo} from "./layout/DocumentationLayout.demo";
 import {cliOutputDemo} from "./doc-elements/cli/CliOutput.demo";
 import {cliOutputPresentationDemo} from "./doc-elements/cli/PresentationCliOutput.demo";
+import {bulletListPresentationDemo} from "./doc-elements/bullets/PresentationBulletList.demo";
 
 const docMeta = {
     id: 'preview',
@@ -152,6 +153,7 @@ registries.add('presentation')
     .registerAsTabs('SVG', svgPresentationDemo)
     .registerAsTabs('GraphViz SVG', graphVizSvgPresentationDemo)
     .registerAsTabs('Blockquote', blockQuotePresentationDemo)
+    .registerAsTabs('Bullet Points', bulletListPresentationDemo)
     .registerAsTabs('Cli Output', cliOutputPresentationDemo)
 
 registries.add('preview')
