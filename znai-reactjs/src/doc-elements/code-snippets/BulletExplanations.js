@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +23,7 @@ import {trimComment} from './codeUtils'
 
 const Bullet = ({comment, idx}) => {
     return (
-        <div>
+        <div className="code-bullet-and-comment">
             <CircleBadge idx={idx}/>
             <span className="code-bullet-comment">{trimComment(comment)}</span>
         </div>
