@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -82,4 +83,19 @@ const Paragraph = (props) => {
     return <DefaultParagraph {...props}/>
 }
 
-export default Paragraph
+const PresentationParagraph = (props) => {
+    return (
+        <div className="znai-presentation-paragraph-wrapper">
+            <Paragraph {...props}/>
+        </div>
+    )
+}
+
+const presentationParagraph = {component: PresentationParagraph,
+    numberOfSlides: ({content}) => {
+        return paragraphStartsWith(content, questionSuffix);
+    }
+}
+
+export { Paragraph, presentationParagraph }
+

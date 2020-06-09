@@ -17,6 +17,7 @@
 import React from 'react'
 
 import {elementsLibrary} from '../DefaultElementsLibrary'
+import {createAttentionParagraph} from "./Paragraph.test.data";
 
 export function paragraphDemo(registry) {
     registry.add('with icon', () => (<elementsLibrary.DocElement content={createParagraphWithIcon()}
@@ -56,34 +57,6 @@ function createParagraphWithIcon() {
                     "id": "git-pull-request",
                     "type": "Icon"
                 },
-            ]
-        }
-    ]
-}
-
-function createAttentionParagraph(suffix) {
-    return [
-        {
-            "type": "Paragraph",
-            "content": [
-                {
-                    "text": `${suffix} It is very easy to add a code snippet or an output result.`,
-                    "type": "SimpleText"
-                },
-                {
-                    "type": "SoftLineBreak"
-                },
-                {
-                    "text": "All you have to do is indent your code with 4 spaces inside your markdown document and",
-                    "type": "SimpleText"
-                },
-                {
-                    "type": "SoftLineBreak"
-                },
-                {
-                    "text": "your code will be rendered like this.",
-                    "type": "SimpleText"
-                }
             ]
         }
     ]

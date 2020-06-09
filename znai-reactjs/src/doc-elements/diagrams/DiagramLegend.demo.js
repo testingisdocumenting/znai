@@ -16,7 +16,7 @@
 
 import React from 'react'
 import DiagramLegend from "./DiagramLegend"
-import Paragraph from "../default-elements/Paragraph"
+import { Paragraph } from "../paragraph/Paragraph"
 
 import {elementsLibrary} from '../DefaultElementsLibrary'
 

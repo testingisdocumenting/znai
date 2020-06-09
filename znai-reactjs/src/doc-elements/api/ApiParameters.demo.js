@@ -17,7 +17,7 @@
 import React from 'react'
 import ApiParameters from './ApiParameters'
 import {elementsLibrary} from '../DefaultElementsLibrary'
-import Paragraph from '../default-elements/Paragraph'
+import { Paragraph } from '../paragraph/Paragraph'
 
 const personParameters = [
     {name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
