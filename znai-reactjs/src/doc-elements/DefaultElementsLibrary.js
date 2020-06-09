@@ -36,7 +36,7 @@ import Anchor from './default-elements/Anchor'
 import Link from './default-elements/Link'
 import {SubHeading, presentationSubHeading} from './default-elements/SubHeading'
 import ListItem from './bullets/ListItem'
-import Paragraph from './default-elements/Paragraph'
+import { Paragraph, presentationParagraph } from './paragraph/Paragraph'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import presentationGraphVizSvg from './graphviz/PresentationGraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
@@ -83,7 +83,9 @@ library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.el
 library.StrikeThrough = (props) => (<del className="strike-through"><props.elementsLibrary.DocElement {...props}/></del>)
 library.Link = Link
 library.Anchor = Anchor
+
 library.Paragraph = Paragraph
+presentationElementHandlers.Paragraph = presentationParagraph
 
 library.SubHeading = SubHeading
 presentationElementHandlers.SubHeading = presentationSubHeading

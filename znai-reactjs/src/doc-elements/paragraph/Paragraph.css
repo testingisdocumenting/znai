@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -110,4 +111,13 @@ not belong to the same parent node so margins won't even each other out.
 
 .paragraph.attention.avoid .icon-part {
     color: var(--znai-attention-dont-color);
+}
+
+.znai-presentation-paragraph-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.znai-presentation-paragraph-wrapper .paragraph {
+    width: 60%;
 }
