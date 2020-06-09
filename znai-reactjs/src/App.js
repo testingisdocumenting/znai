@@ -68,7 +68,7 @@ import testData from "./doc-elements/TestData"
 import {subHeadingPresentationDemo} from './doc-elements/default-elements/PresentationSubHeading.demo'
 import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
 import {updateGlobalDocReferences} from './doc-elements/references/globalDocReferences'
-import {paragraphDemo} from './doc-elements/default-elements/Paragraph.demo'
+import {paragraphDemo} from './doc-elements/paragraph/Paragraph.demo'
 import {defaultNextPrevNavigationDemo} from './doc-elements/page/default/PageDefaultNextPrevNavigation.demo'
 import {twoSidesNextPrevNavigationDemo} from './doc-elements/page/two-sides/TwoSidesNextPrevNavigation.demo'
 import {bulletListsDemo} from './doc-elements/bullets/BulletList.demo'
@@ -78,6 +78,7 @@ import {documentationLayoutDemo} from "./layout/DocumentationLayout.demo";
 import {cliOutputDemo} from "./doc-elements/cli/CliOutput.demo";
 import {cliOutputPresentationDemo} from "./doc-elements/cli/PresentationCliOutput.demo";
 import {bulletListPresentationDemo} from "./doc-elements/bullets/PresentationBulletList.demo";
+import {paragraphPresentationDemo} from "./doc-elements/paragraph/PresentationParagraph.demo";
 
 const docMeta = {
     id: 'preview',
@@ -154,6 +155,7 @@ registries.add('presentation')
     .registerAsTabs('GraphViz SVG', graphVizSvgPresentationDemo)
     .registerAsTabs('Blockquote', blockQuotePresentationDemo)
     .registerAsTabs('Bullet Points', bulletListPresentationDemo)
+    .registerAsTabs('Paragraph', paragraphPresentationDemo)
     .registerAsTabs('Cli Output', cliOutputPresentationDemo)
 
 registries.add('preview')
