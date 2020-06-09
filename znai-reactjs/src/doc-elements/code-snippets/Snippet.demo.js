@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,9 +35,11 @@ export function snippetsDemo(registry) {
         .add('with linked method calls', () => <Snippet wide={true} title="snippet title" lang="java"
                                                         references={methodCallReferences()}
                                                         snippet={codeWithMethodCalls()}/>)
-        .add('with bullet points', () => <Snippet wide={false} lang="java" snippet={codeWithComments()}
-                                                  commentsType="inline"/>)
-        .add('with spoiler bullet points', () => <Snippet wide={false} lang="java" snippet={codeWithComments()}
+        .add('with bullet points java', () => <Snippet wide={false} lang="java" snippet={javaCodeWithComments()}
+                                                       commentsType="inline"/>)
+        .add('with bullet points python', () => <Snippet wide={false} lang="python" snippet={pythonCodeWithComments()}
+                                                         commentsType="inline"/>)
+        .add('with spoiler bullet points', () => <Snippet wide={false} lang="java" snippet={javaCodeWithComments()}
                                                           spoiler={true}
                                                           commentsType="inline"/>)
         .add('wide with bullet points', () => <Snippet wide={true} lang="java" snippet={wideCode()}
@@ -51,7 +54,8 @@ export function snippetsDemo(registry) {
         .add('with empty bullet points', () => <Snippet lang="java" snippet={codeWithoutComments()}
                                                         commentsType="inline"/>)
         .add('horizontal scroll', () => <Snippet wide={false} lang="java" snippet={wideCode()}/>)
-        .add('horizontal scroll with title and highlight', () => <Snippet wide={false} lang="java" snippet={wideCode()} highlight={2} title="Hello Snippet"/>)
+        .add('horizontal scroll with title and highlight', () => <Snippet wide={false} lang="java" snippet={wideCode()}
+                                                                          highlight={2} title="Hello Snippet"/>)
         .add('highlight by line idx', () => <Snippet lang="markdown" snippet={markdownCode()} highlight={[0]}/>)
         .add('highlight by text', () => <Snippet lang="markdown" snippet={markdownCode()} highlight={"include-file"}/>)
         .add('highlight by text right side background', () => <TwoSidesLayoutRightPart><Snippet lang="java"
@@ -99,12 +103,17 @@ function wideCode() {
         '}\n'
 }
 
-function codeWithComments() {
+function javaCodeWithComments() {
     return 'class InternationalPriceService implements PriceService {\n' +
         '    private static void main(String... args) {\n' +
         '        ... // code goes here\n' +
         '    } // code stops here\n' +
         '}\n'
+}
+
+function pythonCodeWithComments() {
+    return 'def method:\n' +
+        '    print("hello") # hello message\n'
 }
 
 function codeWithoutComments() {
@@ -229,7 +238,7 @@ function contentSnippet(isRightSide) {
     return {
         "type": "Snippet",
         "lang": "java",
-        "snippet": codeWithComments(),
+        "snippet": javaCodeWithComments(),
         "meta": {
             "rightSide": isRightSide
         }

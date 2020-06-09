@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -104,7 +105,10 @@ function splitTokensIntoLines(tokens) {
 }
 
 function isInlinedComment(token) {
-    return token.type === 'comment' && token.content.startsWith("//")
+    return token.type === 'comment' && (
+        token.content.startsWith("//") ||
+        token.content.startsWith("#")
+    )
 }
 
 function trimComment(comment) {
