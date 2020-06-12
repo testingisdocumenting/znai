@@ -17,7 +17,9 @@
 
 .code-bullet-and-comment {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    line-height: 18px;
+    margin-bottom: 8px;
 }
 
 .code-bullet-comment {
