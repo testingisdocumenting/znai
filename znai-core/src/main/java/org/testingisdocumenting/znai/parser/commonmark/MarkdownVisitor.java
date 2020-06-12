@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -171,7 +172,8 @@ public class MarkdownVisitor extends AbstractVisitor {
     @Override
     public void visit(Image image) {
         Node firstChild = image.getFirstChild();
-        parserHandler.onImage(image.getTitle(), image.getDestination(), ((Text) firstChild).getLiteral());
+        String alt = extractText(firstChild);
+        parserHandler.onImage(image.getTitle(), image.getDestination(), alt.isEmpty() ? "image" : alt);
     }
 
     @Override
@@ -233,6 +235,14 @@ public class MarkdownVisitor extends AbstractVisitor {
             return "<only regular text is supported as part of heading>";
         }
 
-        return ((Text) firstChild).getLiteral();
+        return extractText(firstChild);
+    }
+
+    private String extractText(Node node) {
+        if (node == null) {
+            return "";
+        }
+
+        return ((Text) node).getLiteral();
     }
 }
