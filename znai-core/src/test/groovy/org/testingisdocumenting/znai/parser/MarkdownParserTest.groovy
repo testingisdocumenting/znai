@@ -248,6 +248,18 @@ world""")
     }
 
     @Test
+    void "image with no alt text"() {
+        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 200000
+
+        parse("![](images/png-test.png \"custom title\")")
+        content.should == [[title: "custom title", destination: '/test-doc/png-test.png',
+                            alt: 'image', inlined: false,
+                            width:762, height:581,
+                            timestamp: 200000,
+                            type: 'Image']]
+    }
+
+    @Test
     void "include plugin"() {
         parse(":include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
         content.should == [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
