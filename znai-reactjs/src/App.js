@@ -30,7 +30,7 @@ import {openApiOperationDemo} from './doc-elements/open-api/operation/OpenApiOpe
 import {openApiSchemaDemo} from './doc-elements/open-api/schema/OpenApiSchema.demo'
 import {docUtilsDemo} from './doc-elements/doc-utils/DocUtils.demo'
 import {pagesDemo} from './doc-elements/page/Page.demo'
-import {imageAnnotationDemo} from './doc-elements/images/EmbeddedAnnotatedImage.demo'
+import {imageDemo} from './doc-elements/images/Image.demo'
 import {apiParametersDemo} from './doc-elements/api/ApiParameters.demo'
 import {jsxDemo} from './doc-elements/jsx/Jsx.demo'
 import {snippetsDemo, snippetsTwoSidesDemo} from './doc-elements/code-snippets/Snippet.demo'
@@ -129,7 +129,7 @@ registries.add('snippets')
 registries.add('visuals')
     .registerAsGrid('Spoilers', 0, spoilerDemo)
     .registerAsGrid('Charts', 0, chartDemo)
-    .registerAsTabs('Image Annotations', imageAnnotationDemo)
+    .registerAsTabs('Image', imageDemo)
     .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)
     .registerAsGrid('SVG', 0, svgDemo)
     .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
