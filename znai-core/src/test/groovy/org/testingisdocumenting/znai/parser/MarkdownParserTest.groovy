@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -242,6 +243,18 @@ world""")
         parse("![alt text](images/png-test.png \"custom title\")")
         content.should == [[title: "custom title", destination: '/test-doc/png-test.png',
                             alt: 'alt text', inlined: false,
+                            width:762, height:581,
+                            timestamp: 200000,
+                            type: 'Image']]
+    }
+
+    @Test
+    void "image with no alt text"() {
+        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 200000
+
+        parse("![](images/png-test.png \"custom title\")")
+        content.should == [[title: "custom title", destination: '/test-doc/png-test.png',
+                            alt: 'image', inlined: false,
                             width:762, height:581,
                             timestamp: 200000,
                             type: 'Image']]
