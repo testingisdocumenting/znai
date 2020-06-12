@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,11 +23,15 @@ import './EmbeddedAnnotatedImage.css'
 
 class EmbeddedAnnotatedImage extends Component {
     render() {
-        const {imageSrc, shapes} = this.props
+        const {imageSrc, shapes, align} = this.props
         const annotations = new Annotations(shapes)
-        return (<div className="embedded-annotated-image">
-            <AnnotatedImage imageSrc={imageSrc} annotations={annotations} {...this.props} isStatic="true"/>
-        </div>)
+
+        const fullClassName = "embedded-annotated-image" + (align ? " content-block " + align : "")
+        return (
+            <div className={fullClassName}>
+                <AnnotatedImage imageSrc={imageSrc} annotations={annotations} {...this.props} isStatic="true"/>
+            </div>
+        )
     }
 }
 

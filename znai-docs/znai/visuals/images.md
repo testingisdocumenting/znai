@@ -46,3 +46,16 @@ To scale image up or down use `scaleRatio` option, `1` is default, `0.5` is half
     :include-image: books.jpg {scaleRatio: 0.3}
 
 :include-image: books.jpg {scaleRatio: 0.3}
+
+# Align
+
+Use `align` option to align images left or right. 
+
+    :include-image: books.jpg {align: "left", scaleRatio: 0.3}
+    
+:include-image: books.jpg {align: "left", scaleRatio: 0.3}
+
+    :include-image: books.jpg {align: "right", scaleRatio: 0.3}
+    
+:include-image: books.jpg {align: "right", scaleRatio: 0.3}
+

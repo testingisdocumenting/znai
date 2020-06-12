@@ -20,6 +20,8 @@ import EmbeddedAnnotatedImage from './EmbeddedAnnotatedImage'
 
 export function imageDemo(registry) {
     registry.add('simple annotations', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}/>)
+    registry.add('left aligned', () => <EmbeddedAnnotatedImage {...leftAlign()}/>)
+    registry.add('right aligned', () => <EmbeddedAnnotatedImage {...rightAlign()}/>)
 }
 
 function simpleAnnotations() {
@@ -35,5 +37,23 @@ function simpleAnnotations() {
             {type: 'highlight', id: 'h1', x: 150, y: 220, width: 80, height: 40, color: 'c'},
             {type: 'rectangle', id: 'c3', x: 270, y: 170, width: 80, height: 40, text: 'here', color: 'b'},
             {type: 'arrow', id: 'a1', beginX: 200, beginY: 200, endX: 300, endY: 300, color: 'd', text: 'This here'}]
+    }
+}
+
+function leftAlign() {
+    return {
+        imageSrc: 'ui.jpg',
+        align: 'left',
+        width: 400,
+        height: 250,
+    }
+}
+
+function rightAlign() {
+    return {
+        imageSrc: 'ui.jpg',
+        align: 'right',
+        width: 400,
+        height: 250,
     }
 }
