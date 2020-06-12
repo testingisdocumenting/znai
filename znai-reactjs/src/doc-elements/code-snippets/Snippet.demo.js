@@ -37,6 +37,8 @@ export function snippetsDemo(registry) {
                                                         snippet={codeWithMethodCalls()}/>)
         .add('with bullet points java', () => <Snippet wide={false} lang="java" snippet={javaCodeWithComments()}
                                                        commentsType="inline"/>)
+        .add('with multiline bullet points java', () => <Snippet wide={false} lang="java" snippet={javaCodeWithMultilineComments()}
+                                                       commentsType="inline"/>)
         .add('with bullet points python', () => <Snippet wide={false} lang="python" snippet={pythonCodeWithComments()}
                                                          commentsType="inline"/>)
         .add('with spoiler bullet points', () => <Snippet wide={false} lang="java" snippet={javaCodeWithComments()}
@@ -108,6 +110,16 @@ function javaCodeWithComments() {
         '    private static void main(String... args) {\n' +
         '        ... // code goes here\n' +
         '    } // code stops here\n' +
+        '}\n'
+}
+
+function javaCodeWithMultilineComments() {
+    return 'class InternationalPriceService implements PriceService {\n' +
+        '    private static void main(String... args) {\n' +
+        '        ... // multiline comment multi line comment multiline comment multi line comment multiline comment ' +
+        'multi line comment multiline comment multi line comment \n' +
+        '    } // Code stops here code stops here code stops here code' +
+        ' stops here code stops here code stops here code stops here code stops here code stops here \n' +
         '}\n'
 }
 

@@ -24,7 +24,7 @@
     color: var(--znai-snippets-bullet-color);
     background-color: var(--znai-snippets-bullet-background-color);
 
-    border-radius: 16px;
+    border-radius: 10px;
     min-height: 20px;
     min-width: 20px;
 
