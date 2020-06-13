@@ -77,6 +77,10 @@
     color: var(--znai-keyword-color);
 }
 
+.token.directive {
+    color: var(--znai-directive-color);
+}
+
 .token.string {
     color: var(--znai-string-color);
 }

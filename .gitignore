@@ -13,3 +13,4 @@ docs-build
 *.DS_Store
 dependency-reduced-pom.xml
 npm-debug.log
+todo.md

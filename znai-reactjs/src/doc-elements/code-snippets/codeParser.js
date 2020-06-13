@@ -47,12 +47,14 @@ const extensionsMapping = {
     hpp: 'cpp',
     cpp: 'cpp',
     js: 'javascript',
+    jsx: 'javascript',
     py: 'python',
     ts: 'typescript',
     tsx: 'typescript',
 }
 
 function adjustLang(lang) {
+    lang = lang ? lang.toLowerCase() : ""
     const extensionBasedLang = extensionsMapping[lang]
     return extensionBasedLang ? extensionBasedLang : lang
 }

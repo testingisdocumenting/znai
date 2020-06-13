@@ -14,6 +14,23 @@ The file will be looked up using following rules:
 * root directory of a documentation
 * all lookup paths listed in a `lookup-paths` file
 
+# Syntax highlighting
+
+Syntax highlighting is automatically selected based file extension. 
+E.g. extensions `.c`, `.h`, `.cpp`, `.hpp` are treated as C++.  
+
+    :include-file: simple.c
+    
+:include-file: simple.c
+
+Use `lang` to force a different syntax highlighting
+
+    :include-file: simple.c {lang: "java"}
+    
+:include-file: simple.c {lang: "java"}
+
+Note: File extensions and `lang` are case-insensitive.
+
 # Title
 
     :include-file: file-name.js {title: "ES6 class"} 
