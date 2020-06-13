@@ -173,6 +173,7 @@
     --znai-class-color: #3d3d3f;
     --znai-function-color: #a66f2b;
     --znai-keyword-color: #038091;
+    --znai-directive-color: #038091;
     --znai-number-color: #2822ad;
     --znai-boolean-color: var(--znai-number-color);
     --znai-string-color: #078744;
