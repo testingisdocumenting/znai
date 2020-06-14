@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +17,7 @@
 
 import React, {Component} from 'react'
 
-import {extractTextFromTokens, splitTokensIntoLines} from './codeUtils'
+import {splitTokensIntoLines} from './codeUtils'
 import LineOfTokens from './LineOfTokens.js'
 import SimpleCodeToken from './SimpleCodeToken.js'
 import {convertToList} from '../propsUtils'
@@ -43,21 +44,11 @@ class SimpleCodeSnippet extends Component {
         }
     }
 
-    processProps({isPresentation, tokens, linesOfCode, highlight}) {
+    processProps({tokens, linesOfCode, highlight}) {
         this.linesOfTokens = !linesOfCode ? splitTokensIntoLines(tokens) : linesOfCode
 
         // highlight is either a single line index/substring or a collection of line indexes and substrings
         this.highlight = convertToList(highlight)
-
-        if (isPresentation || this.highlight.length === 0) {
-            return
-        }
-
-        this.isLineHighlighted = this.linesOfTokens.map((tokens, idx) => this.isHighlighted(idx, tokens))
-
-        if (this.isLineHighlighted.filter(highlighted => highlighted).length === 0) {
-            throw new Error('none of the lines matches specified highlights: ' + this.highlight)
-        }
     }
 
     render() {
@@ -67,18 +58,20 @@ class SimpleCodeSnippet extends Component {
         // slideIdx === 0 means no highlights, 1 - first highlight, etc
         const highlightIsVisible = !isPresentation || slideIdx > 0
 
-        const linesToRender = this.limitLines && !displayFully ?
+        const visibleLines = this.limitLines && !displayFully ?
             this.linesOfTokens.slice(0, this.readMoreVisibleLines) :
             this.linesOfTokens
+
+        const linesToRender = this.processLinesToRender(visibleLines)
 
         const mergedReferences = mergeWithGlobalDocReferences(references)
 
         return (
             <pre>
-                {linesToRender.map((tokens, idx) => (
-                    <LineOfTokens key={idx} tokens={tokens}
+                {linesToRender.map((tokens, lineIdx) => (
+                    <LineOfTokens key={lineIdx} tokens={tokens}
                                   references={mergedReferences}
-                                  isHighlighted={highlightIsVisible && this.isHighlighted(idx, tokens)}
+                                  isHighlighted={highlightIsVisible && this.isHighlighted(lineIdx)}
                                   isPresentation={isPresentation}
                                   TokenComponent={SimpleCodeToken}/>
                 ))}
@@ -99,6 +92,22 @@ class SimpleCodeSnippet extends Component {
         )
     }
 
+    // hides lines for presentation mode to reveal them later
+    processLinesToRender(lines) {
+        const {isPresentation, slideIdx, revealLineStop} = this.props
+
+        if (!isPresentation) {
+            return lines
+        }
+
+        if (!revealLineStop || slideIdx >= revealLineStop.length) {
+            return lines
+        }
+
+        const upToIdx = revealLineStop[slideIdx]
+        return lines.map((line, idx) => idx <= upToIdx ? line : ["\n"])
+    }
+
     onReadMoreClick = () => {
         this.setState({displayFully: true})
     }
@@ -111,30 +120,36 @@ class SimpleCodeSnippet extends Component {
         return this.props.readMoreVisibleLines || 8
     }
 
-    isHighlighted(idx, tokens) {
-        const {meta, isPresentation, slideIdx} = this.props
-        const highlight = (!isPresentation || isAllAtOnce(meta)) ?
-            this.highlight:
-            this.highlight.slice(0, slideIdx)
+    isHighlighted(lineIdx) {
+        const {meta, isPresentation, slideIdx, revealLineStop} = this.props
 
-        if (! highlight) {
+        const highlightSliceIdx = calcHighlightSliceIdx(this.highlight)
+
+        const highlight = !isPresentation ?
+            this.highlight:
+            this.highlight.slice(0, highlightSliceIdx)
+
+        if (!highlight) {
             return false
         }
 
-        if (highlight.indexOf(idx) !== -1) {
-            return true
-        }
+        return highlight.indexOf(lineIdx) !== -1
 
-        const text = extractTextFromTokens(tokens)
-        const matches = highlight.filter(idxOrText => {
-            if (typeof idxOrText === 'number') {
-                return false
+        function calcHighlightSliceIdx(originalHighlight) {
+            const allAtOnce = isAllAtOnce(meta)
+
+            if (!revealLineStop || revealLineStop.length === 0) {
+                return allAtOnce ? originalHighlight.length : slideIdx
             }
 
-            return text.indexOf(idxOrText) !== -1
-        })
+            if (slideIdx <= revealLineStop.length) {
+                return 0
+            }
 
-        return matches.length > 0
+            return allAtOnce ?
+                originalHighlight.length:
+                slideIdx - revealLineStop.length
+        }
     }
 }
 

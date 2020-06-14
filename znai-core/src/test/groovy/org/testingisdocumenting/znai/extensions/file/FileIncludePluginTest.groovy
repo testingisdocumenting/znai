@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -137,9 +138,15 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should highlight lines based on contains"() {
+        def props = resultingProps("script.groovy", "{highlight: 'class'}")
+        props.highlight.should == [3]
+    }
+
+    @Test
     void "should highlight lines from a highlight text file"() {
         def props = resultingProps("script.groovy", "{highlightPath: 'highlight.txt'}")
-        props.highlight.should == ['def a', 'int b']
+        props.highlight.should == [4, 5]
     }
 
     @Test

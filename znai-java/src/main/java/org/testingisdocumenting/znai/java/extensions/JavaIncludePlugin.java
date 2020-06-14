@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +21,7 @@ import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
+import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.java.parser.JavaCode;
 import org.testingisdocumenting.znai.java.parser.JavaMethod;
@@ -58,6 +60,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase implements SnippetC
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
         features.add(new SnippetHighlightFeature(componentsRegistry, pluginParams, this));
+        features.add(new SnippetRevealLineStopFeature(pluginParams, this));
         opts = pluginParams.getOpts();
 
         isBodyOnly = opts.get("bodyOnly", false);

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,6 +55,7 @@ public class FileIncludePlugin implements IncludePlugin, SnippetContentProvider 
                                 Path markupPath,
                                 PluginParams pluginParams) {
         features = new PluginFeatureList(
+                new SnippetRevealLineStopFeature(pluginParams, this),
                 new SnippetHighlightFeature(componentsRegistry, pluginParams, this),
                 new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)
         );

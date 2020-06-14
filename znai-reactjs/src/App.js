@@ -79,6 +79,7 @@ import {cliOutputDemo} from "./doc-elements/cli/CliOutput.demo";
 import {cliOutputPresentationDemo} from "./doc-elements/cli/PresentationCliOutput.demo";
 import {bulletListPresentationDemo} from "./doc-elements/bullets/PresentationBulletList.demo";
 import {paragraphPresentationDemo} from "./doc-elements/paragraph/PresentationParagraph.demo";
+import {snippetPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippet.demo";
 
 const docMeta = {
     id: 'preview',
@@ -156,6 +157,7 @@ registries.add('presentation')
     .registerAsTabs('Blockquote', blockQuotePresentationDemo)
     .registerAsTabs('Bullet Points', bulletListPresentationDemo)
     .registerAsTabs('Paragraph', paragraphPresentationDemo)
+    .registerAsTabs('Code Snippets', snippetPresentationDemo)
     .registerAsTabs('Cli Output', cliOutputPresentationDemo)
 
 registries.add('preview')
