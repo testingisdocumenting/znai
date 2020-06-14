@@ -21,8 +21,10 @@ import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.features.PluginFeatureList;
 import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
+import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
@@ -40,7 +42,7 @@ public class CliOutputIncludePlugin implements IncludePlugin, SnippetContentProv
     private Path filePath;
     private List<String> lines;
 
-    private SnippetHighlightFeature highlightFeature;
+    private PluginFeatureList features;
 
     @Override
     public String id() {
@@ -60,13 +62,17 @@ public class CliOutputIncludePlugin implements IncludePlugin, SnippetContentProv
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         fileName = pluginParams.getFreeParam();
         filePath = resourcesResolver.fullPath(fileName);
-        highlightFeature = new SnippetHighlightFeature(componentsRegistry, pluginParams, this);
+
+        features = new PluginFeatureList(
+                new SnippetRevealLineStopFeature(pluginParams, this),
+                new SnippetHighlightFeature(componentsRegistry, pluginParams, this)
+        );
 
         LinkedHashMap<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         lines = readLines(componentsRegistry, filePath);
         props.put("lines", lines);
         props.putAll(pluginParams.getOpts().toMap());
-        highlightFeature.updateProps(props);
+        features.updateProps(props);
 
         return PluginResult.docElement("CliOutput", props);
     }
@@ -75,7 +81,7 @@ public class CliOutputIncludePlugin implements IncludePlugin, SnippetContentProv
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.concat(
                 Stream.of(AuxiliaryFile.builtTime(filePath)),
-                highlightFeature.auxiliaryFiles());
+                features.auxiliaryFiles());
     }
 
     private static List<String> readLines(ComponentsRegistry componentsRegistry, Path filePath) {

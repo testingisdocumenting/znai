@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,8 +32,9 @@ import java.util.stream.Stream;
  * Provides highlight validation, reads highlights from highlightPath when provided
  */
 public class SnippetHighlightFeature implements PluginFeature {
+    private static final String HIGHLIGHT_KEY = "highlight";
+
     private final ComponentsRegistry componentsRegistry;
-    private final PluginParams pluginParams;
     private final Path highlightFileFullPath;
     private final String highlightPath;
     private final List<Object> highlight;
@@ -40,15 +42,28 @@ public class SnippetHighlightFeature implements PluginFeature {
 
     public SnippetHighlightFeature(ComponentsRegistry componentsRegistry, PluginParams pluginParams, SnippetContentProvider contentProvider) {
         this.componentsRegistry = componentsRegistry;
-        this.pluginParams = pluginParams;
 
         this.highlightPath = pluginParams.getOpts().get("highlightPath", null);
         this.highlightFileFullPath = highlightPath != null ?
                 componentsRegistry.resourceResolver().fullPath(highlightPath) :
                 null;
 
-        this.highlight = extractHighlight(pluginParams.getOpts().getList("highlight"));
+        this.highlight = extractHighlight(pluginParams.getOpts().getList(HIGHLIGHT_KEY));
         this.contentProvider = contentProvider;
+    }
+
+    public void updateProps(Map<String, Object> props) {
+        if (!highlightProvided()) {
+            return;
+        }
+
+        SnippetContainerEntriesConverter snippetValidator = new SnippetContainerEntriesConverter(contentProvider, HIGHLIGHT_KEY);
+        props.put(HIGHLIGHT_KEY, snippetValidator.convertAndValidate(highlight));
+    }
+
+    public Stream<AuxiliaryFile> auxiliaryFiles() {
+        return highlightFileFullPath != null ?
+                Stream.of(AuxiliaryFile.builtTime(highlightFileFullPath)) : Stream.empty();
     }
 
     private List<Object> extractHighlight(List<Object> highlight) {
@@ -62,55 +77,6 @@ public class SnippetHighlightFeature implements PluginFeature {
         combined.addAll(highlight);
 
         return combined;
-    }
-
-    public void updateProps(Map<String, Object> props) {
-        if (!highlightProvided()) {
-            return;
-        }
-
-        validateHighlight(contentProvider.snippetContent());
-        props.put("highlight", highlight);
-    }
-
-    private void validateHighlight(String snippetContent) {
-        String[] lines = snippetContent.split("\n");
-        for (Object idxOrText : highlight) {
-            if (idxOrText instanceof Number) {
-                validateIdx(lines, (Number) idxOrText);
-            } else {
-                validateContains(lines, (String) idxOrText);
-            }
-        }
-    }
-
-    private void validateIdx(String[] lines, Number idx) {
-        int intValue = idx.intValue();
-        if (intValue >= lines.length || intValue < 0) {
-            throw new IllegalArgumentException("highlight idx is out of range: " + idx + exceptionIdMessage());
-        }
-    }
-
-    private void validateContains(String[] lines, String partial) {
-        if (Arrays.stream(lines).noneMatch(line -> line.contains(partial))) {
-            throw new IllegalArgumentException("highlight text <" + partial + "> is not found" +
-                    exceptionIdMessage() +
-                    "\n" + contentProvider.snippetContent());
-        }
-    }
-
-    private String exceptionIdMessage() {
-        String id = contentProvider.snippetId();
-        if (id.isEmpty()) {
-            return "";
-        }
-
-        return "\ncheck: " + id;
-    }
-
-    public Stream<AuxiliaryFile> auxiliaryFiles() {
-        return highlightFileFullPath != null ?
-                Stream.of(AuxiliaryFile.builtTime(highlightFileFullPath)) : Stream.empty();
     }
 
     private boolean highlightProvided() {

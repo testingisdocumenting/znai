@@ -106,10 +106,10 @@ Use `title` to specify output of the output
 
 In presentation mode, `cli-command` will simulate typing inside the terminal.
 
-You can gradually reveal `cli-output` by providing `lineStop` parameter.
+You can gradually reveal `cli-output` by providing `revealLineStop` parameter.
   
-    :include-cli-output: cli/file-path-of-captured.out {lineStop: [0, 4]}
+    :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]}
     
 Passed `highlight` will highlight each line as a separate slide.
 
-:include-cli-output: cli/file-path-of-captured.out {lineStop: [0, 4], highlight: "remote"}
+:include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4], highlight: "remote"}

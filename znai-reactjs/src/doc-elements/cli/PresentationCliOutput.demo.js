@@ -25,18 +25,18 @@ export function cliOutputPresentationDemo(registry) {
         .add('with highlight', createPresentationDemo([{
             type: 'CliOutput',
             lines: generateNonAnsiLines(),
-            highlight: [3, 'line number 7']
+            highlight: [3, 7]
         }]))
         .add('with reveal', createPresentationDemo([{
             type: 'CliOutput',
             lines: generateNonAnsiLines(),
-            lineStop: [0, 3]
+            revealLineStop: [0, 3]
         }]))
         .add('with reveal and highlight', createPresentationDemo([{
             type: 'CliOutput',
             lines: generateNonAnsiLines(),
-            lineStop: [0, 3],
-            highlight: [3, 'line number 7']
+            revealLineStop: [0, 3],
+            highlight: [3, 7]
         }]))
 }
 

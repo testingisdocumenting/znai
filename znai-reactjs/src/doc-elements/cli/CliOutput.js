@@ -18,75 +18,40 @@
 import React from 'react'
 
 import SnippetContainer from "../code-snippets/SnippetContainer";
-import SimpleCodeSnippet from "../code-snippets/SimpleCodeSnippet";
 
 import {convertAnsiToTokenLines} from "./ansiToTokensConverter";
 
+import SimpleCodeSnippet from "../code-snippets/SimpleCodeSnippet";
+
+import {isAllAtOnce} from "../meta/meta";
+
 import './CliOutput.css';
 
-const CliOutput = ({lines, lineStop, highlight, slideIdx, ...props}) => {
-    const isPresentation = slideIdx !== undefined;
+const CliOutput = ({lines, ...props}) => {
     const linesOfTokens = convertAnsiToTokenLines(lines);
 
     return (
         <SnippetContainer className="cli-output"
-                          linesOfCode={reduceLinesForPresentation()}
+                          linesOfCode={linesOfTokens}
                           snippetComponent={SimpleCodeSnippet}
-                          highlight={reduceHighlightForPresentation()}
-                          slideIdx={reduceSnippetContainerSlideIdx()}
                           {...props}/>
     )
-
-    function reduceLinesForPresentation() {
-        if (!lineStop || !isPresentation) {
-            return linesOfTokens;
-        }
-
-        if (slideIdx >= lineStop.length) {
-            return linesOfTokens;
-        }
-
-        return linesOfTokens.slice(0, lineStop[slideIdx] + 1);
-    }
-
-    // slides show first reveal of output
-    // then highlight one line at a time
-    // so we need to delay highlight we pass to SnippetContainer
-    //
-    function reduceHighlightForPresentation() {
-        if (!lineStop || !isPresentation) {
-            return highlight;
-        }
-
-        if (slideIdx < lineStop.length) {
-            return []
-        }
-
-        return highlight;
-    }
-
-    function reduceSnippetContainerSlideIdx() {
-        if (!lineStop) {
-            return slideIdx;
-        }
-
-        return slideIdx - lineStop.length;
-    }
 }
 
 const presentationCliOutput = {component: CliOutput,
-    numberOfSlides: ({highlight, lineStop}) => {
-        let numberOfSlides = 1;
-        if (highlight) {
-            numberOfSlides += highlight.length;
-        }
-
-        if (lineStop) {
-            numberOfSlides += lineStop.length;
-        }
-
-        return numberOfSlides;
+    numberOfSlides: (props) => {
+        return 1 + highlightNumberOfSlides(props) + (props.revealLineStop || []).length;
     }
 }
+
+function highlightNumberOfSlides({meta, highlight}) {
+    highlight = highlight || []
+    if (isAllAtOnce(meta) && highlight.length > 0) {
+        return 1
+    }
+
+    return highlight.length
+}
+
 
 export {CliOutput, presentationCliOutput}

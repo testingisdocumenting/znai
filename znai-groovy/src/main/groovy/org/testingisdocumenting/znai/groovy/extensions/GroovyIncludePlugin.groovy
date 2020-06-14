@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +26,7 @@ import org.testingisdocumenting.znai.extensions.features.PluginFeatureList
 import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature
 import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature
+import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin
 import org.testingisdocumenting.znai.groovy.parser.GroovyCode
 import org.testingisdocumenting.znai.parser.ParserHandler
@@ -57,6 +59,7 @@ class GroovyIncludePlugin implements IncludePlugin, SnippetContentProvider {
                          PluginParams pluginParams) {
         features = new PluginFeatureList(
                 new SnippetHighlightFeature(componentsRegistry, pluginParams, this),
+                new SnippetRevealLineStopFeature(pluginParams, this),
                 new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)
         )
 

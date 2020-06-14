@@ -17,7 +17,7 @@
 
 import React from 'react'
 
-import {Snippet} from '../default-elements/Snippet'
+import {Snippet} from './Snippet'
 import {Tabs} from '../tabs/Tabs'
 
 import {elementsLibrary} from '../DefaultElementsLibrary'
@@ -59,10 +59,9 @@ export function snippetsDemo(registry) {
         .add('horizontal scroll with title and highlight', () => <Snippet wide={false} lang="java" snippet={wideCode()}
                                                                           highlight={2} title="Hello Snippet"/>)
         .add('highlight by line idx', () => <Snippet lang="markdown" snippet={markdownCode()} highlight={[0]}/>)
-        .add('highlight by text', () => <Snippet lang="markdown" snippet={markdownCode()} highlight={"include-file"}/>)
-        .add('highlight by text right side background', () => <TwoSidesLayoutRightPart><Snippet lang="java"
-                                                                                                snippet={wideCode()}
-                                                                                                highlight={"createMegaAbstractFactory"}/></TwoSidesLayoutRightPart>)
+        .add('highlight right side background', () => <TwoSidesLayoutRightPart><Snippet lang="java"
+                                                                                        snippet={wideCode()}
+                                                                                        highlight={[1]}/></TwoSidesLayoutRightPart>)
         .add('read more', () => <Snippet lang="csv" snippet={longCode()}
                                          readMore={true} readMoreVisibleLines={4}/>)
         .add('tabs with wide', () => <Tabs {...tabsContent({label: 'wide', wide: true})}

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,15 +17,15 @@
 
 import * as React from "react"
 
-import {isInlinedComment} from '../code-snippets/codeUtils'
+import {isInlinedComment} from './codeUtils'
 import {isAllAtOnce} from '../meta/meta'
 import {convertToList} from '../propsUtils';
 
-import SnippetContainer from '../code-snippets/SnippetContainer'
-import CodeSnippetWithInlineComments from '../code-snippets/CodeSnippetWithInlineComments'
-import SimpleCodeSnippet from '../code-snippets/SimpleCodeSnippet'
+import SnippetContainer from './SnippetContainer'
+import CodeSnippetWithInlineComments from './CodeSnippetWithInlineComments'
+import SimpleCodeSnippet from './SimpleCodeSnippet'
 
-import {parseCode} from '../code-snippets/codeParser'
+import {parseCode} from './codeParser'
 
 import './Snippet.css'
 
@@ -40,17 +41,15 @@ const Snippet = (props) => {
 
 const presentationSnippetHandler = {
     component: Snippet,
-    numberOfSlides: ({meta, commentsType, lang, snippet, tokens, highlight}) => {
+    numberOfSlides: ({meta, commentsType, lang, snippet, tokens, highlight, revealLineStop}) => {
         const tokensToUse = parseCodeWithCompatibility({lang, snippet, tokens})
         const highlightAsList = convertToList(highlight)
 
         if (commentsType === 'inline') {
             return inlinedCommentsNumberOfSlides({meta, tokens: tokensToUse})
-        } else if (highlightAsList.length) {
-            return highlightNumberOfSlides({meta, highlightAsList})
-        } else {
-            return 1
         }
+
+        return 1 + highlightNumberOfSlides({meta, highlightAsList}) + (revealLineStop || []).length;
     },
 
     slideInfoProvider: ({meta, commentsType, lang, snippet, tokens, slideIdx}) => {
@@ -95,10 +94,10 @@ function inlinedCommentsNumberOfSlides({meta, tokens}) {
 
 function highlightNumberOfSlides({meta, highlightAsList}) {
     if (isAllAtOnce(meta) && highlightAsList.length > 0) {
-        return 2 // two slides: 1st - no highlights; 2nd - all highlighted at once
+        return 1
     }
 
-    return highlightAsList.length + 1
+    return highlightAsList.length
 }
 
 export {Snippet, presentationSnippetHandler}
