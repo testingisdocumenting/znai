@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +15,7 @@
  * limitations under the License.
  */
 
-function splitAndTrimEmptyLines(text) {
+export function splitAndTrimEmptyLines(text) {
     const lines = text.split('\n')
     let startIdx = 0
     for (; startIdx < lines.length; startIdx++) {
@@ -33,7 +34,7 @@ function splitAndTrimEmptyLines(text) {
     return lines.slice(startIdx, endIdx + 1)
 }
 
-function splitTextIntoLinesUsingThreshold(text, thresholdCharCount) {
+export function splitTextIntoLinesUsingThreshold(text, thresholdCharCount) {
     if (text.length < thresholdCharCount) {
         return [text]
     }
@@ -48,7 +49,7 @@ function splitTextIntoLinesUsingThreshold(text, thresholdCharCount) {
     return result.map(words => words.join(" "))
 }
 
-function splitParts({parts, lengthFunc, valueFunc, thresholdCharCount, splitAfterList = []}) {
+export function splitParts({parts, lengthFunc, valueFunc, thresholdCharCount, splitAfterList = []}) {
     const result = []
     let runningLength = 0
     let runningParts = []
@@ -83,4 +84,11 @@ function splitParts({parts, lengthFunc, valueFunc, thresholdCharCount, splitAfte
     }
 }
 
-export { splitAndTrimEmptyLines, splitTextIntoLinesUsingThreshold, splitParts }
+export function repeatChar(n, char) {
+    let result = ''
+    for (let idx = 0; idx < n; idx++) {
+        result += char
+    }
+
+    return result
+}

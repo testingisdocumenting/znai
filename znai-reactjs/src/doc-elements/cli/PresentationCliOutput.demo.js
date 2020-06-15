@@ -45,7 +45,7 @@ function generateNonAnsiLines() {
         'line number 1',
         'line number 2',
         'line number 3',
-        'line number 4',
+        'long another line number 4',
         'line number 5',
         'line number 6',
         'line number 7',
