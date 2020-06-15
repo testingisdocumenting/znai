@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +15,7 @@
  * limitations under the License.
  */
 
-import {splitAndTrimEmptyLines, splitParts, splitTextIntoLinesUsingThreshold} from './strings'
+import {repeatChar, splitAndTrimEmptyLines, splitParts, splitTextIntoLinesUsingThreshold} from './strings'
 
 describe("string utils", () => {
     it("should split text into lines and remove empty lines from both sides", () => {
@@ -81,5 +82,10 @@ describe("string utils", () => {
         })
 
         expect(parts).toEqual([['hello', 'world'], ['of', 'par', 'and'], ['ter', 'configs']])
+    })
+
+    it("should repeat char N times", () => {
+        expect(repeatChar(0, ' ')).toEqual('')
+        expect(repeatChar(3, ' ')).toEqual('   ')
     })
 })

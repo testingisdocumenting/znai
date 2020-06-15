@@ -17,12 +17,14 @@
 
 import React, {Component} from 'react'
 
-import {splitTokensIntoLines} from './codeUtils'
+import {extractTextFromTokens, splitTokensIntoLines} from './codeUtils'
 import LineOfTokens from './LineOfTokens.js'
 import SimpleCodeToken from './SimpleCodeToken.js'
 import {convertToList} from '../propsUtils'
 import {isAllAtOnce} from '../meta/meta';
 import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'
+
+import {repeatChar} from "../../utils/strings";
 
 import './tokens.css'
 import './SimpleCodeSnippet.css'
@@ -104,8 +106,11 @@ class SimpleCodeSnippet extends Component {
             return lines
         }
 
+        const maxLineWidth = lines.reduce((max, line) => Math.max(max, extractTextFromTokens(line).length), 0)
+        const emptyLine = repeatChar(maxLineWidth - 1 /* new line symbol */, ' ')
+
         const upToIdx = revealLineStop[slideIdx]
-        return lines.map((line, idx) => idx <= upToIdx ? line : ["\n"])
+        return lines.map((line, idx) => idx <= upToIdx ? line : [emptyLine + "\n"])
     }
 
     onReadMoreClick = () => {
