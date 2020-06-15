@@ -17,7 +17,7 @@
 
 import * as React from "react"
 
-import {isInlinedComment} from './codeUtils'
+import {isInlinedComment, splitTokensIntoLines} from './codeUtils'
 import {isAllAtOnce} from '../meta/meta'
 import {convertToList} from '../propsUtils';
 
@@ -36,7 +36,13 @@ const Snippet = (props) => {
         CodeSnippetWithInlineComments :
         SimpleCodeSnippet
 
-    return <SnippetContainer {...props} tokens={tokensToUse} snippetComponent={snippetComponent}/>
+    // TODO propagate down
+    // make sure it is not being re-parsed
+    const linesOfCode = splitTokensIntoLines(tokensToUse)
+    return <SnippetContainer {...props}
+                             tokens={tokensToUse}
+                             linesOfCode={linesOfCode}
+                             snippetComponent={snippetComponent}/>
 }
 
 const presentationSnippetHandler = {
