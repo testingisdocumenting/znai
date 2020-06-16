@@ -128,7 +128,10 @@ public class WebSite {
         resourceResolver.addResolver(localResourceResolver);
         resourceResolver.addResolver(new ClassPathResourceResolver());
         resourceResolver.addResolver(new HttpBasedResourceResolver());
-        resourceResolver.initialize(findLookupLocations(siteConfig));
+
+        List<String> lookupLocations = findLookupLocations(siteConfig).collect(toList());
+        printLookupLocations(lookupLocations.stream());
+        resourceResolver.initialize(lookupLocations.stream());
 
         WebSiteResourcesProviders.add(new WebSiteLogoExtension(siteConfig.docRootPath));
         WebSiteResourcesProviders.add(new WebSiteGlobalOverridePlaceholderExtension());
@@ -654,7 +657,18 @@ public class WebSite {
             return root;
         }
 
-        return Stream.concat(root, readLocationsFromFile(cfg.fileWithLookupPaths));
+        Stream<String> additionalLookupPathsStream = cfg.additionalLookupPaths != null ?
+                cfg.additionalLookupPaths.stream() :
+                Stream.empty();
+
+        return Stream.concat(root,
+                Stream.concat(additionalLookupPathsStream,
+                        readLocationsFromFile(cfg.fileWithLookupPaths)));
+    }
+
+    private void printLookupLocations(Stream<String> stream) {
+        reportPhase("lookup locations:");
+        stream.forEach((path) -> ConsoleOutputs.out(Color.PURPLE, path));
     }
 
     private Stream<String> readLocationsFromFile(String filesLookupFilePath) {
@@ -695,6 +709,7 @@ public class WebSite {
         private DocMeta docMeta = new DocMeta(Collections.emptyMap());
         private ReactJsBundle reactJsBundle;
         private PageModifiedTimeStrategy pageModifiedTimeStrategy;
+        private List<String> additionalLookupPaths;
 
         private Configuration() {
             webResources = new ArrayList<>();
@@ -765,6 +780,11 @@ public class WebSite {
 
         public Configuration withFileWithLookupPaths(String fileWithLookupPaths) {
             this.fileWithLookupPaths = fileWithLookupPaths;
+            return this;
+        }
+
+        public Configuration withAdditionalLookupPaths(List<String> additionalLookupPaths) {
+            this.additionalLookupPaths = additionalLookupPaths;
             return this;
         }
 
