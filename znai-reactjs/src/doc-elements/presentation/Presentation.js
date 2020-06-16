@@ -38,7 +38,7 @@ class Presentation extends Component {
         const {pageTitle, sectionTitle} = presentationRegistry.extractCombinedSlideInfo(currentSlideIdx - 1)
 
         const slide = presentationRegistry.slideByIdx(currentSlideIdx)
-        const isSectionTitleOnSlide = !! slide.info.sectionTitle
+        const isSectionTitleOnSlide = !!slide.info.sectionTitle
 
         const slideVisibleNote = slide.info.slideVisibleNote
         const showSlideNote = typeof slideVisibleNote !== "undefined" && slideVisibleNote !== null
@@ -59,7 +59,7 @@ class Presentation extends Component {
 
                     <div className="slide-info">
                         <div className="presentation-page-title">{pageTitle}</div>
-                        {pageTitle && (! isSectionTitleOnSlide) ?
+                        {pageTitle && !isSectionTitleOnSlide && sectionTitle.length !== 0 ?
                             <span className="presentation-title-divider">&gt;&gt;</span> :
                             null
                         }

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +22,7 @@ export function subHeadingPresentationDemo(registry) {
         .add('long', createPresentationDemo([longContent()]))
         .add('short', createPresentationDemo([shortContent()]))
         .add('long single', createPresentationDemo([longSingleWord()]))
+        .add('with empty title section', createPresentationDemo([emptySection()]))
 }
 
 function longContent() {
@@ -47,5 +49,32 @@ function longSingleWord() {
         'id': 'sub',
         'level': 2,
         'type': 'SubHeading'
+    }
+}
+
+function emptySection() {
+    return {
+        "type": "Page",
+        "tocItem": {
+            "sectionTitle": "Section Title",
+            "pageTitle": "Long Page Title Long Page Title",
+            "pageMeta": {},
+            "fileName": "file-name",
+            "dirName": "dir-name",
+            "pageSectionIdTitles": [],
+        },
+        "content": [{
+            "title": "",
+            "id": "title",
+            "type": "Section",
+            "content": [
+                {
+                    'title': 'Long Long Long SubHeading',
+                    'id': 'sub',
+                    'level': 2,
+                    'type': 'SubHeading'
+                }
+            ]
+        }]
     }
 }
