@@ -42,6 +42,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
+import java.util.Arrays;
 
 public class ZnaiCliApp {
     private final ZnaiCliConfig config;
@@ -161,6 +162,7 @@ public class ZnaiCliApp {
                 withDocumentationType(config.getMarkupType()).
                 withMetaFromJsonFile(config.getSourceRoot().resolve(DocMeta.META_FILE_NAME)).
                 withFileWithLookupPaths("lookup-paths").
+                withAdditionalLookupPaths(Arrays.asList(config.getLookupPaths().split(":"))).
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
                 withGlobalReferencesPath(config.getSourceRoot().resolve("references.csv")).
