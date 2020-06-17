@@ -42,4 +42,11 @@ If the file is not found using local locations, it will be fetched from the prov
  
 :include-file: .travis.yml {lang: "yaml"}
 
+# CLI parameter
+
+Use `--lookup-paths` CLI parameter to add additional paths to lookup files. Use it when lookup location 
+can't be hardcoded.
+
+:include-cli-command: webtau --lookup-paths /extra/path-one:/extra/path-two 
+
 

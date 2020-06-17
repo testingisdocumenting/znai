@@ -43,6 +43,7 @@ public class ZnaiCliConfig {
     private static final String HOST_KEY = "host";
     private static final String PORT_KEY = "port";
     private static final String ACTOR_KEY = "actor";
+    private static final String LOOKUP_PATHS_KEY = "lookup-paths";
     private static final String HELP_KEY = "help";
     private static final int DEFAULT_PORT = 3333;
 
@@ -82,6 +83,7 @@ public class ZnaiCliConfig {
     private Mode mode;
     private List<String> specifiedCustomCommands;
     private String actor;
+    private String lookupPaths;
 
     private ModifiedTimeStrategy modifiedTimeStrategy;
 
@@ -165,6 +167,10 @@ public class ZnaiCliConfig {
         this.deployRoot = deployRoot;
     }
 
+    public String getLookupPaths() {
+        return lookupPaths;
+    }
+
     public ModifiedTimeStrategy getModifiedTimeStrategy() {
         return modifiedTimeStrategy;
     }
@@ -231,6 +237,8 @@ public class ZnaiCliConfig {
                 Paths.get("");
 
         actor = commandLine.hasOption(ACTOR_KEY) ? commandLine.getOptionValue(ACTOR_KEY) : "";
+
+        lookupPaths = commandLine.hasOption(LOOKUP_PATHS_KEY) ? commandLine.getOptionValue(LOOKUP_PATHS_KEY) : "";
 
         modifiedTimeStrategy = determineModifiedTimeStrategy(commandLine);
 
@@ -314,7 +322,7 @@ public class ZnaiCliConfig {
         options.addOption(null, DOC_ID_KEY, true, "documentation id");
         options.addOption(null, MODIFIED_TIME_KEY, true,
                 "strategy of modified time for each page: constant or file last update time: constant, file (default)");
-
+        options.addOption(null, LOOKUP_PATHS_KEY, true, "additional lookup paths separated by color(:)");
         options.addOption(null, DEPLOY_KEY, true, "documentation deploy root dir");
         options.addOption(null, PREVIEW_KEY, false, "preview mode");
         options.addOption(null, SERVE_KEY, false, "server mode");

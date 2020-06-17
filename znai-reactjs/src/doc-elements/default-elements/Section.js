@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -61,7 +62,9 @@ const PresentationTitle = ({title}) => {
 
 const presentationSectionHandler = {
     component: PresentationTitle,
-    numberOfSlides: () => 1,
+    numberOfSlides: ({title}) => {
+        return title.length === 0 ? 0 : 1
+    },
     slideInfoProvider: ({title}) => {
         return {sectionTitle: title}
     }
