@@ -25,7 +25,7 @@ import {getSearchPromise} from './search/searchPromise'
 import {documentationNavigation} from '../structure/DocumentationNavigation'
 import {documentationTracking} from './tracking/DocumentationTracking'
 import {textSelection} from './selected-text-extensions/TextSelection'
-import {tableOfContents} from '../structure/toc/TableOfContents'
+import {isTocItemIndex, tableOfContents} from '../structure/toc/TableOfContents'
 import {getAllPagesPromise} from './allPages'
 
 import Presentation from './presentation/Presentation'
@@ -163,7 +163,8 @@ export class Documentation extends Component {
                                                    elementsLibrary={elementsLibrary}/>
 
         const NextPrevNavigation = pageTypesRegistry.nextPrevNavigationComponent(page.tocItem)
-        const renderedNextPrevNavigation = <NextPrevNavigation currentTocItem={page.tocItem}
+        const renderedNextPrevNavigation = <NextPrevNavigation docTitle={docMeta.title}
+                                                               currentTocItem={page.tocItem}
                                                                prevPageTocItem={this.prevPageTocItem}
                                                                nextPageTocItem={this.nextPageTocItem}
                                                                onNextPage={this.onNextPage}
@@ -385,7 +386,7 @@ export class Documentation extends Component {
         const theme = this.theme
         const presentationRegistry = new PresentationRegistry(theme.elementsLibrary, theme.presentationElementHandlers, page)
 
-        const isIndex = tableOfContents.isIndex(page.tocItem)
+        const isIndex = isTocItemIndex(page.tocItem)
         document.title = isIndex ? docMeta.title : docMeta.title + ": " + page.tocItem.pageTitle
 
         this.setState({presentationRegistry})
