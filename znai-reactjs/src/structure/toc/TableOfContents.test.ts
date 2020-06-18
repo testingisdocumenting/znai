@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import {tableOfContents} from './TableOfContents'
+import { isTocItemIndex, tableOfContents } from './TableOfContents'
 
 describe('Table of Contents', () => {
   beforeEach(() => {
@@ -53,9 +53,9 @@ describe('Table of Contents', () => {
   })
 
   it('should detect if page is index', () => {
-    expect(tableOfContents.isIndex({dirName: '', fileName: 'index'})).toBeTruthy()
-    expect(tableOfContents.isIndex({dirName: '', fileName: ''})).toBeFalsy()
-    expect(tableOfContents.isIndex({dirName: 'abc', fileName: 'index'})).toBeFalsy()
+    expect(isTocItemIndex({dirName: '', fileName: 'index'})).toBeTruthy()
+    expect(isTocItemIndex({dirName: '', fileName: ''})).toBeFalsy()
+    expect(isTocItemIndex({dirName: 'abc', fileName: 'index'})).toBeFalsy()
   })
 
   it('should find next toc item', () => {
@@ -65,6 +65,6 @@ describe('Table of Contents', () => {
 
   it('should find prev toc item', () => {
     expect(tableOfContents.prevTocItem({dirName: 'REST', fileName: 'CRUD'})!.pageTitle).toEqual('Getting Started')
-    expect(tableOfContents.prevTocItem({dirName: 'REST', fileName: 'getting-started'})).toEqual(null)
+    expect(tableOfContents.prevTocItem({dirName: 'REST', fileName: 'getting-started'})).toEqual({"dirName": "", "fileName": "index", "pageMeta": {}, "pageTitle": "Index", "sectionTitle": ""})
   })
 })
