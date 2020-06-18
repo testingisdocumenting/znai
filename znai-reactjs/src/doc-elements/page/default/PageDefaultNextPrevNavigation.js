@@ -18,36 +18,55 @@
 import React from 'react'
 
 import { Icon } from '../../icons/Icon'
+import {isTocItemIndex} from "../../../structure/toc/TableOfContents";
+
 import './PageDefaultNextPrevNavigation.css'
 
-function PageDefaultNextPrevNavigation({currentTocItem, prevPageTocItem, nextPageTocItem, onNextPage, onPrevPage}) {
+function PageDefaultNextPrevNavigation({
+                                           docTitle,
+                                           currentTocItem,
+                                           prevPageTocItem,
+                                           nextPageTocItem,
+                                           onNextPage,
+                                           onPrevPage
+                                       }) {
     return (
         <div className="page-default-next-prev-navigation">
-            <DefaultPrevPageButton currentTocItem={currentTocItem} prevTocItem={prevPageTocItem} onClick={onPrevPage}/>
-            <DefaultNextPageButton currentTocItem={currentTocItem} nextTocItem={nextPageTocItem} onClick={onNextPage}/>
+            <DefaultPrevPageButton docTitle={docTitle}
+                                   currentTocItem={currentTocItem}
+                                   prevTocItem={prevPageTocItem}
+                                   onClick={onPrevPage}/>
+            <DefaultNextPageButton docTitle={docTitle}
+                                   currentTocItem={currentTocItem}
+                                   nextTocItem={nextPageTocItem}
+                                   onClick={onNextPage}/>
         </div>
     )
 }
 
-function DefaultPrevPageButton({currentTocItem, prevTocItem, onClick}) {
+function DefaultPrevPageButton({docTitle, currentTocItem, prevTocItem, onClick}) {
     return prevTocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
             <Icon id="chevron-left"/>
-            <div className="next-prev-page-title prev">{fullTitle(currentTocItem, prevTocItem)} </div>
+            <div className="next-prev-page-title prev">{fullTitle(docTitle, currentTocItem, prevTocItem)}</div>
         </div>) : <div/>
 }
 
-function DefaultNextPageButton({currentTocItem, nextTocItem, onClick}) {
+function DefaultNextPageButton({docTitle, currentTocItem, nextTocItem, onClick}) {
     return nextTocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
-            <div className="next-prev-page-title next">{fullTitle(currentTocItem, nextTocItem)} </div>
+            <div className="next-prev-page-title next">{fullTitle(docTitle, currentTocItem, nextTocItem)}</div>
             <Icon id="chevron-right"/>
         </div>) : <div/>
 }
 
-function fullTitle(current, nextOrPrev) {
+function fullTitle(docTitle, current, nextOrPrev) {
+    if (isTocItemIndex(nextOrPrev)) {
+        return docTitle
+    }
+
     if (current.dirName === nextOrPrev.dirName) {
-        return nextOrPrev.pageTitle;
+        return nextOrPrev.pageTitle
     }
 
     return `${nextOrPrev.sectionTitle}: ${nextOrPrev.pageTitle}`

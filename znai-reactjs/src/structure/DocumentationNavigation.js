@@ -16,6 +16,7 @@
 
 import * as Promise from 'promise'
 import {getDocId} from './docMeta';
+import {isTocItemIndex} from "./toc/TableOfContents";
 
 const index = {dirName: '', fileName: 'index'};
 
@@ -55,6 +56,10 @@ class DocumentationNavigation {
     }
 
     buildUrl(id) {
+        if (isTocItemIndex(id)) {
+            return this.fullPageUrl("")
+        }
+
         return this.fullPageUrl(id.dirName + "/" + id.fileName +
             (id.pageSectionId ? ("#" + id.pageSectionId) : ""))
     }

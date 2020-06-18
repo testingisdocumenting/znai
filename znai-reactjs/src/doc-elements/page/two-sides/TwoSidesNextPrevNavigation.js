@@ -21,12 +21,20 @@ import {DefaultNextPageButton, DefaultPrevPageButton} from '../default/PageDefau
 
 import './TwoSidesNextPrevNavigation.css'
 
-const TwoSidesNextPrevNavigation = ({currentTocItem, prevPageTocItem, nextPageTocItem, onNextPage, onPrevPage}) => {
+const TwoSidesNextPrevNavigation = ({
+                                        docTitle,
+                                        currentTocItem,
+                                        prevPageTocItem,
+                                        nextPageTocItem,
+                                        onNextPage,
+                                        onPrevPage
+                                    }) => {
     return (
         <TwoSidesLayout>
             <TwoSidesLayoutLeftPart>
                 <div className="two-sides-prev-navigation-button">
-                    <DefaultPrevPageButton currentTocItem={currentTocItem}
+                    <DefaultPrevPageButton docTitle={docTitle}
+                                           currentTocItem={currentTocItem}
                                            prevTocItem={prevPageTocItem}
                                            onClick={onPrevPage}/>
                 </div>
@@ -34,7 +42,8 @@ const TwoSidesNextPrevNavigation = ({currentTocItem, prevPageTocItem, nextPageTo
 
             <TwoSidesLayoutRightPart>
                 <div className="two-sides-next-navigation-button">
-                    <DefaultNextPageButton currentTocItem={currentTocItem}
+                    <DefaultNextPageButton docTitle={docTitle}
+                                           currentTocItem={currentTocItem}
                                            nextTocItem={nextPageTocItem}
                                            onClick={onNextPage}/>
                 </div>
