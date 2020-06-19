@@ -15,7 +15,13 @@
  * limitations under the License.
  */
 
-import {repeatChar, splitAndTrimEmptyLines, splitParts, splitTextIntoLinesUsingThreshold} from './strings'
+import {
+    countNumberOfLines,
+    repeatChar,
+    splitAndTrimEmptyLines,
+    splitParts,
+    splitTextIntoLinesUsingThreshold
+} from './strings'
 
 describe("string utils", () => {
     it("should split text into lines and remove empty lines from both sides", () => {
@@ -87,5 +93,13 @@ describe("string utils", () => {
     it("should repeat char N times", () => {
         expect(repeatChar(0, ' ')).toEqual('')
         expect(repeatChar(3, ' ')).toEqual('   ')
+    })
+
+    it("counts number of lines", () => {
+        expect(countNumberOfLines("")).toEqual(1);
+        expect(countNumberOfLines("hello")).toEqual(1);
+        expect(countNumberOfLines("hello\nworld")).toEqual(2);
+        expect(countNumberOfLines("hello\nworld\n")).toEqual(2);
+        expect(countNumberOfLines("hello\nworld\nof")).toEqual(3);
     })
 })

@@ -80,6 +80,7 @@ import {cliOutputPresentationDemo} from "./doc-elements/cli/PresentationCliOutpu
 import {bulletListPresentationDemo} from "./doc-elements/bullets/PresentationBulletList.demo";
 import {paragraphPresentationDemo} from "./doc-elements/paragraph/PresentationParagraph.demo";
 import {snippetPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippet.demo";
+import {snippetWithScrollPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippetWithScroll.demo";
 
 const docMeta = {
     id: 'preview',
@@ -158,6 +159,7 @@ registries.add('presentation')
     .registerAsTabs('Bullet Points', bulletListPresentationDemo)
     .registerAsTabs('Paragraph', paragraphPresentationDemo)
     .registerAsTabs('Code Snippets', snippetPresentationDemo)
+    .registerAsTabs('Code Snippets With Scroll', snippetWithScrollPresentationDemo)
     .registerAsTabs('Cli Output', cliOutputPresentationDemo)
 
 registries.add('preview')

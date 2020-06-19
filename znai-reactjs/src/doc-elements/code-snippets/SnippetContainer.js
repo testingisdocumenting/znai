@@ -22,13 +22,18 @@ import * as ClipboardJS from 'clipboard'
 import {extractTextFromTokens} from './codeUtils'
 
 import { Icon } from '../icons/Icon'
+import {SnippetOptionallyScrollablePart} from "./SnippetOptionallyScrollablePart";
+
 import './SnippetContainer.css'
 
 class SnippetContainer extends React.Component {
     state = { displayCopied: false }
 
     render() {
-        return this.props.wide ?
+        const {wide, isPresentation} = this.props
+        const renderWide = wide && !isPresentation
+
+        return renderWide ?
             this.renderWideMode() : this.renderNormalMode()
     }
 
@@ -81,9 +86,15 @@ class SnippetContainer extends React.Component {
     }
 
     renderSnippet() {
+        const {isPresentation, snippetComponent, linesOfCode, visibleLinesOfCode = 14} = this.props
+
         return (
             <div className={this.snippetClassName}>
-                <this.props.snippetComponent {...this.props}/>
+                <SnippetOptionallyScrollablePart isPresentation={isPresentation}
+                                                 linesOfCode={linesOfCode}
+                                                 visibleLinesOfCode={visibleLinesOfCode}
+                                                 snippetComponent={snippetComponent}
+                                                 {...this.props}/>
                 {this.renderCopyToClipboard()}
             </div>
         )

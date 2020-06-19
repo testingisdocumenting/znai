@@ -92,3 +92,24 @@ export function repeatChar(n, char) {
 
     return result
 }
+
+export function countNumberOfLines(text) {
+    let result = 0;
+
+    const len = text.length
+    for (let idx = 0; idx < len; idx++) {
+        if (text[idx] === '\n') {
+            result++;
+        }
+    }
+
+    if (result === 0) {
+        return 1;
+    }
+
+    if (text[text.length - 1] === '\n') {
+        return result;
+    }
+
+    return result + 1;
+}

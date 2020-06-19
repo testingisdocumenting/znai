@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -102,14 +103,16 @@ class PresentationRegistry {
     /**
      * renders component with a slide content
      * @param pageLocalSlideIdx slide idx local for a page. At the start of each page it equals 0
-     * @returns {XML}
+     * @param scaleRatio slide scale ratio
+     * @returns {React.ReactNode}
      */
-    renderedComponent(pageLocalSlideIdx) {
+    renderComponent({pageLocalSlideIdx, scaleRatio}) {
         const slide = this.slides[pageLocalSlideIdx]
 
         return <slide.component {...slide.props}
                                 elementsLibrary={this.elementsLibrary}
                                 slideIdx={slide.slideIdx}
+                                slideScaleRatio={scaleRatio}
                                 isPresentation={true}/>
     }
 
