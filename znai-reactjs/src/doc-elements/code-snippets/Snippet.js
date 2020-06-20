@@ -17,7 +17,7 @@
 
 import * as React from "react"
 
-import {isInlinedComment} from './codeUtils'
+import {isInlinedComment, splitTokensIntoLines} from './codeUtils'
 import {isAllAtOnce} from '../meta/meta'
 import {convertToList} from '../propsUtils';
 
@@ -26,6 +26,7 @@ import CodeSnippetWithInlineComments from './CodeSnippetWithInlineComments'
 import SimpleCodeSnippet from './SimpleCodeSnippet'
 
 import {parseCode} from './codeParser'
+import {countNumberOfLines} from "../../utils/strings";
 
 import './Snippet.css'
 
@@ -36,12 +37,25 @@ const Snippet = (props) => {
         CodeSnippetWithInlineComments :
         SimpleCodeSnippet
 
-    return <SnippetContainer {...props} tokens={tokensToUse} snippetComponent={snippetComponent}/>
+    const linesOfCode = splitTokensIntoLines(tokensToUse)
+    return <SnippetContainer {...props}
+                             tokens={tokensToUse}
+                             linesOfCode={linesOfCode}
+                             scrollToLineIdx={scrollToLineIdx(props)}
+                             snippetComponent={snippetComponent}/>
+}
+
+function scrollToLineIdx({isPresentation, slideIdx, numberOfVisibleLines}) {
+    if (!isPresentation || !numberOfVisibleLines) {
+        return undefined
+    }
+
+    return numberOfVisibleLines * slideIdx
 }
 
 const presentationSnippetHandler = {
     component: Snippet,
-    numberOfSlides: ({meta, commentsType, lang, snippet, tokens, highlight, revealLineStop}) => {
+    numberOfSlides: ({meta, commentsType, lang, snippet, tokens, highlight, revealLineStop, numberOfVisibleLines}) => {
         const tokensToUse = parseCodeWithCompatibility({lang, snippet, tokens})
         const highlightAsList = convertToList(highlight)
 
@@ -49,9 +63,24 @@ const presentationSnippetHandler = {
             return inlinedCommentsNumberOfSlides({meta, tokens: tokensToUse})
         }
 
-        return 1 + highlightNumberOfSlides({meta, highlightAsList}) + (revealLineStop || []).length;
-    },
+        const numberOfStopLines = (revealLineStop || []).length;
+        const hasFirstNoActionSlide = highlightAsList.length > 0 || numberOfStopLines > 0
 
+        return (hasFirstNoActionSlide ? 1 : 0) +
+            highlightNumberOfSlides({meta, highlightAsList}) +
+            numberOfStopLines +
+            (numberOfVisibleLines ? countNumberOfScrolls() : 0)
+
+        function countNumberOfScrolls() {
+            const numberOfLines = countNumberOfLines(snippet)
+
+            if (numberOfLines <= numberOfVisibleLines) {
+                return 0
+            }
+
+            return Math.ceil(numberOfLines / numberOfVisibleLines);
+        }
+    },
     slideInfoProvider: ({meta, commentsType, lang, snippet, tokens, slideIdx}) => {
         const tokensToUse = parseCodeWithCompatibility({lang, snippet, tokens})
 

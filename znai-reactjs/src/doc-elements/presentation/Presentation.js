@@ -21,7 +21,8 @@ import { Icon } from '../icons/Icon'
 
 import './Presentation.css'
 
-const defaultScaleRatio = 3
+const defaultScaleRatio = 1
+const maxScaleRatio = 3
 
 class Presentation extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ class Presentation extends Component {
     render() {
         const {docMeta, presentationRegistry} = this.props
         const {currentSlideIdx, isAppeared, scaleRatio} = this.state
-        const slideContent = presentationRegistry.renderedComponent(currentSlideIdx)
+        const slideContent = presentationRegistry.renderComponent({pageLocalSlideIdx: currentSlideIdx, scaleRatio})
 
         const {pageTitle, sectionTitle} = presentationRegistry.extractCombinedSlideInfo(currentSlideIdx - 1)
 
@@ -128,7 +129,7 @@ class Presentation extends Component {
         const widthRatio = (this.slideAreaDom.offsetWidth - hPad) / width
         const heightRatio = (this.slideAreaDom.offsetHeight - vPad) / height
 
-        const scaleRatio = Math.min(widthRatio, heightRatio, defaultScaleRatio)
+        const scaleRatio = Math.min(widthRatio, heightRatio, maxScaleRatio)
 
         this.setState({scaleRatio})
     }
