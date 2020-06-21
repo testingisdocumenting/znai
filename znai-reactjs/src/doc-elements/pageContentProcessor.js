@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -90,4 +91,4 @@ function findFirstSectionIdx(content) {
     return -1
 }
 
-export default {process}
+export const pageContentProcessor = {process}

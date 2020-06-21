@@ -38,7 +38,7 @@ import AllPagesAtOnce from './AllPagesAtOnce'
 
 import {mergeDocMeta} from '../structure/docMeta'
 
-import pageContentProcessor from './pageContentProcessor.js'
+import {pageContentProcessor} from './pageContentProcessor.js'
 
 import {DocumentationModes} from './DocumentationModes'
 import {pageTypesRegistry} from './page/PageTypesRegistry'

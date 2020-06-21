@@ -67,6 +67,10 @@ class PresentationRegistry {
     register(component, props, handler) {
         const numberOfSlides = handler.numberOfSlides(props);
 
+        if (numberOfSlides === 0) {
+            return
+        }
+
         const slide = {
             componentIdx: this.componentIdx++,
             component: component,
@@ -75,7 +79,7 @@ class PresentationRegistry {
         }
 
         const stickPlacement = presentationStickPlacement(props.meta)
-        if (!stickPlacement || (stickPlacement && stickPlacement.clear)) {
+        if (stickPlacement && stickPlacement.clear) {
             this.stickySlides = []
         } else if (stickPlacement) {
             const lastSlideIdx = numberOfSlides - 1
@@ -86,6 +90,13 @@ class PresentationRegistry {
                 slideIdx: lastSlideIdx,
                 info: extractInfo(lastSlideIdx)
             })
+        } else {
+            if (this.clearStickySlidesOnNextSlide) {
+                this.stickySlides = []
+                this.clearStickySlidesOnNextSlide = false
+            } else {
+                this.clearStickySlidesOnNextSlide = true
+            }
         }
 
         for (let slideIdx = 0; slideIdx < numberOfSlides; slideIdx++) {

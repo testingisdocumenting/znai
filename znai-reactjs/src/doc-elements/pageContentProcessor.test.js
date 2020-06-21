@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +15,7 @@
  * limitations under the License.
  */
 
-import pageContentProcessor from './pageContentProcessor.js'
+import {pageContentProcessor} from './pageContentProcessor.js'
 
 describe('page content post processor', () => {
     it('should create an empty section if no section is defined', () => {

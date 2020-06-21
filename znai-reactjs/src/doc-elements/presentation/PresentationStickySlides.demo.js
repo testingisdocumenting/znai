@@ -16,7 +16,7 @@
 
 import {createPresentationDemo} from '../demo-utils/PresentationDemo'
 
-export function stickySlidesPresentationDemo(registry) {
+export function presentationStickySlidesDemo(registry) {
     registry
         .add('left to right', createPresentationDemo([
             {
@@ -25,7 +25,7 @@ export function stickySlidesPresentationDemo(registry) {
                 snippet: javaCode(),
                 highlight: [2],
                 meta: {
-                    presentationStickPlacement: 'left 30%'
+                    stickySlide: 'left 30%'
                 }
             },
             {
@@ -33,7 +33,7 @@ export function stickySlidesPresentationDemo(registry) {
                 lang: 'python',
                 snippet: pythonCode(),
                 meta: {
-                    presentationStickPlacement: 'left 30%'
+                    stickySlide: 'left 30%'
                 }
             },
             {
@@ -51,7 +51,7 @@ export function stickySlidesPresentationDemo(registry) {
                 snippet: javaCode(),
                 highlight: [2],
                 meta: {
-                    presentationStickPlacement: 'top 30%'
+                    stickySlide: 'top 30%'
                 }
             },
             {
@@ -59,7 +59,7 @@ export function stickySlidesPresentationDemo(registry) {
                 lang: 'python',
                 snippet: pythonCode(),
                 meta: {
-                    presentationStickPlacement: 'top 30%'
+                    stickySlide: 'top 30%'
                 }
             },
             {
@@ -78,7 +78,7 @@ export function stickySlidesPresentationDemo(registry) {
                 snippet: javaCode(),
                 highlight: [2],
                 meta: {
-                    presentationStickPlacement: 'left'
+                    stickySlide: 'left'
                 }
             },
             {
@@ -86,7 +86,7 @@ export function stickySlidesPresentationDemo(registry) {
                 lang: 'python',
                 snippet: pythonCode(),
                 meta: {
-                    presentationStickPlacement: 'top'
+                    stickySlide: 'top'
                 }
             },
             {
@@ -102,7 +102,7 @@ export function stickySlidesPresentationDemo(registry) {
             {
                 type: 'Paragraph',
                 meta: {
-                    presentationStickPlacement: 'top 30%'
+                    stickySlide: 'top 30%'
                 },
                 content: [
                     {
@@ -121,7 +121,7 @@ export function stickySlidesPresentationDemo(registry) {
             {
                 type: 'Paragraph',
                 meta: {
-                    presentationStickPlacement: 'top 30%'
+                    stickySlide: 'top 30%'
                 },
                 content: [{
                     type: 'SimpleText',
@@ -131,7 +131,7 @@ export function stickySlidesPresentationDemo(registry) {
             {
                 type: 'Paragraph',
                 meta: {
-                    presentationStickPlacement: 'top'
+                    stickySlide: 'top'
                 },
                 content: [{
                     type: 'SimpleText',
@@ -145,7 +145,7 @@ export function stickySlidesPresentationDemo(registry) {
             {
                 type: 'BlockQuote',
                 meta: {
-                    presentationStickPlacement: 'left 30%'
+                    stickySlide: 'left 30%'
                 },
                 content: [
                     {
@@ -160,7 +160,7 @@ export function stickySlidesPresentationDemo(registry) {
             {
                 type: 'BlockQuote',
                 meta: {
-                    presentationStickPlacement: 'left 30%'
+                    stickySlide: 'left 30%'
                 },
                 content: [
                     {
@@ -175,7 +175,7 @@ export function stickySlidesPresentationDemo(registry) {
             {
                 type: 'BlockQuote',
                 meta: {
-                    presentationStickPlacement: 'left'
+                    stickySlide: 'left'
                 },
                 content: [
                     {
@@ -190,7 +190,6 @@ export function stickySlidesPresentationDemo(registry) {
         ], {
             slideIdx: 0,
         }))
-
 }
 
 function javaCode() {

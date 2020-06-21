@@ -93,7 +93,7 @@ const PresentationParagraph = (props) => {
 
 const presentationParagraph = {component: PresentationParagraph,
     numberOfSlides: ({content}) => {
-        return paragraphStartsWith(content, questionSuffix);
+        return paragraphStartsWith(content, questionSuffix) ? 1 : 0;
     }
 }
 
