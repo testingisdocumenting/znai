@@ -29,7 +29,7 @@ export interface PresentationStickPlacement {
 
 export interface DocElementMeta {
     allAtOnce?: boolean;
-    presentationStickPlacement?: string;
+    stickySlide?: string;
 }
 
 export function isAllAtOnce(meta: DocElementMeta) {
@@ -43,8 +43,8 @@ export function elementMetaValue(element: any, key: string) {
 /**
  * presentation stick placement makes a slide stick around, while other slide appears
  *
- * :include-meta: {presentationStickPlacement: 'top'}
- * :include-meta: {presentationStickPlacement: 'left 30%'}
+ * :include-meta: {stickySlide: 'top'}
+ * :include-meta: {stickySlide: 'left 30%'}
  * @param meta
  */
 export function presentationStickPlacement(meta: DocElementMeta): PresentationStickPlacement | undefined {
@@ -54,7 +54,7 @@ export function presentationStickPlacement(meta: DocElementMeta): PresentationSt
 
     const defaultPercentage = 50;
 
-    const placement = meta.presentationStickPlacement;
+    const placement = meta.stickySlide;
     if (!placement) {
         return undefined;
     }
