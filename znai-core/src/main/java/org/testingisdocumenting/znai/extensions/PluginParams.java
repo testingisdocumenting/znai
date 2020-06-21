@@ -25,6 +25,7 @@ import java.util.Map;
 
 public class PluginParams {
     private static final String RIGHT_SIDE_OPT_NAME = "rightSide";
+    private static final String STICKY_SLIDE_OPT_NAME = "stickySlide";
 
     private String pluginId;
     private String freeParam;
@@ -85,14 +86,28 @@ public class PluginParams {
         Map<String, Object> result = new LinkedHashMap<>(opts);
 
         Object rightSide = opts.get(RIGHT_SIDE_OPT_NAME);
-        if (rightSide == null) {
+        Object stickySlide = opts.get(STICKY_SLIDE_OPT_NAME);
+        if (rightSide == null && stickySlide == null) {
             return result;
         }
 
-        if (!pluginId.equals(MetaIncludePlugin.ID)) {
-            result.put("meta", Collections.singletonMap(RIGHT_SIDE_OPT_NAME, rightSide));
-            result.remove(RIGHT_SIDE_OPT_NAME);
+        if (pluginId.equals(MetaIncludePlugin.ID)) {
+            return result;
         }
+
+        Map<String, Object> meta = new LinkedHashMap<>();
+
+        if (rightSide != null) {
+            meta.put(RIGHT_SIDE_OPT_NAME, rightSide);
+        }
+
+        if (stickySlide != null) {
+            meta.put(STICKY_SLIDE_OPT_NAME, stickySlide);
+        }
+
+        result.put("meta", meta);
+        result.remove(RIGHT_SIDE_OPT_NAME);
+        result.remove(STICKY_SLIDE_OPT_NAME);
 
         return result;
     }

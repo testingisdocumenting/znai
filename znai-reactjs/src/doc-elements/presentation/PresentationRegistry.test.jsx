@@ -39,8 +39,13 @@ describe('PresentationRegistry', () => {
             const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [
                 {
                     type: 'Dummy',
-                    lang: 'java',
+                    lang: 'python',
                     snippet: "code1",
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'java',
+                    snippet: "code2",
                     meta: {
                         stickySlide: 'top 30%'
                     }
@@ -48,17 +53,17 @@ describe('PresentationRegistry', () => {
                 {
                     type: 'NonSlide',
                     lang: 'python',
-                    snippet: "code1_",
-                },
-                {
-                    type: 'Dummy',
-                    lang: 'python',
-                    snippet: "code2",
+                    snippet: "code2_",
                 },
                 {
                     type: 'Dummy',
                     lang: 'python',
                     snippet: "code3",
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code4",
                     highlight: [1],
                 }
             ])
@@ -66,15 +71,20 @@ describe('PresentationRegistry', () => {
             const slide1 = registry.slideByIdx(0)
             const slide2 = registry.slideByIdx(1)
             const slide3 = registry.slideByIdx(2)
+            const slide4 = registry.slideByIdx(3)
 
+            expect(slide1.props.snippet).toEqual("code1");
             expect(slide1.stickySlides).toEqual([]);
 
             expect(slide2.props.snippet).toEqual("code2");
-            expect(slide2.stickySlides.length).toEqual(1);
-            expect(slide2.stickySlides[0].props.snippet).toEqual("code1");
+            expect(slide2.stickySlides).toEqual([]);
 
             expect(slide3.props.snippet).toEqual("code3");
-            expect(slide3.stickySlides.length).toEqual(0);
+            expect(slide3.stickySlides.length).toEqual(1);
+            expect(slide3.stickySlides[0].props.snippet).toEqual("code2");
+
+            expect(slide4.props.snippet).toEqual("code4");
+            expect(slide4.stickySlides.length).toEqual(0);
         })
     })
 })

@@ -94,7 +94,7 @@ class PresentationRegistry {
             if (this.clearStickySlidesOnNextSlide) {
                 this.stickySlides = []
                 this.clearStickySlidesOnNextSlide = false
-            } else {
+            } else if (this.stickySlides.length > 0) {
                 this.clearStickySlidesOnNextSlide = true
             }
         }

@@ -94,6 +94,12 @@ export function presentationStickySlidesDemo(registry) {
                 lang: 'python',
                 snippet: anotherPythonCode(),
                 highlight: [1],
+            },
+            {
+                type: 'Snippet',
+                lang: 'python',
+                snippet: anotherPythonCode(),
+                highlight: [0],
             }
         ], {
             slideIdx: 2,
