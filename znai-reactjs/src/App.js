@@ -81,6 +81,7 @@ import {bulletListPresentationDemo} from "./doc-elements/bullets/PresentationBul
 import {paragraphPresentationDemo} from "./doc-elements/paragraph/PresentationParagraph.demo";
 import {snippetPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippet.demo";
 import {snippetWithScrollPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippetWithScroll.demo";
+import {stickySlidesPresentationDemo} from "./doc-elements/presentation/StickySlidesPresentation.demo";
 
 const docMeta = {
     id: 'preview',
@@ -151,6 +152,7 @@ registries.add('layout')
 
 registries.add('presentation')
     .registerAsTabs('Layout', presentationDemo)
+    .registerAsTabs('Sticky Slides', stickySlidesPresentationDemo)
     .registerAsTabs('SubHeading', subHeadingPresentationDemo)
     .registerAsTabs('Xml Presentation', xmlPresentationDemo)
     .registerAsTabs('SVG', svgPresentationDemo)

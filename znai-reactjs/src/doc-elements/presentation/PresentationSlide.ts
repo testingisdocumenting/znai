@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2020 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-/*
- doc elements may receive additional information as meta prop that is provided via
- :include-meta: {key: 'value'}
- */
+import React from 'react';
+import { PresentationStickPlacement } from '../meta/meta';
 
-function isAllAtOnce(meta) {
-    return meta && meta.allAtOnce
+export interface PresentationSlide {
+  componentIdx: number;
+  component: React.ComponentType;
+  props: any;
+  numberOfSlides: number;
+  slideIdx: number;
+  stickPlacement?: PresentationStickPlacement;
+  stickySlides: PresentationSlide[];
+  info: any;
 }
-
-function elementMetaValue(element, key) {
-    return element && element.meta ? element.meta[key] : null
-}
-
-export {isAllAtOnce, elementMetaValue}

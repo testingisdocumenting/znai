@@ -18,6 +18,11 @@ import {createPresentationDemo} from '../demo-utils/PresentationDemo'
 
 export function snippetPresentationDemo(registry) {
     registry
+        .add('just snippet', createPresentationDemo([{
+            type: 'Snippet',
+            lang: 'java',
+            snippet: javaCode(),
+        }]))
         .add('highlights', createPresentationDemo([{
             type: 'Snippet',
             lang: 'java',

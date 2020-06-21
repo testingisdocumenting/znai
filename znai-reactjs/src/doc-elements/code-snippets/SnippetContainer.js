@@ -86,15 +86,9 @@ class SnippetContainer extends React.Component {
     }
 
     renderSnippet() {
-        const {isPresentation, snippetComponent, linesOfCode, visibleLinesOfCode = 14} = this.props
-
         return (
             <div className={this.snippetClassName}>
-                <SnippetOptionallyScrollablePart isPresentation={isPresentation}
-                                                 linesOfCode={linesOfCode}
-                                                 visibleLinesOfCode={visibleLinesOfCode}
-                                                 snippetComponent={snippetComponent}
-                                                 {...this.props}/>
+                <SnippetOptionallyScrollablePart{...this.props}/>
                 {this.renderCopyToClipboard()}
             </div>
         )

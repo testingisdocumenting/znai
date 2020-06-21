@@ -16,6 +16,7 @@
  */
 
 import React from 'react'
+import {presentationStickPlacement} from "../meta/meta";
 
 class PresentationRegistry {
     constructor(elementsLibrary, presentationElementHandlers, content) {
@@ -23,6 +24,8 @@ class PresentationRegistry {
         this.presentationElementHandlers = presentationElementHandlers
         this.numberOfSlides_ = 0
         this.slides = []
+        this.stickySlides = []
+        this.componentIdx = 0
 
         if (Array.isArray(content)) {
             this.registerSlides_(content)
@@ -62,20 +65,47 @@ class PresentationRegistry {
     }
 
     register(component, props, handler) {
-        let numberOfSlides = handler.numberOfSlides(props);
+        const numberOfSlides = handler.numberOfSlides(props);
 
         const slide = {
+            componentIdx: this.componentIdx++,
             component: component,
             props: props,
             numberOfSlides: numberOfSlides
         }
 
+        const stickPlacement = presentationStickPlacement(props.meta)
+        if (!stickPlacement || (stickPlacement && stickPlacement.clear)) {
+            this.stickySlides = []
+        } else if (stickPlacement) {
+            const lastSlideIdx = numberOfSlides - 1
+
+            this.stickySlides.push({
+                ...slide,
+                stickPlacement,
+                slideIdx: lastSlideIdx,
+                info: extractInfo(lastSlideIdx)
+            })
+        }
+
         for (let slideIdx = 0; slideIdx < numberOfSlides; slideIdx++) {
-            this.slides.push({...slide, slideIdx: slideIdx,
-                info: handler.slideInfoProvider ? handler.slideInfoProvider({...props, slideIdx: slideIdx}) : {} })
+            this.slides.push({
+                ...slide,
+                slideIdx: slideIdx,
+                info: extractInfo(slideIdx),
+                stickySlides: stickySlidesWithoutCurrent(this.stickySlides)
+            })
         }
 
         this.numberOfSlides_ += numberOfSlides
+
+        function extractInfo(slideIdx) {
+            return handler.slideInfoProvider ? handler.slideInfoProvider({...props, slideIdx: slideIdx}) : {}
+        }
+
+        function stickySlidesWithoutCurrent(stickySlides) {
+            return stickySlides.filter(stickySlide => stickySlide.componentIdx !== slide.componentIdx)
+        }
     }
 
     extractCombinedSlideInfo(pageLocalSlideIdx) {
@@ -103,16 +133,21 @@ class PresentationRegistry {
     /**
      * renders component with a slide content
      * @param pageLocalSlideIdx slide idx local for a page. At the start of each page it equals 0
-     * @param scaleRatio slide scale ratio
      * @returns {React.ReactNode}
      */
-    renderComponent({pageLocalSlideIdx, scaleRatio}) {
+    renderComponent({pageLocalSlideIdx}) {
         const slide = this.slides[pageLocalSlideIdx]
 
         return <slide.component {...slide.props}
                                 elementsLibrary={this.elementsLibrary}
                                 slideIdx={slide.slideIdx}
-                                slideScaleRatio={scaleRatio}
+                                isPresentation={true}/>
+    }
+
+    renderSlide(slide) {
+        return <slide.component {...slide.props}
+                                elementsLibrary={this.elementsLibrary}
+                                slideIdx={slide.slideIdx}
                                 isPresentation={true}/>
     }
 

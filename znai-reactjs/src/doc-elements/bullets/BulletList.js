@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -102,7 +103,11 @@ function slideInfoProvider(props) {
 
     const Bullets = valueByIdWithWarning(presentationTypes, type)
 
-    return {isFullScreen: Bullets.isPresentationFullScreen}
+    return {
+        isSlideCentered: !Bullets.isPresentationFullScreen,
+        isSlidePadded: !Bullets.isPresentationFullScreen,
+        isSlideScaled: !Bullets.isPresentationFullScreen,
+    }
 }
 
 const presentationBulletListHandler = {component: PresentationBulletList,
