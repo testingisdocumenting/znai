@@ -35,9 +35,23 @@ class PluginParamsTest {
     }
 
     @Test
+    void "should auto convert stickySlide value to meta-stickySlide"() {
+        def opts = new PluginParams('file', [stickySlide: 'top']).opts.toMap()
+        opts.get('stickySlide').should == null
+        opts.get('meta').should == [stickySlide: 'top']
+    }
+
+    @Test
     void "should keep rightSide value as is if plugin is include meta"() {
         def opts = new PluginParams('meta', [rightSide: true]).opts.toMap()
         opts.get('rightSide').should == true
+        opts.get('meta').should == null
+    }
+
+    @Test
+    void "should keep stickySlide value as is if plugin is include meta"() {
+        def opts = new PluginParams('meta', [stickySlide: "left"]).opts.toMap()
+        opts.get('stickySlide').should == 'left'
         opts.get('meta').should == null
     }
 }
