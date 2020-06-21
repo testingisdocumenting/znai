@@ -64,7 +64,8 @@ const presentationSnippetHandler = {
         }
 
         const numberOfStopLines = (revealLineStop || []).length;
-        const hasFirstNoActionSlide = highlightAsList.length > 0 || numberOfStopLines > 0
+        const hasFirstNoActionSlide = highlightAsList.length > 0 || numberOfStopLines > 0 ||
+            (highlightAsList.length === 0 && numberOfStopLines === 0)
 
         return (hasFirstNoActionSlide ? 1 : 0) +
             highlightNumberOfSlides({meta, highlightAsList}) +
