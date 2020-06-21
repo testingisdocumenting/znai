@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,13 +24,16 @@ import Presentation from '../presentation/Presentation'
 const defaultDocMeta = {id: "znai", title: "Znai", type: "User Guide"}
 
 export function createPresentationDemo(content, cfg = {docMeta: defaultDocMeta, slideIdx: 0}) {
-    const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, content)
-    return () => (
-        <Presentation docMeta={cfg.docMeta}
-                      presentationRegistry={presentationRegistry}
-                      slideIdx={cfg.slideIdx}
-                      onNextPage={noOp}
-                      onPrevPage={noOp}/>)
+    return () => {
+        const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, content)
+
+        return (
+            <Presentation docMeta={cfg.docMeta || defaultDocMeta}
+                          presentationRegistry={presentationRegistry}
+                          slideIdx={cfg.slideIdx}
+                          onNextPage={noOp}
+                          onPrevPage={noOp}/>)
+    }
 }
 
 function noOp() {

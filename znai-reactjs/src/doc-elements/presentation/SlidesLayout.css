@@ -1,6 +1,5 @@
 /*
  * Copyright 2020 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +14,10 @@
  * limitations under the License.
  */
 
-.presentation .znai-presentation-slide-container .embedded-annotated-image {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    border-top: none;
-    border-bottom: none;
+.znai-slides-layout-recursive {
+    display: flex;
+}
+
+.znai-slides-layout-recursive.top {
+    flex-direction: column;
 }

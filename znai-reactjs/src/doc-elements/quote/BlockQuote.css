@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,11 +32,11 @@ blockquote {
     font-size: 20px;
 }
 
-.presentation .slide-area blockquote {
+.presentation .znai-presentation-slide-container blockquote {
     display: none;
 }
 
-.presentation .slide-area.appeared blockquote {
+.presentation .znai-presentation-slide-appeared blockquote {
     display: block;
     animation: blockquote-presentation-appear;
     animation-fill-mode:forwards;

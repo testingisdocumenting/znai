@@ -19,22 +19,22 @@ import React, {Component} from 'react'
 
 import { Icon } from '../icons/Icon'
 
+import {SlidesLayout} from "./SlidesLayout";
+
 import './Presentation.css'
 
-const defaultScaleRatio = 1
 const maxScaleRatio = 3
 
 class Presentation extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {currentSlideIdx: this.props.slideIdx || 0, scaleRatio: defaultScaleRatio}
+        this.state = {currentSlideIdx: this.props.slideIdx || 0}
     }
 
     render() {
         const {docMeta, presentationRegistry} = this.props
-        const {currentSlideIdx, isAppeared, scaleRatio} = this.state
-        const slideContent = presentationRegistry.renderComponent({pageLocalSlideIdx: currentSlideIdx, scaleRatio})
+        const {currentSlideIdx} = this.state
 
         const {pageTitle, sectionTitle} = presentationRegistry.extractCombinedSlideInfo(currentSlideIdx - 1)
 
@@ -42,13 +42,8 @@ class Presentation extends Component {
         const isSectionTitleOnSlide = !!slide.info.sectionTitle
 
         const slideVisibleNote = slide.info.slideVisibleNote
-        const showSlideNote = typeof slideVisibleNote !== "undefined" && slideVisibleNote !== null
+        const showSlideNote = slideVisibleNote !== undefined
         const slideNoteClass = "presentation-footer" + ((showSlideNote && slideVisibleNote.length === 0) ? " size-only" : "")
-
-        const slideClassName = "slide-area" + (isAppeared ?  " appeared": "") +
-            (slide.info.isFullScreen ? " full-screen" : "")
-
-        const slideAreaStyle = slide.info.isFullScreen ? {display: "flex", flex: 1} : {transform: "scale(" + scaleRatio + ")"}
 
         return (
             <div className="presentation" onClick={this.onMouseClick}>
@@ -76,11 +71,9 @@ class Presentation extends Component {
                     </div>
                 </div>
 
-                <div className={slideClassName} ref={(n) => this.slideAreaDom = n}>
-                    <div ref={(n) => this.componentDom = n} style={slideAreaStyle}>
-                        {slideContent}
-                    </div>
-                </div>
+                <SlidesLayout presentationRegistry={presentationRegistry}
+                              currentSlideIdx={currentSlideIdx}
+                              maxScaleRatio={maxScaleRatio}/>
 
                 {showSlideNote ? <div className={slideNoteClass}>{slideVisibleNote}</div> : null }
             </div>
@@ -89,13 +82,6 @@ class Presentation extends Component {
 
     componentDidMount() {
         document.addEventListener("keydown", this.keyDownHandler)
-        this.updateSlide()
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.currentSlideIdx !== this.state.currentSlideIdx) {
-            this.updateSlide()
-        }
     }
 
     componentWillUnmount() {
@@ -106,38 +92,8 @@ class Presentation extends Component {
         const {presentationRegistry} = this.props
         if (this.scrollToLastWithinPage && presentationRegistry !== props.presentationRegistry) {
             this.scrollToLastWithinPage = false
-            this.setState({currentSlideIdx: props.presentationRegistry.numberOfSlides - 1, scaleRatio: defaultScaleRatio})
+            this.setState({currentSlideIdx: props.presentationRegistry.numberOfSlides - 1})
         }
-    }
-
-    updateSlide() {
-        this.updateScaleRatio()
-        this.updateAnimation()
-    }
-
-    updateScaleRatio() {
-        const {presentationRegistry} = this.props
-        const {currentSlideIdx} = this.state
-
-        const slide = presentationRegistry.slideByIdx(currentSlideIdx)
-        const hPad = slide.info.isFullScreen ? 0 : 60
-        const vPad = slide.info.isFullScreen ? 0 : 30
-
-        const width = this.componentDom.offsetWidth
-        const height = this.componentDom.offsetHeight
-
-        const widthRatio = (this.slideAreaDom.offsetWidth - hPad) / width
-        const heightRatio = (this.slideAreaDom.offsetHeight - vPad) / height
-
-        const scaleRatio = Math.min(widthRatio, heightRatio, maxScaleRatio)
-
-        this.setState({scaleRatio})
-    }
-
-    updateAnimation() {
-        setTimeout(() => {
-            this.setState({isAppeared: true})
-        }, 0)
     }
 
     keyDownHandler = (e) => {
@@ -168,7 +124,7 @@ class Presentation extends Component {
             this.scrollToLastWithinPage = true
             onPrevPage()
         } else {
-            this.setState({currentSlideIdx: newSlideIdx, scaleRatio: defaultScaleRatio, isAppeared: false})
+            this.setState({currentSlideIdx: newSlideIdx})
         }
 
     }
@@ -180,11 +136,11 @@ class Presentation extends Component {
 
         if (newSlideIdx >= presentationRegistry.numberOfSlides) {
             if (hasNextPage) {
-                this.setState({currentSlideIdx: 0, scaleRatio: defaultScaleRatio, isAppeared: false})
+                this.setState({currentSlideIdx: 0})
                 onNextPage()
             }
         } else {
-            this.setState({currentSlideIdx: newSlideIdx, scaleRatio: defaultScaleRatio, isAppeared: false})
+            this.setState({currentSlideIdx: newSlideIdx})
         }
     }
 }
