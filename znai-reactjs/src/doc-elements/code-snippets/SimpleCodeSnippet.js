@@ -60,7 +60,7 @@ class SimpleCodeSnippet extends Component {
         // slideIdx === 0 means no highlights, 1 - first highlight, etc
         const highlightIsVisible = !isPresentation || slideIdx > 0
 
-        const visibleLines = this.limitLines && !displayFully ?
+        const visibleLines = this.limitLines && !displayFully && !isPresentation ?
             this.linesOfTokens.slice(0, this.readMoreVisibleLines) :
             this.linesOfTokens
 
@@ -84,8 +84,9 @@ class SimpleCodeSnippet extends Component {
 
     renderReadMore() {
         const {displayFully} = this.state
+        const {isPresentation} = this.props
 
-        if (displayFully) {
+        if (displayFully || isPresentation) {
             return null
         }
 

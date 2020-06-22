@@ -23,6 +23,12 @@ export function snippetPresentationDemo(registry) {
             lang: 'java',
             snippet: javaCode(),
         }]))
+        .add('read more', createPresentationDemo([{
+            type: 'Snippet',
+            lang: 'java',
+            readMore: true,
+            snippet: longJavaCode(),
+        }]))
         .add('highlights', createPresentationDemo([{
             type: 'Snippet',
             lang: 'java',
@@ -67,3 +73,19 @@ function javaCode() {
         '    }\n' +
         '}\n'
 }
+
+function longJavaCode() {
+    let code = 'class InternationalPriceService implements PriceService {\n' +
+        '    private static void main(String... args) {\n'
+
+    for (let idx = 0; idx < 60; idx++) {
+        code += `        System.out.println("hello ${idx + 1}");\n`
+    }
+
+    code +=         '        ...\n' +
+        '    }\n' +
+        '}\n'
+
+    return code
+}
+
