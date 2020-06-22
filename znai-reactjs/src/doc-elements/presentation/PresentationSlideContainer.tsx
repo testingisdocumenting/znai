@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 
 import './PresentationSlideContainer.css';
 
@@ -43,7 +43,7 @@ export function PresentationSlideContainer({
   const areaNode = useRef<HTMLDivElement>(null);
   const contentNode = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setScaleRatio(isScaled ?
       calcScale(areaNode.current!, contentNode.current!, isPadded, maxScaleRatio) :
       1.0);
