@@ -30,6 +30,8 @@ import {countNumberOfLines} from "../../utils/strings";
 
 import './Snippet.css'
 
+const defaultNumberOfVisibleLines = 25
+
 const Snippet = (props) => {
     const tokensToUse = parseCodeWithCompatibility({lang: props.lang, snippet: props.snippet, tokens: props.tokens})
 
@@ -45,6 +47,10 @@ const Snippet = (props) => {
                              snippetComponent={snippetComponent}/>
 }
 
+Snippet.defaultProps = {
+    numberOfVisibleLines: defaultNumberOfVisibleLines
+}
+
 function scrollToLineIdx({isPresentation, slideIdx, numberOfVisibleLines}) {
     if (!isPresentation || !numberOfVisibleLines) {
         return undefined
@@ -55,7 +61,16 @@ function scrollToLineIdx({isPresentation, slideIdx, numberOfVisibleLines}) {
 
 const presentationSnippetHandler = {
     component: Snippet,
-    numberOfSlides: ({meta, commentsType, lang, snippet, tokens, highlight, revealLineStop, numberOfVisibleLines}) => {
+    numberOfSlides: ({
+                         meta,
+                         commentsType,
+                         lang,
+                         snippet,
+                         tokens,
+                         highlight,
+                         revealLineStop,
+                         numberOfVisibleLines = defaultNumberOfVisibleLines
+                     }) => {
         const tokensToUse = parseCodeWithCompatibility({lang, snippet, tokens})
         const highlightAsList = convertToList(highlight)
 
@@ -63,14 +78,16 @@ const presentationSnippetHandler = {
             return inlinedCommentsNumberOfSlides({meta, tokens: tokensToUse})
         }
 
-        const numberOfStopLines = (revealLineStop || []).length;
+        const numberOfStopLines = (revealLineStop || []).length
+        const numberOfScrolls = countNumberOfScrolls()
+
         const hasFirstNoActionSlide = highlightAsList.length > 0 || numberOfStopLines > 0 ||
-            (highlightAsList.length === 0 && numberOfStopLines === 0)
+            (highlightAsList.length === 0 && numberOfStopLines === 0 && numberOfScrolls === 0)
 
         return (hasFirstNoActionSlide ? 1 : 0) +
             highlightNumberOfSlides({meta, highlightAsList}) +
             numberOfStopLines +
-            (numberOfVisibleLines ? countNumberOfScrolls() : 0)
+            numberOfScrolls
 
         function countNumberOfScrolls() {
             const numberOfLines = countNumberOfLines(snippet)
@@ -79,7 +96,7 @@ const presentationSnippetHandler = {
                 return 0
             }
 
-            return Math.ceil(numberOfLines / numberOfVisibleLines);
+            return Math.ceil(numberOfLines / numberOfVisibleLines)
         }
     },
     slideInfoProvider: ({meta, commentsType, lang, snippet, tokens, slideIdx}) => {

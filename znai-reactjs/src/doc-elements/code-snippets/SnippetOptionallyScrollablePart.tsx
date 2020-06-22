@@ -85,7 +85,8 @@ export class SnippetOptionallyScrollablePart extends React.Component<Props, Stat
       return;
     }
 
-    lineNodes[scrollToLineIdx].scrollIntoView()
+    const maxScrollIdx = Math.min(scrollToLineIdx, lineNodes.length - 1)
+    lineNodes[maxScrollIdx].scrollIntoView()
   }
 
   saveNode = (node: HTMLDivElement) => {
