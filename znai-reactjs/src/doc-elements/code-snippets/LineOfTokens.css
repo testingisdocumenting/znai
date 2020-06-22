@@ -26,3 +26,7 @@
 
     display: block;
 }
+
+.presentation .code-line.highlight {
+    padding: 0 0 0 16px;
+}
