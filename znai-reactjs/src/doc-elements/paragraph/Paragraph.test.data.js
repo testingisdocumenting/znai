@@ -41,3 +41,17 @@ export function createAttentionParagraph(suffix) {
         }
     ]
 }
+
+export function createShortAttentionParagraph(suffix) {
+    return [
+        {
+            "type": "Paragraph",
+            "content": [
+                {
+                    "text": `${suffix} It is very easy`,
+                    "type": "SimpleText"
+                },
+            ]
+        }
+    ]
+}

@@ -15,9 +15,10 @@
  */
 
 import {createPresentationDemo} from '../demo-utils/PresentationDemo'
-import {createAttentionParagraph} from "./Paragraph.test.data";
+import {createAttentionParagraph, createShortAttentionParagraph} from "./Paragraph.test.data";
 
 export function paragraphPresentationDemo(registry) {
     registry
         .add('question', createPresentationDemo(createAttentionParagraph('Question:')))
+        .add('short exercise', createPresentationDemo(createShortAttentionParagraph('Exercise:')))
 }
