@@ -25,6 +25,7 @@ import './Paragraph.css'
 const noteSuffix = "Note:"
 const warningSuffix = "Warning:"
 const questionSuffix = "Question:"
+const exerciseSuffix = "Exercise:"
 const avoidSuffix = "Avoid:"
 const dontSuffix = "Don't:"
 const doNotSuffix = "Do not:"
@@ -51,6 +52,7 @@ const ParagraphWithAttention = ({attentionType, suffix, icon, ...props}) => {
 const NoteParagraph = (props) => <ParagraphWithAttention attentionType="note" suffix={noteSuffix} icon="info" {...props}/>
 const WarningParagraph = (props) => <ParagraphWithAttention attentionType="warning" suffix={warningSuffix} icon="alert-triangle" {...props}/>
 const QuestionParagraph = (props) => <ParagraphWithAttention attentionType="question" suffix={questionSuffix} icon="help-circle" {...props}/>
+const ExerciseParagraph = (props) => <ParagraphWithAttention attentionType="question" suffix={exerciseSuffix} icon="help-circle" {...props}/>
 const AvoidParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={avoidSuffix} icon="x-octagon" {...props}/>
 const DontParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={dontSuffix} icon="x-octagon" {...props}/>
 const DoNotParagraph = (props) => <ParagraphWithAttention attentionType="avoid" suffix={doNotSuffix} icon="x-octagon" {...props}/>
@@ -66,6 +68,10 @@ const Paragraph = (props) => {
 
     if (paragraphStartsWith(props.content, questionSuffix)) {
         return <QuestionParagraph {...props}/>
+    }
+
+    if (paragraphStartsWith(props.content, exerciseSuffix)) {
+        return <ExerciseParagraph {...props}/>
     }
 
     if (paragraphStartsWith(props.content, avoidSuffix)) {
@@ -93,7 +99,8 @@ const PresentationParagraph = (props) => {
 
 const presentationParagraph = {component: PresentationParagraph,
     numberOfSlides: ({content}) => {
-        return paragraphStartsWith(content, questionSuffix) ? 1 : 0;
+        return paragraphStartsWith(content, questionSuffix) ||
+            paragraphStartsWith(content, exerciseSuffix) ? 1 : 0;
     }
 }
 

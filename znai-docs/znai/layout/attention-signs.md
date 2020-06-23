@@ -45,3 +45,10 @@ Do not: commit node_modules to your repository
 Question: Use the question sign to bring extra attention to the main idea of a page.
 \
 What is the point of the `attention signs`?
+
+# Exercise
+
+    Exercise: write a hello world example in this language
+
+Exercise: write a hello world example in this language
+ 
