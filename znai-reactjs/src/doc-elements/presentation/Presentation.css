@@ -99,10 +99,8 @@
     border: none;
 }
 
-.presentation .slide-area.full-screen {
+.znai-presentation-slides-area {
     flex: 1;
-    justify-content: flex-start;
-    align-items: stretch;
 }
 
 .presentation .content-block {

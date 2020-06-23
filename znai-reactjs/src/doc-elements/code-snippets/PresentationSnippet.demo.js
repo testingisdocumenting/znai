@@ -23,6 +23,16 @@ export function snippetPresentationDemo(registry) {
             lang: 'java',
             snippet: javaCode(),
         }]))
+        .add('wide snippet', createPresentationDemo([{
+            lang : 'java',
+            snippet : 'class InternationalPriceService implements PriceService {\n' +
+                '    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n' +
+                '        ...\n' +
+                '    }\n' +
+                '}',
+            wide : true,
+            type : 'Snippet'
+        }]))
         .add('read more', createPresentationDemo([{
             type: 'Snippet',
             lang: 'java',

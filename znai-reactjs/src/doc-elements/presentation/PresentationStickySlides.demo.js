@@ -44,6 +44,24 @@ export function presentationStickySlidesDemo(registry) {
         ], {
             slideIdx: 2,
         }))
+        .add('left to right two wide codes', createPresentationDemo([
+            {
+                type: 'Snippet',
+                lang: 'java',
+                snippet: javaWiderCode(),
+                meta: {
+                    stickySlide: 'left'
+                }
+            },
+            {
+                type: 'Snippet',
+                lang: 'java',
+                snippet: javaWiderCode(),
+                meta: {
+                    stickySlide: 'left'
+                }
+            }
+        ]))
         .add('top to bottom', createPresentationDemo([
             {
                 type: 'Snippet',
@@ -202,6 +220,14 @@ function javaCode() {
     return 'class InternationalPriceService implements PriceService {\n' +
         '    private static void main(String... args) {\n' +
         '        System.out.println("hello");\n' +
+        '        ...\n' +
+        '    }\n' +
+        '}\n'
+}
+
+function javaWiderCode() {
+    return 'class InternationalPriceService implements PriceService {\n' +
+        '    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ...) {\n' +
         '        ...\n' +
         '    }\n' +
         '}\n'

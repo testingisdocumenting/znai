@@ -29,12 +29,15 @@ class Presentation extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {currentSlideIdx: this.props.slideIdx || 0}
+        this.state = {
+            currentSlideIdx: this.props.slideIdx || 0,
+            presentationArea: null
+        }
     }
 
     render() {
         const {docMeta, presentationRegistry} = this.props
-        const {currentSlideIdx} = this.state
+        const {currentSlideIdx, presentationArea} = this.state
 
         const {pageTitle, sectionTitle} = presentationRegistry.extractCombinedSlideInfo(currentSlideIdx - 1)
 
@@ -71,13 +74,26 @@ class Presentation extends Component {
                     </div>
                 </div>
 
-                <SlidesLayout presentationRegistry={presentationRegistry}
-                              currentSlideIdx={currentSlideIdx}
-                              maxScaleRatio={maxScaleRatio}/>
+                <div ref={this.savePresentationAreaDimension} className="znai-presentation-slides-area">
+                    {presentationArea && (<SlidesLayout presentationRegistry={presentationRegistry}
+                                                        currentSlideIdx={currentSlideIdx}
+                                                        maxScaleRatio={maxScaleRatio}
+                                                        presentationArea={presentationArea}/>)
+                    }
+                </div>
 
                 {showSlideNote ? <div className={slideNoteClass}>{slideVisibleNote}</div> : null }
             </div>
         )
+    }
+
+    savePresentationAreaDimension = (node) => {
+        this.setState({
+            presentationArea: {
+                width: node ? node.offsetWidth : 0,
+                height: node ? node.offsetHeight : 0
+            }
+        })
     }
 
     componentDidMount() {

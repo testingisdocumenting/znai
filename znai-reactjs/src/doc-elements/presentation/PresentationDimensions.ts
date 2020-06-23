@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-.znai-presentation-slide-container {
-    display: flex;
+export interface PresentationDimension {
+  height: number;
+  width: number;
 }
 
-.znai-presentation-slide-container.centered {
-    justify-content: center;
-    align-items: center;
-}
-
-.znai-presentation-slide-container.padded {
+export interface SlideAreaDimension {
+  widthPercentage: number;
+  heightPercentage: number;
 }
