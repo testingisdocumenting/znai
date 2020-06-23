@@ -27,26 +27,22 @@ const actions = {
 export function defaultNextPrevNavigationDemo(registry) {
     registry
         .add('current chapter is the same as the next', () => (
-            <PageDefaultNextPrevNavigation docTitle="Doc Title"
-                                           currentTocItem={tocItem('Chapter A', 'Page Two')}
+            <PageDefaultNextPrevNavigation currentTocItem={tocItem('Chapter A', 'Page Two')}
                                            prevPageTocItem={tocItem('Chapter A', 'Page One')}
                                            nextPageTocItem={tocItem('Chapter A', 'Page Three')}
                                            {...actions}/>))
         .add('previous chapter is different than current', () => (
-            <PageDefaultNextPrevNavigation docTitle="Doc Title"
-                                           prevPageTocItem={tocItem('Chapter A', 'Page Two')}
+            <PageDefaultNextPrevNavigation prevPageTocItem={tocItem('Chapter A', 'Page Two')}
                                            currentTocItem={tocItem('Chapter B', 'Page One')}
                                            nextPageTocItem={tocItem('Chapter B', 'Page Two')}
                                            {...actions}/>))
         .add('next chapter is different than current', () => (
-            <PageDefaultNextPrevNavigation docTitle="Doc Title"
-                                           prevPageTocItem={tocItem('', 'index')}
+            <PageDefaultNextPrevNavigation prevPageTocItem={tocItem('', 'Doc Title')}
                                            currentTocItem={tocItem('Chapter A', 'Page Two')}
                                            nextPageTocItem={tocItem('Chapter B', 'Page One')}
                                            {...actions}/>))
         .add('previous chapter is index page', () => (
-            <PageDefaultNextPrevNavigation docTitle="Doc Title"
-                                           prevPageTocItem={tocItem('Chapter A', 'Page Two')}
+            <PageDefaultNextPrevNavigation prevPageTocItem={tocItem('Chapter A', 'Page Two')}
                                            currentTocItem={tocItem('Chapter B', 'Page One')}
                                            nextPageTocItem={tocItem('Chapter B', 'Page Two')}
                                            {...actions}/>))

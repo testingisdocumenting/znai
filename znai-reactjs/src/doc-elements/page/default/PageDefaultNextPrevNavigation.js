@@ -18,12 +18,12 @@
 import React from 'react'
 
 import { Icon } from '../../icons/Icon'
-import {isTocItemIndex} from "../../../structure/toc/TableOfContents";
+
+import { isTocItemIndex } from "../../../structure/toc/TableOfContents"
 
 import './PageDefaultNextPrevNavigation.css'
 
 function PageDefaultNextPrevNavigation({
-                                           docTitle,
                                            currentTocItem,
                                            prevPageTocItem,
                                            nextPageTocItem,
@@ -32,37 +32,35 @@ function PageDefaultNextPrevNavigation({
                                        }) {
     return (
         <div className="page-default-next-prev-navigation">
-            <DefaultPrevPageButton docTitle={docTitle}
-                                   currentTocItem={currentTocItem}
+            <DefaultPrevPageButton currentTocItem={currentTocItem}
                                    prevTocItem={prevPageTocItem}
                                    onClick={onPrevPage}/>
-            <DefaultNextPageButton docTitle={docTitle}
-                                   currentTocItem={currentTocItem}
+            <DefaultNextPageButton currentTocItem={currentTocItem}
                                    nextTocItem={nextPageTocItem}
                                    onClick={onNextPage}/>
         </div>
     )
 }
 
-function DefaultPrevPageButton({docTitle, currentTocItem, prevTocItem, onClick}) {
+function DefaultPrevPageButton({currentTocItem, prevTocItem, onClick}) {
     return prevTocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
             <Icon id="chevron-left"/>
-            <div className="next-prev-page-title prev">{fullTitle(docTitle, currentTocItem, prevTocItem)}</div>
+            <div className="next-prev-page-title prev">{fullTitle(currentTocItem, prevTocItem)}</div>
         </div>) : <div/>
 }
 
-function DefaultNextPageButton({docTitle, currentTocItem, nextTocItem, onClick}) {
+function DefaultNextPageButton({currentTocItem, nextTocItem, onClick}) {
     return nextTocItem ? (
         <div className="default-next-prev-navigation-button" onClick={onClick}>
-            <div className="next-prev-page-title next">{fullTitle(docTitle, currentTocItem, nextTocItem)}</div>
+            <div className="next-prev-page-title next">{fullTitle(currentTocItem, nextTocItem)}</div>
             <Icon id="chevron-right"/>
         </div>) : <div/>
 }
 
-function fullTitle(docTitle, current, nextOrPrev) {
+function fullTitle(current, nextOrPrev) {
     if (isTocItemIndex(nextOrPrev)) {
-        return docTitle
+        return nextOrPrev.pageTitle
     }
 
     if (current.dirName === nextOrPrev.dirName) {

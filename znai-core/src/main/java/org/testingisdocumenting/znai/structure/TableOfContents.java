@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +22,7 @@ import java.util.*;
 import static java.util.stream.Collectors.*;
 
 public class TableOfContents {
-    private List<TocItem> tocItems;
+    private final List<TocItem> tocItems;
 
     public TableOfContents() {
         this.tocItems = new ArrayList<>();
@@ -41,8 +42,8 @@ public class TableOfContents {
         return tocItem;
     }
 
-    public void addIndex() {
-        tocItems.add(0, TocItem.createIndex());
+    public void addIndex(String docTitle) {
+        tocItems.add(0, TocItem.createIndex(docTitle));
     }
 
     public void removeTocItem(String dirName, String fileNameWithoutExtension) {

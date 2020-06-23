@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,6 +39,14 @@ class TableOfContentsTest {
 
         toc.contains("chapter1", "page-a", pageSection1.id).should == true
         toc.contains("chapter1", "page-a", "another title").should == false
+    }
+
+    @Test
+    void "index page title should be a doc title"() {
+        def toc = new TableOfContents()
+        toc.addIndex("My Documentation")
+
+        toc.index.pageTitle.should == "My Documentation"
     }
 
     @Test
