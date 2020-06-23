@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +26,7 @@ import java.nio.file.Path;
 public interface MarkupParsingConfiguration {
     String configurationName();
 
-    TableOfContents createToc(ComponentsRegistry componentsRegistry);
+    TableOfContents createToc(String docTitle, ComponentsRegistry componentsRegistry);
 
     MarkupParser createMarkupParser(ComponentsRegistry componentsRegistry);
 

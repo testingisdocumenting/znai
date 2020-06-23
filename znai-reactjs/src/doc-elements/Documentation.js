@@ -163,8 +163,7 @@ export class Documentation extends Component {
                                                    elementsLibrary={elementsLibrary}/>
 
         const NextPrevNavigation = pageTypesRegistry.nextPrevNavigationComponent(page.tocItem)
-        const renderedNextPrevNavigation = <NextPrevNavigation docTitle={docMeta.title}
-                                                               currentTocItem={page.tocItem}
+        const renderedNextPrevNavigation = <NextPrevNavigation currentTocItem={page.tocItem}
                                                                prevPageTocItem={this.prevPageTocItem}
                                                                nextPageTocItem={this.nextPageTocItem}
                                                                onNextPage={this.onNextPage}

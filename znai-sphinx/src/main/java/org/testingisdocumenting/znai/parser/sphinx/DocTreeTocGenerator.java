@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +49,7 @@ public class DocTreeTocGenerator implements TocGenerator {
             handleChapter(node);
         }
 
-        toc.addIndex();
+        toc.addIndex("Index");
         return toc;
     }
 

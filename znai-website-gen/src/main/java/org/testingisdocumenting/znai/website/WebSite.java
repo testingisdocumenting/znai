@@ -342,7 +342,7 @@ public class WebSite {
 
     private void createTopLevelToc() {
         reportPhase("creating table of contents");
-        toc = markupParsingConfiguration.createToc(componentsRegistry);
+        toc = markupParsingConfiguration.createToc(docMeta.getTitle(), componentsRegistry);
     }
 
     private void createDocStructure() {

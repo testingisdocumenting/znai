@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,8 +30,8 @@ public class TocItem {
 
     public static final String INDEX = "index";
 
-    private String dirName;
-    private String fileNameWithoutExtension;
+    private final String dirName;
+    private final String fileNameWithoutExtension;
     private String sectionTitle;
     private String pageTitle;
     private PageMeta pageMeta;
@@ -44,8 +45,11 @@ public class TocItem {
 
     private List<PageSectionIdTitle> pageSectionIdTitles;
 
-    static TocItem createIndex() {
-        return new TocItem("", INDEX);
+    static TocItem createIndex(String docTitle) {
+        TocItem tocItem = new TocItem("", INDEX);
+        tocItem.setPageTitle(docTitle);
+
+        return tocItem;
     }
 
     public TocItem(String dirName, String fileNameWithoutExtension) {

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,10 +40,10 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
     }
 
     @Override
-    public TableOfContents createToc(ComponentsRegistry componentsRegistry) {
+    public TableOfContents createToc(String docTitle, ComponentsRegistry componentsRegistry) {
         TableOfContents toc = new PlainTextTocGenerator().generate(
                 componentsRegistry.resourceResolver().textContent("toc"));
-        toc.addIndex();
+        toc.addIndex(docTitle);
 
         if (componentsRegistry.resourceResolver().canResolve(TOC_PATCH_NAME)) {
             String patch = componentsRegistry.resourceResolver().textContent(TOC_PATCH_NAME);
