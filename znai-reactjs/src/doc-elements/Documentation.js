@@ -261,6 +261,10 @@ export class Documentation extends Component {
             this.setState({isSearchActive: true})
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && e.altKey) {
             this.setState({mode: DocumentationModes.PRINT})
+        } else if ((mode === DocumentationModes.DEFAULT) && (
+            (e.code === 'Equal' && e.altKey) ||
+            (e.code === 'NumpadAdd' && e.altKey))) {
+            this.onPresentationOpen()
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowLeft' && e.ctrlKey) {
             this.onPrevPage()
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowRight' && e.ctrlKey) {

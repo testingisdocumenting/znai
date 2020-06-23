@@ -1,7 +1,7 @@
 Action, Shortcut
-Change to presentation mode, p
-Change to print mode, Alt + p
-Change to default mode, ESC
-Activate search, /
-Navigate to a previous page, Ctrl + Left arrow
-Navigate to a next page, Ctrl + Right arrow
+Change to presentation mode, `:kbd: Alt =` or `:kbd: Alt +`
+Change to print mode, `:kbd: Alt p`
+Change to default mode, `:kbd: ESC`
+Activate search, `:kbd: /`
+Navigate to a previous page, `:kbd: Ctrl LeftArrow`
+Navigate to a next page, `:kbd: Ctrl RightArrow`
