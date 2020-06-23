@@ -86,8 +86,6 @@ class Presentation extends Component {
     }
 
     calcPresentationArea() {
-        console.log('calcPresentationArea', this.presentationAreaNode)
-        console.log('calcPresentationArea client rect', this.presentationAreaNode.getBoundingClientRect())
         return {
             width: this.presentationAreaNode.offsetWidth,
             height: this.presentationAreaNode.offsetHeight
