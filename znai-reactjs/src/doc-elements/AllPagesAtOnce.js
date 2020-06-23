@@ -49,7 +49,8 @@ class AllPagesAtOnce extends Component {
         const {docMeta} = this.props
         document.title = docMeta.title
 
-        getAllPagesPromise(docMeta).then(allPages => {
+        getAllPagesPromise(docMeta).then(all => {
+            const allPages = all.pages
             const allPagesRendered = allPages.map((p, idx) => <elementsLibrary.Page key={idx}
                                                                                     content={p.content}
                                                                                     tocItem={p.tocItem}
