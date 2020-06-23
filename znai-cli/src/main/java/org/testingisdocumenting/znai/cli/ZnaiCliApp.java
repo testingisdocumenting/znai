@@ -162,7 +162,7 @@ public class ZnaiCliApp {
                 withDocumentationType(config.getMarkupType()).
                 withMetaFromJsonFile(config.getSourceRoot().resolve(DocMeta.META_FILE_NAME)).
                 withFileWithLookupPaths("lookup-paths").
-                withAdditionalLookupPaths(Arrays.asList(config.getLookupPaths().split(":"))).
+                withAdditionalLookupPaths(config.getLookupPaths()).
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
                 withGlobalReferencesPath(config.getSourceRoot().resolve("references.csv")).
