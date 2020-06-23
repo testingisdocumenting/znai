@@ -20,18 +20,22 @@ import PresentationRegistry from './PresentationRegistry';
 import { PresentationSlideContainer } from './PresentationSlideContainer';
 import { PresentationSlide } from './PresentationSlide';
 
+import { PresentationDimension, SlideAreaDimension } from './PresentationDimensions';
+
 import './SlidesLayout.css';
 
 interface Props {
   presentationRegistry: PresentationRegistry;
   currentSlideIdx: number;
   maxScaleRatio: number;
+  presentationArea: PresentationDimension;
 }
 
 export function SlidesLayout({
                                presentationRegistry,
                                currentSlideIdx,
-                               maxScaleRatio
+                               maxScaleRatio,
+                               presentationArea
                              }: Props) {
   const slide = presentationRegistry.slideByIdx(currentSlideIdx);
 
@@ -42,7 +46,9 @@ export function SlidesLayout({
                      currentSlideIdx={currentSlideIdx}
                      maxScaleRatio={maxScaleRatio}
                      level={0}
-                     flex={1}/>
+                     presentationArea={presentationArea}
+                     slideArea={{widthPercentage: 100, heightPercentage: 100}}
+    />
   )
 }
 
@@ -52,8 +58,9 @@ interface RecursiveLayoutProps {
   maxScaleRatio: number;
   stickySlides: PresentationSlide[];
   currentSlide: PresentationSlide;
-  flex: number;
   level: number;
+  presentationArea: PresentationDimension;
+  slideArea: SlideAreaDimension;
 }
 
 function RecursiveLayout({
@@ -62,14 +69,16 @@ function RecursiveLayout({
                            currentSlide,
                            currentSlideIdx,
                            maxScaleRatio,
-                           flex,
+                           presentationArea,
+                           slideArea,
                            level
                          }: RecursiveLayoutProps) {
   if (stickySlides.length === 0) {
     return <SingleSlide presentationRegistry={presentationRegistry}
                         slide={currentSlide}
                         currentSlideIdx={currentSlideIdx}
-                        flex={flex}
+                        slideArea={slideArea}
+                        presentationArea={presentationArea}
                         maxScaleRatio={maxScaleRatio}/>;
   }
 
@@ -77,26 +86,43 @@ function RecursiveLayout({
   const className = 'znai-slides-layout-recursive level' + level +
     (firstSlide.stickPlacement?.left ? ' left' : ' top');
 
-  const flexOne = firstSlide.stickPlacement!.percentage;
-  const flexTwo = 100 - flexOne;
+  const percentageOne = firstSlide.stickPlacement!.percentage;
+  const percentageTwo = 100 - percentageOne;
+
+  const slideAreaOne = calcNewSlideArea(slideArea, percentageOne, !!firstSlide.stickPlacement?.left)
+  const slideAreaTwo = calcNewSlideArea(slideArea, percentageTwo, !!firstSlide.stickPlacement?.left)
 
   return (
-    <div className={className} style={{flex}}>
+    <div className={className}>
       <SingleSlide presentationRegistry={presentationRegistry}
                    slide={firstSlide}
                    currentSlideIdx={currentSlideIdx}
-                   flex={flexOne}
+                   presentationArea={presentationArea}
+                   slideArea={slideAreaOne}
                    maxScaleRatio={maxScaleRatio}/>
 
       <RecursiveLayout presentationRegistry={presentationRegistry}
                        currentSlideIdx={currentSlideIdx}
                        currentSlide={currentSlide}
                        maxScaleRatio={maxScaleRatio}
-                       flex={flexTwo}
                        level={level + 1}
+                       presentationArea={presentationArea}
+                       slideArea={slideAreaTwo}
                        stickySlides={stickySlides.slice(1)}/>
     </div>
   )
+
+  function calcNewSlideArea(area: SlideAreaDimension, percentage: number, left: boolean): SlideAreaDimension {
+    return left ?
+      {
+        widthPercentage:  area.widthPercentage * percentage / 100.0,
+        heightPercentage: area.heightPercentage
+      } :
+      {
+        widthPercentage: area.widthPercentage,
+        heightPercentage: area.heightPercentage * percentage / 100.0
+      }
+  }
 }
 
 interface SingleSlideProps {
@@ -104,15 +130,17 @@ interface SingleSlideProps {
   slide: PresentationSlide;
   currentSlideIdx: number;
   maxScaleRatio: number;
-  flex: number;
+  presentationArea: PresentationDimension;
+  slideArea: SlideAreaDimension;
 }
 
 function SingleSlide({
                        presentationRegistry,
                        slide,
                        currentSlideIdx,
-                       flex,
-                       maxScaleRatio
+                       maxScaleRatio,
+                       presentationArea,
+                       slideArea
                      }: SingleSlideProps) {
   return (
     <PresentationSlideContainer key={slide.componentIdx}
@@ -121,7 +149,8 @@ function SingleSlide({
                                 isCentered={isSlideCentered(slide.info)}
                                 isScaled={isSlideScaled(slide.info)}
                                 isPadded={isSlidePadded(slide.info)}
-                                flex={flex}
+                                presentationArea={presentationArea}
+                                slideArea={slideArea}
                                 render={renderSlideContent}/>
   )
 
@@ -129,7 +158,6 @@ function SingleSlide({
     return presentationRegistry.renderSlide(slide)
   }
 }
-
 
 function isSlideCentered(slideInfo: any) {
   return slideInfoBooleanValue(slideInfo, 'isSlideCentered', true)

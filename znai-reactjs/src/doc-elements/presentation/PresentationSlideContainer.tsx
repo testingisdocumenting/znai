@@ -16,6 +16,8 @@
 
 import React, { useLayoutEffect, useRef, useState } from 'react';
 
+import { PresentationDimension, SlideAreaDimension } from './PresentationDimensions';
+
 import './PresentationSlideContainer.css';
 
 interface Props {
@@ -24,7 +26,8 @@ interface Props {
   isPadded: boolean;
   isScaled: boolean;
   isCentered: boolean;
-  flex: number;
+  presentationArea: PresentationDimension;
+  slideArea: SlideAreaDimension;
   render(): React.ReactNode;
 }
 
@@ -34,22 +37,22 @@ export function PresentationSlideContainer({
                                              isPadded,
                                              isScaled,
                                              isCentered,
-                                             flex,
+                                             presentationArea,
+                                             slideArea,
                                              render
                                            }: Props) {
   const [scaleRatio, setScaleRatio] = useState(1);
   const [slideAppeared, setSlideAppeared] = useState(false);
 
-  const areaNode = useRef<HTMLDivElement>(null);
   const contentNode = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     setScaleRatio(isScaled ?
-      calcScale(areaNode.current!, contentNode.current!, isPadded, maxScaleRatio) :
+      calcScale(presentationArea, slideArea, contentNode.current!, isPadded, maxScaleRatio) :
       1.0);
 
     setSlideAppeared(true);
-  }, [isPadded, maxScaleRatio, isScaled, slideIdx])
+  }, [isPadded, maxScaleRatio, isScaled, slideIdx, presentationArea, slideArea])
 
   const className = "znai-presentation-slide-container " +
     (isCentered ? " centered" : "") +
@@ -64,14 +67,18 @@ export function PresentationSlideContainer({
     </div>
   ) : rendered;
 
+  const maxWidth = presentationArea.width * slideArea.widthPercentage / 100.0
+  const maxHeight = presentationArea.height * slideArea.heightPercentage / 100.0
+
   return (
-    <div className={className} ref={areaNode} style={{flex}}>
+    <div className={className} style={{width: maxWidth, height: maxHeight}}>
       {wrappedChildren}
     </div>
   )
 }
 
-function calcScale(areaNode: HTMLDivElement,
+function calcScale(presentationArea: PresentationDimension,
+                   slideArea: SlideAreaDimension,
                    contentNode: HTMLDivElement,
                    isPadded: boolean,
                    maxScaleRatio: number): number {
@@ -79,8 +86,21 @@ function calcScale(areaNode: HTMLDivElement,
   const hPad = isPadded ? 60 : 0;
   const vPad = isPadded ? 30 : 0;
 
-  const widthRatio = (areaNode.offsetWidth - hPad) / contentNode.offsetWidth;
-  const heightRatio = (areaNode.offsetHeight - vPad) / contentNode.offsetHeight;
+  const maxWidth = calcMaxWidth(presentationArea, slideArea)
+  const maxHeight = calcMaxHeight(presentationArea, slideArea)
+
+  const widthRatio = (maxWidth - hPad) / contentNode.offsetWidth;
+  const heightRatio = (maxHeight - vPad) / contentNode.offsetHeight;
 
   return Math.min(widthRatio, heightRatio, maxScaleRatio);
+}
+
+function calcMaxWidth(presentationArea: PresentationDimension,
+                      slideArea: SlideAreaDimension) {
+  return presentationArea.width * slideArea.widthPercentage / 100.0
+}
+
+function calcMaxHeight(presentationArea: PresentationDimension,
+                       slideArea: SlideAreaDimension) {
+  return presentationArea.height * slideArea.heightPercentage / 100.0
 }
