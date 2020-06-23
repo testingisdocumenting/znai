@@ -33,6 +33,12 @@ export function snippetPresentationDemo(registry) {
             wide : true,
             type : 'Snippet'
         }]))
+        .add('snippet with bullet points', createPresentationDemo([{
+            lang : 'java',
+            type : 'Snippet',
+            snippet : javaCodeWithMultilineComments(),
+            commentsType: 'inline'
+        }]))
         .add('read more', createPresentationDemo([{
             type: 'Snippet',
             lang: 'java',
@@ -98,4 +104,15 @@ function longJavaCode() {
 
     return code
 }
+
+function javaCodeWithMultilineComments() {
+    return 'class InternationalPriceService implements PriceService {\n' +
+        '    private static void main(String... args) {\n' +
+        '        ... // multiline comment multi line comment multiline comment multi line comment multiline comment ' +
+        'multi line comment multiline comment multi line comment multi line comment multiline comment multi line comment multi line comment multiline comment multi line comment \n' +
+        '    } // Code stops here code stops here code stops here code' +
+        ' stops here code stops here code stops here code stops here code stops here code stops here \n' +
+        '}\n'
+}
+
 

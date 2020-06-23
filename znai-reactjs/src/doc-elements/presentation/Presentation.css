@@ -18,8 +18,7 @@
 .presentation {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    max-height: 100vh;
+    height: 100vh;
 }
 
 .presentation .header {
@@ -81,17 +80,24 @@
     cursor: pointer;
 }
 
-.presentation-footer {
-    background-color: var(--znai-presentation-slide-note-background-color);
-    color: var(--znai-presentation-slide-note-color);
+.znai-presentation-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 
-    border-top: 1px solid var(--znai-presentation-border-color);
+    display: flex;
 
     flex: 0 0 50px;
-    display: flex;
     font-size: 28px;
     align-items: center;
     justify-content: center;
+
+    background-color: var(--znai-presentation-slide-note-background-color);
+    color: var(--znai-presentation-slide-note-color);
+
+    padding: 8px;
+    border-top: 1px solid var(--znai-presentation-border-color);
+
 }
 
 .presentation-footer.size-only {
@@ -101,6 +107,7 @@
 
 .znai-presentation-slides-area {
     flex: 1;
+    overflow-y: hidden;
 }
 
 .presentation .content-block {
