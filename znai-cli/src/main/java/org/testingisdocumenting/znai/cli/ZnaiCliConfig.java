@@ -26,6 +26,8 @@ import org.apache.commons.cli.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -167,8 +169,12 @@ public class ZnaiCliConfig {
         this.deployRoot = deployRoot;
     }
 
-    public String getLookupPaths() {
-        return lookupPaths;
+    public List<String> getLookupPaths() {
+        if (lookupPaths.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.asList(lookupPaths.split(":"));
     }
 
     public ModifiedTimeStrategy getModifiedTimeStrategy() {

@@ -668,7 +668,7 @@ public class WebSite {
 
     private void printLookupLocations(Stream<String> stream) {
         reportPhase("lookup locations:");
-        stream.forEach((path) -> ConsoleOutputs.out(Color.PURPLE, path));
+        stream.forEach((path) -> ConsoleOutputs.out("    ", Color.PURPLE, path));
     }
 
     private Stream<String> readLocationsFromFile(String filesLookupFilePath) {
