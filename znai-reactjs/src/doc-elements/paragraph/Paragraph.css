@@ -115,9 +115,6 @@ not belong to the same parent node so margins won't even each other out.
 
 .znai-presentation-paragraph-wrapper {
     display: flex;
+    align-items: center;
     justify-content: center;
-}
-
-.znai-presentation-paragraph-wrapper .paragraph {
-    width: 60%;
 }
