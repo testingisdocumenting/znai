@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Keyboard shortcuts</h1></header>
-<p>Action Shortcut Change to presentation mode p Change to print mode Alt + p Change to default mode ESC Activate search / Navigate to a previous page Ctrl + Left arrow Navigate to a next page Ctrl + Right arrow</p>
+<p>Action Shortcut Change to presentation mode `:kbd: Alt =` or `:kbd: Alt +` Change to print mode `:kbd: Alt p` Change to default mode `:kbd: ESC` Activate search `:kbd: /` Navigate to a previous page `:kbd: Ctrl LeftArrow` Navigate to a next page `:kbd: Ctrl RightArrow`</p>
 </article>
 </section>
 </div>
@@ -134,8 +134,14 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "p",
+              "shortcut" : "Alt =",
+              "type" : "KeyboardShortcut"
+            }, {
+              "text" : " or ",
               "type" : "SimpleText"
+            }, {
+              "shortcut" : "Alt +",
+              "type" : "KeyboardShortcut"
             } ]
           } ] ], [ [ {
             "type" : "Paragraph",
@@ -146,8 +152,8 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Alt + p",
-              "type" : "SimpleText"
+              "shortcut" : "Alt p",
+              "type" : "KeyboardShortcut"
             } ]
           } ] ], [ [ {
             "type" : "Paragraph",
@@ -158,8 +164,8 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "ESC",
-              "type" : "SimpleText"
+              "shortcut" : "ESC",
+              "type" : "KeyboardShortcut"
             } ]
           } ] ], [ [ {
             "type" : "Paragraph",
@@ -170,8 +176,8 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "/",
-              "type" : "SimpleText"
+              "shortcut" : "/",
+              "type" : "KeyboardShortcut"
             } ]
           } ] ], [ [ {
             "type" : "Paragraph",
@@ -182,8 +188,8 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Ctrl + Left arrow",
-              "type" : "SimpleText"
+              "shortcut" : "Ctrl LeftArrow",
+              "type" : "KeyboardShortcut"
             } ]
           } ] ], [ [ {
             "type" : "Paragraph",
@@ -194,15 +200,15 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Ctrl + Right arrow",
-              "type" : "SimpleText"
+              "shortcut" : "Ctrl RightArrow",
+              "type" : "KeyboardShortcut"
             } ]
           } ] ] ]
         },
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1590759330889,
+    "lastModifiedTime" : 1592959343900,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Shortcuts",

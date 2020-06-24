@@ -90,6 +90,11 @@
 </article>
 
 <article>
+<header><h1>Syntax highlighting</h1></header>
+<p>Syntax highlighting is automatically selected based file extension. E.g. extensions .c , .h , .cpp , .hpp are treated as C++. :include-file: simple.c #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } Use lang to force a different syntax highlighting :include-file: simple.c {lang: &quot;java&quot;} #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } Note: File extensions and lang are case-insensitive.</p>
+</article>
+
+<article>
 <header><h1>Title</h1></header>
 <p>:include-file: file-name.js {title: &quot;ES6 class&quot;} Use the title property to specify a title. class JsClass { constructor() { usefulAction() } } export default JsClass</p>
 </article>
@@ -107,6 +112,11 @@
 <article>
 <header><h1>Highlights</h1></header>
 <p>Use the highlight option to bring readers attention to the important lines. :include-file: file-name.js {highlight: &quot;export&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. :include-file: file-name.js {highlight: [&quot;export&quot;, 1]} class JsClass { constructor() { usefulAction() } } export default JsClass Note: Order of lines to highlight is reflected during presentation modeUse the highlightPath option to highlight lines specified in a separate file. :include-file: file-name.js {highlightPath: &quot;lines-to-highlight.txt&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass class usefulAction</p>
+</article>
+
+<article>
+<header><h1>Limit</h1></header>
+<p>Use startLine , endLine to limit the included content.If you have a file with embedded examples, you can use limit function to extract small samples by using marker lines. import market def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example: cancel trade market.cancel_trade('id') # example-end if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py {startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;, excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: &quot;import&quot;} :include-file: python-examples.py {includeRegexp: [&quot;import&quot;]} import market Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: &quot;# example&quot;} :include-file: python-examples.py {excludeRegexp: [&quot;# example&quot;]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade('id') if __name__ == &quot;__main__&quot;: main()</p>
 </article>
 
 <article>
@@ -229,6 +239,88 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           } ]
+        } ]
+      } ]
+    }, {
+      "title" : "Syntax highlighting",
+      "id" : "syntax-highlighting",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Syntax highlighting is automatically selected based file extension.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "E.g. extensions ",
+          "type" : "SimpleText"
+        }, {
+          "code" : ".c",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "code" : ".h",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "code" : ".cpp",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "code" : ".hpp",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " are treated as C++.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: simple.c\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "c",
+        "snippet" : "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "lang",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to force a different syntax highlighting",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: simple.c {lang: \"java\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: File extensions and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "lang",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " are case-insensitive.",
+          "type" : "SimpleText"
         } ]
       } ]
     }, {
@@ -388,7 +480,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlight" : [ "export" ],
+        "highlight" : [ 6 ],
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -409,7 +501,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlight" : [ "export", 1 ],
+        "highlight" : [ 6, 1 ],
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -438,12 +530,153 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "highlightPath" : "lines-to-highlight.txt",
-        "highlight" : [ "class", "usefulAction" ],
+        "highlight" : [ 0, 2 ],
         "type" : "Snippet"
       }, {
         "lang" : "txt",
         "snippet" : "class\nusefulAction",
         "title" : "lines-to-highlight.txt",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "title" : "Limit",
+      "id" : "limit",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "startLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "endLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to limit the included content.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If you have a file with embedded examples, you can use limit function to extract small samples by using marker lines.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "py",
+        "snippet" : "import market\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example: cancel trade\n    market.cancel_trade('id')\n    # example-end\n\nif __name__  == \"__main__\":\n    main()",
+        "title" : "file with examples",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: python-examples.py {startLine: \"example: book trade\", endLine: \"example-end\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "py",
+        "snippet" : "# example: book trade\nid = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n# example-end",
+        "title" : "extracted example",
+        "startLine" : "example: book trade",
+        "endLine" : "example-end",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Lines match doesn't have to be exact, ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "contains",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " is used.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "By default ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "startLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "endLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " are included in the rendered result. Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "excludeStartEnd: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to remove markers.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: python-examples.py { \n    startLine: \"example: book trade\",\n    endLine: \"example-end\",\n    excludeStartEnd: true }\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "py",
+        "snippet" : "id = market.book_trade('symbol', market.CURRENT_PRICE, 100)",
+        "title" : "extracted example",
+        "startLine" : "example: book trade",
+        "endLine" : "example-end",
+        "excludeStartEnd" : true,
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "includeRegexp",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to include only lines matching regexp(s).",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: python-examples.py {includeRegexp: \"import\"}\n:include-file: python-examples.py {includeRegexp: [\"import\"]}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "py",
+        "snippet" : "import market",
+        "includeRegexp" : [ "import" ],
+        "title" : "include by regexp",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "excludeRegexp",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to exclude lines matching regexp(s).",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: python-examples.py {excludeRegexp: \"# example\"}\n:include-file: python-examples.py {excludeRegexp: [\"# example\"]}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "py",
+        "snippet" : "import market\n\ndef main():\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n\n    market.cancel_trade('id')\n\nif __name__  == \"__main__\":\n    main()",
+        "excludeRegexp" : [ "# example" ],
+        "title" : "exclude by regexp",
         "type" : "Snippet"
       } ]
     }, {
@@ -532,7 +765,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1590759330893,
+    "lastModifiedTime" : 1592959343904,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
@@ -543,6 +776,9 @@ ReactDOM.render(React.createElement(Documentation, {
       "pageSectionIdTitles" : [ {
         "title" : "Embedding Content",
         "id" : "embedding-content"
+      }, {
+        "title" : "Syntax highlighting",
+        "id" : "syntax-highlighting"
       }, {
         "title" : "Title",
         "id" : "title"
@@ -555,6 +791,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Highlights",
         "id" : "highlights"
+      }, {
+        "title" : "Limit",
+        "id" : "limit"
       }, {
         "title" : "Callout Comments",
         "id" : "callout-comments"

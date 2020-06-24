@@ -98,6 +98,11 @@
 <header><h1>HTTP Lookup Location</h1></header>
 <p>If files you want to include are not part of your project, you can add an HTTP base URL to lookup-paths . txt ../examples ../module/src/main/java https://raw.githubusercontent.com/testingisdocumenting/webtau/master If the file is not found using local locations, it will be fetched from the provided urls. :include-file: .travis.yml language: java jdk: - openjdk8 - openjdk11 cache: directories: - $HOME/.m2 - $HOME/.npm - node_modules dist: xenial services: - xvfb addons: chrome: stable apt: packages: - graphviz # disables the default install step which is mvn install skipping tests install: true script: mvn -B package</p>
 </article>
+
+<article>
+<header><h1>CLI parameter</h1></header>
+<p>Use --lookup-paths CLI parameter to add additional paths to lookup files. Use it when lookup location can't be hardcoded. webtau --lookup-paths /extra/path-one:/extra/path-two</p>
+</article>
 </section>
 </div>
 <!--test extension added comment-->
@@ -215,7 +220,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "lang" : "xml",
         "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>${project.version}</version>\n    <dependencies>\n        <dependency>\n            <groupId>junit</groupId>\n            <artifactId>junit</artifactId>\n            <version>${junit.version}</version>\n            <classifier>sources</classifier>\n        </dependency>\n    </dependencies>\n</plugin>",
-        "highlight" : [ "classifier" ],
+        "highlight" : [ 9 ],
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -266,8 +271,34 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "language: java\n\njdk:\n  - openjdk8\n  - openjdk11\n\ncache:\n  directories:\n  - $HOME/.m2\n  - $HOME/.npm\n  - node_modules\n\ndist: xenial\n\nservices:\n  - xvfb\n\naddons:\n  chrome: stable\n  apt:\n    packages:\n      - graphviz\n\n# disables the default install step which is mvn install skipping tests\ninstall: true\n\nscript: mvn -B package",
         "type" : "Snippet"
       } ]
+    }, {
+      "title" : "CLI parameter",
+      "id" : "cli-parameter",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "--lookup-paths",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " CLI parameter to add additional paths to lookup files. Use it when lookup location",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "can't be hardcoded.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "command" : "webtau --lookup-paths /extra/path-one:/extra/path-two",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      } ]
     } ],
-    "lastModifiedTime" : 1590759330889,
+    "lastModifiedTime" : 1592959343900,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Lookup Paths",
@@ -284,6 +315,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "HTTP Lookup Location",
         "id" : "http-lookup-location"
+      }, {
+        "title" : "CLI parameter",
+        "id" : "cli-parameter"
       } ]
     }
   },

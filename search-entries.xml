@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#installation</url>
     <fullTitle>Znai: Getting Started, Installation [Introduction]</fullTitle>
     <text>
-      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.37/znai-dist-1.37-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</text>
+      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.40.1/znai-dist-1.40.1-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#scaffolding</url>
     <fullTitle>Znai: Getting Started, Scaffolding [Introduction]</fullTitle>
     <text>
-      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.37&lt;/version> &lt;/plugin> mvn znai:new</text>
+      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.40.1&lt;/version> &lt;/plugin> mvn znai:new</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -224,6 +224,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/flow/lookup-paths#cli-parameter</url>
+    <fullTitle>Znai: Lookup Paths, CLI parameter [Flow]</fullTitle>
+    <text>
+      <text>Use --lookup-paths CLI parameter to add additional paths to lookup files. Use it when lookup location can't be hardcoded. webtau --lookup-paths /extra/path-one:/extra/path-two</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/flow/search#local</url>
     <fullTitle>Znai: Search, Local [Flow]</fullTitle>
     <text>
@@ -275,7 +283,7 @@
     <url>/znai/flow/shortcuts#keyboard-shortcuts</url>
     <fullTitle>Znai: Shortcuts, Keyboard shortcuts [Flow]</fullTitle>
     <text>
-      <text>Action Shortcut Change to presentation mode p Change to print mode Alt + p Change to default mode ESC Activate search / Navigate to a previous page Ctrl + Left arrow Navigate to a next page Ctrl + Right arrow</text>
+      <text>Action Shortcut Change to presentation mode `:kbd: Alt =` or `:kbd: Alt +` Change to print mode `:kbd: Alt p` Change to default mode `:kbd: ESC` Activate search `:kbd: /` Navigate to a previous page `:kbd: Ctrl LeftArrow` Navigate to a next page `:kbd: Ctrl RightArrow`</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -336,6 +344,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/external-code-snippets#syntax-highlighting</url>
+    <fullTitle>Znai: External Code Snippets, Syntax highlighting [Snippets]</fullTitle>
+    <text>
+      <text>Syntax highlighting is automatically selected based file extension. E.g. extensions .c , .h , .cpp , .hpp are treated as C++. :include-file: simple.c #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; } Use lang to force a different syntax highlighting :include-file: simple.c {lang: "java"} #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; } Note: File extensions and lang are case-insensitive.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/external-code-snippets#title</url>
     <fullTitle>Znai: External Code Snippets, Title [Snippets]</fullTitle>
     <text>
@@ -364,6 +380,14 @@
     <fullTitle>Znai: External Code Snippets, Highlights [Snippets]</fullTitle>
     <text>
       <text>Use the highlight option to bring readers attention to the important lines. :include-file: file-name.js {highlight: "export"} class JsClass { constructor() { usefulAction() } } export default JsClass It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. :include-file: file-name.js {highlight: ["export", 1]} class JsClass { constructor() { usefulAction() } } export default JsClass Note: Order of lines to highlight is reflected during presentation modeUse the highlightPath option to highlight lines specified in a separate file. :include-file: file-name.js {highlightPath: "lines-to-highlight.txt"} class JsClass { constructor() { usefulAction() } } export default JsClass class usefulAction</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/external-code-snippets#limit</url>
+    <fullTitle>Znai: External Code Snippets, Limit [Snippets]</fullTitle>
+    <text>
+      <text>Use startLine , endLine to limit the included content.If you have a file with embedded examples, you can use limit function to extract small samples by using marker lines. import market def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example: cancel trade market.cancel_trade('id') # example-end if __name__ == "__main__": main() :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: "example: book trade", endLine: "example-end", excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: "import"} :include-file: python-examples.py {includeRegexp: ["import"]} import market Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: "# example"} :include-file: python-examples.py {excludeRegexp: ["# example"]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade('id') if __name__ == "__main__": main()</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -787,7 +811,23 @@
     <url>/znai/snippets/CLI#output</url>
     <fullTitle>Znai: CLI, Output [Snippets]</fullTitle>
     <text>
-      <text>To display console output and bring attention to certain lines use: :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]} Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master You can highlight by a partial line text match: :include-cli-output: cli/file-path-of-captured.out {highlight: "remote"} Or you can highlight by lines stored in a separate file: :include-cli-output: cli/file-path-of-captured.out {highlightFile: "cli/file-path-of-asserted-lines.txt"} remote: Writing Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
+      <text>To display console output and bring attention to certain lines use: :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]} Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master You can highlight by a partial line text match: :include-cli-output: cli/file-path-of-captured.out {highlight: "remote"} Or you can highlight by lines stored in a separate file: :include-cli-output: cli/file-path-of-captured.out {highlightPath: "cli/file-path-of-asserted-lines.txt"} remote: Writing Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/CLI#ansi-colors</url>
+    <fullTitle>Znai: CLI, ANSI Colors [Snippets]</fullTitle>
+    <text>
+      <text>CLI renders ANSI colors automatically. webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer> expected: 200 &lt;java.lang.Integer> (47ms) { "userId": 1, "id": 1, "title": "delectus aut autem", "completed": false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) :include-cli-output: cli/ansi.out webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer> expected: 200 &lt;java.lang.Integer> (47ms) { "userId": 1, "id": 1, "title": "delectus aut autem", "completed": false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms)</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/CLI#title</url>
+    <fullTitle>Znai: CLI, Title [Snippets]</fullTitle>
+    <text>
+      <text>Use title to specify output of the output :include-cli-output: cli/file-path-of-captured.out {title: "Captured output"} Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -795,7 +835,7 @@
     <url>/znai/snippets/CLI#presentation-mode</url>
     <fullTitle>Znai: CLI, Presentation Mode [Snippets]</fullTitle>
     <text>
-      <text>In presentation mode, cli-command will simulate typing inside the terminal.If your cli-output is long, you can split the presentation output into chunks: :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4], chunkSize: 10, fadedSize: 2} chunkSize specifies the maximum number of lines visible at a time. fadedSize specifies how many lines will be visible after and before as you move through output (default is 2). Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
+      <text>In presentation mode, cli-command will simulate typing inside the terminal.You can gradually reveal cli-output by providing revealLineStop parameter. :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]} Passed highlight will highlight each line as a separate slide. Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -900,6 +940,14 @@
     <fullTitle>Znai: Attention Signs, Question [Layout]</fullTitle>
     <text>
       <text>Question: Use the question sign to bring an extra attention to the main idea of a page. \ What is the point of the `attention signs`? Question: Use the question sign to bring extra attention to the main idea of a page. What is the point of the attention signs ?</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/attention-signs#exercise</url>
+    <fullTitle>Znai: Attention Signs, Exercise [Layout]</fullTitle>
+    <text>
+      <text>Exercise: write a hello world example in this language Exercise: write a hello world example in this language</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1099,7 +1147,7 @@
     <url>/znai/layout/two-sides-pages#aligning-data-in-columns</url>
     <fullTitle>Znai: Two Sides Pages, Aligning Data in Columns [Layout]</fullTitle>
     <text>
-      <text>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side. :include-empty-block: {rightSide: true} :include-table: layout/table.csv :include-meta: {rightSide: true} :include-file: layout/table.csv</text>
+      <text>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. # Aligning Data in Columns Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side. :include-empty-block: {rightSide: true} :include-table: layout/table.csv :include-meta: {rightSide: true} :include-file: layout/table.csv :include-meta: {rightSide: false}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1328,6 +1376,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/images#align</url>
+    <fullTitle>Znai: Images, Align [Visuals]</fullTitle>
+    <text>
+      <text>Use align option to align images left or right. :include-image: books.jpg {align: "left", scaleRatio: 0.3} :include-image: books.jpg {align: "right", scaleRatio: 0.3}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/image-annotations#annotations-file</url>
     <fullTitle>Znai: Image Annotations, Annotations File [Visuals]</fullTitle>
     <text>
@@ -1499,7 +1555,7 @@
     <url>/znai/deployment/static-content#build</url>
     <fullTitle>Znai: Static Content, Build [Deployment]</fullTitle>
     <text>
-      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.37&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
+      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.40.1&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
       <score>STANDARD</score>
     </text>
   </entry>

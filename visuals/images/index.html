@@ -108,6 +108,11 @@
 <header><h1>Scale Ratio</h1></header>
 <p>To scale image up or down use scaleRatio option, 1 is default, 0.5 is half image size. :include-image: books.jpg {scaleRatio: 0.3}</p>
 </article>
+
+<article>
+<header><h1>Align</h1></header>
+<p>Use align option to align images left or right. :include-image: books.jpg {align: &quot;left&quot;, scaleRatio: 0.3} :include-image: books.jpg {align: &quot;right&quot;, scaleRatio: 0.3}</p>
+</article>
 </section>
 </div>
 <!--test extension added comment-->
@@ -154,7 +159,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "destination" : "/znai/visuals/regular-image.png",
         "alt" : "alt text",
         "inlined" : false,
-        "timestamp" : 1590759330913,
+        "timestamp" : 1592959343924,
         "width" : 583,
         "height" : 385,
         "type" : "Image"
@@ -223,7 +228,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "caption" : "Title of an image",
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1590759330905,
+        "timestamp" : 1592959343916,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -243,7 +248,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "caption" : "Title of an image",
         "captionBottom" : true,
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1590759330905,
+        "timestamp" : 1592959343916,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -261,7 +266,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1590759330905,
+        "timestamp" : 1592959343916,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -286,7 +291,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "fit" : true,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1590759330905,
+        "timestamp" : 1592959343916,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -328,14 +333,59 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "scaleRatio" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1590759330905,
+        "timestamp" : 1592959343916,
+        "shapes" : [ ],
+        "width" : 509.4,
+        "height" : 339.3,
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "title" : "Align",
+      "id" : "align",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "align",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option to align images left or right.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-image: books.jpg {align: \"left\", scaleRatio: 0.3}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "align" : "left",
+        "scaleRatio" : 0.3,
+        "imageSrc" : "/znai/visuals/books.jpg",
+        "timestamp" : 1592959343916,
+        "shapes" : [ ],
+        "width" : 509.4,
+        "height" : 339.3,
+        "type" : "AnnotatedImage"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-image: books.jpg {align: \"right\", scaleRatio: 0.3}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "align" : "right",
+        "scaleRatio" : 0.3,
+        "imageSrc" : "/znai/visuals/books.jpg",
+        "timestamp" : 1592959343916,
         "shapes" : [ ],
         "width" : 509.4,
         "height" : 339.3,
         "type" : "AnnotatedImage"
       } ]
     } ],
-    "lastModifiedTime" : 1590759330909,
+    "lastModifiedTime" : 1592959343924,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Images",
@@ -358,6 +408,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Scale Ratio",
         "id" : "scale-ratio"
+      }, {
+        "title" : "Align",
+        "id" : "align"
       } ]
     }
   },

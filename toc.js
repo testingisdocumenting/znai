@@ -3,7 +3,7 @@ toc = [ {
   "dirName" : "",
   "items" : [ {
     "sectionTitle" : "",
-    "pageTitle" : "Index",
+    "pageTitle" : "Znai",
     "pageMeta" : { },
     "dirName" : "",
     "fileName" : "index",
@@ -158,6 +158,9 @@ toc = [ {
     }, {
       "title" : "HTTP Lookup Location",
       "id" : "http-lookup-location"
+    }, {
+      "title" : "CLI parameter",
+      "id" : "cli-parameter"
     } ]
   }, {
     "sectionTitle" : "Flow",
@@ -261,6 +264,9 @@ toc = [ {
       "title" : "Embedding Content",
       "id" : "embedding-content"
     }, {
+      "title" : "Syntax highlighting",
+      "id" : "syntax-highlighting"
+    }, {
       "title" : "Title",
       "id" : "title"
     }, {
@@ -272,6 +278,9 @@ toc = [ {
     }, {
       "title" : "Highlights",
       "id" : "highlights"
+    }, {
+      "title" : "Limit",
+      "id" : "limit"
     }, {
       "title" : "Callout Comments",
       "id" : "callout-comments"
@@ -542,6 +551,12 @@ toc = [ {
       "title" : "Output",
       "id" : "output"
     }, {
+      "title" : "ANSI Colors",
+      "id" : "ansi-colors"
+    }, {
+      "title" : "Title",
+      "id" : "title"
+    }, {
       "title" : "Presentation Mode",
       "id" : "presentation-mode"
     } ]
@@ -622,6 +637,9 @@ toc = [ {
     }, {
       "title" : "Question",
       "id" : "question"
+    }, {
+      "title" : "Exercise",
+      "id" : "exercise"
     } ]
   }, {
     "sectionTitle" : "Layout",
@@ -901,6 +919,9 @@ toc = [ {
     }, {
       "title" : "Scale Ratio",
       "id" : "scale-ratio"
+    }, {
+      "title" : "Align",
+      "id" : "align"
     } ]
   }, {
     "sectionTitle" : "Visuals",
