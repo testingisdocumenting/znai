@@ -17,6 +17,9 @@
 import React from 'react';
 import { PresentationProps } from '../presentation/PresentationProps';
 
+import { extractTextFromTokens } from './codeUtils';
+import { repeatChar } from '../../utils/strings';
+
 import './SnippetOptionallyScrollablePart.css';
 
 interface Props extends PresentationProps {
@@ -35,7 +38,9 @@ interface State {
  */
 export class SnippetOptionallyScrollablePart extends React.Component<Props, State> {
   node?: HTMLDivElement;
-  state = {height: undefined};
+  state = {
+    height: undefined
+  };
 
   render() {
     const {
@@ -51,7 +56,7 @@ export class SnippetOptionallyScrollablePart extends React.Component<Props, Stat
 
     const {height} = this.state;
 
-    const linesOfCodeToRender = !!height ? linesOfCode : linesOfCode.slice(0, numberOfVisibleLines);
+    const linesOfCodeToRender = !!height ? linesOfCode : this.generateEmptyLongestLines();
 
     return (
       <div className="znai-snippet-scrollable-part" ref={this.saveNode} style={{height}}>
@@ -65,10 +70,24 @@ export class SnippetOptionallyScrollablePart extends React.Component<Props, Stat
   }
 
   componentDidMount() {
-    const height = this.node?.getBoundingClientRect().height
+    const height = this.node?.offsetHeight;
     this.setState({height});
 
     this.scrollIfRequired();
+  }
+
+  generateEmptyLongestLines() {
+    const {linesOfCode, numberOfVisibleLines} = this.props;
+
+    const maxLength = linesOfCode.reduce((max, line) => Math.max(max, extractTextFromTokens(line).length), 0);
+    const longLine = repeatChar(maxLength - 1 /* new line symbol */, ' ') + '\n';
+
+    const result = [];
+    for (let idx = 0; idx < numberOfVisibleLines; idx++) {
+      result.push([longLine]);
+    }
+
+    return result;
   }
 
   scrollIfRequired() {
