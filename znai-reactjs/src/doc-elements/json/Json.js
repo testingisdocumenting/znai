@@ -45,6 +45,7 @@ class Json extends React.Component {
             <SnippetContainer linesOfCode={lines}
                               title={title}
                               tokensForClipboardProvider={this.tokensForClipboardProvider}
+                              numberOfVisibleLines={100}
                               snippetComponent={SimpleCodeSnippet}
                               {...props}/>
         )
