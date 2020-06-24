@@ -95,7 +95,12 @@ class SnippetContainer extends React.Component {
     }
 
     renderCopyToClipboard() {
+        const {isPresentation} = this.props
         const {displayCopied} = this.state
+
+        if (isPresentation) {
+            return null
+        }
 
         const className = 'snippet-copy-to-clipboard ' + (displayCopied ? 'copied': 'copy')
 
