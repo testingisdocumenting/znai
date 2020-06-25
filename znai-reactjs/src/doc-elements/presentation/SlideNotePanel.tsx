@@ -56,8 +56,9 @@ export function SlideNotePanel({presentationRegistry, pageLocalSlideIdx, slide}:
   )
 
   function hasNotes() {
+    const componentStartIdx = presentationRegistry.slideComponentStartIdxByIdx(pageLocalSlideIdx)
     for (let idx = 0; idx < slide.numberOfSlides; idx++) {
-      const {slideVisibleNote} = presentationRegistry.extractCombinedSlideInfo(pageLocalSlideIdx + idx);
+      const slideVisibleNote = extractSlideInfo(componentStartIdx + idx);
       if (slideVisibleNote && slideVisibleNote.length > 0) {
         return true;
       }
@@ -67,14 +68,21 @@ export function SlideNotePanel({presentationRegistry, pageLocalSlideIdx, slide}:
   }
 
   function findLongestNote() {
+    const componentStartIdx = presentationRegistry.slideComponentStartIdxByIdx(pageLocalSlideIdx)
+
     let result = '';
     for (let idx = 0; idx < slide.numberOfSlides; idx++) {
-      const {slideVisibleNote} = presentationRegistry.extractCombinedSlideInfo(pageLocalSlideIdx + idx);
+      const slideVisibleNote = extractSlideInfo(componentStartIdx + idx);
       if (slideVisibleNote && slideVisibleNote.length > result.length) {
         result = slideVisibleNote
       }
     }
 
     return result;
+  }
+
+  function extractSlideInfo(slideIdx: number) {
+    const {slideVisibleNote} = presentationRegistry.extractCombinedSlideInfo(slideIdx);
+    return slideVisibleNote;
   }
 }

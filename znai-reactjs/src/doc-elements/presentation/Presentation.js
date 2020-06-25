@@ -80,7 +80,8 @@ class Presentation extends Component {
                     }
                 </div>
 
-                <SlideNotePanel presentationRegistry={presentationRegistry}
+                <SlideNotePanel key={slide.componentIdx}
+                                presentationRegistry={presentationRegistry}
                                 pageLocalSlideIdx={currentSlideIdx}
                                 slide={slide}/>
             </div>
