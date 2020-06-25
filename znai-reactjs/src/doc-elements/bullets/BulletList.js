@@ -97,7 +97,7 @@ function listType(props, key) {
 
 function slideInfoProvider(props) {
     const type = presentationListType(props)
-    if (! type) {
+    if (!type) {
         return {}
     }
 

@@ -36,6 +36,14 @@ export function bulletListPresentationDemo(registry) {
                 content
             }])
         )
+        .add('horizontal stripes with icons', createPresentationDemo([{
+                type: 'BulletList',
+                meta: {
+                    presentationBulletListType: 'HorizontalStripes'
+                },
+                content: bulletListWithIcons()
+            }])
+        )
 }
 
 function createBulletContent() {
@@ -75,6 +83,37 @@ function createBulletContent() {
                     }]
                 }
             ]
+        }
+    ]
+}
+
+function bulletListWithIcons() {
+    return [
+        {
+            "type": "ListItem",
+            "content": [{
+                "type": "Paragraph",
+                "content": [{
+                    "id": "time",
+                    "type": "Icon"
+                }, {
+                    "text": " Lost time for users",
+                    "type": "SimpleText"
+                }]
+            }]
+        },
+        {
+            "type": "ListItem",
+            "content": [{
+                "type": "Paragraph",
+                "content": [{
+                    "id": "thumbs-down",
+                    "type": "Icon"
+                }, {
+                    "text": " Reputational damage",
+                    "type": "SimpleText"
+                }]
+            }]
         }
     ]
 }

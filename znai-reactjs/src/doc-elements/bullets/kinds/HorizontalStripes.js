@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,29 +17,38 @@
 
 import React, {Component} from 'react'
 
-import {extractTextLinesEmphasisOrFull} from '../bulletUtils'
+import {extractIconIds, extractTextLinesEmphasisOrFull} from '../bulletUtils'
 import {isAllAtOnce} from '../../meta/meta'
+
+import {Icon} from "../../icons/Icon";
 
 import './HorizontalStripes.css'
 
-const Stripe = ({text}) => {
-    return <div className="horizontal-stripe">{text}</div>
+const Stripe = ({iconId, text}) => {
+    return (
+        <div className="znai-horizontal-stripe">
+            {iconId && <div className="znai-horizontal-stripe-icon"><Icon id={iconId}/></div>}
+            <div className="znai-horizontal-stripe-text">{text}</div>
+        </div>
+    )
 }
 
 const EmptyStripe = () => {
-    return <div className="empty-horizontal-stripe"/>
+    return <div className="znai-empty-horizontal-stripe"/>
 }
 
 class HorizontalStripes extends Component {
     render() {
         const {elementsLibrary, meta, content, slideIdx} = this.props
         const textLines = extractTextLinesEmphasisOrFull(content)
+        const iconIds = extractIconIds(content)
 
         return (
-            <div className="horizontal-stripes">{content.map((item, idx) => {
+            <div className="znai-horizontal-stripes">{content.map((item, idx) => {
                 const Component = idx <= slideIdx || isAllAtOnce(meta) ? Stripe : EmptyStripe
                 return <Component key={idx}
                                   {...this.props}
+                                  iconId={iconIds[idx]}
                                   elementsLibrary={elementsLibrary}
                                   text={textLines[idx]}/>
             })}
