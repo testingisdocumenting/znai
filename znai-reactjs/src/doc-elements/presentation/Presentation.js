@@ -17,9 +17,11 @@
 
 import React, {Component} from 'react'
 
-import { Icon } from '../icons/Icon'
+import {Icon} from '../icons/Icon'
 
 import {SlidesLayout} from "./SlidesLayout";
+
+import {SlideNotePanel} from "./SlideNotePanel";
 
 import './Presentation.css'
 
@@ -30,21 +32,19 @@ class Presentation extends Component {
         super(props)
 
         this.state = {
-            currentSlideIdx: this.props.slideIdx || 0
+            currentSlideIdx: this.props.slideIdx || 0,
+            presentationArea: undefined
         }
     }
 
     render() {
         const {docMeta, presentationRegistry} = this.props
-        const {currentSlideIdx} = this.state
+        const {currentSlideIdx, presentationArea} = this.state
 
         const {pageTitle, sectionTitle} = presentationRegistry.extractCombinedSlideInfo(currentSlideIdx - 1)
 
         const slide = presentationRegistry.slideByIdx(currentSlideIdx)
         const isSectionTitleOnSlide = !!slide.info.sectionTitle
-
-        const slideVisibleNote = slide.info.slideVisibleNote
-        const showSlideNote = !!slideVisibleNote
 
         return (
             <div className="presentation" onClick={this.onMouseClick}>
@@ -73,19 +73,35 @@ class Presentation extends Component {
                 </div>
 
                 <div ref={this.savePresentationAreaDimension} className="znai-presentation-slides-area">
-                    {this.presentationAreaNode && (<SlidesLayout presentationRegistry={presentationRegistry}
-                                                                 currentSlideIdx={currentSlideIdx}
-                                                                 maxScaleRatio={maxScaleRatio}
-                                                                 presentationArea={this.calcPresentationArea()}/>)
+                    {presentationArea && (<SlidesLayout presentationRegistry={presentationRegistry}
+                                                        currentSlideIdx={currentSlideIdx}
+                                                        maxScaleRatio={maxScaleRatio}
+                                                        presentationArea={presentationArea}/>)
                     }
                 </div>
 
-                {showSlideNote && <div className="znai-presentation-footer">{slideVisibleNote}</div> }
+                <SlideNotePanel presentationRegistry={presentationRegistry}
+                                pageLocalSlideIdx={currentSlideIdx}
+                                slide={slide}/>
             </div>
         )
     }
 
-    calcPresentationArea() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.currentSlideIdx === this.state.currentSlideIdx) {
+            return
+        }
+
+        this.setState({
+            presentationArea: this.calcPresentationArea()
+        })
+    }
+
+    calcPresentationArea = () => {
+        if (!this.presentationAreaNode) {
+            return undefined
+        }
+
         return {
             width: this.presentationAreaNode.offsetWidth,
             height: this.presentationAreaNode.offsetHeight
@@ -94,7 +110,9 @@ class Presentation extends Component {
 
     savePresentationAreaDimension = (node) => {
         this.presentationAreaNode = node
-        this.forceUpdate()
+        this.setState({
+            presentationArea: this.calcPresentationArea()
+        })
     }
 
     componentDidMount() {
