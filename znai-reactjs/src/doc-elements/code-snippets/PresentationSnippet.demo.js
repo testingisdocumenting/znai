@@ -39,6 +39,12 @@ export function snippetPresentationDemo(registry) {
             snippet : javaCodeWithMultilineComments(),
             commentsType: 'inline'
         }]))
+        .add('long snippet with bullet points', createPresentationDemo([{
+            lang : 'java',
+            type : 'Snippet',
+            snippet : longJavaCodeWithComment(),
+            commentsType: 'inline'
+        }]))
         .add('read more', createPresentationDemo([{
             type: 'Snippet',
             lang: 'java',
@@ -96,6 +102,32 @@ function longJavaCode() {
 
     for (let idx = 0; idx < 60; idx++) {
         code += `        System.out.println("hello ${idx + 1}");\n`
+    }
+
+    code +=         '        ...\n' +
+        '    }\n' +
+        '}\n'
+
+    return code
+}
+
+function longJavaCodeWithComment() {
+    let code = 'class InternationalPriceService implements PriceService {\n' +
+        '    private static void main(String... args) {\n'
+
+    for (let idx = 0; idx < 15; idx++) {
+        if (idx === 10) {
+            code += '        System.out.println("hello ' + (idx + 1) + '}"); // multiline comment multi line comment ' +
+                'multiline comment multi line comment multiline comment multiline comment multi line comment multiline ' +
+                'comment multi line comment multiline comment multiline comment multi line comment multiline comment ' +
+                'multi line comment multiline comment multiline comment multi line comment multiline comment multi' +
+                ' line comment multiline comment \n'
+        } else if (idx === 12) {
+            code += '        System.out.println("hello ' + (idx + 1) + '}"); // multiline comment multi line comment\n'
+        } else {
+            code += '        System.out.println("hello ' + (idx + 1) + '}");\n'
+
+        }
     }
 
     code +=         '        ...\n' +
