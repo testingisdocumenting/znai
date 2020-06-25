@@ -141,20 +141,6 @@ class PresentationRegistry {
         return {pageTitle, sectionTitle, slideVisibleNote}
     }
 
-    /**
-     * renders component with a slide content
-     * @param pageLocalSlideIdx slide idx local for a page. At the start of each page it equals 0
-     * @returns {React.ReactNode}
-     */
-    renderComponent({pageLocalSlideIdx}) {
-        const slide = this.slides[pageLocalSlideIdx]
-
-        return <slide.component {...slide.props}
-                                elementsLibrary={this.elementsLibrary}
-                                slideIdx={slide.slideIdx}
-                                isPresentation={true}/>
-    }
-
     renderSlide(slide) {
         return <slide.component {...slide.props}
                                 elementsLibrary={this.elementsLibrary}
@@ -164,6 +150,17 @@ class PresentationRegistry {
 
     slideByIdx(pageLocalSlideIdx) {
         return this.slides[pageLocalSlideIdx]
+    }
+
+    slideComponentStartIdxByIdx(pageLocalSlideIdx) {
+        let idx = pageLocalSlideIdx
+        for (; idx > 0; idx--) {
+            if (this.slideByIdx(idx - 1).componentIdx !== this.slideByIdx(idx).componentIdx) {
+                return idx
+            }
+        }
+
+        return 0
     }
 }
 

@@ -20,13 +20,18 @@ import PresentationRegistry from "./PresentationRegistry";
 
 describe('PresentationRegistry', () => {
     const elementsLibrary = {
-        'Dummy': () => <div/>
+        'Dummy': () => <div/>,
+        'DummyTriple': () => <div/>
     }
 
     const presentationElementHandlers = {
         'Dummy': {
             component: () => <div/>,
             numberOfSlides: () => 1
+        },
+        'DummyTriple': {
+            component: () => <div/>,
+            numberOfSlides: () => 3
         },
         'NonSlide': {
             component: () => <div/>,
@@ -85,6 +90,45 @@ describe('PresentationRegistry', () => {
 
             expect(slide4.props.snippet).toEqual("code4");
             expect(slide4.stickySlides.length).toEqual(0);
+        })
+    })
+
+    describe('slide boundaries', () => {
+        it('should know slideIdx boundaries of a component', () => {
+            const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code1",
+                },
+                {
+                    type: 'DummyTriple',
+                    lang: 'java',
+                    snippet: "code2",
+                },
+                {
+                    type: 'DummyTriple',
+                    lang: 'java',
+                    snippet: "code3",
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code4",
+                    highlight: [1],
+                }
+            ])
+
+            expect(registry.numberOfSlides).toEqual(8)
+
+            expect(registry.slideComponentStartIdxByIdx(0)).toEqual(0)
+            expect(registry.slideComponentStartIdxByIdx(1)).toEqual(1)
+            expect(registry.slideComponentStartIdxByIdx(2)).toEqual(1)
+            expect(registry.slideComponentStartIdxByIdx(3)).toEqual(1)
+            expect(registry.slideComponentStartIdxByIdx(4)).toEqual(4)
+            expect(registry.slideComponentStartIdxByIdx(5)).toEqual(4)
+            expect(registry.slideComponentStartIdxByIdx(6)).toEqual(4)
+            expect(registry.slideComponentStartIdxByIdx(7)).toEqual(7)
         })
     })
 })
