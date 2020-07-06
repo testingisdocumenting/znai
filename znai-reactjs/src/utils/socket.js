@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +17,7 @@
 
 export function socketUrl(relativeUrl) {
     if (process.env.NODE_ENV !== "production") {
-        return "ws://localhost:3333/preview"
+        return "ws://localhost:3334/preview"
     }
 
     let currentLocation = document.location.toString()
