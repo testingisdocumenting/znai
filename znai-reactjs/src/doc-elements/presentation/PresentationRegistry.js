@@ -18,6 +18,8 @@
 import React from 'react'
 import {presentationStickPlacement} from "../meta/meta";
 
+const emptySlide = createEmptySlide()
+
 class PresentationRegistry {
     constructor(elementsLibrary, presentationElementHandlers, content) {
         this.elementsLibrary = elementsLibrary
@@ -120,7 +122,11 @@ class PresentationRegistry {
     }
 
     extractCombinedSlideInfo(pageLocalSlideIdx) {
-        const slideInfo = pageLocalSlideIdx >= 0 ? this.slides[pageLocalSlideIdx].info : {}
+        if (pageLocalSlideIdx < 0 || pageLocalSlideIdx >= this.slides.length) {
+            return {pageTitle: '', sectionTitle: '', slideVisibleNote: ''}
+        }
+
+        const slideInfo = this.slides[pageLocalSlideIdx].info
 
         const slideVisibleNote = slideInfo.slideVisibleNote
         let pageTitle = ""
@@ -149,7 +155,7 @@ class PresentationRegistry {
     }
 
     slideByIdx(pageLocalSlideIdx) {
-        return this.slides[pageLocalSlideIdx]
+        return this.slides[pageLocalSlideIdx] || emptySlide
     }
 
     slideComponentStartIdxByIdx(pageLocalSlideIdx) {
@@ -161,6 +167,18 @@ class PresentationRegistry {
         }
 
         return 0
+    }
+}
+
+function createEmptySlide() {
+    return {
+        componentIdx: -1,
+        component: () => <div/>,
+        props: {},
+        numberOfSlides: 1,
+        slideIdx: 0,
+        stickySlides: [],
+        info: {}
     }
 }
 
