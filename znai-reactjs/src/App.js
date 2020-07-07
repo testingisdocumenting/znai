@@ -64,7 +64,7 @@ import {pageGenErrorDemo} from './doc-elements/page-gen-error/PageGenError.demo'
 import {diffTrackingDemo} from './diff/DiffTracking.demo'
 
 import {Documentation} from "./doc-elements/Documentation"
-import testData from "./doc-elements/TestData"
+import {testDocumentation} from "./doc-elements/testDocumentation"
 import {subHeadingPresentationDemo} from './doc-elements/default-elements/PresentationSubHeading.demo'
 import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
 import {updateGlobalDocReferences} from './doc-elements/references/globalDocReferences'
@@ -176,7 +176,7 @@ registries.add('screens')
 registries.add('end to end')
     .registerAsMiniApp('full documentation navigation', /\/preview/,
         {'root': '/preview'},
-        () => <Documentation {...testData.documentation}/>)
+        () => <Documentation {...testDocumentation}/>)
 
 const dropDowns = new DropDowns()
 dropDowns.add('Theme')
