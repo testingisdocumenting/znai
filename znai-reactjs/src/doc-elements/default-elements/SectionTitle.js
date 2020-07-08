@@ -17,18 +17,26 @@
 import React from 'react'
 
 import { Icon } from '../icons/Icon'
+import {presentationModeListeners} from "../presentation/PresentationModeListener";
 
 import './SectionTitle.css'
 
 const SectionTitle = ({id, title}) => {
     return id ? (
         <h1 className="section-title" id={id}>{title}
-            <a href={"#" + id}><Icon id="link"/></a>
+            <div className="znai-section-title-actions">
+                <a href={"#" + id}><Icon id="link"/></a>
+                <Icon id="maximize" className="znai-section-title-presentation" onClick={openPresentation}/>
+            </div>
         </h1>
     ) : (
         // eslint-disable-next-line
         <h1 className="empty-section-title" id='implicit-section'/>
     )
+
+    function openPresentation() {
+        presentationModeListeners.notifyPresentationEnter(id)
+    }
 }
 
 export default SectionTitle

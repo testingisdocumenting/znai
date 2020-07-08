@@ -17,6 +17,7 @@
 import React from "react";
 
 import PresentationRegistry from "./PresentationRegistry";
+import {presentationSectionHandler} from "../default-elements/Section";
 
 describe('PresentationRegistry', () => {
     const elementsLibrary = {
@@ -36,8 +37,46 @@ describe('PresentationRegistry', () => {
         'NonSlide': {
             component: () => <div/>,
             numberOfSlides: () => 0
-        }
+        },
+        'Section': presentationSectionHandler
     }
+
+    describe('slide idx by title', () => {
+        it('should find a slide idx by page section id', () => {
+            const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [
+                {
+                    type: 'Section',
+                    title : 'Title One',
+                    id : 'title-one',
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code1",
+                },
+                {
+                    type: 'Section',
+                    title : 'Title Two',
+                    id : 'title-two',
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'java',
+                    snippet: "code2",
+                    meta: {
+                        stickySlide: 'top 30%'
+                    }
+                }
+            ])
+
+            expect(registry.findSlideIdxBySectionId('title-one')).toEqual(0)
+            expect(registry.findSlideIdxBySectionId('title-two')).toEqual(2)
+
+            expect(registry.findSlideIdxBySectionId(undefined)).toEqual(0)
+            expect(registry.findSlideIdxBySectionId('')).toEqual(0)
+            expect(registry.findSlideIdxBySectionId('non-existing')).toEqual(0)
+        })
+    })
 
     describe('sticky slides', () => {
         it('should clear sticky slide for after first non sticky slide', () => {
