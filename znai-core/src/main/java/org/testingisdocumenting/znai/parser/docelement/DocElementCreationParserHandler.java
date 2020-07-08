@@ -19,6 +19,8 @@ package org.testingisdocumenting.znai.parser.docelement;
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
+import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.Plugin;
 import org.testingisdocumenting.znai.extensions.PluginParams;
@@ -280,6 +282,20 @@ public class DocElementCreationParserHandler implements ParserHandler {
         Map<String, Object> snippetProps = CodeSnippetsProps.create(lang, snippet);
         snippetProps.put("lineNumber", lineNumber);
         snippetProps.putAll(pluginParams.getOpts().toMap());
+
+        SnippetHighlightFeature highlightFeature = new SnippetHighlightFeature(componentsRegistry, pluginParams,
+                new SnippetContentProvider() {
+                    @Override
+                    public String snippetContent() {
+                        return snippet;
+                    }
+
+                    @Override
+                    public String snippetId() {
+                        return "embedded-snippet";
+                    }
+                });
+        highlightFeature.updateProps(snippetProps);
 
         append(DocElementType.SNIPPET, snippetProps);
     }
