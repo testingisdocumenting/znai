@@ -271,7 +271,7 @@ export class Documentation extends Component {
         } else if ((mode === DocumentationModes.DEFAULT) && (
             (e.code === 'Equal' && e.altKey) ||
             (e.code === 'NumpadAdd' && e.altKey))) {
-            this.onPresentationOpen()
+            this.onPresentationOpenWithHotKey()
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowLeft' && e.ctrlKey) {
             this.onPrevPage()
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'ArrowRight' && e.ctrlKey) {
@@ -464,6 +464,11 @@ export class Documentation extends Component {
 
     onPresentationOpen() {
         this.onPresentationEnter()
+    }
+
+    onPresentationOpenWithHotKey() {
+        const {autoSelectedTocItem} = this.state
+        this.onPresentationEnter(autoSelectedTocItem.anchorId)
     }
 
     onPresentationClose() {
