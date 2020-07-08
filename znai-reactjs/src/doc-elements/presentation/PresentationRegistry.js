@@ -168,6 +168,21 @@ class PresentationRegistry {
 
         return 0
     }
+
+    findSlideIdxBySectionId(sectionId) {
+        if (!sectionId) {
+            return 0
+        }
+
+        for (let slideIdx = 0; slideIdx < this.slides.length; slideIdx++) {
+            const slide = this.slides[slideIdx]
+            if (slide.info.sectionId === sectionId) {
+                return slideIdx;
+            }
+        }
+
+        return 0;
+    }
 }
 
 function createEmptySlide() {

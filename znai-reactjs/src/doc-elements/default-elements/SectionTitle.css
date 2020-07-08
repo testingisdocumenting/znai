@@ -20,6 +20,7 @@ h1 {
 
 .section-title,
 .empty-section-title {
+    display: flex;
     font-size: 26px;
     font-weight: bold;
     color: var(--znai-section-title-color);
@@ -37,10 +38,21 @@ h1 {
 .section-title .icon svg {
     width: 18px;
     height: 18px;
-    margin-left: 10px;
     display: none;
 }
 
 .section-title:hover .icon svg {
     display: inline-block;
+}
+
+.znai-section-title-actions {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+
+.znai-section-title-presentation {
+    padding-right: 48px;
+    cursor: pointer;
 }

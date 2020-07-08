@@ -18,9 +18,7 @@
 import React, {Component} from 'react'
 
 import {Icon} from '../icons/Icon'
-
 import {SlidesLayout} from "./SlidesLayout";
-
 import {SlideNotePanel} from "./SlideNotePanel";
 
 import './Presentation.css'
@@ -32,7 +30,7 @@ class Presentation extends Component {
         super(props)
 
         this.state = {
-            currentSlideIdx: this.props.slideIdx || 0,
+            currentSlideIdx: this.props.slideIdx || this.findSlideIdxBySectionId() || 0,
             presentationArea: undefined
         }
     }
@@ -178,6 +176,11 @@ class Presentation extends Component {
         } else {
             this.setState({currentSlideIdx: newSlideIdx})
         }
+    }
+
+    findSlideIdxBySectionId() {
+        const {presentationRegistry, presentationSectionId} = this.props
+        return presentationRegistry.findSlideIdxBySectionId(presentationSectionId)
     }
 }
 

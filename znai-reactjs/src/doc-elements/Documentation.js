@@ -50,6 +50,8 @@ import {areTocItemEquals} from '../structure/TocItem'
 
 import {isViewPortMobile, ViewPortProvider} from "../theme/ViewPortContext";
 
+import {presentationModeListeners} from "./presentation/PresentationModeListener";
+
 import './search/Search.css'
 
 export class Documentation extends Component {
@@ -78,7 +80,8 @@ export class Documentation extends Component {
             forceSelectedTocItem: null, // via explicit TOC panel click
             autoSelectedTocItem: autoSelectedTocItem, // based on scrolling
             mode: DocumentationModes.DEFAULT,
-            isMobile: isViewPortMobile()
+            isMobile: isViewPortMobile(),
+            presentationSectionId: ''
         }
 
         this.onHeaderClick = this.onHeaderClick.bind(this)
@@ -216,11 +219,12 @@ export class Documentation extends Component {
     }
 
     renderPresentationMode() {
-        const {presentationRegistry, docMeta} = this.state
+        const {presentationRegistry, presentationSectionId, docMeta} = this.state
 
         return (
             <Presentation docMeta={docMeta}
                           presentationRegistry={presentationRegistry}
+                          presentationSectionId={presentationSectionId}
                           onClose={this.onPresentationClose}
                           onNextPage={this.onNextPage}
                           hasNextPage={this.hasNextPage()}
@@ -243,6 +247,8 @@ export class Documentation extends Component {
         document.addEventListener('keydown', this.keyDownHandler)
         document.addEventListener('mouseup', this.mouseUpHandler)
         document.addEventListener('click', this.mouseClickHandler)
+
+        presentationModeListeners.addListener(this)
     }
 
     componentWillUnmount() {
@@ -251,6 +257,8 @@ export class Documentation extends Component {
         document.removeEventListener('keydown', this.keyDownHandler)
         document.removeEventListener('mouseup', this.mouseUpHandler)
         document.removeEventListener('click', this.mouseClickHandler)
+
+        presentationModeListeners.removeListener(this)
     }
 
     keyDownHandler(e) {
@@ -335,6 +343,11 @@ export class Documentation extends Component {
         } else {
             this.mainPanelDom.addEventListener("scroll", this.updateCurrentPageSection)
         }
+    }
+
+    onPresentationEnter = (pageSectionId) => {
+        documentationTracking.onPresentationOpen()
+        this.setState({mode: DocumentationModes.PRESENTATION, presentationSectionId: pageSectionId})
     }
 
     changePage(newStateWithNewPage) {
@@ -450,8 +463,7 @@ export class Documentation extends Component {
     }
 
     onPresentationOpen() {
-        documentationTracking.onPresentationOpen()
-        this.setState({mode: DocumentationModes.PRESENTATION})
+        this.onPresentationEnter()
     }
 
     onPresentationClose() {
