@@ -339,6 +339,29 @@ world""")
     }
 
     @Test
+    void "code snippets by indentation"() {
+        parse("    println 'hello world'")
+        content.should == [[lang: '', snippet:"println 'hello world'\n", lineNumber: '', type: 'Snippet']]
+    }
+
+    @Test
+    void "code snippets by fence"() {
+        parse("```\n" +
+                "println 'hello world'\n" +
+                "```")
+        content.should == [[lang: '', snippet:"println 'hello world'\n", lineNumber: '', type: 'Snippet']]
+    }
+
+    @Test
+    void "code snippets by fence with highlight"() {
+        parse("```script {highlight: \"hello\"}\n" +
+                "println 'hello world'\n" +
+                "```")
+        content.should == [[lang: 'script', snippet:"println 'hello world'\n", lineNumber: '',
+                            highlight: [0], type: 'Snippet']]
+    }
+
+    @Test
     void "fenced plugin"() {
         parse("~~~dummy\n" +
                 "test\n" +

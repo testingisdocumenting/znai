@@ -41,7 +41,7 @@ public class MarkdownVisitor extends AbstractVisitor {
 
     private final ComponentsRegistry componentsRegistry;
     private final Path path;
-    private ParserHandler parserHandler;
+    private final ParserHandler parserHandler;
     private boolean sectionStarted;
 
     public MarkdownVisitor(ComponentsRegistry componentsRegistry, Path path, ParserHandler parserHandler) {
@@ -162,13 +162,6 @@ public class MarkdownVisitor extends AbstractVisitor {
         }
     }
 
-    private void handleIncludePlugin(PluginParams params) {
-        IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());
-        PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, path, params);
-
-        parserHandler.onIncludePlugin(includePlugin, pluginResult);
-    }
-
     @Override
     public void visit(Image image) {
         Node firstChild = image.getFirstChild();
@@ -194,15 +187,6 @@ public class MarkdownVisitor extends AbstractVisitor {
         }
     }
 
-    private static PluginParams extractFencePluginParams(String nameAndParams) {
-        int firstSpaceIdx = nameAndParams.indexOf(' ');
-        return (firstSpaceIdx == -1) ?
-                new PluginParams(nameAndParams, ""):
-                new PluginParams(nameAndParams.substring(0, firstSpaceIdx),
-                        nameAndParams.substring(firstSpaceIdx + 1));
-
-    }
-
     @Override
     public void visit(Link link) {
         parserHandler.onLinkStart(link.getDestination());
@@ -222,6 +206,22 @@ public class MarkdownVisitor extends AbstractVisitor {
         } else {
             parserHandler.onSubHeading(heading.getLevel(), extractHeadingText(heading));
         }
+    }
+
+    private void handleIncludePlugin(PluginParams params) {
+        IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());
+        PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, path, params);
+
+        parserHandler.onIncludePlugin(includePlugin, pluginResult);
+    }
+
+    private static PluginParams extractFencePluginParams(String nameAndParams) {
+        int firstSpaceIdx = nameAndParams.indexOf(' ');
+        return (firstSpaceIdx == -1) ?
+                new PluginParams(nameAndParams, ""):
+                new PluginParams(nameAndParams.substring(0, firstSpaceIdx),
+                        nameAndParams.substring(firstSpaceIdx + 1));
+
     }
 
     private String extractHeadingText(Heading heading) {
