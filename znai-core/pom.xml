@@ -26,6 +26,11 @@
 
     <artifactId>znai-core</artifactId>
 
+    <properties>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.atlassian.commonmark</groupId>
@@ -103,6 +108,13 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>

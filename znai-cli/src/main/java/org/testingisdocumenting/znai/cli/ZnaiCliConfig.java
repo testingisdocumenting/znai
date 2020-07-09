@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.parser.MarkupTypes;
 import org.apache.commons.cli.*;
+import org.testingisdocumenting.znai.version.ZnaiVersion;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -186,6 +187,8 @@ public class ZnaiCliConfig {
     }
 
     public void print() {
+        printVersion();
+
         if (!isScaffoldMode() && !isServeMode()) {
             print("source root", sourceRoot);
         }
@@ -216,6 +219,7 @@ public class ZnaiCliConfig {
 
         if (commandLine.hasOption(HELP_KEY) || args.length < 1) {
             HelpFormatter helpFormatter = new HelpFormatter();
+            printVersion();
             helpFormatter.printHelp("znai", options);
             System.exit(1);
         }
@@ -249,6 +253,11 @@ public class ZnaiCliConfig {
         modifiedTimeStrategy = determineModifiedTimeStrategy(commandLine);
 
         validateMode(commandLine);
+    }
+
+    private void printVersion() {
+        ConsoleOutputs.out(Color.YELLOW, "znai version: ", Color.CYAN, ZnaiVersion.getVersion(),
+                Color.GREEN, " (", ZnaiVersion.getTimeStamp(), ")");
     }
 
     private Mode determineMode(CommandLine commandLine) {
