@@ -16,6 +16,8 @@
 
 package org.testingisdocumenting.znai.diagrams.graphviz;
 
+import org.testingisdocumenting.znai.debug.ZnaiDebug;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -38,8 +40,13 @@ public class InteractiveCmdGraphviz implements GraphvizRuntime {
     }
 
     public String svgFromGv(String gv) {
+        ZnaiDebug.debug("generating svg from graphviz:\n" + gv);
         write(gv);
-        return readTill("</svg>");
+
+        String svg = readTill("</svg>");
+        ZnaiDebug.debug("generated svg:\n" + svg);
+
+        return svg;
     }
 
     private String readTill(String endMarker) {
@@ -70,7 +77,7 @@ public class InteractiveCmdGraphviz implements GraphvizRuntime {
             outputStream.write((gv + "\n").getBytes());
             outputStream.flush();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("error processing graphviz:\n" + gv, e);
         }
     }
 
@@ -79,7 +86,7 @@ public class InteractiveCmdGraphviz implements GraphvizRuntime {
             String binPath = getBinPath(layoutType);
             return new ProcessBuilder().command(binPath, "-Tsvg").redirectErrorStream(true).start();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("failed to create process for layoutType: " + layoutType, e);
         }
     }
 
