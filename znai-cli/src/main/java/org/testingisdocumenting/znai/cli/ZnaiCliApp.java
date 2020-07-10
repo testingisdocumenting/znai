@@ -130,8 +130,7 @@ public class ZnaiCliApp {
 
         ProgressReporter.reportPhase("patching lookup-paths");
         Path lookupPath = config.getExportRoot().resolve("lookup-paths");
-        String lookupContent = FileUtils.fileTextContent(lookupPath);
-        FileUtils.writeTextContent(lookupPath, artifactsDirName + "\n" + lookupContent);
+        FileUtils.writeTextContent(lookupPath, artifactsDirName);
     }
 
     private static void copyFile(Path source, Path target) {
