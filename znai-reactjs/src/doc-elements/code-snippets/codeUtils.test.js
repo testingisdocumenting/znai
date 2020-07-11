@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 webtau maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +16,15 @@
  */
 
 import {
-    containsInlinedComment, enhanceMatchedTokensWithMeta,
-    extractTextFromTokens, findTokensThatMatchExpressions,
+    containsInlinedComment,
+    enhanceMatchedTokensWithMeta,
+    extractTextFromTokens,
+    findTokensThatMatchExpressions,
     isInlinedComment,
     splitTokensIntoLines,
     trimComment
 } from './codeUtils'
+
 import {parseCode} from './codeParser';
 
 const tokens = [{"type": "keyword", "content": "class"}, " ", {
@@ -150,30 +154,6 @@ describe("codeUtils", () => {
         expect(text).toEqual(code)
     })
 
-    it("detects if a token is an inlined comment", () => {
-        const nonInlined = {"type": "comment", "content": "/*another \n comment line \nend of comment */"}
-        const inlined = {"type": "comment", "content": "// comment line"}
-
-        expect(isInlinedComment(nonInlined)).toBeFalsy()
-        expect(isInlinedComment(inlined)).toBeTruthy()
-    })
-
-    it("detects if a list of tokens contains an inlined comment", () => {
-        const tokens = ["    ", {"type": "keyword", "content": "var"}, " a  ", {
-            "type": "operator",
-            "content": "="
-        }, " ", {"type": "number", "content": "2"}, {"type": "punctuation", "content": ";"}, " ", {
-            "type": "comment",
-            "content": "// comment line"
-        }, "\n"]
-
-        expect(containsInlinedComment(tokens)).toBeTruthy()
-    })
-
-    it("trims comment", () => {
-        expect(trimComment("//  comment")).toEqual("comment")
-    })
-
     it("finds token idx that match expression", () => {
         const tokensCalls = parseCode('java', 'http.get("/end-point", http.header("h1", "v1"), ((header, body) -> {')
         const resultCalls = findTokensThatMatchExpressions(tokensCalls, ['http.header', 'http.get', 'nonexiting'])
@@ -219,6 +199,36 @@ describe("codeUtils", () => {
             { type: 'operator', content: '->' },
             ' ',
             { type: 'punctuation', content: '{' }])
+    })
+
+    describe('inlined comments', () => {
+        it("detects if a token is an inlined comment", () => {
+            const nonInlined = {"type": "comment", "content": "/*another \n comment line \nend of comment */"}
+            const inlined = {"type": "comment", "content": "// comment line"}
+
+            expect(isInlinedComment(nonInlined)).toBeFalsy()
+            expect(isInlinedComment(inlined)).toBeTruthy()
+        })
+
+        it("detects if a list of tokens contains an inlined comment", () => {
+            const tokens = ["    ", {"type": "keyword", "content": "var"}, " a  ", {
+                "type": "operator",
+                "content": "="
+            }, " ", {"type": "number", "content": "2"}, {"type": "punctuation", "content": ";"}, " ", {
+                "type": "comment",
+                "content": "// comment line"
+            }, "\n"]
+
+            expect(containsInlinedComment(tokens)).toBeTruthy()
+        })
+
+        it("trims comment", () => {
+            expect(trimComment("//comment")).toEqual("comment")
+            expect(trimComment("//  comment")).toEqual("comment")
+            expect(trimComment("#comment")).toEqual("comment")
+            expect(trimComment("#  comment")).toEqual("comment")
+        })
+
     })
 })
 

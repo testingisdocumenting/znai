@@ -20,7 +20,7 @@
  * @param tokens
  * @return {Array}
  */
-function splitTokensIntoLines(tokens) {
+export function splitTokensIntoLines(tokens) {
     const lines = []
     let line = []
 
@@ -104,23 +104,35 @@ function splitTokensIntoLines(tokens) {
     }
 }
 
-function isInlinedComment(token) {
+export function isInlinedComment(token) {
     return token.type === 'comment' && (
         token.content.startsWith("//") ||
         token.content.startsWith("#")
     )
 }
 
-function trimComment(comment) {
+export function trimComment(comment) {
     const trimmed = comment.trim()
-    return trimmed.substr(2).trim()
+    return trimmed.substr(commentWidth(trimmed)).trim()
 }
 
-function containsInlinedComment(tokens) {
+function commentWidth(comment) {
+    if (comment.startsWith('//')) {
+        return 2;
+    }
+
+    if (comment.startsWith('#')) {
+        return 1;
+    }
+
+    return 0;
+}
+
+export function containsInlinedComment(tokens) {
     return tokens.filter(t => isInlinedComment(t)).length
 }
 
-function extractTextFromTokens(tokens) {
+export function extractTextFromTokens(tokens) {
     return tokens.map(t => tokenToText(t)).join('')
 }
 
@@ -136,12 +148,11 @@ function tokenToText(token) {
     return token.content.toString()
 }
 
-function isSimpleValueToken(token) {
+export function isSimpleValueToken(token) {
     return typeof token === 'string' || typeof token === 'number'
 }
 
-
-function enhanceMatchedTokensWithMeta(tokens, expressions, extraTypeProvider, linkProvider) {
+export function enhanceMatchedTokensWithMeta(tokens, expressions, extraTypeProvider, linkProvider) {
     const enhancedTokens = [...tokens]
 
     const matches = findTokensThatMatchExpressions(tokens, expressions)
@@ -173,7 +184,7 @@ function enhanceMatchedTokensWithMeta(tokens, expressions, extraTypeProvider, li
     }
 }
 
-function findTokensThatMatchExpressions(tokens, expressions) {
+export function findTokensThatMatchExpressions(tokens, expressions) {
     const extractedTexts = tokens.map(t => tokenToText(t).trim())
 
     const result = {}
@@ -217,15 +228,4 @@ function findTokensThatMatchExpressions(tokens, expressions) {
 
         return undefined
     }
-}
-
-export {
-    splitTokensIntoLines,
-    isInlinedComment,
-    trimComment,
-    containsInlinedComment,
-    extractTextFromTokens,
-    isSimpleValueToken,
-    enhanceMatchedTokensWithMeta,
-    findTokensThatMatchExpressions
 }
