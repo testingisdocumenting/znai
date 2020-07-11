@@ -17,7 +17,7 @@
 
 import * as React from "react"
 
-import {isInlinedComment, splitTokensIntoLines} from './codeUtils'
+import {isCommentToken, splitTokensIntoLines} from './codeUtils'
 import {isAllAtOnce} from '../meta/meta'
 import {convertToList} from '../propsUtils';
 
@@ -110,7 +110,7 @@ const presentationSnippetHandler = {
             return {}
         }
 
-        const comments = tokensToUse.filter(t => isInlinedComment(t))
+        const comments = tokensToUse.filter(t => isCommentToken(t))
 
         return {
             slideVisibleNote: !comments.length ? null :
@@ -130,7 +130,7 @@ function parseCodeWithCompatibility({lang, tokens, snippet}) {
 }
 
 function inlinedCommentsNumberOfSlides({meta, tokens}) {
-    const comments = tokens.filter(t => isInlinedComment(t))
+    const comments = tokens.filter(t => isCommentToken(t))
 
     if (isAllAtOnce(meta) && comments.length > 0) {
         return 2 // two slides: 1st - no highlights; 2nd - all highlighted at once

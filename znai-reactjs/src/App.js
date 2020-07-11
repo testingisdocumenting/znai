@@ -82,6 +82,7 @@ import {paragraphPresentationDemo} from "./doc-elements/paragraph/PresentationPa
 import {snippetPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippet.demo";
 import {snippetWithScrollPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippetWithScroll.demo";
 import {presentationStickySlidesDemo} from "./doc-elements/presentation/PresentationStickySlides.demo";
+import {snippetsWithInlineCommentsDemo} from "./doc-elements/code-snippets/CodeSnippetWithInlineComments.demo";
 
 const docMeta = {
     id: 'preview',
@@ -112,6 +113,7 @@ registries.add('text')
 
 registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
+    .registerAsGrid('Code Snippet With Bullets', 0, snippetsWithInlineCommentsDemo)
     .registerAsGrid('Inlined Code', 0, inlinedCodeDemo)
     .registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)
     .registerAsGrid('Yaml Code Snippet', 0, yamlSnippetDemo)
