@@ -104,11 +104,8 @@ export function splitTokensIntoLines(tokens) {
     }
 }
 
-export function isInlinedComment(token) {
-    return token.type === 'comment' && (
-        token.content.startsWith("//") ||
-        token.content.startsWith("#")
-    )
+export function isCommentToken(token) {
+    return token.type === 'comment'
 }
 
 export function trimComment(comment) {
@@ -129,7 +126,7 @@ function commentWidth(comment) {
 }
 
 export function containsInlinedComment(tokens) {
-    return tokens.filter(t => isInlinedComment(t)).length
+    return tokens.filter(t => isCommentToken(t)).length
 }
 
 export function extractTextFromTokens(tokens) {
@@ -150,6 +147,67 @@ function tokenToText(token) {
 
 export function isSimpleValueToken(token) {
     return typeof token === 'string' || typeof token === 'number'
+}
+
+export function collapseCommentsAboveToMakeCommentOnTheCodeLine(lines) {
+    const newLines = []
+    let accumulatedCommentLines = []
+
+    for (let idx = 0; idx < lines.length; idx++) {
+        const line = lines[idx]
+        const comment = extractCommentIfCommentOnlyLine(line)
+        if (comment) {
+            accumulatedCommentLines.push(comment)
+        } else {
+            const combinedComment = accumulatedCommentLines.join(' ')
+            newLines.push(
+                combinedComment.length > 0 ?
+                    [...lineWithTokensTrimmedOnRight(line), {type: 'comment', content: combinedComment}] :
+                    line)
+
+            accumulatedCommentLines = []
+        }
+    }
+
+    return newLines
+}
+
+function lineWithTokensTrimmedOnRight(line) {
+    const endIdx = findEndIdx()
+    if (endIdx === line.length - 1) {
+        return line
+    }
+
+    return line.slice(0, endIdx + 1)
+
+    function findEndIdx() {
+        let endIdx = line.length - 1
+        for (; endIdx >= 0; endIdx--) {
+            if (tokenToText(line[endIdx]).trim().length > 0) {
+                return endIdx
+            }
+        }
+
+        return 0
+    }
+}
+
+function extractCommentIfCommentOnlyLine(line) {
+    for (let idx = 0; idx < line.length; idx++) {
+        const token = line[idx]
+
+        if (tokenToText(token).trim().length === 0) {
+            continue
+        }
+
+        if (token.type === 'comment') {
+            return trimComment(token.content)
+        }
+
+        return undefined
+    }
+
+    return undefined
 }
 
 export function enhanceMatchedTokensWithMeta(tokens, expressions, extraTypeProvider, linkProvider) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 webtau maintainers
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +16,12 @@
  */
 
 import {
+    collapseCommentsAboveToMakeCommentOnTheCodeLine,
     containsInlinedComment,
     enhanceMatchedTokensWithMeta,
     extractTextFromTokens,
     findTokensThatMatchExpressions,
-    isInlinedComment,
+    isCommentToken,
     splitTokensIntoLines,
     trimComment
 } from './codeUtils'
@@ -206,8 +207,8 @@ describe("codeUtils", () => {
             const nonInlined = {"type": "comment", "content": "/*another \n comment line \nend of comment */"}
             const inlined = {"type": "comment", "content": "// comment line"}
 
-            expect(isInlinedComment(nonInlined)).toBeFalsy()
-            expect(isInlinedComment(inlined)).toBeTruthy()
+            expect(isCommentToken(nonInlined)).toBeFalsy()
+            expect(isCommentToken(inlined)).toBeTruthy()
         })
 
         it("detects if a list of tokens contains an inlined comment", () => {
@@ -229,6 +230,47 @@ describe("codeUtils", () => {
             expect(trimComment("#  comment")).toEqual("comment")
         })
 
+        it('collapses multi line comment and attaches it to the next code line', () => {
+            const tokens = parseCode('python', 'def my_func():\n' +
+                '  # comment line one \n' +
+                '  # comment line two  \n' +
+                '  a = 2    \n\n\n' +
+                '  # comment line three \n' +
+                '  a = 4')
+
+            const lines = splitTokensIntoLines(tokens)
+            const collapsed = collapseCommentsAboveToMakeCommentOnTheCodeLine(lines)
+
+            expect(collapsed).toEqual([
+                [
+                    { type: 'keyword', content: 'def' },
+                    ' ',
+                    { type: 'function', content: 'my_func' },
+                    { type: 'punctuation', content: '(' },
+                    { type: 'punctuation', content: ')' },
+                    { type: 'punctuation', content: ':' },
+                    '\n'
+                ],
+                [
+                    '  ',
+                    { content: 'a ', type: 'text' },
+                    { type: 'operator', content: '=' },
+                    ' ',
+                    { type: 'number', content: '2' },
+                    { type: 'comment', content: 'comment line one comment line two' }
+                ],
+                [ '\n' ],
+                [ '\n' ],
+                [
+                    '  ',
+                    { content: 'a ', type: 'text' },
+                    { type: 'operator', content: '=' },
+                    ' ',
+                    { type: 'number', content: '4' },
+                    { type: 'comment', content: 'comment line three' }
+                ]
+            ])
+        })
     })
 })
 

@@ -35,26 +35,6 @@ export function snippetsDemo(registry) {
         .add('with linked method calls', () => <Snippet wide={true} title="snippet title" lang="java"
                                                         references={methodCallReferences()}
                                                         snippet={codeWithMethodCalls()}/>)
-        .add('with bullet points java', () => <Snippet wide={false} lang="java" snippet={javaCodeWithComments()}
-                                                       commentsType="inline"/>)
-        .add('with multiline bullet points java', () => <Snippet wide={false} lang="java" snippet={javaCodeWithMultilineComments()}
-                                                       commentsType="inline"/>)
-        .add('with bullet points python', () => <Snippet wide={false} lang="python" snippet={pythonCodeWithComments()}
-                                                         commentsType="inline"/>)
-        .add('with spoiler bullet points', () => <Snippet wide={false} lang="java" snippet={javaCodeWithComments()}
-                                                          spoiler={true}
-                                                          commentsType="inline"/>)
-        .add('wide with bullet points', () => <Snippet wide={true} lang="java" snippet={wideCode()}
-                                                       commentsType="inline"/>)
-        .add('wide with bullet points right side background', () => <TwoSidesLayoutRightPart><Snippet wide={true}
-                                                                                                      lang="java"
-                                                                                                      snippet={wideCode()}
-                                                                                                      commentsType="inline"/></TwoSidesLayoutRightPart>)
-        .add('wide with spoiler bullet points', () => <Snippet wide={true} spoiler={true} lang="java"
-                                                               snippet={wideCode()}
-                                                               commentsType="inline"/>)
-        .add('with empty bullet points', () => <Snippet lang="java" snippet={codeWithoutComments()}
-                                                        commentsType="inline"/>)
         .add('horizontal scroll', () => <Snippet wide={false} lang="java" snippet={wideCode()}/>)
         .add('horizontal scroll with title and highlight', () => <Snippet wide={false} lang="java" snippet={wideCode()}
                                                                           highlight={2} title="Hello Snippet"/>)
@@ -99,37 +79,6 @@ function htmlCode() {
 function wideCode() {
     return 'class InternationalPriceService implements PriceService {\n' +
         '    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n' +
-        '        ... // code goes here\n' +
-        '    } // code stops here\n' +
-        '}\n'
-}
-
-function javaCodeWithComments() {
-    return 'class InternationalPriceService implements PriceService {\n' +
-        '    private static void main(String... args) {\n' +
-        '        ... // code goes here\n' +
-        '    } // code stops here\n' +
-        '}\n'
-}
-
-function javaCodeWithMultilineComments() {
-    return 'class InternationalPriceService implements PriceService {\n' +
-        '    private static void main(String... args) {\n' +
-        '        ... // multiline comment multi line comment multiline comment multi line comment multiline comment ' +
-        'multi line comment multiline comment multi line comment \n' +
-        '    } // Code stops here code stops here code stops here code' +
-        ' stops here code stops here code stops here code stops here code stops here code stops here \n' +
-        '}\n'
-}
-
-function pythonCodeWithComments() {
-    return 'def method:\n' +
-        '    print("hello") # hello message\n'
-}
-
-function codeWithoutComments() {
-    return 'class InternationalPriceService implements PriceService {\n' +
-        '    private static void main(String... args) {\n' +
         '        ...\n' +
         '    }\n' +
         '}\n'
@@ -249,7 +198,7 @@ function contentSnippet(isRightSide) {
     return {
         "type": "Snippet",
         "lang": "java",
-        "snippet": javaCodeWithComments(),
+        "snippet": codeWithMethodCalls(),
         "meta": {
             "rightSide": isRightSide
         }

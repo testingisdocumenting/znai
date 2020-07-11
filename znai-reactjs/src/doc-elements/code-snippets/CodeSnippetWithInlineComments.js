@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +25,12 @@ import BulletExplanations from './BulletExplanations'
 import CircleBadge from './CircleBadge'
 
 import {isAllAtOnce} from '../meta/meta'
-import {containsInlinedComment, isInlinedComment, splitTokensIntoLines} from './codeUtils'
+import {
+    collapseCommentsAboveToMakeCommentOnTheCodeLine,
+    containsInlinedComment,
+    isCommentToken,
+    splitTokensIntoLines
+} from './codeUtils'
 
 import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'
 
@@ -33,16 +39,16 @@ import './CodeSnippetWithInlineComments.css'
 let commentIdx = 0
 
 const SpecialCommentToken = ({token, isPresentation}) => {
-    if (isInlinedComment(token)) {
-        if (isPresentation) {
-            return null
-        } else {
-            commentIdx++
-            return <CircleBadge idx={commentIdx}/>
-        }
+    if (!isCommentToken(token)) {
+        return (<SimpleCodeToken token={token}/>)
     }
 
-    return (<SimpleCodeToken token={token}/>)
+    if (isPresentation) {
+        return null
+    } else {
+        commentIdx++
+        return <CircleBadge idx={commentIdx}/>
+    }
 }
 
 const Explanations = ({spoiler, isPresentation, slideIdx, comments}) => {
@@ -56,8 +62,8 @@ const Explanations = ({spoiler, isPresentation, slideIdx, comments}) => {
 
 const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentation, meta, slideIdx}) => {
     commentIdx = 0
-    const comments = tokens.filter(t => isInlinedComment(t))
-    const lines = splitTokensIntoLines(tokens)
+    const lines = collapseCommentsAboveToMakeCommentOnTheCodeLine(splitTokensIntoLines(tokens))
+    const comments = findComments(lines)
 
     const idxOfLinesWithComments = []
     lines.forEach((line, idx) => {
@@ -98,6 +104,19 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentat
 
         const lineIdxToHighlight = highlightIsVisible ? idxOfLinesWithComments[slideIdx - 1] : -1
         return lineIdxToHighlight === idx
+    }
+
+    function findComments(lines) {
+        const result = []
+        lines.forEach(line => {
+            line.forEach(token => {
+                if (isCommentToken(token)) {
+                    result.push(token)
+                }
+            })
+        })
+
+        return result
     }
 }
 
