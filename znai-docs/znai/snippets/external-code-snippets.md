@@ -130,12 +130,12 @@ Use `excludeRegexp` to exclude lines matching regexp(s).
 
 # Callout Comments
 
-If you already have comments inside your code it would be non effecient to repeat them inside documentation. 
-Instead comments can be automatically extracted and presented as part of the text
+If you already have comments inside your code it would be non efficient to repeat them inside documentation. 
+Instead, comments can be automatically extracted and presented as part of the text
 
 Given file with inlined comments
 
-:include-file: file-name-with-comments.js
+:include-file: callouts/file-name-with-comments.js
 
 By specifying `commentsType` 
     
@@ -143,7 +143,13 @@ By specifying `commentsType`
 
 It will be rendered as 
 
-:include-file: file-name-with-comments.js {commentsType: "inline"}
+:include-file: callouts/file-name-with-comments.js {commentsType: "inline"}
+
+Comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line.
+
+:include-file: callouts/file-name-with-multiline-comments.py {title: "multi line comments above line"}
+
+:include-file: callouts/file-name-with-multiline-comments.py {commentsType: "inline"}
 
 # Spoilers
 
@@ -153,4 +159,4 @@ Set the `spoiler` property to initially hide explanations. It may be useful when
 
 Click on the spoiler to reveal the explanations:
 
-:include-file: file-name-with-comments.js {commentsType: "inline", spoiler: true}
+:include-file: callouts/file-name-with-comments.js {commentsType: "inline", spoiler: true}
