@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +17,6 @@
 
 import React from 'react'
 
-import SimpleCodeToken from '../code-snippets/SimpleCodeToken'
 import LineOfTokens from '../code-snippets/LineOfTokens'
 
 import {printJsx} from './jsxPrinter'
@@ -31,8 +31,7 @@ const Jsx = ({declaration}) => {
             {lines.map((tokens, idx) => <LineOfTokens key={idx}
                                                       tokens={tokens}
                                                       isHighlighted={false}
-                                                      isPresentation={false}
-                                                      TokenComponent={SimpleCodeToken}/>)
+                                                      isPresentation={false}/>)
             }
         </div>
     )

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +19,9 @@ import React from 'react'
 
 import './CircleBadge.css'
 
-const CircleBadge = ({idx}) => {
-    return <span className="circle-badge">{idx}</span>
+const CircleBadge = ({idx, className}) => {
+    const fullClassName = 'znai-circle-badge' + (className ? ' ' + className : '')
+    return <span className={fullClassName}>{idx}</span>
 }
 
 export default CircleBadge

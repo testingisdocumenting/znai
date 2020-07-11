@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,21 +17,27 @@
 
 import React from 'react'
 
-import {enhanceMatchedTokensWithMeta} from './codeUtils'
+import {enhanceMatchedTokensWithMeta, lineWithTokensTrimmedOnRight} from './codeUtils'
+
+import CodeToken from './CodeToken';
 
 import './LineOfTokens.css'
 
-const LineOfTokens = ({tokens, references, isHighlighted, isPresentation, TokenComponent}) => {
+const LineOfTokens = ({tokens, references, isHighlighted, isPresentation, endOfLineRender}) => {
     const className = "code-line" + (isHighlighted ? " highlight" : "")
-    const enhancedTokens = enhanceTokens()
+
+    const trimmedOnRight = lineWithTokensTrimmedOnRight(tokens)
+    const enhancedTokens = enhanceTokens(trimmedOnRight)
 
     return (
         <span className={className}>
-            {enhancedTokens.map((t, idx) => <TokenComponent key={idx} token={t} isPresentation={isPresentation}/>)}
+            {enhancedTokens.map((t, idx) => <CodeToken key={idx} token={t} isPresentation={isPresentation}/>)}
+            {endOfLineRender && endOfLineRender()}
+            <span>{"\n"}</span>
         </span>
     )
 
-    function enhanceTokens() {
+    function enhanceTokens(tokens) {
         if (!references) {
             return tokens
         }

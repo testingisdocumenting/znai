@@ -172,7 +172,7 @@ export function collapseCommentsAboveToMakeCommentOnTheCodeLine(lines) {
     return newLines
 }
 
-function lineWithTokensTrimmedOnRight(line) {
+export function lineWithTokensTrimmedOnRight(line) {
     const endIdx = findEndIdx()
     if (endIdx === line.length - 1) {
         return line
