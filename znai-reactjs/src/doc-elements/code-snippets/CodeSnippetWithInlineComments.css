@@ -63,7 +63,7 @@
     color: #888;
 }
 
-.hidden-explanation .circle-badge {
+.hidden-explanation .znai-circle-badge {
     color: var(--znai-snippets-explanation-background-color);
     background-color: var(--znai-snippets-explanation-background-color);
 }

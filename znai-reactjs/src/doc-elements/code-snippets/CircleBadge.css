@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-.circle-badge {
+.znai-circle-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -32,4 +32,8 @@
     padding: 1px;
     margin-top: 1px;
     margin-bottom: 1px;
+}
+
+.znai-circle-badge.left-margin {
+    margin-left: 8px;
 }

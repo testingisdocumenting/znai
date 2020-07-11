@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +22,7 @@ import {ReferenceLinkWrapper} from '../references/ReferenceLinkWrapper'
 
 import 'prismjs/themes/prism-coy.css'
 
-const SimpleCodeToken = ({token}) => {
+const CodeToken = ({token}) => {
     if (isSimpleValueToken(token)) {
         return <React.Fragment>{token}</React.Fragment>
     }
@@ -54,14 +55,14 @@ function renderData(token) {
     }
 
     if (Array.isArray(token.content)) {
-        return token.content.map((d, idx) => <SimpleCodeToken key={idx} token={d}/>)
+        return token.content.map((d, idx) => <CodeToken key={idx} token={d}/>)
     }
 
     if (typeof token === 'object') {
-        return <SimpleCodeToken token={token.content} onClick={token.onClick}/>
+        return <CodeToken token={token.content} onClick={token.onClick}/>
     }
 
     return JSON.stringify(token)
 }
 
-export default SimpleCodeToken
+export default CodeToken
