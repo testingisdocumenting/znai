@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,24 +15,40 @@
  * limitations under the License.
  */
 
-.horizontal-stripes {
+.znai-horizontal-stripes {
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
-.horizontal-stripes .horizontal-stripe {
+.znai-horizontal-stripe {
     display: flex;
     flex: 1;
     align-items: center;
-    justify-content: center;
     font-size: 5vh;
     border: 2px solid #7daeff;
     background-color: #1e7bbf;
     color: #fff;
 }
 
-.horizontal-stripes .empty-horizontal-stripe {
+.znai-horizontal-stripe-icon {
+    padding: 5vh;
+    justify-self: flex-start;
+}
+
+.znai-horizontal-stripe-text {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.znai-horizontal-stripe-icon svg,
+.znai-horizontal-stripe-icon span {
+    width: 15vh;
+    height: 15vh;
+}
+
+.znai-empty-horizontal-stripe {
     flex: 1;
     border: 2px solid var(--znai-snippets-outer-border-color);
     background-color: var(--znai-snippets-background-color);

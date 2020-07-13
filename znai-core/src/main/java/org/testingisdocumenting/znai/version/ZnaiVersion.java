@@ -1,6 +1,5 @@
 /*
  * Copyright 2020 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +14,28 @@
  * limitations under the License.
  */
 
-.znai-circle-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+package org.testingisdocumenting.znai.version;
 
-    font-family: var(--znai-code-font-family);
-    font-size: 11px;
-    color: var(--znai-snippets-bullet-color);
-    background-color: var(--znai-snippets-bullet-background-color);
+import org.testingisdocumenting.znai.utils.ResourceUtils;
 
-    border-radius: 10px;
-    min-height: 20px;
-    min-width: 20px;
+public class ZnaiVersion {
+    private static final String version;
+    private static final String timeStamp;
 
-    padding: 1px;
-    margin-top: 1px;
-    margin-bottom: 1px;
-}
+    static {
+        String[] versionTimeStamp = ResourceUtils.textContent("znai-version.txt").trim().split(" ");
+        version = versionTimeStamp[0];
+        timeStamp = versionTimeStamp[1];
+    }
 
-.znai-circle-badge.left-margin {
-    margin-left: 8px;
+    private ZnaiVersion() {
+    }
+
+    public static String getVersion() {
+        return version;
+    }
+
+    public static String getTimeStamp() {
+        return timeStamp;
+    }
 }

@@ -41,12 +41,15 @@
 }
 
 .code-bullets.hidden-explanation {
-    color: var(--znai-snippets-explanation-background-color);
     background-color: var(--znai-snippets-explanation-background-color);
     border-top: var(--znai-snippets-outer-border-color) 1px solid;
     border-bottom: var(--znai-snippets-outer-border-color) 1px solid;
     padding: 0;
     cursor: pointer;
+}
+
+.code-bullets.hidden-explanation * {
+    visibility: hidden;
 }
 
 .wide-screen .code-bullets.hidden-explanation {
@@ -55,17 +58,13 @@
 }
 
 .code-bullets .spoiler-message {
+    visibility: visible;
     position: relative;
     float: left;
     margin-left: 10px;
     margin-top: 2px;
     font-size: 14px;
     color: #888;
-}
-
-.hidden-explanation .circle-badge {
-    color: var(--znai-snippets-explanation-background-color);
-    background-color: var(--znai-snippets-explanation-background-color);
 }
 
 .code-with-inlined-comments.with-highlighted-line pre {

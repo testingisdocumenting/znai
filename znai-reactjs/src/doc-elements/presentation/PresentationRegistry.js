@@ -18,6 +18,8 @@
 import React from 'react'
 import {presentationStickPlacement} from "../meta/meta";
 
+const emptySlide = createEmptySlide()
+
 class PresentationRegistry {
     constructor(elementsLibrary, presentationElementHandlers, content) {
         this.elementsLibrary = elementsLibrary
@@ -120,7 +122,11 @@ class PresentationRegistry {
     }
 
     extractCombinedSlideInfo(pageLocalSlideIdx) {
-        const slideInfo = pageLocalSlideIdx >= 0 ? this.slides[pageLocalSlideIdx].info : {}
+        if (pageLocalSlideIdx < 0 || pageLocalSlideIdx >= this.slides.length) {
+            return {pageTitle: '', sectionTitle: '', slideVisibleNote: ''}
+        }
+
+        const slideInfo = this.slides[pageLocalSlideIdx].info
 
         const slideVisibleNote = slideInfo.slideVisibleNote
         let pageTitle = ""
@@ -141,20 +147,6 @@ class PresentationRegistry {
         return {pageTitle, sectionTitle, slideVisibleNote}
     }
 
-    /**
-     * renders component with a slide content
-     * @param pageLocalSlideIdx slide idx local for a page. At the start of each page it equals 0
-     * @returns {React.ReactNode}
-     */
-    renderComponent({pageLocalSlideIdx}) {
-        const slide = this.slides[pageLocalSlideIdx]
-
-        return <slide.component {...slide.props}
-                                elementsLibrary={this.elementsLibrary}
-                                slideIdx={slide.slideIdx}
-                                isPresentation={true}/>
-    }
-
     renderSlide(slide) {
         return <slide.component {...slide.props}
                                 elementsLibrary={this.elementsLibrary}
@@ -163,7 +155,45 @@ class PresentationRegistry {
     }
 
     slideByIdx(pageLocalSlideIdx) {
-        return this.slides[pageLocalSlideIdx]
+        return this.slides[pageLocalSlideIdx] || emptySlide
+    }
+
+    slideComponentStartIdxByIdx(pageLocalSlideIdx) {
+        let idx = pageLocalSlideIdx
+        for (; idx > 0; idx--) {
+            if (this.slideByIdx(idx - 1).componentIdx !== this.slideByIdx(idx).componentIdx) {
+                return idx
+            }
+        }
+
+        return 0
+    }
+
+    findSlideIdxBySectionId(sectionId) {
+        if (!sectionId) {
+            return 0
+        }
+
+        for (let slideIdx = 0; slideIdx < this.slides.length; slideIdx++) {
+            const slide = this.slides[slideIdx]
+            if (slide.info.sectionId === sectionId) {
+                return slideIdx;
+            }
+        }
+
+        return 0;
+    }
+}
+
+function createEmptySlide() {
+    return {
+        componentIdx: -1,
+        component: () => <div/>,
+        props: {},
+        numberOfSlides: 1,
+        slideIdx: 0,
+        stickySlides: [],
+        info: {}
     }
 }
 

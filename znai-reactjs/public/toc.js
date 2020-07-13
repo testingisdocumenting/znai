@@ -3,7 +3,7 @@ toc = [ {
   "dirName" : "",
   "items" : [ {
     "sectionTitle" : "",
-    "pageTitle" : "Index",
+    "pageTitle" : "Znai",
     "pageMeta" : { },
     "dirName" : "",
     "fileName" : "index",
@@ -69,6 +69,9 @@ toc = [ {
     }, {
       "title" : "Scaffolding",
       "id" : "scaffolding"
+    }, {
+      "title" : "Scaffolding With Maven",
+      "id" : "scaffolding-with-maven"
     }, {
       "title" : "Preview",
       "id" : "preview"
@@ -150,8 +153,14 @@ toc = [ {
       "title" : "Files Reference Lookup",
       "id" : "files-reference-lookup"
     }, {
+      "title" : "Class Path Lookup",
+      "id" : "class-path-lookup"
+    }, {
       "title" : "HTTP Lookup Location",
       "id" : "http-lookup-location"
+    }, {
+      "title" : "CLI parameter",
+      "id" : "cli-parameter"
     } ]
   }, {
     "sectionTitle" : "Flow",
@@ -255,6 +264,9 @@ toc = [ {
       "title" : "Embedding Content",
       "id" : "embedding-content"
     }, {
+      "title" : "Syntax highlighting",
+      "id" : "syntax-highlighting"
+    }, {
       "title" : "Title",
       "id" : "title"
     }, {
@@ -266,6 +278,9 @@ toc = [ {
     }, {
       "title" : "Highlights",
       "id" : "highlights"
+    }, {
+      "title" : "Limit",
+      "id" : "limit"
     }, {
       "title" : "Callout Comments",
       "id" : "callout-comments"
@@ -302,6 +317,9 @@ toc = [ {
     }, {
       "title" : "Nested",
       "id" : "nested"
+    }, {
+      "title" : "Title",
+      "id" : "title"
     }, {
       "title" : "External JSON File",
       "id" : "external-json-file"
@@ -533,6 +551,12 @@ toc = [ {
       "title" : "Output",
       "id" : "output"
     }, {
+      "title" : "ANSI Colors",
+      "id" : "ansi-colors"
+    }, {
+      "title" : "Title",
+      "id" : "title"
+    }, {
       "title" : "Presentation Mode",
       "id" : "presentation-mode"
     } ]
@@ -613,6 +637,9 @@ toc = [ {
     }, {
       "title" : "Question",
       "id" : "question"
+    }, {
+      "title" : "Exercise",
+      "id" : "exercise"
     } ]
   }, {
     "sectionTitle" : "Layout",
@@ -827,8 +854,8 @@ toc = [ {
     "fileName" : "icons",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Glyphicons",
-      "id" : "glyphicons"
+      "title" : "Feather Icons",
+      "id" : "feather-icons"
     }, {
       "title" : "Bullet Points",
       "id" : "bullet-points"
@@ -892,6 +919,9 @@ toc = [ {
     }, {
       "title" : "Scale Ratio",
       "id" : "scale-ratio"
+    }, {
+      "title" : "Align",
+      "id" : "align"
     } ]
   }, {
     "sectionTitle" : "Visuals",
@@ -1000,11 +1030,19 @@ toc = [ {
     "fileName" : "static-content",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "static content intro",
-      "id" : "static-content-intro"
-    }, {
-      "title" : "github placeholder",
-      "id" : "github-placeholder"
+      "title" : "Build",
+      "id" : "build"
+    } ]
+  }, {
+    "sectionTitle" : "Deployment",
+    "pageTitle" : "Static Hosting",
+    "pageMeta" : { },
+    "dirName" : "deployment",
+    "fileName" : "static-hosting",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "GitHub Pages",
+      "id" : "github-pages"
     } ]
   } ]
 }, {

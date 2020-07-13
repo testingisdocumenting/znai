@@ -1,6 +1,5 @@
 /*
  * Copyright 2020 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +14,19 @@
  * limitations under the License.
  */
 
-.znai-circle-badge {
-    display: inline-flex;
+.znai-slide-note-panel {
+    width: 100%;
+
+    display: flex;
+
+    font-size: 28px;
     align-items: center;
     justify-content: center;
 
-    font-family: var(--znai-code-font-family);
-    font-size: 11px;
-    color: var(--znai-snippets-bullet-color);
-    background-color: var(--znai-snippets-bullet-background-color);
+    background-color: var(--znai-presentation-slide-note-background-color);
+    color: var(--znai-presentation-slide-note-color);
 
-    border-radius: 10px;
-    min-height: 20px;
-    min-width: 20px;
-
-    padding: 1px;
-    margin-top: 1px;
-    margin-bottom: 1px;
+    padding: 8px;
+    border-top: 1px solid var(--znai-presentation-border-color);
 }
 
-.znai-circle-badge.left-margin {
-    margin-left: 8px;
-}

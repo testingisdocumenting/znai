@@ -65,8 +65,8 @@ const presentationSectionHandler = {
     numberOfSlides: ({title}) => {
         return title.length === 0 ? 0 : 1
     },
-    slideInfoProvider: ({title}) => {
-        return {sectionTitle: title}
+    slideInfoProvider: ({title, id}) => {
+        return {sectionTitle: title, sectionId: id}
     }
 }
 

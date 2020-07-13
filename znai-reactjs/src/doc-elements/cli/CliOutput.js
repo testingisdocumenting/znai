@@ -34,6 +34,7 @@ const CliOutput = ({lines, ...props}) => {
         <SnippetContainer className="cli-output"
                           linesOfCode={linesOfTokens}
                           snippetComponent={SimpleCodeSnippet}
+                          numberOfVisibleLines={100}
                           {...props}/>
     )
 }

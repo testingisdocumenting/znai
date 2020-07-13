@@ -38,7 +38,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom"
   },
-  "proxy": "http://localhost:3333/",
+  "proxy": "http://localhost:3334/",
   "browserslist": {
     "production": [
       ">0.2%",

@@ -64,7 +64,7 @@ import {pageGenErrorDemo} from './doc-elements/page-gen-error/PageGenError.demo'
 import {diffTrackingDemo} from './diff/DiffTracking.demo'
 
 import {Documentation} from "./doc-elements/Documentation"
-import testData from "./doc-elements/TestData"
+import {testDocumentation} from "./doc-elements/testDocumentation"
 import {subHeadingPresentationDemo} from './doc-elements/default-elements/PresentationSubHeading.demo'
 import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
 import {updateGlobalDocReferences} from './doc-elements/references/globalDocReferences'
@@ -82,6 +82,7 @@ import {paragraphPresentationDemo} from "./doc-elements/paragraph/PresentationPa
 import {snippetPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippet.demo";
 import {snippetWithScrollPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippetWithScroll.demo";
 import {presentationStickySlidesDemo} from "./doc-elements/presentation/PresentationStickySlides.demo";
+import {snippetsWithInlineCommentsDemo} from "./doc-elements/code-snippets/CodeSnippetWithInlineComments.demo";
 
 const docMeta = {
     id: 'preview',
@@ -112,6 +113,7 @@ registries.add('text')
 
 registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
+    .registerAsGrid('Code Snippet With Bullets', 0, snippetsWithInlineCommentsDemo)
     .registerAsGrid('Inlined Code', 0, inlinedCodeDemo)
     .registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)
     .registerAsGrid('Yaml Code Snippet', 0, yamlSnippetDemo)
@@ -176,7 +178,7 @@ registries.add('screens')
 registries.add('end to end')
     .registerAsMiniApp('full documentation navigation', /\/preview/,
         {'root': '/preview'},
-        () => <Documentation {...testData.documentation}/>)
+        () => <Documentation {...testDocumentation}/>)
 
 const dropDowns = new DropDowns()
 dropDowns.add('Theme')

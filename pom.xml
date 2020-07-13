@@ -21,7 +21,7 @@
 
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-parent</artifactId>
-    <version>1.41-SNAPSHOT</version>
+    <version>1.43-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Znai</name>

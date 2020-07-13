@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,17 +15,21 @@
  * limitations under the License.
  */
 
-function startsWithIcon(content) {
+export function startsWithIcon(content) {
     return content &&
             content.length && content[0].type === 'Paragraph' &&
             content[0].content.length && content[0].content[0].type === 'Icon'
 }
 
-function extractIconId(content) {
+export function extractIconId(content) {
     return content[0].content[0].id
 }
 
-function removeIcon(content) {
+export function extractIconIds(list) {
+    return list.map(item => startsWithIcon(item.content) ? extractIconId(item.content) : undefined)
+}
+
+export function removeIcon(content) {
     const copy = [...content]
 
     copy[0] = {...copy[0]}
@@ -33,15 +38,15 @@ function removeIcon(content) {
     return copy
 }
 
-function extractTextLines(content) {
+export function extractTextLines(content) {
     return content.map(item => extractText(item))
 }
 
-function extractTextLinesEmphasisOnly(content) {
+export function extractTextLinesEmphasisOnly(content) {
     return content.map(item => extractText(item, true))
 }
 
-function extractTextLinesEmphasisOrFull(content) {
+export function extractTextLinesEmphasisOrFull(content) {
     const full = extractTextLines(content)
     const emphasisOnly = extractTextLinesEmphasisOnly(content)
     const result = []
@@ -87,5 +92,3 @@ function isEmphasis(docElement) {
 function capitalizeFirstLetter(text) {
     return text.length > 1 ? text.charAt(0).toUpperCase() + text.slice(1) : text;
 }
-
-export {extractTextLines, extractTextLinesEmphasisOnly, extractTextLinesEmphasisOrFull, startsWithIcon, extractIconId, removeIcon}

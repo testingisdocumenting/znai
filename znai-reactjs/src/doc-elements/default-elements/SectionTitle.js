@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,18 +18,26 @@
 import React from 'react'
 
 import { Icon } from '../icons/Icon'
+import {presentationModeListeners} from "../presentation/PresentationModeListener";
 
 import './SectionTitle.css'
 
 const SectionTitle = ({id, title}) => {
     return id ? (
         <h1 className="section-title" id={id}>{title}
-            <a href={"#" + id}><Icon id="link"/></a>
+            <div className="znai-section-title-actions">
+                <a href={"#" + id}><Icon id="link"/></a>
+                <Icon id="maximize" className="znai-section-title-presentation" onClick={openPresentation}/>
+            </div>
         </h1>
     ) : (
         // eslint-disable-next-line
         <h1 className="empty-section-title" id='implicit-section'/>
     )
+
+    function openPresentation() {
+        presentationModeListeners.notifyPresentationEnter(id)
+    }
 }
 
 export default SectionTitle

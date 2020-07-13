@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,9 +30,7 @@ import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-yaml'
 import 'prismjs/components/prism-typescript'
 
-export {parseCode}
-
-function parseCode(lang, code) {
+export function parseCode(lang, code) {
     const prismLang = Prism.languages[adjustLang(lang)]
 
     const tokens = Prism.tokenize(code, prismLang ? prismLang : Prism.languages.clike)

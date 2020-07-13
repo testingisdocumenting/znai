@@ -20,7 +20,7 @@
  * @param tokens
  * @return {Array}
  */
-function splitTokensIntoLines(tokens) {
+export function splitTokensIntoLines(tokens) {
     const lines = []
     let line = []
 
@@ -104,23 +104,32 @@ function splitTokensIntoLines(tokens) {
     }
 }
 
-function isInlinedComment(token) {
-    return token.type === 'comment' && (
-        token.content.startsWith("//") ||
-        token.content.startsWith("#")
-    )
+export function isCommentToken(token) {
+    return token.type === 'comment'
 }
 
-function trimComment(comment) {
+export function trimComment(comment) {
     const trimmed = comment.trim()
-    return trimmed.substr(2).trim()
+    return trimmed.substr(commentWidth(trimmed)).trim()
 }
 
-function containsInlinedComment(tokens) {
-    return tokens.filter(t => isInlinedComment(t)).length
+function commentWidth(comment) {
+    if (comment.startsWith('//')) {
+        return 2;
+    }
+
+    if (comment.startsWith('#')) {
+        return 1;
+    }
+
+    return 0;
 }
 
-function extractTextFromTokens(tokens) {
+export function containsInlinedComment(tokens) {
+    return tokens.filter(t => isCommentToken(t)).length
+}
+
+export function extractTextFromTokens(tokens) {
     return tokens.map(t => tokenToText(t)).join('')
 }
 
@@ -136,12 +145,72 @@ function tokenToText(token) {
     return token.content.toString()
 }
 
-function isSimpleValueToken(token) {
+export function isSimpleValueToken(token) {
     return typeof token === 'string' || typeof token === 'number'
 }
 
+export function collapseCommentsAboveToMakeCommentOnTheCodeLine(lines) {
+    const newLines = []
+    let accumulatedCommentLines = []
 
-function enhanceMatchedTokensWithMeta(tokens, expressions, extraTypeProvider, linkProvider) {
+    for (let idx = 0; idx < lines.length; idx++) {
+        const line = lines[idx]
+        const comment = extractCommentIfCommentOnlyLine(line)
+        if (comment) {
+            accumulatedCommentLines.push(comment)
+        } else {
+            const combinedComment = accumulatedCommentLines.join(' ')
+            newLines.push(
+                combinedComment.length > 0 ?
+                    [...lineWithTokensTrimmedOnRight(line), {type: 'comment', content: combinedComment}] :
+                    line)
+
+            accumulatedCommentLines = []
+        }
+    }
+
+    return newLines
+}
+
+export function lineWithTokensTrimmedOnRight(line) {
+    const endIdx = findEndIdx()
+    if (endIdx === line.length - 1) {
+        return line
+    }
+
+    return line.slice(0, endIdx + 1)
+
+    function findEndIdx() {
+        let endIdx = line.length - 1
+        for (; endIdx >= 0; endIdx--) {
+            if (tokenToText(line[endIdx]).trim().length > 0) {
+                return endIdx
+            }
+        }
+
+        return 0
+    }
+}
+
+function extractCommentIfCommentOnlyLine(line) {
+    for (let idx = 0; idx < line.length; idx++) {
+        const token = line[idx]
+
+        if (tokenToText(token).trim().length === 0) {
+            continue
+        }
+
+        if (token.type === 'comment') {
+            return trimComment(token.content)
+        }
+
+        return undefined
+    }
+
+    return undefined
+}
+
+export function enhanceMatchedTokensWithMeta(tokens, expressions, extraTypeProvider, linkProvider) {
     const enhancedTokens = [...tokens]
 
     const matches = findTokensThatMatchExpressions(tokens, expressions)
@@ -173,7 +242,7 @@ function enhanceMatchedTokensWithMeta(tokens, expressions, extraTypeProvider, li
     }
 }
 
-function findTokensThatMatchExpressions(tokens, expressions) {
+export function findTokensThatMatchExpressions(tokens, expressions) {
     const extractedTexts = tokens.map(t => tokenToText(t).trim())
 
     const result = {}
@@ -217,15 +286,4 @@ function findTokensThatMatchExpressions(tokens, expressions) {
 
         return undefined
     }
-}
-
-export {
-    splitTokensIntoLines,
-    isInlinedComment,
-    trimComment,
-    containsInlinedComment,
-    extractTextFromTokens,
-    isSimpleValueToken,
-    enhanceMatchedTokensWithMeta,
-    findTokensThatMatchExpressions
 }

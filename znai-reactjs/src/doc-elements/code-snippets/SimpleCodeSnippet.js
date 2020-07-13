@@ -19,7 +19,6 @@ import React, {Component} from 'react'
 
 import {extractTextFromTokens, splitTokensIntoLines} from './codeUtils'
 import LineOfTokens from './LineOfTokens.js'
-import SimpleCodeToken from './SimpleCodeToken.js'
 import {convertToList} from '../propsUtils'
 import {isAllAtOnce} from '../meta/meta';
 import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'
@@ -74,8 +73,7 @@ class SimpleCodeSnippet extends Component {
                     <LineOfTokens key={lineIdx} tokens={tokens}
                                   references={mergedReferences}
                                   isHighlighted={highlightIsVisible && this.isHighlighted(lineIdx)}
-                                  isPresentation={isPresentation}
-                                  TokenComponent={SimpleCodeToken}/>
+                                  isPresentation={isPresentation}/>
                 ))}
                 <React.Fragment>{this.renderReadMore()}</React.Fragment>
             </pre>

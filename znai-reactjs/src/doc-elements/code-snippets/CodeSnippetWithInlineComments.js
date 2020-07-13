@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,32 +19,22 @@ import React from 'react'
 
 import 'semantic-ui-css/components/label.css'
 
-import SimpleCodeToken from './SimpleCodeToken'
 import LineOfTokens from './LineOfTokens'
 import BulletExplanations from './BulletExplanations'
 import CircleBadge from './CircleBadge'
 
 import {isAllAtOnce} from '../meta/meta'
-import {containsInlinedComment, isInlinedComment, splitTokensIntoLines} from './codeUtils'
+import {
+    collapseCommentsAboveToMakeCommentOnTheCodeLine,
+    containsInlinedComment,
+    isCommentToken,
+    lineWithTokensTrimmedOnRight,
+    splitTokensIntoLines
+} from './codeUtils'
 
 import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'
 
 import './CodeSnippetWithInlineComments.css'
-
-let commentIdx = 0
-
-const SpecialCommentToken = ({token, isPresentation}) => {
-    if (isInlinedComment(token)) {
-        if (isPresentation) {
-            return null
-        } else {
-            commentIdx++
-            return <CircleBadge idx={commentIdx}/>
-        }
-    }
-
-    return (<SimpleCodeToken token={token}/>)
-}
 
 const Explanations = ({spoiler, isPresentation, slideIdx, comments}) => {
     if (isPresentation || comments.length === 0) {
@@ -55,14 +46,17 @@ const Explanations = ({spoiler, isPresentation, slideIdx, comments}) => {
 }
 
 const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentation, meta, slideIdx}) => {
-    commentIdx = 0
-    const comments = tokens.filter(t => isInlinedComment(t))
-    const lines = splitTokensIntoLines(tokens)
+    const lines = collapseCommentsAboveToMakeCommentOnTheCodeLine(splitTokensIntoLines(tokens))
+    const comments = findComments(lines)
 
     const idxOfLinesWithComments = []
+    const bulletIdxesPerLineIdx = []
+    let bulletIdx = 1
+
     lines.forEach((line, idx) => {
         if (containsInlinedComment(line)) {
             idxOfLinesWithComments.push(idx)
+            bulletIdxesPerLineIdx[idx] = bulletIdx++
         }
     })
 
@@ -75,13 +69,25 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentat
     return (
         <div className={className}>
             <pre>
-                {lines.map((line, idx) =>
-                    <LineOfTokens key={idx}
-                                  tokens={line}
-                                  isHighlighted={isHighlighted(idx)}
-                                  references={mergedReferences}
-                                  isPresentation={isPresentation}
-                                  TokenComponent={SpecialCommentToken}/>)}
+                {lines.map((line, idx) => {
+                    const bulletIdxForLine = bulletIdxesPerLineIdx[idx]
+                    const lineToRender = bulletIdxForLine ?
+                        removeCommentAtTheEnd(line):
+                        line
+
+                    return <LineOfTokens key={idx}
+                                         tokens={lineToRender}
+                                         isHighlighted={isHighlighted(idx)}
+                                         references={mergedReferences}
+                                         isPresentation={isPresentation}
+                                         endOfLineRender={() => {
+                                             const bulletIdxForLine = bulletIdxesPerLineIdx[idx]
+                                             return bulletIdxForLine ?
+                                                 <CircleBadge idx={bulletIdxForLine} className="left-margin"/>:
+                                                 null
+                                         }}
+                    />
+                })}
             </pre>
 
             <Explanations isPresentation={isPresentation}
@@ -91,6 +97,16 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentat
         </div>
     )
 
+    function removeCommentAtTheEnd(line) {
+        const trimmed = lineWithTokensTrimmedOnRight(line)
+        const lastToken = trimmed[trimmed.length - 1]
+        if (isCommentToken(lastToken)) {
+            trimmed.splice(trimmed.length - 1, 1)
+        }
+
+        return trimmed
+    }
+
     function isHighlighted(idx) {
         if (isAllAtOnce(meta) && highlightIsVisible) {
             return idxOfLinesWithComments.indexOf(idx) !== -1
@@ -98,6 +114,19 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentat
 
         const lineIdxToHighlight = highlightIsVisible ? idxOfLinesWithComments[slideIdx - 1] : -1
         return lineIdxToHighlight === idx
+    }
+
+    function findComments(lines) {
+        const result = []
+        lines.forEach(line => {
+            line.forEach(token => {
+                if (isCommentToken(token)) {
+                    result.push(token)
+                }
+            })
+        })
+
+        return result
     }
 }
 

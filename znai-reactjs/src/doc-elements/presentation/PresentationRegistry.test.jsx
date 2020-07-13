@@ -17,10 +17,12 @@
 import React from "react";
 
 import PresentationRegistry from "./PresentationRegistry";
+import {presentationSectionHandler} from "../default-elements/Section";
 
 describe('PresentationRegistry', () => {
     const elementsLibrary = {
-        'Dummy': () => <div/>
+        'Dummy': () => <div/>,
+        'DummyTriple': () => <div/>
     }
 
     const presentationElementHandlers = {
@@ -28,11 +30,53 @@ describe('PresentationRegistry', () => {
             component: () => <div/>,
             numberOfSlides: () => 1
         },
+        'DummyTriple': {
+            component: () => <div/>,
+            numberOfSlides: () => 3
+        },
         'NonSlide': {
             component: () => <div/>,
             numberOfSlides: () => 0
-        }
+        },
+        'Section': presentationSectionHandler
     }
+
+    describe('slide idx by title', () => {
+        it('should find a slide idx by page section id', () => {
+            const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [
+                {
+                    type: 'Section',
+                    title : 'Title One',
+                    id : 'title-one',
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code1",
+                },
+                {
+                    type: 'Section',
+                    title : 'Title Two',
+                    id : 'title-two',
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'java',
+                    snippet: "code2",
+                    meta: {
+                        stickySlide: 'top 30%'
+                    }
+                }
+            ])
+
+            expect(registry.findSlideIdxBySectionId('title-one')).toEqual(0)
+            expect(registry.findSlideIdxBySectionId('title-two')).toEqual(2)
+
+            expect(registry.findSlideIdxBySectionId(undefined)).toEqual(0)
+            expect(registry.findSlideIdxBySectionId('')).toEqual(0)
+            expect(registry.findSlideIdxBySectionId('non-existing')).toEqual(0)
+        })
+    })
 
     describe('sticky slides', () => {
         it('should clear sticky slide for after first non sticky slide', () => {
@@ -85,6 +129,45 @@ describe('PresentationRegistry', () => {
 
             expect(slide4.props.snippet).toEqual("code4");
             expect(slide4.stickySlides.length).toEqual(0);
+        })
+    })
+
+    describe('slide boundaries', () => {
+        it('should know slideIdx boundaries of a component', () => {
+            const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code1",
+                },
+                {
+                    type: 'DummyTriple',
+                    lang: 'java',
+                    snippet: "code2",
+                },
+                {
+                    type: 'DummyTriple',
+                    lang: 'java',
+                    snippet: "code3",
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code4",
+                    highlight: [1],
+                }
+            ])
+
+            expect(registry.numberOfSlides).toEqual(8)
+
+            expect(registry.slideComponentStartIdxByIdx(0)).toEqual(0)
+            expect(registry.slideComponentStartIdxByIdx(1)).toEqual(1)
+            expect(registry.slideComponentStartIdxByIdx(2)).toEqual(1)
+            expect(registry.slideComponentStartIdxByIdx(3)).toEqual(1)
+            expect(registry.slideComponentStartIdxByIdx(4)).toEqual(4)
+            expect(registry.slideComponentStartIdxByIdx(5)).toEqual(4)
+            expect(registry.slideComponentStartIdxByIdx(6)).toEqual(4)
+            expect(registry.slideComponentStartIdxByIdx(7)).toEqual(7)
         })
     })
 })

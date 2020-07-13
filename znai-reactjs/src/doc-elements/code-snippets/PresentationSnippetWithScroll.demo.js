@@ -25,6 +25,25 @@ export function snippetWithScrollPresentationDemo(registry) {
             numberOfVisibleLines: 11,
             snippet: javaCode()
         }]))
+        .add('with sticky slide', createPresentationDemo([
+            {
+                type: 'Snippet',
+                lang: 'java',
+                title: 'Long source code',
+                numberOfVisibleLines: 11,
+                snippet: javaCode(),
+                meta: {
+                    stickySlide: "left"
+                }
+            },
+            {
+                type: 'Snippet',
+                lang: 'java',
+                title: 'Long source code',
+                numberOfVisibleLines: 11,
+                snippet: javaCode()
+            }
+        ]))
 }
 
 function javaCode() {
@@ -57,6 +76,7 @@ function javaCode() {
         '        System.out.println("hello 25");\n' +
         '        System.out.println("hello 26");\n' +
         '        System.out.println("hello 27");\n' +
+        '        System.out.println("hello world to make line longer that others line to test jump 27");\n' +
         '        System.out.println("hello 28");\n' +
         '        System.out.println("hello 29");\n' +
         '        ...\n' +
