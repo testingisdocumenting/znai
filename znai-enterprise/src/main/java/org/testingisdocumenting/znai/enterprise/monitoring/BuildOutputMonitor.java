@@ -96,7 +96,7 @@ public class BuildOutputMonitor implements ServerLifecycleListener {
                     .orElseThrow(() -> new RuntimeException("no directory found inside zip"));
 
             String docId = docsDir.getFileName().toString();
-            ConsoleOutputs.out("detected ", Color.WHITE, docId, Color.BLUE, " at ", Color.PURPLE, zip);
+            ConsoleOutputs.out("processing ", Color.WHITE, docId, Color.BLUE, " at ", Color.PURPLE, zip);
 
             documentationStorage().store("build-output-monitor", docId, "", docsDir);
             DocLifecycleListeners.onDocUpdate(new DocMeta(
@@ -111,6 +111,9 @@ public class BuildOutputMonitor implements ServerLifecycleListener {
         String newCheckSum = checkSum(path);
 
         checkSumByPath.put(path, newCheckSum);
+
+        ConsoleOutputs.out(Color.YELLOW, "comparing checksums for ", Color.PURPLE, path,
+                Color.CYAN, " ", previousCheckSum, Color.GREEN, " vs ", Color.CYAN, newCheckSum);
 
         if (previousCheckSum == null) {
             return true;
