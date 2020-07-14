@@ -9,6 +9,7 @@ flow
     lookup-paths
     search
     footer
+    support
     presentation
     testing
     shortcuts
