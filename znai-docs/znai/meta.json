@@ -6,5 +6,8 @@
   "viewOn": {
     "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
     "title": "View On GitHub"
+  },
+  "support": {
+    "link": "https://github.com/testingisdocumenting/znai/issues"
   }
 }
