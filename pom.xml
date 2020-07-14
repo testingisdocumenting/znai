@@ -145,7 +145,7 @@
         <commons-codec.version>1.4</commons-codec.version>
         <plantuml.version>1.2017.16</plantuml.version>
         <json-path.version>2.4.0</json-path.version>
-        <slf4j-simple.version>1.7.25</slf4j-simple.version>
+        <slf4j.version>1.7.30</slf4j.version>
         <junit.version>4.12</junit.version>
         <javaparser-core.version>3.15.9</javaparser-core.version>
         <jakarta.xml.bind-api.version>2.3.2</jakarta.xml.bind-api.version>
@@ -259,8 +259,20 @@
 
             <dependency>
                 <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
-                <version>${slf4j-simple.version}</version>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-ext</artifactId>
+                <version>${slf4j.version}</version>
             </dependency>
 
             <dependency>
