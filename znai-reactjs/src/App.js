@@ -83,6 +83,7 @@ import {snippetPresentationDemo} from "./doc-elements/code-snippets/Presentation
 import {snippetWithScrollPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippetWithScroll.demo";
 import {presentationStickySlidesDemo} from "./doc-elements/presentation/PresentationStickySlides.demo";
 import {snippetsWithInlineCommentsDemo} from "./doc-elements/code-snippets/CodeSnippetWithInlineComments.demo";
+import {notAuthorizedDemo} from "./screens/not-authorized/NotAuthorizedScreen.demo";
 
 const docMeta = {
     id: 'preview',
@@ -173,6 +174,7 @@ registries.add('preview')
 registries.add('screens')
     .registerAsTabs('Documentation Preparation', documentationPreparationDemo)
     .registerAsTabs('Landing', landingDemo)
+    .registerAsTabs('Not Authorized', notAuthorizedDemo)
     .registerAsTabs('Search Popup', searchPopupDemo)
 
 registries.add('end to end')

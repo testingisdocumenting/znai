@@ -24,6 +24,7 @@ require('./doc-elements/search/Search.css')
 
 const {Documentation} = require('./doc-elements/Documentation')
 const {DocumentationPreparationScreen} = require('./screens/documentation-preparation/DocumentationPreparationScreen')
+const {NotAuthorizedScreen} = require('./screens/not-authorized/NotAuthorizedScreen')
 const {Landing} = require('./screens/landing/Landing')
 const {themeRegistry} = require('./theme/ThemeRegistry')
 const {documentationNavigation} = require('./structure/DocumentationNavigation')
@@ -37,6 +38,7 @@ global.React = React
 global.ReactDOM = ReactDOM
 global.Documentation = Documentation
 global.DocumentationPreparationScreen = DocumentationPreparationScreen
+global.NotAuthorizedScreen = NotAuthorizedScreen
 global.Landing = Landing
 global.themeRegistry = themeRegistry
 global.pageTypesRegistry = pageTypesRegistry
