@@ -18,7 +18,9 @@ package org.testingisdocumenting.znai.server.auth;
 
 import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AuthorizationHandlers {
     private static final Set<AuthorizationHandler> handlers =
@@ -31,6 +33,20 @@ public class AuthorizationHandlers {
 
         return handlers.stream()
                 .anyMatch(h -> h.isAuthorized(userId, docId));
+    }
+
+    public static AuthorizationRequestLink authorizationRequestLink() {
+        return handlers.stream()
+                .map(AuthorizationHandler::authorizationRequestLink)
+                .filter(link -> !link.isEmpty())
+                .findFirst()
+                .orElse(new AuthorizationRequestLink("", ""));
+    }
+
+    public static List<String> allowedGroups(String docId) {
+        return handlers.stream()
+                .flatMap(h -> h.allowedGroups(docId).stream())
+                .collect(Collectors.toList());
     }
 
     public static void add(AuthorizationHandler handler) {

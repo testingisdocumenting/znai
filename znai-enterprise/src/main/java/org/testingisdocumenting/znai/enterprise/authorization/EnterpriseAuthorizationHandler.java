@@ -18,17 +18,19 @@ package org.testingisdocumenting.znai.enterprise.authorization;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.enterprise.DocLifecycleListener;
 import org.testingisdocumenting.znai.enterprise.authorization.groups.AuthorizationGroupResolutionServices;
 import org.testingisdocumenting.znai.server.auth.AuthorizationHandler;
+import org.testingisdocumenting.znai.server.auth.AuthorizationRequestLink;
 import org.testingisdocumenting.znai.structure.DocMeta;
 
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.documentationStorage;
+import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.enterpriseConfig;
 
 public class EnterpriseAuthorizationHandler implements AuthorizationHandler, DocLifecycleListener {
     private Cache<UserIdDocId, Boolean> authorizedByIds;
@@ -46,11 +48,15 @@ public class EnterpriseAuthorizationHandler implements AuthorizationHandler, Doc
     @Override
     public boolean isAuthorized(String userId, String docId) {
         if (AuthorizationGroupResolutionServices.isEmpty()) {
+            ConsoleOutputs.out("AuthorizationGroupResolutionServices.isEmpty(): " +
+                    "no authorization is being performed for <" + docId + ">");
             return true;
         }
 
         AllowedUsersAndGroups allowedUsersAndGroups = allowedUsersAndGroupsById.get(docId);
         if (allowedUsersAndGroups == null || allowedUsersAndGroups.isEmpty()) {
+            ConsoleOutputs.out("allowed users and groups is empty: " +
+                    "no authorization is being performed for <" + docId + ">");
             return true;
         }
 
@@ -66,6 +72,21 @@ public class EnterpriseAuthorizationHandler implements AuthorizationHandler, Doc
                 userIdDocId -> authorized(allowedUsersAndGroups, userId));
 
         return present == null ? false : present;
+    }
+
+    @Override
+    public List<String> allowedGroups(String docId) {
+        AllowedUsersAndGroups allowedUsersAndGroups = allowedUsersAndGroupsById.get(docId);
+        if (allowedUsersAndGroups == null) {
+            return Collections.emptyList();
+        }
+
+        return new ArrayList<>(allowedUsersAndGroups.getAllowedGroups());
+    }
+
+    @Override
+    public AuthorizationRequestLink authorizationRequestLink() {
+        return enterpriseConfig().getAuthzRequestLink();
     }
 
     @Override

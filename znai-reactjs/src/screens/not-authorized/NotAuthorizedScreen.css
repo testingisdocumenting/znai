@@ -14,12 +14,34 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.server.auth;
+.znai-not-authorized-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
-import java.util.List;
+    height: 100vh;
+    width: 100vw;
 
-public interface AuthorizationHandler {
-    boolean isAuthorized(String userId, String docId);
-    List<String> allowedGroups(String docId);
-    AuthorizationRequestLink authorizationRequestLink();
+    font-size: 24px;
+
+    background-color: var(--znai-background-color);
+    color: var(--znai-regular-text-color);
+}
+
+.znai-not-authorized-doc-id {
+    font-weight: bold;
+    color: var(--znai-string-color);
+}
+
+.znai-not-authorized-allowed-groups-message {
+    margin-top: 16px;
+}
+
+.znai-not-authorized-groups {
+    color: var(--znai-string-color);
+}
+
+.znai-not-authorized-link-message {
+    margin-top: 32px;
 }
