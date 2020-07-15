@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#installation</url>
     <fullTitle>Znai: Getting Started, Installation [Introduction]</fullTitle>
     <text>
-      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.43/znai-dist-1.43-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</text>
+      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.43.1/znai-dist-1.43.1-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#scaffolding</url>
     <fullTitle>Znai: Getting Started, Scaffolding [Introduction]</fullTitle>
     <text>
-      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.43&lt;/version> &lt;/plugin> mvn znai:new</text>
+      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.43.1&lt;/version> &lt;/plugin> mvn znai:new</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1563,7 +1563,7 @@
     <url>/znai/deployment/static-content#build</url>
     <fullTitle>Znai: Static Content, Build [Deployment]</fullTitle>
     <text>
-      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.43&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
+      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.43.1&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
       <score>STANDARD</score>
     </text>
   </entry>
