@@ -16,10 +16,24 @@
 
 package org.testingisdocumenting.znai.server.auth;
 
-import java.util.List;
+public class AuthorizationRequestLink {
+    private final String message;
+    private final String link;
 
-public interface AuthorizationHandler {
-    boolean isAuthorized(String userId, String docId);
-    List<String> allowedGroups(String docId);
-    AuthorizationRequestLink authorizationRequestLink();
+    public AuthorizationRequestLink(String message, String link) {
+        this.message = message;
+        this.link = link;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public boolean isEmpty() {
+        return message.isEmpty() || link.isEmpty();
+    }
 }

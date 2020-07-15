@@ -70,7 +70,7 @@ public class EnterpriseComponentsRegistry implements ServerLifecycleListener {
         AuthorizationHandlers.add(authorizationHandler);
         DocLifecycleListeners.add(authorizationHandler);
 
-        if (enterpriseConfig.getAuthGroupsResolutionType().equals("nix-groups")) {
+        if (enterpriseConfig.getAuthzGroupsResolutionType().equals("nix-groups")) {
             AuthorizationGroupResolutionServices.add(new NixAuthorizationGroupResolutionService());
         }
     }
