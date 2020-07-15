@@ -57,7 +57,8 @@ function javaCodeWithMultilineComments() {
 }
 
 function pythonCodeWithComments() {
-    return 'def method:\n' +
+    return 'import market\n\n' +
+        'def method:\n' +
         '    print("hello") # hello message\n'
 }
 

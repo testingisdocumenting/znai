@@ -46,6 +46,7 @@ export function snippetsDemo(registry) {
                                          readMore={true} readMoreVisibleLines={4}/>)
         .add('tabs with wide', () => <Tabs {...tabsContent({label: 'wide', wide: true})}
                                            elementsLibrary={elementsLibrary}/>)
+        .add('python code', () => <Snippet lang="python" snippet={pythonCode()}/>)
         .add('large java code with javadocs', () => <Snippet lang="java" snippet={largeJavaCodeWithJavaDocs()}/>)
 }
 
@@ -203,6 +204,19 @@ function contentSnippet(isRightSide) {
             "rightSide": isRightSide
         }
     }
+}
+
+function pythonCode() {
+    return "import market\n" +
+        "import flight\n" +
+        "\n" +
+        "def main():\n" +
+        "    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n" +
+        "\n" +
+        "    market.cancel_trade('id')\n" +
+        "\n" +
+        "if __name__  == \"__main__\":\n" +
+        "    main() "
 }
 
 function largeJavaCodeWithJavaDocs() {
