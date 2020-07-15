@@ -72,21 +72,20 @@ describe("codeUtils", () => {
                 ' ',
                 {'content': ['Test'], 'type': 'class-name'},
                 ' ',
-                {'content': 'Test2 ', 'type': 'text'},
-                {'content': '{', 'type': 'punctuation'}, '\n'])
+                'Test2 ',
+                {'content': '{', 'type': 'punctuation'}])
 
             expect(lines[2]).toEqual([
                 '    ',
                 {'content': 'var', 'type': 'keyword'},
                 ' ',
-                {'content': 'a  ', 'type': 'text'},
+                'a  ',
                 {'content': '=', 'type': 'operator'},
                 ' ',
                 {'content': '2', 'type': 'number'},
                 {'content': ';', 'type': 'punctuation'},
                 ' ',
-                {'content': '// comment line', 'type': 'comment'},
-                '\n'
+                {'content': '// comment line', 'type': 'comment'}
             ])
         })
 
@@ -94,7 +93,7 @@ describe("codeUtils", () => {
             const tokens = parseCode('java', codeWithEmptyLines)
             const lines = splitTokensIntoLines(tokens)
             expect(lines.length).toEqual(4)
-            expect(lines[2]).toEqual(['\n'])
+            expect(lines[2]).toEqual([])
         })
 
         it("handles string token with new-line code in the middle", () => {
@@ -102,10 +101,10 @@ describe("codeUtils", () => {
             const lines = splitTokensIntoLines(tokens)
 
             expect(lines.length).toEqual(2)
-            expect(lines[0]).toEqual(['hello\n'])
+            expect(lines[0]).toEqual(['hello'])
             expect(lines[1]).toEqual([
                 '  ',
-                {'content': 'world', 'type': 'text'}])
+                'world'])
         })
 
         it("converts text token with spacing into separate spacing token and text token", () => {
@@ -117,13 +116,13 @@ describe("codeUtils", () => {
             expect(lines).toEqual([
                 [
                     ' ',
-                    { content: 'http', type: 'text' },
+                    'http',
                     { type: 'punctuation', content: '.' },
-                    'get\n'
+                    'get'
                 ],
                 [
                     '    ',
-                    { content: 'body', type: 'text' },
+                    'body',
                     { type: 'punctuation', content: '.' },
                     { type: 'function', content: 'get' },
                     { type: 'punctuation', content: '(' },
@@ -131,11 +130,10 @@ describe("codeUtils", () => {
                     { type: 'punctuation', content: ')' },
                     ' ',
                     { type: 'punctuation', content: '{' },
-                    '\n'
                 ],
                 [
                     '    ',
-                    { content: 'body', type: 'text' },
+                    'body',
                     { type: 'punctuation', content: '.' },
                     { type: 'function', content: 'get' },
                     { type: 'punctuation', content: '(' },
@@ -143,7 +141,6 @@ describe("codeUtils", () => {
                     { type: 'punctuation', content: ')' },
                    ' ',
                     { type: 'punctuation', content: '{' },
-                    '\n'
                 ]])
         })
     })
@@ -194,7 +191,7 @@ describe("codeUtils", () => {
             'header',
             { type: 'punctuation', content: ',' },
             ' ',
-            { content: 'body', type: 'text' },
+            'body',
             { type: 'punctuation', content: ')' },
             ' ',
             { type: 'operator', content: '->' },
@@ -249,21 +246,20 @@ describe("codeUtils", () => {
                     { type: 'punctuation', content: '(' },
                     { type: 'punctuation', content: ')' },
                     { type: 'punctuation', content: ':' },
-                    '\n'
                 ],
                 [
                     '  ',
-                    { content: 'a ', type: 'text' },
+                    'a ',
                     { type: 'operator', content: '=' },
                     ' ',
                     { type: 'number', content: '2' },
                     { type: 'comment', content: 'comment line one comment line two' }
                 ],
-                [ '\n' ],
-                [ '\n' ],
+                [],
+                [],
                 [
                     '  ',
-                    { content: 'a ', type: 'text' },
+                    'a ',
                     { type: 'operator', content: '=' },
                     ' ',
                     { type: 'number', content: '4' },
