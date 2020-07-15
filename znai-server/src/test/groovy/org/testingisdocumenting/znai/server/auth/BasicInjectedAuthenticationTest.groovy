@@ -21,7 +21,7 @@ import org.junit.Test
 class BasicInjectedAuthenticationTest {
     @Test
     void "should extract user id from basic base64 auth with fake password"() {
-        def userId = BasicInjectedAuthentication.extractUserId("Basic dGVzdHVzZXIgZHVtbXlwYXNzd29yZA==")
-        userId.should == 'testuser'
+        def userId = BasicInjectedAuthentication.extractUserId("Basic QWxhZGRpbjpPcGVuU2VzYW1l==")
+        userId.should == 'Aladdin'
     }
 }

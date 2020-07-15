@@ -31,7 +31,7 @@ public class BasicInjectedAuthentication {
 
         Base64 base64 = new Base64();
         String userNameAndFakePassword = new String(base64.decode(parts[1].getBytes()));
-        String[] userNamePasswordParts = userNameAndFakePassword.split(" ");
+        String[] userNamePasswordParts = userNameAndFakePassword.split(":");
 
         return userNamePasswordParts[0];
     }
