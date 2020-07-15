@@ -139,6 +139,8 @@ public class ZnaiServer {
 
     private boolean isAuthorized(RoutingContext ctx, String docId) {
         String authorization = ctx.request().headers().get("Authorization");
+        ConsoleOutputs.out("received authorization header for <" + docId + ">: " + authorization);
+
         String userId = BasicInjectedAuthentication.extractUserId(authorization);
 
         if (userId.isEmpty()) {
