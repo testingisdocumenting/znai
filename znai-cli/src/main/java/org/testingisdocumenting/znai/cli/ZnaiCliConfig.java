@@ -337,7 +337,7 @@ public class ZnaiCliConfig {
         options.addOption(null, DOC_ID_KEY, true, "documentation id");
         options.addOption(null, MODIFIED_TIME_KEY, true,
                 "strategy of modified time for each page: constant or file last update time: constant, file (default)");
-        options.addOption(null, LOOKUP_PATHS_KEY, true, "additional lookup paths separated by color(:)");
+        options.addOption(null, LOOKUP_PATHS_KEY, true, "additional lookup paths separated by colon(:)");
         options.addOption(null, DEPLOY_KEY, true, "documentation deploy root dir");
         options.addOption(null, PREVIEW_KEY, false, "preview mode");
         options.addOption(null, SERVE_KEY, false, "server mode");
