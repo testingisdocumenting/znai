@@ -8,5 +8,8 @@
   "title" : "Znai",
   "type" : "User Guide",
   "category" : "Documentation",
-  "previewEnabled" : false
+  "previewEnabled" : false,
+  "support" : {
+    "link" : "https://github.com/testingisdocumenting/znai/issues"
+  }
 }

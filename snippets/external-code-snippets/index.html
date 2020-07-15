@@ -121,7 +121,7 @@
 
 <article>
 <header><h1>Callout Comments</h1></header>
-<p>If you already have comments inside your code it would be non effecient to repeat them inside documentation. Instead comments can be automatically extracted and presented as part of the textGiven file with inlined comments class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules By specifying commentsType :include-file: file-name-with-comments.js {commentsType: &quot;inline&quot;} It will be rendered as class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</p>
+<p>If you already have comments inside your code it would be non efficient to repeat them inside documentation. Instead, comments can be automatically extracted and presented as part of the textGiven file with inlined comments class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules By specifying commentsType :include-file: file-name-with-comments.js {commentsType: &quot;inline&quot;} It will be rendered as class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules Comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line. order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order) order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order)</p>
 </article>
 
 <article>
@@ -150,7 +150,10 @@ ReactDOM.render(React.createElement(Documentation, {
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
-    "previewEnabled" : false
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/issues"
+    }
   },
   "page" : {
     "type" : "Page",
@@ -686,12 +689,12 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "If you already have comments inside your code it would be non effecient to repeat them inside documentation.",
+          "text" : "If you already have comments inside your code it would be non efficient to repeat them inside documentation.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "Instead comments can be automatically extracted and presented as part of the text",
+          "text" : "Instead, comments can be automatically extracted and presented as part of the text",
           "type" : "SimpleText"
         } ]
       }, {
@@ -727,6 +730,22 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
+        "commentsType" : "inline",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "py",
+        "snippet" : "order = fetch_order()\n# explanation of why\n# strategic price calculation\n# is important here\nprice = strategic_price_calc(order)",
+        "title" : "multi line comments above line",
+        "type" : "Snippet"
+      }, {
+        "lang" : "py",
+        "snippet" : "order = fetch_order()\n# explanation of why\n# strategic price calculation\n# is important here\nprice = strategic_price_calc(order)",
         "commentsType" : "inline",
         "type" : "Snippet"
       } ]
@@ -765,7 +784,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1592959343904,
+    "lastModifiedTime" : 1594782673828,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",

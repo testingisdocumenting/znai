@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#installation</url>
     <fullTitle>Znai: Getting Started, Installation [Introduction]</fullTitle>
     <text>
-      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.40.1/znai-dist-1.40.1-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</text>
+      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.43/znai-dist-1.43-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#scaffolding</url>
     <fullTitle>Znai: Getting Started, Scaffolding [Introduction]</fullTitle>
     <text>
-      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.40.1&lt;/version> &lt;/plugin> mvn znai:new</text>
+      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.43&lt;/version> &lt;/plugin> mvn znai:new</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -131,7 +131,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction rationale example getting-started flow structure names page-references lookup-paths search footer presentation testing shortcuts snippets code-snippets external-code-snippets inlined-code-snippets api-parameters code-references java java-doc groovy typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points icons keyboard-shortcuts charts images image-annotations SVG flow-diagrams PlantUml deployment static-content static-hosting synergy-with-testing java REST web-UI configuration basic example-references domain api Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction rationale example getting-started flow structure names page-references lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets inlined-code-snippets api-parameters code-references java java-doc groovy typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points icons keyboard-shortcuts charts images image-annotations SVG flow-diagrams PlantUml deployment static-content static-hosting synergy-with-testing java REST web-UI configuration basic example-references domain api Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -147,7 +147,7 @@
     <url>/znai/flow/structure#meta</url>
     <fullTitle>Znai: Structure, Meta [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have the meta.json file in its root. This JSON file contains documentation display name, type, and optional View On information. { "title": "Znai", "type": "User Guide", "category": "Documentation", "description": "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.", "viewOn": { "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai", "title": "View On GitHub" } }</text>
+      <text>Each documentation must have the meta.json file in its root. This JSON file contains documentation display name, type, and optional View On information. { "title": "Znai", "type": "User Guide", "category": "Documentation", "description": "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.", "viewOn": { "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai", "title": "View On GitHub" }, "support": { "link": "https://github.com/testingisdocumenting/znai/issues" } }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -252,6 +252,14 @@
     <fullTitle>Znai: Footer, Definition [Flow]</fullTitle>
     <text>
       <text>To define a footer, create a footer.md file in the root directory of your documentation files. Footer content will be treated as regular page content, i.e., you can use the standard Markdown and all the custom extensions.Content in footer.md will be displayed at the bottom of each page.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/support#definition</url>
+    <fullTitle>Znai: Support, Definition [Flow]</fullTitle>
+    <text>
+      <text>It is very useful to provide a way to contact an owner of a documentation, so he/she can get a feedback about the documentation from a reader. When a user defines a link in meta.json, Support link will show up under a page title if you define a link under support .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -395,7 +403,7 @@
     <url>/znai/snippets/external-code-snippets#callout-comments</url>
     <fullTitle>Znai: External Code Snippets, Callout Comments [Snippets]</fullTitle>
     <text>
-      <text>If you already have comments inside your code it would be non effecient to repeat them inside documentation. Instead comments can be automatically extracted and presented as part of the textGiven file with inlined comments class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules By specifying commentsType :include-file: file-name-with-comments.js {commentsType: "inline"} It will be rendered as class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</text>
+      <text>If you already have comments inside your code it would be non efficient to repeat them inside documentation. Instead, comments can be automatically extracted and presented as part of the textGiven file with inlined comments class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules By specifying commentsType :include-file: file-name-with-comments.js {commentsType: "inline"} It will be rendered as class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules Comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line. order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order) order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order)</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1555,7 +1563,7 @@
     <url>/znai/deployment/static-content#build</url>
     <fullTitle>Znai: Static Content, Build [Deployment]</fullTitle>
     <text>
-      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.40.1&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
+      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.43&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
       <score>STANDARD</score>
     </text>
   </entry>
