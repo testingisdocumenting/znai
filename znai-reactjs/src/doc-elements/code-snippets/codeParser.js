@@ -16,6 +16,7 @@
  */
 
 import * as Prism from 'prismjs'
+
 import 'prismjs/components/prism-java'
 import 'prismjs/components/prism-groovy'
 import 'prismjs/components/prism-clike'
@@ -29,6 +30,7 @@ import 'prismjs/components/prism-json'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-yaml'
 import 'prismjs/components/prism-typescript'
+import 'prismjs/components/prism-protobuf'
 
 export function parseCode(lang, code) {
     const prismLang = Prism.languages[adjustLang(lang)]
@@ -50,6 +52,9 @@ const extensionsMapping = {
     py: 'python',
     ts: 'typescript',
     tsx: 'typescript',
+    proto: 'protobuf',
+    pb: 'protobuf',
+    protobuf: 'protobuf',
 }
 
 function adjustLang(lang) {

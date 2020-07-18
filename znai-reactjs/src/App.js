@@ -49,7 +49,7 @@ import {typographyDemo} from './doc-elements/typography/Typography.demo'
 import {graphVizSvgDemo} from './doc-elements/graphviz/GraphVizSvg.demo'
 import {graphVizSvgPresentationDemo} from './doc-elements/graphviz/PresentationGraphVizSvg.demo'
 import {cliCommandDemo} from './doc-elements/cli/CliCommand.demo'
-import {yamlSnippetDemo} from './doc-elements/code-snippets/Yaml.demo'
+import {syntaxHighlightSnippetDemo} from './doc-elements/code-snippets/CodeSnippetSyntaxHighlight.demo'
 import {latexDemo} from './doc-elements/latex/Latex.demo'
 import {chartDemo} from './doc-elements/charts/Chart.demo'
 import {tableDemo} from './doc-elements/table/Table.demo'
@@ -115,7 +115,7 @@ registries.add('text')
 registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
     .registerAsGrid('Code Snippet With Bullets', 0, snippetsWithInlineCommentsDemo)
-    .registerAsGrid('Code Snippet Yaml ', 0, yamlSnippetDemo)
+    .registerAsGrid('Code Snippet Syntax Highlight ', 0, syntaxHighlightSnippetDemo)
     .registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)
     .registerAsGrid('Inlined Code', 0, inlinedCodeDemo)
     .registerAsGrid('Json', 0, jsonDemo)
