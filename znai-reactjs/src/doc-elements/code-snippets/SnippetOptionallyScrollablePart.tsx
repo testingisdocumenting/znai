@@ -80,7 +80,7 @@ export class SnippetOptionallyScrollablePart extends React.Component<Props, Stat
     const {linesOfCode, numberOfVisibleLines} = this.props;
 
     const maxLength = linesOfCode.reduce((max, line) => Math.max(max, extractTextFromTokens(line).length), 0);
-    const longLine = repeatChar(maxLength - 1 /* new line symbol */, ' ') + '\n';
+    const longLine = repeatChar(maxLength, ' ');
 
     const result = [];
     for (let idx = 0; idx < numberOfVisibleLines; idx++) {
