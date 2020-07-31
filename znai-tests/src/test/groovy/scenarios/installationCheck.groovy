@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 
+package scenarios
+
+import static clicommands.CliCommands.znai
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
-def unzippedZnai = createLazyResource('unzipped znai') {
-    def unzipDest = fs.tempDir('znai-dist')
-    fs.unzip('../../../../znai-dist/target/dist-znai.zip', unzipDest)
-
-    return [bin: 'sh ' + unzipDest.resolve('dist/znai').toString()]
-}
-
 scenario('shows help') {
-    cli.run(unzippedZnai.bin) {
+    znai.run() {
         output.should contain('--new')
         output.should contain('create new documentation with minimal')
 
@@ -36,7 +32,7 @@ scenario('scaffolds new documentation') {
     def scaffoldDir = fs.tempDir('znai-dist')
     def scaffoldCommand = "cd $scaffoldDir && ${unzippedZnai.bin} --new"
 
-    cli.run(scaffoldCommand)
+    znai.run('--new')
 
     def docRoot = scaffoldDir.resolve('znai')
     fs.textContent(docRoot.resolve('toc')).should contain('chapter-one\n' +
