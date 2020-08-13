@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.server.preview;
 
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.server.NoAuthenticationHandler;
 import org.testingisdocumenting.znai.server.ZnaiServer;
 import org.testingisdocumenting.znai.server.sockets.WebSocketHandlers;
 import org.testingisdocumenting.znai.website.WebSite;
@@ -36,7 +37,7 @@ public class DocumentationPreview {
     }
 
     public void start(WebSite webSite, int port, Runnable onStart) {
-        ZnaiServer znaiServer = new ZnaiServer(webSite.getReactJsBundle(), deployRoot);
+        ZnaiServer znaiServer = new ZnaiServer(webSite.getReactJsBundle(), deployRoot, new NoAuthenticationHandler());
         PreviewWebSocketHandler previewWebSocketHandler = new PreviewWebSocketHandler();
 
         WebSocketHandlers.add(previewWebSocketHandler);
