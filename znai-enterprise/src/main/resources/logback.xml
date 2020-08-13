@@ -16,15 +16,28 @@
   -->
 
 <configuration>
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${logPath}</file>
-        <param name="Append" value="false" />
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <logger name="org.testingisdocumenting.znai.enterprise.log.RedirectToFileConsoleOutput" level="INFO">
-        <appender-ref ref="FILE"/>
-    </logger>
+    <if condition='isDefined("logPath")'>
+        <then>
+            <appender name="Znai" class="ch.qos.logback.core.FileAppender">
+                <file>${logPath}</file>
+                <append>false</append>
+                <encoder>
+                    <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %msg%n</pattern>
+                </encoder>
+            </appender>
+            <logger name="org.testingisdocumenting.znai.enterprise.log.RedirectToFileConsoleOutput" level="INFO">
+                <appender-ref ref="Znai"/>
+            </logger>
+        </then>
+        <else>
+            <appender name="ZnaiConsole" class="ch.qos.logback.core.ConsoleAppender">
+                <encoder>
+                    <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %msg%n</pattern>
+                </encoder>
+            </appender>
+            <root level="ERROR">
+                <appender-ref ref="ZnaiConsole"/>
+            </root>
+        </else>
+    </if>
 </configuration>
