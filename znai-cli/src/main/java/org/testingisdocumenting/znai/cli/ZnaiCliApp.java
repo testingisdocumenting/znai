@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.html.HtmlPage;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
+import org.testingisdocumenting.znai.server.AuthorizationHeaderBasedAuthenticationHandler;
 import org.testingisdocumenting.znai.server.ZnaiServer;
 import org.testingisdocumenting.znai.server.preview.DocumentationPreview;
 import org.testingisdocumenting.znai.structure.DocMeta;
@@ -109,7 +110,8 @@ public class ZnaiCliApp {
     }
 
     private void serve() {
-        HttpServer server = new ZnaiServer(reactJsBundle, config.getDeployRoot()).create();
+        HttpServer server = new ZnaiServer(reactJsBundle, config.getDeployRoot(),
+                new AuthorizationHeaderBasedAuthenticationHandler()).create();
         server.listen(config.getPort());
 
         reportHostPort(config.getPort(), "");

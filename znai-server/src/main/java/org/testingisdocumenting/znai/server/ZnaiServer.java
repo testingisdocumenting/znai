@@ -46,10 +46,12 @@ public class ZnaiServer {
     private final Vertx vertx;
     private final ReactJsBundle reactJsBundle;
     private final ZnaiServerConfig serverConfig;
+    private final AuthenticationHandler authenticationHandler;
 
-    public ZnaiServer(ReactJsBundle reactJsBundle, Path deployRoot) {
+    public ZnaiServer(ReactJsBundle reactJsBundle, Path deployRoot, AuthenticationHandler authenticationHandler) {
         this.reactJsBundle = reactJsBundle;
         this.serverConfig = new ZnaiServerConfig(deployRoot);
+        this.authenticationHandler = authenticationHandler;
 
         System.setProperty("vertx.cwd", deployRoot.toString());
         System.setProperty("file.encoding","UTF-8");
@@ -138,13 +140,8 @@ public class ZnaiServer {
     }
 
     private boolean isAuthorized(RoutingContext ctx, String docId) {
-        String authorization = ctx.request().headers().get("Authorization");
-        ConsoleOutputs.out("received authorization header for <" + docId + ">: " + authorization);
-
-        String userId = BasicInjectedAuthentication.extractUserId(authorization);
-
+        String userId = authenticationHandler.authenticate(ctx, docId);
         if (userId.isEmpty()) {
-            ConsoleOutputs.out("no user id is extracted: no authorization is being performed for <" + docId + ">");
             return true;
         }
 
