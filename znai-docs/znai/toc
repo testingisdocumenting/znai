@@ -48,6 +48,7 @@ visuals
     charts
     images
     image-annotations
+    iframe
     SVG
     flow-diagrams
     PlantUml
