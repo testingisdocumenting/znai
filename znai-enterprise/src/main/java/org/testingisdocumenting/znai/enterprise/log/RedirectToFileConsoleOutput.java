@@ -43,8 +43,8 @@ public class RedirectToFileConsoleOutput implements ConsoleOutput {
     }
 
     private static Logger createLogger() {
-        String logPathBase = System.getProperty("logPath");
-        if (logPathBase == null) {
+        String logPath = System.getProperty("logPath");
+        if (logPath == null) {
             return null;
         }
 
