@@ -15,5 +15,6 @@
 #
 
 org.testingisdocumenting.znai.extensions.file.FileIncludePlugin
+org.testingisdocumenting.znai.extensions.html.IframeIncludePlugin
 org.testingisdocumenting.znai.extensions.reactjs.ReactJsComponentIncludePlugin
 org.testingisdocumenting.znai.extensions.meta.MetaIncludePlugin

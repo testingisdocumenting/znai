@@ -84,6 +84,7 @@ import {snippetWithScrollPresentationDemo} from "./doc-elements/code-snippets/Pr
 import {presentationStickySlidesDemo} from "./doc-elements/presentation/PresentationStickySlides.demo";
 import {snippetsWithInlineCommentsDemo} from "./doc-elements/code-snippets/CodeSnippetWithInlineComments.demo";
 import {notAuthorizedDemo} from "./screens/not-authorized/NotAuthorizedScreen.demo";
+import {iframeDemo} from './doc-elements/iframe/Iframe.demo';
 
 const docMeta = {
     id: 'preview',
@@ -141,6 +142,7 @@ registries.add('visuals')
     .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
     .registerAsRows('Diagram Legend', diagramLegendDemo)
     .registerAsGrid('Keyboard shortcuts', 0, keyboardShortcutsDemo)
+    .registerAsGrid('Iframe', 0, iframeDemo)
 
 registries.add('layout')
     .registerAsTabs('Pages', pagesDemo)
