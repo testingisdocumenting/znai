@@ -109,7 +109,7 @@ class SimpleCodeSnippet extends Component {
         const emptyLine = repeatChar(maxLineWidth - 1 /* new line symbol */, ' ')
 
         const upToIdx = revealLineStop[slideIdx]
-        return lines.map((line, idx) => idx <= upToIdx ? line : [emptyLine + "\n"])
+        return lines.map((line, idx) => idx <= upToIdx ? line : [emptyLine])
     }
 
     onReadMoreClick = () => {

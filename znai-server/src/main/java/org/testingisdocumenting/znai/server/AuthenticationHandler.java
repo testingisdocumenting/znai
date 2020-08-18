@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.server.auth
+package org.testingisdocumenting.znai.server;
 
-import org.junit.Test
+import io.vertx.ext.web.RoutingContext;
 
-class BasicInjectedAuthenticationTest {
-    @Test
-    void "should extract user id from basic base64 auth with fake password"() {
-        def userId = BasicInjectedAuthentication.extractUserId("Basic QWxhZGRpbjpPcGVuU2VzYW1l==")
-        userId.should == 'Aladdin'
-    }
+public interface AuthenticationHandler {
+    String authenticate(RoutingContext ctx, String docId);
 }

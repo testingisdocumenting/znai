@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,16 +17,12 @@
 
 import React from 'react'
 
-import {parseCode} from './codeParser'
 import {Snippet} from './Snippet'
 
-import './tokens.css'
-
-export function yamlSnippetDemo(registry) {
-    const parsed = parseCode("yaml", yamlCode())
-
+export function syntaxHighlightSnippetDemo(registry) {
     registry
-        .add('highlight', () => <Snippet tokens={parsed} highlight={[3, 5]}/>)
+        .add('yaml', () => <Snippet snippet={yamlCode()} lang="yaml" highlight={[3, 5]}/>)
+        .add('protobuf', () => <Snippet snippet={protoCode()} lang="proto" highlight={[5]}/>)
 }
 
 function yamlCode() {
@@ -45,4 +42,33 @@ function yamlCode() {
         '    Late afternoon is best.\n' +
         '    Backup contact is Nancy\n' +
         '    Billsmer @ 338-4338.'
+}
+
+function protoCode() {
+    return 'syntax = "proto2";\n' +
+        '\n' +
+        'package tutorial;\n' +
+        '\n' +
+        'message Person {\n' +
+        '  required string name = 1;\n' +
+        '  required int32 id = 2;\n' +
+        '  optional string email = 3;\n' +
+        '\n' +
+        '  enum PhoneType {\n' +
+        '    MOBILE = 0;\n' +
+        '    HOME = 1;\n' +
+        '    WORK = 2;\n' +
+        '  }\n' +
+        '\n' +
+        '  message PhoneNumber {\n' +
+        '    required string number = 1;\n' +
+        '    optional PhoneType type = 2 [default = HOME];\n' +
+        '  }\n' +
+        '\n' +
+        '  repeated PhoneNumber phones = 4;\n' +
+        '}\n' +
+        '\n' +
+        'message AddressBook {\n' +
+        '  repeated Person people = 1;\n' +
+        '}'
 }

@@ -43,7 +43,7 @@ not belong to the same parent node so margins won't even each other out.
 
 .paragraph.attention {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     margin-top: 24px;
     margin-bottom: 24px;
     padding: 8px 0 8px 16px;

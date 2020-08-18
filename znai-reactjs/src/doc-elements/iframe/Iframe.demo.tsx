@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.server.auth
+import React from 'react';
 
-import org.junit.Test
+import { Registry } from 'react-component-viewer';
+import { Iframe } from './Iframe';
 
-class BasicInjectedAuthenticationTest {
-    @Test
-    void "should extract user id from basic base64 auth with fake password"() {
-        def userId = BasicInjectedAuthentication.extractUserId("Basic QWxhZGRpbjpPcGVuU2VzYW1l==")
-        userId.should == 'Aladdin'
-    }
+export function iframeDemo(registry: Registry) {
+  registry.add('default aspect', () => <Iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"
+                                               title="demo title"/>);
+  registry.add('4:3 aspect', () => <Iframe aspectRatio="4:3" src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title"/>);
 }

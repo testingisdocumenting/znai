@@ -16,6 +16,10 @@
 
 package org.testingisdocumenting.znai.server.auth;
 
+import java.util.List;
+
 public interface AuthorizationHandler {
     boolean isAuthorized(String userId, String docId);
+    List<String> allowedGroups(String docId);
+    AuthorizationRequestLink authorizationRequestLink();
 }

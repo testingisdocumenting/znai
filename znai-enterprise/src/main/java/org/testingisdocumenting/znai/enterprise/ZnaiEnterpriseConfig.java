@@ -16,6 +16,7 @@
 
 package org.testingisdocumenting.znai.enterprise;
 
+import org.testingisdocumenting.znai.server.auth.AuthorizationRequestLink;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
@@ -30,7 +31,9 @@ public class ZnaiEnterpriseConfig {
 
     private final Path fsMonitorConfigPath;
     private final Path docStorageRoot;
-    private final String authGroupsResolutionType;
+    private final String authzGroupsResolutionType;
+
+    private final AuthorizationRequestLink authzRequestLink;
 
     private final Map<String, Object> jsonConfig;
 
@@ -39,7 +42,10 @@ public class ZnaiEnterpriseConfig {
 
         fsMonitorConfigPath = buildFsMonitorConfigPath();
         docStorageRoot = buildDocStorageRoot();
-        authGroupsResolutionType = configValueOrDefault("authGroupsResolutionType", "");
+        authzGroupsResolutionType = configValueOrDefault("authzGroupsResolutionType", "");
+        authzRequestLink = new AuthorizationRequestLink(
+                configValueOrDefault("authzRequestMessage", ""),
+                configValueOrDefault("authzRequestLink", ""));
     }
 
     public Path getFsMonitorConfigPath() {
@@ -50,8 +56,12 @@ public class ZnaiEnterpriseConfig {
         return docStorageRoot;
     }
 
-    public String getAuthGroupsResolutionType() {
-        return authGroupsResolutionType;
+    public String getAuthzGroupsResolutionType() {
+        return authzGroupsResolutionType;
+    }
+
+    public AuthorizationRequestLink getAuthzRequestLink() {
+        return authzRequestLink;
     }
 
     private Path buildFsMonitorConfigPath() {

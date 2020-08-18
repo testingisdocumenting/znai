@@ -46,7 +46,7 @@ export function splitTokensIntoLines(tokens) {
         } else if (isString && token.startsWith(' ')) {
             handleSpacing(token)
         } else {
-            line.push(token)
+            pushToken(token)
         }
     }
 
@@ -56,7 +56,7 @@ export function splitTokensIntoLines(tokens) {
         for (let idx = 0; idx < parts.length; idx++) {
             const isLastPart = (idx === parts.length - 1)
 
-            handleSpacing(parts[idx] + (isLastPart ? '' : '\n'))
+            handleSpacing(parts[idx])
 
             if (!isLastPart) {
                 lines.push(line)
@@ -69,8 +69,6 @@ export function splitTokensIntoLines(tokens) {
         // handle multiple new line chars in a row to create empty lines
         for (let idx = 0; idx < token.length; idx++) {
             if (token.charAt(idx) === '\n') {
-                line.push("\n")
-
                 lines.push(line)
                 line = []
             } else {
@@ -84,11 +82,11 @@ export function splitTokensIntoLines(tokens) {
         const nonSpaceIdx = findNonSpaceIdx()
 
         if (nonSpaceIdx === token.length || nonSpaceIdx === 0) {
-            line.push(token)
+            pushToken(token)
         } else {
-            line.push(token.substr(0, nonSpaceIdx))
+            pushToken(token.substr(0, nonSpaceIdx))
             if (nonSpaceIdx > 0) {
-                line.push({content: token.substr(nonSpaceIdx), type: 'text'})
+                pushToken(token.substr(nonSpaceIdx))
             }
         }
 
@@ -100,6 +98,12 @@ export function splitTokensIntoLines(tokens) {
             }
 
             return token.length
+        }
+    }
+
+    function pushToken(token) {
+        if (token) {
+            line.push(token)
         }
     }
 }

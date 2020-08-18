@@ -49,7 +49,7 @@ import {typographyDemo} from './doc-elements/typography/Typography.demo'
 import {graphVizSvgDemo} from './doc-elements/graphviz/GraphVizSvg.demo'
 import {graphVizSvgPresentationDemo} from './doc-elements/graphviz/PresentationGraphVizSvg.demo'
 import {cliCommandDemo} from './doc-elements/cli/CliCommand.demo'
-import {yamlSnippetDemo} from './doc-elements/code-snippets/Yaml.demo'
+import {syntaxHighlightSnippetDemo} from './doc-elements/code-snippets/CodeSnippetSyntaxHighlight.demo'
 import {latexDemo} from './doc-elements/latex/Latex.demo'
 import {chartDemo} from './doc-elements/charts/Chart.demo'
 import {tableDemo} from './doc-elements/table/Table.demo'
@@ -83,6 +83,8 @@ import {snippetPresentationDemo} from "./doc-elements/code-snippets/Presentation
 import {snippetWithScrollPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippetWithScroll.demo";
 import {presentationStickySlidesDemo} from "./doc-elements/presentation/PresentationStickySlides.demo";
 import {snippetsWithInlineCommentsDemo} from "./doc-elements/code-snippets/CodeSnippetWithInlineComments.demo";
+import {notAuthorizedDemo} from "./screens/not-authorized/NotAuthorizedScreen.demo";
+import {iframeDemo} from './doc-elements/iframe/Iframe.demo';
 
 const docMeta = {
     id: 'preview',
@@ -114,9 +116,9 @@ registries.add('text')
 registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
     .registerAsGrid('Code Snippet With Bullets', 0, snippetsWithInlineCommentsDemo)
-    .registerAsGrid('Inlined Code', 0, inlinedCodeDemo)
+    .registerAsGrid('Code Snippet Syntax Highlight ', 0, syntaxHighlightSnippetDemo)
     .registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)
-    .registerAsGrid('Yaml Code Snippet', 0, yamlSnippetDemo)
+    .registerAsGrid('Inlined Code', 0, inlinedCodeDemo)
     .registerAsGrid('Json', 0, jsonDemo)
     .registerAsGrid('Xml', 0, xmlDemo)
     .registerAsGrid('Latex', 0, latexDemo)
@@ -140,6 +142,7 @@ registries.add('visuals')
     .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
     .registerAsRows('Diagram Legend', diagramLegendDemo)
     .registerAsGrid('Keyboard shortcuts', 0, keyboardShortcutsDemo)
+    .registerAsGrid('Iframe', 0, iframeDemo)
 
 registries.add('layout')
     .registerAsTabs('Pages', pagesDemo)
@@ -173,6 +176,7 @@ registries.add('preview')
 registries.add('screens')
     .registerAsTabs('Documentation Preparation', documentationPreparationDemo)
     .registerAsTabs('Landing', landingDemo)
+    .registerAsTabs('Not Authorized', notAuthorizedDemo)
     .registerAsTabs('Search Popup', searchPopupDemo)
 
 registries.add('end to end')

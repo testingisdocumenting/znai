@@ -14,14 +14,26 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.server.auth
+package org.testingisdocumenting.znai.server.auth;
 
-import org.junit.Test
+public class AuthorizationRequestLink {
+    private final String message;
+    private final String link;
 
-class BasicInjectedAuthenticationTest {
-    @Test
-    void "should extract user id from basic base64 auth with fake password"() {
-        def userId = BasicInjectedAuthentication.extractUserId("Basic QWxhZGRpbjpPcGVuU2VzYW1l==")
-        userId.should == 'Aladdin'
+    public AuthorizationRequestLink(String message, String link) {
+        this.message = message;
+        this.link = link;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public boolean isEmpty() {
+        return message.isEmpty() || link.isEmpty();
     }
 }

@@ -25,10 +25,12 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.impl.RoutingContextDecorator;
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.html.HtmlPage;
 import org.testingisdocumenting.znai.html.reactjs.HtmlReactJsPage;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
 import org.testingisdocumenting.znai.server.auth.AuthorizationHandlers;
+import org.testingisdocumenting.znai.server.auth.AuthorizationRequestLink;
 import org.testingisdocumenting.znai.server.auth.BasicInjectedAuthentication;
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationHandlers;
 import org.testingisdocumenting.znai.server.docpreparation.NoOpDocumentationPreparationProgress;
@@ -44,10 +46,12 @@ public class ZnaiServer {
     private final Vertx vertx;
     private final ReactJsBundle reactJsBundle;
     private final ZnaiServerConfig serverConfig;
+    private final AuthenticationHandler authenticationHandler;
 
-    public ZnaiServer(ReactJsBundle reactJsBundle, Path deployRoot) {
+    public ZnaiServer(ReactJsBundle reactJsBundle, Path deployRoot, AuthenticationHandler authenticationHandler) {
         this.reactJsBundle = reactJsBundle;
         this.serverConfig = new ZnaiServerConfig(deployRoot);
+        this.authenticationHandler = authenticationHandler;
 
         System.setProperty("vertx.cwd", deployRoot.toString());
         System.setProperty("file.encoding","UTF-8");
@@ -110,7 +114,11 @@ public class ZnaiServer {
             String docId = extractDocId(ctx);
 
             if (!isAuthorized(ctx, docId)) {
-                ctx.fail(403);
+                if (isNotDocPageRequest(ctx)) {
+                    ctx.fail(403);
+                }
+
+                serverNotAuthorizedPage(ctx, docId);
                 return;
             }
 
@@ -132,14 +140,33 @@ public class ZnaiServer {
     }
 
     private boolean isAuthorized(RoutingContext ctx, String docId) {
-        String authorization = ctx.request().headers().get("Authorization");
-        String userId = BasicInjectedAuthentication.extractUserId(authorization);
+        String userId = authenticationHandler.authenticate(ctx, docId);
+        if (userId.isEmpty()) {
+            return true;
+        }
 
         return AuthorizationHandlers.isAuthorized(userId, docId);
     }
 
     private void redirectToTrailingSlash(RoutingContext ctx) {
         ctx.response().putHeader("location", ctx.request().uri() + "/").setStatusCode(301).end();
+    }
+
+    private void serverNotAuthorizedPage(RoutingContext ctx, String docId) {
+        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(reactJsBundle);
+        Map<String, Object> props = new LinkedHashMap<>();
+
+        props.put("docId", docId);
+        props.put("allowedGroups", AuthorizationHandlers.allowedGroups(docId));
+
+        AuthorizationRequestLink authorizationRequestLink = AuthorizationHandlers.authorizationRequestLink();
+        props.put("authorizationRequestLink", authorizationRequestLink.getLink());
+        props.put("authorizationRequestMessage", authorizationRequestLink.getMessage());
+
+        HtmlPage htmlPage = htmlReactJsPage.create(docId + ": Not Authorized",
+                "NotAuthorizedScreen", props, () -> "", FavIcons.DEFAULT_ICON_PATH);
+
+        ctx.response().end(htmlPage.render(docId));
     }
 
     private void serveDocumentationPreparationPage(RoutingContext ctx, String docId) {

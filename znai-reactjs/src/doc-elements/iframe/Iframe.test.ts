@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.server.auth
+import { calcAspectRatioPaddingTop } from './Iframe';
 
-import org.junit.Test
+test('calc aspect ratio padding', () => {
+  expect(calcAspectRatioPaddingTop("16:9")).toEqual('56.25%')
+  expect(calcAspectRatioPaddingTop("4:3")).toEqual('75.00%')
+  expect(calcAspectRatioPaddingTop("3:2")).toEqual('66.67%')
+})
 
-class BasicInjectedAuthenticationTest {
-    @Test
-    void "should extract user id from basic base64 auth with fake password"() {
-        def userId = BasicInjectedAuthentication.extractUserId("Basic QWxhZGRpbjpPcGVuU2VzYW1l==")
-        userId.should == 'Aladdin'
-    }
-}
+test('defaults to 16:9 if no valid value is provided', () => {
+  const defaultTop = '56.25%'
+  expect(calcAspectRatioPaddingTop(":9")).toEqual(defaultTop)
+  expect(calcAspectRatioPaddingTop("4:")).toEqual(defaultTop)
+  expect(calcAspectRatioPaddingTop("")).toEqual(defaultTop)
+})

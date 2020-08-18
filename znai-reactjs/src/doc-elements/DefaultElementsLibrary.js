@@ -64,6 +64,7 @@ import LangClass from './lang/LangClass'
 import LangFunction from './lang/LangFunction'
 import ApiParameters from './api/ApiParameters'
 import OpenApiOperation from './open-api/operation/OpenApiOperation'
+import {Iframe} from './iframe/Iframe';
 import JupyterCell from './jupyter/JupyterCell'
 import {Spoiler} from './spoiler/Spoiler'
 import {registerDocUtilsElements} from './doc-utils/DocUtils'
@@ -162,6 +163,8 @@ library.JsxGroup = JsxGroup
 
 library.Svg = Svg
 presentationElementHandlers.Svg = presentationSvgHandler
+
+library.Iframe = Iframe
 
 library.Page = Page
 presentationElementHandlers.Page = presentationPageHandler
