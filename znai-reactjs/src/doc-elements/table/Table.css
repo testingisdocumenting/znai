@@ -14,64 +14,76 @@
  * limitations under the License.
  */
 
-.simple-table {
+.znai-table-wrapper {
     margin: 20px auto;
-}
-
-.simple-table table {
-    table-layout: fixed;
-}
-
-.simple-table td .content-block {
-    width: auto;
-}
-
-.simple-table td .snippet-container {
     overflow-x: auto;
 }
 
-.simple-table .ui.table {
+.znai-table-wrapper td .content-block {
+    width: auto;
+}
+
+.znai-table-wrapper td .snippet-container {
+    overflow-x: auto;
+}
+
+.znai-table td,
+.znai-table th {
+    padding: 0.7em 0.7em;
+}
+
+.znai-table {
     background: var(--znai-table-body-background-color);
     border: 1px solid var(--znai-table-border-color);
     color: var(--znai-table-text-color);
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    width: 100%;
 }
 
-.simple-table .ui.table thead th {
+.znai-table thead th {
     background: var(--znai-table-header-background-color);
     color: var(--znai-table-text-color);
 }
 
-.simple-table td {
+.znai-table thead tr > th:first-child,
+.znai-table tbody tr > td:first-child {
+    border-left: none;
+}
+
+.znai-table td {
     word-break: break-word;
 }
 
-.simple-table .ui.celled.table tr td {
+.znai-table tr td {
     border-left: 1px solid var(--znai-table-border-color);
     border-top: 1px solid var(--znai-table-border-color);
 }
 
-.simple-table .table > thead > tr > th {
+.znai-table > thead > tr > th {
     border-bottom: none;
 }
 
-.simple-table .middle-vertical-lines-only thead th {
+.znai-table-wrapper .middle-vertical-lines-only thead th {
     padding: 5px 20px;
     border-right: solid 1px var(--znai-table-border-color);
     vertical-align: top;
 }
 
-.simple-table .middle-vertical-lines-only thead th:last-child {
+.znai-table-wrapper .middle-vertical-lines-only thead th:last-child {
     border-right: none;
 }
 
-.simple-table .middle-vertical-lines-only tbody td {
+.znai-table-wrapper .middle-vertical-lines-only tbody td {
     padding: 5px 20px;
 
     border-right: solid 1px var(--znai-table-border-color);
     vertical-align: top;
 }
 
-.simple-table .no-vertical-padding tbody td {
+.znai-table-wrapper .no-vertical-padding tbody td {
     padding-top: 0;
     padding-bottom: 0;
 
@@ -79,26 +91,18 @@
     vertical-align: top;
 }
 
-.simple-table .middle-vertical-lines-only tbody td:last-child {
+.znai-table-wrapper .middle-vertical-lines-only tbody td:last-child {
     border-right: none;
 }
 
-.simple-table .ui.celled.table tr th {
+.znai-table tr th {
     border-left: 1px solid var(--znai-table-border-color);
-}
-
-.simple-table .ui.table {
-    margin: 0;
-}
-
-.ui.table.with-title {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
 }
 
 .znai-table-title {
     color: var(--znai-table-title-color);
     background-color: var(--znai-table-title-background-color);
+    width: 100%;
 
     border: 1px solid var(--znai-table-border-color);
     border-bottom: none;

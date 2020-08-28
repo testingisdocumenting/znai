@@ -28,6 +28,11 @@
         margin-right: calc(-1 *var(--znai-single-side-horizontal-min-spacing));
     }
 
+    .znai-table-wrapper {
+        margin-left: calc(-1 *var(--znai-single-side-horizontal-min-spacing));
+        margin-right: calc(-1 *var(--znai-single-side-horizontal-min-spacing));
+    }
+
     .snippet-container .title-container .title,
     .snippet-container .snippet {
         border: none;
