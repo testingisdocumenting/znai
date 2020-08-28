@@ -117,33 +117,33 @@ describe("codeUtils", () => {
                 [
                     ' ',
                     'http',
-                    { type: 'punctuation', content: '.' },
+                    {type: 'punctuation', content: '.'},
                     'get'
                 ],
                 [
                     '    ',
                     'body',
-                    { type: 'punctuation', content: '.' },
-                    { type: 'function', content: 'get' },
-                    { type: 'punctuation', content: '(' },
-                    { type: 'string', content: '"price"' },
-                    { type: 'punctuation', content: ')' },
+                    {type: 'punctuation', content: '.'},
+                    {type: 'function', content: 'get'},
+                    {type: 'punctuation', content: '('},
+                    {type: 'string', content: '"price"'},
+                    {type: 'punctuation', content: ')'},
                     ' ',
-                    { type: 'punctuation', content: '{' },
+                    {type: 'punctuation', content: '{'},
                 ],
                 [
                     '    ',
                     'body',
-                    { type: 'punctuation', content: '.' },
-                    { type: 'function', content: 'get' },
-                    { type: 'punctuation', content: '(' },
-                    { type: 'string', content: '"id"' },
-                    { type: 'punctuation', content: ')' },
-                   ' ',
-                    { type: 'punctuation', content: '{' },
+                    {type: 'punctuation', content: '.'},
+                    {type: 'function', content: 'get'},
+                    {type: 'punctuation', content: '('},
+                    {type: 'string', content: '"id"'},
+                    {type: 'punctuation', content: ')'},
+                    ' ',
+                    {type: 'punctuation', content: '{'},
                 ]])
         })
-    })
+    });
 
     it("converts line of tokens to a simple text", () => {
         const code = 'public class PreviewServer {'
@@ -204,7 +204,7 @@ describe("codeUtils", () => {
             const nonInlined = {"type": "comment", "content": "/*another \n comment line \nend of comment */"}
             const inlined = {"type": "comment", "content": "// comment line"}
 
-            expect(isCommentToken(nonInlined)).toBeFalsy()
+            expect(isCommentToken(nonInlined)).toBeTruthy()
             expect(isCommentToken(inlined)).toBeTruthy()
         })
 

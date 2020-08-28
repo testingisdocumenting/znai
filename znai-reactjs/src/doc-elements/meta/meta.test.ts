@@ -16,24 +16,24 @@
 
 import { presentationStickPlacement } from './meta';
 
-describe('presentationStickPlacement', () => {
+describe('stickySlide', () => {
   it('should have default 50% as percentage', () => {
-    const placement = presentationStickPlacement({presentationStickPlacement: 'left'});
+    const placement = presentationStickPlacement({stickySlide: 'left'});
     expect(placement).toEqual({left: true, top: false, percentage: 50, clear: false})
   })
 
   it('should extract percentage as a second parameter', () => {
-    const placement = presentationStickPlacement({presentationStickPlacement: 'top 25'});
+    const placement = presentationStickPlacement({stickySlide: 'top 25'});
     expect(placement).toEqual({left: false, top: true, percentage: 25, clear: false})
   })
 
   it('should strip percentage sign', () => {
-    const placement = presentationStickPlacement({presentationStickPlacement: 'left 45%'});
+    const placement = presentationStickPlacement({stickySlide: 'left 45%'});
     expect(placement).toEqual({left: true, top: false, percentage: 45, clear: false})
   })
 
   it('should detect sticky placement clear', () => {
-    const placement = presentationStickPlacement({presentationStickPlacement: 'clear'});
+    const placement = presentationStickPlacement({stickySlide: 'clear'});
     expect(placement).toEqual({left: false, top: false, percentage: 50, clear: true})
   })
 });
