@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,14 +18,14 @@
 package org.testingisdocumenting.znai.server.preview;
 
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.html.DocPageReactProps;
+import org.testingisdocumenting.znai.html.HtmlPageAndPageProps;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.structure.DocMeta;
-import org.testingisdocumenting.znai.website.TocAddedAndRemovedPages;
-import org.testingisdocumenting.znai.website.WebSite;
-import org.testingisdocumenting.znai.html.HtmlPageAndPageProps;
-import org.testingisdocumenting.znai.html.DocPageReactProps;
 import org.testingisdocumenting.znai.structure.TocItem;
 import org.testingisdocumenting.znai.utils.FileUtils;
+import org.testingisdocumenting.znai.website.TocAddedAndRemovedPages;
+import org.testingisdocumenting.znai.website.WebSite;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -35,8 +36,8 @@ import java.util.stream.Stream;
 import static org.testingisdocumenting.znai.console.ansi.Color.BLUE;
 
 public class PreviewPushFileChangeHandler implements FileChangeHandler {
-    private PreviewWebSocketHandler previewSocket;
-    private WebSite previewWebSite;
+    private final PreviewWebSocketHandler previewSocket;
+    private final WebSite previewWebSite;
 
     public PreviewPushFileChangeHandler(final PreviewWebSocketHandler previewSocket,
                                         final WebSite previewWebSite) {

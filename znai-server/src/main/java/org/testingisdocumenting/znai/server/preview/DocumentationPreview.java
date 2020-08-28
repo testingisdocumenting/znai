@@ -17,16 +17,15 @@
 
 package org.testingisdocumenting.znai.server.preview;
 
+import io.vertx.core.http.HttpServer;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.server.HttpServerUtils;
 import org.testingisdocumenting.znai.server.NoAuthenticationHandler;
 import org.testingisdocumenting.znai.server.ZnaiServer;
 import org.testingisdocumenting.znai.server.sockets.WebSocketHandlers;
 import org.testingisdocumenting.znai.website.WebSite;
-import io.vertx.core.http.HttpServer;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.nio.file.Path;
 
 public class DocumentationPreview {
@@ -48,7 +47,8 @@ public class DocumentationPreview {
         final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(
                 previewWebSocketHandler,
                 webSite);
-        server.listen(port);
+
+        HttpServerUtils.listen(server, port);
 
         reportPhase("initializing file watcher");
         final FileWatcher fileWatcher = new FileWatcher(
