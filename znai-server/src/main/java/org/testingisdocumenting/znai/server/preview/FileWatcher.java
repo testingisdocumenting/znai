@@ -19,8 +19,8 @@ package org.testingisdocumenting.znai.server.preview;
 
 import com.sun.nio.file.SensitivityWatchEventModifier;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
-import org.testingisdocumenting.znai.core.AuxiliaryFileListener;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.AuxiliaryFileListener;
 import org.testingisdocumenting.znai.structure.DocMeta;
 import org.testingisdocumenting.znai.website.WebSite;
 
@@ -30,9 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
-import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
+import static java.nio.file.StandardWatchEventKinds.*;
 
 public class FileWatcher implements AuxiliaryFileListener {
     private final WebSite.Configuration siteCfg;
@@ -153,7 +151,7 @@ public class FileWatcher implements AuxiliaryFileListener {
     private void registerDirs(final Path rootPath) {
         try {
             final Stream<Path> pathStream = Files.list(rootPath);
-            pathStream.filter(p -> Files.isDirectory(p)).forEach(this::register);
+            pathStream.filter(Files::isDirectory).forEach(this::register);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
