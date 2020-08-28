@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,18 +24,20 @@ const Table = ({table, ...props}) => {
     const tableStyles = table.styles || []
 
     const Row = ({row}) => {
-        return (<tr>
-            {row.map((v, idx) => {
-                const c = table.columns[idx]
-                const align = c.align ? c.align : 'left'
-                const width = c.width ? c.width : 'auto'
+        return (
+            <tr>
+                {row.map((v, idx) => {
+                    const c = table.columns[idx]
+                    const align = c.align ? c.align : 'left'
+                    const width = c.width ? c.width : 'auto'
 
-                const style = {textAlign: align, width: width}
-                const value = Array.isArray(v) ? <props.elementsLibrary.DocElement {...props} content={v}/> : v
+                    const style = {textAlign: align, width: width}
+                    const value = Array.isArray(v) ? <props.elementsLibrary.DocElement {...props} content={v}/> : v
 
-                return (<td key={idx} style={style}>{value}</td>)
-            })}
-        </tr>)
+                    return (<td key={idx} style={style}>{value}</td>)
+                })}
+            </tr>
+        )
     }
 
     const showHeader = tableStyles.indexOf('no-header') === -1
@@ -44,12 +47,11 @@ const Table = ({table, ...props}) => {
 
     const hasTitle = !!props.title
 
-    const tableClassName = (isCustomClassName ? tableStyles.join(' ') : 'ui celled padded table') +
-        (hasTitle ? ' with-title' : '') +
-        ' content-block'
+    const tableClassName = (isCustomClassName ? tableStyles.join(' ') : 'znai-table') +
+        (hasTitle ? ' with-title' : '')
 
     return (
-        <div className="simple-table content-block">
+        <div className="znai-table-wrapper content-block">
             <TableTitle title={props.title}/>
             <table className={tableClassName}>
                 <thead>

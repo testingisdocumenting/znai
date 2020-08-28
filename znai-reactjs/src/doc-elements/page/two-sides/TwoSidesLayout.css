@@ -46,7 +46,7 @@
     margin-top: 0;
 }
 
-.two-sides-section .page-two-sides-left-part:nth-child(3) .simple-table:first-child,
-.two-sides-section .page-two-sides-right-part:nth-child(4) .simple-table:first-child {
+.two-sides-section .page-two-sides-left-part:nth-child(3) .znai-table-wrapper:first-child,
+.two-sides-section .page-two-sides-right-part:nth-child(4) .znai-table-wrapper:first-child {
     margin-top: 0;
 }

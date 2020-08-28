@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +23,8 @@ import Table from './Table'
 export function tableDemo(registry) {
     registry
         .add('no style', () => <Table table={defaultStyle(twoColumnsData())} elementsLibrary={elementsLibrary}/>)
-        .add('with title', () => <Table table={defaultStyle(twoColumnsData())} title="User Data" elementsLibrary={elementsLibrary}/>)
+        .add('with title', () => <Table table={defaultStyle(twoColumnsData())} title="User Data"
+                                        elementsLibrary={elementsLibrary}/>)
         .add('no header, vertical only', () => <Table table={vertLinesOnly(twoColumnsData())}
                                                       elementsLibrary={elementsLibrary}/>)
         .add('no header, vertical only, no vertical padding', () => <Table table={noVertPadding(twoColumnsData())}
@@ -31,6 +33,12 @@ export function tableDemo(registry) {
                                                elementsLibrary={elementsLibrary}/>)
         .add('with code snippet', () => <Table table={defaultStyle(dataWithCodeSnippet())}
                                                elementsLibrary={elementsLibrary}/>)
+        .add('no style mobile multiple columns', () => (
+            <div style={{width: 300}}>
+                <Table table={fourColumns(fourColumnsData())} elementsLibrary={elementsLibrary}/>
+            </div>
+        ))
+
 }
 
 function defaultStyle(data) {
@@ -64,6 +72,17 @@ function twoColumns() {
     ]
 }
 
+function fourColumns(data) {
+    return {
+        columns: [
+            {title: 'Column__1', align: 'right'},
+            {title: 'Column__2', width: '50%'},
+            {title: 'Column 3'},
+            {title: 'Column 4'}],
+        data
+    }
+}
+
 function twoColumnsData() {
     return [
         [1, 2],
@@ -92,6 +111,15 @@ function twoColumnsData() {
     ]
 }
 
+function fourColumnsData() {
+    return [
+        [1, 2, 3, 5],
+        [5, 6, 7, 8],
+        ['hello', [{'text': 'Wesaw(todolink)howyoucanannotate images using ', 'type': 'SimpleText'}],
+            'hello', [{'text': 'We saw (todo link) how you can annotate images using ', 'type': 'SimpleText'}]],
+    ]
+}
+
 function dataWithLongInlinedCode() {
     return [
         [1, 2],
@@ -114,10 +142,10 @@ function dataWithCodeSnippet() {
         ['hello', [
             {
                 'snippet': 'class InternationalPriceService implements PriceService, AnotherInterface {\n' +
-                '    private static void main(String... args) {\n' +
-                '        ... // code goes here\n' +
-                '    } // code stops here\n' +
-                '}\n',
+                    '    private static void main(String... args) {\n' +
+                    '        ... // code goes here\n' +
+                    '    } // code stops here\n' +
+                    '}\n',
                 'lang': 'Java',
                 'type': 'Snippet',
                 'title': 'Snippet in a cell'
