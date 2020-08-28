@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +24,7 @@ describe("DocumentationNavigation", () => {
 
         expect(location.dirName).toEqual("section-name")
         expect(location.fileName).toEqual("page-title")
-        expect(location.pageSectionId).toEqual("page-section")
+        expect(location.anchorId).toEqual("page-section")
     })
 
     it("extracts page location from url without hash", () => {
@@ -31,7 +32,7 @@ describe("DocumentationNavigation", () => {
 
         expect(location.dirName).toEqual("section-name")
         expect(location.fileName).toEqual("page-title")
-        expect(location.pageSectionId).toEqual("")
+        expect(location.anchorId).toEqual("")
     })
 
     it("extracts page location from url where doc id consist of two parts", () => {
@@ -39,7 +40,7 @@ describe("DocumentationNavigation", () => {
 
         expect(location.dirName).toEqual("section-name")
         expect(location.fileName).toEqual("page-title")
-        expect(location.pageSectionId).toEqual("page-section")
+        expect(location.anchorId).toEqual("page-section")
     })
 
     it("extracts page location from url where doc id consist of two parts without hash", () => {

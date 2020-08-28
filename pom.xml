@@ -449,6 +449,20 @@
                         </execution>
 
                         <execution>
+                            <id>npm test</id>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                            <phase>generate-resources</phase>
+                            <configuration>
+                                <environmentVariables>
+                                    <CI>true</CI>
+                                </environmentVariables>
+                                <arguments>test</arguments>
+                            </configuration>
+                        </execution>
+
+                        <execution>
                             <id>Frontend production build</id>
                             <phase>generate-resources</phase>
                             <goals>

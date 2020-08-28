@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,17 +33,9 @@ describe('schemaToApiParameters', () => {
         }])
     })
 
-    it('flat object', () => {
-        const parameters = schemaToApiParameters(customerSchema)
-        expect(parameters).toEqual(expectedCustomerSchemaAsParameters)
-    })
-
     it('array of objects', () => {
         const parameters = schemaToApiParameters(customerSchema)
-        expect(parameters).toEqual([{
-            name: 'customers',
-            type: 'array of objects',
-            children: expectedCustomerSchemaAsParameters}])
+        expect(parameters).toEqual(expectedCustomerSchemaAsParameters)
     })
 
     it('nested object', () => {
@@ -50,7 +43,7 @@ describe('schemaToApiParameters', () => {
 
         expect(parameters).toEqual([
             {name: 'id', 'type': 'string', description: [{text: 'id of a customer', type: 'SimpleText'}]},
-            {name: 'confirmationIds', 'type': 'array of string'},
+            {name: 'confirmationIdsLongerTail', 'type': 'array of string'},
             {name: 'customer', type: 'object', description: [{text: 'Customer object', type: 'SimpleText'}], children: expectedCustomerSchemaAsParameters},
             {name: 'customers', type: 'array of objects', children: expectedCustomerSchemaAsParameters}])
     })
