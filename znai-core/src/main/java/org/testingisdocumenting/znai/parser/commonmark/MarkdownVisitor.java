@@ -225,14 +225,11 @@ public class MarkdownVisitor extends AbstractVisitor {
     }
 
     private String extractHeadingText(Heading heading) {
+        heading.accept(ValidateNoExtraSyntaxInHeadingVisitor.INSTANCE);
         Node firstChild = heading.getFirstChild();
 
         if (firstChild == null) {
             return "";
-        }
-
-        if (!(firstChild instanceof Text)) {
-            return "<only regular text is supported as part of heading>";
         }
 
         return extractText(firstChild);
