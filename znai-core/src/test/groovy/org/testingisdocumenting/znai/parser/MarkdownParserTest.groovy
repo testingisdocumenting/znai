@@ -225,6 +225,28 @@ world""")
     }
 
     @Test
+    void "top level section with styles"() {
+        code {
+            parse("# title with `backtick`")
+        } should throwException("only regular text is supported in headings")
+
+        code {
+            parse("# title *with*")
+        } should throwException("only regular text is supported in headings")
+    }
+
+    @Test
+    void "second level section with styles"() {
+        code {
+            parse("## title with `backtick`")
+        } should throwException("only regular text is supported in headings")
+
+        code {
+            parse("## title *with*")
+        } should throwException("only regular text is supported in headings")
+    }
+
+    @Test
     void "inlined image"() {
         TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 300000
 
