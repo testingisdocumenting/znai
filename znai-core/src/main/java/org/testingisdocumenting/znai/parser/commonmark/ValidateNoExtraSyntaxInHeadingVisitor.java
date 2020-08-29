@@ -57,11 +57,6 @@ class ValidateNoExtraSyntaxInHeadingVisitor extends AbstractVisitor {
     }
 
     @Override
-    public void visit(Heading heading) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
     public void visit(ThematicBreak thematicBreak) {
         onlyRegularTextAllowed();
     }
