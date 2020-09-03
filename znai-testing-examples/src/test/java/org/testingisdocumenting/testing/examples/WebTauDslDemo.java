@@ -31,8 +31,8 @@ public class WebTauDslDemo {
         browser.open("http://google.com");
 
         browser.doc.withAnnotations(
-                badge(signIn),
-                highlight(input).withColor("green"),
-                arrow(search, "Click This").withColor("yellow")).capture("test");
+                browser.doc.badge(signIn),
+                browser.doc.highlight(input).withColor("green"),
+                browser.doc.arrow(search, "Click This").withColor("yellow")).capture("test");
     }
 }

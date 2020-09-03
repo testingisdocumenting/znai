@@ -127,30 +127,30 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <groovy.version>2.5.7</groovy.version>
-        <vertx.io.version>3.5.4</vertx.io.version>
-        <commonmark.version>0.9.0</commonmark.version>
-        <antlr.version>4.5</antlr.version>
-        <jackson.verson>2.10.1</jackson.verson>
-        <webtau.version>1.21.1</webtau.version>
+        <vertx.io.version>3.9.2</vertx.io.version>
+        <commonmark.version>0.15.2</commonmark.version>
+        <antlr.version>4.8-1</antlr.version>
+        <jackson.verson>2.11.2</jackson.verson>
+        <webtau.version>1.28</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
-        <ant.version>1.10.5</ant.version>
+        <ant.version>1.10.8</ant.version>
         <ant-compress.version>1.5</ant-compress.version>
-        <jsoup.version>1.10.2</jsoup.version>
-        <freemarker.version>2.3.23</freemarker.version>
-        <commons-io.version>2.6</commons-io.version>
+        <jsoup.version>1.13.1</jsoup.version>
+        <freemarker.version>2.3.30</freemarker.version>
+        <commons-io.version>2.7</commons-io.version>
         <commons-cli.version>1.4</commons-cli.version>
-        <commons-csv.version>1.4</commons-csv.version>
-        <commons-compress.version>1.19</commons-compress.version>
-        <commons-lang3.version>3.5</commons-lang3.version>
-        <commons-codec.version>1.4</commons-codec.version>
+        <commons-csv.version>1.8</commons-csv.version>
+        <commons-compress.version>1.20</commons-compress.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
+        <commons-codec.version>1.15</commons-codec.version>
         <plantuml.version>1.2020.16</plantuml.version>
         <json-path.version>2.4.0</json-path.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <junit.version>4.12</junit.version>
-        <javaparser-core.version>3.15.9</javaparser-core.version>
-        <jakarta.xml.bind-api.version>2.3.2</jakarta.xml.bind-api.version>
-        <httpcore.version>4.4.3</httpcore.version>
-        <httpclient.version>4.5.6</httpclient.version>
+        <junit.version>4.13</junit.version>
+        <javaparser-core.version>3.16.1</javaparser-core.version>
+        <jakarta.xml.bind-api.version>2.3.3</jakarta.xml.bind-api.version>
+        <httpcore.version>4.4.13</httpcore.version>
+        <httpclient.version>4.5.12</httpclient.version>
     </properties>
 
     <dependencyManagement>
@@ -254,7 +254,7 @@
             <dependency>
                 <groupId>com.github.ben-manes.caffeine</groupId>
                 <artifactId>caffeine</artifactId>
-                <version>2.8.4</version>
+                <version>2.8.5</version>
             </dependency>
 
             <dependency>
