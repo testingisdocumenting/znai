@@ -143,7 +143,7 @@
         <commons-compress.version>1.20</commons-compress.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <commons-codec.version>1.15</commons-codec.version>
-        <plantuml.version>1.2017.16</plantuml.version>
+        <plantuml.version>1.2020.16</plantuml.version>
         <json-path.version>2.4.0</json-path.version>
         <slf4j.version>1.7.30</slf4j.version>
         <junit.version>4.13</junit.version>

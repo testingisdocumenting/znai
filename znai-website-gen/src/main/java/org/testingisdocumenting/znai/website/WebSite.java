@@ -65,15 +65,15 @@ public class WebSite {
     private final Configuration cfg;
 
     private Map<TocItem, Page> pageByTocItem;
-    private GlobalSearchEntries globalSearchEntries;
-    private LocalSearchEntries localSearchEntries;
+    private final GlobalSearchEntries globalSearchEntries;
+    private final LocalSearchEntries localSearchEntries;
 
     private TableOfContents toc;
     private final GlobalDocReferences globalDocReferences;
     private WebSiteDocStructure docStructure;
     private Footer footer;
     private Map<TocItem, DocPageReactProps> pagePropsByTocItem;
-    private List<WebResource> registeredExtraJavaScripts;
+    private final List<WebResource> registeredExtraJavaScripts;
     private List<WebResource> extraJavaScriptsInFront;
     private List<WebResource> extraJavaScriptsInBack;
 
@@ -313,7 +313,7 @@ public class WebSite {
         pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, reactJsBundle);
         markupParser = markupParsingConfiguration.createMarkupParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
-        pagePropsByTocItem = new HashMap<>();
+        pagePropsByTocItem = new LinkedHashMap<>();
         extraJavaScriptsInFront = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScriptsInFront.add(globalAssetsJavaScript);
 

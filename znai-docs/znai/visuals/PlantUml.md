@@ -26,3 +26,10 @@ left:
 right:
 :include-plantuml: demo.plantuml
 ```
+
+# Gantt Example
+
+:include-file: gantt.plantuml {title: "gantt sequence"}
+
+:include-plantuml: gantt.plantuml
+    
