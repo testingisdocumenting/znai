@@ -126,7 +126,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <groovy.version>2.5.7</groovy.version>
+        <groovy.version>2.5.13</groovy.version>
         <vertx.io.version>3.9.2</vertx.io.version>
         <commonmark.version>0.15.2</commonmark.version>
         <antlr.version>4.8-1</antlr.version>
