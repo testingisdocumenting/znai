@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +30,7 @@ public class PlantUml {
 
         try {
             final ByteArrayOutputStream os = new ByteArrayOutputStream();
-            reader.generateImage(os, new FileFormatOption(FileFormat.SVG));
+            reader.outputImage(os, new FileFormatOption(FileFormat.SVG));
             os.close();
 
             return os.toString(String.valueOf(StandardCharsets.UTF_8));
