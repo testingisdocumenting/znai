@@ -20,8 +20,7 @@ import React from 'react'
 import 'semantic-ui-css/components/label.css'
 
 import LineOfTokens from './LineOfTokens'
-import BulletExplanations from './BulletExplanations'
-import CircleBadge from './CircleBadge'
+import CircleBadge from './explanations/CircleBadge'
 
 import {isAllAtOnce} from '../meta/meta'
 import {
@@ -36,18 +35,8 @@ import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'
 
 import './CodeSnippetWithInlineComments.css'
 
-const Explanations = ({spoiler, isPresentation, slideIdx, comments}) => {
-    if (isPresentation || comments.length === 0) {
-        return null
-    }
-
-    return <BulletExplanations spoiler={spoiler}
-                               comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
-}
-
-const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentation, meta, slideIdx}) => {
+const CodeSnippetWithInlineComments = ({tokens, references, isPresentation, meta, slideIdx}) => {
     const lines = collapseCommentsAboveToMakeCommentOnTheCodeLine(splitTokensIntoLines(tokens))
-    const comments = findComments(lines)
 
     const idxOfLinesWithComments = []
     const bulletIdxesPerLineIdx = []
@@ -72,7 +61,7 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentat
                 {lines.map((line, idx) => {
                     const bulletIdxForLine = bulletIdxesPerLineIdx[idx]
                     const lineToRender = bulletIdxForLine ?
-                        removeCommentAtTheEnd(line):
+                        removeCommentAtTheEnd(line) :
                         line
 
                     return <LineOfTokens key={idx}
@@ -83,17 +72,12 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentat
                                          endOfLineRender={() => {
                                              const bulletIdxForLine = bulletIdxesPerLineIdx[idx]
                                              return bulletIdxForLine ?
-                                                 <CircleBadge idx={bulletIdxForLine} className="left-margin"/>:
+                                                 <CircleBadge idx={bulletIdxForLine} className="left-margin"/> :
                                                  null
                                          }}
                     />
                 })}
             </pre>
-
-            <Explanations isPresentation={isPresentation}
-                          slideIdx={slideIdx}
-                          spoiler={spoiler}
-                          comments={comments}/>
         </div>
     )
 
@@ -114,19 +98,6 @@ const CodeSnippetWithInlineComments = ({tokens, spoiler, references, isPresentat
 
         const lineIdxToHighlight = highlightIsVisible ? idxOfLinesWithComments[slideIdx - 1] : -1
         return lineIdxToHighlight === idx
-    }
-
-    function findComments(lines) {
-        const result = []
-        lines.forEach(line => {
-            line.forEach(token => {
-                if (isCommentToken(token)) {
-                    result.push(token)
-                }
-            })
-        })
-
-        return result
     }
 }
 

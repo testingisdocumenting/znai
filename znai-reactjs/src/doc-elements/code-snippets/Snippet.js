@@ -17,7 +17,12 @@
 
 import * as React from "react"
 
-import {isCommentToken, splitTokensIntoLines} from './codeUtils'
+import {
+    collapseCommentsAboveToMakeCommentOnTheCodeLine,
+    findComments,
+    isCommentToken,
+    splitTokensIntoLines
+} from './codeUtils'
 import {isAllAtOnce} from '../meta/meta'
 import {convertToList} from '../propsUtils';
 
@@ -28,28 +33,54 @@ import SimpleCodeSnippet from './SimpleCodeSnippet'
 import {parseCode} from './codeParser'
 import {countNumberOfLines} from "../../utils/strings";
 
+import BulletExplanations from './explanations/BulletExplanations';
+
 import './Snippet.css'
 
 const defaultNumberOfVisibleLines = 25
 
+const bulletCommentsType = 'inline'
+
 const Snippet = (props) => {
     const tokensToUse = parseCodeWithCompatibility({lang: props.lang, snippet: props.snippet, tokens: props.tokens})
 
-    const snippetComponent = props.commentsType === 'inline' ?
+    const renderBulletComments = props.commentsType === bulletCommentsType;
+
+    const snippetComponent = renderBulletComments ?
         CodeSnippetWithInlineComments :
         SimpleCodeSnippet
 
-    const linesOfCode = splitTokensIntoLines(tokensToUse)
-    return <SnippetContainer {...props}
-                             tokens={tokensToUse}
-                             linesOfCode={linesOfCode}
-                             scrollToLineIdx={scrollToLineIdx(props)}
-                             snippetComponent={snippetComponent}/>
+    const linesOfCode = renderBulletComments ?
+        collapseCommentsAboveToMakeCommentOnTheCodeLine(splitTokensIntoLines(tokensToUse)):
+        splitTokensIntoLines(tokensToUse)
+
+    const comments = findComments(linesOfCode)
+
+    return (
+        <>
+            <SnippetContainer {...props}
+                              tokens={tokensToUse}
+                              linesOfCode={linesOfCode}
+                              scrollToLineIdx={scrollToLineIdx(props)}
+                              snippetComponent={snippetComponent}/>
+            <Explanations comments={comments} {...props}/>
+        </>
+    )
 }
 
 Snippet.defaultProps = {
     numberOfVisibleLines: defaultNumberOfVisibleLines
 }
+
+function Explanations({commentsType, spoiler, isPresentation, slideIdx, comments}) {
+    if (commentsType !== bulletCommentsType || isPresentation || comments.length === 0) {
+        return null
+    }
+
+    return <BulletExplanations spoiler={spoiler}
+                               comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
+}
+
 
 function scrollToLineIdx({isPresentation, slideIdx, numberOfVisibleLines}) {
     if (!isPresentation || !numberOfVisibleLines) {
