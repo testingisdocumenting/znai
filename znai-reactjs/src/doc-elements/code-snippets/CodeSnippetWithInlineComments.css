@@ -42,8 +42,7 @@
 
 .code-bullets.hidden-explanation {
     background-color: var(--znai-snippets-explanation-background-color);
-    border-top: var(--znai-snippets-outer-border-color) 1px solid;
-    border-bottom: var(--znai-snippets-outer-border-color) 1px solid;
+    border: var(--znai-snippets-outer-border-color) 1px solid;
     padding: 0;
     cursor: pointer;
 }

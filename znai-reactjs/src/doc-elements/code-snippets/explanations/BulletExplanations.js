@@ -19,7 +19,7 @@ import React, {Component} from 'react'
 
 import CircleBadge from './CircleBadge'
 
-import {trimComment} from './codeUtils'
+import {trimComment} from '../codeUtils'
 
 const Bullet = ({comment, idx}) => {
     return (
@@ -40,7 +40,7 @@ class BulletExplanations extends Component {
         const {comments} = this.props
         const {hidden} = this.state
 
-        const className = "code-bullets" + (hidden ? " hidden-explanation": "")
+        const className = "content-block code-bullets" + (hidden ? " hidden-explanation": "")
         const spoilerMessage = hidden ? (
             <div className="spoiler-message">Press to reveal</div>
         ) : null

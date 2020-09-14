@@ -78,7 +78,7 @@ function htmlCode() {
 }
 
 function wideCode() {
-    return 'class InternationalPriceService implements PriceService {\n' +
+    return 'class InternationalPriceService implements PriceService { // classic\n' +
         '    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n' +
         '        ...\n' +
         '    }\n' +

@@ -117,6 +117,19 @@ export function trimComment(comment) {
     return trimmed.substr(commentWidth(trimmed)).trim()
 }
 
+export function findComments(lines) {
+    const result = []
+    lines.forEach(line => {
+        line.forEach(token => {
+            if (isCommentToken(token)) {
+                result.push(token)
+            }
+        })
+    })
+
+    return result
+}
+
 function commentWidth(comment) {
     if (comment.startsWith('//')) {
         return 2;
