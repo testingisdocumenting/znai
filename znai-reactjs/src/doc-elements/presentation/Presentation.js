@@ -2,7 +2,7 @@
  * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -18,10 +18,13 @@
 import React, {Component} from 'react'
 
 import {Icon} from '../icons/Icon'
-import {SlidesLayout} from "./SlidesLayout";
-import {SlideNotePanel} from "./SlideNotePanel";
+import {SlideNotePanel} from "./SlideNotePanel"
+
+import {PresenterMode} from './PresenterMode'
+import {presentationBroadcast} from './presentationBroadcastChannel'
 
 import './Presentation.css'
+import {SlidePanel} from './SlidePanel';
 
 const maxScaleRatio = 3
 
@@ -31,13 +34,12 @@ class Presentation extends Component {
 
         this.state = {
             currentSlideIdx: this.props.slideIdx || this.findSlideIdxBySectionId() || 0,
-            presentationArea: undefined
         }
     }
 
     render() {
         const {docMeta, presentationRegistry} = this.props
-        const {currentSlideIdx, presentationArea} = this.state
+        const {currentSlideIdx} = this.state
 
         const {pageTitle, sectionTitle} = presentationRegistry.extractCombinedSlideInfo(currentSlideIdx - 1)
 
@@ -61,7 +63,11 @@ class Presentation extends Component {
                         <div className="presentation-section-title">{isSectionTitleOnSlide ? null : sectionTitle}</div>
                     </div>
 
-                    <div className="controls">
+                    <div className="znai-presentation-controls">
+                        <div className="znai-presenter-mode-toggle" onClick={this.togglePresenterMode}>
+                            <Icon id="monitor"/>
+                        </div>
+
                         <div className="slide-number">
                             {currentSlideIdx + 1}/{presentationRegistry.numberOfSlides}
                         </div>
@@ -70,52 +76,62 @@ class Presentation extends Component {
                     </div>
                 </div>
 
-                <div ref={this.savePresentationAreaDimension} className="znai-presentation-slides-area">
-                    {presentationArea && (<SlidesLayout presentationRegistry={presentationRegistry}
-                                                        currentSlideIdx={currentSlideIdx}
-                                                        maxScaleRatio={maxScaleRatio}
-                                                        presentationArea={presentationArea}/>)
-                    }
-                </div>
+                {this.determineIsPresenterMode() ?
+                    this.renderPresenterContent():
+                    this.renderPresentationContent(slide)}
+            </div>
+        )
+    }
+
+    renderPresentationContent(slide) {
+        const {presentationRegistry} = this.props
+        const {currentSlideIdx} = this.state
+
+        return (
+            <>
+                <SlidePanel presentationRegistry={presentationRegistry}
+                            currentSlideIdx={currentSlideIdx}
+                            maxScaleRatio={maxScaleRatio}/>
 
                 <SlideNotePanel key={slide.componentIdx}
                                 presentationRegistry={presentationRegistry}
                                 pageLocalSlideIdx={currentSlideIdx}
                                 slide={slide}/>
-            </div>
+
+            </>
         )
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.currentSlideIdx === this.state.currentSlideIdx) {
-            return
-        }
+    renderPresenterContent() {
+        const {presentationRegistry} = this.props
+        const {currentSlideIdx} = this.state
 
-        this.setState({
-            presentationArea: this.calcPresentationArea()
-        })
+        return <PresenterMode presentationRegistry={presentationRegistry} slideIdx={currentSlideIdx}/>
     }
 
-    calcPresentationArea = () => {
-        if (!this.presentationAreaNode) {
-            return undefined
-        }
 
-        return {
-            width: this.presentationAreaNode.offsetWidth,
-            height: this.presentationAreaNode.offsetHeight
-        }
+    determineIsPresenterMode() {
+        const queryParams = new URLSearchParams(window.location.search)
+        return queryParams.has('presenter')
     }
 
-    savePresentationAreaDimension = (node) => {
-        this.presentationAreaNode = node
-        this.setState({
-            presentationArea: this.calcPresentationArea()
-        })
+    togglePresenterMode = () => {
+        const queryParams = new URLSearchParams(window.location.search)
+
+        if (this.determineIsPresenterMode()) {
+            queryParams.delete('presenter')
+        } else {
+            queryParams.set('presenter', 'true')
+        }
+
+        window.location.search = queryParams.toString()
     }
 
     componentDidMount() {
         document.addEventListener("keydown", this.keyDownHandler)
+        presentationBroadcast.subscribe((message) => {
+            this.setState({currentSlideIdx: message.data.slideIdx})
+        })
     }
 
     componentWillUnmount() {
@@ -126,15 +142,15 @@ class Presentation extends Component {
         const {presentationRegistry} = this.props
         if (this.scrollToLastWithinPage && presentationRegistry !== props.presentationRegistry) {
             this.scrollToLastWithinPage = false
-            this.setState({currentSlideIdx: props.presentationRegistry.numberOfSlides - 1})
+            this.setSlideIdx(props.presentationRegistry.numberOfSlides - 1)
         }
     }
 
     keyDownHandler = (e) => {
         if (e.code === "ArrowRight" || e.code === "PageDown" || e.code === "Space") {
-            this.incrementSlide();
+            this.incrementSlide()
         } else if (e.code === "ArrowLeft" || e.code === "PageUp") {
-            this.decrementSlide();
+            this.decrementSlide()
         }
     }
 
@@ -158,9 +174,8 @@ class Presentation extends Component {
             this.scrollToLastWithinPage = true
             onPrevPage()
         } else {
-            this.setState({currentSlideIdx: newSlideIdx})
+            this.setSlideIdx(newSlideIdx)
         }
-
     }
 
     incrementSlide() {
@@ -170,12 +185,17 @@ class Presentation extends Component {
 
         if (newSlideIdx >= presentationRegistry.numberOfSlides) {
             if (hasNextPage) {
-                this.setState({currentSlideIdx: 0})
+                this.setSlideIdx(0)
                 onNextPage()
             }
         } else {
-            this.setState({currentSlideIdx: newSlideIdx})
+            this.setSlideIdx(newSlideIdx)
         }
+    }
+
+    setSlideIdx(newIdx) {
+        this.setState({currentSlideIdx: newIdx})
+        presentationBroadcast.sendMessage({slideIdx: newIdx})
     }
 
     findSlideIdxBySectionId() {
