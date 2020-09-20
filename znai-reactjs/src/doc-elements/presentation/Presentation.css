@@ -64,7 +64,7 @@
     color: var(--znai-presentation-title-divider);
 }
 
-.presentation .header .controls {
+.znai-presentation-controls {
     display: flex;
     flex: 0 0 80px;
     align-items: center;
@@ -74,15 +74,15 @@
     color: var(--znai-presentation-slide-info-color);
 }
 
-.presentation .header .controls .close {
+.znai-presentation-controls .close {
     color: var(--znai-presentation-slide-info-color);
     margin: 20px;
     cursor: pointer;
 }
 
-.znai-presentation-slides-area {
-    flex: 1;
-    overflow-y: hidden;
+.znai-presenter-mode-toggle {
+    cursor: pointer;
+    margin-right: 16px;
 }
 
 .presentation .content-block {
