@@ -17,11 +17,28 @@
 
 import React from 'react'
 import EmbeddedAnnotatedImage from './EmbeddedAnnotatedImage'
+import {elementsLibrary} from '../DefaultElementsLibrary';
 
 export function imageDemo(registry) {
+
+    registry.add('standard image', () => (
+        <div style={{width: 300, overflow: 'hidden'}}>
+            <elementsLibrary.DocElement content={[standardImage()]}
+                                        elementsLibrary={elementsLibrary}/>
+        </div>
+    ))
     registry.add('simple annotations', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}/>)
     registry.add('left aligned', () => <EmbeddedAnnotatedImage {...leftAlign()}/>)
     registry.add('right aligned', () => <EmbeddedAnnotatedImage {...rightAlign()}/>)
+}
+
+function standardImage() {
+    return {
+        type: 'AnnotatedImage',
+        imageSrc: 'ui.jpg',
+        width: 800,
+        height: 400
+    }
 }
 
 function simpleAnnotations() {

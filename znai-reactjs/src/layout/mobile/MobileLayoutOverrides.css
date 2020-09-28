@@ -23,6 +23,8 @@
         max-width: 100%;
     }
 
+    .znai-image,
+    .embedded-annotated-image,
     .snippet-container {
         margin-left: calc(-1 *var(--znai-single-side-horizontal-min-spacing));
         margin-right: calc(-1 *var(--znai-single-side-horizontal-min-spacing));

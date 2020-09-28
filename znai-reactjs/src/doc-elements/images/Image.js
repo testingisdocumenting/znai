@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +18,10 @@
 import React from 'react'
 import {imageAdditionalPreviewUrlParam} from './imagePreviewAdditionalUrlParam'
 
+import './Image.css'
+
 const Image = ({destination, inlined, isNarrow, timestamp}) => {
-    const className = "image" + (inlined ? " inlined" : "")
+    const className = "znai-image" + (inlined ? " inlined" : "")
         + (isNarrow ? " content-block" : "")
 
     const alt = `image ${destination} was not found`
