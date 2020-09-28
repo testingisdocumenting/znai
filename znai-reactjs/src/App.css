@@ -253,19 +253,6 @@ body {
     margin-right: calc(-1 * var(--znai-single-side-horizontal-min-spacing));
 }
 
-.image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.image.inlined {
-    display: inline-block;
-}
-
 hr {
     border: none;
     border-top: 1px solid var(--znai-horizontal-rule-color);
