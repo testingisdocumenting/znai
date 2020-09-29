@@ -129,7 +129,7 @@
         <groovy.version>2.5.13</groovy.version>
         <vertx.io.version>3.9.2</vertx.io.version>
         <commonmark.version>0.15.2</commonmark.version>
-        <antlr.version>4.8-1</antlr.version>
+        <antlr.version>4.5</antlr.version>
         <jackson.verson>2.11.2</jackson.verson>
         <webtau.version>1.28</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
