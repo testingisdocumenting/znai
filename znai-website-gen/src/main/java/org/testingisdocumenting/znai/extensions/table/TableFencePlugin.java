@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
@@ -41,11 +42,12 @@ public class TableFencePlugin implements FencePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         MarkupParser parser = componentsRegistry.defaultParser();
         String fileName = pluginParams.getFreeParam();
 
         docElementFromParams = new TableDocElementFromParams(pluginParams, parser,
-                componentsRegistry.resourceResolver().fullPath(fileName), content);
+                resourcesResolver, resourcesResolver.fullPath(fileName), content);
         return docElementFromParams.create();
     }
 

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +17,7 @@
 
 package org.testingisdocumenting.znai.extensions.api;
 
-import org.testingisdocumenting.znai.parser.table.CsvParser;
+import org.testingisdocumenting.znai.parser.table.CsvTableParser;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
@@ -45,7 +46,7 @@ public class ApiParametersCsvParser {
     }
 
     public ApiParameters parse() {
-        MarkupTableData tableData = CsvParser.parseWithHeader(csvContent, "name", "type", "description");
+        MarkupTableData tableData = CsvTableParser.parseWithHeader(csvContent, "name", "type", "description");
         tableData.forEachRow(this::parseRow);
 
         return apiParameters;

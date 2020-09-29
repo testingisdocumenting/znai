@@ -37,9 +37,9 @@ All the following content will go to the right side. At the start of a new secti
 Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side.
 :include-empty-block: {rightSide: true}
 
-:include-table: layout/table.csv
+:include-table: layout/table/table.csv
 :include-meta: {rightSide: true}
-:include-file: layout/table.csv
+:include-file: layout/table/table.csv
 
 :include-meta: {rightSide: false}
 
@@ -48,8 +48,8 @@ Table and code snippets above are aligned by using an empty block on the right s
 
 # Single Data Block Shortcut
 
-:include-table: layout/table.csv
-:include-file: layout/table.csv  {rightSide: true}
+:include-table: layout/table/table.csv
+:include-file: layout/table/table.csv  {rightSide: true}
 
 :include-meta: {rightSide: false}
 

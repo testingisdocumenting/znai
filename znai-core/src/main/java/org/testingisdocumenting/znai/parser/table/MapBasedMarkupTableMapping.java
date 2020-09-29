@@ -1,6 +1,5 @@
 /*
  * Copyright 2020 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +14,19 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.reference;
+package org.testingisdocumenting.znai.parser.table;
 
-import org.testingisdocumenting.znai.parser.table.CsvTableParser;
-import org.testingisdocumenting.znai.parser.table.MarkupTableData;
+import java.util.Map;
 
-public class DocReferencesParser {
-    private DocReferencesParser() {
+public class MapBasedMarkupTableMapping implements MarkupTableDataMapping {
+    private final Map<Object, Object> fromToMapping;
+
+    public MapBasedMarkupTableMapping(Map<Object, Object> fromToMapping) {
+        this.fromToMapping = fromToMapping;
     }
 
-    public static DocReferences parse(String content) {
-        MarkupTableData tableData = CsvTableParser.parseWithHeader(content, "reference", "url");
-
-        DocReferences result = new DocReferences();
-        tableData.forEachRow(row -> result.add(row.get(0), row.get(1)));
-
-        return result;
+    @Override
+    public Object map(Object cellValue) {
+        return fromToMapping.get(cellValue);
     }
 }

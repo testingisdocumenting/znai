@@ -7,11 +7,11 @@ Instead of aligning tables using one of the standard Markdown extensions, you ca
 
 In this way, the following `CSV` file...
 
-:include-file: table.csv
+:include-file: table/table.csv
 
 ...will render like so:
 
-:include-table: table.csv
+:include-table: table/table.csv
 
 # JSON
 
@@ -21,11 +21,11 @@ A similar extension can be used to display data from a `JSON` file representing 
 
 So the following `JSON` file...
 
-:include-file: table.json
+:include-file: table/table.json
 
 ...will render like so:
 
-:include-table: table.json
+:include-table: table/table.json
 
 # Title
 
@@ -33,7 +33,7 @@ Use `title` parameter to set a table title.
 
     :include-table: table.json {title: "Monthly Report"}
     
-:include-table: table.json {title: "Monthly Report"}
+:include-table: table/table.json {title: "Monthly Report"}
 
 # Arrange and Filter
 
@@ -41,7 +41,7 @@ To change the order of columns or to filter out certain columns, specify the `co
 
     :include-table: table.csv {columns: ["Description", "Price"]}
     
-:include-table: table.csv {columns: ["Description", "Price"]}
+:include-table: table/table.csv {columns: ["Description", "Price"]}
 
 # Alignment and Width
 
@@ -50,19 +50,32 @@ But you can control the width with the extra options.
 
     :include-table: table.csv {Price: {width: 200}, "Description": {width: 400}}
 
-:include-table: table.csv {Price: {width: 200}, "Description": {width: 400}}
+:include-table: table/table.csv {Price: {width: 200}, "Description": {width: 400}}
 
 And if you need to change a column alignment from default *left* to *right* just add the `align` property.
     
     :include-table: table.csv {Price: {width: 200, align: "right"}}
 
-:include-table: table.csv {Price: {width: 200, align: "right"}}
+:include-table: table/table.csv {Price: {width: 200, align: "right"}}
 
 You can do the same for `JSON` data:
 
     :include-table: table.json {Price: {width: 100, align: "right"}}
 
-:include-table: table.json {Price: {width: 100, align: "right"}}
+:include-table: table/table.json {Price: {width: 100, align: "right"}}
+
+# Mapping
+
+Use `mappingPath` to provide a way to override table values using mapping table.
+
+:include-file: table/table-with-shortcuts.csv {title: "table.csv"}
+
+:include-file: table/table-mapping.csv {title: "mapping.csv"}
+
+    :include-table: table.csv {mappingPath: "mapping.csv"}
+
+:include-table: table/table-with-shortcuts.csv {mappingPath: "table/table-mapping.csv"}
+
 
 # Inlined
 
@@ -79,7 +92,6 @@ Account, Price, Description
 #12BGD3, 150, chair
 #91AGB1, 10, lunch
 ```
-
 
 # Markdown in Cells
 

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +19,7 @@ package org.testingisdocumenting.znai.parser.table
 
 import org.junit.Test
 
-class CsvParserTest {
+class CsvTableParserTest {
     def expectedParsedData = ["columns": [
             ["title": "Account"],
             ["title": "Price"],
@@ -31,29 +32,29 @@ class CsvParserTest {
 
     @Test
     void "parse simple csv"() {
-        def csvData = CsvParser.parse("""Account, Price, "Description"
+        def markupTableData = CsvTableParser.parse("""Account, Price, "Description"
 #12BGD3, 100, "custom, table"
 #12BGD3, 150, chair
 #91AGB1, 10, lunch
 """)
 
-        csvData.toMap().should == expectedParsedData
+        markupTableData.toMap().should == expectedParsedData
     }
 
     @Test
     void "parse csv without header"() {
-        def csvData = CsvParser.parseWithHeader("""
+        def markupTableData = CsvTableParser.parseWithHeader("""
 #12BGD3, 100, "custom, table"
 #12BGD3, 150, chair
 #91AGB1, 10, lunch
 """, "Account", "Price", "Description")
 
-        csvData.toMap().should == expectedParsedData
+        markupTableData.toMap().should == expectedParsedData
     }
 
     @Test(expected = RuntimeException)
     void "report columns mismatch"() {
-        def csvData = CsvParser.parse("""Account, Price, "Description"
+        CsvTableParser.parse("""Account, Price, "Description"
 #12BGD3, 100, "custom, table"
 #12BGD3, 150, chair, extra
 #91AGB1, 10, lunch

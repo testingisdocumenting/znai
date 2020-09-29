@@ -16,17 +16,18 @@
 
 package org.testingisdocumenting.znai.extensions.table;
 
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
-import org.testingisdocumenting.znai.parser.table.CsvParser;
-import org.testingisdocumenting.znai.parser.table.MarkupTableData;
-import org.testingisdocumenting.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.parser.table.*;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -34,28 +35,57 @@ class TableDocElementFromParams {
     private final PluginParams pluginParams;
     private final MarkupParser parser;
     private final Path fullPath;
+    private final Path mappingPath;
+    private final MarkupTableDataMapping tableDataMapping;
+    private final String mappingFileName;
     private MarkupTableData rearrangedTable;
 
+    private final ResourcesResolver resourcesResolver;
     private final String content;
 
-
-    TableDocElementFromParams(PluginParams pluginParams, MarkupParser parser, Path fullPath, String content) {
+    TableDocElementFromParams(PluginParams pluginParams, MarkupParser parser, ResourcesResolver resourcesResolver,
+                              Path fullPath, String content) {
         this.pluginParams = pluginParams;
         this.parser = parser;
+        this.resourcesResolver = resourcesResolver;
         this.content = content;
         this.fullPath = fullPath;
+
+        this.mappingFileName = pluginParams.getOpts().get("mappingPath", "");
+        this.mappingPath = mappingFileName.isEmpty() ? null : resourcesResolver.fullPath(mappingFileName);
+
+        this.tableDataMapping = createMapping();
     }
 
-    public MarkupTableData getRearrangedTable() {
+    MarkupTableData getRearrangedTable() {
         return rearrangedTable;
+    }
+
+    Stream<AuxiliaryFile> mappingAuxiliaryFile() {
+        return mappingPath == null ? Stream.empty() : Stream.of(AuxiliaryFile.builtTime(mappingPath));
+    }
+
+    private MarkupTableDataMapping createMapping() {
+        return new MapBasedMarkupTableMapping(mappingPath == null ?
+                Collections.emptyMap():
+                createMappingFromFileContent());
+    }
+
+    private Map<Object, Object> createMappingFromFileContent() {
+        MarkupTableData tableData = CsvTableParser.parseWithHeader(resourcesResolver.textContent(mappingFileName),
+                "from", "to");
+        return Collections.unmodifiableMap(tableData.toKeyValue());
     }
 
     @SuppressWarnings("unchecked")
     PluginResult create() {
-        MarkupTableData tableFromFile = isJson() ? tableFromJson() : CsvParser.parse(content);
+        MarkupTableData tableFromContent = (isJson() ?
+                JsonTableParser.parse(content) :
+                CsvTableParser.parse(content)).mapValues(tableDataMapping);
+
         rearrangedTable = pluginParams.getOpts().has("columns") ?
-                tableFromFile.withColumnsInOrder(pluginParams.getOpts().getList("columns")) :
-                tableFromFile;
+                tableFromContent.withColumnsInOrder(pluginParams.getOpts().getList("columns")) :
+                tableFromContent;
 
         Map<String, Object> tableAsMap = rearrangedTable.toMap();
 
@@ -78,7 +108,6 @@ class TableDocElementFromParams {
         return PluginResult.docElement(DocElementType.TABLE, props);
     }
 
-
     private List<Object> parseMarkupInEachRow(List<List<Object>> rows) {
         return rows.stream().map(this::parseMarkupInCell).collect(toList());
     }
@@ -95,23 +124,6 @@ class TableDocElementFromParams {
 
         MarkupParserResult parserResult = parser.parse(fullPath, cell.toString());
         return (List<Object>) parserResult.getDocElement().toMap().get("content");
-    }
-
-    @SuppressWarnings("unchecked")
-    private MarkupTableData tableFromJson() {
-        MarkupTableData tableData = new MarkupTableData();
-
-        List<Map<String, ?>> rows = (List<Map<String, ?>>) JsonUtils.deserializeAsList(content);
-        if (rows.isEmpty()) {
-            return tableData;
-        }
-
-        Map<String, ?> firstRowData = rows.get(0);
-
-        firstRowData.keySet().forEach(tableData::addColumn);
-        rows.forEach(tableData::addRow);
-
-        return tableData;
     }
 
     private boolean isJson() {

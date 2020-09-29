@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +22,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
-import org.testingisdocumenting.znai.parser.table.CsvParser;
+import org.testingisdocumenting.znai.parser.table.CsvTableParser;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
@@ -50,7 +51,7 @@ public class ChartIncludePlugin implements IncludePlugin {
         fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         String textContent = componentsRegistry.resourceResolver().textContent(fullPath);
 
-        Map<String, Object> table = CsvParser.parse(textContent).toMap();
+        Map<String, Object> table = CsvTableParser.parse(textContent).toMap();
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         props.put("chartType", props.get("type"));
         props.put("data", table.get("data"));
