@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -62,6 +63,19 @@ class TableIncludePluginTest {
                                                              [[type: 'TestMarkup', markup: 'custom table with a long attachment']]],
                                                             [[[type: 'TestMarkup', markup: '#12BGD3']],
                                                              [[type: 'TestMarkup', markup: 'chair']]]]]]
+    }
+
+    @Test
+    void "should use mapping file to replace table content"() {
+        def element = process('table-with-shortcuts.csv', '{mappingPath: "shortcuts-mapping.csv"}')
+
+        element.should == [type: 'Table', table: [columns: [[title: 'Feature Name'], [title: 'V1'], [title: 'V2']],
+                                                  data:[[[[markup: 'featureA', type: 'TestMarkup']],
+                                                         [[markup: 'Supported', type: 'TestMarkup']],
+                                                         [[markup: 'Supported', type: 'TestMarkup']]],
+                                                        [[[markup: 'featureB', type: 'TestMarkup']],
+                                                         [[markup: '**Not supported**', type: 'TestMarkup']],
+                                                         [[markup: 'Supported', type: 'TestMarkup']]]]]]
     }
 
     private static def process(String fileName, String meta = '') {

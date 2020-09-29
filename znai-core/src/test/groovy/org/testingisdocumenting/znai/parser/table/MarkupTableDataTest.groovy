@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +19,9 @@ package org.testingisdocumenting.znai.parser.table
 
 import org.junit.Before
 import org.junit.Test
+
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class MarkupTableDataTest {
     MarkupTableData table
@@ -55,6 +59,14 @@ class MarkupTableDataTest {
     }
 
     @Test
+    void "should map cell values"() {
+        def newTable = table.mapValues(new MapBasedMarkupTableMapping([b1: 'B1', c2: 'C2']))
+
+        table.allText().should == 'a b C a1 b1 c1 a2 b2 c2'
+        newTable.allText().should == 'a b C a1 B1 c1 a2 b2 C2'
+    }
+
+    @Test
     void "should handle null content for text representation"() {
         def tableWithNull = new MarkupTableData()
         tableWithNull.addColumn('a')
@@ -63,5 +75,48 @@ class MarkupTableDataTest {
         tableWithNull.addRow(new Row(['a1', null]))
 
         tableWithNull.allText().should == 'a b a1'
+    }
+
+    @Test
+    void "should convert table to key value map"() {
+        def table = new MarkupTableData()
+        table.addColumn('a')
+        table.addColumn('b')
+
+        table.addRow(new Row(['k1', 'v1']))
+        table.addRow(new Row(['k2', 'v2']))
+
+        def map = table.toKeyValue()
+        map.should == [k1: 'v1', k2: 'v2']
+    }
+
+    @Test
+    void "convert to key value should validate size"() {
+        def table = new MarkupTableData()
+        table.addColumn('a')
+        table.addColumn('b')
+        table.addColumn('c')
+
+        table.addRow(new Row(['k2', 'v2', 'o1']))
+
+        code {
+            table.toKeyValue()
+        } should throwException("toKeyValue only works with two columns tables")
+    }
+
+    @Test
+    void "convert to key value should validate uniquness"() {
+        def table = new MarkupTableData()
+        table.addColumn('a')
+        table.addColumn('b')
+
+        table.addRow(new Row(['k1', 'v1']))
+        table.addRow(new Row(['k1', 'v2']))
+
+        code {
+            table.toKeyValue()
+        } should throwException("non unique key detected: k1\n" +
+                "previous value: v1\n" +
+                "new value: v2")
     }
 }

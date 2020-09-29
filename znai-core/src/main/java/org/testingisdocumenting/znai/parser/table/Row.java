@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +23,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 public class Row {
-    private List<Object> data;
+    private final List<Object> data;
 
     public Row() {
         data = new ArrayList<>();
@@ -38,6 +39,13 @@ public class Row {
 
     public List<Object> getData() {
         return data;
+    }
+
+    public Row map(MarkupTableDataMapping mapping) {
+        return new Row(data.stream().map(v -> {
+            Object newValue = mapping.map(v);
+            return newValue == null ? v : newValue;
+        }).collect(toList()));
     }
 
     @SuppressWarnings("unchecked")

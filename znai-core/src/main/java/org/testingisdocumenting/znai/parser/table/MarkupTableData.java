@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,8 +25,8 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 public class MarkupTableData {
-    private List<Column> header;
-    private List<Row> data;
+    private final List<Column> header;
+    private final List<Row> data;
 
     public MarkupTableData() {
         header = new ArrayList<>();
@@ -37,16 +38,39 @@ public class MarkupTableData {
         this.data = data;
     }
 
+    public MarkupTableData mapValues(MarkupTableDataMapping mapping) {
+        return new MarkupTableData(header,
+                data.stream().map(row -> row.map(mapping)).collect(toList()));
+    }
+
+    public Map<?, Object> toKeyValue() {
+        Map<String, Object> result = new LinkedHashMap<>();
+
+        if (header.size() != 2) {
+            throw new IllegalArgumentException("toKeyValue only works with two columns tables");
+        }
+
+        for (Row row : data) {
+            Object key = row.get(0);
+            Object value = row.get(1);
+            Object previous = result.put(key.toString(), value);
+
+            if (previous != null) {
+                throw new IllegalArgumentException("non unique key detected: " + key + "\n" +
+                        "previous value: " + previous + "\n" +
+                        "new value: " + value);
+            }
+        }
+
+        return result;
+    }
+
     public Stream<String> columnNamesStream() {
         return header.stream().map(Column::getTitle);
     }
 
     public Stream<Object> allValuesStream() {
         return data.stream().flatMap(row -> row.getData().stream());
-    }
-
-    public <E> Stream<E> mapRows(Function<Row, E> converter) {
-        return data.stream().map(converter);
     }
 
     public void forEachRow(Consumer<Row> consumer) {

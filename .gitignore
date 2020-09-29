@@ -14,3 +14,4 @@ docs-build
 dependency-reduced-pom.xml
 npm-debug.log
 todo.md
+local-overrides

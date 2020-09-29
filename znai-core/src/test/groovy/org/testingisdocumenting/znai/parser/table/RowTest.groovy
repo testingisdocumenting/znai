@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,5 +27,19 @@ class RowTest {
 
         def filtered = row.onlyWithIdxs([1, 2])
         filtered.getData().should == ['b', 'c']
+    }
+
+    @Test
+    void "should map values based on mapping"() {
+        def row = new Row()
+        row.add('A')
+        row.add('B')
+        row.add('C')
+        row.add('D')
+
+        def newRow = row.map(new MapBasedMarkupTableMapping([B: 'hello', D: 'world']))
+
+        row.data.should == ['A', 'B', 'C', 'D']
+        newRow.data.should == ['A', 'hello', 'C', 'world']
     }
 }

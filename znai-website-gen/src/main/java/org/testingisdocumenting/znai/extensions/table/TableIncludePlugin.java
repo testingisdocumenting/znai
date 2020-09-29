@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
@@ -49,18 +50,22 @@ public class TableIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         MarkupParser parser = componentsRegistry.defaultParser();
         String fileName = pluginParams.getFreeParam();
-        String textContent = componentsRegistry.resourceResolver().textContent(fileName);
-        fullPath = componentsRegistry.resourceResolver().fullPath(fileName);
+        String textContent = resourcesResolver.textContent(fileName);
 
-        docElementFromParams = new TableDocElementFromParams(pluginParams, parser, fullPath, textContent);
+        fullPath = resourcesResolver.fullPath(fileName);
+
+        docElementFromParams = new TableDocElementFromParams(pluginParams, parser, resourcesResolver, fullPath, textContent);
         return docElementFromParams.create();
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(fullPath));
+        return Stream.concat(
+                Stream.of(AuxiliaryFile.builtTime(fullPath)),
+                docElementFromParams.mappingAuxiliaryFile());
     }
 
     @Override

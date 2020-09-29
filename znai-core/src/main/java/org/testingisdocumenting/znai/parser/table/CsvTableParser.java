@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,8 +28,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class CsvParser {
-    private CsvParser() {
+public class CsvTableParser {
+    private CsvTableParser() {
     }
 
     public static MarkupTableData parse(String content) {
