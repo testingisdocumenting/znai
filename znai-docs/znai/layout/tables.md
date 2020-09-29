@@ -64,6 +64,23 @@ You can do the same for `JSON` data:
 
 :include-table: table.json {Price: {width: 100, align: "right"}}
 
+# Inlined
+
+    ```table {title: "my table", Price: {width: 100, align: "right"}}
+    Account, Price, Description
+    #12BGD3, 100, custom table with a long attachment
+    #12BGD3, 150, chair
+    #91AGB1, 10, lunch
+    ```
+ 
+```table {title: "my table", Price: {width: 100, align: "right"}}
+Account, Price, Description
+#12BGD3, 100, custom table with a long attachment
+#12BGD3, 150, chair
+#91AGB1, 10, lunch
+```
+
+
 # Markdown in Cells
 
 You can use Markdown table syntax within your table file.

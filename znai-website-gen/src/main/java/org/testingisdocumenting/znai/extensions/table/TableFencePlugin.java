@@ -1,6 +1,5 @@
 /*
  * Copyright 2020 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +16,17 @@
 
 package org.testingisdocumenting.znai.extensions.table;
 
-import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
-import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
-import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.stream.Stream;
 
-public class TableIncludePlugin implements IncludePlugin {
-    private Path fullPath;
+public class TableFencePlugin implements FencePlugin {
     private TableDocElementFromParams docElementFromParams;
 
     @Override
@@ -40,27 +35,18 @@ public class TableIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public IncludePlugin create() {
-        return new TableIncludePlugin();
+    public FencePlugin create() {
+        return new TableFencePlugin();
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry,
-                                ParserHandler parserHandler,
-                                Path markupPath,
-                                PluginParams pluginParams) {
+    public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         MarkupParser parser = componentsRegistry.defaultParser();
         String fileName = pluginParams.getFreeParam();
-        String textContent = componentsRegistry.resourceResolver().textContent(fileName);
-        fullPath = componentsRegistry.resourceResolver().fullPath(fileName);
 
-        docElementFromParams = new TableDocElementFromParams(pluginParams, parser, fullPath, textContent);
+        docElementFromParams = new TableDocElementFromParams(pluginParams, parser,
+                componentsRegistry.resourceResolver().fullPath(fileName), content);
         return docElementFromParams.create();
-    }
-
-    @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(fullPath));
     }
 
     @Override

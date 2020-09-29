@@ -19,3 +19,4 @@ org.testingisdocumenting.znai.extensions.templates.TemplateFencePlugin
 org.testingisdocumenting.znai.extensions.columns.ColumnsFencePlugin
 org.testingisdocumenting.znai.extensions.api.ApiParametersFencePlugin
 org.testingisdocumenting.znai.extensions.markup.MarkdownAndResultFencePlugin
+org.testingisdocumenting.znai.extensions.table.TableFencePlugin
