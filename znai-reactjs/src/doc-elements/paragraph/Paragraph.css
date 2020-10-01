@@ -118,3 +118,9 @@ not belong to the same parent node so margins won't even each other out.
     align-items: center;
     justify-content: center;
 }
+
+.znai-presentation-paragraph-default {
+    background-color: var(--znai-attention-note-background-color);
+    border-left: 3px solid var(--znai-attention-note-color);
+    padding: 16px;
+}

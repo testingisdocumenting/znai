@@ -1,9 +1,10 @@
 # Equal Flow
 
+:include-meta: {presentationParagraph: "default"}
+
 When people build presentations, there should be great focus on the flow of information, making sure that those newly introduced to the topic are not lost. A poorly organized presentation might drive users seeking clarification to documentation, which too often is just as unfriendly to neophytes.
 
 Presentation mode in `Znai` is meant to help with both issues, mutually reinforcing good flow in presentations and documentation.
-
 
 # Presentation Mode
 
