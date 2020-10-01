@@ -154,6 +154,8 @@
 
     --znai-horizontal-rule-color: #313131;
 
+    --znai-image-border-color: var(--znai-toc-panel-border-color);
+
     --znai-diagram-node-shadow-color: #444;
 
     color: var(--znai-regular-text-color);

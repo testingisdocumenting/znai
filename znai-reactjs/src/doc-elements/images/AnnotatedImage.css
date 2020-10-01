@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,4 +20,8 @@
     background-color: var(--znai-annotated-image-background-color);
     color: #fff;
     width: 100%;
+}
+
+.annotated-image.border img {
+    border: 1px solid var(--znai-image-border-color)
 }

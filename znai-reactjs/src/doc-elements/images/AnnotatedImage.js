@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +33,7 @@ class AnnotatedImage extends Component {
             caption,
             captionBottom,
             fit,
+            border,
             timestamp
         } = this.props
 
@@ -43,7 +45,7 @@ class AnnotatedImage extends Component {
         const imageWidth = scaledWidth + "px"
         const imageHeight = scaledHeight + "px"
 
-        let parentStyle = {position: 'relative', width: imageWidth, height: imageHeight}
+        const parentStyle = {position: 'relative', width: imageWidth, height: imageHeight}
         const imageContainerStyle = {position: "absolute", top: 0}
         const annotationsContainerStyle = {position: "absolute", top: 0}
 
@@ -53,11 +55,14 @@ class AnnotatedImage extends Component {
             </div>
         ) : null
 
+        const className = "annotated-image" + (border ? " border" : "")
+
         return (
-            <div style={parentStyle} className="annotated-image" >
+            <div style={parentStyle} className={className}>
                 <div style={imageContainerStyle}>
                     <img alt="annotated"
                          src={imageSrc + imageAdditionalPreviewUrlParam(timestamp)}
+                         // style={{border: "5px solid red"}}
                          width={imageWidth}
                          height={imageHeight}
                          ref={node => this.imageNode = node}/>
