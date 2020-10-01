@@ -21,4 +21,23 @@ export function paragraphPresentationDemo(registry) {
     registry
         .add('question', createPresentationDemo(createAttentionParagraph('Question:')))
         .add('short exercise', createPresentationDemo(createShortAttentionParagraph('Exercise:')))
+        .add('forced paragraph', createPresentationDemo(createForcedParagraph()))
+}
+
+export function createForcedParagraph() {
+    return [
+        {
+            "type": "Paragraph",
+            "content": [
+                {
+                    "text": "simple paragraph with text simple paragraph with text simple paragraph with text simple " +
+                        "paragraph with text simple paragraph with text simple paragraph with text ",
+                    "type": "SimpleText",
+                    "meta": {
+                        "presentationParagraph": "default"
+                    }
+                },
+            ],
+        }
+    ]
 }

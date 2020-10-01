@@ -20,6 +20,8 @@ import { Icon } from '../icons/Icon'
 
 import {paragraphStartsWith, removeSuffixFromParagraph} from './paragraphUtils'
 
+import {elementMetaValue} from '../meta/meta';
+
 import './Paragraph.css'
 
 const noteSuffix = "Note:"
@@ -90,8 +92,11 @@ const Paragraph = (props) => {
 }
 
 const PresentationParagraph = (props) => {
+    const className = "znai-presentation-paragraph-wrapper" + (
+        isParagraphPresentationForced(props.content) ? " znai-presentation-paragraph-default" : "0")
+
     return (
-        <div className="znai-presentation-paragraph-wrapper">
+        <div className={className}>
             <Paragraph {...props}/>
         </div>
     )
@@ -99,9 +104,19 @@ const PresentationParagraph = (props) => {
 
 const presentationParagraph = {component: PresentationParagraph,
     numberOfSlides: ({content}) => {
-        return paragraphStartsWith(content, questionSuffix) ||
+        const presentParagraph = isParagraphPresentationForced(content)
+        return presentParagraph ||
+            paragraphStartsWith(content, questionSuffix) ||
             paragraphStartsWith(content, exerciseSuffix) ? 1 : 0;
     }
+}
+
+function isParagraphPresentationForced(content) {
+    if (content.length === 0) {
+        return false
+    }
+
+    return elementMetaValue(content[0], 'presentationParagraph') === "default"
 }
 
 export { Paragraph, presentationParagraph }
