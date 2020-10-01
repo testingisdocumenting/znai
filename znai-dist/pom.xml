@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.45.1</version>
+        <version>1.46-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-dist</artifactId>
