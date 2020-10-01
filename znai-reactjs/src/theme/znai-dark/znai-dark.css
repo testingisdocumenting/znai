@@ -135,7 +135,7 @@
     --znai-ansi-white: #eee;
 
     --znai-api-key-color: var(--znai-section-title-color);
-    --znai-api-description-color: var(--znai-inversed-text-color);
+    --znai-api-description-color: var(--znai-regular-text-color);
     --znai-api-title-color: var(--znai-snippets-title-color);
     --znai-api-title-background-color: var(--znai-snippets-title-background-color);
 
