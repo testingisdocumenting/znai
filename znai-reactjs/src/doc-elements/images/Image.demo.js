@@ -20,14 +20,15 @@ import EmbeddedAnnotatedImage from './EmbeddedAnnotatedImage'
 import {elementsLibrary} from '../DefaultElementsLibrary';
 
 export function imageDemo(registry) {
-
     registry.add('standard image', () => (
         <div style={{width: 300, overflow: 'hidden'}}>
             <elementsLibrary.DocElement content={[standardImage()]}
                                         elementsLibrary={elementsLibrary}/>
         </div>
     ))
+    registry.add('with border', () => <EmbeddedAnnotatedImage {...standardImage()} border={true}/>)
     registry.add('simple annotations', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}/>)
+    registry.add('simple annotations with border', () => <EmbeddedAnnotatedImage {...simpleAnnotations()} border={true}/>)
     registry.add('left aligned', () => <EmbeddedAnnotatedImage {...leftAlign()}/>)
     registry.add('right aligned', () => <EmbeddedAnnotatedImage {...rightAlign()}/>)
 }

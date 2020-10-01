@@ -27,6 +27,14 @@ To add a caption at the bottom of an image use:
     
 :include-image: castle.jpg {caption: "Title of an image", captionBottom: true}
 
+# Border
+
+Use `border: true` to include a border around image.
+
+    :include-image: image.png {border: true}
+    
+:include-image: regular-image.png {border: true}
+
 # Fit
 
 An unfitted image will occupy all available space:

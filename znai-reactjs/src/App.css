@@ -197,6 +197,7 @@
     --znai-horizontal-rule-color: #eee;
 
     --znai-annotated-image-background-color: rgba(41, 139, 231, .6);
+    --znai-image-border-color: var(--znai-toc-panel-border-color);
 
     --znai-diagram-node-shadow-color: #e6e6e6;
     --znai-diagram-a-line: #AA8E39;
