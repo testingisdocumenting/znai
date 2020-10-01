@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +27,10 @@ const personParameters = [
 ]
 
 const paragraph = {"type": "Paragraph", "content": [{"text": "first name", "type": "SimpleText"}]}
+const code = {"type": "Snippet", "snippet": "println 'hello world'"}
+
 const multipleParagraph = [paragraph, paragraph, paragraph]
+const codeBeforeParagraph = [code, paragraph, code, paragraph, paragraph]
 
 const personLongDescriptionParameters = [
     {name: 'firstName', type: 'string', description: multipleParagraph},
@@ -39,7 +43,6 @@ const mailBoxParameters = [
     {name: 'isPersonal', type: 'boolean', description: [{"text": "does it belong to a org or a person", "type": "SimpleText"}]},
 ]
 
-
 const addressParameters = [
     {name: 'street', type: 'string', description: [{"text": "street name", "type": "SimpleText"}]},
     {name: 'mailBox', type: 'object', children: mailBoxParameters,  description: [{"text": "mail box", "type": "SimpleText"}]},
@@ -51,6 +54,10 @@ const nestedParameters = [
     {name: 'secondaryPerson', type: 'object', children: personParameters, description: [{"text": "secondary person", "type": "SimpleText"}]},
     {name: 'short', type: 'object', children: personParameters, description: [{"text": "secondary person", "type": "SimpleText"}]},
     {name: 'ids', type: 'array of objects', children: personParameters, description: [{"text": "secondary person", "type": "SimpleText"}]},
+]
+
+const withCodeSnippetFirst = [
+    {name: 'paramOne', type: 'string', description: codeBeforeParagraph}
 ]
 
 export function apiParametersDemo(registry) {
@@ -85,6 +92,13 @@ export function apiParametersDemo(registry) {
             <div className="content-block">
                 <ParagraphText/>
                 <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} title="Person definition"/>
+                <ParagraphText/>
+            </div>
+        ))
+        .add('with code first in description', () => (
+            <div className="content-block">
+                <ParagraphText/>
+                <ApiParameters elementsLibrary={elementsLibrary} parameters={withCodeSnippetFirst}/>
                 <ParagraphText/>
             </div>
         ))
