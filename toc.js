@@ -698,6 +698,12 @@ toc = [ {
       "title" : "Alignment and Width",
       "id" : "alignment-and-width"
     }, {
+      "title" : "Mapping",
+      "id" : "mapping"
+    }, {
+      "title" : "Inlined",
+      "id" : "inlined"
+    }, {
       "title" : "Markdown in Cells",
       "id" : "markdown-in-cells"
     }, {
@@ -925,6 +931,9 @@ toc = [ {
       "title" : "Caption",
       "id" : "caption"
     }, {
+      "title" : "Border",
+      "id" : "border"
+    }, {
       "title" : "Fit",
       "id" : "fit"
     }, {
@@ -950,6 +959,20 @@ toc = [ {
     }, {
       "title" : "Presentation Mode",
       "id" : "presentation-mode"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Iframe",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "iframe",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Embedding Video",
+      "id" : "embedding-video"
+    }, {
+      "title" : "Aspect Ratio",
+      "id" : "aspect-ratio"
     } ]
   }, {
     "sectionTitle" : "Visuals",
@@ -1028,6 +1051,9 @@ toc = [ {
     }, {
       "title" : "External File",
       "id" : "external-file"
+    }, {
+      "title" : "Gantt Example",
+      "id" : "gantt-example"
     } ]
   } ]
 }, {

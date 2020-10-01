@@ -110,6 +110,16 @@
 </article>
 
 <article>
+<header><h1>Mapping</h1></header>
+<p>Use mappingPath to provide a way to override table values using mapping table. Feature Name, V1, V2 featureA, +, + featureB, -, + +, `:icon: check` -, `:icon: slash` :include-table: table.csv {mappingPath: &quot;mapping.csv&quot;} Feature Name V1 V2 featureA `:icon: check` `:icon: check` featureB `:icon: slash` `:icon: check`</p>
+</article>
+
+<article>
+<header><h1>Inlined</h1></header>
+<p>```table {title: &quot;my table&quot;, Price: {width: 100, align: &quot;right&quot;}} Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch ``` Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+</article>
+
+<article>
 <header><h1>Markdown in Cells</h1></header>
 <p>You can use Markdown table syntax within your table file. Account, Price, Description #12BGD3, 100, **custom** table with a long attachment #12BGD3, 150, chair #91AGB1, 10, `lunch` Account Price Description #12BGD3 100 **custom** table with a long attachment #12BGD3 150 chair #91AGB1 10 `lunch`</p>
 </article>
@@ -802,6 +812,165 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     }, {
+      "title" : "Mapping",
+      "id" : "mapping",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "mappingPath",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to provide a way to override table values using mapping table.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "csv",
+        "snippet" : "Feature Name, V1, V2\nfeatureA, +, +\nfeatureB, -, +",
+        "title" : "table.csv",
+        "type" : "Snippet"
+      }, {
+        "lang" : "csv",
+        "snippet" : "+, `:icon: check`\n-, `:icon: slash`",
+        "title" : "mapping.csv",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-table: table.csv {mappingPath: \"mapping.csv\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Feature Name"
+          }, {
+            "title" : "V1"
+          }, {
+            "title" : "V2"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "featureA",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "id" : "check",
+              "type" : "Icon"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "id" : "check",
+              "type" : "Icon"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "featureB",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "id" : "slash",
+              "type" : "Icon"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "id" : "check",
+              "type" : "Icon"
+            } ]
+          } ] ] ]
+        },
+        "type" : "Table"
+      } ]
+    }, {
+      "title" : "Inlined",
+      "id" : "inlined",
+      "type" : "Section",
+      "content" : [ {
+        "lang" : "",
+        "snippet" : "```table {title: \"my table\", Price: {width: 100, align: \"right\"}}\nAccount, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price",
+            "width" : 100,
+            "align" : "right"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "title" : "my table",
+        "type" : "Table"
+      } ]
+    }, {
       "title" : "Markdown in Cells",
       "id" : "markdown-in-cells",
       "type" : "Section",
@@ -932,7 +1101,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1594852785732,
+    "lastModifiedTime" : 1601593290105,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Tables",
@@ -955,6 +1124,12 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Alignment and Width",
         "id" : "alignment-and-width"
+      }, {
+        "title" : "Mapping",
+        "id" : "mapping"
+      }, {
+        "title" : "Inlined",
+        "id" : "inlined"
       }, {
         "title" : "Markdown in Cells",
         "id" : "markdown-in-cells"

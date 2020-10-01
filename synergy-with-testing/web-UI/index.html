@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Auto Annotations</h1></header>
-<p>How to annotate images using the include-image plugin visuals/image-annotations was covered previously . Now let's automate the screenshot and annotations assignment process. PageElement signIn = $(&quot;#gb_70&quot;); PageElement input = $(&quot;.gsfi&quot;); PageElement search = $(&quot;[name='btnK']&quot;); browser.open(&quot;http://google.com&quot;); browser.doc.withAnnotations( badge(signIn), highlight(input).withColor(&quot;green&quot;), arrow(search, &quot;Click This&quot;).withColor(&quot;yellow&quot;)).capture(&quot;test&quot;); Example above is using a Selenium-based framework to automatically take a screenshot and retrieve annotations positions. Once we have the information we can include the annotated image in our documentation. :include-image: test.png {annotationsPath: 'test.json'} The result is below:</p>
+<p>How to annotate images using the include-image plugin visuals/image-annotations was covered previously . Now let's automate the screenshot and annotations assignment process. PageElement signIn = $(&quot;#gb_70&quot;); PageElement input = $(&quot;.gsfi&quot;); PageElement search = $(&quot;[name='btnK']&quot;); browser.open(&quot;http://google.com&quot;); browser.doc.withAnnotations( browser.doc.badge(signIn), browser.doc.highlight(input).withColor(&quot;green&quot;), browser.doc.arrow(search, &quot;Click This&quot;).withColor(&quot;yellow&quot;)).capture(&quot;test&quot;); Example above is using a Selenium-based framework to automatically take a screenshot and retrieve annotations positions. Once we have the information we can include the annotated image in our documentation. :include-image: test.png {annotationsPath: 'test.json'} The result is below:</p>
 </article>
 </section>
 </div>
@@ -151,7 +151,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "java",
-        "snippet" : "PageElement signIn = $(\"#gb_70\");\nPageElement input = $(\".gsfi\");\nPageElement search = $(\"[name='btnK']\");\n\nbrowser.open(\"http://google.com\");\n\nbrowser.doc.withAnnotations(\n        badge(signIn),\n        highlight(input).withColor(\"green\"),\n        arrow(search, \"Click This\").withColor(\"yellow\")).capture(\"test\");",
+        "snippet" : "PageElement signIn = $(\"#gb_70\");\nPageElement input = $(\".gsfi\");\nPageElement search = $(\"[name='btnK']\");\n\nbrowser.open(\"http://google.com\");\n\nbrowser.doc.withAnnotations(\n        browser.doc.badge(signIn),\n        browser.doc.highlight(input).withColor(\"green\"),\n        browser.doc.arrow(search, \"Click This\").withColor(\"yellow\")).capture(\"test\");",
         "bodyOnly" : true,
         "entry" : "main",
         "type" : "Snippet"
@@ -180,7 +180,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "annotationsPath" : "test.json",
         "imageSrc" : "/znai/synergy-with-testing/test.png",
-        "timestamp" : 1594852785736,
+        "timestamp" : 1601593290109,
         "shapes" : [ {
           "id" : "circle1",
           "type" : "circle",
@@ -213,7 +213,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "AnnotatedImage"
       } ]
     } ],
-    "lastModifiedTime" : 1594852785736,
+    "lastModifiedTime" : 1601593290109,
     "tocItem" : {
       "sectionTitle" : "Synergy With Testing",
       "pageTitle" : "Web UI",

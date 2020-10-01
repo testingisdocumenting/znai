@@ -96,12 +96,12 @@
 
 <article>
 <header><h1>Aligning Data in Columns</h1></header>
-<p>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. # Aligning Data in Columns Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side. :include-empty-block: {rightSide: true} :include-table: layout/table.csv :include-meta: {rightSide: true} :include-file: layout/table.csv :include-meta: {rightSide: false}</p>
+<p>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. # Aligning Data in Columns Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side. :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-meta: {rightSide: true} :include-file: layout/table/table.csv :include-meta: {rightSide: false}</p>
 </article>
 
 <article>
 <header><h1>Single Data Block Shortcut</h1></header>
-<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch If need to put a single data block to a right side, you can add rightSide: true as a parameter to include- plugins. # Single Data Block Shortcut :include-table: layout/table.csv :include-file: layout/table.csv {rightSide: true}</p>
+<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch If need to put a single data block to a right side, you can add rightSide: true as a parameter to include- plugins. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</p>
 </article>
 </section>
 </div>
@@ -504,7 +504,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "md",
-        "snippet" : "# Aligning Data in Columns\n\nUse an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side.\n:include-empty-block: {rightSide: true}\n\n:include-table: layout/table.csv\n:include-meta: {rightSide: true}\n:include-file: layout/table.csv\n\n:include-meta: {rightSide: false}",
+        "snippet" : "# Aligning Data in Columns\n\nUse an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side.\n:include-empty-block: {rightSide: true}\n\n:include-table: layout/table/table.csv\n:include-meta: {rightSide: true}\n:include-file: layout/table/table.csv\n\n:include-meta: {rightSide: false}",
         "startLine" : "Aligning Data in Columns",
         "exclude" : true,
         "endLine" : ":include-meta: {rightSide: false}",
@@ -610,13 +610,13 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "md",
-        "snippet" : "# Single Data Block Shortcut\n\n:include-table: layout/table.csv\n:include-file: layout/table.csv  {rightSide: true}",
+        "snippet" : "# Single Data Block Shortcut\n\n:include-table: layout/table/table.csv\n:include-file: layout/table/table.csv  {rightSide: true}",
         "startLine" : "Single Data Block Shortcut",
         "endLine" : "{rightSide: true}",
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1594852785736,
+    "lastModifiedTime" : 1601593290105,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Two Sides Pages",

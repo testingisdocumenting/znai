@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Api</title>
+<title>Znai: Iframe</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,18 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Flight API</h1></header>
-<p>Flight API summary placeholder</p>
+<header><h1>Embedding Video</h1></header>
+<p>Use include-iframe to embed content from other place. By default, aspect ratio set to 16:9 . :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY</p>
 </article>
 
 <article>
-<header><h1>Book</h1></header>
-<p>Lower level explanation of fapi.book</p>
-</article>
-
-<article>
-<header><h1>Query</h1></header>
-<p>Lower level explanation of fapi.query</p>
+<header><h1>Aspect Ratio</h1></header>
+<p>Use aspectRatio to change aspect ratio of the embedded content :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {aspectRatio: &quot;4:3&quot;}</p>
 </article>
 </section>
 </div>
@@ -128,62 +123,77 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Flight API",
-      "id" : "flight-api",
+      "title" : "Embedding Video",
+      "id" : "embedding-video",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Flight API summary placeholder",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "title" : "Book",
-      "id" : "book",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Lower level explanation of ",
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "fapi.book",
+          "code" : "include-iframe",
           "type" : "InlinedCode"
+        }, {
+          "text" : " to embed content from other place. By default, aspect ratio set to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "16:9",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
         } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "src" : "https://www.youtube.com/embed/tgbNymZ7vqY",
+        "type" : "Iframe"
       } ]
     }, {
-      "title" : "Query",
-      "id" : "query",
+      "title" : "Aspect Ratio",
+      "id" : "aspect-ratio",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Lower level explanation of ",
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "fapi.query",
+          "code" : "aspectRatio",
           "type" : "InlinedCode"
+        }, {
+          "text" : " to change aspect ratio of the embedded content",
+          "type" : "SimpleText"
         } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {aspectRatio: \"4:3\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "src" : "https://www.youtube.com/embed/tgbNymZ7vqY",
+        "aspectRatio" : "4:3",
+        "type" : "Iframe"
       } ]
     } ],
-    "lastModifiedTime" : 1601593290105,
+    "lastModifiedTime" : 1601593290125,
     "tocItem" : {
-      "sectionTitle" : "Example References",
-      "pageTitle" : "Api",
+      "sectionTitle" : "Visuals",
+      "pageTitle" : "Iframe",
       "pageMeta" : { },
-      "dirName" : "example-references",
-      "fileName" : "api",
+      "dirName" : "visuals",
+      "fileName" : "iframe",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Flight API",
-        "id" : "flight-api"
+        "title" : "Embedding Video",
+        "id" : "embedding-video"
       }, {
-        "title" : "Book",
-        "id" : "book"
-      }, {
-        "title" : "Query",
-        "id" : "query"
+        "title" : "Aspect Ratio",
+        "id" : "aspect-ratio"
       } ]
     }
   },

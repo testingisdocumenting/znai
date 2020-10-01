@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#installation</url>
     <fullTitle>Znai: Getting Started, Installation [Introduction]</fullTitle>
     <text>
-      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.43.1/znai-dist-1.43.1-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</text>
+      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.45.1/znai-dist-1.45.1-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#scaffolding</url>
     <fullTitle>Znai: Getting Started, Scaffolding [Introduction]</fullTitle>
     <text>
-      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.43.1&lt;/version> &lt;/plugin> mvn znai:new</text>
+      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.45.1&lt;/version> &lt;/plugin> mvn znai:new</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -131,7 +131,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction rationale example getting-started flow structure names page-references lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets inlined-code-snippets api-parameters code-references java java-doc groovy typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points icons keyboard-shortcuts charts images image-annotations SVG flow-diagrams PlantUml deployment static-content static-hosting synergy-with-testing java REST web-UI configuration basic example-references domain api Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction rationale example getting-started flow structure names page-references lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets inlined-code-snippets api-parameters code-references java java-doc groovy typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points icons keyboard-shortcuts charts images image-annotations iframe SVG flow-diagrams PlantUml deployment static-content static-hosting synergy-with-testing java REST web-UI configuration basic example-references domain api Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1040,6 +1040,22 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/layout/tables#mapping</url>
+    <fullTitle>Znai: Tables, Mapping [Layout]</fullTitle>
+    <text>
+      <text>Use mappingPath to provide a way to override table values using mapping table. Feature Name, V1, V2 featureA, +, + featureB, -, + +, `:icon: check` -, `:icon: slash` :include-table: table.csv {mappingPath: "mapping.csv"} Feature Name V1 V2 featureA `:icon: check` `:icon: check` featureB `:icon: slash` `:icon: check`</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/tables#inlined</url>
+    <fullTitle>Znai: Tables, Inlined [Layout]</fullTitle>
+    <text>
+      <text>```table {title: "my table", Price: {width: 100, align: "right"}} Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch ``` Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/layout/tables#markdown-in-cells</url>
     <fullTitle>Znai: Tables, Markdown in Cells [Layout]</fullTitle>
     <text>
@@ -1155,7 +1171,7 @@
     <url>/znai/layout/two-sides-pages#aligning-data-in-columns</url>
     <fullTitle>Znai: Two Sides Pages, Aligning Data in Columns [Layout]</fullTitle>
     <text>
-      <text>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. # Aligning Data in Columns Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side. :include-empty-block: {rightSide: true} :include-table: layout/table.csv :include-meta: {rightSide: true} :include-file: layout/table.csv :include-meta: {rightSide: false}</text>
+      <text>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. # Aligning Data in Columns Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side. :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-meta: {rightSide: true} :include-file: layout/table/table.csv :include-meta: {rightSide: false}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1163,7 +1179,7 @@
     <url>/znai/layout/two-sides-pages#single-data-block-shortcut</url>
     <fullTitle>Znai: Two Sides Pages, Single Data Block Shortcut [Layout]</fullTitle>
     <text>
-      <text>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch If need to put a single data block to a right side, you can add rightSide: true as a parameter to include- plugins. # Single Data Block Shortcut :include-table: layout/table.csv :include-file: layout/table.csv {rightSide: true}</text>
+      <text>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch If need to put a single data block to a right side, you can add rightSide: true as a parameter to include- plugins. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1368,6 +1384,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/images#border</url>
+    <fullTitle>Znai: Images, Border [Visuals]</fullTitle>
+    <text>
+      <text>Use border: true to include a border around image. :include-image: image.png {border: true}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/images#fit</url>
     <fullTitle>Znai: Images, Fit [Visuals]</fullTitle>
     <text>
@@ -1412,6 +1436,22 @@
     <fullTitle>Znai: Image Annotations, Presentation Mode [Visuals]</fullTitle>
     <text>
       <text>Annotated images automatically participate in presentation mode. Annotations appear one by one and scale to match the zoom level of a presentation.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/iframe#embedding-video</url>
+    <fullTitle>Znai: Iframe, Embedding Video [Visuals]</fullTitle>
+    <text>
+      <text>Use include-iframe to embed content from other place. By default, aspect ratio set to 16:9 . :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/iframe#aspect-ratio</url>
+    <fullTitle>Znai: Iframe, Aspect Ratio [Visuals]</fullTitle>
+    <text>
+      <text>Use aspectRatio to change aspect ratio of the embedded content :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {aspectRatio: "4:3"}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1560,10 +1600,18 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/PlantUml#gantt-example</url>
+    <fullTitle>Znai: PlantUml, Gantt Example [Visuals]</fullTitle>
+    <text>
+      <text>@startgantt [Task1] lasts 4 days then [Task1.1] lasts 4 days [Task1.2] starts at [Task1]'s end and lasts 7 days [Task2] lasts 5 days then [Task2.1] lasts 4 days [MaxTaskEnd] happens at [Task1.1]'s end [MaxTaskEnd] happens at [Task1.2]'s end [MaxTaskEnd] happens at [Task2.1]'s end @endgantt</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/deployment/static-content#build</url>
     <fullTitle>Znai: Static Content, Build [Deployment]</fullTitle>
     <text>
-      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.43.1&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
+      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.45.1&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1619,7 +1667,7 @@
     <url>/znai/synergy-with-testing/web-UI#auto-annotations</url>
     <fullTitle>Znai: Web UI, Auto Annotations [Synergy With Testing]</fullTitle>
     <text>
-      <text>How to annotate images using the include-image plugin visuals/image-annotations was covered previously . Now let's automate the screenshot and annotations assignment process. PageElement signIn = $("#gb_70"); PageElement input = $(".gsfi"); PageElement search = $("[name='btnK']"); browser.open("http://google.com"); browser.doc.withAnnotations( badge(signIn), highlight(input).withColor("green"), arrow(search, "Click This").withColor("yellow")).capture("test"); Example above is using a Selenium-based framework to automatically take a screenshot and retrieve annotations positions. Once we have the information we can include the annotated image in our documentation. :include-image: test.png {annotationsPath: 'test.json'} The result is below:</text>
+      <text>How to annotate images using the include-image plugin visuals/image-annotations was covered previously . Now let's automate the screenshot and annotations assignment process. PageElement signIn = $("#gb_70"); PageElement input = $(".gsfi"); PageElement search = $("[name='btnK']"); browser.open("http://google.com"); browser.doc.withAnnotations( browser.doc.badge(signIn), browser.doc.highlight(input).withColor("green"), browser.doc.arrow(search, "Click This").withColor("yellow")).capture("test"); Example above is using a Selenium-based framework to automatically take a screenshot and retrieve annotations positions. Once we have the information we can include the annotated image in our documentation. :include-image: test.png {annotationsPath: 'test.json'} The result is below:</text>
       <score>STANDARD</score>
     </text>
   </entry>

@@ -100,6 +100,11 @@
 </article>
 
 <article>
+<header><h1>Border</h1></header>
+<p>Use border: true to include a border around image. :include-image: image.png {border: true}</p>
+</article>
+
+<article>
 <header><h1>Fit</h1></header>
 <p>An unfitted image will occupy all available space:To fit the image to the width of a text use the fit parameter. :include-image: books.jpg {fit: true}</p>
 </article>
@@ -162,7 +167,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "destination" : "/znai/visuals/regular-image.png",
         "alt" : "alt text",
         "inlined" : false,
-        "timestamp" : 1594852785752,
+        "timestamp" : 1601593290125,
         "width" : 583,
         "height" : 385,
         "type" : "Image"
@@ -231,7 +236,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "caption" : "Title of an image",
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1594852785748,
+        "timestamp" : 1601593290117,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -251,10 +256,40 @@ ReactDOM.render(React.createElement(Documentation, {
         "caption" : "Title of an image",
         "captionBottom" : true,
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1594852785748,
+        "timestamp" : 1601593290117,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "title" : "Border",
+      "id" : "border",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "border: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to include a border around image.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-image: image.png {border: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "border" : true,
+        "imageSrc" : "/znai/visuals/regular-image.png",
+        "timestamp" : 1601593290125,
+        "shapes" : [ ],
+        "width" : 583.0,
+        "height" : 385.0,
         "type" : "AnnotatedImage"
       } ]
     }, {
@@ -269,7 +304,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1594852785748,
+        "timestamp" : 1601593290117,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -294,7 +329,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "fit" : true,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1594852785748,
+        "timestamp" : 1601593290117,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -336,7 +371,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "scaleRatio" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1594852785748,
+        "timestamp" : 1601593290117,
         "shapes" : [ ],
         "width" : 509.4,
         "height" : 339.3,
@@ -367,7 +402,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "align" : "left",
         "scaleRatio" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1594852785748,
+        "timestamp" : 1601593290117,
         "shapes" : [ ],
         "width" : 509.4,
         "height" : 339.3,
@@ -381,14 +416,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "align" : "right",
         "scaleRatio" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1594852785748,
+        "timestamp" : 1601593290117,
         "shapes" : [ ],
         "width" : 509.4,
         "height" : 339.3,
         "type" : "AnnotatedImage"
       } ]
     } ],
-    "lastModifiedTime" : 1594852785752,
+    "lastModifiedTime" : 1601593290125,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Images",
@@ -405,6 +440,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Caption",
         "id" : "caption"
+      }, {
+        "title" : "Border",
+        "id" : "border"
       }, {
         "title" : "Fit",
         "id" : "fit"
