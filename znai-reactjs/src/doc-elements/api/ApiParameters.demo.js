@@ -73,11 +73,13 @@ export function apiParametersDemo(registry) {
             <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
         ))
         .add('with text around', () => (
-            <React.Fragment>
-                <ParagraphText/>
-                <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
-                <ParagraphText/>
-            </React.Fragment>
+            <div className="content-block">
+                <React.Fragment>
+                    <ParagraphText/>
+                    <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
+                    <ParagraphText/>
+                </React.Fragment>
+            </div>
         ))
         .add('with text around and title', () => (
             <div className="content-block">

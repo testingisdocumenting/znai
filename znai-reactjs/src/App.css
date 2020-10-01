@@ -160,7 +160,7 @@
     --znai-table-title-background-color: #e0e2e1;
 
     --znai-api-key-color: #527d8f;
-    --znai-api-description-color: #878988;
+    --znai-api-description-color: var(--znai-regular-text-color);
     --znai-api-title-color: var(--znai-snippets-title-color);
     --znai-api-title-background-color: var(--znai-snippets-title-background-color);
 
