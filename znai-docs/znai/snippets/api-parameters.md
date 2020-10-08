@@ -59,10 +59,50 @@ firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
 
+# Multi-line CSV Description
+
+Use quotes `"` to wrap a multiline description. Here is an example of description including multiple lines and 
+nested code block example.
+
+    `````api-parameters 
+    cores, String, "
+    ```
+    execute(cores: 10)
+    ```
+    Specify how many cores to allocate for execution
+    "
+    
+    gpu, Boolean, "
+    ```
+    execute(cores: 10, gpu: true)
+    ```
+    Specify whether to use gpu
+    "
+    `````
+
+`````api-parameters 
+cores, String, "
+```
+execute(cores: 10)
+```
+Specify how many cores to allocate for execution
+"
+
+gpu, Boolean, "
+```
+execute(cores: 10, gpu: true)
+```
+Specify whether to use gpu
+"
+`````
+
+Note: Use larger number of backticks on outside then inside to distinct between `api-parameters` plugin boundaries 
+and nested code blocks
+
 # External JSON File
 
-Instead of hardcoding your parameters inside markdown files, you can specify an external JSON file.
-JSON could be generated based on the data you have. Some of the examples:
+Instead of hard-coding your parameters inside markdown files, you can specify an external JSON file.
+JSON could be generated based on the data you have. Some examples:
 * build time annotation processor
 * test time command line parameters generation
 
