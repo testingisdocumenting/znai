@@ -1,2 +1,2 @@
-+, `:icon: check`
--, `:icon: slash`
++, `:icon: check {stroke: "green"}`
+-, `:icon: slash {stroke: "red"}`

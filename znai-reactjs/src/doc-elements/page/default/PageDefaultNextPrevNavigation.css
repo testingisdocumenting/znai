@@ -33,16 +33,16 @@
     flex: 1;
 }
 
-.default-next-prev-navigation-button > .icon,
-.default-next-prev-navigation-button > .icon {
+.default-next-prev-navigation-button > .znai-icon,
+.default-next-prev-navigation-button > .znai-icon {
     color: var(--znai-brand-primary-color);
 }
 
-.default-next-prev-navigation-button > .icon.chevron-right {
+.default-next-prev-navigation-button > .znai-icon.chevron-right {
     margin-left: 10px;
 }
 
-.default-next-prev-navigation-button > .icon.chevron-left {
+.default-next-prev-navigation-button > .znai-icon.chevron-left {
     margin-right: 10px;
 }
 

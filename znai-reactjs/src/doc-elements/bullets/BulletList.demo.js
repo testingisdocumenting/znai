@@ -79,7 +79,8 @@ function bulletsWithIcons() {
                         "content": [
                             {
                                 "type": "Icon",
-                                "id": "search"
+                                "id": "search",
+                                "stroke": "green",
                             },
                             {
                                 "text": "Something",
@@ -115,7 +116,8 @@ function bulletsWithIcons() {
                         "content": [
                             {
                                 "type": "Icon",
-                                "id": "thumbs-down"
+                                "id": "thumbs-down",
+                                "fill": "red"
                             },
                             {
                                 "type": "Emphasis",

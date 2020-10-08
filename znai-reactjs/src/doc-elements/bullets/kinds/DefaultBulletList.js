@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +24,11 @@ const DefaultBulletList = (props) => {
     const hasIcon = content.length && startsWithIcon(content[0].content)
     const className = "content-block" + (tight ? " tight" : "") + (hasIcon ? " icon-based" : "")
 
-    return (<ul className={className}><props.elementsLibrary.DocElement {...props}/></ul>)
+    return (
+        <ul className={className}>
+            <props.elementsLibrary.DocElement {...props}/>
+        </ul>
+    )
 }
 
 export default DefaultBulletList

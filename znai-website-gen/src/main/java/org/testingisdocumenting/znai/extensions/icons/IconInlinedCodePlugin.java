@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,9 +21,10 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
-import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 
 public class IconInlinedCodePlugin implements InlinedCodePlugin {
     @Override
@@ -37,6 +39,8 @@ public class IconInlinedCodePlugin implements InlinedCodePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        return PluginResult.docElement(new DocElement("Icon", "id", pluginParams.getFreeParam()));
+        Map<String, Object> props = new HashMap<>(pluginParams.getOpts().toMap());
+        props.put("id", pluginParams.getFreeParam());
+        return PluginResult.docElement("Icon", props);
     }
 }

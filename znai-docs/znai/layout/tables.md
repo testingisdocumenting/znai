@@ -76,6 +76,7 @@ Use `mappingPath` to provide a way to override table values using mapping table.
 
 :include-table: table/table-with-shortcuts.csv {mappingPath: "table/table-mapping.csv"}
 
+Note: We used [Icons](visuals/icons) in this example, but you can use any plugins or any text you want.
 
 # Inlined
 
