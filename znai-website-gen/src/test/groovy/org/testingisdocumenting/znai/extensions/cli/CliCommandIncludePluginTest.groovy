@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,7 +52,7 @@ class CliCommandIncludePluginTest {
     }
 
     private static def process(String params) {
-        def result = PluginsTestUtils.process(":include-cli-command: $params")
+        def result = PluginsTestUtils.processInclude(":include-cli-command: $params")
         return result[0].toMap()
     }
 }

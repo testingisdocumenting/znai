@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,19 +25,19 @@ class JavaDocIncludePluginTest {
     @Test
     void "method in doc"() {
         def plugin = process('{entry: "sampleMethod(String, List)"}')
-        plugin.textForSearch().text.should == 'sampleMethod(String, List)'
+        plugin.textForSearch().text.should == 'overloaded method java doc'
     }
 
     @Test
     void "variable in doc"() {
         def plugin = process('{entry: "SAMPLE_CONST"}')
-        plugin.textForSearch().text.should == 'SAMPLE_CONST'
+        plugin.textForSearch().text.should == 'variable level java doc'
     }
 
     @Test
     void "variable with a link in doc"() {
         def plugin = process('{entry: "SAMPLE_CONST_WITH_LINK"}')
-        plugin.textForSearch().text.should == 'SAMPLE_CONST_WITH_LINK'
+        plugin.textForSearch().text.should == 'variable level java doc {@link package.Class}'
     }
 
     private static IncludePlugin process(String params) {

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,6 +39,16 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 abstract public class JavaIncludePluginBase implements IncludePlugin {
+    protected static class JavaDocElementsMapsAndSearchText {
+        protected final List<Map<String, Object>> docElementsMaps;
+        protected final String searchText;
+
+        public JavaDocElementsMapsAndSearchText(List<Map<String, Object>> docElementsMaps, String searchText) {
+            this.docElementsMaps = docElementsMaps;
+            this.searchText = searchText;
+        }
+    }
+
     protected String path;
     protected Path fullPath;
     protected ComponentsRegistry componentsRegistry;
@@ -91,11 +102,12 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
         return SearchScore.HIGH.text(javaIncludeResult.getText());
     }
 
-    protected List<Map<String, Object>> javaDocTextToDocElements(String html) {
-        return HtmlToDocElementConverter.convert(
-                componentsRegistry, markupPath, html, codeReferencesFeature.getReferences())
-                .stream()
-                .map(DocElement::toMap)
-                .collect(toList());
+    protected JavaDocElementsMapsAndSearchText javaDocTextToDocElements(String html) {
+        HtmlToDocElementConverter.Result converted = HtmlToDocElementConverter.convert(
+                componentsRegistry, markupPath, html, codeReferencesFeature.getReferences());
+
+        return new JavaDocElementsMapsAndSearchText(converted.getDocElements().stream()
+                .map(DocElement::toMap).collect(toList()),
+                converted.getSearchText());
     }
 }

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,13 +28,15 @@ public class ApiParameter {
     private final String name;
     private final String type;
     private final List<Map<String, Object>> description;
+    private final String textForSearch;
 
     private final List<ApiParameter> children;
 
-    public ApiParameter(String name, String type, List<Map<String, Object>> description) {
+    public ApiParameter(String name, String type, List<Map<String, Object>> description, String textForSearch) {
         this.name = name;
         this.type = type;
         this.description = description;
+        this.textForSearch = textForSearch;
         this.children = new ArrayList<>();
     }
 
@@ -49,12 +52,27 @@ public class ApiParameter {
         return description;
     }
 
+    public String getTextForSearch() {
+        return textForSearch;
+    }
+
+    public String combinedTextForSearch() {
+        List<String> parts = new ArrayList<>();
+        parts.add(name);
+        parts.add(type);
+        parts.add(textForSearch);
+
+        children.forEach(c -> parts.add(c.combinedTextForSearch()));
+
+        return String.join(" ", parts);
+    }
+
     public List<ApiParameter> getChildren() {
         return children;
     }
 
-    public ApiParameter add(String name, String type, List<Map<String, Object>> description) {
-        ApiParameter apiParameter = new ApiParameter(name, type, description);
+    public ApiParameter add(String name, String type, List<Map<String, Object>> description, String textForSearch) {
+        ApiParameter apiParameter = new ApiParameter(name, type, description, textForSearch);
         children.add(apiParameter);
 
         return apiParameter;

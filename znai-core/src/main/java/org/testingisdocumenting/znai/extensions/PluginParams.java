@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +28,7 @@ public class PluginParams {
     private static final String RIGHT_SIDE_OPT_NAME = "rightSide";
     private static final String STICKY_SLIDE_OPT_NAME = "stickySlide";
 
-    private String pluginId;
+    private final String pluginId;
     private String freeParam;
     private PluginParamsOpts opts;
 

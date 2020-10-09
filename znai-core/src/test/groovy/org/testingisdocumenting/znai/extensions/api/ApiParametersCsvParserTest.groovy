@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,5 +49,10 @@ nestedList.score, int, descr6
                         [name: 'score', type: 'int', description: [[markdown: 'descr6', type: 'TestMarkdown']]]]],
                 [name: 'escaped.name', type: 'String', description: [[markdown: 'desc7', type: 'TestMarkdown']]]
         ]]
+
+        apiParameters.combinedTextForSearch().should == 'firstName String descr1 nested object descr2 zipCode ' +
+                'String descr3 address String descr4 subNested object nested nested url String nested nested 1 ' +
+                'fileName String nested nested 2 nestedList array of objects descr5 score int descr6 escaped.name ' +
+                'String desc7'
     }
 }

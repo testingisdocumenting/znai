@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,11 +28,11 @@ import java.util.Map;
 import static java.util.stream.Collectors.joining;
 
 public class MarkupParserResult {
-    private DocElement docElement;
-    private List<String> globalAnchorIds;
-    private List<AuxiliaryFile> auxiliaryFiles;
-    private PageMeta pageMeta;
-    private List<PageSearchEntry> searchEntries;
+    private final DocElement docElement;
+    private final List<String> globalAnchorIds;
+    private final List<AuxiliaryFile> auxiliaryFiles;
+    private final PageMeta pageMeta;
+    private final List<PageSearchEntry> searchEntries;
 
     public MarkupParserResult(DocElement docElement,
                               List<String> globalAnchorIds,

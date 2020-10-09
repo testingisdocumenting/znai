@@ -61,20 +61,20 @@ public class ApiParametersCsvParser {
 
         boolean escapedName = name.startsWith("'") && name.endsWith("'");
         if (name.contains(".") && !name.contains("..") && !escapedName) {
-            addNested(name, type, description);
+            addNested(name, type, description, markupParserResult.getAllText());
         } else {
             name = escapedName ? name.substring(1, name.length()-1) : name;
-            apiParameters.add(name, type, description);
+            apiParameters.add(name, type, description, markupParserResult.getAllText());
         }
     }
 
-    private void addNested(String name, String type, List<Map<String, Object>> description) {
+    private void addNested(String name, String type, List<Map<String, Object>> description, String textForSearch) {
         String[] parts = name.split("\\.");
         ApiParameter apiParameter = apiParameters.find(parts[0]);
         for (int i = 1; i < parts.length - 1; i++) {
             apiParameter = apiParameter.find(parts[i]);
         }
 
-        apiParameter.add(parts[parts.length - 1], type, description);
+        apiParameter.add(parts[parts.length - 1], type, description, textForSearch);
     }
 }

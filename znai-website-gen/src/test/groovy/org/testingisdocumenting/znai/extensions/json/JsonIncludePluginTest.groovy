@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -69,7 +70,7 @@ class JsonIncludePluginTest {
     }
 
     private static def process(String params) {
-        def result = PluginsTestUtils.process(":include-json: $params")
+        def result = PluginsTestUtils.processInclude(":include-json: $params")
         return result[0].toMap()
     }
 }

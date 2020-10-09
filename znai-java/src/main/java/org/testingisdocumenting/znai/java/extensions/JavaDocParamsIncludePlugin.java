@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,7 +48,10 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
         ApiParameters apiParameters = new ApiParameters();
         addReturn(apiParameters, javaMethod);
         javaMethod.getParams().forEach(param -> {
-            apiParameters.add(param.getName(), param.getType(), javaDocTextToDocElements(param.getJavaDocText()));
+            JavaDocElementsMapsAndSearchText docElementsMapsAndSearchText =
+                    javaDocTextToDocElements(param.getJavaDocText());
+            apiParameters.add(param.getName(), param.getType(),
+                    docElementsMapsAndSearchText.docElementsMaps, docElementsMapsAndSearchText.searchText);
         });
 
         Map<String, Object> props = apiParameters.toMap();
@@ -81,7 +85,10 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
             return;
         }
 
+        JavaDocElementsMapsAndSearchText elementsMapsAndSearchText =
+                javaDocTextToDocElements(methodReturn.getJavaDocText());
+
         apiParameters.add("return", methodReturn.getType(),
-                javaDocTextToDocElements(methodReturn.getJavaDocText()));
+                elementsMapsAndSearchText.docElementsMaps, elementsMapsAndSearchText.searchText);
     }
 }

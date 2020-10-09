@@ -42,7 +42,7 @@ class CliOutputIncludePluginTest {
     }
 
     private static def process(String params) {
-        def result = PluginsTestUtils.process(":include-cli-output: $params")
+        def result = PluginsTestUtils.processInclude(":include-cli-output: $params")
         return result[0].toMap()
     }
 }

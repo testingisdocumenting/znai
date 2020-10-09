@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,9 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchCrawlerParserHandler extends NoOpParserHandler {
-    private List<PageSearchEntry> searchEntries;
+    private final List<PageSearchEntry> searchEntries;
     private String pageSectionTitle;
-    private List<String> currentTextParts;
+    private final List<String> currentTextParts;
 
     public SearchCrawlerParserHandler() {
         this.searchEntries = new ArrayList<>();
@@ -108,6 +109,11 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onHardLineBreak() {
+        add(" ");
+    }
+
+    @Override
+    public void onListItemEnd() {
         add(" ");
     }
 

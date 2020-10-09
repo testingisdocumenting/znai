@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +34,7 @@ class MarkdownIncludePluginTest {
 
     @Test
     void "should pick first available file to include"() {
-        def includePluginAndParserHandler = PluginsTestUtils.processAndGetPluginAndParserHandler(':include-markdown: ' +
+        def includePluginAndParserHandler = PluginsTestUtils.processAndGetIncludePluginAndParserHandler(':include-markdown: ' +
                 '{firstAvailable: ["non-existing.md", "test-optional.md"]}')
         includePluginAndParserHandler.includePlugin
                 .auxiliaryFiles().collect { af -> af.path.fileName.toString() }.should == ['test-optional.md']

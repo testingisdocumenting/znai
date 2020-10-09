@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,6 +40,6 @@ class ReactJsComponentIncludePluginTest {
     }
 
     private static List<Map<String, ?>> process(params) {
-        return PluginsTestUtils.process(":include-reactjs-component: $params")*.toMap()
+        return PluginsTestUtils.processInclude(":include-reactjs-component: $params")*.toMap()
     }
 }

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,8 +36,11 @@ public class JavaDocIncludePlugin extends JavaIncludePluginBase {
     public JavaIncludeResult process(JavaCode javaCode) {
         String entry = pluginParams.getOpts().get("entry");
 
-        return new JavaIncludeResult(HtmlToDocElementConverter.convert(componentsRegistry, markupPath,
+        HtmlToDocElementConverter.Result htmlParseResult = HtmlToDocElementConverter.convert(
+                componentsRegistry, markupPath,
                 entry == null ? javaCode.getClassJavaDocText() : javaCode.findJavaDoc(entry),
-                codeReferencesFeature.getReferences()), entry);
+                codeReferencesFeature.getReferences());
+
+        return new JavaIncludeResult(htmlParseResult.getDocElements(), htmlParseResult.getSearchText());
     }
 }
