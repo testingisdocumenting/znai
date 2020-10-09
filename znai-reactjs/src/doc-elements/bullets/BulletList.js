@@ -34,7 +34,7 @@ const presentationTypes = {...types, RevealBoxes, HorizontalStripes, Grid}
 const BulletList = (props) => {
     const type = listType(props, 'bulletListType')
 
-    if (! type) {
+    if (!type) {
         return <DefaultBulletList {...props}/>
     }
 

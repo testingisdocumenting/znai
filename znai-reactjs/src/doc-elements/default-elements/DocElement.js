@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +24,11 @@ import * as React from 'react'
  * @param elementsLibrary library of elements to use to render
  */
 const DocElement = ({content, elementsLibrary}) => {
-    return (!content ? null : content.map((item, idx) => {
+    if (!content) {
+        return null
+    }
+
+    return content.map((item, idx) => {
         const ElementToUse = elementsLibrary[item.type]
         if (!ElementToUse) {
             console.warn("can't find component to display: " + JSON.stringify(item))
@@ -32,7 +37,7 @@ const DocElement = ({content, elementsLibrary}) => {
             return <ElementToUse key={idx} {...item}
                                  elementsLibrary={elementsLibrary}/>
         }
-    }))
+    })
 }
 
 export default DocElement

@@ -60,44 +60,44 @@ h6 {
     margin-bottom: 15px;
 }
 
-h2 .icon svg {
+h2 .znai-icon svg {
     width: 16px;
     height: 16px;
 }
 
-h3 .icon svg {
+h3 .znai-icon svg {
     width: 14px;
     height: 14px;
 }
 
-h4 .icon svg {
+h4 .znai-icon svg {
     width: 14px;
     height: 14px;
 }
 
-h5 .icon svg {
+h5 .znai-icon svg {
     width: 11px;
     height: 11px;
 }
 
-h6 .icon svg {
+h6 .znai-icon svg {
     width: 10px;
     height: 10px;
 }
 
-h2 .icon svg,
-h3 .icon svg,
-h4 .icon svg,
-h5 .icon svg,
-h6 .icon svg {
+h2 .znai-icon svg,
+h3 .znai-icon svg,
+h4 .znai-icon svg,
+h5 .znai-icon svg,
+h6 .znai-icon svg {
     margin-left: 10px;
     display: none;
 }
 
-h2:hover .icon svg,
-h3:hover .icon svg,
-h4:hover .icon svg,
-h5:hover .icon svg,
-h6:hover .icon svg {
+h2:hover .znai-icon svg,
+h3:hover .znai-icon svg,
+h4:hover .znai-icon svg,
+h5:hover .znai-icon svg,
+h6:hover .znai-icon svg {
     display: inline-block;
 }

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,22 +18,24 @@
 import React from 'react'
 
 import { Icon } from '../icons/Icon'
-import {startsWithIcon, removeIcon, extractIconId} from './bulletUtils'
+import {startsWithIcon, removeIcon, extractIconProps} from './bulletUtils'
 
 import './ListItem.css'
 
 const ListItem = (props) => {
-    let content = props.content
+    const content = props.content
     const hasIcon = startsWithIcon(content)
 
     const className = "list-item" + (hasIcon ? " icon-based" : "")
     const childrenContent = hasIcon ? removeIcon(content) : content
     const children = <props.elementsLibrary.DocElement {...props} content={childrenContent}/>
 
-    return <li className={className}>
-        {hasIcon ? <Icon id={extractIconId(content)}/> : null}
-        {children}
-    </li>
+    return (
+        <li className={className}>
+            {hasIcon ? <Icon {...extractIconProps(content)}/> : null}
+            {children}
+        </li>
+    )
 }
 
 export default ListItem

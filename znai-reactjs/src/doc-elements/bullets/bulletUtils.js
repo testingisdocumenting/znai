@@ -22,7 +22,11 @@ export function startsWithIcon(content) {
 }
 
 export function extractIconId(content) {
-    return content[0].content[0].id
+    return extractIconProps(content).id
+}
+
+export function extractIconProps(content) {
+    return content[0].content[0]
 }
 
 export function extractIconIds(list) {

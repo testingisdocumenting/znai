@@ -17,6 +17,8 @@
 
 .theme-znai-dark,
 .page-two-sides-right-part {
+    --znai-color-black: #000;
+
     --znai-background-color: #1e2529;
 
     --znai-regular-text-color: var(--znai-inversed-text-color);

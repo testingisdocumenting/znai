@@ -16,7 +16,7 @@
  */
 
 import React from 'react'
-import feather from 'feather-icons'
+import feather, { FeatherAttributes } from 'feather-icons'
 
 import './Icon.css'
 
@@ -25,22 +25,31 @@ const idMapping = generateMapping()
 interface Props {
   id: string;
   className?: string;
+  stroke?: string;
+  fill?: string;
 
   onClick?(): void;
 }
 
-export function Icon({id, className, onClick}: Props) {
-  const fullClassName = 'icon ' + id + (className ? ' ' + className : '')
+export function Icon({id, className, stroke, fill, onClick}: Props) {
+  const fullClassName = 'znai-icon ' + id + (className ? ' ' + className : '')
   const idToUse = idMapping[id] || id
 
   const featherIcon = feather.icons[idToUse]
   return featherIcon ? (
     <span className={fullClassName}
           onClick={onClick}
-          dangerouslySetInnerHTML={{__html: featherIcon.toSvg()}}/>
+          dangerouslySetInnerHTML={{__html: featherIcon.toSvg(buildStyle(stroke, fill))}}/>
   ) : (
     <span>Icon not found: {idToUse}</span>
   )
+}
+
+function buildStyle(stroke?: string, fill?: string): FeatherAttributes {
+  return {
+    stroke: stroke ? `var(--znai-color-${stroke})` : 'currentColor',
+    fill: fill ? `var(--znai-color-${fill})` : 'none'
+  }
 }
 
 function generateMapping(): {[id: string]: string;} {

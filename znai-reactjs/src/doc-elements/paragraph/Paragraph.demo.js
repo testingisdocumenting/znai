@@ -23,6 +23,9 @@ export function paragraphDemo(registry) {
     registry.add('with icon', () => (<elementsLibrary.DocElement content={createParagraphWithIcon()}
                                                                  elementsLibrary={elementsLibrary}/>))
 
+    registry.add('with colored icons', () => (<elementsLibrary.DocElement content={createParagraphWithColoredIcons()}
+                                                                          elementsLibrary={elementsLibrary}/>))
+
     registry.add('note', () => (<elementsLibrary.DocElement content={createAttentionParagraph("Note:")}
                                                             elementsLibrary={elementsLibrary}/>))
 
@@ -55,6 +58,66 @@ function createParagraphWithIcon() {
                 {
                     "text": "Text after the icon followed by another icon",
                     "type": "SimpleText"
+                },
+                {
+                    "id": "git-pull-request",
+                    "type": "Icon"
+                },
+            ]
+        }
+    ]
+}
+
+function createParagraphWithColoredIcons() {
+    return [
+        {
+            "type": "Paragraph",
+            "content": [
+                {
+                    "id": "cloud",
+                    "type": "Icon",
+                    "stroke": "blue",
+                    "fill": "blue"
+                },
+                {
+                    "id": "cloud",
+                    "type": "Icon",
+                    "stroke": "green",
+                    "fill": "green"
+                },
+                {
+                    "id": "cloud",
+                    "type": "Icon",
+                    "fill": "yellow"
+                },
+                {
+                    "id": "cloud",
+                    "type": "Icon",
+                    "stroke": "red",
+                    "fill": "red"
+                },
+                {
+                    "type": "HardLineBreak"
+                },
+                {
+                    "id": "check",
+                    "type": "Icon",
+                    "stroke": "blue",
+                },
+                {
+                    "id": "check",
+                    "type": "Icon",
+                    "stroke": "green",
+                },
+                {
+                    "id": "check",
+                    "type": "Icon",
+                    "stroke": "yellow",
+                },
+                {
+                    "id": "check",
+                    "type": "Icon",
+                    "stroke": "red",
                 },
                 {
                     "id": "git-pull-request",
