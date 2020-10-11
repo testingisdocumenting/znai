@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +35,7 @@ class CppCommentsIncludePluginTest {
     }
 
     private static def process(String fileName, String entry) {
-        def result = PluginsTestUtils.process(":include-cpp-comments: $fileName {entry: \"$entry\"}")
+        def result = PluginsTestUtils.processInclude(":include-cpp-comments: $fileName {entry: \"$entry\"}")
         return result[0].getProp("markup")
     }
 }

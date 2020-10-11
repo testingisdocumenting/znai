@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +20,7 @@ package org.testingisdocumenting.znai.extensions.include
 import org.testingisdocumenting.znai.core.AuxiliaryFile
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.Plugins
+import org.testingisdocumenting.znai.extensions.fence.FencePlugin
 import org.testingisdocumenting.znai.parser.docelement.DocElement
 import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler
 
@@ -33,8 +35,13 @@ class PluginsTestUtils {
         DocElementCreationParserHandler parserHandler
     }
 
+    static class FencePluginAndParserHandler {
+        FencePlugin fencePlugin
+        DocElementCreationParserHandler parserHandler
+    }
+
     static Map<String, Object> processAndGetProps(String pluginDef) {
-        def result = process(pluginDef)
+        def result = processInclude(pluginDef)
         return result[0].getProps()
     }
 
@@ -42,22 +49,22 @@ class PluginsTestUtils {
         return processAndGetProps(pluginDef).snippet
     }
 
-    static List<DocElement> process(String pluginDef) {
-        def includePluginAndParserHandler = processAndGetPluginAndParserHandler(pluginDef)
+    static List<DocElement> processInclude(String pluginDef) {
+        def includePluginAndParserHandler = processAndGetIncludePluginAndParserHandler(pluginDef)
         return includePluginAndParserHandler.parserHandler.docElement.content
     }
 
     static Stream<AuxiliaryFile> processAndGetAuxiliaryFiles(String pluginDef) {
-        def includePluginAndParserHandler = processAndGetPluginAndParserHandler(pluginDef)
+        def includePluginAndParserHandler = processAndGetIncludePluginAndParserHandler(pluginDef)
         return includePluginAndParserHandler.includePlugin.auxiliaryFiles(TEST_COMPONENTS_REGISTRY)
     }
 
     static IncludePlugin processAndGetIncludePlugin(String pluginDef) {
-        def includePluginAndParserHandler = processAndGetPluginAndParserHandler(pluginDef)
+        def includePluginAndParserHandler = processAndGetIncludePluginAndParserHandler(pluginDef)
         return includePluginAndParserHandler.includePlugin
     }
 
-    static IncludePluginAndParserHandler processAndGetPluginAndParserHandler(String pluginDef) {
+    static IncludePluginAndParserHandler processAndGetIncludePluginAndParserHandler(String pluginDef) {
         DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(
                 TEST_COMPONENTS_REGISTRY,
                 Paths.get(""))
@@ -70,5 +77,19 @@ class PluginsTestUtils {
         parserHandler.onIncludePlugin(includePlugin, pluginResult)
 
         return new IncludePluginAndParserHandler(includePlugin: includePlugin, parserHandler: parserHandler)
+    }
+
+    static FencePluginAndParserHandler processAndGetFencePluginAndParserHandler(PluginParams pluginParams,
+                                                                                String textContent) {
+        DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(
+                TEST_COMPONENTS_REGISTRY,
+                Paths.get(""))
+
+        def fencePlugin = Plugins.fencePluginById(pluginParams.pluginId)
+
+        def pluginResult = fencePlugin.process(TEST_COMPONENTS_REGISTRY, Paths.get(""),  pluginParams, textContent)
+        parserHandler.onFencePlugin(fencePlugin, pluginResult)
+
+        return new FencePluginAndParserHandler(fencePlugin: fencePlugin, parserHandler: parserHandler)
     }
 }

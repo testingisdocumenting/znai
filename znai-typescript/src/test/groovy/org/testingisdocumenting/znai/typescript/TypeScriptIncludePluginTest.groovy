@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +31,7 @@ class TypeScriptIncludePluginTest {
     }
 
     private static def process(String params) {
-        def result = PluginsTestUtils.process(":include-typescript: $params")
+        def result = PluginsTestUtils.processInclude(":include-typescript: $params")
         return result*.toMap()
     }
 }

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +20,7 @@ package org.testingisdocumenting.znai.java.parser.html;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.parser.ParserHandlersList;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
 import org.testingisdocumenting.znai.reference.DocReferences;
@@ -27,11 +29,32 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.NodeVisitor;
+import org.testingisdocumenting.znai.search.SearchCrawlerParserHandler;
 
 import java.nio.file.Path;
 import java.util.List;
 
+import static java.util.stream.Collectors.joining;
+
 public class HtmlToDocElementConverter {
+    public static class Result {
+        private final List<DocElement> docElements;
+        private final String searchText;
+
+        public Result(List<DocElement> docElements, String searchText) {
+            this.docElements = docElements;
+            this.searchText = searchText;
+        }
+
+        public List<DocElement> getDocElements() {
+            return docElements;
+        }
+
+        public String getSearchText() {
+            return searchText;
+        }
+    }
+
     private HtmlToDocElementConverter() {
     }
 
@@ -44,20 +67,25 @@ public class HtmlToDocElementConverter {
      * @param codeReferences     code references to use during conversion
      * @return doc element that is a representation of th®e html
      */
-    public static List<DocElement> convert(ComponentsRegistry componentsRegistry, Path filePath, String html, DocReferences codeReferences) {
+    public static Result convert(ComponentsRegistry componentsRegistry, Path filePath, String html, DocReferences codeReferences) {
         Document document = Jsoup.parse(html);
 
+        SearchCrawlerParserHandler searchCrawler = new SearchCrawlerParserHandler();
         DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(componentsRegistry, filePath);
-        document.body().traverse(new ConverterNodeVisitor(parserHandler, codeReferences));
+        ParserHandlersList parserHandlersList = new ParserHandlersList(parserHandler, searchCrawler);
 
-        parserHandler.onParsingEnd();
+        document.body().traverse(new ConverterNodeVisitor(parserHandlersList, codeReferences));
 
-        return parserHandler.getDocElement().getContent();
+        parserHandlersList.onParsingEnd();
+
+        return new Result(parserHandler.getDocElement().getContent(),
+                searchCrawler.getSearchEntries().stream().map(se -> se.getSearchText().getText())
+                        .collect(joining(" ")));
     }
 
     private static class ConverterNodeVisitor implements NodeVisitor {
-        private ParserHandler parserHandler;
-        private DocReferences codeReferences;
+        private final ParserHandler parserHandler;
+        private final DocReferences codeReferences;
         private boolean isInsideInlinedCode;
         private boolean isInsideBlockCode;
 

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +18,6 @@
 package org.testingisdocumenting.znai.java.extensions
 
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
-import org.testingisdocumenting.znai.parser.docelement.DocElement
 import org.junit.Test
 
 class JavaEnumEntriesIncludePluginTest {
@@ -54,6 +54,6 @@ class JavaEnumEntriesIncludePluginTest {
     }
 
     private static List<Map<String, Object>> process(String fileName, String params) {
-        return PluginsTestUtils.process(":include-java-enum-entries: $fileName $params")*.toMap()
+        return PluginsTestUtils.processInclude(":include-java-enum-entries: $fileName $params")*.toMap()
     }
 }

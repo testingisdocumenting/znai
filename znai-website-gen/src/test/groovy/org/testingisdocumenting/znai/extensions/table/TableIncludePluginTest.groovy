@@ -79,7 +79,7 @@ class TableIncludePluginTest {
     }
 
     private static def process(String fileName, String meta = '') {
-        def result = PluginsTestUtils.process(":include-table: $fileName $meta")
+        def result = PluginsTestUtils.processInclude(":include-table: $fileName $meta")
         return result[0].toMap()
     }
 }

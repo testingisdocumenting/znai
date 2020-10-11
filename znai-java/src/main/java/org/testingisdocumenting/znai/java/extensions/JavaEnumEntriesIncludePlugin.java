@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,14 +22,11 @@ import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.java.parser.EnumEntry;
 import org.testingisdocumenting.znai.java.parser.JavaCode;
-import org.testingisdocumenting.znai.java.parser.html.HtmlToDocElementConverter;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
-import org.testingisdocumenting.znai.parser.docelement.DocElementType;
 
 import java.util.*;
 
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 
 public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     @Override
@@ -47,7 +45,10 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
         javaCode.getEnumEntries().stream()
                 .filter(this::includeEnum)
                 .forEach((enumEntry) -> {
-            apiParameters.add(enumEntry.getName(), "", javaDocTextToDocElements(enumEntry.getJavaDocText()));
+                    JavaDocElementsMapsAndSearchText elementsMapsAndSearchText = javaDocTextToDocElements(
+                            enumEntry.getJavaDocText());
+                    apiParameters.add(enumEntry.getName(), "", elementsMapsAndSearchText.docElementsMaps,
+                            elementsMapsAndSearchText.searchText);
         });
 
         Map<String, Object> props = apiParameters.toMap();
@@ -68,18 +69,5 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     private String extractText(List<EnumEntry> enums) {
         return enums.stream().map(e -> e.getName() + " " + e.getJavaDocText())
                 .collect(joining(" "));
-    }
-
-    private List<Map<String, Object>> nameToDocElements(EnumEntry e) {
-        return Collections.singletonList(
-                new DocElement(DocElementType.INLINED_CODE, "code", e.getName()).toMap());
-    }
-
-    private List<Map<String, Object>> descriptionToDocElements(EnumEntry e) {
-        return HtmlToDocElementConverter.convert(
-                componentsRegistry, markupPath, e.getJavaDocText(),
-                codeReferencesFeature.getReferences())
-                .stream()
-                .map(DocElement::toMap).collect(toList());
     }
 }

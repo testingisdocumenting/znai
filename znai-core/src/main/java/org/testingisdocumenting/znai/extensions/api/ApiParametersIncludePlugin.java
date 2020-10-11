@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +24,8 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.Map;
@@ -30,6 +33,7 @@ import java.util.stream.Stream;
 
 public class ApiParametersIncludePlugin implements IncludePlugin {
     private Path fullPath;
+    private ApiParameters apiParameters;
 
     @Override
     public String id() {
@@ -46,7 +50,7 @@ public class ApiParametersIncludePlugin implements IncludePlugin {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         fullPath = resourcesResolver.fullPath(pluginParams.getFreeParam());
 
-        ApiParameters apiParameters = ApiParametersJsonParser.parse(componentsRegistry.markdownParser(),
+        apiParameters = ApiParametersJsonParser.parse(componentsRegistry.markdownParser(),
                 resourcesResolver.textContent(fullPath));
 
         Map<String, Object> props = apiParameters.toMap();
@@ -58,5 +62,10 @@ public class ApiParametersIncludePlugin implements IncludePlugin {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(fullPath));
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.STANDARD.text(apiParameters.combinedTextForSearch());
     }
 }

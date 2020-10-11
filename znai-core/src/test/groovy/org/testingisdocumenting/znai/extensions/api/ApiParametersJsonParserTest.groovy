@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -64,5 +65,8 @@ class ApiParametersJsonParserTest {
                         [name: 'param21', type: 'String', description:[[markdown: 'description 21', type: 'TestMarkdown']], children:[
                                 [name: 'param31', type: 'Boolean', description: [[markdown: 'description 31', type: 'TestMarkdown']]]]],
                         [name: 'param22', type: 'Integer', description: [[markdown: 'description 22', type: 'TestMarkdown']]]]]]]
+
+        apiParameters.combinedTextForSearch().should == 'param1 String description 1 param2 Integer description 2 ' +
+                'param21 String description 21 param31 Boolean description 31 param22 Integer description 22'
     }
 }

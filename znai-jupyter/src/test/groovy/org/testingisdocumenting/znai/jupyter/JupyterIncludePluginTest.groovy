@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -70,7 +71,7 @@ class JupyterIncludePluginTest {
     }
 
     private static def process(String params) {
-        def result = PluginsTestUtils.process(":include-jupyter: $params")
+        def result = PluginsTestUtils.processInclude(":include-jupyter: $params")
         return result*.toMap()
     }
 }

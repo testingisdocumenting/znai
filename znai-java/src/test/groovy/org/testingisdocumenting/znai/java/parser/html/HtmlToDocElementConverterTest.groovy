@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,6 +27,7 @@ import java.nio.file.Paths
 class HtmlToDocElementConverterTest {
     private static ComponentsRegistry testComponentsRegistry = new TestComponentsRegistry()
     private List<Map<String,Object>> elements
+    private String searchText
 
     @Test
     void "should replace standard style tags with doc elements"() {
@@ -43,6 +45,8 @@ second paragraph
                                                          [type: 'StrongEmphasis', content:[[text: 'bold', type: 'SimpleText']]],
                                                          [type: 'Emphasis', content:[[text: 'italic', type: 'SimpleText']]]]],
                             [type: 'Paragraph', content:[[text:' second paragraph ', type: 'SimpleText']]]]
+
+        searchText.should == 'hello world another paragraph with bolditalic second paragraph'
     }
 
     @Test
@@ -51,6 +55,8 @@ second paragraph
 
         elements.should == [[type: 'Paragraph', content:[[type: 'Link', isFile: false, url: 'http://url', content:
                 [[text: 'text inside', type: 'SimpleText']]]]]]
+
+        searchText.should == 'http://url text inside'
     }
 
     @Test
@@ -59,6 +65,8 @@ second paragraph
 
         elements.should == [[type: 'Snippet', lang: '', lineNumber: '',
                              snippet: 'line of code']]
+
+        searchText.should == 'line of code'
     }
 
     @Test
@@ -69,6 +77,8 @@ second paragraph
                              content: [
                                      [type: 'ListItem', content: [[text: 'item 1', type: 'SimpleText']]],
                                      [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]]]
+
+        searchText.should == 'item 1 item 2'
     }
 
     @Test
@@ -79,6 +89,8 @@ second paragraph
                              content: [
                                      [type: 'ListItem', content: [[text: 'item 1', type: 'SimpleText']]],
                                      [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]]]
+
+        searchText.should == 'item 1 item 2'
     }
 
     @Test
@@ -100,6 +112,8 @@ World paragraph
                                          [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]],
                             [type: 'Paragraph', content:[[text: ' some text ', type: 'SimpleText']]],
                             [type: 'Paragraph', content:[[text: ' World paragraph ', type: 'SimpleText']]]]
+
+        searchText.should == 'Hello item 1 item 2 some text World paragraph'
     }
 
     @Test
@@ -108,14 +122,18 @@ World paragraph
 
         elements.should == [[type: 'Paragraph',
                              content: [[code: 'MyClass', references: [MyClass: [pageUrl: 'link/toRef']], type: 'InlinedCode']]]]
+
+        searchText.should == 'MyClass'
     }
 
     private void process(String html, codeReferences = [:]) {
         def docReferences = new DocReferences()
         codeReferences.each { k, v -> docReferences.add(k, v) }
 
-        def docElements = HtmlToDocElementConverter.convert(testComponentsRegistry, Paths.get(""), html,
+        def docElementsAndSearchText = HtmlToDocElementConverter.convert(testComponentsRegistry, Paths.get(""), html,
                 docReferences)
-        elements = docElements.collect { it.toMap() }
+
+        elements = docElementsAndSearchText.docElements.collect { it.toMap() }
+        searchText = docElementsAndSearchText.searchText
     }
 }

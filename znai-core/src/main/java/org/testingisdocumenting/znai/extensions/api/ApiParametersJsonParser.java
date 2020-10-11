@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +18,7 @@
 package org.testingisdocumenting.znai.extensions.api;
 
 import org.testingisdocumenting.znai.parser.MarkupParser;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
@@ -49,9 +51,11 @@ public class ApiParametersJsonParser {
 
     @SuppressWarnings("unchecked")
     private void parseParam(ApiParameter current, Map<String, Object> param) {
+        MarkupParserResult parserResult = markupParser.parse(path, param.get("description").toString());
         ApiParameter apiParameter = current.add(param.get("name").toString(),
                 param.get("type").toString(),
-                markupParser.parse(path, param.get("description").toString()).contentToListOfMaps());
+                parserResult.contentToListOfMaps(),
+                parserResult.getAllText());
 
         Object children = param.get("children");
         if (children != null) {

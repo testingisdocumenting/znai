@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,11 +21,15 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.Map;
 
 public class ApiParametersFencePlugin implements FencePlugin {
+    private ApiParameters apiParameters;
+
     @Override
     public String id() {
         return "api-parameters";
@@ -37,10 +42,15 @@ public class ApiParametersFencePlugin implements FencePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
-        ApiParameters apiParameters = ApiParametersCsvParser.parse(componentsRegistry.markdownParser(), content);
+        apiParameters = ApiParametersCsvParser.parse(componentsRegistry.markdownParser(), content);
         Map<String, Object> props = apiParameters.toMap();
         props.putAll(pluginParams.getOpts().toMap());
 
         return PluginResult.docElement("ApiParameters", props);
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.STANDARD.text(apiParameters.combinedTextForSearch());
     }
 }

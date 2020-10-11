@@ -1,0 +1,7 @@
+[
+  {
+    "name": "firstName",
+    "type": "String",
+    "description": "first name"
+  }
+]
