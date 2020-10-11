@@ -32,15 +32,15 @@ public class ApiParametersJsonParser {
     private final List<Map<String, Object>> json;
     private final Path path;
 
-    public static ApiParameters parse(MarkupParser markupParser, String jsonContent) {
-        return new ApiParametersJsonParser(markupParser, jsonContent).parse();
+    public static ApiParameters parse(String anchorPrefix, MarkupParser markupParser, String jsonContent) {
+        return new ApiParametersJsonParser(anchorPrefix, markupParser, jsonContent).parse();
     }
 
     @SuppressWarnings("unchecked")
-    private ApiParametersJsonParser(MarkupParser markupParser, String jsonContent) {
+    private ApiParametersJsonParser(String anchorPrefix, MarkupParser markupParser, String jsonContent) {
         this.markupParser = markupParser;
         this.json = (List<Map<String, Object>>) JsonUtils.deserializeAsList(jsonContent);
-        this.apiParameters = new ApiParameters();
+        this.apiParameters = new ApiParameters(anchorPrefix);
         this.path = Paths.get("");
     }
 

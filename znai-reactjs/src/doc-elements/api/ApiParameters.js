@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,6 +29,7 @@ export default function ApiParameters({
                                           elementsLibrary
                                       }) {
     const renderedParameters = parameters.map(p => <ApiParameter key={p.name}
+                                                                 anchorId={p.anchorId}
                                                                  name={p.name}
                                                                  type={p.type}
                                                                  isExpanded={false}
@@ -38,7 +40,7 @@ export default function ApiParameters({
                                                                  elementsLibrary={elementsLibrary}/>)
 
     const isNested = nestedLevel > 0
-    const className = 'api-parameters' + (isNested ? ' nested' : '')
+    const className = 'znai-api-parameters' + (isNested ? ' nested' : '')
     const style = {marginLeft: -parentWidth}
 
     return (

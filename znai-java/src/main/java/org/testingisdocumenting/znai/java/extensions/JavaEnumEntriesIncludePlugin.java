@@ -41,7 +41,7 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
 
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
-        ApiParameters apiParameters = new ApiParameters();
+        ApiParameters apiParameters = new ApiParameters(determineAnchorPrefix());
         javaCode.getEnumEntries().stream()
                 .filter(this::includeEnum)
                 .forEach((enumEntry) -> {
@@ -69,5 +69,13 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     private String extractText(List<EnumEntry> enums) {
         return enums.stream().map(e -> e.getName() + " " + e.getJavaDocText())
                 .collect(joining(" "));
+    }
+
+    private String determineAnchorPrefix() {
+        if (entry != null) {
+            return entry;
+        }
+
+        return fullPath.getFileName().toString();
     }
 }

@@ -25,6 +25,7 @@ import java.util.Map;
 import static java.util.stream.Collectors.toList;
 
 public class ApiParameter {
+    private final String anchorId;
     private final String name;
     private final String type;
     private final List<Map<String, Object>> description;
@@ -32,7 +33,9 @@ public class ApiParameter {
 
     private final List<ApiParameter> children;
 
-    public ApiParameter(String name, String type, List<Map<String, Object>> description, String textForSearch) {
+    public ApiParameter(String anchorId, String name, String type,
+                        List<Map<String, Object>> description, String textForSearch) {
+        this.anchorId = anchorId;
         this.name = name;
         this.type = type;
         this.description = description;
@@ -67,12 +70,22 @@ public class ApiParameter {
         return String.join(" ", parts);
     }
 
+    public List<String> collectAllAnchors() {
+        List<String> result = new ArrayList<>();
+        result.add(anchorId);
+
+        children.forEach(child -> result.addAll(child.collectAllAnchors()));
+        return result;
+    }
+
     public List<ApiParameter> getChildren() {
         return children;
     }
 
     public ApiParameter add(String name, String type, List<Map<String, Object>> description, String textForSearch) {
-        ApiParameter apiParameter = new ApiParameter(name, type, description, textForSearch);
+        ApiParameter apiParameter = new ApiParameter(
+                ApiParametersAnchors.anchorIdFromNameAndPrefix(anchorId, name),
+                name, type, description, textForSearch);
         children.add(apiParameter);
 
         return apiParameter;
@@ -90,6 +103,7 @@ public class ApiParameter {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("name", name);
         result.put("type", type);
+        result.put("anchorId", anchorId);
         result.put("description", description);
         if (! children.isEmpty()) {
             result.put("children", children.stream().map(ApiParameter::toMap).collect(toList()));

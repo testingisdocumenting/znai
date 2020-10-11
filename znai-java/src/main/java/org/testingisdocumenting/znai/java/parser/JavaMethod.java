@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,19 +18,21 @@
 package org.testingisdocumenting.znai.java.parser;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class JavaMethod {
-    private String name;
-    private String nameWithTypes;
-    private String fullBody;
-    private String bodyOnly;
-    private String signatureOnly;
-    private String javaDocText;
-    private List<JavaMethodParam> params;
-    private JavaMethodReturn javaMethodReturn;
+    private final String name;
+    private final String nameWithTypes;
+    private final String fullBody;
+    private final String bodyOnly;
+    private final String signatureOnly;
+    private final String javaDocText;
+    private final List<JavaMethodParam> params;
+    private final JavaMethodReturn javaMethodReturn;
+    private final String anchorPrefix;
 
     public JavaMethod(String name, String fullBody, String bodyOnly, String signatureOnly,
                       List<JavaMethodParam> params,
@@ -43,6 +46,7 @@ public class JavaMethod {
         this.javaDocText = javaDocText;
         this.params = params;
         this.javaMethodReturn = javaMethodReturn != null && javaMethodReturn.getType().equals("void") ? null : javaMethodReturn;
+        this.anchorPrefix = buildAnchorPrefix();
     }
 
     public String getName() {
@@ -79,5 +83,15 @@ public class JavaMethod {
 
     public List<String> getParamNames() {
         return params.stream().map(JavaMethodParam::getName).collect(toList());
+    }
+
+    public String getAnchorPrefix() {
+        return anchorPrefix;
+    }
+
+    private String buildAnchorPrefix() {
+        String fromParams = params.stream().map(p -> p.getName() + "_" + p.getType())
+                .collect(joining("_"));
+        return name + (fromParams.isEmpty() ? "" : "_" + fromParams);
     }
 }

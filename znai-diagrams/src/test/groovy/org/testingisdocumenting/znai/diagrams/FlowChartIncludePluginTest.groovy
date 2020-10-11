@@ -30,7 +30,7 @@ class FlowChartIncludePluginTest {
     @Before
     @After
     void init() {
-        TEST_COMPONENTS_REGISTRY.docStructure().clearValidLinks()
+        TEST_COMPONENTS_REGISTRY.docStructure().clear()
     }
 
     @Test

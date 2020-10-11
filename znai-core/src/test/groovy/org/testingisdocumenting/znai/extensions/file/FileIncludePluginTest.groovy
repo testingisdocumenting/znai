@@ -161,6 +161,6 @@ class FileIncludePluginTest {
     }
 
     private static Map<String, Object> resultingProps(String fileName, String value) {
-        return PluginsTestUtils.processAndGetProps(":include-file: $fileName $value")
+        return PluginsTestUtils.processIncludeAndGetProps(":include-file: $fileName $value")
     }
 }

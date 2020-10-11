@@ -28,12 +28,13 @@ import static java.util.stream.Collectors.toList;
 public class ApiParameters {
     private final ApiParameter root;
 
-    public ApiParameters() {
-        root = new ApiParameter("root", "root", Collections.emptyList(), "");
+    public ApiParameters(String anchorPrefix) {
+        root = new ApiParameter(ApiParametersAnchors.sanitizeAnchorId(anchorPrefix),
+                "root", "root", Collections.emptyList(), "");
     }
 
-    public void add(String name, String type, List<Map<String, Object>> description, String textForSearch) {
-        root.add(name, type, description, textForSearch);
+    public ApiParameter add(String name, String type, List<Map<String, Object>> description, String textForSearch) {
+        return root.add(name, type, description, textForSearch);
     }
 
     public ApiParameter find(String name) {
@@ -49,6 +50,12 @@ public class ApiParameters {
         result.put("parameters", root.getChildren().stream().map(ApiParameter::toMap).collect(toList()));
 
         return result;
+    }
+
+    public List<String> collectAllAnchors() {
+        return root.getChildren().stream()
+                .flatMap(child -> child.collectAllAnchors().stream())
+                .collect(toList());
     }
 
     public String combinedTextForSearch() {

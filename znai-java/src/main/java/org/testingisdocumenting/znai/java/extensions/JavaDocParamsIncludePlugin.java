@@ -45,7 +45,8 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
     public JavaIncludeResult process(JavaCode javaCode) {
         JavaMethod javaMethod = javaCode.findMethod(entry);
 
-        ApiParameters apiParameters = new ApiParameters();
+        ApiParameters apiParameters = new ApiParameters(javaMethod.getAnchorPrefix());
+
         addReturn(apiParameters, javaMethod);
         javaMethod.getParams().forEach(param -> {
             JavaDocElementsMapsAndSearchText docElementsMapsAndSearchText =

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +26,8 @@ import java.nio.file.Path
 class TestDocStructure implements DocStructure {
     private Set<String> validLinks = [] as Set
     private TableOfContents toc = new TableOfContents()
+
+    Set<String> registeredLocalLinks = [] as TreeSet
 
     @Override
     void validateUrl(Path path, String additionalClue, DocUrl docUrl) {
@@ -62,6 +65,7 @@ class TestDocStructure implements DocStructure {
 
     @Override
     void registerLocalAnchor(Path path, String anchorId) {
+        registeredLocalLinks.add(anchorId)
     }
 
     @Override
@@ -78,8 +82,9 @@ class TestDocStructure implements DocStructure {
         return toc
     }
 
-    void clearValidLinks() {
+    void clear() {
         validLinks.clear()
+        registeredLocalLinks.clear()
     }
 
     void addValidLink(String link) {

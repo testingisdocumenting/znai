@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-.api-parameters {
+.znai-api-parameters {
     max-width: var(--znai-single-column-partial-width);
 
     display: grid;
@@ -30,7 +30,7 @@
     border-bottom: 1px solid var(--znai-snippets-outer-border-color);
 }
 
-.api-parameters.nested {
+.znai-api-parameters.nested {
     margin-top: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
