@@ -121,7 +121,7 @@ Note: `description` field in JSON file is treated as Markdown
 # Anchors
 
 Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear.
-Use `anchorPrefix` parameter to avoid conflict of anchor ids when using the same API parameter names:
+Use `anchorPrefix` parameter to avoid conflict of anchor ids when using the same API parameter names within a single page:
 
     ```api-parameters {anchorPrefix: 'customPrefix'}
     firstName, String, description with *markdown* support
