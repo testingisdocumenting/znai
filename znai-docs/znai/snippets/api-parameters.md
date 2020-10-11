@@ -118,3 +118,19 @@ to display it as API Parameters
     
 Note: `description` field in JSON file is treated as Markdown
  
+# Anchors
+
+Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear.
+Use `anchorPrefix` parameter to avoid conflict of anchor ids when using the same API parameter names:
+
+    ```api-parameters {anchorPrefix: 'customPrefix'}
+    firstName, String, description with *markdown* support
+    score, Integer, another description line with *markdown* support
+    ```
+
+```api-parameters {anchorPrefix: 'customPrefix'}
+firstName, String, description with *markdown* support
+score, Integer, another description line with *markdown* support
+```
+
+In the example above `customPrefix` is added to each parameter link. 
