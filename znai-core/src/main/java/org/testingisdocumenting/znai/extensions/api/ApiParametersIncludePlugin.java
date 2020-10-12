@@ -50,8 +50,12 @@ public class ApiParametersIncludePlugin implements IncludePlugin {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         fullPath = resourcesResolver.fullPath(pluginParams.getFreeParam());
 
-        apiParameters = ApiParametersJsonParser.parse(componentsRegistry.markdownParser(),
+        apiParameters = ApiParametersJsonParser.parse(
+                pluginParams.getOpts().get("anchorPrefix", ""),
+                componentsRegistry.markdownParser(),
                 resourcesResolver.textContent(fullPath));
+
+        ApiParametersAnchors.registerLocalAnchors(componentsRegistry, markupPath, apiParameters);
 
         Map<String, Object> props = apiParameters.toMap();
         props.putAll(pluginParams.getOpts().toMap());

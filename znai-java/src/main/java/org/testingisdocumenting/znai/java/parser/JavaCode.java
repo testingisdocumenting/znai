@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class JavaCode {
     private final JavaCodeVisitor codeVisitor;
-    private String fileContent;
+    private final String fileContent;
 
     public JavaCode(String fileContent) {
         this.fileContent = fileContent;

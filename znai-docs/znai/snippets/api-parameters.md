@@ -12,7 +12,7 @@ the `api-parameters` fence plugin to manually document them.
     score, Integer, another description line with *markdown* support
     ```
 
-```api-parameters
+```api-parameters {anchorPrefix: 'inlined_csv'}
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
@@ -33,7 +33,7 @@ Use `parent.children` syntax to define nested objects like this:
     
 Note: when using this approach it is necessary to explicitly define a `root` entry, such as `person` in this example.
 
-```api-parameters
+```api-parameters {anchorPrefix: 'nested_inlined_csv'}
 sessionId, Integer, session Id
 person, Person, person to login with
 person.firstName, String, first name of the person
@@ -54,7 +54,7 @@ Use the `title` parameter to specify a title.
     score, Integer, another description line with *markdown* support
     ```
 
-```api-parameters {title: "Person Definition"}
+```api-parameters {title: "Person Definition", anchorPrefix: 'title'}
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
@@ -114,7 +114,23 @@ Given the above file, use
 
 to display it as API Parameters
     
-:include-api-parameters: api-parameters.json {title: "Person Definition"}
+:include-api-parameters: api-parameters.json {title: "Person Definition", anchorPrefix: "json"}
     
 Note: `description` field in JSON file is treated as Markdown
  
+# Anchors
+
+Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear.
+Use `anchorPrefix` parameter to avoid conflict of anchor ids when using the same API parameter names within a single page:
+
+    ```api-parameters {anchorPrefix: 'customPrefix'}
+    firstName, String, description with *markdown* support
+    score, Integer, another description line with *markdown* support
+    ```
+
+```api-parameters {anchorPrefix: 'customPrefix'}
+firstName, String, description with *markdown* support
+score, Integer, another description line with *markdown* support
+```
+
+In the example above `customPrefix` is added to each parameter link. 

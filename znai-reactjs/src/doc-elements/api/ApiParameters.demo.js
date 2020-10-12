@@ -21,9 +21,9 @@ import {elementsLibrary} from '../DefaultElementsLibrary'
 import { Paragraph } from '../paragraph/Paragraph'
 
 const personParameters = [
-    {name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
-    {name: 'lastName', type: 'string', description: [{"text": "last name", "type": "SimpleText"}]},
-    {name: 'score', type: 'integer', description: [{"text": "score accumulated over last year", "type": "SimpleText"}]},
+    {anchorId: 'prefix_firstName', name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
+    {anchorId: 'prefix_lastName',name: 'lastName', type: 'string', description: [{"text": "last name", "type": "SimpleText"}]},
+    {anchorId: 'prefix_score',name: 'score', type: 'integer', description: [{"text": "score accumulated over last year", "type": "SimpleText"}]},
 ]
 
 const paragraph = {"type": "Paragraph", "content": [{"text": "first name", "type": "SimpleText"}]}
@@ -51,9 +51,9 @@ const addressParameters = [
 
 const nestedParameters = [
     {name: 'primaryResidence', type: 'object', children: addressParameters, description: [{"text": "primary residence", "type": "SimpleText"}]},
-    {name: 'secondaryPerson', type: 'object', children: personParameters, description: [{"text": "secondary person", "type": "SimpleText"}]},
-    {name: 'short', type: 'object', children: personParameters, description: [{"text": "secondary person", "type": "SimpleText"}]},
-    {name: 'ids', type: 'array of objects', children: personParameters, description: [{"text": "secondary person", "type": "SimpleText"}]},
+    {name: 'secondaryPerson', type: 'object', children: createPersonParameters('nested'), description: [{"text": "secondary person", "type": "SimpleText"}]},
+    {name: 'short', type: 'object', children: createPersonParameters('nested'), description: [{"text": "secondary person", "type": "SimpleText"}]},
+    {name: 'ids', type: 'array of objects', children: createPersonParameters('nested'), description: [{"text": "secondary person", "type": "SimpleText"}]},
 ]
 
 const withCodeSnippetFirst = [
@@ -127,4 +127,10 @@ function paramsReferences() {
     }
 }
 
-
+function createPersonParameters(anchorPrefix) {
+    return [
+        {anchorId: anchorPrefix + '_firstName', name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
+        {anchorId: anchorPrefix + '_lastName',name: 'lastName', type: 'string', description: [{"text": "last name", "type": "SimpleText"}]},
+        {anchorId: anchorPrefix + '_score',name: 'score', type: 'integer', description: [{"text": "score accumulated over last year", "type": "SimpleText"}]},
+    ]
+}

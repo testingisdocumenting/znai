@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +20,7 @@ import React from 'react'
 import ApiParameters from './ApiParameters'
 import {ReferenceLinkWrapper} from '../references/ReferenceLinkWrapper'
 
+import {Icon} from '../icons/Icon';
 import './ApiParameter.css'
 
 class ApiParameter extends React.Component {
@@ -30,6 +32,7 @@ class ApiParameter extends React.Component {
 
     render() {
         const {
+            anchorId,
             name,
             type,
             children,
@@ -45,14 +48,14 @@ class ApiParameter extends React.Component {
 
         const reference = this.findReference()
 
-        const commonClassName = ' api-param-cell' +
+        const commonClassName = ' znai-api-param-cell' +
             (isExpanded ? ' expanded' : '') +
             (children ? ' expandable' : '') +
             (reference ? ' with-reference' : '') +
             (nestedLevel > 0 ? ' nested-' + nestedLevel : '')
 
-        const nameTypeClassName = 'api-param-name-type-toggle-cell' + commonClassName
-        const descriptionClassName = 'api-param-description-cell' + commonClassName
+        const nameTypeClassName = 'znai-api-param-name-type-toggle-cell' + commonClassName
+        const descriptionClassName = 'znai-api-param-description-cell' + commonClassName
 
         const toggleOnClick = children ? this.toggleExpand : null
 
@@ -76,18 +79,21 @@ class ApiParameter extends React.Component {
         return (
             <React.Fragment>
                 <div className={nameTypeClassName}>
-                    <div className="api-param-name-type-toggle" ref={node => this.nameAndTypeNode = node}>
-                        <div className="api-param-name">
+                    <div className="znai-api-param-name-type-toggle" ref={node => this.nameAndTypeNode = node}>
+                        <div className="znai-api-param-name">
                             <ReferenceLinkWrapper referenceUrl={referenceUrl}>
                                 {name}
                             </ReferenceLinkWrapper>
                         </div>
-                        <div className="api-param-type-and-toggle" onClick={toggleOnClick}>
+                        <div className="znai-api-param-type-and-toggle" onClick={toggleOnClick}>
                             {expandToggle}
-                            <div className="api-param-type">
+                            <div className="znai-api-param-type">
                                 {type}
                             </div>
                         </div>
+                    </div>
+                    <div className="znai-api-param-anchor" id={anchorId}>
+                        {anchorId && <a href={"#" + anchorId}><Icon id="link"/></a>}
                     </div>
                 </div>
                 <div className={descriptionClassName}>

@@ -25,7 +25,7 @@ class ApiParametersJsonParserTest {
     @Test
     void "reads api params json and parses description to create doc elemements"() {
         //language=json
-        def apiParameters = ApiParametersJsonParser.parse(TEST_COMPONENTS_REGISTRY.markdownParser(), """
+        def apiParameters = ApiParametersJsonParser.parse('', TEST_COMPONENTS_REGISTRY.markdownParser(), """
 [
     {
         "name": "param1",
@@ -60,11 +60,11 @@ class ApiParametersJsonParserTest {
 """)
 
         apiParameters.toMap().should == [parameters:[
-                [name: 'param1', type: 'String', description: [[markdown: 'description 1', type: 'TestMarkdown']]],
-                [name: 'param2', type: 'Integer', description: [[markdown: 'description 2', type: 'TestMarkdown']], children:[
-                        [name: 'param21', type: 'String', description:[[markdown: 'description 21', type: 'TestMarkdown']], children:[
-                                [name: 'param31', type: 'Boolean', description: [[markdown: 'description 31', type: 'TestMarkdown']]]]],
-                        [name: 'param22', type: 'Integer', description: [[markdown: 'description 22', type: 'TestMarkdown']]]]]]]
+                [anchorId: 'param1', name: 'param1', type: 'String', description: [[markdown: 'description 1', type: 'TestMarkdown']]],
+                [anchorId: 'param2', name: 'param2', type: 'Integer', description: [[markdown: 'description 2', type: 'TestMarkdown']], children:[
+                        [anchorId: 'param2_param21', name: 'param21', type: 'String', description:[[markdown: 'description 21', type: 'TestMarkdown']], children:[
+                                [anchorId: 'param2_param21_param31', name: 'param31', type: 'Boolean', description: [[markdown: 'description 31', type: 'TestMarkdown']]]]],
+                        [anchorId: 'param2_param22', name: 'param22', type: 'Integer', description: [[markdown: 'description 22', type: 'TestMarkdown']]]]]]]
 
         apiParameters.combinedTextForSearch().should == 'param1 String description 1 param2 Integer description 2 ' +
                 'param21 String description 21 param31 Boolean description 31 param22 Integer description 22'

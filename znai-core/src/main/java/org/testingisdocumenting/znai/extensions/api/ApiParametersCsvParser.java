@@ -34,14 +34,14 @@ public class ApiParametersCsvParser {
     private final String csvContent;
     private final Path path;
 
-    public static ApiParameters parse(MarkupParser markupParser, String csvContent) {
-        return new ApiParametersCsvParser(markupParser, csvContent).parse();
+    public static ApiParameters parse(String anchorPrefix, MarkupParser markupParser, String csvContent) {
+        return new ApiParametersCsvParser(anchorPrefix, markupParser, csvContent).parse();
     }
 
-    private ApiParametersCsvParser(MarkupParser markupParser, String csvContent) {
+    private ApiParametersCsvParser(String anchorPrefix, MarkupParser markupParser, String csvContent) {
         this.markupParser = markupParser;
         this.csvContent = csvContent;
-        this.apiParameters = new ApiParameters();
+        this.apiParameters = new ApiParameters(anchorPrefix);
         this.path = Paths.get("");
     }
 

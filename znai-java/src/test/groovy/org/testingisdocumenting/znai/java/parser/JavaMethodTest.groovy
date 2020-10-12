@@ -1,6 +1,5 @@
 /*
  * Copyright 2020 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,22 +14,18 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.java.parser;
+package org.testingisdocumenting.znai.java.parser
 
-public class JavaMethodReturn {
-    private final String type;
-    private final String javaDocText;
+import org.junit.Test
 
-    public JavaMethodReturn(String type, String javaDocText) {
-        this.type = type;
-        this.javaDocText = javaDocText;
-    }
+class JavaMethodTest {
+    @Test
+    void "should build anchor prefix from function name and parameters"() {
+        def methodWithParams = new JavaMethod('myMethod', '', '', '',
+                [new JavaMethodParam('name', '', 'String'),
+                 new JavaMethodParam('score', '', 'Integer')],
+                new JavaMethodReturn('void', ''), '')
 
-    public String getType() {
-        return type;
-    }
-
-    public String getJavaDocText() {
-        return javaDocText;
+        methodWithParams.anchorPrefix.should == 'myMethod_name_String_score_Integer'
     }
 }

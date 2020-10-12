@@ -35,8 +35,17 @@ class JavaEnumEntriesIncludePluginTest {
                 [
                         type      : 'ApiParameters',
                         parameters: [
-                                [name: 'ENTRY_ONE_WITH_A_LONG_NAME', type: '', description: entryOneDescription],
-                                [name: 'ENTRY_TWO', type: '', description: entryTwoDescription]],
+                                [
+                                        name    : 'ENTRY_ONE_WITH_A_LONG_NAME',
+                                        anchorId: 'Enum_java_ENTRY_ONE_WITH_A_LONG_NAME',
+                                        type    : '', description: entryOneDescription
+                                ],
+                                [
+                                        name       : 'ENTRY_TWO',
+                                        anchorId   : 'Enum_java_ENTRY_TWO',
+                                        type       : '',
+                                        description: entryTwoDescription
+                                ]],
                 ]]
     }
 
@@ -49,7 +58,12 @@ class JavaEnumEntriesIncludePluginTest {
                         type             : 'ApiParameters',
                         excludeDeprecated: true,
                         parameters       : [
-                                [name: 'ENTRY_ONE_WITH_A_LONG_NAME', type: '', description: entryOneDescription]],
+                                [
+                                        name       : 'ENTRY_ONE_WITH_A_LONG_NAME',
+                                        anchorId   : 'Enum_java_ENTRY_ONE_WITH_A_LONG_NAME',
+                                        type       : '',
+                                        description: entryOneDescription
+                                ]],
                 ]]
     }
 

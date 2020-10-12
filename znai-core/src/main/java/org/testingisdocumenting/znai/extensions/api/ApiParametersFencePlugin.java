@@ -42,7 +42,12 @@ public class ApiParametersFencePlugin implements FencePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
-        apiParameters = ApiParametersCsvParser.parse(componentsRegistry.markdownParser(), content);
+        apiParameters = ApiParametersCsvParser.parse(
+                pluginParams.getOpts().get("anchorPrefix", ""),
+                componentsRegistry.markdownParser(), content);
+
+        ApiParametersAnchors.registerLocalAnchors(componentsRegistry, markupPath, apiParameters);
+
         Map<String, Object> props = apiParameters.toMap();
         props.putAll(pluginParams.getOpts().toMap());
 

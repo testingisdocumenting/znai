@@ -16,15 +16,33 @@
 
 package org.testingisdocumenting.znai.extensions.api
 
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+
 class ApiParametersIncludePluginTest {
+    @Before
+    @After
+    void init() {
+        TEST_COMPONENTS_REGISTRY.docStructure().clear()
+    }
+
     @Test
     void "should provide search text"() {
         def plugin = PluginsTestUtils.processAndGetIncludePluginAndParserHandler(
                 ":include-api-parameters: api-params-simple.json").includePlugin
 
          plugin.textForSearch().text.should == 'firstName String first name'
+    }
+
+    @Test
+    void "should register local anchors"() {
+        PluginsTestUtils.processAndGetIncludePluginAndParserHandler(
+                ":include-api-parameters: api-params-simple.json {anchorPrefix: 'myPrefix'}").includePlugin
+
+        TEST_COMPONENTS_REGISTRY.docStructure().registeredLocalLinks.should == ['myPrefix_firstName']
     }
 }
