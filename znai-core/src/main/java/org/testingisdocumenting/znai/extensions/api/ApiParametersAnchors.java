@@ -26,8 +26,8 @@ class ApiParametersAnchors {
     }
 
     static void registerLocalAnchors(ComponentsRegistry componentsRegistry,
-                                       Path markupPath,
-                                       ApiParameters apiParameters) {
+                                     Path markupPath,
+                                     ApiParameters apiParameters) {
         DocStructure docStructure = componentsRegistry.docStructure();
         apiParameters.collectAllAnchors().forEach(anchorId -> docStructure.registerLocalAnchor(markupPath, anchorId));
     }
