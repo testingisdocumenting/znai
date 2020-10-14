@@ -67,7 +67,6 @@
 
 .znai-api-param-description-cell {
     color: var(--znai-api-description-color);
-    font-size: var(--znai-smaller-text-size);
     font-family: var(--znai-regular-font-family);
     padding-right: 8px;
 }
@@ -105,10 +104,13 @@
     color: var(--znai-api-key-color);
 }
 
-
 .znai-api-param-type {
     color: var(--znai-meta-color);
-    font-size: var(--znai-small-meta-text-size);
+    font-size: var(--znai-smaller-text-size);
     flex: 1;
     justify-self: end;
+}
+
+.znai-api-parameters.small .znai-api-param-type {
+    font-size: var(--znai-small-meta-text-size);
 }
