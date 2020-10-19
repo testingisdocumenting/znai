@@ -59,6 +59,20 @@ firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
 
+# Size
+
+Use the `small` parameter to render API Parameters using smaller font size and occupying less width
+
+    ```api-parameters {small: true}
+    firstName, String, description with *markdown* support
+    score, Integer, another description line with *markdown* support
+    ```
+
+```api-parameters {small: true, anchorPrefix: 'size'}
+firstName, String, description with *markdown* support
+score, Integer, another description line with *markdown* support
+```
+
 # Multi-line CSV Description
 
 Use quotes `"` to wrap a multiline description. Here is an example of description including multiple lines and 

@@ -25,6 +25,7 @@ export default function ApiParameters({
                                           title,
                                           references,
                                           nestedLevel,
+                                          small,
                                           parentWidth = 0,
                                           elementsLibrary
                                       }) {
@@ -40,7 +41,10 @@ export default function ApiParameters({
                                                                  elementsLibrary={elementsLibrary}/>)
 
     const isNested = nestedLevel > 0
-    const className = 'znai-api-parameters' + (isNested ? ' nested' : '')
+    const className = 'znai-api-parameters' +
+        (isNested ? ' nested' : '') +
+        (small ? ' small' : '')
+
     const style = {marginLeft: -parentWidth}
 
     return (
