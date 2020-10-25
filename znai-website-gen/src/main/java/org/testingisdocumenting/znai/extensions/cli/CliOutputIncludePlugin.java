@@ -22,7 +22,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.features.PluginFeatureList;
-import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
+import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
 import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
@@ -37,10 +37,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class CliOutputIncludePlugin implements IncludePlugin, SnippetContentProvider {
-    private String fileName;
+public class CliOutputIncludePlugin implements IncludePlugin {
     private Path filePath;
-    private List<String> lines;
+    private ManipulatedSnippetContentProvider contentProvider;
 
     private PluginFeatureList features;
 
@@ -60,16 +59,20 @@ public class CliOutputIncludePlugin implements IncludePlugin, SnippetContentProv
                                 Path markupPath,
                                 PluginParams pluginParams) {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
-        fileName = pluginParams.getFreeParam();
+        String fileName = pluginParams.getFreeParam();
         filePath = resourcesResolver.fullPath(fileName);
 
+        String content = componentsRegistry.resourceResolver().textContent(filePath);
+        contentProvider = new ManipulatedSnippetContentProvider(fileName, content, pluginParams);
+
         features = new PluginFeatureList(
-                new SnippetRevealLineStopFeature(pluginParams, this),
-                new SnippetHighlightFeature(componentsRegistry, pluginParams, this)
+                new SnippetRevealLineStopFeature(pluginParams, contentProvider),
+                new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider)
         );
 
         LinkedHashMap<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
-        lines = readLines(componentsRegistry, filePath);
+        List<String> lines = Arrays.asList(contentProvider.snippetContent().split("\n"));
+
         props.put("lines", lines);
         props.putAll(pluginParams.getOpts().toMap());
         features.updateProps(props);
@@ -84,22 +87,8 @@ public class CliOutputIncludePlugin implements IncludePlugin, SnippetContentProv
                 features.auxiliaryFiles());
     }
 
-    private static List<String> readLines(ComponentsRegistry componentsRegistry, Path filePath) {
-        return Arrays.asList(componentsRegistry.resourceResolver().textContent(filePath).split("\n"));
-    }
-
     @Override
     public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(String.join(" ", lines));
-    }
-
-    @Override
-    public String snippetContent() {
-        return String.join("\n", lines);
-    }
-
-    @Override
-    public String snippetId() {
-        return fileName;
+        return SearchScore.STANDARD.text(contentProvider.snippetContent());
     }
 }

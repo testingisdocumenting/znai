@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,16 +27,16 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-class FilePlugin {
-    private FilePlugin() {
+class TextContentExtractor {
+    private TextContentExtractor() {
     }
 
-    public static String extractText(String fileContent, PluginParamsOpts opts) {
+    public static String extractText(String content, PluginParamsOpts opts) {
         if (opts.isEmpty()) {
-            return fileContent;
+            return content;
         }
 
-        Text text = new Text(fileContent);
+        Text text = new Text(content);
         Text croppedAtStart = cropStart(text, opts);
         Text croppedAtEnd = cropEnd(croppedAtStart, opts);
 
