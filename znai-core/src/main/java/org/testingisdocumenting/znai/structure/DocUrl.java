@@ -62,7 +62,10 @@ public class DocUrl {
     }
 
     private boolean handleExternal() {
-        return isExternalUrl = url.startsWith("http") || url.startsWith("file") || url.startsWith("mailto");
+        return isExternalUrl = url.startsWith("http:") ||
+                url.startsWith("https:") ||
+                url.startsWith("file:") ||
+                url.startsWith("mailto:");
     }
 
     private boolean handleIndex() {
