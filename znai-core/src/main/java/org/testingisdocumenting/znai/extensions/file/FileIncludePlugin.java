@@ -33,11 +33,12 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class FileIncludePlugin implements IncludePlugin, SnippetContentProvider {
+public class FileIncludePlugin implements IncludePlugin {
     private String fileName;
-    private String text;
 
     private PluginFeatureList features;
+
+    private ManipulatedSnippetContentProvider contentProvider;
 
     @Override
     public String id() {
@@ -54,22 +55,22 @@ public class FileIncludePlugin implements IncludePlugin, SnippetContentProvider 
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        features = new PluginFeatureList(
-                new SnippetRevealLineStopFeature(pluginParams, this),
-                new SnippetHighlightFeature(componentsRegistry, pluginParams, this),
-                new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)
-        );
-
         fileName = pluginParams.getFreeParam();
 
-        text = FilePlugin.extractText(
+        contentProvider = new ManipulatedSnippetContentProvider(fileName,
                 componentsRegistry.resourceResolver().textContent(fileName),
-                pluginParams.getOpts());
+                pluginParams);
+
+        features = new PluginFeatureList(
+                new SnippetRevealLineStopFeature(pluginParams, contentProvider),
+                new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider),
+                new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)
+        );
 
         String providedLang = pluginParams.getOpts().getString("lang");
         String langToUse = (providedLang == null) ? langFromFileName(fileName) : providedLang;
 
-        Map<String, Object> props = CodeSnippetsProps.create(langToUse, text);
+        Map<String, Object> props = CodeSnippetsProps.create(langToUse, contentProvider.snippetContent());
         props.putAll(pluginParams.getOpts().toMap());
         features.updateProps(props);
 
@@ -84,7 +85,7 @@ public class FileIncludePlugin implements IncludePlugin, SnippetContentProvider 
 
     @Override
     public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(text);
+        return SearchScore.STANDARD.text(contentProvider.snippetContent());
     }
 
     private static String langFromFileName(String fileName) {
@@ -102,15 +103,5 @@ public class FileIncludePlugin implements IncludePlugin, SnippetContentProvider 
         }
 
         return fileName.substring(dotLastIdx + 1);
-    }
-
-    @Override
-    public String snippetContent() {
-        return text;
-    }
-
-    @Override
-    public String snippetId() {
-        return fileName;
     }
 }

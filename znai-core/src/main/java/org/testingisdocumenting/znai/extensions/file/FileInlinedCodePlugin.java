@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,7 +48,7 @@ public class FileInlinedCodePlugin implements InlinedCodePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         fileName = pluginParams.getFreeParam();
 
-        text = FilePlugin.extractText(
+        text = TextContentExtractor.extractText(
                 componentsRegistry.resourceResolver().textContent(fileName),
                 pluginParams.getOpts());
 

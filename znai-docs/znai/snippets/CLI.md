@@ -102,6 +102,24 @@ Use `title` to specify output of the output
 
 :include-cli-output: cli/file-path-of-captured.out {title: "Captured output"}
 
+# Limit
+
+Use `startLine`, `endLine` to limit the included content.
+
+    :include-cli-output: cli/file-path-of-captured.out {
+        title: "Limited captured output",
+        startLine: "git push",
+        endLine: "master -> master"    
+    }
+    
+:include-cli-output: cli/file-path-of-captured.out {
+    title: "Limited captured output",
+    startLine: "git push",
+    endLine: "master -> master"    
+}
+
+More on limit options in [External Code Snippets](snippets/external-code-snippets#limit).
+
 # Presentation Mode
 
 In presentation mode, `cli-command` will simulate typing inside the terminal.
