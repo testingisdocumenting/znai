@@ -80,6 +80,11 @@ class PresentationRegistry {
             numberOfSlides: numberOfSlides
         }
 
+        if (this.clearStickySlidesOnNextSlide) {
+            this.stickySlides = []
+            this.clearStickySlidesOnNextSlide = false
+        }
+
         const stickPlacement = presentationStickPlacement(props.meta)
         if (stickPlacement && stickPlacement.clear) {
             this.stickySlides = []
@@ -93,10 +98,7 @@ class PresentationRegistry {
                 info: extractInfo(lastSlideIdx)
             })
         } else {
-            if (this.clearStickySlidesOnNextSlide) {
-                this.stickySlides = []
-                this.clearStickySlidesOnNextSlide = false
-            } else if (this.stickySlides.length > 0) {
+            if (this.stickySlides.length > 0) {
                 this.clearStickySlidesOnNextSlide = true
             }
         }

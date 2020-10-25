@@ -95,11 +95,6 @@ describe('PresentationRegistry', () => {
                     }
                 },
                 {
-                    type: 'NonSlide',
-                    lang: 'python',
-                    snippet: "code2_",
-                },
-                {
                     type: 'Dummy',
                     lang: 'python',
                     snippet: "code3",
@@ -108,6 +103,14 @@ describe('PresentationRegistry', () => {
                     type: 'Dummy',
                     lang: 'python',
                     snippet: "code4",
+                    meta: {
+                        stickySlide: 'top 30%'
+                    }
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code5",
                     highlight: [1],
                 }
             ])
@@ -116,6 +119,7 @@ describe('PresentationRegistry', () => {
             const slide2 = registry.slideByIdx(1)
             const slide3 = registry.slideByIdx(2)
             const slide4 = registry.slideByIdx(3)
+            const slide5 = registry.slideByIdx(4)
 
             expect(slide1.props.snippet).toEqual("code1");
             expect(slide1.stickySlides).toEqual([]);
@@ -129,6 +133,10 @@ describe('PresentationRegistry', () => {
 
             expect(slide4.props.snippet).toEqual("code4");
             expect(slide4.stickySlides.length).toEqual(0);
+
+            expect(slide5.props.snippet).toEqual("code5");
+            expect(slide5.stickySlides.length).toEqual(1);
+            expect(slide5.stickySlides[0].props.snippet).toEqual("code4");
         })
     })
 

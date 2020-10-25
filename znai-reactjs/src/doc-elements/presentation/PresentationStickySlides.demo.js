@@ -44,6 +44,37 @@ export function presentationStickySlidesDemo(registry) {
         ], {
             slideIdx: 2,
         }))
+        .add('left to right, break, and prepeat', createPresentationDemo([
+            {
+                type: 'Snippet',
+                lang: 'java',
+                snippet: javaCode(),
+                highlight: [2],
+                meta: {
+                    stickySlide: 'left 30%'
+                }
+            },
+            {
+                type: 'Snippet',
+                lang: 'python',
+                snippet: pythonCode(),
+            },
+            {
+                type: 'Snippet',
+                lang: 'python',
+                snippet: anotherPythonCode(),
+                meta: {
+                    stickySlide: 'top 30%'
+                }
+            },
+            {
+                type: 'Snippet',
+                lang: 'python',
+                snippet: yetAnotherPythonCode(),
+            }
+        ], {
+            slideIdx: 2,
+        }))
         .add('left to right two wide codes', createPresentationDemo([
             {
                 type: 'Snippet',
@@ -239,6 +270,11 @@ function pythonCode() {
 }
 
 function anotherPythonCode() {
-    return 'def method:\n' +
+    return 'def another:\n' +
+        '    print("world")\n'
+}
+
+function yetAnotherPythonCode() {
+    return 'def yet_another:\n' +
         '    print("world")\n'
 }
