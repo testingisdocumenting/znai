@@ -29,8 +29,8 @@ class CliCommand extends Component {
     }
 
     initialState(props) {
-        const {isPresentation} = props
-        return {lastTokenIdx: isPresentation ? 1 : this.tokens.length}
+        const {isPresentation, isPresentationDisplayed} = props
+        return {lastTokenIdx: (isPresentation && !isPresentationDisplayed) ? 1 : this.tokens.length}
     }
 
     componentWillReceiveProps(nextProps) {
@@ -60,6 +60,7 @@ class CliCommand extends Component {
         const {
             paramsToHighlight,
             isPresentation,
+            isPresentationDisplayed,
             threshold = 100,
             presentationThreshold = 40,
             splitAfter = [],
@@ -94,6 +95,7 @@ class CliCommand extends Component {
                                         isCursorVisible={isPresentation &&
                                         ((lastTokenIdx > this.tokens.length && isLast) || isLastVisible)}
                                         isPresentation={isPresentation}
+                                        isPresentationDisplayed={isPresentationDisplayed}
                                         isHidden={isHidden}
                                         onFullReveal={this.revealNextToken}/>
             })

@@ -71,6 +71,10 @@ public class CliCommandIncludePlugin implements IncludePlugin {
 
         validateParamsToHighlight(command, combinedParams);
 
+        if (opts.has("meta")) {
+            props.put("meta", opts.get("meta"));
+        }
+
         if (opts.has("threshold")) {
             props.put("threshold", opts.get("threshold"));
         }

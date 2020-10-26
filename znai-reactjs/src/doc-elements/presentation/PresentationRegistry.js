@@ -149,8 +149,9 @@ class PresentationRegistry {
         return {pageTitle, sectionTitle, slideVisibleNote}
     }
 
-    renderSlide(slide) {
+    renderSlide(slide, renderOpts) {
         return <slide.component {...slide.props}
+                                {...renderOpts}
                                 elementsLibrary={this.elementsLibrary}
                                 slideIdx={slide.slideIdx}
                                 isPresentation={true}/>

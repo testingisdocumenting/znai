@@ -76,6 +76,7 @@ function RecursiveLayout({
   if (stickySlides.length === 0) {
     return <SingleSlide presentationRegistry={presentationRegistry}
                         slide={currentSlide}
+                        isPresentationDisplayed={false}
                         currentSlideIdx={currentSlideIdx}
                         slideArea={slideArea}
                         presentationArea={presentationArea}
@@ -96,6 +97,7 @@ function RecursiveLayout({
     <div className={className}>
       <SingleSlide presentationRegistry={presentationRegistry}
                    slide={firstSlide}
+                   isPresentationDisplayed={true}
                    currentSlideIdx={currentSlideIdx}
                    presentationArea={presentationArea}
                    slideArea={slideAreaOne}
@@ -128,6 +130,7 @@ function RecursiveLayout({
 interface SingleSlideProps {
   presentationRegistry: PresentationRegistry;
   slide: PresentationSlide;
+  isPresentationDisplayed: boolean; // e.g. sticky slide that has already played its animation
   currentSlideIdx: number;
   maxScaleRatio: number;
   presentationArea: PresentationDimension;
@@ -137,6 +140,7 @@ interface SingleSlideProps {
 function SingleSlide({
                        presentationRegistry,
                        slide,
+                       isPresentationDisplayed,
                        currentSlideIdx,
                        maxScaleRatio,
                        presentationArea,
@@ -155,7 +159,7 @@ function SingleSlide({
   )
 
   function renderSlideContent() {
-    return presentationRegistry.renderSlide(slide)
+    return presentationRegistry.renderSlide(slide, {isPresentationDisplayed})
   }
 }
 
