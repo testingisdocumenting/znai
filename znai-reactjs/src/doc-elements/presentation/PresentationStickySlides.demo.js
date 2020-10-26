@@ -75,6 +75,30 @@ export function presentationStickySlidesDemo(registry) {
         ], {
             slideIdx: 2,
         }))
+        .add('left to right with temporary slide', createPresentationDemo([
+            {
+                type: 'Snippet',
+                lang: 'java',
+                snippet: javaCode(),
+                highlight: [2],
+                meta: {
+                    stickySlide: 'left'
+                }
+            },
+            {
+                type: 'Snippet',
+                lang: 'python',
+                snippet: pythonCode(),
+                meta: {
+                    stickySlide: 'temp'
+                }
+            },
+            {
+                type: 'Snippet',
+                lang: 'python',
+                snippet: anotherPythonCode(),
+            }
+        ]))
         .add('left to right two wide codes', createPresentationDemo([
             {
                 type: 'Snippet',
