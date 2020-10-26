@@ -85,6 +85,7 @@ import {presentationStickySlidesDemo} from "./doc-elements/presentation/Presenta
 import {snippetsWithInlineCommentsDemo} from "./doc-elements/code-snippets/CodeSnippetWithInlineComments.demo";
 import {notAuthorizedDemo} from "./screens/not-authorized/NotAuthorizedScreen.demo";
 import {iframeDemo} from './doc-elements/iframe/Iframe.demo';
+import {cliCommandPresentationDemo} from './doc-elements/cli/PresentationCliCommand.demo';
 
 const docMeta = {
     id: 'preview',
@@ -167,6 +168,7 @@ registries.add('presentation')
     .registerAsTabs('Paragraph', paragraphPresentationDemo)
     .registerAsTabs('Code Snippets', snippetPresentationDemo)
     .registerAsTabs('Code Snippets With Scroll', snippetWithScrollPresentationDemo)
+    .registerAsTabs('Cli Command', cliCommandPresentationDemo)
     .registerAsTabs('Cli Output', cliOutputPresentationDemo)
 
 registries.add('preview')

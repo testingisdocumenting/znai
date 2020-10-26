@@ -46,12 +46,12 @@ public class PluginParams {
 
     public PluginParams(String pluginId, Map<String, ?> opts) {
         this.pluginId = pluginId;
-        this.opts = new PluginParamsOpts(shortcutRightSideOption(opts));
+        this.opts = new PluginParamsOpts(shortcutMetaOptions(opts));
     }
 
     public void setValue(String value) {
         this.freeParam = extractFreeParam(value);
-        this.opts = new PluginParamsOpts(shortcutRightSideOption(extractMap(value)));
+        this.opts = new PluginParamsOpts(shortcutMetaOptions(extractMap(value)));
     }
 
     public String getPluginId() {
@@ -83,7 +83,7 @@ public class PluginParams {
         return JsonUtils.deserializeAsMap(json);
     }
 
-    private Map<String, ?> shortcutRightSideOption(Map<String, ?> opts) {
+    private Map<String, ?> shortcutMetaOptions(Map<String, ?> opts) {
         Map<String, Object> result = new LinkedHashMap<>(opts);
 
         Object rightSide = opts.get(RIGHT_SIDE_OPT_NAME);

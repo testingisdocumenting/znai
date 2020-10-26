@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,8 +25,8 @@ class CliCommandToken extends Component {
     }
 
     initialState(props) {
-        const {isPresentation, value} = props
-        return {lastCharIdx: isPresentation ? 0 : value.length}
+        const {isPresentation, isPresentationDisplayed, value} = props
+        return {lastCharIdx: (isPresentation && !isPresentationDisplayed) ? 0 : value.length}
     }
 
     render() {

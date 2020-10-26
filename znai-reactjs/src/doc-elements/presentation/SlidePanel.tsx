@@ -44,9 +44,9 @@ export function SlidePanel({presentationRegistry, currentSlideIdx}: Props) {
   return (
     <div ref={areaNode} className="znai-presentation-slide-panel">
       {slideArea && (<SlidesLayout presentationRegistry={presentationRegistry}
-                                          currentSlideIdx={currentSlideIdx}
-                                          maxScaleRatio={maxScaleRatio}
-                                          presentationArea={slideArea}/>)
+                                   currentSlideIdx={currentSlideIdx}
+                                   maxScaleRatio={maxScaleRatio}
+                                   presentationArea={slideArea}/>)
       }
     </div>
   );

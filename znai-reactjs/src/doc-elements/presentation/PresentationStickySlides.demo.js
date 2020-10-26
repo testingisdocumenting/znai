@@ -44,7 +44,7 @@ export function presentationStickySlidesDemo(registry) {
         ], {
             slideIdx: 2,
         }))
-        .add('left to right, break, and prepeat', createPresentationDemo([
+        .add('left to right, break, and repeat', createPresentationDemo([
             {
                 type: 'Snippet',
                 lang: 'java',

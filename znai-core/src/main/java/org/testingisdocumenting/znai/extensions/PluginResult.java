@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PluginResult {
-    private List<DocElement> docElements;
+    private final List<DocElement> docElements;
 
     private PluginResult(DocElement docElements) {
         this.docElements = Collections.singletonList(docElements);
