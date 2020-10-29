@@ -24,6 +24,7 @@ export interface PresentationStickPlacement {
     left: boolean;
     top: boolean;
     clear: boolean;
+    temporary: boolean;
     percentage: number;
 }
 
@@ -64,7 +65,8 @@ export function presentationStickPlacement(meta: DocElementMeta): PresentationSt
         left: parts[0] === 'left',
         top: parts[0] === 'top',
         percentage: parts[1] ? extractPercentage(parts[1].trim()) : defaultPercentage,
-        clear: parts[0] === 'clear'
+        clear: parts[0] === 'clear',
+        temporary: parts[0] === 'temp',
     }
 
     function extractPercentage(percentage: string): number {

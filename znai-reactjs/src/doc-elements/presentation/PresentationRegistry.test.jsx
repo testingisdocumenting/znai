@@ -138,6 +138,46 @@ describe('PresentationRegistry', () => {
             expect(slide5.stickySlides.length).toEqual(1);
             expect(slide5.stickySlides[0].props.snippet).toEqual("code4");
         })
+
+        it('should replace last slide with current one in case of sticky slides', () => {
+            const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [
+                {
+                    type: 'Dummy',
+                    lang: 'java',
+                    snippet: "code1",
+                    meta: {
+                        stickySlide: 'left'
+                    }
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code2",
+                    meta: {
+                        stickySlide: 'temp'
+                    }
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code3",
+                },
+            ])
+
+            const slide1 = registry.slideByIdx(0)
+            const slide2 = registry.slideByIdx(1)
+            const slide3 = registry.slideByIdx(2)
+
+            expect(slide1.props.snippet).toEqual("code1");
+
+            expect(slide2.stickySlides.length).toEqual(1);
+            expect(slide2.stickySlides[0].props.snippet).toEqual("code1");
+            expect(slide2.props.snippet).toEqual("code2");
+
+            expect(slide3.stickySlides.length).toEqual(1);
+            expect(slide3.stickySlides[0].props.snippet).toEqual("code1");
+            expect(slide3.props.snippet).toEqual("code3");
+        })
     })
 
     describe('slide boundaries', () => {

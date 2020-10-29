@@ -88,7 +88,7 @@ class PresentationRegistry {
         const stickPlacement = presentationStickPlacement(props.meta)
         if (stickPlacement && stickPlacement.clear) {
             this.stickySlides = []
-        } else if (stickPlacement) {
+        } else if (stickPlacement && !stickPlacement.temporary) {
             const lastSlideIdx = numberOfSlides - 1
 
             this.stickySlides.push({
@@ -97,7 +97,7 @@ class PresentationRegistry {
                 slideIdx: lastSlideIdx,
                 info: extractInfo(lastSlideIdx)
             })
-        } else {
+        } else if (!stickPlacement) {
             if (this.stickySlides.length > 0) {
                 this.clearStickySlidesOnNextSlide = true
             }

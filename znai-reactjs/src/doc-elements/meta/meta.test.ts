@@ -19,21 +19,26 @@ import { presentationStickPlacement } from './meta';
 describe('stickySlide', () => {
   it('should have default 50% as percentage', () => {
     const placement = presentationStickPlacement({stickySlide: 'left'});
-    expect(placement).toEqual({left: true, top: false, percentage: 50, clear: false})
+    expect(placement).toEqual({left: true, top: false, percentage: 50, clear: false, temporary: false})
   })
 
   it('should extract percentage as a second parameter', () => {
     const placement = presentationStickPlacement({stickySlide: 'top 25'});
-    expect(placement).toEqual({left: false, top: true, percentage: 25, clear: false})
+    expect(placement).toEqual({left: false, top: true, percentage: 25, clear: false, temporary: false})
   })
 
   it('should strip percentage sign', () => {
     const placement = presentationStickPlacement({stickySlide: 'left 45%'});
-    expect(placement).toEqual({left: true, top: false, percentage: 45, clear: false})
+    expect(placement).toEqual({left: true, top: false, percentage: 45, clear: false, temporary: false})
   })
 
   it('should detect sticky placement clear', () => {
     const placement = presentationStickPlacement({stickySlide: 'clear'});
-    expect(placement).toEqual({left: false, top: false, percentage: 50, clear: true})
+    expect(placement).toEqual({left: false, top: false, percentage: 50, clear: true, temporary: false})
+  })
+
+  it('should detect temporary placement', () => {
+    const placement = presentationStickPlacement({stickySlide: 'temp'});
+    expect(placement).toEqual({left: false, top: false, percentage: 50, clear: false, temporary: true})
   })
 });
