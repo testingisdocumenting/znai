@@ -75,6 +75,32 @@ export function presentationStickySlidesDemo(registry) {
         ], {
             slideIdx: 2,
         }))
+        .add('left to right, clear on section', createPresentationDemo([
+            {
+                type: 'Snippet',
+                lang: 'java',
+                snippet: javaCode(),
+                highlight: [2],
+                meta: {
+                    stickySlide: 'left 30%'
+                }
+            },
+            {
+                type: 'Snippet',
+                lang: 'python',
+                snippet: pythonCode(),
+                meta: {
+                    stickySlide: 'left 30%'
+                }
+            },
+            {
+                type: 'Section',
+                title: 'section title',
+                meta: {
+                    stickySlide: 'left 30%'
+                }
+            }
+        ]))
         .add('left to right with temporary slide', createPresentationDemo([
             {
                 type: 'Snippet',

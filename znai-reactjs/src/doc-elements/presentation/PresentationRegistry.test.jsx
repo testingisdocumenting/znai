@@ -178,6 +178,42 @@ describe('PresentationRegistry', () => {
             expect(slide3.stickySlides[0].props.snippet).toEqual("code1");
             expect(slide3.props.snippet).toEqual("code3");
         })
+
+        it('should clear sticky slide on section entry', () => {
+            const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [
+                {
+                    type: 'Dummy',
+                    lang: 'java',
+                    snippet: "code1",
+                    meta: {
+                        stickySlide: 'top 30%'
+                    }
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'java',
+                    snippet: "code2",
+                    meta: {
+                        stickySlide: 'top 30%'
+                    }
+                },
+                {
+                    type: 'Section',
+                    title: 'Section title'
+                },
+            ])
+
+            const slide1 = registry.slideByIdx(0)
+            const slide2 = registry.slideByIdx(1)
+            const slide3 = registry.slideByIdx(2)
+
+            expect(slide1.stickySlides).toEqual([]);
+
+            expect(slide2.stickySlides.length).toEqual(1);
+            expect(slide2.stickySlides[0].props.snippet).toEqual("code1");
+
+            expect(slide3.stickySlides).toEqual([]);
+        })
     })
 
     describe('slide boundaries', () => {

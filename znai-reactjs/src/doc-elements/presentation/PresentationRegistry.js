@@ -86,7 +86,11 @@ class PresentationRegistry {
         }
 
         const stickPlacement = presentationStickPlacement(props.meta)
-        if (stickPlacement && stickPlacement.clear) {
+
+        const needToClearStickyState = (stickPlacement && stickPlacement.clear) ||
+            props.type === 'Section'
+
+        if (needToClearStickyState) {
             this.stickySlides = []
         } else if (stickPlacement && !stickPlacement.temporary) {
             const lastSlideIdx = numberOfSlides - 1
