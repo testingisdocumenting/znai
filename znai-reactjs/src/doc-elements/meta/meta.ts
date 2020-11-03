@@ -61,12 +61,13 @@ export function presentationStickPlacement(meta: DocElementMeta): PresentationSt
     }
 
     const parts = placement.trim().split(' ');
+    const {hasClear, withoutClear} = findClearAndRemove(parts);
     return {
-        left: parts[0] === 'left',
-        top: parts[0] === 'top',
-        percentage: parts[1] ? extractPercentage(parts[1].trim()) : defaultPercentage,
-        clear: parts[0] === 'clear',
-        temporary: parts[0] === 'temp',
+        left: withoutClear[0] === 'left',
+        top: withoutClear[0] === 'top',
+        percentage: withoutClear[1] ? extractPercentage(withoutClear[1].trim()) : defaultPercentage,
+        clear: hasClear,
+        temporary: withoutClear[0] === 'temp',
     }
 
     function extractPercentage(percentage: string): number {
@@ -80,4 +81,23 @@ export function presentationStickPlacement(meta: DocElementMeta): PresentationSt
 
         return Number(percentage);
     }
+
+    function findClearAndRemove(parts: string[]) {
+        const withoutClear = []
+        let hasClear = false;
+        for (let idx = 0; idx < parts.length; idx++) {
+            const part = parts[idx];
+            if (part === 'clear') {
+                hasClear = true;
+            } else {
+                withoutClear.push(part);
+            }
+        }
+
+        return {hasClear, withoutClear}
+    }
+}
+
+export function hasStickyPlacement(stickyPlacement: PresentationStickPlacement): boolean{
+    return stickyPlacement.left || stickyPlacement.top;
 }
