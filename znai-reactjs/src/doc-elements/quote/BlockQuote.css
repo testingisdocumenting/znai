@@ -36,7 +36,11 @@ blockquote {
     display: none;
 }
 
-.presentation .znai-presentation-slide-appeared blockquote {
+.presentation .znai-presentation-slide-appeared blockquote.no-animation {
+    display: block;
+}
+
+.presentation .znai-presentation-slide-appeared blockquote.animate {
     display: block;
     animation: blockquote-presentation-appear;
     animation-fill-mode:forwards;
