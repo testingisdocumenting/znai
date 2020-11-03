@@ -179,6 +179,40 @@ describe('PresentationRegistry', () => {
             expect(slide3.props.snippet).toEqual("code3");
         })
 
+        it('should allow clear and placement at the same time', () => {
+            const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [
+                {
+                    type: 'Dummy',
+                    lang: 'java',
+                    snippet: "code1",
+                    meta: {
+                        stickySlide: 'left'
+                    }
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code2",
+                    meta: {
+                        stickySlide: 'clear top'
+                    }
+                },
+                {
+                    type: 'Dummy',
+                    lang: 'python',
+                    snippet: "code3",
+                },
+            ])
+
+            const slide2 = registry.slideByIdx(1)
+            const slide3 = registry.slideByIdx(2)
+
+            expect(slide2.stickySlides.length).toEqual(0);
+
+            expect(slide3.stickySlides.length).toEqual(1);
+            expect(slide3.stickySlides[0].props.snippet).toEqual("code2");
+        })
+
         it('should clear sticky slide on section entry', () => {
             const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [
                 {

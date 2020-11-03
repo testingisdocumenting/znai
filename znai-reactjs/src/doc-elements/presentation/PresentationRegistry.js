@@ -16,7 +16,7 @@
  */
 
 import React from 'react'
-import {presentationStickPlacement} from "../meta/meta";
+import {hasStickyPlacement, presentationStickPlacement} from "../meta/meta";
 
 const emptySlide = createEmptySlide()
 
@@ -92,7 +92,9 @@ class PresentationRegistry {
 
         if (needToClearStickyState) {
             this.stickySlides = []
-        } else if (stickPlacement && !stickPlacement.temporary) {
+        }
+
+        if (stickPlacement && !stickPlacement.temporary && hasStickyPlacement(stickPlacement)) {
             const lastSlideIdx = numberOfSlides - 1
 
             this.stickySlides.push({

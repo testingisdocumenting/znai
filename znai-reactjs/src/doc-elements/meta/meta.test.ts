@@ -32,9 +32,14 @@ describe('stickySlide', () => {
     expect(placement).toEqual({left: true, top: false, percentage: 45, clear: false, temporary: false})
   })
 
-  it('should detect sticky placement clear', () => {
+  it('should detect sticky clear', () => {
     const placement = presentationStickPlacement({stickySlide: 'clear'});
     expect(placement).toEqual({left: false, top: false, percentage: 50, clear: true, temporary: false})
+  })
+
+  it('should detect sticky placement and clear', () => {
+    const placement = presentationStickPlacement({stickySlide: 'clear top 40%'});
+    expect(placement).toEqual({left: false, top: true, percentage: 40, clear: true, temporary: false})
   })
 
   it('should detect temporary placement', () => {
