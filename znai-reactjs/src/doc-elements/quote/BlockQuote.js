@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,15 +20,23 @@ import React from 'react'
 import './BlockQuote.css'
 
 const BlockQuote = (props) => (
-    <blockquote className="content-block"><props.elementsLibrary.DocElement {...props}/></blockquote>
-)
-
-const PresentationBlockQuote = (props) =>
-    <blockquote>
+    <blockquote className="content-block">
         <props.elementsLibrary.DocElement {...props}/>
     </blockquote>
+)
 
-const presentationBlockQuoteHandler = {component: PresentationBlockQuote,
-    numberOfSlides: () => 1}
+const PresentationBlockQuote = (props) => {
+    const className = props.isPresentationDisplayed ? "no-animation" : "animate";
+    return (
+        <blockquote className={className}>
+            <props.elementsLibrary.DocElement {...props}/>
+        </blockquote>
+    )
+}
+
+const presentationBlockQuoteHandler = {
+    component: PresentationBlockQuote,
+    numberOfSlides: () => 1
+}
 
 export {BlockQuote, presentationBlockQuoteHandler}
