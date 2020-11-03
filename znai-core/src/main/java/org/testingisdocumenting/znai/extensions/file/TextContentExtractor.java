@@ -31,12 +31,12 @@ class TextContentExtractor {
     private TextContentExtractor() {
     }
 
-    public static String extractText(String content, PluginParamsOpts opts) {
+    public static String extractText(String contentId, String content, PluginParamsOpts opts) {
         if (opts.isEmpty()) {
             return content;
         }
 
-        Text text = new Text(content);
+        Text text = new Text(contentId, content);
         Text croppedAtStart = cropStart(text, opts);
         Text croppedAtEnd = cropEnd(croppedAtStart, opts);
 
@@ -102,44 +102,50 @@ class TextContentExtractor {
     }
 
     private static class Text {
+        private final String contentId;
         private final List<String> lines;
 
-        public Text(String text) {
-            this.lines = Arrays.asList(text.split("\n"));
+        public Text(String contentId, String text) {
+            this(contentId, Arrays.asList(text.split("\n")));
         }
 
-        public Text(List<String> lines) {
+        public Text(String contentId, List<String> lines) {
+            this.contentId = contentId;
             this.lines = lines;
         }
 
         Text startingWithLineContaining(String subLine) {
             int lineIdx = findLineIdxContaining(subLine);
-            return new Text(lines.subList(lineIdx, lines.size()));
+            return newText(lines.subList(lineIdx, lines.size()));
         }
 
         Text limitToLineContaining(String subLine) {
             int lineIdx = findLineIdxContaining(subLine);
-            return new Text(lines.subList(0, lineIdx + 1));
+            return newText(lines.subList(0, lineIdx + 1));
         }
 
         Text limitTo(Number numberOfLines) {
-            return new Text(lines.subList(0, numberOfLines.intValue()));
+            return newText(lines.subList(0, numberOfLines.intValue()));
         }
 
         Text cropOneLineFromStartAndEnd() {
-            return new Text(lines.subList(1, lines.size() - 1));
+            return newText(lines.subList(1, lines.size() - 1));
         }
 
         Text includeRegexp(List<Pattern> regexps) {
-            return new Text(lines.stream()
+            return newText(lines.stream()
                     .filter(line -> regexps.stream().anyMatch(r -> r.matcher(line).find()))
                     .collect(Collectors.toList()));
         }
 
         Text excludeRegexp(List<Pattern> regexps) {
-            return new Text(lines.stream()
+            return newText(lines.stream()
                     .filter(line -> regexps.stream().noneMatch(r -> r.matcher(line).find()))
                     .collect(Collectors.toList()));
+        }
+
+        private Text newText(List<String> lines) {
+            return new Text(contentId, lines);
         }
 
         private int findLineIdxContaining(String subLine) {
@@ -149,7 +155,8 @@ class TextContentExtractor {
                 }
             }
 
-            throw new IllegalArgumentException("<there is no line containing " + subLine + " in:\n" + toString());
+            throw new IllegalArgumentException("there is no line containing \"" + subLine + "\" in <" + contentId + ">:\n"
+                    + toString());
         }
 
         @Override

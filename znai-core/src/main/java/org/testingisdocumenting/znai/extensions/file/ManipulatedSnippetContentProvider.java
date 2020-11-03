@@ -25,7 +25,7 @@ public class ManipulatedSnippetContentProvider implements SnippetContentProvider
     public ManipulatedSnippetContentProvider(String snippetId, String originalContent,
                                              PluginParams pluginParams) {
         this.snippetId = snippetId;
-        this.extractedContent = TextContentExtractor.extractText(originalContent, pluginParams.getOpts());
+        this.extractedContent = TextContentExtractor.extractText(snippetId, originalContent, pluginParams.getOpts());
     }
 
     @Override

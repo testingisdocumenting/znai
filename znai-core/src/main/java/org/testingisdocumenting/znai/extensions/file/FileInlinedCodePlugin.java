@@ -49,9 +49,9 @@ public class FileInlinedCodePlugin implements InlinedCodePlugin {
         fileName = pluginParams.getFreeParam();
 
         text = TextContentExtractor.extractText(
+                fileName,
                 componentsRegistry.resourceResolver().textContent(fileName),
                 pluginParams.getOpts());
-
 
         return PluginResult.docElement(DocElementType.INLINED_CODE, Collections.singletonMap("code", text));
     }
