@@ -42,6 +42,29 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should validate start and stop end lines"() {
+        code {
+            resultingSnippet("file.txt", "{startLine: '1multiple lines', endLine: 'stop'}")
+        } should throwException("there is no line containing \"1multiple lines\" in <file.txt>:\n" +
+                "this is a\n" +
+                "test file in\n" +
+                "a multiple lines\n" +
+                "line number\n" +
+                "--- stop\n" +
+                "and five\n" +
+                "and then six")
+
+        code {
+            resultingSnippet("file.txt", "{startLine: 'multiple lines', endLine: 'stop2'}")
+        } should throwException("there is no line containing \"stop2\" in <file.txt>:\n" +
+                "a multiple lines\n" +
+                "line number\n" +
+                "--- stop\n" +
+                "and five\n" +
+                "and then six")
+    }
+
+    @Test
     void "should extract file snippet based on start and stop end lines excluding them"() {
         def text = resultingSnippet("file.txt", "{startLine: 'number', endLine: 'stop', excludeStartEnd: true}")
 

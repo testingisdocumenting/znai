@@ -19,6 +19,9 @@ package org.testingisdocumenting.znai.extensions.file;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * convert and validates idx or contains into a list of indexes. Used for example for text highlight.
+ */
 public class SnippetContainerEntriesConverter {
     private final String[] lines;
     private final String label;
