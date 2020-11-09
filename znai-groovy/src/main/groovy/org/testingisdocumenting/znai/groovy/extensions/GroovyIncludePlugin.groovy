@@ -24,23 +24,25 @@ import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.PluginResult
 import org.testingisdocumenting.znai.extensions.features.PluginFeatureList
 import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature
-import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider
+import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature
 import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin
 import org.testingisdocumenting.znai.groovy.parser.GroovyCode
 import org.testingisdocumenting.znai.parser.ParserHandler
 import org.testingisdocumenting.znai.parser.docelement.DocElementType
+import org.testingisdocumenting.znai.search.SearchScore
+import org.testingisdocumenting.znai.search.SearchText
 
 import java.nio.file.Path
 import java.util.stream.Stream
 
-class GroovyIncludePlugin implements IncludePlugin, SnippetContentProvider {
+class GroovyIncludePlugin implements IncludePlugin {
     private String path
     private Path fullPath
     private PluginFeatureList features
 
-    private String content
+    private ManipulatedSnippetContentProvider contentProvider
 
     @Override
     String id() {
@@ -57,12 +59,6 @@ class GroovyIncludePlugin implements IncludePlugin, SnippetContentProvider {
                          ParserHandler parserHandler,
                          Path markupPath,
                          PluginParams pluginParams) {
-        features = new PluginFeatureList(
-                new SnippetHighlightFeature(componentsRegistry, pluginParams, this),
-                new SnippetRevealLineStopFeature(pluginParams, this),
-                new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)
-        )
-
         path = pluginParams.getFreeParam()
         fullPath = componentsRegistry.resourceResolver().fullPath(path)
         String fileContent = componentsRegistry.resourceResolver().textContent(fullPath)
@@ -72,13 +68,26 @@ class GroovyIncludePlugin implements IncludePlugin, SnippetContentProvider {
 
         Boolean bodyOnly = pluginParams.getOpts().has("bodyOnly") ? pluginParams.getOpts().get("bodyOnly") : false
 
-        content = extractContent(groovyCode, entry, bodyOnly)
-        Map<String, Object> props = CodeSnippetsProps.create("groovy",
-                content)
+        String content = extractContent(groovyCode, entry, bodyOnly)
+        contentProvider = new ManipulatedSnippetContentProvider(path, content, pluginParams)
+
+        features = new PluginFeatureList(
+                new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider),
+                new SnippetRevealLineStopFeature(pluginParams, contentProvider),
+                new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)
+        )
+
+        Map<String, Object> props = CodeSnippetsProps.create("groovy", contentProvider.snippetContent())
         props.putAll(pluginParams.getOpts().toMap())
+
         features.updateProps(props)
 
         return PluginResult.docElement(DocElementType.SNIPPET, props)
+    }
+
+    @Override
+    SearchText textForSearch() {
+        return SearchScore.STANDARD.text(contentProvider.snippetContent())
     }
 
     @Override
@@ -110,15 +119,5 @@ class GroovyIncludePlugin implements IncludePlugin, SnippetContentProvider {
         return bodyOnly ?
                 method.bodyOnly :
                 method.fullBody
-    }
-
-    @Override
-    String snippetContent() {
-        return content
-    }
-
-    @Override
-    String snippetId() {
-        return path
     }
 }
