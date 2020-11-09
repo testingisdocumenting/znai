@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,8 +27,15 @@ class GroovyIncludePluginTest {
     @Test
     void "validates highlight"() {
         code {
-            process("sample.groovy", "{highlight: 4}")
+            process("sample.groovy", "{highlight: 24}")
         } should throwException(IllegalArgumentException)
+    }
+
+    @Test
+    void "excludes lines by regexp"() {
+        def snippet = process("sample.groovy", "{excludeRegexp: 'println'}")
+        snippet.should == 'def "hello world"() {\n' +
+                '}'
     }
 
     private static String process(String fileName, String value) {
