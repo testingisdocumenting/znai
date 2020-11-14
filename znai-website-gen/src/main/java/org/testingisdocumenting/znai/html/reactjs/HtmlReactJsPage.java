@@ -48,8 +48,13 @@ public class HtmlReactJsPage {
                 mainBodySupplier.render() + "</div>");
 
         htmlPage.addToJavaScript(() -> "document.getElementById('" + REACT_BLOCK_ID + "').innerHTML = '';\n" +
+                // code snippets sometimes have <script> tags, even though they are in quotes,
+                // because it is embedded into html page <script> block, browser parser get confused
+                // but if it is surrounded by this special comment, it tricks browser to be "normal" again
+                "/*<!--*/\n" +
                 "ReactDOM.render(" + createElementStatement.render() + ", " +
-                "document.getElementById(\"" + REACT_BLOCK_ID + "\"));");
+                "document.getElementById(\"" + REACT_BLOCK_ID + "\"));\n" +
+                "/*-->*/\n");
 
         reactJsBundle.clientJavaScripts().forEach(htmlPage::addJavaScript);
         reactJsBundle.clientCssResources().forEach(htmlPage::addCss);
