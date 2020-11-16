@@ -50,7 +50,7 @@ export function convertAnsiToTokenLines(lines: string[]): any[] {
         }
 
         if (idx !== len - 1) {
-          printer.println();
+          printer.flushLine();
         }
       }
     }

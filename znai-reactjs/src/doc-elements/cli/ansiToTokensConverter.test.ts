@@ -29,8 +29,7 @@ test('convertAnsiToTokenLines', () => {
       {
         type: 'znai-ansi-regular',
         content: ' http.get("https://jsonplaceholder.typicode.com/todos/1")'
-      },
-      '\n'
+      }
     ],
     [
       { type: 'znai-ansi-yellow-fg', content: '> ' },
@@ -39,7 +38,6 @@ test('convertAnsiToTokenLines', () => {
         type: 'znai-ansi-magenta-fg',
         content: 'https://jsonplaceholder.typicode.com/todos/1'
       },
-      '\n'
     ],
     [
       { type: 'znai-ansi-regular', content: '  ' },
@@ -48,4 +46,13 @@ test('convertAnsiToTokenLines', () => {
       { type: 'znai-ansi-bold znai-ansi-green-fg', content: 'equals 200' }
     ]
   ]);
+})
+
+test('handle empty lines', () => {
+  const lines = convertAnsiToTokenLines(['line one', '', 'line two']);
+  expect(lines).toEqual([
+    [ { type: 'znai-ansi-regular', content: 'line one' } ],
+    [],
+    [ { type: 'znai-ansi-regular', content: 'line two' } ]
+  ])
 })
