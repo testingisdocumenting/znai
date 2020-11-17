@@ -23,6 +23,9 @@ export function cliOutputDemo(registry) {
         .add('no highlight', () => (
             <CliOutput lines={generateNonAnsiLines()}/>
         ))
+        .add('with empty lines', () => (
+            <CliOutput lines={generateNonAnsiWithEmptyLines()}/>
+        ))
         .add('with highlight', () => (
             <CliOutput lines={generateNonAnsiLines()} highlight={[1, 'line number 7']}/>
         ))
@@ -44,6 +47,25 @@ function generateNonAnsiLines() {
         'line number 3',
         'line number 4',
         'line number 5',
+        'line number 6',
+        'line number 7',
+        'line number 8',
+        'line number 9',
+        'line number 10',
+        'line number 11',
+        'line number 12',
+    ]
+}
+
+function generateNonAnsiWithEmptyLines() {
+    return [
+        'line number 1',
+        'line number 2',
+        '',
+        'line number 3',
+        'line number 4',
+        'line number 5',
+        '',
         'line number 6',
         'line number 7',
         'line number 8',
