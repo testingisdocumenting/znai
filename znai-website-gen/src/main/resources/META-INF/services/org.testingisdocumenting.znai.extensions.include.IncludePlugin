@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+org.testingisdocumenting.znai.extensions.structure.PageRedirectIncludePlugin
 org.testingisdocumenting.znai.extensions.twosides.EmptyBlockIncludePlugin
 org.testingisdocumenting.znai.extensions.image.ImageIncludePlugin
 org.testingisdocumenting.znai.extensions.svg.SvgIncludePlugin

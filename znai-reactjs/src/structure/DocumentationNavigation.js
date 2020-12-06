@@ -77,6 +77,11 @@ class DocumentationNavigation {
         return this.notifyNewUrl(url)
     }
 
+    replaceUrl(url) {
+        window.history.replaceState({}, null, url)
+        return this.notifyNewUrl(url)
+    }
+
     scrollToAnchor(anchorId) {
         const anchor = document.getElementById(anchorId)
         if (anchor) {

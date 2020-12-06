@@ -1,3 +1,0 @@
-# Your product
-
-quick summary

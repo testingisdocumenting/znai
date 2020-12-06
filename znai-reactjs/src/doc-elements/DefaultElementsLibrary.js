@@ -74,6 +74,7 @@ import DiagramLegend from './diagrams/DiagramLegend'
 
 import { DocumentationLayout } from '../layout/DocumentationLayout'
 import Footer from '../structure/Footer'
+import {Redirect} from '../structure/Redirect';
 
 const library = {}
 const presentationElementHandlers = {}
@@ -198,6 +199,8 @@ registerDocUtilsElements(library)
 
 library.DocumentationLayout = DocumentationLayout
 library.Footer = Footer
+
+library.Redirect = Redirect
 
 /**
  * to make a DocElement aligned with a page content it needs to have a content-block assigned.
