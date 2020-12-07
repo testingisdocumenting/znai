@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 public class DocScaffolding {
     private final Path workingDir;
-    private Map<String, List<String>> fileNameByDirName;
+    private final Map<String, List<String>> fileNameByDirName;
 
     public DocScaffolding(Path workingDir) {
         this.workingDir = workingDir;
@@ -55,7 +55,7 @@ public class DocScaffolding {
     }
 
     private void createIndex() {
-        createFileFromResource("index.md");
+        createFileFromResource("scaffold-index.md", "index.md");
     }
 
     private void createPages() {
@@ -76,8 +76,12 @@ public class DocScaffolding {
         createAuxiliaryContentFile("file-name.js");
     }
 
-    private void createFileFromResource(String fileName) {
-        FileUtils.writeTextContent(workingDir.resolve(fileName), ResourceUtils.textContent(fileName));
+    private void createFileFromResource(String resourceName) {
+        createFileFromResource(resourceName, resourceName);
+    }
+
+    private void createFileFromResource(String resourceName, String destName) {
+        FileUtils.writeTextContent(workingDir.resolve(destName), ResourceUtils.textContent(resourceName));
     }
 
     private String buildTocSection(String dirName) {

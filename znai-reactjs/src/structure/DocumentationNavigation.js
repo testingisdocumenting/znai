@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -74,6 +75,11 @@ class DocumentationNavigation {
 
     navigateToUrl(url) {
         window.history.pushState({}, null, url)
+        return this.notifyNewUrl(url)
+    }
+
+    replaceUrl(url) {
+        window.history.replaceState({}, null, url)
         return this.notifyNewUrl(url)
     }
 
