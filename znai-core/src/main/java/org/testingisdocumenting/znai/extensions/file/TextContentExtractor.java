@@ -104,19 +104,21 @@ class TextContentExtractor {
     private static class Text {
         private final String contentId;
         private final List<String> lines;
+        private final boolean hasCroppedStart;
 
         public Text(String contentId, String text) {
-            this(contentId, Arrays.asList(text.split("\n")));
+            this(contentId, Arrays.asList(text.split("\n")), false);
         }
 
-        public Text(String contentId, List<String> lines) {
+        public Text(String contentId, List<String> lines, boolean hasCroppedStart) {
             this.contentId = contentId;
             this.lines = lines;
+            this.hasCroppedStart = hasCroppedStart;
         }
 
         Text startingWithLineContaining(String subLine) {
             int lineIdx = findLineIdxContaining(subLine);
-            return newText(lines.subList(lineIdx, lines.size()));
+            return newText(lines.subList(lineIdx, lines.size()), true);
         }
 
         Text limitToLineContaining(String subLine) {
@@ -145,11 +147,15 @@ class TextContentExtractor {
         }
 
         private Text newText(List<String> lines) {
-            return new Text(contentId, lines);
+            return new Text(contentId, lines, false);
+        }
+
+        private Text newText(List<String> lines, boolean hasCroppedStart) {
+            return new Text(contentId, lines, hasCroppedStart);
         }
 
         private int findLineIdxContaining(String subLine) {
-            for (int i = 0; i < lines.size(); i++) {
+            for (int i = hasCroppedStart ? 1 : 0; i < lines.size(); i++) {
                 if (lines.get(i).contains(subLine)) {
                     return i;
                 }
