@@ -23,6 +23,7 @@ export function syntaxHighlightSnippetDemo(registry) {
     registry
         .add('yaml', () => <Snippet snippet={yamlCode()} lang="yaml" highlight={[3, 5]}/>)
         .add('protobuf', () => <Snippet snippet={protoCode()} lang="proto" highlight={[5]}/>)
+        .add('graphql', () => <Snippet snippet={graphqlCode()} lang="graphql" highlight={[5]}/>)
 }
 
 function yamlCode() {
@@ -70,5 +71,16 @@ function protoCode() {
         '\n' +
         'message AddressBook {\n' +
         '  repeated Person people = 1;\n' +
+        '}'
+}
+
+function graphqlCode() {
+    return 'type Query {\n' +
+        '  me: User\n' +
+        '}\n' +
+        ' \n' +
+        'type User {\n' +
+        '  id: ID\n' +
+        '  name: String\n' +
         '}'
 }
