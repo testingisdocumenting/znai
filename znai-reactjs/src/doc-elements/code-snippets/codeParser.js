@@ -33,11 +33,24 @@ import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-protobuf'
 import 'prismjs/components/prism-diff'
 
-export function parseCode(lang, code) {
-    const prismLang = Prism.languages[adjustLang(lang)]
+const diffPrefix = 'diff-'
 
-    const tokens = Prism.tokenize(code, prismLang ? prismLang : Prism.languages.clike)
+export function parseCode(lang, code) {
+    const isDiff = determineIssDiff()
+
+    const langWithoutDiffPrefix = isDiff ? lang.substr(diffPrefix.length) : lang
+    const adjustedLang = Prism.languages[(isDiff ? diffPrefix : '') + langRemap(langWithoutDiffPrefix)]
+
+    const tokens = Prism.tokenize(code, adjustedLang ? adjustedLang : Prism.languages.clike)
     return tokens.map(t => normalizeToken(t))
+
+    function determineIssDiff() {
+        if (!lang) {
+            return false;
+        }
+
+        return lang.indexOf(diffPrefix) === 0
+    }
 }
 
 const extensionsMapping = {
@@ -58,7 +71,7 @@ const extensionsMapping = {
     protobuf: 'protobuf',
 }
 
-function adjustLang(lang) {
+function langRemap(lang) {
     lang = lang ? lang.toLowerCase() : ""
     const extensionBasedLang = extensionsMapping[lang]
     return extensionBasedLang ? extensionBasedLang : lang

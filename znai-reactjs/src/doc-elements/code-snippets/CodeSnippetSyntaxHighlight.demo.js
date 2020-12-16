@@ -24,6 +24,7 @@ export function syntaxHighlightSnippetDemo(registry) {
         .add('yaml', () => <Snippet snippet={yamlCode()} lang="yaml" highlight={[3, 5]}/>)
         .add('protobuf', () => <Snippet snippet={protoCode()} lang="proto" highlight={[5]}/>)
         .add('diff', () => <Snippet snippet={diffCode()} lang="diff"/>)
+        .add('diff-javascript', () => <Snippet snippet={diffJavaScriptCode()} lang="diff-javascript"/>)
 }
 
 function yamlCode() {
@@ -123,4 +124,12 @@ function diffCode() {
         '+ This paragraph contains\n' +
         '+ important new additions\n' +
         '+ to this document.'
+}
+
+function diffJavaScriptCode() {
+    return '@@ -4,6 +4,5 @@\n' +
+        '-    let foo = bar.baz([1, 2, 3]);\n' +
+        '-    foo = foo + 1;\n' +
+        '+    const foo = bar.baz([1, 2, 3]) + 1;\n' +
+        '     console.log(`foo: ${foo}`);'
 }
