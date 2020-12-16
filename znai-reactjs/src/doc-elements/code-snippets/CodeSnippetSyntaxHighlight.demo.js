@@ -23,6 +23,7 @@ export function syntaxHighlightSnippetDemo(registry) {
     registry
         .add('yaml', () => <Snippet snippet={yamlCode()} lang="yaml" highlight={[3, 5]}/>)
         .add('protobuf', () => <Snippet snippet={protoCode()} lang="proto" highlight={[5]}/>)
+        .add('diff', () => <Snippet snippet={diffCode()} lang="diff"/>)
 }
 
 function yamlCode() {
@@ -71,4 +72,55 @@ function protoCode() {
         'message AddressBook {\n' +
         '  repeated Person people = 1;\n' +
         '}'
+}
+
+function diffCode() {
+    return '*** /path/to/original\ttimestamp\n' +
+        '--- /path/to/new\ttimestamp\n' +
+        '***************\n' +
+        '*** 1,3 ****\n' +
+        '--- 1,9 ----\n' +
+        '+ This is an important\n' +
+        '+ notice! It should\n' +
+        '+ therefore be located at\n' +
+        '+ the beginning of this\n' +
+        '+ document!\n' +
+        '+\n' +
+        '  This part of the\n' +
+        '  document has stayed the\n' +
+        '  same from version to\n' +
+        '***************\n' +
+        '*** 8,20 ****\n' +
+        '  compress the size of the\n' +
+        '  changes.\n' +
+        '\n' +
+        '- This paragraph contains\n' +
+        '- text that is outdated.\n' +
+        '- It will be deleted in the\n' +
+        '- near future.\n' +
+        '\n' +
+        '  It is important to spell\n' +
+        '! check this dokument. On\n' +
+        '  the other hand, a\n' +
+        '  misspelled word isn\'t\n' +
+        '  the end of the world.\n' +
+        '--- 14,21 ----\n' +
+        '  compress the size of the\n' +
+        '  changes.\n' +
+        '\n' +
+        '  It is important to spell\n' +
+        '! check this document. On\n' +
+        '  the other hand, a\n' +
+        '  misspelled word isn\'t\n' +
+        '  the end of the world.\n' +
+        '***************\n' +
+        '*** 22,24 ****\n' +
+        '--- 23,29 ----\n' +
+        '  this paragraph needs to\n' +
+        '  be changed. Things can\n' +
+        '  be added after it.\n' +
+        '+\n' +
+        '+ This paragraph contains\n' +
+        '+ important new additions\n' +
+        '+ to this document.'
 }
