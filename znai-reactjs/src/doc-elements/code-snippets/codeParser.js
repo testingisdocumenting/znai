@@ -31,6 +31,7 @@ import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-yaml'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-protobuf'
+import 'prismjs/components/prism-graphql'
 
 export function parseCode(lang, code) {
     const prismLang = Prism.languages[adjustLang(lang)]
