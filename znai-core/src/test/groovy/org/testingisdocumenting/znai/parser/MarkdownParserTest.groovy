@@ -225,6 +225,35 @@ world""")
     }
 
     @Test
+    void "repeating sub headings within different parent sections"() {
+        parse("""
+# top level section
+## example
+#### java
+### java
+## constraint
+### java
+#### java
+#### java
+# another top level
+## example
+## example
+        """)
+
+        content.should == [[title: 'top level section', id: 'top-level-section', type: 'Section',
+                            content: [[level: 2, title: 'example', id: 'top-level-section-example', type: 'SubHeading'],
+                                      [level: 4, title: 'java', id: 'top-level-section-example-java', type: 'SubHeading'],
+                                      [level: 3, title: 'java', id: 'top-level-section-example-java-2', type: 'SubHeading'],
+                                      [level: 2, title: 'constraint', id: 'top-level-section-constraint', type: 'SubHeading'],
+                                      [level: 3, title: 'java', id: 'top-level-section-constraint-java', type: 'SubHeading'],
+                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java', type: 'SubHeading'],
+                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java-2', type: 'SubHeading']]],
+                           [title: 'another top level', id: 'another-top-level', type: 'Section',
+                            content: [[level: 2, title: 'example', id: 'another-top-level-example', type: 'SubHeading'],
+                                      [level: 2, title: 'example', id: 'another-top-level-example-2', type: 'SubHeading']]]]
+    }
+
+    @Test
     void "top level section with styles"() {
         code {
             parse("# title with `backtick`")

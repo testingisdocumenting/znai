@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,8 +23,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PageSectionIdTitle {
-    private String title;
-    private String id;
+    private final String title;
+    private final String id;
 
     public PageSectionIdTitle(String title) {
         this.title = title;
