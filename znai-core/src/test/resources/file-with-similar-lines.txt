@@ -1,0 +1,4 @@
+$prompt >
+some output
+goes here
+$prompt >

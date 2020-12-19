@@ -42,6 +42,17 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should extract not match start line to the end line pattern but start from the one below"() {
+        def text = resultingSnippet("file-with-similar-lines.txt",
+                "{startLine: '\$prompt >', endLine: '\$prompt >'}")
+
+        text.should == '$prompt >\n' +
+                'some output\n' +
+                'goes here\n' +
+                '$prompt >'
+    }
+
+    @Test
     void "should validate start and stop end lines"() {
         code {
             resultingSnippet("file.txt", "{startLine: '1multiple lines', endLine: 'stop'}")
