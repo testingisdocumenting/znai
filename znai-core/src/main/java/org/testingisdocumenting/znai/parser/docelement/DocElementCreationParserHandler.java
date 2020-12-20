@@ -1,4 +1,5 @@
 /*
+ * Copyright 2020 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,6 +56,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private final Deque<DocElement> elementsStack;
 
     private String currentSectionTitle;
+    private SubHeadingUniqueIdGenerator subHeadingUniqueIdGenerator;
 
     private boolean isSectionStarted;
 
@@ -72,6 +74,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
         this.currentSectionTitle = "";
         this.isSectionStarted = false;
+        this.subHeadingUniqueIdGenerator = new SubHeadingUniqueIdGenerator("");
     }
 
     public DocElement getDocElement() {
@@ -98,6 +101,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
         start(DocElementType.SECTION,
                 "title", title,
                 "id", id);
+        subHeadingUniqueIdGenerator = new SubHeadingUniqueIdGenerator(id);
 
         componentsRegistry.docStructure().registerLocalAnchor(path, id);
 
@@ -120,7 +124,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSubHeading(int level, String title) {
-        String id = new PageSectionIdTitle(title).getId();
+        String idByTitle = new PageSectionIdTitle(title).getId();
+
+        subHeadingUniqueIdGenerator.registerSubHeading(level, idByTitle);
+        String id = subHeadingUniqueIdGenerator.generateId();
+
         append(DocElementType.SUB_HEADING,
                 "level", level,
                 "title", title,

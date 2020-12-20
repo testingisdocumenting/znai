@@ -25,10 +25,10 @@ Note: you can get `page-section-id` by hovering over a section title and pressin
 
 ## Links to Subsection
 
-Linking to subsections is the same as linking to a top level section. [Here is an example](flow/page-references#links-to-subsection)
+Linking to subsections is the same as linking to a top level section. [Here is an example](flow/page-references#links-links-to-subsection)
 
 ```markdown
-[Here is an example](flow/page-references#link-to-subsection)
+[Here is an example](flow/page-references#links-links-to-subsection)
 ```
 
 Use [Subsection Shortcut](#links) if a subsection is within the same page: 
