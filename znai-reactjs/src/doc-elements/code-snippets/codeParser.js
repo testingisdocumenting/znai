@@ -71,7 +71,7 @@ const extensionsMapping = {
     protobuf: 'protobuf',
 }
 
-function langRemap(lang) {
+function adjustLang(lang) {
     lang = lang ? lang.toLowerCase() : ""
     const extensionBasedLang = extensionsMapping[lang]
     return extensionBasedLang ? extensionBasedLang : lang
