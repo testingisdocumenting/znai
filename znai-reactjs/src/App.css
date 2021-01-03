@@ -184,6 +184,11 @@
     --znai-string-color: #078744;
     --znai-property-color: #660e7a;
     --znai-punctuation-color: #888;
+    --znai-coord-color: var(--znai-punctuation-color);
+    --znai-diff-color: #038091;
+    --znai-inserted-color: #078744;
+    --znai-deleted-color: #d9534f;
+
     --znai-collapse-uncollapse-color: var(--znai-punctuation-color);
     --znai-collapse-uncollapse-background-color: var(--znai-snippets-title-background-color);
 

@@ -142,6 +142,5 @@ function diffJavaScriptCode() {
     return '@@ -4,6 +4,5 @@\n' +
         '-    let foo = bar.baz([1, 2, 3]);\n' +
         '-    foo = foo + 1;\n' +
-        '+    const foo = bar.baz([1, 2, 3]) + 1;\n' +
-        '     console.log(`foo: ${foo}`);'
+        '+    const foo = bar.baz([1, 2, 3]) + 1;\n'
 }
