@@ -91,6 +91,22 @@
     background-color: var(--znai-token-highlight-background-color);
 }
 
+.token.coord {
+    color: var(--znai-coord-color);
+}
+
+.token.diff {
+    color: var(--znai-diff-color);
+}
+
+.token.inserted-sign {
+    color: var(--znai-inserted-color);
+}
+
+.token.deleted-sign {
+    color: var(--znai-deleted-color);
+}
+
 .code-line .token.url,
 .code-line .token.entity,
 .code-line .token.variable,

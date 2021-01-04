@@ -126,6 +126,10 @@
     --znai-punctuation-color: #8f9aa7;
     --znai-number-color: #6998bc;
     --znai-boolean-color: var(--znai-number-color);
+    --znai-coord-color: var(--znai-punctuation-color);
+    --znai-diff-color: #179aad;
+    --znai-inserted-color: #10974e;
+    --znai-deleted-color: #d9534f;
 
     --znai-ansi-black: #444;
     --znai-ansi-red: #d9534f;

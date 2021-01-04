@@ -31,13 +31,41 @@ import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-yaml'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-protobuf'
-import 'prismjs/components/prism-graphql'
+import 'prismjs/components/prism-diff'
+import 'prismjs/plugins/autoloader/prism-autoloader'
+import 'prismjs/plugins/diff-highlight/prism-diff-highlight'
+
+const diffPrefix = 'diff-'
 
 export function parseCode(lang, code) {
-    const prismLang = Prism.languages[adjustLang(lang)]
+    const isDiff = determineIssDiff()
 
-    const tokens = Prism.tokenize(code, prismLang ? prismLang : Prism.languages.clike)
+    const grammar = createGrammar()
+    const tokens = tokenize()
+
     return tokens.map(t => normalizeToken(t))
+
+    function tokenize() {
+        return Prism.tokenize(code, grammar)
+    }
+
+    function createGrammar() {
+        const grammarByLangName = Prism.languages[adjustLang(lang)] || Prism.languages.clike
+
+        if (!isDiff) {
+            return grammarByLangName
+        }
+
+        return Prism.languages.diff
+    }
+
+    function determineIssDiff() {
+        if (!lang) {
+            return false;
+        }
+
+        return lang.indexOf(diffPrefix) === 0
+    }
 }
 
 const extensionsMapping = {
