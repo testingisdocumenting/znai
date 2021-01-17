@@ -50,7 +50,7 @@
 }
 
 .open-api-operation > .url-and-summary > .path > .path-part-delimiter {
-    color: var(--znai-punctuation-color);
+    color: var(--znai-code-punctuation-color);
 }
 
 .open-api-operation > .url-and-summary > .path > .path-part-parameter {

@@ -117,19 +117,19 @@
     --znai-spoiler-background-color: var(--znai-snippets-title-background-color);
 
     --znai-default-code-block-color: #aaa;
-    --znai-class-color: #bbb;
-    --znai-function-color: #9473a6;
-    --znai-keyword-color: #5284e7;
-    --znai-directive-color: #5284e7;
-    --znai-property-color: #9473a6;
-    --znai-string-color: #678558;
-    --znai-punctuation-color: #8f9aa7;
-    --znai-number-color: #6998bc;
-    --znai-boolean-color: var(--znai-number-color);
-    --znai-coord-color: var(--znai-punctuation-color);
-    --znai-diff-color: #179aad;
-    --znai-inserted-color: #10974e;
-    --znai-deleted-color: #d9534f;
+    --znai-code-class-color: #bbb;
+    --znai-code-function-color: #9473a6;
+    --znai-code-keyword-color: #5284e7;
+    --znai-code-directive-color: #5284e7;
+    --znai-code-property-color: #9473a6;
+    --znai-code-string-color: #678558;
+    --znai-code-punctuation-color: #8f9aa7;
+    --znai-code-number-color: #6998bc;
+    --znai-code-boolean-color: var(--znai-code-number-color);
+    --znai-code-coord-color: var(--znai-code-punctuation-color);
+    --znai-code-diff-color: #179aad;
+    --znai-code-inserted-color: #10974e;
+    --znai-code-deleted-color: #d9534f;
 
     --znai-ansi-black: #444;
     --znai-ansi-red: #d9534f;
@@ -182,12 +182,12 @@
     --znai-snippets-title-left-border-color: var(--znai-snippets-title-background-color);
 
     --znai-default-code-block-color: #aaa;
-    --znai-class-color: #bbb;
-    --znai-property-color: #9473a6;
-    --znai-string-color: #678558;
-    --znai-punctuation-color: #8f9aa7;
-    --znai-number-color: #6998bc;
-    --znai-boolean-color: var(--znai-number-color);
+    --znai-code-class-color: #bbb;
+    --znai-code-property-color: #9473a6;
+    --znai-code-string-color: #678558;
+    --znai-code-punctuation-color: #8f9aa7;
+    --znai-code-number-color: #6998bc;
+    --znai-code-boolean-color: var(--znai-code-number-color);
 
     --znai-collapse-uncollapse-background-color: #383838;
 

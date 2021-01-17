@@ -175,21 +175,21 @@
     --znai-open-api-sub-header-color: var(--znai-light-black);
 
     --znai-default-code-block-color: var(--znai-color-black);
-    --znai-class-color: #3d3d3f;
-    --znai-function-color: #a66f2b;
-    --znai-keyword-color: #038091;
-    --znai-directive-color: #038091;
-    --znai-number-color: #2822ad;
-    --znai-boolean-color: var(--znai-number-color);
-    --znai-string-color: #078744;
-    --znai-property-color: #660e7a;
-    --znai-punctuation-color: #888;
-    --znai-coord-color: var(--znai-punctuation-color);
-    --znai-diff-color: #038091;
-    --znai-inserted-color: #078744;
-    --znai-deleted-color: #d9534f;
+    --znai-code-class-color: #3d3d3f;
+    --znai-code-function-color: #a66f2b;
+    --znai-code-keyword-color: #038091;
+    --znai-code-directive-color: #038091;
+    --znai-code-number-color: #2822ad;
+    --znai-code-boolean-color: var(--znai-code-number-color);
+    --znai-code-string-color: #078744;
+    --znai-code-property-color: #660e7a;
+    --znai-code-punctuation-color: #888;
+    --znai-code-coord-color: var(--znai-code-punctuation-color);
+    --znai-code-diff-color: #038091;
+    --znai-code-inserted-color: #078744;
+    --znai-code-deleted-color: #d9534f;
 
-    --znai-collapse-uncollapse-color: var(--znai-punctuation-color);
+    --znai-collapse-uncollapse-color: var(--znai-code-punctuation-color);
     --znai-collapse-uncollapse-background-color: var(--znai-snippets-title-background-color);
 
     --znai-ansi-black: #222;
