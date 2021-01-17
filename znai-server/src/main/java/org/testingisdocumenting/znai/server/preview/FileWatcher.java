@@ -38,6 +38,8 @@ public class FileWatcher implements AuxiliaryFileListener {
     private final WatchService watchService;
     private final Map<WatchKey, Path> pathByKey;
 
+    private static final Path tempDirPath = detectTempFilesDir();
+
     public FileWatcher(WebSite.Configuration siteCfg, Stream<Path> auxiliaryFiles, FileChangeHandler fileChangeHandler) {
         this.siteCfg = siteCfg;
         this.fileChangeHandler = fileChangeHandler;
@@ -57,6 +59,11 @@ public class FileWatcher implements AuxiliaryFileListener {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void onAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
+        register(auxiliaryFile.getPath());
     }
 
     private void startWatchLoop() throws InterruptedException {
@@ -134,6 +141,10 @@ public class FileWatcher implements AuxiliaryFileListener {
                 return;
             }
 
+            if (tempDirPath.equals(path)) {
+                return;
+            }
+
             if (pathByKey.containsValue(path)) {
                 return;
             }
@@ -167,8 +178,15 @@ public class FileWatcher implements AuxiliaryFileListener {
         return watchService;
     }
 
-    @Override
-    public void onAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
-        register(auxiliaryFile.getPath());
+    private static Path detectTempFilesDir() {
+        try {
+            Path tempFile = Files.createTempFile("detectTempDir", "");
+            Files.delete(tempFile);
+
+            return tempFile.getParent();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
