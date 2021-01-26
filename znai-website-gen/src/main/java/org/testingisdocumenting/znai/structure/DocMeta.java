@@ -28,12 +28,15 @@ public class DocMeta {
     public static final String META_FILE_NAME = "meta.json";
 
     private String id;
+
     private final String type;
     private final String title;
     private final String category;
     private final String description;
     private final List<String> allowedUsers;
     private final List<String> allowedGroups;
+    private final boolean displayOnLanding;
+
     private boolean previewEnabled;
     private final Map<String, ?> docMetaMap;
 
@@ -46,6 +49,7 @@ public class DocMeta {
         this.type = stringValue(docMetaMap, "type", "no-type");
         this.title = stringValue(docMetaMap, "title", "no-title");
         this.category = stringValue(docMetaMap, "category", "Un-categorized");
+        this.displayOnLanding = booleanValue(docMetaMap, "displayOnLanding", true);
         this.description = stringValue(docMetaMap, "description", "no description");
         this.allowedUsers = stringList(docMetaMap, "allowedUsers");
         this.allowedGroups = stringList(docMetaMap, "allowedGroups");
@@ -91,6 +95,10 @@ public class DocMeta {
         return description;
     }
 
+    public boolean isDisplayOnLanding() {
+        return displayOnLanding;
+    }
+
     public List<String> getAllowedUsers() {
         return allowedUsers;
     }
@@ -118,6 +126,10 @@ public class DocMeta {
 
     private static String stringValue(Map<String, ?> docMetaMap, String key, String defaultValue) {
         return docMetaMap.containsKey(key) ? docMetaMap.get(key).toString() : defaultValue;
+    }
+
+    private static Boolean booleanValue(Map<String, ?> docMetaMap, String key, Boolean defaultValue) {
+        return docMetaMap.containsKey(key) ? (Boolean) docMetaMap.get(key) : defaultValue;
     }
 
     @SuppressWarnings("unchecked")
