@@ -37,6 +37,7 @@ public class StorageBasedLandingDocEntriesProvider implements LandingDocEntriesP
     @Override
     public Stream<LandingDocEntry> provide() {
         return docMetaByDocId.entrySet().stream()
+                .filter(entry -> entry.getValue().isDisplayOnLanding())
                 .map(entry -> new LandingDocEntry(
                         entry.getKey(),
                         entry.getValue().getTitle(),
