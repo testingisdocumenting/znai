@@ -31,7 +31,7 @@
 
 .znai-not-authorized-doc-id {
     font-weight: bold;
-    color: var(--znai-string-color);
+    color: var(--znai-code-string-color);
 }
 
 .znai-not-authorized-allowed-groups-message {
@@ -39,7 +39,7 @@
 }
 
 .znai-not-authorized-groups {
-    color: var(--znai-string-color);
+    color: var(--znai-code-string-color);
 }
 
 .znai-not-authorized-link-message {

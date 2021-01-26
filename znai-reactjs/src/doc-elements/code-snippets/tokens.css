@@ -23,7 +23,7 @@
 }
 
 .token.class-name {
-    color: var(--znai-class-color);
+    color: var(--znai-code-class-color);
 }
 
 .token.operator {
@@ -31,23 +31,23 @@
 }
 
 .token.function {
-    color: var(--znai-function-color);
+    color: var(--znai-code-function-color);
 }
 
 .token.punctuation {
-    color: var(--znai-punctuation-color);
+    color: var(--znai-code-punctuation-color);
 }
 
 .token.tag {
-    color: var(--znai-keyword-color);
+    color: var(--znai-code-keyword-color);
 }
 
 .token.attr-name {
-    color: var(--znai-function-color);
+    color: var(--znai-code-function-color);
 }
 
 .token.attr-value {
-    color: var(--znai-property-color);
+    color: var(--znai-code-property-color);
 }
 
 .token.title {
@@ -61,28 +61,28 @@
 
 .token.property,
 .token.key {
-    color: var(--znai-property-color);
+    color: var(--znai-code-property-color);
     font-weight: bold;
 }
 
 .token.number {
-    color: var(--znai-number-color);
+    color: var(--znai-code-number-color);
 }
 
 .token.boolean {
-    color: var(--znai-boolean-color);
+    color: var(--znai-code-boolean-color);
 }
 
 .token.keyword {
-    color: var(--znai-keyword-color);
+    color: var(--znai-code-keyword-color);
 }
 
 .token.directive {
-    color: var(--znai-directive-color);
+    color: var(--znai-code-directive-color);
 }
 
 .token.string {
-    color: var(--znai-string-color);
+    color: var(--znai-code-string-color);
 }
 
 .token.highlighted {
@@ -92,19 +92,19 @@
 }
 
 .token.coord {
-    color: var(--znai-coord-color);
+    color: var(--znai-code-coord-color);
 }
 
 .token.diff {
-    color: var(--znai-diff-color);
+    color: var(--znai-code-diff-color);
 }
 
 .token.inserted-sign {
-    color: var(--znai-inserted-color);
+    color: var(--znai-code-inserted-color);
 }
 
 .token.deleted-sign {
-    color: var(--znai-deleted-color);
+    color: var(--znai-code-deleted-color);
 }
 
 .code-line .token.url,

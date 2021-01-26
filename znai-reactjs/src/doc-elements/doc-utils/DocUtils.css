@@ -41,7 +41,7 @@
 
 .doc-utils-desc-annotation {
     margin-right: 8px;
-    color: var(--znai-keyword-color);
+    color: var(--znai-code-keyword-color);
 }
 
 .doc-utils-desc-name {
@@ -53,12 +53,12 @@
 }
 
 .doc-utils-desc-parameter-list:before {
-    color: var(--znai-punctuation-color);
+    color: var(--znai-code-punctuation-color);
     content: '(';
 }
 
 .doc-utils-desc-parameter-list:after {
-    color: var(--znai-punctuation-color);
+    color: var(--znai-code-punctuation-color);
     content: ')';
 }
 
@@ -71,7 +71,7 @@
 }
 
 .doc-utils-desc-parameter-list > .doc-utils-desc-parameter:after {
-    color: var(--znai-punctuation-color);
+    color: var(--znai-code-punctuation-color);
     content: ', ';
 }
 
@@ -84,12 +84,12 @@
 }
 
 .doc-utils-desc-optional:before {
-    color: var(--znai-punctuation-color);
+    color: var(--znai-code-punctuation-color);
     content: '[';
 }
 
 .doc-utils-desc-optional:after {
-    color: var(--znai-punctuation-color);
+    color: var(--znai-code-punctuation-color);
     content: ']';
 }
 

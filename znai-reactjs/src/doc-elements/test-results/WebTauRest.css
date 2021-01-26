@@ -24,7 +24,7 @@
 }
 
 .webtau-rest .method-and-url .method {
-    color: var(--znai-keyword-color);
+    color: var(--znai-code-keyword-color);
     font-weight: bold;
     margin-right: 15px;
 }

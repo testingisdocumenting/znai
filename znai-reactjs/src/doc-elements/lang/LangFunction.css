@@ -54,7 +54,7 @@
 }
 
 .lang-function .function-params > .name-and-type > .name {
-    color: var(--znai-property-color);
+    color: var(--znai-code-property-color);
     font-family: var(--znai-code-font-family);
 }
 
