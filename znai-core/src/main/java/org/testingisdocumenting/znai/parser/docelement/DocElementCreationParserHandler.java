@@ -280,7 +280,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
                 "width", image.getWidth(),
                 "height", image.getHeight());
 
-        if (! destination.startsWith("http")) {
+        if (!destination.startsWith("http")) {
             auxiliaryFiles.add(auxiliaryFile);
         }
     }
