@@ -39,6 +39,13 @@ Use the `title` property to specify a title.
 
 :include-file: file-name.js {title: "ES6 class"} 
 
+Use the `autoTitle` property to set `title` to be the file name.
+
+    :include-file: file-name.js {autoTitle: true} 
+
+:include-file: file-name.js {autoTitle: true} 
+
+
 # Wide Code
 
 Use the `wide` option to stretch wide code to occupy as much horizontal screen real estate as possible.  

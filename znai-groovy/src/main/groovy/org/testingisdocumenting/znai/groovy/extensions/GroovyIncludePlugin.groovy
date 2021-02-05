@@ -25,6 +25,7 @@ import org.testingisdocumenting.znai.extensions.PluginResult
 import org.testingisdocumenting.znai.extensions.features.PluginFeatureList
 import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature
 import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider
+import org.testingisdocumenting.znai.extensions.file.SnippetAutoTitleFeature
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature
 import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin
@@ -72,6 +73,7 @@ class GroovyIncludePlugin implements IncludePlugin {
         contentProvider = new ManipulatedSnippetContentProvider(path, content, pluginParams)
 
         features = new PluginFeatureList(
+                new SnippetAutoTitleFeature(contentProvider),
                 new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider),
                 new SnippetRevealLineStopFeature(pluginParams, contentProvider),
                 new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)

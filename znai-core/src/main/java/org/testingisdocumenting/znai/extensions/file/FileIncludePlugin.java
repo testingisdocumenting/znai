@@ -62,6 +62,7 @@ public class FileIncludePlugin implements IncludePlugin {
                 pluginParams);
 
         features = new PluginFeatureList(
+                new SnippetAutoTitleFeature(contentProvider),
                 new SnippetRevealLineStopFeature(pluginParams, contentProvider),
                 new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider),
                 new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)
