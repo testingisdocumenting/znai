@@ -184,6 +184,19 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "when title is not set should auto generate title based file name"() {
+        resultingProps("script.groovy", "{autoTitle: true}").title.should == "script.groovy"
+        resultingProps("script.groovy", "{autoTitle: false}").title.should == null
+    }
+
+    @Test
+    void "should not allow autoTitle and title"() {
+        code {
+            resultingProps("script.groovy", "{title: 'hello', autoTitle: false}").title.should == null
+        } should throwException("Can't have both <title> and <autoTitle> specified")
+    }
+
+    @Test
     void "should validate lines from a highlight text file"() {
         code {
             resultingProps("script.groovy", "{highlightPath: 'missing-highlight.txt'}")

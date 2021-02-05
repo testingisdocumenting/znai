@@ -112,6 +112,15 @@ class JavaIncludePluginTest {
         } should throwException(IllegalArgumentException)
     }
 
+    @Test
+    void "provides auto title"() {
+        processAndGetProps("Simple.java", "{autoTitle: true}").title.should == "Simple.java"
+    }
+
+    private static Map<String, Object> processAndGetProps(String fileName, String params) {
+        return PluginsTestUtils.processIncludeAndGetProps(":include-java: $fileName $params")
+    }
+
     private static String process(String fileName, String params) {
         return PluginsTestUtils.processAndGetSimplifiedCodeBlock(":include-java: $fileName $params")
     }

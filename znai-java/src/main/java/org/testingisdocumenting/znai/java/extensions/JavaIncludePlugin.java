@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.java.extensions;
 
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
+import org.testingisdocumenting.znai.extensions.file.SnippetAutoTitleFeature;
 import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
 import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature;
@@ -59,6 +60,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase implements SnippetC
 
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
+        features.add(new SnippetAutoTitleFeature(this));
         features.add(new SnippetHighlightFeature(componentsRegistry, pluginParams, this));
         features.add(new SnippetRevealLineStopFeature(pluginParams, this));
         opts = pluginParams.getOpts();

@@ -38,6 +38,15 @@ class GroovyIncludePluginTest {
                 '}'
     }
 
+    @Test
+    void "provides auto title"() {
+        processAndGetProps("sample.groovy", "{autoTitle: true}").title.should == "sample.groovy"
+    }
+
+    private static Map<String, Object> processAndGetProps(String fileName, String params) {
+        return PluginsTestUtils.processIncludeAndGetProps(":include-groovy: $fileName $params")
+    }
+
     private static String process(String fileName, String value) {
         return PluginsTestUtils.processAndGetSimplifiedCodeBlock(":include-groovy: $fileName $value")
     }
