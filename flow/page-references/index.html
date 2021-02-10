@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Links</h1></header>
-<p>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link.Linking to subsections is the same as linking to a top level section. flow/page-references#links-to-subsection Here is an example markdown [Here is an example](flow/page-references#link-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation PanelTo refer back to the top-level index page use: markdown [index page](/) [index page](/#link-to-subsection)</p>
+<p>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link.Linking to subsections is the same as linking to a top level section. flow/page-references#links-links-to-subsection Here is an example markdown [Here is an example](flow/page-references#links-links-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation PanelTo refer back to the top-level index page use: markdown [index page](/) [index page](/#link-to-subsection)</p>
 </article>
 
 <article>
@@ -114,6 +114,7 @@
 <script type="text/javascript" src="/znai/search-index.js"></script>
 <script>
 document.getElementById('znai').innerHTML = '';
+/*<!--*/
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
@@ -222,7 +223,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "level" : 2,
         "title" : "Links to Subsection",
-        "id" : "links-to-subsection",
+        "id" : "links-links-to-subsection",
         "type" : "SubHeading"
       }, {
         "type" : "Paragraph",
@@ -230,7 +231,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Linking to subsections is the same as linking to a top level section. ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/flow/page-references#links-to-subsection",
+          "url" : "/znai/flow/page-references#links-links-to-subsection",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
@@ -240,7 +241,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "[Here is an example](flow/page-references#link-to-subsection)\n",
+        "snippet" : "[Here is an example](flow/page-references#links-links-to-subsection)\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -268,7 +269,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "level" : 2,
         "title" : "Index Page",
-        "id" : "index-page",
+        "id" : "links-index-page",
         "type" : "SubHeading"
       }, {
         "type" : "Paragraph",
@@ -363,7 +364,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1601593290105,
+    "lastModifiedTime" : 1612992591538,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Page References",
@@ -411,6 +412,8 @@ ReactDOM.render(React.createElement(Documentation, {
     } ]
   }
 }), document.getElementById("znai"));
+/*-->*/
+
 </script>
 
 </body>

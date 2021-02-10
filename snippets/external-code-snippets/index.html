@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Embedding Content</h1></header>
-<p>To reduce documentation maintenance burden avoid copy and paste of code snippets. Embed content by referencing existing files using the :include-file: plugin instead. :include-file: file-name.js This include- syntax will appear throughout the documentation and represents a family of custom Markdown extensions. class JsClass { constructor() { usefulAction() } } export default JsClass The file will be looked up using following rules:directory with a markup fileroot directory of a documentationall lookup paths listed in a lookup-paths file</p>
+<p>To reduce documentation maintenance burden avoid copy and paste of code snippets. Embed content by referencing existing files using the :include-file: plugin instead. :include-file: file-name.js This include- syntax will appear throughout the documentation and represents a family of custom Markdown extensions. class JsClass { constructor() { usefulAction() } } export default JsClass The file will be looked up using following rules:directory with a markup file root directory of a documentation all lookup paths listed in a lookup-paths file</p>
 </article>
 
 <article>
@@ -96,7 +96,7 @@
 
 <article>
 <header><h1>Title</h1></header>
-<p>:include-file: file-name.js {title: &quot;ES6 class&quot;} Use the title property to specify a title. class JsClass { constructor() { usefulAction() } } export default JsClass</p>
+<p>:include-file: file-name.js {title: &quot;ES6 class&quot;} Use the title property to specify a title. class JsClass { constructor() { usefulAction() } } export default JsClass Use the autoTitle property to set title to be the file name. :include-file: file-name.js {autoTitle: true} class JsClass { constructor() { usefulAction() } } export default JsClass</p>
 </article>
 
 <article>
@@ -139,6 +139,7 @@
 <script type="text/javascript" src="/znai/search-index.js"></script>
 <script>
 document.getElementById('znai').innerHTML = '';
+/*<!--*/
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
@@ -351,6 +352,35 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "title" : "ES6 class",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "autoTitle",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " property to set ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to be the file name.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: file-name.js {autoTitle: true} \n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "javascript",
+        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+        "autoTitle" : true,
+        "title" : "file-name.js",
         "type" : "Snippet"
       } ]
     }, {
@@ -784,7 +814,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1601593290105,
+    "lastModifiedTime" : 1612992591538,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
@@ -847,6 +877,8 @@ ReactDOM.render(React.createElement(Documentation, {
     } ]
   }
 }), document.getElementById("znai"));
+/*-->*/
+
 </script>
 
 </body>

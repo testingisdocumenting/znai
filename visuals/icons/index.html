@@ -93,6 +93,11 @@
 <header><h1>Bullet Points</h1></header>
 <p>Icons can also be used as bullet points replacement: * `:icon: time` Time is important * `:icon: settings` Setup must be easy Time is important Setup must be easy</p>
 </article>
+
+<article>
+<header><h1>Colors</h1></header>
+<p>Use stroke parameter to set outline color. * `:icon: time {stroke: 'green'}` stroke: `green` * `:icon: cloud {stroke: 'blue'}` stroke: `blue` * `:icon: settings {stroke: 'yellow'}` stroke: `yellow` * `:icon: x-octagon {stroke: 'red'}` stroke: `red` stroke: green stroke: blue stroke: yellow stroke: red Use stroke parameter to set fill color. fill: red fill: red , stroke: 'black' Note: default stroke color is a text color, which may not look good in Dark theme. Use black color explicitly if you want the stroke color to be black in both Light and Dark themes.</p>
+</article>
 </section>
 </div>
 <!--test extension added comment-->
@@ -104,6 +109,7 @@
 <script type="text/javascript" src="/znai/search-index.js"></script>
 <script>
 document.getElementById('znai').innerHTML = '';
+/*<!--*/
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
@@ -234,8 +240,179 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ]
       } ]
+    }, {
+      "title" : "Colors",
+      "id" : "colors",
+      "type" : "Section",
+      "content" : [ {
+        "level" : 2,
+        "title" : "Stroke",
+        "id" : "colors-stroke",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "stroke",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to set outline color.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "* `:icon: time {stroke: 'green'}` stroke: `green`\n* `:icon: cloud {stroke: 'blue'}` stroke: `blue`\n* `:icon: settings {stroke: 'yellow'}` stroke: `yellow`\n* `:icon: x-octagon {stroke: 'red'}` stroke: `red`\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "stroke" : "green",
+              "id" : "time",
+              "type" : "Icon"
+            }, {
+              "text" : " stroke: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "green",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "stroke" : "blue",
+              "id" : "cloud",
+              "type" : "Icon"
+            }, {
+              "text" : " stroke: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "blue",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "stroke" : "yellow",
+              "id" : "settings",
+              "type" : "Icon"
+            }, {
+              "text" : " stroke: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "yellow",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "stroke" : "red",
+              "id" : "x-octagon",
+              "type" : "Icon"
+            }, {
+              "text" : " stroke: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "red",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "level" : 2,
+        "title" : "Fill",
+        "id" : "colors-fill",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "stroke",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to set fill color.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "fill" : "red",
+              "id" : "x-octagon",
+              "type" : "Icon"
+            }, {
+              "text" : " fill: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "red",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "fill" : "red",
+              "stroke" : "black",
+              "id" : "x-octagon",
+              "type" : "Icon"
+            }, {
+              "text" : " fill: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "red",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", stroke: 'black'",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: default stroke color is a text color, which may not look good in Dark theme. Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "black",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " color explicitly if you want",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "the stroke color to be black in both Light and Dark themes.",
+          "type" : "SimpleText"
+        } ]
+      } ]
     } ],
-    "lastModifiedTime" : 1601593290121,
+    "lastModifiedTime" : 1612992591554,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Icons",
@@ -249,6 +426,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Bullet Points",
         "id" : "bullet-points"
+      }, {
+        "title" : "Colors",
+        "id" : "colors"
       } ]
     }
   },
@@ -277,6 +457,8 @@ ReactDOM.render(React.createElement(Documentation, {
     } ]
   }
 }), document.getElementById("znai"));
+/*-->*/
+
 </script>
 
 </body>

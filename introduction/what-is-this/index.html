@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Inlined Code Snippets</title>
+<title>Znai: What Is This</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,13 +85,7 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Backtick</h1></header>
-<p>To display inline code within regular text, simply put it inside a backtick.Example: To check if an Exchange is closed, you need to use ExchangeCalendar # Backtick To display inline code within regular text, simply put it inside a backtick.</p>
-</article>
-
-<article>
-<header><h1>From File</h1></header>
-<p>To display inline code from a file, use the file backtick plugin.Example: To access this feature navigate to . Example: To access this feature navigate to `:file: urlsample.txt`.</p>
+<p>Znai is a system that generates user facing documentation from markdown files. Documentation files are located next to your product codebase and are part of your product's software development lifecycle. Znai provides extensions to simplify your day-to-day documentation processes and to improve maintenance in the long run.Continue reading to learn more about:Rationale Structuring your documentation Leveraging existing code snippets and test results Diagrams support UI documentation techniques Presentation mode Extremely fast navigation Local search with auto-preview If you are reading this documentation for the first time, we suggest you read from start to finish.</p>
 </article>
 </section>
 </div>
@@ -124,82 +118,127 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Backtick",
-      "id" : "backtick",
-      "type" : "Section",
+      "type" : "Paragraph",
       "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To display inline code within regular text, simply put it inside a backtick.",
-          "type" : "SimpleText"
-        } ]
+        "code" : "Znai",
+        "type" : "InlinedCode"
       }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Example: To check if an Exchange is closed, you need to use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "ExchangeCalendar",
-          "type" : "InlinedCode"
-        } ]
+        "text" : " is a system that generates user facing documentation from markdown files.",
+        "type" : "SimpleText"
       }, {
-        "lang" : "markdown",
-        "snippet" : "# Backtick\n\nTo display inline code within regular text, simply put it inside a backtick. ",
-        "startLine" : "# Backtick",
-        "numberOfLines" : 4,
-        "type" : "Snippet"
+        "type" : "SoftLineBreak"
+      }, {
+        "text" : "Documentation files are located next to your product codebase and are part of your product's software development lifecycle.",
+        "type" : "SimpleText"
       } ]
     }, {
-      "title" : "From File",
-      "id" : "from-file",
-      "type" : "Section",
+      "type" : "Paragraph",
       "content" : [ {
-        "type" : "Paragraph",
+        "code" : "Znai",
+        "type" : "InlinedCode"
+      }, {
+        "text" : " provides extensions to simplify your day-to-day documentation processes and to improve maintenance in the long run.",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Continue reading to learn more about:",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "bulletMarker" : "*",
+      "tight" : true,
+      "type" : "BulletList",
+      "content" : [ {
+        "type" : "ListItem",
         "content" : [ {
-          "text" : "To display inline code from a file, use the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "file",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " backtick plugin.",
-          "type" : "SimpleText"
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Rationale",
+            "type" : "SimpleText"
+          } ]
         } ]
       }, {
-        "type" : "Paragraph",
+        "type" : "ListItem",
         "content" : [ {
-          "text" : "Example: To access this feature navigate to ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "/my-app/feature-url",
-          "type" : "InlinedCode"
-        }, {
-          "text" : ".",
-          "type" : "SimpleText"
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Structuring your documentation",
+            "type" : "SimpleText"
+          } ]
         } ]
       }, {
-        "lang" : "markdown",
-        "snippet" : "Example: To access this feature navigate to `:file: urlsample.txt`. ",
-        "startLine" : "To access this feature",
-        "numberOfLines" : 1,
-        "type" : "Snippet"
+        "type" : "ListItem",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Leveraging existing code snippets and test results",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      }, {
+        "type" : "ListItem",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Diagrams support",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      }, {
+        "type" : "ListItem",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "UI documentation techniques",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      }, {
+        "type" : "ListItem",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Presentation mode",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      }, {
+        "type" : "ListItem",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Extremely fast navigation",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      }, {
+        "type" : "ListItem",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Local search with auto-preview",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "If you are reading this documentation for the first time, we suggest you read from start to finish.",
+        "type" : "SimpleText"
       } ]
     } ],
     "lastModifiedTime" : 1612992591538,
     "tocItem" : {
-      "sectionTitle" : "Snippets",
-      "pageTitle" : "Inlined Code Snippets",
+      "sectionTitle" : "Introduction",
+      "pageTitle" : "What Is This",
       "pageMeta" : { },
-      "dirName" : "snippets",
-      "fileName" : "inlined-code-snippets",
+      "dirName" : "introduction",
+      "fileName" : "what-is-this",
       "viewOnRelativePath" : null,
-      "pageSectionIdTitles" : [ {
-        "title" : "Backtick",
-        "id" : "backtick"
-      }, {
-        "title" : "From File",
-        "id" : "from-file"
-      } ]
+      "pageSectionIdTitles" : [ ]
     }
   },
   "footer" : {

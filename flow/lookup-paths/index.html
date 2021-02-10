@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Files Reference Lookup</h1></header>
-<p>When you refer to a file using plugins like :include-file: my-file.cpp Znai tries to find the file in following locations:directory with the markup file that refers my-file.cpp documentation root directorylocations enumerated inside &lt;doc-root&gt;/lookup-paths file txt ../examples ../module/src/main/java</p>
+<p>When you refer to a file using plugins like :include-file: my-file.cpp Znai tries to find the file in following locations:directory with the markup file that refers my-file.cpp documentation root directory locations enumerated inside &lt;doc-root&gt;/lookup-paths file txt ../examples ../module/src/main/java</p>
 </article>
 
 <article>
@@ -96,7 +96,7 @@
 
 <article>
 <header><h1>HTTP Lookup Location</h1></header>
-<p>If files you want to include are not part of your project, you can add an HTTP base URL to lookup-paths . txt ../examples ../module/src/main/java https://raw.githubusercontent.com/testingisdocumenting/webtau/master If the file is not found using local locations, it will be fetched from the provided urls. :include-file: .travis.yml language: java jdk: - openjdk8 - openjdk11 cache: directories: - $HOME/.m2 - $HOME/.npm - node_modules dist: xenial services: - xvfb addons: chrome: stable apt: packages: - graphviz # disables the default install step which is mvn install skipping tests install: true script: mvn -B package</p>
+<p>If files you want to include are not part of your project, you can add an HTTP base URL to lookup-paths . txt ../examples ../module/src/main/java https://raw.githubusercontent.com/testingisdocumenting/webtau/master If the file is not found using local locations, it will be fetched from the provided urls. :include-file: .travis.yml language: java jdk: - openjdk8 - openjdk11 cache: directories: - $HOME/.m2 - $HOME/.npm - node_modules dist: xenial services: - xvfb addons: chrome: stable firefox: latest apt: packages: - graphviz # disables the default install step which is mvn install skipping tests install: true script: mvn -B verify -P code-coverage</p>
 </article>
 
 <article>
@@ -114,6 +114,7 @@
 <script type="text/javascript" src="/znai/search-index.js"></script>
 <script>
 document.getElementById('znai').innerHTML = '';
+/*<!--*/
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
@@ -271,7 +272,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "yaml",
-        "snippet" : "language: java\n\njdk:\n  - openjdk8\n  - openjdk11\n\ncache:\n  directories:\n  - $HOME/.m2\n  - $HOME/.npm\n  - node_modules\n\ndist: xenial\n\nservices:\n  - xvfb\n\naddons:\n  chrome: stable\n  apt:\n    packages:\n      - graphviz\n\n# disables the default install step which is mvn install skipping tests\ninstall: true\n\nscript: mvn -B package",
+        "snippet" : "language: java\n\njdk:\n  - openjdk8\n  - openjdk11\n\ncache:\n  directories:\n  - $HOME/.m2\n  - $HOME/.npm\n  - node_modules\n\ndist: xenial\n\nservices:\n  - xvfb\n\naddons:\n  chrome: stable\n  firefox: latest\n  apt:\n    packages:\n      - graphviz\n\n# disables the default install step which is mvn install skipping tests\ninstall: true\n\nscript: mvn -B verify -P code-coverage",
         "type" : "Snippet"
       } ]
     }, {
@@ -301,7 +302,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliCommand"
       } ]
     } ],
-    "lastModifiedTime" : 1601593290105,
+    "lastModifiedTime" : 1612992591538,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Lookup Paths",
@@ -349,6 +350,8 @@ ReactDOM.render(React.createElement(Documentation, {
     } ]
   }
 }), document.getElementById("znai"));
+/*-->*/
+
 </script>
 
 </body>

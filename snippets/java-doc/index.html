@@ -86,22 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Class Level</h1></header>
-<p>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use JavaDoc strings to explain certain concepts of your system. /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } Instead of copy-and-pasting text between sources, you can refer to it inside your documentation. :include-java-doc: HelloWorld.java Text bellow is extracted from top class level JavaDoc null</p>
+<p>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use JavaDoc strings to explain certain concepts of your system. /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } Instead of copy-and-pasting text between sources, you can refer to it inside your documentation. :include-java-doc: HelloWorld.java Text bellow is extracted from top class level JavaDoc Top level conceptual description of a CustomDomain problem. To avoid copy &amp; paste of the content consider to re-use information.</p>
 </article>
 
 <article>
 <header><h1>Method Level</h1></header>
-<p>Method level JavaDoc text can be referred to as well by specifying the entry parameter. :include-java-doc: HelloWorld.java {entry: &quot;sampleMethod&quot;} Text bellow is extracted from sampleMethod method JavaDoc sampleMethod</p>
+<p>Method level JavaDoc text can be referred to as well by specifying the entry parameter. :include-java-doc: HelloWorld.java {entry: &quot;sampleMethod&quot;} Text bellow is extracted from sampleMethod method JavaDoc Conceptual description of a Domain problem. It will work only if you put high level description here and not implementation details.</p>
 </article>
 
 <article>
 <header><h1>Field Level</h1></header>
-<p>:include-java-doc: HelloWorld.java {entry: &quot;numberOfStudents&quot;} numberOfStudents</p>
+<p>:include-java-doc: HelloWorld.java {entry: &quot;numberOfStudents&quot;} Each year we hire students from different universities to increase diversity</p>
 </article>
 
 <article>
 <header><h1>Handling Links</h1></header>
-<p>Links defined with {@link MyClass} are automatically converted to snippets/inlined-code-snippets Inlined Code and become MyClass . To turn MyClass into a link you need to use snippets/code-references Code References.Use the referencesPath value to associate {@link CustomDomain} with the documentation link: CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#buy SELL, example-references/domain#sell Alternatively you can define snippets/code-references#global-references Global References to turn MyClass into a link.</p>
+<p>Links defined with {@link MyClass} are automatically converted to snippets/inlined-code-snippets Inlined Code and become MyClass . To turn MyClass into a link you need to use snippets/code-references Code References.Use the referencesPath value to associate {@link CustomDomain} with the documentation link: CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell Alternatively you can define snippets/code-references#global-references Global References to turn MyClass into a link.</p>
 </article>
 
 <article>
@@ -111,7 +111,7 @@
 
 <article>
 <header><h1>Method Params With References</h1></header>
-<p>Use the snippets/code-references Code References file to link method parameters to reference pages.To do that, define references in a CSV file, using a two column format: type-or-variable-name, link . CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#buy SELL, example-references/domain#sell :include-java-doc-params: HelloWorld.java { entry: &quot;importantAction&quot;, title: &quot;Trading Required Parameters&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot;} trader Trader trader that performs action transaction Transaction transaction to perform action on Parameters are now linked with a reference section for the documentation.</p>
+<p>Use the snippets/code-references Code References file to link method parameters to reference pages.To do that, define references in a CSV file, using a two column format: type-or-variable-name, link . CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell :include-java-doc-params: HelloWorld.java { entry: &quot;importantAction&quot;, title: &quot;Trading Required Parameters&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot;} trader Trader trader that performs action transaction Transaction transaction to perform action on Parameters are now linked with a reference section for the documentation.</p>
 </article>
 
 <article>
@@ -121,7 +121,7 @@
 
 <article>
 <header><h1>Enum Entries With References</h1></header>
-<p>Use a snippets/code-references Code References file to link enum entries to reference pages.To do that, define references in a CSV file, using a two column format: enum-name, link . CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#buy SELL, example-references/domain#sell package my.company; enum TransactionTypes { /** * buy intrument */ BUY, /** * sell instrument */ SELL } :include-java-enum-entries: TransactionTypes.java { title: &quot;Transaction Types&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot; } BUY buy intrument SELL sell instrument Enums are now linked with a reference section for the documentation.Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use snippets/code-references#global-references Global References.</p>
+<p>Use a snippets/code-references Code References file to link enum entries to reference pages.To do that, define references in a CSV file, using a two column format: enum-name, link . CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell package my.company; enum TransactionTypes { /** * buy intrument */ BUY, /** * sell instrument */ SELL } :include-java-enum-entries: TransactionTypes.java { title: &quot;Transaction Types&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot; } BUY buy intrument SELL sell instrument Enums are now linked with a reference section for the documentation.Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use snippets/code-references#global-references Global References.</p>
 </article>
 </section>
 </div>
@@ -134,6 +134,7 @@
 <script type="text/javascript" src="/znai/search-index.js"></script>
 <script>
 document.getElementById('znai').innerHTML = '';
+/*<!--*/
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
@@ -411,7 +412,7 @@ ReactDOM.render(React.createElement(Documentation, {
                 "pageUrl" : "example-references/domain"
               },
               "SELL" : {
-                "pageUrl" : "example-references/domain#sell"
+                "pageUrl" : "example-references/domain#transaction-sell"
               },
               "Transaction" : {
                 "pageUrl" : "example-references/domain#transaction"
@@ -420,7 +421,7 @@ ReactDOM.render(React.createElement(Documentation, {
                 "pageUrl" : "example-references/domain#trader"
               },
               "BUY" : {
-                "pageUrl" : "example-references/domain#buy"
+                "pageUrl" : "example-references/domain#transaction-buy"
               }
             },
             "type" : "InlinedCode"
@@ -447,7 +448,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "MarkdownAndResult"
       }, {
         "lang" : "csv",
-        "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#buy\nSELL, example-references/domain#sell",
+        "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#transaction-buy\nSELL, example-references/domain#transaction-sell",
         "title" : "references/javadoc-references-demo.csv",
         "type" : "Snippet"
       }, {
@@ -487,6 +488,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "parameters" : [ {
           "name" : "return",
           "type" : "String",
+          "anchorId" : "sampleMethod_p1_String_p2_int_return",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -506,6 +508,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "name" : "p1",
           "type" : "String",
+          "anchorId" : "sampleMethod_p1_String_p2_int_p1",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -516,6 +519,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "name" : "p2",
           "type" : "int",
+          "anchorId" : "sampleMethod_p1_String_p2_int_p2",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -556,6 +560,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "parameters" : [ {
           "name" : "trader",
           "type" : "Trader",
+          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_trader",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -566,6 +571,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "name" : "transaction",
           "type" : "Transaction",
+          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_transaction",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -613,7 +619,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "csv",
-        "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#buy\nSELL, example-references/domain#sell",
+        "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#transaction-buy\nSELL, example-references/domain#transaction-sell",
         "title" : "references/javadoc-references-demo.csv",
         "type" : "Snippet"
       }, {
@@ -625,6 +631,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "parameters" : [ {
           "name" : "trader",
           "type" : "Trader",
+          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_trader",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -635,6 +642,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "name" : "transaction",
           "type" : "Transaction",
+          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_transaction",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -648,7 +656,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "pageUrl" : "example-references/domain"
           },
           "SELL" : {
-            "pageUrl" : "example-references/domain#sell"
+            "pageUrl" : "example-references/domain#transaction-sell"
           },
           "Transaction" : {
             "pageUrl" : "example-references/domain#transaction"
@@ -657,7 +665,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "pageUrl" : "example-references/domain#trader"
           },
           "BUY" : {
-            "pageUrl" : "example-references/domain#buy"
+            "pageUrl" : "example-references/domain#transaction-buy"
           }
         },
         "entry" : "importantAction",
@@ -701,6 +709,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "parameters" : [ {
           "name" : "ENTRY_ONE",
           "type" : "",
+          "anchorId" : "MyEnum_java_ENTRY_ONE",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -717,6 +726,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "name" : "ENTRY_TWO",
           "type" : "",
+          "anchorId" : "MyEnum_java_ENTRY_TWO",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -744,6 +754,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "name" : "ENTRY_THREE",
           "type" : "",
+          "anchorId" : "MyEnum_java_ENTRY_THREE",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -774,6 +785,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "parameters" : [ {
           "name" : "ENTRY_ONE",
           "type" : "",
+          "anchorId" : "MyEnum_java_ENTRY_ONE",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -790,6 +802,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "name" : "ENTRY_TWO",
           "type" : "",
+          "anchorId" : "MyEnum_java_ENTRY_TWO",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -838,6 +851,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "parameters" : [ {
           "name" : "BUY",
           "type" : "",
+          "anchorId" : "TransactionTypes_java_BUY",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -848,6 +862,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "name" : "SELL",
           "type" : "",
+          "anchorId" : "TransactionTypes_java_SELL",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -894,7 +909,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "csv",
-        "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#buy\nSELL, example-references/domain#sell",
+        "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#transaction-buy\nSELL, example-references/domain#transaction-sell",
         "title" : "references/javadoc-references-demo.csv",
         "type" : "Snippet"
       }, {
@@ -911,6 +926,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "parameters" : [ {
           "name" : "BUY",
           "type" : "",
+          "anchorId" : "TransactionTypes_java_BUY",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -921,6 +937,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "name" : "SELL",
           "type" : "",
+          "anchorId" : "TransactionTypes_java_SELL",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -934,7 +951,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "pageUrl" : "example-references/domain"
           },
           "SELL" : {
-            "pageUrl" : "example-references/domain#sell"
+            "pageUrl" : "example-references/domain#transaction-sell"
           },
           "Transaction" : {
             "pageUrl" : "example-references/domain#transaction"
@@ -943,7 +960,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "pageUrl" : "example-references/domain#trader"
           },
           "BUY" : {
-            "pageUrl" : "example-references/domain#buy"
+            "pageUrl" : "example-references/domain#transaction-buy"
           }
         },
         "referencesPath" : "references/javadoc-references-demo.csv",
@@ -976,7 +993,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1601593290105,
+    "lastModifiedTime" : 1612992591538,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Java Doc",
@@ -1036,6 +1053,8 @@ ReactDOM.render(React.createElement(Documentation, {
     } ]
   }
 }), document.getElementById("znai"));
+/*-->*/
+
 </script>
 
 </body>

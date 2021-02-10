@@ -111,7 +111,7 @@
 
 <article>
 <header><h1>Mapping</h1></header>
-<p>Use mappingPath to provide a way to override table values using mapping table. Feature Name, V1, V2 featureA, +, + featureB, -, + +, `:icon: check` -, `:icon: slash` :include-table: table.csv {mappingPath: &quot;mapping.csv&quot;} Feature Name V1 V2 featureA `:icon: check` `:icon: check` featureB `:icon: slash` `:icon: check`</p>
+<p>Use mappingPath to provide a way to override table values using mapping table. Feature Name, V1, V2 featureA, +, + featureB, -, + +, `:icon: check {stroke: &quot;green&quot;}` -, `:icon: slash {stroke: &quot;red&quot;}` :include-table: table.csv {mappingPath: &quot;mapping.csv&quot;} Feature Name V1 V2 featureA `:icon: check {stroke: &quot;green&quot;}` `:icon: check {stroke: &quot;green&quot;}` featureB `:icon: slash {stroke: &quot;red&quot;}` `:icon: check {stroke: &quot;green&quot;}` Note: We used visuals/icons Icons in this example, but you can use any plugins or any text you want.</p>
 </article>
 
 <article>
@@ -139,6 +139,7 @@
 <script type="text/javascript" src="/znai/search-index.js"></script>
 <script>
 document.getElementById('znai').innerHTML = '';
+/*<!--*/
 ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
@@ -834,7 +835,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "csv",
-        "snippet" : "+, `:icon: check`\n-, `:icon: slash`",
+        "snippet" : "+, `:icon: check {stroke: \"green\"}`\n-, `:icon: slash {stroke: \"red\"}`",
         "title" : "mapping.csv",
         "type" : "Snippet"
       }, {
@@ -860,12 +861,14 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
+              "stroke" : "green",
               "id" : "check",
               "type" : "Icon"
             } ]
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
+              "stroke" : "green",
               "id" : "check",
               "type" : "Icon"
             } ]
@@ -878,18 +881,37 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
+              "stroke" : "red",
               "id" : "slash",
               "type" : "Icon"
             } ]
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
+              "stroke" : "green",
               "id" : "check",
               "type" : "Icon"
             } ]
           } ] ] ]
         },
         "type" : "Table"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: We used ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/visuals/icons",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Icons",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " in this example, but you can use any plugins or any text you want.",
+          "type" : "SimpleText"
+        } ]
       } ]
     }, {
       "title" : "Inlined",
@@ -1101,7 +1123,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1601593290105,
+    "lastModifiedTime" : 1612992591538,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Tables",
@@ -1164,6 +1186,8 @@ ReactDOM.render(React.createElement(Documentation, {
     } ]
   }
 }), document.getElementById("znai"));
+/*-->*/
+
 </script>
 
 </body>

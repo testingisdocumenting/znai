@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Inlined Code Snippets</title>
+<title>Znai: Landing</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,13 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Backtick</h1></header>
-<p>To display inline code within regular text, simply put it inside a backtick.Example: To check if an Exchange is closed, you need to use ExchangeCalendar # Backtick To display inline code within regular text, simply put it inside a backtick.</p>
+<header><h1>Index Landing Page</h1></header>
+<p>Your index.md file in the root is your landing page. Consider putting logos and high level information about your product there.Note: Landing page is not part of your Table Of Contents and is not present on navigation panel. Don't put essential information there as users may not get back there often.</p>
 </article>
 
 <article>
-<header><h1>From File</h1></header>
-<p>To display inline code from a file, use the file backtick plugin.Example: To access this feature navigate to . Example: To access this feature navigate to `:file: urlsample.txt`.</p>
+<header><h1>Auto Redirect</h1></header>
+<p>Use :include-redirect: chapter/page to automatically redirect from index page to any other page in your docs. Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.</p>
 </article>
 </section>
 </div>
@@ -124,81 +124,75 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Backtick",
-      "id" : "backtick",
+      "title" : "Index Landing Page",
+      "id" : "index-landing-page",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To display inline code within regular text, simply put it inside a backtick.",
+          "text" : "Your ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "index.md",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file in the root is your landing page. Consider putting logos and high level information about",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "your product there.",
           "type" : "SimpleText"
         } ]
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Example: To check if an Exchange is closed, you need to use ",
+          "text" : "Note: Landing page is not part of your Table Of Contents and is not present on navigation panel. Don't put essential information",
           "type" : "SimpleText"
         }, {
-          "code" : "ExchangeCalendar",
-          "type" : "InlinedCode"
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "there as users may not get back there often.",
+          "type" : "SimpleText"
         } ]
-      }, {
-        "lang" : "markdown",
-        "snippet" : "# Backtick\n\nTo display inline code within regular text, simply put it inside a backtick. ",
-        "startLine" : "# Backtick",
-        "numberOfLines" : 4,
-        "type" : "Snippet"
       } ]
     }, {
-      "title" : "From File",
-      "id" : "from-file",
+      "title" : "Auto Redirect",
+      "id" : "auto-redirect",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To display inline code from a file, use the ",
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "file",
+          "code" : ":include-redirect: chapter/page",
           "type" : "InlinedCode"
         }, {
-          "text" : " backtick plugin.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Example: To access this feature navigate to ",
+          "text" : " to automatically redirect from index page to any other page in your docs.",
           "type" : "SimpleText"
         }, {
-          "code" : "/my-app/feature-url",
-          "type" : "InlinedCode"
+          "type" : "SoftLineBreak"
         }, {
-          "text" : ".",
+          "text" : "Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.",
           "type" : "SimpleText"
         } ]
-      }, {
-        "lang" : "markdown",
-        "snippet" : "Example: To access this feature navigate to `:file: urlsample.txt`. ",
-        "startLine" : "To access this feature",
-        "numberOfLines" : 1,
-        "type" : "Snippet"
       } ]
     } ],
     "lastModifiedTime" : 1612992591538,
     "tocItem" : {
-      "sectionTitle" : "Snippets",
-      "pageTitle" : "Inlined Code Snippets",
+      "sectionTitle" : "Flow",
+      "pageTitle" : "Landing",
       "pageMeta" : { },
-      "dirName" : "snippets",
-      "fileName" : "inlined-code-snippets",
+      "dirName" : "flow",
+      "fileName" : "landing",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Backtick",
-        "id" : "backtick"
+        "title" : "Index Landing Page",
+        "id" : "index-landing-page"
       }, {
-        "title" : "From File",
-        "id" : "from-file"
+        "title" : "Auto Redirect",
+        "id" : "auto-redirect"
       } ]
     }
   },
