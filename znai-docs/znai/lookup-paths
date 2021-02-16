@@ -2,6 +2,7 @@
 ../../znai-console/src/test/groovy
 ../../znai-jupyter
 ../../znai-testing-examples
+../../znai-testing-examples/doc-artifacts
 ../../znai-testing-examples/src/test/groovy
 ../../znai-testing-examples/src/test/java
 ../../znai-testing-examples/target/test-classes
