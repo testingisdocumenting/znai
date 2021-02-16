@@ -19,6 +19,8 @@ package scenarios
 import static clicommands.CliCommands.znai
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
+def scaffoldedDocRoot = cache.value("scaffoldedNewDocs")
+
 scenario('shows help') {
     znai.run() {
         output.should contain('--new')
@@ -29,26 +31,24 @@ scenario('shows help') {
 }
 
 scenario('scaffolds new documentation') {
-    def scaffoldDir = fs.tempDir('znai-dist')
-    def scaffoldCommand = "cd $scaffoldDir && ${unzippedZnai.bin} --new"
-
-    znai.run('--new')
+    def scaffoldDir = fs.tempDir('znai-scaffold')
+    znai.run('--new', cli.workingDir(scaffoldDir))
 
     def docRoot = scaffoldDir.resolve('znai')
     fs.textContent(docRoot.resolve('toc')).should contain('chapter-one\n' +
             '    getting-started')
+
+    scaffoldedDocRoot.set(docRoot)
 }
 
-scenario('simple serve') {
-    def znaiDocs = '../../../../znai-docs/target'
-    def serveCommand = "${unzippedZnai.bin} --serve --deploy=${znaiDocs}"
+scenario('preview znai docs') {
+    String docsRoot = scaffoldedDocRoot.get()
 
-    def znaiServe = cli.runBackground(serveCommand)
+    def znaiPreview = znai.runInBackground("--preview", cli.workingDir(docsRoot))
+    znaiPreview.output.waitTo contain(":3333")
 
-    znaiServe.output.waitTo contain(":3333")
+    browser.open("http://localhost:3333/preview")
+    $(".toc-panel-header").waitTo == 'Your Product Guide'
 
-    browser.open("http://localhost:3333")
-    $(".toc-panel-header").waitTo == 'Company Guides'
-
-    znaiServe.stop()
+    znaiPreview.stop()
 }

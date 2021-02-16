@@ -15,3 +15,5 @@ dependency-reduced-pom.xml
 npm-debug.log
 todo.md
 local-overrides
+webtau.report.html
+.webtau.cache.json
