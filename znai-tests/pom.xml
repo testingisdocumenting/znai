@@ -64,7 +64,7 @@
                             <tests>
                                 <directory>${project.basedir}/src/test/groovy</directory>
                                 <includes>
-                                    <include>*.groovy</include>
+                                    <include>scenarios/*.groovy</include>
                                 </includes>
                             </tests>
                         </configuration>
