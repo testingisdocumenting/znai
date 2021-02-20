@@ -38,7 +38,7 @@ scenario('scaffolds new documentation') {
     fs.textContent(docRoot.resolve('toc')).should contain('chapter-one\n' +
             '    getting-started')
 
-    scaffoldedDocRoot.set(docRoot)
+    scaffoldedDocRoot.set(docRoot.toString())
 }
 
 scenario('preview znai docs') {
