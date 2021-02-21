@@ -28,3 +28,4 @@ jobs:
         with:
           name: webtau report
           path: znai-tests/src/test/groovy/webtau.report.html
+          retention-days: 3
