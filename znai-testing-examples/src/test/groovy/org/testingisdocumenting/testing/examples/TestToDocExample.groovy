@@ -1,8 +1,9 @@
 package org.testingisdocumenting.testing.examples
 
-import org.testingisdocumenting.webtau.data.table.TableData
-import org.testingisdocumenting.webtau.documentation.DocumentationArtifacts
 import org.junit.Test
+import org.testingisdocumenting.webtau.data.table.TableData
+
+import static org.testingisdocumenting.webtau.WebTauCore.*
 
 class TestToDocExample {
     @Test
@@ -17,7 +18,6 @@ class TestToDocExample {
     }
 
     private static void validateRules(TableData rules) {
-        DocumentationArtifacts.create(TestToDocExample,
-            "account-rules.json", rules.toJson())
+        doc.capture("account-rules", rules)
     }
 }
