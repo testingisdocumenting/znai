@@ -76,7 +76,17 @@ class TextContentExtractor {
             return text;
         }
 
-        return text.cropOneLineFromStartAndEnd();
+        boolean hasStartLine = opts.has("startLine");
+        boolean hasEndLine = opts.has("endLine");
+        if ((hasStartLine && hasEndLine) || (!hasStartLine && !hasEndLine)) {
+            return text.cropOneLineFromStartAndEnd();
+        }
+
+        if (hasStartLine) {
+            return text.cropOneLineFromStart();
+        }
+
+        return text.cropOneLineFromEnd();
     }
 
     private static Text includeRegexp(Text text, PluginParamsOpts opts) {
@@ -132,6 +142,14 @@ class TextContentExtractor {
 
         Text cropOneLineFromStartAndEnd() {
             return newText(lines.subList(1, lines.size() - 1));
+        }
+
+        Text cropOneLineFromStart() {
+            return newText(lines.subList(1, lines.size()));
+        }
+
+        Text cropOneLineFromEnd() {
+            return newText(lines.subList(0, lines.size() - 1));
         }
 
         Text includeRegexp(List<Pattern> regexps) {
