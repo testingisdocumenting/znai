@@ -54,6 +54,11 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
+    public void onSubHeading(int level, String title) {
+        addSeparated(title);
+    }
+
+    @Override
     public void onTable(MarkupTableData tableData) {
         addSeparated(tableData.allText());
     }
