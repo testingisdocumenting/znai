@@ -117,6 +117,22 @@ class JavaIncludePluginTest {
         processAndGetProps("Simple.java", "{autoTitle: true}").title.should == "Simple.java"
     }
 
+    @Test
+    void "exclude by regexp after body extract"() {
+        process("WithExtraLines.java", "{entry: 'method', bodyOnly: true, excludeRegexp: 'doc.capture'}").should ==
+                "// some text here\n" +
+                "methodA();\n" +
+                "// another text here"
+    }
+
+    @Test
+    void "exclude by start-end after body extract"() {
+        process("WithExtraLines.java",
+                "{entry: 'method', bodyOnly: true, startLine: '//', endLine: '//', excludeStartEnd: true}").should ==
+                "methodA();\n" +
+                "doc.capture();"
+    }
+
     private static Map<String, Object> processAndGetProps(String fileName, String params) {
         return PluginsTestUtils.processIncludeAndGetProps(":include-java: $fileName $params")
     }

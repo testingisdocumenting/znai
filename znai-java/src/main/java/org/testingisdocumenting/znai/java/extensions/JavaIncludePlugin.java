@@ -19,10 +19,7 @@ package org.testingisdocumenting.znai.java.extensions;
 
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
-import org.testingisdocumenting.znai.extensions.file.SnippetAutoTitleFeature;
-import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
-import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
-import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature;
+import org.testingisdocumenting.znai.extensions.file.*;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.java.parser.JavaCode;
 import org.testingisdocumenting.znai.java.parser.JavaMethod;
@@ -41,12 +38,12 @@ import java.util.stream.Stream;
 import static org.testingisdocumenting.znai.java.parser.JavaCodeUtils.removeReturn;
 import static org.testingisdocumenting.znai.java.parser.JavaCodeUtils.removeSemicolonAtEnd;
 
-public class JavaIncludePlugin extends JavaIncludePluginBase implements SnippetContentProvider {
+public class JavaIncludePlugin extends JavaIncludePluginBase {
     private PluginParamsOpts opts;
     private boolean isBodyOnly;
     private boolean isSignatureOnly;
     private boolean isMultipleEntries;
-    private String snippet;
+    private ManipulatedSnippetContentProvider contentProvider;
 
     @Override
     public String id() {
@@ -60,9 +57,6 @@ public class JavaIncludePlugin extends JavaIncludePluginBase implements SnippetC
 
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
-        features.add(new SnippetAutoTitleFeature(this));
-        features.add(new SnippetHighlightFeature(componentsRegistry, pluginParams, this));
-        features.add(new SnippetRevealLineStopFeature(pluginParams, this));
         opts = pluginParams.getOpts();
 
         isBodyOnly = opts.get("bodyOnly", false);
@@ -73,16 +67,22 @@ public class JavaIncludePlugin extends JavaIncludePluginBase implements SnippetC
             throw new IllegalArgumentException("specify only bodyOnly or signatureOnly");
         }
 
-        snippet = extractContent(javaCode);
+        contentProvider = new ManipulatedSnippetContentProvider(path,
+                extractContent(javaCode),
+                pluginParams);
 
-        Map<String, Object> props = CodeSnippetsProps.create("java", snippet);
+        features.add(new SnippetAutoTitleFeature(contentProvider));
+        features.add(new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider));
+        features.add(new SnippetRevealLineStopFeature(pluginParams, contentProvider));
+
+        Map<String, Object> props = CodeSnippetsProps.create("java", contentProvider.snippetContent());
         props.putAll(pluginParams.getOpts().toMap());
         features.updateProps(props);
 
         DocElement docElement = new DocElement(DocElementType.SNIPPET);
         props.forEach(docElement::addProp);
 
-        return new JavaIncludeResult(Collections.singletonList(docElement), snippet);
+        return new JavaIncludeResult(Collections.singletonList(docElement), contentProvider.snippetContent());
     }
 
     private String extractContent(JavaCode javaCode) {
@@ -155,15 +155,5 @@ public class JavaIncludePlugin extends JavaIncludePluginBase implements SnippetC
 
     private Collector<CharSequence, ?, String> collectorWithSeparator() {
         return Collectors.joining(isSignatureOnly ? "\n" : "\n\n");
-    }
-
-    @Override
-    public String snippetContent() {
-        return snippet;
-    }
-
-    @Override
-    public String snippetId() {
-        return path;
     }
 }
