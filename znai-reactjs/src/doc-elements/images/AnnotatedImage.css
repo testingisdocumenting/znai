@@ -23,5 +23,6 @@
 }
 
 .annotated-image.border img {
-    border: 1px solid var(--znai-image-border-color)
+    border: 1px solid var(--znai-image-border-color);
+    box-sizing: content-box;
 }
