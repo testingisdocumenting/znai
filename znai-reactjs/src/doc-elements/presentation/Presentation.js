@@ -25,6 +25,7 @@ import {presentationBroadcast} from './presentationBroadcastChannel'
 
 import './Presentation.css'
 import {SlidePanel} from './SlidePanel';
+import {PageGenError} from '../page-gen-error/PageGenError';
 
 const maxScaleRatio = 3
 
@@ -38,13 +39,15 @@ class Presentation extends Component {
     }
 
     render() {
-        const {docMeta, presentationRegistry} = this.props
+        const {docMeta, presentationRegistry, pageGenError} = this.props
         const {currentSlideIdx} = this.state
 
         const {pageTitle, sectionTitle} = presentationRegistry.extractCombinedSlideInfo(currentSlideIdx - 1)
 
         const slide = presentationRegistry.slideByIdx(currentSlideIdx)
         const isSectionTitleOnSlide = !!slide.info.sectionTitle
+
+        const pageGenErrorPanel = pageGenError ? (<PageGenError error={pageGenError}/>) : null;
 
         return (
             <div className="presentation" onClick={this.onMouseClick}>
@@ -75,6 +78,8 @@ class Presentation extends Component {
                         <Icon id="x" onClick={this.onClose} className="close"/>
                     </div>
                 </div>
+
+                {pageGenErrorPanel}
 
                 {this.determineIsPresenterMode() ?
                     this.renderPresenterContent():

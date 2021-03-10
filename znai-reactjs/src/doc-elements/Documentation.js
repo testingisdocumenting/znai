@@ -219,12 +219,18 @@ export class Documentation extends Component {
     }
 
     renderPresentationMode() {
-        const {presentationRegistry, presentationSectionId, docMeta} = this.state
+        const {
+            presentationRegistry,
+            presentationSectionId,
+            docMeta,
+            pageGenError
+        } = this.state
 
         return (
             <Presentation docMeta={docMeta}
                           presentationRegistry={presentationRegistry}
                           presentationSectionId={presentationSectionId}
+                          pageGenError={pageGenError}
                           onClose={this.onPresentationClose}
                           onNextPage={this.onNextPage}
                           hasNextPage={this.hasNextPage()}
