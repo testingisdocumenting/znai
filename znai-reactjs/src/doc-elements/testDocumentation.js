@@ -25,7 +25,7 @@ export const testDocumentation = {
         "title": "Znai",
         "type": "User Guide",
         "category": "Documentation",
-        "previewEnabled": false
+        "previewEnabled": true
     },
     "page": {
         "type": "Page",
