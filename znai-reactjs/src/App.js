@@ -51,6 +51,7 @@ import {graphVizSvgPresentationDemo} from './doc-elements/graphviz/PresentationG
 import {cliCommandDemo} from './doc-elements/cli/CliCommand.demo'
 import {syntaxHighlightSnippetDemo} from './doc-elements/code-snippets/CodeSnippetSyntaxHighlight.demo'
 import {latexDemo} from './doc-elements/latex/Latex.demo'
+import {mermaidDemo} from './doc-elements/mermaid/Mermaid.demo'
 import {chartDemo} from './doc-elements/charts/Chart.demo'
 import {tableDemo} from './doc-elements/table/Table.demo'
 import {diagramLegendDemo} from "./doc-elements/diagrams/DiagramLegend.demo"
@@ -145,6 +146,7 @@ registries.add('visuals')
     .registerAsRows('Diagram Legend', diagramLegendDemo)
     .registerAsGrid('Keyboard shortcuts', 0, keyboardShortcutsDemo)
     .registerAsGrid('Iframe', 0, iframeDemo)
+    .registerAsGrid('Mermaid', 0, mermaidDemo)
 
 registries.add('layout')
     .registerAsTabs('Pages', pagesDemo)

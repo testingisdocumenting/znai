@@ -18,6 +18,7 @@
     "katex": "^0.10.0-rc.1",
     "lunr": "2.0.3",
     "mark.js": "github:julmot/mark.js",
+    "mermaid": "^8.9.2",
     "normalize.css": "^8.0.1",
     "prismjs": "^1.6.0",
     "promise": "^7.1.1",
