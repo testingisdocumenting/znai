@@ -51,6 +51,7 @@ import Xml from './xml/Xml'
 import presentationXml from './xml/PresentationXml'
 import {presentationSvgHandler, Svg} from './svg/Svg'
 import Latex from './latex/Latex'
+import Mermaid from './mermaid/Mermaid'
 import {Chart, presentationChartHandler} from './charts/Chart'
 import Image from './images/Image'
 import {CliCommand, presentationCliCommandHandler} from './cli/CliCommand'
@@ -141,6 +142,9 @@ presentationElementHandlers.Table = {component: Table, numberOfSlides: () => 1}
 
 library.Latex = Latex
 presentationElementHandlers.Latex = {component: Latex, numberOfSlides: () => 1}
+
+library.Mermaid = Mermaid
+presentationElementHandlers.Mermaid = {component: Mermaid, numberOfSlides: () => 1}
 
 library.Image = Image
 presentationElementHandlers.Image = {component: Image, numberOfSlides: () => 1}

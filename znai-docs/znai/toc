@@ -54,6 +54,7 @@ visuals
     SVG
     flow-diagrams
     PlantUml
+    mermaid
 deployment
     static-content
     static-hosting
