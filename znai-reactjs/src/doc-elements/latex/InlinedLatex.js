@@ -14,28 +14,10 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useRef } from "react";
+import React from 'react'
 
-import * as katex from "katex";
-import "katex/dist/katex.min.css";
+import Latex from './Latex'
 
-import "./Latex.css";
-
-export default function Latex(props) {
-  const ref = useRef();
-  const { inline, latex } = props;
-
-  useEffect(() => {
-    if (latex) {
-      katex.render(latex, ref.current, {
-        throwOnError: false,
-      });
-    }
-  }, [latex]);
-
-  return inline ? (
-    <span className="latex content-block" ref={ref} />
-  ) : (
-    <div className="latex content-block" ref={ref} />
-  );
+export default function InlinedLatex(props) {
+    return <Latex inline latex={props.latex} />
 }

@@ -16,7 +16,16 @@
 
 .latex {
     flex-direction: column;
-    margin-top: 20px;
-    margin-bottom: 20px;
     padding: 10px 0;
 }
+
+div.latex {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+span.latex {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+

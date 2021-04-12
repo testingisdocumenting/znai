@@ -16,3 +16,4 @@
 
 org.testingisdocumenting.znai.extensions.icons.IconInlinedCodePlugin
 org.testingisdocumenting.znai.extensions.keyboard.KeyboardShortcutInlinedCodePlugin
+org.testingisdocumenting.znai.extensions.latex.LatexInlinedCodePlugin
