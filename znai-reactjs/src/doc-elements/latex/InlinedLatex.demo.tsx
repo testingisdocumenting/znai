@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2021 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-.latex {
-    flex-direction: column;
-    padding: 10px 0;
-}
+import React from "react";
+import { Registry } from "react-component-viewer";
 
-div.latex {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
+import InlinedLatex from "./InlinedLatex";
 
-span.latex {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+export function inlinedLatexDemo(registry: Registry) {
+  registry.add("inline formula", () => (
+    <p>
+      Sample LaTex inline:
+      <InlinedLatex latex={"c = \\pm\\sqrt{a^2 + b^2}"} />.
+    </p>
+  ));
 }
-

@@ -5,7 +5,9 @@
   "devDependencies": {
     "@types/feather-icons": "^4.7.0",
     "@types/jest": "^25.2.2",
+    "@types/katex": "^0.11.0",
     "@types/react": "^16.9.35",
+    "prettier": "^2.2.1",
     "react-component-viewer": "^0.25.0",
     "react-scripts": "3.4.1",
     "typescript": "^3.8.3"

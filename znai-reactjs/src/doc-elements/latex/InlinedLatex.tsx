@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2021 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,10 @@ import React from 'react'
 
 import Latex from './Latex'
 
-export function latexDemo(registry) {
-    registry
-        .add('block formula', () => <Latex latex={"c = \\pm\\sqrt{a^2 + b^2}"}/>)
+interface InlinedLatexProps {
+    latex: string;
+}
+
+export default function InlinedLatex({latex}: InlinedLatexProps) {
+    return <Latex inline latex={latex} />
 }

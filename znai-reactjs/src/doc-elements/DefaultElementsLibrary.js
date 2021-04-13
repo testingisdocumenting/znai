@@ -51,6 +51,7 @@ import Xml from './xml/Xml'
 import presentationXml from './xml/PresentationXml'
 import {presentationSvgHandler, Svg} from './svg/Svg'
 import Latex from './latex/Latex'
+import InlinedLatex from './latex/InlinedLatex'
 import Mermaid from './mermaid/Mermaid'
 import {Chart, presentationChartHandler} from './charts/Chart'
 import Image from './images/Image'
@@ -139,6 +140,8 @@ presentationElementHandlers.GraphVizFlow = presentationGraphVizHandler
 
 library.Table = Table
 presentationElementHandlers.Table = {component: Table, numberOfSlides: () => 1}
+
+library.InlinedLatex = InlinedLatex
 
 library.Latex = Latex
 presentationElementHandlers.Latex = {component: Latex, numberOfSlides: () => 1}
