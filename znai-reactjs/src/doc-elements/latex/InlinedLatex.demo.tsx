@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2021 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
+import { Registry } from "react-component-viewer";
 
-import Latex from './Latex'
+import InlinedLatex from "./InlinedLatex";
 
-export default function InlinedLatex(props) {
-    return <Latex inline latex={props.latex} />
+export function inlinedLatexDemo(registry: Registry) {
+  registry.add("inline formula", () => (
+    <p>
+      Sample LaTex inline:
+      <InlinedLatex latex={"c = \\pm\\sqrt{a^2 + b^2}"} />.
+    </p>
+  ));
 }
