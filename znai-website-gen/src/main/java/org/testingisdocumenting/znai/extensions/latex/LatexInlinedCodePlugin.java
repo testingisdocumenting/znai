@@ -39,7 +39,7 @@ public class LatexInlinedCodePlugin implements InlinedCodePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        latex = pluginParams.getFreeParam();
+        latex = pluginParams.getOpts().getRequiredString("latex");
         return PluginResult.docElement(new DocElement("InlinedLatex", "latex", latex));
     }
 }
