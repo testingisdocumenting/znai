@@ -19,11 +19,11 @@ In presentation mode, rendered expressions will automatically scale to make use 
 
 Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON parameters are used to allow LaTeX braces to be parsed correctly.
 
-    It holds that `:latex: {latex: "\\frac{1}{2} < \\sqrt{2}"}`.
+    It holds that `:latex: {src: "\\frac{1}{2} < \\sqrt{2}"}`.
 
 The result will be a following math expression.
 
-It holds that `:latex: {latex: "\\frac{1}{2} < \\sqrt{2}"}`.
+It holds that `:latex: {src: "\\frac{1}{2} < \\sqrt{2}"}`.
 
 Note: Rendering is done by using [KaTeX](https://github.com/Khan/KaTeX) library.
 And is using [KaTeX](https://github.com/Khan/KaTeX) fonts.  
