@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2021 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { useMemo, useState } from "react";
 
 import FilterInput from "./FilterInput";
 
@@ -22,7 +22,7 @@ import TocPanel from "../../layout/TocPanel";
 
 import "./Landing.css";
 
-interface Documentation {
+interface DocumentationType {
   id: string | null;
   name: string;
   category: string;
@@ -32,88 +32,28 @@ interface Documentation {
 
 interface CategoryWithDocsType {
   category: string;
-  documentations: Documentation[];
+  documentations: DocumentationType[];
 }
 
-interface Props {
-  documentations: Documentation[];
+interface LandingProps {
+  documentations: DocumentationType[];
   type: string;
   title: string;
 }
 
-interface State {
-  filterText: string;
-  tocCollapsed: boolean;
-}
+function Documentation({
+  documentation,
+}: {
+  documentation: DocumentationType;
+}) {
+  const url = documentation.url ? documentation.url : documentation.id + "/";
 
-export class Landing extends React.Component<Props, State> {
-  state = { filterText: "", tocCollapsed: false };
-
-  render() {
-    const { documentations, type, title } = this.props;
-    const { filterText, tocCollapsed } = this.state;
-
-    const landingDocMeta = { type: type, title: title };
-
-    const filteredDocumentations = filterDocumentations(
-      documentations,
-      filterText
-    );
-
-    const categoriesWithDocs = groupByCategory(filteredDocumentations);
-    const documentationsToc = buildToc(categoriesWithDocs);
-
-    return (
-      <React.Fragment>
-        <div className="znai-landing">
-          <div className="znai-landing-categories-toc-area">
-            <TocPanel
-              toc={documentationsToc}
-              docMeta={landingDocMeta}
-              collapsed={tocCollapsed}
-              onToggle={this.tocCollapseToggle}
-            />
-          </div>
-
-          <div className="znai-landing-documentations-area">
-            <div className="centered">
-              <FilterInput
-                filterText={filterText}
-                onChange={this.onFilterChange}
-              />
-
-              <div className="znai-landing-categories">
-                {categoriesWithDocs.map((categoryWithDocs) => (
-                  <CategoryWithDocs
-                    key={categoryWithDocs.category}
-                    category={categoryWithDocs.category}
-                    documentations={categoryWithDocs.documentations}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  }
-
-  tocCollapseToggle = () => {
-    this.setState((prev) => ({
-      tocCollapsed: !prev.tocCollapsed,
-    }));
-  };
-
-  onFilterChange = (e: Event) => {
-    this.setState({ filterText: (e.target! as HTMLInputElement).value });
-  };
-}
-
-function CategoryWithDocs({ category, documentations }: CategoryWithDocsType) {
   return (
-    <div className="znai-landing-category-with-documentations">
-      <Category category={category} />
-      <Documentations documentations={documentations} />
+    <div className="znai-landing-documentation">
+      <a href={url} target="_blank" rel="noopener noreferrer">
+        <div className="name">{documentation.name}</div>
+        <div className="description">{documentation.description}</div>
+      </a>
     </div>
   );
 }
@@ -131,7 +71,7 @@ function Category({ category }: { category: string }) {
 function Documentations({
   documentations,
 }: {
-  documentations: Documentation[];
+  documentations: DocumentationType[];
 }) {
   return (
     <div className="znai-landing-documentations">
@@ -142,15 +82,11 @@ function Documentations({
   );
 }
 
-function Documentation({ documentation }: { documentation: Documentation }) {
-  const url = documentation.url ? documentation.url : documentation.id + "/";
-
+function CategoryWithDocs({ category, documentations }: CategoryWithDocsType) {
   return (
-    <div className="znai-landing-documentation">
-      <a href={url} target="_blank" rel="noopener noreferrer">
-        <div className="name">{documentation.name}</div>
-        <div className="description">{documentation.description}</div>
-      </a>
+    <div className="znai-landing-category-with-documentations">
+      <Category category={category} />
+      <Documentations documentations={documentations} />
     </div>
   );
 }
@@ -175,7 +111,7 @@ function buildToc(categoriesWithDocs: CategoryWithDocsType[]) {
 }
 
 function filterDocumentations(
-  documentations: Documentation[],
+  documentations: DocumentationType[],
   filterText: string
 ) {
   filterText = filterText.toLowerCase();
@@ -197,16 +133,15 @@ function anchorIdFromName(name: string) {
   return name.toLowerCase().replace(" ", "-");
 }
 
-function groupByCategory(documentations: Documentation[]) {
-  const groups = new Map<string, Documentation[]>();
+function groupByCategory(documentations: DocumentationType[]) {
+  const groups = new Map<string, DocumentationType[]>();
   documentations.forEach((d) => {
-    let entries = groups.get(d.category);
-    if (typeof entries === "undefined") {
-      entries = [];
-      groups.set(d.category, entries);
+    if (!groups.has(d.category)) {
+      groups.set(d.category, []);
     }
 
-    entries.push(d);
+    const entries = groups.get(d.category);
+    entries!.push(d);
   });
 
   const sortedKeys = Object.keys(groups).sort();
@@ -214,4 +149,58 @@ function groupByCategory(documentations: Documentation[]) {
     category,
     documentations: groups.get(category)!.sort(),
   }));
+}
+
+export function Landing({ documentations, type, title }: LandingProps) {
+  const [filterText, setFilterText] = useState("");
+  const [tocCollapsed, setTocCollapsed] = useState(false);
+  const landingDocMeta = useMemo(() => ({ title, type }), [type, title]);
+  const filteredDocumentations = useMemo(
+    () => filterDocumentations(documentations, filterText),
+    [documentations, filterText]
+  );
+
+  const categoriesWithDocs = useMemo(
+    () => groupByCategory(filteredDocumentations),
+    [filterDocumentations]
+  );
+  const documentationsToc = useMemo(() => buildToc(categoriesWithDocs), [
+    categoriesWithDocs,
+  ]);
+
+  return (
+    <React.Fragment>
+      <div className="znai-landing">
+        <div className="znai-landing-categories-toc-area">
+          <TocPanel
+            toc={documentationsToc}
+            docMeta={landingDocMeta}
+            collapsed={tocCollapsed}
+            onToggle={() => setTocCollapsed(!tocCollapsed)}
+          />
+        </div>
+
+        <div className="znai-landing-documentations-area">
+          <div className="centered">
+            <FilterInput
+              filterText={filterText}
+              onChange={({ target }: { target: HTMLInputElement }) =>
+                setFilterText(target.value)
+              }
+            />
+
+            <div className="znai-landing-categories">
+              {categoriesWithDocs.map((categoryWithDocs) => (
+                <CategoryWithDocs
+                  key={categoryWithDocs.category}
+                  category={categoryWithDocs.category}
+                  documentations={categoryWithDocs.documentations}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
+  );
 }
