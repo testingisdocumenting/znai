@@ -17,13 +17,13 @@ In presentation mode, rendered expressions will automatically scale to make use 
 
 # LaTeX Inline
 
-Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline.
+Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON parameters are used to allow LaTeX braces to be parsed correctly.
 
-    For all x in X, `:latex: \exists y \leq \epsilon`.
+    It holds that `:latex: {src: "\\frac{1}{2} < \\sqrt{2}"}`.
 
 The result will be a following math expression.
 
-For all x in X, `:latex: \exists y \leq \epsilon`.
+It holds that `:latex: {src: "\\frac{1}{2} < \\sqrt{2}"}`.
 
 Note: Rendering is done by using [KaTeX](https://github.com/Khan/KaTeX) library.
 And is using [KaTeX](https://github.com/Khan/KaTeX) fonts.  
