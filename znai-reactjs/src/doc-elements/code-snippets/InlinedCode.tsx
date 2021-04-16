@@ -35,11 +35,13 @@ export function InlinedCode({ code, references }: Props) {
 
   const renderedCode = <code className="znai-inlined-code">{code}</code>;
 
-  return reference ? (
-    <ReferenceLinkWrapper referenceUrl={reference.pageUrl}>
-      {renderedCode}
-    </ReferenceLinkWrapper>
-  ) : (
-    renderedCode
-  );
+  if (reference) {
+    return (
+      <ReferenceLinkWrapper referenceUrl={reference.pageUrl}>
+        {renderedCode}
+      </ReferenceLinkWrapper>
+    );
+  }
+
+  return renderedCode;
 }

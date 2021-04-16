@@ -23,7 +23,7 @@ import { LinkWrapper } from "../default-elements/LinkWrapper";
 interface Props {
   referenceUrl: string;
   className?: string;
-  children: React.ReactNode;
+  children: any;
 }
 
 export function ReferenceLinkWrapper({
