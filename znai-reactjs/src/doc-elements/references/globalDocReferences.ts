@@ -24,9 +24,7 @@ import { DocReferences } from "./DocReferences";
  * @param localReferences local references, can be null
  * @returns {Object} global references merged with local, null if neither is defined
  */
-export function mergeWithGlobalDocReferences(
-  localReferences: DocReferences | undefined
-) {
+export function mergeWithGlobalDocReferences(localReferences?: DocReferences) {
   return { ...getGlobalDocReferences(), ...localReferences };
 }
 
