@@ -2,16 +2,6 @@
   "name": "znai-components",
   "version": "0.2.0",
   "private": true,
-  "devDependencies": {
-    "@types/feather-icons": "^4.7.0",
-    "@types/jest": "^25.2.2",
-    "@types/katex": "^0.11.0",
-    "@types/react": "^16.9.35",
-    "prettier": "^2.2.1",
-    "react-component-viewer": "^0.25.0",
-    "react-scripts": "3.4.1",
-    "typescript": "^3.8.3"
-  },
   "dependencies": {
     "ansi_up": "^4.0.4",
     "clipboard": "^2.0.1",
@@ -25,8 +15,8 @@
     "prismjs": "^1.6.0",
     "promise": "^7.1.1",
     "query-string": "^4.3.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "scroll-into-view-if-needed": "^2.2.20",
     "semantic-ui-css": "^2.2.7",
     "victory-axis": "^30.3.1",
@@ -35,6 +25,17 @@
     "victory-core": "^30.3.1",
     "victory-line": "^30.3.1",
     "victory-pie": "^30.3.1"
+  },
+  "devDependencies": {
+    "@types/feather-icons": "^4.7.0",
+    "@types/jest": "^25.2.2",
+    "@types/katex": "^0.11.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "prettier": "^2.2.1",
+    "react-component-viewer": "^0.25.0",
+    "react-scripts": "3.4.1",
+    "typescript": "^4.2.4"
   },
   "scripts": {
     "start": "react-scripts start",

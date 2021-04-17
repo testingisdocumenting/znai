@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,6 +15,8 @@
  * limitations under the License.
  */
 
+import { DocReferences } from "./DocReferences";
+
 /**
  * global references are defined on the documentation level and is applicable to every code snippet.
  * references is loaded as a javascript file with a globally defined variable (similar to how Table Of Contents is loaded)
@@ -21,14 +24,16 @@
  * @param localReferences local references, can be null
  * @returns {Object} global references merged with local, null if neither is defined
  */
-export function mergeWithGlobalDocReferences(localReferences) {
-    return {...getGlobalDocReferences(), ...localReferences}
+export function mergeWithGlobalDocReferences(localReferences?: DocReferences) {
+  return { ...getGlobalDocReferences(), ...localReferences };
 }
 
-export function getGlobalDocReferences() {
-    return window.docReferences || {}
+export function getGlobalDocReferences(): DocReferences {
+  // @ts-ignore
+  return window.docReferences || {};
 }
 
-export function updateGlobalDocReferences(docReferences) {
-    window.docReferences = docReferences
+export function updateGlobalDocReferences(docReferences: DocReferences) {
+  // @ts-ignore
+  window.docReferences = docReferences;
 }

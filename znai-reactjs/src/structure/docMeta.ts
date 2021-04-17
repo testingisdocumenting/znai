@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import {jsonPromise} from "../utils/json"
+import { jsonPromise } from "../utils/json";
 
 export interface DocMeta {
   id: string;
@@ -36,47 +36,57 @@ export interface DocMetaSupport {
   urlToFetchSupportLink?(meta: DocMeta): string;
 }
 
-let docMeta: DocMeta = {id: '', title: '', type: '', previewEnabled: false}
+let docMeta: DocMeta = { id: "", title: "", type: "", previewEnabled: false };
 
 function setDocMeta(newDocMeta: DocMeta) {
-  docMeta = {...newDocMeta}
+  docMeta = { ...newDocMeta };
 }
 
 function getDocMeta() {
-  return {...docMeta}
+  return { ...docMeta };
 }
 
 function mergeDocMeta(newDocMeta: Partial<DocMeta>) {
-  setDocMeta({...docMeta, ...newDocMeta})
-  return getDocMeta()
+  setDocMeta({ ...docMeta, ...newDocMeta });
+  return getDocMeta();
 }
 
 function isPreviewEnabled() {
-  return docMeta.previewEnabled
+  return docMeta.previewEnabled;
 }
 
 function getDocId() {
-  return docMeta.id
+  return docMeta.id;
 }
 
 let supportLinkPromise: Promise<string> | undefined = undefined;
 
-function getSupportLinkPromise() {
+function getSupportLinkPromise(): Promise<string> {
   if (supportLinkPromise) {
-    return supportLinkPromise
+    return supportLinkPromise;
   }
-  const support = docMeta.support
+  const support = docMeta.support;
   if (support && support.link) {
-    supportLinkPromise = new Promise((resolve, reject) => resolve(support.link))
+    supportLinkPromise = new Promise((resolve) => resolve(support.link!));
   } else if (support && support.urlToFetchSupportLink) {
     // @ts-ignore
-    supportLinkPromise = jsonPromise<string, { link: string }>(support.urlToFetchSupportLink(getDocMeta()))
+    supportLinkPromise = jsonPromise<string, { link: string }>(
+      support.urlToFetchSupportLink(getDocMeta())
+    )
       // @ts-ignore
-      .then((supportMeta) => supportMeta.link)
+      .then((supportMeta) => supportMeta.link);
   } else {
-    supportLinkPromise = new Promise((resolve, reject) => resolve(undefined))
+    supportLinkPromise = new Promise((resolve) => resolve(""));
   }
-  return supportLinkPromise
+
+  return supportLinkPromise!;
 }
 
-export {setDocMeta, mergeDocMeta, getDocMeta, isPreviewEnabled, getDocId, getSupportLinkPromise}
+export {
+  setDocMeta,
+  mergeDocMeta,
+  getDocMeta,
+  isPreviewEnabled,
+  getDocId,
+  getSupportLinkPromise,
+};
