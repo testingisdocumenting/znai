@@ -49,7 +49,7 @@ public class CppSourceCode {
         return Collections.emptyList();
     }
 
-    private static Optional<EntryDef> findDefinition(String code, String methodName) {
+    private static Optional<EntryDef>  findDefinition(String code, String methodName) {
         ExtractBodyVisitor visitor = parse(code);
         return visitor.getEntries().filter(m -> methodName.equals(m.getName())).findFirst();
     }
