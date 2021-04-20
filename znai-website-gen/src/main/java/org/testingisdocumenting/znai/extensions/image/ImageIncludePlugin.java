@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,6 +25,7 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.structure.DocStructure;
+import org.testingisdocumenting.znai.utils.FilePathUtils;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
@@ -61,11 +63,11 @@ public class ImageIncludePlugin implements IncludePlugin {
 
         auxiliaryFile = resourceResolver.runtimeAuxiliaryFile(imagePath);
 
-        String annotationsPathValue = pluginParams.getOpts().get("annotationsPath");
         String slidesPathValue = pluginParams.getOpts().get("slidesPath");
         Double scaleRatio = pluginParams.getOpts().get("scaleRatio", 1.0);
 
-        annotationsPath = annotationsPathValue != null ? resourceResolver.fullPath(annotationsPathValue) : null;
+        annotationsPath = determineAnnotationsPath(imagePath, pluginParams);
+
         slidesPath = slidesPathValue != null ? resourceResolver.fullPath(slidesPathValue) : null;
 
         Map<String, ?> annotations = annotationsPath == null ? null : JsonUtils.deserializeAsMap(FileUtils.fileTextContent(annotationsPath));
@@ -95,5 +97,19 @@ public class ImageIncludePlugin implements IncludePlugin {
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.concat(Stream.of(auxiliaryFile),
                 annotationsPath != null ? Stream.of(AuxiliaryFile.builtTime(annotationsPath)) : Stream.empty());
+    }
+
+    private Path determineAnnotationsPath(String imagePath, PluginParams pluginParams) {
+        String annotationsPathValue = pluginParams.getOpts().get("annotationsPath");
+        if (annotationsPathValue != null) {
+            return resourceResolver.fullPath(annotationsPathValue);
+        }
+
+        String annotationsPath = FilePathUtils.replaceExtension(imagePath, "json");
+        if (resourceResolver.canResolve(annotationsPath)) {
+            return resourceResolver.fullPath(annotationsPath);
+        }
+
+        return null;
     }
 }
