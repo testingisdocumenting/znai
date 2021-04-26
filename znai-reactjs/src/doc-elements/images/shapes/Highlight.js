@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,15 +16,15 @@
  */
 
 import React from 'react'
-import colorByName from './colorByName'
+import {styleByName} from './styleByName';
 
 import rectangle from './Rectangle'
 
 const HighlightBody = ({x, y, width, height, color, ...props}) => {
-    const colorScheme = colorByName(color)
+    const styleScheme = styleByName(color)
     return (
         <g>
-            <rect x={x} y={y} width={width} fill={colorScheme.line}  height={height} strokeWidth="0" fillOpacity={0.6} {...props} />
+            <rect x={x} y={y} width={width} fill={styleScheme.line}  height={height} strokeWidth="0" fillOpacity={0.6} {...props} />
         </g>
     );
 }

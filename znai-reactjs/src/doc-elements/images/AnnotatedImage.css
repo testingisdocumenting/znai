@@ -26,3 +26,19 @@
     border: 1px solid var(--znai-image-border-color);
     box-sizing: content-box;
 }
+
+.znai-presentation-slide-appeared circle {
+    animation: badge-circle-presentation-appear;
+    animation-fill-mode: forwards;
+    animation-duration: 0.5s;
+}
+
+@keyframes badge-circle-presentation-appear {
+    from {
+        transform: scale3d(4, 4, 1);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}

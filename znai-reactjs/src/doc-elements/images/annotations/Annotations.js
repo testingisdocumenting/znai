@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,12 +20,12 @@ import React from 'react'
 import interactiveAnnotation from './InteractiveAnnotation'
 import staticAnnotation from './StaticAnnotation'
 
-import circle from '../shapes/Circle'
+import {circle, badge} from '../shapes/Circle'
 import rectangle from '../shapes/Rectangle'
 import arrow from '../shapes/Arrow'
 import highlight from '../shapes/Highlight'
 
-const shapesLib = {circle, rectangle, arrow, highlight}
+const shapesLib = {circle, badge, rectangle, arrow, highlight}
 
 class Annotations {
     constructor(shapes) {

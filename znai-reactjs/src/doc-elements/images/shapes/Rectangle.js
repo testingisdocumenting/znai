@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,14 +16,15 @@
  */
 
 import React from 'react'
-import colorByName from './colorByName'
+import {styleByName} from './styleByName';
 
 const RectangleBody = ({x, y, width, height, color, text, ...props}) => {
-    const colorScheme = colorByName(color)
+    const styleScheme = styleByName(color)
+
     return (
         <g>
-            <rect x={x} y={y} width={width} fill={colorScheme.fill} stroke={colorScheme.line} height={height} strokeWidth="4" fillOpacity={1} {...props} />
-            { text ? <text x={x + width/2} y={y + height/2} fill={colorScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text> : null }
+            <rect x={x} y={y} width={width} fill={styleScheme.fill} stroke={styleScheme.line} height={height} strokeWidth={styleScheme.lineWidth} fillOpacity={1} {...props} />
+            { text ? <text x={x + width/2} y={y + height/2} fill={styleScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text> : null }
         </g>
     );
 }
