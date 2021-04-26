@@ -30,7 +30,8 @@ export function imageDemo(registry) {
     registry.add('simple annotations', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}/>)
     registry.add('simple annotations with border', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}
                                                                                  border={true}/>)
-    registry.add('badge alignment annotations', () => <EmbeddedAnnotatedImage {...badgeAlignment()}/>)
+    registry.add('badge alignment annotations', () => <EmbeddedAnnotatedImage {...badgeAlignment(450, 350)}/>)
+    registry.add('badge alignment annotations inverted', () => <EmbeddedAnnotatedImage {...badgeAlignment(50, 350, true)}/>)
     registry.add('left aligned', () => <EmbeddedAnnotatedImage {...leftAlign()}/>)
     registry.add('right aligned', () => <EmbeddedAnnotatedImage {...rightAlign()}/>)
 }
@@ -60,19 +61,17 @@ function simpleAnnotations() {
     }
 }
 
-function badgeAlignment() {
-    const x = 450
-    const y = 150
+function badgeAlignment(x, y, inverted) {
     return {
         imageSrc: 'ui.jpg',
         width: 800,
         height: 500,
         shapes: [
-            {type: 'circle', id: 'c1', x, y, r: 20, text: 'A', color: 'a'},
-            {type: 'circle', id: 'c1', x, y, r: 20, text: 'A', color: 'a', align: 'Above'},
-            {type: 'circle', id: 'c2', x, y, r: 20, text: 'B', color: 'a', align: 'Below'},
-            {type: 'circle', id: 'c2', x, y, r: 20, text: 'L', color: 'a', align: 'ToTheLeft'},
-            {type: 'circle', id: 'c2', x, y, r: 20, text: 'R', color: 'a', align: 'ToTheRight'}
+            {type: 'badge', id: 'c1', x, y, text: '1', invertedColors: inverted},
+            {type: 'badge', id: 'c1', x, y, text: '2', align: 'Above', invertedColors: inverted},
+            {type: 'badge', id: 'c2', x, y, text: '3', align: 'Below', invertedColors: inverted},
+            {type: 'badge', id: 'c2', x, y, text: '4', align: 'ToTheLeft', invertedColors: inverted},
+            {type: 'badge', id: 'c2', x, y, text: '5', align: 'ToTheRight', invertedColors: inverted}
         ]
     }
 }

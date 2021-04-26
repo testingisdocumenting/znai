@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,21 +16,22 @@
  */
 
 import React from 'react'
-import colorByName from './colorByName'
+import {styleByName} from './styleByName';
 
 const ArrowBody = ({beginX, beginY, endX, endY, color, text, ...props}) => {
-    const colorScheme = colorByName(color, true)
+    const styleScheme = styleByName(color, true)
+
     return (
         <g {...props}>
             <defs>
                 <marker id="arrow" markerWidth="10" markerHeight="10" opacity="1" refX="0" refY="2" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L0,4 L2,2 z" fill={colorScheme.fill} />
+                    <path d="M0,0 L0,4 L2,2 z" fill={styleScheme.fill} />
                 </marker>
             </defs>
-            <line x1={beginX} y1={beginY} x2={endX} y2={endY} fill={colorScheme.fill} stroke={colorScheme.line} strokeWidth="8" strokeOpacity="1" markerEnd="url(#arrow)" />
+            <line x1={beginX} y1={beginY} x2={endX} y2={endY} fill={styleScheme.fill} stroke={styleScheme.line} strokeWidth="8" strokeOpacity="1" markerEnd="url(#arrow)" />
             <text x={beginX}
                   y={ (beginY < endY) ? beginY - 15 : beginY + 15 }
-                  fill={colorScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text>
+                  fill={styleScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text>
         </g>
     );
 }

@@ -209,6 +209,15 @@
     --znai-annotated-image-background-color: rgba(41, 139, 231, .6);
     --znai-image-border-color: var(--znai-toc-panel-border-color);
 
+    --znai-image-annotation-badge-fill-color: #333;
+    --znai-image-annotation-badge-line-color: #444;
+    --znai-image-annotation-badge-text-color: #eee;
+    --znai-image-annotation-badge-inverted-fill-color: #fff;
+    --znai-image-annotation-badge-inverted-line-color: #ccc;
+    --znai-image-annotation-badge-inverted-text-color: #333;
+    --znai-image-annotation-badge-line-width: 2;
+    --znai-image-annotation-badge-font-size: 12px;
+
     --znai-diagram-node-shadow-color: #e6e6e6;
     --znai-diagram-a-line: #AA8E39;
     --znai-diagram-a-fill: #FFEAAA;

@@ -8,6 +8,7 @@
 
 There are different types of annotations:
 * Circles
+* Badges
 * Rectangles
 * Arrows
 * etc.

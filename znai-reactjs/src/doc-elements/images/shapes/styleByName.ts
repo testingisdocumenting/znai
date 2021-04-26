@@ -1,5 +1,6 @@
 /*
- * Copyright 2020 znai maintainers
+ * Copyright 2021 znai maintainers
+ * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +15,22 @@
  * limitations under the License.
  */
 
-import {createPresentationDemo} from '../demo-utils/PresentationDemo'
+export interface AnnotationStyle {
+  line: string;
+  fill: string;
+  text: string;
+  fontSize: number | string;
+  lineWidth: number | string;
+}
 
-export function imagePresentationDemo(registry) {
-    registry
-        .add('image with fit', createPresentationDemo([{
-            type: 'AnnotatedImage',
-            imageSrc: 'ui.jpg',
-            fit: true,
-            shapes: [],
-            width: 800,
-            height: 400
-        }]))
+export function styleByName(name = "a", inverted = false): AnnotationStyle {
+  return {
+    line: `var(--znai-diagram-${name}-line)`,
+    fill: `var(--znai-diagram-${name}-fill)`,
+    lineWidth: 4,
+    fontSize: "",
+    text: inverted
+      ? `var(--znai-diagram-${name}-text-inverse)`
+      : `var(--znai-diagram-${name}-text)`,
+  };
 }
