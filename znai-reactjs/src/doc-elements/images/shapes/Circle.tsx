@@ -24,6 +24,7 @@ interface CircleParamsBase {
   r: number;
   text: string;
   align: string;
+  className?: string;
 }
 
 interface CircleParams extends CircleParamsBase {
@@ -66,7 +67,14 @@ function BadgeBody(badgeParams: BadgeParams) {
     fontSize: "var(--znai-image-annotation-badge-font-size)",
   };
 
-  return <CircleBodyImpl {...badgeParams} r={12} style={style} />;
+  return (
+    <CircleBodyImpl
+      {...badgeParams}
+      r={12}
+      style={style}
+      className="znai-annotation-badge"
+    />
+  );
 }
 
 function CircleBodyImpl({
@@ -76,12 +84,13 @@ function CircleBodyImpl({
   style,
   text,
   align,
+  className,
   ...props
 }: CircleParamsWithStyle) {
   const [cx, cy] = calcCenter();
 
   return (
-    <g transform={`translate(${cx}, ${cy})`}>
+    <g transform={`translate(${cx}, ${cy})`} className={className}>
       <circle
         cx={0}
         cy={0}

@@ -32,6 +32,8 @@ const avoidSuffix = "Avoid:"
 const dontSuffix = "Don't:"
 const doNotSuffix = "Do not:"
 
+const allSuffixes = [noteSuffix, warningSuffix, questionSuffix, exerciseSuffix, avoidSuffix, dontSuffix, doNotSuffix]
+
 const DefaultParagraph = (props) => {
     return <div className="paragraph content-block"><props.elementsLibrary.DocElement {...props}/></div>
 }
@@ -92,14 +94,25 @@ const Paragraph = (props) => {
 }
 
 const PresentationParagraph = (props) => {
-    const className = "znai-presentation-paragraph-wrapper" + (
-        isParagraphPresentationForced(props.content) ? " znai-presentation-paragraph-default" : "0")
+    const className = "znai-presentation-paragraph-wrapper" + buildAdditionalClassName()
 
     return (
         <div className={className}>
             <Paragraph {...props}/>
         </div>
     )
+
+    function buildAdditionalClassName() {
+        if (allSuffixes.some((suffix) => paragraphStartsWith(props.content, suffix))) {
+            return "";
+        }
+
+        if (isParagraphPresentationForced(props.content)) {
+            return " znai-presentation-paragraph-default";
+        }
+
+        return "";
+    }
 }
 
 const presentationParagraph = {component: PresentationParagraph,

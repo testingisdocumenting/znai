@@ -22,6 +22,7 @@ export function paragraphPresentationDemo(registry) {
         .add('question', createPresentationDemo(createAttentionParagraph('Question:')))
         .add('short exercise', createPresentationDemo(createShortAttentionParagraph('Exercise:')))
         .add('forced paragraph', createPresentationDemo(createForcedParagraph()))
+        .add('forced note paragraph', createPresentationDemo(createForcedNoteParagraph()))
 }
 
 export function createForcedParagraph() {
@@ -31,6 +32,24 @@ export function createForcedParagraph() {
             "content": [
                 {
                     "text": "simple paragraph with text simple paragraph with text simple paragraph with text simple " +
+                        "paragraph with text simple paragraph with text simple paragraph with text ",
+                    "type": "SimpleText",
+                    "meta": {
+                        "presentationParagraph": "default"
+                    }
+                },
+            ],
+        }
+    ]
+}
+
+export function createForcedNoteParagraph() {
+    return [
+        {
+            "type": "Paragraph",
+            "content": [
+                {
+                    "text": "Note: simple paragraph with text simple paragraph with text simple paragraph with text simple " +
                         "paragraph with text simple paragraph with text simple paragraph with text ",
                     "type": "SimpleText",
                     "meta": {

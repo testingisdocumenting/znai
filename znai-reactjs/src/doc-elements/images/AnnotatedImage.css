@@ -27,7 +27,7 @@
     box-sizing: content-box;
 }
 
-.znai-presentation-slide-appeared circle {
+.znai-presentation-slide-appeared .znai-annotation-badge circle {
     animation: badge-circle-presentation-appear;
     animation-fill-mode: forwards;
     animation-duration: 0.5s;
