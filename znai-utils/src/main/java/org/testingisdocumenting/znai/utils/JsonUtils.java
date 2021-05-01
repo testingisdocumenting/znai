@@ -96,8 +96,15 @@ public class JsonUtils {
 
     private static ObjectMapper createDeserializeMapper() {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
+        mapper.configure(JsonParser.Feature.ALLOW_YAML_COMMENTS, true);
+        mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
+        mapper.configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true);
+
         mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
         mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+        mapper.configure(JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER, true);
+        mapper.configure(JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS, true);
 
         return mapper;
     }
