@@ -25,7 +25,7 @@ class PythonBasedPythonParserTest {
     void "parsing python using python process"() {
         def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/example.py"))
         parsed.should == [
-                ["type": "function", "name": "my_func", "doc_string": "text inside my func doc"],
+                ["type": "function", "name": "my_func", "doc_string": "text inside my *func* doc"],
                 ["type": "function", "name": "another_func", "doc_string": "more diff text"],
                 ["type": "class", "name": "Animal", "doc_string": "animal top level class doc string"],
                 ["type": "function", "name": "Animal.says", "doc_string": "animal talks"]]
