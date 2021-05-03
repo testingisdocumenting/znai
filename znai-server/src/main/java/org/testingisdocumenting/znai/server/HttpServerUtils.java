@@ -18,6 +18,8 @@ package org.testingisdocumenting.znai.server;
 
 import io.vertx.core.http.HttpServer;
 
+import java.net.BindException;
+
 public class HttpServerUtils {
     private HttpServerUtils() {
     }
@@ -25,7 +27,8 @@ public class HttpServerUtils {
     public static void listen(HttpServer server, int port) {
         server.listen(port, event -> {
             if (event.cause() != null) {
-                System.err.println(event.cause().getMessage());
+                String additionalMessage = event.cause() instanceof BindException ? ", port: " + port : "";
+                System.err.println(event.cause().getMessage() + additionalMessage);
             }
 
             if (event.failed()) {
