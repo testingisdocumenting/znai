@@ -53,6 +53,12 @@
 
         <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
+            <artifactId>znai-python</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-core</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>

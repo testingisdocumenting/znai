@@ -36,7 +36,7 @@ public class PluginParams {
 
     public PluginParams(String pluginId) {
         this.pluginId = pluginId;
-        this.opts = new PluginParamsOpts(Collections.emptyMap());
+        this.opts = new PluginParamsOpts(pluginId, Collections.emptyMap());
     }
 
     public PluginParams(String pluginId, String value) {
@@ -46,12 +46,12 @@ public class PluginParams {
 
     public PluginParams(String pluginId, Map<String, ?> opts) {
         this.pluginId = pluginId;
-        this.opts = new PluginParamsOpts(shortcutMetaOptions(opts));
+        this.opts = new PluginParamsOpts(pluginId, shortcutMetaOptions(opts));
     }
 
     public void setValue(String value) {
         this.freeParam = extractFreeParam(value);
-        this.opts = new PluginParamsOpts(shortcutMetaOptions(extractMap(value)));
+        this.opts = new PluginParamsOpts(pluginId, shortcutMetaOptions(extractMap(value)));
     }
 
     public String getPluginId() {

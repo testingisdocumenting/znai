@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,24 +18,23 @@
 package org.testingisdocumenting.znai.typescript;
 
 import org.testingisdocumenting.znai.utils.JsonUtils;
-import org.testingisdocumenting.znai.utils.ResourceUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import static org.testingisdocumenting.znai.utils.ResourceUtils.tempCopyOfResource;
+
 public class TypescriptNodeBasedParser {
-    private final Process node;
     private final OutputStream outputStream;
     private final InputStream inputStream;
 
     public TypescriptNodeBasedParser() {
-        node = createProcess(tempParserCodeLocation());
+        Process node = createProcess(tempCopyOfResource("typeScriptParserBundle.js"));
 
         inputStream = node.getInputStream();
         outputStream = node.getOutputStream();
@@ -46,21 +46,6 @@ public class TypescriptNodeBasedParser {
         String response = readResponse();
 
         return (List<Map<String, ?>>) JsonUtils.deserializeAsList(response);
-    }
-
-    private Path tempParserCodeLocation() {
-        String textContent = ResourceUtils.textContent("typeScriptParserBundle.js");
-
-        try {
-            Path path = Files.createTempFile("typescriptParser", ".js");
-            path.toFile().deleteOnExit();
-
-            Files.write(path, textContent.getBytes());
-
-            return path;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void write(String content) {

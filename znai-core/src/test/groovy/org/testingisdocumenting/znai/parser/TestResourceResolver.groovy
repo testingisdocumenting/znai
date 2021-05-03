@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -68,7 +69,9 @@ class TestResourceResolver implements ResourcesResolver {
 
     @Override
     Path fullPath(String path) {
-        return root ? root.resolve(path) : Paths.get(path).toAbsolutePath()
+        def pathToResolve = "src/test/resources/" + path
+        return root ? root.resolve(pathToResolve) :
+                Paths.get(pathToResolve).toAbsolutePath()
     }
 
     @Override
