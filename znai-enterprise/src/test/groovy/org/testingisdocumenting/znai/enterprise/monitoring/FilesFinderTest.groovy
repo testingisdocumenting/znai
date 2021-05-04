@@ -16,11 +16,28 @@
 
 package org.testingisdocumenting.znai.enterprise.monitoring
 
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
+import org.testingisdocumenting.znai.console.ConsoleOutput
+import org.testingisdocumenting.znai.console.ConsoleOutputs
+import org.testingisdocumenting.znai.console.ansi.IgnoreAnsiString
 
 import java.nio.file.Paths
 
-class FilesFinderTest {
+class FilesFinderTest implements ConsoleOutput {
+    def capturedErrors = []
+
+    @Before
+    void init() {
+        ConsoleOutputs.add(this)
+    }
+
+    @After
+    void cleanup() {
+        ConsoleOutputs.remove(this)
+    }
+
     @Test
     void "should find files by pattern"() {
         def found = new FilesFinder(
@@ -31,5 +48,25 @@ class FilesFinderTest {
         found.size().should == 1
         found[0].fileName.toString().should == 'FilesFinderTest.groovy'
         found[0].parent.fileName.toString().should == 'monitoring'
+    }
+
+    @Test
+    void "should catch errors and return empty list when no dir is found"() {
+        def found = new FilesFinder(
+                [new BuildRootAndWildCardPatterns(
+                        Paths.get("/__wrong-dir"),
+                        ["src/**/*FinderTest.groovy"])]).find()
+
+        found.size().should == 0
+        capturedErrors.should == ["scan error: basedir /__wrong-dir does not exist."]
+    }
+
+    @Override
+    void out(Object... styleOrValues) {
+    }
+
+    @Override
+    void err(Object... styleOrValues) {
+        capturedErrors << new IgnoreAnsiString(Arrays.stream(styleOrValues)).toString()
     }
 }
