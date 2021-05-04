@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.console.ansi.Color;
 
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +46,13 @@ public class FilesFinder {
         DirectoryScanner scanner = new DirectoryScanner();
         scanner.setBasedir(buildRootAndWildCardPatterns.getBuildRoot().toFile());
         scanner.setIncludes(buildRootAndWildCardPatterns.getWildCardPatterns().toArray(new String[0]));
-        scanner.scan();
+
+        try {
+            scanner.scan();
+        } catch (Exception e) {
+            ConsoleOutputs.err("scan error: " + e.getMessage());
+            return Collections.emptyList();
+        }
 
         return Arrays.stream(scanner.getIncludedFiles())
                 .map(filePath -> buildRootAndWildCardPatterns.getBuildRoot().resolve(filePath))
