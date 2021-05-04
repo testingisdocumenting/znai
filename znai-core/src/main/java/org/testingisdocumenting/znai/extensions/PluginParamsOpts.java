@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,9 +22,11 @@ import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
 public class PluginParamsOpts {
-    private Map<String, ?> opts;
+    private final String pluginId;
+    private final Map<String, ?> opts;
 
-    PluginParamsOpts(Map<String, ?> opts) {
+    PluginParamsOpts(String pluginId, Map<String, ?> opts) {
+        this.pluginId = pluginId;
         this.opts = opts;
     }
 
@@ -75,7 +78,7 @@ public class PluginParamsOpts {
     public String getRequiredString(String name) {
         Object v = opts.get(name);
         if (v == null) {
-            throw new RuntimeException("'" + name + "' is required");
+            throw new RuntimeException("'" + name + "' is required for plugin: " + pluginId);
         }
 
         return v.toString();
@@ -91,5 +94,13 @@ public class PluginParamsOpts {
 
     public Map<String, Object> toMap() {
         return new LinkedHashMap<>(opts);
+    }
+
+    @Override
+    public String toString() {
+        return "PluginParamsOpts{" +
+                "pluginId='" + pluginId + '\'' +
+                ", opts=" + opts +
+                '}';
     }
 }

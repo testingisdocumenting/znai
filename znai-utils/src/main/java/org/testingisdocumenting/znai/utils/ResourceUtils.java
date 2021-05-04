@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -106,5 +109,25 @@ public class ResourceUtils {
         }
 
         return contents;
+    }
+
+    /**
+     * creates a temporary file with the content from resource
+     * @param resourcePath path to resource
+     * @return file system path to a temp file
+     */
+    public static Path tempCopyOfResource(String resourcePath) {
+        String textContent = ResourceUtils.textContent(resourcePath);
+
+        try {
+            Path path = Files.createTempFile(Paths.get(resourcePath).getFileName().toString(), "");
+            path.toFile().deleteOnExit();
+
+            Files.write(path, textContent.getBytes());
+
+            return path;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

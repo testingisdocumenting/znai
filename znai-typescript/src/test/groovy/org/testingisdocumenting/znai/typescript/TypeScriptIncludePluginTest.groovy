@@ -23,7 +23,7 @@ import org.junit.Test
 class TypeScriptIncludePluginTest {
     @Test
     void "should extract jsx declarations"() {
-        def elements = process('src/test/resources/Sample.tsx {jsxElementsFrom: "demo"}')
+        def elements = process('Sample.tsx {jsxElementsFrom: "demo"}')
 
         elements.should == [[type: 'JsxGroup', declarations: [
                 [tagName: 'Declaration', attributes: [[name: 'firstName', value: '"placeholder"'],

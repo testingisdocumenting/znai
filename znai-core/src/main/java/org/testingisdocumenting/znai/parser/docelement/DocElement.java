@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,8 +31,8 @@ import static java.util.stream.Collectors.toList;
  * @see DocElementType
  */
 public class DocElement {
-    private Map<String, Object> props;
-    private List<DocElement> content;
+    private final Map<String, Object> props;
+    private final List<DocElement> content;
     private String type;
 
     public DocElement(String type) {
