@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SplitOnCommentsTokensProcessor {
-    private CPP14Parser parser;
-    private List<CodePart> parts;
+    private final CPP14Parser parser;
+    private final List<CodePart> parts;
     private String currentSpaces = "";
 
     public SplitOnCommentsTokensProcessor(CPP14Parser parser) {

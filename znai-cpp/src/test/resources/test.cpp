@@ -40,3 +40,11 @@ class TestClass2 {
 
     //comment
 };
+
+/**
+ * doxygen style doc at the top of function
+ */
+int func1() {
+    action1();
+    action2();
+}

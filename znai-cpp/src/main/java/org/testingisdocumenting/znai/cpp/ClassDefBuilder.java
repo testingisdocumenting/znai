@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,9 +27,9 @@ public class ClassDefBuilder {
     private String name;
     private int startLine;
     private int endLine;
-    private StringBuilder bodyOnly;
+    private final StringBuilder bodyOnly;
     private int nonClosedScopes;
-    private List<String> codeLines;
+    private final List<String> codeLines;
 
     public ClassDefBuilder(List<String> codeLines) {
         this.codeLines = codeLines;
@@ -65,7 +66,7 @@ public class ClassDefBuilder {
 
     public EntryDef build() {
         return new EntryDef(name,
-                codeLines.subList(startLine - 1, endLine).stream().collect(Collectors.joining("\n")),
+                String.join("\n", codeLines.subList(startLine - 1, endLine)),
                 stripIndentation());
     }
 

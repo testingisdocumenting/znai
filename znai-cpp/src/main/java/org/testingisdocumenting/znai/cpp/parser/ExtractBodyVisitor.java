@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,11 +26,11 @@ import java.util.stream.Stream;
 
 import static org.testingisdocumenting.znai.utils.StringUtils.stripIndentation;
 
-public class ExtractBodyVisitor extends CPP14BaseVisitor {
+public class ExtractBodyVisitor extends CPP14BaseVisitor<Void> {
     private final List<String> lines;
-    private CPP14Parser parser;
-    private String code;
-    private List<EntryDef> entries;
+    private final CPP14Parser parser;
+    private final String code;
+    private final List<EntryDef> entries;
 
     public ExtractBodyVisitor(CPP14Parser parser, String code) {
         this.parser = parser;
@@ -43,17 +44,17 @@ public class ExtractBodyVisitor extends CPP14BaseVisitor {
     }
 
     @Override
-    public Object visitTranslationunit(CPP14Parser.TranslationunitContext ctx) {
-        Object translationunit = super.visitTranslationunit(ctx);
+    public Void visitTranslationunit(CPP14Parser.TranslationunitContext ctx) {
+        super.visitTranslationunit(ctx);
 
         ObjectsDefinitionTokensProcessor objectsDefinitionTokensProcessor = new ObjectsDefinitionTokensProcessor(lines);
         entries.addAll(objectsDefinitionTokensProcessor.process(parser));
 
-        return translationunit;
+        return null;
     }
 
     @Override
-    public Object visitFunctiondefinition(CPP14Parser.FunctiondefinitionContext ctx) {
+    public Void visitFunctiondefinition(CPP14Parser.FunctiondefinitionContext ctx) {
         String methodName = textBeforeParenthesis(ctx.declarator().getText());
 
         EntryDef method = new EntryDef(methodName,

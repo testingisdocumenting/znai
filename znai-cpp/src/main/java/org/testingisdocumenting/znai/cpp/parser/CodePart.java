@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,8 +23,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class CodePart {
-    private boolean isComment;
-    private StringBuilder data;
+    private final boolean isComment;
+    private final StringBuilder data;
 
     public CodePart(boolean isComment, String data) {
         this.isComment = isComment;

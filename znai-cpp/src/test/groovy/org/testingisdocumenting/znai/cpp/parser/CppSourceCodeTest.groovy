@@ -115,4 +115,10 @@ void testMethod() {
                 " of multi lines text", parts[3].data)
         Assert.assertEquals("    int e = 5;\n}", parts[4].data)
     }
+
+    @Test
+    void "extract function doc string"() {
+        def func = CppSourceCode.entryDefinition(code, "func1")
+
+    }
 }
