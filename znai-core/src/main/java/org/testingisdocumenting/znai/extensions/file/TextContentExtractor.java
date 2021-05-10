@@ -153,15 +153,28 @@ class TextContentExtractor {
         }
 
         Text includeRegexp(List<Pattern> regexps) {
-            return newText(lines.stream()
+            List<String> newLines = lines.stream()
                     .filter(line -> regexps.stream().anyMatch(r -> r.matcher(line).find()))
-                    .collect(Collectors.toList()));
+                    .collect(toList());
+
+            if (newLines.isEmpty()) {
+                throw new IllegalArgumentException("there are no lines matching includeRegexp " +
+                        renderListOfRegexp(regexps) + renderInContent());
+            }
+            return newText(newLines);
         }
 
         Text excludeRegexp(List<Pattern> regexps) {
-            return newText(lines.stream()
+            List<String> newLines = lines.stream()
                     .filter(line -> regexps.stream().noneMatch(r -> r.matcher(line).find()))
-                    .collect(Collectors.toList()));
+                    .collect(toList());
+
+            if (newLines.size() == lines.size()) {
+                throw new IllegalArgumentException("there are no lines matching excludeRegexp " +
+                        renderListOfRegexp(regexps) + renderInContent());
+            }
+
+            return newText(newLines);
         }
 
         private Text newText(List<String> lines) {
@@ -179,13 +192,21 @@ class TextContentExtractor {
                 }
             }
 
-            throw new IllegalArgumentException("there is no line containing \"" + subLine + "\" in <" + contentId + ">:\n"
-                    + toString());
+            throw new IllegalArgumentException("there is no line containing \"" + subLine + "\"" + renderInContent());
         }
 
         @Override
         public String toString() {
             return String.join("\n", lines);
+        }
+
+        private String renderInContent() {
+            return " in <" + contentId + ">:\n" + this;
+        }
+
+        private String renderListOfRegexp(List<Pattern> regexps) {
+            return regexps.stream().map(p -> "<" + p.toString() + ">")
+                    .collect(Collectors.joining(", "));
         }
     }
 }

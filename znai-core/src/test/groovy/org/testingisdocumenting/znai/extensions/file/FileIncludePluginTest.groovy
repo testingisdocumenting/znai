@@ -165,6 +165,20 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should fail if none of the include regexps matches"() {
+        code {
+            resultingSnippet("script.groovy", "{includeRegexp: ['in2t', 'de2f']}")
+        } should throwException("there are no lines matching includeRegexp <in2t>, <de2f> in <script.groovy>:\n" +
+                "import e.d.g.AnotherName\n" +
+                "import a.b.c.ClassName\n" +
+                "\n" +
+                "class HelloWorld {\n" +
+                "    def a\n" +
+                "    int b\n" +
+                "}")
+    }
+
+    @Test
     void "should exclude lines matching regexp"() {
         def withoutMarkers = resultingSnippet("sample-with-marker.py", "{excludeRegexp: '# exa..le'}")
         withoutMarkers.should == "print(\"hello\")"
@@ -177,6 +191,21 @@ class FileIncludePluginTest {
         withoutMarkers.should == "print(\"hello\")\n" +
                 "\n" +
                 "print(\"hello world\")"
+    }
+
+    @Test
+    void "should fail if none of the exclude regexp matches"() {
+        code {
+            resultingSnippet("sample-with-multi-marker.py",
+                    '{excludeRegexp: ["# exam34ple", "# .roc3edur."]}')
+        } should throwException("there are no lines matching excludeRegexp <# exam34ple>, <# .roc3edur.> in <sample-with-multi-marker.py>:\n" +
+                "# example: how to print\n" +
+                "print(\"hello\")\n" +
+                "# example-end\n" +
+                "\n" +
+                "# procedure: how to print\n" +
+                "print(\"hello world\")\n" +
+                "# procedure-end")
     }
 
     @Test
