@@ -16,4 +16,6 @@ npm-debug.log
 todo.md
 local-overrides
 webtau.report.html
-.webtau.cache.json
+.webtau-cache
+venv
+doc-artifacts
