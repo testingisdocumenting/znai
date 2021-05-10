@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,13 +37,13 @@ class XmlPrinter {
         const numberOfChildren = (xmlAsJson.children || []).length
         const hasChildren = numberOfChildren > 0
 
+        const numberOfChildrenWithTags = numberOfNodesWithTags(xmlAsJson.children)
+
         if (hasChildren) {
             this.printer.printDelimiter('>')
             this.printChildren(path, xmlAsJson.children)
-        }
 
-        if (hasChildren) {
-            if (numberOfChildren > 1) {
+            if (numberOfChildrenWithTags > 0) {
                 this.printer.printIndentation()
             }
 
@@ -52,8 +53,7 @@ class XmlPrinter {
         } else {
             this.printer.printDelimiter('/>')
         }
-
-        this.printer.println()
+        // this.printer.println()
     }
 
     printAttrs(path, attributes) {
@@ -86,13 +86,11 @@ class XmlPrinter {
         this.printer.indentRight()
         this.printer.println()
 
+        const numberOfChildrenWithTags = numberOfNodesWithTags(children)
+
         const tagIdx = {}
-        let numberOfChildrenWithTags = 0
         children.forEach(c => {
             tagIdx[c.tagName] = 0
-            if (c.tagName) {
-                numberOfChildrenWithTags++
-            }
         })
 
         children.forEach(c => {
@@ -103,6 +101,7 @@ class XmlPrinter {
 
             if (c.tagName) {
                 this.printXml(childrenPath, c)
+                this.printer.println()
             } else {
                 this.printer.printIndentation()
                 this.printText(childrenPath, c.text)
@@ -160,6 +159,21 @@ class XmlPrinter {
     isHighlightedPath(path) {
         return this._pathsToHighlight.hasOwnProperty(path)
     }
+}
+
+function numberOfNodesWithTags(nodes) {
+    if (!nodes) {
+        return 0
+    }
+
+    let result = 0
+    nodes.forEach(n => {
+        if (n.tagName) {
+            result++
+        }
+    })
+
+    return result
 }
 
 export function printXml({xmlAsJson, pathsToHighlight, singleLineAttrs}) {

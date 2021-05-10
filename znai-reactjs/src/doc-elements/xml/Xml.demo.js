@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,6 +29,7 @@ export function xmlDemo(registry) {
         .add('nested with multiple highlights', () => <Xml xmlAsJson={nested()}
                                                            paths={['ul.li[0]', 'ul.li[1].@class', 'ul.li[1].b']}/>)
         .add('nested with multiple attributes', () => <Xml xmlAsJson={nestedWithMultipleAttrs()}/>)
+        .add('deep nested', () => <Xml xmlAsJson={deepNested()}/>)
 }
 
 function noAttrs() {
@@ -138,5 +140,38 @@ function nestedWithMultipleAttrs() {
                 ]
             }
         ]
+    }
+}
+
+function deepNested() {
+    return {
+        "tagName": "ul",
+        "attributes": [],
+        "children": [{
+            "tagName": "li",
+            "attributes": [],
+            "children": [{
+                "tagName": "a",
+                "attributes": [{
+                    "name": "href",
+                    "value": "\"/book\""
+                }],
+                "children": [
+                    {
+                        "tagName": "span",
+                        "attributes": [{
+                            "name": "class",
+                            "value": "abc"
+                        }],
+                        "children": [
+                            {
+                                "tagName": "",
+                                "text": "book"
+                            }
+                        ]
+                    }
+                ]
+            }]
+        }]
     }
 }
