@@ -20,6 +20,9 @@ package org.testingisdocumenting.znai.extensions.json
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
+
 class JsonIncludePluginTest {
     @Test
     void "should display full json"() {
@@ -32,10 +35,10 @@ class JsonIncludePluginTest {
 
     @Test
     void "single paths value is automatically converted to list"() {
-        def elements = process('test.json {paths: "root.dat"}')
+        def elements = process('test.json {paths: "root.key1"}')
         elements.should == [data : [key1: 'value1', key2: [key21: 'value21',
                                                            key22: 'value22']],
-                            paths: ['root.dat'],
+                            paths: ['root.key1'],
                             type : 'Json']
     }
 
@@ -45,7 +48,7 @@ class JsonIncludePluginTest {
         elements.should == [data     : [key1: 'value1', key2: [key21: 'value21',
                                                                key22: 'value22']],
                             pathsFile: 'jsonFileWithPaths.json',
-                            paths    : ['root.dat1', 'root.dat2'],
+                            paths    : ['root.key1', 'root.key2'],
                             type     : 'Json']
     }
 
@@ -57,6 +60,18 @@ class JsonIncludePluginTest {
                             paths  : [],
                             include: '$.key2',
                             type   : 'Json']
+    }
+
+    @Test
+    void "should validate paths presence"() {
+        code {
+            process('test.json {paths: ["root.key_1", "root.key_2"]}')
+        } should throwException("can't find path: root.key_1 in JSON, available paths:\n" +
+                "  root\n" +
+                "  root.key1\n" +
+                "  root.key2\n" +
+                "  root.key2.key21\n" +
+                "  root.key2.key22")
     }
 
     @Test

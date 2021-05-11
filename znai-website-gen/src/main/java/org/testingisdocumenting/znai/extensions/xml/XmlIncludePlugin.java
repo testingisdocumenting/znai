@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.extensions.validation.EntryPresenceValidation;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
@@ -67,12 +68,7 @@ public class XmlIncludePlugin implements IncludePlugin {
 
     private static void validatePaths(Map<String, ?> xmlAsJson, List<String> paths) {
         Set<String> existingPaths = buildPaths(xmlAsJson);
-        for (String path : paths) {
-            if (!existingPaths.contains(path)) {
-                throw new RuntimeException("can't find path: " + path + " in XML, available paths:\n  " +
-                        String.join("\n  ", existingPaths));
-            }
-        }
+        EntryPresenceValidation.validateItemsPresence("path", "XML", existingPaths, paths);
     }
 
     private static Set<String> buildPaths(Map<String, ?> xmlAsJson) {
