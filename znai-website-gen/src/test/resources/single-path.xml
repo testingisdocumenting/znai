@@ -16,6 +16,6 @@
 
 <root>
     <frost>
-        <cold>10</cold>
+        <cold very="true">10</cold>
     </frost>
 </root>

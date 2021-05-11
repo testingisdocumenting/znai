@@ -32,6 +32,8 @@ class XmlIncludePluginTest {
                 "  root.child[0]\n" +
                 "  root.child[1]\n" +
                 "  root.child[2]\n" +
+                "  root.child[2].@key\n" +
+                "  root.child[2].@another\n" +
                 "  root.child[2].nested\n" +
                 "  root.frost[0]\n" +
                 "  root.frost[0].cold")
@@ -44,7 +46,8 @@ class XmlIncludePluginTest {
         } should throwException("can't find path: root.child[4] in XML, available paths:\n" +
                 "  root\n" +
                 "  root.frost\n" +
-                "  root.frost.cold")
+                "  root.frost.cold\n" +
+                "  root.frost.cold.@very")
     }
 
     @Test

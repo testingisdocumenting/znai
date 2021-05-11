@@ -17,7 +17,7 @@
 <root>
     <child>a</child>
     <child>b</child>
-    <child>
+    <child key="value" another="200">
         <nested>c</nested>
     </child>
     <frost>

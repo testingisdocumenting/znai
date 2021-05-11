@@ -32,8 +32,12 @@ class XmlPaths {
 
     private void buildPaths(String path, Map<String, ?> xmlAsJson) {
         paths.add(path);
-        List<Map<String, ?>> children = getChildren(xmlAsJson);
+        handleAttributes(path, xmlAsJson);
+        handleChildren(path, xmlAsJson);
+    }
 
+    private void handleChildren(String path, Map<String, ?> xmlAsJson) {
+        List<Map<String, ?>> children = getChildren(xmlAsJson);
         if (children.size() == 1) {
             String tagName = getTagName(children.get(0));
             if (!tagName.isEmpty()) {
@@ -42,6 +46,11 @@ class XmlPaths {
         } else {
             buildPathsForChildren(path, children);
         }
+    }
+
+    private void handleAttributes(String path, Map<String, ?> xmlAsJson) {
+        List<Map<String, ?>> attributes = getAttributes(xmlAsJson);
+        attributes.forEach((attr) -> paths.add(path + ".@" + attr.get("name")));
     }
 
     private void buildPathsForChildren(String path, List<Map<String, ?>> children) {
@@ -66,6 +75,16 @@ class XmlPaths {
     @SuppressWarnings("unchecked")
     private List<Map<String, ?>> getChildren(Map<String, ?> node) {
         Object children = node.get("children");
+        if (children == null) {
+            return Collections.emptyList();
+        }
+
+        return (List<Map<String, ?>>) children;
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<Map<String, ?>> getAttributes(Map<String, ?> node) {
+        Object children = node.get("attributes");
         if (children == null) {
             return Collections.emptyList();
         }
