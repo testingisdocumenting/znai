@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +25,9 @@ import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class XmlIncludePlugin implements IncludePlugin {
@@ -46,8 +49,13 @@ public class XmlIncludePlugin implements IncludePlugin {
         String xml = componentsRegistry.resourceResolver().textContent(fileName);
 
         Map<String, Object> props = pluginParams.getOpts().toMap();
-        props.put("xmlAsJson", XmlToMapRepresentationConverter.convert(xml));
-        props.put("paths", pluginParams.getOpts().getList("paths"));
+
+        Map<String, ?> xmlAsJson = XmlToMapRepresentationConverter.convert(xml);
+        List<String> paths = pluginParams.getOpts().getList("paths");
+        validatePaths(xmlAsJson, paths);
+
+        props.put("xmlAsJson", xmlAsJson);
+        props.put("paths", paths);
 
         return PluginResult.docElement("Xml", props);
     }
@@ -55,5 +63,19 @@ public class XmlIncludePlugin implements IncludePlugin {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(componentsRegistry.resourceResolver().fullPath(fileName)));
+    }
+
+    private static void validatePaths(Map<String, ?> xmlAsJson, List<String> paths) {
+        Set<String> existingPaths = buildPaths(xmlAsJson);
+        for (String path : paths) {
+            if (!existingPaths.contains(path)) {
+                throw new RuntimeException("can't find path: " + path + " in XML, available paths:\n  " +
+                        String.join("\n  ", existingPaths));
+            }
+        }
+    }
+
+    private static Set<String> buildPaths(Map<String, ?> xmlAsJson) {
+        return new XmlPaths(xmlAsJson).getPaths();
     }
 }
