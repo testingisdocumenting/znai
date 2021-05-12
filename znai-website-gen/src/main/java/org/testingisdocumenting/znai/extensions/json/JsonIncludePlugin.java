@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +20,7 @@ package org.testingisdocumenting.znai.extensions.json;
 import com.jayway.jsonpath.JsonPath;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.validation.EntryPresenceValidation;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
@@ -30,6 +32,7 @@ import org.testingisdocumenting.znai.utils.JsonUtils;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class JsonIncludePlugin implements IncludePlugin {
@@ -60,9 +63,12 @@ public class JsonIncludePlugin implements IncludePlugin {
         String jsonPath = pluginParams.getOpts().get("include", "$");
         Object content = JsonPath.read(json, jsonPath);
 
+        List<String> paths = extractPaths(pluginParams.getOpts());
+        validatePaths(content, paths);
+
         Map<String, Object> props = pluginParams.getOpts().toMap();
         props.put("data", content);
-        props.put("paths", extractPaths(pluginParams.getOpts()));
+        props.put("paths", paths);
 
         return PluginResult.docElement("Json", props);
     }
@@ -88,4 +94,14 @@ public class JsonIncludePlugin implements IncludePlugin {
 
         return opts.getList("paths");
     }
+
+    private static void validatePaths(Object json, List<String> paths) {
+        Set<String> existingPaths = buildPaths(json);
+        EntryPresenceValidation.validateItemsPresence("path", "JSON", existingPaths, paths);
+    }
+
+    private static Set<String> buildPaths(Object json) {
+        return new JsonPaths(json).getPaths();
+    }
+
 }
