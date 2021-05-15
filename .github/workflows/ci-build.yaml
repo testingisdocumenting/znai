@@ -28,7 +28,7 @@ jobs:
 
       - name: upload webtau test report
         uses: actions/upload-artifact@v2
-        if: ${{ always() }}
+        if: always()
         with:
           name: webtau report
           path: znai-tests/src/test/groovy/webtau.report.html
