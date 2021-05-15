@@ -62,7 +62,8 @@
                             <tests>
                                 <directory>${project.basedir}/src/test/groovy</directory>
                                 <includes>
-                                    <include>scenarios/*.groovy</include>
+<!--                                    TODO add other tests after webtau release-->
+                                    <include>scenarios/installationCheck.groovy</include>
                                 </includes>
                             </tests>
                         </configuration>
