@@ -23,11 +23,24 @@ scenario('open docs') {
     browser.open("/")
 }
 
-scenario('table of contents navigation') {
-    standardView.tocSectionTitles.should containAll("INTRODUCTION", "SNIPPETS")
-    standardView.shortcutsTocItem.scrollIntoView()
+scenario('navigating back and forth should preserve scroll position') {
     standardView.externalCodeSnippetsTocItem.click()
+    standardView.externalCodeWideCodeSection.waitTo beVisible()
 
-    browser.url.path.should contain("/snippets/external-code-snippets")
-    browser.title.should == "Znai: External Code Snippets"
+    standardView.externalCodeWideCodeSection.scrollIntoView()
+    def scrollTopBeforeClick = standardView.mainPanelScrollTop.get()
+
+    standardView.apiParametersTocItem.click()
+    standardView.mainPanelScrollTop.waitTo == 0
+
+    standardView.pageTitle.waitTo == "API Parameters"
+
+    // TODO replace with webtau shorcut in 1.42
+    browser.driver.navigate().back()
+
+    standardView.mainPanelScrollTop.waitTo == scrollTopBeforeClick
+
+    // TODO replace with webtau shorcut in 1.42
+    browser.driver.navigate().forward()
+    standardView.mainPanelScrollTop.waitTo == 0
 }

@@ -53,6 +53,7 @@ import {isViewPortMobile, ViewPortProvider} from "../theme/ViewPortContext";
 import {presentationModeListeners} from "./presentation/PresentationModeListener";
 
 import './search/Search.css'
+import {mainPanelClassName} from '../layout/DocumentationLayout';
 
 export class Documentation extends Component {
     constructor(props) {
@@ -327,7 +328,7 @@ export class Documentation extends Component {
     }
 
     saveMainPanelDomRef() {
-        this.mainPanelDom = document.querySelector(".main-panel")
+        this.mainPanelDom = document.querySelector("." + mainPanelClassName)
     }
 
     enableScrollListener() {
@@ -356,13 +357,13 @@ export class Documentation extends Component {
         this.setState({mode: DocumentationModes.PRESENTATION, presentationSectionId: pageSectionId})
     }
 
-    changePage(newStateWithNewPage) {
+    changePage(newStateWithNewPage, urlHistoryState) {
         this.setState({
             ...newStateWithNewPage,
             previousPageTocItem: this.state.page.tocItem,
             page: Documentation.processPage(newStateWithNewPage.page),
             pageGenError: null
-        }, () => this.onPageLoad())
+        }, () => this.onPageLoad(urlHistoryState))
     }
 
     static processPage(page) {
@@ -388,7 +389,7 @@ export class Documentation extends Component {
         }
     }
 
-    onPageLoad() {
+    onPageLoad(urlHistoryState) {
         const {page, docMeta} = this.state
 
         this.extractPageSectionNodes()
@@ -396,11 +397,15 @@ export class Documentation extends Component {
         const currentPageLocation = documentationNavigation.currentPageLocation()
         documentationTracking.onPageOpen(currentPageLocation)
 
-        const anchorId = currentPageLocation.anchorId
-        if (anchorId) {
-            this.scrollToPageSection(anchorId)
+        if (urlHistoryState && urlHistoryState.scrollTop) {
+            this.mainPanelDom.scrollTop = urlHistoryState.scrollTop
         } else {
-            this.scrollToTopIfNecessary()
+            const anchorId = currentPageLocation.anchorId
+            if (anchorId) {
+                this.scrollToPageSection(anchorId)
+            } else {
+                this.scrollToTopIfNecessary()
+            }
         }
 
         this.updateCurrentPageSection()
@@ -609,7 +614,7 @@ export class Documentation extends Component {
         this.setState({textSelection})
     }
 
-    onUrlChange(url) {
+    onUrlChange(url, urlHistoryState) {
         return this.getAllPagesPromise().then((allPages) => {
             const currentPageLocation = documentationNavigation.extractPageLocation(url)
 
@@ -625,7 +630,7 @@ export class Documentation extends Component {
                 forceSelectedTocItem: currentPageLocation,
                 autoSelectedTocItem: currentPageLocation,
                 lastChangeDataDom: null
-            })
+            }, urlHistoryState)
 
             return true
         }, (error) => console.error(error))

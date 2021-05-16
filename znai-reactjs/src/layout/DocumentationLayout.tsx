@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import TocPanel from './TocPanel'
-import { PageGenError } from '../doc-elements/page-gen-error/PageGenError'
+import TocPanel from "./TocPanel";
+import { PageGenError } from "../doc-elements/page-gen-error/PageGenError";
 import { DocMeta } from "../structure/docMeta";
 import { TocItem } from "../structure/TocItem";
 
 import { useIsMobile } from "../theme/ViewPortContext";
 
-import { TocMobileHeader } from './mobile/TocMobileHeader';
+import { TocMobileHeader } from "./mobile/TocMobileHeader";
 
-import { TocMobilePanel } from './mobile/TocMobilePanel';
+import { TocMobilePanel } from "./mobile/TocMobilePanel";
 
-import './DocumentationLayout.css'
-import './mobile/MobileLayoutOverrides.css'
+import "./DocumentationLayout.css";
+import "./mobile/MobileLayoutOverrides.css";
 
 interface Props {
   searchPopup: React.ReactNode;
@@ -54,74 +54,82 @@ interface Props {
   pageGenError?: string;
 }
 
+export const mainPanelClassName = "znai-main-panel";
+
 export function DocumentationLayout({
-                                      searchPopup,
-                                      renderedPage,
-                                      renderedNextPrevNavigation,
-                                      renderedFooter,
-                                      docMeta,
-                                      toc,
-                                      selectedTocItem,
-                                      onHeaderClick,
-                                      onSearchClick,
-                                      onTocItemClick,
-                                      onTocItemPageSectionClick,
-                                      onNextPage,
-                                      onPrevPage,
-                                      pageGenError
-                                    }: Props) {
+  searchPopup,
+  renderedPage,
+  renderedNextPrevNavigation,
+  renderedFooter,
+  docMeta,
+  toc,
+  selectedTocItem,
+  onHeaderClick,
+  onSearchClick,
+  onTocItemClick,
+  onTocItemPageSectionClick,
+  onNextPage,
+  onPrevPage,
+  pageGenError,
+}: Props) {
   const [isMobileTocVisible, setMobileTocVisible] = useState(false);
   const isMobile = useIsMobile();
 
-  const pageGenErrorPanel = pageGenError ? (<PageGenError error={pageGenError}/>) : null;
+  const pageGenErrorPanel = pageGenError ? (
+    <PageGenError error={pageGenError} />
+  ) : null;
 
-  const mainPanelClassName = 'main-panel' + (isMobile ? ' mobile' : '');
+  const panelFullClassName = mainPanelClassName + (isMobile ? " mobile" : "");
   const DocumentationWrapper = isMobile ? React.Fragment : Documentation;
 
   return (
     <DocumentationWrapper>
       {!isMobile && (
         <div className="side-panel">
-          <TocPanel toc={toc}
-                    docMeta={docMeta}
-                    selectedItem={selectedTocItem}
-                    onHeaderClick={onHeaderClick}
-                    onTocItemClick={onTocItemClick}
-                    onTocItemPageSectionClick={onTocItemPageSectionClick}
-                    onSearchClick={onSearchClick}
-                    onNextPage={onNextPage}
-                    onPrevPage={onPrevPage}/>
+          <TocPanel
+            toc={toc}
+            docMeta={docMeta}
+            selectedItem={selectedTocItem}
+            onHeaderClick={onHeaderClick}
+            onTocItemClick={onTocItemClick}
+            onTocItemPageSectionClick={onTocItemPageSectionClick}
+            onSearchClick={onSearchClick}
+            onNextPage={onNextPage}
+            onPrevPage={onPrevPage}
+          />
         </div>
       )}
 
       {searchPopup}
 
       {isMobile && (
-        <TocMobileHeader docMeta={docMeta}
-                         onHeaderClick={onHeaderClickAndCloseMenu}
-                         onMenuClick={toggleMobileToc}/>
+        <TocMobileHeader
+          docMeta={docMeta}
+          onHeaderClick={onHeaderClickAndCloseMenu}
+          onMenuClick={toggleMobileToc}
+        />
       )}
 
       {isMobileTocVisible ? (
-          <TocMobilePanel toc={toc}
-                          onTocItemClick={selectTocItem}
-                          onTocItemPageSectionClick={selectPageSection}/>
-        ) :
-        (
-          <div className={mainPanelClassName}>
-            {renderedPage}
+        <TocMobilePanel
+          toc={toc}
+          onTocItemClick={selectTocItem}
+          onTocItemPageSectionClick={selectPageSection}
+        />
+      ) : (
+        <div className={panelFullClassName}>
+          {renderedPage}
 
-            <div className="page-bottom">
-              {renderedNextPrevNavigation}
-              {renderedFooter}
-            </div>
+          <div className="page-bottom">
+            {renderedNextPrevNavigation}
+            {renderedFooter}
           </div>
-        )
-      }
+        </div>
+      )}
 
       {pageGenErrorPanel}
     </DocumentationWrapper>
-  )
+  );
 
   function selectTocItem(dirName: string, fileName: string) {
     hideMobileToc();
@@ -151,10 +159,6 @@ interface DocumentationProps {
   children: React.ReactNode;
 }
 
-function Documentation({children}: DocumentationProps) {
-  return (
-    <div className="documentation">
-      {children}
-    </div>
-  )
+function Documentation({ children }: DocumentationProps) {
+  return <div className="documentation">{children}</div>;
 }

@@ -18,6 +18,7 @@
 import * as Promise from 'promise'
 import {getDocId} from './docMeta';
 import {isTocItemIndex} from "./toc/TableOfContents";
+import {mainPanelClassName} from '../layout/DocumentationLayout';
 
 const index = {dirName: '', fileName: 'index'};
 
@@ -28,7 +29,7 @@ class DocumentationNavigation {
         // server side rendering guard
         if (window.addEventListener) {
             window.addEventListener('popstate', (e) => {
-                this.notifyNewUrl(document.location.pathname + (document.location.hash))
+                this.notifyNewUrl(document.location.pathname + (document.location.hash), e.state)
             })
         }
     }
@@ -74,7 +75,13 @@ class DocumentationNavigation {
     }
 
     navigateToUrl(url) {
-        window.history.pushState({}, null, url)
+        const mainPanel = window.document.querySelector("." + mainPanelClassName)
+        const state = mainPanel ? {scrollTop: mainPanel.scrollTop} : {}
+
+        // replace current state to save scroll position
+        window.history.replaceState(state, null, window.location.href)
+
+        window.history.pushState({scrollTop: 0}, null, url)
         return this.notifyNewUrl(url)
     }
 
@@ -90,8 +97,8 @@ class DocumentationNavigation {
         }
     }
 
-    notifyNewUrl(url) {
-        const promises = this.listeners.map((l) => l(url))
+    notifyNewUrl(url, state) {
+        const promises = this.listeners.map((l) => l(url, state))
         return Promise.all(promises)
     }
 

@@ -18,6 +18,7 @@ import * as React from 'react'
 import {HtmlNodeDiff} from './HtmlNodeDiff'
 
 import './DiffTracking.css'
+import {mainPanelClassName} from '../layout/DocumentationLayout';
 
 let enabled = false
 let autoDisable = false
@@ -39,7 +40,7 @@ export class DiffTracking extends React.Component {
         }
 
         this.rootNode = node.querySelector('.page-content')
-        this.scrollNode = node.querySelector('.main-panel')
+        this.scrollNode = node.querySelector('.' + mainPanelClassName)
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {

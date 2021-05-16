@@ -24,7 +24,7 @@
     color: black;
 }
 
-.main-panel {
+.znai-main-panel {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -50,7 +50,7 @@
 }
 
 
-.main-panel.mobile {
+.znai-main-panel.mobile {
     display: block;
     height: auto;
     max-height: initial;
