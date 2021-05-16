@@ -27,6 +27,8 @@ import { TocMobileHeader } from "./mobile/TocMobileHeader";
 
 import { TocMobilePanel } from "./mobile/TocMobilePanel";
 
+import { mainPanelClassName } from "./classNames";
+
 import "./DocumentationLayout.css";
 import "./mobile/MobileLayoutOverrides.css";
 
@@ -53,8 +55,6 @@ interface Props {
 
   pageGenError?: string;
 }
-
-export const mainPanelClassName = "znai-main-panel";
 
 export function DocumentationLayout({
   searchPopup,

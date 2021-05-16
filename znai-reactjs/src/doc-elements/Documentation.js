@@ -53,7 +53,7 @@ import {isViewPortMobile, ViewPortProvider} from "../theme/ViewPortContext";
 import {presentationModeListeners} from "./presentation/PresentationModeListener";
 
 import './search/Search.css'
-import {mainPanelClassName} from '../layout/DocumentationLayout';
+import {mainPanelClassName} from '../layout/classNames';
 
 export class Documentation extends Component {
     constructor(props) {

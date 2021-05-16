@@ -18,7 +18,7 @@
 import * as Promise from 'promise'
 import {getDocId} from './docMeta';
 import {isTocItemIndex} from "./toc/TableOfContents";
-import {mainPanelClassName} from '../layout/DocumentationLayout';
+import {mainPanelClassName} from '../layout/classNames';
 
 const index = {dirName: '', fileName: 'index'};
 

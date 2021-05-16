@@ -18,7 +18,7 @@ import * as React from 'react'
 import {HtmlNodeDiff} from './HtmlNodeDiff'
 
 import './DiffTracking.css'
-import {mainPanelClassName} from '../layout/DocumentationLayout';
+import {mainPanelClassName} from '../layout/classNames';
 
 let enabled = false
 let autoDisable = false

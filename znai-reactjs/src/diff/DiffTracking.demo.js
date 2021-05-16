@@ -24,7 +24,7 @@ import {
     enableDiffTracking,
     enableDiffTrackingForOneDomChangeTransaction
 } from './DiffTracking'
-import {mainPanelClassName} from '../layout/DocumentationLayout';
+import {mainPanelClassName} from '../layout/classNames';
 
 const [getTextValue, setTextValue] = simulateState('hello')
 const [getSvgTextValue, setSvgTextValue] = simulateState('svg hello')
