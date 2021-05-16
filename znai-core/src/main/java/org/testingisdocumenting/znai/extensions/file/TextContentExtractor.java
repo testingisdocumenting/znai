@@ -37,7 +37,8 @@ class TextContentExtractor {
         }
 
         Text text = new Text(contentId, content);
-        Text croppedAtStart = cropStart(text, opts);
+        Text surroundedBy = cropSurroundedBy(text, opts);
+        Text croppedAtStart = cropStart(surroundedBy, opts);
         Text croppedAtEnd = cropEnd(croppedAtStart, opts);
 
         Text withExcludedStartEnd = excludeStartEnd(croppedAtEnd, opts);
@@ -45,6 +46,17 @@ class TextContentExtractor {
         Text withExcludedRegexp = excludeRegexp(withIncludeRegexp, opts);
 
         return StringUtils.stripIndentation(withExcludedRegexp.toString());
+    }
+
+    private static Text cropSurroundedBy(Text text, PluginParamsOpts opts) {
+        String surroundedBy = opts.get("surroundedBy");
+        if (surroundedBy == null) {
+            return text;
+        }
+
+        Text start = text.startingWithLineContaining(surroundedBy);
+        return start.limitToLineContaining(surroundedBy)
+                .cropOneLineFromStartAndEnd();
     }
 
     private static Text cropStart(Text text, PluginParamsOpts opts) {

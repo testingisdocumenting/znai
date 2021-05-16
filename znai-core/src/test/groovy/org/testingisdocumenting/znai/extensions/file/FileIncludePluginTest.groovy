@@ -83,6 +83,14 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should extract file snippet based on surrounding pattern and exclude the pattern"() {
+        def text = resultingSnippet("file-with-surround-marker.txt", "{surroundedBy: '# concept-example'}")
+
+        text.should == "foo()\n" +
+                "bar()"
+    }
+
+    @Test
     void "should extract file and exclude first and last line when excludeStartEnd is set and no start end is set"() {
         def text = resultingSnippet("file.txt", "{excludeStartEnd: true}")
 

@@ -94,11 +94,9 @@ Use the `highlightPath` option to highlight lines specified in a separate file.
 
 :include-file: lines-to-highlight.txt {title: "lines-to-highlight.txt"}
 
-# Limit
+# Extract Snippets
 
-Use `startLine`, `endLine` to limit the included content.
-
-If you have a file with embedded examples, you can use limit function to extract small samples by using marker lines.
+Use `startLine`, `endLine` to extract specific content by using marker lines.
 
 :include-file: python-examples.py {title: "file with examples"} 
 
@@ -120,7 +118,17 @@ By default `startLine` and `endLine` are included in the rendered result. Use `e
     startLine: "example: book trade",
     endLine: "example-end",
     excludeStartEnd: true }
+
+Use `surroundedBy` and the same marker for start/end to streamline the snippets extract process
     
+    :include-file: python-examples.py {
+        title: "extracted example with surroundedBy",
+        surroundedBy: "# example-cancel-trade"}
+
+:include-file: python-examples.py {
+  title: "extracted example with surroundedBy",
+  surroundedBy: "# example-cancel-trade"}
+
 Use `includeRegexp` to include only lines matching regexp(s).
 
     :include-file: python-examples.py {includeRegexp: "import"}

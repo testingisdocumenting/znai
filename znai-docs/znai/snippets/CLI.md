@@ -102,9 +102,9 @@ Use `title` to specify output of the output
 
 :include-cli-output: cli/file-path-of-captured.out {title: "Captured output"}
 
-# Limit
+# Extract Snippets
 
-Use `startLine`, `endLine` to limit the included content.
+Use `startLine`, `endLine` to extract specific content by using marker lines.
 
     :include-cli-output: cli/file-path-of-captured.out {
         title: "Limited captured output",
@@ -118,7 +118,7 @@ Use `startLine`, `endLine` to limit the included content.
     endLine: "master -> master"    
 }
 
-More on limit options in [External Code Snippets](snippets/external-code-snippets#limit).
+More on limit options in [External Code Snippets](snippets/external-code-snippets#extract-snippets).
 
 # Presentation Mode
 
