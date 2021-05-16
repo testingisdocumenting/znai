@@ -5,9 +5,9 @@ def main():
     id = market.book_trade('symbol', market.CURRENT_PRICE, 100)
     # example-end
 
-    # example: cancel trade
+    # example-cancel-trade
     market.cancel_trade('id')
-    # example-end
+    # example-cancel-trade
 
 if __name__  == "__main__":
     main()

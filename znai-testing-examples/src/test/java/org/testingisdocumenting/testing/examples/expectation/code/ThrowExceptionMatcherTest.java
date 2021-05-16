@@ -20,8 +20,7 @@ import org.junit.Test;
 
 import java.util.regex.Pattern;
 
-import static org.testingisdocumenting.webtau.Matchers.code;
-import static org.testingisdocumenting.webtau.Matchers.throwException;
+import static org.testingisdocumenting.webtau.Matchers.*;
 
 public class ThrowExceptionMatcherTest {
     @Test
