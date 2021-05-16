@@ -31,13 +31,11 @@ scenario('navigating back and forth should preserve scroll position') {
     def scrollTopBeforeClick = standardView.mainPanelScrollTop.get()
 
     standardView.apiParametersTocItem.click()
-    standardView.mainPanelScrollTop.waitTo == 0
-
     standardView.pageTitle.waitTo == "API Parameters"
+    standardView.mainPanelScrollTop.should == 0
 
     // TODO replace with webtau shorcut in 1.42
     browser.driver.navigate().back()
-
     standardView.mainPanelScrollTop.waitTo == scrollTopBeforeClick
 
     // TODO replace with webtau shorcut in 1.42
