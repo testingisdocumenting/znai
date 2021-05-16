@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +24,7 @@ import {
     enableDiffTracking,
     enableDiffTrackingForOneDomChangeTransaction
 } from './DiffTracking'
+import {mainPanelClassName} from '../layout/classNames';
 
 const [getTextValue, setTextValue] = simulateState('hello')
 const [getSvgTextValue, setSvgTextValue] = simulateState('svg hello')
@@ -42,7 +44,7 @@ export function diffTrackingDemo(registry) {
 
     registry.add('without scroll', () => (
         <DiffTracking>
-            <div className="main-panel">
+            <div className={mainPanelClassName}>
                 <div className="page-content">
                     <div className="content-block" style={{padding: 20}}>
                         <div className="simple-text">{getTextValue()}</div>
@@ -69,7 +71,7 @@ export function diffTrackingDemo(registry) {
 
     registry.add('with scroll', () => (
         <DiffTracking>
-            <div className="main-panel" style={{maxHeight: 100, scroll: 'auto'}}>
+            <div className={mainPanelClassName} style={{maxHeight: 100, scroll: 'auto'}}>
                 <div className="page-content">
                     {getScrollCaseBeforeItems().map((item, idx) => <div key={idx} className="simple-text">{item}</div>)}
                     <div className="simple-text">{getTextValue()}</div>

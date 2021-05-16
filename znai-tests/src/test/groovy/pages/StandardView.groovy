@@ -19,9 +19,19 @@ package pages
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
 class StandardView {
+    def pageTitle = $(".page-title")
+
     def tocSectionTitles = $(".toc-section .title")
     def tocItems = $(".toc-item a")
 
     def shortcutsTocItem = tocItems.get("Shortcuts")
+
+    def codeSnippetsTocItem = tocItems.get("Code Snippets")
     def externalCodeSnippetsTocItem = tocItems.get("External Code Snippets")
+    def externalCodeWideCodeSection = $("h1").get("Wide Code")
+
+    def apiParametersTocItem = tocItems.get("API Parameters")
+
+    def mainPanel = $(".znai-main-panel")
+    def mainPanelScrollTop = mainPanel.scrollTop
 }

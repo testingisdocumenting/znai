@@ -14,20 +14,4 @@
  * limitations under the License.
  */
 
-package scenarios
-
-import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
-import static pages.Pages.*
-
-scenario('open docs') {
-    browser.open("/")
-}
-
-scenario('table of contents navigation') {
-    standardView.tocSectionTitles.should containAll("INTRODUCTION", "SNIPPETS")
-    standardView.shortcutsTocItem.scrollIntoView()
-    standardView.externalCodeSnippetsTocItem.click()
-
-    browser.url.path.should contain("/snippets/external-code-snippets")
-    browser.title.should == "Znai: External Code Snippets"
-}
+export const mainPanelClassName = "znai-main-panel";
