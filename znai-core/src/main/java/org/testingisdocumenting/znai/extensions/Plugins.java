@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,9 +30,9 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
 public class Plugins {
-    private static Map<String, Plugin> includePluginsById = discoverIncludePlugins();
-    private static Map<String, Plugin> fencePluginsById = discoverFencePlugins();
-    private static Map<String, Plugin> inlineCodePluginsById = discoverInlinedCodePlugins();
+    private static final Map<String, Plugin> includePluginsById = discoverIncludePlugins();
+    private static final Map<String, Plugin> fencePluginsById = discoverFencePlugins();
+    private static final Map<String, Plugin> inlineCodePluginsById = discoverInlinedCodePlugins();
 
     public static IncludePlugin includePluginById(String id) {
         return (IncludePlugin) pluginById(includePluginsById, id);
