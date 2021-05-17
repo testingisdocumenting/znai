@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,17 +23,16 @@ import org.commonmark.internal.IndentedCodeBlockParser;
 import org.commonmark.node.Block;
 import org.commonmark.parser.InlineParser;
 import org.commonmark.parser.block.*;
+import org.testingisdocumenting.znai.extensions.PluginsRegexp;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class IncludeBlockParser extends AbstractBlockParser {
-    private static final Pattern INCLUDE_PLUGIN_REGEXP = Pattern.compile("^\\s*:include-(\\S+)+:\\s*(.*)$");
     private static final Pattern SPACES_REGEXP = Pattern.compile("^\\s{4,}.*$");
 
     private final StringBuilder value;
     private final String pluginId;
-    private IncludeBlock block;
+    private final IncludeBlock block;
 
     IncludeBlockParser(String pluginId, String value) {
         this.pluginId = pluginId;
@@ -66,7 +66,7 @@ public class IncludeBlockParser extends AbstractBlockParser {
         CharSequence line = parserState.getLine();
 
         if (line.toString().trim().isEmpty() ||
-                INCLUDE_PLUGIN_REGEXP.matcher(line).matches()) {
+                PluginsRegexp.INCLUDE_PLUGIN_PATTERN.matcher(line).matches()) {
             return BlockContinue.none();
         }
 
@@ -90,9 +90,9 @@ public class IncludeBlockParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
 
-            Matcher matcher = INCLUDE_PLUGIN_REGEXP.matcher(line);
-            if (matcher.matches()) {
-                return BlockStart.of(new IncludeBlockParser(matcher.group(1), matcher.group(2))).atIndex(state.getIndex());
+            PluginsRegexp.IdAndParams idAndParams = PluginsRegexp.parseIncludePlugin(line);
+            if (idAndParams != null) {
+                return BlockStart.of(new IncludeBlockParser(idAndParams.getId(), idAndParams.getParams())).atIndex(state.getIndex());
             }
 
             return BlockStart.none();

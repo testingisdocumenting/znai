@@ -20,7 +20,9 @@ package org.testingisdocumenting.znai.extensions.include
 import org.testingisdocumenting.znai.core.AuxiliaryFile
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.Plugins
+import org.testingisdocumenting.znai.extensions.PluginsRegexp
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin
+import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin
 import org.testingisdocumenting.znai.parser.docelement.DocElement
 import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler
 
@@ -40,8 +42,18 @@ class PluginsTestUtils {
         DocElementCreationParserHandler parserHandler
     }
 
+    static class InlinedCodePluginAndParserHandler {
+        InlinedCodePlugin inlinedCodePlugin
+        DocElementCreationParserHandler parserHandler
+    }
+
     static Map<String, Object> processIncludeAndGetProps(String pluginDef) {
         def result = processInclude(pluginDef)
+        return result[0].getProps()
+    }
+
+    static Map<String, Object> processInlinedCodeAndGetProps(String pluginDef) {
+        def result = processInlinedCode(pluginDef)
         return result[0].getProps()
     }
 
@@ -52,6 +64,11 @@ class PluginsTestUtils {
     static List<DocElement> processInclude(String pluginDef) {
         def includePluginAndParserHandler = processAndGetIncludePluginAndParserHandler(pluginDef)
         return includePluginAndParserHandler.parserHandler.docElement.content
+    }
+
+    static List<DocElement> processInlinedCode(String pluginDef) {
+        def pluginAndParserHandler = processAndGetInlinedCodePluginAndParserHandler(pluginDef)
+        return pluginAndParserHandler.parserHandler.docElement.content
     }
 
     static Stream<AuxiliaryFile> processAndGetAuxiliaryFiles(String pluginDef) {
@@ -65,11 +82,10 @@ class PluginsTestUtils {
     }
 
     static IncludePluginAndParserHandler processAndGetIncludePluginAndParserHandler(String pluginDef) {
-        DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(
-                TEST_COMPONENTS_REGISTRY,
-                Paths.get(""))
+        DocElementCreationParserHandler parserHandler = createParserHandler()
 
-        PluginParams includeParams = IncludePluginParser.parse(pluginDef)
+        def idAndParams = PluginsRegexp.parseIncludePlugin(pluginDef)
+        PluginParams includeParams = new PluginParams(idAndParams.id, idAndParams.params)
         def includePlugin = Plugins.includePluginById(includeParams.pluginId)
 
         def pluginResult = includePlugin.process(TEST_COMPONENTS_REGISTRY, parserHandler, Paths.get(""), includeParams)
@@ -81,9 +97,7 @@ class PluginsTestUtils {
 
     static FencePluginAndParserHandler processAndGetFencePluginAndParserHandler(PluginParams pluginParams,
                                                                                 String textContent) {
-        DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(
-                TEST_COMPONENTS_REGISTRY,
-                Paths.get(""))
+        DocElementCreationParserHandler parserHandler = createParserHandler()
 
         def fencePlugin = Plugins.fencePluginById(pluginParams.pluginId)
 
@@ -91,5 +105,25 @@ class PluginsTestUtils {
         parserHandler.onFencePlugin(fencePlugin, pluginResult)
 
         return new FencePluginAndParserHandler(fencePlugin: fencePlugin, parserHandler: parserHandler)
+    }
+
+    static InlinedCodePluginAndParserHandler processAndGetInlinedCodePluginAndParserHandler(String pluginDef) {
+        DocElementCreationParserHandler parserHandler = createParserHandler()
+
+        def idAndParams = PluginsRegexp.parseInlinedCodePlugin(pluginDef)
+        PluginParams pluginParams = new PluginParams(idAndParams.id, idAndParams.params)
+        def inlinedCodePlugin = Plugins.inlinedCodePluginById(idAndParams.id)
+
+        inlinedCodePlugin.process(TEST_COMPONENTS_REGISTRY, Paths.get(""), pluginParams)
+        parserHandler.onInlinedCodePlugin(pluginParams)
+
+        return new InlinedCodePluginAndParserHandler(inlinedCodePlugin: inlinedCodePlugin, parserHandler: parserHandler)
+    }
+
+    private static DocElementCreationParserHandler createParserHandler() {
+        DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(
+                TEST_COMPONENTS_REGISTRY,
+                Paths.get(""))
+        return parserHandler
     }
 }

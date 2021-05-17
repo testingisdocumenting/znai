@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.Plugins;
+import org.testingisdocumenting.znai.extensions.PluginsRegexp;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -104,9 +105,10 @@ public class MarkdownVisitor extends AbstractVisitor {
     @Override
     public void visit(Code code) {
         String literal = code.getLiteral();
-        Matcher matcher = INLINED_CODE_ID_PATTERN.matcher(literal);
-        if (matcher.matches() && Plugins.hasInlinedCodePlugin(matcher.group(1))) {
-            parserHandler.onInlinedCodePlugin(new PluginParams(matcher.group(1), matcher.group(2)));
+        PluginsRegexp.IdAndParams idAndParams = PluginsRegexp.parseInlinedCodePlugin(literal);
+
+        if (idAndParams != null && Plugins.hasInlinedCodePlugin(idAndParams.getId())) {
+            parserHandler.onInlinedCodePlugin(new PluginParams(idAndParams.getId(), idAndParams.getParams()));
         } else {
             parserHandler.onInlinedCode(literal, DocReferences.EMPTY);
         }
