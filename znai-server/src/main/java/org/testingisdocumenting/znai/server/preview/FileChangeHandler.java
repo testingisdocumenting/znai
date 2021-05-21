@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +21,7 @@ import java.nio.file.Path;
 
 public interface FileChangeHandler {
     void onTocChange(Path path);
+    void onFooterChange(Path path);
     void onGlobalDocReferencesChange(Path path);
     void onDocMetaChange(Path path);
     void onChange(Path path);

@@ -14,24 +14,14 @@
  * limitations under the License.
  */
 
-package handlers
-
-import org.testingisdocumenting.webtau.TestListener
+package pages
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
-class StaticHostStartTestListener implements TestListener {
-    @Override
-    void beforeFirstTest() {
-        // during development we connect to Create React App hosted site
-        def craBaseUrl = "http://localhost:3000/preview"
-        if (http.ping("${craBaseUrl}/index.html")) {
-            cfg.setBaseUrl("cra", craBaseUrl)
-            return
-        }
+class PreviewServer {
+    int port = 3456
 
-        // if no CRA around, we start static server
-        def server = server.serve("znai-docs", "../../../../znai-docs/target")
-        cfg.setBaseUrl("static-server", server.baseUrl + "/znai")
+    void openPreview() {
+        browser.open("http://localhost:${port}/preview")
     }
 }

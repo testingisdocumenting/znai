@@ -81,6 +81,7 @@ public class WebSite {
     private final AuxiliaryFilesRegistry auxiliaryFilesRegistry;
     private final ReactJsBundle reactJsBundle;
     private final WebResource tocJavaScript;
+    private final WebResource footerJavaScript;
     private final WebResource globalAssetsJavaScript;
     private final WebResource globalDocReferencesJavaScript;
     private final WebResource searchIndexJavaScript;
@@ -106,6 +107,7 @@ public class WebSite {
         resourceResolver = new ResourcesResolverChain();
         reactJsBundle = siteConfig.reactJsBundle;
         tocJavaScript = WebResource.withPath("toc.js");
+        footerJavaScript = WebResource.withPath("footer.js");
         globalAssetsJavaScript = WebResource.withPath("assets.js");
         globalDocReferencesJavaScript = WebResource.withPath("documentation-references.js");
         searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
@@ -198,6 +200,7 @@ public class WebSite {
         generatePages();
         generateSearchIndex();
         deployToc();
+        deployFooter();
         deployMeta();
         deployGlobalAssets();
         deployGlobalDocReferences();
@@ -294,6 +297,23 @@ public class WebSite {
         return globalDocReferences.getDocReferences();
     }
 
+    public Footer parseFooter() {
+        Path markupPath = cfg.footerPath;
+
+        if (! Files.exists(markupPath)) {
+            return null;
+        }
+
+        reportPhase("parsing footer");
+
+        localResourceResolver.setCurrentFilePath(markupPath);
+
+        MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
+        footer = new Footer(parserResult.getDocElement());
+
+        return footer;
+    }
+
     public void redeployAuxiliaryFileIfRequired(Path path) {
         if (auxiliaryFilesRegistry.requiresDeployment(path)) {
             deployAuxiliaryFile(auxiliaryFilesRegistry.auxiliaryFileByPath(path));
@@ -322,6 +342,7 @@ public class WebSite {
         }
 
         extraJavaScriptsInFront.add(tocJavaScript);
+        extraJavaScriptsInFront.add(footerJavaScript);
         extraJavaScriptsInBack = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScriptsInBack.add(searchIndexJavaScript);
 
@@ -367,6 +388,15 @@ public class WebSite {
         reportPhase("deploying table of contents");
         String tocJson = JsonUtils.serializePrettyPrint(toc.toListOfMaps());
         deployer.deploy(tocJavaScript, "toc = " + tocJson);
+    }
+
+    private void deployFooter() {
+        reportPhase("deploying footer");
+        String footerJson = footer != null ?
+                JsonUtils.serializePrettyPrint(footer.toMap()):
+                "undefined";
+
+        deployer.deploy(footerJavaScript, "footer = " + footerJson);
     }
 
     private void deployMeta() {
@@ -426,21 +456,6 @@ public class WebSite {
     private void parseMarkups() {
         reportPhase("parsing markup files");
         toc.getTocItems().forEach(this::parseMarkupAndUpdateTocItemAndSearch);
-    }
-
-    private void parseFooter() {
-        Path markupPath = cfg.footerPath;
-
-        if (! Files.exists(markupPath)) {
-            return;
-        }
-
-        reportPhase("parsing footer");
-
-        localResourceResolver.setCurrentFilePath(markupPath);
-
-        MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
-        footer = new Footer(parserResult.getDocElement());
     }
 
     private void parseMarkupMetaOnlyAndUpdateTocItem(TocItem tocItem) {
@@ -567,7 +582,7 @@ public class WebSite {
     private HtmlPageAndPageProps generatePage(TocItem tocItem, Page page) {
         try {
             HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(
-                    tocItem, page, createServerSideRenderer(tocItem), footer);
+                    tocItem, page, createServerSideRenderer(tocItem));
 
             pagePropsByTocItem.put(tocItem, htmlAndProps.getProps());
             extraJavaScriptsInFront.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
@@ -814,6 +829,10 @@ public class WebSite {
 
         public Path getDocRootPath() {
             return docRootPath;
+        }
+
+        public Path getFooterPath() {
+            return footerPath;
         }
 
         public WebSite deployTo(Path path) {

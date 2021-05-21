@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,6 +44,10 @@ class Server {
 
             if (data.type === 'tocUpdate') {
                 this.handlers.onTocUpdate(data.toc)
+            }
+
+            if (data.type === 'footerUpdate') {
+                this.handlers.onFooterUpdate(data.footer)
             }
 
             if (data.type === 'docMetaUpdate') {

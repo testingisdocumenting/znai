@@ -77,6 +77,12 @@ export class Documentation extends Component {
             previousPageTocItem: null,
             page: Documentation.processPage(page),
             toc: tableOfContents.toc,
+
+            // previous version put footer inside props
+            // we check props for backward compatibility with deployed docs
+            // should be safe to remove props.footer after October 2021
+            footer: props.footer || window.footer,
+
             docMeta: docMeta,
             forceSelectedTocItem: null, // via explicit TOC panel click
             autoSelectedTocItem: autoSelectedTocItem, // based on scrolling
@@ -100,6 +106,7 @@ export class Documentation extends Component {
         this.onSearchSelection = this.onSearchSelection.bind(this)
         this.onPageUpdate = this.onPageUpdate.bind(this)
         this.onTocUpdate = this.onTocUpdate.bind(this)
+        this.onFooterUpdate = this.onFooterUpdate.bind(this)
         this.onDocMetaUpdate = this.onDocMetaUpdate.bind(this)
         this.onMultiplePagesUpdate = this.onMultiplePagesUpdate.bind(this)
         this.onPagesRemove = this.onPagesRemove.bind(this)
@@ -134,11 +141,11 @@ export class Documentation extends Component {
     }
 
     renderDefaultDocMode() {
-        const {footer} = this.props
         const {
             toc,
             page,
             docMeta,
+            footer,
             autoSelectedTocItem,
             forceSelectedTocItem,
             tocCollapsed,
@@ -182,6 +189,7 @@ export class Documentation extends Component {
                                                           onPagesRemove={this.onPagesRemove}
                                                           onDocReferencesUpdate={this.onDocReferencesUpdate}
                                                           onTocUpdate={this.onTocUpdate}
+                                                          onFooterUpdate={this.onFooterUpdate}
                                                           onDocMetaUpdate={this.onDocMetaUpdate}
                                                           onError={this.onPageGenError}/> : null
 
@@ -530,6 +538,12 @@ export class Documentation extends Component {
         this.setState({
             toc: toc,
             pageGenError: null
+        })
+    }
+
+    onFooterUpdate(footer) {
+        this.setState({
+            footer: footer
         })
     }
 

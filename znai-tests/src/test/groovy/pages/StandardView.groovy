@@ -24,6 +24,8 @@ class StandardView {
     def tocSectionTitles = $(".toc-section .title")
     def tocItems = $(".toc-item a")
 
+    def footer = $(".footer")
+
     def shortcutsTocItem = tocItems.get("Shortcuts")
 
     def codeSnippetsTocItem = tocItems.get("Code Snippets")

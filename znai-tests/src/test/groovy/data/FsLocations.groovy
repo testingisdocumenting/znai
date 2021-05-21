@@ -14,9 +14,19 @@
  * limitations under the License.
  */
 
-package pages
+package data
 
-class Pages {
-    static StandardView standardView = new StandardView()
-    static PreviewServer previewServer = new PreviewServer()
+
+import java.nio.file.Path
+
+import static org.testingisdocumenting.webtau.cfg.WebTauConfig.cfg
+
+class FsLocations {
+    static Path znaiDocsRoot() {
+        return cfg.fullPath("../../../../znai-docs/znai")
+    }
+
+    static Path resolveFromZnaiDocs(String relative) {
+        return znaiDocsRoot().resolve(relative)
+    }
 }

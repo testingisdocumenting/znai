@@ -14,9 +14,20 @@
  * limitations under the License.
  */
 
-package pages
+package scenarios
 
-class Pages {
-    static StandardView standardView = new StandardView()
-    static PreviewServer previewServer = new PreviewServer()
+import data.FsLocations
+
+import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
+import static pages.Pages.*
+
+scenario('open preview') {
+    previewServer.openPreview()
+}
+
+scenario('footer should be updated on footer file change') {
+    standardView.footer.should == ~/Contributions are welcome/
+
+    fs.writeText(FsLocations.resolveFromZnaiDocs("footer.md"), "new footer")
+    standardView.footer.waitTo == "new footer"
 }

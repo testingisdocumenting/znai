@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +21,7 @@ import org.testingisdocumenting.znai.html.DocPageReactProps;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.server.sockets.JsonWebSocketHandler;
 import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.structure.Footer;
 import org.testingisdocumenting.znai.structure.TableOfContents;
 import org.testingisdocumenting.znai.structure.TocItem;
 
@@ -81,6 +83,14 @@ public class PreviewWebSocketHandler extends JsonWebSocketHandler {
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "docReferencesUpdate");
         payload.put("docReferences", docReferences.toMap());
+
+        send(payload);
+    }
+
+    public void sendFooter(Footer footer) {
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("type", "footerUpdate");
+        payload.put("footer", footer.toMap());
 
         send(payload);
     }
