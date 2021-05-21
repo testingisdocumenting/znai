@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,19 +25,16 @@ import java.util.Map;
 public class DocumentationReactProps {
     private final DocMeta docMeta;
     private final DocPageReactProps pageProps;
-    private FooterProps footerProps;
 
-    public DocumentationReactProps(DocMeta docMeta, DocPageReactProps pageProps, FooterProps footerProps) {
+    public DocumentationReactProps(DocMeta docMeta, DocPageReactProps pageProps) {
         this.docMeta = docMeta;
         this.pageProps = pageProps;
-        this.footerProps = footerProps;
     }
 
     public Map<String, ?> toMap() {
         final Map<String, Object> map = new LinkedHashMap<>();
         map.put("docMeta", docMeta.toMap());
         map.put("page", pageProps.toMap());
-        map.put("footer", footerProps.toMap());
 
         return map;
     }

@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.cli.extension.CliCommandConfig;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput;
 import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.html.HtmlPage;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
 import org.testingisdocumenting.znai.server.AuthorizationHeaderBasedAuthenticationHandler;
@@ -205,7 +206,7 @@ public class ZnaiCliApp {
 
     private static void reportHostPort(int port, String relativeUrl) {
         try {
-            ConsoleOutputs.out("http://", InetAddress.getLocalHost().getHostName(), ":",
+            ConsoleOutputs.out(Color.BLUE, "server started ", FontStyle.NORMAL, "http://", InetAddress.getLocalHost().getHostName(), ":",
                     port, relativeUrl.isEmpty() ? "" : relativeUrl);
         } catch (UnknownHostException e) {
             ConsoleOutputs.err("Cannot extract host name");

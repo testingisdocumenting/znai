@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,15 +36,13 @@ public class PageToHtmlPageConverter {
 
     public HtmlPageAndPageProps convert(TocItem tocItem,
                                         Page page,
-                                        RenderSupplier mainBodySupplier,
-                                        Footer footer) {
+                                        RenderSupplier mainBodySupplier) {
         String title = tocItem.isIndex() ?
                 docMeta.getTitle() :
                 docMeta.getTitle() + ": " + tocItem.getPageTitle();
 
         DocPageReactProps pageProps = new DocPageReactProps(tocItem, page);
-        FooterProps footerProps = new FooterProps(footer);
-        DocumentationReactProps docProps = new DocumentationReactProps(docMeta, pageProps, footerProps);
+        DocumentationReactProps docProps = new DocumentationReactProps(docMeta, pageProps);
 
         HtmlReactJsPage reactJsPage = new HtmlReactJsPage(reactJsBundle);
         HtmlPage htmlPage = reactJsPage.create(title, "Documentation", docProps.toMap(), mainBodySupplier, "");

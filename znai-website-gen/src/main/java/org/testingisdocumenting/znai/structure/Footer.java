@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +19,9 @@ package org.testingisdocumenting.znai.structure;
 
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Footer {
     private final DocElement docElement;
 
@@ -27,5 +31,14 @@ public class Footer {
 
     public DocElement getDocElement() {
         return docElement;
+    }
+
+    public Map<String, ?> toMap() {
+        Map<String, Object> props = new LinkedHashMap<>();
+
+        props.put("type", "Footer");
+        props.put("content", ((Map<String, ?>) getDocElement().toMap()).get("content"));
+
+        return props;
     }
 }

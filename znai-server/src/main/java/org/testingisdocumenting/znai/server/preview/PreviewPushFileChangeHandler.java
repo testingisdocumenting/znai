@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.html.DocPageReactProps;
 import org.testingisdocumenting.znai.html.HtmlPageAndPageProps;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.structure.Footer;
 import org.testingisdocumenting.znai.structure.TocItem;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.website.TocAddedAndRemovedPages;
@@ -61,6 +62,15 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
             if (!tocAddedAndRemovedPages.getRemovedTocItems().isEmpty()) {
                 previewSocket.sendPagesRemove(tocAddedAndRemovedPages.getRemovedTocItems().stream());
             }
+        });
+    }
+
+    @Override
+    public void onFooterChange(Path tocPath) {
+        ConsoleOutputs.out("footer changed: ", tocPath);
+        execute(() -> {
+            Footer footer = previewWebSite.parseFooter();
+            previewSocket.sendFooter(footer);
         });
     }
 

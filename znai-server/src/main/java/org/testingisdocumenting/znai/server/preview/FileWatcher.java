@@ -118,6 +118,8 @@ public class FileWatcher implements AuxiliaryFileListener {
             register(path);
         } else if (fileName.equals("toc")) {
             fileChangeHandler.onTocChange(path);
+        } else if (path.equals(siteCfg.getFooterPath())) {
+            fileChangeHandler.onFooterChange(path);
         } else if (fileName.equals(DocMeta.META_FILE_NAME)) {
             fileChangeHandler.onDocMetaChange(path);
         } else if (path.equals(siteCfg.getGlobalReferencesPath())) {
