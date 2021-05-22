@@ -1,0 +1,9 @@
+<plugin>
+    <groupId>org.testingisdocumenting.znai</groupId>
+    <artifactId>znai-maven-plugin</artifactId>
+    <version>${project.version}</version>
+    <configuration>
+        <docId>znai</docId>
+        <port>3334</port> <!-- optional override of default value 3333-->
+    </configuration>
+</plugin>
