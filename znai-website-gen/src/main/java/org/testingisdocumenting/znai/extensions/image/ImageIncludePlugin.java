@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.image;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
@@ -63,34 +64,36 @@ public class ImageIncludePlugin implements IncludePlugin {
 
         auxiliaryFile = resourceResolver.runtimeAuxiliaryFile(imagePath);
 
-        String slidesPathValue = pluginParams.getOpts().get("slidesPath");
-        Double scaleRatio = pluginParams.getOpts().get("scaleRatio", 1.0);
+        PluginParamsOpts opts = pluginParams.getOpts();
+
+        String slidesPathValue = opts.get("slidesPath");
+        Double scale = opts.get("scaleRatio", opts.get("scale", 1.0));
 
         annotationsPath = determineAnnotationsPath(imagePath, pluginParams);
 
         slidesPath = slidesPathValue != null ? resourceResolver.fullPath(slidesPathValue) : null;
 
         Map<String, ?> annotations = annotationsPath == null ? null : JsonUtils.deserializeAsMap(FileUtils.fileTextContent(annotationsPath));
-        Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
+        Map<String, Object> props = new LinkedHashMap<>(opts.toMap());
         props.put("imageSrc", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
 
         props.put("timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()));
 
         props.put("shapes", annotations != null ? annotations.get("shapes") : Collections.emptyList());
-        setWidthHeight(props, scaleRatio, annotations, imagePath);
+        setWidthHeight(props, scale, annotations, imagePath);
 
         return PluginResult.docElement("AnnotatedImage", props);
     }
 
     private void setWidthHeight(Map<String, Object> props,
-                                Double scaleRatio,
+                                Double scale,
                                 Map<String, ?> annotations,
                                 String imagePathValue) {
         Number pixelRatio = (annotations == null || !annotations.containsKey("pixelRatio")) ? 1 : (Number) annotations.get("pixelRatio");
 
         BufferedImage bufferedImage = resourceResolver.imageContent(imagePathValue);
-        props.put("width", scaleRatio * bufferedImage.getWidth() / pixelRatio.doubleValue());
-        props.put("height", scaleRatio * bufferedImage.getHeight() / pixelRatio.doubleValue());
+        props.put("width", scale * bufferedImage.getWidth() / pixelRatio.doubleValue());
+        props.put("height", scale * bufferedImage.getHeight() / pixelRatio.doubleValue());
     }
 
     @Override
