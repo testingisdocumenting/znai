@@ -18,6 +18,7 @@
 import React from 'react'
 import EmbeddedAnnotatedImage from './EmbeddedAnnotatedImage'
 import {elementsLibrary} from '../DefaultElementsLibrary';
+import {ZoomOverlay} from '../zoom/ZoomOverlay';
 
 export function imageDemo(registry) {
     registry.add('standard image', () => (
@@ -27,6 +28,14 @@ export function imageDemo(registry) {
         </div>
     ))
     registry.add('with border', () => <EmbeddedAnnotatedImage {...standardImage()} border={true}/>)
+    registry.add('fit image with zoom', () =>
+        (
+            <>
+                <ZoomOverlay/>
+                <EmbeddedAnnotatedImage {...fitImage()}/>
+            </>
+        )
+    )
     registry.add('simple annotations', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}/>)
     registry.add('simple annotations with border', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}
                                                                                  border={true}/>)
@@ -45,6 +54,16 @@ function standardImage() {
     }
 }
 
+function fitImage() {
+    return {
+        type: 'AnnotatedImage',
+        imageSrc: 'books.jpg',
+        width: 1698,
+        height: 1131,
+        fit: true
+    }
+}
+
 function simpleAnnotations() {
     return {
         imageSrc: 'ui.jpg',
@@ -52,12 +71,12 @@ function simpleAnnotations() {
         height: 500,
         shapes: [
             {type: 'circle', id: 'c1', x: 100, y: 100, r: 20, text: '1'},
-            {type: 'circle', id: 'c1', x: 500, y: 100, r: 20, text: '1', color: 'a'},
-            {type: 'circle', id: 'c2', x: 180, y: 100, r: 20, text: '2', color: 'b'},
-            {type: 'circle', id: 'c3', x: 150, y: 150, r: 30, text: '3', color: 'c'},
-            {type: 'highlight', id: 'h1', x: 150, y: 220, width: 80, height: 40, color: 'c'},
-            {type: 'rectangle', id: 'c3', x: 270, y: 170, width: 80, height: 40, text: 'here', color: 'b'},
-            {type: 'arrow', id: 'a1', beginX: 200, beginY: 200, endX: 300, endY: 300, color: 'd', text: 'This here'}]
+            {type: 'circle', id: 'c2', x: 500, y: 100, r: 20, text: '1', color: 'a'},
+            {type: 'circle', id: 'c3', x: 180, y: 100, r: 20, text: '2', color: 'b'},
+            {type: 'circle', id: 'c4', x: 150, y: 150, r: 30, text: '3', color: 'c'},
+            {type: 'highlight', id: 'c5', x: 150, y: 220, width: 80, height: 40, color: 'c'},
+            {type: 'rectangle', id: 'c6', x: 270, y: 170, width: 80, height: 40, text: 'here', color: 'b'},
+            {type: 'arrow', id: 'c7', beginX: 200, beginY: 200, endX: 300, endY: 300, color: 'd', text: 'This here'}]
     }
 }
 
@@ -67,11 +86,11 @@ function badgeAlignment(x, y, inverted) {
         width: 800,
         height: 500,
         shapes: [
-            {type: 'badge', id: 'c1', x, y, text: '1', invertedColors: inverted},
-            {type: 'badge', id: 'c1', x, y, text: '2', align: 'Above', invertedColors: inverted},
-            {type: 'badge', id: 'c2', x, y, text: '3', align: 'Below', invertedColors: inverted},
-            {type: 'badge', id: 'c2', x, y, text: '4', align: 'ToTheLeft', invertedColors: inverted},
-            {type: 'badge', id: 'c2', x, y, text: '5', align: 'ToTheRight', invertedColors: inverted}
+            {type: 'badge', id: 'd1', x, y, text: '1', invertedColors: inverted},
+            {type: 'badge', id: 'd2', x, y, text: '2', align: 'Above', invertedColors: inverted},
+            {type: 'badge', id: 'd3', x, y, text: '3', align: 'Below', invertedColors: inverted},
+            {type: 'badge', id: 'd4', x, y, text: '4', align: 'ToTheLeft', invertedColors: inverted},
+            {type: 'badge', id: 'd5', x, y, text: '5', align: 'ToTheRight', invertedColors: inverted}
         ]
     }
 }

@@ -36,3 +36,11 @@
 .embedded-annotated-image.center {
     justify-content: center;
 }
+
+.znai-image-fit {
+    cursor: zoom-in;
+}
+
+.znai-zoom-overlay .embedded-annotated-image {
+    margin: 0;
+}

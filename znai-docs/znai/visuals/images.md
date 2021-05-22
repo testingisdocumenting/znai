@@ -45,6 +45,8 @@ To fit the image to the width of a text use the `fit` parameter.
 
     :include-image: books.jpg {fit: true}
 
+Note: You can click on the image to zoom into it
+
 :include-image: books.jpg {fit: true}
 
 # Scale Ratio

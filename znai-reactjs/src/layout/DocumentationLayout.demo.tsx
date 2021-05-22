@@ -14,44 +14,46 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React from "react";
 
-import { Registry } from 'react-component-viewer';
-import { DocumentationLayout } from './DocumentationLayout';
-import { DocMeta } from '../structure/docMeta';
-import { testLongToc } from '../structure/toc/toc.test.data';
-import { ViewPortProvider } from '../theme/ViewPortContext';
+import { Registry } from "react-component-viewer";
+import { DocumentationLayout } from "./DocumentationLayout";
+import { DocMeta } from "../structure/docMeta";
+import { testLongToc } from "../structure/toc/toc.test.data";
+import { ViewPortProvider } from "../theme/ViewPortContext";
 
-const dummy = <div/>;
+const dummy = <div />;
 
 const docMeta: DocMeta = {
-  id: 'test',
-  type: 'Guide',
-  title: 'My Product',
+  id: "test",
+  type: "Guide",
+  title: "My Product",
   previewEnabled: true,
 };
 
 export function documentationLayoutDemo(registry: Registry) {
-  registry.add('mobile', () => (
+  registry.add("mobile", () => (
     <ViewPortProvider isMobileForced={true}>
-      <div style={{width: 500}}>
-        <DocumentationLayout searchPopup={dummy}
-                             renderedPage={dummy}
-                             renderedNextPrevNavigation={dummy}
-                             renderedFooter={dummy}
-                             docMeta={docMeta}
-                             toc={testLongToc()}
-                             selectedTocItem={undefined}
-                             onHeaderClick={noOp}
-                             onSearchClick={noOp}
-                             onTocItemClick={noOp}
-                             onTocItemPageSectionClick={noOp}
-                             onNextPage={noOp}
-                             onPrevPage={noOp}/>
+      <div style={{ width: 500 }}>
+        <DocumentationLayout
+          searchPopup={dummy}
+          zoomOverlay={dummy}
+          renderedPage={dummy}
+          renderedNextPrevNavigation={dummy}
+          renderedFooter={dummy}
+          docMeta={docMeta}
+          toc={testLongToc()}
+          selectedTocItem={undefined}
+          onHeaderClick={noOp}
+          onSearchClick={noOp}
+          onTocItemClick={noOp}
+          onTocItemPageSectionClick={noOp}
+          onNextPage={noOp}
+          onPrevPage={noOp}
+        />
       </div>
     </ViewPortProvider>
-  ))
+  ));
 }
 
-function noOp() {
-}
+function noOp() {}

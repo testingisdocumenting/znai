@@ -20,18 +20,33 @@ import React, {Component} from 'react'
 import AnnotatedImage from './AnnotatedImage'
 import Annotations from './annotations/Annotations'
 import './EmbeddedAnnotatedImage.css'
+import {zoom} from '../zoom/Zoom';
 
 class EmbeddedAnnotatedImage extends Component {
     render() {
-        const {imageSrc, shapes, align} = this.props
+        const {imageSrc, shapes, align, fit} = this.props
         const annotations = new Annotations(shapes)
 
-        const fullClassName = "embedded-annotated-image" + (align ? " content-block " + align : "")
+        const fullClassName = "embedded-annotated-image" +
+            (align ? " content-block " + align : "") +
+            (fit ? " znai-image-fit" : "")
         return (
-            <div className={fullClassName}>
+            <div className={fullClassName} onClick={this.zoomImage}>
                 <AnnotatedImage imageSrc={imageSrc} annotations={annotations} {...this.props} isStatic="true"/>
             </div>
         )
+    }
+
+    zoomImage = () => {
+        if (!this.props.fit) {
+            return;
+        }
+
+        const noFitProps = {...this.props}
+        delete noFitProps.fit
+
+        zoom.zoom(<EmbeddedAnnotatedImage {...noFitProps}/>)
+        console.log('zoom image')
     }
 }
 
