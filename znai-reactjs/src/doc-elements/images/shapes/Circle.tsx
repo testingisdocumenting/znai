@@ -85,7 +85,6 @@ function CircleBodyImpl({
   text,
   align,
   className,
-  ...props
 }: CircleParamsWithStyle) {
   const [cx, cy] = calcCenter();
 
@@ -100,7 +99,6 @@ function CircleBodyImpl({
         fill={style.fill}
         strokeOpacity={1}
         fillOpacity={1}
-        {...props}
       />
       <text
         x={0}

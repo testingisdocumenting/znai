@@ -33,6 +33,7 @@ import "./DocumentationLayout.css";
 import "./mobile/MobileLayoutOverrides.css";
 
 interface Props {
+  zoomOverlay: React.ReactNode;
   searchPopup: React.ReactNode;
   renderedPage: React.ReactNode;
   renderedNextPrevNavigation: React.ReactNode;
@@ -57,6 +58,7 @@ interface Props {
 }
 
 export function DocumentationLayout({
+  zoomOverlay,
   searchPopup,
   renderedPage,
   renderedNextPrevNavigation,
@@ -101,6 +103,8 @@ export function DocumentationLayout({
       )}
 
       {searchPopup}
+
+      {!isMobile && zoomOverlay}
 
       {isMobile && (
         <TocMobileHeader

@@ -54,6 +54,7 @@ import {presentationModeListeners} from "./presentation/PresentationModeListener
 
 import './search/Search.css'
 import {mainPanelClassName} from '../layout/classNames';
+import {ZoomOverlay} from './zoom/ZoomOverlay';
 
 export class Documentation extends Component {
     constructor(props) {
@@ -157,6 +158,8 @@ export class Documentation extends Component {
         const theme = this.theme
         const elementsLibrary = theme.elementsLibrary
 
+        const zoomOverlay = <ZoomOverlay/>
+
         const searchPopup = isSearchActive ? <SearchPopup elementsLibrary={elementsLibrary}
                                                           tocCollapsed={tocCollapsed}
                                                           searchPromise={this.searchPromise}
@@ -206,6 +209,7 @@ export class Documentation extends Component {
                     <DocumentationLayout docMeta={docMeta}
                                          toc={toc}
                                          theme={theme}
+                                         zoomOverlay={zoomOverlay}
                                          selectedTocItem={selectedTocItem}
                                          prevPageTocItem={this.prevPageTocItem}
                                          nextPageTocItem={this.nextPageTocItem}
