@@ -7,5 +7,6 @@
 ../../znai-testing-examples/src/test/groovy
 ../../znai-testing-examples/src/test/java
 ../../znai-testing-examples/target/test-classes
+../../.github
 ../target/classes
 https://raw.githubusercontent.com/testingisdocumenting/webtau/master
