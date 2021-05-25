@@ -28,6 +28,7 @@ def node_no_dict(node_type, name_to_use, node):
     return {
         "type": node_type,
         "name": name_to_use,
+        "body": extract_body(node),
         "doc_string": ast.get_docstring(node)
     }
 
@@ -35,6 +36,10 @@ def node_no_dict(node_type, name_to_use, node):
 def function_to_dict(func_node):
     return node_no_dict("function", func_node.name, func_node)
 
+
+def extract_body(node):
+    # TODO
+    # isinstance(node.body[0].value, ast.Constant)
 
 def class_to_list_of_dict(class_node):
     """
