@@ -613,19 +613,18 @@ export class Documentation extends Component {
     }
 
     navigateToPageAndDisplayChange(pageProps, updatePagesReference) {
-        updatePagesReference().then(() => {
-            this.navigateToPageIfRequired(pageProps.tocItem).then(() => {
-                this.updatePageAndDetectChangePosition(() => {
-                    this.changePage({page: pageProps})
-                })
-            }).then(() => {
+        this.navigateToPageIfRequired(pageProps.tocItem).then(() => {
+            this.updatePageAndDetectChangePosition(() => {
+                updatePagesReference().then(() => {
+                        this.changePage({page: pageProps})
+                    })}).then(() => {
             }, (error) => console.error(error))
         })
     }
 
     updatePageAndDetectChangePosition(funcToUpdatePage) {
         enableDiffTrackingForOneDomChangeTransaction()
-        funcToUpdatePage()
+        return funcToUpdatePage()
     }
 
     onTextSelection(textSelection) {
