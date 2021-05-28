@@ -56,11 +56,13 @@ public class CliCommandIncludePlugin implements IncludePlugin {
         PluginParamsOpts opts = pluginParams.getOpts();
         Set<String> combinedParams = new LinkedHashSet<>(opts.getList("paramToHighlight"));
 
-        if (opts.has("paramToHighlight")) {
-            ConsoleOutputs.out(Color.RED, "cli-command paramToHighlight will be deprecated"); // TODO deprecation warning API
-        }
-
         combinedParams.addAll(opts.getList("paramsToHighlight"));
+        combinedParams.addAll(opts.getList("highlight"));
+
+        if (opts.has("paramToHighlight") ||
+                opts.has("paramsToHighlight")) {
+            ConsoleOutputs.out(Color.RED, "cli-command param(s)ToHighlight will be deprecated, use <highlight> instead"); // TODO deprecation warning API
+        }
 
         resourcesResolver = componentsRegistry.resourceResolver();
         LinkedHashMap<String, Object> props = new LinkedHashMap<>();
