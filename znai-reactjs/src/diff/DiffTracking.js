@@ -58,18 +58,16 @@ export class DiffTracking extends React.Component {
             return
         }
 
-        setTimeout(() => {
-            try {
-                const diffNode = new HtmlNodeDiff(snapshot.beforeNode, this.rootNode)
-                diffNode.scrollAddedIntoView(this.scrollNode)
-                diffNode.animateAdded()
-            } finally {
-                if (autoDisable) {
-                    enabled = false
-                    autoDisable = false
-                }
+        try {
+            const diffNode = new HtmlNodeDiff(snapshot.beforeNode, this.rootNode)
+            diffNode.scrollAddedIntoView(this.scrollNode)
+            diffNode.animateAdded()
+        } finally {
+            if (autoDisable) {
+                enabled = false
+                autoDisable = false
             }
-        }, 50)
+        }
     }
 }
 

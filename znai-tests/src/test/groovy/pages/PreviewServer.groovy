@@ -19,9 +19,16 @@ package pages
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
 class PreviewServer {
-    int port = 3456
+    // TODO remove cache once webtau shares the same classloader between config and tests
+    static def port = cache.value('preview-port')
+
+    static void setPort(int newPort) {
+        step("set new preview port $newPort") {
+            port.set(newPort)
+        }
+    }
 
     void openPreview() {
-        browser.open("http://localhost:${port}/preview")
+        browser.open("http://localhost:${port.get()}/preview")
     }
 }

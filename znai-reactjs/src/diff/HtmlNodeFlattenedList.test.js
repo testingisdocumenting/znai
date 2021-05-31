@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +26,7 @@ describe('HtmlNodeFlattenedList', () => {
                     id: 'c1', tagName: 'div', className: 'custom-class content-block', children: [
                         {id: 't1', tagName: 'div', className: 'text', text: 'line 1'},
                         {id: 'img1', tagName: 'img', className: 'annotated', attrs: {src: 'path', timestamp: 'time'}},
-                        {id: 't2', tagName: 'div', className: 'text', text: 'line 2'},
+                        {id: 't2', tagName: 'div', className: 'znai-page-last-update-time', text: 'line 2'},
                         {tagName: 'div', children: [
                                 {id: 'nested1', tagName: 'div', text: 'nested-text'}
                             ]}]
@@ -55,7 +56,7 @@ describe('HtmlNodeFlattenedList', () => {
 
         const idxes = nodeList.list.map(e => e.idx)
 
-        expect(idxes).toEqual([0, 1, 2, 3, 4, 5, 6, 7])
+        expect(idxes).toEqual([0, 1, 2, 3, 4, 5, 6])
 
         expect(simplifiedActual).toEqual([
             {
@@ -66,11 +67,6 @@ describe('HtmlNodeFlattenedList', () => {
             {
                 value: 'src=path timestamp=time',
                 nodeId: 'img1',
-                containerId: 'c1'
-            },
-            {
-                value: 'line 2',
-                nodeId: 't2',
                 containerId: 'c1'
             },
             {

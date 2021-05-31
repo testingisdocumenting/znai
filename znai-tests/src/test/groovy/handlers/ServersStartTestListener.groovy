@@ -19,7 +19,7 @@ package handlers
 import clicommands.CliCommands
 import data.FsLocations
 import org.testingisdocumenting.webtau.TestListener
-import pages.Pages
+import pages.PreviewServer
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
@@ -49,10 +49,18 @@ class ServersStartTestListener implements TestListener {
     }
 
     private static void startPreviewServer() {
-        def znaiPreview = CliCommands.znai.runInBackground("--preview --port ${Pages.previewServer.port}" +
+        def previewServerUrl = "http://localhost:3333/preview"
+        if (http.ping("${previewServerUrl}/index.html")) {
+            PreviewServer.port = 3333
+            return
+        }
+
+        def cliPreviewPort = 3456
+        def znaiPreview = CliCommands.znai.runInBackground("--preview --port 3456" +
                 " --lookup-paths znai-overrides",
                 cli.workingDir(FsLocations.znaiDocsRoot()))
 
         znaiPreview.output.waitTo(contain("server started"), 30_000)
+        PreviewServer.port = cliPreviewPort
     }
 }
