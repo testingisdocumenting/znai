@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,6 +51,10 @@ export class HtmlNodeFlattenedList {
     }
 
     processNode(node) {
+        if (ignoreNode(node)) {
+            return true
+        }
+
         if (isTextNode(node)) {
             this.registerTextNode(node)
         } else if (isVisualNode(node)) {
@@ -93,6 +98,10 @@ function isTextNode(node) {
 function isVisualNode(node) {
     const tagName = getNodeTagName(node)
     return tagName === 'img'
+}
+
+function ignoreNode(node) {
+    return getNodeClassName(node) === 'znai-page-last-update-time'
 }
 
 function attributesAsText(node) {
