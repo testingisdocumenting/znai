@@ -40,6 +40,7 @@
             <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-tests</artifactId>
             <version>${project.version}</version>
+            <type>test-jar</type>
         </dependency>
     </dependencies>
 
