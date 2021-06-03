@@ -3,6 +3,8 @@ Documentation files are located next to your product codebase and are part of yo
 
 `Znai` provides extensions to simplify your day-to-day documentation processes and to improve maintenance in the long run.
 
+:include-image: external-code-snippets.png {border: true, fit: true}
+
 Continue reading to learn more about:
 * Rationale
 * Structuring your documentation

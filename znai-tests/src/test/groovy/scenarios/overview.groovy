@@ -30,4 +30,6 @@ scenario('table of contents navigation') {
 
     browser.url.path.should contain("/snippets/external-code-snippets")
     browser.title.should == "Znai: External Code Snippets"
+
+    browser.doc.capture('external-code-snippets')
 }
