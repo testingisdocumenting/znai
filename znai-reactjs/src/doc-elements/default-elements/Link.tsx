@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,20 +15,26 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import {isLocalUrl} from '../../structure/links'
-import {LinkWrapper} from './LinkWrapper'
+import React from "react";
+import { isLocalUrl } from "../../structure/links";
+import { LinkWrapper } from "./LinkWrapper";
+import { DocElementProps } from "./DocElement";
 
-import './Link.css'
+import "./Link.css";
 
-const Link = ({url, isFile, ...props}) => {
-    const isLocalNavigation = isLocalUrl(url) && !isFile;
-
-    return (
-        <LinkWrapper url={url} treatAsLocal={isLocalNavigation}>
-            <props.elementsLibrary.DocElement {...props}/>
-        </LinkWrapper>
-    )
+interface Props extends DocElementProps {
+  url: string;
+  isFile?: boolean;
 }
 
-export default Link
+const Link = ({ url, isFile, ...props }: Props) => {
+  const isLocalNavigation = isLocalUrl(url) && !isFile;
+
+  return (
+    <LinkWrapper url={url} treatAsLocal={isLocalNavigation}>
+      <props.elementsLibrary.DocElement {...props} />
+    </LinkWrapper>
+  );
+};
+
+export default Link;
