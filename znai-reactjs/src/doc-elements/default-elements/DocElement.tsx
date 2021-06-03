@@ -15,7 +15,18 @@
  * limitations under the License.
  */
 
-import * as React from 'react'
+import * as React from "react";
+
+export type ElementsLibraryMap = { [key: string]: any };
+export type DocElementContent = Array<{ type: string }>;
+
+export interface WithElementsLibrary {
+  elementsLibrary: ElementsLibraryMap;
+}
+
+export interface DocElementProps extends WithElementsLibrary {
+  content: DocElementContent;
+}
 
 /**
  * uses given set of components to render DocElements like links, paragraphs, code blocks, etc
@@ -23,21 +34,20 @@ import * as React from 'react'
  * @param content content to render
  * @param elementsLibrary library of elements to use to render
  */
-const DocElement = ({content, elementsLibrary}) => {
-    if (!content) {
-        return null
+export function DocElement({ content, elementsLibrary }: DocElementProps) {
+  if (!content) {
+    return null;
+  }
+
+  return content.map((item, idx) => {
+    const ElementToUse = elementsLibrary[item.type];
+    if (!ElementToUse) {
+      console.warn("can't find component to display: " + JSON.stringify(item));
+      return null;
+    } else {
+      return (
+        <ElementToUse key={idx} {...item} elementsLibrary={elementsLibrary} />
+      );
     }
-
-    return content.map((item, idx) => {
-        const ElementToUse = elementsLibrary[item.type]
-        if (!ElementToUse) {
-            console.warn("can't find component to display: " + JSON.stringify(item))
-            return null
-        } else {
-            return <ElementToUse key={idx} {...item}
-                                 elementsLibrary={elementsLibrary}/>
-        }
-    })
+  });
 }
-
-export default DocElement

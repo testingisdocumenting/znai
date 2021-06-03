@@ -22,7 +22,7 @@ import {themeRegistry} from '../theme/ThemeRegistry'
 
 import znaiDarkTheme from '../theme/znai-dark/znaiDarkTheme'
 
-import DocElement from './default-elements/DocElement'
+import { DocElement } from './default-elements/DocElement'
 import {Page, presentationPageHandler} from './page/Page'
 import PageTitle from './page/PageTitle'
 import SectionTitle from './default-elements/SectionTitle'
