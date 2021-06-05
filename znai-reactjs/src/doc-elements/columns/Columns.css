@@ -48,6 +48,10 @@
     flex-direction: column;
 }
 
+.column .snippet-container:first-child {
+    margin-top: 0;
+}
+
 .column .title-container {
     margin: 0;
 }
