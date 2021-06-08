@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +15,36 @@
  * limitations under the License.
  */
 
-import React from 'react'
+export function createNode({
+  tagName,
+  className,
+  text,
+  id,
+  attrs = {},
+  children = [],
+}: any) {
+  const node = document.createElement(tagName);
 
-const RawHtml = ({html}) => <div dangerouslySetInnerHTML={{ __html: html }}/>
+  if (text) {
+    const textNode = document.createTextNode(text);
+    node.appendChild(textNode);
+  }
 
-export default RawHtml
+  if (id) {
+    node.id = id;
+  }
+
+  if (className) {
+    node.className = className;
+  }
+
+  Object.keys(attrs).forEach((key) => {
+    node.setAttribute(key, attrs[key]);
+  });
+
+  children.forEach((child: ChildNode) => {
+    node.appendChild(createNode(child));
+  });
+
+  return node;
+}
