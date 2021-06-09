@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2021 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,15 @@
  * limitations under the License.
  */
 
-export function extractTextFromContent(content) {
-    if (! content) {
-        return ""
-    }
+import React from "react";
 
-    return content.map((el) => extractTextFromElement(el)).join(" ")
+import "./SimpleText.css";
+
+export interface SimpleTextPayload {
+  type: "SimpleText";
+  text: string;
 }
 
-export function extractTextFromElement(docElement) {
-    if (docElement.type === 'SimpleText') {
-        return docElement.text
-    }
-
-    if (docElement.content) {
-        return extractTextFromContent(docElement.content)
-    }
-
-    return ""
+export function SimpleText(props: SimpleTextPayload) {
+  return <span className="znai-simple-text">{props.text}</span>;
 }
