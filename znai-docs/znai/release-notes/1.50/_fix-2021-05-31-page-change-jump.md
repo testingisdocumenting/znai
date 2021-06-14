@@ -1,0 +1,2 @@
+* Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place,
+but was highlighting date time as the first change for pages that were last modified not in the same day. 
