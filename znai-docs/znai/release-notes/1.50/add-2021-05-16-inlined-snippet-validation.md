@@ -1,0 +1,1 @@
+* Add inlined code snippet with automatic identifier validation by looking into a provided file: [documentaiton](snippets/inlined-code-snippets#validated-identifier)

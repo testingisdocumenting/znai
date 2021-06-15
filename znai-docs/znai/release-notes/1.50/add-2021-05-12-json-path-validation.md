@@ -1,0 +1,1 @@
+* Validate JSON path for highlighting

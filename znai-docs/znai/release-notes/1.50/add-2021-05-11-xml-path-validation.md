@@ -1,0 +1,1 @@
+* Validate XML path for highlighting

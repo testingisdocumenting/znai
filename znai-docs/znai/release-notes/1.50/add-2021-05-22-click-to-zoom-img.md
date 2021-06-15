@@ -1,0 +1,1 @@
+* Add click to zoom image that was `fit: true`
