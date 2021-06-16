@@ -16,27 +16,9 @@
 
 package org.testingisdocumenting.znai.python;
 
-import org.testingisdocumenting.znai.core.AuxiliaryFile;
-import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.PluginParams;
-import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
-import org.testingisdocumenting.znai.parser.MarkupParserResult;
-import org.testingisdocumenting.znai.parser.ParserHandler;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
-import org.testingisdocumenting.znai.search.SearchScore;
-import org.testingisdocumenting.znai.search.SearchText;
 
-import java.nio.file.Path;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-public class PythonDocIncludePlugin implements IncludePlugin {
-    private Path fullPath;
-    private MarkupParserResult docStringParserResult;
-
+public class PythonDocIncludePlugin extends PythonIncludePluginBase {
     @Override
     public String id() {
         return "python-doc";
@@ -48,40 +30,11 @@ public class PythonDocIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
-        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
-
-        String givenFilePath = pluginParams.getFreeParam();
-
-        if (!resourcesResolver.canResolve(givenFilePath)) {
-            throw new IllegalArgumentException("can't find file: " + givenFilePath);
-        }
-
-        fullPath = resourcesResolver.fullPath(givenFilePath);
-        String entryName = pluginParams.getOpts().getRequiredString("entry");
-
-        List<Map<String, Object>> pythonParseResult = PythonBasedPythonParser.INSTANCE.parse(fullPath);
-        Map<String, Object> entry = pythonParseResult.stream().filter(e -> e.getOrDefault("name", "").equals(entryName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("can't find entry: " + entryName +
-                        " in: " + givenFilePath + ", available entries: " +
-                        pythonParseResult.stream()
-                                .map(e -> e.getOrDefault("name", "").toString())
-                                .collect(Collectors.joining(", "))));
-
-        docStringParserResult = componentsRegistry.markdownParser()
-                .parse(markupPath, entry.get("doc_string").toString());
-
-        return PluginResult.docElements(docStringParserResult.getDocElement().getContent().stream());
-    }
-
-    @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(fullPath));
-    }
-
-    @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(docStringParserResult.getAllText());
+    public PythonIncludeResult process(PythonCode parsed) {
+        PythonCodeEntry codeEntry = findEntryByName(parsed, entryName);
+        return new PythonIncludeResult(
+                componentsRegistry.markdownParser().parse(fullPath, codeEntry.getDocString())
+                        .getDocElement().getContent(),
+                codeEntry.getDocString());
     }
 }

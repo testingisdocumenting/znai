@@ -43,12 +43,12 @@ public class PythonBasedPythonParser {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Map<String, Object>> parse(Path path) {
+    public PythonCode parse(Path path) {
         write(path);
         String json = read();
 
         try {
-            return (List<Map<String, Object>>) JsonUtils.deserializeAsList(json);
+            return new PythonCode((List<Map<String, Object>>) JsonUtils.deserializeAsList(json));
         } catch (Exception e) {
             throw new RuntimeException("can't parse python parser output: " + json, e);
         }

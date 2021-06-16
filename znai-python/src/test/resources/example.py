@@ -12,20 +12,31 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-def my_func():
+def func_no_docs():
+    a = 2
+    b = 3
+    return a + b
+
+
+def my_func(a, b,
+            c, d):
     """
     text inside my *func* doc
     """
 
-    return 2 + 2
+    e = a + b
+    f = c + d
+
+    return e + f
 
 
 def another_func():
     """
     more diff text
     """
-
-    return 2 + 2
+    a = 2
+    b = 3
+    return a + b
 
 
 class Animal:
