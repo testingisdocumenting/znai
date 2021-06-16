@@ -1,0 +1,1 @@
+* Add [include-python](snippets/python#function-content) to include function's content
