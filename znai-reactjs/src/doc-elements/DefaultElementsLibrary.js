@@ -22,7 +22,7 @@ import {themeRegistry} from '../theme/ThemeRegistry'
 
 import znaiDarkTheme from '../theme/znai-dark/znaiDarkTheme'
 
-import DocElement from './default-elements/DocElement'
+import { DocElement } from './default-elements/DocElement'
 import {Page, presentationPageHandler} from './page/Page'
 import PageTitle from './page/PageTitle'
 import SectionTitle from './default-elements/SectionTitle'
@@ -77,6 +77,7 @@ import DiagramLegend from './diagrams/DiagramLegend'
 import { DocumentationLayout } from '../layout/DocumentationLayout'
 import Footer from '../structure/Footer'
 import {Redirect} from '../structure/Redirect';
+import {SimpleText} from './default-elements/SimpleText';
 
 const library = {}
 const presentationElementHandlers = {}
@@ -97,7 +98,7 @@ presentationElementHandlers.SubHeading = presentationSubHeading
 library.BlockQuote = BlockQuote
 presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler
 
-library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
+library.SimpleText = SimpleText
 library.InlinedCode = InlinedCode
 library.SoftLineBreak = () => <span> </span>
 library.HardLineBreak = () => <br />

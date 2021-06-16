@@ -20,6 +20,7 @@ import { InlinedCode } from "./InlinedCode";
 import Link from "../default-elements/Link";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import { Registry } from "react-component-viewer";
+import { DocElementContent } from "../default-elements/DocElement";
 
 export function inlinedCodeDemo(registry: Registry) {
   registry
@@ -44,7 +45,7 @@ export function inlinedCodeDemo(registry: Registry) {
       <Link
         url="#url"
         isFile={false}
-        content={linkContent()}
+        content={linkContent() as DocElementContent}
         elementsLibrary={elementsLibrary}
       />
     ));

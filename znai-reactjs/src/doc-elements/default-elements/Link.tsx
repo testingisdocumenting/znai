@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,29 +15,26 @@
  * limitations under the License.
  */
 
-export function createNode({tagName, className, text, id, attrs = {}, children = []}) {
-    const node = document.createElement(tagName)
+import React from "react";
+import { isLocalUrl } from "../../structure/links";
+import { LinkWrapper } from "./LinkWrapper";
+import { DocElementProps } from "./DocElement";
 
-    if (text) {
-        const textNode = document.createTextNode(text)
-        node.appendChild(textNode)
-    }
+import "./Link.css";
 
-    if (id) {
-        node.id = id
-    }
-
-    if (className) {
-        node.className = className
-    }
-
-    Object.keys(attrs).forEach(key => {
-        node.setAttribute(key, attrs[key])
-    })
-
-    children.forEach(child => {
-        node.appendChild(createNode(child))
-    })
-
-    return node
+interface Props extends DocElementProps {
+  url: string;
+  isFile?: boolean;
 }
+
+const Link = ({ url, isFile, ...props }: Props) => {
+  const isLocalNavigation = isLocalUrl(url) && !isFile;
+
+  return (
+    <LinkWrapper url={url} treatAsLocal={isLocalNavigation}>
+      <props.elementsLibrary.DocElement {...props} />
+    </LinkWrapper>
+  );
+};
+
+export default Link;

@@ -47,7 +47,7 @@ class CliCommandIncludePluginTest {
     @Test
     void "validates params to highlight presence"() {
         code {
-            process('git meta push origin HEAD:myfeature/pushrequest {paramsToHighlight: ["pusha"]}')
+            process('git meta push origin HEAD:myfeature/pushrequest {highlight: ["pusha"]}')
         } should throwException('param to highlight "pusha" is not present in command: git meta push origin HEAD:myfeature/pushrequest')
     }
 

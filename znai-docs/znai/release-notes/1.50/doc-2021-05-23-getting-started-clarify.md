@@ -1,0 +1,1 @@
+* Clarify Getting Started documentation section

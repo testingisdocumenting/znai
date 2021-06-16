@@ -2,9 +2,9 @@
 
 To bring attention to important parameters in your examples use the `cli-command` extension.
 
-    :include-cli-command: my-super-command paramA --important-flag=true {paramsToHighlight: "important"}
+    :include-cli-command: my-super-command paramA --important-flag=true {highlight: "important"}
     
-:include-cli-command: my-super-command paramA --important-flag=true {paramsToHighlight: "important"}
+:include-cli-command: my-super-command paramA --important-flag=true {highlight: "important"}
 
 Note: Parameter names gets matched as long as their names contain the passed value.
 
@@ -12,19 +12,19 @@ Note: Parameter names gets matched as long as their names contain the passed val
 
 Long command lines will be automatically wrapped into multiple lines.
 
-:include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {paramsToHighlight: ["name", "value"]}
+:include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {highlight: ["name", "value"]}
 
 Use `threshold` parameter to specify the max length of a line before splitting:
  
 ```
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
-    paramsToHighlight: ["name", "value"], 
+    highlight: ["name", "value"], 
     threshold: 30
 }
 ```
 
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
-    paramsToHighlight: ["name", "value"], 
+    highlight: ["name", "value"], 
     threshold: 30
 }
 
@@ -32,35 +32,35 @@ Use `splitAfter` to force line splitting after specified parameter:
 
 ```
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
-    paramsToHighlight: ["name", "value"], 
+    highlight: ["name", "value"], 
     splitAfter: ["--score=2", "--value=8"]
 }
 ```
 
 :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {
-    paramsToHighlight: ["score", "value"], 
+    highlight: ["score", "value"], 
     splitAfter: ["--score=2", "--value=8"]
 }
 
-Note: Unlike `paramsToHighlight`, `splitAfter` must be an exact match
+Note: Unlike `highlight`, `splitAfter` must be an exact match
 
 # Handle Special Symbols
 
 If your command contains special symbols, such as `{`, move the command definition to a `command` option
 
-    :include-cli-command: {command: "another-command {file1} [file2]", paramsToHighlight: ["file1"]}
+    :include-cli-command: {command: "another-command {file1} [file2]", highlight: ["file1"]}
 
-:include-cli-command: {command: "another-command {file1} [file2]", paramsToHighlight: ["file1"]}
+:include-cli-command: {command: "another-command {file1} [file2]", highlight: ["file1"]}
 
 # From File
 
 You can read a command from file.
 
-    :include-cli-command: {commandFile: "cli/command.txt", paramsToHighlight: "value"}
+    :include-cli-command: {commandFile: "cli/command.txt", highlight: "value"}
 
 :include-file: cli/command.txt {title: "cli/command.txt"}
 
-:include-cli-command: {commandFile: "cli/command.txt", paramsToHighlight: "value"}
+:include-cli-command: {commandFile: "cli/command.txt", highlight: "value"}
 
 This option is useful for displaying a captured command during tests. 
 

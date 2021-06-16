@@ -152,7 +152,7 @@
         <javaparser-core.version>3.16.1</javaparser-core.version>
         <jakarta.xml.bind-api.version>2.3.3</jakarta.xml.bind-api.version>
         <httpcore.version>4.4.13</httpcore.version>
-        <httpclient.version>4.5.12</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
     </properties>
 
     <dependencyManagement>

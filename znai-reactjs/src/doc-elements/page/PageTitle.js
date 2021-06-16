@@ -52,7 +52,7 @@ function ModifiedTime({lastModifiedTime}) {
 
     const modifiedTimeAsStr = new Date(lastModifiedTime).toDateString()
     return (
-        <div className="page-last-update-time">
+        <div className="znai-page-last-update-time">
             {modifiedTimeAsStr}
         </div>
     )

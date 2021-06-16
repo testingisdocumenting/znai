@@ -85,7 +85,7 @@ and that's why it is required to provide `documentation id` during the site gene
 To generate static site, use
 
 ```tabs
-CLI: :include-cli-command: znai --doc-id my-docs --deploy /path/to/static-content {paramsToHighlight: "doc-id"}
+CLI: :include-cli-command: znai --doc-id my-docs --deploy /path/to/static-content {highlight: "doc-id"}
 Maven: :include-file: maven-deploy.xml {title: "maven plugin", highlight: "docId"} 
 ```
 

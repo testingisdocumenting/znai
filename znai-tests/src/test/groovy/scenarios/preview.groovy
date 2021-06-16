@@ -18,6 +18,8 @@ package scenarios
 
 import data.FsLocations
 
+import java.nio.file.Path
+
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 import static pages.Pages.*
 
@@ -30,4 +32,29 @@ scenario('footer should be updated on footer file change') {
 
     fs.writeText(FsLocations.resolveFromZnaiDocs("footer.md"), "new footer")
     standardView.footer.waitTo == "new footer"
+}
+
+scenario('preview jumps to a page associated with a change') {
+    def externalCodeSnippetsTitle = 'External Code Snippets'
+
+    standardView.pageTitle.shouldNot == externalCodeSnippetsTitle
+
+    def externalCodePath = FsLocations.resolveFromZnaiDocs("snippets/external-code-snippets.md")
+    replaceText(externalCodePath, "Given file with inlined comments", "Given file with inlined comments!")
+
+    standardView.pageTitle.waitTo == externalCodeSnippetsTitle
+    browser.url.path.should == "/preview/snippets/external-code-snippets"
+
+    // TODO replace with `inViewport` matcher when webtau releases it
+    standardView.mainPanelScrollTop.shouldBe > 400
+}
+
+static def replaceText(Path path, String regexp, String replacement) {
+    step("replace text in $path") {
+        def fullPath = cfg.fullPath(path)
+        def text = fs.textContent(fullPath).data
+        def replaced = text.replaceAll(regexp, replacement)
+
+        fs.writeText(fullPath, replaced)
+    }
 }
