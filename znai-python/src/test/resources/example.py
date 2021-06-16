@@ -12,6 +12,12 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+def func_no_docs():
+    a = 2
+    b = 3
+    return a + b
+
+
 def my_func(a, b,
             c, d):
     """

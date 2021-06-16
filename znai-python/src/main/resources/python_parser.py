@@ -16,10 +16,13 @@ import ast
 import json
 import sys
 
+content_lines = []
 
 def read_and_parse(file_name):
+    global content_lines
     with open(file_name) as file:
         content = file.read()
+        content_lines = content.splitlines()
 
     return ast.parse(content)
 
@@ -28,7 +31,8 @@ def node_no_dict(node_type, name_to_use, node):
     return {
         "type": node_type,
         "name": name_to_use,
-        "body": extract_body(node),
+        "content": extract_content(node),
+        "body_only": extract_body_only(node),
         "doc_string": ast.get_docstring(node)
     }
 
@@ -37,9 +41,29 @@ def function_to_dict(func_node):
     return node_no_dict("function", func_node.name, func_node)
 
 
-def extract_body(node):
-    # TODO
-    # isinstance(node.body[0].value, ast.Constant)
+def extract_content(node):
+    global content_lines
+    return "\n".join(content_lines[(node.lineno - 1):node.end_lineno])
+
+
+def extract_body_only(node):
+    # skip py doc if present
+    start_idx = 1 if is_py_doc(node.body[0]) else 0
+    end_idx = len(node.body) - 1
+
+    start_line_idx = node.body[start_idx].lineno - 1
+    end_line_idx = node.body[end_idx].end_lineno - 1
+
+    global content_lines
+    return "\n".join(content_lines[start_line_idx:(end_line_idx + 1)])
+
+
+def is_py_doc(node):
+    if isinstance(node.value, ast.Constant) and not hasattr(node, "targets"):
+        return True
+
+    return False
+
 
 def class_to_list_of_dict(class_node):
     """

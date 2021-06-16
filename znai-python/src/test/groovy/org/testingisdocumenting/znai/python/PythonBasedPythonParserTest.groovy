@@ -24,10 +24,58 @@ class PythonBasedPythonParserTest {
     @Test
     void "parsing python using python process"() {
         def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/example.py"))
-        parsed.should == [
-                ["type": "function", "name": "my_func", "doc_string": "text inside my *func* doc"],
-                ["type": "function", "name": "another_func", "doc_string": "more diff text"],
-                ["type": "class", "name": "Animal", "doc_string": "animal top level class doc string"],
-                ["type": "function", "name": "Animal.says", "doc_string": "animal talks"]]
+        parsed.findEntryByName("func_no_docs").should == [
+                name: "func_no_docs",
+                type: "function",
+                content: "def func_no_docs():\n" +
+                        "    a = 2\n" +
+                        "    b = 3\n" +
+                        "    return a + b",
+                bodyOnly: "    a = 2\n" +
+                        "    b = 3\n" +
+                        "    return a + b",
+                docString: ""
+        ]
+
+        parsed.findEntryByName("my_func").should == [
+                name: "my_func",
+                type: "function",
+                content: "def my_func(a, b,\n" +
+                        "            c, d):\n" +
+                        "    \"\"\"\n" +
+                        "    text inside my *func* doc\n" +
+                        "    \"\"\"\n" +
+                        "\n" +
+                        "    e = a + b\n" +
+                        "    f = c + d\n" +
+                        "\n" +
+                        "    return e + f",
+                bodyOnly: "    e = a + b\n" +
+                        "    f = c + d\n" +
+                        "\n" +
+                        "    return e + f",
+                docString: "text inside my *func* doc"
+        ]
+
+        parsed.findEntryByName("Animal").should == [
+                name: "Animal",
+                type: "class",
+                content: "class Animal:\n" +
+                        "    \"\"\"\n" +
+                        "    animal top level class doc string\n" +
+                        "    \"\"\"\n" +
+                        "\n" +
+                        "    def says(self):\n" +
+                        "        \"\"\"\n" +
+                        "        animal talks\n" +
+                        "        \"\"\"\n" +
+                        "        print(\"hello\")",
+                bodyOnly: "    def says(self):\n" +
+                        "        \"\"\"\n" +
+                        "        animal talks\n" +
+                        "        \"\"\"\n" +
+                        "        print(\"hello\")",
+                docString: "animal top level class doc string"
+        ]
     }
 }

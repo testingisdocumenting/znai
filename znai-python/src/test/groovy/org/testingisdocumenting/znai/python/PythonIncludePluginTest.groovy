@@ -22,11 +22,22 @@ import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
 
-class PythonDocIncludePluginTest {
+class PythonIncludePluginTest {
     @Test
-    void "should parse python doc as markdown"() {
-        def props = resultingProps('example.py', '{entry: "my_func"}')
-        props.should == [markdown: 'text inside my *func* doc']
+    void "should extract function full content"() {
+        def props = resultingProps('example.py', '{entry: "Animal.says"}')
+        props.should == [lang: 'python', entry: 'Animal.says', snippet: "def says(self):\n" +
+                "    \"\"\"\n" +
+                "    animal talks\n" +
+                "    \"\"\"\n" +
+                "    print(\"hello\")"]
+    }
+
+    @Test
+    void "should extract function body only"() {
+        def props = resultingProps('example.py', '{entry: "Animal.says", bodyOnly: true}')
+        props.should == [lang: 'python', entry: 'Animal.says', bodyOnly: true,
+                         snippet: "print(\"hello\")"]
     }
 
     @Test
@@ -40,7 +51,7 @@ class PythonDocIncludePluginTest {
     void "should validate entry value presence"() {
         code {
             resultingProps('example.py', '')
-        } should throwException("'entry' is required for plugin: python-doc")
+        } should throwException("'entry' is required for plugin: python")
     }
 
     @Test
@@ -52,6 +63,6 @@ class PythonDocIncludePluginTest {
     }
 
     private static Map<String, Object> resultingProps(String fileName, String value) {
-        return PluginsTestUtils.processIncludeAndGetProps(":include-python-doc: $fileName $value")
+        return PluginsTestUtils.processIncludeAndGetProps(":include-python: $fileName $value")
     }
 }
