@@ -46,14 +46,14 @@ function mergeMetaIntoContent(pageContent, meta) {
 function mergeMetaIntoElement(element, meta) {
     const newContent = element.content ? mergeMetaIntoContent(element.content, meta) : element.content
 
-    let merged = {...element}
+    const merged = {...element}
 
     if (newContent) {
         merged.content = newContent
     }
 
     if (meta) {
-        merged.meta = meta
+        merged.meta = {...meta, ...merged.meta}
     }
 
     return merged

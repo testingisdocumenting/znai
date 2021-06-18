@@ -75,7 +75,10 @@ describe('page content post processor', () => {
                         "content": [
                             {
                                 "text": "Another paragraph",
-                                "type": "SimpleText"
+                                "type": "SimpleText",
+                                "meta": {
+                                    "extraPropB": "specific"
+                                }
                             }
                         ]
                     }]
@@ -116,7 +119,7 @@ describe('page content post processor', () => {
                                 "type": "SimpleText",
                                 "meta": {
                                     "extraPropA": "value1",
-                                    "extraPropB": "value2"
+                                    "extraPropB": "specific"
                                 }
                             }
                         ],
