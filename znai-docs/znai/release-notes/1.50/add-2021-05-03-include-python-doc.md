@@ -1,0 +1,1 @@
+* Added [include-python-doc](snippets/python#doc-string) to extract python docs as markdown text and add it to a page
