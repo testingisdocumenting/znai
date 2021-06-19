@@ -1,0 +1,1 @@
+* More permissive json parsing
