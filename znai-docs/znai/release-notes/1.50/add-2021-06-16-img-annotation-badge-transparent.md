@@ -1,0 +1,1 @@
+* [Image badge annotation](visuals/image-annotations) becomes transparent on hover 
