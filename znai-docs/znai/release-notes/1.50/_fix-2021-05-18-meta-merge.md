@@ -1,0 +1,1 @@
+* Fix: `include-meta` does not override plugin specific meta anymore
