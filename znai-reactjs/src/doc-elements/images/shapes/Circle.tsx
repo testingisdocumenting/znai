@@ -18,6 +18,8 @@
 import React from "react";
 import { AnnotationStyle, styleByName } from "./styleByName";
 
+import "./Circle.css";
+
 interface CircleParamsBase {
   x: number;
   y: number;
