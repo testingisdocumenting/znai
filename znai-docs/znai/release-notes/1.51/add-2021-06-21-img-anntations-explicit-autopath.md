@@ -1,0 +1,1 @@
+* Explicit use of `annotate:true` to use matching [image annotations file](visuals/image-annotations#path-shortcut)

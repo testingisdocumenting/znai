@@ -1,1 +1,1 @@
-* Clarify [Getting Started](introduction/getting-started) documentation section
+* Doc: clarify [Getting Started](introduction/getting-started) documentation section
