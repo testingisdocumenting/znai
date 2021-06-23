@@ -108,11 +108,15 @@ public class ImageIncludePlugin implements IncludePlugin {
             return resourceResolver.fullPath(annotationsPathValue);
         }
 
-        String annotationsPath = FilePathUtils.replaceExtension(imagePath, "json");
-        if (resourceResolver.canResolve(annotationsPath)) {
-            return resourceResolver.fullPath(annotationsPath);
+        if (!pluginParams.getOpts().get("annotate", false)) {
+            return null;
         }
 
-        return null;
+        String annotationsPath = FilePathUtils.replaceExtension(imagePath, "json");
+        if (!resourceResolver.canResolve(annotationsPath)) {
+            throw new RuntimeException("can't find: " + annotationsPath);
+        }
+
+        return resourceResolver.fullPath(annotationsPath);
     }
 }

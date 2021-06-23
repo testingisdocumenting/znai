@@ -22,11 +22,14 @@ capturing a screenshot.
 
 # Path Shortcut 
 
-You don't need to specify annotations path, if annotation file has `json` extension and matches file name and path of the image
+You don't need to specify annotations path, if annotations file matches file name and path of the image and 
+has `json` extension.
 
-    :include-image: word-toolbar.jpg
+Add `annotate:true` to automatically use matching annotations file
 
-:include-image: word-toolbar.jpg
+    :include-image: word-toolbar.jpg {annotate: true}
+
+:include-image: word-toolbar.jpg {annotate: true}
 
 :include-file: annotations.json {title: "word-toolbar.json"}
 
