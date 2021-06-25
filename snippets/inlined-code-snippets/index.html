@@ -86,16 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Backtick</h1></header>
-<p>To display inline code within regular text, simply put it inside a backtick.Example: To check if an Exchange is closed, you need to use ExchangeCalendar # Backtick To display inline code within regular text, simply put it inside a backtick.</p>
+<p>To display inline code within a text, put it inside a backtick. Example: To check if an Exchange is closed, you need to use `ExchangeCalendar` Example: To check if an Exchange is closed, you need to use ExchangeCalendar</p>
 </article>
 
 <article>
 <header><h1>From File</h1></header>
-<p>To display inline code from a file, use the file backtick plugin.Example: To access this feature navigate to . Example: To access this feature navigate to `:file: urlsample.txt`.</p>
+<p>To display inline code from a file, use the file inlined code plugin. Example: To access this feature, navigate to `:file: urlsample.txt`. Example: To access this feature, navigate to .</p>
+</article>
+
+<article>
+<header><h1>Validated Identifier</h1></header>
+<p>Use identifier inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names `:identifier: my_func {validationPath: &quot;my_func_usage.py&quot;}` def example(): my_func(100)</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
@@ -130,9 +136,14 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To display inline code within regular text, simply put it inside a backtick.",
+          "text" : "To display inline code within a text, put it inside a backtick.",
           "type" : "SimpleText"
         } ]
+      }, {
+        "lang" : "",
+        "snippet" : "Example: To check if an Exchange is closed, you need to use `ExchangeCalendar`\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -142,12 +153,6 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "ExchangeCalendar",
           "type" : "InlinedCode"
         } ]
-      }, {
-        "lang" : "markdown",
-        "snippet" : "# Backtick\n\nTo display inline code within regular text, simply put it inside a backtick. ",
-        "startLine" : "# Backtick",
-        "numberOfLines" : 4,
-        "type" : "Snippet"
       } ]
     }, {
       "title" : "From File",
@@ -162,13 +167,18 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "file",
           "type" : "InlinedCode"
         }, {
-          "text" : " backtick plugin.",
+          "text" : " inlined code plugin.",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
+        "snippet" : "Example: To access this feature, navigate to `:file: urlsample.txt`. \n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Example: To access this feature navigate to ",
+          "text" : "Example: To access this feature, navigate to ",
           "type" : "SimpleText"
         }, {
           "code" : "/my-app/feature-url",
@@ -177,15 +187,36 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : ".",
           "type" : "SimpleText"
         } ]
+      } ]
+    }, {
+      "title" : "Validated Identifier",
+      "id" : "validated-identifier",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "identifier",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names ",
+          "type" : "SimpleText"
+        } ]
       }, {
-        "lang" : "markdown",
-        "snippet" : "Example: To access this feature navigate to `:file: urlsample.txt`. ",
-        "startLine" : "To access this feature",
-        "numberOfLines" : 1,
+        "lang" : "",
+        "snippet" : "`:identifier: my_func {validationPath: \"my_func_usage.py\"}` ",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "py",
+        "snippet" : "def example():\n    my_func(100)",
+        "title" : "my_func_usage.py",
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1612992591538,
+    "lastModifiedTime" : 1624594087383,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Inlined Code Snippets",
@@ -199,32 +230,11 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "From File",
         "id" : "from-file"
+      }, {
+        "title" : "Validated Identifier",
+        "id" : "validated-identifier"
       } ]
     }
-  },
-  "footer" : {
-    "type" : "Footer",
-    "content" : [ {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
-        "type" : "SimpleText"
-      }, {
-        "url" : "https://github.com/testingisdocumenting/znai/issues",
-        "isFile" : false,
-        "type" : "Link",
-        "content" : [ {
-          "text" : "GitHub Issue",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "Contributions are welcome",
-        "type" : "SimpleText"
-      } ]
-    } ]
   }
 }), document.getElementById("znai"));
 /*-->*/

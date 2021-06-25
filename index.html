@@ -111,13 +111,15 @@
 
 <article>
 <a href="introduction/getting-started/">Getting Started</a>
-<a href="introduction/getting-started/#command-line-tool">Getting Started Command Line Tool</a>
 <a href="introduction/getting-started/#markdown">Getting Started Markdown</a>
-<a href="introduction/getting-started/#installation">Getting Started Installation</a>
+<a href="introduction/getting-started/#running-znai">Getting Started Running Znai</a>
+<a href="introduction/getting-started/#command-line">Getting Started Command Line</a>
+<a href="introduction/getting-started/#maven-plugin">Getting Started Maven Plugin</a>
 <a href="introduction/getting-started/#scaffolding">Getting Started Scaffolding</a>
-<a href="introduction/getting-started/#scaffolding-with-maven">Getting Started Scaffolding With Maven</a>
-<a href="introduction/getting-started/#preview">Getting Started Preview</a>
-<a href="introduction/getting-started/#deploy">Getting Started Deploy</a>
+<a href="introduction/getting-started/#preview-mode">Getting Started Preview Mode</a>
+<a href="introduction/getting-started/#static-site-generation">Getting Started Static Site Generation</a>
+<a href="introduction/getting-started/#github-pages">Getting Started GitHub Pages</a>
+<a href="introduction/getting-started/#on-site-central-hub-deployment">Getting Started On-site Central Hub Deployment</a>
 </article>
 
 <article>
@@ -207,7 +209,7 @@
 <a href="snippets/external-code-snippets/#wide-code">External Code Snippets Wide Code</a>
 <a href="snippets/external-code-snippets/#read-more">External Code Snippets Read More</a>
 <a href="snippets/external-code-snippets/#highlights">External Code Snippets Highlights</a>
-<a href="snippets/external-code-snippets/#limit">External Code Snippets Limit</a>
+<a href="snippets/external-code-snippets/#extract-snippets">External Code Snippets Extract Snippets</a>
 <a href="snippets/external-code-snippets/#callout-comments">External Code Snippets Callout Comments</a>
 <a href="snippets/external-code-snippets/#spoilers">External Code Snippets Spoilers</a>
 </article>
@@ -216,6 +218,7 @@
 <a href="snippets/inlined-code-snippets/">Inlined Code Snippets</a>
 <a href="snippets/inlined-code-snippets/#backtick">Inlined Code Snippets Backtick</a>
 <a href="snippets/inlined-code-snippets/#from-file">Inlined Code Snippets From File</a>
+<a href="snippets/inlined-code-snippets/#validated-identifier">Inlined Code Snippets Validated Identifier</a>
 </article>
 
 <article>
@@ -264,6 +267,12 @@
 <a href="snippets/groovy/#method-body">Groovy Method Body</a>
 <a href="snippets/groovy/#overloads">Groovy Overloads</a>
 <a href="snippets/groovy/#class-body">Groovy Class Body</a>
+</article>
+
+<article>
+<a href="snippets/python/">Python</a>
+<a href="snippets/python/#function-content">Python Function Content</a>
+<a href="snippets/python/#doc-string">Python Doc String</a>
 </article>
 
 <article>
@@ -318,13 +327,14 @@
 <a href="snippets/CLI/#output">CLI Output</a>
 <a href="snippets/CLI/#ansi-colors">CLI ANSI Colors</a>
 <a href="snippets/CLI/#title">CLI Title</a>
-<a href="snippets/CLI/#limit">CLI Limit</a>
+<a href="snippets/CLI/#extract-snippets">CLI Extract Snippets</a>
 <a href="snippets/CLI/#presentation-mode">CLI Presentation Mode</a>
 </article>
 
 <article>
 <a href="snippets/math/">Math</a>
-<a href="snippets/math/#latex">Math LATEX</a>
+<a href="snippets/math/#latex-block">Math LaTeX Block</a>
+<a href="snippets/math/#latex-inline">Math LaTeX Inline</a>
 </article>
 
 <article>
@@ -469,6 +479,7 @@
 <a href="visuals/image-annotations/">Image Annotations</a>
 <a href="visuals/image-annotations/#annotations-file">Image Annotations Annotations File</a>
 <a href="visuals/image-annotations/#integration-with-testing">Image Annotations Integration With Testing</a>
+<a href="visuals/image-annotations/#path-shortcut">Image Annotations Path Shortcut</a>
 <a href="visuals/image-annotations/#presentation-mode">Image Annotations Presentation Mode</a>
 </article>
 
@@ -510,13 +521,8 @@
 </article>
 
 <article>
-<a href="deployment/static-content/">Static Content</a>
-<a href="deployment/static-content/#build">Static Content Build</a>
-</article>
-
-<article>
-<a href="deployment/static-hosting/">Static Hosting</a>
-<a href="deployment/static-hosting/#github-pages">Static Hosting GitHub Pages</a>
+<a href="visuals/mermaid/">Mermaid</a>
+<a href="visuals/mermaid/#mermaid">Mermaid Mermaid</a>
 </article>
 
 <article>
@@ -554,9 +560,16 @@
 <a href="example-references/api/#book">Api Book</a>
 <a href="example-references/api/#query">Api Query</a>
 </article>
+
+<article>
+<a href="release-notes/2021/">2021 Releases</a>
+<a href="release-notes/2021/#151-future-release">2021 Releases 1.51 (Future Release)</a>
+<a href="release-notes/2021/#150">2021 Releases 1.50</a>
+</article>
 </section>
 </div>
 <!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
@@ -588,7 +601,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "url" : "introduction/what-is-this",
       "type" : "Redirect"
     } ],
-    "lastModifiedTime" : 1612992591538,
+    "lastModifiedTime" : 1624594087379,
     "tocItem" : {
       "sectionTitle" : "",
       "pageTitle" : "Znai",
@@ -598,30 +611,6 @@ ReactDOM.render(React.createElement(Documentation, {
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ ]
     }
-  },
-  "footer" : {
-    "type" : "Footer",
-    "content" : [ {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
-        "type" : "SimpleText"
-      }, {
-        "url" : "https://github.com/testingisdocumenting/znai/issues",
-        "isFile" : false,
-        "type" : "Link",
-        "content" : [ {
-          "text" : "GitHub Issue",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "Contributions are welcome",
-        "type" : "SimpleText"
-      } ]
-    } ]
   }
 }), document.getElementById("znai"));
 /*-->*/

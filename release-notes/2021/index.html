@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: 2021 Releases</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>1.51 (Future Release)</h1></header>
+<p>Explicit use of annotate:true to use matching visuals/image-annotations#path-shortcut image annotations file</p>
+</article>
+
+<article>
+<header><h1>1.50</h1></header>
+<p>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add snippets/python#function-content include-python to include function's content Rename paramsToHighlight -&gt; highlight for :include-cli-command: plugin Rename scaleRatio -&gt; scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/external-code-snippets#extract-snippets documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/external-code-snippets#extract-snippets snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added snippets/python#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View On GitHub"
+    },
+    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/issues"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "title" : "1.51 (Future Release)",
+      "id" : "151-future-release",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Explicit use of ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "annotate:true",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to use matching ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations#path-shortcut",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "image annotations file",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "title" : "1.50",
+      "id" : "150",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: clarify ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/introduction/getting-started",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Getting Started",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " documentation section",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "url" : "/znai/visuals/image-annotations",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image badge annotation",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " becomes transparent on hover",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/python#function-content",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include-python",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to include function's content",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Rename ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "paramsToHighlight",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " -> ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "highlight",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for ",
+              "type" : "SimpleText"
+            }, {
+              "code" : ":include-cli-command:",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " plugin",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Rename ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "scaleRatio",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " -> ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "scale",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for ",
+              "type" : "SimpleText"
+            }, {
+              "code" : ":include-image:",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " plugin",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add click to zoom image that was ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "fit: true",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Preview footer change detection",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "surroundedB",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to include-file like plugins: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/external-code-snippets#extract-snippets",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "documentaiton",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add inlined code snippet with automatic identifier validation by looking into a provided file: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/inlined-code-snippets#validated-identifier",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "documentaiton",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Validate JSON path for highlighting",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Validate XML path for highlighting",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Validate that ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/external-code-snippets#extract-snippets",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "snippets include/exclude",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " matches lines",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Prints port info when port is taken during preview",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "More permissive json parsing",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Added ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/python#doc-string",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include-python-doc",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to extract python docs as markdown text and add it to a page",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Enterprise file monitor validates monitor path",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: extra margin in ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "Columns Layout",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " when code snippets in both columns goes after a code snippet",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place,",
+              "type" : "SimpleText"
+            }, {
+              "type" : "SoftLineBreak"
+            }, {
+              "text" : "but was highlighting date time as the first change for pages that were last modified not in the same day.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "include-meta",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " does not override plugin specific meta anymore",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: restore scroll position on back button",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: XML alignment and remove extra empty line",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1624594087383,
+    "tocItem" : {
+      "sectionTitle" : "Release Notes",
+      "pageTitle" : "2021 Releases",
+      "pageMeta" : {
+        "title" : [ "2021 Releases" ]
+      },
+      "dirName" : "release-notes",
+      "fileName" : "2021",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "1.51 (Future Release)",
+        "id" : "151-future-release"
+      }, {
+        "title" : "1.50",
+        "id" : "150"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

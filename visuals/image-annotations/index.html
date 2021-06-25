@@ -86,12 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Annotations File</h1></header>
-<p>:include-image: word-toolbar.jpg {annotationsPath: 'annotations.json'} {&quot;shapes&quot;: [{&quot;type&quot;: &quot;arrow&quot;, &quot;id&quot;:&quot;a1&quot;, &quot;beginX&quot;: 200, &quot;beginY&quot;: 100, &quot;endX&quot;: 48, &quot;endY&quot;: 42, &quot;color&quot;: &quot;a&quot;, &quot;text&quot;: &quot;debug&quot;}, {&quot;type&quot;: &quot;rectangle&quot;, &quot;id&quot;:&quot;r1&quot;, &quot;x&quot;: 200, &quot;y&quot;: 50, &quot;width&quot;: 100, &quot;height&quot;: 40, &quot;color&quot;: &quot;b&quot;, &quot;text&quot;: &quot;debug&quot;}, {&quot;type&quot;: &quot;circle&quot;, &quot;id&quot;: &quot;c1&quot;, &quot;x&quot;: 350, &quot;y&quot;: 100, &quot;r&quot;: 30, &quot;color&quot;: &quot;c&quot;, &quot;text&quot;: &quot;text&quot;}]} There are different types of annotations:Circles Rectangles Arrows etc.</p>
+<p>:include-image: word-toolbar.jpg {annotationsPath: 'annotations.json'} {&quot;shapes&quot;: [{&quot;type&quot;: &quot;arrow&quot;, &quot;id&quot;:&quot;a1&quot;, &quot;beginX&quot;: 200, &quot;beginY&quot;: 100, &quot;endX&quot;: 48, &quot;endY&quot;: 42, &quot;color&quot;: &quot;a&quot;, &quot;text&quot;: &quot;debug&quot;}, {&quot;type&quot;: &quot;rectangle&quot;, &quot;id&quot;:&quot;r1&quot;, &quot;x&quot;: 200, &quot;y&quot;: 50, &quot;width&quot;: 100, &quot;height&quot;: 40, &quot;color&quot;: &quot;b&quot;, &quot;text&quot;: &quot;debug&quot;}, {&quot;type&quot;: &quot;circle&quot;, &quot;id&quot;: &quot;c1&quot;, &quot;x&quot;: 350, &quot;y&quot;: 100, &quot;r&quot;: 30, &quot;color&quot;: &quot;c&quot;, &quot;text&quot;: &quot;text&quot;}, {&quot;type&quot;: &quot;badge&quot;, &quot;id&quot;: &quot;b1&quot;, &quot;x&quot;: 350, &quot;y&quot;: 140, &quot;text&quot;: &quot;1&quot;}, {&quot;type&quot;: &quot;badge&quot;, &quot;id&quot;: &quot;b2&quot;, &quot;x&quot;: 380, &quot;y&quot;: 180, &quot;text&quot;: &quot;2&quot;} ]} There are different types of annotations:Circles Badges Rectangles Arrows etc.</p>
 </article>
 
 <article>
 <header><h1>Integration With Testing</h1></header>
 <p>It is possible to generate an annotations file by using UI testing framework.For example https://github.com/testingisdocumenting/webtau webtau automatically generates an annotations file in addition to capturing a screenshot.</p>
+</article>
+
+<article>
+<header><h1>Path Shortcut</h1></header>
+<p>You don't need to specify annotations path, if annotations file matches file name and path of the image and has json extension.Add annotate:true to automatically use matching annotations file :include-image: word-toolbar.jpg {annotate: true} {&quot;shapes&quot;: [{&quot;type&quot;: &quot;arrow&quot;, &quot;id&quot;:&quot;a1&quot;, &quot;beginX&quot;: 200, &quot;beginY&quot;: 100, &quot;endX&quot;: 48, &quot;endY&quot;: 42, &quot;color&quot;: &quot;a&quot;, &quot;text&quot;: &quot;debug&quot;}, {&quot;type&quot;: &quot;rectangle&quot;, &quot;id&quot;:&quot;r1&quot;, &quot;x&quot;: 200, &quot;y&quot;: 50, &quot;width&quot;: 100, &quot;height&quot;: 40, &quot;color&quot;: &quot;b&quot;, &quot;text&quot;: &quot;debug&quot;}, {&quot;type&quot;: &quot;circle&quot;, &quot;id&quot;: &quot;c1&quot;, &quot;x&quot;: 350, &quot;y&quot;: 100, &quot;r&quot;: 30, &quot;color&quot;: &quot;c&quot;, &quot;text&quot;: &quot;text&quot;}, {&quot;type&quot;: &quot;badge&quot;, &quot;id&quot;: &quot;b1&quot;, &quot;x&quot;: 350, &quot;y&quot;: 140, &quot;text&quot;: &quot;1&quot;}, {&quot;type&quot;: &quot;badge&quot;, &quot;id&quot;: &quot;b2&quot;, &quot;x&quot;: 380, &quot;y&quot;: 180, &quot;text&quot;: &quot;2&quot;} ]}</p>
 </article>
 
 <article>
@@ -101,6 +106,7 @@
 </section>
 </div>
 <!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
@@ -140,7 +146,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "annotationsPath" : "annotations.json",
         "imageSrc" : "/znai/visuals/word-toolbar.jpg",
-        "timestamp" : 1612992591558,
+        "timestamp" : 1624594087399,
         "shapes" : [ {
           "type" : "arrow",
           "id" : "a1",
@@ -167,13 +173,25 @@ ReactDOM.render(React.createElement(Documentation, {
           "r" : 30,
           "color" : "c",
           "text" : "text"
+        }, {
+          "type" : "badge",
+          "id" : "b1",
+          "x" : 350,
+          "y" : 140,
+          "text" : "1"
+        }, {
+          "type" : "badge",
+          "id" : "b2",
+          "x" : 380,
+          "y" : 180,
+          "text" : "2"
         } ],
         "width" : 833.0,
         "height" : 204.0,
         "type" : "AnnotatedImage"
       }, {
         "lang" : "json",
-        "snippet" : "{\"shapes\": [{\"type\": \"arrow\", \"id\":\"a1\",\n  \"beginX\": 200, \"beginY\": 100, \"endX\": 48, \"endY\": 42,\n  \"color\": \"a\", \"text\": \"debug\"},\n\n  {\"type\": \"rectangle\", \"id\":\"r1\",\n    \"x\": 200, \"y\": 50, \"width\": 100, \"height\": 40,\n    \"color\": \"b\", \"text\": \"debug\"},\n\n  {\"type\": \"circle\", \"id\": \"c1\",\n    \"x\": 350, \"y\": 100, \"r\": 30,\n    \"color\": \"c\", \"text\": \"text\"}]}",
+        "snippet" : "{\"shapes\": [{\"type\": \"arrow\", \"id\":\"a1\",\n  \"beginX\": 200, \"beginY\": 100, \"endX\": 48, \"endY\": 42,\n  \"color\": \"a\", \"text\": \"debug\"},\n\n  {\"type\": \"rectangle\", \"id\":\"r1\",\n    \"x\": 200, \"y\": 50, \"width\": 100, \"height\": 40,\n    \"color\": \"b\", \"text\": \"debug\"},\n\n  {\"type\": \"circle\", \"id\": \"c1\",\n    \"x\": 350, \"y\": 100, \"r\": 30,\n    \"color\": \"c\", \"text\": \"text\"},\n\n  {\"type\": \"badge\", \"id\": \"b1\",\n    \"x\": 350, \"y\": 140, \"text\": \"1\"},\n\n  {\"type\": \"badge\", \"id\": \"b2\",\n    \"x\": 380, \"y\": 180, \"text\": \"2\"}\n]}",
         "title" : "annotations.json",
         "type" : "Snippet"
       }, {
@@ -192,6 +210,15 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "Circles",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Badges",
               "type" : "SimpleText"
             } ]
           } ]
@@ -258,6 +285,84 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
+      "title" : "Path Shortcut",
+      "id" : "path-shortcut",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You don't need to specify annotations path, if annotations file matches file name and path of the image and",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "has ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "json",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " extension.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Add ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "annotate:true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to automatically use matching annotations file",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-image: word-toolbar.jpg {annotate: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "annotate" : true,
+        "imageSrc" : "/znai/visuals/word-toolbar.jpg",
+        "timestamp" : 1624594087399,
+        "shapes" : [ {
+          "type" : "arrow",
+          "id" : "a1",
+          "beginX" : 200,
+          "beginY" : 100,
+          "endX" : 48,
+          "endY" : 42,
+          "color" : "a",
+          "text" : "debug"
+        }, {
+          "type" : "rectangle",
+          "id" : "r1",
+          "x" : 200,
+          "y" : 50,
+          "width" : 100,
+          "height" : 40,
+          "color" : "b",
+          "text" : "debug"
+        }, {
+          "type" : "circle",
+          "id" : "c1",
+          "x" : 350,
+          "y" : 100,
+          "r" : 30,
+          "color" : "c",
+          "text" : "text"
+        } ],
+        "width" : 833.0,
+        "height" : 204.0,
+        "type" : "AnnotatedImage"
+      }, {
+        "lang" : "json",
+        "snippet" : "{\"shapes\": [{\"type\": \"arrow\", \"id\":\"a1\",\n  \"beginX\": 200, \"beginY\": 100, \"endX\": 48, \"endY\": 42,\n  \"color\": \"a\", \"text\": \"debug\"},\n\n  {\"type\": \"rectangle\", \"id\":\"r1\",\n    \"x\": 200, \"y\": 50, \"width\": 100, \"height\": 40,\n    \"color\": \"b\", \"text\": \"debug\"},\n\n  {\"type\": \"circle\", \"id\": \"c1\",\n    \"x\": 350, \"y\": 100, \"r\": 30,\n    \"color\": \"c\", \"text\": \"text\"},\n\n  {\"type\": \"badge\", \"id\": \"b1\",\n    \"x\": 350, \"y\": 140, \"text\": \"1\"},\n\n  {\"type\": \"badge\", \"id\": \"b2\",\n    \"x\": 380, \"y\": 180, \"text\": \"2\"}\n]}",
+        "title" : "word-toolbar.json",
+        "type" : "Snippet"
+      } ]
+    }, {
       "title" : "Presentation Mode",
       "id" : "presentation-mode",
       "type" : "Section",
@@ -274,7 +379,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1612992591554,
+    "lastModifiedTime" : 1624594087399,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Image Annotations",
@@ -289,34 +394,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Integration With Testing",
         "id" : "integration-with-testing"
       }, {
+        "title" : "Path Shortcut",
+        "id" : "path-shortcut"
+      }, {
         "title" : "Presentation Mode",
         "id" : "presentation-mode"
       } ]
     }
-  },
-  "footer" : {
-    "type" : "Footer",
-    "content" : [ {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
-        "type" : "SimpleText"
-      }, {
-        "url" : "https://github.com/testingisdocumenting/znai/issues",
-        "isFile" : false,
-        "type" : "Link",
-        "content" : [ {
-          "text" : "GitHub Issue",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "Contributions are welcome",
-        "type" : "SimpleText"
-      } ]
-    } ]
   }
 }), document.getElementById("znai"));
 /*-->*/

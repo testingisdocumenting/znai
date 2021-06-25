@@ -115,8 +115,8 @@
 </article>
 
 <article>
-<header><h1>Limit</h1></header>
-<p>Use startLine , endLine to limit the included content.If you have a file with embedded examples, you can use limit function to extract small samples by using marker lines. import market def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example: cancel trade market.cancel_trade('id') # example-end if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py {startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;, excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: &quot;import&quot;} :include-file: python-examples.py {includeRegexp: [&quot;import&quot;]} import market Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: &quot;# example&quot;} :include-file: python-examples.py {excludeRegexp: [&quot;# example&quot;]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade('id') if __name__ == &quot;__main__&quot;: main()</p>
+<header><h1>Extract Snippets</h1></header>
+<p>Use startLine , endLine to extract specific content by using marker lines. import market def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade('id') # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py {startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;, excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) Use surroundedBy and the same marker for start/end to streamline the snippets extract process :include-file: python-examples.py { title: &quot;extracted example with surroundedBy&quot;, surroundedBy: &quot;# example-cancel-trade&quot;} market.cancel_trade('id') Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: &quot;import&quot;} :include-file: python-examples.py {includeRegexp: [&quot;import&quot;]} import market Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: &quot;# example&quot;} :include-file: python-examples.py {excludeRegexp: [&quot;# example&quot;]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade('id') if __name__ == &quot;__main__&quot;: main()</p>
 </article>
 
 <article>
@@ -131,6 +131,7 @@
 </section>
 </div>
 <!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
@@ -572,8 +573,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     }, {
-      "title" : "Limit",
-      "id" : "limit",
+      "title" : "Extract Snippets",
+      "id" : "extract-snippets",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
@@ -590,18 +591,12 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "endLine",
           "type" : "InlinedCode"
         }, {
-          "text" : " to limit the included content.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "If you have a file with embedded examples, you can use limit function to extract small samples by using marker lines.",
+          "text" : " to extract specific content by using marker lines.",
           "type" : "SimpleText"
         } ]
       }, {
         "lang" : "py",
-        "snippet" : "import market\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example: cancel trade\n    market.cancel_trade('id')\n    # example-end\n\nif __name__  == \"__main__\":\n    main()",
+        "snippet" : "import market\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example-cancel-trade\n    market.cancel_trade('id')\n    # example-cancel-trade\n\nif __name__  == \"__main__\":\n    main()",
         "title" : "file with examples",
         "type" : "Snippet"
       }, {
@@ -664,6 +659,29 @@ ReactDOM.render(React.createElement(Documentation, {
         "startLine" : "example: book trade",
         "endLine" : "example-end",
         "excludeStartEnd" : true,
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "surroundedBy",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and the same marker for start/end to streamline the snippets extract process",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: python-examples.py {\n    title: \"extracted example with surroundedBy\",\n    surroundedBy: \"# example-cancel-trade\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "py",
+        "snippet" : "market.cancel_trade('id')",
+        "title" : "extracted example with surroundedBy",
+        "surroundedBy" : "# example-cancel-trade",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -814,7 +832,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1612992591538,
+    "lastModifiedTime" : 1624594087383,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
@@ -841,8 +859,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Highlights",
         "id" : "highlights"
       }, {
-        "title" : "Limit",
-        "id" : "limit"
+        "title" : "Extract Snippets",
+        "id" : "extract-snippets"
       }, {
         "title" : "Callout Comments",
         "id" : "callout-comments"
@@ -851,30 +869,6 @@ ReactDOM.render(React.createElement(Documentation, {
         "id" : "spoilers"
       } ]
     }
-  },
-  "footer" : {
-    "type" : "Footer",
-    "content" : [ {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
-        "type" : "SimpleText"
-      }, {
-        "url" : "https://github.com/testingisdocumenting/znai/issues",
-        "isFile" : false,
-        "type" : "Link",
-        "content" : [ {
-          "text" : "GitHub Issue",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "Contributions are welcome",
-        "type" : "SimpleText"
-      } ]
-    } ]
   }
 }), document.getElementById("znai"));
 /*-->*/

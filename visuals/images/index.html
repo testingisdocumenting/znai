@@ -106,21 +106,22 @@
 
 <article>
 <header><h1>Fit</h1></header>
-<p>An unfitted image will occupy all available space:To fit the image to the width of a text use the fit parameter. :include-image: books.jpg {fit: true}</p>
+<p>An unfitted image will occupy all available space:To fit the image to the width of a text use the fit parameter. :include-image: books.jpg {fit: true} Note: You can click on the image to zoom into it</p>
 </article>
 
 <article>
 <header><h1>Scale Ratio</h1></header>
-<p>To scale image up or down use scaleRatio option, 1 is default, 0.5 is half image size. :include-image: books.jpg {scaleRatio: 0.3}</p>
+<p>To scale image up or down use scale option, 1 is default, 0.5 is half image size. :include-image: books.jpg {scale: 0.3}</p>
 </article>
 
 <article>
 <header><h1>Align</h1></header>
-<p>Use align option to align images left or right. :include-image: books.jpg {align: &quot;left&quot;, scaleRatio: 0.3} :include-image: books.jpg {align: &quot;right&quot;, scaleRatio: 0.3}</p>
+<p>Use align option to align images left or right. :include-image: books.jpg {align: &quot;left&quot;, scale: 0.3} :include-image: books.jpg {align: &quot;right&quot;, scale: 0.3}</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
@@ -168,7 +169,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "destination" : "/znai/visuals/regular-image.png",
         "alt" : "alt text",
         "inlined" : false,
-        "timestamp" : 1612992591554,
+        "timestamp" : 1624594087399,
         "width" : 583,
         "height" : 385,
         "type" : "Image"
@@ -237,7 +238,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "caption" : "Title of an image",
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1612992591550,
+        "timestamp" : 1624594087395,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -257,7 +258,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "caption" : "Title of an image",
         "captionBottom" : true,
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1612992591550,
+        "timestamp" : 1624594087395,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -287,7 +288,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "border" : true,
         "imageSrc" : "/znai/visuals/regular-image.png",
-        "timestamp" : 1612992591554,
+        "timestamp" : 1624594087399,
         "shapes" : [ ],
         "width" : 583.0,
         "height" : 385.0,
@@ -305,7 +306,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1612992591550,
+        "timestamp" : 1624594087391,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -328,9 +329,15 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: You can click on the image to zoom into it",
+          "type" : "SimpleText"
+        } ]
+      }, {
         "fit" : true,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1612992591550,
+        "timestamp" : 1624594087391,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -346,7 +353,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "To scale image up or down use ",
           "type" : "SimpleText"
         }, {
-          "code" : "scaleRatio",
+          "code" : "scale",
           "type" : "InlinedCode"
         }, {
           "text" : " option, ",
@@ -366,13 +373,13 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-image: books.jpg {scaleRatio: 0.3}\n",
+        "snippet" : ":include-image: books.jpg {scale: 0.3}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
-        "scaleRatio" : 0.3,
+        "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1612992591550,
+        "timestamp" : 1624594087391,
         "shapes" : [ ],
         "width" : 509.4,
         "height" : 339.3,
@@ -396,35 +403,35 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-image: books.jpg {align: \"left\", scaleRatio: 0.3}\n",
+        "snippet" : ":include-image: books.jpg {align: \"left\", scale: 0.3}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "align" : "left",
-        "scaleRatio" : 0.3,
+        "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1612992591550,
+        "timestamp" : 1624594087391,
         "shapes" : [ ],
         "width" : 509.4,
         "height" : 339.3,
         "type" : "AnnotatedImage"
       }, {
         "lang" : "",
-        "snippet" : ":include-image: books.jpg {align: \"right\", scaleRatio: 0.3}\n",
+        "snippet" : ":include-image: books.jpg {align: \"right\", scale: 0.3}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "align" : "right",
-        "scaleRatio" : 0.3,
+        "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1612992591550,
+        "timestamp" : 1624594087391,
         "shapes" : [ ],
         "width" : 509.4,
         "height" : 339.3,
         "type" : "AnnotatedImage"
       } ]
     } ],
-    "lastModifiedTime" : 1612992591554,
+    "lastModifiedTime" : 1624594087399,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Images",
@@ -455,30 +462,6 @@ ReactDOM.render(React.createElement(Documentation, {
         "id" : "align"
       } ]
     }
-  },
-  "footer" : {
-    "type" : "Footer",
-    "content" : [ {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
-        "type" : "SimpleText"
-      }, {
-        "url" : "https://github.com/testingisdocumenting/znai/issues",
-        "isFile" : false,
-        "type" : "Link",
-        "content" : [ {
-          "text" : "GitHub Issue",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "Contributions are welcome",
-        "type" : "SimpleText"
-      } ]
-    } ]
   }
 }), document.getElementById("znai"));
 /*-->*/

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Static Hosting</title>
+<title>Znai: Mermaid</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,12 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>GitHub Pages</h1></header>
-<p>https://pages.github.com/ GitHub Pages is a great place to deploy Documentation static content.</p>
+<header><h1>Mermaid</h1></header>
+<p>Use https://mermaid-js.github.io/mermaid/#/ Mermaid to create diagrams using text and code, written in a Markdown style. Surround Mermaid expressions with a fenced block and specify mermaid as a language ```mermaid graph TD; A--&gt;B; A--&gt;C; B--&gt;C; ``` The result will be a diagram. graph TD; A--&gt;B; A--&gt;C; B--&gt;C; In presentation mode, rendered expressions will automatically scale to make use of the screen space.Note: Rendering is done by using https://mermaid-js.github.io/mermaid/#/ Mermaid library.</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
@@ -119,62 +120,89 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "GitHub Pages",
-      "id" : "github-pages",
+      "title" : "Mermaid",
+      "id" : "mermaid",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "url" : "https://pages.github.com/",
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://mermaid-js.github.io/mermaid/#/",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
-            "text" : "GitHub Pages",
+            "text" : "Mermaid",
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : " is a great place to deploy Documentation static content.",
+          "text" : " to create diagrams using text and code, written in a Markdown style.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Surround Mermaid expressions with a fenced block and specify ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "mermaid",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " as a language",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```mermaid\ngraph TD; A-->B; A-->C; B-->C;\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The result will be a diagram.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "mermaid" : "graph TD; A-->B; A-->C; B-->C;\n",
+        "type" : "Mermaid"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "In presentation mode, rendered expressions will automatically scale to make use of the screen space.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Rendering is done by using ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://mermaid-js.github.io/mermaid/#/",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Mermaid",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " library.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1612992591538,
+    "lastModifiedTime" : 1624594087399,
     "tocItem" : {
-      "sectionTitle" : "Deployment",
-      "pageTitle" : "Static Hosting",
+      "sectionTitle" : "Visuals",
+      "pageTitle" : "Mermaid",
       "pageMeta" : { },
-      "dirName" : "deployment",
-      "fileName" : "static-hosting",
+      "dirName" : "visuals",
+      "fileName" : "mermaid",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "GitHub Pages",
-        "id" : "github-pages"
+        "title" : "Mermaid",
+        "id" : "mermaid"
       } ]
     }
-  },
-  "footer" : {
-    "type" : "Footer",
-    "content" : [ {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
-        "type" : "SimpleText"
-      }, {
-        "url" : "https://github.com/testingisdocumenting/znai/issues",
-        "isFile" : false,
-        "type" : "Link",
-        "content" : [ {
-          "text" : "GitHub Issue",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "Contributions are welcome",
-        "type" : "SimpleText"
-      } ]
-    } ]
   }
 }), document.getElementById("znai"));
 /*-->*/

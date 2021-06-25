@@ -66,26 +66,32 @@ toc = [ {
     "fileName" : "getting-started",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Command Line Tool",
-      "id" : "command-line-tool"
-    }, {
       "title" : "Markdown",
       "id" : "markdown"
     }, {
-      "title" : "Installation",
-      "id" : "installation"
+      "title" : "Running Znai",
+      "id" : "running-znai"
+    }, {
+      "title" : "Command Line",
+      "id" : "command-line"
+    }, {
+      "title" : "Maven Plugin",
+      "id" : "maven-plugin"
     }, {
       "title" : "Scaffolding",
       "id" : "scaffolding"
     }, {
-      "title" : "Scaffolding With Maven",
-      "id" : "scaffolding-with-maven"
+      "title" : "Preview Mode",
+      "id" : "preview-mode"
     }, {
-      "title" : "Preview",
-      "id" : "preview"
+      "title" : "Static Site Generation",
+      "id" : "static-site-generation"
     }, {
-      "title" : "Deploy",
-      "id" : "deploy"
+      "title" : "GitHub Pages",
+      "id" : "github-pages"
+    }, {
+      "title" : "On-site Central Hub Deployment",
+      "id" : "on-site-central-hub-deployment"
     } ]
   } ]
 }, {
@@ -312,8 +318,8 @@ toc = [ {
       "title" : "Highlights",
       "id" : "highlights"
     }, {
-      "title" : "Limit",
-      "id" : "limit"
+      "title" : "Extract Snippets",
+      "id" : "extract-snippets"
     }, {
       "title" : "Callout Comments",
       "id" : "callout-comments"
@@ -334,6 +340,9 @@ toc = [ {
     }, {
       "title" : "From File",
       "id" : "from-file"
+    }, {
+      "title" : "Validated Identifier",
+      "id" : "validated-identifier"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -460,6 +469,20 @@ toc = [ {
     }, {
       "title" : "Class Body",
       "id" : "class-body"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Python",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "python",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Function Content",
+      "id" : "function-content"
+    }, {
+      "title" : "Doc String",
+      "id" : "doc-string"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -599,8 +622,8 @@ toc = [ {
       "title" : "Title",
       "id" : "title"
     }, {
-      "title" : "Limit",
-      "id" : "limit"
+      "title" : "Extract Snippets",
+      "id" : "extract-snippets"
     }, {
       "title" : "Presentation Mode",
       "id" : "presentation-mode"
@@ -613,8 +636,11 @@ toc = [ {
     "fileName" : "math",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "LATEX",
-      "id" : "latex"
+      "title" : "LaTeX Block",
+      "id" : "latex-block"
+    }, {
+      "title" : "LaTeX Inline",
+      "id" : "latex-inline"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -994,6 +1020,9 @@ toc = [ {
       "title" : "Integration With Testing",
       "id" : "integration-with-testing"
     }, {
+      "title" : "Path Shortcut",
+      "id" : "path-shortcut"
+    }, {
       "title" : "Presentation Mode",
       "id" : "presentation-mode"
     } ]
@@ -1092,31 +1121,16 @@ toc = [ {
       "title" : "Gantt Example",
       "id" : "gantt-example"
     } ]
-  } ]
-}, {
-  "sectionTitle" : "Deployment",
-  "dirName" : "deployment",
-  "items" : [ {
-    "sectionTitle" : "Deployment",
-    "pageTitle" : "Static Content",
-    "pageMeta" : { },
-    "dirName" : "deployment",
-    "fileName" : "static-content",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Build",
-      "id" : "build"
-    } ]
   }, {
-    "sectionTitle" : "Deployment",
-    "pageTitle" : "Static Hosting",
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Mermaid",
     "pageMeta" : { },
-    "dirName" : "deployment",
-    "fileName" : "static-hosting",
+    "dirName" : "visuals",
+    "fileName" : "mermaid",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "GitHub Pages",
-      "id" : "github-pages"
+      "title" : "Mermaid",
+      "id" : "mermaid"
     } ]
   } ]
 }, {
@@ -1213,6 +1227,26 @@ toc = [ {
     }, {
       "title" : "Query",
       "id" : "query"
+    } ]
+  } ]
+}, {
+  "sectionTitle" : "Release Notes",
+  "dirName" : "release-notes",
+  "items" : [ {
+    "sectionTitle" : "Release Notes",
+    "pageTitle" : "2021 Releases",
+    "pageMeta" : {
+      "title" : [ "2021 Releases" ]
+    },
+    "dirName" : "release-notes",
+    "fileName" : "2021",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "1.51 (Future Release)",
+      "id" : "151-future-release"
+    }, {
+      "title" : "1.50",
+      "id" : "150"
     } ]
   } ]
 } ]

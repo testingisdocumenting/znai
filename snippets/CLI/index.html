@@ -86,22 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Command Parameters</h1></header>
-<p>To bring attention to important parameters in your examples use the cli-command extension. :include-cli-command: my-super-command paramA --important-flag=true {paramsToHighlight: &quot;important&quot;} my-super-command paramA --important-flag=true Note: Parameter names gets matched as long as their names contain the passed value.</p>
+<p>To bring attention to important parameters in your examples use the cli-command extension. :include-cli-command: my-super-command paramA --important-flag=true {highlight: &quot;important&quot;} my-super-command paramA --important-flag=true Note: Parameter names gets matched as long as their names contain the passed value.</p>
 </article>
 
 <article>
 <header><h1>Long Commands</h1></header>
-<p>Long command lines will be automatically wrapped into multiple lines. another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Use threshold parameter to specify the max length of a line before splitting: :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { paramsToHighlight: [&quot;name&quot;, &quot;value&quot;], threshold: 30 } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Use splitAfter to force line splitting after specified parameter: :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { paramsToHighlight: [&quot;name&quot;, &quot;value&quot;], splitAfter: [&quot;--score=2&quot;, &quot;--value=8&quot;] } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Note: Unlike paramsToHighlight , splitAfter must be an exact match</p>
+<p>Long command lines will be automatically wrapped into multiple lines. another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Use threshold parameter to specify the max length of a line before splitting: :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { highlight: [&quot;name&quot;, &quot;value&quot;], threshold: 30 } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Use splitAfter to force line splitting after specified parameter: :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { highlight: [&quot;name&quot;, &quot;value&quot;], splitAfter: [&quot;--score=2&quot;, &quot;--value=8&quot;] } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Note: Unlike highlight , splitAfter must be an exact match</p>
 </article>
 
 <article>
 <header><h1>Handle Special Symbols</h1></header>
-<p>If your command contains special symbols, such as { , move the command definition to a command option :include-cli-command: {command: &quot;another-command {file1} [file2]&quot;, paramsToHighlight: [&quot;file1&quot;]} another-command {file1} [file2]</p>
+<p>If your command contains special symbols, such as { , move the command definition to a command option :include-cli-command: {command: &quot;another-command {file1} [file2]&quot;, highlight: [&quot;file1&quot;]} another-command {file1} [file2]</p>
 </article>
 
 <article>
 <header><h1>From File</h1></header>
-<p>You can read a command from file. :include-cli-command: {commandFile: &quot;cli/command.txt&quot;, paramsToHighlight: &quot;value&quot;} my-captured-command --param=10 --another=value my-captured-command --param=10 --another=value This option is useful for displaying a captured command during tests.</p>
+<p>You can read a command from file. :include-cli-command: {commandFile: &quot;cli/command.txt&quot;, highlight: &quot;value&quot;} my-captured-command --param=10 --another=value my-captured-command --param=10 --another=value This option is useful for displaying a captured command during tests.</p>
 </article>
 
 <article>
@@ -120,8 +120,8 @@
 </article>
 
 <article>
-<header><h1>Limit</h1></header>
-<p>Use startLine , endLine to limit the included content. :include-cli-output: cli/file-path-of-captured.out { title: &quot;Limited captured output&quot;, startLine: &quot;git push&quot;, endLine: &quot;master -&gt; master&quot; } Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master More on limit options in snippets/external-code-snippets#limit External Code Snippets.</p>
+<header><h1>Extract Snippets</h1></header>
+<p>Use startLine , endLine to extract specific content by using marker lines. :include-cli-output: cli/file-path-of-captured.out { title: &quot;Limited captured output&quot;, startLine: &quot;git push&quot;, endLine: &quot;master -&gt; master&quot; } Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master More on limit options in snippets/external-code-snippets#extract-snippets External Code Snippets.</p>
 </article>
 
 <article>
@@ -131,6 +131,7 @@
 </section>
 </div>
 <!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
@@ -176,7 +177,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-cli-command: my-super-command paramA --important-flag=true {paramsToHighlight: \"important\"}\n",
+        "snippet" : ":include-cli-command: my-super-command paramA --important-flag=true {highlight: \"important\"}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -218,7 +219,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {\n    paramsToHighlight: [\"name\", \"value\"], \n    threshold: 30\n}\n",
+        "snippet" : ":include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {\n    highlight: [\"name\", \"value\"], \n    threshold: 30\n}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -240,7 +241,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {\n    paramsToHighlight: [\"name\", \"value\"], \n    splitAfter: [\"--score=2\", \"--value=8\"]\n}\n",
+        "snippet" : ":include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {\n    highlight: [\"name\", \"value\"], \n    splitAfter: [\"--score=2\", \"--value=8\"]\n}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -254,7 +255,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Note: Unlike ",
           "type" : "SimpleText"
         }, {
-          "code" : "paramsToHighlight",
+          "code" : "highlight",
           "type" : "InlinedCode"
         }, {
           "text" : ", ",
@@ -291,7 +292,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-cli-command: {command: \"another-command {file1} [file2]\", paramsToHighlight: [\"file1\"]}\n",
+        "snippet" : ":include-cli-command: {command: \"another-command {file1} [file2]\", highlight: [\"file1\"]}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -311,7 +312,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-cli-command: {commandFile: \"cli/command.txt\", paramsToHighlight: \"value\"}\n",
+        "snippet" : ":include-cli-command: {commandFile: \"cli/command.txt\", highlight: \"value\"}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -433,8 +434,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliOutput"
       } ]
     }, {
-      "title" : "Limit",
-      "id" : "limit",
+      "title" : "Extract Snippets",
+      "id" : "extract-snippets",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
@@ -451,7 +452,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "endLine",
           "type" : "InlinedCode"
         }, {
-          "text" : " to limit the included content.",
+          "text" : " to extract specific content by using marker lines.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -471,7 +472,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "More on limit options in ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/snippets/external-code-snippets#limit",
+          "url" : "/znai/snippets/external-code-snippets#extract-snippets",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
@@ -541,7 +542,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliOutput"
       } ]
     } ],
-    "lastModifiedTime" : 1612992591538,
+    "lastModifiedTime" : 1624594087383,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "CLI",
@@ -571,37 +572,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Title",
         "id" : "title"
       }, {
-        "title" : "Limit",
-        "id" : "limit"
+        "title" : "Extract Snippets",
+        "id" : "extract-snippets"
       }, {
         "title" : "Presentation Mode",
         "id" : "presentation-mode"
       } ]
     }
-  },
-  "footer" : {
-    "type" : "Footer",
-    "content" : [ {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "If you have documentation suggestions, features or bugs to report, please create ",
-        "type" : "SimpleText"
-      }, {
-        "url" : "https://github.com/testingisdocumenting/znai/issues",
-        "isFile" : false,
-        "type" : "Link",
-        "content" : [ {
-          "text" : "GitHub Issue",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "Contributions are welcome",
-        "type" : "SimpleText"
-      } ]
-    } ]
   }
 }), document.getElementById("znai"));
 /*-->*/

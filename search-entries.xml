@@ -64,14 +64,6 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/introduction/getting-started#command-line-tool</url>
-    <fullTitle>Znai: Getting Started, Command Line Tool [Introduction]</fullTitle>
-    <text>
-      <text>Znai comes with a command line tool that:Generates a documentation website Runs auto-preview on a local server Runs documentation server</text>
-      <score>STANDARD</score>
-    </text>
-  </entry>
-  <entry>
     <url>/znai/introduction/getting-started#markdown</url>
     <fullTitle>Znai: Getting Started, Markdown [Introduction]</fullTitle>
     <text>
@@ -80,10 +72,26 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/introduction/getting-started#installation</url>
-    <fullTitle>Znai: Getting Started, Installation [Introduction]</fullTitle>
+    <url>/znai/introduction/getting-started#running-znai</url>
+    <fullTitle>Znai: Getting Started, Running Znai [Introduction]</fullTitle>
     <text>
-      <text>Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.48/znai-dist-1.48-znai.zip znai. Add it to your PATH . Note: https://brew.sh/ brew support is currently in progress.</text>
+      <text>Znai is available as #command-line Command Line #maven-plugin Maven Plugin Both command line and maven plugin lets you to build documentation website and also run preview server during documentation writing process.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/introduction/getting-started#command-line</url>
+    <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
+    <text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.50/znai-dist-1.50-znai.zip znai. Add it to your PATH . Brew Note: https://brew.sh/ brew support is currently in progress.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/introduction/getting-started#maven-plugin</url>
+    <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
+    <text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.50&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,23 +99,39 @@
     <url>/znai/introduction/getting-started#scaffolding</url>
     <fullTitle>Znai: Getting Started, Scaffolding [Introduction]</fullTitle>
     <text>
-      <text>To create a minimum set of files for your documentation execute znai --new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Use the znai-maven-plugin https://maven.apache.org/ Maven plugin to scaffold docs in Maven project. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.48&lt;/version> &lt;/plugin> mvn znai:new</text>
+      <text>To create a minimum set of files for your documentation execute CLI znai --new Maven mvn znai:new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Listed above directories and files will be generated in the current directory.</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/introduction/getting-started#preview</url>
-    <fullTitle>Znai: Getting Started, Preview [Introduction]</fullTitle>
+    <url>/znai/introduction/getting-started#preview-mode</url>
+    <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Navigate to the newly created directory. Start preview mode by running: znai --preview [--port port-number] Or using Maven: mvn znai:preview The command will output a URL that directs to your preview.Blue eye icon in the top right corner indicates that preview is on. Open any text editor, modify and save page-one.md file. Changes will be reflected in the browser. The default port number is 3333.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.50&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/introduction/getting-started#deploy</url>
-    <fullTitle>Znai: Getting Started, Deploy [Introduction]</fullTitle>
+    <url>/znai/introduction/getting-started#static-site-generation</url>
+    <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>See deployment/static-content deployment strategy</text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.50&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/introduction/getting-started#github-pages</url>
+    <fullTitle>Znai: Getting Started, GitHub Pages [Introduction]</fullTitle>
+    <text>
+      <text>To deploy to https://pages.github.com GitHub Pages use https://github.com/peaceiris/actions-gh-pages GitHub Pages Action.Here is an example of znai publishing its documentation to github pages - name: deploy documentation uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets.GITHUB_TOKEN }} publish_dir: ./znai-docs/target/znai</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/introduction/getting-started#on-site-central-hub-deployment</url>
+    <fullTitle>Znai: Getting Started, On-site Central Hub Deployment [Introduction]</fullTitle>
+    <text>
+      <text>Znai has enterprise mode that lets you run Documentation hub inside your organization. It is completely free and open sourced.Please create a GitHub issue if you want to try it out. I don't document it yet as I only have a couple of scenarios I tried it on, and I need more input.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -131,7 +155,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this rationale example getting-started flow structure landing names page-references lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets inlined-code-snippets api-parameters code-references java java-doc groovy typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points icons keyboard-shortcuts charts images image-annotations iframe SVG flow-diagrams PlantUml deployment static-content static-hosting synergy-with-testing java REST web-UI configuration basic example-references domain api Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this rationale example getting-started flow structure landing names page-references lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets inlined-code-snippets api-parameters code-references java java-doc groovy python typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points icons keyboard-shortcuts charts images image-annotations iframe SVG flow-diagrams PlantUml mermaid synergy-with-testing java REST web-UI configuration basic example-references domain api release-notes 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -139,7 +163,7 @@
     <url>/znai/flow/structure#sub-headings</url>
     <fullTitle>Znai: Structure, Sub Headings [Flow]</fullTitle>
     <text>
-      <text>Only a first level heading is treated as a first class citizen:Part of TOC Smallest unit of search result # First Class Citizen Nested sub headings only add visual distinction within a page. ## Sub heading content of sub heading ### Sub Sub heading content of sub sub heading content of sub headingcontent of sub sub heading</text>
+      <text>Only a first level heading is treated as a first class citizen:Part of TOC Smallest unit of search result # First Class Citizen Nested sub headings only add visual distinction within a page. ## Sub heading content of sub heading ### Sub Sub heading content of sub sub heading Sub heading content of sub heading Sub Sub heading content of sub sub heading</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -195,7 +219,7 @@
     <url>/znai/flow/page-references#links</url>
     <fullTitle>Znai: Page References, Links [Flow]</fullTitle>
     <text>
-      <text>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link.Linking to subsections is the same as linking to a top level section. flow/page-references#links-links-to-subsection Here is an example markdown [Here is an example](flow/page-references#links-links-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation PanelTo refer back to the top-level index page use: markdown [index page](/) [index page](/#link-to-subsection)</text>
+      <text>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link. Links to Subsection Linking to subsections is the same as linking to a top level section. flow/page-references#links-links-to-subsection Here is an example markdown [Here is an example](flow/page-references#links-links-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Index Page Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation PanelTo refer back to the top-level index page use: markdown [index page](/) [index page](/#link-to-subsection)</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -408,10 +432,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/external-code-snippets#limit</url>
-    <fullTitle>Znai: External Code Snippets, Limit [Snippets]</fullTitle>
+    <url>/znai/snippets/external-code-snippets#extract-snippets</url>
+    <fullTitle>Znai: External Code Snippets, Extract Snippets [Snippets]</fullTitle>
     <text>
-      <text>Use startLine , endLine to limit the included content.If you have a file with embedded examples, you can use limit function to extract small samples by using marker lines. import market def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example: cancel trade market.cancel_trade('id') # example-end if __name__ == "__main__": main() :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: "example: book trade", endLine: "example-end", excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: "import"} :include-file: python-examples.py {includeRegexp: ["import"]} import market Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: "# example"} :include-file: python-examples.py {excludeRegexp: ["# example"]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade('id') if __name__ == "__main__": main()</text>
+      <text>Use startLine , endLine to extract specific content by using marker lines. import market def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade('id') # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: "example: book trade", endLine: "example-end", excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) Use surroundedBy and the same marker for start/end to streamline the snippets extract process :include-file: python-examples.py { title: "extracted example with surroundedBy", surroundedBy: "# example-cancel-trade"} market.cancel_trade('id') Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: "import"} :include-file: python-examples.py {includeRegexp: ["import"]} import market Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: "# example"} :include-file: python-examples.py {excludeRegexp: ["# example"]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade('id') if __name__ == "__main__": main()</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -435,7 +459,7 @@
     <url>/znai/snippets/inlined-code-snippets#backtick</url>
     <fullTitle>Znai: Inlined Code Snippets, Backtick [Snippets]</fullTitle>
     <text>
-      <text>To display inline code within regular text, simply put it inside a backtick.Example: To check if an Exchange is closed, you need to use ExchangeCalendar # Backtick To display inline code within regular text, simply put it inside a backtick.</text>
+      <text>To display inline code within a text, put it inside a backtick. Example: To check if an Exchange is closed, you need to use `ExchangeCalendar` Example: To check if an Exchange is closed, you need to use ExchangeCalendar</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -443,7 +467,15 @@
     <url>/znai/snippets/inlined-code-snippets#from-file</url>
     <fullTitle>Znai: Inlined Code Snippets, From File [Snippets]</fullTitle>
     <text>
-      <text>To display inline code from a file, use the file backtick plugin.Example: To access this feature navigate to . Example: To access this feature navigate to `:file: urlsample.txt`.</text>
+      <text>To display inline code from a file, use the file inlined code plugin. Example: To access this feature, navigate to `:file: urlsample.txt`. Example: To access this feature, navigate to .</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/inlined-code-snippets#validated-identifier</url>
+    <fullTitle>Znai: Inlined Code Snippets, Validated Identifier [Snippets]</fullTitle>
+    <text>
+      <text>Use identifier inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names `:identifier: my_func {validationPath: "my_func_usage.py"}` def example(): my_func(100)</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -672,6 +704,22 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/python#function-content</url>
+    <fullTitle>Znai: Python, Function Content [Snippets]</fullTitle>
+    <text>
+      <text>Use include-python plugin to extract a function content. def my_func(): """ text inside my *func* doc * list one * list two """ return 2 + 2 class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") :include-python: python/example.py {entry: "Animal.says"} def says(self): """ animal **talks** `code` """ print("hello") Use bodyOnly to include only the content of a function without its signature. :include-python: python/example.py {entry: "Animal.says", bodyOnly: true} print("hello")</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/python#doc-string</url>
+    <fullTitle>Znai: Python, Doc String [Snippets]</fullTitle>
+    <text>
+      <text>Use include-python-doc plugin to embed py doc string with markdown into documentation def my_func(): """ text inside my *func* doc * list one * list two """ return 2 + 2 class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") :include-python-doc: python/example.py {entry: "my_func"} text inside my *func* doc * list one * list two :include-python-doc: python/example.py {entry: "Animal"} animal top level class doc string ``` code block ``` :include-python-doc: python/example.py {entry: "Animal.says"} animal **talks** `code`</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/typescript#parsing</url>
     <fullTitle>Znai: Typescript, Parsing [Snippets]</fullTitle>
     <text>
@@ -827,7 +875,7 @@
     <url>/znai/snippets/CLI#command-parameters</url>
     <fullTitle>Znai: CLI, Command Parameters [Snippets]</fullTitle>
     <text>
-      <text>To bring attention to important parameters in your examples use the cli-command extension. :include-cli-command: my-super-command paramA --important-flag=true {paramsToHighlight: "important"} my-super-command paramA --important-flag=true Note: Parameter names gets matched as long as their names contain the passed value.</text>
+      <text>To bring attention to important parameters in your examples use the cli-command extension. :include-cli-command: my-super-command paramA --important-flag=true {highlight: "important"} my-super-command paramA --important-flag=true Note: Parameter names gets matched as long as their names contain the passed value.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -835,7 +883,7 @@
     <url>/znai/snippets/CLI#long-commands</url>
     <fullTitle>Znai: CLI, Long Commands [Snippets]</fullTitle>
     <text>
-      <text>Long command lines will be automatically wrapped into multiple lines. another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Use threshold parameter to specify the max length of a line before splitting: :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { paramsToHighlight: ["name", "value"], threshold: 30 } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Use splitAfter to force line splitting after specified parameter: :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { paramsToHighlight: ["name", "value"], splitAfter: ["--score=2", "--value=8"] } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Note: Unlike paramsToHighlight , splitAfter must be an exact match</text>
+      <text>Long command lines will be automatically wrapped into multiple lines. another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Use threshold parameter to specify the max length of a line before splitting: :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { highlight: ["name", "value"], threshold: 30 } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Use splitAfter to force line splitting after specified parameter: :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { highlight: ["name", "value"], splitAfter: ["--score=2", "--value=8"] } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 Note: Unlike highlight , splitAfter must be an exact match</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -843,7 +891,7 @@
     <url>/znai/snippets/CLI#handle-special-symbols</url>
     <fullTitle>Znai: CLI, Handle Special Symbols [Snippets]</fullTitle>
     <text>
-      <text>If your command contains special symbols, such as { , move the command definition to a command option :include-cli-command: {command: "another-command {file1} [file2]", paramsToHighlight: ["file1"]} another-command {file1} [file2]</text>
+      <text>If your command contains special symbols, such as { , move the command definition to a command option :include-cli-command: {command: "another-command {file1} [file2]", highlight: ["file1"]} another-command {file1} [file2]</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -851,7 +899,7 @@
     <url>/znai/snippets/CLI#from-file</url>
     <fullTitle>Znai: CLI, From File [Snippets]</fullTitle>
     <text>
-      <text>You can read a command from file. :include-cli-command: {commandFile: "cli/command.txt", paramsToHighlight: "value"} my-captured-command --param=10 --another=value my-captured-command --param=10 --another=value This option is useful for displaying a captured command during tests.</text>
+      <text>You can read a command from file. :include-cli-command: {commandFile: "cli/command.txt", highlight: "value"} my-captured-command --param=10 --another=value my-captured-command --param=10 --another=value This option is useful for displaying a captured command during tests.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -880,10 +928,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/CLI#limit</url>
-    <fullTitle>Znai: CLI, Limit [Snippets]</fullTitle>
+    <url>/znai/snippets/CLI#extract-snippets</url>
+    <fullTitle>Znai: CLI, Extract Snippets [Snippets]</fullTitle>
     <text>
-      <text>Use startLine , endLine to limit the included content. :include-cli-output: cli/file-path-of-captured.out { title: "Limited captured output", startLine: "git push", endLine: "master -> master" } Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master More on limit options in snippets/external-code-snippets#limit External Code Snippets.</text>
+      <text>Use startLine , endLine to extract specific content by using marker lines. :include-cli-output: cli/file-path-of-captured.out { title: "Limited captured output", startLine: "git push", endLine: "master -> master" } Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master More on limit options in snippets/external-code-snippets#extract-snippets External Code Snippets.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -896,10 +944,18 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/math#latex</url>
-    <fullTitle>Znai: Math, LATEX [Snippets]</fullTitle>
+    <url>/znai/snippets/math#latex-block</url>
+    <fullTitle>Znai: Math, LaTeX Block [Snippets]</fullTitle>
     <text>
-      <text>To render math you can use https://en.wikibooks.org/wiki/LaTeX/Mathematics LaTeX math expressions. Surround LaTeX expression with fenced block and specify latex as a language ```latex \forall x \in X, \quad \exists y \leq \epsilon ``` The result will be a following math expression. \forall x \in X, \quad \exists y \leq \epsilon In presentation mode, rendered expressions will automatically scale to make use of the screen space.Note: Rendering is done by using https://github.com/Khan/KaTeX KaTeX library. And is using https://github.com/Khan/KaTeX KaTeX fonts.</text>
+      <text>To render math you can use https://en.wikibooks.org/wiki/LaTeX/Mathematics LaTeX math expressions. Surround LaTeX expression with fenced block and specify latex as a language ```latex \forall x \in X, \quad \exists y \leq \epsilon ``` The result will be a following math expression. \forall x \in X, \quad \exists y \leq \epsilon In presentation mode, rendered expressions will automatically scale to make use of the screen space.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/math#latex-inline</url>
+    <fullTitle>Znai: Math, LaTeX Inline [Snippets]</fullTitle>
+    <text>
+      <text>Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON parameters are used to allow LaTeX braces to be parsed correctly. It holds that `:latex: {src: "\\frac{1}{2} &lt; \\sqrt{2}"}`. The result will be a following math expression.It holds that .Note: Rendering is done by using https://github.com/Khan/KaTeX KaTeX library. And is using https://github.com/Khan/KaTeX KaTeX fonts.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -931,7 +987,7 @@
     <url>/znai/snippets/markdown#single-markdown-file</url>
     <fullTitle>Znai: Markdown, Single Markdown File [Snippets]</fullTitle>
     <text>
-      <text>To reuse Markdown in several places without duplication, use the include-markdown plugin. :include-markdown: markdown-dir/md-to-include.md This markdown, and the sub-heading above, were included using the include-markdown plugin. Super easy.</text>
+      <text>To reuse Markdown in several places without duplication, use the include-markdown plugin. :include-markdown: markdown-dir/md-to-include.md Included Markdown This markdown, and the sub-heading above, were included using the include-markdown plugin. Super easy.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -939,7 +995,7 @@
     <url>/znai/snippets/markdown#multiple-markdown-files</url>
     <fullTitle>Znai: Markdown, Multiple Markdown Files [Snippets]</fullTitle>
     <text>
-      <text>You can also include all the Markdown files within a directory by using include-markdowns .This plugin can be used to generate release notes or an FAQ page. :include-markdowns: markdown-dir This markdown, and the sub-heading above, were included using the include-markdown plugin. Super easy. This markdown, and the sub-hed above, were included using the include-markdowns plugin. Please notice the s. This markdown, and the sub-hed above, were included using the include-markdowns plugin. Please notice the s. bash $ command specific to external Note: include-markdowns displays the files of the specified directory based on the filename, in alphabetical order.</text>
+      <text>You can also include all the Markdown files within a directory by using include-markdowns .This plugin can be used to generate release notes or an FAQ page. :include-markdowns: markdown-dir Included Markdown This markdown, and the sub-heading above, were included using the include-markdown plugin. Super easy. Included Markdown 3 This markdown, and the sub-hed above, were included using the include-markdowns plugin. Please notice the s. Included Markdown 2 This markdown, and the sub-hed above, were included using the include-markdowns plugin. Please notice the s. bash $ command specific to external Note: include-markdowns displays the files of the specified directory based on the filename, in alphabetical order.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1355,7 +1411,7 @@
     <url>/znai/visuals/icons#colors</url>
     <fullTitle>Znai: Icons, Colors [Visuals]</fullTitle>
     <text>
-      <text>Use stroke parameter to set outline color. * `:icon: time {stroke: 'green'}` stroke: `green` * `:icon: cloud {stroke: 'blue'}` stroke: `blue` * `:icon: settings {stroke: 'yellow'}` stroke: `yellow` * `:icon: x-octagon {stroke: 'red'}` stroke: `red` stroke: green stroke: blue stroke: yellow stroke: red Use stroke parameter to set fill color. fill: red fill: red , stroke: 'black' Note: default stroke color is a text color, which may not look good in Dark theme. Use black color explicitly if you want the stroke color to be black in both Light and Dark themes.</text>
+      <text>Stroke Use stroke parameter to set outline color. * `:icon: time {stroke: 'green'}` stroke: `green` * `:icon: cloud {stroke: 'blue'}` stroke: `blue` * `:icon: settings {stroke: 'yellow'}` stroke: `yellow` * `:icon: x-octagon {stroke: 'red'}` stroke: `red` stroke: green stroke: blue stroke: yellow stroke: red Fill Use stroke parameter to set fill color. fill: red fill: red , stroke: 'black' Note: default stroke color is a text color, which may not look good in Dark theme. Use black color explicitly if you want the stroke color to be black in both Light and Dark themes.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1451,7 +1507,7 @@
     <url>/znai/visuals/images#fit</url>
     <fullTitle>Znai: Images, Fit [Visuals]</fullTitle>
     <text>
-      <text>An unfitted image will occupy all available space:To fit the image to the width of a text use the fit parameter. :include-image: books.jpg {fit: true}</text>
+      <text>An unfitted image will occupy all available space:To fit the image to the width of a text use the fit parameter. :include-image: books.jpg {fit: true} Note: You can click on the image to zoom into it</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1459,7 +1515,7 @@
     <url>/znai/visuals/images#scale-ratio</url>
     <fullTitle>Znai: Images, Scale Ratio [Visuals]</fullTitle>
     <text>
-      <text>To scale image up or down use scaleRatio option, 1 is default, 0.5 is half image size. :include-image: books.jpg {scaleRatio: 0.3}</text>
+      <text>To scale image up or down use scale option, 1 is default, 0.5 is half image size. :include-image: books.jpg {scale: 0.3}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1467,7 +1523,7 @@
     <url>/znai/visuals/images#align</url>
     <fullTitle>Znai: Images, Align [Visuals]</fullTitle>
     <text>
-      <text>Use align option to align images left or right. :include-image: books.jpg {align: "left", scaleRatio: 0.3} :include-image: books.jpg {align: "right", scaleRatio: 0.3}</text>
+      <text>Use align option to align images left or right. :include-image: books.jpg {align: "left", scale: 0.3} :include-image: books.jpg {align: "right", scale: 0.3}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1475,7 +1531,7 @@
     <url>/znai/visuals/image-annotations#annotations-file</url>
     <fullTitle>Znai: Image Annotations, Annotations File [Visuals]</fullTitle>
     <text>
-      <text>:include-image: word-toolbar.jpg {annotationsPath: 'annotations.json'} {"shapes": [{"type": "arrow", "id":"a1", "beginX": 200, "beginY": 100, "endX": 48, "endY": 42, "color": "a", "text": "debug"}, {"type": "rectangle", "id":"r1", "x": 200, "y": 50, "width": 100, "height": 40, "color": "b", "text": "debug"}, {"type": "circle", "id": "c1", "x": 350, "y": 100, "r": 30, "color": "c", "text": "text"}]} There are different types of annotations:Circles Rectangles Arrows etc.</text>
+      <text>:include-image: word-toolbar.jpg {annotationsPath: 'annotations.json'} {"shapes": [{"type": "arrow", "id":"a1", "beginX": 200, "beginY": 100, "endX": 48, "endY": 42, "color": "a", "text": "debug"}, {"type": "rectangle", "id":"r1", "x": 200, "y": 50, "width": 100, "height": 40, "color": "b", "text": "debug"}, {"type": "circle", "id": "c1", "x": 350, "y": 100, "r": 30, "color": "c", "text": "text"}, {"type": "badge", "id": "b1", "x": 350, "y": 140, "text": "1"}, {"type": "badge", "id": "b2", "x": 380, "y": 180, "text": "2"} ]} There are different types of annotations:Circles Badges Rectangles Arrows etc.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1484,6 +1540,14 @@
     <fullTitle>Znai: Image Annotations, Integration With Testing [Visuals]</fullTitle>
     <text>
       <text>It is possible to generate an annotations file by using UI testing framework.For example https://github.com/testingisdocumenting/webtau webtau automatically generates an annotations file in addition to capturing a screenshot.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/image-annotations#path-shortcut</url>
+    <fullTitle>Znai: Image Annotations, Path Shortcut [Visuals]</fullTitle>
+    <text>
+      <text>You don't need to specify annotations path, if annotations file matches file name and path of the image and has json extension.Add annotate:true to automatically use matching annotations file :include-image: word-toolbar.jpg {annotate: true} {"shapes": [{"type": "arrow", "id":"a1", "beginX": 200, "beginY": 100, "endX": 48, "endY": 42, "color": "a", "text": "debug"}, {"type": "rectangle", "id":"r1", "x": 200, "y": 50, "width": 100, "height": 40, "color": "b", "text": "debug"}, {"type": "circle", "id": "c1", "x": 350, "y": 100, "r": 30, "color": "c", "text": "text"}, {"type": "badge", "id": "b1", "x": 350, "y": 140, "text": "1"}, {"type": "badge", "id": "b2", "x": 380, "y": 180, "text": "2"} ]}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1664,18 +1728,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/deployment/static-content#build</url>
-    <fullTitle>Znai: Static Content, Build [Deployment]</fullTitle>
+    <url>/znai/visuals/mermaid#mermaid</url>
+    <fullTitle>Znai: Mermaid, Mermaid [Visuals]</fullTitle>
     <text>
-      <text>To generate static content for deployment use: znai --doc-id my-docs --deploy /path/to/static-content Using Maven: &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.48&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin> mvn znai:build</text>
-      <score>STANDARD</score>
-    </text>
-  </entry>
-  <entry>
-    <url>/znai/deployment/static-hosting#github-pages</url>
-    <fullTitle>Znai: Static Hosting, GitHub Pages [Deployment]</fullTitle>
-    <text>
-      <text>https://pages.github.com/ GitHub Pages is a great place to deploy Documentation static content.</text>
+      <text>Use https://mermaid-js.github.io/mermaid/#/ Mermaid to create diagrams using text and code, written in a Markdown style. Surround Mermaid expressions with a fenced block and specify mermaid as a language ```mermaid graph TD; A-->B; A-->C; B-->C; ``` The result will be a diagram. graph TD; A-->B; A-->C; B-->C; In presentation mode, rendered expressions will automatically scale to make use of the screen space.Note: Rendering is done by using https://mermaid-js.github.io/mermaid/#/ Mermaid library.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1683,7 +1739,7 @@
     <url>/znai/synergy-with-testing/java#table-data</url>
     <fullTitle>Znai: Java, Table Data [Synergy With Testing]</fullTitle>
     <text>
-      <text>Your business logic tests can greatly improve maintainability of your documentation. The example below tests what account types are allowed to perform Trading Activities. package org.testingisdocumenting.testing.examples import org.testingisdocumenting.webtau.data.table.TableData import org.testingisdocumenting.webtau.documentation.DocumentationArtifacts import org.junit.Test class TestToDocExample { @Test void shouldRestrictAccountsActivity() { def rules = ["Account Type" | "Operation" | "Restriction"] { _________________________________________________ "SPB3" | "Buy Options" | "weekends only" "TR" | "Sell Futures" | "except holidays" "BOSS" | "Buy Stocks" | "none" } validateRules(rules) } private static void validateRules(TableData rules) { DocumentationArtifacts.create(TestToDocExample, "account-rules.json", rules.toJson()) } } As part of validation of account types, the test also captures data that was used for testing. We can refer to this data later in our documentation by using the layout/tables include-table plugin :include-table: account-rules.json Your test data and user-facing documentation is now linked. Account Type Operation Restriction SPB3 Buy Options weekends only TR Sell Futures except holidays BOSS Buy Stocks none</text>
+      <text>Your business logic tests can greatly improve maintainability of your documentation. The example below tests what account types are allowed to perform Trading Activities. package org.testingisdocumenting.testing.examples import org.junit.Test import org.testingisdocumenting.webtau.data.table.TableData import static org.testingisdocumenting.webtau.WebTauCore.* class TestToDocExample { @Test void shouldRestrictAccountsActivity() { def rules = ["Account Type" | "Operation" | "Restriction"] { _________________________________________________ "SPB3" | "Buy Options" | "weekends only" "TR" | "Sell Futures" | "except holidays" "BOSS" | "Buy Stocks" | "none" } validateRules(rules) } private static void validateRules(TableData rules) { doc.capture("account-rules", rules) } } As part of validation of account types, the test also captures data that was used for testing. We can refer to this data later in our documentation by using the layout/tables include-table plugin :include-table: account-rules.json Your test data and user-facing documentation is now linked. Account Type Operation Restriction SPB3 Buy Options weekends only TR Sell Futures except holidays BOSS Buy Stocks none</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1747,7 +1803,7 @@
     <url>/znai/example-references/domain#transaction</url>
     <fullTitle>Znai: Domain, Transaction [Example References]</fullTitle>
     <text>
-      <text>Transaction reference placeholderTransaction buy placeholderTransaction sell placeholder</text>
+      <text>Transaction reference placeholder Buy Transaction buy placeholder Sell Transaction sell placeholder</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1772,6 +1828,22 @@
     <fullTitle>Znai: Api, Query [Example References]</fullTitle>
     <text>
       <text>Lower level explanation of fapi.query</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2021#151-future-release</url>
+    <fullTitle>Znai: 2021 Releases, 1.51 (Future Release) [Release Notes]</fullTitle>
+    <text>
+      <text>Explicit use of annotate:true to use matching visuals/image-annotations#path-shortcut image annotations file</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2021#150</url>
+    <fullTitle>Znai: 2021 Releases, 1.50 [Release Notes]</fullTitle>
+    <text>
+      <text>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add snippets/python#function-content include-python to include function's content Rename paramsToHighlight -> highlight for :include-cli-command: plugin Rename scaleRatio -> scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/external-code-snippets#extract-snippets documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/external-code-snippets#extract-snippets snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added snippets/python#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</text>
       <score>STANDARD</score>
     </text>
   </entry>
