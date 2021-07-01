@@ -59,7 +59,7 @@ def extract_body_only(node):
 
 
 def is_py_doc(node):
-    if isinstance(node.value, ast.Constant) and not hasattr(node, "targets"):
+    if hasattr(node, "value") and isinstance(node.value, ast.Constant) and not hasattr(node, "targets"):
         return True
 
     return False
