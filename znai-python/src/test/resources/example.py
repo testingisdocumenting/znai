@@ -12,6 +12,22 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+def a_method():
+    """
+    This method does stuff
+    :return: nothing
+    """
+    pass
+
+
+class AClass:
+    """
+    This class does things.
+    """
+    def foo(self):
+        pass
+
+
 def func_no_docs():
     a = 2
     b = 3
