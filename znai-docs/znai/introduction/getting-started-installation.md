@@ -4,4 +4,6 @@
 
 ## Brew 
 
-Note: [`brew`](https://brew.sh/) support is currently in progress. 
+```
+brew install testingisdocumenting/brew/znai
+```
