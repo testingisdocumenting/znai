@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,12 +30,12 @@ class GraphvizEngineTest {
         def engine = new GraphvizEngine(shapeConfig).registerRuntime(dot)
 
          def diagram = engine.diagramFromGv("dot", "id", """digraph Simple {
-    main [label="mn [world]"];
+    "main-bridge" [label="mn [world]"];
     server [label="server [a]"];
 
-    server -> main;
+    server -> "main-bridge";
 }""")
 
-        assert diagram.stylesByNodeId == [main: ['world'], server: ['a']]
+        assert diagram.stylesByNodeId == ['main-bridge': ['world'], server: ['a']]
     }
 }
