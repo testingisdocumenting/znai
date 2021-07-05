@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +16,8 @@
  */
 
 package org.testingisdocumenting.znai.diagrams.graphviz.gen;
+
+import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -157,7 +160,7 @@ public class GraphvizFromJsonGen {
     }
 
     private String generateNode(DiagramNode node) {
-        return node.getId() + " [label=\"" + generateNodeLabel(node) + "\"" +
+        return StringUtils.wrapInDoubleQuotes(node.getId()) + " [label=\"" + generateNodeLabel(node) + "\"" +
                 generateSizeAttributesIfRequired(node) + "];";
     }
 
@@ -201,7 +204,8 @@ public class GraphvizFromJsonGen {
     }
 
     private String generateEdge(DiagramEdge edge) {
-        return edge.getFromId() + " -> " + edge.getToId() +
+        return StringUtils.wrapInDoubleQuotes(edge.getFromId()) + " -> " +
+                StringUtils.wrapInDoubleQuotes(edge.getToId()) +
                 (!edge.getDirection().isEmpty() ? "[dir=" + edge.getDirection() + "];" : ";");
     }
 

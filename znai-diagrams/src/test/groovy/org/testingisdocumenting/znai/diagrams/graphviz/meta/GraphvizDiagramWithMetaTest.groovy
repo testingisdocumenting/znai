@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,18 +26,18 @@ class GraphvizDiagramWithMetaTest {
     @Test
     void "should extract styles based on labels"() {
         def diagram = GraphvizDiagramWithMeta.create(shapeConfig, """digraph Simple {
-    main [label="mn [a b]"];
+    "main-entry" [label="mn [a b]"];
     server [label="server [a]"];
 
-    main -> server;
+    "main-entry" -> server;
 }
 """)
-        assert diagram.stylesById == [main: ['a', 'b'], server: ['a']]
+        assert diagram.stylesById == ["main-entry": ['a', 'b'], server: ['a']]
         Assert.assertEquals("digraph Simple {\n" +
-                "    main [label=\"mn\"];\n" +
-                "    server [label=\"server\"];\n" +
+                "    \"main-entry\" [label=\"mn\"];\n" +
+                "    \"server\" [label=\"server\"];\n" +
                 "\n" +
-                "    main -> server;\n" +
+                "    \"main-entry\" -> server;\n" +
                 "}", diagram.getPreprocessed())
     }
 
@@ -44,6 +45,6 @@ class GraphvizDiagramWithMetaTest {
     void "should add shape information for database style"() {
         def diagram = GraphvizDiagramWithMeta.create(shapeConfig, """main [label="mn [person a]"];""")
 
-        Assert.assertEquals("main [label=\"mn\",shape=octagon; width=1; height=2; fixedsize=true];", diagram.getPreprocessed())
+        Assert.assertEquals("\"main\" [label=\"mn\",shape=octagon; width=1; height=2; fixedsize=true];", diagram.getPreprocessed())
     }
 }

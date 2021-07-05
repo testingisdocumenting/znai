@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +18,7 @@
 package org.testingisdocumenting.znai.diagrams.graphviz.meta;
 
 import org.testingisdocumenting.znai.utils.RegexpUtils;
+import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -33,7 +35,7 @@ public class GraphvizDiagramWithMeta {
     private final String preprocessed;
     private final String[] contentLines;
     private final Map<String, List<String>> stylesById;
-    private GraphvizShapeConfig metaConfig;
+    private final GraphvizShapeConfig metaConfig;
 
     public static GraphvizDiagramWithMeta create(GraphvizShapeConfig metaConfig, String diagramContent) {
         return new GraphvizDiagramWithMeta(metaConfig, diagramContent);
@@ -61,7 +63,7 @@ public class GraphvizDiagramWithMeta {
     }
 
     private String replaceAndExtractMeta(Matcher m) {
-        String id = m.group(1);
+        String id = StringUtils.removeQuotes(m.group(1));
         String label = m.group(2);
 
         List<String> styles = extractStyles(label);
@@ -72,7 +74,8 @@ public class GraphvizDiagramWithMeta {
             additionalProps = "," + additionalProps;
         }
 
-        return id + " [label=\"" + removeMeta(label) + "\"" + additionalProps + "];";
+        return StringUtils.wrapInDoubleQuotes(id) +
+                " [label=\"" + removeMeta(label) + "\"" + additionalProps + "];";
     }
 
     private String removeMeta(String label) {

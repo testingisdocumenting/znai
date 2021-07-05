@@ -11,7 +11,7 @@
       "shape": "database"
     },
     {
-      "id": "anotherDb",
+      "id": "another-db",
       "label": "three input",
       "shape": "database-bottom-label"
     },
@@ -36,7 +36,7 @@
     ["researcher", "processor"],
     ["researcher", "config"],
     ["db", "processor"],
-    ["anotherDb", "processor"],
+    ["another-db", "processor"],
     ["config", "outcome"],
     ["processor", "outcome"]
   ]

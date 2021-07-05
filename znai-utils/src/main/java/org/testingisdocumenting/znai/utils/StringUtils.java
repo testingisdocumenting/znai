@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -80,6 +81,23 @@ public class StringUtils {
                 "");
     }
 
+    public static String removeQuotes(String text) {
+        if ((text.startsWith("\"") || text.startsWith("'")) &&
+                text.endsWith("\"") || text.endsWith("'")) {
+            return text.substring(1, text.length() - 1);
+        }
+
+        return text;
+    }
+
+    public static String wrapInDoubleQuotes(String text) {
+        if (text.startsWith("\"") && text.endsWith("\"")) {
+            return text;
+        }
+
+        return "\"" + text + "\"";
+    }
+
     private static String removeIndentation(String line, Integer indentation) {
         if (line.trim().isEmpty()) {
             return line;
@@ -96,7 +114,7 @@ public class StringUtils {
         int b = firstNonEmptyLineIdx(lines);
         int e = firstFromEndNonEmptyLineIdx(lines);
 
-        return lines.subList(b > 0 ? b : 0, e > 0 ? e + 1 : lines.size());
+        return lines.subList(Math.max(b, 0), e > 0 ? e + 1 : lines.size());
     }
 
     private static int firstNonEmptyLineIdx(List<String> lines) {
@@ -118,5 +136,4 @@ public class StringUtils {
 
         return -1;
     }
-
 }
