@@ -42,11 +42,17 @@ def function_to_dict(func_node):
 
 
 def extract_content(node):
+    if not hasattr(node, "end_lineno"):
+        return None
+
     global content_lines
     return "\n".join(content_lines[(node.lineno - 1):node.end_lineno])
 
 
 def extract_body_only(node):
+    if not hasattr(node, "end_lineno"):
+        return None
+
     # skip py doc if present
     start_idx = 1 if is_py_doc(node.body[0]) else 0
     end_idx = len(node.body) - 1
