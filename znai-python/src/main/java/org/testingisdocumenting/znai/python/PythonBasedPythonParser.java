@@ -56,8 +56,9 @@ public class PythonBasedPythonParser {
 
         boolean success = (boolean) parserResponse.get("success");
         if (!success) {
-            System.out.println(parserResponse.get("error"));
-            throw new RuntimeException("Error from python parser");
+            String error = (String) parserResponse.get("error");
+            System.out.println(error);
+            throw new RuntimeException("Error from python parser: " + error);
         }
 
         List<String> warnings = (List<String>) parserResponse.get("warnings");
