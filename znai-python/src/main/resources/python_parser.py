@@ -121,7 +121,7 @@ while True:
     except:
         error = traceback.format_exc()
 
-    success = error is not None
+    success = error is None
     result = {
         "success": success,
         "warnings": list(warnings),
