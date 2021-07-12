@@ -22,18 +22,18 @@ import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 class PythonDocParamsIncludePluginTest {
     @Test
     void "should render python doc params as api params"() {
-        def props = resultingProps('example.py', '{entry: "Animal.says"}')
+        def props = resultingProps('pydoc-params.py', '{entry: "my_func"}')
 
         def expectedProps = [
-                parameters: [[name: 'message', type: 'string', anchorId: 'Animal_says_message',
-                              description: [[markdown: 'message to say', type: 'TestMarkdown']]],
-                             [name: 'volume', type: 'int (default 0)', anchorId: 'Animal_says_volume',
-                              description: [[markdown: 'how loud it is', type: 'TestMarkdown']]]],
-                entry: 'Animal.says']
+                parameters: [[name: 'label', type: 'String', anchorId: 'my_func_label',
+                              description: [[markdown: 'label to use to *render* item in the store', type: 'TestMarkdown']]],
+                             [name: 'price', type: 'Money', anchorId: 'my_func_price',
+                              description: [[markdown: 'price associated with the **item**', type: 'TestMarkdown']]]],
+                entry: 'my_func']
         props.should == expectedProps
 
         // after second parsing no extra props should appear
-        props = resultingProps('example.py', '{entry: "Animal.says"}')
+        props = resultingProps('pydoc-params.py', '{entry: "my_func"}')
         props.should == expectedProps
     }
 
