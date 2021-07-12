@@ -12,6 +12,14 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+one_line_var = "one line variable assignment"
+
+multi_line_var = {
+    "line1": "first line",
+    "line2": "second line",
+}
+
+
 def a_method():
     """
     This method does stuff

@@ -1,3 +1,5 @@
+my_var = "a variable"
+
 def my_func():
     """
     text inside my *func* doc

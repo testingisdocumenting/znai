@@ -31,21 +31,21 @@ def read_and_parse(file_name):
     return ast.parse(content)
 
 
-def node_no_dict(node_type, name_to_use, node):
+def node_to_dict(node_type, name_to_use, node, include_docstring=True):
     try:
         return {
             "type": node_type,
             "name": name_to_use,
             "content": extract_content(node_type, name_to_use, node),
             "body_only": extract_body_only(node_type, name_to_use, node),
-            "doc_string": ast.get_docstring(node)
+            "doc_string": ast.get_docstring(node) if include_docstring else None,
         }
     except Exception as e:
         raise Exception(f"Error processing {name_to_use} {node_type}") from e
 
 
 def function_to_dict(func_node):
-    return node_no_dict("function", func_node.name, func_node)
+    return node_to_dict("function", func_node.name, func_node)
 
 
 def extract_content(node_type, name_to_use, node):
@@ -54,13 +54,27 @@ def extract_content(node_type, name_to_use, node):
         return None
 
     global content_lines
-    return "\n".join(content_lines[(node.lineno - 1):node.end_lineno])
+    return "\n".join(content_lines[(node.lineno - 1) : node.end_lineno])
+
+
+def extract_assignment_value(assignment_node):
+    first_line = content_lines[assignment_node.lineno - 1]
+    _, _, first_line_content = first_line.partition("=")
+
+    if assignment_node.lineno == assignment_node.end_lineno:
+        return first_line_content.strip()
+
+    return first_line_content.strip() + "\n" + "\n".join(
+        content_lines[assignment_node.lineno : assignment_node.end_lineno])
 
 
 def extract_body_only(node_type, name_to_use, node):
     if not hasattr(node, "end_lineno"):
         warnings.add(f"Skipping content extraction for {name_to_use} {node_type}, only supported with Python 3.8+")
         return None
+
+    if node_type == "assignment":
+        return extract_assignment_value(node)
 
     # skip py doc if present
     start_idx = 1 if is_py_doc(node.body[0]) else 0
@@ -70,7 +84,7 @@ def extract_body_only(node_type, name_to_use, node):
     end_line_idx = node.body[end_idx].end_lineno - 1
 
     global content_lines
-    return "\n".join(content_lines[start_line_idx:(end_line_idx + 1)])
+    return "\n".join(content_lines[start_line_idx : (end_line_idx + 1)])
 
 
 def is_py_doc(node):
@@ -82,13 +96,22 @@ def is_py_doc(node):
 
 def class_to_list_of_dict(class_node):
     """
-    flatten functions from class to put into the flat list alongside class defintion
+    flatten functions from class to put into the flat list alongside class definition
     :param class_node:
     :return:
     """
-    return [node_no_dict("class", class_node.name, class_node)] + \
-           [node_no_dict("function", class_node.name + "." + node.name, node) for node in
+    return [node_to_dict("class", class_node.name, class_node)] + \
+           [node_to_dict("function", class_node.name + "." + node.name, node) for node in
             class_node.body if isinstance(node, ast.FunctionDef)]
+
+
+def parse_assignment(assignment_node):
+    if len(assignment_node.targets) != 1:
+        # Currently only support single variable assignment, i.e. no tuples, etc.
+        return None
+
+    name = assignment_node.targets[0].id
+    return node_to_dict("assignment", name, assignment_node.value, include_docstring=False)
 
 
 def parse_file(file_to_parse):
@@ -96,6 +119,7 @@ def parse_file(file_to_parse):
 
     function_definitions = [node for node in module.body if isinstance(node, ast.FunctionDef)]
     class_definitions = [node for node in module.body if isinstance(node, ast.ClassDef)]
+    variable_assignments = [node for node in module.body if isinstance(node, ast.Assign)]
 
     parse_result = [function_to_dict(f) for f in function_definitions]
 
@@ -103,6 +127,11 @@ def parse_file(file_to_parse):
         dicts = class_to_list_of_dict(class_node)
         for class_dict in dicts:
             parse_result.append(class_dict)
+
+    for assignment_node in variable_assignments:
+        assignment_dict = parse_assignment(assignment_node)
+        if assignment_dict is not None:
+            parse_result.append(assignment_dict)
 
     return parse_result
 

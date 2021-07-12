@@ -77,5 +77,27 @@ class PythonBasedPythonParserTest {
                         "        print(\"hello\")",
                 docString: "animal top level class doc string"
         ]
+
+        parsed.findEntryByName("one_line_var").should == [
+            name: "one_line_var",
+            type: "assignment",
+            content: "one_line_var = \"one line variable assignment\"",
+            bodyOnly: "\"one line variable assignment\"",
+            docString: ""
+        ]
+
+        parsed.findEntryByName("multi_line_var").should == [
+            name: "multi_line_var",
+            type: "assignment",
+            content: "multi_line_var = {\n" +
+                "    \"line1\": \"first line\",\n" +
+                "    \"line2\": \"second line\",\n" +
+                "}",
+            bodyOnly: "{\n" +
+                "    \"line1\": \"first line\",\n" +
+                "    \"line2\": \"second line\",\n" +
+                "}",
+            docString: ""
+        ]
     }
 }
