@@ -1,8 +1,8 @@
-# Function Content
+# Content
 
 Note: Function Content support requires running znai in an environemnt with Python 3.8 or later.
 
-Use `include-python` plugin to extract a function content.
+Use `include-python` plugin to extract functuion, class or global variable content.
 
 :include-file: python/example.py {title: "example.py"}
 
