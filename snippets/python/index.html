@@ -86,12 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Function Content</h1></header>
-<p>Use include-python plugin to extract a function content. def my_func(): &quot;&quot;&quot; text inside my *func* doc * list one * list two &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) :include-python: python/example.py {entry: &quot;Animal.says&quot;} def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Use bodyOnly to include only the content of a function without its signature. :include-python: python/example.py {entry: &quot;Animal.says&quot;, bodyOnly: true} print(&quot;hello&quot;)</p>
+<p>Note: Function Content support requires running znai in an environemnt with Python 3.8 or later.Use include-python plugin to extract a function content. def my_func(): &quot;&quot;&quot; text inside my *func* doc * list one * list two &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) :include-python: python/example.py {entry: &quot;Animal.says&quot;} def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Use bodyOnly to include only the content of a function without its signature. :include-python: python/example.py {entry: &quot;Animal.says&quot;, bodyOnly: true} print(&quot;hello&quot;)</p>
 </article>
 
 <article>
 <header><h1>Doc String</h1></header>
 <p>Use include-python-doc plugin to embed py doc string with markdown into documentation def my_func(): &quot;&quot;&quot; text inside my *func* doc * list one * list two &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) :include-python-doc: python/example.py {entry: &quot;my_func&quot;} text inside my *func* doc * list one * list two :include-python-doc: python/example.py {entry: &quot;Animal&quot;} animal top level class doc string ``` code block ``` :include-python-doc: python/example.py {entry: &quot;Animal.says&quot;} animal **talks** `code`</p>
+</article>
+
+<article>
+<header><h1>Doc Parameters</h1></header>
+<p>Use include-python-doc-params plugin to render parameters extracted from pydoc text def my_func(label, price): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters __________ label : String label to use to *render* item in the store price : Money price associated with the **item** &quot;&quot;&quot; print(&quot;hello&quot;) :include-python-doc-params: python/pydoc-params.py {entry: &quot;my_func&quot;, title: &quot;my_func params&quot;} text inside my *func* doc * list one * list two Parameters __________ label : String label to use to *render* item in the store price : Money price associated with the **item** Note: read more about snippets/api-parameters API parameters for additional properties</p>
 </article>
 </section>
 </div>
@@ -129,6 +134,12 @@ ReactDOM.render(React.createElement(Documentation, {
       "id" : "function-content",
       "type" : "Section",
       "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Function Content support requires running znai in an environemnt with Python 3.8 or later.",
+          "type" : "SimpleText"
+        } ]
+      }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Use ",
@@ -283,8 +294,94 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "InlinedCode"
         } ]
       } ]
+    }, {
+      "title" : "Doc Parameters",
+      "id" : "doc-parameters",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-python-doc-params",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin to render parameters extracted from pydoc text",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "py",
+        "snippet" : "def my_func(label, price):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    __________\n    label : String\n\n      label to use to *render* item in the store\n\n    price : Money\n\n      price associated with the **item**\n    \"\"\"\n\n    print(\"hello\")",
+        "title" : "pydoc-params.py",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python-doc-params: python/pydoc-params.py {entry: \"my_func\", title: \"my_func params\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "label",
+          "type" : "String",
+          "anchorId" : "my_func_label",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "label to use to ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "render",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " item in the store",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "price",
+          "type" : "Money",
+          "anchorId" : "my_func_price",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "price associated with the ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "item",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "entry" : "my_func",
+        "title" : "my_func params",
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: read more about ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/api-parameters",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "API parameters",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " for additional properties",
+          "type" : "SimpleText"
+        } ]
+      } ]
     } ],
-    "lastModifiedTime" : 1624759130925,
+    "lastModifiedTime" : 1626065894798,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Python",
@@ -298,6 +395,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Doc String",
         "id" : "doc-string"
+      }, {
+        "title" : "Doc Parameters",
+        "id" : "doc-parameters"
       } ]
     }
   }

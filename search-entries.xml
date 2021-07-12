@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.50/znai-dist-1.50-znai.zip znai. Add it to your PATH . Brew Note: https://brew.sh/ brew support is currently in progress.</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.51/znai-dist-1.51-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.50&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.51&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.50&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.51&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.50&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.51&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -707,7 +707,7 @@
     <url>/znai/snippets/python#function-content</url>
     <fullTitle>Znai: Python, Function Content [Snippets]</fullTitle>
     <text>
-      <text>Use include-python plugin to extract a function content. def my_func(): """ text inside my *func* doc * list one * list two """ return 2 + 2 class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") :include-python: python/example.py {entry: "Animal.says"} def says(self): """ animal **talks** `code` """ print("hello") Use bodyOnly to include only the content of a function without its signature. :include-python: python/example.py {entry: "Animal.says", bodyOnly: true} print("hello")</text>
+      <text>Note: Function Content support requires running znai in an environemnt with Python 3.8 or later.Use include-python plugin to extract a function content. def my_func(): """ text inside my *func* doc * list one * list two """ return 2 + 2 class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") :include-python: python/example.py {entry: "Animal.says"} def says(self): """ animal **talks** `code` """ print("hello") Use bodyOnly to include only the content of a function without its signature. :include-python: python/example.py {entry: "Animal.says", bodyOnly: true} print("hello")</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -716,6 +716,14 @@
     <fullTitle>Znai: Python, Doc String [Snippets]</fullTitle>
     <text>
       <text>Use include-python-doc plugin to embed py doc string with markdown into documentation def my_func(): """ text inside my *func* doc * list one * list two """ return 2 + 2 class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") :include-python-doc: python/example.py {entry: "my_func"} text inside my *func* doc * list one * list two :include-python-doc: python/example.py {entry: "Animal"} animal top level class doc string ``` code block ``` :include-python-doc: python/example.py {entry: "Animal.says"} animal **talks** `code`</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/python#doc-parameters</url>
+    <fullTitle>Znai: Python, Doc Parameters [Snippets]</fullTitle>
+    <text>
+      <text>Use include-python-doc-params plugin to render parameters extracted from pydoc text def my_func(label, price): """ text inside my *func* doc * list one * list two Parameters __________ label : String label to use to *render* item in the store price : Money price associated with the **item** """ print("hello") :include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "my_func params"} text inside my *func* doc * list one * list two Parameters __________ label : String label to use to *render* item in the store price : Money price associated with the **item** Note: read more about snippets/api-parameters API parameters for additional properties</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1651,7 +1659,7 @@
     <url>/znai/visuals/flow-diagrams#shapes</url>
     <fullTitle>Znai: Flow Diagrams, Shapes [Visuals]</fullTitle>
     <text>
-      <text>Use shape to assign one of the predefined shapes. { "nodes": [ { "id": "researcher", "label": "researcher", "shape": "actor" }, { "id": "db", "label": "two", "shape": "database" }, { "id": "anotherDb", "label": "three input", "shape": "database-bottom-label" }, { "id": "processor", "label": "processor", "colorGroup": "b" }, { "id": "outcome", "colorGroup": "c", "shape": "world" }, { "id": "config", "label": "config file", "colorGroup": "b", "shape": "document" } ], "edges": [ ["researcher", "processor"], ["researcher", "config"], ["db", "processor"], ["anotherDb", "processor"], ["config", "outcome"], ["processor", "outcome"] ] }</text>
+      <text>Use shape to assign one of the predefined shapes. { "nodes": [ { "id": "researcher", "label": "researcher", "shape": "actor" }, { "id": "db", "label": "two", "shape": "database" }, { "id": "another-db", "label": "three input", "shape": "database-bottom-label" }, { "id": "processor", "label": "processor", "colorGroup": "b" }, { "id": "outcome", "colorGroup": "c", "shape": "world" }, { "id": "config", "label": "config file", "colorGroup": "b", "shape": "document" } ], "edges": [ ["researcher", "processor"], ["researcher", "config"], ["db", "processor"], ["another-db", "processor"], ["config", "outcome"], ["processor", "outcome"] ] }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1832,10 +1840,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#151-future-release</url>
-    <fullTitle>Znai: 2021 Releases, 1.51 (Future Release) [Release Notes]</fullTitle>
+    <url>/znai/release-notes/2021#151</url>
+    <fullTitle>Znai: 2021 Releases, 1.51 [Release Notes]</fullTitle>
     <text>
-      <text>Explicit use of annotate:true to use matching visuals/image-annotations#path-shortcut image annotations file</text>
+      <text>Doc: introduction/getting-started#brew brew install instruction Added initial snippets/python#doc-parameters pythod doc params support Python parsing is more robust and partially work with older versions of python Explicit use of annotate:true to use matching visuals/image-annotations#path-shortcut image annotations file Fix: handle dashes in visuals/flow-diagrams flow diagram node ids</text>
       <score>STANDARD</score>
     </text>
   </entry>

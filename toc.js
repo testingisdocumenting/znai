@@ -483,6 +483,9 @@ toc = [ {
     }, {
       "title" : "Doc String",
       "id" : "doc-string"
+    }, {
+      "title" : "Doc Parameters",
+      "id" : "doc-parameters"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -1242,8 +1245,8 @@ toc = [ {
     "fileName" : "2021",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "1.51 (Future Release)",
-      "id" : "151-future-release"
+      "title" : "1.51",
+      "id" : "151"
     }, {
       "title" : "1.50",
       "id" : "150"
