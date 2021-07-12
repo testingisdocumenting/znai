@@ -12,6 +12,10 @@ Build functional, maintainable, beautiful User Guides with `Znai`.
 
 ![generated site example](znai-docs/znai/znai-overview.png)
 
+![generated site example of flow diagram](znai-docs/znai/znai-flow-diagram.png)
+
+![generated site example of api params](znai-docs/znai/znai-api-params.png)
+
 # Preview
 
 `Znai` has a preview mode to automatically listen to local files changes. It automatically navigates to a page that was 
