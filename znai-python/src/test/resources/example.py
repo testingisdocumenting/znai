@@ -60,8 +60,19 @@ class Animal:
     animal top level class doc string
     """
 
-    def says(self):
+    def says(self, message, volume):
         """
         animal talks
+
+        Parameters
+        ___________
+        message : string
+
+          message to say
+
+        volume : int (default 0)
+
+          how loud it is
         """
+
         print("hello")

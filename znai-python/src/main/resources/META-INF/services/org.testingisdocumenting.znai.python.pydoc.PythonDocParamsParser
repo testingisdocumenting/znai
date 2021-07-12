@@ -14,6 +14,4 @@
 # limitations under the License.
 #
 
-org.testingisdocumenting.znai.python.PythonIncludePlugin
-org.testingisdocumenting.znai.python.PythonDocIncludePlugin
-org.testingisdocumenting.znai.python.PythonDocParamsIncludePlugin
+org.testingisdocumenting.znai.python.pydoc.PythonDocPandasLikeParamsParser
