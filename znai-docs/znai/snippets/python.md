@@ -1,21 +1,86 @@
 # Content
 
-Note: Function Content support requires running znai in an environemnt with Python 3.8 or later.
+Note: Function Content support requires running znai in an environment with Python 3.8 or later.
 
-Use `include-python` plugin to extract functuion, class or global variable content.
+All the examples below are from the following example Python file:
 
 :include-file: python/example.py {title: "example.py"}
+
+## Full Content
+
+Use `include-python` plugin to extract function, class or global variable content.
+
+### Class
+
+To show the full class definition:
+
+    :include-python: python/example.py {entry: "Animal"}
+
+:include-python: python/example.py {entry: "Animal"}
+
+### Function
+
+To show the full contents of a function:
 
     :include-python: python/example.py {entry: "Animal.says"}
 
 :include-python: python/example.py {entry: "Animal.says"}
 
-Use `bodyOnly` to include only the content of a function without its signature. 
+This also works for global functions:
+
+    :include-python: python/example.py {entry: "my_func"}
+
+:include-python: python/example.py {entry: "my_func"}
+
+### Class
+
+To show the full contents of a class:
+
+    :include-python: python/example.py {entry: "Animal"}
+
+:include-python: python/example.py {entry: "Animal"}
+
+### Variable
+
+To show a variable's definition and assignment:
+
+    :include-python: python/example.py {entry: "my_var"}
+
+:include-python: python/example.py {entry: "my_var"}
+
+## Body Only
+
+Use `bodyOnly` to include just the "body" part of the content.  The specifics differ based on what is being included.
+
+### Function
+
+To show a function's body, without signature or doc string:
 
     :include-python: python/example.py {entry: "Animal.says", bodyOnly: true}
 
 :include-python: python/example.py {entry: "Animal.says", bodyOnly: true}
 
+This also works for global functions:
+
+    :include-python: python/example.py {entry: "my_func", bodyOnly: true}
+
+:include-python: python/example.py {entry: "my_func", bodyOnly: true}
+
+### Class
+
+To show the contents of a class without the class declaration or doc string:
+
+    :include-python: python/example.py {entry: "Animal", bodyOnly: true}
+
+:include-python: python/example.py {entry: "Animal", bodyOnly: true}
+
+### Variable
+
+To show only a variable's value:
+
+    :include-python: python/example.py {entry: "my_var", bodyOnly: true}
+
+:include-python: python/example.py {entry: "my_var", bodyOnly: true}
 
 # Doc String
 
