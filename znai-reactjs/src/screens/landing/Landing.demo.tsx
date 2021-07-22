@@ -15,6 +15,7 @@
  */
 
 import React from 'react'
+import { Registry } from 'react-component-viewer'
 import {Landing} from './Landing'
 
 const documentations = [
@@ -63,7 +64,7 @@ const documentations = [
     },
 ]
 
-export function landingDemo(registry) {
+export function landingDemo(registry: Registry) {
     registry
         .add('landing', () => <Landing documentations={documentations} title="Company" type="Guides"/>)
         .add('landing dark theme', () => <div className="with-theme theme-znai-dark"><Landing
