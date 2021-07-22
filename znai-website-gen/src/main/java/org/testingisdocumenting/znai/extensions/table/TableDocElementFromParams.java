@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.extensions.table;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
@@ -83,26 +84,31 @@ class TableDocElementFromParams {
                 JsonTableParser.parse(content) :
                 CsvTableParser.parse(content)).mapValues(tableDataMapping);
 
-        rearrangedTable = pluginParams.getOpts().has("columns") ?
-                tableFromContent.withColumnsInOrder(pluginParams.getOpts().getList("columns")) :
+        PluginParamsOpts opts = pluginParams.getOpts();
+        rearrangedTable = opts.has("columns") ?
+                tableFromContent.withColumnsInOrder(opts.getList("columns")) :
                 tableFromContent;
 
         Map<String, Object> tableAsMap = rearrangedTable.toMap();
 
         List<Map<String, Object>> columns = (List<Map<String, Object>>) tableAsMap.get("columns");
 
-        pluginParams.getOpts().forEach((columnName, meta) -> {
+        opts.forEach((columnName, meta) -> {
             Optional<Map<String, Object>> column = columns.stream().filter(c -> c.get("title").equals(columnName)).findFirst();
             column.ifPresent(c -> c.putAll((Map<? extends String, ?>) meta));
         });
 
         tableAsMap.put("data", parseMarkupInEachRow((List<List<Object>>) tableAsMap.get("data")));
 
+        if (opts.has("minColumnWidth")) {
+            tableAsMap.put("minColumnWidth", opts.get("minColumnWidth"));
+        }
+
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("table", tableAsMap);
 
-        if (pluginParams.getOpts().has("title")) {
-            props.put("title", pluginParams.getOpts().get("title"));
+        if (opts.has("title")) {
+            props.put("title", opts.get("title"));
         }
 
         return PluginResult.docElement(DocElementType.TABLE, props);

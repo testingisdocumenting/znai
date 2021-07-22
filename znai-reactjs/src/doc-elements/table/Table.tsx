@@ -32,6 +32,7 @@ interface Column {
 interface Table {
   styles: string[];
   columns: Column[];
+  minColumnWidth?: number;
   data: any[][];
 }
 
@@ -48,7 +49,7 @@ export function Table({ table, ...props }: Props) {
       <tr>
         {row.map((v, idx) => {
           const c = table.columns[idx];
-          const style = buildColumnStyle(c);
+          const style = buildColumnStyle(table, c);
           const value = Array.isArray(v) ? (
             <props.elementsLibrary.DocElement {...props} content={v} />
           ) : (
@@ -86,7 +87,7 @@ export function Table({ table, ...props }: Props) {
           <tr>
             {showHeader
               ? table.columns.map((c, idx) => {
-                  const style = buildColumnStyle(c);
+                  const style = buildColumnStyle(table, c);
                   return (
                     <th key={idx} style={style}>
                       {c.title}
@@ -106,7 +107,7 @@ export function Table({ table, ...props }: Props) {
   );
 }
 
-function buildColumnStyle(c: Column): CSSProperties {
+function buildColumnStyle(table: Table, c: Column): CSSProperties {
   const textAlign = c.align ? c.align : "left";
 
   const fullWidth = cssVarPixelValue("znai-single-column-full-width");
@@ -114,8 +115,16 @@ function buildColumnStyle(c: Column): CSSProperties {
     ? calcTableWidth(fullWidth, c.width)
     : undefined;
 
+  const calculatedColumnsMinWidth = table.minColumnWidth
+    ? calcTableWidth(fullWidth, table.minColumnWidth)
+    : 0;
+  const widthToUse =
+    calculatedWidth || calculatedColumnsMinWidth
+      ? Math.max(calculatedColumnsMinWidth, calculatedWidth || 0)
+      : undefined;
+
   // @ts-ignore
-  return { textAlign, width: calculatedWidth, minWidth: calculatedWidth };
+  return { textAlign, width: widthToUse, minWidth: widthToUse };
 }
 
 function TableTitle({ title }: { title?: string }) {

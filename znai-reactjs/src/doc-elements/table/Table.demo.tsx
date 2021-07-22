@@ -73,6 +73,14 @@ export function tableDemo(registry: Registry) {
           elementsLibrary={elementsLibrary}
         />
       </div>
+    ))
+    .add("min width mobile multiple columns", () => (
+      <div style={{ width: 300 }}>
+        <Table
+          table={{ ...fourColumns(fourColumnsData()), minColumnWidth: 150 }}
+          elementsLibrary={elementsLibrary}
+        />
+      </div>
     ));
 }
 

@@ -64,6 +64,14 @@ Note: total percentage of all columns can go above 100%, in which case a scroll 
 
 :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "60%"}}
 
+# Min Width
+
+Use `minColumnWidth` to set min width for all table columns
+
+    :include-table: table/table.csv {minColumnWidth: 400, "Description": {width: 500}}
+
+:include-table: table/table.csv {minColumnWidth: 400, "Description": {width: 500}}
+
 # Text Alignment
 
 Use `align` to change a column text alignment.
