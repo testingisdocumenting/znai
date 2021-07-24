@@ -66,6 +66,13 @@ export function tableDemo(registry: Registry) {
         elementsLibrary={elementsLibrary}
       />
     ))
+    .add("wide mode", () => (
+      <Table
+        table={{ ...fourColumnsWithWidth(fourColumnsData()), wide: true }}
+        title="Wide mode"
+        elementsLibrary={elementsLibrary}
+      />
+    ))
     .add("no style mobile multiple columns", () => (
       <div style={{ width: 300 }}>
         <Table

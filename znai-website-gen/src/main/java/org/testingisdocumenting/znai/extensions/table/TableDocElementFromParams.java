@@ -100,16 +100,13 @@ class TableDocElementFromParams {
 
         tableAsMap.put("data", parseMarkupInEachRow((List<List<Object>>) tableAsMap.get("data")));
 
-        if (opts.has("minColumnWidth")) {
-            tableAsMap.put("minColumnWidth", opts.get("minColumnWidth"));
-        }
+        opts.assignToProps(tableAsMap, "minColumnWidth");
+        opts.assignToProps(tableAsMap, "wide");
 
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("table", tableAsMap);
 
-        if (opts.has("title")) {
-            props.put("title", opts.get("title"));
-        }
+        opts.assignToProps(props, "title");
 
         return PluginResult.docElement(DocElementType.TABLE, props);
     }

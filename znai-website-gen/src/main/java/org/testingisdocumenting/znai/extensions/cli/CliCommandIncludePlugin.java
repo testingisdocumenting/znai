@@ -73,17 +73,9 @@ public class CliCommandIncludePlugin implements IncludePlugin {
 
         validateParamsToHighlight(command, combinedParams);
 
-        if (opts.has("meta")) {
-            props.put("meta", opts.get("meta"));
-        }
-
-        if (opts.has("threshold")) {
-            props.put("threshold", opts.get("threshold"));
-        }
-
-        if (opts.has("presentationThreshold")) {
-            props.put("presentationThreshold", opts.get("presentationThreshold"));
-        }
+        opts.assignToProps(props, "meta");
+        opts.assignToProps(props, "threshold");
+        opts.assignToProps(props, "presentationThreshold");
 
         Set<String> splitAfter = opts.getSet("splitAfter");
         if (!splitAfter.isEmpty()) {
