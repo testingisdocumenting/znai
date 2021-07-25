@@ -72,6 +72,14 @@ Use `minColumnWidth` to set min width for all table columns
 
 :include-table: table/table.csv {minColumnWidth: 400, "Description": {width: 500}}
 
+# Wide Mode
+
+Use `wide: true` to make table occupy all available width
+
+    :include-table: table/table.csv {wide: true, minColumnWidth: 400}
+
+:include-table: table/table-many-columns.csv {wide: true, minColumnWidth: 400}
+
 # Text Alignment
 
 Use `align` to change a column text alignment.

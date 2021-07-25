@@ -33,6 +33,7 @@ interface Table {
   styles: string[];
   columns: Column[];
   minColumnWidth?: number;
+  wide?: boolean;
   data: any[][];
 }
 
@@ -50,11 +51,7 @@ export function Table({ table, ...props }: Props) {
         {row.map((v, idx) => {
           const c = table.columns[idx];
           const style = buildColumnStyle(table, c);
-          const value = Array.isArray(v) ? (
-            <props.elementsLibrary.DocElement {...props} content={v} />
-          ) : (
-            v
-          );
+          const value = Array.isArray(v) ? <props.elementsLibrary.DocElement {...props} content={v} /> : v;
 
           return (
             <td key={idx} style={style}>
@@ -69,18 +66,16 @@ export function Table({ table, ...props }: Props) {
   const showHeader = tableStyles.indexOf("no-header") === -1;
 
   // header related style will not trigger custom css
-  const isCustomClassName =
-    (tableStyles.length > 0 && showHeader) ||
-    (!showHeader && tableStyles.length > 1);
+  const isCustomClassName = (tableStyles.length > 0 && showHeader) || (!showHeader && tableStyles.length > 1);
 
   const hasTitle = !!props.title;
 
-  const tableClassName =
-    (isCustomClassName ? tableStyles.join(" ") : "znai-table") +
-    (hasTitle ? " with-title" : "");
+  const wrapperClassName = "znai-table-wrapper " + (table.wide ? "table-wide-screen" : "content-block");
+
+  const tableClassName = (isCustomClassName ? tableStyles.join(" ") : "znai-table") + (hasTitle ? " with-title" : "");
 
   return (
-    <div className="znai-table-wrapper content-block">
+    <div className={wrapperClassName}>
       <TableTitle title={props.title} />
       <table className={tableClassName}>
         <thead>
@@ -111,13 +106,9 @@ function buildColumnStyle(table: Table, c: Column): CSSProperties {
   const textAlign = c.align ? c.align : "left";
 
   const fullWidth = cssVarPixelValue("znai-single-column-full-width");
-  const calculatedWidth = c.width
-    ? calcTableWidth(fullWidth, c.width)
-    : undefined;
+  const calculatedWidth = c.width ? calcTableWidth(fullWidth, c.width) : undefined;
 
-  const calculatedColumnsMinWidth = table.minColumnWidth
-    ? calcTableWidth(fullWidth, table.minColumnWidth)
-    : 0;
+  const calculatedColumnsMinWidth = table.minColumnWidth ? calcTableWidth(fullWidth, table.minColumnWidth) : 0;
   const widthToUse =
     calculatedWidth || calculatedColumnsMinWidth
       ? Math.max(calculatedColumnsMinWidth, calculatedWidth || 0)

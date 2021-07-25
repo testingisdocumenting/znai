@@ -109,3 +109,7 @@
 
     padding: 8px 16px;
 }
+
+.table-wide-screen .znai-table-title {
+    text-align: center;
+}
