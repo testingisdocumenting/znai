@@ -17,5 +17,5 @@
 import { pixelValue } from "./cssVars";
 
 test("pixelValue", () => {
-  expect(pixelValue("200px")).toEqual(200);
+  expect(pixelValue("my-var", "200px")).toEqual(200);
 });

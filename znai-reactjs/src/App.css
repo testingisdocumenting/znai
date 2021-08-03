@@ -26,8 +26,19 @@
     --znai-zoom-overlay-background-color: rgba(150, 150, 150, 0.5);
     --znai-zoom-container-border: 1px #000 solid;
 
+    /*
+    single column render width to keep content centered
+    it changes its value for mobile and when other content is nested
+     */
+    --znai-single-column-render-width: 900px;
+    --znai-single-column-partial-render-width: 600px;
+
+    /*
+    should always be in pixels
+    use to calculate e.g. percent based width in tables
+    and auto fit of images
+    */
     --znai-single-column-full-width: 900px;
-    --znai-single-column-partial-width: 600px;
 
     --znai-regular-text-size: 16px;
     --znai-smaller-text-size: 14px;
@@ -263,7 +274,7 @@ body {
 }
 
 .content-block {
-    max-width: var(--znai-single-column-full-width);
+    max-width: var(--znai-single-column-render-width);
     margin-left: auto;
     margin-right: auto;
 }
