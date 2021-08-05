@@ -16,19 +16,15 @@
 
 const pxSuffix = "px";
 export function cssVarPixelValue(varName: string): number {
-  const varValue = getComputedStyle(document.documentElement).getPropertyValue(
-    "--" + varName
-  );
-  return pixelValue(varValue);
+  const varValue = getComputedStyle(document.documentElement).getPropertyValue("--" + varName);
+  return pixelValue(varName, varValue);
 }
 
-export function pixelValue(varName: string): number {
-  if (!varName.endsWith(pxSuffix)) {
-    throw new Error(
-      `css var <${varName}> value should have ${pxSuffix} suffix`
-    );
+export function pixelValue(varName: string, value: string): number {
+  if (!value.endsWith(pxSuffix)) {
+    throw new Error(`css var <${varName}> value should have ${pxSuffix} suffix, received: ${value}`);
   }
 
-  const withoutPx = varName.substr(0, varName.length - pxSuffix.length);
+  const withoutPx = value.substr(0, value.length - pxSuffix.length);
   return Number(withoutPx);
 }

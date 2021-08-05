@@ -23,48 +23,22 @@ import { Registry } from "react-component-viewer";
 
 export function tableDemo(registry: Registry) {
   registry
-    .add("no style", () => (
-      <Table
-        table={defaultStyle(twoColumnsData())}
-        elementsLibrary={elementsLibrary}
-      />
-    ))
+    .add("no style", () => <Table table={defaultStyle(twoColumnsData())} elementsLibrary={elementsLibrary} />)
     .add("with title", () => (
-      <Table
-        table={defaultStyle(twoColumnsData())}
-        title="User Data"
-        elementsLibrary={elementsLibrary}
-      />
+      <Table table={defaultStyle(twoColumnsData())} title="User Data" elementsLibrary={elementsLibrary} />
     ))
     .add("no header, vertical only", () => (
-      <Table
-        table={vertLinesOnly(twoColumnsData())}
-        elementsLibrary={elementsLibrary}
-      />
+      <Table table={vertLinesOnly(twoColumnsData())} elementsLibrary={elementsLibrary} />
     ))
     .add("no header, vertical only, no vertical padding", () => (
-      <Table
-        table={noVertPadding(twoColumnsData())}
-        elementsLibrary={elementsLibrary}
-      />
+      <Table table={noVertPadding(twoColumnsData())} elementsLibrary={elementsLibrary} />
     ))
     .add("long inlined code", () => (
-      <Table
-        table={defaultStyle(dataWithLongInlinedCode())}
-        elementsLibrary={elementsLibrary}
-      />
+      <Table table={defaultStyle(dataWithLongInlinedCode())} elementsLibrary={elementsLibrary} />
     ))
-    .add("code snippet", () => (
-      <Table
-        table={defaultStyle(dataWithCodeSnippet())}
-        elementsLibrary={elementsLibrary}
-      />
-    ))
+    .add("code snippet", () => <Table table={defaultStyle(dataWithCodeSnippet())} elementsLibrary={elementsLibrary} />)
     .add("forced width", () => (
-      <Table
-        table={fourColumnsWithWidth(fourColumnsData())}
-        elementsLibrary={elementsLibrary}
-      />
+      <Table table={fourColumnsWithWidth(fourColumnsData())} elementsLibrary={elementsLibrary} />
     ))
     .add("wide mode", () => (
       <Table
@@ -73,20 +47,23 @@ export function tableDemo(registry: Registry) {
         elementsLibrary={elementsLibrary}
       />
     ))
-    .add("no style mobile multiple columns", () => (
-      <div style={{ width: 300 }}>
+    .add("wide mode with scroll", () => (
+      <div style={{ width: 1200 }}>
         <Table
-          table={fourColumns(fourColumnsData())}
+          table={{ ...fourColumnsWithOverflownWidth(fourColumnsData()), wide: true }}
+          title="Wide mode"
           elementsLibrary={elementsLibrary}
         />
       </div>
     ))
+    .add("no style mobile multiple columns", () => (
+      <div style={{ width: 300 }}>
+        <Table table={fourColumns(fourColumnsData())} elementsLibrary={elementsLibrary} />
+      </div>
+    ))
     .add("min width mobile multiple columns", () => (
       <div style={{ width: 300 }}>
-        <Table
-          table={{ ...fourColumns(fourColumnsData()), minColumnWidth: 150 }}
-          elementsLibrary={elementsLibrary}
-        />
+        <Table table={{ ...fourColumns(fourColumnsData()), minColumnWidth: 150 }} elementsLibrary={elementsLibrary} />
       </div>
     ));
 }
@@ -116,10 +93,7 @@ function noVertPadding(data: any[][]) {
 }
 
 function twoColumns() {
-  return [
-    { title: "Column 1", align: "right", width: "40%" },
-    { title: "Column 2" },
-  ];
+  return [{ title: "Column 1", align: "right", width: "40%" }, { title: "Column 2" }];
 }
 
 function fourColumns(data: any[][]) {
@@ -141,6 +115,18 @@ function fourColumnsWithWidth(data: any[][]) {
       { title: "Column__2", width: "50%" },
       { title: "Column 3", width: 400 },
       { title: "Column 4", width: 600 },
+    ],
+    data,
+  };
+}
+
+function fourColumnsWithOverflownWidth(data: any[][]) {
+  return {
+    columns: [
+      { title: "Column__1", align: "right" },
+      { title: "Column__2", width: "50%" },
+      { title: "Column 3", width: "100%" },
+      { title: "Column 4", width: "70%" },
     ],
     data,
   };
@@ -169,8 +155,7 @@ function twoColumnsData() {
           type: "SoftLineBreak",
         },
         {
-          text:
-            "Now let\u0027s automate the screenshot and annotations assigning process.",
+          text: "Now let\u0027s automate the screenshot and annotations assigning process.",
           type: "SimpleText",
         },
       ],

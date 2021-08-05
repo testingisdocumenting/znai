@@ -16,7 +16,6 @@
 
 .znai-table-wrapper {
     margin: 20px auto;
-    overflow-x: auto;
 }
 
 .znai-table-wrapper td .content-block {
@@ -24,6 +23,10 @@
 }
 
 .znai-table-wrapper td .snippet-container {
+    overflow-x: auto;
+}
+
+.znai-table-inner-scroll-wrapper {
     overflow-x: auto;
 }
 

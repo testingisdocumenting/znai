@@ -77,27 +77,29 @@ export function Table({ table, ...props }: Props) {
   return (
     <div className={wrapperClassName}>
       <TableTitle title={props.title} />
-      <table className={tableClassName}>
-        <thead>
-          <tr>
-            {showHeader
-              ? table.columns.map((c, idx) => {
-                  const style = buildColumnStyle(table, c);
-                  return (
-                    <th key={idx} style={style}>
-                      {c.title}
-                    </th>
-                  );
-                })
-              : null}
-          </tr>
-        </thead>
-        <tbody>
-          {table.data.map((r, idx) => (
-            <Row key={idx} row={r} />
-          ))}
-        </tbody>
-      </table>
+      <div className="znai-table-inner-scroll-wrapper">
+        <table className={tableClassName}>
+          <thead>
+            <tr>
+              {showHeader
+                ? table.columns.map((c, idx) => {
+                    const style = buildColumnStyle(table, c);
+                    return (
+                      <th key={idx} style={style}>
+                        {c.title}
+                      </th>
+                    );
+                  })
+                : null}
+            </tr>
+          </thead>
+          <tbody>
+            {table.data.map((r, idx) => (
+              <Row key={idx} row={r} />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

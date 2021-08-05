@@ -16,7 +16,7 @@
  */
 
 .znai-api-parameters {
-    max-width: var(--znai-single-column-full-width);
+    max-width: var(--znai-single-column-render-width);
 
     display: grid;
     grid-template-columns: auto 1fr;
@@ -33,7 +33,7 @@
 
 .znai-api-parameters.small {
     font-size: var(--znai-smaller-text-size);
-    max-width: var(--znai-single-column-partial-width);
+    max-width: var(--znai-single-column-partial-render-width);
 }
 
 .znai-api-parameters.nested {
