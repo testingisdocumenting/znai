@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +25,7 @@ import java.util.Map;
  * custom information associated with a single page of documentation
  */
 public class PageMeta {
-    private Map<String, List<String>> meta;
+    private final Map<String, List<String>> meta;
 
     public PageMeta() {
         this.meta = Collections.emptyMap();

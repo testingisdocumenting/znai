@@ -17,6 +17,9 @@
 
 package org.testingisdocumenting.znai.structure;
 
+import org.testingisdocumenting.znai.utils.FilePathUtils;
+
+import java.nio.file.Path;
 import java.util.*;
 
 import static java.util.stream.Collectors.*;
@@ -100,6 +103,15 @@ public class TableOfContents {
     public TocItem findTocItem(String dirName, String fileNameWithoutExtension) {
         int idx = findTocItemIdx(dirName, fileNameWithoutExtension);
         return idx == -1 ? null : tocItems.get(idx);
+    }
+
+    public TocItem findTocItem(Path markupFilePath) {
+        if (markupFilePath.getFileName().toString().startsWith(TocItem.INDEX + ".")) {
+            return getIndex();
+        }
+
+        return findTocItem(markupFilePath.toAbsolutePath().getParent().getFileName().toString(),
+                FilePathUtils.fileNameWithoutExtension(markupFilePath));
     }
 
     public List<Map<String, Object>> toListOfMaps() {

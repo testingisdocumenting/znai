@@ -89,6 +89,7 @@ import {notAuthorizedDemo} from "./screens/not-authorized/NotAuthorizedScreen.de
 import {iframeDemo} from './doc-elements/iframe/Iframe.demo';
 import {cliCommandPresentationDemo} from './doc-elements/cli/PresentationCliCommand.demo';
 import {imagePresentationDemo} from './doc-elements/images/PresentationAnnotatedImage.demo';
+import { pageTocDemo } from "./doc-elements/page/PageToc.demo";
 
 const docMeta = {
     id: 'preview',
@@ -153,6 +154,7 @@ registries.add('visuals')
 
 registries.add('layout')
     .registerAsTabs('Pages', pagesDemo)
+    .registerAsTabs('Page Toc', pageTocDemo)
     .registerAsGrid('Tabs', 0, tabsDemo)
     .registerAsGrid('Tables', 0, tableDemo)
     .registerAsGrid('Columns', 0, columnsDemo)

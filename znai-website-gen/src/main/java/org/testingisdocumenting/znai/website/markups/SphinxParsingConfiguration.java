@@ -58,12 +58,7 @@ public class SphinxParsingConfiguration implements MarkupParsingConfiguration {
 
     @Override
     public TocItem tocItemByPath(ComponentsRegistry componentsRegistry, TableOfContents toc, Path path) {
-        if (path.getFileName().toString().startsWith(TocItem.INDEX + ".")) {
-            return toc.getIndex();
-        }
-
-        return toc.findTocItem(path.toAbsolutePath().getParent().getFileName().toString(),
-                FilePathUtils.fileNameWithoutExtension(path));
+        return toc.findTocItem(path);
     }
 
     private String filesExtension() {
