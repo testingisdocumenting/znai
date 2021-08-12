@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,8 +20,8 @@ import QueryResult from './QueryResult'
 class Search {
     constructor(allPages) {
         this.allPages = allPages
-        this.searchIdx = (window.znaiSearchIdx === undefined) ?  window.mdocSearchIdx : window.znaiSearchIdx
-        this.searchDataById = mapById((window.znaiSearchData === undefined) ? window.mdocSearchData : window.znaiSearchData)
+        this.searchIdx = window.znaiSearchIdx
+        this.searchDataById = mapById(window.znaiSearchData)
     }
 
     static convertIndexIdToSectionCoords(indexId) {
