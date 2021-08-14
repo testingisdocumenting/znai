@@ -78,6 +78,7 @@ import { DocumentationLayout } from '../layout/DocumentationLayout'
 import Footer from '../structure/Footer'
 import {Redirect} from '../structure/Redirect';
 import {SimpleText} from './default-elements/SimpleText';
+import { PageToc } from "./page/PageToc";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -179,6 +180,7 @@ library.Page = Page
 presentationElementHandlers.Page = presentationPageHandler
 
 library.PageTitle = PageTitle
+library.PageToc = PageToc
 
 library.MarkdownAndResult = MarkdownAndResult
 presentationElementHandlers.MarkdownAndResult = presentationMarkdownAndResultHandler

@@ -8,6 +8,7 @@ flow
     landing
     names
     page-references
+    page-toc
     lookup-paths
     search
     footer
