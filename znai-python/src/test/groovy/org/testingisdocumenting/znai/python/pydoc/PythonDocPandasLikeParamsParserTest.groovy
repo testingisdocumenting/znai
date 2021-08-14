@@ -24,8 +24,33 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class PythonDocPandasLikeParamsParserTest {
     @Test
-    void "parse parameters"() {
-        def content = ResourceUtils.textContent("pydoc-pandas-like-example.txt")
+    void "parse parameters with underscore"() {
+        parseAndValidate("pydoc-pandas-like-example-underscore.txt")
+    }
+
+    @Test
+    void "parse parameters with dash"() {
+        parseAndValidate("pydoc-pandas-like-example.txt")
+    }
+
+    @Test
+    void "empty parameters block"() {
+        def parser = createParser()
+        def params = parser.parse("Parameters\n----------")
+
+        params.should == []
+    }
+
+    @Test
+    void "should error on parameters header absence"() {
+        def parser = createParser()
+        code {
+            parser.parse("")
+        } should throwException("Can't find block with Parameters with underscore")
+    }
+
+    private static void parseAndValidate(String fileName) {
+        def content = ResourceUtils.textContent(fileName)
         def parser = createParser()
         parser.handles(content).should == true
         def params = parser.parse(content)
@@ -38,22 +63,6 @@ class PythonDocPandasLikeParamsParserTest {
                 "with empty lines in between"
 
         params[1].pyDocText.should == "more textual description"
-    }
-
-    @Test
-    void "empty parameters block"() {
-        def parser = createParser()
-        def params = parser.parse("Parameters\n__________")
-
-        params.should == []
-    }
-
-    @Test
-    void "should error on parameters header absence"() {
-        def parser = createParser()
-        code {
-            parser.parse("")
-        } should throwException("Can't find block with Parameters with underscore")
     }
 
     private static PythonDocPandasLikeParamsParser createParser() {

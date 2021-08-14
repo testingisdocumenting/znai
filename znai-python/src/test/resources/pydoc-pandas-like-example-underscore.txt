@@ -1,7 +1,7 @@
 My documentation text blah
 
 Parameters
------------
+____________
 
 myName : myType or None
 
@@ -13,6 +13,6 @@ anotherName : anotherType or Nil
   more textual description
 
 Examples
---------------
+___________
 
 some examples are here and should be ignored
