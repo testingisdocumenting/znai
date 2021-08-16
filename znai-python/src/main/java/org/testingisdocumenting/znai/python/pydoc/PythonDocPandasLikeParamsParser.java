@@ -33,7 +33,7 @@ public class PythonDocPandasLikeParamsParser implements PythonDocParamsParser {
 
     private final String HEADER = "Parameters";
 
-    private final Pattern PARAMETERS_START = Pattern.compile(HEADER + "\\s+_+");
+    private final Pattern PARAMETERS_START = Pattern.compile(HEADER + "\\s+[-_]+");
 
     private final List<PythonParam> params = new ArrayList<>();
     private String currentName = "";
@@ -79,7 +79,7 @@ public class PythonDocPandasLikeParamsParser implements PythonDocParamsParser {
             return LineHandleResult.CONTINUE;
         }
 
-        if (line.startsWith("__")) {
+        if (line.startsWith("__") || line.startsWith("--")) {
             return LineHandleResult.CONTINUE;
         }
 
