@@ -105,10 +105,20 @@ class TableDocElementFromParams {
 
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("table", tableAsMap);
+        handleHighlight(props);
 
         opts.assignToProps(props, "title");
 
         return PluginResult.docElement(DocElementType.TABLE, props);
+    }
+
+    private void handleHighlight(Map<String, Object> props) {
+        List<Object> rows = pluginParams.getOpts().getList("highlightRow");
+        if (rows.isEmpty()) {
+            return;
+        }
+
+        props.put("highlightRowIndexes", rows);
     }
 
     private List<Object> parseMarkupInEachRow(List<List<Object>> rows) {

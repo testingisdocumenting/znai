@@ -113,6 +113,10 @@
     padding: 8px 16px;
 }
 
-.table-wide-screen .znai-table-title {
+.znai-table-row-highlight {
+    background-color: var(--znai-snippets-line-highlighted-background-color);
+}
+
+.znai-table-wide-screen .znai-table-title {
     text-align: center;
 }

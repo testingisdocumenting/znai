@@ -49,7 +49,7 @@ class SimpleCodeSnippet extends Component {
         this.linesOfTokens = !linesOfCode ? splitTokensIntoLines(tokens) : linesOfCode
 
         // highlight is either a single line index/substring or a collection of line indexes and substrings
-        this.highlight = convertToList(highlight)
+        this.highlightRowIndexes = convertToList(highlight)
     }
 
     render() {

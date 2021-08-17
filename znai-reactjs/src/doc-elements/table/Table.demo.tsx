@@ -27,6 +27,9 @@ export function tableDemo(registry: Registry) {
     .add("with title", () => (
       <Table table={defaultStyle(twoColumnsData())} title="User Data" elementsLibrary={elementsLibrary} />
     ))
+    .add("with highlight", () => (
+      <Table table={defaultStyle(twoColumnsData())} highlightRowIndexes={[1]} elementsLibrary={elementsLibrary} />
+    ))
     .add("no header, vertical only", () => (
       <Table table={vertLinesOnly(twoColumnsData())} elementsLibrary={elementsLibrary} />
     ))

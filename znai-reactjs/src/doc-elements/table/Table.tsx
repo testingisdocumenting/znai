@@ -40,14 +40,16 @@ interface Table {
 interface Props extends DocElementProps {
   title?: string;
   table: Table;
+  highlightRowIndexes: number[];
 }
 
-export function Table({ table, ...props }: Props) {
+export function Table({ table, highlightRowIndexes, ...props }: Props) {
   const tableStyles = table.styles || [];
 
-  const Row = ({ row }: { row: any[] }) => {
+  const Row = ({ row, highlight }: { row: any[]; highlight: boolean }) => {
+    const className = "znai-table-row" + (highlight ? " znai-table-row-highlight" : "");
     return (
-      <tr>
+      <tr className={className}>
         {row.map((v, idx) => {
           const c = table.columns[idx];
           const style = buildColumnStyle(table, c);
@@ -70,7 +72,7 @@ export function Table({ table, ...props }: Props) {
 
   const hasTitle = !!props.title;
 
-  const wrapperClassName = "znai-table-wrapper " + (table.wide ? "table-wide-screen" : "content-block");
+  const wrapperClassName = "znai-table-wrapper " + (table.wide ? "znai-table-wide-screen" : "content-block");
 
   const tableClassName = (isCustomClassName ? tableStyles.join(" ") : "znai-table") + (hasTitle ? " with-title" : "");
 
@@ -95,13 +97,21 @@ export function Table({ table, ...props }: Props) {
           </thead>
           <tbody>
             {table.data.map((r, idx) => (
-              <Row key={idx} row={r} />
+              <Row key={idx} row={r} highlight={hasIdx(highlightRowIndexes, idx)} />
             ))}
           </tbody>
         </table>
       </div>
     </div>
   );
+}
+
+function hasIdx(indexes: number[] | undefined, idx: number): boolean {
+  if (!indexes) {
+    return false;
+  }
+
+  return indexes.indexOf(idx) !== -1;
 }
 
 function buildColumnStyle(table: Table, c: Column): CSSProperties {

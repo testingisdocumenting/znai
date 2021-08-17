@@ -35,6 +35,19 @@ Use `title` parameter to set a table title.
     
 :include-table: table/table.json {title: "Monthly Report"}
 
+# Highlight
+
+Use `highlightRow` to highlight a row, or a set of rows by their index
+
+    :include-table: table/table.json {title: "Highlight multiple rows", highlightRow: [0, 2]}
+
+:include-table: table/table.json {title: "Highlight multiple rows", highlightRow: [0, 2]}
+
+    :include-table: table/table.json {title: "Highlight single row", highlightRow: 1}
+
+:include-table: table/table.json {title: "Highlight single row", highlightRow: 1}
+
+
 # Arrange and Filter
 
 To change the order of columns or to filter out certain columns, specify the `columns` parameter.
