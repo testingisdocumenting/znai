@@ -23,6 +23,10 @@ E.g. extensions `.c`, `.h`, `.cpp`, `.hpp` are treated as C++.
     
 :include-file: simple.c
 
+    :include-file: Hello.sc
+    
+:include-file: Hello.sc
+
 Use `lang` to force a different syntax highlighting
 
     :include-file: simple.c {lang: "java"}

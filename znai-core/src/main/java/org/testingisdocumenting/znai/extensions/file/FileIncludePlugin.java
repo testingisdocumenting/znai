@@ -90,11 +90,7 @@ public class FileIncludePlugin implements IncludePlugin {
     }
 
     private static String langFromFileName(String fileName) {
-        String ext = extFromFileName(fileName);
-        switch (ext) {
-            case "js": return "javascript";
-            default: return ext;
-        }
+        return extFromFileName(fileName);
     }
 
     private static String extFromFileName(String fileName) {
