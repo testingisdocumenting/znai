@@ -1,1 +1,1 @@
-* Handle dash (`----`) for [pythod doc params](snippets/python#doc-parameters) parsing
+* Handle dash (`----`) for [python doc params](snippets/python#doc-parameters) parsing

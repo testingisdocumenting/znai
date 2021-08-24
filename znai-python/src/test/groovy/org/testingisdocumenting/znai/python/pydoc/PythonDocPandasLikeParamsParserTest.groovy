@@ -55,14 +55,16 @@ class PythonDocPandasLikeParamsParserTest {
         parser.handles(content).should == true
         def params = parser.parse(content)
 
-        params.name.should == ["myName", "anotherName"]
-        params.type.should == ["myType or None", "anotherType or Nil"]
+        params.name.should == ["myName", "anotherName", "noType"]
+        params.type.should == ["myType or None", "anotherType or Nil", ""]
 
         params[0].pyDocText.should == "text of myName param description\n" +
                 "\n" +
                 "with empty lines in between"
 
         params[1].pyDocText.should == "more textual description"
+
+        params[2].pyDocText.should == "no type param"
     }
 
     private static PythonDocPandasLikeParamsParser createParser() {

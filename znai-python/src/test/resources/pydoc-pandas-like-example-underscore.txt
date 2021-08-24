@@ -12,6 +12,9 @@ myName : myType or None
 anotherName : anotherType or Nil
   more textual description
 
+noType:
+  no type param
+
 Examples
 ___________
 
