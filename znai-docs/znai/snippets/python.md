@@ -92,6 +92,9 @@ Use `include-python-doc` plugin to embed py doc string with markdown into docume
 
 :include-python-doc: python/example.py {entry: "my_func"}
 
+Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include
+parameters
+
     :include-python-doc: python/example.py {entry: "Animal"}
 
 :include-python-doc: python/example.py {entry: "Animal"}

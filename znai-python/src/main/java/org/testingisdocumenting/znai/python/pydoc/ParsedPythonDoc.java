@@ -23,30 +23,39 @@ import java.util.List;
 import java.util.Set;
 
 public class ParsedPythonDoc {
-    private static final Set<PythonDocParamsParser> paramsParsers =
-            ServiceLoaderUtils.load(PythonDocParamsParser.class);
+    private static final PythonDocParser DEFAULT = new PythonDocPandasLikeParser();
+    private static final Set<PythonDocParser> paramsParsers =
+            ServiceLoaderUtils.load(PythonDocParser.class);
 
     private final String pyDoc;
+    private final String pyDocDescriptionOnly;
     private final List<PythonParam> params;
 
     public ParsedPythonDoc(String pyDoc) {
+        PythonDocParser parser = findParser();
+        PythonDocParserResult parserResult = parser.parse(pyDoc);
+
         this.pyDoc = pyDoc;
-        this.params = createParamsParser().parse(pyDoc);
+        this.params = parserResult.getParams();
+        this.pyDocDescriptionOnly = parserResult.getDescriptionOnly();
     }
 
     public String getPyDoc() {
         return pyDoc;
     }
 
+    public String getPyDocDescriptionOnly() {
+        return pyDocDescriptionOnly;
+    }
+
     public List<PythonParam> getParams() {
         return params;
     }
 
-    private PythonDocParamsParser createParamsParser() {
+    private PythonDocParser findParser() {
         return paramsParsers.stream()
                 .filter(parser -> parser.handles(pyDoc))
-                .findFirst().map(PythonDocParamsParser::create)
-                .orElseThrow(() -> new RuntimeException(
-                        "can't find pythod doc params parser to parse:\n" + pyDoc));
+                .findFirst().map(PythonDocParser::create)
+                .orElse(DEFAULT.create());
     }
 }

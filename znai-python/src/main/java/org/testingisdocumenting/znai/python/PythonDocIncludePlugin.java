@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.python;
 
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.python.pydoc.ParsedPythonDoc;
 
 public class PythonDocIncludePlugin extends PythonIncludePluginBase {
     @Override
@@ -32,9 +33,10 @@ public class PythonDocIncludePlugin extends PythonIncludePluginBase {
     @Override
     public PythonIncludeResult process(PythonCode parsed) {
         PythonCodeEntry codeEntry = findEntryByName(parsed, entryName);
+        ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
         return new PythonIncludeResult(
-                componentsRegistry.markdownParser().parse(fullPath, codeEntry.getDocString())
+                componentsRegistry.markdownParser().parse(fullPath, parsedPythonDoc.getPyDocDescriptionOnly())
                         .getDocElement().getContent(),
-                codeEntry.getDocString());
+                parsedPythonDoc.getPyDocDescriptionOnly());
     }
 }

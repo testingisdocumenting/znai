@@ -16,14 +16,10 @@
 
 package org.testingisdocumenting.znai.python.pydoc;
 
-import org.testingisdocumenting.znai.python.PythonParam;
-
-import java.util.List;
-
-public interface PythonDocParamsParser {
+public interface PythonDocParser {
     boolean handles(String pyDoc);
 
-    PythonDocParamsParser create();
+    PythonDocParser create();
 
-    List<PythonParam> parse(String pyDoc);
+    PythonDocParserResult parse(String pyDoc);
 }
