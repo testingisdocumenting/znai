@@ -34,6 +34,7 @@ public class PythonDocPandasLikeParamsParser implements PythonDocParamsParser {
     private final String HEADER = "Parameters";
 
     private final Pattern PARAMETERS_START = Pattern.compile(HEADER + "\\s+[-_]+");
+    private final Pattern PARAMETER_NAME_TYPE = Pattern.compile("^(\\w+)\\s*:\\s*(.*)\\s*");
 
     private final List<PythonParam> params = new ArrayList<>();
     private String currentName = "";
@@ -92,9 +93,9 @@ public class PythonDocPandasLikeParamsParser implements PythonDocParamsParser {
             return LineHandleResult.CONTINUE;
         }
 
-        String[] parts = trimmed.split(":");
-        if (parts.length == 2) {
-            startNewParam(parts[0], parts[1]);
+        Matcher parameterNameTypeMatcher = PARAMETER_NAME_TYPE.matcher(trimmed);
+        if (parameterNameTypeMatcher.find()) {
+            startNewParam(parameterNameTypeMatcher.group(1), parameterNameTypeMatcher.group(2));
             return LineHandleResult.CONTINUE;
         }
 
