@@ -44,6 +44,11 @@ class PythonBasedPythonParserTest {
                         "            c, d):\n" +
                         "    \"\"\"\n" +
                         "    text inside my *func* doc\n" +
+                        "\n" +
+                        "    Parameters\n" +
+                        "    ----------\n" +
+                        "    a: String\n" +
+                        "      description\n" +
                         "    \"\"\"\n" +
                         "\n" +
                         "    e = a + b\n" +
@@ -54,7 +59,12 @@ class PythonBasedPythonParserTest {
                         "    f = c + d\n" +
                         "\n" +
                         "    return e + f",
-                docString: "text inside my *func* doc"
+                docString: "text inside my *func* doc\n" +
+                        "\n" +
+                        "Parameters\n" +
+                        "----------\n" +
+                        "a: String\n" +
+                        "  description"
         ]
 
         parsed.findEntryByName("Animal").should == [
