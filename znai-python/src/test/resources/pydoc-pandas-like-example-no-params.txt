@@ -1,0 +1,8 @@
+My documentation text blah
+in multiple lines when we include any text as py doc
+we exclude all the future sections
+
+Examples
+--------------
+
+some examples are here and should be ignored

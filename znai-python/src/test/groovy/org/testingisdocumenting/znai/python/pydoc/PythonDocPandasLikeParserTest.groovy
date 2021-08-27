@@ -22,38 +22,43 @@ import org.testingisdocumenting.znai.utils.ResourceUtils
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
 
-class PythonDocPandasLikeParamsParserTest {
+class PythonDocPandasLikeParserTest {
     @Test
     void "parse parameters with underscore"() {
-        parseAndValidate("pydoc-pandas-like-example-underscore.txt")
+        parseAndValidateParams("pydoc-pandas-like-example-underscore.txt")
     }
 
     @Test
     void "parse parameters with dash"() {
-        parseAndValidate("pydoc-pandas-like-example.txt")
+        parseAndValidateParams("pydoc-pandas-like-example.txt")
     }
 
     @Test
     void "empty parameters block"() {
         def parser = createParser()
-        def params = parser.parse("Parameters\n----------")
+        def params = parser.parse("Parameters\n----------").params
 
         params.should == []
     }
 
     @Test
-    void "should error on parameters header absence"() {
+    void "should return empty list when empty or absent parameters header"() {
         def parser = createParser()
-        code {
-            parser.parse("")
-        } should throwException("Can't find block with Parameters with underscore")
+        parser.parse("").params.should == []
     }
 
-    private static void parseAndValidate(String fileName) {
-        def content = ResourceUtils.textContent(fileName)
-        def parser = createParser()
-        parser.handles(content).should == true
-        def params = parser.parse(content)
+    @Test
+    void "should return description only ignoring params block"() {
+        def expected = "My documentation text blah\n" +
+                "in multiple lines when we include any text as py doc\n" +
+                "we exclude all the future sections"
+
+        parse("pydoc-pandas-like-example.txt").descriptionOnly.should == expected
+        parse("pydoc-pandas-like-example-no-params.txt").descriptionOnly.should == expected
+    }
+
+    private static void parseAndValidateParams(String fileName) {
+        def params = parse(fileName).params
 
         params.name.should == ["myName", "anotherName", "noType"]
         params.type.should == ["myType or None", "anotherType or Nil", ""]
@@ -67,7 +72,14 @@ class PythonDocPandasLikeParamsParserTest {
         params[2].pyDocText.should == "no type param"
     }
 
-    private static PythonDocPandasLikeParamsParser createParser() {
-        return new PythonDocPandasLikeParamsParser().create()
+    private static PythonDocParserResult parse(String fileName) {
+        def content = ResourceUtils.textContent(fileName)
+        def parser = createParser()
+        parser.handles(content).should == true
+
+        return parser.parse(content)
+    }
+    private static PythonDocPandasLikeParser createParser() {
+        return new PythonDocPandasLikeParser().create()
     }
 }

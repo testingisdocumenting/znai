@@ -46,6 +46,11 @@ def my_func(a, b,
             c, d):
     """
     text inside my *func* doc
+
+    Parameters
+    ----------
+    a: String
+      description
     """
 
     e = a + b

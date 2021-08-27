@@ -25,15 +25,17 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PythonDocPandasLikeParamsParser implements PythonDocParamsParser {
+public class PythonDocPandasLikeParser implements PythonDocParser {
     private enum LineHandleResult {
         CONTINUE,
         BREAK
     }
 
-    private final String HEADER = "Parameters";
+    private final String PARAMETERS_HEADER = "Parameters";
+    private final String UNDERSCORE_PATTERN = "\\s+[-_]+";
 
-    private final Pattern PARAMETERS_START = Pattern.compile(HEADER + "\\s+[-_]+");
+    private final Pattern HEADER_START = Pattern.compile("\\w+" + UNDERSCORE_PATTERN);
+    private final Pattern PARAMETERS_START = Pattern.compile(PARAMETERS_HEADER + UNDERSCORE_PATTERN);
     private final Pattern PARAMETER_NAME_TYPE = Pattern.compile("^(\\w+)\\s*:\\s*(.*)\\s*");
 
     private final List<PythonParam> params = new ArrayList<>();
@@ -43,21 +45,40 @@ public class PythonDocPandasLikeParamsParser implements PythonDocParamsParser {
 
     @Override
     public boolean handles(String pyDoc) {
-        return PARAMETERS_START.matcher(pyDoc).find();
-    }
-
-    @Override
-    public PythonDocPandasLikeParamsParser create() {
-        return new PythonDocPandasLikeParamsParser();
-    }
-
-    @Override
-    public List<PythonParam> parse(String pyDoc) {
-        Matcher matcher = PARAMETERS_START.matcher(pyDoc);
-        if (!matcher.find()) {
-            throw new RuntimeException("Can't find block with Parameters with underscore");
+        if (pyDoc == null) {
+            return false;
         }
 
+        return HEADER_START.matcher(pyDoc).find();
+    }
+
+    @Override
+    public PythonDocPandasLikeParser create() {
+        return new PythonDocPandasLikeParser();
+    }
+
+    @Override
+    public PythonDocParserResult parse(String pyDoc) {
+        String descriptionOnly = extractDescriptionOnly(pyDoc);
+        List<PythonParam> params = parseParams(pyDoc);
+
+        return new PythonDocParserResult(descriptionOnly, params);
+    }
+
+    private String extractDescriptionOnly(String pyDoc) {
+        Matcher matcher = HEADER_START.matcher(pyDoc);
+        if (!matcher.find()) {
+            return pyDoc;
+        }
+
+        return pyDoc.substring(0, matcher.start()).trim();
+    }
+
+    private List<PythonParam> parseParams(String pyDoc) {
+        Matcher matcher = PARAMETERS_START.matcher(pyDoc);
+        if (!matcher.find()) {
+            return Collections.emptyList();
+        }
         int start = matcher.start();
         String fromParams = pyDoc.substring(start);
 
@@ -76,7 +97,7 @@ public class PythonDocPandasLikeParamsParser implements PythonDocParamsParser {
 
     private LineHandleResult handleLine(String line) {
         String trimmed = line.trim();
-        if (trimmed.equals(HEADER)) {
+        if (trimmed.equals(PARAMETERS_HEADER)) {
             return LineHandleResult.CONTINUE;
         }
 

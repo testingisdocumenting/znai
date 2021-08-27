@@ -1,0 +1,1 @@
+* Exclude Parameters section type during [python doc](snippets/python#doc-string) parsing
