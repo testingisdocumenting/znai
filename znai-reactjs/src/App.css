@@ -181,6 +181,7 @@
     --znai-api-description-color: var(--znai-regular-text-color);
     --znai-api-title-color: var(--znai-snippets-title-color);
     --znai-api-title-background-color: var(--znai-snippets-title-background-color);
+    --znai-api-param-max-width: 225px;
 
     --znai-open-api-method-color: var(--znai-light-black);
     --znai-open-api-path-color: var(--znai-light-black);

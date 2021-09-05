@@ -32,6 +32,12 @@ const code = {"type": "Snippet", "snippet": "println 'hello world'"}
 const multipleParagraph = [paragraph, paragraph, paragraph]
 const codeBeforeParagraph = [code, paragraph, code, paragraph, paragraph]
 
+const personLongTypeParameters = [
+    {name: 'firstName', type: 'string or gstring or some union and some other long description', description: multipleParagraph},
+    {name: 'lastName', type: 'string', description: multipleParagraph},
+    {name: 'score', type: 'integer', description: multipleParagraph},
+]
+
 const personLongDescriptionParameters = [
     {name: 'firstName', type: 'string', description: multipleParagraph},
     {name: 'lastName', type: 'string', description: multipleParagraph},
@@ -67,6 +73,9 @@ export function apiParametersDemo(registry) {
         ))
         .add('flat parameters small size', () => (
             <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} small={true}/>
+        ))
+        .add('flat parameters long name and type', () => (
+            <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongTypeParameters}/>
         ))
         .add('flat parameters with title', () => (
             <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition"/>
