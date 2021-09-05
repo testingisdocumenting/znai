@@ -26,6 +26,10 @@
 
     <artifactId>znai-enterprise</artifactId>
 
+    <properties>
+        <logback.version>1.2.3</logback.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
@@ -36,7 +40,13 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
         </dependency>
 
         <dependency>
