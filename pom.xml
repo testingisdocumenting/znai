@@ -21,7 +21,7 @@
 
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-parent</artifactId>
-    <version>1.52-SNAPSHOT</version>
+    <version>1.52</version>
     <packaging>pom</packaging>
 
     <name>Znai</name>
@@ -76,7 +76,7 @@
         <url>https://github.com/testingisdocumenting/znai</url>
         <connection>scm:git:https://github.com/testingisdocumenting/znai.git</connection>
         <developerConnection>scm:git:https://github.com/testingisdocumenting/znai.git</developerConnection>
-        <tag>1.20</tag>
+        <tag>1.52</tag>
     </scm>
 
     <distributionManagement>
