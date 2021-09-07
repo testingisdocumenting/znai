@@ -42,6 +42,14 @@ class ADataClass:
     foo: str = "bar"
 
 
+@dataclass
+class ADataClassWithDocString:
+    """
+    A data class with a doc string.
+    """
+    foo: str = "bar"
+
+
 def func_no_docs():
     a = 2
     b = 3

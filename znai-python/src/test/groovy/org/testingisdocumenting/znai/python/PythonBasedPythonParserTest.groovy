@@ -109,5 +109,21 @@ class PythonBasedPythonParserTest {
                 "}",
             docString: ""
         ]
+
+        parsed.findEntryByName("ADataClass").should == [
+            name: "ADataClass",
+            type: "class",
+            content: "class ADataClass:\n    foo: str = \"bar\"",
+            bodyOnly: "    foo: str = \"bar\"",
+            docString: ""
+        ]
+
+        parsed.findEntryByName("ADataClassWithDocString").should == [
+            name: "ADataClassWithDocString",
+            type: "class",
+            content: "class ADataClassWithDocString:\n    \"\"\"\n    A data class with a doc string.\n    \"\"\"\n    foo: str = \"bar\"",
+            bodyOnly: "    foo: str = \"bar\"",
+            docString: "A data class with a doc string."
+        ]
     }
 }
