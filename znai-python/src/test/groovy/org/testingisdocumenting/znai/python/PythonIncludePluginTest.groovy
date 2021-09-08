@@ -59,8 +59,8 @@ class PythonIncludePluginTest {
         code {
             resultingProps('example.py', '{entry: "my_func_two"}')
         } should throwException("can't find entry: my_func_two in: example.py, available entries: a_method, " +
-                "func_no_docs, my_func, another_func, AClass, AClass.foo, Animal, Animal.says, " +
-                "one_line_var, multi_line_var")
+                "func_no_docs, my_func, another_func, AClass, AClass.foo, ADataClass, ADataClassWithDocString, " +
+                "Animal, Animal.says, one_line_var, multi_line_var")
     }
 
     private static Map<String, Object> resultingProps(String fileName, String value) {

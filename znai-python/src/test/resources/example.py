@@ -11,6 +11,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from dataclasses import dataclass
 
 one_line_var = "one line variable assignment"
 
@@ -34,6 +35,19 @@ class AClass:
     """
     def foo(self):
         pass
+
+
+@dataclass
+class ADataClass:
+    foo: str = "bar"
+
+
+@dataclass
+class ADataClassWithDocString:
+    """
+    A data class with a doc string.
+    """
+    foo: str = "bar"
 
 
 def func_no_docs():
