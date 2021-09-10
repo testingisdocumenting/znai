@@ -85,18 +85,18 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Function Content</h1></header>
-<p>Note: Function Content support requires running znai in an environemnt with Python 3.8 or later.Use include-python plugin to extract a function content. def my_func(): &quot;&quot;&quot; text inside my *func* doc * list one * list two &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) :include-python: python/example.py {entry: &quot;Animal.says&quot;} def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Use bodyOnly to include only the content of a function without its signature. :include-python: python/example.py {entry: &quot;Animal.says&quot;, bodyOnly: true} print(&quot;hello&quot;)</p>
+<header><h1>Content</h1></header>
+<p>Note: Function Content support requires running znai in an environment with Python 3.8 or later.All the examples below are from the following example Python file: my_var = &quot;a variable&quot; def my_func(p1, p2): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Full Content Use include-python plugin to extract function, class or global variable content. Class To show the full class definition: :include-python: python/example.py {entry: &quot;Animal&quot;} class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Function To show the full contents of a function: :include-python: python/example.py {entry: &quot;Animal.says&quot;} def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) This also works for global functions: :include-python: python/example.py {entry: &quot;my_func&quot;} def my_func(p1, p2): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description &quot;&quot;&quot; return 2 + 2 Class To show the full contents of a class: :include-python: python/example.py {entry: &quot;Animal&quot;} class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Variable To show a variable's definition and assignment: :include-python: python/example.py {entry: &quot;my_var&quot;} my_var = &quot;a variable&quot; Body Only Use bodyOnly to include just the &quot;body&quot; part of the content. The specifics differ based on what is being included. Function To show a function's body, without signature or doc string: :include-python: python/example.py {entry: &quot;Animal.says&quot;, bodyOnly: true} print(&quot;hello&quot;) This also works for global functions: :include-python: python/example.py {entry: &quot;my_func&quot;, bodyOnly: true} return 2 + 2 Class To show the contents of a class without the class declaration or doc string: :include-python: python/example.py {entry: &quot;Animal&quot;, bodyOnly: true} def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Variable To show only a variable's value: :include-python: python/example.py {entry: &quot;my_var&quot;, bodyOnly: true} &quot;a variable&quot;</p>
 </article>
 
 <article>
 <header><h1>Doc String</h1></header>
-<p>Use include-python-doc plugin to embed py doc string with markdown into documentation def my_func(): &quot;&quot;&quot; text inside my *func* doc * list one * list two &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) :include-python-doc: python/example.py {entry: &quot;my_func&quot;} text inside my *func* doc * list one * list two :include-python-doc: python/example.py {entry: &quot;Animal&quot;} animal top level class doc string ``` code block ``` :include-python-doc: python/example.py {entry: &quot;Animal.says&quot;} animal **talks** `code`</p>
+<p>Use include-python-doc plugin to embed py doc string with markdown into documentation my_var = &quot;a variable&quot; def my_func(p1, p2): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) :include-python-doc: python/example.py {entry: &quot;my_func&quot;} text inside my *func* doc * list one * list two Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include parameters :include-python-doc: python/example.py {entry: &quot;Animal&quot;} animal top level class doc string ``` code block ``` :include-python-doc: python/example.py {entry: &quot;Animal.says&quot;} animal **talks** `code`</p>
 </article>
 
 <article>
 <header><h1>Doc Parameters</h1></header>
-<p>Use include-python-doc-params plugin to render parameters extracted from pydoc text def my_func(label, price): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters __________ label : String label to use to *render* item in the store price : Money price associated with the **item** &quot;&quot;&quot; print(&quot;hello&quot;) :include-python-doc-params: python/pydoc-params.py {entry: &quot;my_func&quot;, title: &quot;my_func params&quot;} text inside my *func* doc * list one * list two Parameters __________ label : String label to use to *render* item in the store price : Money price associated with the **item** Note: read more about snippets/api-parameters API parameters for additional properties</p>
+<p>Use include-python-doc-params plugin to render parameters extracted from pydoc text def my_func(label, price): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters -------------- label : String label to use to *render* item in the store price : Money price associated with the **item** &quot;&quot;&quot; print(&quot;hello&quot;) :include-python-doc-params: python/pydoc-params.py {entry: &quot;my_func&quot;, title: &quot;my_func params&quot;} text inside my *func* doc * list one * list two Parameters -------------- label : String label to use to *render* item in the store price : Money price associated with the **item** Note: read more about snippets/api-parameters API parameters for additional properties</p>
 </article>
 </section>
 </div>
@@ -130,15 +130,31 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Function Content",
-      "id" : "function-content",
+      "id" : "content",
       "type" : "Section",
+      "title" : "Content",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: Function Content support requires running znai in an environemnt with Python 3.8 or later.",
+          "text" : "Note: Function Content support requires running znai in an environment with Python 3.8 or later.",
           "type" : "SimpleText"
         } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "All the examples below are from the following example Python file:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "my_var = \"a variable\"\n\ndef my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
+        "type" : "Snippet",
+        "title" : "example.py",
+        "lang" : "py"
+      }, {
+        "level" : 2,
+        "id" : "content-full-content",
+        "type" : "SubHeading",
+        "title" : "Full Content"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -148,24 +164,114 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "include-python",
           "type" : "InlinedCode"
         }, {
-          "text" : " plugin to extract a function content.",
+          "text" : " plugin to extract function, class or global variable content.",
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "py",
-        "snippet" : "def my_func():\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n    \"\"\"\n\n    return 2 + 2\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
-        "title" : "example.py",
-        "type" : "Snippet"
+        "level" : 3,
+        "id" : "content-full-content-class",
+        "type" : "SubHeading",
+        "title" : "Class"
       }, {
-        "lang" : "",
-        "snippet" : ":include-python: python/example.py {entry: \"Animal.says\"}\n",
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To show the full class definition:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-python: python/example.py {entry: \"Animal\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "python",
+        "snippet" : "class Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
+        "entry" : "Animal",
+        "type" : "Snippet",
+        "lang" : "python"
+      }, {
+        "level" : 3,
+        "id" : "content-full-content-function",
+        "type" : "SubHeading",
+        "title" : "Function"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To show the full contents of a function:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-python: python/example.py {entry: \"Animal.says\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
         "snippet" : "def says(self):\n    \"\"\"\n    animal **talks** `code`\n    \"\"\"\n    print(\"hello\")",
         "entry" : "Animal.says",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "python"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This also works for global functions:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-python: python/example.py {entry: \"my_func\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "def my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2",
+        "entry" : "my_func",
+        "type" : "Snippet",
+        "lang" : "python"
+      }, {
+        "level" : 3,
+        "id" : "content-full-content-class-2",
+        "type" : "SubHeading",
+        "title" : "Class"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To show the full contents of a class:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-python: python/example.py {entry: \"Animal\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "class Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
+        "entry" : "Animal",
+        "type" : "Snippet",
+        "lang" : "python"
+      }, {
+        "level" : 3,
+        "id" : "content-full-content-variable",
+        "type" : "SubHeading",
+        "title" : "Variable"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To show a variable's definition and assignment:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-python: python/example.py {entry: \"my_var\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "my_var = \"a variable\"",
+        "entry" : "my_var",
+        "type" : "Snippet",
+        "lang" : "python"
+      }, {
+        "level" : 2,
+        "id" : "content-body-only",
+        "type" : "SubHeading",
+        "title" : "Body Only"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -175,25 +281,97 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "bodyOnly",
           "type" : "InlinedCode"
         }, {
-          "text" : " to include only the content of a function without its signature.",
+          "text" : " to include just the \"body\" part of the content.  The specifics differ based on what is being included.",
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
-        "snippet" : ":include-python: python/example.py {entry: \"Animal.says\", bodyOnly: true}\n",
-        "lineNumber" : "",
-        "type" : "Snippet"
+        "level" : 3,
+        "id" : "content-body-only-function",
+        "type" : "SubHeading",
+        "title" : "Function"
       }, {
-        "lang" : "python",
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To show a function's body, without signature or doc string:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-python: python/example.py {entry: \"Animal.says\", bodyOnly: true}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
         "snippet" : "print(\"hello\")",
         "entry" : "Animal.says",
         "bodyOnly" : true,
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "python"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This also works for global functions:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-python: python/example.py {entry: \"my_func\", bodyOnly: true}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "return 2 + 2",
+        "entry" : "my_func",
+        "bodyOnly" : true,
+        "type" : "Snippet",
+        "lang" : "python"
+      }, {
+        "level" : 3,
+        "id" : "content-body-only-class",
+        "type" : "SubHeading",
+        "title" : "Class"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To show the contents of a class without the class declaration or doc string:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-python: python/example.py {entry: \"Animal\", bodyOnly: true}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "def says(self):\n    \"\"\"\n    animal **talks** `code`\n    \"\"\"\n    print(\"hello\")",
+        "entry" : "Animal",
+        "bodyOnly" : true,
+        "type" : "Snippet",
+        "lang" : "python"
+      }, {
+        "level" : 3,
+        "id" : "content-body-only-variable",
+        "type" : "SubHeading",
+        "title" : "Variable"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To show only a variable's value:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-python: python/example.py {entry: \"my_var\", bodyOnly: true}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "\"a variable\"",
+        "entry" : "my_var",
+        "bodyOnly" : true,
+        "type" : "Snippet",
+        "lang" : "python"
       } ]
     }, {
-      "title" : "Doc String",
       "id" : "doc-string",
       "type" : "Section",
+      "title" : "Doc String",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -207,15 +385,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "py",
-        "snippet" : "def my_func():\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n    \"\"\"\n\n    return 2 + 2\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
+        "snippet" : "my_var = \"a variable\"\n\ndef my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
+        "type" : "Snippet",
         "title" : "example.py",
-        "type" : "Snippet"
+        "lang" : "py"
       }, {
-        "lang" : "",
         "snippet" : ":include-python-doc: python/example.py {entry: \"my_func\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -233,8 +411,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -255,10 +433,21 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ]
       }, {
-        "lang" : "",
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "parameters",
+          "type" : "SimpleText"
+        } ]
+      }, {
         "snippet" : ":include-python-doc: python/example.py {entry: \"Animal\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -266,15 +455,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "code block\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "",
         "snippet" : ":include-python-doc: python/example.py {entry: \"Animal.says\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -295,9 +484,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Doc Parameters",
       "id" : "doc-parameters",
       "type" : "Section",
+      "title" : "Doc Parameters",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -311,20 +500,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "py",
-        "snippet" : "def my_func(label, price):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    __________\n    label : String\n\n      label to use to *render* item in the store\n\n    price : Money\n\n      price associated with the **item**\n    \"\"\"\n\n    print(\"hello\")",
+        "snippet" : "def my_func(label, price):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    --------------\n    label : String\n      label to use to *render* item in the store\n\n    price : Money\n      price associated with the **item**\n    \"\"\"\n\n    print(\"hello\")",
+        "type" : "Snippet",
         "title" : "pydoc-params.py",
-        "type" : "Snippet"
+        "lang" : "py"
       }, {
-        "lang" : "",
         "snippet" : ":include-python-doc-params: python/pydoc-params.py {entry: \"my_func\", title: \"my_func params\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "entry" : "my_func",
+        "type" : "ApiParameters",
+        "title" : "my_func params",
         "parameters" : [ {
           "name" : "label",
-          "type" : "String",
-          "anchorId" : "my_func_label",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -340,11 +530,11 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " item in the store",
               "type" : "SimpleText"
             } ]
-          } ]
+          } ],
+          "anchorId" : "my_func_label",
+          "type" : "String"
         }, {
           "name" : "price",
-          "type" : "Money",
-          "anchorId" : "my_func_price",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -357,31 +547,30 @@ ReactDOM.render(React.createElement(Documentation, {
                 "type" : "SimpleText"
               } ]
             } ]
-          } ]
-        } ],
-        "entry" : "my_func",
-        "title" : "my_func params",
-        "type" : "ApiParameters"
+          } ],
+          "anchorId" : "my_func_price",
+          "type" : "Money"
+        } ]
       }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Note: read more about ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/snippets/api-parameters",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "API parameters",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "/znai/snippets/api-parameters"
         }, {
           "text" : " for additional properties",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894798,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Python",
@@ -390,8 +579,8 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "python",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Function Content",
-        "id" : "function-content"
+        "title" : "Content",
+        "id" : "content"
       }, {
         "title" : "Doc String",
         "id" : "doc-string"

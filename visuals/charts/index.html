@@ -140,9 +140,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Pie",
       "id" : "pie",
       "type" : "Section",
+      "title" : "Pie",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -156,9 +156,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "csv",
         "snippet" : "label, value\nA, 10\nB, 20\nC, 15\nD, 8",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "csv"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -166,14 +166,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-chart: data.csv {type: \"Pie\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "type" : "Chart",
+        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ],
         "chartType" : "Pie",
-        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ]
+        "type" : "Chart"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -187,20 +187,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-chart: data.csv {type: \"Pie\", innerRadius: 100} \n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "type" : "Chart",
-        "innerRadius" : 100,
+        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ],
         "chartType" : "Pie",
-        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ]
+        "innerRadius" : 100,
+        "type" : "Chart"
       } ]
     }, {
-      "title" : "Bar",
       "id" : "bar",
       "type" : "Section",
+      "title" : "Bar",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -208,12 +208,11 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-chart: data.csv\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "chartType" : null,
         "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ],
         "type" : "Chart"
       }, {
@@ -223,20 +222,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-chart: data.csv {horizontal: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "horizontal" : true,
-        "chartType" : null,
         "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ],
         "type" : "Chart"
       } ]
     }, {
-      "title" : "Line",
       "id" : "line",
       "type" : "Section",
+      "title" : "Line",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -244,19 +242,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-chart: data.csv {type: \"Line\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "type" : "Chart",
+        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ],
         "chartType" : "Line",
-        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ]
+        "type" : "Chart"
       } ]
     }, {
-      "title" : "Presentation Mode",
       "id" : "presentation-mode",
       "type" : "Section",
+      "title" : "Presentation Mode",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -281,15 +279,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-meta: {allAtOnce: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       } ]
     }, {
-      "title" : "Victory Charts",
       "id" : "victory-charts",
       "type" : "Section",
+      "title" : "Victory Charts",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -299,20 +297,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : " uses the ",
           "type" : "SimpleText"
         }, {
-          "url" : "https://github.com/FormidableLabs/victory-chart",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "VictoryChart",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "https://github.com/FormidableLabs/victory-chart"
         }, {
           "text" : " library to render charts.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894806,
+    "lastModifiedTime" : 1631289543454,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Charts",

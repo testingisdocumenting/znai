@@ -150,9 +150,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Method Body",
       "id" : "method-body",
       "type" : "Section",
+      "title" : "Method Body",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -172,9 +172,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "java",
         "snippet" : "/**\n * Top level conceptual description of a {@link CustomDomain} problem.\n * <p>\n * To avoid <b>copy & paste</b> of the content consider to re-use information.\n */\nclass HelloWorld {\n    /**\n     * Each year we hire students from different universities to increase\n     * <code>diversity</code>\n     */\n    private int numberOfStudents;\n\n    /**\n     * Conceptual description of a <i>Domain</i> problem.\n     * <p>\n     * It will work only if you put high level description here and\n     * <b>not</b> implementation details.\n     *\n     * @param p1 important parameter of something\n     * @param p2 sample <i>offset</i> according to the rules of the universe\n     * @return name of the <b>best</b> sample\n     */\n    public String sampleMethod(String p1, int p2) {\n        validate();\n        process(p2); // important comment\n        notifyAll(p1); // very important\n\n        return bestSample();\n    }\n\n    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n        // overloaded method\n    }\n\n    /**\n     * @param trader trader that performs action\n     * @param transaction transaction to perform action on\n     */\n    public void importantAction(Trader trader, Transaction transaction) {\n        // TODO important\n    }\n\n    public Data createData() {\n        // create data\n    }\n}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -182,10 +182,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -199,29 +199,29 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "java",
         "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();",
         "entry" : "sampleMethod",
         "bodyOnly" : true,
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       } ]
     }, {
-      "title" : "Callout Comments",
       "id" : "callout-comments",
       "type" : "Section",
+      "title" : "Callout Comments",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Similar to how you ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/snippets/external-code-snippets#callout-comments",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "specify comments type",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "/znai/snippets/external-code-snippets#callout-comments"
         }, {
           "text" : " for a regular file,",
           "type" : "SimpleText"
@@ -244,22 +244,22 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true, commentsType: \"inline\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();",
         "entry" : "sampleMethod",
         "bodyOnly" : true,
         "commentsType" : "inline",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       } ]
     }, {
-      "title" : "Signature Only",
       "id" : "signature-only",
       "type" : "Section",
+      "title" : "Signature Only",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -267,10 +267,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -284,16 +284,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "java",
         "snippet" : "public String sampleMethod(String p1, int p2)",
         "entry" : "sampleMethod",
+        "type" : "Snippet",
         "signatureOnly" : true,
-        "type" : "Snippet"
+        "lang" : "java"
       } ]
     }, {
-      "title" : "Overloads",
       "id" : "overloads",
       "type" : "Section",
+      "title" : "Overloads",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -312,10 +312,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod(Map, int, boolean)\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -323,15 +323,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "java",
         "snippet" : "public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n    // overloaded method\n}",
         "entry" : "sampleMethod(Map, int, boolean)",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       } ]
     }, {
-      "title" : "Type Body",
       "id" : "type-body",
       "type" : "Section",
+      "title" : "Type Body",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -357,15 +357,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-java: MyEnum.java {entry: \"MyEnum\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "enum MyEnum {\n    /**\n     * description of <b>entry one</b>\n     */\n    ENTRY_ONE,\n\n    /**\n     * description of entry two\n     * <ul>\n     *     <li>item one</li>\n     *     <li>item two</li>\n     * </ul>\n     */\n    ENTRY_TWO,\n\n    /**\n     * Don't use, instead use ENTRY_TWO\n     */\n    @Deprecated\n    ENTRY_THREE\n}",
         "entry" : "MyEnum",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -379,21 +379,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-java: MyEnum.java {entry: \"MyEnum\", bodyOnly: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "/**\n * description of <b>entry one</b>\n */\nENTRY_ONE,\n\n/**\n * description of entry two\n * <ul>\n *     <li>item one</li>\n *     <li>item two</li>\n * </ul>\n */\nENTRY_TWO,\n\n/**\n * Don't use, instead use ENTRY_TWO\n */\n@Deprecated\nENTRY_THREE",
         "entry" : "MyEnum",
         "bodyOnly" : true,
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       } ]
     }, {
-      "title" : "Multiple Entries",
       "id" : "multiple-entries",
       "type" : "Section",
+      "title" : "Multiple Entries",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -407,10 +407,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-java: HelloWorld.java {entries: [\"createData\", \"importantAction\"]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -418,10 +418,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "java",
         "snippet" : "public Data createData() {\n    // create data\n}\n\npublic void importantAction(Trader trader, Transaction transaction) {\n    // TODO important\n}",
         "entries" : [ "createData", "importantAction" ],
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -435,10 +435,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-java: HelloWorld.java {entries: [\"createData\", \"importantAction\"], signatureOnly: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -446,16 +446,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "java",
         "snippet" : "public Data createData()\npublic void importantAction(Trader trader, Transaction transaction)",
         "entries" : [ "createData", "importantAction" ],
+        "type" : "Snippet",
         "signatureOnly" : true,
-        "type" : "Snippet"
+        "lang" : "java"
       } ]
     }, {
-      "title" : "Multiple Overloads",
       "id" : "multiple-overloads",
       "type" : "Section",
+      "title" : "Multiple Overloads",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -469,19 +469,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-java: HelloWorld.java {entries: \"sampleMethod\", signatureOnly: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "public String sampleMethod(String p1, int p2)\npublic void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive)",
         "entries" : "sampleMethod",
+        "type" : "Snippet",
         "signatureOnly" : true,
-        "type" : "Snippet"
+        "lang" : "java"
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Java",

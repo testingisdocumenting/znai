@@ -125,9 +125,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Hidden Content",
       "id" : "hidden-content",
       "type" : "Section",
+      "title" : "Hidden Content",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -141,11 +141,12 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "````spoiler \nInformation you don't want users to see right away goes here.\nCan use all the markdown inside\n1. item A\n2. item B\n    \n```\nlet list = [1, 2, 3]\nlet value = 0\n```\n````\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "Spoiler",
         "title" : "Press to reveal",
         "content" : [ {
           "type" : "Paragraph",
@@ -159,8 +160,8 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         }, {
-          "delimiter" : ".",
           "startNumber" : 1,
+          "delimiter" : ".",
           "type" : "OrderedList",
           "content" : [ {
             "type" : "ListItem",
@@ -182,12 +183,11 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         }, {
-          "lang" : "",
           "snippet" : "let list = [1, 2, 3]\nlet value = 0\n",
+          "type" : "Snippet",
           "lineNumber" : "",
-          "type" : "Snippet"
-        } ],
-        "type" : "Spoiler"
+          "lang" : ""
+        } ]
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -201,9 +201,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Hidden Content Title",
       "id" : "hidden-content-title",
       "type" : "Section",
+      "title" : "Hidden Content Title",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -217,15 +217,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```spoiler {title: \"Are you ready to see what's inside?\"}\n...\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "Spoiler",
         "title" : "Are you ready to see what's inside?",
         "content" : [ {
-          "delimiter" : ".",
           "startNumber" : 1,
+          "delimiter" : ".",
           "type" : "OrderedList",
           "content" : [ {
             "type" : "ListItem",
@@ -255,11 +256,10 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           } ]
-        } ],
-        "type" : "Spoiler"
+        } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894814,
+    "lastModifiedTime" : 1631289543462,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Spoilers",

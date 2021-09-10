@@ -135,9 +135,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Setup",
       "id" : "setup",
       "type" : "Section",
+      "title" : "Setup",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -145,15 +145,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "markdown",
         "snippet" : "---\ntype: two-sides\n---\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : "markdown"
       } ]
     }, {
-      "title" : "Details Side",
       "id" : "details-side",
       "type" : "Section",
+      "title" : "Details Side",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -178,81 +178,32 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "markdown",
         "snippet" : ":include-open-api: snippets/open-api/uber.json {method: \"get\", path: \"/v1/estimates/time\"}\n:include-meta: {rightSide: true}\n:include-json: two-sides/price-estimate.json\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : "markdown"
       } ]
     }, {
-      "title" : "Open API Example",
       "id" : "open-api-example",
       "type" : "Section",
+      "title" : "Open API Example",
       "content" : [ {
-        "method" : "get",
         "path" : "/v1/estimates/time",
+        "method" : "get",
+        "type" : "OpenApiOperation",
         "operation" : {
-          "id" : "null",
-          "method" : "get",
-          "path" : "/v1/estimates/time",
-          "consumes" : null,
-          "produces" : [ "application/json" ],
           "summary" : "Time Estimates",
-          "tags" : [ "Estimates" ],
-          "parameters" : [ {
-            "name" : "start_latitude",
-            "in" : "query",
-            "type" : "number",
-            "required" : true,
-            "schema" : { },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Latitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          }, {
-            "name" : "start_longitude",
-            "in" : "query",
-            "type" : "number",
-            "required" : true,
-            "schema" : { },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Longitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          }, {
-            "name" : "customer_uuid",
-            "in" : "query",
-            "type" : "string",
-            "required" : false,
-            "schema" : { },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique customer identifier to be used for experience customization.",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          }, {
-            "name" : "product_id",
-            "in" : "query",
-            "type" : "string",
-            "required" : false,
-            "schema" : { },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
-                "type" : "SimpleText"
-              } ]
+          "path" : "/v1/estimates/time",
+          "method" : "get",
+          "produces" : [ "application/json" ],
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
+              "type" : "SimpleText"
             } ]
           } ],
           "responses" : [ {
-            "code" : "200",
             "schema" : {
               "type" : "array",
               "items" : {
@@ -310,6 +261,7 @@ ReactDOM.render(React.createElement(Documentation, {
                 }
               }
             },
+            "code" : "200",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -318,21 +270,21 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           }, {
-            "code" : "default",
             "schema" : {
               "properties" : {
                 "code" : {
                   "format" : "int32",
                   "type" : "integer"
                 },
-                "message" : {
+                "fields" : {
                   "type" : "string"
                 },
-                "fields" : {
+                "message" : {
                   "type" : "string"
                 }
               }
             },
+            "code" : "default",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -341,70 +293,117 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           } ],
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        },
-        "type" : "OpenApiOperation"
+          "id" : "null",
+          "parameters" : [ {
+            "schema" : { },
+            "in" : "query",
+            "name" : "start_latitude",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Latitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ],
+            "type" : "number",
+            "required" : true
+          }, {
+            "schema" : { },
+            "in" : "query",
+            "name" : "start_longitude",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Longitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ],
+            "type" : "number",
+            "required" : true
+          }, {
+            "schema" : { },
+            "in" : "query",
+            "name" : "customer_uuid",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique customer identifier to be used for experience customization.",
+                "type" : "SimpleText"
+              } ]
+            } ],
+            "type" : "string",
+            "required" : false
+          }, {
+            "schema" : { },
+            "in" : "query",
+            "name" : "product_id",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
+                "type" : "SimpleText"
+              } ]
+            } ],
+            "type" : "string",
+            "required" : false
+          } ],
+          "tags" : [ "Estimates" ]
+        }
       }, {
         "rightSide" : true,
         "type" : "Meta"
       }, {
-        "title" : "Response",
         "data" : {
           "prices" : [ {
-            "localized_display_name" : "POOL",
-            "distance" : 6.17,
-            "display_name" : "POOL",
-            "product_id" : "26546650-e557-4a7b-86e7-6a3942445247",
+            "duration" : 1080,
             "high_estimate" : 15,
+            "distance" : 6.17,
             "low_estimate" : 13,
-            "duration" : 1080,
+            "product_id" : "26546650-e557-4a7b-86e7-6a3942445247",
             "estimate" : "$13-14",
+            "localized_display_name" : "POOL",
+            "display_name" : "POOL",
             "currency_code" : "USD"
           }, {
-            "localized_display_name" : "uberX",
-            "distance" : 6.17,
-            "display_name" : "uberX",
-            "product_id" : "a1111c8c-c720-46c3-8534-2fcdd730040d",
+            "duration" : 1080,
             "high_estimate" : 17,
+            "distance" : 6.17,
             "low_estimate" : 13,
-            "duration" : 1080,
+            "product_id" : "a1111c8c-c720-46c3-8534-2fcdd730040d",
             "estimate" : "$13-17",
+            "localized_display_name" : "uberX",
+            "display_name" : "uberX",
             "currency_code" : "USD"
           }, {
-            "localized_display_name" : "uberXL",
-            "distance" : 6.17,
-            "display_name" : "uberXL",
-            "product_id" : "821415d8-3bd5-4e27-9604-194e4359a449",
+            "duration" : 1080,
             "high_estimate" : 26,
+            "distance" : 6.17,
             "low_estimate" : 20,
-            "duration" : 1080,
+            "product_id" : "821415d8-3bd5-4e27-9604-194e4359a449",
             "estimate" : "$20-26",
+            "localized_display_name" : "uberXL",
+            "display_name" : "uberXL",
             "currency_code" : "USD"
           }, {
-            "localized_display_name" : "SELECT",
-            "distance" : 6.17,
-            "display_name" : "SELECT",
-            "product_id" : "57c0ff4e-1493-4ef9-a4df-6b961525cf92",
-            "high_estimate" : 38,
-            "low_estimate" : 30,
             "duration" : 1080,
+            "high_estimate" : 38,
+            "distance" : 6.17,
+            "low_estimate" : 30,
+            "product_id" : "57c0ff4e-1493-4ef9-a4df-6b961525cf92",
             "estimate" : "$30-38",
+            "localized_display_name" : "SELECT",
+            "display_name" : "SELECT",
             "currency_code" : "USD"
           } ]
         },
         "paths" : [ ],
-        "type" : "Json"
+        "type" : "Json",
+        "title" : "Response"
       } ]
     }, {
-      "title" : "Aligning Data in Columns",
       "id" : "aligning-data-in-columns",
       "type" : "Section",
+      "title" : "Aligning Data in Columns",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -423,14 +422,8 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "type" : "EmptyBlock"
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price"
-          }, {
-            "title" : "Description"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -485,16 +478,22 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "lunch",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
       }, {
         "rightSide" : true,
         "type" : "Meta"
       }, {
-        "lang" : "csv",
         "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "csv"
       }, {
         "rightSide" : false,
         "type" : "Meta"
@@ -505,26 +504,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "md",
+        "endLine" : ":include-meta: {rightSide: false}",
         "snippet" : "# Aligning Data in Columns\n\nUse an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side.\n:include-empty-block: {rightSide: true}\n\n:include-table: layout/table/table.csv\n:include-meta: {rightSide: true}\n:include-file: layout/table/table.csv\n\n:include-meta: {rightSide: false}",
         "startLine" : "Aligning Data in Columns",
         "exclude" : true,
-        "endLine" : ":include-meta: {rightSide: false}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "md"
       } ]
     }, {
-      "title" : "Single Data Block Shortcut",
       "id" : "single-data-block-shortcut",
       "type" : "Section",
+      "title" : "Single Data Block Shortcut",
       "content" : [ {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price"
-          }, {
-            "title" : "Description"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -579,16 +572,22 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "lunch",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
       }, {
-        "lang" : "csv",
         "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
         "meta" : {
           "rightSide" : true
         },
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "csv"
       }, {
         "rightSide" : false,
         "type" : "Meta"
@@ -611,14 +610,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "md",
+        "endLine" : "{rightSide: true}",
         "snippet" : "# Single Data Block Shortcut\n\n:include-table: layout/table/table.csv\n:include-file: layout/table/table.csv  {rightSide: true}",
         "startLine" : "Single Data Block Shortcut",
-        "endLine" : "{rightSide: true}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "md"
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Two Sides Pages",

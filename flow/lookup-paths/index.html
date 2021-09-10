@@ -135,9 +135,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Files Reference Lookup",
       "id" : "files-reference-lookup",
       "type" : "Section",
+      "title" : "Files Reference Lookup",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -161,8 +161,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -201,16 +201,16 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ]
       }, {
-        "lang" : "txt",
         "snippet" : "../examples\n../module/src/main/java\n",
-        "lineNumber" : "",
+        "type" : "Snippet",
         "title" : "lookup-paths",
-        "type" : "Snippet"
+        "lineNumber" : "",
+        "lang" : "txt"
       } ]
     }, {
-      "title" : "Class Path Lookup",
       "id" : "class-path-lookup",
       "type" : "Section",
+      "title" : "Class Path Lookup",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -223,25 +223,25 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "xml",
         "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>${project.version}</version>\n    <dependencies>\n        <dependency>\n            <groupId>junit</groupId>\n            <artifactId>junit</artifactId>\n            <version>${junit.version}</version>\n            <classifier>sources</classifier>\n        </dependency>\n    </dependencies>\n</plugin>",
         "highlight" : [ 9 ],
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "xml"
       }, {
-        "lang" : "",
         "snippet" : ":include-java: org/junit/Assert.java {entry: \"assertArrayEquals\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "public static void assertArrayEquals(String message, Object[] expecteds,\n        Object[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}",
         "entry" : "assertArrayEquals",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       } ]
     }, {
-      "title" : "HTTP Lookup Location",
       "id" : "http-lookup-location",
       "type" : "Section",
+      "title" : "HTTP Lookup Location",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -255,11 +255,11 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "txt",
         "snippet" : "../examples\n../module/src/main/java\nhttps://raw.githubusercontent.com/testingisdocumenting/webtau/master\n",
-        "lineNumber" : "",
+        "type" : "Snippet",
         "title" : "lookup-paths",
-        "type" : "Snippet"
+        "lineNumber" : "",
+        "lang" : "txt"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -267,19 +267,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: .travis.yml\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "yaml",
         "snippet" : "language: java\n\njdk:\n  - openjdk8\n  - openjdk11\n\ncache:\n  directories:\n  - $HOME/.m2\n  - $HOME/.npm\n  - node_modules\n\ndist: xenial\n\nservices:\n  - xvfb\n\naddons:\n  chrome: stable\n  firefox: latest\n  apt:\n    packages:\n      - graphviz\n\n# disables the default install step which is mvn install skipping tests\ninstall: true\n\nscript: mvn -B verify -P code-coverage",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "yaml"
       } ]
     }, {
-      "title" : "CLI parameter",
       "id" : "cli-parameter",
       "type" : "Section",
+      "title" : "CLI parameter",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -298,12 +298,12 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "command" : "webtau --lookup-paths /extra/path-one:/extra/path-two",
         "paramsToHighlight" : [ ],
-        "type" : "CliCommand"
+        "type" : "CliCommand",
+        "command" : "webtau --lookup-paths /extra/path-one:/extra/path-two"
       } ]
     } ],
-    "lastModifiedTime" : 1626065894790,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Lookup Paths",

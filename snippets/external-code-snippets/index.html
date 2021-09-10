@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Syntax highlighting</h1></header>
-<p>Syntax highlighting is automatically selected based file extension. E.g. extensions .c , .h , .cpp , .hpp are treated as C++. :include-file: simple.c #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } Use lang to force a different syntax highlighting :include-file: simple.c {lang: &quot;java&quot;} #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } Note: File extensions and lang are case-insensitive.</p>
+<p>Syntax highlighting is automatically selected based file extension. E.g. extensions .c , .h , .cpp , .hpp are treated as C++. :include-file: simple.c #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } :include-file: Hello.sc object Hello { def main(args: Array[String]) = { println(&quot;Hello, world&quot;) } } Use lang to force a different syntax highlighting :include-file: simple.c {lang: &quot;java&quot;} #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } Note: File extensions and lang are case-insensitive.</p>
 </article>
 
 <article>
@@ -160,9 +160,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Embedding Content",
       "id" : "embedding-content",
       "type" : "Section",
+      "title" : "Embedding Content",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -181,10 +181,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: file-name.js\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -198,9 +198,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "js"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -209,8 +209,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -247,9 +247,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Syntax highlighting",
       "id" : "syntax-highlighting",
       "type" : "Section",
+      "title" : "Syntax highlighting",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -286,14 +286,23 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: simple.c\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "c",
         "snippet" : "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "c"
+      }, {
+        "snippet" : ":include-file: Hello.sc\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "object Hello {\n  def main(args: Array[String]) = {\n    println(\"Hello, world\")\n  }\n}",
+        "type" : "Snippet",
+        "lang" : "sc"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -307,14 +316,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: simple.c {lang: \"java\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -329,14 +338,14 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Title",
       "id" : "title",
       "type" : "Section",
+      "title" : "Title",
       "content" : [ {
-        "lang" : "",
         "snippet" : ":include-file: file-name.js {title: \"ES6 class\"} \n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -350,10 +359,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+        "type" : "Snippet",
         "title" : "ES6 class",
-        "type" : "Snippet"
+        "lang" : "js"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -373,21 +382,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: file-name.js {autoTitle: true} \n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "autoTitle" : true,
+        "type" : "Snippet",
         "title" : "file-name.js",
-        "type" : "Snippet"
+        "autoTitle" : true,
+        "lang" : "js"
       } ]
     }, {
-      "title" : "Wide Code",
       "id" : "wide-code",
       "type" : "Section",
+      "title" : "Wide Code",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -401,15 +410,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: WideCode.java {wide: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
         "wide" : true,
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -423,9 +432,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "java",
         "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -443,9 +452,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Read More",
       "id" : "read-more",
       "type" : "Section",
+      "title" : "Read More",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -479,21 +488,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n        this.workingDir = workingDir;\n        this.fileNameByDirName = new LinkedHashMap<>();\n    }\n\n    public void create() {\n        createPages();\n        createToc();\n        createMeta();\n        createIndex();\n        createLookupPaths();\n    }\n\n    private void createLookupPaths() {\n        createFileFromResource(\"lookup-paths\");\n    }\n\n    private void createMeta() {\n        createFileFromResource(\"meta.json\");\n    }\n}",
-        "readMore" : true,
         "readMoreVisibleLines" : 3,
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "readMore" : true,
+        "lang" : "java"
       } ]
     }, {
-      "title" : "Highlights",
       "id" : "highlights",
       "type" : "Section",
+      "title" : "Highlights",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -507,15 +516,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: file-name.js {highlight: \"export\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "highlight" : [ 6 ],
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "js"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -528,15 +537,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: file-name.js {highlight: [\"export\", 1]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "highlight" : [ 6, 1 ],
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "js"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -556,26 +565,26 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: file-name.js {highlightPath: \"lines-to-highlight.txt\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlightPath" : "lines-to-highlight.txt",
         "highlight" : [ 0, 2 ],
-        "type" : "Snippet"
+        "highlightPath" : "lines-to-highlight.txt",
+        "type" : "Snippet",
+        "lang" : "js"
       }, {
-        "lang" : "txt",
         "snippet" : "class\nusefulAction",
+        "type" : "Snippet",
         "title" : "lines-to-highlight.txt",
-        "type" : "Snippet"
+        "lang" : "txt"
       } ]
     }, {
-      "title" : "Extract Snippets",
       "id" : "extract-snippets",
       "type" : "Section",
+      "title" : "Extract Snippets",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -595,22 +604,22 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "py",
         "snippet" : "import market\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example-cancel-trade\n    market.cancel_trade('id')\n    # example-cancel-trade\n\nif __name__  == \"__main__\":\n    main()",
+        "type" : "Snippet",
         "title" : "file with examples",
-        "type" : "Snippet"
+        "lang" : "py"
       }, {
-        "lang" : "",
         "snippet" : ":include-file: python-examples.py {startLine: \"example: book trade\", endLine: \"example-end\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "py",
-        "snippet" : "# example: book trade\nid = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n# example-end",
-        "title" : "extracted example",
-        "startLine" : "example: book trade",
         "endLine" : "example-end",
-        "type" : "Snippet"
+        "snippet" : "# example: book trade\nid = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n# example-end",
+        "startLine" : "example: book trade",
+        "type" : "Snippet",
+        "title" : "extracted example",
+        "lang" : "py"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -648,18 +657,18 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: python-examples.py { \n    startLine: \"example: book trade\",\n    endLine: \"example-end\",\n    excludeStartEnd: true }\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "py",
-        "snippet" : "id = market.book_trade('symbol', market.CURRENT_PRICE, 100)",
-        "title" : "extracted example",
-        "startLine" : "example: book trade",
         "endLine" : "example-end",
+        "snippet" : "id = market.book_trade('symbol', market.CURRENT_PRICE, 100)",
         "excludeStartEnd" : true,
-        "type" : "Snippet"
+        "startLine" : "example: book trade",
+        "type" : "Snippet",
+        "title" : "extracted example",
+        "lang" : "py"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -673,16 +682,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: python-examples.py {\n    title: \"extracted example with surroundedBy\",\n    surroundedBy: \"# example-cancel-trade\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "py",
         "snippet" : "market.cancel_trade('id')",
-        "title" : "extracted example with surroundedBy",
         "surroundedBy" : "# example-cancel-trade",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "title" : "extracted example with surroundedBy",
+        "lang" : "py"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -696,16 +705,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: python-examples.py {includeRegexp: \"import\"}\n:include-file: python-examples.py {includeRegexp: [\"import\"]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "py",
         "snippet" : "import market",
-        "includeRegexp" : [ "import" ],
+        "type" : "Snippet",
         "title" : "include by regexp",
-        "type" : "Snippet"
+        "lang" : "py",
+        "includeRegexp" : [ "import" ]
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -719,21 +728,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: python-examples.py {excludeRegexp: \"# example\"}\n:include-file: python-examples.py {excludeRegexp: [\"# example\"]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "py",
         "snippet" : "import market\n\ndef main():\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n\n    market.cancel_trade('id')\n\nif __name__  == \"__main__\":\n    main()",
         "excludeRegexp" : [ "# example" ],
+        "type" : "Snippet",
         "title" : "exclude by regexp",
-        "type" : "Snippet"
+        "lang" : "py"
       } ]
     }, {
-      "title" : "Callout Comments",
       "id" : "callout-comments",
       "type" : "Section",
+      "title" : "Callout Comments",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -752,9 +761,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "js"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -765,10 +774,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "InlinedCode"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: file-name-with-comments.js {commentsType: \"inline\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -776,10 +785,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
         "commentsType" : "inline",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "js"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -787,20 +796,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "py",
         "snippet" : "order = fetch_order()\n# explanation of why\n# strategic price calculation\n# is important here\nprice = strategic_price_calc(order)",
+        "type" : "Snippet",
         "title" : "multi line comments above line",
-        "type" : "Snippet"
+        "lang" : "py"
       }, {
-        "lang" : "py",
         "snippet" : "order = fetch_order()\n# explanation of why\n# strategic price calculation\n# is important here\nprice = strategic_price_calc(order)",
         "commentsType" : "inline",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "py"
       } ]
     }, {
-      "title" : "Spoilers",
       "id" : "spoilers",
       "type" : "Section",
+      "title" : "Spoilers",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -814,10 +823,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-file: file-name-with-comments.js {commentsType: \"inline\", spoiler: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -825,14 +834,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
         "commentsType" : "inline",
         "spoiler" : true,
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "js"
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",

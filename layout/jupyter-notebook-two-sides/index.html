@@ -125,19 +125,19 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Code First",
       "id" : "code-first",
       "type" : "Section",
+      "title" : "Code First",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "url" : "/znai/snippets/jupyter-notebook",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "The include-jupyter extension",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "/znai/snippets/jupyter-notebook"
         }, {
           "text" : " automatically assigns ",
           "type" : "SimpleText"
@@ -175,10 +175,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "InlinedCode"
         } ]
       }, {
-        "cellType" : "code",
-        "lang" : "python",
         "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
-        "type" : "JupyterCell"
+        "cellType" : "code",
+        "type" : "JupyterCell",
+        "lang" : "python"
       }, {
         "cellType" : "empty-output",
         "meta" : {
@@ -186,34 +186,34 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "type" : "JupyterCell"
       }, {
-        "cellType" : "code",
-        "lang" : "python",
         "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
-        "type" : "JupyterCell"
-      }, {
-        "cellType" : "output",
-        "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
-        "meta" : {
-          "rightSide" : true
-        },
-        "type" : "JupyterCell"
-      }, {
         "cellType" : "code",
-        "lang" : "python",
-        "snippet" : "display(tran)",
-        "type" : "JupyterCell"
+        "type" : "JupyterCell",
+        "lang" : "python"
       }, {
         "cellType" : "output",
-        "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
         "meta" : {
           "rightSide" : true
         },
+        "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
+        "type" : "JupyterCell"
+      }, {
+        "snippet" : "display(tran)",
+        "cellType" : "code",
+        "type" : "JupyterCell",
+        "lang" : "python"
+      }, {
+        "cellType" : "output",
+        "meta" : {
+          "rightSide" : true
+        },
+        "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
         "type" : "JupyterCell"
       } ]
     }, {
-      "title" : "Story First",
       "id" : "story-first",
       "type" : "Section",
+      "title" : "Story First",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -232,15 +232,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-jupyter: notebook.ipynb {storyFirst: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       } ]
     }, {
-      "title" : "Pandas",
       "id" : "pandas",
       "type" : "Section",
+      "title" : "Pandas",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -263,13 +263,13 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "type" : "JupyterCell"
       }, {
-        "cellType" : "code",
-        "lang" : "python",
         "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
+        "cellType" : "code",
         "meta" : {
           "rightSide" : true
         },
-        "type" : "JupyterCell"
+        "type" : "JupyterCell",
+        "lang" : "python"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -287,13 +287,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
         "type" : "JupyterCell"
       }, {
-        "cellType" : "code",
-        "lang" : "python",
         "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
+        "cellType" : "code",
         "meta" : {
           "rightSide" : true
         },
-        "type" : "JupyterCell"
+        "type" : "JupyterCell",
+        "lang" : "python"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -311,16 +311,16 @@ ReactDOM.render(React.createElement(Documentation, {
         "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
         "type" : "JupyterCell"
       }, {
-        "cellType" : "code",
-        "lang" : "python",
         "snippet" : "display(tran)",
+        "cellType" : "code",
         "meta" : {
           "rightSide" : true
         },
-        "type" : "JupyterCell"
+        "type" : "JupyterCell",
+        "lang" : "python"
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Jupyter Notebook Two Sides",

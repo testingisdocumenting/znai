@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Mermaid</title>
+<title>Znai: Page Toc</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,8 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Mermaid</h1></header>
-<p>Use https://mermaid-js.github.io/mermaid/#/ Mermaid to create diagrams using text and code, written in a Markdown style. Surround Mermaid expressions with a fenced block and specify mermaid as a language ```mermaid graph TD; A--&gt;B; A--&gt;C; B--&gt;C; ``` The result will be a diagram. graph TD; A--&gt;B; A--&gt;C; B--&gt;C; In presentation mode, rendered expressions will automatically scale to make use of the screen space.Note: Rendering is done by using https://mermaid-js.github.io/mermaid/#/ Mermaid library.</p>
+<header><h1>Section One</h1></header>
+<p>Use :include-page-toc: to include page top level sections as links :include-page-toc: some text</p>
+</article>
+
+<article>
+<header><h1>Section Two</h1></header>
+<p>some other text</p>
 </article>
 </section>
 </div>
@@ -120,87 +125,68 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "mermaid",
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Use ",
+        "type" : "SimpleText"
+      }, {
+        "code" : ":include-page-toc:",
+        "type" : "InlinedCode"
+      }, {
+        "text" : " to include page top level sections as links",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "snippet" : ":include-page-toc:\n",
+      "type" : "Snippet",
+      "lineNumber" : "",
+      "lang" : ""
+    }, {
+      "type" : "PageToc",
+      "sections" : [ {
+        "title" : "Section One",
+        "id" : "section-one"
+      }, {
+        "title" : "Section Two",
+        "id" : "section-two"
+      } ]
+    }, {
+      "id" : "section-one",
       "type" : "Section",
-      "title" : "Mermaid",
+      "title" : "Section One",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "isFile" : false,
-          "type" : "Link",
-          "content" : [ {
-            "text" : "Mermaid",
-            "type" : "SimpleText"
-          } ],
-          "url" : "https://mermaid-js.github.io/mermaid/#/"
-        }, {
-          "text" : " to create diagrams using text and code, written in a Markdown style.",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "Surround Mermaid expressions with a fenced block and specify ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "mermaid",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " as a language",
+          "text" : "some text",
           "type" : "SimpleText"
         } ]
-      }, {
-        "snippet" : "```mermaid\ngraph TD; A-->B; A-->C; B-->C;\n```\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
+      } ]
+    }, {
+      "id" : "section-two",
+      "type" : "Section",
+      "title" : "Section Two",
+      "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "The result will be a diagram.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "mermaid" : "graph TD; A-->B; A-->C; B-->C;\n",
-        "type" : "Mermaid"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "In presentation mode, rendered expressions will automatically scale to make use of the screen space.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Note: Rendering is done by using ",
-          "type" : "SimpleText"
-        }, {
-          "isFile" : false,
-          "type" : "Link",
-          "content" : [ {
-            "text" : "Mermaid",
-            "type" : "SimpleText"
-          } ],
-          "url" : "https://mermaid-js.github.io/mermaid/#/"
-        }, {
-          "text" : " library.",
+          "text" : "some other text",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1631289543458,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
-      "sectionTitle" : "Visuals",
-      "pageTitle" : "Mermaid",
+      "sectionTitle" : "Flow",
+      "pageTitle" : "Page Toc",
       "pageMeta" : { },
-      "dirName" : "visuals",
-      "fileName" : "mermaid",
+      "dirName" : "flow",
+      "fileName" : "page-toc",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Mermaid",
-        "id" : "mermaid"
+        "title" : "Section One",
+        "id" : "section-one"
+      }, {
+        "title" : "Section Two",
+        "id" : "section-two"
       } ]
     }
   }

@@ -135,65 +135,65 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Annotations File",
       "id" : "annotations-file",
       "type" : "Section",
+      "title" : "Annotations File",
       "content" : [ {
-        "lang" : "",
         "snippet" : ":include-image: word-toolbar.jpg {annotationsPath: 'annotations.json'}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "annotationsPath" : "annotations.json",
-        "imageSrc" : "/znai/visuals/word-toolbar.jpg",
-        "timestamp" : 1626065894814,
         "shapes" : [ {
-          "type" : "arrow",
-          "id" : "a1",
+          "endY" : 42,
+          "endX" : 48,
+          "color" : "a",
           "beginX" : 200,
           "beginY" : 100,
-          "endX" : 48,
-          "endY" : 42,
-          "color" : "a",
-          "text" : "debug"
+          "text" : "debug",
+          "id" : "a1",
+          "type" : "arrow"
         }, {
-          "type" : "rectangle",
-          "id" : "r1",
+          "color" : "b",
+          "width" : 100,
           "x" : 200,
           "y" : 50,
-          "width" : 100,
-          "height" : 40,
-          "color" : "b",
-          "text" : "debug"
+          "text" : "debug",
+          "id" : "r1",
+          "type" : "rectangle",
+          "height" : 40
         }, {
-          "type" : "circle",
-          "id" : "c1",
-          "x" : 350,
-          "y" : 100,
           "r" : 30,
           "color" : "c",
-          "text" : "text"
+          "x" : 350,
+          "y" : 100,
+          "text" : "text",
+          "id" : "c1",
+          "type" : "circle"
         }, {
-          "type" : "badge",
-          "id" : "b1",
           "x" : 350,
           "y" : 140,
-          "text" : "1"
+          "text" : "1",
+          "id" : "b1",
+          "type" : "badge"
         }, {
-          "type" : "badge",
-          "id" : "b2",
           "x" : 380,
           "y" : 180,
-          "text" : "2"
+          "text" : "2",
+          "id" : "b2",
+          "type" : "badge"
         } ],
         "width" : 833.0,
+        "imageSrc" : "/znai/visuals/word-toolbar.jpg",
+        "type" : "AnnotatedImage",
         "height" : 204.0,
-        "type" : "AnnotatedImage"
+        "timestamp" : 1631289543462
       }, {
-        "lang" : "json",
         "snippet" : "{\"shapes\": [{\"type\": \"arrow\", \"id\":\"a1\",\n  \"beginX\": 200, \"beginY\": 100, \"endX\": 48, \"endY\": 42,\n  \"color\": \"a\", \"text\": \"debug\"},\n\n  {\"type\": \"rectangle\", \"id\":\"r1\",\n    \"x\": 200, \"y\": 50, \"width\": 100, \"height\": 40,\n    \"color\": \"b\", \"text\": \"debug\"},\n\n  {\"type\": \"circle\", \"id\": \"c1\",\n    \"x\": 350, \"y\": 100, \"r\": 30,\n    \"color\": \"c\", \"text\": \"text\"},\n\n  {\"type\": \"badge\", \"id\": \"b1\",\n    \"x\": 350, \"y\": 140, \"text\": \"1\"},\n\n  {\"type\": \"badge\", \"id\": \"b2\",\n    \"x\": 380, \"y\": 180, \"text\": \"2\"}\n]}",
+        "type" : "Snippet",
         "title" : "annotations.json",
-        "type" : "Snippet"
+        "lang" : "json"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -202,8 +202,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -252,9 +252,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Integration With Testing",
       "id" : "integration-with-testing",
       "type" : "Section",
+      "title" : "Integration With Testing",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -267,13 +267,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "For example ",
           "type" : "SimpleText"
         }, {
-          "url" : "https://github.com/testingisdocumenting/webtau",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "webtau",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "https://github.com/testingisdocumenting/webtau"
         }, {
           "text" : " automatically generates an annotations file in addition to",
           "type" : "SimpleText"
@@ -285,9 +285,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Path Shortcut",
       "id" : "path-shortcut",
       "type" : "Section",
+      "title" : "Path Shortcut",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -318,54 +318,54 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-image: word-toolbar.jpg {annotate: true}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "annotate" : true,
-        "imageSrc" : "/znai/visuals/word-toolbar.jpg",
-        "timestamp" : 1626065894814,
         "shapes" : [ {
-          "type" : "arrow",
-          "id" : "a1",
+          "endY" : 42,
+          "endX" : 48,
+          "color" : "a",
           "beginX" : 200,
           "beginY" : 100,
-          "endX" : 48,
-          "endY" : 42,
-          "color" : "a",
-          "text" : "debug"
+          "text" : "debug",
+          "id" : "a1",
+          "type" : "arrow"
         }, {
-          "type" : "rectangle",
-          "id" : "r1",
+          "color" : "b",
+          "width" : 100,
           "x" : 200,
           "y" : 50,
-          "width" : 100,
-          "height" : 40,
-          "color" : "b",
-          "text" : "debug"
+          "text" : "debug",
+          "id" : "r1",
+          "type" : "rectangle",
+          "height" : 40
         }, {
-          "type" : "circle",
-          "id" : "c1",
-          "x" : 350,
-          "y" : 100,
           "r" : 30,
           "color" : "c",
-          "text" : "text"
+          "x" : 350,
+          "y" : 100,
+          "text" : "text",
+          "id" : "c1",
+          "type" : "circle"
         } ],
         "width" : 833.0,
+        "imageSrc" : "/znai/visuals/word-toolbar.jpg",
+        "annotate" : true,
+        "type" : "AnnotatedImage",
         "height" : 204.0,
-        "type" : "AnnotatedImage"
+        "timestamp" : 1631289543462
       }, {
-        "lang" : "json",
         "snippet" : "{\"shapes\": [{\"type\": \"arrow\", \"id\":\"a1\",\n  \"beginX\": 200, \"beginY\": 100, \"endX\": 48, \"endY\": 42,\n  \"color\": \"a\", \"text\": \"debug\"},\n\n  {\"type\": \"rectangle\", \"id\":\"r1\",\n    \"x\": 200, \"y\": 50, \"width\": 100, \"height\": 40,\n    \"color\": \"b\", \"text\": \"debug\"},\n\n  {\"type\": \"circle\", \"id\": \"c1\",\n    \"x\": 350, \"y\": 100, \"r\": 30,\n    \"color\": \"c\", \"text\": \"text\"},\n\n  {\"type\": \"badge\", \"id\": \"b1\",\n    \"x\": 350, \"y\": 140, \"text\": \"1\"},\n\n  {\"type\": \"badge\", \"id\": \"b2\",\n    \"x\": 380, \"y\": 180, \"text\": \"2\"}\n]}",
+        "type" : "Snippet",
         "title" : "word-toolbar.json",
-        "type" : "Snippet"
+        "lang" : "json"
       } ]
     }, {
-      "title" : "Presentation Mode",
       "id" : "presentation-mode",
       "type" : "Section",
+      "title" : "Presentation Mode",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -379,7 +379,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894814,
+    "lastModifiedTime" : 1631289543458,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Image Annotations",

@@ -100,13 +100,33 @@
 </article>
 
 <article>
+<header><h1>Highlight</h1></header>
+<p>Use highlightRow to highlight a row, or a set of rows by their index :include-table: table/table.json {title: &quot;Highlight multiple rows&quot;, highlightRow: [0, 2]} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch :include-table: table/table.json {title: &quot;Highlight single row&quot;, highlightRow: 1} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+</article>
+
+<article>
 <header><h1>Arrange and Filter</h1></header>
 <p>To change the order of columns or to filter out certain columns, specify the columns parameter. :include-table: table.csv {columns: [&quot;Description&quot;, &quot;Price&quot;]} Description Price custom table with a long attachment 100 chair 150 lunch 10</p>
 </article>
 
 <article>
-<header><h1>Alignment and Width</h1></header>
-<p>By default column width is auto-calculated to fit the values inside. But you can control the width with the extra options. :include-table: table.csv {Price: {width: 200}, &quot;Description&quot;: {width: 400}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch And if you need to change a column alignment from default left to right just add the align property. :include-table: table.csv {Price: {width: 200, align: &quot;right&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch You can do the same for JSON data: :include-table: table.json {Price: {width: 100, align: &quot;right&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+<header><h1>Width</h1></header>
+<p>By default, columns width is auto-calculated to fit the values inside. Use width to control the width of a column. :include-table: table.csv {Price: {width: 200}, &quot;Description&quot;: {width: 400}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Use percentage value to change column size relative to the page content width. :include-table: table/table.csv {Price: {width: &quot;50%&quot;}, &quot;Description&quot;: {width: &quot;30%&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content :include-table: table/table.csv {Price: {width: &quot;50%&quot;}, &quot;Description&quot;: {width: &quot;60%&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+</article>
+
+<article>
+<header><h1>Min Width</h1></header>
+<p>Use minColumnWidth to set min width for all table columns :include-table: table/table.csv {minColumnWidth: 400, &quot;Description&quot;: {width: 500}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+</article>
+
+<article>
+<header><h1>Wide Mode</h1></header>
+<p>Use wide: true to make table occupy all available width :include-table: table/table.csv {wide: true, minColumnWidth: 400, title: &quot;My Items&quot;} Account Price Zip Code Rating Description #12BGD3 100 11111 4 custom table with a long attachment #12BGD3 150 22222 5 chair #91AGB1 10 33333 4.5 lunch</p>
+</article>
+
+<article>
+<header><h1>Text Alignment</h1></header>
+<p>Use align to change a column text alignment. :include-table: table.csv {Price: {width: 200, align: &quot;right&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch JSON data example: :include-table: table.json {Price: {width: 100, align: &quot;right&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
 </article>
 
 <article>
@@ -160,9 +180,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "CSV",
       "id" : "csv",
       "type" : "Section",
+      "title" : "CSV",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -176,10 +196,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-table: table.csv \n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -193,9 +213,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "csv",
         "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "csv"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -203,14 +223,8 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price"
-          }, {
-            "title" : "Description"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -265,14 +279,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "lunch",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
       } ]
     }, {
-      "title" : "JSON",
       "id" : "json",
       "type" : "Section",
+      "title" : "JSON",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -286,10 +306,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-table: table.json \n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -303,9 +323,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "json",
         "snippet" : "[\n  {\n    \"Account\": \"#12BGD3\",\n    \"Price\": 100,\n    \"Description\": \"custom table with a long attachment\"\n  },\n  {\n    \"Account\": \"#12BGD3\",\n    \"Price\": 150,\n    \"Description\": \"chair\"\n  },\n  {\n    \"Account\": \"#91AGB1\",\n    \"Price\": 10,\n    \"Description\": \"lunch\"\n  }\n]",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "json"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -313,14 +333,8 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price"
-          }, {
-            "title" : "Description"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -375,14 +389,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "lunch",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
       } ]
     }, {
-      "title" : "Title",
       "id" : "title",
       "type" : "Section",
+      "title" : "Title",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -396,19 +416,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-table: table.json {title: \"Monthly Report\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "Table",
+        "title" : "Monthly Report",
         "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price"
-          }, {
-            "title" : "Description"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -463,15 +478,183 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "lunch",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "title" : "Monthly Report",
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
       } ]
     }, {
-      "title" : "Arrange and Filter",
+      "id" : "highlight",
+      "type" : "Section",
+      "title" : "Highlight",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "highlightRow",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to highlight a row, or a set of rows by their index",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-table: table/table.json {title: \"Highlight multiple rows\", highlightRow: [0, 2]}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "highlightRowIndexes" : [ 0, 2 ],
+        "type" : "Table",
+        "title" : "Highlight multiple rows",
+        "table" : {
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
+      }, {
+        "snippet" : ":include-table: table/table.json {title: \"Highlight single row\", highlightRow: 1}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "highlightRowIndexes" : [ 1 ],
+        "type" : "Table",
+        "title" : "Highlight single row",
+        "table" : {
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
+      } ]
+    }, {
       "id" : "arrange-and-filter",
       "type" : "Section",
+      "title" : "Arrange and Filter",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -485,17 +668,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-table: table.csv {columns: [\"Description\", \"Price\"]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Description"
-          }, {
-            "title" : "Price"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -532,41 +711,43 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "10",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Description"
+          }, {
+            "title" : "Price"
+          } ]
+        }
       } ]
     }, {
-      "title" : "Alignment and Width",
-      "id" : "alignment-and-width",
+      "id" : "width",
       "type" : "Section",
+      "title" : "Width",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "By default column width is auto-calculated to fit the values inside.",
+          "text" : "By default, columns width is auto-calculated to fit the values inside.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "But you can control the width with the extra options.",
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "width",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to control the width of a column.",
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-table: table.csv {Price: {width: 200}, \"Description\": {width: 400}}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price",
-            "width" : 200
-          }, {
-            "title" : "Description",
-            "width" : 400
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -621,55 +802,421 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "lunch",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "width" : 200,
+            "title" : "Price"
+          }, {
+            "width" : 400,
+            "title" : "Description"
+          } ]
+        }
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "And if you need to change a column alignment from default ",
+          "text" : "Use percentage value to change column size relative to the page content width.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-table: table/table.csv {Price: {width: \"50%\"}, \"Description\": {width: \"30%\"}}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "type" : "Table",
+        "table" : {
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "width" : "50%",
+            "title" : "Price"
+          }, {
+            "width" : "30%",
+            "title" : "Description"
+          } ]
+        }
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-table: table/table.csv {Price: {width: \"50%\"}, \"Description\": {width: \"60%\"}}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "type" : "Table",
+        "table" : {
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "width" : "50%",
+            "title" : "Price"
+          }, {
+            "width" : "60%",
+            "title" : "Description"
+          } ]
+        }
+      } ]
+    }, {
+      "id" : "min-width",
+      "type" : "Section",
+      "title" : "Min Width",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "type" : "Emphasis",
-          "content" : [ {
-            "text" : "left",
-            "type" : "SimpleText"
-          } ]
+          "code" : "minColumnWidth",
+          "type" : "InlinedCode"
         }, {
-          "text" : " to ",
+          "text" : " to set min width for all table columns",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-table: table/table.csv {minColumnWidth: 400, \"Description\": {width: 500}}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "type" : "Table",
+        "table" : {
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "width" : 500,
+            "title" : "Description"
+          } ],
+          "minColumnWidth" : 400
+        }
+      } ]
+    }, {
+      "id" : "wide-mode",
+      "type" : "Section",
+      "title" : "Wide Mode",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "type" : "Emphasis",
-          "content" : [ {
-            "text" : "right",
-            "type" : "SimpleText"
-          } ]
+          "code" : "wide: true",
+          "type" : "InlinedCode"
         }, {
-          "text" : " just add the ",
+          "text" : " to make table occupy all available width",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-table: table/table.csv {wide: true, minColumnWidth: 400, title: \"My Items\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "type" : "Table",
+        "title" : "My Items",
+        "table" : {
+          "wide" : true,
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "11111",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "22222",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "5",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "33333",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "4.5",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Zip Code"
+          }, {
+            "title" : "Rating"
+          }, {
+            "title" : "Description"
+          } ],
+          "minColumnWidth" : 400
+        }
+      } ]
+    }, {
+      "id" : "text-alignment",
+      "type" : "Section",
+      "title" : "Text Alignment",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
           "code" : "align",
           "type" : "InlinedCode"
         }, {
-          "text" : " property.",
+          "text" : " to change a column text alignment.",
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-table: table.csv {Price: {width: 200, align: \"right\"}}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price",
-            "width" : 200,
-            "align" : "right"
-          }, {
-            "title" : "Description"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -724,37 +1271,34 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "lunch",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "width" : 200,
+            "align" : "right",
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "You can do the same for ",
-          "type" : "SimpleText"
-        }, {
           "code" : "JSON",
           "type" : "InlinedCode"
         }, {
-          "text" : " data:",
+          "text" : " data example:",
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-table: table.json {Price: {width: 100, align: \"right\"}}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price",
-            "width" : 100,
-            "align" : "right"
-          }, {
-            "title" : "Description"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -809,14 +1353,22 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "lunch",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "width" : 100,
+            "align" : "right",
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
       } ]
     }, {
-      "title" : "Mapping",
       "id" : "mapping",
       "type" : "Section",
+      "title" : "Mapping",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -830,29 +1382,23 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "csv",
         "snippet" : "Feature Name, V1, V2\nfeatureA, +, +\nfeatureB, -, +",
+        "type" : "Snippet",
         "title" : "table.csv",
-        "type" : "Snippet"
+        "lang" : "csv"
       }, {
-        "lang" : "csv",
         "snippet" : "+, `:icon: check {stroke: \"green\"}`\n-, `:icon: slash {stroke: \"red\"}`",
+        "type" : "Snippet",
         "title" : "mapping.csv",
-        "type" : "Snippet"
+        "lang" : "csv"
       }, {
-        "lang" : "",
         "snippet" : ":include-table: table.csv {mappingPath: \"mapping.csv\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Feature Name"
-          }, {
-            "title" : "V1"
-          }, {
-            "title" : "V2"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -862,16 +1408,16 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
-              "stroke" : "green",
               "id" : "check",
-              "type" : "Icon"
+              "type" : "Icon",
+              "stroke" : "green"
             } ]
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
-              "stroke" : "green",
               "id" : "check",
-              "type" : "Icon"
+              "type" : "Icon",
+              "stroke" : "green"
             } ]
           } ] ], [ [ {
             "type" : "Paragraph",
@@ -882,58 +1428,57 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
-              "stroke" : "red",
               "id" : "slash",
-              "type" : "Icon"
+              "type" : "Icon",
+              "stroke" : "red"
             } ]
           } ], [ {
             "type" : "Paragraph",
             "content" : [ {
-              "stroke" : "green",
               "id" : "check",
-              "type" : "Icon"
+              "type" : "Icon",
+              "stroke" : "green"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Feature Name"
+          }, {
+            "title" : "V1"
+          }, {
+            "title" : "V2"
+          } ]
+        }
       }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Note: We used ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/visuals/icons",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Icons",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "/znai/visuals/icons"
         }, {
           "text" : " in this example, but you can use any plugins or any text you want.",
           "type" : "SimpleText"
         } ]
       } ]
     }, {
-      "title" : "Inlined",
       "id" : "inlined",
       "type" : "Section",
+      "title" : "Inlined",
       "content" : [ {
-        "lang" : "",
         "snippet" : "```table {title: \"my table\", Price: {width: 100, align: \"right\"}}\nAccount, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "Table",
+        "title" : "my table",
         "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price",
-            "width" : 100,
-            "align" : "right"
-          }, {
-            "title" : "Description"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -988,15 +1533,22 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "lunch",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "title" : "my table",
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "width" : 100,
+            "align" : "right",
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
       } ]
     }, {
-      "title" : "Markdown in Cells",
       "id" : "markdown-in-cells",
       "type" : "Section",
+      "title" : "Markdown in Cells",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -1004,18 +1556,12 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "csv",
         "snippet" : "Account, Price, Description\n#12BGD3, 100, **custom** table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, `lunch`",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "csv"
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price"
-          }, {
-            "title" : "Description"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -1076,31 +1622,28 @@ ReactDOM.render(React.createElement(Documentation, {
               "code" : "lunch",
               "type" : "InlinedCode"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ]
+        }
       } ]
     }, {
-      "title" : "Github Flavored Table",
       "id" : "github-flavored-table",
       "type" : "Section",
+      "title" : "Github Flavored Table",
       "content" : [ {
-        "lang" : "",
         "snippet" : "| Github        | Flavored      | Table |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Github",
-            "align" : "left"
-          }, {
-            "title" : "Flavored",
-            "align" : "center"
-          }, {
-            "title" : "Table",
-            "align" : "right"
-          } ],
           "data" : [ [ [ {
             "text" : "col 3 is",
             "type" : "SimpleText"
@@ -1119,12 +1662,21 @@ ReactDOM.render(React.createElement(Documentation, {
           } ], [ {
             "text" : "$12",
             "type" : "SimpleText"
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "align" : "left",
+            "title" : "Github"
+          }, {
+            "align" : "center",
+            "title" : "Flavored"
+          }, {
+            "align" : "right",
+            "title" : "Table"
+          } ]
+        }
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Tables",
@@ -1142,11 +1694,23 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Title",
         "id" : "title"
       }, {
+        "title" : "Highlight",
+        "id" : "highlight"
+      }, {
         "title" : "Arrange and Filter",
         "id" : "arrange-and-filter"
       }, {
-        "title" : "Alignment and Width",
-        "id" : "alignment-and-width"
+        "title" : "Width",
+        "id" : "width"
+      }, {
+        "title" : "Min Width",
+        "id" : "min-width"
+      }, {
+        "title" : "Wide Mode",
+        "id" : "wide-mode"
+      }, {
+        "title" : "Text Alignment",
+        "id" : "text-alignment"
       }, {
         "title" : "Mapping",
         "id" : "mapping"

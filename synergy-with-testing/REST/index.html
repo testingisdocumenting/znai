@@ -135,9 +135,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Request and Response Capture",
       "id" : "request-and-response-capture",
       "type" : "Section",
+      "title" : "Request and Response Capture",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -162,19 +162,19 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "WebTau",
       "id" : "webtau",
       "type" : "Section",
+      "title" : "WebTau",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "url" : "https://testingisdocumenting.org/webtau/REST/getting-started",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "WebTau",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "https://testingisdocumenting.org/webtau/REST/getting-started"
         }, {
           "text" : " is a framework to write, run, and capture REST tests artifacts.",
           "type" : "SimpleText"
@@ -186,14 +186,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "groovy",
         "snippet" : "package rest\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\nscenario(\"simple get\") {\n    http.get(\"/weather\") {\n        temperature.should == 88\n    }\n}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "groovy"
       } ]
     }, {
-      "title" : "Capture REST Artifacts",
       "id" : "capture-rest-artifacts",
       "type" : "Section",
+      "title" : "Capture REST Artifacts",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -204,10 +204,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "InlinedCode"
         } ]
       }, {
-        "lang" : "groovy",
         "snippet" : "package rest\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\nscenario(\"extracting id after POST to use inside GET request\") {\n    def id = http.post(\"/employee\", [firstName: 'FN', lastName: 'LN']) {\n        return id\n    }\n    http.doc.capture('employee-post')\n\n    http.get(\"/employee/$id\") {\n        firstName.should == 'FN'\n        lastName.should == 'LN'\n    }\n    http.doc.capture('employee-get') // capture previous HTTP call as <docDir>/employee-get\n}",
         "commentsType" : "inline",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "groovy"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -221,14 +221,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "json",
         "snippet" : "{\n  \"method\": \"GET\",\n  \"url\": \"http://localhost:8180/employee/id-generated-2\",\n  \"responseType\": \"application/json\",\n  \"responseBody\": \"{\\\"firstName\\\":\\\"FN\\\",\\\"lastName\\\":\\\"LN\\\"}\\n\",\n  \"responseBodyChecks\": {\n    \"failedPaths\": [],\n    \"passedPaths\": [\n      \"root.firstName\",\n      \"root.lastName\"\n    ]\n  }\n}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "json"
       } ]
     }, {
-      "title" : "Document REST Calls",
       "id" : "document-rest-calls",
       "type" : "Section",
+      "title" : "Document REST Calls",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -242,10 +242,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-rest-test: REST/employee-get.json\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -254,14 +254,14 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "testArtifact" : {
-          "method" : "GET",
-          "url" : "http://localhost:8180/employee/id-generated-2",
-          "responseType" : "application/json",
-          "responseBody" : "{\"firstName\":\"FN\",\"lastName\":\"LN\"}\n",
           "responseBodyChecks" : {
             "failedPaths" : [ ],
             "passedPaths" : [ "root.firstName", "root.lastName" ]
-          }
+          },
+          "responseType" : "application/json",
+          "responseBody" : "{\"firstName\":\"FN\",\"lastName\":\"LN\"}\n",
+          "method" : "GET",
+          "url" : "http://localhost:8180/employee/id-generated-2"
         },
         "type" : "WebTauRest"
       }, {
@@ -272,16 +272,16 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "testArtifact" : {
-          "method" : "POST",
-          "url" : "http://localhost:8180/employee",
-          "requestType" : "application/json",
-          "requestBody" : "{\"firstName\":\"FN\",\"lastName\":\"LN\"}",
-          "responseType" : "application/json",
-          "responseBody" : "{\"id\":\"id-generated-2\"}\n",
           "responseBodyChecks" : {
             "failedPaths" : [ ],
             "passedPaths" : [ ]
-          }
+          },
+          "responseType" : "application/json",
+          "responseBody" : "{\"id\":\"id-generated-2\"}\n",
+          "requestType" : "application/json",
+          "method" : "POST",
+          "requestBody" : "{\"firstName\":\"FN\",\"lastName\":\"LN\"}",
+          "url" : "http://localhost:8180/employee"
         },
         "type" : "WebTauRest"
       }, {
@@ -297,7 +297,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894798,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Synergy With Testing",
       "pageTitle" : "REST",

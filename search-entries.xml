@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.51/znai-dist-1.51-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.52/znai-dist-1.52-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.51&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.52&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.51&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.52&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.51&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.52&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -155,7 +155,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this rationale example getting-started flow structure landing names page-references lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets inlined-code-snippets api-parameters code-references java java-doc groovy python typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points icons keyboard-shortcuts charts images image-annotations iframe SVG flow-diagrams PlantUml mermaid synergy-with-testing java REST web-UI configuration basic example-references domain api release-notes 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this rationale example getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets inlined-code-snippets api-parameters code-references java java-doc groovy python typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points icons keyboard-shortcuts charts images image-annotations iframe SVG flow-diagrams PlantUml mermaid synergy-with-testing java REST web-UI configuration basic example-references domain api release-notes 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -236,6 +236,22 @@
     <fullTitle>Znai: Page References, Validation [Flow]</fullTitle>
     <text>
       <text>Local links are automatically validated during documentation build time. You will get a build time error if you refer to a page or a section/sub-section that does not exist.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/page-toc#section-one</url>
+    <fullTitle>Znai: Page Toc, Section One [Flow]</fullTitle>
+    <text>
+      <text>Use :include-page-toc: to include page top level sections as links :include-page-toc: some text</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/page-toc#section-two</url>
+    <fullTitle>Znai: Page Toc, Section Two [Flow]</fullTitle>
+    <text>
+      <text>some other text</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -395,7 +411,7 @@
     <url>/znai/snippets/external-code-snippets#syntax-highlighting</url>
     <fullTitle>Znai: External Code Snippets, Syntax highlighting [Snippets]</fullTitle>
     <text>
-      <text>Syntax highlighting is automatically selected based file extension. E.g. extensions .c , .h , .cpp , .hpp are treated as C++. :include-file: simple.c #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; } Use lang to force a different syntax highlighting :include-file: simple.c {lang: "java"} #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; } Note: File extensions and lang are case-insensitive.</text>
+      <text>Syntax highlighting is automatically selected based file extension. E.g. extensions .c , .h , .cpp , .hpp are treated as C++. :include-file: simple.c #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; } :include-file: Hello.sc object Hello { def main(args: Array[String]) = { println("Hello, world") } } Use lang to force a different syntax highlighting :include-file: simple.c {lang: "java"} #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; } Note: File extensions and lang are case-insensitive.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -704,10 +720,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/python#function-content</url>
-    <fullTitle>Znai: Python, Function Content [Snippets]</fullTitle>
+    <url>/znai/snippets/python#content</url>
+    <fullTitle>Znai: Python, Content [Snippets]</fullTitle>
     <text>
-      <text>Note: Function Content support requires running znai in an environemnt with Python 3.8 or later.Use include-python plugin to extract a function content. def my_func(): """ text inside my *func* doc * list one * list two """ return 2 + 2 class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") :include-python: python/example.py {entry: "Animal.says"} def says(self): """ animal **talks** `code` """ print("hello") Use bodyOnly to include only the content of a function without its signature. :include-python: python/example.py {entry: "Animal.says", bodyOnly: true} print("hello")</text>
+      <text>Note: Function Content support requires running znai in an environment with Python 3.8 or later.All the examples below are from the following example Python file: my_var = "a variable" def my_func(p1, p2): """ text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description """ return 2 + 2 class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") Full Content Use include-python plugin to extract function, class or global variable content. Class To show the full class definition: :include-python: python/example.py {entry: "Animal"} class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") Function To show the full contents of a function: :include-python: python/example.py {entry: "Animal.says"} def says(self): """ animal **talks** `code` """ print("hello") This also works for global functions: :include-python: python/example.py {entry: "my_func"} def my_func(p1, p2): """ text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description """ return 2 + 2 Class To show the full contents of a class: :include-python: python/example.py {entry: "Animal"} class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") Variable To show a variable's definition and assignment: :include-python: python/example.py {entry: "my_var"} my_var = "a variable" Body Only Use bodyOnly to include just the "body" part of the content. The specifics differ based on what is being included. Function To show a function's body, without signature or doc string: :include-python: python/example.py {entry: "Animal.says", bodyOnly: true} print("hello") This also works for global functions: :include-python: python/example.py {entry: "my_func", bodyOnly: true} return 2 + 2 Class To show the contents of a class without the class declaration or doc string: :include-python: python/example.py {entry: "Animal", bodyOnly: true} def says(self): """ animal **talks** `code` """ print("hello") Variable To show only a variable's value: :include-python: python/example.py {entry: "my_var", bodyOnly: true} "a variable"</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -715,7 +731,7 @@
     <url>/znai/snippets/python#doc-string</url>
     <fullTitle>Znai: Python, Doc String [Snippets]</fullTitle>
     <text>
-      <text>Use include-python-doc plugin to embed py doc string with markdown into documentation def my_func(): """ text inside my *func* doc * list one * list two """ return 2 + 2 class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") :include-python-doc: python/example.py {entry: "my_func"} text inside my *func* doc * list one * list two :include-python-doc: python/example.py {entry: "Animal"} animal top level class doc string ``` code block ``` :include-python-doc: python/example.py {entry: "Animal.says"} animal **talks** `code`</text>
+      <text>Use include-python-doc plugin to embed py doc string with markdown into documentation my_var = "a variable" def my_func(p1, p2): """ text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description """ return 2 + 2 class Animal: """ animal top level class doc string ``` code block ``` """ def says(self): """ animal **talks** `code` """ print("hello") :include-python-doc: python/example.py {entry: "my_func"} text inside my *func* doc * list one * list two Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include parameters :include-python-doc: python/example.py {entry: "Animal"} animal top level class doc string ``` code block ``` :include-python-doc: python/example.py {entry: "Animal.says"} animal **talks** `code`</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -723,7 +739,7 @@
     <url>/znai/snippets/python#doc-parameters</url>
     <fullTitle>Znai: Python, Doc Parameters [Snippets]</fullTitle>
     <text>
-      <text>Use include-python-doc-params plugin to render parameters extracted from pydoc text def my_func(label, price): """ text inside my *func* doc * list one * list two Parameters __________ label : String label to use to *render* item in the store price : Money price associated with the **item** """ print("hello") :include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "my_func params"} text inside my *func* doc * list one * list two Parameters __________ label : String label to use to *render* item in the store price : Money price associated with the **item** Note: read more about snippets/api-parameters API parameters for additional properties</text>
+      <text>Use include-python-doc-params plugin to render parameters extracted from pydoc text def my_func(label, price): """ text inside my *func* doc * list one * list two Parameters -------------- label : String label to use to *render* item in the store price : Money price associated with the **item** """ print("hello") :include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "my_func params"} text inside my *func* doc * list one * list two Parameters -------------- label : String label to use to *render* item in the store price : Money price associated with the **item** Note: read more about snippets/api-parameters API parameters for additional properties</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1136,6 +1152,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/layout/tables#highlight</url>
+    <fullTitle>Znai: Tables, Highlight [Layout]</fullTitle>
+    <text>
+      <text>Use highlightRow to highlight a row, or a set of rows by their index :include-table: table/table.json {title: "Highlight multiple rows", highlightRow: [0, 2]} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch :include-table: table/table.json {title: "Highlight single row", highlightRow: 1} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/layout/tables#arrange-and-filter</url>
     <fullTitle>Znai: Tables, Arrange and Filter [Layout]</fullTitle>
     <text>
@@ -1144,10 +1168,34 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/layout/tables#alignment-and-width</url>
-    <fullTitle>Znai: Tables, Alignment and Width [Layout]</fullTitle>
+    <url>/znai/layout/tables#width</url>
+    <fullTitle>Znai: Tables, Width [Layout]</fullTitle>
     <text>
-      <text>By default column width is auto-calculated to fit the values inside. But you can control the width with the extra options. :include-table: table.csv {Price: {width: 200}, "Description": {width: 400}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch And if you need to change a column alignment from default left to right just add the align property. :include-table: table.csv {Price: {width: 200, align: "right"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch You can do the same for JSON data: :include-table: table.json {Price: {width: 100, align: "right"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <text>By default, columns width is auto-calculated to fit the values inside. Use width to control the width of a column. :include-table: table.csv {Price: {width: 200}, "Description": {width: 400}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Use percentage value to change column size relative to the page content width. :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "30%"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "60%"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/tables#min-width</url>
+    <fullTitle>Znai: Tables, Min Width [Layout]</fullTitle>
+    <text>
+      <text>Use minColumnWidth to set min width for all table columns :include-table: table/table.csv {minColumnWidth: 400, "Description": {width: 500}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/tables#wide-mode</url>
+    <fullTitle>Znai: Tables, Wide Mode [Layout]</fullTitle>
+    <text>
+      <text>Use wide: true to make table occupy all available width :include-table: table/table.csv {wide: true, minColumnWidth: 400, title: "My Items"} Account Price Zip Code Rating Description #12BGD3 100 11111 4 custom table with a long attachment #12BGD3 150 22222 5 chair #91AGB1 10 33333 4.5 lunch</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/tables#text-alignment</url>
+    <fullTitle>Znai: Tables, Text Alignment [Layout]</fullTitle>
+    <text>
+      <text>Use align to change a column text alignment. :include-table: table.csv {Price: {width: 200, align: "right"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch JSON data example: :include-table: table.json {Price: {width: 100, align: "right"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1840,6 +1888,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/release-notes/2021#152</url>
+    <fullTitle>Znai: 2021 Releases, 1.52 [Release Notes]</fullTitle>
+    <text>
+      <text>Add enterprise server log rotation Force max width for type and name for snippets/api-parameters API Parameters. Reduce title height. Exclude Parameters section type during snippets/python#doc-string python doc parsing Handle optional type during snippets/python#doc-parameters python doc params parsing Added Scala syntax highlight Added layout/tables#highlight Table row highlight by index Handle dash ( ---- ) for snippets/python#doc-parameters python doc params parsing Add flow/page-toc Page Table Of Contents Add Table layout/tables#wide-mode wide mode Add Table layout/tables#min-width column min width Add layout/tables#width Table percentage width Add Windows znai.cmd script Add support for variables to snippets/python#content include-python and revamped the entire doc section Fix: Table layout/tables#title title rendering when scroll is present</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/release-notes/2021#151</url>
     <fullTitle>Znai: 2021 Releases, 1.51 [Release Notes]</fullTitle>
     <text>
@@ -1851,7 +1907,39 @@
     <url>/znai/release-notes/2021#150</url>
     <fullTitle>Znai: 2021 Releases, 1.50 [Release Notes]</fullTitle>
     <text>
-      <text>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add snippets/python#function-content include-python to include function's content Rename paramsToHighlight -> highlight for :include-cli-command: plugin Rename scaleRatio -> scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/external-code-snippets#extract-snippets documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/external-code-snippets#extract-snippets snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added snippets/python#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</text>
+      <text>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add snippets/python#content include-python to include function's content Rename paramsToHighlight -> highlight for :include-cli-command: plugin Rename scaleRatio -> scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/external-code-snippets#extract-snippets documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/external-code-snippets#extract-snippets snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added snippets/python#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2021#149</url>
+    <fullTitle>Znai: 2021 Releases, 1.49 [Release Notes]</fullTitle>
+    <text>
+      <text>No notes</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2021#148</url>
+    <fullTitle>Znai: 2021 Releases, 1.48 [Release Notes]</fullTitle>
+    <text>
+      <text>No notes</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2021#147</url>
+    <fullTitle>Znai: 2021 Releases, 1.47 [Release Notes]</fullTitle>
+    <text>
+      <text>No notes</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2021#146</url>
+    <fullTitle>Znai: 2021 Releases, 1.46 [Release Notes]</fullTitle>
+    <text>
+      <text>No notes</text>
       <score>STANDARD</score>
     </text>
   </entry>

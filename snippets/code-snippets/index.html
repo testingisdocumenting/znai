@@ -145,9 +145,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Simple Snippet",
       "id" : "simple-snippet",
       "type" : "Section",
+      "title" : "Simple Snippet",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -165,16 +165,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "interface PriceService {\n    Money calcPrice(String cuips, Integer quantity);\n}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "markdown",
         "snippet" : "# Simple Snippet\n\nIt is very easy to add a code snippet or an output result.\nAll you have to do is indent your code with 4 spaces inside your Markdown document and\nyour code will be rendered like this.\n\n    interface PriceService {\n        Money calcPrice(String cuips, Integer quantity);\n    }",
-        "startLine" : "# Simple Snippet",
         "numberOfLines" : 9,
-        "type" : "Snippet"
+        "startLine" : "# Simple Snippet",
+        "type" : "Snippet",
+        "lang" : "markdown"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -183,9 +183,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Specifying Language",
       "id" : "specifying-language",
       "type" : "Section",
+      "title" : "Specifying Language",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -193,15 +193,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```javascript\nimport React, {Component} from 'react'\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "javascript",
         "snippet" : "import React, {Component} from 'react'\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : "javascript"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -210,8 +210,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -276,13 +276,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : " uses ",
           "type" : "SimpleText"
         }, {
-          "url" : "http://prismjs.com",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "prismjs",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "http://prismjs.com"
         }, {
           "text" : " library to provide syntax highlighting.",
           "type" : "SimpleText"
@@ -294,9 +294,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Title",
       "id" : "title",
       "type" : "Section",
+      "title" : "Title",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -310,21 +310,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```javascript {title: \"ReactJS Component\"}\n...\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "javascript",
         "snippet" : "import React, {Component} from 'react'\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n",
-        "lineNumber" : "",
+        "type" : "Snippet",
         "title" : "ReactJS Component",
-        "type" : "Snippet"
+        "lineNumber" : "",
+        "lang" : "javascript"
       } ]
     }, {
-      "title" : "Wide Code",
       "id" : "wide-code",
       "type" : "Section",
+      "title" : "Wide Code",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -338,16 +338,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```java {wide: true}\nclass InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n",
-        "lineNumber" : "",
         "wide" : true,
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -361,10 +361,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "java",
         "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -382,9 +382,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Read More",
       "id" : "read-more",
       "type" : "Section",
+      "title" : "Read More",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -412,22 +412,22 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```java {readMore: true, readMoreVisibleLines: 3}\npublic class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n    ...\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n        this.workingDir = workingDir;\n        this.fileNameByDirName = new LinkedHashMap<>();\n    }\n\n    public void create() {\n        createPages();\n        createToc();\n        createMeta();\n        createIndex();\n        createLookupPaths();\n    }\n\n    private void createLookupPaths() {\n        createFileFromResource(\"lookup-paths\");\n    }\n\n    private void createMeta() {\n        createFileFromResource(\"meta.json\");\n    }\n}\n",
-        "lineNumber" : "",
-        "readMore" : true,
         "readMoreVisibleLines" : 3,
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "readMore" : true,
+        "lineNumber" : "",
+        "lang" : "java"
       } ]
     }, {
-      "title" : "Highlights",
       "id" : "highlights",
       "type" : "Section",
+      "title" : "Highlights",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -441,16 +441,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```java {highlight: \"workingDir\"}\npublic class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n    ...\n    }\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n    ...\n    }\n",
-        "lineNumber" : "",
         "highlight" : [ 1 ],
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -469,16 +469,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```java {highlight: [2,  \"...\"]}\npublic class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n    ...\n    }\n```    \n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "java",
         "snippet" : "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n    ...\n    }\n",
-        "lineNumber" : "",
         "highlight" : [ 2, 5 ],
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -487,7 +487,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Code Snippets",

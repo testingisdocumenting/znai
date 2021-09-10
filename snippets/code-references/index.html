@@ -130,9 +130,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Local References",
       "id" : "local-references",
       "type" : "Section",
+      "title" : "Local References",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -152,19 +152,17 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "csv",
         "snippet" : "constructor, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor\nusefulAction, flow/footer",
+        "type" : "Snippet",
         "title" : "references/references-demo.csv",
-        "type" : "Snippet"
+        "lang" : "csv"
       }, {
-        "lang" : "",
         "snippet" : ":include-file: file-name.js {referencesPath: \"references/references-demo.csv\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "javascript",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "referencesPath" : "references/references-demo.csv",
         "references" : {
           "usefulAction" : {
             "pageUrl" : "flow/footer"
@@ -173,12 +171,14 @@ ReactDOM.render(React.createElement(Documentation, {
             "pageUrl" : "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor"
           }
         },
-        "type" : "Snippet"
+        "referencesPath" : "references/references-demo.csv",
+        "type" : "Snippet",
+        "lang" : "js"
       } ]
     }, {
-      "title" : "Global References",
       "id" : "global-references",
       "type" : "Section",
+      "title" : "Global References",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -192,30 +192,30 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "csv",
         "snippet" : "fapi.book, example-references/api#book\nfapi.query, example-references/api#query",
+        "type" : "Snippet",
         "title" : "references.csv",
-        "type" : "Snippet"
+        "lang" : "csv"
       }, {
-        "lang" : "javascript",
         "snippet" : "import * as fapi from 'flight-api'\n\nfunction bookFlight(flightInfo) {\n    const confirmation = fapi.book(flightInfo)\n    //...\n}\n\nfunction flightStatus(id) {\n    const fullStatus = fapi.query(id)\n    return fullStatus.shortStatus\n}",
+        "type" : "Snippet",
         "title" : "API example",
-        "type" : "Snippet"
+        "lang" : "js"
       } ]
     }, {
-      "title" : "Inlined Code",
       "id" : "inlined-code",
       "type" : "Section",
+      "title" : "Inlined Code",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "url" : "/znai/snippets/inlined-code-snippets",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Inlined code",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "/znai/snippets/inlined-code-snippets"
         }, {
           "text" : " is automatically converted into a link if its content matches one of the",
           "type" : "SimpleText"
@@ -226,10 +226,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "md",
         "snippet" : "Use `fapi.book` to book a flight.  ",
+        "type" : "Snippet",
         "title" : "Example",
-        "type" : "Snippet"
+        "lang" : "md"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -244,7 +244,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Code References",

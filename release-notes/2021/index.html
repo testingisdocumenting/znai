@@ -85,13 +85,38 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.52</h1></header>
+<p>Add enterprise server log rotation Force max width for type and name for snippets/api-parameters API Parameters. Reduce title height. Exclude Parameters section type during snippets/python#doc-string python doc parsing Handle optional type during snippets/python#doc-parameters python doc params parsing Added Scala syntax highlight Added layout/tables#highlight Table row highlight by index Handle dash ( ---- ) for snippets/python#doc-parameters python doc params parsing Add flow/page-toc Page Table Of Contents Add Table layout/tables#wide-mode wide mode Add Table layout/tables#min-width column min width Add layout/tables#width Table percentage width Add Windows znai.cmd script Add support for variables to snippets/python#content include-python and revamped the entire doc section Fix: Table layout/tables#title title rendering when scroll is present</p>
+</article>
+
+<article>
 <header><h1>1.51</h1></header>
 <p>Doc: introduction/getting-started#brew brew install instruction Added initial snippets/python#doc-parameters pythod doc params support Python parsing is more robust and partially work with older versions of python Explicit use of annotate:true to use matching visuals/image-annotations#path-shortcut image annotations file Fix: handle dashes in visuals/flow-diagrams flow diagram node ids</p>
 </article>
 
 <article>
 <header><h1>1.50</h1></header>
-<p>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add snippets/python#function-content include-python to include function's content Rename paramsToHighlight -&gt; highlight for :include-cli-command: plugin Rename scaleRatio -&gt; scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/external-code-snippets#extract-snippets documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/external-code-snippets#extract-snippets snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added snippets/python#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</p>
+<p>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add snippets/python#content include-python to include function's content Rename paramsToHighlight -&gt; highlight for :include-cli-command: plugin Rename scaleRatio -&gt; scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/external-code-snippets#extract-snippets documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/external-code-snippets#extract-snippets snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added snippets/python#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</p>
+</article>
+
+<article>
+<header><h1>1.49</h1></header>
+<p>No notes</p>
+</article>
+
+<article>
+<header><h1>1.48</h1></header>
+<p>No notes</p>
+</article>
+
+<article>
+<header><h1>1.47</h1></header>
+<p>No notes</p>
+</article>
+
+<article>
+<header><h1>1.46</h1></header>
+<p>No notes</p>
 </article>
 </section>
 </div>
@@ -125,13 +150,332 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "1.51",
-      "id" : "151",
+      "id" : "152",
       "type" : "Section",
+      "title" : "1.52",
       "content" : [ {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add enterprise server log rotation",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Force max width for type and name for ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "API Parameters",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/api-parameters"
+            }, {
+              "text" : ". Reduce title height.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Exclude Parameters section type during ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "python doc",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/python#doc-string"
+            }, {
+              "text" : " parsing",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Handle optional type during ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "python doc params",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/python#doc-parameters"
+            }, {
+              "text" : " parsing",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Added Scala syntax highlight",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Added ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Table row highlight",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/layout/tables#highlight"
+            }, {
+              "text" : " by index",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Handle dash (",
+              "type" : "SimpleText"
+            }, {
+              "code" : "----",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ") for ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "python doc params",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/python#doc-parameters"
+            }, {
+              "text" : " parsing",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Page Table Of Contents",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/flow/page-toc"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add Table ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "wide mode",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/layout/tables#wide-mode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add Table ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "column min width",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/layout/tables#min-width"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Table",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/layout/tables#width"
+            }, {
+              "text" : " percentage width",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add Windows znai.cmd script",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add support for variables to ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include-python",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/python#content"
+            }, {
+              "text" : " and revamped the entire doc section",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Table ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "title",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/layout/tables#title"
+            }, {
+              "text" : " rendering when scroll is present",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "151",
+      "type" : "Section",
+      "title" : "1.51",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -140,20 +484,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Doc: ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/introduction/getting-started#brew",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "brew install instruction",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/introduction/getting-started#brew"
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -162,13 +506,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Added initial ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/snippets/python#doc-parameters",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "pythod doc params",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/snippets/python#doc-parameters"
             }, {
               "text" : " support",
               "type" : "SimpleText"
@@ -177,8 +521,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -191,8 +535,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -207,20 +551,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " to use matching ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/visuals/image-annotations#path-shortcut",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "image annotations file",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/visuals/image-annotations#path-shortcut"
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -229,13 +573,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Fix: handle dashes in ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/visuals/flow-diagrams",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "flow diagram",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/visuals/flow-diagrams"
             }, {
               "text" : " node ids",
               "type" : "SimpleText"
@@ -244,13 +588,13 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "1.50",
       "id" : "150",
       "type" : "Section",
+      "title" : "1.50",
       "content" : [ {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -259,13 +603,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Doc: clarify ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/introduction/getting-started",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Getting Started",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/introduction/getting-started"
             }, {
               "text" : " documentation section",
               "type" : "SimpleText"
@@ -274,20 +618,20 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "url" : "/znai/visuals/image-annotations",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Image badge annotation",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/visuals/image-annotations"
             }, {
               "text" : " becomes transparent on hover",
               "type" : "SimpleText"
@@ -296,8 +640,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -306,13 +650,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/snippets/python#function-content",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "include-python",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/snippets/python#content"
             }, {
               "text" : " to include function's content",
               "type" : "SimpleText"
@@ -321,8 +665,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -353,8 +697,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -385,8 +729,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -402,8 +746,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -416,8 +760,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -432,20 +776,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " to include-file like plugins: ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/snippets/external-code-snippets#extract-snippets",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "documentaiton",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/snippets/external-code-snippets#extract-snippets"
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -454,20 +798,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add inlined code snippet with automatic identifier validation by looking into a provided file: ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/snippets/inlined-code-snippets#validated-identifier",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "documentaiton",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/snippets/inlined-code-snippets#validated-identifier"
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -480,8 +824,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -494,8 +838,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -504,13 +848,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Validate that ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/snippets/external-code-snippets#extract-snippets",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "snippets include/exclude",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/snippets/external-code-snippets#extract-snippets"
             }, {
               "text" : " matches lines",
               "type" : "SimpleText"
@@ -519,8 +863,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -533,8 +877,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -547,8 +891,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -557,13 +901,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Added ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/snippets/python#doc-string",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "include-python-doc",
                 "type" : "SimpleText"
-              } ]
+              } ],
+              "url" : "/znai/snippets/python#doc-string"
             }, {
               "text" : " to extract python docs as markdown text and add it to a page",
               "type" : "SimpleText"
@@ -572,8 +916,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -586,8 +930,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -609,8 +953,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -628,8 +972,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -648,8 +992,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -662,8 +1006,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -675,8 +1019,64 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ]
       } ]
+    }, {
+      "id" : "149",
+      "type" : "Section",
+      "title" : "1.49",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "No notes",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "148",
+      "type" : "Section",
+      "title" : "1.48",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "No notes",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "147",
+      "type" : "Section",
+      "title" : "1.47",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "No notes",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "146",
+      "type" : "Section",
+      "title" : "1.46",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "No notes",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
       "sectionTitle" : "Release Notes",
       "pageTitle" : "2021 Releases",
@@ -687,11 +1087,26 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "2021",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.52",
+        "id" : "152"
+      }, {
         "title" : "1.51",
         "id" : "151"
       }, {
         "title" : "1.50",
         "id" : "150"
+      }, {
+        "title" : "1.49",
+        "id" : "149"
+      }, {
+        "title" : "1.48",
+        "id" : "148"
+      }, {
+        "title" : "1.47",
+        "id" : "147"
+      }, {
+        "title" : "1.46",
+        "id" : "146"
       } ]
     }
   }

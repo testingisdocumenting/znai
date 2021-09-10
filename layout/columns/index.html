@@ -140,9 +140,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Information Layout",
       "id" : "information-layout",
       "type" : "Section",
+      "title" : "Information Layout",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -156,8 +156,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -188,9 +188,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Definition",
       "id" : "definition",
       "type" : "Section",
+      "title" : "Definition",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -210,10 +210,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```columns\nleft: \nthis content goes to the left\n\nand can span multiple lines\nright: this content goes to the right\n\nand can span multiple lines\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "columns" : [ {
           "content" : [ {
@@ -244,13 +244,13 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
-        "config" : { },
-        "type" : "Columns"
+        "type" : "Columns",
+        "config" : { }
       } ]
     }, {
-      "title" : "Sizes",
       "id" : "sizes",
       "type" : "Section",
+      "title" : "Sizes",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -293,10 +293,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```columns {left: {portion: 3}}\nleft: \nthis content goes to the left\n\nand can span multiple lines\nright: this content goes to the right\n\nand can span multiple lines\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "columns" : [ {
           "content" : [ {
@@ -327,17 +327,17 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "type" : "Columns",
         "config" : {
           "left" : {
             "portion" : 3
           }
-        },
-        "type" : "Columns"
+        }
       } ]
     }, {
-      "title" : "Border",
       "id" : "border",
       "type" : "Section",
+      "title" : "Border",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -345,10 +345,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```columns {left: {portion: 3}, border: true}\nleft: **Argument Name**\nright: Argument description and what argument is for\n```\n```columns {left: {portion: 3}, border: true}\nleft: **Another Name**\nright: Argument description and what argument is for\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "columns" : [ {
           "content" : [ {
@@ -370,13 +370,13 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "type" : "Columns",
         "config" : {
+          "border" : true,
           "left" : {
             "portion" : 3
-          },
-          "border" : true
-        },
-        "type" : "Columns"
+          }
+        }
       }, {
         "columns" : [ {
           "content" : [ {
@@ -398,18 +398,18 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "type" : "Columns",
         "config" : {
+          "border" : true,
           "left" : {
             "portion" : 3
-          },
-          "border" : true
-        },
-        "type" : "Columns"
+          }
+        }
       } ]
     }, {
-      "title" : "Alignment",
       "id" : "alignment",
       "type" : "Section",
+      "title" : "Alignment",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -423,10 +423,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```columns {left: {portion: 3, align: \"right\"}, border: true}\nleft: **Argument Name**\n\n*optional*\nright: Argument description and what argument is for\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "columns" : [ {
           "content" : [ {
@@ -457,17 +457,17 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "type" : "Columns",
         "config" : {
+          "border" : true,
           "left" : {
             "portion" : 3,
             "align" : "right"
-          },
-          "border" : true
-        },
-        "type" : "Columns"
+          }
+        }
       } ]
     } ],
-    "lastModifiedTime" : 1626065894790,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Columns",

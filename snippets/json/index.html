@@ -160,9 +160,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Paths",
       "id" : "paths",
       "type" : "Section",
+      "title" : "Paths",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -182,10 +182,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-json: book-store.json {paths: [\"root.store.book[0].category\", \"root.store.book[2].category\"]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -199,45 +199,45 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "paths" : [ "root.store.book[0].category", "root.store.book[2].category" ],
         "data" : {
           "store" : {
-            "book" : [ {
-              "category" : "reference",
-              "author" : "Nigel Rees",
-              "title" : "Sayings of the Century",
-              "price" : 8.95
-            }, {
-              "category" : "fiction",
-              "author" : "Evelyn Waugh",
-              "title" : "Sword of Honour",
-              "price" : 12.99
-            }, {
-              "category" : "fiction",
-              "author" : "Herman Melville",
-              "title" : "Moby Dick",
-              "isbn" : "0-553-21311-3",
-              "price" : 8.99
-            }, {
-              "category" : "fiction",
-              "author" : "J. R. R. Tolkien",
-              "title" : "The Lord of the Rings",
-              "isbn" : "0-395-19395-8",
-              "price" : 22.99
-            } ],
             "bicycle" : {
               "color" : "red",
               "price" : 19.95
-            }
+            },
+            "book" : [ {
+              "price" : 8.95,
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "category" : "reference"
+            }, {
+              "price" : 12.99,
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "category" : "fiction"
+            }, {
+              "price" : 8.99,
+              "author" : "Herman Melville",
+              "isbn" : "0-553-21311-3",
+              "title" : "Moby Dick",
+              "category" : "fiction"
+            }, {
+              "price" : 22.99,
+              "author" : "J. R. R. Tolkien",
+              "isbn" : "0-395-19395-8",
+              "title" : "The Lord of the Rings",
+              "category" : "fiction"
+            } ]
           },
           "expensive" : 10
         },
+        "paths" : [ "root.store.book[0].category", "root.store.book[2].category" ],
         "type" : "Json"
       } ]
     }, {
-      "title" : "Paths From File",
       "id" : "paths-from-file",
       "type" : "Section",
+      "title" : "Paths From File",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -251,20 +251,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "title" : "book-store-paths.json",
         "data" : [ "root.store.book[1].category", "root.store.book[2].category" ],
         "paths" : [ ],
-        "type" : "Json"
+        "type" : "Json",
+        "title" : "book-store-paths.json"
       }, {
-        "lang" : "",
         "snippet" : ":include-json: book-store.json {pathsFile: \"book-store-paths.json\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       } ]
     }, {
-      "title" : "Json Subparts",
       "id" : "json-subparts",
       "type" : "Section",
+      "title" : "Json Subparts",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -276,13 +276,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "pass ",
           "type" : "SimpleText"
         }, {
-          "url" : "https://github.com/json-path/JsonPath",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Json Path",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "https://github.com/json-path/JsonPath"
         }, {
           "text" : " as ",
           "type" : "SimpleText"
@@ -294,30 +294,30 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "include" : "$..book[0,1]",
         "data" : [ {
-          "category" : "reference",
+          "price" : 8.95,
           "author" : "Nigel Rees",
           "title" : "Sayings of the Century",
-          "price" : 8.95
+          "category" : "reference"
         }, {
-          "category" : "fiction",
+          "price" : 12.99,
           "author" : "Evelyn Waugh",
           "title" : "Sword of Honour",
-          "price" : 12.99
+          "category" : "fiction"
         } ],
         "paths" : [ ],
         "type" : "Json"
       } ]
     }, {
-      "title" : "Title",
       "id" : "title",
       "type" : "Section",
+      "title" : "Title",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -331,31 +331,31 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", title: \"Books\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "include" : "$..book[0,1]",
-        "title" : "Books",
         "data" : [ {
-          "category" : "reference",
+          "price" : 8.95,
           "author" : "Nigel Rees",
           "title" : "Sayings of the Century",
-          "price" : 8.95
+          "category" : "reference"
         }, {
-          "category" : "fiction",
+          "price" : 12.99,
           "author" : "Evelyn Waugh",
           "title" : "Sword of Honour",
-          "price" : 12.99
+          "category" : "fiction"
         } ],
         "paths" : [ ],
-        "type" : "Json"
+        "type" : "Json",
+        "title" : "Books"
       } ]
     }, {
-      "title" : "Read More",
       "id" : "read-more",
       "type" : "Section",
+      "title" : "Read More",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -395,52 +395,52 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "readMore" : true,
         "readMoreVisibleLines" : 5,
         "data" : {
           "store" : {
-            "book" : [ {
-              "category" : "reference",
-              "author" : "Nigel Rees",
-              "title" : "Sayings of the Century",
-              "price" : 8.95
-            }, {
-              "category" : "fiction",
-              "author" : "Evelyn Waugh",
-              "title" : "Sword of Honour",
-              "price" : 12.99
-            }, {
-              "category" : "fiction",
-              "author" : "Herman Melville",
-              "title" : "Moby Dick",
-              "isbn" : "0-553-21311-3",
-              "price" : 8.99
-            }, {
-              "category" : "fiction",
-              "author" : "J. R. R. Tolkien",
-              "title" : "The Lord of the Rings",
-              "isbn" : "0-395-19395-8",
-              "price" : 22.99
-            } ],
             "bicycle" : {
               "color" : "red",
               "price" : 19.95
-            }
+            },
+            "book" : [ {
+              "price" : 8.95,
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "category" : "reference"
+            }, {
+              "price" : 12.99,
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "category" : "fiction"
+            }, {
+              "price" : 8.99,
+              "author" : "Herman Melville",
+              "isbn" : "0-553-21311-3",
+              "title" : "Moby Dick",
+              "category" : "fiction"
+            }, {
+              "price" : 22.99,
+              "author" : "J. R. R. Tolkien",
+              "isbn" : "0-395-19395-8",
+              "title" : "The Lord of the Rings",
+              "category" : "fiction"
+            } ]
           },
           "expensive" : 10
         },
         "paths" : [ ],
-        "type" : "Json"
+        "type" : "Json",
+        "readMore" : true
       } ]
     }, {
-      "title" : "Hidden Parts",
       "id" : "hidden-parts",
       "type" : "Section",
+      "title" : "Hidden Parts",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -460,51 +460,51 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-json: book-store.json {collapsedPaths: ['root.store.book']}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "collapsedPaths" : [ "root.store.book" ],
         "data" : {
           "store" : {
-            "book" : [ {
-              "category" : "reference",
-              "author" : "Nigel Rees",
-              "title" : "Sayings of the Century",
-              "price" : 8.95
-            }, {
-              "category" : "fiction",
-              "author" : "Evelyn Waugh",
-              "title" : "Sword of Honour",
-              "price" : 12.99
-            }, {
-              "category" : "fiction",
-              "author" : "Herman Melville",
-              "title" : "Moby Dick",
-              "isbn" : "0-553-21311-3",
-              "price" : 8.99
-            }, {
-              "category" : "fiction",
-              "author" : "J. R. R. Tolkien",
-              "title" : "The Lord of the Rings",
-              "isbn" : "0-395-19395-8",
-              "price" : 22.99
-            } ],
             "bicycle" : {
               "color" : "red",
               "price" : 19.95
-            }
+            },
+            "book" : [ {
+              "price" : 8.95,
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "category" : "reference"
+            }, {
+              "price" : 12.99,
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "category" : "fiction"
+            }, {
+              "price" : 8.99,
+              "author" : "Herman Melville",
+              "isbn" : "0-553-21311-3",
+              "title" : "Moby Dick",
+              "category" : "fiction"
+            }, {
+              "price" : 22.99,
+              "author" : "J. R. R. Tolkien",
+              "isbn" : "0-395-19395-8",
+              "title" : "The Lord of the Rings",
+              "category" : "fiction"
+            } ]
           },
           "expensive" : 10
         },
         "paths" : [ ],
+        "collapsedPaths" : [ "root.store.book" ],
         "type" : "Json"
       } ]
     }, {
-      "title" : "Highlights",
       "id" : "highlights",
       "type" : "Section",
+      "title" : "Highlights",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -523,13 +523,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : ", in (similar fashion to ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/snippets/external-code-snippets#highlights",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "regular code snippets",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "/znai/snippets/external-code-snippets#highlights"
         }, {
           "text" : "), you can highlight",
           "type" : "SimpleText"
@@ -540,41 +540,41 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-json: book-store.json {highlight: [\"category\", 2]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "highlight" : [ "category", 2 ],
         "data" : {
           "store" : {
-            "book" : [ {
-              "category" : "reference",
-              "author" : "Nigel Rees",
-              "title" : "Sayings of the Century",
-              "price" : 8.95
-            }, {
-              "category" : "fiction",
-              "author" : "Evelyn Waugh",
-              "title" : "Sword of Honour",
-              "price" : 12.99
-            }, {
-              "category" : "fiction",
-              "author" : "Herman Melville",
-              "title" : "Moby Dick",
-              "isbn" : "0-553-21311-3",
-              "price" : 8.99
-            }, {
-              "category" : "fiction",
-              "author" : "J. R. R. Tolkien",
-              "title" : "The Lord of the Rings",
-              "isbn" : "0-395-19395-8",
-              "price" : 22.99
-            } ],
             "bicycle" : {
               "color" : "red",
               "price" : 19.95
-            }
+            },
+            "book" : [ {
+              "price" : 8.95,
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "category" : "reference"
+            }, {
+              "price" : 12.99,
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "category" : "fiction"
+            }, {
+              "price" : 8.99,
+              "author" : "Herman Melville",
+              "isbn" : "0-553-21311-3",
+              "title" : "Moby Dick",
+              "category" : "fiction"
+            }, {
+              "price" : 22.99,
+              "author" : "J. R. R. Tolkien",
+              "isbn" : "0-395-19395-8",
+              "title" : "The Lord of the Rings",
+              "category" : "fiction"
+            } ]
           },
           "expensive" : 10
         },
@@ -582,9 +582,9 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Json"
       } ]
     }, {
-      "title" : "Code References",
       "id" : "code-references",
       "type" : "Section",
+      "title" : "Code References",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -599,26 +599,26 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "include" : "$..book[0,1]",
-        "title" : "Books",
-        "referencesPath" : "references/json-references-demo.csv",
         "data" : [ {
-          "category" : "reference",
+          "price" : 8.95,
           "author" : "Nigel Rees",
           "title" : "Sayings of the Century",
-          "price" : 8.95
+          "category" : "reference"
         }, {
-          "category" : "fiction",
+          "price" : 12.99,
           "author" : "Evelyn Waugh",
           "title" : "Sword of Honour",
-          "price" : 12.99
+          "category" : "fiction"
         } ],
+        "referencesPath" : "references/json-references-demo.csv",
         "paths" : [ ],
-        "type" : "Json"
+        "type" : "Json",
+        "title" : "Books"
       } ]
     }, {
-      "title" : "Test Results",
       "id" : "test-results",
       "type" : "Section",
+      "title" : "Test Results",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -638,7 +638,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Json",

@@ -130,9 +130,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Highlight Parts",
       "id" : "highlight-parts",
       "type" : "Section",
+      "title" : "Highlight Parts",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -164,49 +164,49 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-xml: menu.html {paths: [\"ul.@class\", \"ul.li[1].@class\", \"ul.li[2]\"]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "paths" : [ "ul.@class", "ul.li[1].@class", "ul.li[2]" ],
         "xmlAsJson" : {
-          "tagName" : "ul",
+          "children" : [ {
+            "children" : [ {
+              "text" : "Menu 1",
+              "tagName" : ""
+            } ],
+            "attributes" : [ {
+              "name" : "class",
+              "value" : "\"menu-item\""
+            } ],
+            "tagName" : "li"
+          }, {
+            "children" : [ {
+              "text" : "Menu 2",
+              "tagName" : ""
+            } ],
+            "attributes" : [ {
+              "name" : "class",
+              "value" : "\"menu-item\""
+            } ],
+            "tagName" : "li"
+          }, {
+            "children" : [ {
+              "text" : "Menu 3",
+              "tagName" : ""
+            } ],
+            "attributes" : [ {
+              "name" : "class",
+              "value" : "\"menu-item\""
+            } ],
+            "tagName" : "li"
+          } ],
           "attributes" : [ {
             "name" : "class",
             "value" : "\"menu\""
           } ],
-          "children" : [ {
-            "tagName" : "li",
-            "attributes" : [ {
-              "name" : "class",
-              "value" : "\"menu-item\""
-            } ],
-            "children" : [ {
-              "tagName" : "",
-              "text" : "Menu 1"
-            } ]
-          }, {
-            "tagName" : "li",
-            "attributes" : [ {
-              "name" : "class",
-              "value" : "\"menu-item\""
-            } ],
-            "children" : [ {
-              "tagName" : "",
-              "text" : "Menu 2"
-            } ]
-          }, {
-            "tagName" : "li",
-            "attributes" : [ {
-              "name" : "class",
-              "value" : "\"menu-item\""
-            } ],
-            "children" : [ {
-              "tagName" : "",
-              "text" : "Menu 3"
-            } ]
-          } ]
+          "tagName" : "ul"
         },
         "type" : "Xml"
       }, {
@@ -222,58 +222,58 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-xml: simple.xml {paths: [\"root.a[1]\", \"root.b[0]\", \"root.c[0]\"]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "paths" : [ "root.a[1]", "root.b[0]", "root.c[0]" ],
         "xmlAsJson" : {
-          "tagName" : "root",
-          "attributes" : [ ],
           "children" : [ {
-            "tagName" : "a",
-            "attributes" : [ ],
             "children" : [ {
-              "tagName" : "",
-              "text" : "text 1"
-            } ]
+              "text" : "text 1",
+              "tagName" : ""
+            } ],
+            "attributes" : [ ],
+            "tagName" : "a"
           }, {
-            "tagName" : "a",
-            "attributes" : [ ],
             "children" : [ {
-              "tagName" : "",
-              "text" : "text 2"
-            } ]
+              "text" : "text 2",
+              "tagName" : ""
+            } ],
+            "attributes" : [ ],
+            "tagName" : "a"
           }, {
-            "tagName" : "b",
-            "attributes" : [ ],
             "children" : [ {
-              "tagName" : "",
-              "text" : "text 3"
-            } ]
+              "text" : "text 3",
+              "tagName" : ""
+            } ],
+            "attributes" : [ ],
+            "tagName" : "b"
           }, {
-            "tagName" : "c",
-            "attributes" : [ ],
             "children" : [ {
-              "tagName" : "",
-              "text" : "text 4"
-            } ]
+              "text" : "text 4",
+              "tagName" : ""
+            } ],
+            "attributes" : [ ],
+            "tagName" : "c"
           }, {
-            "tagName" : "c",
-            "attributes" : [ ],
             "children" : [ {
-              "tagName" : "",
-              "text" : "text 5"
-            } ]
-          } ]
+              "text" : "text 5",
+              "tagName" : ""
+            } ],
+            "attributes" : [ ],
+            "tagName" : "c"
+          } ],
+          "attributes" : [ ],
+          "tagName" : "root"
         },
         "type" : "Xml"
       } ]
     }, {
-      "title" : "Use Cases",
       "id" : "use-cases",
       "type" : "Section",
+      "title" : "Use Cases",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -291,8 +291,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "tight" : true,
         "type" : "BulletList",
+        "tight" : true,
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -338,9 +338,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Title",
       "id" : "title",
       "type" : "Section",
+      "title" : "Title",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -354,55 +354,55 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-xml: menu.html {title: \"Menu snippet\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "title" : "Menu snippet",
+        "paths" : [ ],
         "xmlAsJson" : {
-          "tagName" : "ul",
+          "children" : [ {
+            "children" : [ {
+              "text" : "Menu 1",
+              "tagName" : ""
+            } ],
+            "attributes" : [ {
+              "name" : "class",
+              "value" : "\"menu-item\""
+            } ],
+            "tagName" : "li"
+          }, {
+            "children" : [ {
+              "text" : "Menu 2",
+              "tagName" : ""
+            } ],
+            "attributes" : [ {
+              "name" : "class",
+              "value" : "\"menu-item\""
+            } ],
+            "tagName" : "li"
+          }, {
+            "children" : [ {
+              "text" : "Menu 3",
+              "tagName" : ""
+            } ],
+            "attributes" : [ {
+              "name" : "class",
+              "value" : "\"menu-item\""
+            } ],
+            "tagName" : "li"
+          } ],
           "attributes" : [ {
             "name" : "class",
             "value" : "\"menu\""
           } ],
-          "children" : [ {
-            "tagName" : "li",
-            "attributes" : [ {
-              "name" : "class",
-              "value" : "\"menu-item\""
-            } ],
-            "children" : [ {
-              "tagName" : "",
-              "text" : "Menu 1"
-            } ]
-          }, {
-            "tagName" : "li",
-            "attributes" : [ {
-              "name" : "class",
-              "value" : "\"menu-item\""
-            } ],
-            "children" : [ {
-              "tagName" : "",
-              "text" : "Menu 2"
-            } ]
-          }, {
-            "tagName" : "li",
-            "attributes" : [ {
-              "name" : "class",
-              "value" : "\"menu-item\""
-            } ],
-            "children" : [ {
-              "tagName" : "",
-              "text" : "Menu 3"
-            } ]
-          } ]
+          "tagName" : "ul"
         },
-        "paths" : [ ],
-        "type" : "Xml"
+        "type" : "Xml",
+        "title" : "Menu snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1626065894798,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Xml",

@@ -120,9 +120,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Table Data",
       "id" : "table-data",
       "type" : "Section",
+      "title" : "Table Data",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -144,9 +144,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "java",
         "snippet" : "package org.testingisdocumenting.testing.examples\n\nimport org.junit.Test\nimport org.testingisdocumenting.webtau.data.table.TableData\n\nimport static org.testingisdocumenting.webtau.WebTauCore.*\n\nclass TestToDocExample {\n    @Test\n    void shouldRestrictAccountsActivity() {\n        def rules = [\"Account Type\" | \"Operation\"    | \"Restriction\"] {\n                    _________________________________________________\n                        \"SPB3\"      | \"Buy Options\"  | \"weekends only\"\n                        \"TR\"        | \"Sell Futures\" | \"except holidays\"\n                        \"BOSS\"      | \"Buy Stocks\"   | \"none\" }\n\n        validateRules(rules)\n    }\n\n    private static void validateRules(TableData rules) {\n        doc.capture(\"account-rules\", rules)\n    }\n}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -158,22 +158,22 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "We can refer to this data later in our documentation by using the ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/layout/tables",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "include-table",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "/znai/layout/tables"
         }, {
           "text" : " plugin",
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-table: account-rules.json\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -181,14 +181,8 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "type" : "Table",
         "table" : {
-          "columns" : [ {
-            "title" : "Account Type"
-          }, {
-            "title" : "Operation"
-          }, {
-            "title" : "Restriction"
-          } ],
           "data" : [ [ [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -243,12 +237,18 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "none",
               "type" : "SimpleText"
             } ]
-          } ] ] ]
-        },
-        "type" : "Table"
+          } ] ] ],
+          "columns" : [ {
+            "title" : "Account Type"
+          }, {
+            "title" : "Operation"
+          }, {
+            "title" : "Restriction"
+          } ]
+        }
       } ]
     } ],
-    "lastModifiedTime" : 1626065894798,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Synergy With Testing",
       "pageTitle" : "Java",

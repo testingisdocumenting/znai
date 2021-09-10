@@ -160,9 +160,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Command Parameters",
       "id" : "command-parameters",
       "type" : "Section",
+      "title" : "Command Parameters",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -176,14 +176,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-command: my-super-command paramA --important-flag=true {highlight: \"important\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "command" : "my-super-command paramA --important-flag=true",
         "paramsToHighlight" : [ "important" ],
-        "type" : "CliCommand"
+        "type" : "CliCommand",
+        "command" : "my-super-command paramA --important-flag=true"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -192,9 +192,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Long Commands",
       "id" : "long-commands",
       "type" : "Section",
+      "title" : "Long Commands",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -202,9 +202,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "command" : "another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3",
         "paramsToHighlight" : [ "name", "value" ],
-        "type" : "CliCommand"
+        "type" : "CliCommand",
+        "command" : "another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -218,15 +218,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {\n    highlight: [\"name\", \"value\"], \n    threshold: 30\n}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "command" : "another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3",
         "paramsToHighlight" : [ "name", "value" ],
         "threshold" : 30,
-        "type" : "CliCommand"
+        "type" : "CliCommand",
+        "command" : "another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -240,15 +240,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 {\n    highlight: [\"name\", \"value\"], \n    splitAfter: [\"--score=2\", \"--value=8\"]\n}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "command" : "another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3",
-        "paramsToHighlight" : [ "score", "value" ],
         "splitAfter" : [ "--value=8", "--score=2" ],
-        "type" : "CliCommand"
+        "paramsToHighlight" : [ "score", "value" ],
+        "type" : "CliCommand",
+        "command" : "another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -269,9 +269,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Handle Special Symbols",
       "id" : "handle-special-symbols",
       "type" : "Section",
+      "title" : "Handle Special Symbols",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -291,19 +291,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-command: {command: \"another-command {file1} [file2]\", highlight: [\"file1\"]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "command" : "another-command {file1} [file2]",
         "paramsToHighlight" : [ "file1" ],
-        "type" : "CliCommand"
+        "type" : "CliCommand",
+        "command" : "another-command {file1} [file2]"
       } ]
     }, {
-      "title" : "From File",
       "id" : "from-file",
       "type" : "Section",
+      "title" : "From File",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -311,19 +311,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-command: {commandFile: \"cli/command.txt\", highlight: \"value\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "txt",
         "snippet" : "my-captured-command --param=10 --another=value",
+        "type" : "Snippet",
         "title" : "cli/command.txt",
-        "type" : "Snippet"
+        "lang" : "txt"
       }, {
-        "command" : "my-captured-command --param=10 --another=value",
         "paramsToHighlight" : [ "value" ],
-        "type" : "CliCommand"
+        "type" : "CliCommand",
+        "command" : "my-captured-command --param=10 --another=value"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -332,9 +332,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Output",
       "id" : "output",
       "type" : "Section",
+      "title" : "Output",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -342,14 +342,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "highlight" : [ 0, 4 ],
-        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ],
-        "type" : "CliOutput"
+        "type" : "CliOutput",
+        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ]
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -357,10 +357,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-output: cli/file-path-of-captured.out {highlight: \"remote\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -368,25 +368,25 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-output: cli/file-path-of-captured.out {highlightPath: \"cli/file-path-of-asserted-lines.txt\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lang" : "txt",
         "snippet" : "remote:\nWriting",
+        "type" : "Snippet",
         "title" : "cli/file-path-of-asserted-lines.txt",
-        "type" : "Snippet"
+        "lang" : "txt"
       }, {
-        "highlightPath" : "cli/file-path-of-asserted-lines.txt",
-        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ],
         "highlight" : [ 4, 2 ],
-        "type" : "CliOutput"
+        "highlightPath" : "cli/file-path-of-asserted-lines.txt",
+        "type" : "CliOutput",
+        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ]
       } ]
     }, {
-      "title" : "ANSI Colors",
       "id" : "ansi-colors",
       "type" : "Section",
+      "title" : "ANSI Colors",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -394,23 +394,23 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "out",
         "snippet" : "\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\")\n\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m\n  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200\n      matches:\n\n      header.statusCode:   actual: 200 <java.lang.Integer>\n                         expected: 200 <java.lang.Integer>\u001B[33m (\u001B[32m47ms\u001B[33m)\u001B[0m\n\u001B[36m{\u001B[0m\n  \u001B[35m\"userId\": 1\u001B[36m,\u001B[0m\n  \u001B[35m\"id\": 1\u001B[36m,\u001B[0m\n  \u001B[35m\"title\": \u001B[32m\"delectus aut autem\"\u001B[36m,\u001B[0m\n  \u001B[35m\"completed\": false\u001B[0m\n\u001B[36m}\u001B[0m\n\u001B[32m. \u001B[34mexecuted HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[33m (\u001B[32m342ms\u001B[33m)\u001B[0m",
+        "type" : "Snippet",
         "title" : "cli/ansi.out - file with ANSI sequence colors",
-        "type" : "Snippet"
+        "lang" : "out"
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-output: cli/ansi.out\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "lines" : [ "\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\")", "\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m", "  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200", "      matches:", "", "      header.statusCode:   actual: 200 <java.lang.Integer>", "                         expected: 200 <java.lang.Integer>\u001B[33m (\u001B[32m47ms\u001B[33m)\u001B[0m", "\u001B[36m{\u001B[0m", "  \u001B[35m\"userId\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"id\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"title\": \u001B[32m\"delectus aut autem\"\u001B[36m,\u001B[0m", "  \u001B[35m\"completed\": false\u001B[0m", "\u001B[36m}\u001B[0m", "\u001B[32m. \u001B[34mexecuted HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[33m (\u001B[32m342ms\u001B[33m)\u001B[0m" ],
-        "type" : "CliOutput"
+        "type" : "CliOutput",
+        "lines" : [ "\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\")", "\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m", "  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200", "      matches:", "", "      header.statusCode:   actual: 200 <java.lang.Integer>", "                         expected: 200 <java.lang.Integer>\u001B[33m (\u001B[32m47ms\u001B[33m)\u001B[0m", "\u001B[36m{\u001B[0m", "  \u001B[35m\"userId\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"id\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"title\": \u001B[32m\"delectus aut autem\"\u001B[36m,\u001B[0m", "  \u001B[35m\"completed\": false\u001B[0m", "\u001B[36m}\u001B[0m", "\u001B[32m. \u001B[34mexecuted HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[33m (\u001B[32m342ms\u001B[33m)\u001B[0m" ]
       } ]
     }, {
-      "title" : "Title",
       "id" : "title",
       "type" : "Section",
+      "title" : "Title",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -424,19 +424,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-output: cli/file-path-of-captured.out {title: \"Captured output\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "title" : "Captured output",
+        "type" : "CliOutput",
         "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ],
-        "type" : "CliOutput"
+        "title" : "Captured output"
       } ]
     }, {
-      "title" : "Extract Snippets",
       "id" : "extract-snippets",
       "type" : "Section",
+      "title" : "Extract Snippets",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -456,38 +456,38 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-output: cli/file-path-of-captured.out {\n    title: \"Limited captured output\",\n    startLine: \"git push\",\n    endLine: \"master -> master\"    \n}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
-        "title" : "Limited captured output",
-        "startLine" : "git push",
         "endLine" : "master -> master",
+        "startLine" : "git push",
+        "type" : "CliOutput",
         "lines" : [ "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master" ],
-        "type" : "CliOutput"
+        "title" : "Limited captured output"
       }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "More on limit options in ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/snippets/external-code-snippets#extract-snippets",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "External Code Snippets",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "/znai/snippets/external-code-snippets#extract-snippets"
         }, {
           "text" : ".",
           "type" : "SimpleText"
         } ]
       } ]
     }, {
-      "title" : "Presentation Mode",
       "id" : "presentation-mode",
       "type" : "Section",
+      "title" : "Presentation Mode",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -519,10 +519,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -536,13 +536,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "revealLineStop" : [ 0, 4 ],
         "highlight" : [ 4 ],
-        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ],
-        "type" : "CliOutput"
+        "revealLineStop" : [ 0, 4 ],
+        "type" : "CliOutput",
+        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "CLI",

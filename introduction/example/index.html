@@ -125,9 +125,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Markdown",
       "id" : "markdown",
       "type" : "Section",
+      "title" : "Markdown",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -138,15 +138,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "markdown" : {
-          "lang" : "markdown",
-          "snippet" : "# Header\n\nNormal paragraph text. Some *italic* and **bold**.\nFollowed by bullet points:\n* Apple\n* Banana\n* Water\n",
-          "type" : "Snippet"
-        },
         "result" : [ {
-          "title" : "Header",
           "id" : "header",
           "type" : "Section",
+          "title" : "Header",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -178,8 +173,8 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           }, {
             "bulletMarker" : "*",
-            "tight" : true,
             "type" : "BulletList",
+            "tight" : true,
             "content" : [ {
               "type" : "ListItem",
               "content" : [ {
@@ -210,12 +205,17 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "markdown" : {
+          "snippet" : "# Header\n\nNormal paragraph text. Some *italic* and **bold**.\nFollowed by bullet points:\n* Apple\n* Banana\n* Water\n",
+          "type" : "Snippet",
+          "lang" : "markdown"
+        },
         "type" : "MarkdownAndResult"
       } ]
     }, {
-      "title" : "External References",
       "id" : "external-references",
       "type" : "Section",
+      "title" : "External References",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -223,10 +223,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "markdown",
         "snippet" : "# Server Configuration\n\n:include-file: config/server.config\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : "markdown"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -247,7 +247,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894790,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
       "sectionTitle" : "Introduction",
       "pageTitle" : "Example",

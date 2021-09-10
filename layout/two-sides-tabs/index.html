@@ -130,9 +130,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Unified Tabs",
       "id" : "unified-tabs",
       "type" : "Section",
+      "title" : "Unified Tabs",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -141,9 +141,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Definition",
       "id" : "definition",
       "type" : "Section",
+      "title" : "Definition",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -151,10 +151,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```tabs\nJavaScript: :include-file: snippets/file-name.js\nJava: :include-file: snippets/WideCode.java \nCpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true}\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -174,31 +174,31 @@ ReactDOM.render(React.createElement(Documentation, {
         "tabsContent" : [ {
           "name" : "JavaScript",
           "content" : [ {
-            "lang" : "javascript",
             "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-            "type" : "Snippet"
+            "type" : "Snippet",
+            "lang" : "js"
           } ]
         }, {
           "name" : "Java",
           "content" : [ {
-            "lang" : "java",
             "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
-            "type" : "Snippet"
+            "type" : "Snippet",
+            "lang" : "java"
           } ]
         }, {
           "name" : "Cpp",
           "content" : [ {
-            "lang" : "cpp",
             "snippet" : "int test = 2;\n\n// comment with **important**\n// information\nint b = 3;\nint d = 3;\n\n/*\n * multi line comment\n * of multi *lines* text\n*/\nint e = 5;",
-            "type" : "Snippet"
+            "type" : "Snippet",
+            "lang" : "cpp"
           } ]
         } ],
         "type" : "Tabs"
       } ]
     }, {
-      "title" : "Markdown Per Tab",
       "id" : "markdown-per-tab",
       "type" : "Section",
+      "title" : "Markdown Per Tab",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -220,10 +220,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "````tabs\nJavaScript: \nFirst you need to download WebStorm and then run the following using your terminal\n\n```bash\n$ yarn install\n$ yarn start\n```\n    \nJava: \nFirst you need to download Intellij IDEA and then run the following using your terminal\n    \n```bash\n$ mvn install\n$ mvn exec:exec\n```\n    \nCpp: \nFirst you need to download CLion and then run the following using your terminal\n\n```bash\n$ pwd\n$ whoamis\n```\n````\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "rightSide" : true,
         "type" : "Meta"
@@ -237,10 +237,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
-            "lang" : "bash",
             "snippet" : "$ yarn install\n$ yarn start\n",
+            "type" : "Snippet",
             "lineNumber" : "",
-            "type" : "Snippet"
+            "lang" : "bash"
           } ]
         }, {
           "name" : "Java",
@@ -251,10 +251,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
-            "lang" : "bash",
             "snippet" : "$ mvn install\n$ mvn exec:exec\n",
+            "type" : "Snippet",
             "lineNumber" : "",
-            "type" : "Snippet"
+            "lang" : "bash"
           } ]
         }, {
           "name" : "Cpp",
@@ -265,16 +265,16 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
-            "lang" : "bash",
             "snippet" : "$ pwd\n$ whoamis\n",
+            "type" : "Snippet",
             "lineNumber" : "",
-            "type" : "Snippet"
+            "lang" : "bash"
           } ]
         } ],
         "type" : "Tabs"
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Two Sides Tabs",

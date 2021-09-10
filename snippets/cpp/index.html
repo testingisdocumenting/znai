@@ -120,9 +120,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Comments",
       "id" : "comments",
       "type" : "Section",
+      "title" : "Comments",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -147,9 +147,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "cpp",
         "snippet" : "int my_func() {\n    // @znai important context information goes here\n    // this information is useful and can be re-used inside a user guide\n\n    code_goes_here();\n     // this comment is not marked\n    another_code();\n\n    /* @znai\n    another piece of **documentation**\n    in multiple lines, but it will be treated as `markdown`\n    */\n}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "cpp"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -157,10 +157,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-cpp-comments: comments.cpp {entry: \"my_func\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -195,7 +195,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Cpp",

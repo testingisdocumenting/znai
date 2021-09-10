@@ -140,9 +140,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Don't Repeat Yourself",
       "id" : "dont-repeat-yourself",
       "type" : "Section",
+      "title" : "Don't Repeat Yourself",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -261,9 +261,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Definition",
       "id" : "definition",
       "type" : "Section",
+      "title" : "Definition",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -279,21 +279,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : " uses the ",
           "type" : "SimpleText"
         }, {
-          "url" : "http://freemarker.org",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "FreeMarker",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "http://freemarker.org"
         }, {
           "text" : " template engine.",
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "md",
         "snippet" : "**Name**: ${name}\n\n**Title**: ${title}\n\n**Current Project**: BBR\n \n**Team**: Team A",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "md"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -301,10 +301,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : "```template templates/job.md\nname: Sathish\ntitle: Software Engineer\n```\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -361,9 +361,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Inlined",
       "id" : "inlined",
       "type" : "Section",
+      "title" : "Inlined",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -371,10 +371,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-template: templates/arg-definition.md {name: \"Arg Name\", description: \"Description of the argument\"}\n\n:include-template: templates/arg-definition.md {name: \"Other Name\", optional: true, description: \"Yet another description of the argument\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -385,9 +385,9 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ]
       }, {
-        "lang" : "md",
         "snippet" : "```columns {left: {portion: 3, align: \"right\"}, border: true}\nleft: **${name}**\n<#if optional??>\n\\\n*optional*\n</#if>\nright: ${description}\n```",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "md"
       }, {
         "columns" : [ {
           "content" : [ {
@@ -409,14 +409,14 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "type" : "Columns",
         "config" : {
+          "border" : true,
           "left" : {
             "portion" : 3,
             "align" : "right"
-          },
-          "border" : true
-        },
-        "type" : "Columns"
+          }
+        }
       }, {
         "columns" : [ {
           "content" : [ {
@@ -448,19 +448,19 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "type" : "Columns",
         "config" : {
+          "border" : true,
           "left" : {
             "portion" : 3,
             "align" : "right"
-          },
-          "border" : true
-        },
-        "type" : "Columns"
+          }
+        }
       } ]
     }, {
-      "title" : "External Parameters",
       "id" : "external-parameters",
       "type" : "Section",
+      "title" : "External Parameters",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -485,9 +485,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "json",
         "snippet" : "{\n  \"name\": \"specified name\",\n  \"code\": \"class CodeSnippet {\\n    ...\\n}\",\n  \"description\": \"generated description\"\n}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "json"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -495,9 +495,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "md",
         "snippet" : "`````columns {left: {align: \"right\", portion: 3}, border: true}\nleft: ${name}\nright: ${description}\n\n```java\n${code}\n```\n\n`````",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "md"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -505,10 +505,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-template: templates/test-artifact.md {paramsPath: \"artifacts/generated-values.json\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "columns" : [ {
           "content" : [ {
@@ -526,38 +526,38 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
-            "lang" : "java",
             "snippet" : "class CodeSnippet {\n    ...\n}\n",
+            "type" : "Snippet",
             "lineNumber" : "",
-            "type" : "Snippet"
+            "lang" : "java"
           } ]
         } ],
+        "type" : "Columns",
         "config" : {
+          "border" : true,
           "left" : {
-            "align" : "right",
-            "portion" : 3
-          },
-          "border" : true
-        },
-        "type" : "Columns"
+            "portion" : 3,
+            "align" : "right"
+          }
+        }
       } ]
     }, {
-      "title" : "Loops",
       "id" : "loops",
       "type" : "Section",
+      "title" : "Loops",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "You can loop over a list of parameters using ",
           "type" : "SimpleText"
         }, {
-          "url" : "http://freemarker.org/docs/ref_directive_list.html",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "FreeMarker loop",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "http://freemarker.org/docs/ref_directive_list.html"
         } ]
       }, {
         "type" : "Paragraph",
@@ -566,9 +566,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "json",
         "snippet" : "{\"names\": [\n  {\"name\": \"Name 1\", \"description\": \"Description 1\"},\n  {\"name\": \"Name 2\", \"description\": \"Description 2\", \"optional\": \"true\"},\n  {\"name\": \"Name 3\", \"description\": \"Description 3\"}\n]}",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "json"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -576,14 +576,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "md",
         "snippet" : "<#list names as n>\n```columns {left: {portion: 3, align: \"right\"}, border: true}\nleft: **${n.name}**\n<#if n.optional??>\n\\\n*optional*\n</#if>\nright: ${n.description}\n```\n</#list>",
-        "type" : "Snippet"
+        "type" : "Snippet",
+        "lang" : "md"
       }, {
-        "lang" : "",
         "snippet" : ":include-template: templates/multiple-arg-definition.md {paramsPath: \"artifacts/names.json\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "columns" : [ {
           "content" : [ {
@@ -605,14 +605,14 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "type" : "Columns",
         "config" : {
+          "border" : true,
           "left" : {
             "portion" : 3,
             "align" : "right"
-          },
-          "border" : true
-        },
-        "type" : "Columns"
+          }
+        }
       }, {
         "columns" : [ {
           "content" : [ {
@@ -644,14 +644,14 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "type" : "Columns",
         "config" : {
+          "border" : true,
           "left" : {
             "portion" : 3,
             "align" : "right"
-          },
-          "border" : true
-        },
-        "type" : "Columns"
+          }
+        }
       }, {
         "columns" : [ {
           "content" : [ {
@@ -673,17 +673,17 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
+        "type" : "Columns",
         "config" : {
+          "border" : true,
           "left" : {
             "portion" : 3,
             "align" : "right"
-          },
-          "border" : true
-        },
-        "type" : "Columns"
+          }
+        }
       } ]
     } ],
-    "lastModifiedTime" : 1626065894794,
+    "lastModifiedTime" : 1631289543442,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Templates",

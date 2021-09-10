@@ -132,37 +132,37 @@ ReactDOM.render(React.createElement(Documentation, {
     "content" : [ {
       "type" : "Paragraph",
       "content" : [ {
-        "url" : "http://plantuml.com/sequence-diagram",
         "isFile" : false,
         "type" : "Link",
         "content" : [ {
           "text" : "PlantUml",
           "type" : "SimpleText"
-        } ]
+        } ],
+        "url" : "http://plantuml.com/sequence-diagram"
       }, {
         "text" : " is a text-based way of drawing many kinds of diagrams.",
         "type" : "SimpleText"
       } ]
     }, {
-      "title" : "In Place",
       "id" : "in-place",
       "type" : "Section",
+      "title" : "In Place",
       "content" : [ {
-        "markdown" : {
-          "lang" : "markdown",
-          "snippet" : "```plantuml\n@startuml\nAlice -> Bob: Authentication Request\nBob --> Alice: Authentication Response\n\nAlice -> Bob: Another authentication Request\nAlice <-- Bob: another authentication Response\n@enduml\n```\n",
-          "type" : "Snippet"
-        },
         "result" : [ {
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" contentScriptType=\"application/ecmascript\" contentStyleType=\"text/css\" height=\"223px\" preserveAspectRatio=\"none\" style=\"width:307px;height:223px;\" version=\"1.1\" viewBox=\"0 0 307 223\" width=\"307px\" zoomAndPan=\"magnify\"><defs><filter height=\"300%\" id=\"fbrzg00n1hs25\" width=\"300%\" x=\"-1\" y=\"-1\"><feGaussianBlur result=\"blurOut\" stdDeviation=\"2.0\"/><feColorMatrix in=\"blurOut\" result=\"blurOut2\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0\"/><feOffset dx=\"4.0\" dy=\"4.0\" in=\"blurOut2\" result=\"blurOut3\"/><feBlend in=\"SourceGraphic\" in2=\"blurOut3\" mode=\"normal\"/></filter></defs><g><line style=\"stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;\" x1=\"33\" x2=\"33\" y1=\"38.2969\" y2=\"174.8281\"/><line style=\"stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;\" x1=\"269\" x2=\"269\" y1=\"38.2969\" y2=\"174.8281\"/><rect fill=\"#FEFECE\" filter=\"url(#fbrzg00n1hs25)\" height=\"30.2969\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"46\" x=\"8\" y=\"3\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"32\" x=\"15\" y=\"22.9951\">Alice</text><rect fill=\"#FEFECE\" filter=\"url(#fbrzg00n1hs25)\" height=\"30.2969\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"46\" x=\"8\" y=\"173.8281\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"32\" x=\"15\" y=\"193.8232\">Alice</text><rect fill=\"#FEFECE\" filter=\"url(#fbrzg00n1hs25)\" height=\"30.2969\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"42\" x=\"246\" y=\"3\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"28\" x=\"253\" y=\"22.9951\">Bob</text><rect fill=\"#FEFECE\" filter=\"url(#fbrzg00n1hs25)\" height=\"30.2969\" style=\"stroke: #A80036; stroke-width: 1.5;\" width=\"42\" x=\"246\" y=\"173.8281\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"14\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"28\" x=\"253\" y=\"193.8232\">Bob</text><polygon fill=\"#A80036\" points=\"257,65.4297,267,69.4297,257,73.4297,261,69.4297\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><line style=\"stroke: #A80036; stroke-width: 1.0;\" x1=\"33\" x2=\"263\" y1=\"69.4297\" y2=\"69.4297\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"13\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"149\" x=\"40\" y=\"64.3638\">Authentication Request</text><polygon fill=\"#A80036\" points=\"44,94.5625,34,98.5625,44,102.5625,40,98.5625\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><line style=\"stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;\" x1=\"38\" x2=\"268\" y1=\"98.5625\" y2=\"98.5625\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"13\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"159\" x=\"50\" y=\"93.4966\">Authentication Response</text><polygon fill=\"#A80036\" points=\"257,123.6953,267,127.6953,257,131.6953,261,127.6953\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><line style=\"stroke: #A80036; stroke-width: 1.0;\" x1=\"33\" x2=\"263\" y1=\"127.6953\" y2=\"127.6953\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"13\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"203\" x=\"40\" y=\"122.6294\">Another authentication Request</text><polygon fill=\"#A80036\" points=\"44,152.8281,34,156.8281,44,160.8281,40,156.8281\" style=\"stroke: #A80036; stroke-width: 1.0;\"/><line style=\"stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;\" x1=\"38\" x2=\"268\" y1=\"156.8281\" y2=\"156.8281\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"13\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"212\" x=\"50\" y=\"151.7622\">another authentication Response</text><!--MD5=[79f4b9abeaa043af3002f110f0a6d47e]\n@startuml\r\nAlice -> Bob: Authentication Request\r\nBob - -> Alice: Authentication Response\r\n\r\nAlice -> Bob: Another authentication Request\r\nAlice <- - Bob: another authentication Response\r\n@enduml\r\n\nPlantUML version 1.2020.16(Sun Aug 23 20:20:43 UTC 2020)\n(GPL source distribution)\nJava Runtime: OpenJDK Runtime Environment\nJVM: OpenJDK 64-Bit Server VM\nDefault Encoding: UTF-8\nLanguage: en\nCountry: null\n--></g></svg>",
           "type" : "Svg"
         } ],
+        "markdown" : {
+          "snippet" : "```plantuml\n@startuml\nAlice -> Bob: Authentication Request\nBob --> Alice: Authentication Response\n\nAlice -> Bob: Another authentication Request\nAlice <-- Bob: another authentication Response\n@enduml\n```\n",
+          "type" : "Snippet",
+          "lang" : "markdown"
+        },
         "type" : "MarkdownAndResult"
       } ]
     }, {
-      "title" : "External File",
       "id" : "external-file",
       "type" : "Section",
+      "title" : "External File",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -178,15 +178,15 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "columns" : [ {
           "content" : [ {
-            "lang" : "",
             "snippet" : ":include-plantuml: demo.plantuml\n",
+            "type" : "Snippet",
             "lineNumber" : "",
-            "type" : "Snippet"
+            "lang" : ""
           }, {
-            "lang" : "plantuml",
             "snippet" : "@startuml\n\npackage \"Some Group\" {\n  HTTP - [First Component]\n  [Another Component]\n}\n\nnode \"Other Groups\" {\n  FTP - [Second Component]\n  [First Component] --> FTP\n}\n\ncloud {\n  [Example 1]\n}\n\n\ndatabase \"MySql\" {\n  folder \"This is my folder\" {\n    [Folder 3]\n  }\n  frame \"Foo\" {\n    [Frame 4]\n  }\n}\n\n[Another Component] --> [Example 1]\n[Example 1] --> [Folder 3]\n[Folder 3] --> [Frame 4]\n\n@enduml",
+            "type" : "Snippet",
             "title" : "demo.plantuml",
-            "type" : "Snippet"
+            "lang" : "plantuml"
           } ]
         }, {
           "content" : [ {
@@ -194,24 +194,24 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "Svg"
           } ]
         } ],
-        "config" : { },
-        "type" : "Columns"
+        "type" : "Columns",
+        "config" : { }
       } ]
     }, {
-      "title" : "Gantt Example",
       "id" : "gantt-example",
       "type" : "Section",
+      "title" : "Gantt Example",
       "content" : [ {
-        "lang" : "plantuml",
         "snippet" : "@startgantt\n[Task1] lasts 4 days\nthen [Task1.1] lasts 4 days\n[Task1.2] starts at [Task1]'s end and lasts 7 days\n\n[Task2] lasts 5 days\nthen [Task2.1] lasts 4 days\n\n[MaxTaskEnd] happens at [Task1.1]'s end\n[MaxTaskEnd] happens at [Task1.2]'s end\n[MaxTaskEnd] happens at [Task2.1]'s end\n@endgantt",
+        "type" : "Snippet",
         "title" : "gantt sequence",
-        "type" : "Snippet"
+        "lang" : "plantuml"
       }, {
         "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" contentScriptType=\"application/ecmascript\" contentStyleType=\"text/css\" height=\"114px\" preserveAspectRatio=\"none\" style=\"width:248px;height:114px;\" version=\"1.1\" viewBox=\"0 0 248 114\" width=\"248px\" zoomAndPan=\"magnify\"><defs/><g><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"6\" x=\"5\" y=\"9.2822\">1</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"0\" x2=\"0\" y1=\"0\" y2=\"112\"/><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"6\" x=\"21\" y=\"9.2822\">2</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"16\" x2=\"16\" y1=\"0\" y2=\"112\"/><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"6\" x=\"37\" y=\"9.2822\">3</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"32\" x2=\"32\" y1=\"0\" y2=\"112\"/><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"6\" x=\"53\" y=\"9.2822\">4</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"48\" x2=\"48\" y1=\"0\" y2=\"112\"/><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"6\" x=\"69\" y=\"9.2822\">5</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"64\" x2=\"64\" y1=\"0\" y2=\"112\"/><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"6\" x=\"85\" y=\"9.2822\">6</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"80\" x2=\"80\" y1=\"0\" y2=\"112\"/><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"6\" x=\"101\" y=\"9.2822\">7</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"96\" x2=\"96\" y1=\"0\" y2=\"112\"/><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"6\" x=\"117\" y=\"9.2822\">8</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"112\" x2=\"112\" y1=\"0\" y2=\"112\"/><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"6\" x=\"133\" y=\"9.2822\">9</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"128\" x2=\"128\" y1=\"0\" y2=\"112\"/><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"12\" x=\"146\" y=\"9.2822\">10</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"144\" x2=\"144\" y1=\"0\" y2=\"112\"/><text fill=\"#000000\" font-family=\"Serif\" font-size=\"10\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"12\" x=\"162\" y=\"9.2822\">11</text><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"160\" x2=\"160\" y1=\"0\" y2=\"112\"/><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"176\" x2=\"176\" y1=\"0\" y2=\"112\"/><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"0\" x2=\"176\" y1=\"0\" y2=\"0\"/><line style=\"stroke: #C0C0C0; stroke-width: 1.0;\" x1=\"0\" x2=\"176\" y1=\"13\" y2=\"13\"/><line style=\"stroke: #CD0A0A; stroke-width: 1.5;\" x1=\"56\" x2=\"56\" y1=\"32\" y2=\"40\"/><line style=\"stroke: #CD0A0A; stroke-width: 1.5;\" x1=\"56\" x2=\"64\" y1=\"40\" y2=\"40\"/><polygon fill=\"#CD0A0A\" points=\"60,36,60,40,60,44,64,40\" style=\"stroke: #CD0A0A; stroke-width: 1.5;\"/><line style=\"stroke: #CD0A0A; stroke-width: 1.5;\" x1=\"56\" x2=\"56\" y1=\"32\" y2=\"56\"/><line style=\"stroke: #CD0A0A; stroke-width: 1.5;\" x1=\"56\" x2=\"64\" y1=\"56\" y2=\"56\"/><polygon fill=\"#CD0A0A\" points=\"60,52,60,56,60,60,64,56\" style=\"stroke: #CD0A0A; stroke-width: 1.5;\"/><line style=\"stroke: #CD0A0A; stroke-width: 1.5;\" x1=\"72\" x2=\"72\" y1=\"80\" y2=\"88\"/><line style=\"stroke: #CD0A0A; stroke-width: 1.5;\" x1=\"72\" x2=\"80\" y1=\"88\" y2=\"88\"/><polygon fill=\"#CD0A0A\" points=\"76,84,76,88,76,92,80,88\" style=\"stroke: #CD0A0A; stroke-width: 1.5;\"/><rect fill=\"#FEFECE\" height=\"12\" rx=\"4\" ry=\"4\" style=\"stroke: #A80036; stroke-width: 1.0;\" width=\"60\" x=\"2\" y=\"18\"/><rect fill=\"#FEFECE\" height=\"12\" rx=\"4\" ry=\"4\" style=\"stroke: #A80036; stroke-width: 1.0;\" width=\"60\" x=\"66\" y=\"34\"/><rect fill=\"#FEFECE\" height=\"12\" rx=\"4\" ry=\"4\" style=\"stroke: #A80036; stroke-width: 1.0;\" width=\"108\" x=\"66\" y=\"50\"/><rect fill=\"#FEFECE\" height=\"12\" rx=\"4\" ry=\"4\" style=\"stroke: #A80036; stroke-width: 1.0;\" width=\"76\" x=\"2\" y=\"66\"/><rect fill=\"#FEFECE\" height=\"12\" rx=\"4\" ry=\"4\" style=\"stroke: #A80036; stroke-width: 1.0;\" width=\"60\" x=\"82\" y=\"82\"/><polygon fill=\"#000000\" points=\"168,98,174,104,168,110,162,104\" style=\"stroke: #000000; stroke-width: 1.0;\"/><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"11\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"34\" x=\"16\" y=\"26.8081\">Task1</text><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"11\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"45\" x=\"80\" y=\"42.8081\">Task1.1</text><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"11\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"45\" x=\"80\" y=\"58.8081\">Task1.2</text><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"11\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"34\" x=\"16\" y=\"74.8081\">Task2</text><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"11\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"45\" x=\"96\" y=\"90.8081\">Task2.1</text><text fill=\"#000000\" font-family=\"sans-serif\" font-size=\"11\" lengthAdjust=\"spacingAndGlyphs\" textLength=\"70\" x=\"176\" y=\"106.8081\">MaxTaskEnd</text><!--MD5=[b6f3dbae34d28d8b86ba0e9e0c21e545]\n@startgantt\r\n[Task1] lasts 4 days\r\nthen [Task1.1] lasts 4 days\r\n[Task1.2] starts at [Task1]'s end and lasts 7 days\r\n\r\n[Task2] lasts 5 days\r\nthen [Task2.1] lasts 4 days\r\n\r\n[MaxTaskEnd] happens at [Task1.1]'s end\r\n[MaxTaskEnd] happens at [Task1.2]'s end\r\n[MaxTaskEnd] happens at [Task2.1]'s end\r\n@endgantt\r\n\nPlantUML version 1.2020.16(Sun Aug 23 20:20:43 UTC 2020)\n(GPL source distribution)\nJava Runtime: OpenJDK Runtime Environment\nJVM: OpenJDK 64-Bit Server VM\nDefault Encoding: UTF-8\nLanguage: en\nCountry: null\n--></g></svg>",
         "type" : "Svg"
       } ]
     } ],
-    "lastModifiedTime" : 1626065894798,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "PlantUml",

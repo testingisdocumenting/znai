@@ -130,9 +130,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Parsing",
       "id" : "parsing",
       "type" : "Section",
+      "title" : "Parsing",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -156,14 +156,14 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "title" : "Properties",
       "id" : "properties",
       "type" : "Section",
+      "title" : "Properties",
       "content" : [ {
-        "lang" : "ts",
         "snippet" : "/**\n * top level doc string\n */\nexport class Customer {\n    /**\n     * customer's first name\n     */\n    firstName: string;\n\n    /**\n     * customer's last name\n     */\n    lastName: string;\n\n    /**\n     * method A <b>description</b> and some\n     * @param {string} input for <i>test</i>\n     */\n    methodA(input: string) {\n        console.log('method a body');\n        console.log('test22');\n    }\n}",
+        "type" : "Snippet",
         "title" : "typescript/Customer.ts",
-        "type" : "Snippet"
+        "lang" : "ts"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -177,43 +177,43 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-typescript: typescript/Customer.ts {propertiesOf: \"Customer\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "ApiParameters",
         "parameters" : [ {
           "name" : "firstName",
-          "type" : "string",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "customer's first name",
               "type" : "SimpleText"
             } ]
-          } ]
+          } ],
+          "type" : "string"
         }, {
           "name" : "lastName",
-          "type" : "string",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "customer's last name",
               "type" : "SimpleText"
             } ]
-          } ]
-        } ],
-        "type" : "ApiParameters"
+          } ],
+          "type" : "string"
+        } ]
       } ]
     }, {
-      "title" : "JSX Elements",
       "id" : "jsx-elements",
       "type" : "Section",
+      "title" : "JSX Elements",
       "content" : [ {
-        "lang" : "tsx",
         "snippet" : "import { PrimaryButton } from 'my-lib';\n\nfunction buttonsDemo(registry) {\n    registry\n        .add('primary', <PrimaryButton label=\"Click Me\"/>)\n        .add('primary disabled', <PrimaryButton label=\"Click Me\" disabled={true}/>);\n}",
+        "type" : "Snippet",
         "title" : "demo.tsx",
-        "type" : "Snippet"
+        "lang" : "tsx"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -233,31 +233,31 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-typescript: typescript/demo.tsx {jsxElementsFrom: \"buttonsDemo\"}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
+        "type" : "JsxGroup",
         "declarations" : [ {
-          "tagName" : "PrimaryButton",
           "attributes" : [ {
             "name" : "label",
             "value" : "\"Click Me\""
-          } ]
+          } ],
+          "tagName" : "PrimaryButton"
         }, {
-          "tagName" : "PrimaryButton",
           "attributes" : [ {
             "name" : "label",
             "value" : "\"Click Me\""
           }, {
             "name" : "disabled",
             "value" : "{true}"
-          } ]
-        } ],
-        "type" : "JsxGroup"
+          } ],
+          "tagName" : "PrimaryButton"
+        } ]
       } ]
     } ],
-    "lastModifiedTime" : 1626065894798,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Typescript",

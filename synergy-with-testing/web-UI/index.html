@@ -120,9 +120,9 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "title" : "Auto Annotations",
       "id" : "auto-annotations",
       "type" : "Section",
+      "title" : "Auto Annotations",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -135,13 +135,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : " plugin ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/visuals/image-annotations",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "was covered previously",
             "type" : "SimpleText"
-          } ]
+          } ],
+          "url" : "/znai/visuals/image-annotations"
         }, {
           "text" : " .",
           "type" : "SimpleText"
@@ -152,11 +152,11 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "java",
         "snippet" : "PageElement signIn = $(\"#gb_70\");\nPageElement input = $(\".gsfi\");\nPageElement search = $(\"[name='btnK']\");\n\nbrowser.open(\"http://google.com\");\n\nbrowser.doc.withAnnotations(\n        browser.doc.badge(signIn),\n        browser.doc.highlight(input).withColor(\"green\"),\n        browser.doc.arrow(search, \"Click This\").withColor(\"yellow\")).capture(\"test\");",
-        "bodyOnly" : true,
         "entry" : "main",
-        "type" : "Snippet"
+        "bodyOnly" : true,
+        "type" : "Snippet",
+        "lang" : "java"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -169,10 +169,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
         "snippet" : ":include-image: test.png {annotationsPath: 'test.json'}\n",
+        "type" : "Snippet",
         "lineNumber" : "",
-        "type" : "Snippet"
+        "lang" : ""
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -181,41 +181,41 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "annotationsPath" : "test.json",
-        "imageSrc" : "/znai/synergy-with-testing/test.png",
-        "timestamp" : 1626065894798,
         "shapes" : [ {
-          "id" : "circle1",
-          "type" : "circle",
-          "text" : "1",
+          "r" : 20,
           "color" : "red",
           "x" : 934,
           "y" : 31,
-          "r" : 20
+          "text" : "1",
+          "id" : "circle1",
+          "type" : "circle"
         }, {
-          "id" : "rectangle2",
-          "type" : "rectangle",
-          "text" : "",
           "color" : "yellow",
+          "width" : 403,
           "x" : 272,
           "y" : 324,
-          "width" : 403,
+          "text" : "",
+          "id" : "rectangle2",
+          "type" : "rectangle",
           "height" : 34
         }, {
-          "id" : "arrow3",
-          "type" : "arrow",
-          "text" : "Click This",
+          "endY" : 419,
+          "endX" : 424,
           "color" : "yellow",
           "beginX" : 374,
           "beginY" : 501,
-          "endX" : 424,
-          "endY" : 419
+          "text" : "Click This",
+          "id" : "arrow3",
+          "type" : "arrow"
         } ],
         "width" : 1000.0,
+        "imageSrc" : "/znai/synergy-with-testing/test.png",
+        "type" : "AnnotatedImage",
         "height" : 686.0,
-        "type" : "AnnotatedImage"
+        "timestamp" : 1631289543446
       } ]
     } ],
-    "lastModifiedTime" : 1626065894798,
+    "lastModifiedTime" : 1631289543446,
     "tocItem" : {
       "sectionTitle" : "Synergy With Testing",
       "pageTitle" : "Web UI",
