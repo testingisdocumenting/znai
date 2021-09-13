@@ -18,8 +18,13 @@
 import React from 'react'
 import {styleByName} from './styleByName';
 
-const ArrowBody = ({beginX, beginY, endX, endY, color, text, ...props}) => {
+const ArrowBody = ({beginX, beginY, endX, endY, color, text, scale, ...props}) => {
     const styleScheme = styleByName(color, true)
+
+    const scaledBx = beginX * scale;
+    const scaledBy = beginY * scale;
+    const scaledEx = endX * scale;
+    const scaledEy = endY * scale;
 
     return (
         <g {...props}>
@@ -28,9 +33,9 @@ const ArrowBody = ({beginX, beginY, endX, endY, color, text, ...props}) => {
                     <path d="M0,0 L0,4 L2,2 z" fill={styleScheme.fill} />
                 </marker>
             </defs>
-            <line x1={beginX} y1={beginY} x2={endX} y2={endY} fill={styleScheme.fill} stroke={styleScheme.line} strokeWidth="8" strokeOpacity="1" markerEnd="url(#arrow)" />
-            <text x={beginX}
-                  y={ (beginY < endY) ? beginY - 15 : beginY + 15 }
+            <line x1={scaledBx} y1={scaledBy} x2={scaledEx} y2={scaledEy} fill={styleScheme.fill} stroke={styleScheme.line} strokeWidth="8" strokeOpacity="1" markerEnd="url(#arrow)" />
+            <text x={scaledBx}
+                  y={ (scaledBy < scaledEy) ? scaledBy - 15 : scaledBy + 15 }
                   fill={styleScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text>
         </g>
     );

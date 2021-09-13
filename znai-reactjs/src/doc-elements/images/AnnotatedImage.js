@@ -20,6 +20,7 @@ import React, {Component} from 'react'
 import {imageAdditionalPreviewUrlParam} from './imagePreviewAdditionalUrlParam'
 
 import './AnnotatedImage.css'
+import { cssVarPixelValue } from "../../utils/cssVars";
 
 class AnnotatedImage extends Component {
     render() {
@@ -37,7 +38,8 @@ class AnnotatedImage extends Component {
             timestamp
         } = this.props
 
-        const scale = fit ? 900.0/width : 1 // TODO theme with sizes. How to share with CSS, e.g. content-block?
+        const fullWidth = cssVarPixelValue("znai-single-column-full-width");
+        const scale = fit ? fullWidth / width : 1;
 
         const scaledWidth = width * scale
         const scaledHeight = height * scale
@@ -62,7 +64,6 @@ class AnnotatedImage extends Component {
                 <div style={imageContainerStyle}>
                     <img alt="annotated"
                          src={imageSrc + imageAdditionalPreviewUrlParam(timestamp)}
-                         // style={{border: "5px solid red"}}
                          width={imageWidth}
                          height={imageHeight}
                          ref={node => this.imageNode = node}/>
@@ -70,7 +71,7 @@ class AnnotatedImage extends Component {
                 <div style={annotationsContainerStyle}>
                     <svg width={imageWidth} height={imageHeight}>
                         {isStatic ?
-                            annotations.staticAnnotationsToRender():
+                            annotations.staticAnnotationsToRender(scale):
                             annotations.interactiveAnnotationsToRender(selectedId)}
 
                         <filter id="highlight">

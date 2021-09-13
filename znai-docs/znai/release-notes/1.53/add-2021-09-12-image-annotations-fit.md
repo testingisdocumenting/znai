@@ -1,0 +1,1 @@
+* Fix [Image Annotations](visuals/image-annotations) placement when `fit: true` is present
