@@ -5,16 +5,16 @@ we exclude all the future sections
 Parameters
 -----------
 
-myName : myType or None
+my_name : myType or None
 
   text of myName param description
 
   with empty lines in between
 
-anotherName : anotherType or Nil
+another_name : anotherType or Nil
   more textual description
 
-noType:
+no_type:
   no type param
 
 Examples
