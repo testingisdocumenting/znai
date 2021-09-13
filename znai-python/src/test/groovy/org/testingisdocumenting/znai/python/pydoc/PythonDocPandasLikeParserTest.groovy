@@ -29,8 +29,15 @@ class PythonDocPandasLikeParserTest {
     }
 
     @Test
-    void "parse parameters with dash"() {
+    void "parse parameters with dash as underscore"() {
         parseAndValidateParams("pydoc-pandas-like-example.txt")
+    }
+
+    @Test
+    void "parse parameters with dash in name"() {
+        def params = parse("pydoc-pandas-like-name-with-dashes.txt").params
+        params.name.should == ["--my-param", "--another-param"]
+        params.type.should == ["", ""]
     }
 
     @Test
@@ -60,7 +67,7 @@ class PythonDocPandasLikeParserTest {
     private static void parseAndValidateParams(String fileName) {
         def params = parse(fileName).params
 
-        params.name.should == ["myName", "anotherName", "noType"]
+        params.name.should == ["my_name", "another_name", "no_type"]
         params.type.should == ["myType or None", "anotherType or Nil", ""]
 
         params[0].pyDocText.should == "text of myName param description\n" +

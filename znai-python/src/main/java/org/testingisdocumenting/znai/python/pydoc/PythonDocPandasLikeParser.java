@@ -36,7 +36,8 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
 
     private final Pattern HEADER_START = Pattern.compile("\\w+" + UNDERSCORE_PATTERN);
     private final Pattern PARAMETERS_START = Pattern.compile(PARAMETERS_HEADER + UNDERSCORE_PATTERN);
-    private final Pattern PARAMETER_NAME_TYPE = Pattern.compile("^(\\w+)\\s*:\\s*(.*)\\s*");
+//    private final Pattern PARAMETER_NAME_TYPE = Pattern.compile("^(\\w+)\\s*:\\s*(.*)\\s*");
+    private final Pattern PARAMETER_NAME_TYPE = Pattern.compile("^(\\S+)\\s*:\\s*(.*)\\s*");
 
     private final List<PythonParam> params = new ArrayList<>();
     private String currentName = "";
@@ -101,7 +102,7 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
             return LineHandleResult.CONTINUE;
         }
 
-        if (line.startsWith("__") || line.startsWith("--")) {
+        if (line.startsWith("___") || line.startsWith("---")) {
             return LineHandleResult.CONTINUE;
         }
 
@@ -110,6 +111,10 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
         }
 
         if (line.startsWith(" ") || trimmed.isEmpty()) {
+            if (currentDocLines == null) {
+                throw new IllegalStateException("unexpected parameter description found: define parameter first");
+            }
+
             currentDocLines.add(line);
             return LineHandleResult.CONTINUE;
         }
