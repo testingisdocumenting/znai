@@ -28,6 +28,9 @@ export function imageDemo(registry) {
         </div>
     ))
     registry.add('with border', () => <EmbeddedAnnotatedImage {...standardImage()} border={true}/>)
+    registry.add('no fit image with annotation', () => (
+      <EmbeddedAnnotatedImage {...noFitImage()} {...noFitImageAnnotations()}/>
+    ))
     registry.add('fit image with zoom', () =>
         (
             <>
@@ -36,6 +39,10 @@ export function imageDemo(registry) {
             </>
         )
     )
+    registry.add('badge alignment annotations fit', () => (
+      <EmbeddedAnnotatedImage {...badgeAlignment(450, 350)} {...fitImage()} {...noFitImageAnnotations()}/>
+    ))
+
     registry.add('simple annotations', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}/>)
     registry.add('simple annotations with border', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}
                                                                                  border={true}/>)
@@ -61,6 +68,24 @@ function fitImage() {
         width: 1698,
         height: 1131,
         fit: true
+    }
+}
+
+function noFitImage() {
+    return {
+        ...fitImage(),
+        fit: false
+    }
+}
+
+function noFitImageAnnotations() {
+    return {
+        shapes: [
+            {type: 'badge', id: 'c1', x: 640, y: 900, text: '1', invertedColors: true},
+            {type: 'circle', id: 'c2', x: 640, y: 800, r: 20, text: '2'},
+            {type: 'rectangle', id: 'r1', x: 640, y: 700, width: 80, height: 40, text: 'here', color: 'b'},
+            {type: 'highlight', id: 'r2', x: 640, y: 650, width: 80, height: 40, text: 'here', color: 'b'},
+            {type: 'arrow', id: 'a1', beginX: 640, beginY: 600, endX: 740, endY: 580, color: 'd', text: 'This here'}]
     }
 }
 

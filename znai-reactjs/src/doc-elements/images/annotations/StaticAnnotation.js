@@ -18,13 +18,13 @@
 import React from 'react'
 import {styleByName} from '../shapes/styleByName';
 
-const staticAnnotation = (shapeHandler) => ({shape}) => {
+const staticAnnotation = (shapeHandler) => ({shape, scale}) => {
     if (!shapeHandler) {
         return <NotFound {...shape}/>
     }
 
     const Body = shapeHandler.body;
-    return <Body key="body" {...shape}/>
+    return <Body key="body" {...shape} scale={scale}/>
 }
 
 function NotFound({x, y, width, height, color}) {

@@ -27,6 +27,7 @@ interface CircleParamsBase {
   text: string;
   align: string;
   className?: string;
+  scale: number;
 }
 
 interface CircleParams extends CircleParamsBase {
@@ -43,6 +44,7 @@ interface BadgeParams {
   text: string;
   align: string;
   invertedColors: boolean;
+  scale: number;
 }
 
 function CircleBody(circleParams: CircleParams) {
@@ -70,28 +72,18 @@ function BadgeBody(badgeParams: BadgeParams) {
   };
 
   return (
-    <CircleBodyImpl
-      {...badgeParams}
-      r={12}
-      style={style}
-      className="znai-annotation-badge"
-    />
+    <CircleBodyImpl {...badgeParams} r={12} style={style} scale={badgeParams.scale} className="znai-annotation-badge" />
   );
 }
 
-function CircleBodyImpl({
-  x,
-  y,
-  r = 15,
-  style,
-  text,
-  align,
-  className,
-}: CircleParamsWithStyle) {
+function CircleBodyImpl({ x, y, r = 15, style, text, align, scale, className }: CircleParamsWithStyle) {
   const [cx, cy] = calcCenter();
 
+  const scaledX = cx * scale;
+  const scaledY = cy * scale;
+
   return (
-    <g transform={`translate(${cx}, ${cy})`} className={className}>
+    <g transform={`translate(${scaledX}, ${scaledY})`} className={className}>
       <circle
         cx={0}
         cy={0}
@@ -102,14 +94,7 @@ function CircleBodyImpl({
         strokeOpacity={1}
         fillOpacity={1}
       />
-      <text
-        x={0}
-        y={0}
-        fill={style.text}
-        textAnchor="middle"
-        fontSize={style.fontSize}
-        alignmentBaseline="central"
-      >
+      <text x={0} y={0} fill={style.text} textAnchor="middle" fontSize={style.fontSize} alignmentBaseline="central">
         {text}
       </text>
     </g>

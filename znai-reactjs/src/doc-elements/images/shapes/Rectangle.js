@@ -18,13 +18,16 @@
 import React from 'react'
 import {styleByName} from './styleByName';
 
-const RectangleBody = ({x, y, width, height, color, text, ...props}) => {
+const RectangleBody = ({x, y, width, height, color, text, scale, ...props}) => {
     const styleScheme = styleByName(color)
+
+    const scaledX = x * scale;
+    const scaledY = y * scale;
 
     return (
         <g>
-            <rect x={x} y={y} width={width} fill={styleScheme.fill} stroke={styleScheme.line} height={height} strokeWidth={styleScheme.lineWidth} fillOpacity={1} {...props} />
-            { text ? <text x={x + width/2} y={y + height/2} fill={styleScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text> : null }
+            <rect x={scaledX} y={scaledY} width={width} fill={styleScheme.fill} stroke={styleScheme.line} height={height} strokeWidth={styleScheme.lineWidth} fillOpacity={1} {...props} />
+            { text ? <text x={scaledX + width/2} y={scaledY + height/2} fill={styleScheme.text} textAnchor="middle" alignmentBaseline="central">{text}</text> : null }
         </g>
     );
 }
