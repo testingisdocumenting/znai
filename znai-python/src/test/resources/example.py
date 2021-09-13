@@ -21,6 +21,13 @@ multi_line_var = {
 }
 
 
+class MyClass:
+    def __init__(self):
+        self.my_value = 'hello'
+
+MyClass.V = 2
+
+
 def a_method():
     """
     This method does stuff

@@ -110,7 +110,11 @@ def parse_assignment(assignment_node):
         # Currently only support single variable assignment, i.e. no tuples, etc.
         return None
 
-    name = assignment_node.targets[0].id
+    target = assignment_node.targets[0]
+    if not hasattr(target, "id"):
+        return None
+
+    name = target.id
     return node_to_dict("assignment", name, assignment_node.value, include_docstring=False)
 
 
