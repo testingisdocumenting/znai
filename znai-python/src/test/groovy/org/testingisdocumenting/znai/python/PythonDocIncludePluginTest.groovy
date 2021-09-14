@@ -48,7 +48,7 @@ class PythonDocIncludePluginTest {
         code {
             resultingProps('example.py', '{entry: "my_func_two"}')
         } should throwException("can't find entry: my_func_two in: example.py, available entries: a_method, " +
-            "func_no_docs, my_func, another_func, AClass, AClass.foo, ADataClass, ADataClassWithDocString, " +
+            "func_no_docs, my_func, another_func, MyClass, MyClass.__init__, AClass, AClass.foo, ADataClass, ADataClassWithDocString, " +
             "Animal, Animal.says, one_line_var, multi_line_var")
     }
 
