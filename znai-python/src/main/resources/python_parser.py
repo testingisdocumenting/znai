@@ -57,9 +57,14 @@ def extract_content(node_type, name_to_use, node):
     return "\n".join(content_lines[(node.lineno - 1) : node.end_lineno])
 
 
-def extract_assignment_value(assignment_node):
+def partition_assignment_first_line(assignment_node):
     first_line = content_lines[assignment_node.lineno - 1]
-    _, _, first_line_content = first_line.partition("=")
+    name, _, first_line_content = first_line.partition("=")
+    return name, first_line_content
+
+
+def extract_assignment_value(assignment_node):
+    _, first_line_content = partition_assignment_first_line(assignment_node)
 
     if assignment_node.lineno == assignment_node.end_lineno:
         return first_line_content.strip()
@@ -110,12 +115,8 @@ def parse_assignment(assignment_node):
         # Currently only support single variable assignment, i.e. no tuples, etc.
         return None
 
-    target = assignment_node.targets[0]
-    if not hasattr(target, "id"):
-        return None
-
-    name = target.id
-    return node_to_dict("assignment", name, assignment_node.value, include_docstring=False)
+    name, _ = partition_assignment_first_line(assignment_node)
+    return node_to_dict("assignment", name.strip(), assignment_node.value, include_docstring=False)
 
 
 def parse_file(file_to_parse):
