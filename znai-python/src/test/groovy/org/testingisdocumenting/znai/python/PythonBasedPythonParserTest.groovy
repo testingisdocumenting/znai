@@ -110,6 +110,14 @@ class PythonBasedPythonParserTest {
             docString: ""
         ]
 
+        parsed.findEntryByName("MyClass.V").should == [
+            name: "MyClass.V",
+            type: "assignment",
+            content: "MyClass.V = 2",
+            bodyOnly: "2",
+            docString: ""
+        ]
+
         parsed.findEntryByName("ADataClass").should == [
             name: "ADataClass",
             type: "class",
