@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +17,7 @@
 
 package org.testingisdocumenting.znai.extensions.tabs
 
+import org.testingisdocumenting.webtau.Matchers
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin
 import org.testingisdocumenting.znai.parser.TestComponentsRegistry
@@ -25,6 +27,8 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class TabsFencePluginTest {
@@ -39,11 +43,19 @@ class TabsFencePluginTest {
     }
 
     @Test
-    void "support tab names with special names"() {
+    void "support tab names with special sybols"() {
         def elements = process("java@8:test java markup\n" +
                 "java@9:test groovy markup")
 
         elements[0].tabsContent.name.should == ['java@8', 'java@9']
+    }
+
+    @Test
+    void "support tab names with spaces when quoted"() {
+        def elements = process("\"python lang\":test java markup\n" +
+                "\"java lang\":test groovy markup")
+
+        elements[0].tabsContent.name.should == ['python lang', 'java lang']
     }
 
     @Test
@@ -71,9 +83,18 @@ class TabsFencePluginTest {
         def result = plugin.process(TEST_COMPONENTS_REGISTRY,
                 Paths.get("test.md"),
                 new PluginParams(plugin.id(), "{rightSide: true}"),
-                "")
+                "java: content for java")
 
-        result.docElements*.toMap().should == [[meta: [rightSide: true], tabsContent: [], type: 'Tabs']]
+        result.docElements*.toMap().should == [[meta: [rightSide: true], tabsContent: [
+                [name: 'java', content: [[markup: ' content for java', type: 'TestMarkup']]]
+        ], type: 'Tabs']]
+    }
+
+    @Test
+    void "validates that at least one tab is present"() {
+        code {
+            processAndGetPluginWithResult("", false)
+        } should throwException("no tabs are defined. if your tab names have spaces quote the tab name")
     }
 
     private static List<Map> processWithFakeMarkupParser(String markup) {
