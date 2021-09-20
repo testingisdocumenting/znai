@@ -115,8 +115,8 @@ class PluginsTestUtils {
         PluginParams pluginParams = new PluginParams(idAndParams.id, idAndParams.params)
         def inlinedCodePlugin = Plugins.inlinedCodePluginById(idAndParams.id)
 
-        inlinedCodePlugin.process(TEST_COMPONENTS_REGISTRY, Paths.get(""), pluginParams)
-        parserHandler.onInlinedCodePlugin(pluginParams)
+        def result = inlinedCodePlugin.process(TEST_COMPONENTS_REGISTRY, Paths.get(""), pluginParams)
+        parserHandler.onInlinedCodePlugin(pluginParams, result)
 
         return new InlinedCodePluginAndParserHandler(inlinedCodePlugin: inlinedCodePlugin, parserHandler: parserHandler)
     }
