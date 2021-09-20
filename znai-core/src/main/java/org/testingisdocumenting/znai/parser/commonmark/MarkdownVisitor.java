@@ -234,7 +234,7 @@ public class MarkdownVisitor extends AbstractVisitor {
         try {
             InlinedCodePlugin inlinedCodePlugin = Plugins.inlinedCodePluginById(params.getPluginId());
             PluginResult pluginResult = inlinedCodePlugin.process(componentsRegistry, path, params);
-            parserHandler.onInlinedCodePlugin(params, pluginResult);
+            parserHandler.onInlinedCodePlugin(inlinedCodePlugin, pluginResult);
         } catch (Exception e) {
             throw new RuntimeException(createPluginErrorMessage("inline code", params, e));
         }

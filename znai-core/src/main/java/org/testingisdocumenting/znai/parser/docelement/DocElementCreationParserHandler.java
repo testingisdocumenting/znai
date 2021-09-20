@@ -359,8 +359,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onInlinedCodePlugin(PluginParams pluginParams, PluginResult pluginResult) {
-        InlinedCodePlugin inlinedCodePlugin = Plugins.inlinedCodePluginById(pluginParams.getPluginId());
+    public void onInlinedCodePlugin(InlinedCodePlugin inlinedCodePlugin, PluginResult pluginResult) {
         processPlugin(inlinedCodePlugin, pluginResult);
     }
 
