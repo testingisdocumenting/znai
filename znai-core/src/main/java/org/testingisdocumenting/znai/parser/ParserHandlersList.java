@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -220,8 +221,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onInlinedCodePlugin(PluginParams pluginParams) {
-        list.forEach(h -> h.onInlinedCodePlugin(pluginParams));
+    public void onInlinedCodePlugin(PluginParams pluginParams, PluginResult pluginResult) {
+        list.forEach(h -> h.onInlinedCodePlugin(pluginParams, pluginResult));
     }
 
     @Override

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,10 +40,15 @@ class DummyIncludePlugin implements IncludePlugin {
     PluginResult process(ComponentsRegistry componentsRegistry,
                          ParserHandler parserHandler,
                          Path markupPath,
-                         PluginParams includeParams) {
+                         PluginParams pluginParams) {
+        def throwMessage = pluginParams.getOpts().get("throw", "")
+        if (throwMessage) {
+            throw new RuntimeException(throwMessage)
+        }
+
         def dummy = new DocElement("IncludeDummy")
-        dummy.addProp("ff", includeParams.getFreeParam())
-        dummy.addProp("opts", includeParams.getOpts().toMap())
+        dummy.addProp("ff", pluginParams.getFreeParam())
+        dummy.addProp("opts", pluginParams.getOpts().toMap())
 
         return PluginResult.docElements([dummy].stream())
     }

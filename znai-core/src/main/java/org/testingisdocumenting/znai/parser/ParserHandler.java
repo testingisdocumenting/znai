@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -80,6 +81,6 @@ public interface ParserHandler {
      */
     void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult);
     void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult);
-    void onInlinedCodePlugin(PluginParams pluginParams);
+    void onInlinedCodePlugin(PluginParams pluginParams, PluginResult pluginResult);
     void onParsingEnd();
 }

@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.extensions.PluginsRegexp;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.include.IncludeBlock;
 import org.testingisdocumenting.znai.parser.table.GfmTableToTableConverter;
@@ -32,14 +33,13 @@ import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
 import org.commonmark.ext.gfm.strikethrough.Strikethrough;
 import org.commonmark.ext.gfm.tables.TableBlock;
 import org.commonmark.node.*;
+import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MarkdownVisitor extends AbstractVisitor {
-    private static final Pattern INLINED_CODE_ID_PATTERN = Pattern.compile("^:([a-zA-Z-_]+):\\s*(.*)");
-
     private final ComponentsRegistry componentsRegistry;
     private final Path path;
     private final ParserHandler parserHandler;
@@ -108,7 +108,7 @@ public class MarkdownVisitor extends AbstractVisitor {
         PluginsRegexp.IdAndParams idAndParams = PluginsRegexp.parseInlinedCodePlugin(literal);
 
         if (idAndParams != null && Plugins.hasInlinedCodePlugin(idAndParams.getId())) {
-            parserHandler.onInlinedCodePlugin(new PluginParams(idAndParams.getId(), idAndParams.getParams()));
+            handleInlineCodePlugin(new PluginParams(idAndParams.getId(), idAndParams.getParams()));
         } else {
             parserHandler.onInlinedCode(literal, DocReferences.EMPTY);
         }
@@ -180,10 +180,7 @@ public class MarkdownVisitor extends AbstractVisitor {
     public void visit(FencedCodeBlock fencedCodeBlock) {
         PluginParams pluginParams = extractFencePluginParams(fencedCodeBlock.getInfo().trim());
         if (Plugins.hasFencePlugin(pluginParams.getPluginId())) {
-            FencePlugin fencePlugin = Plugins.fencePluginById(pluginParams.getPluginId());
-            PluginResult pluginResult = fencePlugin.process(componentsRegistry, path, pluginParams, fencedCodeBlock.getLiteral());
-
-            parserHandler.onFencePlugin(fencePlugin, pluginResult);
+            handleFencePlugin(pluginParams, fencedCodeBlock.getLiteral());
         } else {
             parserHandler.onSnippet(pluginParams, pluginParams.getPluginId(), "", fencedCodeBlock.getLiteral());
         }
@@ -211,10 +208,42 @@ public class MarkdownVisitor extends AbstractVisitor {
     }
 
     private void handleIncludePlugin(PluginParams params) {
-        IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());
-        PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, path, params);
+        try {
+            IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());
+            PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, path, params);
 
-        parserHandler.onIncludePlugin(includePlugin, pluginResult);
+            parserHandler.onIncludePlugin(includePlugin, pluginResult);
+        } catch (Exception e) {
+            throw new RuntimeException(createPluginErrorMessage("include", params, e), e);
+        }
+    }
+
+    private void handleFencePlugin(PluginParams params, String fenceContent) {
+        try {
+            FencePlugin fencePlugin = Plugins.fencePluginById(params.getPluginId());
+            PluginResult pluginResult = fencePlugin.process(componentsRegistry, path, params, fenceContent);
+
+            parserHandler.onFencePlugin(fencePlugin, pluginResult);
+        } catch (Exception e) {
+            throw new RuntimeException(createPluginErrorMessage("fence", params, e) + "\n" +
+                    "  fence content:\n" + fenceContent);
+        }
+    }
+
+    private void handleInlineCodePlugin(PluginParams params) {
+        try {
+            InlinedCodePlugin inlinedCodePlugin = Plugins.inlinedCodePluginById(params.getPluginId());
+            PluginResult pluginResult = inlinedCodePlugin.process(componentsRegistry, path, params);
+            parserHandler.onInlinedCodePlugin(params, pluginResult);
+        } catch (Exception e) {
+            throw new RuntimeException(createPluginErrorMessage("inline code", params, e));
+        }
+    }
+
+    private static String createPluginErrorMessage(String pluginType, PluginParams params, Exception e) {
+        return "error handling " + pluginType + " plugin <" + params.getPluginId() + ">: " + e.getMessage() + "\n" +
+                "  free param: " + params.getFreeParam() + "\n" +
+                "  opts: " + JsonUtils.serialize(params.getOpts().toMap());
     }
 
     private static PluginParams extractFencePluginParams(String nameAndParams) {

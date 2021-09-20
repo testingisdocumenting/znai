@@ -176,7 +176,7 @@ public class NoOpParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onInlinedCodePlugin(PluginParams pluginParams) {
+    public void onInlinedCodePlugin(PluginParams pluginParams, PluginResult pluginResult) {
     }
 
     @Override

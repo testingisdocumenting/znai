@@ -359,18 +359,9 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onInlinedCodePlugin(PluginParams pluginParams) {
+    public void onInlinedCodePlugin(PluginParams pluginParams, PluginResult pluginResult) {
         InlinedCodePlugin inlinedCodePlugin = Plugins.inlinedCodePluginById(pluginParams.getPluginId());
-        processPlugin(inlinedCodePlugin, (p) -> p.process(componentsRegistry, path, pluginParams));
-    }
-
-    private <E extends Plugin> void processPlugin(E plugin, Function<E, PluginResult> processFunc) {
-        try {
-            PluginResult result = processFunc.apply(plugin);
-            processPlugin(plugin, result);
-        } catch (Exception e) {
-            throw new RuntimeException("failure during processing plugin '" + plugin.id() + "': " + e.getMessage(), e);
-        }
+        processPlugin(inlinedCodePlugin, pluginResult);
     }
 
     private <E extends Plugin> void processPlugin(E plugin, PluginResult result) {
