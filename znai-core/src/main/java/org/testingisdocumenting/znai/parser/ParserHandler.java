@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +21,7 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
@@ -80,6 +82,6 @@ public interface ParserHandler {
      */
     void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult);
     void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult);
-    void onInlinedCodePlugin(PluginParams pluginParams);
+    void onInlinedCodePlugin(InlinedCodePlugin inlinedCodePlugin, PluginResult pluginResult);
     void onParsingEnd();
 }

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,6 +37,11 @@ class DummyFencePlugin implements FencePlugin {
 
     @Override
     PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
+        def throwMessage = pluginParams.getOpts().get("throw", "")
+        if (throwMessage) {
+            throw new RuntimeException(throwMessage)
+        }
+
         def dummy = new DocElement("FenceDummy")
         if (pluginParams.freeParam) {
             dummy.addProp("freeParam", pluginParams.freeParam)

@@ -390,6 +390,15 @@ world""")
     }
 
     @Test
+    void "include plugin error should provide context of the plugin"() {
+        code {
+            parse(":include-dummy: free-form text {param1: 'v1', param2: 'v2', throw: 'message to throw'}")
+        } should throwException("error handling include plugin <dummy>: message to throw\n" +
+                "  free param: free-form text\n" +
+                "  opts: {\"param1\":\"v1\",\"param2\":\"v2\",\"throw\":\"message to throw\"}")
+    }
+
+    @Test
     void "code snippets by indentation"() {
         parse("    println 'hello world'")
         content.should == [[lang: '', snippet:"println 'hello world'\n", lineNumber: '', type: 'Snippet']]
@@ -435,10 +444,34 @@ world""")
     }
 
     @Test
+    void "fenced plugin error should provide context of the plugin"() {
+        code {
+            parse("~~~dummy {throw: \"some error\"}\n" +
+                    "test\n" +
+                    "block\n" +
+                    "~~~")
+        } should throwException("error handling fence plugin <dummy>: some error\n" +
+                "  free param: \n" +
+                "  opts: {\"throw\":\"some error\"}\n" +
+                "  fence content:\n" +
+                "test\n" +
+                "block\n")
+    }
+
+    @Test
     void "inlined code plugin"() {
         parse("`:dummy: free-param {p1: 'v1'}`")
 
         content.should == [[type: 'Paragraph', content: [[type: 'InlinedCodeDummy', ff: 'free-param', opts: [p1: 'v1']]]]]
+    }
+
+    @Test
+    void "inlined code plugin error should provide context of the plugin"() {
+        code {
+            parse("`:dummy: user-param {p1: 'v1', throw: 'process error'}`")
+        } should throwException("error handling inline code plugin <dummy>: process error\n" +
+                "  free param: user-param\n" +
+                "  opts: {\"p1\":\"v1\",\"throw\":\"process error\"}")
     }
 
     @Test
