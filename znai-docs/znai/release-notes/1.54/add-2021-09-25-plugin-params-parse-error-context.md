@@ -1,0 +1,1 @@
+* Plugin parameters parsing error provides more details about plugin id and provided parameters  

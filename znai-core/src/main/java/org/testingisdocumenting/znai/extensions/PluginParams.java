@@ -18,6 +18,7 @@
 package org.testingisdocumenting.znai.extensions;
 
 import org.testingisdocumenting.znai.extensions.meta.MetaIncludePlugin;
+import org.testingisdocumenting.znai.utils.JsonParseException;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.util.Collections;
@@ -41,7 +42,12 @@ public class PluginParams {
 
     public PluginParams(String pluginId, String value) {
         this.pluginId = pluginId;
-        this.setValue(value);
+
+        try {
+            this.setValue(value);
+        } catch (JsonParseException e) {
+            throw new PluginParamsParseException(pluginId, value, e.getMessage());
+        }
     }
 
     public PluginParams(String pluginId, Map<String, ?> opts) {
