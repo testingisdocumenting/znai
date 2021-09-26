@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +19,9 @@ package org.testingisdocumenting.znai.extensions.include
 
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.junit.Test
+
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class PluginParamsTest {
     @Test
@@ -53,5 +57,16 @@ class PluginParamsTest {
         def opts = new PluginParams('meta', [stickySlide: "left"]).opts.toMap()
         opts.get('stickySlide').should == 'left'
         opts.get('meta').should == null
+    }
+
+    @Test
+    void "parsing exception should provide details about plugin"() {
+        code {
+            new PluginParams('file', 'hello {key: "value}')
+        } should throwException("plugin parameters parsing error\n" +
+                "  pluginId: file\n" +
+                "  freeParamAndJsonText: hello {key: \"value}\n" +
+                "  error: Unexpected end-of-input: was expecting closing quote for a string value\n" +
+                " at [Source: (String)\"{key: \"value}\"; line: 1, column: 14]\n")
     }
 }

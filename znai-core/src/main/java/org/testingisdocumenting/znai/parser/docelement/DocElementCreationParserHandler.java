@@ -89,6 +89,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
         return globalAnchorIds;
     }
 
+    public String getCurrentSectionTitle() {
+        return currentSectionTitle;
+    }
+
     @Override
     public void onSectionStart(String title) {
         currentSectionTitle = title;
