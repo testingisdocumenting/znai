@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,29 +15,35 @@
  * limitations under the License.
  */
 
-export {removeCustomProps, buildUniqueId, expandId}
-
-function removeCustomProps(props) {
+export function removeCustomProps(props) {
     const res = {...props}
-    delete res.svg
-    delete res.url
-    delete res.isInvertedTextColor
-    delete res.colors
-    delete res.parentClassName
-    delete res.nodeId
-    delete res.diagramId
-    delete res.selected
-
+    removeCustomPropsNoCopy(res)
     return res
 }
 
-function buildUniqueId(diagramId, nodeId) {
+export function removeCustomPropsNoCopy(props) {
+    delete props.svg
+    delete props.url
+    delete props.isInvertedTextColor
+    delete props.colors
+    delete props.parentClassName
+    delete props.nodeId
+    delete props.diagramId
+    delete props.selected
+}
+
+export function removeRadiusPropsNoCopy(props) {
+    delete props.rx
+    delete props.ry
+}
+
+export function buildUniqueId(diagramId, nodeId) {
     diagramId = diagramId || "no_name"
     return `${diagramId}_${nodeId}`
 }
 
 // if id is for an edge like a->b we want it to be expanded into three ids: a, b, a->b
-function expandId(id) {
+export function expandId(id) {
     const expanded = [id]
     if (id.indexOf('-') === -1) {
         return expanded
