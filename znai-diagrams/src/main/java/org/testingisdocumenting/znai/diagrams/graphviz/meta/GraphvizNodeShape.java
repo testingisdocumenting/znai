@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,10 +22,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GraphvizNodeShape {
-    private String shape;
-    private String labelLoc;
-    private Number width;
-    private Number height;
+    private final String shape;
+    private final String labelLoc;
+    private final Number width;
+    private final Number height;
 
     public GraphvizNodeShape(String shape, String labelLoc, Number width, Number height) {
         this.shape = shape;

@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-org.testingisdocumenting.znai.diagrams.graphviz.GvDiagramIncludePlugin
+org.testingisdocumenting.znai.diagrams.graphviz.GraphvizIncludePlugin
 org.testingisdocumenting.znai.diagrams.graphviz.GvDiagramSlidesIncludePlugin
 org.testingisdocumenting.znai.diagrams.FlowChartIncludePlugin
 org.testingisdocumenting.znai.diagrams.plantuml.PlantUmlIncludePlugin

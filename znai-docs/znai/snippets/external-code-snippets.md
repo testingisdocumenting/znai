@@ -152,7 +152,7 @@ Use `excludeRegexp` to exclude lines matching regexp(s).
 If you already have comments inside your code it would be non efficient to repeat them inside documentation. 
 Instead, comments can be automatically extracted and presented as part of the text
 
-Given file with inlined comments!!!
+Given file with inlined comments!!!!
 
 :include-file: callouts/file-name-with-comments.js
 

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +17,7 @@
 
 import React, {Component} from 'react'
 import SvgCustomShape from './SvgCustomShape'
-import {removeCustomProps, buildUniqueId} from './gvUtils'
+import { buildUniqueId, removeRadiusPropsNoCopy, removeCustomPropsNoCopy } from "./gvUtils";
 
 import LinkWrap from './LinkWrap'
 
@@ -33,7 +34,7 @@ class GvPolygon extends Component {
     }
 
     renderNode() {
-        const sizes = calculateSizes(this.props.points)
+        const sizes = calculateSizes(this.props)
         const colorsOverride = createColors(this.props.parentClassName, this.props.colors)
 
         if (this.props.svg) {
@@ -41,7 +42,9 @@ class GvPolygon extends Component {
             return <SvgCustomShape {...this.props} {...sizes} style={style}/>
         } else {
             const style = createNodeOnlyStyle(this.props.diagramId, this.props.parentClassName)
-            const cleanedUpProps = removeCustomProps(this.props)
+            const cleanedUpProps = {...this.props}
+            removeCustomPropsNoCopy(cleanedUpProps)
+            removeRadiusPropsNoCopy(cleanedUpProps)
 
             if (this.props.parentClassName === 'node') {
                 const gap = 4;
@@ -78,8 +81,21 @@ function createGlowStyle(diagramId) {
 
 // make polygon slightly smaller so arrows dont connect with the surface
 // calculates center and sizes
-function calculateSizes(points) {
-    let coordPairs = points.split(' ')
+function calculateSizes(props) {
+    // handle case of ellipse
+    if (props.rx) {
+        const {cx, cy, rx, ry} = props
+        return {
+            cx, cy,
+            width: rx * 2.0,
+            height: ry * 2.0,
+            x: cx - rx,
+            y: cy - ry
+        }
+    }
+
+    const {points} = props
+    const coordPairs = points.split(' ')
 
     let x = []
     let y = []
