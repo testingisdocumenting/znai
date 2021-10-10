@@ -22,14 +22,14 @@ import io.vertx.ext.web.Router;
 import org.testingisdocumenting.znai.server.RoutesProvider;
 import org.testingisdocumenting.znai.server.ZnaiServerConfig;
 
-public class UploadDocumentationRouteProvider implements RoutesProvider {
+public class DocumentationOnlyUploadRouteProvider implements RoutesProvider {
     @Override
     public void register(Vertx vertx, ZnaiServerConfig config, Router router) {
         router.route("/upload/:docId").handler(ctx -> {
             MultiMap params = ctx.request().params();
             String docId = params.get("docId");
             String actor = params.get("actor");
-            new DocumentationUploadVertxHandler(vertx, config, docId, actor).handle(ctx.request());
+            new DocumentationOnlyUploadVertxHandler(vertx, config, docId, actor).handle(ctx.request());
         });
     }
 }

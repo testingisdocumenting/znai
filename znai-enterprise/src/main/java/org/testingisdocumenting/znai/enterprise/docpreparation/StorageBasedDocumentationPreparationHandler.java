@@ -16,23 +16,13 @@
 
 package org.testingisdocumenting.znai.enterprise.docpreparation;
 
-import org.apache.commons.lang3.StringUtils;
 import org.testingisdocumenting.znai.enterprise.storage.DocumentationFileBasedTimestamp;
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationHandler;
-import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationHandlers;
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
 
 import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.*;
 
 public class StorageBasedDocumentationPreparationHandler implements DocumentationPreparationHandler {
-    private static final String SERVER_URL = System.getProperty("znai.server.url");
-
-    static {
-        if (StringUtils.isNotBlank(SERVER_URL)) {
-            DocumentationPreparationHandlers.add(new StorageBasedDocumentationPreparationHandler());
-        }
-    }
-
     @Override
     public boolean handles(String docId) {
         return enterpriseConfig().getDocStorageRoot() != null &&

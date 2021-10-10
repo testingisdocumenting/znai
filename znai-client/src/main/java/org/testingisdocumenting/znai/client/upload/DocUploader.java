@@ -36,7 +36,7 @@ import java.nio.file.Paths;
 /**
  * zips and uploads znai produced docs to provided url
  * assumes the presence of meta.json file
- * and assumes the files are not zipped
+ * if files are not zipped, they will be zipped
  * @see DocHubUploader
  */
 public class DocUploader {
@@ -61,7 +61,7 @@ public class DocUploader {
 
     private void upload() {
         UploadPathValidator.validate(path, "index.html");
-        Path zipPath = zipDocs(path);
+        Path zipPath = zipDocsIfRequired(path);
         httpPut(zipPath);
     }
 
@@ -96,7 +96,12 @@ public class DocUploader {
         return uploadUrl + "/" + docId;
     }
 
-    private Path zipDocs(Path path) {
+    private Path zipDocsIfRequired(Path path) {
+        if (path.endsWith(".zip")) {
+            ConsoleOutputs.out(Color.BLUE, "path is already a zip archive: ", Color.PURPLE, path);
+            return path;
+        }
+
         ConsoleOutputs.out(Color.BLUE, "zipping: ", Color.PURPLE, path);
 
         Path zipDestination = Paths.get(docId + ".zip");

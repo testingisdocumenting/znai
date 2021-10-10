@@ -29,14 +29,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class DocumentationUploadVertxHandler implements Handler<HttpServerRequest> {
+/**
+ * handler for a zip upload only
+ * no additional params
+ */
+public class DocumentationOnlyUploadVertxHandler implements Handler<HttpServerRequest> {
     private final Vertx vertx;
     private final ZnaiServerConfig config;
     private final String docId;
     private final Path destination;
     private final String actor;
 
-    public DocumentationUploadVertxHandler(Vertx vertx, ZnaiServerConfig config, String docId, String actor) {
+    public DocumentationOnlyUploadVertxHandler(Vertx vertx, ZnaiServerConfig config, String docId, String actor) {
         this.vertx = vertx;
         this.config = config;
         this.docId = docId;

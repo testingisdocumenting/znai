@@ -14,5 +14,5 @@
 # limitations under the License.
 #
 
-org.testingisdocumenting.znai.enterprise.upload.UploadDocumentationRouteProvider
+org.testingisdocumenting.znai.enterprise.upload.DocumentationOnlyUploadRouteProvider
 org.testingisdocumenting.znai.enterprise.remove.RemoveDocumentationRouteProvider
