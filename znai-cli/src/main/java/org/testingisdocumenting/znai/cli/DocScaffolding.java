@@ -17,7 +17,7 @@
 
 package org.testingisdocumenting.znai.cli;
 
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.ResourceUtils;
 

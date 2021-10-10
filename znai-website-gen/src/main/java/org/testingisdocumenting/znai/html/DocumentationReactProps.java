@@ -17,7 +17,7 @@
 
 package org.testingisdocumenting.znai.html;
 
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

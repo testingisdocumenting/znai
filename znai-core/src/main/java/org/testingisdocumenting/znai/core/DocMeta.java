@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.structure;
+package org.testingisdocumenting.znai.core;
 
 import org.testingisdocumenting.znai.utils.JsonUtils;
 

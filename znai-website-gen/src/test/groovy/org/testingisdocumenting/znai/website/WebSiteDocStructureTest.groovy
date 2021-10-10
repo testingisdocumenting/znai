@@ -18,7 +18,7 @@
 package org.testingisdocumenting.znai.website
 
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle
-import org.testingisdocumenting.znai.structure.DocMeta
+import org.testingisdocumenting.znai.core.DocMeta
 import org.testingisdocumenting.znai.structure.DocUrl
 import org.testingisdocumenting.znai.structure.TableOfContents
 import org.testingisdocumenting.znai.website.markups.MarkdownParsingConfiguration

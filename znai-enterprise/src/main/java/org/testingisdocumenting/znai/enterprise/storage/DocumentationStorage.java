@@ -17,7 +17,7 @@
 package org.testingisdocumenting.znai.enterprise.storage;
 
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 
 import java.nio.file.Path;
 import java.util.List;

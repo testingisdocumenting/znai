@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2021 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,11 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.client.testapp;
+package org.testingisdocumenting.znai.client.upload;
 
-import org.testingisdocumenting.znai.client.DocumentationUploadClient;
-
-import java.nio.file.Paths;
-
-public class DocumentationUploadTestApp {
-    public static void main(String[] args) {
-        DocumentationUploadClient client = new DocumentationUploadClient("example-docs",
-                Paths.get("znai-client/docs-build"), "localhost", 3333);
-
-        client.upload((statusCode) -> System.out.println("uploaded with statusCode: " + statusCode));
-    }
+/**
+ * uploads any html based docs to hub
+ * sends associated meta information with docs
+ */
+public class DocHubUploader {
 }

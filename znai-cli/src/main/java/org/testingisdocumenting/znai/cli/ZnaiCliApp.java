@@ -28,7 +28,7 @@ import org.testingisdocumenting.znai.server.AuthorizationHeaderBasedAuthenticati
 import org.testingisdocumenting.znai.server.HttpServerUtils;
 import org.testingisdocumenting.znai.server.ZnaiServer;
 import org.testingisdocumenting.znai.server.preview.DocumentationPreview;
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.website.ProgressReporter;
 import org.testingisdocumenting.znai.website.WebResource;
@@ -45,7 +45,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
-import java.util.Arrays;
 
 public class ZnaiCliApp {
     private final ZnaiCliConfig config;

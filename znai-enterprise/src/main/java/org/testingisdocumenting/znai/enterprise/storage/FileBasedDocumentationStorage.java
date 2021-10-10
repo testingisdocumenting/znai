@@ -19,7 +19,7 @@ package org.testingisdocumenting.znai.enterprise.storage;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.server.docpreparation.DocumentationPreparationProgress;
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.io.IOException;
@@ -108,7 +108,7 @@ public class FileBasedDocumentationStorage implements DocumentationStorage {
     public List<DocMeta> list() {
         try {
             return Files.list(storageRoot)
-                    .filter(file -> Files.isDirectory(file))
+                    .filter(Files::isDirectory)
                     .filter(file -> Files.exists(file.resolve(DocMeta.META_FILE_NAME)))
                     .map(file -> file.resolve(DocMeta.META_FILE_NAME))
                     .map(fileMeta -> new DocMeta(FileUtils.fileTextContent(fileMeta)))

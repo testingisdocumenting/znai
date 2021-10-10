@@ -22,7 +22,7 @@ import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.enterprise.DocLifecycleListeners;
 import org.testingisdocumenting.znai.fs.FsUtils;
 import org.testingisdocumenting.znai.server.ZnaiServerConfig;
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.nio.file.Path;

@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.AuxiliaryFilesRegistry;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.resources.*;
 import org.testingisdocumenting.znai.html.*;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;

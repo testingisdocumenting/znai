@@ -19,8 +19,7 @@ package org.testingisdocumenting.znai.html;
 
 import org.testingisdocumenting.znai.html.reactjs.HtmlReactJsPage;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
-import org.testingisdocumenting.znai.structure.DocMeta;
-import org.testingisdocumenting.znai.structure.Footer;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.structure.Page;
 import org.testingisdocumenting.znai.structure.TocItem;
 

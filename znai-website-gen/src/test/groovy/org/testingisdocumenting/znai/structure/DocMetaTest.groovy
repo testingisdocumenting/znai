@@ -18,6 +18,7 @@
 package org.testingisdocumenting.znai.structure
 
 import org.junit.Test
+import org.testingisdocumenting.znai.core.DocMeta
 
 class DocMetaTest {
     @Test

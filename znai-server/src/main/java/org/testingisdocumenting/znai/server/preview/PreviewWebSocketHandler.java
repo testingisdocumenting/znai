@@ -20,7 +20,7 @@ package org.testingisdocumenting.znai.server.preview;
 import org.testingisdocumenting.znai.html.DocPageReactProps;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.server.sockets.JsonWebSocketHandler;
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.structure.Footer;
 import org.testingisdocumenting.znai.structure.TableOfContents;
 import org.testingisdocumenting.znai.structure.TocItem;

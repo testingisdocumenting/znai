@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +18,7 @@
 package org.testingisdocumenting.znai.website;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.structure.*;
 import org.testingisdocumenting.znai.parser.MarkupParsingConfiguration;
 

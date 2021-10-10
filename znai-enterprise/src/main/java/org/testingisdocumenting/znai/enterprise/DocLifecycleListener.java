@@ -16,7 +16,7 @@
 
 package org.testingisdocumenting.znai.enterprise;
 
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 
 public interface DocLifecycleListener {
     void onDocUpdate(DocMeta docMeta);
