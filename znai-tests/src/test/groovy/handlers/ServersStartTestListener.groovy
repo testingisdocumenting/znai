@@ -49,14 +49,14 @@ class ServersStartTestListener implements TestListener {
     }
 
     private static void startPreviewServer() {
-        def previewServerUrl = "http://localhost:3333/preview"
+        def previewServerUrl = "http://localhost:3334/preview"
         if (http.ping("${previewServerUrl}/index.html")) {
-            PreviewServer.port = 3333
+            PreviewServer.port = 3334
             return
         }
 
-        def cliPreviewPort = 3456
-        def znaiPreview = CliCommands.znai.runInBackground("--preview --port 3456" +
+        def cliPreviewPort = 3458
+        def znaiPreview = CliCommands.znai.runInBackground("--preview --port ${cliPreviewPort}" +
                 " --lookup-paths znai-overrides",
                 cli.workingDir(FsLocations.znaiDocsRoot()))
 

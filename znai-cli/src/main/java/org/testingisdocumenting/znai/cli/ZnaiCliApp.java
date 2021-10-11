@@ -89,7 +89,7 @@ public class ZnaiCliApp {
 
         reactJsBundle = new ReactJsBundle();
 
-        if (!config.isServeMode()) {
+        if (needsDocGeneration()) {
             generateDocs();
         }
 
@@ -103,6 +103,18 @@ public class ZnaiCliApp {
             config.getSpecifiedCustomCommand().handle(
                     new CliCommandConfig(config.getDocId(), config.getSourceRoot(), config.getDeployRoot(), config.getActor()));
         }
+    }
+
+    private boolean needsDocGeneration() {
+        if (config.isServeMode()) {
+            return false;
+        }
+
+        if (config.isCustomCommand()) {
+            return config.getSpecifiedCustomCommand().needsDocGeneration();
+        }
+
+        return true;
     }
 
     private void preview() {

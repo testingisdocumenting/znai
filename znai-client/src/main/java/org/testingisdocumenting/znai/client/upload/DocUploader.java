@@ -55,14 +55,23 @@ public class DocUploader {
     }
 
     public static void upload(String uploadUrl, String docId, Path path, String actor) {
-        actor = StringUtils.isBlank(actor) ? USER : actor;
-        new DocUploader(uploadUrl, docId, path, actor).upload();
+        new DocUploader(uploadUrl, docId, path, getActor(actor)).upload();
+    }
+
+    public static void uploadZip(String uploadUrl, String docId, Path path, String actor) {
+        new DocUploader(uploadUrl, docId, path, getActor(actor)).uploadZip();
     }
 
     private void upload() {
-        UploadPathValidator.validate(path, "index.html");
-        Path zipPath = zipDocsIfRequired(path);
+        UploadPathValidator.validateFile(path, "index.html");
+        UploadPathValidator.validateSize(path);
+        Path zipPath = zipDocs(path);
         httpPut(zipPath);
+    }
+
+    private void uploadZip() {
+        UploadPathValidator.validateSize(path);
+        httpPut(path);
     }
 
     private void httpPut(Path zipPath) {
@@ -96,12 +105,7 @@ public class DocUploader {
         return uploadUrl + "/" + docId;
     }
 
-    private Path zipDocsIfRequired(Path path) {
-        if (path.endsWith(".zip")) {
-            ConsoleOutputs.out(Color.BLUE, "path is already a zip archive: ", Color.PURPLE, path);
-            return path;
-        }
-
+    private Path zipDocs(Path path) {
         ConsoleOutputs.out(Color.BLUE, "zipping: ", Color.PURPLE, path);
 
         Path zipDestination = Paths.get(docId + ".zip");
@@ -111,5 +115,9 @@ public class DocUploader {
         zipTask.execute();
 
         return zipDestination;
+    }
+
+    private static String getActor(String actor) {
+        return StringUtils.isBlank(actor) ? USER : actor;
     }
 }

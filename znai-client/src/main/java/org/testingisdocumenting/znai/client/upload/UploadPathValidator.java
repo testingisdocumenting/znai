@@ -28,11 +28,13 @@ public class UploadPathValidator {
     private static final long MB = 1000 * 1000;
     private static final long MAX_SIZE = MAX_MB_COUNT * MB;
 
-    public static void validate(Path path, String file) {
+    public static void validateFile(Path path, String file) {
         if (!path.endsWith(".zip") && !Files.exists(path.resolve(file))) {
             throw new RuntimeException(String.format("no %s found in %s", file, path));
         }
+    }
 
+    public static void validateSize(Path path) {
         ConsoleOutputs.out(Color.BLUE, "validating size of ", Color.PURPLE, path);
 
         long size = getSize(path);

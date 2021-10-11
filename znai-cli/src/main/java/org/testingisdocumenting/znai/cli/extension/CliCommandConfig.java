@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,10 +20,10 @@ package org.testingisdocumenting.znai.cli.extension;
 import java.nio.file.Path;
 
 public class CliCommandConfig {
-    private String docId;
-    private Path sourceRoot;
-    private Path deployRoot;
-    private String actor;
+    private final String docId;
+    private final Path sourceRoot;
+    private final Path deployRoot;
+    private final String actor;
 
     public CliCommandConfig(String docId, Path sourceRoot, Path deployRoot, String actor) {
         this.docId = docId;
@@ -33,6 +34,10 @@ public class CliCommandConfig {
 
     public String getDocId() {
         return docId;
+    }
+
+    public boolean isDocIdSpecified() {
+        return !getDocId().equals("no-id-specified");
     }
 
     public Path getSourceRoot() {

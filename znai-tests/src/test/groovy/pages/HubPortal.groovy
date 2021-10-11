@@ -1,6 +1,5 @@
 /*
  * Copyright 2021 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +14,11 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.cli.extension;
+package pages
 
-public interface CliCommandHandler {
-    String commandName();
-    String description();
-    void handle(CliCommandConfig config);
-    boolean needsDocGeneration();
-    default boolean isEnabled() {
-        return true;
-    }
+import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
+
+class HubPortal {
+    def names = $(".znai-landing-documentation .name")
 }
+

@@ -18,5 +18,6 @@ package pages
 
 class Pages {
     static StandardView standardView = new StandardView()
+    static HubPortal hubPortal = new HubPortal()
     static PreviewServer previewServer = new PreviewServer()
 }
