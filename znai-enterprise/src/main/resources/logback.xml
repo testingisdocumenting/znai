@@ -18,9 +18,14 @@
 <configuration>
     <if condition='isDefined("logPath")'>
         <then>
-            <appender name="Znai" class="ch.qos.logback.core.FileAppender">
+            <appender name="Znai" class="ch.qos.logback.core.rolling.RollingFileAppender">
                 <file>${logPath}</file>
-                <append>false</append>
+                <append>true</append>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>${logPath}-%d{yyyy-MM-dd}</fileNamePattern>
+                    <maxHistory>7</maxHistory>
+                    <totalSizeCap>20MB</totalSizeCap>
+                </rollingPolicy>
                 <encoder>
                     <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %msg%n</pattern>
                 </encoder>

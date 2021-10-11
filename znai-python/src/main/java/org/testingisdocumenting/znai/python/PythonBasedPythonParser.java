@@ -43,15 +43,31 @@ public class PythonBasedPythonParser {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Map<String, Object>> parse(Path path) {
+    public PythonCode parse(Path path) {
         write(path);
         String json = read();
 
+        Map<String, Object> parserResponse;
         try {
-            return (List<Map<String, Object>>) JsonUtils.deserializeAsList(json);
+            parserResponse = (Map<String, Object>) JsonUtils.deserializeAsMap(json);
         } catch (Exception e) {
             throw new RuntimeException("can't parse python parser output: " + json, e);
         }
+
+        boolean success = (boolean) parserResponse.get("success");
+        if (!success) {
+            String error = (String) parserResponse.get("error");
+            System.out.println(error);
+            throw new RuntimeException("Error from python parser: " + error);
+        }
+
+        List<String> warnings = (List<String>) parserResponse.get("warnings");
+        if (warnings != null && warnings.size() > 0) {
+            System.out.println("Warnings from python parsing:");
+            warnings.forEach(warning -> System.out.println("\t" + warning));
+        }
+
+        return new PythonCode((List<Map<String, Object>>) parserResponse.get("result"));
     }
 
     private void write(Path path) {

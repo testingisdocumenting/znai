@@ -1,0 +1,1 @@
+* Preview footer change detection

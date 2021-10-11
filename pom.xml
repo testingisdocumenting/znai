@@ -21,7 +21,7 @@
 
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-parent</artifactId>
-    <version>1.50-SNAPSHOT</version>
+    <version>1.54-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Znai</name>
@@ -135,14 +135,14 @@
         <jackson.verson>2.11.2</jackson.verson>
         <webtau.version>1.41</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
-        <ant.version>1.10.9</ant.version>
+        <ant.version>1.10.11</ant.version>
         <ant-compress.version>1.5</ant-compress.version>
-        <jsoup.version>1.13.1</jsoup.version>
+        <jsoup.version>1.14.2</jsoup.version>
         <freemarker.version>2.3.30</freemarker.version>
         <commons-io.version>2.7</commons-io.version>
         <commons-cli.version>1.4</commons-cli.version>
         <commons-csv.version>1.8</commons-csv.version>
-        <commons-compress.version>1.20</commons-compress.version>
+        <commons-compress.version>1.21</commons-compress.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <commons-codec.version>1.15</commons-codec.version>
         <plantuml.version>1.2020.16</plantuml.version>
@@ -523,6 +523,7 @@
                     <releaseProfiles>release</releaseProfiles>
                     <tagNameFormat>@{project.version}</tagNameFormat>
                     <goals>deploy</goals>
+                    <pushChanges>false</pushChanges>
                 </configuration>
             </plugin>
 

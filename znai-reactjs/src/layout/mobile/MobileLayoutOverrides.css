@@ -16,7 +16,7 @@
 
 @media only screen and (max-width: 940px) {
     :root {
-        --znai-single-column-full-width: auto;
+        --znai-single-column-render-width: auto;
     }
 
     svg {

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,9 +41,9 @@ import java.util.Optional;
  * the lines connect properly a shape must be of a proper height, width and if possible, shape.
  */
 public class GraphvizShapeConfig {
-    private Map<String, ?> config;
+    private final Map<String, ?> config;
 
-    private Map<String, String> svgByName;
+    private final Map<String, String> svgByName;
 
     public GraphvizShapeConfig(String json) {
         this(JsonUtils.deserializeAsMap(json));

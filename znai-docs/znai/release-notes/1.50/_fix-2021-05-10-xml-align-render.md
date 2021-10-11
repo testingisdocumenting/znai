@@ -1,0 +1,1 @@
+* Fix: XML alignment and remove extra empty line 

@@ -18,6 +18,7 @@
 .znai-api-param-name-type-toggle-cell {
     display: flex;
     justify-content: flex-end;
+    max-width: var(--znai-api-param-max-width);
     width: 100%;
     text-align: right;
     padding-left: 20px;

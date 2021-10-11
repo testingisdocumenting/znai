@@ -25,6 +25,7 @@ import {elementsLibrary} from '../DefaultElementsLibrary'
 import {TwoSidesLayoutRightPart} from '../page/two-sides/TwoSidesLayout'
 
 import {Page} from '../page/Page'
+import {Section} from '../default-elements/Section';
 
 import './tokens.css'
 
@@ -64,6 +65,29 @@ function docMeta() {
     return {
         "title": "Doc Title",
         "type": "Guide"
+    }
+}
+
+export function snippetsTwoColumns(registry) {
+    registry
+        .add('after snippet', () => <Section elementsLibrary={elementsLibrary}
+                                             docMeta={docMeta()}
+                                             title="Section title"
+                                             id="section-title"
+                                             content={createContent()}/>)
+
+    function createContent() {
+        return [
+            contentSnippet(false),
+            {
+                type: "Columns",
+                config: {},
+                columns: [
+                    {content: [contentSnippet(false)]},
+                    {content: [contentSnippet(false)]}
+                ]
+            }
+        ]
     }
 }
 
@@ -133,6 +157,10 @@ function tabsContent({label, wide}) {
 }
 
 function twoSidesPage(content) {
+    return pageContent("two-sides", content)
+}
+
+function pageContent(type, content) {
     return {
         "type": "Page",
         "content": content,
@@ -142,7 +170,7 @@ function twoSidesPage(content) {
             "pageTitle": "Demo",
             "pageMeta": {
                 "type": [
-                    "two-sides"
+                    type
                 ]
             },
             "fileName": "demo",

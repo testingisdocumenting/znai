@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -62,6 +63,10 @@ public class TabsFencePlugin implements FencePlugin {
 
         ColonDelimitedKeyValues tabsDefinitions = new ColonDelimitedKeyValues(content);
         List<ParsedTab> parsedTabs = tabsDefinitions.map(this::parseTab).collect(toList());
+
+        if (parsedTabs.isEmpty()) {
+            throw new IllegalStateException("no tabs are defined. if your tab names have spaces quote the tab name");
+        }
 
         Map<String, Object> tabsProps = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         tabsProps.put("tabsContent", parsedTabs.stream().map(this::tabProps).collect(toList()));

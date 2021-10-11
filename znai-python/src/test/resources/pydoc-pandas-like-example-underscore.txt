@@ -1,0 +1,21 @@
+My documentation text blah
+
+Parameters
+____________
+
+my_name : myType or None
+
+  text of myName param description
+
+  with empty lines in between
+
+another_name : anotherType or Nil
+  more textual description
+
+no_type:
+  no type param
+
+Examples
+___________
+
+some examples are here and should be ignored

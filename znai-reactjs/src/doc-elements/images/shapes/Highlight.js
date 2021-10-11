@@ -20,11 +20,15 @@ import {styleByName} from './styleByName';
 
 import rectangle from './Rectangle'
 
-const HighlightBody = ({x, y, width, height, color, ...props}) => {
+const HighlightBody = ({x, y, width, height, color, scale, ...props}) => {
     const styleScheme = styleByName(color)
+
+    const scaledX = x * scale;
+    const scaledY = y * scale;
+
     return (
         <g>
-            <rect x={x} y={y} width={width} fill={styleScheme.line}  height={height} strokeWidth="0" fillOpacity={0.6} {...props} />
+            <rect x={scaledX} y={scaledY} width={width} fill={styleScheme.line}  height={height} strokeWidth="0" fillOpacity={0.6} {...props} />
         </g>
     );
 }

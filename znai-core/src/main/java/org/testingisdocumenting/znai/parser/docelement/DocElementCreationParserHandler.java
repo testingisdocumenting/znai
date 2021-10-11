@@ -89,6 +89,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
         return globalAnchorIds;
     }
 
+    public String getCurrentSectionTitle() {
+        return currentSectionTitle;
+    }
+
     @Override
     public void onSectionStart(String title) {
         currentSectionTitle = title;
@@ -359,18 +363,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onInlinedCodePlugin(PluginParams pluginParams) {
-        InlinedCodePlugin inlinedCodePlugin = Plugins.inlinedCodePluginById(pluginParams.getPluginId());
-        processPlugin(inlinedCodePlugin, (p) -> p.process(componentsRegistry, path, pluginParams));
-    }
-
-    private <E extends Plugin> void processPlugin(E plugin, Function<E, PluginResult> processFunc) {
-        try {
-            PluginResult result = processFunc.apply(plugin);
-            processPlugin(plugin, result);
-        } catch (Exception e) {
-            throw new RuntimeException("failure during processing plugin '" + plugin.id() + "': " + e.getMessage(), e);
-        }
+    public void onInlinedCodePlugin(InlinedCodePlugin inlinedCodePlugin, PluginResult pluginResult) {
+        processPlugin(inlinedCodePlugin, pluginResult);
     }
 
     private <E extends Plugin> void processPlugin(E plugin, PluginResult result) {

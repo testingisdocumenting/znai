@@ -72,6 +72,7 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
 
     @Override
     public TocItem tocItemByPath(ComponentsRegistry componentsRegistry, TableOfContents toc, Path path) {
+        //         return toc.findTocItem(path);
         if (path.getFileName().toString().startsWith(TocItem.INDEX + ".")) {
             return toc.getIndex();
         }

@@ -77,6 +77,8 @@ import DiagramLegend from './diagrams/DiagramLegend'
 import { DocumentationLayout } from '../layout/DocumentationLayout'
 import Footer from '../structure/Footer'
 import {Redirect} from '../structure/Redirect';
+import {SimpleText} from './default-elements/SimpleText';
+import { PageToc } from "./page/PageToc";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -97,7 +99,7 @@ presentationElementHandlers.SubHeading = presentationSubHeading
 library.BlockQuote = BlockQuote
 presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler
 
-library.SimpleText = ({text}) => <span className="simple-text">{text}</span>
+library.SimpleText = SimpleText
 library.InlinedCode = InlinedCode
 library.SoftLineBreak = () => <span> </span>
 library.HardLineBreak = () => <br />
@@ -178,6 +180,7 @@ library.Page = Page
 presentationElementHandlers.Page = presentationPageHandler
 
 library.PageTitle = PageTitle
+library.PageToc = PageToc
 
 library.MarkdownAndResult = MarkdownAndResult
 presentationElementHandlers.MarkdownAndResult = presentationMarkdownAndResultHandler

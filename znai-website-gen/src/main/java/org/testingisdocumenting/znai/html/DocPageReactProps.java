@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +21,10 @@ import org.testingisdocumenting.znai.structure.Page;
 import org.testingisdocumenting.znai.structure.TocItem;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * represents props for ReactJs Doc Page component to render an entire documentation page
@@ -48,10 +52,43 @@ public class DocPageReactProps {
         Map<String, Object> pageProps = new LinkedHashMap<>();
 
         pageProps.put("type", "Page");
-        pageProps.put("content", ((Map<String, ?>) page.getDocElement().toMap()).get("content"));
+        pageProps.put("content", exerciseSuppliers(((Map<String, ?>) page.getDocElement().toMap()).get("content")));
         pageProps.put("lastModifiedTime", page.getLastModifiedTime().toEpochMilli());
         pageProps.put("tocItem", tocItem.toMap());
 
         return pageProps;
+    }
+
+    /**
+     * values inside a map could be lazy evaluated Suppliers and we need to exercise them before rendering the page
+     * @see org.testingisdocumenting.znai.extensions.toc.PageTocIncludePlugin
+     * @param content content with potential suppliers
+     * @return content with exercised suppliers
+     */
+    @SuppressWarnings("unchecked")
+    private static Object exerciseSuppliers(Object content) {
+        if (content instanceof Supplier) {
+            return ((Supplier<?>) content).get();
+        }
+
+        if (content instanceof Map) {
+            return exerciseMapSuppliers((Map<String, ?>) content);
+        }
+
+        if (content instanceof List) {
+            return exerciseListSuppliers((List<?>) content);
+        }
+
+        return content;
+    }
+
+    private static Map<String, ?> exerciseMapSuppliers(Map<String, ?> content) {
+        return content.entrySet().stream()
+                .filter(e -> e.getValue() != null)
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> exerciseSuppliers(e.getValue())));
+    }
+
+    private static List<?> exerciseListSuppliers(List<?> content) {
+        return content.stream().map(DocPageReactProps::exerciseSuppliers).collect(Collectors.toList());
     }
 }

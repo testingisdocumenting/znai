@@ -1,0 +1,1 @@
+* Doc: clarify [Getting Started](introduction/getting-started) documentation section

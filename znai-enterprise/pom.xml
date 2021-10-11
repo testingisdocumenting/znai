@@ -21,10 +21,14 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.50-SNAPSHOT</version>
+        <version>1.54-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-enterprise</artifactId>
+
+    <properties>
+        <logback.version>1.2.3</logback.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -36,7 +40,13 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
         </dependency>
 
         <dependency>

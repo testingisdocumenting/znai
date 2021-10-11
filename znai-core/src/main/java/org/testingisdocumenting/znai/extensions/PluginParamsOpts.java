@@ -39,6 +39,12 @@ public class PluginParamsOpts {
         return has(name) ? get(name) : defaultValue;
     }
 
+    public void assignToProps(Map<String, ?> props, String name) {
+        if (has(name)) {
+            props.put(name, get(name));
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public <E> List<E> getList(String name) {
         if (!has(name)) {
@@ -55,7 +61,7 @@ public class PluginParamsOpts {
     }
 
     public <E> Set<E> getSet(String name) {
-        return new HashSet<E>(getList(name));
+        return new HashSet<>(getList(name));
     }
 
     public Stream<String> getNames() {

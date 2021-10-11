@@ -8,6 +8,7 @@ flow
     landing
     names
     page-references
+    page-toc
     lookup-paths
     search
     footer
@@ -53,6 +54,7 @@ visuals
     image-annotations
     iframe
     SVG
+    graphviz
     flow-diagrams
     PlantUml
     mermaid
@@ -65,3 +67,5 @@ configuration
 example-references
     domain
     api
+release-notes
+    2021

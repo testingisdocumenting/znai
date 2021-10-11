@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +21,7 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
@@ -220,8 +222,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onInlinedCodePlugin(PluginParams pluginParams) {
-        list.forEach(h -> h.onInlinedCodePlugin(pluginParams));
+    public void onInlinedCodePlugin(InlinedCodePlugin inlinedCodePlugin, PluginResult pluginResult) {
+        list.forEach(h -> h.onInlinedCodePlugin(inlinedCodePlugin, pluginResult));
     }
 
     @Override

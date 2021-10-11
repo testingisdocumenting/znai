@@ -1,0 +1,1 @@
+* Handle optional type during [python doc params](snippets/python#doc-parameters) parsing

@@ -1,0 +1,1 @@
+* Rename `scaleRatio` -> `scale` for `:include-image:` plugin  

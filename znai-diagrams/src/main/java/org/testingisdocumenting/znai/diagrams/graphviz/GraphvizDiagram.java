@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,10 +22,10 @@ import java.util.List;
 import java.util.Map;
 
 public class GraphvizDiagram {
-    private String id;
-    private String svg;
-    private Map<String, List<String>> stylesByNodeId;
-    private Map<String, Boolean> isInvertedTextColorByStyleId;
+    private final String id;
+    private final String svg;
+    private final Map<String, List<String>> stylesByNodeId;
+    private final Map<String, Boolean> isInvertedTextColorByStyleId;
 
     public GraphvizDiagram(String id, String svg, Map<String, List<String>> stylesByNodeId,
                            Map<String, Boolean> isInvertedTextColorByStyleId) {

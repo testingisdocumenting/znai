@@ -1,0 +1,1 @@
+* Added [Table row highlight](layout/tables#highlight) by index 

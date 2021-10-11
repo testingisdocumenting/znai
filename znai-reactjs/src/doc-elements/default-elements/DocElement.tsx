@@ -18,7 +18,12 @@
 import * as React from "react";
 
 export type ElementsLibraryMap = { [key: string]: any };
-export type DocElementContent = Array<{ type: string }>;
+export type DocElementContent = DocElementPayload[];
+
+export interface DocElementPayload {
+  type: "any";
+  content?: DocElementContent;
+}
 
 export interface WithElementsLibrary {
   elementsLibrary: ElementsLibraryMap;

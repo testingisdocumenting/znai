@@ -35,6 +35,19 @@ Use `title` parameter to set a table title.
     
 :include-table: table/table.json {title: "Monthly Report"}
 
+# Highlight
+
+Use `highlightRow` to highlight a row, or a set of rows by their index
+
+    :include-table: table/table.json {title: "Highlight multiple rows", highlightRow: [0, 2]}
+
+:include-table: table/table.json {title: "Highlight multiple rows", highlightRow: [0, 2]}
+
+    :include-table: table/table.json {title: "Highlight single row", highlightRow: 1}
+
+:include-table: table/table.json {title: "Highlight single row", highlightRow: 1}
+
+
 # Arrange and Filter
 
 To change the order of columns or to filter out certain columns, specify the `columns` parameter.
@@ -43,22 +56,52 @@ To change the order of columns or to filter out certain columns, specify the `co
     
 :include-table: table/table.csv {columns: ["Description", "Price"]}
 
-# Alignment and Width
+# Width
 
-By default column width is auto-calculated to fit the values inside. 
-But you can control the width with the extra options.
+By default, columns width is auto-calculated to fit the values inside.
+Use `width` to control the width of a column.
 
     :include-table: table.csv {Price: {width: 200}, "Description": {width: 400}}
 
 :include-table: table/table.csv {Price: {width: 200}, "Description": {width: 400}}
 
-And if you need to change a column alignment from default *left* to *right* just add the `align` property.
+Use percentage value to change column size relative to the page content width. 
+
+    :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "30%"}}
+
+:include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "30%"}}
+
+Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content 
+
+    :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "60%"}}
+
+:include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "60%"}}
+
+# Min Width
+
+Use `minColumnWidth` to set min width for all table columns
+
+    :include-table: table/table.csv {minColumnWidth: 400, "Description": {width: 500}}
+
+:include-table: table/table.csv {minColumnWidth: 400, "Description": {width: 500}}
+
+# Wide Mode
+
+Use `wide: true` to make table occupy all available width
+
+    :include-table: table/table.csv {wide: true, minColumnWidth: 400, title: "My Items"}
+
+:include-table: table/table-many-columns.csv {wide: true, minColumnWidth: 400, title: "My Items"}
+
+# Text Alignment
+
+Use `align` to change a column text alignment.
     
     :include-table: table.csv {Price: {width: 200, align: "right"}}
 
 :include-table: table/table.csv {Price: {width: 200, align: "right"}}
 
-You can do the same for `JSON` data:
+`JSON` data example:
 
     :include-table: table.json {Price: {width: 100, align: "right"}}
 

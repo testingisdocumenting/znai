@@ -11,21 +11,83 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from dataclasses import dataclass
 
-def my_func():
+one_line_var = "one line variable assignment"
+
+multi_line_var = {
+    "line1": "first line",
+    "line2": "second line",
+}
+
+
+class MyClass:
+    def __init__(self):
+        self.my_value = 'hello'
+
+
+MyClass.V = 2
+
+
+def a_method():
+    """
+    This method does stuff
+    :return: nothing
+    """
+    pass
+
+
+class AClass:
+    """
+    This class does things.
+    """
+    def foo(self):
+        pass
+
+
+@dataclass
+class ADataClass:
+    foo: str = "bar"
+
+
+@dataclass
+class ADataClassWithDocString:
+    """
+    A data class with a doc string.
+    """
+    foo: str = "bar"
+
+
+def func_no_docs():
+    a = 2
+    b = 3
+    return a + b
+
+
+def my_func(a, b,
+            c, d):
     """
     text inside my *func* doc
+
+    Parameters
+    ----------
+    a: String
+      description
     """
 
-    return 2 + 2
+    e = a + b
+    f = c + d
+
+    return e + f
 
 
 def another_func():
     """
     more diff text
     """
-
-    return 2 + 2
+    a = 2
+    b = 3
+    return a + b
 
 
 class Animal:

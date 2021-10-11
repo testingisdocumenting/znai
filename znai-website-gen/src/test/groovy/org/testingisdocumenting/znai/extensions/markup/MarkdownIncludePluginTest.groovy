@@ -62,4 +62,12 @@ class MarkdownIncludePluginTest {
         } should throwException("use either <firstAvailable> or free form param " +
                 "to specify file to include, but not both")
     }
+
+    @Test
+    void "should validate file presence"() {
+        code {
+            PluginsTestUtils.processAndGetAuxiliaryFiles(
+                    ':include-markdown: wrongfile.md')
+        } should throwException("can't find resource: wrongfile.md")
+    }
 }

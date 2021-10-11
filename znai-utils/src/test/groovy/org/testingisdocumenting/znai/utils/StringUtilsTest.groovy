@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -58,5 +59,19 @@ line #_3\r""")
         Assert.assertEquals("a prefix:line1 line1\n" +
                 "         line2\n" +
                 "         line #3", concatenated)
+    }
+
+    @Test
+    void "remove quotes"() {
+        Assert.assertEquals("", StringUtils.removeQuotes('""'))
+        Assert.assertEquals("", StringUtils.removeQuotes("''"))
+        Assert.assertEquals("hello world", StringUtils.removeQuotes("'hello world'"))
+        Assert.assertEquals("hello world", StringUtils.removeQuotes('"hello world"'))
+    }
+
+    @Test
+    void "wrap in double quotes"() {
+        Assert.assertEquals('""', StringUtils.wrapInDoubleQuotes('""'))
+        Assert.assertEquals('"hello world"', StringUtils.wrapInDoubleQuotes("hello world"))
     }
 }

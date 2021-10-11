@@ -53,10 +53,10 @@ class Annotations {
         }
     }
 
-    staticAnnotationsToRender() {
+    staticAnnotationsToRender(scale) {
         return this.shapes.map(shape => {
             const StaticAnnotation = staticAnnotationForShape(shape)
-            return <StaticAnnotation key={shape.id} shape={shape}/>
+            return <StaticAnnotation key={shape.id} shape={shape} scale={scale}/>
         })
     }
 

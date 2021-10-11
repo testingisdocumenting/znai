@@ -1,0 +1,1 @@
+* Enterprise file monitor validates monitor path

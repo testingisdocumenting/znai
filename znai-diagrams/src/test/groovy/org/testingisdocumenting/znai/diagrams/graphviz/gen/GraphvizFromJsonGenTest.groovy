@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,18 +34,18 @@ class GraphvizFromJsonGenTest {
                         ["n1", "n2"],
                         ["n1", "n2", "both"],
                 ]])
-
-        gv.should == "digraph Generated {\n" +
-                "rankdir=LR;\n" +
-                "bgcolor=\"#ffffff00\";\n" +
-                "node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n" +
-                "\n" +
-                "n1 [label=\"l1\"];\n" +
-                "n2 [label=\"l2\"];\n" +
-                "\n" +
-                "n1 -> n2;\n" +
-                "n1 -> n2[dir=both];\n" +
-                "}"
+        
+        gv.should == 'digraph Generated {\n' +
+                'rankdir=LR;\n' +
+                'bgcolor="#ffffff00";\n' +
+                'node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n' +
+                '\n' +
+                '"n1" [label="l1"];\n' +
+                '"n2" [label="l2"];\n' +
+                '\n' +
+                '"n1" -> "n2";\n' +
+                '"n1" -> "n2"[dir=both];\n' +
+                '}'
     }
 
     @Test
@@ -54,7 +55,7 @@ class GraphvizFromJsonGenTest {
                 edges: [["n", "n"]
                 ]])
 
-        gv.should contain("n [label=\"multi\\nline\"]")
+        gv.should contain('"n" [label="multi\\nline"]')
     }
 
     @Test
@@ -73,8 +74,8 @@ class GraphvizFromJsonGenTest {
                         ]]
                 ])
 
-        gv.should contain("n1 [label=\"l1\" fixedsize=true width=4 height=2]")
-        gv.should contain("n2 [label=\"l2\" fixedsize=true width=4 height=2]")
+        gv.should contain('"n1" [label=\"l1\" fixedsize=true width=4 height=2]')
+        gv.should contain('"n2" [label=\"l2\" fixedsize=true width=4 height=2]')
     }
 
     @Test
@@ -93,38 +94,38 @@ class GraphvizFromJsonGenTest {
                         ]]
                 ])
 
-        gv.should contain("n1 [label=\"l1\" fixedsize=true width=4 height=2]")
-        gv.should contain("n2 [label=\"l2\" fixedsize=true width=8 height=1]")
+        gv.should contain('"n1" [label="l1" fixedsize=true width=4 height=2]')
+        gv.should contain('"n2" [label="l2" fixedsize=true width=8 height=1]')
     }
 
     @Test
     void "applies meta information for highlighted items"() {
         generate([nodes: [[id: "n", label: "l", highlight: true]], edges: [["n", "n"]]])
-        gv.should contain("n [label=\"l[h]\"]")
+        gv.should contain('"n" [label="l[h]"]')
     }
 
     @Test
     void "applies meta information when color group is specified"() {
         generate([nodes: [[id: "n", label: "l", colorGroup: "b"]], edges: [["n", "n"]]])
-        gv.should contain("n [label=\"l[b]\"]")
+        gv.should contain('"n" [label="l[b]"]')
     }
 
     @Test
     void "applies meta information when shape is specified"() {
         generate([nodes: [[id: "n", label: "l", shape: "database"]], edges: [["n", "n"]]])
-        gv.should contain("n [label=\"l[database]\"]")
+        gv.should contain('"n" [label="l[database]"]')
     }
 
     @Test
     void "applies meta information when shape and color is specified"() {
         generate([nodes: [[id: "n", label: "l", colorGroup: "b", shape: "database"]], edges: [["n", "n"]]])
-        gv.should contain("n [label=\"l[b database]\"]")
+        gv.should contain('"n" [label="l[b database]"]')
     }
 
     @Test
     void "applies meta information when shape and highlight is specified"() {
         generate([nodes: [[id: "n", label: "l", highlight: true, shape: "database"]], edges: [["n", "n"]]])
-        gv.should contain("n [label=\"l[h database]\"]")
+        gv.should contain('"n" [label="l[h database]"]')
     }
 
     @Test
@@ -145,12 +146,12 @@ class GraphvizFromJsonGenTest {
                 'bgcolor="#ffffff00";\n' +
                 'node [shape=record; fontsize=10; margin=0.2; fontname=Helvetica];\n' +
                 '\n' +
-                'a [label="A"];\n' +
-                'b [label="B"];\n' +
-                'c [label="C"];\n' +
+                '"a" [label="A"];\n' +
+                '"b" [label="B"];\n' +
+                '"c" [label="C"];\n' +
                 '\n' +
-                'a -> b;\n' +
-                'c -> d;\n' +
+                '"a" -> "b";\n' +
+                '"c" -> "d";\n' +
                 '}'
     }
 

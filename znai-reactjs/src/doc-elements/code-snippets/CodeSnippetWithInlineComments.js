@@ -17,8 +17,6 @@
 
 import React from 'react'
 
-import 'semantic-ui-css/components/label.css'
-
 import LineOfTokens from './LineOfTokens'
 import CircleBadge from './explanations/CircleBadge'
 

@@ -33,7 +33,7 @@ import {pagesDemo} from './doc-elements/page/Page.demo'
 import {imageDemo} from './doc-elements/images/Image.demo'
 import {apiParametersDemo} from './doc-elements/api/ApiParameters.demo'
 import {jsxDemo} from './doc-elements/jsx/Jsx.demo'
-import {snippetsDemo, snippetsTwoSidesDemo} from './doc-elements/code-snippets/Snippet.demo'
+import {snippetsDemo, snippetsTwoColumns, snippetsTwoSidesDemo} from './doc-elements/code-snippets/Snippet.demo'
 import {inlinedCodeDemo} from './doc-elements/code-snippets/InlinedCode.demo'
 import {documentationPreparationDemo} from './screens/documentation-preparation/DocumentationPreparation.demo'
 import {setDocMeta} from './structure/docMeta'
@@ -89,6 +89,7 @@ import {notAuthorizedDemo} from "./screens/not-authorized/NotAuthorizedScreen.de
 import {iframeDemo} from './doc-elements/iframe/Iframe.demo';
 import {cliCommandPresentationDemo} from './doc-elements/cli/PresentationCliCommand.demo';
 import {imagePresentationDemo} from './doc-elements/images/PresentationAnnotatedImage.demo';
+import { pageTocDemo } from "./doc-elements/page/PageToc.demo";
 
 const docMeta = {
     id: 'preview',
@@ -121,6 +122,7 @@ registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
     .registerAsGrid('Code Snippet With Bullets', 0, snippetsWithInlineCommentsDemo)
     .registerAsGrid('Code Snippet Syntax Highlight ', 0, syntaxHighlightSnippetDemo)
+    .registerAsGrid('Code Snippet In Two Columns', 0, snippetsTwoColumns)
     .registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)
     .registerAsGrid('Inlined Code', 0, inlinedCodeDemo)
     .registerAsGrid('Json', 0, jsonDemo)
@@ -152,6 +154,7 @@ registries.add('visuals')
 
 registries.add('layout')
     .registerAsTabs('Pages', pagesDemo)
+    .registerAsTabs('Page Toc', pageTocDemo)
     .registerAsGrid('Tabs', 0, tabsDemo)
     .registerAsGrid('Tables', 0, tableDemo)
     .registerAsGrid('Columns', 0, columnsDemo)

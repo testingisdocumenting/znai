@@ -1,0 +1,1 @@
+* Fix: extra margin in *Columns Layout* when code snippets in both columns goes after a code snippet  

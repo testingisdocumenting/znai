@@ -26,6 +26,7 @@ import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin
 import org.testingisdocumenting.znai.parser.docelement.DocElement
 import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler
 
+import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.stream.Stream
 
@@ -47,8 +48,8 @@ class PluginsTestUtils {
         DocElementCreationParserHandler parserHandler
     }
 
-    static Map<String, Object> processIncludeAndGetProps(String pluginDef) {
-        def result = processInclude(pluginDef)
+    static Map<String, Object> processIncludeAndGetProps(String pluginDef, Path markupPath = Paths.get("")) {
+        def result = processInclude(pluginDef, markupPath)
         return result[0].getProps()
     }
 
@@ -61,8 +62,8 @@ class PluginsTestUtils {
         return processIncludeAndGetProps(pluginDef).snippet
     }
 
-    static List<DocElement> processInclude(String pluginDef) {
-        def includePluginAndParserHandler = processAndGetIncludePluginAndParserHandler(pluginDef)
+    static List<DocElement> processInclude(String pluginDef, Path markupPath = Paths.get("")) {
+        def includePluginAndParserHandler = processAndGetIncludePluginAndParserHandler(pluginDef, markupPath)
         return includePluginAndParserHandler.parserHandler.docElement.content
     }
 
@@ -81,14 +82,14 @@ class PluginsTestUtils {
         return includePluginAndParserHandler.includePlugin
     }
 
-    static IncludePluginAndParserHandler processAndGetIncludePluginAndParserHandler(String pluginDef) {
+    static IncludePluginAndParserHandler processAndGetIncludePluginAndParserHandler(String pluginDef, Path markupPath = Paths.get("")) {
         DocElementCreationParserHandler parserHandler = createParserHandler()
 
         def idAndParams = PluginsRegexp.parseIncludePlugin(pluginDef)
         PluginParams includeParams = new PluginParams(idAndParams.id, idAndParams.params)
         def includePlugin = Plugins.includePluginById(includeParams.pluginId)
 
-        def pluginResult = includePlugin.process(TEST_COMPONENTS_REGISTRY, parserHandler, Paths.get(""), includeParams)
+        def pluginResult = includePlugin.process(TEST_COMPONENTS_REGISTRY, parserHandler, markupPath, includeParams)
 
         parserHandler.onIncludePlugin(includePlugin, pluginResult)
 
@@ -112,10 +113,10 @@ class PluginsTestUtils {
 
         def idAndParams = PluginsRegexp.parseInlinedCodePlugin(pluginDef)
         PluginParams pluginParams = new PluginParams(idAndParams.id, idAndParams.params)
-        def inlinedCodePlugin = Plugins.inlinedCodePluginById(idAndParams.id)
 
-        inlinedCodePlugin.process(TEST_COMPONENTS_REGISTRY, Paths.get(""), pluginParams)
-        parserHandler.onInlinedCodePlugin(pluginParams)
+        def inlinedCodePlugin = Plugins.inlinedCodePluginById(idAndParams.id)
+        def result = inlinedCodePlugin.process(TEST_COMPONENTS_REGISTRY, Paths.get(""), pluginParams)
+        parserHandler.onInlinedCodePlugin(inlinedCodePlugin, result)
 
         return new InlinedCodePluginAndParserHandler(inlinedCodePlugin: inlinedCodePlugin, parserHandler: parserHandler)
     }

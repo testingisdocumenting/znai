@@ -1,0 +1,23 @@
+My documentation text blah
+in multiple lines when we include any text as py doc
+we exclude all the future sections
+
+Parameters
+-----------
+
+my_name : myType or None
+
+  text of myName param description
+
+  with empty lines in between
+
+another_name : anotherType or Nil
+  more textual description
+
+no_type:
+  no type param
+
+Examples
+--------------
+
+some examples are here and should be ignored

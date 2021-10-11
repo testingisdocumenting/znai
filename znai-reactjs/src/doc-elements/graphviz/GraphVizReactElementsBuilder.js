@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +33,12 @@ export default class GraphVizReactElementsBuilder {
         this.currentParentClass = null
     }
 
+    /**
+     * parses svg nodes and create react components out of them, modifying to apply style
+     * @param domNode dom node
+     * @param idx
+     * @returns react component
+     */
     reactElementFromDomNode(domNode, idx) {
         if (domNode.nodeName === '#comment') {
             this.currentCommentAsId = decodeComment(domNode.textContent.trim())
@@ -43,7 +50,7 @@ export default class GraphVizReactElementsBuilder {
         }
 
         const attrProps = attributesToProps(domNode.attributes)
-        if (! attrProps.key) {
+        if (!attrProps.key) {
             attrProps.key = idx
         }
 
@@ -105,7 +112,7 @@ export default class GraphVizReactElementsBuilder {
         props.isInvertedTextColor = this.isInvertedTextColor()
         props.url = this.urls[this.currentCommentAsId]
 
-        const component = this.reactComponentForDom(domNode)
+        const component = this.reactComponentForDom(domNode, props)
         const passExtraProps = typeof component !== 'string'
         const propsToUse = passExtraProps ? {...attrProps, ...props} : attrProps
 
@@ -133,9 +140,18 @@ export default class GraphVizReactElementsBuilder {
         return this.currentStyles.filter((s) => this.diagram.isInvertedTextColorByStyleId[s]).length > 0
     }
 
-    reactComponentForDom(domNode) {
+    reactComponentForDom(domNode, props) {
+        console.log(props)
         switch (domNode.nodeName) {
-            case 'polygon': return GvPolygon
+            case 'polygon': {
+                if (props.parentClassName === 'graph') {
+                    return () => null
+                }
+
+                return GvPolygon
+            }
+
+            case 'ellipse': return GvPolygon
             case 'text': return GvText
             case 'path': return GvPath
             case 'g': return GvGroup
@@ -158,10 +174,10 @@ export default class GraphVizReactElementsBuilder {
         }
 
         const childNodes = domNode.childNodes || []
-        for (let i = 0, len = childNodes.length; i < len; i++) {
-            const child = childNodes[i]
+        for (let idx = 0, len = childNodes.length; idx < len; idx++) {
+            const child = childNodes[idx]
 
-            const reactChildElement = this.reactElementFromDomNode(child, i)
+            const reactChildElement = this.reactElementFromDomNode(child, idx)
             if (reactChildElement !== null) {
                 children.push(reactChildElement)
             }
