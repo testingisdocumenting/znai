@@ -54,6 +54,7 @@ visuals
     image-annotations
     iframe
     SVG
+    graphviz
     flow-diagrams
     PlantUml
     mermaid
