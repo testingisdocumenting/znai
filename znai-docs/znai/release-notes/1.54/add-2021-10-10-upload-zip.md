@@ -1,0 +1,1 @@
+* Add `uploadzip` command to upload any html zip to znai hub  
