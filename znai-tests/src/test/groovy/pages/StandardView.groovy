@@ -21,16 +21,21 @@ import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 class StandardView {
     def pageTitle = $(".page-title")
 
-    def tocSectionTitles = $(".toc-section .title")
+    def tocSectionTitles = $(".toc-section .title").all()
     def tocItems = $(".toc-item a")
 
     def footer = $(".footer")
+
+    def docTitle = $(".toc-panel-header")
 
     def shortcutsTocItem = tocItems.get("Shortcuts")
 
     def codeSnippetsTocItem = tocItems.get("Code Snippets")
     def externalCodeSnippetsTocItem = tocItems.get("External Code Snippets")
+    def gettingStartedTocItem = tocItems.get("Getting Started")
+    def pageThreeTocItem = tocItems.get("Page Three")
     def externalCodeWideCodeSection = $("h1").get("Wide Code")
+    def metaSection = $("h1").get("Meta")
 
     def apiParametersTocItem = tocItems.get("API Parameters")
 

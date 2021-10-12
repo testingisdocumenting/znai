@@ -16,34 +16,53 @@
 
 package scenarios
 
-import data.FsLocations
+import clicommands.CliCommands
 
 import java.nio.file.Path
+import java.nio.file.Paths
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 import static pages.Pages.*
 
-scenario('open preview') {
-    previewServer.openPreview()
+def scaffoldedPathCache = cache.value('scaffolded-docs-for-preview')
+
+scenario('scaffold docs and run preview') {
+    def tempPath = fs.tempDir('znai-scaffold-for-preview')
+    CliCommands.znai.run('--new', cli.workingDir(tempPath))
+
+    def docsPath = tempPath.resolve("znai")
+    scaffoldedPathCache.set(docsPath.toString())
+
+    def port = 3457
+    def preview = CliCommands.znai.runInBackground("--preview --port=${port}", cli.workingDir(docsPath))
+
+    preview.output.waitTo(contain("server started"), 30_000)
+
+    previewServer.openPreview(port)
 }
 
 scenario('footer should be updated on footer file change') {
     standardView.footer.should == ~/Contributions are welcome/
 
-    fs.writeText(FsLocations.resolveFromZnaiDocs("footer.md"), "new footer")
+    // TODO use getAsPath() when webtau released
+    def docsPath = Paths.get(scaffoldedPathCache.get())
+    fs.writeText(docsPath.resolve("footer.md"), "new footer")
     standardView.footer.waitTo == "new footer"
 }
 
 scenario('preview jumps to a page associated with a change') {
-    def externalCodeSnippetsTitle = 'External Code Snippets'
+    def docsPath = Paths.get(scaffoldedPathCache.get())
 
-    standardView.pageTitle.shouldNot == externalCodeSnippetsTitle
+    standardView.pageThreeTocItem.click()
 
-    def externalCodePath = FsLocations.resolveFromZnaiDocs("snippets/external-code-snippets.md")
-    replaceText(externalCodePath, "Given file with inlined comments", "Given file with inlined comments!")
+    def gettingStartedTitle = 'Getting Started'
+    standardView.pageTitle.shouldNot == gettingStartedTitle
 
-    standardView.pageTitle.waitTo == externalCodeSnippetsTitle
-    browser.url.path.should == "/preview/snippets/external-code-snippets"
+    def gettingStartedPath = docsPath.resolve("chapter-one/getting-started.md")
+    replaceText(gettingStartedPath, "Each documentation must have ", "Each documentation must have!")
+
+    standardView.pageTitle.waitTo == gettingStartedTitle
+    browser.url.path.should == "/preview/chapter-one/getting-started"
 
     // TODO replace with `inViewport` matcher when webtau releases it
     standardView.mainPanelScrollTop.shouldBe > 400
