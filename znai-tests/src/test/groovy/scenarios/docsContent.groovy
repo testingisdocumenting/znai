@@ -16,29 +16,46 @@
 
 package scenarios
 
+import docgen.ScaffoldUtils
+
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 import static pages.Pages.*
 
-scenario('open docs') {
-    browser.open("/")
+def scaffoldServerUrl = cache.value('scaffold-server-url')
+
+scenario('scaffold new docs and serve') {
+    scaffoldServerUrl.set(
+            ScaffoldUtils.scaffoldAndServe('znai-basic-scaffold').baseUrl)
+}
+
+scenario('open docs in browser') {
+    browser.open(scaffoldServerUrl.get() + '/my-product')
+}
+
+scenario('table of contents navigation') {
+    standardView.tocSectionTitles.should containAll("CHAPTER ONE", "CHAPTER TWO")
+    standardView.pageThreeTocItem.click()
+
+    browser.url.path.should contain("/chapter-two/page-three")
+    browser.title.should == "Your Product: Page Three"
 }
 
 scenario('navigating back and forth should preserve scroll position') {
-    standardView.externalCodeSnippetsTocItem.click()
-    standardView.externalCodeWideCodeSection.waitTo beVisible()
+    standardView.gettingStartedTocItem.click()
+    standardView.metaSection.waitTo beVisible()
+    standardView.metaSection.scrollIntoView()
 
-    standardView.externalCodeWideCodeSection.scrollIntoView()
     def scrollTopBeforeClick = standardView.mainPanelScrollTop.get()
 
-    standardView.apiParametersTocItem.click()
-    standardView.pageTitle.waitTo == "API Parameters"
+    standardView.pageThreeTocItem.click()
+    standardView.pageTitle.waitTo == "Page Three"
     standardView.mainPanelScrollTop.should == 0
 
-    // TODO replace with webtau shorcut in 1.42
+    // TODO replace with webtau shorcut
     browser.driver.navigate().back()
     standardView.mainPanelScrollTop.waitTo == scrollTopBeforeClick
 
-    // TODO replace with webtau shorcut in 1.42
+    // TODO replace with webtau shorcut
     browser.driver.navigate().forward()
     standardView.mainPanelScrollTop.waitTo == 0
 }

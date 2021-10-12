@@ -63,6 +63,7 @@ public class DocScaffolding {
         createPage("chapter-one", "page-two");
         createPage("chapter-two", "page-three");
         createPage("chapter-two", "page-four");
+        createFooter();
     }
 
     private void createToc() {
@@ -95,6 +96,12 @@ public class DocScaffolding {
         String withExtension = fileName + ".md";
         FileUtils.writeTextContent(workingDir.resolve(dirName).resolve(withExtension),
                 ResourceUtils.textContent(withExtension));
+    }
+
+    private void createFooter() {
+        String footerName = "footer.md";
+        FileUtils.writeTextContent(workingDir.resolve(footerName),
+                ResourceUtils.textContent(footerName));
     }
 
     private void registerPage(String dirName, String fileName) {

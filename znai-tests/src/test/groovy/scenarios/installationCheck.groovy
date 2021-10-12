@@ -18,6 +18,7 @@ package scenarios
 
 import static clicommands.CliCommands.znai
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
+import static pages.Pages.standardView
 
 def scaffoldedDocRoot = cache.value("scaffoldedNewDocs")
 
@@ -48,7 +49,7 @@ scenario('preview znai docs') {
     znaiPreview.output.waitTo contain(":3333")
 
     browser.open("http://localhost:3333/preview")
-    $(".toc-panel-header").waitTo == 'Your Product Guide'
+    standardView.docTitle.waitTo == 'Your Product Guide'
 
     znaiPreview.stop()
 }
