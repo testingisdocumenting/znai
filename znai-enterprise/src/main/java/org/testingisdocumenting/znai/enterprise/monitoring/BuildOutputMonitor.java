@@ -23,7 +23,7 @@ import org.testingisdocumenting.znai.enterprise.DocLifecycleListeners;
 import org.testingisdocumenting.znai.fs.FsUtils;
 import org.testingisdocumenting.znai.server.ServerLifecycleListener;
 import org.testingisdocumenting.znai.server.ZnaiServerConfig;
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 

@@ -16,7 +16,7 @@
 
 package org.testingisdocumenting.znai.enterprise;
 
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.util.Set;

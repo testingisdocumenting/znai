@@ -28,7 +28,7 @@ import org.testingisdocumenting.znai.server.AuthorizationHeaderBasedAuthenticati
 import org.testingisdocumenting.znai.server.HttpServerUtils;
 import org.testingisdocumenting.znai.server.ZnaiServer;
 import org.testingisdocumenting.znai.server.preview.DocumentationPreview;
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.website.ProgressReporter;
 import org.testingisdocumenting.znai.website.WebResource;
@@ -45,7 +45,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
-import java.util.Arrays;
 
 public class ZnaiCliApp {
     private final ZnaiCliConfig config;
@@ -90,7 +89,7 @@ public class ZnaiCliApp {
 
         reactJsBundle = new ReactJsBundle();
 
-        if (!config.isServeMode()) {
+        if (needsDocGeneration()) {
             generateDocs();
         }
 
@@ -104,6 +103,18 @@ public class ZnaiCliApp {
             config.getSpecifiedCustomCommand().handle(
                     new CliCommandConfig(config.getDocId(), config.getSourceRoot(), config.getDeployRoot(), config.getActor()));
         }
+    }
+
+    private boolean needsDocGeneration() {
+        if (config.isServeMode()) {
+            return false;
+        }
+
+        if (config.isCustomCommand()) {
+            return config.getSpecifiedCustomCommand().needsDocGeneration();
+        }
+
+        return true;
     }
 
     private void preview() {

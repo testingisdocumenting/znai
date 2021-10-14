@@ -14,3 +14,5 @@
 # limitations under the License.
 #
 
+org.testingisdocumenting.znai.cli.extension.upload.CliUploadCommandHandler
+org.testingisdocumenting.znai.cli.extension.upload.CliUploadZipCommandHandler

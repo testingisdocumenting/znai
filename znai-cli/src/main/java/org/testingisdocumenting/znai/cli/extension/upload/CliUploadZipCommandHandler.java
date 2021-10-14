@@ -20,16 +20,15 @@ import org.testingisdocumenting.znai.cli.extension.CliCommandConfig;
 import org.testingisdocumenting.znai.cli.extension.CliCommandHandler;
 import org.testingisdocumenting.znai.client.upload.DocUploader;
 
-public class CliUploadCommandHandler implements CliCommandHandler {
-
+public class CliUploadZipCommandHandler implements CliCommandHandler {
     @Override
     public String commandName() {
-        return "upload";
+        return "uploadzip";
     }
 
     @Override
     public String description() {
-        return "generate and upload znai documentation to the znai hub";
+        return "upload documentation to the global documentation server";
     }
 
     @Override
@@ -38,15 +37,15 @@ public class CliUploadCommandHandler implements CliCommandHandler {
             throw new IllegalArgumentException("--doc-id is required for upload");
         }
 
-        DocUploader.upload(CliUploadCfg.getServerUrl(),
+        DocUploader.uploadZip(CliUploadCfg.getServerUrl(),
                 cliCommandConfig.getDocId(),
-                cliCommandConfig.getDeployRoot().resolve(cliCommandConfig.getDocId()),
+                cliCommandConfig.getDeployRoot(),
                 cliCommandConfig.getActor());
     }
 
     @Override
     public boolean needsDocGeneration() {
-        return true;
+        return false;
     }
 
     @Override

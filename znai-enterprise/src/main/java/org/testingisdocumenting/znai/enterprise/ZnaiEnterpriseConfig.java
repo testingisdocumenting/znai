@@ -27,6 +27,7 @@ import java.util.Collections;
 import java.util.Map;
 
 public class ZnaiEnterpriseConfig {
+    private static final String ZNAI_DOC_STORAGE_PATH_KEY = "znaiDocStoragePath";
     private static final String CONFIG_FILE_NAME = "znai-enterprise.cfg";
 
     private final Path fsMonitorConfigPath;
@@ -69,7 +70,7 @@ public class ZnaiEnterpriseConfig {
     }
 
     private Path buildDocStorageRoot() {
-        String docStoragePath = configValueOrDefault("znaiDocStoragePath", "");
+        String docStoragePath = configValueOrDefault(ZNAI_DOC_STORAGE_PATH_KEY, "");
         return docStoragePath.isEmpty() ? null : Paths.get(docStoragePath);
     }
 

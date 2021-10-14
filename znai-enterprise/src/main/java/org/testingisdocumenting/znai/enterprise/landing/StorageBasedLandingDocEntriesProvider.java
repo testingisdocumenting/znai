@@ -17,7 +17,7 @@
 package org.testingisdocumenting.znai.enterprise.landing;
 
 import org.testingisdocumenting.znai.enterprise.DocLifecycleListener;
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 
 import java.util.HashMap;
 import java.util.Map;

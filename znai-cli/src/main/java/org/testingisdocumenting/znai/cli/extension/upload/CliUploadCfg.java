@@ -1,6 +1,5 @@
 /*
  * Copyright 2021 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +14,26 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.cli.extension;
+package org.testingisdocumenting.znai.cli.extension.upload;
 
-public interface CliCommandHandler {
-    String commandName();
-    String description();
-    void handle(CliCommandConfig config);
-    boolean needsDocGeneration();
-    default boolean isEnabled() {
-        return true;
+import org.apache.commons.lang3.StringUtils;
+
+class CliUploadCfg {
+    static String getServerUrl() {
+        String systemProperty = System.getProperty("znai.server.url");
+        if (StringUtils.isNotBlank(systemProperty)) {
+            return systemProperty;
+        }
+
+        String env = System.getenv().get("ZNAI_SERVER_URL");
+        if (StringUtils.isNotBlank(env)) {
+            return env;
+        }
+
+        return "";
+    }
+
+    static boolean isEnabled() {
+        return StringUtils.isNotBlank(getServerUrl());
     }
 }

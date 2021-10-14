@@ -1,3 +1,19 @@
+/*
+ * Copyright 2021 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.testingisdocumenting.znai.client.upload;
 
 
@@ -17,6 +33,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * zips and uploads znai produced docs to provided url
+ * assumes the presence of meta.json file
+ * if files are not zipped, they will be zipped
+ * @see DocHubUploader
+ */
 public class DocUploader {
     private static final String USER = System.getProperty("USER", "");
 
@@ -33,14 +55,23 @@ public class DocUploader {
     }
 
     public static void upload(String uploadUrl, String docId, Path path, String actor) {
-        actor = StringUtils.isBlank(actor) ? USER : actor;
-        new DocUploader(uploadUrl, docId, path, actor).upload();
+        new DocUploader(uploadUrl, docId, path, getActor(actor)).upload();
+    }
+
+    public static void uploadZip(String uploadUrl, String docId, Path path, String actor) {
+        new DocUploader(uploadUrl, docId, path, getActor(actor)).uploadZip();
     }
 
     private void upload() {
-        UploadPathValidator.validate(path, "index.html");
+        UploadPathValidator.validateFile(path, "index.html");
+        UploadPathValidator.validateSize(path);
         Path zipPath = zipDocs(path);
         httpPut(zipPath);
+    }
+
+    private void uploadZip() {
+        UploadPathValidator.validateSize(path);
+        httpPut(path);
     }
 
     private void httpPut(Path zipPath) {
@@ -84,5 +115,9 @@ public class DocUploader {
         zipTask.execute();
 
         return zipDestination;
+    }
+
+    private static String getActor(String actor) {
+        return StringUtils.isBlank(actor) ? USER : actor;
     }
 }

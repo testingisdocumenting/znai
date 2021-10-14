@@ -21,7 +21,7 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.html.DocPageReactProps;
 import org.testingisdocumenting.znai.html.HtmlPageAndPageProps;
 import org.testingisdocumenting.znai.reference.DocReferences;
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.structure.Footer;
 import org.testingisdocumenting.znai.structure.TocItem;
 import org.testingisdocumenting.znai.utils.FileUtils;

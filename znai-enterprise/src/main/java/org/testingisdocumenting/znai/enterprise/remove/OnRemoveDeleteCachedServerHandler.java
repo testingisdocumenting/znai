@@ -16,7 +16,6 @@
 
 package org.testingisdocumenting.znai.enterprise.remove;
 
-import org.apache.commons.lang3.StringUtils;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.enterprise.DocLifecycleListeners;
@@ -29,14 +28,6 @@ import java.nio.file.Path;
 import static org.testingisdocumenting.znai.enterprise.EnterpriseComponentsRegistry.documentationStorage;
 
 public class OnRemoveDeleteCachedServerHandler implements OnRemoveFinishedServerHandler {
-    private static final String SERVER_URL = System.getProperty("znai.server.url");
-
-    static {
-        if (StringUtils.isNotBlank(SERVER_URL)) {
-            OnRemoveFinishedServerHandlers.add(new OnRemoveDeleteCachedServerHandler());
-        }
-    }
-
     @Override
     public void onRemoveFinished(ZnaiServerConfig config, String docId, String actor) {
         Path docPath = config.getDeployRoot().resolve(docId);

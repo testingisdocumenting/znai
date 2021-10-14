@@ -1,3 +1,19 @@
+/*
+ * Copyright 2021 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.testingisdocumenting.znai.client.upload;
 
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
@@ -12,11 +28,13 @@ public class UploadPathValidator {
     private static final long MB = 1000 * 1000;
     private static final long MAX_SIZE = MAX_MB_COUNT * MB;
 
-    public static void validate(Path path, String file) {
-        if (!Files.exists(path.resolve(file))) {
-            throw new RuntimeException(String.format("no %s found in %s", file, path.toString()));
+    public static void validateFile(Path path, String file) {
+        if (!path.endsWith(".zip") && !Files.exists(path.resolve(file))) {
+            throw new RuntimeException(String.format("no %s found in %s", file, path));
         }
+    }
 
+    public static void validateSize(Path path) {
         ConsoleOutputs.out(Color.BLUE, "validating size of ", Color.PURPLE, path);
 
         long size = getSize(path);

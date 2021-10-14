@@ -23,7 +23,7 @@ import org.testingisdocumenting.znai.enterprise.DocLifecycleListener;
 import org.testingisdocumenting.znai.enterprise.authorization.groups.AuthorizationGroupResolutionServices;
 import org.testingisdocumenting.znai.server.auth.AuthorizationHandler;
 import org.testingisdocumenting.znai.server.auth.AuthorizationRequestLink;
-import org.testingisdocumenting.znai.structure.DocMeta;
+import org.testingisdocumenting.znai.core.DocMeta;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -71,7 +71,7 @@ public class EnterpriseAuthorizationHandler implements AuthorizationHandler, Doc
         Boolean present = authorizedByIds.get(new UserIdDocId(userId, docId),
                 userIdDocId -> authorized(allowedUsersAndGroups, userId));
 
-        return present == null ? false : present;
+        return present != null && present;
     }
 
     @Override
