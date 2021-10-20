@@ -1,0 +1,1 @@
+* Add [commentsType: remove](snippets/code-comments#remove-comments) to remove comments from a code snippet  

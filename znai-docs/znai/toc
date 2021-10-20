@@ -19,6 +19,7 @@ flow
 snippets
     code-snippets
     external-code-snippets
+    code-comments
     inlined-code-snippets
     api-parameters
     code-references
