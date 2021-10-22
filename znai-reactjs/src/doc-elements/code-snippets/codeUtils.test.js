@@ -21,10 +21,10 @@ import {
     enhanceMatchedTokensWithMeta,
     extractTextFromTokens,
     findTokensThatMatchExpressions,
-    isCommentToken,
+    isCommentToken, removeCommentsFromEachLine,
     splitTokensIntoLines,
     trimComment
-} from './codeUtils'
+} from "./codeUtils";
 
 import {parseCode} from './codeParser';
 
@@ -229,11 +229,11 @@ describe("codeUtils", () => {
 
         it('collapses multi line comment and attaches it to the next code line', () => {
             const tokens = parseCode('python', 'def my_func():\n' +
-                '  # comment line one \n' +
-                '  # comment line two  \n' +
-                '  a = 2    \n\n\n' +
-                '  # comment line three \n' +
-                '  a = 4')
+              '  # comment line one \n' +
+              '  # comment line two  \n' +
+              '  a = 2    \n\n\n' +
+              '  # comment line three \n' +
+              '  a = 4')
 
             const lines = splitTokensIntoLines(tokens)
             const collapsed = collapseCommentsAboveToMakeCommentOnTheCodeLine(lines)
@@ -266,6 +266,44 @@ describe("codeUtils", () => {
                     { type: 'comment', content: 'comment line three' }
                 ]
             ])
+        })
+
+        it('removes comment lines and tokens', () => {
+            const tokens = parseCode('python', 'def my_func():\n' +
+              '  # comment line one \n' +
+              '  # comment line two  \n' +
+              '  a = 2 # explanation A \n' +
+              '  # comment line three \n' +
+              '  a = 4 \n')
+
+            const lines = splitTokensIntoLines(tokens)
+
+            const withoutComments = removeCommentsFromEachLine(lines)
+            expect(withoutComments).toEqual([
+                  [
+                      { type: "keyword", content: "def" },
+                      " ",
+                      { type: "function", content: "my_func" },
+                      { type: "punctuation", content: "(" },
+                      { type: "punctuation", content: ")" },
+                      { type: "punctuation", content: ":" }
+                  ],
+                  [
+                      "  ",
+                      "a ",
+                      { type: "operator", content: "=" },
+                      " ",
+                      { type: "number", content: "2" }
+                  ],
+                  [
+                      "  ",
+                      "a ",
+                      { type: "operator", content: "=" },
+                      " ",
+                      { type: "number", content: "4" }
+                  ]
+              ]
+            )
         })
     })
 })

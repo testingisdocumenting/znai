@@ -189,6 +189,25 @@ export function collapseCommentsAboveToMakeCommentOnTheCodeLine(lines) {
     return newLines
 }
 
+export function removeCommentsFromEachLine(lines) {
+    const newLines = []
+
+    for (let idx = 0; idx < lines.length; idx++) {
+        const line = lines[idx]
+        const comment = extractCommentIfCommentOnlyLine(line)
+        if (!comment) {
+            newLines.push(removeCommentTokens(line))
+        }
+    }
+
+    return newLines
+}
+
+function removeCommentTokens(line) {
+    return lineWithTokensTrimmedOnRight(
+      line.filter(token => !isCommentToken(token)))
+}
+
 export function lineWithTokensTrimmedOnRight(line) {
     const endIdx = findEndIdx()
     if (endIdx === line.length - 1) {
@@ -217,7 +236,7 @@ function extractCommentIfCommentOnlyLine(line) {
             continue
         }
 
-        if (token.type === 'comment') {
+        if (isCommentToken(token)) {
             return trimComment(token.content)
         }
 

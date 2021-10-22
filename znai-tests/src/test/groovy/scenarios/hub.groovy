@@ -16,22 +16,11 @@
 
 package scenarios
 
-@Grapes(
-        @Grab(group='org.apache.ant', module='ant-compress', version='1.5')
-)
-import org.apache.tools.ant.Project
-import org.apache.tools.ant.taskdefs.Zip
 import org.testingisdocumenting.webtau.cli.CliBackgroundCommand
 import org.testingisdocumenting.webtau.utils.JsonUtils
 
-import java.nio.file.Files
-import java.nio.file.Path
-
 import static clicommands.CliCommands.znai
-import static org.testingisdocumenting.webtau.Matchers.contain
-import static org.testingisdocumenting.webtau.WebTauDsl.*
-import static org.testingisdocumenting.webtau.WebTauGroovyDsl.scenario
-import static org.testingisdocumenting.webtau.WebTauGroovyDsl.step
+import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 import static pages.Pages.hubPortal
 
 CliBackgroundCommand znaiBackground
@@ -71,7 +60,7 @@ scenario("generate static doc") {
     step("zipping docs") {
         def zipPath = zipParentDir.resolve("my-doc-id.zip")
         zippedDocsCache.set(zipPath.toString())
-        zip(docsDir, zipPath)
+        fs.zip(docsDir, zipPath)
     }
 }
 
@@ -105,23 +94,4 @@ scenario("stop hub") {
     if (znaiBackground) {
         znaiBackground.stop()
     }
-}
-
-// TODO replace with fs.zip after webtau upgrade
-static void zip(Path srcDir, Path dest) {
-    def task = new Zip()
-
-    task.setProject(new Project())
-    task.getProject().init()
-
-    try {
-        Files.createDirectories(dest.getParent())
-    } catch (IOException e) {
-        throw new UncheckedIOException(e)
-    }
-
-    task.setBasedir(srcDir.toAbsolutePath().toFile())
-    task.setDestFile(dest.toAbsolutePath().toFile())
-
-    task.execute()
 }

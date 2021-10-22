@@ -90,6 +90,7 @@ import {iframeDemo} from './doc-elements/iframe/Iframe.demo';
 import {cliCommandPresentationDemo} from './doc-elements/cli/PresentationCliCommand.demo';
 import {imagePresentationDemo} from './doc-elements/images/PresentationAnnotatedImage.demo';
 import { pageTocDemo } from "./doc-elements/page/PageToc.demo";
+import { codeSnippetWithRemovedCommentsDemo } from "./doc-elements/code-snippets/CodeSnippetWithRemovedComments.demo";
 
 const docMeta = {
     id: 'preview',
@@ -121,6 +122,7 @@ registries.add('text')
 registries.add('snippets')
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
     .registerAsGrid('Code Snippet With Bullets', 0, snippetsWithInlineCommentsDemo)
+    .registerAsGrid('Code Snippet Removed Comments', 0, codeSnippetWithRemovedCommentsDemo)
     .registerAsGrid('Code Snippet Syntax Highlight ', 0, syntaxHighlightSnippetDemo)
     .registerAsGrid('Code Snippet In Two Columns', 0, snippetsTwoColumns)
     .registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)

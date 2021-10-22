@@ -20,9 +20,9 @@ import * as React from "react"
 import {
     collapseCommentsAboveToMakeCommentOnTheCodeLine,
     findComments,
-    isCommentToken,
+    isCommentToken, removeCommentsFromEachLine,
     splitTokensIntoLines
-} from './codeUtils'
+} from "./codeUtils";
 import {isAllAtOnce} from '../meta/meta'
 import {convertToList} from '../propsUtils';
 
@@ -39,33 +39,45 @@ import './Snippet.css'
 
 const defaultNumberOfVisibleLines = 25
 
-const bulletCommentsType = 'inline'
+const BULLETS_COMMENT_TYPE = 'inline'
+const REMOVE_COMMENT_TYPE = 'remove'
 
 const Snippet = (props) => {
     const tokensToUse = parseCodeWithCompatibility({lang: props.lang, snippet: props.snippet, tokens: props.tokens})
 
-    const renderBulletComments = props.commentsType === bulletCommentsType;
+    const renderBulletComments = props.commentsType === BULLETS_COMMENT_TYPE;
 
     const snippetComponent = renderBulletComments ?
         CodeSnippetWithInlineComments :
         SimpleCodeSnippet
 
-    const linesOfCode = renderBulletComments ?
-        collapseCommentsAboveToMakeCommentOnTheCodeLine(splitTokensIntoLines(tokensToUse)):
-        splitTokensIntoLines(tokensToUse)
+    const lines = splitTokensIntoLines(tokensToUse);
 
-    const comments = findComments(linesOfCode)
+    const modifiedLines = modifyLinesOfCode()
+    const comments = findComments(modifiedLines)
 
     return (
         <>
             <SnippetContainer {...props}
                               tokens={tokensToUse}
-                              linesOfCode={linesOfCode}
+                              linesOfCode={modifiedLines}
                               scrollToLineIdx={scrollToLineIdx(props)}
                               snippetComponent={snippetComponent}/>
             <Explanations comments={comments} {...props}/>
         </>
     )
+
+    function modifyLinesOfCode() {
+        if (renderBulletComments) {
+            return collapseCommentsAboveToMakeCommentOnTheCodeLine(lines)
+        }
+
+        if (props.commentsType === REMOVE_COMMENT_TYPE) {
+            return removeCommentsFromEachLine(lines)
+        }
+
+        return lines
+    }
 }
 
 Snippet.defaultProps = {
@@ -73,7 +85,7 @@ Snippet.defaultProps = {
 }
 
 function Explanations({commentsType, spoiler, isPresentation, slideIdx, comments}) {
-    if (commentsType !== bulletCommentsType || isPresentation || comments.length === 0) {
+    if (commentsType !== BULLETS_COMMENT_TYPE || isPresentation || comments.length === 0) {
         return null
     }
 
@@ -105,7 +117,7 @@ const presentationSnippetHandler = {
         const tokensToUse = parseCodeWithCompatibility({lang, snippet, tokens})
         const highlightAsList = convertToList(highlight)
 
-        if (commentsType === 'inline') {
+        if (commentsType === BULLETS_COMMENT_TYPE) {
             return inlinedCommentsNumberOfSlides({meta, tokens: tokensToUse})
         }
 
@@ -137,7 +149,7 @@ const presentationSnippetHandler = {
             return {}
         }
 
-        if (commentsType !== 'inline') {
+        if (commentsType !== BULLETS_COMMENT_TYPE) {
             return {}
         }
 

@@ -19,7 +19,6 @@ package scenarios
 import clicommands.CliCommands
 
 import java.nio.file.Path
-import java.nio.file.Paths
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 import static pages.Pages.*
@@ -44,14 +43,13 @@ scenario('scaffold docs and run preview') {
 scenario('footer should be updated on footer file change') {
     standardView.footer.should == ~/Contributions are welcome/
 
-    // TODO use getAsPath() when webtau released
-    def docsPath = Paths.get(scaffoldedPathCache.get())
+    def docsPath = scaffoldedPathCache.getAsPath()
     fs.writeText(docsPath.resolve("footer.md"), "new footer")
     standardView.footer.waitTo == "new footer"
 }
 
 scenario('preview jumps to a page associated with a change') {
-    def docsPath = Paths.get(scaffoldedPathCache.get())
+    def docsPath = scaffoldedPathCache.getAsPath()
 
     standardView.pageThreeTocItem.click()
 

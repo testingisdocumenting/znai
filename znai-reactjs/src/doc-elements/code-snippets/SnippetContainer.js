@@ -136,7 +136,7 @@ class SnippetContainer extends React.Component {
 
         this.clipboard = new ClipboardJS(this.copyToClipboardNode, {
             text: () => {
-                const {tokens, linesOfCode, tokensForClipboardProvider} = this.props
+                const {linesOfCode, tokensForClipboardProvider} = this.props
                 this.setState({displayCopied: true})
                 this.startRemoveFeedbackTimer()
 
@@ -147,11 +147,7 @@ class SnippetContainer extends React.Component {
                         return tokensForClipboardProvider()
                     }
 
-                    if (tokens) {
-                        return tokens
-                    }
-
-                    return linesOfCode.reduce((acc, curr) => acc.concat(curr), [])
+                    return linesOfCode.reduce((acc, curr) => acc.concat(curr).concat("\n"), [])
                 }
             }
         })
