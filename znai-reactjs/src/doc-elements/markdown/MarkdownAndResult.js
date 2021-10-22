@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 TWO SIGMA OPEN SOURCE, LLC
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +25,7 @@ const TwoColumns = ({markdown, result, ...props}) => {
     const column2 = {content: result}
 
     return <Columns columns={[column1, column2]}
-                    config={{border: true}}
+                    config={{border: false}}
                     {...props}/>
 }
 

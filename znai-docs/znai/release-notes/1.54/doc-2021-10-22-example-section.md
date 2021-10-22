@@ -1,0 +1,1 @@
+* Doc: more examples inside [Example](introduction/example) page
