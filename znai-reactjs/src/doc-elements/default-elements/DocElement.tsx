@@ -21,7 +21,7 @@ export type ElementsLibraryMap = { [key: string]: any };
 export type DocElementContent = DocElementPayload[];
 
 export interface DocElementPayload {
-  type: "any";
+  type: any;
   content?: DocElementContent;
 }
 

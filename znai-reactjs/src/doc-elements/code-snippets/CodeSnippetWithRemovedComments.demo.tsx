@@ -41,5 +41,9 @@ function javaWithComments() {
 }
 
 function pythonWithComments() {
-  return "def method:\n" + "    # hello message\n" + "    # on multiple lines\n" + '    print("hello") # inlined\n';
+  return `def method:
+    # hello message
+    # on multiple lines
+    print("hello") # inlined
+`;
 }

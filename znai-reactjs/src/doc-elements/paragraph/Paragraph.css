@@ -55,7 +55,7 @@ not belong to the same parent node so margins won't even each other out.
     margin-right: 15px;
 }
 
-.paragraph.attention .icon-part .icon {
+.paragraph.attention .icon-part .znai-icon {
     height: 24px;
     width: 24px;
 }
