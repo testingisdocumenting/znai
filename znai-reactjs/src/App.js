@@ -91,6 +91,7 @@ import {cliCommandPresentationDemo} from './doc-elements/cli/PresentationCliComm
 import {imagePresentationDemo} from './doc-elements/images/PresentationAnnotatedImage.demo';
 import { pageTocDemo } from "./doc-elements/page/PageToc.demo";
 import { codeSnippetWithRemovedCommentsDemo } from "./doc-elements/code-snippets/CodeSnippetWithRemovedComments.demo";
+import { textBadgeDemo } from "./doc-elements/badge/TextBadge.demo";
 
 const docMeta = {
     id: 'preview',
@@ -143,6 +144,7 @@ registries.add('snippets')
     .registerAsGrid('CLI Output', 0, cliOutputDemo)
 
 registries.add('visuals')
+    .registerAsGrid('Text Badges', 0, textBadgeDemo)
     .registerAsGrid('Spoilers', 0, spoilerDemo)
     .registerAsGrid('Charts', 0, chartDemo)
     .registerAsRows('Image', imageDemo)
