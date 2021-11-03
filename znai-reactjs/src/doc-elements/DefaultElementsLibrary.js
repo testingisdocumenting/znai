@@ -79,6 +79,7 @@ import Footer from '../structure/Footer'
 import {Redirect} from '../structure/Redirect';
 import {SimpleText} from './default-elements/SimpleText';
 import { PageToc } from "./page/PageToc";
+import { TextBadge } from "./badge/TextBadge";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -120,6 +121,8 @@ presentationElementHandlers.BulletList = presentationBulletListHandler
 
 library.Icon = Icon
 library.KeyboardShortcut = KeyboardShortcut
+
+library.TextBadge = TextBadge
 
 library.OrderedList = ({delimiter, startNumber, ...props}) => <ol className="content-block" start={startNumber}>
     <props.elementsLibrary.DocElement {...props}/>
