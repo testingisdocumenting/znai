@@ -210,27 +210,27 @@ world""")
     @Test
     void "top level sections"() {
         parse("# Section\ntext text")
-        content.should == [[type: 'Section', id: "section", title: "Section", content:[
+        content.should == [[type: 'Section', id: "section", title: "Section", payload: [], content:[
                 [type: "Paragraph", content: [[type: "SimpleText", text: "text text"]]]]]]
     }
 
     @Test
     void "top level section without text"() {
         parse("# ")
-        content.should == [[type: 'Section', id: "", title: ""]]
+        content.should == [[type: 'Section', id: "", title: "", payload: []]]
     }
 
     @Test
     void "second level section"() {
         parse("## Secondary Section \ntext text")
-        content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section'],
+        content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section', payload: []],
                            [type: 'Paragraph', content: [[type: 'SimpleText', text: 'text text']]]]
     }
 
     @Test
     void "second level section without text"() {
         parse("## ")
-        content.should == [[type: 'SubHeading', level: 2, title: '', id: '']]
+        content.should == [[type: 'SubHeading', level: 2, title: '', id: '', payload: []]]
     }
 
     @Test
@@ -257,23 +257,23 @@ world""")
 ## example
         """)
 
-        content.should == [[title: 'top level section', id: 'top-level-section', type: 'Section',
-                            content: [[level: 2, title: 'example', id: 'top-level-section-example', type: 'SubHeading'],
-                                      [level: 4, title: 'java', id: 'top-level-section-example-java', type: 'SubHeading'],
-                                      [level: 3, title: 'java', id: 'top-level-section-example-java-2', type: 'SubHeading'],
-                                      [level: 2, title: 'constraint', id: 'top-level-section-constraint', type: 'SubHeading'],
-                                      [level: 3, title: 'java', id: 'top-level-section-constraint-java', type: 'SubHeading'],
-                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java', type: 'SubHeading'],
-                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java-2', type: 'SubHeading']]],
-                           [title: 'another top level', id: 'another-top-level', type: 'Section',
-                            content: [[level: 2, title: 'example', id: 'another-top-level-example', type: 'SubHeading'],
-                                      [level: 2, title: 'example', id: 'another-top-level-example-2', type: 'SubHeading']]]]
+        content.should == [[title: 'top level section', id: 'top-level-section', type: 'Section', payload: [],
+                            content: [[level: 2, title: 'example', id: 'top-level-section-example', type: 'SubHeading', payload: []],
+                                      [level: 4, title: 'java', id: 'top-level-section-example-java', type: 'SubHeading', payload: []],
+                                      [level: 3, title: 'java', id: 'top-level-section-example-java-2', type: 'SubHeading', payload: []],
+                                      [level: 2, title: 'constraint', id: 'top-level-section-constraint', type: 'SubHeading', payload: []],
+                                      [level: 3, title: 'java', id: 'top-level-section-constraint-java', type: 'SubHeading', payload: []],
+                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java', type: 'SubHeading', payload: []],
+                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java-2', type: 'SubHeading', payload: []]]],
+                           [title: 'another top level', id: 'another-top-level', type: 'Section', payload: [],
+                            content: [[level: 2, title: 'example', id: 'another-top-level-example', type: 'SubHeading', payload: []],
+                                      [level: 2, title: 'example', id: 'another-top-level-example-2', type: 'SubHeading', payload: []]]]]
     }
 
     @Test
     void "top level section with styles"() {
         code {
-            parse("# title with `backtick`")
+            parse("# title with **text**")
         } should throwException("only regular text is supported in headings")
 
         code {
@@ -284,7 +284,7 @@ world""")
     @Test
     void "second level section with styles"() {
         code {
-            parse("## title with `backtick`")
+            parse("## title with **text**")
         } should throwException("only regular text is supported in headings")
 
         code {
