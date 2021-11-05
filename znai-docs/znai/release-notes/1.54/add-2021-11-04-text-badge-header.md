@@ -1,0 +1,1 @@
+* Add [heading text badge](visuals/text-badge#part-of-heading)  

@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class NoOpParserHandler implements ParserHandler {
     @Override
-    public void onSectionStart(String title) {
+    public void onSectionStart(String title, HeadingPayloadList payloadList) {
     }
 
     @Override
@@ -37,7 +37,7 @@ public class NoOpParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSubHeading(int level, String title) {
+    public void onSubHeading(int level, String title, HeadingPayloadList payloadList) {
     }
 
     @Override

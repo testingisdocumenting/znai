@@ -21,10 +21,15 @@ import { Icon } from '../icons/Icon'
 import {presentationModeListeners} from "../presentation/PresentationModeListener";
 
 import './SectionTitle.css'
+import { DocElement } from "./DocElement";
 
-const SectionTitle = ({id, title}) => {
+const SectionTitle = ({elementsLibrary, id, title, payload}) => {
+    const payloadContent = payload ?
+      payload.map(e => e.payload) : undefined
+
     return id ? (
         <h1 className="section-title" id={id}>{title}
+            {payloadContent && <DocElement content={payloadContent} elementsLibrary={elementsLibrary}/>}
             <div className="znai-section-title-actions">
                 <a href={"#" + id}><Icon id="link"/></a>
                 <Icon id="maximize" className="znai-section-title-presentation" onClick={openPresentation}/>

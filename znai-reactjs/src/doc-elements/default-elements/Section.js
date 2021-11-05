@@ -24,11 +24,14 @@ import './Section.css'
 
 class Section extends Component {
     render() {
-        const {id, title, ...props} = this.props
+        const {id, title, payload, ...props} = this.props
 
         const sectionTitle = (
             <div className="content-block">
-                <props.elementsLibrary.SectionTitle id={id} title={title || ''}/>
+                <props.elementsLibrary.SectionTitle elementsLibrary={props.elementsLibrary}
+                                                    id={id}
+                                                    title={title || ''}
+                                                    payload={payload}/>
             </div>
         )
 

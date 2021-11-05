@@ -25,8 +25,12 @@ import org.testingisdocumenting.znai.extensions.PluginsRegexp;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
+import org.testingisdocumenting.znai.parser.HeadingPayload;
+import org.testingisdocumenting.znai.parser.HeadingPayloadList;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.include.IncludeBlock;
+import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
+import org.testingisdocumenting.znai.parser.docelement.DocElementType;
 import org.testingisdocumenting.znai.parser.table.GfmTableToTableConverter;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
@@ -36,8 +40,6 @@ import org.commonmark.node.*;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MarkdownVisitor extends AbstractVisitor {
     private final ComponentsRegistry componentsRegistry;
@@ -200,10 +202,10 @@ public class MarkdownVisitor extends AbstractVisitor {
                 parserHandler.onSectionEnd();
             }
 
-            parserHandler.onSectionStart(extractHeadingText(heading));
+            parserHandler.onSectionStart(extractHeadingText(heading), extractHeadingPayload(heading));
             sectionStarted = true;
         } else {
-            parserHandler.onSubHeading(heading.getLevel(), extractHeadingText(heading));
+            parserHandler.onSubHeading(heading.getLevel(), extractHeadingText(heading), extractHeadingPayload(heading));
         }
     }
 
@@ -256,7 +258,7 @@ public class MarkdownVisitor extends AbstractVisitor {
     }
 
     private String extractHeadingText(Heading heading) {
-        heading.accept(ValidateNoExtraSyntaxInHeadingVisitor.INSTANCE);
+        heading.accept(ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor.INSTANCE);
         Node firstChild = heading.getFirstChild();
 
         if (firstChild == null) {
@@ -271,6 +273,19 @@ public class MarkdownVisitor extends AbstractVisitor {
             return "";
         }
 
-        return ((Text) node).getLiteral();
+        return ((Text) node).getLiteral().trim();
+    }
+
+    private HeadingPayloadList extractHeadingPayload(Heading heading) {
+        HeadingPayloadList result = new HeadingPayloadList();
+        DocElementCreationParserHandler headingParser = new DocElementCreationParserHandler(componentsRegistry, path);
+        MarkdownVisitor markdownVisitor = new MarkdownVisitor(componentsRegistry, path, headingParser);
+        markdownVisitor.visitChildren(heading);
+
+        headingParser.getDocElement().contentToListOfMaps().stream()
+                .filter(c -> !c.get("type").equals(DocElementType.SIMPLE_TEXT))
+                .forEach(payload -> result.add(new HeadingPayload(payload, true)));
+
+        return result;
     }
 }

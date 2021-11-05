@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.HeadingPayloadList;
 import org.testingisdocumenting.znai.parser.NoOpParserHandler;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
@@ -44,7 +45,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
-    public void onSectionStart(String title) {
+    public void onSectionStart(String title, HeadingPayloadList payloadList) {
         pageSectionTitle = title;
     }
 
@@ -54,7 +55,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
-    public void onSubHeading(int level, String title) {
+    public void onSubHeading(int level, String title, HeadingPayloadList payloadList) {
         addSeparated(title);
     }
 

@@ -112,6 +112,15 @@ class MarkdownParserTest {
     }
 
     @Test
+    void "inlined code in header"() {
+        parse("# my header `:badge: v1.32`")
+
+        content.should == [[title: 'my header' , id: 'my-header',
+                            payload: [[attachToEnd: true, payload: [text: 'v1.32', type: 'TextBadge']]],
+                            type: 'Section']]
+    }
+
+    @Test
     void "bullet list"() {
         parse("""* entry
 * another entry
@@ -222,6 +231,14 @@ world""")
     void "second level section without text"() {
         parse("## ")
         content.should == [[type: 'SubHeading', level: 2, title: '', id: '']]
+    }
+
+    @Test
+    void "second level section with payload"() {
+        parse("## Secondary Section `:badge: v2.0` \ntext text")
+        content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section',
+                           payload: [[attachToEnd: true, payload: [text: "v2.0", type: "TextBadge"]]]],
+                           [type: 'Paragraph', content: [[type: 'SimpleText', text: 'text text']]]]
     }
 
     @Test
