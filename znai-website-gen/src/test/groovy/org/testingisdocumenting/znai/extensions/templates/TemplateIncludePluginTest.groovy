@@ -51,15 +51,15 @@ text
 # header two
 """)
 
-        content.should == [[title  : 'header one', id: 'header-one', type: 'Section',
+        content.should == [[title  : 'header one', id: 'header-one', type: 'Section', payload: [],
                             content: [[type   : 'Paragraph',
                                        content: [[text: 'text', type: 'SimpleText']]],
                                       [type: 'Paragraph', content: [[text: 'text before section', type: 'SimpleText']]]]],
-                           [title  : 'Template Header One', id: 'template-header-one', type: 'Section',
+                           [title  : 'Template Header One', id: 'template-header-one', type: 'Section', payload: [],
                             content: [[type: 'Paragraph', content: [[text: 'template body one', type: 'SimpleText']]]]],
-                           [title  : 'Template Header Two', id: 'template-header-two', type: 'Section',
+                           [title  : 'Template Header Two', id: 'template-header-two', type: 'Section', payload: [],
                             content: [[type: 'Paragraph', content: [[text: 'template body two', type: 'SimpleText']]]]],
-                           [title: 'header two', id: 'header-two', type: 'Section']]
+                           [title: 'header two', id: 'header-two', type: 'Section', payload: []]]
     }
 
     private void parse(String markdown) {
