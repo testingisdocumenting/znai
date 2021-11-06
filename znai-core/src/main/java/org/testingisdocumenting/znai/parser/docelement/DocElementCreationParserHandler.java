@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
+import org.testingisdocumenting.znai.parser.HeadingPayloadList;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.Plugin;
 import org.testingisdocumenting.znai.extensions.PluginParams;
@@ -94,7 +95,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSectionStart(String title) {
+    public void onSectionStart(String title, HeadingPayloadList payloadList) {
         currentSectionTitle = title;
 
         if (isSectionStarted) {
@@ -104,7 +105,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
         String id = new PageSectionIdTitle(title).getId();
         start(DocElementType.SECTION,
                 "title", title,
-                "id", id);
+                "id", id,
+                "payload", payloadList.toListOfMaps());
         subHeadingUniqueIdGenerator = new SubHeadingUniqueIdGenerator(id);
 
         componentsRegistry.docStructure().registerLocalAnchor(path, id);
@@ -127,16 +129,17 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSubHeading(int level, String title) {
+    public void onSubHeading(int level, String title, HeadingPayloadList payloadList) {
         String idByTitle = new PageSectionIdTitle(title).getId();
 
         subHeadingUniqueIdGenerator.registerSubHeading(level, idByTitle);
         String id = subHeadingUniqueIdGenerator.generateId();
 
         append(DocElementType.SUB_HEADING,
+                "id", id,
                 "level", level,
                 "title", title,
-                "id", id);
+                "payload", payloadList.toListOfMaps());
 
         componentsRegistry.docStructure().registerLocalAnchor(path, id);
     }

@@ -22,6 +22,7 @@ h1 {
 .section-title,
 .empty-section-title {
     display: flex;
+    align-items: center;
     font-size: 26px;
     font-weight: bold;
     color: var(--znai-section-title-color);
@@ -48,6 +49,7 @@ h1 {
 
 .znai-section-title-actions {
     display: flex;
+    align-items: center;
     flex: 1;
     justify-content: space-between;
     margin-left: 10px;

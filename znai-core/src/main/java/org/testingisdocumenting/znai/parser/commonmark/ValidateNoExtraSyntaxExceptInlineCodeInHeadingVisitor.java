@@ -18,8 +18,8 @@ package org.testingisdocumenting.znai.parser.commonmark;
 
 import org.commonmark.node.*;
 
-class ValidateNoExtraSyntaxInHeadingVisitor extends AbstractVisitor {
-    static final ValidateNoExtraSyntaxInHeadingVisitor INSTANCE = new ValidateNoExtraSyntaxInHeadingVisitor();
+class ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor extends AbstractVisitor {
+    static final ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor INSTANCE = new ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor();
 
     @Override
     public void visit(BlockQuote blockQuote) {
@@ -33,7 +33,6 @@ class ValidateNoExtraSyntaxInHeadingVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Code code) {
-        onlyRegularTextAllowed();
     }
 
     @Override

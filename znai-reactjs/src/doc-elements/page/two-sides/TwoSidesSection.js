@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +29,7 @@ const TwoSidesSection = ({elementsLibrary, id, title, content = []}) => {
         <div className="two-sides-section">
             <TwoSidesLayout>
                 <TwoSidesLayoutLeftPart>
-                    <elementsLibrary.SectionTitle id={id} title={title}/>
+                    <elementsLibrary.SectionTitle elementsLibrary={elementsLibrary} id={id} title={title}/>
                 </TwoSidesLayoutLeftPart>
 
                 <TwoSidesLayoutRightPart/>

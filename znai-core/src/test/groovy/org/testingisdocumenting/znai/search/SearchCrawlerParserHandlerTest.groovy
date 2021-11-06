@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +18,7 @@
 package org.testingisdocumenting.znai.search
 
 import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.parser.HeadingPayloadList
 import org.testingisdocumenting.znai.reference.DocReferences
 import org.junit.Before
 import org.junit.Test
@@ -31,13 +33,13 @@ class SearchCrawlerParserHandlerTest {
 
     @Test
     void "should create search entry per section"() {
-        parserHandler.onSectionStart('section one')
+        parserHandler.onSectionStart('section one', new HeadingPayloadList())
         parserHandler.onSimpleText('hello')
         parserHandler.onSnippet(PluginParams.EMPTY, '', '', 'source code')
         parserHandler.onInlinedCode('inlined term', DocReferences.EMPTY)
         parserHandler.onSectionEnd()
 
-        parserHandler.onSectionStart('section two')
+        parserHandler.onSectionStart('section two', new HeadingPayloadList())
         parserHandler.onSimpleText('world')
         parserHandler.onSnippet(PluginParams.EMPTY, '', '', 'code')
         parserHandler.onInlinedCode('broker', DocReferences.EMPTY)
@@ -87,7 +89,7 @@ class SearchCrawlerParserHandlerTest {
     }
 
     private withinSection(Closure setupCode) {
-        parserHandler.onSectionStart('section')
+        parserHandler.onSectionStart('section', new HeadingPayloadList())
         setupCode()
         parserHandler.onSectionEnd()
 

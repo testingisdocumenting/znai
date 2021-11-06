@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +22,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.HeadingPayloadList;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
@@ -31,7 +33,7 @@ import java.util.stream.Stream;
 
 public class OpenApiIncludePlugin implements IncludePlugin {
     private Path specPath;
-    private List<OpenApiOperation> operations = new ArrayList<>();
+    private final List<OpenApiOperation> operations = new ArrayList<>();
     private PluginParams pluginParams;
     private OpenApiSpec openApiSpec;
     private ParserHandler parserHandler;
@@ -107,7 +109,7 @@ public class OpenApiIncludePlugin implements IncludePlugin {
 
     private void processOperation(OpenApiOperation operation, boolean isAutoSection) {
         if (isAutoSection) {
-            parserHandler.onSectionStart(operation.getSummary());
+            parserHandler.onSectionStart(operation.getSummary(), new HeadingPayloadList());
         }
 
         Map<String, Object> props = pluginParams.getOpts().toMap();

@@ -37,8 +37,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onSectionStart(String title) {
-        list.forEach(h -> h.onSectionStart(title));
+    public void onSectionStart(String title, HeadingPayloadList payloadList) {
+        list.forEach(h -> h.onSectionStart(title, payloadList));
     }
 
     @Override
@@ -47,8 +47,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onSubHeading(int level, String title) {
-        list.forEach(h -> h.onSubHeading(level, title));
+    public void onSubHeading(int level, String title, HeadingPayloadList payloadList) {
+        list.forEach(h -> h.onSubHeading(level, title, payloadList));
     }
 
     @Override

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,12 +19,14 @@ import React from 'react'
 import {elementsLibrary} from '../DefaultElementsLibrary'
 
 export function typographyDemo(registry) {
-    const headingcontent = [headingDemo()]
-    const headingTextcontent = [headingTextDemo()]
+    const headingContent = [headingDemo()]
+    const headingPayloadContent = [headingDemoWithPayload()]
+    const headingTextContent = [headingTextDemo()]
 
     registry
-        .add('headings', () => <elementsLibrary.DocElement content={headingcontent} elementsLibrary={elementsLibrary}/>)
-        .add('headings with text', () => <elementsLibrary.DocElement content={headingTextcontent}
+        .add('headings', () => <elementsLibrary.DocElement content={headingContent} elementsLibrary={elementsLibrary}/>)
+        .add('headings with payload', () => <elementsLibrary.DocElement content={headingPayloadContent} elementsLibrary={elementsLibrary}/>)
+        .add('headings with text', () => <elementsLibrary.DocElement content={headingTextContent}
                                                                      elementsLibrary={elementsLibrary}/>)
 }
 
@@ -50,6 +53,51 @@ function headingDemo() {
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Section Heading",
                 "id": "sub-sub-sub-section-heading",
+            },
+            {
+                "level": 5,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-sub-section-heading",
+            },
+            {
+                "level": 6,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-sub-sub-section-heading"
+            }
+        ]
+    }
+}
+
+function headingDemoWithPayload() {
+    return {
+        "title": "Section Heading",
+        "id": "section-heading",
+        "type": "Section",
+        "payload": [
+          { "attachToEnd": true, "payload": { type: "TextBadge", text: "v1.20" } }
+        ],
+        "content": [
+            {
+                "level": 2,
+                "type": "SubHeading",
+                "title": "Sub-Section Heading",
+                "id": "sub-section-heading",
+                "payload": [{ "attachToEnd": true, "payload": { type: "TextBadge", text: "v2.38" } }],
+            },
+            {
+                "level": 3,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Section Heading",
+                "id": "sub-sub-section-heading",
+            },
+            {
+                "level": 4,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-section-heading",
+                "payload": [{ "attachToEnd": true, "payload": { type: "TextBadge", text: "v2.38" } }],
             },
             {
                 "level": 5,

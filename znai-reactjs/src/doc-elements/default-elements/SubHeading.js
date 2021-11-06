@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,13 +22,19 @@ import { Icon } from '../icons/Icon'
 import {PresentationHeading} from './PresentationHeading'
 
 import './SubHeading.css'
+import { DocElement } from "./DocElement";
 
-export function SubHeading({level, title, id}) {
+export function SubHeading({elementsLibrary, level, title, id, payload}) {
     const Element = `h${level}`
 
-    return (
+  const payloadContent = payload ?
+    payload.map(e => e.payload) : undefined
+
+  return (
         <Element className="content-block" id={id}>
-            <span>{title}</span>
+            <span>{title}
+              {payloadContent && <DocElement content={payloadContent} elementsLibrary={elementsLibrary}/>}
+            </span>
             <a href={"#" + id}><Icon id="link"/></a>
         </Element>
     )

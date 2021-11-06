@@ -36,11 +36,12 @@ public interface ParserHandler {
     /**
      * top level section start handler. Should be responsible for handle of closing current section (if required)
      * @param title title of a new section
+     * @param payloadList heading payload
      */
-    void onSectionStart(String title);
+    void onSectionStart(String title, HeadingPayloadList payloadList);
     void onSectionEnd();
 
-    void onSubHeading(int level, String title);
+    void onSubHeading(int level, String title, HeadingPayloadList payloadList);
     void onHardLineBreak();
     void onSoftLineBreak();
     void onParagraphStart();

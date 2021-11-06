@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +20,7 @@ package org.testingisdocumenting.znai.parser.sphinx;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.parser.HeadingPayloadList;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.sphinx.python.*;
 import org.testingisdocumenting.znai.reference.DocReferences;
@@ -37,9 +39,9 @@ import java.util.Map;
 import static org.testingisdocumenting.znai.parser.sphinx.xml.DocUtilsXmlFixer.fixDocUtilsIncorrectXml;
 
 class DocTreeDomXmlParser {
-    private ComponentsRegistry componentsRegistry;
-    private Path filePath;
-    private ParserHandler parserHandler;
+    private final ComponentsRegistry componentsRegistry;
+    private final Path filePath;
+    private final ParserHandler parserHandler;
 
     DocTreeDomXmlParser(ComponentsRegistry componentsRegistry,
                         Path filePath,
@@ -146,7 +148,7 @@ class DocTreeDomXmlParser {
     }
 
     private boolean parseSection(Node node) {
-        parserHandler.onSectionStart(extractTitle(node));
+        parserHandler.onSectionStart(extractTitle(node), new HeadingPayloadList());
         parseChildren(node);
         parserHandler.onSectionEnd();
 
