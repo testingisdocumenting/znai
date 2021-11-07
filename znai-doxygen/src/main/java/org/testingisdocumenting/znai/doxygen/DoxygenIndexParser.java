@@ -20,7 +20,6 @@ import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class DoxygenIndexParser {
     private final String content;

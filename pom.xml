@@ -105,6 +105,7 @@
         <module>znai-groovy</module>
         <module>znai-cpp</module>
         <module>znai-python</module>
+        <module>znai-doxygen</module>
         <module>znai-ecmascript</module>
         <module>znai-sphinx</module>
         <module>znai-open-api</module>

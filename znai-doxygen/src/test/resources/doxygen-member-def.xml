@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!--
+  ~ Copyright 2021 znai maintainers
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<doxygen version="1.9.2" xml:lang="en-US">
+    <compounddef id="namespaceutils_1_1nested" kind="namespace" language="C++">
+        <compoundname>utils::nested</compoundname>
+        <sectiondef kind="func">
+            <memberdef kind="function" id="funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void utils::nested::my_func</definition>
+                <argsstring>(int a)</argsstring>
+                <name>my_func</name>
+                <param>
+                    <type>int</type>
+                    <declname>a</declname>
+                </param>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                    <para>top level comment</para>
+                    <para><parameterlist kind="param"><parameteritem>
+                        <parameternamelist>
+                            <parametername>a</parametername>
+                        </parameternamelist>
+                        <parameterdescription>
+                            <para>description of param a </para>
+                        </parameterdescription>
+                    </parameteritem>
+                        <parameteritem>
+                            <parameternamelist>
+                                <parametername>b</parametername>
+                            </parameternamelist>
+                            <parameterdescription>
+                                <para>description of param b </para>
+                            </parameterdescription>
+                        </parameteritem>
+                    </parameterlist>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="src/funcs.h" line="9" column="6" bodyfile="src/funcs.h" bodystart="9" bodyend="10"/>
+            </memberdef>
+            <memberdef kind="function" id="funcs_8h_1aabd4a1a9d6b4fac39ac54692bf1807f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void utils::nested::my_func</definition>
+                <argsstring>(const std::string &amp;a)</argsstring>
+                <name>my_func</name>
+                <param>
+                    <type>const std::string &amp;</type>
+                    <declname>a</declname>
+                </param>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="src/funcs.h" line="12" column="6" bodyfile="src/funcs.h" bodystart="12" bodyend="13"/>
+            </memberdef>
+            <memberdef kind="function" id="funcs__two_8h_1ad6d71365e9e3451cf2d4872735ed95a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void utils::nested::my_func</definition>
+                <argsstring>(long a)</argsstring>
+                <name>my_func</name>
+                <param>
+                    <type>long</type>
+                    <declname>a</declname>
+                </param>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="src/funcs_two.h" line="3" column="6" bodyfile="src/funcs_two.h" bodystart="3" bodyend="4"/>
+            </memberdef>
+            <memberdef kind="function" id="funcs__two_8h_1a1533bbab3a5044ab26df876e9836d6eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void utils::nested::my_func</definition>
+                <argsstring>(double a)</argsstring>
+                <name>my_func</name>
+                <param>
+                    <type>double</type>
+                    <declname>a</declname>
+                </param>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="src/funcs_two.h" line="6" column="6" bodyfile="src/funcs_two.h" bodystart="6" bodyend="7"/>
+            </memberdef>
+        </sectiondef>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <location file="src/funcs.h" line="2" column="1"/>
+    </compounddef>
+</doxygen>

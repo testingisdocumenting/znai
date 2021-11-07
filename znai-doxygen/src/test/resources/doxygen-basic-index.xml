@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!--
+  ~ Copyright 2021 znai maintainers
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<doxygenindex xml:lang="en-US">
+    <compound refid="namespaceutils" kind="namespace"><name>utils</name>
+        <member refid="funcs_8h_1a7c6a959211f251ad4a7f39a8f87c5334" kind="function"><name>my_func</name></member>
+        <member refid="funcs_8h_1a8df3a9917facb968cc90b5b3026e6a05" kind="function"><name>my_func</name></member>
+        <member refid="funcs__two_8h_1a2a5a7433f07b07acd9ddca40c36eb7a5" kind="function"><name>my_func</name></member>
+        <member refid="funcs__two_8h_1a7b2cc5b76df2f7357aae200fe5a524ee" kind="function"><name>another_func</name></member>
+    </compound>
+</doxygenindex>
