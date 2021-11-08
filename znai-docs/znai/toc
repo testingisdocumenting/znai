@@ -27,6 +27,7 @@ snippets
     java-doc
     groovy
     python
+    doxygen
     typescript
     cpp
     json

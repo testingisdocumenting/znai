@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +18,7 @@
 package org.testingisdocumenting.znai.website;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.core.DocConfig;
 import org.testingisdocumenting.znai.core.GlobalAssetsRegistry;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.parser.MarkupParser;
@@ -25,19 +27,24 @@ import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.time.SystemTimeService;
 import org.testingisdocumenting.znai.time.TimeService;
 
+import java.nio.file.Path;
+
 public class WebSiteComponentsRegistry implements ComponentsRegistry {
     private MarkupParser defaultParser;
     private MarkdownParser markdownParser;
     private ResourcesResolver resourcesResolver;
     private DocStructure docStructure;
 
-    private GlobalAssetsRegistry assetsRegistry;
+    private final GlobalAssetsRegistry assetsRegistry;
 
-    private TimeService timeService;
+    private final TimeService timeService;
 
-    public WebSiteComponentsRegistry() {
+    private final DocConfig docConfig;
+
+    public WebSiteComponentsRegistry(Path docRootPath) {
         assetsRegistry = new GlobalAssetsRegistry();
         timeService = new SystemTimeService();
+        docConfig = new DocConfig(docRootPath);
     }
 
     @Override
@@ -58,6 +65,11 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
     @Override
     public DocStructure docStructure() {
         return docStructure;
+    }
+
+    @Override
+    public DocConfig docConfig() {
+        return docConfig;
     }
 
     @Override

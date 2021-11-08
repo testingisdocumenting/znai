@@ -45,6 +45,8 @@ public interface ComponentsRegistry {
     ResourcesResolver resourceResolver();
     DocStructure docStructure();
 
+    DocConfig docConfig();
+
     GlobalAssetsRegistry globalAssetsRegistry();
 
     TimeService timeService();
