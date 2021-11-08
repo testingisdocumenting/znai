@@ -35,15 +35,13 @@ public class Doxygen {
     private static final String INDEX_PATH_KEY = "indexPath";
 
     private DoxygenIndex doxygenIndexCached;
-    private final Path indexPath;
+    private Path indexPath;
     private FileTime indexLastModifiedTime;
 
     private final Map<String, DoxygenMember> memberByName;
 
     private Doxygen() {
         memberByName = new ConcurrentHashMap<>();
-        indexPath = extractDoxygenIndexPath();
-        buildIndex();
     }
 
     public Path getIndexPath() {
@@ -56,7 +54,7 @@ public class Doxygen {
             return cachedMember;
         }
 
-        DoxygenIndex doxygenIndex = buildIndexOrGetCached();
+        DoxygenIndex doxygenIndex = buildIndexOrGetCached(componentsRegistry);
         DoxygenIndexMember byName = doxygenIndex.findByName(nameOrFullName);
         DoxygenMember member = findAndParseMember(componentsRegistry, byName);
 
@@ -64,19 +62,25 @@ public class Doxygen {
         return member;
     }
 
-    private DoxygenIndex buildIndexOrGetCached() {
-        FileTime indexModifiedTime = FileUtils.getLastModifiedTime(indexPath);
-        if (indexModifiedTime.equals(indexLastModifiedTime)) {
-            return doxygenIndexCached;
+    private DoxygenIndex buildIndexOrGetCached(ComponentsRegistry componentsRegistry) {
+        if (indexPath != null) {
+            FileTime indexModifiedTime = FileUtils.getLastModifiedTime(indexPath);
+            if (indexModifiedTime.equals(indexLastModifiedTime)) {
+                return doxygenIndexCached;
+            }
         }
 
-        buildIndex();
+        buildIndex(componentsRegistry);
         memberByName.clear();
 
         return doxygenIndexCached;
     }
 
-    private void buildIndex() {
+    private void buildIndex(ComponentsRegistry componentsRegistry) {
+        if (indexPath == null) {
+            indexPath = extractDoxygenIndexPath(componentsRegistry);
+        }
+
         String indexXml = FileUtils.fileTextContent(indexPath);
         doxygenIndexCached = DoxygenIndexParser.parse(indexXml);
         indexLastModifiedTime = FileUtils.getLastModifiedTime(indexPath);
@@ -88,12 +92,12 @@ public class Doxygen {
                 xml, indexMember.getCompound().getId(), indexMember.getId());
     }
 
-    private Path extractDoxygenIndexPath() {
-        Path cfgPath = Paths.get(DOXYGEN_JSON_CFG_NAME);
+    private Path extractDoxygenIndexPath(ComponentsRegistry componentsRegistry) {
+        Path docRoot = componentsRegistry.docConfig().getDocRoot();
+        Path cfgPath = docRoot.resolve(DOXYGEN_JSON_CFG_NAME).toAbsolutePath();
         if (!Files.exists(cfgPath)) {
             throw new IllegalArgumentException("can't find " + DOXYGEN_JSON_CFG_NAME + " config file");
         }
-
 
         Map<String, ?> cfg = JsonUtils.deserializeAsMap(FileUtils.fileTextContent(cfgPath));
         Object indexPath = cfg.get(INDEX_PATH_KEY);
@@ -101,6 +105,6 @@ public class Doxygen {
             throw new IllegalArgumentException("can't find " + INDEX_PATH_KEY + " key that points to doxygen index.xml");
         }
 
-        return Paths.get(indexPath.toString());
+        return docRoot.resolve(indexPath.toString());
     }
 }

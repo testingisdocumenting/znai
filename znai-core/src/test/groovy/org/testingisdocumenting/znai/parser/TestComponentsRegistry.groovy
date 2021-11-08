@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +18,7 @@
 package org.testingisdocumenting.znai.parser
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry
+import org.testingisdocumenting.znai.core.DocConfig
 import org.testingisdocumenting.znai.core.GlobalAssetsRegistry
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.testingisdocumenting.znai.resources.ResourcesResolver
@@ -35,6 +37,8 @@ class TestComponentsRegistry implements ComponentsRegistry {
 
     private GlobalAssetsRegistry assetsRegistry = new GlobalAssetsRegistry()
     private TimeService timeService = new FakeTimeService()
+
+    private DocConfig docConfig = new DocConfig(Paths.get("").toAbsolutePath())
 
     TestComponentsRegistry() {
     }
@@ -61,6 +65,11 @@ class TestComponentsRegistry implements ComponentsRegistry {
     @Override
     TestDocStructure docStructure() {
         return docStructure
+    }
+
+    @Override
+    DocConfig docConfig() {
+        return docConfig
     }
 
     @Override

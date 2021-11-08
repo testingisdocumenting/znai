@@ -104,7 +104,7 @@ public class WebSite {
                 siteConfig.pageModifiedTimeStrategy : new FileBasedPageModifiedTime();
 
         registeredExtraJavaScripts = siteConfig.registeredExtraJavaScripts;
-        componentsRegistry = new WebSiteComponentsRegistry();
+        componentsRegistry = new WebSiteComponentsRegistry(siteConfig.docRootPath);
         resourceResolver = new ResourcesResolverChain();
         reactJsBundle = siteConfig.reactJsBundle;
         tocJavaScript = WebResource.withPath("toc.js");
