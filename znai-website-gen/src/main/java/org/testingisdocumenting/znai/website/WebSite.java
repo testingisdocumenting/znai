@@ -546,7 +546,7 @@ public class WebSite {
     }
 
     // each markup file may refer other files like code snippets or diagrams
-    // we maintain dependency between them so we know which one triggers what page refresh during preview mode
+    // we maintain dependency between them, so we know which one triggers what page refresh during preview mode
     //
     private void updateFilesAssociation(TocItem tocItem, List<AuxiliaryFile> newAuxiliaryFiles) {
         newAuxiliaryFiles.forEach((af) -> auxiliaryFilesRegistry.updateFileAssociations(tocItem, af));

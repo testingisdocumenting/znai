@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.doxygen;
+package org.testingisdocumenting.znai.doxygen.parser;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -32,5 +32,17 @@ public class DoxygenIndex {
 
     public Map<String, DoxygenIndexMember> getMemberById() {
         return memberById;
+    }
+
+    public DoxygenIndexMember findByName(String nameOrFullName) {
+        return memberById.values().stream()
+                .filter((m) -> matches(m, nameOrFullName))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("can't find entry with name <" + nameOrFullName + ">"));
+    }
+
+    private boolean matches(DoxygenIndexMember doxygenIndexMember, String nameOrFullName) {
+        return nameOrFullName.equals(doxygenIndexMember.getName()) ||
+                nameOrFullName.equals(doxygenIndexMember.getFullName());
     }
 }

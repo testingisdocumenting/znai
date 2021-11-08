@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.doxygen;
+package org.testingisdocumenting.znai.doxygen.parser;
 
 public class DoxygenIndexMember {
-    private final DoxygenIndexCompound parent;
+    private final DoxygenIndexCompound compound;
 
     private final String id;
     private final String kind;
     private final String name;
 
-    public DoxygenIndexMember(DoxygenIndexCompound parent, String id, String kind, String name) {
-        this.parent = parent;
+    public DoxygenIndexMember(DoxygenIndexCompound compound, String id, String kind, String name) {
+        this.compound = compound;
         this.id = id;
         this.kind = kind;
         this.name = name;
     }
 
-    public DoxygenIndexCompound getParent() {
-        return parent;
+    public DoxygenIndexCompound getCompound() {
+        return compound;
     }
 
     public String getId() {
@@ -43,6 +43,14 @@ public class DoxygenIndexMember {
     }
 
     public String getName() {
+        return name;
+    }
+
+    public String getFullName() {
+        if (!compound.getKind().equals("file")) {
+            return compound.getName() + "::" + name;
+        }
+
         return name;
     }
 }

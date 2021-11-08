@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.doxygen;
+package org.testingisdocumenting.znai.doxygen.parser;
 
 import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Document;

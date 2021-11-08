@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  ~ Copyright 2021 znai maintainers
   ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,6 +55,12 @@
         <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-python</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testingisdocumenting.znai</groupId>
+            <artifactId>znai-doxygen</artifactId>
             <version>${project.version}</version>
         </dependency>
 

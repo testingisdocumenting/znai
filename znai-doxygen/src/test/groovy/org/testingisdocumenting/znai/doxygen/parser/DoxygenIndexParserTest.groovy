@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.doxygen
+package org.testingisdocumenting.znai.doxygen.parser
 
 import org.junit.Test
 import org.testingisdocumenting.znai.utils.ResourceUtils
@@ -26,8 +26,8 @@ class DoxygenIndexParserTest {
         println index.getMemberById()
 
         def members = index.getMemberById().values()
-        members.parent.kind.should == ["namespace", "namespace", "namespace", "namespace"]
-        members.parent.name.should == ["utils", "utils", "utils", "utils"]
+        members.compound.kind.should == ["namespace", "namespace", "namespace", "namespace"]
+        members.compound.name.should == ["utils", "utils", "utils", "utils"]
 
         members.name.should == ["my_func", "my_func", "my_func", "another_func"]
     }

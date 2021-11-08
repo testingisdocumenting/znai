@@ -14,27 +14,30 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.doxygen;
+package org.testingisdocumenting.znai.doxygen.parser;
 
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class DoxygenMemberParser {
+    private final ComponentsRegistry componentsRegistry;
     private final String content;
     private final String compoundId;
     private final String id;
     private final DoxygenMember member;
 
-    private DoxygenMemberParser(String content, String compoundId, String id) {
+    private DoxygenMemberParser(ComponentsRegistry componentsRegistry, String content, String compoundId, String id) {
+        this.componentsRegistry = componentsRegistry;
         this.content = content;
         this.compoundId = compoundId;
         this.id = id;
         this.member = new DoxygenMember();
     }
 
-    public static DoxygenMember parse(String content, String compoundId, String id) {
-        DoxygenMemberParser parser = new DoxygenMemberParser(content, compoundId, id);
+    public static DoxygenMember parse(ComponentsRegistry componentsRegistry, String content, String compoundId, String id) {
+        DoxygenMemberParser parser = new DoxygenMemberParser(componentsRegistry, content, compoundId, id);
         parser.parseXml();
 
         return parser.member;
@@ -63,5 +66,7 @@ public class DoxygenMemberParser {
 
     private void parseMember(Node memberNode) {
         member.definition = XmlUtils.nodeByName(memberNode, "definition").getTextContent();
+        member.description = DoxygenDescriptionParser.parse(componentsRegistry,
+                XmlUtils.nodeByName(memberNode, "detaileddescription"));
     }
 }

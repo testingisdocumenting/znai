@@ -14,28 +14,24 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.doxygen;
+package org.testingisdocumenting.znai.doxygen.parser;
 
-public class DoxygenIndexCompound {
-    private final String id;
-    private final String kind;
-    private final String name;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-    public DoxygenIndexCompound(String id, String kind, String name) {
-        this.id = id;
-        this.kind = kind;
-        this.name = name;
+class DoxygenXmlUtils {
+    private DoxygenXmlUtils() {
     }
 
-    public String getId() {
-        return id;
-    }
+    public static String extractNameNodeText(Node parentNode) {
+        NodeList nodes = parentNode.getChildNodes();
+        for (int idx = 0; idx < nodes.getLength(); idx++) {
+            Node node = nodes.item(idx);
+            if (node.getNodeName().equals("name")) {
+                return node.getTextContent();
+            }
+        }
 
-    public String getKind() {
-        return kind;
-    }
-
-    public String getName() {
-        return name;
+        throw new IllegalArgumentException("no nested name node found in: " + parentNode);
     }
 }

@@ -14,15 +14,28 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.doxygen;
+package org.testingisdocumenting.znai.doxygen.parser;
 
-public class DoxygenMember {
-    protected String definition;
+public class DoxygenIndexCompound {
+    private final String id;
+    private final String kind;
+    private final String name;
 
-    public DoxygenMember() {
+    public DoxygenIndexCompound(String id, String kind, String name) {
+        this.id = id;
+        this.kind = kind;
+        this.name = name;
     }
 
-    public String getDefinition() {
-        return definition;
+    public String getId() {
+        return id;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public String getName() {
+        return name;
     }
 }

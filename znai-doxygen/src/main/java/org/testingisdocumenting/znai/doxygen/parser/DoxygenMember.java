@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.doxygen
+package org.testingisdocumenting.znai.doxygen.parser;
 
-import org.junit.Test
-import org.testingisdocumenting.znai.utils.ResourceUtils
+public class DoxygenMember {
+    protected String definition;
+    protected DoxygenDescription description;
 
-class DoxygenMemberParserTest {
-    @Test
-    void "should extract member definition"() {
-        def member = DoxygenMemberParser.parse(ResourceUtils.textContent("doxygen-member-def.xml"),
-                "namespaceutils_1_1nested",
-                "funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7")
+    public DoxygenMember() {
+    }
 
-        member.definition.should == "void utils::nested::my_func"
+    public String getDefinition() {
+        return definition;
+    }
+
+    public DoxygenDescription getDescription() {
+        return description;
     }
 }
