@@ -41,16 +41,7 @@
                     <parametername>a</parametername>
                 </parameternamelist>
                 <parameterdescription>
-                    <para>description of <emphasis>param</emphasis> a
-                        <orderedlist>
-                            <listitem>
-                                <para>item a</para>
-                            </listitem>
-                            <listitem>
-                                <para>item b</para>
-                            </listitem>
-                        </orderedlist>
-                    </para>
+                    <para>description of <emphasis>param</emphasis> a<orderedlist><listitem><para>item a</para></listitem><listitem><para>item b</para></listitem></orderedlist></para>
                 </parameterdescription>
             </parameteritem>
             <parameteritem>

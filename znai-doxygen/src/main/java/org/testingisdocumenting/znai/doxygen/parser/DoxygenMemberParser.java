@@ -67,6 +67,7 @@ public class DoxygenMemberParser {
     private void parseMember(Node memberNode) {
         member.definition = XmlUtils.nodeByName(memberNode, "definition").getTextContent();
         member.description = DoxygenDescriptionParser.parse(componentsRegistry,
+                id,
                 XmlUtils.nodeByName(memberNode, "detaileddescription"));
     }
 }

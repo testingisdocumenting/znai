@@ -16,24 +16,31 @@
 
 package org.testingisdocumenting.znai.doxygen.parser;
 
+import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
 import java.util.List;
 
 public class DoxygenDescription {
     private final List<DocElement> docElements;
+    private final ApiParameters apiParameters;
     private final String searchText;
 
-    public DoxygenDescription(List<DocElement> docElements, String searchText) {
+    public DoxygenDescription(List<DocElement> docElements, ApiParameters apiParameters, String withoutParametersSearchText) {
         this.docElements = docElements;
-        this.searchText = searchText;
+        this.apiParameters = apiParameters;
+        this.searchText = withoutParametersSearchText;
     }
 
     public List<DocElement> getDocElements() {
         return docElements;
     }
 
-    public String getSearchText() {
+    public String getSearchTextWithoutParameters() {
         return searchText;
+    }
+
+    public ApiParameters getApiParameters() {
+        return apiParameters;
     }
 }

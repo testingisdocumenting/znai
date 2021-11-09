@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.doxygen.parser;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
 import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Node;
@@ -26,28 +27,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoxygenDescriptionParser {
+    private final ComponentsRegistry componentsRegistry;
+    private final String paramsAnchorPrefix;
     private final Node descriptionRoot;
     private final List<String> textParts;
 
     private DocElementCreationParserHandler parserHandler;
+    private ApiParameters apiParameters;
 
-    private DoxygenDescriptionParser(Node descriptionNode) {
+    private DoxygenDescriptionParser(ComponentsRegistry componentsRegistry, String paramsAnchorPrefix, Node descriptionNode) {
+        this.componentsRegistry = componentsRegistry;
+        this.paramsAnchorPrefix = paramsAnchorPrefix;
         this.descriptionRoot = descriptionNode;
         this.textParts = new ArrayList<>();
     }
 
-    public static DoxygenDescription parse(ComponentsRegistry componentsRegistry, Node descriptionNode) {
-        DoxygenDescriptionParser parser = new DoxygenDescriptionParser(descriptionNode);
-        return parser.parseXml(componentsRegistry);
+    public static DoxygenDescription parse(ComponentsRegistry componentsRegistry,
+                                           String paramsAnchorPrefix,
+                                           Node descriptionNode) {
+        DoxygenDescriptionParser parser = new DoxygenDescriptionParser(componentsRegistry,
+                paramsAnchorPrefix,
+                descriptionNode);
+
+        return parser.parseXml();
     }
 
-    private DoxygenDescription parseXml(ComponentsRegistry componentsRegistry) {
+    private DoxygenDescription parseXml() {
         parserHandler = new DocElementCreationParserHandler(componentsRegistry, Paths.get("doxygen-xml"));
 
         parseChildren(descriptionRoot);
         parserHandler.onParsingEnd();
 
         return new DoxygenDescription(parserHandler.getDocElement().getContent(),
+                apiParameters,
                 String.join(" ", textParts));
     }
 
@@ -60,6 +72,9 @@ public class DoxygenDescriptionParser {
             parserHandler.onParagraphStart();
             parseChildren(node);
             parserHandler.onParagraphEnd();
+        } if (node.getNodeName().equals("parameterlist")) {
+            apiParameters = DoxygenDescriptionParamsParser.parseParameters(componentsRegistry, paramsAnchorPrefix, node);
+            parseChildren(node);
         } else if (node.getNodeName().equals("bold")) {
             parserHandler.onStrongEmphasisStart();
             parseChildren(node);
