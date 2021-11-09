@@ -22,3 +22,11 @@ Use `include-doxygen-doc` to extract a function description
 :include-doxygen-doc: utils::nested::my_func
 
 Note: Plugin ignores parameters block and only includes the description text
+
+# Doc Parameters
+
+Use `include-doxygen-doc-params` to extract parameters description from doxygen comments
+
+    :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }
+
+:include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }

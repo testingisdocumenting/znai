@@ -3,7 +3,7 @@
   <compound refid="namespaceutils" kind="namespace"><name>utils</name>
   </compound>
   <compound refid="namespaceutils_1_1nested" kind="namespace"><name>utils::nested</name>
-    <member refid="funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7" kind="function"><name>my_func</name></member>
+    <member refid="funcs_8h_1a5049cb5e6566fcb928af1f05dee569cd" kind="function"><name>my_func</name></member>
     <member refid="funcs_8h_1aabd4a1a9d6b4fac39ac54692bf1807f0" kind="function"><name>my_func</name></member>
     <member refid="funcs__two_8h_1ad6d71365e9e3451cf2d4872735ed95a4" kind="function"><name>my_func</name></member>
     <member refid="funcs__two_8h_1a1533bbab3a5044ab26df876e9836d6eb" kind="function"><name>my_func</name></member>
