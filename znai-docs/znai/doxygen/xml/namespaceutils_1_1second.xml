@@ -1,14 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
-  <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
-    <compoundname>src</compoundname>
-    <innerfile refid="classes_8h">classes.h</innerfile>
-    <innerfile refid="funcs_8h">funcs.h</innerfile>
-    <innerfile refid="funcs__two_8h">funcs_two.h</innerfile>
+  <compounddef id="namespaceutils_1_1second" kind="namespace" language="C++">
+    <compoundname>utils::second</compoundname>
+    <innerclass refid="classutils_1_1second_1_1MyClass" prot="public">utils::second::MyClass</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="src/"/>
+    <location file="src/classes.h" line="2" column="1"/>
   </compounddef>
 </doxygen>

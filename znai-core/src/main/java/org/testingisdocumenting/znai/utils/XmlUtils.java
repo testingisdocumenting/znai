@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -66,18 +67,24 @@ public class XmlUtils {
     }
 
     public static boolean hasNodeByName(Node parent, String name) {
-        NodeList matched = nodesListByName(parent, name);
+        NodeList matched = allNestedNodesListByName(parent, name);
         return matched.getLength() > 0;
     }
 
-    public static Node nodeByName(Node parent, String name) {
-        NodeList matched = nodesListByName(parent, name);
+    public static Node anyNestedNodeByName(Node parent, String name) {
+        NodeList matched = allNestedNodesListByName(parent, name);
 
         if (matched.getLength() == 0) {
             throw new IllegalArgumentException("expected to find element <" + name + ">");
         }
 
         return matched.item(0);
+    }
+
+    public static Node nextLevelNodeByName(Node parent, String name) {
+        return childrenNodesStreamByName(parent, name)
+                .findFirst()
+                .orElseThrow(() ->  new IllegalArgumentException("expected to find element <" + name + ">"));
     }
 
     public static void forEach(NodeList list, Consumer<Node> consumer) {
@@ -87,11 +94,25 @@ public class XmlUtils {
         }
     }
 
-    public static Stream<Node> nodesStreamByName(Node parent, String name) {
-        NodeList matched = nodesListByName(parent, name);
+    public static Stream<Node> allNestedNodesStreamByName(Node parent, String name) {
+        NodeList matched = allNestedNodesListByName(parent, name);
 
         Stream.Builder<Node> streamBuilder = Stream.builder();
         forEach(matched, streamBuilder);
+
+        return streamBuilder.build();
+    }
+
+    public static Stream<Node> childrenNodesStreamByName(Node parent, String name) {
+        Stream.Builder<Node> streamBuilder = Stream.builder();
+
+        NodeList childNodes = parent.getChildNodes();
+        for (int idx = 0; idx < childNodes.getLength(); idx++) {
+            Node node = childNodes.item(idx);
+            if (node.getNodeName().equals(name)) {
+                streamBuilder.accept(node);
+            }
+        }
 
         return streamBuilder.build();
     }
@@ -122,7 +143,7 @@ public class XmlUtils {
         return result;
     }
 
-    private static NodeList nodesListByName(Node parent, String name) {
+    private static NodeList allNestedNodesListByName(Node parent, String name) {
         return (parent instanceof Document) ?
                 ((Document) parent).getElementsByTagName(name):
                 ((Element) parent).getElementsByTagName(name);

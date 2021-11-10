@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,15 +30,15 @@ public class PythonClassXmlParser {
     }
 
     public PythonClass parseClass(Node node) {
-        Node descSignature = XmlUtils.nodeByName(node, "desc_signature");
-        Node descContent = XmlUtils.nodeByName(node, "desc_content");
-        Node description = XmlUtils.nodeByName(descContent, "paragraph");
+        Node descSignature = XmlUtils.anyNestedNodeByName(node, "desc_signature");
+        Node descContent = XmlUtils.anyNestedNodeByName(node, "desc_content");
+        Node description = XmlUtils.anyNestedNodeByName(descContent, "paragraph");
 
         pythonClass = new PythonClass(XmlUtils.getAttributeText(descSignature, "ids"),
                 XmlUtils.getAttributeText(descSignature, "fullname"),
                 description.getTextContent());
         
-        XmlUtils.nodesStreamByName(descContent, "desc").forEach(this::parseMethod);
+        XmlUtils.allNestedNodesStreamByName(descContent, "desc").forEach(this::parseMethod);
         return pythonClass;
     }
 

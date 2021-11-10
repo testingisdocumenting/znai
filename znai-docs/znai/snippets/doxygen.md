@@ -13,6 +13,8 @@ Specify `index.xml` location inside `<docroot>/doxygen.json`
 
 # Doc Comments
 
+## Functions And Methods
+
 Use `include-doxygen-doc` to extract a function description
 
 :include-file: doxygen/src/funcs.h {title: "src/funcs.h"}
@@ -22,6 +24,17 @@ Use `include-doxygen-doc` to extract a function description
 :include-doxygen-doc: utils::nested::my_func
 
 Note: Plugin ignores parameters block and only includes the description text
+
+## Classes
+
+To extract class top level comment, provide full class name
+
+:include-file: doxygen/src/classes.h {title: "src/classes.h"}
+
+    :include-doxygen-doc: utils::second::MyClass
+
+:include-doxygen-doc: utils::second::MyClass
+
 
 # Doc Parameters
 

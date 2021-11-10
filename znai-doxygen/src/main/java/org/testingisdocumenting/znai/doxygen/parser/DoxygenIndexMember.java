@@ -46,8 +46,13 @@ public class DoxygenIndexMember {
         return name;
     }
 
+    public String getCompoundName() {
+        return compound.getName();
+    }
+
     public String getFullName() {
         if (!compound.getKind().equals("file")) {
+            // TODO full name of a simple function outside namespace
             return compound.getName() + "::" + name;
         }
 

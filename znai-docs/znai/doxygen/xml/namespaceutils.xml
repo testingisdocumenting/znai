@@ -3,10 +3,11 @@
   <compounddef id="namespaceutils" kind="namespace" language="C++">
     <compoundname>utils</compoundname>
     <innernamespace refid="namespaceutils_1_1nested">utils::nested</innernamespace>
+    <innernamespace refid="namespaceutils_1_1second">utils::second</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="src/funcs.h" line="1" column="1"/>
+    <location file="src/classes.h" line="1" column="1"/>
   </compounddef>
 </doxygen>

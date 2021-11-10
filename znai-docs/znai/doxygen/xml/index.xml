@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.2" xml:lang="en-US">
+  <compound refid="classutils_1_1second_1_1MyClass" kind="class"><name>utils::second::MyClass</name>
+    <member refid="classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1" kind="function"><name>bark</name></member>
+  </compound>
   <compound refid="namespaceutils" kind="namespace"><name>utils</name>
   </compound>
   <compound refid="namespaceutils_1_1nested" kind="namespace"><name>utils::nested</name>
@@ -7,6 +10,10 @@
     <member refid="funcs_8h_1aabd4a1a9d6b4fac39ac54692bf1807f0" kind="function"><name>my_func</name></member>
     <member refid="funcs__two_8h_1ad6d71365e9e3451cf2d4872735ed95a4" kind="function"><name>my_func</name></member>
     <member refid="funcs__two_8h_1a1533bbab3a5044ab26df876e9836d6eb" kind="function"><name>my_func</name></member>
+  </compound>
+  <compound refid="namespaceutils_1_1second" kind="namespace"><name>utils::second</name>
+  </compound>
+  <compound refid="classes_8h" kind="file"><name>classes.h</name>
   </compound>
   <compound refid="funcs_8h" kind="file"><name>funcs.h</name>
     <member refid="funcs_8h_1a451470a505617c5422faf2b6df5e2d43" kind="function"><name>free_func</name></member>

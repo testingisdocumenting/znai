@@ -43,4 +43,8 @@ public class DoxygenDescription {
     public ApiParameters getApiParameters() {
         return apiParameters;
     }
+
+    public String getSearchText() {
+        return searchText;
+    }
 }
