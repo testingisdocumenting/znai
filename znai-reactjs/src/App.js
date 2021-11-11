@@ -92,6 +92,7 @@ import {imagePresentationDemo} from './doc-elements/images/PresentationAnnotated
 import { pageTocDemo } from "./doc-elements/page/PageToc.demo";
 import { codeSnippetWithRemovedCommentsDemo } from "./doc-elements/code-snippets/CodeSnippetWithRemovedComments.demo";
 import { textBadgeDemo } from "./doc-elements/badge/TextBadge.demo";
+import { doxygenMemberDemo } from "./doc-elements/doxygen/DoxygenMember.demo";
 
 const docMeta = {
     id: 'preview',
@@ -142,6 +143,9 @@ registries.add('snippets')
     .registerAsGrid('Jupyter', 0, jupyterDemo)
     .registerAsGrid('CLI Command', 0, cliCommandDemo)
     .registerAsGrid('CLI Output', 0, cliOutputDemo)
+
+registries.add('doxygen')
+  .registerAsRows('member', doxygenMemberDemo)
 
 registries.add('visuals')
     .registerAsGrid('Text Badges', 0, textBadgeDemo)

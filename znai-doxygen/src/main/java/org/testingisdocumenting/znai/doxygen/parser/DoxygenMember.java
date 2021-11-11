@@ -16,18 +16,46 @@
 
 package org.testingisdocumenting.znai.doxygen.parser;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class DoxygenMember {
-    protected String definition;
+    protected String compoundName;
+    protected String name;
+    protected DoxygenTextWithLinks returnType;
+    protected List<DoxygenParameter> parameters;
     protected DoxygenDescription description;
 
     public DoxygenMember() {
-    }
-
-    public String getDefinition() {
-        return definition;
+        parameters = new ArrayList<>();
     }
 
     public DoxygenDescription getDescription() {
         return description;
+    }
+
+    public void addParameter(String name, DoxygenTextWithLinks type) {
+        parameters.add(new DoxygenParameter(name, type));
+    }
+
+    public String getCompoundName() {
+        return compoundName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("compoundName", compoundName);
+        result.put("name", name);
+        result.put("returnType", returnType.toListOfMaps());
+        result.put("parameters", parameters.stream().map(DoxygenParameter::toMap).collect(Collectors.toList()));
+
+        return result;
     }
 }

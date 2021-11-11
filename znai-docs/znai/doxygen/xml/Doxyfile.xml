@@ -202,7 +202,7 @@
   <option  id='ALPHABETICAL_INDEX' default='yes' type='bool'><value>YES</value></option>
   <option  id='IGNORE_PREFIX' default='yes' type='stringlist'>
   </option>
-  <option  id='GENERATE_HTML' default='no' type='bool'><value>NO</value></option>
+  <option  id='GENERATE_HTML' default='yes' type='bool'><value>YES</value></option>
   <option  id='HTML_OUTPUT' default='yes' type='string'><value><![CDATA[html]]></value></option>
   <option  id='HTML_FILE_EXTENSION' default='yes' type='string'><value><![CDATA[.html]]></value></option>
   <option  id='HTML_HEADER' default='yes' type='string'><value><![CDATA[]]></value></option>

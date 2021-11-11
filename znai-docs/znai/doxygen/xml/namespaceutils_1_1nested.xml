@@ -73,6 +73,62 @@
         </inbodydescription>
         <location file="src/funcs.h" line="20" column="6" bodyfile="src/funcs.h" bodystart="20" bodyend="21"/>
       </memberdef>
+      <memberdef kind="function" id="funcs__three_8h_1a4932db5d1f6b4553535635906bffa3a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref></type>
+        <definition>utils::second::MyClass utils::nested::another_func</definition>
+        <argsstring>(const utils::second::MyClass &amp;one, const utils::second::AnotherClass &amp;two)</argsstring>
+        <name>another_func</name>
+        <param>
+          <type>const <ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref> &amp;</type>
+          <declname>one</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">utils::second::AnotherClass</ref> &amp;</type>
+          <declname>two</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>one</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>instance of my class </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>two</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>instance of another class </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/funcs_three.h" line="7" column="24" bodyfile="src/funcs_three.h" bodystart="7" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="funcs__three_8h_1a1533bbab3a5044ab26df876e9836d6eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void utils::nested::my_func</definition>
+        <argsstring>(double a)</argsstring>
+        <name>my_func</name>
+        <param>
+          <type>double</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/funcs_three.h" line="10" column="6" bodyfile="src/funcs_three.h" bodystart="10" bodyend="11"/>
+      </memberdef>
       <memberdef kind="function" id="funcs__two_8h_1ad6d71365e9e3451cf2d4872735ed95a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void utils::nested::my_func</definition>
@@ -89,23 +145,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="src/funcs_two.h" line="3" column="6" bodyfile="src/funcs_two.h" bodystart="3" bodyend="4"/>
-      </memberdef>
-      <memberdef kind="function" id="funcs__two_8h_1a1533bbab3a5044ab26df876e9836d6eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void utils::nested::my_func</definition>
-        <argsstring>(double a)</argsstring>
-        <name>my_func</name>
-        <param>
-          <type>double</type>
-          <declname>a</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="src/funcs_two.h" line="6" column="6" bodyfile="src/funcs_two.h" bodystart="6" bodyend="7"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

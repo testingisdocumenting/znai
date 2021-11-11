@@ -51,6 +51,8 @@ public class DoxygenMemberParser {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("can't find compound with id: " + compoundId));
 
+        member.compoundName = XmlUtils.nextLevelNodeByName(compoundRoot, "compoundname").getTextContent();
+
         XmlUtils.childrenNodesStreamByName(compoundRoot, "sectiondef")
                 .forEach(this::parseSection);
     }
@@ -65,7 +67,15 @@ public class DoxygenMemberParser {
     }
 
     private void parseMember(Node memberNode) {
-        member.definition = XmlUtils.anyNestedNodeByName(memberNode, "definition").getTextContent();
+        member.name = XmlUtils.nextLevelNodeByName(memberNode, "name").getTextContent();
+        member.returnType = DoxygenTextWithLinksParser.parse(XmlUtils.nextLevelNodeByName(memberNode, "type"));
+
+        XmlUtils.allNestedNodesStreamByName(memberNode, "param").forEach((paramNode) -> {
+            String name = XmlUtils.nextLevelNodeByName(paramNode, "declname").getTextContent();
+            DoxygenTextWithLinks type = DoxygenTextWithLinksParser.parse(XmlUtils.nextLevelNodeByName(paramNode, "type"));
+            member.addParameter(name, type);
+        });
+
         member.description = DoxygenDescriptionParser.parse(componentsRegistry,
                 id,
                 XmlUtils.anyNestedNodeByName(memberNode, "detaileddescription"));

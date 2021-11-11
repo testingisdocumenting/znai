@@ -1,0 +1,56 @@
+/*
+ * Copyright 2021 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.znai-doxygen-member {
+    display: flex;
+    font-family: var(--znai-code-font-family);
+    font-size: var(--znai-code-text-size);
+}
+
+.znai-doxygen-member-full-name {
+    display: flex;
+}
+
+.znai-doxygen-member-name {
+    color: var(--znai-code-keyword-color);
+}
+
+.znai-doxygen-member-params,
+.znai-doxygen-member-param {
+    display: flex;
+}
+
+.znai-doxygen-member-params {
+    flex-wrap: wrap;
+}
+
+.znai-doxygen-member-return,
+.znai-doxygen-member-param-type {
+    margin-right: 8px;
+}
+
+.znai-doxygen-member-param-type {
+    color: var(--znai-code-class-color);
+}
+
+.znai-doxygen-member-param-name {
+    color: var(--znai-code-property-color);
+}
+
+.znai-doxygen-member-params-separator {
+    white-space: pre;
+    color: var(--znai-code-punctuation-color)
+}
