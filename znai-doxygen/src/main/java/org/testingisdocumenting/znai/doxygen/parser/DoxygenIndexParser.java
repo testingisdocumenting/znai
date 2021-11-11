@@ -47,7 +47,7 @@ public class DoxygenIndexParser {
     }
 
     private void parseCompoundNodes() {
-        XmlUtils.nodesStreamByName(indexNode, "compound")
+        XmlUtils.allNestedNodesStreamByName(indexNode, "compound")
                 .forEach((compoundNode) -> {
                     NamedNodeMap attributes = compoundNode.getAttributes();
                     currentCompound = new DoxygenIndexCompound(
@@ -55,12 +55,13 @@ public class DoxygenIndexParser {
                             attributes.getNamedItem("kind").getTextContent(),
                             DoxygenXmlUtils.extractNameNodeText(compoundNode));
 
+                    index.addCompound(currentCompound);
                     extractMembers(compoundNode);
                 });
     }
 
     private void extractMembers(Node compoundNode) {
-        XmlUtils.nodesStreamByName(compoundNode, "member")
+        XmlUtils.allNestedNodesStreamByName(compoundNode, "member")
                 .forEach((memberNode) -> {
                     NamedNodeMap attributes = memberNode.getAttributes();
                     DoxygenIndexMember member = new DoxygenIndexMember(
@@ -69,11 +70,11 @@ public class DoxygenIndexParser {
                             attributes.getNamedItem("kind").getTextContent(),
                             DoxygenXmlUtils.extractNameNodeText(memberNode));
 
-                    index.add(member);
+                    index.addMember(member);
                 });
     }
 
     private Node findRoot() {
-        return XmlUtils.nodeByName(document, "doxygenindex");
+        return XmlUtils.nextLevelNodeByName(document, "doxygenindex");
     }
 }

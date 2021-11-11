@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="classutils_1_1second_1_1MyClass" kind="class" language="C++" prot="public">
+    <compoundname>utils::second::MyClass</compoundname>
+    <includes refid="classes_8h" local="no">classes.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void utils::second::MyClass::bark</definition>
+        <argsstring>()</argsstring>
+        <name>bark</name>
+        <briefdescription>
+<para>bark </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/classes.h" line="10" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><bold>Domain</bold> specific context setting. Describes business setting and requirements. </para>
+    </detaileddescription>
+    <location file="src/classes.h" line="7" column="1" bodyfile="src/classes.h" bodystart="7" bodyend="11"/>
+    <listofallmembers>
+      <member refid="classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1" prot="public" virt="non-virtual"><scope>utils::second::MyClass</scope><name>bark</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

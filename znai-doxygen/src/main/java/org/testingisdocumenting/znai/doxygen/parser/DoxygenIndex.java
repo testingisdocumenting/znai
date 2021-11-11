@@ -18,31 +18,56 @@ package org.testingisdocumenting.znai.doxygen.parser;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DoxygenIndex {
+    private final Map<String, DoxygenIndexCompound> compoundById;
     private final Map<String, DoxygenIndexMember> memberById;
 
     public DoxygenIndex() {
+        this.compoundById = new LinkedHashMap<>();
         this.memberById = new LinkedHashMap<>();
     }
 
-    public void add(DoxygenIndexMember member) {
+    public void addCompound(DoxygenIndexCompound compound) {
+        compoundById.put(compound.getId(), compound);
+    }
+
+    public void addMember(DoxygenIndexMember member) {
         memberById.put(member.getId(), member);
+    }
+
+    public Map<String, DoxygenIndexCompound> getCompoundById() {
+        return compoundById;
     }
 
     public Map<String, DoxygenIndexMember> getMemberById() {
         return memberById;
     }
 
-    public DoxygenIndexMember findByName(String nameOrFullName) {
-        return memberById.values().stream()
-                .filter((m) -> matches(m, nameOrFullName))
+    public DoxygenIndexCompound findCompoundByName(String fullName) {
+        return compoundById.values().stream()
+                .filter((c) -> fullName.equals(c.getName()))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("can't find entry with name <" + nameOrFullName + ">"));
+                .orElse(null);
     }
 
-    private boolean matches(DoxygenIndexMember doxygenIndexMember, String nameOrFullName) {
-        return nameOrFullName.equals(doxygenIndexMember.getName()) ||
-                nameOrFullName.equals(doxygenIndexMember.getFullName());
+    public DoxygenIndexMember findMemberByName(String fullName) {
+        return memberById.values().stream()
+                .filter((m) -> fullName.equals(m.getFullName()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public String renderAvailableNames() {
+        return Stream.concat(
+                        compoundById.values().stream()
+                                .filter(c -> !c.getKind().equals("file"))
+                                .map(DoxygenIndexCompound::getName),
+                        memberById.values().stream().map(DoxygenIndexMember::getFullName))
+                .sorted()
+                .distinct()
+                .collect(Collectors.joining("\n"));
     }
 }

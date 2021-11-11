@@ -22,4 +22,10 @@
         <member refid="funcs__two_8h_1a2a5a7433f07b07acd9ddca40c36eb7a5" kind="function"><name>my_func</name></member>
         <member refid="funcs__two_8h_1a7b2cc5b76df2f7357aae200fe5a524ee" kind="function"><name>another_func</name></member>
     </compound>
+    <compound refid="classutils_1_1second_1_1MyClass" kind="class"><name>utils::second::MyClass</name>
+        <member refid="classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1" kind="function"><name>bark</name></member>
+    </compound>
+    <compound refid="funcs_8h" kind="file"><name>funcs.h</name>
+        <member refid="funcs_8h_1a451470a505617c5422faf2b6df5e2d43" kind="function"><name>free_func</name></member>
+    </compound>
 </doxygenindex>

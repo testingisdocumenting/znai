@@ -68,10 +68,10 @@ class DoxygenDescriptionParserTest {
     }
 
     private static DoxygenDescription parseDescription(String resourceName) {
-        def descRoot = XmlUtils.nodeByName(
+        def descRoot = XmlUtils.anyNestedNodeByName(
                 XmlUtils.parseXml(ResourceUtils.textContent(resourceName)),
                 "detaileddescription")
 
-        def desc = DoxygenDescriptionParser.parse(TEST_COMPONENTS_REGISTRY, "params_anchor", descRoot)
+        return DoxygenDescriptionParser.parse(TEST_COMPONENTS_REGISTRY, "params_anchor", descRoot)
     }
 }

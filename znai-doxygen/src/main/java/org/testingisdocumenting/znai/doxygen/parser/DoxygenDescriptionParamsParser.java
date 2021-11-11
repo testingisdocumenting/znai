@@ -47,17 +47,17 @@ public class DoxygenDescriptionParamsParser {
     }
 
     private void parseXml() {
-        XmlUtils.nodesStreamByName(node, "parameteritem").forEach(this::handleParam);
+        XmlUtils.allNestedNodesStreamByName(node, "parameteritem").forEach(this::handleParam);
     }
 
     private void handleParam(Node paramItem) {
-        Node nameAndType = XmlUtils.nodeByName(paramItem, "parameternamelist");
-        String name = XmlUtils.nodeByName(nameAndType, "parametername").getTextContent();
+        Node nameAndType = XmlUtils.nextLevelNodeByName(paramItem, "parameternamelist");
+        String name = XmlUtils.nextLevelNodeByName(nameAndType, "parametername").getTextContent();
         String type = XmlUtils.hasNodeByName(nameAndType, "parametertype") ?
-                XmlUtils.nodeByName(nameAndType, "parametertype").getTextContent() :
+                XmlUtils.nextLevelNodeByName(nameAndType, "parametertype").getTextContent() :
                 "";
 
-        Node descriptionNode = XmlUtils.nodeByName(paramItem, "parameterdescription");
+        Node descriptionNode = XmlUtils.nextLevelNodeByName(paramItem, "parameterdescription");
         DoxygenDescription paramDescription = DoxygenDescriptionParser.parse(componentsRegistry,
                 anchorPrefix + "_",
                 descriptionNode);

@@ -23,7 +23,6 @@ import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -39,30 +38,54 @@ public class Doxygen {
     private FileTime indexLastModifiedTime;
 
     private final Map<String, DoxygenMember> memberByName;
+    private final Map<String, DoxygenCompound> compoundByName;
 
     private Doxygen() {
         memberByName = new ConcurrentHashMap<>();
+        compoundByName = new ConcurrentHashMap<>();
     }
 
     public Path getIndexPath() {
         return indexPath;
     }
 
-    public DoxygenMember getCachedOrFindAndParseMember(ComponentsRegistry componentsRegistry, String nameOrFullName) {
-        DoxygenMember cachedMember = memberByName.get(nameOrFullName);
+    public DoxygenMember getCachedOrFindAndParseMember(ComponentsRegistry componentsRegistry, String fullName) {
+        DoxygenMember cachedMember = memberByName.get(fullName);
         if (cachedMember != null) {
             return cachedMember;
         }
 
         DoxygenIndex doxygenIndex = buildIndexOrGetCached(componentsRegistry);
-        DoxygenIndexMember byName = doxygenIndex.findByName(nameOrFullName);
-        DoxygenMember member = findAndParseMember(componentsRegistry, byName);
+        DoxygenIndexMember indexMember = doxygenIndex.findMemberByName(fullName);
+        if (indexMember == null) {
+            return null;
+        }
 
-        memberByName.put(nameOrFullName, member);
+        DoxygenMember member = findAndParseMember(componentsRegistry, indexMember);
+
+        this.memberByName.put(fullName, member);
         return member;
     }
 
-    private DoxygenIndex buildIndexOrGetCached(ComponentsRegistry componentsRegistry) {
+    public DoxygenCompound getCachedOrFindAndParseCompound(ComponentsRegistry componentsRegistry, String fullName) {
+        DoxygenCompound cachedCompound = compoundByName.get(fullName);
+        if (cachedCompound != null) {
+            return cachedCompound;
+        }
+
+        DoxygenIndex doxygenIndex = buildIndexOrGetCached(componentsRegistry);
+        DoxygenIndexCompound indexCompound = doxygenIndex.findCompoundByName(fullName);
+        if (indexCompound == null) {
+            return null;
+        }
+
+        DoxygenCompound compound = findAndParseCompound(componentsRegistry, indexCompound);
+
+        this.compoundByName.put(fullName, compound);
+        return compound;
+    }
+
+    public DoxygenIndex buildIndexOrGetCached(ComponentsRegistry componentsRegistry) {
         if (indexPath != null) {
             FileTime indexModifiedTime = FileUtils.getLastModifiedTime(indexPath);
             if (indexModifiedTime.equals(indexLastModifiedTime)) {
@@ -72,6 +95,7 @@ public class Doxygen {
 
         buildIndex(componentsRegistry);
         memberByName.clear();
+        compoundByName.clear();
 
         return doxygenIndexCached;
     }
@@ -90,6 +114,11 @@ public class Doxygen {
         String xml = FileUtils.fileTextContent(indexPath.getParent().resolve(indexMember.getCompound().getId() + ".xml"));
         return DoxygenMemberParser.parse(componentsRegistry,
                 xml, indexMember.getCompound().getId(), indexMember.getId());
+    }
+
+    private DoxygenCompound findAndParseCompound(ComponentsRegistry componentsRegistry, DoxygenIndexCompound indexCompound) {
+        String xml = FileUtils.fileTextContent(indexPath.getParent().resolve(indexCompound.getId() + ".xml"));
+        return DoxygenCompoundParser.parse(componentsRegistry, xml, indexCompound.getId());
     }
 
     private Path extractDoxygenIndexPath(ComponentsRegistry componentsRegistry) {

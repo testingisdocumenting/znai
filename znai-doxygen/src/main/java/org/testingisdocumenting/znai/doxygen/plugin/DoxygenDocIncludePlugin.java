@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.doxygen.plugin;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.Doxygen;
+import org.testingisdocumenting.znai.doxygen.parser.DoxygenCompound;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMember;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
@@ -32,6 +33,7 @@ import java.util.stream.Stream;
 
 public class DoxygenDocIncludePlugin implements IncludePlugin {
     private DoxygenMember member;
+    private DoxygenCompound compound;
 
     @Override
     public String id() {
@@ -45,15 +47,31 @@ public class DoxygenDocIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
-        member = Doxygen.INSTANCE.getCachedOrFindAndParseMember(componentsRegistry,
-                pluginParams.getFreeParam());
+        Doxygen doxygen = Doxygen.INSTANCE;
 
-        return PluginResult.docElements(member.getDescription().getDocElements().stream());
+        String fullName = pluginParams.getFreeParam();
+        compound = doxygen.getCachedOrFindAndParseCompound(componentsRegistry,
+                fullName);
+
+        member = doxygen.getCachedOrFindAndParseMember(componentsRegistry,
+                fullName);
+
+        if (compound == null && member == null) {
+            throw new RuntimeException("can't find entry: " + fullName + ", available names:\n" +
+                    doxygen.buildIndexOrGetCached(componentsRegistry).renderAvailableNames());
+        }
+
+        return PluginResult.docElements(
+                member != null ?
+                        member.getDescription().getDocElements().stream():
+                        compound.getDescription().getDocElements().stream());
     }
 
     @Override
     public SearchText textForSearch() {
-        return SearchScore.HIGH.text(member.getDescription().getSearchTextWithoutParameters());
+        return member != null ?
+                SearchScore.HIGH.text(member.getDescription().getSearchTextWithoutParameters()):
+                SearchScore.HIGH.text(compound.getDescription().getSearchTextWithoutParameters());
     }
 
     @Override
