@@ -11,7 +11,7 @@ Specify `index.xml` location inside `<docroot>/doxygen.json`
 
 :include-file: doxygen.json {autoTitle: true}
 
-# Doc Comments
+# Extract Comment Text
 
 ## Functions And Methods
 
@@ -35,11 +35,19 @@ To extract class top level comment, provide full class name
 
 :include-doxygen-doc: utils::second::MyClass
 
+# Member Signature
 
-# Doc Parameters
+Use `include-doxygen-member` to render member signature
+
+    :include-doxygen-member: utils::nested::my_func
+
+:include-doxygen-member: utils::nested::my_func 
+
+# Extract Comment Parameters
 
 Use `include-doxygen-doc-params` to extract parameters description from doxygen comments
 
     :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }
 
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }
+

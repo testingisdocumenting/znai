@@ -29,6 +29,15 @@ class DoxygenMemberParserTest {
                 "namespaceutils_1_1nested",
                 "funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7")
 
-        member.definition.should == "void utils::nested::my_func"
+        member.compoundName.should == 'utils::nested'
+        member.name.should == 'my_func'
+
+        member.returnType.toListOfMaps().should == [[text: "utils::second::MyClass", refId: "classutils_1_1second_1_1MyClass"]]
+        member.parameters*.toMap().should == [[name: "one", type: [[text: "const ", refId: ""],
+                                                                   [text: "utils::second::MyClass", refId: "classutils_1_1second_1_1MyClass"],
+                                                                   [text: " &", refId: ""]]],
+                                              [name: "two", type: [[text: "const ", refId: ""],
+                                                                   [text: "utils::second::AnotherClass", refId: "classutils_1_1second_1_1AnotherClass"],
+                                                                   [text: " &", refId: ""]]]]
     }
 }

@@ -1,1 +1,1 @@
-* Add [doxygen docs params](snippets/doxygen#doc-parameters) to embed as [API parameters](snippets/api-parameters)
+* Add [doxygen docs params](snippets/doxygen#extract-comment-parameters) to embed as [API parameters](snippets/api-parameters)

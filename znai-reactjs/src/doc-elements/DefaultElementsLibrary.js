@@ -80,6 +80,7 @@ import {Redirect} from '../structure/Redirect';
 import {SimpleText} from './default-elements/SimpleText';
 import { PageToc } from "./page/PageToc";
 import { TextBadge } from "./badge/TextBadge";
+import { DoxygenMember } from "./doxygen/DoxygenMember";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -171,6 +172,8 @@ presentationElementHandlers.Json = presentationJson
 
 library.Xml = Xml
 presentationElementHandlers.Xml = presentationXml
+
+library.DoxygenMember = DoxygenMember
 
 library.JsxGroup = JsxGroup
 

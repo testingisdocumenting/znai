@@ -1,1 +1,1 @@
-* Add [doxygen docs](snippets/doxygen#doc-comments) to embed comments text  
+* Add [doxygen docs](snippets/doxygen#extract-comment-text) to embed comments text  

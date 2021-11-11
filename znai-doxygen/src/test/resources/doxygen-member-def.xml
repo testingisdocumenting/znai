@@ -20,32 +20,35 @@
         <compoundname>utils::nested</compoundname>
         <sectiondef kind="func">
             <memberdef kind="function" id="funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-                <type>void</type>
-                <definition>void utils::nested::my_func</definition>
-                <argsstring>(int a)</argsstring>
+                <type><ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref></type>
+                <definition>utils::second::MyClass utils::nested::another_func</definition>
+                <argsstring>(const utils::second::MyClass &amp;one, const utils::second::AnotherClass &amp;two)</argsstring>
                 <name>my_func</name>
                 <param>
-                    <type>int</type>
-                    <declname>a</declname>
+                    <type>const <ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref> &amp;</type>
+                    <declname>one</declname>
+                </param>
+                <param>
+                    <type>const <ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">utils::second::AnotherClass</ref> &amp;</type>
+                    <declname>two</declname>
                 </param>
                 <briefdescription>
                 </briefdescription>
                 <detaileddescription>
-                    <para>top level comment</para>
                     <para><parameterlist kind="param"><parameteritem>
                         <parameternamelist>
-                            <parametername>a</parametername>
+                            <parametername>one</parametername>
                         </parameternamelist>
                         <parameterdescription>
-                            <para>description of param a </para>
+                            <para>instance of my class </para>
                         </parameterdescription>
                     </parameteritem>
                         <parameteritem>
                             <parameternamelist>
-                                <parametername>b</parametername>
+                                <parametername>two</parametername>
                             </parameternamelist>
                             <parameterdescription>
-                                <para>description of param b </para>
+                                <para>instance of another class </para>
                             </parameterdescription>
                         </parameteritem>
                     </parameterlist>
