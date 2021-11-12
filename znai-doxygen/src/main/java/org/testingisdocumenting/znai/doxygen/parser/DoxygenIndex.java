@@ -61,18 +61,28 @@ public class DoxygenIndex {
     }
 
     public String renderAvailableNames() {
-        return renderNames(Stream.concat(
-                        compoundById.values().stream()
-                                .filter(c -> !c.getKind().equals("file"))
-                                .map(DoxygenIndexCompound::getName),
-                        memberById.values().stream().map(DoxygenIndexMember::getFullName)));
+        return renderNames(Stream.concat(availableCompoundNamesStream(), availableMemberNamesStream()));
     }
 
     public String renderAvailableMemberNames() {
-        return renderNames(memberById.values().stream().map(DoxygenIndexMember::getFullName));
+        return renderNames(availableMemberNamesStream());
+    }
+
+    public String renderAvailableCompoundNames() {
+        return renderNames(availableMemberNamesStream());
     }
 
     private String renderNames(Stream<String> names) {
         return names.sorted().distinct().collect(Collectors.joining("\n"));
+    }
+
+    private Stream<String> availableMemberNamesStream() {
+        return memberById.values().stream().map(DoxygenIndexMember::getFullName);
+    }
+
+    private Stream<String> availableCompoundNamesStream() {
+        return compoundById.values().stream()
+                .filter(c -> !DoxygenUtils.compoundNameOrEmptyForFile(c.getKind(), c.getName()).isEmpty())
+                .map(DoxygenIndexCompound::getName);
     }
 }

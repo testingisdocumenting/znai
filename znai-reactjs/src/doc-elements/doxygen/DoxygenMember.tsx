@@ -35,8 +35,13 @@ export function DoxygenMember({ compoundName, name, returnType, parameters }: Pr
         <DoxygenTextWithLinks text={returnType} />
       </div>
       <div className="znai-doxygen-member-full-name">
-        <div className="znai-doxygen-member-compound-name">{compoundName}</div>
-        <div className="znai-doxygen-member-name-separator">::</div>
+        {compoundName && (
+          <>
+            <div className="znai-doxygen-member-compound-name">{compoundName}</div>
+            <div className="znai-doxygen-member-name-separator">::</div>
+          </>
+        )}
+
         <div className="znai-doxygen-member-name">{name}</div>
         <div className="znai-doxygen-member-params">
           <div className="znai-doxygen-member-params-separator">(</div>

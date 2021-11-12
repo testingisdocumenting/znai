@@ -122,7 +122,8 @@ public class XmlUtils {
     }
 
     public static String getAttributeText(Node node, String name) {
-        return node.getAttributes().getNamedItem(name).getTextContent();
+        Node namedItem = node.getAttributes().getNamedItem(name);
+        return namedItem != null ? namedItem.getTextContent() : null;
     }
 
     public static String getAttributeText(Node node, String name, String defaultValue) {

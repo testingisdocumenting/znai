@@ -15,11 +15,22 @@
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="7" refid="classutils_1_1second_1_1AnotherClass" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">AnotherClass</ref><sp/>{</highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="10" refid="classutils_1_1second_1_1AnotherClass_1afe1b68c81af47834b78679d80401631d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1AnotherClass_1afe1b68c81af47834b78679d80401631d" kindref="member">sing</ref>();</highlight></codeline>
-<codeline lineno="11"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="14"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="10" refid="classutils_1_1second_1_1AnotherClass_1a5126e99df34cb7a3d702193dc3511114" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1AnotherClass_1a5126e99df34cb7a3d702193dc3511114" kindref="member">number_of_sounds</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>counter;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="classutils_1_1second_1_1AnotherClass_1a204e9b29b851102ef16951cddc42ea63" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1AnotherClass_1a204e9b29b851102ef16951cddc42ea63" kindref="member">sing</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>tone,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>volume);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="classutils_1_1second_1_1AnotherClass_1a583e410fbb93deef48631f0a7382e7fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1AnotherClass_1a583e410fbb93deef48631f0a7382e7fd" kindref="member">bark</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>tone,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>volume);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="35" refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" kindref="member">help</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>tone,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>volume);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="src/classes_two.h"/>
   </compounddef>

@@ -51,3 +51,10 @@ Use `include-doxygen-doc-params` to extract parameters description from doxygen 
 
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }
 
+# Compound
+
+Use `include-doxygen-compound` to render definition compound such as class 
+
+    :include-doxygen-compound: utils::second::AnotherClass
+
+:include-doxygen-compound: utils::second::AnotherClass 

@@ -16,13 +16,53 @@
 
 package org.testingisdocumenting.znai.doxygen.parser;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Stream;
+
 public class DoxygenCompound {
+    private final Map<String, DoxygenMember> memberById;
+
+    protected String id;
+    protected String kind;
+    protected String name;
     protected DoxygenDescription description;
 
     public DoxygenCompound() {
+        memberById = new LinkedHashMap<>();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public DoxygenDescription getDescription() {
         return description;
+    }
+
+    public void addMember(DoxygenMember member) {
+        memberById.put(member.getId(), member);
+    }
+
+    public DoxygenMember findById(String id) {
+        return memberById.get(id);
+    }
+
+    public DoxygenMember findByFullName(String fullName) {
+        return membersStream().filter(m -> fullName.equals(m.getFullName()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Stream<DoxygenMember> membersStream() {
+        return memberById.values().stream();
     }
 }

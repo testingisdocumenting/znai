@@ -23,11 +23,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DoxygenMember {
-    protected String compoundName;
-    protected String name;
-    protected DoxygenTextWithLinks returnType;
-    protected List<DoxygenParameter> parameters;
-    protected DoxygenDescription description;
+    private DoxygenCompound compound;
+    private String id;
+    private String name;
+    private DoxygenTextWithLinks returnType;
+    private List<DoxygenParameter> parameters;
+    private DoxygenDescription description;
+    private String visibility;
+    private String kind;
+    private boolean isVirtual;
+    private boolean isStatic;
 
     public DoxygenMember() {
         parameters = new ArrayList<>();
@@ -41,21 +46,100 @@ public class DoxygenMember {
         parameters.add(new DoxygenParameter(name, type));
     }
 
-    public String getCompoundName() {
-        return compoundName;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public DoxygenCompound getCompound() {
+        return compound;
+    }
+
+    public void setCompound(DoxygenCompound compound) {
+        this.compound = compound;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFullName() {
+        return DoxygenUtils.fullName(compound.getKind(), compound.getName(), name);
+    }
+
+    public DoxygenTextWithLinks getReturnType() {
+        return returnType;
+    }
+
+    public void setReturnType(DoxygenTextWithLinks returnType) {
+        this.returnType = returnType;
+    }
+
+    public List<DoxygenParameter> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<DoxygenParameter> parameters) {
+        this.parameters = parameters;
+    }
+
+    public void setDescription(DoxygenDescription description) {
+        this.description = description;
+    }
+
+    public String getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public boolean isVirtual() {
+        return isVirtual;
+    }
+
+    public void setVirtual(boolean virtual) {
+        isVirtual = virtual;
+    }
+
+    public boolean isStatic() {
+        return isStatic;
+    }
+
+    public void setStatic(boolean aStatic) {
+        isStatic = aStatic;
+    }
+
     public Map<String, Object> toMap() {
         Map<String, Object> result = new HashMap<>();
-        result.put("compoundName", compoundName);
+        result.put("compoundName", DoxygenUtils.compoundNameOrEmptyForFile(compound.getKind(), compound.getName()));
+        result.put("compoundKind", compound.getKind());
         result.put("name", name);
+        result.put("visibility", visibility);
+        result.put("kind", kind);
+        result.put("isVirtual", isVirtual);
+        result.put("isStatic", isStatic);
         result.put("returnType", returnType.toListOfMaps());
         result.put("parameters", parameters.stream().map(DoxygenParameter::toMap).collect(Collectors.toList()));
 
         return result;
     }
+
+
 }

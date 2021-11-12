@@ -19,18 +19,21 @@ package org.testingisdocumenting.znai.doxygen.parser
 import org.junit.Test
 import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import org.testingisdocumenting.znai.utils.ResourceUtils
+import org.testingisdocumenting.znai.utils.XmlUtils
 
 class DoxygenMemberParserTest {
     @Test
-    void "should extract member definition"() {
+    void "should parse member definition"() {
+        def document = XmlUtils.parseXml(ResourceUtils.textContent("doxygen-member-def.xml"))
+        def memberNode = XmlUtils.anyNestedNodeByName(document, "memberdef")
         def member = DoxygenMemberParser.parse(
                 TestComponentsRegistry.TEST_COMPONENTS_REGISTRY,
-                ResourceUtils.textContent("doxygen-member-def.xml"),
-                "namespaceutils_1_1nested",
-                "funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7")
+                memberNode)
 
-        member.compoundName.should == 'utils::nested'
+        member.id.should == 'funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7'
         member.name.should == 'my_func'
+        member.static.should == false
+        member.virtual.should == false
 
         member.returnType.toListOfMaps().should == [[text: "utils::second::MyClass", refId: "classutils_1_1second_1_1MyClass"]]
         member.parameters*.toMap().should == [[name: "one", type: [[text: "const ", refId: ""],

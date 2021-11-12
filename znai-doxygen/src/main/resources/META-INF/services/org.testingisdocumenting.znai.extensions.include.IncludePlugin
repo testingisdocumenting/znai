@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+org.testingisdocumenting.znai.doxygen.plugin.DoxygenCompoundIncludePlugin
 org.testingisdocumenting.znai.doxygen.plugin.DoxygenMemberIncludePlugin
 org.testingisdocumenting.znai.doxygen.plugin.DoxygenDocIncludePlugin
 org.testingisdocumenting.znai.doxygen.plugin.DoxygenDocParamsIncludePlugin
