@@ -61,10 +61,11 @@ public class Doxygen {
             return null;
         }
 
-        DoxygenMember member = findAndParseMember(componentsRegistry, indexMember);
+        DoxygenCompound compound = getCachedOrFindAndParseCompound(componentsRegistry,
+                indexMember.getCompound().getName());
 
-        this.memberByName.put(fullName, member);
-        return member;
+
+        return compound.findByFullName(fullName);
     }
 
     public DoxygenCompound getCachedOrFindAndParseCompound(ComponentsRegistry componentsRegistry, String fullName) {
@@ -108,12 +109,6 @@ public class Doxygen {
         String indexXml = FileUtils.fileTextContent(indexPath);
         doxygenIndexCached = DoxygenIndexParser.parse(indexXml);
         indexLastModifiedTime = FileUtils.getLastModifiedTime(indexPath);
-    }
-
-    private DoxygenMember findAndParseMember(ComponentsRegistry componentsRegistry, DoxygenIndexMember indexMember) {
-        String xml = FileUtils.fileTextContent(indexPath.getParent().resolve(indexMember.getCompound().getId() + ".xml"));
-        return DoxygenMemberParser.parse(componentsRegistry,
-                xml, indexMember.getCompound().getId(), indexMember.getId());
     }
 
     private DoxygenCompound findAndParseCompound(ComponentsRegistry componentsRegistry, DoxygenIndexCompound indexCompound) {

@@ -3,20 +3,156 @@
   <compounddef id="classutils_1_1second_1_1AnotherClass" kind="class" language="C++" prot="public">
     <compoundname>utils::second::AnotherClass</compoundname>
     <includes refid="classes__two_8h" local="no">classes_two.h</includes>
-      <sectiondef kind="public-func">
-      <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1afe1b68c81af47834b78679d80401631d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void utils::second::AnotherClass::sing</definition>
-        <argsstring>()</argsstring>
-        <name>sing</name>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classutils_1_1second_1_1AnotherClass_1a5126e99df34cb7a3d702193dc3511114" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int utils::second::AnotherClass::number_of_sounds</definition>
+        <argsstring></argsstring>
+        <name>number_of_sounds</name>
         <briefdescription>
-<para>sing </para>
+<para>current number of sounds made </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="10" column="10"/>
+        <location file="src/classes_two.h" line="10" column="9" bodyfile="src/classes_two.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int utils::second::AnotherClass::counter</definition>
+        <argsstring></argsstring>
+        <name>counter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/classes_two.h" line="12" column="16" bodyfile="src/classes_two.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a204e9b29b851102ef16951cddc42ea63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void utils::second::AnotherClass::sing</definition>
+        <argsstring>(int tone, int volume)</argsstring>
+        <name>sing</name>
+        <param>
+          <type>int</type>
+          <declname>tone</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>volume</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>sing out loud <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tone</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tone at which to sing </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>volume</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>volume at which to sing </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/classes_two.h" line="19" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a583e410fbb93deef48631f0a7382e7fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void utils::second::AnotherClass::bark</definition>
+        <argsstring>(int tone, int volume)</argsstring>
+        <name>bark</name>
+        <param>
+          <type>int</type>
+          <declname>tone</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>volume</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>bark out loud <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tone</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tone at which to sing </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>volume</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>volume at which to sing </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/classes_two.h" line="26" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void utils::second::AnotherClass::help</definition>
+        <argsstring>(int tone, int volume)</argsstring>
+        <name>help</name>
+        <param>
+          <type>int</type>
+          <declname>tone</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>volume</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>ask for help out loud <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tone</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tone at which to sing </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>volume</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>volume at which to sing </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/classes_two.h" line="35" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -24,9 +160,13 @@
     <detaileddescription>
 <para><bold>Domain</bold> specific context setting. Describes business setting and requirements. </para>
     </detaileddescription>
-    <location file="src/classes_two.h" line="7" column="1" bodyfile="src/classes_two.h" bodystart="7" bodyend="11"/>
+    <location file="src/classes_two.h" line="7" column="1" bodyfile="src/classes_two.h" bodystart="7" bodyend="37"/>
     <listofallmembers>
-      <member refid="classutils_1_1second_1_1AnotherClass_1afe1b68c81af47834b78679d80401631d" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>sing</name></member>
+      <member refid="classutils_1_1second_1_1AnotherClass_1a583e410fbb93deef48631f0a7382e7fd" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>bark</name></member>
+      <member refid="classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>counter</name></member>
+      <member refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" prot="protected" virt="virtual"><scope>utils::second::AnotherClass</scope><name>help</name></member>
+      <member refid="classutils_1_1second_1_1AnotherClass_1a5126e99df34cb7a3d702193dc3511114" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>number_of_sounds</name></member>
+      <member refid="classutils_1_1second_1_1AnotherClass_1a204e9b29b851102ef16951cddc42ea63" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>sing</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

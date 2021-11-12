@@ -16,18 +16,46 @@
 
 package org.testingisdocumenting.znai.doxygen.parser
 
+import org.junit.BeforeClass
 import org.junit.Test
 import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import org.testingisdocumenting.znai.utils.ResourceUtils
 
+import java.util.stream.Collectors
+
 class DoxygenCompoundParserTest {
-    @Test
-    void "should extract compound doc"() {
-        def compound = DoxygenCompoundParser.parse(
+    static DoxygenCompound compound
+
+    @BeforeClass
+    static void parse() {
+        compound = DoxygenCompoundParser.parse(
                 TestComponentsRegistry.TEST_COMPONENTS_REGISTRY,
                 ResourceUtils.textContent("doxygen-class.xml"),
-                "classutils_1_1second_1_1MyClass")
+                "classutils_1_1second_1_1AnotherClass")
+    }
 
+    @Test
+    void "should extract name, kind, id"() {
+        compound.id.should == "classutils_1_1second_1_1AnotherClass"
+        compound.kind.should == "class"
+        compound.name.should == "utils::second::AnotherClass"
+    }
+
+    @Test
+    void "should extract compound doc"() {
         compound.description.searchText.should == "Domain specific context setting. Describes business setting and requirements."
+    }
+
+    @Test
+    void "should extract members"() {
+        def members = compound.membersStream().collect(Collectors.toList())
+        members.should == ["name"              | "kind"     | "visibility" | "virtual" | "static"] {
+                         _____________________________________________________________________________
+                           "number_of_sounds"  | "variable" | "public"     | false     | false
+                           "counter"           | "variable" | "public"     | false     | true
+                           "sing"              | "function" | "public"     | false     | false
+                           "bark"              | "function" | "public"     | false     | false
+                           "help"              | "function" | "protected"  | true      | false
+        }
     }
 }

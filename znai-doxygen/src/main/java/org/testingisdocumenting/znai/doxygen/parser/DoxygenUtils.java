@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.parser;
+package org.testingisdocumenting.znai.doxygen.parser;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-public class HeadingPayloadList {
-    private final List<HeadingPayload> list;
-
-    public HeadingPayloadList() {
-        this.list = new ArrayList<>();
+public class DoxygenUtils {
+    private DoxygenUtils() {
     }
 
-    public HeadingPayloadList add(HeadingPayload payload) {
-        list.add(payload);
-        return this;
+    public static String fullName(String compoundKind, String compoundName, String name) {
+        if (compoundNameOrEmptyForFile(compoundKind, compoundName).isEmpty()) {
+            return name;
+        }
+
+        // TODO separator for Java/Python/etc
+        return compoundName + "::" + name;
     }
 
-    public List<Map<String, ?>> toListOfMaps() {
-        return list.stream().map(HeadingPayload::toMap).collect(Collectors.toList());
+    public static String compoundNameOrEmptyForFile(String compoundKind, String compoundName) {
+        if ("file".equals(compoundKind)) {
+            return "";
+        }
+
+        return compoundName;
     }
 }
