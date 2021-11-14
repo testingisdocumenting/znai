@@ -57,6 +57,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
                     doxygen.buildIndexOrGetCached(componentsRegistry).renderAvailableMemberNames());
         }
 
+        parserHandler.onGlobalAnchor(member.getId());
         return PluginResult.docElement("DoxygenMember", member.toMap());
     }
 

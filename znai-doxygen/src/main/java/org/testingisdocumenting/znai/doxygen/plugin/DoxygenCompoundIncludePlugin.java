@@ -31,6 +31,7 @@ import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class DoxygenCompoundIncludePlugin implements IncludePlugin {
@@ -64,7 +65,20 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
                 CollectionUtils.createMap("text", compound.getKind(), "type", "TextBadge"), true)));
 
         parserHandler.onSubHeading(2, "functions", new HeadingPayloadList());
-        compound.membersStream().forEach(member -> parserHandler.onCustomNode("DoxygenMember", member.toMap()));
+        compound.membersStream().forEach(member -> {
+            Map<String, Object> memberProps = member.toMap();
+            memberProps.put("compoundName", ""); // to remove compound name from rendering list of members
+            memberProps.put("refId", member.getId()); // to make clickable, as in TOC for members
+
+            parserHandler.onCustomNode("DoxygenMember", memberProps);
+        });
+
+        parserHandler.onSubHeading(2, "definitions", new HeadingPayloadList());
+        compound.membersStream().forEach(member -> {
+            parserHandler.onSubHeading(3, member.getName(), new HeadingPayloadList());
+            parserHandler.onGlobalAnchor(member.getId());
+            parserHandler.onCustomNode("DoxygenMember", member.toMap());
+        });
 
         return PluginResult.docElements(Stream.empty());
     }

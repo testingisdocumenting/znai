@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2021 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +17,27 @@
 package org.testingisdocumenting.znai.structure;
 
 import java.nio.file.Path;
-import java.util.Map;
 
-public interface DocStructure {
-    void validateUrl(Path path, String additionalClue, DocUrl docUrl);
-    String createUrl(Path path, DocUrl docUrl);
-    String fullUrl(String relativeUrl);
+public class GlobalAnchor {
+    private final String id;
+    private final Path filePath;
+    private final String url;
 
-    void registerGlobalAnchor(Path sourcePath, String anchorId);
-    void registerLocalAnchor(Path path, String anchorId);
-    String globalAnchorUrl(Path clientPath, String anchorId);
-    Map<String, String> globalAnchors();
+    public GlobalAnchor(String id, Path filePath, String url) {
+        this.id = id;
+        this.filePath = filePath;
+        this.url = url;
+    }
 
-    TableOfContents tableOfContents();
+    public String getId() {
+        return id;
+    }
+
+    public Path getFilePath() {
+        return filePath;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }
