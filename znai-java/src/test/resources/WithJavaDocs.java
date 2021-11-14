@@ -27,6 +27,11 @@ class HelloWorld {
     private static String SAMPLE_CONST = "Sample";
 
     /**
+     * outer field description
+     */
+    private int myField;
+
+    /**
      * method level java doc {@link package.Class}
      * @param test test param {@link package.Param}
      */
@@ -49,5 +54,25 @@ class HelloWorld {
                                      List<String> name) {
         statement3();
         statement4();
+    }
+
+    private class InnerClass {
+        /**
+         * inner field description
+         */
+        private int myField;
+
+        /**
+         * inner class method level java doc {@link package.Class}
+         * @param test test param {@link package.Param}
+         */
+        public void sampleMethod(String test) {
+            statement1();
+            statement2();
+
+            if (logic) {
+                doAction();
+            }
+        }
     }
 }

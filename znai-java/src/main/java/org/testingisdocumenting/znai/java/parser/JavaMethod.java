@@ -24,8 +24,8 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class JavaMethod {
+    private final JavaIdentifier id;
     private final String name;
-    private final String nameWithTypes;
     private final String fullBody;
     private final String bodyOnly;
     private final String signatureOnly;
@@ -34,12 +34,13 @@ public class JavaMethod {
     private final JavaMethodReturn javaMethodReturn;
     private final String anchorPrefix;
 
-    public JavaMethod(String name, String fullBody, String bodyOnly, String signatureOnly,
+    public JavaMethod(List<String> parentNames, String name, String fullBody, String bodyOnly, String signatureOnly,
                       List<JavaMethodParam> params,
                       JavaMethodReturn javaMethodReturn,
                       String javaDocText) {
         this.name = name;
-        this.nameWithTypes = name + "(" + params.stream().map(JavaMethodParam::getType).collect(joining(",")) + ")";
+        this.id = new JavaIdentifier(parentNames, name,
+                "(" + params.stream().map(JavaMethodParam::getType).collect(joining(",")) + ")");
         this.fullBody = fullBody;
         this.bodyOnly = bodyOnly;
         this.signatureOnly = signatureOnly;
@@ -49,12 +50,16 @@ public class JavaMethod {
         this.anchorPrefix = buildAnchorPrefix();
     }
 
-    public String getName() {
-        return name;
+    public String getFullNameWithoutFirstParent() {
+        return id.getFullNameWithoutFirstParent();
     }
 
-    public String getNameWithTypes() {
-        return nameWithTypes;
+    public boolean matches(String fullOrPartialName) {
+        return id.matches(fullOrPartialName);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getFullBody() {

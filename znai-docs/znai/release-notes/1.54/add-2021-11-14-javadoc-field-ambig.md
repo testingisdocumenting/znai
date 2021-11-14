@@ -1,0 +1,1 @@
+* Add [inner classes](snippets/java-doc#inner-classes) reference to java doc parsing

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,20 +37,23 @@ import static com.github.javaparser.javadoc.JavadocBlockTag.Type.RETURN;
 import static org.testingisdocumenting.znai.utils.StringUtils.*;
 import static java.util.stream.Collectors.*;
 
-public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
+class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     private final List<String> lines;
-    private Map<String, JavaType> javaTypes;
-    private List<JavaMethod> javaMethods;
-    private List<EnumEntry> enumEntries;
-    private Map<String, JavaField> javaFields;
+    private final Map<String, JavaType> javaTypes;
+    private final List<JavaMethod> javaMethods;
+    private final List<EnumEntry> enumEntries;
+    private final List<JavaField> javaFields;
     private String topLevelJavaDoc;
+
+    private final ArrayDeque<String> parentNames;
 
     public JavaCodeVisitor(String code) {
         lines = Arrays.asList(code.split("\n"));
         javaTypes = new LinkedHashMap<>();
         javaMethods = new ArrayList<>();
-        javaFields = new LinkedHashMap<>();
+        javaFields = new ArrayList<>();
         enumEntries = new ArrayList<>();
+        parentNames = new ArrayDeque<>();
     }
 
     public boolean hasType(String typeName) {
@@ -77,9 +81,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     public List<JavaMethod> findAllMethodDetails(String methodNameWithOptionalTypes) {
         String nameWithoutSpaces = methodNameWithOptionalTypes.replaceAll("\\s+", "");
         return javaMethods.stream()
-                .filter(
-                        m -> m.getName().equals(methodNameWithOptionalTypes) ||
-                                m.getNameWithTypes().equals(nameWithoutSpaces))
+                .filter(m -> m.matches(nameWithoutSpaces))
                 .collect(Collectors.toList());
     }
 
@@ -88,16 +90,18 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     }
 
     public JavaField findFieldDetails(String fieldName) {
-        if (! javaFields.containsKey(fieldName)) {
-            throw new RuntimeException("no field found: " + fieldName);
-        }
-
-        return javaFields.get(fieldName);
+        return javaFields.stream().filter(f -> f.matches(fieldName))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("no field found: " + fieldName));
     }
 
     public String findJavaDoc(String entryName) {
-        if (javaFields.containsKey(entryName)) {
-            return javaFields.get(entryName).getJavaDocText();
+        JavaField javaField = javaFields.stream().filter(f -> f.matches(entryName))
+                .findFirst()
+                .orElse(null);
+
+        if (javaField != null) {
+            return javaField.getJavaDocText();
         }
 
         if (!hasMethodDetails(entryName)) {
@@ -119,7 +123,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
                 fieldDeclaration.getJavadocComment().map(c -> c.parse().toText()).orElse("") : "";
 
         fieldDeclaration.getVariables().stream().map(vd -> vd.getName().getIdentifier())
-                .forEach(name -> javaFields.put(name, new JavaField(name, javaDocText)));
+                .forEach(name -> javaFields.add(new JavaField(new ArrayList<>(parentNames), name, javaDocText)));
     }
 
     @Override
@@ -127,7 +131,9 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
         extractTopLevelJavaDoc(classOrInterfaceDeclaration);
         registerType(classOrInterfaceDeclaration);
 
+        parentNames.add(classOrInterfaceDeclaration.getName().getIdentifier());
         super.visit(classOrInterfaceDeclaration, arg);
+        parentNames.removeLast();
     }
 
     @Override
@@ -157,7 +163,9 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
                 extractJavaDocDescription(javaDoc.getDescription()) :
                 "";
 
-        javaMethods.add(new JavaMethod(name,
+        javaMethods.add(new JavaMethod(
+                new ArrayList<>(parentNames),
+                name,
                 stripIndentation(JavaCodeUtils.removeSemicolonAtEnd(code)),
                 stripIndentation(JavaCodeUtils.removeSemicolonAtEnd(extractInsideCurlyBraces(code))),
                 JavaCodeUtils.removeSemicolonAtEnd(JavaCodeUtils.extractSignature(code)),
@@ -172,11 +180,13 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     }
 
     private String renderAllMethods() {
-        return "    " + javaMethods.stream().map(JavaMethod::getNameWithTypes).collect(joining("\n    "));
+        return "    " + javaMethods.stream().map(JavaMethod::getFullNameWithoutFirstParent).collect(joining("\n    "));
     }
 
     private String renderAllFields() {
-        return "    " + String.join("\n    ", javaFields.keySet());
+        return "    " + javaFields.stream()
+                .map(JavaField::getFullNameWithoutFirstParent)
+                .collect(joining("\n    "));
     }
 
     private String extractJavaDocDescription(JavadocComment javadocComment) {
@@ -244,9 +254,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     private boolean hasMethodDetails(String methodNameWithOptionalTypes) {
         String nameWithoutSpaces = methodNameWithOptionalTypes.replaceAll("\\s+", "");
-
-        return javaMethods.stream().anyMatch(m -> m.getName().equals(methodNameWithOptionalTypes) ||
-                m.getNameWithTypes().equals(nameWithoutSpaces));
+        return javaMethods.stream().anyMatch(m -> m.matches(nameWithoutSpaces));
     }
 
     private List<JavaMethodParam> extractParams(MethodDeclaration methodDeclaration, Javadoc javadoc) {

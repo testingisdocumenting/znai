@@ -29,6 +29,17 @@ Method level `JavaDoc` text can be referred to as well by specifying the `entry`
     
 :include-java-doc: HelloWorld.java {entry: "numberOfStudents"}
 
+# Inner Classes
+
+Use `NestedName.entityName` to disambiguate a field or a method name 
+
+:include-java: HelloWorldWithInner.java {autoTitle: true}
+
+    :include-java-doc: HelloWorldWithInner.java {entry: "Nested.importantScore"}
+
+:include-java-doc: HelloWorldWithInner.java {entry: "Nested.importantScore"}
+
+
 # Handling Links
 
 Links defined with `{@link MyClass}` are automatically converted to [Inlined Code](snippets/inlined-code-snippets) and become
