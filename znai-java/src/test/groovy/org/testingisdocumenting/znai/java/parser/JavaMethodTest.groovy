@@ -21,7 +21,7 @@ import org.junit.Test
 class JavaMethodTest {
     @Test
     void "should build anchor prefix from function name and parameters"() {
-        def methodWithParams = new JavaMethod('myMethod', '', '', '',
+        def methodWithParams = new JavaMethod([], 'myMethod', '', '', '',
                 [new JavaMethodParam('name', '', 'String'),
                  new JavaMethodParam('score', '', 'Integer')],
                 new JavaMethodReturn('void', ''), '')
