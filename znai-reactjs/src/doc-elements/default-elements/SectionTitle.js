@@ -15,21 +15,18 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-import { Icon } from '../icons/Icon'
-import {presentationModeListeners} from "../presentation/PresentationModeListener";
+import { Icon } from "../icons/Icon";
+import { presentationModeListeners } from "../presentation/PresentationModeListener";
 
-import './SectionTitle.css'
-import { DocElement } from "./DocElement";
+import "./SectionTitle.css";
+import { TextBadge } from "../badge/TextBadge";
 
-const SectionTitle = ({elementsLibrary, id, title, payload}) => {
-    const payloadContent = payload ?
-      payload.map(e => e.payload) : undefined
-
+const SectionTitle = ({id, title, badge}) => {
     return id ? (
         <h1 className="section-title" id={id}>{title}
-            {payloadContent && <DocElement content={payloadContent} elementsLibrary={elementsLibrary}/>}
+            {badge && <TextBadge text={badge}/>}
             <div className="znai-section-title-actions">
                 <a href={"#" + id}><Icon id="link"/></a>
                 <Icon id="maximize" className="znai-section-title-presentation" onClick={openPresentation}/>

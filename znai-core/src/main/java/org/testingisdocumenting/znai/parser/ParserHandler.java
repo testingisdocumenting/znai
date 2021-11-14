@@ -36,12 +36,12 @@ public interface ParserHandler {
     /**
      * top level section start handler. Should be responsible for handle of closing current section (if required)
      * @param title title of a new section
-     * @param payloadList heading payload
+     * @param headingProps heading props to change look and feel
      */
-    void onSectionStart(String title, HeadingPayloadList payloadList);
+    void onSectionStart(String title, HeadingProps headingProps);
     void onSectionEnd();
 
-    void onSubHeading(int level, String title, HeadingPayloadList payloadList);
+    void onSubHeading(int level, String title, HeadingProps headingProps);
     void onHardLineBreak();
     void onSoftLineBreak();
     void onParagraphStart();

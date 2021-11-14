@@ -23,8 +23,7 @@ import org.testingisdocumenting.znai.doxygen.parser.DoxygenCompound;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
-import org.testingisdocumenting.znai.parser.HeadingPayload;
-import org.testingisdocumenting.znai.parser.HeadingPayloadList;
+import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
@@ -61,10 +60,10 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
         }
 
         parserHandler.onGlobalAnchor(compound.getId());
-        parserHandler.onSectionStart(compound.getName(), new HeadingPayloadList().add(new HeadingPayload(
-                CollectionUtils.createMap("text", compound.getKind(), "type", "TextBadge"), true)));
+        parserHandler.onSectionStart(compound.getName(),
+                new HeadingProps(CollectionUtils.createMap("badge", compound.getKind())));
 
-        parserHandler.onSubHeading(2, "functions", new HeadingPayloadList());
+        parserHandler.onSubHeading(2, "functions", HeadingProps.EMPTY);
         compound.membersStream().forEach(member -> {
             Map<String, Object> memberProps = member.toMap();
             memberProps.put("compoundName", ""); // to remove compound name from rendering list of members
@@ -73,9 +72,9 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
             parserHandler.onCustomNode("DoxygenMember", memberProps);
         });
 
-        parserHandler.onSubHeading(2, "definitions", new HeadingPayloadList());
+        parserHandler.onSubHeading(2, "definitions", HeadingProps.EMPTY);
         compound.membersStream().forEach(member -> {
-            parserHandler.onSubHeading(3, member.getName(), new HeadingPayloadList());
+            parserHandler.onSubHeading(3, member.getName(), HeadingProps.EMPTY);
             parserHandler.onGlobalAnchor(member.getId());
             parserHandler.onCustomNode("DoxygenMember", member.toMap());
         });

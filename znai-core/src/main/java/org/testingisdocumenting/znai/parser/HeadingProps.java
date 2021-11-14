@@ -16,24 +16,23 @@
 
 package org.testingisdocumenting.znai.parser;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-public class HeadingPayloadList {
-    private final List<HeadingPayload> list;
+/**
+ * Sections do not support bold text, images, bullet points, etc.
+ * To customize headings style you can pass JSON block at the end of section text
+ */
+public class HeadingProps {
+    public static HeadingProps EMPTY = new HeadingProps(Collections.emptyMap());
 
-    public HeadingPayloadList() {
-        this.list = new ArrayList<>();
+    private final Map<String, ?> props;
+
+    public HeadingProps(Map<String, ?> props) {
+        this.props = props;
     }
 
-    public HeadingPayloadList add(HeadingPayload payload) {
-        list.add(payload);
-        return this;
-    }
-
-    public List<Map<String, ?>> toListOfMaps() {
-        return list.stream().map(HeadingPayload::toMap).collect(Collectors.toList());
+    public Map<String, ?> getProps() {
+        return Collections.unmodifiableMap(props);
     }
 }

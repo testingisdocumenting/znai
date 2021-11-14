@@ -75,16 +75,14 @@ function headingDemoWithPayload() {
         "title": "Section Heading",
         "id": "section-heading",
         "type": "Section",
-        "payload": [
-          { "attachToEnd": true, "payload": { type: "TextBadge", text: "v1.20" } }
-        ],
+        "badge": "v1.20",
         "content": [
             {
                 "level": 2,
                 "type": "SubHeading",
                 "title": "Sub-Section Heading",
                 "id": "sub-section-heading",
-                "payload": [{ "attachToEnd": true, "payload": { type: "TextBadge", text: "v2.38" } }],
+                "badge": "v2.38"
             },
             {
                 "level": 3,
@@ -97,7 +95,7 @@ function headingDemoWithPayload() {
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Section Heading",
                 "id": "sub-sub-sub-section-heading",
-                "payload": [{ "attachToEnd": true, "payload": { type: "TextBadge", text: "v2.38" } }],
+                "badge": "v2.38"
             },
             {
                 "level": 5,
