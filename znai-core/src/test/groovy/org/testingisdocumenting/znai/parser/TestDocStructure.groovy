@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.parser
 
 import org.testingisdocumenting.znai.structure.DocStructure
 import org.testingisdocumenting.znai.structure.DocUrl
+import org.testingisdocumenting.znai.structure.GlobalAnchor
 import org.testingisdocumenting.znai.structure.TableOfContents
 
 import java.nio.file.Path
@@ -71,6 +72,11 @@ class TestDocStructure implements DocStructure {
     @Override
     String globalAnchorUrl(Path clientPath, String anchorId) {
         return null
+    }
+
+    @Override
+    Map<String, String> globalAnchors() {
+        return [:]
     }
 
     void setToc(TableOfContents testToc) {

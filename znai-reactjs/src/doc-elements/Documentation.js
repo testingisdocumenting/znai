@@ -55,6 +55,7 @@ import {presentationModeListeners} from "./presentation/PresentationModeListener
 import './search/Search.css'
 import {mainPanelClassName} from '../layout/classNames';
 import {ZoomOverlay} from './zoom/ZoomOverlay';
+import { updateGlobalAnchors } from "./references/globalAnchors";
 
 export class Documentation extends Component {
     constructor(props) {
@@ -112,6 +113,7 @@ export class Documentation extends Component {
         this.onMultiplePagesUpdate = this.onMultiplePagesUpdate.bind(this)
         this.onPagesRemove = this.onPagesRemove.bind(this)
         this.onDocReferencesUpdate = this.onDocReferencesUpdate.bind(this)
+        this.onGlobalAnchorsUpdate = this.onGlobalAnchorsUpdate.bind(this)
         this.onPageGenError = this.onPageGenError.bind(this)
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
@@ -191,6 +193,7 @@ export class Documentation extends Component {
                                                           onMultiplePagesUpdate={this.onMultiplePagesUpdate}
                                                           onPagesRemove={this.onPagesRemove}
                                                           onDocReferencesUpdate={this.onDocReferencesUpdate}
+                                                          onGlobalAnchorsUpdate={this.onGlobalAnchorsUpdate}
                                                           onTocUpdate={this.onTocUpdate}
                                                           onFooterUpdate={this.onFooterUpdate}
                                                           onDocMetaUpdate={this.onDocMetaUpdate}
@@ -603,6 +606,13 @@ export class Documentation extends Component {
     onDocReferencesUpdate(docReferences) {
         this.updatePageAndDetectChangePosition(() => {
             updateGlobalDocReferences(docReferences)
+            this.changePage({page: this.state.page})
+        })
+    }
+
+    onGlobalAnchorsUpdate(globalAnchors) {
+        this.updatePageAndDetectChangePosition(() => {
+            updateGlobalAnchors(globalAnchors)
             this.changePage({page: this.state.page})
         })
     }

@@ -87,6 +87,14 @@ public class PreviewWebSocketHandler extends JsonWebSocketHandler {
         send(payload);
     }
 
+    public void sendGlobalAnchors(DocReferences docReferences) {
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("type", "docReferencesUpdate");
+        payload.put("docReferences", docReferences.toMap());
+
+        send(payload);
+    }
+
     public void sendFooter(Footer footer) {
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", "footerUpdate");

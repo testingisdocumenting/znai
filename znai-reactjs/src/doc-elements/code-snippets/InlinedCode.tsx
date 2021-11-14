@@ -18,29 +18,23 @@ import * as React from "react";
 
 import { mergeWithGlobalDocReferences } from "../references/globalDocReferences";
 import { ReferenceLinkWrapper } from "../references/ReferenceLinkWrapper";
-import { DocReferences } from "../references/DocReferences";
+import { SnippetDocReferences } from "../references/SnippetDocReferences";
 
 import "./InlinedCode.css";
 
 interface Props {
   code: string;
-  references?: DocReferences;
+  references?: SnippetDocReferences;
 }
 
 export function InlinedCode({ code, references }: Props) {
-  const mergedReferences: DocReferences = mergeWithGlobalDocReferences(
-    references
-  );
+  const mergedReferences: SnippetDocReferences = mergeWithGlobalDocReferences(references);
   const reference = mergedReferences[code];
 
   const renderedCode = <code className="znai-inlined-code">{code}</code>;
 
   if (reference) {
-    return (
-      <ReferenceLinkWrapper referenceUrl={reference.pageUrl}>
-        {renderedCode}
-      </ReferenceLinkWrapper>
-    );
+    return <ReferenceLinkWrapper referenceUrl={reference.pageUrl}>{renderedCode}</ReferenceLinkWrapper>;
   }
 
   return renderedCode;
