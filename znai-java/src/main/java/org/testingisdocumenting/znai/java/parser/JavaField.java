@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +17,21 @@
 
 package org.testingisdocumenting.znai.java.parser;
 
-public class JavaField {
-    private String name;
-    private String javaDocText;
+import java.util.List;
 
-    public JavaField(String name, String javaDocText) {
+public class JavaField {
+    private final JavaIdentifier identifier;
+    private final String name;
+    private final String javaDocText;
+
+    public JavaField(List<String> parentNames, String name, String javaDocText) {
+        this.identifier = new JavaIdentifier(parentNames, name, "");
         this.name = name;
         this.javaDocText = javaDocText;
+    }
+
+    public String getFullNameWithoutFirstParent() {
+        return identifier.getFullNameWithoutFirstParent();
     }
 
     public String getName() {
@@ -33,10 +42,14 @@ public class JavaField {
         return javaDocText;
     }
 
+    public boolean matches(String fullOrPartialName) {
+        return identifier.matches(fullOrPartialName);
+    }
+
     @Override
     public String toString() {
         return "JavaField{" +
-                "name='" + name + '\'' +
+                "identifier='" + identifier + '\'' +
                 ", javaDocText='" + javaDocText + '\'' +
                 '}';
     }

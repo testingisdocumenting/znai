@@ -69,6 +69,52 @@ class HelloWorld {
     }
 }"""
 
+    private final String classCodeWithInnerClass = """
+class HelloWorld {
+    /**
+     * Each year we hire students from different universities to increase
+     * diversity
+     */
+    private int numberOfStudents;
+    
+    private boolean fieldWithNoComment;
+
+    /**
+     * method level java doc {@link package.Class}
+     * @param test test param {@link package.Param}
+     */
+    public void sampleMethod(String test) {
+        statement1();
+        statement2();
+
+        if (logic) {
+            doAction();
+        }
+    }
+
+    /**
+     * overloaded method java doc 
+     * @param test test param
+     * @param name name of the param 
+     * @return list of samples
+     */
+    public List<String> sampleMethod(String test, 
+                                     List<String> name) {
+        statement3();
+        statement4();
+    }
+    
+    public String noReturnTag() {
+        return "";
+    }
+    
+    public static class Fence {
+        private int numberOfStudents;
+        /** inner method */
+        public void sampleMethod(String test) {}
+    }
+}"""
+
     private final String interfaceCode = """
 /**
  * this is a <b>top</b> level java doc
@@ -114,6 +160,7 @@ enum MyEnum {
 """
 
     private final JavaCode javaCode = new JavaCode(classCode)
+    private final JavaCode javaCodeInnerClass = new JavaCode(classCodeWithInnerClass)
     private final JavaCode javaCodeInterface = new JavaCode(interfaceCode)
     private final JavaCode javaCodeEnum = new JavaCode(enumCode)
 
@@ -323,5 +370,27 @@ enum MyEnum {
     @Test
     void "extracts top level java doc"() {
         Assert.assertEquals("this is a <b>top</b> level java doc", javaCode.getClassJavaDocText())
+    }
+
+    @Test
+    void "find method inside inner class"() {
+        def sampleMethodDoc = javaCodeInnerClass.findJavaDoc("Fence.sampleMethod(String)")
+        sampleMethodDoc.should == "inner method"
+    }
+
+    @Test
+    void "enumerate fields and methods with inner class"() {
+        code {
+            javaCodeInnerClass.findJavaDoc("nonExisting")
+        } should throwException("can't find method or field: nonExisting.\n" +
+                "Available methods:\n" +
+                "    sampleMethod(String)\n" +
+                "    sampleMethod(String,List)\n" +
+                "    noReturnTag()\n" +
+                "    Fence.sampleMethod(String)\n" +
+                "Available fields:\n" +
+                "    numberOfStudents\n" +
+                "    fieldWithNoComment\n" +
+                "    Fence.numberOfStudents")
     }
 }

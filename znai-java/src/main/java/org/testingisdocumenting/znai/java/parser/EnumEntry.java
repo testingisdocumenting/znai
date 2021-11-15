@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,9 +18,9 @@
 package org.testingisdocumenting.znai.java.parser;
 
 public class EnumEntry {
-    private String name;
-    private String javaDocText;
-    private boolean isDeprecated;
+    private final String name;
+    private final String javaDocText;
+    private final boolean isDeprecated;
 
     public EnumEntry(String name, String javaDocText, boolean isDeprecated) {
         this.name = name;

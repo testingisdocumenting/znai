@@ -23,15 +23,39 @@ import org.junit.Test
 
 class JavaDocIncludePluginTest {
     @Test
-    void "method in doc"() {
+    void "method in doc with signature"() {
         def plugin = process('{entry: "sampleMethod(String, List)"}')
         plugin.textForSearch().text.should == 'overloaded method java doc'
     }
 
     @Test
-    void "variable in doc"() {
+    void "method in doc without signature"() {
+        def plugin = process('{entry: "sampleMethod"}')
+        plugin.textForSearch().text.should == 'method level java doc package.Class'
+    }
+
+    @Test
+    void "method in doc inner class"() {
+        def plugin = process('{entry: "InnerClass.sampleMethod"}')
+        plugin.textForSearch().text.should == 'inner class method level java doc package.Class'
+    }
+
+    @Test
+    void "static variable in doc"() {
         def plugin = process('{entry: "SAMPLE_CONST"}')
         plugin.textForSearch().text.should == 'variable level java doc'
+    }
+
+    @Test
+    void "variable in doc with clashing name in inner class"() {
+        def plugin = process('{entry: "myField"}')
+        plugin.textForSearch().text.should == 'outer field description'
+    }
+
+    @Test
+    void "variable in doc with inner class name qualifier"() {
+        def plugin = process('{entry: "InnerClass.myField"}')
+        plugin.textForSearch().text.should == 'inner field description'
     }
 
     @Test
