@@ -15,18 +15,15 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import {elementsLibrary} from '../DefaultElementsLibrary'
+import React from "react";
+import { elementsLibrary } from "../DefaultElementsLibrary";
 
 export function typographyDemo(registry) {
-    const headingContent = [headingDemo()]
-    const headingPayloadContent = [headingDemoWithPayload()]
-    const headingTextContent = [headingTextDemo()]
-
     registry
-        .add('headings', () => <elementsLibrary.DocElement content={headingContent} elementsLibrary={elementsLibrary}/>)
-        .add('headings with payload', () => <elementsLibrary.DocElement content={headingPayloadContent} elementsLibrary={elementsLibrary}/>)
-        .add('headings with text', () => <elementsLibrary.DocElement content={headingTextContent}
+        .add('headings', () => <elementsLibrary.DocElement content={[headingDemo()]} elementsLibrary={elementsLibrary}/>)
+        .add('headings with badges', () => <elementsLibrary.DocElement content={[headingDemoWithBadge()]} elementsLibrary={elementsLibrary}/>)
+        .add('headings types', () => <elementsLibrary.DocElement content={[headingDemoTypes()]} elementsLibrary={elementsLibrary}/>)
+        .add('headings with text', () => <elementsLibrary.DocElement content={[headingTextDemo()]}
                                                                      elementsLibrary={elementsLibrary}/>)
 }
 
@@ -70,7 +67,7 @@ function headingDemo() {
     }
 }
 
-function headingDemoWithPayload() {
+function headingDemoWithBadge() {
     return {
         "title": "Section Heading",
         "id": "section-heading",
@@ -108,6 +105,52 @@ function headingDemoWithPayload() {
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
                 "id": "sub-sub-sub-sub-sub-section-heading"
+            }
+        ]
+    }
+}
+
+function headingDemoTypes() {
+    return {
+        "title": "Section Heading",
+        "id": "section-heading",
+        "type": "Section",
+        "style": "api",
+        "content": [
+            {
+                "level": 2,
+                "type": "SubHeading",
+                "title": "Sub-Section Heading",
+                "id": "sub-section-heading",
+                "style": "api"
+            },
+            {
+                "level": 3,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Section Heading",
+                "id": "sub-sub-section-heading",
+                "style": "api"
+            },
+            {
+                "level": 4,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-section-heading",
+                "style": "api"
+            },
+            {
+                "level": 5,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-sub-section-heading",
+                "style": "api"
+            },
+            {
+                "level": 6,
+                "type": "SubHeading",
+                "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
+                "id": "sub-sub-sub-sub-sub-section-heading",
+                "style": "api"
             }
         ]
     }

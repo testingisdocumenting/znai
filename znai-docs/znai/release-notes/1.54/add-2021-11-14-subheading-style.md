@@ -1,0 +1,1 @@
+* Add [API subheading style](flow/structure#heading-types)

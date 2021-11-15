@@ -30,6 +30,7 @@ import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -61,9 +62,11 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
 
         parserHandler.onGlobalAnchor(compound.getId());
         parserHandler.onSectionStart(compound.getName(),
-                new HeadingProps(CollectionUtils.createMap("badge", compound.getKind())));
+                new HeadingProps(CollectionUtils.createMap("badge", compound.getKind(), "style", "api")));
 
-        parserHandler.onSubHeading(2, "functions", HeadingProps.EMPTY);
+        HeadingProps headingProps = new HeadingProps(Collections.singletonMap("style", "api"));
+
+        parserHandler.onSubHeading(2, "functions", headingProps);
         compound.membersStream().forEach(member -> {
             Map<String, Object> memberProps = member.toMap();
             memberProps.put("compoundName", ""); // to remove compound name from rendering list of members
@@ -72,9 +75,9 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
             parserHandler.onCustomNode("DoxygenMember", memberProps);
         });
 
-        parserHandler.onSubHeading(2, "definitions", HeadingProps.EMPTY);
+        parserHandler.onSubHeading(2, "definitions", headingProps);
         compound.membersStream().forEach(member -> {
-            parserHandler.onSubHeading(3, member.getName(), HeadingProps.EMPTY);
+            parserHandler.onSubHeading(3, member.getName(), headingProps);
             parserHandler.onGlobalAnchor(member.getId());
             parserHandler.onCustomNode("DoxygenMember", member.toMap());
         });

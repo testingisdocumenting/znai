@@ -59,6 +59,18 @@ content of sub heading
 ### Sub Sub heading
 content of sub sub heading
 
+# Heading Types {style: "api"}
+    
+Use `{style: "api"}` at the end of heading title to change style of the heading to `API` one: monospace and 
+different subheading colors
+
+    # Heading Types {style: "api"}
+    ## Sub Heading Types {style: "api"}
+
+## Sub Heading Types {style: "api"}
+
+
+
 
 # Meta
 

@@ -26,20 +26,16 @@ class Section extends Component {
     render() {
         const {id, title, ...props} = this.props
 
-        const sectionTitle = (
-            <div className="content-block">
-                <props.elementsLibrary.SectionTitle elementsLibrary={props.elementsLibrary}
-                                                    id={id}
-                                                    title={title || ''}
-                                                    {...props}/>
-            </div>
-        )
-
         return (
-            <div className="section" key={title} ref={n => this.node = n}>
-                {sectionTitle}
-                <props.elementsLibrary.DocElement {...props}/>
-            </div>
+          <div className="section" key={title} ref={n => this.node = n}>
+              <props.elementsLibrary.SectionTitle elementsLibrary={props.elementsLibrary}
+                                                  level={1}
+                                                  id={id}
+                                                  title={title || ''}
+                                                  showPresentationIcon={true}
+                                                  {...props}/>
+              <props.elementsLibrary.DocElement {...props}/>
+          </div>
         )
     }
 
