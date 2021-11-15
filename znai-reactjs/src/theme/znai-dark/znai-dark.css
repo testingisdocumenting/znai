@@ -36,6 +36,8 @@
 
     --znai-link-decoration: none;
 
+    --znai-heading-api-color: #9cbbfb;
+
     --znai-inlined-code-background-color: #181e21;
     --znai-inlined-code-text-color: #aaa;
 
@@ -122,8 +124,8 @@
     --znai-default-code-block-color: #aaa;
     --znai-code-class-color: #bbb;
     --znai-code-function-color: #9473a6;
-    --znai-code-keyword-color: #5284e7;
-    --znai-code-directive-color: #5284e7;
+    --znai-code-keyword-color: #97afdf;
+    --znai-code-directive-color: #97afdf;
     --znai-code-property-color: #9473a6;
     --znai-code-string-color: #678558;
     --znai-code-punctuation-color: #8f9aa7;

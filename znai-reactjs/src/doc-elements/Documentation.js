@@ -669,7 +669,7 @@ export class Documentation extends Component {
     }
 
     extractPageSectionNodes() {
-        this.pageSectionNodes = [...document.querySelectorAll(".section-title")]
+        this.pageSectionNodes = [...document.querySelectorAll(".znai-section-title")]
     }
 
     scrollToPageSection(pageSectionId) {

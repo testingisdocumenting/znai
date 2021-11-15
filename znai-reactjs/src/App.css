@@ -60,6 +60,8 @@
     --znai-link-color: var(--znai-brand-primary-color);
     --znai-link-decoration: underline;
 
+    --znai-heading-api-color: #245d74;
+
     --znai-rest-link-color: #7287b3;
     --znai-important-attention: #c52912;
     --znai-meta-color: #aaa;

@@ -19,7 +19,7 @@ h1 {
     line-height: 1.1;
 }
 
-.section-title,
+.znai-section-title,
 .empty-section-title {
     display: flex;
     align-items: center;
@@ -37,13 +37,13 @@ h1 {
     margin-bottom: 0;
 }
 
-.section-title .znai-icon svg {
+.znai-section-title .znai-icon svg {
     width: 18px;
     height: 18px;
     display: none;
 }
 
-.section-title:hover .znai-icon svg {
+.znai-section-title:hover .znai-icon svg {
     display: inline-block;
 }
 
