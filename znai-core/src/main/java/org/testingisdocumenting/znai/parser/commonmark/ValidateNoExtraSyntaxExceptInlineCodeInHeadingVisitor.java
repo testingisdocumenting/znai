@@ -33,6 +33,7 @@ class ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor extends AbstractVisi
 
     @Override
     public void visit(Code code) {
+        onlyRegularTextAllowed();
     }
 
     @Override

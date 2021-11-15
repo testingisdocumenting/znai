@@ -22,7 +22,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
-import org.testingisdocumenting.znai.parser.HeadingPayloadList;
+import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
@@ -109,7 +109,7 @@ public class OpenApiIncludePlugin implements IncludePlugin {
 
     private void processOperation(OpenApiOperation operation, boolean isAutoSection) {
         if (isAutoSection) {
-            parserHandler.onSectionStart(operation.getSummary(), new HeadingPayloadList());
+            parserHandler.onSectionStart(operation.getSummary(), HeadingProps.EMPTY);
         }
 
         Map<String, Object> props = pluginParams.getOpts().toMap();

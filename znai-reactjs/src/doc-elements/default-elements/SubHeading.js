@@ -21,23 +21,21 @@ import { Icon } from '../icons/Icon'
 
 import {PresentationHeading} from './PresentationHeading'
 
+import { TextBadge } from "../badge/TextBadge";
+
 import './SubHeading.css'
-import { DocElement } from "./DocElement";
 
-export function SubHeading({elementsLibrary, level, title, id, payload}) {
-    const Element = `h${level}`
-
-  const payloadContent = payload ?
-    payload.map(e => e.payload) : undefined
+export function SubHeading({level, title, id, badge}) {
+  const Element = `h${level}`
 
   return (
-        <Element className="content-block" id={id}>
-            <span>{title}
-              {payloadContent && <DocElement content={payloadContent} elementsLibrary={elementsLibrary}/>}
-            </span>
-            <a href={"#" + id}><Icon id="link"/></a>
-        </Element>
-    )
+    <Element className="content-block" id={id}>
+      <span>{title}
+        {badge && <TextBadge text={badge}/>}
+      </span>
+      <a href={"#" + id}><Icon id="link"/></a>
+    </Element>
+  )
 }
 
 export const presentationSubHeading = {component: PresentationHeading, numberOfSlides: () => 1}

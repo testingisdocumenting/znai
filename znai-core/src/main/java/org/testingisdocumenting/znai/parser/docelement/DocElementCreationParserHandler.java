@@ -22,12 +22,11 @@ import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
-import org.testingisdocumenting.znai.parser.HeadingPayloadList;
+import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.Plugin;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
-import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
@@ -41,7 +40,6 @@ import org.testingisdocumenting.znai.structure.DocUrl;
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class DocElementCreationParserHandler implements ParserHandler {
@@ -95,7 +93,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSectionStart(String title, HeadingPayloadList payloadList) {
+    public void onSectionStart(String title, HeadingProps headingProps) {
         currentSectionTitle = title;
 
         if (isSectionStarted) {
@@ -103,10 +101,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
         }
 
         String id = new PageSectionIdTitle(title).getId();
-        start(DocElementType.SECTION,
-                "title", title,
-                "id", id,
-                "payload", payloadList.toListOfMaps());
+        Map<String, Object> props = new LinkedHashMap<>(headingProps.getProps());
+        props.put("id", id);
+        props.put("title", title);
+
+        start(DocElementType.SECTION, props);
         subHeadingUniqueIdGenerator = new SubHeadingUniqueIdGenerator(id);
 
         componentsRegistry.docStructure().registerLocalAnchor(path, id);
@@ -129,18 +128,18 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSubHeading(int level, String title, HeadingPayloadList payloadList) {
+    public void onSubHeading(int level, String title, HeadingProps headingProps) {
         String idByTitle = new PageSectionIdTitle(title).getId();
 
         subHeadingUniqueIdGenerator.registerSubHeading(level, idByTitle);
         String id = subHeadingUniqueIdGenerator.generateId();
 
-        append(DocElementType.SUB_HEADING,
-                "id", id,
-                "level", level,
-                "title", title,
-                "payload", payloadList.toListOfMaps());
+        Map<String, Object> props = new LinkedHashMap<>(headingProps.getProps());
+        props.put("id", id);
+        props.put("level", level);
+        props.put("title", title);
 
+        append(DocElementType.SUB_HEADING, props);
         componentsRegistry.docStructure().registerLocalAnchor(path, id);
     }
 
@@ -430,6 +429,13 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     private void start(String type, Object... propsKeyValue) {
         appendAndPush(new DocElement(type, propsKeyValue));
+    }
+
+    private void start(String type, Map<String, ?> propsKeyValue) {
+        DocElement element = new DocElement(type);
+        propsKeyValue.forEach(element::addProp);
+
+        appendAndPush(element);
     }
 
     private DocElement end() {

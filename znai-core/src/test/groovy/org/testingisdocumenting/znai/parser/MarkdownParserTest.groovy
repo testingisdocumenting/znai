@@ -112,12 +112,9 @@ class MarkdownParserTest {
     }
 
     @Test
-    void "inlined code in header"() {
-        parse("# my header `:badge: v1.32`")
-
-        content.should == [[title: 'my header' , id: 'my-header',
-                            payload: [[attachToEnd: true, payload: [text: 'v1.32', type: 'TextBadge']]],
-                            type: 'Section']]
+    void "header badge"() {
+        parse('# my header {badge: "v1.32"}')
+        content.should == [[title: 'my header' , id: 'my-header', badge: 'v1.32', type: 'Section']]
     }
 
     @Test
@@ -210,34 +207,33 @@ world""")
     @Test
     void "top level sections"() {
         parse("# Section\ntext text")
-        content.should == [[type: 'Section', id: "section", title: "Section", payload: [], content:[
+        content.should == [[type: 'Section', id: "section", title: "Section", content:[
                 [type: "Paragraph", content: [[type: "SimpleText", text: "text text"]]]]]]
     }
 
     @Test
     void "top level section without text"() {
         parse("# ")
-        content.should == [[type: 'Section', id: "", title: "", payload: []]]
+        content.should == [[type: 'Section', id: "", title: ""]]
     }
 
     @Test
     void "second level section"() {
         parse("## Secondary Section \ntext text")
-        content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section', payload: []],
+        content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section'],
                            [type: 'Paragraph', content: [[type: 'SimpleText', text: 'text text']]]]
     }
 
     @Test
     void "second level section without text"() {
         parse("## ")
-        content.should == [[type: 'SubHeading', level: 2, title: '', id: '', payload: []]]
+        content.should == [[type: 'SubHeading', level: 2, title: '', id: '']]
     }
 
     @Test
     void "second level section with payload"() {
-        parse("## Secondary Section `:badge: v2.0` \ntext text")
-        content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section',
-                           payload: [[attachToEnd: true, payload: [text: "v2.0", type: "TextBadge"]]]],
+        parse('## Secondary Section {badge: "v2.0"}" \ntext text')
+        content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section', badge: 'v2.0'],
                            [type: 'Paragraph', content: [[type: 'SimpleText', text: 'text text']]]]
     }
 
@@ -257,17 +253,17 @@ world""")
 ## example
         """)
 
-        content.should == [[title: 'top level section', id: 'top-level-section', type: 'Section', payload: [],
-                            content: [[level: 2, title: 'example', id: 'top-level-section-example', type: 'SubHeading', payload: []],
-                                      [level: 4, title: 'java', id: 'top-level-section-example-java', type: 'SubHeading', payload: []],
-                                      [level: 3, title: 'java', id: 'top-level-section-example-java-2', type: 'SubHeading', payload: []],
-                                      [level: 2, title: 'constraint', id: 'top-level-section-constraint', type: 'SubHeading', payload: []],
-                                      [level: 3, title: 'java', id: 'top-level-section-constraint-java', type: 'SubHeading', payload: []],
-                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java', type: 'SubHeading', payload: []],
-                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java-2', type: 'SubHeading', payload: []]]],
-                           [title: 'another top level', id: 'another-top-level', type: 'Section', payload: [],
-                            content: [[level: 2, title: 'example', id: 'another-top-level-example', type: 'SubHeading', payload: []],
-                                      [level: 2, title: 'example', id: 'another-top-level-example-2', type: 'SubHeading', payload: []]]]]
+        content.should == [[title: 'top level section', id: 'top-level-section', type: 'Section',
+                            content: [[level: 2, title: 'example', id: 'top-level-section-example', type: 'SubHeading'],
+                                      [level: 4, title: 'java', id: 'top-level-section-example-java', type: 'SubHeading'],
+                                      [level: 3, title: 'java', id: 'top-level-section-example-java-2', type: 'SubHeading'],
+                                      [level: 2, title: 'constraint', id: 'top-level-section-constraint', type: 'SubHeading'],
+                                      [level: 3, title: 'java', id: 'top-level-section-constraint-java', type: 'SubHeading'],
+                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java', type: 'SubHeading'],
+                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java-2', type: 'SubHeading']]],
+                           [title: 'another top level', id: 'another-top-level', type: 'Section',
+                            content: [[level: 2, title: 'example', id: 'another-top-level-example', type: 'SubHeading'],
+                                      [level: 2, title: 'example', id: 'another-top-level-example-2', type: 'SubHeading']]]]
     }
 
     @Test

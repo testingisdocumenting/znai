@@ -25,21 +25,20 @@ import org.testingisdocumenting.znai.extensions.PluginsRegexp;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
-import org.testingisdocumenting.znai.parser.HeadingPayload;
-import org.testingisdocumenting.znai.parser.HeadingPayloadList;
+import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.include.IncludeBlock;
-import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
-import org.testingisdocumenting.znai.parser.docelement.DocElementType;
 import org.testingisdocumenting.znai.parser.table.GfmTableToTableConverter;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
 import org.commonmark.ext.gfm.strikethrough.Strikethrough;
 import org.commonmark.ext.gfm.tables.TableBlock;
 import org.commonmark.node.*;
+import org.testingisdocumenting.znai.utils.JsonParseException;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
+import java.util.Map;
 
 public class MarkdownVisitor extends AbstractVisitor {
     private final ComponentsRegistry componentsRegistry;
@@ -197,15 +196,17 @@ public class MarkdownVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Heading heading) {
+        HeadingTextAndProps headingTextAndProps = extractHeadingTextAndProps(heading);
+
         if (heading.getLevel() == 1) {
             if (sectionStarted) {
                 parserHandler.onSectionEnd();
             }
 
-            parserHandler.onSectionStart(extractHeadingText(heading), extractHeadingPayload(heading));
+            parserHandler.onSectionStart(headingTextAndProps.text, headingTextAndProps.props);
             sectionStarted = true;
         } else {
-            parserHandler.onSubHeading(heading.getLevel(), extractHeadingText(heading), extractHeadingPayload(heading));
+            parserHandler.onSubHeading(heading.getLevel(), headingTextAndProps.text, headingTextAndProps.props);
         }
     }
 
@@ -257,15 +258,31 @@ public class MarkdownVisitor extends AbstractVisitor {
 
     }
 
-    private String extractHeadingText(Heading heading) {
+    private HeadingTextAndProps extractHeadingTextAndProps(Heading heading) {
         heading.accept(ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor.INSTANCE);
         Node firstChild = heading.getFirstChild();
 
         if (firstChild == null) {
-            return "";
+            return new HeadingTextAndProps("", HeadingProps.EMPTY);
         }
 
-        return extractText(firstChild);
+        String extractedText = extractText(firstChild);
+
+        int startOfCurlyIdx = extractedText.indexOf('{');
+        if (startOfCurlyIdx == -1) {
+            return new HeadingTextAndProps(extractedText, HeadingProps.EMPTY);
+        }
+
+
+        try {
+            String jsonStart = extractedText.substring(startOfCurlyIdx);
+
+            Map<String, ?> props = JsonUtils.deserializeAsMap(jsonStart);
+            String headingTextOnly = extractedText.substring(0, startOfCurlyIdx).trim();
+            return new HeadingTextAndProps(headingTextOnly, new HeadingProps(props));
+        } catch (JsonParseException e) {
+            throw new RuntimeException("Can't parse props of heading: " + extractedText, e);
+        }
     }
 
     private String extractText(Node node) {
@@ -276,16 +293,13 @@ public class MarkdownVisitor extends AbstractVisitor {
         return ((Text) node).getLiteral().trim();
     }
 
-    private HeadingPayloadList extractHeadingPayload(Heading heading) {
-        HeadingPayloadList result = new HeadingPayloadList();
-        DocElementCreationParserHandler headingParser = new DocElementCreationParserHandler(componentsRegistry, path);
-        MarkdownVisitor markdownVisitor = new MarkdownVisitor(componentsRegistry, path, headingParser);
-        markdownVisitor.visitChildren(heading);
+    private static class HeadingTextAndProps {
+        private final String text;
+        private final HeadingProps props;
 
-        headingParser.getDocElement().contentToListOfMaps().stream()
-                .filter(c -> !c.get("type").equals(DocElementType.SIMPLE_TEXT))
-                .forEach(payload -> result.add(new HeadingPayload(payload, true)));
-
-        return result;
+        public HeadingTextAndProps(String text, HeadingProps props) {
+            this.text = text;
+            this.props = props;
+        }
     }
 }

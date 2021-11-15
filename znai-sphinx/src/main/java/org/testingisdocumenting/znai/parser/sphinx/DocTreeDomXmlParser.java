@@ -20,7 +20,7 @@ package org.testingisdocumenting.znai.parser.sphinx;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
-import org.testingisdocumenting.znai.parser.HeadingPayloadList;
+import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.sphinx.python.*;
 import org.testingisdocumenting.znai.reference.DocReferences;
@@ -148,7 +148,7 @@ class DocTreeDomXmlParser {
     }
 
     private boolean parseSection(Node node) {
-        parserHandler.onSectionStart(extractTitle(node), new HeadingPayloadList());
+        parserHandler.onSectionStart(extractTitle(node), HeadingProps.EMPTY);
         parseChildren(node);
         parserHandler.onSectionEnd();
 
