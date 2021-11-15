@@ -20,15 +20,28 @@ import { DoxygenLink, DoxygenParameter } from "./Doxygen";
 import { DoxygenTextWithLinks } from "./DoxygenTextWithLinks";
 
 import "./DoxygenMember.css";
+import { LinkWrapper } from "../default-elements/LinkWrapper";
+import { globalAnchorUrl } from "../references/globalAnchors";
 
 interface Props {
   compoundName: string;
   name: string;
+  refId?: string;
   returnType: DoxygenLink[];
   parameters: DoxygenParameter[];
 }
 
-export function DoxygenMember({ compoundName, name, returnType, parameters }: Props) {
+export function DoxygenMember({ compoundName, name, refId, returnType, parameters }: Props) {
+  const renderedName = <div className="znai-doxygen-member-name">{name}</div>;
+  const memberUrl = refId ? globalAnchorUrl(refId) : undefined;
+  const wrappedInOptionalLink = memberUrl ? (
+    <LinkWrapper url={memberUrl} treatAsLocal={true}>
+      {renderedName}
+    </LinkWrapper>
+  ) : (
+    renderedName
+  );
+
   return (
     <div className="znai-doxygen-member content-block">
       <div className="znai-doxygen-member-return">
@@ -42,7 +55,7 @@ export function DoxygenMember({ compoundName, name, returnType, parameters }: Pr
           </>
         )}
 
-        <div className="znai-doxygen-member-name">{name}</div>
+        {wrappedInOptionalLink}
         <div className="znai-doxygen-member-params">
           <div className="znai-doxygen-member-params-separator">(</div>
           {parameters.map((param, idx) => {

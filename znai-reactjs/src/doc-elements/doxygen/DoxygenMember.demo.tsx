@@ -18,12 +18,46 @@ import React from "react";
 
 import { Registry } from "react-component-viewer";
 import { DoxygenMember } from "./DoxygenMember";
+import { updateGlobalAnchors } from "../references/globalAnchors";
 
 export function doxygenMemberDemo(registry: Registry) {
+  updateGlobalAnchors({ test_link: "list/blah" });
+
   registry.add("default", () => (
     <DoxygenMember
       compoundName="utils::nested"
       name="my_func"
+      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      parameters={[
+        {
+          name: "p_one",
+          type: [
+            { text: "const ", refId: "" },
+            { text: "MyClass", refId: "MyClass__8x" },
+          ],
+        },
+        {
+          name: "p_two",
+          type: [
+            { text: "const ", refId: "" },
+            { text: "AnotherClass", refId: "AnotherClass__9x" },
+          ],
+        },
+        {
+          name: "p_three",
+          type: [
+            { text: "const ", refId: "" },
+            { text: "AnotherClass2", refId: "AnotherClass2__9x" },
+          ],
+        },
+      ]}
+    />
+  ));
+  registry.add("with link", () => (
+    <DoxygenMember
+      compoundName=""
+      name="my_func"
+      refId="test_link"
       returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
       parameters={[
         {

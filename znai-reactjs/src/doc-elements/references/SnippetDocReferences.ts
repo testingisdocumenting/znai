@@ -18,4 +18,4 @@ export interface DocReference {
   pageUrl: string;
 }
 
-export type DocReferences = { [key: string]: DocReference };
+export type SnippetDocReferences = { [key: string]: DocReference };

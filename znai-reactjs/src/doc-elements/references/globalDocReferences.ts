@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { DocReferences } from "./DocReferences";
+import { SnippetDocReferences } from "./SnippetDocReferences";
 
 /**
  * global references are defined on the documentation level and is applicable to every code snippet.
@@ -24,16 +24,16 @@ import { DocReferences } from "./DocReferences";
  * @param localReferences local references, can be null
  * @returns {Object} global references merged with local, null if neither is defined
  */
-export function mergeWithGlobalDocReferences(localReferences?: DocReferences) {
+export function mergeWithGlobalDocReferences(localReferences?: SnippetDocReferences) {
   return { ...getGlobalDocReferences(), ...localReferences };
 }
 
-export function getGlobalDocReferences(): DocReferences {
+export function getGlobalDocReferences(): SnippetDocReferences {
   // @ts-ignore
   return window.docReferences || {};
 }
 
-export function updateGlobalDocReferences(docReferences: DocReferences) {
+export function updateGlobalDocReferences(docReferences: SnippetDocReferences) {
   // @ts-ignore
   window.docReferences = docReferences;
 }

@@ -66,6 +66,10 @@ class Server {
                 this.handlers.onDocReferencesUpdate(data.docReferences)
             }
 
+            if (data.type === 'globalAnchorsUpdate') {
+                this.handlers.onGlobalAnchorsUpdate(data.docReferences)
+            }
+
             if (data.type === 'error') {
                 this.handlers.onError(data.error)
             }

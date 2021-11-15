@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.parser.MarkupParsingConfiguration;
 
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -34,7 +35,7 @@ class WebSiteDocStructure implements DocStructure {
     private TableOfContents toc;
     private final MarkupParsingConfiguration parsingConfiguration;
     private final List<LinkToValidate> linksToValidate;
-    private final Map<String, Path> globalAnchorPathById;
+    private final Map<String, GlobalAnchor> globalAnchorsById;
     private final Map<TocItem, List<String>> localAnchorIdsByTocItem;
 
     WebSiteDocStructure(ComponentsRegistry componentsRegistry,
@@ -46,14 +47,14 @@ class WebSiteDocStructure implements DocStructure {
         this.toc = toc;
         this.parsingConfiguration = parsingConfiguration;
         this.linksToValidate = new ArrayList<>();
-        this.globalAnchorPathById = new HashMap<>();
+        this.globalAnchorsById = new HashMap<>();
         this.localAnchorIdsByTocItem = new HashMap<>();
     }
 
     void removeGlobalAnchorsForPath(Path path) {
-        List<Map.Entry<String, Path>> entriesForPath =
-                globalAnchorPathById.entrySet().stream().filter(kv -> kv.getValue().equals(path)).collect(toList());
-        entriesForPath.forEach(kv -> globalAnchorPathById.remove(kv.getKey()));
+        List<Map.Entry<String, GlobalAnchor>> entriesForPath =
+                globalAnchorsById.entrySet().stream().filter(kv -> kv.getValue().getFilePath().equals(path)).collect(toList());
+        entriesForPath.forEach(kv -> globalAnchorsById.remove(kv.getKey()));
     }
 
     void removeLocalAnchorsForTocItem(TocItem tocItem) {
@@ -109,14 +110,17 @@ class WebSiteDocStructure implements DocStructure {
 
     @Override
     public void registerGlobalAnchor(Path sourcePath, String anchorId) {
-        Path existingPath = globalAnchorPathById.get(anchorId);
+        GlobalAnchor globalAnchor = globalAnchorsById.get(anchorId);
 
-        if (existingPath != null) {
+        if (globalAnchor != null) {
             ProgressReporter.reportWarning("global anchor <" + anchorId + "> specified in " + sourcePath +
-                    " is already registered in " + existingPath);
+                    " is already registered in " + globalAnchor.getFilePath());
         }
 
-        globalAnchorPathById.put(anchorId, sourcePath);
+        TocItem tocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, sourcePath);
+        String url = createUrl(sourcePath, new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), anchorId));
+
+        globalAnchorsById.put(anchorId, new GlobalAnchor(anchorId, sourcePath, url));
     }
 
     @Override
@@ -132,13 +136,21 @@ class WebSiteDocStructure implements DocStructure {
 
     @Override
     public String globalAnchorUrl(Path clientPath, String anchorId) {
-        Path anchorPath = globalAnchorPathById.get(anchorId);
-        if (anchorPath == null) {
-            throw new RuntimeException("cannot find global anchor <" + anchorId + "> referenced in " + clientPath);
+        GlobalAnchor anchor = globalAnchorsById.get(anchorId);
+        if (anchor == null) {
+            throw new RuntimeException("cannot find global anchor <" + anchorId +
+                    "> referenced in " + clientPath + ".\nMake sure you call globalAnchorUrl in lazy evaluated manner" +
+                    " to make sure all the global references were registered");
         }
 
-        TocItem tocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, anchorPath);
-        return createUrl(anchorPath, new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), anchorId));
+        TocItem tocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, anchor.getFilePath());
+        return createUrl(anchor.getFilePath(), new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), anchorId));
+    }
+
+    @Override
+    public Map<String, String> globalAnchors() {
+        return globalAnchorsById.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().getUrl()));
     }
 
     @Override
@@ -193,12 +205,12 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     private boolean isValidGlobalAnchor(TocItem tocItemWithAnchor, String anchorId) {
-        Path anchorPath = globalAnchorPathById.get(anchorId);
-        if (anchorPath == null) {
+        GlobalAnchor globalAnchor = globalAnchorsById.get(anchorId);
+        if (globalAnchor == null) {
             return false;
         }
 
-        TocItem anchorTocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, anchorPath);
+        TocItem anchorTocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, globalAnchor.getFilePath());
         return tocItemWithAnchor.equals(anchorTocItem);
     }
 
