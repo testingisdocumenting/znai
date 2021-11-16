@@ -40,10 +40,8 @@ export function SubHeading({ level, title, id, badge, style }: Props) {
   return (
     // @ts-ignore
     <Element className={className} id={id}>
-      <span>
-        {title}
-        {badge && <TextBadge text={badge} />}
-      </span>
+      <span className="znai-heading-title">{title}</span>
+      {badge && <TextBadge text={badge} />}
       <a href={"#" + id}>
         <Icon id="link" />
       </a>

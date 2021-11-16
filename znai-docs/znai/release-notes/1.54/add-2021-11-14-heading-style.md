@@ -1,0 +1,1 @@
+* Add [API heading style](visuals/headings)
