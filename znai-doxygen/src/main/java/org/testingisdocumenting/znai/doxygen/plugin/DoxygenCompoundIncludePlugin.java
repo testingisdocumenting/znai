@@ -20,8 +20,10 @@ import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.Doxygen;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenCompound;
+import org.testingisdocumenting.znai.doxygen.parser.DoxygenMember;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -35,7 +37,11 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class DoxygenCompoundIncludePlugin implements IncludePlugin {
+    private static final HeadingProps headingProps = new HeadingProps(Collections.singletonMap("style", "api"));
     private DoxygenCompound compound;
+    private ComponentsRegistry componentsRegistry;
+    private ParserHandler parserHandler;
+    private Path markupPath;
 
     @Override
     public String id() {
@@ -49,6 +55,9 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
+        this.componentsRegistry = componentsRegistry;
+        this.parserHandler = parserHandler;
+        this.markupPath = markupPath;
         Doxygen doxygen = Doxygen.INSTANCE;
 
         String fullName = pluginParams.getFreeParam();
@@ -64,35 +73,64 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
         parserHandler.onSectionStart(compound.getName(),
                 new HeadingProps(CollectionUtils.createMap("badge", compound.getKind(), "style", "api")));
 
-        HeadingProps headingProps = new HeadingProps(Collections.singletonMap("style", "api"));
+        insertDocs(fullName);
 
-        parserHandler.onSubHeading(2, "functions", headingProps);
-        compound.membersStream().forEach(member -> {
-            Map<String, Object> memberProps = member.toMap();
-            memberProps.put("compoundName", ""); // to remove compound name from rendering list of members
-            memberProps.put("refId", member.getId()); // to make clickable, as in TOC for members
+        parserHandler.onSubHeading(3, "Public Functions", headingProps);
+        compound.publicNonStaticFunctionsStream().forEach(this::createMemberDecl);
 
-            parserHandler.onCustomNode("DoxygenMember", memberProps);
-        });
+        parserHandler.onSubHeading(3, "Static Public Functions", headingProps);
+        compound.publicStaticFunctionsStream().forEach(this::createMemberDecl);
 
-        parserHandler.onSubHeading(2, "definitions", headingProps);
-        compound.membersStream().forEach(member -> {
-            parserHandler.onSubHeading(3, member.getName(), headingProps);
-            parserHandler.onGlobalAnchor(member.getId());
-            parserHandler.onCustomNode("DoxygenMember", member.toMap());
-        });
+        parserHandler.onSubHeading(3, "Public Attributes", headingProps);
+        compound.publicNonStaticAttributesStream().forEach(this::createMemberDecl);
+
+        parserHandler.onSubHeading(3, "Static Public Attributes", headingProps);
+        compound.publicStaticAttributesStream().forEach(this::createMemberDecl);
+
+        parserHandler.onSubHeading(3, "Protected Functions", headingProps);
+        compound.protectedFunctionsStream().forEach(this::createMemberDecl);
+
+        parserHandler.onSubHeading(3, "Definitions", headingProps);
+        compound.publicNonStaticFunctionsStream().forEach(this::createMemberDef);
+        compound.publicStaticFunctionsStream().forEach(this::createMemberDef);
+        compound.publicNonStaticAttributesStream().forEach(this::createMemberDef);
+        compound.publicStaticAttributesStream().forEach(this::createMemberDef);
+        compound.protectedFunctionsStream().forEach(this::createMemberDef);
 
         return PluginResult.docElements(Stream.empty());
     }
 
+    private void insertDocs(String fullName) {
+        IncludePlugin includePlugin = DoxygenDocIncludePlugin.createDocPlugin();
+        PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, markupPath,
+                new PluginParams(includePlugin.id(), fullName));
+        parserHandler.onIncludePlugin(includePlugin, pluginResult);
+    }
+
     @Override
     public SearchText textForSearch() {
-        // TODO include all texts from all members, etc
         return SearchScore.HIGH.text(compound.getName());
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(Doxygen.INSTANCE.getIndexPath()));
+    }
+
+    public void createMemberDecl(DoxygenMember member) {
+        Map<String, Object> memberProps = member.toMap();
+        memberProps.put("compoundName", ""); // to remove compound name from rendering list of members
+        memberProps.put("refId", member.getId()); // to make clickable, as in TOC for members
+
+        parserHandler.onCustomNode("DoxygenMember", memberProps);
+    }
+
+    public void createMemberDef(DoxygenMember member) {
+        parserHandler.onSubHeading(4, member.getName(), headingProps);
+
+        IncludePlugin includePlugin = DoxygenMemberIncludePlugin.createMemberPlugin();
+        PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, markupPath,
+                new PluginParams(includePlugin.id(), member.getFullName()));
+        parserHandler.onIncludePlugin(includePlugin, pluginResult);
     }
 }

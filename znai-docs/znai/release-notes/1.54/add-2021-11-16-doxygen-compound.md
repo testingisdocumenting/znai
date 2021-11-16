@@ -1,0 +1,1 @@
+* Add [doxygen compound](snippets/doxygen#compound) to include class description and methods/attributes

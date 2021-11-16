@@ -21,13 +21,16 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.Doxygen;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMember;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.stream.Stream;
 
 public class DoxygenMemberIncludePlugin implements IncludePlugin {
@@ -40,6 +43,10 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
 
     @Override
     public IncludePlugin create() {
+        return createMemberPlugin();
+    }
+
+    public static IncludePlugin createMemberPlugin() {
         return new DoxygenMemberIncludePlugin();
     }
 
@@ -47,6 +54,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         Doxygen doxygen = Doxygen.INSTANCE;
 
+        PluginParamsOpts paramsOpts = pluginParams.getOpts();
         String fullName = pluginParams.getFreeParam();
 
         member = doxygen.getCachedOrFindAndParseMember(componentsRegistry,
@@ -58,7 +66,26 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
         }
 
         parserHandler.onGlobalAnchor(member.getId());
-        return PluginResult.docElement("DoxygenMember", member.toMap());
+
+        if (paramsOpts.get("signatureOnly", false)) {
+            return PluginResult.docElement("DoxygenMember", member.toMap());
+        }
+
+        parserHandler.onCustomNode("DoxygenMember", member.toMap());
+
+        IncludePlugin docPlugin = DoxygenDocIncludePlugin.createDocPlugin();
+        parserHandler.onIncludePlugin(docPlugin,
+                docPlugin.process(componentsRegistry, parserHandler, markupPath,
+                        new PluginParams(docPlugin.id(), fullName)));
+
+        if (member.isFunction()) {
+            IncludePlugin docParamsPlugin = DoxygenDocParamsIncludePlugin.createDocParamsPlugin();
+            parserHandler.onIncludePlugin(docParamsPlugin,
+                    docParamsPlugin.process(componentsRegistry, parserHandler, markupPath,
+                            new PluginParams(docPlugin.id(), fullName, Collections.singletonMap("small", true))));
+        }
+
+        return PluginResult.docElements(Stream.empty());
     }
 
     @Override

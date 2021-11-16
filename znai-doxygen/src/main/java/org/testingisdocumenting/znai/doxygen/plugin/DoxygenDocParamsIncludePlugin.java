@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.doxygen.parser.DoxygenDescription;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMember;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.search.SearchScore;
@@ -42,17 +43,30 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
 
     @Override
     public IncludePlugin create() {
+        return createDocParamsPlugin();
+    }
+
+    public static IncludePlugin createDocParamsPlugin() {
         return new DoxygenDocParamsIncludePlugin();
     }
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
-        member = Doxygen.INSTANCE.getCachedOrFindAndParseMember(componentsRegistry,
-                pluginParams.getFreeParam());
+        Doxygen doxygen = Doxygen.INSTANCE;
+
+        String fullName = pluginParams.getFreeParam();
+        member = doxygen.getCachedOrFindAndParseMember(componentsRegistry,
+                fullName);
+
+        if (member == null) {
+            throw new RuntimeException("can't find member: " + fullName + ", available names:\n" +
+                    doxygen.buildIndexOrGetCached(componentsRegistry).renderAvailableMemberNames());
+        }
 
         DoxygenDescription description = member.getDescription();
 
-        Map<String, Object> props = description.getApiParameters().toMap();
+        Map<String, Object> props = pluginParams.getOpts().toMap();
+        props.putAll(description.getApiParameters().toMap());
         props.putAll(pluginParams.getOpts().toMap());
         return PluginResult.docElement("ApiParameters", props);
     }
