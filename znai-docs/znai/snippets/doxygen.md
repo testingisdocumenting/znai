@@ -2,8 +2,11 @@
 
 Znai parses generated [Doxygen](https://www.doxygen.nl/index.html) XML files to extract and embed
 * Comments
-* Signatures (coming)
-* Parameters (coming)
+* Signatures 
+* Parameters
+
+Use the building blocks to mix and match API documentation with visuals and other artifacts.
+Or use the built-in plugins to generate the whole blocks of API reference.
 
 # Setup
 
@@ -13,7 +16,7 @@ Specify `index.xml` location inside `<docroot>/doxygen.json`
 
 # Extract Comment Text
 
-## Functions And Methods
+## Members Comment Text
 
 Use `include-doxygen-doc` to extract a function description
 
@@ -25,7 +28,7 @@ Use `include-doxygen-doc` to extract a function description
 
 Note: Plugin ignores parameters block and only includes the description text
 
-## Classes
+## Classes Comment Text
 
 To extract class top level comment, provide full class name
 
@@ -35,13 +38,21 @@ To extract class top level comment, provide full class name
 
 :include-doxygen-doc: utils::second::MyClass
 
-# Member Signature
+# Member Signature, Comment And Parameters
 
 Use `include-doxygen-member` to render member signature
 
     :include-doxygen-member: utils::nested::my_func
 
 :include-doxygen-member: utils::nested::my_func 
+
+# Member Signature Only
+
+Use `signatureOnly: true` parameter to render only member signature
+
+    :include-doxygen-member: utils::second::MyClass::bark { signatureOnly: true }
+
+:include-doxygen-member: utils::second::MyClass::bark { signatureOnly: true }
 
 # Extract Comment Parameters
 
@@ -50,6 +61,10 @@ Use `include-doxygen-doc-params` to extract parameters description from doxygen 
     :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }
 
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }
+
+Use `small: true` option to make parameters smaller 
+
+:include-doxygen-doc-params: utils::nested::my_func { title: "My Params", small: true }
 
 # Compound
 

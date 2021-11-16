@@ -27,6 +27,7 @@ export function doxygenMemberDemo(registry: Registry) {
     <DoxygenMember
       compoundName="utils::nested"
       name="my_func"
+      isFunction={true}
       returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
       parameters={[
         {
@@ -55,6 +56,7 @@ export function doxygenMemberDemo(registry: Registry) {
   ));
   registry.add("with link", () => (
     <DoxygenMember
+      isFunction={true}
       compoundName=""
       name="my_func"
       refId="test_link"

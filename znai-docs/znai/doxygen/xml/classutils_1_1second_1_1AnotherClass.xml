@@ -10,13 +10,13 @@
         <argsstring></argsstring>
         <name>number_of_sounds</name>
         <briefdescription>
-<para>current number of sounds made </para>
         </briefdescription>
         <detaileddescription>
+<para>current number of sounds made </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="10" column="9" bodyfile="src/classes_two.h" bodystart="10" bodyend="-1"/>
+        <location file="src/classes_two.h" line="12" column="9" bodyfile="src/classes_two.h" bodystart="12" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-attrib">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="12" column="16" bodyfile="src/classes_two.h" bodystart="12" bodyend="-1"/>
+        <location file="src/classes_two.h" line="14" column="16" bodyfile="src/classes_two.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="19" column="10"/>
+        <location file="src/classes_two.h" line="21" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a583e410fbb93deef48631f0a7382e7fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -111,7 +111,36 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="26" column="10"/>
+        <location file="src/classes_two.h" line="28" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a7f879de76a89c99be528367721e77526" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void utils::second::AnotherClass::smile</definition>
+        <argsstring>(int volume)</argsstring>
+        <name>smile</name>
+        <param>
+          <type>int</type>
+          <declname>volume</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>global smile <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>volume</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>smile volume </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/classes_two.h" line="34" column="17" bodyfile="src/classes_two.h" bodystart="34" bodyend="35"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-func">
@@ -152,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="35" column="18"/>
+        <location file="src/classes_two.h" line="43" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -160,13 +189,14 @@
     <detaileddescription>
 <para><bold>Domain</bold> specific context setting. Describes business setting and requirements. </para>
     </detaileddescription>
-    <location file="src/classes_two.h" line="7" column="1" bodyfile="src/classes_two.h" bodystart="7" bodyend="37"/>
+    <location file="src/classes_two.h" line="7" column="1" bodyfile="src/classes_two.h" bodystart="7" bodyend="45"/>
     <listofallmembers>
       <member refid="classutils_1_1second_1_1AnotherClass_1a583e410fbb93deef48631f0a7382e7fd" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>bark</name></member>
       <member refid="classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>counter</name></member>
       <member refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" prot="protected" virt="virtual"><scope>utils::second::AnotherClass</scope><name>help</name></member>
       <member refid="classutils_1_1second_1_1AnotherClass_1a5126e99df34cb7a3d702193dc3511114" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>number_of_sounds</name></member>
       <member refid="classutils_1_1second_1_1AnotherClass_1a204e9b29b851102ef16951cddc42ea63" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>sing</name></member>
+      <member refid="classutils_1_1second_1_1AnotherClass_1a7f879de76a89c99be528367721e77526" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>smile</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

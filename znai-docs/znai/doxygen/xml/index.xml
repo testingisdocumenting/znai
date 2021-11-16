@@ -5,6 +5,7 @@
     <member refid="classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14" kind="variable"><name>counter</name></member>
     <member refid="classutils_1_1second_1_1AnotherClass_1a204e9b29b851102ef16951cddc42ea63" kind="function"><name>sing</name></member>
     <member refid="classutils_1_1second_1_1AnotherClass_1a583e410fbb93deef48631f0a7382e7fd" kind="function"><name>bark</name></member>
+    <member refid="classutils_1_1second_1_1AnotherClass_1a7f879de76a89c99be528367721e77526" kind="function"><name>smile</name></member>
     <member refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" kind="function"><name>help</name></member>
   </compound>
   <compound refid="classutils_1_1second_1_1MyClass" kind="class"><name>utils::second::MyClass</name>

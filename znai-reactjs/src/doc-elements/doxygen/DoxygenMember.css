@@ -18,6 +18,7 @@
     display: flex;
     font-family: var(--znai-code-font-family);
     font-size: var(--znai-code-text-size);
+    margin-bottom: 8px;
 }
 
 .znai-doxygen-member-full-name {

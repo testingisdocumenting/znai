@@ -27,11 +27,12 @@ interface Props {
   compoundName: string;
   name: string;
   refId?: string;
+  isFunction: boolean;
   returnType: DoxygenLink[];
   parameters: DoxygenParameter[];
 }
 
-export function DoxygenMember({ compoundName, name, refId, returnType, parameters }: Props) {
+export function DoxygenMember({ compoundName, name, refId, returnType, isFunction, parameters }: Props) {
   const renderedName = <div className="znai-doxygen-member-name">{name}</div>;
   const memberUrl = refId ? globalAnchorUrl(refId) : undefined;
   const wrappedInOptionalLink = memberUrl ? (
@@ -57,7 +58,7 @@ export function DoxygenMember({ compoundName, name, refId, returnType, parameter
 
         {wrappedInOptionalLink}
         <div className="znai-doxygen-member-params">
-          <div className="znai-doxygen-member-params-separator">(</div>
+          {isFunction && <div className="znai-doxygen-member-params-separator">(</div>}
           {parameters.map((param, idx) => {
             const needSeparator = idx !== parameters.length - 1;
             return (
@@ -70,7 +71,7 @@ export function DoxygenMember({ compoundName, name, refId, returnType, parameter
               </div>
             );
           })}
-          <div className="znai-doxygen-member-params-separator">)</div>
+          {isFunction && <div className="znai-doxygen-member-params-separator">)</div>}
         </div>
       </div>
     </div>

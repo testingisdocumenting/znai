@@ -69,9 +69,6 @@ different subheading colors
 
 ## Sub Heading Types {style: "api"}
 
-
-
-
 # Meta
 
 Each documentation must have the `meta.json` file in its root.
