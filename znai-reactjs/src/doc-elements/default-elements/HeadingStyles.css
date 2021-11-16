@@ -26,3 +26,13 @@ h5.znai-heading.api,
 h6.znai-heading.api {
     color: var(--znai-heading-api-color);
 }
+
+h2.znai-heading.api .znai-heading-title,
+h3.znai-heading.api .znai-heading-title {
+    border-bottom: 1px solid var(--znai-heading-api-color);
+}
+
+h4.znai-heading.api .znai-heading-title {
+    background-color: var(--znai-heading-api-background-color);
+    padding: 2px;
+}
