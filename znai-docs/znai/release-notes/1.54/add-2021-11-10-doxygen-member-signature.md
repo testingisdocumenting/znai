@@ -1,1 +1,1 @@
-* Add [doxygen member signature](snippets/doxygen#member-signature)
+* Add [doxygen member signature](snippets/doxygen#member-signature-only)

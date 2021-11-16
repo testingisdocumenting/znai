@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.doxygen.parser;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class DoxygenCompound {
@@ -64,5 +65,37 @@ public class DoxygenCompound {
 
     public Stream<DoxygenMember> membersStream() {
         return memberById.values().stream();
+    }
+
+    public Stream<DoxygenMember> publicNonStaticFunctionsStream() {
+        return publicFunctionsStream().filter(member -> !member.isStatic());
+    }
+
+    public Stream<DoxygenMember> protectedFunctionsStream() {
+        return filterStream(DoxygenMember::isProtected);
+    }
+
+    public Stream<DoxygenMember> publicStaticFunctionsStream() {
+        return publicFunctionsStream().filter(DoxygenMember::isStatic);
+    }
+
+    public Stream<DoxygenMember> publicNonStaticAttributesStream() {
+        return publicAttributesStream().filter(member -> !member.isStatic());
+    }
+
+    public Stream<DoxygenMember> publicStaticAttributesStream() {
+        return publicAttributesStream().filter(DoxygenMember::isStatic);
+    }
+
+    public Stream<DoxygenMember> publicAttributesStream() {
+        return filterStream(member -> member.isVariable() && member.isPublic());
+    }
+
+    public Stream<DoxygenMember> publicFunctionsStream() {
+        return filterStream(member -> member.isFunction() && member.isPublic());
+    }
+
+    private Stream<DoxygenMember> filterStream(Predicate<DoxygenMember> predicate) {
+        return memberById.values().stream().filter(predicate);
     }
 }

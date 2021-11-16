@@ -6,7 +6,9 @@ namespace second {
  */
 class AnotherClass {
 public:
-    /// current number of sounds made
+    /**
+     * current number of sounds made
+     */
     int number_of_sounds;
 
     static int counter;
@@ -25,6 +27,12 @@ public:
     ///
     void bark(int tone, int volume);
 
+    ///
+    /// global smile
+    /// @param volume smile volume
+    ///
+    static void smile(int volume) {
+    }
 
 protected:
     ///

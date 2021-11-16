@@ -102,12 +102,28 @@ public class DoxygenMember {
         this.visibility = visibility;
     }
 
+    public boolean isPublic() {
+        return "public".equals(visibility);
+    }
+
+    public boolean isProtected() {
+        return "protected".equals(visibility);
+    }
+
     public String getKind() {
         return kind;
     }
 
     public void setKind(String kind) {
         this.kind = kind;
+    }
+
+    public boolean isVariable() {
+        return "variable".equals(kind);
+    }
+
+    public boolean isFunction() {
+        return "function".equals(kind);
     }
 
     public boolean isVirtual() {
@@ -134,6 +150,7 @@ public class DoxygenMember {
         result.put("visibility", visibility);
         result.put("kind", kind);
         result.put("isVirtual", isVirtual);
+        result.put("isFunction", isFunction());
         result.put("isStatic", isStatic);
         result.put("returnType", returnType.toListOfMaps());
         result.put("parameters", parameters.stream().map(DoxygenParameter::toMap).collect(Collectors.toList()));

@@ -42,6 +42,10 @@ public class DoxygenDocIncludePlugin implements IncludePlugin {
 
     @Override
     public IncludePlugin create() {
+        return createDocPlugin();
+    }
+
+    public static IncludePlugin createDocPlugin() {
         return new DoxygenDocIncludePlugin();
     }
 
