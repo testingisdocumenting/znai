@@ -40,7 +40,7 @@ h4 {
     font-weight: 800;
     color: var(--znai-section-h4-color);
     margin-top: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 h5 {
@@ -48,7 +48,7 @@ h5 {
     font-weight: 400;
     color: var(--znai-section-h5-color);
     margin-top: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 h6 {
@@ -57,7 +57,7 @@ h6 {
     text-transform: uppercase;
     color: var(--znai-section-h6-color);
     margin-top: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 h2 .znai-icon svg {
