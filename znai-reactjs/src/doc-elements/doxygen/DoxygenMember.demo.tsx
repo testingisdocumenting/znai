@@ -18,11 +18,8 @@ import React from "react";
 
 import { Registry } from "react-component-viewer";
 import { DoxygenMember } from "./DoxygenMember";
-import { updateGlobalAnchors } from "../references/globalAnchors";
 
 export function doxygenMemberDemo(registry: Registry) {
-  updateGlobalAnchors({ test_link: "list/blah" });
-
   registry.add("default", () => (
     <DoxygenMember
       compoundName="utils::nested"

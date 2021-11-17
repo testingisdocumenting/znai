@@ -17,8 +17,8 @@
 package org.testingisdocumenting.znai.doxygen.parser;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.utils.XmlUtils;
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class DoxygenMemberParser {
@@ -53,13 +53,14 @@ public class DoxygenMemberParser {
 
         member.setReturnType(DoxygenTextWithLinksParser.parse(XmlUtils.nextLevelNodeByName(memberNode, "type")));
 
-        XmlUtils.allNestedNodesStreamByName(memberNode, "param").forEach((paramNode) -> {
+        XmlUtils.childrenNodesStreamByName(memberNode, "param").forEach((paramNode) -> {
             String name = XmlUtils.nextLevelNodeByName(paramNode, "declname").getTextContent();
-            DoxygenTextWithLinks type = DoxygenTextWithLinksParser.parse(XmlUtils.nextLevelNodeByName(paramNode, "type"));
+            ApiLinkedText type = DoxygenTextWithLinksParser.parse(XmlUtils.nextLevelNodeByName(paramNode, "type"));
             member.addParameter(name, type);
         });
 
         member.setDescription(DoxygenDescriptionParser.parse(componentsRegistry,
+                member.getParameters(),
                 member.getName(),
                 XmlUtils.anyNestedNodeByName(memberNode, "detaileddescription")));
     }

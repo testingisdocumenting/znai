@@ -54,7 +54,8 @@ public class DoxygenCompoundParser {
         compound.name = XmlUtils.nextLevelNodeByName(compoundRoot, "compoundname").getTextContent();
 
         Node description = XmlUtils.nextLevelNodeByName(compoundRoot, "detaileddescription");
-        compound.description = DoxygenDescriptionParser.parse(componentsRegistry, id, description);
+        compound.description = DoxygenDescriptionParser.parse(componentsRegistry, new DoxygenParameterList(),
+                id, description);
 
         XmlUtils.allNestedNodesStreamByName(compoundRoot, "memberdef").forEach(this::parseMember);
     }

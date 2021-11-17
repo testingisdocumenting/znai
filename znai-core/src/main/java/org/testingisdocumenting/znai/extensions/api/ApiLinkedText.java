@@ -14,33 +14,44 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.doxygen.parser;
+package org.testingisdocumenting.znai.extensions.api;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class DoxygenTextWithLinks {
-    private final List<DoxygenLink> parts;
+public class ApiLinkedText {
+    private final List<ApiLinkedTextPart> parts;
 
-    public DoxygenTextWithLinks() {
+    public ApiLinkedText() {
         this.parts = new ArrayList<>();
     }
 
+    public ApiLinkedText(String textOnly) {
+        this.parts = new ArrayList<>();
+        addPart(textOnly);
+    }
+
     public void addPart(String text) {
-        parts.add(new DoxygenLink(text, ""));
+        parts.add(new ApiLinkedTextPart(text, ""));
     }
 
     public void addPart(String text, String refId) {
-        parts.add(new DoxygenLink(text, refId));
+        parts.add(new ApiLinkedTextPart(text, refId));
     }
 
-    public List<DoxygenLink> getParts() {
+    public List<ApiLinkedTextPart> getParts() {
         return parts;
     }
 
     public List<Map<String, Object>> toListOfMaps() {
-        return parts.stream().map(DoxygenLink::toMap).collect(Collectors.toList());
+        return parts.stream().map(ApiLinkedTextPart::toMap).collect(Collectors.toList());
+    }
+
+    public String buildCombinedText() {
+        return this.parts.stream()
+                .map((part) -> part.getText().trim())
+                .collect(Collectors.joining(" "));
     }
 }

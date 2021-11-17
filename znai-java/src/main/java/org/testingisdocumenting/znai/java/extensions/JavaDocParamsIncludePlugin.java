@@ -18,6 +18,7 @@
 package org.testingisdocumenting.znai.java.extensions;
 
 import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.java.parser.JavaCode;
@@ -51,7 +52,7 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
         javaMethod.getParams().forEach(param -> {
             JavaDocElementsMapsAndSearchText docElementsMapsAndSearchText =
                     javaDocTextToDocElements(param.getJavaDocText());
-            apiParameters.add(param.getName(), param.getType(),
+            apiParameters.add(param.getName(), new ApiLinkedText(param.getType()),
                     docElementsMapsAndSearchText.docElementsMaps, docElementsMapsAndSearchText.searchText);
         });
 
@@ -89,7 +90,7 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
         JavaDocElementsMapsAndSearchText elementsMapsAndSearchText =
                 javaDocTextToDocElements(methodReturn.getJavaDocText());
 
-        apiParameters.add("return", methodReturn.getType(),
+        apiParameters.add("return", new ApiLinkedText(methodReturn.getType()),
                 elementsMapsAndSearchText.docElementsMaps, elementsMapsAndSearchText.searchText);
     }
 }

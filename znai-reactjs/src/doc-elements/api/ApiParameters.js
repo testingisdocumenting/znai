@@ -15,56 +15,56 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import ApiParameter from './ApiParameter'
+import React from "react";
+import ApiParameter from "./ApiParameter";
 
-import './ApiParameters.css'
+import "./ApiParameters.css";
 
 export default function ApiParameters({
-                                          parameters,
-                                          title,
-                                          references,
-                                          nestedLevel,
-                                          small,
-                                          parentWidth = 0,
-                                          elementsLibrary
+                                        parameters,
+                                        title,
+                                        references,
+                                        nestedLevel,
+                                        small,
+                                        parentWidth = 0,
+                                        elementsLibrary
                                       }) {
-    const renderedParameters = parameters.map(p => <ApiParameter key={p.name}
-                                                                 anchorId={p.anchorId}
-                                                                 name={p.name}
-                                                                 type={p.type}
-                                                                 isExpanded={false}
-                                                                 children={p.children}
-                                                                 description={p.description}
-                                                                 nestedLevel={nestedLevel}
-                                                                 references={references}
-                                                                 elementsLibrary={elementsLibrary}/>)
+  const renderedParameters = (parameters || []).map(p => <ApiParameter key={p.name}
+                                                                       anchorId={p.anchorId}
+                                                                       name={p.name}
+                                                                       type={p.type}
+                                                                       isExpanded={false}
+                                                                       children={p.children}
+                                                                       description={p.description}
+                                                                       nestedLevel={nestedLevel}
+                                                                       references={references}
+                                                                       elementsLibrary={elementsLibrary} />);
 
-    const isNested = nestedLevel > 0
-    const className = 'znai-api-parameters' +
-        (isNested ? ' nested' : '') +
-        (small ? ' small' : '')
+  const isNested = nestedLevel > 0;
+  const className = "znai-api-parameters" +
+    (isNested ? " nested" : "") +
+    (small ? " small" : "");
 
-    const style = {marginLeft: -parentWidth}
+  const style = { marginLeft: -parentWidth };
 
-    return (
-        <div className={className} style={style}>
-            <ApiParametersTitle title={title} nestedLevel={nestedLevel}/>
-            {renderedParameters}
-        </div>
-    )
+  return (
+    <div className={className} style={style}>
+      <ApiParametersTitle title={title} nestedLevel={nestedLevel} />
+      {renderedParameters}
+    </div>
+  );
 }
 
-function ApiParametersTitle({title, nestedLevel}) {
-    if (!title || nestedLevel > 0) {
-        return null
-    }
+function ApiParametersTitle({ title, nestedLevel }) {
+  if (!title || nestedLevel > 0) {
+    return null;
+  }
 
-    return (
-        <div className="znai-api-parameters-title-cell">
-            <div className="znai-api-parameters-title">
-                {title}
-            </div>
-        </div>
-    )
+  return (
+    <div className="znai-api-parameters-title-cell">
+      <div className="znai-api-parameters-title">
+        {title}
+      </div>
+    </div>
+  );
 }

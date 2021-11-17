@@ -16,6 +16,8 @@
 
 package org.testingisdocumenting.znai.doxygen.parser;
 
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,11 +25,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DoxygenMember {
+    private final DoxygenParameterList parameters;
+
     private DoxygenCompound compound;
     private String id;
     private String name;
-    private DoxygenTextWithLinks returnType;
-    private List<DoxygenParameter> parameters;
+    private ApiLinkedText returnType;
     private DoxygenDescription description;
     private String visibility;
     private String kind;
@@ -35,14 +38,14 @@ public class DoxygenMember {
     private boolean isStatic;
 
     public DoxygenMember() {
-        parameters = new ArrayList<>();
+        parameters = new DoxygenParameterList();
     }
 
     public DoxygenDescription getDescription() {
         return description;
     }
 
-    public void addParameter(String name, DoxygenTextWithLinks type) {
+    public void addParameter(String name, ApiLinkedText type) {
         parameters.add(new DoxygenParameter(name, type));
     }
 
@@ -74,20 +77,16 @@ public class DoxygenMember {
         return DoxygenUtils.fullName(compound.getKind(), compound.getName(), name);
     }
 
-    public DoxygenTextWithLinks getReturnType() {
+    public ApiLinkedText getReturnType() {
         return returnType;
     }
 
-    public void setReturnType(DoxygenTextWithLinks returnType) {
+    public void setReturnType(ApiLinkedText returnType) {
         this.returnType = returnType;
     }
 
-    public List<DoxygenParameter> getParameters() {
+    public DoxygenParameterList getParameters() {
         return parameters;
-    }
-
-    public void setParameters(List<DoxygenParameter> parameters) {
-        this.parameters = parameters;
     }
 
     public void setDescription(DoxygenDescription description) {
@@ -153,7 +152,7 @@ public class DoxygenMember {
         result.put("isFunction", isFunction());
         result.put("isStatic", isStatic);
         result.put("returnType", returnType.toListOfMaps());
-        result.put("parameters", parameters.stream().map(DoxygenParameter::toMap).collect(Collectors.toList()));
+        result.put("parameters", parameters.toListOfMaps());
 
         return result;
     }

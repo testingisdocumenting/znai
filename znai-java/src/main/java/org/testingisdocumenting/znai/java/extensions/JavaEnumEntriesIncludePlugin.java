@@ -18,6 +18,7 @@
 package org.testingisdocumenting.znai.java.extensions;
 
 import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.java.parser.EnumEntry;
@@ -47,7 +48,7 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
                 .forEach((enumEntry) -> {
                     JavaDocElementsMapsAndSearchText elementsMapsAndSearchText = javaDocTextToDocElements(
                             enumEntry.getJavaDocText());
-                    apiParameters.add(enumEntry.getName(), "", elementsMapsAndSearchText.docElementsMaps,
+                    apiParameters.add(enumEntry.getName(), new ApiLinkedText(""), elementsMapsAndSearchText.docElementsMaps,
                             elementsMapsAndSearchText.searchText);
         });
 

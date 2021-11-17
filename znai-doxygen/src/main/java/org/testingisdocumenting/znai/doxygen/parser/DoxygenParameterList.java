@@ -16,31 +16,30 @@
 
 package org.testingisdocumenting.znai.doxygen.parser;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-public class DoxygenLink {
-    private final String text;
-    private final String refId;
+public class DoxygenParameterList {
+    private final List<DoxygenParameter> list;
 
-    public DoxygenLink(String text, String refId) {
-        this.text = text;
-        this.refId = refId;
+    public DoxygenParameterList() {
+        list = new ArrayList<>();
     }
 
-    public String getText() {
-        return text;
+    public void add(DoxygenParameter parameter) {
+        list.add(parameter);
     }
 
-    public String getRefId() {
-        return refId;
+    public List<Map<String, ?>> toListOfMaps() {
+        return list.stream()
+                .map(DoxygenParameter::toMap)
+                .collect(Collectors.toList());
     }
 
-    public Map<String, Object> toMap() {
-        Map<String, Object> result = new HashMap<>();
-        result.put("text", text);
-        result.put("refId", refId);
-
-        return result;
+    public DoxygenParameter findByName(String name) {
+        return list.stream().filter(p -> name.equals(p.getName()))
+                .findFirst().orElse(null);
     }
 }

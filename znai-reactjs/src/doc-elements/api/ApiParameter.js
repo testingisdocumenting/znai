@@ -22,6 +22,7 @@ import {ReferenceLinkWrapper} from '../references/ReferenceLinkWrapper'
 
 import {Icon} from '../icons/Icon';
 import './ApiParameter.css'
+import { ApiLinkedTextBlock } from "./ApiLinkedTextBlock";
 
 class ApiParameter extends React.Component {
     constructor(props) {
@@ -88,7 +89,7 @@ class ApiParameter extends React.Component {
                         <div className="znai-api-param-type-and-toggle" onClick={toggleOnClick}>
                             {expandToggle}
                             <div className="znai-api-param-type">
-                                {type}
+                                {typeof type === "string" ? type : <ApiLinkedTextBlock linkedText={type}/>}
                             </div>
                         </div>
                     </div>

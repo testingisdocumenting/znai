@@ -17,29 +17,45 @@
 package org.testingisdocumenting.znai.doxygen.parser;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Node;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class DoxygenDescriptionParamsParser {
-    private final ApiParameters apiParameters;
     private final ComponentsRegistry componentsRegistry;
+    private final ApiParameters apiParameters;
+    private final DoxygenParameterList parameters;
     private final String anchorPrefix;
     private final Node node;
 
-    private DoxygenDescriptionParamsParser(ComponentsRegistry componentsRegistry, String anchorPrefix, Node node) {
+    private DoxygenDescriptionParamsParser(ComponentsRegistry componentsRegistry,
+                                           DoxygenParameterList parameters,
+                                           String anchorPrefix, Node node) {
         this.componentsRegistry = componentsRegistry;
+        this.parameters = parameters;
         this.anchorPrefix = anchorPrefix;
         this.node = node;
         this.apiParameters = new ApiParameters(anchorPrefix);
     }
 
-    public static ApiParameters parseParameters(ComponentsRegistry componentsRegistry, String anchorPrefix, Node node) {
+    /**
+     * parse parameters description from doxygen description parameters block
+     * @param componentsRegistry components registry to help with creation of parser handlers and other things
+     * @param parameters optional list of parameters extracted from a member to grab types as doxygen desc doesn't have types, only names
+     * @param anchorPrefix anchor for created api parameters
+     * @param node node to parse
+     * @return parsed parameters
+     */
+    public static ApiParameters parseParameters(ComponentsRegistry componentsRegistry,
+                                                DoxygenParameterList parameters,
+                                                String anchorPrefix, Node node) {
         DoxygenDescriptionParamsParser parser = new DoxygenDescriptionParamsParser(componentsRegistry,
-                anchorPrefix, node);
+                parameters, anchorPrefix, node);
 
         parser.parseXml();
 
@@ -53,16 +69,33 @@ public class DoxygenDescriptionParamsParser {
     private void handleParam(Node paramItem) {
         Node nameAndType = XmlUtils.nextLevelNodeByName(paramItem, "parameternamelist");
         String name = XmlUtils.nextLevelNodeByName(nameAndType, "parametername").getTextContent();
-        String type = XmlUtils.hasNodeByName(nameAndType, "parametertype") ?
+        String typeText = XmlUtils.hasNodeByName(nameAndType, "parametertype") ?
                 XmlUtils.nextLevelNodeByName(nameAndType, "parametertype").getTextContent() :
                 "";
 
+        ApiLinkedText type = linkedTextByName(name, typeText);
+
         Node descriptionNode = XmlUtils.nextLevelNodeByName(paramItem, "parameterdescription");
         DoxygenDescription paramDescription = DoxygenDescriptionParser.parse(componentsRegistry,
+                parameters,
                 anchorPrefix + "_",
                 descriptionNode);
+
         apiParameters.add(name, type,
                 paramDescription.getDocElements().stream().map(DocElement::toMap).collect(Collectors.toList()),
                 paramDescription.getSearchTextWithoutParameters());
+    }
+
+    private ApiLinkedText linkedTextByName(String name, String existingTypeText) {
+        if (!existingTypeText.isEmpty()) {
+            return new ApiLinkedText(existingTypeText);
+        }
+
+        DoxygenParameter byName = parameters.findByName(name);
+        if (byName != null) {
+            return byName.getType();
+        }
+
+        return new ApiLinkedText("");
     }
 }

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { ApiLinkedText } from "../api/ApiLinkedText";
-
-export interface DoxygenParameter {
-  name: string;
-  type: ApiLinkedText;
+export interface ApiLinkedTextPart {
+  text: string;
+  refId: string; // optional global anchor id
 }
+
+export type ApiLinkedText = ApiLinkedTextPart[];

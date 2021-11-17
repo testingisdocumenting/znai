@@ -14,34 +14,32 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.doxygen.parser;
-
-import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
+package org.testingisdocumenting.znai.extensions.api;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DoxygenParameter {
-    private final String name;
-    private final ApiLinkedText type;
+public class ApiLinkedTextPart {
+    private final String text;
+    private final String refId;
 
-    public DoxygenParameter(String name, ApiLinkedText type) {
-        this.name = name;
-        this.type = type;
+    public ApiLinkedTextPart(String text, String refId) {
+        this.text = text;
+        this.refId = refId;
     }
 
-    public String getName() {
-        return name;
+    public String getText() {
+        return text;
     }
 
-    public ApiLinkedText getType() {
-        return type;
+    public String getRefId() {
+        return refId;
     }
 
     public Map<String, Object> toMap() {
         Map<String, Object> result = new HashMap<>();
-        result.put("name", name);
-        result.put("type", type.toListOfMaps());
+        result.put("text", text);
+        result.put("refId", refId);
 
         return result;
     }

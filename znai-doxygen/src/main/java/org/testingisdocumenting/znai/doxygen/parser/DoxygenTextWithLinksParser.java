@@ -16,6 +16,7 @@
 
 package org.testingisdocumenting.znai.doxygen.parser;
 
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Node;
 
@@ -23,8 +24,8 @@ public class DoxygenTextWithLinksParser {
     private DoxygenTextWithLinksParser() {
     }
 
-    public static DoxygenTextWithLinks parse(Node nodeWithLinks) {
-        DoxygenTextWithLinks result = new DoxygenTextWithLinks();
+    public static ApiLinkedText parse(Node nodeWithLinks) {
+        ApiLinkedText result = new ApiLinkedText();
         XmlUtils.forEach(nodeWithLinks.getChildNodes(), (node) -> {
             if (node.getNodeType() == Node.TEXT_NODE) {
                 result.addPart(node.getTextContent());

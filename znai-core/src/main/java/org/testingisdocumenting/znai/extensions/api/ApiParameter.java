@@ -27,13 +27,13 @@ import static java.util.stream.Collectors.toList;
 public class ApiParameter {
     private final String anchorId;
     private final String name;
-    private final String type;
+    private final ApiLinkedText type;
     private final List<Map<String, Object>> description;
     private final String textForSearch;
 
     private final List<ApiParameter> children;
 
-    public ApiParameter(String anchorId, String name, String type,
+    public ApiParameter(String anchorId, String name, ApiLinkedText type,
                         List<Map<String, Object>> description, String textForSearch) {
         this.anchorId = anchorId;
         this.name = name;
@@ -47,7 +47,7 @@ public class ApiParameter {
         return name;
     }
 
-    public String getType() {
+    public ApiLinkedText getType() {
         return type;
     }
 
@@ -62,7 +62,7 @@ public class ApiParameter {
     public String combinedTextForSearch() {
         List<String> parts = new ArrayList<>();
         parts.add(name);
-        parts.add(type);
+        parts.add(type.buildCombinedText());
         parts.add(textForSearch);
 
         children.forEach(c -> parts.add(c.combinedTextForSearch()));
@@ -82,7 +82,7 @@ public class ApiParameter {
         return children;
     }
 
-    public ApiParameter add(String name, String type, List<Map<String, Object>> description, String textForSearch) {
+    public ApiParameter add(String name, ApiLinkedText type, List<Map<String, Object>> description, String textForSearch) {
         ApiParameter apiParameter = new ApiParameter(
                 ApiParametersAnchors.anchorIdFromNameAndPrefix(anchorId, name),
                 name, type, description, textForSearch);
@@ -102,7 +102,7 @@ public class ApiParameter {
     public Map<String, Object> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("name", name);
-        result.put("type", type);
+        result.put("type", type.toListOfMaps());
         result.put("anchorId", anchorId);
         result.put("description", description);
         if (! children.isEmpty()) {
