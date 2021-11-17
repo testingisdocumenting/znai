@@ -42,4 +42,8 @@ public class DoxygenParameterList {
         return list.stream().filter(p -> name.equals(p.getName()))
                 .findFirst().orElse(null);
     }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
 }

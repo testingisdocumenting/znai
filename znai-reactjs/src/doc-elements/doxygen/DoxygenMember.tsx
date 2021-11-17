@@ -30,11 +30,24 @@ interface Props {
   name: string;
   refId?: string;
   isFunction: boolean;
+  isStatic: boolean;
+  isVirtual: boolean;
+  isConst: boolean;
   returnType: ApiLinkedText;
   parameters: DoxygenParameter[];
 }
 
-export function DoxygenMember({ compoundName, name, refId, returnType, isFunction, parameters }: Props) {
+export function DoxygenMember({
+  compoundName,
+  name,
+  refId,
+  returnType,
+  isFunction,
+  isStatic,
+  isVirtual,
+  isConst,
+  parameters,
+}: Props) {
   const renderedName = <div className="znai-doxygen-member-name">{name}</div>;
   const memberUrl = refId ? globalAnchorUrl(refId) : undefined;
   const wrappedInOptionalLink = memberUrl ? (
@@ -47,6 +60,9 @@ export function DoxygenMember({ compoundName, name, refId, returnType, isFunctio
 
   return (
     <div className="znai-doxygen-member content-block">
+      {isStatic && <div className="znai-doxygen-member-classifier">static </div>}
+      {isVirtual && <div className="znai-doxygen-member-classifier">virtual </div>}
+
       <div className="znai-doxygen-member-return">
         <ApiLinkedTextBlock linkedText={returnType} />
       </div>
@@ -74,6 +90,7 @@ export function DoxygenMember({ compoundName, name, refId, returnType, isFunctio
             );
           })}
           {isFunction && <div className="znai-doxygen-member-params-separator">)</div>}
+          {isConst && <div className="znai-doxygen-member-classifier"> const</div>}
         </div>
       </div>
     </div>
