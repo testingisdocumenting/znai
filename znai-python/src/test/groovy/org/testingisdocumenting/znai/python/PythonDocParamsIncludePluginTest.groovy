@@ -25,9 +25,9 @@ class PythonDocParamsIncludePluginTest {
         def props = resultingProps('pydoc-params.py', '{entry: "my_func"}')
 
         def expectedProps = [
-                parameters: [[name: 'label', type: 'String', anchorId: 'my_func_label',
+                parameters: [[name: 'label', type: [[text: 'String', refId: '']], anchorId: 'my_func_label',
                               description: [[markdown: 'label to use to *render* item in the store', type: 'TestMarkdown']]],
-                             [name: 'price', type: 'Money', anchorId: 'my_func_price',
+                             [name: 'price', type: [[text: 'Money', refId: '']], anchorId: 'my_func_price',
                               description: [[markdown: 'price associated with the **item**', type: 'TestMarkdown']]]],
                 entry: 'my_func']
         props.should == expectedProps
