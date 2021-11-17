@@ -78,7 +78,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
                 docPlugin.process(componentsRegistry, parserHandler, markupPath,
                         new PluginParams(docPlugin.id(), fullName)));
 
-        if (member.isFunction()) {
+        if (member.isFunction() && member.hasParameters()) {
             IncludePlugin docParamsPlugin = DoxygenDocParamsIncludePlugin.createDocParamsPlugin();
             parserHandler.onIncludePlugin(docParamsPlugin,
                     docParamsPlugin.process(componentsRegistry, parserHandler, markupPath,

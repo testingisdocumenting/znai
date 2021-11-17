@@ -18,11 +18,8 @@ package org.testingisdocumenting.znai.doxygen.parser;
 
 import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class DoxygenMember {
     private final DoxygenParameterList parameters;
@@ -36,6 +33,7 @@ public class DoxygenMember {
     private String kind;
     private boolean isVirtual;
     private boolean isStatic;
+    private boolean isConst;
 
     public DoxygenMember() {
         parameters = new DoxygenParameterList();
@@ -89,6 +87,10 @@ public class DoxygenMember {
         return parameters;
     }
 
+    public boolean hasParameters() {
+        return !parameters.isEmpty();
+    }
+
     public void setDescription(DoxygenDescription description) {
         this.description = description;
     }
@@ -99,6 +101,14 @@ public class DoxygenMember {
 
     public void setVisibility(String visibility) {
         this.visibility = visibility;
+    }
+
+    public boolean isConst() {
+        return isConst;
+    }
+
+    public void setConst(boolean aConst) {
+        isConst = aConst;
     }
 
     public boolean isPublic() {
@@ -150,6 +160,7 @@ public class DoxygenMember {
         result.put("kind", kind);
         result.put("isVirtual", isVirtual);
         result.put("isFunction", isFunction());
+        result.put("isConst", isConst);
         result.put("isStatic", isStatic);
         result.put("returnType", returnType.toListOfMaps());
         result.put("parameters", parameters.toListOfMaps());

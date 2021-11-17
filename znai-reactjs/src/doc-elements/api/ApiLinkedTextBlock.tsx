@@ -44,9 +44,9 @@ export function ApiLinkedTextBlock({ linkedText }: Props) {
         }
 
         return (
-          <div key={idx} className="znai-api-text-with-links-text">
+          <span key={idx} className="znai-api-text-with-links-text">
             {part.text}
-          </div>
+          </span>
         );
       })}
     </div>

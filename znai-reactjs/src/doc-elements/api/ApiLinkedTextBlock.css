@@ -15,7 +15,7 @@
  */
 
 .znai-api-text-with-links {
-    display: flex;
+    display: inline-block;
     white-space: pre;
 }
 

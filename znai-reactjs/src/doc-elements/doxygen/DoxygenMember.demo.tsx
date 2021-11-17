@@ -20,67 +20,96 @@ import { Registry } from "react-component-viewer";
 import { DoxygenMember } from "./DoxygenMember";
 
 export function doxygenMemberDemo(registry: Registry) {
+  const parameters = [
+    {
+      name: "p_one",
+      type: [
+        { text: "const ", refId: "" },
+        { text: "MyClass", refId: "MyClass__8x" },
+      ],
+    },
+    {
+      name: "p_two",
+      type: [
+        { text: "const ", refId: "" },
+        { text: "AnotherClass", refId: "AnotherClass__9x" },
+      ],
+    },
+    {
+      name: "p_three",
+      type: [
+        { text: "const ", refId: "" },
+        { text: "AnotherClass2", refId: "AnotherClass2__9x" },
+      ],
+    },
+  ];
+
   registry.add("default", () => (
     <DoxygenMember
       compoundName="utils::nested"
       name="my_func"
       isFunction={true}
+      isVirtual={false}
+      isConst={false}
+      isStatic={false}
       returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
-      parameters={[
-        {
-          name: "p_one",
-          type: [
-            { text: "const ", refId: "" },
-            { text: "MyClass", refId: "MyClass__8x" },
-          ],
-        },
-        {
-          name: "p_two",
-          type: [
-            { text: "const ", refId: "" },
-            { text: "AnotherClass", refId: "AnotherClass__9x" },
-          ],
-        },
-        {
-          name: "p_three",
-          type: [
-            { text: "const ", refId: "" },
-            { text: "AnotherClass2", refId: "AnotherClass2__9x" },
-          ],
-        },
-      ]}
+      parameters={parameters}
     />
   ));
-  registry.add("with link", () => (
+
+  registry.add("with link and no compound name", () => (
     <DoxygenMember
       isFunction={true}
+      isVirtual={false}
+      isConst={false}
+      isStatic={false}
       compoundName=""
       name="my_func"
       refId="test_link"
       returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
-      parameters={[
-        {
-          name: "p_one",
-          type: [
-            { text: "const ", refId: "" },
-            { text: "MyClass", refId: "MyClass__8x" },
-          ],
-        },
-        {
-          name: "p_two",
-          type: [
-            { text: "const ", refId: "" },
-            { text: "AnotherClass", refId: "AnotherClass__9x" },
-          ],
-        },
-        {
-          name: "p_three",
-          type: [
-            { text: "const ", refId: "" },
-            { text: "AnotherClass2", refId: "AnotherClass2__9x" },
-          ],
-        },
-      ]}
+      parameters={parameters}
+    />
+  ));
+
+  registry.add("static const", () => (
+    <DoxygenMember
+      isFunction={true}
+      isVirtual={false}
+      isConst={true}
+      isStatic={true}
+      compoundName="utils::MyClass"
+      name="my_func"
+      refId="test_link"
+      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      parameters={parameters}
+    />
+  ));
+
+  registry.add("static var", () => (
+    <DoxygenMember
+      isFunction={false}
+      isVirtual={false}
+      isConst={false}
+      isStatic={true}
+      compoundName="utils::MyClass"
+      name="var_name"
+      refId="test_link"
+      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      parameters={[]}
+    />
+  ));
+
+  registry.add("virtual", () => (
+    <DoxygenMember
+      isFunction={true}
+      isVirtual={true}
+      isConst={false}
+      isStatic={false}
+      compoundName="utils::MyClass"
+      name="my_func"
+      refId="test_link"
+      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      parameters={parameters}
     />
   ));
 }

@@ -23,7 +23,6 @@ import org.testingisdocumenting.znai.doxygen.parser.DoxygenCompound;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMember;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
-import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -33,7 +32,9 @@ import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DoxygenCompoundIncludePlugin implements IncludePlugin {
@@ -75,20 +76,11 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
 
         insertDocs(fullName);
 
-        parserHandler.onSubHeading(3, "Public Functions", headingProps);
-        compound.publicNonStaticFunctionsStream().forEach(this::createMemberDecl);
-
-        parserHandler.onSubHeading(3, "Static Public Functions", headingProps);
-        compound.publicStaticFunctionsStream().forEach(this::createMemberDecl);
-
-        parserHandler.onSubHeading(3, "Public Attributes", headingProps);
-        compound.publicNonStaticAttributesStream().forEach(this::createMemberDecl);
-
-        parserHandler.onSubHeading(3, "Static Public Attributes", headingProps);
-        compound.publicStaticAttributesStream().forEach(this::createMemberDecl);
-
-        parserHandler.onSubHeading(3, "Protected Functions", headingProps);
-        compound.protectedFunctionsStream().forEach(this::createMemberDecl);
+        declBlock("Public Functions", compound.publicNonStaticFunctionsStream());
+        declBlock("Static Public Functions", compound.publicStaticFunctionsStream());
+        declBlock("Public Attributes", compound.publicNonStaticAttributesStream());
+        declBlock("Static Public Attributes", compound.publicStaticAttributesStream());
+        declBlock("Protected Functions", compound.protectedFunctionsStream());
 
         parserHandler.onSubHeading(3, "Definitions", headingProps);
         compound.publicNonStaticFunctionsStream().forEach(this::createMemberDef);
@@ -98,6 +90,16 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
         compound.protectedFunctionsStream().forEach(this::createMemberDef);
 
         return PluginResult.docElements(Stream.empty());
+    }
+
+    private void declBlock(String name, Stream<DoxygenMember> memberStream) {
+        List<DoxygenMember> members = memberStream.collect(Collectors.toList());
+        if (members.isEmpty()) {
+            return;
+        }
+
+        parserHandler.onSubHeading(3, name, headingProps);
+        members.forEach(this::createMemberDecl);
     }
 
     private void insertDocs(String fullName) {

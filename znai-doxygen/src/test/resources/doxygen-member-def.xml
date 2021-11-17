@@ -19,7 +19,7 @@
     <compounddef id="namespaceutils_1_1nested" kind="namespace" language="C++">
         <compoundname>utils::nested</compoundname>
         <sectiondef kind="func">
-            <memberdef kind="function" id="funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+            <memberdef kind="function" id="funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
                 <type><ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref></type>
                 <definition>utils::second::MyClass utils::nested::another_func</definition>
                 <argsstring>(const utils::second::MyClass &amp;one, const utils::second::AnotherClass &amp;two)</argsstring>

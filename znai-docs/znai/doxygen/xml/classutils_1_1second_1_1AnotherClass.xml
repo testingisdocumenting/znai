@@ -35,10 +35,10 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a204e9b29b851102ef16951cddc42ea63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a2221a3c49e7c701f5a1829249c53078d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void utils::second::AnotherClass::sing</definition>
-        <argsstring>(int tone, int volume)</argsstring>
+        <argsstring>(int tone, int volume) const</argsstring>
         <name>sing</name>
         <param>
           <type>int</type>
@@ -207,7 +207,7 @@
       <member refid="classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>counter</name></member>
       <member refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" prot="protected" virt="virtual"><scope>utils::second::AnotherClass</scope><name>help</name></member>
       <member refid="classutils_1_1second_1_1AnotherClass_1a5126e99df34cb7a3d702193dc3511114" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>number_of_sounds</name></member>
-      <member refid="classutils_1_1second_1_1AnotherClass_1a204e9b29b851102ef16951cddc42ea63" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>sing</name></member>
+      <member refid="classutils_1_1second_1_1AnotherClass_1a2221a3c49e7c701f5a1829249c53078d" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>sing</name></member>
       <member refid="classutils_1_1second_1_1AnotherClass_1a7f879de76a89c99be528367721e77526" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>smile</name></member>
     </listofallmembers>
   </compounddef>

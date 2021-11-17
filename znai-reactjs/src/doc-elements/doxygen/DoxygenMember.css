@@ -55,3 +55,8 @@
     white-space: pre;
     color: var(--znai-code-punctuation-color)
 }
+
+.znai-doxygen-member-classifier {
+    color: var(--znai-code-keyword-color);
+    white-space: pre;
+}
