@@ -15,20 +15,22 @@
  */
 
 import React from "react";
-import { DoxygenLink, DoxygenParameter } from "./Doxygen";
+import { DoxygenParameter } from "./Doxygen";
 
-import { DoxygenTextWithLinks } from "./DoxygenTextWithLinks";
-
-import "./DoxygenMember.css";
 import { LinkWrapper } from "../default-elements/LinkWrapper";
 import { globalAnchorUrl } from "../references/globalAnchors";
+import { ApiLinkedText } from "../api/ApiLinkedText";
+
+import { ApiLinkedTextBlock } from "../api/ApiLinkedTextBlock";
+
+import "./DoxygenMember.css";
 
 interface Props {
   compoundName: string;
   name: string;
   refId?: string;
   isFunction: boolean;
-  returnType: DoxygenLink[];
+  returnType: ApiLinkedText;
   parameters: DoxygenParameter[];
 }
 
@@ -46,7 +48,7 @@ export function DoxygenMember({ compoundName, name, refId, returnType, isFunctio
   return (
     <div className="znai-doxygen-member content-block">
       <div className="znai-doxygen-member-return">
-        <DoxygenTextWithLinks text={returnType} />
+        <ApiLinkedTextBlock linkedText={returnType} />
       </div>
       <div className="znai-doxygen-member-full-name">
         {compoundName && (
@@ -59,12 +61,12 @@ export function DoxygenMember({ compoundName, name, refId, returnType, isFunctio
         {wrappedInOptionalLink}
         <div className="znai-doxygen-member-params">
           {isFunction && <div className="znai-doxygen-member-params-separator">(</div>}
-          {parameters.map((param, idx) => {
+          {(parameters || []).map((param, idx) => {
             const needSeparator = idx !== parameters.length - 1;
             return (
               <div className="znai-doxygen-member-param" key={idx}>
                 <div className="znai-doxygen-member-param-type">
-                  <DoxygenTextWithLinks text={param.type} />
+                  <ApiLinkedTextBlock linkedText={param.type} />
                 </div>
                 <div className="znai-doxygen-member-param-name">{param.name}</div>
                 {needSeparator && <div className="znai-doxygen-member-params-separator">, </div>}

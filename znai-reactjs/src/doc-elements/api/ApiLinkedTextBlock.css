@@ -14,7 +14,14 @@
  * limitations under the License.
  */
 
-.znai-doxygen-text-with-links {
+.znai-api-text-with-links {
     display: flex;
     white-space: pre;
+}
+
+.znai-api-text-with-links-text {
+}
+
+.znai-api-text-with-links-link {
+    color: blue;
 }

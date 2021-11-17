@@ -15,13 +15,22 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import ApiParameters from './ApiParameters'
-import {elementsLibrary} from '../DefaultElementsLibrary'
-import { Paragraph } from '../paragraph/Paragraph'
+import React from "react";
+import ApiParameters from "./ApiParameters";
+import { elementsLibrary } from "../DefaultElementsLibrary";
+import { Paragraph } from "../paragraph/Paragraph";
 
 const personParameters = [
     {anchorId: 'prefix_firstName', name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
+    {anchorId: 'prefix_lastName',name: 'lastName', type: 'string', description: [{"text": "last name", "type": "SimpleText"}]},
+    {anchorId: 'prefix_score',name: 'score', type: 'integer', description: [{"text": "score accumulated over last year", "type": "SimpleText"}]},
+]
+
+const personParametersWithTypeRef = [
+    {anchorId: 'prefix_firstName', name: 'firstName', type: [
+            {text: "list of ", refId: ""},
+            {text: "tokens", refId: "lib_string_tokens"}],
+        description: [{"text": "first name", "type": "SimpleText"}]},
     {anchorId: 'prefix_lastName',name: 'lastName', type: 'string', description: [{"text": "last name", "type": "SimpleText"}]},
     {anchorId: 'prefix_score',name: 'score', type: 'integer', description: [{"text": "score accumulated over last year", "type": "SimpleText"}]},
 ]
@@ -70,6 +79,9 @@ export function apiParametersDemo(registry) {
     registry
         .add('flat parameters', () => (
             <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>
+        ))
+        .add('flat parameters with global refs', () => (
+            <ApiParameters elementsLibrary={elementsLibrary} parameters={personParametersWithTypeRef}/>
         ))
         .add('flat parameters small size', () => (
             <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} small={true}/>

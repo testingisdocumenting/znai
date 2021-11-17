@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.python;
 
 import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
@@ -45,7 +46,7 @@ public class PythonDocParamsIncludePlugin extends PythonIncludePluginBase {
         ApiParameters apiParameters = new ApiParameters(entryName);
         parsedPythonDoc.getParams().forEach(pythonParam -> {
             MarkupParserResult parsedMarkdown = componentsRegistry.markdownParser().parse(fullPath, pythonParam.getPyDocText());
-            apiParameters.add(pythonParam.getName(), pythonParam.getType(),
+            apiParameters.add(pythonParam.getName(), new ApiLinkedText(pythonParam.getType()),
                     parsedMarkdown.contentToListOfMaps(),
                     parsedMarkdown.getAllText());
         });

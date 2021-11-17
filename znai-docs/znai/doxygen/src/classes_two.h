@@ -22,10 +22,11 @@ public:
 
     ///
     /// bark out loud
+    /// @param myClass to test reference
     /// @param tone tone at which to sing
     /// @param volume volume at which to sing
     ///
-    void bark(int tone, int volume);
+    void bark(const MyClass& myClass, int tone, int volume);
 
     ///
     /// global smile

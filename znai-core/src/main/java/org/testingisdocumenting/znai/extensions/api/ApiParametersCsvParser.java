@@ -54,7 +54,7 @@ public class ApiParametersCsvParser {
 
     private void parseRow(Row row) {
         String name = row.get(0);
-        String type = row.get(1);
+        ApiLinkedText type = new ApiLinkedText(row.get(1));
 
         MarkupParserResult markupParserResult = markupParser.parse(path, row.get(2));
         List<Map<String, Object>> description = markupParserResult.getDocElement().contentToListOfMaps();
@@ -68,7 +68,7 @@ public class ApiParametersCsvParser {
         }
     }
 
-    private void addNested(String name, String type, List<Map<String, Object>> description, String textForSearch) {
+    private void addNested(String name, ApiLinkedText type, List<Map<String, Object>> description, String textForSearch) {
         String[] parts = name.split("\\.");
         ApiParameter apiParameter = apiParameters.find(parts[0]);
         for (int i = 1; i < parts.length - 1; i++) {

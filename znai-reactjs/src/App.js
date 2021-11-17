@@ -93,6 +93,7 @@ import { pageTocDemo } from "./doc-elements/page/PageToc.demo";
 import { codeSnippetWithRemovedCommentsDemo } from "./doc-elements/code-snippets/CodeSnippetWithRemovedComments.demo";
 import { textBadgeDemo } from "./doc-elements/badge/TextBadge.demo";
 import { doxygenMemberDemo } from "./doc-elements/doxygen/DoxygenMember.demo";
+import { updateGlobalAnchors } from "./doc-elements/references/globalAnchors";
 
 const docMeta = {
     id: 'preview',
@@ -112,6 +113,8 @@ updateGlobalDocReferences({
         pageUrl: '#super-url'
     }
 })
+
+updateGlobalAnchors({ lib_string_tokens: "/preview/block/url", test_link: "list/blah"  });
 
 const registries = new Registries()
 

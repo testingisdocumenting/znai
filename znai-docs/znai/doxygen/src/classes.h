@@ -10,5 +10,14 @@ public:
     void bark();
 };
 
+/**
+ * **Domain** specific context setting. Describes business setting and requirements.
+ */
+class ThirdClass {
+public:
+    /// bark
+    void bark();
+};
+
 }
 }

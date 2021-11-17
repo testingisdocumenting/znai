@@ -37,10 +37,10 @@ class ApiParametersTest {
     }
 
     private static void populateParams(ApiParameters params) {
-        params.add('firstName', 'String', [], '')
-        params.add('lastName', 'String', [], '')
+        params.add('firstName', new ApiLinkedText('String'), [], '')
+        params.add('lastName', new ApiLinkedText('String'), [], '')
 
-        def address = params.add('address', 'Object', [], '')
-        address.add('street', 'String', [], '')
+        def address = params.add('address', new ApiLinkedText('Object'), [], '')
+        address.add('street', new ApiLinkedText('String'), [], '')
     }
 }

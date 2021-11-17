@@ -53,7 +53,7 @@ public class ApiParametersJsonParser {
     private void parseParam(ApiParameter current, Map<String, Object> param) {
         MarkupParserResult parserResult = markupParser.parse(path, param.get("description").toString());
         ApiParameter apiParameter = current.add(param.get("name").toString(),
-                param.get("type").toString(),
+                new ApiLinkedText(param.get("type").toString()),
                 parserResult.contentToListOfMaps(),
                 parserResult.getAllText());
 

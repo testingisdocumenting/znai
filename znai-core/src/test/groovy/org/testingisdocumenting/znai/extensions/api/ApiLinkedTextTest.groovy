@@ -14,24 +14,17 @@
  * limitations under the License.
  */
 
-import React from "react";
+package org.testingisdocumenting.znai.extensions.api
 
-import { DoxygenLink } from "./Doxygen";
+import org.junit.Test
 
-import "./DoxygenTextWithLinks.css";
+class ApiLinkedTextTest {
+    @Test
+    void "should provide combined text"() {
+        def linkedText = new ApiLinkedText("hello")
+        linkedText.addPart("world", "refid1")
+        linkedText.addPart("links ", "refid2")
 
-interface Props {
-  text: DoxygenLink[];
-}
-
-export function DoxygenTextWithLinks({ text }: Props) {
-  return (
-    <div className="znai-doxygen-text-with-links">
-      {text.map((part, idx) => (
-        <React.Fragment key={idx}>
-          <div className="znai-doxygen-text-with-links-part">{part.text}</div>
-        </React.Fragment>
-      ))}
-    </div>
-  );
+        linkedText.buildCombinedText().should == "hello world links"
+    }
 }

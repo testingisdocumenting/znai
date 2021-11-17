@@ -54,7 +54,7 @@ class DoxygenDescriptionParserTest {
         println desc.apiParameters.combinedTextForSearch()
 
         desc.apiParameters.combinedTextForSearch().should == "a  description of param a item a item b b  description of param b"
-        desc.apiParameters.toMap().should == [parameters: [[name: "a", type: "", anchorId: "params_anchor_a",
+        desc.apiParameters.toMap().should == [parameters: [[name: "a", type: [[text: "", refId: ""]], anchorId: "params_anchor_a",
                                                             description: [[type: "Paragraph",
                                                                           content: [[text: "description of ", type: "SimpleText"],
                                                                                     [type: "Emphasis", content: [[text: "param", type: "SimpleText"]]],
@@ -62,7 +62,7 @@ class DoxygenDescriptionParserTest {
                                                                                     [delimiter: " ", startNumber:1, type: "OrderedList",
                                                                                      content: [[type: "ListItem", content: [[type: "Paragraph", content: [[text: "item a", type: "SimpleText"]]]]],
                                                                                                [type: "ListItem", content: [[type: "Paragraph", content: [[text: "item b", type: "SimpleText"]]]]]]]]]]],
-                                                           [name: "b", type: "", anchorId: "params_anchor_b",
+                                                           [name: "b", type: [[text: "", refId: ""]], anchorId: "params_anchor_b",
                                                             description: [[type: "Paragraph",
                                                                            content: [[text: "description of param b", type: "SimpleText"]]]]]]]
     }
@@ -72,6 +72,6 @@ class DoxygenDescriptionParserTest {
                 XmlUtils.parseXml(ResourceUtils.textContent(resourceName)),
                 "detaileddescription")
 
-        return DoxygenDescriptionParser.parse(TEST_COMPONENTS_REGISTRY, "params_anchor", descRoot)
+        return DoxygenDescriptionParser.parse(TEST_COMPONENTS_REGISTRY, new DoxygenParameterList(),"params_anchor", descRoot)
     }
 }

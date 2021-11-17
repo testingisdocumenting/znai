@@ -3,6 +3,7 @@
   <compounddef id="classes_8h" kind="file" language="C++">
     <compoundname>classes.h</compoundname>
     <innerclass refid="classutils_1_1second_1_1MyClass" prot="public">utils::second::MyClass</innerclass>
+    <innerclass refid="classutils_1_1second_1_1ThirdClass" prot="public">utils::second::ThirdClass</innerclass>
     <innernamespace refid="namespaceutils">utils</innernamespace>
     <innernamespace refid="namespaceutils_1_1second">utils::second</innernamespace>
     <briefdescription>
@@ -18,8 +19,13 @@
 <codeline lineno="10" refid="classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1" kindref="member">bark</ref>();</highlight></codeline>
 <codeline lineno="11"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="14"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="16" refid="classutils_1_1second_1_1ThirdClass" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classutils_1_1second_1_1ThirdClass" kindref="compound">ThirdClass</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="19" refid="classutils_1_1second_1_1ThirdClass_1a0b8841f3d07edf14f592150dab8f0046" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1ThirdClass_1a0b8841f3d07edf14f592150dab8f0046" kindref="member">bark</ref>();</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="src/classes.h"/>
   </compounddef>

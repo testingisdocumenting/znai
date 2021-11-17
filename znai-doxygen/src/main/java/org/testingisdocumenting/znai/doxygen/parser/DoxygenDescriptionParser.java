@@ -28,6 +28,7 @@ import java.util.List;
 
 public class DoxygenDescriptionParser {
     private final ComponentsRegistry componentsRegistry;
+    private final DoxygenParameterList parameters;
     private final String paramsAnchorPrefix;
     private final Node descriptionRoot;
     private final List<String> textParts;
@@ -35,17 +36,30 @@ public class DoxygenDescriptionParser {
     private DocElementCreationParserHandler parserHandler;
     private ApiParameters apiParameters;
 
-    private DoxygenDescriptionParser(ComponentsRegistry componentsRegistry, String paramsAnchorPrefix, Node descriptionNode) {
+    private DoxygenDescriptionParser(ComponentsRegistry componentsRegistry,
+                                     DoxygenParameterList parameters,
+                                     String paramsAnchorPrefix, Node descriptionNode) {
         this.componentsRegistry = componentsRegistry;
+        this.parameters = parameters;
         this.paramsAnchorPrefix = paramsAnchorPrefix;
         this.descriptionRoot = descriptionNode;
         this.textParts = new ArrayList<>();
     }
 
+    /**
+     * parse parameters description from doxygen description block
+     * @param componentsRegistry components registry to help with creation of parser handlers and other things
+     * @param parameters optional list of parameters extracted from a member to grab types as doxygen desc doesn't have types, only names
+     * @param paramsAnchorPrefix anchor for created api parameters
+     * @param descriptionNode node to parse
+     * @return parsed description
+     */
     public static DoxygenDescription parse(ComponentsRegistry componentsRegistry,
+                                           DoxygenParameterList parameters,
                                            String paramsAnchorPrefix,
                                            Node descriptionNode) {
         DoxygenDescriptionParser parser = new DoxygenDescriptionParser(componentsRegistry,
+                parameters,
                 paramsAnchorPrefix,
                 descriptionNode);
 
@@ -73,7 +87,7 @@ public class DoxygenDescriptionParser {
             parseChildren(node);
             parserHandler.onParagraphEnd();
         } if (node.getNodeName().equals("parameterlist")) {
-            apiParameters = DoxygenDescriptionParamsParser.parseParameters(componentsRegistry, paramsAnchorPrefix, node);
+            apiParameters = DoxygenDescriptionParamsParser.parseParameters(componentsRegistry, parameters, paramsAnchorPrefix, node);
             parseChildren(node);
         } else if (node.getNodeName().equals("bold")) {
             parserHandler.onStrongEmphasisStart();

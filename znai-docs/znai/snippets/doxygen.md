@@ -50,9 +50,9 @@ Use `include-doxygen-member` to render member signature
 
 Use `signatureOnly: true` parameter to render only member signature
 
-    :include-doxygen-member: utils::second::MyClass::bark { signatureOnly: true }
+    :include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }
 
-:include-doxygen-member: utils::second::MyClass::bark { signatureOnly: true }
+:include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }
 
 # Extract Comment Parameters
 
@@ -73,3 +73,7 @@ Use `include-doxygen-compound` to render definition compound such as class
     :include-doxygen-compound: utils::second::AnotherClass
 
 :include-doxygen-compound: utils::second::AnotherClass 
+
+    :include-doxygen-compound: utils::second::MyClass
+
+:include-doxygen-compound: utils::second::MyClass 

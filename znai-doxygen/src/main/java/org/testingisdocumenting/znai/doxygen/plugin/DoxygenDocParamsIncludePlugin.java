@@ -66,14 +66,23 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
         DoxygenDescription description = member.getDescription();
 
         Map<String, Object> props = pluginParams.getOpts().toMap();
-        props.putAll(description.getApiParameters().toMap());
+        ApiParameters apiParameters = description.getApiParameters();
+        if (apiParameters != null) {
+            props.putAll(apiParameters.toMap());
+        }
+
         props.putAll(pluginParams.getOpts().toMap());
         return PluginResult.docElement("ApiParameters", props);
     }
 
     @Override
     public SearchText textForSearch() {
-        return SearchScore.HIGH.text(member.getDescription().getApiParameters().combinedTextForSearch());
+        ApiParameters apiParameters = member.getDescription().getApiParameters();
+        if (apiParameters != null) {
+            return SearchScore.HIGH.text(apiParameters.combinedTextForSearch());
+        }
+
+        return null;
     }
 
     @Override

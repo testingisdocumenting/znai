@@ -30,10 +30,10 @@ public class ApiParameters {
 
     public ApiParameters(String anchorPrefix) {
         root = new ApiParameter(ApiParametersAnchors.sanitizeAnchorId(anchorPrefix),
-                "root", "root", Collections.emptyList(), "");
+                "root", new ApiLinkedText("root"), Collections.emptyList(), "");
     }
 
-    public ApiParameter add(String name, String type, List<Map<String, Object>> description, String textForSearch) {
+    public ApiParameter add(String name, ApiLinkedText type, List<Map<String, Object>> description, String textForSearch) {
         return root.add(name, type, description, textForSearch);
     }
 
