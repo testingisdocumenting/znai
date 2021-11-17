@@ -41,7 +41,7 @@ class JavaDocParamsIncludePluginTest {
         def props = processAndGetProps('{entry: "sampleMethod(String)"}')
         println props
 
-        props.should == [parameters: [[name: 'test', type: 'String', anchorId: 'sampleMethod_test_String_test',
+        props.should == [parameters: [[name: 'test', type: [[text: 'String', refId: '']], anchorId: 'sampleMethod_test_String_test',
                                        description:[[type: 'Paragraph',
                                                      content: [[text: 'test param ', type: 'SimpleText'],
                                                                [code: 'package.Param', type: 'InlinedCode']]]]]],
