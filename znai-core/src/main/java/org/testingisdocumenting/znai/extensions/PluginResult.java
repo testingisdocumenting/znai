@@ -36,6 +36,10 @@ public class PluginResult {
         this.docElements = docElements;
     }
 
+    public static PluginResult empty() {
+        return docElements(Stream.empty());
+    }
+
     public static PluginResult docElements(Stream<DocElement> elements) {
         return new PluginResult(elements.collect(Collectors.toList()));
     }

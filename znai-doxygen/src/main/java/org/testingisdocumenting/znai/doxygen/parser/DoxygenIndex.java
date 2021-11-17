@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.doxygen.parser;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -58,6 +59,12 @@ public class DoxygenIndex {
                 .filter((m) -> fullName.equals(m.getFullName()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public List<DoxygenIndexMember> findAllMembersByName(String fullName) {
+        return memberById.values().stream()
+                .filter((m) -> fullName.equals(m.getFullName()))
+                .collect(Collectors.toList());
     }
 
     public String renderAvailableNames() {

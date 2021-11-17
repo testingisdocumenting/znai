@@ -29,7 +29,7 @@
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>my_func(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>first_param,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>second_param)<sp/>{</highlight></codeline>
 <codeline lineno="18"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>my_func(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>a)<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>my_func(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>first_param)<sp/>{</highlight></codeline>
 <codeline lineno="21"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="22"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="23"><highlight class="normal">}</highlight></codeline>

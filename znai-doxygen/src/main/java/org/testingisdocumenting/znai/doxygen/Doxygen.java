@@ -24,8 +24,11 @@ import org.testingisdocumenting.znai.utils.JsonUtils;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class Doxygen {
     public static Doxygen INSTANCE = new Doxygen();
@@ -66,6 +69,22 @@ public class Doxygen {
 
 
         return compound.findByFullName(fullName);
+    }
+
+    public List<DoxygenMember> findAndParseAllMembers(ComponentsRegistry componentsRegistry, String fullName) {
+        DoxygenIndex doxygenIndex = buildIndexOrGetCached(componentsRegistry);
+        List<DoxygenIndexMember> indexMembersList = doxygenIndex.findAllMembersByName(fullName);
+        if (indexMembersList.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        return indexMembersList.stream()
+                .map(indexMember -> {
+                    DoxygenCompound compound = getCachedOrFindAndParseCompound(componentsRegistry,
+                            indexMember.getCompound().getName());
+                    
+                    return compound.findById(indexMember.getId());
+                }).collect(Collectors.toList());
     }
 
     public DoxygenCompound getCachedOrFindAndParseCompound(ComponentsRegistry componentsRegistry, String fullName) {

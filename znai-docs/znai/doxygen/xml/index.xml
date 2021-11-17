@@ -18,10 +18,12 @@
   </compound>
   <compound refid="namespaceutils_1_1nested" kind="namespace"><name>utils::nested</name>
     <member refid="funcs_8h_1a5049cb5e6566fcb928af1f05dee569cd" kind="function"><name>my_func</name></member>
-    <member refid="funcs_8h_1aabd4a1a9d6b4fac39ac54692bf1807f0" kind="function"><name>my_func</name></member>
+    <member refid="funcs_8h_1a473e2055917748ea18369f55f9226ae8" kind="function"><name>my_func</name></member>
     <member refid="funcs__three_8h_1a4932db5d1f6b4553535635906bffa3a5" kind="function"><name>another_func</name></member>
-    <member refid="funcs__three_8h_1a1533bbab3a5044ab26df876e9836d6eb" kind="function"><name>my_func</name></member>
-    <member refid="funcs__two_8h_1ad6d71365e9e3451cf2d4872735ed95a4" kind="function"><name>my_func</name></member>
+    <member refid="funcs__three_8h_1a64e30b24d77cedacf813d8e910ea8c7a" kind="function"><name>my_func</name></member>
+    <member refid="funcs__two_8h_1a84ee829975e83205e4d19ad95d193e7f" kind="function"><name>their_func</name></member>
+    <member refid="funcs__two_8h_1aba9044a671c9870fc6616d5968d283b1" kind="function"><name>their_func</name></member>
+    <member refid="funcs__two_8h_1a148cd7898973999d38680871eb7eaf05" kind="function"><name>their_func</name></member>
   </compound>
   <compound refid="namespaceutils_1_1second" kind="namespace"><name>utils::second</name>
   </compound>

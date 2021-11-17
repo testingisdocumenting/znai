@@ -54,6 +54,13 @@ Use `signatureOnly: true` parameter to render only member signature
 
 :include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }
 
+# All Matching Signatures
+
+    :include-doxygen-member: utils::nested::their_func { signatureOnly: true, includeAllMatches: true }
+
+:include-doxygen-member: utils::nested::their_func { signatureOnly: true, includeAllMatches: true }
+
+
 # Extract Comment Parameters
 
 Use `include-doxygen-doc-params` to extract parameters description from doxygen comments

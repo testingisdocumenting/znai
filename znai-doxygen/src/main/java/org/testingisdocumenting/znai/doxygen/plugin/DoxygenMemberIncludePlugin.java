@@ -26,15 +26,22 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class DoxygenMemberIncludePlugin implements IncludePlugin {
-    private DoxygenMember member;
+    private List<DoxygenMember> membersList;
+    private String fullName;
+    private ComponentsRegistry componentsRegistry;
+    private ParserHandler parserHandler;
+    private Path markupPath;
 
     @Override
     public String id() {
@@ -52,49 +59,73 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
+        this.componentsRegistry = componentsRegistry;
+        this.parserHandler = parserHandler;
+        this.markupPath = markupPath;
+        membersList = new ArrayList<>();
         Doxygen doxygen = Doxygen.INSTANCE;
 
         PluginParamsOpts paramsOpts = pluginParams.getOpts();
-        String fullName = pluginParams.getFreeParam();
+        fullName = pluginParams.getFreeParam();
 
-        member = doxygen.getCachedOrFindAndParseMember(componentsRegistry,
-                fullName);
+        boolean includeAllMatches = paramsOpts.get("includeAllMatches", false);
 
-        if (member == null) {
+        if (includeAllMatches) {
+            membersList.addAll(doxygen.findAndParseAllMembers(componentsRegistry, fullName));
+        } else {
+            membersList.add(doxygen.getCachedOrFindAndParseMember(componentsRegistry,
+                    fullName));
+        }
+
+        if (membersList.isEmpty()) {
             throw new RuntimeException("can't find member: " + fullName + ", available names:\n" +
                     doxygen.buildIndexOrGetCached(componentsRegistry).renderAvailableMemberNames());
         }
 
-        parserHandler.onGlobalAnchor(member.getId());
-
         if (paramsOpts.get("signatureOnly", false)) {
-            return PluginResult.docElement("DoxygenMember", member.toMap());
+            return signatureOnly();
         }
 
-        parserHandler.onCustomNode("DoxygenMember", member.toMap());
-
-        IncludePlugin docPlugin = DoxygenDocIncludePlugin.createDocPlugin();
-        parserHandler.onIncludePlugin(docPlugin,
-                docPlugin.process(componentsRegistry, parserHandler, markupPath,
-                        new PluginParams(docPlugin.id(), fullName)));
-
-        if (member.isFunction()) {
-            IncludePlugin docParamsPlugin = DoxygenDocParamsIncludePlugin.createDocParamsPlugin();
-            parserHandler.onIncludePlugin(docParamsPlugin,
-                    docParamsPlugin.process(componentsRegistry, parserHandler, markupPath,
-                            new PluginParams(docPlugin.id(), fullName, Collections.singletonMap("small", true))));
-        }
-
-        return PluginResult.docElements(Stream.empty());
+        return fullDefinition();
     }
 
     @Override
     public SearchText textForSearch() {
-        return SearchScore.HIGH.text(member.getName());
+        return SearchScore.HIGH.text(fullName);
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(Doxygen.INSTANCE.getIndexPath()));
+    }
+
+    private PluginResult signatureOnly() {
+        membersList.forEach(this::memberAnchorAndSignature);
+        return PluginResult.empty();
+    }
+
+    private PluginResult fullDefinition() {
+        membersList.forEach(member -> {
+            memberAnchorAndSignature(member);
+
+            IncludePlugin docPlugin = DoxygenDocIncludePlugin.createDocPlugin();
+            parserHandler.onIncludePlugin(docPlugin,
+                    docPlugin.process(componentsRegistry, parserHandler, markupPath,
+                            new PluginParams(docPlugin.id(), fullName)));
+
+            if (member.isFunction()) {
+                IncludePlugin docParamsPlugin = DoxygenDocParamsIncludePlugin.createDocParamsPlugin();
+                parserHandler.onIncludePlugin(docParamsPlugin,
+                        docParamsPlugin.process(componentsRegistry, parserHandler, markupPath,
+                                new PluginParams(docPlugin.id(), fullName, Collections.singletonMap("small", true))));
+            }
+        });
+
+        return PluginResult.empty();
+    }
+
+    private void memberAnchorAndSignature(DoxygenMember member) {
+        parserHandler.onGlobalAnchor(member.getId());
+        parserHandler.onCustomNode("DoxygenMember", member.toMap());
     }
 }
