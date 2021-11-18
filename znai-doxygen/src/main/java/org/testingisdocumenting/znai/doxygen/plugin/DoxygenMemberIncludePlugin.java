@@ -70,7 +70,6 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
         }
 
         boolean includeAllMatches = paramsOpts.get(INCLUDE_ALL_MATCHES_KEY, false);
-        String argsToFilter = paramsOpts.get(ARGS_KEY, "");
 
         if (includeAllMatches) {
             membersList = doxygen.findAndParseAllMembers(componentsRegistry, fullName);
