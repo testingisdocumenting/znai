@@ -16,25 +16,29 @@
 
 package org.testingisdocumenting.znai.doxygen.plugin;
 
-import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.Doxygen;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMember;
+import org.testingisdocumenting.znai.doxygen.parser.DoxygenMembersList;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;
-import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
-import org.testingisdocumenting.znai.search.SearchScore;
-import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.stream.Stream;
 
 public class DoxygenMemberIncludePlugin implements IncludePlugin {
-    private DoxygenMember member;
+    private static final String INCLUDE_ALL_MATCHES_KEY = "includeAllMatches";
+    private static final String ARGS_KEY = "args";
+
+    private DoxygenMembersList membersList;
+    private String fullName;
+    private ComponentsRegistry componentsRegistry;
+    private ParserHandler parserHandler;
+    private Path markupPath;
 
     @Override
     public String id() {
@@ -52,18 +56,27 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
+        this.componentsRegistry = componentsRegistry;
+        this.parserHandler = parserHandler;
+        this.markupPath = markupPath;
         Doxygen doxygen = Doxygen.INSTANCE;
 
         PluginParamsOpts paramsOpts = pluginParams.getOpts();
         fullName = pluginParams.getFreeParam();
 
-        boolean includeAllMatches = paramsOpts.get("includeAllMatches", false);
+        if (paramsOpts.has(INCLUDE_ALL_MATCHES_KEY) && paramsOpts.has(ARGS_KEY)) {
+            throw new IllegalArgumentException("can't specify " + INCLUDE_ALL_MATCHES_KEY + " and " + ARGS_KEY +
+                    " at the same time");
+        }
+
+        boolean includeAllMatches = paramsOpts.get(INCLUDE_ALL_MATCHES_KEY, false);
+        String argsToFilter = paramsOpts.get(ARGS_KEY, "");
 
         if (includeAllMatches) {
-            membersList.addAll(doxygen.findAndParseAllMembers(componentsRegistry, fullName));
+            membersList = doxygen.findAndParseAllMembers(componentsRegistry, fullName);
         } else {
-            membersList.add(doxygen.getCachedOrFindAndParseMember(componentsRegistry,
-                    fullName));
+            membersList = new DoxygenMembersList(
+                    Stream.of(doxygen.getCachedOrFindAndParseMember(componentsRegistry, fullName)));
         }
 
         if (membersList.isEmpty()) {
@@ -75,6 +88,14 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
             return signatureOnly();
         }
 
+        return fullDefinition();
+    }
+
+    private PluginResult signatureOnly() {
+        membersList.forEach(this::memberAnchorAndSignature);
+        return PluginResult.empty();
+    }
+
     private PluginResult fullDefinition() {
         membersList.forEach(member -> {
             memberAnchorAndSignature(member);
@@ -84,7 +105,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
                     docPlugin.process(componentsRegistry, parserHandler, markupPath,
                             new PluginParams(docPlugin.id(), fullName)));
 
-            if (member.isFunction() && member.hasParameters()) {
+            if (member.isFunction()) {
                 IncludePlugin docParamsPlugin = DoxygenDocParamsIncludePlugin.createDocParamsPlugin();
                 parserHandler.onIncludePlugin(docParamsPlugin,
                         docParamsPlugin.process(componentsRegistry, parserHandler, markupPath,
@@ -92,7 +113,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
             }
         });
 
-            return PluginResult.empty();
+        return PluginResult.empty();
     }
 
     private void memberAnchorAndSignature(DoxygenMember member) {

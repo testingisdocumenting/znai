@@ -71,20 +71,20 @@ public class Doxygen {
         return compound.findByFullName(fullName);
     }
 
-    public List<DoxygenMember> findAndParseAllMembers(ComponentsRegistry componentsRegistry, String fullName) {
+    public DoxygenMembersList findAndParseAllMembers(ComponentsRegistry componentsRegistry, String fullName) {
         DoxygenIndex doxygenIndex = buildIndexOrGetCached(componentsRegistry);
         List<DoxygenIndexMember> indexMembersList = doxygenIndex.findAllMembersByName(fullName);
         if (indexMembersList.isEmpty()) {
-            return Collections.emptyList();
+            return new DoxygenMembersList();
         }
 
-        return indexMembersList.stream()
+        return new DoxygenMembersList(indexMembersList.stream()
                 .map(indexMember -> {
                     DoxygenCompound compound = getCachedOrFindAndParseCompound(componentsRegistry,
                             indexMember.getCompound().getName());
-                    
+
                     return compound.findById(indexMember.getId());
-                }).collect(Collectors.toList());
+                }));
     }
 
     public DoxygenCompound getCachedOrFindAndParseCompound(ComponentsRegistry componentsRegistry, String fullName) {
