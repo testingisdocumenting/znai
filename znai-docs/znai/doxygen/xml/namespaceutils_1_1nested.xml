@@ -68,10 +68,24 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para>specific description for single param version <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first_param</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>description of first <emphasis>param</emphasis><orderedlist>
+<listitem><para>item a</para>
+</listitem><listitem><para>item b </para>
+</listitem></orderedlist>
+</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/funcs.h" line="20" column="6" bodyfile="src/funcs.h" bodystart="20" bodyend="21"/>
+        <location file="src/funcs.h" line="26" column="6" bodyfile="src/funcs.h" bodystart="26" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="funcs__three_8h_1a4932db5d1f6b4553535635906bffa3a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref></type>

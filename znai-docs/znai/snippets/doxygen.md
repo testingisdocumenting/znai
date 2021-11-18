@@ -28,6 +28,19 @@ Use `include-doxygen-doc` to extract a function description
 
 Note: Plugin ignores parameters block and only includes the description text
 
+## Member Args Selection 
+
+Use `args` param to pick an overload to use for comments extraction
+
+    :include-doxygen-doc: utils::nested::my_func { title: "My Params", args: "(int first_param)" }
+
+:include-doxygen-doc: utils::nested::my_func { title: "My Params", args: "(int first_param)" }
+
+Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to
+copy and paste.
+
+
+
 ## Classes Comment Text
 
 To extract class top level comment, provide full class name
@@ -61,7 +74,18 @@ Use `signatureOnly: true` parameter to render only member signature
 :include-doxygen-member: utils::nested::their_func { signatureOnly: true, includeAllMatches: true }
 
 
-# Extract Comment Parameters
+# Specific Member By Args
+
+Use `args` to select a specific overload by providing parameters string
+
+    :include-doxygen-member: utils::nested::their_func { args: "(long param1, bool param3)" }
+
+:include-doxygen-member: utils::nested::their_func { args: "(long param1, bool param3)", disableAnchor: true }
+
+Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to 
+copy and paste.
+
+# Extract Parameters
 
 Use `include-doxygen-doc-params` to extract parameters description from doxygen comments
 
@@ -72,6 +96,14 @@ Use `include-doxygen-doc-params` to extract parameters description from doxygen 
 Use `small: true` option to make parameters smaller 
 
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params", small: true }
+
+## Member Args Selection
+
+Use `args` to select a specific overload by providing parameters string
+
+    :include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "(int first_param)" }
+
+:include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "(int first_param)" }
 
 # Compound
 

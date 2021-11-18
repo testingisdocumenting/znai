@@ -31,6 +31,7 @@ public class DoxygenMember {
     private DoxygenDescription description;
     private String visibility;
     private String kind;
+    private String args;
     private boolean isVirtual;
     private boolean isStatic;
     private boolean isConst;
@@ -69,6 +70,22 @@ public class DoxygenMember {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getArgs() {
+        return args;
+    }
+
+    public void setArgs(String args) {
+        this.args = args;
+    }
+
+    public boolean matchesArgs(String argsToMatch) {
+        if (!argsToMatch.startsWith("(")) {
+            argsToMatch = "(" + argsToMatch + ")";
+        }
+
+        return args.equals(argsToMatch);
     }
 
     public String getFullName() {

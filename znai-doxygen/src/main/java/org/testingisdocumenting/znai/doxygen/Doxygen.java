@@ -24,11 +24,9 @@ import org.testingisdocumenting.znai.utils.JsonUtils;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 public class Doxygen {
     public static Doxygen INSTANCE = new Doxygen();

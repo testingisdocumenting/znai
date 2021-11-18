@@ -20,7 +20,7 @@ import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.Doxygen;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenDescription;
-import org.testingisdocumenting.znai.doxygen.parser.DoxygenMember;
+import org.testingisdocumenting.znai.doxygen.parser.DoxygenMembersList;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
-    private DoxygenMember member;
+    private DoxygenMembersList membersList;
 
     @Override
     public String id() {
@@ -55,15 +55,15 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
         Doxygen doxygen = Doxygen.INSTANCE;
 
         String fullName = pluginParams.getFreeParam();
-        member = doxygen.getCachedOrFindAndParseMember(componentsRegistry,
-                fullName);
 
-        if (member == null) {
-            throw new RuntimeException("can't find member: " + fullName + ", available names:\n" +
-                    doxygen.buildIndexOrGetCached(componentsRegistry).renderAvailableMemberNames());
+        membersList = DoxygenMemberListExtractor.extract(doxygen, componentsRegistry,
+                pluginParams.getOpts(), false, fullName);
+
+        if (membersList.isEmpty()) {
+            DoxygenMemberListExtractor.throwIfMembersListIsEmpty(doxygen, componentsRegistry, fullName);
         }
 
-        DoxygenDescription description = member.getDescription();
+        DoxygenDescription description = membersList.first().getDescription();
 
         Map<String, Object> props = pluginParams.getOpts().toMap();
         ApiParameters apiParameters = description.getApiParameters();
@@ -77,7 +77,7 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
 
     @Override
     public SearchText textForSearch() {
-        ApiParameters apiParameters = member.getDescription().getApiParameters();
+        ApiParameters apiParameters = membersList.first().getDescription().getApiParameters();
         if (apiParameters != null) {
             return SearchScore.HIGH.text(apiParameters.combinedTextForSearch());
         }
