@@ -49,13 +49,12 @@ class DoxygenCompoundParserTest {
     @Test
     void "should extract members"() {
         def members = compound.membersStream().collect(Collectors.toList())
-        members.should == ["name"              | "kind"     | "visibility" | "virtual" | "static"] {
-                         _____________________________________________________________________________
-                           "number_of_sounds"  | "variable" | "public"     | false     | false
-                           "counter"           | "variable" | "public"     | false     | true
-                           "sing"              | "function" | "public"     | false     | false
-                           "bark"              | "function" | "public"     | false     | false
-                           "help"              | "function" | "protected"  | true      | false
-        }
+        members.should == ["name"              | "kind"     | "visibility" | "virtual" | "static" | "const"] {
+                         __________________________________________________________________________________
+                           "number_of_sounds"  | "variable" | "public"     | false     | false    | false
+                           "counter"           | "variable" | "public"     | false     | true     | false
+                           "sing"              | "function" | "public"     | false     | false    | true
+                           "bark"              | "function" | "public"     | false     | false    | false
+                           "help"              | "function" | "protected"  | true      | false    | false }
     }
 }

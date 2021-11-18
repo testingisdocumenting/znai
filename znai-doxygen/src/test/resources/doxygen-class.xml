@@ -35,7 +35,7 @@
             </memberdef>
         </sectiondef>
         <sectiondef kind="public-func">
-            <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a204e9b29b851102ef16951cddc42ea63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+            <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a204e9b29b851102ef16951cddc42ea63" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
                 <type>void</type>
                 <definition>void utils::second::AnotherClass::sing</definition>
                 <argsstring>(int tone, int volume)</argsstring>

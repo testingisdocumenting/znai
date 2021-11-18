@@ -34,6 +34,7 @@ class DoxygenMemberParserTest {
         member.name.should == 'my_func'
         member.static.should == false
         member.virtual.should == false
+        member.const.should == true
 
         member.returnType.toListOfMaps().should == [[text: "utils::second::MyClass", refId: "classutils_1_1second_1_1MyClass"]]
         member.parameters.toListOfMaps().should == [[name: "one", type: [[text: "const ", refId: ""],

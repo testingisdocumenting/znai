@@ -81,6 +81,13 @@ Use `include-doxygen-compound` to render definition compound such as class
 
 :include-doxygen-compound: utils::second::AnotherClass 
 
+
+# Cross-Reference
+
+Znai uses doxygen cross-reference to link definitions together. 
+Class above references `MyClass` in its parameters. After you include definition of that class,
+`MyClass` reference above becomes a link.
+
     :include-doxygen-compound: utils::second::MyClass
 
 :include-doxygen-compound: utils::second::MyClass 

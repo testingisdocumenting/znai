@@ -18,7 +18,7 @@ public:
     /// @param tone tone at which to sing
     /// @param volume volume at which to sing
     ///
-    void sing(int tone, int volume);
+    void sing(int tone, int volume) const;
 
     ///
     /// bark out loud
