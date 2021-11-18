@@ -56,14 +56,14 @@
         </inbodydescription>
         <location file="src/funcs.h" line="17" column="6" bodyfile="src/funcs.h" bodystart="17" bodyend="18"/>
       </memberdef>
-      <memberdef kind="function" id="funcs_8h_1aabd4a1a9d6b4fac39ac54692bf1807f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="funcs_8h_1a473e2055917748ea18369f55f9226ae8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void utils::nested::my_func</definition>
-        <argsstring>(const std::string &amp;a)</argsstring>
+        <argsstring>(int first_param)</argsstring>
         <name>my_func</name>
         <param>
-          <type>const std::string &amp;</type>
-          <declname>a</declname>
+          <type>int</type>
+          <declname>first_param</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -112,14 +112,14 @@
         </inbodydescription>
         <location file="src/funcs_three.h" line="7" column="24" bodyfile="src/funcs_three.h" bodystart="7" bodyend="8"/>
       </memberdef>
-      <memberdef kind="function" id="funcs__three_8h_1a1533bbab3a5044ab26df876e9836d6eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="funcs__three_8h_1a64e30b24d77cedacf813d8e910ea8c7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void utils::nested::my_func</definition>
-        <argsstring>(double a)</argsstring>
+        <argsstring>(bool second_param)</argsstring>
         <name>my_func</name>
         <param>
-          <type>double</type>
-          <declname>a</declname>
+          <type>bool</type>
+          <declname>second_param</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -129,14 +129,22 @@
         </inbodydescription>
         <location file="src/funcs_three.h" line="10" column="6" bodyfile="src/funcs_three.h" bodystart="10" bodyend="11"/>
       </memberdef>
-      <memberdef kind="function" id="funcs__two_8h_1ad6d71365e9e3451cf2d4872735ed95a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="funcs__two_8h_1a84ee829975e83205e4d19ad95d193e7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void utils::nested::my_func</definition>
-        <argsstring>(long a)</argsstring>
-        <name>my_func</name>
+        <definition>void utils::nested::their_func</definition>
+        <argsstring>(long param1, std::string param2, bool param3)</argsstring>
+        <name>their_func</name>
         <param>
           <type>long</type>
-          <declname>a</declname>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>param2</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>param3</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -144,7 +152,45 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/funcs_two.h" line="3" column="6" bodyfile="src/funcs_two.h" bodystart="3" bodyend="4"/>
+        <location file="src/funcs_two.h" line="4" column="6" bodyfile="src/funcs_two.h" bodystart="4" bodyend="5"/>
+      </memberdef>
+      <memberdef kind="function" id="funcs__two_8h_1aba9044a671c9870fc6616d5968d283b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void utils::nested::their_func</definition>
+        <argsstring>(long param1, bool param3)</argsstring>
+        <name>their_func</name>
+        <param>
+          <type>long</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>param3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/funcs_two.h" line="7" column="6" bodyfile="src/funcs_two.h" bodystart="7" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="funcs__two_8h_1a148cd7898973999d38680871eb7eaf05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void utils::nested::their_func</definition>
+        <argsstring>(long param1)</argsstring>
+        <name>their_func</name>
+        <param>
+          <type>long</type>
+          <declname>param1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/funcs_two.h" line="10" column="6" bodyfile="src/funcs_two.h" bodystart="10" bodyend="11"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

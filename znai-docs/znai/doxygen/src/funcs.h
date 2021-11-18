@@ -17,7 +17,7 @@ namespace nested {
 void my_func(int first_param, bool second_param) {
 }
 
-void my_func(const std::string& a) {
+void my_func(int first_param) {
 }
 }
 }
