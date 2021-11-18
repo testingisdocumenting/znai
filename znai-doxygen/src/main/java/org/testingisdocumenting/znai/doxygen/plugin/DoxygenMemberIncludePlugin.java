@@ -28,17 +28,14 @@ import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
 import java.util.Collections;
-import java.util.stream.Stream;
 
 public class DoxygenMemberIncludePlugin implements IncludePlugin {
-    private static final String INCLUDE_ALL_MATCHES_KEY = "includeAllMatches";
-    private static final String ARGS_KEY = "args";
-
+    private Boolean disableAnchor;
     private DoxygenMembersList membersList;
-    private String fullName;
     private ComponentsRegistry componentsRegistry;
     private ParserHandler parserHandler;
     private Path markupPath;
+    private String fullName;
 
     @Override
     public String id() {
@@ -59,29 +56,16 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
         this.componentsRegistry = componentsRegistry;
         this.parserHandler = parserHandler;
         this.markupPath = markupPath;
-        Doxygen doxygen = Doxygen.INSTANCE;
 
         PluginParamsOpts paramsOpts = pluginParams.getOpts();
         fullName = pluginParams.getFreeParam();
-
-        if (paramsOpts.has(INCLUDE_ALL_MATCHES_KEY) && paramsOpts.has(ARGS_KEY)) {
-            throw new IllegalArgumentException("can't specify " + INCLUDE_ALL_MATCHES_KEY + " and " + ARGS_KEY +
-                    " at the same time");
-        }
-
-        boolean includeAllMatches = paramsOpts.get(INCLUDE_ALL_MATCHES_KEY, false);
-
-        if (includeAllMatches) {
-            membersList = doxygen.findAndParseAllMembers(componentsRegistry, fullName);
-        } else {
-            membersList = new DoxygenMembersList(
-                    Stream.of(doxygen.getCachedOrFindAndParseMember(componentsRegistry, fullName)));
-        }
+        membersList = DoxygenMemberListExtractor.extract(Doxygen.INSTANCE, componentsRegistry,
+                paramsOpts, true, fullName);
 
         if (membersList.isEmpty()) {
-            throw new RuntimeException("can't find member: " + fullName + ", available names:\n" +
-                    doxygen.buildIndexOrGetCached(componentsRegistry).renderAvailableMemberNames());
+            DoxygenMemberListExtractor.throwIfMembersListIsEmpty(Doxygen.INSTANCE, componentsRegistry, fullName);
         }
+        disableAnchor = paramsOpts.get("disableAnchor", false);
 
         if (paramsOpts.get("signatureOnly", false)) {
             return signatureOnly();
@@ -104,7 +88,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
                     docPlugin.process(componentsRegistry, parserHandler, markupPath,
                             new PluginParams(docPlugin.id(), fullName)));
 
-            if (member.isFunction()) {
+            if (member.isFunction() && member.hasParameters()) {
                 IncludePlugin docParamsPlugin = DoxygenDocParamsIncludePlugin.createDocParamsPlugin();
                 parserHandler.onIncludePlugin(docParamsPlugin,
                         docParamsPlugin.process(componentsRegistry, parserHandler, markupPath,
@@ -116,7 +100,10 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
     }
 
     private void memberAnchorAndSignature(DoxygenMember member) {
-        parserHandler.onGlobalAnchor(member.getId());
+        if (!disableAnchor) {
+            parserHandler.onGlobalAnchor(member.getId());
+        }
+
         parserHandler.onCustomNode("DoxygenMember", member.toMap());
     }
 }

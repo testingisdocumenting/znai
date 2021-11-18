@@ -44,4 +44,19 @@ public class DoxygenMembersList {
     public void forEach(Consumer<DoxygenMember> consumer) {
         members.forEach(consumer);
     }
+
+    public DoxygenMember first() {
+        return members.get(0);
+    }
+
+    public DoxygenMember findByArgs(String args) {
+        return members.stream()
+                .filter(member -> member.matchesArgs(args))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public String renderAvailableArgs() {
+        return members.stream().map(DoxygenMember::getArgs).collect(Collectors.joining("\n"));
+    }
 }

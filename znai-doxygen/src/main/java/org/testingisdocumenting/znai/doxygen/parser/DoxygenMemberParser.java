@@ -52,6 +52,8 @@ public class DoxygenMemberParser {
         member.setVirtual("virtual".equals(XmlUtils.getAttributeText(memberNode, "virt")));
         member.setConst("yes".equals(XmlUtils.getAttributeText(memberNode, "const")));
 
+        member.setArgs(XmlUtils.nextLevelNodeByName(memberNode, "argsstring").getTextContent());
+
         member.setReturnType(DoxygenTextWithLinksParser.parse(XmlUtils.nextLevelNodeByName(memberNode, "type")));
 
         XmlUtils.childrenNodesStreamByName(memberNode, "param").forEach((paramNode) -> {

@@ -20,7 +20,7 @@ import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.Doxygen;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenCompound;
-import org.testingisdocumenting.znai.doxygen.parser.DoxygenMember;
+import org.testingisdocumenting.znai.doxygen.parser.DoxygenMembersList;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
@@ -32,7 +32,7 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 
 public class DoxygenDocIncludePlugin implements IncludePlugin {
-    private DoxygenMember member;
+    private DoxygenMembersList membersList;
     private DoxygenCompound compound;
 
     @Override
@@ -52,30 +52,34 @@ public class DoxygenDocIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         Doxygen doxygen = Doxygen.INSTANCE;
+        membersList = new DoxygenMembersList();
 
         String fullName = pluginParams.getFreeParam();
         compound = doxygen.getCachedOrFindAndParseCompound(componentsRegistry,
                 fullName);
 
-        member = doxygen.getCachedOrFindAndParseMember(componentsRegistry,
-                fullName);
+        if (compound == null) {
+            membersList = DoxygenMemberListExtractor.extract(doxygen, componentsRegistry,
+                    pluginParams.getOpts(), false, pluginParams.getFreeParam());
+        }
 
-        if (compound == null && member == null) {
+        if (compound == null && membersList.isEmpty()) {
             throw new RuntimeException("can't find entry: " + fullName + ", available names:\n" +
                     doxygen.buildIndexOrGetCached(componentsRegistry).renderAvailableNames());
         }
 
-        return PluginResult.docElements(
-                member != null ?
-                        member.getDescription().getDocElements().stream():
-                        compound.getDescription().getDocElements().stream());
+        if (compound != null) {
+            return PluginResult.docElements(compound.getDescription().getDocElements().stream());
+        }
+
+        return PluginResult.docElements(membersList.first().getDescription().getDocElements().stream());
     }
 
     @Override
     public SearchText textForSearch() {
-        return member != null ?
-                SearchScore.HIGH.text(member.getDescription().getSearchTextWithoutParameters()):
-                SearchScore.HIGH.text(compound.getDescription().getSearchTextWithoutParameters());
+        return membersList.isEmpty() ?
+                SearchScore.HIGH.text(compound.getDescription().getSearchTextWithoutParameters()):
+                SearchScore.HIGH.text(membersList.first().getDescription().getSearchTextWithoutParameters());
     }
 
     @Override
