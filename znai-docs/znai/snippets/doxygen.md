@@ -53,7 +53,7 @@ To extract class top level comment, provide full class name
 
 # Member Signature, Comment And Parameters
 
-Use `include-doxygen-member` to render member signature
+Use `include-doxygen-member` to render member signature, its description and parameters list
 
     :include-doxygen-member: utils::nested::my_func
 
@@ -97,7 +97,7 @@ Use `small: true` option to make parameters smaller
 
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params", small: true }
 
-## Member Args Selection
+# Extract Parameters By Args 
 
 Use `args` to select a specific overload by providing parameters string
 

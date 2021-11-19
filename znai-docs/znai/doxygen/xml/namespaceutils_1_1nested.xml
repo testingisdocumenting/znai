@@ -184,10 +184,29 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para>Description of <emphasis>what</emphasis> and <emphasis>why</emphasis> for their_func</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>param1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>description of param1 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>param3</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>description of param3 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/funcs_two.h" line="7" column="6" bodyfile="src/funcs_two.h" bodystart="7" bodyend="8"/>
+        <location file="src/funcs_two.h" line="13" column="6" bodyfile="src/funcs_two.h" bodystart="13" bodyend="14"/>
       </memberdef>
       <memberdef kind="function" id="funcs__two_8h_1a148cd7898973999d38680871eb7eaf05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -204,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/funcs_two.h" line="10" column="6" bodyfile="src/funcs_two.h" bodystart="10" bodyend="11"/>
+        <location file="src/funcs_two.h" line="16" column="6" bodyfile="src/funcs_two.h" bodystart="16" bodyend="17"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

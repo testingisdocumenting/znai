@@ -27,7 +27,7 @@ import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
-import java.util.Collections;
+import java.util.Map;
 
 public class DoxygenMemberIncludePlugin implements IncludePlugin {
     private Boolean disableAnchor;
@@ -36,6 +36,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
     private ParserHandler parserHandler;
     private Path markupPath;
     private String fullName;
+    private PluginParamsOpts paramsOpts;
 
     @Override
     public String id() {
@@ -57,7 +58,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
         this.parserHandler = parserHandler;
         this.markupPath = markupPath;
 
-        PluginParamsOpts paramsOpts = pluginParams.getOpts();
+        paramsOpts = pluginParams.getOpts();
         fullName = pluginParams.getFreeParam();
         membersList = DoxygenMemberListExtractor.extract(Doxygen.INSTANCE, componentsRegistry,
                 paramsOpts, true, fullName);
@@ -86,13 +87,16 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
             IncludePlugin docPlugin = DoxygenDocIncludePlugin.createDocPlugin();
             parserHandler.onIncludePlugin(docPlugin,
                     docPlugin.process(componentsRegistry, parserHandler, markupPath,
-                            new PluginParams(docPlugin.id(), fullName)));
+                            new PluginParams(docPlugin.id(), fullName, paramsOpts.toMap())));
 
             if (member.isFunction() && member.hasParameters()) {
                 IncludePlugin docParamsPlugin = DoxygenDocParamsIncludePlugin.createDocParamsPlugin();
+                Map<String, Object> paramsOpts = this.paramsOpts.toMap();
+                paramsOpts.put("small", true);
+
                 parserHandler.onIncludePlugin(docParamsPlugin,
                         docParamsPlugin.process(componentsRegistry, parserHandler, markupPath,
-                                new PluginParams(docPlugin.id(), fullName, Collections.singletonMap("small", true))));
+                                new PluginParams(docPlugin.id(), fullName, paramsOpts)));
             }
         });
 
