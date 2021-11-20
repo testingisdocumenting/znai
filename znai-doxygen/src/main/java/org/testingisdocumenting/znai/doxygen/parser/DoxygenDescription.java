@@ -24,11 +24,16 @@ import java.util.List;
 public class DoxygenDescription {
     private final List<DocElement> docElements;
     private final ApiParameters apiParameters;
+    private final ApiParameters apiTemplateParameters;
     private final String searchText;
 
-    public DoxygenDescription(List<DocElement> docElements, ApiParameters apiParameters, String withoutParametersSearchText) {
+    public DoxygenDescription(List<DocElement> docElements,
+                              ApiParameters apiParameters,
+                              ApiParameters apiTemplateParameters,
+                              String withoutParametersSearchText) {
         this.docElements = docElements;
         this.apiParameters = apiParameters;
+        this.apiTemplateParameters = apiTemplateParameters;
         this.searchText = withoutParametersSearchText;
     }
 
@@ -42,6 +47,10 @@ public class DoxygenDescription {
 
     public ApiParameters getApiParameters() {
         return apiParameters;
+    }
+
+    public ApiParameters getApiTemplateParameters() {
+        return apiTemplateParameters;
     }
 
     public String getSearchText() {

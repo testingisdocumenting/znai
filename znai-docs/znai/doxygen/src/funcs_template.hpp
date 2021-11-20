@@ -1,0 +1,29 @@
+/**
+ * \file funcs_template.hpp
+ *
+ * utilities template functions
+ */
+
+/**
+ * prints a value and a new line
+ * @param v value to print
+ * @tparam T type of the value to print
+ */
+template<typename T>
+void println(const T& v) {
+    std::cout << v << "\n";
+}
+
+// multi_println
+/**
+ * prints a value and a new line
+ * @param v1 value to print
+ * @param v2 value to print
+ * @tparam T1 type of the value one to print
+ * @tparam T2 type of the value two to print
+ */
+template<typename T1, typename T2>
+void multi_println(const T1& v1, const T2& v2) {
+    std::cout << v1 << ", " << v2 << "\n";
+}
+// multi_println

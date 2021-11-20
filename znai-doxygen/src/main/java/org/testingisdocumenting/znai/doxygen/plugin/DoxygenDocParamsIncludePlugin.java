@@ -64,13 +64,18 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
         }
 
         DoxygenDescription description = membersList.first().getDescription();
+        String type = pluginParams.getOpts().get("type", "");
 
-        Map<String, Object> props = pluginParams.getOpts().toMap();
-        ApiParameters apiParameters = description.getApiParameters();
-        if (apiParameters != null) {
-            props.putAll(apiParameters.toMap());
+        ApiParameters apiParameters = "template".equals(type) ?
+                description.getApiTemplateParameters():
+                description.getApiParameters();
+
+        if (apiParameters == null) {
+            return PluginResult.empty();
         }
 
+        Map<String, Object> props = pluginParams.getOpts().toMap();
+        props.putAll(apiParameters.toMap());
         props.putAll(pluginParams.getOpts().toMap());
         return PluginResult.docElement("ApiParameters", props);
     }

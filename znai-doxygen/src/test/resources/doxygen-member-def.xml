@@ -24,6 +24,14 @@
                 <definition>utils::second::MyClass utils::nested::another_func</definition>
                 <argsstring>(const utils::second::MyClass &amp;one, const utils::second::AnotherClass &amp;two)</argsstring>
                 <name>my_func</name>
+                <templateparamlist>
+                    <param>
+                        <type>typename T1</type>
+                    </param>
+                    <param>
+                        <type>typename T2</type>
+                    </param>
+                </templateparamlist>
                 <param>
                     <type>const <ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref> &amp;</type>
                     <declname>one</declname>

@@ -34,6 +34,10 @@
   <compound refid="funcs_8h" kind="file"><name>funcs.h</name>
     <member refid="funcs_8h_1a451470a505617c5422faf2b6df5e2d43" kind="function"><name>free_func</name></member>
   </compound>
+  <compound refid="funcs__template_8hpp" kind="file"><name>funcs_template.hpp</name>
+    <member refid="funcs__template_8hpp_1af969a1dd1f0b5ebd1b4380a42cd0f66f" kind="function"><name>println</name></member>
+    <member refid="funcs__template_8hpp_1adbf4cefb343f576f1f3ba2e4a73738b2" kind="function"><name>multi_println</name></member>
+  </compound>
   <compound refid="funcs__three_8h" kind="file"><name>funcs_three.h</name>
   </compound>
   <compound refid="funcs__two_8h" kind="file"><name>funcs_two.h</name>
