@@ -53,5 +53,22 @@
                 </parameterdescription>
             </parameteritem>
         </parameterlist>
+        <parameterlist kind="templateparam"><parameteritem>
+            <parameternamelist>
+                <parametername>T1</parametername>
+            </parameternamelist>
+            <parameterdescription>
+                <para>type of the value one to print </para>
+            </parameterdescription>
+        </parameteritem>
+            <parameteritem>
+                <parameternamelist>
+                    <parametername>T2</parametername>
+                </parameternamelist>
+                <parameterdescription>
+                    <para>type of the value two to print </para>
+                </parameterdescription>
+            </parameteritem>
+        </parameterlist>
     </para>
 </detaileddescription>

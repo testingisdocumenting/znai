@@ -5,6 +5,7 @@
     <innerfile refid="classes_8h">classes.h</innerfile>
     <innerfile refid="classes__two_8h">classes_two.h</innerfile>
     <innerfile refid="funcs_8h">funcs.h</innerfile>
+    <innerfile refid="funcs__template_8hpp">funcs_template.hpp</innerfile>
     <innerfile refid="funcs__three_8h">funcs_three.h</innerfile>
     <innerfile refid="funcs__two_8h">funcs_two.h</innerfile>
     <briefdescription>

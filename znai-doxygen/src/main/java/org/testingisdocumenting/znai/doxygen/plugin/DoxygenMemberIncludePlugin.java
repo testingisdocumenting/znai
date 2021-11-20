@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.doxygen.plugin;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.Doxygen;
+import org.testingisdocumenting.znai.doxygen.parser.DoxygenDescription;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMember;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMembersList;
 import org.testingisdocumenting.znai.extensions.PluginParams;
@@ -81,26 +82,44 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
     }
 
     private PluginResult fullDefinition() {
-        membersList.forEach(member -> {
-            memberAnchorAndSignature(member);
-
-            IncludePlugin docPlugin = DoxygenDocIncludePlugin.createDocPlugin();
-            parserHandler.onIncludePlugin(docPlugin,
-                    docPlugin.process(componentsRegistry, parserHandler, markupPath,
-                            new PluginParams(docPlugin.id(), fullName, paramsOpts.toMap())));
-
-            if (member.isFunction() && member.hasParameters()) {
-                IncludePlugin docParamsPlugin = DoxygenDocParamsIncludePlugin.createDocParamsPlugin();
-                Map<String, Object> paramsOpts = this.paramsOpts.toMap();
-                paramsOpts.put("small", true);
-
-                parserHandler.onIncludePlugin(docParamsPlugin,
-                        docParamsPlugin.process(componentsRegistry, parserHandler, markupPath,
-                                new PluginParams(docPlugin.id(), fullName, paramsOpts)));
-            }
-        });
-
+        membersList.forEach(this::fullDefinition);
         return PluginResult.empty();
+    }
+
+    private void fullDefinition(DoxygenMember member) {
+        memberAnchorAndSignature(member);
+
+        DoxygenDescription description = member.getDescription();
+        boolean hasParametersDesc = description != null && description.getApiParameters() != null;
+        boolean hasTemplateParametersDesc = description != null && description.getApiTemplateParameters() != null;
+
+        IncludePlugin docPlugin = DoxygenDocIncludePlugin.createDocPlugin();
+        parserHandler.onIncludePlugin(docPlugin,
+                docPlugin.process(componentsRegistry, parserHandler, markupPath,
+                        new PluginParams(docPlugin.id(), fullName, paramsOpts.toMap())));
+
+        if (hasParametersDesc) {
+            parameters("", hasTemplateParametersDesc ? "parameters" : "");
+        }
+
+        if (hasTemplateParametersDesc) {
+            parameters("template", hasParametersDesc ? "template parameters" : "");
+        }
+    }
+
+    private void parameters(String type, String title) {
+        IncludePlugin docParamsPlugin = DoxygenDocParamsIncludePlugin.createDocParamsPlugin();
+        Map<String, Object> paramsOpts = this.paramsOpts.toMap();
+        paramsOpts.put("small", true);
+        paramsOpts.put("type", type);
+
+        if (!title.isEmpty()) {
+            paramsOpts.put("title", title);
+        }
+
+        parserHandler.onIncludePlugin(docParamsPlugin,
+                docParamsPlugin.process(componentsRegistry, parserHandler, markupPath,
+                        new PluginParams(docParamsPlugin.id(), fullName, paramsOpts)));
     }
 
     private void memberAnchorAndSignature(DoxygenMember member) {

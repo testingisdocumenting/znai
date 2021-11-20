@@ -105,6 +105,16 @@ Use `args` to select a specific overload by providing parameters string
 
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "(int first_param)" }
 
+# Extract Template Parameters
+
+Pass `type: "template"` parameter to `include-doxygen-doc-params` plugin to extract template parameters
+
+:include-file: doxygen/src/funcs_template.hpp { title: "source.hpp", surroundedBy: "// multi_println" }
+
+    :include-doxygen-doc-params: multi_println { title: "Template parameters", type: "template" }
+
+:include-doxygen-doc-params: multi_println { title: "Template parameters", type: "template" }
+
 # Compound
 
 Use `include-doxygen-compound` to render definition compound such as class 

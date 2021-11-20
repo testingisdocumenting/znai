@@ -35,6 +35,7 @@ public class DoxygenDescriptionParser {
 
     private DocElementCreationParserHandler parserHandler;
     private ApiParameters apiParameters;
+    private ApiParameters apiTemplateParameters;
 
     private DoxygenDescriptionParser(ComponentsRegistry componentsRegistry,
                                      DoxygenParameterList parameters,
@@ -74,6 +75,7 @@ public class DoxygenDescriptionParser {
 
         return new DoxygenDescription(parserHandler.getDocElement().getContent(),
                 apiParameters,
+                apiTemplateParameters,
                 String.join(" ", textParts));
     }
 
@@ -87,7 +89,12 @@ public class DoxygenDescriptionParser {
             parseChildren(node);
             parserHandler.onParagraphEnd();
         } if (node.getNodeName().equals("parameterlist")) {
-            apiParameters = DoxygenDescriptionParamsParser.parseParameters(componentsRegistry, parameters, paramsAnchorPrefix, node);
+            String kind = XmlUtils.getAttributeText(node, "kind");
+            if ("param".equals(kind)) {
+                apiParameters = DoxygenDescriptionParamsParser.parseParameters(componentsRegistry, parameters, paramsAnchorPrefix, node);
+            } else if ("templateparam".equals(kind)) {
+                apiTemplateParameters = DoxygenDescriptionParamsParser.parseParameters(componentsRegistry, parameters, paramsAnchorPrefix + "_template", node);
+            }
             parseChildren(node);
         } else if (node.getNodeName().equals("bold")) {
             parserHandler.onStrongEmphasisStart();
