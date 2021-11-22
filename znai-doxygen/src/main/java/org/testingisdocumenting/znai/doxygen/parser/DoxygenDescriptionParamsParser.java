@@ -96,6 +96,6 @@ public class DoxygenDescriptionParamsParser {
             return byName.getType();
         }
 
-        return new ApiLinkedText("");
+        return new ApiLinkedText();
     }
 }

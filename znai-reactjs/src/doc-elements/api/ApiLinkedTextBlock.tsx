@@ -29,6 +29,10 @@ interface Props {
 }
 
 export function ApiLinkedTextBlock({ linkedText }: Props) {
+  if (linkedText.length === 0) {
+    return null;
+  }
+
   return (
     <div className="znai-api-text-with-links">
       {linkedText.map((part, idx) => {

@@ -62,6 +62,15 @@ public class DoxygenMemberParser {
             member.addParameter(name, type);
         });
 
+        if (XmlUtils.hasNodeByName(memberNode, "templateparamlist")) {
+            Node templateParamsNode = XmlUtils.nextLevelNodeByName(memberNode, "templateparamlist");
+
+            XmlUtils.childrenNodesStreamByName(templateParamsNode, "param").forEach((paramNode) -> {
+                ApiLinkedText type = DoxygenTextWithLinksParser.parse(XmlUtils.nextLevelNodeByName(paramNode, "type"));
+                member.addTemplateParameter("", type);
+            });
+        }
+
         member.setDescription(DoxygenDescriptionParser.parse(componentsRegistry,
                 member.getParameters(),
                 member.getName(),

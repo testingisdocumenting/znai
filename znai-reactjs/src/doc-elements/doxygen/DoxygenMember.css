@@ -15,7 +15,6 @@
  */
 
 .znai-doxygen-member {
-    display: flex;
     font-family: var(--znai-code-font-family);
     font-size: var(--znai-code-text-size);
     margin-bottom: 8px;
@@ -27,6 +26,23 @@
 
 .znai-doxygen-member-name {
     color: var(--znai-code-keyword-color);
+}
+
+.znai-doxygen-template-param,
+.znai-doxygen-template-params {
+    display: flex;
+}
+
+.znai-doxygen-template {
+    color: var(--znai-meta-color);
+}
+
+.znai-doxygen-template-param {
+    color: var(--znai-code-property-color);
+}
+
+.znai-doxygen-member-signature-row {
+    display: flex;
 }
 
 .znai-doxygen-member-params,

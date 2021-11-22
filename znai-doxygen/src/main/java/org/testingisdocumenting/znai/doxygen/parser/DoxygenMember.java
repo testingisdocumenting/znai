@@ -23,6 +23,7 @@ import java.util.Map;
 
 public class DoxygenMember {
     private final DoxygenParameterList parameters;
+    private final DoxygenParameterList templateParameters;
 
     private DoxygenCompound compound;
     private String id;
@@ -38,6 +39,7 @@ public class DoxygenMember {
 
     public DoxygenMember() {
         parameters = new DoxygenParameterList();
+        templateParameters = new DoxygenParameterList();
     }
 
     public DoxygenDescription getDescription() {
@@ -46,6 +48,10 @@ public class DoxygenMember {
 
     public void addParameter(String name, ApiLinkedText type) {
         parameters.add(new DoxygenParameter(name, type));
+    }
+
+    public void addTemplateParameter(String name, ApiLinkedText type) {
+        templateParameters.add(new DoxygenParameter(name, type));
     }
 
     public String getId() {
@@ -181,6 +187,7 @@ public class DoxygenMember {
         result.put("isStatic", isStatic);
         result.put("returnType", returnType.toListOfMaps());
         result.put("parameters", parameters.toListOfMaps());
+        result.put("templateParameters", templateParameters.toListOfMaps());
 
         return result;
     }

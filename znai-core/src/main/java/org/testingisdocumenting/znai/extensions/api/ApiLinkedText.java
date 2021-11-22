@@ -30,7 +30,9 @@ public class ApiLinkedText {
 
     public ApiLinkedText(String textOnly) {
         this.parts = new ArrayList<>();
-        addPart(textOnly);
+        if (!textOnly.trim().isEmpty()) {
+            addPart(textOnly);
+        }
     }
 
     public void addPart(String text) {
