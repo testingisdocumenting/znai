@@ -12,7 +12,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>current number of sounds made </para>
+<para>current number of <computeroutput>sounds</computeroutput> made </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -172,7 +172,9 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>ask for help out loud <parameterlist kind="param"><parameteritem>
+<para>ask for help out loud <emphasis>example</emphasis> <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">utils::second::AnotherClass</ref>*<sp/>instance;</highlight></codeline>
+<codeline><highlight class="normal">instance-&gt;<ref refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" kindref="member">help</ref>(10,<sp/>20);</highlight></codeline>
+</programlisting> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>tone</parametername>
 </parameternamelist>
@@ -193,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="44" column="18"/>
+        <location file="src/classes_two.h" line="49" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -201,7 +203,7 @@
     <detaileddescription>
 <para><bold>Domain</bold> specific context setting. Describes business setting and requirements. </para>
     </detaileddescription>
-    <location file="src/classes_two.h" line="7" column="1" bodyfile="src/classes_two.h" bodystart="7" bodyend="46"/>
+    <location file="src/classes_two.h" line="7" column="1" bodyfile="src/classes_two.h" bodystart="7" bodyend="51"/>
     <listofallmembers>
       <member refid="classutils_1_1second_1_1AnotherClass_1a6df6948dc0a20d9df49b49d89df7bbee" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>bark</name></member>
       <member refid="classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>counter</name></member>

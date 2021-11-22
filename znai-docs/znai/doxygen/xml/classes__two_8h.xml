@@ -27,12 +27,12 @@
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="44" refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" kindref="member">help</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>tone,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>volume);</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="49"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49" refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" kindref="member">help</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>tone,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>volume);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="src/classes_two.h"/>
   </compounddef>

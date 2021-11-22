@@ -1,0 +1,27 @@
+<!--
+  ~ Copyright 2021 znai maintainers
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<programlisting filename=".cpp">
+    <codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+    <codeline lineno="13" refid="funcs__template_8hpp_1af969a1dd1f0b5ebd1b4380a42cd0f66f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="funcs__template_8hpp_1af969a1dd1f0b5ebd1b4380a42cd0f66f" kindref="member">println</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>v)<sp/>{</highlight></codeline>
+    <codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>v<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+    <codeline lineno="15"><highlight class="normal">}</highlight></codeline>
+    <codeline lineno="16"><highlight class="normal"></highlight></codeline>
+    <codeline lineno="25"><highlight class="comment"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+    <codeline lineno="26" refid="funcs__template_8hpp_1adbf4cefb343f576f1f3ba2e4a73738b2" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="funcs__template_8hpp_1adbf4cefb343f576f1f3ba2e4a73738b2" kindref="member">multi_println</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T1&amp;<sp/>v1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T2&amp;<sp/>v2)<sp/>{</highlight></codeline>
+    <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>v1<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;,<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>v2<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+    <codeline lineno="28"><highlight class="normal">}</highlight></codeline>
+</programlisting>
