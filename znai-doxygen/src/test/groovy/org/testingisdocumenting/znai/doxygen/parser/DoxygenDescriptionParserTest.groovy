@@ -53,7 +53,7 @@ class DoxygenDescriptionParserTest {
         DoxygenDescription desc = parseDescription("doxygen-description.xml")
 
         desc.apiParameters.combinedTextForSearch().should == "a  description of param a item a item b b  description of param b"
-        desc.apiParameters.toMap().should == [parameters: [[name: "a", type: [[text: "", refId: ""]], anchorId: "name_a",
+        desc.apiParameters.toMap().should == [parameters: [[name: "a", type: [], anchorId: "name_a",
                                                             description: [[type: "Paragraph",
                                                                           content: [[text: "description of ", type: "SimpleText"],
                                                                                     [type: "Emphasis", content: [[text: "param", type: "SimpleText"]]],
@@ -61,7 +61,7 @@ class DoxygenDescriptionParserTest {
                                                                                     [delimiter: " ", startNumber:1, type: "OrderedList",
                                                                                      content: [[type: "ListItem", content: [[type: "Paragraph", content: [[text: "item a", type: "SimpleText"]]]]],
                                                                                                [type: "ListItem", content: [[type: "Paragraph", content: [[text: "item b", type: "SimpleText"]]]]]]]]]]],
-                                                           [name: "b", type: [[text: "", refId: ""]], anchorId: "name_b",
+                                                           [name: "b", type: [], anchorId: "name_b",
                                                             description: [[type: "Paragraph",
                                                                            content: [[text: "description of param b", type: "SimpleText"]]]]]]]
     }
