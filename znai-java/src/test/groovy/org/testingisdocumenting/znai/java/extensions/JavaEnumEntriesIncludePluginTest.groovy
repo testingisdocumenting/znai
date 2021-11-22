@@ -38,12 +38,12 @@ class JavaEnumEntriesIncludePluginTest {
                                 [
                                         name    : 'ENTRY_ONE_WITH_A_LONG_NAME',
                                         anchorId: 'Enum_java_ENTRY_ONE_WITH_A_LONG_NAME',
-                                        type    : [[text: '', refId: '']], description: entryOneDescription
+                                        type    : [], description: entryOneDescription
                                 ],
                                 [
                                         name       : 'ENTRY_TWO',
                                         anchorId   : 'Enum_java_ENTRY_TWO',
-                                        type       : [[text: '', refId: '']],
+                                        type       : [],
                                         description: entryTwoDescription
                                 ]],
                 ]]
@@ -61,7 +61,7 @@ class JavaEnumEntriesIncludePluginTest {
                                 [
                                         name       : 'ENTRY_ONE_WITH_A_LONG_NAME',
                                         anchorId   : 'Enum_java_ENTRY_ONE_WITH_A_LONG_NAME',
-                                        type       : [[text: '', refId: '']],
+                                        type       : [],
                                         description: entryOneDescription
                                 ]],
                 ]]
