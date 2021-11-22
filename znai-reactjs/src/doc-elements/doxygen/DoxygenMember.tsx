@@ -34,7 +34,8 @@ interface Props {
   isVirtual: boolean;
   isConst: boolean;
   returnType: ApiLinkedText;
-  parameters: DoxygenParameter[];
+  parameters?: DoxygenParameter[];
+  templateParameters?: DoxygenParameter[];
 }
 
 export function DoxygenMember({
@@ -47,10 +48,11 @@ export function DoxygenMember({
   isVirtual,
   isConst,
   parameters,
+  templateParameters,
 }: Props) {
   const renderedName = <div className="znai-doxygen-member-name">{name}</div>;
   const memberUrl = refId ? globalAnchorUrl(refId) : undefined;
-  const wrappedInOptionalLink = memberUrl ? (
+  const nameWrappedInOptionalLink = memberUrl ? (
     <LinkWrapper url={memberUrl} treatAsLocal={true}>
       {renderedName}
     </LinkWrapper>
@@ -60,37 +62,60 @@ export function DoxygenMember({
 
   return (
     <div className="znai-doxygen-member content-block">
-      {isStatic && <div className="znai-doxygen-member-classifier">static </div>}
-      {isVirtual && <div className="znai-doxygen-member-classifier">virtual </div>}
+      {templateParameters && templateParameters.length > 0 && (
+        <div className="znai-doxygen-member-template-row">
+          <div className="znai-doxygen-template-params">
+            <div className="znai-doxygen-template">template&lt;</div>
+            {templateParameters.map((templateParam, idx) => {
+              const needSeparator = idx !== templateParameters.length - 1;
 
-      <div className="znai-doxygen-member-return">
-        <ApiLinkedTextBlock linkedText={returnType} />
-      </div>
-      <div className="znai-doxygen-member-full-name">
-        {compoundName && (
-          <>
-            <div className="znai-doxygen-member-compound-name">{compoundName}</div>
-            <div className="znai-doxygen-member-name-separator">::</div>
-          </>
-        )}
-
-        {wrappedInOptionalLink}
-        <div className="znai-doxygen-member-params">
-          {isFunction && <div className="znai-doxygen-member-params-separator">(</div>}
-          {(parameters || []).map((param, idx) => {
-            const needSeparator = idx !== parameters.length - 1;
-            return (
-              <div className="znai-doxygen-member-param" key={idx}>
-                <div className="znai-doxygen-member-param-type">
-                  <ApiLinkedTextBlock linkedText={param.type} />
+              return (
+                <div key={idx} className="znai-doxygen-template-param">
+                  <ApiLinkedTextBlock linkedText={templateParam.type} />
+                  {needSeparator && <div className="znai-doxygen-member-params-separator">, </div>}
                 </div>
-                <div className="znai-doxygen-member-param-name">{param.name}</div>
-                {needSeparator && <div className="znai-doxygen-member-params-separator">, </div>}
-              </div>
-            );
-          })}
-          {isFunction && <div className="znai-doxygen-member-params-separator">)</div>}
-          {isConst && <div className="znai-doxygen-member-classifier"> const</div>}
+              );
+            })}
+            <div className="znai-doxygen-template">&gt;</div>
+          </div>
+        </div>
+      )}
+
+      <div className="znai-doxygen-member-signature-row">
+        {isStatic && <div className="znai-doxygen-member-classifier">static </div>}
+        {isVirtual && <div className="znai-doxygen-member-classifier">virtual </div>}
+
+        <div className="znai-doxygen-member-return">
+          <ApiLinkedTextBlock linkedText={returnType} />
+        </div>
+        <div className="znai-doxygen-member-full-name">
+          {compoundName && (
+            <>
+              <div className="znai-doxygen-member-compound-name">{compoundName}</div>
+              <div className="znai-doxygen-member-name-separator">::</div>
+            </>
+          )}
+
+          {nameWrappedInOptionalLink}
+          {parameters && (
+            <div className="znai-doxygen-member-params">
+              {isFunction && <div className="znai-doxygen-member-params-separator">(</div>}
+              {parameters.map((param, idx) => {
+                const needSeparator = idx !== parameters.length - 1;
+                return (
+                  <div className="znai-doxygen-member-param" key={idx}>
+                    <div className="znai-doxygen-member-param-type">
+                      <ApiLinkedTextBlock linkedText={param.type} />
+                    </div>
+                    <div className="znai-doxygen-member-param-name">{param.name}</div>
+                    {needSeparator && <div className="znai-doxygen-member-params-separator">, </div>}
+                  </div>
+                );
+              })}
+              {isFunction && <div className="znai-doxygen-member-params-separator">)</div>}
+              {isConst && <div className="znai-doxygen-member-classifier"> const</div>}
+            </div>
+          )}
         </div>
       </div>
     </div>

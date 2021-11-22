@@ -44,6 +44,17 @@ export function doxygenMemberDemo(registry: Registry) {
     },
   ];
 
+  const templateParameters = [
+    {
+      name: "",
+      type: [{ text: "T1", refId: "" }],
+    },
+    {
+      name: "",
+      type: [{ text: "T2", refId: "" }],
+    },
+  ];
+
   registry.add("default", () => (
     <DoxygenMember
       compoundName="utils::nested"
@@ -54,6 +65,20 @@ export function doxygenMemberDemo(registry: Registry) {
       isStatic={false}
       returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
       parameters={parameters}
+    />
+  ));
+
+  registry.add("with template params", () => (
+    <DoxygenMember
+      compoundName="utils::nested"
+      name="my_func"
+      isFunction={true}
+      isVirtual={false}
+      isConst={false}
+      isStatic={false}
+      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      parameters={parameters}
+      templateParameters={templateParameters}
     />
   ));
 

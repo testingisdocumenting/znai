@@ -48,7 +48,7 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
                 .forEach((enumEntry) -> {
                     JavaDocElementsMapsAndSearchText elementsMapsAndSearchText = javaDocTextToDocElements(
                             enumEntry.getJavaDocText());
-                    apiParameters.add(enumEntry.getName(), new ApiLinkedText(""), elementsMapsAndSearchText.docElementsMaps,
+                    apiParameters.add(enumEntry.getName(), new ApiLinkedText(), elementsMapsAndSearchText.docElementsMaps,
                             elementsMapsAndSearchText.searchText);
         });
 

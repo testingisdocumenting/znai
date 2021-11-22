@@ -39,8 +39,6 @@ Use `args` param to pick an overload to use for comments extraction
 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to
 copy and paste.
 
-
-
 ## Classes Comment Text
 
 To extract class top level comment, provide full class name
@@ -58,6 +56,12 @@ Use `include-doxygen-member` to render member signature, its description and par
     :include-doxygen-member: utils::nested::my_func
 
 :include-doxygen-member: utils::nested::my_func 
+
+```markdown {title: "template example"}
+:include-doxygen-member: multi_println
+```
+
+:include-doxygen-member: multi_println
 
 # Member Signature Only
 

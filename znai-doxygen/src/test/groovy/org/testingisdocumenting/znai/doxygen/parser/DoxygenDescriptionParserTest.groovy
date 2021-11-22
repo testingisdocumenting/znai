@@ -71,9 +71,9 @@ class DoxygenDescriptionParserTest {
         DoxygenDescription desc = parseDescription("doxygen-description.xml")
 
         desc.apiTemplateParameters.combinedTextForSearch().should == "T1  type of the value one to print T2  type of the value two to print"
-        desc.apiTemplateParameters.toMap().should == [parameters: [[name: "T1", type: [[text: "", refId: ""]], anchorId: "name_template_T1",
+        desc.apiTemplateParameters.toMap().should == [parameters: [[name: "T1", type: [], anchorId: "name_template_T1",
                                                                     description: [[type: "Paragraph", content: [[text: "type of the value one to print ", type: "SimpleText"]]]]],
-                                                                   [name: "T2", type: [[text: "", refId: ""]], anchorId: "name_template_T2",
+                                                                   [name: "T2", type: [], anchorId: "name_template_T2",
                                                                     description:[[type: "Paragraph", content: [[text: "type of the value two to print ", type: "SimpleText"]]]]]]]
     }
 
