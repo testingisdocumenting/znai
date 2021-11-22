@@ -22,13 +22,19 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class NixAuthorizationGroupResolutionService implements AuthorizationGroupResolutionService {
     @Override
     public boolean groupContainsUser(String group, String userId) {
+        return groupNamesStream(userId).anyMatch(group::equals);
+    }
+
+    protected static Stream<String> groupNamesStream(String userId) {
         String groups = readGroups(userId);
         String[] groupsList = groups.split(" ");
-        return Arrays.asList(groupsList).contains(group);
+        return Arrays.stream(groupsList)
+                .map(String::trim);
     }
 
     private static String readGroups(String userId) {
