@@ -40,10 +40,11 @@ class DoxygenDescriptionParserTest {
                 [bulletMarker: "*", tight: false, type: "BulletList", content:
                         [[type: "ListItem", content: [[type: "Paragraph", content: [[text: "list one", type: "SimpleText"]]]]],
                          [type: "ListItem", content: [[type: "Paragraph", content: [[text: "list two", type: "SimpleText"]]]]],
-                         [type: "ListItem", content: [[type: "Paragraph", content: [[text: "list three", type: "SimpleText"]]]]]]],
+                         [type: "ListItem", content: [[type: "Paragraph", content: [[code: "list three", type: "InlinedCode"]]]]]]],
                 [delimiter: " " , startNumber: 1, type: "OrderedList", content:
                         [[type: "ListItem", content: [[type: "Paragraph", content: [[text: "number one", type: "SimpleText"]]]]],
-                         [type: "ListItem", content: [[type: "Paragraph", content: [[text: "number two", type: "SimpleText"]]]]]]]]]]
+                         [type: "ListItem", content: [[type: "Paragraph", content: [[text: "number two", type: "SimpleText"]]]]]]],
+                 [type: "Snippet", lang: "cpp", snippet: "utils::second::AnotherClass* instance;\ninstance->help(10, 20);\n", lineNumber: ""]]]]
 
         desc.searchTextWithoutParameters.should == "top level comment of important list one list two list three number one number two"
     }
