@@ -17,8 +17,10 @@
 package org.testingisdocumenting.znai.doxygen.parser;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
+import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Node;
 
@@ -84,11 +86,12 @@ public class DoxygenDescriptionParser {
     }
 
     private void handleDescriptionNode(Node node) {
-        if (node.getNodeName().equals("para")) {
+        String nodeName = node.getNodeName();
+        if (nodeName.equals("para")) {
             parserHandler.onParagraphStart();
             parseChildren(node);
             parserHandler.onParagraphEnd();
-        } if (node.getNodeName().equals("parameterlist")) {
+        } else if (nodeName.equals("parameterlist")) {
             String kind = XmlUtils.getAttributeText(node, "kind");
             if ("param".equals(kind)) {
                 apiParameters = DoxygenDescriptionParamsParser.parseParameters(componentsRegistry, parameters, paramsAnchorPrefix, node);
@@ -96,23 +99,30 @@ public class DoxygenDescriptionParser {
                 apiTemplateParameters = DoxygenDescriptionParamsParser.parseParameters(componentsRegistry, parameters, paramsAnchorPrefix + "_template", node);
             }
             parseChildren(node);
-        } else if (node.getNodeName().equals("bold")) {
+        } else if (nodeName.equals("programlisting")) {
+            DoxygenCodeBlockSimple codeBlockSimple = DoxygenProgramListingParser.parseAsSimpleCodeBlock(node);
+            parserHandler.onSnippet(PluginParams.EMPTY, codeBlockSimple.getExtension(), "", codeBlockSimple.getCode());
+        } else if (nodeName.equals("computeroutput")) {
+            String textContent = node.getTextContent();
+            parserHandler.onInlinedCode(textContent, DocReferences.EMPTY);
+            textParts.add(textContent);
+        } else if (nodeName.equals("bold")) {
             parserHandler.onStrongEmphasisStart();
             parseChildren(node);
             parserHandler.onStrongEmphasisEnd();
-        } else if (node.getNodeName().equals("emphasis")) {
+        } else if (nodeName.equals("emphasis")) {
             parserHandler.onEmphasisStart();
             parseChildren(node);
             parserHandler.onEmphasisEnd();
-        } else if (node.getNodeName().equals("itemizedlist")) {
+        } else if (nodeName.equals("itemizedlist")) {
             parserHandler.onBulletListStart('*', false);
             parseChildren(node);
             parserHandler.onBulletListEnd();
-        } else if (node.getNodeName().equals("orderedlist")) {
+        } else if (nodeName.equals("orderedlist")) {
             parserHandler.onOrderedListStart(' ', 1);
             parseChildren(node);
             parserHandler.onOrderedListEnd();
-        } else if (node.getNodeName().equals("listitem")) {
+        } else if (nodeName.equals("listitem")) {
             parserHandler.onListItemStart();
             parseChildren(node);
             parserHandler.onListItemEnd();

@@ -22,7 +22,7 @@
                 <para>list two</para>
             </listitem>
             <listitem>
-                <para>list three</para>
+                <para><computeroutput>list three</computeroutput></para>
             </listitem>
         </itemizedlist>
         <orderedlist>
@@ -33,6 +33,9 @@
                 <para>number two</para>
             </listitem>
         </orderedlist>
+        <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">utils::second::AnotherClass</ref>*<sp/>instance;</highlight></codeline>
+            <codeline><highlight class="normal">instance-&gt;<ref refid="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" kindref="member">help</ref>(10,<sp/>20);</highlight></codeline>
+        </programlisting>
     </para>
     <para>
         <parameterlist kind="param">

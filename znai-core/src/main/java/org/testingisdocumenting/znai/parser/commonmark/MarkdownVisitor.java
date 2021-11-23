@@ -174,7 +174,7 @@ public class MarkdownVisitor extends AbstractVisitor {
 
     @Override
     public void visit(IndentedCodeBlock indentedCodeBlock) {
-        parserHandler.onSnippet(PluginParams.EMPTY,"", "", indentedCodeBlock.getLiteral());
+        parserHandler.onSnippet(PluginParams.EMPTY, "", "", indentedCodeBlock.getLiteral());
     }
 
     @Override

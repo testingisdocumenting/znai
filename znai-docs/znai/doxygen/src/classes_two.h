@@ -7,7 +7,7 @@ namespace second {
 class AnotherClass {
 public:
     /**
-     * current number of sounds made
+     * current number of `sounds` made
      */
     int number_of_sounds;
 
@@ -38,6 +38,11 @@ public:
 protected:
     ///
     /// ask for help out loud
+    /// *example*
+    /// ```cpp
+    /// utils::second::AnotherClass* instance;
+    /// instance->help(10, 20);
+    /// ```
     /// @param tone tone at which to sing
     /// @param volume volume at which to sing
     ///
