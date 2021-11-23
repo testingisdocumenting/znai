@@ -69,17 +69,17 @@ public class DoxygenDocIncludePlugin implements IncludePlugin {
         }
 
         if (compound != null) {
-            return PluginResult.docElements(compound.getDescription().getDocElements().stream());
+            return PluginResult.docElements(compound.getDescription().docElementStream());
         }
 
-        return PluginResult.docElements(membersList.first().getDescription().getDocElements().stream());
+        return PluginResult.docElements(membersList.first().getDescription().docElementStream());
     }
 
     @Override
     public SearchText textForSearch() {
         return membersList.isEmpty() ?
-                SearchScore.HIGH.text(compound.getDescription().getSearchTextWithoutParameters()):
-                SearchScore.HIGH.text(membersList.first().getDescription().getSearchTextWithoutParameters());
+                SearchScore.HIGH.text(compound.getDescription().textForSearch()):
+                SearchScore.HIGH.text(membersList.first().getDescription().textForSearch());
     }
 
     @Override

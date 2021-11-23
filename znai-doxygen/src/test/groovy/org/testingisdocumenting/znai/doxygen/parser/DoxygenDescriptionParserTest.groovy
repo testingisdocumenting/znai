@@ -83,6 +83,6 @@ class DoxygenDescriptionParserTest {
                 XmlUtils.parseXml(ResourceUtils.textContent(resourceName)),
                 "detaileddescription")
 
-        return DoxygenDescriptionParser.parse(TEST_COMPONENTS_REGISTRY, new DoxygenParameterList(),"name", descRoot)
+        return DoxygenDescriptionParser.parseFull(TEST_COMPONENTS_REGISTRY, new DoxygenParameterList(),"name", descRoot)
     }
 }

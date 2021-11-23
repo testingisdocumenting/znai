@@ -10,13 +10,13 @@
         <argsstring></argsstring>
         <name>number_of_sounds</name>
         <briefdescription>
+<para>current number of <computeroutput>sounds</computeroutput> made </para>
         </briefdescription>
         <detaileddescription>
-<para>current number of <computeroutput>sounds</computeroutput> made </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="12" column="9" bodyfile="src/classes_two.h" bodystart="12" bodyend="-1"/>
+        <location file="src/classes_two.h" line="10" column="9" bodyfile="src/classes_two.h" bodystart="10" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-attrib">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="14" column="16" bodyfile="src/classes_two.h" bodystart="14" bodyend="-1"/>
+        <location file="src/classes_two.h" line="12" column="16" bodyfile="src/classes_two.h" bodystart="12" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="21" column="10"/>
+        <location file="src/classes_two.h" line="19" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a6df6948dc0a20d9df49b49d89df7bbee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="29" column="10"/>
+        <location file="src/classes_two.h" line="27" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="35" column="17" bodyfile="src/classes_two.h" bodystart="35" bodyend="36"/>
+        <location file="src/classes_two.h" line="33" column="17" bodyfile="src/classes_two.h" bodystart="33" bodyend="34"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-func">
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes_two.h" line="49" column="18"/>
+        <location file="src/classes_two.h" line="47" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -203,7 +203,7 @@
     <detaileddescription>
 <para><bold>Domain</bold> specific context setting. Describes business setting and requirements. </para>
     </detaileddescription>
-    <location file="src/classes_two.h" line="7" column="1" bodyfile="src/classes_two.h" bodystart="7" bodyend="51"/>
+    <location file="src/classes_two.h" line="7" column="1" bodyfile="src/classes_two.h" bodystart="7" bodyend="49"/>
     <listofallmembers>
       <member refid="classutils_1_1second_1_1AnotherClass_1a6df6948dc0a20d9df49b49d89df7bbee" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>bark</name></member>
       <member refid="classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14" prot="public" virt="non-virtual"><scope>utils::second::AnotherClass</scope><name>counter</name></member>
