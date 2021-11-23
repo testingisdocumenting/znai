@@ -50,34 +50,51 @@ public class DoxygenDescriptionParser {
     }
 
     /**
-     * parse parameters description from doxygen description block
+     * parse description from doxygen description block
      * @param componentsRegistry components registry to help with creation of parser handlers and other things
      * @param parameters optional list of parameters extracted from a member to grab types as doxygen desc doesn't have types, only names
      * @param paramsAnchorPrefix anchor for created api parameters
      * @param descriptionNode node to parse
      * @return parsed description
      */
-    public static DoxygenDescription parse(ComponentsRegistry componentsRegistry,
-                                           DoxygenParameterList parameters,
-                                           String paramsAnchorPrefix,
-                                           Node descriptionNode) {
+    public static DoxygenDescription parseFull(ComponentsRegistry componentsRegistry,
+                                               DoxygenParameterList parameters,
+                                               String paramsAnchorPrefix,
+                                               Node descriptionNode) {
         DoxygenDescriptionParser parser = new DoxygenDescriptionParser(componentsRegistry,
                 parameters,
                 paramsAnchorPrefix,
                 descriptionNode);
 
-        return parser.parseXml();
+        return parser.parseFullDescription();
     }
 
-    private DoxygenDescription parseXml() {
-        parserHandler = new DocElementCreationParserHandler(componentsRegistry, Paths.get("doxygen-xml"));
+    public static DoxygenBriefDescription parseBrief(ComponentsRegistry componentsRegistry, Node briefDescriptionNode) {
+        DoxygenDescriptionParser parser = new DoxygenDescriptionParser(componentsRegistry,
+                new DoxygenParameterList(),
+                "",
+                briefDescriptionNode);
 
+        return parser.parseBriefDescription();
+    }
+
+    private DoxygenDescription parseFullDescription() {
+        parserHandler = new DocElementCreationParserHandler(componentsRegistry, Paths.get("doxygen-xml"));
         parseChildren(descriptionRoot);
         parserHandler.onParsingEnd();
 
         return new DoxygenDescription(parserHandler.getDocElement().getContent(),
                 apiParameters,
                 apiTemplateParameters,
+                String.join(" ", textParts));
+    }
+
+    private DoxygenBriefDescription parseBriefDescription() {
+        parserHandler = new DocElementCreationParserHandler(componentsRegistry, Paths.get("doxygen-xml"));
+        parseChildren(descriptionRoot);
+        parserHandler.onParsingEnd();
+
+        return new DoxygenBriefDescription(parserHandler.getDocElement().getContent(),
                 String.join(" ", textParts));
     }
 

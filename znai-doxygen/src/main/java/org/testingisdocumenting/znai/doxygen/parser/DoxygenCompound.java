@@ -24,13 +24,29 @@ import java.util.stream.Stream;
 public class DoxygenCompound {
     private final Map<String, DoxygenMember> memberById;
 
-    protected String id;
-    protected String kind;
-    protected String name;
-    protected DoxygenDescription description;
+    private String id;
+    private String kind;
+    private String name;
+    private DoxygenCombinedDescription description;
 
     public DoxygenCompound() {
         memberById = new LinkedHashMap<>();
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(DoxygenCombinedDescription description) {
+        this.description = description;
     }
 
     public String getId() {
@@ -45,7 +61,7 @@ public class DoxygenCompound {
         return name;
     }
 
-    public DoxygenDescription getDescription() {
+    public DoxygenCombinedDescription getDescription() {
         return description;
     }
 

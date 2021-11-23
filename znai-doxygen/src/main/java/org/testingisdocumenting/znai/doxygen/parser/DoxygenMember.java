@@ -29,7 +29,7 @@ public class DoxygenMember {
     private String id;
     private String name;
     private ApiLinkedText returnType;
-    private DoxygenDescription description;
+    private DoxygenCombinedDescription description;
     private String visibility;
     private String kind;
     private String args;
@@ -42,8 +42,12 @@ public class DoxygenMember {
         templateParameters = new DoxygenParameterList();
     }
 
-    public DoxygenDescription getDescription() {
+    public DoxygenCombinedDescription getDescription() {
         return description;
+    }
+
+    public void setDescription(DoxygenCombinedDescription description) {
+        this.description = description;
     }
 
     public void addParameter(String name, ApiLinkedText type) {
@@ -116,10 +120,6 @@ public class DoxygenMember {
 
     public boolean hasParameters() {
         return !parameters.isEmpty();
-    }
-
-    public void setDescription(DoxygenDescription description) {
-        this.description = description;
     }
 
     public String getVisibility() {
