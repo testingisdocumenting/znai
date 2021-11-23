@@ -119,6 +119,19 @@ Pass `type: "template"` parameter to `include-doxygen-doc-params` plugin to extr
 
 :include-doxygen-doc-params: multi_println { title: "Template parameters", type: "template" }
 
+# Ignore Template Parameters
+
+Use `doc_ignore` as part of template parameter name to remove it from signature
+
+:include-file: doxygen/src/funcs_template.hpp { title: "source.hpp", surroundedBy: "// ignore_template" }
+
+```markdown {title: "template example"}
+:include-doxygen-member: long_template_func {signatureOnly: true}
+```
+
+:include-doxygen-member: long_template_func {signatureOnly: true}
+
+
 # Compound
 
 Use `include-doxygen-compound` to render definition compound such as class 
