@@ -35,6 +35,10 @@ public class ApiLinkedText {
         }
     }
 
+    public boolean contains(String text) {
+        return parts.stream().anyMatch(p -> p.getText().contains(text));
+    }
+
     public void addPart(String text) {
         parts.add(new ApiLinkedTextPart(text, ""));
     }

@@ -55,6 +55,10 @@ public class DoxygenMember {
     }
 
     public void addTemplateParameter(String name, ApiLinkedText type) {
+        if (type.contains("doc_ignore")) {
+            return;
+        }
+
         templateParameters.add(new DoxygenParameter(name, type));
     }
 

@@ -43,6 +43,7 @@
   <compound refid="funcs__template_8hpp" kind="file"><name>funcs_template.hpp</name>
     <member refid="funcs__template_8hpp_1af969a1dd1f0b5ebd1b4380a42cd0f66f" kind="function"><name>println</name></member>
     <member refid="funcs__template_8hpp_1adbf4cefb343f576f1f3ba2e4a73738b2" kind="function"><name>multi_println</name></member>
+    <member refid="funcs__template_8hpp_1aa9b71ec13f0f9fe185a26b7e07e818ca" kind="function"><name>long_template_func</name></member>
   </compound>
   <compound refid="funcs__three_8h" kind="file"><name>funcs_three.h</name>
   </compound>

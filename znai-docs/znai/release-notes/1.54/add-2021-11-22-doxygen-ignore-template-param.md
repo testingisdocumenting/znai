@@ -1,0 +1,1 @@
+* Add Doxygen [ignore template parameter](snippets/doxygen#ignore-template-parameters) 
