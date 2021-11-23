@@ -156,6 +156,7 @@
             </memberdef>
         </sectiondef>
         <briefdescription>
+            <para>brief desc</para>
         </briefdescription>
         <detaileddescription>
             <para><bold>Domain</bold> specific context setting. Describes business setting and requirements. </para>

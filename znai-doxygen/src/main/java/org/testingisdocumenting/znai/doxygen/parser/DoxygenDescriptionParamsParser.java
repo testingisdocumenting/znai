@@ -23,7 +23,6 @@ import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Node;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class DoxygenDescriptionParamsParser {
@@ -76,7 +75,7 @@ public class DoxygenDescriptionParamsParser {
         ApiLinkedText type = linkedTextByName(name, typeText);
 
         Node descriptionNode = XmlUtils.nextLevelNodeByName(paramItem, "parameterdescription");
-        DoxygenDescription paramDescription = DoxygenDescriptionParser.parse(componentsRegistry,
+        DoxygenDescription paramDescription = DoxygenDescriptionParser.parseFull(componentsRegistry,
                 parameters,
                 anchorPrefix + "_",
                 descriptionNode);

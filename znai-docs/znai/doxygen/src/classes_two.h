@@ -6,9 +6,7 @@ namespace second {
  */
 class AnotherClass {
 public:
-    /**
-     * current number of `sounds` made
-     */
+    /// current number of `sounds` made
     int number_of_sounds;
 
     static int counter;

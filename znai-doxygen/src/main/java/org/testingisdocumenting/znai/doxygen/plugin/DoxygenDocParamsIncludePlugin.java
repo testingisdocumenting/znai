@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.doxygen.plugin;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.Doxygen;
+import org.testingisdocumenting.znai.doxygen.parser.DoxygenCombinedDescription;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenDescription;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMembersList;
 import org.testingisdocumenting.znai.extensions.PluginParams;
@@ -63,12 +64,12 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
             DoxygenMemberListExtractor.throwIfMembersListIsEmpty(doxygen, componentsRegistry, fullName);
         }
 
-        DoxygenDescription description = membersList.first().getDescription();
+        DoxygenCombinedDescription description = membersList.first().getDescription();
         String type = pluginParams.getOpts().get("type", "");
 
         ApiParameters apiParameters = "template".equals(type) ?
-                description.getApiTemplateParameters():
-                description.getApiParameters();
+                description.getFull().getApiTemplateParameters():
+                description.getFull().getApiParameters();
 
         if (apiParameters == null) {
             return PluginResult.empty();
@@ -82,7 +83,7 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
 
     @Override
     public SearchText textForSearch() {
-        ApiParameters apiParameters = membersList.first().getDescription().getApiParameters();
+        ApiParameters apiParameters = membersList.first().getDescription().getFull().getApiParameters();
         if (apiParameters != null) {
             return SearchScore.HIGH.text(apiParameters.combinedTextForSearch());
         }

@@ -11,6 +11,9 @@
   <compound refid="classutils_1_1second_1_1MyClass" kind="class"><name>utils::second::MyClass</name>
     <member refid="classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1" kind="function"><name>bark</name></member>
   </compound>
+  <compound refid="structMyStruct" kind="struct"><name>MyStruct</name>
+    <member refid="structMyStruct_1aa372b7473fe51ce2784d8653e17bc591" kind="typedef"><name>type</name></member>
+  </compound>
   <compound refid="classutils_1_1second_1_1ThirdClass" kind="class"><name>utils::second::ThirdClass</name>
     <member refid="classutils_1_1second_1_1ThirdClass_1a0b8841f3d07edf14f592150dab8f0046" kind="function"><name>bark</name></member>
   </compound>
@@ -41,6 +44,8 @@
   <compound refid="funcs__three_8h" kind="file"><name>funcs_three.h</name>
   </compound>
   <compound refid="funcs__two_8h" kind="file"><name>funcs_two.h</name>
+  </compound>
+  <compound refid="structs_8h" kind="file"><name>structs.h</name>
   </compound>
   <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>src</name>
   </compound>

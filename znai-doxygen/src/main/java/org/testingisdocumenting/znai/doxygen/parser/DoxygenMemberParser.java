@@ -71,9 +71,10 @@ public class DoxygenMemberParser {
             });
         }
 
-        member.setDescription(DoxygenDescriptionParser.parse(componentsRegistry,
-                member.getParameters(),
-                member.getName(),
-                XmlUtils.anyNestedNodeByName(memberNode, "detaileddescription")));
+        member.setDescription(new DoxygenCombinedDescription(
+                DoxygenDescriptionParser.parseBrief(componentsRegistry,
+                        XmlUtils.anyNestedNodeByName(memberNode, "briefdescription")),
+                DoxygenDescriptionParser.parseFull(componentsRegistry, member.getParameters(), member.getName(),
+                        XmlUtils.anyNestedNodeByName(memberNode, "detaileddescription"))));
     }
 }

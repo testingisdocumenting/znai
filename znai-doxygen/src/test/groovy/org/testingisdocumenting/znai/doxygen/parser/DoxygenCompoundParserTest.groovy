@@ -43,6 +43,7 @@ class DoxygenCompoundParserTest {
 
     @Test
     void "should extract compound doc"() {
+        compound.briefDescription.searchText.should == "brief desc"
         compound.description.searchText.should == "Domain specific context setting. Describes business setting and requirements."
     }
 

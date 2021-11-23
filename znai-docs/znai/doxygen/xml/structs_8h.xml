@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="structs_8h" kind="file" language="C++">
+    <compoundname>structs.h</compoundname>
+    <innerclass refid="structMyStruct" prot="public">MyStruct</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="9" refid="structMyStruct" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structMyStruct" kindref="compound">MyStruct</ref><sp/>{</highlight></codeline>
+<codeline lineno="11" refid="structMyStruct_1aa372b7473fe51ce2784d8653e17bc591" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>T::type<sp/><ref refid="structMyStruct_1aa372b7473fe51ce2784d8653e17bc591" kindref="member">type</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/structs.h"/>
+  </compounddef>
+</doxygen>
