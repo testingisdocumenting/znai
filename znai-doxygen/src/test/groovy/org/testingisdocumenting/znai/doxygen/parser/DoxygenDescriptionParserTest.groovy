@@ -28,9 +28,9 @@ import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_C
 class DoxygenDescriptionParserTest {
     @Test
     void "should parse and convert description to doc elements"() {
-        DoxygenDescription desc = parseDescription("doxygen-description.xml")
+        DoxygenFullDescription desc = parseDescription("doxygen-description.xml")
 
-        def descMaps = desc.docElements.stream().map(DocElement::toMap).collect(Collectors.toList())
+        def descMaps = desc.descriptionElements.stream().map(DocElement::toMap).collect(Collectors.toList())
 
         descMaps.should == [
                 [type: "Paragraph", content: [[text: "top ", type: "SimpleText"], [type: "StrongEmphasis", content: [[text: "level", type: "SimpleText"]]],
@@ -51,7 +51,7 @@ class DoxygenDescriptionParserTest {
 
     @Test
     void "should parse and convert params to api parameters"() {
-        DoxygenDescription desc = parseDescription("doxygen-description.xml")
+        DoxygenFullDescription desc = parseDescription("doxygen-description.xml")
 
         desc.apiParameters.combinedTextForSearch().should == "a  description of param a item a item b b  description of param b"
         desc.apiParameters.toMap().should == [parameters: [[name: "a", type: [], anchorId: "name_a",
@@ -69,7 +69,7 @@ class DoxygenDescriptionParserTest {
 
     @Test
     void "should parse and convert template params to api parameters"() {
-        DoxygenDescription desc = parseDescription("doxygen-description.xml")
+        DoxygenFullDescription desc = parseDescription("doxygen-description.xml")
 
         desc.apiTemplateParameters.combinedTextForSearch().should == "T1  type of the value one to print T2  type of the value two to print"
         desc.apiTemplateParameters.toMap().should == [parameters: [[name: "T1", type: [], anchorId: "name_template_T1",
@@ -78,7 +78,7 @@ class DoxygenDescriptionParserTest {
                                                                     description:[[type: "Paragraph", content: [[text: "type of the value two to print ", type: "SimpleText"]]]]]]]
     }
 
-    private static DoxygenDescription parseDescription(String resourceName) {
+    private static DoxygenFullDescription parseDescription(String resourceName) {
         def descRoot = XmlUtils.anyNestedNodeByName(
                 XmlUtils.parseXml(ResourceUtils.textContent(resourceName)),
                 "detaileddescription")

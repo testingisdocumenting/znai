@@ -18,30 +18,22 @@ package org.testingisdocumenting.znai.doxygen.parser;
 
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
-import java.util.stream.Stream;
+import java.util.List;
 
-public class DoxygenCombinedDescription {
-    private final DoxygenBriefDescription brief;
-    private final DoxygenDescription full;
+public class DoxygenReturn {
+    private final List<DocElement> docElementList;
+    private final String textForSearch;
 
-    public DoxygenCombinedDescription(DoxygenBriefDescription brief, DoxygenDescription full) {
-        this.brief = brief;
-        this.full = full;
+    public DoxygenReturn(List<DocElement> docElementList, String textForSearch) {
+        this.docElementList = docElementList;
+        this.textForSearch = textForSearch;
     }
 
-    public DoxygenBriefDescription getBrief() {
-        return brief;
+    public List<DocElement> getDocElementList() {
+        return docElementList;
     }
 
-    public DoxygenDescription getFull() {
-        return full;
-    }
-
-    public Stream<DocElement> docElementStream() {
-        return Stream.concat(brief.getDocElements().stream(), full.getDocElements().stream());
-    }
-
-    public String textForSearch() {
-        return brief.getSearchText() + " " + full.getSearchTextWithoutParameters();
+    public String getTextForSearch() {
+        return textForSearch;
     }
 }

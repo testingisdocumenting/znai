@@ -131,6 +131,15 @@ Use `doc_ignore` as part of template parameter name to remove it from signature
 
 :include-doxygen-member: long_template_func {signatureOnly: true}
 
+# Return Description
+
+Return description is part of parameters list
+
+:include-file: doxygen/src/math.h { title: "math.h", surroundedBy: "// math-add" }
+
+    :include-doxygen-doc-params: math::add
+
+:include-doxygen-doc-params: math::add
 
 # Compound
 

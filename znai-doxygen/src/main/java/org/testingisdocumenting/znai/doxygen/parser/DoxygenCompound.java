@@ -27,7 +27,7 @@ public class DoxygenCompound {
     private String id;
     private String kind;
     private String name;
-    private DoxygenCombinedDescription description;
+    private DoxygenDescription description;
 
     public DoxygenCompound() {
         memberById = new LinkedHashMap<>();
@@ -45,7 +45,7 @@ public class DoxygenCompound {
         this.name = name;
     }
 
-    public void setDescription(DoxygenCombinedDescription description) {
+    public void setDescription(DoxygenDescription description) {
         this.description = description;
     }
 
@@ -61,7 +61,7 @@ public class DoxygenCompound {
         return name;
     }
 
-    public DoxygenCombinedDescription getDescription() {
+    public DoxygenDescription getDescription() {
         return description;
     }
 

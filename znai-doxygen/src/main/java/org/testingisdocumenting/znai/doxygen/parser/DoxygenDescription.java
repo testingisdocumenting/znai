@@ -16,44 +16,32 @@
 
 package org.testingisdocumenting.znai.doxygen.parser;
 
-import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 public class DoxygenDescription {
-    private final List<DocElement> docElements;
-    private final ApiParameters apiParameters;
-    private final ApiParameters apiTemplateParameters;
-    private final String searchText;
+    private final DoxygenBriefDescription brief;
+    private final DoxygenFullDescription full;
 
-    public DoxygenDescription(List<DocElement> docElements,
-                              ApiParameters apiParameters,
-                              ApiParameters apiTemplateParameters,
-                              String withoutParametersSearchText) {
-        this.docElements = docElements;
-        this.apiParameters = apiParameters;
-        this.apiTemplateParameters = apiTemplateParameters;
-        this.searchText = withoutParametersSearchText;
+    public DoxygenDescription(DoxygenBriefDescription brief, DoxygenFullDescription full) {
+        this.brief = brief;
+        this.full = full;
     }
 
-    public List<DocElement> getDocElements() {
-        return docElements;
+    public DoxygenBriefDescription getBrief() {
+        return brief;
     }
 
-    public String getSearchTextWithoutParameters() {
-        return searchText;
+    public DoxygenFullDescription getFull() {
+        return full;
     }
 
-    public ApiParameters getApiParameters() {
-        return apiParameters;
+    public Stream<DocElement> docElementStream() {
+        return Stream.concat(brief.getDocElements().stream(), full.getDescriptionElements().stream());
     }
 
-    public ApiParameters getApiTemplateParameters() {
-        return apiTemplateParameters;
-    }
-
-    public String getSearchText() {
-        return searchText;
+    public String textForSearch() {
+        return brief.getSearchText() + " " + full.getSearchTextWithoutParameters();
     }
 }
