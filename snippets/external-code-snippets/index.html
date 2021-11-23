@@ -118,21 +118,12 @@
 <header><h1>Extract Snippets</h1></header>
 <p>Use startLine , endLine to extract specific content by using marker lines. import market def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade('id') # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py {startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;, excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) Use surroundedBy and the same marker for start/end to streamline the snippets extract process :include-file: python-examples.py { title: &quot;extracted example with surroundedBy&quot;, surroundedBy: &quot;# example-cancel-trade&quot;} market.cancel_trade('id') Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: &quot;import&quot;} :include-file: python-examples.py {includeRegexp: [&quot;import&quot;]} import market Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: &quot;# example&quot;} :include-file: python-examples.py {excludeRegexp: [&quot;# example&quot;]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade('id') if __name__ == &quot;__main__&quot;: main()</p>
 </article>
-
-<article>
-<header><h1>Callout Comments</h1></header>
-<p>If you already have comments inside your code it would be non efficient to repeat them inside documentation. Instead, comments can be automatically extracted and presented as part of the textGiven file with inlined comments!! class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules By specifying commentsType :include-file: file-name-with-comments.js {commentsType: &quot;inline&quot;} It will be rendered as class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules Comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line. order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order) order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order)</p>
-</article>
-
-<article>
-<header><h1>Spoilers</h1></header>
-<p>Set the spoiler property to initially hide explanations. It may be useful when teaching. :include-file: file-name-with-comments.js {commentsType: &quot;inline&quot;, spoiler: true} Click on the spoiler to reveal the explanations: class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</p>
-</article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -739,109 +730,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "exclude by regexp",
         "lang" : "py"
       } ]
-    }, {
-      "id" : "callout-comments",
-      "type" : "Section",
-      "title" : "Callout Comments",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "If you already have comments inside your code it would be non efficient to repeat them inside documentation.",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "Instead, comments can be automatically extracted and presented as part of the text",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Given file with inlined comments!!",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
-        "type" : "Snippet",
-        "lang" : "js"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "By specifying ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "commentsType",
-          "type" : "InlinedCode"
-        } ]
-      }, {
-        "snippet" : ":include-file: file-name-with-comments.js {commentsType: \"inline\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "It will be rendered as",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
-        "commentsType" : "inline",
-        "type" : "Snippet",
-        "lang" : "js"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "order = fetch_order()\n# explanation of why\n# strategic price calculation\n# is important here\nprice = strategic_price_calc(order)",
-        "type" : "Snippet",
-        "title" : "multi line comments above line",
-        "lang" : "py"
-      }, {
-        "snippet" : "order = fetch_order()\n# explanation of why\n# strategic price calculation\n# is important here\nprice = strategic_price_calc(order)",
-        "commentsType" : "inline",
-        "type" : "Snippet",
-        "lang" : "py"
-      } ]
-    }, {
-      "id" : "spoilers",
-      "type" : "Section",
-      "title" : "Spoilers",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Set the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "spoiler",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " property to initially hide explanations. It may be useful when teaching.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-file: file-name-with-comments.js {commentsType: \"inline\", spoiler: true}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Click on the spoiler to reveal the explanations:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
-        "commentsType" : "inline",
-        "spoiler" : true,
-        "type" : "Snippet",
-        "lang" : "js"
-      } ]
     } ],
-    "lastModifiedTime" : 1631881388260,
+    "lastModifiedTime" : 1637672439042,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
@@ -870,12 +760,6 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Extract Snippets",
         "id" : "extract-snippets"
-      }, {
-        "title" : "Callout Comments",
-        "id" : "callout-comments"
-      }, {
-        "title" : "Spoilers",
-        "id" : "spoilers"
       } ]
     }
   }

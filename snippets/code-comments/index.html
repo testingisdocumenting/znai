@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Inlined Code Snippets</title>
+<title>Znai: Code Comments</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,18 +85,18 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Backtick</h1></header>
-<p>To display inline code within a text, put it inside a backtick. Example: To check if an Exchange is closed, you need to use `ExchangeCalendar` Example: To check if an Exchange is closed, you need to use ExchangeCalendar</p>
+<header><h1>Callout Comments</h1></header>
+<p>Use commentsType: &quot;inline&quot; to extract comments from a code and render them as bullet pointsGiven a file with comments class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules :include-file: file-name-with-comments.js {commentsType: &quot;inline&quot;} class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules Multiple comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line. order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order) order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order)</p>
 </article>
 
 <article>
-<header><h1>From File</h1></header>
-<p>To display inline code from a file, use the file inlined code plugin. Example: To access this feature, navigate to `:file: urlsample.txt`. Example: To access this feature, navigate to .</p>
+<header><h1>Spoilers</h1></header>
+<p>Set the spoiler property to initially hide explanations. It may be useful when teaching. :include-file: file-name-with-comments.js {commentsType: &quot;inline&quot;, spoiler: true} Click on the spoiler to reveal the explanations: class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</p>
 </article>
 
 <article>
-<header><h1>Validated Identifier</h1></header>
-<p>Use identifier inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names `:identifier: my_func {validationPath: &quot;my_func_usage.py&quot;}` def example(): my_func(100)</p>
+<header><h1>Remove Comments</h1></header>
+<p>Use commentsType: &quot;remove&quot; to hide all the comments from a code snippet Given a file with comments class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules :include-file: file-name-with-comments.js {commentsType: &quot;remove&quot;} class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</p>
 </article>
 </section>
 </div>
@@ -131,109 +131,146 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "backtick",
+      "id" : "callout-comments",
       "type" : "Section",
-      "title" : "Backtick",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To display inline code within a text, put it inside a backtick.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "Example: To check if an Exchange is closed, you need to use `ExchangeCalendar`\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Example: To check if an Exchange is closed, you need to use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "ExchangeCalendar",
-          "type" : "InlinedCode"
-        } ]
-      } ]
-    }, {
-      "id" : "from-file",
-      "type" : "Section",
-      "title" : "From File",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To display inline code from a file, use the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "file",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " inlined code plugin.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "Example: To access this feature, navigate to `:file: urlsample.txt`. \n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Example: To access this feature, navigate to ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "/my-app/feature-url",
-          "type" : "InlinedCode"
-        }, {
-          "text" : ".",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "id" : "validated-identifier",
-      "type" : "Section",
-      "title" : "Validated Identifier",
+      "title" : "Callout Comments",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "identifier",
+          "code" : "commentsType: \"inline\"",
           "type" : "InlinedCode"
         }, {
-          "text" : " inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names ",
+          "text" : " to extract comments from a code and render them as bullet points",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "`:identifier: my_func {validationPath: \"my_func_usage.py\"}` ",
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Given a file with comments",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
+        "type" : "Snippet",
+        "lang" : "js"
+      }, {
+        "snippet" : ":include-file: file-name-with-comments.js {commentsType: \"inline\"}\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
       }, {
-        "snippet" : "def example():\n    my_func(100)",
+        "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
+        "commentsType" : "inline",
         "type" : "Snippet",
-        "title" : "my_func_usage.py",
+        "lang" : "js"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Multiple comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "order = fetch_order()\n# explanation of why\n# strategic price calculation\n# is important here\nprice = strategic_price_calc(order)",
+        "type" : "Snippet",
+        "title" : "multi line comments above line",
         "lang" : "py"
+      }, {
+        "snippet" : "order = fetch_order()\n# explanation of why\n# strategic price calculation\n# is important here\nprice = strategic_price_calc(order)",
+        "commentsType" : "inline",
+        "type" : "Snippet",
+        "lang" : "py"
+      } ]
+    }, {
+      "id" : "spoilers",
+      "type" : "Section",
+      "title" : "Spoilers",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Set the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "spoiler",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " property to initially hide explanations. It may be useful when teaching.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-file: file-name-with-comments.js {commentsType: \"inline\", spoiler: true}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Click on the spoiler to reveal the explanations:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
+        "commentsType" : "inline",
+        "spoiler" : true,
+        "type" : "Snippet",
+        "lang" : "js"
+      } ]
+    }, {
+      "id" : "remove-comments",
+      "type" : "Section",
+      "title" : "Remove Comments",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "commentsType: \"remove\"",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to hide all the comments from a code snippet",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Given a file with comments",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
+        "type" : "Snippet",
+        "lang" : "js"
+      }, {
+        "snippet" : ":include-file: file-name-with-comments.js {commentsType: \"remove\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
+        "commentsType" : "remove",
+        "type" : "Snippet",
+        "lang" : "js"
       } ]
     } ],
     "lastModifiedTime" : 1637672439042,
     "tocItem" : {
       "sectionTitle" : "Snippets",
-      "pageTitle" : "Inlined Code Snippets",
+      "pageTitle" : "Code Comments",
       "pageMeta" : { },
       "dirName" : "snippets",
-      "fileName" : "inlined-code-snippets",
+      "fileName" : "code-comments",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Backtick",
-        "id" : "backtick"
+        "title" : "Callout Comments",
+        "id" : "callout-comments"
       }, {
-        "title" : "From File",
-        "id" : "from-file"
+        "title" : "Spoilers",
+        "id" : "spoilers"
       }, {
-        "title" : "Validated Identifier",
-        "id" : "validated-identifier"
+        "title" : "Remove Comments",
+        "id" : "remove-comments"
       } ]
     }
   }

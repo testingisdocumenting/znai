@@ -51,15 +51,23 @@
     <url>/znai/introduction/example#markdown</url>
     <fullTitle>Znai: Example, Markdown [Introduction]</fullTitle>
     <text>
-      <text>Znai uses Markdown, a markup language that uses ASCII to represent styles and page structure.</text>
+      <text>Znai uses https://commonmark.org Markdown, a markup language that uses ASCII to represent styles and page structure.</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/introduction/example#external-references</url>
-    <fullTitle>Znai: Example, External References [Introduction]</fullTitle>
+    <url>/znai/introduction/example#extensions</url>
+    <fullTitle>Znai: Example, Extensions [Introduction]</fullTitle>
     <text>
-      <text>Additionally, you can keep your documentation up to date and accurate by referencing existing resources. markdown # Server Configuration :include-file: config/server.config Note: This include-file macro is a Znai extension and not part of a standard Markdown syntax.</text>
+      <text>Znai has extensions mechanism that are not part of standard markdown. Embed External File Graphvis Diagram :include-graphviz: visuals/graphviz.dot {autoTitle: true} digraph { a -> b; b -> c; d -> b; b -> e; }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/introduction/example#website</url>
+    <fullTitle>Znai: Example, Website [Introduction]</fullTitle>
+    <text>
+      <text>This user guide is built using znai . Continue reading to learn the features that may improve your users experience and reduce your maintenance burden.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -155,7 +163,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this rationale example getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets inlined-code-snippets api-parameters code-references java java-doc groovy python typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points icons keyboard-shortcuts charts images image-annotations iframe SVG flow-diagrams PlantUml mermaid synergy-with-testing java REST web-UI configuration basic example-references domain api release-notes 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this rationale example getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets code-comments inlined-code-snippets api-parameters code-references java java-doc groovy python doxygen typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points text-badge headings icons keyboard-shortcuts charts images image-annotations iframe SVG graphviz flow-diagrams PlantUml mermaid synergy-with-testing java REST web-UI configuration basic example-references domain api release-notes 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -456,18 +464,26 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/external-code-snippets#callout-comments</url>
-    <fullTitle>Znai: External Code Snippets, Callout Comments [Snippets]</fullTitle>
+    <url>/znai/snippets/code-comments#callout-comments</url>
+    <fullTitle>Znai: Code Comments, Callout Comments [Snippets]</fullTitle>
     <text>
-      <text>If you already have comments inside your code it would be non efficient to repeat them inside documentation. Instead, comments can be automatically extracted and presented as part of the textGiven file with inlined comments!! class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules By specifying commentsType :include-file: file-name-with-comments.js {commentsType: "inline"} It will be rendered as class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules Comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line. order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order) order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order)</text>
+      <text>Use commentsType: "inline" to extract comments from a code and render them as bullet pointsGiven a file with comments class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules :include-file: file-name-with-comments.js {commentsType: "inline"} class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules Multiple comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line. order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order) order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order)</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/external-code-snippets#spoilers</url>
-    <fullTitle>Znai: External Code Snippets, Spoilers [Snippets]</fullTitle>
+    <url>/znai/snippets/code-comments#spoilers</url>
+    <fullTitle>Znai: Code Comments, Spoilers [Snippets]</fullTitle>
     <text>
       <text>Set the spoiler property to initially hide explanations. It may be useful when teaching. :include-file: file-name-with-comments.js {commentsType: "inline", spoiler: true} Click on the spoiler to reveal the explanations: class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/code-comments#remove-comments</url>
+    <fullTitle>Znai: Code Comments, Remove Comments [Snippets]</fullTitle>
+    <text>
+      <text>Use commentsType: "remove" to hide all the comments from a code snippet Given a file with comments class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules :include-file: file-name-with-comments.js {commentsType: "remove"} class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -587,7 +603,7 @@
     <url>/znai/snippets/java#callout-comments</url>
     <fullTitle>Znai: Java, Callout Comments [Snippets]</fullTitle>
     <text>
-      <text>Similar to how you snippets/external-code-snippets#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, commentsType: "inline"} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
+      <text>Similar to how you snippets/code-comments#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, commentsType: "inline"} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -652,6 +668,14 @@
     <fullTitle>Znai: Java Doc, Field Level [Snippets]</fullTitle>
     <text>
       <text>:include-java-doc: HelloWorld.java {entry: "numberOfStudents"} Each year we hire students from different universities to increase diversity</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/java-doc#inner-classes</url>
+    <fullTitle>Znai: Java Doc, Inner Classes [Snippets]</fullTitle>
+    <text>
+      <text>Use NestedName.entityName to disambiguate a field or a method name class HelloWorld { private int importantScore; public static class Nested { /** * system caclulates &lt;b>importance&lt;/b> score based on following factors... */ private int importantScore; } } :include-java-doc: HelloWorldWithInner.java {entry: "Nested.importantScore"} system caclulates importance score based on following factors...</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -740,6 +764,118 @@
     <fullTitle>Znai: Python, Doc Parameters [Snippets]</fullTitle>
     <text>
       <text>Use include-python-doc-params plugin to render parameters extracted from pydoc text def my_func(label, price): """ text inside my *func* doc * list one * list two Parameters -------------- label : String label to use to *render* item in the store price : Money price associated with the **item** """ print("hello") :include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "my_func params"} text inside my *func* doc * list one * list two Parameters -------------- label : String label to use to *render* item in the store price : Money price associated with the **item** Note: read more about snippets/api-parameters API parameters for additional properties</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#introduction</url>
+    <fullTitle>Znai: Doxygen, Introduction [Snippets]</fullTitle>
+    <text>
+      <text>Znai parses generated https://www.doxygen.nl/index.html Doxygen XML files to extract and embedComments Signatures Parameters Use the building blocks to mix and match API documentation with visuals and other artifacts. Or use the built-in plugins to generate the whole blocks of API reference.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#setup</url>
+    <fullTitle>Znai: Doxygen, Setup [Snippets]</fullTitle>
+    <text>
+      <text>Specify index.xml location inside &lt;docroot>/doxygen.json { "indexPath": "doxygen/xml/index.xml" }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#extract-comment-text</url>
+    <fullTitle>Znai: Doxygen, Extract Comment Text [Snippets]</fullTitle>
+    <text>
+      <text>Members Comment Text Use include-doxygen-doc to extract a function description namespace utils { namespace nested { /** * top **level** comment *of* important * * list one * * list two * * list three * * 1. number one * 2. number two * * @param first_param description of first *param* * 1. item a * 2. item b * @param second_param description of second param */ void my_func(int first_param, bool second_param) { } /** * specific description for single param version * @param first_param description of first *param* * 1. item a * 2. item b */ void my_func(int first_param) { } } } void free_func() { } :include-doxygen-doc: utils::nested::my_func top level comment of important list one list two list three number one number two Note: Plugin ignores parameters block and only includes the description text Member Args Selection Use args param to pick an overload to use for comments extraction :include-doxygen-doc: utils::nested::my_func { title: "My Params", args: "(int first_param)" } specific description for single param version Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste. Classes Comment Text To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#member-signature-comment-and-parameters</url>
+    <fullTitle>Znai: Doxygen, Member Signature, Comment And Parameters [Snippets]</fullTitle>
+    <text>
+      <text>Use include-doxygen-member to render member signature, its description and parameters list :include-doxygen-member: utils::nested::my_func top level comment of important list one list two list three number one number two first_param int description of first param item a item b second_param bool description of second param markdown :include-doxygen-member: multi_println prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#member-signature-only</url>
+    <fullTitle>Znai: Doxygen, Member Signature Only [Snippets]</fullTitle>
+    <text>
+      <text>Use signatureOnly: true parameter to render only member signature :include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#all-matching-signatures</url>
+    <fullTitle>Znai: Doxygen, All Matching Signatures [Snippets]</fullTitle>
+    <text>
+      <text>:include-doxygen-member: utils::nested::their_func { signatureOnly: true, includeAllMatches: true }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#specific-member-by-args</url>
+    <fullTitle>Znai: Doxygen, Specific Member By Args [Snippets]</fullTitle>
+    <text>
+      <text>Use args to select a specific overload by providing parameters string :include-doxygen-member: utils::nested::their_func { args: "(long param1, bool param3)" } Description of what and why for their_func param1 long description of param1 param3 bool description of param3 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#extract-parameters</url>
+    <fullTitle>Znai: Doxygen, Extract Parameters [Snippets]</fullTitle>
+    <text>
+      <text>Use include-doxygen-doc-params to extract parameters description from doxygen comments :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" } first_param int description of first param item a item b second_param bool description of second param Use small: true option to make parameters smaller first_param int description of first param item a item b second_param bool description of second param</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#extract-parameters-by-args</url>
+    <fullTitle>Znai: Doxygen, Extract Parameters By Args [Snippets]</fullTitle>
+    <text>
+      <text>Use args to select a specific overload by providing parameters string :include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "(int first_param)" } first_param int description of first param item a item b</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#extract-template-parameters</url>
+    <fullTitle>Znai: Doxygen, Extract Template Parameters [Snippets]</fullTitle>
+    <text>
+      <text>Pass type: "template" parameter to include-doxygen-doc-params plugin to extract template parameters /** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print */ template&lt;typename T1, typename T2> void multi_println(const T1&amp; v1, const T2&amp; v2) { std::cout &lt;&lt; v1 &lt;&lt; ", " &lt;&lt; v2 &lt;&lt; "\n"; } :include-doxygen-doc-params: multi_println { title: "Template parameters", type: "template" } v1 const T1 &amp; value to print v2 const T2 &amp; value to print</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#ignore-template-parameters</url>
+    <fullTitle>Znai: Doxygen, Ignore Template Parameters [Snippets]</fullTitle>
+    <text>
+      <text>Use doc_ignore as part of template parameter name to remove it from signature /** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @param v3 value to print * @param v4 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * @tparam T3 type of the value three to print * @tparam T4 type of the value four to print */ template&lt;typename T1, typename T2, typename T3, typename T4, typename T5_doc_ignore> void long_template_func(const T1&amp; v1, const T2&amp; v2, const T3&amp; v3, const T4&amp; v4) { } markdown :include-doxygen-member: long_template_func {signatureOnly: true}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#return-description</url>
+    <fullTitle>Znai: Doxygen, Return Description [Snippets]</fullTitle>
+    <text>
+      <text>Return description is part of parameters list /** * sums two numbers * @param a number to add to * @param b number that is added * @return *sum* of **two** numbers */ int add(int a, int b); :include-doxygen-doc-params: math::add return sum of two numbers a int number to add to b int number that is added</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#utilssecondanotherclass</url>
+    <fullTitle>Znai: Doxygen, utils::second::AnotherClass [Snippets]</fullTitle>
+    <text>
+      <text>Use include-doxygen-compound to render definition compound such as class :include-doxygen-compound: utils::second::AnotherClass Domain specific context setting. Describes business setting and requirements. Public Functions Static Public Functions Public Attributes Static Public Attributes Protected Functions Definitions sing sing out loud tone int tone at which to sing volume int volume at which to sing bark bark out loud myClass const MyClass &amp; to test reference tone int tone at which to sing volume int volume at which to sing smile global smile volume int smile volume number_of_sounds current number of sounds made counter help ask for help out loud example tone int tone at which to sing volume int volume at which to sing utils::second::AnotherClass</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/doxygen#utilssecondmyclass</url>
+    <fullTitle>Znai: Doxygen, utils::second::MyClass [Snippets]</fullTitle>
+    <text>
+      <text>Znai uses doxygen cross-reference to link definitions together. Class above references MyClass in its parameters. After you include definition of that class, MyClass reference above becomes a link. :include-doxygen-compound: utils::second::MyClass Domain specific context setting. Describes business setting and requirements. Public Functions Definitions bark bark utils::second::MyClass</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1448,6 +1584,38 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/text-badge#part-of-text</url>
+    <fullTitle>Znai: Text Badge, Part Of Text [Visuals]</fullTitle>
+    <text>
+      <text>Use badge inlined code plugin to render a badge like this to render a badge like this `:badge: v3.12`</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/text-badge#part-of-heading</url>
+    <fullTitle>Znai: Text Badge, Part Of Heading [Visuals]</fullTitle>
+    <text>
+      <text>To add a badge to a header use # Part Of Heading {badge: "v3.12"}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/headings#heading-types</url>
+    <fullTitle>Znai: Headings, Heading Types [Visuals]</fullTitle>
+    <text>
+      <text>Use {style: "api"} at the end of heading title to change style of the heading to API one: monospace and different subheading styles.Use it to hand-craft reference documentation # Heading API Type {style: "api", badge: "class"} ## Heading API Type {style: "api"} ### Heading API Type {style: "api"} #### Heading API Type {style: "api"} ##### Heading API Type {style: "api"} ###### Heading API Type {style: "api"}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/headings#heading-api-type</url>
+    <fullTitle>Znai: Headings, Heading API Type [Visuals]</fullTitle>
+    <text>
+      <text>Heading API Type Heading API Type Heading API Type Heading API Type Heading API Type</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/icons#feather-icons</url>
     <fullTitle>Znai: Icons, Feather Icons [Visuals]</fullTitle>
     <text>
@@ -1660,6 +1828,14 @@
     <fullTitle>Znai: SVG, Scale [Visuals]</fullTitle>
     <text>
       <text>Use scale: scaleFactor to change the size of the SVG provided :include-svg: with-groups.svg {idsToReveal: ["partC"], actualSize: true, scale: 0.2}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/graphviz#external-file</url>
+    <fullTitle>Znai: Graphviz, External File [Visuals]</fullTitle>
+    <text>
+      <text>Use graphviz plugin to render graphviz diagram from a file :include-graphviz: graphviz.dot digraph { a -> b; b -> c; d -> b; b -> e; }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1884,6 +2060,14 @@
     <fullTitle>Znai: Api, Query [Example References]</fullTitle>
     <text>
       <text>Lower level explanation of fapi.query</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2021#154</url>
+    <fullTitle>Znai: 2021 Releases, 1.54 [Release Notes]</fullTitle>
+    <text>
+      <text>Doc: more examples inside introduction/example Example page Add Doxygen snippets/doxygen#ignore-template-parameters ignore template parameter Add Doxygen memeber snippets/doxygen#all-matching-signatures select by args Add snippets/doxygen#specific-member-by-args doxygen all overaloads at once Add snippets/doxygen#compound doxygen compound to include class description and methods/attributes Add snippets/java-doc#inner-classes inner classes reference to java doc parsing Add visuals/headings API heading style Add snippets/doxygen#member-signature-only doxygen member signature Add snippets/doxygen#extract-parameters doxygen docs params to embed as snippets/api-parameters API parameters Add snippets/doxygen#extract-comment-text doxygen docs to embed comments text Add visuals/text-badge#part-of-heading heading text badge Add visuals/text-badge text badge Add snippets/code-comments#remove-comments commentsType: remove to remove comments from a code snippet Add uploadzip command to upload any html zip to znai hub Add visuals/graphviz/ graphviz include plugin Plugin parameters parsing error provides more details about plugin id and provided parameters Add include , fence and inline code plugin failure context: id, params Add layout/tabs Tabs presence validation Enhance snippets/python#content-full-content-variable variable extraction to include all assignments, not just global variables Fix: Enterprise nix based authz last user group is now taken into account Fix: icon alignment regression in layout/attention-signs Attention Paragraphs</text>
       <score>STANDARD</score>
     </text>
   </entry>

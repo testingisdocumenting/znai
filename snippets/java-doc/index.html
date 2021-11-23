@@ -100,6 +100,11 @@
 </article>
 
 <article>
+<header><h1>Inner Classes</h1></header>
+<p>Use NestedName.entityName to disambiguate a field or a method name class HelloWorld { private int importantScore; public static class Nested { /** * system caclulates &lt;b&gt;importance&lt;/b&gt; score based on following factors... */ private int importantScore; } } :include-java-doc: HelloWorldWithInner.java {entry: &quot;Nested.importantScore&quot;} system caclulates importance score based on following factors...</p>
+</article>
+
+<article>
 <header><h1>Handling Links</h1></header>
 <p>Links defined with {@link MyClass} are automatically converted to snippets/inlined-code-snippets Inlined Code and become MyClass . To turn MyClass into a link you need to use snippets/code-references Code References.Use the referencesPath value to associate {@link CustomDomain} with the documentation link: CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell Alternatively you can define snippets/code-references#global-references Global References to turn MyClass into a link.</p>
 </article>
@@ -128,6 +133,7 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -326,6 +332,49 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
+      "id" : "inner-classes",
+      "type" : "Section",
+      "title" : "Inner Classes",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "NestedName.entityName",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to disambiguate a field or a method name",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "class HelloWorld {\n    private int importantScore;\n\n    public static class Nested {\n        /**\n         * system caclulates <b>importance</b> score based on following factors...\n         */\n        private int importantScore;\n    }\n}",
+        "type" : "Snippet",
+        "title" : "HelloWorldWithInner.java",
+        "autoTitle" : true,
+        "lang" : "java"
+      }, {
+        "snippet" : ":include-java-doc: HelloWorldWithInner.java {entry: \"Nested.importantScore\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "system caclulates ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "importance",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " score based on following factors... ",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
       "id" : "handling-links",
       "type" : "Section",
       "title" : "Handling Links",
@@ -507,7 +556,10 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "sampleMethod_p1_String_p2_int_return",
-          "type" : "String"
+          "type" : [ {
+            "refId" : "",
+            "text" : "String"
+          } ]
         }, {
           "name" : "p1",
           "description" : [ {
@@ -518,7 +570,10 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "sampleMethod_p1_String_p2_int_p1",
-          "type" : "String"
+          "type" : [ {
+            "refId" : "",
+            "text" : "String"
+          } ]
         }, {
           "name" : "p2",
           "description" : [ {
@@ -538,7 +593,10 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "sampleMethod_p1_String_p2_int_p2",
-          "type" : "int"
+          "type" : [ {
+            "refId" : "",
+            "text" : "int"
+          } ]
         } ]
       }, {
         "type" : "Paragraph",
@@ -571,7 +629,10 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "importantAction_trader_Trader_transaction_Transaction_trader",
-          "type" : "Trader"
+          "type" : [ {
+            "refId" : "",
+            "text" : "Trader"
+          } ]
         }, {
           "name" : "transaction",
           "description" : [ {
@@ -582,7 +643,10 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "importantAction_trader_Trader_transaction_Transaction_transaction",
-          "type" : "Transaction"
+          "type" : [ {
+            "refId" : "",
+            "text" : "Transaction"
+          } ]
         } ]
       } ]
     }, {
@@ -660,7 +724,10 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "importantAction_trader_Trader_transaction_Transaction_trader",
-          "type" : "Trader"
+          "type" : [ {
+            "refId" : "",
+            "text" : "Trader"
+          } ]
         }, {
           "name" : "transaction",
           "description" : [ {
@@ -671,7 +738,10 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "importantAction_trader_Trader_transaction_Transaction_transaction",
-          "type" : "Transaction"
+          "type" : [ {
+            "refId" : "",
+            "text" : "Transaction"
+          } ]
         } ]
       }, {
         "type" : "Paragraph",
@@ -724,7 +794,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "MyEnum_java_ENTRY_ONE",
-          "type" : ""
+          "type" : [ ]
         }, {
           "name" : "ENTRY_TWO",
           "description" : [ {
@@ -752,7 +822,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "MyEnum_java_ENTRY_TWO",
-          "type" : ""
+          "type" : [ ]
         }, {
           "name" : "ENTRY_THREE",
           "description" : [ {
@@ -763,7 +833,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "MyEnum_java_ENTRY_THREE",
-          "type" : ""
+          "type" : [ ]
         } ]
       }, {
         "type" : "Paragraph",
@@ -801,7 +871,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "MyEnum_java_ENTRY_ONE",
-          "type" : ""
+          "type" : [ ]
         }, {
           "name" : "ENTRY_TWO",
           "description" : [ {
@@ -829,7 +899,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "MyEnum_java_ENTRY_TWO",
-          "type" : ""
+          "type" : [ ]
         } ]
       }, {
         "type" : "Paragraph",
@@ -861,7 +931,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "TransactionTypes_java_BUY",
-          "type" : ""
+          "type" : [ ]
         }, {
           "name" : "SELL",
           "description" : [ {
@@ -872,7 +942,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "TransactionTypes_java_SELL",
-          "type" : ""
+          "type" : [ ]
         } ]
       } ]
     }, {
@@ -954,7 +1024,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "TransactionTypes_java_BUY",
-          "type" : ""
+          "type" : [ ]
         }, {
           "name" : "SELL",
           "description" : [ {
@@ -965,7 +1035,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ],
           "anchorId" : "TransactionTypes_java_SELL",
-          "type" : ""
+          "type" : [ ]
         } ]
       }, {
         "type" : "Paragraph",
@@ -994,7 +1064,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1631881388260,
+    "lastModifiedTime" : 1637672439042,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Java Doc",
@@ -1011,6 +1081,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Field Level",
         "id" : "field-level"
+      }, {
+        "title" : "Inner Classes",
+        "id" : "inner-classes"
       }, {
         "title" : "Handling Links",
         "id" : "handling-links"

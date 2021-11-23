@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Inlined Code Snippets</title>
+<title>Znai: Text Badge</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,18 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Backtick</h1></header>
-<p>To display inline code within a text, put it inside a backtick. Example: To check if an Exchange is closed, you need to use `ExchangeCalendar` Example: To check if an Exchange is closed, you need to use ExchangeCalendar</p>
+<header><h1>Part Of Text</h1></header>
+<p>Use badge inlined code plugin to render a badge like this to render a badge like this `:badge: v3.12`</p>
 </article>
 
 <article>
-<header><h1>From File</h1></header>
-<p>To display inline code from a file, use the file inlined code plugin. Example: To access this feature, navigate to `:file: urlsample.txt`. Example: To access this feature, navigate to .</p>
-</article>
-
-<article>
-<header><h1>Validated Identifier</h1></header>
-<p>Use identifier inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names `:identifier: my_func {validationPath: &quot;my_func_usage.py&quot;}` def example(): my_func(100)</p>
+<header><h1>Part Of Heading</h1></header>
+<p>To add a badge to a header use # Part Of Heading {badge: &quot;v3.12&quot;}</p>
 </article>
 </section>
 </div>
@@ -131,109 +126,62 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "backtick",
+      "id" : "part-of-text",
       "type" : "Section",
-      "title" : "Backtick",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To display inline code within a text, put it inside a backtick.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "Example: To check if an Exchange is closed, you need to use `ExchangeCalendar`\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Example: To check if an Exchange is closed, you need to use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "ExchangeCalendar",
-          "type" : "InlinedCode"
-        } ]
-      } ]
-    }, {
-      "id" : "from-file",
-      "type" : "Section",
-      "title" : "From File",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To display inline code from a file, use the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "file",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " inlined code plugin.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "Example: To access this feature, navigate to `:file: urlsample.txt`. \n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Example: To access this feature, navigate to ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "/my-app/feature-url",
-          "type" : "InlinedCode"
-        }, {
-          "text" : ".",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "id" : "validated-identifier",
-      "type" : "Section",
-      "title" : "Validated Identifier",
+      "title" : "Part Of Text",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "identifier",
+          "code" : "badge",
           "type" : "InlinedCode"
         }, {
-          "text" : " inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names ",
+          "text" : " inlined code plugin to render a badge like this ",
           "type" : "SimpleText"
+        }, {
+          "text" : "v3.12",
+          "type" : "TextBadge"
         } ]
       }, {
-        "snippet" : "`:identifier: my_func {validationPath: \"my_func_usage.py\"}` ",
+        "snippet" : "to render a badge like this `:badge: v3.12`\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
+      } ]
+    }, {
+      "badge" : "v3.12",
+      "id" : "part-of-heading",
+      "type" : "Section",
+      "title" : "Part Of Heading",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To add a badge to a header use",
+          "type" : "SimpleText"
+        } ]
       }, {
-        "snippet" : "def example():\n    my_func(100)",
+        "snippet" : "# Part Of Heading {badge: \"v3.12\"}\n",
         "type" : "Snippet",
-        "title" : "my_func_usage.py",
-        "lang" : "py"
+        "lineNumber" : "",
+        "lang" : ""
       } ]
     } ],
-    "lastModifiedTime" : 1637672439042,
+    "lastModifiedTime" : 1637672439062,
     "tocItem" : {
-      "sectionTitle" : "Snippets",
-      "pageTitle" : "Inlined Code Snippets",
+      "sectionTitle" : "Visuals",
+      "pageTitle" : "Text Badge",
       "pageMeta" : { },
-      "dirName" : "snippets",
-      "fileName" : "inlined-code-snippets",
+      "dirName" : "visuals",
+      "fileName" : "text-badge",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Backtick",
-        "id" : "backtick"
+        "title" : "Part Of Text",
+        "id" : "part-of-text"
       }, {
-        "title" : "From File",
-        "id" : "from-file"
-      }, {
-        "title" : "Validated Identifier",
-        "id" : "validated-identifier"
+        "title" : "Part Of Heading",
+        "id" : "part-of-heading"
       } ]
     }
   }

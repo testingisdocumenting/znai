@@ -86,18 +86,24 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Markdown</h1></header>
-<p>Znai uses Markdown, a markup language that uses ASCII to represent styles and page structure.</p>
+<p>Znai uses https://commonmark.org Markdown, a markup language that uses ASCII to represent styles and page structure.</p>
 </article>
 
 <article>
-<header><h1>External References</h1></header>
-<p>Additionally, you can keep your documentation up to date and accurate by referencing existing resources. markdown # Server Configuration :include-file: config/server.config Note: This include-file macro is a Znai extension and not part of a standard Markdown syntax.</p>
+<header><h1>Extensions</h1></header>
+<p>Znai has extensions mechanism that are not part of standard markdown. Embed External File Graphvis Diagram :include-graphviz: visuals/graphviz.dot {autoTitle: true} digraph { a -&gt; b; b -&gt; c; d -&gt; b; b -&gt; e; }</p>
+</article>
+
+<article>
+<header><h1>Website</h1></header>
+<p>This user guide is built using znai . Continue reading to learn the features that may improve your users experience and reduce your maintenance burden.</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -134,120 +140,187 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "Znai",
           "type" : "InlinedCode"
         }, {
-          "text" : " uses Markdown, a markup language that uses ASCII to represent styles and page structure.",
+          "text" : " uses ",
+          "type" : "SimpleText"
+        }, {
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Markdown",
+            "type" : "SimpleText"
+          } ],
+          "url" : "https://commonmark.org"
+        }, {
+          "text" : ", a markup language that uses ASCII to represent styles and page structure.",
           "type" : "SimpleText"
         } ]
       }, {
         "result" : [ {
-          "id" : "header",
-          "type" : "Section",
-          "title" : "Header",
+          "level" : 2,
+          "id" : "sub-header",
+          "type" : "SubHeading",
+          "title" : "Sub Header"
+        }, {
+          "type" : "Paragraph",
           "content" : [ {
-            "type" : "Paragraph",
+            "text" : "Normal paragraph text. Some ",
+            "type" : "SimpleText"
+          }, {
+            "type" : "Emphasis",
             "content" : [ {
-              "text" : "Normal paragraph text. Some ",
-              "type" : "SimpleText"
-            }, {
-              "type" : "Emphasis",
-              "content" : [ {
-                "text" : "italic",
-                "type" : "SimpleText"
-              } ]
-            }, {
-              "text" : " and ",
-              "type" : "SimpleText"
-            }, {
-              "type" : "StrongEmphasis",
-              "content" : [ {
-                "text" : "bold",
-                "type" : "SimpleText"
-              } ]
-            }, {
-              "text" : ".",
-              "type" : "SimpleText"
-            }, {
-              "type" : "SoftLineBreak"
-            }, {
-              "text" : "Followed by bullet points:",
+              "text" : "italic",
               "type" : "SimpleText"
             } ]
           }, {
-            "bulletMarker" : "*",
-            "type" : "BulletList",
-            "tight" : true,
+            "text" : " and ",
+            "type" : "SimpleText"
+          }, {
+            "type" : "StrongEmphasis",
             "content" : [ {
-              "type" : "ListItem",
+              "text" : "bold",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "text" : ".",
+            "type" : "SimpleText"
+          }, {
+            "type" : "SoftLineBreak"
+          }, {
+            "text" : "Followed by bullet points:",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "bulletMarker" : "*",
+          "type" : "BulletList",
+          "tight" : true,
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
               "content" : [ {
-                "type" : "Paragraph",
-                "content" : [ {
-                  "text" : "Apple",
-                  "type" : "SimpleText"
-                } ]
+                "text" : "Apple",
+                "type" : "SimpleText"
               } ]
-            }, {
-              "type" : "ListItem",
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
               "content" : [ {
-                "type" : "Paragraph",
-                "content" : [ {
-                  "text" : "Banana",
-                  "type" : "SimpleText"
-                } ]
+                "text" : "Banana",
+                "type" : "SimpleText"
               } ]
-            }, {
-              "type" : "ListItem",
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
               "content" : [ {
-                "type" : "Paragraph",
-                "content" : [ {
-                  "text" : "Water",
-                  "type" : "SimpleText"
-                } ]
+                "text" : "Water",
+                "type" : "SimpleText"
               } ]
             } ]
           } ]
         } ],
         "markdown" : {
-          "snippet" : "# Header\n\nNormal paragraph text. Some *italic* and **bold**.\nFollowed by bullet points:\n* Apple\n* Banana\n* Water\n",
+          "snippet" : "## Sub Header\n\nNormal paragraph text. Some *italic* and **bold**.\nFollowed by bullet points:\n* Apple\n* Banana\n* Water\n",
           "type" : "Snippet",
           "lang" : "markdown"
         },
         "type" : "MarkdownAndResult"
       } ]
     }, {
-      "id" : "external-references",
+      "id" : "extensions",
       "type" : "Section",
-      "title" : "External References",
+      "title" : "Extensions",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Additionally, you can keep your documentation up to date and accurate by referencing existing resources.",
+          "text" : "Znai has extensions mechanism that are not part of standard markdown.",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "# Server Configuration\n\n:include-file: config/server.config\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : "markdown"
+        "level" : 2,
+        "id" : "extensions-embed-external-file",
+        "type" : "SubHeading",
+        "title" : "Embed External File"
       }, {
+        "result" : [ {
+          "level" : 2,
+          "id" : "server-configuration",
+          "type" : "SubHeading",
+          "title" : "Server Configuration"
+        }, {
+          "snippet" : "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: nginx-deployment\n  labels:\n    app: nginx\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: nginx\n  template:\n    metadata:\n      labels:\n        app: nginx\n    spec:\n      containers:\n        - name: nginx\n          image: nginx:1.14.2\n          ports:\n            - containerPort: 80",
+          "type" : "Snippet",
+          "title" : "config/server.yml",
+          "autoTitle" : true,
+          "lang" : "yml"
+        } ],
+        "markdown" : {
+          "snippet" : "## Server Configuration\n\n:include-file: config/server.yml {autoTitle: true}\n",
+          "type" : "Snippet",
+          "lang" : "markdown"
+        },
+        "type" : "MarkdownAndResult"
+      }, {
+        "level" : 2,
+        "id" : "extensions-graphvis-diagram",
+        "type" : "SubHeading",
+        "title" : "Graphvis Diagram"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "snippet" : ":include-graphviz: visuals/graphviz.dot {autoTitle: true}\n",
+            "type" : "Snippet",
+            "lineNumber" : "",
+            "lang" : ""
+          }, {
+            "snippet" : "digraph {\n a -> b;\n b -> c;\n d -> b;\n b -> e;\n}",
+            "type" : "Snippet",
+            "title" : "visuals/graphviz.dot",
+            "autoTitle" : true,
+            "lang" : "dot"
+          } ]
+        }, {
+          "content" : [ {
+            "diagram" : {
+              "isInvertedTextColorByStyleId" : { },
+              "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: %3 Pages: 1 -->\n<svg width=\"134pt\" height=\"188pt\"\n viewBox=\"0.00 0.00 134.00 188.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 184)\">\n<title>%3</title>\n<polygon fill=\"white\" stroke=\"transparent\" points=\"-4,4 -4,-184 130,-184 130,4 -4,4\"/>\n<!-- a -->\n<g id=\"node1\" class=\"node\">\n<title>a</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-162\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-158.3\" font-family=\"Times,serif\" font-size=\"14.00\">a</text>\n</g>\n<!-- b -->\n<g id=\"node2\" class=\"node\">\n<title>b</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"63\" cy=\"-90\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"63\" y=\"-86.3\" font-family=\"Times,serif\" font-size=\"14.00\">b</text>\n</g>\n<!-- a&#45;&gt;b -->\n<g id=\"edge1\" class=\"edge\">\n<title>a&#45;&gt;b</title>\n<path fill=\"none\" stroke=\"black\" d=\"M35.35,-144.76C39.71,-136.28 45.15,-125.71 50.04,-116.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"53.23,-117.64 54.7,-107.15 47.01,-114.44 53.23,-117.64\"/>\n</g>\n<!-- c -->\n<g id=\"node3\" class=\"node\">\n<title>c</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-18\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-14.3\" font-family=\"Times,serif\" font-size=\"14.00\">c</text>\n</g>\n<!-- b&#45;&gt;c -->\n<g id=\"edge2\" class=\"edge\">\n<title>b&#45;&gt;c</title>\n<path fill=\"none\" stroke=\"black\" d=\"M54.65,-72.76C50.29,-64.28 44.85,-53.71 39.96,-44.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"42.99,-42.44 35.3,-35.15 36.77,-45.64 42.99,-42.44\"/>\n</g>\n<!-- e -->\n<g id=\"node5\" class=\"node\">\n<title>e</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"99\" cy=\"-18\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"99\" y=\"-14.3\" font-family=\"Times,serif\" font-size=\"14.00\">e</text>\n</g>\n<!-- b&#45;&gt;e -->\n<g id=\"edge4\" class=\"edge\">\n<title>b&#45;&gt;e</title>\n<path fill=\"none\" stroke=\"black\" d=\"M71.35,-72.76C75.71,-64.28 81.15,-53.71 86.04,-44.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"89.23,-45.64 90.7,-35.15 83.01,-42.44 89.23,-45.64\"/>\n</g>\n<!-- d -->\n<g id=\"node4\" class=\"node\">\n<title>d</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"99\" cy=\"-162\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"99\" y=\"-158.3\" font-family=\"Times,serif\" font-size=\"14.00\">d</text>\n</g>\n<!-- d&#45;&gt;b -->\n<g id=\"edge3\" class=\"edge\">\n<title>d&#45;&gt;b</title>\n<path fill=\"none\" stroke=\"black\" d=\"M90.65,-144.76C86.29,-136.28 80.85,-125.71 75.96,-116.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"78.99,-114.44 71.3,-107.15 72.77,-117.64 78.99,-114.44\"/>\n</g>\n</g>\n</svg>\n",
+              "stylesByNodeId" : { },
+              "id" : "gv_e093b040_034e_43cf_9c86_a82dcd54f3cb"
+            },
+            "urls" : [ ],
+            "type" : "GraphVizDiagram"
+          } ]
+        } ],
+        "type" : "Columns",
+        "config" : { }
+      } ]
+    }, {
+      "id" : "website",
+      "type" : "Section",
+      "title" : "Website",
+      "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note:  This ",
+          "text" : "This user guide is built using ",
           "type" : "SimpleText"
         }, {
-          "code" : "include-file",
+          "code" : "znai",
           "type" : "InlinedCode"
         }, {
-          "text" : " macro is a ",
+          "text" : ". Continue reading to learn the features that may improve your users experience",
           "type" : "SimpleText"
         }, {
-          "code" : "Znai",
-          "type" : "InlinedCode"
+          "type" : "SoftLineBreak"
         }, {
-          "text" : " extension and not part of a standard Markdown syntax.",
+          "text" : "and reduce your maintenance burden.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1631881388256,
+    "lastModifiedTime" : 1637672439038,
     "tocItem" : {
       "sectionTitle" : "Introduction",
       "pageTitle" : "Example",
@@ -259,8 +332,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Markdown",
         "id" : "markdown"
       }, {
-        "title" : "External References",
-        "id" : "external-references"
+        "title" : "Extensions",
+        "id" : "extensions"
+      }, {
+        "title" : "Website",
+        "id" : "website"
       } ]
     }
   }

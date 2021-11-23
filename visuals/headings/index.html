@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Inlined Code Snippets</title>
+<title>Znai: Headings</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,18 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Backtick</h1></header>
-<p>To display inline code within a text, put it inside a backtick. Example: To check if an Exchange is closed, you need to use `ExchangeCalendar` Example: To check if an Exchange is closed, you need to use ExchangeCalendar</p>
+<header><h1>Heading Types</h1></header>
+<p>Use {style: &quot;api&quot;} at the end of heading title to change style of the heading to API one: monospace and different subheading styles.Use it to hand-craft reference documentation # Heading API Type {style: &quot;api&quot;, badge: &quot;class&quot;} ## Heading API Type {style: &quot;api&quot;} ### Heading API Type {style: &quot;api&quot;} #### Heading API Type {style: &quot;api&quot;} ##### Heading API Type {style: &quot;api&quot;} ###### Heading API Type {style: &quot;api&quot;}</p>
 </article>
 
 <article>
-<header><h1>From File</h1></header>
-<p>To display inline code from a file, use the file inlined code plugin. Example: To access this feature, navigate to `:file: urlsample.txt`. Example: To access this feature, navigate to .</p>
-</article>
-
-<article>
-<header><h1>Validated Identifier</h1></header>
-<p>Use identifier inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names `:identifier: my_func {validationPath: &quot;my_func_usage.py&quot;}` def example(): my_func(100)</p>
+<header><h1>Heading API Type</h1></header>
+<p>Heading API Type Heading API Type Heading API Type Heading API Type Heading API Type</p>
 </article>
 </section>
 </div>
@@ -131,109 +126,96 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "backtick",
+      "id" : "heading-types",
       "type" : "Section",
-      "title" : "Backtick",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To display inline code within a text, put it inside a backtick.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "Example: To check if an Exchange is closed, you need to use `ExchangeCalendar`\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Example: To check if an Exchange is closed, you need to use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "ExchangeCalendar",
-          "type" : "InlinedCode"
-        } ]
-      } ]
-    }, {
-      "id" : "from-file",
-      "type" : "Section",
-      "title" : "From File",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To display inline code from a file, use the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "file",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " inlined code plugin.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "Example: To access this feature, navigate to `:file: urlsample.txt`. \n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Example: To access this feature, navigate to ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "/my-app/feature-url",
-          "type" : "InlinedCode"
-        }, {
-          "text" : ".",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "id" : "validated-identifier",
-      "type" : "Section",
-      "title" : "Validated Identifier",
+      "title" : "Heading Types",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "identifier",
+          "code" : "{style: \"api\"}",
           "type" : "InlinedCode"
         }, {
-          "text" : " inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names ",
+          "text" : " at the end of heading title to change style of the heading to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "API",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " one: monospace and",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "different subheading styles.",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "`:identifier: my_func {validationPath: \"my_func_usage.py\"}` ",
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use it to hand-craft reference documentation",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "# Heading API Type {style: \"api\", badge: \"class\"}\n## Heading API Type {style: \"api\"}\n### Heading API Type {style: \"api\"}\n#### Heading API Type {style: \"api\"}\n##### Heading API Type {style: \"api\"}\n###### Heading API Type {style: \"api\"}\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
+      } ]
+    }, {
+      "badge" : "class",
+      "style" : "api",
+      "id" : "heading-api-type",
+      "type" : "Section",
+      "title" : "Heading API Type",
+      "content" : [ {
+        "level" : 2,
+        "style" : "api",
+        "id" : "heading-api-type-heading-api-type",
+        "type" : "SubHeading",
+        "title" : "Heading API Type"
       }, {
-        "snippet" : "def example():\n    my_func(100)",
-        "type" : "Snippet",
-        "title" : "my_func_usage.py",
-        "lang" : "py"
+        "level" : 3,
+        "style" : "api",
+        "id" : "heading-api-type-heading-api-type-heading-api-type",
+        "type" : "SubHeading",
+        "title" : "Heading API Type"
+      }, {
+        "level" : 4,
+        "style" : "api",
+        "id" : "heading-api-type-heading-api-type-heading-api-type-heading-api-type",
+        "type" : "SubHeading",
+        "title" : "Heading API Type"
+      }, {
+        "level" : 5,
+        "style" : "api",
+        "id" : "heading-api-type-heading-api-type-heading-api-type-heading-api-type-heading-api-type",
+        "type" : "SubHeading",
+        "title" : "Heading API Type"
+      }, {
+        "level" : 6,
+        "style" : "api",
+        "id" : "heading-api-type-heading-api-type-heading-api-type-heading-api-type-heading-api-type-heading-api-type",
+        "type" : "SubHeading",
+        "title" : "Heading API Type"
       } ]
     } ],
-    "lastModifiedTime" : 1637672439042,
+    "lastModifiedTime" : 1637672439058,
     "tocItem" : {
-      "sectionTitle" : "Snippets",
-      "pageTitle" : "Inlined Code Snippets",
+      "sectionTitle" : "Visuals",
+      "pageTitle" : "Headings",
       "pageMeta" : { },
-      "dirName" : "snippets",
-      "fileName" : "inlined-code-snippets",
+      "dirName" : "visuals",
+      "fileName" : "headings",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Backtick",
-        "id" : "backtick"
+        "title" : "Heading Types",
+        "id" : "heading-types"
       }, {
-        "title" : "From File",
-        "id" : "from-file"
-      }, {
-        "title" : "Validated Identifier",
-        "id" : "validated-identifier"
+        "title" : "Heading API Type",
+        "id" : "heading-api-type"
       } ]
     }
   }
