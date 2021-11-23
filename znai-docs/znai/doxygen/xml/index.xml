@@ -17,6 +17,9 @@
   <compound refid="classutils_1_1second_1_1ThirdClass" kind="class"><name>utils::second::ThirdClass</name>
     <member refid="classutils_1_1second_1_1ThirdClass_1a0b8841f3d07edf14f592150dab8f0046" kind="function"><name>bark</name></member>
   </compound>
+  <compound refid="namespacemath" kind="namespace"><name>math</name>
+    <member refid="math_8h_1a0b2d8c3d7f189b107fcdfb5e40ab694c" kind="function"><name>add</name></member>
+  </compound>
   <compound refid="namespaceutils" kind="namespace"><name>utils</name>
   </compound>
   <compound refid="namespaceutils_1_1nested" kind="namespace"><name>utils::nested</name>
@@ -44,6 +47,8 @@
   <compound refid="funcs__three_8h" kind="file"><name>funcs_three.h</name>
   </compound>
   <compound refid="funcs__two_8h" kind="file"><name>funcs_two.h</name>
+  </compound>
+  <compound refid="math_8h" kind="file"><name>math.h</name>
   </compound>
   <compound refid="structs_8h" kind="file"><name>structs.h</name>
   </compound>

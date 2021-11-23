@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="math_8h" kind="file" language="C++">
+    <compoundname>math.h</compoundname>
+    <innernamespace refid="namespacemath">math</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>math utilities func </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">math<sp/>{</highlight></codeline>
+<codeline lineno="14" refid="math_8h_1a0b2d8c3d7f189b107fcdfb5e40ab694c" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="math_8h_1a0b2d8c3d7f189b107fcdfb5e40ab694c" kindref="member">add</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>b);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/math.h"/>
+  </compounddef>
+</doxygen>

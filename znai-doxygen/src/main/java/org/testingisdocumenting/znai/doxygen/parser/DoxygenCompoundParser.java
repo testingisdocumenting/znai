@@ -53,7 +53,7 @@ public class DoxygenCompoundParser {
         compound.setKind(XmlUtils.getAttributeText(compoundRoot, "kind"));
         compound.setName(XmlUtils.nextLevelNodeByName(compoundRoot, "compoundname").getTextContent());
 
-        compound.setDescription(new DoxygenCombinedDescription(
+        compound.setDescription(new DoxygenDescription(
                 DoxygenDescriptionParser.parseBrief(componentsRegistry,
                         XmlUtils.nextLevelNodeByName(compoundRoot, "briefdescription")),
                 DoxygenDescriptionParser.parseFull(componentsRegistry, new DoxygenParameterList(),

@@ -19,7 +19,6 @@ package org.testingisdocumenting.znai.doxygen.plugin;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.Doxygen;
-import org.testingisdocumenting.znai.doxygen.parser.DoxygenCombinedDescription;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenDescription;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMembersList;
 import org.testingisdocumenting.znai.extensions.PluginParams;
@@ -64,7 +63,7 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
             DoxygenMemberListExtractor.throwIfMembersListIsEmpty(doxygen, componentsRegistry, fullName);
         }
 
-        DoxygenCombinedDescription description = membersList.first().getDescription();
+        DoxygenDescription description = membersList.first().getDescription();
         String type = pluginParams.getOpts().get("type", "");
 
         ApiParameters apiParameters = "template".equals(type) ?

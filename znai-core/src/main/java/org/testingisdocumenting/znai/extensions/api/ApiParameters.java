@@ -33,6 +33,10 @@ public class ApiParameters {
                 "root", new ApiLinkedText("root"), Collections.emptyList(), "");
     }
 
+    public ApiParameter addInFront(String name, ApiLinkedText type, List<Map<String, Object>> description, String textForSearch) {
+        return root.addInFront(name, type, description, textForSearch);
+    }
+
     public ApiParameter add(String name, ApiLinkedText type, List<Map<String, Object>> description, String textForSearch) {
         return root.add(name, type, description, textForSearch);
     }

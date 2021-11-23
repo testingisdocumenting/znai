@@ -119,6 +119,16 @@ Pass `type: "template"` parameter to `include-doxygen-doc-params` plugin to extr
 
 :include-doxygen-doc-params: multi_println { title: "Template parameters", type: "template" }
 
+# Return Description
+
+Return description is part of parameters list
+
+:include-file: doxygen/src/math.h { title: "math.h", surroundedBy: "// math-add" }
+
+    :include-doxygen-doc-params: math::add
+
+:include-doxygen-doc-params: math::add
+
 # Compound
 
 Use `include-doxygen-compound` to render definition compound such as class 

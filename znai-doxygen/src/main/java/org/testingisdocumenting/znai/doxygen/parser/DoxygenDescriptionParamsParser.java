@@ -75,13 +75,13 @@ public class DoxygenDescriptionParamsParser {
         ApiLinkedText type = linkedTextByName(name, typeText);
 
         Node descriptionNode = XmlUtils.nextLevelNodeByName(paramItem, "parameterdescription");
-        DoxygenDescription paramDescription = DoxygenDescriptionParser.parseFull(componentsRegistry,
+        DoxygenFullDescription paramDescription = DoxygenDescriptionParser.parseFull(componentsRegistry,
                 parameters,
                 anchorPrefix + "_",
                 descriptionNode);
 
         apiParameters.add(name, type,
-                paramDescription.getDocElements().stream().map(DocElement::toMap).collect(Collectors.toList()),
+                paramDescription.getDescriptionElements().stream().map(DocElement::toMap).collect(Collectors.toList()),
                 paramDescription.getSearchTextWithoutParameters());
     }
 

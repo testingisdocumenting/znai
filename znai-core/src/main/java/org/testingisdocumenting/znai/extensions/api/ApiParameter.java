@@ -82,6 +82,15 @@ public class ApiParameter {
         return children;
     }
 
+    public ApiParameter addInFront(String name, ApiLinkedText type, List<Map<String, Object>> description, String textForSearch) {
+        ApiParameter apiParameter = new ApiParameter(
+                ApiParametersAnchors.anchorIdFromNameAndPrefix(anchorId, name),
+                name, type, description, textForSearch);
+        children.add(0, apiParameter);
+
+        return apiParameter;
+    }
+
     public ApiParameter add(String name, ApiLinkedText type, List<Map<String, Object>> description, String textForSearch) {
         ApiParameter apiParameter = new ApiParameter(
                 ApiParametersAnchors.anchorIdFromNameAndPrefix(anchorId, name),
