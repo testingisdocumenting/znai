@@ -18,7 +18,7 @@ package org.testingisdocumenting.znai.doxygen.plugin;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.Doxygen;
-import org.testingisdocumenting.znai.doxygen.parser.DoxygenCombinedDescription;
+import org.testingisdocumenting.znai.doxygen.parser.DoxygenDescription;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMember;
 import org.testingisdocumenting.znai.doxygen.parser.DoxygenMembersList;
 import org.testingisdocumenting.znai.extensions.PluginParams;
@@ -89,7 +89,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
     private void fullDefinition(DoxygenMember member) {
         memberAnchorAndSignature(member);
 
-        DoxygenCombinedDescription description = member.getDescription();
+        DoxygenDescription description = member.getDescription();
         boolean hasParametersDesc = description.getFull() != null &&
                 description.getFull().getApiParameters() != null;
         boolean hasTemplateParametersDesc = description.getFull() != null &&

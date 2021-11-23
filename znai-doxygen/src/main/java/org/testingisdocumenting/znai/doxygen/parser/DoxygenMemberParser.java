@@ -71,7 +71,7 @@ public class DoxygenMemberParser {
             });
         }
 
-        member.setDescription(new DoxygenCombinedDescription(
+        member.setDescription(new DoxygenDescription(
                 DoxygenDescriptionParser.parseBrief(componentsRegistry,
                         XmlUtils.anyNestedNodeByName(memberNode, "briefdescription")),
                 DoxygenDescriptionParser.parseFull(componentsRegistry, member.getParameters(), member.getName(),
