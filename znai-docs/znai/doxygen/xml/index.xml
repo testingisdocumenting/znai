@@ -11,11 +11,23 @@
   <compound refid="classutils_1_1second_1_1MyClass" kind="class"><name>utils::second::MyClass</name>
     <member refid="classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1" kind="function"><name>bark</name></member>
   </compound>
+  <compound refid="classjava_1_1org_1_1example_1_1MyJavaClass" kind="class"><name>java::org::example::MyJavaClass</name>
+    <member refid="classjava_1_1org_1_1example_1_1MyJavaClass_1a3d8679b1f09e3b6b31eb450e3767f1f3" kind="function"><name>hello</name></member>
+    <member refid="classjava_1_1org_1_1example_1_1MyJavaClass_1ad34fc623d5c94b6ad212cd9c751fe890" kind="function"><name>main</name></member>
+  </compound>
   <compound refid="structMyStruct" kind="struct"><name>MyStruct</name>
     <member refid="structMyStruct_1aa372b7473fe51ce2784d8653e17bc591" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classutils_1_1second_1_1ThirdClass" kind="class"><name>utils::second::ThirdClass</name>
     <member refid="classutils_1_1second_1_1ThirdClass_1a0b8841f3d07edf14f592150dab8f0046" kind="function"><name>bark</name></member>
+  </compound>
+  <compound refid="namespacejava" kind="namespace"><name>java</name>
+  </compound>
+  <compound refid="namespacejava_1_1lang" kind="namespace"><name>java::lang</name>
+  </compound>
+  <compound refid="namespacejava_1_1org" kind="namespace"><name>java::org</name>
+  </compound>
+  <compound refid="namespacejava_1_1org_1_1example" kind="namespace"><name>java::org::example</name>
   </compound>
   <compound refid="namespacemath" kind="namespace"><name>math</name>
     <member refid="math_8h_1a0b2d8c3d7f189b107fcdfb5e40ab694c" kind="function"><name>add</name></member>
@@ -49,9 +61,19 @@
   </compound>
   <compound refid="funcs__two_8h" kind="file"><name>funcs_two.h</name>
   </compound>
+  <compound refid="MyJavaClass_8java" kind="file"><name>MyJavaClass.java</name>
+  </compound>
   <compound refid="math_8h" kind="file"><name>math.h</name>
   </compound>
   <compound refid="structs_8h" kind="file"><name>structs.h</name>
+  </compound>
+  <compound refid="dir_3e20c4d34c7c0351785a7692bae3b5a1" kind="dir"><name>src/main/java/org/example</name>
+  </compound>
+  <compound refid="dir_fd3f6763802dee1ad875f6c80eac0bda" kind="dir"><name>src/main/java</name>
+  </compound>
+  <compound refid="dir_5eb159725f84c66aafd839904a4acdd0" kind="dir"><name>src/main</name>
+  </compound>
+  <compound refid="dir_daf7592b8ade76cad5a1e82d805df54b" kind="dir"><name>src/main/java/org</name>
   </compound>
   <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>src</name>
   </compound>

@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
   <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
     <compoundname>src</compoundname>
+    <innerdir refid="dir_5eb159725f84c66aafd839904a4acdd0">src/main</innerdir>
     <innerfile refid="classes_8h">classes.h</innerfile>
     <innerfile refid="classes__two_8h">classes_two.h</innerfile>
     <innerfile refid="funcs_8h">funcs.h</innerfile>

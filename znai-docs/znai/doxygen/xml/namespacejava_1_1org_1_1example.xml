@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="namespacejava_1_1org_1_1example" kind="namespace" language="Java">
+    <compoundname>java::org::example</compoundname>
+    <innerclass refid="classjava_1_1org_1_1example_1_1MyJavaClass" prot="package">java::org::example::MyJavaClass</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/main/java/org/example/MyJavaClass.java" line="1" column="15"/>
+  </compounddef>
+</doxygen>

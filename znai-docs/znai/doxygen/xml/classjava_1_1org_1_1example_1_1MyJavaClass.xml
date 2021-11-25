@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+  <compounddef id="classjava_1_1org_1_1example_1_1MyJavaClass" kind="class" language="Java" prot="package">
+    <compoundname>java::org::example::MyJavaClass</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classjava_1_1org_1_1example_1_1MyJavaClass_1a3d8679b1f09e3b6b31eb450e3767f1f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void java.org.example.MyJavaClass.hello</definition>
+        <argsstring>()</argsstring>
+        <name>hello</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>hello world </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/main/java/org/example/MyJavaClass.java" line="10" column="17" bodyfile="src/main/java/org/example/MyJavaClass.java" bodystart="10" bodyend="12"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classjava_1_1org_1_1example_1_1MyJavaClass_1ad34fc623d5c94b6ad212cd9c751fe890" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void java.org.example.MyJavaClass.main</definition>
+        <argsstring>(String[] args)</argsstring>
+        <name>main</name>
+        <param>
+          <type>String[]</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/main/java/org/example/MyJavaClass.java" line="14" column="24" bodyfile="src/main/java/org/example/MyJavaClass.java" bodystart="14" bodyend="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>my java class </para>
+    </detaileddescription>
+    <location file="src/main/java/org/example/MyJavaClass.java" line="6" column="1" bodyfile="src/main/java/org/example/MyJavaClass.java" bodystart="6" bodyend="17"/>
+    <listofallmembers>
+      <member refid="classjava_1_1org_1_1example_1_1MyJavaClass_1a3d8679b1f09e3b6b31eb450e3767f1f3" prot="public" virt="non-virtual"><scope>java::org::example::MyJavaClass</scope><name>hello</name></member>
+      <member refid="classjava_1_1org_1_1example_1_1MyJavaClass_1ad34fc623d5c94b6ad212cd9c751fe890" prot="public" virt="non-virtual"><scope>java::org::example::MyJavaClass</scope><name>main</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
