@@ -1,4 +1,5 @@
 /*
+ * Copyright 2021 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,22 +17,22 @@
 
 package org.testingisdocumenting.znai.extensions.cli;
 
-import org.testingisdocumenting.znai.console.ConsoleOutputs;
-import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Map;
 import java.util.stream.Stream;
+
+import static org.testingisdocumenting.znai.extensions.cli.CliCommandPropsAndValidation.CliDocElementName;
 
 public class CliCommandIncludePlugin implements IncludePlugin {
     private String command;
@@ -53,37 +54,12 @@ public class CliCommandIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        PluginParamsOpts opts = pluginParams.getOpts();
-        Set<String> combinedParams = new LinkedHashSet<>(opts.getList("paramToHighlight"));
-
-        combinedParams.addAll(opts.getList("paramsToHighlight"));
-        combinedParams.addAll(opts.getList("highlight"));
-
-        if (opts.has("paramToHighlight") ||
-                opts.has("paramsToHighlight")) {
-            ConsoleOutputs.out(Color.RED, "cli-command param(s)ToHighlight will be deprecated, use <highlight> instead"); // TODO deprecation warning API
-        }
-
         resourcesResolver = componentsRegistry.resourceResolver();
-        LinkedHashMap<String, Object> props = new LinkedHashMap<>();
         command = extractCommand(pluginParams);
+        Map<String, Object> props = CliCommandPropsAndValidation.createProps(command, command,
+                pluginParams.getOpts());
 
-        props.put("command", command);
-        props.put("paramsToHighlight", combinedParams);
-
-        validateParamsToHighlight(command, combinedParams);
-
-        opts.assignToProps(props, "meta");
-        opts.assignToProps(props, "threshold");
-        opts.assignToProps(props, "presentationThreshold");
-
-        Set<String> splitAfter = opts.getSet("splitAfter");
-        if (!splitAfter.isEmpty()) {
-            props.put("splitAfter", splitAfter);
-            validateSplitAfter(command, splitAfter);
-        }
-
-        return PluginResult.docElement("CliCommand", props);
+        return PluginResult.docElement(CliDocElementName, props);
     }
 
     @Override
@@ -96,25 +72,6 @@ public class CliCommandIncludePlugin implements IncludePlugin {
     @Override
     public SearchText textForSearch() {
         return SearchScore.HIGH.text(command);
-    }
-
-    private void validateSplitAfter(String command, Set<String> splitAfter) {
-        Set<String> commandParts = new HashSet<>(Arrays.asList(command.split(" ")));
-
-        for (String token : splitAfter) {
-            if (!commandParts.contains(token)) {
-                throw new RuntimeException("split part \"" + token + "\" is not present in command: " + command);
-            }
-        }
-    }
-
-    private void validateParamsToHighlight(String command, Set<String> paramsToHighlight) {
-        for (String paramToHighlight : paramsToHighlight) {
-            if (!command.contains(paramToHighlight)) {
-                throw new RuntimeException("param to highlight \"" + paramToHighlight + "\" " +
-                        "is not present in command: " + command);
-            }
-        }
     }
 
     private String extractCommand(PluginParams pluginParams) {
