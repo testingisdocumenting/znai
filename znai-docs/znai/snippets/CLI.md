@@ -1,12 +1,37 @@
-# Command Parameters
+# Parameters Highlight
 
-To bring attention to important parameters in your examples use the `cli-command` extension.
+To bring attention to important parameters in your CLI examples use the `cli` fence plugin.
+
+    ```cli {highlight: "important"}
+    my-super-command paramA --important-flag=true 
+    ```
+
+```cli {highlight: "important"}
+my-super-command paramA --important-flag=true 
+```
+
+Note: Parameter names gets matched as long as their names contain the passed value.
+
+````markdown {title: "stacking multiple commands"} 
+```cli {highlight: "important"}
+my-super-command paramA --important-flag=true 
+another-command stop  
+```
+````
+
+```cli {highlight: "important"} 
+my-super-command paramA --important-flag=true 
+another-command stop  
+```
+
+# Include Plugin 
+
+Alternatively to fence plugin above, you can use include type.
+Note: options listed below are applicable to either form
 
     :include-cli-command: my-super-command paramA --important-flag=true {highlight: "important"}
     
 :include-cli-command: my-super-command paramA --important-flag=true {highlight: "important"}
-
-Note: Parameter names gets matched as long as their names contain the passed value.
 
 # Long Commands
 
@@ -122,7 +147,7 @@ More on limit options in [External Code Snippets](snippets/external-code-snippet
 
 # Presentation Mode
 
-In presentation mode, `cli-command` will simulate typing inside the terminal.
+In presentation mode, cli command related plugins will simulate typing inside the terminal.
 
 You can gradually reveal `cli-output` by providing `revealLineStop` parameter.
   
