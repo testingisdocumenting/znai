@@ -1,1 +1,1 @@
-* Doc: more examples inside [Example](introduction/example) page
+* Doc: more examples 
