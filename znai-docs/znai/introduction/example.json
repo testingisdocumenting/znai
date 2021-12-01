@@ -1,0 +1,9 @@
+{
+  "person": {
+    "id": "pid1",
+    "name": "Person Name"
+  },
+  "details": {
+    "extra": "info"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "nodes": [
+    {
+      "id": "author",
+      "label": "Project"
+    },
+    {
+      "id": "markdown",
+      "label": "Markdown"
+    },
+    {
+      "id": "src",
+      "label": "Code",
+      "colorGroup": "b"
+    },
+    {
+      "id": "test",
+      "label": "Test",
+      "colorGroup": "c"
+    },
+    {
+      "id": "javadoc",
+      "label": "JavaDoc/Doxygen/etc"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "apiresponse",
+      "label": "API Responses"
+    },
+    {
+      "id": "screenshots",
+      "label": "Annotated Screenshots"
+    },
+    {
+      "id": "userguide",
+      "label": "User Guide"
+    }
+  ],
+  "edges": [
+    ["author", "src"],
+    ["author", "markdown"],
+    ["author", "test"],
+    ["src", "javadoc"],
+    ["src", "examples"],
+    ["test", "screenshots"],
+    ["test", "apiresponse"],
+    ["markdown", "userguide"],
+    ["javadoc", "userguide"],
+    ["examples", "userguide"],
+    ["apiresponse", "userguide"],
+    ["screenshots", "userguide"]
+  ]
+}
