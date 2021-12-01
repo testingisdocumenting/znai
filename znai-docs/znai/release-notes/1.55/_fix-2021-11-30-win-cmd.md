@@ -1,0 +1,1 @@
+* Fix: win cmd script to include passed params
