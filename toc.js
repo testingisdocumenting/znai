@@ -20,46 +20,18 @@ toc = [ {
     "dirName" : "introduction",
     "fileName" : "what-is-this",
     "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ ]
-  }, {
-    "sectionTitle" : "Introduction",
-    "pageTitle" : "Rationale",
-    "pageMeta" : { },
-    "dirName" : "introduction",
-    "fileName" : "rationale",
-    "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Stale Documentation",
-      "id" : "stale-documentation"
+      "title" : "Beautiful and Maintainable User Guide",
+      "id" : "beautiful-and-maintainable-user-guide"
     }, {
-      "title" : "Part Of Workflow",
-      "id" : "part-of-workflow"
+      "title" : "Extensive Plugins System",
+      "id" : "extensive-plugins-system"
     }, {
-      "title" : "Maintenance",
-      "id" : "maintenance"
+      "title" : "Auto Presentation",
+      "id" : "auto-presentation"
     }, {
-      "title" : "Familiar Approach",
-      "id" : "familiar-approach"
-    }, {
-      "title" : "Presentations",
-      "id" : "presentations"
-    } ]
-  }, {
-    "sectionTitle" : "Introduction",
-    "pageTitle" : "Example",
-    "pageMeta" : { },
-    "dirName" : "introduction",
-    "fileName" : "example",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Markdown",
-      "id" : "markdown"
-    }, {
-      "title" : "Extensions",
-      "id" : "extensions"
-    }, {
-      "title" : "Website",
-      "id" : "website"
+      "title" : "Batteries Included",
+      "id" : "batteries-included"
     } ]
   }, {
     "sectionTitle" : "Introduction",
@@ -691,8 +663,11 @@ toc = [ {
     "fileName" : "CLI",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Command Parameters",
-      "id" : "command-parameters"
+      "title" : "Parameters Highlight",
+      "id" : "parameters-highlight"
+    }, {
+      "title" : "Include Plugin",
+      "id" : "include-plugin"
     }, {
       "title" : "Long Commands",
       "id" : "long-commands"
@@ -1383,6 +1358,9 @@ toc = [ {
     "fileName" : "2021",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.55",
+      "id" : "155"
+    }, {
       "title" : "1.54",
       "id" : "154"
     }, {

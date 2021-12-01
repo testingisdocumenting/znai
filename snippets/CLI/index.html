@@ -85,8 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Command Parameters</h1></header>
-<p>To bring attention to important parameters in your examples use the cli-command extension. :include-cli-command: my-super-command paramA --important-flag=true {highlight: &quot;important&quot;} my-super-command paramA --important-flag=true Note: Parameter names gets matched as long as their names contain the passed value.</p>
+<header><h1>Parameters Highlight</h1></header>
+<p>To bring attention to important parameters in your CLI examples use the cli fence plugin. ```cli {highlight: &quot;important&quot;} my-super-command paramA --important-flag=true ``` my-super-command paramA --important-flag=true Note: Parameter names gets matched as long as their names contain the passed value. markdown ```cli {highlight: &quot;important&quot;} my-super-command paramA --important-flag=true another-command stop ``` my-super-command paramA --important-flag=true another-command stop</p>
+</article>
+
+<article>
+<header><h1>Include Plugin</h1></header>
+<p>Alternatively to fence plugin above, you can use include type. Note: options listed below are applicable to either form :include-cli-command: my-super-command paramA --important-flag=true {highlight: &quot;important&quot;} my-super-command paramA --important-flag=true</p>
 </article>
 
 <article>
@@ -126,7 +131,7 @@
 
 <article>
 <header><h1>Presentation Mode</h1></header>
-<p>In presentation mode, cli-command will simulate typing inside the terminal.You can gradually reveal cli-output by providing revealLineStop parameter. :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]} Passed highlight will highlight each line as a separate slide. Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -&gt; master</p>
+<p>In presentation mode, cli command related plugins will simulate typing inside the terminal.You can gradually reveal cli-output by providing revealLineStop parameter. :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]} Passed highlight will highlight each line as a separate slide. Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -&gt; master</p>
 </article>
 </section>
 </div>
@@ -161,23 +166,23 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "command-parameters",
+      "id" : "parameters-highlight",
       "type" : "Section",
-      "title" : "Command Parameters",
+      "title" : "Parameters Highlight",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To bring attention to important parameters in your examples use the ",
+          "text" : "To bring attention to important parameters in your CLI examples use the ",
           "type" : "SimpleText"
         }, {
-          "code" : "cli-command",
+          "code" : "cli",
           "type" : "InlinedCode"
         }, {
-          "text" : " extension.",
+          "text" : " fence plugin.",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-cli-command: my-super-command paramA --important-flag=true {highlight: \"important\"}\n",
+        "snippet" : "```cli {highlight: \"important\"}\nmy-super-command paramA --important-flag=true \n```\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
@@ -191,6 +196,45 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Note: Parameter names gets matched as long as their names contain the passed value.",
           "type" : "SimpleText"
         } ]
+      }, {
+        "snippet" : "```cli {highlight: \"important\"}\nmy-super-command paramA --important-flag=true \nanother-command stop  \n```\n",
+        "type" : "Snippet",
+        "title" : "stacking multiple commands",
+        "lineNumber" : "",
+        "lang" : "markdown"
+      }, {
+        "paramsToHighlight" : [ "important" ],
+        "type" : "CliCommand",
+        "command" : "my-super-command paramA --important-flag=true"
+      }, {
+        "paramsToHighlight" : [ "important" ],
+        "type" : "CliCommand",
+        "command" : "another-command stop"
+      } ]
+    }, {
+      "id" : "include-plugin",
+      "type" : "Section",
+      "title" : "Include Plugin",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Alternatively to fence plugin above, you can use include type.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Note: options listed below are applicable to either form",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-cli-command: my-super-command paramA --important-flag=true {highlight: \"important\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "paramsToHighlight" : [ "important" ],
+        "type" : "CliCommand",
+        "command" : "my-super-command paramA --important-flag=true"
       } ]
     }, {
       "id" : "long-commands",
@@ -492,13 +536,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "In presentation mode, ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "cli-command",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " will simulate typing inside the terminal.",
+          "text" : "In presentation mode, cli command related plugins will simulate typing inside the terminal.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -543,7 +581,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ]
       } ]
     } ],
-    "lastModifiedTime" : 1637672439042,
+    "lastModifiedTime" : 1638365049090,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "CLI",
@@ -552,8 +590,11 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "CLI",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Command Parameters",
-        "id" : "command-parameters"
+        "title" : "Parameters Highlight",
+        "id" : "parameters-highlight"
+      }, {
+        "title" : "Include Plugin",
+        "id" : "include-plugin"
       }, {
         "title" : "Long Commands",
         "id" : "long-commands"

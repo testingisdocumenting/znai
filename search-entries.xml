@@ -1,73 +1,33 @@
 <znai>
   <entry>
-    <url>/znai/introduction/what-is-this</url>
-    <fullTitle>Znai: What Is This,  [Introduction]</fullTitle>
+    <url>/znai/introduction/what-is-this#beautiful-and-maintainable-user-guide</url>
+    <fullTitle>Znai: What Is This, Beautiful and Maintainable User Guide [Introduction]</fullTitle>
     <text>
-      <text>Znai is a system that generates user facing documentation from markdown files. Documentation files are located next to your product codebase and are part of your product's software development lifecycle. Znai provides extensions to simplify your day-to-day documentation processes and to improve maintenance in the long run.Continue reading to learn more about:Rationale Structuring your documentation Leveraging existing code snippets and test results Diagrams support UI documentation techniques Presentation mode Extremely fast navigation Local search with auto-preview If you are reading this documentation for the first time, we suggest you read from start to finish.</text>
+      <text>Znai combines human written text with artifacts such as code , graphs , REST API , Java Docs , Doxygen , etc. to create up-to-date, maintainable, beautiful User Guides and Tutorials. # Beautiful and Maintainable User Guide `Znai` combines human written text with artifacts such as `code`, `graphs`, `REST API`, `Java Docs`, `Doxygen`, etc. to create up-to-date, maintainable, beautiful **User Guides** and **Tutorials**. :include-flow-chart: artifacts-flow.json {vertical: true, highlight: "userguide"}</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/introduction/rationale#stale-documentation</url>
-    <fullTitle>Znai: Rationale, Stale Documentation [Introduction]</fullTitle>
+    <url>/znai/introduction/what-is-this#extensive-plugins-system</url>
+    <fullTitle>Znai: What Is This, Extensive Plugins System [Introduction]</fullTitle>
     <text>
-      <text>Keeping documentation up to date is a hard task. It's often the case that the more separated your documentation is from the code it's describing, the more likely it won't be updated when a feature is added or changed.Depending on your product and clients, stale documentation can cause: Lost time for users Reputational damage</text>
+      <text>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Inlined Code plugins markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Include plugins markdown :include-json: example.json { title: "JSON example", paths: ["root.person.id"], collapsedPaths: ["root.details"] } Fence plugins markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/introduction/rationale#part-of-workflow</url>
-    <fullTitle>Znai: Rationale, Part Of Workflow [Introduction]</fullTitle>
+    <url>/znai/introduction/what-is-this#auto-presentation</url>
+    <fullTitle>Znai: What Is This, Auto Presentation [Introduction]</fullTitle>
     <text>
-      <text>As part of your code review today, you likely check that:No design violations are committed No subtle bugs are introduced All tests are updated Now, it is time to add to that list:Documentation is updated</text>
+      <text>With a click of a button, Znai turns User Guide content to presentation slides. Single source of truth and minimal effort.Present a feature in a meeting and then share the same content as a link to the documentation.</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/introduction/rationale#maintenance</url>
-    <fullTitle>Znai: Rationale, Maintenance [Introduction]</fullTitle>
+    <url>/znai/introduction/what-is-this#batteries-included</url>
+    <fullTitle>Znai: What Is This, Batteries Included [Introduction]</fullTitle>
     <text>
-      <text>Keeping documentation up to date takes time. Even non-functional changes may require documentation updates. Here are some activities that most likely put your documentation out of sync:Moving UI elements around Re-naming REST response fields Removing redundant command line parameters Renaming public API classes Your codebase probably already contains a vast amount of data. Instead of using copy-and-paste to duplicate that data in your documentation, you should leverage the already-existing artifacts.Examples of how to use API (part of code) Config files Test resultsWeb UI REST CLI Business logic</text>
-      <score>STANDARD</score>
-    </text>
-  </entry>
-  <entry>
-    <url>/znai/introduction/rationale#familiar-approach</url>
-    <fullTitle>Znai: Rationale, Familiar Approach [Introduction]</fullTitle>
-    <text>
-      <text>Markup is everywhereStackOverflow GitHub Jupyter Reddit Discourse Markup-based documentation is widely used as wellOpen source projects (ReactJS, Pandas, Spark) Technical books (O'Reilly, Manning) Big companies (Google, FaceBook)</text>
-      <score>STANDARD</score>
-    </text>
-  </entry>
-  <entry>
-    <url>/znai/introduction/rationale#presentations</url>
-    <fullTitle>Znai: Rationale, Presentations [Introduction]</fullTitle>
-    <text>
-      <text>Znai builds presentations to:Show new features Teach a class from your documentation Like all documentation, maintaining presentations takes effort. Instead of building separate slides and trying to keep them up to date, this system automatically generates slides from your documentation content.</text>
-      <score>STANDARD</score>
-    </text>
-  </entry>
-  <entry>
-    <url>/znai/introduction/example#markdown</url>
-    <fullTitle>Znai: Example, Markdown [Introduction]</fullTitle>
-    <text>
-      <text>Znai uses https://commonmark.org Markdown, a markup language that uses ASCII to represent styles and page structure.</text>
-      <score>STANDARD</score>
-    </text>
-  </entry>
-  <entry>
-    <url>/znai/introduction/example#extensions</url>
-    <fullTitle>Znai: Example, Extensions [Introduction]</fullTitle>
-    <text>
-      <text>Znai has extensions mechanism that are not part of standard markdown. Embed External File Graphvis Diagram :include-graphviz: visuals/graphviz.dot {autoTitle: true} digraph { a -> b; b -> c; d -> b; b -> e; }</text>
-      <score>STANDARD</score>
-    </text>
-  </entry>
-  <entry>
-    <url>/znai/introduction/example#website</url>
-    <fullTitle>Znai: Example, Website [Introduction]</fullTitle>
-    <text>
-      <text>This user guide is built using znai . Continue reading to learn the features that may improve your users experience and reduce your maintenance burden.</text>
+      <text>Znai comes withdev server mode with changes highlight and auto-jump to a change local search (with full preview) dark/light mode runtime switch instant switching between pages</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -163,7 +123,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this rationale example getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets code-comments inlined-code-snippets api-parameters code-references java java-doc groovy python doxygen typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points text-badge headings icons keyboard-shortcuts charts images image-annotations iframe SVG graphviz flow-diagrams PlantUml mermaid synergy-with-testing java REST web-UI configuration basic example-references domain api release-notes 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets code-comments inlined-code-snippets api-parameters code-references java java-doc groovy python doxygen typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points text-badge headings icons keyboard-shortcuts charts images image-annotations iframe SVG graphviz flow-diagrams PlantUml mermaid synergy-with-testing java REST web-UI configuration basic example-references domain api release-notes 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1032,10 +992,18 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/CLI#command-parameters</url>
-    <fullTitle>Znai: CLI, Command Parameters [Snippets]</fullTitle>
+    <url>/znai/snippets/CLI#parameters-highlight</url>
+    <fullTitle>Znai: CLI, Parameters Highlight [Snippets]</fullTitle>
     <text>
-      <text>To bring attention to important parameters in your examples use the cli-command extension. :include-cli-command: my-super-command paramA --important-flag=true {highlight: "important"} my-super-command paramA --important-flag=true Note: Parameter names gets matched as long as their names contain the passed value.</text>
+      <text>To bring attention to important parameters in your CLI examples use the cli fence plugin. ```cli {highlight: "important"} my-super-command paramA --important-flag=true ``` my-super-command paramA --important-flag=true Note: Parameter names gets matched as long as their names contain the passed value. markdown ```cli {highlight: "important"} my-super-command paramA --important-flag=true another-command stop ``` my-super-command paramA --important-flag=true another-command stop</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/CLI#include-plugin</url>
+    <fullTitle>Znai: CLI, Include Plugin [Snippets]</fullTitle>
+    <text>
+      <text>Alternatively to fence plugin above, you can use include type. Note: options listed below are applicable to either form :include-cli-command: my-super-command paramA --important-flag=true {highlight: "important"} my-super-command paramA --important-flag=true</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1099,7 +1067,7 @@
     <url>/znai/snippets/CLI#presentation-mode</url>
     <fullTitle>Znai: CLI, Presentation Mode [Snippets]</fullTitle>
     <text>
-      <text>In presentation mode, cli-command will simulate typing inside the terminal.You can gradually reveal cli-output by providing revealLineStop parameter. :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]} Passed highlight will highlight each line as a separate slide. Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
+      <text>In presentation mode, cli command related plugins will simulate typing inside the terminal.You can gradually reveal cli-output by providing revealLineStop parameter. :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]} Passed highlight will highlight each line as a separate slide. Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2064,10 +2032,18 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/release-notes/2021#155</url>
+    <fullTitle>Znai: 2021 Releases, 1.55 [Release Notes]</fullTitle>
+    <text>
+      <text>Doc: rewrite of introduction/what-is-this What Is This starting page Add snippets/CLI CLI fence plugin Fix: win cmd script to include passed params</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/release-notes/2021#154</url>
     <fullTitle>Znai: 2021 Releases, 1.54 [Release Notes]</fullTitle>
     <text>
-      <text>Doc: more examples inside introduction/example Example page Add Doxygen snippets/doxygen#ignore-template-parameters ignore template parameter Add Doxygen memeber snippets/doxygen#all-matching-signatures select by args Add snippets/doxygen#specific-member-by-args doxygen all overaloads at once Add snippets/doxygen#compound doxygen compound to include class description and methods/attributes Add snippets/java-doc#inner-classes inner classes reference to java doc parsing Add visuals/headings API heading style Add snippets/doxygen#member-signature-only doxygen member signature Add snippets/doxygen#extract-parameters doxygen docs params to embed as snippets/api-parameters API parameters Add snippets/doxygen#extract-comment-text doxygen docs to embed comments text Add visuals/text-badge#part-of-heading heading text badge Add visuals/text-badge text badge Add snippets/code-comments#remove-comments commentsType: remove to remove comments from a code snippet Add uploadzip command to upload any html zip to znai hub Add visuals/graphviz/ graphviz include plugin Plugin parameters parsing error provides more details about plugin id and provided parameters Add include , fence and inline code plugin failure context: id, params Add layout/tabs Tabs presence validation Enhance snippets/python#content-full-content-variable variable extraction to include all assignments, not just global variables Fix: Enterprise nix based authz last user group is now taken into account Fix: icon alignment regression in layout/attention-signs Attention Paragraphs</text>
+      <text>Doc: more examples Add Doxygen snippets/doxygen#ignore-template-parameters ignore template parameter Add Doxygen memeber snippets/doxygen#all-matching-signatures select by args Add snippets/doxygen#specific-member-by-args doxygen all overaloads at once Add snippets/doxygen#compound doxygen compound to include class description and methods/attributes Add snippets/java-doc#inner-classes inner classes reference to java doc parsing Add visuals/headings API heading style Add snippets/doxygen#member-signature-only doxygen member signature Add snippets/doxygen#extract-parameters doxygen docs params to embed as snippets/api-parameters API parameters Add snippets/doxygen#extract-comment-text doxygen docs to embed comments text Add visuals/text-badge#part-of-heading heading text badge Add visuals/text-badge text badge Add snippets/code-comments#remove-comments commentsType: remove to remove comments from a code snippet Add uploadzip command to upload any html zip to znai hub Add visuals/graphviz/ graphviz include plugin Plugin parameters parsing error provides more details about plugin id and provided parameters Add include , fence and inline code plugin failure context: id, params Add layout/tabs Tabs presence validation Enhance snippets/python#content-full-content-variable variable extraction to include all assignments, not just global variables Fix: Enterprise nix based authz last user group is now taken into account Fix: icon alignment regression in layout/attention-signs Attention Paragraphs</text>
       <score>STANDARD</score>
     </text>
   </entry>
