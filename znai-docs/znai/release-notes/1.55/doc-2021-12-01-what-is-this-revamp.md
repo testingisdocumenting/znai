@@ -1,0 +1,1 @@
+* Doc: rewrite of [What Is This](introduction/what-is-this) starting page 
