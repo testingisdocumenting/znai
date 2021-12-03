@@ -1,0 +1,1 @@
+* Fix: snippets highlight regression
