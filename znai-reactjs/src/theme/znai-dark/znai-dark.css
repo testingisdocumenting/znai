@@ -206,3 +206,8 @@
     border-left: 1px solid #444;
     background-color: #161c1f;
 }
+
+.theme-znai-dark ::selection {
+    background-color: var(--znai-regular-text-color);
+    color: var(--znai-background-color);
+}
