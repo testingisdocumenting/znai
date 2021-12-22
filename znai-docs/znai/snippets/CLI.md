@@ -143,7 +143,7 @@ Use `startLine`, `endLine` to extract specific content by using marker lines.
     endLine: "master -> master"    
 }
 
-More on limit options in [External Code Snippets](snippets/external-code-snippets#extract-snippets).
+More on snippets extractions: [Snippets Manipulation](snippets/snippets-manipulation).
 
 # Presentation Mode
 

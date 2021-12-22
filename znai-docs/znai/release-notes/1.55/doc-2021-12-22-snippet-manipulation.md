@@ -1,0 +1,1 @@
+* Doc: moved [Snippets Manipulation](snippets/snippets-manipulation) to its own page 
