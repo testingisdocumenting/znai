@@ -1,4 +1,6 @@
+# example-import-block
 import market
+# example-import-block
 
 def main():
     # example: book trade

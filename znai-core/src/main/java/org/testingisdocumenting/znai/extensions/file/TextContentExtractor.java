@@ -20,7 +20,9 @@ package org.testingisdocumenting.znai.extensions.file;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -37,7 +39,7 @@ class TextContentExtractor {
         }
 
         Text text = new Text(contentId, content);
-        Text surroundedBy = cropSurroundedBy(text, opts);
+        Text surroundedBy = cropSurroundedBy(contentId, text, opts);
         Text croppedAtStart = cropStart(surroundedBy, opts);
         Text croppedAtEnd = cropEnd(croppedAtStart, opts);
 
@@ -45,18 +47,40 @@ class TextContentExtractor {
         Text withIncludeRegexp = includeRegexp(withExcludedStartEnd, opts);
         Text withExcludedRegexp = excludeRegexp(withIncludeRegexp, opts);
 
-        return StringUtils.stripIndentation(withExcludedRegexp.toString());
+        return withExcludedRegexp.stripIndentation().toString();
     }
 
-    private static Text cropSurroundedBy(Text text, PluginParamsOpts opts) {
-        String surroundedBy = opts.get("surroundedBy");
-        if (surroundedBy == null) {
+    private static Text cropSurroundedBy(String contentId, Text text, PluginParamsOpts opts) {
+        List<String> surroundedBy = opts.getList("surroundedBy");
+        if (surroundedBy.isEmpty()) {
             return text;
         }
 
-        Text start = text.startingWithLineContaining(surroundedBy);
-        return start.limitToLineContaining(surroundedBy)
-                .cropOneLineFromStartAndEnd();
+        List<String> surroundedBySeparator = opts.getList("surroundedBySeparator");
+        Iterator<String> separatorIt = surroundedBySeparator.iterator();
+        String separator = separatorIt.hasNext() ? separatorIt.next() : null;
+
+        Text result = new Text(contentId, "");
+
+        int idx = 0;
+        for (String marker : surroundedBy) {
+            boolean isLast = idx == (surroundedBy.size() - 1);
+
+            Text surroundedCrop = text.startingWithLineContaining(marker);
+            surroundedCrop = surroundedCrop.limitToLineContaining(marker)
+                    .cropOneLineFromStartAndEnd();
+
+            result = result.append(surroundedCrop.stripIndentation());
+            if (!isLast && separator != null) {
+                result = result.append(separator);
+            }
+
+            separator = separatorIt.hasNext() ? separatorIt.next() : separator;
+
+            idx++;
+        }
+
+        return result;
     }
 
     private static Text cropStart(Text text, PluginParamsOpts opts) {
@@ -136,6 +160,24 @@ class TextContentExtractor {
             this.contentId = contentId;
             this.lines = lines;
             this.hasCroppedStart = hasCroppedStart;
+        }
+
+        Text stripIndentation() {
+            return new Text(contentId, StringUtils.stripIndentation(toString()));
+        }
+
+        Text append(Text another) {
+            List<String> newLines = new ArrayList<>(lines);
+            newLines.addAll(another.lines);
+
+            return newText(newLines);
+        }
+
+        Text append(String line) {
+            List<String> newLines = new ArrayList<>(lines);
+            newLines.add(line);
+
+            return newText(newLines);
         }
 
         Text startingWithLineContaining(String subLine) {
