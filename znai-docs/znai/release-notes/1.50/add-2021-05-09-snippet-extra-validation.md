@@ -1,1 +1,1 @@
-* Validate that [snippets include/exclude](snippets/external-code-snippets#extract-snippets) matches lines
+* Validate that [snippets include/exclude](snippets/snippets-manipulation#include-regexp) matches lines
