@@ -1,6 +1,6 @@
 # Surrounded By
 
-Use `surroundedBy` and a marker to extract code snippet surrounded by a marker
+Use `surroundedBy` to extract code snippet surrounded by a marker
 
 :include-file: python-examples.py {title: "file with examples"}
 
@@ -12,10 +12,39 @@ Use `surroundedBy` and a marker to extract code snippet surrounded by a marker
   title: "extracted example",
   surroundedBy: "# example-cancel-trade"}
 
+# Multiple Surrounded By 
+
+Pass a list to `surroundedBy` to extract multiple blocks
+
+    :include-file: python-examples.py {
+      title: "extracted example",
+      surroundedBy: ["# example-import-block", "# example-cancel-trade"]}
+
+:include-file: python-examples.py {
+  title: "extracted example",
+  surroundedBy: ["# example-import-block", "# example-cancel-trade"]}
+
+Use `surroundedBySeparator` to select separator(s) between blocks
+  
+    :include-file: python-examples.py {
+      title: "extracted example",
+      surroundedBy: ["# example-import-block", "# example-cancel-trade"],
+      surroundedBySeparator: ["..."]
+    }
+
+:include-file: python-examples.py {
+  title: "extracted example",
+  surroundedBy: ["# example-import-block", "# example-cancel-trade"],
+  surroundedBySeparator: ["..."]
+}
+
+Note: `surroundedBySeparator` can be either single value or a list. Plugin will use a different separator for each block.
 
 # Start/End Line
 
 Use `startLine`, `endLine` to extract specific content by using marker lines.
+
+:include-file: python-examples.py {title: "file with examples"}
 
     :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"}
 

@@ -91,6 +91,36 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should extract file snippet based on multiple surrounding patterns and indent each block"() {
+        def text = resultingSnippet("file-with-multiple-surround-marker.txt",
+                "{surroundedBy: ['# import-list', '# concept-example']}")
+
+        text.should == "import abc\n" +
+                "import def\n" +
+                "foo()\n" +
+                "bar()"
+    }
+
+    @Test
+    void "should extract file snippet based on multiple surrounding patterns and add specified separator"() {
+        def text = resultingSnippet("file-with-multiple-surround-marker.txt",
+                "{surroundedBy: ['# import-list', '# concept-example', '# another-example', '# next-last-example', '# last-example', ]," +
+                        " surroundedBySeparator: ['...', '', '%']}")
+
+        text.should == "import abc\n" +
+                "import def\n" +
+                "...\n" +
+                "foo()\n" +
+                "bar()\n" +
+                "\n" +
+                "foobar()\n" +
+                "%\n" +
+                "almostFinish()\n" +
+                "%\n" +
+                "finish()"
+    }
+
+    @Test
     void "should extract file and exclude first and last line when excludeStartEnd is set and no start end is set"() {
         def text = resultingSnippet("file.txt", "{excludeStartEnd: true}")
 
