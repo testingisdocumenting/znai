@@ -15,21 +15,21 @@
  */
 
 import AnsiUp from "ansi_up";
-import { TokensPrinter } from '../code-snippets/TokensPrinter';
+import { TokensPrinter } from "../code-snippets/TokensPrinter";
 
 export function convertAnsiToTokenLines(lines: string[]): any[] {
   const ansiUp = createAnsiUp();
 
-  const html = ansiUp.ansi_to_html(lines.join('\n'));
+  const html = ansiUp.ansi_to_html(lines.join("\n"));
   const domParser = new DOMParser();
 
   const printer = new TokensPrinter();
 
   // TODO create PR https://github.com/drudru/ansi_up to generate intermediate tokens data instead of HTML
-  const doc = domParser.parseFromString(html, 'text/html');
+  const doc = domParser.parseFromString(html, "text/html");
   doc.body.childNodes.forEach((node) => {
     handleNode(node);
-  })
+  });
 
   return printer.linesOfTokens;
 
@@ -40,7 +40,7 @@ export function convertAnsiToTokenLines(lines: string[]): any[] {
     handleNewLine(content);
 
     function handleNewLine(content: string) {
-      const parts = content.split('\n')
+      const parts = content.split("\n");
 
       let len = parts.length;
       for (let idx = 0; idx < len; idx++) {
@@ -58,21 +58,22 @@ export function convertAnsiToTokenLines(lines: string[]): any[] {
 
   function typeFromNode(node: any) {
     const types = [];
-    if (node.style && node.style.getPropertyValue('font-weight') === 'bold') {
-      types.push('znai-ansi-bold');
+    if (node.style && node.style.getPropertyValue("font-weight") === "bold") {
+      types.push("znai-ansi-bold");
     }
 
     if (node.className) {
-      types.push('znai-' + node.className);
+      const classes = node.className.split(" ");
+      classes.forEach((c: string) => {
+        types.push("znai-" + c.trim());
+      });
     }
 
-    return types.length === 0 ? 'znai-ansi-regular' : types.join(' ');
+    return types.length === 0 ? "znai-ansi-regular" : types.join(" ");
   }
 
   function contentFromNode(node: any) {
-    return node.nodeType === 3 ?
-      node.nodeValue:
-      node.childNodes[0].nodeValue;
+    return node.nodeType === 3 ? node.nodeValue : node.childNodes[0].nodeValue;
   }
 }
 

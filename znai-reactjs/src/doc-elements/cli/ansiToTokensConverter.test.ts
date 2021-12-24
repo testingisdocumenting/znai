@@ -14,45 +14,49 @@
  * limitations under the License.
  */
 
-import { convertAnsiToTokenLines } from './ansiToTokensConverter';
+import { convertAnsiToTokenLines } from "./ansiToTokensConverter";
 
-test('convertAnsiToTokenLines', () => {
-  const lines = convertAnsiToTokenLines(['\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get("https://jsonplaceholder.typicode.com/todos/1")',
-    '\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m',
-    '  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200']);
+test("convertAnsiToTokenLines", () => {
+  const lines = convertAnsiToTokenLines([
+    "\u001B[43;1m\u001B[30mscenario\u001B[0m\u001B[34m\u001B[0m",
+    '\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get("https://jsonplaceholder.typicode.com/todos/1")',
+    "\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m",
+    "  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200",
+  ]);
 
   expect(lines).toEqual([
+    [{ type: "znai-ansi-bold znai-ansi-black-fg znai-ansi-yellow-bg", content: "scenario" }],
     [
-      { type: 'znai-ansi-bold', content: 'webtau:' },
-      { type: 'znai-ansi-regular', content: '000' },
-      { type: 'znai-ansi-bold', content: '>' },
+      { type: "znai-ansi-bold", content: "webtau:" },
+      { type: "znai-ansi-regular", content: "000" },
+      { type: "znai-ansi-bold", content: ">" },
       {
-        type: 'znai-ansi-regular',
-        content: ' http.get("https://jsonplaceholder.typicode.com/todos/1")'
-      }
-    ],
-    [
-      { type: 'znai-ansi-yellow-fg', content: '> ' },
-      { type: 'znai-ansi-blue-fg', content: 'executing HTTP GET ' },
-      {
-        type: 'znai-ansi-magenta-fg',
-        content: 'https://jsonplaceholder.typicode.com/todos/1'
+        type: "znai-ansi-regular",
+        content: ' http.get("https://jsonplaceholder.typicode.com/todos/1")',
       },
     ],
     [
-      { type: 'znai-ansi-regular', content: '  ' },
-      { type: 'znai-ansi-green-fg', content: '. ' },
-      { type: 'znai-ansi-bold znai-ansi-green-fg', content: 'header.statusCode ' },
-      { type: 'znai-ansi-bold znai-ansi-green-fg', content: 'equals 200' }
-    ]
+      { type: "znai-ansi-yellow-fg", content: "> " },
+      { type: "znai-ansi-blue-fg", content: "executing HTTP GET " },
+      {
+        type: "znai-ansi-magenta-fg",
+        content: "https://jsonplaceholder.typicode.com/todos/1",
+      },
+    ],
+    [
+      { type: "znai-ansi-regular", content: "  " },
+      { type: "znai-ansi-green-fg", content: ". " },
+      { type: "znai-ansi-bold znai-ansi-green-fg", content: "header.statusCode " },
+      { type: "znai-ansi-bold znai-ansi-green-fg", content: "equals 200" },
+    ],
   ]);
-})
+});
 
-test('handle empty lines', () => {
-  const lines = convertAnsiToTokenLines(['line one', '', 'line two']);
+test("handle empty lines", () => {
+  const lines = convertAnsiToTokenLines(["line one", "", "line two"]);
   expect(lines).toEqual([
-    [ { type: 'znai-ansi-regular', content: 'line one' } ],
+    [{ type: "znai-ansi-regular", content: "line one" }],
     [],
-    [ { type: 'znai-ansi-regular', content: 'line two' } ]
-  ])
-})
+    [{ type: "znai-ansi-regular", content: "line two" }],
+  ]);
+});
