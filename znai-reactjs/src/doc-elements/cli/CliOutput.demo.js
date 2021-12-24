@@ -33,7 +33,7 @@ export function cliOutputDemo(registry) {
             <CliOutput lines={generateAnsiLines()}/>
         ))
         .add('ansi colors', () => (
-            <CliOutput lines={generateAllColors()}/>
+            <CliOutput lines={generateAnsiColors()}/>
         ))
         .add('with revealLineStop and highlight outside presentation', () => (
             <CliOutput lines={generateNonAnsiLines()} highlight={[2, 5]} revealLineStop={[0, 2]}/>
@@ -82,7 +82,8 @@ function generateAnsiLines() {
         '  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200']
 }
 
-function generateAllColors() {
+function generateAnsiColors() {
     return ['\u001b[30m A \u001b[31m B \u001b[32m C \u001b[33m D \u001b[0m',
-        '\u001b[34m E \u001b[35m F \u001b[36m G \u001b[37m H \u001b[0m']
+        '\u001b[34m E \u001b[35m F \u001b[36m G \u001b[37m H \u001b[0m',
+        '\u001B[43;1m\u001B[30mscenario\u001B[0m\u001B[34m\u001B[0m']
 }
