@@ -20,10 +20,7 @@ package org.testingisdocumenting.znai.extensions.file;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -43,11 +40,40 @@ class TextContentExtractor {
         Text croppedAtStart = cropStart(surroundedBy, opts);
         Text croppedAtEnd = cropEnd(croppedAtStart, opts);
 
-        Text withExcludedStartEnd = excludeStartEnd(croppedAtEnd, opts);
+        Text replacedAll = replaceAll(croppedAtEnd, opts);
+
+        Text withExcludedStartEnd = excludeStartEnd(replacedAll, opts);
         Text withIncludeRegexp = includeRegexp(withExcludedStartEnd, opts);
         Text withExcludedRegexp = excludeRegexp(withIncludeRegexp, opts);
 
         return withExcludedRegexp.stripIndentation().toString();
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Text replaceAll(Text text, PluginParamsOpts opts) {
+        List<?> fromToOrListOfFromTo = opts.getList("replaceAll");
+        if (fromToOrListOfFromTo.isEmpty()) {
+            return text;
+        }
+
+        List<List<String>> replacePairsList = new ArrayList<>();
+        if (fromToOrListOfFromTo.get(0) instanceof List) {
+            replacePairsList.addAll((Collection<? extends List<String>>) fromToOrListOfFromTo);
+        } else {
+            replacePairsList.add((List<String>) fromToOrListOfFromTo);
+        }
+
+        Text result = text;
+        for (List<String> fromTo : replacePairsList) {
+            if (fromTo.size() != 2) {
+                throw new IllegalArgumentException("replaceAll expects list with two values [from, to] or a " +
+                        "list of pairs [[from1, to1], [from2, to2]]");
+            }
+
+            result = result.replaceAll(fromTo.get(0), fromTo.get(1));
+        }
+
+        return result;
     }
 
     private static Text cropSurroundedBy(String contentId, Text text, PluginParamsOpts opts) {
@@ -171,6 +197,16 @@ class TextContentExtractor {
             newLines.addAll(another.lines);
 
             return newText(newLines);
+        }
+
+        Text replaceAll(String from, String to) {
+            List<String> replaced = lines.stream().map(line -> line.replaceAll(from, to)).collect(toList());
+            if (replaced.equals(lines)) {
+                throw new IllegalArgumentException("content was not modified using replaceAll from: <" +
+                        from + "> to: <" + to + ">");
+            }
+
+            return newText(replaced);
         }
 
         Text append(String line) {

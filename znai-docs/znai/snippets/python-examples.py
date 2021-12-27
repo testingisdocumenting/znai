@@ -8,7 +8,7 @@ def main():
     # example-end
 
     # example-cancel-trade
-    market.cancel_trade('id')
+    market.cancel_trade(id)
     # example-cancel-trade
 
 if __name__  == "__main__":
