@@ -9,7 +9,7 @@ Use `surroundedBy` to extract code snippet surrounded by a marker
         surroundedBy: "# example-cancel-trade"}
 
 :include-file: python-examples.py {
-  title: "extracted example",
+  title: "extracted result",
   surroundedBy: "# example-cancel-trade"}
 
 # Multiple Surrounded By 
@@ -21,7 +21,7 @@ Pass a list to `surroundedBy` to extract multiple blocks
       surroundedBy: ["# example-import-block", "# example-cancel-trade"]}
 
 :include-file: python-examples.py {
-  title: "extracted example",
+  title: "extracted result",
   surroundedBy: ["# example-import-block", "# example-cancel-trade"]}
 
 Use `surroundedBySeparator` to select separator(s) between blocks
@@ -33,12 +33,57 @@ Use `surroundedBySeparator` to select separator(s) between blocks
     }
 
 :include-file: python-examples.py {
-  title: "extracted example",
+  title: "extracted result",
   surroundedBy: ["# example-import-block", "# example-cancel-trade"],
   surroundedBySeparator: ["..."]
 }
 
 Note: `surroundedBySeparator` can be either single value or a list. Plugin will use a different separator for each block.
+
+# Replace All
+
+Use `replaceAll` to replace content of the resulting snippet
+
+```markdown {highlight: "replaceAll"}
+:include-file: python-examples.py {
+  title: "extracted example",
+  surroundedBy: "# example-cancel-trade",
+  replaceAll: ['id', '"trade_id"']}
+```
+
+:include-file: python-examples.py {
+  title: "replace result",
+  surroundedBy: "# example-cancel-trade",
+  replaceAll: ['id', '"trade_id"']}
+
+Pass a list of lists to `replaceAll` for multiple replaces
+
+```markdown {highlight: "replaceAll"}
+:include-file: python-examples.py {
+  title: "replace example",
+  surroundedBy: "# example-cancel-trade",
+  replaceAll: [['id', '"trade_id"'], ["market", "api"]]}
+```
+
+:include-file: python-examples.py {
+  title: "replace multiple result",
+  surroundedBy: "# example-cancel-trade",
+  replaceAll: [['id', '"trade_id"'], ["market", "api"]]}
+
+# Replace Regexp Groups
+
+Use `$1` regexp capture groups to create derived content
+
+:include-file: replace-all-group.txt {autoTitle: true}
+
+    :include-file: replace-all-group.txt {
+      title: "replace regexp group example",
+      replaceAll: ["(\\w+)(\\d+)", "$2-$1"]}
+
+:include-file: replace-all-group.txt {
+  title: "replace regexp group result",
+  replaceAll: ["(\\w+)(\\d+)", "$2-$1"]}
+
 
 # Start/End Line
 
@@ -60,7 +105,7 @@ By default `startLine` and `endLine` are included in the rendered result. Use `e
         excludeStartEnd: true }
 
 :include-file: python-examples.py {
-  title: "extracted example",
+  title: "extracted result",
   startLine: "example: book trade",
   endLine: "example-end",
   excludeStartEnd: true }
@@ -72,7 +117,7 @@ Use `includeRegexp` to include only lines matching regexp(s).
     :include-file: python-examples.py {includeRegexp: "import"}
     :include-file: python-examples.py {includeRegexp: ["import"]}
 
-:include-file: python-examples.py { includeRegexp: ["import"], title: "include by regexp" }
+:include-file: python-examples.py { includeRegexp: ["import"], title: "include by regexp result" }
 
 # Exclude Regexp
 
@@ -81,5 +126,5 @@ Use `excludeRegexp` to exclude lines matching regexp(s).
     :include-file: python-examples.py {excludeRegexp: "# example"}
     :include-file: python-examples.py {excludeRegexp: ["# example"]}
 
-:include-file: python-examples.py { excludeRegexp: ["# example"], title: "exclude by regexp" }
+:include-file: python-examples.py { excludeRegexp: ["# example"], title: "exclude by regexp result" }
 

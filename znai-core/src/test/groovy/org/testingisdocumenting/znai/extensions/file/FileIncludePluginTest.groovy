@@ -121,6 +121,75 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should replace text by exact match"() {
+        def text = resultingSnippet("file-replace-all.txt",
+                "{replaceAll: ['foo', 'foo2']}")
+
+        text.should == "foo2 foo2 foo2\n" +
+                "bar bar bar\n" +
+                "test12 great16"
+    }
+
+    @Test
+    void "should replace text by exact match using multiple pairs"() {
+        def text = resultingSnippet("file-replace-all.txt",
+                "{replaceAll: [['foo', 'foo2'], ['bar', 'bar3']]}")
+
+        text.should == "foo2 foo2 foo2\n" +
+                "bar3 bar3 bar3\n" +
+                "test12 great16"
+    }
+
+    @Test
+    void "should replace text using match group"() {
+        def text = resultingSnippet("file-replace-all.txt",
+                "{replaceAll: ['test(\\\\d+)', '\$1-TEST']}")
+
+        text.should == "foo foo foo\n" +
+                "bar bar bar\n" +
+                "12-TEST great16"
+    }
+
+    @Test
+    void "should replace text inside surroundBy extracted group"() {
+        def text = resultingSnippet("file-with-multiple-surround-marker.txt",
+                "{surroundedBy: ['# import-list', '# concept-example'], replaceAll: [['abc', 'ABC'], ['bar', 'Bar']]}")
+
+        text.should == 'import ABC\n' +
+                'import def\n' +
+                'foo()\n' +
+                'Bar()'
+    }
+
+    @Test
+    void "should validate replaceAll parameters"() {
+        def expectedError = "replaceAll expects list with two values [from, to] or a list of pairs [[from1, to1], [from2, to2]]"
+
+        code {
+            resultingSnippet("file-replace-all.txt",
+                    "{replaceAll: 'a'}")
+        } should throwException(expectedError)
+
+        code {
+            resultingSnippet("file-replace-all.txt",
+                    "{replaceAll: ['a']}")
+        } should throwException(expectedError)
+
+        code {
+            resultingSnippet("file-replace-all.txt",
+                    "{replaceAll: [['a']]}")
+        } should throwException(expectedError)
+    }
+
+    @Test
+    void "should validate replaceAll actually replaced something"() {
+        code {
+            resultingSnippet("file-replace-all.txt",
+                    "{replaceAll: ['no-match', 'new-value']}")
+        } should throwException("content was not modified using replaceAll from: <no-match> to: <new-value>")
+    }
+
+    @Test
     void "should extract file and exclude first and last line when excludeStartEnd is set and no start end is set"() {
         def text = resultingSnippet("file.txt", "{excludeStartEnd: true}")
 
