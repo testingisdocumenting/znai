@@ -51,7 +51,7 @@ class TextContentExtractor {
 
     @SuppressWarnings("unchecked")
     private static Text replaceAll(Text text, PluginParamsOpts opts) {
-        List<?> fromToOrListOfFromTo = opts.getList("replaceAll");
+        List<?> fromToOrListOfFromTo = opts.getList("replace");
         if (fromToOrListOfFromTo.isEmpty()) {
             return text;
         }
@@ -66,7 +66,7 @@ class TextContentExtractor {
         Text result = text;
         for (List<String> fromTo : replacePairsList) {
             if (fromTo.size() != 2) {
-                throw new IllegalArgumentException("replaceAll expects list with two values [from, to] or a " +
+                throw new IllegalArgumentException("replace expects list with two values [from, to] or a " +
                         "list of pairs [[from1, to1], [from2, to2]]");
             }
 
@@ -202,7 +202,7 @@ class TextContentExtractor {
         Text replaceAll(String from, String to) {
             List<String> replaced = lines.stream().map(line -> line.replaceAll(from, to)).collect(toList());
             if (replaced.equals(lines)) {
-                throw new IllegalArgumentException("content was not modified using replaceAll from: <" +
+                throw new IllegalArgumentException("content was not modified using replace from: <" +
                         from + "> to: <" + to + ">");
             }
 

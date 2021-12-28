@@ -1,1 +1,0 @@
-* Add [Replace All](snippets/snippets-manipulation#replace-all) snippet manipulation 

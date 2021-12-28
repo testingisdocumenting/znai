@@ -40,35 +40,34 @@ Use `surroundedBySeparator` to select separator(s) between blocks
 
 Note: `surroundedBySeparator` can be either single value or a list. Plugin will use a different separator for each block.
 
-# Replace All
+# Replace
 
-Use `replaceAll` to replace content of the resulting snippet
+Use `replace` to replace content of the resulting snippet
 
-```markdown {highlight: "replaceAll"}
+```markdown {highlight: "replace"}
 :include-file: python-examples.py {
-  title: "extracted example",
   surroundedBy: "# example-cancel-trade",
-  replaceAll: ['id', '"trade_id"']}
+  replace: ['id', '"trade_id"'] }
 ```
 
 :include-file: python-examples.py {
-  title: "replace result",
   surroundedBy: "# example-cancel-trade",
-  replaceAll: ['id', '"trade_id"']}
+  replace: ['id', '"trade_id"'],
+  title: "replace result"
+}
 
-Pass a list of lists to `replaceAll` for multiple replaces
+Pass a list of lists to `replace` for multiple replaces
 
-```markdown {highlight: "replaceAll"}
+```markdown {highlight: "replace"}
 :include-file: python-examples.py {
-  title: "replace example",
   surroundedBy: "# example-cancel-trade",
-  replaceAll: [['id', '"trade_id"'], ["market", "api"]]}
+  replace: [['id', '"trade_id"'], ["market", "api"]]}
 ```
 
 :include-file: python-examples.py {
   title: "replace multiple result",
   surroundedBy: "# example-cancel-trade",
-  replaceAll: [['id', '"trade_id"'], ["market", "api"]]}
+  replace: [['id', '"trade_id"'], ["market", "api"]]}
 
 # Replace Regexp Groups
 
@@ -76,13 +75,11 @@ Use `$1` regexp capture groups to create derived content
 
 :include-file: replace-all-group.txt {autoTitle: true}
 
-    :include-file: replace-all-group.txt {
-      title: "replace regexp group example",
-      replaceAll: ["(\\w+)(\\d+)", "$2-$1"]}
+    :include-file: replace-all-group.txt {replace: ["(\\w+)(\\d+)", "$2-$1"]}
 
 :include-file: replace-all-group.txt {
   title: "replace regexp group result",
-  replaceAll: ["(\\w+)(\\d+)", "$2-$1"]}
+  replace: ["(\\w+)(\\d+)", "$2-$1"]}
 
 
 # Start/End Line
