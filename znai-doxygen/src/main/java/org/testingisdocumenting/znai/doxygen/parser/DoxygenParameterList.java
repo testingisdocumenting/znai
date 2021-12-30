@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.doxygen.parser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class DoxygenParameterList {
@@ -36,6 +37,14 @@ public class DoxygenParameterList {
         return list.stream()
                 .map(DoxygenParameter::toMap)
                 .collect(Collectors.toList());
+    }
+
+    public String generateCommaSeparatedTypes() {
+        return list.stream()
+                .map(p -> p.getType().buildCombinedText()
+                        .replace(" &", "&")
+                        .replace(" *", "*"))
+                .collect(Collectors.joining(","));
     }
 
     public DoxygenParameter findByName(String name) {

@@ -14,10 +14,13 @@
 <codeline lineno="7"><highlight class="normal"><ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref><sp/>another_func(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref>&amp;<sp/>one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">utils::second::AnotherClass</ref>&amp;<sp/>two)<sp/>{</highlight></codeline>
 <codeline lineno="8"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>my_func(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>second_param)<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref><sp/>func_with_pointers(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref>*<sp/>one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">utils::second::AnotherClass</ref>*<sp/>two)<sp/>{</highlight></codeline>
 <codeline lineno="11"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>my_func(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>second_param)<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="src/funcs_three.h"/>
   </compounddef>

@@ -46,7 +46,7 @@ class DoxygenMemberListExtractor {
             membersList = doxygen.findAndParseAllMembers(componentsRegistry, fullName);
             DoxygenMember memberByArgs = membersList.findByArgs(argsToFilter);
             if (memberByArgs == null) {
-                throw new RuntimeException("can't find member " + fullName + " with args: " + argsToFilter + ", " +
+                throw new RuntimeException("can't find member " + fullName + " with args: <" + argsToFilter + "> " +
                         "available args:\n" + membersList.renderAvailableArgs());
             }
 

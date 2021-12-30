@@ -26,6 +26,7 @@
     <member refid="funcs_8h_1a5049cb5e6566fcb928af1f05dee569cd" kind="function"><name>my_func</name></member>
     <member refid="funcs_8h_1a473e2055917748ea18369f55f9226ae8" kind="function"><name>my_func</name></member>
     <member refid="funcs__three_8h_1a4932db5d1f6b4553535635906bffa3a5" kind="function"><name>another_func</name></member>
+    <member refid="funcs__three_8h_1a7e10476cb199c45ac5547997999af371" kind="function"><name>func_with_pointers</name></member>
     <member refid="funcs__three_8h_1a64e30b24d77cedacf813d8e910ea8c7a" kind="function"><name>my_func</name></member>
     <member refid="funcs__two_8h_1a84ee829975e83205e4d19ad95d193e7f" kind="function"><name>their_func</name></member>
     <member refid="funcs__two_8h_1aba9044a671c9870fc6616d5968d283b1" kind="function"><name>their_func</name></member>
