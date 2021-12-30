@@ -32,9 +32,9 @@ Note: Plugin ignores parameters block and only includes the description text
 
 Use `args` param to pick an overload to use for comments extraction
 
-    :include-doxygen-doc: utils::nested::my_func { title: "My Params", args: "(int first_param)" }
+    :include-doxygen-doc: utils::nested::my_func { title: "My Params", args: "int" }
 
-:include-doxygen-doc: utils::nested::my_func { title: "My Params", args: "(int first_param)" }
+:include-doxygen-doc: utils::nested::my_func { title: "My Params", args: "int" }
 
 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to
 copy and paste.
@@ -82,9 +82,9 @@ Use `signatureOnly: true` parameter to render only member signature
 
 Use `args` to select a specific overload by providing parameters string
 
-    :include-doxygen-member: utils::nested::their_func { args: "(long param1, bool param3)" }
+    :include-doxygen-member: utils::nested::their_func { args: "long, bool" }
 
-:include-doxygen-member: utils::nested::their_func { args: "(long param1, bool param3)", disableAnchor: true }
+:include-doxygen-member: utils::nested::their_func { args: "long, bool", disableAnchor: true }
 
 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to 
 copy and paste.
@@ -105,9 +105,9 @@ Use `small: true` option to make parameters smaller
 
 Use `args` to select a specific overload by providing parameters string
 
-    :include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "(int first_param)" }
+    :include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "int" }
 
-:include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "(int first_param)" }
+:include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "int" }
 
 # Extract Template Parameters
 

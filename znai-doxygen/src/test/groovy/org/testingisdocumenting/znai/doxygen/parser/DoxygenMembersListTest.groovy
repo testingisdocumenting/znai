@@ -18,12 +18,14 @@ package org.testingisdocumenting.znai.doxygen.parser
 
 import org.junit.Test
 
-class DoxygenMemberTest {
+class DoxygenMembersListTest {
     @Test
-    void "should match by args"() {
-        def member = new DoxygenMember(
-                normalizedParamsSignature: "const utils::second::MyClass&,const utils::second::AnotherClass&")
+    void "should find member by non-normalized args"() {
+        def list = new DoxygenMembersList()
+        list.add(new DoxygenMember(id: "id1", name: "n1", normalizedParamsSignature: "int,const std::string&"))
+        list.add(new DoxygenMember(id: "id2", name: "n1", normalizedParamsSignature: "bool,const std::string*"))
 
-        member.matchesArgs("const utils::second::MyClass&,const utils::second::AnotherClass&").should == true
+        list.findByArgs("int,   const std::string & ").id.should == "id1"
+        list.findByArgs("   bool,const   std::string  * ").id.should == "id2"
     }
 }

@@ -32,7 +32,9 @@ public class DoxygenMember {
     private DoxygenDescription description;
     private String visibility;
     private String kind;
-    private String args;
+
+    private String normalizedParamsSignature;
+
     private boolean isVirtual;
     private boolean isStatic;
     private boolean isConst;
@@ -52,6 +54,14 @@ public class DoxygenMember {
 
     public void addParameter(String name, ApiLinkedText type) {
         parameters.add(new DoxygenParameter(name, type));
+    }
+
+    public String getNormalizedParamsSignature() {
+        return normalizedParamsSignature;
+    }
+
+    protected void buildNormalizedParamsSignature() {
+        normalizedParamsSignature = parameters.generateCommaSeparatedTypes();
     }
 
     public void addTemplateParameter(String name, ApiLinkedText type) {
@@ -86,20 +96,8 @@ public class DoxygenMember {
         this.name = name;
     }
 
-    public String getArgs() {
-        return args;
-    }
-
-    public void setArgs(String args) {
-        this.args = args;
-    }
-
-    public boolean matchesArgs(String argsToMatch) {
-        if (!argsToMatch.startsWith("(")) {
-            argsToMatch = "(" + argsToMatch + ")";
-        }
-
-        return args.equals(argsToMatch);
+    public boolean matchesArgs(String normalizedArgsToMatch) {
+        return normalizedParamsSignature.equals(normalizedArgsToMatch);
     }
 
     public String getFullName() {

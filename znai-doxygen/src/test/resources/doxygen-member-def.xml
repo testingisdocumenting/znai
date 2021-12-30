@@ -37,7 +37,7 @@
                     <declname>one</declname>
                 </param>
                 <param>
-                    <type>const <ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">utils::second::AnotherClass</ref> &amp;</type>
+                    <type>const <ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">utils::second::AnotherClass</ref> *</type>
                     <declname>two</declname>
                 </param>
                 <briefdescription>

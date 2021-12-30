@@ -11,8 +11,10 @@
     <programlisting>
 <codeline lineno="1"><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">math<sp/>{</highlight></codeline>
-<codeline lineno="14" refid="math_8h_1a0b2d8c3d7f189b107fcdfb5e40ab694c" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="math_8h_1a0b2d8c3d7f189b107fcdfb5e40ab694c" kindref="member">add</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>b);</highlight></codeline>
-<codeline lineno="15"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>math-add</highlight></codeline>
+<codeline lineno="15" refid="math_8h_1a0b2d8c3d7f189b107fcdfb5e40ab694c" refkind="member"><highlight class="comment"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="math_8h_1a0b2d8c3d7f189b107fcdfb5e40ab694c" kindref="member">add</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>b);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>math-add</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="src/math.h"/>
   </compounddef>

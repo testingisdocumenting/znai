@@ -50,13 +50,23 @@ public class DoxygenMembersList {
     }
 
     public DoxygenMember findByArgs(String args) {
+        String normalizedArg = normalizeArgs(args);
+
         return members.stream()
-                .filter(member -> member.matchesArgs(args))
+                .filter(member -> member.matchesArgs(normalizedArg))
                 .findFirst()
                 .orElse(null);
     }
 
     public String renderAvailableArgs() {
-        return members.stream().map(DoxygenMember::getArgs).collect(Collectors.joining("\n"));
+        return members.stream().map(DoxygenMember::getNormalizedParamsSignature).collect(Collectors.joining("\n"));
+    }
+
+    private static String normalizeArgs(String args) {
+        return args.trim()
+                .replaceAll(",\\s+", ",")
+                .replaceAll("\\s+", " ")
+                .replaceAll(" &", "&")
+                .replaceAll(" \\*", "*");
     }
 }

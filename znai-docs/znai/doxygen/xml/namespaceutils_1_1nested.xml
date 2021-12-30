@@ -126,6 +126,27 @@
         </inbodydescription>
         <location file="src/funcs_three.h" line="7" column="24" bodyfile="src/funcs_three.h" bodystart="7" bodyend="8"/>
       </memberdef>
+      <memberdef kind="function" id="funcs__three_8h_1a7e10476cb199c45ac5547997999af371" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref></type>
+        <definition>utils::second::MyClass utils::nested::func_with_pointers</definition>
+        <argsstring>(const utils::second::MyClass *one, const utils::second::AnotherClass *two)</argsstring>
+        <name>func_with_pointers</name>
+        <param>
+          <type>const <ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref> *</type>
+          <declname>one</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">utils::second::AnotherClass</ref> *</type>
+          <declname>two</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/funcs_three.h" line="10" column="24" bodyfile="src/funcs_three.h" bodystart="10" bodyend="11"/>
+      </memberdef>
       <memberdef kind="function" id="funcs__three_8h_1a64e30b24d77cedacf813d8e910ea8c7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void utils::nested::my_func</definition>
@@ -141,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/funcs_three.h" line="10" column="6" bodyfile="src/funcs_three.h" bodystart="10" bodyend="11"/>
+        <location file="src/funcs_three.h" line="13" column="6" bodyfile="src/funcs_three.h" bodystart="13" bodyend="14"/>
       </memberdef>
       <memberdef kind="function" id="funcs__two_8h_1a84ee829975e83205e4d19ad95d193e7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
