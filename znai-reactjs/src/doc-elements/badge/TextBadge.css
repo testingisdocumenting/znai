@@ -21,7 +21,6 @@
     color: var(--znai-text-badge-text-color);
 
     font-size: var(--znai-smaller-text-size);
-    font-weight: 700;
     line-height: 1;
     text-align: center;
     white-space: nowrap;

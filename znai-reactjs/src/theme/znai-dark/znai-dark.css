@@ -93,6 +93,9 @@
     --znai-search-popup-input-box-background-color: #3c484e;
     --znai-search-popup-input-box-color: var(--znai-regular-text-color);
 
+    --znai-text-badge-background-color: #9db1c1;
+    --znai-text-badge-text-color: #01000a;
+
     --znai-landing-border-color: var(--znai-search-border-color);
     --znai-landing-category-color: var(--znai-brand-primary-color);
     --znai-landing-card-title-border-color: #333;

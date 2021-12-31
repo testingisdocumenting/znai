@@ -33,7 +33,7 @@ import SimpleCodeSnippet from './SimpleCodeSnippet'
 import {parseCode} from './codeParser'
 import {countNumberOfLines} from "../../utils/strings";
 
-import BulletExplanations from './explanations/BulletExplanations';
+import { SnippetBulletExplanations } from './explanations/SnippetBulletExplanations';
 
 import './Snippet.css'
 
@@ -89,8 +89,8 @@ function Explanations({commentsType, spoiler, isPresentation, slideIdx, comments
         return null
     }
 
-    return <BulletExplanations spoiler={spoiler}
-                               comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
+    return <SnippetBulletExplanations spoiler={spoiler}
+                                      comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
 }
 
 

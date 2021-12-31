@@ -18,7 +18,7 @@
 import React from 'react'
 
 import LineOfTokens from './LineOfTokens'
-import CircleBadge from './explanations/CircleBadge'
+import { SnippetCircleBadge } from './explanations/SnippetCircleBadge'
 
 import {isAllAtOnce} from '../meta/meta'
 import {
@@ -70,7 +70,9 @@ const CodeSnippetWithInlineComments = ({tokens, references, isPresentation, meta
                                          endOfLineRender={() => {
                                              const bulletIdxForLine = bulletIdxesPerLineIdx[idx]
                                              return bulletIdxForLine ?
-                                                 <CircleBadge idx={bulletIdxForLine} className="left-margin"/> :
+                                                 <SnippetCircleBadge idx={bulletIdxForLine}
+                                                                     tooltip="test"
+                                                                     className="left-margin"/> :
                                                  null
                                          }}
                     />

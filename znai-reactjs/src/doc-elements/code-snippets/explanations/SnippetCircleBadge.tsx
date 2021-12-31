@@ -15,25 +15,17 @@
  * limitations under the License.
  */
 
-.znai-circle-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+import React from "react";
 
-    font-family: var(--znai-code-font-family);
-    font-size: 11px;
-    color: var(--znai-snippets-bullet-color);
-    background-color: var(--znai-snippets-bullet-background-color);
+import "./SnippetCircleBadge.css";
 
-    border-radius: 10px;
-    min-height: 20px;
-    min-width: 20px;
-
-    padding: 1px;
-    margin-top: 1px;
-    margin-bottom: 1px;
+interface Props {
+  idx: number;
+  tooltip?: string;
+  className?: string;
 }
 
-.znai-circle-badge.left-margin {
-    margin-left: 8px;
+export function SnippetCircleBadge({ className, idx, tooltip }: Props) {
+  const fullClassName = "znai-circle-badge" + (className ? " " + className : "");
+  return <span className={fullClassName}>{idx}</span>;
 }
