@@ -20,12 +20,10 @@ import "./TextBadge.css";
 
 interface Props {
   text: string;
+  useExtraLeftMargin?: boolean;
 }
 
-export function TextBadge({text}: Props) {
-  return (
-    <span className="znai-text-badge">
-      {text}
-    </span>
-  );
+export function TextBadge({ text, useExtraLeftMargin }: Props) {
+  const className = "znai-text-badge" + (useExtraLeftMargin ? " znai-text-badge-left-margin" : "");
+  return <span className={className}>{text}</span>;
 }

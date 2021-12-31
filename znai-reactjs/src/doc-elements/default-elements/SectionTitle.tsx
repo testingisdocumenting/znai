@@ -38,7 +38,7 @@ export function SectionTitle({ id, title, badge, style }: Props) {
     // @ts-ignore
     <h1 className={className} id={id}>
       {title}
-      {badge && <TextBadge text={badge} />}
+      {badge && <TextBadge text={badge} useExtraLeftMargin={true} />}
       <div className="znai-section-title-actions">
         <a href={"#" + id}>
           <Icon id="link" />
