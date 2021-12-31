@@ -1,0 +1,1 @@
+* Extra spacing between section title and [its badge](visuals/text-badge#part-of-heading)  
