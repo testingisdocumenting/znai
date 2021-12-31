@@ -1,0 +1,1 @@
+* Color tweaks for [code snippet bullet points](snippets/code-comments#callout-comments) and [text badge](visuals/text-badge) for light and dark theme  

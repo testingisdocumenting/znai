@@ -40,7 +40,7 @@ function javaWithComments() {
 
 function wideCode() {
     return 'class InternationalPriceService implements PriceService {\n' +
-        '    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n' +
+        '    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { // this one is long wow many text goes here still yeah\n' +
         '        ... // code goes here\n' +
         '    } // code stops here\n' +
         '}\n'

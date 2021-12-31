@@ -144,8 +144,8 @@
     --znai-snippets-background-color: #f8fafc;
     --znai-snippets-outer-border-color: #ddd;
     --znai-snippets-inner-border-color: #f3f3f3;
-    --znai-snippets-bullet-color: #eee;
-    --znai-snippets-bullet-background-color: var(--znai-brand-primary-color);
+    /*--znai-snippets-bullet-color: #eee;*/
+    /*--znai-snippets-bullet-background-color: var(--znai-brand-primary-color);*/
     --znai-snippets-title-color: #555;
     --znai-snippets-title-background-color: #efeff1;
     --znai-snippets-title-left-border-color: var(--znai-light-black);
@@ -174,7 +174,7 @@
     --znai-attention-question-color: var(--znai-color-green);
     --znai-attention-question-background-color: #59a65a15;
 
-    --znai-text-badge-background-color: #0367c5;
+    --znai-text-badge-background-color: #06437c;
     --znai-text-badge-text-color: #eee;
 
     --znai-table-body-background-color: #fff;

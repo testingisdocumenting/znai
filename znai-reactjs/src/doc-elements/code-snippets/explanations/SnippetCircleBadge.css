@@ -1,0 +1,67 @@
+/*
+ * Copyright 2020 znai maintainers
+ * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.znai-circle-badge {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--znai-code-font-family);
+    font-size: 11px;
+    color: var(--znai-text-badge-text-color);
+    background-color: var(--znai-text-badge-background-color);
+
+    border-radius: 10px;
+    min-height: 20px;
+    min-width: 20px;
+
+    padding: 1px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+
+    cursor: default;
+}
+
+.znai-circle-badge-tooltip {
+    position: absolute;
+    left: 100%;
+
+    display: none;
+    width: 120px;
+
+    background-color: black;
+    color: #fff;
+
+    text-align: center;
+
+    padding: 5px 0;
+    border-radius: 6px;
+
+    margin-top: 8px;
+
+    z-index: 1;
+}
+
+.znai-circle-badge:hover .znai-circle-badge-tooltip {
+    display: block;
+}
+
+.znai-circle-badge.left-margin {
+    margin-left: 8px;
+}
