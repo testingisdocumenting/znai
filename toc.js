@@ -306,9 +306,35 @@ toc = [ {
     }, {
       "title" : "Highlights",
       "id" : "highlights"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Snippets Manipulation",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "snippets-manipulation",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Surrounded By",
+      "id" : "surrounded-by"
     }, {
-      "title" : "Extract Snippets",
-      "id" : "extract-snippets"
+      "title" : "Multiple Surrounded By",
+      "id" : "multiple-surrounded-by"
+    }, {
+      "title" : "Replace",
+      "id" : "replace"
+    }, {
+      "title" : "Replace Regexp Groups",
+      "id" : "replace-regexp-groups"
+    }, {
+      "title" : "Start/End Line",
+      "id" : "startend-line"
+    }, {
+      "title" : "Include Regexp",
+      "id" : "include-regexp"
+    }, {
+      "title" : "Exclude Regexp",
+      "id" : "exclude-regexp"
     } ]
   }, {
     "sectionTitle" : "Snippets",

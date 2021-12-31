@@ -113,11 +113,6 @@
 <header><h1>Highlights</h1></header>
 <p>Use the highlight option to bring readers attention to the important lines. :include-file: file-name.js {highlight: &quot;export&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. :include-file: file-name.js {highlight: [&quot;export&quot;, 1]} class JsClass { constructor() { usefulAction() } } export default JsClass Note: Order of lines to highlight is reflected during presentation modeUse the highlightPath option to highlight lines specified in a separate file. :include-file: file-name.js {highlightPath: &quot;lines-to-highlight.txt&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass class usefulAction</p>
 </article>
-
-<article>
-<header><h1>Extract Snippets</h1></header>
-<p>Use startLine , endLine to extract specific content by using marker lines. import market def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade('id') # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py {startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;, excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) Use surroundedBy and the same marker for start/end to streamline the snippets extract process :include-file: python-examples.py { title: &quot;extracted example with surroundedBy&quot;, surroundedBy: &quot;# example-cancel-trade&quot;} market.cancel_trade('id') Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: &quot;import&quot;} :include-file: python-examples.py {includeRegexp: [&quot;import&quot;]} import market Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: &quot;# example&quot;} :include-file: python-examples.py {excludeRegexp: [&quot;# example&quot;]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade('id') if __name__ == &quot;__main__&quot;: main()</p>
-</article>
 </section>
 </div>
 <!--test extension added comment-->
@@ -572,166 +567,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "lines-to-highlight.txt",
         "lang" : "txt"
       } ]
-    }, {
-      "id" : "extract-snippets",
-      "type" : "Section",
-      "title" : "Extract Snippets",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "startLine",
-          "type" : "InlinedCode"
-        }, {
-          "text" : ", ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "endLine",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to extract specific content by using marker lines.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "import market\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example-cancel-trade\n    market.cancel_trade('id')\n    # example-cancel-trade\n\nif __name__  == \"__main__\":\n    main()",
-        "type" : "Snippet",
-        "title" : "file with examples",
-        "lang" : "py"
-      }, {
-        "snippet" : ":include-file: python-examples.py {startLine: \"example: book trade\", endLine: \"example-end\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "endLine" : "example-end",
-        "snippet" : "# example: book trade\nid = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n# example-end",
-        "startLine" : "example: book trade",
-        "type" : "Snippet",
-        "title" : "extracted example",
-        "lang" : "py"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Note: Lines match doesn't have to be exact, ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "contains",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " is used.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "By default ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "startLine",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " and ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "endLine",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " are included in the rendered result. Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "excludeStartEnd: true",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to remove markers.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-file: python-examples.py { \n    startLine: \"example: book trade\",\n    endLine: \"example-end\",\n    excludeStartEnd: true }\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "endLine" : "example-end",
-        "snippet" : "id = market.book_trade('symbol', market.CURRENT_PRICE, 100)",
-        "excludeStartEnd" : true,
-        "startLine" : "example: book trade",
-        "type" : "Snippet",
-        "title" : "extracted example",
-        "lang" : "py"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "surroundedBy",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " and the same marker for start/end to streamline the snippets extract process",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-file: python-examples.py {\n    title: \"extracted example with surroundedBy\",\n    surroundedBy: \"# example-cancel-trade\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "market.cancel_trade('id')",
-        "surroundedBy" : "# example-cancel-trade",
-        "type" : "Snippet",
-        "title" : "extracted example with surroundedBy",
-        "lang" : "py"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "includeRegexp",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to include only lines matching regexp(s).",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-file: python-examples.py {includeRegexp: \"import\"}\n:include-file: python-examples.py {includeRegexp: [\"import\"]}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "import market",
-        "type" : "Snippet",
-        "title" : "include by regexp",
-        "lang" : "py",
-        "includeRegexp" : [ "import" ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "excludeRegexp",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to exclude lines matching regexp(s).",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-file: python-examples.py {excludeRegexp: \"# example\"}\n:include-file: python-examples.py {excludeRegexp: [\"# example\"]}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "import market\n\ndef main():\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n\n    market.cancel_trade('id')\n\nif __name__  == \"__main__\":\n    main()",
-        "excludeRegexp" : [ "# example" ],
-        "type" : "Snippet",
-        "title" : "exclude by regexp",
-        "lang" : "py"
-      } ]
     } ],
-    "lastModifiedTime" : 1638365049090,
+    "lastModifiedTime" : 1640992968674,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
@@ -757,9 +594,6 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Highlights",
         "id" : "highlights"
-      }, {
-        "title" : "Extract Snippets",
-        "id" : "extract-snippets"
       } ]
     }
   }

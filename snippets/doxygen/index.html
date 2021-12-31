@@ -96,7 +96,7 @@
 
 <article>
 <header><h1>Extract Comment Text</h1></header>
-<p>Members Comment Text Use include-doxygen-doc to extract a function description namespace utils { namespace nested { /** * top **level** comment *of* important * * list one * * list two * * list three * * 1. number one * 2. number two * * @param first_param description of first *param* * 1. item a * 2. item b * @param second_param description of second param */ void my_func(int first_param, bool second_param) { } /** * specific description for single param version * @param first_param description of first *param* * 1. item a * 2. item b */ void my_func(int first_param) { } } } void free_func() { } :include-doxygen-doc: utils::nested::my_func top level comment of important list one list two list three number one number two Note: Plugin ignores parameters block and only includes the description text Member Args Selection Use args param to pick an overload to use for comments extraction :include-doxygen-doc: utils::nested::my_func { title: &quot;My Params&quot;, args: &quot;(int first_param)&quot; } specific description for single param version Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste. Classes Comment Text To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements.</p>
+<p>Members Comment Text Use include-doxygen-doc to extract a function description namespace utils { namespace nested { /** * top **level** comment *of* important * * list one * * list two * * list three * * 1. number one * 2. number two * * @param first_param description of first *param* * 1. item a * 2. item b * @param second_param description of second param */ void my_func(int first_param, bool second_param) { } /** * specific description for single param version * @param first_param description of first *param* * 1. item a * 2. item b */ void my_func(int first_param) { } } } void free_func() { } :include-doxygen-doc: utils::nested::my_func top level comment of important list one list two list three number one number two Note: Plugin ignores parameters block and only includes the description text Member Args Selection Use args param to pick an overload to use for comments extraction :include-doxygen-doc: utils::nested::my_func { title: &quot;My Params&quot;, args: &quot;int&quot; } specific description for single param version Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste. Classes Comment Text To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements.</p>
 </article>
 
 <article>
@@ -116,7 +116,7 @@
 
 <article>
 <header><h1>Specific Member By Args</h1></header>
-<p>Use args to select a specific overload by providing parameters string :include-doxygen-member: utils::nested::their_func { args: &quot;(long param1, bool param3)&quot; } Description of what and why for their_func param1 long description of param1 param3 bool description of param3 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.</p>
+<p>Use args to select a specific overload by providing parameters string :include-doxygen-member: utils::nested::their_func { args: &quot;long, bool&quot; } Description of what and why for their_func param1 long description of param1 param3 bool description of param3 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.</p>
 </article>
 
 <article>
@@ -126,7 +126,7 @@
 
 <article>
 <header><h1>Extract Parameters By Args</h1></header>
-<p>Use args to select a specific overload by providing parameters string :include-doxygen-doc-params: utils::nested::my_func { title: &quot;My Params&quot;, args: &quot;(int first_param)&quot; } first_param int description of first param item a item b</p>
+<p>Use args to select a specific overload by providing parameters string :include-doxygen-doc-params: utils::nested::my_func { title: &quot;My Params&quot;, args: &quot;int&quot; } first_param int description of first param item a item b</p>
 </article>
 
 <article>
@@ -410,7 +410,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-doxygen-doc: utils::nested::my_func { title: \"My Params\", args: \"(int first_param)\" }\n",
+        "snippet" : ":include-doxygen-doc: utils::nested::my_func { title: \"My Params\", args: \"int\" }\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
@@ -940,7 +940,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-doxygen-member: utils::nested::their_func { args: \"(long param1, bool param3)\" }\n",
+        "snippet" : ":include-doxygen-member: utils::nested::their_func { args: \"long, bool\" }\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
@@ -999,7 +999,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "small" : true,
-        "args" : "(long param1, bool param3)",
+        "args" : "long, bool",
         "disableAnchor" : true,
         "type" : "ApiParameters",
         "parameters" : [ {
@@ -1217,12 +1217,12 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-doxygen-doc-params: utils::nested::my_func { title: \"My Params\", args: \"(int first_param)\" }\n",
+        "snippet" : ":include-doxygen-doc-params: utils::nested::my_func { title: \"My Params\", args: \"int\" }\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
       }, {
-        "args" : "(int first_param)",
+        "args" : "int",
         "type" : "ApiParameters",
         "title" : "My Params",
         "parameters" : [ {
@@ -2259,7 +2259,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1638365049090,
+    "lastModifiedTime" : 1640992968674,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Doxygen",

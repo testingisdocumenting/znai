@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: Snippets Manipulation</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Surrounded By</h1></header>
+<p>Use surroundedBy to extract code snippet surrounded by a marker # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py { title: &quot;extracted example with surroundedBy&quot;, surroundedBy: &quot;# example-cancel-trade&quot;} market.cancel_trade(id)</p>
+</article>
+
+<article>
+<header><h1>Multiple Surrounded By</h1></header>
+<p>Pass a list to surroundedBy to extract multiple blocks :include-file: python-examples.py { title: &quot;extracted example&quot;, surroundedBy: [&quot;# example-import-block&quot;, &quot;# example-cancel-trade&quot;]} import market market.cancel_trade(id) Use surroundedBySeparator to select separator(s) between blocks :include-file: python-examples.py { title: &quot;extracted example&quot;, surroundedBy: [&quot;# example-import-block&quot;, &quot;# example-cancel-trade&quot;], surroundedBySeparator: [&quot;...&quot;] } import market ... market.cancel_trade(id) Note: surroundedBySeparator can be either single value or a list. Plugin will use a different separator for each block.</p>
+</article>
+
+<article>
+<header><h1>Replace</h1></header>
+<p>Use replace to replace content of the resulting snippet markdown :include-file: python-examples.py { surroundedBy: &quot;# example-cancel-trade&quot;, replace: ['id', '&quot;trade_id&quot;'] } market.cancel_trade(&quot;trade_id&quot;) Pass a list of lists to replace for multiple replaces markdown :include-file: python-examples.py { surroundedBy: &quot;# example-cancel-trade&quot;, replace: [['id', '&quot;trade_id&quot;'], [&quot;market&quot;, &quot;api&quot;]]} api.cancel_trade(&quot;trade_id&quot;)</p>
+</article>
+
+<article>
+<header><h1>Replace Regexp Groups</h1></header>
+<p>Use $1 regexp capture groups to create derived content hello1 world2 another3 line4 :include-file: replace-all-group.txt {replace: [&quot;(\\w+)(\\d+)&quot;, &quot;$2-$1&quot;]} 1-hello 2-world 3-another 4-line</p>
+</article>
+
+<article>
+<header><h1>Start/End Line</h1></header>
+<p>Use startLine , endLine to extract specific content by using marker lines. # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py {startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;, excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100)</p>
+</article>
+
+<article>
+<header><h1>Include Regexp</h1></header>
+<p>Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: &quot;import&quot;} :include-file: python-examples.py {includeRegexp: [&quot;import&quot;]} # example-import-block import market # example-import-block</p>
+</article>
+
+<article>
+<header><h1>Exclude Regexp</h1></header>
+<p>Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: &quot;# example&quot;} :include-file: python-examples.py {excludeRegexp: [&quot;# example&quot;]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id) if __name__ == &quot;__main__&quot;: main()</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/global-anchors.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View On GitHub"
+    },
+    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/issues"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "surrounded-by",
+      "type" : "Section",
+      "title" : "Surrounded By",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "surroundedBy",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to extract code snippet surrounded by a marker",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "# example-import-block\nimport market\n# example-import-block\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example-cancel-trade\n    market.cancel_trade(id)\n    # example-cancel-trade\n\nif __name__  == \"__main__\":\n    main()",
+        "type" : "Snippet",
+        "title" : "file with examples",
+        "lang" : "py"
+      }, {
+        "snippet" : ":include-file: python-examples.py {\n    title: \"extracted example with surroundedBy\",\n    surroundedBy: \"# example-cancel-trade\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "market.cancel_trade(id)",
+        "surroundedBy" : "# example-cancel-trade",
+        "type" : "Snippet",
+        "title" : "extracted result",
+        "lang" : "py"
+      } ]
+    }, {
+      "id" : "multiple-surrounded-by",
+      "type" : "Section",
+      "title" : "Multiple Surrounded By",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass a list to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "surroundedBy",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to extract multiple blocks",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-file: python-examples.py {\n  title: \"extracted example\",\n  surroundedBy: [\"# example-import-block\", \"# example-cancel-trade\"]}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "import market\nmarket.cancel_trade(id)",
+        "surroundedBy" : [ "# example-import-block", "# example-cancel-trade" ],
+        "type" : "Snippet",
+        "title" : "extracted result",
+        "lang" : "py"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "surroundedBySeparator",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to select separator(s) between blocks",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-file: python-examples.py {\n  title: \"extracted example\",\n  surroundedBy: [\"# example-import-block\", \"# example-cancel-trade\"],\n  surroundedBySeparator: [\"...\"]\n}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "import market\n...\nmarket.cancel_trade(id)",
+        "surroundedBy" : [ "# example-import-block", "# example-cancel-trade" ],
+        "type" : "Snippet",
+        "surroundedBySeparator" : [ "..." ],
+        "title" : "extracted result",
+        "lang" : "py"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "surroundedBySeparator",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " can be either single value or a list. Plugin will use a different separator for each block.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "replace",
+      "type" : "Section",
+      "title" : "Replace",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "replace",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to replace content of the resulting snippet",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-file: python-examples.py {\n  surroundedBy: \"# example-cancel-trade\",\n  replace: ['id', '\"trade_id\"'] }\n",
+        "highlight" : [ 2 ],
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : "markdown"
+      }, {
+        "snippet" : "market.cancel_trade(\"trade_id\")",
+        "surroundedBy" : "# example-cancel-trade",
+        "replace" : [ "id", "\"trade_id\"" ],
+        "type" : "Snippet",
+        "title" : "replace result",
+        "lang" : "py"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass a list of lists to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "replace",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " for multiple replaces",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-file: python-examples.py {\n  surroundedBy: \"# example-cancel-trade\",\n  replace: [['id', '\"trade_id\"'], [\"market\", \"api\"]]}\n",
+        "highlight" : [ 2 ],
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : "markdown"
+      }, {
+        "snippet" : "api.cancel_trade(\"trade_id\")",
+        "surroundedBy" : "# example-cancel-trade",
+        "replace" : [ [ "id", "\"trade_id\"" ], [ "market", "api" ] ],
+        "type" : "Snippet",
+        "title" : "replace multiple result",
+        "lang" : "py"
+      } ]
+    }, {
+      "id" : "replace-regexp-groups",
+      "type" : "Section",
+      "title" : "Replace Regexp Groups",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "$1",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " regexp capture groups to create derived content",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "hello1 world2\nanother3 line4",
+        "type" : "Snippet",
+        "title" : "replace-all-group.txt",
+        "autoTitle" : true,
+        "lang" : "txt"
+      }, {
+        "snippet" : ":include-file: replace-all-group.txt {replace: [\"(\\\\w+)(\\\\d+)\", \"$2-$1\"]}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "1-hello 2-world\n3-another 4-line",
+        "replace" : [ "(\\w+)(\\d+)", "$2-$1" ],
+        "type" : "Snippet",
+        "title" : "replace regexp group result",
+        "lang" : "txt"
+      } ]
+    }, {
+      "id" : "startend-line",
+      "type" : "Section",
+      "title" : "Start/End Line",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "startLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "endLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to extract specific content by using marker lines.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "# example-import-block\nimport market\n# example-import-block\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example-cancel-trade\n    market.cancel_trade(id)\n    # example-cancel-trade\n\nif __name__  == \"__main__\":\n    main()",
+        "type" : "Snippet",
+        "title" : "file with examples",
+        "lang" : "py"
+      }, {
+        "snippet" : ":include-file: python-examples.py {startLine: \"example: book trade\", endLine: \"example-end\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "endLine" : "example-end",
+        "snippet" : "# example: book trade\nid = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n# example-end",
+        "startLine" : "example: book trade",
+        "type" : "Snippet",
+        "title" : "extracted example",
+        "lang" : "py"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Lines match doesn't have to be exact, ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "contains",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " is used.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "By default ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "startLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "endLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " are included in the rendered result. Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "excludeStartEnd: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to remove markers.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-file: python-examples.py { \n    startLine: \"example: book trade\",\n    endLine: \"example-end\",\n    excludeStartEnd: true }\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "endLine" : "example-end",
+        "snippet" : "id = market.book_trade('symbol', market.CURRENT_PRICE, 100)",
+        "excludeStartEnd" : true,
+        "startLine" : "example: book trade",
+        "type" : "Snippet",
+        "title" : "extracted result",
+        "lang" : "py"
+      } ]
+    }, {
+      "id" : "include-regexp",
+      "type" : "Section",
+      "title" : "Include Regexp",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "includeRegexp",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to include only lines matching regexp(s).",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-file: python-examples.py {includeRegexp: \"import\"}\n:include-file: python-examples.py {includeRegexp: [\"import\"]}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "# example-import-block\nimport market\n# example-import-block",
+        "type" : "Snippet",
+        "title" : "include by regexp result",
+        "lang" : "py",
+        "includeRegexp" : [ "import" ]
+      } ]
+    }, {
+      "id" : "exclude-regexp",
+      "type" : "Section",
+      "title" : "Exclude Regexp",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "excludeRegexp",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to exclude lines matching regexp(s).",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-file: python-examples.py {excludeRegexp: \"# example\"}\n:include-file: python-examples.py {excludeRegexp: [\"# example\"]}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "import market\n\ndef main():\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n\n    market.cancel_trade(id)\n\nif __name__  == \"__main__\":\n    main()",
+        "excludeRegexp" : [ "# example" ],
+        "type" : "Snippet",
+        "title" : "exclude by regexp result",
+        "lang" : "py"
+      } ]
+    } ],
+    "lastModifiedTime" : 1640992968678,
+    "tocItem" : {
+      "sectionTitle" : "Snippets",
+      "pageTitle" : "Snippets Manipulation",
+      "pageMeta" : { },
+      "dirName" : "snippets",
+      "fileName" : "snippets-manipulation",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Surrounded By",
+        "id" : "surrounded-by"
+      }, {
+        "title" : "Multiple Surrounded By",
+        "id" : "multiple-surrounded-by"
+      }, {
+        "title" : "Replace",
+        "id" : "replace"
+      }, {
+        "title" : "Replace Regexp Groups",
+        "id" : "replace-regexp-groups"
+      }, {
+        "title" : "Start/End Line",
+        "id" : "startend-line"
+      }, {
+        "title" : "Include Regexp",
+        "id" : "include-regexp"
+      }, {
+        "title" : "Exclude Regexp",
+        "id" : "exclude-regexp"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

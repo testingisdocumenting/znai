@@ -51,7 +51,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.53/znai-dist-1.53-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.55/znai-dist-1.55-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -59,7 +59,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.53&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.55&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -75,7 +75,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.53&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.55&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.53&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.55&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -123,7 +123,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets code-comments inlined-code-snippets api-parameters code-references java java-doc groovy python doxygen typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points text-badge headings icons keyboard-shortcuts charts images image-annotations iframe SVG graphviz flow-diagrams PlantUml mermaid synergy-with-testing java REST web-UI configuration basic example-references domain api release-notes 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets snippets-manipulation code-comments inlined-code-snippets api-parameters code-references java java-doc groovy python doxygen typescript cpp json xml open-API CLI math jupyter-notebook markdown layout attention-signs tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides visuals spoilers smart-bullet-points text-badge headings icons keyboard-shortcuts charts images image-annotations iframe SVG graphviz flow-diagrams PlantUml mermaid synergy-with-testing java REST web-UI configuration basic example-references domain api release-notes 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -416,10 +416,58 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/external-code-snippets#extract-snippets</url>
-    <fullTitle>Znai: External Code Snippets, Extract Snippets [Snippets]</fullTitle>
+    <url>/znai/snippets/snippets-manipulation#surrounded-by</url>
+    <fullTitle>Znai: Snippets Manipulation, Surrounded By [Snippets]</fullTitle>
     <text>
-      <text>Use startLine , endLine to extract specific content by using marker lines. import market def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade('id') # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: "example: book trade", endLine: "example-end", excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) Use surroundedBy and the same marker for start/end to streamline the snippets extract process :include-file: python-examples.py { title: "extracted example with surroundedBy", surroundedBy: "# example-cancel-trade"} market.cancel_trade('id') Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: "import"} :include-file: python-examples.py {includeRegexp: ["import"]} import market Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: "# example"} :include-file: python-examples.py {excludeRegexp: ["# example"]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade('id') if __name__ == "__main__": main()</text>
+      <text>Use surroundedBy to extract code snippet surrounded by a marker # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py { title: "extracted example with surroundedBy", surroundedBy: "# example-cancel-trade"} market.cancel_trade(id)</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-manipulation#multiple-surrounded-by</url>
+    <fullTitle>Znai: Snippets Manipulation, Multiple Surrounded By [Snippets]</fullTitle>
+    <text>
+      <text>Pass a list to surroundedBy to extract multiple blocks :include-file: python-examples.py { title: "extracted example", surroundedBy: ["# example-import-block", "# example-cancel-trade"]} import market market.cancel_trade(id) Use surroundedBySeparator to select separator(s) between blocks :include-file: python-examples.py { title: "extracted example", surroundedBy: ["# example-import-block", "# example-cancel-trade"], surroundedBySeparator: ["..."] } import market ... market.cancel_trade(id) Note: surroundedBySeparator can be either single value or a list. Plugin will use a different separator for each block.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-manipulation#replace</url>
+    <fullTitle>Znai: Snippets Manipulation, Replace [Snippets]</fullTitle>
+    <text>
+      <text>Use replace to replace content of the resulting snippet markdown :include-file: python-examples.py { surroundedBy: "# example-cancel-trade", replace: ['id', '"trade_id"'] } market.cancel_trade("trade_id") Pass a list of lists to replace for multiple replaces markdown :include-file: python-examples.py { surroundedBy: "# example-cancel-trade", replace: [['id', '"trade_id"'], ["market", "api"]]} api.cancel_trade("trade_id")</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-manipulation#replace-regexp-groups</url>
+    <fullTitle>Znai: Snippets Manipulation, Replace Regexp Groups [Snippets]</fullTitle>
+    <text>
+      <text>Use $1 regexp capture groups to create derived content hello1 world2 another3 line4 :include-file: replace-all-group.txt {replace: ["(\\w+)(\\d+)", "$2-$1"]} 1-hello 2-world 3-another 4-line</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-manipulation#startend-line</url>
+    <fullTitle>Znai: Snippets Manipulation, Start/End Line [Snippets]</fullTitle>
+    <text>
+      <text>Use startLine , endLine to extract specific content by using marker lines. # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: "example: book trade", endLine: "example-end", excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100)</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-manipulation#include-regexp</url>
+    <fullTitle>Znai: Snippets Manipulation, Include Regexp [Snippets]</fullTitle>
+    <text>
+      <text>Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: "import"} :include-file: python-examples.py {includeRegexp: ["import"]} # example-import-block import market # example-import-block</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-manipulation#exclude-regexp</url>
+    <fullTitle>Znai: Snippets Manipulation, Exclude Regexp [Snippets]</fullTitle>
+    <text>
+      <text>Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: "# example"} :include-file: python-examples.py {excludeRegexp: ["# example"]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id) if __name__ == "__main__": main()</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -747,7 +795,7 @@
     <url>/znai/snippets/doxygen#extract-comment-text</url>
     <fullTitle>Znai: Doxygen, Extract Comment Text [Snippets]</fullTitle>
     <text>
-      <text>Members Comment Text Use include-doxygen-doc to extract a function description namespace utils { namespace nested { /** * top **level** comment *of* important * * list one * * list two * * list three * * 1. number one * 2. number two * * @param first_param description of first *param* * 1. item a * 2. item b * @param second_param description of second param */ void my_func(int first_param, bool second_param) { } /** * specific description for single param version * @param first_param description of first *param* * 1. item a * 2. item b */ void my_func(int first_param) { } } } void free_func() { } :include-doxygen-doc: utils::nested::my_func top level comment of important list one list two list three number one number two Note: Plugin ignores parameters block and only includes the description text Member Args Selection Use args param to pick an overload to use for comments extraction :include-doxygen-doc: utils::nested::my_func { title: "My Params", args: "(int first_param)" } specific description for single param version Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste. Classes Comment Text To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements.</text>
+      <text>Members Comment Text Use include-doxygen-doc to extract a function description namespace utils { namespace nested { /** * top **level** comment *of* important * * list one * * list two * * list three * * 1. number one * 2. number two * * @param first_param description of first *param* * 1. item a * 2. item b * @param second_param description of second param */ void my_func(int first_param, bool second_param) { } /** * specific description for single param version * @param first_param description of first *param* * 1. item a * 2. item b */ void my_func(int first_param) { } } } void free_func() { } :include-doxygen-doc: utils::nested::my_func top level comment of important list one list two list three number one number two Note: Plugin ignores parameters block and only includes the description text Member Args Selection Use args param to pick an overload to use for comments extraction :include-doxygen-doc: utils::nested::my_func { title: "My Params", args: "int" } specific description for single param version Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste. Classes Comment Text To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -779,7 +827,7 @@
     <url>/znai/snippets/doxygen#specific-member-by-args</url>
     <fullTitle>Znai: Doxygen, Specific Member By Args [Snippets]</fullTitle>
     <text>
-      <text>Use args to select a specific overload by providing parameters string :include-doxygen-member: utils::nested::their_func { args: "(long param1, bool param3)" } Description of what and why for their_func param1 long description of param1 param3 bool description of param3 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.</text>
+      <text>Use args to select a specific overload by providing parameters string :include-doxygen-member: utils::nested::their_func { args: "long, bool" } Description of what and why for their_func param1 long description of param1 param3 bool description of param3 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -795,7 +843,7 @@
     <url>/znai/snippets/doxygen#extract-parameters-by-args</url>
     <fullTitle>Znai: Doxygen, Extract Parameters By Args [Snippets]</fullTitle>
     <text>
-      <text>Use args to select a specific overload by providing parameters string :include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "(int first_param)" } first_param int description of first param item a item b</text>
+      <text>Use args to select a specific overload by providing parameters string :include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "int" } first_param int description of first param item a item b</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1059,7 +1107,7 @@
     <url>/znai/snippets/CLI#extract-snippets</url>
     <fullTitle>Znai: CLI, Extract Snippets [Snippets]</fullTitle>
     <text>
-      <text>Use startLine , endLine to extract specific content by using marker lines. :include-cli-output: cli/file-path-of-captured.out { title: "Limited captured output", startLine: "git push", endLine: "master -> master" } Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master More on limit options in snippets/external-code-snippets#extract-snippets External Code Snippets.</text>
+      <text>Use startLine , endLine to extract specific content by using marker lines. :include-cli-output: cli/file-path-of-captured.out { title: "Limited captured output", startLine: "git push", endLine: "master -> master" } Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master More on snippets extractions: snippets/snippets-manipulation Snippets Manipulation.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2035,7 +2083,7 @@
     <url>/znai/release-notes/2021#155</url>
     <fullTitle>Znai: 2021 Releases, 1.55 [Release Notes]</fullTitle>
     <text>
-      <text>Doc: rewrite of introduction/what-is-this What Is This starting page Add snippets/CLI CLI fence plugin Fix: win cmd script to include passed params</text>
+      <text>Doc: moved snippets/snippets-manipulation Snippets Manipulation to its own page Doc: rewrite of introduction/what-is-this What Is This starting page Extra spacing between section title and visuals/text-badge#part-of-heading its badge Color tweaks for snippets/code-comments#callout-comments code snippet bullet points and visuals/text-badge text badge for light and dark theme Normalize doxygen member snippets/doxygen#specific-member-by-args selection by args Add snippets/snippets-manipulation#replace Replace snippet manipulation Add snippets/snippets-manipulation#multiple-surrounded-by Surrounded By Multiple blocks support Add snippets/CLI CLI fence plugin Tweaked text selection color for dark theme Fix: snippets/CLI#ansi-colors CLI ANSI output background colors Fix: snippets highlight regression Fix: win cmd script to include passed params</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2075,7 +2123,7 @@
     <url>/znai/release-notes/2021#150</url>
     <fullTitle>Znai: 2021 Releases, 1.50 [Release Notes]</fullTitle>
     <text>
-      <text>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add snippets/python#content include-python to include function's content Rename paramsToHighlight -> highlight for :include-cli-command: plugin Rename scaleRatio -> scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/external-code-snippets#extract-snippets documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/external-code-snippets#extract-snippets snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added snippets/python#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</text>
+      <text>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add snippets/python#content include-python to include function's content Rename paramsToHighlight -> highlight for :include-cli-command: plugin Rename scaleRatio -> scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/snippets-manipulation#surrounded-by documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/snippets-manipulation#include-regexp snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added snippets/python#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</text>
       <score>STANDARD</score>
     </text>
   </entry>

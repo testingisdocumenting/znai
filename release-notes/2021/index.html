@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>1.55</h1></header>
-<p>Doc: rewrite of introduction/what-is-this What Is This starting page Add snippets/CLI CLI fence plugin Fix: win cmd script to include passed params</p>
+<p>Doc: moved snippets/snippets-manipulation Snippets Manipulation to its own page Doc: rewrite of introduction/what-is-this What Is This starting page Extra spacing between section title and visuals/text-badge#part-of-heading its badge Color tweaks for snippets/code-comments#callout-comments code snippet bullet points and visuals/text-badge text badge for light and dark theme Normalize doxygen member snippets/doxygen#specific-member-by-args selection by args Add snippets/snippets-manipulation#replace Replace snippet manipulation Add snippets/snippets-manipulation#multiple-surrounded-by Surrounded By Multiple blocks support Add snippets/CLI CLI fence plugin Tweaked text selection color for dark theme Fix: snippets/CLI#ansi-colors CLI ANSI output background colors Fix: snippets highlight regression Fix: win cmd script to include passed params</p>
 </article>
 
 <article>
@@ -111,7 +111,7 @@
 
 <article>
 <header><h1>1.50</h1></header>
-<p>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add snippets/python#content include-python to include function's content Rename paramsToHighlight -&gt; highlight for :include-cli-command: plugin Rename scaleRatio -&gt; scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/external-code-snippets#extract-snippets documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/external-code-snippets#extract-snippets snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added snippets/python#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</p>
+<p>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add snippets/python#content include-python to include function's content Rename paramsToHighlight -&gt; highlight for :include-cli-command: plugin Rename scaleRatio -&gt; scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/snippets-manipulation#surrounded-by documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/snippets-manipulation#include-regexp snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added snippets/python#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</p>
 </article>
 
 <article>
@@ -166,11 +166,35 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "badge" : "Upcoming Release",
       "id" : "155",
       "type" : "Section",
       "title" : "1.55",
       "content" : [ {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: moved ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Snippets Manipulation",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/snippets-manipulation"
+            }, {
+              "text" : " to its own page",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
         "bulletMarker" : "*",
         "type" : "BulletList",
         "tight" : true,
@@ -204,6 +228,136 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
+              "text" : "Extra spacing between section title and ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "its badge",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/visuals/text-badge#part-of-heading"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Color tweaks for ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "code snippet bullet points",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/code-comments#callout-comments"
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "text badge",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/visuals/text-badge"
+            }, {
+              "text" : " for light and dark theme",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Normalize doxygen member ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "selection by args",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/doxygen#specific-member-by-args"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Replace",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/snippets-manipulation#replace"
+            }, {
+              "text" : " snippet manipulation",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Surrounded By Multiple",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/snippets-manipulation#multiple-surrounded-by"
+            }, {
+              "text" : " blocks support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
@@ -214,6 +368,59 @@ ReactDOM.render(React.createElement(Documentation, {
                 "type" : "SimpleText"
               } ],
               "url" : "/znai/snippets/CLI"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Tweaked text selection color for dark theme",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "CLI ANSI output",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/CLI#ansi-colors"
+            }, {
+              "text" : " background colors",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: snippets highlight regression",
+              "type" : "SimpleText"
             } ]
           } ]
         } ]
@@ -1451,7 +1658,7 @@ ReactDOM.render(React.createElement(Documentation, {
                 "text" : "documentaiton",
                 "type" : "SimpleText"
               } ],
-              "url" : "/znai/snippets/external-code-snippets#extract-snippets"
+              "url" : "/znai/snippets/snippets-manipulation#surrounded-by"
             } ]
           } ]
         } ]
@@ -1523,7 +1730,7 @@ ReactDOM.render(React.createElement(Documentation, {
                 "text" : "snippets include/exclude",
                 "type" : "SimpleText"
               } ],
-              "url" : "/znai/snippets/external-code-snippets#extract-snippets"
+              "url" : "/znai/snippets/snippets-manipulation#include-regexp"
             }, {
               "text" : " matches lines",
               "type" : "SimpleText"
@@ -1745,7 +1952,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1638365049090,
+    "lastModifiedTime" : 1640992968674,
     "tocItem" : {
       "sectionTitle" : "Release Notes",
       "pageTitle" : "2021 Releases",
