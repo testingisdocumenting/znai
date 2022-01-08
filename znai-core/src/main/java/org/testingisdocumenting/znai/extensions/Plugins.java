@@ -42,7 +42,8 @@ public class Plugins {
     
     public static IncludePlugin includePluginById(String id) {
         pluginsTracker.includePlugins.increment(id);
-        return (IncludePlugin) pluginById(includePluginsById, id);
+        return new TrackingIncludePlugin((IncludePlugin) pluginById(includePluginsById, id),
+                pluginsTracker.includePlugins.createParamsTracker(id));
     }
 
     public static boolean hasFencePlugin(String id) {
@@ -51,7 +52,8 @@ public class Plugins {
 
     public static FencePlugin fencePluginById(String id) {
         pluginsTracker.fencePlugins.increment(id);
-        return (FencePlugin) pluginById(fencePluginsById, id);
+        return new TrackingFencePlugin((FencePlugin) pluginById(fencePluginsById, id),
+                pluginsTracker.fencePlugins.createParamsTracker(id));
     }
 
     public static boolean hasInlinedCodePlugin(String id) {
@@ -60,7 +62,8 @@ public class Plugins {
 
     public static InlinedCodePlugin inlinedCodePluginById(String id) {
         pluginsTracker.inlineCodePlugins.increment(id);
-        return (InlinedCodePlugin) pluginById(inlineCodePluginsById, id);
+        return new TrackingInlineCodePlugin((InlinedCodePlugin) pluginById(inlineCodePluginsById, id),
+                pluginsTracker.inlineCodePlugins.createParamsTracker(id));
     }
 
     private static Plugin pluginById(Map<String, Plugin> plugins, String id) {
