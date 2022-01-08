@@ -34,7 +34,14 @@ public class Plugins {
     private static final Map<String, Plugin> fencePluginsById = discoverFencePlugins();
     private static final Map<String, Plugin> inlineCodePluginsById = discoverInlinedCodePlugins();
 
+    private static final PluginsTracker pluginsTracker = new PluginsTracker();
+
+    public static Map<String, ?> buildStatsMap() {
+        return pluginsTracker.buildStatsMap();
+    }
+    
     public static IncludePlugin includePluginById(String id) {
+        pluginsTracker.includePlugins.increment(id);
         return (IncludePlugin) pluginById(includePluginsById, id);
     }
 
@@ -43,6 +50,7 @@ public class Plugins {
     }
 
     public static FencePlugin fencePluginById(String id) {
+        pluginsTracker.fencePlugins.increment(id);
         return (FencePlugin) pluginById(fencePluginsById, id);
     }
 
@@ -51,6 +59,7 @@ public class Plugins {
     }
 
     public static InlinedCodePlugin inlinedCodePluginById(String id) {
+        pluginsTracker.inlineCodePlugins.increment(id);
         return (InlinedCodePlugin) pluginById(inlineCodePluginsById, id);
     }
 
