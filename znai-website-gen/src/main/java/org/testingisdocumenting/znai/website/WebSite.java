@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.AuxiliaryFilesRegistry;
 import org.testingisdocumenting.znai.core.DocMeta;
+import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.resources.*;
 import org.testingisdocumenting.znai.html.*;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
@@ -210,6 +211,7 @@ public class WebSite {
         deployGlobalAnchors();
         deployAuxiliaryFiles();
         deployResources();
+        deployPluginsStats();
     }
 
     public TocItem tocItemByPath(Path path) {
@@ -659,6 +661,11 @@ public class WebSite {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void deployPluginsStats() {
+        reportPhase("deploying plugins statistics");
+        deployer.deploy("plugin-stats.json", JsonUtils.serialize(Plugins.buildStatsMap()));
     }
 
     private void forEachPage(PageConsumer consumer) {
