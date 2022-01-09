@@ -32,6 +32,13 @@ scenario('open docs in browser') {
     browser.open(scaffoldServerUrl.get() + '/my-product')
 }
 
+scenario('check generated plugin stats') {
+    http.get(http.concatUrl(scaffoldServerUrl.get(), '/my-product/plugin-stats.json')) {
+        includePlugins.file.count.shouldBe > 1
+        includePlugins.file.params.should contain("title")
+    }
+}
+
 scenario('table of contents navigation') {
     standardView.tocSectionTitles.should containAll("CHAPTER ONE", "CHAPTER TWO")
     standardView.pageThreeTocItem.click()

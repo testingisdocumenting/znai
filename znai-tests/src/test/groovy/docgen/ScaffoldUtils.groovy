@@ -30,8 +30,6 @@ class ScaffoldUtils {
         CliCommands.znai.run("--doc-id my-product --deploy $znaiDeployRoot",
                 cli.workingDir(tempPath.resolve('znai')))
 
-        return server.serve(serverId,
-                znaiDeployRoot
-                        .toRealPath())  // to remove symlink, todo remove after webtau release
+        return server.serve(serverId, znaiDeployRoot)
     }
 }
