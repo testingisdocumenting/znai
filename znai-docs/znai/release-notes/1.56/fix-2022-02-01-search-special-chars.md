@@ -1,0 +1,1 @@
+* Fix: using `:`, `-`, `+` chars in **Search** doesn't lead to crash anymore
