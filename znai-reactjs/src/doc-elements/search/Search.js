@@ -30,7 +30,8 @@ class Search {
     }
 
     search(term) {
-        return new QueryResult(this.searchIdx.search(term))
+        const quoted = term.replaceAll(/([:+-^*])/g, "\\$1")
+        return new QueryResult(this.searchIdx.search(quoted))
     }
 
     findSearchEntryById(id) {
