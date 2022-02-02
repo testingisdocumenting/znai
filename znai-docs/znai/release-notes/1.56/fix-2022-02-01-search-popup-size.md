@@ -1,0 +1,1 @@
+* Fix: search popup window height is consistent size when jumping between results
