@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -78,7 +79,7 @@ class SearchPopup extends Component {
         const {search} = this.state
 
         return (
-            <div className="toc-and-preview">
+            <div className="znai-toc-and-preview">
                 <div className="znai-search-toc-panel">
                     <SearchToc ids={ids}
                                selectedIdx={selectedIdx}
