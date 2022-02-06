@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +20,7 @@ package org.testingisdocumenting.znai.openapi;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
 import org.testingisdocumenting.znai.utils.JsonUtils;
+import org.testingisdocumenting.znai.utils.UrlUtils;
 import org.testingisdocumenting.znai.utils.YamlUtils;
 
 import java.nio.file.Paths;
@@ -32,9 +34,12 @@ public class OpenApiSpec {
     private static final String ALL_OFF_KEY = "allOf";
     private final String basePath;
 
-    private MarkdownParser markdownParser;
-    private Map<String, ?> spec;
-    private List<OpenApiOperation> operations;
+    private final MarkdownParser markdownParser;
+    private final Map<String, ?> spec;
+    private final List<OpenApiOperation> operations;
+
+    private final Map<String, Object> schemaByPath;
+    private final Set<String> schemaInProgressByPath;
 
     /**
      * create open api spec representation from json.
@@ -65,6 +70,8 @@ public class OpenApiSpec {
         this.spec = spec;
         this.basePath = extractBasePath(spec);
         this.operations = new ArrayList<>();
+        this.schemaByPath = new HashMap<>();
+        this.schemaInProgressByPath = new HashSet<>();
 
         parse();
     }
@@ -141,19 +148,7 @@ public class OpenApiSpec {
     }
 
     private String fullPath(String path) {
-        if (basePath.endsWith("/") && !path.startsWith("/")) {
-            return basePath + path;
-        }
-
-        if (!basePath.endsWith("/") && path.startsWith("/")) {
-            return basePath + path;
-        }
-
-        if (basePath.endsWith("/") && path.startsWith("/")) {
-            return basePath + path.substring(1);
-        }
-
-        return basePath + "/" + path;
+        return UrlUtils.concat(basePath, path);
     }
 
     @SuppressWarnings("unchecked")
@@ -274,14 +269,35 @@ public class OpenApiSpec {
     }
 
     private Object schemaByPath(String path) {
-        if (! path.startsWith("#")) {
+        if (!path.startsWith("#")) {
             throw new IllegalArgumentException("definition path is not supported: " + path);
+        }
+
+        if (schemaInProgressByPath.contains(path)) {
+            String[] pathParts = path.split("/");
+
+            Map<String, Object> loop = new HashMap<>();
+            loop.put("type", pathParts.length > 0 ? pathParts[pathParts.length - 1] : "NA");
+            loop.put("properties", Collections.emptyMap());
+
+            return loop;
+        }
+
+        Object alreadyParsed = schemaByPath.get(path);
+        schemaInProgressByPath.add(path);
+
+        if (alreadyParsed != null) {
+            return alreadyParsed;
         }
 
         String[] pathParts = path.split("/");
         String[] pathFromRoot = Arrays.copyOfRange(pathParts, 1, pathParts.length);
 
-        return specValueByPath(pathFromRoot);
+        Object valueByPath = specValueByPath(pathFromRoot);
+        schemaInProgressByPath.remove(path);
+        schemaByPath.put(path, valueByPath);
+
+        return valueByPath;
     }
 
     @SuppressWarnings("unchecked")

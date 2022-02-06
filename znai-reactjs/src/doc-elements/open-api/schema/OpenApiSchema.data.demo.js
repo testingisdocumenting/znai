@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,6 +41,15 @@ const customerSchema = {
             "description": [
                 {
                     "text": "customer's last name",
+                    "type": "SimpleText"
+                }
+            ]
+        },
+        "friend": {
+            "type": "Customer",
+            "description": [
+                {
+                    "text": "customer's friend",
                     "type": "SimpleText"
                 }
             ]

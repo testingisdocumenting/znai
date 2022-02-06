@@ -1,0 +1,126 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Api Documentation",
+    "version": "1.0",
+    "title": "Api Documentation",
+    "termsOfService": "urn:tos",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "consumes": [
+    "application/xml"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "localhost:8080",
+  "basePath": "/api",
+  "tags": [],
+  "paths": {
+    "/pets": {
+      "get": {
+        "summary": "find all pets",
+        "description": "description text",
+        "operationId": "findPets",
+        "parameters": [
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "tags to filter by",
+            "required": false,
+            "type": "array",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of results to return",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pet response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Pet": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NewPet"
+        },
+        {
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      ]
+    },
+    "NewPet": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "pet name"
+        },
+        "tag": {
+          "type": "string"
+        },
+        "friend": {
+          "$ref": "#/definitions/NewPet",
+          "description": "pet friend of type Pet"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
