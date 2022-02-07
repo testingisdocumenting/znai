@@ -1,0 +1,1 @@
+* Handle loop reference in [Open API](snippets/open-API)

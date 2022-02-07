@@ -22,6 +22,7 @@ const expectedCustomerSchemaAsParameters = [
     {name: 'firstName', type: 'string', description: [{"text": "customer's first name", "type": "SimpleText"}]},
     {name: 'id', type: 'integer(int64)', description: [{"text": "customer's unique id", "type": "SimpleText"}]},
     {name: 'lastName', type: 'string', description: [{"text": "customer's last name", "type": "SimpleText"}]},
+    {name: 'friend', type: 'Customer', "description": [{ "text": "customer's friend", "type": "SimpleText" }]},
 ]
 
 describe('schemaToApiParameters', () => {
@@ -42,7 +43,7 @@ describe('schemaToApiParameters', () => {
         const parameters = schemaToApiParameters(checkSchema)
 
         expect(parameters).toEqual([
-            {name: 'id', 'type': 'string', description: [{text: 'id of a customer', type: 'SimpleText'}]},
+            {name: 'id', type: 'string', description: [{text: 'id of a customer', type: 'SimpleText'}]},
             {name: 'confirmationIdsLongerTail', 'type': 'array of string'},
             {name: 'customer', type: 'object', description: [{text: 'Customer object', type: 'SimpleText'}], children: expectedCustomerSchemaAsParameters},
             {name: 'customers', type: 'array of objects', children: expectedCustomerSchemaAsParameters}])
