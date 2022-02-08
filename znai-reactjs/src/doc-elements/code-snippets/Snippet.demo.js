@@ -48,7 +48,7 @@ export function snippetsDemo(registry) {
         .add('tabs with wide', () => <Tabs {...tabsContent({label: 'wide', wide: true})}
                                            elementsLibrary={elementsLibrary}/>)
         .add('python code', () => <Snippet lang="python" snippet={pythonCode()}/>)
-        .add('large java code with javadocs', () => <Snippet lang="java" snippet={largeJavaCodeWithJavaDocs()}/>)
+        .add('large java code with javadocs', () => <Snippet lang="java" highlight={[0, 3, 6]} snippet={largeJavaCodeWithJavaDocs()}/>)
 }
 
 export function snippetsTwoSidesDemo(registry) {
