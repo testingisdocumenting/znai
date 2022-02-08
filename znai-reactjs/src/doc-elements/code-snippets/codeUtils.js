@@ -39,7 +39,9 @@ export function splitTokensIntoLines(tokens) {
     function handle(token) {
         const isString = typeof token === 'string'
 
-        if (isString && token.indexOf('\n') > 0) {
+        if (isCommentToken(token) && token.content.indexOf('\n') > 0) {
+            handleMultiLineCommentToken(token)
+        } else if (isString && token.indexOf('\n') > 0) {
             handleMultiLineStringToken(token)
         } else if (isString && token.startsWith('\n')) {
             handleNewLineStringToken(token)
@@ -58,6 +60,20 @@ export function splitTokensIntoLines(tokens) {
 
             handleSpacing(parts[idx])
 
+            if (!isLastPart) {
+                lines.push(line)
+                line = []
+            }
+        }
+    }
+
+    function handleMultiLineCommentToken(token) {
+        const parts = token.content.split('\n')
+
+        for (let idx = 0; idx < parts.length; idx++) {
+            const isLastPart = (idx === parts.length - 1)
+
+            line.push({type: 'comment', content: parts[idx]})
             if (!isLastPart) {
                 lines.push(line)
                 line = []
