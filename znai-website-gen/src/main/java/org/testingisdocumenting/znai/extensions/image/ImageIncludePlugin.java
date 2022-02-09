@@ -19,34 +19,26 @@ package org.testingisdocumenting.znai.extensions.image;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
-import org.testingisdocumenting.znai.structure.DocStructure;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.utils.FilePathUtils;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
-import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.Collections;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class ImageIncludePlugin implements IncludePlugin {
-    private Path annotationsPath;
-    private Path slidesPath;
+public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin {
+    private Map<String, ?> annotations;
     private ResourcesResolver resourceResolver;
-    private AuxiliaryFile auxiliaryFile;
 
-    @Override
-    public String id() {
-        return "image";
-    }
+    protected Path annotationsPath;
 
     @Override
     public IncludePlugin create() {
@@ -59,50 +51,35 @@ public class ImageIncludePlugin implements IncludePlugin {
                                 Path markupPath,
                                 PluginParams pluginParams) {
         resourceResolver = componentsRegistry.resourceResolver();
-        DocStructure docStructure = componentsRegistry.docStructure();
         String imagePath = pluginParams.getFreeParam();
 
-        auxiliaryFile = resourceResolver.runtimeAuxiliaryFile(imagePath);
-
-        PluginParamsOpts opts = pluginParams.getOpts();
-
-        String slidesPathValue = opts.get("slidesPath");
-        Double scale = opts.get("scaleRatio", opts.get("scale", 1.0));
-
         annotationsPath = determineAnnotationsPath(imagePath, pluginParams);
+        annotations = this.annotationsPath == null ?
+                null :
+                JsonUtils.deserializeAsMap(FileUtils.fileTextContent(this.annotationsPath));
 
-        slidesPath = slidesPathValue != null ? resourceResolver.fullPath(slidesPathValue) : null;
-
-        Map<String, ?> annotations = annotationsPath == null ? null : JsonUtils.deserializeAsMap(FileUtils.fileTextContent(annotationsPath));
-        Map<String, Object> props = new LinkedHashMap<>(opts.toMap());
-        props.put("imageSrc", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
-
-        props.put("timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()));
-
-        props.put("shapes", annotations != null ? annotations.get("shapes") : Collections.emptyList());
-        setWidthHeight(props, scale, annotations, imagePath);
-
-        return PluginResult.docElement("AnnotatedImage", props);
-    }
-
-    private void setWidthHeight(Map<String, Object> props,
-                                Double scale,
-                                Map<String, ?> annotations,
-                                String imagePathValue) {
-        Number pixelRatio = (annotations == null || !annotations.containsKey("pixelRatio")) ? 1 : (Number) annotations.get("pixelRatio");
-
-        BufferedImage bufferedImage = resourceResolver.imageContent(imagePathValue);
-        props.put("width", scale * bufferedImage.getWidth() / pixelRatio.doubleValue());
-        props.put("height", scale * bufferedImage.getHeight() / pixelRatio.doubleValue());
+        return process(componentsRegistry, pluginParams);
     }
 
     @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.concat(Stream.of(auxiliaryFile),
-                annotationsPath != null ? Stream.of(AuxiliaryFile.builtTime(annotationsPath)) : Stream.empty());
+    @SuppressWarnings("unchecked")
+    protected List<Map<String, ?>> annotationShapes() {
+        return annotations != null ? (List<Map<String, ?>>) annotations.get("shapes") : Collections.emptyList();
     }
 
-    private Path determineAnnotationsPath(String imagePath, PluginParams pluginParams) {
+    @Override
+    protected Double pixelRatio() {
+        return (annotations == null || !annotations.containsKey("pixelRatio")) ?
+                1.0 :
+                ((Number) annotations.get("pixelRatio")).doubleValue();
+    }
+
+    @Override
+    protected Stream<AuxiliaryFile> additionalAuxiliaryFiles() {
+        return annotationsPath != null ? Stream.of(AuxiliaryFile.builtTime(annotationsPath)) : Stream.empty();
+    }
+
+    protected Path determineAnnotationsPath(String imagePath, PluginParams pluginParams) {
         String annotationsPathValue = pluginParams.getOpts().get("annotationsPath");
         if (annotationsPathValue != null) {
             return resourceResolver.fullPath(annotationsPathValue);
