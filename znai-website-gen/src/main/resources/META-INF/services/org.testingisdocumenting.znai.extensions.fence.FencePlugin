@@ -20,3 +20,4 @@ org.testingisdocumenting.znai.extensions.columns.ColumnsFencePlugin
 org.testingisdocumenting.znai.extensions.markup.MarkdownAndResultFencePlugin
 org.testingisdocumenting.znai.extensions.table.TableFencePlugin
 org.testingisdocumenting.znai.extensions.cli.CliFencePlugin
+org.testingisdocumenting.znai.extensions.image.ImageFencePlugin

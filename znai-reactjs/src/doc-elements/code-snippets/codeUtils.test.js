@@ -208,7 +208,6 @@ describe("codeUtils", () => {
 class MyClass {
 }
 `)
-        console.log(tokens)
         const lines = splitTokensIntoLines(tokens)
 
         expect(lines).toEqual([

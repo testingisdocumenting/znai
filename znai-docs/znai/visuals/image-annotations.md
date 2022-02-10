@@ -1,3 +1,17 @@
+# Badges
+
+Use `image` fence plugin to display Image and manually provide badge coordinates 
+    
+    ```image word-toolbar.jpg
+    100,50
+    150,80
+    ```
+
+```image word-toolbar.jpg
+100,50
+150,80
+```
+
 # Annotations File
 
     :include-image: word-toolbar.jpg {annotationsPath: 'annotations.json'}
