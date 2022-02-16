@@ -182,7 +182,8 @@ public class ZnaiCliApp {
                 withGlobalReferencesPath(config.getSourceRoot().resolve("references.csv")).
                 withWebResources(favIconResource).
                 withPageModifiedTimeStrategy(pageModifiedTimeStrategy()).
-                withEnabledPreview(config.isPreviewMode());
+                withEnabledPreview(config.isPreviewMode()).
+                withValidateExternalLinks(config.isValidateExternalLinks());
 
         this.webSite = config.isExportMode() ?
                 webSiteCfg.parseOnly():

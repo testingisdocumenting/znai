@@ -22,9 +22,13 @@ import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.structure.*;
 import org.testingisdocumenting.znai.parser.MarkupParsingConfiguration;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -34,7 +38,8 @@ class WebSiteDocStructure implements DocStructure {
     private final DocMeta docMeta;
     private TableOfContents toc;
     private final MarkupParsingConfiguration parsingConfiguration;
-    private final List<LinkToValidate> linksToValidate;
+    private final List<LinkToValidate> collectedExternalLinks;
+    private final List<LinkToValidate> collectedLocalLinks;
     private final Map<String, GlobalAnchor> globalAnchorsById;
     private final Map<TocItem, List<String>> localAnchorIdsByTocItem;
 
@@ -46,7 +51,8 @@ class WebSiteDocStructure implements DocStructure {
         this.docMeta = docMeta;
         this.toc = toc;
         this.parsingConfiguration = parsingConfiguration;
-        this.linksToValidate = new ArrayList<>();
+        this.collectedExternalLinks = new ArrayList<>();
+        this.collectedLocalLinks = new ArrayList<>();
         this.globalAnchorsById = new HashMap<>();
         this.localAnchorIdsByTocItem = new HashMap<>();
     }
@@ -62,7 +68,8 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     void removeLinksForPath(Path path) {
-        linksToValidate.removeIf(linkToValidate -> linkToValidate.path.equals(path));
+        collectedExternalLinks.removeIf(linkToValidate -> linkToValidate.path.equals(path));
+        collectedLocalLinks.removeIf(linkToValidate -> linkToValidate.path.equals(path));
     }
 
     void updateToc(TableOfContents toc) {
@@ -70,24 +77,29 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     public void validateCollectedLinks() {
-        String validationErrorMessage = linksToValidate.stream()
-                .map(this::validateLink)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+        String localLinksValidation = validateLocalLinks();
+        String externalLinksValidation = validateExternalLinks();
+
+        if (localLinksValidation.isEmpty() && externalLinksValidation.isEmpty()) {
+            return;
+        }
+
+        String message = Stream.of(localLinksValidation, externalLinksValidation)
+                .filter(m -> !m.isEmpty())
                 .collect(joining("\n\n"));
 
-        if (!validationErrorMessage.isEmpty()) {
-            throw new IllegalArgumentException(validationErrorMessage + "\n");
-        }
+        throw new RuntimeException(message + "\n");
     }
 
     @Override
     public void validateUrl(Path path, String additionalClue, DocUrl docUrl) {
         if (docUrl.isExternalUrl()) {
-            return;
+            if (componentsRegistry.docConfig().isValidateExternalLinks()) {
+                collectedExternalLinks.add(new LinkToValidate(path, additionalClue, docUrl));
+            }
+        } else {
+            collectedLocalLinks.add(new LinkToValidate(path, additionalClue, docUrl));
         }
-
-        linksToValidate.add(new LinkToValidate(path, additionalClue, docUrl));
     }
 
     @Override
@@ -158,7 +170,23 @@ class WebSiteDocStructure implements DocStructure {
         return toc;
     }
 
-    private Optional<String> validateLink(LinkToValidate link) {
+    private String validateLocalLinks() {
+        return collectedLocalLinks.stream()
+                .map(this::validateLocalLink)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(joining("\n\n"));
+    }
+
+    private String validateExternalLinks() {
+        return collectedExternalLinks.parallelStream()
+                .map(this::validateExternalLink)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(joining("\n\n"));
+    }
+
+    private Optional<String> validateLocalLink(LinkToValidate link) {
         String anchorId = link.docUrl.getAnchorId();
 
         TocItem tocItem = findTocItemByLink(link);
@@ -182,6 +210,34 @@ class WebSiteDocStructure implements DocStructure {
         return Optional.of(createInvalidLinkMessage(link));
     }
 
+    private Optional<String> validateExternalLink(LinkToValidate linkToValidate) {
+        String url = linkToValidate.docUrl.getUrl();
+//        if (url.endsWith("/")) {
+//            url += "index.html";
+//        }
+
+        int responseCode = pingUrlConnection(url, 5000);
+        if ((responseCode >= 200 && responseCode <= 204) || responseCode == 301) {
+            return Optional.empty();
+        }
+
+        return Optional.of("can't get data from " + url + ": " +
+                checkFileMessage(linkToValidate));
+    }
+
+    private int pingUrlConnection(String url, int timeout) {
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+            connection.setReadTimeout(timeout);
+            connection.setConnectTimeout(timeout);
+            connection.addRequestProperty("User-Agent", "Mozilla");
+
+            return connection.getResponseCode();
+        } catch (IOException e) {
+            return -1;
+        }
+    }
+
     private TocItem findTocItemByLink(LinkToValidate link) {
         if (link.docUrl.isIndexUrl()) {
             return toc.getIndex();
@@ -193,8 +249,7 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     private String createInvalidLinkMessage(LinkToValidate link) {
-        String checkFileMessage = "\ncheck file: " + link.path + (
-                link.additionalClue.isEmpty() ? "" : ", " + link.additionalClue);
+        String checkFileMessage = checkFileMessage(link);
 
         if (link.docUrl.isAnchorOnly()) {
             return "can't find the anchor " + link.docUrl.getAnchorIdWithHash() + checkFileMessage;
@@ -202,6 +257,11 @@ class WebSiteDocStructure implements DocStructure {
 
         String url = link.docUrl.getDirName() + "/" + link.docUrl.getFileName() + link.docUrl.getAnchorIdWithHash();
         return "can't find a page associated with: " + url + checkFileMessage;
+    }
+
+    private String checkFileMessage(LinkToValidate link) {
+        return "\ncheck file: " + link.path + (
+                link.additionalClue.isEmpty() ? "" : ", " + link.additionalClue);
     }
 
     private boolean isValidGlobalAnchor(TocItem tocItemWithAnchor, String anchorId) {

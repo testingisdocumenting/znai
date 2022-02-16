@@ -106,7 +106,7 @@ public class WebSite {
                 siteConfig.pageModifiedTimeStrategy : new FileBasedPageModifiedTime();
 
         registeredExtraJavaScripts = siteConfig.registeredExtraJavaScripts;
-        componentsRegistry = new WebSiteComponentsRegistry(siteConfig.docRootPath);
+        componentsRegistry = new WebSiteComponentsRegistry(siteConfig.docRootPath, siteConfig.isValidateExternalLinks);
         resourceResolver = new ResourcesResolverChain();
         reactJsBundle = siteConfig.reactJsBundle;
         tocJavaScript = WebResource.withPath("toc.js");
@@ -741,6 +741,7 @@ public class WebSite {
         private String logoRelativePath;
         private List<WebResource> registeredExtraJavaScripts;
         private boolean isPreviewEnabled;
+        private boolean isValidateExternalLinks;
         private String documentationType = MARKDOWN;
         private DocMeta docMeta = new DocMeta(Collections.emptyMap());
         private ReactJsBundle reactJsBundle;
@@ -841,6 +842,11 @@ public class WebSite {
 
         public Configuration withEnabledPreview(boolean isPreviewEnabled) {
             this.isPreviewEnabled = isPreviewEnabled;
+            return this;
+        }
+
+        public Configuration withValidateExternalLinks(boolean isValidateExternalLinks) {
+            this.isValidateExternalLinks = isValidateExternalLinks;
             return this;
         }
 

@@ -8,7 +8,7 @@ capturing the relevant artifacts.
 
 # WebTau
 
-[WebTau](https://testingisdocumenting.org/webtau/REST/getting-started) is a framework to write, run, and capture REST tests artifacts.
+[WebTau](https://testingisdocumenting.org/webtau/HTTP/introduction) is a framework to write, run, and capture REST tests artifacts.
 
 The bare minimum test in WebTau looks like this:
 

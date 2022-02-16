@@ -1,4 +1,4 @@
-[PlantUml](http://plantuml.com/sequence-diagram) is a text-based way of drawing many kinds of diagrams.
+[PlantUml](https://plantuml.com/sequence-diagram) is a text-based way of drawing many kinds of diagrams.
 
 # In Place
 
