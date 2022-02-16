@@ -48,6 +48,8 @@ public class ZnaiCliConfig {
     private static final String PORT_KEY = "port";
     private static final String ACTOR_KEY = "actor";
     private static final String LOOKUP_PATHS_KEY = "lookup-paths";
+    private static final String VALIDATE_EXTERNAL_LINKS = "validate-external-links";
+
     private static final String HELP_KEY = "help";
     private static final int DEFAULT_PORT = 3333;
 
@@ -89,6 +91,8 @@ public class ZnaiCliConfig {
     private String actor;
     private String lookupPaths;
 
+    private boolean isValidateExternalLinks;
+
     private ModifiedTimeStrategy modifiedTimeStrategy;
 
     public ZnaiCliConfig(String... args) {
@@ -113,6 +117,10 @@ public class ZnaiCliConfig {
 
     public boolean isPreviewMode() {
         return mode == Mode.PREVIEW;
+    }
+
+    public boolean isValidateExternalLinks() {
+        return isValidateExternalLinks;
     }
 
     public boolean isServeMode() {
@@ -236,6 +244,8 @@ public class ZnaiCliConfig {
 
         markupType = commandLine.hasOption(MARKUP_TYPE_KEY) ? commandLine.getOptionValue(MARKUP_TYPE_KEY) : MarkupTypes.MARKDOWN;
 
+        isValidateExternalLinks = commandLine.hasOption(VALIDATE_EXTERNAL_LINKS);
+
         isSourceRootSet = commandLine.hasOption(SOURCE_KEY);
         sourceRoot = Paths.get(isSourceRootSet ? commandLine.getOptionValue(SOURCE_KEY) : "")
                 .toAbsolutePath();
@@ -334,6 +344,7 @@ public class ZnaiCliConfig {
         options.addOption(null, PORT_KEY, true, "server port");
         options.addOption(null, HOST_KEY, true, "server host");
         options.addOption(null, MARKUP_TYPE_KEY, true, "markup type");
+        options.addOption(null, VALIDATE_EXTERNAL_LINKS, false, "validate external links");
         options.addOption(null, SOURCE_KEY, true, "documentation source dir");
         options.addOption(null, DOC_ID_KEY, true, "documentation id");
         options.addOption(null, MODIFIED_TIME_KEY, true,

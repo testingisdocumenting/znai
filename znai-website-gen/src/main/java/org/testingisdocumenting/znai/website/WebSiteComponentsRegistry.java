@@ -41,10 +41,10 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
 
     private final DocConfig docConfig;
 
-    public WebSiteComponentsRegistry(Path docRootPath) {
+    public WebSiteComponentsRegistry(Path docRootPath, boolean validateExternalLinks) {
         assetsRegistry = new GlobalAssetsRegistry();
         timeService = new SystemTimeService();
-        docConfig = new DocConfig(docRootPath);
+        docConfig = new DocConfig(docRootPath, validateExternalLinks);
     }
 
     @Override

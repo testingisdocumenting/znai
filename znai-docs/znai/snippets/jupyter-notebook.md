@@ -1,6 +1,6 @@
 # Code and Output
 
-Use `include-jupyter` to include [Jupyter](http://jupyter.org/) notebook inside your documentation. 
+Use `include-jupyter` to include [Jupyter](https://jupyter.org/) notebook inside your documentation. 
 
     :include-jupyter: jupyter/simple-notebook.ipynb
     

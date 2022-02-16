@@ -27,7 +27,7 @@ Suppose you are have to display multiple elements like the following:
 
 Instead of copy and pasting, define a template in a separate file.
 
-`Znai` uses the [FreeMarker](http://freemarker.org) template engine.
+`Znai` uses the [FreeMarker](https://freemarker.apache.org) template engine.
  
 :include-file: templates/job.md
 
@@ -83,7 +83,7 @@ You can include a template in your page and make use of parameters from the file
 
 # Loops
 
-You can loop over a list of parameters using [FreeMarker loop](http://freemarker.org/docs/ref_directive_list.html)
+You can loop over a list of parameters using [FreeMarker loop](https://freemarker.apache.org/docs/ref_directive_list.html)
 
 Consider an external file...
 

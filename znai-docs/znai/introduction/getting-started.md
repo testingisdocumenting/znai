@@ -1,6 +1,6 @@
 # Markdown
 
-The fastest way to learn Markdown is to go to [CommonMark](http://commonmark.org/help/) website
+The fastest way to learn Markdown is to go to [CommonMark](https://commonmark.org/help/) website
 and go through a 60 second cheatsheet or 10 minute tutorial.
 
 # Running Znai

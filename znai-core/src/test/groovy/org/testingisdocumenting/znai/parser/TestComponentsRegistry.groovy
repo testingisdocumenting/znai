@@ -38,7 +38,7 @@ class TestComponentsRegistry implements ComponentsRegistry {
     private GlobalAssetsRegistry assetsRegistry = new GlobalAssetsRegistry()
     private TimeService timeService = new FakeTimeService()
 
-    private DocConfig docConfig = new DocConfig(Paths.get("").toAbsolutePath())
+    private DocConfig docConfig = new DocConfig(Paths.get("").toAbsolutePath(), false)
 
     TestComponentsRegistry() {
     }

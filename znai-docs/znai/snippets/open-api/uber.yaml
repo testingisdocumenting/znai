@@ -211,7 +211,7 @@ definitions:
           product_id than uberX in Los Angeles
       currency_code:
         type: string
-        description: "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code."
+        description: "[ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code."
       display_name:
         type: string
         description: Display name of product.

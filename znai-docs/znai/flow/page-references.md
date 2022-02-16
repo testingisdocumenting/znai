@@ -60,4 +60,6 @@ Download [test json file](data/test.json)
 # Validation
 
 Local links are automatically validated during documentation build time. 
-You will get a build time error if you refer to a page or a section/sub-section that does not exist. 
+You will get a build time error if you refer to a page or a section/sub-section that does not exist.
+
+Pass `--validate-external-links` to enable external links validation. 

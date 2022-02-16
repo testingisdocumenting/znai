@@ -20,12 +20,18 @@ import java.nio.file.Path;
 
 public class DocConfig {
     private final Path sourceRoot;
+    private final boolean isValidateExternalLinks;
 
-    public DocConfig(Path sourceRoot) {
+    public DocConfig(Path sourceRoot, boolean validateExternalLinks) {
         this.sourceRoot = sourceRoot;
+        this.isValidateExternalLinks = validateExternalLinks;
     }
 
     public Path getDocRoot() {
         return sourceRoot;
+    }
+
+    public boolean isValidateExternalLinks() {
+        return isValidateExternalLinks;
     }
 }
