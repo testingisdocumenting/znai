@@ -15,40 +15,23 @@ toc = [ {
   "dirName" : "introduction",
   "items" : [ {
     "sectionTitle" : "Introduction",
-    "pageTitle" : "Rationale",
+    "pageTitle" : "What Is This",
     "pageMeta" : { },
     "dirName" : "introduction",
-    "fileName" : "rationale",
+    "fileName" : "what-is-this",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Stale Documentation",
-      "id" : "stale-documentation"
+      "title" : "Beautiful and Maintainable User Guide",
+      "id" : "beautiful-and-maintainable-user-guide"
     }, {
-      "title" : "Part Of Workflow",
-      "id" : "part-of-workflow"
+      "title" : "Extensive Plugins System",
+      "id" : "extensive-plugins-system"
     }, {
-      "title" : "Maintenance",
-      "id" : "maintenance"
+      "title" : "Auto Presentation",
+      "id" : "auto-presentation"
     }, {
-      "title" : "Familiar Approach",
-      "id" : "familiar-approach"
-    }, {
-      "title" : "Presentations",
-      "id" : "presentations"
-    } ]
-  }, {
-    "sectionTitle" : "Introduction",
-    "pageTitle" : "Example",
-    "pageMeta" : { },
-    "dirName" : "introduction",
-    "fileName" : "example",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Markdown",
-      "id" : "markdown"
-    }, {
-      "title" : "External References",
-      "id" : "external-references"
+      "title" : "Batteries Included",
+      "id" : "batteries-included"
     } ]
   }, {
     "sectionTitle" : "Introduction",
@@ -58,26 +41,32 @@ toc = [ {
     "fileName" : "getting-started",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Command Line Tool",
-      "id" : "command-line-tool"
-    }, {
       "title" : "Markdown",
       "id" : "markdown"
     }, {
-      "title" : "Installation",
-      "id" : "installation"
+      "title" : "Running Znai",
+      "id" : "running-znai"
+    }, {
+      "title" : "Command Line",
+      "id" : "command-line"
+    }, {
+      "title" : "Maven Plugin",
+      "id" : "maven-plugin"
     }, {
       "title" : "Scaffolding",
       "id" : "scaffolding"
     }, {
-      "title" : "Scaffolding With Maven",
-      "id" : "scaffolding-with-maven"
+      "title" : "Preview Mode",
+      "id" : "preview-mode"
     }, {
-      "title" : "Preview",
-      "id" : "preview"
+      "title" : "Static Site Generation",
+      "id" : "static-site-generation"
     }, {
-      "title" : "Deploy",
-      "id" : "deploy"
+      "title" : "GitHub Pages",
+      "id" : "github-pages"
+    }, {
+      "title" : "On-site Central Hub Deployment",
+      "id" : "on-site-central-hub-deployment"
     } ]
   } ]
 }, {
@@ -105,6 +94,20 @@ toc = [ {
     }, {
       "title" : "Meta",
       "id" : "meta"
+    } ]
+  }, {
+    "sectionTitle" : "Flow",
+    "pageTitle" : "Landing",
+    "pageMeta" : { },
+    "dirName" : "flow",
+    "fileName" : "landing",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Index Landing Page",
+      "id" : "index-landing-page"
+    }, {
+      "title" : "Auto Redirect",
+      "id" : "auto-redirect"
     } ]
   }, {
     "sectionTitle" : "Flow",
@@ -141,6 +144,20 @@ toc = [ {
     }, {
       "title" : "Validation",
       "id" : "validation"
+    } ]
+  }, {
+    "sectionTitle" : "Flow",
+    "pageTitle" : "Page Toc",
+    "pageMeta" : { },
+    "dirName" : "flow",
+    "fileName" : "page-toc",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Section One",
+      "id" : "section-one"
+    }, {
+      "title" : "Section Two",
+      "id" : "section-two"
     } ]
   }, {
     "sectionTitle" : "Flow",
@@ -182,6 +199,17 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "footer",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Definition",
+      "id" : "definition"
+    } ]
+  }, {
+    "sectionTitle" : "Flow",
+    "pageTitle" : "Support",
+    "pageMeta" : { },
+    "dirName" : "flow",
+    "fileName" : "support",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Definition",
@@ -278,15 +306,52 @@ toc = [ {
     }, {
       "title" : "Highlights",
       "id" : "highlights"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Snippets Manipulation",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "snippets-manipulation",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Surrounded By",
+      "id" : "surrounded-by"
     }, {
-      "title" : "Limit",
-      "id" : "limit"
+      "title" : "Multiple Surrounded By",
+      "id" : "multiple-surrounded-by"
     }, {
+      "title" : "Replace",
+      "id" : "replace"
+    }, {
+      "title" : "Replace Regexp Groups",
+      "id" : "replace-regexp-groups"
+    }, {
+      "title" : "Start/End Line",
+      "id" : "startend-line"
+    }, {
+      "title" : "Include Regexp",
+      "id" : "include-regexp"
+    }, {
+      "title" : "Exclude Regexp",
+      "id" : "exclude-regexp"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Code Comments",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "code-comments",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
       "title" : "Callout Comments",
       "id" : "callout-comments"
     }, {
       "title" : "Spoilers",
       "id" : "spoilers"
+    }, {
+      "title" : "Remove Comments",
+      "id" : "remove-comments"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -301,6 +366,9 @@ toc = [ {
     }, {
       "title" : "From File",
       "id" : "from-file"
+    }, {
+      "title" : "Validated Identifier",
+      "id" : "validated-identifier"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -321,8 +389,17 @@ toc = [ {
       "title" : "Title",
       "id" : "title"
     }, {
+      "title" : "Size",
+      "id" : "size"
+    }, {
+      "title" : "Multi-line CSV Description",
+      "id" : "multi-line-csv-description"
+    }, {
       "title" : "External JSON File",
       "id" : "external-json-file"
+    }, {
+      "title" : "Anchors",
+      "id" : "anchors"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -387,6 +464,9 @@ toc = [ {
       "title" : "Field Level",
       "id" : "field-level"
     }, {
+      "title" : "Inner Classes",
+      "id" : "inner-classes"
+    }, {
       "title" : "Handling Links",
       "id" : "handling-links"
     }, {
@@ -418,6 +498,79 @@ toc = [ {
     }, {
       "title" : "Class Body",
       "id" : "class-body"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Python",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "python",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Content",
+      "id" : "content"
+    }, {
+      "title" : "Doc String",
+      "id" : "doc-string"
+    }, {
+      "title" : "Doc Parameters",
+      "id" : "doc-parameters"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Doxygen",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "doxygen",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Introduction",
+      "id" : "introduction"
+    }, {
+      "title" : "Setup",
+      "id" : "setup"
+    }, {
+      "title" : "Extract Comment Text",
+      "id" : "extract-comment-text"
+    }, {
+      "title" : "Member Signature, Comment And Parameters",
+      "id" : "member-signature-comment-and-parameters"
+    }, {
+      "title" : "Member Signature Only",
+      "id" : "member-signature-only"
+    }, {
+      "title" : "All Matching Signatures",
+      "id" : "all-matching-signatures"
+    }, {
+      "title" : "Specific Member By Args",
+      "id" : "specific-member-by-args"
+    }, {
+      "title" : "Extract Parameters",
+      "id" : "extract-parameters"
+    }, {
+      "title" : "Extract Parameters By Args",
+      "id" : "extract-parameters-by-args"
+    }, {
+      "title" : "Extract Template Parameters",
+      "id" : "extract-template-parameters"
+    }, {
+      "title" : "Ignore Template Parameters",
+      "id" : "ignore-template-parameters"
+    }, {
+      "title" : "Return Description",
+      "id" : "return-description"
+    }, {
+      "title" : "Compound",
+      "id" : "compound"
+    }, {
+      "title" : "utils::second::AnotherClass",
+      "id" : "utilssecondanotherclass"
+    }, {
+      "title" : "Cross-Reference",
+      "id" : "cross-reference"
+    }, {
+      "title" : "utils::second::MyClass",
+      "id" : "utilssecondmyclass"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -536,8 +689,11 @@ toc = [ {
     "fileName" : "CLI",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Command Parameters",
-      "id" : "command-parameters"
+      "title" : "Parameters Highlight",
+      "id" : "parameters-highlight"
+    }, {
+      "title" : "Include Plugin",
+      "id" : "include-plugin"
     }, {
       "title" : "Long Commands",
       "id" : "long-commands"
@@ -557,6 +713,9 @@ toc = [ {
       "title" : "Title",
       "id" : "title"
     }, {
+      "title" : "Extract Snippets",
+      "id" : "extract-snippets"
+    }, {
       "title" : "Presentation Mode",
       "id" : "presentation-mode"
     } ]
@@ -568,8 +727,11 @@ toc = [ {
     "fileName" : "math",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "LATEX",
-      "id" : "latex"
+      "title" : "LaTeX Block",
+      "id" : "latex-block"
+    }, {
+      "title" : "LaTeX Inline",
+      "id" : "latex-inline"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -681,11 +843,29 @@ toc = [ {
       "title" : "Title",
       "id" : "title"
     }, {
+      "title" : "Highlight",
+      "id" : "highlight"
+    }, {
       "title" : "Arrange and Filter",
       "id" : "arrange-and-filter"
     }, {
-      "title" : "Alignment and Width",
-      "id" : "alignment-and-width"
+      "title" : "Width",
+      "id" : "width"
+    }, {
+      "title" : "Min Width",
+      "id" : "min-width"
+    }, {
+      "title" : "Wide Mode",
+      "id" : "wide-mode"
+    }, {
+      "title" : "Text Alignment",
+      "id" : "text-alignment"
+    }, {
+      "title" : "Mapping",
+      "id" : "mapping"
+    }, {
+      "title" : "Inlined",
+      "id" : "inlined"
     }, {
       "title" : "Markdown in Cells",
       "id" : "markdown-in-cells"
@@ -848,6 +1028,34 @@ toc = [ {
     } ]
   }, {
     "sectionTitle" : "Visuals",
+    "pageTitle" : "Text Badge",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "text-badge",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Part Of Text",
+      "id" : "part-of-text"
+    }, {
+      "title" : "Part Of Heading",
+      "id" : "part-of-heading"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Headings",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "headings",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Heading Types",
+      "id" : "heading-types"
+    }, {
+      "title" : "Heading API Type",
+      "id" : "heading-api-type"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
     "pageTitle" : "Icons",
     "pageMeta" : { },
     "dirName" : "visuals",
@@ -859,6 +1067,9 @@ toc = [ {
     }, {
       "title" : "Bullet Points",
       "id" : "bullet-points"
+    }, {
+      "title" : "Colors",
+      "id" : "colors"
     } ]
   }, {
     "sectionTitle" : "Visuals",
@@ -914,6 +1125,9 @@ toc = [ {
       "title" : "Caption",
       "id" : "caption"
     }, {
+      "title" : "Border",
+      "id" : "border"
+    }, {
       "title" : "Fit",
       "id" : "fit"
     }, {
@@ -937,8 +1151,25 @@ toc = [ {
       "title" : "Integration With Testing",
       "id" : "integration-with-testing"
     }, {
+      "title" : "Path Shortcut",
+      "id" : "path-shortcut"
+    }, {
       "title" : "Presentation Mode",
       "id" : "presentation-mode"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Iframe",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "iframe",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Embedding Video",
+      "id" : "embedding-video"
+    }, {
+      "title" : "Aspect Ratio",
+      "id" : "aspect-ratio"
     } ]
   }, {
     "sectionTitle" : "Visuals",
@@ -959,6 +1190,17 @@ toc = [ {
     }, {
       "title" : "Scale",
       "id" : "scale"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Graphviz",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "graphviz",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "External File",
+      "id" : "external-file"
     } ]
   }, {
     "sectionTitle" : "Visuals",
@@ -1017,32 +1259,20 @@ toc = [ {
     }, {
       "title" : "External File",
       "id" : "external-file"
-    } ]
-  } ]
-}, {
-  "sectionTitle" : "Deployment",
-  "dirName" : "deployment",
-  "items" : [ {
-    "sectionTitle" : "Deployment",
-    "pageTitle" : "Static Content",
-    "pageMeta" : { },
-    "dirName" : "deployment",
-    "fileName" : "static-content",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Build",
-      "id" : "build"
+    }, {
+      "title" : "Gantt Example",
+      "id" : "gantt-example"
     } ]
   }, {
-    "sectionTitle" : "Deployment",
-    "pageTitle" : "Static Hosting",
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Mermaid",
     "pageMeta" : { },
-    "dirName" : "deployment",
-    "fileName" : "static-hosting",
+    "dirName" : "visuals",
+    "fileName" : "mermaid",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "GitHub Pages",
-      "id" : "github-pages"
+      "title" : "Mermaid",
+      "id" : "mermaid"
     } ]
   } ]
 }, {
@@ -1139,6 +1369,50 @@ toc = [ {
     }, {
       "title" : "Query",
       "id" : "query"
+    } ]
+  } ]
+}, {
+  "sectionTitle" : "Release Notes",
+  "dirName" : "release-notes",
+  "items" : [ {
+    "sectionTitle" : "Release Notes",
+    "pageTitle" : "2021 Releases",
+    "pageMeta" : {
+      "title" : [ "2021 Releases" ]
+    },
+    "dirName" : "release-notes",
+    "fileName" : "2021",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "1.55",
+      "id" : "155"
+    }, {
+      "title" : "1.54",
+      "id" : "154"
+    }, {
+      "title" : "1.53",
+      "id" : "153"
+    }, {
+      "title" : "1.52",
+      "id" : "152"
+    }, {
+      "title" : "1.51",
+      "id" : "151"
+    }, {
+      "title" : "1.50",
+      "id" : "150"
+    }, {
+      "title" : "1.49",
+      "id" : "149"
+    }, {
+      "title" : "1.48",
+      "id" : "148"
+    }, {
+      "title" : "1.47",
+      "id" : "147"
+    }, {
+      "title" : "1.46",
+      "id" : "146"
     } ]
   } ]
 } ]
