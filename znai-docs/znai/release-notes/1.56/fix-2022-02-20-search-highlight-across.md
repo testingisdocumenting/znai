@@ -1,0 +1,1 @@
+* Fix: search result preview highlight across styles

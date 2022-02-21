@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,12 +37,20 @@ class SearchPreview extends Component {
     highlight() {
         const {snippets} = this.props
 
-        this.mark.mark(snippets)
-
-        const marked = document.querySelector(".znai-search-result-preview mark");
-        if (marked) {
-            marked.scrollIntoView();
-        }
+        this.mark.mark(snippets, {
+            acrossElements: true,
+            separateWordSearch: false,
+            caseSensitive: true,
+            ignoreJoiners: true,
+            diacritics: false,
+            accuracy: "exactly",
+            done: () => {
+                const marked = document.querySelector(".znai-search-result-preview mark");
+                if (marked) {
+                    marked.scrollIntoView();
+                }
+            }
+        })
     }
 }
 
