@@ -24,7 +24,7 @@ import java.nio.file.Paths
 class MultipleLocalLocationsResourceResolverTest {
     @Test
     void "resolves against specified list of dirs"() {
-        def resolver = new MultipleLocalLocationsResourceResolver(Paths.get(""))
+        def resolver = new MultipleLocalLocationsResourceResolver(docStructure, Paths.get(""))
         resolver.initialize(["src/main/java/org/testingisdocumenting/znai",
                              "src/test/groovy/org/testingisdocumenting/znai"].stream())
 
@@ -34,7 +34,7 @@ class MultipleLocalLocationsResourceResolverTest {
 
     @Test
     void "confirms if file is inside documentation"() {
-        def resolver = new MultipleLocalLocationsResourceResolver(Paths.get("/path/to/docs"))
+        def resolver = new MultipleLocalLocationsResourceResolver(docStructure, Paths.get("/path/to/docs"))
         assert resolver.isInsideDoc(Paths.get("/path/to/docs/image.png"))
     }
 }

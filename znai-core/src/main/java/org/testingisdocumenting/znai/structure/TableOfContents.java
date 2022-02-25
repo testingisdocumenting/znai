@@ -49,6 +49,13 @@ public class TableOfContents {
         tocItems.add(0, TocItem.createIndex(docTitle));
     }
 
+    public TocItem firstNonIndexPage() {
+        return tocItems.stream()
+                .filter(tocItem -> !tocItem.isIndex())
+                .findFirst()
+                .orElse(null);
+    }
+
     public void removeTocItem(String dirName, String fileNameWithoutExtension) {
         tocItems.removeIf(item -> item.match(dirName, fileNameWithoutExtension));
     }

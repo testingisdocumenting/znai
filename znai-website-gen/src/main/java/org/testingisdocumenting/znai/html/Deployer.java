@@ -51,10 +51,10 @@ public class Deployer {
     }
 
     public void deploy(Path relativePath, String content) {
-        deploy(relativePath, relativePath, content);
+        deploy(relativePath.toString(), relativePath, content);
     }
 
-    public void deploy(Path originalPathForLogging, Path relativePath, String content) {
+    public void deploy(String originalPathForLogging, Path relativePath, String content) {
         deploy(originalPathForLogging, relativePath, content.getBytes(StandardCharsets.UTF_8));
     }
 
@@ -77,10 +77,10 @@ public class Deployer {
     }
 
     public void deploy(Path relativePath, byte[] content) {
-        deploy(relativePath, relativePath, content);
+        deploy(relativePath.toString(), relativePath, content);
     }
 
-    public void deploy(Path originalPathForLogging, Path relativePath, byte[] content) {
+    public void deploy(String originalPathForLogging, Path relativePath, byte[] content) {
         final Path fullPath = root.resolve(relativePath);
         if (deployed.contains(fullPath))
             return;
