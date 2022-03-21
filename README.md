@@ -35,4 +35,4 @@ to learn more about Enterprise setup. It will help me prioritize.
 
 [Znai documentation website built with Znai](https://testingisdocumenting.org/znai/)
 
-For curios, znai word meaning: `znai` is a `to know` in Russian and is a root that words like `knoweldge` (`znanie`) are built on.  
+For curios, znai word meaning: `znai` is a `to know` in Ukranian and is a prefix for words like `knoweldge` are built on.  
