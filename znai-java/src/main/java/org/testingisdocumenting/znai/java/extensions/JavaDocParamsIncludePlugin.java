@@ -44,7 +44,10 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
 
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
-        JavaMethod javaMethod = javaCode.findMethod(entry);
+        if (entries.isEmpty()) {
+            throw new IllegalArgumentException("no entry param specified");
+        }
+        JavaMethod javaMethod = javaCode.findMethod(entries.get(0));
 
         ApiParameters apiParameters = new ApiParameters(javaMethod.getAnchorPrefix());
 

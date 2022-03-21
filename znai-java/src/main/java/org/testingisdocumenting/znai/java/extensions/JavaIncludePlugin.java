@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.testingisdocumenting.znai.java.parser.JavaCodeUtils.removeReturn;
 import static org.testingisdocumenting.znai.java.parser.JavaCodeUtils.removeSemicolonAtEnd;
@@ -42,7 +41,6 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     private PluginParamsOpts opts;
     private boolean isBodyOnly;
     private boolean isSignatureOnly;
-    private boolean isMultipleEntries;
     private ManipulatedSnippetContentProvider contentProvider;
 
     @Override
@@ -61,7 +59,6 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
 
         isBodyOnly = opts.get("bodyOnly", false);
         isSignatureOnly = opts.get("signatureOnly", false);
-        isMultipleEntries = !entries.isEmpty();
 
         if (isBodyOnly && isSignatureOnly) {
             throw new IllegalArgumentException("specify only bodyOnly or signatureOnly");
@@ -86,17 +83,16 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     }
 
     private String extractContent(JavaCode javaCode) {
-        if (entry == null && entries.isEmpty()) {
+        if (entries.isEmpty()) {
             return javaCode.getFileContent();
         }
 
-        Stream<String> methodNamesWithOptionalTypes = entry != null ? Stream.of(entry) : entries.stream();
-        return methodNamesWithOptionalTypes
-                .map(nameWithOptionalType -> extractSingleEntryContent(javaCode, nameWithOptionalType))
+        return entries.stream()
+                .map(nameWithOptionalType -> extractEntryContent(javaCode, nameWithOptionalType))
                 .collect(collectorWithSeparator());
     }
 
-    private String extractSingleEntryContent(JavaCode javaCode, String entry) {
+    private String extractEntryContent(JavaCode javaCode, String entry) {
         return javaCode.hasType(entry) ?
                 extractTypeContent(javaCode, entry) :
                 extractMethodContent(javaCode, entry);
@@ -108,9 +104,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     }
 
     private String extractMethodContent(JavaCode javaCode, String entry) {
-        List<JavaMethod> methods = isMultipleEntries ?
-                javaCode.findAllMethods(entry) :
-                Collections.singletonList(javaCode.findMethod(entry));
+        List<JavaMethod> methods = javaCode.findAllMethods(entry);
 
         if (isBodyOnly) {
             return extractBodiesOnly(methods);

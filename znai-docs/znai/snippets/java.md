@@ -62,26 +62,40 @@ Use `bodyOnly` to only display body of your type.
 
 # Multiple Entries
 
-To display multiple methods at once use `entries` parameter to pass a list of method names.
+To display multiple methods at once pass a list to `entry` parameter
     
-    :include-java: HelloWorld.java {entries: ["createData", "importantAction"]}
+    :include-java: HelloWorld.java {entry: ["createData", "importantAction"]}
 
 This will render:
 
-:include-java: HelloWorld.java {entries: ["createData", "importantAction"]}
+:include-java: HelloWorld.java {entry: ["createData", "importantAction"]}
 
 List important methods signatures at one place by passing `signatureOnly: true`.
 
-    :include-java: HelloWorld.java {entries: ["createData", "importantAction"], signatureOnly: true}
+    :include-java: HelloWorld.java {entry: ["createData", "importantAction"], signatureOnly: true}
 
 This will render: 
 
-:include-java: HelloWorld.java {entries: ["createData", "importantAction"], signatureOnly: true}
+:include-java: HelloWorld.java {entry: ["createData", "importantAction"], signatureOnly: true}
 
 # Multiple Overloads
 
-To list of the overloads of a method, specify method name using the `entries` parameter.
+To list of the overloads of a method, specify method name using the `entry` parameter.
 
-    :include-java: HelloWorld.java {entries: "sampleMethod", signatureOnly: true}
+    :include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true}
 
-:include-java: HelloWorld.java {entries: "sampleMethod", signatureOnly: true}
+:include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true}
+
+# Multiple Bodies Only
+
+Pass multiple entries and `bodyOnly` to extract example of usage from unit tests
+
+:include-file: HelloWorldTest.java { autoTitle: true }
+
+    :include-java: HelloWorldTest.java {
+      entry: ["exampleOfA", "exampleOfB"],
+      bodyOnly: true,
+      title: "example of actions"}
+
+:include-java: HelloWorldTest.java {entry: ["exampleOfA", "exampleOfB"], bodyOnly: true, title: "example of actions"}
+
