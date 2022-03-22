@@ -63,13 +63,13 @@ class GroovyIncludePlugin implements IncludePlugin {
         path = pluginParams.getFreeParam()
         fullPath = componentsRegistry.resourceResolver().fullPath(path)
         String fileContent = componentsRegistry.resourceResolver().textContent(fullPath)
-        String entry = pluginParams.getOpts().get("entry")
+        List<String> entries = pluginParams.getOpts().getList("entry")
 
         GroovyCode groovyCode = new GroovyCode(componentsRegistry, fullPath, fileContent)
 
         Boolean bodyOnly = pluginParams.getOpts().has("bodyOnly") ? pluginParams.getOpts().get("bodyOnly") : false
 
-        String content = extractContent(groovyCode, entry, bodyOnly)
+        String content = extractContent(groovyCode, entries, bodyOnly)
         contentProvider = new ManipulatedSnippetContentProvider(path, content, pluginParams)
 
         features = new PluginFeatureList(
@@ -97,14 +97,16 @@ class GroovyIncludePlugin implements IncludePlugin {
         return features.combineAuxiliaryFilesWith(Stream.of(AuxiliaryFile.builtTime(fullPath)))
     }
 
-    private static String extractContent(GroovyCode groovyCode, String entry, Boolean bodyOnly) {
-        if (entry == null) {
+    private static String extractContent(GroovyCode groovyCode, List<String> entries, Boolean bodyOnly) {
+        if (entries.isEmpty()) {
             return groovyCode.getFileContent()
         }
 
-        return groovyCode.hasTypeDetails(entry) ?
-                extractTypeContent(groovyCode, entry, bodyOnly):
-                extractMethodContent(groovyCode, entry, bodyOnly)
+        String firstEntry = entries.get(0)
+
+        return groovyCode.hasTypeDetails(firstEntry) ?
+                extractTypeContent(groovyCode, firstEntry, bodyOnly):
+                extractMethodsContent(groovyCode, entries, bodyOnly)
     }
 
     private static String extractTypeContent(GroovyCode groovyCode, String entry, boolean bodyOnly) {
@@ -115,7 +117,11 @@ class GroovyIncludePlugin implements IncludePlugin {
                 type.fullBody
     }
 
-    private static String extractMethodContent(GroovyCode groovyCode, String entry, boolean bodyOnly) {
+    private static String extractMethodsContent(GroovyCode groovyCode, List<String> entries, boolean bodyOnly) {
+        return entries.collect { extractSingleMethodContent(groovyCode, it, bodyOnly) }.join("\n\n")
+    }
+
+    private static String extractSingleMethodContent(GroovyCode groovyCode, String entry, boolean bodyOnly) {
         def method = groovyCode.findMethod(entry)
 
         return bodyOnly ?
