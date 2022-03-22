@@ -14,6 +14,23 @@ If `bodyOnly` is specified, signature will be omitted.
 
 :include-groovy: HelloWorldTest.groovy {entry: "should calculate risk based on epsilon", bodyOnly: true}
 
+# Multiple Bodies
+
+Pass `list` as `entry` to extract multiple method bodies
+
+```markdown {highlight: "entry"}
+:include-groovy: HelloWorldTest.groovy {
+  title: "api example",
+  entry: ["should calculate risk based on epsilon", "should calculate risk based on epsilon"],
+  bodyOnly: true }
+```
+
+:include-groovy: HelloWorldTest.groovy {
+  title: "api example",
+  entry: ["should calculate risk based on epsilon", "should calculate risk based on epsilon"],
+  bodyOnly: true }
+
+
 # Overloads
 
 Specify types inside brackets to select an overloaded versions of your methods. 

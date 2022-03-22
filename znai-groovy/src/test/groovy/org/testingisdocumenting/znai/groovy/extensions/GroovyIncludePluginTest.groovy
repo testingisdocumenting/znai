@@ -43,6 +43,28 @@ class GroovyIncludePluginTest {
         processAndGetProps("sample.groovy", "{autoTitle: true}").title.should == "sample.groovy"
     }
 
+    @Test
+    void "extract body and signature by entry"() {
+        def snippet = process("UnitTestExample.groovy", "{entry: 'example of api a'}")
+
+        snippet.should == "void \"example of api a\"() {\n" +
+                "    apiA.doAction()\n" +
+                "}"
+    }
+
+    @Test
+    void "extract body only by entry"() {
+        def snippet = process("UnitTestExample.groovy", "{entry: 'example of api a', bodyOnly: true}")
+        snippet.should == "apiA.doAction()"
+    }
+
+    @Test
+    void "extract multiple bodies by entries"() {
+        def snippet = process("UnitTestExample.groovy", "{entry: ['example of api a', 'example of api b'], bodyOnly: true}")
+        snippet.should == "apiA.doAction()\n\n" +
+                "apiB.doAction()"
+    }
+
     private static Map<String, Object> processAndGetProps(String fileName, String params) {
         return PluginsTestUtils.processIncludeAndGetProps(":include-groovy: $fileName $params")
     }
