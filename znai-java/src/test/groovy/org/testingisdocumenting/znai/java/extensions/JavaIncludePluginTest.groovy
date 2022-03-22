@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +29,7 @@ class JavaIncludePluginTest {
         def result = process("Simple.java", "")
         result.should == "class Simple {\n" +
                 "    void methodA() {\n" +
-                "\n" +
+                "        // inside method a\n" +
                 "    }\n" +
                 "\n" +
                 "    void methodB(String p) {\n" +
@@ -48,14 +49,15 @@ class JavaIncludePluginTest {
 
     @Test
     void "includes multiple entries of java method signatures"() {
-        def result = process("Simple.java", "{entries: ['methodA', 'createData'], signatureOnly: true}")
+        def result = process("Simple.java", "{entry: ['methodA', 'createData'], signatureOnly: true}")
         result.should == "void methodA()\n" +
                 "Data createData()"
     }
 
     @Test
     void "includes overloaded entry of java method"() {
-        process("Simple.java", "{entry: 'methodB', signatureOnly: true}").should == "void methodB(String p)"
+        process("Simple.java", "{entry: 'methodB', signatureOnly: true}").should == "void methodB(String p)\n" +
+                "void methodB(String p, Boolean b)"
         process("Simple.java", "{entry: 'methodB(String, Boolean)', signatureOnly: true}").should == "void methodB(String p, Boolean b)"
 
         code {
@@ -71,15 +73,23 @@ class JavaIncludePluginTest {
     }
 
     @Test
+    void "extract body only multiple entries"() {
+        process("Simple.java", "{entry: ['methodA', 'createData'], bodyOnly: true}").should ==
+                "// inside method a\n\n" +
+                "return construction(a, b,\n" +
+                "                    c, d);"
+    }
+
+    @Test
     void "extract multiple signatures of a method overloads"() {
-        def result = process("Simple.java", "{entries: 'methodB', signatureOnly: true}")
+        def result = process("Simple.java", "{entry: 'methodB', signatureOnly: true}")
         result.should == 'void methodB(String p)\n' +
                 'void methodB(String p, Boolean b)'
     }
 
     @Test
     void "extract multiple full bodies of a method overloads"() {
-        def result = process("Simple.java", "{entries: 'methodB'}")
+        def result = process("Simple.java", "{entry: 'methodB'}")
         result.should == 'void methodB(String p) {\n' +
                 '    doB();\n' +
                 '}\n' +

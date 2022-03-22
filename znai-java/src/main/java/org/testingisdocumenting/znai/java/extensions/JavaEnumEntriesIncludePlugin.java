@@ -73,8 +73,8 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     }
 
     private String determineAnchorPrefix() {
-        if (entry != null) {
-            return entry;
+        if (!entries.isEmpty()) {
+            return entries.get(0);
         }
 
         return fullPath.getFileName().toString();
