@@ -65,6 +65,13 @@ class GroovyIncludePluginTest {
                 "apiB.doAction()"
     }
 
+    @Test
+    void "extract multiple bodies by entries with empty separator"() {
+        def snippet = process("UnitTestExample.groovy", "{entry: ['example of api a', 'example of api b'], entrySeparator: '', bodyOnly: true}")
+        snippet.should == "apiA.doAction()\n" +
+                "apiB.doAction()"
+    }
+
     private static Map<String, Object> processAndGetProps(String fileName, String params) {
         return PluginsTestUtils.processIncludeAndGetProps(":include-groovy: $fileName $params")
     }

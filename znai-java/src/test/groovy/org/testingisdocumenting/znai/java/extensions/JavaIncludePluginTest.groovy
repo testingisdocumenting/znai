@@ -55,6 +55,16 @@ class JavaIncludePluginTest {
     }
 
     @Test
+    void "includes multiple entries of java method signatures with custom separator"() {
+        process("Simple.java",
+                "{entry: ['methodA', 'createData'], signatureOnly: true, entrySeparator: '\\n'}").should == "void methodA()\n\n" +
+                "Data createData()"
+        process("Simple.java",
+                "{entry: ['methodA', 'createData'], signatureOnly: true, entrySeparator: '---'}").should == "void methodA()\n---\n" +
+                "Data createData()"
+    }
+
+    @Test
     void "includes overloaded entry of java method"() {
         process("Simple.java", "{entry: 'methodB', signatureOnly: true}").should == "void methodB(String p)\n" +
                 "void methodB(String p, Boolean b)"

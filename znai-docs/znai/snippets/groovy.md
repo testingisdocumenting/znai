@@ -30,6 +30,21 @@ Pass `list` as `entry` to extract multiple method bodies
   entry: ["should calculate risk based on epsilon", "should calculate risk based on epsilon"],
   bodyOnly: true }
 
+Pass empty line to `entrySeparator: ""` to remove default empty line separating entries
+
+```markdown {highlight: "entrySeparator"}
+:include-groovy: HelloWorldTest.groovy {
+  title: "api example",
+  entry: ["should calculate risk based on epsilon", "should calculate risk based on epsilon"],
+  entrySeparator: "",
+  bodyOnly: true }
+```
+
+:include-groovy: HelloWorldTest.groovy {
+  title: "api example",
+  entry: ["should calculate risk based on epsilon", "should calculate risk based on epsilon"],
+  entrySeparator: "",
+  bodyOnly: true }
 
 # Overloads
 

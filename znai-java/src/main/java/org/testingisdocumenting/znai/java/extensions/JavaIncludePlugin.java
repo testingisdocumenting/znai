@@ -26,6 +26,7 @@ import org.testingisdocumenting.znai.java.parser.JavaMethod;
 import org.testingisdocumenting.znai.java.parser.JavaType;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
+import org.testingisdocumenting.znai.utils.EntriesSeparatorUtils;
 import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.Collections;
@@ -41,6 +42,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     private PluginParamsOpts opts;
     private boolean isBodyOnly;
     private boolean isSignatureOnly;
+    private String entrySeparator;
     private ManipulatedSnippetContentProvider contentProvider;
 
     @Override
@@ -59,6 +61,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
 
         isBodyOnly = opts.get("bodyOnly", false);
         isSignatureOnly = opts.get("signatureOnly", false);
+        entrySeparator = opts.get("entrySeparator");
 
         if (isBodyOnly && isSignatureOnly) {
             throw new IllegalArgumentException("specify only bodyOnly or signatureOnly");
@@ -148,6 +151,11 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     }
 
     private Collector<CharSequence, ?, String> collectorWithSeparator() {
-        return Collectors.joining(isSignatureOnly ? "\n" : "\n\n");
+        String separator = entrySeparator;
+        if (separator == null) {
+            separator = isSignatureOnly ? "" : "\n";
+        }
+
+        return Collectors.joining(EntriesSeparatorUtils.enrichUserTextEntriesSeparator(separator));
     }
 }
