@@ -86,7 +86,7 @@ To list of the overloads of a method, specify method name using the `entry` para
 
 :include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true}
 
-# Multiple Bodies Only
+# Multiple Bodies
 
 Pass multiple entries and `bodyOnly` to extract example of usage from unit tests
 
@@ -97,5 +97,24 @@ Pass multiple entries and `bodyOnly` to extract example of usage from unit tests
       bodyOnly: true,
       title: "example of actions"}
 
-:include-java: HelloWorldTest.java {entry: ["exampleOfA", "exampleOfB"], bodyOnly: true, title: "example of actions"}
+:include-java: HelloWorldTest.java {
+  entry: ["exampleOfA", "exampleOfB"],
+  bodyOnly: true,
+  title: "example of actions"}
+
+Pass empty line to `entrySeparator: ""` to remove default empty line separating entries 
+
+```markdown {highlight: "entrySeparator"}
+:include-java: HelloWorldTest.java {
+  entry: ["exampleOfA", "exampleOfB"],
+  entrySeparator: "",
+  bodyOnly: true,
+  title: "example of actions"}
+```
+
+:include-java: HelloWorldTest.java {
+  entry: ["exampleOfA", "exampleOfB"],
+  entrySeparator: "",
+  bodyOnly: true,
+  title: "example of actions"}
 
