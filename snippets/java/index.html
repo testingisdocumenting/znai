@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Method Body</h1></header>
-<p>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
+<p>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method</p>
 </article>
 
 <article>
 <header><h1>Callout Comments</h1></header>
-<p>Similar to how you snippets/code-comments#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot;} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
+<p>Similar to how you snippets/code-comments#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot;} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method</p>
 </article>
 
 <article>
 <header><h1>Signature Only</h1></header>
-<p>You can also specify a method name and extract only its signature. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true} If signatureOnly is specified, body will be omitted. public String sampleMethod(String p1, int p2)</p>
+<p>You can also specify a method name and extract only its signature. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true} If signatureOnly is specified, body will be omitted. public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive)</p>
 </article>
 
 <article>
@@ -111,12 +111,17 @@
 
 <article>
 <header><h1>Multiple Entries</h1></header>
-<p>To display multiple methods at once use entries parameter to pass a list of method names. :include-java: HelloWorld.java {entries: [&quot;createData&quot;, &quot;importantAction&quot;]} This will render: public Data createData() { // create data } public void importantAction(Trader trader, Transaction transaction) { // TODO important } List important methods signatures at one place by passing signatureOnly: true . :include-java: HelloWorld.java {entries: [&quot;createData&quot;, &quot;importantAction&quot;], signatureOnly: true} This will render: public Data createData() public void importantAction(Trader trader, Transaction transaction)</p>
+<p>To display multiple methods at once pass a list to entry parameter :include-java: HelloWorld.java {entry: [&quot;createData&quot;, &quot;importantAction&quot;]} This will render: public Data createData() { // create data } public void importantAction(Trader trader, Transaction transaction) { // TODO important } List important methods signatures at one place by passing signatureOnly: true . :include-java: HelloWorld.java {entry: [&quot;createData&quot;, &quot;importantAction&quot;], signatureOnly: true} This will render: public Data createData() public void importantAction(Trader trader, Transaction transaction)</p>
 </article>
 
 <article>
 <header><h1>Multiple Overloads</h1></header>
-<p>To list of the overloads of a method, specify method name using the entries parameter. :include-java: HelloWorld.java {entries: &quot;sampleMethod&quot;, signatureOnly: true} public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive)</p>
+<p>To list of the overloads of a method, specify method name using the entry parameter. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true} public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive)</p>
+</article>
+
+<article>
+<header><h1>Multiple Bodies</h1></header>
+<p>Pass multiple entries and bodyOnly to extract example of usage from unit tests public class HelloWorldTest { @Test public void exampleOfA() { a.action(); } @Test public void exampleOfB() { b.action(); } } :include-java: HelloWorldTest.java { entry: [&quot;exampleOfA&quot;, &quot;exampleOfB&quot;], bodyOnly: true, title: &quot;example of actions&quot;} a.action(); b.action(); Pass empty line to entrySeparator: &quot;&quot; to remove default empty line separating entries markdown :include-java: HelloWorldTest.java { entry: [&quot;exampleOfA&quot;, &quot;exampleOfB&quot;], entrySeparator: &quot;&quot;, bodyOnly: true, title: &quot;example of actions&quot;} a.action(); b.action();</p>
 </article>
 </section>
 </div>
@@ -200,7 +205,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n\n// overloaded method",
         "entry" : "sampleMethod",
         "bodyOnly" : true,
         "type" : "Snippet",
@@ -250,7 +255,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "lang" : ""
       }, {
-        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n\n// overloaded method",
         "entry" : "sampleMethod",
         "bodyOnly" : true,
         "commentsType" : "inline",
@@ -285,7 +290,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "public String sampleMethod(String p1, int p2)",
+        "snippet" : "public String sampleMethod(String p1, int p2)\npublic void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive)",
         "entry" : "sampleMethod",
         "type" : "Snippet",
         "signatureOnly" : true,
@@ -398,17 +403,17 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To display multiple methods at once use ",
+          "text" : "To display multiple methods at once pass a list to ",
           "type" : "SimpleText"
         }, {
-          "code" : "entries",
+          "code" : "entry",
           "type" : "InlinedCode"
         }, {
-          "text" : " parameter to pass a list of method names.",
+          "text" : " parameter",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-java: HelloWorld.java {entries: [\"createData\", \"importantAction\"]}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: [\"createData\", \"importantAction\"]}\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
@@ -420,7 +425,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "snippet" : "public Data createData() {\n    // create data\n}\n\npublic void importantAction(Trader trader, Transaction transaction) {\n    // TODO important\n}",
-        "entries" : [ "createData", "importantAction" ],
+        "entry" : [ "createData", "importantAction" ],
         "type" : "Snippet",
         "lang" : "java"
       }, {
@@ -436,7 +441,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-java: HelloWorld.java {entries: [\"createData\", \"importantAction\"], signatureOnly: true}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: [\"createData\", \"importantAction\"], signatureOnly: true}\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
@@ -448,7 +453,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "snippet" : "public Data createData()\npublic void importantAction(Trader trader, Transaction transaction)",
-        "entries" : [ "createData", "importantAction" ],
+        "entry" : [ "createData", "importantAction" ],
         "type" : "Snippet",
         "signatureOnly" : true,
         "lang" : "java"
@@ -463,26 +468,87 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "To list of the overloads of a method, specify method name using the ",
           "type" : "SimpleText"
         }, {
-          "code" : "entries",
+          "code" : "entry",
           "type" : "InlinedCode"
         }, {
           "text" : " parameter.",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-java: HelloWorld.java {entries: \"sampleMethod\", signatureOnly: true}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true}\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
       }, {
         "snippet" : "public String sampleMethod(String p1, int p2)\npublic void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive)",
-        "entries" : "sampleMethod",
+        "entry" : "sampleMethod",
         "type" : "Snippet",
         "signatureOnly" : true,
         "lang" : "java"
       } ]
+    }, {
+      "id" : "multiple-bodies",
+      "type" : "Section",
+      "title" : "Multiple Bodies",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass multiple entries and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "bodyOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to extract example of usage from unit tests",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "public class HelloWorldTest {\n    @Test\n    public void exampleOfA() {\n        a.action();\n    }\n\n    @Test\n    public void exampleOfB() {\n        b.action();\n    }\n}",
+        "type" : "Snippet",
+        "title" : "HelloWorldTest.java",
+        "autoTitle" : true,
+        "lang" : "java"
+      }, {
+        "snippet" : ":include-java: HelloWorldTest.java {\n  entry: [\"exampleOfA\", \"exampleOfB\"],\n  bodyOnly: true,\n  title: \"example of actions\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "a.action();\n\nb.action();",
+        "entry" : [ "exampleOfA", "exampleOfB" ],
+        "bodyOnly" : true,
+        "type" : "Snippet",
+        "title" : "example of actions",
+        "lang" : "java"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass empty line to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entrySeparator: \"\"",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to remove default empty line separating entries",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-java: HelloWorldTest.java {\n  entry: [\"exampleOfA\", \"exampleOfB\"],\n  entrySeparator: \"\",\n  bodyOnly: true,\n  title: \"example of actions\"}\n",
+        "highlight" : [ 2 ],
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : "markdown"
+      }, {
+        "snippet" : "a.action();\nb.action();",
+        "entry" : [ "exampleOfA", "exampleOfB" ],
+        "bodyOnly" : true,
+        "entrySeparator" : "",
+        "type" : "Snippet",
+        "title" : "example of actions",
+        "lang" : "java"
+      } ]
     } ],
-    "lastModifiedTime" : 1640992968674,
+    "lastModifiedTime" : 1648425171477,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Java",
@@ -511,6 +577,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Multiple Overloads",
         "id" : "multiple-overloads"
+      }, {
+        "title" : "Multiple Bodies",
+        "id" : "multiple-bodies"
       } ]
     }
   }

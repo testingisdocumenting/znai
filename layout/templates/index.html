@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Definition</h1></header>
-<p>Instead of copy and pasting, define a template in a separate file. Znai uses the http://freemarker.org FreeMarker template engine. **Name**: ${name} **Title**: ${title} **Current Project**: BBR **Team**: Team A Insert your template using the fenced block syntax. The content inside the fenced block is treated as key/values. ```template templates/job.md name: Sathish title: Software Engineer ``` The result is rendered below: Name: SathishTitle: Software EngineerCurrent Project: BBRTeam: Team A</p>
+<p>Instead of copy and pasting, define a template in a separate file. Znai uses the https://freemarker.apache.org FreeMarker template engine. **Name**: ${name} **Title**: ${title} **Current Project**: BBR **Team**: Team A Insert your template using the fenced block syntax. The content inside the fenced block is treated as key/values. ```template templates/job.md name: Sathish title: Software Engineer ``` The result is rendered below: Name: SathishTitle: Software EngineerCurrent Project: BBRTeam: Team A</p>
 </article>
 
 <article>
@@ -106,7 +106,7 @@
 
 <article>
 <header><h1>Loops</h1></header>
-<p>You can loop over a list of parameters using http://freemarker.org/docs/ref_directive_list.html FreeMarker loopConsider an external file... {&quot;names&quot;: [ {&quot;name&quot;: &quot;Name 1&quot;, &quot;description&quot;: &quot;Description 1&quot;}, {&quot;name&quot;: &quot;Name 2&quot;, &quot;description&quot;: &quot;Description 2&quot;, &quot;optional&quot;: &quot;true&quot;}, {&quot;name&quot;: &quot;Name 3&quot;, &quot;description&quot;: &quot;Description 3&quot;} ]} ...and this template: &lt;#list names as n&gt; ```columns {left: {portion: 3, align: &quot;right&quot;}, border: true} left: **${n.name}** &lt;#if n.optional??&gt; \ *optional* &lt;/#if&gt; right: ${n.description} ``` &lt;/#list&gt; :include-template: templates/multiple-arg-definition.md {paramsPath: &quot;artifacts/names.json&quot;} Name 1 Description 1 Name 2 optional Description 2 Name 3 Description 3</p>
+<p>You can loop over a list of parameters using https://freemarker.apache.org/docs/ref_directive_list.html FreeMarker loopConsider an external file... {&quot;names&quot;: [ {&quot;name&quot;: &quot;Name 1&quot;, &quot;description&quot;: &quot;Description 1&quot;}, {&quot;name&quot;: &quot;Name 2&quot;, &quot;description&quot;: &quot;Description 2&quot;, &quot;optional&quot;: &quot;true&quot;}, {&quot;name&quot;: &quot;Name 3&quot;, &quot;description&quot;: &quot;Description 3&quot;} ]} ...and this template: &lt;#list names as n&gt; ```columns {left: {portion: 3, align: &quot;right&quot;}, border: true} left: **${n.name}** &lt;#if n.optional??&gt; \ *optional* &lt;/#if&gt; right: ${n.description} ``` &lt;/#list&gt; :include-template: templates/multiple-arg-definition.md {paramsPath: &quot;artifacts/names.json&quot;} Name 1 Description 1 Name 2 optional Description 2 Name 3 Description 3</p>
 </article>
 </section>
 </div>
@@ -286,7 +286,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "text" : "FreeMarker",
             "type" : "SimpleText"
           } ],
-          "url" : "http://freemarker.org"
+          "url" : "https://freemarker.apache.org"
         }, {
           "text" : " template engine.",
           "type" : "SimpleText"
@@ -558,7 +558,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "text" : "FreeMarker loop",
             "type" : "SimpleText"
           } ],
-          "url" : "http://freemarker.org/docs/ref_directive_list.html"
+          "url" : "https://freemarker.apache.org/docs/ref_directive_list.html"
         } ]
       }, {
         "type" : "Paragraph",
@@ -684,7 +684,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }
       } ]
     } ],
-    "lastModifiedTime" : 1640992968670,
+    "lastModifiedTime" : 1648425171477,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Templates",

@@ -101,7 +101,7 @@
 
 <article>
 <header><h1>Validation</h1></header>
-<p>Local links are automatically validated during documentation build time. You will get a build time error if you refer to a page or a section/sub-section that does not exist.</p>
+<p>Local links are automatically validated during documentation build time. You will get a build time error if you refer to a page or a section/sub-section that does not exist.Pass --validate-external-links to enable external links validation.</p>
 </article>
 </section>
 </div>
@@ -364,9 +364,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "You will get a build time error if you refer to a page or a section/sub-section that does not exist.",
           "type" : "SimpleText"
         } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "--validate-external-links",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to enable external links validation.",
+          "type" : "SimpleText"
+        } ]
       } ]
     } ],
-    "lastModifiedTime" : 1640992968666,
+    "lastModifiedTime" : 1648425171469,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Page References",

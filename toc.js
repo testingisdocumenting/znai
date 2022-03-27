@@ -446,6 +446,9 @@ toc = [ {
     }, {
       "title" : "Multiple Overloads",
       "id" : "multiple-overloads"
+    }, {
+      "title" : "Multiple Bodies",
+      "id" : "multiple-bodies"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -492,6 +495,9 @@ toc = [ {
     "pageSectionIdTitles" : [ {
       "title" : "Method Body",
       "id" : "method-body"
+    }, {
+      "title" : "Multiple Bodies",
+      "id" : "multiple-bodies"
     }, {
       "title" : "Overloads",
       "id" : "overloads"
@@ -767,8 +773,17 @@ toc = [ {
       "title" : "Multiple Markdown Files",
       "id" : "multiple-markdown-files"
     }, {
+      "title" : "Section One",
+      "id" : "section-one"
+    }, {
+      "title" : "Section Two",
+      "id" : "section-two"
+    }, {
       "title" : "Optional Markdown",
       "id" : "optional-markdown"
+    }, {
+      "title" : "Partial Markdown",
+      "id" : "partial-markdown"
     } ]
   } ]
 }, {
@@ -1145,6 +1160,9 @@ toc = [ {
     "fileName" : "image-annotations",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "Badges",
+      "id" : "badges"
+    }, {
       "title" : "Annotations File",
       "id" : "annotations-file"
     }, {
@@ -1375,6 +1393,19 @@ toc = [ {
   "sectionTitle" : "Release Notes",
   "dirName" : "release-notes",
   "items" : [ {
+    "sectionTitle" : "Release Notes",
+    "pageTitle" : "2022 Releases",
+    "pageMeta" : {
+      "title" : [ "2022 Releases" ]
+    },
+    "dirName" : "release-notes",
+    "fileName" : "2022",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "1.56",
+      "id" : "156"
+    } ]
+  }, {
     "sectionTitle" : "Release Notes",
     "pageTitle" : "2021 Releases",
     "pageMeta" : {

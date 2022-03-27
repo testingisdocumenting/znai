@@ -91,12 +91,17 @@
 
 <article>
 <header><h1>Multiple Markdown Files</h1></header>
-<p>You can also include all the Markdown files within a directory by using include-markdowns .This plugin can be used to generate release notes or an FAQ page. :include-markdowns: markdown-dir Included Markdown This markdown, and the sub-heading above, were included using the include-markdown plugin. Super easy. Included Markdown 3 This markdown, and the sub-hed above, were included using the include-markdowns plugin. Please notice the s. Included Markdown 2 This markdown, and the sub-hed above, were included using the include-markdowns plugin. Please notice the s. bash $ command specific to external Note: include-markdowns displays the files of the specified directory based on the filename, in alphabetical order.</p>
+<p>You can also include all the Markdown files within a directory by using include-markdowns .This plugin can be used to generate release notes or an FAQ page. :include-markdowns: markdown-dir Included Markdown This markdown, and the sub-heading above, were included using the include-markdown plugin. Super easy. Included Markdown 3 This markdown, and the sub-hed above, were included using the include-markdowns plugin. Please notice the s. Included Markdown 2 This markdown, and the sub-hed above, were included using the include-markdowns plugin. Please notice the s. Some text Use these parameters to setup your work environment: parameter=value bash $ command specific to external Note: include-markdowns displays the files of the specified directory based on the filename, in alphabetical order.</p>
 </article>
 
 <article>
 <header><h1>Optional Markdown</h1></header>
 <p>When you document an open source project you may have different instructions based on where the documentation is deployed.For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like Getting Started.We build documentation twice and the differences are handled by :include-markdown: 's firstAvailable parameter. :include-markdown: {firstAvailable: [ &quot;markdown-dir/getting-started-step-internal.md&quot;, &quot;markdown-dir/getting-started-step-external.md&quot;]} bash $ command specific to external</p>
+</article>
+
+<article>
+<header><h1>Partial Markdown</h1></header>
+<p>Use surroundedBy to include portion of a markdown from existing markdown file, e.g. readme.md Given an existing markdown files with markers # Section One Some text # Section Two [comment]: &lt;&gt; (marker-one) Use these parameters to setup your work environment: ``` parameter=value ``` [comment]: &lt;&gt; (marker-one) markdown :include-markdown: markdown-dir/markdown-with-markers.md {surroundedBy: &quot;&lt;&gt; (marker-one)&quot;} Use these parameters to setup your work environment: parameter=value</p>
 </article>
 </section>
 </div>
@@ -265,24 +270,51 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : ".",
           "type" : "SimpleText"
         } ]
-      }, {
-        "snippet" : "$ command specific to external\n",
-        "type" : "Snippet",
-        "title" : "getting started",
-        "lineNumber" : "",
-        "lang" : "bash"
-      }, {
+      } ]
+    }, {
+      "id" : "section-one",
+      "type" : "Section",
+      "title" : "Section One",
+      "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "include-markdowns",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " displays the files of the specified directory based on the filename, in alphabetical order.",
+          "text" : "Some text",
           "type" : "SimpleText"
         } ]
+      } ]
+    }, {
+      "id" : "section-two",
+      "type" : "Section",
+      "title" : "Section Two",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use these parameters to setup your work environment:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "parameter=value\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      } ]
+    }, {
+      "snippet" : "$ command specific to external\n",
+      "type" : "Snippet",
+      "title" : "getting started",
+      "lineNumber" : "",
+      "lang" : "bash"
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Note: ",
+        "type" : "SimpleText"
+      }, {
+        "code" : "include-markdowns",
+        "type" : "InlinedCode"
+      }, {
+        "text" : " displays the files of the specified directory based on the filename, in alphabetical order.",
+        "type" : "SimpleText"
       } ]
     }, {
       "id" : "optional-markdown",
@@ -344,8 +376,56 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "lang" : "bash"
       } ]
+    }, {
+      "id" : "partial-markdown",
+      "type" : "Section",
+      "title" : "Partial Markdown",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "surroundedBy",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to include portion of a markdown from existing markdown file, e.g. ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "readme.md",
+          "type" : "InlinedCode"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Given an existing markdown files with markers",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "# Section One\n\nSome text\n\n# Section Two\n\n[comment]: <> (marker-one)\n\nUse these parameters to setup your work environment:\n```\nparameter=value\n```\n\n[comment]: <> (marker-one)",
+        "type" : "Snippet",
+        "title" : "readme.md",
+        "lang" : "md"
+      }, {
+        "snippet" : ":include-markdown: markdown-dir/markdown-with-markers.md {surroundedBy: \"<> (marker-one)\"}\n",
+        "type" : "Snippet",
+        "title" : "partial include",
+        "lineNumber" : "",
+        "lang" : "markdown"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use these parameters to setup your work environment:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "parameter=value\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      } ]
     } ],
-    "lastModifiedTime" : 1640992968678,
+    "lastModifiedTime" : 1648425171481,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Markdown",
@@ -360,8 +440,17 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Multiple Markdown Files",
         "id" : "multiple-markdown-files"
       }, {
+        "title" : "Section One",
+        "id" : "section-one"
+      }, {
+        "title" : "Section Two",
+        "id" : "section-two"
+      }, {
         "title" : "Optional Markdown",
         "id" : "optional-markdown"
+      }, {
+        "title" : "Partial Markdown",
+        "id" : "partial-markdown"
       } ]
     }
   }

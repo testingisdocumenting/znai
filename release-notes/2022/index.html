@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: 2022 Releases</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>1.56</h1></header>
+<p>Fix: search result preview highlight across styles Fix highlight code lines when multiline comment is present (e.g. /* */ ) Fix: using : , - , + chars in Search doesn't lead to crash anymore Fix: search popup window height is consistent size when jumping between results Added snippets/markdown#partial-markdown include partial markdown Added multiple entries separator for snippets/java#multiple-bodies Java and snippets/groovy#multiple-bodies Groovy Added snippets/groovy#multiple-bodies multiple bodies only using entry for Groovy Added snippets/java#multiple-bodies multiple bodies only using entry for Java Add validate external links flag --validate-external-links Add visuals/image-annotations#badges image fence plugin with badge annotations Handle loop reference in snippets/open-API Open API Generate plugin params usage statistics file Generate plugins usage statistics file</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/global-anchors.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View On GitHub"
+    },
+    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/issues"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "156",
+      "type" : "Section",
+      "title" : "1.56",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: search result preview highlight across styles",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix highlight code lines when multiline comment is present (e.g. ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "/* */",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ")",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: using ",
+              "type" : "SimpleText"
+            }, {
+              "code" : ":",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "-",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "+",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " chars in ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "Search",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " doesn't lead to crash anymore",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: search popup window height is consistent size when jumping between results",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Added ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include partial markdown",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/markdown#partial-markdown"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Added multiple entries separator for ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Java",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/java#multiple-bodies"
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Groovy",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/groovy#multiple-bodies"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Added ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "multiple bodies only",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/groovy#multiple-bodies"
+            }, {
+              "text" : " using ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "entry",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for Groovy",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Added ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "multiple bodies only",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/java#multiple-bodies"
+            }, {
+              "text" : " using ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "entry",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for Java",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add validate external links flag ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "--validate-external-links",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "image fence",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/visuals/image-annotations#badges"
+            }, {
+              "text" : " plugin with badge annotations",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Handle loop reference in ",
+              "type" : "SimpleText"
+            }, {
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Open API",
+                "type" : "SimpleText"
+              } ],
+              "url" : "/znai/snippets/open-API"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Generate plugin params usage statistics file",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "type" : "BulletList",
+        "tight" : true,
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Generate plugins usage statistics file",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1648425171477,
+    "tocItem" : {
+      "sectionTitle" : "Release Notes",
+      "pageTitle" : "2022 Releases",
+      "pageMeta" : {
+        "title" : [ "2022 Releases" ]
+      },
+      "dirName" : "release-notes",
+      "fileName" : "2022",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "1.56",
+        "id" : "156"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

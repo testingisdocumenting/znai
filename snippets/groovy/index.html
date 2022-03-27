@@ -86,7 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Method Body</h1></header>
-<p>When you need to extract a specific method body use the include-groovy plugin.Consider the following file: class HelloWorldTest { @Test void &quot;should calculate risk based on epsilon&quot;() { generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 } } Specify a method name to extract it from the file. :include-groovy: HelloWorldTest.groovy {entry: &quot;should calculate risk based on epsilon&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108</p>
+<p>When you need to extract a specific method body use the include-groovy plugin.Consider the following file: class HelloWorldTest { @Test void &quot;should calculate risk based on epsilon&quot;() { generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 } @Test void &quot;should calculate risk without quantity&quot;() { generateStatement(price: 10, epsilon: 2) calcRisk().should == 108 } } Specify a method name to extract it from the file. :include-groovy: HelloWorldTest.groovy {entry: &quot;should calculate risk based on epsilon&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108</p>
+</article>
+
+<article>
+<header><h1>Multiple Bodies</h1></header>
+<p>Pass list as entry to extract multiple method bodies markdown :include-groovy: HelloWorldTest.groovy { title: &quot;api example&quot;, entry: [&quot;should calculate risk based on epsilon&quot;, &quot;should calculate risk based on epsilon&quot;], bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 Pass empty line to entrySeparator: &quot;&quot; to remove default empty line separating entries markdown :include-groovy: HelloWorldTest.groovy { title: &quot;api example&quot;, entry: [&quot;should calculate risk based on epsilon&quot;, &quot;should calculate risk based on epsilon&quot;], entrySeparator: &quot;&quot;, bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108</p>
 </article>
 
 <article>
@@ -153,7 +158,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "class HelloWorldTest {\n    @Test\n    void \"should calculate risk based on epsilon\"() {\n        generateStatement(price: 10, quantity: 10, epsilon: 2)\n        calcRisk().should == 108\n    }\n}",
+        "snippet" : "class HelloWorldTest {\n    @Test\n    void \"should calculate risk based on epsilon\"() {\n        generateStatement(price: 10, quantity: 10, epsilon: 2)\n        calcRisk().should == 108\n    }\n\n    @Test\n    void \"should calculate risk without quantity\"() {\n        generateStatement(price: 10, epsilon: 2)\n        calcRisk().should == 108\n    }\n}",
         "type" : "Snippet",
         "lang" : "groovy"
       }, {
@@ -184,6 +189,68 @@ ReactDOM.render(React.createElement(Documentation, {
         "entry" : "should calculate risk based on epsilon",
         "bodyOnly" : true,
         "type" : "Snippet",
+        "lang" : "groovy"
+      } ]
+    }, {
+      "id" : "multiple-bodies",
+      "type" : "Section",
+      "title" : "Multiple Bodies",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "list",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " as ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entry",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to extract multiple method bodies",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-groovy: HelloWorldTest.groovy {\n  title: \"api example\",\n  entry: [\"should calculate risk based on epsilon\", \"should calculate risk based on epsilon\"],\n  bodyOnly: true }\n",
+        "highlight" : [ 2 ],
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : "markdown"
+      }, {
+        "snippet" : "generateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108\n\ngenerateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108",
+        "entry" : [ "should calculate risk based on epsilon", "should calculate risk based on epsilon" ],
+        "bodyOnly" : true,
+        "type" : "Snippet",
+        "title" : "api example",
+        "lang" : "groovy"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass empty line to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entrySeparator: \"\"",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to remove default empty line separating entries",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-groovy: HelloWorldTest.groovy {\n  title: \"api example\",\n  entry: [\"should calculate risk based on epsilon\", \"should calculate risk based on epsilon\"],\n  entrySeparator: \"\",\n  bodyOnly: true }\n",
+        "highlight" : [ 3 ],
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : "markdown"
+      }, {
+        "snippet" : "generateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108\ngenerateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108",
+        "entry" : [ "should calculate risk based on epsilon", "should calculate risk based on epsilon" ],
+        "bodyOnly" : true,
+        "entrySeparator" : "",
+        "type" : "Snippet",
+        "title" : "api example",
         "lang" : "groovy"
       } ]
     }, {
@@ -309,7 +376,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "groovy"
       } ]
     } ],
-    "lastModifiedTime" : 1640992968674,
+    "lastModifiedTime" : 1648425171477,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Groovy",
@@ -320,6 +387,9 @@ ReactDOM.render(React.createElement(Documentation, {
       "pageSectionIdTitles" : [ {
         "title" : "Method Body",
         "id" : "method-body"
+      }, {
+        "title" : "Multiple Bodies",
+        "id" : "multiple-bodies"
       }, {
         "title" : "Overloads",
         "id" : "overloads"
