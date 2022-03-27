@@ -70,4 +70,16 @@ class MarkdownIncludePluginTest {
                     ':include-markdown: wrongfile.md')
         } should throwException("can't find resource: wrongfile.md")
     }
+
+    @Test
+    void "should extract portion of markdown using surroundedBy"() {
+        def includePluginAndParserHandler = PluginsTestUtils.processAndGetIncludePluginAndParserHandler(':include-markdown: ' +
+                'test-with-marker.md { surroundedBy: "marker-to-surround"}')
+
+        includePluginAndParserHandler.parserHandler.docElement
+                .toMap().content[0].markup.should == '```\n' +
+                'code snippet\n' +
+                'multi line\n' +
+                '```'
+    }
 }
