@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.extensions.markup;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
@@ -59,9 +60,19 @@ public class MarkdownIncludePlugin implements IncludePlugin {
         MarkupParser parser = componentsRegistry.defaultParser();
 
         markdownPathUsed = selectMarkdown(componentsRegistry.resourceResolver(), pluginParams);
-        parserResult = parser.parse(markupPath, resourcesResolver.textContent(markdownPathUsed));
+        String content = modifiedContent(markdownPathUsed.toString(),
+                resourcesResolver.textContent(markdownPathUsed), pluginParams);
+        parserResult = parser.parse(markupPath, content);
 
         return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
+    }
+
+    private String modifiedContent(String id, String fullContent, PluginParams pluginParams) {
+        ManipulatedSnippetContentProvider contentProvider = new ManipulatedSnippetContentProvider(id,
+                fullContent,
+                pluginParams);
+
+        return contentProvider.snippetContent();
     }
 
     private Path selectMarkdown(ResourcesResolver resourcesResolver, PluginParams pluginParams) {
