@@ -23,7 +23,8 @@ import static org.testingisdocumenting.znai.utils.EntriesSeparatorUtils.enrichUs
 class EntriesSeparatorUtilsTest {
     @Test
     void "should enrich user provided separator"() {
-        enrichUserTextEntriesSeparator("").should == "\n"
+        enrichUserTextEntriesSeparator(null).should == "\n"
+        enrichUserTextEntriesSeparator("").should == "\n\n"
         enrichUserTextEntriesSeparator("\n").should == "\n\n"
         enrichUserTextEntriesSeparator("---").should == "\n---\n"
     }

@@ -22,8 +22,8 @@ public class EntriesSeparatorUtils {
 
     /**
      * <ul>
-     *     <li>null separator becomes double new-line separator (empty line in between)</li>
-     *     <li>empty separator becomes single new-line separator</li>
+     *     <li>null separator becomes new-line separator</li>
+     *     <li>empty separator becomes double new-line separator (empty line in between)</li>
      *     <li>text separator becomes single new-line separators surrounding provided separator</li>
      * </ul>
      *
@@ -34,7 +34,7 @@ public class EntriesSeparatorUtils {
         if (separator == null) {
             return "\n";
         } else if (separator.isEmpty()) {
-            return "\n";
+            return "\n\n";
         } else if (separator.equals("\n")) {
             return "\n\n";
         } else {

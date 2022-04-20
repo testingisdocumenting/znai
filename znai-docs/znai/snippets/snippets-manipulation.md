@@ -38,7 +38,7 @@ Use `surroundedBySeparator` to select separator(s) between blocks
   surroundedBySeparator: ["..."]
 }
 
-Note: `surroundedBySeparator` can be either single value or a list. Plugin will use a different separator for each block.
+Note: `surroundedBySeparator` can be either single value or a list. Plugin will use a different separator for each block. Use `null` to have an empty line as a separator.  
 
 # Replace
 
@@ -111,10 +111,10 @@ By default `startLine` and `endLine` are included in the rendered result. Use `e
 
 Use `includeRegexp` to include only lines matching regexp(s).
 
-    :include-file: python-examples.py {includeRegexp: "import"}
-    :include-file: python-examples.py {includeRegexp: ["import"]}
+    :include-file: python-examples.py {includeRegexp: "import "}
+    :include-file: python-examples.py {includeRegexp: ["import "]}
 
-:include-file: python-examples.py { includeRegexp: ["import"], title: "include by regexp result" }
+:include-file: python-examples.py { includeRegexp: ["import "], title: "include by regexp result" }
 
 # Exclude Regexp
 

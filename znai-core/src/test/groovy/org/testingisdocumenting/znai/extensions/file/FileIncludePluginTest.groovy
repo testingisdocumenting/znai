@@ -105,14 +105,13 @@ class FileIncludePluginTest {
     void "should extract file snippet based on multiple surrounding patterns and add specified separator"() {
         def text = resultingSnippet("file-with-multiple-surround-marker.txt",
                 "{surroundedBy: ['# import-list', '# concept-example', '# another-example', '# next-last-example', '# last-example', ]," +
-                        " surroundedBySeparator: ['...', '', '%']}")
+                        " surroundedBySeparator: ['...', null, '%']}")
 
         text.should == "import abc\n" +
                 "import def\n" +
                 "...\n" +
                 "foo()\n" +
                 "bar()\n" +
-                "\n" +
                 "foobar()\n" +
                 "%\n" +
                 "almostFinish()\n" +
