@@ -125,7 +125,7 @@ class GroovyIncludePlugin implements IncludePlugin {
     }
 
     private String extractMethodsContent(GroovyCode groovyCode, List<String> entries) {
-        def separator = EntriesSeparatorUtils.enrichUserTextEntriesSeparator(entrySeparator == null ? "\n" : entrySeparator)
+        def separator = EntriesSeparatorUtils.enrichUserTextEntriesSeparator(entrySeparator)
         return entries.collect { extractSingleMethodContent(groovyCode, it) }.join(separator)
     }
 
