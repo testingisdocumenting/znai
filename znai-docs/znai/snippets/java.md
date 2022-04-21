@@ -33,6 +33,12 @@ If `signatureOnly` is specified, body will be omitted.
 
 :include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true}
 
+Pass `entrySeparator: "<separator>"` to have a provided line in between entries as a separator.
+
+    :include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true, entrySeparator: "..."}
+
+:include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true, entrySeparator: "..."}
+
 # Overloads
 
 Specify types inside brackets to select an overloaded versions of your methods. 
@@ -102,7 +108,7 @@ Pass multiple entries and `bodyOnly` to extract example of usage from unit tests
   bodyOnly: true,
   title: "example of actions"}
 
-Pass empty line to `entrySeparator: ""` to remove default empty line separating entries 
+Pass `entrySeparator: "<separator>"` to have a provided line in between entries as a separator.
 
 ```markdown {highlight: "entrySeparator"}
 :include-java: HelloWorldTest.java {

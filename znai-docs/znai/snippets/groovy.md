@@ -30,7 +30,7 @@ Pass `list` as `entry` to extract multiple method bodies
   entry: ["should calculate risk based on epsilon", "should calculate risk based on epsilon"],
   bodyOnly: true }
 
-Pass empty line to `entrySeparator: ""` to remove default empty line separating entries
+Pass `entrySeparator: "<separator>"` to have a provided line in between entries as a separator.
 
 ```markdown {highlight: "entrySeparator"}
 :include-groovy: HelloWorldTest.groovy {

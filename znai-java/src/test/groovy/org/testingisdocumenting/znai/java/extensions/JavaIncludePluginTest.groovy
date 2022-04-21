@@ -57,7 +57,7 @@ class JavaIncludePluginTest {
     @Test
     void "includes multiple entries of java method signatures with custom separator"() {
         process("Simple.java",
-                "{entry: ['methodA', 'createData'], signatureOnly: true, entrySeparator: '\\n'}").should == "void methodA()\n\n" +
+                "{entry: ['methodA', 'createData'], signatureOnly: true, entrySeparator: ''}").should == "void methodA()\n\n" +
                 "Data createData()"
         process("Simple.java",
                 "{entry: ['methodA', 'createData'], signatureOnly: true, entrySeparator: '---'}").should == "void methodA()\n---\n" +
@@ -85,7 +85,7 @@ class JavaIncludePluginTest {
     @Test
     void "extract body only multiple entries"() {
         process("Simple.java", "{entry: ['methodA', 'createData'], bodyOnly: true}").should ==
-                "// inside method a\n\n" +
+                "// inside method a\n" +
                 "return construction(a, b,\n" +
                 "                    c, d);"
     }
@@ -103,7 +103,6 @@ class JavaIncludePluginTest {
         result.should == 'void methodB(String p) {\n' +
                 '    doB();\n' +
                 '}\n' +
-                '\n' +
                 'void methodB(String p, Boolean b) {\n' +
                 '    doBPlus();\n' +
                 '}'

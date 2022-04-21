@@ -61,14 +61,14 @@ class GroovyIncludePluginTest {
     @Test
     void "extract multiple bodies by entries"() {
         def snippet = process("UnitTestExample.groovy", "{entry: ['example of api a', 'example of api b'], bodyOnly: true}")
-        snippet.should == "apiA.doAction()\n\n" +
+        snippet.should == "apiA.doAction()\n" +
                 "apiB.doAction()"
     }
 
     @Test
     void "extract multiple bodies by entries with empty separator"() {
         def snippet = process("UnitTestExample.groovy", "{entry: ['example of api a', 'example of api b'], entrySeparator: '', bodyOnly: true}")
-        snippet.should == "apiA.doAction()\n" +
+        snippet.should == "apiA.doAction()\n\n" +
                 "apiB.doAction()"
     }
 

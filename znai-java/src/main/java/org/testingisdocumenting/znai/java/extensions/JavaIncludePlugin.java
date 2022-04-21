@@ -151,11 +151,6 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     }
 
     private Collector<CharSequence, ?, String> collectorWithSeparator() {
-        String separator = entrySeparator;
-        if (separator == null) {
-            separator = isSignatureOnly ? "" : "\n";
-        }
-
-        return Collectors.joining(EntriesSeparatorUtils.enrichUserTextEntriesSeparator(separator));
+        return Collectors.joining(EntriesSeparatorUtils.enrichUserTextEntriesSeparator(entrySeparator));
     }
 }
