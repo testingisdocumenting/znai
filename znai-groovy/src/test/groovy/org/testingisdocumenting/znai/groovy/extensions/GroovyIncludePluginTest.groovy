@@ -61,7 +61,7 @@ class GroovyIncludePluginTest {
     @Test
     void "extract multiple bodies by entries"() {
         def snippet = process("UnitTestExample.groovy", "{entry: ['example of api a', 'example of api b'], bodyOnly: true}")
-        snippet.should == "apiA.doAction()\n\n" +
+        snippet.should == "apiA.doAction()\n" +
                 "apiB.doAction()"
     }
 
