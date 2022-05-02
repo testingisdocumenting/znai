@@ -1,0 +1,1 @@
+* Fix: search preview popup has fixed height now to avoid size jump

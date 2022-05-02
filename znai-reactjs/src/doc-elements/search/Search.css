@@ -54,8 +54,10 @@
 }
 
 .znai-toc-and-preview {
-    flex-direction: row;
     display: flex;
+    flex: 1;
+    flex-direction: row;
+
     border: 1px solid var(--znai-search-border-color);
     border-top: none;
     border-bottom-left-radius: 8px;
