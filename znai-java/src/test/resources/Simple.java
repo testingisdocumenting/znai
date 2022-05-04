@@ -1,6 +1,6 @@
 class Simple {
     void methodA() {
-
+        // inside method a
     }
 
     void methodB(String p) {

@@ -34,6 +34,7 @@ import org.testingisdocumenting.znai.parser.ParserHandler
 import org.testingisdocumenting.znai.parser.docelement.DocElementType
 import org.testingisdocumenting.znai.search.SearchScore
 import org.testingisdocumenting.znai.search.SearchText
+import org.testingisdocumenting.znai.utils.EntriesSeparatorUtils
 
 import java.nio.file.Path
 import java.util.stream.Stream
@@ -44,6 +45,8 @@ class GroovyIncludePlugin implements IncludePlugin {
     private PluginFeatureList features
 
     private ManipulatedSnippetContentProvider contentProvider
+    private boolean bodyOnly
+    private String entrySeparator
 
     @Override
     String id() {
@@ -63,13 +66,17 @@ class GroovyIncludePlugin implements IncludePlugin {
         path = pluginParams.getFreeParam()
         fullPath = componentsRegistry.resourceResolver().fullPath(path)
         String fileContent = componentsRegistry.resourceResolver().textContent(fullPath)
-        String entry = pluginParams.getOpts().get("entry")
+
+        def opts = pluginParams.getOpts()
+
+        List<String> entries = opts.getList("entry")
 
         GroovyCode groovyCode = new GroovyCode(componentsRegistry, fullPath, fileContent)
 
-        Boolean bodyOnly = pluginParams.getOpts().has("bodyOnly") ? pluginParams.getOpts().get("bodyOnly") : false
+        bodyOnly = opts.get("bodyOnly", false)
+        entrySeparator = opts.get("entrySeparator")
 
-        String content = extractContent(groovyCode, entry, bodyOnly)
+        String content = extractContent(groovyCode, entries)
         contentProvider = new ManipulatedSnippetContentProvider(path, content, pluginParams)
 
         features = new PluginFeatureList(
@@ -80,7 +87,7 @@ class GroovyIncludePlugin implements IncludePlugin {
         )
 
         Map<String, Object> props = CodeSnippetsProps.create("groovy", contentProvider.snippetContent())
-        props.putAll(pluginParams.getOpts().toMap())
+        props.putAll(opts.toMap())
 
         features.updateProps(props)
 
@@ -97,17 +104,19 @@ class GroovyIncludePlugin implements IncludePlugin {
         return features.combineAuxiliaryFilesWith(Stream.of(AuxiliaryFile.builtTime(fullPath)))
     }
 
-    private static String extractContent(GroovyCode groovyCode, String entry, Boolean bodyOnly) {
-        if (entry == null) {
+    private String extractContent(GroovyCode groovyCode, List<String> entries) {
+        if (entries.isEmpty()) {
             return groovyCode.getFileContent()
         }
 
-        return groovyCode.hasTypeDetails(entry) ?
-                extractTypeContent(groovyCode, entry, bodyOnly):
-                extractMethodContent(groovyCode, entry, bodyOnly)
+        String firstEntry = entries.get(0)
+
+        return groovyCode.hasTypeDetails(firstEntry) ?
+                extractTypeContent(groovyCode, firstEntry):
+                extractMethodsContent(groovyCode, entries)
     }
 
-    private static String extractTypeContent(GroovyCode groovyCode, String entry, boolean bodyOnly) {
+    private String extractTypeContent(GroovyCode groovyCode, String entry) {
         def type = groovyCode.findType(entry)
 
         return bodyOnly ?
@@ -115,7 +124,12 @@ class GroovyIncludePlugin implements IncludePlugin {
                 type.fullBody
     }
 
-    private static String extractMethodContent(GroovyCode groovyCode, String entry, boolean bodyOnly) {
+    private String extractMethodsContent(GroovyCode groovyCode, List<String> entries) {
+        def separator = EntriesSeparatorUtils.enrichUserTextEntriesSeparator(entrySeparator)
+        return entries.collect { extractSingleMethodContent(groovyCode, it) }.join(separator)
+    }
+
+    private String extractSingleMethodContent(GroovyCode groovyCode, String entry) {
         def method = groovyCode.findMethod(entry)
 
         return bodyOnly ?

@@ -35,3 +35,16 @@ We build documentation twice and the differences are handled by `:include-markdo
     "markdown-dir/getting-started-step-internal.md", 
     "markdown-dir/getting-started-step-external.md"]}
  
+# Partial Markdown
+
+Use `surroundedBy` to include portion of a markdown from existing markdown file, e.g. `readme.md` 
+
+Given an existing markdown files with markers
+
+:include-file: markdown-dir/markdown-with-markers.md {title: "readme.md"}
+
+```markdown {title: "partial include"}
+:include-markdown: markdown-dir/markdown-with-markers.md {surroundedBy: "<> (marker-one)"}
+```
+
+:include-markdown: markdown-dir/markdown-with-markers.md {surroundedBy: "<> (marker-one)"}

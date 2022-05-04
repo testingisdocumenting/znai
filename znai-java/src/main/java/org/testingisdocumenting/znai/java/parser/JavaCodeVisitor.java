@@ -71,8 +71,7 @@ class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     public JavaMethod findMethodDetails(String methodNameWithOptionalTypes) {
         List<JavaMethod> details = findAllMethodDetails(methodNameWithOptionalTypes);
         if (details.isEmpty()) {
-            throw new RuntimeException("no method found: " + methodNameWithOptionalTypes + "." +
-                    "\nAvailable methods:\n" + renderAllMethods());
+            return throwNoMethodFound(methodNameWithOptionalTypes);
         }
 
         return details.get(0);
@@ -80,9 +79,20 @@ class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     public List<JavaMethod> findAllMethodDetails(String methodNameWithOptionalTypes) {
         String nameWithoutSpaces = methodNameWithOptionalTypes.replaceAll("\\s+", "");
-        return javaMethods.stream()
+        List<JavaMethod> result = javaMethods.stream()
                 .filter(m -> m.matches(nameWithoutSpaces))
-                .collect(Collectors.toList());
+                .collect(toList());
+
+        if (result.isEmpty()) {
+            throwNoMethodFound(methodNameWithOptionalTypes);
+        }
+
+        return result;
+    }
+
+    private JavaMethod throwNoMethodFound(String methodNameWithOptionalTypes) {
+        throw new RuntimeException("no method found: " + methodNameWithOptionalTypes + "." +
+                "\nAvailable methods:\n" + renderAllMethods());
     }
 
     public List<EnumEntry> getEnumEntries() {
