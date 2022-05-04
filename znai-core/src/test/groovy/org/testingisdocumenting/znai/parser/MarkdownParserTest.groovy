@@ -66,7 +66,7 @@ class MarkdownParserTest {
 
         code {
             parse("[label](dir/page/extra)")
-        } should throwException(~/Unexpected url pattern: dir\/page\/extra/)
+        } should throwException(~/Unexpected url pattern: <dir\/page\/extra>/)
     }
 
     @Test
