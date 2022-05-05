@@ -82,12 +82,7 @@ scenario("check docs on hub portal") {
     myDocs.waitTo beVisible()
     myDocs.click()
 
-    // TODO replace with new webtau release by url/title
-    browser.driver.switchTo().window(browser.driver.getWindowHandles()[1])
     $("body").waitTo == "test docs"
-
-    browser.driver.close()
-    browser.driver.switchTo().window(browser.driver.getWindowHandles()[0])
 }
 
 scenario("stop hub") {
