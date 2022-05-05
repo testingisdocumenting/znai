@@ -17,6 +17,8 @@
 
 package org.testingisdocumenting.znai.resources;
 
+import org.testingisdocumenting.znai.structure.TableOfContents;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,11 +28,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MultipleLocalLocationsResourceResolver implements ResourcesResolver {
+    private final TableOfContents toc;
     private final Path docRootPath;
     private final List<Path> lookupPaths;
     private final ThreadLocal<Path> currentFilePath;
 
-    public MultipleLocalLocationsResourceResolver(Path docRootPath) {
+    public MultipleLocalLocationsResourceResolver(TableOfContents toc, Path docRootPath) {
+        this.toc = toc;
         this.docRootPath = docRootPath;
         this.lookupPaths = new ArrayList<>();
         this.currentFilePath = new ThreadLocal<>();

@@ -93,7 +93,7 @@ public class DocUrl {
     private boolean handleLocal() {
         String[] parts = url.split("/");
         if (parts.length != 2) {
-            throw new IllegalArgumentException("Unexpected url pattern: " + url + ". " + LINK_TO_SECTION_INSTRUCTION);
+            throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
         }
 
         dirName = parts[0];

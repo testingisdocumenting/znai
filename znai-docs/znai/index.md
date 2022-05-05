@@ -1,1 +1,0 @@
-:include-redirect: introduction/what-is-this

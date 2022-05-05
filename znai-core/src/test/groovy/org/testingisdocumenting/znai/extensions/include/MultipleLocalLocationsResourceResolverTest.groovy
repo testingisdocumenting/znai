@@ -17,14 +17,18 @@
 package org.testingisdocumenting.znai.extensions.include
 
 import org.junit.Test
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import org.testingisdocumenting.znai.resources.MultipleLocalLocationsResourceResolver
 
 import java.nio.file.Paths
 
 class MultipleLocalLocationsResourceResolverTest {
+    def toc = TestComponentsRegistry.TEST_COMPONENTS_REGISTRY.docStructure().tableOfContents()
+
     @Test
     void "resolves against specified list of dirs"() {
-        def resolver = new MultipleLocalLocationsResourceResolver(Paths.get(""))
+
+        def resolver = new MultipleLocalLocationsResourceResolver(toc, Paths.get(""))
         resolver.initialize(["src/main/java/org/testingisdocumenting/znai",
                              "src/test/groovy/org/testingisdocumenting/znai"].stream())
 
@@ -34,7 +38,7 @@ class MultipleLocalLocationsResourceResolverTest {
 
     @Test
     void "confirms if file is inside documentation"() {
-        def resolver = new MultipleLocalLocationsResourceResolver(Paths.get("/path/to/docs"))
+        def resolver = new MultipleLocalLocationsResourceResolver(toc, Paths.get("/path/to/docs"))
         assert resolver.isInsideDoc(Paths.get("/path/to/docs/image.png"))
     }
 }

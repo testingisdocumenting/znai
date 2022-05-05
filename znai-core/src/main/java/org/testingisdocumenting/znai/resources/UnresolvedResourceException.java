@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.joining;
 
 public class UnresolvedResourceException extends RuntimeException {
-    private String resourceName;
+    private final String resourceName;
 
     public UnresolvedResourceException(Stream<ResourcesResolver> resolvers, String resourceName) {
         super("Can't find: " + resourceName + "\n\nTried following ResourceResolvers:\n" +

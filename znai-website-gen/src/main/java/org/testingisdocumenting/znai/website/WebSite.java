@@ -89,7 +89,7 @@ public class WebSite {
     private final WebResource globalAnchorsJavaScript;
     private final WebResource searchIndexJavaScript;
 
-    private final MultipleLocalLocationsResourceResolver localResourceResolver;
+    private MultipleLocalLocationsResourceResolver localResourceResolver;
     private final ResourcesResolverChain resourceResolver;
 
     private final MarkupParsingConfiguration markupParsingConfiguration;
@@ -127,21 +127,6 @@ public class WebSite {
         if (siteConfig.isPreviewEnabled) {
             docMeta.setPreviewEnabled(true);
         }
-
-        componentsRegistry.setResourcesResolver(resourceResolver);
-
-        localResourceResolver = new MultipleLocalLocationsResourceResolver(siteConfig.docRootPath);
-        resourceResolver.addResolver(localResourceResolver);
-        resourceResolver.addResolver(new ClassPathResourceResolver());
-        resourceResolver.addResolver(new HttpBasedResourceResolver());
-
-        List<String> lookupLocations = findLookupLocations(siteConfig).collect(toList());
-        printLookupLocations(lookupLocations.stream());
-        resourceResolver.initialize(lookupLocations.stream());
-
-        WebSiteResourcesProviders.add(new WebSiteLogoExtension(siteConfig.docRootPath));
-        WebSiteResourcesProviders.add(new WebSiteGlobalOverridePlaceholderExtension());
-        WebSiteResourcesProviders.add(initFileBasedWebSiteExtension(siteConfig));
 
         reset();
     }
@@ -188,6 +173,8 @@ public class WebSite {
     }
 
     public void parse() {
+        createResourceResolvers();
+        registerSiteResourceProviders();
         createTopLevelToc();
         createDocStructure();
         parseGlobalDocReference();
@@ -231,15 +218,14 @@ public class WebSite {
     }
 
     public void removeLinksForTocItem(TocItem tocItem) {
-        try {
-            Path markupPath = markupPath(tocItem);
-
-            docStructure.removeGlobalAnchorsForPath(markupPath);
-            docStructure.removeLocalAnchorsForTocItem(tocItem);
-            docStructure.removeLinksForPath(markupPath);
-        } catch (UnresolvedResourceException e) {
-            // ignored
+        MarkupPathWithError markupPathWithError = markupPathWithError(tocItem);
+        if (markupPathWithError.path == null) {
+            return;
         }
+
+        docStructure.removeGlobalAnchorsForPath(markupPathWithError.path);
+        docStructure.removeLocalAnchorsForTocItem(tocItem);
+        docStructure.removeLinksForPath(markupPathWithError.path);
     }
 
     public HtmlPageAndPageProps regeneratePageOnly(TocItem tocItem) {
@@ -379,6 +365,25 @@ public class WebSite {
         componentsRegistry.setDocStructure(docStructure);
     }
 
+    private void createResourceResolvers() {
+        componentsRegistry.setResourcesResolver(resourceResolver);
+
+        localResourceResolver = new MultipleLocalLocationsResourceResolver(toc, cfg.docRootPath);
+        resourceResolver.addResolver(localResourceResolver);
+        resourceResolver.addResolver(new ClassPathResourceResolver());
+        resourceResolver.addResolver(new HttpBasedResourceResolver());
+
+        List<String> lookupLocations = findLookupLocations(cfg).collect(toList());
+        printLookupLocations(lookupLocations.stream());
+        resourceResolver.initialize(lookupLocations.stream());
+    }
+
+    private void registerSiteResourceProviders() {
+        WebSiteResourcesProviders.add(new WebSiteLogoExtension(cfg.docRootPath));
+        WebSiteResourcesProviders.add(new WebSiteGlobalOverridePlaceholderExtension());
+        WebSiteResourcesProviders.add(initFileBasedWebSiteExtension(cfg));
+    }
+
     private void parseGlobalDocReference() {
         reportPhase("parsing global doc references");
         globalDocReferences.load();
@@ -389,7 +394,17 @@ public class WebSite {
      * Additional page structure information comes after parsing file. Hence phased approach.
      */
     private void updateTocWithPageSections() {
-        forEachPage(((tocItem, page) -> tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles())));
+        forEachPage(((tocItem, page) -> {
+            if (page == null) {
+                if (tocItem.isIndex()) {
+                    return;
+                } else {
+                    throw new IllegalStateException("no parsed page associated with " + tocItem);
+                }
+            }
+
+            tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
+        }));
     }
 
     private void deployToc() {
@@ -455,8 +470,12 @@ public class WebSite {
     }
 
     private boolean isTocItemMissing(TocItem tocItem) {
+        if (tocItem.isIndex()) {
+            return false;
+        }
+
         try {
-            markupPath(tocItem);
+            markupPathWithError(tocItem);
         } catch (UnresolvedResourceException e) {
             return true;
         }
@@ -475,33 +494,50 @@ public class WebSite {
     }
 
     private void parseMarkupMetaOnlyAndUpdateTocItem(TocItem tocItem) {
-        Path markupPath = null;
+        MarkupPathWithError markupPathWithError = MarkupPathWithError.EMPTY;
 
         try {
-            markupPath = markupPath(tocItem);
-            PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPath));
+            markupPathWithError = markupPathWithError(tocItem);
+            if (markupPathWithError.path == null && tocItem.isIndex()) {
+                return;
+            }
+
+            if (markupPathWithError.error != null) {
+                throw markupPathWithError.error;
+            }
+
+            PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPathWithError.path));
 
             updateTocItemWithPageMeta(tocItem, pageMeta);
         } catch(Exception e) {
-            throwParsingErrorMessage(tocItem, markupPath, e);
+            throwParsingErrorMessage(tocItem, markupPathWithError.path, e);
         }
     }
 
     private void parseMarkupAndUpdateTocItemAndSearch(TocItem tocItem) {
-        Path markupPath = null;
+        MarkupPathWithError markupPathWithError = MarkupPathWithError.EMPTY;
 
         try {
-            markupPath = markupPath(tocItem);
-            Path relativePathToLog = cfg.docRootPath.relativize(markupPath);
+            markupPathWithError = markupPathWithError(tocItem);
+            if (markupPathWithError.path == null) {
+                if (tocItem.isIndex()) {
+                    return;
+                }
+
+                throw markupPathWithError.error;
+            }
+
+            Path relativePathToLog = cfg.docRootPath.relativize(markupPathWithError.path);
 
             ConsoleOutputs.out("parsing ", Color.PURPLE, relativePathToLog);
 
-            localResourceResolver.setCurrentFilePath(markupPath);
+            localResourceResolver.setCurrentFilePath(markupPathWithError.path);
 
-            MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
+            MarkupParserResult parserResult = markupParser.parse(markupPathWithError.path,
+                    fileTextContent(markupPathWithError.path));
             updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
 
-            Instant lastModifiedTime = pageModifiedTimeStrategy.lastModifiedTime(tocItem, markupPath);
+            Instant lastModifiedTime = pageModifiedTimeStrategy.lastModifiedTime(tocItem, markupPathWithError.path);
             Page page = new Page(parserResult.getDocElement(), lastModifiedTime, parserResult.getPageMeta());
             pageByTocItem.put(tocItem, page);
 
@@ -510,7 +546,7 @@ public class WebSite {
 
             updateSearchEntries(tocItem, parserResult);
         } catch(Exception e) {
-            throwParsingErrorMessage(tocItem, markupPath, e);
+            throwParsingErrorMessage(tocItem, markupPathWithError.path, e);
         }
     }
 
@@ -567,8 +603,14 @@ public class WebSite {
         newAuxiliaryFiles.forEach((af) -> auxiliaryFilesRegistry.updateFileAssociations(tocItem, af));
     }
 
-    private Path markupPath(TocItem tocItem) {
-        return markupParsingConfiguration.fullPath(componentsRegistry, cfg.docRootPath, tocItem);
+    private MarkupPathWithError markupPathWithError(TocItem tocItem) {
+        try {
+            return new MarkupPathWithError(
+                    markupParsingConfiguration.fullPath(componentsRegistry, cfg.docRootPath, tocItem),
+                    null);
+        } catch (UnresolvedResourceException e) {
+            return new MarkupPathWithError(null, e);
+        }
     }
 
     private void generatePages() {
@@ -597,8 +639,7 @@ public class WebSite {
 
     private HtmlPageAndPageProps generatePage(TocItem tocItem, Page page) {
         try {
-            HtmlPageAndPageProps htmlAndProps = pageToHtmlPageConverter.convert(
-                    tocItem, page, createServerSideRenderer(tocItem));
+            HtmlPageAndPageProps htmlAndProps = createHtmlPageAndProps(tocItem, page);
 
             pagePropsByTocItem.put(tocItem, htmlAndProps.getProps());
             extraJavaScriptsInFront.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
@@ -609,10 +650,17 @@ public class WebSite {
             Path pagePath = tocItem.isIndex() ? Paths.get("index.html") :
                     Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
 
-            Path originalPathForLogging = cfg.docRootPath.relativize(
-                    markupParsingConfiguration.fullPath(componentsRegistry, cfg.docRootPath, tocItem).toAbsolutePath());
+            MarkupPathWithError markupPathWithError = markupPathWithError(tocItem);
 
-            deployer.deploy(originalPathForLogging, pagePath, html);
+            if (markupPathWithError.path == null && tocItem.isIndex()) {
+                deployer.deploy("auto-generated-index", pagePath, html);
+
+            } else {
+                Path originalPathForLogging = cfg.docRootPath.relativize(
+                        markupParsingConfiguration.fullPath(componentsRegistry, cfg.docRootPath, tocItem).toAbsolutePath());
+
+                deployer.deploy(originalPathForLogging.toString(), pagePath, html);
+            }
 
             return htmlAndProps;
         } catch (Exception e) {
@@ -620,6 +668,33 @@ public class WebSite {
                     tocItem.getFileNameWithoutExtension() + ": " + e.getMessage(),
                     e);
         }
+    }
+
+    private HtmlPageAndPageProps createHtmlPageAndProps(TocItem tocItem, Page page) {
+        if (page == null && tocItem.isIndex()) {
+            return createRedirectingToFirstTocItemHtmlPageAndProps();
+        }
+
+        return pageToHtmlPageConverter.convert(
+                tocItem, page, createServerSideRenderer(tocItem));
+    }
+
+    private HtmlPageAndPageProps createRedirectingToFirstTocItemHtmlPageAndProps() {
+        TocItem firstNonIndexPage = toc.firstNonIndexPage();
+
+        if (firstNonIndexPage == null) {
+            throw new IllegalStateException("no documentation pages found");
+        }
+
+        String url = firstNonIndexPage.getDirName() + "/" + firstNonIndexPage.getFileNameWithoutExtension();
+        MarkupParserResult parserResult = markupParser.parse(Paths.get("index"),
+                ":include-redirect: " + url);
+
+        Instant lastModifiedTime = Instant.ofEpochSecond(0);
+        Page page = new Page(parserResult.getDocElement(), lastModifiedTime, parserResult.getPageMeta());
+
+        return pageToHtmlPageConverter.convert(
+                toc.getIndex(), page, createServerSideRenderer(firstNonIndexPage));
     }
 
     private RenderSupplier createServerSideRenderer(TocItem tocItem) {
@@ -723,8 +798,16 @@ public class WebSite {
         void consume(TocItem tocItem, Page page);
     }
 
-    private interface TocItemConsumer {
-        void consume(TocItem tocItem);
+    private static class MarkupPathWithError {
+        private final Path path;
+        private final RuntimeException error;
+
+        private static final MarkupPathWithError EMPTY = new MarkupPathWithError(null, null);
+
+        public MarkupPathWithError(Path path, RuntimeException error) {
+            this.path = path;
+            this.error = error;
+        }
     }
 
     public static class Configuration {
