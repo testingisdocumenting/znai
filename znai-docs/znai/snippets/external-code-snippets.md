@@ -64,6 +64,14 @@ Without the `wide` option code will be aligned with the rest of the text and use
 
 Note: Good placement of a *Wide Code* element is at the end of a page or a section to show the full version of a code sample.
 
+# Wrap Code
+
+Use the `wrap` option to enable long lines wrapping.  
+
+    :include-file: WideCode.java {wrap: true}
+    
+:include-file: WideCode.java {wrap: true}
+
 # Read More
 
 If you have a file with large code snippet and you want to initially display only a small fraction use `readMore` 

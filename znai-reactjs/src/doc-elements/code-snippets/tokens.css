@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -107,10 +108,10 @@
     color: var(--znai-code-deleted-color);
 }
 
-.code-line .token.url,
-.code-line .token.entity,
-.code-line .token.variable,
-.code-line .token.operator {
+.znai-code-line .token.url,
+.znai-code-line .token.entity,
+.znai-code-line .token.variable,
+.znai-code-line .token.operator {
     background: none;
 }
 

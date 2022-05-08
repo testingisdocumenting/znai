@@ -97,6 +97,26 @@ class InternationalPriceService implements PriceService {
 
 Note: Good placement of a *Wide Code* element is at the end of a page or a section to show the full version of a code sample.
 
+# Wrap Code
+
+Use the `wrap` option to stretch wide code to occupy as much horizontal real estate as possible.
+
+    ```java {wrap: true}
+    class InternationalPriceService implements PriceService {
+        private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {
+            ...
+        }
+    }
+    ```
+
+```java {wrap: true}
+class InternationalPriceService implements PriceService {
+    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {
+        ...
+    }
+}
+``` 
+
 # Read More
 
 If you have a large code snippet and you want to initially display only a small fraction use the `readMore` option with an **optional**
