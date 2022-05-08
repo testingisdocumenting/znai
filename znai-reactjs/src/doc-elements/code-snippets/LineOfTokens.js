@@ -23,8 +23,10 @@ import CodeToken from './CodeToken';
 
 import './LineOfTokens.css'
 
-const LineOfTokens = ({tokens, references, isHighlighted, isPresentation, endOfLineRender}) => {
-    const className = "code-line" + (isHighlighted ? " highlight" : "")
+const LineOfTokens = ({tokens, references, isHighlighted, isPresentation, wrap, endOfLineRender}) => {
+    const className = "znai-code-line"
+      + (isHighlighted ? " highlight" : "")
+      + (wrap ? " wrap": "")
 
     const trimmedOnRight = lineWithTokensTrimmedOnRight(tokens)
     const enhancedTokens = enhanceTokens(trimmedOnRight)

@@ -37,6 +37,7 @@ export function snippetsDemo(registry) {
                                                         references={methodCallReferences()}
                                                         snippet={codeWithMethodCalls()}/>)
         .add('horizontal scroll', () => <Snippet wide={false} lang="java" snippet={wideCode()}/>)
+        .add('wrap', () => <Snippet wide={false} lang="java" snippet={wideCode()} wrap={true}/>)
         .add('horizontal scroll with title and highlight', () => <Snippet wide={false} lang="java" snippet={wideCode()}
                                                                           highlight={2} title="Hello Snippet"/>)
         .add('highlight by line idx', () => <Snippet lang="markdown" snippet={markdownCode()} highlight={[0]}/>)

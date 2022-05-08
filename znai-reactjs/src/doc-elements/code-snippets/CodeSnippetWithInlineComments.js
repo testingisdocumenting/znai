@@ -33,7 +33,7 @@ import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'
 
 import './CodeSnippetWithInlineComments.css'
 
-const CodeSnippetWithInlineComments = ({tokens, references, isPresentation, meta, slideIdx}) => {
+const CodeSnippetWithInlineComments = ({tokens, references, isPresentation, meta, slideIdx, wrap}) => {
     const lines = collapseCommentsAboveToMakeCommentOnTheCodeLine(splitTokensIntoLines(tokens))
 
     const idxOfLinesWithComments = []
@@ -67,6 +67,7 @@ const CodeSnippetWithInlineComments = ({tokens, references, isPresentation, meta
                                          isHighlighted={isHighlighted(idx)}
                                          references={mergedReferences}
                                          isPresentation={isPresentation}
+                                         wrap={wrap}
                                          endOfLineRender={() => {
                                              const bulletIdxForLine = bulletIdxesPerLineIdx[idx]
                                              return bulletIdxForLine ?

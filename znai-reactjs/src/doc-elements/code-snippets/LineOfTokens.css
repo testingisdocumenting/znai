@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +15,12 @@
  * limitations under the License.
  */
 
-.code-line {
+.znai-code-line {
     word-break: keep-all;
     white-space: pre;
 }
 
-.code-line.highlight {
+.znai-code-line.highlight {
     background: var(--znai-snippets-line-highlighted-background-color);
     margin-left: -16px;
     padding: 4px 0 4px 16px;
@@ -27,6 +28,10 @@
     display: block;
 }
 
-.presentation .code-line.highlight {
+.znai-code-line.wrap {
+    white-space: pre-wrap;
+}
+
+.presentation .znai-code-line.highlight {
     padding: 0 0 0 16px;
 }
