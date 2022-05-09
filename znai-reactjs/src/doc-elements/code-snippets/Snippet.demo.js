@@ -50,6 +50,7 @@ export function snippetsDemo(registry) {
                                            elementsLibrary={elementsLibrary}/>)
         .add('python code', () => <Snippet lang="python" snippet={pythonCode()}/>)
         .add('large java code with javadocs', () => <Snippet lang="java" highlight={[0, 3, 6]} snippet={largeJavaCodeWithJavaDocs()}/>)
+        .add('markdown code', () => <Snippet lang="markdown" highlight={[0, 2]} snippet={markdownCode()}/>)
 }
 
 export function snippetsTwoSidesDemo(registry) {
@@ -132,7 +133,7 @@ function methodCallReferences() {
 
 function markdownCode() {
     return '# Server Configuration\n\n' +
-        ':include-file: config/server.config\n'
+        ':include-file: config/server.config\n\nNote: hello world\n'
 }
 
 function longCode() {

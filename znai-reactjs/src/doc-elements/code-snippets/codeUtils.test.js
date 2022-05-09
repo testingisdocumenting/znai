@@ -143,6 +143,20 @@ describe("codeUtils", () => {
                     {type: 'punctuation', content: '{'},
                 ]])
         })
+
+        it("handles markdown tokens with multiple end of line in between", () => {
+            const tokens = parseCode('markdown', '# Server Configuration\n\n' +
+              ':include-file: config/server.config\n\nNote: hello world\n')
+
+            const lines = splitTokensIntoLines(tokens)
+            expect(lines).toEqual([
+                [ { type: 'title', content: [{type: 'punctuation', content: '#'}, ' Server Configuration'] } ],
+                [],
+                [ ':include-file: config/server.config' ],
+                [],
+                [ 'Note: hello world' ]
+            ])
+        });
     });
 
     it("converts line of tokens to a simple text", () => {
