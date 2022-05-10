@@ -88,7 +88,7 @@ export function splitTokensIntoLines(tokens) {
                 lines.push(line)
                 line = []
             } else {
-                handleSpacing(token.substr(idx))
+                handle(token.substr(idx))
                 return;
             }
         }
