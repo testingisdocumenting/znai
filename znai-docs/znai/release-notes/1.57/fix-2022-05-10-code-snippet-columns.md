@@ -1,0 +1,1 @@
+* Fix: remove extra top margin in case of code snippet in between code snippets in two columns mode

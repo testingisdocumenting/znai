@@ -52,6 +52,10 @@
     margin-top: 0;
 }
 
+.columns.snippet-at-bottom + .snippet-container {
+    margin-top: 0;
+}
+
 .column .title-container {
     margin: 0;
 }
