@@ -33,7 +33,7 @@ import {pagesDemo} from './doc-elements/page/Page.demo'
 import {imageDemo} from './doc-elements/images/Image.demo'
 import {apiParametersDemo} from './doc-elements/api/ApiParameters.demo'
 import {jsxDemo} from './doc-elements/jsx/Jsx.demo'
-import {snippetsDemo, snippetsTwoColumns, snippetsTwoSidesDemo} from './doc-elements/code-snippets/Snippet.demo'
+import {snippetsDemo, snippetsTwoColumnsDemo, snippetsTwoSidesDemo} from './doc-elements/code-snippets/Snippet.demo'
 import {inlinedCodeDemo} from './doc-elements/code-snippets/InlinedCode.demo'
 import {documentationPreparationDemo} from './screens/documentation-preparation/DocumentationPreparation.demo'
 import {setDocMeta} from './structure/docMeta'
@@ -129,7 +129,7 @@ registries.add('snippets')
     .registerAsGrid('Code Snippet With Bullets', 0, snippetsWithInlineCommentsDemo)
     .registerAsGrid('Code Snippet Removed Comments', 0, codeSnippetWithRemovedCommentsDemo)
     .registerAsGrid('Code Snippet Syntax Highlight ', 0, syntaxHighlightSnippetDemo)
-    .registerAsGrid('Code Snippet In Two Columns', 0, snippetsTwoColumns)
+    .registerAsGrid('Code Snippet In Two Columns', 0, snippetsTwoColumnsDemo)
     .registerAsGrid('Code Snippet In Two Sides Mode', 0, snippetsTwoSidesDemo)
     .registerAsGrid('Inlined Code', 0, inlinedCodeDemo)
     .registerAsGrid('Json', 0, jsonDemo)

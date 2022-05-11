@@ -70,15 +70,36 @@ function docMeta() {
     }
 }
 
-export function snippetsTwoColumns(registry) {
+export function snippetsTwoColumnsDemo(registry) {
+    const commonProps = {
+        elementsLibrary,
+        docMeta: docMeta(),
+        title: "Section title",
+        id: "section-title"
+    }
     registry
-        .add('after snippet', () => <Section elementsLibrary={elementsLibrary}
-                                             docMeta={docMeta()}
-                                             title="Section title"
-                                             id="section-title"
-                                             content={createContent()}/>)
+      .add('before snippet', () => <Section {...commonProps}
+                                            content={beforeSnippetContent()}/>)
+        .add('after snippet', () => <Section {...commonProps}
+                                             content={afterSnippetContent()}/>)
+      .add('surrounded by text', () => <Section {...commonProps}
+                                        content={surroundedByTextContent()}/>)
 
-    function createContent() {
+    function beforeSnippetContent() {
+        return [
+            {
+                type: "Columns",
+                config: {},
+                columns: [
+                    {content: [contentSnippet(false)]},
+                    {content: [contentSnippet(false)]}
+                ]
+            },
+            contentSnippet(false),
+        ]
+    }
+
+    function afterSnippetContent() {
         return [
             contentSnippet(false),
             {
@@ -89,6 +110,21 @@ export function snippetsTwoColumns(registry) {
                     {content: [contentSnippet(false)]}
                 ]
             }
+        ]
+    }
+
+    function surroundedByTextContent() {
+        return [
+            contentParagraph(false),
+            {
+                type: "Columns",
+                config: {},
+                columns: [
+                    {content: [contentSnippet(false)]},
+                    {content: [contentSnippet(false)]}
+                ]
+            },
+            contentParagraph(false),
         ]
     }
 }
