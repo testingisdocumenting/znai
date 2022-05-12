@@ -80,6 +80,12 @@
 
         <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
+            <artifactId>znai-charts</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-open-api</artifactId>
             <version>${project.version}</version>
         </dependency>

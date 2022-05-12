@@ -30,17 +30,6 @@
 
     <developers>
         <developer>
-            <id>tsiq-karold</id>
-            <name>Karol Dudzinski</name>
-            <email>karol.dudzinski@twosigmaiq.com</email>
-            <organization>Two Sigma Insurance Quantified</organization>
-            <organizationUrl>http://twosigmaiq.com/</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>Europe/London</timezone>
-        </developer>
-        <developer>
             <id>MykolaGolubyev</id>
             <name>Nick Golubyev</name>
             <email>golubev.nikolay@gmail.com</email>
@@ -51,6 +40,7 @@
             </roles>
             <timezone>America/New_York</timezone>
         </developer>
+
         <developer>
             <id>byc1234</id>
             <name>Hwansoo Lee</name>
@@ -61,6 +51,18 @@
                 <role>developer</role>
             </roles>
             <timezone>America/New_York</timezone>
+        </developer>
+
+        <developer>
+            <id>tsiq-karold</id>
+            <name>Karol Dudzinski</name>
+            <email>karol.dudzinski@twosigmaiq.com</email>
+            <organization>Two Sigma Insurance Quantified</organization>
+            <organizationUrl>http://twosigmaiq.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>Europe/London</timezone>
         </developer>
     </developers>
 
@@ -100,6 +102,7 @@
         <module>znai-website-gen</module>
         <module>znai-core</module>
         <module>znai-enterprise</module>
+        <module>znai-charts</module>
         <module>znai-latex</module>
         <module>znai-java</module>
         <module>znai-groovy</module>

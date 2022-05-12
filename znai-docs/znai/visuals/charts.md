@@ -18,17 +18,20 @@ You can change the style with the `innerRadius` property:
 
 # Bar
 
-To build a vertical bar chart use:
+To build a bar chart use:
 
-    :include-chart: data.csv
+    :include-barchart: data.csv
 
-:include-chart: data.csv
+:include-barchart: data.csv
 
-To build a horizontal bar chart use:
+:include-file: data.csv {autoTitle: true}
 
-    :include-chart: data.csv {horizontal: true}
+Add more columns to CSV data to use multiple bars per X axis tick
 
-:include-chart: data.csv {horizontal: true}
+:include-barchart: charts/multi-barchart.csv 
+
+:include-file: charts/multi-barchart.csv {autoTitle: true} 
+
 
 # Line
 

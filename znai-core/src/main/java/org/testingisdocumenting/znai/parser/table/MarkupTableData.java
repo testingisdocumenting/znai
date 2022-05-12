@@ -102,7 +102,7 @@ public class MarkupTableData {
 
     private Integer findColumnIdx(String columnName) {
         for (int idx = 0; idx < header.size(); idx++) {
-            if (header.get(idx).getTitle().toLowerCase().equals(columnName.toLowerCase())) {
+            if (header.get(idx).getTitle().equalsIgnoreCase(columnName)) {
                 return idx;
             }
         }
@@ -129,10 +129,18 @@ public class MarkupTableData {
         data.add(row);
     }
 
+    public List<String> getColumnTitles() {
+        return header.stream().map(Column::getTitle).collect(toList());
+    }
+
+    public List<List<Object>> getData() {
+        return data.stream().map(Row::getData).collect(toList());
+    }
+
     public Map<String, Object> toMap() {
         final Map<String, Object> result = new LinkedHashMap<>();
         result.put("columns", header.stream().map(Column::toMap).collect(toList()));
-        result.put("data", data.stream().map(Row::getData).collect(toList()));
+        result.put("data", getData());
 
         return result;
     }

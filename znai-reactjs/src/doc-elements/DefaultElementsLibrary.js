@@ -54,6 +54,7 @@ import Latex from './latex/Latex'
 import InlinedLatex from './latex/InlinedLatex'
 import Mermaid from './mermaid/Mermaid'
 import {Chart, presentationChartHandler} from './charts/Chart'
+import {EchartGeneric} from "./charts/EchartGeneric";
 import Image from './images/Image'
 import {CliCommand, presentationCliCommandHandler} from './cli/CliCommand'
 import {CliOutput, presentationCliOutput} from './cli/CliOutput'
@@ -193,6 +194,8 @@ presentationElementHandlers.MarkdownAndResult = presentationMarkdownAndResultHan
 
 library.Chart = Chart
 presentationElementHandlers.Chart = presentationChartHandler
+
+library.EchartGeneric = EchartGeneric
 
 library.CliCommand = CliCommand
 presentationElementHandlers.CliCommand = presentationCliCommandHandler
