@@ -22,8 +22,8 @@ import {
   TooltipComponent,
   TransformComponent,
 } from "echarts/components";
-import { BarChart } from "echarts/charts";
-import { LabelLayout, UniversalTransition } from "echarts/features";
+import { BarChart, PieChart } from "echarts/charts";
+import { LabelLayout } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
 
 let configured = false;
@@ -36,8 +36,8 @@ export function configuredEcharts() {
       DatasetComponent,
       TransformComponent,
       BarChart,
+      PieChart,
       LabelLayout,
-      UniversalTransition,
       CanvasRenderer,
     ]);
 

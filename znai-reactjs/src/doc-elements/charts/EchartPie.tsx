@@ -15,27 +15,27 @@
  */
 
 import React from "react";
-import { EchartBar } from "./EchartBar";
-import { EchartPie } from "./EchartPie";
+import { EchartReactWrapper } from "./EchartReactWrapper";
 
 interface Props {
-  chartType: string;
   data: any[][];
-  labels?: string[];
-  height?: number;
-  stack?: boolean;
-  horizontal?: boolean;
+  height: number;
 }
 
-export function EchartGeneric({ labels, chartType, data, height, stack, horizontal }: Props) {
-  const heightToUse = height || 400;
+export function EchartPie({ data, height }: Props) {
+  return <EchartReactWrapper height={height} echartConfigProvider={configProvider} />;
 
-  switch (chartType) {
-    case "bar":
-      return <EchartBar labels={labels!} data={data} height={heightToUse} stack={stack} horizontal={horizontal} />;
-    case "pie":
-      return <EchartPie data={data} height={heightToUse} />;
-    default:
-      return <div>"undefined chart type: " + chartType</div>;
+  function configProvider() {
+    return {
+      series: [createSeriesInstance()],
+    };
+
+    function createSeriesInstance() {
+      return {
+        radius: height / 2.0 - 20,
+        type: "pie",
+        data: data.map((row) => ({ name: row[0], value: row[1] })),
+      };
+    }
   }
 }

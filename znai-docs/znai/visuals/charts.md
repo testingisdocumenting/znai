@@ -1,30 +1,22 @@
 # Pie
 
-Given a `CSV` file...
+To build a pie chart use:
 
-:include-file: data.csv
+    :include-piechart: charts/genres.csv
 
-..to build a pie chart use:
+:include-file: charts/genres.csv {autoTitle: true}
 
-    :include-chart: data.csv {type: "Pie"}
-
-:include-chart: data.csv {type: "Pie"}
-
-You can change the style with the `innerRadius` property:
-
-    :include-chart: data.csv {type: "Pie", innerRadius: 100} 
-
-:include-chart: data.csv {type: "Pie", innerRadius: 100}
+:include-piechart: charts/genres.csv
 
 # Bar
 
 To build a bar chart use:
 
-    :include-barchart: data.csv
+    :include-barchart: charts/genres.csv
 
-:include-barchart: data.csv
+:include-barchart: charts/genres.csv
 
-:include-file: data.csv {autoTitle: true}
+:include-file: charts/genres.csv {autoTitle: true}
 
 Add more columns to CSV data to use multiple bars per X axis tick
 
@@ -68,4 +60,4 @@ To force all values to appear at once use:
 
 # ECharts
 
-`Znai` uses the beautiful and functional [EChart](https://echarts.apache.org/en/index.html) library to render charts.
+`Znai` uses the beautiful and functional [EChart](https://echarts.apache.org/) library to render charts.
