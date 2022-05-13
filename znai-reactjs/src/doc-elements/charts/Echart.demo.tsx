@@ -22,7 +22,8 @@ export function echartDemo(registry: Registry) {
   registry
     .add("bar", () => <EchartGeneric {...barChartData()} />)
     .add("bar horizontal", () => <EchartGeneric {...barChartData()} horizontal={true} height={700} />)
-    .add("bar stacked", () => <EchartGeneric {...barChartData()} stack={true} />);
+    .add("bar stacked", () => <EchartGeneric {...barChartData()} stack={true} />)
+    .add("pie", () => <EchartGeneric {...pieChartData()} labels={[]} />);
 }
 
 function barChartData() {
@@ -36,6 +37,20 @@ function barChartData() {
       ["pants", 10, 7, 3],
       ["heels", 10, 2, 5],
       ["socks", 12, 1, 15],
+    ],
+  };
+}
+
+function pieChartData() {
+  return {
+    chartType: "pie",
+    data: [
+      ["shirt", 5],
+      ["cardigan", 20],
+      ["chiffon", 36],
+      ["pants", 10],
+      ["heels", 10],
+      ["socks", 12],
     ],
   };
 }
