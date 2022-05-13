@@ -28,9 +28,17 @@ To build a bar chart use:
 
 Add more columns to CSV data to use multiple bars per X axis tick
 
+    :include-barchart: charts/multi-barchart.csv
+
 :include-barchart: charts/multi-barchart.csv 
 
 :include-file: charts/multi-barchart.csv {autoTitle: true} 
+
+Use `stack: true` to render multiple bars stacked
+
+    :include-barchart: charts/multi-barchart.csv {stack: true}
+
+:include-barchart: charts/multi-barchart.csv {stack: true}
 
 
 # Line
@@ -51,3 +59,7 @@ To force all values to appear at once use:
 # Victory Charts
 
 `Znai` uses the [VictoryChart](https://github.com/FormidableLabs/victory-chart) library to render charts.
+
+# ECharts
+
+`Znai` uses the beautiful and functional [EChart](https://echarts.apache.org/en/index.html) library to render charts.

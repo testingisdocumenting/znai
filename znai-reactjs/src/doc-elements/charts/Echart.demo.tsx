@@ -33,4 +33,20 @@ export function echartDemo(registry: Registry) {
       ]}
     />
   ));
+
+  registry.add("bar stacked", () => (
+    <EchartGeneric
+      labels={["x", "sales", "tax", "fee"]}
+      chartType="bar"
+      stack={true}
+      data={[
+        ["shirt", 5, 7, 17],
+        ["cardigan", 20, 2, 2],
+        ["chiffon", 36, 6, 7],
+        ["pants", 10, 7, 3],
+        ["heels", 10, 2, 5],
+        ["socks", 12, 1, 15],
+      ]}
+    />
+  ));
 }
