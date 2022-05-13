@@ -26,9 +26,10 @@ interface Props {
   chartType: string;
   data: any[][];
   height?: number;
+  stack?: boolean;
 }
 
-export function EchartGeneric({ labels, chartType, data, height }: Props) {
+export function EchartGeneric({ labels, chartType, data, height, stack }: Props) {
   const echartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,9 +54,10 @@ export function EchartGeneric({ labels, chartType, data, height }: Props) {
         name: labels[columnIdx],
         type: chartType,
         data: data.map((row) => row[columnIdx]),
+        stack: stack ? "stack" : undefined,
       };
     }
-  }, [chartType, labels, data, height]);
+  }, [chartType, labels, data, height, stack]);
 
   const heightToUse = height || 400;
 

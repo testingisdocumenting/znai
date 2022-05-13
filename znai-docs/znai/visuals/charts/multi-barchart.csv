@@ -1,5 +1,5 @@
-game, score, price
-Oblivion, 90, 10
-Elden Ring, 110, 60
-Persona 5, 100, 30
-Divinity, 85, 15
+game, score, price, length
+Oblivion, 90, 10, 300
+Elden Ring, 110, 60, 500
+Persona 5, 100, 30, 100
+Divinity, 85, 15, 80
