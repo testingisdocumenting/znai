@@ -94,6 +94,7 @@ import { codeSnippetWithRemovedCommentsDemo } from "./doc-elements/code-snippets
 import { textBadgeDemo } from "./doc-elements/badge/TextBadge.demo";
 import { doxygenMemberDemo } from "./doc-elements/doxygen/DoxygenMember.demo";
 import { updateGlobalAnchors } from "./doc-elements/references/globalAnchors";
+import { echartDemo } from "./doc-elements/charts/Echart.demo";
 
 const docMeta = {
     id: 'preview',
@@ -154,6 +155,7 @@ registries.add('visuals')
     .registerAsGrid('Text Badges', 0, textBadgeDemo)
     .registerAsGrid('Spoilers', 0, spoilerDemo)
     .registerAsGrid('Charts', 0, chartDemo)
+    .registerAsGrid('Echarts', 0, echartDemo)
     .registerAsRows('Image', imageDemo)
     .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)
     .registerAsGrid('SVG', 0, svgDemo)
