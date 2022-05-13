@@ -19,34 +19,23 @@ import { Registry } from "react-component-viewer";
 import { EchartGeneric } from "./EchartGeneric";
 
 export function echartDemo(registry: Registry) {
-  registry.add("bar", () => (
-    <EchartGeneric
-      labels={["x", "sales", "tax", "fee"]}
-      chartType="bar"
-      data={[
-        ["shirt", 5, 7, 17],
-        ["cardigan", 20, 2, 2],
-        ["chiffon", 36, 6, 7],
-        ["pants", 10, 7, 3],
-        ["heels", 10, 2, 5],
-        ["socks", 12, 1, 15],
-      ]}
-    />
-  ));
+  registry
+    .add("bar", () => <EchartGeneric {...barChartData()} />)
+    .add("bar horizontal", () => <EchartGeneric {...barChartData()} horizontal={true} height={700} />)
+    .add("bar stacked", () => <EchartGeneric {...barChartData()} stack={true} />);
+}
 
-  registry.add("bar stacked", () => (
-    <EchartGeneric
-      labels={["x", "sales", "tax", "fee"]}
-      chartType="bar"
-      stack={true}
-      data={[
-        ["shirt", 5, 7, 17],
-        ["cardigan", 20, 2, 2],
-        ["chiffon", 36, 6, 7],
-        ["pants", 10, 7, 3],
-        ["heels", 10, 2, 5],
-        ["socks", 12, 1, 15],
-      ]}
-    />
-  ));
+function barChartData() {
+  return {
+    chartType: "bar",
+    labels: ["x", "sales", "tax", "fee"],
+    data: [
+      ["shirt", 5, 7, 17],
+      ["cardigan", 20, 2, 2],
+      ["chiffon", 36, 6, 7],
+      ["pants", 10, 7, 3],
+      ["heels", 10, 2, 5],
+      ["socks", 12, 1, 15],
+    ],
+  };
 }

@@ -18,6 +18,7 @@ import React, { useEffect } from "react";
 
 import { configuredEcharts } from "./EchartsCommon";
 import { useRef } from "react";
+import { EChartsType } from "echarts/types/dist/shared";
 
 const echarts = configuredEcharts();
 
@@ -27,27 +28,45 @@ interface Props {
   data: any[][];
   height?: number;
   stack?: boolean;
+  horizontal?: boolean;
 }
 
-export function EchartGeneric({ labels, chartType, data, height, stack }: Props) {
-  const echartRef = useRef<HTMLDivElement>(null);
+export function EchartGeneric({ labels, chartType, data, height, stack, horizontal }: Props) {
+  const echartDivNodeRef = useRef<HTMLDivElement>(null);
+  const echartRef = useRef<EChartsType>();
 
   useEffect(() => {
-    const bar = echarts.init(echartRef.current!);
+    echartRef.current = echarts.init(echartDivNodeRef.current!);
+
     const series = [];
     for (let colIdx = 1; colIdx < labels.length; colIdx++) {
       series.push(createSeriesInstance(colIdx));
     }
 
-    bar.setOption({
+    echartRef.current.setOption({
       tooltip: {},
-      xAxis: {
-        data: data.map((row) => row[0]),
-      },
+      ...defineAxes(),
       animation: false,
-      yAxis: {},
       series: series,
     });
+
+    function defineAxes() {
+      const axisData = data.map((row) => row[0]);
+
+      return horizontal
+        ? {
+            xAxis: {},
+            yAxis: {
+              data: axisData,
+            },
+          }
+        : {
+            xAxis: {
+              data: axisData,
+            },
+            yAxis: {},
+          };
+    }
 
     function createSeriesInstance(columnIdx: number) {
       return {
@@ -57,9 +76,15 @@ export function EchartGeneric({ labels, chartType, data, height, stack }: Props)
         stack: stack ? "stack" : undefined,
       };
     }
-  }, [chartType, labels, data, height, stack]);
+  }, [chartType, labels, data, stack, horizontal]);
+
+  useEffect(() => {
+    if (echartRef.current) {
+      echartRef.current.resize();
+    }
+  }, [height]);
 
   const heightToUse = height || 400;
 
-  return <div className="content-block" ref={echartRef} style={{ height: heightToUse }} />;
+  return <div className="content-block" ref={echartDivNodeRef} style={{ height: heightToUse }} />;
 }

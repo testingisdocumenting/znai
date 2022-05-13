@@ -40,6 +40,12 @@ Use `stack: true` to render multiple bars stacked
 
 :include-barchart: charts/multi-barchart.csv {stack: true}
 
+Use `horizontal: true` and `height` parameter to change render direction
+
+    :include-barchart: charts/multi-barchart.csv {stack: true, horizontal: true, height: 300}
+
+:include-barchart: charts/multi-barchart.csv {stack: true, horizontal: true, height: 300}
+
 
 # Line
 
