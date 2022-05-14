@@ -20,32 +20,50 @@ To build a bar chart use:
 
 Add more columns to CSV data to use multiple bars per X axis tick
 
-    :include-barchart: charts/multi-barchart.csv
+    :include-barchart: charts/game-activities.csv
 
-:include-barchart: charts/multi-barchart.csv 
+:include-barchart: charts/game-activities.csv
 
-:include-file: charts/multi-barchart.csv {autoTitle: true} 
+:include-file: charts/game-activities.csv {autoTitle: true} 
 
 Use `stack: true` to render multiple bars stacked
 
-    :include-barchart: charts/multi-barchart.csv {stack: true}
+    :include-barchart: charts/game-activities.csv {stack: true}
 
-:include-barchart: charts/multi-barchart.csv {stack: true}
+:include-barchart: charts/game-activities.csv {stack: true}
 
 Use `horizontal: true` and `height` parameter to change render direction
 
-    :include-barchart: charts/multi-barchart.csv {stack: true, horizontal: true, height: 300}
+    :include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 300}
 
-:include-barchart: charts/multi-barchart.csv {stack: true, horizontal: true, height: 300}
-
+:include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 300}
 
 # Line
 
 To build a line chart use:
 
-    :include-chart: data.csv {type: "Line"}
+    :include-linechart: charts/genres.csv
 
-:include-chart: data.csv {type: "Line"}
+:include-file: charts/genres.csv {autoTitle: true}
+
+:include-linechart: charts/genres.csv
+
+Use multiple CSV columns to add more lines
+
+    :include-linechart: charts/daily-genres.csv
+
+:include-file: charts/daily-genres.csv {autoTitle: true}
+
+:include-linechart: charts/daily-genres.csv
+
+Use numbers in first column to have a regular X, Y plots
+
+    :include-linechart: charts/competitors.csv
+
+:include-file: charts/competitors.csv {autoTitle: true}
+
+:include-linechart: charts/competitors.csv
+
 
 # Presentation Mode
 

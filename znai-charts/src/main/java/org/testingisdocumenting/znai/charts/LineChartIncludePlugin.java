@@ -14,29 +14,23 @@
  * limitations under the License.
  */
 
-import React from "react";
-import { EchartReactWrapper } from "./EchartReactWrapper";
+package org.testingisdocumenting.znai.charts;
 
-interface Props {
-  data: any[][];
-  height: number;
-}
+import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 
-export function EchartPie({ data, height }: Props) {
-  return <EchartReactWrapper height={height} echartConfigProvider={configProvider} />;
-
-  function configProvider() {
-    return {
-      series: [createSeriesInstance()],
-      tooltip: {},
-    };
-
-    function createSeriesInstance() {
-      return {
-        radius: height / 2.0 - 20,
-        type: "pie",
-        data: data.map((row) => ({ name: row[0], value: row[1] })),
-      };
+public class LineChartIncludePlugin extends ChartIncludeBasePlugin {
+    @Override
+    public String id() {
+        return "linechart";
     }
-  }
+
+    @Override
+    public IncludePlugin create() {
+        return new LineChartIncludePlugin();
+    }
+
+    @Override
+    protected String type() {
+        return "line";
+    }
 }

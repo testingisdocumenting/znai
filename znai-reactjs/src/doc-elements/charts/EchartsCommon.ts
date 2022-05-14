@@ -15,31 +15,15 @@
  */
 
 import * as echarts from "echarts/core";
-import {
-  DatasetComponent,
-  GridComponent,
-  TitleComponent,
-  TooltipComponent,
-  TransformComponent,
-} from "echarts/components";
-import { BarChart, PieChart } from "echarts/charts";
+import { GridComponent, TooltipComponent } from "echarts/components";
+import { BarChart, LineChart, PieChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
 
 let configured = false;
 export function configuredEcharts() {
   if (!configured) {
-    echarts.use([
-      TitleComponent,
-      TooltipComponent,
-      GridComponent,
-      DatasetComponent,
-      TransformComponent,
-      BarChart,
-      PieChart,
-      LabelLayout,
-      CanvasRenderer,
-    ]);
+    echarts.use([TooltipComponent, GridComponent, BarChart, PieChart, LineChart, LabelLayout, CanvasRenderer]);
 
     configured = true;
   }
