@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useRef } from "react";
+import React, { MutableRefObject, RefObject, useEffect, useRef } from "react";
 import { EChartsType } from "echarts/types/dist/shared";
 import { configuredEcharts, EchartCommonProps } from "./EchartCommon";
+
+import "./EchartReactWrapper.css";
 
 interface Props extends EchartCommonProps {
   echartConfigProvider(): any;
@@ -24,38 +26,71 @@ interface Props extends EchartCommonProps {
 
 const echarts = configuredEcharts();
 
-export function EchartReactWrapper({ echartConfigProvider, height, legend }: Props) {
+export function EchartReactWrapper(props: Props) {
   const echartDivNodeRef = useRef<HTMLDivElement>(null);
   const echartRef = useRef<EChartsType>();
 
   useEffect(() => {
-    echartRef.current = echarts.init(echartDivNodeRef.current!);
+    // TODO theme integration via context
+    // @ts-ignore
+    window.znaiTheme.addChangeHandler(onThemeChange);
+    // @ts-ignore
+    return () => window.znaiTheme.removeChangeHandler(onThemeChange);
 
-    const config = {
-      tooltip: { trigger: "axis" },
-      ...echartConfigProvider(),
-      legend: createLegend(),
-      animation: false,
-    };
-
-    echartRef.current.setOption(config);
-
-    function createLegend() {
-      if (!legend) {
-        return undefined;
-      }
-
-      return {
-        orient: "horizontal",
-      };
+    function onThemeChange() {
+      createOrInitEchart(echartDivNodeRef, echartRef, props);
     }
-  }, [legend, echartConfigProvider]);
+  }, [props]);
+
+  useEffect(
+    () => {
+      createOrInitEchart(echartDivNodeRef, echartRef, props);
+    },
+    // @ts-ignore
+    [props]
+  );
 
   useEffect(() => {
     if (echartRef.current) {
       echartRef.current.resize();
     }
-  }, [height]);
+  }, [props.height]);
 
-  return <div className="content-block" ref={echartDivNodeRef} style={{ height }} />;
+  return <div className="content-block znai-chart" ref={echartDivNodeRef} style={{ height: props.height }} />;
+}
+
+function createOrInitEchart(
+  htmlNode: RefObject<HTMLDivElement>,
+  echartRef: MutableRefObject<EChartsType | undefined>,
+  props: Props
+) {
+  if (echartRef.current) {
+    echartRef.current?.dispose();
+  }
+
+  echartRef.current = echarts.init(
+    htmlNode.current!,
+    // TODO theme context
+    // @ts-ignore
+    window.znaiTheme.name === "znai-dark" ? "dark" : undefined
+  );
+
+  const config = {
+    tooltip: { trigger: "axis" },
+    ...props.echartConfigProvider(),
+    legend: createLegend(),
+    animation: false,
+  };
+
+  echartRef.current.setOption(config);
+
+  function createLegend() {
+    if (!props.legend) {
+      return undefined;
+    }
+
+    return {
+      orient: "horizontal",
+    };
+  }
 }
