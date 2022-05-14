@@ -64,18 +64,6 @@ Use numbers in first column to have a regular X, Y plots
 
 :include-linechart: charts/competitors.csv
 
-
-# Presentation Mode
-
-In presentation mode, chart values for `Bar` and `Pie` appear one at a time.
-To force all values to appear at once use:
-
-    :include-meta: {allAtOnce: true}
-
-# Victory Charts
-
-`Znai` uses the [VictoryChart](https://github.com/FormidableLabs/victory-chart) library to render charts.
-
 # ECharts
 
 `Znai` uses the beautiful and functional [EChart](https://echarts.apache.org/) library to render charts.

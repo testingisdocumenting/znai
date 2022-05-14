@@ -18,13 +18,7 @@
     "query-string": "^4.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "scroll-into-view-if-needed": "^2.2.20",
-    "victory-axis": "^30.3.1",
-    "victory-bar": "^30.3.1",
-    "victory-chart": "^30.3.1",
-    "victory-core": "^30.3.1",
-    "victory-line": "^30.3.1",
-    "victory-pie": "^30.3.1"
+    "scroll-into-view-if-needed": "^2.2.20"
   },
   "devDependencies": {
     "@types/diff": "^5.0.0",
