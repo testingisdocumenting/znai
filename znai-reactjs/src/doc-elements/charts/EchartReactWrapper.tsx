@@ -16,16 +16,15 @@
 
 import React, { useEffect, useRef } from "react";
 import { EChartsType } from "echarts/types/dist/shared";
-import { configuredEcharts } from "./EchartsCommon";
+import { configuredEcharts, EchartCommonProps } from "./EchartCommon";
 
-interface Props {
+interface Props extends EchartCommonProps {
   echartConfigProvider(): any;
-  height: number;
 }
 
 const echarts = configuredEcharts();
 
-export function EchartReactWrapper({ echartConfigProvider, height }: Props) {
+export function EchartReactWrapper({ echartConfigProvider, height, legend }: Props) {
   const echartDivNodeRef = useRef<HTMLDivElement>(null);
   const echartRef = useRef<EChartsType>();
 
@@ -35,11 +34,22 @@ export function EchartReactWrapper({ echartConfigProvider, height }: Props) {
     const config = {
       tooltip: { trigger: "axis" },
       ...echartConfigProvider(),
+      legend: createLegend(),
       animation: false,
     };
 
     echartRef.current.setOption(config);
-  }, [echartConfigProvider]);
+
+    function createLegend() {
+      if (!legend) {
+        return undefined;
+      }
+
+      return {
+        orient: "horizontal",
+      };
+    }
+  }, [legend, echartConfigProvider]);
 
   useEffect(() => {
     if (echartRef.current) {

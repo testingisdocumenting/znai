@@ -23,9 +23,12 @@ export function echartDemo(registry: Registry) {
     .add("bar", () => <EchartGeneric {...barChartData()} />)
     .add("bar horizontal", () => <EchartGeneric {...barChartData()} horizontal={true} height={700} />)
     .add("bar stacked", () => <EchartGeneric {...barChartData()} stack={true} />)
+    .add("bar legend", () => <EchartGeneric {...barChartData()} stack={true} legend={true} />)
     .add("pie", () => <EchartGeneric {...pieChartData()} />)
+    .add("pie legend", () => <EchartGeneric {...pieChartData()} legend={true} />)
     .add("line with text x axis", () => <EchartGeneric {...multiLineTextXData()} />)
-    .add("line with number", () => <EchartGeneric {...multiLineNumberXData()} />);
+    .add("line with number", () => <EchartGeneric {...multiLineNumberXData()} />)
+    .add("line legend", () => <EchartGeneric {...multiLineTextXData()} legend={true} />);
 }
 
 function barChartData() {

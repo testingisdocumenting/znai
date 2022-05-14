@@ -16,15 +16,15 @@
 
 import React from "react";
 import { EchartReactWrapper } from "./EchartReactWrapper";
+import { EchartCommonProps } from "./EchartCommon";
 
-interface Props {
+interface Props extends EchartCommonProps {
   labels: string[];
   data: any[][];
-  height: number;
 }
 
-export function EchartLine({ labels, data, height }: Props) {
-  return <EchartReactWrapper height={height} echartConfigProvider={configProvider} />;
+export function EchartLine({ labels, data, ...commonProps }: Props) {
+  return <EchartReactWrapper echartConfigProvider={configProvider} {...commonProps} />;
 
   function configProvider() {
     const firstRow = data.length > 0 ? data[0] : [0];

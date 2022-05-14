@@ -15,7 +15,7 @@
  */
 
 import * as echarts from "echarts/core";
-import { GridComponent, TooltipComponent } from "echarts/components";
+import { GridComponent, TooltipComponent, LegendComponent } from "echarts/components";
 import { BarChart, LineChart, PieChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
@@ -23,10 +23,24 @@ import { CanvasRenderer } from "echarts/renderers";
 let configured = false;
 export function configuredEcharts() {
   if (!configured) {
-    echarts.use([TooltipComponent, GridComponent, BarChart, PieChart, LineChart, LabelLayout, CanvasRenderer]);
+    echarts.use([
+      TooltipComponent,
+      GridComponent,
+      LegendComponent,
+      BarChart,
+      PieChart,
+      LineChart,
+      LabelLayout,
+      CanvasRenderer,
+    ]);
 
     configured = true;
   }
 
   return echarts;
+}
+
+export interface EchartCommonProps {
+  height: number;
+  legend: boolean;
 }
