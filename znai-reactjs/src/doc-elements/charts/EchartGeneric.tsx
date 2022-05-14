@@ -26,18 +26,22 @@ interface Props {
   height?: number;
   stack?: boolean;
   horizontal?: boolean;
+  legend?: boolean;
 }
 
-export function EchartGeneric({ labels, chartType, data, height, stack, horizontal }: Props) {
-  const heightToUse = height || 400;
+export function EchartGeneric({ labels, chartType, data, height, stack, horizontal, legend }: Props) {
+  const commonProps = {
+    height: height || 400,
+    legend: legend || false,
+  };
 
   switch (chartType) {
     case "bar":
-      return <EchartBar labels={labels!} data={data} height={heightToUse} stack={stack} horizontal={horizontal} />;
+      return <EchartBar labels={labels!} data={data} stack={stack} horizontal={horizontal} {...commonProps} />;
     case "pie":
-      return <EchartPie data={data} height={heightToUse} />;
+      return <EchartPie data={data} {...commonProps} />;
     case "line":
-      return <EchartLine labels={labels!} data={data} height={heightToUse} />;
+      return <EchartLine labels={labels!} data={data} {...commonProps} />;
     default:
       return <div>{"undefined chart type: " + chartType}</div>;
   }

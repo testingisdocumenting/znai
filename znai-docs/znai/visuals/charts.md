@@ -64,6 +64,14 @@ Use numbers in first column to have a regular X, Y plots
 
 :include-linechart: charts/competitors.csv
 
+# Legend 
+
+Use `legend: true` to add legend to a chart
+
+    :include-linechart: charts/daily-genres.csv {legend: true}
+
+:include-linechart: charts/daily-genres.csv {legend: true}
+
 # ECharts
 
 `Znai` uses the beautiful and functional [EChart](https://echarts.apache.org/) library to render charts.
