@@ -53,7 +53,6 @@ import {syntaxHighlightSnippetDemo} from './doc-elements/code-snippets/CodeSnipp
 import {inlinedLatexDemo} from './doc-elements/latex/InlinedLatex.demo'
 import {latexDemo} from './doc-elements/latex/Latex.demo'
 import {mermaidDemo} from './doc-elements/mermaid/Mermaid.demo'
-import {chartDemo} from './doc-elements/charts/Chart.demo'
 import {tableDemo} from './doc-elements/table/Table.demo'
 import {diagramLegendDemo} from "./doc-elements/diagrams/DiagramLegend.demo"
 import {keyboardShortcutsDemo} from "./doc-elements/keyboard/KeyboardShortcut.demo"
@@ -154,7 +153,6 @@ registries.add('doxygen')
 registries.add('visuals')
     .registerAsGrid('Text Badges', 0, textBadgeDemo)
     .registerAsGrid('Spoilers', 0, spoilerDemo)
-    .registerAsGrid('Charts', 0, chartDemo)
     .registerAsGrid('Echarts', 0, echartDemo)
     .registerAsRows('Image', imageDemo)
     .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)

@@ -25,6 +25,5 @@ org.testingisdocumenting.znai.extensions.rest.RestTestIncludePlugin
 org.testingisdocumenting.znai.extensions.json.JsonIncludePlugin
 org.testingisdocumenting.znai.extensions.xml.XmlIncludePlugin
 org.testingisdocumenting.znai.extensions.templates.TemplateIncludePlugin
-org.testingisdocumenting.znai.extensions.charts.ChartIncludePlugin
 org.testingisdocumenting.znai.extensions.cli.CliCommandIncludePlugin
 org.testingisdocumenting.znai.extensions.cli.CliOutputIncludePlugin

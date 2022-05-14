@@ -53,7 +53,6 @@ import {presentationSvgHandler, Svg} from './svg/Svg'
 import Latex from './latex/Latex'
 import InlinedLatex from './latex/InlinedLatex'
 import Mermaid from './mermaid/Mermaid'
-import {Chart, presentationChartHandler} from './charts/Chart'
 import {EchartGeneric} from "./charts/EchartGeneric";
 import Image from './images/Image'
 import {CliCommand, presentationCliCommandHandler} from './cli/CliCommand'
@@ -191,9 +190,6 @@ library.PageToc = PageToc
 
 library.MarkdownAndResult = MarkdownAndResult
 presentationElementHandlers.MarkdownAndResult = presentationMarkdownAndResultHandler
-
-library.Chart = Chart
-presentationElementHandlers.Chart = presentationChartHandler
 
 library.EchartGeneric = EchartGeneric
 
