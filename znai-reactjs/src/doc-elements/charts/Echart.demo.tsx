@@ -23,7 +23,9 @@ export function echartDemo(registry: Registry) {
     .add("bar", () => <EchartGeneric {...barChartData()} />)
     .add("bar horizontal", () => <EchartGeneric {...barChartData()} horizontal={true} height={700} />)
     .add("bar stacked", () => <EchartGeneric {...barChartData()} stack={true} />)
-    .add("pie", () => <EchartGeneric {...pieChartData()} labels={[]} />);
+    .add("pie", () => <EchartGeneric {...pieChartData()} />)
+    .add("line with text x axis", () => <EchartGeneric {...multiLineTextXData()} />)
+    .add("line with number", () => <EchartGeneric {...multiLineNumberXData()} />);
 }
 
 function barChartData() {
@@ -44,6 +46,7 @@ function barChartData() {
 function pieChartData() {
   return {
     chartType: "pie",
+    labels: [],
     data: [
       ["shirt", 5],
       ["cardigan", 20],
@@ -51,6 +54,34 @@ function pieChartData() {
       ["pants", 10],
       ["heels", 10],
       ["socks", 12],
+    ],
+  };
+}
+
+function multiLineTextXData() {
+  return {
+    chartType: "line",
+    labels: ["x", "sales", "tax", "fee"],
+    data: [
+      ["Monday", 5, 7, 17],
+      ["Tuesday", 20, 2, 2],
+      ["Wednesday", 36, 6, 7],
+      ["Thursday", 10, 7, 3],
+      ["Friday", 10, 2, 5],
+    ],
+  };
+}
+
+function multiLineNumberXData() {
+  return {
+    chartType: "line",
+    labels: ["x", "sales", "tax", "fee"],
+    data: [
+      [5, 5, 7, 17],
+      [14, 20, 2, 2],
+      [30, 36, 6, 7],
+      [33, 10, 7, 3],
+      [38, 10, 2, 5],
     ],
   };
 }

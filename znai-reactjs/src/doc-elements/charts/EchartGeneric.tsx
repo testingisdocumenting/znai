@@ -17,6 +17,7 @@
 import React from "react";
 import { EchartBar } from "./EchartBar";
 import { EchartPie } from "./EchartPie";
+import { EchartLine } from "./EchartLine";
 
 interface Props {
   chartType: string;
@@ -35,7 +36,9 @@ export function EchartGeneric({ labels, chartType, data, height, stack, horizont
       return <EchartBar labels={labels!} data={data} height={heightToUse} stack={stack} horizontal={horizontal} />;
     case "pie":
       return <EchartPie data={data} height={heightToUse} />;
+    case "line":
+      return <EchartLine labels={labels!} data={data} height={heightToUse} />;
     default:
-      return <div>"undefined chart type: " + chartType</div>;
+      return <div>{"undefined chart type: " + chartType}</div>;
   }
 }

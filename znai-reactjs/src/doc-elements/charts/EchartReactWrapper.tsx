@@ -33,8 +33,8 @@ export function EchartReactWrapper({ echartConfigProvider, height }: Props) {
     echartRef.current = echarts.init(echartDivNodeRef.current!);
 
     const config = {
+      tooltip: { trigger: "axis" },
       ...echartConfigProvider(),
-      tooltip: {},
       animation: false,
     };
 

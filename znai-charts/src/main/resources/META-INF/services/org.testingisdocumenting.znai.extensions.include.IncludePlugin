@@ -14,5 +14,6 @@
 # limitations under the License.
 #
 
+org.testingisdocumenting.znai.charts.LineChartIncludePlugin
 org.testingisdocumenting.znai.charts.BarChartIncludePlugin
 org.testingisdocumenting.znai.charts.PieChartIncludePlugin
