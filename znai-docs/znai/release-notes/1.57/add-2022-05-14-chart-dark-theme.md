@@ -1,1 +1,1 @@
-* Add dark theme support for [Charts](visuals/chart)   
+* Add dark theme support for [Charts](visuals/charts)   
