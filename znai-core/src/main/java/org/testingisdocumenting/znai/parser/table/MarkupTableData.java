@@ -17,6 +17,10 @@
 
 package org.testingisdocumenting.znai.parser.table;
 
+import org.testingisdocumenting.znai.utils.StringUtils;
+
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -27,6 +31,7 @@ import static java.util.stream.Collectors.toList;
 public class MarkupTableData {
     private final List<Column> header;
     private final List<Row> data;
+    private final NumberFormat numberFormat = NumberFormat.getNumberInstance();
 
     public MarkupTableData() {
         header = new ArrayList<>();
@@ -137,11 +142,40 @@ public class MarkupTableData {
         return data.stream().map(Row::getData).collect(toList());
     }
 
+    public List<List<Object>> getDataConvertingNumbers() {
+        return data.stream()
+                .map(row -> {
+                    List<Object> rowData = row.getData();
+
+                    return rowData.stream()
+                            .map(this::convertToNumberIfPossible)
+                            .collect(toList());
+                })
+                .collect(toList());
+    }
+
     public Map<String, Object> toMap() {
         final Map<String, Object> result = new LinkedHashMap<>();
         result.put("columns", header.stream().map(Column::toMap).collect(toList()));
         result.put("data", getData());
 
         return result;
+    }
+
+    private Object convertToNumberIfPossible(Object value) {
+        if (value == null) {
+            return null;
+        }
+
+        String valueAsText = value.toString();
+        if (StringUtils.isNumeric(numberFormat, valueAsText)) {
+            try {
+                return numberFormat.parse(valueAsText);
+            } catch (ParseException e) {
+                return "can't parse <" + valueAsText + "> to number";
+            }
+        }
+
+        return value;
     }
 }

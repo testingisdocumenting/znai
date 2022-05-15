@@ -25,6 +25,6 @@ class ChartDataCsvParser {
 
     public static ChartData parse(String content) {
         MarkupTableData tableData = CsvTableParser.parse(content);
-        return new ChartData(tableData.getColumnTitles(), tableData.getData());
+        return new ChartData(tableData.getColumnTitles(), tableData.getDataConvertingNumbers());
     }
 }

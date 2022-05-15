@@ -17,6 +17,8 @@
 
 package org.testingisdocumenting.znai.utils;
 
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -96,6 +98,19 @@ public class StringUtils {
         }
 
         return "\"" + text + "\"";
+    }
+
+    public static boolean isNumeric(NumberFormat numberFormat, String text) {
+        text = text.trim();
+
+        if (text.isEmpty()) {
+            return false;
+        }
+
+        ParsePosition pos = new ParsePosition(0);
+        numberFormat.parse(text, pos);
+
+        return text.length() == pos.getIndex();
     }
 
     private static String removeIndentation(String line, Integer indentation) {

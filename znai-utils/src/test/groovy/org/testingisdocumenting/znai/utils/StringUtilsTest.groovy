@@ -17,8 +17,9 @@
 
 package org.testingisdocumenting.znai.utils
 
-import org.junit.Assert
 import org.junit.Test
+
+import java.text.NumberFormat
 
 class StringUtilsTest {
     @Test
@@ -27,51 +28,58 @@ class StringUtilsTest {
 line #_2
 line #_3\r""")
 
-        assert maxLineLength == 8
+        maxLineLength.should == 8
     }
 
     @Test
     void "strip common indentation"() {
         def code = "    int a = 2;\n    int b = 3;"
         def stripped = StringUtils.stripIndentation(code)
-        Assert.assertEquals("int a = 2;\nint b = 3;", stripped)
+        stripped.should == "int a = 2;\nint b = 3;"
     }
 
     @Test
     void "extracts inside curly braces"() {
         def code = "{\n    statement1;\n    statement2}"
         def stripped = StringUtils.extractInsideCurlyBraces(code)
-        Assert.assertEquals("\n    statement1;\n    statement2", stripped)
+        stripped.should == "\n    statement1;\n    statement2"
 
-        Assert.assertEquals("", StringUtils.extractInsideCurlyBraces(""))
+        StringUtils.extractInsideCurlyBraces("").should == ""
     }
 
     @Test
     void "removes content inside brackets and brackets"() {
-        Assert.assertEquals("hello ",
-                StringUtils.removeContentInsideBracketsInclusive("hello <world>"))
+        StringUtils.removeContentInsideBracketsInclusive("hello <world>").should == "hello "
     }
 
     @Test
     void "concat prefix and multiline text preserving prefix size indentation"() {
         def concatenated = StringUtils.concatWithIndentation("a prefix:", "line1 line1\nline2\nline #3")
 
-        Assert.assertEquals("a prefix:line1 line1\n" +
+        concatenated.should == "a prefix:line1 line1\n" +
                 "         line2\n" +
-                "         line #3", concatenated)
+                "         line #3"
     }
 
     @Test
     void "remove quotes"() {
-        Assert.assertEquals("", StringUtils.removeQuotes('""'))
-        Assert.assertEquals("", StringUtils.removeQuotes("''"))
-        Assert.assertEquals("hello world", StringUtils.removeQuotes("'hello world'"))
-        Assert.assertEquals("hello world", StringUtils.removeQuotes('"hello world"'))
+        StringUtils.removeQuotes('""').should == ""
+        StringUtils.removeQuotes("''").should == ""
+        StringUtils.removeQuotes("'hello world'").should == "hello world"
+        StringUtils.removeQuotes('"hello world"').should == "hello world"
     }
 
     @Test
     void "wrap in double quotes"() {
-        Assert.assertEquals('""', StringUtils.wrapInDoubleQuotes('""'))
-        Assert.assertEquals('"hello world"', StringUtils.wrapInDoubleQuotes("hello world"))
+        StringUtils.wrapInDoubleQuotes('""').should == '""'
+        StringUtils.wrapInDoubleQuotes("hello world").should == '"hello world"'
+    }
+
+    @Test
+    void "is number"() {
+        def format = NumberFormat.getInstance()
+        StringUtils.isNumeric(format, "100").should == true
+        StringUtils.isNumeric(format, "100.34").should == true
+        StringUtils.isNumeric(format, "100a34").should == false
     }
 }
