@@ -18,9 +18,11 @@ import React, { MutableRefObject, RefObject, useEffect, useRef } from "react";
 import { EChartsType } from "echarts/types/dist/shared";
 import { configuredEcharts, EchartCommonProps } from "./EchartCommon";
 
+import { PresentationProps } from "../presentation/PresentationProps";
+
 import "./EchartReactWrapper.css";
 
-interface Props extends EchartCommonProps {
+interface Props extends EchartCommonProps, PresentationProps {
   echartConfigProvider(): any;
 }
 
@@ -56,7 +58,12 @@ export function EchartReactWrapper(props: Props) {
     }
   }, [props.height]);
 
-  return <div className="content-block znai-chart" ref={echartDivNodeRef} style={{ height: props.height }} />;
+  const style = {
+    width: props.isPresentation ? "var(--znai-single-column-full-width)" : undefined,
+    height: props.height,
+  };
+
+  return <div className="content-block znai-chart" ref={echartDivNodeRef} style={style} />;
 }
 
 function createOrInitEchart(

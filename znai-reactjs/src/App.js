@@ -94,6 +94,7 @@ import { textBadgeDemo } from "./doc-elements/badge/TextBadge.demo";
 import { doxygenMemberDemo } from "./doc-elements/doxygen/DoxygenMember.demo";
 import { updateGlobalAnchors } from "./doc-elements/references/globalAnchors";
 import { echartDemo } from "./doc-elements/charts/Echart.demo";
+import { chartsPresentationDemo } from "./doc-elements/charts/EchartPresentation.demo";
 
 const docMeta = {
     id: 'preview',
@@ -190,6 +191,7 @@ registries.add('presentation')
     .registerAsTabs('Code Snippets With Scroll', snippetWithScrollPresentationDemo)
     .registerAsTabs('Cli Command', cliCommandPresentationDemo)
     .registerAsTabs('Cli Output', cliOutputPresentationDemo)
+    .registerAsTabs('Charts', chartsPresentationDemo)
 
 registries.add('preview')
     .registerAsRows('Diff Highlight', diffTrackingDemo)

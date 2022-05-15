@@ -19,6 +19,7 @@ import { GridComponent, TooltipComponent, LegendComponent } from "echarts/compon
 import { BarChart, LineChart, PieChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
 import { SVGRenderer } from "echarts/renderers";
+import { PresentationProps } from "../presentation/PresentationProps";
 
 let configured = false;
 export function configuredEcharts() {
@@ -40,7 +41,8 @@ export function configuredEcharts() {
   return echarts;
 }
 
-export interface EchartCommonProps {
+export interface EchartCommonProps extends PresentationProps {
+  breakpoints: any[];
   height: number;
   legend: boolean;
 }
