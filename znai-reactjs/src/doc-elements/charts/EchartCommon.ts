@@ -18,7 +18,7 @@ import * as echarts from "echarts/core";
 import { GridComponent, TooltipComponent, LegendComponent } from "echarts/components";
 import { BarChart, LineChart, PieChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
-import { CanvasRenderer } from "echarts/renderers";
+import { SVGRenderer } from "echarts/renderers";
 
 let configured = false;
 export function configuredEcharts() {
@@ -31,7 +31,7 @@ export function configuredEcharts() {
       PieChart,
       LineChart,
       LabelLayout,
-      CanvasRenderer,
+      SVGRenderer,
     ]);
 
     configured = true;
