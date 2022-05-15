@@ -119,4 +119,21 @@ class MarkupTableDataTest {
                 "previous value: v1\n" +
                 "new value: v2")
     }
+
+    @Test
+    void "convert data to numbers"() {
+        def table = new MarkupTableData()
+        table.addColumn('a')
+        table.addColumn('b')
+
+        table.addRow(new Row(['k1', '100']))
+        table.addRow(new Row(['k2', '101.3']))
+
+
+        def data = table.getDataConvertingNumbers()
+        data.should == [['k1', 100], ['k2', 101.3]]
+
+        (data[0][1] instanceof Number).should == true
+        (data[1][1] instanceof Number).should == true
+    }
 }
