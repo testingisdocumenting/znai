@@ -50,7 +50,6 @@ import {graphVizSvgDemo} from './doc-elements/graphviz/GraphVizSvg.demo'
 import {graphVizSvgPresentationDemo} from './doc-elements/graphviz/PresentationGraphVizSvg.demo'
 import {cliCommandDemo} from './doc-elements/cli/CliCommand.demo'
 import {syntaxHighlightSnippetDemo} from './doc-elements/code-snippets/CodeSnippetSyntaxHighlight.demo'
-import {inlinedLatexDemo} from './doc-elements/latex/InlinedLatex.demo'
 import {latexDemo} from './doc-elements/latex/Latex.demo'
 import {mermaidDemo} from './doc-elements/mermaid/Mermaid.demo'
 import {tableDemo} from './doc-elements/table/Table.demo'
@@ -135,7 +134,6 @@ registries.add('snippets')
     .registerAsGrid('Inlined Code', 0, inlinedCodeDemo)
     .registerAsGrid('Json', 0, jsonDemo)
     .registerAsGrid('Xml', 0, xmlDemo)
-    .registerAsGrid('Inlined Latex', 0, inlinedLatexDemo)
     .registerAsGrid('Latex', 0, latexDemo)
     .registerAsGrid('Jsx', 0, jsxDemo)
     .registerAsGrid('DocUtils', 0, docUtilsDemo)

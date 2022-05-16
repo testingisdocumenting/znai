@@ -1,0 +1,1 @@
+* Fix: [Latex](snippets/math) more complex math render by adding missing fonts
