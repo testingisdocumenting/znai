@@ -18,8 +18,9 @@ import React from "react";
 import { EchartBar } from "./EchartBar";
 import { EchartPie } from "./EchartPie";
 import { EchartLine } from "./EchartLine";
+import { PresentationProps } from "../presentation/PresentationProps";
 
-interface Props {
+interface Props extends PresentationProps {
   chartType: string;
   data: any[][];
   labels?: string[];
@@ -27,12 +28,27 @@ interface Props {
   stack?: boolean;
   horizontal?: boolean;
   legend?: boolean;
+  breakpoints?: any[];
 }
 
-export function EchartGeneric({ labels, chartType, data, height, stack, horizontal, legend }: Props) {
+export function EchartGeneric({
+  labels,
+  chartType,
+  data,
+  height,
+  stack,
+  horizontal,
+  legend,
+  breakpoints,
+  isPresentation,
+  slideIdx,
+}: Props) {
   const commonProps = {
     height: height || 400,
     legend: legend || false,
+    breakpoints: breakpoints || [],
+    isPresentation,
+    slideIdx,
   };
 
   switch (chartType) {
@@ -46,3 +62,14 @@ export function EchartGeneric({ labels, chartType, data, height, stack, horizont
       return <div>{"undefined chart type: " + chartType}</div>;
   }
 }
+
+export const presentationEchartHandler = {
+  component: EchartGeneric,
+  numberOfSlides: ({ breakpoints }: Props) => {
+    if (breakpoints) {
+      return breakpoints.length + 1;
+    }
+
+    return 1;
+  },
+};

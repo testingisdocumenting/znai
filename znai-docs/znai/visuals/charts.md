@@ -72,6 +72,25 @@ Use `legend: true` to add legend to a chart
 
 :include-linechart: charts/daily-genres.csv {legend: true}
 
+# Presentation
+
+Charts automatically participate in slides.
+Each chart becomes an individual slide.
+
+Use `breakpoints` to add extra slides transitions.
+
+    :include-linechart: charts/competitors.csv {
+      legend: true,
+      breakpoints: [17, 42]
+    }
+
+:include-linechart: charts/competitors.csv {
+  legend: true,
+  breakpoints: [17, 42]
+}
+
+To try it, press on `:icon: maximize` icon next to the **Presentation** header
+
 # ECharts
 
 `Znai` uses the beautiful and functional [EChart](https://echarts.apache.org/) library to render charts.

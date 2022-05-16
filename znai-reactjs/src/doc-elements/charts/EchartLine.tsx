@@ -17,6 +17,9 @@
 import React from "react";
 import { EchartReactWrapper } from "./EchartReactWrapper";
 import { EchartCommonProps } from "./EchartCommon";
+import { createInvisibleLineSeries, partialDataExcludingDataAfterPoint } from "./echartUtils";
+
+const type = "line";
 
 interface Props extends EchartCommonProps {
   labels: string[];
@@ -34,6 +37,8 @@ export function EchartLine({ labels, data, ...commonProps }: Props) {
     for (let colIdx = 1; colIdx < labels.length; colIdx++) {
       series.push(createSeriesInstance(colIdx));
     }
+
+    series.push({ ...createInvisibleLineSeries(data), type });
 
     return {
       ...defineAxes(),
@@ -61,9 +66,21 @@ export function EchartLine({ labels, data, ...commonProps }: Props) {
     function createSeriesInstance(columnIdx: number) {
       return {
         name: labels[columnIdx],
-        type: "line",
-        data: data.map((row) => (isXNumbers ? [row[0], row[columnIdx]] : row[columnIdx])),
+        type,
+        data: partialDataExcludingDataAfterPoint(data, columnIdx, calcBreakpoint()),
       };
+
+      function calcBreakpoint() {
+        if (!commonProps.isPresentation || !commonProps.breakpoints) {
+          return undefined;
+        }
+
+        if (commonProps.slideIdx! > commonProps.breakpoints.length) {
+          return undefined;
+        }
+
+        return commonProps.breakpoints[commonProps.slideIdx!];
+      }
     }
   }
 }
