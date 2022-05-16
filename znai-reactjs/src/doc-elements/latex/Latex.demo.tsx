@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +15,21 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import { Registry } from 'react-component-viewer'
+import React from "react";
+import { Registry } from "react-component-viewer";
 
-import Latex from './Latex'
+import Latex from "./Latex";
+import InlinedLatex from "./InlinedLatex";
+
+import "katex/dist/katex.min.css";
 
 export function latexDemo(registry: Registry) {
-    registry
-        .add('block formula', () => <Latex latex={"c = \\pm\\sqrt{a^2 + b^2}"}/>)
+  registry
+    .add("block formula", () => <Latex latex={"c = \\pm\\sqrt{a^2 + b^2}"} />)
+    .add("inline formula", () => (
+      <p>
+        Sample LaTex inline:
+        <InlinedLatex latex={"c = \\pm\\sqrt{a^2 + b^2}"} />.
+      </p>
+    ));
 }

@@ -36,15 +36,8 @@ public class ReactJsBundle {
         mainCss = WebResource.fromResource("static/main.css");
         katexCss = WebResource.fromResource("static/css/katex.min.css");
 
-        Stream<WebResource> katexFonts = Stream.of("ttf", "woff", "woff2")
-                .flatMap(ext -> Stream.of(
-                        "KaTeX_Main-Bold." + ext,
-                        "KaTeX_Main-BoldItalic." + ext,
-                        "KaTeX_Main-Italic." + ext,
-                        "KaTeX_Main-Regular." + ext,
-                        "KaTeX_Math-BoldItalic." + ext,
-                        "KaTeX_Math-Italic." + ext)
-                        .map(name -> WebResource.fromResource("static/fonts/" + name)));
+        Stream<WebResource> katexFonts = KatexFonts.LIST.stream()
+                .map(name -> WebResource.fromResource("static/css/fonts/" + name));
 
         fonts = katexFonts.collect(toList());
     }

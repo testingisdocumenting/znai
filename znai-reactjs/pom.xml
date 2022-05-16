@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  ~ Copyright 2022 znai maintainers
   ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -65,10 +66,15 @@
                             <fileset file="build/static/css/*.css" />
                         </concat>
 
-                        <copy verbose="true" todir="${project.build.outputDirectory}/static/fonts">
+                        <copy verbose="true" todir="${project.build.outputDirectory}/static/css/fonts">
                             <fileset id="fonts" dir="node_modules/katex/dist/fonts">
                                 <include name="KaTeX_Main-*.*" />
                                 <include name="KaTeX_Math-*.*" />
+                                <include name="KaTeX_Script-*.*" />
+                                <include name="KaTeX_Size1-*.*" />
+                                <include name="KaTeX_Size2-*.*" />
+                                <include name="KaTeX_Size3-*.*" />
+                                <include name="KaTeX_Size4-*.*" />
                             </fileset>
                         </copy>
 

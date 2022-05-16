@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +15,9 @@
  * limitations under the License.
  */
 
-import React, { useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 
 import * as katex from "katex";
-import "katex/dist/katex.min.css";
 
 import "./Latex.css";
 
@@ -27,20 +27,13 @@ interface LatexProps {
 }
 
 export default function Latex({ inline, latex }: LatexProps) {
-  const initLatex = useCallback(
-    (ref: HTMLElement | null) => {
-      if (latex && ref) {
-        katex.render(latex, ref, {
-          throwOnError: false,
-        });
-      }
-    },
-    [latex]
-  );
+  const latexNode = useRef<HTMLDivElement>(null);
 
-  return inline ? (
-    <span className="latex content-block" ref={initLatex} />
-  ) : (
-    <div className="latex content-block" ref={initLatex} />
-  );
+  useEffect(() => {
+    katex.render(latex, latexNode.current!, {
+      throwOnError: false,
+    });
+  }, [inline, latex]);
+
+  return inline ? <span className="latex" ref={latexNode} /> : <div className="latex content-block" ref={latexNode} />;
 }
