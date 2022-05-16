@@ -312,6 +312,17 @@ world""")
                             type: 'Image']]
     }
 
+
+    @Test
+    void "image with external ref"() {
+        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 200000
+
+        parse("![alt text](https://host/images/png-test.png \"custom title\")")
+        content.should == [[title: "custom title", destination: 'https://host/images/png-test.png',
+                            alt: 'alt text', inlined: false,
+                            type: 'Image']]
+    }
+
     @Test
     void "image with no alt text"() {
         TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 200000

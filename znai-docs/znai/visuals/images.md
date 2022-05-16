@@ -69,3 +69,12 @@ Use `align` option to align images left or right.
     
 :include-image: books.jpg {align: "right", scale: 0.3}
 
+# External Image
+
+Pass external url in place of image to render image from a remote site 
+
+    ![text](https://external-url)
+
+    :include-image: https://external-url { align: "left" }
+
+Note: Pass `:identifier: validate-external-links {validationPath: "org/testingisdocumenting/znai/cli/ZnaiCliConfig.java"}` parameter to validate image urls

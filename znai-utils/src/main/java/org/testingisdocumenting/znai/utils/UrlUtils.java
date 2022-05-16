@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,5 +40,9 @@ public class UrlUtils {
         }
 
         return left + "/" + right;
+    }
+
+    public static boolean isExternal(String url) {
+        return url.startsWith("http:") || url.startsWith("https:");
     }
 }

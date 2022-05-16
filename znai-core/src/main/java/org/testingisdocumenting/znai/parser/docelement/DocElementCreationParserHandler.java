@@ -36,6 +36,7 @@ import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.structure.DocUrl;
+import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
@@ -274,20 +275,27 @@ public class DocElementCreationParserHandler implements ParserHandler {
     public void onImage(String title, String destination, String alt) {
         DocStructure docStructure = componentsRegistry.docStructure();
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
-        AuxiliaryFile auxiliaryFile = resourcesResolver.runtimeAuxiliaryFile(destination);
+        boolean isExternal = UrlUtils.isExternal(destination);
 
-        BufferedImage image = resourcesResolver.imageContent(destination);
+        if (!isExternal) {
+            AuxiliaryFile auxiliaryFile = resourcesResolver.runtimeAuxiliaryFile(destination);
+            BufferedImage image = resourcesResolver.imageContent(destination);
 
-        append(DocElementType.IMAGE, "title", title,
-                "destination", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()),
-                "alt", alt,
-                "inlined", true,
-                "timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()),
-                "width", image.getWidth(),
-                "height", image.getHeight());
+            append(DocElementType.IMAGE, "title", title,
+                    "destination", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()),
+                    "alt", alt,
+                    "inlined", true,
+                    "timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()),
+                    "width", image.getWidth(),
+                    "height", image.getHeight());
 
-        if (!destination.startsWith("http")) {
             auxiliaryFiles.add(auxiliaryFile);
+        } else {
+            docStructure.validateUrl(path, "![]() image", new DocUrl(destination));
+            append(DocElementType.IMAGE, "title", title,
+                    "destination", destination,
+                    "alt", alt,
+                    "inlined", true);
         }
     }
 

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,37 +17,42 @@
 
 package org.testingisdocumenting.znai.utils
 
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.ExpectedException
+
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class UrlUtilsTest {
-    @Rule
-    public final ExpectedException exception = ExpectedException.none()
 
     @Test
     void "url concatenation validates passed url on the left to be non null"() {
-        exception.expect(IllegalArgumentException)
-        exception.expectMessage('passed url on the left is NULL')
-
-        UrlUtils.concat(null, '/relative')
+        code {
+            UrlUtils.concat(null, '/relative')
+        } should throwException(IllegalArgumentException, 'passed url on the left is NULL')
     }
 
     @Test
     void "url concatenation validates passed url on the right to be non null"() {
-        exception.expect(IllegalArgumentException)
-        exception.expectMessage('passed url on the right is NULL')
+        code {
+            UrlUtils.concat('/relative', null)
 
-        UrlUtils.concat('/relative', null)
+        } should throwException(IllegalArgumentException, 'passed url on the right is NULL')
     }
 
     @Test
     void "url concatenation handles slashes to avoid double slash or slash absense"() {
         def expected = 'https://base/relative'
 
-        assert UrlUtils.concat('https://base/', '/relative') == expected
-        assert UrlUtils.concat('https://base', '/relative') == expected
-        assert UrlUtils.concat('https://base/', 'relative') == expected
-        assert UrlUtils.concat('https://base', 'relative') == expected
+        UrlUtils.concat('https://base/', '/relative').should == expected
+        UrlUtils.concat('https://base', '/relative').should == expected
+        UrlUtils.concat('https://base/', 'relative').should == expected
+        UrlUtils.concat('https://base', 'relative').should == expected
+    }
+
+    @Test
+    void "is external"() {
+        UrlUtils.isExternal("http://hello").should == true
+        UrlUtils.isExternal("https://hello").should == true
+        UrlUtils.isExternal("httphello").should == false
     }
 }
