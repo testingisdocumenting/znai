@@ -24,8 +24,12 @@ import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.structure.DocStructure;
+import org.testingisdocumenting.znai.structure.DocUrl;
+import org.testingisdocumenting.znai.utils.UrlUtils;
 
+import javax.print.Doc;
 import java.awt.image.BufferedImage;
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +37,8 @@ import java.util.stream.Stream;
 
 abstract class ImagePluginBase implements Plugin {
     protected AuxiliaryFile auxiliaryFile;
+    protected boolean isExternal;
+
     private ResourcesResolver resourceResolver;
 
     @Override
@@ -41,6 +47,10 @@ abstract class ImagePluginBase implements Plugin {
     }
 
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
+        if (isExternal) {
+            return additionalAuxiliaryFiles();
+        }
+
         return Stream.concat(Stream.of(auxiliaryFile), additionalAuxiliaryFiles());
     }
 
@@ -50,21 +60,27 @@ abstract class ImagePluginBase implements Plugin {
 
     protected abstract Stream<AuxiliaryFile> additionalAuxiliaryFiles();
 
-    protected PluginResult process(ComponentsRegistry componentsRegistry, PluginParams pluginParams) {
+    protected PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         resourceResolver = componentsRegistry.resourceResolver();
         DocStructure docStructure = componentsRegistry.docStructure();
         String imagePath = pluginParams.getFreeParam();
 
-        auxiliaryFile = resourceResolver.runtimeAuxiliaryFile(imagePath);
-
+        isExternal = UrlUtils.isExternal(imagePath);
         PluginParamsOpts opts = pluginParams.getOpts();
-        Double scale = opts.get("scaleRatio", opts.get("scale", 1.0));
-
         Map<String, Object> props = new LinkedHashMap<>(opts.toMap());
-        props.put("imageSrc", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
-        props.put("timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()));
-        props.put("shapes", annotationShapes());
-        setWidthHeight(props, scale, imagePath);
+
+        if (isExternal) {
+            props.put("imageSrc", imagePath);
+            props.put("shapes", annotationShapes());
+            docStructure.validateUrl(markupPath, "<image plugin>", new DocUrl(imagePath));
+        } else {
+            auxiliaryFile = resourceResolver.runtimeAuxiliaryFile(imagePath);
+            Double scale = opts.get("scaleRatio", opts.get("scale", 1.0));
+            props.put("imageSrc", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
+            props.put("timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()));
+            props.put("shapes", annotationShapes());
+            setWidthHeight(props, scale, imagePath);
+        }
 
         return PluginResult.docElement("AnnotatedImage", props);
     }

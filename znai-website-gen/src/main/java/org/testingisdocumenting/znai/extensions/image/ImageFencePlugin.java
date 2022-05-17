@@ -45,7 +45,7 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         this.content = content;
-        return process(componentsRegistry, pluginParams);
+        return process(componentsRegistry, markupPath, pluginParams);
     }
 
     @Override

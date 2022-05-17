@@ -58,7 +58,7 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
                 null :
                 JsonUtils.deserializeAsMap(FileUtils.fileTextContent(this.annotationsPath));
 
-        return process(componentsRegistry, pluginParams);
+        return process(componentsRegistry, markupPath, pluginParams);
     }
 
     @Override
@@ -86,6 +86,10 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
         }
 
         if (!pluginParams.getOpts().get("annotate", false)) {
+            return null;
+        }
+
+        if (isExternal) {
             return null;
         }
 
