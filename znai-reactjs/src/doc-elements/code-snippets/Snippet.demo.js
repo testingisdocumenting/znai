@@ -27,7 +27,11 @@ import {TwoSidesLayoutRightPart} from '../page/two-sides/TwoSidesLayout'
 import {Page} from '../page/Page'
 import {Section} from '../default-elements/Section';
 
+import { simulateState } from "react-component-viewer";
+
 import './tokens.css'
+
+const [getReadMore, setReadMore] = simulateState(true);
 
 export function snippetsDemo(registry) {
     registry
@@ -46,6 +50,12 @@ export function snippetsDemo(registry) {
                                                                                         highlight={[1]}/></TwoSidesLayoutRightPart>)
         .add('read more', () => <Snippet lang="csv" snippet={longCode()}
                                          readMore={true} readMoreVisibleLines={4}/>)
+        .add('read more switch', () => (
+          <div>
+              <button onClick={() => setReadMore(!getReadMore())}>toggle read more</button>
+              <Snippet lang="csv" snippet={longCode()}
+                       readMore={getReadMore()} readMoreVisibleLines={4}/>)
+          </div>))
         .add('tabs with wide', () => <Tabs {...tabsContent({label: 'wide', wide: true})}
                                            elementsLibrary={elementsLibrary}/>)
         .add('python code', () => <Snippet lang="python" snippet={pythonCode()}/>)
