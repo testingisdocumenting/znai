@@ -16,33 +16,21 @@
 
 package org.testingisdocumenting.znai.charts;
 
-import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
-import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
-import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 
 import java.nio.file.Path;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.stream.Stream;
 
-abstract public class ChartIncludeBasePlugin implements IncludePlugin {
-    private Path fullPath;
-
+public abstract class ChartFenceBasePlugin implements FencePlugin {
     abstract protected String type();
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
-        fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
-        String csvContent = componentsRegistry.resourceResolver().textContent(fullPath);
-
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                Path markupPath,
+                                PluginParams pluginParams,
+                                String csvContent) {
         return ChartPluginResult.create(pluginParams, type(), csvContent);
-    }
-
-    @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(fullPath));
     }
 }
