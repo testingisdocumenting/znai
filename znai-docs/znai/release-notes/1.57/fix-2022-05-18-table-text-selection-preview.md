@@ -1,0 +1,1 @@
+* Fix: [Table](layout/tables) text selection during preview is not auto deselected 

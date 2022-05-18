@@ -153,7 +153,6 @@ export class Documentation extends Component {
             forceSelectedTocItem,
             tocCollapsed,
             isSearchActive,
-            textSelection,
             pageGenError,
         } = this.state
 
@@ -637,8 +636,7 @@ export class Documentation extends Component {
         return funcToUpdatePage()
     }
 
-    onTextSelection(textSelection) {
-        this.setState({textSelection})
+    onTextSelection(selectedText) {
     }
 
     onUrlChange(url, urlHistoryState) {
