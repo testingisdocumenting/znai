@@ -42,7 +42,10 @@ export function configuredEcharts() {
 }
 
 export interface EchartCommonProps extends PresentationProps {
+  data: any[][];
   breakpoints: any[];
   height: number;
   legend: boolean;
+  wide: boolean;
+  padding: string;
 }

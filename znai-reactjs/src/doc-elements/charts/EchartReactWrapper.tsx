@@ -20,10 +20,17 @@ import { configuredEcharts, EchartCommonProps } from "./EchartCommon";
 
 import { PresentationProps } from "../presentation/PresentationProps";
 
+import { echartGridUsingMaxDataAndLegend } from "./echartUtils";
+
 import "./EchartReactWrapper.css";
 
 interface Props extends EchartCommonProps, PresentationProps {
   echartConfigProvider(): any;
+
+  /**
+   * max number used in the grid to cacl extra padding as echarts cuts of value even with options not to cut provided
+   */
+  maxAxisNumericValueProvider?(): number;
 }
 
 const echarts = configuredEcharts();
@@ -52,18 +59,33 @@ export function EchartReactWrapper(props: Props) {
     [props]
   );
 
+  // resize on height change
   useEffect(() => {
     if (echartRef.current) {
       echartRef.current.resize();
     }
   }, [props.height]);
 
+  // resize on browser window changes to deal with wide mode chart
+  useEffect(() => {
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+
+    function resize() {
+      if (echartRef.current) {
+        echartRef.current.resize();
+      }
+    }
+  }, []);
+
   const style = {
     width: props.isPresentation ? "var(--znai-single-column-full-width)" : undefined,
     height: props.height,
   };
 
-  return <div className="content-block znai-chart" ref={echartDivNodeRef} style={style} />;
+  const className = "znai-chart" + (props.wide ? "" : " content-block");
+
+  return <div className={className} ref={echartDivNodeRef} style={style} />;
 }
 
 function createOrInitEchart(
@@ -84,9 +106,17 @@ function createOrInitEchart(
 
   const config = {
     tooltip: { trigger: "axis" },
-    ...props.echartConfigProvider(),
+    grid: {
+      ...echartGridUsingMaxDataAndLegend(
+        props.legend,
+        props.maxAxisNumericValueProvider ? props.maxAxisNumericValueProvider() : 0
+      ),
+      containLabel: true,
+    },
+
     legend: createLegend(),
     animation: false,
+    ...props.echartConfigProvider(),
   };
 
   echartRef.current.setOption(config);

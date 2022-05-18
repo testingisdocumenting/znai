@@ -23,22 +23,27 @@ const type = "line";
 
 interface Props extends EchartCommonProps {
   labels: string[];
-  data: any[][];
 }
 
-export function EchartLine({ labels, data, ...commonProps }: Props) {
-  return <EchartReactWrapper echartConfigProvider={configProvider} {...commonProps} />;
+export function EchartLine(props: Props) {
+  return (
+    <EchartReactWrapper
+      echartConfigProvider={configProvider}
+      maxAxisNumericValueProvider={maxNumberProvider}
+      {...props}
+    />
+  );
 
   function configProvider() {
-    const firstRow = data.length > 0 ? data[0] : [0];
+    const firstRow = props.data.length > 0 ? props.data[0] : [0];
     const isXNumbers = typeof firstRow[0] === "number";
 
     const series = [];
-    for (let colIdx = 1; colIdx < labels.length; colIdx++) {
+    for (let colIdx = 1; colIdx < props.labels.length; colIdx++) {
       series.push(createSeriesInstance(colIdx));
     }
 
-    series.push({ ...createInvisibleLineSeries(data), type });
+    series.push({ ...createInvisibleLineSeries(props.data), type });
 
     return {
       ...defineAxes(),
@@ -53,7 +58,7 @@ export function EchartLine({ labels, data, ...commonProps }: Props) {
         };
       }
 
-      const axisData = data.map((row) => row[0]);
+      const axisData = props.data.map((row) => row[0]);
 
       return {
         xAxis: {
@@ -65,22 +70,32 @@ export function EchartLine({ labels, data, ...commonProps }: Props) {
 
     function createSeriesInstance(columnIdx: number) {
       return {
-        name: labels[columnIdx],
+        name: props.labels[columnIdx],
         type,
-        data: partialDataExcludingDataAfterPoint(data, columnIdx, calcBreakpoint()),
+        data: partialDataExcludingDataAfterPoint(props.data, columnIdx, calcBreakpoint()),
       };
 
       function calcBreakpoint() {
-        if (!commonProps.isPresentation || !commonProps.breakpoints) {
+        if (!props.isPresentation || !props.breakpoints) {
           return undefined;
         }
 
-        if (commonProps.slideIdx! > commonProps.breakpoints.length) {
+        if (props.slideIdx! > props.breakpoints.length) {
           return undefined;
         }
 
-        return commonProps.breakpoints[commonProps.slideIdx!];
+        return props.breakpoints[props.slideIdx!];
       }
     }
+  }
+
+  function maxNumberProvider() {
+    let maxX = Number.MIN_SAFE_INTEGER;
+
+    for (let rowIdx = 0; rowIdx < props.data.length; rowIdx++) {
+      maxX = Math.max(maxX, props.data[rowIdx][0]);
+    }
+
+    return maxX;
   }
 }

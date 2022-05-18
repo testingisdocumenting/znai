@@ -21,14 +21,17 @@ import { EchartGeneric } from "./EchartGeneric";
 export function echartDemo(registry: Registry) {
   registry
     .add("bar", () => <EchartGeneric {...barChartData()} />)
+    .add("bar padding", () => <EchartGeneric {...barChartData()} padding="10% 35%" />)
     .add("bar horizontal", () => <EchartGeneric {...barChartData()} horizontal={true} height={700} />)
     .add("bar stacked", () => <EchartGeneric {...barChartData()} stack={true} />)
+    .add("bar stacked horizontal", () => <EchartGeneric {...barChartDataLarge()} stack={true} horizontal={true} />)
     .add("bar legend", () => <EchartGeneric {...barChartData()} stack={true} legend={true} />)
     .add("pie", () => <EchartGeneric {...pieChartData()} />)
     .add("pie legend", () => <EchartGeneric {...pieChartData()} legend={true} />)
     .add("line with text x axis", () => <EchartGeneric {...multiLineTextXData()} />)
     .add("line with number", () => <EchartGeneric {...multiLineNumberXData()} />)
-    .add("line legend", () => <EchartGeneric {...multiLineTextXData()} legend={true} />);
+    .add("line legend", () => <EchartGeneric {...multiLineTextXData()} legend={true} />)
+    .add("line wide", () => <EchartGeneric {...multiLineNumberXDataLarge()} wide={true} />);
 }
 
 function barChartData() {
@@ -42,6 +45,21 @@ function barChartData() {
       ["pants", 10, 7, 3],
       ["heels", 10, 2, 5],
       ["socks", 12, 1, 15],
+    ],
+  };
+}
+
+function barChartDataLarge() {
+  return {
+    chartType: "bar",
+    labels: ["x", "sales", "tax", "fee"],
+    data: [
+      ["shirt", 5000, 7000, 17000],
+      ["cardigan", 20000, 2000, 2000],
+      ["chiffon", 36000, 6000, 7000],
+      ["pants", 10000, 7000, 3000],
+      ["heels", 10000, 2000, 5000],
+      ["socks", 12000, 1000, 15000],
     ],
   };
 }
@@ -85,6 +103,20 @@ function multiLineNumberXData() {
       [30, 36, 6, 7],
       [33, 10, 7, 3],
       [38, 10, 2, 5],
+    ],
+  };
+}
+
+function multiLineNumberXDataLarge() {
+  return {
+    chartType: "line",
+    labels: ["x", "sales", "tax", "fee"],
+    data: [
+      [0, 5, 7, 1700],
+      [202138, 20000, 200, 300],
+      [502138, 3006, 6, 7],
+      [1002138, 10000, 7, 3],
+      [2002138, 10, 15000, 5],
     ],
   };
 }

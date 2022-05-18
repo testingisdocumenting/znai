@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-import { createInvisibleLineSeries, partialDataExcludingDataAfterPoint } from "./echartUtils";
+import {
+  createInvisibleLineSeries,
+  echartGridUsingMaxDataAndLegend,
+  echartGridUsingPadding,
+  partialDataExcludingDataAfterPoint,
+} from "./echartUtils";
 
 test("invisible line for numbers X", () => {
   const invisible = createInvisibleLineSeries([
@@ -101,4 +106,36 @@ test("partial data with text breakpoint", () => {
   );
 
   expect(partial).toEqual([-2, -3]);
+});
+
+test("grid config by given padding", () => {
+  const gridEmpty = echartGridUsingPadding("    ");
+  expect(gridEmpty).toEqual(undefined);
+
+  const gridSingle = echartGridUsingPadding("  5%  ");
+  expect(gridSingle).toEqual({
+    top: "5%",
+    bottom: "5%",
+    left: "5%",
+    right: "5%",
+  });
+
+  const gridMultiple = echartGridUsingPadding("  5%   20% ");
+  expect(gridMultiple).toEqual({
+    top: "5%",
+    bottom: "5%",
+    left: "20%",
+    right: "20%",
+  });
+});
+
+test("grid auto config", () => {
+  const grid = echartGridUsingMaxDataAndLegend(true, 2000000);
+
+  expect(grid).toEqual({
+    top: 40,
+    bottom: 0,
+    left: 0,
+    right: 36,
+  });
 });

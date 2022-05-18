@@ -20,17 +20,22 @@ import { EchartCommonProps } from "./EchartCommon";
 
 interface Props extends EchartCommonProps {
   labels: string[];
-  data: any[][];
   stack?: boolean;
   horizontal?: boolean;
 }
 
-export function EchartBar({ labels, data, stack, horizontal, ...commonProps }: Props) {
-  return <EchartReactWrapper echartConfigProvider={configProvider} {...commonProps} />;
+export function EchartBar(props: Props) {
+  return (
+    <EchartReactWrapper
+      echartConfigProvider={configProvider}
+      maxAxisNumericValueProvider={maxAxisNumericValueProvider}
+      {...props}
+    />
+  );
 
   function configProvider() {
     const series = [];
-    for (let colIdx = 1; colIdx < labels.length; colIdx++) {
+    for (let colIdx = 1; colIdx < props.labels.length; colIdx++) {
       series.push(createSeriesInstance(colIdx));
     }
 
@@ -40,9 +45,9 @@ export function EchartBar({ labels, data, stack, horizontal, ...commonProps }: P
     };
 
     function defineAxes() {
-      const axisData = data.map((row) => row[0]);
+      const axisData = props.data.map((row) => row[0]);
 
-      return horizontal
+      return props.horizontal
         ? {
             xAxis: {},
             yAxis: {
@@ -59,11 +64,50 @@ export function EchartBar({ labels, data, stack, horizontal, ...commonProps }: P
 
     function createSeriesInstance(columnIdx: number) {
       return {
-        name: labels[columnIdx],
+        name: props.labels[columnIdx],
         type: "bar",
-        data: data.map((row) => row[columnIdx]),
-        stack: stack ? "stack" : undefined,
+        data: props.data.map((row) => row[columnIdx]),
+        stack: props.stack ? "stack" : undefined,
       };
+    }
+  }
+
+  function maxAxisNumericValueProvider() {
+    if (!props.horizontal) {
+      return 0;
+    }
+
+    if (props.stack) {
+      return maxSum();
+    }
+
+    return max();
+
+    function maxSum() {
+      let result = Number.MIN_SAFE_INTEGER;
+
+      for (let rowIdx = 0; rowIdx < props.data.length; rowIdx++) {
+        let sum = 0;
+        for (let colIdx = 1; colIdx < props.labels.length; colIdx++) {
+          sum += props.data[rowIdx][colIdx];
+        }
+
+        result = Math.max(result, sum);
+      }
+
+      return result;
+    }
+
+    function max() {
+      let result = Number.MIN_SAFE_INTEGER;
+
+      for (let rowIdx = 0; rowIdx < props.data.length; rowIdx++) {
+        for (let colIdx = 1; colIdx < props.labels.length; colIdx++) {
+          result = Math.max(result, props.data[rowIdx][colIdx]);
+        }
+      }
+
+      return result;
     }
   }
 }

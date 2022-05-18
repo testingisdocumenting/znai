@@ -18,12 +18,8 @@ import React from "react";
 import { EchartReactWrapper } from "./EchartReactWrapper";
 import { EchartCommonProps } from "./EchartCommon";
 
-interface Props extends EchartCommonProps {
-  data: any[][];
-}
-
-export function EchartPie({ data, ...commonProps }: Props) {
-  return <EchartReactWrapper echartConfigProvider={configProvider} {...commonProps} />;
+export function EchartPie(props: EchartCommonProps) {
+  return <EchartReactWrapper echartConfigProvider={configProvider} {...props} />;
 
   function configProvider() {
     return {
@@ -33,11 +29,11 @@ export function EchartPie({ data, ...commonProps }: Props) {
 
     function createSeriesInstance() {
       const labelsGap = 20;
-      const legendGap = commonProps.legend ? 32 : 0;
+      const legendGap = props.legend ? 32 : 0;
       return {
-        radius: commonProps.height / 2.0 - labelsGap - legendGap,
+        radius: props.height / 2.0 - labelsGap - legendGap,
         type: "pie",
-        data: data.map((row) => ({ name: row[0], value: row[1] })),
+        data: props.data.map((row) => ({ name: row[0], value: row[1] })),
       };
     }
   }

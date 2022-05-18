@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+.znai-chart {
+    padding: 16px 0;
+}
+
 .znai-chart svg > rect {
     fill: var(--znai-background-color);
 }
