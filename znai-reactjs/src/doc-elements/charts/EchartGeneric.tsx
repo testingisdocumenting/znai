@@ -28,6 +28,8 @@ interface Props extends PresentationProps {
   stack?: boolean;
   horizontal?: boolean;
   legend?: boolean;
+  wide?: boolean;
+  padding?: string;
   breakpoints?: any[];
 }
 
@@ -39,6 +41,8 @@ export function EchartGeneric({
   stack,
   horizontal,
   legend,
+  wide,
+  padding,
   breakpoints,
   isPresentation,
   slideIdx,
@@ -46,6 +50,8 @@ export function EchartGeneric({
   const commonProps = {
     height: height || 400,
     legend: legend || false,
+    wide: wide || false,
+    padding: padding || "",
     breakpoints: breakpoints || [],
     isPresentation,
     slideIdx,

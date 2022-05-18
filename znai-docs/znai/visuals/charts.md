@@ -34,9 +34,9 @@ Use `stack: true` to render multiple bars stacked
 
 Use `horizontal: true` and `height` parameter to change render direction
 
-    :include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 300}
+    :include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 250}
 
-:include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 300}
+:include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 250}
 
 # Line
 
@@ -71,6 +71,20 @@ Use `legend: true` to add legend to a chart
     :include-linechart: charts/daily-genres.csv {legend: true}
 
 :include-linechart: charts/daily-genres.csv {legend: true}
+
+# Wide Mode
+
+Use `wide: true` to use available horizontal space
+
+    :include-linechart: charts/daily-genres.csv {wide: true}
+
+:include-linechart: charts/daily-genres.csv {wide: true}
+
+Use in combination with height to fit larger charts
+
+    :include-linechart: charts/daily-genres.csv {wide: true, height: 800}
+
+:include-linechart: charts/daily-genres.csv {wide: true, height: 800}
 
 
 # Inlined Data 

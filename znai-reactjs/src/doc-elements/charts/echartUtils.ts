@@ -89,3 +89,55 @@ export function partialDataExcludingDataAfterPoint(
 
   return partialData;
 }
+
+/**
+ * creates grid config from padding shortcut
+ * @param padding "10%" "10% 10%" "5px 10px"
+ */
+export function echartGridUsingPadding(padding: string) {
+  const trimmed = padding.trim();
+  if (trimmed.length === 0) {
+    return undefined;
+  }
+
+  const parts = trimmed.split(/\s+/);
+  if (parts.length === 1) {
+    const value = parts[0];
+    return {
+      left: value,
+      right: value,
+      top: value,
+      bottom: value,
+    };
+  }
+
+  if (parts.length >= 2) {
+    const topBottom = parts[0];
+    const leftRight = parts[1];
+    return {
+      left: leftRight,
+      right: leftRight,
+      top: topBottom,
+      bottom: topBottom,
+    };
+  }
+}
+
+const numberFormatter = new Intl.NumberFormat("en-US");
+
+export function echartGridUsingMaxDataAndLegend(legend: boolean, maxAxisNumber: number) {
+  return {
+    left: 0,
+    right: rightGap(),
+    top: 8 + (legend ? 32 : 0),
+    bottom: 0,
+  };
+
+  function rightGap() {
+    const maxValueLabel = numberFormatter.format(maxAxisNumber);
+
+    // approximate size of half of the value
+    // we calc padding as echarts cuts label on the right
+    return (maxValueLabel.length / 2.0) * 8;
+  }
+}
