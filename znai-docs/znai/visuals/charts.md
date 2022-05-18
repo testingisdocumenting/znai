@@ -72,6 +72,61 @@ Use `legend: true` to add legend to a chart
 
 :include-linechart: charts/daily-genres.csv {legend: true}
 
+
+# Inlined Data 
+
+Use fence block plugin to inline chart data into markdown  
+
+    ```piechart
+    genre, preference
+    RPG, 75
+    Action, 50
+    RTS, 40
+    FPS, 50
+    ```
+  
+```piechart
+genre, preference
+RPG, 75
+Action, 50
+RTS, 40
+FPS, 50
+```
+
+    ```linechart {legend: true}
+    day, RPG, RTS, FPS
+    Monday, 100, 10, 0
+    Tuesday, 50, 50, 20
+    Wednesday, 10, 30, 50
+    Thursday, 5, 5, 100
+    Friday, 0, 100, 10
+    ```
+
+```linechart {legend: true}
+day, RPG, RTS, FPS
+Monday, 100, 10, 0
+Tuesday, 50, 50, 20
+Wednesday, 10, 30, 50
+Thursday, 5, 5, 100
+Friday, 0, 100, 10
+```
+
+    ```barchart
+    genre, preference
+    RPG, 75
+    Action, 50
+    RTS, 40
+    FPS, 50
+    ```
+
+```barchart
+genre, preference
+RPG, 75
+Action, 50
+RTS, 40
+FPS, 50
+```
+
 # Presentation
 
 Charts automatically participate in slides.
