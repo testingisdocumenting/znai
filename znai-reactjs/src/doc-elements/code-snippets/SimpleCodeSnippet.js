@@ -33,16 +33,14 @@ class SimpleCodeSnippet extends Component {
         super(props)
 
         this.processProps(props)
-        this.state = {displayFully: !this.limitLines}
+        this.state = {displayFully: !this.limitLines(props)}
     }
 
     // handles changes during preview
     componentWillReceiveProps(nextProps) {
         this.processProps(nextProps)
 
-        if (this.props.readMore && this.props.readMoreVisibleLines !== nextProps.readMoreVisibleLines) {
-            this.setState({displayFully: false})
-        }
+        this.setState({displayFully: !this.limitLines(nextProps)})
     }
 
     processProps({tokens, linesOfCode, highlight}) {
@@ -60,7 +58,7 @@ class SimpleCodeSnippet extends Component {
         const highlightIsVisible = !isPresentation || slideIdx > 0
 
         const visibleLines = this.limitLines && !displayFully && !isPresentation ?
-            this.linesOfTokens.slice(0, this.readMoreVisibleLines) :
+            this.linesOfTokens.slice(0, this.readMoreVisibleLines(this.props)) :
             this.linesOfTokens
 
         const linesToRender = this.processLinesToRender(visibleLines)
@@ -117,12 +115,12 @@ class SimpleCodeSnippet extends Component {
         this.setState({displayFully: true})
     }
 
-    get limitLines() {
-        return this.linesOfTokens.length >= this.readMoreVisibleLines && this.props.readMore
+    limitLines(props) {
+        return this.linesOfTokens.length >= this.readMoreVisibleLines(props) && props.readMore
     }
 
-    get readMoreVisibleLines() {
-        return this.props.readMoreVisibleLines || 8
+    readMoreVisibleLines(props) {
+        return props.readMoreVisibleLines || 8
     }
 
     isHighlighted(lineIdx) {

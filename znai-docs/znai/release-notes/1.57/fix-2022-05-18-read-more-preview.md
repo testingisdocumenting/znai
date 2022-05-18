@@ -1,0 +1,1 @@
+* Fix: [read more](snippets/external-code-snippets#read-more) option change during preview now properly updates the snippet
