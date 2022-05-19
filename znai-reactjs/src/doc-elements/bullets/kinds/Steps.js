@@ -74,7 +74,7 @@ class Step extends Component {
 
         return parts.map((part, idx) => (
             <text key={idx}
-                  x={halfWidth + (noseLength / 3.0)}
+                  x={halfWidth}
                   y={y + idx * fontHeight} fontSize={fontSize} textAnchor="middle"
                   style={textStyle}
                   alignmentBaseline="central">
@@ -89,7 +89,7 @@ const Steps = ({content, meta, isPresentation, slideIdx}) => {
     const lastLineIdx = isAllAtOnce(meta) ? textLines.length - 1: slideIdx
     const textLinesToReveal = isPresentation ? textLines.slice(0, lastLineIdx + 1) : textLines
 
-    const dx = (totalWidth - (textLinesToReveal.length * stepAllocatedWidth)) / 2
+    const dx = calcDx()
 
     return (
         <SvgWithCalculatedSize isPresentation={isPresentation}
@@ -106,6 +106,21 @@ const Steps = ({content, meta, isPresentation, slideIdx}) => {
             </g>
         </SvgWithCalculatedSize>
     )
+
+    function calcDx() {
+        const align = meta.align || "center"
+        const stepsWidth = (textLinesToReveal.length * stepAllocatedWidth)
+
+        if (align === "left") {
+            return 0;
+        }
+
+        if (align === "right") {
+            return totalWidth - stepsWidth;
+        }
+
+        return (totalWidth - stepsWidth) / 2;
+    }
 }
 
 export default Steps
