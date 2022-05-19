@@ -94,6 +94,7 @@ import { doxygenMemberDemo } from "./doc-elements/doxygen/DoxygenMember.demo";
 import { updateGlobalAnchors } from "./doc-elements/references/globalAnchors";
 import { echartDemo } from "./doc-elements/charts/Echart.demo";
 import { chartsPresentationDemo } from "./doc-elements/charts/EchartPresentation.demo";
+import { smartBulletListsDemo } from "./doc-elements/bullets/SmarlBulletList.demo";
 
 const docMeta = {
     id: 'preview',
@@ -154,6 +155,7 @@ registries.add('visuals')
     .registerAsGrid('Spoilers', 0, spoilerDemo)
     .registerAsGrid('Echarts', 0, echartDemo)
     .registerAsRows('Image', imageDemo)
+    .registerAsRows('Smart Bullets', smartBulletListsDemo)
     .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)
     .registerAsGrid('SVG', 0, svgDemo)
     .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)

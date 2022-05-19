@@ -62,6 +62,16 @@ Use `differentColors: true` to use distinct colors for each step
 * Learn Java
 * Learn Machine Learning
 
+Use `align: "left"` to align steps to the left
+
+    :include-meta: {bulletListType: "Steps", differentColors: true, align: "left"}
+
+:include-meta: {bulletListType: "Steps", differentColors: true, align: "left"}
+
+* Install IDEA
+* Learn Java
+* Learn Machine Learning
+
 
 # Presentation Only
 

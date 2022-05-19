@@ -15,135 +15,135 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-import {elementsLibrary} from '../DefaultElementsLibrary'
+import { elementsLibrary } from "../DefaultElementsLibrary";
 
 export function bulletListsDemo(registry) {
-    registry.add('with multi paragraph', () => (<elementsLibrary.DocElement content={createListWithParagraphs()}
-                                                                            elementsLibrary={elementsLibrary}/>))
+  registry.add("with multi paragraph", () => (<elementsLibrary.DocElement content={createListWithParagraphs()}
+                                                                          elementsLibrary={elementsLibrary} />));
 
-    registry.add('with icons', () => <elementsLibrary.DocElement elementsLibrary={elementsLibrary}
-                                                                 content={bulletsWithIcons()}/>)
+  registry.add("with icons", () => <elementsLibrary.DocElement elementsLibrary={elementsLibrary}
+                                                               content={bulletsWithIcons()} />);
 }
 
 function createListWithParagraphs() {
-    return [ {
-        "bulletMarker" : "*",
-        "tight" : false,
-        "type" : "BulletList",
-        "content" : [ {
-            "type" : "ListItem",
-            "content" : [ {
-                "type" : "Paragraph",
-                "content" : [ {
-                    "text" : "First list item's first paragraph.",
-                    "type" : "SimpleText"
-                }, {
-                    "type" : "SoftLineBreak"
-                }, {
-                    "text" : "This is still part of the first paragraph.",
-                    "type" : "SimpleText"
-                } ]
-            }, {
-                "type" : "Paragraph",
-                "content" : [ {
-                    "text" : "First list item's second paragraph",
-                    "type" : "SimpleText"
-                } ]
-            } ]
+  return [{
+    "bulletMarker": "*",
+    "tight": false,
+    "type": "BulletList",
+    "content": [{
+      "type": "ListItem",
+      "content": [{
+        "type": "Paragraph",
+        "content": [{
+          "text": "First list item's first paragraph.",
+          "type": "SimpleText"
         }, {
-            "type" : "ListItem",
-            "content" : [ {
-                "type" : "Paragraph",
-                "content" : [ {
-                    "text" : "Second list item's first paragraph",
-                    "type" : "SimpleText"
-                } ]
-            } ]
-        } ]
-    } ]
+          "type": "SoftLineBreak"
+        }, {
+          "text": "This is still part of the first paragraph.",
+          "type": "SimpleText"
+        }]
+      }, {
+        "type": "Paragraph",
+        "content": [{
+          "text": "First list item's second paragraph",
+          "type": "SimpleText"
+        }]
+      }]
+    }, {
+      "type": "ListItem",
+      "content": [{
+        "type": "Paragraph",
+        "content": [{
+          "text": "Second list item's first paragraph",
+          "type": "SimpleText"
+        }]
+      }]
+    }]
+  }];
 }
 
 function bulletsWithIcons() {
-    return [{
-        "bulletMarker": "*",
-        "tight": true,
-        "type": "BulletList",
+  return [{
+    "bulletMarker": "*",
+    "tight": true,
+    "type": "BulletList",
+    "content": [
+      {
+        "type": "ListItem",
         "content": [
-            {
-                "type": "ListItem",
-                "content": [
-                    {
-                        "type": "Paragraph",
-                        "content": [
-                            {
-                                "type": "Icon",
-                                "id": "search",
-                                "stroke": "green",
-                            },
-                            {
-                                "text": "Something",
-                                "type": "SimpleText"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "type": "ListItem",
-                "content": [
-                    {
-                        "type": "Paragraph",
-                        "content": [
-                            {
-                                "type": "Icon",
-                                "id": "time"
-                            },
-                            {
-                                "text": "Additional Additional Additional Additional Additional Additional Additional Additional Additional Additional Additional Additional",
-                                "type": "SimpleText"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "type": "ListItem",
-                "content": [
-                    {
-                        "type": "Paragraph",
-                        "content": [
-                            {
-                                "type": "Icon",
-                                "id": "thumbs-down",
-                                "fill": "red"
-                            },
-                            {
-                                "type": "Emphasis",
-                                "content": [
-                                    {
-                                        "text": "Inject",
-                                        "type": "SimpleText"
-                                    }
-                                ]
-                            },
-                            {
-                                "text": " ",
-                                "type": "SimpleText"
-                            },
-                            {
-                                "code": "DAO",
-                                "type": "InlinedCode"
-                            },
-                            {
-                                "text": " to decouple",
-                                "type": "SimpleText"
-                            }
-                        ]
-                    }
-                ]
-            }
+          {
+            "type": "Paragraph",
+            "content": [
+              {
+                "type": "Icon",
+                "id": "search",
+                "stroke": "green"
+              },
+              {
+                "text": "Something",
+                "type": "SimpleText"
+              }
+            ]
+          }
         ]
-    }]
+      },
+      {
+        "type": "ListItem",
+        "content": [
+          {
+            "type": "Paragraph",
+            "content": [
+              {
+                "type": "Icon",
+                "id": "time"
+              },
+              {
+                "text": "Additional Additional Additional Additional Additional Additional Additional Additional Additional Additional Additional Additional",
+                "type": "SimpleText"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ListItem",
+        "content": [
+          {
+            "type": "Paragraph",
+            "content": [
+              {
+                "type": "Icon",
+                "id": "thumbs-down",
+                "fill": "red"
+              },
+              {
+                "type": "Emphasis",
+                "content": [
+                  {
+                    "text": "Inject",
+                    "type": "SimpleText"
+                  }
+                ]
+              },
+              {
+                "text": " ",
+                "type": "SimpleText"
+              },
+              {
+                "code": "DAO",
+                "type": "InlinedCode"
+              },
+              {
+                "text": " to decouple",
+                "type": "SimpleText"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }];
 }
