@@ -195,7 +195,7 @@
 
 .toc-item.selected {
     border-left: 4px solid var(--znai-toc-selected-border-color);
-    padding-left: 25px;
+    padding-left: 21px;
     transition: border-color 0.5s;
 }
 
