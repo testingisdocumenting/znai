@@ -1,0 +1,1 @@
+* Fix: selected TOC item padding 
