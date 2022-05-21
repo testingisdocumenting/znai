@@ -53,6 +53,11 @@ const personLongDescriptionParameters = [
     {name: 'score', type: 'integer', description: multipleParagraph},
 ]
 
+const longNameParameters = [
+    {anchorId: 'prefix_long1', name: 'VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
+    {anchorId: 'prefix_long2',name: 'VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES', type: 'string', description: [{"text": "last name", "type": "SimpleText"}]},
+]
+
 const mailBoxParameters = [
     {name: 'zipCode', type: 'string', description: [{"text": "zip code", "type": "SimpleText"}]},
     {name: 'isPersonal', type: 'boolean', description: [{"text": "does it belong to a org or a person", "type": "SimpleText"}]},
@@ -77,64 +82,70 @@ const withCodeSnippetFirst = [
 
 export function apiParametersDemo(registry) {
     registry
-        .add('flat parameters', () => (
-            <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>
-        ))
-        .add('flat parameters with global refs', () => (
-            <ApiParameters elementsLibrary={elementsLibrary} parameters={personParametersWithTypeRef}/>
-        ))
-        .add('flat parameters small size', () => (
-            <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} small={true}/>
-        ))
-        .add('flat parameters long name and type', () => (
-            <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongTypeParameters}/>
-        ))
-        .add('flat parameters with title', () => (
-            <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition"/>
-        ))
-        .add('flat parameters with long description', () => (
-            <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongDescriptionParameters}/>
-        ))
-        .add('flat parameters with references', () => (
-            <ApiParameters elementsLibrary={elementsLibrary}
-                           parameters={personParameters}
-                           references={paramsReferences()}/>
-        ))
-        .add('nested parameters', () => (
-            <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
-        ))
-        .add('with text around', () => (
-            <div className="content-block">
-                <React.Fragment>
-                    <ParagraphText/>
-                    <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
-                    <ParagraphText/>
-                </React.Fragment>
-            </div>
-        ))
-        .add('with text around small size', () => (
-            <div className="content-block">
-                <React.Fragment>
-                    <ParagraphText/>
-                    <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} small={true}/>
-                    <ParagraphText/>
-                </React.Fragment>
-            </div>
-        ))
-        .add('with text around and title', () => (
-            <div className="content-block">
+      .add('flat parameters', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>
+      ))
+      .add('flat parameters with global refs', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParametersWithTypeRef}/>
+      ))
+      .add('flat parameters small size', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} small={true}/>
+      ))
+      .add('flat parameters long type', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongTypeParameters}/>
+      ))
+      .add('with long names without spaces', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={longNameParameters}/>
+      ))
+      .add('with long names without spaces and noWrap option', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={longNameParameters} noWrap={true}/>
+      ))
+      .add('flat parameters with title', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition"/>
+      ))
+      .add('flat parameters with long description', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongDescriptionParameters}/>
+      ))
+      .add('flat parameters with references', () => (
+        <ApiParameters elementsLibrary={elementsLibrary}
+                       parameters={personParameters}
+                       references={paramsReferences()}/>
+      ))
+      .add('nested parameters', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
+      ))
+      .add('with text around', () => (
+        <div className="content-block">
+            <React.Fragment>
                 <ParagraphText/>
-                <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} title="Person definition"/>
+                <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
                 <ParagraphText/>
-            </div>
-        ))
-        .add('with code first in description', () => (
-            <div className="content-block">
+            </React.Fragment>
+        </div>
+      ))
+      .add('with text around small size', () => (
+        <div className="content-block">
+            <React.Fragment>
                 <ParagraphText/>
-                <ApiParameters elementsLibrary={elementsLibrary} parameters={withCodeSnippetFirst}/>
+                <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} small={true}/>
                 <ParagraphText/>
-            </div>
-        ))
+            </React.Fragment>
+        </div>
+      ))
+      .add('with text around and title', () => (
+        <div className="content-block">
+            <ParagraphText/>
+            <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} title="Person definition"/>
+            <ParagraphText/>
+        </div>
+      ))
+      .add('with code first in description', () => (
+        <div className="content-block">
+            <ParagraphText/>
+            <ApiParameters elementsLibrary={elementsLibrary} parameters={withCodeSnippetFirst}/>
+            <ParagraphText/>
+        </div>
+      ))
 }
 
 function ParagraphText() {

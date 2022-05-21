@@ -147,4 +147,25 @@ firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
 
-In the example above `customPrefix` is added to each parameter link. 
+In the example above `customPrefix` is added to each parameter link.
+
+# Long Parameter Names
+
+Znai hard wraps long parameter names to leave more space to description. 
+
+```api-parameters {anchorPrefix: 'customPrefix'}
+VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support
+VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support
+```
+
+Use `noWrap: true` to remove hard wrap enforcement
+
+    ```api-parameters {anchorPrefix: 'customPrefix', noWrap: true}
+    VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support
+    VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support
+    ```
+
+```api-parameters {anchorPrefix: 'customPrefix', noWrap: true}
+VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support
+VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support
+```
