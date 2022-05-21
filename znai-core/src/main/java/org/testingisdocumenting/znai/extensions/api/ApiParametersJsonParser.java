@@ -25,8 +25,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ApiParametersJsonParser {
+    private final String NAME_KEY = "name";
+    private final String DESCRIPTION_KEY = "description";
+
     private final ApiParameters apiParameters;
     private final MarkupParser markupParser;
     private final List<Map<String, Object>> json;
@@ -51,9 +56,11 @@ public class ApiParametersJsonParser {
 
     @SuppressWarnings("unchecked")
     private void parseParam(ApiParameter current, Map<String, Object> param) {
-        MarkupParserResult parserResult = markupParser.parse(path, param.get("description").toString());
-        ApiParameter apiParameter = current.add(param.get("name").toString(),
-                new ApiLinkedText(param.get("type").toString()),
+        validateParam(param);
+
+        MarkupParserResult parserResult = markupParser.parse(path, param.get(DESCRIPTION_KEY).toString());
+        ApiParameter apiParameter = current.add(param.get(NAME_KEY).toString(),
+                new ApiLinkedText(param.getOrDefault("type", "").toString()),
                 parserResult.contentToListOfMaps(),
                 parserResult.getAllText());
 
@@ -61,6 +68,20 @@ public class ApiParametersJsonParser {
         if (children != null) {
             List<Map<String, Object>> list = (List<Map<String, Object>>) children;
             list.forEach(p -> parseParam(apiParameter, p));
+        }
+    }
+
+    private void validateParam(Map<String, Object> param) {
+        boolean missingName = !param.containsKey(NAME_KEY);
+        boolean missingDescription = !param.containsKey(DESCRIPTION_KEY);
+
+        if (missingName || missingDescription) {
+            Stream<String> missingKeys = Stream.concat(
+                    missingName ? Stream.of(NAME_KEY) : Stream.empty(),
+                    missingDescription ? Stream.of(DESCRIPTION_KEY) : Stream.empty());
+
+            throw new IllegalArgumentException("missing required fields: " +
+                    missingKeys.collect(Collectors.joining(", ")) + "\nrecord: " + JsonUtils.serialize(param));
         }
     }
 }

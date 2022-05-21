@@ -96,6 +96,12 @@ class PluginsTestUtils {
         return new IncludePluginAndParserHandler(includePlugin: includePlugin, parserHandler: parserHandler)
     }
 
+    static Map<String, Object> processFenceAndGetProps(PluginParams pluginParams,
+                                                               String textContent) {
+        def pluginAndHandler = processAndGetFencePluginAndParserHandler(pluginParams, textContent)
+        return pluginAndHandler.parserHandler.docElement.content[0].getProps()
+    }
+
     static FencePluginAndParserHandler processAndGetFencePluginAndParserHandler(PluginParams pluginParams,
                                                                                 String textContent) {
         DocElementCreationParserHandler parserHandler = createParserHandler()
