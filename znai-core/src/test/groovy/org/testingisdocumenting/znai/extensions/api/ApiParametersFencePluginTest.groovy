@@ -22,6 +22,8 @@ import org.junit.Test
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class ApiParametersFencePluginTest {
@@ -29,6 +31,24 @@ class ApiParametersFencePluginTest {
     @After
     void init() {
         TEST_COMPONENTS_REGISTRY.docStructure().clear()
+    }
+
+    @Test
+    void "should work without type in csv"() {
+        def props = PluginsTestUtils.processFenceAndGetProps(
+                new PluginParams('api-parameters', [:]),
+        "firstName,,first name")
+
+        props.should == [parameters: [[name: "firstName", type:[], anchorId: "firstName",
+                                       description: [[markdown: "first name", type: "TestMarkdown"]]]]]
+    }
+
+    @Test
+    void "should report missing fields in csv"() {
+        code {
+            PluginsTestUtils.processFenceAndGetProps(
+                    new PluginParams('api-parameters', [:]), "firstName")
+        } should throwException("record mismatches header. header: [name, type, description]; record: [firstName]")
     }
 
     @Test
@@ -48,5 +68,4 @@ class ApiParametersFencePluginTest {
 
         TEST_COMPONENTS_REGISTRY.docStructure().registeredLocalLinks.should == ['myPrefix_firstName']
     }
-
 }
