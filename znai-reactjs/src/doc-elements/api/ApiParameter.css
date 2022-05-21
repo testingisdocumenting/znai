@@ -24,6 +24,10 @@
     padding-left: 20px;
 }
 
+.znai-api-parameters.no-wrap .znai-api-param-name-type-toggle-cell {
+    max-width: 100%;
+}
+
 .znai-api-param-anchor {
     display: flex;
     justify-content: center;
@@ -103,6 +107,11 @@
 
 .znai-api-param-name {
     color: var(--znai-api-key-color);
+    word-break: break-all;
+}
+
+.znai-api-parameters.no-wrap .znai-api-param-name {
+    word-break: normal;
 }
 
 .znai-api-param-type {
