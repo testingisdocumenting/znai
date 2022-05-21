@@ -1,0 +1,1 @@
+* Better validation of [API Parameters](snippets/api-parameters#external-json-file) input JSON 
