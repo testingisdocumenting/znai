@@ -56,4 +56,37 @@ export function chartsPresentationDemo(registry: Registry) {
       },
     ])
   );
+
+  const pie = {
+    type: "EchartGeneric",
+    chartType: "pie",
+    labels: [],
+    data: [
+      ["shirt", 5],
+      ["cardigan", 20],
+      ["chiffon", 36],
+      ["pants", 10],
+      ["heels", 10],
+      ["socks", 12],
+    ],
+  };
+
+  registry.add(
+    "pie breakpoints",
+    createPresentationDemo([
+      {
+        ...pie,
+        breakpoints: ["cardigan", "pants"],
+      },
+    ])
+  );
+
+  registry.add(
+    "pie no breakpoints",
+    createPresentationDemo([
+      {
+        ...pie,
+      },
+    ])
+  );
 }

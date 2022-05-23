@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { EchartCommonProps } from "./EchartCommon";
+
 /**
  * finds max and min values from data and creates invisible line data series
  * so that chart scale remains the same for presentation mode as new values are revealed over time
@@ -59,9 +61,9 @@ export function createInvisibleLineSeries(data: any[][]) {
 /**
  * creates partial data based on column and break point value
  * all the values after breakpoint are ignored
- * @param fullData
- * @param colIdx
- * @param breakpointX
+ * @param fullData all data
+ * @param colIdx column index to process
+ * @param breakpointX breakpoint to split data
  */
 export function partialDataExcludingDataAfterPoint(
   fullData: any[][],
@@ -88,6 +90,35 @@ export function partialDataExcludingDataAfterPoint(
   }
 
   return partialData;
+}
+
+export function echartCalcBreakpoint(props: EchartCommonProps) {
+  if (!props.isPresentation || !props.breakpoints) {
+    return undefined;
+  }
+
+  if (props.slideIdx! > props.breakpoints.length) {
+    return undefined;
+  }
+
+  return props.breakpoints[props.slideIdx!];
+}
+
+export function findBreakpointDataIndexForText(data: any[][], breakpoint: string | undefined) {
+  if (!breakpoint) {
+    return undefined;
+  }
+
+  for (let rowIdx = 0; rowIdx < data.length; rowIdx++) {
+    const row = data[rowIdx];
+    const x = row[0];
+
+    if (breakpoint !== undefined && x === breakpoint) {
+      return rowIdx;
+    }
+  }
+
+  return undefined;
 }
 
 /**
