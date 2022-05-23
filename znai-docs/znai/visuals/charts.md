@@ -160,6 +160,11 @@ Use `breakpoints` to add extra slides transitions.
 
 To try it, press on `:icon: maximize` icon next to the **Presentation** header
 
+    :include-piechart: charts/genres.csv {breakpoints: ["Action"]}
+
+:include-piechart: charts/genres.csv {breakpoints: ["Action"]}
+
+
 # ECharts
 
 `Znai` uses the beautiful and functional [EChart](https://echarts.apache.org/) library to render charts.

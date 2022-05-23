@@ -18,6 +18,7 @@ import {
   createInvisibleLineSeries,
   echartGridUsingMaxDataAndLegend,
   echartGridUsingPadding,
+  findBreakpointDataIndexForText,
   partialDataExcludingDataAfterPoint,
 } from "./echartUtils";
 
@@ -106,6 +107,41 @@ test("partial data with text breakpoint", () => {
   );
 
   expect(partial).toEqual([-2, -3]);
+});
+
+test("breakpoint index with text axis", () => {
+  expect(
+    findBreakpointDataIndexForText(
+      [
+        ["A", 0.1, -2, 3],
+        ["B", -4, -3, 5],
+        ["C", -2, 7, 1],
+      ],
+      "B"
+    )
+  ).toEqual(1);
+
+  expect(
+    findBreakpointDataIndexForText(
+      [
+        ["A", 0.1, -2, 3],
+        ["B", -4, -3, 5],
+        ["C", -2, 7, 1],
+      ],
+      "R"
+    )
+  ).toEqual(undefined);
+
+  expect(
+    findBreakpointDataIndexForText(
+      [
+        ["A", 0.1, -2, 3],
+        ["B", -4, -3, 5],
+        ["C", -2, 7, 1],
+      ],
+      undefined
+    )
+  ).toEqual(undefined);
 });
 
 test("grid config by given padding", () => {

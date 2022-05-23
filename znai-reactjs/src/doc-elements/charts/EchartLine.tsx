@@ -17,7 +17,7 @@
 import React from "react";
 import { EchartReactWrapper } from "./EchartReactWrapper";
 import { EchartCommonProps } from "./EchartCommon";
-import { createInvisibleLineSeries, partialDataExcludingDataAfterPoint } from "./echartUtils";
+import { createInvisibleLineSeries, echartCalcBreakpoint, partialDataExcludingDataAfterPoint } from "./echartUtils";
 
 const type = "line";
 
@@ -72,20 +72,8 @@ export function EchartLine(props: Props) {
       return {
         name: props.labels[columnIdx],
         type,
-        data: partialDataExcludingDataAfterPoint(props.data, columnIdx, calcBreakpoint()),
+        data: partialDataExcludingDataAfterPoint(props.data, columnIdx, echartCalcBreakpoint(props)),
       };
-
-      function calcBreakpoint() {
-        if (!props.isPresentation || !props.breakpoints) {
-          return undefined;
-        }
-
-        if (props.slideIdx! > props.breakpoints.length) {
-          return undefined;
-        }
-
-        return props.breakpoints[props.slideIdx!];
-      }
     }
   }
 

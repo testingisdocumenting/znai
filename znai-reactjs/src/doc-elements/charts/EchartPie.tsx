@@ -17,6 +17,7 @@
 import React from "react";
 import { EchartReactWrapper } from "./EchartReactWrapper";
 import { EchartCommonProps } from "./EchartCommon";
+import { echartCalcBreakpoint, findBreakpointDataIndexForText } from "./echartUtils";
 
 export function EchartPie(props: EchartCommonProps) {
   return <EchartReactWrapper echartConfigProvider={configProvider} {...props} />;
@@ -30,10 +31,29 @@ export function EchartPie(props: EchartCommonProps) {
     function createSeriesInstance() {
       const labelsGap = 20;
       const legendGap = props.legend ? 32 : 0;
+
+      const breakpoint = echartCalcBreakpoint(props);
+      const breakpointIdx = findBreakpointDataIndexForText(props.data, breakpoint);
+
       return {
         radius: props.height / 2.0 - labelsGap - legendGap,
         type: "pie",
-        data: props.data.map((row) => ({ name: row[0], value: row[1] })),
+        labelLine: { show: true },
+        data: props.data.map((row, idx) => {
+          const visible = breakpointIdx === undefined || idx <= breakpointIdx;
+
+          const piece: any = {
+            name: row[0],
+            value: row[1],
+          };
+
+          if (!visible) {
+            piece.itemStyle = { color: "none" };
+            piece.label = { color: "none" };
+          }
+
+          return piece;
+        }),
       };
     }
   }
