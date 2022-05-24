@@ -31,7 +31,7 @@ class ChartPluginResult {
         ChartData chartData = ChartDataCsvParser.parse(csvContent);
 
         List<List<Object>> data = chartData.getData();
-        List<Object> breakpoints = pluginParams.getOpts().getList("breakpoints");
+        List<Object> breakpoints = pluginParams.getOpts().getList("breakpoint");
 
         validateBreakpoints(breakpoints, data);
 
@@ -40,7 +40,7 @@ class ChartPluginResult {
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         props.put("chartType", type);
         if (!breakpoints.isEmpty()) {
-            props.put("breakpoints", convertedBreakpoints);
+            props.put("breakpoint", convertedBreakpoints);
         }
 
         props.putAll(chartData.toMap());

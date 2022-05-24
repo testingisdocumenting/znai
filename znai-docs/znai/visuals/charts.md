@@ -146,34 +146,34 @@ FPS, 50
 Charts automatically participate in slides.
 Each chart becomes an individual slide.
 
-Use `breakpoints` to add extra slides transitions.
+Use `breakpoint` to add extra slides transitions.
 
     :include-linechart: charts/competitors.csv {
       legend: true,
-      breakpoints: [17, 42]
+      breakpoint: [17, 42]
     }
 
 :include-linechart: charts/competitors.csv {
   legend: true,
-  breakpoints: [17, 42]
+  breakpoint: [17, 42]
 }
 
 To try it, press on `:icon: maximize` icon next to the **Presentation** header
 
-    :include-piechart: charts/genres.csv {breakpoints: ["Action"]}
+    :include-piechart: charts/genres.csv {breakpoint: "Action"}
 
-:include-piechart: charts/genres.csv {breakpoints: ["Action"]}
+:include-piechart: charts/genres.csv {breakpoint: "Action"}
 
 Use `all` as breakpoint value to create a slide for each textual entry 
 
     :include-barchart: charts/genres.csv {
       legend: true,
-      breakpoints: "all"
+      breakpoint: "all"
     }
 
 :include-barchart: charts/genres.csv {
   legend: true,
-  breakpoints: "all"
+  breakpoint: "all"
 }
 
 # ECharts
