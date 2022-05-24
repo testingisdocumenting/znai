@@ -58,7 +58,7 @@ public class ZipJarFileResourceResolver implements ResourcesResolver {
 
     @Override
     public boolean supportsLookupPath(String lookupPath) {
-        Path path = Paths.get(lookupPath);
+        Path path = docRootPath.resolve(lookupPath);
         return Files.exists(path) && (lookupPath.endsWith(".zip") || lookupPath.endsWith(".jar"));
     }
 
