@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +27,7 @@ import java.nio.charset.StandardCharsets;
 
 class HttpResource {
     private final String url;
-    private String content;
+    private final String content;
 
     HttpResource(String url) {
         this.url = url;
