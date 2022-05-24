@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,8 +31,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Deployer {
-    private Path root;
-    private Set<Path> deployed;
+    private final Path root;
+    private final Set<Path> deployed;
 
     public Deployer(Path root) {
         this.root = root.toAbsolutePath().normalize();

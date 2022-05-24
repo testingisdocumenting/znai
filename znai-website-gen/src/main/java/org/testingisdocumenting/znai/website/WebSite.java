@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.AuxiliaryFilesRegistry;
 import org.testingisdocumenting.znai.core.DocMeta;
+import org.testingisdocumenting.znai.core.Log;
 import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.resources.*;
 import org.testingisdocumenting.znai.html.*;
@@ -57,7 +58,7 @@ import static org.testingisdocumenting.znai.utils.FileUtils.fileTextContent;
 import static org.testingisdocumenting.znai.website.ProgressReporter.reportPhase;
 import static java.util.stream.Collectors.toList;
 
-public class WebSite {
+public class WebSite implements Log {
     private static final String SEARCH_INDEX_FILE_NAME = "search-index.js";
 
     private PageToHtmlPageConverter pageToHtmlPageConverter;
@@ -370,6 +371,7 @@ public class WebSite {
 
         localResourceResolver = new MultipleLocalLocationsResourceResolver(toc, cfg.docRootPath);
         resourceResolver.addResolver(localResourceResolver);
+        resourceResolver.addResolver(new ZipJarFileResourceResolver(this, cfg.docRootPath));
         resourceResolver.addResolver(new ClassPathResourceResolver());
         resourceResolver.addResolver(new HttpBasedResourceResolver());
 
@@ -792,6 +794,21 @@ public class WebSite {
         return Arrays.stream(fileContent.split("[;\n]"))
                 .map(String::trim)
                 .filter(e -> !e.isEmpty());
+    }
+
+    @Override
+    public void phase(String message) {
+        reportPhase(message);
+    }
+
+    @Override
+    public void info(Object... styleOrValue) {
+        ConsoleOutputs.out(styleOrValue);
+    }
+
+    @Override
+    public void warn(String message) {
+        ProgressReporter.reportWarning(message);
     }
 
     private interface PageConsumer {

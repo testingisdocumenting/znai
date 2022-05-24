@@ -50,7 +50,8 @@ public class MultipleLocalLocationsResourceResolver implements ResourcesResolver
 
     @Override
     public boolean supportsLookupPath(String lookupPath) {
-        return !HttpResource.isHttpResource(lookupPath);
+        Path path = Paths.get(lookupPath);
+        return Files.exists(path) && Files.isDirectory(path);
     }
 
     @Override

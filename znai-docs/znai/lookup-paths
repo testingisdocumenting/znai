@@ -10,4 +10,5 @@
 ../../znai-testing-examples/target/test-classes
 ../../.github
 ../target/classes
+../example-sources.zip
 https://raw.githubusercontent.com/testingisdocumenting/webtau/master
