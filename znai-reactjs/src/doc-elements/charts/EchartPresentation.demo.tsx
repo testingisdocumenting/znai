@@ -89,4 +89,37 @@ export function chartsPresentationDemo(registry: Registry) {
       },
     ])
   );
+
+  const bar = {
+    type: "EchartGeneric",
+    chartType: "bar",
+    labels: ["x", "sales", "tax", "fee"],
+    data: [
+      ["shirt", 5, 7, 17],
+      ["cardigan", 20, 2, 2],
+      ["chiffon", 36, 6, 7],
+      ["pants", 10, 7, 3],
+      ["heels", 10, 2, 5],
+      ["socks", 12, 1, 15],
+    ],
+  };
+
+  registry.add(
+    "bar breakpoints",
+    createPresentationDemo([
+      {
+        ...bar,
+        breakpoints: ["cardigan", "pants"],
+      },
+    ])
+  );
+
+  registry.add(
+    "bar no breakpoints",
+    createPresentationDemo([
+      {
+        ...bar,
+      },
+    ])
+  );
 }

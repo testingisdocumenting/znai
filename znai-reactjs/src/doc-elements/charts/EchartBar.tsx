@@ -17,6 +17,7 @@
 import React from "react";
 import { EchartReactWrapper } from "./EchartReactWrapper";
 import { EchartCommonProps } from "./EchartCommon";
+import { echartCalcBreakpoint, findBreakpointDataIndexForText } from "./echartUtils";
 
 interface Props extends EchartCommonProps {
   labels: string[];
@@ -63,10 +64,26 @@ export function EchartBar(props: Props) {
     }
 
     function createSeriesInstance(columnIdx: number) {
+      const breakpoint = echartCalcBreakpoint(props);
+      const breakpointIdx = findBreakpointDataIndexForText(props.data, breakpoint);
+
       return {
         name: props.labels[columnIdx],
         type: "bar",
-        data: props.data.map((row) => row[columnIdx]),
+        data: props.data.map((row, idx) => {
+          const visible = breakpointIdx === undefined || idx <= breakpointIdx;
+
+          const piece: any = {
+            value: row[columnIdx],
+          };
+
+          if (!visible) {
+            piece.itemStyle = { color: "none" };
+            piece.label = { color: "none" };
+          }
+
+          return piece;
+        }),
         stack: props.stack ? "stack" : undefined,
       };
     }
