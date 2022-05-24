@@ -19,12 +19,24 @@ package org.testingisdocumenting.znai.charts;
 import org.testingisdocumenting.znai.parser.table.CsvTableParser;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 
+import java.util.List;
+
 class ChartDataCsvParser {
     private ChartDataCsvParser() {
     }
 
     public static ChartData parse(String content) {
         MarkupTableData tableData = CsvTableParser.parse(content);
+        List<List<Object>> data = tableData.getData();
+
+        if (data.isEmpty()) {
+            throw new IllegalArgumentException("no data is present");
+        }
+
+        if (data.get(0).size() <= 1) {
+            throw new IllegalArgumentException("chart requires at least two columns of data");
+        }
+
         return new ChartData(tableData.getColumnTitles(), tableData.getDataConvertingNumbers());
     }
 }

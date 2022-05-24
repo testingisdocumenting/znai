@@ -19,6 +19,9 @@ package org.testingisdocumenting.znai.charts
 import org.junit.Test
 import org.testingisdocumenting.znai.utils.ResourceUtils
 
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
+
 class ChartDataCsvParserTest {
     @Test
     void "chart csv data parser"() {
@@ -31,5 +34,20 @@ class ChartDataCsvParserTest {
                         ["xyz", 40, 2, 4]
                 ]
         ]
+    }
+
+    @Test
+    void "should validate that enough data is present"() {
+        code {
+            ChartDataCsvParser.parse("")
+        } should throwException(IllegalArgumentException, "no data is present")
+
+        code {
+            ChartDataCsvParser.parse("X")
+        } should throwException(IllegalArgumentException, "no data is present")
+
+        code {
+            ChartDataCsvParser.parse(ResourceUtils.textContent("not-enough-bar-data.csv"))
+        } should throwException(IllegalArgumentException, "chart requires at least two columns of data")
     }
 }
