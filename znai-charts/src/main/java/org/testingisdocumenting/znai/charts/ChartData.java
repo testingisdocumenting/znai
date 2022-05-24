@@ -29,6 +29,14 @@ class ChartData {
         this.data = data;
     }
 
+    public List<String> getLabels() {
+        return labels;
+    }
+
+    public List<List<Object>> getData() {
+        return data;
+    }
+
     public Map<String, Object> toMap() {
         Map<String, Object> result = new HashMap<>();
         result.put("labels", labels);

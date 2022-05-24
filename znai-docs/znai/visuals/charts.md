@@ -164,6 +164,17 @@ To try it, press on `:icon: maximize` icon next to the **Presentation** header
 
 :include-piechart: charts/genres.csv {breakpoints: ["Action"]}
 
+Use `all` as breakpoint value to create a slide for each textual entry 
+
+    :include-barchart: charts/genres.csv {
+      legend: true,
+      breakpoints: "all"
+    }
+
+:include-barchart: charts/genres.csv {
+  legend: true,
+  breakpoints: "all"
+}
 
 # ECharts
 

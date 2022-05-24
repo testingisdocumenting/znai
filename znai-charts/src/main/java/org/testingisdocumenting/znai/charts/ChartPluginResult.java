@@ -19,8 +19,9 @@ package org.testingisdocumenting.znai.charts;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class ChartPluginResult {
     private ChartPluginResult() {
@@ -29,10 +30,83 @@ class ChartPluginResult {
     static PluginResult create(PluginParams pluginParams, String type, String csvContent) {
         ChartData chartData = ChartDataCsvParser.parse(csvContent);
 
+        List<List<Object>> data = chartData.getData();
+        List<Object> breakpoints = pluginParams.getOpts().getList("breakpoints");
+
+        validateBreakpoints(breakpoints, data);
+
+        List<Object> convertedBreakpoints = convertAllBreakpointsToActualValues(breakpoints, data);
+
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         props.put("chartType", type);
+        if (!breakpoints.isEmpty()) {
+            props.put("breakpoints", convertedBreakpoints);
+        }
+
         props.putAll(chartData.toMap());
 
         return PluginResult.docElement("EchartGeneric", props);
+    }
+
+    private static List<Object> convertAllBreakpointsToActualValues(List<Object> breakpoints, List<List<Object>> data) {
+        if (!isAllBreakpoints(breakpoints)) {
+            return breakpoints;
+        }
+
+        if (data.stream().anyMatch(row -> row.get(0) instanceof Number)) {
+            throw new IllegalArgumentException("<all> breakpoint is not supported for numerical data");
+        }
+
+        return data.stream()
+                .limit(data.size() - 1)
+                .map(row -> row.get(0)).collect(Collectors.toList());
+    }
+
+    private static void validateBreakpoints(List<Object> breakpoints, List<List<Object>> data) {
+        if (breakpoints.isEmpty() || isAllBreakpoints(breakpoints)) {
+            return;
+        }
+
+        if (data.isEmpty()) {
+            return;
+        }
+
+        Stream<Object> mainAxisValues = data.stream().map(row -> row.get(0));
+
+        if (breakpoints.get(0) instanceof String) {
+            validateTextBreakPoints(breakpoints, mainAxisValues);
+        } else {
+            validateNumericBreakpoints(breakpoints, mainAxisValues);
+        }
+    }
+
+    private static void validateTextBreakPoints(List<Object> breakpoints, Stream<Object> mainAxisValues) {
+        Set<String> uniqueValues = mainAxisValues
+                .map(Object::toString)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        for (Object breakpoint : breakpoints) {
+            if (!uniqueValues.contains(breakpoint.toString())) {
+                throw new IllegalArgumentException("breakpoint value <" + breakpoint + "> is not found, " +
+                        "available values:\n  " + String.join("\n  ", uniqueValues));
+            }
+        }
+    }
+
+    private static void validateNumericBreakpoints(List<Object> breakpoints, Stream<Object> mainAxisValues) {
+        DoubleSummaryStatistics statistics = mainAxisValues.collect(
+                Collectors.summarizingDouble(v -> ((Number) v).doubleValue()));
+
+        for (Object breakpoint : breakpoints) {
+            double breakpointNumber = ((Number) breakpoint).doubleValue();
+            if (breakpointNumber < statistics.getMin() || breakpointNumber > statistics.getMax()) {
+                throw new IllegalArgumentException("breakpoint <" + breakpointNumber + "> is outside of range" +
+                        " [" + statistics.getMin() + ", " + statistics.getMax() + "]");
+            }
+        }
+    }
+
+    private static boolean isAllBreakpoints(List<Object> breakpoints) {
+        return breakpoints.size() == 1 && breakpoints.get(0).equals("all");
     }
 }
