@@ -30,7 +30,7 @@ interface Props extends PresentationProps {
   legend?: boolean;
   wide?: boolean;
   padding?: string;
-  breakpoints?: any[];
+  breakpoint?: any[];
 }
 
 export function EchartGeneric({
@@ -43,7 +43,7 @@ export function EchartGeneric({
   legend,
   wide,
   padding,
-  breakpoints,
+  breakpoint,
   isPresentation,
   slideIdx,
 }: Props) {
@@ -52,7 +52,7 @@ export function EchartGeneric({
     legend: legend || false,
     wide: wide || false,
     padding: padding || "",
-    breakpoints: breakpoints || [],
+    breakpoint: breakpoint || [],
     isPresentation,
     slideIdx,
   };
@@ -71,9 +71,9 @@ export function EchartGeneric({
 
 export const presentationEchartHandler = {
   component: EchartGeneric,
-  numberOfSlides: ({ breakpoints }: Props) => {
-    if (breakpoints) {
-      return breakpoints.length + 1;
+  numberOfSlides: ({ breakpoint }: Props) => {
+    if (breakpoint) {
+      return breakpoint.length + 1;
     }
 
     return 1;

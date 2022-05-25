@@ -43,7 +43,7 @@ export function configuredEcharts() {
 
 export interface EchartCommonProps extends PresentationProps {
   data: any[][];
-  breakpoints: any[];
+  breakpoint: any[];
   height: number;
   legend: boolean;
   wide: boolean;

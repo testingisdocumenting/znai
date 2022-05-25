@@ -25,14 +25,14 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 class ChartPluginResultTest {
     @Test
     void "should unpack 'all' breakpoint value into all available values but last"() {
-        def params = new PluginParams("barchart", [breakpoints: "all"])
+        def params = new PluginParams("barchart", [breakpoint: "all"])
         def result = ChartPluginResult.create(params, "bar", "x, y\n" +
                 "test, 10\n" +
                 "another, 20\n" +
                 "last, 30\n")
 
         def props = result.docElements[0].toMap()
-        props.should == [breakpoints: ["test", "another"],
+        props.should == [breakpoint: ["test", "another"],
                          chartType: "bar",
                          data: [["test", 10], ["another", 20], ["last", 30]],
                          labels: ["x", "y"],
@@ -41,7 +41,7 @@ class ChartPluginResultTest {
 
     @Test
     void "unpacking `all` breakpoints should be forbidden for numeric main axis"() {
-        def params = new PluginParams("barchart", [breakpoints: "all"])
+        def params = new PluginParams("barchart", [breakpoint: "all"])
 
         code {
             ChartPluginResult.create(params, "bar", "x, y\n" +
@@ -52,7 +52,7 @@ class ChartPluginResultTest {
 
     @Test
     void "should validate and report text breakpoints that don't match available values"() {
-        def params = new PluginParams("barchart", [breakpoints: ["test", "hello"]])
+        def params = new PluginParams("barchart", [breakpoint: ["test", "hello"]])
         code {
             ChartPluginResult.create(params, "bar", "x, y\n" +
                     "test, 10\n" +
@@ -64,7 +64,7 @@ class ChartPluginResultTest {
 
     @Test
     void "should validate and report numeric breakpoints that are outside of min max values"() {
-        def params = new PluginParams("barchart", [breakpoints: [100.12, 300.5]])
+        def params = new PluginParams("barchart", [breakpoint: [100.12, 300.5]])
         code {
             ChartPluginResult.create(params, "bar", "x, y\n" +
                     "90.343, 10\n" +
