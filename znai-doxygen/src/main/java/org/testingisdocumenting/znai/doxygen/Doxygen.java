@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.doxygen;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.doxygen.parser.*;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
@@ -123,13 +124,15 @@ public class Doxygen {
             indexPath = extractDoxygenIndexPath(componentsRegistry);
         }
 
-        String indexXml = FileUtils.fileTextContent(indexPath);
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
+        String indexXml = resourcesResolver.textContent(indexPath);
         doxygenIndexCached = DoxygenIndexParser.parse(indexXml);
         indexLastModifiedTime = FileUtils.getLastModifiedTime(indexPath);
     }
 
     private DoxygenCompound findAndParseCompound(ComponentsRegistry componentsRegistry, DoxygenIndexCompound indexCompound) {
-        String xml = FileUtils.fileTextContent(indexPath.getParent().resolve(indexCompound.getId() + ".xml"));
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
+        String xml = resourcesResolver.textContent(indexPath.getParent().resolve(indexCompound.getId() + ".xml"));
         return DoxygenCompoundParser.parse(componentsRegistry, xml, indexCompound.getId());
     }
 
@@ -146,6 +149,6 @@ public class Doxygen {
             throw new IllegalArgumentException("can't find " + INDEX_PATH_KEY + " key that points to doxygen index.xml");
         }
 
-        return docRoot.resolve(indexPath.toString());
+        return componentsRegistry.resourceResolver().fullPath(indexPath.toString());
     }
 }
