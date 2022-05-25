@@ -90,8 +90,13 @@
 </article>
 
 <article>
-<header><h1>Class Path Lookup</h1></header>
-<p>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets from projects deployed to, for example, Maven Central. &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;${project.version}&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;${junit.version}&lt;/version&gt; &lt;classifier&gt;sources&lt;/classifier&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;/plugin&gt; :include-java: org/junit/Assert.java {entry: &quot;assertArrayEquals&quot;} public static void assertArrayEquals(String message, Object[] expecteds, Object[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(Object[] expecteds, Object[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, boolean[] expecteds, boolean[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(boolean[] expecteds, boolean[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, byte[] expecteds, byte[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(byte[] expecteds, byte[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, char[] expecteds, char[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(char[] expecteds, char[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, short[] expecteds, short[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(short[] expecteds, short[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, int[] expecteds, int[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(int[] expecteds, int[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, long[] expecteds, long[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(long[] expecteds, long[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, double[] expecteds, double[] actuals, double delta) throws ArrayComparisonFailure { new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(double[] expecteds, double[] actuals, double delta) { assertArrayEquals(null, expecteds, actuals, delta); } public static void assertArrayEquals(String message, float[] expecteds, float[] actuals, float delta) throws ArrayComparisonFailure { new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(float[] expecteds, float[] actuals, float delta) { assertArrayEquals(null, expecteds, actuals, delta); }</p>
+<header><h1>CLI parameter</h1></header>
+<p>Use --lookup-paths CLI parameter to add additional paths to lookup files. znai --lookup-paths /extra/path-one /extra/path-two</p>
+</article>
+
+<article>
+<header><h1>Zip and Jar Lookup</h1></header>
+<p>When Znai encounters zip or jar file listed inside lookup-paths it will unpack the archives into a temporary location and will use those locations to resolve files txt ../sources.zip ../module/archive.jar :include-file: dir/inside-zip-b.txt inside zip B</p>
 </article>
 
 <article>
@@ -100,8 +105,8 @@
 </article>
 
 <article>
-<header><h1>CLI parameter</h1></header>
-<p>Use --lookup-paths CLI parameter to add additional paths to lookup files. Use it when lookup location can't be hardcoded. webtau --lookup-paths /extra/path-one:/extra/path-two</p>
+<header><h1>Class Path Lookup</h1></header>
+<p>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets from projects deployed to, for example, Maven Central. &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;${project.version}&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;${junit.version}&lt;/version&gt; &lt;classifier&gt;sources&lt;/classifier&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;/plugin&gt; :include-java: org/junit/Assert.java {entry: &quot;assertArrayEquals&quot;} public static void assertArrayEquals(String message, Object[] expecteds, Object[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(Object[] expecteds, Object[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, boolean[] expecteds, boolean[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(boolean[] expecteds, boolean[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, byte[] expecteds, byte[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(byte[] expecteds, byte[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, char[] expecteds, char[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(char[] expecteds, char[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, short[] expecteds, short[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(short[] expecteds, short[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, int[] expecteds, int[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(int[] expecteds, int[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, long[] expecteds, long[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(long[] expecteds, long[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, double[] expecteds, double[] actuals, double delta) throws ArrayComparisonFailure { new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(double[] expecteds, double[] actuals, double delta) { assertArrayEquals(null, expecteds, actuals, delta); } public static void assertArrayEquals(String message, float[] expecteds, float[] actuals, float delta) throws ArrayComparisonFailure { new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(float[] expecteds, float[] actuals, float delta) { assertArrayEquals(null, expecteds, actuals, delta); }</p>
 </article>
 </section>
 </div>
@@ -209,35 +214,64 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "txt"
       } ]
     }, {
-      "id" : "class-path-lookup",
+      "id" : "cli-parameter",
       "type" : "Section",
-      "title" : "Class Path Lookup",
+      "title" : "CLI parameter",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Znai is written using Java and can access resources from the classpath.",
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "--lookup-paths",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " CLI parameter to add additional paths to lookup files.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand",
+        "command" : "znai --lookup-paths /extra/path-one /extra/path-two"
+      } ]
+    }, {
+      "id" : "zip-and-jar-lookup",
+      "type" : "Section",
+      "title" : "Zip and Jar Lookup",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When Znai encounters zip or jar file listed inside ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "lookup-paths",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " it will unpack the archives into a temporary location",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "Using class path lookup you can include snippets from projects deployed to, for example, Maven Central.",
+          "text" : "and will use those locations to resolve files",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>${project.version}</version>\n    <dependencies>\n        <dependency>\n            <groupId>junit</groupId>\n            <artifactId>junit</artifactId>\n            <version>${junit.version}</version>\n            <classifier>sources</classifier>\n        </dependency>\n    </dependencies>\n</plugin>",
-        "highlight" : [ 9 ],
+        "snippet" : "../sources.zip\n../module/archive.jar\n",
         "type" : "Snippet",
-        "lang" : "xml"
+        "title" : "lookup-paths",
+        "lineNumber" : "",
+        "lang" : "txt"
       }, {
-        "snippet" : ":include-java: org/junit/Assert.java {entry: \"assertArrayEquals\"}\n",
+        "snippet" : ":include-file: dir/inside-zip-b.txt\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
       }, {
-        "snippet" : "public static void assertArrayEquals(String message, Object[] expecteds,\n        Object[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(Object[] expecteds, Object[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(String message, boolean[] expecteds,\n        boolean[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(boolean[] expecteds, boolean[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(String message, byte[] expecteds,\n        byte[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(byte[] expecteds, byte[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(String message, char[] expecteds,\n        char[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(char[] expecteds, char[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(String message, short[] expecteds,\n        short[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(short[] expecteds, short[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(String message, int[] expecteds,\n        int[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(int[] expecteds, int[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(String message, long[] expecteds,\n        long[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(long[] expecteds, long[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(String message, double[] expecteds,\n        double[] actuals, double delta) throws ArrayComparisonFailure {\n    new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(double[] expecteds, double[] actuals, double delta) {\n    assertArrayEquals(null, expecteds, actuals, delta);\n}\n\npublic static void assertArrayEquals(String message, float[] expecteds,\n        float[] actuals, float delta) throws ArrayComparisonFailure {\n    new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals);\n}\n\npublic static void assertArrayEquals(float[] expecteds, float[] actuals, float delta) {\n    assertArrayEquals(null, expecteds, actuals, delta);\n}",
-        "entry" : "assertArrayEquals",
+        "snippet" : "inside\nzip\nB",
         "type" : "Snippet",
-        "lang" : "java"
+        "title" : "dir/inside-zip-b.txt",
+        "autoTitle" : true,
+        "lang" : "txt"
       } ]
     }, {
       "id" : "http-lookup-location",
@@ -278,33 +312,38 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "yaml"
       } ]
     }, {
-      "id" : "cli-parameter",
+      "id" : "class-path-lookup",
       "type" : "Section",
-      "title" : "CLI parameter",
+      "title" : "Class Path Lookup",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "--lookup-paths",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " CLI parameter to add additional paths to lookup files. Use it when lookup location",
+          "text" : "Znai is written using Java and can access resources from the classpath.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "can't be hardcoded.",
+          "text" : "Using class path lookup you can include snippets from projects deployed to, for example, Maven Central.",
           "type" : "SimpleText"
         } ]
       }, {
-        "paramsToHighlight" : [ ],
-        "type" : "CliCommand",
-        "command" : "webtau --lookup-paths /extra/path-one:/extra/path-two"
+        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>${project.version}</version>\n    <dependencies>\n        <dependency>\n            <groupId>junit</groupId>\n            <artifactId>junit</artifactId>\n            <version>${junit.version}</version>\n            <classifier>sources</classifier>\n        </dependency>\n    </dependencies>\n</plugin>",
+        "highlight" : [ 9 ],
+        "type" : "Snippet",
+        "lang" : "xml"
+      }, {
+        "snippet" : ":include-java: org/junit/Assert.java {entry: \"assertArrayEquals\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "public static void assertArrayEquals(String message, Object[] expecteds,\n        Object[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(Object[] expecteds, Object[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, boolean[] expecteds,\n        boolean[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(boolean[] expecteds, boolean[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, byte[] expecteds,\n        byte[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(byte[] expecteds, byte[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, char[] expecteds,\n        char[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(char[] expecteds, char[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, short[] expecteds,\n        short[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(short[] expecteds, short[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, int[] expecteds,\n        int[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(int[] expecteds, int[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, long[] expecteds,\n        long[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(long[] expecteds, long[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, double[] expecteds,\n        double[] actuals, double delta) throws ArrayComparisonFailure {\n    new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(double[] expecteds, double[] actuals, double delta) {\n    assertArrayEquals(null, expecteds, actuals, delta);\n}\npublic static void assertArrayEquals(String message, float[] expecteds,\n        float[] actuals, float delta) throws ArrayComparisonFailure {\n    new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(float[] expecteds, float[] actuals, float delta) {\n    assertArrayEquals(null, expecteds, actuals, delta);\n}",
+        "entry" : "assertArrayEquals",
+        "type" : "Snippet",
+        "lang" : "java"
       } ]
     } ],
-    "lastModifiedTime" : 1648437179086,
+    "lastModifiedTime" : 1653499403250,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Lookup Paths",
@@ -316,14 +355,17 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Files Reference Lookup",
         "id" : "files-reference-lookup"
       }, {
-        "title" : "Class Path Lookup",
-        "id" : "class-path-lookup"
+        "title" : "CLI parameter",
+        "id" : "cli-parameter"
+      }, {
+        "title" : "Zip and Jar Lookup",
+        "id" : "zip-and-jar-lookup"
       }, {
         "title" : "HTTP Lookup Location",
         "id" : "http-lookup-location"
       }, {
-        "title" : "CLI parameter",
-        "id" : "cli-parameter"
+        "title" : "Class Path Lookup",
+        "id" : "class-path-lookup"
       } ]
     }
   }

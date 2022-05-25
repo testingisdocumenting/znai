@@ -86,12 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>LaTeX Block</h1></header>
-<p>To render math you can use https://en.wikibooks.org/wiki/LaTeX/Mathematics LaTeX math expressions. Surround LaTeX expression with fenced block and specify latex as a language ```latex \forall x \in X, \quad \exists y \leq \epsilon ``` The result will be a following math expression. \forall x \in X, \quad \exists y \leq \epsilon In presentation mode, rendered expressions will automatically scale to make use of the screen space.</p>
+<p>To render math you can use https://en.wikibooks.org/wiki/LaTeX/Mathematics LaTeX math expressions. Surround LaTeX expression with fenced block and specify latex as a language ```latex \forall x \in X, \quad \exists y \leq \epsilon ``` The result will be a following math expression. \forall x \in X, \quad \exists y \leq \epsilon ```latex x = \begin{cases} a &amp;\text{if } b \\ c &amp;\text{if } d \\ x &amp;\text{if } z \end{cases} ``` x = \begin{cases} a &amp;\text{if } b \\ c &amp;\text{if } d \\ x &amp;\text{if } z \end{cases}</p>
 </article>
 
 <article>
 <header><h1>LaTeX Inline</h1></header>
-<p>Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON parameters are used to allow LaTeX braces to be parsed correctly. It holds that `:latex: {src: &quot;\\frac{1}{2} &lt; \\sqrt{2}&quot;}`. The result will be a following math expression.It holds that .Note: Rendering is done by using https://github.com/Khan/KaTeX KaTeX library. And is using https://github.com/Khan/KaTeX KaTeX fonts.</p>
+<p>Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON parameters are used to allow LaTeX braces to be parsed correctly. It holds that `:latex: {src: &quot;\\frac{1}{2} &lt; \\sqrt{2}&quot;}`. The result will be a following math expression.It holds that .</p>
+</article>
+
+<article>
+<header><h1>Presentation Mode</h1></header>
+<p>In presentation mode, rendered expressions will automatically scale to make use of the screen space.</p>
+</article>
+
+<article>
+<header><h1>KaTex</h1></header>
+<p>Rendering is done by using awesome https://github.com/Khan/KaTeX KaTeX library. https://github.com/Khan/KaTeX KaTeX fonts are copied to generated documentation resources.</p>
 </article>
 </section>
 </div>
@@ -172,11 +182,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Latex",
         "latex" : "\\forall x \\in X, \\quad \\exists y \\leq \\epsilon\n"
       }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "In presentation mode, rendered expressions will automatically scale to make use of the screen space.",
-          "type" : "SimpleText"
-        } ]
+        "snippet" : "```latex\nx = \\begin{cases}\na &\\text{if } b \\\\\nc &\\text{if } d \\\\\nx &\\text{if } z\n\\end{cases}\n```\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "type" : "Latex",
+        "latex" : "x = \\begin{cases}\na &\\text{if } b \\\\\nc &\\text{if } d \\\\\nx &\\text{if } z\n\\end{cases}\n"
       } ]
     }, {
       "id" : "latex-inline",
@@ -211,10 +223,26 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : ".",
           "type" : "SimpleText"
         } ]
-      }, {
+      } ]
+    }, {
+      "id" : "presentation-mode",
+      "type" : "Section",
+      "title" : "Presentation Mode",
+      "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: Rendering is done by using ",
+          "text" : "In presentation mode, rendered expressions will automatically scale to make use of the screen space.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "katex",
+      "type" : "Section",
+      "title" : "KaTex",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Rendering is done by using awesome ",
           "type" : "SimpleText"
         }, {
           "isFile" : false,
@@ -227,12 +255,10 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "text" : " library.",
           "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "And is using ",
-          "type" : "SimpleText"
-        }, {
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
@@ -241,12 +267,12 @@ ReactDOM.render(React.createElement(Documentation, {
           } ],
           "url" : "https://github.com/Khan/KaTeX"
         }, {
-          "text" : " fonts.",
+          "text" : " fonts are copied to generated documentation resources.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1648437179094,
+    "lastModifiedTime" : 1653499403266,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Math",
@@ -260,6 +286,12 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "LaTeX Inline",
         "id" : "latex-inline"
+      }, {
+        "title" : "Presentation Mode",
+        "id" : "presentation-mode"
+      }, {
+        "title" : "KaTex",
+        "id" : "katex"
       } ]
     }
   }

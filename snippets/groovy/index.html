@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Multiple Bodies</h1></header>
-<p>Pass list as entry to extract multiple method bodies markdown :include-groovy: HelloWorldTest.groovy { title: &quot;api example&quot;, entry: [&quot;should calculate risk based on epsilon&quot;, &quot;should calculate risk based on epsilon&quot;], bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 Pass empty line to entrySeparator: &quot;&quot; to remove default empty line separating entries markdown :include-groovy: HelloWorldTest.groovy { title: &quot;api example&quot;, entry: [&quot;should calculate risk based on epsilon&quot;, &quot;should calculate risk based on epsilon&quot;], entrySeparator: &quot;&quot;, bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108</p>
+<p>Pass list as entry to extract multiple method bodies markdown :include-groovy: HelloWorldTest.groovy { title: &quot;api example&quot;, entry: [&quot;should calculate risk based on epsilon&quot;, &quot;should calculate risk based on epsilon&quot;], bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 Pass entrySeparator: &quot;&lt;separator&gt;&quot; to have a provided line in between entries as a separator. markdown :include-groovy: HelloWorldTest.groovy { title: &quot;api example&quot;, entry: [&quot;should calculate risk based on epsilon&quot;, &quot;should calculate risk based on epsilon&quot;], entrySeparator: &quot;&quot;, bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108</p>
 </article>
 
 <article>
@@ -220,7 +220,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "lang" : "markdown"
       }, {
-        "snippet" : "generateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108\n\ngenerateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108",
+        "snippet" : "generateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108\ngenerateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108",
         "entry" : [ "should calculate risk based on epsilon", "should calculate risk based on epsilon" ],
         "bodyOnly" : true,
         "type" : "Snippet",
@@ -229,13 +229,13 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Pass empty line to ",
+          "text" : "Pass ",
           "type" : "SimpleText"
         }, {
-          "code" : "entrySeparator: \"\"",
+          "code" : "entrySeparator: \"<separator>\"",
           "type" : "InlinedCode"
         }, {
-          "text" : " to remove default empty line separating entries",
+          "text" : " to have a provided line in between entries as a separator.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -245,7 +245,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "lang" : "markdown"
       }, {
-        "snippet" : "generateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108\ngenerateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108",
+        "snippet" : "generateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108\n\ngenerateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108",
         "entry" : [ "should calculate risk based on epsilon", "should calculate risk based on epsilon" ],
         "bodyOnly" : true,
         "entrySeparator" : "",
@@ -376,7 +376,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "groovy"
       } ]
     } ],
-    "lastModifiedTime" : 1648437179094,
+    "lastModifiedTime" : 1653499403262,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Groovy",

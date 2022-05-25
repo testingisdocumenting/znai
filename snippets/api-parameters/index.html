@@ -118,6 +118,11 @@
 <header><h1>Anchors</h1></header>
 <p>Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear. Use anchorPrefix parameter to avoid conflict of anchor ids when using the same API parameter names within a single page: ```api-parameters {anchorPrefix: 'customPrefix'} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support In the example above customPrefix is added to each parameter link.</p>
 </article>
+
+<article>
+<header><h1>Long Parameter Names</h1></header>
+<p>Znai hard wraps long parameter names to leave more space to description. VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support Use noWrap: true to remove hard wrap enforcement ```api-parameters {anchorPrefix: 'customPrefix', noWrap: true} VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support ``` VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support</p>
+</article>
 </section>
 </div>
 <!--test extension added comment-->
@@ -917,8 +922,137 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       } ]
+    }, {
+      "id" : "long-parameter-names",
+      "type" : "Section",
+      "title" : "Long Parameter Names",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Znai hard wraps long parameter names to leave more space to description.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "ApiParameters",
+        "anchorPrefix" : "customPrefix",
+        "parameters" : [ {
+          "name" : "VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ],
+          "anchorId" : "customPrefix_VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
+          "type" : [ {
+            "refId" : "",
+            "text" : "String"
+          } ]
+        }, {
+          "name" : "VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "another description line with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ],
+          "anchorId" : "customPrefix_VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
+          "type" : [ {
+            "refId" : "",
+            "text" : "String"
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "noWrap: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to remove hard wrap enforcement",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "```api-parameters {anchorPrefix: 'customPrefix', noWrap: true}\nVERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support\nVERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support\n```\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "noWrap" : true,
+        "type" : "ApiParameters",
+        "anchorPrefix" : "customPrefix",
+        "parameters" : [ {
+          "name" : "VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ],
+          "anchorId" : "customPrefix_VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
+          "type" : [ {
+            "refId" : "",
+            "text" : "String"
+          } ]
+        }, {
+          "name" : "VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "another description line with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ],
+          "anchorId" : "customPrefix_VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
+          "type" : [ {
+            "refId" : "",
+            "text" : "String"
+          } ]
+        } ]
+      } ]
     } ],
-    "lastModifiedTime" : 1648437179094,
+    "lastModifiedTime" : 1653499403262,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "API Parameters",
@@ -949,6 +1083,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Anchors",
         "id" : "anchors"
+      }, {
+        "title" : "Long Parameter Names",
+        "id" : "long-parameter-names"
       } ]
     }
   }

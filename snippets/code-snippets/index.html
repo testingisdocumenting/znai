@@ -105,6 +105,11 @@
 </article>
 
 <article>
+<header><h1>Wrap Code</h1></header>
+<p>Use the wrap option to stretch wide code to occupy as much horizontal real estate as possible. ```java {wrap: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } ``` java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } }</p>
+</article>
+
+<article>
 <header><h1>Read More</h1></header>
 <p>If you have a large code snippet and you want to initially display only a small fraction use the readMore option with an optional readMoreVisibleLines option to specify a number of initial lines displayed (default is 8). ```java {readMore: true, readMoreVisibleLines: 3} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; ... ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { this.workingDir = workingDir; this.fileNameByDirName = new LinkedHashMap&lt;&gt;(); } public void create() { createPages(); createToc(); createMeta(); createIndex(); createLookupPaths(); } private void createLookupPaths() { createFileFromResource(&quot;lookup-paths&quot;); } private void createMeta() { createFileFromResource(&quot;meta.json&quot;); } }</p>
 </article>
@@ -383,6 +388,34 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
+      "id" : "wrap-code",
+      "type" : "Section",
+      "title" : "Wrap Code",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "wrap",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option to stretch wide code to occupy as much horizontal real estate as possible.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "```java {wrap: true}\nclass InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n```\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : "java",
+        "wrap" : true
+      } ]
+    }, {
       "id" : "read-more",
       "type" : "Section",
       "title" : "Read More",
@@ -488,7 +521,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1648437179094,
+    "lastModifiedTime" : 1653499403262,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Code Snippets",
@@ -508,6 +541,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Wide Code",
         "id" : "wide-code"
+      }, {
+        "title" : "Wrap Code",
+        "id" : "wrap-code"
       }, {
         "title" : "Read More",
         "id" : "read-more"

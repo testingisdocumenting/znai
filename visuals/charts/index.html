@@ -86,27 +86,42 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Pie</h1></header>
-<p>Given a CSV file... label, value A, 10 B, 20 C, 15 D, 8 ..to build a pie chart use: :include-chart: data.csv {type: &quot;Pie&quot;} You can change the style with the innerRadius property: :include-chart: data.csv {type: &quot;Pie&quot;, innerRadius: 100}</p>
+<p>To build a pie chart use: :include-piechart: charts/genres.csv genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50</p>
 </article>
 
 <article>
 <header><h1>Bar</h1></header>
-<p>To build a vertical bar chart use: :include-chart: data.csv To build a horizontal bar chart use: :include-chart: data.csv {horizontal: true}</p>
+<p>To build a bar chart use: :include-barchart: charts/genres.csv genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50 Add more columns to CSV data to use multiple bars per X axis tick :include-barchart: charts/game-activities.csv game, walking, fighting, reading Oblivion, 100, 100, 20 Elden Ring, 110, 110, 5 Persona 5, 20, 30, 50 Divinity, 30, 30, 10 Use stack: true to render multiple bars stacked :include-barchart: charts/game-activities.csv {stack: true} Use horizontal: true and height parameter to change render direction :include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 250}</p>
 </article>
 
 <article>
 <header><h1>Line</h1></header>
-<p>To build a line chart use: :include-chart: data.csv {type: &quot;Line&quot;}</p>
+<p>To build a line chart use: :include-linechart: charts/genres.csv genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50 Use multiple CSV columns to add more lines :include-linechart: charts/daily-genres.csv day, RPG, RTS, FPS Monday, 100, 10, 0 Tuesday, 50, 50, 20 Wednesday, 10, 30, 50 Thursday, 5, 5, 100 Friday, 0, 100, 10 Use numbers in first column to have a regular X, Y plots :include-linechart: charts/competitors.csv x, company one, company two 10, 100, 150 15.5, 110, 145 30, 120, 130 40, 110, 145 50, 115, 100</p>
 </article>
 
 <article>
-<header><h1>Presentation Mode</h1></header>
-<p>In presentation mode, chart values for Bar and Pie appear one at a time. To force all values to appear at once use: :include-meta: {allAtOnce: true}</p>
+<header><h1>Legend</h1></header>
+<p>Use legend: true to add legend to a chart :include-linechart: charts/daily-genres.csv {legend: true}</p>
 </article>
 
 <article>
-<header><h1>Victory Charts</h1></header>
-<p>Znai uses the https://github.com/FormidableLabs/victory-chart VictoryChart library to render charts.</p>
+<header><h1>Wide Mode</h1></header>
+<p>Use wide: true to use available horizontal space :include-linechart: charts/daily-genres.csv {wide: true} Use in combination with height to fit larger charts :include-linechart: charts/daily-genres.csv {wide: true, height: 800}</p>
+</article>
+
+<article>
+<header><h1>Inlined Data</h1></header>
+<p>Use fence block plugin to inline chart data into markdown ```piechart genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50 ``` ```linechart {legend: true} day, RPG, RTS, FPS Monday, 100, 10, 0 Tuesday, 50, 50, 20 Wednesday, 10, 30, 50 Thursday, 5, 5, 100 Friday, 0, 100, 10 ``` ```barchart genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50 ```</p>
+</article>
+
+<article>
+<header><h1>Presentation</h1></header>
+<p>Charts automatically participate in slides. Each chart becomes an individual slide.Use breakpoint to add extra slides transitions. :include-linechart: charts/competitors.csv { legend: true, breakpoint: [17, 42] } To try it, press on icon next to the Presentation header :include-piechart: charts/genres.csv {breakpoint: &quot;Action&quot;} Use all as breakpoint value to create a slide for each textual entry :include-barchart: charts/genres.csv { legend: true, breakpoint: &quot;all&quot; }</p>
+</article>
+
+<article>
+<header><h1>ECharts</h1></header>
+<p>Znai uses the beautiful and functional https://echarts.apache.org/ EChart library to render charts.</p>
 </article>
 </section>
 </div>
@@ -147,56 +162,25 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Given a ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "CSV",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " file...",
+          "text" : "To build a pie chart use:",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "label, value\nA, 10\nB, 20\nC, 15\nD, 8",
+        "snippet" : ":include-piechart: charts/genres.csv\n",
         "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "genre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50",
+        "type" : "Snippet",
+        "title" : "charts/genres.csv",
+        "autoTitle" : true,
         "lang" : "csv"
       }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "..to build a pie chart use:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-chart: data.csv {type: \"Pie\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ],
-        "chartType" : "Pie",
-        "type" : "Chart"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "You can change the style with the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "innerRadius",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " property:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-chart: data.csv {type: \"Pie\", innerRadius: 100} \n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ],
-        "chartType" : "Pie",
-        "innerRadius" : 100,
-        "type" : "Chart"
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "chartType" : "pie",
+        "type" : "EchartGeneric",
+        "labels" : [ "genre", "preference" ]
       } ]
     }, {
       "id" : "bar",
@@ -205,32 +189,101 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To build a vertical bar chart use:",
+          "text" : "To build a bar chart use:",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-chart: data.csv\n",
+        "snippet" : ":include-barchart: charts/genres.csv\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
       }, {
-        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ],
-        "type" : "Chart"
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "chartType" : "bar",
+        "type" : "EchartGeneric",
+        "labels" : [ "genre", "preference" ]
+      }, {
+        "snippet" : "genre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50",
+        "type" : "Snippet",
+        "title" : "charts/genres.csv",
+        "autoTitle" : true,
+        "lang" : "csv"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To build a horizontal bar chart use:",
+          "text" : "Add more columns to CSV data to use multiple bars per X axis tick",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-chart: data.csv {horizontal: true}\n",
+        "snippet" : ":include-barchart: charts/game-activities.csv\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
+        "chartType" : "bar",
+        "type" : "EchartGeneric",
+        "labels" : [ "game", "walking", "fighting", "reading" ]
+      }, {
+        "snippet" : "game, walking, fighting, reading\nOblivion, 100, 100, 20\nElden Ring, 110, 110, 5\nPersona 5, 20, 30, 50\nDivinity, 30, 30, 10",
+        "type" : "Snippet",
+        "title" : "charts/game-activities.csv",
+        "autoTitle" : true,
+        "lang" : "csv"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "stack: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to render multiple bars stacked",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-barchart: charts/game-activities.csv {stack: true}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "stack" : true,
+        "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
+        "chartType" : "bar",
+        "type" : "EchartGeneric",
+        "labels" : [ "game", "walking", "fighting", "reading" ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "horizontal: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "height",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to change render direction",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 250}\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
       }, {
         "horizontal" : true,
-        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ],
-        "type" : "Chart"
+        "stack" : true,
+        "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
+        "chartType" : "bar",
+        "type" : "EchartGeneric",
+        "labels" : [ "game", "walking", "fighting", "reading" ],
+        "height" : 250
       } ]
     }, {
       "id" : "line",
@@ -243,75 +296,305 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-chart: data.csv {type: \"Line\"}\n",
+        "snippet" : ":include-linechart: charts/genres.csv\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
       }, {
-        "data" : [ [ "A", "10" ], [ "B", "20" ], [ "C", "15" ], [ "D", "8" ] ],
-        "chartType" : "Line",
-        "type" : "Chart"
+        "snippet" : "genre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50",
+        "type" : "Snippet",
+        "title" : "charts/genres.csv",
+        "autoTitle" : true,
+        "lang" : "csv"
+      }, {
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "chartType" : "line",
+        "type" : "EchartGeneric",
+        "labels" : [ "genre", "preference" ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use multiple CSV columns to add more lines",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-linechart: charts/daily-genres.csv\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "day, RPG, RTS, FPS\nMonday, 100, 10, 0\nTuesday, 50, 50, 20\nWednesday, 10, 30, 50\nThursday, 5, 5, 100\nFriday, 0, 100, 10",
+        "type" : "Snippet",
+        "title" : "charts/daily-genres.csv",
+        "autoTitle" : true,
+        "lang" : "csv"
+      }, {
+        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
+        "chartType" : "line",
+        "type" : "EchartGeneric",
+        "labels" : [ "day", "RPG", "RTS", "FPS" ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use numbers in first column to have a regular X, Y plots",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-linechart: charts/competitors.csv\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "x, company one, company two\n10, 100, 150\n15.5, 110, 145\n30, 120, 130\n40, 110, 145\n50, 115, 100",
+        "type" : "Snippet",
+        "title" : "charts/competitors.csv",
+        "autoTitle" : true,
+        "lang" : "csv"
+      }, {
+        "data" : [ [ 10, 100, 150 ], [ 15.5, 110, 145 ], [ 30, 120, 130 ], [ 40, 110, 145 ], [ 50, 115, 100 ] ],
+        "chartType" : "line",
+        "type" : "EchartGeneric",
+        "labels" : [ "x", "company one", "company two" ]
       } ]
     }, {
-      "id" : "presentation-mode",
+      "id" : "legend",
       "type" : "Section",
-      "title" : "Presentation Mode",
+      "title" : "Legend",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "In presentation mode, chart values for ",
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "Bar",
+          "code" : "legend: true",
           "type" : "InlinedCode"
         }, {
-          "text" : " and ",
+          "text" : " to add legend to a chart",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-linechart: charts/daily-genres.csv {legend: true}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
+        "legend" : true,
+        "chartType" : "line",
+        "type" : "EchartGeneric",
+        "labels" : [ "day", "RPG", "RTS", "FPS" ]
+      } ]
+    }, {
+      "id" : "wide-mode",
+      "type" : "Section",
+      "title" : "Wide Mode",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "Pie",
+          "code" : "wide: true",
           "type" : "InlinedCode"
         }, {
-          "text" : " appear one at a time.",
+          "text" : " to use available horizontal space",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-linechart: charts/daily-genres.csv {wide: true}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
+        "wide" : true,
+        "chartType" : "line",
+        "type" : "EchartGeneric",
+        "labels" : [ "day", "RPG", "RTS", "FPS" ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use in combination with height to fit larger charts",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-linechart: charts/daily-genres.csv {wide: true, height: 800}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
+        "wide" : true,
+        "chartType" : "line",
+        "type" : "EchartGeneric",
+        "labels" : [ "day", "RPG", "RTS", "FPS" ],
+        "height" : 800
+      } ]
+    }, {
+      "id" : "inlined-data",
+      "type" : "Section",
+      "title" : "Inlined Data",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use fence block plugin to inline chart data into markdown",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : "```piechart\ngenre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50\n```\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "chartType" : "pie",
+        "type" : "EchartGeneric",
+        "labels" : [ "genre", "preference" ]
+      }, {
+        "snippet" : "```linechart {legend: true}\nday, RPG, RTS, FPS\nMonday, 100, 10, 0\nTuesday, 50, 50, 20\nWednesday, 10, 30, 50\nThursday, 5, 5, 100\nFriday, 0, 100, 10\n```\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
+        "legend" : true,
+        "chartType" : "line",
+        "type" : "EchartGeneric",
+        "labels" : [ "day", "RPG", "RTS", "FPS" ]
+      }, {
+        "snippet" : "```barchart\ngenre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50\n```\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "chartType" : "bar",
+        "type" : "EchartGeneric",
+        "labels" : [ "genre", "preference" ]
+      } ]
+    }, {
+      "id" : "presentation",
+      "type" : "Section",
+      "title" : "Presentation",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Charts automatically participate in slides.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "To force all values to appear at once use:",
+          "text" : "Each chart becomes an individual slide.",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-meta: {allAtOnce: true}\n",
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "breakpoint",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to add extra slides transitions.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-linechart: charts/competitors.csv {\n  legend: true,\n  breakpoint: [17, 42]\n}\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
+      }, {
+        "data" : [ [ 10, 100, 150 ], [ 15.5, 110, 145 ], [ 30, 120, 130 ], [ 40, 110, 145 ], [ 50, 115, 100 ] ],
+        "legend" : true,
+        "chartType" : "line",
+        "type" : "EchartGeneric",
+        "labels" : [ "x", "company one", "company two" ],
+        "breakpoint" : [ 17, 42 ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To try it, press on ",
+          "type" : "SimpleText"
+        }, {
+          "id" : "maximize",
+          "type" : "Icon"
+        }, {
+          "text" : " icon next to the ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "Presentation",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " header",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-piechart: charts/genres.csv {breakpoint: \"Action\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "chartType" : "pie",
+        "type" : "EchartGeneric",
+        "labels" : [ "genre", "preference" ],
+        "breakpoint" : [ "Action" ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "all",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " as breakpoint value to create a slide for each textual entry",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-barchart: charts/genres.csv {\n  legend: true,\n  breakpoint: \"all\"\n}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "legend" : true,
+        "chartType" : "bar",
+        "type" : "EchartGeneric",
+        "labels" : [ "genre", "preference" ],
+        "breakpoint" : [ "RPG", "Action", "RTS" ]
       } ]
     }, {
-      "id" : "victory-charts",
+      "id" : "echarts",
       "type" : "Section",
-      "title" : "Victory Charts",
+      "title" : "ECharts",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "code" : "Znai",
           "type" : "InlinedCode"
         }, {
-          "text" : " uses the ",
+          "text" : " uses the beautiful and functional ",
           "type" : "SimpleText"
         }, {
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
-            "text" : "VictoryChart",
+            "text" : "EChart",
             "type" : "SimpleText"
           } ],
-          "url" : "https://github.com/FormidableLabs/victory-chart"
+          "url" : "https://echarts.apache.org/"
         }, {
           "text" : " library to render charts.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1648437179106,
+    "lastModifiedTime" : 1653499403274,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Charts",
@@ -329,11 +612,20 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Line",
         "id" : "line"
       }, {
-        "title" : "Presentation Mode",
-        "id" : "presentation-mode"
+        "title" : "Legend",
+        "id" : "legend"
       }, {
-        "title" : "Victory Charts",
-        "id" : "victory-charts"
+        "title" : "Wide Mode",
+        "id" : "wide-mode"
+      }, {
+        "title" : "Inlined Data",
+        "id" : "inlined-data"
+      }, {
+        "title" : "Presentation",
+        "id" : "presentation"
+      }, {
+        "title" : "ECharts",
+        "id" : "echarts"
       } ]
     }
   }

@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Setup</h1></header>
-<p>Specify index.xml location inside &lt;docroot&gt;/doxygen.json { &quot;indexPath&quot;: &quot;doxygen/xml/index.xml&quot; }</p>
+<p>Specify index.xml location inside &lt;docroot&gt;/doxygen.json { &quot;indexPath&quot;: &quot;doxygen/xml/index.xml&quot; } Note: To read doxygen XMLs from zip, add path to the zip to flow/lookup-paths#zip-and-jar-lookup lookup-paths</p>
 </article>
 
 <article>
@@ -275,6 +275,20 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "doxygen.json",
         "autoTitle" : true,
         "lang" : "json"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: To read doxygen XMLs from zip, add path to the zip to ",
+          "type" : "SimpleText"
+        }, {
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "lookup-paths",
+            "type" : "SimpleText"
+          } ],
+          "url" : "/znai/flow/lookup-paths#zip-and-jar-lookup"
+        } ]
       } ]
     }, {
       "id" : "extract-comment-text",
@@ -2259,7 +2273,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1648437179094,
+    "lastModifiedTime" : 1653499403262,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Doxygen",

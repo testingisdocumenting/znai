@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Multiple Surrounded By</h1></header>
-<p>Pass a list to surroundedBy to extract multiple blocks :include-file: python-examples.py { title: &quot;extracted example&quot;, surroundedBy: [&quot;# example-import-block&quot;, &quot;# example-cancel-trade&quot;]} import market market.cancel_trade(id) Use surroundedBySeparator to select separator(s) between blocks :include-file: python-examples.py { title: &quot;extracted example&quot;, surroundedBy: [&quot;# example-import-block&quot;, &quot;# example-cancel-trade&quot;], surroundedBySeparator: [&quot;...&quot;] } import market ... market.cancel_trade(id) Note: surroundedBySeparator can be either single value or a list. Plugin will use a different separator for each block.</p>
+<p>Pass a list to surroundedBy to extract multiple blocks :include-file: python-examples.py { title: &quot;extracted example&quot;, surroundedBy: [&quot;# example-import-block&quot;, &quot;# example-cancel-trade&quot;]} import market market.cancel_trade(id) Use surroundedBySeparator to select separator(s) between blocks :include-file: python-examples.py { title: &quot;extracted example&quot;, surroundedBy: [&quot;# example-import-block&quot;, &quot;# example-cancel-trade&quot;], surroundedBySeparator: [&quot;...&quot;] } import market ... market.cancel_trade(id) Note: surroundedBySeparator can be either single value or a list. Plugin will use a different separator for each block. Use null to have an empty line as a separator.</p>
 </article>
 
 <article>
@@ -111,7 +111,7 @@
 
 <article>
 <header><h1>Include Regexp</h1></header>
-<p>Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: &quot;import&quot;} :include-file: python-examples.py {includeRegexp: [&quot;import&quot;]} # example-import-block import market # example-import-block</p>
+<p>Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: &quot;import &quot;} :include-file: python-examples.py {includeRegexp: [&quot;import &quot;]} import market</p>
 </article>
 
 <article>
@@ -243,7 +243,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "surroundedBySeparator",
           "type" : "InlinedCode"
         }, {
-          "text" : " can be either single value or a list. Plugin will use a different separator for each block.",
+          "text" : " can be either single value or a list. Plugin will use a different separator for each block. Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "null",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to have an empty line as a separator.",
           "type" : "SimpleText"
         } ]
       } ]
@@ -442,16 +448,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-file: python-examples.py {includeRegexp: \"import\"}\n:include-file: python-examples.py {includeRegexp: [\"import\"]}\n",
+        "snippet" : ":include-file: python-examples.py {includeRegexp: \"import \"}\n:include-file: python-examples.py {includeRegexp: [\"import \"]}\n",
         "type" : "Snippet",
         "lineNumber" : "",
         "lang" : ""
       }, {
-        "snippet" : "# example-import-block\nimport market\n# example-import-block",
+        "snippet" : "import market",
         "type" : "Snippet",
         "title" : "include by regexp result",
         "lang" : "py",
-        "includeRegexp" : [ "import" ]
+        "includeRegexp" : [ "import " ]
       } ]
     }, {
       "id" : "exclude-regexp",
@@ -482,7 +488,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "py"
       } ]
     } ],
-    "lastModifiedTime" : 1648437179094,
+    "lastModifiedTime" : 1653499403266,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Snippets Manipulation",

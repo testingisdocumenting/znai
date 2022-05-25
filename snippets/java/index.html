@@ -96,7 +96,7 @@
 
 <article>
 <header><h1>Signature Only</h1></header>
-<p>You can also specify a method name and extract only its signature. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true} If signatureOnly is specified, body will be omitted. public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive)</p>
+<p>You can also specify a method name and extract only its signature. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true} If signatureOnly is specified, body will be omitted. public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) Pass entrySeparator: &quot;&lt;separator&gt;&quot; to have a provided line in between entries as a separator. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true, entrySeparator: &quot;...&quot;} public String sampleMethod(String p1, int p2) ... public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive)</p>
 </article>
 
 <article>
@@ -121,7 +121,7 @@
 
 <article>
 <header><h1>Multiple Bodies</h1></header>
-<p>Pass multiple entries and bodyOnly to extract example of usage from unit tests public class HelloWorldTest { @Test public void exampleOfA() { a.action(); } @Test public void exampleOfB() { b.action(); } } :include-java: HelloWorldTest.java { entry: [&quot;exampleOfA&quot;, &quot;exampleOfB&quot;], bodyOnly: true, title: &quot;example of actions&quot;} a.action(); b.action(); Pass empty line to entrySeparator: &quot;&quot; to remove default empty line separating entries markdown :include-java: HelloWorldTest.java { entry: [&quot;exampleOfA&quot;, &quot;exampleOfB&quot;], entrySeparator: &quot;&quot;, bodyOnly: true, title: &quot;example of actions&quot;} a.action(); b.action();</p>
+<p>Pass multiple entries and bodyOnly to extract example of usage from unit tests public class HelloWorldTest { @Test public void exampleOfA() { a.action(); } @Test public void exampleOfB() { b.action(); } } :include-java: HelloWorldTest.java { entry: [&quot;exampleOfA&quot;, &quot;exampleOfB&quot;], bodyOnly: true, title: &quot;example of actions&quot;} a.action(); b.action(); Pass entrySeparator: &quot;&lt;separator&gt;&quot; to have a provided line in between entries as a separator. markdown :include-java: HelloWorldTest.java { entry: [&quot;exampleOfA&quot;, &quot;exampleOfB&quot;], entrySeparator: &quot;&quot;, bodyOnly: true, title: &quot;example of actions&quot;} a.action(); b.action();</p>
 </article>
 </section>
 </div>
@@ -205,7 +205,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n\n// overloaded method",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n// overloaded method",
         "entry" : "sampleMethod",
         "bodyOnly" : true,
         "type" : "Snippet",
@@ -255,7 +255,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "lang" : ""
       }, {
-        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n\n// overloaded method",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n// overloaded method",
         "entry" : "sampleMethod",
         "bodyOnly" : true,
         "commentsType" : "inline",
@@ -292,6 +292,30 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "snippet" : "public String sampleMethod(String p1, int p2)\npublic void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive)",
         "entry" : "sampleMethod",
+        "type" : "Snippet",
+        "signatureOnly" : true,
+        "lang" : "java"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entrySeparator: \"<separator>\"",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to have a provided line in between entries as a separator.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true, entrySeparator: \"...\"}\n",
+        "type" : "Snippet",
+        "lineNumber" : "",
+        "lang" : ""
+      }, {
+        "snippet" : "public String sampleMethod(String p1, int p2)\n...\npublic void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive)",
+        "entry" : "sampleMethod",
+        "entrySeparator" : "...",
         "type" : "Snippet",
         "signatureOnly" : true,
         "lang" : "java"
@@ -424,7 +448,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "public Data createData() {\n    // create data\n}\n\npublic void importantAction(Trader trader, Transaction transaction) {\n    // TODO important\n}",
+        "snippet" : "public Data createData() {\n    // create data\n}\npublic void importantAction(Trader trader, Transaction transaction) {\n    // TODO important\n}",
         "entry" : [ "createData", "importantAction" ],
         "type" : "Snippet",
         "lang" : "java"
@@ -514,7 +538,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "lang" : ""
       }, {
-        "snippet" : "a.action();\n\nb.action();",
+        "snippet" : "a.action();\nb.action();",
         "entry" : [ "exampleOfA", "exampleOfB" ],
         "bodyOnly" : true,
         "type" : "Snippet",
@@ -523,13 +547,13 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Pass empty line to ",
+          "text" : "Pass ",
           "type" : "SimpleText"
         }, {
-          "code" : "entrySeparator: \"\"",
+          "code" : "entrySeparator: \"<separator>\"",
           "type" : "InlinedCode"
         }, {
-          "text" : " to remove default empty line separating entries",
+          "text" : " to have a provided line in between entries as a separator.",
           "type" : "SimpleText"
         } ]
       }, {
@@ -539,7 +563,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "lang" : "markdown"
       }, {
-        "snippet" : "a.action();\nb.action();",
+        "snippet" : "a.action();\n\nb.action();",
         "entry" : [ "exampleOfA", "exampleOfB" ],
         "bodyOnly" : true,
         "entrySeparator" : "",
@@ -548,7 +572,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "java"
       } ]
     } ],
-    "lastModifiedTime" : 1648437179094,
+    "lastModifiedTime" : 1653499403262,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Java",

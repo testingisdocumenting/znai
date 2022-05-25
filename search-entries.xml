@@ -51,7 +51,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.56/znai-dist-1.56-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.57/znai-dist-1.57-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -59,7 +59,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.56&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.57&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -75,7 +75,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.56&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.57&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.56&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.57&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -144,10 +144,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/flow/landing#index-landing-page</url>
-    <fullTitle>Znai: Landing, Index Landing Page [Flow]</fullTitle>
+    <url>/znai/flow/landing#optional-index-landing-page</url>
+    <fullTitle>Znai: Landing, Optional Index Landing Page [Flow]</fullTitle>
     <text>
-      <text>Your index.md file in the root is your landing page. Consider putting logos and high level information about your product there.Note: Landing page is not part of your Table Of Contents and is not present on navigation panel. Don't put essential information there as users may not get back there often.</text>
+      <text>Optional index.md file in the root is your landing page. Consider putting logos and high level information about your product there.Note: Landing page is not part of your Table Of Contents and is not present on navigation panel. Don't put essential information there as users may not get back there often.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -155,7 +155,7 @@
     <url>/znai/flow/landing#auto-redirect</url>
     <fullTitle>Znai: Landing, Auto Redirect [Flow]</fullTitle>
     <text>
-      <text>Use :include-redirect: chapter/page to automatically redirect from index page to any other page in your docs. Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.</text>
+      <text>Use :include-redirect: chapter/page to automatically redirect from index page to any other page in your docs. Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.If index.md is not present, users will be redirected to the first page in your Table Of Contents.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -232,10 +232,18 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/flow/lookup-paths#class-path-lookup</url>
-    <fullTitle>Znai: Lookup Paths, Class Path Lookup [Flow]</fullTitle>
+    <url>/znai/flow/lookup-paths#cli-parameter</url>
+    <fullTitle>Znai: Lookup Paths, CLI parameter [Flow]</fullTitle>
     <text>
-      <text>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets from projects deployed to, for example, Maven Central. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>${project.version}&lt;/version> &lt;dependencies> &lt;dependency> &lt;groupId>junit&lt;/groupId> &lt;artifactId>junit&lt;/artifactId> &lt;version>${junit.version}&lt;/version> &lt;classifier>sources&lt;/classifier> &lt;/dependency> &lt;/dependencies> &lt;/plugin> :include-java: org/junit/Assert.java {entry: "assertArrayEquals"} public static void assertArrayEquals(String message, Object[] expecteds, Object[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(Object[] expecteds, Object[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, boolean[] expecteds, boolean[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(boolean[] expecteds, boolean[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, byte[] expecteds, byte[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(byte[] expecteds, byte[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, char[] expecteds, char[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(char[] expecteds, char[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, short[] expecteds, short[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(short[] expecteds, short[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, int[] expecteds, int[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(int[] expecteds, int[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, long[] expecteds, long[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(long[] expecteds, long[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, double[] expecteds, double[] actuals, double delta) throws ArrayComparisonFailure { new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(double[] expecteds, double[] actuals, double delta) { assertArrayEquals(null, expecteds, actuals, delta); } public static void assertArrayEquals(String message, float[] expecteds, float[] actuals, float delta) throws ArrayComparisonFailure { new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(float[] expecteds, float[] actuals, float delta) { assertArrayEquals(null, expecteds, actuals, delta); }</text>
+      <text>Use --lookup-paths CLI parameter to add additional paths to lookup files. znai --lookup-paths /extra/path-one /extra/path-two</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/lookup-paths#zip-and-jar-lookup</url>
+    <fullTitle>Znai: Lookup Paths, Zip and Jar Lookup [Flow]</fullTitle>
+    <text>
+      <text>When Znai encounters zip or jar file listed inside lookup-paths it will unpack the archives into a temporary location and will use those locations to resolve files txt ../sources.zip ../module/archive.jar :include-file: dir/inside-zip-b.txt inside zip B</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -248,10 +256,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/flow/lookup-paths#cli-parameter</url>
-    <fullTitle>Znai: Lookup Paths, CLI parameter [Flow]</fullTitle>
+    <url>/znai/flow/lookup-paths#class-path-lookup</url>
+    <fullTitle>Znai: Lookup Paths, Class Path Lookup [Flow]</fullTitle>
     <text>
-      <text>Use --lookup-paths CLI parameter to add additional paths to lookup files. Use it when lookup location can't be hardcoded. webtau --lookup-paths /extra/path-one:/extra/path-two</text>
+      <text>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets from projects deployed to, for example, Maven Central. &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>${project.version}&lt;/version> &lt;dependencies> &lt;dependency> &lt;groupId>junit&lt;/groupId> &lt;artifactId>junit&lt;/artifactId> &lt;version>${junit.version}&lt;/version> &lt;classifier>sources&lt;/classifier> &lt;/dependency> &lt;/dependencies> &lt;/plugin> :include-java: org/junit/Assert.java {entry: "assertArrayEquals"} public static void assertArrayEquals(String message, Object[] expecteds, Object[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(Object[] expecteds, Object[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, boolean[] expecteds, boolean[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(boolean[] expecteds, boolean[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, byte[] expecteds, byte[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(byte[] expecteds, byte[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, char[] expecteds, char[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(char[] expecteds, char[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, short[] expecteds, short[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(short[] expecteds, short[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, int[] expecteds, int[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(int[] expecteds, int[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, long[] expecteds, long[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(long[] expecteds, long[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, double[] expecteds, double[] actuals, double delta) throws ArrayComparisonFailure { new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(double[] expecteds, double[] actuals, double delta) { assertArrayEquals(null, expecteds, actuals, delta); } public static void assertArrayEquals(String message, float[] expecteds, float[] actuals, float delta) throws ArrayComparisonFailure { new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(float[] expecteds, float[] actuals, float delta) { assertArrayEquals(null, expecteds, actuals, delta); }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -352,6 +360,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/code-snippets#wrap-code</url>
+    <fullTitle>Znai: Code Snippets, Wrap Code [Snippets]</fullTitle>
+    <text>
+      <text>Use the wrap option to stretch wide code to occupy as much horizontal real estate as possible. ```java {wrap: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } ``` java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/code-snippets#read-more</url>
     <fullTitle>Znai: Code Snippets, Read More [Snippets]</fullTitle>
     <text>
@@ -400,6 +416,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/external-code-snippets#wrap-code</url>
+    <fullTitle>Znai: External Code Snippets, Wrap Code [Snippets]</fullTitle>
+    <text>
+      <text>Use the wrap option to enable long lines wrapping. :include-file: WideCode.java {wrap: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/external-code-snippets#read-more</url>
     <fullTitle>Znai: External Code Snippets, Read More [Snippets]</fullTitle>
     <text>
@@ -427,7 +451,7 @@
     <url>/znai/snippets/snippets-manipulation#multiple-surrounded-by</url>
     <fullTitle>Znai: Snippets Manipulation, Multiple Surrounded By [Snippets]</fullTitle>
     <text>
-      <text>Pass a list to surroundedBy to extract multiple blocks :include-file: python-examples.py { title: "extracted example", surroundedBy: ["# example-import-block", "# example-cancel-trade"]} import market market.cancel_trade(id) Use surroundedBySeparator to select separator(s) between blocks :include-file: python-examples.py { title: "extracted example", surroundedBy: ["# example-import-block", "# example-cancel-trade"], surroundedBySeparator: ["..."] } import market ... market.cancel_trade(id) Note: surroundedBySeparator can be either single value or a list. Plugin will use a different separator for each block.</text>
+      <text>Pass a list to surroundedBy to extract multiple blocks :include-file: python-examples.py { title: "extracted example", surroundedBy: ["# example-import-block", "# example-cancel-trade"]} import market market.cancel_trade(id) Use surroundedBySeparator to select separator(s) between blocks :include-file: python-examples.py { title: "extracted example", surroundedBy: ["# example-import-block", "# example-cancel-trade"], surroundedBySeparator: ["..."] } import market ... market.cancel_trade(id) Note: surroundedBySeparator can be either single value or a list. Plugin will use a different separator for each block. Use null to have an empty line as a separator.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -459,7 +483,7 @@
     <url>/znai/snippets/snippets-manipulation#include-regexp</url>
     <fullTitle>Znai: Snippets Manipulation, Include Regexp [Snippets]</fullTitle>
     <text>
-      <text>Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: "import"} :include-file: python-examples.py {includeRegexp: ["import"]} # example-import-block import market # example-import-block</text>
+      <text>Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: "import "} :include-file: python-examples.py {includeRegexp: ["import "]} import market</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -576,6 +600,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/api-parameters#long-parameter-names</url>
+    <fullTitle>Znai: API Parameters, Long Parameter Names [Snippets]</fullTitle>
+    <text>
+      <text>Znai hard wraps long parameter names to leave more space to description. VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support Use noWrap: true to remove hard wrap enforcement ```api-parameters {anchorPrefix: 'customPrefix', noWrap: true} VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support ``` VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/code-references#local-references</url>
     <fullTitle>Znai: Code References, Local References [Snippets]</fullTitle>
     <text>
@@ -619,7 +651,7 @@
     <url>/znai/snippets/java#signature-only</url>
     <fullTitle>Znai: Java, Signature Only [Snippets]</fullTitle>
     <text>
-      <text>You can also specify a method name and extract only its signature. :include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true} If signatureOnly is specified, body will be omitted. public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer> p1, int p2, boolean isActive)</text>
+      <text>You can also specify a method name and extract only its signature. :include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true} If signatureOnly is specified, body will be omitted. public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer> p1, int p2, boolean isActive) Pass entrySeparator: "&lt;separator>" to have a provided line in between entries as a separator. :include-java: HelloWorld.java {entry: "sampleMethod", signatureOnly: true, entrySeparator: "..."} public String sampleMethod(String p1, int p2) ... public void sampleMethod(Map&lt;String, Integer> p1, int p2, boolean isActive)</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -659,7 +691,7 @@
     <url>/znai/snippets/java#multiple-bodies</url>
     <fullTitle>Znai: Java, Multiple Bodies [Snippets]</fullTitle>
     <text>
-      <text>Pass multiple entries and bodyOnly to extract example of usage from unit tests public class HelloWorldTest { @Test public void exampleOfA() { a.action(); } @Test public void exampleOfB() { b.action(); } } :include-java: HelloWorldTest.java { entry: ["exampleOfA", "exampleOfB"], bodyOnly: true, title: "example of actions"} a.action(); b.action(); Pass empty line to entrySeparator: "" to remove default empty line separating entries markdown :include-java: HelloWorldTest.java { entry: ["exampleOfA", "exampleOfB"], entrySeparator: "", bodyOnly: true, title: "example of actions"} a.action(); b.action();</text>
+      <text>Pass multiple entries and bodyOnly to extract example of usage from unit tests public class HelloWorldTest { @Test public void exampleOfA() { a.action(); } @Test public void exampleOfB() { b.action(); } } :include-java: HelloWorldTest.java { entry: ["exampleOfA", "exampleOfB"], bodyOnly: true, title: "example of actions"} a.action(); b.action(); Pass entrySeparator: "&lt;separator>" to have a provided line in between entries as a separator. markdown :include-java: HelloWorldTest.java { entry: ["exampleOfA", "exampleOfB"], entrySeparator: "", bodyOnly: true, title: "example of actions"} a.action(); b.action();</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -747,7 +779,7 @@
     <url>/znai/snippets/groovy#multiple-bodies</url>
     <fullTitle>Znai: Groovy, Multiple Bodies [Snippets]</fullTitle>
     <text>
-      <text>Pass list as entry to extract multiple method bodies markdown :include-groovy: HelloWorldTest.groovy { title: "api example", entry: ["should calculate risk based on epsilon", "should calculate risk based on epsilon"], bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 Pass empty line to entrySeparator: "" to remove default empty line separating entries markdown :include-groovy: HelloWorldTest.groovy { title: "api example", entry: ["should calculate risk based on epsilon", "should calculate risk based on epsilon"], entrySeparator: "", bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108</text>
+      <text>Pass list as entry to extract multiple method bodies markdown :include-groovy: HelloWorldTest.groovy { title: "api example", entry: ["should calculate risk based on epsilon", "should calculate risk based on epsilon"], bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 Pass entrySeparator: "&lt;separator>" to have a provided line in between entries as a separator. markdown :include-groovy: HelloWorldTest.groovy { title: "api example", entry: ["should calculate risk based on epsilon", "should calculate risk based on epsilon"], entrySeparator: "", bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -803,7 +835,7 @@
     <url>/znai/snippets/doxygen#setup</url>
     <fullTitle>Znai: Doxygen, Setup [Snippets]</fullTitle>
     <text>
-      <text>Specify index.xml location inside &lt;docroot>/doxygen.json { "indexPath": "doxygen/xml/index.xml" }</text>
+      <text>Specify index.xml location inside &lt;docroot>/doxygen.json { "indexPath": "doxygen/xml/index.xml" } Note: To read doxygen XMLs from zip, add path to the zip to flow/lookup-paths#zip-and-jar-lookup lookup-paths</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1139,7 +1171,7 @@
     <url>/znai/snippets/math#latex-block</url>
     <fullTitle>Znai: Math, LaTeX Block [Snippets]</fullTitle>
     <text>
-      <text>To render math you can use https://en.wikibooks.org/wiki/LaTeX/Mathematics LaTeX math expressions. Surround LaTeX expression with fenced block and specify latex as a language ```latex \forall x \in X, \quad \exists y \leq \epsilon ``` The result will be a following math expression. \forall x \in X, \quad \exists y \leq \epsilon In presentation mode, rendered expressions will automatically scale to make use of the screen space.</text>
+      <text>To render math you can use https://en.wikibooks.org/wiki/LaTeX/Mathematics LaTeX math expressions. Surround LaTeX expression with fenced block and specify latex as a language ```latex \forall x \in X, \quad \exists y \leq \epsilon ``` The result will be a following math expression. \forall x \in X, \quad \exists y \leq \epsilon ```latex x = \begin{cases} a &amp;\text{if } b \\ c &amp;\text{if } d \\ x &amp;\text{if } z \end{cases} ``` x = \begin{cases} a &amp;\text{if } b \\ c &amp;\text{if } d \\ x &amp;\text{if } z \end{cases}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1147,7 +1179,23 @@
     <url>/znai/snippets/math#latex-inline</url>
     <fullTitle>Znai: Math, LaTeX Inline [Snippets]</fullTitle>
     <text>
-      <text>Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON parameters are used to allow LaTeX braces to be parsed correctly. It holds that `:latex: {src: "\\frac{1}{2} &lt; \\sqrt{2}"}`. The result will be a following math expression.It holds that .Note: Rendering is done by using https://github.com/Khan/KaTeX KaTeX library. And is using https://github.com/Khan/KaTeX KaTeX fonts.</text>
+      <text>Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON parameters are used to allow LaTeX braces to be parsed correctly. It holds that `:latex: {src: "\\frac{1}{2} &lt; \\sqrt{2}"}`. The result will be a following math expression.It holds that .</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/math#presentation-mode</url>
+    <fullTitle>Znai: Math, Presentation Mode [Snippets]</fullTitle>
+    <text>
+      <text>In presentation mode, rendered expressions will automatically scale to make use of the screen space.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/math#katex</url>
+    <fullTitle>Znai: Math, KaTex [Snippets]</fullTitle>
+    <text>
+      <text>Rendering is done by using awesome https://github.com/Khan/KaTeX KaTeX library. https://github.com/Khan/KaTeX KaTeX fonts are copied to generated documentation resources.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1603,7 +1651,7 @@
     <url>/znai/visuals/smart-bullet-points#steps</url>
     <fullTitle>Znai: Smart Bullet Points, Steps [Visuals]</fullTitle>
     <text>
-      <text>Use Steps to outline a procedure.Install IDEA Learn Java Learn Machine Learning Use differentColors: true to use distinct colors for each step :include-meta: {bulletListType: "Steps", differentColors: true} Install IDEA Learn Java Learn Machine Learning</text>
+      <text>Use Steps to outline a procedure.Install IDEA Learn Java Learn Machine Learning Use differentColors: true to use distinct colors for each step :include-meta: {bulletListType: "Steps", differentColors: true} Install IDEA Learn Java Learn Machine Learning Use align: "left" to align steps to the left :include-meta: {bulletListType: "Steps", differentColors: true, align: "left"} Install IDEA Learn Java Learn Machine Learning</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1699,7 +1747,7 @@
     <url>/znai/visuals/charts#pie</url>
     <fullTitle>Znai: Charts, Pie [Visuals]</fullTitle>
     <text>
-      <text>Given a CSV file... label, value A, 10 B, 20 C, 15 D, 8 ..to build a pie chart use: :include-chart: data.csv {type: "Pie"} You can change the style with the innerRadius property: :include-chart: data.csv {type: "Pie", innerRadius: 100}</text>
+      <text>To build a pie chart use: :include-piechart: charts/genres.csv genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1707,7 +1755,7 @@
     <url>/znai/visuals/charts#bar</url>
     <fullTitle>Znai: Charts, Bar [Visuals]</fullTitle>
     <text>
-      <text>To build a vertical bar chart use: :include-chart: data.csv To build a horizontal bar chart use: :include-chart: data.csv {horizontal: true}</text>
+      <text>To build a bar chart use: :include-barchart: charts/genres.csv genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50 Add more columns to CSV data to use multiple bars per X axis tick :include-barchart: charts/game-activities.csv game, walking, fighting, reading Oblivion, 100, 100, 20 Elden Ring, 110, 110, 5 Persona 5, 20, 30, 50 Divinity, 30, 30, 10 Use stack: true to render multiple bars stacked :include-barchart: charts/game-activities.csv {stack: true} Use horizontal: true and height parameter to change render direction :include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 250}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1715,23 +1763,47 @@
     <url>/znai/visuals/charts#line</url>
     <fullTitle>Znai: Charts, Line [Visuals]</fullTitle>
     <text>
-      <text>To build a line chart use: :include-chart: data.csv {type: "Line"}</text>
+      <text>To build a line chart use: :include-linechart: charts/genres.csv genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50 Use multiple CSV columns to add more lines :include-linechart: charts/daily-genres.csv day, RPG, RTS, FPS Monday, 100, 10, 0 Tuesday, 50, 50, 20 Wednesday, 10, 30, 50 Thursday, 5, 5, 100 Friday, 0, 100, 10 Use numbers in first column to have a regular X, Y plots :include-linechart: charts/competitors.csv x, company one, company two 10, 100, 150 15.5, 110, 145 30, 120, 130 40, 110, 145 50, 115, 100</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/visuals/charts#presentation-mode</url>
-    <fullTitle>Znai: Charts, Presentation Mode [Visuals]</fullTitle>
+    <url>/znai/visuals/charts#legend</url>
+    <fullTitle>Znai: Charts, Legend [Visuals]</fullTitle>
     <text>
-      <text>In presentation mode, chart values for Bar and Pie appear one at a time. To force all values to appear at once use: :include-meta: {allAtOnce: true}</text>
+      <text>Use legend: true to add legend to a chart :include-linechart: charts/daily-genres.csv {legend: true}</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/visuals/charts#victory-charts</url>
-    <fullTitle>Znai: Charts, Victory Charts [Visuals]</fullTitle>
+    <url>/znai/visuals/charts#wide-mode</url>
+    <fullTitle>Znai: Charts, Wide Mode [Visuals]</fullTitle>
     <text>
-      <text>Znai uses the https://github.com/FormidableLabs/victory-chart VictoryChart library to render charts.</text>
+      <text>Use wide: true to use available horizontal space :include-linechart: charts/daily-genres.csv {wide: true} Use in combination with height to fit larger charts :include-linechart: charts/daily-genres.csv {wide: true, height: 800}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/charts#inlined-data</url>
+    <fullTitle>Znai: Charts, Inlined Data [Visuals]</fullTitle>
+    <text>
+      <text>Use fence block plugin to inline chart data into markdown ```piechart genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50 ``` ```linechart {legend: true} day, RPG, RTS, FPS Monday, 100, 10, 0 Tuesday, 50, 50, 20 Wednesday, 10, 30, 50 Thursday, 5, 5, 100 Friday, 0, 100, 10 ``` ```barchart genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50 ```</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/charts#presentation</url>
+    <fullTitle>Znai: Charts, Presentation [Visuals]</fullTitle>
+    <text>
+      <text>Charts automatically participate in slides. Each chart becomes an individual slide.Use breakpoint to add extra slides transitions. :include-linechart: charts/competitors.csv { legend: true, breakpoint: [17, 42] } To try it, press on icon next to the Presentation header :include-piechart: charts/genres.csv {breakpoint: "Action"} Use all as breakpoint value to create a slide for each textual entry :include-barchart: charts/genres.csv { legend: true, breakpoint: "all" }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/charts#echarts</url>
+    <fullTitle>Znai: Charts, ECharts [Visuals]</fullTitle>
+    <text>
+      <text>Znai uses the beautiful and functional https://echarts.apache.org/ EChart library to render charts.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1788,6 +1860,14 @@
     <fullTitle>Znai: Images, Align [Visuals]</fullTitle>
     <text>
       <text>Use align option to align images left or right. :include-image: books.jpg {align: "left", scale: 0.3} :include-image: books.jpg {align: "right", scale: 0.3}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/images#external-image</url>
+    <fullTitle>Znai: Images, External Image [Visuals]</fullTitle>
+    <text>
+      <text>Pass external url in place of image to render image from a remote site ![text](https://external-url) :include-image: https://external-url { align: "left" } Note: Pass parameter to validate image urls</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2112,10 +2192,18 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/release-notes/2022#157</url>
+    <fullTitle>Znai: 2022 Releases, 1.57 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: selected TOC item padding Fix: layout/tables Table text selection during preview is not auto deselected Fix: snippets/external-code-snippets#read-more read more option change during preview now properly updates the snippet Fix: snippets/math Latex more complex math render by adding missing fonts Fix: remove extra top margin in case of code snippet in between code snippets in two columns mode Fix: markdown snippets render extra new line at the end Fix: search preview popup has fixed height now to avoid size jump Use standard args parsing for flow/lookup-paths#cli-parameter CLI Lookup Paths Add snippets/doxygen#setup Doxygen From Zip support Add visuals/charts#presentation Charts Presentation support for all breakpoint support that creates a slide for every textual value Add visuals/charts#presentation Charts Presentation breakpoint validation Add visuals/charts#presentation Bar Chart presentation mode breakpoints support Add flow/lookup-paths#zip-and-jar-lookup Zip and Jar lookup path support to access content from within archives Add visuals/charts#presentation Pie Chart presentation mode breakpoints support Better validation of snippets/api-parameters#external-json-file API Parameters input JSON Add automatic hard wrap and snippets/api-parameters#long-parameter-names noWrap option to snippets/api-parameters API Parameters to handle long parameter names without spaces Add visuals/smart-bullet-points#steps Smart Bullets Points Steps align option Add visuals/charts#wide-mode Charts Wide Mode Add visuals/charts#inlined-data Charts Inlined Data Add visuals/images#external-image External Images support and image URL validation Add presentation support for [Line Chart] breakpoints (visuals/charts#presentation) Remove generic include-chart plugin that uses Victory Chart for rendering Add visuals/charts#legend chart legend Add dark theme support for visuals/charts Charts Migrate visuals/charts#pie Pie Chart to https://echarts.apache.org/ ECharts Migrate visuals/charts#line Line Chart to https://echarts.apache.org/ ECharts Add stack mode to visuals/charts#bar Bar Chart visuals/charts#bar Bar Chart horizontal mode with height setting Add multiple values per tick support to visuals/charts#bar Bar Chart Wrap code option for snippets/code-snippets#wrap-code Fence Block and snippets/external-code-snippets#wrap-code External Code Landing hub opens documentation in the same window and not a new tab Add snippets/snippets-manipulation#multiple-surrounded-by surrounded by null as separator value No extra separator for snippets/java#multiple-entries java and snippets/groovy#multiple-bodies groovy entries separator</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/release-notes/2022#156</url>
     <fullTitle>Znai: 2022 Releases, 1.56 [Release Notes]</fullTitle>
     <text>
-      <text>Fix: search result preview highlight across styles Fix highlight code lines when multiline comment is present (e.g. /* */ ) Fix: using : , - , + chars in Search doesn't lead to crash anymore Fix: search popup window height is consistent size when jumping between results Added snippets/markdown#partial-markdown include partial markdown Added multiple entries separator for snippets/java#multiple-bodies Java and snippets/groovy#multiple-bodies Groovy Added snippets/groovy#multiple-bodies multiple bodies only using entry for Groovy Added snippets/java#multiple-bodies multiple bodies only using entry for Java Add validate external links flag --validate-external-links Add visuals/image-annotations#badges image fence plugin with badge annotations Handle loop reference in snippets/open-API Open API Generate plugin params usage statistics file Generate plugins usage statistics file</text>
+      <text>Fix: search result preview highlight across styles Fix highlight code lines when multiline comment is present (e.g. /* */ ) Fix: using : , - , + chars in Search doesn't lead to crash anymore Fix: search popup window height is consistent size when jumping between results Added snippets/markdown#partial-markdown include partial markdown Added multiple entries separator for snippets/java#multiple-bodies Java and snippets/groovy#multiple-bodies Groovy Added snippets/groovy#multiple-bodies multiple bodies only using entry for Groovy Added snippets/java#multiple-bodies multiple bodies only using entry for Java flow/landing index.md is now optional Add validate external links flag --validate-external-links Add visuals/image-annotations#badges image fence plugin with badge annotations Handle loop reference in snippets/open-API Open API Generate plugin params usage statistics file Generate plugins usage statistics file</text>
       <score>STANDARD</score>
     </text>
   </entry>

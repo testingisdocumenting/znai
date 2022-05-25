@@ -85,13 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Index Landing Page</h1></header>
-<p>Your index.md file in the root is your landing page. Consider putting logos and high level information about your product there.Note: Landing page is not part of your Table Of Contents and is not present on navigation panel. Don't put essential information there as users may not get back there often.</p>
+<header><h1>Optional Index Landing Page</h1></header>
+<p>Optional index.md file in the root is your landing page. Consider putting logos and high level information about your product there.Note: Landing page is not part of your Table Of Contents and is not present on navigation panel. Don't put essential information there as users may not get back there often.</p>
 </article>
 
 <article>
 <header><h1>Auto Redirect</h1></header>
-<p>Use :include-redirect: chapter/page to automatically redirect from index page to any other page in your docs. Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.</p>
+<p>Use :include-redirect: chapter/page to automatically redirect from index page to any other page in your docs. Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.If index.md is not present, users will be redirected to the first page in your Table Of Contents.</p>
 </article>
 </section>
 </div>
@@ -126,13 +126,13 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "index-landing-page",
+      "id" : "optional-index-landing-page",
       "type" : "Section",
-      "title" : "Index Landing Page",
+      "title" : "Optional Index Landing Page",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Your ",
+          "text" : "Optional ",
           "type" : "SimpleText"
         }, {
           "code" : "index.md",
@@ -179,9 +179,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.",
           "type" : "SimpleText"
         } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "index.md",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " is not present, users will be redirected to the first page in your Table Of Contents.",
+          "type" : "SimpleText"
+        } ]
       } ]
     } ],
-    "lastModifiedTime" : 1648437179086,
+    "lastModifiedTime" : 1653499403250,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Landing",
@@ -190,8 +202,8 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "landing",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Index Landing Page",
-        "id" : "index-landing-page"
+        "title" : "Optional Index Landing Page",
+        "id" : "optional-index-landing-page"
       }, {
         "title" : "Auto Redirect",
         "id" : "auto-redirect"

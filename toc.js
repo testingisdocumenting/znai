@@ -103,8 +103,8 @@ toc = [ {
     "fileName" : "landing",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Index Landing Page",
-      "id" : "index-landing-page"
+      "title" : "Optional Index Landing Page",
+      "id" : "optional-index-landing-page"
     }, {
       "title" : "Auto Redirect",
       "id" : "auto-redirect"
@@ -170,14 +170,17 @@ toc = [ {
       "title" : "Files Reference Lookup",
       "id" : "files-reference-lookup"
     }, {
-      "title" : "Class Path Lookup",
-      "id" : "class-path-lookup"
+      "title" : "CLI parameter",
+      "id" : "cli-parameter"
+    }, {
+      "title" : "Zip and Jar Lookup",
+      "id" : "zip-and-jar-lookup"
     }, {
       "title" : "HTTP Lookup Location",
       "id" : "http-lookup-location"
     }, {
-      "title" : "CLI parameter",
-      "id" : "cli-parameter"
+      "title" : "Class Path Lookup",
+      "id" : "class-path-lookup"
     } ]
   }, {
     "sectionTitle" : "Flow",
@@ -275,6 +278,9 @@ toc = [ {
       "title" : "Wide Code",
       "id" : "wide-code"
     }, {
+      "title" : "Wrap Code",
+      "id" : "wrap-code"
+    }, {
       "title" : "Read More",
       "id" : "read-more"
     }, {
@@ -300,6 +306,9 @@ toc = [ {
     }, {
       "title" : "Wide Code",
       "id" : "wide-code"
+    }, {
+      "title" : "Wrap Code",
+      "id" : "wrap-code"
     }, {
       "title" : "Read More",
       "id" : "read-more"
@@ -400,6 +409,9 @@ toc = [ {
     }, {
       "title" : "Anchors",
       "id" : "anchors"
+    }, {
+      "title" : "Long Parameter Names",
+      "id" : "long-parameter-names"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -738,6 +750,12 @@ toc = [ {
     }, {
       "title" : "LaTeX Inline",
       "id" : "latex-inline"
+    }, {
+      "title" : "Presentation Mode",
+      "id" : "presentation-mode"
+    }, {
+      "title" : "KaTex",
+      "id" : "katex"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -1117,11 +1135,20 @@ toc = [ {
       "title" : "Line",
       "id" : "line"
     }, {
-      "title" : "Presentation Mode",
-      "id" : "presentation-mode"
+      "title" : "Legend",
+      "id" : "legend"
     }, {
-      "title" : "Victory Charts",
-      "id" : "victory-charts"
+      "title" : "Wide Mode",
+      "id" : "wide-mode"
+    }, {
+      "title" : "Inlined Data",
+      "id" : "inlined-data"
+    }, {
+      "title" : "Presentation",
+      "id" : "presentation"
+    }, {
+      "title" : "ECharts",
+      "id" : "echarts"
     } ]
   }, {
     "sectionTitle" : "Visuals",
@@ -1151,6 +1178,9 @@ toc = [ {
     }, {
       "title" : "Align",
       "id" : "align"
+    }, {
+      "title" : "External Image",
+      "id" : "external-image"
     } ]
   }, {
     "sectionTitle" : "Visuals",
@@ -1402,6 +1432,9 @@ toc = [ {
     "fileName" : "2022",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.57",
+      "id" : "157"
+    }, {
       "title" : "1.56",
       "id" : "156"
     } ]
