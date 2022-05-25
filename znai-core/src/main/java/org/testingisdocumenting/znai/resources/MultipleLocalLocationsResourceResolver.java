@@ -95,7 +95,7 @@ public class MultipleLocalLocationsResourceResolver implements ResourcesResolver
         Stream<Path> absoluteLocation = original.isAbsolute() ? Stream.of(original) : Stream.empty();
         Stream<Path> lookedUpInLocations = lookupPaths.stream().map(p -> p.resolve(path).normalize());
 
-        return Stream.concat(relativeToCurrent, Stream.concat(absoluteLocation, lookedUpInLocations));
+        return Stream.concat(relativeToCurrent, Stream.concat(absoluteLocation, lookedUpInLocations)).distinct();
     }
 
     public void setCurrentFilePath(Path currentFilePath) {

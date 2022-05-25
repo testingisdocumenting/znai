@@ -14,6 +14,8 @@ Specify `index.xml` location inside `<docroot>/doxygen.json`
 
 :include-file: doxygen.json {autoTitle: true}
 
+Note: To read doxygen XMLs from zip, add path to the zip to [lookup-paths](flow/lookup-paths#zip-and-jar-lookup)
+
 # Extract Comment Text
 
 ## Members Comment Text
