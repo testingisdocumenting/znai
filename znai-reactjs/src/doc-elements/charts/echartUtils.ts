@@ -93,15 +93,15 @@ export function partialDataExcludingDataAfterPoint(
 }
 
 export function echartCalcBreakpoint(props: EchartCommonProps) {
-  if (!props.isPresentation || !props.breakpoints) {
+  if (!props.isPresentation || !props.breakpoint) {
     return undefined;
   }
 
-  if (props.slideIdx! > props.breakpoints.length) {
+  if (props.slideIdx! > props.breakpoint.length) {
     return undefined;
   }
 
-  return props.breakpoints[props.slideIdx!];
+  return props.breakpoint[props.slideIdx!];
 }
 
 export function findBreakpointDataIndexForText(data: any[][], breakpoint: string | undefined) {
