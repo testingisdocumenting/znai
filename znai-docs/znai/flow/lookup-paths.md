@@ -15,6 +15,14 @@ When you refer to a file using plugins like
 ../module/src/main/java
 ```
 
+# CLI parameter
+
+Use `--lookup-paths` CLI parameter to add additional paths to lookup files.  
+
+```cli
+znai --lookup-paths /extra/path-one /extra/path-two
+```
+
 # Zip and Jar Lookup
 
 When Znai encounters zip or jar file listed inside `lookup-paths` it will unpack the archives into a temporary location
@@ -55,12 +63,3 @@ Using class path lookup you can include snippets from projects deployed to, for 
     :include-java: org/junit/Assert.java {entry: "assertArrayEquals"}
 
 :include-java: org/junit/Assert.java {entry: "assertArrayEquals"}
-
-# CLI parameter
-
-Use `--lookup-paths` CLI parameter to add additional paths to lookup files. Use it when lookup location 
-can't be hardcoded.
-
-:include-cli-command: webtau --lookup-paths /extra/path-one:/extra/path-two 
-
-

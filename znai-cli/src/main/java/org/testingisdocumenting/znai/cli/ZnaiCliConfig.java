@@ -89,7 +89,7 @@ public class ZnaiCliConfig {
     private Mode mode;
     private List<String> specifiedCustomCommands;
     private String actor;
-    private String lookupPaths;
+    private List<String> lookupPaths;
 
     private boolean isValidateExternalLinks;
 
@@ -180,11 +180,7 @@ public class ZnaiCliConfig {
     }
 
     public List<String> getLookupPaths() {
-        if (lookupPaths.isEmpty()) {
-            return Collections.emptyList();
-        }
-
-        return Arrays.asList(lookupPaths.split(":"));
+        return lookupPaths;
     }
 
     public ModifiedTimeStrategy getModifiedTimeStrategy() {
@@ -259,7 +255,9 @@ public class ZnaiCliConfig {
 
         actor = commandLine.hasOption(ACTOR_KEY) ? commandLine.getOptionValue(ACTOR_KEY) : "";
 
-        lookupPaths = commandLine.hasOption(LOOKUP_PATHS_KEY) ? commandLine.getOptionValue(LOOKUP_PATHS_KEY) : "";
+        lookupPaths = commandLine.hasOption(LOOKUP_PATHS_KEY) ?
+                Arrays.asList(commandLine.getOptionValues(LOOKUP_PATHS_KEY)):
+                Collections.emptyList();
 
         modifiedTimeStrategy = determineModifiedTimeStrategy(commandLine);
 
@@ -349,7 +347,14 @@ public class ZnaiCliConfig {
         options.addOption(null, DOC_ID_KEY, true, "documentation id");
         options.addOption(null, MODIFIED_TIME_KEY, true,
                 "strategy of modified time for each page: constant or file last update time: constant, file (default)");
-        options.addOption(null, LOOKUP_PATHS_KEY, true, "additional lookup paths separated by colon(:)");
+
+        Option lookupPaths = Option.builder()
+                .desc("additional lookup paths separated by colon(:)")
+                .longOpt(LOOKUP_PATHS_KEY)
+                .hasArgs()
+                .build();
+        options.addOption(lookupPaths);
+
         options.addOption(null, DEPLOY_KEY, true, "documentation deploy root dir");
         options.addOption(null, PREVIEW_KEY, false, "preview mode");
         options.addOption(null, SERVE_KEY, false, "server mode");
