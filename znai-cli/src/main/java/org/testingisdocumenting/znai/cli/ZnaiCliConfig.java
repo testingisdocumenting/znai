@@ -51,6 +51,8 @@ public class ZnaiCliConfig {
     private static final String VALIDATE_EXTERNAL_LINKS = "validate-external-links";
 
     private static final String HELP_KEY = "help";
+    private static final String VERSION_KEY = "version";
+
     private static final int DEFAULT_PORT = 3333;
 
     public enum Mode {
@@ -229,6 +231,11 @@ public class ZnaiCliConfig {
             System.exit(1);
         }
 
+        if (commandLine.hasOption(VERSION_KEY)) {
+            printVersion();
+            System.exit(1);
+        }
+
         port = commandLine.hasOption(PORT_KEY) ? Integer.parseInt(commandLine.getOptionValue(PORT_KEY)) : DEFAULT_PORT;
         mode = determineMode(commandLine);
         specifiedCustomCommands = CliCommandHandlers.registeredCommandNames()
@@ -339,6 +346,7 @@ public class ZnaiCliConfig {
     private Options createOptions() {
         Options options = new Options();
         options.addOption(null, HELP_KEY, false, "print help");
+        options.addOption(null, VERSION_KEY, false, "print version");
         options.addOption(null, PORT_KEY, true, "server port");
         options.addOption(null, HOST_KEY, true, "server host");
         options.addOption(null, MARKUP_TYPE_KEY, true, "markup type");
