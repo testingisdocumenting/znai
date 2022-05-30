@@ -1,1 +1,1 @@
-* Add presentation support for [Line Chart] breakpoints (visuals/charts#presentation)  
+* Add presentation support for [Line Chart](visuals/charts#presentation) breakpoints  
