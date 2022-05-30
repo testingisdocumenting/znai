@@ -331,7 +331,11 @@ public class ZnaiCliConfig {
         try {
             return parser.parse(options, args);
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            ConsoleOutputs.out(Color.RED, e.getMessage());
+            ConsoleOutputs.out(Color.BLUE, "use --help to list all available parameters");
+            System.exit(2);
+
+            return null;
         }
     }
 
