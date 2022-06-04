@@ -116,7 +116,9 @@
     --znai-snippets-line-highlighted-background-color: #000;
 
     --znai-token-title-color: #dddddd;
-    --znai-token-highlight-background-color: rgba(147, 112, 219, 0.22);
+
+    --znai-token-highlight-text-color: var(--znai-background-color);
+    --znai-token-highlight-background-color: #b9abab;
 
     --znai-cli-command-param-highlight-color: #ae59c1;
     --znai-cli-command-color: #a0aeb5;

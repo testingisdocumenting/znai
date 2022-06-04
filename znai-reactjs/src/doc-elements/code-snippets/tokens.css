@@ -89,6 +89,7 @@
 .token.highlighted {
     padding: 2px 2px;
     border-radius: 4px;
+    color: var(--znai-token-highlight-text-color);
     background-color: var(--znai-token-highlight-background-color);
 }
 
