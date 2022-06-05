@@ -144,8 +144,7 @@
     --znai-snippets-background-color: #f8fafc;
     --znai-snippets-outer-border-color: #ddd;
     --znai-snippets-inner-border-color: #f3f3f3;
-    /*--znai-snippets-bullet-color: #eee;*/
-    /*--znai-snippets-bullet-background-color: var(--znai-brand-primary-color);*/
+
     --znai-snippets-title-color: #555;
     --znai-snippets-title-background-color: #efeff1;
     --znai-snippets-title-left-border-color: var(--znai-light-black);
@@ -157,6 +156,7 @@
     --znai-snippets-line-highlighted-background-color: rgba(41, 139, 231, .2);
 
     --znai-token-title-color: #383b3f;
+    --znai-token-highlight-text-color: var(--znai-regular-text-color);
     --znai-token-highlight-background-color: var(--znai-snippets-line-highlighted-background-color);
     --znai-cli-command-color: #383b3f;
     --znai-cli-command-param-highlight-color: #660e7a;

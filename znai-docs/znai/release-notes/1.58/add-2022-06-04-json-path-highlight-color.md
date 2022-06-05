@@ -1,0 +1,1 @@
+* More prominent colors for highlight of [JSON value](snippets/json)
