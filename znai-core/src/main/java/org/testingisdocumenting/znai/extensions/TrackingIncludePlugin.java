@@ -59,4 +59,9 @@ public class TrackingIncludePlugin implements IncludePlugin {
         paramsTracker.trackParams(pluginParams);
         return delegate.process(componentsRegistry, parserHandler, markupPath, pluginParams);
     }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        return delegate.parameters();
+    }
 }

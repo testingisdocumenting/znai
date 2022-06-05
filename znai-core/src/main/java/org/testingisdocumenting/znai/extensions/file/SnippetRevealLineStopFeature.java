@@ -17,7 +17,9 @@
 package org.testingisdocumenting.znai.extensions.file;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.features.PluginFeature;
 
 import java.util.List;
@@ -28,6 +30,8 @@ import java.util.stream.Stream;
  * Provides reveal stop line validation and conversion from text to indexes
  */
 public class SnippetRevealLineStopFeature implements PluginFeature {
+    public static final PluginParamsDefinition paramsDefinition = createParamsDefinition();
+
     private static final String REVEAL_LINE_STOP_KEY = "revealLineStop";
     private final SnippetContentProvider contentProvider;
     private final List<Object> revealLineStop;
@@ -56,5 +60,11 @@ public class SnippetRevealLineStopFeature implements PluginFeature {
 
     private boolean lineStopsProvided() {
         return !revealLineStop.isEmpty();
+    }
+
+    private static PluginParamsDefinition createParamsDefinition() {
+        return new PluginParamsDefinition()
+                .add(REVEAL_LINE_STOP_KEY, PluginParamType.LIST_OR_SINGLE_STRING_OR_NUMBER,
+                        "reveal line stop indexes for presentation", "[3, \"partial-match-text\"]");
     }
 }

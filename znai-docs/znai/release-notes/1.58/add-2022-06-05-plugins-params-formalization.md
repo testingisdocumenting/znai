@@ -1,0 +1,1 @@
+* Add initial plugin parameters formalization. Enforce parameters validation for [File Plugin](snippets/snippets-manipulation)  

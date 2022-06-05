@@ -44,7 +44,7 @@ Use an `include-empty-block` to align code snippets or other data block on both 
 :include-meta: {rightSide: false}
 
 Table and code snippets above are aligned by using an empty block on the right side. 
-:include-file: two-sides-pages.md {startLine: "Aligning Data in Columns", exclude: true, endLine: ":include-meta: {rightSide: false}"}
+:include-file: two-sides-pages.md {startLine: "Aligning Data in Columns", excludeStartEnd: true, endLine: ":include-meta: {rightSide: false}"}
 
 # Single Data Block Shortcut
 

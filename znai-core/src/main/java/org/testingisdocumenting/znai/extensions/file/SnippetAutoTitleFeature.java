@@ -17,6 +17,8 @@
 package org.testingisdocumenting.znai.extensions.file;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.features.PluginFeature;
 
 import java.util.Map;
@@ -25,6 +27,8 @@ import java.util.stream.Stream;
 import static java.lang.Boolean.TRUE;
 
 public class SnippetAutoTitleFeature implements PluginFeature {
+    public static final PluginParamsDefinition paramsDefinition = createParamsDefinition();
+
     private static final String TITLE_KEY = "title";
     private static final String AUTO_TITLE_KEY = "autoTitle";
 
@@ -54,5 +58,11 @@ public class SnippetAutoTitleFeature implements PluginFeature {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles() {
         return Stream.empty();
+    }
+
+    private static PluginParamsDefinition createParamsDefinition() {
+        return new PluginParamsDefinition()
+                .add(TITLE_KEY, PluginParamType.STRING, "title to use for snippet", "\"example of API usage\"")
+                .add(AUTO_TITLE_KEY, PluginParamType.BOOLEAN, "use snippet path as automatic title", "true");
     }
 }

@@ -166,11 +166,6 @@ class FileIncludePluginTest {
 
         code {
             resultingSnippet("file-replace-all.txt",
-                    "{replace: 'a'}")
-        } should throwException(expectedError)
-
-        code {
-            resultingSnippet("file-replace-all.txt",
                     "{replace: ['a']}")
         } should throwException(expectedError)
 

@@ -34,4 +34,6 @@ public interface Plugin {
     default SearchText textForSearch() {
         return null;
     }
+
+    default PluginParamsDefinition parameters() { return PluginParamsDefinition.undefined(); }
 }

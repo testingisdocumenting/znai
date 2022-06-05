@@ -213,17 +213,21 @@ public class MarkdownVisitor extends AbstractVisitor {
     private void handleIncludePlugin(PluginParams params) {
         try {
             IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());
+            includePlugin.parameters().validate(params);
+
             PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, path, params);
 
             parserHandler.onIncludePlugin(includePlugin, pluginResult);
         } catch (Exception e) {
-            throw new RuntimeException(createPluginErrorMessage("include", params, e), e);
+            throw new RuntimeException(createPluginErrorMessage("include", params, e));
         }
     }
 
     private void handleFencePlugin(PluginParams params, String fenceContent) {
         try {
             FencePlugin fencePlugin = Plugins.fencePluginById(params.getPluginId());
+            fencePlugin.parameters().validate(params);
+
             PluginResult pluginResult = fencePlugin.process(componentsRegistry, path, params, fenceContent);
 
             parserHandler.onFencePlugin(fencePlugin, pluginResult);
@@ -236,6 +240,8 @@ public class MarkdownVisitor extends AbstractVisitor {
     private void handleInlineCodePlugin(PluginParams params) {
         try {
             InlinedCodePlugin inlinedCodePlugin = Plugins.inlinedCodePluginById(params.getPluginId());
+            inlinedCodePlugin.parameters().validate(params);
+
             PluginResult pluginResult = inlinedCodePlugin.process(componentsRegistry, path, params);
             parserHandler.onInlinedCodePlugin(inlinedCodePlugin, pluginResult);
         } catch (Exception e) {
@@ -244,9 +250,9 @@ public class MarkdownVisitor extends AbstractVisitor {
     }
 
     private static String createPluginErrorMessage(String pluginType, PluginParams params, Exception e) {
-        return "error handling " + pluginType + " plugin <" + params.getPluginId() + ">: " + e.getMessage() + "\n" +
+        return "error handling " + pluginType + " plugin <" + params.getPluginId() + ">\n" +
                 "  free param: " + params.getFreeParam() + "\n" +
-                "  opts: " + JsonUtils.serialize(params.getOpts().toMap());
+                "  opts: " + JsonUtils.serialize(params.getOpts().toMap()) + "\n\n" + e.getMessage() + "\n";
     }
 
     private static PluginParams extractFencePluginParams(String nameAndParams) {

@@ -20,7 +20,9 @@ package org.testingisdocumenting.znai.extensions.file;
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.features.PluginFeatureList;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
@@ -39,6 +41,34 @@ public class FileIncludePlugin implements IncludePlugin {
     private PluginFeatureList features;
 
     private ManipulatedSnippetContentProvider contentProvider;
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        PluginParamsDefinition result = new PluginParamsDefinition();
+
+        result.add("lang", PluginParamType.STRING,
+                "force language to use for syntax highlight (by default is taken from file extension)", "yaml");
+        result.add("wide", PluginParamType.BOOLEAN,
+                "force snippet to take all the available horizontal space", "true");
+        result.add("wrap", PluginParamType.BOOLEAN,
+                "force snippet soft wrapping", "true");
+        result.add("readMore", PluginParamType.BOOLEAN,
+                "hides snippet behind \"read more\" button", "true");
+        result.add("readMoreVisibleLines", PluginParamType.NUMBER,
+                "number of lines to display when readMore is true", "10");
+        result.add("commentsType", PluginParamType.STRING,
+                "change way code comments are displayed: <inline> - use bullet points, <remove> - hide comments", "\"inline\"");
+        result.add("spoiler", PluginParamType.BOOLEAN,
+                "hide bullet points comments (commentsType: \"inline\") behind spoiler", "\"inline\"");
+
+        result.add(SnippetAutoTitleFeature.paramsDefinition);
+        result.add(SnippetHighlightFeature.paramsDefinition);
+        result.add(ManipulatedSnippetContentProvider.paramsDefinition);
+        result.add(SnippetRevealLineStopFeature.paramsDefinition);
+        result.add(CodeReferencesFeature.paramsDefinition);
+
+        return result;
+    }
 
     @Override
     public String id() {
