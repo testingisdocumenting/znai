@@ -20,6 +20,7 @@ package org.testingisdocumenting.znai.extensions.json;
 import com.jayway.jsonpath.JsonPath;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature;
 import org.testingisdocumenting.znai.extensions.validation.EntryPresenceValidation;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
@@ -39,6 +40,7 @@ public class JsonIncludePlugin implements IncludePlugin {
     private String fileName;
     private ResourcesResolver resourcesResolver;
     private Path pathsFilePath;
+    private CodeReferencesFeature codeReferencesFeature;
 
     @Override
     public String id() {
@@ -56,6 +58,7 @@ public class JsonIncludePlugin implements IncludePlugin {
                                 Path markupPath,
                                 PluginParams pluginParams) {
         resourcesResolver = componentsRegistry.resourceResolver();
+        codeReferencesFeature = new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams);
 
         fileName = pluginParams.getFreeParam();
         String json = resourcesResolver.textContent(fileName);
@@ -69,6 +72,7 @@ public class JsonIncludePlugin implements IncludePlugin {
         Map<String, Object> props = pluginParams.getOpts().toMap();
         props.put("data", content);
         props.put("paths", paths);
+        codeReferencesFeature.updateProps(props);
 
         return PluginResult.docElement("Json", props);
     }
@@ -80,7 +84,8 @@ public class JsonIncludePlugin implements IncludePlugin {
                 Stream.of(AuxiliaryFile.builtTime(pathsFilePath));
 
         return Stream.concat(pathsFile,
-                Stream.of(AuxiliaryFile.builtTime(componentsRegistry.resourceResolver().fullPath(fileName))));
+                Stream.concat(codeReferencesFeature.auxiliaryFiles(),
+                        Stream.of(AuxiliaryFile.builtTime(componentsRegistry.resourceResolver().fullPath(fileName)))));
     }
 
     @SuppressWarnings("unchecked")
