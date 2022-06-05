@@ -176,6 +176,12 @@ describe("codeUtils", () => {
         expect(resultClass).toEqual({SuperType: [6, 6], AnotherType: [10, 10]})
     })
 
+    it("finds token idx ignoring quotes", () => {
+        const tokens = ["hello", {type: "key", content: '"trader"'}]
+        const result = findTokensThatMatchExpressions(tokens, ['trader'])
+        expect(result).toEqual({'trader': [1, 1]})
+    })
+
     it("enhances tokens with on click information", () => {
         const tokens = parseCode('java', 'http.get("/end-point", http.header("h1", "v1"), ((header, body) -> {')
         const lines = splitTokensIntoLines(tokens)

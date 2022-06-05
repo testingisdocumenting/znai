@@ -63,8 +63,17 @@ a line by text matching or by providing a line index.
 
 You can turn parts of `JSON` into links to internal or external pages. 
 
+    :include-json: trader.json {
+      title: "trader",
+      referencesPath: "references/json-references-demo.csv"
+    }
 
-:include-json: book-store.json {include: "$..book[0,1]", title: "Books", referencesPath: "references/json-references-demo.csv"}
+:include-file: references/json-references-demo.csv {autoTitle: true}
+
+:include-json: trader.json {
+  title: "trader",
+  referencesPath: "references/json-references-demo.csv"
+}
 
 # Test Results
 

@@ -324,7 +324,7 @@ export function findTokensThatMatchExpressions(tokens, expressions) {
                 continue
             }
 
-            running += tokenText
+            running += removeQuotes(tokenText)
 
             if (expression.indexOf(running) !== 0) {
                 running = ''
@@ -337,5 +337,14 @@ export function findTokensThatMatchExpressions(tokens, expressions) {
         }
 
         return undefined
+    }
+
+    // for cases of json references as there won't be any match between "key1" and key1
+    function removeQuotes(text) {
+        if (text[0] === '"' && text[text.length - 1] === '"') {
+            return text.substr(1, text.length - 2)
+        }
+
+        return text
     }
 }

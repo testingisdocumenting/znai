@@ -1,0 +1,1 @@
+* Add [JSON Code References](snippets/json#code-references) support

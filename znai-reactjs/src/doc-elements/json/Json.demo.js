@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -93,4 +94,11 @@ export function jsonDemo(registry) {
         .add('with read more', () => <Json data={arrayOfObjectWithinObjectData} readMore={true}/>)
         .add('with line highlights', () => <Json data={arrayOfObjectWithinObjectData} highlight={[1, 3]}/>)
         .add('array of records', () => <Json data={arrayOfObject}/>)
+        .add('code references', () => <Json data={objectNestedData} references={buildReferences()}/>)
+}
+
+function buildReferences() {
+    return {
+        key23: {pageUrl: "#key23"}
+    }
 }
