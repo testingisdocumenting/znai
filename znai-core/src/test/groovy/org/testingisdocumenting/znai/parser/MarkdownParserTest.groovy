@@ -417,9 +417,11 @@ world""")
     void "include plugin error should provide context of the plugin"() {
         code {
             parse(":include-dummy: free-form text {param1: 'v1', param2: 'v2', throw: 'message to throw'}")
-        } should throwException("error handling include plugin <dummy>: message to throw\n" +
+        } should throwException("error handling include plugin <dummy>\n" +
                 "  free param: free-form text\n" +
-                "  opts: {\"param1\":\"v1\",\"param2\":\"v2\",\"throw\":\"message to throw\"}")
+                "  opts: {\"param1\":\"v1\",\"param2\":\"v2\",\"throw\":\"message to throw\"}\n" +
+                "\n" +
+                "message to throw\n")
     }
 
     @Test
@@ -474,9 +476,12 @@ world""")
                     "test\n" +
                     "block\n" +
                     "~~~")
-        } should throwException("error handling fence plugin <dummy>: some error\n" +
+        } should throwException("error handling fence plugin <dummy>\n" +
                 "  free param: \n" +
                 "  opts: {\"throw\":\"some error\"}\n" +
+                "\n" +
+                "some error\n" +
+                "\n" +
                 "  fence content:\n" +
                 "test\n" +
                 "block\n")
@@ -493,9 +498,11 @@ world""")
     void "inlined code plugin error should provide context of the plugin"() {
         code {
             parse("`:dummy: user-param {p1: 'v1', throw: 'process error'}`")
-        } should throwException("error handling inline code plugin <dummy>: process error\n" +
+        } should throwException("error handling inline code plugin <dummy>\n" +
                 "  free param: user-param\n" +
-                "  opts: {\"p1\":\"v1\",\"throw\":\"process error\"}")
+                "  opts: {\"p1\":\"v1\",\"throw\":\"process error\"}\n" +
+                "\n" +
+                "process error\n")
     }
 
     @Test
