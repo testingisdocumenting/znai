@@ -17,12 +17,12 @@
 package docgen
 
 import clicommands.CliCommands
-import org.testingisdocumenting.webtau.server.WebtauServer
+import org.testingisdocumenting.webtau.server.WebTauServer
 
 import static org.testingisdocumenting.webtau.WebTauDsl.*
 
 class ScaffoldUtils {
-    static WebtauServer scaffoldAndServe(String serverId) {
+    static WebTauServer scaffoldAndServe(String serverId) {
         def tempPath = fs.tempDir('znai-scaffold')
         CliCommands.znai.run('--new', cli.workingDir(tempPath))
 
