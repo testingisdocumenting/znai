@@ -19,7 +19,9 @@ package org.testingisdocumenting.znai.extensions.file;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.features.PluginFeature;
 
 import java.nio.file.Path;
@@ -32,7 +34,10 @@ import java.util.stream.Stream;
  * Provides highlight validation, reads highlights from highlightPath when provided
  */
 public class SnippetHighlightFeature implements PluginFeature {
+    public static final PluginParamsDefinition paramsDefinition = createParamsDefinition();
+
     private static final String HIGHLIGHT_KEY = "highlight";
+    private static final String HIGHLIGHT_PATH_KEY = "highlightPath";
 
     private final ComponentsRegistry componentsRegistry;
     private final Path highlightFileFullPath;
@@ -81,5 +86,12 @@ public class SnippetHighlightFeature implements PluginFeature {
 
     private boolean highlightProvided() {
         return !highlight.isEmpty();
+    }
+
+    private static PluginParamsDefinition createParamsDefinition() {
+        return new PluginParamsDefinition()
+                .add(HIGHLIGHT_KEY, PluginParamType.LIST_OR_SINGLE_STRING_OR_NUMBER,
+                        "lines to highlight by index or partial match", "[3, \"constructor\"] or \"class\"")
+                .add(HIGHLIGHT_PATH_KEY, PluginParamType.STRING, "path to a file with lines to highlight", "highlight.txt");
     }
 }

@@ -18,7 +18,9 @@ package org.testingisdocumenting.znai.extensions.file;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.features.PluginFeature;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.reference.DocReferencesParser;
@@ -34,6 +36,10 @@ import java.util.stream.Stream;
  * to handle parsing of code references, converting them to props, and handling auxiliary files.
  */
 public class CodeReferencesFeature implements PluginFeature {
+    public static final PluginParamsDefinition paramsDefinition = createParamsDefinition();
+
+    private static final String REFERENCES_PATH_KEY = "referencesPath";
+
     private final ComponentsRegistry componentsRegistry;
 
     private final Path referencesFullPath;
@@ -46,7 +52,7 @@ public class CodeReferencesFeature implements PluginFeature {
         this.componentsRegistry = componentsRegistry;
         this.markupPath = markupPath;
 
-        this.referencesPath = pluginParams.getOpts().get("referencesPath", null);
+        this.referencesPath = pluginParams.getOpts().get(REFERENCES_PATH_KEY, null);
         this.referencesFullPath = referencesPath != null ?
                 componentsRegistry.resourceResolver().fullPath(referencesPath):
                 null;
@@ -93,5 +99,10 @@ public class CodeReferencesFeature implements PluginFeature {
 
     private boolean referencesProvided() {
         return referencesFullPath != null;
+    }
+
+    private static PluginParamsDefinition createParamsDefinition() {
+        return new PluginParamsDefinition()
+                .add(REFERENCES_PATH_KEY, PluginParamType.STRING, "path to a file with code references", "\"myreferences.csv\"");
     }
 }

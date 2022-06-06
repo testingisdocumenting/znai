@@ -17,8 +17,11 @@
 package org.testingisdocumenting.znai.extensions.file;
 
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 
 public class ManipulatedSnippetContentProvider implements SnippetContentProvider {
+    public static final PluginParamsDefinition paramsDefinition = TextContentExtractor.createParamsDefinition();
+
     private final String snippetId;
     private final String extractedContent;
 

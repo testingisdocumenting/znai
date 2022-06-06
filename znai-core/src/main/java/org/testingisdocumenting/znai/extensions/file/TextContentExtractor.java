@@ -17,6 +17,8 @@
 
 package org.testingisdocumenting.znai.extensions.file;
 
+import org.testingisdocumenting.znai.extensions.PluginParamType;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.utils.StringUtils;
 
@@ -27,7 +29,48 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
 class TextContentExtractor {
+    static final String SURROUNDED_BY_KEY = "surroundedBy";
+    static final String SURROUNDED_BY_SEPARATOR_KEY = "surroundedBySeparator";
+
+    static final String START_LINE_KEY = "startLine";
+    static final String END_LINE_KEY = "endLine";
+    static final String NUMBER_OF_LINES_KEY = "numberOfLines";
+    static final String EXCLUDE_START_END_KEY = "excludeStartEnd";
+
+    static final String INCLUDE_REGEXP_KEY = "includeRegexp";
+    static final String EXCLUDE_REGEXP_KEY = "excludeRegexp";
+
+    static final String REPLACE_KEY = "replace";
+
     private TextContentExtractor() {
+    }
+
+    static PluginParamsDefinition createParamsDefinition() {
+        return new PluginParamsDefinition()
+                .add(SURROUNDED_BY_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
+                        "markers to use to extract portion of a snippet",
+                        "\"example-of-transaction\" or [\"example-of-creation\", \"example-of-consumption\"]")
+                .add(SURROUNDED_BY_SEPARATOR_KEY, PluginParamType.LIST_OR_SINGLE_STRING_WITH_NULLS,
+                        "separator(s) to use for multiple surrounded by blocks",
+                        "\"...\" or [\"\", \"...\"]")
+                .add(SURROUNDED_BY_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
+                        "markers to use to extract portion of a snippet",
+                        "\"example-of-transaction\" or [\"example-of-creation\", \"example-of-consumption\"]")
+                .add(START_LINE_KEY, PluginParamType.STRING,
+                        "partial match of start line for snippet extraction", "\"class\"")
+                .add(END_LINE_KEY, PluginParamType.STRING,
+                        "partial match of end line for snippet extraction", "\"class\"")
+                .add(NUMBER_OF_LINES_KEY, PluginParamType.NUMBER,
+                        "number of lines to extract given start line", "10")
+                .add(EXCLUDE_START_END_KEY, PluginParamType.BOOLEAN,
+                        "exclude start and end line for snippet extraction", "true")
+                .add(INCLUDE_REGEXP_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
+                        "include only lines matching provided regexp(s)", "\"import\" or [\"class R*Base\", \"import B\"")
+                .add(EXCLUDE_REGEXP_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
+                        "exclude lines matching provided regexp(s)", "\"// marker\" or [\"// marker1\", \"// marker2\"")
+                .add(REPLACE_KEY, PluginParamType.LIST_OF_ANY,
+                        "replaces values in the resulting snippet",
+                        "[\"old-value\", \"new-value\"] or [[\"old-value1\", \"new-value1\"], [\"old-value2\", \"new-value2\"]]");
     }
 
     public static String extractText(String contentId, String content, PluginParamsOpts opts) {
@@ -51,7 +94,7 @@ class TextContentExtractor {
 
     @SuppressWarnings("unchecked")
     private static Text replaceAll(Text text, PluginParamsOpts opts) {
-        List<?> fromToOrListOfFromTo = opts.getList("replace");
+        List<?> fromToOrListOfFromTo = opts.getList(REPLACE_KEY);
         if (fromToOrListOfFromTo.isEmpty()) {
             return text;
         }
@@ -77,12 +120,12 @@ class TextContentExtractor {
     }
 
     private static Text cropSurroundedBy(String contentId, Text text, PluginParamsOpts opts) {
-        List<String> surroundedBy = opts.getList("surroundedBy");
+        List<String> surroundedBy = opts.getList(SURROUNDED_BY_KEY);
         if (surroundedBy.isEmpty()) {
             return text;
         }
 
-        List<String> surroundedBySeparator = opts.getList("surroundedBySeparator");
+        List<String> surroundedBySeparator = opts.getList(SURROUNDED_BY_SEPARATOR_KEY);
         Iterator<String> separatorIt = surroundedBySeparator.iterator();
         String separator = separatorIt.hasNext() ? separatorIt.next() : null;
 
@@ -110,7 +153,7 @@ class TextContentExtractor {
     }
 
     private static Text cropStart(Text text, PluginParamsOpts opts) {
-        String startLine = opts.get("startLine");
+        String startLine = opts.get(START_LINE_KEY);
         if (startLine == null) {
             return text;
         }
@@ -119,12 +162,12 @@ class TextContentExtractor {
     }
 
     private static Text cropEnd(Text text, PluginParamsOpts opts) {
-        Number numberOfLines = opts.get("numberOfLines");
+        Number numberOfLines = opts.get(NUMBER_OF_LINES_KEY);
         if (numberOfLines != null) {
             return text.limitTo(numberOfLines);
         }
 
-        String endLine = opts.get("endLine");
+        String endLine = opts.get(END_LINE_KEY);
         if (endLine != null) {
             return text.limitToLineContaining(endLine);
         }
@@ -133,13 +176,13 @@ class TextContentExtractor {
     }
 
     private static Text excludeStartEnd(Text text, PluginParamsOpts opts) {
-        Boolean exclude = opts.get("excludeStartEnd", false);
+        Boolean exclude = opts.get(EXCLUDE_START_END_KEY, false);
         if (!exclude) {
             return text;
         }
 
-        boolean hasStartLine = opts.has("startLine");
-        boolean hasEndLine = opts.has("endLine");
+        boolean hasStartLine = opts.has(START_LINE_KEY);
+        boolean hasEndLine = opts.has(END_LINE_KEY);
         if ((hasStartLine && hasEndLine) || (!hasStartLine && !hasEndLine)) {
             return text.cropOneLineFromStartAndEnd();
         }
@@ -152,7 +195,7 @@ class TextContentExtractor {
     }
 
     private static Text includeRegexp(Text text, PluginParamsOpts opts) {
-        List<String> includeRegexps = opts.getList("includeRegexp");
+        List<String> includeRegexps = opts.getList(INCLUDE_REGEXP_KEY);
         if (includeRegexps.isEmpty()) {
             return text;
         }
@@ -161,7 +204,7 @@ class TextContentExtractor {
     }
 
     private static Text excludeRegexp(Text text, PluginParamsOpts opts) {
-        List<String> excludeRegexps = opts.getList("excludeRegexp");
+        List<String> excludeRegexps = opts.getList(EXCLUDE_REGEXP_KEY);
         if (excludeRegexps.isEmpty()) {
             return text;
         }
