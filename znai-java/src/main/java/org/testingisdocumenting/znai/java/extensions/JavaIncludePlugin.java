@@ -18,6 +18,9 @@
 package org.testingisdocumenting.znai.java.extensions;
 
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinitionCommon;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.file.*;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
@@ -39,11 +42,16 @@ import static org.testingisdocumenting.znai.java.parser.JavaCodeUtils.removeRetu
 import static org.testingisdocumenting.znai.java.parser.JavaCodeUtils.removeSemicolonAtEnd;
 
 public class JavaIncludePlugin extends JavaIncludePluginBase {
+    private final static String BODY_ONLY_KEY = "bodyOnly";
+    private final static String SIGNATURE_ONLY_KEY = "signatureOnly";
+    private final static String ENTRY_SEPARATOR_KEY = "entrySeparator";
+    private final static String REMOVE_RETURN_KEY = "removeReturn";
+    private final static String REMOVE_SEMICOLON_KEY = "removeSemicolon";
+
     private PluginParamsOpts opts;
     private boolean isBodyOnly;
     private boolean isSignatureOnly;
     private String entrySeparator;
-    private ManipulatedSnippetContentProvider contentProvider;
 
     @Override
     public String id() {
@@ -56,18 +64,36 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        return new PluginParamsDefinition()
+                .add(SnippetAutoTitleFeature.paramsDefinition)
+                .add(ENTRY_KEY, PluginParamType.LIST_OR_SINGLE_STRING, "entry to include content of",
+                        "\"myMethod\" or [\"myMethod1(String)\", \"myMethod2(Integer)\"]")
+                .add(ENTRY_SEPARATOR_KEY, PluginParamType.STRING, "separator to use when displaying multiple entries", "\"...\"")
+                .add(BODY_ONLY_KEY, PluginParamType.BOOLEAN, "renders content of an entry, omitting signature", "true")
+                .add(SIGNATURE_ONLY_KEY, PluginParamType.BOOLEAN, "renders only signature of an entry", "true")
+                .add(REMOVE_RETURN_KEY, PluginParamType.BOOLEAN, "remove <return> from a method content", "true")
+                .add(REMOVE_SEMICOLON_KEY, PluginParamType.BOOLEAN, "remove semicolon \";\" from a method content", "true")
+                .add(PluginParamsDefinitionCommon.snippetRenderConfig)
+                .add(ManipulatedSnippetContentProvider.paramsDefinition)
+                .add(CodeReferencesFeature.paramsDefinition)
+                .add(SnippetHighlightFeature.paramsDefinition)
+                .add(SnippetRevealLineStopFeature.paramsDefinition);
+    }
+
+    @Override
     public JavaIncludeResult process(JavaCode javaCode) {
         opts = pluginParams.getOpts();
 
-        isBodyOnly = opts.get("bodyOnly", false);
-        isSignatureOnly = opts.get("signatureOnly", false);
-        entrySeparator = opts.get("entrySeparator");
+        isBodyOnly = opts.get(BODY_ONLY_KEY, false);
+        isSignatureOnly = opts.get(SIGNATURE_ONLY_KEY, false);
+        entrySeparator = opts.get(ENTRY_SEPARATOR_KEY);
 
         if (isBodyOnly && isSignatureOnly) {
-            throw new IllegalArgumentException("specify only bodyOnly or signatureOnly");
+            throw new IllegalArgumentException("specify only " + BODY_ONLY_KEY + " or " + SIGNATURE_ONLY_KEY);
         }
 
-        contentProvider = new ManipulatedSnippetContentProvider(path,
+        ManipulatedSnippetContentProvider contentProvider = new ManipulatedSnippetContentProvider(path,
                 extractContent(javaCode),
                 pluginParams);
 
@@ -141,10 +167,10 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     private String extractBodyOnly(JavaMethod method) {
         String result = method.getBodyOnly();
 
-        boolean removeReturn = opts.get("removeReturn", false);
+        boolean removeReturn = opts.get(REMOVE_RETURN_KEY, false);
         result = removeReturn ? StringUtils.stripIndentation(removeReturn(result)) : result;
 
-        boolean removeSemicolon = opts.get("removeSemicolon", false);
+        boolean removeSemicolon = opts.get(REMOVE_SEMICOLON_KEY, false);
         result = removeSemicolon ? removeSemicolonAtEnd(result) : result;
 
         return result;

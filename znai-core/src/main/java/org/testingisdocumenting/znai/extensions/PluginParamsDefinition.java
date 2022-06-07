@@ -27,17 +27,28 @@ public class PluginParamsDefinition {
         private final String description;
         private final String example;
         private final PluginParamType type;
+        private final boolean isRequired;
 
-        Param(String name, PluginParamType type, String description, String example) {
+        Param(String name, PluginParamType type, String description, String example, boolean isRequired) {
             this.name = name;
             this.type = type;
             this.description = description;
             this.example = example;
+            this.isRequired = isRequired;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public boolean isRequired() {
+            return isRequired;
         }
 
         @Override
         public String toString() {
-            return name + ": " + description + " <" + type.getDescription() + "> (e.g. " + example + ")" ;
+            return name + ": " + (isRequired ? "REQUIRED " : "")
+                    + description + " <" + type.getDescription() + "> (e.g. " + example + ")";
         }
     }
 
@@ -56,8 +67,13 @@ public class PluginParamsDefinition {
         this.isDefined = isDefined;
     }
 
-    public PluginParamsDefinition add(String title, PluginParamType type, String description, String example) {
-        params.add(new Param(title, type, description, example));
+    public PluginParamsDefinition add(String name, PluginParamType type, String description, String example) {
+        params.add(new Param(name, type, description, example, false));
+        return this;
+    }
+
+    public PluginParamsDefinition addRequired(String name, PluginParamType type, String description, String example) {
+        params.add(new Param(name, type, description, example, true));
         return this;
     }
 
@@ -81,6 +97,12 @@ public class PluginParamsDefinition {
         List<String> unrecognizedNames = new ArrayList<>();
         List<String> typeMismatches = new ArrayList<>();
 
+        List<String> missingRequiredNames = params.stream()
+                .filter(Param::isRequired)
+                .filter(p -> !pluginParams.getOpts().has(p.name))
+                .map(Param::getName)
+                .collect(Collectors.toList());
+
         pluginParams.getOpts().forEach((name, value) -> {
             if (name.equals("meta")) {
                 return; // ignore meta parameters for now
@@ -98,11 +120,12 @@ public class PluginParamsDefinition {
             }
         });
 
-        if (unrecognizedNames.isEmpty() && typeMismatches.isEmpty()) {
+        if (unrecognizedNames.isEmpty() && typeMismatches.isEmpty() && missingRequiredNames.isEmpty()) {
             return;
         }
 
-        throw new IllegalArgumentException(renderValidationMessage(unrecognizedNames, typeMismatches));
+        throw new IllegalArgumentException(renderValidationMessage(missingRequiredNames,
+                unrecognizedNames, typeMismatches));
     }
 
     private String renderGiven(Object value) {
@@ -121,10 +144,18 @@ public class PluginParamsDefinition {
         return value.toString();
     }
 
-    private String renderValidationMessage(List<String> unrecognizedNames, List<String> typeMismatches) {
+    private String renderValidationMessage(List<String> missingRequiredNames,
+                                           List<String> unrecognizedNames,
+                                           List<String> typeMismatches) {
         StringBuilder message = new StringBuilder();
+        if (!missingRequiredNames.isEmpty()) {
+            message.append("missing required parameter(s): ")
+                    .append(String.join(", ", missingRequiredNames)).append("\n");
+        }
+
         if (!unrecognizedNames.isEmpty()) {
-            message.append("unrecognized parameter(s): ").append(String.join(", ", unrecognizedNames)).append("\n");
+            message.append("unrecognized parameter(s): ")
+                    .append(String.join(", ", unrecognizedNames)).append("\n");
         }
 
         if (!typeMismatches.isEmpty()) {

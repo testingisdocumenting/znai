@@ -39,6 +39,8 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 abstract public class JavaIncludePluginBase implements IncludePlugin {
+    protected final static String ENTRY_KEY = "entry";
+
     protected static class JavaDocElementsMapsAndSearchText {
         protected final List<Map<String, Object>> docElementsMaps;
         protected final String searchText;
@@ -76,7 +78,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
 
         path = pluginParams.getFreeParam();
         fullPath = componentsRegistry.resourceResolver().fullPath(path);
-        entries = pluginParams.getOpts().getList("entry");
+        entries = pluginParams.getOpts().getList(ENTRY_KEY);
 
         JavaCode javaCode = new JavaCode(componentsRegistry.resourceResolver().textContent(path));
         javaIncludeResult = process(javaCode);

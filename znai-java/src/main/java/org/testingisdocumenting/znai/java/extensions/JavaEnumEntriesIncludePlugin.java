@@ -17,9 +17,12 @@
 
 package org.testingisdocumenting.znai.java.extensions;
 
+import org.testingisdocumenting.znai.extensions.PluginParamType;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
+import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.java.parser.EnumEntry;
 import org.testingisdocumenting.znai.java.parser.JavaCode;
@@ -30,6 +33,7 @@ import java.util.*;
 import static java.util.stream.Collectors.joining;
 
 public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
+    private final static String EXCLUDE_DEPRECATED_KEY = "excludeDeprecated";
     @Override
     public String id() {
         return "java-enum-entries";
@@ -38,6 +42,14 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     @Override
     public IncludePlugin create() {
         return new JavaEnumEntriesIncludePlugin();
+    }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        return new PluginParamsDefinition()
+                .add("title", PluginParamType.STRING, "title to use for parameters block", "\"myMethod parameters\"")
+                .add(EXCLUDE_DEPRECATED_KEY, PluginParamType.BOOLEAN, "exclude deprecated entries from the list", "true")
+                .add(CodeReferencesFeature.paramsDefinition);
     }
 
     @Override
