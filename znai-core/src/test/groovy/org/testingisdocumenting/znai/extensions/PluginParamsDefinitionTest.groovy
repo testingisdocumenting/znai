@@ -27,34 +27,52 @@ class PluginParamsDefinitionTest {
             .add("highlight", PluginParamType.LIST_OR_SINGLE_STRING_OR_NUMBER,
                     "lines to highlight", "[4, \"class\"]")
             .add("autoTitle", PluginParamType.BOOLEAN, "auto title based on path", "true")
+            .addRequired("id", PluginParamType.STRING, "id of the concept", "true")
+
+    static def expectedPluginParametersHelp = "available plugin parameters:\n" +
+            "title: title of snippet <string> (e.g. \"example of API\")\n" +
+            "highlight: lines to highlight <list or a single value of either number(s) or string(s)> (e.g. [4, \"class\"])\n" +
+            "autoTitle: auto title based on path <boolean> (e.g. true)\n" +
+            "id: REQUIRED id of the concept <string> (e.g. true)"
 
     @Test
     void "passes validation"() {
-        paramsDefinition.validate(new PluginParams("file", [title: "my title"]))
+        paramsDefinition.validate(new PluginParams("file", [id: "id1", title: "my title"]))
     }
 
     @Test
     void "validates param names"() {
         code {
-            paramsDefinition.validate(new PluginParams("file", [totle: "my title"]))
+            paramsDefinition.validate(new PluginParams("file", [totle: "my title", id: "id1"]))
         } should throwException("unrecognized parameter(s): totle\n" +
-                "\n" +
-                "available plugin parameters:\n" +
-                "title: title of snippet <string> (e.g. \"example of API\")\n" +
-                "highlight: lines to highlight <list or a single value of either number(s) or string(s)> (e.g. [4, \"class\"])\n" +
-                "autoTitle: auto title based on path <boolean> (e.g. true)")
+                "\n" + expectedPluginParametersHelp)
     }
 
     @Test
     void "validates param types"() {
         code {
-            paramsDefinition.validate(new PluginParams("file", [autoTitle: "false"]))
+            paramsDefinition.validate(new PluginParams("file", [autoTitle: "false", id: "id2"]))
         } should throwException("type mismatches:\n" +
                 "  autoTitle given: \"false\" <string>, expected: <boolean> (e.g. true)\n" +
-                "\n" +
-                "available plugin parameters:\n" +
-                "title: title of snippet <string> (e.g. \"example of API\")\n" +
-                "highlight: lines to highlight <list or a single value of either number(s) or string(s)> (e.g. [4, \"class\"])\n" +
-                "autoTitle: auto title based on path <boolean> (e.g. true)")
+                "\n" + expectedPluginParametersHelp)
+    }
+
+    @Test
+    void "validates required parameters"() {
+        code {
+            paramsDefinition.validate(new PluginParams("file", [:]))
+        } should throwException("missing required parameter(s): id\n" +
+                "\n" + expectedPluginParametersHelp)
+    }
+
+    @Test
+    void "all validations at once"() {
+        code {
+            paramsDefinition.validate(new PluginParams("file", [totle: "my title", autoTitle: "false"]))
+        } should throwException("missing required parameter(s): id\n" +
+                "unrecognized parameter(s): totle\n" +
+                "type mismatches:\n" +
+                "  autoTitle given: \"false\" <string>, expected: <boolean> (e.g. true)\n" +
+                "\n" + expectedPluginParametersHelp)
     }
 }

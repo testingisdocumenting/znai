@@ -17,9 +17,12 @@
 
 package org.testingisdocumenting.znai.java.extensions;
 
+import org.testingisdocumenting.znai.extensions.PluginParamType;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
+import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.java.parser.JavaCode;
 import org.testingisdocumenting.znai.java.parser.JavaMethod;
@@ -43,10 +46,16 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        return new PluginParamsDefinition()
+                .addRequired(ENTRY_KEY, PluginParamType.STRING, "entry to extract parameters definition from",
+                        "\"myMethod\"")
+                .add("title", PluginParamType.STRING, "title to use for parameters block", "\"myMethod parameters\"")
+                .add(CodeReferencesFeature.paramsDefinition);
+    }
+
+    @Override
     public JavaIncludeResult process(JavaCode javaCode) {
-        if (entries.isEmpty()) {
-            throw new IllegalArgumentException("no entry param specified");
-        }
         JavaMethod javaMethod = javaCode.findMethod(entries.get(0));
 
         ApiParameters apiParameters = new ApiParameters(javaMethod.getAnchorPrefix());

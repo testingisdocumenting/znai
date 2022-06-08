@@ -17,6 +17,9 @@
 
 package org.testingisdocumenting.znai.java.extensions;
 
+import org.testingisdocumenting.znai.extensions.PluginParamType;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
+import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.java.parser.JavaCode;
 import org.testingisdocumenting.znai.java.parser.html.HtmlToDocElementConverter;
@@ -33,8 +36,16 @@ public class JavaDocIncludePlugin extends JavaIncludePluginBase {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        return new PluginParamsDefinition()
+                .add(ENTRY_KEY, PluginParamType.STRING, "entry to extract java doc from, if empty, then plugin extracts top level class java doc",
+                        "\"myMethod(String)\"")
+                .add(CodeReferencesFeature.paramsDefinition);
+    }
+
+    @Override
     public JavaIncludeResult process(JavaCode javaCode) {
-        String entry = pluginParams.getOpts().get("entry");
+        String entry = pluginParams.getOpts().get(ENTRY_KEY);
 
         HtmlToDocElementConverter.Result htmlParseResult = HtmlToDocElementConverter.convert(
                 componentsRegistry, markupPath,
