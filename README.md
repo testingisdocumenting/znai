@@ -6,15 +6,36 @@ Build functional, maintainable, beautiful User Guides with `Znai`.
 * Instant pages navigation 
 * Local search
 * Multiple integrations to work with Python, Java, OpenAPI, etc
-* Transform "getting started" sections into slideshow for your workshops.
-* Leverage happy path test results to enrich you documentation
+* Presentation Mode to automatically turn your documentation into slides, using the same content
+* Dark/Light runtime themes
+* Leverage automated test results to enrich your documentation with annotated images, REST responses, CLI outputs, etc
 * GitHub pages friendly
 
-![generated site example](znai-docs/znai/znai-overview.png)
+![generated site example](znai-docs/readme/znai-overview.png)
 
-![generated site example of flow diagram](znai-docs/znai/znai-flow-diagram.png)
+Rich Visuals such as [Charts](https://testingisdocumenting.org/znai/visuals/charts) and [Flow Diagrams](https://testingisdocumenting.org/znai/visuals/flow-diagrams)
 
-![generated site example of api params](znai-docs/znai/znai-api-params.png)
+![generated site example of charts](znai-docs/readme/znai-charts.png)
+
+Dark/Light mode switching 
+
+![generated site example of flow diagram](znai-docs/readme/znai-flow-diagram.png)
+
+Beautiful way to document your API 
+
+![generated site example of api params](znai-docs/readme/znai-api-parameters.png)
+
+Embedding of [External Resources](https://testingisdocumenting.org/znai/snippets/external-code-snippets) at build time 
+
+![generated site example of external code](znai-docs/readme/znai-external-code.png)
+
+Blazing fast local search with results preview
+
+![generated site example of search](znai-docs/readme/znai-search.png)
+
+Automatic Presentation from **the same content** with zero config
+
+![generated site example of presentation mode](znai-docs/readme/znai-presentation.png)
 
 # Preview
 
