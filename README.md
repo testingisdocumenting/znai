@@ -3,10 +3,11 @@
 Build functional, maintainable, beautiful User Guides with `Znai`.
 
 * Markdown with custom extensions and dozens of plugins: 
-  * content from external files with markers and filters support
-  * embedding of JavaDoc/PyDoc documentation text, preserving styles
-  * beautiful API documentation capabilities  
-  * rich visuals like flow diagrams and charts
+  * Content from external files with markers and filters support
+  * Simplified extraction of a function body content (working with examples) 
+  * Embedding of JavaDoc/PyDoc documentation text, preserving styles
+  * Beautiful API documentation capabilities  
+  * Rich visuals like flow diagrams and charts
   * etc
 * Instant pages navigation 
 * Local search
