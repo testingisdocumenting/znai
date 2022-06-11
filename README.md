@@ -2,7 +2,12 @@
 
 Build functional, maintainable, beautiful User Guides with `Znai`.
 
-* Markdown with custom extensions
+* Markdown with custom extensions and dozens of plugins: 
+  * content from external files with markers and filters support
+  * embedding of JavaDoc/PyDoc documentation text, preserving styles
+  * beautiful API documentation capabilities  
+  * rich visuals like flow diagrams and charts
+  * etc
 * Instant pages navigation 
 * Local search
 * Multiple integrations to work with Python, Java, OpenAPI, etc
@@ -12,6 +17,10 @@ Build functional, maintainable, beautiful User Guides with `Znai`.
 * GitHub pages friendly
 
 ![generated site example](znai-docs/readme/znai-overview.png)
+
+Embedding of [External Resources](https://testingisdocumenting.org/znai/snippets/external-code-snippets) at build time
+
+![generated site example of external code](znai-docs/readme/znai-external-code.png)
 
 Rich Visuals such as [Charts](https://testingisdocumenting.org/znai/visuals/charts) and [Flow Diagrams](https://testingisdocumenting.org/znai/visuals/flow-diagrams)
 
@@ -24,10 +33,6 @@ Dark/Light mode switching
 Beautiful way to document your API 
 
 ![generated site example of api params](znai-docs/readme/znai-api-parameters.png)
-
-Embedding of [External Resources](https://testingisdocumenting.org/znai/snippets/external-code-snippets) at build time 
-
-![generated site example of external code](znai-docs/readme/znai-external-code.png)
 
 Blazing fast local search with results preview
 
