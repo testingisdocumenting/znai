@@ -80,7 +80,7 @@ class GroovyIncludePlugin implements IncludePlugin {
         contentProvider = new ManipulatedSnippetContentProvider(path, content, pluginParams)
 
         features = new PluginFeatureList(
-                new SnippetAutoTitleFeature(contentProvider),
+                new SnippetAutoTitleFeature(contentProvider.snippetId()),
                 new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider),
                 new SnippetRevealLineStopFeature(pluginParams, contentProvider),
                 new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)

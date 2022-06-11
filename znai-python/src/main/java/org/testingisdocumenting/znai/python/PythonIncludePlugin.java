@@ -51,7 +51,7 @@ public class PythonIncludePlugin extends PythonIncludePluginBase {
                 extractContent(codeEntry),
                 pluginParams);
 
-        features.add(new SnippetAutoTitleFeature(contentProvider));
+        features.add(new SnippetAutoTitleFeature(contentProvider.snippetId()));
         features.add(new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider));
         features.add(new SnippetRevealLineStopFeature(pluginParams, contentProvider));
 
