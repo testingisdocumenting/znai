@@ -32,10 +32,10 @@ public class SnippetAutoTitleFeature implements PluginFeature {
     private static final String TITLE_KEY = "title";
     private static final String AUTO_TITLE_KEY = "autoTitle";
 
-    private final SnippetContentProvider snippetContentProvider;
+    private final String snippetId;
 
-    public SnippetAutoTitleFeature(SnippetContentProvider snippetContentProvider) {
-        this.snippetContentProvider = snippetContentProvider;
+    public SnippetAutoTitleFeature(String snippetId) {
+        this.snippetId = snippetId;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class SnippetAutoTitleFeature implements PluginFeature {
         }
 
         if (TRUE.equals(autoTitle)) {
-            props.put(TITLE_KEY, snippetContentProvider.snippetId());
+            props.put(TITLE_KEY, snippetId);
         }
     }
 

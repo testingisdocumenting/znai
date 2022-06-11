@@ -12,7 +12,7 @@ Comma-separated paths specified inside `paths` will be highlighted.
 
 Use `pathsFile` to specify a file to read paths from.
 
-:include-json: book-store-paths.json {title: "book-store-paths.json"} 
+:include-json: book-store-paths.json {autoTitle: true} 
 
     :include-json: book-store.json {pathsFile: "book-store-paths.json"}
 
@@ -27,11 +27,18 @@ pass [Json Path](https://github.com/json-path/JsonPath) as `include` property:
 
 # Title
 
-To specify a title use the `title` property:
+Use `title` parameter to specify a snippet title:
 
     :include-json: book-store.json {include: "$..book[0,1]", title: "Books"}
     
 :include-json: book-store.json {include: "$..book[0,1]", title: "Books"}
+
+Use `autoTitle: true` to automatically set title to specified file name
+
+  :include-json: book-store.json {include: "$..book[0,1]", autoTitle: true}
+
+:include-json: book-store.json {include: "$..book[0,1]", autoTitle: true}
+
 
 # Read More
 
