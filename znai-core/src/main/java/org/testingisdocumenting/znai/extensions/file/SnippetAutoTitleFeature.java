@@ -62,7 +62,7 @@ public class SnippetAutoTitleFeature implements PluginFeature {
 
     private static PluginParamsDefinition createParamsDefinition() {
         return new PluginParamsDefinition()
-                .add(TITLE_KEY, PluginParamType.STRING, "title to use for snippet", "\"example of API usage\"")
+                .add(TITLE_KEY, PluginParamType.STRING, "title to use for snippet", "\"title of the snippet\"")
                 .add(AUTO_TITLE_KEY, PluginParamType.BOOLEAN, "use snippet path as automatic title", "true");
     }
 }

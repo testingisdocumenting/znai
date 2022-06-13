@@ -17,18 +17,23 @@
 package org.testingisdocumenting.znai.extensions;
 
 public class PluginParamsDefinitionCommon {
-    public static final PluginParamsDefinition snippetReadMoreConfig = new PluginParamsDefinition()
+    public static final String TITLE_KEY = "title";
+
+    public static final PluginParamsDefinition snippetTitle = new PluginParamsDefinition()
+            .add(TITLE_KEY, PluginParamType.STRING, "title to use for snippet", "\"title of the snippet\"");
+
+    public static final PluginParamsDefinition snippetReadMore = new PluginParamsDefinition()
             .add("readMore", PluginParamType.BOOLEAN,
                     "hides snippet behind \"read more\" button", "true")
             .add("readMoreVisibleLines", PluginParamType.NUMBER,
                     "number of lines to display when readMore is true", "10");
 
-    public static final PluginParamsDefinition snippetRenderConfig = new PluginParamsDefinition()
+    public static final PluginParamsDefinition snippetRender = new PluginParamsDefinition()
             .add("wide", PluginParamType.BOOLEAN,
                     "force snippet to take all the available horizontal space", "true")
             .add("wrap", PluginParamType.BOOLEAN,
                     "force snippet soft wrapping", "true")
-            .add(snippetReadMoreConfig)
+            .add(snippetReadMore)
             .add("commentsType", PluginParamType.STRING,
                     "change way code comments are displayed: <inline> - use bullet points, <remove> - hide comments", "\"inline\"")
             .add("spoiler", PluginParamType.BOOLEAN,

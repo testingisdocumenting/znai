@@ -72,7 +72,7 @@ class PluginsTestUtils {
         return pluginAndParserHandler.parserHandler.docElement.content
     }
 
-    static Stream<AuxiliaryFile> processAndGetAuxiliaryFiles(String pluginDef) {
+    static Stream<AuxiliaryFile> processIncludeAndGetAuxiliaryFiles(String pluginDef) {
         def includePluginAndParserHandler = processAndGetIncludePluginAndParserHandler(pluginDef)
         return includePluginAndParserHandler.includePlugin.auxiliaryFiles(TEST_COMPONENTS_REGISTRY)
     }
@@ -99,9 +99,15 @@ class PluginsTestUtils {
     }
 
     static Map<String, Object> processFenceAndGetProps(PluginParams pluginParams,
-                                                               String textContent) {
+                                                       String textContent) {
         def pluginAndHandler = processAndGetFencePluginAndParserHandler(pluginParams, textContent)
         return pluginAndHandler.parserHandler.docElement.content[0].getProps()
+    }
+
+    static Stream<AuxiliaryFile> processFenceAndGetAuxiliaryFiles(PluginParams pluginParams,
+                                                                  String textContent) {
+        def pluginAndHandler = processAndGetFencePluginAndParserHandler(pluginParams, textContent)
+        return pluginAndHandler.fencePlugin.auxiliaryFiles(TEST_COMPONENTS_REGISTRY)
     }
 
     static FencePluginAndParserHandler processAndGetFencePluginAndParserHandler(PluginParams pluginParams,

@@ -1,6 +1,36 @@
-# Paths
+# Auto Formatting
 
-Use the `include-json` plugin to bring attention to a certain place in a `JSON` file. 
+Use `json` fence block to render auto formatted json and use extra capabilities described below
+  
+    ```json
+    [{"key1": "value1"}, {"key2": "value2"}]
+    ```
+
+```json
+[{"key1": "value1"}, {"key2": "value2"}]
+```
+
+Use `json` include plugin to read json from an external file 
+
+:include-file: simple.json {autoTitle: true}
+
+    :include-json: simple.json
+
+:include-json: simple.json
+
+# Highlight Values By Path
+
+Use the `paths` plugin parameter to bring attention to a certain place in a `JSON` file.
+
+    ```json {paths: "root[1].key2"}
+    [{"key1": "value1"}, {"key2": "value2"}]
+    ```
+
+```json {paths: "root[1].key2"}
+[{"key1": "value1"}, {"key2": "value2"}]
+```
+
+Pass multiple values to `paths` to highlight more than one leaf value 
 
     :include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]}
 
@@ -8,7 +38,7 @@ Comma-separated paths specified inside `paths` will be highlighted.
 
 :include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]}
 
-# Paths From File
+# Highlight By Path From File
 
 Use `pathsFile` to specify a file to read paths from.
 

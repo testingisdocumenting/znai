@@ -70,7 +70,7 @@ public class Plugins {
         final Plugin plugin = plugins.get(id);
         if (plugin == null) {
             throw new RuntimeException(
-                "can't find plugin with id '" + id + "'. full list\n: " + renderListOfPlugins(plugins.values()));
+                "can't find plugin with id '" + id + "'. full list:\n  " + renderListOfPlugins(plugins.values()));
         }
 
         return plugin.create();
@@ -101,6 +101,6 @@ public class Plugins {
     }
 
     private static <E extends Plugin> String renderListOfPlugins(Collection<E> list) {
-        return list.stream().map(p -> p.id() + ":" + p.getClass()).collect(joining("\n"));
+        return list.stream().map(p -> p.id() + ": " + p.getClass().getCanonicalName()).collect(joining("\n  "));
     }
 }

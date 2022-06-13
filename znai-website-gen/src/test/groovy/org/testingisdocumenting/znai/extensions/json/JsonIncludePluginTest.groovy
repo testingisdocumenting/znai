@@ -24,42 +24,35 @@ import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class JsonIncludePluginTest {
+    private def expectedFullData = [key1: 'value1', key2: [key21: 'value21', key22: 'value22']]
+
     @Test
     void "should display full json"() {
-        def elements = process('test.json')
-        elements.should == [data : [key1: 'value1', key2: [key21: 'value21',
-                                                           key22: 'value22']],
-                            paths: [],
-                            type : 'Json']
+        def props = process('test.json')
+        props.should == [data: expectedFullData, paths: []]
     }
 
     @Test
     void "single paths value is automatically converted to list"() {
-        def elements = process('test.json {paths: "root.key1"}')
-        elements.should == [data : [key1: 'value1', key2: [key21: 'value21',
-                                                           key22: 'value22']],
-                            paths: ['root.key1'],
-                            type : 'Json']
+        def props = process('test.json {paths: "root.key1"}')
+        props.should == [data: expectedFullData, paths: ['root.key1']]
     }
 
     @Test
     void "should read paths from file when provided"() {
-        def elements = process('test.json {pathsFile: "jsonFileWithPaths.json"}')
-        elements.should == [data     : [key1: 'value1', key2: [key21: 'value21',
-                                                               key22: 'value22']],
-                            pathsFile: 'jsonFileWithPaths.json',
-                            paths    : ['root.key1', 'root.key2'],
-                            type     : 'Json']
+        def propos = process('test.json {pathsFile: "jsonFileWithPaths.json"}')
+        propos.should == [data     : expectedFullData,
+                          pathsFile: 'jsonFileWithPaths.json',
+                          paths    : ['root.key1', 'root.key2']]
     }
 
     @Test
     void "should display subset of json"() {
-        def elements = process('test.json {include: "$.key2"}')
-        elements.should == [data   : [key21: 'value21',
-                                      key22: 'value22'],
-                            paths  : [],
-                            include: '$.key2',
-                            type   : 'Json']
+        def props = process('test.json {include: "$.key2"}')
+        props.should == [data   : [key21: 'value21',
+                                   key22: 'value22'],
+                         paths  : [],
+                         include: '$.key2']
     }
 
     @Test
@@ -75,9 +68,18 @@ class JsonIncludePluginTest {
     }
 
     @Test
+    void "should auto title"() {
+        def props = process('test.json {"autoTitle": true}')
+        props.should == [data     : expectedFullData,
+                         autoTitle: true,
+                         title    : "test.json",
+                         paths    : []]
+    }
+
+    @Test
     void "auxiliary files should include pathsFile"() {
         def auxiliaryFilesStream =
-                PluginsTestUtils.processAndGetAuxiliaryFiles(
+                PluginsTestUtils.processIncludeAndGetAuxiliaryFiles(
                         ':include-json: test.json {pathsFile: "jsonFileWithPaths.json"}')
 
         auxiliaryFilesStream.collect { af -> af.path.fileName.toString() }
@@ -85,7 +87,6 @@ class JsonIncludePluginTest {
     }
 
     private static def process(String params) {
-        def result = PluginsTestUtils.processInclude(":include-json: $params")
-        return result[0].toMap()
+        return PluginsTestUtils.processIncludeAndGetProps(":include-json: $params")
     }
 }

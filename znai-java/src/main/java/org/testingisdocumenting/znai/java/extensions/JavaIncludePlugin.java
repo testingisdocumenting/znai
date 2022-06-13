@@ -66,6 +66,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     @Override
     public PluginParamsDefinition parameters() {
         return new PluginParamsDefinition()
+                .add(PluginParamsDefinitionCommon.snippetTitle)
                 .add(SnippetAutoTitleFeature.paramsDefinition)
                 .add(ENTRY_KEY, PluginParamType.LIST_OR_SINGLE_STRING, "entry to include content of",
                         "\"myMethod\" or [\"myMethod1(String)\", \"myMethod2(Integer)\"]")
@@ -74,7 +75,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
                 .add(SIGNATURE_ONLY_KEY, PluginParamType.BOOLEAN, "renders only signature of an entry", "true")
                 .add(REMOVE_RETURN_KEY, PluginParamType.BOOLEAN, "remove <return> from a method content", "true")
                 .add(REMOVE_SEMICOLON_KEY, PluginParamType.BOOLEAN, "remove semicolon \";\" from a method content", "true")
-                .add(PluginParamsDefinitionCommon.snippetRenderConfig)
+                .add(PluginParamsDefinitionCommon.snippetRender)
                 .add(ManipulatedSnippetContentProvider.paramsDefinition)
                 .add(CodeReferencesFeature.paramsDefinition)
                 .add(SnippetHighlightFeature.paramsDefinition)

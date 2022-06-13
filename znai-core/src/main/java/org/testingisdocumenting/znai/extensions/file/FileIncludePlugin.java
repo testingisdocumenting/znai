@@ -46,7 +46,8 @@ public class FileIncludePlugin implements IncludePlugin {
         result.add("lang", PluginParamType.STRING,
                 "force language to use for syntax highlight (by default is taken from file extension)", "yaml");
 
-        result.add(PluginParamsDefinitionCommon.snippetRenderConfig);
+        result.add(PluginParamsDefinitionCommon.snippetRender);
+        result.add(PluginParamsDefinitionCommon.snippetTitle);
         result.add(SnippetAutoTitleFeature.paramsDefinition);
         result.add(SnippetHighlightFeature.paramsDefinition);
         result.add(ManipulatedSnippetContentProvider.paramsDefinition);

@@ -22,6 +22,7 @@ snippets
     inlined-code-snippets
     api-parameters
     code-references
+    json
     java
     java-doc
     groovy
@@ -29,7 +30,6 @@ snippets
     doxygen
     typescript
     cpp
-    json
     xml
     open-API
     CLI
