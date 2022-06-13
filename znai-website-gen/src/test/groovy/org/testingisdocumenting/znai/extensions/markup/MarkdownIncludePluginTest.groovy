@@ -26,7 +26,7 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 class MarkdownIncludePluginTest {
     @Test
     void "should register passed file as auxiliary file"() {
-        def auxiliaryFilesStream = PluginsTestUtils.processAndGetAuxiliaryFiles(
+        def auxiliaryFilesStream = PluginsTestUtils.processIncludeAndGetAuxiliaryFiles(
                         ':include-markdown: test.md')
 
         auxiliaryFilesStream.collect { af -> af.path.fileName.toString() }.should == ['test.md']
@@ -66,7 +66,7 @@ class MarkdownIncludePluginTest {
     @Test
     void "should validate file presence"() {
         code {
-            PluginsTestUtils.processAndGetAuxiliaryFiles(
+            PluginsTestUtils.processIncludeAndGetAuxiliaryFiles(
                     ':include-markdown: wrongfile.md')
         } should throwException("can't find resource: wrongfile.md")
     }

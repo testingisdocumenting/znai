@@ -1,6 +1,5 @@
 /*
- * Copyright 2021 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2022 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,49 +22,36 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.features.PluginFeature;
-import org.testingisdocumenting.znai.extensions.file.SnippetAutoTitleFeature;
-import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
-import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
-public class JsonIncludePlugin extends JsonBasePlugin implements IncludePlugin {
-    private String fileName;
-
+public class JsonFencePlugin extends JsonBasePlugin implements FencePlugin {
     @Override
-    public String id() {
-        return "json";
-    }
-
-    @Override
-    public IncludePlugin create() {
-        return new JsonIncludePlugin();
-    }
-
-    @Override
-    protected void updateParams(PluginParamsDefinition paramsDefinition) {
-        paramsDefinition.add(SnippetAutoTitleFeature.paramsDefinition);
-    }
-
-    @Override
-    protected Stream<PluginFeature> additionalPluginFeatures() {
-        return Stream.of(new SnippetAutoTitleFeature(fileName));
-    }
-
-    @Override
-    protected Stream<AuxiliaryFile> additionalAuxiliaryFiles() {
-        return Stream.of(AuxiliaryFile.builtTime(resourcesResolver.fullPath(fileName)));
+    public FencePlugin create() {
+        return new JsonFencePlugin();
     }
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry,
-                                ParserHandler parserHandler,
                                 Path markupPath,
-                                PluginParams pluginParams) {
-        fileName = pluginParams.getFreeParam();
-        String json = componentsRegistry.resourceResolver().textContent(fileName);
+                                PluginParams pluginParams,
+                                String content) {
+        return commonProcess(componentsRegistry, markupPath, pluginParams, content);
+    }
 
-        return commonProcess(componentsRegistry, markupPath, pluginParams, json);
+    @Override
+    protected void updateParams(PluginParamsDefinition paramsDefinition) {
+    }
+
+    @Override
+    protected Stream<PluginFeature> additionalPluginFeatures() {
+        return Stream.of();
+    }
+
+    @Override
+    protected Stream<AuxiliaryFile> additionalAuxiliaryFiles() {
+        return Stream.of();
     }
 }
