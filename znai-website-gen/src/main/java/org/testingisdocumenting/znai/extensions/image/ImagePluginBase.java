@@ -40,6 +40,8 @@ abstract class ImagePluginBase implements Plugin {
     protected boolean isExternal;
 
     private ResourcesResolver resourceResolver;
+    protected Double scale;
+    protected Double pixelRatioFromOpts;
 
     @Override
     public String id() {
@@ -54,43 +56,47 @@ abstract class ImagePluginBase implements Plugin {
         return Stream.concat(Stream.of(auxiliaryFile), additionalAuxiliaryFiles());
     }
 
-    protected abstract List<Map<String, ?>> annotationShapes();
+    protected abstract List<Map<String, ?>> annotationShapes(BufferedImage image);
 
     protected abstract Double pixelRatio();
 
     protected abstract Stream<AuxiliaryFile> additionalAuxiliaryFiles();
 
     protected PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+        PluginParamsOpts opts = pluginParams.getOpts();
+        // TODO use deprecation params API
+        scale = opts.get("scaleRatio", opts.get("scale", 1.0));
+        pixelRatioFromOpts = opts.get("pixelRatio");
+
         resourceResolver = componentsRegistry.resourceResolver();
         DocStructure docStructure = componentsRegistry.docStructure();
         String imagePath = pluginParams.getFreeParam();
 
         isExternal = UrlUtils.isExternal(imagePath);
-        PluginParamsOpts opts = pluginParams.getOpts();
         Map<String, Object> props = new LinkedHashMap<>(opts.toMap());
 
         if (isExternal) {
             props.put("imageSrc", imagePath);
-            props.put("shapes", annotationShapes());
+            props.put("shapes", annotationShapes(null));
             docStructure.validateUrl(markupPath, "<image plugin>", new DocUrl(imagePath));
         } else {
             auxiliaryFile = resourceResolver.runtimeAuxiliaryFile(imagePath);
-            Double scale = opts.get("scaleRatio", opts.get("scale", 1.0));
+            BufferedImage bufferedImage = resourceResolver.imageContent(imagePath);
+
             props.put("imageSrc", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
             props.put("timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()));
-            props.put("shapes", annotationShapes());
-            setWidthHeight(props, scale, imagePath);
+            props.put("shapes", annotationShapes(bufferedImage));
+            setWidthHeight(bufferedImage, props, scale);
         }
 
         return PluginResult.docElement("AnnotatedImage", props);
     }
 
-    private void setWidthHeight(Map<String, Object> props,
-                                Double scale,
-                                String imagePathValue) {
+    private void setWidthHeight(BufferedImage bufferedImage,
+                                Map<String, Object> props,
+                                Double scale) {
         Number pixelRatio = pixelRatio();
 
-        BufferedImage bufferedImage = resourceResolver.imageContent(imagePathValue);
         props.put("width", scale * bufferedImage.getWidth() / pixelRatio.doubleValue());
         props.put("height", scale * bufferedImage.getHeight() / pixelRatio.doubleValue());
     }

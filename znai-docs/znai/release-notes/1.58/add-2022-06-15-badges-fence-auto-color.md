@@ -1,0 +1,1 @@
+* Add [Image Badge Annotation](visuals/image-annotations#badges) auto color detection   
