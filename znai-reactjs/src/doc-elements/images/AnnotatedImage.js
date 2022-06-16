@@ -34,15 +34,15 @@ class AnnotatedImage extends Component {
             caption,
             captionBottom,
             fit,
+            scale,
             border,
             timestamp
         } = this.props
 
-        const fullWidth = cssVarPixelValue("znai-single-column-full-width");
-        const scale = fit ? fullWidth / width : 1;
+        const scaleToUse = calcScale()
 
-        const scaledWidth = width * scale
-        const scaledHeight = height * scale
+        const scaledWidth = width * scaleToUse
+        const scaledHeight = height * scaleToUse
 
         const imageWidth = scaledWidth + "px"
         const imageHeight = scaledHeight + "px"
@@ -71,7 +71,7 @@ class AnnotatedImage extends Component {
                 <div style={annotationsContainerStyle}>
                     <svg width={imageWidth} height={imageHeight}>
                         {isStatic ?
-                            annotations.staticAnnotationsToRender(scale):
+                            annotations.staticAnnotationsToRender(scaleToUse):
                             annotations.interactiveAnnotationsToRender(selectedId)}
 
                         <filter id="highlight">
@@ -85,6 +85,15 @@ class AnnotatedImage extends Component {
                 {captionElement}
             </div>
         )
+
+        function calcScale() {
+            if (fit) {
+                const fullWidth = cssVarPixelValue("znai-single-column-full-width");
+                return  fullWidth / width;
+            }
+
+            return scale || 1.0;
+        }
     }
 }
 

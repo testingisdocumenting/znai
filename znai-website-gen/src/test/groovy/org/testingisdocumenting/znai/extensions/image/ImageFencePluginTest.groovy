@@ -27,7 +27,7 @@ class ImageFencePluginTest {
     @Test
     void "should generate badge shapes from fence block text"() {
         def handler = PluginsTestUtils.processAndGetFencePluginAndParserHandler(
-                new PluginParams('image', 'dummy.png', [:]),
+                new PluginParams('image', 'dummy.png', [scale: 2.0d]),
                 "100, 200\n" +
                         "150, 40\n").parserHandler
 
@@ -38,6 +38,7 @@ class ImageFencePluginTest {
                           timestamp: greaterThanOrEqual(0),
                           width: greaterThan(0),
                           height: greaterThan(0),
+                          scale: 2.0,
                           type: "AnnotatedImage"]]
     }
 }

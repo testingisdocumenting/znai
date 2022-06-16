@@ -1,0 +1,1 @@
+* Fix: Image explicit `scale` now respects [Annotations Placement](visuals/image-annotations)

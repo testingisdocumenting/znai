@@ -2,12 +2,12 @@
 
 Use `image` fence plugin to display Image and manually provide badge coordinates 
 
-    ```image testingisdocumenting.png {pixelRatio: 2.0}
+    ```image testingisdocumenting.png {pixelRatio: 2.0, fit: true} 
     490,300
     900,700
     ```
 
-```image testingisdocumenting.png {pixelRatio: 2.0}
+```image testingisdocumenting.png {pixelRatio: 2.0, fit: true} 
 490,300
 900,700
 ```
@@ -33,7 +33,7 @@ There are different types of annotations:
 
 It is possible to generate an annotations file by using UI testing framework.
 
-For example [webtau](https://github.com/testingisdocumenting/webtau) automatically generates an annotations file in addition to 
+For example [WebTau](https://github.com/testingisdocumenting/webtau) automatically generates an annotations file in addition to 
 capturing a screenshot. 
 
 # Path Shortcut 

@@ -39,6 +39,10 @@ public class PluginParamsOpts {
         return has(name) ? get(name) : defaultValue;
     }
 
+    public Number getNumber(String name, Number defaultValue) {
+        return get(name, defaultValue);
+    }
+
     public void assignToProps(Map<String, ?> props, String name) {
         if (has(name)) {
             props.put(name, get(name));
