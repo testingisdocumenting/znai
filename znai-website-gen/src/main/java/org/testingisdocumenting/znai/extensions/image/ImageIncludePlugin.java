@@ -28,6 +28,7 @@ import org.testingisdocumenting.znai.utils.FilePathUtils;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
+import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
@@ -63,12 +64,16 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
 
     @Override
     @SuppressWarnings("unchecked")
-    protected List<Map<String, ?>> annotationShapes() {
+    protected List<Map<String, ?>> annotationShapes(BufferedImage image) {
         return annotations != null ? (List<Map<String, ?>>) annotations.get("shapes") : Collections.emptyList();
     }
 
     @Override
     protected Double pixelRatio() {
+        if (pixelRatioFromOpts != null) {
+            return pixelRatioFromOpts;
+        }
+
         return (annotations == null || !annotations.containsKey("pixelRatio")) ?
                 1.0 :
                 ((Number) annotations.get("pixelRatio")).doubleValue();

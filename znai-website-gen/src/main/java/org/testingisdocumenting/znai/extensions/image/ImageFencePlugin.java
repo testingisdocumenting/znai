@@ -25,6 +25,7 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Path;
@@ -49,8 +50,10 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
     }
 
     @Override
-    protected List<Map<String, ?>> annotationShapes() {
+    protected List<Map<String, ?>> annotationShapes(BufferedImage image) {
         List<Map<String, ?>> badges = new ArrayList<>();
+
+        Double pixelRatio = pixelRatio();
 
         CSVParser csvRecords = readCsvRecords(content);
         int badgeNumber = 1;
@@ -60,9 +63,17 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
 
             Map<String, Object> badge = new HashMap<>();
             badge.put("type", "badge");
-            badge.put("x", toNum(xText));
-            badge.put("y", toNum(yText));
+
+            Double x = toNum(xText);
+            Double y = toNum(yText);
+
+            badge.put("x", x);
+            badge.put("y", y);
             badge.put("text", String.valueOf(badgeNumber));
+            badge.put("invertedColors", ImageUtils.colorDarknessRatio(image,
+                    (int) (x * pixelRatio),
+                    (int) (y * pixelRatio),
+                    (int) (10 * pixelRatio)) > 0.5);
 
             badges.add(badge);
 
@@ -74,6 +85,10 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
 
     @Override
     protected Double pixelRatio() {
+        if (pixelRatioFromOpts != null) {
+            return pixelRatioFromOpts;
+        }
+
         return 1.0;
     }
 

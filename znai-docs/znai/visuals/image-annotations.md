@@ -1,16 +1,18 @@
 # Badges
 
 Use `image` fence plugin to display Image and manually provide badge coordinates 
-    
-    ```image word-toolbar.jpg
-    100,50
-    150,80
+
+    ```image testingisdocumenting.png {pixelRatio: 2.0}
+    490,300
+    900,700
     ```
 
-```image word-toolbar.jpg
-100,50
-150,80
+```image testingisdocumenting.png {pixelRatio: 2.0}
+490,300
+900,700
 ```
+
+Note: Color of badges change based on the background color
 
 # Annotations File
 
