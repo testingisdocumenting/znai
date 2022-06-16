@@ -33,8 +33,8 @@ class ImageFencePluginTest {
 
         def props = handler.docElement.contentToListOfMaps()
         props.should == [[imageSrc: '/test-doc/dummy.png',
-                          shapes: [[x: 100.0, y: 200.0, text: "1", type: "badge"],
-                                   [x: 150.0, y: 40.0, text: "2", type: "badge"]],
+                          shapes: [[x: 100.0, y: 200.0, text: "1", type: "badge", invertedColors: false],
+                                   [x: 150.0, y: 40.0, text: "2", type: "badge", invertedColors: false]],
                           timestamp: greaterThanOrEqual(0),
                           width: greaterThan(0),
                           height: greaterThan(0),
