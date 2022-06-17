@@ -43,6 +43,10 @@ export function imageDemo(registry) {
       <EmbeddedAnnotatedImage {...badgeAlignment(450, 350)} {...fitImage()} {...noFitImageAnnotations()}/>
     ))
 
+    registry.add('badge alignment manual scale param', () => (
+      <EmbeddedAnnotatedImage {...badgeAlignment(450, 350)} {...scaleImage(0.6)} {...noFitImageAnnotations()}/>
+    ))
+
     registry.add('simple annotations', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}/>)
     registry.add('simple annotations with border', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}
                                                                                  border={true}/>)
@@ -75,6 +79,13 @@ function noFitImage() {
     return {
         ...fitImage(),
         fit: false
+    }
+}
+
+function scaleImage(scale) {
+    return {
+        ...noFitImage(),
+        scale
     }
 }
 

@@ -66,7 +66,7 @@ class Annotations {
                 onChange: this.onChange,
                 onSelection: this.onSelection
             })
-            return <InteractiveAnnotation key={shape.id} shape={shape} isSelected={selectedId === shape.id}/>
+            return <InteractiveAnnotation key={shape.id} shape={shape} isSelected={selectedId === shape.id} />
         })
     }
 

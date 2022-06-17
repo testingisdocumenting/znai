@@ -28,6 +28,7 @@ import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,29 +56,32 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
 
         Double pixelRatio = pixelRatio();
 
-        CSVParser csvRecords = readCsvRecords(content);
-        int badgeNumber = 1;
-        for (CSVRecord record : csvRecords) {
-            String xText = record.get(0);
-            String yText = record.get(1);
+        try (CSVParser csvRecords = readCsvRecords(content)) {
+            int badgeNumber = 1;
+            for (CSVRecord record : csvRecords) {
+                String xText = record.get(0);
+                String yText = record.get(1);
 
-            Map<String, Object> badge = new HashMap<>();
-            badge.put("type", "badge");
+                Map<String, Object> badge = new HashMap<>();
+                badge.put("type", "badge");
 
-            Double x = toNum(xText);
-            Double y = toNum(yText);
+                Double x = toNum(xText);
+                Double y = toNum(yText);
 
-            badge.put("x", x);
-            badge.put("y", y);
-            badge.put("text", String.valueOf(badgeNumber));
-            badge.put("invertedColors", ImageUtils.colorDarknessRatio(image,
-                    (int) (x * pixelRatio),
-                    (int) (y * pixelRatio),
-                    (int) (10 * pixelRatio)) > 0.5);
+                badge.put("x", x);
+                badge.put("y", y);
+                badge.put("text", String.valueOf(badgeNumber));
+                badge.put("invertedColors", ImageUtils.colorDarknessRatio(image,
+                        (int) (x * pixelRatio),
+                        (int) (y * pixelRatio),
+                        (int) (10 * pixelRatio)) > 0.5);
 
-            badges.add(badge);
+                badges.add(badge);
 
-            badgeNumber++;
+                badgeNumber++;
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
         }
 
         return badges;

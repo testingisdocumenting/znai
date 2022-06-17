@@ -36,11 +36,12 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 abstract class ImagePluginBase implements Plugin {
+    private static final String SCALE_KEY = "scale";
+    private static final String SCALE_DEPRECATED_KEY = "scaleRatio";
+
     protected AuxiliaryFile auxiliaryFile;
     protected boolean isExternal;
 
-    private ResourcesResolver resourceResolver;
-    protected Double scale;
     protected Double pixelRatioFromOpts;
 
     @Override
@@ -64,11 +65,9 @@ abstract class ImagePluginBase implements Plugin {
 
     protected PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         PluginParamsOpts opts = pluginParams.getOpts();
-        // TODO use deprecation params API
-        scale = opts.get("scaleRatio", opts.get("scale", 1.0));
         pixelRatioFromOpts = opts.get("pixelRatio");
 
-        resourceResolver = componentsRegistry.resourceResolver();
+        ResourcesResolver resourceResolver = componentsRegistry.resourceResolver();
         DocStructure docStructure = componentsRegistry.docStructure();
         String imagePath = pluginParams.getFreeParam();
 
@@ -86,18 +85,28 @@ abstract class ImagePluginBase implements Plugin {
             props.put("imageSrc", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
             props.put("timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()));
             props.put("shapes", annotationShapes(bufferedImage));
-            setWidthHeight(bufferedImage, props, scale);
+            setWidthHeight(bufferedImage, props);
         }
+
+        updatePropsScale(props, opts);
 
         return PluginResult.docElement("AnnotatedImage", props);
     }
 
     private void setWidthHeight(BufferedImage bufferedImage,
-                                Map<String, Object> props,
-                                Double scale) {
+                                Map<String, Object> props) {
         Number pixelRatio = pixelRatio();
 
-        props.put("width", scale * bufferedImage.getWidth() / pixelRatio.doubleValue());
-        props.put("height", scale * bufferedImage.getHeight() / pixelRatio.doubleValue());
+        props.put("width", bufferedImage.getWidth() / pixelRatio.doubleValue());
+        props.put("height", bufferedImage.getHeight() / pixelRatio.doubleValue());
+    }
+
+    private static void updatePropsScale(Map<String, Object> props, PluginParamsOpts opts) {
+        // TODO use deprecation params API
+        if (opts.has(SCALE_DEPRECATED_KEY)) {
+            props.put(SCALE_KEY, opts.getNumber(SCALE_DEPRECATED_KEY));
+        } else if (opts.has(SCALE_KEY)) {
+            props.put(SCALE_KEY, opts.getNumber(SCALE_KEY));
+        }
     }
 }
