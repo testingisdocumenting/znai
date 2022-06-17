@@ -36,6 +36,9 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 abstract class ImagePluginBase implements Plugin {
+    private static final String SCALE_KEY = "scale";
+    private static final String SCALE_DEPRECATED_KEY = "scaleRatio";
+
     protected AuxiliaryFile auxiliaryFile;
     protected boolean isExternal;
 
@@ -85,7 +88,7 @@ abstract class ImagePluginBase implements Plugin {
             setWidthHeight(bufferedImage, props);
         }
 
-        props.put("scale", extractScale(opts)); // TODO deprecation API should automatically take an old value
+        updatePropsScale(props, opts);
 
         return PluginResult.docElement("AnnotatedImage", props);
     }
@@ -98,12 +101,12 @@ abstract class ImagePluginBase implements Plugin {
         props.put("height", bufferedImage.getHeight() / pixelRatio.doubleValue());
     }
 
-    private static Double extractScale(PluginParamsOpts opts) {
+    private static void updatePropsScale(Map<String, Object> props, PluginParamsOpts opts) {
         // TODO use deprecation params API
-        if (opts.has("scaleRatio")) {
-            return opts.get("scaleRatio");
+        if (opts.has(SCALE_DEPRECATED_KEY)) {
+            props.put(SCALE_KEY, opts.getNumber(SCALE_DEPRECATED_KEY));
+        } else if (opts.has(SCALE_KEY)) {
+            props.put(SCALE_KEY, opts.getNumber(SCALE_KEY));
         }
-
-        return opts.getNumber("scale", 1).doubleValue();
     }
 }
