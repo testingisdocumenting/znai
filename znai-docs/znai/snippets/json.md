@@ -114,5 +114,26 @@ You can turn parts of `JSON` into links to internal or external pages.
 
 # Test Results
 
-Consider leveraging testing frameworks to extract `JSON` samples from your endpoints. 
-Information about what assertions were made can be used to highlight points of interest.
+Below is an example of using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to make 
+an HTTP call, extract JSON response and information about asserted fields to highlight.
+
+:include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {
+  title: "WebTau REST API test example",
+  entry: "weather",
+  bodyOnly: true
+}
+
+`http.doc.capture` captures multiple test artifacts into separate files: request/response.json, url.txt, paths.json (validated paths).
+
+```markdown {title: "include-json using test results"}
+:include-json: weather-example/response.json {
+  title: "weather response example",
+  pathsFile: "weather-example/paths.json"
+}
+```
+
+:include-json: weather-example/response.json {
+  title: "weather response example",
+  pathsFile: "weather-example/paths.json"
+}
+
