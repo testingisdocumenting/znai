@@ -1,5 +1,9 @@
-# Definition
+# Linking To Support Site
 
-It is very useful to provide a way to contact an owner of a documentation, so he/she can get a feedback about the documentation from a reader. When a user defines a link in meta.json, Support link will show up under a page title if you define a `link` under `support`. 
+To provide a support link to your users add link and title to the `meta.json` file.
 
-:include-json: ../meta.json {highlight: [9, 10, 11]}
+:include-json: ../meta.json {
+  paths: "root.support.link"
+}
+
+Take a look at the example at the top of this page.

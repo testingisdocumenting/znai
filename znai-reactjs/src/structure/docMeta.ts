@@ -28,10 +28,12 @@ export interface DocMeta {
 
 export interface SupportMeta {
   link: string;
+  title: string;
 }
 
 export interface DocMetaSupport {
   link?: string;
+  title?: string;
 
   urlToFetchSupportLink?(meta: DocMeta): string;
 }
@@ -59,24 +61,30 @@ function getDocId() {
   return docMeta.id;
 }
 
-let supportLinkPromise: Promise<string> | undefined = undefined;
+let supportLinkPromise: Promise<SupportMeta> | undefined = undefined;
 
-function getSupportLinkPromise(): Promise<string> {
+const defaultSupportTitle = "Support";
+
+function getSupportLinkAndTitlePromise(): Promise<SupportMeta> {
   if (supportLinkPromise) {
     return supportLinkPromise;
   }
   const support = docMeta.support;
   if (support && support.link) {
-    supportLinkPromise = new Promise((resolve) => resolve(support.link!));
+    supportLinkPromise = new Promise((resolve) => resolve({
+      link: support.link!,
+      title: support.title || defaultSupportTitle}));
   } else if (support && support.urlToFetchSupportLink) {
     // @ts-ignore
-    supportLinkPromise = jsonPromise<string, { link: string }>(
+    supportLinkPromise = jsonPromise<string, SupportMeta>(
       support.urlToFetchSupportLink(getDocMeta())
     )
       // @ts-ignore
-      .then((supportMeta) => supportMeta.link);
+      .then((supportMeta) => ({
+        link: supportMeta.link,
+        title: defaultSupportTitle }));
   } else {
-    supportLinkPromise = new Promise((resolve) => resolve(""));
+    supportLinkPromise = new Promise((resolve) => resolve({link: "", title: ""}));
   }
 
   return supportLinkPromise!;
@@ -88,5 +96,5 @@ export {
   getDocMeta,
   isPreviewEnabled,
   getDocId,
-  getSupportLinkPromise,
+  getSupportLinkAndTitlePromise,
 };
