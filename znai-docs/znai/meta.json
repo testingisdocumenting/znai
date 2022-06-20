@@ -2,12 +2,13 @@
   "title": "Znai",
   "type": "User Guide",
   "category": "Documentation",
-  "description": "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+  "description": "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
   "viewOn": {
     "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-    "title": "View On GitHub"
+    "title": "View Markdown"
   },
   "support": {
-    "link": "https://github.com/testingisdocumenting/znai/issues"
+    "link": "https://github.com/testingisdocumenting/znai/discussions",
+    "title": "Questions/Suggestions"
   }
 }

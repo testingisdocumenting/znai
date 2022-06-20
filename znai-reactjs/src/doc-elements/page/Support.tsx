@@ -15,29 +15,21 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
-import {getSupportLinkPromise} from '../../structure/docMeta'
+import React, { useEffect, useState } from "react";
+import { getSupportLinkAndTitlePromise, SupportMeta } from "../../structure/docMeta";
 
-class Support extends Component {
-    constructor(props) {
-        super(props);
+export function Support() {
+    const [support, setSupport] = useState<SupportMeta>();
 
-        this.state = {link: null}
-    }
+    useEffect(() => {
+        getSupportLinkAndTitlePromise().then(supportMeta => setSupport(supportMeta));
+    }, []);
 
-    componentDidMount() {
-        getSupportLinkPromise().then(link => this.setState({link: link}));
-    }
-
-    render() {
-        return (
-            <div className="page-support">
-                {this.state.link ?
-                    <a href={this.state.link} target="_blank" rel="noopener">Support</a> : null
-                }
-            </div>
-        )
-    }
+    return (
+      <div className="page-support">
+          {support && support.link ?
+            <a href={support.link} target="_blank" rel="noopener noreferrer">{support.title}</a> : null
+          }
+      </div>
+    )
 }
-
-export default Support
