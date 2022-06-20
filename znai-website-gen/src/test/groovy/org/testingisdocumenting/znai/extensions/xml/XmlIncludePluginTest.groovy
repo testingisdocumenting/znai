@@ -27,7 +27,7 @@ class XmlIncludePluginTest {
     void "should validate path presence whith multiple children"() {
         code {
             resultingProps("sample.xml", '{paths: ["root.child[4]"]}')
-        } should throwException("can't find path: root.child[4] in XML, available paths:\n" +
+        } should throwException("can't find path: root.child[4] in XML, available:\n" +
                 "  root\n" +
                 "  root.child[0]\n" +
                 "  root.child[1]\n" +
@@ -43,7 +43,7 @@ class XmlIncludePluginTest {
     void "should validate path presence with single path"() {
         code {
             resultingProps("single-path.xml", '{paths: ["root.child[4]"]}')
-        } should throwException("can't find path: root.child[4] in XML, available paths:\n" +
+        } should throwException("can't find path: root.child[4] in XML, available:\n" +
                 "  root\n" +
                 "  root.frost\n" +
                 "  root.frost.cold\n" +

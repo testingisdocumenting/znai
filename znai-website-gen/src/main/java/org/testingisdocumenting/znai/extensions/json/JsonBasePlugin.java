@@ -75,20 +75,25 @@ public abstract class JsonBasePlugin implements Plugin {
     public PluginResult commonProcess(ComponentsRegistry componentsRegistry,
                                       Path markupPath,
                                       PluginParams pluginParams,
-                                      String json) {
+                                      String jsonText) {
         resourcesResolver = componentsRegistry.resourceResolver();
         String jsonPath = pluginParams.getOpts().get(INCLUDE_KEY, "$");
-        Object content = JsonPath.read(json, jsonPath);
+        Object parsed = JsonPath.read(jsonText, jsonPath);
 
         features = new PluginFeatureList(
                 new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams));
         additionalPluginFeatures().forEach(features::add);
 
+        Set<String> existingPaths = buildPaths(parsed);
+
         List<String> paths = extractPaths(pluginParams.getOpts());
-        validatePaths(content, paths);
+        EntryPresenceValidation.validateItemsPresence(PATHS_KEY, "JSON", existingPaths, paths);
+
+        List<String> collapsedPaths = pluginParams.getOpts().getList(COLLAPSED_PATHS_KEY);
+        EntryPresenceValidation.validateItemsPresence(COLLAPSED_PATHS_KEY, "JSON", existingPaths, collapsedPaths);
 
         Map<String, Object> props = pluginParams.getOpts().toMap();
-        props.put("data", content);
+        props.put("data", parsed);
         props.put("paths", paths);
         features.updateProps(props);
 
@@ -118,11 +123,6 @@ public abstract class JsonBasePlugin implements Plugin {
         }
 
         return opts.getList(PATHS_KEY);
-    }
-
-    private static void validatePaths(Object json, List<String> paths) {
-        Set<String> existingPaths = buildPaths(json);
-        EntryPresenceValidation.validateItemsPresence("path", "JSON", existingPaths, paths);
     }
 
     private static Set<String> buildPaths(Object json) {
