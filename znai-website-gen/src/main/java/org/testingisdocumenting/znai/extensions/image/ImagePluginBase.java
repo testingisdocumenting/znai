@@ -18,31 +18,57 @@ package org.testingisdocumenting.znai.extensions.image;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.Plugin;
-import org.testingisdocumenting.znai.extensions.PluginParams;
-import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
-import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.structure.DocUrl;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
-import javax.print.Doc;
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 abstract class ImagePluginBase implements Plugin {
-    private static final String SCALE_KEY = "scale";
-    private static final String SCALE_DEPRECATED_KEY = "scaleRatio";
+    private static final List<String> ALIGN_VALUES = Arrays.asList("left", "center", "right");
+
+    protected static final String ALIGN_KEY = "align";
+    protected static final String BORDER_KEY = "border";
+    protected static final String CAPTION_KEY = "caption";
+    protected static final String CAPTION_BOTTOM_KEY = "captionBottom";
+    protected static final String FIT_KEY = "fit";
+    protected static final String SCALE_KEY = "scale";
+    protected static final String SCALE_DEPRECATED_KEY = "scaleRatio";
+
+    private static final String PIXEL_RATIO_KEY = "pixelRatio";
 
     protected AuxiliaryFile auxiliaryFile;
     protected boolean isExternal;
 
     protected Double pixelRatioFromOpts;
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        PluginParamsDefinition params = new PluginParamsDefinition();
+        // TODO use title, deprecate caption
+        params.add(CAPTION_KEY, PluginParamType.STRING, "image title", "\"my image\"");
+        // TODO deprecate
+        params.add(CAPTION_BOTTOM_KEY, PluginParamType.BOOLEAN, "place image title at the bottom", "true");
+        params.add(ALIGN_KEY, PluginParamType.STRING, "horizontal image alignment",
+                ALIGN_VALUES.stream().map(v -> "\"" + v + "\"").collect(Collectors.joining(", ")));
+
+        params.add(BORDER_KEY, PluginParamType.BOOLEAN, "use border around image", "true");
+        params.add(FIT_KEY, PluginParamType.BOOLEAN, "fit image to the text width", "true");
+        params.add(SCALE_KEY, PluginParamType.NUMBER, "image scale ratio", "0.5");
+        params.add(PIXEL_RATIO_KEY, PluginParamType.NUMBER,
+                "pixel ratio for hi-dpi images, effect is similar to scale, e.g. 2.0 is the same as scale 0.5. " +
+                        "The difference is pixelRatio affects annotation coordinates so they need to be " +
+                        "supplied using smaller numbers ", "2.0");
+        params.add(additionalParameters());
+
+        return params;
+    }
 
     @Override
     public String id() {
@@ -61,15 +87,21 @@ abstract class ImagePluginBase implements Plugin {
 
     protected abstract Double pixelRatio();
 
+    protected abstract PluginParamsDefinition additionalParameters();
+
     protected abstract Stream<AuxiliaryFile> additionalAuxiliaryFiles();
 
     protected PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         PluginParamsOpts opts = pluginParams.getOpts();
-        pixelRatioFromOpts = opts.get("pixelRatio");
+        pixelRatioFromOpts = opts.has(PIXEL_RATIO_KEY) ?
+                opts.getNumber(PIXEL_RATIO_KEY).doubleValue():
+                null;
 
         ResourcesResolver resourceResolver = componentsRegistry.resourceResolver();
         DocStructure docStructure = componentsRegistry.docStructure();
         String imagePath = pluginParams.getFreeParam();
+
+        validateAlign(opts);
 
         isExternal = UrlUtils.isExternal(imagePath);
         Map<String, Object> props = new LinkedHashMap<>(opts.toMap());
@@ -93,12 +125,24 @@ abstract class ImagePluginBase implements Plugin {
         return PluginResult.docElement("AnnotatedImage", props);
     }
 
+    private void validateAlign(PluginParamsOpts opts) {
+        if (!opts.has(ALIGN_KEY)) {
+            return;
+        }
+
+        String align = opts.get(ALIGN_KEY);
+        if (!ALIGN_VALUES.contains(align)) {
+            throw new IllegalArgumentException("<" + ALIGN_KEY + "> only accept following values: " +
+                    ALIGN_VALUES.stream().map(v -> "\"" + v + "\"").collect(Collectors.joining(", ")));
+        }
+    }
+
     private void setWidthHeight(BufferedImage bufferedImage,
                                 Map<String, Object> props) {
-        Number pixelRatio = pixelRatio();
+        Double pixelRatio = pixelRatio();
 
-        props.put("width", bufferedImage.getWidth() / pixelRatio.doubleValue());
-        props.put("height", bufferedImage.getHeight() / pixelRatio.doubleValue());
+        props.put("width", bufferedImage.getWidth() / pixelRatio);
+        props.put("height", bufferedImage.getHeight() / pixelRatio);
     }
 
     private static void updatePropsScale(Map<String, Object> props, PluginParamsOpts opts) {
