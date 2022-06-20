@@ -22,6 +22,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 
@@ -94,6 +95,11 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
         }
 
         return 1.0;
+    }
+
+    @Override
+    protected PluginParamsDefinition additionalParameters() {
+        return PluginParamsDefinition.undefined();
     }
 
     @Override

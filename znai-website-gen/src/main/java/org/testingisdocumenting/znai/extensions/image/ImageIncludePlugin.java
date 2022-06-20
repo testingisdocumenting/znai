@@ -19,7 +19,9 @@ package org.testingisdocumenting.znai.extensions.image;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -36,6 +38,9 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin {
+    private static final String ANNOTATIONS_PATH_KEY = "annotationsPath";
+    private static final String ANNOTATE_KEY = "annotate";
+
     private Map<String, ?> annotations;
     private ResourcesResolver resourceResolver;
 
@@ -77,6 +82,15 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
         return (annotations == null || !annotations.containsKey("pixelRatio")) ?
                 1.0 :
                 ((Number) annotations.get("pixelRatio")).doubleValue();
+    }
+
+    @Override
+    protected PluginParamsDefinition additionalParameters() {
+        return new PluginParamsDefinition()
+                .add(ANNOTATIONS_PATH_KEY, PluginParamType.STRING,
+                        "path to a JSON file with annotations information", "annotations.json")
+                .add(ANNOTATE_KEY, PluginParamType.BOOLEAN,
+                        "automatically use the annotations file matching image file but with json extension", "true");
     }
 
     @Override

@@ -1,0 +1,1 @@
+* Add formal plugin parameters to [Image Plugin](visuals/images)
