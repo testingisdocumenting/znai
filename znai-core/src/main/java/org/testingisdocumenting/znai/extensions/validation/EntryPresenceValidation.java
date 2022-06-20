@@ -23,11 +23,13 @@ public class EntryPresenceValidation {
     private EntryPresenceValidation() {
     }
 
-    public static void validateItemsPresence(String itemsLabel, String source, Set<String> existing, List<String> passed) {
-        for (String item : passed) {
+    public static void validateItemsPresence(String itemsLabel, String source,
+                                             Set<String> existing,
+                                             List<String> toValidate) {
+        for (String item : toValidate) {
             if (!existing.contains(item)) {
                 throw new RuntimeException("can't find " + itemsLabel + ": " + item + " in " + source +
-                        ", available " + itemsLabel + "s:\n  " +
+                        ", available:\n  " +
                         String.join("\n  ", existing));
             }
         }

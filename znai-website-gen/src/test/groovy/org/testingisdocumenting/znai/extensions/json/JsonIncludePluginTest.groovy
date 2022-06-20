@@ -40,8 +40,8 @@ class JsonIncludePluginTest {
 
     @Test
     void "should read paths from file when provided"() {
-        def propos = process('test.json {pathsFile: "jsonFileWithPaths.json"}')
-        propos.should == [data     : expectedFullData,
+        def props = process('test.json {pathsFile: "jsonFileWithPaths.json"}')
+        props.should == [data     : expectedFullData,
                           pathsFile: 'jsonFileWithPaths.json',
                           paths    : ['root.key1', 'root.key2']]
     }
@@ -59,7 +59,19 @@ class JsonIncludePluginTest {
     void "should validate paths presence"() {
         code {
             process('test.json {paths: ["root.key_1", "root.key_2"]}')
-        } should throwException("can't find path: root.key_1 in JSON, available paths:\n" +
+        } should throwException("can't find paths: root.key_1 in JSON, available:\n" +
+                "  root\n" +
+                "  root.key1\n" +
+                "  root.key2\n" +
+                "  root.key2.key21\n" +
+                "  root.key2.key22")
+    }
+
+    @Test
+    void "should validate collapsed paths presence"() {
+        code {
+            process('test.json {collapsedPaths: ["root.key_1", "root.key_2"]}')
+        } should throwException("can't find collapsedPaths: root.key_1 in JSON, available:\n" +
                 "  root\n" +
                 "  root.key1\n" +
                 "  root.key2\n" +
