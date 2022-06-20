@@ -13,6 +13,37 @@ to create up-to-date, maintainable, beautiful **User Guides** and **Tutorials**.
 `Znai` extends markdown with plugins system to supercharge visuals and maintainability.
 Three categories of plugins are available for usage and creation
 
+### Include plugins {style: "api"}
+
+```markdown {title: "json plugin example"}
+:include-json: example.json {
+  title: "JSON example",
+  paths: ["root.person.id"],
+  collapsedPaths: ["root.details"]
+}
+```
+
+:include-json: example.json {
+  title: "JSON example",
+  paths: ["root.person.id"],
+  collapsedPaths: ["root.details"] 
+}
+
+```markdown {title: "java plugin example"}
+:include-java: ../snippets/HelloWorld.java {
+  entry: "sampleMethod", 
+  bodyOnly: true,
+  commentsType: "inline"
+}
+```
+
+:include-java: ../snippets/HelloWorld.java {
+  entry: "sampleMethod", 
+  bodyOnly: true,
+  commentsType: "inline"
+}
+
+
 ### Inlined Code plugins {style: "api"}
 
 ```markdown {title: "plugin example"}
@@ -20,20 +51,6 @@ It is a `:icon: cloud` day, `:icon: clock` is ticking
 ```
 
 It is a `:icon: cloud` day, `:icon: clock` is ticking
-
-### Include plugins {style: "api"}
-
-```markdown {title: "plugin example"}
-:include-json: example.json {
-  title: "JSON example",
-  paths: ["root.person.id"],
-  collapsedPaths: ["root.details"] }
-```
-
-:include-json: example.json {
-  title: "JSON example",
-  paths: ["root.person.id"],
-  collapsedPaths: ["root.details"] }
 
 ### Fence plugins {style: "api"}
 
@@ -57,6 +74,24 @@ Python:
     content of Python tab
 ```
 
+# Rich Visuals
+
+Leverage multiple out-of-the box plugins to render charts, flow diagrams, annotated images, dynamic SVGs, etc
+
+:include-image: znai-charts.png {pixelRatio: 2.0}
+
+# Dark/Light Runtime Mode
+
+Generate one documentation and let your users switch Dark/Light theme at runtime
+
+:include-image: znai-flow-diagram.png {pixelRatio: 2.0}
+
+# Local Search
+
+Local search with preview and instant navigation to the result 
+
+:include-image: znai-search.png {pixelRatio: 2.0}
+
 # Auto Presentation
 
 With a click of a button, `Znai` turns **User Guide** content to presentation slides.
@@ -64,14 +99,20 @@ Single source of truth and minimal effort.
 
 Present a feature in a meeting and then share the same content as a link to the documentation.
 
-:include-image: slide.png {scale: 0.5, border: true}
+:include-image: znai-presentation.png {pixelRatio: 2.0}
 
 # Batteries Included
 
-`Znai` comes with
-* dev server mode with changes highlight and auto-jump to a change
-* local search (with full preview)
-* dark/light mode runtime switch
-* instant switching between pages
+Znai comes with
 
-:include-image: search.png {fit: true, border: true}
+* Markdown with custom extensions and dozens of plugins:
+  * Content from external files with markers and filters support
+  * Simplified extraction of a function body content (working with examples)
+  * Embedding of JavaDoc/PyDoc documentation text, preserving styles
+  * Beautiful API documentation capabilities
+  * Rich visuals like flow diagrams and charts
+  * etc
+* Dev server mode with changes highlight and auto-jump to a change
+* Local search (with full preview)
+* Dark/light mode runtime switch
+* Presentation Mode to automatically turn your documentation into slides, using the same content

@@ -9,6 +9,7 @@
 ../../znai-testing-examples/src/test/java
 ../../znai-testing-examples/target/test-classes
 ../../.github
+../readme
 ../target/classes
 ../example-sources.zip
 https://raw.githubusercontent.com/testingisdocumenting/webtau/master
