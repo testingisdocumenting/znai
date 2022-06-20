@@ -1,0 +1,1 @@
+* Add [JSON Collapsed Paths](snippets/json#hidden-parts) validation
