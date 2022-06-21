@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,5 +51,11 @@ value42
     void "key should not start with a space"() {
         def values = new ColonDelimitedKeyValues(" key:value1")
         values.toMap().should == [:]
+    }
+
+    @Test
+    void "should not confuse link inside value with a column"() {
+        def values = new ColonDelimitedKeyValues("key:\n[mylink](https://site)")
+        values.toMap().should == [key: "[mylink](https://site)"]
     }
 }

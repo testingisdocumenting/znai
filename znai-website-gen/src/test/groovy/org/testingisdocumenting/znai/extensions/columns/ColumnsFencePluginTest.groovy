@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.columns
 
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.junit.Test
+import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 
 import java.nio.file.Paths
 
@@ -32,5 +34,23 @@ class ColumnsFencePluginTest {
 right:text on the right""")
 
         plugin.textForSearch().text.should == 'text on the left text on the right'
+    }
+
+    @Test
+    void "render columns with links"() {
+        def props = PluginsTestUtils.processFenceAndGetProps(new PluginParams("columns"),
+        """left:
+[left link](http://localhost:3030)
+
+right:
+[rightlink](http://localhost:3030) something something
+""")
+        props.should == [columns: [
+                [content: [
+                        [markup : "[left link](http://localhost:3030)\n", type: "TestMarkup"]
+                ]],
+                [content: [
+                        [markup: "[rightlink](http://localhost:3030) something something", type: "TestMarkup"]]]],
+                         config:[:]]
     }
 }
