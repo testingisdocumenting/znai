@@ -85,7 +85,9 @@ public class DocPageReactProps {
     private static Map<String, ?> exerciseMapSuppliers(Map<String, ?> content) {
         return content.entrySet().stream()
                 .filter(e -> e.getValue() != null)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> exerciseSuppliers(e.getValue())));
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> exerciseSuppliers(e.getValue()),
+                        (a, b) -> b,
+                        LinkedHashMap::new));
     }
 
     private static List<?> exerciseListSuppliers(List<?> content) {

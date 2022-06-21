@@ -31,7 +31,7 @@ class JsonFencePluginTest {
     @Test
     void "should display full json"() {
         def props = process([:], json)
-        props.should == [data : expectedFullData, paths: []]
+        props.should == [data: expectedFullData, paths: []]
     }
 
     @Test
@@ -39,7 +39,6 @@ class JsonFencePluginTest {
         def props = process([paths: "root.key1"], json)
         props.should == [data : expectedFullData, paths: ['root.key1']]
     }
-
 
     @Test
     void "should display subset of json"() {
@@ -59,6 +58,17 @@ class JsonFencePluginTest {
 
         auxiliaryFilesStream.collect { af -> af.path.fileName.toString() }
                 .should == ['jsonFileWithPaths.json']
+    }
+
+    @Test
+    void "should maintain original json order"() {
+        def props = process([:], '{\n' +
+                '  "id": "id1",\n' +
+                '  "price": 100,\n' +
+                '  "amount": 30\n' +
+                '}')
+
+        props.data.keySet().should == ["id", "price", "amount"]
     }
 
     private static def process(Map<String, ?> params, String content) {
