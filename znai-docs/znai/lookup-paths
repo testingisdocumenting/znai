@@ -3,6 +3,9 @@
 ../../znai-console/src/main/java
 ../../znai-console/src/test/groovy
 ../../znai-jupyter
+../../znai-testing-examples-junit5
+../../znai-testing-examples-junit5/doc-artifacts
+../../znai-testing-examples-junit5/src/test/groovy
 ../../znai-testing-examples
 ../../znai-testing-examples/doc-artifacts
 ../../znai-testing-examples/src/test/groovy
