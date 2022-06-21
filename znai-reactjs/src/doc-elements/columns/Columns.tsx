@@ -83,7 +83,7 @@ function Columns({ columns, config, isPresentation, slideIdx, ...props }: Props)
 }
 
 function isLastElementCodeSnippet(content: DocElementContent) {
-  return content[content.length - 1].type === "Snippet";
+  return content.length > 0 && content[content.length - 1].type === "Snippet";
 }
 
 const defaultColumnFlex = 10;

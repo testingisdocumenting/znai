@@ -1,0 +1,1 @@
+* Fix: Empty [Column](layout/columns) rendering crash

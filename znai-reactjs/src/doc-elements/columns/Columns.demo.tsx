@@ -29,6 +29,8 @@ export function columnsDemo(registry: Registry) {
         <Columns elementsLibrary={elementsLibrary} {...contentAndConfig()} />
       </ViewPortProvider>
     ))
+    .add("missing column content", () => <Columns elementsLibrary={elementsLibrary}
+                                                  {...missingContentForRightColumn()} />)
     .add("with code snippet", () => <Columns elementsLibrary={elementsLibrary} {...snippetAndText()} />)
     .add("with code snippet mobile", () => (
       <ViewPortProvider isMobileForced={true}>
@@ -65,6 +67,36 @@ function contentAndConfig() {
       },
     ],
   };
+}
+
+function missingContentForRightColumn() {
+  return {
+    isPresentation: false,
+    slideIdx: 0,
+    columns: [
+      {
+        content: [
+          {
+            type: "Paragraph",
+            content: [{
+              isFile: false,
+              type: "Link",
+              content: [{
+                text: "left link",
+                type: "SimpleText"
+              }],
+              url: "http://localhost:3030"
+            }]
+          }
+        ]
+      },
+      {
+        content: []
+      }
+    ],
+    type: "Columns",
+    config: {}
+  }
 }
 
 function snippetAndText() {
