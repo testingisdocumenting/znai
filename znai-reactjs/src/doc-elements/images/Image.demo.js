@@ -19,6 +19,9 @@ import React from 'react'
 import EmbeddedAnnotatedImage from './EmbeddedAnnotatedImage'
 import {elementsLibrary} from '../DefaultElementsLibrary';
 import {ZoomOverlay} from '../zoom/ZoomOverlay';
+import { simulateState } from "react-component-viewer";
+
+const [getBorder, setBorder] = simulateState(true);
 
 export function imageDemo(registry) {
     registry.add('standard image', () => (
@@ -28,6 +31,15 @@ export function imageDemo(registry) {
         </div>
     ))
     registry.add('with border', () => <EmbeddedAnnotatedImage {...standardImage()} border={true}/>)
+    registry.add('with border and badge', () => <EmbeddedAnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)} border={true}/>)
+    registry.add('without border but with badge', () => <EmbeddedAnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)}/>)
+    registry.add("toggle border", () => (
+      <div>
+          <button onClick={() => setBorder(!getBorder())}>toggle border</button>
+        <EmbeddedAnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)} border={getBorder()}/>)
+      </div>
+    ));
+
     registry.add('no fit image with annotation', () => (
       <EmbeddedAnnotatedImage {...noFitImage()} {...noFitImageAnnotations()}/>
     ))

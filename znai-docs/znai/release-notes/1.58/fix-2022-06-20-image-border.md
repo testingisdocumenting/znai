@@ -1,0 +1,1 @@
+* Fix: [Image](visuals/images#border) bottom border rendering
