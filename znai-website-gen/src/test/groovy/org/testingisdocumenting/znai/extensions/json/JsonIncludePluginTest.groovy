@@ -98,6 +98,12 @@ class JsonIncludePluginTest {
                 .should == ['jsonFileWithPaths.json', 'test.json']
     }
 
+    @Test
+    void "should maintain original json order"() {
+        def props = process('test-account.json')
+        props.data.keySet().should == ["id", "price", "amount"]
+    }
+
     private static def process(String params) {
         return PluginsTestUtils.processIncludeAndGetProps(":include-json: $params")
     }
