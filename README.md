@@ -7,6 +7,7 @@ Build functional, maintainable, beautiful User Guides with `Znai`.
   * Simplified extraction of a function body content (working with examples) 
   * Embedding of JavaDoc/PyDoc documentation text, preserving styles
   * Beautiful API documentation capabilities  
+  * Two Sides Page Layout Option with convenient example languages switch 
   * Rich visuals like flow diagrams and charts
   * etc
 * Instant pages navigation 
@@ -34,6 +35,11 @@ Dark/Light mode switching
 Beautiful way to document your API 
 
 ![generated site example of api params](znai-docs/readme/znai-api-parameters.png)
+
+Use [two sides](https://testingisdocumenting.org/znai/layout/two-sides-tabs) layout option to render examples and supporting information side by side
+with convenient examples language switch
+
+![generated site example of two sides layout](znai-docs/readme/znai-two-sides-tabs.png)
 
 Blazing fast local search with results preview
 
