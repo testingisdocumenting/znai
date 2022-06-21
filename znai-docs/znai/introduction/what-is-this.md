@@ -86,6 +86,13 @@ Generate one documentation and let your users switch Dark/Light theme at runtime
 
 :include-image: znai-flow-diagram.png {pixelRatio: 2.0}
 
+# Two Sides Page Layout
+
+Use [two sides](layout/two-sides-tabs) layout option to render examples and supporting information side by side
+with convenient examples language switch
+
+:include-image: znai-two-sides-tabs.png {pixelRatio: 2.0}
+
 # Local Search
 
 Local search with preview and instant navigation to the result 
@@ -110,6 +117,7 @@ Znai comes with
   * Simplified extraction of a function body content (working with examples)
   * Embedding of JavaDoc/PyDoc documentation text, preserving styles
   * Beautiful API documentation capabilities
+  * Two Sides Page Layout with convenient examples language switch
   * Rich visuals like flow diagrams and charts
   * etc
 * Dev server mode with changes highlight and auto-jump to a change
