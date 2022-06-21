@@ -6,7 +6,7 @@ Head over to [GitHub Discussions](https://github.com/testingisdocumenting/znai/d
 share your thoughts!
 
 Ask questions on [StackOverflow](https://stackoverflow.com/questions/tagged/znai). 
-Tag your questions with `#znai` and Znai maintainers will try to answer them  
+Tag your questions with `#znai` and Znai maintainers will try to answer them.  
 
 **Contributions are welcome**
 
