@@ -44,12 +44,24 @@ class AnnotatedImage extends Component {
         const scaledWidth = width * scaleToUse
         const scaledHeight = height * scaleToUse
 
+        const borderSize = border ? 1 : 0;
+        const borderSizeAdjustment = borderSize * 2;
+
+        const parentStyle = {
+            position: 'relative',
+            width: (scaledWidth + borderSizeAdjustment) + "px",
+            height: (scaledHeight + borderSizeAdjustment) + "px"}
+
         const imageWidth = scaledWidth + "px"
         const imageHeight = scaledHeight + "px"
 
-        const parentStyle = {position: 'relative', width: imageWidth, height: imageHeight}
-        const imageContainerStyle = {position: "absolute", top: 0}
-        const annotationsContainerStyle = {position: "absolute", top: 0}
+        const childContainerStyle = {
+            position: "absolute",
+            width: imageWidth,
+            height: imageHeight,
+            // top: borderSize,
+            // left: borderSize
+        }
 
         const captionElement = caption ? (
             <div style={captionContainerStyle(captionBottom)} className="annotated-image-caption">
@@ -61,14 +73,14 @@ class AnnotatedImage extends Component {
 
         return (
             <div style={parentStyle} className={className}>
-                <div style={imageContainerStyle}>
+                <div style={childContainerStyle}>
                     <img alt="annotated"
                          src={imageSrc + imageAdditionalPreviewUrlParam(timestamp)}
                          width={imageWidth}
                          height={imageHeight}
                          ref={node => this.imageNode = node}/>
                 </div>
-                <div style={annotationsContainerStyle}>
+                <div style={childContainerStyle}>
                     <svg width={imageWidth} height={imageHeight}>
                         {isStatic ?
                             annotations.staticAnnotationsToRender(scaleToUse):

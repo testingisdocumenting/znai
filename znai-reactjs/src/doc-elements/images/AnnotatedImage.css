@@ -22,9 +22,9 @@
     width: 100%;
 }
 
-.annotated-image.border img {
+.annotated-image.border {
+    box-sizing: border-box;
     border: 1px solid var(--znai-image-border-color);
-    box-sizing: content-box;
 }
 
 .znai-presentation-slide-appeared .znai-annotation-badge circle {
