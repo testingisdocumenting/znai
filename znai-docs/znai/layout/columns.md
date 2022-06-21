@@ -1,14 +1,14 @@
 # Information Layout
 
-The way your information is laid out affects how easy it is to comprehend any given material.
-Some content benefits from being formatted side-by-side. Some examples are:
+Use `columns` plugin to render content in two columns:
 * Before-and-after transition
 * Action and its result
 * Input and output
+* Result comparison
 
 # Definition
 
-To define columns layout use a `fenced` block plugin with the `columns` keyword:
+To define columns use fenced code block 
  
     ```columns
     left: 
@@ -33,67 +33,93 @@ and can span multiple lines
 
 # Sizes
 
-Size can be specified for a column as a `portion`. By default both portions are assigned a value of `10`. 
-If you specify `portion` to be `3` for left column it will occupy `0.3` of the space.
-
-    ```columns {left: {portion: 3}}
-    left: 
-    this content goes to the left
-    
-    and can span multiple lines
-    right: this content goes to the right
-    
-    and can span multiple lines
-    ```
+Size can be specified for a column as a `portion`. By default, both portions are assigned a value of `10`. 
+If you specify right column `portion` to be `5`, then left will be left as `10` by default, 
+leaving right side to be roughly 33% in size.
 
 
-```columns {left: {portion: 3}}
+```columns {right: {portion: 5}}
 left: 
-this content goes to the left
+:include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {
+  title: "WebTau REST API test example",
+  entry: "weather",
+  bodyOnly: true
+}
 
-and can span multiple lines
-right: this content goes to the right
-
-and can span multiple lines
+right:
+:include-json: weather-example/response.json {
+  title: "weather response example",
+  pathsFile: "weather-example/paths.json"
+}
 ```
 
+    ```columns {right: {portion: 5}}
+    left: 
+    :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {
+      title: "WebTau REST API test example",
+      entry: "weather",
+      bodyOnly: true
+    }
+    
+    right:
+    :include-json: weather-example/response.json {
+      title: "weather response example",
+      pathsFile: "weather-example/paths.json"
+    }
+    ```
+    
 # Border
 
-You can add a border to your columns.
+Use `border` to add a border separator between columns
 
-    ```columns {left: {portion: 3}, border: true}
-    left: **Argument Name**
-    right: Argument description and what argument is for
-    ```
-    ```columns {left: {portion: 3}, border: true}
-    left: **Another Name**
-    right: Argument description and what argument is for
-    ```
+```columns {border: true}
+left: 
+**Before**
 
-```columns {left: {portion: 3}, border: true}
-left: **Argument Name**
-right: Argument description and what argument is for
+Hello World
+
+right:
+**After**
+
+World Of Hellos
 ```
-```columns {left: {portion: 3}, border: true}
-left: **Another Name**
-right: Argument description and what argument is for
-```
+
+    ```columns {border: true}
+    left: 
+    **Before**
+    
+    Hello World
+    
+    right:
+    **After**
+    
+    World Of Hellos
+    ```
 
 # Alignment
 
-Specify text alignment using `align`.
-    
-    ```columns {left: {portion: 3, align: "right"}, border: true}
-    left: **Argument Name**
-    
-    *optional*
-    right: Argument description and what argument is for
-    ```
+Use `align` to change a column content alignment.
 
-```columns {left: {portion: 3, align: "right"}, border: true}
-left: **Argument Name**
+```columns {border: true, left: {align: "right"}}
+left: 
+**Before**
 
-*optional*
+Hello World
 
-right: Argument description and what argument is for
+right:
+**After**
+
+World Of Hellos
 ```
+    
+    ```columns {border: true, left: {align: "right"}}
+    left: 
+    **Before**
+    
+    Hello World
+    
+    right:
+    **After**
+    
+    World Of Hellos
+    ```

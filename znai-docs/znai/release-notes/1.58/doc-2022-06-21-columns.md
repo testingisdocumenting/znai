@@ -1,0 +1,1 @@
+* Doc: Update [Columns](layout/columns) examples and text refactoring    
