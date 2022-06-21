@@ -1,0 +1,1 @@
+* Fix: [Column](layout/columns) rendering when content starts with a link

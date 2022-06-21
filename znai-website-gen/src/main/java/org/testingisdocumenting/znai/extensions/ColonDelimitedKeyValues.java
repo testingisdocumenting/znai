@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -106,7 +107,7 @@ public class ColonDelimitedKeyValues {
         int quoteStartIdx = -1;
         int quoteEndIdx = -1;
         int numberOfQuotes = 0;
-        int numberOfSpaces = 0;
+        int numberOfDelimiters = 0;
         for (int i = 0; i < line.length(); i++) {
             char c = line.charAt(i);
 
@@ -121,18 +122,16 @@ public class ColonDelimitedKeyValues {
                 numberOfQuotes++;
             }
 
-            if (Character.isSpaceChar(c)) {
-                numberOfSpaces++;
-            }
-
             if (c == ':') {
                 if (numberOfQuotes == 2) {
                     return new KeyValuePart(line.substring(quoteStartIdx + 1, quoteEndIdx), line.substring(quoteEndIdx + 2));
                 }
 
-                if (numberOfQuotes == 0 && numberOfSpaces == 0) {
+                if (numberOfQuotes == 0 && numberOfDelimiters == 0) {
                     return new KeyValuePart(line.substring(0, i), line.substring(i + 1));
                 }
+            } else if (Character.isSpaceChar(c) || c == '[') {
+                numberOfDelimiters++;
             }
 
             pc = c;
