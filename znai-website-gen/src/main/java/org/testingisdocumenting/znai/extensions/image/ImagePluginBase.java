@@ -35,6 +35,7 @@ abstract class ImagePluginBase implements Plugin {
 
     protected static final String ALIGN_KEY = "align";
     protected static final String BORDER_KEY = "border";
+    protected static final String TITLE_KEY = "title";
     protected static final String CAPTION_KEY = "caption";
     protected static final String CAPTION_BOTTOM_KEY = "captionBottom";
     protected static final String FIT_KEY = "fit";
@@ -51,6 +52,7 @@ abstract class ImagePluginBase implements Plugin {
     @Override
     public PluginParamsDefinition parameters() {
         PluginParamsDefinition params = new PluginParamsDefinition();
+        params.add(TITLE_KEY, PluginParamType.STRING, "image title", "\"my image\"");
         // TODO use title, deprecate caption
         params.add(CAPTION_KEY, PluginParamType.STRING, "image title", "\"my image\"");
         // TODO deprecate
@@ -60,6 +62,7 @@ abstract class ImagePluginBase implements Plugin {
 
         params.add(BORDER_KEY, PluginParamType.BOOLEAN, "use border around image", "true");
         params.add(FIT_KEY, PluginParamType.BOOLEAN, "fit image to the text width", "true");
+        params.add(SCALE_DEPRECATED_KEY, PluginParamType.NUMBER, "[deprecated] image scale ratio", "0.5");
         params.add(SCALE_KEY, PluginParamType.NUMBER, "image scale ratio", "0.5");
         params.add(PIXEL_RATIO_KEY, PluginParamType.NUMBER,
                 "pixel ratio for hi-dpi images, effect is similar to scale, e.g. 2.0 is the same as scale 0.5. " +
@@ -121,6 +124,7 @@ abstract class ImagePluginBase implements Plugin {
         }
 
         updatePropsScale(props, opts);
+        updateTitleProp(props, opts);
 
         return PluginResult.docElement("AnnotatedImage", props);
     }
@@ -151,6 +155,14 @@ abstract class ImagePluginBase implements Plugin {
             props.put(SCALE_KEY, opts.getNumber(SCALE_DEPRECATED_KEY));
         } else if (opts.has(SCALE_KEY)) {
             props.put(SCALE_KEY, opts.getNumber(SCALE_KEY));
+        }
+    }
+
+    private static void updateTitleProp(Map<String, Object> props, PluginParamsOpts opts) {
+        if (opts.has(TITLE_KEY)) {
+            props.put(TITLE_KEY, opts.get(TITLE_KEY));
+        } else if (opts.has(CAPTION_KEY)) {
+            props.put(TITLE_KEY, opts.get(CAPTION_KEY));
         }
     }
 }

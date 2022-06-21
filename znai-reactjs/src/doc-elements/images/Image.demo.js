@@ -16,7 +16,7 @@
  */
 
 import React from 'react'
-import EmbeddedAnnotatedImage from './EmbeddedAnnotatedImage'
+import { AnnotatedImage } from './AnnotatedImage'
 import {elementsLibrary} from '../DefaultElementsLibrary';
 import {ZoomOverlay} from '../zoom/ZoomOverlay';
 import { simulateState } from "react-component-viewer";
@@ -30,42 +30,48 @@ export function imageDemo(registry) {
                                         elementsLibrary={elementsLibrary}/>
         </div>
     ))
-    registry.add('with border', () => <EmbeddedAnnotatedImage {...standardImage()} border={true}/>)
-    registry.add('with border and badge', () => <EmbeddedAnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)} border={true}/>)
-    registry.add('without border but with badge', () => <EmbeddedAnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)}/>)
+    registry.add('with border', () => <AnnotatedImage {...standardImage()} border={true}/>)
+    registry.add('with border and badge', () => <AnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)} border={true}/>)
+    registry.add('without border but with badge', () => <AnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)}/>)
     registry.add("toggle border", () => (
       <div>
           <button onClick={() => setBorder(!getBorder())}>toggle border</button>
-        <EmbeddedAnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)} border={getBorder()}/>)
+        <AnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)} border={getBorder()}/>)
       </div>
     ));
 
     registry.add('no fit image with annotation', () => (
-      <EmbeddedAnnotatedImage {...noFitImage()} {...noFitImageAnnotations()}/>
+      <AnnotatedImage {...noFitImage()} {...noFitImageAnnotations()}/>
     ))
+
+    registry.add('with title', () => <AnnotatedImage {...standardImage()} title="My Image"/>)
+    registry.add('no fit with title', () => (
+      <AnnotatedImage {...noFitImage()} title="My Image"/>
+    ))
+
     registry.add('fit image with zoom', () =>
         (
             <>
                 <ZoomOverlay/>
-                <EmbeddedAnnotatedImage {...fitImage()}/>
+                <AnnotatedImage {...fitImage()}/>
             </>
         )
     )
     registry.add('badge alignment annotations fit', () => (
-      <EmbeddedAnnotatedImage {...badgeAlignment(450, 350)} {...fitImage()} {...noFitImageAnnotations()}/>
+      <AnnotatedImage {...badgeAlignment(450, 350)} {...fitImage()} {...noFitImageAnnotations()}/>
     ))
 
     registry.add('badge alignment manual scale param', () => (
-      <EmbeddedAnnotatedImage {...badgeAlignment(450, 350)} {...scaleImage(0.6)} {...noFitImageAnnotations()}/>
+      <AnnotatedImage {...badgeAlignment(450, 350)} {...scaleImage(0.6)} {...noFitImageAnnotations()}/>
     ))
 
-    registry.add('simple annotations', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}/>)
-    registry.add('simple annotations with border', () => <EmbeddedAnnotatedImage {...simpleAnnotations()}
+    registry.add('simple annotations', () => <AnnotatedImage {...simpleAnnotations()}/>)
+    registry.add('simple annotations with border', () => <AnnotatedImage {...simpleAnnotations()}
                                                                                  border={true}/>)
-    registry.add('badge alignment annotations', () => <EmbeddedAnnotatedImage {...badgeAlignment(450, 350)}/>)
-    registry.add('badge alignment annotations inverted', () => <EmbeddedAnnotatedImage {...badgeAlignment(50, 350, true)}/>)
-    registry.add('left aligned', () => <EmbeddedAnnotatedImage {...leftAlign()}/>)
-    registry.add('right aligned', () => <EmbeddedAnnotatedImage {...rightAlign()}/>)
+    registry.add('badge alignment annotations', () => <AnnotatedImage {...badgeAlignment(450, 350)}/>)
+    registry.add('badge alignment annotations inverted', () => <AnnotatedImage {...badgeAlignment(50, 350, true)}/>)
+    registry.add('left aligned', () => <AnnotatedImage {...leftAlign()}/>)
+    registry.add('right aligned', () => <AnnotatedImage {...rightAlign()}/>)
 }
 
 function standardImage() {

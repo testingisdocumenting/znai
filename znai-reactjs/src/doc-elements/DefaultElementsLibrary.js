@@ -57,7 +57,6 @@ import {EchartGeneric, presentationEchartHandler} from "./charts/EchartGeneric";
 import Image from './images/Image'
 import {CliCommand, presentationCliCommandHandler} from './cli/CliCommand'
 import {CliOutput, presentationCliOutput} from './cli/CliOutput'
-import EmbeddedAnnotatedImage from './images/EmbeddedAnnotatedImage'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
 import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
 import {MarkdownAndResult, presentationMarkdownAndResultHandler} from './markdown/MarkdownAndResult'
@@ -81,6 +80,7 @@ import {SimpleText} from './default-elements/SimpleText';
 import { PageToc } from "./page/PageToc";
 import { TextBadge } from "./badge/TextBadge";
 import { DoxygenMember } from "./doxygen/DoxygenMember";
+import { AnnotatedImage } from "./images/AnnotatedImage";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -158,7 +158,7 @@ presentationElementHandlers.Mermaid = {component: Mermaid, numberOfSlides: () =>
 library.Image = Image
 presentationElementHandlers.Image = {component: Image, numberOfSlides: () => 1}
 
-library.AnnotatedImage = EmbeddedAnnotatedImage
+library.AnnotatedImage = AnnotatedImage
 presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 
 library.Tabs = Tabs

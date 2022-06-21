@@ -50,8 +50,8 @@
 }
 
 .znai-api-parameters-title {
-    color: var(--znai-table-title-color);
-    background-color: var(--znai-table-title-background-color);
+    color: var(--znai-api-title-color);
+    background-color: var(--znai-api-title-background-color);
 
     padding: 2px 20px;
 }

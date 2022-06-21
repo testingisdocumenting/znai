@@ -15,14 +15,30 @@
  * limitations under the License.
  */
 
-.annotated-image-caption {
-    padding: 10px;
-    background-color: var(--znai-annotated-image-background-color);
-    color: #fff;
-    width: 100%;
+.znai-annotated-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
-.annotated-image.border {
+.znai-image-title {
+    padding: 4px 16px;
+    font-size: var(--znai-smaller-text-size);
+
+    text-align: center;
+
+    background-color: var(--znai-image-title-background-color);
+    color: var(--znai-image-title-color);
+}
+
+.znai-annotated-image {
+}
+
+.znai-annotated-image.border {
     box-sizing: border-box;
     border: 1px solid var(--znai-image-border-color);
 }
@@ -31,6 +47,26 @@
     animation: badge-circle-presentation-appear;
     animation-fill-mode: forwards;
     animation-duration: 0.5s;
+}
+
+.znai-annotated-image-container.left {
+    justify-content: flex-start;
+}
+
+.znai-annotated-image-container.right {
+    justify-content: flex-end;
+}
+
+.znai-annotated-image-container.center {
+    justify-content: center;
+}
+
+.znai-image-fit {
+    cursor: zoom-in;
+}
+
+.znai-zoom-overlay .znai-annotated-image-container {
+    margin: 0;
 }
 
 @keyframes badge-circle-presentation-appear {

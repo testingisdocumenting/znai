@@ -1,0 +1,1 @@
+* New [Image Title](visuals/images#title) look and feel
