@@ -48,12 +48,12 @@ Note: if a parameter name actually contains a period ("."), you can prevent this
 
 Use the `title` parameter to specify a title.
     
-    ```api-parameters {title: "Person Definition"}
+    ```api-parameters {title: "person definition"}
     firstName, String, description with *markdown* support
     score, Integer, another description line with *markdown* support
     ```
 
-```api-parameters {title: "Person Definition", anchorPrefix: "title"}
+```api-parameters {title: "person definition", anchorPrefix: "title"}
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
