@@ -33,6 +33,7 @@
 
     position: fixed;
     top: 50px;
+    bottom: 50px;
     right: 0;
     left: 0;
 
@@ -42,7 +43,6 @@
 
     padding-right: 20px;
 
-    height: calc(100vh - 100px);
     z-index: 1001;
 }
 
