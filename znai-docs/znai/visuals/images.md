@@ -8,24 +8,21 @@ An image can be included using standard Markdown syntax.
 
 # Extension
 
-`Znai` adds additional extension to provide additional information:
-* caption
+`Znai` has `:include-image:` extension to provide additional features:
+* title
 * annotations
-* fit parameters
+* fit 
+* scale
+* alignment
+* presentation mode
 
-# Caption
+# Title
 
-To add a caption at the top of an image use:
+Use `title` to add a title to an image.
 
-    :include-image: castle.jpg {caption: "Title of an image"}
+    :include-image: castle.jpg {title: "Title of an image"}
     
-:include-image: castle.jpg {caption: "Title of an image"}
-    
-To add a caption at the bottom of an image use:
-
-    :include-image: castle.jpg {caption: "Title of an image", captionBottom: true}
-    
-:include-image: castle.jpg {caption: "Title of an image", captionBottom: true}
+:include-image: castle.jpg {title: "Title of an image"}
 
 # Border
 
@@ -37,21 +34,21 @@ Use `border: true` to include a border around image.
 
 # Fit
 
-An unfitted image will occupy all available space:
+By default image occupies all available horizontal space:
 
-:include-image: books.jpg 
+:include-image: books.jpg {title: "wide image"}
 
-To fit the image to the width of a text use the `fit` parameter.
+Use `fit` parameter to fit an image to the text column width.
 
     :include-image: books.jpg {fit: true}
 
 Note: You can click on the image to zoom into it
 
-:include-image: books.jpg {fit: true}
+:include-image: books.jpg {fit: true, title: "auto scaled down image"}
 
-# Scale Ratio
+# Scale
 
-To scale image up or down use `scale` option, `1` is default, `0.5` is half image size.   
+To scale image up or down use `scale` option, `1` is default, `0.5` is half an image size.   
     
     :include-image: books.jpg {scale: 0.3}
 

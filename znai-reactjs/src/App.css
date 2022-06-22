@@ -226,8 +226,9 @@
 
     --znai-horizontal-rule-color: #eee;
 
-    --znai-annotated-image-background-color: rgba(41, 139, 231, .6);
     --znai-image-border-color: var(--znai-toc-panel-border-color);
+    --znai-image-title-color: var(--znai-snippets-title-color);
+    --znai-image-title-background-color: var(--znai-snippets-title-background-color);
 
     --znai-image-annotation-badge-fill-color: #333;
     --znai-image-annotation-badge-line-color: #444;
