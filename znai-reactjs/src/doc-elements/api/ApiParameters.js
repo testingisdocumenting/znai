@@ -27,6 +27,7 @@ export default function ApiParameters({
                                         nestedLevel,
                                         small,
                                         noWrap,
+                                        wide,
                                         parentWidth = 0,
                                         elementsLibrary
                                       }) {
@@ -42,6 +43,7 @@ export default function ApiParameters({
                                                                        elementsLibrary={elementsLibrary} />);
 
   const isNested = nestedLevel > 0;
+  const containerClass = !isNested ? (wide ? " wide" : " content-block") : "";
   const className = "znai-api-parameters" +
     (isNested ? " nested" : "") +
     (small ? " small" : "") +
@@ -49,12 +51,22 @@ export default function ApiParameters({
 
   const style = { marginLeft: -parentWidth };
 
-  return (
+  const rendered = (
     <div className={className} style={style}>
       <ApiParametersTitle title={title} nestedLevel={nestedLevel} />
       {renderedParameters}
     </div>
   );
+
+  if (containerClass) {
+    return (
+      <div className={"znai-api-parameters-wrapper" + containerClass}>
+        {rendered}
+      </div>
+    )
+  }
+
+  return rendered
 }
 
 function ApiParametersTitle({ title, nestedLevel }) {

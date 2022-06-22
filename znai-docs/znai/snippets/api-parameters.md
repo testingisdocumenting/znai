@@ -4,8 +4,7 @@ title: API Parameters
 
 # Inlined CSV
 
-When you are not able to automatically extract an API parameter definition you can use
-the `api-parameters` fence plugin to manually document them.  
+Use `api-parameters` fenced code plugin to document API parameters.
 
     ```api-parameters
     firstName, String, description with *markdown* support
@@ -19,7 +18,7 @@ score, Integer, another description line with *markdown* support
 
 # Nested
 
-Use `parent.children` syntax to define nested objects like this:
+Use `parent.child` syntax to define nested objects like this:
 
     ```api-parameters
     sessionId, Integer, session Id
@@ -168,4 +167,20 @@ Use `noWrap: true` to remove hard wrap enforcement
 ```api-parameters {anchorPrefix: "customPrefix", noWrap: true}
 VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support
 VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support
+```
+
+# Wide Mode
+
+Use `wide: true` to use all the available horizontal space
+
+    ```api-parameters {anchorPrefix: "customPrefix", noWrap: true, wide: true}
+    VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, "longer line longer line, description with *markdown* support"
+    VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, "longer line longer line, another description 
+    line with *markdown* support and few moe lines"
+    ```
+
+```api-parameters {anchorPrefix: "customPrefix", noWrap: true, wide: true}
+VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, "longer line longer line, description with *markdown* support"
+VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, "longer line longer line, another description 
+line with *markdown* support and few moe lines"
 ```

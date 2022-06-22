@@ -28,5 +28,7 @@ class ApiParametersParams {
             .add("small", PluginParamType.BOOLEAN,
                     "use smaller font and width", "true")
             .add("noWrap", PluginParamType.BOOLEAN,
-                    "do not wrap long parameter names and instead expand parameters column width to fit", "true");
+                    "do not wrap long parameter names and instead expand parameters column width to fit", "true")
+            .add("wide", PluginParamType.BOOLEAN,
+                    "use available horizontal space", "true");
 }
